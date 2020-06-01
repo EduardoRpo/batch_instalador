@@ -1,13 +1,32 @@
 <?php
-  include('../../conexion.php');
-  
+  //include('/Desarrollo/BatchRecord/htdocs/conexion.php');
+  require_once('../../conexion.php');
+
+  function utf8ize($d) {
+    if (is_array($d)) 
+        foreach ($d as $k => $v) 
+            $d[$k] = utf8ize($v);
+
+     else if(is_object($d))
+        foreach ($d as $k => $v) 
+            $d->$k = utf8ize($v);
+
+     else 
+        return utf8_encode($d);
+
+    return $d;
+    }
+
+
   $op = $_POST['operacion'];
+
 
    switch($op){
     case 1: //listar Batch
       $query_batch = mysqli_query($conn, 'SELECT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, presentacion_comercial.presentacion,batch.numero_lote, batch.tamano_lote, propietario.nombre,batch.fecha_creacion, batch.fecha_programacion, batch.estado
       FROM batch INNER JOIN producto INNER JOIN presentacion_comercial INNER JOIN propietario
-      ON batch.id_producto = producto.referencia AND producto.id_presentacion_comercial = presentacion_comercial.id AND producto.id_propietario = propietario.id');
+      ON batch.id_producto = producto.referencia AND producto.id_presentacion_comercial = presentacion_comercial.id AND producto.id_propietario = propietario.id
+      ORDER BY batch.id_batch desc;');
     
       $result = mysqli_num_rows($query_batch);
       
@@ -16,7 +35,7 @@
           $arreglo["data"][] =$data;
         }
         
-        echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+        echo json_encode(utf8ize($arreglo), JSON_UNESCAPED_UNICODE);
 
         exit();
 
@@ -52,7 +71,8 @@
         while($data = mysqli_fetch_assoc($query_referencia)){
           $arreglo[] = $data;}
         
-          echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+          //echo json_encode(utf8ize($arreglo), JSON_UNESCAPED_UNICODE);
+          //echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
       }else{
         echo "Error";
       }

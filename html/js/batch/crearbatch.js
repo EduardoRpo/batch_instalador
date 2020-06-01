@@ -6,6 +6,8 @@ function mostrarModal(){
     $("#cmbNoReferencia").css("display", "block");
     //$("#cmbNoReferencia").valor()
     $("#modalCrearBatch").find("input,textarea,select").val("");
+    $('#guardarBatch').html('Crear');
+    $('.tcrearBatch').html('Crear Batch Record');
     cargarReferencias();
      
 }
