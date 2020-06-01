@@ -24,6 +24,7 @@ function multipresentacion() {
                     $select.append('<option value=' + i.id + '>' + value.nombre_referencia + '</option>');
                 });
                 
+                $('#totalMulti').val('');
                 $('#Modal_Multipresentacion').modal('show');
                 }
             });

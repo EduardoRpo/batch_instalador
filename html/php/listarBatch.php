@@ -72,7 +72,7 @@
           $arreglo[] = $data;}
         
           //echo json_encode(utf8ize($arreglo), JSON_UNESCAPED_UNICODE);
-          //echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+          echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
       }else{
         echo "Error";
       }
@@ -191,7 +191,8 @@
      
         }
         
-        echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+        echo json_encode(utf8ize($arreglo), JSON_UNESCAPED_UNICODE);
+        //echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
         //exit();
 
       }else{
