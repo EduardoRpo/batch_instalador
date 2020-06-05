@@ -151,6 +151,8 @@
 <script src="js/sidebarmenu.js"></script>
 <script src="../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
 <!-- <script src="../assets/plugins/jquery/jquery.number.min.js"></script> -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+
 
 <!--Custom JavaScript -->
 <!-- <script src="js/global.js"></script> -->
@@ -162,6 +164,7 @@
 <script src="js/batch/crearbatch.js"></script>
 <script src="js/batch/filtradofechas.js"></script>
 <script src="js/batch/multipresentacion.js"></script>
+
 
 
 <!--Alertify-->

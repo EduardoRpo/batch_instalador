@@ -29,7 +29,7 @@
       </div>
       <div class="inputcalculoTotal" style="display: flex; justify-content:flex-end; margin-right:45px; margin-bottom:10px">  
         <label for="" style="padding-right: 10px;">Total</label>
-        <input id="totalMulti" type="text" class="form-control" style="width: 28%;">
+        <input id="totalMulti" type="text" class="form-control" style="width: 28%;" autocomplete="off">
       </div>
         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

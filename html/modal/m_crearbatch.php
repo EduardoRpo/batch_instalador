@@ -47,6 +47,11 @@
                             <label for="recipient-name" class="col-form-label">Presentación Comercial</label>
                             <input id="presentacioncomercial" class="displayallinfo" readonly name="presentacioncomercial" readonly>
                         </div>
+                        <!-- 
+                        <div class="col-md-1 col-2 align-self-center">
+                            <label for="recipient-name" class="col-form-label">ML</label>
+                        </div> -->
+                        
                         <div class="col-md-4 col-2 align-self-center">
                             <label for="recipient-name" class="col-form-label">Linea</label>
                             <input id="linea" class="displayallinfo" readonly name="linea" readonly>
@@ -72,7 +77,7 @@
                         <div class="col-md-4 col-2 align-self-center">
                             <label for="recipient-name" class="col-form-label" type="number">Tamaño del Lote (Kg)</label>
                             <input type="number" name="tamanototallote" id="tamanototallote" class="form-control Numeric" 
-                            min="1" readonly value="" style= "height: 70px; font-size: xx-large; width: 140; text-align: center" />
+                            min="1" readonly value="" style= "height: 70px; font-size: xx-large; width: 160; text-align: center" />
                         </div>
 
                     </div>
@@ -86,71 +91,28 @@
                     </div>
                     <hr>
                     <div class="row page">
+                        <div class="col-md-12 col-2 align-self-center">
+                            <label for="recipient-name" class="col-form-label">Observaciones Pesaje / Preparación</label>
+                        </div>
                         <div class="col-md-6 col-2 align-self-center">
                             <!-- <form action="" method="POST"> -->
-                                <label for="recipient-name" class="col-form-label">Observaciones Pesaje</label>
-                                <button id="adicionarPesaje" name="adicionarPesaje" type="button" class="btn btn-primary">+</button>
+                                
+                                <button id="adicionarPesaje" name="adicionarPesaje" type="button" class="btn btn-primary">Adicionar</button>
                             
                                 <table id="addTanquePesaje" class="mt-3">
                                     <tr>
                                         <td width = "120">
-                                        <?php 
-                                            $query_tanquep = mysqli_query($conn, 'SELECT capacidad FROM tanques');
-                                            $result = mysqli_num_rows($query_tanquep);
-                                        ?>
-                                        <select class="form-control" name="tanquePesaje" id="tanquePesaje" >
-                                            <option disabled selected>Tanque</option>
-                                                <?php 
-                                                    if($result > 0){
-                                                        while($data = mysqli_fetch_array($query_tanquep)){
-                                                ?>
-                                            <option value=""> <?php echo $data['capacidad'] ?> </option>
-                                                <?php            
-                                                        }
-                                                    }
-                                                ?>
-                                        </select>
+                                            <select class="form-control" name="cmbtanque" id="cmbTanque" >
+                                                <option disabled selected>Tanque(Kg)</option>
+                                            </select>
                                         </td>
-                                        <td><input type="number" class="form-control" id="obpesaje" name="obpesaje" ></td>
-                                        <td><input type="number" class="form-control" id="totalpesaje" name="obpesaje" ></td>
+                                        <td><input type="number" class="form-control" id="obpesaje" name="obpesaje" placeholder="Cantidad" onchange="CalculoTanque();"></td>
+                                        <td><input type="number" class="form-control" id="totalpesaje" name="obpesaje" placeholder="Total" ></td>
                                         <td class="eliminarPesaje"> <input class="btn btn-warning" type="button" value="-"> </td> 
                                     </tr>
                                 </table>    
-                            <!-- </form> -->
-                        </div>
-                        <div class="col-md-6 col-2 align-self-center">
-                            <!-- <form action="" method="POST"> -->
-                                <label for="recipient-name" class="col-form-label">Observaciones Preparación</label>
-                                <button id="adicionarPreparacion" name="adicionarPreparacion" type="button" class="btn btn-primary">+</button>
-                            
-                                <table id="addTanquePreparacion" class="mt-3">
-                                    <tr>
-                                        <td width = "120">
-                                        <?php 
-                                            $query_tanquep = mysqli_query($conn, 'SELECT capacidad FROM tanques');
-                                            $result = mysqli_num_rows($query_tanquep);
-                                        ?>
-                                        <select class="form-control" name="tanquePrepracion" id="tanquePrepracion" >
-                                            <option disabled selected>Tanque</option>
-                                                <?php 
-                                                    if($result > 0){
-                                                        while($data = mysqli_fetch_array($query_tanquep)){
-                                                ?>
-                                            <option value=""> <?php echo $data['capacidad'] ?> </option>
-                                                <?php            
-                                                        }
-                                                    }
-                                                ?>
-                                        </select>
-                                        </td>
-                                        <td><input type="number" class="form-control" id="obpreparacion" name="obpreparacion" ></td>
-                                        <td><input type="number" class="form-control" id="totalpreparacion" name="obpreparacion" ></td>
-                                        <td class="eliminarPreparacion"> <input class="btn btn-warning" type="button" value="-"></td> 
-                                    </tr>
-                                </table>    
-                           <!--  </form> -->
-                        </div>    
-                    </div>            
+                            </div>
+                        </div>            
                     
                     <div class="modal-footer">
                         <button type="button" onclick="guardarDatos();" class="btn btn-primary crearbatch" name="guardarBatch" id="guardarBatch">Crear</button>

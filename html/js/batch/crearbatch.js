@@ -9,6 +9,7 @@ function mostrarModal(){
     $('#guardarBatch').html('Crear');
     $('.tcrearBatch').html('Crear Batch Record');
     cargarReferencias();
+    cargarTanque();
      
 }
 
@@ -25,7 +26,7 @@ function cargarReferencias() {
                 $('#cmbNoReferencia').empty();
                 var info = JSON.parse(r);            
                                 
-                $select.append('<option disabled selected>' + "Seleccione una opción" + '</option>');
+                $select.append('<option disabled selected>' + "Referencia" + '</option>');
                 
                 $.each(info, function(i, value) {
                     $select.append('<option>' + value.referencia + '</option>');
@@ -35,6 +36,34 @@ function cargarReferencias() {
         }
     });
 }
+
+/* Cargar tanques */
+//numeral.locale('es');
+
+//numeral.defaultFormat('$0.0,00');
+
+function cargarTanque() {
+    
+    $.ajax({
+        type: "POST",
+        'url' : 'php/listarBatch.php',
+        'data':{"operacion" : "9"},
+        success: function(r){
+            var $select = $('#cmbTanque');
+                $('#cmbTanque').empty();
+                var info = JSON.parse(r);            
+                                
+                $select.append('<option disabled selected>' + "Tanque" + '</option>');
+                
+                $.each(info, function(i, value) {
+                    $select.append('<option>' + numeral(value.capacidad).format(',') + '</option>');
+            });
+                
+            //$('#modalCrearBatch').modal('show');
+        }
+    });
+}
+
 
 /* Llenar campos de producto de acuerdo con la referencia del producto */
 
@@ -65,7 +94,7 @@ function recargarDatos(){
             $('#notificacionSanitaria').val(info[0].notificacion_sanitaria);
             $('#propietario').val(info[0].propietario);
             $('#producto').val(info[0].producto);          
-            $('#presentacioncomercial').val(info[0].presentacion);
+            $('#presentacioncomercial').val(numeral(info[0].presentacion).format('0,0'));
             $('#linea').val(info[0].linea);
             $('#densidad').val(info[0].densidad);
         }
@@ -82,7 +111,8 @@ function CalculoTamanolote (valor) {
     presentacion = document.getElementById('presentacioncomercial').value;
     total = (unidades * densidad * presentacion)/1000;
 
-    document.getElementById('tamanototallote').value = total //formatter.format(total);
+    (document.getElementById('tamanototallote').value) = numeral(total).format('0kb');
+    console.log(total);
 }
 
 /* Limpiar datos al cambiar referencia en el modal de crear Batch */
@@ -135,4 +165,16 @@ $(document).on("click",".eliminarPreparacion", function(){
 
 function cerrarModal(){
     $('#modalCrearBatch').modal('hide');
+}
+
+
+/* Multiplica el tamaño de los tanques */
+
+function CalculoTanque(){
+    tanque = document.getElementById('tanquePesaje').value;
+    obpesaje = document.getElementById('obpesaje').value;
+    total = (tanque * pesaje );
+
+    document.getElementById('tamanototallote').value = total
+
 }

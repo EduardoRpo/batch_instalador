@@ -40,7 +40,7 @@
         exit();
 
       }else{
-        echo false;
+        echo json_encode('');
       }
       mysqli_free_result($query_batch);
       mysqli_close($conn);
@@ -71,10 +71,10 @@
         while($data = mysqli_fetch_assoc($query_referencia)){
           $arreglo[] = $data;}
         
-          //echo json_encode(utf8ize($arreglo), JSON_UNESCAPED_UNICODE);
-          echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+          echo json_encode(utf8ize($arreglo), JSON_UNESCAPED_UNICODE);
+          //echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
       }else{
-        echo "Error";
+        echo json_encode('');
       }
       mysqli_free_result($query_referencia);
       mysqli_close($conn);
@@ -98,7 +98,7 @@
         echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
 
       }else{
-        echo "Error";
+        echo json_encode('');
       }  
                                        
     break;
@@ -200,6 +200,26 @@
       }  
 
     break;
+
+    case 9:
+      $query_tanque = mysqli_query($conn, 'SELECT capacidad FROM tanques');
+    
+      $result = mysqli_num_rows($query_tanque);
+      
+      if($result > 0){
+        while($data = mysqli_fetch_assoc($query_tanque)){
+          $arreglo[] = $data;}
+        
+          echo json_encode(utf8ize($arreglo), JSON_UNESCAPED_UNICODE);
+          //echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+      }else{
+        echo json_encode('');
+      }
+      mysqli_free_result($query_tanque);
+      mysqli_close($conn);
+    
+    break;
+
   }
 ?>
 
