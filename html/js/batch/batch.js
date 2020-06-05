@@ -112,11 +112,16 @@ $(document).on('click', '.link-borrar', function(e){
                 'method' : 'POST',
                 'url' : 'php/listarBatch.php',
                 'data':{operacion : "2", id : id},
-                
-            });
-            //location.DataTable().reload();
-            actualizarTabla()
-            alertify.success('Batch Record Eliminado');
+            
+                success: function(r){
+                    alertify.set("notifier","position", "top-right"); alertify.success("Batch Record Eliminado.");
+                    actualizarTabla();
+                    
+                },
+                error: function(r){
+                    alertify.set("notifier","position", "top-right"); alertify.error("Error al Eliminar el Batch Record.");
+                } 
+            });            
         }
     });       
 });
