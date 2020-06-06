@@ -16,17 +16,26 @@ function multipresentacion() {
             success: function(r){
                 var $select = $('#MultiReferencia');
                 $('#MultiReferencia').empty();
-                var info = JSON.parse(r);            
+                var info = JSON.parse(r); 
                 
-                $select.append('<option disabled selected>' + "Seleccione una opción" + '</option>');
+                if(info!=''){
+                    $select.append('<option disabled selected>' + "Seleccione una opción" + '</option>');
                 
-                $.each(info, function(i, value) {
-                    $select.append('<option value=' + i.id + '>' + value.nombre_referencia + '</option>');
-                });
-                
-                $('#totalMulti').val('');
-                $('#Modal_Multipresentacion').modal('show');
+                    $.each(info, function(i, value) {
+                        $select.append('<option value=' + i.id + '>' + value.nombre_referencia + '</option>');
+                    });
+                    
+                    $('#totalMulti').val('');
+                    $('#Modal_Multipresentacion').modal('show');
+                    }
+
+                else{
+                  alertify.set("notifier","position", "top-right"); alertify.error("No existen referencias asociadas para este producto.");
                 }
+                
+                
+                 
+            }   
             });
                 
 

@@ -180,8 +180,8 @@
     
       $query_nref = mysqli_query($conn, "SELECT @curRow := @curRow + 1 AS id, nombre_referencia FROM producto JOIN (SELECT @curRow := 0) r WHERE multi = 
                                         (SELECT multi FROM producto WHERE producto.referencia = 
-                                        (SELECT batch.id_producto FROM batch WHERE batch.id_batch = $id_batch))");
-      
+                                        (SELECT batch.id_producto FROM batch WHERE batch.id_batch = $id_batch)) AND multi>0");
+    
       $result = mysqli_num_rows($query_nref);
       
       if($result > 0){
@@ -196,7 +196,7 @@
         //exit();
 
       }else{
-        echo "Error";
+        echo json_encode('');
       }  
 
     break;
