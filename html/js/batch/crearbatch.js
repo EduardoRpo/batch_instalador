@@ -108,9 +108,11 @@ function CalculoTamanolote (valor) {
     unidades = parseInt(valor);
 	
     densidad = document.getElementById('densidad').value;
-    presentacion = document.getElementById('presentacioncomercial').value;
+    console.log(densidad);
+    presentacion = parseInt(document.getElementById('presentacioncomercial').value);
+    console.log(presentacion);
     total = (unidades * densidad * presentacion)/1000;
-
+    console.log(total);
     (document.getElementById('tamanototallote').value) = numeral(total).format('0kb');
     console.log(total);
 }

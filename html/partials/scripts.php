@@ -10,6 +10,8 @@
 <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> -->
 
 <link rel="stylesheet" href="vendor/jquery-confirm/jquery-confirm.min.css">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
@@ -34,4 +36,4 @@
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> -->

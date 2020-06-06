@@ -24,6 +24,9 @@
 
 
   <?php include('./partials/scripts.php'); ?>
+
+  
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
   
   <style type="text/css">
     .tcrearBatch {
@@ -84,21 +87,45 @@
     
     <!-- <div class="card">
       <div class="card-body"> -->
-        <div class="container" hidden id="filtrafechas" style="padding:15px; left:700px"> 
+
+     <!--  <p id="date_filter">
+    <span id="date-label-from" class="date-label">From: </span><input class="date_range_filter date" type="text" id="datepicker_from" />
+    <span id="date-label-to" class="date-label">To:<input class="date_range_filter date" type="text" id="datepicker_to" />
+</p> -->
+
+      <div class="panel panel-primary">  
+        <div class="container" id="filtrafechas" style="padding:15px; left:850px"> 
+          <form id="formFechas">
           <div class="row" >
-            <div class="col-md-2 col-2 align-self-center">
-              <input class="form-control" type="date" id="min" name="min" placeholder="Fecha Inicial">
-              </div>
-            <div class="col-md-2 col-2 align-self-center">
-              <input class="form-control" type="date" id="max" name="max" placeholder="Fecha Final">
-            </div>
-            <div class="col-md-1 col-2 align-self-center">
-              <button id="filtrofecha" class="btn btn-warning"  onclick="ocultarfiltrarfechas();">Cerrar</button>
+            <div class="col-md-6 col-2 align-self-center" style="padding-bottom: 10px;left:50px">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1" name="typeFilter">
+              <label class="form-check-label" for="exampleCheck1" style="padding-right: 10px;">Creación</label>
+              
+              <input type="checkbox" class="form-check-input" id="exampleCheck2" name="typeFilter">
+              <label class="form-check-label" for="exampleCheck2">Programación</label>    
             </div>
           </div>
+          
+          <div class="row fechasfiltrado" >
+            <div class="col-md-3 col-2 align-self-center">
+            <input type="text" name="daterange" value="" class="form-control" />
+              <!-- <input class="form-control" id="fechaInicial" type="text" id="min" name="min" placeholder="Fecha Inicial" autocomplete="off"> -->
+            </div>
+          
+            <!-- <div class="col-md-2 col-2 align-self-center">
+              <input class="form-control" id="fechaFinal" type="text" id="max" name="max" placeholder="Fecha Final" autocomplete="off">
+            </div> -->
+          
+            <div class="col-md-1 col-2 align-self-center">
+              <button id="btnfiltrar" class="btn btn-danger" type="submit">Filtrar</button>
+              
+              <!-- <button id="filtrofecha" class="btn btn-warning"  onclick="ocultarfiltrarfechas();">Cerrar</button> -->
+            </div>
+          </div>
+          </form>
         </div>
-<!--       </div> 
-    </div> -->
+      </div> 
+    <!-- </div> -->
 
   <!-- Tabla -->
   <!-- <div id="colabatch"></div> -->
@@ -134,6 +161,11 @@
     </div>
   </div>
 
+
+  
+
+
+
 <!-- jquery -->
 <script src="../assets/plugins/jquery/jquery.min.js"></script>
 <script src="js/jquery.slimscroll.js"></script>
@@ -147,7 +179,15 @@
 <!-- Datatables -->
 <script type="text/javascript" src="vendor/datatables/datatables.min.js"></script>
 
+<!-- Calendario -->
+<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+<!-- <script src="jquery.ui.datepicker-es.js"></script> -->
 
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+<!-- Menu -->
 <script src="js/sidebarmenu.js"></script>
 <script src="../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
 <!-- <script src="../assets/plugins/jquery/jquery.number.min.js"></script> -->
@@ -164,7 +204,7 @@
 <script src="js/batch/crearbatch.js"></script>
 <script src="js/batch/filtradofechas.js"></script>
 <script src="js/batch/multipresentacion.js"></script>
-
+<script src="js/calendario/calendar.js"></script>
 
 
 <!--Alertify-->

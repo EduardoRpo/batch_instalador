@@ -176,7 +176,6 @@ function guardarDatos(){
             
             success: function(r){
                 alertify.set("notifier","position", "top-right"); alertify.success("Batch Record registrado con éxito.");
-                //document.getElementById("formBatch").reset();
                 cerrarModal();
                 actualizarTabla();
                 

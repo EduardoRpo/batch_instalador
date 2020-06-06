@@ -201,7 +201,7 @@
 
     break;
 
-    case 9:
+    case 9: // cargar selector de Tanques
       $query_tanque = mysqli_query($conn, 'SELECT capacidad FROM tanques');
     
       $result = mysqli_num_rows($query_tanque);
