@@ -32,6 +32,10 @@
     .tcrearBatch {
       color: #fff;
     }
+
+  .uniqueClassName {
+    text-align: center;
+  }
   </style>
 
 </head>

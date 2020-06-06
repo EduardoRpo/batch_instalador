@@ -174,6 +174,7 @@ function cerrarModal(){
 
 function CalculoTanque(){
     tanque = document.getElementById('tanquePesaje').value;
+    
     obpesaje = document.getElementById('obpesaje').value;
     total = (tanque * pesaje );
 

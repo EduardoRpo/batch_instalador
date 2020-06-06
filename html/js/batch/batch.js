@@ -22,22 +22,25 @@ $(document).ready(function() {
         columns:[
             {"defaultContent": "<input type='radio' id='express' name='optradio'>"},
             {"data": "id_batch"},
-            {"data": "numero_orden"},
-            {"data": "referencia"},
+            {"data": "numero_orden", className: "uniqueClassName"},
+            {"data": "referencia", className: "uniqueClassName"},
             {"data": "nombre_referencia"},
             /* {"data": "presentacion"}, */
             {"data": "numero_lote"},
-            {"data": "tamano_lote"},
+            {"data": "tamano_lote", className: "uniqueClassName" , render: $.fn.dataTable.render.number( '.', ',', 0, '' )},
             {"data": "nombre"},
-            {"data": "fecha_creacion"},
-            {"data": "fecha_programacion"},
-            {"data": "estado"},
+            {"data": "fecha_creacion", className: "uniqueClassName"},
+            {"data": "fecha_programacion", className: "uniqueClassName"},
+            {"data": "estado", className: "uniqueClassName"},
             
             {"defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Editar' style='color:rgb(255, 193, 7)'>&#xE254;</i></a>"},
             {"defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(234, 67, 54)'>delete_forever</i></a>"}
-        ]
+        ],
+
     });
 });
+
+
 
 /*  */
 /* 
