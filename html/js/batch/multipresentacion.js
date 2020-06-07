@@ -50,7 +50,6 @@ $(function(){
 
 var maxField = 5;
 var ps = 1;
-var pr = 1;
 
 $("#masMulti").on('click', function(){
     if(ps < maxField){

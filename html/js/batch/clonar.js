@@ -1,3 +1,17 @@
+//obtener la fecha del dia
+ 
+//var fechaHoy;
+
+function fechaActual(){
+    var d = new Date();
+
+        var mes = d.getMonth() + 1;
+        var dia = d.getDate();
+        var fechaHoy = d.getFullYear() + '/' + (mes<10 ? '0' : '') + mes + '/' + (dia<10 ? '0' : '') + dia;
+        return fechaHoy;
+        
+}
+
 //Clonar un Batch Record
 
 function clonar() {
@@ -8,28 +22,53 @@ function clonar() {
     }
 }
 
-$('input:radio[name=optradio]').click(function () {
-    $('#tablaBatch tbody tr').removeClass('selected')
-    $(this).parent().parent().addClass('selected')
+$('#tablaBatch tbody').on( 'click', 'tr', function () {  
+    data = tabla.row( this ).data();
 });
 
 $('#form_clonar').submit(function (event) {
     event.preventDefault();
-    let form = $(this);
-    let obj = form.serializeToJSON();
-    obj.idbatch = $('input:radio[name=optradio]:checked').val();
-    console.log(obj)
-    $.ajax({
-        url: '/api/clonebatch',
-        type: 'post',
-        dataType: 'json',
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(obj)
-    }).done((data, status, xhr) => {
-        if (data.success) {
-            location.reload();
-        } else {
-            $.alert('Error al clonar');
-        }
-    });
-});
+    if ($("input[name='optradio']:radio").is(':checked')) {
+       var duplicar = $("#txtCantidadCB").val();
+       console.log(duplicar);
+     
+       fechaActual();
+       console.log(fechaHoy);
+       return false;
+
+        $.ajax({
+            type: "POST",
+            'url' : 'php/listarBatch.php',
+            'data': { operacion : "10", id : data.id_batch},
+            
+            success: function(r){
+                var info = JSON.parse(r);
+                
+                $.ajax({
+                    type: "POST",
+                    'url' : 'php/listarBatch.php',
+                    'data': { 
+                        operacion : "5", 
+                        
+                        ref : info[0].id_producto,
+                        unidades: info[0].unidad_lote,
+                        lote: info[0].tamano_lote,
+                        programacion: '',
+                        presentacion: info[0].lote_presentacion,
+                        fecha: fechaActual,
+                        },
+                    
+                    success: function(r){
+                        alertify.set("notifier","position", "top-right"); alertify.success("Batch Record Clonado.");
+                        $('#ClonarModal').modal('hide');
+                        actualizarTabla();
+
+                    }
+                });
+            }   
+        });
+
+    } else {
+        alertify.set("notifier","position", "top-right"); alertify.error("Imposible clonar");
+    }
+})

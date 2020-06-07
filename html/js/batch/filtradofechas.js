@@ -46,8 +46,8 @@ $(function() {
     //console.log("inicio.format('YYYY-MM-DD') + fin.format('YYYY-MM-DD'));
     minDateFilter = inicio.format('YYYY-MM-DD');
     maxDateFilter = fin.format('YYYY-MM-DD');
-    console.log(minDateFilter);
-    console.log(maxDateFilter)
+    //console.log(minDateFilter);
+    //console.log(maxDateFilter)
   });
 });
 
