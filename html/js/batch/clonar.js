@@ -30,11 +30,11 @@ $('#form_clonar').submit(function (event) {
     event.preventDefault();
     if ($("input[name='optradio']:radio").is(':checked')) {
        var duplicar = $("#txtCantidadCB").val();
-       console.log(duplicar);
+       /* console.log(duplicar);
      
        fechaActual();
        console.log(fechaHoy);
-       return false;
+       return false; */
 
         $.ajax({
             type: "POST",
