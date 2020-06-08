@@ -16,13 +16,19 @@ function fechaActual(){
 
 function clonar() {
     if ($("input[name='optradio']:radio").is(':checked')) {
-        $('#ClonarModal').modal('show');
+        
         $('#txtCantidadCB').val('');
-        $('#txtCantidadCB').focus();
+        $('#txtCantidadCB').trigger('focus');
+        $('#ClonarModal').modal('show');
     } else {
         alertify.set("notifier","position", "top-right"); alertify.error("Para Clonar seleccione un Batch Record");
     }
 }
+
+/* $('#myModal').on('shown.bs.modal', function () {
+    $('#myInput').trigger('focus')
+  }) */
+
 
 $('#tablaBatch tbody').on( 'click', 'tr', function () {  
     data = tabla.row( this ).data();
