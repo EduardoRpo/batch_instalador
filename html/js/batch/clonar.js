@@ -1,14 +1,14 @@
 //obtener la fecha del dia
  
-//var fechaHoy;
+var fechaHoy;
 
 function fechaActual(){
     var d = new Date();
 
         var mes = d.getMonth() + 1;
         var dia = d.getDate();
-        var fechaHoy = d.getFullYear() + '/' + (mes<10 ? '0' : '') + mes + '/' + (dia<10 ? '0' : '') + dia;
-        return fechaHoy;
+        fechaHoy = d.getFullYear() + '/' + (mes<10 ? '0' : '') + mes + '/' + (dia<10 ? '0' : '') + dia;
+        //return fechaHoy;
         
 }
 
@@ -17,6 +17,8 @@ function fechaActual(){
 function clonar() {
     if ($("input[name='optradio']:radio").is(':checked')) {
         $('#ClonarModal').modal('show');
+        $('#txtCantidadCB').val('');
+        $('#txtCantidadCB').focus();
     } else {
         alertify.set("notifier","position", "top-right"); alertify.error("Para Clonar seleccione un Batch Record");
     }
@@ -30,25 +32,30 @@ $('#form_clonar').submit(function (event) {
     event.preventDefault();
     if ($("input[name='optradio']:radio").is(':checked')) {
        var duplicar = $("#txtCantidadCB").val();
-       /* console.log(duplicar);
-     
-       fechaActual();
-       console.log(fechaHoy);
-       return false; */
+       clonarCantidad = parseInt(duplicar);
+        
+        if(clonarCantidad > 10){
+            console.log(duplicar);
+            alertify.set("notifier","position", "top-right"); alertify.error("El número máximo para clonar son 9 Batch Record");
+            return false;
+        }else{
 
+       fechaActual();
+       
         $.ajax({
             type: "POST",
             'url' : 'php/listarBatch.php',
-            'data': { operacion : "10", id : data.id_batch},
+            'data': { operacion : "10", id : data.id_batch },
             
             success: function(r){
                 var info = JSON.parse(r);
-                
+
                 $.ajax({
                     type: "POST",
                     'url' : 'php/listarBatch.php',
                     'data': { 
-                        operacion : "5", 
+                        operacion : "5" , 
+                        cantidad: clonarCantidad,
                         
                         ref : info[0].id_producto,
                         unidades: info[0].unidad_lote,
@@ -67,7 +74,7 @@ $('#form_clonar').submit(function (event) {
                 });
             }   
         });
-
+        }
     } else {
         alertify.set("notifier","position", "top-right"); alertify.error("Imposible clonar");
     }

@@ -77,7 +77,7 @@
       <div class="card">
         <div class="card-block">
           <div class="table-responsive">
-            <table class="table table-striped table-bordered" id="preparacionTable" style="width: 100%;">
+            <table class="table table-striped table-bordered" id="preparacionTabla" style="width: 100%;">
 
             </table>
           </div>

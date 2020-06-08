@@ -38,9 +38,6 @@ function cargarReferencias() {
 }
 
 /* Cargar tanques */
-//numeral.locale('es');
-
-//numeral.defaultFormat('$0.0,00');
 
 function cargarTanque() {
     

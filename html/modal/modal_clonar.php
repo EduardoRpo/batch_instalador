@@ -20,7 +20,7 @@
             </div> -->
             <div class="col-md-12 col-2"> <!-- align-self-center -->
               <label for="recipient-name" class="col-form-label"><strong>Cantidad</strong></label>
-              <input type="number" class="form-control" id="txtCantidadCB" name="txtCantidadCB">
+              <input type="number" class="form-control" id="txtCantidadCB" name="txtCantidadCB" autocomplete="off" required >
             </div>
           </div>
 

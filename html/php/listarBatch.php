@@ -104,25 +104,35 @@
     break;
   
     case 5: // Guardar
+      $cantidad = $_POST['cantidad'];
       $id = $_POST['ref'];
-      $nombreReferencia = $_POST['nref'];
+      //$nombreReferencia = $_POST['nref'];
       $unidadesxlote = $_POST['unidades'];
       $tamanototallote = $_POST['lote'];
       $fechaprogramacion = $_POST['programacion'];
       $fechahoy = $_POST['fecha'];
       $tamanolotepresentacion = $_POST['presentacion'];
 
-      echo $id;
-      /* echo $fechaprogramacion;
-      echo $fechahoy; */
-
-      
-
       if ($fechaPrograma = "") {
        $estado = 'null';
       } else {
         $estado = '1';
       }
+      $i = 0;
+      
+      if(isset($cantidad)){
+        $cantidad = $cantidad-1;
+        echo $cantidad;
+        exit();
+        while($i < $cantidad){
+          $query = "INSERT INTO batch (fecha_creacion, fecha_programacion, fecha_actual, numero_orden, numero_lote, tamano_lote, lote_presentacion, unidad_lote, estado, id_producto) 
+			              VALUES ('$fechahoy',";
+          $query .= $fechaprogramacion != null ? "'$fechaprogramacion'" : "NULL";
+          $query .= ",'$fechahoy', 'OP012020',' X0010320', '$tamanototallote', '$tamanolotepresentacion', '$unidadesxlote', '$estado', '$id')";      
+          $i++;
+        }
+      }
+
 
       $query = "INSERT INTO batch (fecha_creacion, fecha_programacion, fecha_actual, numero_orden, numero_lote, tamano_lote, lote_presentacion, unidad_lote, estado, id_producto) 
 			VALUES ('$fechahoy',";

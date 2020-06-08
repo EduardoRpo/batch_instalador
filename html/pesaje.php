@@ -92,7 +92,7 @@
           <!--<h4 class="card-title">Basic Table</h4>
          <h6 class="card-subtitle">Add class <code>.table</code></h6>-->
           <div class="table-responsive">
-            <table class="table table-striped table-bordered" id="tablePesajes">
+            <table class="table table-striped table-bordered" id="tablaPesajes">
 
             </table>
             <div id="result"></div>
@@ -119,7 +119,7 @@
 <!--Wave Effects -->
 <script src="./html/js/waves.js"></script>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $.fn.dataTable.ext.search.push(
         function (settings, data, dataIndex) {
             var est = parseInt($('#est').val(), 10);
@@ -200,7 +200,7 @@
             table.draw();
         });
     });
-</script>
+</script> -->
 <!--stickey kit -->
 <!--Menu sidebar -->
 <script src="html/js/sidebarmenu.js"></script>

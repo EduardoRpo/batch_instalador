@@ -1,4 +1,4 @@
-$.fn.dataTable.ext.search.push(
+/* $.fn.dataTable.ext.search.push(
     function (settings, data, dataIndex) {
         var est = parseInt($('#est').val(), 10);
         var max = parseInt($('#est').val(), 10);
@@ -13,12 +13,15 @@ $.fn.dataTable.ext.search.push(
         return false;
     }
 );
-
+ */
 $(document).ready(function () {
-    var table = $('#tablePesajes').DataTable({
+    $('#tablaPesajes').DataTable({
         ajax: {
-            url: '/api/pesajes',
-            dataSrc: ''
+            method: "POST",
+            url : "html/php/listarBatch.php",
+            data : {"operacion" : "1"},
+            //url: '/api/pesajes',
+            //dataSrc: ''
         },
         language:{
             url: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json'
@@ -56,10 +59,10 @@ $(document).ready(function () {
             }
         ]
     });
-    table.destroy();
+    //table.destroy();
 
 // Event listener to the two range filtering inputs to redraw on input
-$('#est').keyup(function () {
+/* $('#est').keyup(function () {
         table.draw();
-    });
+    }); */
 });
