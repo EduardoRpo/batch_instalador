@@ -118,28 +118,22 @@
       } else {
         $estado = '1';
       }
-      $i = 0;
+      $i = 1;
       
-      if(isset($cantidad)){
-        $cantidad = $cantidad-1;
-        echo $cantidad;
-        exit();
-        while($i < $cantidad){
-          $query = "INSERT INTO batch (fecha_creacion, fecha_programacion, fecha_actual, numero_orden, numero_lote, tamano_lote, lote_presentacion, unidad_lote, estado, id_producto) 
-			              VALUES ('$fechahoy',";
-          $query .= $fechaprogramacion != null ? "'$fechaprogramacion'" : "NULL";
-          $query .= ",'$fechahoy', 'OP012020',' X0010320', '$tamanototallote', '$tamanolotepresentacion', '$unidadesxlote', '$estado', '$id')";      
-          $i++;
-        }
-      }
-
-
       $query = "INSERT INTO batch (fecha_creacion, fecha_programacion, fecha_actual, numero_orden, numero_lote, tamano_lote, lote_presentacion, unidad_lote, estado, id_producto) 
 			VALUES ('$fechahoy',";
       $query .= $fechaprogramacion != null ? "'$fechaprogramacion'" : "NULL";
       $query .= ",'$fechahoy', 'OP012020',' X0010320', '$tamanototallote', '$tamanolotepresentacion', '$unidadesxlote', '$estado', '$id')";
 
-      $result = mysqli_query($conn, $query); //or die ("Problemas al insertar" . mysqli_error($conn));
+
+      if(isset($cantidad)){
+                
+        while($i <= $cantidad){
+          $result = mysqli_query($conn, $query); //or die ("Problemas al insertar" . mysqli_error($conn));    
+          $i++;
+        }
+      }
+     
 
       if(!$result){
         die('Error');

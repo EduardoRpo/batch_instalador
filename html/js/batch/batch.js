@@ -157,15 +157,17 @@ function guardarDatos(){
             datos = {
                 operacion: "5",
                 ref: $('#idbatch').val(),
-                nref: $('#nombrereferencia').val(),
+                //nref: $('#nombrereferencia').val(),
                 unidades: $('#unidadesxlote').val(),
                 lote: $('#tamanototallote').val(),
                 presentacion: $('#presentacioncomercial').val(),
                 programacion: $('#fechaprogramacion').val(),
                 /* fecha: $('#fechahoy').val(), */
                 fecha : fechaActual,
+                cantidad: "1",
                 
                 };
+                console.log(datos.cantidad);
         }else{
              datos = {
                 operacion: "7",
