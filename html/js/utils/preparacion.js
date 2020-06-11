@@ -4,7 +4,7 @@ $(document).ready(function () {
             //url: '/api/batch',
             method: "POST",
             url : "html/php/listarBatch.php",
-            data : {"operacion" : "1"},
+            data : {"operacion" : "1", "proceso": "2"},
             //dataSrc: ''
         },
         language:{
@@ -40,14 +40,14 @@ $(document).ready(function () {
                 data: 'tamano_lote'
             },*/
 
-            {
+            /* {
                 title: 'Estado',
                 data: 'estado',
                 render: (data, type, row) => {
                     'use strict';
                     return data === 1 ? 'Activo' : 'Inactivo';
                 }
-            },
+            }, */
             {
                 title: 'Ingresar',
                 data: '',

@@ -19,13 +19,14 @@ $(document).ready(function () {
         ajax: {
             method: "POST",
             url : "html/php/listarBatch.php",
-            data : {"operacion" : "1"},
+            data : {"operacion" : "1", "proceso": "2"},
             //url: '/api/pesajes',
             //dataSrc: ''
         },
         language:{
             url: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json'
         },
+        
         columns: [
             {
                 title: 'Fecha Programación',

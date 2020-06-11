@@ -23,11 +23,24 @@
 
    switch($op){
     case 1: //listar Batch
+
+      $proceso = $_POST['proceso'];
+      //echo $proceso;
+      //exit();
+
+      if($proceso==2){
+        $query_batch = mysqli_query($conn, 'SELECT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, presentacion_comercial.presentacion,batch.numero_lote, batch.tamano_lote, propietario.nombre,batch.fecha_creacion, batch.fecha_programacion, batch.estado
+                                            FROM batch INNER JOIN producto INNER JOIN presentacion_comercial INNER JOIN propietario
+                                            ON batch.id_producto = producto.referencia AND producto.id_presentacion_comercial = presentacion_comercial.id AND producto.id_propietario = propietario.id
+                                            WHERE estado=1
+                                            ORDER BY batch.id_batch desc; ');
+      }else{ 
       $query_batch = mysqli_query($conn, 'SELECT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, presentacion_comercial.presentacion,batch.numero_lote, batch.tamano_lote, propietario.nombre,batch.fecha_creacion, batch.fecha_programacion, batch.estado
-      FROM batch INNER JOIN producto INNER JOIN presentacion_comercial INNER JOIN propietario
-      ON batch.id_producto = producto.referencia AND producto.id_presentacion_comercial = presentacion_comercial.id AND producto.id_propietario = propietario.id
-      ORDER BY batch.id_batch desc;');
-    
+                                            FROM batch INNER JOIN producto INNER JOIN presentacion_comercial INNER JOIN propietario
+                                            ON batch.id_producto = producto.referencia AND producto.id_presentacion_comercial = presentacion_comercial.id AND producto.id_propietario = propietario.id
+                                            ORDER BY batch.id_batch desc;');
+      }
+
       $result = mysqli_num_rows($query_batch);
       
       if($result > 0){
@@ -44,6 +57,7 @@
       }
       mysqli_free_result($query_batch);
       mysqli_close($conn);
+    
     break;
 
     case 2: //Eliminar

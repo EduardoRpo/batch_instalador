@@ -36,14 +36,14 @@ $('#aprobacionTable').dataTable({
                 return $.number(data, 0, ',', '.');
             } */
         },
-        {
+      /*   {
             title: 'Estado',
             data: 'estado',
             render: (data, type, row) => {
                 'use strict';
                 return data === 1 ? 'Activo' : 'Inactivo';
             }
-        },
+        }, */
         {
             title: 'Ingresar',
             data: '',

@@ -16,7 +16,7 @@ $(document).ready(function() {
         ajax:{
             method : "POST",
             url : "php/listarBatch.php",
-            data : {"operacion" : "1"},
+            data : {"operacion" : "1", "proceso" : "1"},
         },
 
         columns:[
@@ -157,12 +157,10 @@ function guardarDatos(){
             datos = {
                 operacion: "5",
                 ref: $('#idbatch').val(),
-                //nref: $('#nombrereferencia').val(),
                 unidades: $('#unidadesxlote').val(),
                 lote: $('#tamanototallote').val(),
                 presentacion: $('#presentacioncomercial').val(),
                 programacion: $('#fechaprogramacion').val(),
-                /* fecha: $('#fechahoy').val(), */
                 fecha : fechaActual,
                 cantidad: "1",
                 

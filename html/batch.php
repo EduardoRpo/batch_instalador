@@ -22,71 +22,49 @@
   <!-- <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png"> -->
   <title>Samara Cosmetics</title>
 
-
   <?php include('./partials/scripts.php'); ?>
-
-  
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-  
-  <style type="text/css">
-    .tcrearBatch {
-      color: #fff;
-    }
-
-  .uniqueClassName {
-    text-align: center;
-  }
-  </style>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">
 
-<div id="contenedor">
-      
+  <div id="contenedor">
     <div class="preloader">
-        <svg class="circular" viewBox="25 25 50 50">
-            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
-        </svg>
+      <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+      </svg>
     </div>
 
-<div id="main-wrapper" style="padding-top:15px; padding-left:15px; padding-right:15px">
+    <div id="main-wrapper">
   
     <?php include('./partials/header.php'); ?>
 
-  <div class="row page-titles">
-    <div class="col-md-3 col-2 align-self-right">
-      <h1 class="text-themecolor m-b-0 m-t-0" style="margin-left: 7%"><b>Batch Record</b></h1>
-    </div>
-    <div class="col-md-1 col-4 align-self-center"></div>
-    <div class="col-md-8 col-2 align-self-center">
+  <div class="contenedorPrincipal">
+    <div class="row">
+    <h1 class="text-themecolor izquierda"><b>Batch Record</b></h1>
+    
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle btn-md" style="background-color:#fff;color:#FF8D6D; border-color:#FF8D6D;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#" onclick="multipresentacion()">Multipresentación</a>
+            <a class="dropdown-item" href="#" onclick="clonar()">Clonar</a>
+          </div>
+      </div>
+      
+      <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md" style="background-color:#fff;color:#FF8D6D" onclick="filtrarfechas()">Filtrar</button>
+      <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md" onclick="mostrarModal();"><strong>Crear Batch Record</strong></button>
+    
+    <!-- <div class="col-md-8 col-2 align-self-center">
       <div class="container">
         <div class="row" style="position:relative; left:320px">
           <div class="col-lg-2" style="padding-right:0px">
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle"
-                      style="background-color:#fff;color:#FF8D6D; ;padding-top: 12px;padding-bottom: 12px;padding-left: 25px;padding-right: 25px; border-color:#FF8D6D;"
-                      type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                      aria-expanded="false">Acciones
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#" onclick="multipresentacion()">Multipresentación</a>
-                <a class="dropdown-item" href="#" onclick="clonar()">Clonar</a>
-              </div>
+            
             </div>
-          </div>
-          <div class="col-lg-2" style="padding-right:15px;padding-left:0px">
-            <button type="button" style="background-color:#fff;color:#FF8D6D"
-                    class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md" onclick="filtrarfechas()">Filtrar
-            </button>
-
-          </div>
-          <div class="col-lg-3 mb-3">
-            <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md"
-                    onclick="mostrarModal();"><strong>Crear Batch Record</strong></button>
-          </div>
+          </div>-->
+          
         </div>
-      </div>
+      </div> 
     </div>
     
     <!-- <div class="card">
@@ -98,7 +76,7 @@
 </p> -->
 
       <div class="panel panel-primary">  
-        <div class="container" id="filtrafechas" style="padding:15px; left:850px"> 
+        <div class="container" id="filtrafechas" style="left:800px"> 
           <form id="formFechas">
           <div class="row" >
             <div class="col-md-6 col-2 align-self-center" style="padding-bottom: 10px;left:50px">

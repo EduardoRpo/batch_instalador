@@ -47,7 +47,7 @@
     <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
   </svg>
 </div>
-<div id="main-wrapper" style="padding-top:15px; padding-left:15px; padding-right:15px">
+<div id="main-wrapper">
   <header class="topbar">
     <nav class="navbar top-navbar navbar-toggleable-sm navbar-light">
       <div class="navbar-header">
@@ -77,20 +77,18 @@
     </nav>
   </header>
 
-  <div class="container-fluid">
+  <div class="container-fluid contenedorProceso">
     <div class="row page-titles">
-      <div class="col-md-5 col-2 align-self-center">
-        <h1 class="text-themecolor m-b-0 m-t-0"><b>Pesaje</b></h1>
-      </div>
-      <div class="col-md-3 col-4 align-self-center"></div>
-      <div class="col-md-2 col-8 align-self-center"></div>
-      <div class="col-md-2 col-2 align-self-center">
-      <div class="container">
-        <a href="../../pesaje" style="background-color:#fff;color:#FF8D6D" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md" role="button">Cola de Trabajo</a>
-      </div>
-      </div>
-      </div>
-    </div>
+    <!-- <label for="" style="color: coral;font-size:medium ">Fecha:<?php echo date("d/m/Y"); ?></label> -->  
+    <h1 class="text-themecolor m-b-0 m-t-0"><b>Pesaje</b></h1>
+      
+      <a href="../../pesaje" style="background-color:#fff;color:#FF8D6D" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md" role="button">Cola de Trabajo</a>
+    </div>  
+    
+      
+   
+   <!--  </div> -->
+  </div>
 
 <div class="row">
   <!-- column -->
@@ -108,47 +106,79 @@
 
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
           <div class="card-body">
-            <div class="row" style="margin: 1%">
-              <div class="col-md-4 col-2 align-self-right">
-                <label for="recipient-name" class="col-form-label">Fecha:</label>
-                <input type="date" class="form-control" id="in_fecha" name="fechaprogramacion" readonly>
-              </div>
-              <div class="col-md-4 col-2 align-self-center">
-                <label for="recipient-name" class="col-form-label">No Orden:</label>
+            <div class="contenedorInfo">
+              <label>Fecha Programación</label>
+              <label>No Orden</label>
+              <label>Referencia</label>
+              <label>Observaciones</label>
+
+              <input type="text" class="form-control" id="in_fecha_programacion" readonly>
+              <input type="text" class="form-control" id="in_numero_orden" readonly>
+              <input type="text" class="form-control" id="in_referencia" readonly>
+              <input type="text" class="form-control itemInfo" id="observaciones" readonly>
+              <!-- <textarea class="form-control itemInfoObs" id="" rows="5" readonly></textarea> -->
+              
+              <label>Tamaño Lote (Kg)</label>
+              <label>No Lote</label>
+              <label>Línea</label>
+              
+
+              <input type="text" class="form-control" id="in_tamano_lote" readonly>
+              <input type="text" class="form-control" id="in_numero_lote" readonly>
+              <input type="text" class="form-control" id="in_linea" readonly>
+              
+              
+              <!-- <input type="textarea" class="form-control " id="in_linea" readonly style="text-align: center;"> -->
+              
+            </div>
+
+            <div class="contenedorInfoObs">
+              
+            </div>
+
+            <!-- <div class="row" style="margin: 1%">
+              <div class="col-md-3 col-2 align-self-right">
+                <label for="recipient-name" class="col-form-label">Fecha Programación</label>
+                <input type="text" class="form-control" id="in_fecha_programacion" readonly style="text-align: center;"> -->
+                <!-- <input type="date" class="form-control" id="in_fecha" name="fechaprogramacion" readonly> -->
+              <!-- </div>
+              <div class="col-md-3 col-2 align-self-center">
+                <label for="recipient-name" class="col-form-label">No Orden</label>
                 <input type="text" class="form-control" id="in_numero_orden" readonly>
-                <input type="text" class="form-control" name="idbatch"
-                       hidden>
+                <input type="text" class="form-control" name="idbatch" hidden style="text-align: center;">
               </div>
 
-              <div class="col-md-4 col-2 align-self-right">
-                <label for="recipient-name" class="col-form-label">Referencia:</label>
-                <input type="text" class="form-control" id="in_referencia"
-                       readonly>
+              <div class="col-md-3 col-2 align-self-right">
+                <label for="recipient-name" class="col-form-label">Referencia</label>
+                <input type="text" class="form-control" id="in_referencia" readonly style="text-align: center;">
               </div>
-
+              
+              <div class="col-md-3 col-2 align-self-right">
+                <label for="recipient-name" class="col-form-label">Observaciones</label>
+                <input type="textarea" class="form-control" name="" id="" readonly>
+              </div>
             </div>
             <div class="row" style="margin: 1%">
-              <div class="col-md-4 col-2 align-self-center">
+              <div class="col-md-3 col-2 align-self-center">
                 <label for="in_tamano_lote" class="col-form-label">Tamaño Lote (Kg)</label>
-                <input type="text" class="form-control Numeric" id="in_tamano_lote"
+                <input type="text" class="form-control Numeric" id="in_tamano_lote" readonly style="text-align: center;">
+              </div>
+              <div class="col-md-3 col-2 align-self-center">
+                <label for="in_numero_lote" class="col-form-label">No Lote</label>
+                <input type="text" class="form-control" id="in_numero_lote" readonly style="text-align: center;">
+              </div>
+              <div class="col-md-3 col-2 align-self-center">
+                <label for="recipient-name" class="col-form-label">Linea</label>
+                <input type="text" class="form-control" id="in_linea" readonly style="text-align: center;">
+              </div> -->
+              <!-- <div class="col-md-4 col-2 align-self-center">
+                <label for="recipient-name" class="col-form-label">Fecha de Programación</label>
+                <input type="text" class="form-control" id="x|"
                        readonly>
-              </div>
-              <div class="col-md-4 col-2 align-self-center">
-                <label for="in_numero_lote" class="col-form-label">No Lote:</label>
-                <input type="text" class="form-control" id="in_numero_lote"
-                       readonly>
-              </div>
-              <div class="col-md-4 col-2 align-self-center">
-                <label for="recipient-name" class="col-form-label">Linea:</label>
-                <input type="text" class="form-control" id="in_linea" readonly>
-              </div>
-              <div class="col-md-4 col-2 align-self-center">
-                <label for="recipient-name" class="col-form-label">Fecha de Programacion:</label>
-                <input type="text" class="form-control" id="in_fecha_programacion"
-                       readonly>
-              </div>
+              </div> -->
 
-            </div>
+            <!-- </div> -->
+            
           </div>
         </div>
       </div>
@@ -351,7 +381,7 @@
 <script src="../../assets/plugins/bootstrap/js/tether.min.js"></script>
 <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../../html/vendor/datatables/datatables.min.js"></script>
-<script src="html/vendor/bootstrap/js/popper.js"></script>
+<!-- <script src="html/vendor/bootstrap/js/popper.js"></script> -->
 <!-- slimscrollbar scrollbar JavaScript -->
 <script src="../../html/js/jquery.slimscroll.js"></script>
 <!--Wave Effects -->
@@ -366,7 +396,7 @@
 <script src="../../html/js/datatables.js"></script>
 <script src="../../html/js/utils/loadinfo-global.js"></script>
 <script src="../../html/js/utils/pesajeinfo.js"></script>
-<script src="../../html/js/validadores.js"></script>
+<!-- <script src="../../html/js/validadores.js"></script> -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <!-- Toastr.js Después -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
