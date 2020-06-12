@@ -131,32 +131,38 @@ var pr = 1;
 
 
 $("#adicionarPesaje").on('click', function(){
-    if(ps < maxField){
-        $("#addTanquePesaje tbody tr:eq(0)").clone().removeClass().appendTo('#addTanquePesaje');
-        ps++;
-    }    
-});
+    
+    var total = $('#txtTotal').val();
+    
+    if(ps==1  && total == ""){
+        alertify.set("notifier","position", "top-right"); alertify.error("Para adicionar más tanques diligencia todos los campos vacios.");
+        
+    }else{
 
-$(document).on("click",".eliminarPesaje", function(){
-    var parent = $(this).parents().get(0);
-    if(ps != 1){
-        $(parent).remove();
-        ps--;
+        var trs = $("addTanquePesaje tbody tr");
+        $.each(trs, function(i, tr) {
+            if (!$(tr).attr('id')) {    
+            $(tr).attr('id', i + 1);
+            }
+        });  
+        
+        if(ps < maxField){
+            $("#addTanquePesaje tbody tr:eq(0)").clone().appendTo('#addTanquePesaje');
+            ps++;
+        }    
     }
 });
 
-$("#adicionarPreparacion").on('click', function(){
-    if(pr < maxField){
-        $("#addTanquePreparacion tbody tr:eq(0)").clone().removeClass().appendTo('#addTanquePreparacion');
-        pr++;
-    }    
-});
-
-$(document).on("click",".eliminarPreparacion", function(){
+$(document).on("click",".eliminarPesaje", function(){
+/* function eliminarTanque(){  */    
     var parent = $(this).parents().get(0);
-    if(pr != 1){
+    if(ps != 1){
+       /*  $("#txtCantidad").remove();
+        $("#txtTotal").remove();
+        $("#btnEliminarTanques").remove(); */
         $(parent).remove();
-        pr--;
+        ps--;
+    /* } */ 
     }
 });
 
@@ -169,12 +175,15 @@ function cerrarModal(){
 
 /* Multiplica el tamaño de los tanques */
 
-function CalculoTanque(){
-    tanque = document.getElementById('tanquePesaje').value;
-    
-    obpesaje = document.getElementById('obpesaje').value;
-    total = (tanque * pesaje );
+function CalcularTanque() {
 
-    document.getElementById('tamanototallote').value = total
+    $('#addTanquePesaje tr').each(function(){
 
-}
+        var cantidad = $('#txtCantidad').val();
+        var tanque = $('select[name=cmbtanque]').val()
+        var total = tanque * cantidad;
+
+        $('#txtTotal').val(total);
+
+    })   
+ }

@@ -99,6 +99,17 @@
                                 
                                 <button id="adicionarPesaje" name="adicionarPesaje" type="button" class="btn btn-primary">Adicionar</button>
                             
+                                <!-- <form method="POST">
+                                    <div id="lineas">
+                                        <select class="form-control" name="cmbtanque" id="cmbTanque" ><option disabled selected>Tanque(Kg)</option></select>    
+                                        <input type="number" class="form-control" id="txtCantidad" name="txtCantidad[]" placeholder="Cantidad" value="0" onkeyup="CalcularTanque(this)">
+                                        <input type="number" class="form-control" id="txtTotal" name="txtTotal[]" placeholder="Total" >
+                                    </div>
+                                    
+                                    
+                                </form> -->        
+
+
                                 <table id="addTanquePesaje" class="mt-3">
                                     <tr>
                                         <td width = "120">
@@ -106,8 +117,8 @@
                                                 <option disabled selected>Tanque(Kg)</option>
                                             </select>
                                         </td>
-                                        <td><input type="number" class="form-control" id="obpesaje" name="obpesaje" placeholder="Cantidad" onchange="CalculoTanque();"></td>
-                                        <td><input type="number" class="form-control" id="totalpesaje" name="obpesaje" placeholder="Total" ></td>
+                                        <td><input type="number" class="form-control" id="txtCantidad" name="txtCantidad[]" placeholder="Cantidad" value="0" onkeyup="CalcularTanque()"></td>
+                                        <td><input type="number" class="form-control" id="txtTotal" name="txtTotal[]" placeholder="Total" ></td>
                                         <td class="eliminarPesaje"> <input class="btn btn-warning" type="button" value="-"> </td> 
                                     </tr>
                                 </table>    
@@ -125,3 +136,5 @@
         </div>
     </div>
 </div>
+
+
