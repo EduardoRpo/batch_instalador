@@ -10,8 +10,8 @@
 <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> -->
 
 <link rel="stylesheet" href="vendor/jquery-confirm/jquery-confirm.min.css">
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
-
+<!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" /> -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 

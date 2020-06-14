@@ -162,7 +162,8 @@
 <script type="text/javascript" src="vendor/datatables/datatables.min.js"></script>
 
 <!-- Calendario -->
-<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+<!-- <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script> -->
 <!-- <script src="jquery.ui.datepicker-es.js"></script> -->
 
 
@@ -173,7 +174,8 @@
 <script src="js/utils/sidebarmenu.js"></script>
 <script src="../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
 <!-- <script src="../assets/plugins/jquery/jquery.number.min.js"></script> -->
-<script src="http://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+<!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 
 
 <!--Custom JavaScript -->
