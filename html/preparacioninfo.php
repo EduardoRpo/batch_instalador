@@ -590,16 +590,16 @@
 <!-- slimscrollbar scrollbar JavaScript -->
 <script src="../../html/js/jquery.slimscroll.js"></script>
 <!--Wave Effects -->
-<script src="../../html/js/waves.js"></script>
+<script src="../../html/js/utils/waves.js"></script>
 <!--Menu sidebar -->
 <script src="../../html/js/sidebarmenu.js"></script>
 <!--stickey kit -->
 <script src="../../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
 <!--Custom JavaScript -->
-<script src="../../html/js/custom.min.js"></script>
-<script src="../../html/js/datatables.js"></script>
+<script src="../../html/js/utils/custom.min.js"></script>
+<script src="../../html/js/utils/datatables.js"></script>
 <script src="../../html/vendor/jquery-confirm/jquery-confirm.min.js"></script>
-<script src="../../html/js/clock.js"></script>
+<script src="../../html/js/utils/clock.js"></script>
 <script src="../../assets/plugins/jquery/jquery.number.min.js"></script>
 
 <script src="../../html/js/global/loadinfo-global.js"></script>

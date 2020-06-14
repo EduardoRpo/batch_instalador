@@ -150,7 +150,7 @@
 
 <!-- jquery -->
 <script src="../assets/plugins/jquery/jquery.min.js"></script>
-<script src="js/jquery.slimscroll.js"></script>
+<script src="js/utils/jquery.slimscroll.js"></script>
 <script src="vendor/jquery/jquery.serializeToJSON.min.js"></script>
 
 <!-- Bootstrap -->
@@ -170,17 +170,17 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
 <!-- Menu -->
-<script src="js/sidebarmenu.js"></script>
+<script src="js/utils/sidebarmenu.js"></script>
 <script src="../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
 <!-- <script src="../assets/plugins/jquery/jquery.number.min.js"></script> -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 
 
 <!--Custom JavaScript -->
 <!-- <script src="js/global.js"></script> -->
-<script src="js/datatables.js"></script>
+<script src="js/utils/datatables.js"></script>
 <script src="vendor/jquery-confirm/jquery-confirm.min.js"></script>
-<script src="js/custom.js"></script>
+<script src="js/utils/custom.js"></script>
 <script src="js/batch/batch.js"></script>
 <script src="js/batch/clonar.js"></script>
 <script src="js/batch/crearbatch.js"></script>
