@@ -105,13 +105,13 @@ function CalculoTamanolote (valor) {
     unidades = parseInt(valor);
 	
     densidad = document.getElementById('densidad').value;
-    console.log(densidad);
+    //console.log(densidad);
     presentacion = parseInt(document.getElementById('presentacioncomercial').value);
-    console.log(presentacion);
+    //console.log(presentacion);
     total = (unidades * densidad * presentacion)/1000;
-    console.log(total);
+    //console.log(total);
     (document.getElementById('tamanototallote').value) = numeral(total).format('0kb');
-    console.log(total);
+    //console.log(total);
 }
 
 /* Limpiar datos al cambiar referencia en el modal de crear Batch */
@@ -134,20 +134,39 @@ $("#adicionarPesaje").on('click', function(){
     
     var total = $('#txtTotal').val();
     
-    if(ps==1  && total == ""){
+    if(total == "" || total == 0){
         alertify.set("notifier","position", "top-right"); alertify.error("Para adicionar más tanques diligencia todos los campos vacios.");
         
     }else{
 
-        var trs = $("addTanquePesaje tbody tr");
+/*         var trs = $("addTanquePesaje tbody tr");
         $.each(trs, function(i, tr) {
             if (!$(tr).attr('id')) {    
             $(tr).attr('id', i + 1);
             }
-        });  
+        });   */
+        
         
         if(ps < maxField){
-            $("#addTanquePesaje tbody tr:eq(0)").clone().appendTo('#addTanquePesaje');
+            //var nfilas = $("#addTanquePesaje tr").length;
+
+            /* $("#addTanquePesaje tbody tr:eq(0)") */
+            $("#cmbtanque").clone(true, true).appendTo("body"); /*.find('input').val("").attr('id', 'txtTotal' + nfilas) ;*/
+                
+                /*  var elementoClonado = $("#addTanquePesaje tbody tr:eq(0)").clone(true, true).appendTo('#addTanquePesaje').find('input').val("");
+            console.log(elementoClonado);
+            elementoClonado.attr('id', 'nuevo id');
+            elementoClonado.attr('name', 'nuevo nombre'); */
+            /* $("#addTanquePesaje tbody tr:eq(0)").clone(true).attr("id", "newId").find("#input_1").attr("id", "input_2"); */
+            
+
+            /* $('addTanquePesaje').children("tbody").children("tr").each(function(index, e){
+                if( index >= 1){
+                   console.log($(this).attr('id'));
+                }
+             }); */
+
+
             ps++;
         }    
     }
@@ -173,17 +192,33 @@ function cerrarModal(){
 }
 
 
+var tanque="";
+
 /* Multiplica el tamaño de los tanques */
+$('#cmbTanque').change(function(){
 
-function CalcularTanque() {
+    var tanque = $(this).val();
+    $('#transito').val(tanque);
+    console.log(tanque);
 
-    $('#addTanquePesaje tr').each(function(){
+});
 
-        var cantidad = $('#txtCantidad').val();
-        var tanque = $('select[name=cmbtanque]').val()
-        var total = tanque * cantidad;
+
+function CalcularTanque(cantidad) {
+
+    /* $('#addTanquePesaje tr').each(function(){ */
+
+        tanque = $('#transito').val()
+        /*console.log(tanque); */
+        
+        cantidad =cantidad;
+        //cantidad = $('#txtCantidad').val();
+        console.log(cantidad);
+        
+        total = tanque * cantidad;
+        console.log(total);
 
         $('#txtTotal').val(total);
 
-    })   
+   /*  })  */  
  }

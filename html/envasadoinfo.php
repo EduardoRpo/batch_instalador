@@ -1,550 +1,478 @@
+<?php
+include('/Desarrollo/BatchRecord/htdocs/html/modal/modal_firma.php');
+//include('../modal/modal_firma.php');
+include('/Desarrollo/BatchRecord/htdocs/html/modal/modal_cambiarContrasena.php');
+/* include('../modal/modal_cambiarContrasena.php'); */
+include('/Desarrollo/BatchRecord/htdocs/html/modal/modal_observaciones.php');
+include('/Desarrollo/BatchRecord/htdocs/html/modal/m_firma.php');
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <title>Samara Cosmetics</title>
-    <!-- Bootstrap Core CSS -->
-    <link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="css/style.css" rel="stylesheet">
-    <!-- You can change the theme colors from here -->
-    <link href="css/colors/blue.css" id="theme" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-      <link rel="stylesheet" type="text/css" href="vendor/datatables/datatables.min.css">
-      <link rel="stylesheet" type="text/css" href="vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css">
-     
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Favicon icon -->
+  <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
+  <title>Samara Cosmetics</title>
+
+  <!-- Bootstrap Core CSS -->
+  <link href="../../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="../../html/css/style.css" rel="stylesheet">
+
+  <!-- You can change the theme colors from here -->
+  <link rel="stylesheet" href="../../html/css/colors/blue.css" id="theme">
+  <link rel="stylesheet" href="../../html/css/custom.css">
+  <link rel="stylesheet" href="../../html/vendor/jquery-confirm/jquery-confirm.min.css">
+  <link rel="stylesheet" type="text/css" href="../../html/vendor/datatables/datatables.min.css">
+  <link rel="stylesheet" type="text/css" href="../../html/vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <!-- script src="https://kit.fontawesome.com/6589be6481.js" crossorigin="anonymous"></script> -->
+
+  <!-- Hoja de estilos Toastr -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css"> -->
+
+  <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> -->
+  <!-- Alertify -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">
-    <!-- ============================================================== -->
-    <!-- Preloader - style you can find in spinners.css -->
-    <!-- ============================================================== -->
-    <div class="preloader">
-        <svg class="circular" viewBox="25 25 50 50">
-            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
-    </div>
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
-    <div id="main-wrapper">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
-        <header class="topbar">
-            <nav class="navbar top-navbar navbar-toggleable-sm navbar-light">
-                <!-- ============================================================== -->
-                <!-- Logo -->
-                <!-- ============================================================== -->
-                <div class="navbar-header">
-                    <a class="navbar-brand">
-                        <!-- Logo text --><span>
-                         
-                         <!-- Light Logo text -->    
-                         <img src="../assets/images/logo-light-text2.png" class="light-logo" alt="homepage" /></span> </a>
-                </div>
-                <!-- ============================================================== -->
-                <!-- End Logo -->
-                <!-- ============================================================== -->
-                <div class="navbar-collapse">
-                    <!-- ============================================================== -->
-                    <!-- toggle and nav items -->
-                    <!-- ============================================================== -->
-                    <ul class="navbar-nav mr-auto mt-md-0">
-                        <!-- This is  -->
-                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
-                        <!-- ============================================================== -->
-                        <!-- Search -->
-                        <!-- ============================================================== -->
+  <div class="preloader">
+    <svg class="circular" viewBox="25 25 50 50">
+      <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
+  </div>
+  <div id="main-wrapper">
+    <header class="topbar">
+      <nav class="navbar top-navbar navbar-toggleable-sm navbar-light">
+        <div class="navbar-header">
+          <a class="navbar-brand">
+            <span><img src="../../assets/images/logo-light-text2.png" class="light-logo" alt="homepage" /></span>
+          </a>
+        </div>
+        <div class="navbar-collapse">
+          <ul class="navbar-nav mr-auto mt-md-0">
+            <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
+          </ul>
+          <ul class="navbar-nav my-lg-0">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" id="dropdownMenuenlace">Berney Montoya
+                <i class="large material-icons">account_circle</i></a>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuenlace">
+                <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modalCambiarContrasena">Cambiar contraseña</a>
+                <a href="../index.html" class="dropdown-item">Cerrar sesión</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
 
-                    </ul>
-                    <!-- ============================================================== -->
-                    <!-- User profile and search -->
-                    <!-- ============================================================== -->
-                    <ul class="navbar-nav my-lg-0">
-                        <!-- ============================================================== -->
-                        <!-- Profile -->
-                        <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
-                            <!-- <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/campana.png" alt="noty" class="profile-pic m-r-12" /></a>-->
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/users/1.jpg" alt="user" class="profile-pic m-r-10" />Jonathan Hernandez</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-      
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
-       <div class="container-fluid">
-                <!-- ============================================================== -->
-                <!-- Bread crumb and right sidebar toggle -->
-                <!-- ============================================================== -->
-                <div class="row page-titles">
-                    <div class="col-md-5 col-2 align-self-center">
-                        <h1 class="text-themecolor m-b-0 m-t-0">Aprobación</h1> 
-                    </div>
-                    <div class="col-md-3 col-4 align-self-center">
-                        <!-- Search form -->
-                     
-                    </div>
-                    <div class="col-md-2 col-8 align-self-center">
-                      
-                    </div>
-
-
-    <div class="col-md-2 col-2 align-self-center">
-    <div class="container">
-  <!-- Trigger the modal with a button -->
-
-  <select class="selectpicker form-control">
-                        <option selected hidden>Acciones</option>
-                        <option>Mustard</option>
-                        <option>Ketchup</option>
-                        <option>Relish</option>
-                      </select>
-                    </div>
-                    </div>
-                 </div>
-                <!-- ============================================================== -->
-                <!-- End Bread crumb and right sidebar toggle -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
-                <div class="row">
-                    <!-- column -->
-                    <div class="col-lg-12">
-                        <div id="accordion">
-  <div class="card">
-    <div class="card-header" id="headingOne">
-      <h5 class="mb-0">
-        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="width: 100%">
-          Información del producto
-        </button>
-      </h5>
-    </div>
-
-    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-      <div class="card-body">
-        <div class="row" style="margin: 1%">
-                              <div class="col-md-4 col-2 align-self-right" >
-                                <label for="recipient-name" class="col-form-label">No. Lote:</label>
-                                <input type="text" class="form-control" id="recipient-name">
-                              </div>
-                              <div class="col-md-4 col-2 align-self-center">
-                                <label for="recipient-name" class="col-form-label">Fecha:</label>
-                                 <input type="date" class="form-control" id="recipient2-name">
-                              </div>
-                              <div class="col-md-4 col-2 align-self-center">
-                                <label for="recipient-name" class="col-form-label">No OP:</label>
-                                 <input type="text" class="form-control" id="recipient2-name">
-                              </div>
-            </div>
+    <div class="container-fluid">
+      <div class="row page-titles">
+        <!-- <label for="" style="color: coral;font-size:medium ">Fecha:<?php echo date("d/m/Y"); ?></label> -->
+        <h1 class="text-themecolor m-b-0 m-t-0"><b>Envasado</b></h1>
+        <a href="../../envasado" style="background-color:#fff;color:#FF8D6D" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md" role="button">Cola de Trabajo</a>
       </div>
     </div>
-  </div>
-<div class="card">
-    <div class="card-header" id="headingTwo">
-      <h5 class="mb-0">
-        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"style="width: 100%">
-          Despeje de lineas y procesos
-        </button>
-      </h5>
-    </div>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-      <div class="card-body">
-         <div class="row" style="margin: 1%">
-                              <div class="col-md-12 col-2 align-self-right" >
-                                <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Parámetros de control</h3>
-                              </div>
-         </div>
-         <div class="row" style="margin: 1%">
-                              <div class="col-md-10 col-2 align-self-right" >
-                                <a for="recipient-name" class="col-form-label">Se encuentras las areas de materias primas, materiales, insumos y productos que no se </a>
-                              </div>
-                              <div class="col-md-1 col-0 align-self-center">
-                  <label class="checkbox"> <input type="checkbox" />
-                  </label>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <div id="accordion">
+          <div class="card">
+            <div class="card-header" id="headingOne">
+              <h5 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="width: 100%">
+                  <b>INFORMACIÓN DEL PRODUCTO</b>
+                </button>
+              </h5>
+            </div>
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+              <div class="card-body">
+                <div class="contenedorInfo">
+                  <label>Fecha Programación</label>
+                  <label>No Orden</label>
+                  <label>Referencia</label>
+                 
+                  <input type="text" class="form-control" id="in_fecha_programacion" readonly>
+                  <input type="text" class="form-control" id="in_numero_orden" readonly>
+                  <input type="text" class="form-control" id="in_referencia" readonly>
+
+                  <label>Tamaño Lote (Kg)</label>
+                  <label>No Lote</label>
+                  <label>Línea</label>
+
+                  <input type="text" class="form-control" id="in_tamano_lote" readonly>
+                  <input type="text" class="form-control" id="in_numero_lote" readonly>
+                  <input type="text" class="form-control" id="in_linea" readonly>
+
                 </div>
-                   <div class="col-md-1 col-0 align-self-center">
-                  <label class="checkbox"> <input type="checkbox" />
-                  </label>
-                </div>
-         </div>
-         <div class="row" style="margin: 1%">
-                              <div class="col-md-10 col-2 align-self-right" >
-                                <a for="recipient-name" class="col-form-label">Se encuentras las areas de materias primas, materiales, insumos y productos que no se </a>
-                              </div>
-                              <div class="col-md-1 col-0 align-self-center">
-                  <label class="checkbox"> <input type="checkbox" />
-                  </label>
-                </div>
-                   <div class="col-md-1 col-0 align-self-center">
-                  <label class="checkbox"> <input type="checkbox" />
-                  </label>
-                </div>
-         </div>
-         <div class="row" style="margin: 1%">
-                              <div class="col-md-10 col-2 align-self-right" >
-                                <a for="recipient-name" class="col-form-label">Se encuentras las areas de materias primas, materiales, insumos y productos que no se </a>
-                              </div>
-                              <div class="col-md-1 col-0 align-self-center">
-                  <label class="checkbox"> <input type="checkbox" />
-                  </label>
-                </div>
-                   <div class="col-md-1 col-0 align-self-center">
-                  <label class="checkbox"> <input type="checkbox" />
-                  </label>
-                </div>
-         </div>
-         <div class="row" style="margin: 1%">
-                              <div class="col-md-10 col-2 align-self-right" >
-                                <a for="recipient-name" class="col-form-label">Se encuentras las areas de materias primas, materiales, insumos y productos que no se </a>
-                              </div>
-                              <div class="col-md-1 col-0 align-self-center">
-                  <label class="checkbox"> <input type="checkbox" />
-                  </label>
-                </div>
-                   <div class="col-md-1 col-0 align-self-center">
-                  <label class="checkbox"> <input type="checkbox" />
-                  </label>
-                </div>
-         </div>
-         <div class="row" style="margin: 1%">
-                              <div class="col-md-12 col-2 align-self-right" >
-                                <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Desinfección </h3>
-                              </div>
-         </div>
-        <div class="row" style="margin: 1%">
-                              <div class="col-md-4 col-2 align-self-right" >
-                                <label for="recipient-name" class="col-form-label">Producto de desinfección</label>
-                                <select class="selectpicker form-control">
-                                <option selected hidden></option>
-                                <option>Mustard</option>
-                                <option>Ketchup</option>
-                                <option>Relish</option>
+
+
+              </div>
+            </div>
+            </div>
+            <div class="card">
+              <div class="card-header" id="headingTwo">
+                <h5 class="mb-0">
+                  <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="width: 100%">
+                    <b>DESPEJE DE LINEAS Y PROCESOS</b>
+                  </button>
+                </h5>
+              </div>
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body">
+                  <div class="row justify-content-center" style="margin: 1%;  background-color: #C0C0C0">
+                    <div class="col-md-10 col-2 align-self-right">
+                      <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Parámetros de control</h3>
+                    </div>
+                    <div class="col-md-1 col-0 align-self-center">
+                      <h3 for="recipient-name" class="col-form-label" style=" background-color: #C0C0C0">&nbsp;&nbsp;&nbsp;Si</h3>
+                    </div>
+                    <div class="col-md-1 col-0 align-self-center">
+                      <h3 for="recipient-name" class="col-form-label" style=" background-color: #C0C0C0">&nbsp;&nbsp;&nbsp;No</h3>
+                    </div>
+                  </div>
+
+                  <div class="row" id="preguntas-div" style="margin: 1%">
+
+                  </div>
+
+
+                  <div class="row" style="margin: 1%">
+                    <div class="col-md-12 col-2 align-self-right">
+                      <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Desinfección </h3>
+                    </div>
+                  </div>
+                  <div class="row" style="margin: 1%">
+                    <div class="col-md-4 col-2 align-self-right">
+                      <label for="sel_producto_desinfeccion" class="col-form-label">Producto de desinfección</label>
+                      <select class="selectpicker form-control in_desinfeccion" id="sel_producto_desinfeccion">
+                        <option selected>Seleccione</option>
                       </select>
-                              </div>
-                              <div class="col-md-8 col-2 align-self-center">
-                                <label for="recipient-name" class="col-form-label">Observaciones:</label>
-                                 <input type="text" class="form-control" id="recipient2-name">
-                              </div>
-            </div>   
-        <div class="row" style="margin: 1%">
-                              <div class="col-md-4 col-2 align-self-center">
-                                <label for="recipient-name" class="col-form-label">Realizado Por:</label>
-                                 <input type="text" class="form-control" id="recipient2-name">
-                              </div>
-                              <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                                <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;">Firmar</button>
-                              </div>
-                              
-                              <div class="col-md-4 col-2 align-self-center">
-                                <label for="recipient-name" class="col-form-label">Verificado Por:</label>
-                                 <input type="text" class="form-control" id="recipient2-name">
-                              </div>
-                              <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                                <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;">Firmar</button>
-                              </div>
-            </div>  
-        <div class="row" style="margin: 1%">
-                            <div class="col-md-12 col-2 align-self-center" style="margin-left: 85%">
-                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                           <button type="button" class="btn btn-primary">Aceptar</button>
-                           </div>                     
-            </div>                       
-            </div>
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-header" id="headingThree">
-      <h5 class="mb-0">
-        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
-          Envasado
-        </button>
-      </h5>
-    </div>
-    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-      <div class="card-body">
-                 <div class="row" style="margin: 1%">
-                              <div class="col-md-12 col-2 align-self-center" >
-                                <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Entrega material de envase</h3>
-                              </div>
-                              <div class="col-md-12 col-2 align-self-center">
-                               <div class="card">
-                            <div class="card-block">
-                                 <!--<h4 class="card-title">Basic Table</h4>
-                                <h6 class="card-subtitle">Add class <code>.table</code></h6>-->
-                                <div class="table-responsive">
-                              
-                               <table class="table table-striped table-bordered">
-                                   <thead>
-                                            <tr>
-                                                <th>Fecha</th>
-                                                <th>Referencia envase tapa</th>
-                                                <th>Descripción</th>
-                                                <th>Cantidad</th>                                              
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td> </td>
-                                                <td>16</td>
-                                                <td>Auto</td>
-                                                <td> <input type="text" class="form-control" id="cantidad-name"></td>
-                                            </tr>
-                                             <tr>
-                                                <td> </td>
-                                                <td>15</td>
-                                                <td>Auto</td>
-                                                <td> <input type="text" class="form-control" id="cantidad-name"></td>
-                                            </tr>
-                                             <tr>
-                                                <td> </td>
-                                                <td>17</td>
-                                                <td>Auto</td>
-                                                <td> <input type="text" class="form-control" id="cantidad-name"></td>
-                                            </tr>
-                               </table> 
-                                </form>
-                                         </div>
-                                            </div> 
-                                               </div> 
-                              <div class="col-md-3 col-2 align-self-center">
-                                <label for="recipient-name" class="col-form-label">Identificacion envasadora:</label>
-                                 
-                              </div> 
-                             
-                              <div class="col-md-4 col-2 align-self-center">
-                                <select class="selectpicker form-control">
-                                <option selected hidden></option>
-                                <option>Mustard</option>
-                                <option>Ketchup</option>
-                                <option>Relish</option>
-                      </select>
-                              </div>                           
-                <div class="row" style="margin: 1%">
-                               <div class="col-md-4 col-2 align-self-center">
-                                <label for="recipient-name" class="col-form-label">Realizado Por:</label>
-                                 <input type="text" class="form-control" id="recipient2-name">
-                              </div>
-                              <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                                <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;">Firmar</button>
-                              </div>
-                              
-                              <div class="col-md-4 col-2 align-self-center">
-                                <label for="recipient-name" class="col-form-label">Verificado Por:</label>
-                                 <input type="text" class="form-control" id="recipient2-name">
-                              </div>
-                              <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                                <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;">Firmar</button>
-                              </div>      
-            </div>    
-            <div class="row" style="margin: 1%">
-                            <div class="col-md-12 col-2 align-self-center"  style="margin-left: 85%">
-                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                           <button type="button" class="btn btn-primary">Aceptar</button>
-                           </div>                           
-            </div>
-            <div class="row" style="margin: 1%">
-                              <div class="col-md-12 col-2 align-self-center" >
-                                <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Especificaciones tecnicas</h3>
-                              </div>
-                              <div class="col-md-1 col-2 align-self-center" style="margin-top: 1%">
-                                <label for="recipient-name" class="col-form-label">Minimo:</label>   
-                              </div>
-                               <div class="col-md-3 col-2 align-self-center" style="margin-top: 1%">
-                                 <input type="text" class="form-control" id="Minimo">   
-                              </div> 
-                              <div class="col-md-1 col-2 align-self-center" style="margin-top: 1%">
-                                <label for="recipient-name" class="col-form-label">Medio:</label>             
-                              </div>
-                               <div class="col-md-3 col-2 align-self-center" style="margin-top: 1%">
-                                 <input type="text" class="form-control" id="Medio">   
-                              </div>
-                              <div class="col-md-1 col-2 align-self-center" style="margin-top: 1%">
-                                <label for="recipient-name" class="col-form-label">Maximo:</label> 
-                              </div>
-                               <div class="col-md-3 col-2 align-self-center"  style="margin-top: 1%">
-                                 <input type="text" class="form-control" id="Maximo">   
-                              </div>
-             </div>
-                         <div class="row" style="margin: 1%">
-                              <div class="col-md-12 col-2 align-self-center" >
-                                <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Control de peso en proceso</h3>
-                              </div>
-                              <div class="col-md-1 col-2 align-self-center" style="margin-top: 1%">
-                                <label for="recipient-name" class="col-form-label">No. Muestras:</label>   
-                              </div>
-                               <div class="col-md-3 col-2 align-self-center" style="margin-top: 1%">
-                                 <input type="text" class="form-control" id="Muestras">   
-                              </div> 
-                              <div class="col-md-1 col-2 align-self-center" style="margin-top: 1%">
-                                <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;">Iniciar</button>
-                              </div>
-                              <div class="col-md-1 col-2 align-self-center" style="margin-top: 1%">
-                                <label for="recipient-name" class="col-form-label">Promedio:</label>             
-                              </div>
-                               <div class="col-md-3 col-2 align-self-center" style="margin-top: 1%">
-                                 <input type="text" class="form-control" id="Promedio">   
-                              </div>
-                              <div class="col-md-4 col-2 align-self-center">
-                                <label for="recipient-name" class="col-form-label">Realizado Por:</label>
-                                 <input type="text" class="form-control" id="recipient2-name">
-                              </div>
-                              <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                                <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;">Firmar</button>
-                              </div>
-                              
-                              <div class="col-md-4 col-2 align-self-center">
-                                <label for="recipient-name" class="col-form-label">Verificado Por:</label>
-                                 <input type="text" class="form-control" id="recipient2-name">
-                              </div>
-                              <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                                <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;">Firmar</button>
-                              </div>
-                              
-                              </div>
-           <div class="row" style="margin: 1%">
-                              <div class="col-md-12 col-2 align-self-center" >
-                                <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Devolución de material de envase sobrante</h3>
-                              </div>
-                             
-                               <div class="col-md-12 col-2 align-self-center">
-                               <div class="card">
-                            <div class="card-block">
-                                 <!--<h4 class="card-title">Basic Table</h4>
-                                <h6 class="card-subtitle">Add class <code>.table</code></h6>-->
-                                <div class="table-responsive">
-                               <table class="table table-striped table-bordered">
-                                   <thead>
-                                            <tr>
-                                                <th>Fecha</th>
-                                                <th>Referencia</th>
-                                                <th>Descripción</th>
-                                                <th>Cantidad Entregada</th>
-                                                <th>Cantidad Envasada</th>
-                                                <th>Cantidad Averias</th>
-                                                <th>Cantidad Sobrante</th>                                              
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                             <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                               </table> 
-                              </div>   
-                               </div>
-                               </div>  
-                                </div>
-                                </div>     
-                               <div class="row" style="margin: 1%">
-                             <div class="col-md-4 col-2 align-self-center">
-                                <label for="recipient-name" class="col-form-label">Realizado Por:</label>
-                                 <input type="text" class="form-control" id="recipient2-name">
-                              </div>
-                              <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                                <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;">Firmar</button>
-                              </div>
-                              
-                              <div class="col-md-4 col-2 align-self-center">
-                                <label for="recipient-name" class="col-form-label">Verificado Por:</label>
-                                 <input type="text" class="form-control" id="recipient2-name">
-                              </div>
-                              <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                                <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;">Firmar</button>
-                              </div>
-            </div>   
-            <div class="row" style="margin: 1%">
-                            <div class="col-md-12 col-2 align-self-center"  style="margin-left: 85%">
-                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                           <button type="button" class="btn btn-primary" onclick="window.location.href = '../html/loteado.html';">Aceptar</button>
-                           </div>                           
-            </div>
-  
-             </div>
-             
+                    </div>
+                    <div class="col-md-8 col-2 align-self-center">
+                      <label for="in_observaciones" class="col-form-label">Observaciones:</label>
+                      <input type="text" class="form-control in_desinfeccion" id="in_observaciones">
+                    </div>
+                  </div>
+                  <div class="row" style="margin: 1%">
+                    <div class="col-md-4 col-2 align-self-center">
+                      <label for="in_realizado" class="col-form-label">Realizado Por:</label>
+                      <input type="text" class="form-control in_desinfeccion" id="in_realizado">
+                    </div>
+                    <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
+                      <input type="button" class="btn btn-danger in_desinfeccion" data-toggle="modal" data-target="#m_firmar" style="width: 100%; height: 38px;" value="Firmar">
+                      <!-- <input type="button" class="btn btn-danger in_desinfeccion" data-toggle="modal" data-target="#myModal2"
+                       style="width: 100%; height: 38px;" value="Firmar"> -->
+                    </div>
 
-                <!-- ============================================================== -->
-                <!-- End PAge Content -->
-                <!-- ============================================================== -->
+                    <div class="col-md-4 col-2 align-self-center">
+                      <label for="in_verificado" class="col-form-label">Verificado Por:</label>
+                      <input type="text" class="form-control in_desinfeccion" id="in_verificado">
+                    </div>
+                    <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
+                      <!-- <input type="button" class="btn btn-danger in_desinfeccion" data-toggle="modal" data-target="#myModal3" style="width: 100%; height: 38px;" value="Firmar"> -->
+                      <input type="button" class="btn btn-danger in_desinfeccion" data-toggle="modal" data-target="#m_firmar" style="width: 100%; height: 38px;" value="Firmar">
+                    </div>
+                  </div>
+                  <div class="row justify-content-end mt-5" style="margin: 1%; text-align: right">
+                    <div class="col-md-12 col-2 align-self-end">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                      <button type="button" class="btn btn-primary">Aceptar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-             </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingThree">
+            <h5 class="mb-0">
+              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
+                <b>ENVASADO</b>
+              </button>
+            </h5>
+          </div>
+          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+            <div class="card-body">
+              <div class="row" style="margin: 1%">
+                <div class="col-md-12 col-2 align-self-center">
+                  <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Entrega material de envase</h3>
+                </div>
+                <div class="col-md-12 col-2 align-self-center">
+                  <div class="card">
+                    <div class="card-block">
 
+                      <div class="table-responsive">
+
+                        <table class="table table-striped table-bordered">
+                          <thead>
+                            <tr>
+                              <th>Fecha</th>
+                              <th>Referencia envase tapa</th>
+                              <th>Descripción</th>
+                              <th>Cantidad</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td> </td>
+                              <td>16</td>
+                              <td>Auto</td>
+                              <td> <input type="text" class="form-control" id="cantidad-name"></td>
+                            </tr>
+                            <tr>
+                              <td> </td>
+                              <td>15</td>
+                              <td>Auto</td>
+                              <td> <input type="text" class="form-control" id="cantidad-name"></td>
+                            </tr>
+                            <tr>
+                              <td> </td>
+                              <td>17</td>
+                              <td>Auto</td>
+                              <td> <input type="text" class="form-control" id="cantidad-name"></td>
+                            </tr>
+                        </table>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3 col-2 align-self-center">
+                    <label for="recipient-name" class="col-form-label">Identificacion envasadora:</label>
+
+                  </div>
+
+                  <div class="col-md-4 col-2 align-self-center">
+                    <select class="selectpicker form-control">
+                      <option selected hidden></option>
+                      <option>Mustard</option>
+                      <option>Ketchup</option>
+                      <option>Relish</option>
+                    </select>
+                  </div>
+                  <div class="row" style="margin: 1%">
+                    <div class="col-md-4 col-2 align-self-center">
+                      <label for="recipient-name" class="col-form-label">Realizado Por:</label>
+                      <input type="text" class="form-control" id="recipient2-name">
+                    </div>
+                    <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
+                      <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;">Firmar</button>
+                    </div>
+
+                    <div class="col-md-4 col-2 align-self-center">
+                      <label for="recipient-name" class="col-form-label">Verificado Por:</label>
+                      <input type="text" class="form-control" id="recipient2-name">
+                    </div>
+                    <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
+                      <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;">Firmar</button>
+                    </div>
+                  </div>
+                  <div class="row" style="margin: 1%">
+                    <div class="col-md-12 col-2 align-self-center" style="margin-left: 85%">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                      <button type="button" class="btn btn-primary">Aceptar</button>
+                    </div>
+                  </div>
+                  <div class="row" style="margin: 1%">
+                    <div class="col-md-12 col-2 align-self-center">
+                      <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Especificaciones tecnicas</h3>
+                    </div>
+                    <div class="col-md-1 col-2 align-self-center" style="margin-top: 1%">
+                      <label for="recipient-name" class="col-form-label">Minimo:</label>
+                    </div>
+                    <div class="col-md-3 col-2 align-self-center" style="margin-top: 1%">
+                      <input type="text" class="form-control" id="Minimo">
+                    </div>
+                    <div class="col-md-1 col-2 align-self-center" style="margin-top: 1%">
+                      <label for="recipient-name" class="col-form-label">Medio:</label>
+                    </div>
+                    <div class="col-md-3 col-2 align-self-center" style="margin-top: 1%">
+                      <input type="text" class="form-control" id="Medio">
+                    </div>
+                    <div class="col-md-1 col-2 align-self-center" style="margin-top: 1%">
+                      <label for="recipient-name" class="col-form-label">Maximo:</label>
+                    </div>
+                    <div class="col-md-3 col-2 align-self-center" style="margin-top: 1%">
+                      <input type="text" class="form-control" id="Maximo">
+                    </div>
+                  </div>
+                  <div class="row" style="margin: 1%">
+                    <div class="col-md-12 col-2 align-self-center">
+                      <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Control de peso en proceso</h3>
+                    </div>
+                    <div class="col-md-1 col-2 align-self-center" style="margin-top: 1%">
+                      <label for="recipient-name" class="col-form-label">No. Muestras:</label>
+                    </div>
+                    <div class="col-md-3 col-2 align-self-center" style="margin-top: 1%">
+                      <input type="text" class="form-control" id="Muestras">
+                    </div>
+                    <div class="col-md-1 col-2 align-self-center" style="margin-top: 1%">
+                      <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;">Iniciar</button>
+                    </div>
+                    <div class="col-md-1 col-2 align-self-center" style="margin-top: 1%">
+                      <label for="recipient-name" class="col-form-label">Promedio:</label>
+                    </div>
+                    <div class="col-md-3 col-2 align-self-center" style="margin-top: 1%">
+                      <input type="text" class="form-control" id="Promedio">
+                    </div>
+                    <div class="col-md-4 col-2 align-self-center">
+                      <label for="recipient-name" class="col-form-label">Realizado Por:</label>
+                      <input type="text" class="form-control" id="recipient2-name">
+                    </div>
+                    <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
+                      <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;">Firmar</button>
+                    </div>
+
+                    <div class="col-md-4 col-2 align-self-center">
+                      <label for="recipient-name" class="col-form-label">Verificado Por:</label>
+                      <input type="text" class="form-control" id="recipient2-name">
+                    </div>
+                    <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
+                      <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;">Firmar</button>
+                    </div>
+
+                  </div>
+                  <div class="row" style="margin: 1%">
+                    <div class="col-md-12 col-2 align-self-center">
+                      <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Devolución de material de envase sobrante</h3>
+                    </div>
+
+                    <div class="col-md-12 col-2 align-self-center">
+                      <div class="card">
+                        <div class="card-block">
+
+                          <div class="table-responsive">
+                            <table class="table table-striped table-bordered">
+                              <thead>
+                                <tr>
+                                  <th>Fecha</th>
+                                  <th>Referencia</th>
+                                  <th>Descripción</th>
+                                  <th>Cantidad Entregada</th>
+                                  <th>Cantidad Envasada</th>
+                                  <th>Cantidad Averias</th>
+                                  <th>Cantidad Sobrante</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                </tr>
+                                <tr>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                </tr>
+                                <tr>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                </tr>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row" style="margin: 1%">
+                    <div class="col-md-4 col-2 align-self-center">
+                      <label for="recipient-name" class="col-form-label">Realizado Por:</label>
+                      <input type="text" class="form-control" id="recipient2-name">
+                    </div>
+                    <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
+                      <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;">Firmar</button>
+                    </div>
+
+                    <div class="col-md-4 col-2 align-self-center">
+                      <label for="recipient-name" class="col-form-label">Verificado Por:</label>
+                      <input type="text" class="form-control" id="recipient2-name">
+                    </div>
+                    <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
+                      <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;">Firmar</button>
+                    </div>
+                  </div>
+                  <div class="row" style="margin: 1%">
+                    <div class="col-md-12 col-2 align-self-center" style="margin-left: 85%">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                      <button type="button" class="btn btn-primary" onclick="window.location.href = '../html/loteado.html';">Aceptar</button>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
             </div>
 
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
- 
+          </div>
 
-    <script src="../assets/plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="../assets/plugins/bootstrap/js/tether.min.js"></script>
-    <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript"  src="vendor/datatables/datatables.min.js"></script>
-    <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="js/jquery.slimscroll.js"></script>
-    <!--Wave Effects -->
-    <script src="js/waves.js"></script>
-    <!--Menu sidebar -->
-    <script src="js/sidebarmenu.js"></script>
-    <!--stickey kit -->
-    <script src="../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <!--Custom JavaScript -->
-    <script src="js/custom.min.js"></script>
-    <script src="js/datatables.js"></script>
-   
+
+          <!-- jquery -->
+          <script src="../../assets/plugins/jquery/jquery.min.js"></script>
+
+          <!-- Bootstrap tether Core JavaScript -->
+          <script src="../../assets/plugins/bootstrap/js/tether.min.js"></script>
+          <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+          <!-- Datatables -->
+          <script type="text/javascript" src="../../html/vendor/datatables/datatables.min.js"></script>
+          <!-- <script src="html/vendor/bootstrap/js/popper.js"></script> -->
+          <!-- slimscrollbar scrollbar JavaScript -->
+
+          <script src="../../html/js/jquery.slimscroll.js"></script>
+
+          <!--Wave Effects -->
+          <script src="../../html/js/waves.js"></script>
+
+          <!--Menu sidebar -->
+          <script src="../../html/js/sidebarmenu.js"></script>
+
+          <!--stickey kit -->
+          <script src="../../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+
+          <!--Custom JavaScript -->
+          <script src="../../html/js/custom.min.js"></script>
+          <script src="../../html/vendor/jquery-confirm/jquery-confirm.min.js"></script>
+          <!-- <script src="../../html/js/datatables.js"></script> -->
+          <script src="../../html/js/global/loadinfo-global.js"></script>
+          <script src="../../html/js/pesaje/pesajeinfo.js"></script>
+          <script src="../../html/js/firmar/firmar.js"></script>
+          <!-- <script src="../../html/js/validadores.js"></script> -->
+          <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+          <!-- Toastr.js Después -->
+
+          <!--Alertify-->
+          <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
 </body>
 
 </html>

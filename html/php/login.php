@@ -29,6 +29,7 @@ if(!empty($_SESSION['active'])){
                 header('location: html/batch.php');
             }else{
                 $alert="El usuario o la contraseña no son validos";
+                '<script>alertify.set("notifier","position", "top-right"); alertify.error("Para adicionar más tanques diligencia todos los campos vacios.");</script>';
                 session_destroy();
             }
             

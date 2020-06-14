@@ -72,7 +72,7 @@
                     <div class="row page">
                         <div class="col-md-4 col-2 align-self-center">
                             <label for="recipient-name" class="col-form-label">Unidades por Lote</label>
-                            <input type="number" name="unidadesxlote" id="unidadesxlote" onchange="CalculoTamanolote(this.value);" class="form-control" min="1" value="" required />
+                            <input type="number" name="unidadesxlote" id="unidadesxlote" onkeyup="CalculoTamanolote(this.value);" class="form-control" min="1" value="" required />
                         </div>
                         <div class="col-md-4 col-2 align-self-center">
                             <label for="recipient-name" class="col-form-label" type="number">Tamaño del Lote (Kg)</label>
@@ -91,38 +91,54 @@
                     </div>
                     <hr>
                     <div class="row page">
-                        <div class="col-md-12 col-2 align-self-center">
+                        <div class="col-md-6 col-2 align-self-center">
                             <label for="recipient-name" class="col-form-label">Observaciones Pesaje / Preparación</label>
                         </div>
-                        <div class="col-md-6 col-2 align-self-center">
+                    </div>    
+                    <div class="row page">
+                        <div class="col-md-3 col-2 align-self-center">
                             <!-- <form action="" method="POST"> -->
                                 
                                 <button id="adicionarPesaje" name="adicionarPesaje" type="button" class="btn btn-primary">Adicionar</button>
-                            
-                                <!-- <form method="POST">
-                                    <div id="lineas">
-                                        <select class="form-control" name="cmbtanque" id="cmbTanque" ><option disabled selected>Tanque(Kg)</option></select>    
-                                        <input type="number" class="form-control" id="txtCantidad" name="txtCantidad[]" placeholder="Cantidad" value="0" onkeyup="CalcularTanque(this)">
-                                        <input type="number" class="form-control" id="txtTotal" name="txtTotal[]" placeholder="Total" >
-                                    </div>
-                                    
-                                    
-                                </form> -->        
-
-
-                                <table id="addTanquePesaje" class="mt-3">
+                                <label for="">Cantidad</label>
+                                <input type="number" class="form-control col-md-4" hidden id="transito" readonly>
+                        </div>
+                    </div>    
+                    <div class="row page mb-3 mt-3 insertar">
+                        <div class="col-md-3 col-2 align-self-center">
+                                <!-- <table id="addTanquePesaje" class="mt-3">
                                     <tr>
                                         <td width = "120">
                                             <select class="form-control" name="cmbtanque" id="cmbTanque" >
                                                 <option disabled selected>Tanque(Kg)</option>
                                             </select>
                                         </td>
-                                        <td><input type="number" class="form-control" id="txtCantidad" name="txtCantidad[]" placeholder="Cantidad" value="0" onkeyup="CalcularTanque()"></td>
-                                        <td><input type="number" class="form-control" id="txtTotal" name="txtTotal[]" placeholder="Total" ></td>
-                                        <td class="eliminarPesaje"> <input class="btn btn-warning" type="button" value="-"> </td> 
+                                        <td><input type="number" class="form-control" id="txtCantidad" name="txtCantidad[]" placeholder="Cantidad" value="0" onkeyup="CalcularTanque(this.value)"></td>
+                                        <td><input type="number" class="form-control" id="txtTotal" name="txtTotal[]" placeholder="Total" readonly></td>
+                                        <td class="eliminarPesaje"> <input class="btn btn-warning" type="button" value="X" > </td> 
                                     </tr>
-                                </table>    
-                            </div>
+                                </table>     -->
+                            
+                            <div id="tanques">
+                                <select class="form-control" name="cmbtanque" id="cmbTanque" >
+                                    <option disabled selected>Tanque(Kg)</option>
+                                </select>
+                            </div>    
+                        </div>    
+                        <div class="col-md-3 col-2 align-self-center">
+                                <input type="number" class="form-control" id="txtCantidad" name="txtCantidad[]" placeholder="Cantidad" value="0" onkeyup="CalcularTanque(this.value)">
+                        </div>
+                        <div class="col-md-3 col-2 align-self-center">
+                                <input type="number" class="form-control" id="txtTotal" name="txtTotal[]" placeholder="Total" readonly>
+                        </div>
+                        <div class="col-md-3 col-2 align-self-center">                                
+                                <input class="btn btn-warning eliminar" type="button" value="X" >
+                        </div>
+                            
+                            
+                            
+                            
+                            <!-- </div> -->
                         </div>            
                     
                     <div class="modal-footer">

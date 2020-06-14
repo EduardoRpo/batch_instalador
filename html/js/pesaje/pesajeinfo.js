@@ -85,41 +85,13 @@ $('.in_desinfeccion').click((event) => {
         if (!$(`input[name='${name}']:radio`).is(':checked')) {
             flag = true;
             
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                onOpen: (toast) => {
-                  toast.addEventListener('mouseenter', Swal.stopTimer)
-                  toast.addEventListener('mouseleave', Swal.resumeTimer)
-                }
-              })
-              
-              Toast.fire({
-                icon: 'error',
-                title: 'Completa todas las preguntas'
-              })
-
-            
-            /* toastr.error("Antes de continuar, complete las preguntas", "Error", {
-                "timeOut": "5000",
-                "progressBar": true,
-                "positionClass": "toast-top-center",
-                "preventDuplicates": true
-
-            }); */
-            /* swal({
-                title: "",
-                text: "Antes de seguir, Completa las preguntas",
-                icon: "error",
-                button: "Cerrar",
-              }); */
-            /* $.alert({
-                title: 'Atencion!',
-                content: 'Completa las preguntas primero',
-            }); */
+            $.alert({
+                theme: 'white',
+                icon: 'fa fa-warning',
+                title: 'Samara Cosmetics',
+                content: 'Antes de continuar, complete todas las preguntas',
+                confirmButtonClass: 'btn-info',
+            });
         }
     });
 
@@ -144,10 +116,12 @@ function cambioConversion() {
 }
 
 
-function enviar() {
+/* function enviar() {
     $('#myModal2').modal('hide');
     let usuario = $('#usuariomodal2').val();
+    console.log(usuario);
     let contrasena = $('#contrasenamodal2').val();
+    console.log(contrasena);
     let user = {
         email: usuario,
         password: contrasena
@@ -242,4 +216,4 @@ function enviar4() {
     });
     return false;
 
-}
+} */

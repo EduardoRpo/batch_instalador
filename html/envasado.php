@@ -1,3 +1,7 @@
+<?php 
+  include('modal/modal_cambiarContrasena.php');
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -26,7 +30,7 @@
     </svg>
   </div>
 
-  <div id="main-wrapper" style="padding-top:15px; padding-left:15px; padding-right:15px">
+  <div id="main-wrapper">
     <header class="topbar">
       <nav class="navbar top-navbar navbar-toggleable-sm navbar-light">
         <div class="navbar-header">
@@ -53,7 +57,14 @@
     </nav>
   </header>
   
-  <div class="row page-titles">
+  <div class="container-fluid">
+    <div class="row page-titles">
+      <h1 class="text-themecolor m-b-0 m-t-0"><b>Envasado</b></h1>
+    </div>
+  </div>
+
+
+<!--   <div class="row page-titles">
     <div class="col-md-5 col-2 align-self-right">
       <h1 class="text-themecolor m-b-0 m-t-0" style="margin-left: 7%"><b>Envasado</b></h1>
     </div>
@@ -65,7 +76,7 @@
       <div class="container">
       </div>
     </div>
-  </div>
+  </div> -->
 
 
 <div class="row">
@@ -73,7 +84,7 @@
       <div class="card">
         <div class="card-block">
           <div class="table-responsive">
-            <table class="table table-striped table-bordered" id="preparacionTable" style="width: 100%;">
+            <table class="table table-striped table-bordered" id="tablaEnvasado" style="width: 100%;">
 
             </table>
           </div>
@@ -104,7 +115,7 @@
 <script src="html/js/custom.min.js"></script>
 <script src="html/js/datatables.js"></script>
 <script src="../assets/plugins/jquery/jquery.number.min.js"></script>
-<script src="html/js/utils/preparacion.js"></script>
+<script src="html/js/envasado/envasado.js"></script>
 
 </body>
 

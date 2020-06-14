@@ -413,7 +413,7 @@
 <!--Custom JavaScript -->
 <script src="../../html/js/custom.min.js"></script>
 <script src="../../html/js/datatables.js"></script>
-<script src="../../html/js/utils/loadinfo-global.js"></script>
+<script src="../../html/js/global/loadinfo-global.js"></script>
 <script src="../../html/js/utils/aprobacioninfo.js"></script>
 </body>
 

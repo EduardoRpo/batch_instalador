@@ -30,15 +30,17 @@ $.ajax({
     type: 'GET'
 }).done((data, status, xhr) => {
     data.forEach(desinfectante => {
+        $('#sel_producto_desinfeccion').val(' ');
         $('#sel_producto_desinfeccion').append(`<option value="${desinfectante.id}">${desinfectante.nombre}</option>`);
     });
 
 });
 
 
-function enviar() {
+/* function enviar() {
     $('#myModal2').modal('hide');
     let usuario = $('#usuariomodal2').val();
+    console.log(usuario);
     let contrasena = $('#contrasenamodal2').val();
     let user = {
         email: usuario,
@@ -50,6 +52,7 @@ function enviar() {
         data: JSON.stringify(user),
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
+        
         success: function (resp) {
 
             let parent = $('#in_realizado').parent();
@@ -134,4 +137,4 @@ function enviar4() {
     });
     return false;
 
-}
+} */

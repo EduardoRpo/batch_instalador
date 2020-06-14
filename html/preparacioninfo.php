@@ -602,7 +602,7 @@
 <script src="../../html/js/clock.js"></script>
 <script src="../../assets/plugins/jquery/jquery.number.min.js"></script>
 
-<script src="../../html/js/utils/loadinfo-global.js"></script>
+<script src="../../html/js/global/loadinfo-global.js"></script>
 <script src="../../html/js/utils/preparacioninfo.js"></script>
 </body>
 

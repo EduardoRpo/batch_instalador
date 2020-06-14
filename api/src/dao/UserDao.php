@@ -25,7 +25,7 @@
       $stmt->execute(array('email' => $email));
       $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
       $user = $stmt->fetch($connection::FETCH_ASSOC);
-      $this->logger->notice("usuarios Obtenidas", array('usuarios' => $user));
+      $this->logger->notice("usuarios Obtenidos", array('usuarios' => $user));
       return $user;
     }
   }

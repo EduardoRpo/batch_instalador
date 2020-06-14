@@ -160,6 +160,7 @@
     $email = $parsedBody["email"];
     $password = $parsedBody["password"];
     $user = $userDao->findByEmail($email);
+      
     $resp = array();
     if ($user != null) {
       if ($password === $user["password"]) {
