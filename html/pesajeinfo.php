@@ -1,10 +1,8 @@
 <?php
-  include('/Desarrollo/BatchRecord/htdocs/html/modal/modal_firma.php');
-  //include('../modal/modal_firma.php');
-  include('/Desarrollo/BatchRecord/htdocs/html/modal/modal_cambiarContrasena.php');
-  /* include('../modal/modal_cambiarContrasena.php'); */
-  include('/Desarrollo/BatchRecord/htdocs/html/modal/modal_observaciones.php');
-  include('/Desarrollo/BatchRecord/htdocs/html/modal/m_firma.php');
+  include('modal/modal_firma.php');
+  include('modal/modal_cambiarContrasena.php');
+  include('modal/modal_observaciones.php');
+  include('modal/m_firma.php');
   ?>
 
 <!DOCTYPE html>
@@ -292,7 +290,7 @@
                     <label for="in_realizado_2" class="col-form-label">Realizado Por:</label>
                     <input type="text" class="form-control" id="in_realizado_2">
                   </div>
-                  
+
                   <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
                     <input type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal4" style="width: 100%; height: 38px;" value="Firmar">
                   </div>
