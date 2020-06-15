@@ -121,7 +121,7 @@
 <script src="html/js/utils/custom.min.js"></script>
 <script src="html/js/utils/datatables.js"></script>
 <script src="assets/plugins/jquery/jquery.number.min.js"></script>
-<script src="html/js/utils/aprobacion.js"></script>
+<script src="html/js/aprobacion/aprobacion.js"></script>
 </body>
 
 </html>

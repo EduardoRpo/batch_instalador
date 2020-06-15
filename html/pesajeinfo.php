@@ -284,10 +284,10 @@
                 </div>
                 <hr>
                 <div class="row" style="margin: 1%">
-                  <div class="col-md-2 col-2 align-self-right">
+                  <!-- <div class="col-md-2 col-2 align-self-right">
                     <label for="in_fecha_pesaje" class="col-form-label">Fecha:</label>
                     <input type="date" class="form-control" id="in_fecha_pesaje" readonly>
-                  </div>
+                  </div> -->
                   <div class="col-md-3 col-2 align-self-center">
                     <label for="pesaje_realizado" class="col-form-label">Realizado Por:</label>
                     <input type="text" class="form-control" id="pesaje_realizado">

@@ -97,7 +97,7 @@
 <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="html/vendor/datatables/datatables.min.js"></script>
 <!-- slimscrollbar scrollbar JavaScript -->
-<script src="html/js/jquery.slimscroll.js"></script>
+<script src="html/js/utils/jquery.slimscroll.js"></script>
 <!--Wave Effects -->
 <script src="html/js/utils/waves.js"></script>
 <!--Menu sidebar -->
@@ -108,7 +108,7 @@
 <script src="html/js/utils/custom.min.js"></script>
 <script src="html/js/utils/datatables.js"></script>
 <script src="../assets/plugins/jquery/jquery.number.min.js"></script>
-<script src="html/js/utils/preparacion.js"></script>
+<script src="html/js/preparacion/preparacion.js"></script>
 
 </body>
 
