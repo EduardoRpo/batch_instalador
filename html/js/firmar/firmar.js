@@ -1,7 +1,15 @@
+let id;
+
+function cargar(btn){
+    $('#m_firmar').modal('show');
+    id = btn.id;
+}
+
+
 function enviar() {
    $('#m_firmar').modal('hide');
     
-   var template = '<img id="in_verificado" src="/html/firmas/BerneyMontoya/:firma:" alt="firma_usuario" height="130">'; 
+   var template = '<img id="" src="/html/firmas/BerneyMontoya/:firma:" alt="firma_usuario" height="130">'; 
     
     datos = {
         email: $('#usuario').val(),
@@ -15,12 +23,12 @@ function enviar() {
     
         success: function (datos) {
             data = JSON.parse(datos);
-            let parent = $('#in_realizado').parent();
-            $('#in_realizado').remove();
+            let parent = $('#'+id).parent();
+            $('#'+id).remove();
+            id='';
             var firma = template.replace(':firma:', data.urlfirma);
             parent.append(firma).html
         }
     });
     return false;
-
 }

@@ -182,24 +182,24 @@
                 </div>
                 <div class="row" style="margin: 1%">
                   <div class="col-md-4 col-2 align-self-center">
-                    <label for="in_realizado" class="col-form-label">Realizado Por:</label>
-                    <input type="text" class="form-control in_desinfeccion" id="in_realizado">
+                    <label for="despeje_realizado" class="col-form-label">Realizado Por:</label>
+                    <input type="text" class="form-control in_desinfeccion" id="despeje_realizado">
                   </div>
 
                   <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                    <input type="button" class="btn btn-danger in_desinfeccion" data-toggle="modal" data-target="#m_firmar" style="width: 100%; height: 38px;" value="Firmar">
+                    <input type="button" class="btn btn-danger in_desinfeccion" id="despeje_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar"> <!-- data-toggle="modal" data-target="#m_firmar" -->
                     <!-- <input type="button" class="btn btn-danger in_desinfeccion" data-toggle="modal" data-target="#myModal2"
                        style="width: 100%; height: 38px;" value="Firmar"> -->
                   </div>
 
                   <div class="col-md-4 col-2 align-self-center">
-                    <label for="in_verificado" class="col-form-label">Verificado Por:</label>
-                    <input type="text" class="form-control in_desinfeccion" id="in_verificado">
+                    <label for="despeje_verificado" class="col-form-label">Verificado Por:</label>
+                    <input type="text" class="form-control in_desinfeccion" id="despeje_verificado">
                   </div>
                   
                   <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
                     <!-- <input type="button" class="btn btn-danger in_desinfeccion" data-toggle="modal" data-target="#myModal3" style="width: 100%; height: 38px;" value="Firmar"> -->
-                    <input type="button" class="btn btn-danger in_desinfeccion" data-toggle="modal" data-target="#m_firmar" style="width: 100%; height: 38px;" value="Firmar">
+                    <input type="button" class="btn btn-danger in_desinfeccion" id="despeje_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar"> <!-- data-toggle="modal" data-target="#m_firmar" -->
                   </div>
                 </div>
                 <div class="row justify-content-end mt-5" style="margin: 1%; text-align: right">
@@ -289,20 +289,20 @@
                     <input type="date" class="form-control" id="in_fecha_pesaje" readonly>
                   </div>
                   <div class="col-md-3 col-2 align-self-center">
-                    <label for="in_realizado_2" class="col-form-label">Realizado Por:</label>
-                    <input type="text" class="form-control" id="in_realizado_2">
+                    <label for="pesaje_realizado" class="col-form-label">Realizado Por:</label>
+                    <input type="text" class="form-control" id="pesaje_realizado">
                   </div>
 
                   <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                    <input type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal4" style="width: 100%; height: 38px;" value="Firmar">
+                    <input type="button" class="btn btn-danger" id="pesaje_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
                   </div>
 
                   <div class="col-md-3 col-2 align-self-center">
-                    <label for="in_verificado_2" class="col-form-label">Verificado Por:</label>
-                    <input type="text" class="form-control" id="in_verificado_2">
+                    <label for="pesaje_verificado" class="col-form-label">Verificado Por:</label>
+                    <input type="text" class="form-control" id="pesaje_verificado">
                   </div>
                   <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                    <input type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal5" style="width: 100%; height: 38px;" value="Firmar">
+                    <input type="button" class="btn btn-danger" id="pesaje_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
                   </div>
                 </div>
 
