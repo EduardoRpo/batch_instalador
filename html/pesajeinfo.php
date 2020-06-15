@@ -185,6 +185,7 @@
                     <label for="in_realizado" class="col-form-label">Realizado Por:</label>
                     <input type="text" class="form-control in_desinfeccion" id="in_realizado">
                   </div>
+
                   <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
                     <input type="button" class="btn btn-danger in_desinfeccion" data-toggle="modal" data-target="#m_firmar" style="width: 100%; height: 38px;" value="Firmar">
                     <!-- <input type="button" class="btn btn-danger in_desinfeccion" data-toggle="modal" data-target="#myModal2"
@@ -195,6 +196,7 @@
                     <label for="in_verificado" class="col-form-label">Verificado Por:</label>
                     <input type="text" class="form-control in_desinfeccion" id="in_verificado">
                   </div>
+                  
                   <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
                     <!-- <input type="button" class="btn btn-danger in_desinfeccion" data-toggle="modal" data-target="#myModal3" style="width: 100%; height: 38px;" value="Firmar"> -->
                     <input type="button" class="btn btn-danger in_desinfeccion" data-toggle="modal" data-target="#m_firmar" style="width: 100%; height: 38px;" value="Firmar">
