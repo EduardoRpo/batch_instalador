@@ -131,7 +131,7 @@ $(function() { */
   }); */
   
   // Date range filter
-  minDateFilter = "";
+ /*  minDateFilter = "";
   maxDateFilter = "";
   
   $.fn.dataTableExt.afnFiltering.push(
@@ -154,4 +154,12 @@ $(function() { */
   
       return true;
     }
-  );
+  ); */
+
+  $(document).ready(function() {
+    var table = $('#tablaBatch').DataTable();
+
+    // Add event listeners to the two range filtering inputs
+    $('#min').keyup( function() { table.draw(); } );
+    $('#max').keyup( function() { table.draw(); } );
+  });

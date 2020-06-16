@@ -143,11 +143,6 @@
     </div>
   </div>
 
-
-  
-
-
-
 <!-- jquery -->
 <script src="../assets/plugins/jquery/jquery.min.js"></script>
 <script src="js/utils/jquery.slimscroll.js"></script>

@@ -35,6 +35,10 @@
   <!-- <script src="https://kit.fontawesome.com/6589be6481.js" crossorigin="anonymous"></script> -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   
+  <!-- Alertify -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">
@@ -312,6 +316,8 @@
 <script src="../../html/js/utils/sidebarmenu.js"></script>
 <!--stickey kit -->
 <script src="../../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+<!--Alertify-->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 <!--Custom JavaScript -->
 <script src="../../html/js/utils/custom.min.js"></script>
 <script src="../../html/js/datatables.js"></script>

@@ -1,16 +1,27 @@
-let id;
 
-function cargar(btn){
-    $('#m_firmar').modal('show');
-    id = btn.id;
-}
+$(document).on('ready', function(event){
+    event.preventDefault();
+    $('#iniciar').click(function(){
+        $('.form-signin input:first').attr('id', 'usuario');
+        //.find('input')
+        //.first()
 
 
-function enviar() {
-   $('#m_firmar').modal('hide');
+
+    })
+})
+
+
+
+function loguears() {
     
-   var template = '<img id="" src="/html/firmas/BerneyMontoya/:firma:" alt="firma_usuario" height="130">'; 
-    
+    $(".form-signin")
+        //.find('input')
+        //.first()
+        .attr("id", "usuario");
+
+    return false;
+
     datos = {
         email: $('#usuario').val(),
         password: $('#clave').val(),

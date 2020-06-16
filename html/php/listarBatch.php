@@ -244,38 +244,15 @@
       $result = mysqli_num_rows($query_clonar);
 
       if($result > 0){
-        //while(){
           $data = mysqli_fetch_assoc($query_clonar);
           $arreglo[] = $data;
-        //}
+
           echo json_encode(utf8ize($arreglo), JSON_UNESCAPED_UNICODE);
-          //echo $arreglo[0];           
+       
       }else{
         echo json_encode('');
       }
       exit();
-      
-
-      
-
-      /* if ($fechaPrograma = "") {
-       $estado = 'null';
-      } else {
-        $estado = '1';
-      }
-
-      $query = "INSERT INTO batch (fecha_creacion, fecha_programacion, fecha_actual, numero_orden, numero_lote, tamano_lote, lote_presentacion, unidad_lote, estado, id_producto) 
-			VALUES ('$fechahoy',";
-      $query .= $fechaprogramacion != null ? "'$fechaprogramacion'" : "NULL";
-      $query .= ",'$fechahoy', 'OP012020',' X0010320', '$tamanototallote', '$tamanolotepresentacion', '$unidadesxlote', '$estado', '$id')";
-
-      $result = mysqli_query($conn, $query); //or die ("Problemas al insertar" . mysqli_error($conn));
-
-      if(!$result){
-        die('Error');
-      }else{
-        echo 'Almacenado';
-      }   */     
 
     break;
 

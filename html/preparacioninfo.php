@@ -36,6 +36,10 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <!-- <script src="https://kit.fontawesome.com/6589be6481.js" crossorigin="anonymous"></script> -->
   
+  <!-- Alertify -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">
@@ -421,6 +425,8 @@
 <script src="../../assets/plugins/bootstrap/js/tether.min.js"></script>
 <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../../html/vendor/datatables/datatables.min.js"></script>
+<!--Alertify-->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 <!-- slimscrollbar scrollbar JavaScript -->
 <script src="../../html/js/utils/jquery.slimscroll.js"></script>
 <!--Wave Effects -->
