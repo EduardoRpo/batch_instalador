@@ -8181,6 +8181,15 @@ div.displayallinfo {
   /* width: 100%; */
 }
 
+.contenedorInfoGeneral{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1em 2em 1em 2em;
+  grid-gap: 1em;
+  margin: 20px;
+  /* width: 100%; */
+}
+
 .itemInfo{
 
   grid-column-start: 4;

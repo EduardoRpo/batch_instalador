@@ -2,6 +2,7 @@
   include("modal/modal_firma.php"); 
   include("modal/modal_req_ajuste.php");
   include("modal/modal_observaciones.php");
+  include('modal/m_firma.php');
 ?>
 
 <!DOCTYPE html>
@@ -42,30 +43,29 @@
       <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
     </svg>
   </div>
+
 <div id="main-wrapper">
   
-<header class="topbar">
-  <nav class="navbar top-navbar navbar-toggleable-sm navbar-light">
-    <div class="navbar-header">
-      <a class="navbar-brand">
-        <span><img src="../../assets/images/logo-light-text2.png" class="light-logo" alt="homepage"/></span>
-      </a>
-    </div>
+  <header class="topbar">
+    <nav class="navbar top-navbar navbar-toggleable-sm navbar-light">
+      <div class="navbar-header">
+        <a class="navbar-brand">
+          <span><img src="../../assets/images/logo-light-text2.png" class="light-logo" alt="homepage"/></span>
+        </a>
+      </div>
     
     <div class="navbar-collapse">
       <ul class="navbar-nav mr-auto mt-md-0">
-        <li class="nav-item"><a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark"
-                                href="javascript:void(0)"><i class="mdi mdi-menu"></i></a></li>
+        <li class="nav-item">
+          <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)">
+            <i class="mdi mdi-menu"></i></a></li>
       </ul>
 
       <ul class="navbar-nav my-lg-0">
         <li class="nav-item dropdown">
-          <!-- <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/campana.png" alt="noty" class="profile-pic m-r-12" /></a>-->
-          <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="true" id="dropdownMenuenlace">Berney Montoya 
+          <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" id="dropdownMenuenlace">Berney Montoya 
               <i class="large material-icons">account_circle</i></i></a>
-              <!-- <i class="fas fa-chevron-circle-down"></i></a> -->
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuenlace">
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuenlace">
             <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modalCambiarContrasena">Cambiar Contraseña</a>
             <a href="../index.html" class="dropdown-item">Cerrar Sesión</a>
           </div>
@@ -75,97 +75,20 @@
   </nav>
 </header>
 
-  <div class="container-fluid">
+<div class="container-fluid">
   <div class="row page-titles">
-      <div class="col-md-5 col-2 align-self-center">
-        <h1 class="text-themecolor m-b-0 m-t-0"><b>Aprobación</b></h1>
-      </div>
-      <div class="col-md-3 col-4 align-self-center"></div>
-      <div class="col-md-2 col-8 align-self-center"></div>
-      <div class="col-md-2 col-2 align-self-center">
-        <div class="container">
-          <a href="../../preparacion" style="background-color:#fff;color:#FF8D6D" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md" role="button">Cola de Trabajo</a>
-        </div>
-      </div>
-    </div>
-
-
-    <!-- Modal -->
-   <!--  <div class="modal fade" id="myModal2" role="dialog" tabindex="-1">
-      <div class="modal-dialog modal-md">
-        <div class="modal-content">
-          <form method="post" onsubmit="return enviar();">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Firmar</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div class="row page">
-                <div class="col-md-12 col-2 align-self-center">
-                  <label for="recipient-name" class="col-form-label">Usuario:</label>
-                  <input type="text" class="form-control" id="usuario">
-                </div>
-                <div class="col-md-12 col-2 align-self-center">
-                  <label for="recipient-name" class="col-form-label">Contraseña:</label>
-                  <input type="text" class="form-control" id="contrasena">
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-              <input type="submit" class="btn btn-primary" value="Firmar">
-          </form>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
-  <!-- Modal -->
-  <!-- <div class="modal fade" id="myModal3" role="dialog" tabindex="-1">
-    <div class="modal-dialog modal-md">
-      <div class="modal-content">
-        <form method="post" onsubmit="return enviar2();">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Firma QC/Supervisor</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="row page">
-              <div class="col-md-12 col-2 align-self-center">
-                <label for="recipient-name" class="col-form-label">Usuario:</label>
-                <input type="text" class="form-control" id="usuario2">
-              </div>
-              <div class="col-md-12 col-2 align-self-center">
-                <label for="recipient-name" class="col-form-label">Contraseña:</label>
-                <input type="text" class="form-control" id="contrasena2">
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <input type="submit" class="btn btn-primary" value="Firmar">
-        </form>
-      </div>
-    </div>
+    <h1 class="text-themecolor m-b-0 m-t-0"><b>Aprobación</b></h1>
+    <a href="../../preparacion" style="background-color:#fff;color:#FF8D6D" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md" role="button">Cola de Trabajo</a>
   </div>
-</div> -->
-<!-- Modal -->
-
+</div>
 
 <div class="row">
-  <!-- column -->
   <div class="col-lg-12">
     <div id="accordion">
       <div class="card">
         <div class="card-header" id="headingOne">
           <h5 class="mb-0">
-            <button class="btn btn-link text-uppercase" data-toggle="collapse" data-target="#collapseOne"
-                    aria-expanded="true"
-                    aria-controls="collapseOne" style="width: 100%">
+            <button class="btn btn-link text-uppercase" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="width: 100%">
               Información del producto
             </button>
           </h5>
@@ -173,47 +96,31 @@
 
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
           <div class="card-body">
-            <div class="row" style="margin: 1%">
+            <div class="contenedorInfoGeneral">
+              <label for="recipient-name" class="col-form-label">Fecha Programación</label>
+              <label for="recipient-name" class="col-form-label">No. Orden</label>
+              <label for="recipient-name" class="col-form-label">Referencia</label>
+              
+              <input type="date" class="form-control" id="in_fecha" readonly>
+              <input type="text" class="form-control" id="in_numero_orden" readonly>
+              <input type="text" class="form-control" id="in_referencia" readonly>
+              
+              <label for="in_tamano_lote" class="col-form-label">Tamaño Lote</label>
+              <label for="recipient-name" class="col-form-label">No. Lote</label>
+              <label for="recipient-name" class="col-form-label">Linea</label>
 
-              <div class="col-md-4 col-2 align-self-center">
-                <label for="recipient-name" class="col-form-label">Fecha:</label>
-                <input type="date" class="form-control" id="in_fecha" readonly>
-              </div>
-              <div class="col-md-4 col-2 align-self-center">
-                <label for="recipient-name" class="col-form-label">No. Orden:</label>
-                <input type="text" class="form-control" id="in_numero_orden" readonly>
-              </div>
-              <div class="col-md-4 col-2 align-self-right">
-                <label for="recipient-name" class="col-form-label">Referencia:</label>
-                <input type="text" class="form-control" id="in_referencia" readonly>
-              </div>
-
-
-            </div>
-            <div class="row" style="margin: 1%">
-              <div class="col-md-4 col-2 align-self-center">
-                <label for="in_tamano_lote" class="col-form-label">Tamaño Lote:</label>
-                <input type="text" class="form-control" id="in_tamano_lote"
-                       readonly>
-              </div>
-              <div class="col-md-4 col-2 align-self-right">
-                <label for="recipient-name" class="col-form-label">No. Lote:</label>
-                <input type="text" class="form-control" id="in_numero_lote" readonly>
-              </div>
-
-              <div class="col-md-4 col-2 align-self-center">
-                <label for="recipient-name" class="col-form-label">Linea:</label>
-                <input type="text" class="form-control" id="in_linea" readonly>
-              </div>
+              <input type="text" class="form-control" id="in_tamano_lote" readonly>
+              <input type="text" class="form-control" id="in_numero_lote" readonly>
+              <input type="text" class="form-control" id="in_linea" readonly>
             </div>
           </div>
         </div>
       </div>
+
       <div class="card">
         <div class="card-header" id="headingTwo">
           <h5 class="mb-0">
-            <button class="btn btn-link collapsed text-uppercase" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="false" aria-controls="collapseTwo" style="width: 100%">
+            <button class="btn btn-link collapsed text-uppercase" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="width: 100%">
               Liberación control calidad fisioquimico para envasado
             </button>
           </h5>
@@ -222,8 +129,7 @@
           <div class="card-body">
             <div class="row" style="margin: 1%">
               <div class="col-md-12 col-2 align-self-right">
-                <h3 for="recipient-name" class="col-form-label"
-                    style="text-align: center; background-color: #C0C0C0">Desinfección </h3>
+                <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Desinfección </h3>
               </div>
             </div>
             <div class="row" style="margin: 1%">
@@ -240,29 +146,25 @@
             </div>
             <div class="row" style="margin: 1%">
               <div class="col-md-4 col-2 align-self-center">
-                <label for="in_realizado" class="col-form-label">Realizado Por:</label>
-                <input type="text" class="form-control" id="in_realizado">
+                <label for="desinfeccion_realizado" class="col-form-label">Realizado Por:</label>
+                <input type="text" class="form-control" id="desinfeccion_realizado">
               </div>
               <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                <input type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal2"
-                       style="width: 100%; height: 38px;" value="Firmar">
+                <input type="button" class="btn btn-danger" id="desinfeccion_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
               </div>
 
               <div class="col-md-4 col-2 align-self-center">
-                <label for="in_verificado" class="col-form-label">Verificado Por:</label>
-                <input type="text" class="form-control" id="in_verificado">
+                <label for="desinfeccion_verificado" class="col-form-label">Verificado Por:</label>
+                <input type="text" class="form-control" id="desinfeccion_verificado">
               </div>
               <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                <input type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal3"
-                       style="width: 100%; height: 38px;" value="Firmar">
+                <input type="button" class="btn btn-danger" id="desinfeccion_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
               </div>
             </div>
           </div>
           <div class="row" style="margin: 1%">
             <div class="col-md-12 col-2 align-self-center">
-              <h3 for="recipient-name" class="col-form-label"
-                  style="text-align: center; background-color: #c0c0c0">
-                Control de proceso</h3>
+              <h3 for="recipient-name" class="col-form-label mt-3" style="text-align: center; background-color: #c0c0c0"> Control de proceso</h3>
             </div>
             <div class="col-md-12 col-2 align-self-center">
               <div class="card">
@@ -415,6 +317,7 @@
 <script src="../../html/js/datatables.js"></script>
 <script src="../../html/js/global/loadinfo-global.js"></script>
 <script src="../../html/js/aprobacion/aprobacioninfo.js"></script>
+<script src="../../html/js/firmar/firmar.js"></script>
 </body>
 
 </html>

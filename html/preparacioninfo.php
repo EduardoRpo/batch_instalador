@@ -1,5 +1,5 @@
 <?php 
-    include("modal/modal_firma.php");
+    include('modal/m_firma.php');
     include("modal/modal_observaciones.php");
     include("modal/modal_req_ajuste.php");
     include("modal/modal_cambiarContrasena.php");
@@ -45,7 +45,7 @@
   </svg>
 </div>
 
-<div id="main-wrapper" style="padding-top:15px; padding-left:15px; padding-right:15px">
+<div id="main-wrapper">
   <header class="topbar">
     <nav class="navbar top-navbar navbar-toggleable-sm navbar-light">
       <div class="navbar-header">
@@ -55,8 +55,7 @@
       </div>
       <div class="navbar-collapse">
         <ul class="navbar-nav mr-auto mt-md-0">
-          <li class="nav-item"><a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark"
-                                  href="javascript:void(0)"><i class="mdi mdi-menu"></i></a></li>
+          <li class="nav-item"><a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="mdi mdi-menu"></i></a></li>
         </ul>
         <ul class="navbar-nav my-lg-0">
           <li class="nav-item dropdown">
@@ -75,156 +74,18 @@
   </header>
   <div class="container-fluid">
     <div class="row page-titles">
-      <div class="col-md-5 col-2 align-self-center">
-        <h1 class="text-themecolor m-b-0 m-t-0"><b>Preparación</b></h1>
-      </div>
-      <div class="col-md-3 col-4 align-self-center"></div>
-      <div class="col-md-2 col-8 align-self-center"></div>
-      <div class="col-md-2 col-2 align-self-center">
-        <div class="container">
-          <a href="../../preparacion" style="background-color:#fff;color:#FF8D6D" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md" role="button">Cola de Trabajo</a>
-        </div>
-      </div>
-    </div>
- 
-    <!-- Modal -->
-    <!-- <div class="modal fade" id="myModal2" role="dialog" tabindex="-1">
-      <div class="modal-dialog modal-md">
-        <div class="modal-content">
-          <form onsubmit="return enviar();">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Firmar</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div class="row page">
-                <div class="col-md-12 col-2 align-self-center">
-                  <label for="usuariomodal2" class="col-form-label">Usuario:</label>
-                  <input type="text" class="form-control" id="usuariomodal2" name="usuario">
-                </div>
-              </div>
-              <div class="row page">
-                <div class="col-md-12 col-2 align-self-center">
-                  <label for="contrasenamodal2" class="col-form-label">Contraseña:</label>
-                  <input type="password" class="form-control" id="contrasenamodal2" name="contrasena">
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-              <input type="submit" class="btn btn-primary" value="Firmar">
-          </form>
-        </div>
-      </div>
-    </div>
-  </div> -->
-  <!-- Modal -->
- <!--  <div class="modal fade" id="myModal3" role="dialog" tabindex="-1">
-    <div class="modal-dialog modal-md">
-      <div class="modal-content">
-        <form method="post" onsubmit="return enviar2();">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Firmar</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="row page">
-              <div class="col-md-12 col-2 align-self-center">
-                <label for="usuariomodal3" class="col-form-label">Usuario:</label>
-                <input type="text" class="form-control" id="usuariomodal3" name="usuario2">
-              </div>
-              <div class="col-md-12 col-2 align-self-center">
-                <label for="contrasenamodal3" class="col-form-label">Contraseña:</label>
-                <input type="password" class="form-control" id="contrasenamodal3" name="contrasena2">
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <input type="submit" class="btn btn-primary" value="Firmar">
-        </form>
-      </div>
+      <h1 class="text-themecolor m-b-0 m-t-0"><b>Preparación</b></h1>
+      <a href="../../preparacion" style="background-color:#fff;color:#FF8D6D" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md" role="button">Cola de Trabajo</a>
     </div>
   </div>
-</div> -->
-<!-- Modal -->
-<!-- <div class="modal fade" id="myModal4" role="dialog" tabindex="-1">
-  <div class="modal-dialog modal-md">
-    <div class="modal-content">
-      <form method="post" onsubmit=" return enviar3()">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Firmar</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="row page">
-            <div class="col-md-12 col-2 align-self-center">
-              <label for="usuariomodal4" class="col-form-label">Usuario:</label>
-              <input type="text" class="form-control" id="usuariomodal4">
-            </div>
-            <div class="col-md-12 col-2 align-self-center">
-              <label for="contrasenamodal4" class="col-form-label">Contraseña:</label>
-              <input type="password" class="form-control" id="contrasenamodal4">
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <input type="submit" class="btn btn-primary" value="Firmar">
-      </form>
-    </div>
-  </div>
-</div>
-</div> -->
-<!-- Modal -->
-<!-- <div class="modal fade" id="myModal5" role="dialog" tabindex="-1">
-  <div class="modal-dialog modal-md">
-    <div class="modal-content">
-      <form method="post" onsubmit=" return enviar4()">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Firma QC/Supervisor</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="row page">
-            <div class="col-md-12 col-2 align-self-center">
-              <label for="usuariomodal5" class="col-form-label">Usuario:</label>
-              <input type="text" class="form-control" id="usuariomodal5">
-            </div>
-            <div class="col-md-12 col-2 align-self-center">
-              <label for="contrasenamodal5" class="col-form-label">Contraseña:</label>
-              <input type="password" class="form-control" id="contrasenamodal5">
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <input type="submit" class="btn btn-primary" value="Firmar">
-      </form>
-    </div>
-  </div>
-</div>
-</div> -->
-
 
 <div class="row">
-  <!-- column -->
   <div class="col-lg-12">
     <div id="accordion">
       <div class="card">
         <div class="card-header" id="headingOne">
           <h5 class="mb-0">
-            <button class="btn btn-link text-uppercase" data-toggle="collapse" data-target="#collapseOne"
-                    aria-expanded="true"
-                    aria-controls="collapseOne" style="width: 100%">
+            <button class="btn btn-link text-uppercase" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="width: 100%">
               Información del producto
             </button>
           </h5>
@@ -232,54 +93,34 @@
 
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
           <div class="card-body">
-            <div class="row" style="margin: 1%">
+            <div class="contenedorInfo">
+              <label for="recipient-name" class="col-form-label">Fecha Programación</label>
+              <label for="recipient-name" class="col-form-label">No Orden</label>
+              <label for="recipient-name" class="col-form-label">Referencia</label>
+              <label for="recipient-name" class="col-form-label">Observaciones</label>
+              
+              <input type="date" class="form-control" id="in_fecha" readonly>
+              <input type="text" class="form-control" id="in_numero_orden" readonly>
+              <input type="text" class="form-control" id="in_referencia" readonly>
+              <input type="text" class="form-control itemInfo" id="observaciones" readonly>
 
-              <div class="col-md-4 col-2 align-self-center">
-                <label for="recipient-name" class="col-form-label">Fecha:</label>
-                <input type="date" class="form-control" id="in_fecha" readonly>
-              </div>
-              <div class="col-md-4 col-2 align-self-center">
-                <label for="recipient-name" class="col-form-label">No Orden:</label>
-                <input type="text" class="form-control" id="in_numero_orden" readonly>
-                <input type="text" class="form-control" name="idbatch"
-                       hidden>
-              </div>
-              <div class="col-md-4 col-2 align-self-right">
-                <label for="recipient-name" class="col-form-label">Referencia:</label>
-                <input type="text" class="form-control" id="in_referencia" readonly>
-              </div>
+              <label for="in_tamano_lote" class="col-form-label">Tamaño Lote</label>
+              <label for="recipient-name" class="col-form-label">No. Lote</label>
+              <label for="recipient-name" class="col-form-label">Linea</label>
 
-            </div>
-            <div class="row" style="margin: 1%">
-              <div class="col-md-4 col-2 align-self-center">
-                <label for="in_tamano_lote" class="col-form-label">Tamaño Lote:</label>
-                <input type="text" class="form-control" id="in_tamano_lote"
-                       readonly>
-              </div>
-              <div class="col-md-4 col-2 align-self-right">
-                <label for="recipient-name" class="col-form-label">No. Lote:</label>
-                <input type="text" class="form-control" id="in_numero_lote" readonly>
-              </div>
-
-              <div class="col-md-4 col-2 align-self-center">
-                <label for="recipient-name" class="col-form-label">Linea:</label>
-                <input type="text" class="form-control" id="in_linea" readonly>
-              </div>
-              <div class="col-md-4 col-2 align-self-center">
-                <label for="recipient-name" class="col-form-label">Fecha de Programacion:</label>
-                <input type="date" class="form-control" id="in_fecha_programacion"
-                       readonly>
-              </div>
+              <input type="text" class="form-control" id="in_tamano_lote" readonly>
+              <input type="text" class="form-control" id="in_numero_lote" readonly>
+              <input type="text" class="form-control" id="in_linea" readonly>
             </div>
           </div>
         </div>
       </div>
+      
       <div class="card">
         <div class="card-header" id="headingTwo">
           <h5 class="mb-0">
-            <button class="btn btn-link collapsed text-uppercase" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="false" aria-controls="collapseTwo" style="width: 100%">
-              Despeje de lineas y procesos
+            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" style="width: 100%">
+              DESPEJE DE LINEAS Y PROCESOS
             </button>
           </h5>
         </div>
@@ -287,24 +128,21 @@
           <div class="card-body">
             <div class="row" style="margin: 1%;background-color: #C0C0C0;">
               <div class="col-md-10 col-2 align-self-right">
-                <h3 for="recipient-name" class="col-form-label" 
-                    style="text-align: center; background-color: #C0C0C0" data-toggle="modal" data-target="#modalCondicionesMedio">Parámetros de control</h3>
+                <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0" data-toggle="modal" data-target="#modalCondicionesMedio">Parámetros de control</h3>
               </div>
               <div class="col-md-1 col-0 align-self-center">
-                <h3 for="recipient-name" class="col-form-label"
-                    style=" background-color: #C0C0C0">&nbsp;&nbsp;&nbsp;Si</h3>
+                <h3 for="recipient-name" class="col-form-label" style=" background-color: #C0C0C0">&nbsp;&nbsp;&nbsp;Si</h3>
               </div>
               <div class="col-md-1 col-0 align-self-center">
-                <h3 for="recipient-name" class="col-form-label"
-                    style=" background-color: #C0C0C0">&nbsp;&nbsp;&nbsp;No</h3>
+                <h3 for="recipient-name" class="col-form-label" style=" background-color: #C0C0C0">&nbsp;&nbsp;&nbsp;No</h3>
               </div>
             </div>
-            <div class="row" id="preguntas-div" style="margin: 1%">
-            </div>
+            
+            <div class="row" id="preguntas-div" style="margin: 1%"></div>
+            
             <div class="row" style="margin: 1%">
               <div class="col-md-12 col-2 align-self-right">
-                <h3 for="recipient-name" class="col-form-label"
-                    style="text-align: center; background-color: #C0C0C0">Desinfección </h3>
+                <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Desinfección </h3>
               </div>
             </div>
             <div class="row" style="margin: 1%">
@@ -321,21 +159,19 @@
             </div>
             <div class="row" style="margin: 1%">
               <div class="col-md-4 col-2 align-self-center">
-                <label for="in_realizado" class="col-form-label">Realizado Por:</label>
-                <input type="text" class="form-control" id="in_realizado">
+                <label for="despeje_realizado" class="col-form-label">Realizado Por:</label>
+                <input type="text" class="form-control" id="despeje_realizado">
               </div>
               <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                <input type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal2"
-                       style="width: 100%; height: 38px;" value="Firmar">
+                <input type="button" class="btn btn-danger" id="despeje_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
               </div>
 
               <div class="col-md-4 col-2 align-self-center">
-                <label for="in_verificado" class="col-form-label">Verificado Por:</label>
-                <input type="text" class="form-control" id="in_verificado">
+                <label for="despeje_verificado" class="col-form-label">Verificado Por:</label>
+                <input type="text" class="form-control" id="despeje_verificado">
               </div>
               <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                <input type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal3"
-                       style="width: 100%; height: 38px;" value="Firmar">
+                <input type="button" class="btn btn-danger" id="despeje_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
               </div>
             </div>
             <div class="row justify-content-end mt-5" style="margin: 1%; text-align: right">
@@ -535,32 +371,30 @@
             </div>
             <hr>
             <div class="row" style="margin: 1%">
-              <div class="col-md-2 col-2 align-self-right">
+              <!-- <div class="col-md-2 col-2 align-self-right">
                 <label for="in_realizado_2" class="col-form-label">Fecha</label>
                 <input type="text" class="form-control" id="in_realizado_2" readonly>
-              </div>
-              <div class="col-md-3 col-2 align-self-center">
-                <label for="in_realizado_2" class="col-form-label">Realizado Por</label>
-                <input type="text" class="form-control" id="in_realizado_2">
+              </div> -->
+              <div class="col-md-4 col-2 align-self-center">
+                <label for="preparacion_realizado" class="col-form-label">Realizado Por</label>
+                <input type="text" class="form-control" id="preparacion_realizado">
               </div>
               <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                <input type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal4"
-                       style="width: 100%; height: 38px;" value="Firmar">
+                <input type="button" class="btn btn-danger" id="preparacion_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
               </div>
 
-              <div class="col-md-3 col-2 align-self-center">
-                <label for="in_verificado_2" class="col-form-label">Verificado Por</label>
-                <input type="text" class="form-control" id="in_verificado_2">
+              <div class="col-md-4 col-2 align-self-center">
+                <label for="preparacion_verificado" class="col-form-label">Verificado Por</label>
+                <input type="text" class="form-control" id="preparacion_verificado">
               </div>
               <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                <input type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal5"
-                       style="width: 100%; height: 38px;" value="Firmar">
+                <input type="button" class="btn btn-danger" id="preparacion_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
               </div>
             </div>
             <hr>
             <div class="row" style="margin: 1%">
-              <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down"
-                      data-toggle="modal" data-target="#modalAjuste" style="margin-left: 1%">¿Se requiere algún ajuste?
+              <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down" data-toggle="modal" data-target="#modalAjuste" style="margin-left: 1%">
+                ¿Se requiere algún ajuste?
               </button>
             </div>
             <hr>
@@ -604,6 +438,7 @@
 
 <script src="../../html/js/global/loadinfo-global.js"></script>
 <script src="../../html/js/preparacion/preparacioninfo.js"></script>
+<script src="../../html/js/firmar/firmar.js"></script>
 </body>
 
 </html>
