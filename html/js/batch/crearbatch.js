@@ -113,7 +113,7 @@ $("#adicionarPesaje").on('click', function(){
     var template = '<select class="form-control" name="cmbtanque" id=":cmbTanque:">' +
                     /* '<option disabled selected>Tanque(Kg)</option>' + */
                     '</select>' +
-                    '<input type="number" class="form-control" id=":txtCantidad:" name="txtCantidad[]" placeholder="Cantidad" value="0" onkeyup="CalcularTanque(this.value)">' +
+                    '<input type="number" class="form-control" id=":txtCantidad:" name="txtCantidad[]" placeholder="Cantidad" value="0" onblur="CalcularTanque(this.value)">' +
                     '<input type="number" class="form-control" id=":txtTotal:" name="txtTotal[]" placeholder="Total" readonly>' +
                     '<button class="btn btn-warning eliminar" type="button">X</button>'
 
@@ -159,34 +159,25 @@ var tanque="";
 
 /* Multiplica el tamaño de los tanques */
 
-function multiplicarTanques(cont){
-    $('#cmbTanque'+cont).change(function(){
+/* function multiplicarTanques(cont){
+    $('#cmbTanque1').change(function(){
         var tanque = $(this).val();
         $('#transito').val(tanque);
         console.log(tanque);
     });
-}
+} */
 
+cant=1;
 function CalcularTanque(cantidad) {
 
-    /* $('#addTanquePesaje tr').each(function(){ */
-        
-        $('#transito').val(tanque);
-        tanque = $('#transito').val()
-        //tanque = $('select[id:cmbTanque'+cont+']').val();
-        console.log(tanque);
-        
-        //cantidad =cantidad;
-        //cantidad = $('#txtCantidad').val();
-        console.log(cantidad);
+        var cambio = '#cmbTanque' + cant + ' option:selected';
+        var tanque = $(cambio).val();
         
         total = tanque * cantidad;
-        console.log(total);
 
-        $('#txtTotal'+cont).val(total);
-
-   /*  })  */  
- }
+        $('#txtTotal'+cant).val(total);
+        cant++;
+}
 
 /* Eliminar Tanque */
 
