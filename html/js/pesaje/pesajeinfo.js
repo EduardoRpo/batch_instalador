@@ -45,28 +45,30 @@ let tablePesaje = $('#tablePesaje').dataTable({
     columns: [
         {
             title: 'Referencia',
-            data: 'referencia'
+            data: 'referencia', className: 'uniqueClassName'
         },
         {
             title: 'Materia Prima',
-            data: 'alias'
+            data: 'alias', className: 'uniqueClassName'
         },
         {
-            title: 'Peso (<a href="javascript:cambioConversion();" class="conversion_weight">Kg</a>)',
+            title: 'Peso (<a href="javascript:cambioConversion();" class="conversion_weight">g</a>)',
             className: 'conversion_weight_column',
-            data: 'porcentaje',
+            data: 'porcentaje', className: 'uniqueClassName',
             render: (data, type, row) => {
+                
                 if (flagWeight) {
-                    return data * batch.tamano_lote;
+                    return data * (batch.tamano_lote)/ 1000;
+                    //$.fn.dataTable.render.number( '.', ',', 0, '' )}
                 } else {
-                    return (data * batch.tamano_lote) / 1000;
+                    return (data * batch.tamano_lote);
                 }
 
             }
         },
         {
             title: 'Impresión',
-            defaultContent: '<a href="#" data-toggle="modal" data-target="#imprimirEtiquetas"><i class="large material-icons">print</i></a>'
+            defaultContent: '<a href="#" data-toggle="modal" data-target="#imprimirEtiquetas"><i class="large material-icons">print</i></a>', className: 'uniqueClassName'
         }
         
     ]

@@ -37,30 +37,6 @@ function cargarReferencias() {
     });
 }
 
-/* Cargar tanques */
-
-function cargarTanque() {
-    
-    $.ajax({
-        type: "POST",
-        'url' : 'php/listarBatch.php',
-        'data':{"operacion" : "9"},
-        success: function(r){
-            var $select = $('#cmbTanque');
-                $('#cmbTanque').empty();
-                var info = JSON.parse(r);            
-                                
-                $select.append('<option disabled selected>' + "Tanque" + '</option>');
-                
-                $.each(info, function(i, value) {
-                    $select.append('<option>' + numeral(value.capacidad).format(',') + '</option>');
-            });
-                
-            //$('#modalCrearBatch').modal('show');
-        }
-    });
-}
-
 
 /* Llenar campos de producto de acuerdo con la referencia del producto */
 
@@ -125,52 +101,94 @@ $("#cmbNoReferencia").change(function(){
 
 
 /* Adicionar y elimina campos para los tanques al crear batch record */
+
 var maxField = 5;
 var ps = 1;
 var pr = 1;
-
+var cont=1;
+var Mtotal = 0;
 
 $("#adicionarPesaje").on('click', function(){
     
-    var total = $('#txtTotal').val();
+    var template = '<select class="form-control" name="cmbtanque" id=":cmbTanque:">' +
+                    /* '<option disabled selected>Tanque(Kg)</option>' + */
+                    '</select>' +
+                    '<input type="number" class="form-control" id=":txtCantidad:" name="txtCantidad[]" placeholder="Cantidad" value="0" onkeyup="CalcularTanque(this.value)">' +
+                    '<input type="number" class="form-control" id=":txtTotal:" name="txtTotal[]" placeholder="Total" readonly>' +
+                    '<button class="btn btn-warning eliminar" type="button">X</button>'
+
+    var nuevo = template.replace(':cmbTanque:', 'cmbTanque'+cont).replace(':txtCantidad:', 'txtCantidad'+cont).replace(':txtTotal:', 'txtTotal'+cont );
     
-    if(total == "" || total == 0){
-        alertify.set("notifier","position", "top-right"); alertify.error("Para adicionar más tanques diligencia todos los campos vacios.");
-        
-    }else{
-
-/*         var trs = $("addTanquePesaje tbody tr");
-        $.each(trs, function(i, tr) {
-            if (!$(tr).attr('id')) {    
-            $(tr).attr('id', i + 1);
-            }
-        });   */
-        
-        
-        if(ps < maxField){
-            //var nfilas = $("#addTanquePesaje tr").length;
-
-            /* $("#addTanquePesaje tbody tr:eq(0)") */
-            $("#cmbtanque").clone(true, true).appendTo("body"); /*.find('input').val("").attr('id', 'txtTotal' + nfilas) ;*/
-                
-                /*  var elementoClonado = $("#addTanquePesaje tbody tr:eq(0)").clone(true, true).appendTo('#addTanquePesaje').find('input').val("");
-            console.log(elementoClonado);
-            elementoClonado.attr('id', 'nuevo id');
-            elementoClonado.attr('name', 'nuevo nombre'); */
-            /* $("#addTanquePesaje tbody tr:eq(0)").clone(true).attr("id", "newId").find("#input_1").attr("id", "input_2"); */
-            
-
-            /* $('addTanquePesaje').children("tbody").children("tr").each(function(index, e){
-                if( index >= 1){
-                   console.log($(this).attr('id'));
-                }
-             }); */
-
-
-            ps++;
-        }    
+    if(ps <= maxField) {
+        $(".insertarTanque").append(nuevo);
+        cargarTanque(cont)
+          
+        ps++;
+        cont++;
+        /*} else{
+            alertify.set("notifier","position", "top-right"); alertify.error("Para adicionar más tanques diligencie todos los campos vacios.");
+        } */    
     }
 });
+
+/* Cargar tanques */
+
+function cargarTanque(cont) {
+    
+    $.ajax({
+        type: "POST",
+        'url' : 'php/listarBatch.php',
+        'data':{"operacion" : "9"},
+        success: function(r){
+            var $select = $('#cmbTanque'+cont);
+                //$('#cmbTanque'+contador).empty();
+                var info = JSON.parse(r);            
+                                
+                $select.append('<option disabled selected>' + "Tanque" + '</option>');
+                
+                $.each(info, function(i, value) {
+                    $select.append('<option>' + value.capacidad + '</option>');
+            });
+                
+            //$('#modalCrearBatch').modal('show');
+        }
+    });
+}
+
+var tanque="";
+
+/* Multiplica el tamaño de los tanques */
+
+function multiplicarTanques(cont){
+    $('#cmbTanque'+cont).change(function(){
+        var tanque = $(this).val();
+        $('#transito').val(tanque);
+        console.log(tanque);
+    });
+}
+
+function CalcularTanque(cantidad) {
+
+    /* $('#addTanquePesaje tr').each(function(){ */
+        
+        $('#transito').val(tanque);
+        tanque = $('#transito').val()
+        //tanque = $('select[id:cmbTanque'+cont+']').val();
+        console.log(tanque);
+        
+        //cantidad =cantidad;
+        //cantidad = $('#txtCantidad').val();
+        console.log(cantidad);
+        
+        total = tanque * cantidad;
+        console.log(total);
+
+        $('#txtTotal'+cont).val(total);
+
+   /*  })  */  
+ }
+
+/* Eliminar Tanque */
 
 $(document).on("click",".eliminarPesaje", function(){
 /* function eliminarTanque(){  */    
@@ -190,35 +208,3 @@ $(document).on("click",".eliminarPesaje", function(){
 function cerrarModal(){
     $('#modalCrearBatch').modal('hide');
 }
-
-
-var tanque="";
-
-/* Multiplica el tamaño de los tanques */
-$('#cmbTanque').change(function(){
-
-    var tanque = $(this).val();
-    $('#transito').val(tanque);
-    console.log(tanque);
-
-});
-
-
-function CalcularTanque(cantidad) {
-
-    /* $('#addTanquePesaje tr').each(function(){ */
-
-        tanque = $('#transito').val()
-        /*console.log(tanque); */
-        
-        cantidad =cantidad;
-        //cantidad = $('#txtCantidad').val();
-        console.log(cantidad);
-        
-        total = tanque * cantidad;
-        console.log(total);
-
-        $('#txtTotal').val(total);
-
-   /*  })  */  
- }

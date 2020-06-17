@@ -9,15 +9,15 @@ $('#tablaEnvasado').dataTable({
     columns: [
         {
             title: 'Fecha Programación',
-            data: 'fecha_programacion'
+            data: 'fecha_programacion', className: 'uniqueClassName'
         },
         {
             title: 'No de Orden',
-            data: 'numero_orden'
+            data: 'numero_orden', className: 'uniqueClassName'
         },
         {
             title: 'Referencia',
-            data: 'referencia'
+            data: 'referencia', className: 'uniqueClassName'
         },
         /* {
             title: 'Presentación Comercial',
@@ -29,7 +29,7 @@ $('#tablaEnvasado').dataTable({
         },*/
         {
             title: 'No Lote',
-            data: 'numero_lote',
+            data: 'numero_lote', className: 'uniqueClassName'
             /* render: (data, type, row) => {
                 'use strict';
                 return $.number(data, 0, ',', '.');
@@ -44,11 +44,11 @@ $('#tablaEnvasado').dataTable({
             }
         }, */
         {
-            title: 'Ingresar',
+            title: 'Ingresar', className: 'uniqueClassName',
             data: '',
             render: (data, type, row) => {
                 'use strict';
-                return `<a href="envasadoinfo/${row.id_batch}/${row.referencia}"><i class="large material-icons" data-toggle="tooltip" title="Ingresar" style="color:rgb(0, 154, 68)">border_color</i></a>`;
+                return `<a href="envasadoinfo/${row.id_batch}/${row.referencia}"><i class="large material-icons" data-toggle="tooltip" title="Ingresar" style="color:rgb(0, 154, 68)">exit_to_app</i></a>`;
             }
         },
     ]

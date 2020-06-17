@@ -1,5 +1,5 @@
 
-$('#aprobacionTable').dataTable({
+$('#preparacionTable').dataTable({
     ajax: {
         url: '/api/batch',
         dataSrc: ''
@@ -49,7 +49,7 @@ $('#aprobacionTable').dataTable({
             data: '',
             render: (data, type, row) => {
                 'use strict';
-                return `<a href="aprobacioninfo/${row.id_batch}/${row.referencia}"><i class="large material-icons" data-toggle="tooltip" title="Ingresar" style="color:rgb(0, 154, 68)">exit_to_app</i></a>`;
+                return `<a href="acondicionamientoinfo/${row.id_batch}/${row.referencia}"><i class="large material-icons" data-toggle="tooltip" title="Ingresar" style="color:rgb(0, 154, 68)">exit_to_app</i></a>`;
             }
         },
     ]

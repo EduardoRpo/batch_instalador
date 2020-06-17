@@ -42,45 +42,45 @@
   });
 
   $router->add('/loteado', function () {
-    return Router::getRenderedHTML('html/loteado.html');
+    return Router::getRenderedHTML('html/loteado.php');
   });
   $router->add('/loteadoinfo/:idBatch/:referencia', function ($idBatch, $referencia) {
-    return Router::getRenderedHTML('html/loteadoinfo.html');
+    return Router::getRenderedHTML('html/loteadoinfo.php');
   });
 
   $router->add('/acondicionamiento', function () {
-    return Router::getRenderedHTML('html/acondicionamiento.html');
+    return Router::getRenderedHTML('html/acondicionamiento.php');
   });
   $router->add('/acondicionamientoinfo/:idBatch/:referencia', function ($idBatch, $referencia) {
-    return Router::getRenderedHTML('html/acondicionamientoinfo.html');
+    return Router::getRenderedHTML('html/acondicionamientoinfo.php');
   });
 
   $router->add('/despachos', function () {
-    return Router::getRenderedHTML('html/despachos.html');
+    return Router::getRenderedHTML('html/despachos.php');
   });
   $router->add('/despachoinfo/:idBatch/:referencia', function ($idBatch, $referencia) {
-    return Router::getRenderedHTML('html/despachosinfo.html');
+    return Router::getRenderedHTML('html/despachosinfo.php');
   });
 
   $router->add('/liberacionproducto', function () {
-    return Router::getRenderedHTML('html/liberacionproducto.html');
+    return Router::getRenderedHTML('html/liberacionproducto.php');
   });
   $router->add('/liberacionproductoinfo/:idBatch/:referencia', function ($idBatch, $referencia) {
-    return Router::getRenderedHTML('html/liberacionproductoinfo.html');
+    return Router::getRenderedHTML('html/liberacionproductoinfo.php');
   });
 
   $router->add('/controlfisico', function () {
-    return Router::getRenderedHTML('html/controlfisico.html');
+    return Router::getRenderedHTML('html/controlfisico.php');
   });
   $router->add('/controlfisicoinfo/:idBatch/:referencia', function ($idBatch, $referencia) {
-    return Router::getRenderedHTML('html/controlfisicoinfo.html');
+    return Router::getRenderedHTML('html/controlfisicoinfo.php');
   });
   
   $router->add('/liberacionlote', function () {
-    return Router::getRenderedHTML('html/liberacionlote.html');
+    return Router::getRenderedHTML('html/liberacionlote.php');
   });
   $router->add('/liberacionloteinfo/:idBatch/:referencia', function ($idBatch, $referencia) {
-    return Router::getRenderedHTML('html/liberacionloteinfo.html');
+    return Router::getRenderedHTML('html/liberacionloteinfo.php');
   });
 
   $router->run();

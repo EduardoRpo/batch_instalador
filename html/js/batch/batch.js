@@ -165,7 +165,7 @@ function guardarDatos(){
                 cantidad: "1",
                 
                 };
-                console.log(datos.cantidad);
+                //console.log(datos.cantidad);
         }else{
              datos = {
                 operacion: "7",

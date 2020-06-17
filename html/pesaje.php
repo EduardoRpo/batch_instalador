@@ -31,7 +31,8 @@
   <link rel="stylesheet" type="text/css" href="html/vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css">
   <!-- <script src="https://kit.fontawesome.com/6589be6481.js" crossorigin="anonymous"></script> -->
  
-
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css" rel="stylesheet">
+  
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">
@@ -76,9 +77,7 @@
       <h1 class="text-themecolor m-b-0 m-t-0"><b>Pesaje</b></h1>
     </div>
   </div>
-  
 
-  
   <div class="row">
     <div class="col-md-12 col-2 align-self-right">
       <div class="card">
@@ -112,6 +111,10 @@
 
 <!--Wave Effects -->
 <script src="./html/js/utils/waves.js"></script>
+
+<!-- Fonts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/js/all.min.js"></script> 
+
 
 <!-- <script type="text/javascript">
     $.fn.dataTable.ext.search.push(
