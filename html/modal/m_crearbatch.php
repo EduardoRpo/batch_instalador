@@ -83,8 +83,7 @@
                     <div class="row page">
                         <div class="col-md-4 col-2 align-self-center">
                             <label for="recipient-name" class="col-form-label">Fecha de Programación</label>
-                            <input type="date" class="form-control" id="fechaprogramacion" name="fechaprogramacion" value="" min="<?php $hoy = date("Y-m-d");
-                                                                                                                                    echo $hoy; ?>">
+                            <input type="date" class="form-control" id="fechaprogramacion" name="fechaprogramacion" value="" min="<?php $hoy = date("Y-m-d"); echo $hoy; ?>">
                         </div>
 
                     </div>
@@ -97,8 +96,8 @@
                     <div class="row page">
                         <div class="col-md-3 col-2 align-self-center">
                             <button id="adicionarPesaje" name="adicionarPesaje" type="button" class="btn btn-primary">Adicionar</button>
-                            <!-- <label for="">Cantidad</label>
-                            <input type="number" class="form-control col-md-4" id="transito" readonly> -->
+                            <!-- <label for="">Cantidad</label>-->
+                            <input type="number" class="form-control col-md-4" id="transito" hidden readonly>
                         </div>
                     </div>
                     <div class="mb-3 mt-3 insertarTanque">

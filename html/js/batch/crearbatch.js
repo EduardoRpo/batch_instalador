@@ -106,29 +106,42 @@ var maxField = 5;
 var ps = 1;
 var pr = 1;
 var cont=1;
-var Mtotal = 0;
+var total = 0;
 
 $("#adicionarPesaje").on('click', function(){
+    var unidades = $('#unidadesxlote').val(); 
+    var lote = $('#tamanototallote').val();
+    
+    if(unidades == "" || unidades == 0 || lote == 0 ){
+        alertify.set("notifier","position", "top-right"); alertify.error("Para adicionar Tanques, complete todos los campos.");
+        return false;
+    }
     
     var template = '<select class="form-control" name="cmbtanque" id=":cmbTanque:">' +
-                    /* '<option disabled selected>Tanque(Kg)</option>' + */
                     '</select>' +
                     '<input type="number" class="form-control" id=":txtCantidad:" name="txtCantidad[]" placeholder="Cantidad" value="0" onblur="CalcularTanque(this.value)">' +
                     '<input type="number" class="form-control" id=":txtTotal:" name="txtTotal[]" placeholder="Total" readonly>' +
-                    '<button class="btn btn-warning eliminar" type="button">X</button>'
+                    '<button class="btn btn-warning eliminarTanque" type="button">X</button>'
 
     var nuevo = template.replace(':cmbTanque:', 'cmbTanque'+cont).replace(':txtCantidad:', 'txtCantidad'+cont).replace(':txtTotal:', 'txtTotal'+cont );
-    
-    if(ps <= maxField) {
+    var totaltl = $('input#transito').val();
+
+    if(ps == 1) {
         $(".insertarTanque").append(nuevo);
         cargarTanque(cont)
-          
         ps++;
         cont++;
-        /*} else{
-            alertify.set("notifier","position", "top-right"); alertify.error("Para adicionar más tanques diligencie todos los campos vacios.");
-        } */    
-    }
+
+    }else if(ps >= 2 && ps <= maxField && totaltl != 0 && totaltl != ""){
+        $(".insertarTanque").append(nuevo);
+        cargarTanque(cont)
+        ps++;
+        cont++;
+        $('#transito').val(0);
+
+    }else{
+        alertify.set("notifier","position", "top-right"); alertify.error("Para adicionar más tanques diligencie todos los campos vacios.");
+        }        
 });
 
 /* Cargar tanques */
@@ -157,41 +170,44 @@ function cargarTanque(cont) {
 
 var tanque="";
 
-/* Multiplica el tamaño de los tanques */
-
-/* function multiplicarTanques(cont){
-    $('#cmbTanque1').change(function(){
-        var tanque = $(this).val();
-        $('#transito').val(tanque);
-        console.log(tanque);
-    });
-} */
-
-cant=1;
 function CalcularTanque(cantidad) {
 
-        var cambio = '#cmbTanque' + cant + ' option:selected';
-        var tanque = $(cambio).val();
-        
-        total = tanque * cantidad;
+    cont--;
 
-        $('#txtTotal'+cant).val(total);
-        cant++;
+    var cambio = '#cmbTanque' + cont + ' option:selected';
+    var tanque = $(cambio).val();
+    
+    if (tanque == "Tanque"){
+        cont++;
+        return false;
+    }
+
+    total = tanque * cantidad;
+
+    $('#txtTotal'+cont).val(total);
+    $('#transito').val(total);
+    
+    if(tanque!='Tanque'){
+        cont++;
+    }
+        
 }
 
 /* Eliminar Tanque */
 
-$(document).on("click",".eliminarPesaje", function(){
-/* function eliminarTanque(){  */    
-    var parent = $(this).parents().get(0);
-    if(ps != 1){
-       /*  $("#txtCantidad").remove();
-        $("#txtTotal").remove();
-        $("#btnEliminarTanques").remove(); */
-        $(parent).remove();
-        ps--;
-    /* } */ 
-    }
+$(document).on("click",".eliminarTanque", function(){
+    cont--;
+    
+    $('#cmbTanque' + cont).remove();
+    $('#txtCantidad'+ cont).remove();
+    $('#txtTotal' + cont).remove();
+    $(this).remove();
+        
+    ps--;
+
+    var temporal = $('#txtTotal1').val();
+    $('#transito').val(temporal);
+
 });
 
 /* cerrar modal al crear Batch */
