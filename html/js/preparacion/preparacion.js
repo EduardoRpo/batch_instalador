@@ -53,7 +53,7 @@ $(document).ready(function () {
                 data: '', className: 'uniqueClassName',
                 render: (data, type, row) => {
                     'use strict';
-                    return `<a href="preparacioninfo/${row.id_batch}/${row.referencia}"<i class="large material-icons" data-toggle="tooltip" title="Ingresar" style="color:rgb(0, 154, 68)">exit_to_app</i></a>`;
+                    return `<a href="preparacioninfo/${row.id_batch}/${row.referencia}"<i class="large material-icons" data-toggle="tooltip" title="Ingresar" style="color:rgb(0, 154, 68)">ev_station</i></a>`;
                 }
             },
         ]

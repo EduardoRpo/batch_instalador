@@ -170,6 +170,8 @@ function cargarTanque(cont) {
 
 var tanque="";
 
+/* Calcular el valor de los tanques */
+
 function CalcularTanque(cantidad) {
 
     cont--;
@@ -183,6 +185,25 @@ function CalcularTanque(cantidad) {
     }
 
     total = tanque * cantidad;
+
+    var sumaTanques = $('#sumaTanques').val();
+    
+    if(cont==1 ){
+        sumaTanques=0;
+    }
+      
+    sumaTanques = parseInt(sumaTanques) + total
+    var cantidadLote = $('#tamanototallote').val();
+    
+    if(sumaTanques > cantidadLote ){
+        alertify.set("notifier","position", "top-right"); alertify.error("La configuración de Tanques supera el Tamaño del lote");
+        cont++;
+        return false;
+    }else{
+        $('#sumaTanques').val(sumaTanques);    
+    }
+
+
 
     $('#txtTotal'+cont).val(total);
     $('#transito').val(total);
@@ -207,6 +228,30 @@ $(document).on("click",".eliminarTanque", function(){
 
     var temporal = $('#txtTotal1').val();
     $('#transito').val(temporal);
+
+    var txtTotal1 = $('#txtTotal1').val();
+    var txtTotal2 = $('#txtTotal2').val();
+    var txtTotal3 = $('#txtTotal3').val();
+    var txtTotal4 = $('#txtTotal4').val();
+    var txtTotal5 = $('#txtTotal5').val();
+    
+    var sumaTanques = 0;
+
+    if(txtTotal1 == undefined){
+        txtTotal1 = 0;
+    }if(txtTotal2 == undefined){
+        txtTotal2 = 0;
+    }if(txtTotal3 == undefined){
+        txtTotal3 = 0;
+    }if(txtTotal4 == undefined){
+        txtTotal4 = 0;
+    }if(txtTotal5 == undefined){
+        txtTotal5 = 0;
+    }   
+
+    sumaTanques =  parseInt(txtTotal1) + parseInt(txtTotal2) + parseInt(txtTotal3) + parseInt(txtTotal4) + parseInt(txtTotal5)
+
+    $('#sumaTanques').val(sumaTanques);
 
 });
 

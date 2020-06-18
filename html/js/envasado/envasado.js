@@ -48,7 +48,7 @@ $('#tablaEnvasado').dataTable({
             data: '',
             render: (data, type, row) => {
                 'use strict';
-                return `<a href="envasadoinfo/${row.id_batch}/${row.referencia}"><i class="large material-icons" data-toggle="tooltip" title="Ingresar" style="color:rgb(0, 154, 68)">exit_to_app</i></a>`;
+                return `<a href="envasadoinfo/${row.id_batch}/${row.referencia}"><i class="large material-icons" data-toggle="tooltip" title="Ingresar" style="color:rgb(0, 154, 68)">touch_app</i></a>`;
             }
         },
     ]

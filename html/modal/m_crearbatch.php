@@ -94,10 +94,11 @@
                         </div>
                     </div>
                     <div class="row page">
-                        <div class="col-md-3 col-2 align-self-center">
+                        <div class="col-md-6 col-2 align-self-center">
                             <button id="adicionarPesaje" name="adicionarPesaje" type="button" class="btn btn-primary">Adicionar</button>
                             <!-- <label for="">Cantidad</label>-->
                             <input type="number" class="form-control col-md-4" id="transito" hidden readonly>
+                            <input type="number" class="form-control col-md-4" id="sumaTanques" readonly>
                         </div>
                     </div>
                     <div class="mb-3 mt-3 insertarTanque">
