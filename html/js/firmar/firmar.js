@@ -1,15 +1,26 @@
 let id;
+let btnOprimido;
+let cont = 1;
 
 function cargar(btn){
-    $('#m_firmar').modal('show');
     id = btn.id;
+    btnOprimido = id.split('_');
+
+    if(btnOprimido[1]=='verificado' && cont == 1){
+        alertify.set("notifier","position", "top-right"); alertify.error("Debe firmar en orden, primero el 'Realizado'.");
+        return false;
+    }else{
+        $('#m_firmar').modal('show');
+        cont = 0;
+    }
+    
 }
 
 
 function enviar() {
    $('#m_firmar').modal('hide');
     
-   var template = '<img id="" src="/html/firmas/BerneyMontoya/:firma:" alt="firma_usuario" height="130">'; 
+   let template = '<img id="" src="/html/firmas/BerneyMontoya/:firma:" alt="firma_usuario" height="130">'; 
     
     datos = {
         email: $('#usuario').val(),
@@ -30,8 +41,13 @@ function enviar() {
                 let parent = $('#'+id).parent();
                 $('#'+id).remove();
                 id='';
-                var firma = template.replace(':firma:', data.urlfirma);
+                let firma = template.replace(':firma:', data.urlfirma);
                 parent.append(firma).html
+
+                if(btnOprimido[1]=='verificado'){
+                    cont = 1;
+                }
+
             }
         }
     });

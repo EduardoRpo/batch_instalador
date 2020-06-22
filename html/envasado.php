@@ -63,22 +63,6 @@
     </div>
   </div>
 
-
-<!--   <div class="row page-titles">
-    <div class="col-md-5 col-2 align-self-right">
-      <h1 class="text-themecolor m-b-0 m-t-0" style="margin-left: 7%"><b>Envasado</b></h1>
-    </div>
-    <div class="col-md-3 col-4 align-self-center">
-      <input type="text" name="fechahoy" value="" readonly="" class="form-control datepicker" hidden="">
-    </div>
-    <div class="col-md-2 col-8 align-self-center"></div>
-    <div class="col-md-2 col-2 align-self-center">
-      <div class="container">
-      </div>
-    </div>
-  </div> -->
-
-
 <div class="row">
     <div class="col-md-12 col-2 align-self-center">
       <div class="card">

@@ -1,9 +1,10 @@
 <?php
-  include('modal/modal_firma.php');
-  include('modal/modal_cambiarContrasena.php');
-  include('modal/modal_observaciones.php');
-  include('modal/m_firma.php');
-  ?>
+include('modal/modal_firma.php');
+include('modal/modal_cambiarContrasena.php');
+include('modal/modal_observaciones.php');
+include('modal/modal_imprimirEtiquetas.php');
+include('modal/m_firma.php');
+?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -114,22 +115,18 @@
                   <label>No Lote</label>
                   <label>Línea</label>
 
-
                   <input type="text" class="form-control" id="in_tamano_lote" readonly>
                   <input type="text" class="form-control" id="in_numero_lote" readonly>
                   <input type="text" class="form-control" id="in_linea" readonly>
-
-
-                  <!-- <input type="textarea" class="form-control " id="in_linea" readonly style="text-align: center;"> -->
-
+                  
                 </div>
                 <div class="contenedorInfoObs">
                 </div>
 
-
               </div>
             </div>
           </div>
+          
           <div class="card">
             <div class="card-header" id="headingTwo">
               <h5 class="mb-0">
@@ -177,7 +174,7 @@
                 <div class="row" style="margin: 1%">
                   <div class="col-md-4 col-2 align-self-center">
                     <label for="despeje_realizado" class="col-form-label">Realizado Por:</label>
-                    <input type="text" class="form-control in_desinfeccion" id="despeje_realizado">
+                    <input type="text" class="form-control in_desinfeccion" id="despeje_realizado" readonly>
                   </div>
 
                   <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
@@ -188,9 +185,9 @@
 
                   <div class="col-md-4 col-2 align-self-center">
                     <label for="despeje_verificado" class="col-form-label">Verificado Por:</label>
-                    <input type="text" class="form-control in_desinfeccion" id="despeje_verificado">
+                    <input type="text" class="form-control in_desinfeccion" id="despeje_verificado" readonly>
                   </div>
-                  
+
                   <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
                     <!-- <input type="button" class="btn btn-danger in_desinfeccion" data-toggle="modal" data-target="#myModal3" style="width: 100%; height: 38px;" value="Firmar"> -->
                     <input type="button" class="btn btn-danger in_desinfeccion" id="despeje_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar"> <!-- data-toggle="modal" data-target="#m_firmar" -->
@@ -203,9 +200,9 @@
                   </div>
                 </div>
               </div>
-            </div>  
+            </div>
           </div>
-        
+
         </div>
         <div class="card">
           <div class="card-header" id="headingThree">
@@ -222,59 +219,32 @@
                   <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">
                     Formula Maestra</h3>
                 </div>
-                <div class="row" style="margin: 1%; text-align: center;">
-                  <div class="col-md-3 col-2 align-self-right">
-                    <label for="cargo-1" class="col-form-label"><b>Entrega de formula Maestra para solicitud de
-                        materia prima</b></label>
-
-                  </div>
-                  <div class="col-md-3 col-2 align-self-center">
-                    <label for="cargo-2" class="col-form-label"><b>Lleva Materia prima a la escusa</b></label>
-
-                  </div>
-                  <div class="col-md-3 col-2 align-self-center">
-                    <label for="cargo-3" class="col-form-label"><b>Verificación del estado de Identificación y
-                        Aprobación Materias primas</b></label>
-
-                  </div>
-                  <div class="col-md-3 col-2 align-self-center">
-                    <label for="cargo-4" class="col-form-label"><b>Toma de materia prima de la
-                        esclusa</b></label>
-
-                  </div>
-                </div>
-              </div>
-              <div class="row" style="margin: 1%; text-align: center;">
-                <div class="col-md-3 col-2 align-self-right">
+                <div class="formulaMaestra">
+                  <label for="cargo-1" class="col-form-label"><b>Entrega de formula Maestra para solicitud de materia prima</b></label>
+                  <label for="cargo-2" class="col-form-label"><b>Lleva Materia prima a la escusa</b></label>
+                  <label for="cargo-3" class="col-form-label"><b>Verificación del estado de Identificación y Aprobación Materias primas</b></label>
+                  <label for="cargo-4" class="col-form-label"><b>Toma de materia prima de la esclusa</b></label>
 
                   <input type="text" class="form-control text-center" id="cargo-1" readonly>
-                </div>
-                <div class="col-md-3 col-2 align-self-center">
-
                   <input type="text" class="form-control text-center" id="cargo-2" readonly>
-                </div>
-                <div class="col-md-3 col-2 align-self-center">
-
                   <input type="text" class="form-control text-center" id="cargo-3" readonly>
-                </div>
-                <div class="col-md-3 col-2 align-self-center">
-
                   <input type="text" class="form-control text-center" id="cargo-4" readonly>
                 </div>
               </div>
+
               <hr>
               <div class="card-body">
-                <div class="row" style="margin: 1%">
-                  <div class="col-md-12 col-2 align-self-center">
+                <!-- <div class="row" style="margin: 1%"> -->
+                  <!-- <div class="col-md-12 col-2 align-self-center"> -->
                     <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Pesaje</h3>
-                  </div>
-                  <div class="col-md-12 col-2 align-self-center">
+                  <!-- </div> -->
+                  <!-- <div class="col-md-12 col-2 align-self-center"> -->
                     <form>
                       <table class="table" id="tablePesaje" style="width: 100%;">
 
                       </table>
                     </form>
-                  </div>
+                  <!-- </div> -->
 
                 </div>
                 <hr>
@@ -285,7 +255,7 @@
                   </div> -->
                   <div class="col-md-3 col-2 align-self-center">
                     <label for="pesaje_realizado" class="col-form-label">Realizado Por:</label>
-                    <input type="text" class="form-control" id="pesaje_realizado">
+                    <input type="text" class="form-control" id="pesaje_realizado" readonly>
                   </div>
 
                   <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
@@ -294,7 +264,7 @@
 
                   <div class="col-md-3 col-2 align-self-center">
                     <label for="pesaje_verificado" class="col-form-label">Verificado Por:</label>
-                    <input type="text" class="form-control" id="pesaje_verificado">
+                    <input type="text" class="form-control" id="pesaje_verificado" readonly>
                   </div>
                   <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
                     <input type="button" class="btn btn-danger" id="pesaje_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">

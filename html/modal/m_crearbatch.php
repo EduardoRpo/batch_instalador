@@ -83,7 +83,8 @@
                     <div class="row page">
                         <div class="col-md-4 col-2 align-self-center">
                             <label for="recipient-name" class="col-form-label">Fecha de Programación</label>
-                            <input type="date" class="form-control" id="fechaprogramacion" name="fechaprogramacion" value="" min="<?php $hoy = date("Y-m-d"); echo $hoy; ?>">
+                            <input type="date" class="form-control" id="fechaprogramacion" name="fechaprogramacion" value="" min="<?php $hoy = date("Y-m-d");
+                                                                                                                                    echo $hoy; ?>">
                         </div>
 
                     </div>
@@ -102,14 +103,8 @@
                         </div>
                     </div>
                     <div class="mb-3 mt-3 insertarTanque">
-                        <!-- <select class="form-control" name="cmbtanque" id="cmbTanque">
-                            <option disabled selected>Tanque(Kg)</option>
-                        </select>
-                        <input type="number" class="form-control" id="txtCantidad" name="txtCantidad[]" placeholder="Cantidad" value="0" onkeyup="CalcularTanque(this.value)">
-                        <input type="number" class="form-control" id="txtTotal" name="txtTotal[]" placeholder="Total" readonly>
-                        <button class="btn btn-warning eliminar" type="button">X</button> -->
-                    </div>
 
+                    </div>
                     <div class="modal-footer">
                         <button type="button" onclick="guardarDatos();" class="btn btn-primary crearbatch" name="guardarBatch" id="guardarBatch">Crear</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

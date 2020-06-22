@@ -256,6 +256,26 @@
 
     break;
 
+    case 11: //seleccionar ID para Cargar datos de acuerdo con la selección de multipresentación
+      $nombre_referencia = $_POST['nombre_referencia'];
+      
+      $query_producto = mysqli_query($conn, "SELECT referencia FROM `producto` WHERE nombre_referencia='$nombre_referencia'");
+                                             
+      $result = mysqli_num_rows($query_producto);
+
+      if($result > 0){
+
+        while($data = mysqli_fetch_assoc($query_producto)){
+          $arreglo[] = $data;}
+        
+        echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+
+      }else{
+        echo json_encode('');
+      }  
+
+
+    break;
   }
 ?>
 

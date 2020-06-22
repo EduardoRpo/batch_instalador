@@ -2,13 +2,14 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Imprimir Etiquetas Virtuales</h5>
-        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button> -->
+        <h5 class="modal-title" id="exampleModalLabel" style="color: cornsilk;">IMPRIMIR</h5>
       </div>
       <div class="modal-body">
-        ...
+        <div class="imprimir">
+        <img src="../../assets/images/icon/impresora.png" width="80px">
+        <h5 style="text-align: center;">Imprimir Etiquetas Virtuales</h5>
+        </div>
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

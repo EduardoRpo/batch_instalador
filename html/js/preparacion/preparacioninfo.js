@@ -124,28 +124,15 @@ function procesoTiempo(event) {
     if (proceso.id == id) {
         $('#tiempo_instructivo').val(tiempo);
     } else {
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            onOpen: (toast) => {
-              toast.addEventListener('mouseenter', Swal.stopTimer)
-              toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-          })
-          
-          Toast.fire({
-            icon: 'error',
-            title: 'Trabaja en orden'
-          })
-        
-        /* $.alert({
+       
+        $.alert({
+            theme: 'white',
+            icon: 'fa fa-warning',
+            title: 'Samara Cosmetics',
+            content: 'Siga el orden del instructivo',
+            confirmButtonClass: 'btn-info',
             type: 'warning',
-            title: 'Alerta!',
-            content: 'Por favor sigue el orden'
-        }); */
+        });
     }
 }
 

@@ -35,13 +35,6 @@ include('modal/m_firma.php');
   <link rel="stylesheet" type="text/css" href="../../html/vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-  <!-- script src="https://kit.fontawesome.com/6589be6481.js" crossorigin="anonymous"></script> -->
-
-  <!-- Hoja de estilos Toastr -->
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css"> -->
-
-  <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> -->
-  
   <!-- Alertify -->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
@@ -108,17 +101,19 @@ include('modal/m_firma.php');
             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
               <div class="card-body">
                 <div class="contenedorInfoGeneral">
-                  <label>Fecha Programación</label>
-                  <label>No Orden</label>
-                  <label>Referencia</label>
+                <label for="recipient-name" class="col-form-label">Fecha Programación</label>
+                  <label for="recipient-name" class="col-form-label">No Orden</label>
+                  <label for="recipient-name" class="col-form-label">Referencia</label>
+                  <label for="recipient-name" class="col-form-label">Multipresentación</label>
 
-                  <input type="text" class="form-control" id="in_fecha_programacion" readonly>
+                  <input type="date" class="form-control" id="in_fecha" readonly>
                   <input type="text" class="form-control" id="in_numero_orden" readonly>
                   <input type="text" class="form-control" id="in_referencia" readonly>
+                  <input type="text" class="form-control itemInfo" id="observaciones" readonly>
 
-                  <label>Tamaño Lote (Kg)</label>
-                  <label>No Lote</label>
-                  <label>Línea</label>
+                  <label for="in_tamano_lote" class="col-form-label">Tamaño Lote</label>
+                  <label for="recipient-name" class="col-form-label">No. Lote</label>
+                  <label for="recipient-name" class="col-form-label">Linea</label>
 
                   <input type="text" class="form-control" id="in_tamano_lote" readonly>
                   <input type="text" class="form-control" id="in_numero_lote" readonly>
@@ -219,7 +214,7 @@ include('modal/m_firma.php');
                           <table class="table table-striped table-bordered">
                             <thead>
                               <tr>
-                                <th>Fecha</th>
+                                <!-- <th>Fecha</th> -->
                                 <th>Referencia envase tapa</th>
                                 <th>Descripción</th>
                                 <th>Cantidad</th>
@@ -360,13 +355,14 @@ include('modal/m_firma.php');
                               <table class="table table-striped table-bordered">
                                 <thead>
                                   <tr>
-                                    <th>Fecha</th>
+                                    <!-- <th>Fecha</th> -->
                                     <th>Referencia</th>
                                     <th>Descripción</th>
-                                    <th>Cantidad Entregada</th>
-                                    <th>Cantidad Envasada</th>
-                                    <th>Cantidad Averias</th>
-                                    <th>Cantidad Sobrante</th>
+                                    <th>Recibida</th>
+                                    <th>Envasada</th>
+                                    <th>Averias</th>
+                                    <th>Sobrante</th>
+                                    <th>Total</th>
                                   </tr>
                                 </thead>
                                 <tbody>

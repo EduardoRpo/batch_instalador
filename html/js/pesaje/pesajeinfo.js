@@ -55,16 +55,35 @@ let tablePesaje = $('#tablePesaje').dataTable({
             title: 'Peso (<a href="javascript:cambioConversion();" class="conversion_weight">g</a>)',
             className: 'conversion_weight_column',
             data: 'porcentaje', className: 'uniqueClassName',
+            
             render: (data, type, row) => {
                 
                 if (flagWeight) {
-                    return data * (batch.tamano_lote)/ 1000;
-                    //$.fn.dataTable.render.number( '.', ',', 0, '' )}
+                    return (data * batch.tamano_lote) / 1000;
                 } else {
                     return (data * batch.tamano_lote);
                 }
-
-            }
+                
+            },
+            
+            /* render: $.fn.dataTable.render.number( ',', '.', 10), */
+            
+        },
+        {
+            title: 'No TQ',
+            data: 'porcentaje', className: 'uniqueClassName',
+            render: (data, type, row) => {
+                
+                if (flagWeight) {
+                    return ((data * batch.tamano_lote) / 1000) * 10;
+                    //$.fn.dataTable.render.number( '.', ',', 2, '' )}
+                } else {
+                    return data * batch.tamano_lote * 10;
+                }
+            
+            },
+            /* render: $.fn.dataTable.render.number( '.', ',', 2, '' ) */
+            
         },
         {
             title: 'Impresión',
@@ -74,30 +93,7 @@ let tablePesaje = $('#tablePesaje').dataTable({
     ]
 });
 
-//Validacion campos de preguntas diligenciados
 
-$('.in_desinfeccion').click((event) => {
-    event.preventDefault();
-    let flag = false;
-    $('.questions').each((indx, question) => {
-        if (flag) {
-            return;
-        }
-        let name = $(question).attr('name');
-        if (!$(`input[name='${name}']:radio`).is(':checked')) {
-            flag = true;
-            
-            $.alert({
-                theme: 'white',
-                icon: 'fa fa-warning',
-                title: 'Samara Cosmetics',
-                content: 'Antes de continuar, complete todas las preguntas',
-                confirmButtonClass: 'btn-info',
-            });
-        }
-    });
-
-});
 
 
 Date.prototype.toDateInputValue = (function () {

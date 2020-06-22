@@ -81,13 +81,10 @@ function CalculoTamanolote (valor) {
     unidades = parseInt(valor);
 	
     densidad = document.getElementById('densidad').value;
-    //console.log(densidad);
     presentacion = parseInt(document.getElementById('presentacioncomercial').value);
-    //console.log(presentacion);
-    total = (unidades * densidad * presentacion)/1000;
-    //console.log(total);
+    total = ((unidades * densidad * presentacion)/1000)*(1 + 0.03);
+
     (document.getElementById('tamanototallote').value) = numeral(total).format('0kb');
-    //console.log(total);
 }
 
 /* Limpiar datos al cambiar referencia en el modal de crear Batch */
@@ -103,7 +100,7 @@ $("#cmbNoReferencia").change(function(){
 /* Adicionar y elimina campos para los tanques al crear batch record */
 
 var maxField = 5;
-var ps = 1;
+var ps1 = 1;
 var pr = 1;
 var cont=1;
 var total = 0;
@@ -126,16 +123,16 @@ $("#adicionarPesaje").on('click', function(){
     var nuevo = template.replace(':cmbTanque:', 'cmbTanque'+cont).replace(':txtCantidad:', 'txtCantidad'+cont).replace(':txtTotal:', 'txtTotal'+cont );
     var totaltl = $('input#transito').val();
 
-    if(ps == 1) {
+    if(ps1 == 1) {
         $(".insertarTanque").append(nuevo);
         cargarTanque(cont)
-        ps++;
+        ps1++;
         cont++;
 
-    }else if(ps >= 2 && ps <= maxField && totaltl != 0 && totaltl != ""){
+    }else if(ps1 >= 2 && ps1 <= maxField && totaltl != 0 && totaltl != ""){
         $(".insertarTanque").append(nuevo);
         cargarTanque(cont)
-        ps++;
+        ps1++;
         cont++;
         $('#transito').val(0);
 
@@ -224,7 +221,7 @@ $(document).on("click",".eliminarTanque", function(){
     $('#txtTotal' + cont).remove();
     $(this).remove();
         
-    ps--;
+    ps1--;
 
     var temporal = $('#txtTotal1').val();
     $('#transito').val(temporal);

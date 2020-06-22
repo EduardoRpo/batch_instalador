@@ -9,27 +9,18 @@
         </button>
       </div>
       <div class="modal-body">
-      <input class="btn btn-primary" id="masMulti" type="button" value="Adicionar" style="margin-bottom: 10px;">  
-      <div class="multi" style="display: flex;">
+        <input class="btn btn-primary" id="masMulti" type="button" value="Adicionar" style="width: 150px;" >
+        <input type="text" id="transitoMulti" hidden>
+         
+          <div class="insertarRefMulti mb-3 mt-3" >
         
-          <table id="tablaMulti">
-          
-            <tr>
-              <td><select class="form-control" name="MultiReferencia" id="MultiReferencia" required></select></td>
-              <td><input type="text" class="form-control" id="cantidadMulti" name="cantidadMulti" placeholder="Unidades"></td>  
-              <td><input type="text" class="form-control" id="tamanoloteMulti" name="tamanoloteMulti" readonly placeholder="Lote"></td>
-              <!-- <td><input class="btn btn-primary" id="masMulti" type="button" value="+"></td> -->
-              <td class="menosMulti"><input class="btn btn-warning" type="button" value="-"></td>
-            </tr>
-          </table>
-           
-          <input type="text" class="form-control" id="densidadMulti" name="densidadMulti" placeholder="Densidad" hidden>
-          <input type="text" class="form-control" id="presentacionMulti" name="presentacionMulti" placeholder="Presentación" hidden>
-        </div>        
+          </div>        
       </div>
-      <div class="inputcalculoTotal" style="display: flex; justify-content:flex-end; margin-right:45px; margin-bottom:10px">  
-        <label for="" style="padding-right: 10px;">Total</label>
-        <input id="totalMulti" type="text" class="form-control" style="width: 28%;" readonly autocomplete="off">
+      <div class="inputcalculoTotal mb-3 mr-5" style="display: flex; justify-content:flex-end">  
+        <label class="labelcenter mr-3">Tamaño Lote</label>
+        <input type="text" id="loteTotal" class="form-control" style = "width: 100px;" readonly>
+        <label class="labelcenter ml-3 mr-3" style="padding-right: 10px;">Total</label>
+        <input id="sumaMulti" type="text" class="form-control" style="width: 28%;" readonly autocomplete="off">
       </div>
         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

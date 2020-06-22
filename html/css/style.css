@@ -8200,9 +8200,95 @@ div.displayallinfo {
   
 }
 
+.parametrosControl{
+  display: grid;
+  grid-template-columns: minmax(50px, 1070px) minmax(80px, 100px) minmax(80px, 110px);
+  grid-gap: 1em;
+  margin: 20px;
+  background-color: #C0C0C0;
+  text-align: center;
+}
+
+.observacion{
+  display: grid;
+  grid-template-columns: 455px 255px;
+  grid-gap: 1em;
+  margin: 10px;
+  text-align: center;
+}
+
+.observacion .txtObservaciones{
+  grid-row-start: 1;
+  grid-row-end: 8;
+
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+/* Creacion Batch Record */
+
 .insertarTanque{
   display: grid;
   grid-template-columns: 100px 100px 100px 40px;
+  grid-gap: 1em;
+  margin: 20px;
+}
+
+.insertarRefMulti{
+  display: grid;
+  grid-template-columns: 450px 100px 100px 50px;
+  /* grid-template-columns: 250px 100px 100px 100px 100px 50px; */
+  grid-gap: 1em;
+  margin: 20px;
+}
+
+.labelcenter{
+  display: flex;
+  align-items: flex-end;
+}
+
+/* pesaje */
+
+.formulaMaestra{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  /* grid-template-rows: 1em 2em; */
+  grid-gap: 1em;
+  margin: 20px;
+  text-align: center;
+}
+
+.imprimir{
+  display: grid;
+  grid-template-columns: 40px 364px;
+  grid-gap: 1em;
+  margin: 10px;
+  text-align: center;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* Maquinas preparacion */
+
+.maquinasPreparacion{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  
+  grid-column-gap: 2em;
+  margin: 20px;
+  text-align: center;
+}
+
+.maquinasPreparacion .subtitulo{
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+/* acondicionamiento */
+
+.conciliacionrendimiento{
+  display: grid;
+  grid-template-columns: 100px 100px 100px 100px 100px 100px 100px 100px ;
+  /* grid-template-columns: 250px 100px 100px 100px 100px 50px; */
   grid-gap: 1em;
   margin: 20px;
 }
