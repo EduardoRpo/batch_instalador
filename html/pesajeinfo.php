@@ -1,9 +1,9 @@
 <?php
-include('modal/modal_firma.php');
 include('modal/modal_cambiarContrasena.php');
 include('modal/modal_observaciones.php');
 include('modal/modal_imprimirEtiquetas.php');
 include('modal/m_firma.php');
+include('modal/modal_condicionesMedio.php')
 ?>
 
 <!DOCTYPE html>
@@ -16,10 +16,11 @@ include('modal/m_firma.php');
   <meta name="description" content="Batch Record">
   <meta name="author" content="Samara Cosmetics">
 
-  <!-- Favicon icon -->
-  <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
   <title>Samara Cosmetics</title>
 
+  <!-- Favicon icon -->
+  <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
+  
   <!-- Bootstrap Core CSS -->
   <link href="../../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -85,7 +86,6 @@ include('modal/m_firma.php');
     </div>
 
     <div class="row">
-      <!-- column -->
       <div class="col-lg-12">
         <div id="accordion">
           <div class="card">
@@ -109,7 +109,6 @@ include('modal/m_firma.php');
                   <input type="text" class="form-control" id="in_numero_orden" readonly>
                   <input type="text" class="form-control" id="in_referencia" readonly>
                   <input type="text" class="form-control itemInfo" id="observaciones" readonly>
-                  <!-- <textarea class="form-control itemInfoObs" id="" rows="5" readonly></textarea> -->
 
                   <label>Tamaño Lote (Kg)</label>
                   <label>No Lote</label>
@@ -118,15 +117,13 @@ include('modal/m_firma.php');
                   <input type="text" class="form-control" id="in_tamano_lote" readonly>
                   <input type="text" class="form-control" id="in_numero_lote" readonly>
                   <input type="text" class="form-control" id="in_linea" readonly>
-                  
                 </div>
                 <div class="contenedorInfoObs">
                 </div>
-
               </div>
             </div>
           </div>
-          
+
           <div class="card">
             <div class="card-header" id="headingTwo">
               <h5 class="mb-0">
@@ -135,24 +132,16 @@ include('modal/m_firma.php');
                 </button>
               </h5>
             </div>
+
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
               <div class="card-body">
-                <div class="row justify-content-center" style="margin: 1%;  background-color: #C0C0C0">
-                  <div class="col-md-10 col-2 align-self-right">
-                    <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Parámetros de control</h3>
-                  </div>
-                  <div class="col-md-1 col-0 align-self-center">
-                    <h3 for="recipient-name" class="col-form-label" style=" background-color: #C0C0C0">&nbsp;&nbsp;&nbsp;Si</h3>
-                  </div>
-                  <div class="col-md-1 col-0 align-self-center">
-                    <h3 for="recipient-name" class="col-form-label" style=" background-color: #C0C0C0">&nbsp;&nbsp;&nbsp;No</h3>
-                  </div>
+                <div class="parametrosControl">
+                  <h3 for="recipient-name" class="col-form-label" style="text-align: center">Parámetros de Control</h3>
+                  <h3 for="recipient-name" class="col-form-label">&nbsp;&nbsp;&nbsp;Si</h3>
+                  <h3 for="recipient-name" class="col-form-label">&nbsp;&nbsp;&nbsp;No</h3>
                 </div>
-
                 <div class="row" id="preguntas-div" style="margin: 1%">
-
                 </div>
-
 
                 <div class="row" style="margin: 1%">
                   <div class="col-md-12 col-2 align-self-right">
@@ -235,96 +224,92 @@ include('modal/m_firma.php');
               <hr>
               <div class="card-body">
                 <!-- <div class="row" style="margin: 1%"> -->
-                  <!-- <div class="col-md-12 col-2 align-self-center"> -->
-                    <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Pesaje</h3>
-                  <!-- </div> -->
-                  <!-- <div class="col-md-12 col-2 align-self-center"> -->
-                    <form>
-                      <table class="table" id="tablePesaje" style="width: 100%;">
+                <!-- <div class="col-md-12 col-2 align-self-center"> -->
+                <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Pesaje</h3>
+                <!-- </div> -->
+                <!-- <div class="col-md-12 col-2 align-self-center"> -->
+                <form>
+                  <table class="table" id="tablePesaje" style="width: 100%;">
 
-                      </table>
-                    </form>
-                  <!-- </div> -->
+                  </table>
+                </form>
+                <!-- </div> -->
 
-                </div>
-                <hr>
-                <div class="row" style="margin: 1%">
-                  <!-- <div class="col-md-2 col-2 align-self-right">
+              </div>
+              <hr>
+              <div class="row" style="margin: 1%">
+                <!-- <div class="col-md-2 col-2 align-self-right">
                     <label for="in_fecha_pesaje" class="col-form-label">Fecha:</label>
                     <input type="date" class="form-control" id="in_fecha_pesaje" readonly>
                   </div> -->
-                  <div class="col-md-3 col-2 align-self-center">
-                    <label for="pesaje_realizado" class="col-form-label">Realizado Por:</label>
-                    <input type="text" class="form-control" id="pesaje_realizado" readonly>
-                  </div>
-
-                  <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                    <input type="button" class="btn btn-danger" id="pesaje_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
-                  </div>
-
-                  <div class="col-md-3 col-2 align-self-center">
-                    <label for="pesaje_verificado" class="col-form-label">Verificado Por:</label>
-                    <input type="text" class="form-control" id="pesaje_verificado" readonly>
-                  </div>
-                  <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                    <input type="button" class="btn btn-danger" id="pesaje_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
-                  </div>
+                <div class="col-md-3 col-2 align-self-center">
+                  <label for="pesaje_realizado" class="col-form-label">Realizado Por:</label>
+                  <input type="text" class="form-control" id="pesaje_realizado" readonly>
                 </div>
 
-                <div class="row justify-content-end mt-5" style="margin: 1%;text-align: right">
-                  <div class="col-md-12 col-2 align-self-end">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <!-- <button type="button" class="btn btn-primary" onclick="window.location.href = '/preparacion';">Aceptar -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalObservaciones">Aceptar
-                    </button>
-                  </div>
+                <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
+                  <input type="button" class="btn btn-danger" id="pesaje_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
                 </div>
 
+                <div class="col-md-3 col-2 align-self-center">
+                  <label for="pesaje_verificado" class="col-form-label">Verificado Por:</label>
+                  <input type="text" class="form-control" id="pesaje_verificado" readonly>
+                </div>
+                <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
+                  <input type="button" class="btn btn-danger" id="pesaje_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
+                </div>
               </div>
-            </div>
 
+              <div class="row justify-content-end mt-5" style="margin: 1%;text-align: right">
+                <div class="col-md-12 col-2 align-self-end">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  <!-- <button type="button" class="btn btn-primary" onclick="window.location.href = '/preparacion';">Aceptar -->
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalObservaciones">Aceptar
+                  </button>
+                </div>
+              </div>
+
+            </div>
           </div>
 
         </div>
+
       </div>
     </div>
+  </div>
 
-    <!-- jquery -->
-    <script src="../../assets/plugins/jquery/jquery.min.js"></script>
+  <!-- jquery -->
+  <script src="../../assets/plugins/jquery/jquery.min.js"></script>
 
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="../../assets/plugins/bootstrap/js/tether.min.js"></script>
-    <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+  <!-- Bootstrap tether Core JavaScript -->
+  <script src="../../assets/plugins/bootstrap/js/tether.min.js"></script>
+  <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
-    <!-- Datatables -->
-    <script type="text/javascript" src="../../html/vendor/datatables/datatables.min.js"></script>
-    <!-- <script src="html/vendor/bootstrap/js/popper.js"></script> -->
-    <!-- slimscrollbar scrollbar JavaScript -->
+  <!-- Datatables -->
+  <script type="text/javascript" src="../../html/vendor/datatables/datatables.min.js"></script>
+    
+  <!-- slimscrollbar scrollbar JavaScript -->
+  <script src="../../html/js/utils/jquery.slimscroll.js"></script>
 
-    <script src="../../html/js/utils/jquery.slimscroll.js"></script>
+  <!--Wave Effects -->
+  <script src="../../html/js/utils/waves.js"></script>
 
-    <!--Wave Effects -->
-    <script src="../../html/js/utils/waves.js"></script>
+  <!--Menu sidebar -->
+  <script src="../../html/js/utils/sidebarmenu.js"></script>
 
-    <!--Menu sidebar -->
-    <script src="../../html/js/utils/sidebarmenu.js"></script>
+  <!--stickey kit -->
+  <script src="../../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
 
-    <!--stickey kit -->
-    <script src="../../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+  <!--Custom JavaScript -->
+  <script src="../../html/js/utils/custom.min.js"></script>
+  <script src="../../html/vendor/jquery-confirm/jquery-confirm.min.js"></script>
+  <!-- <script src="../../html/js/datatables.js"></script> -->
+  <script src="../../html/js/global/loadinfo-global.js"></script>
+  <script src="../../html/js/pesaje/pesajeinfo.js"></script>
+  <script src="../../html/js/firmar/firmar.js"></script>
 
-    <!--Custom JavaScript -->
-    <script src="../../html/js/utils/custom.min.js"></script>
-    <script src="../../html/vendor/jquery-confirm/jquery-confirm.min.js"></script>
-    <!-- <script src="../../html/js/datatables.js"></script> -->
-    <script src="../../html/js/global/loadinfo-global.js"></script>
-    <script src="../../html/js/pesaje/pesajeinfo.js"></script>
-    <script src="../../html/js/firmar/firmar.js"></script>
-    <!-- <script src="../../html/js/validadores.js"></script> -->
-    <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
-    <!-- Toastr.js Después -->
-
-    <!--Alertify-->
-    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+  <!--Alertify-->
+  <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 </body>
 
 </html>

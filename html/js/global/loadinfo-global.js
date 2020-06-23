@@ -24,16 +24,22 @@ $.ajax({
     $('#in_tamano_lote').val(data.tamano_lote);
 });
 
+/* Cargar ventana de Condiciones Medio */
+
+$(document).ready(function () {
+    setTimeout(function(){ 
+        $('#modalCondicionesMedio').modal('show'); }, Math.floor(Math.random() * (300000 - 180000)) + 180000);
+});
+
+/* Cargar desinfectantes */
 
 $.ajax({
     url: `../../api/desinfectantes`,
     type: 'GET'
 }).done((data, status, xhr) => {
     data.forEach(desinfectante => {
-        $('#sel_producto_desinfeccion').val(' ');
         $('#sel_producto_desinfeccion').append(`<option value="${desinfectante.id}">${desinfectante.nombre}</option>`);
     });
-
 });
 
 //Validacion campos de preguntas diligenciados

@@ -7,7 +7,7 @@ include("modal/modal_condicionesMedio.php");
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="utf-8">
@@ -16,10 +16,11 @@ include("modal/modal_condicionesMedio.php");
   <meta name="description" content="Batch Record">
   <meta name="author" content="Teenus SAS">
 
+  <title>Samara Cosmetics</title>
+  
   <!-- Favicon icon -->
   <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
-  <title>Samara Cosmetics</title>
-
+  
   <!-- Bootstrap Core CSS -->
   <link href="../../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -143,7 +144,7 @@ include("modal/modal_condicionesMedio.php");
                 </div>
                 <div class="row" style="margin: 1%">
                   <div class="col-md-4 col-2 align-self-right">
-                    <label for="sel_producto_desinfeccion" class="col-form-label">Producto de desinfección</label>
+                    <label for="sel_producto_desinfeccion" class="col-form-label">Producto Desinfección</label>
                     <select class="selectpicker form-control in_desinfeccion" id="sel_producto_desinfeccion">
                       <option selected>Seleccione</option>
                     </select>
@@ -229,7 +230,6 @@ include("modal/modal_condicionesMedio.php");
                               </select>
                             </div>
                             <div class="buttons-wrapper">
-
                               <button class="btn" id="start-countdown">Iniciar</button>
                             </div>
                           </div>
@@ -427,12 +427,13 @@ include("modal/modal_condicionesMedio.php");
   <script src="../../html/js/utils/custom.min.js"></script>
   <script src="../../html/js/utils/datatables.js"></script>
   <script src="../../html/vendor/jquery-confirm/jquery-confirm.min.js"></script>
-  <script src="../../html/js/utils/clock.js"></script>
+  <script src="../../html/js/preparacion/clock.js"></script>
   <script src="../../assets/plugins/jquery/jquery.number.min.js"></script>
 
   <script src="../../html/js/global/loadinfo-global.js"></script>
   
   <script src="../../html/js/preparacion/preparacioninfo.js"></script>
+  <script src="../../html/js/pesaje/pesajeinfo.js"></script>
   <script src="../../html/js/firmar/firmar.js"></script>
 </body>
 

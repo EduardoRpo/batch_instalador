@@ -1,5 +1,7 @@
 let flagWeight = false;
 
+/* cargue de preguntas */
+
 $.ajax({
     url: `../../api/questions/1`,
     type: 'GET'
@@ -21,6 +23,8 @@ $.ajax({
 
 });
 
+/* Carga de Cargos  */
+
 $.ajax({
     url: `../../api/cargos`,
     type: 'GET'
@@ -31,7 +35,7 @@ $.ajax({
 
 });
 
-
+/* Tabla formula  */
 
 let tablePesaje = $('#tablePesaje').dataTable({
     ajax: {

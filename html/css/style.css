@@ -8224,6 +8224,27 @@ div.displayallinfo {
   grid-column-start: 2;
   grid-column-end: 3;
 }
+
+.condicionesMedio{
+  display: grid;
+  grid-template-columns: 30px 100px 80px;
+  grid-gap: 1em;
+  margin: 10px;
+  text-align: center;
+  justify-items: center;
+  align-items: baseline;
+  justify-content: center;
+}
+
+
+.fechaCondicionesMedio{
+  grid-column-start: 2;
+  grid-column-end: 4;
+
+  /* grid-column-start: 2;
+  grid-column-end: 3; */
+}
+
 /* Creacion Batch Record */
 
 .insertarTanque{

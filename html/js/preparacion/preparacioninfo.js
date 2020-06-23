@@ -1,3 +1,4 @@
+
 let pasos;
 //let idBatch = location.href.split('/')[4];
 //let referencia = location.href.split('/')[5];
@@ -8,6 +9,8 @@ Date.prototype.toDateInputValue = (function () {
     local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
     return local.toJSON().slice(0, 10);
 });
+
+/* Carga info del producto */
 
 $('#in_fecha').attr('min', new Date().toDateInputValue());
 $.ajax({
@@ -21,6 +24,8 @@ $.ajax({
     $('#in_nombre_referencia').val(data.nombre_referencia);
     $('#in_linea').val(data.nombre_linea);
 });
+
+/* Carga preguntas */
 
 $.ajax({
     url: `../../api/questions/2`,
@@ -42,16 +47,8 @@ $.ajax({
     });
 
 });
-$.ajax({
-    url: `../../api/desinfectantes`,
-    type: 'GET'
-}).done((data, status, xhr) => {
-    data.forEach(desinfectante => {
-        $('#sel_producto_desinfeccion').append(`<option value="${desinfectante.id}">${desinfectante.nombre}</option>`);
-    })
 
-});
-
+/* Carga maquina agitadores */
 
 $.ajax({
     url: `/api/agitadores`,
@@ -62,6 +59,8 @@ $.ajax({
     });
 });
 
+/* Carga maquina marmitas */
+
 $.ajax({
     url: `/api/marmitas`,
     type: 'GET'
@@ -71,6 +70,7 @@ $.ajax({
     });
 });
 
+/* Carga tabla de propiedades del producto */
 
 $.ajax({
     url: `/api/productsDetails/${referencia}`,
@@ -105,6 +105,12 @@ $.ajax({
     $('#espec_untosidad').html(data.untuosidad);
 });
 
+/* Valida que las maquinas tengan alguna seleccion */
+
+
+
+/* Carga instructivo preparación para producto */
+
 $.ajax({
     url: `/api/instructivos/${referencia}`,
     type: 'GET'
@@ -112,7 +118,9 @@ $.ajax({
     $('#pasos_instructivo').html('');
     pasos = data;
     data.forEach((instructivo, indx) => {
-        $('#pasos_instructivo').append(`<a href="javascript:void(0)" onclick="procesoTiempo(event)" class="proceso-instructivo" attr-indx="${indx}" attr-id="${instructivo.id}" attr-tiempo="${instructivo.tiempo}">PASO ${indx + 1}: ${instructivo.proceso} </a>  <br/>`);
+        $('#pasos_instructivo').append(`<a href="javascript:void(0)" onclick="procesoTiempo(event)" 
+        class="proceso-instructivo" attr-indx="${indx}" attr-id="${instructivo.id}" 
+        attr-tiempo="${instructivo.tiempo}">PASO ${indx + 1}: ${instructivo.proceso} </a>  <br/>`);
     });
 });
 

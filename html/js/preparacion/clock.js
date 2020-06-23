@@ -11,16 +11,24 @@ $(document).ready(function(){
     var hours = 0
 
     var interval = null;
-
     var clockType = undefined;
 
     $('button#start-countdown').on('click', function(){
+
+        const agitador = $('#sel_agitador').val();
+        const marmita = $('#sel_marmita').val();
+        
+        if(agitador == "Seleccione" || marmita == "Seleccione"){
+            alertify.set("notifier","position", "top-right"); alertify.error("Antes de continuar, seleccione el Agitador y la Marmita o Tanque");
+            return false;
+        }
+
         if($(ammount).val() != '' && $(ammount).val() > 0 && $(measure).val() != 0) {
             clockType = 'countdown'
             startClock()
         }
         else if ($(ammount).val() == '') {
-            alert('Type in the Ammount')
+            alertify.set("notifier","position", "top-right"); alertify.error("Seleccione el primer 'PASO' a Ejecutar.");
         }
         else if ($(measure).val() == 0) {
             alert('Select the Unit')
@@ -210,7 +218,7 @@ $(document).ready(function(){
 
         if (hours == 0 && minutes == 0 && seconds == 0 && hasStarted == true) {
             hasEnded = true
-            alert('El tiempo a finalizado!')
+            alertify.set("notifier","position", "top-right"); alertify.error("Tiempo completado.");
             queeProcess++;
             refreshInstructivo();
         }
@@ -218,6 +226,6 @@ $(document).ready(function(){
 
     function clear(intervalID) {
         clearInterval(intervalID)
-        console.log('cleared the interval called ' + intervalID)
+        //console.log('cleared the interval called ' + intervalID)
     }
 })
