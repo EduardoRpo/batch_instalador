@@ -6,7 +6,7 @@
       </div>
       <div class="modal-body">
         <label for="">Incidencias</label>
-        <label for="" style="margin-left: 300px;">Observaciones</label>
+        <label for="" style="margin-left: 390px;">Observaciones</label>
         <div class="observacion">
           <select class="custom-select" style="font-size: small;">
             <option value="" hidden selected>METODO</option>

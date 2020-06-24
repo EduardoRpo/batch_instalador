@@ -100,7 +100,7 @@ $("#cmbNoReferencia").change(function(){
 /* Adicionar y elimina campos para los tanques al crear batch record */
 
 var maxField = 5;
-var ps1 = 1;
+var tnq = 1;
 var pr = 1;
 var cont=1;
 var total = 0;
@@ -114,30 +114,34 @@ $("#adicionarPesaje").on('click', function(){
         return false;
     }
     
-    var template = '<select class="form-control" name="cmbtanque" id=":cmbTanque:">' +
+    var template = '<select class="form-control" name="cmbtanque" id=":cmbTanque:" onchange = "validarTanque();">' +
                     '</select>' +
-                    '<input type="number" class="form-control" id=":txtCantidad:" name="txtCantidad[]" placeholder="Cantidad" value="0" onblur="CalcularTanque(this.value)">' +
+                    '<input type="number" class="form-control" id=":txtCantidad:" name="txtCantidad[]" placeholder="Cantidad" value="0" onblur="CalcularTanque()">' +
                     '<input type="number" class="form-control" id=":txtTotal:" name="txtTotal[]" placeholder="Total" readonly>' +
                     '<button class="btn btn-warning eliminarTanque" type="button">X</button>'
 
     var nuevo = template.replace(':cmbTanque:', 'cmbTanque'+cont).replace(':txtCantidad:', 'txtCantidad'+cont).replace(':txtTotal:', 'txtTotal'+cont );
     var totaltl = $('input#transito').val();
 
-    if(ps1 == 1) {
+    if(tnq == 1) {
         $(".insertarTanque").append(nuevo);
         cargarTanque(cont)
-        ps1++;
+        tnq++;
         cont++;
 
-    }else if(ps1 >= 2 && ps1 <= maxField && totaltl != 0 && totaltl != ""){
+    }else if(tnq >= 2 && tnq <= maxField && totaltl != 0 && totaltl != ""){
         $(".insertarTanque").append(nuevo);
         cargarTanque(cont)
-        ps1++;
+        cont--
+        $('#txtCantidad'+ cont).attr("readonly","readonly");
+        $('#cmbTanque'+ cont).attr("disabled", true);
+        cont++;
+        tnq++;
         cont++;
         $('#transito').val(0);
 
     }else{
-        alertify.set("notifier","position", "top-right"); alertify.error("Para adicionar más tanques diligencie todos los campos vacios.");
+        alertify.set("notifier","position", "top-right"); alertify.error("Para adicionar más tanques diligencie todos los campos vacios o corriga los datos.");
         }        
 });
 
@@ -165,46 +169,76 @@ function cargarTanque(cont) {
     });
 }
 
-var tanque="";
-
 /* Calcular el valor de los tanques */
 
-function CalcularTanque(cantidad) {
+var tanque="";
 
+function validarTanque(){
+    cont--;
+    let cant = $('#txtCantidad' + cont).val();
+    if(cant!= ""){
+        cont++;
+        CalcularTanque();
+    }
+}
+
+function CalcularTanque() {
+
+    $('#sumaTanques').val('');
     cont--;
 
-    var cambio = '#cmbTanque' + cont + ' option:selected';
-    var tanque = $(cambio).val();
-    
+    let cambio = '#cmbTanque' + cont + ' option:selected';
+    let tanque = $(cambio).val();
+    let cantidad = $('#txtCantidad' + cont ).val();
+
+
     if (tanque == "Tanque"){
         cont++;
         return false;
     }
 
     total = tanque * cantidad;
+    $('#txtTotal'+cont).val(total);
+    $('#transito').val(total);
 
+    var txtTotal1 = $('#txtTotal1').val();
+    var txtTotal2 = $('#txtTotal2').val();
+    var txtTotal3 = $('#txtTotal3').val();
+    var txtTotal4 = $('#txtTotal4').val();
+    var txtTotal5 = $('#txtTotal5').val();
+    
     var sumaTanques = $('#sumaTanques').val();
     
     if(cont==1 ){
         sumaTanques=0;
     }
+
+    if(txtTotal1 == undefined || txtTotal1==""){
+        txtTotal1 = 0;
+    }if(txtTotal2 == undefined || txtTotal2==""){
+        txtTotal2 = 0;
+    }if(txtTotal3 == undefined || txtTotal3==""){
+        txtTotal3 = 0;
+    }if(txtTotal4 == undefined || txtTotal4==""){
+        txtTotal4 = 0;
+    }if(txtTotal5 == undefined || txtTotal5==""){
+        txtTotal5 = 0;
+    }   
       
-    sumaTanques = parseInt(sumaTanques) + total
+    sumaTanques =  parseInt(txtTotal1) + parseInt(txtTotal2) + parseInt(txtTotal3) + parseInt(txtTotal4) + parseInt(txtTotal5);
+    //sumaTanques = parseInt(sumaTanques) + total
+    
     var cantidadLote = $('#tamanototallote').val();
     
     if(sumaTanques > cantidadLote ){
         alertify.set("notifier","position", "top-right"); alertify.error("La configuración de Tanques supera el Tamaño del lote");
+        $('input#transito').val('');
         cont++;
         return false;
     }else{
-        $('#sumaTanques').val(sumaTanques);    
+        $('#sumaTanques').val(sumaTanques);
     }
-
-
-
-    $('#txtTotal'+cont).val(total);
-    $('#transito').val(total);
-    
+       
     if(tanque!='Tanque'){
         cont++;
     }
@@ -221,7 +255,7 @@ $(document).on("click",".eliminarTanque", function(){
     $('#txtTotal' + cont).remove();
     $(this).remove();
         
-    ps1--;
+    tnq--;
 
     var temporal = $('#txtTotal1').val();
     $('#transito').val(temporal);
@@ -249,7 +283,10 @@ $(document).on("click",".eliminarTanque", function(){
     sumaTanques =  parseInt(txtTotal1) + parseInt(txtTotal2) + parseInt(txtTotal3) + parseInt(txtTotal4) + parseInt(txtTotal5)
 
     $('#sumaTanques').val(sumaTanques);
-
+    cont--;
+    $('#txtCantidad'+ cont).removeAttr("readonly");
+    $('#cmbTanque'+ cont).attr("disabled", false);
+    cont++;
 });
 
 /* cerrar modal al crear Batch */
