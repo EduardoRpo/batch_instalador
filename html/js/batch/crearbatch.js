@@ -58,8 +58,6 @@ function recargarDatos(){
         success: function(r)
         {
             var info = JSON.parse(r);
-            //console.log(info);
-
 
             $('#idbatch').val(info[0].referencia);
             $('#nombrereferencia').val(info[0].nombre);
@@ -99,29 +97,29 @@ $("#cmbNoReferencia").change(function(){
 
 /* Adicionar y elimina campos para los tanques al crear batch record */
 
-var maxField = 5;
-var tnq = 1;
-var pr = 1;
-var cont=1;
-var total = 0;
+let maxField = 5;
+let tnq = 1;
+let pr = 1;
+let cont=1;
+let total = 0;
 
 $("#adicionarPesaje").on('click', function(){
-    var unidades = $('#unidadesxlote').val(); 
-    var lote = $('#tamanototallote').val();
+    let unidades = $('#unidadesxlote').val(); 
+    let lote = $('#tamanototallote').val();
     
     if(unidades == "" || unidades == 0 || lote == 0 ){
         alertify.set("notifier","position", "top-right"); alertify.error("Para adicionar Tanques, complete todos los campos.");
         return false;
     }
     
-    var template = '<select class="form-control" name="cmbtanque" id=":cmbTanque:" onchange = "validarTanque();">' +
+    let template = '<select class="form-control" name="cmbtanque" id=":cmbTanque:" onchange = "validarTanque();">' +
                     '</select>' +
                     '<input type="number" class="form-control" id=":txtCantidad:" name="txtCantidad[]" placeholder="Cantidad" value="0" onblur="CalcularTanque()">' +
                     '<input type="number" class="form-control" id=":txtTotal:" name="txtTotal[]" placeholder="Total" readonly>' +
                     '<button class="btn btn-warning eliminarTanque" type="button">X</button>'
 
-    var nuevo = template.replace(':cmbTanque:', 'cmbTanque'+cont).replace(':txtCantidad:', 'txtCantidad'+cont).replace(':txtTotal:', 'txtTotal'+cont );
-    var totaltl = $('input#transito').val();
+    let nuevo = template.replace(':cmbTanque:', 'cmbTanque'+cont).replace(':txtCantidad:', 'txtCantidad'+cont).replace(':txtTotal:', 'txtTotal'+cont );
+    let totaltl = $('input#transito').val();
 
     if(tnq == 1) {
         $(".insertarTanque").append(nuevo);
@@ -201,13 +199,13 @@ function CalcularTanque() {
     $('#txtTotal'+cont).val(total);
     $('#transito').val(total);
 
-    var txtTotal1 = $('#txtTotal1').val();
-    var txtTotal2 = $('#txtTotal2').val();
-    var txtTotal3 = $('#txtTotal3').val();
-    var txtTotal4 = $('#txtTotal4').val();
-    var txtTotal5 = $('#txtTotal5').val();
+    let txtTotal1 = $('#txtTotal1').val();
+    let txtTotal2 = $('#txtTotal2').val();
+    let txtTotal3 = $('#txtTotal3').val();
+    let txtTotal4 = $('#txtTotal4').val();
+    let txtTotal5 = $('#txtTotal5').val();
     
-    var sumaTanques = $('#sumaTanques').val();
+    let sumaTanques = $('#sumaTanques').val();
     
     if(cont==1 ){
         sumaTanques=0;
@@ -228,7 +226,7 @@ function CalcularTanque() {
     sumaTanques =  parseInt(txtTotal1) + parseInt(txtTotal2) + parseInt(txtTotal3) + parseInt(txtTotal4) + parseInt(txtTotal5);
     //sumaTanques = parseInt(sumaTanques) + total
     
-    var cantidadLote = $('#tamanototallote').val();
+    let cantidadLote = $('#tamanototallote').val();
     
     if(sumaTanques > cantidadLote ){
         alertify.set("notifier","position", "top-right"); alertify.error("La configuración de Tanques supera el Tamaño del lote");
@@ -257,16 +255,16 @@ $(document).on("click",".eliminarTanque", function(){
         
     tnq--;
 
-    var temporal = $('#txtTotal1').val();
+    let temporal = $('#txtTotal1').val();
     $('#transito').val(temporal);
 
-    var txtTotal1 = $('#txtTotal1').val();
-    var txtTotal2 = $('#txtTotal2').val();
-    var txtTotal3 = $('#txtTotal3').val();
-    var txtTotal4 = $('#txtTotal4').val();
-    var txtTotal5 = $('#txtTotal5').val();
+    let txtTotal1 = $('#txtTotal1').val();
+    let txtTotal2 = $('#txtTotal2').val();
+    let txtTotal3 = $('#txtTotal3').val();
+    let txtTotal4 = $('#txtTotal4').val();
+    let txtTotal5 = $('#txtTotal5').val();
     
-    var sumaTanques = 0;
+    let sumaTanques = 0;
 
     if(txtTotal1 == undefined){
         txtTotal1 = 0;

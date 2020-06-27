@@ -70,7 +70,7 @@ let tablePesaje = $('#tablePesaje').dataTable({
                 
             },
             
-            /* render: $.fn.dataTable.render.number( ',', '.', 10), */
+            /* render: $.fn.dataTable.render.number( ',', '.', 3), */
             
         },
         {
@@ -79,7 +79,7 @@ let tablePesaje = $('#tablePesaje').dataTable({
             render: (data, type, row) => {
                 
                 if (flagWeight) {
-                    return ((data * batch.tamano_lote) / 1000) * 10;
+                    return ((data * batch.tamano_lote) / 1000) / 10;
                     //$.fn.dataTable.render.number( '.', ',', 2, '' )}
                 } else {
                     return data * batch.tamano_lote * 10;

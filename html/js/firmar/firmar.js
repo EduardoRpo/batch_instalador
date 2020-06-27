@@ -43,7 +43,9 @@ function enviar() {
                 id='';
                 let firma = template.replace(':firma:', data.urlfirma);
                 parent.append(firma).html
-
+                
+                /* $('#imprimirEtiquetas').show(); /* Imprimir etiquetas */
+                
                 if(btnOprimido[1]=='verificado'){
                     cont = 1;
                 }

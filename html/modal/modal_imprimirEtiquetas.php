@@ -7,7 +7,7 @@
       <div class="modal-body">
         <div class="imprimir">
         <img src="../../assets/images/icon/impresora.png" width="80px">
-        <h5 style="text-align: center;">Imprimir Etiquetas Virtuales</h5>
+        <h5 style="text-align: center;">Imprimir Etiquetas</h5>
         </div>
         
       </div>

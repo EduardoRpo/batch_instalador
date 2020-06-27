@@ -28,7 +28,7 @@ $.ajax({
 
 $(document).ready(function () {
     setTimeout(function(){ 
-        $('#modalCondicionesMedio').modal('show'); }, Math.floor(Math.random() * (300000 - 180000)) + 180000);
+        $('#modalCondicionesMedio').modal('show'); }, Math.floor(Math.random() * (300000 - 180000)) + 180000); /* 5 min y 15min */
 });
 
 /* Cargar desinfectantes */

@@ -367,6 +367,13 @@ include("modal/modal_condicionesMedio.php");
                   </button>
                 </div>
                 <hr>
+                
+                <div class="row" style="margin: 1%">
+                  <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down" data-toggle="modal" data-target="#modalObservaciones" style="margin-left: 1%">
+                    Observaciones y/o Incidencias en el proceso
+                  </button>
+                </div>
+                <hr>
                 <div class="row" style="margin: 1%">
                   <!-- <div class="col-md-2 col-2 align-self-right">
                 <label for="in_realizado_2" class="col-form-label">Fecha</label>
@@ -394,7 +401,7 @@ include("modal/modal_condicionesMedio.php");
                   <div class="col-md-12 col-2 align-self-center" style="margin-left: 85%">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <!-- <button type="button" class="btn btn-primary" onclick="window.location.href = '../html/aprobacion.html';">Aceptar -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalObservaciones">Aceptar
+                    <button type="button" class="btn btn-primary">Aceptar
                     </button>
                   </div>
                 </div>

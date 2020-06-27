@@ -8225,6 +8225,8 @@ div.displayallinfo {
   grid-column-end: 3;
 }
 
+/* Modal Condiciones Medio */
+
 .condicionesMedio{
   display: grid;
   grid-template-columns: 30px 100px 80px;
@@ -8257,6 +8259,7 @@ div.displayallinfo {
 .insertarRefMulti{
   display: grid;
   grid-template-columns: 450px 100px 100px 50px;
+  /* grid-template-columns: 450px 100px 100px 50px; */
   /* grid-template-columns: 250px 100px 100px 100px 100px 50px; */
   grid-gap: 1em;
   margin: 20px;

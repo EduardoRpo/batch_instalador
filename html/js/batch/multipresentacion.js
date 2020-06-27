@@ -6,6 +6,7 @@ $('#tablaBatch tbody').on( 'click', 'tr', function () {
 });
 
 function multipresentacion() {
+
     if ($("input[name='optradio']:radio").is(':checked')) {
         
         $.ajax({
@@ -14,22 +15,11 @@ function multipresentacion() {
             'data':{"operacion" : "8", id : data.id_batch},
             
             success: function(r){
-                /* var $select = $('#MultiReferencia');
-                $('#MultiReferencia').empty();*/
                 var info = JSON.parse(r);  
                 
                 if(info!=''){
                     $('#Modal_Multipresentacion').modal('show');
-                    
-                   /*  $select.append('<option disabled selected>' + "Seleccione una opción" + '</option>');
-                
-                    $.each(info, function(i, value) {
-                        $select.append('<option value=' + i.id + '>' + value.nombre_referencia + '</option>');
-                    });
-                    
-                    $('#totalMulti').val('');
-                    $('#Modal_Multipresentacion').modal('show'); */
-                    }
+                }
 
                 else{
                   alertify.set("notifier","position", "top-right"); alertify.error("No existen referencias asociadas para este producto.");
@@ -44,27 +34,25 @@ function multipresentacion() {
 
 /* Adicionar y multipresentacion en un batch*/
 
-var maxField = 5;
-var ps = 1;
-var pr = 1;
-var cont=1;
-var total = 0;
+let maxRef = 5;
+ps = 1;
+pr = 1;
+cont=0;
+total = 0;
 
 $("#masMulti").on('click', function(){
-    //var unidades = $('#unidadesxlote').val(); 
-    //var lote = $('#tamanototallote').val();
-    
-    /* if(unidades == "" || unidades == 0 || lote == 0 ){
-        alertify.set("notifier","position", "top-right"); alertify.error("Para adicionar Tanques, complete todos los campos.");
-        return false;
-    } */
-    
+    cont++;
+
+    if ($('#inputcalculoTotal').is(':hidden')) {
+        $('#inputcalculoTotal').show();
+    } 
+
     var template = '<select class="form-control" name="MultiReferencia" id=":cmbMultiReferencia:" onchange="cargarReferenciaM();" required>' +
                     '</select>' +
                     '<input type="text" class="form-control" id=":cantidadMulti:" name="cantidadMulti" placeholder="Unidades" onblur="CalculoloteMulti(this.value);">' +
                     '<input type="text" class="form-control" id=":tamanoloteMulti:" name="tamanoloteMulti" readonly placeholder="Lote">' +
-                    '<input type="text" class="form-control" id=":densidadMulti:" name="densidadMulti" placeholder="Densidad" hidden >' + /* hidden */
-                    '<input type="text" class="form-control" id=":presentacionMulti:" name="presentacionMulti" placeholder="Presentación" hidden >' + /* hidden */
+                    '<input type="text" class="form-control" id=":densidadMulti:" name="densidadMulti" placeholder="Densidad" hidden>' + /* hidden */
+                    '<input type="text" class="form-control" id=":presentacionMulti:" name="presentacionMulti" placeholder="Presentación" hidden>' + /* hidden */
                     '<button class="btn btn-warning eliminarMulti" type="button">X</button>'
 
     var nuevo = template.replace(':cmbMultiReferencia:', 'cmbMultiReferencia'+ cont).replace(':cantidadMulti:', 'cantidadMulti'+ cont).replace(':tamanoloteMulti:', 'tamanoloteMulti'+ cont).replace(':densidadMulti:', 'densidadMulti'+ cont ).replace(':presentacionMulti:', 'presentacionMulti'+ cont );
@@ -74,17 +62,19 @@ $("#masMulti").on('click', function(){
         $(".insertarRefMulti").append(nuevo);
         cargarMulti(cont)
         ps++;
-        cont++;
 
-    }else if(ps >= 2 && ps <= maxField && totaltl != 0 && totaltl != ""){
+    }else if(ps >= 2 && ps <= maxRef && totaltl != 0 && totaltl != ""){
         $(".insertarRefMulti").append(nuevo);
         cargarMulti(cont)
-        ps++;
+        cont--
+        $('#cantidadMulti'+ cont).attr("readonly","readonly");
+        $('#cmbMultiReferencia'+ cont).attr("disabled", true);
         cont++;
+        ps++;
         $('#transitoMulti').val(0);
 
     }else{
-        alertify.set("notifier","position", "top-right"); alertify.error("Para adicionar más referencias diligencie todos los campos vacios.");
+        alertify.set("notifier","position", "top-right"); alertify.error("Para adicionar otras Presentaciones diligencie todos los campos vacios o corriga los datos.");
         }        
 });
 
@@ -100,7 +90,7 @@ function cargarMulti(cont) {
         success: function(r){
             var $select = $('#cmbMultiReferencia' + cont);
             var info = JSON.parse(r);            
-
+            console.log(info);
             $select.append('<option disabled selected>' + "Multipresentacion" + '</option>');
             
             $.each(info, function(i, value) {
@@ -112,11 +102,11 @@ function cargarMulti(cont) {
 }
 
 /* cargar datos de acuerdo con la seleccion de multipresentacion */
+var sel;
 
 function cargarReferenciaM(){
-    cont--;
-    var combo = document.getElementById("cmbMultiReferencia" + cont);
-    var sel = combo.options[combo.selectedIndex].text;
+    
+    sel =  $("#cmbMultiReferencia"+ cont +" option:selected").text();
 
     $.ajax({
         type: "POST",
@@ -126,7 +116,6 @@ function cargarReferenciaM(){
         success: function(r)
         {
             var info = JSON.parse(r);
-            cont++;
                       
             $.ajax({
                 type: "POST",
@@ -136,39 +125,51 @@ function cargarReferenciaM(){
                 success: function(r)
                 {
                     var info = JSON.parse(r);
-                    cont--;
                     
                     $('#presentacionMulti'+cont).val(info[0].presentacion);
                     $('#densidadMulti'+cont).val(info[0].densidad);
                     $('#loteTotal').val(data.tamano_lote);
+                    
                 }
             });
            
         }
     });
-
+    validarMulti();
 }
 
 /* Calcular Lote de acuerdo con la seleccion y las unidades a fabricar */
 
+function validarMulti(){
+
+    var cant = $('#cantidadMulti' + cont).val();
+    if(cant!= ""){
+        CalculoloteMulti();
+    }
+}
+
+
 /* calcular Tamaño del Lote */
 
-function CalculoloteMulti (cantidad) {
-    //cont--;
+function CalculoloteMulti () {
 
-    var combo = document.getElementById("cmbMultiReferencia" + cont);
-    var sel = combo.options[combo.selectedIndex].text;
-    
+    var cantidad = $('#cantidadMulti' + cont ).val();
+    var densidad = $('#densidadMulti' + cont).val();
+    var presentacion = $('#presentacionMulti' + cont).val();
+
     if (sel == "Multipresentacion"){
-        cont++;
         return false;
     }
 
-    var densidad = $('#densidadMulti' + cont).val();
-    var presentacion = $('#presentacionMulti' + cont).val();
-    
-    total = ((densidad * cantidad * presentacion)/1000)*( 1 + 0.03);
+    total = parseInt(((densidad * cantidad * presentacion)/1000)*( 1 + 0.03));
     $('#tamanoloteMulti' + cont).val(total);    
+    $('#transitoMulti').val(total);
+
+    var txtTotalm1 = $('#tamanoloteMulti1').val();
+    var txtTotalm2 = $('#tamanoloteMulti2').val();
+    var txtTotalm3 = $('#tamanoloteMulti3').val();
+    var txtTotalm4 = $('#tamanoloteMulti4').val();
+    var txtTotalm5 = $('#tamanoloteMulti5').val();
 
     var sumaMulti = $('#sumaMulti').val();
     
@@ -176,25 +177,77 @@ function CalculoloteMulti (cantidad) {
         sumaMulti=0;
     }
     
+    if(txtTotalm1 == undefined || txtTotalm1==""){
+        txtTotalm1 = 0;
+    }if(txtTotalm2 == undefined || txtTotalm2==""){
+        txtTotalm2 = 0;
+    }if(txtTotalm3 == undefined || txtTotalm3==""){
+        txtTotalm3 = 0;
+    }if(txtTotalm4 == undefined || txtTotalm4==""){
+        txtTotalm4 = 0;
+    }if(txtTotalm5 == undefined || txtTotalm5==""){
+        txtTotalm5 = 0;
+    }  
     
-    sumaMulti = parseInt(sumaMulti) + total
+    sumaMulti =  parseInt(txtTotalm1) + parseInt(txtTotalm2) + parseInt(txtTotalm3) + parseInt(txtTotalm4) + parseInt(txtTotalm5);
+    
     var cantidadLote = $('#loteTotal').val();
     
     if(sumaMulti > cantidadLote ){
-        alertify.set("notifier","position", "top-right"); alertify.error("El tamaño del lote para Multipresentación supera el Tamaño del lote inicial");
-        cont--;
+        alertify.set("notifier","position", "top-right"); alertify.error("El tamaño del lote para esta referencia de Multipresentación supera el Tamaño del lote inicial");
+        $('input#transitoMulti').val('');
         return false;
     }else{
         $('#sumaMulti').val(sumaMulti);    
     }
-
-    //$('#txtTotal'+cont).val(total);
-    $('#transitoMulti').val(total);
-    
-    /* if(sel!='Multipresentacion'){
-        cont++;
-    } */
-        
+ 
 }
 
+/* Eliminar Multipresentacion */
+
+$(document).on("click",".eliminarMulti", function(){
     
+    $('#cmbMultiReferencia' + cont).remove();
+    $('#cantidadMulti'+ cont).remove();
+    $('#tamanoloteMulti' + cont).remove();
+    $('#densidadMulti' + cont).remove();
+    $('#presentacionMulti' + cont).remove();
+    $(this).remove();
+        
+    cont--;
+
+    var temp = $('#txtTotalm' + cont).val();
+    $('#transito').val(temp);
+
+    var txtTotalm1 = $('#tamanoloteMulti1').val();
+    var txtTotalm2 = $('#tamanoloteMulti2').val();
+    var txtTotalm3 = $('#tamanoloteMulti3').val();
+    var txtTotalm4 = $('#tamanoloteMulti4').val();
+    var txtTotalm5 = $('#tamanoloteMulti5').val();
+    
+    var sumaPresentaciones = 0;
+
+    if(txtTotalm1 == undefined){
+        txtTotalm1 = 0;
+    }if(txtTotalm2 == undefined){
+        txtTotalm2 = 0;
+    }if(txtTotalm3 == undefined){
+        txtTotalm3 = 0;
+    }if(txtTotalm4 == undefined){
+        txtTotalm4 = 0;
+    }if(txtTotalm5 == undefined){
+        txtTotalm5 = 0;
+    }   
+
+    sumaPresentaciones =  parseInt(txtTotalm1) + parseInt(txtTotalm2) + parseInt(txtTotalm3) + parseInt(txtTotalm4) + parseInt(txtTotalm5)
+
+    $('#sumaMulti').val(sumaPresentaciones);
+    $('#cantidadMulti'+ cont).removeAttr("readonly");
+    $('#cmbMultiReferencia'+ cont).attr("disabled", false);
+});
+
+/* cerrar modal al crear Batch */
+
+function cerrarModal(){
+    $('#modalCrearBatch').modal('hide');
+}    

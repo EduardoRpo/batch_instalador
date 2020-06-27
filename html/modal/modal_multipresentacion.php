@@ -9,16 +9,15 @@
         </button>
       </div>
       <div class="modal-body">
-        <input class="btn btn-primary" id="masMulti" type="button" value="Adicionar" style="width: 150px;" >
-        <input type="text" id="transitoMulti" hidden>
-         
-          <div class="insertarRefMulti mb-3 mt-3" >
-        
-          </div>        
-      </div>
+        <div class="row">
+            <input class="btn btn-primary ml-3" id="masMulti" type="button" value="Adicionar" style="width: 150px;" >
+            <label class="labelcenter ml-3 mr-3">Tamaño Lote</label>
+            <input type="text" id="loteTotal" class="form-control" style = "width: 100px;" readonly>
+            <input type="text" id="transitoMulti" hidden>
+          </div>
+            <div class="insertarRefMulti mb-3 mt-3"></div>        
+        </div>
       <div class="inputcalculoTotal mb-3 mr-5" style="display: flex; justify-content:flex-end">  
-        <label class="labelcenter mr-3">Tamaño Lote</label>
-        <input type="text" id="loteTotal" class="form-control" style = "width: 100px;" readonly>
         <label class="labelcenter ml-3 mr-3" style="padding-right: 10px;">Total</label>
         <input id="sumaMulti" type="text" class="form-control" style="width: 28%;" readonly autocomplete="off">
       </div>

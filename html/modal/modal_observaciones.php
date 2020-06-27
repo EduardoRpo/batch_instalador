@@ -10,6 +10,7 @@
         <div class="observacion">
           <select class="custom-select" style="font-size: small;">
             <option value="" hidden selected>METODO</option>
+            <option value=""></option>
             <option value="">FALTA PROGRAMACIÓN PRODUCCIÓN</option>
             <option value="">FALTA ESTANDARIZACIÓN PRODUCTO</option>
             <option value="">FALTA DOCUMENTACIÓN NECESARIA PARA EL CUMPLIMIENTO DE LA LABOR</option>

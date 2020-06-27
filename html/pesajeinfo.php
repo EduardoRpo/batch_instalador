@@ -264,7 +264,7 @@ include('modal/modal_condicionesMedio.php')
                 <div class="col-md-12 col-2 align-self-end">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                   <!-- <button type="button" class="btn btn-primary" onclick="window.location.href = '/preparacion';">Aceptar -->
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalObservaciones">Aceptar
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#m_CondicionesMedio">Aceptar
                   </button>
                 </div>
               </div>
