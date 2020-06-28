@@ -47,25 +47,12 @@ $(document).ready(function() {
 });
 
 
-
-/*  */
-/* 
-$(document).ready(function() {
-    var table = $('#tablaBatch').dataTable();
-
-    // Sort in the order that was origially in the HTML
-    var nTd = table.fnGetTd( $('#tablaBatch tbody tr:eq(1)')[0], 1 );
-    console.log( nTd );
-} ); */
-
 /* Cargar datos para Actualizar registros */
 
 $(document).on('click', '.link-editar', function(e){
     e.preventDefault();
     editar = true;
 
-    
-    //let id = $(this).parent().parent().children().first().text();
     var texto = $(this).parent().parent().children()[1];
     var id = $(texto).text();
     
@@ -146,12 +133,31 @@ function actualizarTabla() {
   /* Guardar datos de Crear y Actualizar batch*/
 
 function guardarDatos(){         
-        //e.preventDefault();
         var d = new Date();
 
         var mes = d.getMonth() + 1;
         var dia = d.getDate();
         var fechaActual = d.getFullYear() + '/' + (mes<10 ? '0' : '') + mes + '/' + (dia<10 ? '0' : '') + dia;
+        var tqn = [];
+        var tmn = [];
+
+        var j=1;
+
+        for(i=0; i<cont ; i++){
+            tqn[i] = $('#cmbTanque' + j + ' option:selected').val();
+            j++;
+        }
+        
+        j=1;
+        
+        for(i=0; i<cont ; i++){
+            tmn[i] = $('#txtCantidad'+ j).val();
+            j++;
+        }
+
+        /* console.log(tqn);
+        console.log(tmn);
+        return false; */
 
         if(!editar){
             datos = {
@@ -163,6 +169,8 @@ function guardarDatos(){
                 programacion: $('#fechaprogramacion').val(),
                 fecha : fechaActual,
                 cantidad: "1",
+                tqns: tqn, 
+                tmn: tmn,
                 
                 };
                 //console.log(datos.cantidad);

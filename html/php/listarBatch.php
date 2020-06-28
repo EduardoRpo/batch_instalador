@@ -121,12 +121,15 @@
       $cantidad = $_POST['cantidad'];
       $id = $_POST['ref'];
       //$nombreReferencia = $_POST['nref'];
-      $unidadesxlote = $_POST['unidades'];
-      $tamanototallote = $_POST['lote'];
-      $fechaprogramacion = $_POST['programacion'];
-      $fechahoy = $_POST['fecha'];
+      $unidadesxlote          = $_POST['unidades'];
+      $tamanototallote        = $_POST['lote'];
+      $fechaprogramacion      = $_POST['programacion'];
+      $fechahoy               = $_POST['fecha'];
       $tamanolotepresentacion = $_POST['presentacion'];
+      $tanque                 = $_POST['tqns'];
+      $tamanotqn              = $_POST['tmn'];
 
+      
       if ($fechaPrograma = "") {
        $estado = 'null';
       } else {
@@ -147,8 +150,17 @@
           $i++;
         }
       }
-     
 
+      if( sizeof($tanque) > 0 ){
+          
+        $id = mysqli_insert_id($conn);
+
+        for($i=0; $i < sizeof($tanque); ++$i){
+          $query_tanque = "INSERT INTO batch_tanques (tanque, cantidad, id_batch) VALUES('$tanque[$i]' , '$tamanotqn[$i]', '$id')";
+          $result = mysqli_query($conn, $query_tanque);
+        }
+      }
+      
       if(!$result){
         die('Error');
       }else{
