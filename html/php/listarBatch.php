@@ -18,8 +18,7 @@
     }
 
 
-  $op = $_POST['operacion'];
-
+    $op = $_POST['operacion'];
 
    switch($op){
     case 1: //listar Batch
@@ -62,17 +61,24 @@
 
     case 2: //Eliminar
       $id_batch = $_POST['id'];
-      
-        $query_batch = "DELETE FROM batch WHERE id_batch = $id_batch";
-        $result = mysqli_query($conn, $query_batch);
+      //echo $id_batch;  
+    
+      $query_batch = "DELETE FROM batch WHERE id_batch = $id_batch";
+      $result = mysqli_query($conn, $query_batch);
 
-        if($result){
-            echo 'Eliminado';
-        }else{
-            echo 'No Eliminado';
-        }
-        mysqli_free_result($query_batch);
-        mysqli_close($conn);
+      /* $query_batch_tanques = "DELETE FROM batch_tanques WHERE id_batch = $id_batch";
+      $result_tanques = mysqli_query($conn, $query_batch_tanques); */
+
+
+      if($result){
+        $query_batch_tanques = "DELETE FROM batch_tanques WHERE id_batch = $id_batch";
+        $result_tanques = mysqli_query($conn, $query_batch_tanques);
+      }else{
+          echo 'No Eliminado';
+      }
+      //mysqli_free_result($query_batch);
+      //mysqli_free_result($query_batch_tanques);
+      mysqli_close($conn);
     break;
 
     case 3: //cargar selector de referencias
