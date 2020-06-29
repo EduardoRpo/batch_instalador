@@ -46,12 +46,16 @@ $(document).ready(function() {
     });
 });
 
+/* Cambiar puntero del mouse al tocar los botones de actualizar y eliminar */
+
+$('.link-editar').css('cursor','pointer');
 
 /* Cargar datos para Actualizar registros */
 
 $(document).on('click', '.link-editar', function(e){
     e.preventDefault();
     editar = true;
+    limpiarTanques();
 
     var texto = $(this).parent().parent().children()[1];
     var id = $(texto).text();
@@ -63,20 +67,39 @@ $(document).on('click', '.link-editar', function(e){
         
         
          success: function(response){
-            var info = JSON.parse(response);            
-            $('#idbatch').val(info.id_batch);
-            $('#referencia').val(info.referencia);
-            $('#nombrereferencia').val(info.nombre_referencia);
-            $('#marca').val(info.marca);
-            $('#propietario').val(info.propietario);
-            $('#producto').val(info.nombre_referencia);
-            $('#presentacioncomercial').val(info.presentacion);
-            $('#linea').val(info.linea);
-            $('#notificacionSanitaria').val(info.notificacion_sanitaria);
-            $('#densidad').val(info.densidad);
-            $('#unidadesxlote').val(info.unidad_lote);
-            $('#tamanototallote').val(info.tamano_lote);
-            $('#fechaprogramacion').val(info.fecha_programacion);
+            
+            var info = JSON.parse(response);
+                       
+            $('#idbatch').val(info[0].id_batch);
+            $('#referencia').val(info[0].referencia);
+            $('#nombrereferencia').val(info[0].nombre_referencia);
+            $('#marca').val(info[0].marca);
+            $('#propietario').val(info[0].propietario);
+            $('#producto').val(info[0].nombre_referencia);
+            $('#presentacioncomercial').val(info[0].presentacion);
+            $('#linea').val(info[0].linea);
+            $('#notificacionSanitaria').val(info[0].notificacion_sanitaria);
+            $('#densidad').val(info[0].densidad);
+            $('#unidadesxlote').val(info[0].unidad_lote);
+            $('#tamanototallote').val(info[0].tamano_lote);
+            $('#fechaprogramacion').val(info[0].fecha_programacion);
+            
+            unidades = info[0].unidad_lote;
+            lote = info[0].tamano_lote;
+                        
+            for(i=1; i<info.length; i++){
+                
+                cont = i-1;
+                tnque = info[i].tanque;
+                cant = info[i].cantidad;
+                
+                $('#adicionarPesaje').click();
+                $("#cmbTanque"+cont+ " option[value="+ tnque +"]").attr("selected",true);
+                 $('#txtCantidad'+ i).val(cant);
+                
+                CalcularTanque();
+            }
+            
 
             $("#cmbNoReferencia"). css("display", "none");
             $("#referencia"). css("display", "block");
@@ -133,6 +156,11 @@ function actualizarTabla() {
   /* Guardar datos de Crear y Actualizar batch*/
 
 function guardarDatos(){         
+        
+        for(i=1; 1<cont; i++){
+            $('#txtTotal' + i).val();
+        }
+    
         var d = new Date();
 
         var mes = d.getMonth() + 1;
@@ -155,10 +183,6 @@ function guardarDatos(){
             j++;
         }
 
-        /* console.log(tqn);
-        console.log(tmn);
-        return false; */
-
         if(!editar){
             datos = {
                 operacion: "5",
@@ -173,7 +197,7 @@ function guardarDatos(){
                 tmn: tmn,
                 
                 };
-                //console.log(datos.cantidad);
+
         }else{
              datos = {
                 operacion: "7",

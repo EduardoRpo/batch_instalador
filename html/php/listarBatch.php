@@ -74,7 +74,7 @@
         $query_batch_tanques = "DELETE FROM batch_tanques WHERE id_batch = $id_batch";
         $result_tanques = mysqli_query($conn, $query_batch_tanques);
       }else{
-          echo 'No Eliminado';
+        echo 'No Eliminado. Error: '.mysqli_error($conn);
       }
       //mysqli_free_result($query_batch);
       //mysqli_free_result($query_batch_tanques);
@@ -169,6 +169,7 @@
       
       if(!$result){
         die('Error');
+        echo 'No guardado. Error: '.mysqli_error($conn);
       }else{
         echo 'Almacenado';
       } 
@@ -178,12 +179,32 @@
       $id_batch = $_POST['id'];
 
         $query_buscar = mysqli_query($conn,"SELECT bt.id_batch, p.referencia, p.nombre_referencia, m.nombre as marca, pp.nombre as propietario, np.nombre_producto, pc.presentacion, linea.nombre_linea as linea, linea.densidad, ns.notificacion_sanitaria, bt.unidad_lote, bt.tamano_lote, bt.fecha_programacion 
-                                          FROM producto p INNER JOIN marca m INNER JOIN propietario pp INNER JOIN nombre_producto np INNER JOIN presentacion_comercial pc INNER JOIN linea INNER JOIN notificacion_sanitaria ns INNER JOIN batch bt 
-                                          ON p.id_marca=m.id AND p.id_propietario=pp.id AND p.id_nombre_producto=np.id AND p.id_presentacion_comercial=pc.id AND p.id_linea=linea.id AND p.id_notificacion_sanitaria=ns.id AND bt.id_producto=p.referencia 
+                                          FROM producto p INNER JOIN marca m INNER JOIN propietario pp INNER JOIN nombre_producto np INNER JOIN presentacion_comercial pc INNER JOIN linea INNER JOIN notificacion_sanitaria ns INNER JOIN batch bt
+                                          ON p.id_marca=m.id AND p.id_propietario=pp.id AND p.id_nombre_producto=np.id AND p.id_presentacion_comercial=pc.id AND p.id_linea=linea.id AND p.id_notificacion_sanitaria=ns.id AND bt.id_producto=p.referencia
                                           WHERE bt.id_batch= $id_batch");
 
-        $data = mysqli_fetch_assoc($query_buscar);
-        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        $data[] = mysqli_fetch_assoc($query_buscar);
+        
+        $query_buscarTanque =  mysqli_query($conn,"SELECT tanque, cantidad FROM batch_tanques btnq WHERE btnq.id_batch = $id_batch");
+        $result = mysqli_num_rows($query_buscarTanque);
+      
+      if($result > 0){
+
+        while($tnq = mysqli_fetch_assoc($query_buscarTanque)){
+            $tanques[] = $tnq;
+        }
+        
+        $tnq = mysqli_fetch_assoc($query_buscarTanque);
+      }
+
+        if($result > 0){
+          $resultado = array_merge($data, $tanques);
+        }else{
+          $resultado = $data;
+        }
+                
+        echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+        
         mysqli_close($conn);
     break;
 
@@ -199,9 +220,10 @@
       $result = mysqli_query($conn, $query_actualizar);
 
       if($result){
-        echo "Exitoso";
+        echo "Exitoso"; 
       }else{
-        echo "Error";  
+        echo "Error";
+        echo 'No Cargado. Error: '.mysqli_error($conn); 
       }
 
       mysqli_free_result($query_actualizar);

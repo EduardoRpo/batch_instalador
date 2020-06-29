@@ -8,7 +8,21 @@ function mostrarModal(){
     $('#guardarBatch').html('Crear');
     $('.tcrearBatch').html('Crear Batch Record');
     cargarReferencias();
-    cargarTanque();     
+    //cargarTanque(); 
+    limpiarTanques();
+}
+
+/* Eliminar los tanques generados */
+
+function limpiarTanques() {
+    $('#sumaTanques').val(' ');
+    
+    for (i = 1; i <= cont; i++) {
+        $('#cmbTanque' + i).remove();
+        $('#txtCantidad' + i).remove();
+        $('#txtTotal' + i).remove();
+        $('#btnEliminar' + i).remove();
+    }
 }
 
 /* Llenar el selector de referencias al crear Batch */
@@ -114,9 +128,13 @@ $("#adicionarPesaje").on('click', function(){
                     '</select>' +
                     '<input type="number" class="form-control" id=":txtCantidad:" name="txtCantidad[]" placeholder="Cantidad" value="0" onblur="CalcularTanque()">' +
                     '<input type="number" class="form-control" id=":txtTotal:" name="txtTotal[]" placeholder="Total" readonly>' +
-                    '<button class="btn btn-warning eliminarTanque" type="button">X</button>'
+                    '<button class="btn btn-warning eliminarTanque" id=":btnEliminar:" type="button">X</button>'
 
-    let nuevo = template.replace(':cmbTanque:', 'cmbTanque'+cont).replace(':txtCantidad:', 'txtCantidad'+cont).replace(':txtTotal:', 'txtTotal'+cont );
+    let nuevo = template.replace(':cmbTanque:', 'cmbTanque'+ cont)
+                        .replace(':txtCantidad:', 'txtCantidad'+ cont)
+                        .replace(':txtTotal:', 'txtTotal'+ cont )
+                        .replace(':btnEliminar:', 'btnEliminar'+ cont);
+
     let totaltl = $('input#transito').val();
 
     if(tnq == 1) {
@@ -150,13 +168,15 @@ function cargarTanque(cont) {
         'url' : 'php/listarBatch.php',
         'data':{"operacion" : "9"},
         success: function(r){
-            var $select = $('#cmbTanque'+cont);
-            var info = JSON.parse(r);            
-                                
+            var $select = $('#cmbTanque'+ cont);
+            var info = JSON.parse(r);
+            /* i = 1; */
+
             $select.append('<option disabled selected>' + "Tanque" + '</option>');
             
             $.each(info, function(i, value) {
-                $select.append('<option>' + value.capacidad + '</option>');
+                $select.append('<option value ="'+  value.capacidad + '">' + value.capacidad + '</option>');
+                /* i++; */
             });
         }
     });
@@ -177,9 +197,16 @@ function CalcularTanque() {
 
     $('#sumaTanques').val('');
 
-    let cambio = '#cmbTanque' + cont + ' option:selected';
-    let tanque = $(cambio).val();
-    let cantidad = $('#txtCantidad' + cont ).val();
+    /* let cambio = '#cmbTanque' + cont + ' option:selected';
+    let tanque = $(cambio).val(); */
+    var tanque = $('#cmbTanque' + cont).val();
+    var cantidad = $('#txtCantidad' + cont ).val();
+
+    if(tanque == undefined){
+        tanque = tnque;
+        cantidad = cant;
+    }
+    
 
     if (tanque == "Tanque"){
         return false;
@@ -188,6 +215,11 @@ function CalcularTanque() {
     total = tanque * cantidad;
     $('#txtTotal' + cont).val(total);
     $('#transito').val(total);
+
+/*     for(i=1; i<6; i++){
+        txt = "txtTotal"+ i;
+        txt = $('#txtTotal'+ i).val();
+    } */
 
     let txtTotal1 = $('#txtTotal1').val();
     let txtTotal2 = $('#txtTotal2').val();
