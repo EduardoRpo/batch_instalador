@@ -135,6 +135,8 @@
       $tanque                 = $_POST['tqns'];
       $tamanotqn              = $_POST['tmn'];
 
+
+
       
       if ($fechaPrograma = "") {
        $estado = 'null';
@@ -157,7 +159,7 @@
         }
       }
 
-      if( sizeof($tanque) > 0 ){
+      if(sizeof($tanque) > 0 ){
           
         $id = mysqli_insert_id($conn);
 
@@ -209,10 +211,12 @@
     break;
 
     case 7: //Actualiza datos
-      $id_batch = $_POST['ref'];
-      $unidades = $_POST['unidades'];
-      $lote = $_POST['lote'];
+      $id_batch     = $_POST['ref'];
+      $unidades     = $_POST['unidades'];
+      $lote         = $_POST['lote'];
       $programacion = $_POST['programacion'];
+      $tanque       = $_POST['tqns'];
+      $tamanotqn    = $_POST['tmn'];
 
       $query_actualizar = "UPDATE batch SET unidad_lote = '$unidades', tamano_lote = '$lote', fecha_programacion = '$programacion'
                            WHERE id_batch ='$id_batch'";
@@ -220,10 +224,32 @@
       $result = mysqli_query($conn, $query_actualizar);
 
       if($result){
+        echo "Exitoso actualizacion datos batch record"; 
+      }else{
+        echo "No Exitoso actualizacion datos Batch record";
+        echo 'No Cargado. Error: '. mysqli_error($conn); 
+      }  
+
+      $query_eliminar_tanque = mysqli_query($conn, "DELETE FROM batch_tanques WHERE id_batch ='$id_batch'");
+      
+      if(sizeof($tanque) > 0 ){
+        for($i=0; $i < sizeof($tanque); ++$i){
+          $query_tanque = "INSERT INTO batch_tanques (tanque, cantidad, id_batch) VALUES('$tanque[$i]' , '$tamanotqn[$i]', '$id_batch')";
+          $result = mysqli_query($conn, $query_tanque);
+        }
+      }
+
+      if($result){
+        echo "Exitoso actualizacion datos batch record"; 
+      }else{
+        echo 'No Cargado. Error: '. mysqli_error($conn); 
+      }
+
+      if($result){
         echo "Exitoso"; 
       }else{
         echo "Error";
-        echo 'No Cargado. Error: '.mysqli_error($conn); 
+        echo 'No Cargado. Error: '. mysqli_error($conn); 
       }
 
       mysqli_free_result($query_actualizar);
@@ -313,6 +339,28 @@
       }else{
         echo json_encode('');
       }  
+
+
+    break;
+
+    case 12: // Guardar Multipresentacion
+      /* $nom_referencia = $_POST['ref'];
+      $cantidad = $_POST['cant'];
+
+      $query_id_referencia = "SELECT referencia FROM 	producto WHERE nombre_referencia='$nom_referencia'";
+      $result = mysqli_query($conn, $query_id_referencia);
+
+      $result = mysqli_num_rows($query_id_referencia);
+      
+      if($result > 0){
+
+        while($data = mysqli_fetch_assoc($query_id_referencia)){
+          $arreglo[] = $data;
+        }
+        
+        echo json_encode(utf8ize($arreglo), JSON_UNESCAPED_UNICODE); */
+
+
 
 
     break;

@@ -69,7 +69,7 @@ $(document).on('click', '.link-editar', function(e){
          success: function(response){
             
             var info = JSON.parse(response);
-                       
+            
             $('#idbatch').val(info[0].id_batch);
             $('#referencia').val(info[0].referencia);
             $('#nombrereferencia').val(info[0].nombre_referencia);
@@ -83,23 +83,34 @@ $(document).on('click', '.link-editar', function(e){
             $('#unidadesxlote').val(info[0].unidad_lote);
             $('#tamanototallote').val(info[0].tamano_lote);
             $('#fechaprogramacion').val(info[0].fecha_programacion);
-            
             unidades = info[0].unidad_lote;
             lote = info[0].tamano_lote;
                         
-            for(i=1; i<info.length; i++){
+            for(k=1; k<info.length; k++){
                 
-                cont = i-1;
-                tnque = info[i].tanque;
-                cant = info[i].cantidad;
-                
+                cont = k-1;
+                               
                 $('#adicionarPesaje').click();
-                $("#cmbTanque"+cont+ " option[value="+ tnque +"]").attr("selected",true);
-                 $('#txtCantidad'+ i).val(cant);
+                
+                cmbTanque = $('#cmbTanque'+ k);
+
+                cmbTanque.val('30');
+                console.log(cmbTanque);
+
+                tnque = info[k].tanque;
+                cant = info[k].cantidad;
+                
+                $('#cmbTanque'+ k).val(tnque);
+                console.log($('#cmbTanque'+ k).val());
+                
+                /* $('#cmbTanque'+k+' option')
+                .filter(function() { console.log($(this).text()); return $.trim( $(this).text() ) == tnque; })
+                .attr('selected',true); */
+
+                $('#txtCantidad'+ k).val(cant);
                 
                 CalcularTanque();
             }
-            
 
             $("#cmbNoReferencia"). css("display", "none");
             $("#referencia"). css("display", "block");
@@ -113,6 +124,10 @@ $(document).on('click', '.link-editar', function(e){
         } 
     });
 });
+
+/* Asignar variables para actualizar */
+
+
 
 /* Borrar registro */
 
@@ -156,76 +171,73 @@ function actualizarTabla() {
   /* Guardar datos de Crear y Actualizar batch*/
 
 function guardarDatos(){         
-        
-        for(i=1; 1<cont; i++){
-            $('#txtTotal' + i).val();
-        }
-    
-        var d = new Date();
 
-        var mes = d.getMonth() + 1;
-        var dia = d.getDate();
-        var fechaActual = d.getFullYear() + '/' + (mes<10 ? '0' : '') + mes + '/' + (dia<10 ? '0' : '') + dia;
-        var tqn = [];
-        var tmn = [];
+    var d = new Date();
 
-        var j=1;
+    var mes = d.getMonth() + 1;
+    var dia = d.getDate();
+    var fechaActual = d.getFullYear() + '/' + (mes<10 ? '0' : '') + mes + '/' + (dia<10 ? '0' : '') + dia;
+    var tqn = [];
+    var tmn = [];
 
-        for(i=0; i<cont ; i++){
-            tqn[i] = $('#cmbTanque' + j + ' option:selected').val();
-            j++;
-        }
-        
-        j=1;
-        
-        for(i=0; i<cont ; i++){
-            tmn[i] = $('#txtCantidad'+ j).val();
-            j++;
-        }
+    var j=1;
 
-        if(!editar){
-            datos = {
-                operacion: "5",
-                ref: $('#idbatch').val(),
-                unidades: $('#unidadesxlote').val(),
-                lote: $('#tamanototallote').val(),
-                presentacion: $('#presentacioncomercial').val(),
-                programacion: $('#fechaprogramacion').val(),
-                fecha : fechaActual,
-                cantidad: "1",
-                tqns: tqn, 
-                tmn: tmn,
-                
-                };
-
-        }else{
-             datos = {
-                operacion: "7",
-                ref: $('#idbatch').val(),
-                unidades: $('#unidadesxlote').val(),
-                lote: $('#tamanototallote').val(),
-                programacion: $('#fechaprogramacion').val(),
-                fecha : fechaActual,
-                
-                };
-        }
-        
-        $.ajax({
-            type: "POST",
-            url: "php/listarBatch.php",
-            data: datos,
-            
-            success: function(r){
-                alertify.set("notifier","position", "top-right"); alertify.success("Batch Record registrado con éxito.");
-                cerrarModal();
-                actualizarTabla();
-                
-            },
-            error: function(r){
-                alertify.set("notifier","position", "top-right"); alertify.error("Error al registrar el Batch Record.");
-            } 
-        }); 
+    for(i=0; i<cont ; i++){
+        tqn[i] = $('#cmbTanque' + j + ' option:selected').val();
+        j++;
     }
+    
+    j=1;
+    
+    for(i=0; i<cont ; i++){
+        tmn[i] = $('#txtCantidad'+ j).val();
+        j++;
+    }
+
+    if(!editar){
+        datos = {
+            operacion: "5",
+            ref: $('#idbatch').val(),
+            unidades: $('#unidadesxlote').val(),
+            lote: $('#tamanototallote').val(),
+            presentacion: $('#presentacioncomercial').val(),
+            programacion: $('#fechaprogramacion').val(),
+            fecha : fechaActual,
+            cantidad: "1",
+            tqns: tqn, 
+            tmn: tmn,
+            
+            };
+
+    }else{
+            datos = {
+            operacion: "7",
+            ref: $('#idbatch').val(),
+            unidades: $('#unidadesxlote').val(),
+            lote: $('#tamanototallote').val(),
+            programacion: $('#fechaprogramacion').val(),
+            fecha : fechaActual,
+            tqns: tqn, 
+            tmn: tmn,
+            };
+    }
+    
+    $.ajax({
+        type: "POST",
+        url: "php/listarBatch.php",
+        data: datos,
+        
+        success: function(r){
+            alertify.set("notifier","position", "top-right"); alertify.success("Batch Record registrado con éxito.");
+            cerrarModal();
+            actualizarTabla();
+            
+        },
+        error: function(r){
+            alertify.set("notifier","position", "top-right"); alertify.error("Error al registrar el Batch Record.");
+        } 
+    }); 
+}
 
 
 /* Formateo de numeros */

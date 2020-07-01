@@ -23,6 +23,9 @@ function limpiarTanques() {
         $('#txtTotal' + i).remove();
         $('#btnEliminar' + i).remove();
     }
+    cont=0;
+    $('input#transito').val(' ');
+    tnq=1;
 }
 
 /* Llenar el selector de referencias al crear Batch */
@@ -197,8 +200,6 @@ function CalcularTanque() {
 
     $('#sumaTanques').val('');
 
-    /* let cambio = '#cmbTanque' + cont + ' option:selected';
-    let tanque = $(cambio).val(); */
     var tanque = $('#cmbTanque' + cont).val();
     var cantidad = $('#txtCantidad' + cont ).val();
 
@@ -206,7 +207,6 @@ function CalcularTanque() {
         tanque = tnque;
         cantidad = cant;
     }
-    
 
     if (tanque == "Tanque"){
         return false;
@@ -216,36 +216,15 @@ function CalcularTanque() {
     $('#txtTotal' + cont).val(total);
     $('#transito').val(total);
 
-/*     for(i=1; i<6; i++){
-        txt = "txtTotal"+ i;
-        txt = $('#txtTotal'+ i).val();
-    } */
+    sumaTanques=0;
 
-    let txtTotal1 = $('#txtTotal1').val();
-    let txtTotal2 = $('#txtTotal2').val();
-    let txtTotal3 = $('#txtTotal3').val();
-    let txtTotal4 = $('#txtTotal4').val();
-    let txtTotal5 = $('#txtTotal5').val();
-    
-    let sumaTanques = $('#sumaTanques').val();
-    
-    if(cont==1 ){
-        sumaTanques=0;
+    for(i=1; i<6; i++){
+        txtTotal = $('#txtTotal'+ i).val();
+        if(txtTotal == undefined || txtTotal1==""){
+            txtTotal = 0;
+        }    
+        sumaTanques = parseInt(sumaTanques) + parseInt(txtTotal);
     }
-
-    if(txtTotal1 == undefined || txtTotal1==""){
-        txtTotal1 = 0;
-    }if(txtTotal2 == undefined || txtTotal2==""){
-        txtTotal2 = 0;
-    }if(txtTotal3 == undefined || txtTotal3==""){
-        txtTotal3 = 0;
-    }if(txtTotal4 == undefined || txtTotal4==""){
-        txtTotal4 = 0;
-    }if(txtTotal5 == undefined || txtTotal5==""){
-        txtTotal5 = 0;
-    }   
-      
-    sumaTanques =  parseInt(txtTotal1) + parseInt(txtTotal2) + parseInt(txtTotal3) + parseInt(txtTotal4) + parseInt(txtTotal5);
     
     let cantidadLote = $('#tamanototallote').val();
     

@@ -6,90 +6,76 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <title>Proyecto</title>
+
+  <!-- Bootstrap Core CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 
 <body>
-  <div style="margin:0 auto;">
-    <button class="btn btn-success" onclick="clon();">Agregar</button>
-    <hr>
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <!-- 4 -->
-          <!-- <th>CANTIDAD</th> -->
-          <!-- <th>UNIT MEDIDA</th> -->
-          <!-- <th>DESCRIPCION</th> -->
-          <th>VAL COMPRA</th>
-          <th>IGV</th>
-        </tr>
-      </thead>
-      <tbody id="rows">
-        <tr id="rols">
-          <!-- <td><input type="text" readonly="" class="form-control"></td>
-          <td><input type="text" class="form-control"></td>
- -->        <!--   <td>
-            <select name="" id="" class="form-control">
-              <option value="">option 1</option>
-              <option value="">option 2</option>
-            </select>
-          </td> -->
-          <td id="tbodyDescripcion">
-            <select name="idDescripcion1" id="descripciones1" class="form-control descripciones">
-              <option value="">option 1</option>
-              <option value="">option 2</option>
-            </select>
-          </td>
-          <td><input name="idtotal1" id="total1" type="text" class="form-control"></td>
-          <!-- <td><input type="text" readonly="" class="form-control"></td> -->
-        </tr>
-      </tbody>
-    </table>
+  <div class="row page">
+    <div class="col-md-6 col-2 align-self-center mt-3 ml-3">
+      <!-- <button id="adicionarPesaje" name="adicionarPesaje" type="button" class="btn btn-primary">Adicionar</button> -->
+      <input type="number" class="form-control col-md-4" id="transito">
+      <button id="adicionarPesaje" name="adicionarPesaje" type="button" class="btn btn-primary" onclick="cambiar();">Adicionar</button>
+      <button id="adicionarPesaje" name="adicionarPesaje" type="button" class="btn btn-primary" onclick="cambiar2();">Adicionar2</button>
+      <!-- <input type="number" class="form-control col-md-4" id="sumaTanques" readonly> -->
+    </div>
   </div>
-</body>
+  
+  <select class="form-control mt-3 ml-3" name="cmbtanque4" id="cmbTanque4" style="width: 300px;">
+    <option disabled="" selected="">Tanque</option>
+    <option value="30">30</option>
+    <option value="60">60</option>
+    <option value="100">100</option>
+    <option value="120">120</option>
+    <option value="150">150</option>
+    <option value="180">180</option>
+    <option value="200">200</option>
+    <option value="220">220</option>
+    <option value="250">250</option>
+    <option value="300">300</option>
+    <option value="350">350</option>
+    <option value="450">450</option>
+    <option value="800">800</option>
+    <option value="1500">1500</option>
+    <option value="2000">2000</option>
+  </select>
+    
+  </div>
+  
+  <!-- <div class="modal-footer">
+    <button type="button" onclick="guardarDatos();" class="btn btn-primary crearbatch" name="guardarBatch" id="guardarBatch">Crear</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+  </div> -->
 
-<script>
-	 var contador = 1;
-    function addrows() {
-      contador++;
-      var row = '<tr id="rols">' +
-      //'<td><input type="text" readonly="" class="form-control"></td>' +
-      //'<td><input type="text" class="form-control"></td>' +
-      '<td>' +
-      '<select name="" id="" class="form-control">' +
-      '<option value="">option 1</option>' +
-      '<option value="">option 2</option>' +
-      '<option value="">option 3</option>' +
-      '</select>' +
-      '</td>' +
-      '<td id="sel' + contador + '">' +
+ <!-- jquery -->
+ <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+ <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+ <!-- <script src="js/utils/jquery.slimscroll.js"></script> -->
 
-      '</td>' +
-      '<td><input type="text" class="form-control"></td>' +
-	    '<td id="inp' + contador + '">'
-	  //'<td><input type="text" readonly="" class="form-control"></td>' +
-      '</tr>';
-      $("#rows").append(row);
+  <script>
+    i=4;
+    
+    function cambiar(){
+      tnque = $('#transito').val();
+      console.log(tnque);
+      $('#cmbTanque'+i+' option')
+          .filter(function() { 
+            console.log($(this).text());
+            return $.trim( $(this).text() ) == tnque; })
+          .attr('selected',true);
     }
 
-    function clon() {
-      addrows();
-                              
-      var estructuraSelect = "<select name=\"idDescripcion" + contador + "\" id=\"descripciones" + contador + "\" class=\"form-control descripciones\">";
-      var selectActual = $("#descripciones1").html();
-      estructuraSelect += selectActual + "</select>"
-      alert(estructuraSelect);
-            $("#sel"+contador).html(estructuraSelect);
+    function cambiar2(){
+      tnque = $('#transito').val();
+      //console.log(tnque);
+      $('#cmbTanque'+i).val("30");
+      console.log($('#cmbTanque'+i).val());
+    }
+  </script>
 
-      var estructuraInput = "<input name=\"idtotal" + contador + "\" id=\"total" + contador + "\" type=\"text" + "\" class=\"form-control\">";
-      var inputActual = $("#total1").html();
-      estructuraInput += inputActual + ""
-      alert(estructuraInput);
-          $("#inp"+contador).html(estructuraInput);
-        
-    };
+</body>
 
 
-</script>
-
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 </html>

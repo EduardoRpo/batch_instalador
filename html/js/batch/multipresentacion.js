@@ -250,4 +250,58 @@ $(document).on("click",".eliminarMulti", function(){
 
 function cerrarModal(){
     $('#modalCrearBatch').modal('hide');
-}    
+} 
+
+function guardar_Multi() {  
+    var ref = [];
+    var cant = [];
+
+    var j=1;
+
+    for(i=0; i<cont ; i++){
+        //ref[i] = $('#cmbMultiReferencia' + j).text();
+        ref[i] = $('#cmbMultiReferencia' + j + ' option:selected').text();
+        j++;
+    }
+    
+    j=1;
+    
+    for(i=0; i<cont ; i++){
+        cant[i] = $('#cantidadMulti'+ j).val();
+        j++;
+    }
+    
+    if(!editar){
+        datos = {
+            operacion: "12",
+            ref: ref, 
+            cant: cant,
+            
+        };
+
+    }else{
+            datos = {
+            operacion: "13",
+            ref: ref, 
+            cant: cant,
+            };
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "php/listarBatch.php",
+        data: datos,
+        
+        success: function(r){
+            alertify.set("notifier","position", "top-right"); alertify.success("Multipresentación registrada con éxito.");
+            cerrarModal();
+            actualizarTabla();
+            
+        },
+        error: function(r){
+            alertify.set("notifier","position", "top-right"); alertify.error("Error al registrar la Multipresentación.");
+        } 
+    });
+
+
+}

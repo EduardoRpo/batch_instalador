@@ -23,7 +23,7 @@
       </div>
         <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="submit" class="btn btn-primary">Aceptar</button>
+        <button type="submit" class="btn btn-primary" onclick="guardar_Multi();">Aceptar</button>
       </div>
     </div>
   </div>
