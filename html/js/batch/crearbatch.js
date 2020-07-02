@@ -283,4 +283,5 @@ $(document).on("click",".eliminarTanque", function(){
 
 function cerrarModal(){
     $('#modalCrearBatch').modal('hide');
+    $('#Modal_Multipresentacion').modal('hide');
 }

@@ -107,6 +107,7 @@ include("modal/modal_cambiarContrasena.php");
                   <th>Creación</th>
                   <th>Programación</th>
                   <th>Estado</th>
+                  <th>Multi</th>
                   <th></th>
                   <th></th>
                 </tr>

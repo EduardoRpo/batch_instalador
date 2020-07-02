@@ -28,13 +28,13 @@
       //exit();
 
       if($proceso==2){
-        $query_batch = mysqli_query($conn, 'SELECT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, presentacion_comercial.presentacion,batch.numero_lote, batch.tamano_lote, propietario.nombre,batch.fecha_creacion, batch.fecha_programacion, batch.estado
+        $query_batch = mysqli_query($conn, 'SELECT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, presentacion_comercial.presentacion,batch.numero_lote, batch.tamano_lote, propietario.nombre,batch.fecha_creacion, batch.fecha_programacion, batch.estado, batch.multi
                                             FROM batch INNER JOIN producto INNER JOIN presentacion_comercial INNER JOIN propietario
                                             ON batch.id_producto = producto.referencia AND producto.id_presentacion_comercial = presentacion_comercial.id AND producto.id_propietario = propietario.id
                                             WHERE estado=1
                                             ORDER BY batch.id_batch desc; ');
       }else{ 
-      $query_batch = mysqli_query($conn, 'SELECT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, presentacion_comercial.presentacion,batch.numero_lote, batch.tamano_lote, propietario.nombre,batch.fecha_creacion, batch.fecha_programacion, batch.estado
+      $query_batch = mysqli_query($conn, 'SELECT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, presentacion_comercial.presentacion,batch.numero_lote, batch.tamano_lote, propietario.nombre,batch.fecha_creacion, batch.fecha_programacion, batch.estado, batch.multi
                                             FROM batch INNER JOIN producto INNER JOIN presentacion_comercial INNER JOIN propietario
                                             ON batch.id_producto = producto.referencia AND producto.id_presentacion_comercial = presentacion_comercial.id AND producto.id_propietario = propietario.id
                                             ORDER BY batch.id_batch desc;');
@@ -140,9 +140,9 @@
       
       if ($fechaPrograma = "") {
        $estado = 'null';
-      } else {
+        } else {
         $estado = '1';
-      }
+        }
       $i = 1;
       
       $query = "INSERT INTO batch (fecha_creacion, fecha_programacion, fecha_actual, numero_orden, numero_lote, tamano_lote, lote_presentacion, unidad_lote, estado, id_producto) 
@@ -344,24 +344,41 @@
     break;
 
     case 12: // Guardar Multipresentacion
-      /* $nom_referencia = $_POST['ref'];
-      $cantidad = $_POST['cant'];
+      $nom_referencia = $_POST['ref'];
+      $cantidad       = $_POST['cant'];
+      $id_batch       = $_POST['id'];
 
-      $query_id_referencia = "SELECT referencia FROM 	producto WHERE nombre_referencia='$nom_referencia'";
-      $result = mysqli_query($conn, $query_id_referencia);
+      for($i=0; $i < sizeof($nom_referencia); ++$i){
+        echo $nom_referencia[$i];
+      }
 
-      $result = mysqli_num_rows($query_id_referencia);
-      
-      if($result > 0){
+      for($i=0; $i < sizeof($nom_referencia); ++$i){
+        echo $cantidad[$i];
+      }
 
-        while($data = mysqli_fetch_assoc($query_id_referencia)){
-          $arreglo[] = $data;
-        }
+      echo $id_batch;
+
+      for($i=0; $i < sizeof($nom_referencia); ++$i){
+        //$query_tanque = "INSERT INTO batch_tanques (tanque, cantidad, id_batch) VALUES('$tanque[$i]' , '$tamanotqn[$i]', '$id')";
         
-        echo json_encode(utf8ize($arreglo), JSON_UNESCAPED_UNICODE); */
-
-
-
+        $query_id_referencia = "INSERT INTO multipresentacion (id_batch, referencia, cantidad) 
+                                SELECT '$id_batch', referencia, '$cantidad[$i]' 
+                                FROM producto 
+                                WHERE nombre_referencia = '$nom_referencia[$i]'";
+        $query_batch_multi = "  UPDATE batch 
+                                SET multi = '1' 
+                                WHERE id_batch='$id_batch'";                                
+        
+        $result = mysqli_query($conn, $query_id_referencia);
+        $result1 = mysqli_query($conn, $query_batch_multi);
+      }
+            
+      if(!$result){
+        die('Error');
+        echo 'No guardado. Error: '.mysqli_error($conn);
+      }else{
+        echo 'Almacenado';
+      } 
 
     break;
   }

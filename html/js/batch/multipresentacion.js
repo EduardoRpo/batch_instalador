@@ -248,9 +248,11 @@ $(document).on("click",".eliminarMulti", function(){
 
 /* cerrar modal al crear Batch */
 
-function cerrarModal(){
+/* function cerrarModal(){
     $('#modalCrearBatch').modal('hide');
-} 
+    $('#Modal_Multipresentacion').modal('hide');
+
+} */ 
 
 function guardar_Multi() {  
     var ref = [];
@@ -276,7 +278,7 @@ function guardar_Multi() {
             operacion: "12",
             ref: ref, 
             cant: cant,
-            
+            id : data.id_batch
         };
 
     }else{
@@ -284,6 +286,7 @@ function guardar_Multi() {
             operacion: "13",
             ref: ref, 
             cant: cant,
+            id : data.id_batch
             };
     }
 
@@ -295,7 +298,7 @@ function guardar_Multi() {
         success: function(r){
             alertify.set("notifier","position", "top-right"); alertify.success("Multipresentación registrada con éxito.");
             cerrarModal();
-            actualizarTabla();
+            //actualizarTabla();
             
         },
         error: function(r){
