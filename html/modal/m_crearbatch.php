@@ -1,4 +1,4 @@
-<div class="modal fade" id="modalCrearBatch" role="dialog" tabindex="-1">
+<div class="modal" id="modalCrearBatch" role="dialog" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header" style="  background-color: #FF8D6D !important;">

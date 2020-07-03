@@ -252,7 +252,7 @@
         echo 'No Cargado. Error: '. mysqli_error($conn); 
       }
 
-      mysqli_free_result($query_actualizar);
+      //mysqli_free_result($query_actualizar);
       mysqli_close($conn); 
   
     break;
