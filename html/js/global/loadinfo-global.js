@@ -68,7 +68,7 @@ $('.in_desinfeccion').click((event) => {
 });
 
 
-function fechahoy(){
+function fechaHoy(){
     var d = new Date();
 
     var mes = d.getMonth() + 1;

@@ -178,7 +178,7 @@ function actualizarTabla() {
 
 function guardarDatos(){         
     
-    fechahoy();
+    fechaHoy();
     var tqn = [];
     var tmn = [];
 

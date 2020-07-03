@@ -48,7 +48,7 @@ $('#form_clonar').submit(function (event) {
 
        //fechaActual();
        fechaHoy();
-       
+
         $.ajax({
             type: "POST",
             'url' : 'php/listarBatch.php',
