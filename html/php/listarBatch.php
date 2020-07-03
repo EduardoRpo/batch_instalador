@@ -136,8 +136,6 @@
       $tamanotqn              = $_POST['tmn'];
 
 
-
-      
       if ($fechaPrograma = "") {
        $estado = 'null';
         } else {
@@ -159,11 +157,11 @@
         }
       }
 
-      if(sizeof($tanque) > 0 ){
+      if(count($tanque) > 0 ){
           
         $id = mysqli_insert_id($conn);
 
-        for($i=0; $i < sizeof($tanque); ++$i){
+        for($i=0; $i < count($tanque); ++$i){
           $query_tanque = "INSERT INTO batch_tanques (tanque, cantidad, id_batch) VALUES('$tanque[$i]' , '$tamanotqn[$i]', '$id')";
           $result = mysqli_query($conn, $query_tanque);
         }
@@ -232,8 +230,8 @@
 
       $query_eliminar_tanque = mysqli_query($conn, "DELETE FROM batch_tanques WHERE id_batch ='$id_batch'");
       
-      if(sizeof($tanque) > 0 ){
-        for($i=0; $i < sizeof($tanque); ++$i){
+      if(count($$tanque) > 0 ){
+        for($i=0; $i < count($tanque); ++$i){
           $query_tanque = "INSERT INTO batch_tanques (tanque, cantidad, id_batch) VALUES('$tanque[$i]' , '$tamanotqn[$i]', '$id_batch')";
           $result = mysqli_query($conn, $query_tanque);
         }
