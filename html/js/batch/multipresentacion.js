@@ -11,8 +11,8 @@ function multipresentacion() {
         
         $.ajax({
             type: "POST",
-            'url' : 'php/listarBatch.php',
-            'data':{"operacion" : "8", id : data.id_batch},
+            'url' : 'php/multi.php',
+            'data':{"operacion" : "1", id : data.id_batch},
             
             success: function(r){
                 var info = JSON.parse(r);  
@@ -85,8 +85,8 @@ function cargarMulti(cont) {
     
     $.ajax({
         type: "POST",
-        'url' : 'php/listarBatch.php',
-        'data':{"operacion" : "8", id : data.id_batch},
+        'url' : 'php/multi.php',
+        'data':{"operacion" : "1", id : data.id_batch},
         success: function(r){
             var $select = $('#cmbMultiReferencia' + cont);
             var info = JSON.parse(r);            
@@ -110,8 +110,8 @@ function cargarReferenciaM(){
 
     $.ajax({
         type: "POST",
-        'url' : 'php/listarBatch.php',
-        'data':{"operacion" : "11", "nombre_referencia" :  sel},
+        'url' : 'php/multi.php',
+        'data':{"operacion" : "2", "nombre_referencia" :  sel},
         
         success: function(r)
         {
@@ -119,8 +119,8 @@ function cargarReferenciaM(){
                       
             $.ajax({
                 type: "POST",
-                'url' : 'php/listarBatch.php',
-                'data':{"operacion" : "4", "id" : info[0].referencia},
+                'url' : 'php/multi.php',
+                'data':{"operacion" : "3", "id" : info[0].referencia},
                 
                 success: function(r)
                 {
@@ -275,7 +275,7 @@ function guardar_Multi() {
     
     if(!editar){
         datos = {
-            operacion: "12",
+            operacion: "4",
             ref: ref, 
             cant: cant,
             id : data.id_batch
@@ -283,7 +283,7 @@ function guardar_Multi() {
 
     }else{
             datos = {
-            operacion: "13",
+            operacion: "5",
             ref: ref, 
             cant: cant,
             id : data.id_batch
@@ -292,19 +292,66 @@ function guardar_Multi() {
 
     $.ajax({
         type: "POST",
-        url: "php/listarBatch.php",
+        url: "php/multi.php",
         data: datos,
         
         success: function(r){
             alertify.set("notifier","position", "top-right"); alertify.success("Multipresentación registrada con éxito.");
             cerrarModal();
-            //actualizarTabla();
+            actualizarTabla();
             
         },
         error: function(r){
             alertify.set("notifier","position", "top-right"); alertify.error("Error al registrar la Multipresentación.");
         } 
     });
+}
 
+//Actualizar Multipresentacion
+
+$(document).on('click', '.link-editarMulti', function(e){
+    editar=true;
+    limpiarMultipresentacion();
+
+
+    $.ajax({
+        method: 'POST',
+        url : 'php/listarBatch.php',
+        data: {operacion : "4", id : id},
+
+        success: function(response){
+            
+            var info = JSON.parse(response);
+            for(k=1; k<info.length; k++){
+                $("#masMulti").click();
+                
+                $('#cmbMultiReferencia' + k).val(info[0].multireferencia);
+                $('#cantidadMulti' + k).val(info[0].cantidad);
+                $('#tamanoloteMulti' + k).val(info[0].tamano);
+                $('#densidadMulti' + k).val(info[0].densidad);
+                $('#presentacionMulti' + k).val(info[0].presentacion);
+            }
+        }
+
+    })
+
+    $('#Modal_Multipresentacion').modal('show');
+})
+
+function limpiarMultipresentacion(){
+    $('#loteTotal').val(' ');
+    $('#sumaMulti').val(' ');
+    
+    for (i = 1; i <= cont; i++) {
+
+        $('#cmbMultiReferencia' + i).remove();
+        $('#cantidadMulti' + i).remove();
+        $('#tamanoloteMulti' + i).remove();
+        $('#densidadMulti' + i).remove();
+        $('#presentacionMulti' + i).remove();
+    }
+    cont=0;
+    $('input#transitoMulti').val(' ');
+    tnq=1;
 
 }

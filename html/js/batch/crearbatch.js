@@ -279,7 +279,8 @@ $(document).on("click",".eliminarTanque", function(){
     $('#cmbTanque'+ cont).attr("disabled", false);
 });
 
-/* cerrar modal al crear Batch */
+/* cerrar modal al crea
+r Batch */
 
 function cerrarModal(){
     $('#modalCrearBatch').modal('hide');

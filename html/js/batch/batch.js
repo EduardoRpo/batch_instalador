@@ -41,7 +41,7 @@ $(document).ready(function() {
             {"data": "multi", className: "uniqueClassName",
             render: (data, type, row) => {
                 'use strict';
-                return data == 1 ? '<i class="fa fa-superscript aria-hidden="true" data-toggle="tooltip" title="Multipresentación" style="color:rgb(59, 131, 189)" aria-hidden="true"></i>' : '';
+                return data == 1 ? '<i class="fa fa-superscript link-editarMulti" aria-hidden="true" data-toggle="tooltip" title="Multipresentación" style="color:rgb(59, 131, 189)" aria-hidden="true"></i>' : '';
             }
             },
             {"defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Editar' style='color:rgb(255, 193, 7)'>&#xE254;</i></a>"},
