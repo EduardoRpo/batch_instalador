@@ -67,6 +67,15 @@ $('.in_desinfeccion').click((event) => {
 
 });
 
+
+function fechahoy(){
+    var d = new Date();
+
+    var mes = d.getMonth() + 1;
+    var dia = d.getDate();
+    var fechaActual = d.getFullYear() + '/' + (mes<10 ? '0' : '') + mes + '/' + (dia<10 ? '0' : '') + dia;
+}
+
 /* function enviar() {
     $('#myModal2').modal('hide');
     let usuario = $('#usuariomodal2').val();

@@ -317,7 +317,7 @@ $(document).on('click', '.link-editarMulti', function(e){
     $.ajax({
         method: 'POST',
         url : 'php/listarBatch.php',
-        data: {operacion : "4", id : id},
+        data: {operacion : "4", id :data.id_batch},
 
         success: function(response){
             

@@ -1,6 +1,6 @@
 //obtener la fecha del dia
  
-var fechaHoy;
+/* var fechaHoy;
 
 function fechaActual(){
     var d = new Date();
@@ -10,7 +10,7 @@ function fechaActual(){
         fechaHoy = d.getFullYear() + '/' + (mes<10 ? '0' : '') + mes + '/' + (dia<10 ? '0' : '') + dia;
         //return fechaHoy;
         
-}
+} */
 
 //Clonar un Batch Record
 
@@ -46,7 +46,8 @@ $('#form_clonar').submit(function (event) {
             return false;
         }else{
 
-       fechaActual();
+       //fechaActual();
+       fechaHoy();
        
         $.ajax({
             type: "POST",
@@ -55,7 +56,9 @@ $('#form_clonar').submit(function (event) {
             
             success: function(r){
                 var info = JSON.parse(r);
-
+                var tanque = [];
+                var tamano = [];
+                
                 $.ajax({
                     type: "POST",
                     'url' : 'php/listarBatch.php',
@@ -69,6 +72,8 @@ $('#form_clonar').submit(function (event) {
                         programacion: '',
                         presentacion: info[0].lote_presentacion,
                         fecha: fechaActual,
+                        tqns: tanque,
+                        tmn:tamano,
                         },
                     
                     success: function(r){
