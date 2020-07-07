@@ -32,7 +32,7 @@ $(document).ready(function() {
     
     $.ajax({
         'type' : 'POST',
-        'url'  : '/html/php/condicionesmedio.php',
+        'url'  : '../../html/php/condicionesmedio.php',
         'data' : {operacion : "1", modulo : proceso},
         
         success: function (resp) {
@@ -66,7 +66,7 @@ function guardar_condicionesMedio(){
 
     $.ajax({
         'type' : 'POST',
-        'url'  : '/html/php/condicionesmedio.php',
+        'url'  : '../../html/php/condicionesmedio.php',
         'data' : {
             operacion: "2",
             modulo : proceso,
