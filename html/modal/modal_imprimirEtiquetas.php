@@ -8,12 +8,14 @@
         <div class="imprimir">
         <img src="../../assets/images/icon/impresora.png" width="80px">
         <h5 style="text-align: center;">Imprimir Etiquetas</h5>
+        <label for="">No de Etiquetas para imprimir</label>
+        <input type="text" class="form-control">
         </div>
         
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Imprimir</button>
+        <button type="button" class="btn btn-primary" onclick="imprimirFantasma();">Imprimir</button>
       </div>
     </div>
   </div>

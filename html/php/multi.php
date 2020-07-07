@@ -134,7 +134,32 @@
     case 5: //Guardar Actualizacion
     break;
 
-    case 6:
+    case 6: // Cargar datos para actualizar Multipresentacion
+      $id_batch = $_POST['id'];
+    
+        $query_multi = mysqli_query($conn, "SELECT multipresentacion.id, multipresentacion.id_batch, multipresentacion.referencia, producto.nombre_referencia, multipresentacion.cantidad, densidad, presentacion_comercial.presentacion 
+                                            FROM multipresentacion INNER JOIN producto INNER JOIN linea INNER JOIN presentacion_comercial
+                                            ON multipresentacion.referencia = producto.referencia AND producto.id_linea = linea.id AND producto.id_presentacion_comercial=presentacion_comercial.id
+                                            WHERE id_batch='$id_batch'");
+      
+        $result = mysqli_num_rows($query_multi);
+        
+        if($result > 0){
+  
+          while($data = mysqli_fetch_assoc($query_multi)){
+            $arreglo[] = $data;
+       
+          }
+          
+          echo json_encode(utf8ize($arreglo), JSON_UNESCAPED_UNICODE);
+          //echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+          //exit();
+  
+        }/* else{
+          echo json_encode('');
+        }  
+ */
+
     break;
 }
 ?>

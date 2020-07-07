@@ -171,12 +171,12 @@ include("modal/modal_condicionesMedio.php");
                     <input type="button" class="btn btn-danger" id="despeje_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
                   </div>
                 </div>
-                <div class="row justify-content-end mt-5" style="margin: 1%; text-align: right">
+                <!-- <div class="row justify-content-end mt-5" style="margin: 1%; text-align: right">
                   <div class="col-md-12 col-2 align-self-end">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <button type="button" class="btn btn-primary">Aceptar</button>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>

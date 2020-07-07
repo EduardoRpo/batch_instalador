@@ -10,17 +10,17 @@
           <!-- <input type="date" id="" class="form-control mb-3 fechaCondicionesMedio" readonly> -->
           <img src="../../assets/images/icon/termometro.png" alt="Temperatura" width="25px">
           <label>Temperatura</label>
-          <input type="number" id="temp" class="form-control" style="text-align: center;">
+          <input type="number" id="temperatura" class="form-control" style="text-align: center;" required>
           
           <img src="../../assets/images/icon/humedad.png" alt="Humedad" width="25px">
           <label>Humedad</label>
-          <input type="number" id="humedad" class="form-control" style="text-align: center;">
+          <input type="number" id="humedad" class="form-control" style="text-align: center;" required>
         
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary">Aceptar</button>
+        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button> -->
+        <button type="button" class="btn btn-primary" onclick="guardar_condicionesMedio();">Guardar</button>
       </div>
     </div>
   </div>

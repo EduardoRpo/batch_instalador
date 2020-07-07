@@ -49,6 +49,7 @@ include("modal/modal_cambiarContrasena.php");
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <a class="dropdown-item" href="#" onclick="multipresentacion()">Multipresentación</a>
               <a class="dropdown-item" href="#" onclick="clonar()">Clonar</a>
+              <a class="dropdown-item" href="#" onclick="eliminado()">Batch Eliminados</a>
             </div>
           </div>
 

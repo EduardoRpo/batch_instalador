@@ -20,6 +20,7 @@
           <textarea class="form-control txtObservaciones" aria-label="With textarea"></textarea>
           <select class="custom-select" style="font-size: small;">
             <option value="" hidden selected>MATERIALES</option>
+            <option value=""></option>
             <option value="">FALTANTE MEZCLA MATERIAL BLEND</option>
             <option value="">MATERIA PRIMA DEFECTUOSA</option>
             <option value="">FALTANTE DE INSUMOS</option>
@@ -29,11 +30,13 @@
           </select>
           <select class="custom-select" style="font-size: small;">
             <option value="" hidden selected>MEDICIÓN</option>
+            <option value=""></option>
             <option value="">DESORDEN PUESTO DE TRABAJO</option>
             <option value="">TIEMPO INSUFICIENTE PARA SUPLIR LAS LABORES</option>
           </select>
           <select class="custom-select" style="font-size: small;">
             <option value="" hidden selected>MÁQUINA</option>
+            <option value=""></option>
             <option value="">EQUIPO OBSOLETO Y SIN MANTENIMIENTO</option>
             <option value="">DAÑO SISTEMA CALENTAMIENTO</option>
             <option value="">AVERIA SISTEMA MECANICO</option>
@@ -43,6 +46,7 @@
           </select>
           <select class="custom-select" style="font-size: small;">
             <option value="" hidden selected>MANO DE OBRA</option>
+            <option value=""></option>
             <option value="">AUSENCIA DE PERSONAL</option>
             <option value="">ACCIDENTE DE TRABAJO</option>
             <option value="">TOMA DE DECISIONES TARDIA</option>
@@ -51,11 +55,13 @@
           </select>
           <select class="custom-select" style="font-size: small;">
             <option value="" hidden selected>MEDIO AMBIENTE</option>
+            <option value=""></option>
             <option value="">TEMPERATURAS MUY ALTAS</option>
             <option value="">FALTA DE CULTURA ORGANIZACIONAL</option>
           </select>
           <select class="custom-select" style="font-size: small;">
             <option value="" hidden selected>INCIDENCIAS NECESARIAS</option>
+            <option value=""></option>
             <option value="">MANTENIMIENTO PREVENTIVO</option>
             <option value="">MONTAJE DE MOLDE O BOQUILLAS</option>
             <option value="">EMPAQUE DE MATERIAL</option>

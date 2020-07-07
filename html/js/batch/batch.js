@@ -41,11 +41,11 @@ $(document).ready(function() {
             {"data": "multi", className: "uniqueClassName",
             render: (data, type, row) => {
                 'use strict';
-                return data == 1 ? '<i class="fa fa-superscript link-editarMulti" aria-hidden="true" data-toggle="tooltip" title="Multipresentación" style="color:rgb(59, 131, 189)" aria-hidden="true"></i>' : '';
+                return data == 1 ? '<i class="fa fa-superscript link-editarMulti" aria-hidden="true" data-toggle="tooltip" title="Editar Multipresentación" style="color:rgb(59, 131, 189)" aria-hidden="true"></i>' : '';
             }
             },
-            {"defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Editar' style='color:rgb(255, 193, 7)'>&#xE254;</i></a>"},
-            {"defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(234, 67, 54)'>delete_forever</i></a>"}
+            {"defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Editar Batch Record' style='color:rgb(255, 193, 7)'>&#xE254;</i></a>"},
+            {"defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar Batch Record' style='color:rgb(234, 67, 54)'>delete_forever</i></a>"}
             
         ],
 

@@ -29,6 +29,10 @@ $(document).ready(function () {
         
         columns: [
             {
+                title: 'Batch',
+                data: "id_batch", className: 'uniqueClassName'
+            },
+            {
                 title: 'Fecha Programación',
                 data: 'fecha_programacion', className: 'uniqueClassName'
             },
@@ -44,13 +48,6 @@ $(document).ready(function () {
                 title: 'No Lote',
                 data: 'numero_lote', className: 'uniqueClassName'
             },
-            /*{
-                title: 'Estado',
-                data: 'estado',
-                render: (data, type, row) => {
-                    return data == 1 ? "Activo" : "Inactivo";
-                }
-            },*/ 
             {
                 title: 'Ingresar',
                 data: '', className: 'uniqueClassName',

@@ -20,7 +20,7 @@ include('modal/modal_condicionesMedio.php')
 
   <!-- Favicon icon -->
   <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
-  
+
   <!-- Bootstrap Core CSS -->
   <link href="../../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -31,13 +31,18 @@ include('modal/modal_condicionesMedio.php')
   <link rel="stylesheet" href="../../html/css/colors/blue.css" id="theme">
   <link rel="stylesheet" href="../../html/css/custom.css">
   <link rel="stylesheet" href="../../html/vendor/jquery-confirm/jquery-confirm.min.css">
-  <link rel="stylesheet" type="text/css" href="../../html/vendor/datatables/datatables.min.css">
+  <!-- <link rel="stylesheet" type="text/css" href="../../html/vendor/datatables/datatables.min.css"> -->
   <link rel="stylesheet" type="text/css" href="../../html/vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
   <!-- Alertify -->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+
+  <!-- Exportar Archivos -->
+  <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"> -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
+  <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.21/b-1.6.2/b-flash-1.6.2/datatables.min.css"/> -->
 
 </head>
 
@@ -79,8 +84,7 @@ include('modal/modal_condicionesMedio.php')
 
     <div class="container-fluid">
       <div class="row page-titles">
-        <!-- <label for="" style="color: coral;font-size:medium ">Fecha:<?php echo date("d/m/Y"); ?></label> -->
-        <h1 class="text-themecolor m-b-0 m-t-0"><b>Pesaje</b></h1>
+        <h1 class="text-themecolor m-b-0 m-t-0" data-toggle="modal" data-target="#m_CondicionesMedio" data-backdrop="static" data-keyboard="false"><b>Pesaje</b></h1>
         <a href="../../pesaje" style="background-color:#fff;color:#FF8D6D" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md" role="button">Cola de Trabajo</a>
       </div>
     </div>
@@ -108,7 +112,7 @@ include('modal/modal_condicionesMedio.php')
                   <input type="text" class="form-control" id="in_fecha_programacion" readonly>
                   <input type="text" class="form-control" id="in_numero_orden" readonly>
                   <input type="text" class="form-control" id="in_referencia" readonly>
-                  <input type="text" class="form-control itemInfo" id="observaciones" readonly>
+                  <input type="textarea" class="form-control itemInfo" id="observaciones" readonly>
 
                   <label>Tamaño Lote (Kg)</label>
                   <label>No Lote</label>
@@ -183,10 +187,10 @@ include('modal/modal_condicionesMedio.php')
                   </div>
                 </div>
                 <div class="row justify-content-end mt-5" style="margin: 1%; text-align: right">
-                  <div class="col-md-12 col-2 align-self-end">
+                  <!--  <div class="col-md-12 col-2 align-self-end">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <button type="button" class="btn btn-primary">Aceptar</button>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -223,59 +227,63 @@ include('modal/modal_condicionesMedio.php')
 
               <hr>
               <div class="card-body">
-                <!-- <div class="row" style="margin: 1%"> -->
-                <!-- <div class="col-md-12 col-2 align-self-center"> -->
                 <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Pesaje</h3>
-                <!-- </div> -->
-                <!-- <div class="col-md-12 col-2 align-self-center"> -->
+
                 <form>
+                  <div class="table-responsive"></div>
                   <table class="table" id="tablePesaje" style="width: 100%;">
 
                   </table>
-                </form>
-                <!-- </div> -->
-
               </div>
-              <hr>
-              <div class="row" style="margin: 1%">
-                <!-- <div class="col-md-2 col-2 align-self-right">
+              </form>
+
+            </div>
+            <hr>
+
+            <div class="row" style="margin: 1%">
+              <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down" data-toggle="modal" data-target="#modalObservaciones" style="margin-left: 1%">
+                Observaciones y/o Incidencias en el proceso
+              </button>
+            </div>
+            <hr>
+            <div class="row" style="margin: 1%">
+              <!-- <div class="col-md-2 col-2 align-self-right">
                     <label for="in_fecha_pesaje" class="col-form-label">Fecha:</label>
                     <input type="date" class="form-control" id="in_fecha_pesaje" readonly>
                   </div> -->
-                <div class="col-md-3 col-2 align-self-center">
-                  <label for="pesaje_realizado" class="col-form-label">Realizado Por:</label>
-                  <input type="text" class="form-control" id="pesaje_realizado" readonly>
-                </div>
-
-                <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                  <input type="button" class="btn btn-danger" id="pesaje_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
-                </div>
-
-                <div class="col-md-3 col-2 align-self-center">
-                  <label for="pesaje_verificado" class="col-form-label">Verificado Por:</label>
-                  <input type="text" class="form-control" id="pesaje_verificado" readonly>
-                </div>
-                <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                  <input type="button" class="btn btn-danger" id="pesaje_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
-                </div>
+              <div class="col-md-3 col-2 align-self-center">
+                <label for="pesaje_realizado" class="col-form-label">Realizado Por:</label>
+                <input type="text" class="form-control" id="pesaje_realizado" readonly>
               </div>
 
-              <div class="row justify-content-end mt-5" style="margin: 1%;text-align: right">
-                <div class="col-md-12 col-2 align-self-end">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                  <!-- <button type="button" class="btn btn-primary" onclick="window.location.href = '/preparacion';">Aceptar -->
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#m_CondicionesMedio">Aceptar
-                  </button>
-                </div>
+              <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
+                <input type="button" class="btn btn-danger" id="pesaje_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
               </div>
 
+              <div class="col-md-3 col-2 align-self-center">
+                <label for="pesaje_verificado" class="col-form-label">Verificado Por:</label>
+                <input type="text" class="form-control" id="pesaje_verificado" readonly>
+              </div>
+              <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
+                <input type="button" class="btn btn-danger" id="pesaje_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
+              </div>
             </div>
-          </div>
 
+            <div class="row justify-content-end mt-5" style="margin: 1%;text-align: right">
+              <div class="col-md-12 col-2 align-self-end">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#m_CondicionesMedio">Aceptar
+                </button>
+              </div>
+            </div>
+
+          </div>
         </div>
 
       </div>
+
     </div>
+  </div>
   </div>
 
   <!-- jquery -->
@@ -287,7 +295,7 @@ include('modal/modal_condicionesMedio.php')
 
   <!-- Datatables -->
   <script type="text/javascript" src="../../html/vendor/datatables/datatables.min.js"></script>
-    
+
   <!-- slimscrollbar scrollbar JavaScript -->
   <script src="../../html/js/utils/jquery.slimscroll.js"></script>
 
@@ -310,6 +318,19 @@ include('modal/modal_condicionesMedio.php')
 
   <!--Alertify-->
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+  <!-- Exportar Archivos -->
+
+  <!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
+  <!-- <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script> -->
+  <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.print.min.js"></script>
+
+  
+ 
+ <!-- <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.21/b-1.6.2/b-flash-1.6.2/datatables.min.js"></script> -->
+ 
+
 </body>
 
 </html>

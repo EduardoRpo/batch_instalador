@@ -24,12 +24,67 @@ $.ajax({
     $('#in_tamano_lote').val(data.tamano_lote);
 });
 
-/* Cargar ventana de Condiciones Medio */
+/* Mostrar ventana de Condiciones Medio de acuerdo con el tiempo establecido en la BD*/
 
-$(document).ready(function () {
-    setTimeout(function(){ 
-        $('#modalCondicionesMedio').modal('show'); }, Math.floor(Math.random() * (300000 - 180000)) + 180000); /* 5 min y 15min */
+$(document).ready(function() {
+        
+    let proceso = $('h1').text();
+    
+    $.ajax({
+        'type' : 'POST',
+        'url'  : '/html/php/condicionesmedio.php',
+        'data' : {operacion : "1", modulo : proceso},
+        
+        success: function (resp) {
+            
+            var info = JSON.parse(resp);
+            let tiempo = Math.round(Math.random()*(info.max-info.min)+parseInt(info.min));
+            setTimeout(function(){  $("#m_CondicionesMedio").modal("show").modal({backdrop: 'static', keyboard: false}); }, tiempo*60000);
+            
+        }
+    });
+    return false;
+
 });
+
+/* Almacenar informacion de condiciones del medio */
+
+function guardar_condicionesMedio(){
+
+    let proceso = $('h1').text();
+    let temperatura = $('#temperatura').val();
+    let humedad = $('#humedad').val();
+    let url = $(location).attr('href');
+    let id_batch = url.split("/");
+    
+    if(temperatura == "" || humedad == ""){
+        alertify.set("notifier","position", "top-right"); alertify.error("Complete todos los datos para continuar con el proceso.");
+        return false;
+    }
+
+    $('#m_CondicionesMedio').modal('hide');
+
+    $.ajax({
+        'type' : 'POST',
+        'url'  : '/html/php/condicionesmedio.php',
+        'data' : {
+            operacion: "2",
+            modulo : proceso,
+            temperatura: temperatura,
+            humedad: humedad,
+            id: id_batch[4]
+        },
+        
+        success: function (resp) {
+            alertify.set("notifier","position", "top-right"); alertify.success("Condiciones del Medio Almacenado");
+            
+            
+        }
+    });
+    return false;
+ 
+}
+
 
 /* Cargar desinfectantes */
 

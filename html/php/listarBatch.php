@@ -31,7 +31,7 @@
         $query_batch = mysqli_query($conn, 'SELECT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, presentacion_comercial.presentacion,batch.numero_lote, batch.tamano_lote, propietario.nombre,batch.fecha_creacion, batch.fecha_programacion, batch.estado, batch.multi
                                             FROM batch INNER JOIN producto INNER JOIN presentacion_comercial INNER JOIN propietario
                                             ON batch.id_producto = producto.referencia AND producto.id_presentacion_comercial = presentacion_comercial.id AND producto.id_propietario = propietario.id
-                                            WHERE estado=1
+                                            WHERE estado=1 AND fecha_programacion<DATE_SUB(CURDATE(), INTERVAL -1 DAY)
                                             ORDER BY batch.id_batch desc; ');
       }else{ 
       $query_batch = mysqli_query($conn, 'SELECT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, presentacion_comercial.presentacion,batch.numero_lote, batch.tamano_lote, propietario.nombre,batch.fecha_creacion, batch.fecha_programacion, batch.estado, batch.multi
@@ -62,15 +62,18 @@
     case 2: //Eliminar
       $id_batch = $_POST['id'];
       //echo $id_batch;  
+
+      $query_batch_Insert = "INSERT INTO batch_eliminado 
+                             SELECT id_batch, fecha_creacion, fecha_programacion, NOW(), numero_orden, numero_lote, tamano_lote, lote_presentacion, unidad_lote, id_producto 
+                             FROM batch 
+                             WHERE id_batch = $id_batch";
+      
+      $result_insert = mysqli_query($conn, $query_batch_Insert);
     
-      $query_batch = "DELETE FROM batch WHERE id_batch = $id_batch";
-      $result = mysqli_query($conn, $query_batch);
+      $query_batch_Eliminar = "DELETE FROM batch WHERE id_batch = $id_batch";
+      $result_eliminar = mysqli_query($conn, $query_batch_Eliminar);
 
-      /* $query_batch_tanques = "DELETE FROM batch_tanques WHERE id_batch = $id_batch";
-      $result_tanques = mysqli_query($conn, $query_batch_tanques); */
-
-
-      if($result){
+      if($result_eliminar){
         $query_batch_tanques = "DELETE FROM batch_tanques WHERE id_batch = $id_batch";
         $result_tanques = mysqli_query($conn, $query_batch_tanques);
       }else{

@@ -35,7 +35,8 @@ $.ajax({
 
 });
 
-/* Tabla formula  */
+/* Formula Materia Prima  */
+
 
 let tablePesaje = $('#tablePesaje').dataTable({
     ajax: {
@@ -46,6 +47,26 @@ let tablePesaje = $('#tablePesaje').dataTable({
     info: false,
     searching: false,
     sorting: false,
+    
+    /*dom: 'Bfrtilp',
+    
+    buttons: [
+        'print'
+        {
+            extend: 'pdfHtml5',
+            text: '<i class="fas fa-file-pdf"></i>',
+            titleAttr: 'Exportar a PDF',
+            className: 'btn btn-danger'
+
+        },
+        {
+            extend: 'print',
+            text: '<i class="fas fa-print"></i>',
+            titleAttr: 'Imprimir',
+            className: 'btn btn-info'
+
+        }, 
+        ],*/
     columns: [
         {
             title: 'Referencia',
@@ -63,9 +84,9 @@ let tablePesaje = $('#tablePesaje').dataTable({
             render: (data, type, row) => {
                 
                 if (flagWeight) {
-                    return (data * batch.tamano_lote) / 1000;
+                    return (data * batch.tamano_lote) ;
                 } else {
-                    return (data * batch.tamano_lote);
+                    return (data * batch.tamano_lote)/ 1000;
                 }
                 
             },
@@ -79,10 +100,10 @@ let tablePesaje = $('#tablePesaje').dataTable({
             render: (data, type, row) => {
                 
                 if (flagWeight) {
-                    return ((data * batch.tamano_lote) / 1000) / 10;
+                    return data * batch.tamano_lote * 10;
                     //$.fn.dataTable.render.number( '.', ',', 2, '' )}
                 } else {
-                    return data * batch.tamano_lote * 10;
+                    return ((data * batch.tamano_lote) / 1000) / 10;
                 }
             
             },
@@ -96,6 +117,8 @@ let tablePesaje = $('#tablePesaje').dataTable({
         
     ]
 });
+
+/* Creacion de botones para exportar */
 
 
 
@@ -116,106 +139,3 @@ function cambioConversion() {
     tablePesaje.api().ajax.reload();
     $(tablePesaje.api().column(2).header()).html(`Peso (<a href="javascript:cambioConversion();" class="conversion_weight">${flagWeight ? 'Kg' : 'g'}</a>)`);
 }
-
-
-/* function enviar() {
-    $('#myModal2').modal('hide');
-    let usuario = $('#usuariomodal2').val();
-    console.log(usuario);
-    let contrasena = $('#contrasenamodal2').val();
-    console.log(contrasena);
-    let user = {
-        email: usuario,
-        password: contrasena
-    };
-    $.ajax({
-        type: 'POST',
-        url: '/api/user',
-        data: JSON.stringify(user),
-        dataType: 'json',
-        contentType: 'application/json; charset=utf-8',
-        success: function (resp) {
-
-            let parent = $('#in_realizado').parent();
-            $('#in_realizado').remove();
-            parent.append(`<img id="in_verificado" src="data:image/png;base64, ${resp.firma}" height="130">`);
-        }
-    });
-    return false;
-
-}
-
-function enviar2() {
-
-    $('#myModal3').modal('hide');
-    let usuario = $('#usuariomodal3').val();
-    let contrasena = $('#contrasenamodal3').val();
-    let user = {
-        email: usuario,
-        password: contrasena
-    };
-    $.ajax({
-        type: 'POST',
-        url: '/api/user',
-        data: JSON.stringify(user),
-        dataType: 'json',
-        contentType: 'application/json; charset=utf-8',
-        success: function (resp) {
-            let parent = $('#in_verificado').parent();
-            $('#in_verificado').remove();
-            parent.append(`<img id="in_verificado" src="data:image/png;base64, ${resp.firma}" height="130">`);
-        }
-    });
-    return false;
-
-}
-
-function enviar3() {
-    $('#myModal4').modal('hide');
-    let usuario = $('#usuariomodal4').val();
-    let contrasena = $('#contrasenamodal4').val();
-    let user = {
-        email: usuario,
-        password: contrasena
-    };
-    $.ajax({
-        type: 'POST',
-        url: '/api/user',
-        data: JSON.stringify(user),
-        dataType: 'json',
-        contentType: 'application/json; charset=utf-8',
-        success: function (resp) {
-
-            let parent = $('#in_realizado_2').parent();
-            $('#in_realizado_2').remove();
-            parent.append(`<img id="in_realizado_2" src="data:image/png;base64, ${resp.firma}" height="130">`);
-        }
-    });
-    return false;
-
-}
-
-function enviar4() {
-
-    $('#myModal5').modal('hide');
-    let usuario = $('#usuariomodal5').val();
-    let contrasena = $('#contrasenamodal5').val();
-    let user = {
-        email: usuario,
-        password: contrasena
-    };
-    $.ajax({
-        type: 'POST',
-        url: '/api/user',
-        data: JSON.stringify(user),
-        dataType: 'json',
-        contentType: 'application/json; charset=utf-8',
-        success: function (resp) {
-            let parent = $('#in_verificado_2').parent();
-            $('#in_verificado_2').remove();
-            parent.append(`<img  id="in_verificado_2" src="data:image/png;base64, ${resp.firma}" height="130">`);
-        }
-    });
-    return false;
-
-} */

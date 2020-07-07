@@ -51,9 +51,9 @@ $('#form_clonar').submit(function (event) {
 
         var d = new Date();
 
-    var mes = d.getMonth() + 1;
-    var dia = d.getDate();
-    var fechaActual = d.getFullYear() + '/' + (mes<10 ? '0' : '') + mes + '/' + (dia<10 ? '0' : '') + dia;
+        var mes = d.getMonth() + 1;
+        var dia = d.getDate();
+        var fechaActual = d.getFullYear() + '/' + (mes<10 ? '0' : '') + mes + '/' + (dia<10 ? '0' : '') + dia;
 
 
         $.ajax({

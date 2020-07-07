@@ -47,7 +47,7 @@ $("#masMulti").on('click', function(){
         $('#inputcalculoTotal').show();
     } 
 
-    var template = '<select class="form-control" name="MultiReferencia" id=":cmbMultiReferencia:" onchange="cargarReferenciaM();" required>' +
+    var template = '<select class="form-control" name="MultiReferencia" id=":cmbMultiReferencia:" onchange="cargarReferenciaM();">' +
                     '</select>' +
                     '<input type="text" class="form-control" id=":cantidadMulti:" name="cantidadMulti" placeholder="Unidades" onblur="CalculoloteMulti(this.value);">' +
                     '<input type="text" class="form-control" id=":tamanoloteMulti:" name="tamanoloteMulti" readonly placeholder="Lote">' +
@@ -91,10 +91,11 @@ function cargarMulti(cont) {
             var $select = $('#cmbMultiReferencia' + cont);
             var info = JSON.parse(r);            
             console.log(info);
-            $select.append('<option disabled selected>' + "Multipresentacion" + '</option>');
-            
+            $select.append('<option disabled selected>' + "MULTIPRESENTACIÓN" + '</option>');
+            i=1;
             $.each(info, function(i, value) {
-                $select.append('<option value=' + i.id + '>' + value.nombre_referencia + '</option>');
+                $select.append('<option value=' + i + '>' + value.nombre_referencia + '</option>');
+                i++;
             });
             
         }
@@ -116,7 +117,7 @@ function cargarReferenciaM(){
         success: function(r)
         {
             var info = JSON.parse(r);
-                      
+            console.log(info);
             $.ajax({
                 type: "POST",
                 'url' : 'php/multi.php',
@@ -165,32 +166,21 @@ function CalculoloteMulti () {
     $('#tamanoloteMulti' + cont).val(total);    
     $('#transitoMulti').val(total);
 
-    var txtTotalm1 = $('#tamanoloteMulti1').val();
-    var txtTotalm2 = $('#tamanoloteMulti2').val();
-    var txtTotalm3 = $('#tamanoloteMulti3').val();
-    var txtTotalm4 = $('#tamanoloteMulti4').val();
-    var txtTotalm5 = $('#tamanoloteMulti5').val();
-
     var sumaMulti = $('#sumaMulti').val();
     
     if(cont==1 ){
         sumaMulti=0;
     }
-    
-    if(txtTotalm1 == undefined || txtTotalm1==""){
-        txtTotalm1 = 0;
-    }if(txtTotalm2 == undefined || txtTotalm2==""){
-        txtTotalm2 = 0;
-    }if(txtTotalm3 == undefined || txtTotalm3==""){
-        txtTotalm3 = 0;
-    }if(txtTotalm4 == undefined || txtTotalm4==""){
-        txtTotalm4 = 0;
-    }if(txtTotalm5 == undefined || txtTotalm5==""){
-        txtTotalm5 = 0;
-    }  
-    
-    sumaMulti =  parseInt(txtTotalm1) + parseInt(txtTotalm2) + parseInt(txtTotalm3) + parseInt(txtTotalm4) + parseInt(txtTotalm5);
-    
+
+    for(i=1; i<6; i++){
+        txtTotalm = $('#txtTotalm'+ i).val();
+        if(txtTotalm == undefined || $('#tamanoloteMulti'+i).val() ==""){
+            txtTotalm = 0;
+        }    
+        
+        sumaMulti = parseInt(sumaMulti) + parseInt(txtTotalm);
+    }
+      
     var cantidadLote = $('#loteTotal').val();
     
     if(sumaMulti > cantidadLote ){
@@ -316,27 +306,44 @@ $(document).on('click', '.link-editarMulti', function(e){
 
     $.ajax({
         method: 'POST',
-        url : 'php/listarBatch.php',
-        data: {operacion : "4", id :data.id_batch},
+        url : 'php/multi.php',
+        data: {operacion : "6", id :data.id_batch},
 
         success: function(response){
             
             var info = JSON.parse(response);
-            for(k=1; k<info.length; k++){
+
+            //for(k=1; k<=info.length; k++){
+                //$('#Modal_Multipresentacion').modal('show');
+                k=1
                 $("#masMulti").click();
+                var referencia = info[0].nombre_referencia;
+               
                 
-                $('#cmbMultiReferencia' + k).val(info[0].multireferencia);
-                $('#cantidadMulti' + k).val(info[0].cantidad);
-                $('#tamanoloteMulti' + k).val(info[0].tamano);
-                $('#densidadMulti' + k).val(info[0].densidad);
-                $('#presentacionMulti' + k).val(info[0].presentacion);
-            }
+                $('#cantidadMulti1').val(info[0].cantidad); 
+                $('#tamanoloteMulti1').val(info[0].tamano);
+                $('#densidadMulti1').val(info[0].densidad);
+                $('#presentacionMulti1').val(info[0].presentacion);
+                CalculoloteMulti();
+                cargarMulti(k);
+                $('#cmbMultiReferencia1 option')
+                    .filter(function() { 
+                        console.log($(this).text());
+                        return $.trim( $(this).text() ) == referencia; })
+                    .attr('selected',true);
+
+            //}
         }
 
     })
 
     $('#Modal_Multipresentacion').modal('show');
 })
+
+/*  */
+
+
+/* Limpiar campos de Multipresentacion */
 
 function limpiarMultipresentacion(){
     $('#loteTotal').val(' ');
