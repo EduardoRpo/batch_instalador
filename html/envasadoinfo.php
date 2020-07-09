@@ -14,8 +14,8 @@ include('modal/m_firma.php');
 
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <meta name="description" content="Batch Record">
+  <meta name="author" content="Teenus SAS">
 
   <!-- Favicon icon -->
   <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
@@ -80,7 +80,6 @@ include('modal/m_firma.php');
 
     <div class="container-fluid">
       <div class="row page-titles">
-        <!-- <label for="" style="color: coral;font-size:medium ">Fecha:<?php echo date("d/m/Y"); ?></label> -->
         <h1 class="text-themecolor m-b-0 m-t-0"><b>Envasado</b></h1>
         <a href="../../envasado" style="background-color:#fff;color:#FF8D6D" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md" role="button">Cola de Trabajo</a>
       </div>
@@ -100,7 +99,7 @@ include('modal/m_firma.php');
 
             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
               <div class="card-body">
-                <div class="contenedorInfoGeneral">
+                <div class="contenedorInfo">
                 <label for="recipient-name" class="col-form-label">Fecha Programación</label>
                   <label for="recipient-name" class="col-form-label">No Orden</label>
                   <label for="recipient-name" class="col-form-label">Referencia</label>
@@ -109,7 +108,8 @@ include('modal/m_firma.php');
                   <input type="date" class="form-control" id="in_fecha" readonly>
                   <input type="text" class="form-control" id="in_numero_orden" readonly>
                   <input type="text" class="form-control" id="in_referencia" readonly>
-                  <input type="text" class="form-control itemInfo" id="observaciones" readonly>
+                  <!-- <input type="text" class="form-control itemInfo" id="observaciones" readonly> -->
+                  <textarea class="form-control itemInfo" id="observacionesMulti" cols="5" rows="7" readonly></textarea>
 
                   <label for="in_tamano_lote" class="col-form-label">Tamaño Lote</label>
                   <label for="recipient-name" class="col-form-label">No. Lote</label>

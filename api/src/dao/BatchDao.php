@@ -12,7 +12,7 @@
    *
    * Class BatchDao
    * @package BatchRecord\dao
-   * @author Alexis Holguin <MoraHol>
+   * @author Sergio Velandia <svelandia>
    */
   class BatchDao
   {
@@ -47,12 +47,20 @@
     public function findById($id)
     {
       $connection = Connection::getInstance()->getConnection();
-      $stmt = $connection->prepare("SELECT * FROM producto INNER JOIN batch ON batch.id_producto = producto.referencia  INNER JOIN linea ON linea.id = producto.id_linea WHERE id_batch= :idBatch");
+      $stmt = $connection->prepare("SELECT * 
+                                    FROM producto 
+                                    INNER JOIN batch ON batch.id_producto = producto.referencia  
+                                    INNER JOIN linea ON linea.id = producto.id_linea 
+                                    WHERE id_batch= :idBatch");
+      
       $stmt->execute(array('idBatch' => $id));
+      
       $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
       $batch = $stmt->fetch($connection::FETCH_ASSOC);
       $this->logger->notice("batch consultado", array('batch' => $batch));
+
       return $batch;
+
     }
 
     public function save($batch)

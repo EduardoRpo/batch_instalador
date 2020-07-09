@@ -99,7 +99,7 @@ include('modal/m_firma.php');
 
             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
               <div class="card-body">
-                <div class="contenedorInfoGeneral">
+                <div class="contenedorInfo">
                   <label for="recipient-name" class="col-form-label">Fecha Programación</label>
                   <label for="recipient-name" class="col-form-label">No Orden</label>
                   <label for="recipient-name" class="col-form-label">Referencia</label>
@@ -108,7 +108,8 @@ include('modal/m_firma.php');
                   <input type="date" class="form-control" id="in_fecha" readonly>
                   <input type="text" class="form-control" id="in_numero_orden" readonly>
                   <input type="text" class="form-control" id="in_referencia" readonly>
-                  <input type="text" class="form-control itemInfo" id="observaciones" readonly>
+                  <!-- <input type="text" class="form-control itemInfo" id="observaciones" readonly> -->
+                  <textarea class="form-control itemInfo" id="observaciones" cols="5" rows="7" readonly></textarea>
 
                   <label for="in_tamano_lote" class="col-form-label">Tamaño Lote</label>
                   <label for="recipient-name" class="col-form-label">No. Lote</label>

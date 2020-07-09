@@ -105,7 +105,8 @@ include("modal/modal_condicionesMedio.php");
                   <input type="date" class="form-control" id="in_fecha" readonly>
                   <input type="text" class="form-control" id="in_numero_orden" readonly>
                   <input type="text" class="form-control" id="in_referencia" readonly>
-                  <input type="text" class="form-control itemInfo" id="observaciones" readonly>
+                  <!-- <input type="text" class="form-control itemInfo" id="observaciones" readonly> -->
+                  <textarea class="form-control itemInfo" id="observaciones" cols="5" rows="7" readonly></textarea>
 
                   <label for="in_tamano_lote" class="col-form-label">Tamaño Lote</label>
                   <label for="recipient-name" class="col-form-label">No. Lote</label>

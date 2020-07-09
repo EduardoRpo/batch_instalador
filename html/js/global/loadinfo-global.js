@@ -1,6 +1,7 @@
 let idBatch = location.href.split('/')[4];
 let referencia = location.href.split('/')[5];
 let batch;
+let template;
 
 Date.prototype.toDateInputValue = (function () {
     var local = new Date(this);
@@ -10,6 +11,7 @@ Date.prototype.toDateInputValue = (function () {
 
 $('#in_fecha').val(new Date().toDateInputValue());
 $('#in_fecha').attr('min', new Date().toDateInputValue());
+
 $.ajax({
     url: `../../api/batch/${idBatch}`,
     type: 'GET'
@@ -22,6 +24,24 @@ $.ajax({
     $('#in_linea').val(data.nombre_linea);
     $('#in_fecha_programacion').val(data.fecha_programacion);
     $('#in_tamano_lote').val(data.tamano_lote);
+});
+
+$.ajax({
+    'method' : 'POST',
+    'url' : '../../html/php/tanques.php',
+    'data':{id : idBatch},
+
+    success: function(data){
+        var info = JSON.parse(data);
+ 
+        for(i=0; i<=info.length; i++){
+            template = 'Tanque: '+ info[i].tanque +' x '+ ' Cantidad: ' + info[i].cantidad+' ='+' Total: ' + info[i].tanque * info[i].cantidad;
+            document.getElementById("observaciones").value+=template + '\n';
+        }
+    },
+    error: function(r){
+        alertify.set("notifier","position", "top-right"); alertify.error("Error al Cargar los tanques.");
+    } 
 });
 
 /* Mostrar ventana de Condiciones Medio de acuerdo con el tiempo establecido en la BD*/
@@ -76,9 +96,7 @@ function guardar_condicionesMedio(){
         },
         
         success: function (resp) {
-            alertify.set("notifier","position", "top-right"); alertify.success("Condiciones del Medio Almacenado");
-            
-            
+            alertify.set("notifier","position", "top-right"); alertify.success("Condiciones del Medio Almacenado");  
         }
     });
     return false;

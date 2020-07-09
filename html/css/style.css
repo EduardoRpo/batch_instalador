@@ -8174,7 +8174,7 @@ div.displayallinfo {
 /* Cabecera Info */
 .contenedorInfo{
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr) 350px;
   grid-template-rows: 1em 2em 1em 2em;
   grid-gap: 1em;
   margin: 20px;
