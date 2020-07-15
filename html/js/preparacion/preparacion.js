@@ -1,11 +1,11 @@
 $(document).ready(function () {
     $('#preparacionTabla').dataTable({
         ajax: {
-            //url: '/api/batch',
-            method: "POST",
-            url : "html/php/listarBatch.php",
-            data : {"operacion" : "1", "proceso": "2"},
-            //dataSrc: ''
+            url: '/api/batch',
+            //method: "POST",
+            //url : "html/php/listarBatch.php",
+            //data : {"operacion" : "1", "proceso": "2"},
+            dataSrc: ''
         },
         language:{
             url: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json'

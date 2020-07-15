@@ -221,6 +221,7 @@ $(document).ready(function(){
             alertify.set("notifier","position", "top-right"); alertify.error("Tiempo completado.");
             queeProcess++;
             refreshInstructivo();
+            mostrarInstructivo();
         }
     }
 

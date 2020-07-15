@@ -119,9 +119,10 @@ $.ajax({
     pasos = data;
     data.forEach((instructivo, indx) => {
         $('#pasos_instructivo').append(`<a href="javascript:void(0)" onclick="procesoTiempo(event)" 
-        class="proceso-instructivo" attr-indx="${indx}" attr-id="${instructivo.id}" 
+        class="proceso-instructivo" attr-indx="${indx}" attr-id="${instructivo.id}" id="proceso-instructivo${instructivo.id}" 
         attr-tiempo="${instructivo.tiempo}">PASO ${indx + 1}: ${instructivo.proceso} </a>  <br/>`);
     });
+    ocultarInstructivo();
 });
 
 function procesoTiempo(event) {
@@ -151,4 +152,26 @@ function refreshInstructivo() {
             $(this).addClass('text-sucess');
         }
     });
+}
+
+/* Ocultar las instrucciones del paso 3 en adelante */
+
+var paso = 4;
+
+function ocultarInstructivo(){
+    
+    var numElem =$('#pasos_instructivo .proceso-instructivo').length;
+    
+    for (i=4; i<=numElem; i++ ){    
+        $("#proceso-instructivo"+i).css("color", "#FFFFFF");
+        $("#proceso-instructivo"+i).css("outline", "none");
+        }
+} 
+
+/* Mostrar siguiente paso */
+
+function mostrarInstructivo(){
+    
+    $("#proceso-instructivo"+ paso).css("color", "#67757c");
+    paso = paso + 1;
 }
