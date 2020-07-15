@@ -1,9 +1,9 @@
 <?php
-include('modal/modal_cambiarContrasena.php');
-include('modal/modal_observaciones.php');
-include('modal/modal_imprimirEtiquetas.php');
-include('modal/m_firma.php');
-include('modal/modal_condicionesMedio.php')
+  include('modal/modal_cambiarContrasena.php');
+  include('modal/modal_observaciones.php');
+  include('modal/modal_imprimirEtiquetas.php');
+  include('modal/m_firma.php');
+  include('modal/modal_condicionesMedio.php')
 ?>
 
 <!DOCTYPE html>
@@ -115,7 +115,6 @@ include('modal/modal_condicionesMedio.php')
                   <!-- <input type="textarea" class="form-control itemInfo" id="observaciones" hidden readonly> -->
                   <textarea class="form-control itemInfo" id="observaciones" cols="5" rows="7" readonly></textarea>
                   
-
                   <label>Tamaño Lote (Kg)</label>
                   <label>No Lote</label>
                   <label>Línea</label>

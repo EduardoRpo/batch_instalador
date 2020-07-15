@@ -17,27 +17,40 @@
     return $d;
     }
 
-
     $op = $_POST['operacion'];
-
+        
+    if($op==1){
+      $fecha_busqueda = $_POST['busqueda'];
+      $fecha_inicio = $_POST['inicio'];
+      $fecha_final = $_POST['final'];  
+    }
+    
    switch($op){
     case 1: //listar Batch
 
       $proceso = $_POST['proceso'];
-      //echo $proceso;
-      //exit();
 
       if($proceso==2){
-        $query_batch = mysqli_query($conn, 'SELECT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, presentacion_comercial.presentacion,batch.numero_lote, batch.tamano_lote, propietario.nombre,batch.fecha_creacion, batch.fecha_programacion, batch.estado, batch.multi
+        $query_batch = mysqli_query($conn, "SELECT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, presentacion_comercial.presentacion,batch.numero_lote, batch.tamano_lote, propietario.nombre,batch.fecha_creacion, batch.fecha_programacion, batch.estado, batch.multi
                                             FROM batch INNER JOIN producto INNER JOIN presentacion_comercial INNER JOIN propietario
                                             ON batch.id_producto = producto.referencia AND producto.id_presentacion_comercial = presentacion_comercial.id AND producto.id_propietario = propietario.id
-                                            WHERE estado=1 AND fecha_programacion<DATE_SUB(CURDATE(), INTERVAL -1 DAY)
-                                            ORDER BY batch.id_batch desc; ');
+                                            WHERE estado=1 AND fecha_programacion < DATE_SUB(CURDATE(), INTERVAL -1 DAY)
+                                            ORDER BY batch.id_batch desc; ");
       }else{ 
-      $query_batch = mysqli_query($conn, 'SELECT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, presentacion_comercial.presentacion,batch.numero_lote, batch.tamano_lote, propietario.nombre,batch.fecha_creacion, batch.fecha_programacion, batch.estado, batch.multi
-                                            FROM batch INNER JOIN producto INNER JOIN presentacion_comercial INNER JOIN propietario
-                                            ON batch.id_producto = producto.referencia AND producto.id_presentacion_comercial = presentacion_comercial.id AND producto.id_propietario = propietario.id
-                                            ORDER BY batch.id_batch desc;');
+      
+        $query = "SELECT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, presentacion_comercial.presentacion,batch.numero_lote, batch.tamano_lote, propietario.nombre,batch.fecha_creacion, batch.fecha_programacion, batch.estado, batch.multi
+                  FROM batch INNER JOIN producto INNER JOIN presentacion_comercial INNER JOIN propietario
+                  ON batch.id_producto = producto.referencia AND producto.id_presentacion_comercial = presentacion_comercial.id AND producto.id_propietario = propietario.id 
+                   ";
+        
+        if($fecha_busqueda){
+          $query .= " WHERE $fecha_busqueda BETWEEN '$fecha_inicio' AND '$fecha_final' ";
+          }
+
+          $query .= "ORDER BY batch.id_batch desc";
+
+          $query_batch = mysqli_query($conn, $query);
+                                          
       }
 
       $result = mysqli_num_rows($query_batch);
@@ -219,6 +232,10 @@
       $tanque       = $_POST['tqns'];
       $tamanotqn    = $_POST['tmn'];
 
+      print_r($tanque); '<br>';
+      print_r($tamanotqn);
+
+
       $query_actualizar = "UPDATE batch SET unidad_lote = '$unidades', tamano_lote = '$lote', fecha_programacion = '$programacion'
                            WHERE id_batch ='$id_batch'";
     
@@ -233,7 +250,7 @@
 
       $query_eliminar_tanque = mysqli_query($conn, "DELETE FROM batch_tanques WHERE id_batch ='$id_batch'");
       
-      if(count($$tanque) > 0 ){
+      if(count($tanque) > 0 ){
         for($i=0; $i < count($tanque); ++$i){
           $query_tanque = "INSERT INTO batch_tanques (tanque, cantidad, id_batch) VALUES('$tanque[$i]' , '$tamanotqn[$i]', '$id_batch')";
           $result = mysqli_query($conn, $query_tanque);

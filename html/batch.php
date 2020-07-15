@@ -65,23 +65,23 @@ include("modal/modal_cambiarContrasena.php");
         <form id="formFechas">
           <div class="row">
             <div class="col-md-6 col-2 align-self-center" style="padding-bottom: 10px;left:50px">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1" name="typeFilter">
-              <label class="form-check-label" for="exampleCheck1" style="padding-right: 10px;">Creación</label>
+              <input type="checkbox" class="form-check-input" id="checkFechaCreacion" name="typeFilter">
+              <label class="form-check-label" for="checkFechaCreacion" style="padding-right: 10px;">Creación</label>
 
-              <input type="checkbox" class="form-check-input" id="exampleCheck2" name="typeFilter">
-              <label class="form-check-label" for="exampleCheck2">Programación</label>
+              <input type="checkbox" class="form-check-input" id="checkFechaProgramacion" name="typeFilter">
+              <label class="form-check-label" for="checkFechaProgramacion">Programación</label>
             </div>
           </div>
 
           <div class="row fechasfiltrado">
             <div class="col-md-3 col-2 align-self-center">
-              <input type="text" name="daterange" value="" class="form-control" />
+              <input type="text" name="daterange" id="daterange" value="" class="form-control" />
 
             </div>
 
 
             <div class="col-md-1 col-2 align-self-center">
-              <button id="btnfiltrar" class="btn btn-danger" type="submit">Filtrar</button>
+              <button id="btnfiltrar" class="btn btn-info" type="button">Eliminar Filtro</button>
 
 
             </div>
@@ -123,7 +123,8 @@ include("modal/modal_cambiarContrasena.php");
     </div>
 
     <!-- jquery -->
-    <script src="../assets/plugins/jquery/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <!-- <script src="../assets/plugins/jquery/jquery.min.js"></script> -->
     <script src="js/utils/jquery.slimscroll.js"></script>
     <script src="vendor/jquery/jquery.serializeToJSON.min.js"></script>
 

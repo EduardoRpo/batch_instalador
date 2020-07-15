@@ -8256,6 +8256,36 @@ div.displayallinfo {
   margin: 20px;
 }
 
+.labelTanques{
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.mostrarTanque{
+  display: grid;
+  grid-template-columns:  repeat(3, 100px) 40px;
+  grid-gap: 1em;
+  margin: 20px; 
+}
+
+.sumaTanques{
+  grid-column-start: 3;
+  grid-column-end: 4;
+}
+
+.tnq{
+  text-align: right;
+}
+
+.labelTotalTanques{
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
 .insertarRefMulti{
   display: grid;
   grid-template-columns: 450px 100px 100px 50px;

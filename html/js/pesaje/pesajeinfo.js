@@ -37,8 +37,8 @@ $.ajax({
 
 /* Formula Materia Prima  */
 
-
 let tablePesaje = $('#tablePesaje').dataTable({
+
     ajax: {
         url: `../../api/materiasp/${referencia}`,
         dataSrc: ''
@@ -48,25 +48,6 @@ let tablePesaje = $('#tablePesaje').dataTable({
     searching: false,
     sorting: false,
     
-    /*dom: 'Bfrtilp',
-    
-    buttons: [
-        'print'
-        {
-            extend: 'pdfHtml5',
-            text: '<i class="fas fa-file-pdf"></i>',
-            titleAttr: 'Exportar a PDF',
-            className: 'btn btn-danger'
-
-        },
-        {
-            extend: 'print',
-            text: '<i class="fas fa-print"></i>',
-            titleAttr: 'Imprimir',
-            className: 'btn btn-info'
-
-        }, 
-        ],*/
     columns: [
         {
             title: 'Referencia',
@@ -79,7 +60,7 @@ let tablePesaje = $('#tablePesaje').dataTable({
         {
             title: 'Peso (<a href="javascript:cambioConversion();" class="conversion_weight">g</a>)',
             className: 'conversion_weight_column',
-            data: 'porcentaje', className: 'uniqueClassName',
+            data: 'porcentaje', className: 'uniqueClassName', //render: $.fn.dataTable.render.number( '.', ',', 0, '' )},
             
             render: (data, type, row) => {
                 
@@ -100,8 +81,9 @@ let tablePesaje = $('#tablePesaje').dataTable({
             render: (data, type, row) => {
                 
                 if (flagWeight) {
-                    return data * batch.tamano_lote * 10;
+                    return parseInt(data * batch.tamano_lote * 10);
                     //$.fn.dataTable.render.number( '.', ',', 2, '' )}
+                    //render: $.fn.dataTable.render.number( '.', ',', 0, '' )
                 } else {
                     return ((data * batch.tamano_lote) / 1000) / 10;
                 }
@@ -115,8 +97,15 @@ let tablePesaje = $('#tablePesaje').dataTable({
             defaultContent: '<a href="#" data-toggle="modal" data-target="#imprimirEtiquetas"><i class="large material-icons">print</i></a>', className: 'uniqueClassName'
         }
         
-    ]
+    ],
+
+/*     "formatNumber": function ( toFormat ) {
+        return toFormat.toString().replace(
+          /\B(?=(\d{3})+(?!\d))/g, "."
+        );
+      } */
 });
+
 
 /* Creacion de botones para exportar */
 

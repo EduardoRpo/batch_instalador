@@ -33,10 +33,13 @@ $.ajax({
 
     success: function(data){
         var info = JSON.parse(data);
- 
+        if(data == undefined){
+            alertify.set("notifier","position", "top-right"); alertify.error("No se encontró información de Tanques.");    
+        }else{ 
         for(i=0; i<=info.length; i++){
             template = 'Tanque: '+ info[i].tanque +' x '+ ' Cantidad: ' + info[i].cantidad+' ='+' Total: ' + info[i].tanque * info[i].cantidad;
             document.getElementById("observaciones").value+=template + '\n';
+            }
         }
     },
     error: function(r){

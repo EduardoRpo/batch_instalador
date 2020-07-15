@@ -5,8 +5,16 @@ var editar;
 var datos;
 var tabla;
 var data;
+var cont = 0;
+var tanques;
 
-$(document).ready(function() {   
+$(document).ready(function() {
+    crearTablaBatch();
+    cargarTanques();
+});
+
+
+function crearTablaBatch(columna_busqueda='', minDateFilter='', maxDateFilter=''){ 
     tabla = $("#tablaBatch").DataTable({
         
         responsive: true,
@@ -16,7 +24,12 @@ $(document).ready(function() {
         ajax:{
             method : "POST",
             url : "php/listarBatch.php",
-            data : {"operacion" : "1", "proceso" : "1"},
+            data : {"operacion" : "1", 
+                    "proceso" : "1",
+                    "busqueda" : columna_busqueda,
+                    "inicio" : minDateFilter,
+                    "final" : maxDateFilter
+                },
         },
 
         columns:[
@@ -50,7 +63,7 @@ $(document).ready(function() {
         ],
 
     });
-});
+}
 
 /* Cambiar puntero del mouse al tocar los botones de actualizar y eliminar */
 
@@ -62,19 +75,19 @@ $(document).on('click', '.link-editar', function(e){
     e.preventDefault();
     editar = true;
     limpiarTanques();
+    OcultarTanques();
 
-    var texto = $(this).parent().parent().children()[1];
-    var id = $(texto).text();
+    const texto = $(this).parent().parent().children()[1];
+    const id = $(texto).text();
     
     $.ajax({
         method: 'POST',
         url : 'php/listarBatch.php',
         data: {operacion : "6", id : id},  
-        
-        
+                
          success: function(response){
             
-            var info = JSON.parse(response);
+            const info = JSON.parse(response);
             
             $('#idbatch').val(info[0].id_batch);
             $('#referencia').val(info[0].referencia);
@@ -89,50 +102,61 @@ $(document).on('click', '.link-editar', function(e){
             $('#unidadesxlote').val(info[0].unidad_lote);
             $('#tamanototallote').val(info[0].tamano_lote);
             $('#fechaprogramacion').val(info[0].fecha_programacion);
-            unidades = info[0].unidad_lote;
-            lote = info[0].tamano_lote;
-                        
-            for(k=1; k<info.length; k++){
-                
-                cont = k-1;
-                               
-                $('#adicionarPesaje').click();
-                
-                cmbTanque = $('#cmbTanque'+ k);
-
-                cmbTanque.val('30');
-                console.log(cmbTanque);
-
-                tnque = info[k].tanque;
-                cant = info[k].cantidad;
-                
-                $('#cmbTanque'+ k).val(tnque);
-                console.log($('#cmbTanque'+ k).val());
-                
-                /* $('#cmbTanque'+k+' option')
-                .filter(function() { console.log($(this).text()); return $.trim( $(this).text() ) == tnque; })
-                .attr('selected',true); */
-
-                $('#txtCantidad'+ k).val(cant);
-                
-                CalcularTanque();
-            }
-
-            $("#cmbNoReferencia"). css("display", "none");
-            $("#referencia"). css("display", "block");
-            $('#guardarBatch').html('Actualizar');
-            $('.tcrearBatch').html('Actualizar Batch Record');
-            $('#modalCrearBatch').modal('show');
-            actualizarTabla();
-        },
+       
+            mostrarTanques(info);
+            
+             },
         error: function(response){
             console.log(response);
-        } 
-    });
-});
+       
+        }
+    })
+    
+})
 
-/* Asignar variables para actualizar */
+function mostrarTanques(info){
+    let sum=0;
+    for(k=1; k<info.length; k++){
+        const cantidad = info[k].cantidad
+        const tanque= info[k].tanque
+        const total = cantidad * tanque
 
+        $('#cmbTanque' + k).show().val(tanque);
+        $('#txtCantidad' + k).show().val(cantidad);
+        $('#txtTotal' + k).show().val(total);
+        $('#btnEliminar' + k).show();
+          
+        sum = sum + total;
+        $('.sumatanques').val(sum);
+        $('.labelTanques').show();
+        $('.labelTotalTanques').show();
+        $('.sumaTanques').show();
+    }
+
+    contarTanques();
+
+    for(k=1; k<(info.length-1); k++){
+        $('#cmbTanque' + k).attr('disabled', 'disabled');
+        $('#txtCantidad' + k).attr('disabled', 'disabled');
+        $('#txtTotal' + k).attr('disabled', 'disabled');
+        $('#btnEliminar' + k).attr('disabled', 'disabled');
+    }
+
+    $("#cmbNoReferencia"). css("display", "none");
+    $("#referencia"). css("display", "block");
+    $('#guardarBatch').html('Actualizar');
+    $('.tcrearBatch').html('Actualizar Batch Record');
+    $('#modalCrearBatch').modal('show');
+
+    /* for(k=1; k<info.length; k++){
+
+        $('#cmbTanque'+ k-1).attr("disabled", true);
+        $('#txtCantidad'+ k-1).attr("readonly","readonly");   
+        $('#txtTotal' + k-1).show().attr("readonly","readonly");   
+        $('#btnEliminar').attr("disabled", true);
+    } */
+
+}
 
 
 /* Borrar registro */
@@ -141,10 +165,10 @@ $(document).on('click', '.link-borrar', function(e){
     e.preventDefault();
     
     //let id = $(this).parent().parent().children().first().text();
-    var texto = $(this).parent().parent().children()[1];
-    var id = $(texto).text();
+    const texto = $(this).parent().parent().children()[1];
+    const id = $(texto).text();
     
-    var confirm = alertify.confirm('Samara Cosmetics','¿Está seguro de eliminar este registro?',null,null).set('labels', {ok:'Si', cancel:'No'});
+    const confirm = alertify.confirm('Samara Cosmetics','¿Está seguro de eliminar este registro?',null,null).set('labels', {ok:'Si', cancel:'No'});
  
     confirm.set('onok', function(r){ 
         if(r){
@@ -176,32 +200,44 @@ function actualizarTabla() {
 
   /* Guardar datos de Crear y Actualizar batch*/
 
-function guardarDatos(){         
+function guardarDatos(){    
     
-var d = new Date();
+    const lote = $('#tamanototallote').val();
+    const sumaTanques = $('.sumaTanques').val()
+    let tqn = [];
+    let tmn = [];
+    
+    contarTanques();
 
+    if(cont != 0 && sumaTanques == '' || lote == ''){
+        alertify.set("notifier","position", "top-right"); alertify.error("Ingrese todos los datos.");
+        return false;
+    }
+
+    var d = new Date();
     var mes = d.getMonth() + 1;
     var dia = d.getDate();
     var fechaActual = d.getFullYear() + '/' + (mes<10 ? '0' : '') + mes + '/' + (dia<10 ? '0' : '') + dia;
 
-    //fechaHoy();
-    var tqn = [];
-    var tmn = [];
+    var j=0;
 
-    var j=1;
-
-    for(i=0; i<cont ; i++){
-        tqn[i] = $('#cmbTanque' + j + ' option:selected').val();
+    for(i=1; i<=Notanques ; i++){
+        let tanque = $('#cmbTanque'+i).val();
+        tqn[j] = tanque;  
+        j++;
+    }
+    
+    j=0;
+    
+    for(i=1; i<=Notanques ; i++){
+        let cantidad = $('#txtCantidad' + i).val();    
+        tmn[j] = cantidad;
         j++;
     }
     
     j=1;
     
-    for(i=0; i<cont ; i++){
-        tmn[i] = $('#txtCantidad'+ j).val();
-        j++;
-    }
-
+    
     if(!editar){
         datos = {
             operacion: "5",
@@ -247,6 +283,29 @@ var d = new Date();
     }); 
 }
 
+/* Contar Tanques */
+
+function  contarTanques(){
+    addtnq = 0;
+    cont = 0;
+    Notanques = 0;
+
+    for(i=1; i<6; i++){
+        const txtTotal = $('#txtTotal'+i).val();
+        //const  Notanques = $('#cmbTanque'+ i).val();
+        parseInt(txtTotal, 10);
+        
+        if( txtTotal !='' && txtTotal != "0" && txtTotal > 0 ){
+            addtnq++;
+            cont++;
+            }
+        if($('#txtTotal'+i).is(":visible")){
+            Notanques++;
+        }
+         
+         }
+         addtnq++;
+}
 
 /* Formateo de numeros */
 
