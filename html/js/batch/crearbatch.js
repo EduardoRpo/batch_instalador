@@ -1,6 +1,5 @@
 
 let tnq = 1;
-//let cont = 1;
 let total = 0;
 let addtnq = 1;
 

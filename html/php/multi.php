@@ -96,32 +96,27 @@
         $nom_referencia = $_POST['ref'];
         $cantidad       = $_POST['cant'];
         $id_batch       = $_POST['id'];
-  
-        for($i=0; $i < sizeof($nom_referencia); ++$i){
-          echo $nom_referencia[$i];
-        }
-  
-        for($i=0; $i < sizeof($nom_referencia); ++$i){
-          echo $cantidad[$i];
-        }
-  
-        echo $id_batch;
-  
-        for($i=0; $i < sizeof($nom_referencia); ++$i){
+
+        $tmn = sizeof($nom_referencia);
+
+        for($i=0; $i <= $tmn; ++$i){
           //$query_tanque = "INSERT INTO batch_tanques (tanque, cantidad, id_batch) VALUES('$tanque[$i]' , '$tamanotqn[$i]', '$id')";
           
-          $query_id_referencia = "INSERT INTO multipresentacion (id_batch, referencia, cantidad) 
-                                  SELECT '$id_batch', referencia, '$cantidad[$i]' 
-                                  FROM producto 
-                                  WHERE nombre_referencia = '$nom_referencia[$i]'";
-          $query_batch_multi = "  UPDATE batch 
-                                  SET multi = '1' 
-                                  WHERE id_batch='$id_batch'";                                
+            $query_id_referencia = "INSERT INTO multipresentacion (id_batch, referencia, cantidad) 
+                                    SELECT '$id_batch', referencia, '$cantidad[$i]' 
+                                    FROM producto 
+                                    WHERE nombre_referencia = '$nom_referencia[$i]'";                                
           
           $result = mysqli_query($conn, $query_id_referencia);
-          $result1 = mysqli_query($conn, $query_batch_multi);
+          
         }
-              
+
+        $query_batch_multi = "  UPDATE batch 
+                                  SET multi = '1' 
+                                  WHERE id_batch='$id_batch'";
+        
+        $result1 = mysqli_query($conn, $query_batch_multi);      
+        
         if(!$result){
           die('Error');
           echo 'No guardado. Error: '.mysqli_error($conn);

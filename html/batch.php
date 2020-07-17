@@ -41,11 +41,11 @@ include("modal/modal_cambiarContrasena.php");
       <?php include('./partials/header.php'); ?>
 
       <div class="contenedorPrincipal">
-        <div class="row">
-          <h1 class="text-themecolor izquierda"><b>Batch Record</b></h1>
+        <!-- <div class="row"> -->
+          <h1 class="text-themecolor tituloProceso"><b>Batch Record</b></h1>
 
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle btn-md" style="background-color:#fff;color:#FF8D6D; border-color:#FF8D6D;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>
+          <div class="dropdown btn-acciones">
+            <button class="btn btn-secondary dropdown-toggle btn-md " style="background-color:#fff;color:#FF8D6D; border-color:#FF8D6D;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <a class="dropdown-item" href="#" onclick="multipresentacion()">Multipresentación</a>
               <a class="dropdown-item" href="#" onclick="clonar()">Clonar</a>
@@ -53,10 +53,10 @@ include("modal/modal_cambiarContrasena.php");
             </div>
           </div>
 
-          <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md" style="background-color:#fff;color:#FF8D6D" onclick="filtrarfechas()">Filtrar</button>
-          <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md" onclick="mostrarModal();"><strong>Crear Batch Record</strong></button>
+          <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md btn-filtrar" style="background-color:#fff;color:#FF8D6D" onclick="filtrarfechas()">Filtrar</button>
+          <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md btn-crearbatch"  onclick="mostrarModal();"><strong>Crear Batch Record</strong></button>
 
-        </div>
+        <!-- </div> -->
       </div>
     </div>
 
@@ -158,11 +158,11 @@ include("modal/modal_cambiarContrasena.php");
     <script src="js/utils/datatables.js"></script>
     <script src="vendor/jquery-confirm/jquery-confirm.min.js"></script>
     <script src="js/utils/custom.js"></script>
+    <script src="js/batch/multipresentacion.js"></script>
     <script src="js/batch/batch.js"></script>
     <script src="js/batch/clonar.js"></script>
     <script src="js/batch/crearbatch.js"></script>
     <script src="js/batch/filtradofechas.js"></script>
-    <script src="js/batch/multipresentacion.js"></script>
     <script src="js/calendario/calendar.js"></script>
 
 

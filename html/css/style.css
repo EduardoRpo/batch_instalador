@@ -8157,9 +8157,9 @@ div.displayallinfo {
 }
 
 /* Cabecera Colas */
-.contenedorPrincipal{
-  margin: 15px 35px 0px 0px;
+/* .contenedorPrincipal{
   display: flex;
+  margin: 15px 35px 0px 0px;
   flex-wrap: nowrap;
   align-items: center;
   justify-content: flex-end;
@@ -8169,7 +8169,36 @@ div.displayallinfo {
 .izquierda{
   margin-right: 700px;
   align-self: flex-end;
+} */
+
+.contenedorPrincipal{
+  display: grid;
+  grid-template-columns: repeat(13, 1fr);
+  grid-template-rows: 4em;
+  grid-gap: 1em;
+  margin: 20px;
 }
+
+.tituloProceso{
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
+.btn-acciones{
+  grid-column-start: 10;
+  grid-column-end: 11;
+}
+
+.btn-filtrar{
+  grid-column-start: 11;
+  grid-column-end: 12;
+}
+
+.btn-crearbatch{
+  grid-column-start: 12;
+  grid-column-end: 14;
+}
+
 
 /* Cabecera Info */
 .contenedorInfo{
@@ -8274,7 +8303,7 @@ div.displayallinfo {
   grid-column-end: 4;
 }
 
-.tnq{
+.tnq.derecha{
   text-align: right;
 }
 
@@ -8300,6 +8329,11 @@ div.displayallinfo {
   align-items: flex-end;
 }
 
+/* Multipresentacion */
+
+.centrado{
+  text-align: center;
+}
 /* pesaje */
 
 .formulaMaestra{
