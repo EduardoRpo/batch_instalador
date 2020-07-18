@@ -11,9 +11,10 @@
   /**
    * Class MateriaPrimaDao
    * @package BatchRecord\dao
-   * @author Alexis Holguin <MoraHol>
+   * @author Teenus SAS
    */
-  class MateriaPrimaDao
+  
+   class MateriaPrimaDao
   {
     private $logger;
 

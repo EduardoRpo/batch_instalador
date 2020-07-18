@@ -124,7 +124,6 @@ include("modal/modal_cambiarContrasena.php");
 
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-    <!-- <script src="../assets/plugins/jquery/jquery.min.js"></script> -->
     <script src="js/utils/jquery.slimscroll.js"></script>
     <script src="vendor/jquery/jquery.serializeToJSON.min.js"></script>
 
@@ -138,23 +137,16 @@ include("modal/modal_cambiarContrasena.php");
 
     <!-- Calendario -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
-    <!-- <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script> -->
-    <!-- <script src="jquery.ui.datepicker-es.js"></script> -->
-
-
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
     <!-- Menu -->
     <script src="js/utils/sidebarmenu.js"></script>
     <script src="../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <!-- <script src="../assets/plugins/jquery/jquery.number.min.js"></script> -->
-    <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 
 
     <!--Custom JavaScript -->
-    <!-- <script src="js/global.js"></script> -->
     <script src="js/utils/datatables.js"></script>
     <script src="vendor/jquery-confirm/jquery-confirm.min.js"></script>
     <script src="js/utils/custom.js"></script>
@@ -168,10 +160,6 @@ include("modal/modal_cambiarContrasena.php");
 
     <!--Alertify-->
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-    <!-- <script src="js/filterDate.js"></script> -->
-    <!-- <script src="js/autoNumeric.min.js"></script> -->
-    <!-- <script src="html/vendor/bootstrap/js/popper.js"></script> -->
-    <!-- <script src="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css"></script> -->
     <script src="//cdn.datatables.net/plug-ins/1.10.21/api/fnGetTds.js"></script>
 
 </body>

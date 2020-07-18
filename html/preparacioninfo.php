@@ -19,10 +19,12 @@ include("modal/modal_condicionesMedio.php");
   <title>Samara Cosmetics</title>
   
   <!-- Favicon icon -->
-  <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
   
   <!-- Bootstrap Core CSS -->
   <link href="../../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" type="text/css" href="../../html/vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css">
 
   <!-- Custom CSS -->
   <link href="../../html/css/style.css" rel="stylesheet">
@@ -30,8 +32,13 @@ include("modal/modal_condicionesMedio.php");
   <!-- You can change the theme colors from here -->
   <link href="../../html/css/colors/blue.css" id="theme" rel="stylesheet">
   <link rel="stylesheet" href="../../html/vendor/jquery-confirm/jquery-confirm.min.css">
+  
+  <!-- datatables -->
   <link rel="stylesheet" type="text/css" href="../../html/vendor/datatables/datatables.min.css">
-  <link rel="stylesheet" type="text/css" href="../../html/vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
+
+  
   <link rel="stylesheet" href="../../html/css/custom.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <!-- <script src="https://kit.fontawesome.com/6589be6481.js" crossorigin="anonymous"></script> -->
@@ -266,7 +273,6 @@ include("modal/modal_condicionesMedio.php");
                         <!--<h4 class="card-title">Basic Table</h4>
                    <h6 class="card-subtitle">Add class <code>.table</code></h6>-->
                         <div class="table-responsive">
-
                           <table class="table table-striped table-bordered">
                             <thead>
                               <tr>
@@ -416,11 +422,19 @@ include("modal/modal_condicionesMedio.php");
   </div>
 
 
-  <script src="../../assets/plugins/jquery/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <!-- <script src="../../assets/plugins/jquery/jquery.min.js"></script> -->
   <!-- Bootstrap tether Core JavaScript -->
   <script src="../../assets/plugins/bootstrap/js/tether.min.js"></script>
   <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="../../html/vendor/datatables/datatables.min.js"></script>
+  <!-- <script type="text/javascript" src="../../html/vendor/datatables/datatables.min.js"></script> -->
+  <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.2.5/js/responsive.bootstrap4.min.js"></script>
+
+  
+
   <!--Alertify-->
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
   <!-- slimscrollbar scrollbar JavaScript -->

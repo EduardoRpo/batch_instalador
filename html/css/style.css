@@ -3427,9 +3427,9 @@ Table-Data Table
   .dt-buttons .dt-button {
     padding: 5px 15px;
     border-radius: 4px;
-    background: #009efb;
+    background: red;
     color: #ffffff;
-    margin-right: 3px; }
+    margin: 5px; }
     .dt-buttons .dt-button:hover {
       background: #2f3d4a; }
 

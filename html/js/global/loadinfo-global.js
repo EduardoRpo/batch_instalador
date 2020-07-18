@@ -12,6 +12,8 @@ Date.prototype.toDateInputValue = (function () {
 $('#in_fecha').val(new Date().toDateInputValue());
 $('#in_fecha').attr('min', new Date().toDateInputValue());
 
+/* Carga de datos de informacion del batch record seleccionado */
+
 $.ajax({
     url: `../../api/batch/${idBatch}`,
     type: 'GET'
@@ -26,6 +28,8 @@ $.ajax({
     $('#in_tamano_lote').val(data.tamano_lote);
 });
 
+/* Carga de tanques para mostrar en los proceso de pesaje, preparacion y aprobacion */
+
 $.ajax({
     'method' : 'POST',
     'url' : '../../html/php/tanques.php',
@@ -33,10 +37,11 @@ $.ajax({
 
     success: function(data){
         var info = JSON.parse(data);
-        if(data == undefined){
+
+        if(info == undefined){
             alertify.set("notifier","position", "top-right"); alertify.error("No se encontró información de Tanques.");    
         }else{ 
-        for(i=0; i<=info.length; i++){
+        for(i=0; i < info.length; i++){
             template = 'Tanque: '+ info[i].tanque +' x '+ ' Cantidad: ' + info[i].cantidad+' ='+' Total: ' + info[i].tanque * info[i].cantidad;
             document.getElementById("observaciones").value+=template + '\n';
             }
@@ -143,6 +148,7 @@ $('.in_desinfeccion').click((event) => {
 
 });
 
+/* Calcular la fecha del dia  */
 
 function fechaHoy(){
     var d = new Date();

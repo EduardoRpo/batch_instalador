@@ -53,7 +53,7 @@
 		<button class="btn btn-lg btn-success btn-block mb-3" type="submit">Iniciar</button><!-- onclick="window.location='/html/crear-batch.php'" -->
 		<div class=""></div>
 		<div class="alert alert-danger mb" role="alert"> <?php echo isset($alert) ? $alert :''; ?> </div>
-		<p class="mt-5 mb-3 text-muted">&copy; 2020</p>
+		<p class="mt-5 mb-3 text-muted">&copy; 2020</p>x
 	</form>
 
 	<script src="html/vendor/jquery/jquery-3.2.1.min.js" type="text/javascript"></script>

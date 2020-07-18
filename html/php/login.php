@@ -18,18 +18,18 @@ if(!empty($_SESSION['active'])){
 
             if($result>0){
                 $data= mysqli_fetch_array($query);
-                $_SESSION['active']=true;
-                $_SESSION['idUser']=$data['id'];
-                $_SESSION['nombre']=$data['nombre'];
-                $_SESSION['apellido']=$data['apellido'];
-                $_SESSION['email']=$data['email'];
-                $_SESSION['idModulo']=$data['id_modulo'];
-                $_SESSION['cargo']=$data['id_cargo'];
+                $_SESSION['active'] = true;
+                $_SESSION['idUser'] = $data['id'];
+                $_SESSION['nombre'] = $data['nombre'];
+                $_SESSION['apellido'] = $data['apellido'];
+                $_SESSION['email'] = $data['email'];
+                $_SESSION['idModulo'] = $data['id_modulo'];
+                $_SESSION['cargo'] = $data['id_cargo'];
                 
                 header('location: html/batch.php');
             }else{
                 $alert="El usuario o la contraseña no son validos";
-                '<script>alertify.set("notifier","position", "top-right"); alertify.error("Para adicionar más tanques diligencia todos los campos vacios.");</script>';
+                echo '<script>alertify.set("notifier","position", "top-right"); alertify.error("El usuario o contraseña no son validos.");</script>';
                 session_destroy();
             }
             

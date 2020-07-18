@@ -35,6 +35,21 @@ $.ajax({
 
 });
 
+/* Exportar Datatable Materia Prima */
+
+$(document).ready(function() {
+    var btnExportar = {
+        exportOptions: {
+            format: {
+                body: function ( data, row, column, node ) {
+                    return column === 4 ?
+                        data.replace( /[$,]/g, '' ) :
+                        data;
+                }
+            }
+        }
+    };
+
 /* Formula Materia Prima  */
 
 let tablePesaje = $('#tablePesaje').dataTable({
@@ -60,36 +75,32 @@ let tablePesaje = $('#tablePesaje').dataTable({
         {
             title: 'Peso (<a href="javascript:cambioConversion();" class="conversion_weight">g</a>)',
             className: 'conversion_weight_column',
-            data: 'porcentaje', className: 'uniqueClassName', //render: $.fn.dataTable.render.number( '.', ',', 0, '' )},
+            data: 'porcentaje', className: 'uniqueClassName',
             
             render: (data, type, row) => {
                 
                 if (flagWeight) {
-                    return (data * batch.tamano_lote) ;
-                } else {
-                    return (data * batch.tamano_lote)/ 1000;
+                    var peso =  parseFloat(data * batch.tamano_lote) ;
+                    return peso.toFixed(3);;
+                } else { 
+                    peso = (data * batch.tamano_lote)/ 1000;
+                    return peso.toFixed(3);;
                 }
-                
             },
-            
-            /* render: $.fn.dataTable.render.number( ',', '.', 3), */
             
         },
         {
             title: 'No TQ',
             data: 'porcentaje', className: 'uniqueClassName',
             render: (data, type, row) => {
-                
+                $.fn.dataTable.render.number( ',', '.', 3);
                 if (flagWeight) {
-                    return parseInt(data * batch.tamano_lote * 10);
-                    //$.fn.dataTable.render.number( '.', ',', 2, '' )}
-                    //render: $.fn.dataTable.render.number( '.', ',', 0, '' )
+                    return parseInt(data * batch.tamano_lote * 10).toFixed(3);
                 } else {
-                    return ((data * batch.tamano_lote) / 1000) / 10;
+                    return (((data * batch.tamano_lote) / 1000) / 10).toFixed(3);
                 }
             
             },
-            /* render: $.fn.dataTable.render.number( '.', ',', 2, '' ) */
             
         },
         {
@@ -98,17 +109,32 @@ let tablePesaje = $('#tablePesaje').dataTable({
         }
         
     ],
+    columnDefs: [
+        {
+            targets: 1,
+            className: 'noVis'
+        }
+    ],
 
-/*     "formatNumber": function ( toFormat ) {
-        return toFormat.toString().replace(
-          /\B(?=(\d{3})+(?!\d))/g, "."
-        );
-      } */
+    dom: 'Bfrtip',
+        buttons: [
+            /* $.extend( true, {}, buttonCommon, {
+                extend: 'copyHtml5'
+            } ),
+            $.extend( true, {}, buttonCommon, {
+                extend: 'excelHtml5'
+            } ), */
+            
+            $.extend( true, {}, btnExportar, {
+                extend: 'pdfHtml5',
+                columns: ':not(.noVis)'
+            } )
+        ]
+
+
 });
 
-
-/* Creacion de botones para exportar */
-
+} );
 
 
 
