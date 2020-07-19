@@ -38,21 +38,10 @@ $.ajax({
 /* Exportar Datatable Materia Prima */
 
 $(document).ready(function() {
-    var btnExportar = {
-        exportOptions: {
-            format: {
-                body: function ( data, row, column, node ) {
-                    return column === 4 ?
-                        data.replace( /[$,]/g, '' ) :
-                        data;
-                }
-            }
-        }
-    };
 
 /* Formula Materia Prima  */
 
-let tablePesaje = $('#tablePesaje').dataTable({
+tablePesaje = $('#tablePesaje').dataTable({
 
     ajax: {
         url: `../../api/materiasp/${referencia}`,
@@ -80,11 +69,9 @@ let tablePesaje = $('#tablePesaje').dataTable({
             render: (data, type, row) => {
                 
                 if (flagWeight) {
-                    var peso =  parseFloat(data * batch.tamano_lote) ;
-                    return peso.toFixed(3);;
+                    return (data * batch.tamano_lote).toFixed(2).replace('.', ',');
                 } else { 
-                    peso = (data * batch.tamano_lote)/ 1000;
-                    return peso.toFixed(3);;
+                    return (data * batch.tamano_lote/ 1000).toFixed(2).replace('.', ',');
                 }
             },
             
@@ -95,9 +82,9 @@ let tablePesaje = $('#tablePesaje').dataTable({
             render: (data, type, row) => {
                 $.fn.dataTable.render.number( ',', '.', 3);
                 if (flagWeight) {
-                    return parseInt(data * batch.tamano_lote * 10).toFixed(3);
+                    return (data * batch.tamano_lote * 10).toFixed(2).replace('.', ',');
                 } else {
-                    return (((data * batch.tamano_lote) / 1000) / 10).toFixed(3);
+                    return (data * batch.tamano_lote / 1000 / 10).toFixed(2).replace('.', ',');
                 }
             
             },
@@ -109,12 +96,6 @@ let tablePesaje = $('#tablePesaje').dataTable({
         }
         
     ],
-    columnDefs: [
-        {
-            targets: 1,
-            className: 'noVis'
-        }
-    ],
 
     dom: 'Bfrtip',
         buttons: [
@@ -125,16 +106,21 @@ let tablePesaje = $('#tablePesaje').dataTable({
                 extend: 'excelHtml5'
             } ), */
             
-            $.extend( true, {}, btnExportar, {
+            $.extend( true, {}, {
                 extend: 'pdfHtml5',
-                columns: ':not(.noVis)'
-            } )
+                text: 'Exportar PDF',
+                title: 'Formula Producto ' + batch.referencia,
+                messageTop: 'https://samaracosmetics.com/',
+                
+                exportOptions: {
+                    columns: [ 0, 1, 2, 3 ]
+                }
+            })
         ]
 
+    });
 
 });
-
-} );
 
 
 
