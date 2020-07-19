@@ -39,6 +39,7 @@ $.ajax({
 
 $(document).ready(function() {
 
+
 /* Formula Materia Prima  */
 
 tablePesaje = $('#tablePesaje').dataTable({
@@ -77,14 +78,14 @@ tablePesaje = $('#tablePesaje').dataTable({
             
         },
         {
-            title: 'No TQ',
+            title: '<input type="text" class="form-control" id="Notanques" placeholder="Tanques" style="width:52px; text-align:center" onkeydown="calcularxNoTanques();">',
             data: 'porcentaje', className: 'uniqueClassName',
             render: (data, type, row) => {
-                $.fn.dataTable.render.number( ',', '.', 3);
-                if (flagWeight) {
-                    return (data * batch.tamano_lote * 10).toFixed(2).replace('.', ',');
+                let tanque = $('#Notanques').val();
+                if (flagWeight && tanque!='') {
+                    return (data * batch.tamano_lote * $('#Notanques').val()).toFixed(2).replace('.', ',');
                 } else {
-                    return (data * batch.tamano_lote / 1000 / 10).toFixed(2).replace('.', ',');
+                    return (data * batch.tamano_lote / 1000 / $('#Notanques').val()).toFixed(2).replace('.', ',');
                 }
             
             },
@@ -139,4 +140,10 @@ function cambioConversion() {
     flagWeight = !flagWeight;
     tablePesaje.api().ajax.reload();
     $(tablePesaje.api().column(2).header()).html(`Peso (<a href="javascript:cambioConversion();" class="conversion_weight">${flagWeight ? 'Kg' : 'g'}</a>)`);
+}
+
+/* Calcular los tanques */
+
+function calcularxNoTanques(){
+    tablePesaje.api().ajax.reload();
 }
