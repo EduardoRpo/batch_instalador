@@ -1,9 +1,10 @@
 <?php
-  include('modal/modal_cambiarContrasena.php');
-  include('modal/modal_observaciones.php');
-  include('modal/modal_imprimirEtiquetas.php');
-  include('modal/m_firma.php');
-  include('modal/modal_condicionesMedio.php')
+include_once('modal/modal_cambiarContrasena.php');
+include_once('modal/modal_observaciones.php');
+include_once('modal/modal_imprimirEtiquetas.php');
+include_once('modal/m_firma.php');
+include_once('modal/modal_condicionesMedio.php');
+//include('modal/m_plantillaEtiquetas.php')
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +20,7 @@
   <title>Samara Cosmetics</title>
 
   <!-- Favicon icon -->
-  <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
 
   <!-- Bootstrap Core CSS -->
   <link href="../../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -114,7 +115,7 @@
                   <input type="text" class="form-control" id="in_referencia" readonly>
                   <!-- <input type="textarea" class="form-control itemInfo" id="observaciones" hidden readonly> -->
                   <textarea class="form-control itemInfo" id="observaciones" cols="5" rows="7" readonly></textarea>
-                  
+
                   <label>Tamaño Lote (Kg)</label>
                   <label>No Lote</label>
                   <label>Línea</label>
@@ -235,8 +236,9 @@
                   <table class="table" id="tablePesaje" style="width: 100%;">
 
                   </table>
+                </form>
               </div>
-              </form>
+              
 
             </div>
             <hr>
@@ -244,6 +246,14 @@
             <div class="row" style="margin: 1%">
               <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down" data-toggle="modal" data-target="#modalObservaciones" style="margin-left: 1%">
                 Observaciones y/o Incidencias en el proceso
+              </button>
+            </div>
+            <hr>
+
+            <div class="row" style="margin: 1%">
+              <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down" 
+                      id="imprimirEtiquetasVirtuale" style="margin-left: 1%" onclick="imprimir();">
+                Imprimir Etiquetas Virtuales
               </button>
             </div>
             <hr>
@@ -320,14 +330,13 @@
   <!--Alertify-->
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
-  <!-- Exportar Archivos -->
+  <!-- Imprimir PDF -->
+  <script src="../../html/js/global/descargarPDF.js"></script>
 
-  <!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
-  <!-- <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script> -->
-<!--   <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script> -->
-  
+  <!-- <script src="../../html/vendor/pdf/jspdf.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+  <script src="../../html/js/global/descargarPDF.js"></script>
 
-  
   <!-- Buttons -->
 
   <script src="https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
@@ -336,9 +345,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
   <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
- 
- <!-- <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.21/b-1.6.2/b-flash-1.6.2/datatables.min.js"></script> -->
- 
+
+  <!-- <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.21/b-1.6.2/b-flash-1.6.2/datatables.min.js"></script> -->
+
 
 </body>
 

@@ -1,6 +1,6 @@
 let idBatch = location.href.split('/')[4];
 let referencia = location.href.split('/')[5];
-let batch;
+var batch;
 let template;
 
 Date.prototype.toDateInputValue = (function () {
@@ -19,6 +19,7 @@ $.ajax({
     type: 'GET'
 }).done((data, status, xhr) => {
     batch = data;
+    //console.log(batch);
     $('#in_numero_orden').val(data.numero_orden);
     $('#in_numero_lote').val(data.numero_lote);
     $('#in_referencia').val(data.referencia);
@@ -26,6 +27,14 @@ $.ajax({
     $('#in_linea').val(data.nombre_linea);
     $('#in_fecha_programacion').val(data.fecha_programacion);
     $('#in_tamano_lote').val(data.tamano_lote);
+
+    $('#Minimo').val(batch.lote_presentacion*batch.densidad);
+    const peso_minimo = $('#Minimo').val();
+    const peso_maximo = peso_minimo*(1+0.03); 
+    $('#Maximo').val(peso_maximo);
+
+    const promedio = (parseInt(peso_minimo) + peso_maximo)/2
+    $('#Medio').val(promedio);
 });
 
 /* Carga de tanques para mostrar en los proceso de pesaje, preparacion y aprobacion */
@@ -67,8 +76,9 @@ $(document).ready(function() {
             
             var info = JSON.parse(resp);
             let tiempo = Math.round(Math.random()*(info.max-info.min)+parseInt(info.min));
-            setTimeout(function(){  $("#m_CondicionesMedio").modal("show").modal({backdrop: 'static', keyboard: false}); }, tiempo*60000);
-            
+            //setTimeout(function(){  $("#m_CondicionesMedio").modal("show").modal({backdrop: 'static', keyboard: false}); }, tiempo*60000);
+            setTimeout(function(){  
+                $("#m_CondicionesMedio").modal("show"); }, tiempo*60000); //.modal({backdrop: 'static', keyboard: false})
         }
     });
     return false;
@@ -156,6 +166,36 @@ function fechaHoy(){
     var mes = d.getMonth() + 1;
     var dia = d.getDate();
     var fechaActual = d.getFullYear() + '/' + (mes<10 ? '0' : '') + mes + '/' + (dia<10 ? '0' : '') + dia;
+}
+
+/* carga de maquinas */
+
+function cargarMaquinas(){ 
+    const linea = $("#select-Linea").val();
+
+    $.ajax({
+        method: 'POST',
+        url : '../../html/php/cargarMaquinas.php',
+        data: {linea : linea},  
+                
+        success: function(response){
+            const info = JSON.parse(response);
+
+            $('.envasadora').val('')
+            $('.loteadora').val('')
+            $('#sel_agitador').val('')
+            $('#sel_marmita').val('')
+            
+            $('.envasadora').val(info[0].envasadora)
+            $('.loteadora').val(info[0].loteadora)
+            $('#sel_agitador').val(info[0].agitador)
+            $('#sel_marmita').val(info[0].marmita)
+            
+            },
+        error: function(response){
+           console.log(response);
+        }
+    })
 }
 
 /* function enviar() {

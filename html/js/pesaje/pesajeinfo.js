@@ -53,8 +53,7 @@ tablePesaje = $('#tablePesaje').dataTable({
     searching: false,
     sorting: false,
     
-    columns: [
-        {
+    columns: [{
             title: 'Referencia',
             data: 'referencia', className: 'uniqueClassName'
         },

@@ -17,10 +17,10 @@ include("modal/modal_condicionesMedio.php");
   <meta name="author" content="Teenus SAS">
 
   <title>Samara Cosmetics</title>
-  
+
   <!-- Favicon icon -->
   <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-  
+
   <!-- Bootstrap Core CSS -->
   <link href="../../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css">
@@ -32,13 +32,13 @@ include("modal/modal_condicionesMedio.php");
   <!-- You can change the theme colors from here -->
   <link href="../../html/css/colors/blue.css" id="theme" rel="stylesheet">
   <link rel="stylesheet" href="../../html/vendor/jquery-confirm/jquery-confirm.min.css">
-  
+
   <!-- datatables -->
   <link rel="stylesheet" type="text/css" href="../../html/vendor/datatables/datatables.min.css">
-  
+
   <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
 
-  
+
   <link rel="stylesheet" href="../../html/css/custom.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <!-- <script src="https://kit.fontawesome.com/6589be6481.js" crossorigin="anonymous"></script> -->
@@ -203,18 +203,27 @@ include("modal/modal_condicionesMedio.php");
               <div class="col-md-12 col-2 align-self-center">
                 <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Máquinas</h3>
               </div> -->
+                <h3 class="subtitulo" style="text-align: center; background-color: #C0C0C0; margin:25px; height:40px">Máquinas</h3>
                 <div class="maquinasPreparacion">
-                  <h3 class="subtitulo" style="text-align: center; background-color: #C0C0C0">Máquinas</h3>
+
+                  <label for="">Linea</label>
                   <label for="sel_agitador">Identificación Agitador</label>
                   <label for="sel_marmita">Identificación Marmita o Tanque</label>
-
-                  <select class="selectpicker form-control" id="sel_agitador">
+                  <select class="selectpicker form-control" id="select-Linea">
+                    <option selected hidden>Seleccionar Linea</option>
+                    <option>Liquido</option>
+                    <option>Solido</option>
+                    <option>Semisolido</option>
+                  < /select>
+                  <input type="text" id="sel_agitador" class="form-control" readonly>
+                  <input type="text" id="sel_marmita" class="form-control" readonly>
+                  <!-- <select class="selectpicker form-control" id="sel_agitador">
                     <option selected hidden>Seleccione</option>
                   </select>
 
                   <select class="selectpicker form-control" id="sel_marmita">
                     <option selected hidden>Seleccione</option>
-                  </select>
+                  </select> -->
                 </div>
                 <!-- </div> -->
                 <div class="row" style="margin: 1%">
@@ -374,7 +383,7 @@ include("modal/modal_condicionesMedio.php");
                   </button>
                 </div>
                 <hr>
-                
+
                 <div class="row" style="margin: 1%">
                   <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down" data-toggle="modal" data-target="#modalObservaciones" style="margin-left: 1%">
                     Observaciones y/o Incidencias en el proceso
@@ -433,7 +442,7 @@ include("modal/modal_condicionesMedio.php");
   <script src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
   <script src="https://cdn.datatables.net/responsive/2.2.5/js/responsive.bootstrap4.min.js"></script>
 
-  
+
 
   <!--Alertify-->
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
@@ -453,7 +462,7 @@ include("modal/modal_condicionesMedio.php");
   <script src="../../assets/plugins/jquery/jquery.number.min.js"></script>
 
   <script src="../../html/js/global/loadinfo-global.js"></script>
-  
+
   <script src="../../html/js/preparacion/preparacioninfo.js"></script>
   <script src="../../html/js/pesaje/pesajeinfo.js"></script>
   <script src="../../html/js/firmar/firmar.js"></script>

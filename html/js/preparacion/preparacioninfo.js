@@ -70,7 +70,7 @@ $.ajax({
 });
 
 /* Carga maquina agitadores */
-
+/* 
 $.ajax({
     url: `/api/agitadores`,
     type: 'GET'
@@ -79,17 +79,23 @@ $.ajax({
         $('#sel_agitador').append(`<option value="${agitador.id}">${agitador.nombre}</option>`);
     });
 });
-
+ */
 /* Carga maquina marmitas */
 
-$.ajax({
+/* $.ajax({
     url: `/api/marmitas`,
     type: 'GET'
 }).done((data, status, xhr) => {
     data.forEach(agitador => {
         $('#sel_marmita').append(`<option value="${agitador.id}">${agitador.nombre}</option>`);
     });
-});
+}); */
+
+/* Cargar maquinas de acuerdo con la linea */
+
+$( "#select-Linea" ).change(function () {
+    cargarMaquinas();
+  })
 
 /* Carga tabla de propiedades del producto */
 

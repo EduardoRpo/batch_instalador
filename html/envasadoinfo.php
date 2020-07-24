@@ -100,7 +100,7 @@ include('modal/m_firma.php');
             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
               <div class="card-body">
                 <div class="contenedorInfo">
-                <label for="recipient-name" class="col-form-label">Fecha Programación</label>
+                  <label for="recipient-name" class="col-form-label">Fecha Programación</label>
                   <label for="recipient-name" class="col-form-label">No Orden</label>
                   <label for="recipient-name" class="col-form-label">Referencia</label>
                   <label for="recipient-name" class="col-form-label">Multipresentación</label>
@@ -215,29 +215,29 @@ include('modal/m_firma.php');
                             <thead>
                               <tr>
                                 <!-- <th>Fecha</th> -->
-                                <th>Referencia envase tapa</th>
+                                <th>Tipo</th>
                                 <th>Descripción</th>
                                 <th>Cantidad</th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr>
-                                <td> </td>
+                                <td>Referencia</td>
                                 <td>16</td>
                                 <td>Auto</td>
-                                <td> <input type="text" class="form-control" id="cantidad-name"></td>
+                                <!-- <td> <input type="text" class="form-control" id="cantidad-name"></td> -->
                               </tr>
                               <tr>
-                                <td> </td>
+                                <td>Envase</td>
                                 <td>15</td>
                                 <td>Auto</td>
-                                <td> <input type="text" class="form-control" id="cantidad-name"></td>
+                                <!-- <td> <input type="text" class="form-control" id="cantidad-name"></td> -->
                               </tr>
                               <tr>
-                                <td> </td>
+                                <td>Tapa </td>
                                 <td>17</td>
                                 <td>Auto</td>
-                                <td> <input type="text" class="form-control" id="cantidad-name"></td>
+                                <!-- <td></td> -->
                               </tr>
                           </table>
                           </form>
@@ -245,22 +245,27 @@ include('modal/m_firma.php');
                       </div>
                     </div>
 
-                    <div class="row">
-                      <div class="col-md-2 col-2 align-self-center">
-                        <label for="recipient-name" class="col-form-label">Identificación Envasadora</label>
-                      </div>
+                    <div class="id_envasadora_loteadora">
+                      <label for="recipient-name" class="col-form-label">Linea</label>
+                      <select class="selectpicker form-control" id="select-Linea">
+                        <option selected hidden>Seleccionar Linea</option>
+                        <option>Liquido</option>
+                        <option>Solido</option>
+                        <option>Semisolido</option>
+                      </select>
 
-                      <div class="col-md-4 col-2 align-self-center">
-                        <select class="selectpicker form-control">
-                          <option selected hidden>Seleccionar Envasadora</option>
-                          <option>Mustard</option>
-                          <option>Ketchup</option>
-                          <option>Relish</option>
-                        </select>
-                      </div>
+                      <label for="recipient-name" class="col-form-label envasadora">Identificación Envasadora</label>
+                      <input type="text" class="form-control envasadora" readonly>
+
+                      <label for="recipient-name" class="col-form-label" loteadora>Identificación Loteadora</label>
+                      <input type="text" class="form-control loteadora" readonly>
+
+                      <label for="recipient-name" class="col-form-label">Digite el lote requerido</label>
+                      <input type="text" class="form-control">
+
                     </div>
                     <hr>
-                    <div class="row" style="margin: 1%">
+                    <!-- <div class="row" style="margin: 1%">
                       <div class="col-md-4 col-2 align-self-center">
                         <label for="envasado_realizado" class="col-form-label">Realizado Por:</label>
                         <input type="text" class="form-control" id="envasado_realizado">
@@ -276,36 +281,28 @@ include('modal/m_firma.php');
                       <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
                         <button type="button" class="btn waves-effect waves-light btn-danger" id="envasado_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;">Firmar</button>
                       </div>
-                    </div>
+                    </div> -->
                     <div class="row" style="margin: 1%">
                       <div class="col-md-12 col-2 align-self-center" style="margin-left: 85%">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                         <button type="button" class="btn btn-primary">Aceptar</button>
                       </div>
                     </div>
-                    <div class="row" style="margin: 1%">
-                      <div class="col-md-12 col-2 align-self-center">
-                        <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Especificaciones Técnicas</h3>
-                      </div>
-                      <div class="col-md-1 col-2 align-self-center" style="margin-top: 1%">
-                        <label for="recipient-name" class="col-form-label">Mínimo:</label>
-                      </div>
-                      <div class="col-md-3 col-2 align-self-center" style="margin-top: 1%">
-                        <input type="text" class="form-control" id="Minimo">
-                      </div>
-                      <div class="col-md-1 col-2 align-self-center" style="margin-top: 1%">
-                        <label for="recipient-name" class="col-form-label">Medio:</label>
-                      </div>
-                      <div class="col-md-3 col-2 align-self-center" style="margin-top: 1%">
-                        <input type="text" class="form-control" id="Medio">
-                      </div>
-                      <div class="col-md-1 col-2 align-self-center" style="margin-top: 1%">
-                        <label for="recipient-name" class="col-form-label">Máximo:</label>
-                      </div>
-                      <div class="col-md-3 col-2 align-self-center" style="margin-top: 1%">
-                        <input type="text" class="form-control" id="Maximo">
-                      </div>
+                    <!-- <div class="row" style="margin: 1%"> -->
+                    <div class="col-md-12 col-2 align-self-center">
+                      <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Especificaciones Técnicas</h3>
                     </div>
+                    <div class="especificaciones_tecnicas">
+                      <label for="recipient-name" class="col-form-label">Mínimo:</label>
+                      <input type="text" class="form-control centrado" id="Minimo" readonly>
+
+                      <label for="recipient-name" class="col-form-label">Medio:</label>
+                      <input type="text" class="form-control centrado" id="Medio" readonly>
+
+                      <label for="recipient-name" class="col-form-label">Máximo:</label>
+                      <input type="text" class="form-control centrado" id="Maximo" readonly>
+                    </div>
+                    <!-- </div> -->
                     <div class="row" style="margin: 1%">
                       <div class="col-md-12 col-2 align-self-center">
                         <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Control de Peso en Proceso</h3>
@@ -399,74 +396,61 @@ include('modal/m_firma.php');
                         </div>
                       </div>
                     </div>
-                    <div class="row" style="margin: 1%">
-                      <div class="col-md-4 col-2 align-self-center">
-                        <label for="devolucion_realizado" class="col-form-label">Realizado Por:</label>
-                        <input type="text" class="form-control" id="devolucion_realizado">
-                      </div>
-                      <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger" id="devolucion_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;">Firmar</button>
-                      </div>
+                    <div class="firmas_envasado">
 
-                      <div class="col-md-4 col-2 align-self-center">
-                        <label for="devolucion_verificado" class="col-form-label">Verificado Por:</label>
-                        <input type="text" class="form-control" id="devolucion_verificado">
-                      </div>
-                      <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger" id="devolucion_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;">Firmar</button>
-                      </div>
-                    </div>
-                    <div class="row" style="margin: 1%">
-                      <div class="col-md-12 col-2 align-self-center" style="margin-left: 85%">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" onclick="window.location.href = '../html/loteado.html';">Aceptar</button>
-                      </div>
-                    </div>
+                      <label for="devolucion_realizado" class="col-form-label">Realizado Por:</label>
+                      <input type="text" class="form-control" id="devolucion_realizado">
 
+                      <button type="button" class="btn waves-effect waves-light btn-danger" id="devolucion_realizado">Firmar</button>
+
+                      <label for="devolucion_verificado" class="col-form-label">Verificado Por:</label>
+                      <input type="text" class="form-control" id="devolucion_verificado">
+
+                      <button type="button" class="btn waves-effect waves-light btn-danger" id="devolucion_verificado">Firmar</button>
+                      
+                      <button type="button" class="btn btn-secondary btn-cancelar" style="width: 100px; justify-self:end;">Cancelar</button>
+                      <button type="button" class="btn btn-primary btn-aceptar" style="width: 100px; ">Aceptar</button>
+
+                    </div>
                   </div>
-
                 </div>
               </div>
+              
 
-            </div>
+              <!-- jquery -->
+              <script src="../../assets/plugins/jquery/jquery.min.js"></script>
 
+              <!-- Bootstrap tether Core JavaScript -->
+              <script src="../../assets/plugins/bootstrap/js/tether.min.js"></script>
+              <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
-            <!-- jquery -->
-            <script src="../../assets/plugins/jquery/jquery.min.js"></script>
+              <!-- Datatables -->
+              <script type="text/javascript" src="../../html/vendor/datatables/datatables.min.js"></script>
+              <!-- <script src="html/vendor/bootstrap/js/popper.js"></script> -->
+              <!-- slimscrollbar scrollbar JavaScript -->
 
-            <!-- Bootstrap tether Core JavaScript -->
-            <script src="../../assets/plugins/bootstrap/js/tether.min.js"></script>
-            <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+              <script src="../../html/js/utils/jquery.slimscroll.js"></script>
 
-            <!-- Datatables -->
-            <script type="text/javascript" src="../../html/vendor/datatables/datatables.min.js"></script>
-            <!-- <script src="html/vendor/bootstrap/js/popper.js"></script> -->
-            <!-- slimscrollbar scrollbar JavaScript -->
+              <!--Wave Effects -->
+              <script src="../../html/js/utils/waves.js"></script>
 
-            <script src="../../html/js/utils/jquery.slimscroll.js"></script>
+              <!--Menu sidebar -->
+              <script src="../../html/js/utils/sidebarmenu.js"></script>
 
-            <!--Wave Effects -->
-            <script src="../../html/js/utils/waves.js"></script>
+              <!--stickey kit -->
+              <script src="../../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
 
-            <!--Menu sidebar -->
-            <script src="../../html/js/utils/sidebarmenu.js"></script>
+              <!--Custom JavaScript -->
+              <script src="../../html/js/utils/custom.min.js"></script>
+              <script src="../../html/vendor/jquery-confirm/jquery-confirm.min.js"></script>
+              <!-- <script src="../../html/js/datatables.js"></script> -->
+              <script src="../../html/js/global/loadinfo-global.js"></script>
+              <script src="../../html/js/pesaje/pesajeinfo.js"></script>
+              <script src="../../html/js/firmar/firmar.js"></script>
+              <script src="../../html/js/envasado/envasadoinfo.js"></script>
 
-            <!--stickey kit -->
-            <script src="../../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
-
-            <!--Custom JavaScript -->
-            <script src="../../html/js/utils/custom.min.js"></script>
-            <script src="../../html/vendor/jquery-confirm/jquery-confirm.min.js"></script>
-            <!-- <script src="../../html/js/datatables.js"></script> -->
-            <script src="../../html/js/global/loadinfo-global.js"></script>
-            <script src="../../html/js/pesaje/pesajeinfo.js"></script>
-            <script src="../../html/js/firmar/firmar.js"></script>
-            <!-- <script src="../../html/js/validadores.js"></script> -->
-            <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
-            <!-- Toastr.js Después -->
-
-            <!--Alertify-->
-            <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+              <!--Alertify-->
+              <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
 </body>
 

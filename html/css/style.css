@@ -1767,7 +1767,7 @@ textarea {
   resize: none; }
 
 /*******************
-Form-control
+Form-conForm-control
 ******************/
 .form-control {
   color: #67757c;
@@ -8347,19 +8347,21 @@ div.displayallinfo {
 
 .imprimir{
   display: grid;
-  grid-template-columns: 40px 364px;
-  grid-gap: 1em;
+  grid-template-columns: 1fr;
+  /* grid-gap: 1em; */
   margin: 10px;
   text-align: center;
   justify-content: flex-end;
   align-items: center;
 }
 
+
+
 /* Maquinas preparacion */
 
 .maquinasPreparacion{
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 250px repeat(2, 1fr);
   
   grid-column-gap: 2em;
   margin: 20px;
@@ -8379,4 +8381,43 @@ div.displayallinfo {
   /* grid-template-columns: 250px 100px 100px 100px 100px 50px; */
   grid-gap: 1em;
   margin: 20px;
+}
+
+.especificaciones_tecnicas{
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  
+  grid-column-gap: 2em;
+  margin: 20px;
+  text-align: center;
+}
+
+.id_envasadora_loteadora{
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  
+  grid-column-gap: 2em;
+  grid-gap: 1em;
+  margin: 20px;
+  text-align: center;
+}
+
+.firmas_envasado{
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  
+  grid-column-gap: 2em;
+  grid-gap: 1.5em;
+  margin: 20px;
+  text-align: center;
+}
+
+.btn-cancelar{
+  grid-column-start: 5;
+  grid-column-end: 6;
+}
+
+.btn-aceptar {
+  grid-column-start: 6;
+  grid-column-end: 7;
 }

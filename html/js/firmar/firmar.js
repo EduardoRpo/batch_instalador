@@ -10,6 +10,8 @@ function cargar(btn){
         alertify.set("notifier","position", "top-right"); alertify.error("Debe firmar en orden, primero el 'Realizado'.");
         return false;
     }else{
+        //$('#plantillaEtiquetas').modal('show');
+        //<a href="javascript:void(window.open('http://www.htmltopdfconverter.net/?convert='+window.location))">Convert To PDF</a>
         $('#m_firmar').modal('show');
         cont = 0;
     }
@@ -54,4 +56,8 @@ function enviar() {
         }
     });
     return false;
+}
+
+function imprimirPDF(){
+    $('#m_firmar').modal('show');
 }
