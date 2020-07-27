@@ -6879,11 +6879,11 @@ form p:last-child {
   margin-bottom: 0; }
 
 /* Remove default checkbox */
-[type="checkbox"]:not(:checked),
+/* [type="checkbox"]:not(:checked),
 [type="checkbox"]:checked {
   position: absolute;
   left: -9999px;
-  opacity: 0; }
+  opacity: 0; } */
 
 /* [type="checkbox"] {
   /* checkbox aspect */ /*} */
@@ -8420,4 +8420,22 @@ div.displayallinfo {
 .btn-aceptar {
   grid-column-start: 6;
   grid-column-end: 7;
+}
+
+
+/* Aprobacion */
+
+.desinfeccion_aprobacion{
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  
+  grid-column-gap: 2em;
+  grid-gap: 1.5em;
+  margin: 20px;
+  text-align: center;
+}
+
+.checkbox-aprobacion{
+  /* width: 30px; */
+  height: 30px;
 }

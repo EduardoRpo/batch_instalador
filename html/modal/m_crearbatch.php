@@ -44,7 +44,7 @@
                         </div>
                         <div class="col-md-4 col-2 align-self-center">
                             <label for="recipient-name" class="col-form-label">Presentación Comercial</label>
-                            <input id="presentacioncomercial" class="displayallinfo" readonly name="presentacioncomercial" readonly>
+                            <input id="presentacioncomercial" class="displayallinfo" readonly name="presentacioncomercial" style="text-align: center;" readonly>
                         </div>
                         <!-- 
                         <div class="col-md-1 col-2 align-self-center">
@@ -75,7 +75,7 @@
                         </div>
                         <div class="col-md-4 col-2 align-self-center">
                             <label for="recipient-name" class="col-form-label" type="number">Tamaño del Lote (Kg)</label>
-                            <input type="number" name="tamanototallote" id="tamanototallote" class="form-control Numeric" min="1" readonly value="" style="height: 70px; font-size: xx-large; width: 160; text-align: center" />
+                            <input name="tamanototallote" id="tamanototallote" class="form-control Numeric" min="1" readonly value="" style="height: 70px; font-size: xx-large; width: 180; text-align: center" />
                         </div>
 
                     </div>

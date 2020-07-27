@@ -19,23 +19,36 @@ $.ajax({
     type: 'GET'
 }).done((data, status, xhr) => {
     batch = data;
-    //console.log(batch);
+    const tamano_lote = formatoCO(data.tamano_lote);
+
     $('#in_numero_orden').val(data.numero_orden);
     $('#in_numero_lote').val(data.numero_lote);
     $('#in_referencia').val(data.referencia);
     $('#in_nombre_referencia').val(data.nombre_referencia);
     $('#in_linea').val(data.nombre_linea);
     $('#in_fecha_programacion').val(data.fecha_programacion);
-    $('#in_tamano_lote').val(data.tamano_lote);
-
-    $('#Minimo').val(batch.lote_presentacion*batch.densidad);
-    const peso_minimo = $('#Minimo').val();
-    const peso_maximo = peso_minimo*(1+0.03); 
-    $('#Maximo').val(peso_maximo);
-
-    const promedio = (parseInt(peso_minimo) + peso_maximo)/2
-    $('#Medio').val(promedio);
+    $('#in_tamano_lote').val(tamano_lote);
+    
+    calularPeso();
 });
+
+
+/* Calcular peso minimo, maximo y promedio */
+
+function calularPeso(){
+    var peso_min = batch.lote_presentacion * batch.densidad; // DENSIDAD DEBE TRAERSE DE LA GUARDADO EN APROBACION POR CALIDAD
+    var peso_minimo = formatoCO(peso_min);
+    
+    var peso_max = peso_min * (1+0.03);
+    var peso_maximo = formatoCO(peso_max);
+    
+    var prom = (parseInt(peso_min) + peso_max)/2
+    var promedio = formatoCO(prom);
+    
+    $('#Minimo').val(peso_minimo);
+    $('#Maximo').val(peso_maximo);
+    $('#Medio').val(promedio);
+}
 
 /* Carga de tanques para mostrar en los proceso de pesaje, preparacion y aprobacion */
 
@@ -196,6 +209,26 @@ function cargarMaquinas(){
            console.log(response);
         }
     })
+}
+
+/* formato de numeros */
+
+const formatoCO = (number) => {
+    
+    const exp = /(\d)(?=(\d{3})+(?!\d))/g;
+    const rep = '$1.';
+    let arr = number.toString().split('.');
+    arr[0] = arr[0].replace(exp,rep);
+    return arr[1] ? arr.join(','): arr[0];
+  }
+
+  const formatoGeneral = (number) =>{
+    
+    const numero = number.replace(".","");
+    const numero1 = numero.replace(",",".");
+    return numero1;
+  
+
 }
 
 /* function enviar() {

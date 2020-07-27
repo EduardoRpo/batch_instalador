@@ -262,7 +262,7 @@
                   </div>
 
                 </div>
-                <div class="row" style="margin: 1%">
+                <!-- <div class="row" style="margin: 1%">
                   <div class="col-md-4 col-2 align-self-center">
                     <label for="recipient-name" class="col-form-label">Realizado Por</label>
                     <input type="text" class="form-control" id="recipient2-name">
@@ -278,7 +278,7 @@
                   <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
                     <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;">Firmar</button>
                   </div>
-                </div>
+                </div> -->
                 <div class="row" style="margin: 1%">
                   <div class="col-md-12 col-2 align-self-center" style="margin-left: 85%">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -325,10 +325,10 @@
                   <input type="text" class="form-control" readonly>
                   <!-- </div> -->
                   <!-- <div class="col-md-3 col-2 align-self-center" style="margin-top: 1%"> -->
-                  <label for="recipient-name" class="col-form-label">Loteadora</label>
+                  <!-- <label for="recipient-name" class="col-form-label">Loteadora</label> -->
                   <!-- </div> -->
                   <!-- <div class="col-md-3 col-2 align-self-center" style="margin-top: 1%"> -->
-                  <input type="text" class="form-control" readonly>
+                  <!-- <input type="text" class="form-control" readonly> -->
                   <!-- </div> -->
 
 
@@ -351,7 +351,7 @@
                 <div class="row" style="margin: 1%">
                   <div class="col-md-4 col-2 align-self-center">
                     <label for="recipient-name" class="col-form-label">Realizado Por</label>
-                    <input type="text" class="form-control" id="recipient2-name">
+                    <input type="text" class="form-control" id="recipient2-name" readonly>
                   </div>
                   <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
                     <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;">Firmar</button>
@@ -359,7 +359,7 @@
 
                   <div class="col-md-4 col-2 align-self-center">
                     <label for="recipient-name" class="col-form-label">Verificado Por</label>
-                    <input type="text" class="form-control" id="recipient2-name">
+                    <input type="text" class="form-control" id="recipient2-name" readonly>
                   </div>
                   <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
                     <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;">Firmar</button>

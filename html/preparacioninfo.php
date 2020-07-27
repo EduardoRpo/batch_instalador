@@ -232,6 +232,13 @@ include("modal/modal_condicionesMedio.php");
                       Instructivo de Preparación</h3>
                   </div>
                   <div class="col-md-8 col-2 align-self-center">
+                  <div class="m-3">
+                  <label for="">Control Preparación Tanques</label>
+                  <input type="checkbox" name="" id="chk1" style="width: 30px; height: 30px;">
+                  <input type="checkbox" name="" id="chk2" style="width: 30px; height: 30px;">
+                  <input type="checkbox" name="" id="chk3" style="width: 30px; height: 30px;">
+                  <input type="checkbox" name="" id="chk4" style="width: 30px; height: 30px;">
+                </div>
                     <div id="pasos_instructivo" class="col-form-label"></div>
 
                   </div>
@@ -403,7 +410,7 @@ include("modal/modal_condicionesMedio.php");
                     <input type="button" class="btn btn-danger" id="preparacion_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
                   </div>
 
-                  <div class="col-md-4 col-2 align-self-center">
+                  <div class="col-md-4 col-2 align-self-center"> <!-- APARECER SOLO AL CHEQUEAR EL ULTIMO CHECKBOX -->
                     <label for="preparacion_verificado" class="col-form-label">Verificado Por</label>
                     <input type="text" class="form-control" id="preparacion_verificado" readonly>
                   </div>

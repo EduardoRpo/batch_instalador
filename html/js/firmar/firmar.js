@@ -21,6 +21,8 @@ function cargar(btn){
 
 function enviar() {
    $('#m_firmar').modal('hide');
+
+   //VALIDAR PARA LA FIRMA DE VERIFICADO SI TODOS LOS CHECKBOX ESTAN CHEQUEADOS APARECER
     
    let template = '<img id="" src="/html/firmas/BerneyMontoya/:firma:" alt="firma_usuario" height="130">'; 
     

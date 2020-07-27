@@ -230,7 +230,13 @@ include_once('modal/modal_condicionesMedio.php');
               <hr>
               <div class="card-body">
                 <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Pesaje</h3>
-
+                <div class="m-3">
+                  <label for="">Control Pesaje Tanques</label>
+                  <input type="checkbox" name="" id="chk1" style="width: 30px; height: 30px;">
+                  <input type="checkbox" name="" id="chk2" style="width: 30px; height: 30px;">
+                  <input type="checkbox" name="" id="chk3" style="width: 30px; height: 30px;">
+                  <input type="checkbox" name="" id="chk4" style="width: 30px; height: 30px;">
+                </div>
                 <form>
                   <div class="table-responsive"></div>
                   <table class="table" id="tablePesaje" style="width: 100%;">
@@ -238,7 +244,7 @@ include_once('modal/modal_condicionesMedio.php');
                   </table>
                 </form>
               </div>
-              
+
 
             </div>
             <hr>
@@ -251,8 +257,7 @@ include_once('modal/modal_condicionesMedio.php');
             <hr>
 
             <div class="row" style="margin: 1%">
-              <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down" 
-                      id="imprimirEtiquetasVirtuale" style="margin-left: 1%" onclick="imprimir();">
+              <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down" id="imprimirEtiquetasVirtuale" style="margin-left: 1%" onclick="imprimir();">
                 Imprimir Etiquetas Virtuales
               </button>
             </div>

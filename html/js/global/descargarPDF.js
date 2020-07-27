@@ -19,6 +19,8 @@
 
 function imprimir(imp1){
 
+    //COLOCAR 4 PAGINAS DE ETIQUETAS 2.5 cm x 10 cm 
+
         var printContents = $('#imprimirEtiquetasVirtuale').html();
         var originalContents = document.body.innerHTML;
    

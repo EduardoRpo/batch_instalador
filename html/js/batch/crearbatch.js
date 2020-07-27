@@ -104,7 +104,8 @@ function recargarDatos(){
             $('#notificacionSanitaria').val(info[0].notificacion_sanitaria);
             $('#propietario').val(info[0].propietario);
             $('#producto').val(info[0].producto);          
-            $('#presentacioncomercial').val(info[0].presentacion);
+            let presentacion = formatoCO(info[0].presentacion);
+            $('#presentacioncomercial').val(presentacion);
             $('#linea').val(info[0].linea);
             $('#densidad').val(info[0].densidad);
         }
@@ -116,12 +117,20 @@ function recargarDatos(){
 function CalculoTamanolote (valor) {
     var total = 0;	
     unidades = parseInt(valor);
-    
-    densidad = $('#densidad').val();
-    presentacion = $('#presentacioncomercial').val();
-    total = ((unidades * densidad * presentacion)/1000)*(1 + 0.03);
 
-    $('#tamanototallote').val(total);
+    densidad = $('#densidad').val();
+
+    if(batch === false){
+        presentacion = formatoGeneral($('#presentacioncomercial').val());
+    }else{
+        presentacion = batch[0].presentacion;
+    }
+    
+    
+    total = ((unidades * densidad * presentacion)/1000)*(1 + 0.03);
+    total1 = formatoCO(total.toFixed(2));
+    
+    $('#tamanototallote').val(total1);
 }
 
 /* Limpiar datos al cambiar referencia en el modal de crear Batch */

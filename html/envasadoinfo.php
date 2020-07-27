@@ -167,7 +167,7 @@ include('modal/m_firma.php');
                 <div class="row" style="margin: 1%">
                   <div class="col-md-4 col-2 align-self-center">
                     <label for="despeje_realizado" class="col-form-label">Realizado Por</label>
-                    <input type="text" class="form-control in_desinfeccion" id="despeje_realizado">
+                    <input type="text" class="form-control in_desinfeccion" id="despeje_realizado" readonly>
                   </div>
                   <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
                     <input type="button" class="btn btn-danger in_desinfeccion" id="despeje_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
@@ -175,7 +175,7 @@ include('modal/m_firma.php');
 
                   <div class="col-md-4 col-2 align-self-center">
                     <label for="despeje_verificado" class="col-form-label">Verificado Por</label>
-                    <input type="text" class="form-control in_desinfeccion" id="despeje_verificado">
+                    <input type="text" class="form-control in_desinfeccion" id="despeje_verificado" readonly>
                   </div>
                   <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
                     <input type="button" class="btn btn-danger in_desinfeccion" id="despeje_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
@@ -205,24 +205,25 @@ include('modal/m_firma.php');
                   <div class="col-md-12 col-2 align-self-center">
                     <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Entrega Material Envase</h3>
                   </div>
+                  
                   <div class="col-md-12 col-2 align-self-center">
                     <div class="card">
                       <div class="card-block">
-
+                        
                         <div class="table-responsive">
 
                           <table class="table table-striped table-bordered">
                             <thead>
                               <tr>
                                 <!-- <th>Fecha</th> -->
-                                <th>Tipo</th>
+                                <th>Referencia</th>
                                 <th>Descripción</th>
                                 <th>Cantidad</th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr>
-                                <td>Referencia</td>
+                                <td>Tapa</td>
                                 <td>16</td>
                                 <td>Auto</td>
                                 <!-- <td> <input type="text" class="form-control" id="cantidad-name"></td> -->
@@ -234,7 +235,7 @@ include('modal/m_firma.php');
                                 <!-- <td> <input type="text" class="form-control" id="cantidad-name"></td> -->
                               </tr>
                               <tr>
-                                <td>Tapa </td>
+                                <td>Otro</td>
                                 <td>17</td>
                                 <td>Auto</td>
                                 <!-- <td></td> -->
@@ -282,12 +283,12 @@ include('modal/m_firma.php');
                         <button type="button" class="btn waves-effect waves-light btn-danger" id="envasado_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;">Firmar</button>
                       </div>
                     </div> -->
-                    <div class="row" style="margin: 1%">
+                   <!--  <div class="row" style="margin: 1%">
                       <div class="col-md-12 col-2 align-self-center" style="margin-left: 85%">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                         <button type="button" class="btn btn-primary">Aceptar</button>
                       </div>
-                    </div>
+                    </div> -->
                     <!-- <div class="row" style="margin: 1%"> -->
                     <div class="col-md-12 col-2 align-self-center">
                       <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Especificaciones Técnicas</h3>
@@ -324,7 +325,7 @@ include('modal/m_firma.php');
                       </div>
                       <div class="col-md-4 col-2 align-self-center">
                         <label for="controlpeso_realizado" class="col-form-label">Realizado Por</label>
-                        <input type="text" class="form-control" id="controlpeso_realizado">
+                        <input type="text" class="form-control" id="controlpeso_realizado" readonly>
                       </div>
                       <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
                         <button type="button" class="btn waves-effect waves-light btn-danger" id="controlpeso_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;">Firmar</button>
@@ -332,7 +333,7 @@ include('modal/m_firma.php');
 
                       <div class="col-md-4 col-2 align-self-center">
                         <label for="controlpeso_verificado" class="col-form-label">Verificado Por</label>
-                        <input type="text" class="form-control" id="controlpeso_verificado">
+                        <input type="text" class="form-control" id="controlpeso_verificado" readonly>
                       </div>
                       <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
                         <button type="button" class="btn waves-effect waves-light btn-danger" id="controlpeso_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;">Firmar</button>
@@ -364,31 +365,31 @@ include('modal/m_firma.php');
                                 </thead>
                                 <tbody>
                                   <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>Envase</td>
+                                    <td>15</td>
+                                    <td>2.400</td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text" name="" id=""></td>
+                                    <td><input type="text" name="" id=""></td>
                                   </tr>
                                   <tr>
+                                    <td>tapa</td>
+                                    <td>16</td>
+                                    <td>2.400</td>
                                     <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
                                   </tr>
                                   <tr>
+                                    <td>Otro</td>
+                                    <td>17</td>
+                                    <td>2.400</td>
                                     <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
                                   </tr>
                               </table>
                             </div>
@@ -399,12 +400,12 @@ include('modal/m_firma.php');
                     <div class="firmas_envasado">
 
                       <label for="devolucion_realizado" class="col-form-label">Realizado Por:</label>
-                      <input type="text" class="form-control" id="devolucion_realizado">
+                      <input type="text" class="form-control" id="devolucion_realizado" readonly>
 
                       <button type="button" class="btn waves-effect waves-light btn-danger" id="devolucion_realizado">Firmar</button>
 
                       <label for="devolucion_verificado" class="col-form-label">Verificado Por:</label>
-                      <input type="text" class="form-control" id="devolucion_verificado">
+                      <input type="text" class="form-control" id="devolucion_verificado" readonly>
 
                       <button type="button" class="btn waves-effect waves-light btn-danger" id="devolucion_verificado">Firmar</button>
                       

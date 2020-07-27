@@ -156,8 +156,28 @@ include('modal/m_firma.php');
                 <div class="col-md-12 col-2 align-self-center">
                   <h3 for="recipient-name" class="col-form-label mt-3" style="text-align: center; background-color: #c0c0c0"> Control de proceso</h3>
                 </div>
+
                 <div class="col-md-12 col-2 align-self-center">
-                  <div class="card">
+                  <div class=" checkbox-aprobacion mt-3">
+                    <label for="myCheck">Tanques:</label>
+                    <!-- <input type="checkbox" class="form-check-input" id="myCheck0" name="typeFilter"> -->
+                    <input type="checkbox" id="myCheck1" style="height: 30px; width:30px;">
+                    <input type="checkbox" id="myCheck2" style="height: 30px; width:30px;">
+                    <input type="checkbox" id="myCheck3" style="height: 30px; width:30px;">
+                    <input type="checkbox" id="myCheck4" style="height: 30px; width:30px;">
+                    <input type="checkbox" id="myCheck5" style="height: 30px; width:30px;">
+                    <input type="checkbox" id="myCheck6" style="height: 30px; width:30px;">
+                    <input type="checkbox" id="myCheck7" style="height: 30px; width:30px;">
+                    <input type="checkbox" id="myCheck8" style="height: 30px; width:30px;">
+                    <input type="checkbox" id="myCheck9" style="height: 30px; width:30px;">
+                    <input type="checkbox" id="myCheck10" style="height: 30px; width:30px;">
+                   
+                  </div>
+                  <div class="alert alert-primary" role="alert">
+                      Notificacion de parametros de control, mostrar mensaje de texto
+                    </div>
+                    
+                  <div class="card mt-3">
                     <div class="card-block">
                       <!--<h4 class="card-title">Basic Table</h4>
                  <h6 class="card-subtitle">Add class <code>.table</code></h6>-->
@@ -269,7 +289,7 @@ include('modal/m_firma.php');
               <div class="row" style="margin: 1%">
                 <div class="col-md-4 col-2 align-self-center">
                   <label for="desinfeccion_realizado" class="col-form-label">Realizado Por:</label>
-                  <input type="text" class="form-control" id="desinfeccion_realizado">
+                  <input type="text" class="form-control" id="desinfeccion_realizado" readonly>
                 </div>
                 <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
                   <input type="button" class="btn btn-danger" id="desinfeccion_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
@@ -277,7 +297,7 @@ include('modal/m_firma.php');
 
                 <div class="col-md-4 col-2 align-self-center">
                   <label for="desinfeccion_verificado" class="col-form-label">Verificado Por:</label>
-                  <input type="text" class="form-control" id="desinfeccion_verificado">
+                  <input type="text" class="form-control" id="desinfeccion_verificado" readonly>
                 </div>
                 <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
                   <input type="button" class="btn btn-danger" id="desinfeccion_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">

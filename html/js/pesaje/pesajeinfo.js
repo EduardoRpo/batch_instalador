@@ -69,22 +69,22 @@ tablePesaje = $('#tablePesaje').dataTable({
             render: (data, type, row) => {
                 
                 if (flagWeight) {
-                    return (data * batch.tamano_lote).toFixed(2).replace('.', ',');
+                    return (data * batch.tamano_lote / 1000).toFixed(2).replace('.', ',');
                 } else { 
-                    return (data * batch.tamano_lote/ 1000).toFixed(2).replace('.', ',');
+                    return (data * batch.tamano_lote).toFixed(2).replace('.', ',');
                 }
             },
             
         },
         {
             title: '<input type="text" class="form-control" id="Notanques" placeholder="Tanques" style="width:52px; text-align:center" onkeydown="calcularxNoTanques();">',
-            data: 'porcentaje', className: 'uniqueClassName',
+            data: 'porcentaje', className: 'uniqueClassName', //colocar numero limite de tanques a 10; y por defecto quede con 1
             render: (data, type, row) => {
                 let tanque = $('#Notanques').val();
                 if (flagWeight && tanque!='') {
-                    return (data * batch.tamano_lote * $('#Notanques').val()).toFixed(2).replace('.', ',');
-                } else {
                     return (data * batch.tamano_lote / 1000 / $('#Notanques').val()).toFixed(2).replace('.', ',');
+                } else {
+                    return (data * batch.tamano_lote /  $('#Notanques').val()).toFixed(2).replace('.', ',');
                 }
             
             },
@@ -109,11 +109,11 @@ tablePesaje = $('#tablePesaje').dataTable({
             $.extend( true, {}, {
                 extend: 'pdfHtml5',
                 text: 'Exportar PDF',
-                title: 'Formula Producto ' + batch.referencia,
-                messageTop: 'https://samaracosmetics.com/',
+                title: 'DISPENSACIÓN ' + batch.referencia,  //DEJAR LA OP EN VEZ DE LA REFERENCIA DEL PRODUCTO
+                messageTop: 'Ingrese el número de Tanque   _____', //VALIDAR PARA QUE SE PREGUNTE EL NÚMERO DE TANQUE
                 
                 exportOptions: {
-                    columns: [ 0, 1, 2, 3 ]
+                    columns: [ 0, 1, 3 ]
                 }
             })
         ]

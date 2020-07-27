@@ -8,7 +8,10 @@
         <label for="">Incidencias</label>
         <label for="" style="margin-left: 390px;">Observaciones</label>
         <div class="observacion">
+          <label for="">1-Metodo, 2-Materiales, 3-Medicion, 4-Máquina, 5-Mano de Obra, 6-Medio Ambiente, 7-Necesarias </label>
+          <label for="">1</label>
           <select class="custom-select" style="font-size: small;">
+          
             <option value="" hidden selected>METODO</option>
             <option value=""></option>
             <option value="">FALTA PROGRAMACIÓN PRODUCCIÓN</option>
@@ -18,6 +21,7 @@
             <option value="">FALTA DOCUMENTACIÓN NECESARIA</option>
           </select>
           <textarea class="form-control txtObservaciones" aria-label="With textarea"></textarea>
+          <label for="">2</label>
           <select class="custom-select" style="font-size: small;">
             <option value="" hidden selected>MATERIALES</option>
             <option value=""></option>
@@ -28,6 +32,7 @@
             <option value="">PRODUCTO SIN ROTULOS</option>
             <option value="">PRODUCTO NO CONFORME</option>
           </select>
+          <label for="">3</label>
           <select class="custom-select" style="font-size: small;">
             <option value="" hidden selected>MEDICIÓN</option>
             <option value=""></option>

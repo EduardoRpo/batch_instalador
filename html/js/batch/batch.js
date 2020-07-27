@@ -88,19 +88,27 @@ $(document).on('click', '.link-editar', function(e){
          success: function(response){
             
             const info = JSON.parse(response);
-            
+            batch = info;
+            debugger
             $('#idbatch').val(info[0].id_batch);
             $('#referencia').val(info[0].referencia);
             $('#nombrereferencia').val(info[0].nombre_referencia);
             $('#marca').val(info[0].marca);
             $('#propietario').val(info[0].propietario);
             $('#producto').val(info[0].nombre_referencia);
-            $('#presentacioncomercial').val(info[0].presentacion);
+            const presentacion = formatoCO(info[0].presentacion);
+            $('#presentacioncomercial').val(presentacion);
             $('#linea').val(info[0].linea);
             $('#notificacionSanitaria').val(info[0].notificacion_sanitaria);
             $('#densidad').val(info[0].densidad);
+            
+            //const unidad_lote = formatoCO(info[0].unidad_lote);
+            //$('#unidadesxlote').val(unidad_lote);
             $('#unidadesxlote').val(info[0].unidad_lote);
-            $('#tamanototallote').val(info[0].tamano_lote);
+
+            const tamano_lote = formatoCO(info[0].tamano_lote);
+            $('#tamanototallote').val(tamano_lote);
+
             $('#fechaprogramacion').val(info[0].fecha_programacion);
        
             mostrarTanques(info);
@@ -203,6 +211,12 @@ function actualizarTabla() {
 function guardarDatos(){    
     
     const lote = $('#tamanototallote').val();
+    const tamano_lote  = formatoGeneral(lote);
+
+    const presentacion = $('#presentacioncomercial').val();
+    const presentacion_comercial = formatoGeneral(presentacion);
+    
+    debugger
     const sumaTanques = $('.sumaTanques').val()
     let tqn = [];
     let tmn = [];
@@ -237,14 +251,15 @@ function guardarDatos(){
     
     j=1;
     
+    debugger
     
     if(!editar){
         datos = {
             operacion: "5",
             ref: $('#idbatch').val(),
             unidades: $('#unidadesxlote').val(),
-            lote: $('#tamanototallote').val(),
-            presentacion: $('#presentacioncomercial').val(),
+            lote: tamano_lote, //$('#tamanototallote').val(),
+            presentacion: presentacion_comercial,
             programacion: $('#fechaprogramacion').val(),
             fecha : fechaActual,
             cantidad: "1",
@@ -307,10 +322,3 @@ function  contarTanques(){
          addtnq++;
 }
 
-/* Formateo de numeros */
-
-const formatter = new Intl.NumberFormat('de-DE', {
-    //style: 'currency',
-    //currencySign: 'accounting'
-    /* minimumFractionDigits: 2 */
-  })

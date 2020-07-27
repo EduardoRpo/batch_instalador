@@ -156,6 +156,7 @@ include("modal/modal_cambiarContrasena.php");
     <script src="js/batch/crearbatch.js"></script>
     <script src="js/batch/filtradofechas.js"></script>
     <script src="js/calendario/calendar.js"></script>
+    <script src="js/global/loadinfo-global.js"></script>
 
 
     <!--Alertify-->
