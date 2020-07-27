@@ -89,7 +89,7 @@ $(document).on('click', '.link-editar', function(e){
             
             const info = JSON.parse(response);
             batch = info;
-            debugger
+            
             $('#idbatch').val(info[0].id_batch);
             $('#referencia').val(info[0].referencia);
             $('#nombrereferencia').val(info[0].nombre_referencia);
@@ -216,7 +216,6 @@ function guardarDatos(){
     const presentacion = $('#presentacioncomercial').val();
     const presentacion_comercial = formatoGeneral(presentacion);
     
-    debugger
     const sumaTanques = $('.sumaTanques').val()
     let tqn = [];
     let tmn = [];
@@ -251,9 +250,7 @@ function guardarDatos(){
     
     j=1;
     
-    debugger
-    
-    if(!editar){
+   if(!editar){
         datos = {
             operacion: "5",
             ref: $('#idbatch').val(),

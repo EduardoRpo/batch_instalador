@@ -42,7 +42,7 @@ function calularPeso(){
     var peso_max = peso_min * (1+0.03);
     var peso_maximo = formatoCO(peso_max);
     
-    var prom = (parseInt(peso_min) + peso_max)/2
+    var prom = (parseInt(peso_min) + peso_max)/2;
     var promedio = formatoCO(prom);
     
     $('#Minimo').val(peso_minimo);
@@ -60,7 +60,7 @@ $.ajax({
     success: function(data){
         var info = JSON.parse(data);
 
-        if(info == undefined){
+        if(info === undefined){
             alertify.set("notifier","position", "top-right"); alertify.error("No se encontró información de Tanques.");    
         }else{ 
         for(i=0; i < info.length; i++){
@@ -108,7 +108,7 @@ function guardar_condicionesMedio(){
     let url = $(location).attr('href');
     let id_batch = url.split("/");
     
-    if(temperatura == "" || humedad == ""){
+    if(temperatura === "" || humedad === ""){
         alertify.set("notifier","position", "top-right"); alertify.error("Complete todos los datos para continuar con el proceso.");
         return false;
     }
@@ -194,15 +194,15 @@ function cargarMaquinas(){
         success: function(response){
             const info = JSON.parse(response);
 
-            $('.envasadora').val('')
-            $('.loteadora').val('')
-            $('#sel_agitador').val('')
-            $('#sel_marmita').val('')
+            $('.envasadora').val('');
+            $('.loteadora').val('');
+            $('#sel_agitador').val('');
+            $('#sel_marmita').val('');
             
-            $('.envasadora').val(info[0].envasadora)
-            $('.loteadora').val(info[0].loteadora)
-            $('#sel_agitador').val(info[0].agitador)
-            $('#sel_marmita').val(info[0].marmita)
+            $('.envasadora').val(info[0].envasadora);
+            $('.loteadora').val(info[0].loteadora);
+            $('#sel_agitador').val(info[0].agitador);
+            $('#sel_marmita').val(info[0].marmita);
             
             },
         error: function(response){
