@@ -29,26 +29,9 @@ $.ajax({
     $('#in_fecha_programacion').val(data.fecha_programacion);
     $('#in_tamano_lote').val(tamano_lote);
     
-    calularPeso();
+    calcularPeso(batch);
+    calcularMuestras(batch);
 });
-
-
-/* Calcular peso minimo, maximo y promedio */
-
-function calularPeso(){
-    var peso_min = batch.lote_presentacion * batch.densidad; // DENSIDAD DEBE TRAERSE DE LA GUARDADO EN APROBACION POR CALIDAD
-    var peso_minimo = formatoCO(peso_min);
-    
-    var peso_max = peso_min * (1+0.03);
-    var peso_maximo = formatoCO(peso_max);
-    
-    var prom = (parseInt(peso_min) + peso_max)/2;
-    var promedio = formatoCO(prom);
-    
-    $('#Minimo').val(peso_minimo);
-    $('#Maximo').val(peso_maximo);
-    $('#Medio').val(promedio);
-}
 
 /* Carga de tanques para mostrar en los proceso de pesaje, preparacion y aprobacion */
 
@@ -230,6 +213,8 @@ const formatoCO = (number) => {
   
 
 }
+
+
 
 /* function enviar() {
     $('#myModal2').modal('hide');

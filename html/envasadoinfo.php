@@ -312,7 +312,7 @@ include('modal/m_firma.php');
                         <label for="recipient-name" class="col-form-label">No. Muestras</label>
                       </div>
                       <div class="col-md-2 col-2 align-self-center" style="margin-top: 1%">
-                        <input type="text" class="form-control" id="Muestras">
+                        <input type="text" class="form-control" id="Muestras" style="text-align: center;" readonly>
                       </div>
                       <div class="col-md-1 col-2 align-self-center" style="margin-top: 1%">
                         <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;">Iniciar</button>
@@ -368,28 +368,28 @@ include('modal/m_firma.php');
                                     <td>Envase</td>
                                     <td>15</td>
                                     <td>2.400</td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text" name="" id=""></td>
-                                    <td><input type="text" name="" id=""></td>
+                                    <td><input type="text" class="form-control"></td>
+                                    <td><input type="text" class="form-control"></td>
+                                    <td><input type="text" name="" id="" class="form-control"></td>
+                                    <td><input type="text" name="" id="" class="form-control"></td>
                                   </tr>
                                   <tr>
                                     <td>tapa</td>
                                     <td>16</td>
                                     <td>2.400</td>
                                     <td></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
+                                    <td><input type="text" class="form-control"></td>
+                                    <td><input type="text" class="form-control"></td>
+                                    <td><input type="text" class="form-control"></td>
                                   </tr>
                                   <tr>
                                     <td>Otro</td>
                                     <td>17</td>
                                     <td>2.400</td>
                                     <td></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
-                                    <td><input type="text"></td>
+                                    <td><input type="text" class="form-control"></td>
+                                    <td><input type="text" class="form-control"></td>
+                                    <td><input type="text" class="form-control"></td>
                                   </tr>
                               </table>
                             </div>
