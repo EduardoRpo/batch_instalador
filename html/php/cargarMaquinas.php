@@ -22,7 +22,7 @@
 
     $query_linea = $conn -> query("SELECT envasadora.nombre AS envasadora, loteadora.nombre as loteadora, marmita.nombre AS marmita, agitador.nombre AS agitador 
                                   FROM linea_maquinaria, envasadora, loteadora, marmita, agitador 
-                                  WHERE (SELECT id FROM LINEA WHERE nombre_linea = '$linea') = id_linea 
+                                  WHERE (SELECT id FROM linea WHERE nombre_linea = '$linea') = id_linea 
                                   AND id_envasadora = envasadora.id AND id_loteadora = loteadora.id AND id_marmita = marmita.id AND id_agitador = agitador.id");
     
     $result = mysqli_num_rows($query_linea);
