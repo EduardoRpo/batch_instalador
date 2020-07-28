@@ -223,21 +223,21 @@ include('modal/m_firma.php');
                             </thead>
                             <tbody>
                               <tr>
-                                <td>Tapa</td>
-                                <td>16</td>
-                                <td>Auto</td>
+                                <td id="tapa"></td>
+                                <td id="descripcion_tapa"></td>
+                                <td id="unidades1"></td>
                                 <!-- <td> <input type="text" class="form-control" id="cantidad-name"></td> -->
                               </tr>
                               <tr>
-                                <td>Envase</td>
-                                <td>15</td>
-                                <td>Auto</td>
+                                <td id="envase"></td>
+                                <td id="descripcion_envase"></td>
+                                <td id="unidades2"></td>
                                 <!-- <td> <input type="text" class="form-control" id="cantidad-name"></td> -->
                               </tr>
                               <tr>
-                                <td>Otro</td>
-                                <td>17</td>
-                                <td>Auto</td>
+                                <td id="otro"></td>
+                                <td id="descripcion_otro"></td>
+                                <td id="unidades3"></td>
                                 <!-- <td></td> -->
                               </tr>
                           </table>
@@ -365,31 +365,31 @@ include('modal/m_firma.php');
                                 </thead>
                                 <tbody>
                                   <tr>
-                                    <td>Envase</td>
-                                    <td>15</td>
-                                    <td>2.400</td>
-                                    <td><input type="text" class="form-control"></td>
-                                    <td><input type="text" class="form-control"></td>
-                                    <td><input type="text" name="" id="" class="form-control"></td>
-                                    <td><input type="text" name="" id="" class="form-control"></td>
+                                    <td id="tapa1"></td>
+                                    <td id="descripcion_tapa1"></td>
+                                    <td id="unidades4"></td>
+                                    <td><input type="number" id="txtCantidad_Envasada" min="1" class="form-control centrado" onkeyup="devolucionMaterial(this.value);"></td>
+                                    <td><input type="number" class="form-control centrado"></td>
+                                    <td><input type="number" name="" id="" class="form-control centrado"></td>
+                                    <td><input type="number" name="" id="" class="form-control centrado" readonly></td>
                                   </tr>
                                   <tr>
-                                    <td>tapa</td>
-                                    <td>16</td>
-                                    <td>2.400</td>
-                                    <td></td>
-                                    <td><input type="text" class="form-control"></td>
-                                    <td><input type="text" class="form-control"></td>
-                                    <td><input type="text" class="form-control"></td>
+                                    <td id="envase1"></td>
+                                    <td id="descripcion_envase1"></td>
+                                    <td id="unidades5"></td>
+                                    <td id="unidades_envasadas" class="centrado"></td>
+                                    <td><input type="number" class="form-control centrado"></td>
+                                    <td><input type="number" class="form-control centrado"></td>
+                                    <td><input type="number" class="form-control centrado" readonly></td>
                                   </tr>
                                   <tr>
-                                    <td>Otro</td>
-                                    <td>17</td>
-                                    <td>2.400</td>
-                                    <td></td>
-                                    <td><input type="text" class="form-control"></td>
-                                    <td><input type="text" class="form-control"></td>
-                                    <td><input type="text" class="form-control"></td>
+                                    <td id="otro1"></td>
+                                    <td id="descripcion_otro1"></td>
+                                    <td id="unidades6"></td>
+                                    <td id="unidades_envasadas1" class="centrado"></td>
+                                    <td><input type="number" class="form-control centrado"></td>
+                                    <td><input type="number" class="form-control centrado"></td>
+                                    <td><input type="number" class="form-control centrado" readonly></td>
                                   </tr>
                               </table>
                             </div>

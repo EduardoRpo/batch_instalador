@@ -2,6 +2,7 @@ let idBatch = location.href.split('/')[4];
 let referencia = location.href.split('/')[5];
 var batch;
 let template;
+let modulo;
 
 Date.prototype.toDateInputValue = (function () {
     var local = new Date(this);
@@ -29,13 +30,16 @@ $.ajax({
     $('#in_fecha_programacion').val(data.fecha_programacion);
     $('#in_tamano_lote').val(tamano_lote);
     
+    cargarTablaEnvase(batch);
     calcularPeso(batch);
     calcularMuestras(batch);
+    
 });
 
 /* Carga de tanques para mostrar en los proceso de pesaje, preparacion y aprobacion */
-
+let cantidad = 0;
 $.ajax({
+
     'method' : 'POST',
     'url' : '../../html/php/tanques.php',
     'data':{id : idBatch},
@@ -45,17 +49,36 @@ $.ajax({
 
         if(info === undefined){
             alertify.set("notifier","position", "top-right"); alertify.error("No se encontró información de Tanques.");    
-        }else{ 
-        for(i=0; i < info.length; i++){
-            template = 'Tanque: '+ info[i].tanque +' x '+ ' Cantidad: ' + info[i].cantidad+' ='+' Total: ' + info[i].tanque * info[i].cantidad;
+        }else{
+            template = 'Tanque            Cantidad              Total '; 
             document.getElementById("observaciones").value+=template + '\n';
+        for(i=0; i < info.length; i++){
+            template = '    ' + info[i].tanque +'                      ' + info[i].cantidad + '                   ' + info[i].tanque * info[i].cantidad;
+            document.getElementById("observaciones").value+=template + '\n';
+            cantidad = cantidad + parseInt(info[i].cantidad);
+
             }
         }
+        controlProceso(cantidad);
     },
     error: function(r){
         alertify.set("notifier","position", "top-right"); alertify.error("Error al Cargar los tanques.");
     } 
+    
 });
+
+/* Mostrar los checkbox de acuerdo con la cantidad de tanques */
+
+function controlProceso(cantidad){
+
+    for(let i=1; i<11; i++){
+        $('#chk-controlPesaje'+i).hide();
+    }
+
+    for(let i=1; i<=cantidad; i++){
+        $('#chk-controlPesaje'+i).show();
+    }
+}
 
 /* Mostrar ventana de Condiciones Medio de acuerdo con el tiempo establecido en la BD*/
 

@@ -71,7 +71,7 @@
                     <div class="row page">
                         <div class="col-md-4 col-2 align-self-center">
                             <label for="recipient-name" class="col-form-label">Unidades por Lote</label>
-                            <input type="number" name="unidadesxlote" id="unidadesxlote" onkeyup="CalculoTamanolote(this.value);" class="form-control" min="1" required />
+                            <input type="number" name="unidadesxlote" id="unidadesxlote" min="1" onkeyup="CalculoTamanolote(this.value);" class="form-control" min="1" required />
                         </div>
                         <div class="col-md-4 col-2 align-self-center">
                             <label for="recipient-name" class="col-form-label" type="number">Tamaño del Lote (Kg)</label>

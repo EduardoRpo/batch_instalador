@@ -214,10 +214,9 @@ include("modal/modal_condicionesMedio.php");
                     <option>Liquido</option>
                     <option>Solido</option>
                     <option>Semisolido</option>
-                  < /select>
-                  <input type="text" id="sel_agitador" class="form-control" readonly>
-                  <input type="text" id="sel_marmita" class="form-control" readonly>
-                  <!-- <select class="selectpicker form-control" id="sel_agitador">
+                    < /select> <input type="text" id="sel_agitador" class="form-control" readonly>
+                      <input type="text" id="sel_marmita" class="form-control" readonly>
+                      <!-- <select class="selectpicker form-control" id="sel_agitador">
                     <option selected hidden>Seleccione</option>
                   </select>
 
@@ -231,14 +230,22 @@ include("modal/modal_condicionesMedio.php");
                     <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">
                       Instructivo de Preparación</h3>
                   </div>
+                  <div class="chk-control m-3">
+                    <label for="" class="lblchk-control">Control Preparación Tanques</label>
+                    <input type="checkbox" name="" id="chk-control1" style="width: 30px; height: 30px;">
+                    <input type="checkbox" name="" id="chk-control2" style="width: 30px; height: 30px;">
+                    <input type="checkbox" name="" id="chk-control3" style="width: 30px; height: 30px;">
+                    <input type="checkbox" name="" id="chk-control4" style="width: 30px; height: 30px;">
+                    <input type="checkbox" name="" id="chk-control5" style="width: 30px; height: 30px;">
+                    <input type="checkbox" name="" id="chk-control6" style="width: 30px; height: 30px;">
+                    <input type="checkbox" name="" id="chk-control7" style="width: 30px; height: 30px;">
+                    <input type="checkbox" name="" id="chk-control8" style="width: 30px; height: 30px;">
+                    <input type="checkbox" name="" id="chk-control9" style="width: 30px; height: 30px;">
+                    <input type="checkbox" name="" id="chk-control10" style="width: 30px; height: 30px;">
+                  </div>
+                  <hr>
                   <div class="col-md-8 col-2 align-self-center">
-                  <div class="m-3">
-                  <label for="">Control Preparación Tanques</label>
-                  <input type="checkbox" name="" id="chk1" style="width: 30px; height: 30px;">
-                  <input type="checkbox" name="" id="chk2" style="width: 30px; height: 30px;">
-                  <input type="checkbox" name="" id="chk3" style="width: 30px; height: 30px;">
-                  <input type="checkbox" name="" id="chk4" style="width: 30px; height: 30px;">
-                </div>
+
                     <div id="pasos_instructivo" class="col-form-label"></div>
 
                   </div>
@@ -344,7 +351,7 @@ include("modal/modal_condicionesMedio.php");
                                 </td>
                               </tr>
                               <tr>
-                                <td></td>
+                                <td>Densidad</td>
                                 <td id="espec_densidad"></td>
                                 <td><input class="selectpicker form-control" type="number" id="in_densidad">
                                 </td>
@@ -410,7 +417,8 @@ include("modal/modal_condicionesMedio.php");
                     <input type="button" class="btn btn-danger" id="preparacion_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
                   </div>
 
-                  <div class="col-md-4 col-2 align-self-center"> <!-- APARECER SOLO AL CHEQUEAR EL ULTIMO CHECKBOX -->
+                  <div class="col-md-4 col-2 align-self-center">
+                    <!-- APARECER SOLO AL CHEQUEAR EL ULTIMO CHECKBOX -->
                     <label for="preparacion_verificado" class="col-form-label">Verificado Por</label>
                     <input type="text" class="form-control" id="preparacion_verificado" readonly>
                   </div>

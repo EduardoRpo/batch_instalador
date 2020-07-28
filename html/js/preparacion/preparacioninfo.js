@@ -1,7 +1,7 @@
 
 let pasos;
-//let idBatch = location.href.split('/')[4];
-//let referencia = location.href.split('/')[5];
+let idBatch = location.href.split('/')[4];
+let referencia = location.href.split('/')[5];
 let queeProcess = 0;
 
 /* Inicializar tabla control de proceso */
@@ -131,9 +131,6 @@ $.ajax({
 
     $('#espec_untosidad').html(data.untuosidad);
 });
-
-/* Valida que las maquinas tengan alguna seleccion */
-
 
 
 /* Carga instructivo preparación para producto */

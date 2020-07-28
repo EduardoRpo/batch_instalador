@@ -35,3 +35,56 @@ function calcularPeso(batch){
   $('#Medio').val(promedio);
 }
 
+
+/* Carga tabla de propiedades del producto */
+function cargarTablaEnvase(batch){
+
+  $.ajax({
+    url: '../../html/php/envase.php',
+    type: 'POST',
+    data: {id: batch.referencia},
+
+  }).done((data, status, xhr) => {
+    
+    var info = JSON.parse(data);
+    unidades = formatoCO(batch.unidad_lote);
+
+    $('#tapa').html(info[0].referencia);
+    $('#descripcion_tapa').html(info[0].descripcion);
+    
+    $('#envase').html(info[1].referencia);
+    $('#descripcion_envase').html(info[1].descripcion);
+
+    $('#otro').html(info[2].referencia);
+    $('#descripcion_otro').html(info[2].descripcion);
+  
+    $('#tapa1').html(info[0].referencia);
+    $('#descripcion_tapa1').html(info[0].descripcion);
+
+    $('#envase1').html(info[1].referencia);
+    $('#descripcion_envase1').html(info[1].descripcion);
+
+    $('#otro1').html(info[2].referencia);
+    $('#descripcion_otro1').html(info[2].descripcion);
+    
+    for (let i=1; i<7; i++){
+      $('#unidades'+i).html(unidades);
+    }
+  
+  });
+}
+
+/* Calculo de la devolucion de material */
+
+function devolucionMaterial(valor){
+  
+  let unidades_envasadas = formatoCO(parseInt(valor));
+
+  if(unidades_envasadas ==='NaN'){
+    unidades_envasadas=0;
+  }
+  
+  $('#txtCantidad_Envasada').val(unidades_envasadas);
+  $('#unidades_envasadas').html(unidades_envasadas);
+  $('#unidades_envasadas1').html(unidades_envasadas);
+}

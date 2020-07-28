@@ -8240,18 +8240,26 @@ div.displayallinfo {
 
 .observacion{
   display: grid;
-  grid-template-columns: 455px 255px;
+  grid-template-columns: 20px 455px 255px;
   grid-gap: 1em;
-  margin: 10px;
+  margin: 5px;
   text-align: center;
+}
+
+.observacion .categorias{
+  /* grid-row-start: 1;
+  grid-row-end: 8; */
+
+  grid-column-start: 1;
+  grid-column-end: 3;
 }
 
 .observacion .txtObservaciones{
   grid-row-start: 1;
-  grid-row-end: 8;
+  grid-row-end: 9;
 
-  grid-column-start: 2;
-  grid-column-end: 3;
+  grid-column-start: 3;
+  grid-column-end: 4;
 }
 
 /* Modal Condiciones Medio */
@@ -8343,6 +8351,20 @@ div.displayallinfo {
   grid-gap: 1em;
   margin: 20px;
   text-align: center;
+}
+
+.chk-control{
+  display: grid;
+  grid-template-columns: repeat(30, 1fr);
+  grid-gap: 1em;
+  text-align: center;
+  justify-items: center;
+  justify-content: center;
+}
+
+.lblchk-control{
+  grid-column-start: 4;
+  grid-column-end: 11;
 }
 
 .imprimir{

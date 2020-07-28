@@ -5,11 +5,12 @@
         <h5 class="modal-title" style="color: white;">Observaciones</h5>
       </div>
       <div class="modal-body">
-        <label for="">Incidencias</label>
-        <label for="" style="margin-left: 390px;">Observaciones</label>
+        <label style="margin-left: 50px;">Incidencias</label>
+        <label style="margin-left: 390px;">Observaciones</label>
+        
         <div class="observacion">
-          <label for="">1-Metodo, 2-Materiales, 3-Medicion, 4-Máquina, 5-Mano de Obra, 6-Medio Ambiente, 7-Necesarias </label>
-          <label for="">1</label>
+        <label class="categorias">1-Metodo, 2-Materiales, 3-Medicion, 4-Máquina, 5-Mano de Obra, 6-Medio Ambiente, 7-Necesarias </label>
+          <label>1</label>
           <select class="custom-select" style="font-size: small;">
           
             <option value="" hidden selected>METODO</option>
@@ -39,6 +40,7 @@
             <option value="">DESORDEN PUESTO DE TRABAJO</option>
             <option value="">TIEMPO INSUFICIENTE PARA SUPLIR LAS LABORES</option>
           </select>
+          <label for="">4</label>
           <select class="custom-select" style="font-size: small;">
             <option value="" hidden selected>MÁQUINA</option>
             <option value=""></option>
@@ -49,6 +51,7 @@
             <option value="">FALTA DE BOQUILLAS Y MOLDES</option>
             <option value="">AVERIA SISTEMA ELECTRICO</option>
           </select>
+          <label for="">5</label>
           <select class="custom-select" style="font-size: small;">
             <option value="" hidden selected>MANO DE OBRA</option>
             <option value=""></option>
@@ -58,12 +61,14 @@
             <option value="">FALTA DE CAPACITACION</option>
             <option value="">AGOTAMIENTO</option>
           </select>
+          <label for="">6</label>
           <select class="custom-select" style="font-size: small;">
             <option value="" hidden selected>MEDIO AMBIENTE</option>
             <option value=""></option>
             <option value="">TEMPERATURAS MUY ALTAS</option>
             <option value="">FALTA DE CULTURA ORGANIZACIONAL</option>
           </select>
+          <label for="">7</label>
           <select class="custom-select" style="font-size: small;">
             <option value="" hidden selected>INCIDENCIAS NECESARIAS</option>
             <option value=""></option>
@@ -75,6 +80,7 @@
             <option value="">SALIDAS NECESARIAS (BAÑO, DESAYUNO, ALMUERZO)</option>
             <option value="">ASEO PLANTA</option>
           </select>
+
 
         </div>
       </div>
