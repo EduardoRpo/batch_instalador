@@ -200,13 +200,13 @@ function cargarMaquinas(){
         success: function(response){
             const info = JSON.parse(response);
 
-            $('.envasadora').val('');
-            $('.loteadora').val('');
+            $('.txtEnvasadora').val('');
+            $('.txtLoteadora').val('');
             $('#sel_agitador').val('');
             $('#sel_marmita').val('');
             
-            $('.envasadora').val(info[0].envasadora);
-            $('.loteadora').val(info[0].loteadora);
+            $('.txtEnvasadora').val(info[0].envasadora);
+            $('.txtLoteadora').val(info[0].loteadora);
             $('#sel_agitador').val(info[0].agitador);
             $('#sel_marmita').val(info[0].marmita);
             

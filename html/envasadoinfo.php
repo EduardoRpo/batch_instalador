@@ -3,6 +3,7 @@ include('modal/modal_firma.php');
 include('modal/modal_cambiarContrasena.php');
 include('modal/modal_observaciones.php');
 include('modal/m_firma.php');
+include('modal/m_muestras.php');
 ?>
 
 <!DOCTYPE html>
@@ -255,14 +256,16 @@ include('modal/m_firma.php');
                         <option>Semisolido</option>
                       </select>
 
-                      <label for="recipient-name" class="col-form-label envasadora">Identificación Envasadora</label>
-                      <input type="text" class="form-control envasadora" readonly>
-
-                      <label for="recipient-name" class="col-form-label" loteadora>Identificación Loteadora</label>
-                      <input type="text" class="form-control loteadora" readonly>
-
                       <label for="recipient-name" class="col-form-label">Digite el lote requerido</label>
                       <input type="text" class="form-control">
+                      
+                      <label for="recipient-name" class="col-form-label envasadora">Identificación Envasadora</label>
+                      <input type="text" class="form-control txtEnvasadora" readonly>
+
+                      <label for="recipient-name" class="col-form-label loteadora" >Identificación Loteadora</label>
+                      <input type="text" class="form-control txtLoteadora" readonly>
+
+                      
 
                     </div>
                     <hr>
@@ -315,7 +318,7 @@ include('modal/m_firma.php');
                         <input type="text" class="form-control" id="Muestras" style="text-align: center;" readonly>
                       </div>
                       <div class="col-md-1 col-2 align-self-center" style="margin-top: 1%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;">Iniciar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;" onclick="muestrasEnvase();" data-toggle="modal" data-target="#m_muestras" >Iniciar</button>
                       </div>
                       <div class="col-md-1 col-2 align-self-center" style="margin-top: 1%">
                         <label for="recipient-name" class="col-form-label">Promedio</label>

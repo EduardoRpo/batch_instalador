@@ -232,8 +232,8 @@
       $tanque       = $_POST['tqns'];
       $tamanotqn    = $_POST['tmn'];
 
-      print_r($tanque); '<br>';
-      print_r($tamanotqn);
+      //print_r($tanque); '<br>';
+      //print_r($tamanotqn);
 
 
       $query_actualizar = "UPDATE batch SET unidad_lote = '$unidades', tamano_lote = '$lote', fecha_programacion = '$programacion'

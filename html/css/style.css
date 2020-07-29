@@ -8424,6 +8424,64 @@ div.displayallinfo {
   text-align: center;
 }
 
+.id_envasadora_loteadora .envasadora{
+  grid-row-start: 2;
+  grid-row-end: 3;
+
+  grid-column-start: 1;
+  grid-column-end: 3;
+  text-align: start;
+}
+
+
+.id_envasadora_loteadora .txtEnvasadora{
+  grid-row-start: 2;
+  grid-row-end: 3;
+
+  grid-column-start: 2;
+  grid-column-end: 4;
+}
+
+.id_envasadora_loteadora .loteadora{
+  grid-row-start: 2;
+  grid-row-end: 3;
+
+  grid-column-start: 4;
+  grid-column-end: 5;
+  text-align: start;
+}
+
+
+.id_envasadora_loteadora .txtLoteadora{
+  grid-row-start: 2;
+  grid-row-end: 3;
+
+  grid-column-start: 5;
+  grid-column-end: 7;
+}
+
+.txtMuestras{
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  
+  grid-column-gap: 2em;
+  grid-gap: 1em;
+  margin: 20px;
+  text-align: center;
+}
+
+.lblMuestras{
+  display: flex;
+  justify-content: space-around;
+  font-size: large;
+}
+
+input::placeholder {
+  color: greenyellow ;
+  font-size: 10px;
+  font-style: italic;
+}
+
 .firmas_envasado{
   display: grid;
   grid-template-columns: repeat(6, 1fr);
