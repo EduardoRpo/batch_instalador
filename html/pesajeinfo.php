@@ -232,16 +232,7 @@ include_once('modal/modal_condicionesMedio.php');
                 <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Pesaje</h3>
                 <div class="chk-control m-3">
                   <label for="" class="lblchk-control">Control Pesaje Tanques</label>
-                  <input type="checkbox" class="form-control" id="chk-control1" style="width: 30px; height: 30px;">
-                  <input type="checkbox" class="form-control" id="chk-control2" style="width: 30px; height: 30px;">
-                  <input type="checkbox" class="form-control" id="chk-control3" style="width: 30px; height: 30px;">
-                  <input type="checkbox" class="form-control" id="chk-control4" style="width: 30px; height: 30px;">
-                  <input type="checkbox" class="form-control" id="chk-control5" style="width: 30px; height: 30px;">
-                  <input type="checkbox" class="form-control" id="chk-control6" style="width: 30px; height: 30px;">
-                  <input type="checkbox" class="form-control" id="chk-control7" style="width: 30px; height: 30px;">
-                  <input type="checkbox" class="form-control" id="chk-control8" style="width: 30px; height: 30px;">
-                  <input type="checkbox" class="form-control" id="chk-control9" style="width: 30px; height: 30px;">
-                  <input type="checkbox" class="form-control" id="chk-control10" style="width: 30px; height: 30px;">
+                  <!-- Control de Tanques -->
                 </div>
                 <hr>
                 <form>

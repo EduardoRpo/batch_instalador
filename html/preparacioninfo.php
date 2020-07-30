@@ -232,16 +232,7 @@ include("modal/modal_condicionesMedio.php");
                   </div>
                   <div class="chk-control m-3">
                     <label for="" class="lblchk-control">Control Preparación Tanques</label>
-                    <input type="checkbox" name="" id="chk-control1" style="width: 30px; height: 30px;">
-                    <input type="checkbox" name="" id="chk-control2" style="width: 30px; height: 30px;">
-                    <input type="checkbox" name="" id="chk-control3" style="width: 30px; height: 30px;">
-                    <input type="checkbox" name="" id="chk-control4" style="width: 30px; height: 30px;">
-                    <input type="checkbox" name="" id="chk-control5" style="width: 30px; height: 30px;">
-                    <input type="checkbox" name="" id="chk-control6" style="width: 30px; height: 30px;">
-                    <input type="checkbox" name="" id="chk-control7" style="width: 30px; height: 30px;">
-                    <input type="checkbox" name="" id="chk-control8" style="width: 30px; height: 30px;">
-                    <input type="checkbox" name="" id="chk-control9" style="width: 30px; height: 30px;">
-                    <input type="checkbox" name="" id="chk-control10" style="width: 30px; height: 30px;">
+                    <!-- Control de Tanques -->
                   </div>
                   <hr>
                   <div class="col-md-8 col-2 align-self-center">

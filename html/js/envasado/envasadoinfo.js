@@ -56,7 +56,7 @@ function muestrasEnvase() {
 }
 
 function guardarMuestras() {
-  debugger;
+
   let cantidad_muestras = $('#Muestras').val();
   let muestras = [];
 
@@ -79,6 +79,7 @@ function guardarMuestras() {
             
     success: function(response){
         alertify.set("notifier", "position", "top-right"); alertify.error("Muestras almacenadas satisfactoriamente");
+        $('#m_muestras').hide();
         },
     error: function(response){
        console.log(response);

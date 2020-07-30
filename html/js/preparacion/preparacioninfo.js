@@ -1,8 +1,9 @@
 
-let pasos;
-let idBatch = location.href.split('/')[4];
-let referencia = location.href.split('/')[5];
+idBatch = location.href.split('/')[4];
+referencia = location.href.split('/')[5];
 let queeProcess = 0;
+let pasos;
+
 
 /* Inicializar tabla control de proceso */
 /* $(document).ready(function() {

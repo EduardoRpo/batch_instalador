@@ -8377,8 +8377,6 @@ div.displayallinfo {
   align-items: center;
 }
 
-
-
 /* Maquinas preparacion */
 
 .maquinasPreparacion{
@@ -8394,6 +8392,23 @@ div.displayallinfo {
   grid-column-start: 1;
   grid-column-end: 3;
 }
+
+/* Aprobacion */
+
+.checkbox-aprobacion{
+  display: grid;
+  grid-template-columns: repeat(30, 1fr);
+  grid-gap: 1em;
+  text-align: center;
+  justify-items: center;
+  justify-content: center;
+}
+
+.lblControlTanques{
+  grid-column-start: 4;
+  grid-column-end: 11;
+}
+
 
 /* acondicionamiento */
 
@@ -8413,6 +8428,8 @@ div.displayallinfo {
   margin: 20px;
   text-align: center;
 }
+
+/* envasadora */
 
 .id_envasadora_loteadora{
   display: grid;

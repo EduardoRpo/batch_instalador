@@ -1,3 +1,20 @@
+
+/* Carge control de Tanques */
+
+function cargaTanquesControl(cantidad) {
+
+    if (cantidad > 10) {
+        cantidad = 10;
+    }
+
+    for (let i = 1; i <= cantidad; i++) {
+        $(".checkbox-aprobacion").append(`<input type="checkbox" id="chkcontrolTanques${i}" style="height: 30px; width:30px;">`);
+    }
+}
+
+
+/* Carga de tabla de propiedades del producto */
+
 $.ajax({
     url: `/api/productsDetails/${referencia}`,
     type: 'GET'
@@ -30,3 +47,4 @@ $.ajax({
 
     $('#espec_untosidad').html(data.untuosidad);
 });
+

@@ -76,7 +76,7 @@ $(document).on('click', '.link-editar', function(e){
     editar = true;
     limpiarTanques();
     OcultarTanques();
-
+    
     const texto = $(this).parent().parent().children()[1];
     const id = $(texto).text();
     
@@ -155,15 +155,6 @@ function mostrarTanques(info){
     $('#guardarBatch').html('Actualizar');
     $('.tcrearBatch').html('Actualizar Batch Record');
     $('#modalCrearBatch').modal('show');
-
-    /* for(k=1; k<info.length; k++){
-
-        $('#cmbTanque'+ k-1).attr("disabled", true);
-        $('#txtCantidad'+ k-1).attr("readonly","readonly");   
-        $('#txtTotal' + k-1).show().attr("readonly","readonly");   
-        $('#btnEliminar').attr("disabled", true);
-    } */
-
 }
 
 
@@ -209,7 +200,7 @@ function actualizarTabla() {
   /* Guardar datos de Crear y Actualizar batch*/
 
 function guardarDatos(){    
-    
+
     const lote = $('#tamanototallote').val();
     const tamano_lote  = formatoGeneral(lote);
 
@@ -270,7 +261,7 @@ function guardarDatos(){
             operacion: "7",
             ref: $('#idbatch').val(),
             unidades: $('#unidadesxlote').val(),
-            lote: $('#tamanototallote').val(),
+            lote: tamano_lote,
             programacion: $('#fechaprogramacion').val(),
             fecha : fechaActual,
             tqns: tqn, 

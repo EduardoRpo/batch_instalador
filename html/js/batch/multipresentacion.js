@@ -1,8 +1,8 @@
 
 /* Validar Batch Record y si existe Cargar Multipresentación */
 
-$('#tablaBatch tbody').on( 'click', 'tr', function () {  
-    data = tabla.row( this ).data();
+$('#tablaBatch tbody').on('click', 'tr', function () {
+    data = tabla.row(this).data();
 });
 
 /* Validar si un producto puede tener multipresentacion */
@@ -10,41 +10,41 @@ $('#tablaBatch tbody').on( 'click', 'tr', function () {
 function multipresentacion() {
 
     if ($("input[name='optradio']:radio").is(':checked')) {
-        
+
         $.ajax({
             type: "POST",
-            'url' : 'php/multi.php',
-            'data':{"operacion" : "1", id : data.id_batch},
-            
-            success: function(r){
-                var info = JSON.parse(r);  
-                
-                if(info!=''){
+            'url': 'php/multi.php',
+            'data': { "operacion": "1", id: data.id_batch },
+
+            success: function (r) {
+                var info = JSON.parse(r);
+
+                if (info != '') {
                     $('#Modal_Multipresentacion').modal('show');
                     OcultarMultipresentacion();
-                    //cargarMulti();
+                    cargarMulti();
                 }
 
-                else{
-                  alertify.set("notifier","position", "top-right"); alertify.error("No existen referencias asociadas para este producto.");
-                } 
-            }   
+                else {
+                    alertify.set("notifier", "position", "top-right"); alertify.error("No existen referencias asociadas para este producto.");
+                }
+            }
         });
-                
+
     } else {
-        alertify.set("notifier","position", "top-right"); alertify.error("Para Multipresentación seleccione un Batch Record");
+        alertify.set("notifier", "position", "top-right"); alertify.error("Para Multipresentación seleccione un Batch Record");
     }
 }
 
 /* Ocultar objetos para Multipresentacion */
 
-function OcultarMultipresentacion(){
-    
+function OcultarMultipresentacion() {
+
     $('.labelcenter').hide();
     $('#loteTotal').hide();
     $('#sumaMulti').hide();
-    
-    for(i=1; i<6; i++){
+
+    for (i = 1; i < 6; i++) {
         $('#cmbMultiReferencia' + i).hide().removeAttr('disable');
         $('#txtcantidadMulti' + i).hide().removeAttr('disable');
         $('#txttamanoloteMulti' + i).hide().removeAttr('disable');
@@ -56,30 +56,30 @@ function OcultarMultipresentacion(){
 
 /* Adicionar referencia para crear multipresentacion en un batch*/
 
-$("#adicionarMultipresentacion").on('click', function(){
-
+$("#adicionarMultipresentacion").on('click', function () {
+    
     contarMultipresentacion();
-    const cantidad = $('#txtcantidadMulti'+ cont).val();
+    const cantidad = $('#txtcantidadMulti' + cont).val();
 
-    if(cont == 0){
+    if (cont == 0) {
         insertarMulti();
         insertarTotales();
-    }else if(cont > 0 && cont < 6 && cantidad != "0" && cantidad != ""){
+    } else if (cont > 0 && cont < 6 && cantidad != "0" && cantidad != "") {
         insertarMulti();
         bloquearCeldasMulti();
-    }else{
-        alertify.set("notifier","position", "top-right"); alertify.error("Diligencie todos los campos vacios.");
+    } else {
+        alertify.set("notifier", "position", "top-right"); alertify.error("Diligencie todos los campos vacios.");
     }
 
-    
+
 });
 
 /* Contar objetos creados para Multipresentacion */
 
-function contarMultipresentacion(){
+function contarMultipresentacion() {
     cont = 0;
-    for(i=1; i<6; i++){
-        if($('#txttamanoloteMulti'+i).is(":visible")){
+    for (i = 1; i < 6; i++) {
+        if ($('#txttamanoloteMulti' + i).is(":visible")) {
             cont = cont + 1;
         }
     }
@@ -87,33 +87,37 @@ function contarMultipresentacion(){
 
 /* Insertar Multipresentacion Nueva */
 
-function insertarMulti(){
-    addMulti= cont + 1;
+function insertarMulti() {
+    
+    addMulti = cont + 1;
 
     $('#cmbMultiReferencia' + addMulti).show();
     $('#txtcantidadMulti' + addMulti).show();
     $('#txttamanoloteMulti' + addMulti).show();
+
     /* $('#txtdensidadMulti' + addMulti).show();
     $('#txtpresentacionMulti' + addMulti).show(); */
-    $('.btneliminarMulti' + addMulti).show();    
+    $('.btneliminarMulti' + addMulti).show();
 }
 
-function insertarTotales(){
+function insertarTotales() {
+
     $('.labelcenter').show();
-    $('#loteTotal').show();
+    $('#loteTotal').show().val(data.tamano_lote);
+    
     $('#sumaMulti').show();
 }
 
 /* deshabilitar objetos configurada para multipresentacion al adicionar una nueva*/
 
-function bloquearCeldasMulti(){
+function bloquearCeldasMulti() {
 
     $('#cmbMultiReferencia' + cont).attr('disabled', 'disabled');
     $('#txtcantidadMulti' + cont).attr('disabled', 'disabled');
     $('#txttamanoloteMulti' + cont).attr('disabled', 'disabled');
     /* $('#txtdensidadMulti' + addMulti).attr('disabled', 'disabled');
     $('#txtpresentacionMulti' + addMulti).attr('disabled', 'disabled'); */
-    $('.btneliminarMulti' + cont).attr('disabled', 'disabled');    
+    $('.btneliminarMulti' + cont).attr('disabled', 'disabled');
 }
 
 
@@ -121,22 +125,22 @@ function bloquearCeldasMulti(){
 /* Cargar Select Referencias con Multipresentacion */
 
 function cargarMulti() {
-    
+
     $.ajax({
         type: "POST",
-        'url' : 'php/multi.php',
-        'data':{"operacion" : "1", id : data.id_batch},
-        success: function(r){
+        'url': 'php/multi.php',
+        'data': { "operacion": "1", id: data.id_batch },
+        success: function (r) {
             var info = JSON.parse(r);
-            for(i=1;i<6;i++){
-           
+            for (i = 1; i < 6; i++) {
+
                 let $select = $('#cmbMultiReferencia' + i);
                 $select.empty();
                 $select.append('<option disabled selected>' + "MULTIPRESENTACIÓN" + '</option>');
-                
-                $.each(info, function(i, value) {
-                    $select.append('<option value=' + i + '>' + value.nombre_referencia + '</option>');
-                    
+
+                $.each(info, function (i, value) {
+                    $select.append(`<option value="${value.nombre_referencia}">${value.nombre_referencia}</option>`);
+
                 })
             }
         }
@@ -145,31 +149,31 @@ function cargarMulti() {
 
 /* cargar datos de acuerdo con la seleccion de multipresentacion */
 
-function cargarReferenciaM(id){
-    
-    const opcion =  $("#cmbMultiReferencia"+ id +" option:selected").text();
+function cargarReferenciaM(id) {
+
+    const opcion = $("#cmbMultiReferencia" + id + " option:selected").text();
 
     $.ajax({
         type: "POST",
-        'url' : 'php/multi.php',
-        'data':{"operacion" : "2", "nombre_referencia" :  opcion},
-        
-        success: function(r){
+        'url': 'php/multi.php',
+        'data': { "operacion": "2", "nombre_referencia": opcion },
+
+        success: function (r) {
             var info = JSON.parse(r);
             $.ajax({
                 type: "POST",
-                'url' : 'php/multi.php',
-                'data':{"operacion" : "3", "id" : info[0].referencia},
-                
-                success: function(r){
+                'url': 'php/multi.php',
+                'data': { "operacion": "3", "id": info[0].referencia },
+
+                success: function (r) {
                     var info = JSON.parse(r);
-                    $('#txtpresentacionMulti'+id).val(info[0].presentacion);
-                    $('#txtdensidadMulti'+id).val(info[0].densidad);
-                    $('#loteTotal').val(data.tamano_lote);
-                    
+                    $('#txtpresentacionMulti' + id).val(info[0].presentacion);
+                    $('#txtdensidadMulti' + id).val(info[0].densidad);
+                    //$('#loteTotal').val(data.tamano_lote);
+
                 }
             });
-           
+
         }
     });
     calcularMulti(id);
@@ -177,10 +181,10 @@ function cargarReferenciaM(id){
 
 /* Calcular Lote de acuerdo con la seleccion y las unidades a fabricar */
 
-function calcularMulti(id){
+function calcularMulti(id) {
 
     const cantidad = $('#txtcantidadMulti' + id).val();
-    if(cantidad!= ""){
+    if (cantidad != "") {
         CalculoloteMulti(id, cantidad);
     }
 }
@@ -190,152 +194,156 @@ function calcularMulti(id){
 
 function CalculoloteMulti(id, cantidad) {
 
-    const opcion = $('#cmbMultiReferencia' + id ).val();
+    const opcion = $('#cmbMultiReferencia' + id).val();
     const densidad = $('#txtdensidadMulti' + id).val();
     const presentacion = $('#txtpresentacionMulti' + id).val();
     const lote = $('#loteTotal').val();
-    
-    cantidad = $('#txtcantidadMulti' + id ).val();
+
+    cantidad = $('#txtcantidadMulti' + id).val();
     let sumaMulti = 0;
 
-    if (opcion == undefined){
-        alertify.set("notifier","position", "top-right"); alertify.error("Seleccione la presentacion.");
+    if (opcion == undefined) {
+        alertify.set("notifier", "position", "top-right"); alertify.error("Seleccione la presentacion.");
         return false;
     }
 
-    total = parseInt(((densidad * cantidad * presentacion)/1000)*( 1 + 0.03));
-    $('#txttamanoloteMulti'+ id).val(total);    
-   
-    for(i=1; i<6; i++){
-        totalMulti = $('#txttamanoloteMulti'+ i).val();
-        if(totalMulti == undefined || totalMulti ==""){
+    total = parseInt(((densidad * cantidad * presentacion) / 1000) * (1 + 0.03));
+    $('#txttamanoloteMulti' + id).val(total);
+
+    for (i = 1; i < 6; i++) {
+        totalMulti = $('#txttamanoloteMulti' + i).val();
+        if (totalMulti == undefined || totalMulti == "") {
             totalMulti = 0;
-        }    
-        
+        }
+
         sumaMulti = parseInt(sumaMulti) + parseInt(totalMulti);
     }
-      
-    
-    if(sumaMulti > lote ){
-        alertify.set("notifier","position", "top-right"); alertify.error("El tamaño del lote para esta referencia de Multipresentación supera el Tamaño del lote inicial");
+
+
+    if (sumaMulti > lote) {
+        alertify.set("notifier", "position", "top-right"); alertify.error("El tamaño del lote para esta referencia de Multipresentación supera el Tamaño del lote inicial");
         sumaMulti = 0;
         return false;
-    }else{
-        $('#sumaMulti').val(sumaMulti);    
+    } else {
+        $('#sumaMulti').val(sumaMulti);
     }
- 
+
 }
 
 /* Eliminar Multipresentacion */
 
-function eliminarMulti(id){
+function eliminarMulti(id) {
     let totallote = 0;
-    
+
     $('#cmbMultiReferencia' + id).hide().val('').removeAttr('disabled');
-    $('#txtcantidadMulti'+ id).hide().val('').removeAttr('disabled');
+    $('#txtcantidadMulti' + id).hide().val('').removeAttr('disabled');
     $('#txttamanoloteMulti' + id).hide().val('').removeAttr('disabled');
     $('.btneliminarMulti' + id).hide().removeAttr('disabled');
     $('#txtdensidadMulti' + id).hide().val('').removeAttr('disabled');
     $('#txtpresentacionMulti' + id).hide().val('').removeAttr('disabled');
 
-    for(i=1; i<6; i++){
+    for (i = 1; i < 6; i++) {
         const loteMulti = $('#txttamanoloteMulti1').val();
-        
-        if(loteMulti != ""){
+
+        if (loteMulti != "") {
             totallote = totallote + parseInt(loteMulti);
         }
     }
 
     $('#sumaMulti').val(totallote);
-    
-    $('#cmbMultiReferencia'+ (id-1)).attr("disabled", false);
-    $('#txtcantidadMulti'+ (id-1)).removeAttr('disabled');
-    $('#txtdensidadMulti' + (id-1)).val('').removeAttr('disabled');
-    $('#txtpresentacionMulti' + (id-1)).val('').removeAttr('disabled');
-    $('.btneliminarMulti' + (id-1)).removeAttr('disabled');
+
+    $('#cmbMultiReferencia' + (id - 1)).attr("disabled", false);
+    $('#txtcantidadMulti' + (id - 1)).removeAttr('disabled');
+    $('#txtdensidadMulti' + (id - 1)).val('').removeAttr('disabled');
+    $('#txtpresentacionMulti' + (id - 1)).val('').removeAttr('disabled');
+    $('.btneliminarMulti' + (id - 1)).removeAttr('disabled');
 }
 
 /* Guardar Multi */
 
-function guardar_Multi() {  
+function guardar_Multi() {
     var ref = [];
     var cant = [];
 
-    var j=1;
+    var j = 1;
 
     contarMultipresentacion();
 
-    for(i=0; i<cont ; i++){
+    for (i = 0; i < cont; i++) {
         ref[i] = $('#cmbMultiReferencia' + j + ' option:selected').text();
         j++;
     }
-    
-    j=1;
-    
-    for(i=0; i<cont ; i++){
-        cant[i] = $('#txtcantidadMulti'+ j).val();
+
+    j = 1;
+
+    for (i = 0; i < cont; i++) {
+        cant[i] = $('#txtcantidadMulti' + j).val();
         j++;
     }
-    
-    if(!editar){
+
+    if (!editar) {
         datos = {
             operacion: "4",
-            ref: ref, 
+            ref: ref,
             cant: cant,
-            id : data.id_batch
+            id: data.id_batch
         };
 
-    }else{
-            datos = {
+    } else {
+        datos = {
             operacion: "5",
-            ref: ref, 
+            ref: ref,
             cant: cant,
-            id : data.id_batch
-            };
+            id: data.id_batch
+        };
     }
 
     $.ajax({
         type: "POST",
         url: "php/multi.php",
         data: datos,
-        
-        success: function(r){
-            alertify.set("notifier","position", "top-right"); alertify.success("Multipresentación registrada con éxito.");
+
+        success: function (r) {
+            alertify.set("notifier", "position", "top-right"); alertify.success("Multipresentación registrada con éxito.");
             cerrarModal();
             actualizarTabla();
-            
+
         },
-        error: function(r){
-            alertify.set("notifier","position", "top-right"); alertify.error("Error al registrar la Multipresentación.");
-        } 
+        error: function (r) {
+            alertify.set("notifier", "position", "top-right"); alertify.error("Error al registrar la Multipresentación.");
+        }
     });
 }
 
 //Actualizar Multipresentacion
 
-$(document).on('click', '.link-editarMulti', function(e){
-    editar=true;
+$(document).on('click', '.link-editarMulti', function (e) {
+    editar = true;
+    texto = $(this).parent().parent().children()[6];
+    tamano = formatoGeneral($(texto).text());
+
     limpiarMultipresentacion();
     OcultarMultipresentacion();
     cargarMulti();
 
     $.ajax({
         method: 'POST',
-        url : 'php/multi.php',
-        data: {operacion : "6", id :data.id_batch},
+        url: 'php/multi.php',
+        data: { operacion: "6", id: data.id_batch },
 
-        success: function(response){
+        success: function (response) {
             cont = 0;
             const info = JSON.parse(response);
-            console.log(info);
-            
+            console.log(batch);
+
             insertarTotales();
 
-            for(let k=1; k <= info.length; k++){
-                insertarMulti();              
-
-                $('#cmbMultiReferencia'+ k).val(info[cont].nombre_referencia);
-                $('#txtcantidadMulti' + k).val(info[cont].cantidad); 
+            for (let k = 1; k <= info.length; k++) {
+                insertarMulti();
+              
+                $(`#loteTotal`).val(tamano);
+                $(`#cmbMultiReferencia${k}`).val(info[cont].nombre_referencia);
+                $('#txtcantidadMulti' + k).val(info[cont].cantidad);
                 $('#txttamanoloteMulti' + k).val(info[cont].tamano);
                 $('#txtdensidadMulti' + k).val(info[cont].densidad);
                 $('#txtpresentacionMulti' + k).val(info[cont].presentacion);
@@ -354,12 +362,12 @@ $(document).on('click', '.link-editarMulti', function(e){
 
 /* Limpiar campos de Multipresentacion */
 
-function limpiarMultipresentacion(){
+function limpiarMultipresentacion() {
     $('#loteTotal').val(' ');
     $('#sumaMulti').val(' ');
-    
+
     contarMultipresentacion();
-    
+
     for (i = 1; i <= cont; i++) {
 
         $('#cmbMultiReferencia' + i).hide().val('');

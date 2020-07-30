@@ -159,24 +159,13 @@ include('modal/m_firma.php');
 
                 <div class="col-md-12 col-2 align-self-center">
                   <div class=" checkbox-aprobacion mt-3">
-                    <label for="myCheck">Tanques:</label>
-                    <!-- <input type="checkbox" class="form-check-input" id="myCheck0" name="typeFilter"> -->
-                    <input type="checkbox" id="myCheck1" style="height: 30px; width:30px;">
-                    <input type="checkbox" id="myCheck2" style="height: 30px; width:30px;">
-                    <input type="checkbox" id="myCheck3" style="height: 30px; width:30px;">
-                    <input type="checkbox" id="myCheck4" style="height: 30px; width:30px;">
-                    <input type="checkbox" id="myCheck5" style="height: 30px; width:30px;">
-                    <input type="checkbox" id="myCheck6" style="height: 30px; width:30px;">
-                    <input type="checkbox" id="myCheck7" style="height: 30px; width:30px;">
-                    <input type="checkbox" id="myCheck8" style="height: 30px; width:30px;">
-                    <input type="checkbox" id="myCheck9" style="height: 30px; width:30px;">
-                    <input type="checkbox" id="myCheck10" style="height: 30px; width:30px;">
-                   
+                    <label class="lblControlTanques">Control de Tanques</label>
+                    <!-- Control Tanques -->
                   </div>
                   <div class="alert alert-primary" role="alert">
-                      Notificacion de parametros de control, mostrar mensaje de texto
-                    </div>
-                    
+                    <!-- Notificacion de parametros de control, mostrar mensaje de texto -->
+                  </div>
+
                   <div class="card mt-3">
                     <div class="card-block">
                       <!--<h4 class="card-title">Basic Table</h4>
@@ -344,7 +333,7 @@ include('modal/m_firma.php');
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
   <!--Custom JavaScript -->
   <script src="../../html/js/utils/custom.min.js"></script>
-  <script src="../../html/js/datatables.js"></script>
+  <!-- <script src="../../html/js/datatables.js"></script> -->
   <script src="../../html/js/global/loadinfo-global.js"></script>
   <script src="../../html/js/aprobacion/aprobacioninfo.js"></script>
   <script src="../../html/js/firmar/firmar.js"></script>
