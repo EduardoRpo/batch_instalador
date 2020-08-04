@@ -1,7 +1,7 @@
 <?php 
 
 if(!empty($_SESSION['active'])){
-    header('location: html/crear-batch.php');
+    header('location: html/batch.php');
 }else{
     $alert = '';
     if(!empty($_POST)){
@@ -12,8 +12,10 @@ if(!empty($_SESSION['active'])){
             require_once('./conexion.php');
             $email = mysqli_real_escape_string($conn,$_POST['email']); 
             $pass = md5(mysqli_real_escape_string($conn,$_POST['clave']));
-            
+
             $query = mysqli_query($conn, "SELECT * FROM usuario WHERE email ='$email' AND clave='$pass'");
+            mysqli_close($conn);
+            
             $result = mysqli_num_rows($query);
 
             if($result>0){

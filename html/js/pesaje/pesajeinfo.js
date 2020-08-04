@@ -162,5 +162,3 @@ function calcularxNoTanques(){
     
 }
 
-/* Generar el numero de checks de acuerdo con la cantidad de tanques */
-

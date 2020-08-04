@@ -251,9 +251,9 @@ include('modal/m_muestras.php');
                       <label for="recipient-name" class="col-form-label">Linea</label>
                       <select class="selectpicker form-control" id="select-Linea">
                         <option selected hidden>Seleccionar Linea</option>
-                        <option>Liquido</option>
-                        <option>Solido</option>
-                        <option>Semisolido</option>
+                        <option>LIQUIDOS</option>
+                        <option>SOLIDOS</option>
+                        <option>SEMISOLIDOS</option>
                       </select>
 
                       <label for="recipient-name" class="col-form-label">Digite el lote requerido</label>
@@ -371,28 +371,28 @@ include('modal/m_muestras.php');
                                     <td id="tapa1"></td>
                                     <td id="descripcion_tapa1"></td>
                                     <td id="unidades4"></td>
-                                    <td><input type="number" id="txtCantidad_Envasada" min="1" class="form-control centrado" onkeyup="devolucionMaterial(this.value);"></td>
-                                    <td><input type="number" class="form-control centrado"></td>
-                                    <td><input type="number" name="" id="" class="form-control centrado"></td>
-                                    <td><input type="number" name="" id="" class="form-control centrado" readonly></td>
+                                    <td><input type="number" id="txtEnvasada1" min="1" class="form-control centrado"  style="width: 110px;" onkeyup="devolucionMaterialEnvasada(this.value);"></td>
+                                    <td><input type="number" id="averias1" class="form-control centrado" style="width: 110px;"></td>
+                                    <td><input type="number" id="sobrante1" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 1);"></td>
+                                    <td id="totalDevolucion1" class="centrado"></td><!-- <input type="number" id="totalDevolucion1" class="form-control centrado" readonly> -->
                                   </tr>
                                   <tr>
                                     <td id="envase1"></td>
                                     <td id="descripcion_envase1"></td>
                                     <td id="unidades5"></td>
-                                    <td id="unidades_envasadas" class="centrado"></td>
-                                    <td><input type="number" class="form-control centrado"></td>
-                                    <td><input type="number" class="form-control centrado"></td>
-                                    <td><input type="number" class="form-control centrado" readonly></td>
+                                    <td id="txtEnvasada2" class="centrado"></td>
+                                    <td><input type="number" id="averias2" class="form-control centrado" style="width: 110px;"></td>
+                                    <td><input type="number" id="sobrante2" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 2);"></td>
+                                    <td id="totalDevolucion2" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
                                   </tr>
                                   <tr>
                                     <td id="otro1"></td>
                                     <td id="descripcion_otro1"></td>
                                     <td id="unidades6"></td>
-                                    <td id="unidades_envasadas1" class="centrado"></td>
-                                    <td><input type="number" class="form-control centrado"></td>
-                                    <td><input type="number" class="form-control centrado"></td>
-                                    <td><input type="number" class="form-control centrado" readonly></td>
+                                    <td id="txtEnvasada3" class="centrado"></td>
+                                    <td><input type="number" id="averias3"  class="form-control centrado" style="width: 110px;"></td>
+                                    <td><input type="number" id="sobrante3"  class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 3);"></td>
+                                    <td id="totalDevolucion3" class="centrado"></td> <!-- <input type="number" id="totalDevolucion3" class="form-control centrado" readonly> -->
                                   </tr>
                               </table>
                             </div>

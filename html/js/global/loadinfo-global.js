@@ -209,16 +209,27 @@ function cargarMaquinas() {
 
         success: function (response) {
             const info = JSON.parse(response);
-
+            debugger
             $('.txtEnvasadora').val('');
             $('.txtLoteadora').val('');
             $('#sel_agitador').val('');
             $('#sel_marmita').val('');
+            $('#sel_banda').val('');
+            $('#sel_etiqueteadora').val('');
+            $('#sel_tunel').val('');
 
-            $('.txtEnvasadora').val(info[0].envasadora);
+            /* $('.txtEnvasadora').val(info[0].envasadora);
             $('.txtLoteadora').val(info[0].loteadora);
             $('#sel_agitador').val(info[0].agitador);
-            $('#sel_marmita').val(info[0].marmita);
+            $('#sel_marmita').val(info[0].marmita); */
+            
+            $('#sel_agitador').val(info[0].maquina);
+            $('#txtBanda').val(info[1].maquina);
+            $('.txtEnvasadora').val(info[2].maquina);
+            $('#txtEtiqueteadora').val(info[3].maquina);
+            $('.txtLoteadora').val(info[4].maquina);
+            $('#sel_marmita').val(info[5].maquina);
+            $('#txtTunel').val(info[6].maquina);
 
         },
         error: function (response) {

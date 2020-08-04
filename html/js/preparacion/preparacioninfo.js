@@ -94,9 +94,9 @@ $.ajax({
 
 /* Cargar maquinas de acuerdo con la linea */
 
-$( "#select-Linea" ).change(function () {
+$("#select-Linea").change(function () {
     cargarMaquinas();
-  })
+})
 
 /* Carga tabla de propiedades del producto */
 
@@ -158,7 +158,7 @@ function procesoTiempo(event) {
     if (proceso.id == id) {
         $('#tiempo_instructivo').val(tiempo);
     } else {
-       
+
         $.alert({
             theme: 'white',
             icon: 'fa fa-warning',
@@ -183,20 +183,33 @@ function refreshInstructivo() {
 
 var paso = 4;
 
-function ocultarInstructivo(){
-    
-    var numElem =$('#pasos_instructivo .proceso-instructivo').length;
-    
-    for (i=4; i<=numElem; i++ ){    
-        $("#proceso-instructivo"+i).css("color", "#FFFFFF");
-        $("#proceso-instructivo"+i).css("outline", "none");
-        }
-} 
+function ocultarInstructivo() {
+
+    var numElem = $('#pasos_instructivo .proceso-instructivo').length;
+
+    for (i = 4; i <= numElem; i++) {
+        $("#proceso-instructivo" + i).css("color", "#FFFFFF");
+        $("#proceso-instructivo" + i).css("outline", "none");
+    }
+}
 
 /* Mostrar siguiente paso */
 
-function mostrarInstructivo(){
-    
-    $("#proceso-instructivo"+ paso).css("color", "#67757c");
+function mostrarInstructivo() {
+
+    $("#proceso-instructivo" + paso).css("color", "#67757c");
     paso = paso + 1;
+}
+
+function guardarBatchPreparacion() {
+    valores = new Array();
+    
+    $('#tblControlProcesoPreparacion tr').each(function () {
+        var cantidad = $(this).find('td').eq(0).html();
+        var descripcion = $(this).find('td').eq(1).html();
+        var valorUnitario = $(this).find('td').eq(3).html();
+        debugger
+        valor = new Array(cantidad, descripcion, valorUnitario);
+        valores.push(valor);
+    });
 }

@@ -88,6 +88,8 @@ $(document).on('click', '.link-editar', function(e){
          success: function(response){
             
             const info = JSON.parse(response);
+            const presentacion = formatoCO(info[0].presentacion);
+            const tamano_lote = formatoCO(info[0].tamano_lote);
             batch = info;
             
             $('#idbatch').val(info[0].id_batch);
@@ -96,19 +98,12 @@ $(document).on('click', '.link-editar', function(e){
             $('#marca').val(info[0].marca);
             $('#propietario').val(info[0].propietario);
             $('#producto').val(info[0].nombre_referencia);
-            const presentacion = formatoCO(info[0].presentacion);
             $('#presentacioncomercial').val(presentacion);
             $('#linea').val(info[0].linea);
             $('#notificacionSanitaria').val(info[0].notificacion_sanitaria);
             $('#densidad').val(info[0].densidad);
-            
-            //const unidad_lote = formatoCO(info[0].unidad_lote);
-            //$('#unidadesxlote').val(unidad_lote);
             $('#unidadesxlote').val(info[0].unidad_lote);
-
-            const tamano_lote = formatoCO(info[0].tamano_lote);
             $('#tamanototallote').val(tamano_lote);
-
             $('#fechaprogramacion').val(info[0].fecha_programacion);
        
             mostrarTanques(info);
@@ -295,7 +290,6 @@ function  contarTanques(){
 
     for(i=1; i<6; i++){
         const txtTotal = $('#txtTotal'+i).val();
-        //const  Notanques = $('#cmbTanque'+ i).val();
         parseInt(txtTotal, 10);
         
         if( txtTotal !='' && txtTotal != "0" && txtTotal > 0 ){

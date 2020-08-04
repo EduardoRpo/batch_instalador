@@ -110,7 +110,7 @@ include_once('modal/modal_condicionesMedio.php');
                   <label>Referencia</label>
                   <label>Observaciones</label>
 
-                  <input type="text" class="form-control" id="in_fecha_programacion" readonly>
+                  <input type="text" class="form-control" id="in_fecha" readonly>
                   <input type="text" class="form-control" id="in_numero_orden" readonly>
                   <input type="text" class="form-control" id="in_referencia" readonly>
                   <!-- <input type="textarea" class="form-control itemInfo" id="observaciones" hidden readonly> -->

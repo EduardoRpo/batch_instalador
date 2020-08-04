@@ -211,12 +211,13 @@ include("modal/modal_condicionesMedio.php");
                   <label for="sel_marmita">Identificación Marmita o Tanque</label>
                   <select class="selectpicker form-control" id="select-Linea">
                     <option selected hidden>Seleccionar Linea</option>
-                    <option>Liquido</option>
-                    <option>Solido</option>
-                    <option>Semisolido</option>
-                    < /select> <input type="text" id="sel_agitador" class="form-control" readonly>
-                      <input type="text" id="sel_marmita" class="form-control" readonly>
-                      <!-- <select class="selectpicker form-control" id="sel_agitador">
+                    <option>LIQUIDOS</option>
+                    <option>SOLIDOS</option>
+                    <option>SEMISOLIDOS</option>
+                  </select>
+                  <input type="text" id="sel_agitador" class="form-control" readonly>
+                  <input type="text" id="sel_marmita" class="form-control" readonly>
+                  <!-- <select class="selectpicker form-control" id="sel_agitador">
                     <option selected hidden>Seleccione</option>
                   </select>
 
@@ -287,12 +288,12 @@ include("modal/modal_condicionesMedio.php");
                         <!--<h4 class="card-title">Basic Table</h4>
                    <h6 class="card-subtitle">Add class <code>.table</code></h6>-->
                         <div class="table-responsive">
-                          <table class="table table-striped table-bordered">
+                          <table id="tblControlProcesoPreparacion" class="table table-striped table-bordered">
                             <thead>
                               <tr>
-                                <th>Parametros</th>
-                                <th>Especificaciones</th>
-                                <th>Resultados</th>
+                                <th style="text-align: center;">PARAMETROS</th>
+                                <th style="text-align: center;">ESPECIFICACIONES</th>
+                                <th style="text-align: center;">RESULTADOS</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -301,9 +302,9 @@ include("modal/modal_condicionesMedio.php");
                                 <td id="espec_color"></td>
                                 <td><select class="selectpicker form-control">
                                     <option selected hidden></option>
-                                    <option>Cumple</option>
-                                    <option>No cumple</option>
-                                    <option>No aplica</option>
+                                    <option>CUMPLE</option>
+                                    <option>NO CUMPLE</option>
+                                    <option>NO APLICA</option>
                                   </select>
                                 </td>
                               </tr>
@@ -312,9 +313,9 @@ include("modal/modal_condicionesMedio.php");
                                 <td id="espec_olor"></td>
                                 <td><select class="selectpicker form-control">
                                     <option selected hidden></option>
-                                    <option>Cumple</option>
-                                    <option>No cumple</option>
-                                    <option>No aplica</option>
+                                    <option>CUMPLE</option>
+                                    <option>NO CUMPLE</option>
+                                    <option>NO APLICA</option>
                                   </select>
                                 </td>
                               </tr>
@@ -323,9 +324,9 @@ include("modal/modal_condicionesMedio.php");
                                 <td id="espec_apariencia"></td>
                                 <td><select class="selectpicker form-control">
                                     <option selected hidden></option>
-                                    <option>Cumple</option>
-                                    <option>No cumple</option>
-                                    <option>No aplica</option>
+                                    <option>CUMPLE</option>
+                                    <option>NO CUMPLE</option>
+                                    <option>NO APLICA</option>
                                   </select>
                                 </td>
                               </tr>
@@ -352,9 +353,9 @@ include("modal/modal_condicionesMedio.php");
                                 <td id="espec_untosidad"></td>
                                 <td><select class="selectpicker form-control">
                                     <option selected hidden></option>
-                                    <option>Cumple</option>
-                                    <option>No cumple</option>
-                                    <option>No aplica</option>
+                                    <option>CUMPLE</option>
+                                    <option>NO CUMPLE</option>
+                                    <option>NO APLICA</option>
                                   </select>
                                 </td>
                               </tr>
@@ -363,9 +364,9 @@ include("modal/modal_condicionesMedio.php");
                                 <td id="espec_poder_espumoso"></td>
                                 <td><select class="selectpicker form-control">
                                     <option selected hidden></option>
-                                    <option>Cumple</option>
-                                    <option>No cumple</option>
-                                    <option>No aplica</option>
+                                    <option>CUMPLE</option>
+                                    <option>NO CUMPLE</option>
+                                    <option>NO APLICA</option>
                                   </select>
                                 </td>
                               </tr>
@@ -423,8 +424,7 @@ include("modal/modal_condicionesMedio.php");
                   <div class="col-md-12 col-2 align-self-center" style="margin-left: 85%">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <!-- <button type="button" class="btn btn-primary" onclick="window.location.href = '../html/aprobacion.html';">Aceptar -->
-                    <button type="button" class="btn btn-primary">Aceptar
-                    </button>
+                    <button type="button" class="btn btn-primary" onclick="guardarBatchPreparacion();">Guardar</button>
                   </div>
                 </div>
               </div>

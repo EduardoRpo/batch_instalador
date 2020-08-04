@@ -125,6 +125,8 @@
                                              WHERE p.referencia = $id_referencia");
                                              
       $result = mysqli_num_rows($query_producto);
+      
+      mysqli_close($conn);
 
       if($result > 0){
 
@@ -183,6 +185,8 @@
         }
       }
       
+      mysqli_close($conn);
+
       if(!$result){
         die('Error');
         echo 'No guardado. Error: '.mysqli_error($conn);

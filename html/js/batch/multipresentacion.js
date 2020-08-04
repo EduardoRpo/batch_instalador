@@ -94,9 +94,6 @@ function insertarMulti() {
     $('#cmbMultiReferencia' + addMulti).show();
     $('#txtcantidadMulti' + addMulti).show();
     $('#txttamanoloteMulti' + addMulti).show();
-
-    /* $('#txtdensidadMulti' + addMulti).show();
-    $('#txtpresentacionMulti' + addMulti).show(); */
     $('.btneliminarMulti' + addMulti).show();
 }
 
@@ -169,8 +166,6 @@ function cargarReferenciaM(id) {
                     var info = JSON.parse(r);
                     $('#txtpresentacionMulti' + id).val(info[0].presentacion);
                     $('#txtdensidadMulti' + id).val(info[0].densidad);
-                    //$('#loteTotal').val(data.tamano_lote);
-
                 }
             });
 

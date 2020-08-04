@@ -1,20 +1,36 @@
 
-$(document).on('ready', function(event){
+/* Mostrar contraseña */
+
+function mostrarPassword() {
+    debugger
+    if ($('#clave').val()==='') {
+        alertify.set("notifier","position", "top-right"); alertify.error("Ingrese la password");
+        return false;        
+    }
+
+
+    $('#clave').attr('type', 'text');
+    setTimeout(function () { $('#clave').attr('type', 'password'); }, 1000);
+
+}
+
+
+
+/* $(document).on('ready', function(event){
     event.preventDefault();
     $('#iniciar').click(function(){
         $('.form-signin input:first').attr('id', 'usuario');
-        //.find('input')
-        //.first()
+
 
 
 
     })
 })
+ */
 
 
+/* function loguears() {
 
-function loguears() {
-    
     $(".form-signin")
         //.find('input')
         //.first()
@@ -31,10 +47,10 @@ function loguears() {
         type: 'POST',
         url: '../../html/php/firmar.php',
         data: datos,
-    
+
         success: function (datos) {
             data = JSON.parse(datos);
-            
+
             if(data==""){
                 alertify.set("notifier","position", "top-right"); alertify.error("usuario y/o contraseña no coinciden.");
             }else{
@@ -47,4 +63,4 @@ function loguears() {
         }
     });
     return false;
-}
+}*/

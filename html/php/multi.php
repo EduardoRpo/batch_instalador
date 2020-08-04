@@ -30,6 +30,8 @@
       
         $result = mysqli_num_rows($query_nref);
         
+        mysqli_close($conn);
+
         if($result > 0){
   
           while($data = mysqli_fetch_assoc($query_nref)){
@@ -55,6 +57,8 @@
                                              
       $result = mysqli_num_rows($query_producto);
 
+      mysqli_close($conn);
+
       if($result > 0){
 
         while($data = mysqli_fetch_assoc($query_producto)){
@@ -78,7 +82,9 @@
                                                WHERE p.referencia = $id_referencia");
                                                
         $result = mysqli_num_rows($query_producto);
-  
+    
+        mysqli_close($conn);
+
         if($result > 0){
   
           while($data = mysqli_fetch_assoc($query_producto)){
@@ -117,12 +123,16 @@
         
         $result1 = mysqli_query($conn, $query_batch_multi);      
         
+
+
         if(!$result){
           die('Error');
           echo 'No guardado. Error: '.mysqli_error($conn);
         }else{
           echo 'Almacenado';
         } 
+        
+        mysqli_close($conn);
   
     break;
   
@@ -139,6 +149,8 @@
       
         $result = mysqli_num_rows($query_multi);
         
+        mysqli_close($conn);
+
         if($result > 0){
   
           while($data = mysqli_fetch_assoc($query_multi)){

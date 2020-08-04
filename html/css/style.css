@@ -8409,17 +8409,6 @@ div.displayallinfo {
   grid-column-end: 11;
 }
 
-
-/* acondicionamiento */
-
-.conciliacionrendimiento{
-  display: grid;
-  grid-template-columns: 100px 100px 100px 100px 100px 100px 100px 100px ;
-  /* grid-template-columns: 250px 100px 100px 100px 100px 50px; */
-  grid-gap: 1em;
-  margin: 20px;
-}
-
 .especificaciones_tecnicas{
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -8535,4 +8524,54 @@ input::placeholder {
 .checkbox-aprobacion{
   /* width: 30px; */
   height: 30px;
+}
+
+/* Acondicionamiento */
+
+.linea-produccion{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  
+  grid-column-gap: 1em;
+  grid-gap: 0.5em;
+  margin: 20px;
+  text-align: center;
+}
+
+/* acondicionamiento */
+
+.conciliacionrendimiento{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr) ;
+  grid-gap: 1em;
+  margin: 40px;
+}
+.firma{
+  display: grid;
+  grid-template-columns: repeat(6, 1fr) ;
+  grid-gap: 1em;
+  margin: 40px;
+}
+
+.entrego-acon{
+  display: flex;
+  justify-content: flex-end;
+  grid-column-start: 4;
+  grid-column-end: 5;
+}
+
+#txtPorcentaje-Unidades{
+  grid-row-start: 3;
+  grid-row-end: 4;
+  grid-column-start: 4;
+  grid-column-end: 5;
+}
+
+/* Alamacen despachos */
+.almacen-despachos{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr) ;
+  grid-gap: 1em;
+  margin: 40px;
+
 }

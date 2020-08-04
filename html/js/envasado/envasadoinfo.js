@@ -1,3 +1,46 @@
+/* Cargar Multipresentacion */
+
+$(document).ready(function () {
+  let cantidad = 0;
+
+  $.ajax({
+
+    'method': 'POST',
+    'url': '../../html/php/busqueda_multipresentacion.php',
+    'data': { id: idBatch },
+
+    success: function (data) {
+      var info = JSON.parse(data);
+
+      if (info === undefined) {
+        let text = "Sin Multipresentacion";
+        $("#observacionesMulti").val(text);
+      } else {
+        template = 'Presentación            Cantidad              Total ';
+        document.getElementById("observacionesMulti").value += template + '\n';
+        for (i = 0; i < info.length; i++) {
+          template = '    ' + formatoCO(info[i].presentacion) + '                      ' + formatoCO(info[i].cantidad) + '                ' + formatoCO(info[i].presentacion * info[i].cantidad);
+          document.getElementById("observacionesMulti").value += template + '\n';
+          cantidad = cantidad + parseInt(info[i].cantidad);
+
+        }
+      }
+
+      if (proceso === "Pesaje" || proceso === "Preparación") {
+        controlProceso(cantidad);
+      } else if (proceso === "Aprobación") {
+        cargaTanquesControl(cantidad);
+      }
+
+
+    },
+    error: function (r) {
+      alertify.set("notifier", "position", "top-right"); alertify.error("Error al Cargar los tanques.");
+    }
+
+  });
+});
+
 /* Cargar linea y maquinas de acuerdo con la seleccion */
 
 $("#select-Linea").change(function () {
@@ -68,23 +111,23 @@ function guardarMuestras() {
   }
 
   for (i = 1; i <= cantidad_muestras; i++) {
-      muestras.push($(`#txtMuestra${i}`).val());
-    }
-  
+    muestras.push($(`#txtMuestra${i}`).val());
+  }
+
 
   $.ajax({
     method: 'POST',
-    url : '../../html/php/muestras.php',
-    data: {id : idBatch, muestras: muestras},  
-            
-    success: function(response){
-        alertify.set("notifier", "position", "top-right"); alertify.error("Muestras almacenadas satisfactoriamente");
-        $('#m_muestras').hide();
-        },
-    error: function(response){
-       console.log(response);
+    url: '../../html/php/muestras.php',
+    data: { id: idBatch, muestras: muestras },
+
+    success: function (response) {
+      alertify.set("notifier", "position", "top-right"); alertify.error("Muestras almacenadas satisfactoriamente");
+      $('#m_muestras').hide();
+    },
+    error: function (response) {
+      console.log(response);
     }
-})
+  })
 
 }
 
@@ -129,16 +172,33 @@ function cargarTablaEnvase(batch) {
 
 /* Calculo de la devolucion de material */
 
-function devolucionMaterial(valor) {
+function devolucionMaterialEnvasada(valor) {
 
   let unidades_envasadas = formatoCO(parseInt(valor));
 
-  if (unidades_envasadas === 'NaN') {
+  if (isNaN(unidades_envasadas)) {
     unidades_envasadas = 0;
   }
+  $('#txtEnvasada2').html(unidades_envasadas);
+  $('#txtEnvasada3').html(unidades_envasadas);
+}
 
-  $('#txtCantidad_Envasada').val(unidades_envasadas);
-  $('#unidades_envasadas').html(unidades_envasadas);
-  $('#unidades_envasadas1').html(unidades_envasadas);
+function devolucionMaterialTotal(valor, id){
+
+    let recibida= parseInt(formatoGeneral($(`#unidades${id}`).html()));
+    let envasada= parseInt($(`#txtEnvasada${id}`).val());
+    
+    if(isNaN(envasada)){
+      envasada= $(`#txtEnvasada${id}`).html();
+      envasada = parseInt(formatoGeneral(envasada));
+    }
+    
+    let averias= parseInt($(`#averias${id}`).val());
+    debugger
+    let total = recibida + envasada + averias + parseInt(valor);
+    total = formatoCO(parseInt(total));
+    //$(`#totalDevolucion${id}`).val(total);
+    $(`#totalDevolucion${id}`).html(total);
+
 }
 
