@@ -70,6 +70,7 @@
 
     <div class="container-fluid">
       <div class="row page-titles">
+        <h1 hidden>6</h1>
         <h1 class="text-themecolor m-b-0 m-t-0"><b>Acondicionamiento</b></h1>
         <a href="../../pesaje" style="background-color:#fff;color:#FF8D6D" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md" role="button">Cola de Trabajo</a>
       </div>
@@ -94,7 +95,7 @@
                   <label for="recipient-name" class="col-form-label">Fecha Programación</label>
                   <label for="recipient-name" class="col-form-label">No Orden</label>
                   <label for="recipient-name" class="col-form-label">Referencia</label>
-                  
+
                   <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:80%; height: 30px;">
                     <thead>
                       <tr>
@@ -103,7 +104,7 @@
                         <th>Total</th>
                       </tr>
                     </thead>
-                    <tbody >
+                    <tbody>
                       <tr id="fila1">
                         <td id="tanque1" style="text-align: end;font-size:14px;"></td>
                         <td id="cantidad1" style="text-align: end;font-size:14px;"></td>
@@ -135,7 +136,7 @@
                   <input type="date" class="form-control" id="in_fecha" readonly>
                   <input type="text" class="form-control" id="in_numero_orden" readonly>
                   <input type="text" class="form-control" id="in_referencia" readonly>
-                  
+
                   <label></label>
                   <label for="in_tamano_lote" class="col-form-label">Tamaño Lote (Kg)</label>
                   <label for="recipient-name" class="col-form-label">No. Lote</label>

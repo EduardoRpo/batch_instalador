@@ -85,6 +85,7 @@ include_once('modal/modal_condicionesMedio.php');
 
     <div class="container-fluid">
       <div class="row page-titles">
+        <h1 hidden>2</h1>
         <h1 class="text-themecolor m-b-0 m-t-0" data-toggle="modal" data-target="#m_CondicionesMedio" data-backdrop="static" data-keyboard="false"><b>Pesaje</b></h1>
         <a href="../../pesaje" style="background-color:#fff;color:#FF8D6D" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md" role="button">Cola de Trabajo</a>
       </div>
@@ -117,7 +118,7 @@ include_once('modal/modal_condicionesMedio.php');
                         <th>Total</th>
                       </tr>
                     </thead>
-                    <tbody >
+                    <tbody>
                       <tr id="fila1">
                         <td id="tanque1" style="text-align: end;font-size:14px;"></td>
                         <td id="cantidad1" style="text-align: end;font-size:14px;"></td>
@@ -149,7 +150,7 @@ include_once('modal/modal_condicionesMedio.php');
                   <input type="text" class="form-control" id="in_fecha" readonly>
                   <input type="text" class="form-control" id="in_numero_orden" readonly>
                   <input type="text" class="form-control" id="in_referencia" readonly>
-                  
+
                   <label></label>
                   <label>Tamaño Lote (Kg)</label>
                   <label>No. Lote</label>

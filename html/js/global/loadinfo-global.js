@@ -1,9 +1,10 @@
 
 let idBatch = location.href.split('/')[4];
 let referencia = location.href.split('/')[5];
-let proceso = $('h1').text();
+let proceso = $('h1:first').text();
 var batch;
 let template;
+
 
 
 Date.prototype.toDateInputValue = (function () {
@@ -17,7 +18,7 @@ $('#in_fecha').attr('min', new Date().toDateInputValue());
 
 /* Modulo */
 
-$.ajax({
+/* $.ajax({
     method: 'POST',
     url: '../../html/php/modulo.php',
     data: { proceso: proceso },
@@ -26,14 +27,14 @@ $.ajax({
     const info = JSON.parse(data);
     preguntas(info[0].id);
 
-});
+}); */
 
 /* cargue de preguntas */
 
-function preguntas(data) {
+/* function preguntas(data) { */
 
     $.ajax({
-        url: `../../api/questions/${data}`,
+        url: `../../api/questions/${proceso}`,
         type: 'GET'
     }).done((data, status, xhr) => {
         $('#preguntas-div').html('');
@@ -52,7 +53,7 @@ function preguntas(data) {
         });
 
     });
-}
+/* } */
 
 /* Carga de datos de informacion del batch record seleccionado */
 
