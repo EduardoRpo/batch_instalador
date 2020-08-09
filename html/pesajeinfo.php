@@ -75,7 +75,7 @@ include_once('modal/modal_condicionesMedio.php');
               class="fas fa-chevron-circle-down"> --></i></a>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuenlace">
                 <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modalCambiarContrasena">Cambiar contraseña</a>
-                <a href="../index.html" class="dropdown-item">Cerrar sesión</a>
+                <a href="../../index.php" class="dropdown-item">Cerrar sesión</a>
               </div>
             </li>
           </ul>

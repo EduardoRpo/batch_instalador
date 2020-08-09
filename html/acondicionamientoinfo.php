@@ -59,7 +59,7 @@
                 <i class="large material-icons">account_circle</i></a>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuenlace">
                 <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modalCambiarContrasena">Cambiar contraseña</a>
-                <a href="../index.html" class="dropdown-item">Cerrar sesión</a>
+                <a href="../../index.php" class="dropdown-item">Cerrar sesión</a>
               </div>
             </li>
           </ul>
@@ -72,7 +72,7 @@
       <div class="row page-titles">
         <h1 hidden>6</h1>
         <h1 class="text-themecolor m-b-0 m-t-0"><b>Acondicionamiento</b></h1>
-        <a href="../../pesaje" style="background-color:#fff;color:#FF8D6D" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md" role="button">Cola de Trabajo</a>
+        <a href="../../acondicionamiento" style="background-color:#fff;color:#FF8D6D" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md" role="button">Cola de Trabajo</a>
       </div>
     </div>
 
