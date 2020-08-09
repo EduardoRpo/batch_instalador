@@ -18,10 +18,10 @@
 
 // obtener firma y huella del usuario
 
-    $email = $_POST['email'];
+    $user = $_POST['user'];
     $clave = md5($_POST['password']);
 
-    $query_firma = $conn -> query("SELECT urlfirma FROM usuario WHERE email = '$email' AND clave = '$clave'");
+    $query_firma = $conn -> query("SELECT urlfirma FROM usuario WHERE user = '$user' AND clave = '$clave'");
     $result = mysqli_num_rows($query_firma);
       
     if($result > 0){

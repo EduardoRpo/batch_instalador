@@ -55,8 +55,8 @@ $.ajax({
 
 /* Carga preguntas */
 
-$.ajax({
-    url: `../../api/questions/2`,
+/* $.ajax({
+    url: `../../api/questions/3`,
     type: 'GET'
 }).done((data, status, xhr) => {
     $('#preguntas-div').html('');
@@ -74,7 +74,7 @@ $.ajax({
                   </div>`);
     });
 
-});
+}); */
 
 /* Carga maquina agitadores */
 /* 

@@ -27,7 +27,7 @@ function enviar() {
    let template = '<img id="" src="/html/firmas/BerneyMontoya/:firma:" alt="firma_usuario" height="130">'; 
     
     datos = {
-        email: $('#usuario').val(),
+        user: $('#usuario').val(),
         password: $('#clave').val(),
         },
 
@@ -37,6 +37,7 @@ function enviar() {
         data: datos,
     
         success: function (datos) {
+            debugger
             data = JSON.parse(datos);
             
             if(data==""){

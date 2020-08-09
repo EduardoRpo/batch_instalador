@@ -15,6 +15,45 @@ Date.prototype.toDateInputValue = (function () {
 $('#in_fecha').val(new Date().toDateInputValue());
 $('#in_fecha').attr('min', new Date().toDateInputValue());
 
+/* Modulo */
+
+$.ajax({
+    method: 'POST',
+    url: '../../html/php/modulo.php',
+    data: { proceso: proceso },
+
+}).done((data, status, xhr) => {
+    const info = JSON.parse(data);
+    preguntas(info[0].id);
+
+});
+
+/* cargue de preguntas */
+
+function preguntas(data) {
+
+    $.ajax({
+        url: `../../api/questions/${data}`,
+        type: 'GET'
+    }).done((data, status, xhr) => {
+        $('#preguntas-div').html('');
+        data.forEach((question, indx) => {
+            $('#preguntas-div').append(`<div class="col-md-10 col-2 align-self-right">
+                    <a for="recipient-name" class="col-form-label">${question.pregunta}</a>
+                  </div>
+                  <div class="col-md-1 col-0 align-self-center">
+                    <label class="checkbox"> <input type="radio" class="questions" name="question-${question.id}" value="si"/>
+                    </label>
+                  </div>
+                  <div class="col-md-1 col-0 align-self-center">
+                    <label class="checkbox"> <input type="radio" name="question-${question.id}" value="no"/>
+                    </label>
+                  </div>`);
+        });
+
+    });
+}
+
 /* Carga de datos de informacion del batch record seleccionado */
 
 $.ajax({
@@ -44,7 +83,7 @@ $.ajax({
 $(document).ready(function () {
     $('#txtobservacionesTanques').DataTable({
         "scrollY": "100px", "scrollCollapse": true, searching: false, paging: false, info: false, ordering: false,
-        columnDefs:[{
+        columnDefs: [{
             targets: "_all",
             sortable: false
         }],
@@ -93,11 +132,11 @@ $.ajax({
 /* Ocultar filas tanques */
 
 function ocultarfilasTanques(filas) {
-    filas = filas+1;
-    for(let i=filas; i<6;i++){
+    filas = filas + 1;
+    for (let i = filas; i < 6; i++) {
         $(`#fila${i}`).attr("hidden", true);
     }
-    
+
 }
 
 
