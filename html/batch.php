@@ -41,7 +41,6 @@ include("modal/modal_cambiarContrasena.php");
       <?php include('./partials/header.php'); ?>
 
       <div class="contenedorPrincipal">
-        <!-- <div class="row"> -->
           <h1 class="text-themecolor tituloProceso"><b>Batch Record</b></h1>
 
           <div class="dropdown btn-acciones">
@@ -56,7 +55,6 @@ include("modal/modal_cambiarContrasena.php");
           <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md btn-filtrar" style="background-color:#fff;color:#FF8D6D" onclick="filtrarfechas()">Filtrar</button>
           <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md btn-crearbatch"  onclick="mostrarModal();"><strong>Crear Batch Record</strong></button>
 
-        <!-- </div> -->
       </div>
     </div>
 

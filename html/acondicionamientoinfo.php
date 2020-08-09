@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <meta name="description" content="Batch Record">
+  <meta name="author" content="Teenus SAS">
 
   <!-- Favicon icon -->
   <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
@@ -94,14 +94,50 @@
                   <label for="recipient-name" class="col-form-label">Fecha Programación</label>
                   <label for="recipient-name" class="col-form-label">No Orden</label>
                   <label for="recipient-name" class="col-form-label">Referencia</label>
-                  <label for="recipient-name" class="col-form-label">Observaciones</label>
+                  
+                  <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:80%; height: 30px;">
+                    <thead>
+                      <tr>
+                        <th>Tanque</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody >
+                      <tr id="fila1">
+                        <td id="tanque1" style="text-align: end;font-size:14px;"></td>
+                        <td id="cantidad1" style="text-align: end;font-size:14px;"></td>
+                        <td id="total1" style="text-align: end;font-size:14px;"></td>
+                      </tr>
+                      <tr id="fila2">
+                        <td id="tanque2" style="text-align: end;font-size:14px;"></td>
+                        <td id="cantidad2" style="text-align: end;font-size:14px;"></td>
+                        <td id="total2" style="text-align: end;font-size:14px;"></td>
+                      </tr>
+                      <tr id="fila3">
+                        <td id="tanque3" style="text-align: end;font-size:14px;"></td>
+                        <td id="cantidad3" style="text-align: end;font-size:14px;"></td>
+                        <td id="total3" style="text-align: end;font-size:14px;"></td>
+                      </tr>
+                      <tr id="fila4">
+                        <td id="tanque4" style="text-align: end;font-size:14px;"></td>
+                        <td id="cantidad4" style="text-align: end;font-size:14px;"></td>
+                        <td id="total4" style="text-align: end;font-size:14px;"></td>
+                      </tr>
+                      <tr id="fila5">
+                        <td id="tanque5" style="text-align: end;font-size:14px;"></td>
+                        <td id="cantidad5" style="text-align: end;font-size:14px;"></td>
+                        <td id="total5" style="text-align: end;font-size:14px;"></td>
+                      </tr>
+                    </tbody>
+                  </table>
 
                   <input type="date" class="form-control" id="in_fecha" readonly>
                   <input type="text" class="form-control" id="in_numero_orden" readonly>
                   <input type="text" class="form-control" id="in_referencia" readonly>
-                  <input type="text" class="form-control itemInfo" id="observaciones" readonly>
-
-                  <label for="in_tamano_lote" class="col-form-label">Tamaño Lote</label>
+                  
+                  <label></label>
+                  <label for="in_tamano_lote" class="col-form-label">Tamaño Lote (Kg)</label>
                   <label for="recipient-name" class="col-form-label">No. Lote</label>
                   <label for="recipient-name" class="col-form-label">Linea</label>
 
@@ -112,6 +148,7 @@
               </div>
             </div>
           </div>
+
           <div class="card">
             <div class="card-header" id="headingTwo">
               <h5 class="mb-0">
@@ -134,10 +171,7 @@
                   </div>
                 </div>
 
-                <div class="row" id="preguntas-div" style="margin: 1%">
-
-                </div>
-
+                <div class="row" id="preguntas-div" style="margin: 1%"></div>
 
                 <div class="row" style="margin: 1%">
                   <div class="col-md-12 col-2 align-self-right">
@@ -164,8 +198,6 @@
 
                   <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
                     <input type="button" class="btn btn-danger in_desinfeccion" id="despeje_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar"> <!-- data-toggle="modal" data-target="#m_firmar" -->
-                    <!-- <input type="button" class="btn btn-danger in_desinfeccion" data-toggle="modal" data-target="#myModal2"
-                       style="width: 100%; height: 38px;" value="Firmar"> -->
                   </div>
 
                   <div class="col-md-4 col-2 align-self-center">
@@ -174,7 +206,6 @@
                   </div>
 
                   <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                    <!-- <input type="button" class="btn btn-danger in_desinfeccion" data-toggle="modal" data-target="#myModal3" style="width: 100%; height: 38px;" value="Firmar"> -->
                     <input type="button" class="btn btn-danger in_desinfeccion" id="despeje_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar"> <!-- data-toggle="modal" data-target="#m_firmar" -->
                   </div>
                 </div>
@@ -250,25 +281,8 @@
                     </div>
                   </div>
                 </div>
-
               </div>
-              <!-- <div class="row" style="margin: 1%">
-                  <div class="col-md-4 col-2 align-self-center">
-                    <label for="recipient-name" class="col-form-label">Realizado Por</label>
-                    <input type="text" class="form-control" id="recipient2-name">
-                  </div>
-                  <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                    <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;">Firmar</button>
-                  </div>
 
-                  <div class="col-md-4 col-2 align-self-center">
-                    <label for="recipient-name" class="col-form-label">Verificado Por</label>
-                    <input type="text" class="form-control" id="recipient2-name">
-                  </div>
-                  <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                    <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;">Firmar</button>
-                  </div>
-                </div> -->
               <div class="row" style="margin: 1%">
                 <div class="col-md-12 col-2 align-self-center" style="margin-left: 85%">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -410,63 +424,60 @@
                   <div class="col-md-12 col-2 align-self-center">
                     <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Conciliación Rendimiento</h3>
                   </div>
-                  </div>
-                  <div class="conciliacionrendimiento">
-                    <label for="recipient-name" class="col-form-label">Unidades Producidas:</label>
-                    <input type="number" class="form-control" id="txtUnidadesProducidas">
+                </div>
+                <div class="conciliacionrendimiento">
+                  <label for="recipient-name" class="col-form-label">Unidades Producidas:</label>
+                  <input type="number" class="form-control centrado" id="txtUnidadesProducidas">
 
-                    <label for="recipient-name" class="col-form-label">Total Cajas:</label>
-                    <input type="number" class="form-control" id="txtTotal-Cajas">
+                  <label for="recipient-name" class="col-form-label">No Muestras de Retención:</label>
+                  <input type="number" class="form-control centrado" id="txtMuestras-Retencion" onkeyup="conciliacionRendimiento(this.value);"><!-- impresion etiquetas para muestras (No produccion, lote, cod barras, cod producto, fecha ) -->
 
-                    <label for="recipient-name" class="col-form-label">No Muestras de Retención:</label>
-                    <input type="number" class="form-control" id="txtMuestras-Retencion">
+                  <label for="recipient-name" class="col-form-label">Total Cajas:</label>
+                  <input type="text" class="form-control centrado" id="txtTotal-Cajas" readonly>
 
-                    <label for="recipient-name" class="col-form-label">Total a Entregar Bodega/Cliente:</label>
-                    <input type="number" class="form-control" id="txtEntrega-Bodega">
+                  <label for="recipient-name" class="col-form-label">Total a Entregar Bodega/Cliente:</label>
+                  <input type="text" class="form-control centrado" id="txtEntrega-Bodega" readonly>
 
-                    <label for="recipient-name" class="col-form-label">Rendimiento Producto:</label>
-                    <input type="text" class="form-control" id="txtRendimiento-Producto">
-                    
-                    <label for="recipient-name" class="col-form-label">Porcentaje Unidades:</label>
-                    <input type="text" class="form-control" id="txtPorcentaje-Unidades">
+                  <label for="recipient-name" class="col-form-label">Rendimiento Producto:</label>
+                  <input type="text" class="form-control centrado" id="txtRendimiento-Producto">
 
-                    <label for="recipient-name" class="col-form-label">Responsable Movimiento Ofimatica:</label>
-                    <input type="text" class="form-control" id="txtReponsable">
+                  <label for="recipient-name" class="col-form-label">Porcentaje Unidades:</label>
+                  <input type="text" class="form-control centrado" id="txtPorcentaje-Unidades">
 
-                  </div>
-                  <div class="firma mt-5">
-                    <label for="recipient-name" class="col-form-label entrego-acon">Entregó</label>
-                    <input type="text" class="form-control" id="recipient2-name">
+                  <label for="recipient-name" class="col-form-label">No Movimiento Ofimatica:</label>
+                  <input type="number" class="form-control centrado" id="txtNoMovimiento">
 
-                    <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;">Firmar</button>
-                  </div>
-                
+                  <label for="recipient-name" class="col-form-label">Responsable Movimiento Ofimatica:</label>
+                  <input type="text" class="form-control centrado" id="txtReponsable">
+
+                </div>
+                <div class="firma mt-5">
+                  <label for="recipient-name" class="col-form-label entrego-acon">Entregó</label>
+                  <input type="text" class="form-control" id="recipient2-name" readonly>
+
+                  <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;">Firmar</button>
+                </div>
+
                 <!-- <div class="row" style="margin: 1%"> -->
-                  <div class="col-md-12 col-2 align-self-center">
+                <!--          <div class="col-md-12 col-2 align-self-center">
                     <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Almacen Despachos</h3>
                   </div>
-                  <div class="almacen-despachos">
-                    <!-- <div class="col-md-4 col-2 align-self-center">
-                    <label for="recipient-name" class="col-form-label">Entregó</label>
-                    <input type="text" class="form-control" id="recipient2-name">
-                  </div> -->
-                  <!-- <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%"> -->
+                   <div class="almacen-despachos">
                     <label for="recipient-name"  class="col-form-label">Número del Traslado ofimatico</label>
-                    <input type="text" class="form-control">
-                  <!-- </div> -->
-
-                  <!-- <div class="col-md-4 col-2 align-self-center"> -->
+                    <input type="text" class="form-control" id="Notraslado">
                     <label for="recipient-name" class="col-form-label" style="display: flex; justify-content:flex-end">Recibió</label>
                     <input type="text" class="form-control" id="recipient2-name">
-                  <!-- </div> -->
-                  <!-- <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%"> -->
-                    <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;">Firmar</button>
-                  <!-- </div> -->
-                </div>
+
+                    input total cajas y total entrega cliente
+                    informativo input muestras de retencion
+                    input total a facturar unidades validadas + muestras de retencion
+
+        
+                </div> -->
                 <div class="row" style="margin: 1%">
                   <div class="col-md-12 col-2 align-self-center" style="margin-left: 85%">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" onclick="window.location.href = '../html/liberacionproducto.html';">Aceptar</button>
+                    <button type="button" class="btn btn-primary" onclick="" ;">Aceptar</button>
                   </div>
 
 

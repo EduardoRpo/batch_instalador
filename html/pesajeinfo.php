@@ -108,24 +108,59 @@ include_once('modal/modal_condicionesMedio.php');
                   <label>Fecha Programación</label>
                   <label>No Orden</label>
                   <label>Referencia</label>
-                  <label>Observaciones</label>
+
+                  <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:80%; height: 30px;">
+                    <thead>
+                      <tr>
+                        <th>Tanque</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody >
+                      <tr id="fila1">
+                        <td id="tanque1" style="text-align: end;font-size:14px;"></td>
+                        <td id="cantidad1" style="text-align: end;font-size:14px;"></td>
+                        <td id="total1" style="text-align: end;font-size:14px;"></td>
+                      </tr>
+                      <tr id="fila2">
+                        <td id="tanque2" style="text-align: end;font-size:14px;"></td>
+                        <td id="cantidad2" style="text-align: end;font-size:14px;"></td>
+                        <td id="total2" style="text-align: end;font-size:14px;"></td>
+                      </tr>
+                      <tr id="fila3">
+                        <td id="tanque3" style="text-align: end;font-size:14px;"></td>
+                        <td id="cantidad3" style="text-align: end;font-size:14px;"></td>
+                        <td id="total3" style="text-align: end;font-size:14px;"></td>
+                      </tr>
+                      <tr id="fila4">
+                        <td id="tanque4" style="text-align: end;font-size:14px;"></td>
+                        <td id="cantidad4" style="text-align: end;font-size:14px;"></td>
+                        <td id="total4" style="text-align: end;font-size:14px;"></td>
+                      </tr>
+                      <tr id="fila5">
+                        <td id="tanque5" style="text-align: end;font-size:14px;"></td>
+                        <td id="cantidad5" style="text-align: end;font-size:14px;"></td>
+                        <td id="total5" style="text-align: end;font-size:14px;"></td>
+                      </tr>
+                    </tbody>
+                  </table>
 
                   <input type="text" class="form-control" id="in_fecha" readonly>
                   <input type="text" class="form-control" id="in_numero_orden" readonly>
                   <input type="text" class="form-control" id="in_referencia" readonly>
-                  <!-- <input type="textarea" class="form-control itemInfo" id="observaciones" hidden readonly> -->
-                  <textarea class="form-control itemInfo" id="observaciones" cols="5" rows="7" readonly></textarea>
-
+                  
+                  <label></label>
                   <label>Tamaño Lote (Kg)</label>
-                  <label>No Lote</label>
+                  <label>No. Lote</label>
                   <label>Línea</label>
 
                   <input type="text" class="form-control" id="in_tamano_lote" readonly>
                   <input type="text" class="form-control" id="in_numero_lote" readonly>
                   <input type="text" class="form-control" id="in_linea" readonly>
                 </div>
-                <div class="contenedorInfoObs">
-                </div>
+                <!-- <div class="contenedorInfoObs">
+                </div> -->
               </div>
             </div>
           </div>
@@ -173,9 +208,7 @@ include_once('modal/modal_condicionesMedio.php');
                   </div>
 
                   <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                    <input type="button" class="btn btn-danger in_desinfeccion" id="despeje_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar"> <!-- data-toggle="modal" data-target="#m_firmar" -->
-                    <!-- <input type="button" class="btn btn-danger in_desinfeccion" data-toggle="modal" data-target="#myModal2"
-                       style="width: 100%; height: 38px;" value="Firmar"> -->
+                    <input type="button" class="btn btn-danger in_desinfeccion" id="despeje_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
                   </div>
 
                   <div class="col-md-4 col-2 align-self-center">
@@ -184,15 +217,10 @@ include_once('modal/modal_condicionesMedio.php');
                   </div>
 
                   <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                    <!-- <input type="button" class="btn btn-danger in_desinfeccion" data-toggle="modal" data-target="#myModal3" style="width: 100%; height: 38px;" value="Firmar"> -->
-                    <input type="button" class="btn btn-danger in_desinfeccion" id="despeje_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar"> <!-- data-toggle="modal" data-target="#m_firmar" -->
+                    <input type="button" class="btn btn-danger in_desinfeccion" id="despeje_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
                   </div>
                 </div>
                 <div class="row justify-content-end mt-5" style="margin: 1%; text-align: right">
-                  <!--  <div class="col-md-12 col-2 align-self-end">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary">Aceptar</button>
-                  </div> -->
                 </div>
               </div>
             </div>
@@ -232,18 +260,14 @@ include_once('modal/modal_condicionesMedio.php');
                 <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Pesaje</h3>
                 <div class="chk-control m-3">
                   <label for="" class="lblchk-control">Control Pesaje Tanques</label>
-                  <!-- Control de Tanques -->
                 </div>
                 <hr>
                 <form>
                   <div class="table-responsive"></div>
                   <table class="table" id="tablePesaje" style="width: 100%;">
-
                   </table>
                 </form>
               </div>
-
-
             </div>
             <hr>
 
@@ -255,16 +279,12 @@ include_once('modal/modal_condicionesMedio.php');
             <hr>
 
             <div class="row" style="margin: 1%">
-              <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down" id="imprimirEtiquetasVirtuale" style="margin-left: 1%" onclick="imprimir();">
-                Imprimir Etiquetas Virtuales
+              <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down" id="imprimirEtiquetasVirtuales">Imprimir Etiquetas Virtuales
               </button>
+              <iframe id="printf" name="printf" src="../../html/modal/m_plantillaEtiquetas.php" width="0" height="0" style="display:none;"></iframe>
             </div>
             <hr>
             <div class="row" style="margin: 1%">
-              <!-- <div class="col-md-2 col-2 align-self-right">
-                    <label for="in_fecha_pesaje" class="col-form-label">Fecha:</label>
-                    <input type="date" class="form-control" id="in_fecha_pesaje" readonly>
-                  </div> -->
               <div class="col-md-3 col-2 align-self-center">
                 <label for="pesaje_realizado" class="col-form-label">Realizado Por:</label>
                 <input type="text" class="form-control" id="pesaje_realizado" readonly>
@@ -290,14 +310,10 @@ include_once('modal/modal_condicionesMedio.php');
                 </button>
               </div>
             </div>
-
           </div>
         </div>
-
       </div>
-
     </div>
-  </div>
   </div>
 
   <!-- jquery -->

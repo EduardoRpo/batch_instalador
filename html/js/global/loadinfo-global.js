@@ -39,8 +39,23 @@ $.ajax({
     }
 });
 
+/* tabla de observaciones en la pestaña de informacion del producto */
+
+$(document).ready(function () {
+    $('#txtobservacionesTanques').DataTable({
+        "scrollY": "100px", "scrollCollapse": true, searching: false, paging: false, info: false, ordering: false,
+        columnDefs:[{
+            targets: "_all",
+            sortable: false
+        }],
+    });
+
+    $('.dataTables_length').addClass('bs-select');
+});
+
 /* Carga de tanques para mostrar en los proceso de pesaje, preparacion y aprobacion */
 let cantidad = 0;
+ocultarfilasTanques();
 $.ajax({
 
     'method': 'POST',
@@ -49,19 +64,17 @@ $.ajax({
 
     success: function (data) {
         var info = JSON.parse(data);
+        var j = 1;
 
-        if (info === undefined) {
-            alertify.set("notifier", "position", "top-right"); alertify.error("No se encontró información de Tanques.");
-        } else {
-            template = 'Tanque            Cantidad              Total ';
-            document.getElementById("observaciones").value += template + '\n';
-            for (i = 0; i < info.length; i++) {
-                template = '    ' + info[i].tanque + '                      ' + info[i].cantidad + '                   ' + info[i].tanque * info[i].cantidad;
-                document.getElementById("observaciones").value += template + '\n';
-                cantidad = cantidad + parseInt(info[i].cantidad);
+        for (let i = 0; i < info.length; i++) {
+            $(`#tanque${j}`).html(info[i].tanque);
+            $(`#cantidad${j}`).html(info[i].cantidad);
+            $(`#total${j}`).html(info[i].tanque * info[i].cantidad);
+            j++;
 
-            }
+            cantidad = cantidad + parseInt(info[i].cantidad);
         }
+        ocultarfilasTanques(info.length);
 
         if (proceso === "Pesaje" || proceso === "Preparación") {
             controlProceso(cantidad);
@@ -77,10 +90,21 @@ $.ajax({
 
 });
 
+/* Ocultar filas tanques */
+
+function ocultarfilasTanques(filas) {
+    filas = filas+1;
+    for(let i=filas; i<6;i++){
+        $(`#fila${i}`).attr("hidden", true);
+    }
+    
+}
+
+
 /* Mostrar los checkbox de acuerdo con la cantidad de tanques */
 
 function controlProceso(cantidad) {
-    
+
     if (cantidad > 10) {
         cantidad = 10;
     }
@@ -147,7 +171,6 @@ function guardar_condicionesMedio() {
         }
     });
     return false;
-
 }
 
 
@@ -209,7 +232,7 @@ function cargarMaquinas() {
 
         success: function (response) {
             const info = JSON.parse(response);
-            debugger
+
             $('.txtEnvasadora').val('');
             $('.txtLoteadora').val('');
             $('#sel_agitador').val('');
@@ -222,7 +245,7 @@ function cargarMaquinas() {
             $('.txtLoteadora').val(info[0].loteadora);
             $('#sel_agitador').val(info[0].agitador);
             $('#sel_marmita').val(info[0].marmita); */
-            
+
             $('#sel_agitador').val(info[0].maquina);
             $('#txtBanda').val(info[1].maquina);
             $('.txtEnvasadora').val(info[2].maquina);

@@ -103,15 +103,50 @@ include('modal/m_firma.php');
                   <label for="recipient-name" class="col-form-label">Fecha Programación</label>
                   <label for="recipient-name" class="col-form-label">No Orden</label>
                   <label for="recipient-name" class="col-form-label">Referencia</label>
-                  <label for="recipient-name" class="col-form-label">Observaciones</label>
+                  
+                  <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:80%; height: 30px;">
+                    <thead>
+                      <tr>
+                        <th>Tanque</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody >
+                      <tr id="fila1">
+                        <td id="tanque1" style="text-align: end;font-size:14px;"></td>
+                        <td id="cantidad1" style="text-align: end;font-size:14px;"></td>
+                        <td id="total1" style="text-align: end;font-size:14px;"></td>
+                      </tr>
+                      <tr id="fila2">
+                        <td id="tanque2" style="text-align: end;font-size:14px;"></td>
+                        <td id="cantidad2" style="text-align: end;font-size:14px;"></td>
+                        <td id="total2" style="text-align: end;font-size:14px;"></td>
+                      </tr>
+                      <tr id="fila3">
+                        <td id="tanque3" style="text-align: end;font-size:14px;"></td>
+                        <td id="cantidad3" style="text-align: end;font-size:14px;"></td>
+                        <td id="total3" style="text-align: end;font-size:14px;"></td>
+                      </tr>
+                      <tr id="fila4">
+                        <td id="tanque4" style="text-align: end;font-size:14px;"></td>
+                        <td id="cantidad4" style="text-align: end;font-size:14px;"></td>
+                        <td id="total4" style="text-align: end;font-size:14px;"></td>
+                      </tr>
+                      <tr id="fila5">
+                        <td id="tanque5" style="text-align: end;font-size:14px;"></td>
+                        <td id="cantidad5" style="text-align: end;font-size:14px;"></td>
+                        <td id="total5" style="text-align: end;font-size:14px;"></td>
+                      </tr>
+                    </tbody>
+                  </table>
 
                   <input type="date" class="form-control" id="in_fecha" readonly>
                   <input type="text" class="form-control" id="in_numero_orden" readonly>
                   <input type="text" class="form-control" id="in_referencia" readonly>
-                  <!-- <input type="text" class="form-control itemInfo" id="observaciones" readonly> -->
-                  <textarea class="form-control itemInfo" id="observaciones" cols="5" rows="7" readonly></textarea>
-
-                  <label for="in_tamano_lote" class="col-form-label">Tamaño Lote</label>
+                  
+                  <label></label>
+                  <label for="in_tamano_lote" class="col-form-label">Tamaño Lote (Kg)</label>
                   <label for="recipient-name" class="col-form-label">No. Lote</label>
                   <label for="recipient-name" class="col-form-label">Linea</label>
 

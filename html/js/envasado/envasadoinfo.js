@@ -1,7 +1,9 @@
 /* Cargar Multipresentacion */
 
 $(document).ready(function () {
-  let cantidad = 0;
+  //let cantidad = 0;
+  ocultarEnvasado();
+  ocultarfilasTanques();
 
   $.ajax({
 
@@ -11,35 +13,41 @@ $(document).ready(function () {
 
     success: function (data) {
       var info = JSON.parse(data);
+      let j = 1;
+      for (let i = 0; i < info.length; i++) {
+        $(`#tanque${j}`).html(formatoCO(info[i].presentacion));
+        $(`#cantidad${j}`).html(formatoCO(info[i].cantidad));
+        $(`#total${j}`).html(formatoCO(info[i].presentacion * info[i].cantidad));
+        $(`#envasado${j}`).attr("hidden", false);
+        $(`#envasadoMulti${j}`).html('ENVASADO PRESENTACION: ' + info[i].presentacion);
+        j++;
 
-      if (info === undefined) {
-        let text = "Sin Multipresentacion";
-        $("#observacionesMulti").val(text);
-      } else {
-        template = 'Presentación            Cantidad              Total ';
-        document.getElementById("observacionesMulti").value += template + '\n';
-        for (i = 0; i < info.length; i++) {
-          template = '    ' + formatoCO(info[i].presentacion) + '                      ' + formatoCO(info[i].cantidad) + '                ' + formatoCO(info[i].presentacion * info[i].cantidad);
-          document.getElementById("observacionesMulti").value += template + '\n';
-          cantidad = cantidad + parseInt(info[i].cantidad);
-
-        }
+        //cantidad = cantidad + parseInt(info[i].cantidad);
       }
+      ocultarfilasTanques(info.length);
 
-      if (proceso === "Pesaje" || proceso === "Preparación") {
+      /* if (proceso === "Pesaje" || proceso === "Preparación") {
         controlProceso(cantidad);
       } else if (proceso === "Aprobación") {
         cargaTanquesControl(cantidad);
-      }
+      } */
 
 
     },
     error: function (r) {
-      alertify.set("notifier", "position", "top-right"); alertify.error("Error al Cargar los tanques.");
+      alertify.set("notifier", "position", "top-right"); alertify.error("Error al Cargar la multipresentacion.");
     }
 
   });
 });
+
+/* Ocultar Envasado */
+
+function ocultarEnvasado() {
+  for (let i = 2; i < 6; i++) {
+    $(`#envasado${i}`).attr("hidden", true);
+  }
+}
 
 /* Cargar linea y maquinas de acuerdo con la seleccion */
 
@@ -183,22 +191,27 @@ function devolucionMaterialEnvasada(valor) {
   $('#txtEnvasada3').html(unidades_envasadas);
 }
 
-function devolucionMaterialTotal(valor, id){
+function devolucionMaterialTotal(valor, id) {
 
-    let recibida= parseInt(formatoGeneral($(`#unidades${id}`).html()));
-    let envasada= parseInt($(`#txtEnvasada${id}`).val());
-    
-    if(isNaN(envasada)){
-      envasada= $(`#txtEnvasada${id}`).html();
-      envasada = parseInt(formatoGeneral(envasada));
-    }
-    
-    let averias= parseInt($(`#averias${id}`).val());
-    debugger
-    let total = recibida + envasada + averias + parseInt(valor);
-    total = formatoCO(parseInt(total));
-    //$(`#totalDevolucion${id}`).val(total);
-    $(`#totalDevolucion${id}`).html(total);
+  //let recibida= parseInt(formatoGeneral($(`#unidades${id}`).html()));
+  let envasada = parseInt($(`#txtEnvasada${id}`).val());
+
+  if (isNaN(envasada)) {
+    envasada = $(`#txtEnvasada${id}`).html();
+    envasada = parseInt(formatoGeneral(envasada));
+  }
+
+  let averias = parseInt($(`#averias${id}`).val());
+
+  let total = envasada + averias + parseInt(valor);
+
+  total = formatoCO(parseInt(total));
+  if (isNaN(total)) {
+    total = "";
+  }
+
+  //$(`#totalDevolucion${id}`).val(total);
+  $(`#totalDevolucion${id}`).html(total);
 
 }
 

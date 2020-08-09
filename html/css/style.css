@@ -8201,13 +8201,43 @@ div.displayallinfo {
 
 
 /* Cabecera Info */
+
 .contenedorInfo{
   display: grid;
   grid-template-columns: repeat(3, 1fr) 350px;
   grid-template-rows: 1em 2em 1em 2em;
   grid-gap: 1em;
   margin: 20px;
-  /* width: 100%; */
+
+}
+
+/* Pesaje */
+
+#in_tamano_lote{
+  grid-row-start: 4;
+  grid-row-end: 5;
+
+  grid-column-start: 1;
+  grid-column-end: 2;
+  text-align: start;
+}
+
+#in_numero_lote{
+  grid-row-start: 4;
+  grid-row-end: 5;
+
+  grid-column-start: 2;
+  grid-column-end: 3;
+  text-align: start;
+}
+
+#in_linea{
+  grid-row-start: 4;
+  grid-row-end: 5;
+
+  grid-column-start: 3;
+  grid-column-end: 4;
+  text-align: start;
 }
 
 .contenedorInfoGeneral{
@@ -8216,10 +8246,11 @@ div.displayallinfo {
   grid-template-rows: 1em 2em 1em 2em;
   grid-gap: 1em;
   margin: 20px;
-  /* width: 100%; */
+
 }
 
-.itemInfo{
+
+/* .itemInfo{
 
   grid-column-start: 4;
   grid-column-end: 5;
@@ -8227,7 +8258,7 @@ div.displayallinfo {
   grid-row-start: 2;
   grid-row-end: 5;
   
-}
+} */
 
 .parametrosControl{
   display: grid;
