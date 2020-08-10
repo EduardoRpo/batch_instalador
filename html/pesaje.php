@@ -1,4 +1,6 @@
 <?php
+//require_once('./sesion/sesion.php');
+//require_once('../conexion.php');
 include('modal/modal_cambiarContrasena.php');
 ?>
 
@@ -43,6 +45,8 @@ include('modal/modal_cambiarContrasena.php');
   </div>
   <div id="main-wrapper">
 
+    <?php //include('./partials/header.php'); ?>
+
     <header class="topbar">
       <nav class="navbar top-navbar navbar-toggleable-sm navbar-light">
         <div class="navbar-header">
@@ -59,11 +63,10 @@ include('modal/modal_cambiarContrasena.php');
           <ul class="navbar-nav my-lg-0">
             <li class="nav-item dropdown">
 
-              <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" id="dropdownMenuenlace">
+              <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" id="dropdownMenuenlace"><?php// echo $_SESSION['nombre'] .' '. $_SESSION['apellido']; ?>
                 <i class="large material-icons">account_circle</i></i></a>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuenlace">
                 <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modalCambiarContrasena">Cambiar Contraseña</a>
-                <!-- <a href="./" class="dropdown-item">Cerrar Sesión</a> -->
                 <a href="../html/salir.php" class="dropdown-item">Cerrar sesión</a>
               </div>
             </li>
