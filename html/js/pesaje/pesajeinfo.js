@@ -17,7 +17,7 @@ $.ajax({
 /* Exportar Datatable Materia Prima */
 /* Formula Materia Prima  */
 
-$(document).ready(function () {
+//$(document).ready(function () {
 
     tablePesaje = $('#tablePesaje').dataTable({
 
@@ -103,7 +103,7 @@ $(document).ready(function () {
 
     });
 
-});
+//});
 
 
 

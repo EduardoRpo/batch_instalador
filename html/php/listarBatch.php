@@ -99,7 +99,7 @@
 
     case 3: //cargar selector de referencias
       
-      $query_referencia = mysqli_query($conn, "SELECT @curRow := @curRow + 1 AS id, referencia FROM producto JOIN (SELECT @curRow := 0) r ORDER BY `id` ASC");
+      $query_referencia = mysqli_query($conn, "SELECT @curRow := @curRow + 1 AS id, referencia FROM producto JOIN (SELECT @curRow := 0) r ORDER BY 'id' ASC");
     
       $result = mysqli_num_rows($query_referencia);
       
@@ -122,7 +122,7 @@
       $query_producto = mysqli_query($conn, "SELECT p.referencia, p.nombre_referencia as nombre, m.nombre as marca, ns.notificacion_sanitaria, pp.nombre as propietario, np.nombre_producto as producto, pc.presentacion, l.nombre_linea as linea, l.densidad 
                                              FROM producto p INNER JOIN marca m INNER JOIN notificacion_sanitaria ns INNER JOIN propietario pp INNER JOIN nombre_producto np INNER JOIN presentacion_comercial pc INNER JOIN linea l 
                                              ON p.id_marca = m.id AND p.id_notificacion_sanitaria = ns.id AND p.id_propietario=pp.id AND p.id_nombre_producto= np.id AND p.id_presentacion_comercial=pc.id AND p.id_linea=l.id 
-                                             WHERE p.referencia = $id_referencia");
+                                             WHERE p.referencia = '$id_referencia'");
                                              
       $result = mysqli_num_rows($query_producto);
       
@@ -306,7 +306,7 @@
     break;
 
     case 9: // cargar selector de Tanques
-      $query_tanque = mysqli_query($conn, 'SELECT capacidad FROM tanques');
+      $query_tanque = mysqli_query($conn, "SELECT capacidad FROM tanques ORDER BY 'capacidad' ASC");
     
       $result = mysqli_num_rows($query_tanque);
       

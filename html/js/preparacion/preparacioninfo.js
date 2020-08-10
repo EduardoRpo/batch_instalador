@@ -148,10 +148,12 @@ $.ajax({
 }).done((data, status, xhr) => {
     $('#pasos_instructivo').html('');
     pasos = data;
+    var i=1;
     data.forEach((instructivo, indx) => {
         $('#pasos_instructivo').append(`<a href="javascript:void(0)" onclick="procesoTiempo(event)" 
-        class="proceso-instructivo" attr-indx="${indx}" attr-id="${instructivo.id}" id="proceso-instructivo${instructivo.id}" 
+        class="proceso-instructivo" attr-indx="${indx}" attr-id="${instructivo.id}" id="proceso-instructivo${i}" 
         attr-tiempo="${instructivo.tiempo}">PASO ${indx + 1}: ${instructivo.proceso} </a>  <br/>`);
+        i++;
     });
     ocultarInstructivo();
 });
