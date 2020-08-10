@@ -71,7 +71,7 @@ include('modal/m_muestras.php');
               <div class="dropdown-menu" aria-labelledby="dropdownMenuenlace">
                 <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modalCambiarContrasena">Cambiar contraseña</a>
                 <!-- <a href="../../index.php" class="dropdown-item">Cerrar sesión</a> -->
-                <a href="salir.php" class="dropdown-item">Cerrar sesión</a>
+                <a href="../html/salir.php" class="dropdown-item">Cerrar sesión</a>
               </div>
             </li>
           </ul>
