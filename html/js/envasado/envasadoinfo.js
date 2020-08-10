@@ -24,7 +24,7 @@ $(document).ready(function () {
 
         //cantidad = cantidad + parseInt(info[i].cantidad);
       }
-      ocultarfilasTanques(info.length);
+      //ocultarfilasTanques(info.length);
 
       /* if (proceso === "Pesaje" || proceso === "Preparación") {
         controlProceso(cantidad);
