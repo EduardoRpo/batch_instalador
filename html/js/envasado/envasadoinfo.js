@@ -14,7 +14,7 @@ $(document).ready(function () {
     success: function (data) {
       var info = JSON.parse(data);
       let j = 1;
-      for (let i = 0; i < info.length; i++) {
+      for (let i = 0; i <= info.length; i++) {
         $(`#tanque${j}`).html(formatoCO(info[i].presentacion));
         $(`#cantidad${j}`).html(formatoCO(info[i].cantidad));
         $(`#total${j}`).html(formatoCO(info[i].cantidad));
