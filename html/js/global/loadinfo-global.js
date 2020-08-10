@@ -95,7 +95,7 @@ $(document).ready(function () {
 
 /* Carga de tanques para mostrar en los proceso de pesaje, preparacion y aprobacion */
 let cantidad = 0;
-ocultarfilasTanques();
+ocultarfilasTanques(5);
 $.ajax({
 
     'method': 'POST',

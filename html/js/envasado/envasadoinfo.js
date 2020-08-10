@@ -17,7 +17,7 @@ $(document).ready(function () {
       for (let i = 0; i < info.length; i++) {
         $(`#tanque${j}`).html(formatoCO(info[i].presentacion));
         $(`#cantidad${j}`).html(formatoCO(info[i].cantidad));
-        $(`#total${j}`).html(formatoCO(info[i].presentacion * info[i].cantidad));
+        $(`#total${j}`).html(formatoCO(info[i].cantidad));
         $(`#envasado${j}`).attr("hidden", false);
         $(`#envasadoMulti${j}`).html('ENVASADO PRESENTACION: ' + info[i].presentacion);
         j++;
