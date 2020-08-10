@@ -22,7 +22,7 @@ $op = $_POST['operacion'];
 switch($op){
   case 1: // obtener el tiempo para mostrar modal
     $id_modulo = $_POST['modulo'];
-
+    
     $query_tiempo = mysqli_query($conn, "SELECT min, max 
                                         FROM condicionesmedio_tiempo 
                                         WHERE id_modulo = '$id_modulo')");
