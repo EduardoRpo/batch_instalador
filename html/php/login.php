@@ -12,10 +12,12 @@ if (!empty($_SESSION['active'])) {
             $usuario = mysqli_real_escape_string($conn, $_POST['usuario']);
             $pass = md5(mysqli_real_escape_string($conn, $_POST['clave']));
 
-            $query = mysqli_query($conn, "SELECT * FROM usuario WHERE user ='$usuario' AND clave='$pass'");
-            mysqli_close($conn);
+            $query = mysqli_query($conn, "SELECT * 
+                                          FROM usuario, modulo 
+                                          WHERE user ='$usuario' AND clave='$pass' AND modulo.id=usuario.id_modulo");
 
             $result = mysqli_num_rows($query);
+            mysqli_close($conn);
 
             if ($result > 0) {
                 $data = mysqli_fetch_array($query);
@@ -26,23 +28,16 @@ if (!empty($_SESSION['active'])) {
                 $_SESSION['email'] = $data['email'];
                 $_SESSION['idModulo'] = $data['id_modulo'];
                 $_SESSION['cargo'] = $data['id_cargo'];
-
-                switch ($_SESSION['idModulo']) {
-                    case 1:
-                        header('location: html/batch.php');
-                        break;
-                    case 2:
-                        header('location: pesaje');
-                        break;
-                    case 3:
-                        header('location: preparacion');
-                        break;
-                    case 4:
-                        header('location: aprobacion');
-                        break;
+                $_SESSION['modulo'] = $data['modulo'];
+                $modulo = $data['modulo'];
+                
+                if ($data['id_modulo'] == 1) {
+                    header('location: html/batch.php');
+                } else {
+                    header("location: {$modulo}");
                 }
             } else {
-                $alert = "El usuario o la contraseña no son validos";
+                //$alert = "El usuario o la contraseña no son validos";
                 echo '<script>alertify.set("notifier","position", "top-right"); alertify.error("El usuario o contraseña no son validos.");</script>';
                 session_destroy();
             }

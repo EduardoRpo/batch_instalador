@@ -63,7 +63,8 @@ include('modal/modal_cambiarContrasena.php');
                 <i class="large material-icons">account_circle</i></i></a>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuenlace">
                 <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modalCambiarContrasena">Cambiar Contraseña</a>
-                <a href="./" class="dropdown-item">Cerrar Sesión</a>
+                <!-- <a href="./" class="dropdown-item">Cerrar Sesión</a> -->
+                <a href="salir.php" class="dropdown-item">Cerrar sesión</a>
               </div>
             </li>
           </ul>
