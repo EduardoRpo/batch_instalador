@@ -116,9 +116,9 @@ $.ajax({
         }
         ocultarfilasTanques(info.length);
 
-        if (proceso === "Pesaje" || proceso === "Preparación") {
+        if (proceso === "2" || proceso === "3") {
             controlProceso(cantidad);
-        } else if (proceso === "Aprobación") {
+        } else if (proceso === "4") {
             cargaTanquesControl(cantidad);
         }
 
