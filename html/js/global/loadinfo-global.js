@@ -163,7 +163,7 @@ $(document).ready(function () {
         'type': 'POST',
         'url': '../../html/php/condicionesmedio.php',
         'data': { operacion: "1", modulo: proceso },
-
+        
         success: function (resp) {
 
             let t = JSON.parse(resp);
