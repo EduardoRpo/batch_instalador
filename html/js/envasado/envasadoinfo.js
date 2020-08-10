@@ -3,7 +3,7 @@
 $(document).ready(function () {
   //let cantidad = 0;
   ocultarEnvasado();
-  ocultarfilasTanques();
+  ocultarfilasTanques(5);
 
   $.ajax({
 
@@ -18,6 +18,8 @@ $(document).ready(function () {
         $(`#tanque${j}`).html(formatoCO(info[i].presentacion));
         $(`#cantidad${j}`).html(formatoCO(info[i].cantidad));
         $(`#total${j}`).html(formatoCO(info[i].cantidad));
+        
+        $(`#fila${j}`).attr("hidden", false);
         $(`#envasado${j}`).attr("hidden", false);
         $(`#envasadoMulti${j}`).html('ENVASADO PRESENTACION: ' + info[i].presentacion);
         j++;

@@ -100,7 +100,7 @@
                   <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:80%; height: 30px;">
                     <thead>
                       <tr>
-                        <th>Tanque</th>
+                        <th>Multipresentación</th>
                         <th>Cantidad</th>
                         <th>Total</th>
                       </tr>
