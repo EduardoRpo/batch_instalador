@@ -1,0 +1,85 @@
+/* no muestra las viñetas */
+
+.contenedor-menu ul {
+  list-style: none;
+}
+
+/* Ocultar submenus */
+
+.contenedor-menu .nav ul {
+  display: none;
+}
+
+/* Organizar inputs y label para establecer tiempos */
+
+#frmadTiempos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1em;
+  margin: 10px;
+  text-align: center;
+  justify-items: center;
+  align-items: baseline;
+  justify-content: center;
+}
+
+#guardarCondiciones {
+  grid-column-start: 3;
+  grid-column-end: 4;
+}
+
+/* Organizar inputs y label para establecer tiempos */
+
+#frmadDesinfectante {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1em;
+  margin: 10px;
+  text-align: center;
+  justify-items: center;
+  align-items: baseline;
+  justify-content: center;
+}
+
+#desinfectante {
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+#concentracion {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+#guardarDesinfectante {
+  grid-column-start: 3;
+  grid-column-end: 4;
+}
+
+/* organizar adicionar lineas */
+
+#frmadLineas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1em;
+  margin: 10px;
+  text-align: center;
+  justify-items: center;
+  align-items: baseline;
+  justify-content: center;
+}
+
+#linea {
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+#densidad {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+#guardarDesinfectante {
+  grid-column-start: 3;
+  grid-column-end: 4;
+}

@@ -47,4 +47,3 @@ $.ajax({
 
     $('#espec_untosidad').html(data.untuosidad);
 });
-

@@ -107,9 +107,9 @@ $.ajax({
         var j = 1;
 
         for (let i = 0; i < info.length; i++) {
-            $(`#tanque${j}`).html(info[i].tanque);
+            $(`#tanque${j}`).html(formatoCO(info[i].tanque));
             $(`#cantidad${j}`).html(info[i].cantidad);
-            $(`#total${j}`).html(info[i].tanque * info[i].cantidad);
+            $(`#total${j}`).html(formatoCO(info[i].tanque * info[i].cantidad));
             j++;
 
             cantidad = cantidad + parseInt(info[i].cantidad);

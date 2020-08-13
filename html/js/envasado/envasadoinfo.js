@@ -18,7 +18,7 @@ $(document).ready(function () {
         $(`#tanque${j}`).html(formatoCO(info[i].presentacion));
         $(`#cantidad${j}`).html(formatoCO(info[i].cantidad));
         $(`#total${j}`).html(formatoCO(info[i].cantidad));
-        
+
         $(`#fila${j}`).attr("hidden", false);
         $(`#envasado${j}`).attr("hidden", false);
         $(`#envasadoMulti${j}`).html('ENVASADO PRESENTACION: ' + info[i].presentacion);
@@ -217,3 +217,12 @@ function devolucionMaterialTotal(valor, id) {
 
 }
 
+function validarLote(data) {
+  let lote = $('#in_numero_lote').val();
+
+  if(lote != data){
+    alertify.set("notifier", "position", "top-right"); alertify.error("Lote digitado no corresponde al procesado");
+    return false;
+  }
+
+}

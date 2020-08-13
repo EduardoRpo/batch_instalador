@@ -107,7 +107,7 @@ include("modal/modal_condicionesMedio.php");
               <div class="card-body">
                 <div class="contenedorInfo">
                   <label for="recipient-name" class="col-form-label">Fecha Programación</label>
-                  <label for="recipient-name" class="col-form-label">No Orden</label>
+                  <label for="recipient-name" class="col-form-label">No Orden de Producción</label>
                   <label for="recipient-name" class="col-form-label">Referencia</label>
                   <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:80%; height: 30px;">
                     <thead>
@@ -147,7 +147,7 @@ include("modal/modal_condicionesMedio.php");
                   </table>
 
                   <input type="date" class="form-control" id="in_fecha" readonly>
-                  <input type="text" class="form-control" id="in_numero_orden" readonly>
+                  <input type="text" class="form-control" id="in_numero_orden" readonly style="font-size:x-large">
                   <input type="text" class="form-control" id="in_referencia" readonly>
 
                   <label></label>
@@ -249,9 +249,9 @@ include("modal/modal_condicionesMedio.php");
                   <input type="text" id="sel_marmita" class="form-control" readonly>
                   <!-- <select class="selectpicker form-control" id="sel_agitador">
                     <option selected hidden>Seleccione</option>
-                  </select>
+                  </select>-->
 
-                  <select class="selectpicker form-control" id="sel_marmita">
+                  <!-- select class="selectpicker form-control" id="sel_marmita">
                     <option selected hidden>Seleccione</option>
                   </select> -->
                 </div>

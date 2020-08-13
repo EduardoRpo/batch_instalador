@@ -1,5 +1,5 @@
-<?php 
-  include('./modal/ModalcrearUsuarios.php');
+<?php
+include('./modal/m_crearUsuarios.php');
 ?>
 
 
@@ -13,15 +13,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>Samara Cosmetics | Usuarios</title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-  
+
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  
+
   <!-- CSS Files -->
   <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
   <link href="../assets/css/now-ui-dashboard.css?v=1.5.0" rel="stylesheet" />
-  
+  <link href="../sistema/css/estilos.css" rel="stylesheet" />
+
   <!-- Datatables -->
   <!-- <link rel="stylesheet" href="../assets/datatables/datatables.min.css">
   <link rel="stylesheet" href="./htdocs/assets/datatables/DataTables-1.10.21/css/dataTables.bootstrap4.css"> -->
@@ -30,18 +31,18 @@
 
   <!-- Icons -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-  
-  <!-- Alertify -->
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>  
-  
 
-  
+  <!-- Alertify -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+
+
+
 </head>
 
 <body class="">
   <div class="wrapper ">
-   
+
     <?php include('./admin_componentes/sidebar.php'); ?>
 
     <div class="main-panel" id="main-panel">
@@ -54,7 +55,7 @@
               <div class="card-header">
                 <h4 class="card-title">Usuarios Registrados</h4>
                 <!-- <a class="btn btn-primary" href="crearUsuarios1.php" role="button">Crear Usuario</a> -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCrearUsuarios">Crear Usuarios</button>                
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCrearUsuarios">Crear Usuarios</button>
                 <!-- <a class="btn btn-primary" role="button" href='crearUsuarios.php' <i class='large material-icons' data-toggle='tooltip' title='Adicionar' style='color:rgb(0, 154, 68)'>how_to_reg</i></a> -->
               </div>
               <div class="card-body">
@@ -73,21 +74,20 @@
                       </tr>
                     </thead>
                     <tbody>
-                     
+
                     </tbody>
-                  </table>      
+                  </table>
                 </div>
               </div>
             </div>
-          </div>      
+          </div>
         </div>
-      </div>                
+      </div>
       <?php include('./admin_componentes/footer.php'); ?>
     </div>
   </div>
-  
-  
-  
+
+
   <!--   Core JS Files   -->
   <!-- <script src="../assets/js/core/jquery.min.js"></script> -->
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -102,10 +102,10 @@
   <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
   <!-- Chart JS -->
   <script src="../assets/js/plugins/chartjs.min.js"></script>
- 
+
   <!--  Notifications Plugin    -->
   <script src="../assets/js/plugins/bootstrap-notify.js"></script>
- 
+
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script><!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
   <!-- <script src="../assets/demo/demo.js"></script> -->
@@ -114,8 +114,9 @@
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
   <!-- javascript inicializacion datatables -->
-  <script src="/admin/sistema/js/usuarios.js"></script>
+  <script src="js/usuarios.js"></script>
+  <script src="js/menu.js"></script>
 
-  </body>
+</body>
 
 </html>

@@ -235,6 +235,13 @@ function CalcularTanque(id){
     const tanque = $('#cmbTanque' + id).val();
     const cantidad = $('#txtCantidad' + id ).val();
 
+    if(cantidad>=11){
+        $('#txtTotal1').val('');
+        $('#sumaTanques').val('');
+        alertify.set("notifier","position", "top-right"); alertify.error("Supera el número de tanques");
+        return false;
+    }
+
     if(tanque == '' || cantidad == '' || cantidad == 0){
         return false;
     }
@@ -257,7 +264,8 @@ function CalcularTanque(id){
     }
     
     let cantidadLote = $('#tamanototallote').val();
-    
+    cantidadLote = formatoGeneral(cantidadLote);
+
     if(sumaTanques > cantidadLote ){
         alertify.set("notifier","position", "top-right"); alertify.error("La configuración de Tanques supera el Tamaño del lote");
         return false;

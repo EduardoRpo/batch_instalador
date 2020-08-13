@@ -163,6 +163,8 @@ function procesoTiempo(event) {
     let id = $(event.target).attr('attr-id');
     let proceso = pasos[queeProcess];
 
+    /* marcar el check del tanque siguiente y validar */
+
     if (proceso.id == id) {
         $('#tiempo_instructivo').val(tiempo);
     } else {

@@ -5,7 +5,7 @@
 
   switch($op){
     case 1: //listar parametros
-      $query_parametros = mysqli_query($conn, "SELECT * FROM preguntas");
+      $query_parametros = mysqli_query($conn, "SELECT * FROM preguntas INNER JOIN modulo");
 
     /* SELECT p.id, p.pregunta, (m.id) as id_proceso, m.modulo 
     FROM preguntas p INNER JOIN modulo m INNER JOIN modulo_pregunta mp 

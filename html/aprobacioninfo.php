@@ -258,16 +258,15 @@ include('modal/m_firma.php');
                               </td>
                             </tr>
                             <tr>
-                              <td>Viscocidad CPS</td>
-                              <td id="espec_viscidad">Especificacion del area</td>
+                              <td>Viscocidad CPS </td>
+                              <td id="espec_viscidad">Especificacion del area  </td>
                               <td><input type="number" class="selectpicker form-control" id="in_viscocidad">
                               </td>
                             </tr>
                             <tr>
-                              <td>Densidad o gravedad especifica G/ML</td>
+                              <td>Densidad o gravedad especifica G/ML <input type="text" class="form-control" style="width: 60px;" readonly></td>
                               <td id="espec_densidad">Especificacion del area</td>
-                              <td><input class="selectpicker form-control" type="number" id="in_densidad">
-                              </td>
+                              <td><input class="selectpicker form-control" type="number" id="in_densidad"></td>
                             </tr>
                             <tr>
                               <td>Untuosidad</td>

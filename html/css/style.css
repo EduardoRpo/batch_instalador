@@ -8398,6 +8398,11 @@ div.displayallinfo {
   grid-column-end: 11;
 }
 
+.tituloDesinfeccion{
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
 .imprimir{
   display: grid;
   grid-template-columns: 1fr;

@@ -38,20 +38,17 @@
                     </div>
 
                     <div class="row page">
-                        <div class="col-md-4 col-2 align-self-center">
+                        <div class="col-md-6 col-2 align-self-center">
                             <label for="recipient-name" class="col-form-label">Producto</label>
                             <input id="producto" class="displayallinfo" readonly name="producto">
                         </div>
-                        <div class="col-md-4 col-2 align-self-center">
-                            <label for="recipient-name" class="col-form-label">Presentación Comercial</label>
+
+                        <div class="col-md-3 col-2 align-self-center">
+                            <label for="recipient-name" class="col-form-label">Presentación</label>
                             <input id="presentacioncomercial" class="displayallinfo" readonly name="presentacioncomercial" style="text-align: center;" readonly>
                         </div>
-                        <!-- 
-                        <div class="col-md-1 col-2 align-self-center">
-                            <label for="recipient-name" class="col-form-label">ML</label>
-                        </div> -->
 
-                        <div class="col-md-4 col-2 align-self-center">
+                        <div class="col-md-3 col-2 align-self-center">
                             <label for="recipient-name" class="col-form-label">Linea</label>
                             <input id="linea" class="displayallinfo" readonly name="linea" readonly>
                         </div>
@@ -75,7 +72,7 @@
                         </div>
                         <div class="col-md-4 col-2 align-self-center">
                             <label for="recipient-name" class="col-form-label" type="number">Tamaño del Lote (Kg)</label>
-                            <input name="tamanototallote" id="tamanototallote" class="form-control Numeric" min="1" readonly value="" style="height: 70px; font-size: xx-large; width: 180; text-align: center" />
+                            <input name="tamanototallote" id="tamanototallote" class="form-control Numeric" min="1" readonly value="" style="height: 70px; font-size: xx-large; width: 200; text-align: center" />
                         </div>
 
                     </div>
@@ -111,7 +108,7 @@
                         <input type="number" class="form-control tnq" id="txtTotal1">
                         <button class="btn btn-warning" id="btnEliminar1" type="button" onclick="eliminarTanque(1);">X</button>
 
-                        <select class="form-control tnq" id="cmbTanque2" onchange="validarTanque(2);"></select>
+                        <!-- <select class="form-control tnq" id="cmbTanque2" onchange="validarTanque(2);"></select>
                         <input type="number" class="form-control tnq" id="txtCantidad2" onblur="CalcularTanque(2)">
                         <input type="number" class="form-control tnq" id="txtTotal2">
                         <button class="btn btn-warning" id="btnEliminar2" type="button" onclick="eliminarTanque(2);">X</button>
@@ -129,7 +126,7 @@
                         <select class="form-control tnq" id="cmbTanque5" onchange="validarTanque(5);"></select>
                         <input type="number" class="form-control tnq" id="txtCantidad5" onblur="CalcularTanque(5)">
                         <input type="number" class="form-control tnq" id="txtTotal5">
-                        <button class="btn btn-warning eliminarTanque" id="btnEliminar5" type="button" onclick="eliminarTanque(5);">X</button>
+                        <button class="btn btn-warning eliminarTanque" id="btnEliminar5" type="button" onclick="eliminarTanque(5);">X</button> -->
                         
                         <label for="" class="labelTotalTanques">Total</label>
                         <input type="number" class="form-control sumaTanques tnq" id="sumaTanques" readonly>

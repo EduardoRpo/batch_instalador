@@ -254,27 +254,27 @@
                             <tr>
                               <td>Etiquetas</td>
                               <td>Auto</td>
-                              <td> <input type="text" class="form-control" id="cantidad-name"></td>
+                              <td>Unidades con la que sc reo el Batch Record</td>
                             </tr>
                             <tr>
                               <td>Bandas</td>
                               <td>Auto</td>
-                              <td> <input type="text" class="form-control" id="cantidad-name"></td>
+                              <td>Unidades con la que sc reo el Batch Record</td>
                             </tr>
                             <tr>
                               <td>Sellos de Seguridad</td>
                               <td>Auto</td>
-                              <td> <input type="text" class="form-control" id="cantidad-name"></td>
+                              <td>Unidades con la que sc reo el Batch Record</td>
                             </tr>
                             <tr>
                               <td>Cajas</td>
                               <td>Auto</td>
-                              <td> <input type="text" class="form-control" id="cantidad-name"></td>
+                              <td> Unidades con la que se creo el Batch Record / la unidad de empaque, se aproxima por el mayor y es entero</td>
                             </tr>
                             <tr>
                               <td>Otros</td>
                               <td>Auto</td>
-                              <td> <input type="text" class="form-control" id="cantidad-name"></td>
+                              <td>Unidades con la que sc reo el Batch Record</td>
                             </tr>
 
                         </table>
@@ -429,7 +429,7 @@
                 </div>
                 <div class="conciliacionrendimiento">
                   <label for="recipient-name" class="col-form-label">Unidades Producidas:</label>
-                  <input type="number" class="form-control centrado" id="txtUnidadesProducidas">
+                  <input type="number" class="form-control centrado" id="txtUnidadesProducidas"> <!-- Este valor se valide con lo envasado por el usuario en envasado txtEnvasado1 Alert(Las unidades producidads son diferentes a las envasadas, notificar al jefe de producción) -->
 
                   <label for="recipient-name" class="col-form-label">No Muestras de Retención:</label>
                   <input type="number" class="form-control centrado" id="txtMuestras-Retencion" onkeyup="conciliacionRendimiento(this.value);"><!-- impresion etiquetas para muestras (No produccion, lote, cod barras, cod producto, fecha ) -->
@@ -450,7 +450,7 @@
                   <input type="number" class="form-control centrado" id="txtNoMovimiento">
 
                   <label for="recipient-name" class="col-form-label">Responsable Movimiento Ofimatica:</label>
-                  <input type="text" class="form-control centrado" id="txtReponsable">
+                  <input type="text" class="form-control centrado" id="txtReponsable" value="Director de Producción (CRC)" readonly>
 
                 </div>
                 <div class="firma mt-5">

@@ -293,7 +293,7 @@ include('modal/m_muestras.php');
                       </select>
 
                       <label for="recipient-name" class="col-form-label">Digite el lote requerido</label>
-                      <input type="text" class="form-control">
+                      <input type="text" class="form-control" onclick="validarLote(this.value);">
 
                       <label for="recipient-name" class="col-form-label envasadora">Identificación Envasadora</label>
                       <input type="text" class="form-control txtEnvasadora" readonly>

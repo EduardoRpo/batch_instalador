@@ -6,7 +6,7 @@
       </div>
       <div class="modal-body">
         <div class="condicionesMedio">
-          
+          <label class="tituloDesinfeccion"><strong>Recuerde mínimo cada 2 horas hacer aspersión desinfectante en el área</strong></label>
           <!-- <input type="date" id="" class="form-control mb-3 fechaCondicionesMedio" readonly> -->
           <img src="../../assets/images/icon/termometro.png" alt="Temperatura" width="25px">
           <label>Temperatura</label>
