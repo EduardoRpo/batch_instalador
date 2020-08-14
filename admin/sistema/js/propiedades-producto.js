@@ -1,15 +1,26 @@
-
-/* Mostrar Menu seleccionadp */
+/* Mostrar Menu seleccionado */
 
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#link2').css('text-decoration', 'revert')
+$('#link5').css('text-decoration', 'revert')
 $('.contenedor-menu .menu ul.abrir').show();
 
-
-/* Cargue de Parametros de Condiciones del medio */
-
 $(document).ready(function () {
-    $("#listarDesinfectante").DataTable({
+    let tabla;
+    for (i = 1; i < 9; i++) {
+        tabla = $(`#tbl${i}`);
+        if (i <= 4)
+            cargarTablas(tabla, i);
+        else
+            cargarTablas2(tabla, i);
+
+
+    }
+})
+
+/* Cargue de Nombre Productos*/
+
+function cargarTablas(tabla, operacion) {
+    $(tabla).DataTable({
         scrollY: '50vh',
         scrollCollapse: true,
         paging: false,
@@ -17,28 +28,77 @@ $(document).ready(function () {
 
         "ajax": {
             method: "POST",
-            url: "php/c_desinfectante.php",
-            data: { operacion: "1" },
+            url: "php/c_propiedades-producto.php",
+            data: { operacion: operacion },
         },
 
         "columns": [
             { "data": "id" },
             { "data": "nombre" },
-            { "data": "concentracion" },
             { "defaultContent": "<a href='#' <i class='large material-icons link-editar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
             { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" }
 
         ]
     });
-});
+};
+
+
+function cargarTablas2(tabla, operacion) {
+    $(tabla).DataTable({
+        scrollY: '50vh',
+        scrollCollapse: true,
+        paging: false,
+        language: { url: 'admin_componentes/es-ar.json' },
+
+        "ajax": {
+            method: "POST",
+            url: "php/c_propiedades-producto.php",
+            data: { operacion: operacion },
+        },
+
+        "columns": [
+            { "data": "id" },
+            { "data": "min" },
+            { "data": "max" },
+            { "defaultContent": "<a href='#' <i class='large material-icons link-editar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
+            { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" }
+
+        ]
+    });
+};
 
 /* Ocultar */
 
-$('#adDesinfectante').click(function (e) {
+$('#adNombreProducto').click(function (e) {
     e.preventDefault();
     $("#frmadParametro").slideToggle();
-
+    cargarSelectorLinea();
 });
+
+function cargarSelectorLinea() {
+
+    $.ajax({
+        method: 'POST',
+        url: 'php/c_maquinaria.php',
+        data: { operacion: "4" },
+
+        success: function (response) {
+            var info = JSON.parse(response);
+
+            let $select = $('#cmbLinea');
+            $select.empty();
+
+            $select.append('<option disabled selected>' + "Seleccionar" + '</option>');
+
+            $.each(info, function (i, value) {
+                $select.append('<option value ="' + value.id + '">' + value.linea + '</option>');
+            });
+        },
+        error: function (response) {
+            console.log(response);
+        }
+    })
+}
 
 /* Borrar registros */
 

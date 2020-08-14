@@ -50,33 +50,34 @@
       <div class="panel-header panel-header-sm"></div>
       <div class="content">
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-10">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title">Máquinas Registradas</h4>
+                <h4 class="card-title">Equipos Registrados</h4>
                 <!-- <a class="btn btn-primary" href="crearUsuarios1.php" role="button">Crear Usuario</a> -->
                 <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCrearUsuarios">Crear Usuarios</button> -->
                 <!-- <a class="btn btn-primary" role="button" href='crearUsuarios.php' <i class='large material-icons' data-toggle='tooltip' title='Adicionar' style='color:rgb(0, 154, 68)'>how_to_reg</i></a> -->
                 <hr>
-                <button type="button" class="btn btn-primary" id="adLineas">Adicionar Máquina</button>
-                <form id="frmadLineas" style="display: none;">
+                <button type="button" class="btn btn-primary" id="adEquipos">Adicionar Equipos</button>
+                <form id="frmadParametro" style="display: none;">
+                  <label for=""><b>Equipo</b></label>
                   <label for=""><b>Línea</b></label>
-                  <label for=""><b>Densidad</b></label>
                   
-                  <input type="text" name="linea" id="linea" class="form-control" placeholder="Linea">
-                  <input type="number" name="densidad" id="densidad" class="form-control" placeholder="Densidad">
-                  <button type="button" class="btn btn-primary" id="guardarLineas">Guardar</button>
+                  <input type="text" name="equipo" id="txtEquipo" class="form-control" placeholder="Linea">
+                  
+                  <select name="linea" id="cmbLinea" class="form-control"></select>
+                  <button type="button" class="btn btn-primary" id="guardarEquipos">Guardar</button>
                 </form>
                 <hr>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="listarLineas" class="table-striped row-borde" style="width:100%">
+                  <table id="listarEquipos" class="table-striped row-borde" style="width:100%">
                     <thead>
                       <tr>
                         <th>id</th>
-                        <th>Línea</th>
-                        <th>Densidad</th>
+                        <th>Equipo</th>
+                        <th>Linea</th>
                         <th>Actualizar</th>
                         <th>Eliminar</th>
                       </tr>
@@ -122,7 +123,7 @@
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
   <!-- javascript inicializacion datatables -->
-  <script src="js/lineas.js"></script>
+  <script src="js/maquinaria.js"></script>
   <script src="js/menu.js"></script>
 
 </body>

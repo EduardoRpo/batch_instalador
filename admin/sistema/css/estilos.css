@@ -30,7 +30,7 @@
 
 /* Organizar inputs y label para establecer tiempos */
 
-#frmadDesinfectante {
+#frmadParametro {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 1em;
@@ -58,7 +58,7 @@
 
 /* organizar adicionar lineas */
 
-#frmadLineas {
+/* #frmadLineas {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 1em;
@@ -67,7 +67,7 @@
   justify-items: center;
   align-items: baseline;
   justify-content: center;
-}
+} */
 
 #linea {
   grid-column-start: 1;
@@ -82,4 +82,15 @@
 #guardarDesinfectante {
   grid-column-start: 3;
   grid-column-end: 4;
+}
+
+/* organizar maquinaria */
+#txtEquipo {
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+#cmbLinea {
+  grid-column-start: 2;
+  grid-column-end: 3;
 }

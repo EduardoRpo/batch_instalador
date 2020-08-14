@@ -1,13 +1,13 @@
-/* Mostrar Menu seleccionado */
+/* Mostrar Menu seleccionadp */
 
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#link7').css('text-decoration', 'revert')
-$('.contenedor-menu .menu ul.abrir').show();
+$('#link18').css('text-decoration', 'revert')
+$('.contenedor-menu .menu ul.abrir2').show();
 
 /* Cargue de Parametros de Control en DataTable */
 
 $(document).ready(function() {
-    $("#listarDespeje").DataTable({
+    $("#tblCargos").DataTable({
         scrollY:        '50vh',
         scrollCollapse: true,
         paging:         false,
@@ -15,15 +15,13 @@ $(document).ready(function() {
 
         "ajax":{
             method : "POST",
-            url : "php/operacionesDespejedelinea.php",
+            url : "php/c_cargos.php",
             data : {operacion : "1"},
         },
 
         "columns":[
             {"data": "id"},
-            {"data": "pregunta"},
-            {"data": "resp"},
-            {"data": "modulo"},
+            {"data": "cargo"},
             {"defaultContent": "<a href='#' <i class='large material-icons link-editar' style='color:rgb(255, 165, 0)'>edit</i></a>"},
             {"defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>"}
             
@@ -31,42 +29,50 @@ $(document).ready(function() {
     });
 });
 
+/* Ocultar */
+
+$('#adCargo').click(function (e) {
+    e.preventDefault();
+    $("#frmadParametro").slideToggle();
+   
+});
+
 
 /* Borrar registros */
 
-$(document).on('click', '.link-borrar', function(e){
+$(document).on('click', '.link-borrar', function (e) {
     e.preventDefault();
-    
+
     let id = $(this).parent().parent().children().first().text();
- 
-    var confirm= alertify.confirm('Samara Cosmetics','¿Está seguro de eliminar este registro?',null,null).set('labels', {ok:'Si', cancel:'No'}); 	
- 
-    confirm.set('onok', function(r){ 
-        if(r){
+
+    var confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este registro?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
+
+    confirm.set('onok', function (r) {
+        if (r) {
             $.ajax({
-                'method' : 'POST',
-                'url' : 'php/operacionesDespejedelinea.php',
-                'data':{operacion : "2", id : id}
+                'method': 'POST',
+                'url': 'php/operacionesDespejedelinea.php',
+                'data': { operacion: "2", id: id }
             });
             refreshTable();
             alertify.success('Registro Eliminado');
         }
-    });       
+    });
 });
 
 /* Cargar datos para Actualizar registros */
 
-$(document).on('click', '.link-editar', function(e){
+$(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
     let id = $(this).parent().parent().children().first().text();
 
     $.ajax({
         method: 'POST',
-        url : 'php/operacionesDespejedelinea.php',
-        data: {operacion : "3", id : id},  
-    
-        success: function(response){
-            var info = JSON.parse(response);            
+        url: 'php/operacionesDespejedelinea.php',
+        data: { operacion: "3", id: id },
+
+        success: function (response) {
+            var info = JSON.parse(response);
             $('#pregunta').val(info.pregunta);
             $('#resp').val(info.resp);
             $('#btnguardarPregunta').html('Actualizar');
@@ -74,7 +80,7 @@ $(document).on('click', '.link-editar', function(e){
             $('#modalDespejedeLinea').modal('show');
             refreshTable();
         },
-        error: function(response){
+        error: function (response) {
             console.log(response);
         }
     });
@@ -83,8 +89,8 @@ $(document).on('click', '.link-editar', function(e){
 
 /* Almacenar Registros */
 
-$(document).ready(function(){
-    $('#btnguardarPregunta').click(function(e){
+$(document).ready(function () {
+    $('#btnguardarPregunta').click(function (e) {
         e.preventDefault();
         var datos = $('#frmpreguntas').serialize();
         $.ajax({
@@ -92,12 +98,12 @@ $(document).ready(function(){
             url: "php/operacionesDespejedelinea.php",
             data: datos,
             //data: {operacion : "3", id : id},
-            success: function(r){
-                if(r==1){
-                    alertify.set("notifier","position", "top-right"); alertify.success("Agregado con éxito.");
+            success: function (r) {
+                if (r == 1) {
+                    alertify.set("notifier", "position", "top-right"); alertify.success("Agregado con éxito.");
                     document.getElementById("frmagregarUsuarios").reset();
-                }else{
-                    alertify.set("notifier","position", "top-right"); alertify.error("Usuario No Registrado.");
+                } else {
+                    alertify.set("notifier", "position", "top-right"); alertify.error("Usuario No Registrado.");
                 }
             }
         });
@@ -114,9 +120,9 @@ function refreshTable() {
 }
 
 
-/*      var confirm= alertify.confirm('Samara Cosmetics','¿Está seguro de actualizar este registro?',null,null).set('labels', {ok:'Si', cancel:'No'}); 	
- 
-     confirm.set('onok', function(r){ 
+/*      var confirm= alertify.confirm('Samara Cosmetics','¿Está seguro de actualizar este registro?',null,null).set('labels', {ok:'Si', cancel:'No'});
+
+     confirm.set('onok', function(r){
          if(r){
              $.ajax({
                  'method' : 'GET',

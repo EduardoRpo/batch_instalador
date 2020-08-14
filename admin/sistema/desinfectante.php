@@ -50,7 +50,7 @@
       <div class="panel-header panel-header-sm"></div>
       <div class="content">
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-6">
             <div class="card">
               <div class="card-header">
                 <h4 class="card-title">Desinfectantes Registrados</h4>
@@ -59,7 +59,7 @@
                 <!-- <a class="btn btn-primary" role="button" href='crearUsuarios.php' <i class='large material-icons' data-toggle='tooltip' title='Adicionar' style='color:rgb(0, 154, 68)'>how_to_reg</i></a> -->
                 <hr>
                 <button type="button" class="btn btn-primary" id="adDesinfectante">Adicionar Desinfectante</button>
-                <form id="frmadDesinfectante" style="display: none;">
+                <form id="frmadParametro" style="display: none;">
                   <label for=""><b>Desinfectante</b></label>
                   <label for=""><b>Concentracion</b></label>
                   

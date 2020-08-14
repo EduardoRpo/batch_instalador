@@ -1,3 +1,7 @@
+$('.contenedor-menu .menu a').removeAttr('style');
+$('#link4').css('text-decoration', 'revert')
+$('.contenedor-menu .menu ul.abrir').show();
+
 /* Cargue de lineas*/
 
 $(document).ready(function () {
@@ -28,7 +32,7 @@ $(document).ready(function () {
 
 $('#adLineas').click(function (e) {
     e.preventDefault();
-    $("#frmadLineas").slideToggle();
+    $("#frmadParametro").slideToggle();
     
 });
 

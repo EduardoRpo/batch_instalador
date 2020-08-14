@@ -1,15 +1,13 @@
-
-/* Mostrar Menu seleccionadp */
+/* Mostrar Menu seleccionado */
 
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#link2').css('text-decoration', 'revert')
+$('#link8').css('text-decoration', 'revert')
 $('.contenedor-menu .menu ul.abrir').show();
-
 
 /* Cargue de Parametros de Condiciones del medio */
 
 $(document).ready(function () {
-    $("#listarDesinfectante").DataTable({
+    $("#listarTanques").DataTable({
         scrollY: '50vh',
         scrollCollapse: true,
         paging: false,
@@ -17,14 +15,13 @@ $(document).ready(function () {
 
         "ajax": {
             method: "POST",
-            url: "php/c_desinfectante.php",
+            url: "php/c_tanques.php",
             data: { operacion: "1" },
         },
 
         "columns": [
             { "data": "id" },
-            { "data": "nombre" },
-            { "data": "concentracion" },
+            { "data": "capacidad" },
             { "defaultContent": "<a href='#' <i class='large material-icons link-editar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
             { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" }
 
@@ -34,11 +31,36 @@ $(document).ready(function () {
 
 /* Ocultar */
 
-$('#adDesinfectante').click(function (e) {
+$('#adTanques').click(function (e) {
     e.preventDefault();
     $("#frmadParametro").slideToggle();
-
+    cargarSelectorModulo();
 });
+
+function cargarSelectorModulo() {
+
+    $.ajax({
+        method: 'POST',
+        url: 'php/c_condiciones.php',
+        data: { operacion: "7" },
+
+        success: function (response) {
+            var info = JSON.parse(response);
+
+            let $select = $('#moduloCondiciones');
+            $select.empty();
+
+            $select.append('<option disabled selected>' + "Seleccionar" + '</option>');
+
+            $.each(info, function (i, value) {
+                $select.append('<option value ="' + value.id + '">' + value.modulo + '</option>');
+            });
+        },
+        error: function (response) {
+            console.log(response);
+        }
+    })
+}
 
 /* Borrar registros */
 
@@ -117,8 +139,8 @@ $(document).ready(function () {
 /* Actualizar tabla */
 
 function refreshTable() {
-    $('#listarDespeje').DataTable().clear();
-    $('#listarDespeje').DataTable().ajax.reload();
+    $('#listarCondiciones').DataTable().clear();
+    $('#listarCondiciones').DataTable().ajax.reload();
 }
 
 

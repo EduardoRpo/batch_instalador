@@ -50,7 +50,7 @@
       <div class="panel-header panel-header-sm"></div>
       <div class="content">
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-6">
             <div class="card">
               <div class="card-header">
                 <h4 class="card-title">Lineas Registradas</h4>
@@ -59,7 +59,7 @@
                 <!-- <a class="btn btn-primary" role="button" href='crearUsuarios.php' <i class='large material-icons' data-toggle='tooltip' title='Adicionar' style='color:rgb(0, 154, 68)'>how_to_reg</i></a> -->
                 <hr>
                 <button type="button" class="btn btn-primary" id="adLineas">Adicionar Linea</button>
-                <form id="frmadLineas" style="display: none;">
+                <form id="frmadParametro" style="display: none;">
                   <label for=""><b>Línea</b></label>
                   <label for=""><b>Densidad</b></label>
                   

@@ -11,7 +11,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>Samara Cosmetics | Condiciones del Medio</title>
+  <title>Samara Cosmetics | tanques</title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
 
   <!--     Fonts and icons     -->
@@ -53,34 +53,28 @@
           <div class="col-md-6">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title">Condiciones del Medio</h4>
+                <h4 class="card-title">Tanques</h4>
                 <!-- <a class="btn btn-primary" href="crearUsuarios1.php" role="button">Crear Usuario</a> -->
                 <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCrearUsuarios">Crear Usuarios</button> -->
                 <!-- <a class="btn btn-primary" role="button" href='crearUsuarios.php' <i class='large material-icons' data-toggle='tooltip' title='Adicionar' style='color:rgb(0, 154, 68)'>how_to_reg</i></a> -->
                 <hr>
-                <button type="button" class="btn btn-primary" id="adTiempos">Adicionar Tiempos</button>
-                <form id="frmadTiempos" style="display: none;">
-                  <label for=""><b>Modulo</b></label>
-                  <label for=""><b>Tiempo Mínimo</b></label>
-                  <label for=""><b>Tiempo Máximo</b></label>
-                  <select name="moduloCondiciones" id="moduloCondiciones" class="form-control"></select>
-                  <input type="number" name="t_min" id="t_min" class="form-control" placeholder="Tiempos Mínimos">
-                  <input type="number" name="t_max" id="t_max" class="form-control" placeholder="Tiempos Máximos">
-                  <button type="button" class="btn btn-primary" id="guardarCondiciones">Guardar</button>
+                <button type="button" class="btn btn-primary" id="adTanques">Adicionar Tanque</button>
+                <form id="frmadParametro" style="display: none;">
+                  <label for=""><b>Capacidad</b></label>                  
+                  <input type="text" name="txtcCapacidad" id="txtcCapacidad" class="form-control" placeholder="Capacidad">
+                  <button type="button" class="btn btn-primary" id="guardarLineas">Guardar</button>
                 </form>
                 <hr>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="listarCondiciones" class="table-striped row-borde" style="width:100%">
+                  <table id="listarTanques" class="table-striped row-borde" style="width:100%">
                     <thead>
                       <tr>
                         <th>id</th>
-                        <th>Módulos</th>
-                        <th>Tiempo Mínimo</th>
-                        <th>Tiempos Máximo</th>
-                        <th></th>
-                        <th></th>
+                        <th>Capacidad</th>
+                        <th>Actualizar</th>
+                        <th>Eliminar</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -124,7 +118,7 @@
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
   <!-- javascript inicializacion datatables -->
-  <script src="js/condiciones.js"></script>
+  <script src="js/tanques.js"></script>
   <script src="js/menu.js"></script>
 
 </body>

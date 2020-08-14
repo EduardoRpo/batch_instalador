@@ -1,3 +1,8 @@
+/* Mostrar Menu seleccionado */
+
+$('.contenedor-menu .menu a').removeAttr('style');
+$('#link1').css('text-decoration', 'revert')
+$('.contenedor-menu .menu ul.abrir').show();
 
 /* Cargue de Parametros de Condiciones del medio */
 
@@ -136,8 +141,8 @@ $(document).ready(function () {
 /* Actualizar tabla */
 
 function refreshTable() {
-    $('#listarDespeje').DataTable().clear();
-    $('#listarDespeje').DataTable().ajax.reload();
+    $('#listarCondiciones').DataTable().clear();
+    $('#listarCondiciones').DataTable().ajax.reload();
 }
 
 

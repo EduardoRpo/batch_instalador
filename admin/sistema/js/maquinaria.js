@@ -1,15 +1,15 @@
-
-/* Mostrar Menu seleccionadp */
+/* Mostrar Menu seleccionado */
 
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#link2').css('text-decoration', 'revert')
+$('#link5').css('text-decoration', 'revert')
 $('.contenedor-menu .menu ul.abrir').show();
 
+/* Cargue de Equipos*/
 
-/* Cargue de Parametros de Condiciones del medio */
+let data = 1;
 
 $(document).ready(function () {
-    $("#listarDesinfectante").DataTable({
+    $("#listarEquipos").DataTable({
         scrollY: '50vh',
         scrollCollapse: true,
         paging: false,
@@ -17,14 +17,14 @@ $(document).ready(function () {
 
         "ajax": {
             method: "POST",
-            url: "php/c_desinfectante.php",
-            data: { operacion: "1" },
+            url: "php/c_maquinaria.php",
+            data: { operacion: data },
         },
 
         "columns": [
             { "data": "id" },
-            { "data": "nombre" },
-            { "data": "concentracion" },
+            { "data": "maquina" },
+            { "data": "nombre_linea" },
             { "defaultContent": "<a href='#' <i class='large material-icons link-editar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
             { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" }
 
@@ -34,11 +34,36 @@ $(document).ready(function () {
 
 /* Ocultar */
 
-$('#adDesinfectante').click(function (e) {
+$('#adEquipos').click(function (e) {
     e.preventDefault();
     $("#frmadParametro").slideToggle();
-
+    cargarSelectorLinea();
 });
+
+function cargarSelectorLinea() {
+
+    $.ajax({
+        method: 'POST',
+        url: 'php/c_maquinaria.php',
+        data: { operacion: "4" },
+
+        success: function (response) {
+            var info = JSON.parse(response);
+
+            let $select = $('#cmbLinea');
+            $select.empty();
+
+            $select.append('<option disabled selected>' + "Seleccionar" + '</option>');
+            
+            $.each(info, function (i, value) {
+                $select.append('<option value ="' + value.id + '">' + value.linea + '</option>');
+            });
+        },
+        error: function (response) {
+            console.log(response);
+        }
+    })
+}
 
 /* Borrar registros */
 
