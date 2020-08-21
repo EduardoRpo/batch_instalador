@@ -1,7 +1,7 @@
 <?php
 require_once('../../../conexion.php');
 
-$query_productos = mysqli_query($conn, "SELECT p.referencia, p.nombre_referencia, p.unidad_empaque, np.nombre_producto as producto, ns.notificacion_sanitaria as notificacion, linea.nombre_linea as linea 
+$query_productos = mysqli_query($conn, "SELECT p.referencia, p.nombre_referencia, p.unidad_empaque, np.nombre as producto, ns.nombre as notificacion, linea.nombre as linea 
                                         FROM producto p INNER JOIN nombre_producto np INNER JOIN notificacion_sanitaria ns INNER JOIN linea 
                                         ON np.id = p.id_nombre_producto AND linea.id = p.id_linea AND ns.id = p.id_notificacion_sanitaria");
 

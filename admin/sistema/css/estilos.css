@@ -1,3 +1,9 @@
+/* centrar el texto */
+
+.centrado {
+  text-align: center;
+}
+
 /* no muestra las viñetas */
 
 .contenedor-menu ul {
@@ -23,14 +29,19 @@
   justify-content: center;
 }
 
-#guardarCondiciones {
+/* #txtModulo {
+  grid-column-start: 1;
+  grid-column-end: 2;
+} */
+
+#btnguardarCondiciones {
   grid-column-start: 3;
   grid-column-end: 4;
 }
 
 /* Organizar inputs y label para establecer tiempos */
 
-#frmadParametro {
+form.frmAdicionar{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 1em;
@@ -56,19 +67,6 @@
   grid-column-end: 4;
 }
 
-/* organizar adicionar lineas */
-
-/* #frmadLineas {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 1em;
-  margin: 10px;
-  text-align: center;
-  justify-items: center;
-  align-items: baseline;
-  justify-content: center;
-} */
-
 #linea {
   grid-column-start: 1;
   grid-column-end: 2;
@@ -93,4 +91,39 @@
 #cmbLinea {
   grid-column-start: 2;
   grid-column-end: 3;
+}
+
+/* organizar adicionar Formula */
+
+#frmadFormulas {
+  display: grid;
+  grid-template-columns: 120px repeat(2, 1fr) 100px;
+  grid-gap: 1em;
+  margin: 10px;
+  text-align: center;
+  justify-items: center;
+  align-items: baseline;
+  justify-content: center;
+}
+
+#guardarFormula {
+  grid-column-start: 4;
+  grid-column-end: 5;
+}
+
+#frmaddMP {
+  display: grid;
+  grid-template-columns: 100px repeat(2, 1fr);
+  grid-gap: 1em;
+  margin: 10px;
+  text-align: center;
+  justify-items: center;
+  align-items: baseline;
+  justify-content: center;
+}
+
+#guardarMP {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  justify-self: self-end;
 }

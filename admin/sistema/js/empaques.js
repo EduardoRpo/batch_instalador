@@ -1,19 +1,26 @@
 /* Mostrar Menu seleccionado */
 
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#link5').css('text-decoration', 'revert')
-$('.contenedor-menu .menu ul.abrir').show();
+$('#link13').css('text-decoration', 'revert')
+$('.contenedor-menu .menu ul.abrir1').show();
+
+/* Mostrar cada parametro */
+
+function parametros(card) {
+    $(`#${card}`).toggle();
+}
+
+/* Cargar tablas */
 
 $(document).ready(function () {
     let tabla;
     for (i = 1; i < 9; i++) {
+        $(`#${i}`).hide();
         tabla = $(`#tbl${i}`);
         if (i <= 4)
             cargarTablas(tabla, i);
         else
             cargarTablas2(tabla, i);
-
-
     }
 })
 
@@ -28,7 +35,7 @@ function cargarTablas(tabla, operacion) {
 
         "ajax": {
             method: "POST",
-            url: "php/c_propiedades-producto.php",
+            url: "php/c_empaque.php",
             data: { operacion: operacion },
         },
 

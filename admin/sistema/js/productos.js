@@ -29,7 +29,54 @@ $(document).ready(function () {
       { "data": "notificacion" },
       { "data": "linea" },
       /* {"defaultContent": "<a href='crearUsuarios.php' <i class='large material-icons' data-toggle='tooltip' title='Adicionar' style='color:rgb(0, 154, 68)'>how_to_reg</i></a>"}, */
-      
+
     ]
   });
 });
+
+function cargarDatosProductos() {
+  var sel = [];
+  var j = 0;
+  var c = 5;
+
+  $('#m_productos').modal('show');
+
+  $('select').each(function () {
+    sel.push($(this).prop('id'))
+  })
+
+  for (i = 1; i < sel.length; i++) {
+    propiedad = sel[j];
+    debugger;
+    cargarselectores(propiedad, c);
+    //c++;
+    j++;
+  }
+
+}
+
+function cargarselectores(selector, data) {
+  debugger;
+  $.ajax({
+    method: 'POST',
+    url: 'php/c_productos.php',
+    data: { tabla: selector, operacion: data },
+
+    success: function (response) {
+      var info = JSON.parse(response);
+      console.log(info);
+
+      let $select = $(`#${selector}`);
+      $select.empty();
+
+      $select.append('<option disabled selected>' + "Seleccionar" + '</option>');
+
+      $.each(info.data, function (i, value) {
+        $select.append('<option value ="' + i + '">' + value.nombre + '</option>');
+      });
+    },
+    error: function (response) {
+      console.log(response);
+    }
+  })
+}

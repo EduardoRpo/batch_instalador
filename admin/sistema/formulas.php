@@ -1,6 +1,7 @@
-<?php 
-  include_once('./modal/m_productos.php');
+<?php
+//include('./modal/m_crearUsuarios.php');
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -10,7 +11,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>Samara Cosmetics | Actualizar/Adicionar</title>
+  <title>Samara Cosmetics | formulas</title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
 
   <!--     Fonts and icons     -->
@@ -27,6 +28,7 @@
   <link rel="stylesheet" href="./htdocs/assets/datatables/DataTables-1.10.21/css/dataTables.bootstrap4.css"> -->
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
 
+
   <!-- Icons -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 
@@ -34,8 +36,8 @@
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
 
-  <!-- CSS Just for demo purpose, don't include it in your project -->
-  <!-- <link href="../assets/demo/demo.css" rel="stylesheet" /> -->
+
+
 </head>
 
 <body class="">
@@ -45,46 +47,65 @@
 
     <div class="main-panel" id="main-panel">
       <?php include('./admin_componentes/navegacion.php'); ?>
-      <div class="panel-header panel-header-sm"></div>
+      <div class="panel-header panel-header-sm">
+
+      </div>
+
       <div class="content">
         <div class="row">
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title"> <strong>Productos Registrados</strong></h4>
-                <!-- <a class="btn btn-primary" href="crearUsuarios.php" role="button">Crear Producto</a> -->
-                <button type="button" class="btn btn-primary" onclick="cargarDatosProductos();">Crear Productos</button>
+                <h5 class="title">Formulas</h5>
+                <p class="category">Samara Cosmetics <a href=""></a></p>
               </div>
               <div class="card-body">
+                <select name="cmbReferenciaProductos" id="cmbReferenciaProductos" class="form-control" style="width: 200px;"></select>
+                <input type="text" class="form-control">
+                <hr>
+                <button type="button" class="btn btn-primary" id="addFormula">Adicionar</button>
+                <form id="frmadFormulas" style="display: none;">
+                  <label for=""><b>Referencia</b></label>
+                  <label for="">Materia Prima</label>
+                  <label for="">Alias</label>
+                  <label for="">%</label>
+
+                  <select name="" id="cmbreferencia" class="form-control"></select>
+                  <input type="text" name="txtMateria-Prima" id="txtMateria-Prima" class="form-control" placeholder="Materia Prima">
+                  <input type="text" name="alias" id="alias" class="form-control" placeholder="alias">
+                  <input type="number" name="porcentaje" id="porcentaje" class="form-control" placeholder="%">
+                  <button type="button" class="btn btn-primary" id="guardarFormula">Guardar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card" id="1">
+              <!-- <div class="card-header">
+                <h4 class="card-title">Formulas</h4>
+                <hr>
+                <button type="button" class="btn btn-primary" id="addFormula">Adicionar</button>
+                <form id="frmadParametro" style="display: none;">
+                  <label for=""><b>Nombre Producto</b></label>
+                  <input type="text" name="nombreProducto" id="nombreProducto" class="form-control" placeholder="Nombre Producto">
+                  <button type="button" class="btn btn-primary" id="guardarFormula">Guardar</button>
+                </form>
+                <hr>
+              </div> -->
+              <div class="card-body">
                 <div class="table-responsive">
-                  <table id="listarProductos" class="table-striped row-borde" style="width:100%">
+                  <table id="tblFormulas" class="table-striped row-borde" style="width:100%">
                     <thead>
                       <tr>
-                        <th></th>
-                        <th></th>
                         <th>Referencia</th>
-                        <th>Nombre</th>
-                        <th>Unidad Empaque</th>
-                        <th>Producto</th>
-                        <th>Notificación Sanitaria</th>
-                        <th>Linea</th>
-
-
-                        <!--  <th>Marca</th>
-                        <th>Propietario</th>
-                        <th>Presentación</th>
-                        <th>Color</th>
-                        <th>Apariencia</th>
-                        <th>Untuosidad</th>
-                        <th>Poder Espumoso</th>
-                        <th>Recuento Mesofilos</th>
-                        <th>Pseudomona</th>
-                        <th>Escherichia</th>
-                        <th>Staphylococcus</th>
-                        <th>PH</th>
-                        <th>Viscosidad</th>
-                        <th>Densidad</th>
-                        <th>Alcohol</th> -->
+                        <th>Materia Prima</th>
+                        <th>Alias</th>
+                        <th>Porcentaje</th>
+                        <th></th>
+                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -100,7 +121,6 @@
       <?php include('./admin_componentes/footer.php'); ?>
     </div>
   </div>
-
 
 
   <!--   Core JS Files   -->
@@ -129,7 +149,7 @@
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
   <!-- javascript inicializacion datatables -->
-  <script src="js/productos.js"></script>
+  <script src="js/formulas.js"></script>
   <script src="js/menu.js"></script>
 
 </body>

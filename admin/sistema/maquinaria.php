@@ -78,8 +78,8 @@
                         <th>id</th>
                         <th>Equipo</th>
                         <th>Linea</th>
-                        <th>Actualizar</th>
-                        <th>Eliminar</th>
+                        <th></th>
+                        <th></th>
                       </tr>
                     </thead>
                     <tbody>

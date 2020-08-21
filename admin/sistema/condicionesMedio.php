@@ -50,23 +50,26 @@
       <div class="panel-header panel-header-sm"></div>
       <div class="content">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-8">
             <div class="card">
               <div class="card-header">
                 <h4 class="card-title">Condiciones del Medio</h4>
+                <p class="category">Tiempos<a href=""></a></p>
                 <!-- <a class="btn btn-primary" href="crearUsuarios1.php" role="button">Crear Usuario</a> -->
                 <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCrearUsuarios">Crear Usuarios</button> -->
                 <!-- <a class="btn btn-primary" role="button" href='crearUsuarios.php' <i class='large material-icons' data-toggle='tooltip' title='Adicionar' style='color:rgb(0, 154, 68)'>how_to_reg</i></a> -->
                 <hr>
-                <button type="button" class="btn btn-primary" id="adTiempos">Adicionar Tiempos</button>
+                <button type="button" class="btn btn-primary" id="adTiempos">Adicionar</button>
                 <form id="frmadTiempos" style="display: none;">
                   <label for=""><b>Modulo</b></label>
-                  <label for=""><b>Tiempo Mínimo</b></label>
-                  <label for=""><b>Tiempo Máximo</b></label>
+                  <label for=""><b>Tiempo Mín</b></label>
+                  <label for=""><b>Tiempo Máx</b></label>
                   <select name="moduloCondiciones" id="moduloCondiciones" class="form-control"></select>
-                  <input type="number" name="t_min" id="t_min" class="form-control" placeholder="Tiempos Mínimos">
-                  <input type="number" name="t_max" id="t_max" class="form-control" placeholder="Tiempos Máximos">
-                  <button type="button" class="btn btn-primary" id="guardarCondiciones">Guardar</button>
+                  <input type="text" name="txtModulo" class="form-control centrado" readonly>
+                  <!-- <input type="text" name="txt" id="idRegistro" class="form-control" readonly hidden> -->
+                  <input type="number" name="t_min" id="t_min" class="form-control centrado" placeholder="Tiempos Mínimos" required>
+                  <input type="number" name="t_max" id="t_max" class="form-control centrado" placeholder="Tiempos Máximos" required>
+                  <button type="button" class="btn btn-primary" id="btnguardarCondiciones">Guardar</button>
                 </form>
                 <hr>
               </div>

@@ -5,7 +5,7 @@ $op = $_POST['operacion'];
 
 switch($op){
   case 1: //listar Equipos
-    $query_lineas = mysqli_query($conn, "SELECT m.id, m.maquina, l.nombre_linea 
+    $query_lineas = mysqli_query($conn, "SELECT m.id, m.maquina, l.nombre 
                                         FROM maquinaria m 
                                         INNER JOIN linea l ON l.id = m.linea 
                                         ORDER BY m.id ASC");
@@ -53,7 +53,7 @@ switch($op){
   break;
 
   case 4: //listar lineas
-    $query_lineas = mysqli_query($conn, "SELECT id, nombre_linea as linea FROM linea");
+    $query_lineas = mysqli_query($conn, "SELECT id, nombre as linea FROM linea");
     
     $result = mysqli_num_rows($query_lineas);
     

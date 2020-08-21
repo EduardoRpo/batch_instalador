@@ -5,22 +5,8 @@ require_once('./crud.php');
 $op = $_POST['operacion'];
 
 switch ($op) {
-    case 1: //listar Condiciones del medio
-        $query_modulos = mysqli_query($conn, "SELECT cm.id, m.modulo, cm.min, cm.max FROM condicionesmedio_tiempo cm INNER JOIN modulo m ON cm.id_modulo= m.id");
+    case 1: //listar productos
 
-        $result = mysqli_num_rows($query_modulos);
-
-        mysqli_close($conn);
-
-        if ($result > 0) {
-            while ($data = mysqli_fetch_assoc($query_modulos)) {
-                $arreglo["data"][] = $data;
-            }
-            echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
-        } else {
-            echo false;
-        }
-        mysqli_free_result($query_modulos);
 
         break;
 
@@ -45,19 +31,25 @@ switch ($op) {
             $query = "INSERT INTO condicionesmedio_tiempo (id_modulo, min, max) VALUES('$modulo', '$t_min', '$t_max')";
 
         ejecutarQuery($conn, $query);
-        
+
         break;
 
-    case 4: // Cargar Selector Procesos
 
-        $query = "SELECT * FROM modulo";
-        ejecutarQuerySelect($conn, $query);
-        break;
 
-    case 5: // Cargar datos para actualizar
+    case 4: // Cargar datos para actualizar
         $id = $_POST['id'];
 
         $query = "SELECT c.id, c.id_modulo, c.min, c.max, m.modulo FROM condicionesmedio_tiempo c INNER JOIN modulo m ON c.id_modulo = m.id WHERE c.id = $id";
+        ejecutarQuerySelect($conn, $query);
+        break;
+    case 5: // Cargar Selectores
+        $tabla = $_POST['tabla'];
+
+        if ($tabla == 'ph' || $tabla == 'viscosidad' || $tabla == 'densidad_gravedad' || $tabla == 'grado_alcohol' )
+            $query = "SELECT id, CONCAT(limite_inferior, ' - ', limite_superior) as nombre FROM $tabla";
+        else
+            $query = "SELECT * FROM $tabla";
+
         ejecutarQuerySelect($conn, $query);
         break;
 }

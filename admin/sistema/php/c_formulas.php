@@ -4,42 +4,16 @@
 $op = $_POST['operacion'];
 
 switch ($op) {
-    case 1: //listar Nombres de Productos
-        $query = "SELECT id, nombre_producto as nombre FROM nombre_producto";
-        listar($query);
+    case 1: //listar Productos
+        $select = "SELECT p.referencia FROM producto p";
+        listar($select);
         break;
 
-    case 2: //marca
-        $query = "SELECT * FROM marca";
-        listar($query);
-        break;
-        
-    case 3: //marca
-        $query = "SELECT id, color as nombre FROM color";
-        listar($query);
-        break;
-
-    case 4: //olor
-        $query = "SELECT id, olor as nombre FROM olor";
-        listar($query);
-        break;
-    case 5: //densidad
-        $query = "SELECT id, limite_inferior as min, limite_superior as max FROM densidad_gravedad";
-        listar($query);
-        break;
-    case 6: //grado de alcohol
-        $query = "SELECT id, limite_inferior as min, limite_superior as max FROM grado_alcohol";
-        listar($query);
-        break;
-
-    case 7: //PH
-        $query = "SELECT id, limite_inferior as min, limite_superior as max FROM ph";
-        listar($query);
-        break;
-
-    case 8: //Viscosidad
-        $query = "SELECT id, limite_inferior as min, limite_superior as max FROM viscosidad";
-        listar($query);
+    case 2: //Listar Formula
+        $referencia = $_POST['referencia'];
+        //echo $referencia;
+        $select = "SELECT f.id_producto, f.id_materiaprima as referencia, m.nombre, m.alias, f.porcentaje FROM formula f INNER JOIN materia_prima m ON f.id_materiaprima=m.referencia WHERE f.id_producto = '$referencia'";
+        listar($select);
         break;
 
         /* case 2: //Eliminar
@@ -98,11 +72,11 @@ switch ($op) {
 }
 
 
-function listar($query)
+function listar($select)
 {
     require_once('../../../conexion.php');
 
-    $query = mysqli_query($conn, $query);
+    $query = mysqli_query($conn, $select);
     $result = mysqli_num_rows($query);
 
     mysqli_close($conn);

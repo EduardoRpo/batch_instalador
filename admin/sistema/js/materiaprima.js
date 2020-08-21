@@ -1,11 +1,14 @@
+/* Mostrar Menu seleccionadp */
+
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#link4').css('text-decoration', 'revert')
-$('.contenedor-menu .menu ul.abrir').show();
+$('#linkMateriaPrima').css('text-decoration', 'revert')
+$('.contenedor-menu .menu ul.abrir1').show();
 
-/* Cargue de lineas*/
+/* Cargue de Parametros de Control en DataTable */
 
-$(document).ready(function () {
-    $("#listarLineas").DataTable({
+/* function cargarTablaFormulas(referencia) { */
+    $("#tblMateriaPrima").DataTable({
+        destroy: true,
         scrollY: '50vh',
         scrollCollapse: true,
         paging: false,
@@ -13,28 +16,28 @@ $(document).ready(function () {
 
         "ajax": {
             method: "POST",
-            url: "php/c_lineas.php",
+            url: "php/c_materiaprima.php",
             data: { operacion: "1" },
         },
 
         "columns": [
-            { "data": "id" },
+            { "data": "referencia" },
             { "data": "nombre" },
-            { "data": "densidad" },
-            { "defaultContent": "<a href='#' <i class='large material-icons link-editar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
+            { "data": "alias" },
+            { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
             { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" }
-
         ]
     });
-});
+/* } */
 
 /* Ocultar */
 
-$('#adLineas').click(function (e) {
+$('#addMP').click(function (e) {
     e.preventDefault();
-    $("#frmadParametro").slideToggle();
-    
+    $("#frmaddMP").slideToggle();
+
 });
+
 
 /* Borrar registros */
 
@@ -109,14 +112,12 @@ $(document).ready(function () {
     });
 });
 
-
 /* Actualizar tabla */
 
-function refreshTable() {
-    $('#listarDespeje').DataTable().clear();
-    $('#listarDespeje').DataTable().ajax.reload();
+function refreshTable(tabla) {
+    $(tabla).DataTable().clear();
+    $(tabla).DataTable().ajax.reload();
 }
-
 
 /*      var confirm= alertify.confirm('Samara Cosmetics','¿Está seguro de actualizar este registro?',null,null).set('labels', {ok:'Si', cancel:'No'});
 

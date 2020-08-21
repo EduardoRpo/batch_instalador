@@ -1,7 +1,7 @@
 /* Mostrar Menu seleccionado */
 
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#link1').css('text-decoration', 'revert')
+$('#linkCondicionesMedio').css('text-decoration', 'revert')
 $('.contenedor-menu .menu ul.abrir').show();
 
 /* Cargue de Parametros de Condiciones del medio */
@@ -22,8 +22,8 @@ $(document).ready(function () {
         "columns": [
             { "data": "id" },
             { "data": "modulo" },
-            { "data": "min" },
-            { "data": "max" },
+            { "data": "min", className: "centrado" },
+            { "data": "max", className: "centrado"  },
             { "defaultContent": "<a href='#' <i class='large material-icons link-editar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
             { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" }
 
@@ -36,6 +36,15 @@ $(document).ready(function () {
 $('#adTiempos').click(function (e) {
     e.preventDefault();
     $("#frmadTiempos").slideToggle();
+
+    $('input:text[name=txtModulo]').hide();
+    $('input:text[name=txtModulo]').css('grid-row-start', '3');
+
+    $('#moduloCondiciones').show();
+    $('#moduloCondiciones').css('grid-row-start', '2');
+
+    $('#t_min').val('');
+    $('#t_max').val('');
     cargarSelectorModulo();
 });
 
@@ -44,7 +53,7 @@ function cargarSelectorModulo() {
     $.ajax({
         method: 'POST',
         url: 'php/c_condiciones.php',
-        data: { operacion: "7" },
+        data: { operacion: "4" },
 
         success: function (response) {
             var info = JSON.parse(response);
@@ -54,7 +63,7 @@ function cargarSelectorModulo() {
 
             $select.append('<option disabled selected>' + "Seleccionar" + '</option>');
 
-            $.each(info, function (i, value) {
+            $.each(info.data, function (i, value) {
                 $select.append('<option value ="' + value.id + '">' + value.modulo + '</option>');
             });
         },
@@ -70,19 +79,62 @@ $(document).on('click', '.link-borrar', function (e) {
     e.preventDefault();
 
     let id = $(this).parent().parent().children().first().text();
-
     var confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este registro?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
 
     confirm.set('onok', function (r) {
         if (r) {
             $.ajax({
                 'method': 'POST',
-                'url': 'php/operacionesDespejedelinea.php',
+                'url': 'php/c_condiciones.php',
                 'data': { operacion: "2", id: id }
             });
             refreshTable();
-            alertify.success('Registro Eliminado');
+            alertify.set("notifier", "position", "top-right"); alertify.success("Registro Eliminado.");
         }
+    });
+});
+
+/* Almacenar Registros */
+
+$(document).ready(function () {
+    $('#btnguardarCondiciones').click(function (e) {
+        e.preventDefault();
+
+        var modulo = $('#moduloCondiciones').val();
+        var t_min = parseInt($('#t_min').val());
+        var t_max = parseInt($('#t_max').val());
+        var id = $('input:text[name=txtModulo]').attr('id');
+
+        debugger;
+
+        if (id == undefined) {
+            if (modulo === null || isNaN(t_min) || isNaN(t_max)) {
+                alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos.");
+                return false;
+            }
+
+        } else if (t_min >= t_max) {
+            alertify.set("notifier", "position", "top-right"); alertify.error("El tiempo Máximo debe ser mayor al tiempo Mínimo.");
+            return false;
+        } else {
+            modulo = id;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "php/c_condiciones.php",
+            data: { operacion: "3", modulo: modulo, t_min: t_min, t_max: t_max },
+
+            success: function (r) {
+                debugger;
+                if (r === '1') {
+                    alertify.set("notifier", "position", "top-right"); alertify.success("Almacenado con éxito.");
+                    refreshTable();
+                } else {
+                    alertify.set("notifier", "position", "top-right"); alertify.error("No Almacenado.");
+                }
+            }
+        });
     });
 });
 
@@ -94,46 +146,31 @@ $(document).on('click', '.link-editar', function (e) {
 
     $.ajax({
         method: 'POST',
-        url: 'php/operacionesDespejedelinea.php',
-        data: { operacion: "3", id: id },
+        url: 'php/c_condiciones.php',
+        data: { operacion: "5", id: id },
 
         success: function (response) {
+
             var info = JSON.parse(response);
-            $('#pregunta').val(info.pregunta);
-            $('#resp').val(info.resp);
-            $('#btnguardarPregunta').html('Actualizar');
-            $('.tpregunta').html('Actualizar Registros');
-            $('#modalDespejedeLinea').modal('show');
-            refreshTable();
+
+            $("#frmadTiempos").show();
+            $('#btnguardarCondiciones').html('Actualizar');
+
+            $('input:text[name=txtModulo]').show();
+            $('input:text[name=txtModulo]').css('grid-row-start', '2');
+
+            $('#moduloCondiciones').hide();
+            $('#moduloCondiciones').css('grid-row-start', '3');
+
+            $('input:text[name=txtModulo]').attr('id', info.data[0].id_modulo);
+            $('input:text[name=txtModulo]').val(info.data[0].modulo);
+            $('#t_min').val(info.data[0].min);
+            $('#t_max').val(info.data[0].max);
+
         },
         error: function (response) {
             console.log(response);
         }
-    });
-});
-
-
-/* Almacenar Registros */
-
-$(document).ready(function () {
-    $('#btnguardarPregunta').click(function (e) {
-        e.preventDefault();
-        var datos = $('#frmpreguntas').serialize();
-        $.ajax({
-            type: "POST",
-            url: "php/operacionesDespejedelinea.php",
-            data: datos,
-            //data: {operacion : "3", id : id},
-            success: function (r) {
-                if (r == 1) {
-                    alertify.set("notifier", "position", "top-right"); alertify.success("Agregado con éxito.");
-                    document.getElementById("frmagregarUsuarios").reset();
-                } else {
-                    alertify.set("notifier", "position", "top-right"); alertify.error("Usuario No Registrado.");
-                }
-            }
-        });
-        //return false;
     });
 });
 
@@ -144,18 +181,3 @@ function refreshTable() {
     $('#listarCondiciones').DataTable().clear();
     $('#listarCondiciones').DataTable().ajax.reload();
 }
-
-
-/*      var confirm= alertify.confirm('Samara Cosmetics','¿Está seguro de actualizar este registro?',null,null).set('labels', {ok:'Si', cancel:'No'});
-
-     confirm.set('onok', function(r){
-         if(r){
-             $.ajax({
-                 'method' : 'GET',
-                 'url' : `php/accionesDespejedeLinea.php?link-editar=${id}`,
-                 'data' : 'id',
-             });
-             refreshTable();
-             alertify.success('Registro Eliminado');
-         }
-     });   */

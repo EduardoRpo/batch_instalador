@@ -74,8 +74,8 @@
                       <tr>
                         <th>id</th>
                         <th>Proceso</th>
-                        <th>Actualizar</th>
-                        <th>Eliminar</th>
+                        <th></th>
+                        <th></th>
                       </tr>
                     </thead>
                     <tbody>

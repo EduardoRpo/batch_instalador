@@ -1,6 +1,7 @@
-<?php 
-  include_once('./modal/m_productos.php');
+<?php
+//include('./modal/m_crearUsuarios.php');
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -10,7 +11,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>Samara Cosmetics | Actualizar/Adicionar</title>
+  <title>Samara Cosmetics | Materia Prima</title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
 
   <!--     Fonts and icons     -->
@@ -27,6 +28,7 @@
   <link rel="stylesheet" href="./htdocs/assets/datatables/DataTables-1.10.21/css/dataTables.bootstrap4.css"> -->
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
 
+
   <!-- Icons -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 
@@ -34,8 +36,8 @@
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
 
-  <!-- CSS Just for demo purpose, don't include it in your project -->
-  <!-- <link href="../assets/demo/demo.css" rel="stylesheet" /> -->
+
+
 </head>
 
 <body class="">
@@ -51,40 +53,33 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title"> <strong>Productos Registrados</strong></h4>
-                <!-- <a class="btn btn-primary" href="crearUsuarios.php" role="button">Crear Producto</a> -->
-                <button type="button" class="btn btn-primary" onclick="cargarDatosProductos();">Crear Productos</button>
+                <h4 class="card-title">Materia Prima</h4>
+                <!-- <a class="btn btn-primary" href="crearUsuarios1.php" role="button">Crear Usuario</a> -->
+                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCrearUsuarios">Crear Usuarios</button> -->
+                <!-- <a class="btn btn-primary" role="button" href='crearUsuarios.php' <i class='large material-icons' data-toggle='tooltip' title='Adicionar' style='color:rgb(0, 154, 68)'>how_to_reg</i></a> -->
+                <hr>
+                <button type="button" class="btn btn-primary" id="addMP">Adicionar</button>
+                <form id="frmaddMP" style="display: none;">
+                  <label for=""><b>Codigo</b></label>
+                  <label for=""><b>Materia Pima</b></label>
+                  <label for=""><b>Alias</b></label>
+                  <input type="number" name="txtCodigo" id="txtCodigo" class="form-control" placeholder="Codigo">
+                  <input type="text" name="txtMP" id="txtMP" class="form-control" placeholder="Materia Prima">
+                  <input type="text" name="txtAlias" id="txtAlias" class="form-control" placeholder="Alias">
+                  <button type="button" class="btn btn-primary" id="guardarMP">Guardar</button>
+                </form>
+                <hr>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="listarProductos" class="table-striped row-borde" style="width:100%">
+                  <table id="tblMateriaPrima" class="table-striped row-borde" style="width:100%">
                     <thead>
                       <tr>
+                        <th>Código</th>
+                        <th>Materia Prima</th>
+                        <th>Alias</th>
                         <th></th>
                         <th></th>
-                        <th>Referencia</th>
-                        <th>Nombre</th>
-                        <th>Unidad Empaque</th>
-                        <th>Producto</th>
-                        <th>Notificación Sanitaria</th>
-                        <th>Linea</th>
-
-
-                        <!--  <th>Marca</th>
-                        <th>Propietario</th>
-                        <th>Presentación</th>
-                        <th>Color</th>
-                        <th>Apariencia</th>
-                        <th>Untuosidad</th>
-                        <th>Poder Espumoso</th>
-                        <th>Recuento Mesofilos</th>
-                        <th>Pseudomona</th>
-                        <th>Escherichia</th>
-                        <th>Staphylococcus</th>
-                        <th>PH</th>
-                        <th>Viscosidad</th>
-                        <th>Densidad</th>
-                        <th>Alcohol</th> -->
                       </tr>
                     </thead>
                     <tbody>
@@ -100,7 +95,6 @@
       <?php include('./admin_componentes/footer.php'); ?>
     </div>
   </div>
-
 
 
   <!--   Core JS Files   -->
@@ -129,7 +123,7 @@
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
   <!-- javascript inicializacion datatables -->
-  <script src="js/productos.js"></script>
+  <script src="js/materiaprima.js"></script>
   <script src="js/menu.js"></script>
 
 </body>
