@@ -1,3 +1,6 @@
+var tabla;
+var editar;
+
 /* Mostrar Menu seleccionadp */
 
 $('.contenedor-menu .menu a').removeAttr('style');
@@ -12,20 +15,17 @@ $.ajax({
     method: 'POST',
     url: 'php/c_formulas.php',
     data: { operacion: "1" },
-
+    
     success: function (response) {
         var info = JSON.parse(response);
+
         let $selectProductos = $('#cmbReferenciaProductos');
-        let $selectReferencia = $('#cmbreferencia');
 
         $selectProductos.empty();
-        $selectReferencia.empty();
         $selectProductos.append('<option disabled selected>' + "Seleccionar" + '</option>');
-        $selectReferencia.append('<option disabled selected>' + "Seleccionar" + '</option>');
 
         $.each(info.data, function (i, value) {
             $selectProductos.append('<option value ="' + value.referencia + '">' + value.referencia + '</option>');
-            $selectReferencia.append('<option value ="' + value.referencia + '">' + value.referencia + '</option>');
         });
     },
     error: function (response) {
@@ -34,11 +34,24 @@ $.ajax({
 });
 //}
 
-/* Seleccion Referencia */
+
+/* Cargar nombre de producto de acuerdo con Seleccion Referencia */
 
 $('#cmbReferenciaProductos').change(function (e) {
     e.preventDefault();
     let seleccion = $("select option:selected").val();
+
+    $.ajax({
+        type: "POST",
+        url: "php/c_formulas.php",
+        data: { operacion: "2", referencia: seleccion },
+
+        success: function (response) {
+            var info = JSON.parse(response);
+            $('#txtnombreProducto').val(info.data[0].nombre_referencia);
+        }
+    });
+
     cargarTablaFormulas(seleccion);
 });
 
@@ -46,7 +59,8 @@ $('#cmbReferenciaProductos').change(function (e) {
 /* Cargue de Parametros de Control en DataTable */
 
 function cargarTablaFormulas(referencia) {
-    $("#tblFormulas").DataTable({
+    tabla = $("#tblFormulas").DataTable({
+
         destroy: true,
         scrollY: '50vh',
         scrollCollapse: true,
@@ -56,119 +70,153 @@ function cargarTablaFormulas(referencia) {
         "ajax": {
             method: "POST",
             url: "php/c_formulas.php",
-            data: { operacion: "2", referencia: referencia },
+            data: { operacion: "3", referencia: referencia },
         },
 
         "columns": [
             { "data": "referencia" },
             { "data": "nombre" },
             { "data": "alias" },
-            { "data": "porcentaje" },
+            { "data": "porcentaje", className: "centrado" },
             { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
             { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" }
+        ],
+        columnDefs: [
+            { width: "10%", "targets": 0 },
         ]
     });
 }
 
 /* Ocultar */
 
-$('#addFormula').click(function (e) {
+$('#adicionarFormula').click(function (e) {
     e.preventDefault();
     $("#frmadFormulas").slideToggle();
+    $('#textReferencia').hide();
+    $('#cmbreferencia').show();
 
+    $('#txtMateria-Prima').attr('disabled', true);
+    $('#alias').attr('disabled', true);
+
+    /* Cargar datos para Adicionar Materia Prima */
+
+    $.ajax({
+        method: 'POST',
+        url: 'php/c_formulas.php',
+        data: { operacion: "4" },
+
+        success: function (response) {
+            var info = JSON.parse(response);
+            let $selectReferencia = $('#cmbreferencia');
+
+            $selectReferencia.empty();
+            $selectReferencia.append('<option disabled selected>' + "Seleccionar" + '</option>');
+
+            $.each(info.data, function (i, value) {
+                $selectReferencia.append('<option value ="' + value.referencia + '">' + value.referencia + '</option>');
+            });
+        },
+        error: function (response) {
+            console.log(response);
+        }
+    })
 });
 
+/* Cargar Materia prima a guardar con la seleccion de la referencia */
 
-/* Borrar registros */
-
-$(document).on('click', '.link-borrar', function (e) {
+$('#cmbreferencia').change(function (e) {
     e.preventDefault();
+    let referencia = $("#cmbreferencia option:selected").text();
 
-    let id = $(this).parent().parent().children().first().text();
+    $.ajax({
+        type: "POST",
+        url: "php/c_formulas.php",
+        data: { operacion: "5", referencia: referencia },
 
-    var confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este registro?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
-
-    confirm.set('onok', function (r) {
-        if (r) {
-            $.ajax({
-                'method': 'POST',
-                'url': 'php/operacionesDespejedelinea.php',
-                'data': { operacion: "2", id: id }
-            });
-            refreshTable();
-            alertify.success('Registro Eliminado');
+        success: function (response) {
+            var info = JSON.parse(response);
+            $('#txtMateria-Prima').val(info.data[0].nombre);
+            $('#alias').val(info.data[0].alias);
         }
     });
 });
+
+/* Almacenar Registros */
+
+function guardarFormulaMateriaPrima() {
+    let ref_producto = $('#cmbReferenciaProductos').val();
+    let ref_materiaprima = $('#cmbreferencia').val();
+    let porcentaje = $('#porcentaje').val();
+    editar = false;
+
+    if (ref_materiaprima === null) {
+        editar = true;
+        ref_materiaprima = $('#textReferencia').val();
+    }
+
+
+    $.ajax({
+        type: "POST",
+        url: "php/c_formulas.php",
+        data: { operacion: "6", ref_producto: ref_producto, ref_materiaprima: ref_materiaprima, porcentaje: porcentaje, editar: editar },
+
+        success: function (r) {
+            if (r == 1) {
+                alertify.set("notifier", "position", "top-right"); alertify.success("Almacenado");
+                refreshTable();
+
+            } else {
+                alertify.set("notifier", "position", "top-right"); alertify.error("Error.");
+            }
+        }
+    });
+}
 
 /* Cargar datos para Actualizar registros */
 
 $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
     let id = $(this).parent().parent().children().first().text();
+    let mp = $(this).parent().parent().children().eq(1).text();
+    let alias = $(this).parent().parent().children().eq(2).text();
+    let porcentaje = $(this).parent().parent().children().eq(3).text();
 
-    $.ajax({
-        method: 'POST',
-        url: 'php/operacionesDespejedelinea.php',
-        data: { operacion: "3", id: id },
+    $('#cmbreferencia').val('');
+    $("#frmadFormulas").slideDown();
+    $('#textReferencia').show();
+    $('#cmbreferencia').hide();
 
-        success: function (response) {
-            var info = JSON.parse(response);
-            $('#pregunta').val(info.pregunta);
-            $('#resp').val(info.resp);
-            $('#btnguardarPregunta').html('Actualizar');
-            $('.tpregunta').html('Actualizar Registros');
-            $('#modalDespejedeLinea').modal('show');
-            refreshTable();
-        },
-        error: function (response) {
-            console.log(response);
-        }
-    });
+    $('#textReferencia').val(id).prop('disabled', true);
+    $('#txtMateria-Prima').val(mp).prop('disabled', true);
+    $('#alias').val(alias).prop('disabled', true);
+    $('#porcentaje').val(porcentaje);
 });
 
+/* Borrar registros */
 
-/* Almacenar Registros */
+$(document).on('click', '.link-borrar', function (e) {
+    e.preventDefault();
 
-$(document).ready(function () {
-    $('#btnguardarPregunta').click(function (e) {
-        e.preventDefault();
-        var datos = $('#frmpreguntas').serialize();
-        $.ajax({
-            type: "POST",
-            url: "php/operacionesDespejedelinea.php",
-            data: datos,
-            //data: {operacion : "3", id : id},
-            success: function (r) {
-                if (r == 1) {
-                    alertify.set("notifier", "position", "top-right"); alertify.success("Agregado con éxito.");
-                    document.getElementById("frmagregarUsuarios").reset();
-                } else {
-                    alertify.set("notifier", "position", "top-right"); alertify.error("Usuario No Registrado.");
-                }
-            }
-        });
-        //return false;
+    let ref_materiaprima = $(this).parent().parent().children().first().text();
+    let ref_producto = $('#cmbReferenciaProductos').val();
+    
+    var confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este registro?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
+    confirm.set('onok', function (r) {
+        if (r) {
+            $.ajax({
+                'method': 'POST',
+                'url': 'php/c_formulas.php',
+                'data': { operacion: "7", ref_producto: ref_producto, ref_materiaprima: ref_materiaprima  }
+            });
+            refreshTable();
+            alertify.set("notifier", "position", "top-right"); alertify.success("Eliminado");
+        }
     });
 });
 
 /* Actualizar tabla */
 
 function refreshTable(tabla) {
-    $(tabla).DataTable().clear();
-    $(tabla).DataTable().ajax.reload();
+    $('#tblFormulas').DataTable().clear();
+    $('#tblFormulas').DataTable().ajax.reload();
 }
-
-/*      var confirm= alertify.confirm('Samara Cosmetics','¿Está seguro de actualizar este registro?',null,null).set('labels', {ok:'Si', cancel:'No'});
-
-     confirm.set('onok', function(r){
-         if(r){
-             $.ajax({
-                 'method' : 'GET',
-                 'url' : `php/accionesDespejedeLinea.php?link-editar=${id}`,
-                 'data' : 'id',
-             });
-             refreshTable();
-             alertify.success('Registro Eliminado');
-         }
-     });   */

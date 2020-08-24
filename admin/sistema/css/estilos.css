@@ -41,7 +41,7 @@
 
 /* Organizar inputs y label para establecer tiempos */
 
-form.frmAdicionar{
+form.frmAdicionar {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 1em;
@@ -91,6 +91,12 @@ form.frmAdicionar{
 #cmbLinea {
   grid-column-start: 2;
   grid-column-end: 3;
+}
+
+/* Organizar seleccion formulas */
+.selproductos {
+  display: flex;
+  
 }
 
 /* organizar adicionar Formula */

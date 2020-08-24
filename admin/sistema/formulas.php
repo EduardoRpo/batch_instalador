@@ -60,21 +60,24 @@
                 <p class="category">Samara Cosmetics <a href=""></a></p>
               </div>
               <div class="card-body">
-                <select name="cmbReferenciaProductos" id="cmbReferenciaProductos" class="form-control" style="width: 200px;"></select>
-                <input type="text" class="form-control">
+                <div class="selproductos">
+                  <select name="cmbReferenciaProductos" id="cmbReferenciaProductos" class="form-control" style="width: 200px;"></select>
+                  <input type="text" class="form-control ml-3" id="txtnombreProducto">
+                </div>
                 <hr>
-                <button type="button" class="btn btn-primary" id="addFormula">Adicionar</button>
+                <button type="button" class="btn btn-primary" id="adicionarFormula">Adicionar</button>
                 <form id="frmadFormulas" style="display: none;">
                   <label for=""><b>Referencia</b></label>
                   <label for="">Materia Prima</label>
                   <label for="">Alias</label>
                   <label for="">%</label>
 
+                  <input type="text" id="textReferencia" class="form-control">
                   <select name="" id="cmbreferencia" class="form-control"></select>
                   <input type="text" name="txtMateria-Prima" id="txtMateria-Prima" class="form-control" placeholder="Materia Prima">
                   <input type="text" name="alias" id="alias" class="form-control" placeholder="alias">
-                  <input type="number" name="porcentaje" id="porcentaje" class="form-control" placeholder="%">
-                  <button type="button" class="btn btn-primary" id="guardarFormula">Guardar</button>
+                  <input type="number" name="porcentaje" id="porcentaje" class="form-control" placeholder="%" style="text-align: center;">
+                  <button type="button" class="btn btn-primary" id="guardarFormula" onclick="guardarFormulaMateriaPrima();">Guardar</button>
                 </form>
               </div>
             </div>
