@@ -14,7 +14,6 @@ function existeRegistro($conn, $query)
 
 function ejecutarQuery($conn, $query)
 {
-
     //$result = mysqli_query($conn, $query);
     $result = $conn->query($query);
 

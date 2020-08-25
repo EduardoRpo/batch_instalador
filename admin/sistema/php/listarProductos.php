@@ -1,6 +1,21 @@
 <?php
 require_once('../../../conexion.php');
 
+function utf8ize($d) {
+  if (is_array($d)) 
+      foreach ($d as $k => $v) 
+          $d[$k] = utf8ize($v);
+
+   else if(is_object($d))
+      foreach ($d as $k => $v) 
+          $d->$k = utf8ize($v);
+
+   else 
+      return utf8_encode($d);
+
+  return $d;
+  }
+
 $query_productos = mysqli_query($conn, "SELECT p.referencia, p.nombre_referencia, p.unidad_empaque, np.nombre as producto, ns.nombre as notificacion, linea.nombre as linea 
                                         FROM producto p INNER JOIN nombre_producto np INNER JOIN notificacion_sanitaria ns INNER JOIN linea 
                                         ON np.id = p.id_nombre_producto AND linea.id = p.id_linea AND ns.id = p.id_notificacion_sanitaria");
@@ -11,7 +26,7 @@ if ($result > 0) {
   while ($data = mysqli_fetch_assoc($query_productos)) {
     $arreglo["data"][] = $data;
   }
-  echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+  echo json_encode(utf8ize($arreglo), JSON_UNESCAPED_UNICODE);
 }
 mysqli_free_result($query_productos);
 mysqli_close($conn);

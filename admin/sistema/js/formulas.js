@@ -15,7 +15,7 @@ $.ajax({
     method: 'POST',
     url: 'php/c_formulas.php',
     data: { operacion: "1" },
-    
+
     success: function (response) {
         var info = JSON.parse(response);
 
@@ -48,6 +48,7 @@ $('#cmbReferenciaProductos').change(function (e) {
 
         success: function (response) {
             var info = JSON.parse(response);
+            $('#txtnombreProducto').val('');
             $('#txtnombreProducto').val(info.data[0].nombre_referencia);
         }
     });
@@ -154,7 +155,6 @@ function guardarFormulaMateriaPrima() {
         ref_materiaprima = $('#textReferencia').val();
     }
 
-
     $.ajax({
         type: "POST",
         url: "php/c_formulas.php",
@@ -199,14 +199,14 @@ $(document).on('click', '.link-borrar', function (e) {
 
     let ref_materiaprima = $(this).parent().parent().children().first().text();
     let ref_producto = $('#cmbReferenciaProductos').val();
-    
+
     var confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este registro?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
     confirm.set('onok', function (r) {
         if (r) {
             $.ajax({
                 'method': 'POST',
                 'url': 'php/c_formulas.php',
-                'data': { operacion: "7", ref_producto: ref_producto, ref_materiaprima: ref_materiaprima  }
+                'data': { operacion: "7", ref_producto: ref_producto, ref_materiaprima: ref_materiaprima }
             });
             refreshTable();
             alertify.set("notifier", "position", "top-right"); alertify.success("Eliminado");
