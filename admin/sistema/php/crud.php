@@ -1,5 +1,7 @@
 <?php
 
+require_once('utils/utf8.php');
+
 /* Validar si el registro existe */
 
 function existeRegistro($conn, $query)
@@ -40,7 +42,7 @@ function ejecutarQuerySelect($conn, $query)
             //$arreglo[] = $data;
             $arreglo["data"][] = $data;
         }
-        echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+        echo json_encode(utf8ize($arreglo), JSON_UNESCAPED_UNICODE);
     } else {
         echo mysqli_error($conn);
     }

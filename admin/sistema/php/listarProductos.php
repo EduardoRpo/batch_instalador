@@ -1,7 +1,8 @@
 <?php
 require_once('../../../conexion.php');
+require_once('utils/utf8.php');
 
-function utf8ize($d) {
+/* function utf8ize($d) {
   if (is_array($d)) 
       foreach ($d as $k => $v) 
           $d[$k] = utf8ize($v);
@@ -14,7 +15,7 @@ function utf8ize($d) {
       return utf8_encode($d);
 
   return $d;
-  }
+  } */
 
 $query_productos = mysqli_query($conn, "SELECT p.referencia, p.nombre_referencia, p.unidad_empaque, np.nombre as producto, ns.nombre as notificacion, linea.nombre as linea 
                                         FROM producto p INNER JOIN nombre_producto np INNER JOIN notificacion_sanitaria ns INNER JOIN linea 
