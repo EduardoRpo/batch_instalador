@@ -48,8 +48,22 @@
             <div class="card">
               <div class="card-header">
                 <h4 class="card-title"> <strong>Despeje de Linea de los Procesos</strong></h4>
-                <!-- <a class="btn btn-primary" href="crearUsuarios.php" role="button">Crear Parametro</a> -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDespejedeLinea">Crear Parametro</button>
+                <hr>
+                <button type="button" class="btn btn-primary" id="adicionarParametro">Adicionar Parametro</button>
+                <form id="frmadParametro" style="display: none;"> <!--  -->
+                  <label for="" id="lblPregunta"><b>Pregunta</b></label>
+                  
+                  <input type="text" class="form-control" id="txtIdPregunta" hidden>
+                  <input type="text" name="txtPregunta" id="txtPregunta" class="form-control" placeholder="Pregunta"> <!-- style="width: 650px;" -->
+                  <label for=""><b>Respuesta</b></label>
+                  <label for=""><b>Proceso</b></label>
+                  <input type="text" name="txtRespuesta" id="txtRespuesta" class="form-control centrado" placeholder="Respuesta"> <!-- style="width: 100px;" -->
+                  <select name="cmbProceso" id="cmbProceso" class="form-control"></select>
+                  <button type="button" class="btn btn-primary" id="btnguardarProceso">Guardar</button>
+                </form>
+                <hr>
+
+                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalDespejedeLinea">Crear Parametro</button> -->
               </div>
               <div class="card-body">
                 <div class="table-responsive">
@@ -58,8 +72,8 @@
                       <tr>
                         <th>Id</th>
                         <th>Parametro de Control</th>
-                        <th>Respuesta</th>
-                        <th>Módulo</th>
+                        <th>Respuesta Correcta</th>
+                        <th>Proceso</th>
                         <th></th>
                         <th></th>
                       </tr>

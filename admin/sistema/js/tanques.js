@@ -21,9 +21,9 @@ $(document).ready(function () {
 
         "columns": [
             { "data": "id" },
-            { "data": "capacidad" },
-            { "defaultContent": "<a href='#' <i class='large material-icons link-editar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
-            { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" }
+            { "data": "capacidad", className: "centrado"},
+            { "defaultContent": "<a href='#' <i class='large material-icons link-editar' style='color:rgb(255, 165, 0)'>edit</i></a>", className: "centrado" },
+            { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>", className: "centrado" }
 
         ]
     });
@@ -89,25 +89,12 @@ $(document).on('click', '.link-borrar', function (e) {
 $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
     let id = $(this).parent().parent().children().first().text();
+    let capacidad = $(this).parent().parent().children().eq(1).text();
+    
+    $('#frmadParametro').slideDown();
 
-    $.ajax({
-        method: 'POST',
-        url: 'php/operacionesDespejedelinea.php',
-        data: { operacion: "3", id: id },
-
-        success: function (response) {
-            var info = JSON.parse(response);
-            $('#pregunta').val(info.pregunta);
-            $('#resp').val(info.resp);
-            $('#btnguardarPregunta').html('Actualizar');
-            $('.tpregunta').html('Actualizar Registros');
-            $('#modalDespejedeLinea').modal('show');
-            refreshTable();
-        },
-        error: function (response) {
-            console.log(response);
-        }
-    });
+    $('#id-Tanque').val(id).hide;
+    $('#txtcCapacidad').val(capacidad);
 });
 
 

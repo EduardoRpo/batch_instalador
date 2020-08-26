@@ -20,12 +20,12 @@
             <li id="parametrosg"><a href=""><i class="fa fa-chevron-down"></i><span>Parametros Generales</span></a></li>
             <ul class="abrir">
                 <li><a href="condicionesMedio.php" id="linkCondicionesMedio"><i class='large material-icons'>portrait</i><span>Condiciones del Medio</span></a></li>
-                <li><a href="desinfectante.php" id="link2"><i class='large material-icons'>portrait</i><span>Desinfectantes</span></a></li>
+                <li><a href="desinfectante.php" id="linkDesinfectante"><i class='large material-icons'>portrait</i><span>Desinfectantes</span></a></li>
                 <!-- <li><a href="" id="link3"><i class='large material-icons'>portrait</i><span>Incidencias</span></a></li> -->
                 <!-- <li><a href="lineas.php" id="link4"><i class='large material-icons'>portrait</i><span>Líneas</span></a></li> -->
-                <li><a href="maquinaria.php" id="link5"><i class='large material-icons'>portrait</i><span>Equipos</span></a></li>
+                <li><a href="maquinaria.php" id="linkEquipos"><i class='large material-icons'>portrait</i><span>Equipos</span></a></li>
                 <li><a href="modulos.php" id="link6"><i class='large material-icons'>portrait</i><span>Procesos</span></a></li>
-                <li><a href="despejedelinea.php" id="link7"><i class='large material-icons'>portrait</i><span>Preguntas</span></a></li>
+                <li><a href="despejedelinea.php" id="linkDespeje"><i class='large material-icons'>portrait</i><span>Preguntas</span></a></li>
                 <li><a href="tanques.php" id="link8"><i class='large material-icons'>portrait</i><span>Tanques</span></a></li>
 
             </ul>
@@ -39,7 +39,7 @@
                 <li><a href="empaques.php" id="linkEmpaques"><i class='large material-icons'>portrait</i><span>Empaques</span></a></li>
                 <li><a href="materiaprima.php" id="linkMateriaPrima"><i class='large material-icons'>portrait</i><span>Materia Prima</span></a></li>
                 <li><a href="formulas.php" id="linkFormulas"><i class='large material-icons'>portrait</i><span>Formulas</span></a></li>
-                <li><a href="" id="linkPreparaciones"><i class='large material-icons'>portrait</i><span>Preparaciones</span></a></li>
+                <li><a href="formulas.php" id="linkPreparaciones"><i class='large material-icons'>portrait</i><span>Instructivo Preparación</span></a></li>
             </ul>
             <li id="usuarios"><a href=""><i class="fa fa-chevron-down"></i><span>Usuarios</span></a></li>
             <ul class="abrir2">

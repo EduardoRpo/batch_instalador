@@ -63,7 +63,7 @@
                   <label for=""><b>Equipo</b></label>
                   <label for=""><b>Línea</b></label>
                   
-                  <input type="text" name="equipo" id="txtEquipo" class="form-control" placeholder="Linea">
+                  <input type="text" name="equipo" id="txtEquipo" class="form-control" placeholder="Linea" style="width: 500px;">
                   
                   <select name="linea" id="cmbLinea" class="form-control"></select>
                   <button type="button" class="btn btn-primary" id="guardarEquipos">Guardar</button>

@@ -148,7 +148,7 @@
         </div>
 
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-12">
             <div class="card" id="3">
               <div class="card-header">
                 <h4 class="card-title">Etiquetas</h4>
@@ -185,7 +185,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-12">
             <div class="card" id="4">
               <div class="card-header">
                 <h4 class="card-title">Otros Caja</h4>
@@ -197,7 +197,7 @@
                 <form id="frmadParametro" style="display: none;">
                   <label for=""><b>Código</b></label>
                   <input type="number" name="codigoCaja" id="codigoCaja" class="form-control" placeholder="Codigo">
-                  <label for=""><b>Decscripción</b></label>
+                  <label for=""><b>Descripción</b></label>
                   <input type="text" name="nombreCaja" id="nombreCaja" class="form-control" placeholder="Decripción">
                   <button type="button" class="btn btn-primary" id="guardarCaja">Guardar</button>
                 </form>
@@ -225,7 +225,7 @@
         </div>
 
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-12">
             <div class="card" id="5">
               <div class="card-header">
                 <h4 class="card-title">Otros</h4>

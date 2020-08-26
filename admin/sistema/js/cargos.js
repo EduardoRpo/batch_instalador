@@ -1,7 +1,7 @@
 /* Mostrar Menu seleccionadp */
 
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#link18').css('text-decoration', 'revert')
+$('#linkCargos').css('text-decoration', 'revert')
 $('.contenedor-menu .menu ul.abrir2').show();
 
 /* Cargue de Parametros de Control en DataTable */
@@ -22,8 +22,8 @@ $(document).ready(function() {
         "columns":[
             {"data": "id"},
             {"data": "cargo"},
-            {"defaultContent": "<a href='#' <i class='large material-icons link-editar' style='color:rgb(255, 165, 0)'>edit</i></a>"},
-            {"defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>"}
+            {"defaultContent": "<a href='#' <i class='large material-icons link-editar' style='color:rgb(255, 165, 0)'>edit</i></a>", className: "centrado"},
+            {"defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>", className: "centrado"}
             
         ]
     });
@@ -35,6 +35,19 @@ $('#adCargo').click(function (e) {
     e.preventDefault();
     $("#frmadParametro").slideToggle();
    
+});
+
+
+/* Cargar datos para Actualizar registros */
+
+$(document).on('click', '.link-editar', function (e) {
+    e.preventDefault();
+    
+    let id = $(this).parent().parent().children().first().text();
+    let cargo = $(this).parent().parent().children().eq(1).text();
+    
+    $('#txtCargo').val(cargo);
+    $('#frmadParametro').slideDown();
 });
 
 
@@ -51,7 +64,7 @@ $(document).on('click', '.link-borrar', function (e) {
         if (r) {
             $.ajax({
                 'method': 'POST',
-                'url': 'php/operacionesDespejedelinea.php',
+                'url': 'php/c_cargos.php',
                 'data': { operacion: "2", id: id }
             });
             refreshTable();
@@ -59,33 +72,6 @@ $(document).on('click', '.link-borrar', function (e) {
         }
     });
 });
-
-/* Cargar datos para Actualizar registros */
-
-$(document).on('click', '.link-editar', function (e) {
-    e.preventDefault();
-    let id = $(this).parent().parent().children().first().text();
-
-    $.ajax({
-        method: 'POST',
-        url: 'php/operacionesDespejedelinea.php',
-        data: { operacion: "3", id: id },
-
-        success: function (response) {
-            var info = JSON.parse(response);
-            $('#pregunta').val(info.pregunta);
-            $('#resp').val(info.resp);
-            $('#btnguardarPregunta').html('Actualizar');
-            $('.tpregunta').html('Actualizar Registros');
-            $('#modalDespejedeLinea').modal('show');
-            refreshTable();
-        },
-        error: function (response) {
-            console.log(response);
-        }
-    });
-});
-
 
 /* Almacenar Registros */
 
@@ -118,18 +104,3 @@ function refreshTable() {
     $('#listarDespeje').DataTable().clear();
     $('#listarDespeje').DataTable().ajax.reload();
 }
-
-
-/*      var confirm= alertify.confirm('Samara Cosmetics','¿Está seguro de actualizar este registro?',null,null).set('labels', {ok:'Si', cancel:'No'});
-
-     confirm.set('onok', function(r){
-         if(r){
-             $.ajax({
-                 'method' : 'GET',
-                 'url' : `php/accionesDespejedeLinea.php?link-editar=${id}`,
-                 'data' : 'id',
-             });
-             refreshTable();
-             alertify.success('Registro Eliminado');
-         }
-     });   */

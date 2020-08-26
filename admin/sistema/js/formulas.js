@@ -4,7 +4,7 @@ var editar;
 /* Mostrar Menu seleccionadp */
 
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#link14').css('text-decoration', 'revert')
+$('#linkFormulas').css('text-decoration', 'revert')
 $('.contenedor-menu .menu ul.abrir1').show();
 
 /* Cargue select referencias */

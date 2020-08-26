@@ -23,7 +23,7 @@ $(document).ready(function () {
             { "data": "id" },
             { "data": "modulo" },
             { "data": "min", className: "centrado" },
-            { "data": "max", className: "centrado"  },
+            { "data": "max", className: "centrado" },
             { "defaultContent": "<a href='#' <i class='large material-icons link-editar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
             { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" }
 
@@ -143,35 +143,25 @@ $(document).ready(function () {
 $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
     let id = $(this).parent().parent().children().first().text();
+    let modulo = $(this).parent().parent().children().eq(1).text();
+    let t_min = $(this).parent().parent().children().eq(2).text();
+    let t_max = $(this).parent().parent().children().eq(3).text();
 
-    $.ajax({
-        method: 'POST',
-        url: 'php/c_condiciones.php',
-        data: { operacion: "5", id: id },
+    $("#frmadTiempos").slideDown();
+    $('#btnguardarCondiciones').html('Actualizar');
 
-        success: function (response) {
+    $('input:text[name=txtModulo]').show();
+    $('input:text[name=txtModulo]').css('grid-row-start', '2');
 
-            var info = JSON.parse(response);
+    $('#moduloCondiciones').hide();
+    $('#moduloCondiciones').css('grid-row-start', '3');
 
-            $("#frmadTiempos").show();
-            $('#btnguardarCondiciones').html('Actualizar');
+    $('input:text[name=txtModulo]').attr('id', id);
+    $('input:text[name=txtModulo]').val(modulo);
+    $('#t_min').val(t_min);
+    $('#t_max').val(t_max);
 
-            $('input:text[name=txtModulo]').show();
-            $('input:text[name=txtModulo]').css('grid-row-start', '2');
 
-            $('#moduloCondiciones').hide();
-            $('#moduloCondiciones').css('grid-row-start', '3');
-
-            $('input:text[name=txtModulo]').attr('id', info.data[0].id_modulo);
-            $('input:text[name=txtModulo]').val(info.data[0].modulo);
-            $('#t_min').val(info.data[0].min);
-            $('#t_max').val(info.data[0].max);
-
-        },
-        error: function (response) {
-            console.log(response);
-        }
-    });
 });
 
 

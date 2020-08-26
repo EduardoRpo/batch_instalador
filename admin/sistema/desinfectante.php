@@ -63,7 +63,7 @@
                   <label for=""><b>Desinfectante</b></label>
                   <label for=""><b>Concentracion</b></label>
                   
-                  <input type="number" name="t_min" id="desinfectante" class="form-control" placeholder="Desinfectante">
+                  <input type="text" name="t_min" id="desinfectante" class="form-control" placeholder="Desinfectante">
                   <input type="number" name="t_max" id="concentracion" class="form-control" placeholder="Concentración">
                   <button type="button" class="btn btn-primary" id="guardarDesinfectante">Guardar</button>
                 </form>

@@ -1,7 +1,7 @@
 /* Mostrar Menu seleccionado */
 
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#link13').css('text-decoration', 'revert')
+$('#linkEmpaques').css('text-decoration', 'revert')
 $('.contenedor-menu .menu ul.abrir1').show();
 
 /* Mostrar cada parametro */

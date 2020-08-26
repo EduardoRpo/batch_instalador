@@ -61,7 +61,7 @@
                 <button type="button" class="btn btn-primary" id="adProceso">Adicionar Proceso</button>
                 <form id="frmadParametro" style="display: none;">
                   <label for=""><b>Proceso</b></label>
-                  <input type="text" name="txtProceso" id="txtProceso" class="form-control" placeholder="Proceso">
+                  <input type="text" name="txtProceso" id="txtProceso" class="form-control" placeholder="Proceso" style="width: 300px;">
                   <!-- <select name="linea" id="cmbLinea" class="form-control"></select> -->
                   <button type="button" class="btn btn-primary" id="guardarModulos">Guardar</button>
                 </form>

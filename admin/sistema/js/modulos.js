@@ -64,26 +64,15 @@ $(document).on('click', '.link-borrar', function (e) {
 
 $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
+
     let id = $(this).parent().parent().children().first().text();
+    let proceso = $(this).parent().parent().children().eq(1).text();
 
-    $.ajax({
-        method: 'POST',
-        url: 'php/operacionesDespejedelinea.php',
-        data: { operacion: "3", id: id },
+    $('#frmadParametro').slideDown();
+    
+    $('#idProceso').val(id).hide();
+    $('#txtProceso').val(proceso);
 
-        success: function (response) {
-            var info = JSON.parse(response);
-            $('#pregunta').val(info.pregunta);
-            $('#resp').val(info.resp);
-            $('#btnguardarPregunta').html('Actualizar');
-            $('.tpregunta').html('Actualizar Registros');
-            $('#modalDespejedeLinea').modal('show');
-            refreshTable();
-        },
-        error: function (response) {
-            console.log(response);
-        }
-    });
 });
 
 

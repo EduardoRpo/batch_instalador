@@ -29,6 +29,17 @@
   justify-content: center;
 }
 
+#frmadParametro {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  margin: 10px;
+  text-align: center;
+  justify-items: center;
+  align-items: baseline;
+  justify-content: center;
+}
+
 /* #txtModulo {
   grid-column-start: 1;
   grid-column-end: 2;
@@ -93,10 +104,24 @@ form.frmAdicionar {
   grid-column-end: 3;
 }
 
+/* Preguntas */
+
+#txtPregunta  {
+  grid-column: 1/4;
+}
+
+#lblPregunta {
+  grid-column: 1/4;
+}
+
+#txtRespuesta {
+  grid-column: 1/2;
+}
+
+
 /* Organizar seleccion formulas */
 .selproductos {
   display: flex;
-  
 }
 
 /* organizar adicionar Formula */

@@ -2,7 +2,7 @@
 /* Mostrar Menu seleccionadp */
 
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#link2').css('text-decoration', 'revert')
+$('#linkDesinfectante').css('text-decoration', 'revert')
 $('.contenedor-menu .menu ul.abrir').show();
 
 
@@ -67,25 +67,14 @@ $(document).on('click', '.link-borrar', function (e) {
 $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
     let id = $(this).parent().parent().children().first().text();
+    let desinfectante = $(this).parent().parent().children().eq(1).text();
+    let concentracion = $(this).parent().parent().children().eq(2).text();
 
-    $.ajax({
-        method: 'POST',
-        url: 'php/operacionesDespejedelinea.php',
-        data: { operacion: "3", id: id },
-
-        success: function (response) {
-            var info = JSON.parse(response);
-            $('#pregunta').val(info.pregunta);
-            $('#resp').val(info.resp);
-            $('#btnguardarPregunta').html('Actualizar');
-            $('.tpregunta').html('Actualizar Registros');
-            $('#modalDespejedeLinea').modal('show');
-            refreshTable();
-        },
-        error: function (response) {
-            console.log(response);
-        }
-    });
+    $('#frmadParametro').slideDown();
+    $('#desinfectante').val(desinfectante);
+    $('#concentracion').val(concentracion);
+    
+    
 });
 
 

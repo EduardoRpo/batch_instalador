@@ -1,7 +1,7 @@
 /* Mostrar Menu seleccionado */
 
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#link5').css('text-decoration', 'revert')
+$('#linkEquipos').css('text-decoration', 'revert')
 $('.contenedor-menu .menu ul.abrir').show();
 
 /* Cargue de Equipos*/
@@ -92,25 +92,13 @@ $(document).on('click', '.link-borrar', function (e) {
 $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
     let id = $(this).parent().parent().children().first().text();
+    let nombre = $(this).parent().parent().children().eq(1).text();
 
-    $.ajax({
-        method: 'POST',
-        url: 'php/operacionesDespejedelinea.php',
-        data: { operacion: "3", id: id },
+    $('#frmadParametro').slideDown();
+    cargarSelectorLinea();
+    $('#idEquipo').val(id);
+    $('#txtEquipo').val(nombre);
 
-        success: function (response) {
-            var info = JSON.parse(response);
-            $('#pregunta').val(info.pregunta);
-            $('#resp').val(info.resp);
-            $('#btnguardarPregunta').html('Actualizar');
-            $('.tpregunta').html('Actualizar Registros');
-            $('#modalDespejedeLinea').modal('show');
-            refreshTable();
-        },
-        error: function (response) {
-            console.log(response);
-        }
-    });
 });
 
 

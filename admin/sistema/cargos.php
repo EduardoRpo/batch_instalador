@@ -50,7 +50,7 @@
       <div class="panel-header panel-header-sm"></div>
       <div class="content">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-8">
             <div class="card">
               <div class="card-header">
                 <h4 class="card-title">Cargos</h4>
@@ -61,7 +61,7 @@
                 <button type="button" class="btn btn-primary" id="adCargo">Adicionar Cargo</button>
                 <form id="frmadParametro" style="display: none;">
                   <label for=""><b>Cargo</b></label>
-                  <input type="text" name="txtCargo" id="txtCargo" class="form-control" placeholder="Cargo">
+                  <input type="text" name="txtCargo" id="txtCargo" class="form-control" placeholder="Cargo" style="width: 300px;">
                   <!-- <select name="linea" id="cmbLinea" class="form-control"></select> -->
                   <button type="button" class="btn btn-primary" id="guardarCargo">Guardar</button>
                 </form>

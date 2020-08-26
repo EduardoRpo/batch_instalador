@@ -65,26 +65,14 @@ $(document).on('click', '.link-borrar', function (e) {
 
 $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
-    let id = $(this).parent().parent().children().first().text();
+    let referencia = $(this).parent().parent().children().first().text();
+    let materiaprima = $(this).parent().parent().children().eq(1).text();
+    let alias = $(this).parent().parent().children().eq(2).text();
 
-    $.ajax({
-        method: 'POST',
-        url: 'php/operacionesDespejedelinea.php',
-        data: { operacion: "3", id: id },
-
-        success: function (response) {
-            var info = JSON.parse(response);
-            $('#pregunta').val(info.pregunta);
-            $('#resp').val(info.resp);
-            $('#btnguardarPregunta').html('Actualizar');
-            $('.tpregunta').html('Actualizar Registros');
-            $('#modalDespejedeLinea').modal('show');
-            refreshTable();
-        },
-        error: function (response) {
-            console.log(response);
-        }
-    });
+    $('#frmaddMP').slideDown();
+    $('#txtCodigo').val(referencia);
+    $('#txtMP').val(materiaprima);
+    $('#txtAlias').val(alias);
 });
 
 
