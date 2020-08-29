@@ -16,12 +16,12 @@ $(document).ready(function () {
         "ajax": {
             method: "POST",
             url: "php/c_tanques.php",
-            data: { operacion: "1" },
+            data: { operacion: 1 },
         },
 
         "columns": [
             { "data": "id" },
-            { "data": "capacidad", className: "centrado"},
+            { "data": "capacidad", className: "centrado", render: $.fn.dataTable.render.number('.', ',', 0, '') },
             { "defaultContent": "<a href='#' <i class='large material-icons link-editar' style='color:rgb(255, 165, 0)'>edit</i></a>", className: "centrado" },
             { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>", className: "centrado" }
 
@@ -29,38 +29,16 @@ $(document).ready(function () {
     });
 });
 
-/* Ocultar */
+/* Adicionar Tanques */
 
 $('#adTanques').click(function (e) {
     e.preventDefault();
+
     $("#frmadParametro").slideToggle();
-    cargarSelectorModulo();
+    $('#txtid_tanques').val('');
+    $('#btnguardarTanques').html('Crear');
 });
 
-function cargarSelectorModulo() {
-
-    $.ajax({
-        method: 'POST',
-        url: 'php/c_condiciones.php',
-        data: { operacion: "7" },
-
-        success: function (response) {
-            var info = JSON.parse(response);
-
-            let $select = $('#moduloCondiciones');
-            $select.empty();
-
-            $select.append('<option disabled selected>' + "Seleccionar" + '</option>');
-
-            $.each(info, function (i, value) {
-                $select.append('<option value ="' + value.id + '">' + value.modulo + '</option>');
-            });
-        },
-        error: function (response) {
-            console.log(response);
-        }
-    })
-}
 
 /* Borrar registros */
 
@@ -68,15 +46,14 @@ $(document).on('click', '.link-borrar', function (e) {
     e.preventDefault();
 
     let id = $(this).parent().parent().children().first().text();
-
-    var confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este registro?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
+    let confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este registro?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
 
     confirm.set('onok', function (r) {
         if (r) {
             $.ajax({
                 'method': 'POST',
-                'url': 'php/operacionesDespejedelinea.php',
-                'data': { operacion: "2", id: id }
+                'url': 'php/c_tanques.php',
+                'data': { operacion: 2, id: id }
             });
             refreshTable();
             alertify.success('Registro Eliminado');
@@ -90,7 +67,7 @@ $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
     let id = $(this).parent().parent().children().first().text();
     let capacidad = $(this).parent().parent().children().eq(1).text();
-    
+
     $('#frmadParametro').slideDown();
 
     $('#id-Tanque').val(id).hide;
@@ -101,20 +78,23 @@ $(document).on('click', '.link-editar', function (e) {
 /* Almacenar Registros */
 
 $(document).ready(function () {
-    $('#btnguardarPregunta').click(function (e) {
+    $('#btnguardarTanques').click(function (e) {
         e.preventDefault();
-        var datos = $('#frmpreguntas').serialize();
+
+        let id = $('#txtid_tanques').val();
+        let capacidad = $('#txtCapacidad').val();
+
         $.ajax({
             type: "POST",
-            url: "php/operacionesDespejedelinea.php",
-            data: datos,
-            //data: {operacion : "3", id : id},
+            url: "php/c_tanques.php",
+            data: { operacion: 3, id: id, capacidad: capacidad },
+
             success: function (r) {
                 if (r == 1) {
-                    alertify.set("notifier", "position", "top-right"); alertify.success("Agregado con éxito.");
-                    document.getElementById("frmagregarUsuarios").reset();
+                    alertify.set("notifier", "position", "top-right"); alertify.success("Registrado.");
+                    refreshTable();
                 } else {
-                    alertify.set("notifier", "position", "top-right"); alertify.error("Usuario No Registrado.");
+                    alertify.set("notifier", "position", "top-right"); alertify.error("Error.");
                 }
             }
         });
@@ -126,21 +106,6 @@ $(document).ready(function () {
 /* Actualizar tabla */
 
 function refreshTable() {
-    $('#listarCondiciones').DataTable().clear();
-    $('#listarCondiciones').DataTable().ajax.reload();
+    $('#listarTanques').DataTable().clear();
+    $('#listarTanques').DataTable().ajax.reload();
 }
-
-
-/*      var confirm= alertify.confirm('Samara Cosmetics','¿Está seguro de actualizar este registro?',null,null).set('labels', {ok:'Si', cancel:'No'});
-
-     confirm.set('onok', function(r){
-         if(r){
-             $.ajax({
-                 'method' : 'GET',
-                 'url' : `php/accionesDespejedeLinea.php?link-editar=${id}`,
-                 'data' : 'id',
-             });
-             refreshTable();
-             alertify.success('Registro Eliminado');
-         }
-     });   */

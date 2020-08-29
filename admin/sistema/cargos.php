@@ -58,11 +58,11 @@
                 <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCrearUsuarios">Crear Usuarios</button> -->
                 <!-- <a class="btn btn-primary" role="button" href='crearUsuarios.php' <i class='large material-icons' data-toggle='tooltip' title='Adicionar' style='color:rgb(0, 154, 68)'>how_to_reg</i></a> -->
                 <hr>
-                <button type="button" class="btn btn-primary" id="adCargo">Adicionar Cargo</button>
+                <button type="button" class="btn btn-primary" id="adicionarCargo">Adicionar Cargo</button>
                 <form id="frmadParametro" style="display: none;">
                   <label for=""><b>Cargo</b></label>
+                  <input type="text" name="txtId" id="txtId" class="form-control" hidden>
                   <input type="text" name="txtCargo" id="txtCargo" class="form-control" placeholder="Cargo" style="width: 300px;">
-                  <!-- <select name="linea" id="cmbLinea" class="form-control"></select> -->
                   <button type="button" class="btn btn-primary" id="guardarCargo">Guardar</button>
                 </form>
                 <hr>

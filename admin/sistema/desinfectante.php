@@ -54,18 +54,15 @@
             <div class="card">
               <div class="card-header">
                 <h4 class="card-title">Desinfectantes Registrados</h4>
-                <!-- <a class="btn btn-primary" href="crearUsuarios1.php" role="button">Crear Usuario</a> -->
-                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCrearUsuarios">Crear Usuarios</button> -->
-                <!-- <a class="btn btn-primary" role="button" href='crearUsuarios.php' <i class='large material-icons' data-toggle='tooltip' title='Adicionar' style='color:rgb(0, 154, 68)'>how_to_reg</i></a> -->
                 <hr>
                 <button type="button" class="btn btn-primary" id="adDesinfectante">Adicionar Desinfectante</button>
                 <form id="frmadParametro" style="display: none;">
                   <label for=""><b>Desinfectante</b></label>
                   <label for=""><b>Concentracion</b></label>
-                  
-                  <input type="text" name="t_min" id="desinfectante" class="form-control" placeholder="Desinfectante">
-                  <input type="number" name="t_max" id="concentracion" class="form-control" placeholder="Concentración">
-                  <button type="button" class="btn btn-primary" id="guardarDesinfectante">Guardar</button>
+                  <input type="text" id="id_desinfectante" class="form-control" hidden>
+                  <input type="text" name="desinfectante" id="desinfectante" class="form-control" placeholder="Desinfectante">
+                  <input type="number" name="concentracion" id="concentracion" class="form-control" placeholder="Concentración">
+                  <button type="button" class="btn btn-primary" id="btnguardarDesinfectante">Guardar</button>
                 </form>
                 <hr>
               </div>
@@ -76,7 +73,7 @@
                       <tr>
                         <th>id</th>
                         <th>Desinfectante</th>
-                        <th>Concentración</th>                        
+                        <th>Concentración</th>
                         <th></th>
                         <th></th>
                       </tr>

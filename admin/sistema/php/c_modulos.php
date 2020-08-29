@@ -1,80 +1,38 @@
 <?php
 require_once('../../../conexion.php');
+require_once('./crud.php');
 
 $op = $_POST['operacion'];
 
 switch ($op) {
     case 1: //listar Modulos
-        $query_procesos = mysqli_query($conn, "SELECT * FROM modulo");
-
-        $result = mysqli_num_rows($query_procesos);
-
-        mysqli_close($conn);
-
-        if ($result > 0) {
-            while ($data = mysqli_fetch_assoc($query_procesos)) {
-                $arreglo["data"][] = $data;
-                //$arreglo[] = $data;
-            }
-            echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
-        } else {
-            echo false;
-        }
-        mysqli_free_result($query_procesos);
-
+        $query = "SELECT * FROM modulo";
+        ejecutarQuerySelect($conn, $query);
         break;
 
     case 2: //Eliminar
-        $id_pregunta = $_POST['id'];
-
-        $query_pregunta = "DELETE FROM preguntas WHERE id = $id_pregunta";
-        $result = mysqli_query($conn, $query_pregunta);
-
-        if ($result) {
-            echo 'Eliminado';
-        } else {
-            echo 'No Eliminado';
-        }
-        //mysqli_free_result($query_pregunta);
-        mysqli_close($conn);
+        $id = $_POST['id'];
+        $query = "DELETE FROM modulo WHERE id = $id";
+        ejecutarQuery($conn, $query);
         break;
 
-    case 3: // obtener data
-        $id_pregunta = $_POST['id'];
+    case 3: // Guardar datos o actualizar
+        $id = $_POST['id'];
+        $proceso = $_POST['proceso'];
+        
+        if ($id == '') {
+            $query = "SELECT * FROM modulo WHERE modulo='$proceso'";
+            $result = existeRegistro($conn, $query);
 
-        $query = mysqli_query($conn, "SELECT * FROM preguntas WHERE id = $id_pregunta");
-        $data = mysqli_fetch_assoc($query);
-        echo json_encode($data, JSON_UNESCAPED_UNICODE);
-        mysqli_close($conn);
+            if ($result > 0) {
+                exit();
+            } else
+                $query = "INSERT INTO modulo (modulo) VALUES('$proceso')";
+        } else
+            $query = "UPDATE modulo SET modulo = '$proceso' WHERE id = $id";
 
-        break;
+        ejecutarQuery($conn, $query);
 
-    case 6: // Guardar data
-        $id_pregunta = $_POST['id'];
-
-        $query = mysqli_query($conn, "SELECT * FROM preguntas WHERE id = $id_pregunta");
-        $data = mysqli_fetch_assoc($query);
-        echo json_encode($data, JSON_UNESCAPED_UNICODE);
-        mysqli_close($conn);
-
-        break;
-    case 7: // Cargar Selector Modulos
-
-        $query_mod = mysqli_query($conn, "SELECT * FROM modulo");
-
-        $result = mysqli_num_rows($query_mod);
-
-        if ($result > 0) {
-            while ($data = mysqli_fetch_assoc($query_mod)) {
-                $arreglo[] = $data;
-            }
-
-            echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
-        } else {
-            echo json_encode('');
-        }
-        mysqli_free_result($query_mod);
-        mysqli_close($conn);
 
         break;
 }

@@ -54,22 +54,20 @@
             <div class="card">
               <div class="card-header">
                 <h4 class="card-title">Procesos Registrados</h4>
-                <!-- <a class="btn btn-primary" href="crearUsuarios1.php" role="button">Crear Usuario</a> -->
-                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCrearUsuarios">Crear Usuarios</button> -->
-                <!-- <a class="btn btn-primary" role="button" href='crearUsuarios.php' <i class='large material-icons' data-toggle='tooltip' title='Adicionar' style='color:rgb(0, 154, 68)'>how_to_reg</i></a> -->
+                
                 <hr>
                 <button type="button" class="btn btn-primary" id="adProceso">Adicionar Proceso</button>
                 <form id="frmadParametro" style="display: none;">
                   <label for=""><b>Proceso</b></label>
+                  <input type="text" id="txtid_Proceso" readonly hidden>
                   <input type="text" name="txtProceso" id="txtProceso" class="form-control" placeholder="Proceso" style="width: 300px;">
-                  <!-- <select name="linea" id="cmbLinea" class="form-control"></select> -->
-                  <button type="button" class="btn btn-primary" id="guardarModulos">Guardar</button>
+                  <button type="button" class="btn btn-primary" id="btnguardarModulos">Guardar</button>
                 </form>
                 <hr>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="modulosBR" class="table-striped row-borde" style="width:100%">
+                  <table id="tblModulos" class="table-striped row-borde" style="width:100%">
                     <thead>
                       <tr>
                         <th>id</th>

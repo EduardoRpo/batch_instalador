@@ -6,46 +6,31 @@ $op = $_POST['operacion'];
 
 switch ($op) {
     case 1: //listar Condiciones del medio
-        $query_modulos = mysqli_query($conn, "SELECT cm.id, m.modulo, cm.min, cm.max FROM condicionesmedio_tiempo cm INNER JOIN modulo m ON cm.id_modulo= m.id");
-
-        $result = mysqli_num_rows($query_modulos);
-
-        mysqli_close($conn);
-
-        if ($result > 0) {
-            while ($data = mysqli_fetch_assoc($query_modulos)) {
-                $arreglo["data"][] = $data;
-            }
-            echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
-        } else {
-            echo false;
-        }
-        mysqli_free_result($query_modulos);
-
+        $query = "SELECT cm.id, m.modulo, cm.min, cm.max FROM condicionesmedio_tiempo cm INNER JOIN modulo m ON cm.id_modulo= m.id";
+        ejecutarQuerySelect($conn, $query);
         break;
 
     case 2: //Eliminar
         $id = $_POST['id'];
-
         $query = "DELETE FROM condicionesmedio_tiempo WHERE id = $id";
         ejecutarQuery($conn, $query);
         break;
 
-    case 3: // Guardar data
-        $modulo = $_POST['modulo'];
+    case 3: // Actualizar y Guardar data 
+        $id_modulo = $_POST['id'];
         $t_min = $_POST['t_min'];
         $t_max =  $_POST['t_max'];
+        
+        $query = "SELECT * FROM condicionesmedio_tiempo WHERE id_modulo = $id_modulo";
+        $result = existeRegistro($conn, $query);
 
-        $query = "SELECT COUNT(id) from condicionesmedio_tiempo where id_modulo = $modulo";
-        $row = existeRegistro($conn, $query);
-
-        if ($row > 0)
-            $query = "UPDATE condicionesmedio_tiempo SET min=$t_min, max=$t_max WHERE id_modulo = $modulo";
+        if ($result > 0)
+            $query = "UPDATE condicionesmedio_tiempo SET min=$t_min, max=$t_max WHERE id_modulo = $id_modulo";
         else
-            $query = "INSERT INTO condicionesmedio_tiempo (id_modulo, min, max) VALUES('$modulo', '$t_min', '$t_max')";
+            $query = "INSERT INTO condicionesmedio_tiempo (id_modulo, min, max) VALUES('$id_modulo', '$t_min', '$t_max')";
 
         ejecutarQuery($conn, $query);
-        
+
         break;
 
     case 4: // Cargar Selector Procesos

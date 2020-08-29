@@ -22,9 +22,10 @@ function utf8ize($d) {
 
 function existeRegistro($conn, $query)
 {
-    $result = $conn->query($query);
-    $row = $result->mysqli_fetch_row();
-    return $row;
+    $query = mysqli_query($conn, $query);
+    $result = mysqli_num_rows($query);
+    return $result;
+    
 }
 
 
@@ -39,7 +40,7 @@ function ejecutarQuery($conn, $query)
         echo '1';
     } else {
         die('Error');
-        echo 'Error: ' . mysqli_error($conn);
+        //echo 'Error: ' . mysqli_error($conn);
     }
     //mysqli_free_result($query);
     //mysqli_close($conn);

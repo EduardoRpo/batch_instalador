@@ -23,13 +23,24 @@ switch ($op) {
     $query = "DELETE FROM preguntas WHERE id = $id_pregunta";
     ejecutarQuery($conn, $query);
 
-  case 4: // obtener data
-    $id_pregunta = $_POST['id'];
+  case 4: // Guardar y actualizar data
+    $id = $_POST['id'];
+    $pregunta = $_POST['pregunta'];
+    $respuesta = $_POST['respuesta'];
+    $modulo = $_POST['modulo'];
 
-    $query = mysqli_query($conn, "SELECT * FROM preguntas WHERE id = $id_pregunta");
-    $data = mysqli_fetch_assoc($query);
-    echo json_encode($data, JSON_UNESCAPED_UNICODE);
-    mysqli_close($conn);
+    if ($id == '') {
+        $query = "SELECT * FROM preguntas WHERE nombre='$pregunta'";
+        $result = existeRegistro($conn, $query);
+
+        if ($result > 0) {
+            exit();
+        } else
+            $query = "INSERT INTO preguntas (pregunta, resp) VALUES('$pregunta', '$respuesta')";
+    } else
+        $query = "UPDATE preguntas SET pregunta = '$pregunta', respuesta=$respuesta WHERE id = $id";
+
+    ejecutarQuery($conn, $query);
 
     break;
 }

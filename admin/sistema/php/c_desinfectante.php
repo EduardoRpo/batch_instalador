@@ -19,8 +19,23 @@ switch ($op) {
 
         break;
 
-    case 3: // Guardar data
+    case 3: // Guardar o actualizar data
+        $id = $_POST['id'];
+        $desinfectante = $_POST['desinfectante'];
+        $concentracion = $_POST['concentracion'];
 
+        if ($id == '') {
+            $query = "SELECT * FROM desinfectante WHERE nombre='$desinfectante'";
+            $result = existeRegistro($conn, $query);
+
+            if ($result > 0) {
+                exit();
+            } else
+                $query = "INSERT INTO desinfectante (nombre, concentracion) VALUES('$desinfectante', '$concentracion')";
+        } else
+            $query = "UPDATE desinfectante SET nombre = '$desinfectante', concentracion=$concentracion WHERE id = $id";
+
+        ejecutarQuery($conn, $query);
 
         break;
 }

@@ -59,6 +59,7 @@
                   <label for=""><b>Proceso</b></label>
                   <input type="text" name="txtRespuesta" id="txtRespuesta" class="form-control centrado" placeholder="Respuesta"> <!-- style="width: 100px;" -->
                   <select name="cmbProceso" id="cmbProceso" class="form-control"></select>
+                  <input type="text" id="txtIdPregunta" readonly hidden>
                   <button type="button" class="btn btn-primary" id="btnguardarProceso">Guardar</button>
                 </form>
                 <hr>

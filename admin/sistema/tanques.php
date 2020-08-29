@@ -1,7 +1,3 @@
-<?php
-//include('./modal/m_crearUsuarios.php');
-?>
-
 
 <!DOCTYPE html>
 <html lang="es">
@@ -54,15 +50,14 @@
             <div class="card">
               <div class="card-header">
                 <h4 class="card-title">Tanques</h4>
-                <!-- <a class="btn btn-primary" href="crearUsuarios1.php" role="button">Crear Usuario</a> -->
-                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCrearUsuarios">Crear Usuarios</button> -->
-                <!-- <a class="btn btn-primary" role="button" href='crearUsuarios.php' <i class='large material-icons' data-toggle='tooltip' title='Adicionar' style='color:rgb(0, 154, 68)'>how_to_reg</i></a> -->
+                
                 <hr>
                 <button type="button" class="btn btn-primary" id="adTanques">Adicionar Tanque</button>
                 <form id="frmadParametro" style="display: none;">
                   <label for=""><b>Capacidad</b></label>                  
-                  <input type="text" name="txtcCapacidad" id="txtcCapacidad" class="form-control" placeholder="Capacidad">
-                  <button type="button" class="btn btn-primary" id="guardarLineas">Guardar</button>
+                  <input type="text" name="txtCapacidad" id="txtCapacidad" class="form-control" placeholder="Capacidad">
+                  <input type="text" id="txtid_tanques" readonly hidden>
+                  <button type="button" class="btn btn-primary" id="btnguardarTanques">Guardar</button>
                 </form>
                 <hr>
               </div>

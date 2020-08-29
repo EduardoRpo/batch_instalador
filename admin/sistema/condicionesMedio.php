@@ -65,8 +65,6 @@
                   <label for=""><b>Tiempo Mín</b></label>
                   <label for=""><b>Tiempo Máx</b></label>
                   <select name="moduloCondiciones" id="moduloCondiciones" class="form-control"></select>
-                  <input type="text" name="txtModulo" class="form-control centrado" readonly>
-                  <!-- <input type="text" name="txt" id="idRegistro" class="form-control" readonly hidden> -->
                   <input type="number" name="t_min" id="t_min" class="form-control centrado" placeholder="Tiempos Mínimos" required>
                   <input type="number" name="t_max" id="t_max" class="form-control centrado" placeholder="Tiempos Máximos" required>
                   <button type="button" class="btn btn-primary" id="btnguardarCondiciones">Guardar</button>

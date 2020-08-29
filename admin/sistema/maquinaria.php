@@ -54,19 +54,17 @@
             <div class="card">
               <div class="card-header">
                 <h4 class="card-title">Equipos Registrados</h4>
-                <!-- <a class="btn btn-primary" href="crearUsuarios1.php" role="button">Crear Usuario</a> -->
-                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCrearUsuarios">Crear Usuarios</button> -->
-                <!-- <a class="btn btn-primary" role="button" href='crearUsuarios.php' <i class='large material-icons' data-toggle='tooltip' title='Adicionar' style='color:rgb(0, 154, 68)'>how_to_reg</i></a> -->
+
                 <hr>
                 <button type="button" class="btn btn-primary" id="adEquipos">Adicionar Equipos</button>
                 <form id="frmadParametro" style="display: none;">
                   <label for=""><b>Equipo</b></label>
                   <label for=""><b>Línea</b></label>
-                  
-                  <input type="text" name="equipo" id="txtEquipo" class="form-control" placeholder="Linea" style="width: 500px;">
+                  <input type="text" id="txtid_Equipo" readonly hidden>
+                  <input type="text" name="txtEquipo" id="txtEquipo" class="form-control" placeholder="Linea" style="width: 500px;" required>
                   
                   <select name="linea" id="cmbLinea" class="form-control"></select>
-                  <button type="button" class="btn btn-primary" id="guardarEquipos">Guardar</button>
+                  <button type="button" class="btn btn-primary" id="btnguardarEquipos">Guardar</button>
                 </form>
                 <hr>
               </div>

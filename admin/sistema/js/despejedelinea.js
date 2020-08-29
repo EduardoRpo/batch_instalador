@@ -4,6 +4,7 @@ $('.contenedor-menu .menu a').removeAttr('style');
 $('#linkDespeje').css('text-decoration', 'revert')
 $('.contenedor-menu .menu ul.abrir').show();
 
+cargarSelectorProceso();
 /* Cargue de Parametros de Control en DataTable */
 
 $(document).ready(function () {
@@ -43,6 +44,7 @@ $('#adicionarParametro').click(function (e) {
     e.preventDefault();
     $("#frmadParametro").slideToggle();
     $('#txtIdPregunta').val('');
+    $('#btnguardarProceso').html('Crear');
     cargarSelectorProceso();
 });
 
@@ -80,11 +82,14 @@ $(document).on('click', '.link-editar', function (e) {
     let id = $(this).parent().parent().children().first().text();
     let pregunta = $(this).parent().parent().children().eq(1).text();
     let respuesta = $(this).parent().parent().children().eq(2).text();
+    let modulo = $(this).parent().parent().children().eq(3).text();
 
     $('#frmadParametro').slideDown();
     $('#txtIdPregunta').val(id);
     $('#txtPregunta').val(pregunta);
     $('#txtRespuesta').val(respuesta);
+    $(`#cmbProceso option:contains(${modulo})`).attr('selected', true);
+
 
 });
 
@@ -94,7 +99,6 @@ $(document).on('click', '.link-borrar', function (e) {
     e.preventDefault();
 
     let id = $(this).parent().parent().children().first().text();
-
     var confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este registro?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
 
     confirm.set('onok', function (r) {
@@ -115,21 +119,23 @@ $(document).on('click', '.link-borrar', function (e) {
 
 $('#btnguardarProceso').click(function (e) {
     e.preventDefault();
-    
-    let id = $('#txtIdPregunta').val();
 
+    let id = $('#txtIdPregunta').val();
+    let pregunta = $('#txtIdPregunta').val();
+    let respuesta = $('#txtRespuesta').val();
+    let modulo = $('#cmbProceso').val();
 
     $.ajax({
         type: "POST",
-        url: "php/operacionesDespejedelinea.php",
-        data: datos,
-        //data: {operacion : "3", id : id},
+        url: "php/c_despejeLinea.php",
+        data: { id: id, pregunta: pregunta, respuesta: respuesta, modulo: modulo },
+        
         success: function (r) {
             if (r == 1) {
-                alertify.set("notifier", "position", "top-right"); alertify.success("Agregado con éxito.");
-                document.getElementById("frmagregarUsuarios").reset();
+                alertify.set("notifier", "position", "top-right"); alertify.success("Proceso exitoso.");
+                refreshTable();
             } else {
-                alertify.set("notifier", "position", "top-right"); alertify.error("Usuario No Registrado.");
+                alertify.set("notifier", "position", "top-right"); alertify.error("Error.");
             }
         }
     });
@@ -142,18 +148,3 @@ function refreshTable() {
     $('#listarDespeje').DataTable().clear();
     $('#listarDespeje').DataTable().ajax.reload();
 }
-
-
-/*      var confirm= alertify.confirm('Samara Cosmetics','¿Está seguro de actualizar este registro?',null,null).set('labels', {ok:'Si', cancel:'No'});
-
-     confirm.set('onok', function(r){
-         if(r){
-             $.ajax({
-                 'method' : 'GET',
-                 'url' : `php/accionesDespejedeLinea.php?link-editar=${id}`,
-                 'data' : 'id',
-             });
-             refreshTable();
-             alertify.success('Registro Eliminado');
-         }
-     });   */
