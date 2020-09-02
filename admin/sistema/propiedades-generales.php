@@ -79,7 +79,7 @@
                 <h4 class="card-title">Nombres Productos</h4>
                 <hr>
                 <button type="button" class="btn btn-primary" onclick="adicionar(1);">Adicionar</button>
-                <form id="frmAdicionar1" class="frmAdicionar"  style="display: none;">
+                <form id="frmAdicionar1" class="frmAdicionar" style="display: none;">
                   <label for=""><b>Nombre Producto</b></label>
                   <input type="text" name="input1" id="input1" class="form-control" placeholder="Nombre Producto" style="width: 350px;">
                   <input type="text" name="txt1" id="txt1" class="form-control" placeholder="Nombre Producto" style="width: 350px;" hidden>
@@ -104,6 +104,10 @@
                   </table>
                 </div>
               </div>
+              <form id="formDataExcel" enctype="multipart/form-data">
+                <input type="file" name="datosExcel" id="datosExcel" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
+                <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value, 1);" disabled="disabled">Cargar Datos</button>
+              </form>
             </div>
           </div>
           <div class="col-md-6">
@@ -137,6 +141,10 @@
                   </table>
                 </div>
               </div>
+              <form id="formDataExcel" enctype="multipart/form-data">
+                <input type="file" name="datosExcel" id="datosExcel" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
+                <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value, 1);" disabled="disabled">Cargar Datos</button>
+              </form>
             </div>
           </div>
         </div>
@@ -173,6 +181,10 @@
                   </table>
                 </div>
               </div>
+              <form id="formDataExcel" enctype="multipart/form-data">
+                <input type="file" name="datosExcel" id="datosExcel" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
+                <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value, 1);" disabled="disabled">Cargar Datos</button>
+              </form>
             </div>
           </div>
           <div class="col-md-10">
@@ -206,6 +218,10 @@
                   </table>
                 </div>
               </div>
+              <form id="formDataExcel" enctype="multipart/form-data">
+                <input type="file" name="datosExcel" id="datosExcel" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
+                <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value, 1);" disabled="disabled">Cargar Datos</button>
+              </form>
             </div>
           </div>
         </div>
@@ -242,6 +258,10 @@
                   </table>
                 </div>
               </div>
+              <form id="formDataExcel" enctype="multipart/form-data">
+                <input type="file" name="datosExcel" id="datosExcel" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
+                <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value, 1);" disabled="disabled">Cargar Datos</button>
+              </form>
             </div>
           </div>
           <div class="col-md-6">
@@ -275,6 +295,10 @@
                   </table>
                 </div>
               </div>
+              <form id="formDataExcel" enctype="multipart/form-data">
+                <input type="file" name="datosExcel" id="datosExcel" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
+                <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value, 1);" disabled="disabled">Cargar Datos</button>
+              </form>
             </div>
           </div>
         </div>

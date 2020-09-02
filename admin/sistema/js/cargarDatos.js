@@ -21,7 +21,7 @@ function comprobarExtension(formulario, archivo, id) {
 /* enviar datos para cargar a la BD */
 
 function cargarDataExcel(id) {
-
+    debugger;
     const formulario = new FormData($('#formDataExcel')[0]);
     formulario.set('operacion', id);
 

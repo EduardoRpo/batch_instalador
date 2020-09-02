@@ -40,10 +40,27 @@
   justify-content: center;
 }
 
-/* #txtModulo {
-  grid-column-start: 1;
-  grid-column-end: 2;
-} */
+#frmadicionarPregunta {
+  display: grid;
+  grid-template-columns: 1fr 100px;
+  /* grid-gap: 5px; */
+  margin: 10px;
+  text-align: center;
+  justify-items: center;
+  align-items: baseline;
+  justify-content: center;
+}
+
+#frmadicionarPreguntaModulo {
+  display: grid;
+  grid-template-columns: 1fr 100px 240px;
+  grid-gap: 5px;
+  margin: 10px;
+  text-align: center;
+  justify-items: center;
+  align-items: baseline;
+  justify-content: center;
+}
 
 #btnguardarCondiciones {
   grid-column-start: 3;
@@ -117,17 +134,18 @@ form.frmAdicionarMinMax {
 
 /* Preguntas */
 
-#txtPregunta {
-  grid-column: 1/4;
+#btnguardarDespeje {
+  grid-column-start: 3;
 }
 
-#lblPregunta {
+/*
+/* #lblPregunta {
   grid-column: 1/4;
-}
+} */
 
-#txtRespuesta {
+/* #txtRespuesta {
   grid-column: 1/2;
-}
+} */
 
 /* Organizar seleccion formulas */
 .selproductos {

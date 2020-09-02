@@ -5,10 +5,11 @@ $('#linkDespeje').css('text-decoration', 'revert')
 $('.contenedor-menu .menu ul.abrir').show();
 
 cargarSelectorProceso();
+cargarSelectorPreguntas();
 /* Cargue de Parametros de Control en DataTable */
 
 $(document).ready(function () {
-    $("#listarDespeje").DataTable({
+    $("#tblDespeje").DataTable({
         scrollY: '50vh',
         scrollCollapse: true,
         paging: false,
@@ -42,10 +43,11 @@ $(document).ready(function () {
 
 $('#adicionarParametro').click(function (e) {
     e.preventDefault();
-    $("#frmadParametro").slideToggle();
-    $('#txtIdPregunta').val('');
+    $("#frmadicionarPreguntaModulo").slideToggle();
+
     $('#btnguardarProceso').html('Crear');
     cargarSelectorProceso();
+    cargarSelectorPreguntas();
 });
 
 /* Cargar selector Proceso */
@@ -75,19 +77,47 @@ function cargarSelectorProceso() {
     })
 }
 
+/* Cargar selector Preguntas */
+
+function cargarSelectorPreguntas() {
+
+    $.ajax({
+        method: 'POST',
+        url: 'php/c_despejeLinea.php',
+        data: { operacion: "3" },
+
+        success: function (response) {
+            var info = JSON.parse(response);
+
+            let $select = $('#cmbPregunta');
+            $select.empty();
+
+            $select.append('<option disabled selected>' + "Seleccionar" + '</option>');
+
+            $.each(info.data, function (i, value) {
+                $select.append('<option value ="' + value.id + '">' + value.pregunta + '</option>');
+            });
+        },
+        error: function (response) {
+            console.log(response);
+        }
+    })
+}
+
 /* Cargar datos para Actualizar registros */
 
 $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
+    debugger;
     let id = $(this).parent().parent().children().first().text();
     let pregunta = $(this).parent().parent().children().eq(1).text();
     let respuesta = $(this).parent().parent().children().eq(2).text();
     let modulo = $(this).parent().parent().children().eq(3).text();
 
-    $('#frmadParametro').slideDown();
-    $('#txtIdPregunta').val(id);
-    $('#txtPregunta').val(pregunta);
-    $('#txtRespuesta').val(respuesta);
+    $("#frmadicionarPreguntaModulo").slideDown();
+
+    $(`#cmbPregunta option:contains(${pregunta})`).attr('selected', true);
+    $(`#cmbRespuesta option:contains(${respuesta})`).attr('selected', true);
     $(`#cmbProceso option:contains(${modulo})`).attr('selected', true);
 
 
@@ -106,7 +136,7 @@ $(document).on('click', '.link-borrar', function (e) {
             $.ajax({
                 'method': 'POST',
                 'url': 'php/c_despejeLinea.php',
-                'data': { operacion: "3", id: id }
+                'data': { operacion: "4", id: id }
             });
             refreshTable();
             alertify.success('Registro Eliminado');
@@ -117,19 +147,25 @@ $(document).on('click', '.link-borrar', function (e) {
 
 /* Almacenar Registros */
 
-$('#btnguardarProceso').click(function (e) {
+$('#btnguardarDespeje').click(function (e) {
     e.preventDefault();
 
-    let id = $('#txtIdPregunta').val();
-    let pregunta = $('#txtIdPregunta').val();
-    let respuesta = $('#txtRespuesta').val();
+    debugger;
+
+    let pregunta = $('#cmbPregunta').val();
+    let respuesta = $('#cmbRespuesta').val();
     let modulo = $('#cmbProceso').val();
+
+    if (pregunta === null || respuesta === null || modulo === null) {
+        alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos.");
+        return false;
+    }
 
     $.ajax({
         type: "POST",
         url: "php/c_despejeLinea.php",
-        data: { id: id, pregunta: pregunta, respuesta: respuesta, modulo: modulo },
-        
+        data: { operacion: "5", pregunta: pregunta, respuesta: respuesta, modulo: modulo },
+
         success: function (r) {
             if (r == 1) {
                 alertify.set("notifier", "position", "top-right"); alertify.success("Proceso exitoso.");
@@ -145,6 +181,6 @@ $('#btnguardarProceso').click(function (e) {
 /* Actualizar tabla */
 
 function refreshTable() {
-    $('#listarDespeje').DataTable().clear();
-    $('#listarDespeje').DataTable().ajax.reload();
+    $('#tblDespeje').DataTable().clear();
+    $('#tblDespeje').DataTable().ajax.reload();
 }

@@ -25,8 +25,8 @@
                 <!-- <li><a href="" id="link3"><i class='large material-icons'>portrait</i><span>Incidencias</span></a></li> -->
                 <!-- <li><a href="lineas.php" id="link4"><i class='large material-icons'>portrait</i><span>Líneas</span></a></li> -->
                 <li><a href="maquinaria.php" id="linkEquipos"><i class='large material-icons'>portrait</i><span>Equipos</span></a></li>
-
-                <li><a href="despejedelinea.php" id="linkDespeje"><i class='large material-icons'>portrait</i><span>Preguntas</span></a></li>
+                <li><a href="preguntas.php" id="linkPreguntas"><i class='large material-icons'>portrait</i><span>Preguntas</span></a></li>
+                <li><a href="despejedelinea.php" id="linkDespeje"><i class='large material-icons'>portrait</i><span>Despeje</span></a></li>
                 <li><a href="tanques.php" id="link8"><i class='large material-icons'>portrait</i><span>Tanques</span></a></li>
 
             </ul>

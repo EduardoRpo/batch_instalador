@@ -1,5 +1,5 @@
-<?php 
-  include('./modal/m_despejedeLinea.php');
+<?php
+include('./modal/m_despejedeLinea.php');
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -11,7 +11,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>Samara Cosmetics | Despeje de Linea</title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-  
+
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -21,13 +21,13 @@
   <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
   <link href="../assets/css/now-ui-dashboard.css?v=1.5.0" rel="stylesheet" />
   <link href="../sistema/css/estilos.css" rel="stylesheet" />
-  
+
   <!-- Datatables -->
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
 
   <!-- Alertify -->
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
 
   <!-- Seleccion Multiple -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
@@ -36,7 +36,7 @@
 
 <body class="">
   <div class="wrapper ">
-   
+
     <?php include('./admin_componentes/sidebar.php'); ?>
 
     <div class="main-panel" id="main-panel">
@@ -47,20 +47,21 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title"> <strong>Despeje de Linea de los Procesos</strong></h4>
+                <h4 class="card-title"> <strong>Despeje de Linea</strong></h4>
                 <hr>
-                <button type="button" class="btn btn-primary" id="adicionarParametro">Adicionar Parametro</button>
-                <form id="frmadParametro" style="display: none;"> <!--  -->
-                  <label for="" id="lblPregunta"><b>Pregunta</b></label>
-                  
-                  <input type="text" class="form-control" id="txtIdPregunta" hidden>
-                  <input type="text" name="txtPregunta" id="txtPregunta" class="form-control" placeholder="Pregunta"> <!-- style="width: 650px;" -->
-                  <label for=""><b>Respuesta</b></label>
+                <button type="button" class="btn btn-primary" id="adicionarParametro">Adicionar</button>
+                <form id="frmadicionarPreguntaModulo" style="display: none;">
+                  <label><b>Pregunta</b></label>
+                  <label><b>Respuesta</b></label>
                   <label for=""><b>Proceso</b></label>
-                  <input type="text" name="txtRespuesta" id="txtRespuesta" class="form-control centrado" placeholder="Respuesta"> <!-- style="width: 100px;" -->
+                  <select name="cmbPregunta" id="cmbPregunta" class="form-control" ></select>
+                  <select name="cmbRespuesta" id="cmbRespuesta" class="form-control" >
+                    <option disabled selected>Seleccionar</option>
+                    <option value="1">Si</option>
+                    <option value="0">No</option>
+                  </select>
                   <select name="cmbProceso" id="cmbProceso" class="form-control"></select>
-                  <input type="text" id="txtIdPregunta" readonly hidden>
-                  <button type="button" class="btn btn-primary" id="btnguardarProceso">Guardar</button>
+                  <button type="button" class="btn btn-primary" id="btnguardarDespeje">Guardar</button>
                 </form>
                 <hr>
 
@@ -68,11 +69,11 @@
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="listarDespeje" class="table-striped row-borde" style="width:100%">
+                  <table id="tblDespeje" class="table-striped row-borde" style="width:100%">
                     <thead>
                       <tr>
                         <th>Id</th>
-                        <th>Parametro de Control</th>
+                        <th>Pregunta</th>
                         <th>Respuesta Correcta</th>
                         <th>Proceso</th>
                         <th></th>
@@ -80,25 +81,25 @@
                       </tr>
                     </thead>
                     <tbody>
-                     
+
                     </tbody>
-                  </table>      
+                  </table>
                 </div>
               </div>
               <form action="" id="formDataExcel" enctype="multipart/form-data">
                 <input type="file" name="datosExcel" id="datosExcel" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
-                <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value);" disabled="disabled">Cargar Datos</button>
+                <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value, 6);" disabled="disabled">Cargar Datos</button>
               </form>
             </div>
-          </div>      
+          </div>
         </div>
-      </div>                
+      </div>
       <?php include('./admin_componentes/footer.php'); ?>
     </div>
   </div>
-  
-  
-  
+
+
+
   <!--   Core JS Files   -->
   <!-- <script src="../assets/js/core/jquery.min.js"></script> -->
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -113,24 +114,26 @@
   <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
   <!-- Chart JS -->
   <script src="../assets/js/plugins/chartjs.min.js"></script>
- 
+
   <!--  Notifications Plugin    -->
   <script src="../assets/js/plugins/bootstrap-notify.js"></script>
- 
+
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-  <!-- <script src="../assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script> --><!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
+  <!-- <script src="../assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script> -->
+  <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
   <!-- <script src="../assets/demo/demo.js"></script> -->
 
   <!-- Alertify -->
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
   <!-- javascript inicializacion datatables -->
-  <script src="/admin/sistema/js/despejedelinea.js"></script>
+  <script src="js/despejedelinea.js"></script>
+  <script src="js/cargarDatos.js"></script>
 
   <!-- Multiple Seleccion -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script>
 
 
-  </body>
+</body>
 
 </html>

@@ -79,7 +79,7 @@
               </div>
               <form action="" id="formDataExcel" enctype="multipart/form-data">
                 <input type="file" name="datosExcel" id="datosExcel" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
-                <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value, 5);" disabled="disabled">Cargar Datos</button>
+                <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value, 7);" disabled="disabled">Cargar Datos</button>
               </form>
             </div>
           </div>
