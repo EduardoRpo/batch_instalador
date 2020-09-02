@@ -1,5 +1,5 @@
-<?php 
-  include_once('./modal/m_productos.php');
+<?php
+include_once('./modal/m_productos.php');
 ?>
 
 <!DOCTYPE html>
@@ -53,11 +53,11 @@
               <div class="card-header">
                 <h4 class="card-title"> <strong>Productos Registrados</strong></h4>
                 <!-- <a class="btn btn-primary" href="crearUsuarios.php" role="button">Crear Producto</a> -->
-                <button type="button" class="btn btn-primary" onclick="cargarDatosProductos();">Crear Productos</button>
+                <button type="button" class="btn btn-primary" onclick="cargarModalProductos();">Crear Productos</button>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="listarProductos" class="table-striped row-borde" style="width:100%">
+                  <table id="listarProductos" class="display" style="width:100%">
                     <thead>
                       <tr>
                         <th></th>
@@ -68,9 +68,7 @@
                         <th>Producto</th>
                         <th>Notificación Sanitaria</th>
                         <th>Linea</th>
-
-
-                        <!--  <th>Marca</th>
+                        <th>Marca</th>
                         <th>Propietario</th>
                         <th>Presentación</th>
                         <th>Color</th>
@@ -81,9 +79,10 @@
                         <th>Pseudomona</th>
                         <th>Escherichia</th>
                         <th>Staphylococcus</th>
-                        <th>PH</th>
-                        <th>Viscosidad</th>
                         <th>Densidad</th>
+                        <!--  <th>PH</th>
+                        <th>Viscosidad</th>
+                        
                         <th>Alcohol</th> -->
                       </tr>
                     </thead>
@@ -93,6 +92,10 @@
                   </table>
                 </div>
               </div>
+              <form action="" id="formDataExcel" enctype="multipart/form-data">
+                <input type="file" name="datosExcel" id="datosExcel" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
+                <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value);" disabled="disabled">Cargar Datos</button>
+              </form>
             </div>
           </div>
         </div>

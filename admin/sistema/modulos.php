@@ -54,7 +54,7 @@
             <div class="card">
               <div class="card-header">
                 <h4 class="card-title">Procesos Registrados</h4>
-                
+
                 <hr>
                 <button type="button" class="btn btn-primary" id="adProceso">Adicionar Proceso</button>
                 <form id="frmadParametro" style="display: none;">
@@ -82,6 +82,10 @@
                   </table>
                 </div>
               </div>
+              <form action="" id="formDataExcel" enctype="multipart/form-data">
+                <input type="file" name="datosExcel" id="datosExcel" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
+                <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value, 4);" disabled="disabled">Cargar Datos</button>
+              </form>
             </div>
           </div>
         </div>
@@ -119,6 +123,7 @@
   <!-- javascript inicializacion datatables -->
   <script src="js/modulos.js"></script>
   <script src="js/menu.js"></script>
+  <script src="js/cargarDatos.js"></script>
 
 </body>
 

@@ -1,18 +1,48 @@
+var tablaBD;
+var id_tbl;
+var editar;
+
 /* Mostrar Menu seleccionado */
 
 $('.contenedor-menu .menu a').removeAttr('style');
 $('#linkEmpaques').css('text-decoration', 'revert')
 $('.contenedor-menu .menu ul.abrir1').show();
 
+
+/* Ocultar tablas Propiedades Generales */
+
+$(document).ready(function () {
+
+    for (i = 1; i < 6; i++) {
+        $(`#${i}`).hide();
+
+    }
+})
+
 /* Mostrar cada parametro */
 
-function parametros(card) {
-    $(`#${card}`).toggle();
+function parametros(id) {
+    debugger;
+    //$(`#${card}`).toggle();
+    $(`#${id}`).toggle();
+
+    for (let i = 1; i < 6; i++) {
+        if (id != i) {
+            $(`#${i}`).slideUp();
+        }
+    }
+
+    id_tbl = id;
+    id = $(`#tbl${id}`);
+    tablaBD = tabla;
+
+    cargarTablas(id, tabla);
+    debugger;
 }
 
 /* Cargar tablas */
 
-$(document).ready(function () {
+/* $(document).ready(function () {
     let tabla;
     for (i = 1; i < 9; i++) {
         $(`#${i}`).hide();
@@ -22,11 +52,11 @@ $(document).ready(function () {
         else
             cargarTablas2(tabla, i);
     }
-})
+}) */
 
 /* Cargue de Nombre Productos*/
 
-function cargarTablas(tabla, operacion) {
+function cargarTablas(id, tabla) {
     $(tabla).DataTable({
         scrollY: '50vh',
         scrollCollapse: true,
@@ -36,12 +66,12 @@ function cargarTablas(tabla, operacion) {
         "ajax": {
             method: "POST",
             url: "php/c_empaque.php",
-            data: { operacion: operacion },
+            data: { tabla: tabla, operacion: 1 },
         },
 
         "columns": [
-            { "data": "id" },
-            { "data": "nombre" },
+            { "data": "codigo" },
+            { "data": "descripcion" },
             { "defaultContent": "<a href='#' <i class='large material-icons link-editar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
             { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" }
 

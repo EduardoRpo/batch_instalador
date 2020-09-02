@@ -1,33 +1,11 @@
 <?php
 require_once('../../../conexion.php');
-require_once('utils/utf8.php');
+require_once('./crud.php');
 
-/* function utf8ize($d) {
-  if (is_array($d)) 
-      foreach ($d as $k => $v) 
-          $d[$k] = utf8ize($v);
+$op = $_POST['operacion'];
 
-   else if(is_object($d))
-      foreach ($d as $k => $v) 
-          $d->$k = utf8ize($v);
+switch ($op) {
+  
 
-   else 
-      return utf8_encode($d);
-
-  return $d;
-  } */
-
-$query_productos = mysqli_query($conn, "SELECT p.referencia, p.nombre_referencia, p.unidad_empaque, np.nombre as producto, ns.nombre as notificacion, linea.nombre as linea 
-                                        FROM producto p INNER JOIN nombre_producto np INNER JOIN notificacion_sanitaria ns INNER JOIN linea 
-                                        ON np.id = p.id_nombre_producto AND linea.id = p.id_linea AND ns.id = p.id_notificacion_sanitaria");
-
-$result = mysqli_num_rows($query_productos);
-
-if ($result > 0) {
-  while ($data = mysqli_fetch_assoc($query_productos)) {
-    $arreglo["data"][] = $data;
-  }
-  echo json_encode(utf8ize($arreglo), JSON_UNESCAPED_UNICODE);
+    break;
 }
-mysqli_free_result($query_productos);
-mysqli_close($conn);

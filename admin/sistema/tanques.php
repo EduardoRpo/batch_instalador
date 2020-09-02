@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -50,11 +49,11 @@
             <div class="card">
               <div class="card-header">
                 <h4 class="card-title">Tanques</h4>
-                
+
                 <hr>
                 <button type="button" class="btn btn-primary" id="adTanques">Adicionar Tanque</button>
                 <form id="frmadParametro" style="display: none;">
-                  <label for=""><b>Capacidad</b></label>                  
+                  <label for=""><b>Capacidad</b></label>
                   <input type="text" name="txtCapacidad" id="txtCapacidad" class="form-control" placeholder="Capacidad">
                   <input type="text" id="txtid_tanques" readonly hidden>
                   <button type="button" class="btn btn-primary" id="btnguardarTanques">Guardar</button>
@@ -78,6 +77,10 @@
                   </table>
                 </div>
               </div>
+              <form action="" id="formDataExcel" enctype="multipart/form-data">
+                <input type="file" name="datosExcel" id="datosExcel" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
+                <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value, 5);" disabled="disabled">Cargar Datos</button>
+              </form>
             </div>
           </div>
         </div>
@@ -115,6 +118,7 @@
   <!-- javascript inicializacion datatables -->
   <script src="js/tanques.js"></script>
   <script src="js/menu.js"></script>
+  <script src="js/cargarDatos.js"></script>
 
 </body>
 

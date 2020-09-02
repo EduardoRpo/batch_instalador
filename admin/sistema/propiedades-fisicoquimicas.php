@@ -68,7 +68,7 @@
                 <button class="btn btn-light mb-5" id="ph" onclick="parametros(id, 6)">PH</button>
                 <button class="btn btn-primary mb-5" id="untuosidad" onclick="parametros(id, 7)">Untuosidad</button>
                 <button class="btn btn-light mb-5" id="viscosidad" onclick="parametros(id, 8)">Viscosidad</button>
-                <button class="btn btn-primary mb-5" id="poder_espumoso" onclick="parametros(id, 8)">Poder Espumoso</button>
+                <button class="btn btn-primary mb-5" id="poder_espumoso" onclick="parametros(id, 9)">Poder Espumoso</button>
               </div>
             </div>
           </div>
@@ -84,8 +84,8 @@
                 <button type="button" class="btn btn-primary" onclick="adicionar(1);">Adicionar</button>
                 <form id="frmAdicionar1" class="frmAdicionar" style="display: none;">
                   <label for=""><b>Apariencia</b></label>
+                  <input type="text" name="txt-id1" id="txt-id1" class="form-control" hidden>
                   <input type="text" name="input1" id="input1" class="form-control" placeholder="Apariencia" style="width: 700px;">
-                  <input type="text" name="txt1" id="txt1" class="form-control" hidden>
                   <button type="button" class="btn btn-primary tabla1" id="apariencia" onclick="guardarDatosGenerales(id, 1);">Guardar</button>
                 </form>
                 <hr>
@@ -118,6 +118,7 @@
                 <button type="button" class="btn btn-primary" onclick="adicionar(2);">Adicionar</button>
                 <form id="frmAdicionar2" class="frmAdicionar" style="display: none;">
                   <label for=""><b>Color</b></label>
+                  <input type="text" name="txt-id2" id="txt-id2" class="form-control" hidden>
                   <input type="text" name="input2" id="input2" class="form-control" placeholder="Color" style="width: 550px;">
                   <button type="button" class="btn btn-primary tabla2" id="color" onclick="guardarDatosGenerales(id, 2);">Guardar</button>
                 </form>
@@ -154,6 +155,7 @@
                 <button type="button" class="btn btn-primary" onclick="adicionar(3);">Adicionar</button>
                 <form id="frmAdicionar3" class="frmAdicionar" style="display: none;">
                   <label for=""><b>Olor</b></label>
+                  <input type="text" name="txt-id3" id="txt-id3" class="form-control" hidden>
                   <input type="text" name="input3" id="input3" class="form-control" placeholder="Olor" style="width:550px;">
                   <button type="button" class="btn btn-primary tabla3" id="olor" onclick="guardarDatosGenerales(id, 3);">Guardar</button>
                 </form>
@@ -185,10 +187,12 @@
 
                 <hr>
                 <button type="button" class="btn btn-primary" onclick="adicionar(4);">Adicionar</button>
-                <form id="frmAdicionar4" class="frmAdicionar" style="display: none;">
+                <form id="frmAdicionar4" class="frmAdicionarMinMax" style="display: none;">
                   <label for=""><b>Densidad</b></label>
-                  <input type="text" name="input4" id="input4" class="form-control" placeholder="Densidad" style="width: 350px;">
-                  <button type="button" class="btn btn-primary tabla4" id="densidad" onclick="guardarDatosGenerales(id, 4);">Guardar</button>
+                  <input type="text" name="txt-id4" id="txt-id4" class="form-control" hidden>
+                  <input type="number" name="min4" id="min4" class="form-control centrado" placeholder="Mínimo">
+                  <input type="number" name="max4" id="max4" class="form-control centrado" placeholder="Máximo">
+                  <button type="button" class="btn btn-primary tabla4" id="densidad_gravedad" onclick="guardarDatosGeneralesMinMax(id, 4);">Guardar</button>
                 </form>
                 <hr>
               </div>
@@ -221,10 +225,12 @@
 
                 <hr>
                 <button type="button" class="btn btn-primary" onclick="adicionar(5);">Adicionar</button>
-                <form id="frmAdicionar5" class="frmAdicionar" style="display: none;">
+                <form id="frmAdicionar5" class="frmAdicionarMinMax" style="display: none;">
                   <label for=""><b>Grado de Alcohol</b></label>
-                  <input type="text" name="input5" id="input5" class="form-control" placeholder="Algrado de Alcohol" style="width: 400px;">
-                  <button type="button" class="btn btn-primary tabla5" id="grado_alcohol" onclick="guardarDatosGenerales(id, 5);">Guardar</button>
+                  <input type="text" name="txt-id5" id="txt-id5" class="form-control" hidden>
+                  <input type="number" name="min5" id="min" class="form-control centrado" placeholder="Mínimo">
+                  <input type="number" name="max5" id="max" class="form-control centrado" placeholder="Máximo">
+                  <button type="button" class="btn btn-primary tabla5" id="grado_alcohol" onclick="guardarDatosGeneralesMinMax(id, 5);">Guardar</button>
                 </form>
                 <hr>
               </div>
@@ -254,10 +260,12 @@
 
                 <hr>
                 <button type="button" class="btn btn-primary" onclick="adicionar(6);">Adicionar</button>
-                <form id="frmAdicionar6" class="frmAdicionar" style="display: none;">
+                <form id="frmAdicionar6" class="frmAdicionarMinMax" style="display: none;">
                   <label for=""><b>PH</b></label>
-                  <input type="number" name="input6" id="input6" class="form-control" placeholder="PH">
-                  <button type="button" class="btn btn-primary tabla6" id="PH" onclick="guardarDatosGenerales(id, 6);">Guardar</button>
+                  <input type="text" name="txt-id6" id="txt-id6" class="form-control" hidden>
+                  <input type="number" name="min6" id="min6" class="form-control centrado" placeholder="Mínimo">
+                  <input type="number" name="max6" id="max6" class="form-control centrado" placeholder="Máximo">
+                  <button type="button" class="btn btn-primary tabla6" id="PH" onclick="guardarDatosGeneralesMinMax(id, 6);">Guardar</button>
                 </form>
                 <hr>
               </div>
@@ -291,6 +299,7 @@
                 <button type="button" class="btn btn-primary" onclick="adicionar(7);">Adicionar</button>
                 <form id="frmAdicionar7" class="frmAdicionar" style="display: none;">
                   <label for=""><b>Untuosidad</b></label>
+                  <input type="text" name="txt-id7" id="txt-id7" class="form-control" hidden>
                   <input type="text" name="input7" id="input7" class="form-control" placeholder="Untuosidad" style="width: 400px;">
                   <button type="button" class="btn btn-primary tabla7" id="untuosidad" onclick="guardarDatosGenerales(id, 7);">Guardar</button>
                 </form>
@@ -319,13 +328,14 @@
             <div class="card" id="8">
               <div class="card-header">
                 <h4 class="card-title">Viscosidad</h4>
-
                 <hr>
                 <button type="button" class="btn btn-primary" onclick="adicionar(8);">Adicionar</button>
-                <form id="frmAdicionar8" class="frmAdicionar" style="display: none;">
-                  <label for=""><b>Poder Espumoso</b></label>
-                  <input type="number" name="input8" id="input8" class="form-control" placeholder="Viscosidad">
-                  <button type="button" class="btn btn-primary tabla8" id="viscosidad" onclick="guardarDatosGenerales(id, 8);">Guardar</button>
+                <form id="frmAdicionar8" class="frmAdicionarMinMax" style="display: none;">
+                  <label for=""><b>Viscosidad</b></label>
+                  <input type="text" name="txt-id8" id="txt-id8" class="form-control" hidden>
+                  <input type="number" name="min8" id="min8" class="form-control centrado" placeholder="Mínimo">
+                  <input type="number" name="max8" id="max8" class="form-control centrado" placeholder="Máximo">
+                  <button type="button" class="btn btn-primary tabla8" id="viscosidad" onclick="guardarDatosGeneralesMinMax(id, 8);">Guardar</button>
                 </form>
                 <hr>
               </div>
@@ -350,7 +360,7 @@
           </div>
         </div>
         <div class="row">
-        <div class="col-md-6">
+          <div class="col-md-6">
             <div class="card" id="9">
               <div class="card-header">
                 <h4 class="card-title">Poder Espumoso</h4>
@@ -359,14 +369,15 @@
                 <button type="button" class="btn btn-primary" onclick="adicionar(9);">Adicionar</button>
                 <form id="frmAdicionar9" class="frmAdicionar" style="display: none;">
                   <label for=""><b>Poder Espumoso</b></label>
-                  <input type="number" name="input8" id="input8" class="form-control" placeholder="Poder Espumoso">
+                  <input type="text" name="txt-id9" id="txt-id9" class="form-control" hidden>
+                  <input type="text" name="input9" id="input9" class="form-control" placeholder="Poder Espumoso" style="width: 250px;">
                   <button type="button" class="btn btn-primary tabla9" id="poder_espumoso" onclick="guardarDatosGenerales(id, 9);">Guardar</button>
                 </form>
                 <hr>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="tbl8" class="table-striped row-borde" style="width:100%">
+                  <table id="tbl9" class="table-striped row-borde" style="width:100%">
                     <thead>
                       <tr>
                         <th>id</th>

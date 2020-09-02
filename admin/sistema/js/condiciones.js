@@ -37,9 +37,10 @@ function cargarSelectorModulo() {
     $.ajax({
         method: 'POST',
         url: 'php/c_condiciones.php',
-        data: { operacion: "4" },
+        data: { operacion: 4 },
 
         success: function (response) {
+
             info = JSON.parse(response);
 
             let $select = $('#moduloCondiciones');

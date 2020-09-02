@@ -1,8 +1,3 @@
-<?php
-//include('./modal/m_crearUsuarios.php');
-?>
-
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -28,15 +23,12 @@
   <link rel="stylesheet" href="./htdocs/assets/datatables/DataTables-1.10.21/css/dataTables.bootstrap4.css"> -->
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
 
-
   <!-- Icons -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 
   <!-- Alertify -->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
-
-
 
 </head>
 
@@ -60,11 +52,11 @@
                 <p class="category">Propiedades<a href=""></a></p>
               </div>
               <div class="card-body">
-                <button class="btn btn-info mb-5" onclick="parametros(1);">Tapa</button>
-                <button class="btn btn-light mb-5" onclick="parametros(2)">Envase</button>
-                <button class="btn btn-info mb-5" onclick="parametros(3)">Etiqueta</button>
-                <button class="btn btn-light mb-5" onclick="parametros(4)">Otros Caja</button>
-                <button class="btn btn-info mb-5" onclick="parametros(5)">Otros</button>
+                <button class="btn btn-info mb-5" id="tapas" onclick="parametros(id, 1);">Tapa</button>
+                <button class="btn btn-light mb-5" id="envase" onclick="parametros(id, 2)">Envase</button>
+                <button class="btn btn-info mb-5" id="etiqueta" onclick="parametros(id, 3)">Etiqueta</button>
+                <button class="btn btn-light mb-5" id="otros" onclick="parametros(id, 4)">Otros Caja</button>
+                <button class="btn btn-info mb-5" id="otros_empaque" onclick="parametros(id, 5)">Otros</button>
               </div>
             </div>
           </div>
@@ -75,13 +67,10 @@
             <div class="card" id="1">
               <div class="card-header">
                 <h4 class="card-title">Tapas</h4>
-                <!-- <a class="btn btn-primary" href="crearUsuarios1.php" role="button">Crear Usuario</a> -->
-                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCrearUsuarios">Crear Usuarios</button> -->
-                <!-- <a class="btn btn-primary" role="button" href='crearUsuarios.php' <i class='large material-icons' data-toggle='tooltip' title='Adicionar' style='color:rgb(0, 154, 68)'>how_to_reg</i></a> -->
                 <hr>
                 <button type="button" class="btn btn-primary" id="addTapa">Adicionar</button>
                 <form id="frmadParametro" style="display: none;">
-                  <label for=""><b>Codigo</b></label>
+                  <label for=""><b>Código</b></label>
                   <input type="number" name="codigoTapa" id="codigoTapa" class="form-control" placeholder="Codigo">
                   <label for=""><b>Descripcion de Tapa</b></label>
                   <input type="text" name="nombreTapa" id="nombreTapa" class="form-control" placeholder="Descripcion Tapa">
@@ -94,7 +83,7 @@
                   <table id="tbl1" class="table-striped row-borde" style="width:100%">
                     <thead>
                       <tr>
-                        <th>Codigo</th>
+                        <th>Código</th>
                         <th>Tapas</th>
                         <th></th>
                         <th></th>
@@ -106,19 +95,20 @@
                   </table>
                 </div>
               </div>
+              <form action="" id="formDataExcel" enctype="multipart/form-data">
+                <input type="file" name="datosExcel" id="datosExcel" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
+                <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value);" disabled="disabled">Cargar Datos</button>
+              </form>
             </div>
           </div>
           <div class="col-md-12">
             <div class="card" id="2">
               <div class="card-header">
                 <h4 class="card-title">Envases</h4>
-                <!-- <a class="btn btn-primary" href="crearUsuarios1.php" role="button">Crear Usuario</a> -->
-                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCrearUsuarios">Crear Usuarios</button> -->
-                <!-- <a class="btn btn-primary" role="button" href='crearUsuarios.php' <i class='large material-icons' data-toggle='tooltip' title='Adicionar' style='color:rgb(0, 154, 68)'>how_to_reg</i></a> -->
                 <hr>
                 <button type="button" class="btn btn-primary" id="addEnvase">Adicionar</button>
                 <form id="frmadParametro" style="display: none;">
-                  <label for=""><b>Codigo</b></label>
+                  <label for=""><b>Código</b></label>
                   <input type="text" name="codigoEnvase" id="codigoEnvase" class="form-control" placeholder="Codigo">
                   <label for=""><b>Envase</b></label>
                   <input type="text" name="nombreEnvase" id="nombreEnvase" class="form-control" placeholder="Envase">
@@ -131,7 +121,7 @@
                   <table id="tbl2" class="table-striped row-borde" style="width:100%">
                     <thead>
                       <tr>
-                        <th>codigo</th>
+                        <th>Código</th>
                         <th>Envase</th>
                         <th></th>
                         <th></th>
@@ -152,9 +142,6 @@
             <div class="card" id="3">
               <div class="card-header">
                 <h4 class="card-title">Etiquetas</h4>
-                <!-- <a class="btn btn-primary" href="crearUsuarios1.php" role="button">Crear Usuario</a> -->
-                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCrearUsuarios">Crear Usuarios</button> -->
-                <!-- <a class="btn btn-primary" role="button" href='crearUsuarios.php' <i class='large material-icons' data-toggle='tooltip' title='Adicionar' style='color:rgb(0, 154, 68)'>how_to_reg</i></a> -->
                 <hr>
                 <button type="button" class="btn btn-primary" id="addEtiquetas">Adicionar</button>
                 <form id="frmadParametro" style="display: none;">
@@ -189,9 +176,6 @@
             <div class="card" id="4">
               <div class="card-header">
                 <h4 class="card-title">Otros Caja</h4>
-                <!-- <a class="btn btn-primary" href="crearUsuarios1.php" role="button">Crear Usuario</a> -->
-                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCrearUsuarios">Crear Usuarios</button> -->
-                <!-- <a class="btn btn-primary" role="button" href='crearUsuarios.php' <i class='large material-icons' data-toggle='tooltip' title='Adicionar' style='color:rgb(0, 154, 68)'>how_to_reg</i></a> -->
                 <hr>
                 <button type="button" class="btn btn-primary" id="addCaja">Adicionar</button>
                 <form id="frmadParametro" style="display: none;">
@@ -229,9 +213,6 @@
             <div class="card" id="5">
               <div class="card-header">
                 <h4 class="card-title">Otros</h4>
-                <!-- <a class="btn btn-primary" href="crearUsuarios1.php" role="button">Crear Usuario</a> -->
-                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCrearUsuarios">Crear Usuarios</button> -->
-                <!-- <a class="btn btn-primary" role="button" href='crearUsuarios.php' <i class='large material-icons' data-toggle='tooltip' title='Adicionar' style='color:rgb(0, 154, 68)'>how_to_reg</i></a> -->
                 <hr>
                 <button type="button" class="btn btn-primary" id="addOtros">Adicionar</button>
                 <form id="frmadParametro" style="display: none;">
@@ -298,7 +279,7 @@
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
   <!-- javascript inicializacion datatables -->
-  <script src="js/empaques.js"></script>
+  <script src="js/propiedades-generales.js"></script>
   <script src="js/menu.js"></script>
 
 </body>
