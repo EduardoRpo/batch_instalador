@@ -88,14 +88,14 @@ function cargarselectores(selector) {
 
     success: function (response) {
       var info = JSON.parse(response);
-
+      debugger;
       let $select = $(`#${selector}`);
       $select.empty();
 
       $select.append('<option disabled selected>' + "Seleccionar" + '</option>');
 
       $.each(info.data, function (i, value) {
-        $select.append('<option value ="' + i + '">' + value.nombre + '</option>');
+        $select.append('<option value ="' + value.id + '">' + value.nombre + '</option>');
       });
     },
     error: function (response) {
