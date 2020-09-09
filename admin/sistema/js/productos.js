@@ -47,13 +47,8 @@ $(document).ready(function () {
       { "data": "viscosidad" },
       { "data": "densidad" },
       { "data": "alcohol" },
-
-
-      /* {"defaultContent": "<a href='crearUsuarios.php' <i class='large material-icons' data-toggle='tooltip' title='Adicionar' style='color:rgb(0, 154, 68)'>how_to_reg</i></a>"}, */
-
     ]
   });
-
 });
 
 /* Cargar Modal para actualizar y Crear productos */
@@ -88,7 +83,7 @@ function cargarselectores(selector) {
 
     success: function (response) {
       var info = JSON.parse(response);
-      debugger;
+
       let $select = $(`#${selector}`);
       $select.empty();
 
@@ -155,13 +150,10 @@ $(document).on('click', '#btnguardarProductos', function (e) {
 
   const producto = new FormData($('#frmagregarProductos')[0]);
   producto.set('operacion', 3);
-  //let producto = $("#frmagregarProductos").serialize();
-  debugger;
 
   $.ajax({
     type: "POST",
     url: "php/c_productos.php",
-    //data: { operacion: 3, producto: producto },
     data: producto,
     processData: false,
     contentType: false,
@@ -176,7 +168,7 @@ $(document).on('click', '#btnguardarProductos', function (e) {
         alertify.set("notifier", "position", "top-right"); alertify.success("El producto ya se encuentra registrado.");
         return false;
       }
-
+      $('#m_productos').modal('hide');
     },
     error: function (response) {
       alertify.set("notifier", "position", "top-right"); alertify.error("Error.");

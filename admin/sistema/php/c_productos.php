@@ -30,44 +30,22 @@ switch ($op) {
 
         ejecutarQuerySelect($conn, $query);
         break;
-    
+
 
     case 2: //Eliminar
-        $id = $_POST['referencia'];
+        $id = $_POST['id'];
         $query = "DELETE FROM producto WHERE referencia = $id";
         ejecutarQuery($conn, $query);
         break;
 
     case 3: // Guardar data
 
+        //carga la informacion del POST
+
         foreach ($_POST as $nombre_campo => $valor) {
             $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";
             eval($asignacion);
         }
-
-        /* echo $referencia; '<br>';
-        echo $nombre; '<br>';   
-        echo $empaque; '<br>';
-        echo $nombre_producto; '<br>';
-        echo $notificacion_sanitaria; '<br>';
-        echo $linea; '<br>';
-        echo $marca; '<br>';
-        echo $propietario; '<br>'; 
-        echo $presentacion_comercial; '<br>'; 
-        echo $color; '<br>'; 
-        echo $olor; '<br>';
-        echo $apariencia; '<br>'; 
-        echo $untuosidad; '<br>';
-        echo $poder_espumoso; '<br>'; 
-        echo $recuento_mesofilos; '<br>';
-        echo $pseudomona; '<br>';
-        echo $escherichia; '<br>';
-        echo $staphylococcus; '<br>';
-        echo $ph; '<br>';
-        echo $viscosidad; '<br>';
-        echo $densidad_gravedad; '<br>';
-        echo $grado_alcohol; '<br>'; */
-        //exit();
 
         //validar si el registro existe
 
@@ -84,9 +62,7 @@ switch ($op) {
             VALUES ('$referencia', '$nombre', '$empaque', '$nombre_producto', '$notificacion_sanitaria', 
             '$linea', '$marca', '$propietario', '$presentacion_comercial', '$color', '$olor', '$apariencia', 
             '$untuosidad', '$poder_espumoso', '$recuento_mesofilos', '$pseudomona', '$escherichia', '$staphylococcus',
-             '$ph', '$viscosidad', '$densidad_gravedad', '$grado_alcohol')";
-             echo $query;
-             exit();
+            '$ph', '$viscosidad', '$densidad_gravedad', '$grado_alcohol')";
         }
 
         ejecutarQuery($conn, $query);
