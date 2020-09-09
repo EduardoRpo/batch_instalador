@@ -1,6 +1,3 @@
-<?php
-include('./modal/m_despejedeLinea.php');
-?>
 <!DOCTYPE html>
 <html lang="es">
 

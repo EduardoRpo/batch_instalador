@@ -1,8 +1,6 @@
 <?php
 include('./modal/m_crearUsuarios.php');
 ?>
-
-
 <!DOCTYPE html>
 <html lang="es">
 
