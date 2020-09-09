@@ -1,6 +1,3 @@
-<?php
-include('./modal/m_crearUsuarios.php');
-?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -54,6 +51,7 @@ include('./modal/m_crearUsuarios.php');
                 <h4 class="card-title">Usuarios Registrados</h4>
                 <!-- <a class="btn btn-primary" href="crearUsuarios1.php" role="button">Crear Usuario</a> -->
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCrearUsuarios">Crear Usuarios</button>
+                <?php include_once('./modal/m_crearUsuarios.php');?>
                 <!-- <a class="btn btn-primary" role="button" href='crearUsuarios.php' <i class='large material-icons' data-toggle='tooltip' title='Adicionar' style='color:rgb(0, 154, 68)'>how_to_reg</i></a> -->
               </div>
               <div class="card-body">
