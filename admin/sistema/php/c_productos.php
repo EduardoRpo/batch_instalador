@@ -25,7 +25,7 @@ switch ($op) {
                     AND p.id_marca= m.id AND p.id_propietario = pr.id AND p.id_presentacion_comercial = pc.id 
                     AND p.id_color=c.id AND p.id_olor=o.id AND p.id_apariencia=ap.id AND p.id_untuosidad=u.id 
                     AND p.id_poder_espumoso=pe.id AND p.id_recuento_mesofilos=rm.id AND p.id_pseudomona=ps.id 
-                    AND p.id_escherichia=es.id AND p.id_escherichia=es.id AND p.id_staphylococcus=st.id AND P.id_ph=PH.id 
+                    AND p.id_escherichia=es.id AND p.id_escherichia=es.id AND p.id_staphylococcus=st.id AND p.id_ph = ph.id 
                     AND p.id_viscosidad=v.id AND p.id_densidad_gravedad=d.id AND p.id_grado_alcohol = a.id";
 
         ejecutarQuerySelect($conn, $query);
