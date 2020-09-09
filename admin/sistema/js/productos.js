@@ -1,5 +1,6 @@
-/* Mostrar Menu seleccionado */
+let editar;
 
+/* Mostrar Menu seleccionado */
 $('.contenedor-menu .menu a').removeAttr('style');
 $('#link9').css('text-decoration', 'revert')
 $('.contenedor-menu .menu ul.abrir1').show();
@@ -54,7 +55,10 @@ $(document).ready(function () {
 /* Cargar Modal para actualizar y Crear productos */
 
 function cargarModalProductos() {
+  editar = false;
   $('#m_productos').modal('show');
+  $('#btnguardarProductos').html('Crear Producto');
+
 }
 
 /* Cargar selectores y data */
@@ -102,16 +106,25 @@ function cargarselectores(selector) {
 /* Cargar datos para Actualizar registros */
 
 $(document).on('click', '.link-editar', function (e) {
+  editar = true;
   let j = 1;
   let producto = [];
 
+  //muestra el modal
   $('#m_productos').modal('show');
+  $('#btnguardarProductos').html('Actualizar Producto');
 
+  //para actualizar guarda la referencia inicia
+  let referencia = $('#referencia').val();
+  $('#id_referencia').val(referencia);
+
+  //carga el array con los datos de la tabla
   for (let i = 2; i < 23; i++) {
     propiedad = $(this).parent().parent().children().eq(i).text();
     producto.push(propiedad);
   }
 
+  //carga todos los campos con la info del array
   for (let i = 0; i <= 2; i++) {
     $(`.n${j}`).val(producto[i]);
     j++;
@@ -150,7 +163,8 @@ $(document).on('click', '#btnguardarProductos', function (e) {
 
   const producto = new FormData($('#frmagregarProductos')[0]);
   producto.set('operacion', 3);
-
+  producto.set('editar', editar)
+  debugger;
   $.ajax({
     type: "POST",
     url: "php/c_productos.php",
@@ -161,11 +175,11 @@ $(document).on('click', '#btnguardarProductos', function (e) {
     success: function (response) {
       debugger;
       if (response == 1) {
-        alertify.set("notifier", "position", "top-right"); alertify.success("Datos almacenados.");
+        alertify.set("notifier", "position", "top-right"); alertify.success("Operacion exitosa.");
         refreshTable();
       }
       else if (response == 2) {
-        alertify.set("notifier", "position", "top-right"); alertify.success("El producto ya se encuentra registrado.");
+        alertify.set("notifier", "position", "top-right"); alertify.success("Esta referencia ya se encuentra registrada.");
         return false;
       }
       $('#m_productos').modal('hide');

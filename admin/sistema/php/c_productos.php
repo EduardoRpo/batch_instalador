@@ -47,15 +47,27 @@ switch ($op) {
             eval($asignacion);
         }
 
-        //validar si el registro existe
-
-        $query = "SELECT * FROM producto WHERE referencia='$referencia'";
-        $result = existeRegistro($conn, $query);
-
-        if ($result > 0) {
-            echo '2';
+        if (isset($_POST['editar'])) {
+           $query = "UPDATE producto SET referencia='$referencia', nombre_referencia='$nombre', unidad_empaque='$empaque', 
+            id_nombre_producto = '$nombre_producto', id_notificacion_sanitaria = '$notificacion_sanitaria', id_linea = '$linea', 
+            id_marca = '$marca', id_propietario = '$propietario', id_presentacion_comercial='$presentacion_comercial', 
+            id_color='$color', id_olor= '$olor', id_apariencia = '$apariencia', id_untuosidad='$untuosidad', 
+            id_poder_espumoso='$poder_espumoso', id_recuento_mesofilos = '$recuento_mesofilos', id_pseudomona='$pseudomona', 
+            id_escherichia='$escherichia', id_staphylococcus= '$staphylococcus', id_ph = '$ph', id_viscosidad = '$viscosidad', 
+            id_densidad_gravedad = '$densidad_gravedad', id_grado_alcohol = '$grado_alcohol' WHERE referencia = '$id_referencia'";
+            
         } else {
-            $query = "INSERT INTO producto (referencia, nombre_referencia, unidad_empaque, id_nombre_producto, 
+
+            //valida si el registro existe
+
+            $query = "SELECT * FROM producto WHERE referencia='$referencia'";
+            $result = existeRegistro($conn, $query);
+
+            if ($result > 0) {
+                echo '2';
+                exit();
+            } else {
+                $query = "INSERT INTO producto (referencia, nombre_referencia, unidad_empaque, id_nombre_producto, 
             id_notificacion_sanitaria, id_linea, id_marca, id_propietario, id_presentacion_comercial, id_color, id_olor, 
             id_apariencia, id_untuosidad, id_poder_espumoso, id_recuento_mesofilos, id_pseudomona, id_escherichia, 
             id_staphylococcus, id_ph, id_viscosidad, id_densidad_gravedad, id_grado_alcohol)
@@ -63,6 +75,7 @@ switch ($op) {
             '$linea', '$marca', '$propietario', '$presentacion_comercial', '$color', '$olor', '$apariencia', 
             '$untuosidad', '$poder_espumoso', '$recuento_mesofilos', '$pseudomona', '$escherichia', '$staphylococcus',
             '$ph', '$viscosidad', '$densidad_gravedad', '$grado_alcohol')";
+            }
         }
 
         ejecutarQuery($conn, $query);

@@ -22,6 +22,7 @@
                       <div class="col-md-2 pr-1">
                         <div class="form-group">
                           <label for="referencia">Referencia</label>
+                          <input type="text" name="id_referencia" id="id_referencia" class="form-control n1" hidden>
                           <input type="text" name="referencia" id="referencia" class="form-control n1" placeholder="Referencia" required>
                         </div>
                       </div>
