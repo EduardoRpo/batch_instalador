@@ -54,19 +54,17 @@
             <div class="card">
               <div class="card-header">
                 <h4 class="card-title">Materia Prima</h4>
-                <!-- <a class="btn btn-primary" href="crearUsuarios1.php" role="button">Crear Usuario</a> -->
-                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCrearUsuarios">Crear Usuarios</button> -->
-                <!-- <a class="btn btn-primary" role="button" href='crearUsuarios.php' <i class='large material-icons' data-toggle='tooltip' title='Adicionar' style='color:rgb(0, 154, 68)'>how_to_reg</i></a> -->
                 <hr>
-                <button type="button" class="btn btn-primary" id="addMP">Adicionar</button>
-                <form id="frmaddMP" style="display: none;">
+                <button type="button" class="btn btn-primary" id="btnadicionarMateriaPrima">Adicionar</button>
+                <form id="frmAdicionarMateriaPrima" style="display: none;">
                   <label for=""><b>Codigo</b></label>
                   <label for=""><b>Materia Pima</b></label>
                   <label for=""><b>Alias</b></label>
-                  <input type="number" name="txtCodigo" id="txtCodigo" class="form-control" placeholder="Codigo">
-                  <input type="text" name="txtMP" id="txtMP" class="form-control" placeholder="Materia Prima">
-                  <input type="text" name="txtAlias" id="txtAlias" class="form-control" placeholder="Alias">
-                  <button type="button" class="btn btn-primary" id="guardarMP">Guardar</button>
+                  <input type="number" name="txtId" id="txtId" class="form-control" hidden>
+                  <input type="number" name="txtCodigo" id="txtCodigo" class="form-control" placeholder="Codigo" required>
+                  <input type="text" name="txtMP" id="txtMP" class="form-control" placeholder="Materia Prima" required>
+                  <input type="text" name="txtAlias" id="txtAlias" class="form-control" placeholder="Alias" required>
+                  <button type="button" class="btn btn-primary" id="btnguardarMateriaPrima">Guardar</button>
                 </form>
                 <hr>
               </div>
@@ -90,7 +88,7 @@
               </div>
               <form id="formDataExcel" enctype="multipart/form-data">
                 <input type="file" name="datosExcel" id="datosExcel" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
-                <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value, 1);" disabled="disabled">Cargar Datos</button>
+                <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value, 8);" disabled="disabled">Cargar Datos</button>
               </form>
             </div>
           </div>
@@ -129,6 +127,7 @@
   <!-- javascript inicializacion datatables -->
   <script src="js/materiaprima.js"></script>
   <script src="js/menu.js"></script>
+  <script src="js/cargarDatos.js"></script>
 
 </body>
 

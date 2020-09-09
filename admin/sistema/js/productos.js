@@ -10,7 +10,7 @@ cargarDatosProductos();
 
 $(document).ready(function () {
 
-  $('#listarProductos').DataTable({
+  $('#tblProductos').DataTable({
     scrollY: '45vh',
     scrollCollapse: true,
     paging: false,
@@ -35,6 +35,7 @@ $(document).ready(function () {
       { "data": "propietario" },
       { "data": "presentacion" },
       { "data": "color" },
+      { "data": "olor" },
       { "data": "apariencia" },
       { "data": "untuosidad" },
       { "data": "poder_espumoso" },
@@ -42,7 +43,10 @@ $(document).ready(function () {
       { "data": "pseudomona" },
       { "data": "escherichia" },
       { "data": "staphylococcus" },
+      { "data": "ph" },
+      { "data": "viscosidad" },
       { "data": "densidad" },
+      { "data": "alcohol" },
 
 
       /* {"defaultContent": "<a href='crearUsuarios.php' <i class='large material-icons' data-toggle='tooltip' title='Adicionar' style='color:rgb(0, 154, 68)'>how_to_reg</i></a>"}, */
@@ -63,7 +67,6 @@ function cargarModalProductos() {
 function cargarDatosProductos() {
   let sel = [];
   let j = 0;
-  let c = 5;
 
   $('select').each(function () {
     sel.push($(this).prop('id'))
@@ -71,21 +74,20 @@ function cargarDatosProductos() {
 
   for (i = 1; i <= sel.length; i++) {
     propiedad = sel[j];
-    cargarselectores(propiedad, c);
+    cargarselectores(propiedad);
     j++;
   }
 }
 
-function cargarselectores(selector, data) {
+function cargarselectores(selector) {
 
   $.ajax({
     method: 'POST',
     url: 'php/c_productos.php',
-    data: { tabla: selector, operacion: data },
+    data: { tabla: selector, operacion: 4 },
 
     success: function (response) {
       var info = JSON.parse(response);
-      console.log(info);
 
       let $select = $(`#${selector}`);
       $select.empty();
@@ -140,29 +142,52 @@ $(document).on('click', '.link-borrar', function (e) {
     success: function (response) {
       alertify.set("notifier", "position", "top-right"); alertify.success("Registro Eliminado.");
       refreshTable();
+    },
+
+    error: function (response) {
+      alertify.set("notifier", "position", "top-right"); alertify.error("Error.");
     }
   })
 });
 
 $(document).on('click', '#btnguardarProductos', function (e) {
+  e.preventDefault();
 
-  let producto = $("#frmagregarProductos").serialize();
+  const producto = new FormData($('#frmagregarProductos')[0]);
+  producto.set('operacion', 3);
+  //let producto = $("#frmagregarProductos").serialize();
+  debugger;
 
   $.ajax({
     type: "POST",
     url: "php/c_productos.php",
-    data: { operacion: 4, producto: producto },
-    
+    //data: { operacion: 3, producto: producto },
+    data: producto,
+    processData: false,
+    contentType: false,
+
     success: function (response) {
-      
+      debugger;
+      if (response == 1) {
+        alertify.set("notifier", "position", "top-right"); alertify.success("Datos almacenados.");
+        refreshTable();
+      }
+      else if (response == 2) {
+        alertify.set("notifier", "position", "top-right"); alertify.success("El producto ya se encuentra registrado.");
+        return false;
+      }
+
+    },
+    error: function (response) {
+      alertify.set("notifier", "position", "top-right"); alertify.error("Error.");
     }
-  });
+  })
 });
 
 
 /* Actualizar tabla */
 
 function refreshTable() {
-  $('#listarProductos').DataTable().clear();
-  $('#listarProductos').DataTable().ajax.reload();
+  $('#tblProductos').DataTable().clear();
+  $('#tblProductos').DataTable().ajax.reload();
 }

@@ -7,35 +7,40 @@ $('.contenedor-menu .menu ul.abrir1').show();
 /* Cargue de Parametros de Control en DataTable */
 
 /* function cargarTablaFormulas(referencia) { */
-    $("#tblMateriaPrima").DataTable({
-        destroy: true,
-        scrollY: '50vh',
-        scrollCollapse: true,
-        paging: false,
-        language: { url: 'admin_componentes/es-ar.json' },
+$("#tblMateriaPrima").DataTable({
+    destroy: true,
+    scrollY: '50vh',
+    scrollCollapse: true,
+    paging: false,
+    language: { url: 'admin_componentes/es-ar.json' },
 
-        "ajax": {
-            method: "POST",
-            url: "php/c_materiaprima.php",
-            data: { operacion: "1" },
-        },
+    "ajax": {
+        method: "POST",
+        url: "php/c_materiaprima.php",
+        data: { operacion: "1" },
+    },
 
-        "columns": [
-            { "data": "referencia" },
-            { "data": "nombre" },
-            { "data": "alias" },
-            { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
-            { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" }
-        ]
-    });
+    "columns": [
+        { "data": "referencia" },
+        { "data": "nombre" },
+        { "data": "alias" },
+        { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
+        { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" }
+    ]
+});
 /* } */
 
 /* Ocultar */
 
-$('#addMP').click(function (e) {
+$('#btnadicionarMateriaPrima').click(function (e) {
     e.preventDefault();
-    $("#frmaddMP").slideToggle();
 
+    $("#frmAdicionarMateriaPrima").slideToggle();
+    $('#txtId').val('');
+    $('#txtCodigo').val('');
+    $('#txtMP').val('');
+    $('#txtAlias').val('');
+    $('#btnguardarMateriaPrima').html('Crear');
 });
 
 
@@ -43,16 +48,15 @@ $('#addMP').click(function (e) {
 
 $(document).on('click', '.link-borrar', function (e) {
     e.preventDefault();
-
+    debugger;
     let id = $(this).parent().parent().children().first().text();
-
-    var confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este registro?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
+    let confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este registro?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
 
     confirm.set('onok', function (r) {
         if (r) {
             $.ajax({
                 'method': 'POST',
-                'url': 'php/operacionesDespejedelinea.php',
+                'url': 'php/c_materiaprima.php',
                 'data': { operacion: "2", id: id }
             });
             refreshTable();
@@ -69,54 +73,52 @@ $(document).on('click', '.link-editar', function (e) {
     let materiaprima = $(this).parent().parent().children().eq(1).text();
     let alias = $(this).parent().parent().children().eq(2).text();
 
-    $('#frmaddMP').slideDown();
+    $('#frmAdicionarMateriaPrima').slideDown();
+    $('#txtId').val(referencia);
     $('#txtCodigo').val(referencia);
     $('#txtMP').val(materiaprima);
     $('#txtAlias').val(alias);
+    $('#btnguardarMateriaPrima').html('Actualizar');
 });
 
 
 /* Almacenar Registros */
 
-$(document).ready(function () {
-    $('#btnguardarPregunta').click(function (e) {
-        e.preventDefault();
-        var datos = $('#frmpreguntas').serialize();
-        $.ajax({
-            type: "POST",
-            url: "php/operacionesDespejedelinea.php",
-            data: datos,
-            //data: {operacion : "3", id : id},
-            success: function (r) {
-                if (r == 1) {
-                    alertify.set("notifier", "position", "top-right"); alertify.success("Agregado con éxito.");
-                    document.getElementById("frmagregarUsuarios").reset();
-                } else {
-                    alertify.set("notifier", "position", "top-right"); alertify.error("Usuario No Registrado.");
-                }
+
+$('#btnguardarMateriaPrima').click(function (e) {
+    e.preventDefault();
+
+    let ref = $('#txtCodigo').val();
+    let materiaprima = $('#txtMP').val();
+    let alias = $('#txtAlias').val();
+
+    if (ref == '' || materiaprima == '' || alias == '') {
+        alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos.");
+        return false;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "php/c_materiaprima.php",
+         data: { operacion: 3, referencia: ref, materiaprima: materiaprima, alias: alias },
+
+        success: function (r) {
+            if (r == 1) {
+                alertify.set("notifier", "position", "top-right"); alertify.success("Operación Exitosa.");
+                refreshTable();
+            } else if (r == 2) {
+                alertify.set("notifier", "position", "top-right"); alertify.error("El número de referencia ya existe.");
             }
-        });
-        //return false;
-    });
+            else {
+                alertify.set("notifier", "position", "top-right"); alertify.error("Error.");
+            }
+        }
+    })
 });
 
 /* Actualizar tabla */
 
 function refreshTable(tabla) {
-    $(tabla).DataTable().clear();
-    $(tabla).DataTable().ajax.reload();
+    $('#tblMateriaPrima').DataTable().clear();
+    $('#tblMateriaPrima').DataTable().ajax.reload();
 }
-
-/*      var confirm= alertify.confirm('Samara Cosmetics','¿Está seguro de actualizar este registro?',null,null).set('labels', {ok:'Si', cancel:'No'});
-
-     confirm.set('onok', function(r){
-         if(r){
-             $.ajax({
-                 'method' : 'GET',
-                 'url' : `php/accionesDespejedeLinea.php?link-editar=${id}`,
-                 'data' : 'id',
-             });
-             refreshTable();
-             alertify.success('Registro Eliminado');
-         }
-     });   */

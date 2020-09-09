@@ -1,81 +1,41 @@
 <?php
 require_once('../../../conexion.php');
+require_once('./crud.php');
 
 $op = $_POST['operacion'];
 
 switch ($op) {
     case 1: //listar Materia Prima
-        $query_materiaPrima = mysqli_query($conn, "SELECT * FROM materia_prima");
-
-        $result = mysqli_num_rows($query_materiaPrima);
-
-        
-
-        if ($result > 0) {
-            while ($data = mysqli_fetch_assoc($query_materiaPrima)) {
-                $arreglo["data"][] = $data;
-                //$arreglo[] = $data;
-            }
-            echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
-        } else {
-            echo false;
-        }
-        mysqli_close($conn);
-        mysqli_free_result($query_materiaPrima);
-
+        $query = "SELECT * FROM materia_prima";
+        ejecutarQuerySelect($conn, $query);
         break;
 
     case 2: //Eliminar
-        $id_pregunta = $_POST['id'];
+        $id = $_POST['id'];
+        $query = "DELETE FROM materia_prima WHERE referencia = $id";
+        ejecutarQuery($conn, $query);
+        break;
 
-        $query_pregunta = "DELETE FROM preguntas WHERE id = $id_pregunta";
-        $result = mysqli_query($conn, $query_pregunta);
+    case 3: // Almacenar o actualizar data
+        $referencia = $_POST['referencia'];
+        $materia_prima = $_POST['materiaprima'];
+        $alias = $_POST['alias'];
 
-        if ($result) {
-            echo 'Eliminado';
+        if (isset($_POST['txtId'])) {
+            $id = $_POST['txtId'];
+            $query = "UPDATE materia_prima SET referencia = '$referencia', nombre='$materia_prima, alias='$alias ' WHERE referencia = $id";
         } else {
-            echo 'No Eliminado';
+            $query = "SELECT * FROM materia_prima WHERE referencia='$referencia'";
+            $result = existeRegistro($conn, $query);
+
+            if ($result > 0) {
+                echo '2';
+                exit();
+            } else
+                $query = "INSERT INTO materia_prima (referencia, nombre, alias) VALUES('$referencia', '$materia_prima', '$alias')";
         }
-        //mysqli_free_result($query_pregunta);
-        mysqli_close($conn);
-        break;
 
-    case 3: // obtener data
-        $id_pregunta = $_POST['id'];
-
-        $query = mysqli_query($conn, "SELECT * FROM preguntas WHERE id = $id_pregunta");
-        $data = mysqli_fetch_assoc($query);
-        echo json_encode($data, JSON_UNESCAPED_UNICODE);
-        mysqli_close($conn);
-
-        break;
-
-    case 6: // Guardar data
-        $id_pregunta = $_POST['id'];
-
-        $query = mysqli_query($conn, "SELECT * FROM preguntas WHERE id = $id_pregunta");
-        $data = mysqli_fetch_assoc($query);
-        echo json_encode($data, JSON_UNESCAPED_UNICODE);
-        mysqli_close($conn);
-
-        break;
-    case 7: // Cargar Selector Modulos
-
-        $query_mod = mysqli_query($conn, "SELECT * FROM modulo");
-
-        $result = mysqli_num_rows($query_mod);
-
-        if ($result > 0) {
-            while ($data = mysqli_fetch_assoc($query_mod)) {
-                $arreglo[] = $data;
-            }
-
-            echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
-        } else {
-            echo json_encode('');
-        }
-        mysqli_free_result($query_mod);
-        mysqli_close($conn);
+        ejecutarQuery($conn, $query);
 
         break;
 }

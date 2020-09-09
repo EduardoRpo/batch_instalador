@@ -13,13 +13,12 @@ switch ($op) {
 
   case 2: //Eliminar
     $id_pregunta = $_POST['id'];
-
     $query = "DELETE FROM preguntas WHERE id = $id_pregunta";
     ejecutarQuery($conn, $query);
 
   case 3: // Guardar y actualizar data
     $id = $_POST['id'];
-    $pregunta = $_POST['pregunta'];
+    $pregunta = strtoupper($_POST['pregunta']);
 
     if ($id == '') {
         $query = "SELECT * FROM preguntas WHERE pregunta='$pregunta'";

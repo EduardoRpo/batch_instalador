@@ -33,17 +33,15 @@ function existeRegistro($conn, $query)
 
 function ejecutarQuery($conn, $query)
 {
-    //$result = mysqli_query($conn, $query);
     $result = $conn->query($query);
 
     if ($result) {
         echo '1';
     } else {
         die('Error');
-        //echo 'Error: ' . mysqli_error($conn);
+        print_r('Error: ' . mysqli_error($conn));
     }
-    //mysqli_free_result($query);
-    //mysqli_close($conn);
+
     $conn->close();
 }
 

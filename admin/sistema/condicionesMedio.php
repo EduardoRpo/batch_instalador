@@ -55,9 +55,6 @@
               <div class="card-header">
                 <h4 class="card-title">Condiciones del Medio</h4>
                 <p class="category">Tiempos<a href=""></a></p>
-                <!-- <a class="btn btn-primary" href="crearUsuarios1.php" role="button">Crear Usuario</a> -->
-                <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCrearUsuarios">Crear Usuarios</button> -->
-                <!-- <a class="btn btn-primary" role="button" href='crearUsuarios.php' <i class='large material-icons' data-toggle='tooltip' title='Adicionar' style='color:rgb(0, 154, 68)'>how_to_reg</i></a> -->
                 <hr>
                 <button type="button" class="btn btn-primary" id="adTiempos">Adicionar</button>
                 <form id="frmadTiempos" style="display: none;">

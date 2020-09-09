@@ -124,6 +124,46 @@
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card" id="1">
+              <!-- <div class="card-header">
+                <h4 class="card-title">Formulas</h4>
+                <hr>
+                <button type="button" class="btn btn-primary" id="addFormula">Adicionar</button>
+                <form id="frmadParametro" style="display: none;">
+                  <label for=""><b>Nombre Producto</b></label>
+                  <input type="text" name="nombreProducto" id="nombreProducto" class="form-control" placeholder="Nombre Producto">
+                  <button type="button" class="btn btn-primary" id="guardarFormula">Guardar</button>
+                </form>
+                <hr>
+              </div> -->
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table id="tblFormulas" class="table-striped row-borde" style="width:100%">
+                    <thead>
+                      <tr>
+                        <th>Referencia</th>
+                        <th>Materia Prima</th>
+                        <th>Alias</th>
+                        <th>Porcentaje</th>
+                        <th></th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <form id="formDataExcel" enctype="multipart/form-data">
+                <input type="file" name="datosExcel" id="datosExcel" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
+                <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value, 1);" disabled="disabled">Cargar Datos</button>
+              </form> 
+            </div>
+          </div>
+        </div>
       </div>
       <?php include('./admin_componentes/footer.php'); ?>
     </div>

@@ -21,7 +21,7 @@ switch ($op) {
 
     case 3: // Guardar o actualizar data
         $id = $_POST['id'];
-        $desinfectante = $_POST['desinfectante'];
+        $desinfectante = strtoupper($_POST['desinfectante']);
         $concentracion = $_POST['concentracion'];
 
         if ($id == '') {

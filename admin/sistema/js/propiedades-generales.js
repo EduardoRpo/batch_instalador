@@ -21,7 +21,7 @@ $(document).ready(function () {
 /* Mostrar cada parametro */
 
 function parametros(tabla, id) {
-    debugger;
+
     $(`#${id}`).toggle();
 
     for (let i = 1; i < 10; i++) {
@@ -34,8 +34,70 @@ function parametros(tabla, id) {
     id = $(`#tbl${id}`);
     tablaBD = tabla;
 
-    cargarTablas(id, tabla);
+    if (tablaBD === 'notificacion_sanitaria')
+        cargarTablaNotificacion(id, tabla);
+    else if (tablaBD === 'linea')
+        cargarTablaLinea(id, tabla);
+    else
+        cargarTablas(id, tabla);
 }
+
+/* Cargue de Nombre Productos*/
+
+function cargarTablaNotificacion(id, tabla) {
+
+    $(id).DataTable({
+        destroy: true,
+        scrollY: '50vh',
+        scrollCollapse: true,
+        paging: false,
+        language: { url: 'admin_componentes/es-ar.json' },
+
+        "ajax": {
+            method: "POST",
+            url: "php/c_propiedades-generales.php",
+            data: { tabla: tabla, operacion: 1 },
+        },
+
+        "columns": [
+            { "data": "id" },
+            { "data": "nombre" },
+            { "data": "vencimiento" },
+            { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a>", className: "centrado" },
+            { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>", className: "centrado" }
+
+        ]
+    });
+};
+
+
+/* Cargar tabla lineas */
+
+function cargarTablaLinea(id, tabla) {
+
+    $(id).DataTable({
+        destroy: true,
+        scrollY: '50vh',
+        scrollCollapse: true,
+        paging: false,
+        language: { url: 'admin_componentes/es-ar.json' },
+
+        "ajax": {
+            method: "POST",
+            url: "php/c_propiedades-generales.php",
+            data: { tabla: tabla, operacion: 1 },
+        },
+
+        "columns": [
+            { "data": "id" },
+            { "data": "nombre" },
+            { "data": "densidad" },
+            { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a>", className: "centrado" },
+            { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>", className: "centrado" }
+
+        ]
+    });
+};
 
 /* Cargue de Nombre Productos*/
 
@@ -103,9 +165,8 @@ $(document).on('click', '.link-borrar', function (e) {
 
 $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
-
     editar = true;
-
+    debugger;
     let id = $(this).parent().parent().children().first().text();
     let nombre = $(this).parent().parent().children().eq(1).text();
 
@@ -127,6 +188,7 @@ $(document).on('click', '.link-editar', function (e) {
 /* Almacenar Registros */
 
 function guardarDatosGenerales(nombre, id) {
+
     let datos = $(`#input${id}`).val();
 
     if (!datos) {
@@ -135,7 +197,7 @@ function guardarDatosGenerales(nombre, id) {
     }
 
     if (editar) {
-        id_registro = $(`#txt-id${id_tbl}`).val();
+        let id_registro = $(`#txt-Id${id}`).val();
         data = { datos: datos, id_registro: id_registro, tabla: nombre, operacion: 3 };
     } else
         data = { datos: datos, tabla: nombre, operacion: 3 };
@@ -160,7 +222,7 @@ function guardarDatosGenerales(nombre, id) {
 /* Almacenar Registros */
 
 function guardarDatosGeneralesMinMax(nombre, id) {
-
+    debugger;
     let min = parseInt($(`#min${id}`).val());
     let max = parseInt($(`#max${id}`).val());
 
@@ -173,7 +235,7 @@ function guardarDatosGeneralesMinMax(nombre, id) {
     }
 
     if (editar) {
-        id_registro = $(`#txt-id${id_tbl}`).val();
+        id_registro = $(`#txt-Id${id_tbl}`).val();
         data = { min: min, max: max, id_registro: id_registro, tabla: nombre, operacion: 4 };
     } else
         data = { min: min, max: max, tabla: nombre, operacion: 4 };

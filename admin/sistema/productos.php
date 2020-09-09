@@ -57,7 +57,7 @@ include_once('./modal/m_productos.php');
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="listarProductos" class="display" style="width:100%">
+                  <table id="tblProductos" class="display" style="width:100%">
                     <thead>
                       <tr>
                         <th></th>
@@ -72,6 +72,7 @@ include_once('./modal/m_productos.php');
                         <th>Propietario</th>
                         <th>Presentación</th>
                         <th>Color</th>
+                        <th>Olor</th>
                         <th>Apariencia</th>
                         <th>Untuosidad</th>
                         <th>Poder Espumoso</th>
@@ -79,11 +80,10 @@ include_once('./modal/m_productos.php');
                         <th>Pseudomona</th>
                         <th>Escherichia</th>
                         <th>Staphylococcus</th>
-                        <th>Densidad</th>
-                        <!--  <th>PH</th>
+                        <th>PH</th>
                         <th>Viscosidad</th>
-                        
-                        <th>Alcohol</th> -->
+                        <th>Densidad</th>
+                        <th>Alcohol</th>
                       </tr>
                     </thead>
                     <tbody>

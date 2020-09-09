@@ -30,8 +30,8 @@ switch ($op) {
     ejecutarQuery($conn, $query);
 
   case 5: // Guardar y actualizar data
-    $pregunta = $_POST['pregunta'];
-    $respuesta = $_POST['respuesta'];
+    $pregunta = strtoupper($_POST['pregunta']);
+    $respuesta = strtoupper($_POST['respuesta']);
     $modulo = $_POST['modulo'];
 
     $query = "SELECT * FROM modulo_pregunta WHERE id_pregunta='$pregunta'";

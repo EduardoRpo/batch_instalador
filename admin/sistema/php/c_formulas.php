@@ -6,7 +6,6 @@ $op = $_POST['operacion'];
 
 switch ($op) {
     case 1: //listar referencias Productos
-
         $query = "SELECT p.referencia FROM producto p";
         ejecutarQuerySelect($conn, $query);
         break;

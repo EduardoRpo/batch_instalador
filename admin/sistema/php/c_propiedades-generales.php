@@ -21,16 +21,17 @@ switch ($op) {
         $id = $_POST['id'];
         $tabla = $_POST['tabla'];
 
-        $query = "DELETE FROM $tabla WHERE id = $id";
+        $query = "DELETE FROM $tabla WHERE id = '$id'";
         ejecutarQuery($conn, $query);
         break;
 
     case 3: // Guardar o actualizar data
         $tabla = $_POST['tabla'];
-        $dato =  $_POST['datos'];
+        $dato =  strtoupper($_POST['datos']);
 
         if (isset($_POST['id_registro'])) {
             $registro = $_POST['id_registro'];
+
             $query = "UPDATE $tabla SET nombre = '$dato' WHERE id = '$registro'";
         } else {
             $query = "INSERT INTO $tabla (nombre) VALUES('$dato')";

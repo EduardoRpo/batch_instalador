@@ -17,7 +17,7 @@ switch ($op) {
         break;
 
     case 3: // Actualizar y Guardar data
-        $cargo = $_POST['cargo'];
+        $cargo = strtoupper($_POST['cargo']);
         $id_cargo = $_POST['id'];
 
         if ($id_cargo == '') {

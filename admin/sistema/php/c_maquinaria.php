@@ -24,7 +24,7 @@ switch ($op) {
 
   case 4: // Guardar y actualizar data
     $id = $_POST['id'];
-    $equipo = $_POST['equipo'];
+    $equipo = strtoupper($_POST['equipo']);
     $linea = $_POST['linea'];
 
     if ($id == '') {

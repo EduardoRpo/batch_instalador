@@ -81,8 +81,8 @@
                 <button type="button" class="btn btn-primary" onclick="adicionar(1);">Adicionar</button>
                 <form id="frmAdicionar1" class="frmAdicionar" style="display: none;">
                   <label for=""><b>Nombre Producto</b></label>
+                  <input type="text" name="txt-Id1" id="txt-Id1" class="form-control" hidden>
                   <input type="text" name="input1" id="input1" class="form-control" placeholder="Nombre Producto" style="width: 350px;">
-                  <input type="text" name="txt1" id="txt1" class="form-control" placeholder="Nombre Producto" style="width: 350px;" hidden>
                   <button type="button" class="btn btn-primary tabla1" id="nombre_producto" onclick="guardarDatosGenerales(id, 1);">Guardar</button>
                 </form>
                 <hr>
@@ -104,13 +104,13 @@
                   </table>
                 </div>
               </div>
-              <form id="formDataExcel" enctype="multipart/form-data">
-                <input type="file" name="datosExcel" id="datosExcel" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
-                <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value, 1);" disabled="disabled">Cargar Datos</button>
+              <form id="formDataExcel1" enctype="multipart/form-data">
+                <input type="file" name="datosExcel1" id="datosExcel1" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
+                <button type="button" id="btnCargarExcel1" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel1.value, 'nombre_producto', 1);" disabled="disabled">Cargar Datos</button>
               </form>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-8">
             <div class="card" id="2">
               <div class="card-header">
                 <h4 class="card-title">Notificaciones Sanitarias</h4>
@@ -119,6 +119,7 @@
                 <button type="button" class="btn btn-primary" onclick="adicionar(2);">Adicionar</button>
                 <form id="frmAdicionar2" class="frmAdicionar" style="display: none;">
                   <label for=""><b>Notificacion Sanitaria</b></label>
+                  <input type="text" name="txt-Id2" id="txt-Id2" class="form-control" hidden>
                   <input type="text" name="input2" id="input2" class="form-control" placeholder="Notificacion Sanitaria">
                   <button type="button" class="btn btn-primary tabla2" id="notificacion_sanitaria" onclick="guardarDatosGenerales(id, 2);">Guardar</button>
                 </form>
@@ -131,6 +132,7 @@
                       <tr>
                         <th>id</th>
                         <th>Notificación Sanitaria</th>
+                        <th>Fecha Vencimiento</th>
                         <th></th>
                         <th></th>
                       </tr>
@@ -141,9 +143,9 @@
                   </table>
                 </div>
               </div>
-              <form id="formDataExcel" enctype="multipart/form-data">
-                <input type="file" name="datosExcel" id="datosExcel" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
-                <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value, 1);" disabled="disabled">Cargar Datos</button>
+              <form id="formDataExcel2" enctype="multipart/form-data">
+                <input type="file" name="datosExcel2" id="datosExcel2" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
+                <button type="button" id="btnCargarExcel2" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel2.value, 'notificacion_sanitaria', 2);" disabled="disabled">Cargar Datos</button>
               </form>
             </div>
           </div>
@@ -158,8 +160,9 @@
                 <hr>
                 <button type="button" class="btn btn-primary" onclick="adicionar(3);">Adicionar</button>
                 <form id="frmAdicionar3" class="frmAdicionar" style="display: none;">
-                  <label for=""><b>Linea</b></label>
+                  <input type="text" name="txt-Id3" id="txt-Id3" class="form-control" hidden>
                   <input type="text" name="input3" id="input3" class="form-control" placeholder="Linea">
+                  <input type="number" name="input31" id="input31" class="form-control" placeholder="Densidad">
                   <button type="button" class="btn btn-primary tabla3" id="linea" onclick="guardarDatosGenerales(id, 3);">Guardar</button>
                 </form>
                 <hr>
@@ -171,6 +174,7 @@
                       <tr>
                         <th>id</th>
                         <th>Linea</th>
+                        <th>Densidad</th>
                         <th></th>
                         <th></th>
                       </tr>
@@ -181,9 +185,9 @@
                   </table>
                 </div>
               </div>
-              <form id="formDataExcel" enctype="multipart/form-data">
-                <input type="file" name="datosExcel" id="datosExcel" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
-                <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value, 1);" disabled="disabled">Cargar Datos</button>
+              <form id="formDataExcel3" enctype="multipart/form-data">
+                <input type="file" name="datosExcel3" id="datosExcel3" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
+                <button type="button" id="btnCargarExcel3" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel3.value, 'linea',3);" disabled="disabled">Cargar Datos</button>
               </form>
             </div>
           </div>
@@ -196,6 +200,7 @@
                 <button type="button" class="btn btn-primary" onclick="adicionar(4);">Adicionar</button>
                 <form id="frmAdicionar4" class="frmAdicionar" style="display: none;">
                   <label for=""><b>Marca</b></label>
+                  <input type="text" name="txt-Id4" id="txt-Id4" class="form-control" hidden>
                   <input type="text" name="input4" id="input4" class="form-control" placeholder="Marca" style="width: 350px;">
                   <button type="button" class="btn btn-primary tabla4" id="marca" onclick="guardarDatosGenerales(id, 4);">Guardar</button>
                 </form>
@@ -218,9 +223,9 @@
                   </table>
                 </div>
               </div>
-              <form id="formDataExcel" enctype="multipart/form-data">
-                <input type="file" name="datosExcel" id="datosExcel" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
-                <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value, 1);" disabled="disabled">Cargar Datos</button>
+              <form id="formDataExcel4" enctype="multipart/form-data">
+                <input type="file" name="datosExcel4" id="datosExcel4" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
+                <button type="button" id="btnCargarExcel4" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel4.value, 'marca',4);" disabled="disabled">Cargar Datos</button>
               </form>
             </div>
           </div>
@@ -236,6 +241,7 @@
                 <button type="button" class="btn btn-primary" onclick="adicionar(5);">Adicionar</button>
                 <form id="frmAdicionar5" class="frmAdicionar" style="display: none;">
                   <label for=""><b>Propietario</b></label>
+                  <input type="text" name="txt-Id5" id="txt-Id5" class="form-control" hidden>
                   <input type="text" name="input5" id="input5" class="form-control" placeholder="Propietario" style="width: 400px;">
                   <button type="button" class="btn btn-primary tabla5" id="propietario" onclick="guardarDatosGenerales(id, 5);">Guardar</button>
                 </form>
@@ -258,9 +264,9 @@
                   </table>
                 </div>
               </div>
-              <form id="formDataExcel" enctype="multipart/form-data">
-                <input type="file" name="datosExcel" id="datosExcel" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
-                <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value, 1);" disabled="disabled">Cargar Datos</button>
+              <form id="formDataExcel5" enctype="multipart/form-data">
+                <input type="file" name="datosExcel5" id="datosExcel5" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
+                <button type="button" id="btnCargarExcel5" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel5.value, 'propietario',5);" disabled="disabled">Cargar Datos</button>
               </form>
             </div>
           </div>
@@ -273,6 +279,7 @@
                 <button type="button" class="btn btn-primary" onclick="adicionar(6);">Adicionar</button>
                 <form id="frmAdicionar6" class="frmAdicionar" style="display: none;">
                   <label for=""><b>Presentación</b></label>
+                  <input type="text" name="txt-Id6" id="txt-Id6" class="form-control" hidden>
                   <input type="number" name="input6" id="input6" class="form-control" placeholder="Presentacion">
                   <button type="button" class="btn btn-primary tabla6" id="presentacion_comercial" onclick="guardarDatosGenerales(id, 6);">Guardar</button>
                 </form>
@@ -295,9 +302,9 @@
                   </table>
                 </div>
               </div>
-              <form id="formDataExcel" enctype="multipart/form-data">
-                <input type="file" name="datosExcel" id="datosExcel" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
-                <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value, 1);" disabled="disabled">Cargar Datos</button>
+              <form id="formDataExcel6" enctype="multipart/form-data">
+                <input type="file" name="datosExcel6" id="datosExcel6" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
+                <button type="button" id="btnCargarExcel6" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel6.value, 'presentacion_comercial',6);" disabled="disabled">Cargar Datos</button>
               </form>
             </div>
           </div>
@@ -336,6 +343,7 @@
   <!-- javascript inicializacion datatables -->
   <script src="js/propiedades-generales.js"></script>
   <script src="js/menu.js"></script>
+  <script src="js/importarProductos.js"></script>
 
 </body>
 

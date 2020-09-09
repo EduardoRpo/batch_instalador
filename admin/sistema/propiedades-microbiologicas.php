@@ -63,7 +63,7 @@
                 <button class="btn btn-primary mb-5" id="recuento_mesofilos" onclick="parametros(id, 1);">Recuento Mesofilos</button>
                 <button class="btn btn-light mb-5" id="pseudomona" onclick="parametros(id, 2)">Pseudomona</button>
                 <button class="btn btn-primary mb-5" id="escherichia" onclick="parametros(id, 3)">Escherichia</button>
-                <button class="btn btn-light mb-5" id="staphylococcus" onclick="parametros(id, 4)">Staphylococcus</button>
+                <button class="btn btn-light mb-5" id="staphylococcus" onclick="parametros(id, 7)">Staphylococcus</button>
               </div>
             </div>
           </div>
@@ -79,8 +79,8 @@
                 <button type="button" class="btn btn-primary" onclick="adicionar(1);">Adicionar</button>
                 <form id="frmAdicionar1" class="frmAdicionar" style="display: none;">
                   <label for=""><b>Recuento Mesofilos</b></label>
+                  <input type="text" name="txt-Id1" id="txt-Id1" class="form-control" hidden>
                   <input type="text" name="input1" id="input1" class="form-control" placeholder="Recuento Mesofilos" style="width: 350px;">
-                  <input type="text" name="txt1" id="txt1" class="form-control" placeholder="Nombre Producto" style="width: 350px;" hidden>
                   <button type="button" class="btn btn-primary tabla1" id="recuento_mesofilos" onclick="guardarDatosGenerales(id, 1);">Guardar</button>
                 </form>
                 <hr>
@@ -102,6 +102,10 @@
                   </table>
                 </div>
               </div>
+              <form id="formDataExcel1" enctype="multipart/form-data">
+                <input type="file" name="datosExcel1" id="datosExcel1" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
+                <button type="button" id="btnCargarExcel1" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel1.value, 'recuento_mesofilos', 1);" disabled="disabled">Cargar Datos</button>
+              </form>
             </div>
           </div>
           <div class="col-md-6">
@@ -113,6 +117,7 @@
                 <button type="button" class="btn btn-primary" onclick="adicionar(2);">Adicionar</button>
                 <form id="frmAdicionar2" class="frmAdicionar" style="display: none;">
                   <label for=""><b>Pseudomona</b></label>
+                  <input type="text" name="txt-Id2" id="txt-Id2" class="form-control" hidden>
                   <input type="text" name="input2" id="input2" class="form-control" placeholder="Pseudomona">
                   <button type="button" class="btn btn-primary tabla2" id="pseudomona" onclick="guardarDatosGenerales(id, 2);">Guardar</button>
                 </form>
@@ -135,6 +140,10 @@
                   </table>
                 </div>
               </div>
+              <form id="formDataExcel2" enctype="multipart/form-data">
+                <input type="file" name="datosExcel2" id="datosExcel2" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
+                <button type="button" id="btnCargarExcel2" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel2.value, 'pseudomona', 2);" disabled="disabled">Cargar Datos</button>
+              </form>
             </div>
           </div>
         </div>
@@ -149,6 +158,7 @@
                 <button type="button" class="btn btn-primary" onclick="adicionar(3);">Adicionar</button>
                 <form id="frmAdicionar3" class="frmAdicionar" style="display: none;">
                   <label for=""><b>Escherichia</b></label>
+                  <input type="text" name="txt-Id3" id="txt-Id3" class="form-control" hidden>
                   <input type="text" name="input3" id="input3" class="form-control" placeholder="Escherichia">
                   <button type="button" class="btn btn-primary tabla3" id="escherichia" onclick="guardarDatosGenerales(id, 3);">Guardar</button>
                 </form>
@@ -171,25 +181,30 @@
                   </table>
                 </div>
               </div>
+              <form id="formDataExcel3" enctype="multipart/form-data">
+                <input type="file" name="datosExcel3" id="datosExcel3" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
+                <button type="button" id="btnCargarExcel3" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel3.value, 'escherichia', 3);" disabled="disabled">Cargar Datos</button>
+              </form>
             </div>
           </div>
           <div class="col-md-7">
-            <div class="card" id="4">
+            <div class="card" id="7">
               <div class="card-header">
                 <h4 class="card-title">Staphylococcus</h4>
 
                 <hr>
-                <button type="button" class="btn btn-primary" onclick="adicionar(4);">Adicionar</button>
-                <form id="frmAdicionar4" class="frmAdicionar" style="display: none;">
+                <button type="button" class="btn btn-primary" onclick="adicionar(7);">Adicionar</button>
+                <form id="frmAdicionar7" class="frmAdicionar" style="display: none;">
                   <label for=""><b>Staphylococcus</b></label>
-                  <input type="text" name="input4" id="input4" class="form-control" placeholder="Staphylococcus" style="width: 350px;">
-                  <button type="button" class="btn btn-primary tabla4" id="staphylococcus" onclick="guardarDatosGenerales(id, 4);">Guardar</button>
+                  <input type="text" name="txt-Id7" id="txt-Id7" class="form-control" hidden>
+                  <input type="text" name="input7" id="input7" class="form-control" placeholder="Staphylococcus" style="width: 350px;">
+                  <button type="button" class="btn btn-primary tabla4" id="staphylococcus" onclick="guardarDatosGenerales(id, 7);">Guardar</button>
                 </form>
                 <hr>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="tbl4" class="table-striped row-borde" style="width:100%">
+                  <table id="tbl7" class="table-striped row-borde" style="width:100%">
                     <thead>
                       <tr>
                         <th>id</th>
@@ -204,6 +219,10 @@
                   </table>
                 </div>
               </div>
+              <form id="formDataExcel7" enctype="multipart/form-data">
+                <input type="file" name="datosExcel7" id="datosExcel7" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
+                <button type="button" id="btnCargarExcel7" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel7.value, 'staphylococcus', 7);" disabled="disabled">Cargar Datos</button>
+              </form>
             </div>
           </div>
         </div>
@@ -239,9 +258,11 @@
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
   <!-- javascript inicializacion datatables -->
-  <script src="js/propiedades-generales.js"></script>
+
   <script src="js/menu.js"></script>
+  <script src="js/propiedades-generales.js"></script>
   <script src="js/selectlinkPM.js"></script>
+  <script src="js/ImportarProductos.js"></script>
 
 </body>
 
