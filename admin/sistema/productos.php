@@ -134,7 +134,7 @@ include_once('./modal/m_productos.php');
   <!-- javascript inicializacion datatables -->
   <script src="js/productos.js"></script>
   <script src="js/menu.js"></script>
-  <script src="js/importarProductos.js"></script>
+  <script src="js/ImportarProductos.js"></script>
 
 </body>
 
