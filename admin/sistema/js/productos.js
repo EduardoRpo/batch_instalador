@@ -183,7 +183,7 @@ $(document).on('click', '#btnguardarProductos', function (e) {
     contentType: false,
 
     success: function (response) {
-      debugger;
+
       if (response == 1) {
         alertify.set("notifier", "position", "top-right"); alertify.success("Operacion exitosa.");
         refreshTable();
