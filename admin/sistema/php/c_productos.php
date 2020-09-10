@@ -67,6 +67,8 @@ switch ($op) {
                 echo '2';
                 exit();
             } else {
+                $nombre = strtoupper($nombre);
+
                 $query = "INSERT INTO producto (referencia, nombre_referencia, unidad_empaque, id_nombre_producto, 
             id_notificacion_sanitaria, id_linea, id_marca, id_propietario, id_presentacion_comercial, id_color, id_olor, 
             id_apariencia, id_untuosidad, id_poder_espumoso, id_recuento_mesofilos, id_pseudomona, id_escherichia, 

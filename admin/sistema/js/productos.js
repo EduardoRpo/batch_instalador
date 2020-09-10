@@ -161,10 +161,20 @@ $(document).on('click', '.link-borrar', function (e) {
 $(document).on('click', '#btnguardarProductos', function (e) {
   e.preventDefault();
 
+  /* Validar todos los datos del formulario */
+  for (let i = 1; i <= 23; i++) {
+    let validar = $(`.n${i}`).val();
+    if (validar === '' || validar === null) {
+      alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos.");
+      return false;
+    }
+  }
+
+  /* Construye un ForData de todos los datos */
   const producto = new FormData($('#frmagregarProductos')[0]);
   producto.set('operacion', 3);
   producto.set('editar', editar)
-  debugger;
+
   $.ajax({
     type: "POST",
     url: "php/c_productos.php",
@@ -189,7 +199,6 @@ $(document).on('click', '#btnguardarProductos', function (e) {
     }
   })
 });
-
 
 /* Actualizar tabla */
 

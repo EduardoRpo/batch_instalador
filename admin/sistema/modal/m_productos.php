@@ -22,20 +22,20 @@
                       <div class="col-md-2 pr-1">
                         <div class="form-group">
                           <label for="referencia">Referencia</label>
-                          <input type="text" name="id_referencia" id="id_referencia" class="form-control n1" hidden>
-                          <input type="text" name="referencia" id="referencia" class="form-control n1" placeholder="Referencia" required>
+                          <input type="text" name="id_referencia" id="id_referencia" class="form-control" hidden>
+                          <input type="text" name="referencia" id="referencia" class="form-control n1" placeholder="Referencia" class="required">
                         </div>
                       </div>
                       <div class="col-md-8 pl-1">
                         <div class="form-group">
                           <label for="nombre">Nombre</label>
-                          <input type="text" name="nombre" id="nombre" class="form-control n2" placeholder="Nombre" required>
+                          <input type="text" name="nombre" id="nombre" class="form-control n2" placeholder="Nombre" class="validate[required]">
                         </div>
                       </div>
                       <div class="col-md-2 pl-1">
                         <div class="form-group">
                           <label for="empaque">Unidad Empaque</label>
-                          <input type="number" name="empaque" id="empaque" class="form-control n3" placeholder="Cantidad" required>
+                          <input type="number" name="empaque" id="empaque" class="form-control n3" placeholder="Cantidad" class="required">
                         </div>
                       </div>
                     </div>
