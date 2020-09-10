@@ -158,6 +158,8 @@ $(document).on('click', '.link-borrar', function (e) {
   });
 });
 
+/* Guardar o actualizar data*/
+
 $(document).on('click', '#btnguardarProductos', function (e) {
   e.preventDefault();
 
@@ -171,9 +173,12 @@ $(document).on('click', '#btnguardarProductos', function (e) {
   }
 
   /* Construye un ForData de todos los datos */
+  id_referencia = $('#id_referencia').val();
+  
   const producto = new FormData($('#frmagregarProductos')[0]);
   producto.set('operacion', 3);
   producto.set('editar', editar);
+  producto.set('editar', id_referencia);
 
   $.ajax({
     type: "POST",
