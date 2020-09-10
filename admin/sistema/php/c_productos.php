@@ -47,7 +47,7 @@ switch ($op) {
             eval($asignacion);
         }
 
-        if ($editar == true) {
+        if ($editar > 0) {
             $query = "UPDATE producto SET referencia=$referencia, nombre_referencia='$nombre', unidad_empaque=$empaque, 
             id_nombre_producto = $nombre_producto, id_notificacion_sanitaria = $notificacion_sanitaria, id_linea = $linea, 
             id_marca = $marca, id_propietario = $propietario, id_presentacion_comercial= $presentacion_comercial, 

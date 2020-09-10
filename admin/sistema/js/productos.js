@@ -55,7 +55,7 @@ $(document).ready(function () {
 /* Cargar Modal para actualizar y Crear productos */
 
 function cargarModalProductos() {
-  editar = false;
+  editar = 0;
   $('#m_productos').modal('show');
   $('#btnguardarProductos').html('Crear Producto');
 
@@ -106,7 +106,7 @@ function cargarselectores(selector) {
 /* Cargar datos para Actualizar registros */
 
 $(document).on('click', '.link-editar', function (e) {
-  editar = true;
+  editar = 1;
   let j = 1;
   let producto = [];
 
@@ -175,12 +175,10 @@ $(document).on('click', '#btnguardarProductos', function (e) {
   }
 
   /* Construye un ForData de todos los datos */
-  //id_referencia = $('#id_referencia').val();
-  
+
   const producto = new FormData($('#frmagregarProductos')[0]);
   producto.set('operacion', 3);
   producto.set('editar', editar);
-  //producto.set('id', id_referencia);
 
   $.ajax({
     type: "POST",
@@ -213,3 +211,9 @@ function refreshTable() {
   $('#tblProductos').DataTable().clear();
   $('#tblProductos').DataTable().ajax.reload();
 }
+
+/* Borrar todos los elementos en el formulario */
+
+$('#m_productos').on('hidden.bs.modal', function () {
+  $(this).find("input, textarea, select").val('').end();
+})
