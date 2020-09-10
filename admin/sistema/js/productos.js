@@ -114,10 +114,6 @@ $(document).on('click', '.link-editar', function (e) {
   $('#m_productos').modal('show');
   $('#btnguardarProductos').html('Actualizar Producto');
 
-  //para actualizar guarda la referencia inicia
-  let referencia = $('#referencia').val();
-  $('#id_referencia').val(referencia);
-
   //carga el array con los datos de la tabla
   for (let i = 2; i < 23; i++) {
     propiedad = $(this).parent().parent().children().eq(i).text();
@@ -134,7 +130,13 @@ $(document).on('click', '.link-editar', function (e) {
     $(`.n${j} option:contains(${producto[i]})`).attr('selected', true);
     j++;
   }
+
+  //para actualizar guarda la referencia inicia
+  let referencia = $('#referencia').val();
+  $('#id_referencia').val(referencia);
+
 });
+
 
 /* Eliminar registros */
 
@@ -173,12 +175,12 @@ $(document).on('click', '#btnguardarProductos', function (e) {
   }
 
   /* Construye un ForData de todos los datos */
-  id_referencia = $('#id_referencia').val();
+  //id_referencia = $('#id_referencia').val();
   
   const producto = new FormData($('#frmagregarProductos')[0]);
   producto.set('operacion', 3);
   producto.set('editar', editar);
-  producto.set('id_referencia', id_referencia);
+  //producto.set('id', id_referencia);
 
   $.ajax({
     type: "POST",
