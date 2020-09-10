@@ -57,7 +57,7 @@ $(document).ready(function () {
 function cargarModalProductos() {
   editar = 0;
   $('#m_productos').modal('show');
-  $('#m_productos').find("input, textarea, select").val('').end();
+  $('#m_productos').find("input, select").val('').end();
   $('#btnguardarProductos').html('Crear Producto');
 }
 

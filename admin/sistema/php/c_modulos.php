@@ -18,7 +18,7 @@ switch ($op) {
 
     case 3: // Guardar datos o actualizar
         $id = $_POST['id'];
-        $proceso = $_POST['proceso'];
+        $proceso = strtoupper($_POST['proceso']);
         
         if ($id == '') {
             $query = "SELECT * FROM modulo WHERE modulo='$proceso'";
