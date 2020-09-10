@@ -178,7 +178,7 @@ $(document).on('click', '#btnguardarProductos', function (e) {
   const producto = new FormData($('#frmagregarProductos')[0]);
   producto.set('operacion', 3);
   producto.set('editar', editar);
-  producto.set('editar', id_referencia);
+  producto.set('id_referencia', id_referencia);
 
   $.ajax({
     type: "POST",
