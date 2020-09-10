@@ -50,7 +50,7 @@ switch ($op) {
         if ($editar == true) {
             $query = "UPDATE producto SET referencia=$referencia, nombre_referencia='$nombre', unidad_empaque=$empaque, 
             id_nombre_producto = $nombre_producto, id_notificacion_sanitaria = $notificacion_sanitaria, id_linea = $linea, 
-            id_marca = $marca, id_propietario = $propietario, id_presentacion_comercial='presentacion_comercial, 
+            id_marca = $marca, id_propietario = $propietario, id_presentacion_comercial= $presentacion_comercial, 
             id_color=$color, id_olor= $olor, id_apariencia = $apariencia, id_untuosidad=$untuosidad, 
             id_poder_espumoso=$poder_espumoso, id_recuento_mesofilos = $recuento_mesofilos, id_pseudomona=$pseudomona, 
             id_escherichia=$escherichia, id_staphylococcus= $staphylococcus, id_ph = $ph, id_viscosidad = $viscosidad, 
