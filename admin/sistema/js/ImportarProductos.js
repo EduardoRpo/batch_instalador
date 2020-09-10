@@ -3,7 +3,6 @@
 
 $("#datosExcel1").change(function (e) {
     e.preventDefault();
-    debugger;
     activarBoton(1);
 });
 
@@ -26,6 +25,10 @@ $("#datosExcel5").change(function (e) {
 $("#datosExcel6").change(function (e) {
     e.preventDefault();
     activarBoton(6);
+});
+$("#datosExcel7").change(function (e) {
+    e.preventDefault();
+    activarBoton(7);
 });
 
 function activarBoton(id) {
@@ -61,7 +64,7 @@ function cargarDataExcel(tabla, id) {
 
     const formulario = new FormData($(`#formDataExcel${id}`)[0]);
     formulario.set('tabla', tabla);
-
+    debugger;
     $.ajax({
 
         url: "php/importarProductos.php",

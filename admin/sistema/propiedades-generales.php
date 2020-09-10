@@ -304,7 +304,7 @@
               </div>
               <form id="formDataExcel6" enctype="multipart/form-data">
                 <input type="file" name="datosExcel6" id="datosExcel6" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
-                <button type="button" id="btnCargarExcel6" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel6.value, 'presentacion_comercial',6);" disabled="disabled">Cargar Datos</button>
+                <button type="button" id="btnCargarExcel6" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel6.value, 'presentacion_comercial', 6);" disabled="disabled">Cargar Datos</button>
               </form>
             </div>
           </div>
