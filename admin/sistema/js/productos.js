@@ -52,13 +52,13 @@ $(document).ready(function () {
   });
 });
 
-/* Cargar Modal para actualizar y Crear productos */
+/* Cargar Modal para Crear productos */
 
 function cargarModalProductos() {
   editar = 0;
   $('#m_productos').modal('show');
+  $('#m_productos').find("input, textarea, select").val('').end();
   $('#btnguardarProductos').html('Crear Producto');
-
 }
 
 /* Cargar selectores y data */
@@ -211,9 +211,3 @@ function refreshTable() {
   $('#tblProductos').DataTable().clear();
   $('#tblProductos').DataTable().ajax.reload();
 }
-
-/* Borrar todos los elementos en el formulario */
-
-$('#m_productos').on('hidden.bs.modal', function () {
-  $(this).find("input, textarea, select").val('').end();
-})
