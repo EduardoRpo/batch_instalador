@@ -2,7 +2,7 @@ let editar;
 
 /* Mostrar Menu seleccionado */
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#link9').css('text-decoration', 'revert')
+$('#link9').css('text-decoration', 'revert');
 $('.contenedor-menu .menu ul.abrir1').show();
 
 cargarDatosProductos();
@@ -68,8 +68,8 @@ function cargarDatosProductos() {
   let j = 0;
 
   $('select').each(function () {
-    sel.push($(this).prop('id'))
-  })
+    sel.push($(this).prop('id'));
+  });
 
   for (i = 1; i <= sel.length; i++) {
     propiedad = sel[j];
@@ -100,7 +100,7 @@ function cargarselectores(selector) {
     error: function (response) {
       console.log(response);
     }
-  })
+  });
 }
 
 /* Cargar datos para Actualizar registros */
@@ -155,7 +155,7 @@ $(document).on('click', '.link-borrar', function (e) {
     error: function (response) {
       alertify.set("notifier", "position", "top-right"); alertify.error("Error.");
     }
-  })
+  });
 });
 
 $(document).on('click', '#btnguardarProductos', function (e) {
@@ -173,7 +173,7 @@ $(document).on('click', '#btnguardarProductos', function (e) {
   /* Construye un ForData de todos los datos */
   const producto = new FormData($('#frmagregarProductos')[0]);
   producto.set('operacion', 3);
-  producto.set('editar', editar)
+  producto.set('editar', editar);
 
   $.ajax({
     type: "POST",
@@ -197,7 +197,7 @@ $(document).on('click', '#btnguardarProductos', function (e) {
     error: function (response) {
       alertify.set("notifier", "position", "top-right"); alertify.error("Error.");
     }
-  })
+  });
 });
 
 /* Actualizar tabla */
