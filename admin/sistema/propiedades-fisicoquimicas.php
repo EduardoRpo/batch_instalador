@@ -472,7 +472,7 @@
   <script src="js/menu.js"></script>
   <script src="js/propiedades-generales.js"></script>
   <script src="js/selectlink.js"></script>
-  <script src="js/ImportarProductos.js"></script>
+  <script src="js/importarProductos.js"></script>
 
 </body>
 

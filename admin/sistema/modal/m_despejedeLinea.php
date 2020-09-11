@@ -1,5 +1,5 @@
 <?php 
-    require_once('/Desarrollo/BatchRecord/htdocs/conexion.php');
+    require_once('./conexion.php');
 ?>
 
 <div class="modal fade" id="modalDespejedeLinea" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

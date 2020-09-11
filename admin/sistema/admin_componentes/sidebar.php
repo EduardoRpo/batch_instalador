@@ -36,7 +36,6 @@
                 <li><a href="propiedades-generales.php" id="linkGenerales"><i class='large material-icons'>portrait</i><span>Generales</span></a></li>
                 <li><a href="propiedades-fisicoquimicas.php" id="linkFisicoQuimicas"><i class='large material-icons'>portrait</i><span>Propiedades FisicoQuimicas</span></a></li>
                 <li><a href="propiedades-microbiologicas.php" id="linkMicrobiologicas"><i class='large material-icons'>portrait</i><span>Propiedades Microbiologicas</span></a></li>
-                <!-- <li><a href="" id="link12"><i class='large material-icons'>portrait</i><span>Presentación</span></a></li> -->
                 <li><a href="empaques.php" id="linkEmpaques"><i class='large material-icons'>portrait</i><span>Empaques</span></a></li>
                 <li><a href="materiaprima.php" id="linkMateriaPrima"><i class='large material-icons'>portrait</i><span>Materia Prima</span></a></li>
                 <li><a href="formulas.php" id="linkFormulas"><i class='large material-icons'>portrait</i><span>Formulas</span></a></li>

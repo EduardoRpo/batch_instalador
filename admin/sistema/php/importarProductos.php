@@ -16,7 +16,8 @@ else if (isset($_FILES['datosExcel5']))
 	$datos = $_FILES['datosExcel5'];
 else if (isset($_FILES['datosExcel6']))
 	$datos = $_FILES['datosExcel6'];
-
+else if (isset($_FILES['datosExcel7']))
+	$datos = $_FILES['datosExcel7'];
 
 $tabla = $_POST['tabla'];
 print_r($tabla);

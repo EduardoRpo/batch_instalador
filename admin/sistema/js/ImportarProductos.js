@@ -42,9 +42,9 @@ function comprobarExtension(formulario, archivo, tabla, id) {
     let extension = (archivo.substring(archivo.lastIndexOf("."))).toLowerCase();
 
     if (extensiones_permitidas === extension) {
-        
+
         $("#btnCargarExcel").prop("disabled", false);
-        
+
         let confirm = alertify.confirm('Samara Cosmetics', 'Todos los datos serán eliminados y reemplazados por el nuevo archivo ¿Esta seguro de ejecutar la operación?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
         confirm.set('onok', function (r) {
             if (r) {
@@ -64,7 +64,7 @@ function cargarDataExcel(tabla, id) {
 
     const formulario = new FormData($(`#formDataExcel${id}`)[0]);
     formulario.set('tabla', tabla);
-    debugger;
+
     $.ajax({
 
         url: "php/importarProductos.php",
@@ -74,13 +74,8 @@ function cargarDataExcel(tabla, id) {
         contentType: false,
 
         success: function (data) {
-
-            /* if (!data) {
-                alertify.set("notifier", "position", "top-right"); alertify.error("Error");
-            } else { */
             alertify.set("notifier", "position", "top-right"); alertify.success("Operación exitosa");
             refreshTable(id);
-            /* } */
 
         }
     });

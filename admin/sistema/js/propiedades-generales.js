@@ -102,7 +102,7 @@ function cargarTablaLinea(id, tabla) {
 /* Cargue de Nombre Productos*/
 
 function cargarTablas(id, tabla) {
-
+    debugger;
     $(id).DataTable({
         destroy: true,
         scrollY: '50vh',

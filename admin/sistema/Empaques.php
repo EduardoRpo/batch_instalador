@@ -52,11 +52,11 @@
                 <p class="category">Propiedades<a href=""></a></p>
               </div>
               <div class="card-body">
-                <button class="btn btn-info mb-5" id="tapas" onclick="parametros(id, 1);">Tapa</button>
+                <button class="btn btn-primary mb-5" id="tapa" onclick="parametros(id, 1);">Tapa</button>
                 <button class="btn btn-light mb-5" id="envase" onclick="parametros(id, 2)">Envase</button>
-                <button class="btn btn-info mb-5" id="etiqueta" onclick="parametros(id, 3)">Etiqueta</button>
+                <button class="btn btn-primary mb-5" id="etiqueta" onclick="parametros(id, 3)">Etiqueta</button>
                 <button class="btn btn-light mb-5" id="otros" onclick="parametros(id, 4)">Otros Caja</button>
-                <button class="btn btn-info mb-5" id="otros_empaque" onclick="parametros(id, 5)">Otros</button>
+                <button class="btn btn-primary mb-5" id="otro_empaque" onclick="parametros(id, 5)">Otros</button>
               </div>
             </div>
           </div>
