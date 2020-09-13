@@ -12,8 +12,8 @@ switch ($op) {
 
     case 2: //Eliminar
         $id = $_POST['id'];
-        $query = "DELETE FROM condicionesmedio_tiempo WHERE id = $id";
-        ejecutarQuery($conn, $query);
+        $sql = "DELETE FROM condicionesmedio_tiempo WHERE id = :id";
+        ejecutarEliminar($conn, $sql, $id);
         break;
 
     case 3: // Actualizar y Guardar data 

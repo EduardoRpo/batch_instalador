@@ -34,8 +34,8 @@ switch ($op) {
 
     case 2: //Eliminar
         $id = $_POST['id'];
-        $query = "DELETE FROM producto WHERE referencia = $id";
-        ejecutarQuery($conn, $query);
+        $sql = "DELETE FROM producto WHERE referencia = :id";
+        ejecutarEliminar($conn, $sql, $id);
         break;
 
     case 3: // Guardar data

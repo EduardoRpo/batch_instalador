@@ -102,7 +102,7 @@ function cargarTablaLinea(id, tabla) {
 /* Cargue de Nombre Productos*/
 
 function cargarTablas(id, tabla) {
-    debugger;
+   
     $(id).DataTable({
         destroy: true,
         scrollY: '50vh',
@@ -130,7 +130,7 @@ function cargarTablas(id, tabla) {
 /* Mostrar elementos para adicionar registros en las diferentes tablas */
 
 function adicionar(id) {
-
+   
     $(`#frmAdicionar${id}`).slideToggle();
     $(`.tabla${id}`).html('Crear');
     $(`#txt${id}`).val('');
@@ -166,7 +166,7 @@ $(document).on('click', '.link-borrar', function (e) {
 $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
     editar = true;
-    debugger;
+
     let id = $(this).parent().parent().children().first().text();
     let nombre = $(this).parent().parent().children().eq(1).text();
 

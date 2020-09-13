@@ -12,8 +12,8 @@ switch ($op) {
 
     case 2: //Eliminar
         $id = $_POST['id'];
-        $query = "DELETE FROM materia_prima WHERE referencia = $id";
-        ejecutarQuery($conn, $query);
+        $sql = "DELETE FROM materia_prima WHERE referencia = :id";
+        ejecutarEliminar($conn, $sql, $id);
         break;
 
     case 3: // Almacenar o actualizar data

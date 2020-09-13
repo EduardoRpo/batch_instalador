@@ -1,13 +1,12 @@
+
 var tablaBD;
 var id_tbl;
 var editar;
 
 /* Mostrar Menu seleccionado */
-
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#linkEmpaques').css('text-decoration', 'revert')
 $('.contenedor-menu .menu ul.abrir1').show();
-
+$('#linkGenerales').css('text-decoration', 'revert')
 
 /* Ocultar tablas Propiedades Generales */
 
@@ -21,9 +20,8 @@ $(document).ready(function () {
 
 /* Mostrar cada parametro */
 
-function parametros(id) {
-    debugger;
-    //$(`#${card}`).toggle();
+function parametros(tabla, id) {
+
     $(`#${id}`).toggle();
 
     for (let i = 1; i < 6; i++) {
@@ -37,27 +35,14 @@ function parametros(id) {
     tablaBD = tabla;
 
     cargarTablas(id, tabla);
-    debugger;
 }
 
-/* Cargar tablas */
-
-/* $(document).ready(function () {
-    let tabla;
-    for (i = 1; i < 9; i++) {
-        $(`#${i}`).hide();
-        tabla = $(`#tbl${i}`);
-        if (i <= 4)
-            cargarTablas(tabla, i);
-        else
-            cargarTablas2(tabla, i);
-    }
-}) */
-
-/* Cargue de Nombre Productos*/
+/* Cargue de Tablas envase*/
 
 function cargarTablas(id, tabla) {
-    $(tabla).DataTable({
+
+    $(id).DataTable({
+        destroy: true,
         scrollY: '50vh',
         scrollCollapse: true,
         paging: false,
@@ -65,76 +50,32 @@ function cargarTablas(id, tabla) {
 
         "ajax": {
             method: "POST",
-            url: "php/c_empaque.php",
+            url: "php/c_empaques.php",
             data: { tabla: tabla, operacion: 1 },
         },
 
         "columns": [
-            { "data": "codigo" },
-            { "data": "descripcion" },
-            { "defaultContent": "<a href='#' <i class='large material-icons link-editar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
-            { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" }
-
-        ]
-    });
-};
-
-
-function cargarTablas2(tabla, operacion) {
-    $(tabla).DataTable({
-        scrollY: '50vh',
-        scrollCollapse: true,
-        paging: false,
-        language: { url: 'admin_componentes/es-ar.json' },
-
-        "ajax": {
-            method: "POST",
-            url: "php/c_propiedades-producto.php",
-            data: { operacion: operacion },
-        },
-
-        "columns": [
             { "data": "id" },
-            { "data": "min" },
-            { "data": "max" },
-            { "defaultContent": "<a href='#' <i class='large material-icons link-editar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
-            { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" }
+            { "data": "nombre" },
+            { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a>", className: "centrado" },
+            { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>", className: "centrado" }
 
         ]
     });
 };
 
-/* Ocultar */
 
-$('#adNombreProducto').click(function (e) {
-    e.preventDefault();
-    $("#frmadParametro").slideToggle();
-    cargarSelectorLinea();
-});
+/* Mostrar elementos para adicionar registros en las diferentes tablas */
 
-function cargarSelectorLinea() {
+function adicionar(id) {
 
-    $.ajax({
-        method: 'POST',
-        url: 'php/c_maquinaria.php',
-        data: { operacion: "4" },
+    editar = 0;
+    $(`#frmAdicionar${id}`).slideToggle();
+    $('.btnguardar').html('Crear');
+    $(`#txt-Id${id}`).val('');
+    $(`#codigo${id}`).val('');
+    $(`#input${id}`).val('');
 
-        success: function (response) {
-            var info = JSON.parse(response);
-
-            let $select = $('#cmbLinea');
-            $select.empty();
-
-            $select.append('<option disabled selected>' + "Seleccionar" + '</option>');
-
-            $.each(info, function (i, value) {
-                $select.append('<option value ="' + value.id + '">' + value.linea + '</option>');
-            });
-        },
-        error: function (response) {
-            console.log(response);
-        }
-    })
 }
 
 /* Borrar registros */
@@ -143,17 +84,16 @@ $(document).on('click', '.link-borrar', function (e) {
     e.preventDefault();
 
     let id = $(this).parent().parent().children().first().text();
-
     var confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este registro?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
 
     confirm.set('onok', function (r) {
         if (r) {
             $.ajax({
                 'method': 'POST',
-                'url': 'php/operacionesDespejedelinea.php',
-                'data': { operacion: "2", id: id }
+                'url': 'php/c_empaques.php',
+                'data': { operacion: 2, id: id, tabla: tablaBD }
             });
-            refreshTable();
+            refreshTable(id_tbl);
             alertify.success('Registro Eliminado');
         }
     });
@@ -163,72 +103,57 @@ $(document).on('click', '.link-borrar', function (e) {
 
 $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
-    let id = $(this).parent().parent().children().first().text();
+    editar = 1;
 
-    $.ajax({
-        method: 'POST',
-        url: 'php/operacionesDespejedelinea.php',
-        data: { operacion: "3", id: id },
+    let codigo = $(this).parent().parent().children().first().text();
+    let nombre = $(this).parent().parent().children().eq(1).text();
 
-        success: function (response) {
-            var info = JSON.parse(response);
-            $('#pregunta').val(info.pregunta);
-            $('#resp').val(info.resp);
-            $('#btnguardarPregunta').html('Actualizar');
-            $('.tpregunta').html('Actualizar Registros');
-            $('#modalDespejedeLinea').modal('show');
-            refreshTable();
-        },
-        error: function (response) {
-            console.log(response);
-        }
-    });
+    $(`#frmAdicionar${id_tbl}`).slideDown();
+    $('.btnguardar').html('Actualizar');
+
+    $(`#txt-Id${id_tbl}`).val(codigo);
+    $(`#codigo${id_tbl}`).val(codigo);
+    $(`#input${id_tbl}`).val(nombre);
 });
 
 
 /* Almacenar Registros */
 
-$(document).ready(function () {
-    $('#btnguardarPregunta').click(function (e) {
-        e.preventDefault();
-        var datos = $('#frmpreguntas').serialize();
-        $.ajax({
-            type: "POST",
-            url: "php/operacionesDespejedelinea.php",
-            data: datos,
-            //data: {operacion : "3", id : id},
-            success: function (r) {
-                if (r == 1) {
-                    alertify.set("notifier", "position", "top-right"); alertify.success("Agregado con éxito.");
-                    document.getElementById("frmagregarUsuarios").reset();
-                } else {
-                    alertify.set("notifier", "position", "top-right"); alertify.error("Usuario No Registrado.");
-                }
+function guardarDatosGenerales(nombre, id) {
+
+    let cod = $(`#txt-Id${id}`).val();
+    let codigo = $(`#codigo${id}`).val();
+    let descripcion = $(`#input${id}`).val();
+
+    if (!codigo || !nombre) {
+        alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos");
+        return false;
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "php/c_empaques.php",
+        data: { operacion: 3, editar: editar, nombre: nombre, id: cod, codigo: codigo, descripcion: descripcion },
+
+        success: function (r) {
+
+            if (r == 1) {
+                alertify.set("notifier", "position", "top-right"); alertify.success("¡Operación exitosa.!");
+                refreshTable(id);
+            } else if (r == 2) {
+                alertify.set("notifier", "position", "top-right"); alertify.error("¡Error!. El codigo ya existe.");
             }
-        });
-        //return false;
+            else {
+                alertify.set("notifier", "position", "top-right"); alertify.error("¡Error!");
+            }
+        }
     });
-});
+}
 
 
 /* Actualizar tabla */
 
-function refreshTable() {
-    $('#listarDespeje').DataTable().clear();
-    $('#listarDespeje').DataTable().ajax.reload();
+function refreshTable(id) {
+    $(`#tbl${id}`).DataTable().clear();
+    $(`#tbl${id}`).DataTable().ajax.reload();
 }
-
-
-/*      var confirm= alertify.confirm('Samara Cosmetics','¿Está seguro de actualizar este registro?',null,null).set('labels', {ok:'Si', cancel:'No'});
-
-     confirm.set('onok', function(r){
-         if(r){
-             $.ajax({
-                 'method' : 'GET',
-                 'url' : `php/accionesDespejedeLinea.php?link-editar=${id}`,
-                 'data' : 'id',
-             });
-             refreshTable();
-             alertify.success('Registro Eliminado');
-         }
-     });   */

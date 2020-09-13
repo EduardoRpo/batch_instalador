@@ -24,10 +24,9 @@ switch ($op) {
     break;
 
   case 4: //Eliminar
-    $id_pregunta = $_POST['id'];
-
-    $query = "DELETE FROM preguntas WHERE id = $id_pregunta";
-    ejecutarQuery($conn, $query);
+    $id = $_POST['id'];
+    $sql = "DELETE FROM preguntas WHERE id = :id";
+    ejecutarEliminar($conn, $sql, $id);
 
   case 5: // Guardar y actualizar data
     $pregunta = strtoupper($_POST['pregunta']);

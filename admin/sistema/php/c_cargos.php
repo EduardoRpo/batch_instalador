@@ -12,26 +12,41 @@ switch ($op) {
 
     case 2: //Eliminar
         $id = $_POST['id'];
-        $query = "DELETE FROM cargo WHERE id = $id";
-        ejecutarQuery($conn, $query);
+        $sql = "DELETE FROM cargo WHERE id = :id";
+        ejecutarEliminar($conn, $sql, $id);
         break;
 
     case 3: // Actualizar y Guardar data
-        $cargo = strtoupper($_POST['cargo']);
-        $id_cargo = $_POST['id'];
+        if (!empty($_POST)) {
+            $editar = $_POST['editar'];
+            $cargo = strtoupper($_POST['cargo']);
 
-        if ($id_cargo == '') {
-            $query = "SELECT * FROM cargo WHERE cargo='$cargo'";
-            $result = existeRegistro($conn, $query);
+            if ($editar == 0) {
+                $sql = "SELECT * FROM cargo WHERE cargo= :cargo";
+                $query = $conn->prepare($sql);
+                $query->execute(['cargo' => $cargo]);
+                $rows = $query->rowCount();
 
-            if ($result > 0) {
-                exit();
-            } else
-                $query = "INSERT INTO cargo (cargo, posicion) VALUES('$cargo', '0')";
-        } else
-            $query = "UPDATE cargo SET cargo = '$cargo' WHERE id = $id_cargo";
+                if ($rows > 0) {
+                    echo '2';
+                    exit();
+                } else {
+                    $sql = "INSERT INTO cargo (cargo) VALUES(:cargo)";
+                    $query = $conn->prepare($sql);
+                    $result = $query->execute(['cargo' => $cargo]);
+                    ejecutarQuery($result, $conn);
+                }
+            } else {
+                $id = $_POST['id'];
+                $sql = "UPDATE cargo SET cargo = '$cargo' WHERE id = :id";
+                $query = $conn->prepare($sql);
+                $result = $query->execute(['id' => $id]);
 
-        ejecutarQuery($conn, $query);
-
+                if ($result) {
+                    echo '3';
+                    exit();
+                }
+            }
+        }
         break;
 }

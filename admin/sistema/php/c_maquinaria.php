@@ -18,8 +18,8 @@ switch ($op) {
 
   case 3: //Eliminar
     $id = $_POST['id'];
-    $query = "DELETE FROM maquinaria WHERE id = $id";
-    ejecutarQuery($conn, $query);
+    $sql = "DELETE FROM maquinaria WHERE id = :id";
+    ejecutarEliminar($conn, $sql, $id);
     break;
 
   case 4: // Guardar y actualizar data

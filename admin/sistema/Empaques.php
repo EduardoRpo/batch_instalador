@@ -68,13 +68,16 @@
               <div class="card-header">
                 <h4 class="card-title">Tapas</h4>
                 <hr>
-                <button type="button" class="btn btn-primary" id="addTapa">Adicionar</button>
-                <form id="frmadParametro" style="display: none;">
+                <button type="button" class="btn btn-primary" onclick="adicionar(1);">Adicionar</button>
+                <form id="frmAdicionar1" style="display: none;">
                   <label for=""><b>Código</b></label>
-                  <input type="number" name="codigoTapa" id="codigoTapa" class="form-control" placeholder="Codigo">
                   <label for=""><b>Descripcion de Tapa</b></label>
-                  <input type="text" name="nombreTapa" id="nombreTapa" class="form-control" placeholder="Descripcion Tapa">
-                  <button type="button" class="btn btn-primary" id="guardarNombreProducto">Guardar</button>
+
+                  <input type="number" name="txt-Id1" id="txt-Id1" class="form-control" hidden>
+                  <input type="number" name="codigo1" id="codigo1" class="form-control" placeholder="Codigo" style="text-align: center;">
+                  <input type="text" name="input1" id="input1" class="form-control" placeholder="Descripcion Tapa">
+
+                  <button type="button" class="btn btn-primary btnguardar" id="tapa" onclick="guardarDatosGenerales(id, 1);">Guardar</button>
                 </form>
                 <hr>
               </div>
@@ -106,13 +109,16 @@
               <div class="card-header">
                 <h4 class="card-title">Envases</h4>
                 <hr>
-                <button type="button" class="btn btn-primary" id="addEnvase">Adicionar</button>
-                <form id="frmadParametro" style="display: none;">
+                <button type="button" class="btn btn-primary" onclick="adicionar(2);">Adicionar</button>
+                <form id="frmAdicionar2" style="display: none;">
                   <label for=""><b>Código</b></label>
-                  <input type="text" name="codigoEnvase" id="codigoEnvase" class="form-control" placeholder="Codigo">
-                  <label for=""><b>Envase</b></label>
-                  <input type="text" name="nombreEnvase" id="nombreEnvase" class="form-control" placeholder="Envase">
-                  <button type="button" class="btn btn-primary" id="guardarNombreEnvase">Guardar</button>
+                  <label for=""><b>Descripcion de Envase</b></label>
+
+                  <input type="number" name="txt-Id2" id="txt-Id2" class="form-control" hidden>
+                  <input type="number" name="codigo2" id="codigo2" class="form-control" placeholder="Codigo" style="text-align: center;">
+                  <input type="text" name="input2" id="input2" class="form-control" placeholder="Descripcion Envase">
+
+                  <button type="button" class="btn btn-primary btnguardar" id="envase" onclick="guardarDatosGenerales(id, 2);">G>Guardar</button>
                 </form>
                 <hr>
               </div>
@@ -143,13 +149,16 @@
               <div class="card-header">
                 <h4 class="card-title">Etiquetas</h4>
                 <hr>
-                <button type="button" class="btn btn-primary" id="addEtiquetas">Adicionar</button>
-                <form id="frmadParametro" style="display: none;">
+                <button type="button" class="btn btn-primary" onclick="adicionar(3);">Adicionar</button>
+                <form id="frmAdicionar3" style="display: none;">
                   <label for=""><b>Código</b></label>
-                  <input type="text" name="codigoEtiqueta" id="codigoEtiqueta" class="form-control" placeholder="Código">
-                  <label for=""><b>Etiqueta</b></label>
-                  <input type="text" name="nombreEtiqueta" id="nombreEtiqueta" class="form-control" placeholder="Etiqueta">
-                  <button type="button" class="btn btn-primary" id="guardarCodigo">Guardar</button>
+                  <label for=""><b>Descripcion Etiqueta</b></label>
+
+                  <input type="number" name="txt-Id3" id="txt-Id3" class="form-control" hidden>
+                  <input type="number" name="codigo3" id="codigo3" class="form-control" placeholder="Codigo" style="text-align: center;">
+                  <input type="text" name="input3" id="input3" class="form-control" placeholder="Descripcion Etiqueta">
+
+                  <button type="button" class="btn btn-primary btnguardar" id="etiqueta" onclick="guardarDatosGenerales(id, 3);">G>Guardar</button>
                 </form>
                 <hr>
               </div>
@@ -175,15 +184,18 @@
           <div class="col-md-12">
             <div class="card" id="4">
               <div class="card-header">
-                <h4 class="card-title">Otros Caja</h4>
+                <h4 class="card-title">Otros</h4>
                 <hr>
-                <button type="button" class="btn btn-primary" id="addCaja">Adicionar</button>
-                <form id="frmadParametro" style="display: none;">
+                <button type="button" class="btn btn-primary" onclick="adicionar(4);">Adicionar</button>
+                <form id="frmAdicionar4" style="display: none;">
                   <label for=""><b>Código</b></label>
-                  <input type="number" name="codigoCaja" id="codigoCaja" class="form-control" placeholder="Codigo">
-                  <label for=""><b>Descripción</b></label>
-                  <input type="text" name="nombreCaja" id="nombreCaja" class="form-control" placeholder="Decripción">
-                  <button type="button" class="btn btn-primary" id="guardarCaja">Guardar</button>
+                  <label for=""><b>Descripcion Otros</b></label>
+
+                  <input type="number" name="txt-Id4" id="txt-Id4" class="form-control" hidden>
+                  <input type="number" name="codigo4" id="codigo4" class="form-control" placeholder="Codigo" style="text-align: center;">
+                  <input type="text" name="input4" id="input4" class="form-control" placeholder="Descripcion Otros">
+
+                  <button type="button" class="btn btn-primary btnguardar" id="otros" onclick="guardarDatosGenerales(id, 4);">G>Guardar</button>
                 </form>
                 <hr>
               </div>
@@ -214,13 +226,16 @@
               <div class="card-header">
                 <h4 class="card-title">Otros</h4>
                 <hr>
-                <button type="button" class="btn btn-primary" id="addOtros">Adicionar</button>
-                <form id="frmadParametro" style="display: none;">
+                <button type="button" class="btn btn-primary" onclick="adicionar(5);">Adicionar</button>
+                <form id="frmAdicionar5" style="display: none;">
                   <label for=""><b>Código</b></label>
-                  <input type="number" name="codOtros" id="codOtros" class="form-control" placeholder="Código">
-                  <label for=""><b>Decripción</b></label>
-                  <input type="number" name="nombreOtros" id="nombreOtros" class="form-control" placeholder="Descripción">
-                  <button type="button" class="btn btn-primary" id="guardarOtros">Guardar</button>
+                  <label for=""><b>Otros Adicionales</b></label>
+
+                  <input type="number" name="txt-Id5" id="txt-Id5" class="form-control" hidden>
+                  <input type="number" name="codigo5" id="codigo5" class="form-control" placeholder="Codigo" style="text-align: center;">
+                  <input type="text" name="input5" id="input5" class="form-control" placeholder="Descripcion Otros">
+
+                  <button type="button" class="btn btn-primary btnguardar" id="otro_empaque" onclick="guardarDatosGenerales(id, 5);">G>Guardar</button>
                 </form>
                 <hr>
               </div>
@@ -279,8 +294,9 @@
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
   <!-- javascript inicializacion datatables -->
-  <script src="js/propiedades-generales.js"></script>
+  <script src="js/empaques.js"></script>
   <script src="js/menu.js"></script>
+  <script src="js/cargarDatos.js"></script>
 
 </body>
 

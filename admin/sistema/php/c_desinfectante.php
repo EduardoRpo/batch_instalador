@@ -13,9 +13,8 @@ switch ($op) {
 
     case 2: //Eliminar
         $id = $_POST['id'];
-
-        $query = "DELETE FROM desinfectante WHERE id = $id";
-        ejecutarQuery($conn, $query);
+        $sql = "DELETE FROM desinfectante WHERE id = :id";
+        ejecutarEliminar($conn, $sql, $id);
 
         break;
 

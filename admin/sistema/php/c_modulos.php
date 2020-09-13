@@ -12,27 +12,42 @@ switch ($op) {
 
     case 2: //Eliminar
         $id = $_POST['id'];
-        $query = "DELETE FROM modulo WHERE id = $id";
-        ejecutarQuery($conn, $query);
+        $sql = "DELETE FROM modulo WHERE id = :id";
+        ejecutarEliminar($conn, $sql, $id);
         break;
 
     case 3: // Guardar datos o actualizar
-        $id = $_POST['id'];
-        $proceso = strtoupper($_POST['proceso']);
-        
-        if ($id == '') {
-            $query = "SELECT * FROM modulo WHERE modulo='$proceso'";
-            $result = existeRegistro($conn, $query);
 
-            if ($result > 0) {
-                exit();
-            } else
-                $query = "INSERT INTO modulo (modulo) VALUES('$proceso')";
-        } else
-            $query = "UPDATE modulo SET modulo = '$proceso' WHERE id = $id";
+        if (!empty($_POST)) {
+            $editar = $_POST['editar'];
+            $proceso = strtoupper($_POST['proceso']);
 
-        ejecutarQuery($conn, $query);
+            if ($editar == 0) {
+                $sql = "SELECT * FROM modulo WHERE modulo= :proceso";
+                $query = $conn->prepare($sql);
+                $query->execute(['proceso' => $proceso]);
+                $rows = $query->rowCount();
 
+                if ($rows > 0) {
+                    echo '2';
+                    exit();
+                } else {
+                    $sql = "INSERT INTO modulo (modulo) VALUES(:proceso)";
+                    $query = $conn->prepare($sql);
+                    $result = $query->execute(['proceso' => $proceso]);
+                    ejecutarQuery($result, $conn);
+                }
+            } else {
+                $id = $_POST['id'];
+                $sql = "UPDATE modulo SET modulo = '$proceso' WHERE id = :id";
+                $query = $conn->prepare($sql);
+                $result = $query->execute(['id' => $id]);
 
+                if ($result) {
+                    echo '3';
+                    exit();
+                }
+            }
+        }
         break;
 }

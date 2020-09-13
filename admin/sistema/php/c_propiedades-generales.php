@@ -21,8 +21,8 @@ switch ($op) {
         $id = $_POST['id'];
         $tabla = $_POST['tabla'];
 
-        $query = "DELETE FROM $tabla WHERE id = '$id'";
-        ejecutarQuery($conn, $query);
+        $sql = "DELETE FROM $tabla WHERE id = :id";
+        ejecutarEliminar($conn, $sql, $id);
         break;
 
     case 3: // Guardar o actualizar data

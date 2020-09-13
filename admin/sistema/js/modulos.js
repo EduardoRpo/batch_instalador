@@ -1,5 +1,6 @@
-/* Mostrar Menu seleccionadp */
+let editar;
 
+/* Mostrar Menu seleccionadp */
 $('.contenedor-menu .menu a').removeAttr('style');
 $('#link6').css('text-decoration', 'revert')
 $('.contenedor-menu .menu ul.abrir').show();
@@ -33,8 +34,10 @@ $(document).ready(function () {
 
 $('#adProceso').click(function (e) {
     e.preventDefault();
-    $("#frmadParametro").slideToggle();
 
+    editar = 0;
+
+    $("#frmadParametro").slideToggle();
     $('#txtid_Proceso').val('');
     $('#btnguardarModulos').html('Crear');
     $('#txtProceso').val('');
@@ -70,6 +73,7 @@ $(document).on('click', '.link-editar', function (e) {
 
     let id = $(this).parent().parent().children().first().text();
     let proceso = $(this).parent().parent().children().eq(1).text();
+    editar = 1;
 
     $('#frmadParametro').slideDown();
     $('#btnguardarModulos').html('Actualizar');
@@ -91,14 +95,19 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: "php/c_modulos.php",
-            data: { operacion: 3, id: id, proceso: proceso },
+            data: { operacion: 3, id: id, proceso: proceso, editar: editar },
 
             success: function (r) {
                 if (r == 1) {
                     alertify.set("notifier", "position", "top-right"); alertify.success("Agregado con éxito.");
                     refreshTable();
+                } else if (r == 2) {
+                    alertify.set("notifier", "position", "top-right"); alertify.error("Módulo ya existe.");
+                } else if (r == 3) {
+                    alertify.set("notifier", "position", "top-right"); alertify.success("Registros actualizado.");
+                    refreshTable();
                 } else {
-                    alertify.set("notifier", "position", "top-right"); alertify.error("Usuario No Registrado.");
+                    alertify.set("notifier", "position", "top-right"); alertify.error("Error.");
                 }
             }
         });

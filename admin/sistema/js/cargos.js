@@ -1,3 +1,5 @@
+let editar;
+
 /* Mostrar Menu seleccionadp */
 
 $('.contenedor-menu .menu a').removeAttr('style');
@@ -33,7 +35,7 @@ $(document).ready(function () {
 
 $('#adicionarCargo').click(function (e) {
     e.preventDefault();
-
+    editar = 0;
     $("#frmadParametro").slideToggle();
     $('#txtId').val('');
     $('#txtCargo').val('');
@@ -46,6 +48,7 @@ $('#adicionarCargo').click(function (e) {
 
 $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
+    editar = 1;
     let id = $(this).parent().parent().children().first().text();
     let cargo = $(this).parent().parent().children().eq(1).text();
 
@@ -87,7 +90,7 @@ $(document).ready(function () {
         let id = $('#txtId').val();
         let cargo = $('#txtCargo').val();
 
-        if(cargo == ''){
+        if (cargo == '') {
             alertify.set("notifier", "position", "top-right"); alertify.error("ingrese todos los datos");
             return false();
         }
@@ -95,14 +98,19 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: "php/c_cargos.php",
-            data: { operacion: 3, id: id, cargo: cargo },
+            data: { operacion: 3, editar: editar, id: id, cargo: cargo },
 
             success: function (r) {
                 if (r == 1) {
-                    alertify.set("notifier", "position", "top-right"); alertify.success("Registro exitoso.");
+                    alertify.set("notifier", "position", "top-right"); alertify.success("Agregado con éxito.");
+                    refreshTable();
+                } else if (r == 2) {
+                    alertify.set("notifier", "position", "top-right"); alertify.error("Módulo ya existe.");
+                } else if (r == 3) {
+                    alertify.set("notifier", "position", "top-right"); alertify.success("Registros actualizado.");
                     refreshTable();
                 } else {
-                    alertify.set("notifier", "position", "top-right"); alertify.error("Error");
+                    alertify.set("notifier", "position", "top-right"); alertify.error("Error.");
                 }
             }
         });

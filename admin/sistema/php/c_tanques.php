@@ -12,10 +12,8 @@ switch ($op) {
 
     case 2: //Eliminar
         $id = $_POST['id'];
-
-        $query_pregunta = "DELETE FROM tanques WHERE id = $id";
-        $result = mysqli_query($conn, $query_pregunta);
-        ejecutarQuery($conn, $query);
+        $sql = "DELETE FROM tanques WHERE id = :id";
+        ejecutarEliminar($conn, $sql, $id);
         break;
 
     case 3: // Guardar y Actualizar
