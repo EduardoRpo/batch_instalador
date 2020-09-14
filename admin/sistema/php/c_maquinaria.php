@@ -23,21 +23,38 @@ switch ($op) {
     break;
 
   case 4: // Guardar y actualizar data
-    $id = $_POST['id'];
-    $equipo = strtoupper($_POST['equipo']);
-    $linea = $_POST['linea'];
+    if (!empty($_POST)) {
+      $editar = $_POST['editar'];
+      $id = $_POST['id'];
+      $equipo = strtoupper($_POST['equipo']);
+      $linea = $_POST['linea'];
 
-    if ($id == '') {
-      $query = "SELECT * FROM maquinaria WHERE maquina='$equipo'";
-      $result = existeRegistro($conn, $query);
+      if ($editar == 0) {
+        $sql = "SELECT * FROM maquinaria WHERE maquina=:equipo";
+        $query = $conn->prepare($sql);
+        $query->execute(['equipo' => $equipo]);
+        $rows = $query->rowCount();
 
-      if ($result > 0) {
-        exit();
-      } else
-        $query = "INSERT INTO maquinaria (maquina, linea) VALUES('$equipo', '$linea')";
-    } else
-      $query = "UPDATE maquinaria SET maquina = '$equipo', linea='$linea' WHERE id = $id";
+        if ($rows > 0) {
+          echo '2';
+          exit();
+        } else {
+          $sql = "INSERT INTO maquinaria (maquina, linea) VALUES(:equipo, :linea)";
+          $query = $conn->prepare($sql);
+          $result = $query->execute(['equipo' => $equipo, 'linea' => $linea]);
+          ejecutarQuery($result, $conn);
+        }
+      } else {
+        $id = $_POST['id'];
+        $sql = "UPDATE maquinaria SET maquina = :equipo, linea=:linea WHERE id = :id";
+        $query = $conn->prepare($sql);
+        $result = $query->execute(['equipo' => $equipo, 'linea' => $linea, 'id' => $id]);
 
-    ejecutarQuery($conn, $query);
+        if ($result) {
+          echo '3';
+          exit();
+        }
+      }
+    }
     break;
 }

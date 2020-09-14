@@ -1,112 +1,110 @@
 <?php
+if (!empty($_POST)) {
+	require_once('../../../conexion.php');
 
-require_once('../../../conexion.php');
+	//obtener datos
+	$datos = $_FILES['datosExcel'];
+	$operacion = $_POST['operacion'];
 
-//obtener datos
+	$datos = file_get_contents($datos['tmp_name']);
 
-$datos = $_FILES['datosExcel'];
-$operacion = $_POST['operacion'];
+	$datos = explode("\n", $datos);
+	$datos = array_filter($datos);
 
-$datos = file_get_contents($datos['tmp_name']);
+	// preparar datos
+	foreach ($datos as $data) {
+		$dataList[] = explode(";", $data);
+	}
 
-$datos = explode("\n", $datos);
-$datos = array_filter($datos);
+	//Buscar operacion y ejecutar
 
-// preparar datos
-foreach ($datos as $data) {
-	$dataList[] = explode(";", $data);
-}
+	switch ($operacion) {
+		case '1': // insertar en la BD procesos
 
-//Buscar operacion y ejecutar
+			$conn->query("DELETE FROM modulo");
+			$conn->query("ALTER TABLE modulo AUTO_INCREMENT = 1");
 
-switch ($operacion) {
-	case '1': // insertar en la BD procesos
-
-		$conn->query("DELETE FROM modulo");
-		$conn->query("ALTER TABLE modulo AUTO_INCREMENT = 1");
-
-		foreach ($dataList as $data) {
-			$conn->query("INSERT INTO modulo (modulo) 
+			foreach ($dataList as $data) {
+				$conn->query("INSERT INTO modulo (modulo) 
 					  VALUES ('{$data[0]}')");
-		}
-		break;
+			}
+			break;
 
-	case '2': // insertar en la BD condiciones
+		case '2': // insertar en la BD condiciones
 
-		$conn->query("DELETE FROM condicionesmedio_tiempo");
-		$conn->query("ALTER TABLE condicionesmedio_tiempo AUTO_INCREMENT = 1");
+			$conn->query("DELETE FROM condicionesmedio_tiempo");
+			$conn->query("ALTER TABLE condicionesmedio_tiempo AUTO_INCREMENT = 1");
 
-		foreach ($dataList as $data) {
-			$conn->query("INSERT INTO condicionesmedio_tiempo (id_modulo, min, max) 
+			foreach ($dataList as $data) {
+				$conn->query("INSERT INTO condicionesmedio_tiempo (id_modulo, min, max) 
 				  VALUES ('{$data[0]}', '{$data[1]}', '{$data[2]}')");
-		}
-		break;
+			}
+			break;
 
-	case '3': // insertar en la BD desinfectante
+		case '3': // insertar en la BD desinfectante
 
-		$conn->query("DELETE FROM desinfectante");
-		$conn->query("ALTER TABLE desinfectante AUTO_INCREMENT = 1");
+			$conn->query("DELETE FROM desinfectante");
+			$conn->query("ALTER TABLE desinfectante AUTO_INCREMENT = 1");
 
-		foreach ($dataList as $data) {
-			$conn->query("INSERT INTO desinfectante (nombre, concentracion) 
+			foreach ($dataList as $data) {
+				$conn->query("INSERT INTO desinfectante (nombre, concentracion) 
 				  VALUES ('{$data[0]}', '{$data[1]}')");
-		}
-		break;
+			}
+			break;
 
-	case '4': // insertar en la BD equipos
+		case '4': // insertar en la BD equipos
 
-		$conn->query("DELETE FROM maquinaria");
-		$conn->query("ALTER TABLE maquinaria AUTO_INCREMENT = 1");
+			$conn->query("DELETE FROM maquinaria");
+			$conn->query("ALTER TABLE maquinaria AUTO_INCREMENT = 1");
 
-		foreach ($dataList as $data) {
-			$conn->query("INSERT INTO maquinaria (maquina, linea ) 
+			foreach ($dataList as $data) {
+				$conn->query("INSERT INTO maquinaria (maquina, linea ) 
 				  VALUES ('{$data[0]}', '{$data[1]}')");
-		}
-		break;
+			}
+			break;
 
-	case '5': // insertar en la BD preguntas
+		case '5': // insertar en la BD preguntas
 
-		$conn->query("DELETE FROM preguntas");
-		$conn->query("ALTER TABLE preguntas AUTO_INCREMENT = 1");
+			$conn->query("DELETE FROM preguntas");
+			$conn->query("ALTER TABLE preguntas AUTO_INCREMENT = 1");
 
-		foreach ($dataList as $data) {
-			$conn->query("INSERT INTO preguntas (pregunta ) 
+			foreach ($dataList as $data) {
+				$conn->query("INSERT INTO preguntas (pregunta ) 
 					  VALUES ('{$data[0]}')");
-		}
-		break;
+			}
+			break;
 
-	case '6': // insertar en la BD despeje
+		case '6': // insertar en la BD despeje
 
-		$conn->query("DELETE FROM modulo_pregunta");
-		$conn->query("ALTER TABLE modulo_pregunta AUTO_INCREMENT = 1");
+			$conn->query("DELETE FROM modulo_pregunta");
+			$conn->query("ALTER TABLE modulo_pregunta AUTO_INCREMENT = 1");
 
-		foreach ($dataList as $data) {
-			$conn->query("INSERT INTO modulo_pregunta (id_pregunta, resp, id_modulo ) 
+			foreach ($dataList as $data) {
+				$conn->query("INSERT INTO modulo_pregunta (id_pregunta, resp, id_modulo ) 
 						  VALUES ('{$data[0]}', '{$data[1]}', '{$data[2]}')");
-		}
-		break;
+			}
+			break;
 
-	case '7': // insertar en la BD tanques
+		case '7': // insertar en la BD tanques
 
-		$conn->query("DELETE FROM tanques");
-		$conn->query("ALTER TABLE tanques AUTO_INCREMENT = 1");
+			$conn->query("DELETE FROM tanques");
+			$conn->query("ALTER TABLE tanques AUTO_INCREMENT = 1");
 
-		foreach ($dataList as $data) {
-			$conn->query("INSERT INTO tanques (capacidad) 
+			foreach ($dataList as $data) {
+				$conn->query("INSERT INTO tanques (capacidad) 
 						  VALUES ('{$data[0]}')");
-		}
-		break;
+			}
+			break;
 
-	case '8': // insertar en la BD Materia Prima
+		case '8': // insertar en la BD Materia Prima
 
-		$conn->query("DELETE FROM materia_prima");
-		$conn->query("ALTER TABLE materia_prima AUTO_INCREMENT = 1");
+			$conn->query("DELETE FROM materia_prima");
+			$conn->query("ALTER TABLE materia_prima AUTO_INCREMENT = 1");
 
-		foreach ($dataList as $data) {
-			$conn->query("INSERT INTO materia_prima (referencia, nombre, alias) 
+			foreach ($dataList as $data) {
+				$conn->query("INSERT INTO materia_prima (referencia, nombre, alias) 
 							  VALUES ('{$data[0]}', '{$data[1]}', '{$data[2]}')");
-		}
-		break;
-
-		$conn->close();
+			}
+			break;
+	}
 }

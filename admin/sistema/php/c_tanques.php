@@ -17,24 +17,40 @@ switch ($op) {
         break;
 
     case 3: // Guardar y Actualizar
-        $id = $_POST['id'];
-        $capacidad = $_POST['capacidad'];
-        
-        if ($id == '') {
-            $query = "SELECT * FROM tanques WHERE capacidad='$capacidad'";
-            $result = existeRegistro($conn, $query);
+        if (!empty($_POST)) {
+            $editar = $_POST['editar'];
+            $capacidad = $_POST['capacidad'];
 
-            if ($result > 0) {
-                exit();
-            } else
-                $query = "INSERT INTO tanques (capacidad) VALUES('$capacidad')";
-        } else
-            $query = "UPDATE tanques SET capacidad = '$capacidad' WHERE id = $id";
+            if ($editar == 0) {
+                $sql = "SELECT * FROM tanques WHERE capacidad=:capacidad";
+                $query = $conn->prepare($sql);
+                $query->execute(['capacidad' => $capacidad]);
+                $rows = $query->rowCount();
 
-        ejecutarQuery($conn, $query);
+                if ($rows > 0) {
+                    echo '2';
+                    exit();
+                } else {
+                    $sql = "INSERT INTO tanques (capacidad) VALUES(:capacidad)";
+                    $query = $conn->prepare($sql);
+                    $result = $query->execute(['capacidad' => $capacidad]);
+                    ejecutarQuery($result, $conn);
+                }
+            } else {
+                $id = $_POST['id'];
+                $sql = "UPDATE tanques SET capacidad = :capacidad WHERE id = :id";
+                $query = $conn->prepare($sql);
+                $result = $query->execute(['capacidad' => $capacidad, 'id' => $id]);
+
+                if ($result) {
+                    echo '3';
+                    exit();
+                }
+            }
+        }
 
 
-    
+
 
         break;
 }

@@ -105,9 +105,9 @@ $(document).ready(function () {
                     alertify.set("notifier", "position", "top-right"); alertify.success("Almacenado con éxito.");
                     refreshTable();
                 } else if (r == 2) {
-                    alertify.set("notifier", "position", "top-right"); alertify.error("Módulo ya existe.");
+                    alertify.set("notifier", "position", "top-right"); alertify.error("El cargo ya existe.");
                 } else if (r == 3) {
-                    alertify.set("notifier", "position", "top-right"); alertify.success("Registros actualizado.");
+                    alertify.set("notifier", "position", "top-right"); alertify.success("Registro actualizado.");
                     refreshTable();
                 } else {
                     alertify.set("notifier", "position", "top-right"); alertify.error("Error.");

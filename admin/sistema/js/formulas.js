@@ -164,12 +164,12 @@ function guardarFormulaMateriaPrima() {
         success: function (r) {
             if (r == 1) {
                 alertify.set("notifier", "position", "top-right"); alertify.success("Almacenada con éxito.");
-                refreshTable(id);
+                refreshTable();
             } else if (r == 2) {
                 alertify.set("notifier", "position", "top-right"); alertify.error("Código ya existe.");
             } else if (r == 3) {
                 alertify.set("notifier", "position", "top-right"); alertify.success("Registro actualizado.");
-                refreshTable(id);
+                refreshTable();
             } else {
                 alertify.set("notifier", "position", "top-right"); alertify.error("Error.");
             }

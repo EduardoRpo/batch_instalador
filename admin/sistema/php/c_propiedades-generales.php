@@ -26,32 +26,76 @@ switch ($op) {
         break;
 
     case 3: // Guardar o actualizar data
-        $tabla = $_POST['tabla'];
-        $dato =  strtoupper($_POST['datos']);
+        if (!empty($_POST)) {
 
-        if (isset($_POST['id_registro'])) {
-            $registro = $_POST['id_registro'];
+            $editar = $_POST['editar'];
+            $tabla = $_POST['tabla'];
+            $dato =  strtoupper($_POST['datos']);
 
-            $query = "UPDATE $tabla SET nombre = '$dato' WHERE id = '$registro'";
-        } else {
-            $query = "INSERT INTO $tabla (nombre) VALUES('$dato')";
+            if ($editar == 0) {
+                $sql = "SELECT * FROM $tabla WHERE nombre= :dato";
+                $query = $conn->prepare($sql);
+                $query->execute(['dato' => $dato]);
+                $rows = $query->rowCount();
+
+                if ($rows > 0) {
+                    echo '2';
+                    exit();
+                } else {
+                    $sql = "INSERT INTO $tabla (nombre) VALUES(:dato)";
+                    $query = $conn->prepare($sql);
+                    $result = $query->execute(['dato' => $dato]);
+                    ejecutarQuery($result, $conn);
+                }
+            } else {
+                $id_registro = $_POST['id_registro'];
+                $sql = "UPDATE $tabla SET nombre = :dato WHERE id = :registro";
+                $query = $conn->prepare($sql);
+                $result = $query->execute(['dato' => $dato, 'registro' => $id_registro]);
+
+                if ($result) {
+                    echo '3';
+                    exit();
+                }
+            }
         }
 
-        ejecutarQuery($conn, $query);
         break;
 
     case 4: // Guardar o actualizar data en parametros min y max
-        $tabla = $_POST['tabla'];
-        $min =  $_POST['min'];
-        $max =  $_POST['max'];
+        if (!empty($_POST)) {
 
-        if (isset($_POST['id_registro'])) {
-            $registro = $_POST['id_registro'];
-            $query = "UPDATE $tabla SET limite_inferior = $min, limite_superior = $max WHERE id = '$registro'";
-        } else {
-            $query = "INSERT INTO $tabla (limite_inferior, limite_superior) VALUES('$min', '$max')";
+            $editar = $_POST['editar'];
+            $tabla = $_POST['tabla'];
+            $limite_min =  $_POST['min'];
+            $limite_max =  $_POST['max'];
+
+            if ($editar == 0) {
+                $sql = "SELECT * FROM $tabla WHERE limite_inferior =:t_min AND limite_superior =:tmax";
+                $query = $conn->prepare($sql);
+                $query->execute(['t_min' => $limite_min, 'tmax' => $limite_max]);
+                $rows = $query->rowCount();
+
+                if ($rows > 0) {
+                    echo '2';
+                    exit();
+                } else {
+                    $sql = "INSERT INTO $tabla (limite_inferior, limite_superior) VALUES(:limite_min, :limite_max)";
+                    $query = $conn->prepare($sql);
+                    $result = $query->execute(['limite_min' => $limite_min, 'limite_max' => $limite_max]);
+                    ejecutarQuery($result, $conn);
+                }
+            } else {
+                $registro = $_POST['id_registro'];
+                $sql = "UPDATE $tabla SET limite_inferior = :limite_min, limite_superior = :limite_max WHERE id = :registro";
+                $query = $conn->prepare($sql);
+                $result = $query->execute(['limite_min' => $limite_min, 'limite_max' => $limite_max, 'registro' => $registro]);
+
+                if ($result) {
+                    echo '3';
+                    exit();
+                }
+            }
         }
-
-        ejecutarQuery($conn, $query);
         break;
 }

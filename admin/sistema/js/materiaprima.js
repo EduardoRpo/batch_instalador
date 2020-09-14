@@ -1,5 +1,6 @@
-/* Mostrar Menu seleccionadp */
+let editar;
 
+/* Mostrar Menu seleccionado */
 $('.contenedor-menu .menu a').removeAttr('style');
 $('#linkMateriaPrima').css('text-decoration', 'revert')
 $('.contenedor-menu .menu ul.abrir1').show();
@@ -34,7 +35,7 @@ $("#tblMateriaPrima").DataTable({
 
 $('#btnadicionarMateriaPrima').click(function (e) {
     e.preventDefault();
-
+    editar = 0;
     $("#frmAdicionarMateriaPrima").slideToggle();
     $('#txtId').val('');
     $('#txtCodigo').val('');
@@ -69,6 +70,7 @@ $(document).on('click', '.link-borrar', function (e) {
 
 $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
+    editar = 1;
     let referencia = $(this).parent().parent().children().first().text();
     let materiaprima = $(this).parent().parent().children().eq(1).text();
     let alias = $(this).parent().parent().children().eq(2).text();
@@ -87,7 +89,7 @@ $(document).on('click', '.link-editar', function (e) {
 
 $('#btnguardarMateriaPrima').click(function (e) {
     e.preventDefault();
-
+    let id = $('#txtId').val();
     let ref = $('#txtCodigo').val();
     let materiaprima = $('#txtMP').val();
     let alias = $('#txtAlias').val();
@@ -100,16 +102,18 @@ $('#btnguardarMateriaPrima').click(function (e) {
     $.ajax({
         type: "POST",
         url: "php/c_materiaprima.php",
-         data: { operacion: 3, referencia: ref, materiaprima: materiaprima, alias: alias },
+        data: { operacion: 3, editar: editar, id: id, referencia: ref, materiaprima: materiaprima, alias: alias },
 
         success: function (r) {
             if (r == 1) {
-                alertify.set("notifier", "position", "top-right"); alertify.success("Operación Exitosa.");
+                alertify.set("notifier", "position", "top-right"); alertify.success("Almacenado con éxito.");
                 refreshTable();
             } else if (r == 2) {
                 alertify.set("notifier", "position", "top-right"); alertify.error("El número de referencia ya existe.");
-            }
-            else {
+            } else if (r == 3) {
+                alertify.set("notifier", "position", "top-right"); alertify.success("Registro actualizado.");
+                refreshTable();
+            } else {
                 alertify.set("notifier", "position", "top-right"); alertify.error("Error.");
             }
         }

@@ -1,5 +1,6 @@
-/* Mostrar Menu seleccionado */
+let editar;
 
+/* Mostrar Menu seleccionado */
 $('.contenedor-menu .menu a').removeAttr('style');
 $('#linkPreguntas').css('text-decoration', 'revert')
 $('.contenedor-menu .menu ul.abrir').show();
@@ -34,7 +35,7 @@ $(document).ready(function () {
 
 $('#adicionarParametro').click(function (e) {
     e.preventDefault();
-
+    editar = 0;
     $("#frmadicionarPregunta").slideToggle();
     $('#txtIdPregunta').val('');
     $('#txtPregunta').val('');
@@ -46,7 +47,7 @@ $('#adicionarParametro').click(function (e) {
 
 $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
-
+    editar = 1;
     let id = $(this).parent().parent().children().first().text();
     let pregunta = $(this).parent().parent().children().eq(1).text();
 
@@ -91,17 +92,19 @@ $('#btnAlmacenarPregunta').click(function (e) {
     $.ajax({
         type: "POST",
         url: "php/c_preguntas.php",
-        data: { operacion: 3, id: id, pregunta: pregunta },
+        data: { operacion: 3, editar: editar, id: id, pregunta: pregunta },
 
         success: function (r) {
-            debugger;
+
             if (r == 1) {
-                alertify.set("notifier", "position", "top-right"); alertify.success("Proceso exitoso.");
+                alertify.set("notifier", "position", "top-right"); alertify.success("Almacenado con éxito.");
                 refreshTable();
-            } else if (r > 0) {
-                alertify.set("notifier", "position", "top-right"); alertify.info("La pregunta ya existe.");
-            }
-            else {
+            } else if (r == 2) {
+                alertify.set("notifier", "position", "top-right"); alertify.error("La pregunta ya existe.");
+            } else if (r == 3) {
+                alertify.set("notifier", "position", "top-right"); alertify.success("Registro actualizado.");
+                refreshTable();
+            } else {
                 alertify.set("notifier", "position", "top-right"); alertify.error("Error.");
             }
         }

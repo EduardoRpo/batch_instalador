@@ -17,22 +17,36 @@ switch ($op) {
     ejecutarEliminar($conn, $sql, $id);
 
   case 3: // Guardar y actualizar data
-    $id = $_POST['id'];
-    $pregunta = strtoupper($_POST['pregunta']);
+    if (!empty($_POST)) {
+      $editar = $_POST['editar'];
+      $pregunta = strtoupper($_POST['pregunta']);
 
-    if ($id == '') {
-        $query = "SELECT * FROM preguntas WHERE pregunta='$pregunta'";
-        $result = existeRegistro($conn, $query);
+      if ($editar == 0) {
+        $sql = "SELECT * FROM preguntas WHERE pregunta=:pregunta";
+        $query = $conn->prepare($sql);
+        $query->execute(['pregunta' => $pregunta]);
+        $rows = $query->rowCount();
 
-        if ($result > 0) {
-            echo '2';
-        
-        } else
-            $query = "INSERT INTO preguntas (pregunta) VALUES('$pregunta')";
-    } else
-        $query = "UPDATE preguntas SET pregunta = '$pregunta' WHERE id = $id";
+        if ($rows > 0) {
+          echo '2';
+          exit();
+        } else {
+          $sql = "INSERT INTO preguntas (pregunta) VALUES(:pregunta)";
+          $query = $conn->prepare($sql);
+          $result = $query->execute(['pregunta' => $pregunta]);
+          ejecutarQuery($result, $conn);
+        }
+      } else {
+        $id = $_POST['id'];
+        $sql = "UPDATE preguntas SET pregunta = :pregunta WHERE id = :id";
+        $query = $conn->prepare($sql);
+        $result = $query->execute(['pregunta' => $pregunta, 'id' => $id]);
 
-    ejecutarQuery($conn, $query);
-
+        if ($result) {
+          echo '3';
+          exit();
+        }
+      }
+    }
     break;
 }

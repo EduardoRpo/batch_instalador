@@ -1,4 +1,4 @@
-
+let editar;
 cargarSelectorLinea();
 
 /* Mostrar Menu seleccionado */
@@ -36,6 +36,7 @@ $(document).ready(function () {
 
 $('#adEquipos').click(function (e) {
     e.preventDefault();
+    editar = 0;
     $("#frmadParametro").slideToggle();
     $('#btnguardarEquipos').html('Crear');
     $('#txtEquipo').val('');
@@ -93,10 +94,11 @@ $(document).on('click', '.link-borrar', function (e) {
 
 $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
+    editar = 1;
     let id = $(this).parent().parent().children().first().text();
     let nombre = $(this).parent().parent().children().eq(1).text();
     let linea = $(this).parent().parent().children().eq(2).text();
-    debugger;
+
     $('#frmadParametro').slideDown();
     $('#btnguardarEquipos').html('Actualizar');
 
@@ -115,7 +117,7 @@ $(document).ready(function () {
         let id = $('#txtid_Equipo').val();
         let equipo = $('#txtEquipo').val();
         let linea = $('#cmbLinea').val();
-        
+
         if (equipo == '' || linea == null) {
             alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos");
             return false();
@@ -124,14 +126,19 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: "php/c_maquinaria.php",
-            data: { operacion: 4, id: id, equipo: equipo, linea: linea },
+            data: { operacion: 4, editar: editar, id: id, equipo: equipo, linea: linea },
 
             success: function (r) {
                 if (r == 1) {
-                    alertify.set("notifier", "position", "top-right"); alertify.success("Registro existoso.");
+                    alertify.set("notifier", "position", "top-right"); alertify.success("Almacenado con éxito.");
+                    refreshTable();
+                } else if (r == 2) {
+                    alertify.set("notifier", "position", "top-right"); alertify.error("El Equipo ya existe.");
+                } else if (r == 3) {
+                    alertify.set("notifier", "position", "top-right"); alertify.success("Registro actualizado.");
                     refreshTable();
                 } else {
-                    alertify.set("notifier", "position", "top-right"); alertify.error("Error. Contacte a su administrador");
+                    alertify.set("notifier", "position", "top-right"); alertify.error("Error.");
                 }
             }
         });

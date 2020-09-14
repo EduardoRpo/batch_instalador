@@ -17,25 +17,38 @@ switch ($op) {
         break;
 
     case 3: // Almacenar o actualizar data
-        $referencia = $_POST['referencia'];
-        $materia_prima = $_POST['materiaprima'];
-        $alias = $_POST['alias'];
+        if (!empty($_POST)) {
+            $editar = $_POST['editar'];
+            $referencia = $_POST['referencia'];
+            $materia_prima = $_POST['materiaprima'];
+            $alias = $_POST['alias'];
 
-        if (isset($_POST['txtId'])) {
-            $id = $_POST['txtId'];
-            $query = "UPDATE materia_prima SET referencia = '$referencia', nombre='$materia_prima, alias='$alias ' WHERE referencia = $id";
-        } else {
-            $query = "SELECT * FROM materia_prima WHERE referencia='$referencia'";
-            $result = existeRegistro($conn, $query);
+            if ($editar == 0) {
+                $sql = "SELECT * FROM materia_prima WHERE referencia=:referencia";
+                $query = $conn->prepare($sql);
+                $query->execute(['referencia' => $referencia]);
+                $rows = $query->rowCount();
 
-            if ($result > 0) {
-                echo '2';
-                exit();
-            } else
-                $query = "INSERT INTO materia_prima (referencia, nombre, alias) VALUES('$referencia', '$materia_prima', '$alias')";
+                if ($rows > 0) {
+                    echo '2';
+                    exit();
+                } else {
+                    $sql = "INSERT INTO materia_prima (referencia, nombre, alias) VALUES(:referencia, :materia_prima, :alias)";
+                    $query = $conn->prepare($sql);
+                    $result = $query->execute(['referencia' => $referencia, 'materia_prima' => $materia_prima, 'alias' => $alias]);
+                    ejecutarQuery($result, $conn);
+                }
+            } else {
+                $id = $_POST['id'];
+                $sql = "UPDATE materia_prima SET referencia =:referencia, nombre=:materia_prima, alias=:alias WHERE referencia = :id";
+                $query = $conn->prepare($sql);
+                $result = $query->execute(['referencia' => $referencia, 'materia_prima' => $materia_prima, 'alias' => $alias, 'id' => $id]);
+
+                if ($result) {
+                    echo '3';
+                    exit();
+                }
+            }
         }
-
-        ejecutarQuery($conn, $query);
-
         break;
 }

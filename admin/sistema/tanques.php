@@ -54,8 +54,8 @@
                 <button type="button" class="btn btn-primary" id="adTanques">Adicionar Tanque</button>
                 <form id="frmadParametro" style="display: none;">
                   <label for=""><b>Capacidad</b></label>
-                  <input type="text" name="txtCapacidad" id="txtCapacidad" class="form-control" placeholder="Capacidad">
                   <input type="text" id="txtid_tanques" readonly hidden>
+                  <input type="text" name="txtCapacidad" id="txtCapacidad" class="form-control" placeholder="Capacidad">
                   <button type="button" class="btn btn-primary" id="btnguardarTanques">Guardar</button>
                 </form>
                 <hr>

@@ -95,28 +95,6 @@
   justify-content: center;
 }
 
-#frmAdicionar4 {
-  display: grid;
-  grid-template-columns: 150px 1fr;
-  grid-gap: 5px;
-  margin: 10px;
-  text-align: center;
-  justify-items: center;
-  align-items: baseline;
-  justify-content: center;
-}
-
-#frmAdicionar5 {
-  display: grid;
-  grid-template-columns: 150px 1fr;
-  grid-gap: 5px;
-  margin: 10px;
-  text-align: center;
-  justify-items: center;
-  align-items: baseline;
-  justify-content: center;
-}
-
 .btnguardar {
   grid-column-start: 2;
   grid-column-end: 3;
@@ -182,10 +160,10 @@ form.frmAdicionarMinMax {
   grid-column-end: 4;
 }
 
-/* #linea {
-  grid-column-start: 1;
-  grid-column-end: 2;
-} */
+.tabla1 {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
 
 /* #densidad {
   grid-column-start: 2;

@@ -2,7 +2,6 @@
 /* Activar el boton de carga hasta que solo se haya seleccionado un archivo */
 
 $("#datosExcel").change(function () {
-    //$("#btnCargarExcel").prop("disabled", this.files.length == 0);
     $("#btnCargarExcel").prop("disabled", false);
 });
 
@@ -42,12 +41,8 @@ function cargarDataExcel(id) {
 
         success: function (data) {
 
-            /* if (!data) {
-                alertify.set("notifier", "position", "top-right"); alertify.error("Error");
-            } else { */
             alertify.set("notifier", "position", "top-right"); alertify.success("Operación exitosa");
             refreshTable();
-            /* } */
 
         }
     });

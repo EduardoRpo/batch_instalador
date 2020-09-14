@@ -58,10 +58,18 @@ $(document).on('click', '.link-borrar', function (e) {
             $.ajax({
                 'method': 'POST',
                 'url': 'php/c_modulos.php',
-                'data': { operacion: 2, id: id }
+                'data': { operacion: 2, id: id },
+
+                success: function (data) {
+
+                    if (data == 1) {
+                        alertify.set("notifier", "position", "top-right"); alertify.success("Operación exitosa");
+                        refreshTable();
+                    } else {
+                        alertify.set("notifier", "position", "top-right"); alertify.error("El proceso se encuentra relacionado con uno o más procesos y no es posible eliminarlo");
+                    }
+                }
             });
-            refreshTable();
-            alertify.set("notifier", "position", "top-right"); alertify.success("Registro Eliminado");
         }
     });
 });

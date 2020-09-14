@@ -1,5 +1,6 @@
-/* Mostrar Menu seleccionado */
+let editar;
 
+/* Mostrar Menu seleccionado */
 $('.contenedor-menu .menu a').removeAttr('style');
 $('#link8').css('text-decoration', 'revert')
 $('.contenedor-menu .menu ul.abrir').show();
@@ -33,7 +34,7 @@ $(document).ready(function () {
 
 $('#adTanques').click(function (e) {
     e.preventDefault();
-
+    editar = 0;
     $("#frmadParametro").slideToggle();
     $('#txtid_tanques').val('');
     $('#btnguardarTanques').html('Crear');
@@ -65,13 +66,15 @@ $(document).on('click', '.link-borrar', function (e) {
 
 $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
+    
+    editar = 1;
     let id = $(this).parent().parent().children().first().text();
     let capacidad = $(this).parent().parent().children().eq(1).text();
-
+    
+    $('#btnguardarTanques').html('Actualizar');
     $('#frmadParametro').slideDown();
-
-    $('#id-Tanque').val(id).hide;
-    $('#txtcCapacidad').val(capacidad);
+    $('#txtid_tanques').val(id).hide;
+    $('#txtCapacidad').val(capacidad);
 });
 
 
@@ -83,15 +86,20 @@ $(document).ready(function () {
 
         let id = $('#txtid_tanques').val();
         let capacidad = $('#txtCapacidad').val();
-
+        debugger;
         $.ajax({
             type: "POST",
             url: "php/c_tanques.php",
-            data: { operacion: 3, id: id, capacidad: capacidad },
+            data: { operacion: 3, editar: editar, id: id, capacidad: capacidad },
 
             success: function (r) {
                 if (r == 1) {
-                    alertify.set("notifier", "position", "top-right"); alertify.success("Registrado.");
+                    alertify.set("notifier", "position", "top-right"); alertify.success("Almacenado con éxito.");
+                    refreshTable();
+                } else if (r == 2) {
+                    alertify.set("notifier", "position", "top-right"); alertify.error("El Tanque ya existe.");
+                } else if (r == 3) {
+                    alertify.set("notifier", "position", "top-right"); alertify.success("Registro actualizado.");
                     refreshTable();
                 } else {
                     alertify.set("notifier", "position", "top-right"); alertify.error("Error.");

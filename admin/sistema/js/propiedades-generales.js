@@ -102,7 +102,7 @@ function cargarTablaLinea(id, tabla) {
 /* Cargue de Nombre Productos*/
 
 function cargarTablas(id, tabla) {
-   
+
     $(id).DataTable({
         destroy: true,
         scrollY: '50vh',
@@ -130,14 +130,15 @@ function cargarTablas(id, tabla) {
 /* Mostrar elementos para adicionar registros en las diferentes tablas */
 
 function adicionar(id) {
-   
+    editar = 0;
+
     $(`#frmAdicionar${id}`).slideToggle();
     $(`.tabla${id}`).html('Crear');
     $(`#txt${id}`).val('');
     $(`#input${id}`).val('');
     $(`#min${id}`).val('');
     $(`#max${id}`).val('');
-    editar = false;
+    
 }
 
 /* Borrar registros */
@@ -165,7 +166,7 @@ $(document).on('click', '.link-borrar', function (e) {
 
 $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
-    editar = true;
+    editar = 1;
 
     let id = $(this).parent().parent().children().first().text();
     let nombre = $(this).parent().parent().children().eq(1).text();
@@ -190,30 +191,30 @@ $(document).on('click', '.link-editar', function (e) {
 function guardarDatosGenerales(nombre, id) {
 
     let datos = $(`#input${id}`).val();
+    let id_registro = $(`#txt-Id${id}`).val();
 
     if (!datos) {
         alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos");
         return false;
     }
-
-    if (editar) {
-        let id_registro = $(`#txt-Id${id}`).val();
-        data = { datos: datos, id_registro: id_registro, tabla: nombre, operacion: 3 };
-    } else
-        data = { datos: datos, tabla: nombre, operacion: 3 };
-
+    
     $.ajax({
         type: "POST",
         url: "php/c_propiedades-generales.php",
-        data: data,
+        data: { datos: datos, id_registro: id_registro, tabla: nombre, operacion: 3, editar: editar },
 
         success: function (r) {
 
             if (r == 1) {
-                alertify.set("notifier", "position", "top-right"); alertify.success("Operación exitosa.");
+                alertify.set("notifier", "position", "top-right"); alertify.success("Almacenado con éxito.");
+                refreshTable(id);
+            } else if (r == 2) {
+                alertify.set("notifier", "position", "top-right"); alertify.error("Registro ya existe.");
+            } else if (r == 3) {
+                alertify.set("notifier", "position", "top-right"); alertify.success("Registro actualizado.");
                 refreshTable(id);
             } else {
-                alertify.set("notifier", "position", "top-right"); alertify.error("Error");
+                alertify.set("notifier", "position", "top-right"); alertify.error("Error.");
             }
         }
     });
@@ -222,7 +223,8 @@ function guardarDatosGenerales(nombre, id) {
 /* Almacenar Registros */
 
 function guardarDatosGeneralesMinMax(nombre, id) {
-    debugger;
+
+    id_registro = $(`#txt-Id${id_tbl}`).val();
     let min = parseInt($(`#min${id}`).val());
     let max = parseInt($(`#max${id}`).val());
 
@@ -234,24 +236,23 @@ function guardarDatosGeneralesMinMax(nombre, id) {
         return false;
     }
 
-    if (editar) {
-        id_registro = $(`#txt-Id${id_tbl}`).val();
-        data = { min: min, max: max, id_registro: id_registro, tabla: nombre, operacion: 4 };
-    } else
-        data = { min: min, max: max, tabla: nombre, operacion: 4 };
-
     $.ajax({
         type: "POST",
         url: "php/c_propiedades-generales.php",
-        data: data,
+        data : { min: min, max: max, id_registro: id_registro, tabla: nombre, operacion: 4, editar:editar },
 
         success: function (r) {
 
-            if (r == 1) {
-                alertify.set("notifier", "position", "top-right"); alertify.success("Operación exitosa.");
+             if (r == 1) {
+                alertify.set("notifier", "position", "top-right"); alertify.success("Almacenado con éxito.");
+                refreshTable(id);
+            } else if (r == 2) {
+                alertify.set("notifier", "position", "top-right"); alertify.error("Registro ya existe.");
+            } else if (r == 3) {
+                alertify.set("notifier", "position", "top-right"); alertify.success("Registro actualizado.");
                 refreshTable(id);
             } else {
-                alertify.set("notifier", "position", "top-right"); alertify.error("Error");
+                alertify.set("notifier", "position", "top-right"); alertify.error("Error.");
             }
         }
     });
