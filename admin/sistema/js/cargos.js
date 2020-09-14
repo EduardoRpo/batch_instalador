@@ -102,7 +102,7 @@ $(document).ready(function () {
 
             success: function (r) {
                 if (r == 1) {
-                    alertify.set("notifier", "position", "top-right"); alertify.success("Agregado con éxito.");
+                    alertify.set("notifier", "position", "top-right"); alertify.success("Almacenado con éxito.");
                     refreshTable();
                 } else if (r == 2) {
                     alertify.set("notifier", "position", "top-right"); alertify.error("Módulo ya existe.");

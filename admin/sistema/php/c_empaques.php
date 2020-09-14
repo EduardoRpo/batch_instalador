@@ -21,29 +21,38 @@ switch ($op) {
         break;
 
     case 3: // Guardar o actualizar data
+        if (!empty($_POST)) {
+            $editar = $_POST['editar'];
+            $tabla = $_POST['nombre'];
+            $codigo =  $_POST['codigo'];
+            $descripcion =  strtoupper($_POST['descripcion']);
 
-        $editar = $_POST['editar'];
-        $tabla = $_POST['nombre'];
-        $codigo =  $_POST['codigo'];
-        $descripcion =  strtoupper($_POST['descripcion']);
+            if ($editar == 0) {
+                $sql = "SELECT * FROM $tabla WHERE id = :codigo";
+                $query = $conn->prepare($sql);
+                $query->execute(['codigo' => $codigo]);
+                $rows = $query->rowCount();
 
-        if ($editar > 0) {
-            $id = $_POST['id'];
-            $query = "UPDATE $tabla SET id = $codigo, nombre = '$descripcion' WHERE id = $id";
-        } else {
-            $id = $_POST['id'];
-            $query = "SELECT * FROM $tabla WHERE id = $codigo";
-            $result = existeRegistro($conn, $query);
+                if ($rows > 0) {
+                    echo '2';
+                    exit();
+                } else {
+                    $sql = "INSERT INTO $tabla (id, nombre) VALUES(:codigo, :descripcion)";
+                    $query = $conn->prepare($sql);
+                    $result = $query->execute(['codigo' => $codigo, 'descripcion' => $descripcion]);
+                    ejecutarQuery($result, $conn);
+                }
+            } else {
+                $id = $_POST['id'];
+                $sql = "UPDATE $tabla SET id = :codigo, nombre = :descripcion WHERE id = :id";
+                $query = $conn->prepare($sql);
+                $result = $query->execute(['codigo' => $codigo, 'descripcion' => $descripcion, 'id' => $id]);
 
-            if ($result > 0) {
-                echo '2';
-                exit();
-            }else{
-                $query = "INSERT INTO $tabla (id, nombre) VALUES($codigo, '$descripcion')";
+                if ($result) {
+                    echo '3';
+                    exit();
+                }
             }
-
         }
-
-        ejecutarQuery($conn, $query);
         break;
 }

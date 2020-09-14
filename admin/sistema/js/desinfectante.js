@@ -1,4 +1,4 @@
-
+let editar;
 /* Mostrar Menu seleccionadp */
 
 $('.contenedor-menu .menu a').removeAttr('style');
@@ -36,6 +36,7 @@ $(document).ready(function () {
 
 $('#adDesinfectante').click(function (e) {
     e.preventDefault();
+    editar = 0;
     $('#id_desinfectante').val('');
     $('#desinfectante').val('');
     $('#concentracion').val('');
@@ -69,6 +70,7 @@ $(document).on('click', '.link-borrar', function (e) {
 
 $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
+    editar = 1;
     let id = $(this).parent().parent().children().first().text();
     let desinfectante = $(this).parent().parent().children().eq(1).text();
     let concentracion = $(this).parent().parent().children().eq(2).text();
@@ -100,11 +102,16 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: "php/c_desinfectante.php",
-            data: { operacion: 3, id: id, desinfectante: desinfectante, concentracion: concentracion },
+            data: { operacion: 3, editar: editar, id: id, desinfectante: desinfectante, concentracion: concentracion },
 
             success: function (r) {
                 if (r == 1) {
-                    alertify.set("notifier", "position", "top-right"); alertify.success("Registro exitoso.");
+                    alertify.set("notifier", "position", "top-right"); alertify.success("Almacenado con éxito.");
+                    refreshTable();
+                } else if (r == 2) {
+                    alertify.set("notifier", "position", "top-right"); alertify.error("Módulo ya existe.");
+                } else if (r == 3) {
+                    alertify.set("notifier", "position", "top-right"); alertify.success("Registros actualizado.");
                     refreshTable();
                 } else {
                     alertify.set("notifier", "position", "top-right"); alertify.error("Error.");

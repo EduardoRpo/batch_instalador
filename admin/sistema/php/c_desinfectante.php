@@ -19,22 +19,39 @@ switch ($op) {
         break;
 
     case 3: // Guardar o actualizar data
-        $id = $_POST['id'];
-        $desinfectante = strtoupper($_POST['desinfectante']);
-        $concentracion = $_POST['concentracion'];
+        if (!empty($_POST)) {
+            $editar = $_POST['editar'];
 
-        if ($id == '') {
-            $query = "SELECT * FROM desinfectante WHERE nombre='$desinfectante'";
-            $result = existeRegistro($conn, $query);
+            $id = $_POST['id'];
+            $desinfectante = strtoupper($_POST['desinfectante']);
+            $concentracion = $_POST['concentracion'];
 
-            if ($result > 0) {
-                exit();
-            } else
-                $query = "INSERT INTO desinfectante (nombre, concentracion) VALUES('$desinfectante', '$concentracion')";
-        } else
-            $query = "UPDATE desinfectante SET nombre = '$desinfectante', concentracion=$concentracion WHERE id = $id";
+            if ($editar == 0) {
+                $sql = "SELECT * FROM desinfectante WHERE nombre=:desinfectante";
+                $query = $conn->prepare($sql);
+                $query->execute(['desinfectante' => $desinfectante]);
+                $rows = $query->rowCount();
 
-        ejecutarQuery($conn, $query);
+                if ($rows > 0) {
+                    echo '2';
+                    exit();
+                } else {
+                    $sql = "INSERT INTO desinfectante (nombre, concentracion) VALUES(:desinfectante, :concentracion)";
+                    $query = $conn->prepare($sql);
+                    $result = $query->execute(['desinfectante' => $desinfectante, 'concentracion' => $concentracion]);
+                    ejecutarQuery($result, $conn);
+                }
+            } else {
+                $id = $_POST['id'];
+                $sql = "UPDATE desinfectante SET nombre = :desinfectante, concentracion=:concentracion WHERE id = :id";
+                $query = $conn->prepare($sql);
+                $result = $query->execute(['desinfectante' => $desinfectante, 'concentracion' => $concentracion, 'id' => $id]);
 
+                if ($result) {
+                    echo '3';
+                    exit();
+                }
+            }
+        }
         break;
 }

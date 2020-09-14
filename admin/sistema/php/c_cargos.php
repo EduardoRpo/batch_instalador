@@ -38,9 +38,9 @@ switch ($op) {
                 }
             } else {
                 $id = $_POST['id'];
-                $sql = "UPDATE cargo SET cargo = '$cargo' WHERE id = :id";
+                $sql = "UPDATE cargo SET cargo = :cargo WHERE id = :id";
                 $query = $conn->prepare($sql);
-                $result = $query->execute(['id' => $id]);
+                $result = $query->execute(['cargo' => $cargo, 'id' => $id]);
 
                 if ($result) {
                     echo '3';

@@ -1,5 +1,6 @@
-/* Mostrar Menu seleccionado */
+let editar;
 
+/* Mostrar Menu seleccionado */
 $('.contenedor-menu .menu a').removeAttr('style');
 $('#linkDespeje').css('text-decoration', 'revert')
 $('.contenedor-menu .menu ul.abrir').show();
@@ -43,6 +44,8 @@ $(document).ready(function () {
 
 $('#adicionarParametro').click(function (e) {
     e.preventDefault();
+
+    editar = 0;
     $("#frmadicionarPreguntaModulo").slideToggle();
 
     $('#btnguardarProceso').html('Crear');
@@ -109,6 +112,7 @@ function cargarSelectorPreguntas() {
 $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
     debugger;
+    editar = 1;
     let id = $(this).parent().parent().children().first().text();
     let pregunta = $(this).parent().parent().children().eq(1).text();
     let respuesta = $(this).parent().parent().children().eq(2).text();
@@ -164,11 +168,16 @@ $('#btnguardarDespeje').click(function (e) {
     $.ajax({
         type: "POST",
         url: "php/c_despejeLinea.php",
-        data: { operacion: "5", pregunta: pregunta, respuesta: respuesta, modulo: modulo },
+        data: { operacion: "5", editar: editar, pregunta: pregunta, respuesta: respuesta, modulo: modulo },
 
         success: function (r) {
             if (r == 1) {
-                alertify.set("notifier", "position", "top-right"); alertify.success("Proceso exitoso.");
+                alertify.set("notifier", "position", "top-right"); alertify.success("Almacenado con éxito.");
+                refreshTable();
+            } else if (r == 2) {
+                alertify.set("notifier", "position", "top-right"); alertify.error("Configuración ya existe.");
+            } else if (r == 3) {
+                alertify.set("notifier", "position", "top-right"); alertify.success("Registro actualizado.");
                 refreshTable();
             } else {
                 alertify.set("notifier", "position", "top-right"); alertify.error("Error.");

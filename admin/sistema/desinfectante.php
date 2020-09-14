@@ -55,7 +55,7 @@
               <div class="card-header">
                 <h4 class="card-title">Desinfectantes Registrados</h4>
                 <hr>
-                <button type="button" class="btn btn-primary" id="adDesinfectante">Adicionar Desinfectante</button>
+                <button type="button" class="btn btn-primary" id="adDesinfectante">Adicionar</button>
                 <form id="frmadParametro" style="display: none;">
                   <label for=""><b>Desinfectante</b></label>
                   <label for=""><b>Concentracion</b></label>

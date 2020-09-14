@@ -1,6 +1,6 @@
+let editar;
 
 /* Mostrar Menu seleccionado */
-
 $('.contenedor-menu .menu a').removeAttr('style');
 $('#linkCondicionesMedio').css('text-decoration', 'revert')
 $('.contenedor-menu .menu ul.abrir').show();
@@ -23,8 +23,8 @@ $(document).ready(function () {
         "columns": [
             { "data": "id" },
             { "data": "modulo" },
-            { "data": "min", className: "centrado" },
-            { "data": "max", className: "centrado" },
+            { "data": "t_min", className: "centrado" },
+            { "data": "t_max", className: "centrado" },
             { "defaultContent": "<a href='#' <i class='large material-icons link-editar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
             { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" }
 
@@ -63,6 +63,7 @@ function cargarSelectorModulo() {
 
 $('#adTiempos').click(function (e) {
     e.preventDefault();
+    editar = 0;
     cargarSelectorModulo()
     $('#btnguardarCondiciones').html('Crear');
     $("#frmadTiempos").slideToggle();
@@ -92,6 +93,25 @@ $(document).on('click', '.link-borrar', function (e) {
     });
 });
 
+/* Cargar datos para Actualizar registros */
+
+$(document).on('click', '.link-editar', function (e) {
+    e.preventDefault();
+    editar = 1;
+    let id = $(this).parent().parent().children().first().text();
+    let modulo = $(this).parent().parent().children().eq(1).text();
+    let t_min = $(this).parent().parent().children().eq(2).text();
+    let t_max = $(this).parent().parent().children().eq(3).text();
+
+    $('#btnguardarCondiciones').html('Actualizar');
+    $("#frmadTiempos").slideDown();
+    $('input:text[name=txtModulo]').hide();
+    $(`#moduloCondiciones option:contains(${modulo})`).attr('selected', true);
+    $('#t_min').val(t_min);
+    $('#t_max').val(t_max);
+
+});
+
 /* Almacenar Registros */
 
 $(document).ready(function () {
@@ -109,15 +129,21 @@ $(document).ready(function () {
             alertify.set("notifier", "position", "top-right"); alertify.error("El tiempo Máximo debe ser mayor al tiempo Mínimo.");
             return false;
         }
-
+        console.log(editar);
+        debugger;
         $.ajax({
             type: "POST",
             url: "php/c_condiciones.php",
-            data: { operacion: "3", id: modulo, t_min: t_min, t_max: t_max },
+            data: { operacion: "3", editar: editar,id: modulo, t_min: t_min, t_max: t_max },
 
             success: function (r) {
-                if (r === '1') {
-                    alertify.set("notifier", "position", "top-right"); alertify.success("Proceso Exitoso.");
+                if (r == 1) {
+                    alertify.set("notifier", "position", "top-right"); alertify.success("Almacenado con éxito.");
+                    refreshTable();
+                } else if (r == 2) {
+                    alertify.set("notifier", "position", "top-right"); alertify.error("Módulo ya existe.");
+                } else if (r == 3) {
+                    alertify.set("notifier", "position", "top-right"); alertify.success("Registros actualizado.");
                     refreshTable();
                 } else {
                     alertify.set("notifier", "position", "top-right"); alertify.error("Error.");
@@ -125,25 +151,6 @@ $(document).ready(function () {
             }
         });
     });
-});
-
-/* Cargar datos para Actualizar registros */
-
-$(document).on('click', '.link-editar', function (e) {
-    e.preventDefault();
-
-    let id = $(this).parent().parent().children().first().text();
-    let modulo = $(this).parent().parent().children().eq(1).text();
-    let t_min = $(this).parent().parent().children().eq(2).text();
-    let t_max = $(this).parent().parent().children().eq(3).text();
-
-    $('#btnguardarCondiciones').html('Actualizar');
-    $("#frmadTiempos").slideDown();
-    $('input:text[name=txtModulo]').hide();
-    $(`#moduloCondiciones option:contains(${modulo})`).attr('selected', true);
-    $('#t_min').val(t_min);
-    $('#t_max').val(t_max);
-
 });
 
 

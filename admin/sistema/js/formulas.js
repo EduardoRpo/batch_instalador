@@ -93,6 +93,8 @@ function cargarTablaFormulas(referencia) {
 
 $('#adicionarFormula').click(function (e) {
     e.preventDefault();
+    editar = 0;
+
     $("#frmadFormulas").slideToggle();
     $('#textReferencia').hide();
     $('#cmbreferencia').show();
@@ -149,10 +151,8 @@ function guardarFormulaMateriaPrima() {
     let ref_producto = $('#cmbReferenciaProductos').val();
     let ref_materiaprima = $('#cmbreferencia').val();
     let porcentaje = $('#porcentaje').val();
-    editar = false;
 
     if (ref_materiaprima === null) {
-        editar = true;
         ref_materiaprima = $('#textReferencia').val();
     }
 
@@ -163,9 +163,13 @@ function guardarFormulaMateriaPrima() {
 
         success: function (r) {
             if (r == 1) {
-                alertify.set("notifier", "position", "top-right"); alertify.success("Almacenado");
-                refreshTable();
-
+                alertify.set("notifier", "position", "top-right"); alertify.success("Almacenada con éxito.");
+                refreshTable(id);
+            } else if (r == 2) {
+                alertify.set("notifier", "position", "top-right"); alertify.error("Código ya existe.");
+            } else if (r == 3) {
+                alertify.set("notifier", "position", "top-right"); alertify.success("Registro actualizado.");
+                refreshTable(id);
             } else {
                 alertify.set("notifier", "position", "top-right"); alertify.error("Error.");
             }
@@ -177,6 +181,8 @@ function guardarFormulaMateriaPrima() {
 
 $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
+    
+    editar = 1;
     let id = $(this).parent().parent().children().first().text();
     let mp = $(this).parent().parent().children().eq(1).text();
     let alias = $(this).parent().parent().children().eq(2).text();

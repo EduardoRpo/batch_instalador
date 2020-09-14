@@ -138,13 +138,15 @@ function guardarDatosGenerales(nombre, id) {
         success: function (r) {
 
             if (r == 1) {
-                alertify.set("notifier", "position", "top-right"); alertify.success("¡Operación exitosa.!");
+                alertify.set("notifier", "position", "top-right"); alertify.success("Almacenado con éxito.");
                 refreshTable(id);
             } else if (r == 2) {
-                alertify.set("notifier", "position", "top-right"); alertify.error("¡Error!. El codigo ya existe.");
-            }
-            else {
-                alertify.set("notifier", "position", "top-right"); alertify.error("¡Error!");
+                alertify.set("notifier", "position", "top-right"); alertify.error("Código ya existe.");
+            } else if (r == 3) {
+                alertify.set("notifier", "position", "top-right"); alertify.success("Registro actualizado.");
+                refreshTable(id);
+            } else {
+                alertify.set("notifier", "position", "top-right"); alertify.error("Error.");
             }
         }
     });

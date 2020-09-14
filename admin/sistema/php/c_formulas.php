@@ -11,95 +11,82 @@ switch ($op) {
         break;
 
     case 2: //Obtener nombre producto
-
         $referencia = $_POST['referencia'];
-
         $query = "SELECT p.referencia, p.nombre_referencia FROM producto p WHERE referencia = $referencia";
         ejecutarQuerySelect($conn, $query);
         break;
 
     case 3: //Listar Formula
-
         $referencia = $_POST['referencia'];
-        //echo $referencia;
         $query = "SELECT f.id_producto, f.id_materiaprima as referencia, m.nombre, m.alias, f.porcentaje FROM formula f INNER JOIN materia_prima m ON f.id_materiaprima=m.referencia WHERE f.id_producto = '$referencia'";
         ejecutarQuerySelect($conn, $query);
         break;
 
     case 4: //Referencias Materias Primas
-
         $query = "SELECT referencia FROM materia_prima";
         ejecutarQuerySelect($conn, $query);
         break;
 
     case 5: //Obtener Materia Prima y Alias
-
         $referencia = $_POST['referencia'];
-
         $query = "SELECT mp.referencia, mp.nombre, mp.alias FROM materia_prima mp WHERE referencia = $referencia";
         ejecutarQuerySelect($conn, $query);
         break;
 
     case 6: // Guardar data
-        $editar = $_POST['editar'];
-        $id_producto = $_POST['ref_producto'];
-        $id_materiaprima = $_POST['ref_materiaprima'];
-        $porcentaje = $_POST['porcentaje'];
+        if (!empty($_POST)) {
+            $editar = $_POST['editar'];
+            $id_producto = $_POST['ref_producto'];
+            $id_materiaprima = $_POST['ref_materiaprima'];
+            $porcentaje = $_POST['porcentaje'];
 
-        if ($editar == 'true')
-            $query = "UPDATE formula SET porcentaje='$porcentaje' WHERE id_materiaprima = '$id_materiaprima' AND id_producto = '$id_producto'";
-        else
-            $query = "INSERT INTO formula (id_producto, id_materiaprima, porcentaje) VALUES ($id_producto, $id_materiaprima, $porcentaje )";
+            if ($editar == 0) {
+                $sql = "SELECT * FROM formula WHERE WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
+                $query = $conn->prepare($sql);
+                $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto]);
+                $rows = $query->rowCount();
 
-        ejecutarQuery($conn, $query);
+                if ($rows > 0) {
+                    echo '2';
+                    exit();
+                } else {
+                    $sql = "INSERT INTO formula (id_producto, id_materiaprima, porcentaje) VALUES (:id_producto, :id_materiaprima, :porcentaje )";
+                    $query = $conn->prepare($sql);
+                    $result = $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto, 'porcentaje' => $porcentaje]);
+                    if ($result) {
+                        echo '1';
+                        exit();
+                    }
+                }
+            } else {
+                $id = $_POST['id'];
+                $sql = "UPDATE formula SET porcentaje=:porcentaje WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
+                $query = $conn->prepare($sql);
+                $result = $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto, 'porcentaje' => $porcentaje]);
 
+                if ($result) {
+                    echo '3';
+                    exit();
+                }
+            }
+        }
         break;
 
     case 7: //Eliminar
         $ref_materiaprima = $_POST['ref_materiaprima'];
         $ref_producto = $_POST['ref_producto'];
 
-        $query = "DELETE FROM formula WHERE id_producto = $ref_producto AND id_materiaprima = $ref_materiaprima";
-        ejecutarQuery($conn, $query);
-        break;
-        /*
+        $id = $_POST['id'];
+        $sql = "DELETE FROM formula WHERE id_producto = :ref_producto AND id_materiaprima = :ref_materiaprima";
+        $query = $conn->prepare($sql);
+        $result = $query->execute(['ref_producto' => $ref_producto, 'ref_materiaprima' => $ref_materiaprima]);
+
         if ($result) {
-            echo 'Eliminado';
+            echo '1';
         } else {
-            echo 'No Eliminado';
+            die('Error');
+            print_r('Error: ' . mysqli_error($conn));
         }
-        //mysqli_free_result($query_pregunta);
-        mysqli_close($conn);
-        break;
-
-    case 3: // obtener data
-        $id_pregunta = $_POST['id'];
-
-        $query = mysqli_query($conn, "SELECT * FROM preguntas WHERE id = $id_pregunta");
-        $data = mysqli_fetch_assoc($query);
-        echo json_encode($data, JSON_UNESCAPED_UNICODE);
-        mysqli_close($conn);
 
         break;
-
-    
-    case 7: // Cargar Selector Modulos
-
-        $query_mod = mysqli_query($conn, "SELECT * FROM modulo");
-
-        $result = mysqli_num_rows($query_mod);
-
-        if ($result > 0) {
-            while ($data = mysqli_fetch_assoc($query_mod)) {
-                $arreglo[] = $data;
-            }
-
-            echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
-        } else {
-            echo json_encode('');
-        }
-        mysqli_free_result($query_mod);
-        mysqli_close($conn);
-
-        break; */
 }
