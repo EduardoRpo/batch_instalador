@@ -1,6 +1,6 @@
 <?php 
 
-    require_once('../../conexion.php');
+    require_once('../../conexion2.php');
 
     $fecha_busqueda = $_POST['busqueda'];
     $fecha_inicio = $_POST['inicio'];

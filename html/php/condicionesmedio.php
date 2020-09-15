@@ -1,5 +1,5 @@
 <?php
-  require_once('../../conexion.php');
+  require_once('../../conexion2.php');
 
   function utf8ize($d) {
     if (is_array($d)) 
@@ -23,9 +23,7 @@ switch($op){
   case 1: // obtener el tiempo para mostrar modal
     $id_modulo = intval($_POST['modulo']);
     
-    $query_tiempo = mysqli_query($conn, "SELECT min, max 
-                                        FROM condicionesmedio_tiempo 
-                                        WHERE id_modulo = $id_modulo");
+    $query_tiempo = mysqli_query($conn, "SELECT t_min, t_max FROM condicionesmedio_tiempo WHERE id_modulo = $id_modulo");
     
     $result = mysqli_num_rows($query_tiempo);
     

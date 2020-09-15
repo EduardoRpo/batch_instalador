@@ -69,6 +69,38 @@ function crearTablaBatch(columna_busqueda='', minDateFilter='', maxDateFilter=''
 
 $('.link-editar').css('cursor','pointer');
 
+/* Borrar registro */
+
+$(document).on('click', '.link-borrar', function(e){
+    e.preventDefault();
+    
+    //let id = $(this).parent().parent().children().first().text();
+    const texto = $(this).parent().parent().children()[1];
+    const id = $(texto).text();
+    
+    const confirm = alertify.confirm('Samara Cosmetics','¿Está seguro de eliminar este registro?',null,null).set('labels', {ok:'Si', cancel:'No'});
+ 
+    confirm.set('onok', function(r){ 
+        if(r){
+            $.ajax({
+                'method' : 'POST',
+                'url' : 'php/listarBatch.php',
+                'data':{operacion : "2", id : id},
+            
+                success: function(r){
+                    alertify.set("notifier","position", "top-right"); alertify.success("Batch Record Eliminado.");
+                    actualizarTabla();
+                    
+                },
+                error: function(r){
+                    alertify.set("notifier","position", "top-right"); alertify.error("Error al Eliminar el Batch Record.");
+                } 
+            });            
+        }
+    });       
+});
+
+
 /* Cargar datos para Actualizar registros */
 
 $(document).on('click', '.link-editar', function(e){
@@ -153,36 +185,7 @@ function mostrarTanques(info){
 }
 
 
-/* Borrar registro */
 
-$(document).on('click', '.link-borrar', function(e){
-    e.preventDefault();
-    
-    //let id = $(this).parent().parent().children().first().text();
-    const texto = $(this).parent().parent().children()[1];
-    const id = $(texto).text();
-    
-    const confirm = alertify.confirm('Samara Cosmetics','¿Está seguro de eliminar este registro?',null,null).set('labels', {ok:'Si', cancel:'No'});
- 
-    confirm.set('onok', function(r){ 
-        if(r){
-            $.ajax({
-                'method' : 'POST',
-                'url' : 'php/listarBatch.php',
-                'data':{operacion : "2", id : id},
-            
-                success: function(r){
-                    alertify.set("notifier","position", "top-right"); alertify.success("Batch Record Eliminado.");
-                    actualizarTabla();
-                    
-                },
-                error: function(r){
-                    alertify.set("notifier","position", "top-right"); alertify.error("Error al Eliminar el Batch Record.");
-                } 
-            });            
-        }
-    });       
-});
 
 
 /* Actualizar tabla */

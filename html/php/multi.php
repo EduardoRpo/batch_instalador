@@ -1,6 +1,6 @@
 <?php
   //include('/Desarrollo/BatchRecord/htdocs/conexion.php');
-  require_once('../../conexion.php');
+  require_once('../../conexion2.php');
 
   function utf8ize($d) {
     if (is_array($d)) 

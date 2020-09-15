@@ -1,6 +1,6 @@
 <?php 
 
-    require_once('../../conexion.php');
+    require_once('../../conexion2.php');
 
     $id_batch = $_POST['id'];
 

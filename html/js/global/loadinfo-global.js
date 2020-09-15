@@ -62,7 +62,8 @@ $.ajax({
     type: 'GET'
 }).done((data, status, xhr) => {
     batch = data;
-    const tamano_lote = formatoCO(data.tamano_lote);
+    //const tamano_lote = formatoCO(data.tamano_lote);
+    const tamano_lote = data.tamano_lote;
 
     $('#in_numero_orden').val(data.numero_orden);
     $('#in_numero_lote').val(data.numero_lote);
@@ -165,7 +166,7 @@ $(document).ready(function () {
         'data': { operacion: "1", modulo: proceso },
         
         success: function (resp) {
-
+            debugger;
             let t = JSON.parse(resp);
             let tiempo = Math.round(Math.random() * (t.max - t.min) + parseInt(t.min));
             //setTimeout(function(){  $("#m_CondicionesMedio").modal("show").modal({backdrop: 'static', keyboard: false}); }, tiempo*60000);
