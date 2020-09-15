@@ -166,7 +166,6 @@ $(document).ready(function () {
         'data': { operacion: "1", modulo: proceso },
         
         success: function (resp) {
-            debugger;
             let t = JSON.parse(resp);
             let tiempo = Math.round(Math.random() * (t.max - t.min) + parseInt(t.min));
             //setTimeout(function(){  $("#m_CondicionesMedio").modal("show").modal({backdrop: 'static', keyboard: false}); }, tiempo*60000);
