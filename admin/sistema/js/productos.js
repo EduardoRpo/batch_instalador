@@ -192,14 +192,14 @@ $(document).on('click', '#btnguardarProductos', function (e) {
       if (r == 1) {
         alertify.set("notifier", "position", "top-right"); alertify.success("Almacenado con éxito.");
         refreshTable();
-    } else if (r == 2) {
+      } else if (r == 2) {
         alertify.set("notifier", "position", "top-right"); alertify.error("La Referencia ya existe.");
-    } else if (r == 3) {
+      } else if (r == 3) {
         alertify.set("notifier", "position", "top-right"); alertify.success("Registro actualizado.");
         refreshTable();
-    } else {
+      } else {
         alertify.set("notifier", "position", "top-right"); alertify.error("Error.");
-    }
+      }
       $('#m_productos').modal('hide');
     },
     error: function (response) {

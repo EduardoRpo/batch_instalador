@@ -116,18 +116,3 @@ function refreshTable() {
     $('#listarDespeje').DataTable().clear();
     $('#listarDespeje').DataTable().ajax.reload();
 }
-
-
-/*      var confirm= alertify.confirm('Samara Cosmetics','¿Está seguro de actualizar este registro?',null,null).set('labels', {ok:'Si', cancel:'No'});
-
-     confirm.set('onok', function(r){
-         if(r){
-             $.ajax({
-                 'method' : 'GET',
-                 'url' : `php/accionesDespejedeLinea.php?link-editar=${id}`,
-                 'data' : 'id',
-             });
-             refreshTable();
-             alertify.success('Registro Eliminado');
-         }
-     });   */
