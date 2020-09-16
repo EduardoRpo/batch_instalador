@@ -104,8 +104,8 @@ function recargarDatos(){
             $('#notificacionSanitaria').val(info[0].notificacion_sanitaria);
             $('#propietario').val(info[0].propietario);
             $('#producto').val(info[0].producto);          
-            let presentacion = formatoCO(info[0].presentacion);
-            $('#presentacioncomercial').val(presentacion);
+            //let presentacion = formatoCO(info[0].presentacion);
+            $('#presentacioncomercial').val(info[0].presentacion);
             $('#linea').val(info[0].linea);
             $('#densidad').val(info[0].densidad);
         }
