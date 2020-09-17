@@ -145,16 +145,16 @@ $(document).on('click', '.link-editar', function(e){
             console.log(response);
        
         }
-    })
+    });
     
-})
+});
 
 function mostrarTanques(info){
     let sum=0;
     for(k=1; k<info.length; k++){
-        const cantidad = info[k].cantidad
-        const tanque= info[k].tanque
-        const total = cantidad * tanque
+        const cantidad = info[k].cantidad;
+        const tanque= info[k].tanque;
+        const total = cantidad * tanque;
 
         $('#cmbTanque' + k).show().val(tanque);
         $('#txtCantidad' + k).show().val(cantidad);
@@ -205,13 +205,13 @@ function guardarDatos(){
     const presentacion = $('#presentacioncomercial').val();
     const presentacion_comercial = formatoGeneral(presentacion);
     
-    const sumaTanques = $('.sumaTanques').val()
+    const sumaTanques = $('.sumaTanques').val();
     let tqn = [];
     let tmn = [];
     
     contarTanques();
 
-    if(cont != 0 && sumaTanques == '' || lote == ''){
+    if(cont !== 0 && sumaTanques == '' || lote == ''){
         alertify.set("notifier","position", "top-right"); alertify.error("Ingrese todos los datos.");
         return false;
     }
@@ -244,7 +244,7 @@ function guardarDatos(){
             operacion: "5",
             ref: $('#idbatch').val(),
             unidades: $('#unidadesxlote').val(),
-            lote: tamano_lote, //$('#tamanototallote').val(),
+            lote: tamano_lote,
             presentacion: presentacion_comercial,
             programacion: $('#fechaprogramacion').val(),
             fecha : fechaActual,

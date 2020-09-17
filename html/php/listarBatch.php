@@ -46,7 +46,7 @@
           $query .= " WHERE $fecha_busqueda BETWEEN '$fecha_inicio' AND '$fecha_final' ";
           }
 
-          $query .= "ORDER BY batch.id_batch desc";
+          $query .= " ORDER BY batch.id_batch desc";
 
           $query_batch = mysqli_query($conn, $query);
                                           
@@ -164,7 +164,8 @@
 			VALUES ('$fechahoy',";
       $query .= $fechaprogramacion != null ? "'$fechaprogramacion'" : "NULL";
       $query .= ",'$fechahoy', 'OP012020',' X0010320', '$tamanototallote', '$tamanolotepresentacion', '$unidadesxlote', '$estado', '$id')";
-
+      
+      var_dump($query);
 
       if(isset($cantidad)){
                 

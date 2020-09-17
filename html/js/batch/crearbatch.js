@@ -62,6 +62,7 @@ function cargarReferencias() {
         success: function(r){
             var $select = $('#cmbNoReferencia');
                 $('#cmbNoReferencia').empty();
+                debugger;
                 var info = JSON.parse(r);            
                                 
                 $select.append('<option disabled selected>' + "Referencia" + '</option>');
@@ -153,19 +154,19 @@ $("#adicionarPesaje").on('click', function(){
     
     contarTanques();
 
-    if(unidades == "" || unidades == 0 || lote == 0){
+    if(unidades === "" || unidades === 0 || lote === 0){
         alertify.set("notifier","position", "top-right"); alertify.error("Complete todos los campos.");
         return false;
     }
     
-    if(addtnq==1 || addtnq > 1 && addtnq < 6 && sumaTanques != "0" && sumaTanques != ""){
+    if(addtnq==1 || addtnq > 1 && addtnq < 6 && sumaTanques != "0" && sumaTanques !== ""){
         insertar();
         bloquearCeldas();
     
     } else{
         alertify.set("notifier","position", "top-right"); alertify.error("Diligencie todos los campos vacios o reconfigure los tanques.");
     }
-})
+});
 
 function insertar(){
     insertarTanques();
