@@ -27,7 +27,7 @@
     
     $query_linea = $conn -> query("SELECT maquina 
                                   FROM maquinaria 
-                                  WHERE (SELECT id FROM linea WHERE nombre_linea = '$linea') = linea  
+                                  WHERE (SELECT id FROM linea WHERE nombre = '$linea') = linea  
                                   ORDER BY `maquinaria`.`maquina`  ASC");
 
     $result = mysqli_num_rows($query_linea);

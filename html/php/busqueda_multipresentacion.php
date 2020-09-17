@@ -20,7 +20,7 @@
 
     $id_batch = $_POST['id'];
 
-    $query_busq_multi = $conn -> query("SELECT m.id, m.id_batch, m.referencia, p.nombre_referencia, pc.presentacion, m.cantidad 
+    $query_busq_multi = $conn -> query("SELECT m.id, m.id_batch, m.referencia, p.nombre_referencia, pc.nombre, m.cantidad 
                                         FROM multipresentacion m INNER JOIN producto p INNER JOIN presentacion_comercial pc 
                                         ON m.referencia = p.referencia AND p.id_presentacion_comercial = pc.id 
                                         WHERE m.id_batch='$id_batch'");
