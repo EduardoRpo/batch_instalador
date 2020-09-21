@@ -67,7 +67,7 @@
                   <input type="text" id="txtId" class="form-control" hidden>
                   <input type="text" id="txtActividad" class="form-control">
                   <input type="number" name="txtTiempo" id="txtTiempo" class="form-control" placeholder="Tiempo" style="text-align: center;">
-                  <button type="button" class="btn btn-primary" id="guardarInstructivo" onclick="guardarInstructivo();">Guardar</button>
+                  <button type="button" class="btn btn-primary" id="txtguardarInstructivo" onclick="guardarInstructivo();">Guardar</button>
                 </form>
               </div>
             </div>
@@ -145,7 +145,7 @@
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
   <!-- javascript inicializacion datatables -->
-  <script src="js/preparacion.js"></script>
+  <script src="js/instructivo.js"></script>
   <script src="js/menu.js"></script>
 
 </body>

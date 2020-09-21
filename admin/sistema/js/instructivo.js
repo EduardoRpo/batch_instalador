@@ -96,7 +96,7 @@ $('#adicionarInstructivo').click(function (e) {
     $("#frmadInstructivo").slideToggle();
     $('#txtActividad').val('');
     $('#txtTiempo').val('');
-    $('#guardarInstructivo').html('Crear');
+    $('#txtguardarInstructivo').html('Crear');
 
 });
 

@@ -101,7 +101,7 @@ $(document).ready(function () {
         let clave = $('#clave').val();
         
         if (editar == 1) {
-            if (nombres === '' || apellidos === '' || email === '' || cargo === '' || modulo === '' || user === '') {
+            if (nombres === '' || apellidos === '' || cargo === '' || modulo === '' || user === '') {
                 alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos.");
                 return false;
             }
