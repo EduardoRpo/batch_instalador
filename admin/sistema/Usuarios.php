@@ -113,9 +113,6 @@ include_once('./modal/m_crearUsuarios.php');
   <!-- Alertify -->
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
-  <!-- Validar formulario -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
-
   <!-- javascript inicializacion datatables -->
   <script src="js/usuarios.js"></script>
   <script src="js/menu.js"></script>

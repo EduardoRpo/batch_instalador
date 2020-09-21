@@ -4,10 +4,6 @@ let editar;
 cargarselectores('cargo');
 cargarselectores('modulo');
 
-$(document).ready(function () {
-    $("#frmagregarUsuarios").validate();
-});
-
 /* Mostrar Menu seleccionado */
 $('.contenedor-menu .menu a').removeAttr('style');
 $('#link16').css('text-decoration', 'revert')
