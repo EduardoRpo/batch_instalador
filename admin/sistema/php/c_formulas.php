@@ -41,7 +41,7 @@ switch ($op) {
             $porcentaje = $_POST['porcentaje'];
 
             if ($editar == 0) {
-                $sql = "SELECT * FROM formula WHERE WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
+                $sql = "SELECT * FROM formula WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
                 $query = $conn->prepare($sql);
                 $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto]);
                 $rows = $query->rowCount();

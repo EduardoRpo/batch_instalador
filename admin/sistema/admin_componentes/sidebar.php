@@ -39,7 +39,7 @@
                 <li><a href="empaques.php" id="linkEmpaques"><i class='large material-icons'>portrait</i><span>Empaques</span></a></li>
                 <li><a href="materiaprima.php" id="linkMateriaPrima"><i class='large material-icons'>portrait</i><span>Materia Prima</span></a></li>
                 <li><a href="formulas.php" id="linkFormulas"><i class='large material-icons'>portrait</i><span>Formulas</span></a></li>
-                <li><a href="formulas.php" id="linkPreparaciones"><i class='large material-icons'>portrait</i><span>Instructivo Preparación</span></a></li>
+                <li><a href="instructivo.php" id="linkPreparaciones"><i class='large material-icons'>portrait</i><span>Instructivo Preparación</span></a></li>
             </ul>
             <li id="usuarios"><a href=""><i class="fa fa-chevron-down"></i><span>Usuarios</span></a></li>
             <ul class="abrir2">

@@ -26,17 +26,17 @@ class Connection
     public function __construct()
     {
         $this->logger = new Logger(self::class);
-      $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20,Logger::DEBUG));
+        $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
         $dotenv = new Dotenv();
         $dotenv->load(__DIR__ . '/../../environment.env');
         try {
-          $host = $_ENV["DB_HOST"];
-          $dbname = $_ENV["DB_NAME"];
-          $dbport = $_ENV["DB_PORT"];
-          $dsn = "mysql:host=$host;port=$dbport;dbname=$dbname;charset=utf8";
-          $this->dbh = new PDO($dsn, $_ENV["DB_USER"], $_ENV["DB_PASS"]);
-          $this->dbh->exec('SET NAMES utf8');
-          $this->logger->info("Connection SuccesFully DB", array("pdo" => $this->dbh));
+            $host = $_ENV["DB_HOST"];
+            $dbname = $_ENV["DB_NAME"];
+            $dbport = $_ENV["DB_PORT"];
+            $dsn = "mysql:host=$host;port=$dbport;dbname=$dbname;charset=utf8";
+            $this->dbh = new PDO($dsn, $_ENV["DB_USER"], $_ENV["DB_PASS"]);
+            $this->dbh->exec('SET NAMES utf8');
+            $this->logger->info("Connection SuccesFully DB", array("pdo" => $this->dbh));
         } catch (PDOException $e) {
             $this->logger->error($e->getMessage());
         }
@@ -64,5 +64,4 @@ class Connection
     {
         return $this->dbh;
     }
-
 }

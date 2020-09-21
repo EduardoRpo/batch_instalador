@@ -1,6 +1,3 @@
-<?php
-include_once('./modal/m_crearUsuarios.php');
-?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -9,7 +6,7 @@ include_once('./modal/m_crearUsuarios.php');
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>Samara Cosmetics | Usuarios</title>
+  <title>Samara Cosmetics | Preparación</title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
 
   <!--     Fonts and icons     -->
@@ -45,32 +42,62 @@ include_once('./modal/m_crearUsuarios.php');
 
     <div class="main-panel" id="main-panel">
       <?php include('./admin_componentes/navegacion.php'); ?>
-      <div class="panel-header panel-header-sm"></div>
+      <div class="panel-header panel-header-sm">
+
+      </div>
+
       <div class="content">
         <div class="row">
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title">Usuarios Registrados</h4>
-                <!-- <a class="btn btn-primary" href="crearUsuarios1.php" role="button">Crear Usuario</a> -->
-                <button type="button" class="btn btn-primary" id="btnCrearUsuarios">Crear Usuarios</button>
-
-                <!-- <a class="btn btn-primary" role="button" href='crearUsuarios.php' <i class='large material-icons' data-toggle='tooltip' title='Adicionar' style='color:rgb(0, 154, 68)'>how_to_reg</i></a> -->
+                <h5 class="title">Instructivo de Preparación</h5>
+                <p class="category">Samara Cosmetics <a href=""></a></p>
               </div>
               <div class="card-body">
+                <div class="selproductos">
+                  <select name="cmbReferenciaProductos" id="cmbReferenciaProductos" class="form-control" style="width: 200px;"></select>
+                  <input type="text" class="form-control ml-3" id="txtnombreProducto">
+                </div>
+                <hr>
+                <button type="button" class="btn btn-primary" id="adicionarInstructivo">Adicionar</button>
+                <form id="frmadInstructivo" style="display: none;">
+                  <label for=""><b>Actividad</b></label>
+                  <label for="">Tiempo</label>
+                  <input type="text" id="txtId" class="form-control" hidden>
+                  <input type="text" id="txtActividad" class="form-control">
+                  <input type="number" name="txtTiempo" id="txtTiempo" class="form-control" placeholder="Tiempo" style="text-align: center;">
+                  <button type="button" class="btn btn-primary" id="guardarInstructivo" onclick="guardarInstructivo();">Guardar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card" id="1">
+              <!-- <div class="card-header">
+                <h4 class="card-title">Formulas</h4>
+                <hr>
+                <button type="button" class="btn btn-primary" id="addFormula">Adicionar</button>
+                <form id="frmadParametro" style="display: none;">
+                  <label for=""><b>Nombre Producto</b></label>
+                  <input type="text" name="nombreProducto" id="nombreProducto" class="form-control" placeholder="Nombre Producto">
+                  <button type="button" class="btn btn-primary" id="guardarFormula">Guardar</button>
+                </form>
+                <hr>
+              </div> -->
+              <div class="card-body">
                 <div class="table-responsive">
-                  <table id="listaUsuarios" class="table-striped row-borde" style="width:100%">
+                  <table id="tblInstructivo" class="table-striped row-borde" style="width:100%">
                     <thead>
                       <tr>
                         <th></th>
                         <th></th>
-                        <th>id</th>
-                        <th>Nombres</th>
-                        <th>Apellidos</th>
-                        <th>Email</th>
-                        <th>Cargo</th>
-                        <th>Módulo</th>
-                        <th>Usuario</th>
+                        <th>Id</th>
+                        <th>Actividad</th>
+                        <th>Tiempo</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -79,6 +106,10 @@ include_once('./modal/m_crearUsuarios.php');
                   </table>
                 </div>
               </div>
+              <form id="formDataExcel" enctype="multipart/form-data">
+                <input type="file" name="datosExcel" id="datosExcel" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
+                <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value, 1);" disabled="disabled">Cargar Datos</button>
+              </form>
             </div>
           </div>
         </div>
@@ -113,11 +144,8 @@ include_once('./modal/m_crearUsuarios.php');
   <!-- Alertify -->
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
-  <!-- Validar formulario -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
-
   <!-- javascript inicializacion datatables -->
-  <script src="js/usuarios.js"></script>
+  <script src="js/preparacion.js"></script>
   <script src="js/menu.js"></script>
 
 </body>

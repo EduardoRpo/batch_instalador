@@ -1,6 +1,12 @@
+let id;
 let editar;
+
 cargarselectores('cargo');
 cargarselectores('modulo');
+
+$(document).ready(function () {
+    $("#frmagregarUsuarios").validate();
+});
 
 /* Mostrar Menu seleccionado */
 $('.contenedor-menu .menu a').removeAttr('style');
@@ -23,15 +29,15 @@ $(document).ready(function () {
         },
 
         "columns": [
+            { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Editar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
+            { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" },
             { "data": "id" },
             { "data": "nombre" },
             { "data": "apellido" },
             { "data": "email" },
             { "data": "cargo" },
             { "data": "modulo" },
-            /* {"defaultContent": "<a href='crearUsuarios.php' <i class='large material-icons' data-toggle='tooltip' title='Adicionar' style='color:rgb(0, 154, 68)'>how_to_reg</i></a>"}, */
-            { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Editar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
-            { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" }
+            { "data": "user" }
         ]
     });
 });
@@ -74,12 +80,13 @@ function cargarselectores(selector) {
 $('#btnCrearUsuarios').click(function () {
     editar = 0;
     $('#ModalCrearUsuarios').modal('show');
-
+    $('#btnguardarUsuarios').html('Crear');
     $('#nombres').val('');
     $('#apellidos').val('');
     $('#email').val('');
     $('#cargo').val('');
     $('#modulo').val('');
+    $('#usuario').val('');
 
 });
 
@@ -89,10 +96,30 @@ $('#btnCrearUsuarios').click(function () {
 $(document).ready(function () {
     $('#btnguardarUsuarios').click(function (e) {
         e.preventDefault();
+        let nombres = $('#nombres').val();
+        let apellidos = $('#apellidos').val();
+        let email = $('#email').val();
+        let cargo = $('#cargo').val();
+        let modulo = $('#modulo').val();
+        let user = $('#usuario').val();
+        let clave = $('#clave').val();
+        
+        if (editar == 1) {
+            if (nombres === '' || apellidos === '' || email === '' || cargo === '' || modulo === '' || user === '') {
+                alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos.");
+                return false;
+            }
+        }else{
+            if (nombres === '' || apellidos === '' || email === '' || cargo === '' || modulo === '' || user === '' || clave === '') {
+                alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos.");
+                return false;
+            }
+        }
 
         const usuario = new FormData($('#frmagregarUsuarios')[0]);
         usuario.set('operacion', 3);
         usuario.set('editar', editar);
+        usuario.set('id', id);
 
         $.ajax({
             type: "POST",
@@ -126,20 +153,22 @@ $(document).ready(function () {
 $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
     editar = 1;
-    let id = $(this).parent().parent().children().first().text();
-    let nombres = $(this).parent().parent().children().eq(1).text();
-    let apellidos = $(this).parent().parent().children().eq(2).text();
-    let email = $(this).parent().parent().children().eq(3).text();
-    let cargo = $(this).parent().parent().children().eq(4).text();
-    let modulo = $(this).parent().parent().children().eq(5).text();
+    id = $(this).parent().parent().children().eq(2).text();
+    let nombres = $(this).parent().parent().children().eq(3).text();
+    let apellidos = $(this).parent().parent().children().eq(4).text();
+    let email = $(this).parent().parent().children().eq(5).text();
+    let cargo = $(this).parent().parent().children().eq(6).text();
+    let modulo = $(this).parent().parent().children().eq(7).text();
+    let usuario = $(this).parent().parent().children().eq(8).text();
 
     $('#ModalCrearUsuarios').modal('show');
+    $('#btnguardarUsuarios').html('Actualizar');
     $('#nombres').val(nombres);
     $('#apellidos').val(apellidos);
     $('#email').val(email);
-    $('#cargo').val(cargo);
-    $('#modulo').val(modulo);
-
+    $("#cargo option:contains(" + cargo + ")").attr("selected", true);
+    $("#modulo option:contains(" + modulo + ")").attr("selected", true);
+    $('#usuario').val(usuario);
 });
 
 
@@ -149,15 +178,14 @@ $(document).on('click', '.link-borrar', function (e) {
     e.preventDefault();
 
     let id = $(this).parent().parent().children().first().text();
-
-    var confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este usuario?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
+    let confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este usuario?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
 
     confirm.set('onok', function (r) {
         if (r) {
             $.ajax({
                 'method': 'POST',
                 'url': 'php/c_usuarios.php',
-                'data': 'id',
+                'data': { id: id, operacion: 2 }
             });
             refreshTable();
             alertify.success('Registro Eliminado');

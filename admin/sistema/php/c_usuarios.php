@@ -6,7 +6,7 @@ $op = $_POST['operacion'];
 
 switch ($op) {
     case 1: //listar Usuarios
-        $query = "SELECT u.id, u.nombre, u.apellido, u.email, c.cargo, m.modulo FROM usuario u INNER JOIN cargo c INNER JOIN modulo m ON u.id_cargo = c.id AND u.id_modulo = m.id";
+        $query = "SELECT u.id, u.nombre, u.apellido, u.email, c.cargo, m.modulo, u.user FROM usuario u INNER JOIN cargo c INNER JOIN modulo m ON u.id_cargo = c.id AND u.id_modulo = m.id";
         ejecutarQuerySelect($conn, $query);
         break;
 
@@ -27,13 +27,15 @@ switch ($op) {
             $usuario = $_POST['usuario'];
             $clave = $_POST['clave'];
 
-            /* var_dump($nombres);
+
+            /*  var_dump($nombres);
             var_dump($apellidos);
             var_dump($email);
             var_dump($cargo);
             var_dump($modulo);
             var_dump($editar);
             var_dump($clave);
+            var_dump($usuario);
 
             exit(); */
 
@@ -63,9 +65,37 @@ switch ($op) {
                 }
             } else {
                 $id = $_POST['id'];
-                $sql = "UPDATE cargo SET cargo = :cargo WHERE id = :id";
-                $query = $conn->prepare($sql);
-                $result = $query->execute(['cargo' => $cargo, 'id' => $id]);
+
+                if (empty($clave)) {
+                    $sql = "UPDATE usuario SET nombre =:nombre, apellido =:apellido, email =:email, user =:user, id_modulo =:modulo, id_cargo =:cargo WHERE id = :id";
+                    $query = $conn->prepare($sql);
+                    $result = $query->execute([
+                        'nombre' => $nombres,
+                        'apellido' => $apellidos,
+                        'email' => $email,
+                        'user' => $usuario,
+                        'modulo' => $modulo,
+                        'cargo' => $cargo,
+                        'id' => $id
+                    ]);
+                } else {
+                    $sql = "UPDATE usuario SET nombre =:nombre, apellido =:apellido, email =:email, user =:user, clave =:clave, id_modulo =:modulo, id_cargo =:cargo WHERE id = :id";
+                    $query = $conn->prepare($sql);
+                    $result = $query->execute([
+                        'nombre' => $nombres,
+                        'apellido' => $apellidos,
+                        'email' => $email,
+                        'user' => $usuario,
+                        'clave' => md5($clave),
+                        'modulo' => $modulo,
+                        'cargo' => $cargo,
+                        'id' => $id
+                    ]);
+                }
+
+
+
+
 
                 if ($result) {
                     echo '3';
