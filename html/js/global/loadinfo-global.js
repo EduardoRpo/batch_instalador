@@ -69,7 +69,7 @@ $.ajax({
     $('#in_numero_lote').val(data.numero_lote);
     $('#in_referencia').val(data.referencia);
     $('#in_nombre_referencia').val(data.nombre_referencia);
-    $('#in_linea').val(data.nombre_linea);
+    $('#in_linea').val(data.linea);
     $('#in_fecha_programacion').val(data.fecha_programacion);
     $('#in_tamano_lote').val(tamano_lote);
 
