@@ -25,22 +25,23 @@ switch ($op) {
     case 4: // Guardar data
         if (!empty($_POST)) {
             $editar = $_POST['editar'];
+            $referencia = $_POST['referencia'];
             $actividad = $_POST['actividad'];
             $tiempo = $_POST['tiempo'];
 
             if ($editar == 0) {
-                $sql = "SELECT * FROM instructivo_preparacion WHERE proceso = :proceso";
+                $sql = "SELECT * FROM instructivo_preparacion WHERE proceso = :proceso AND id_producto =:referencia";
                 $query = $conn->prepare($sql);
-                $query->execute(['proceso' => $actividad]);
+                $query->execute(['proceso' => $actividad, 'referencia' => $referencia]);
                 $rows = $query->rowCount();
 
                 if ($rows > 0) {
                     echo '2';
                     exit();
                 } else {
-                    $sql = "INSERT INTO instructivo_preparacion (proceso, tiempo) VALUES (:proceso, :tiempo )";
+                    $sql = "INSERT INTO instructivo_preparacion (proceso, tiempo, id_producto) VALUES (:proceso, :tiempo, :referencia )";
                     $query = $conn->prepare($sql);
-                    $result = $query->execute(['proceso' => $actividad, 'tiempo' => $tiempo]);
+                    $result = $query->execute(['proceso' => $actividad, 'tiempo' => $tiempo, 'referencia' => $referencia]);
                     if ($result) {
                         echo '1';
                         exit();
