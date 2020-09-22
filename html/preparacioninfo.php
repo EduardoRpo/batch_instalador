@@ -499,8 +499,8 @@ include("modal/modal_condicionesMedio.php");
 
   <script src="../../html/js/global/loadinfo-global.js"></script>
 
-  <script src="../../html/js/preparacion/preparacioninfo.js"></script>
   <script src="../../html/js/pesaje/pesajeinfo.js"></script>
+  <script src="../../html/js/preparacion/preparacioninfo.js"></script>
   <script src="../../html/js/firmar/firmar.js"></script>
 </body>
 
