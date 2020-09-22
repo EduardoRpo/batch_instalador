@@ -35,26 +35,20 @@ include("modal/modal_cambiarContrasena.php");
         <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
       </svg>
     </div>
-
     <div id="main-wrapper">
-
       <?php include('./partials/header.php'); ?>
-
       <div class="contenedorPrincipal">
-          <h1 class="text-themecolor tituloProceso"><b>Batch Record</b></h1>
-
-          <div class="dropdown btn-acciones">
-            <button class="btn btn-secondary dropdown-toggle btn-md " style="background-color:#fff;color:#FF8D6D; border-color:#FF8D6D;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#" onclick="multipresentacion()">Multipresentación</a>
-              <a class="dropdown-item" href="#" onclick="clonar()">Clonar</a>
-              <a class="dropdown-item" href="#" onclick="eliminado()">Batch Eliminados</a>
-            </div>
+        <h1 class="text-themecolor tituloProceso"><b>Batch Record</b></h1>
+        <div class="dropdown btn-acciones">
+          <button class="btn btn-secondary dropdown-toggle btn-md " style="background-color:#fff;color:#FF8D6D; border-color:#FF8D6D;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#" onclick="multipresentacion()">Multipresentación</a>
+            <a class="dropdown-item" href="#" onclick="clonar()">Clonar</a>
+            <a class="dropdown-item" href="#" onclick="eliminado()">Batch Eliminados</a>
           </div>
-
-          <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md btn-filtrar" style="background-color:#fff;color:#FF8D6D" onclick="filtrarfechas()">Filtrar</button>
-          <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md btn-crearbatch"  onclick="mostrarModal();"><strong>Crear Batch Record</strong></button>
-
+        </div>
+        <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md btn-filtrar" style="background-color:#fff;color:#FF8D6D" onclick="filtrarfechas()">Filtrar</button>
+        <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md btn-crearbatch" onclick="mostrarModal();"><strong>Crear Batch Record</strong></button>
       </div>
     </div>
 
@@ -63,10 +57,9 @@ include("modal/modal_cambiarContrasena.php");
         <form id="formFechas">
           <div class="row">
             <div class="col-md-6 col-2 align-self-center" style="padding-bottom: 10px;left:50px">
-              <input type="checkbox" class="form-check-input" id="checkFechaCreacion" name="typeFilter">
+              <input type="checkbox" class="form-check-input" id="checkFechaCreacion" name="typeFilter" hidden>
               <label class="form-check-label" for="checkFechaCreacion" style="padding-right: 10px;">Creación</label>
-
-              <input type="checkbox" class="form-check-input" id="checkFechaProgramacion" name="typeFilter">
+              <input type="checkbox" class="form-check-input" id="checkFechaProgramacion" name="typeFilter" hidden>
               <label class="form-check-label" for="checkFechaProgramacion">Programación</label>
             </div>
           </div>
@@ -74,14 +67,9 @@ include("modal/modal_cambiarContrasena.php");
           <div class="row fechasfiltrado">
             <div class="col-md-3 col-2 align-self-center">
               <input type="text" name="daterange" id="daterange" value="" class="form-control" />
-
             </div>
-
-
             <div class="col-md-1 col-2 align-self-center">
               <button id="btnfiltrar" class="btn btn-info" type="button">Eliminar Filtro</button>
-
-
             </div>
           </div>
         </form>
