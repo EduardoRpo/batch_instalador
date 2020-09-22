@@ -50,7 +50,7 @@ $.ajax({
     $('#in_fecha').val(data.fecha_programacion);
     $('#in_referencia').val(data.referencia);
     $('#in_nombre_referencia').val(data.nombre_referencia);
-    $('#in_linea').val(data.nombre_linea);
+    $('#in_linea').val(data.linea);
 });
 
 /* Carga preguntas */
