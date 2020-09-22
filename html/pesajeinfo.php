@@ -148,7 +148,7 @@ include_once('modal/modal_condicionesMedio.php');
                     </tbody>
                   </table>
 
-                  <input type="text" class="form-control" id="in_fecha" readonly>
+                  <input type="text" class="form-control" id="in_fecha_programacion" readonly>
                   <input type="text" class="form-control" id="in_numero_orden" readonly>
                   <input type="text" class="form-control" id="in_referencia" readonly>
 
