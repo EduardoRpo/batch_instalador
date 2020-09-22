@@ -16,6 +16,9 @@ if (!empty($_POST)) {
 		$dataList[] = explode(";", $data);
 	}
 
+	echo $dataList;
+	exit();
+
 	//Buscar operacion y ejecutar
 
 	switch ($operacion) {
@@ -104,6 +107,16 @@ if (!empty($_POST)) {
 			foreach ($dataList as $data) {
 				$conn->query("INSERT INTO materia_prima (referencia, nombre, alias) 
 							  VALUES ('{$data[0]}', '{$data[1]}', '{$data[2]}')");
+			}
+			break;
+		case '9': // insertar en la BD instructivo
+
+			$conn->query("DELETE FROM instructivo_preparacion");
+			$conn->query("ALTER TABLE instructivo_preparacion AUTO_INCREMENT = 1");
+
+			foreach ($dataList as $data) {
+				$conn->query("INSERT INTO instructivo_preparacion (proceso, tiempo, id_producto) 
+								  VALUES ('{$data[0]}', '{$data[1]}', '{$data[2]}')");
 			}
 			break;
 	}

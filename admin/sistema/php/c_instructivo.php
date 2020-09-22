@@ -26,7 +26,7 @@ switch ($op) {
         if (!empty($_POST)) {
             $editar = $_POST['editar'];
             $referencia = $_POST['referencia'];
-            $actividad = $_POST['actividad'];
+            $actividad = strtoupper($_POST['actividad']);
             $tiempo = $_POST['tiempo'];
 
             if ($editar == 0) {
@@ -51,7 +51,7 @@ switch ($op) {
                 $id = $_POST['id'];
                 $sql = "UPDATE instructivo_preparacion SET proceso=:proceso, tiempo=:tiempo WHERE id = :id";
                 $query = $conn->prepare($sql);
-                $result = $query->execute(['id' => $id, 'proceso' => $proceso, 'tiempo' => $tiempo]);
+                $result = $query->execute(['id' => $id, 'proceso' => $actividad, 'tiempo' => $tiempo]);
 
                 if ($result) {
                     echo '3';

@@ -111,7 +111,8 @@ $(document).on('click', '.link-editar', function (e) {
     let actividad = $(this).parent().parent().children().eq(3).text();
     let tiempo = $(this).parent().parent().children().eq(4).text();
     
-    $("#frmadFormulas").slideDown();
+    $("#frmadInstructivo").slideDown();
+    $('#txtguardarInstructivo').html('Actualizar');
     $('#txtId').val(id);
     $('#txtActividad').val(actividad);
     $('#txtTiempo').val(tiempo);
