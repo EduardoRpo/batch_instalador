@@ -16,7 +16,7 @@
     return $d;
     }
 
-// obtener firma y huella del usuario
+// obtener equipos de acuerdo con la linea
 
     $linea = $_POST['linea'];
     

@@ -50,7 +50,7 @@ $('#adProceso').click(function (e) {
 $(document).on('click', '.link-borrar', function (e) {
     e.preventDefault();
 
-    let id = $(this).parent().parent().children().first().text();
+    const id = $(this).parent().parent().children().first().text();
     let confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este registro?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
 
     confirm.set('onok', function (r) {

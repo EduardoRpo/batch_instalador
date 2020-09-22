@@ -94,6 +94,27 @@ $.ajax({
     });
 }); */
 
+/* Cargar lineas */
+
+$.ajax({
+    type: "POST",
+    url: 'php/cargarLineas.php',
+
+    success: function (r) {
+        info = JSON.parse(response);
+
+        let $select = $('#select-Linea');
+        $select.empty();
+
+        $select.append('<option disabled selected>' + "Seleccionar" + '</option>');
+
+        $.each(info.data, function (i, value) {
+            $select.append('<option value ="' + value.id + '">' + value.linea + '</option>');
+        });
+    }
+});
+
+
 /* Cargar maquinas de acuerdo con la linea */
 
 $("#select-Linea").change(function () {
@@ -144,7 +165,7 @@ $.ajax({
 }).done((data, status, xhr) => {
     $('#pasos_instructivo').html('');
     pasos = data;
-    var i=1;
+    var i = 1;
     data.forEach((instructivo, indx) => {
         $('#pasos_instructivo').append(`<a href="javascript:void(0)" onclick="procesoTiempo(event)" 
         class="proceso-instructivo" attr-indx="${indx}" attr-id="${instructivo.id}" id="proceso-instructivo${i}" 
@@ -209,7 +230,7 @@ function mostrarInstructivo() {
 
 function guardarBatchPreparacion() {
     valores = new Array();
-    
+
     $('#tblControlProcesoPreparacion tr').each(function () {
         var cantidad = $(this).find('td').eq(0).html();
         var descripcion = $(this).find('td').eq(1).html();
