@@ -16,8 +16,8 @@ if (!empty($_POST)) {
 		$dataList[] = explode(";", $data);
 	}
 
-	echo $dataList;
-	exit();
+	/* print_r($dataList);
+	exit(); */
 
 	//Buscar operacion y ejecutar
 

@@ -6,7 +6,7 @@ $("#datosExcel").change(function () {
 });
 
 function comprobarExtension(formulario, archivo, id) {
-
+    
     let confirm = alertify.confirm('Samara Cosmetics', 'Todos los datos serán eliminados y reemplazados por el nuevo archivo ¿Esta seguro de ejecutar la operación?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
     confirm.set('onok', function (r) {
         if (r) {
@@ -27,7 +27,7 @@ function comprobarExtension(formulario, archivo, id) {
 /* enviar datos para cargar a la BD */
 
 function cargarDataExcel(id) {
- 
+
     const formulario = new FormData($('#formDataExcel')[0]);
     formulario.set('operacion', id);
 
@@ -40,7 +40,6 @@ function cargarDataExcel(id) {
         contentType: false,
 
         success: function (data) {
-
             alertify.set("notifier", "position", "top-right"); alertify.success("Operación exitosa");
             refreshTable();
 
