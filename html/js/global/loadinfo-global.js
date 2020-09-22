@@ -166,7 +166,7 @@ $(document).ready(function () {
         
         success: function (resp) {
             let t = JSON.parse(resp);
-            let tiempo = Math.round(Math.random() * (t.max - t.min) + parseInt(t.min));
+            let tiempo = Math.round(Math.random() * (t.t_max - t.t_min) + parseInt(t.t_min));
             //setTimeout(function(){  $("#m_CondicionesMedio").modal("show").modal({backdrop: 'static', keyboard: false}); }, tiempo*60000);
             setTimeout(function () {
                 $("#m_CondicionesMedio").modal("show");
