@@ -98,7 +98,7 @@ $.ajax({
 $(document).ready(function () {
     $.ajax({
         type: "POST",
-        url: '../php/cargarLineas.php',
+        url: '../../php/cargarLineas.php',
 
         success: function (r) {
             info = JSON.parse(response);
