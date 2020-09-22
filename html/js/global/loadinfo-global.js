@@ -13,8 +13,8 @@ Date.prototype.toDateInputValue = (function () {
     return local.toJSON().slice(0, 10);
 });
 
-$('#in_fecha').val(new Date().toDateInputValue());
-$('#in_fecha').attr('min', new Date().toDateInputValue());
+/* $('#in_fecha').val(new Date().toDateInputValue());
+$('#in_fecha').attr('min', new Date().toDateInputValue()); */
 
 /* Modulo */
 
