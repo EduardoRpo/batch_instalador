@@ -9,7 +9,7 @@ if (!empty($_POST)) {
 	$operacion = $_POST['operacion'];
 	
 	$datos = file_get_contents($datos['tmp_name']);
-	print_r($datos);
+	
 	$datos = explode("\n", $datos);
 	$datos = array_filter($datos);
 
@@ -19,7 +19,7 @@ if (!empty($_POST)) {
 	}
 
 	//print_r($dataList);
-	exit(); 
+	/* exit();  */
 
 	//Buscar operacion y ejecutar
 
