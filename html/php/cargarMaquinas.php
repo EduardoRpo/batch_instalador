@@ -8,9 +8,6 @@ if (!empty($_POST)) {
 
   $linea = $_POST['linea'];
 
-  $query = "SELECT maquina 
-            FROM maquinaria 
-            WHERE (SELECT id FROM linea WHERE nombre = '$linea') = linea  
-            ORDER BY `maquinaria`.`maquina`  ASC";
+  $query = "SELECT maquina FROM maquinaria WHERE linea = $linea ORDER BY `maquinaria`.`maquina` ASC";
   ejecutarQuerySelect($conn, $query);
 }
