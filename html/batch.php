@@ -96,8 +96,6 @@ include("modal/modal_cambiarContrasena.php");
               <thead>
                 <tr>
                   <th></th>
-                  <th></th>
-                  <th></th>
                   <th>No</th>
                   <th>Orden</th>
                   <th>Referencia</th>
@@ -109,7 +107,8 @@ include("modal/modal_cambiarContrasena.php");
                   <th>Programación</th>
                   <th>Estado</th>
                   <th>Multi</th>
-                  
+                  <th></th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
