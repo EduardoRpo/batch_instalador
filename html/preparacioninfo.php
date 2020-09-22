@@ -239,12 +239,7 @@ include("modal/modal_condicionesMedio.php");
                   <label for="">Linea</label>
                   <label for="sel_agitador">Identificación Agitador</label>
                   <label for="sel_marmita">Identificación Marmita o Tanque</label>
-                  <select class="selectpicker form-control" id="select-Linea">
-                    <option selected hidden>Seleccionar Linea</option>
-                    <option>LIQUIDOS</option>
-                    <option>SOLIDOS</option>
-                    <option>SEMISOLIDOS</option>
-                  </select>
+                  <select class="selectpicker form-control" id="select-Linea"></select>
                   <input type="text" id="sel_agitador" class="form-control" readonly>
                   <input type="text" id="sel_marmita" class="form-control" readonly>
                   <!-- <select class="selectpicker form-control" id="sel_agitador">

@@ -95,24 +95,26 @@ $.ajax({
 }); */
 
 /* Cargar lineas */
+$(document).ready(function () {
+    $.ajax({
+        type: "POST",
+        url: 'php/cargarLineas.php',
 
-$.ajax({
-    type: "POST",
-    url: 'php/cargarLineas.php',
+        success: function (r) {
+            info = JSON.parse(response);
 
-    success: function (r) {
-        info = JSON.parse(response);
+            let $select = $('#select-Linea');
+            $select.empty();
 
-        let $select = $('#select-Linea');
-        $select.empty();
+            $select.append('<option disabled selected>' + "Seleccionar" + '</option>');
 
-        $select.append('<option disabled selected>' + "Seleccionar" + '</option>');
-
-        $.each(info.data, function (i, value) {
-            $select.append('<option value ="' + value.id + '">' + value.linea + '</option>');
-        });
-    }
+            $.each(info.data, function (i, value) {
+                $select.append('<option value ="' + value.id + '">' + value.linea + '</option>');
+            });
+        }
+    });
 });
+
 
 
 /* Cargar maquinas de acuerdo con la linea */
