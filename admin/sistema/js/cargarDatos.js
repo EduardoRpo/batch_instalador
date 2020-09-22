@@ -33,7 +33,7 @@ function cargarDataExcel(id) {
     debugger;
     $.ajax({
 
-        url: "php/importar.php",
+        url: "../../html/php/importar.php",
         type: "POST",
         data: formulario,
         processData: false,
