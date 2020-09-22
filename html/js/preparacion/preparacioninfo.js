@@ -101,7 +101,7 @@ $(document).ready(function () {
         url: '../../html/php/cargarLineas.php',
 
         success: function (r) {
-            info = JSON.parse(response);
+            info = JSON.parse(r);
 
             let $select = $('#select-Linea');
             $select.empty();
