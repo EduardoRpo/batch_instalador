@@ -107,20 +107,15 @@ $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
 
     editar = 1;
-    let id = $(this).parent().parent().children().first().text();
-    let mp = $(this).parent().parent().children().eq(1).text();
-    let alias = $(this).parent().parent().children().eq(2).text();
-    let porcentaje = $(this).parent().parent().children().eq(3).text();
-
-    $('#cmbreferencia').val('');
+    let id = $(this).parent().parent().children().eq(2).text();
+    let actividad = $(this).parent().parent().children().eq(3).text();
+    let tiempo = $(this).parent().parent().children().eq(4).text();
+    
     $("#frmadFormulas").slideDown();
-    $('#textReferencia').show();
-    $('#cmbreferencia').hide();
-
-    $('#textReferencia').val(id).prop('disabled', true);
-    $('#txtMateria-Prima').val(mp).prop('disabled', true);
-    $('#alias').val(alias).prop('disabled', true);
-    $('#porcentaje').val(porcentaje);
+    $('#txtId').val(id);
+    $('#txtActividad').val(actividad);
+    $('#txtTiempo').val(tiempo);
+    
 });
 
 
@@ -128,13 +123,19 @@ $(document).on('click', '.link-editar', function (e) {
 
 function guardarInstructivo() {
     let id = $('#txtId').val();
+    let referencia = $('#cmbReferenciaProductos').val();
     let actividad = $('#txtActividad').val();
     let tiempo = $('#txtTiempo').val();
-
+    debugger;
     $.ajax({
         type: "POST",
         url: "php/c_instructivo.php",
-        data: { operacion: 4, editar: editar, id: id, actividad: actividad, tiempo: tiempo },
+        data: { operacion: 4, 
+                editar: editar, 
+                referencia: referencia, 
+                id: id, 
+                actividad: actividad, 
+                tiempo: tiempo },
 
         success: function (r) {
             if (r == 1) {
@@ -158,7 +159,7 @@ $(document).on('click', '.link-borrar', function (e) {
     e.preventDefault();
 
     let id = $(this).parent().parent().children().eq(2).text();
-    
+
     let confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este registro?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
     confirm.set('onok', function (r) {
         if (r) {

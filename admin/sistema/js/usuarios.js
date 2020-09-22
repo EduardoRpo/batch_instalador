@@ -83,6 +83,7 @@ $('#btnCrearUsuarios').click(function () {
     $('#cargo').val('');
     $('#modulo').val('');
     $('#usuario').val('');
+    $('#clave').val('');
 
 });
 

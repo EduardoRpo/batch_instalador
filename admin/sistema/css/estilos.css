@@ -145,6 +145,22 @@ form.frmAdicionarMinMax {
   justify-content: center;
 }
 
+#frmadInstructivo {
+  display: grid;
+  grid-template-columns: 1fr 100px;
+  grid-gap: 1em;
+  margin: 10px;
+  text-align: center;
+  justify-items: center;
+  align-items: baseline;
+  justify-content: center;
+}
+
+#txtguardarInstructivo {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
 #desinfectante {
   grid-column-start: 1;
   grid-column-end: 2;
