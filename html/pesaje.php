@@ -1,5 +1,5 @@
 <?php
-//require_once('./sesion/sesion.php');
+/* require_once('./sesion/sesion.php'); */
 //require_once('../conexion.php');
 include('modal/modal_cambiarContrasena.php');
 ?>

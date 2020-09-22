@@ -1,23 +1,25 @@
 <?php
+header("Content-Type: text/html;charset=utf-8");
+
 if (!empty($_POST)) {
 	require_once('../../../conexion.php');
 
 	//obtener datos
 	$datos = $_FILES['datosExcel'];
 	$operacion = $_POST['operacion'];
-
+	
 	$datos = file_get_contents($datos['tmp_name']);
-
+	print_r($datos);
 	$datos = explode("\n", $datos);
 	$datos = array_filter($datos);
 
 	// preparar datos
 	foreach ($datos as $data) {
-		$dataList[] = explode(";", $data);
+		$dataList[] = explode(";", strtoupper($data));
 	}
 
-	/* print_r($dataList);
-	exit(); */
+	//print_r($dataList);
+	exit(); 
 
 	//Buscar operacion y ejecutar
 

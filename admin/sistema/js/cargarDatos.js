@@ -30,7 +30,7 @@ function cargarDataExcel(id) {
 
     const formulario = new FormData($('#formDataExcel')[0]);
     formulario.set('operacion', id);
-
+    debugger;
     $.ajax({
 
         url: "php/importar.php",

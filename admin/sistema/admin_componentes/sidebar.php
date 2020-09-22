@@ -1,3 +1,7 @@
+<?php
+    //require_once('../sistema/salir.php');
+?>
+
 <div class="sidebar" data-color="orange">
     <div class="logo">
         <!-- <a href="# class="simple-text logo-mini"></a> -->
@@ -5,9 +9,9 @@
     </div>
     <div class="sidebar-wrapper contenedor-menu" id="sidebar-wrapper">
         <ul class="nav menu">
-            <!-- <li><a href="./dashboard.php"><i class="now-ui-icons design_app"></i>
-                    <p>Tablero de Control</p>
-                </a></li> -->
+            <li><a href="./index.php"><i class="now-ui-icons design_app"></i>
+                    <p>Inicio</p>
+                </a></li>
             <!-- <li><a href="./icons.php"><i class="now-ui-icons education_atom"></i>
                     <p>Icons</p>
                 </a></li>
@@ -46,10 +50,6 @@
                 <li><a href="usuarios.php" id="linkMaestroUsuarios"><i class='large material-icons'>portrait</i><span>Maestro Usuarios</span></a></li>
                 <li><a href="cargos.php" id="linkCargos"><i class='large material-icons'>portrait</i><span>Cargos</span></a></li>
             </ul>
-            <!-- <li><a href="despejedelinea.php"><i class="now-ui-icons design_bullet-list-67"></i>
-                    <p>Despeje de Linea</p>
-                </a></li> -->
-            <!-- <li><a href="./typography.php"><i class="now-ui-icons text_caps-small"></i><p>Typography</p></a></li> -->
         </ul>
     </div>
 </div>

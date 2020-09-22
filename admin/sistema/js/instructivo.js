@@ -17,7 +17,7 @@ $.ajax({
     data: { operacion: "1" },
 
     success: function (response) {
-
+      
         var info = JSON.parse(response);
         let $selectProductos = $('#cmbReferenciaProductos');
 
@@ -127,7 +127,7 @@ function guardarInstructivo() {
     let referencia = $('#cmbReferenciaProductos').val();
     let actividad = $('#txtActividad').val();
     let tiempo = $('#txtTiempo').val();
-    debugger;
+    
     $.ajax({
         type: "POST",
         url: "php/c_instructivo.php",

@@ -9,13 +9,13 @@ if (!empty($_SESSION['active'])) {
             $alert = "Ingrese su usuario y password";
         } else {
             require_once('./conexion.php');
-            
+
             $usuario = $_POST['usuario'];
             $pass = md5($_POST['clave']);
 
             $sql = "SELECT * FROM usuario, modulo WHERE user = :usuario AND clave=:pass AND modulo.id=usuario.id_modulo";
             $query = $conn->prepare($sql);
-            $query->execute(['usuario' => $usuario,'pass' => $pass]);
+            $query->execute(['usuario' => $usuario, 'pass' => $pass]);
             $rows = $query->rowCount();
 
             if ($rows > 0) {
@@ -30,7 +30,9 @@ if (!empty($_SESSION['active'])) {
                 $_SESSION['modulo'] = $data['modulo'];
                 $modulo = $data['modulo'];
 
-                if ($data['id_modulo'] == 1) {
+                if ($data['id_modulo'] == 0) {
+                    header('location: admin/sistema/index.php');
+                } else if ($data['id_modulo'] == 1) {
                     header('location: html/batch.php');
                 } else {
                     header("location: {$modulo}");
@@ -40,9 +42,6 @@ if (!empty($_SESSION['active'])) {
                 echo '<script>alertify.set("notifier","position", "top-right"); alertify.error("El usuario o contraseña no son validos.");</script>';
                 session_destroy();
             }
-
-
         }
-        
     }
 }
