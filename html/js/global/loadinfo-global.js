@@ -159,7 +159,7 @@ $(document).ready(function () {
 
     $.ajax({
         'type': 'POST',
-        'url': '../../php/condicionesmedio.php',
+        'url': 'php/condicionesmedio.php',
         'data': { operacion: "1", modulo: proceso },
         
         success: function (resp) {
