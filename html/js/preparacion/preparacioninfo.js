@@ -133,8 +133,8 @@ $.ajax({
     $('#espec_olor').html(data.olor);
     $('#espec_apariencia').html(data.apariencia);
     $('#espec_poder_espumoso').html(data.poder_espumoso);
-    $('#espec_untosidad').html(data.untosidad);
-
+    //$('#espec_untosidad').html(data.untosidad);
+    $('#espec_untosidad').html(data.untuosidad);
     $('#espec_ph').html(`${data.limite_inferior_ph} a ${data.limite_superior_ph}`);
 
     $('#in_ph').attr('min', data.limite_inferior_ph);
@@ -155,7 +155,7 @@ $.ajax({
     $('#in_viscocidad').attr('min', data.limite_inferior_viscosidad);
     $('#in_viscocidad').attr('max', data.limite_superior_viscosidad);
 
-    $('#espec_untosidad').html(data.untuosidad);
+    
 });
 
 
