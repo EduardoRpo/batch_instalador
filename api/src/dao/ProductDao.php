@@ -37,7 +37,7 @@
     {
       $connection = Connection::getInstance()->getConnection();
       $stmt = $connection->prepare("SELECT producto.referencia, producto.nombre_referencia,
-      color.nombre, olor.nombre, apariencia.nombre,
+      color.nombre as color, olor.nombre as olor, apariencia.nombre as apariencia,
       viscosidad.limite_inferior as limite_inferior_viscosidad ,
       viscosidad.limite_superior as limite_superior_viscosidad,
       densidad_gravedad.limite_inferior as limite_inferior_densidad_gravedad,
@@ -45,8 +45,8 @@
       untuosidad.nombre, poder_espumoso.nombre,
       grado_alcohol.limite_inferior as limite_inferior_grado_alcohol,
       grado_alcohol.limite_superior as limite_superior_grado_alcohol,
-      ph.limite_inferior AS limite_inferior_ph,
-      ph.limite_superior AS limite_superior_ph
+      ph.limite_inferior as limite_inferior_ph,
+      ph.limite_superior as limite_superior_ph
       FROM producto
       LEFT JOIN olor ON olor.id = producto.id_color
       LEFT JOIN color ON color.id = producto.id_color
