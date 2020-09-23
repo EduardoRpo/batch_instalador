@@ -1,0 +1,93 @@
+<div class="modal" id="modalObservaciones" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" style="color: white;">Observaciones</h5>
+      </div>
+      <div class="modal-body">
+        <label style="margin-left: 50px;">Incidencias</label>
+        <label style="margin-left: 390px;">Observaciones</label>
+        
+        <div class="observacion">
+        <label class="categorias">1-Metodo, 2-Materiales, 3-Medicion, 4-Máquina, 5-Mano de Obra, 6-Medio Ambiente, 7-Necesarias </label>
+          <label>1</label>
+          <select class="custom-select" style="font-size: small;">
+          
+            <option value="" hidden selected>METODO</option>
+            <option value=""></option>
+            <option value="">FALTA PROGRAMACIÓN PRODUCCIÓN</option>
+            <option value="">FALTA ESTANDARIZACIÓN PRODUCTO</option>
+            <option value="">FALTA DOCUMENTACIÓN NECESARIA PARA EL CUMPLIMIENTO DE LA LABOR</option>
+            <option value="">FALTA DE CAPACITACIÓN</option>
+            <option value="">FALTA DOCUMENTACIÓN NECESARIA</option>
+          </select>
+          <textarea class="form-control txtObservaciones" aria-label="With textarea"></textarea>
+          <label for="">2</label>
+          <select class="custom-select" style="font-size: small;">
+            <option value="" hidden selected>MATERIALES</option>
+            <option value=""></option>
+            <option value="">FALTANTE MEZCLA MATERIAL BLEND</option>
+            <option value="">MATERIA PRIMA DEFECTUOSA</option>
+            <option value="">FALTANTE DE INSUMOS</option>
+            <option value="">PERSONAL NO SUFICIENTE PARA LA ELABORACION DE LA LABOR</option>
+            <option value="">PRODUCTO SIN ROTULOS</option>
+            <option value="">PRODUCTO NO CONFORME</option>
+          </select>
+          <label for="">3</label>
+          <select class="custom-select" style="font-size: small;">
+            <option value="" hidden selected>MEDICIÓN</option>
+            <option value=""></option>
+            <option value="">DESORDEN PUESTO DE TRABAJO</option>
+            <option value="">TIEMPO INSUFICIENTE PARA SUPLIR LAS LABORES</option>
+          </select>
+          <label for="">4</label>
+          <select class="custom-select" style="font-size: small;">
+            <option value="" hidden selected>MÁQUINA</option>
+            <option value=""></option>
+            <option value="">EQUIPO OBSOLETO Y SIN MANTENIMIENTO</option>
+            <option value="">DAÑO SISTEMA CALENTAMIENTO</option>
+            <option value="">AVERIA SISTEMA MECANICO</option>
+            <option value="">APAGADO MAQUINAS</option>
+            <option value="">FALTA DE BOQUILLAS Y MOLDES</option>
+            <option value="">AVERIA SISTEMA ELECTRICO</option>
+          </select>
+          <label for="">5</label>
+          <select class="custom-select" style="font-size: small;">
+            <option value="" hidden selected>MANO DE OBRA</option>
+            <option value=""></option>
+            <option value="">AUSENCIA DE PERSONAL</option>
+            <option value="">ACCIDENTE DE TRABAJO</option>
+            <option value="">TOMA DE DECISIONES TARDIA</option>
+            <option value="">FALTA DE CAPACITACION</option>
+            <option value="">AGOTAMIENTO</option>
+          </select>
+          <label for="">6</label>
+          <select class="custom-select" style="font-size: small;">
+            <option value="" hidden selected>MEDIO AMBIENTE</option>
+            <option value=""></option>
+            <option value="">TEMPERATURAS MUY ALTAS</option>
+            <option value="">FALTA DE CULTURA ORGANIZACIONAL</option>
+          </select>
+          <label for="">7</label>
+          <select class="custom-select" style="font-size: small;">
+            <option value="" hidden selected>INCIDENCIAS NECESARIAS</option>
+            <option value=""></option>
+            <option value="">MANTENIMIENTO PREVENTIVO</option>
+            <option value="">MONTAJE DE MOLDE O BOQUILLAS</option>
+            <option value="">EMPAQUE DE MATERIAL</option>
+            <option value="">APROBACION DE PRODUCTO</option>
+            <option value="">DESPEJE DE LINEAS POR PRODUCTO Y PROCESO</option>
+            <option value="">SALIDAS NECESARIAS (BAÑO, DESAYUNO, ALMUERZO)</option>
+            <option value="">ASEO PLANTA</option>
+          </select>
+
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Guardar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

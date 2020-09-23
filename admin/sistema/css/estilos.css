@@ -1,0 +1,258 @@
+/* centrar el texto */
+
+.centrado {
+  text-align: center;
+}
+
+/* no muestra las viñetas */
+
+.contenedor-menu ul {
+  list-style: none;
+}
+
+/* Ocultar submenus */
+
+.contenedor-menu .nav ul {
+  display: none;
+}
+
+/* Organizar inputs y label para establecer tiempos */
+
+#frmadTiempos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1em;
+  margin: 10px;
+  text-align: center;
+  justify-items: center;
+  align-items: baseline;
+  justify-content: center;
+}
+
+#frmadParametro {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  margin: 10px;
+  text-align: center;
+  justify-items: center;
+  align-items: baseline;
+  justify-content: center;
+}
+
+#frmadicionarPregunta {
+  display: grid;
+  grid-template-columns: 1fr 100px;
+  /* grid-gap: 5px; */
+  margin: 10px;
+  text-align: center;
+  justify-items: center;
+  align-items: baseline;
+  justify-content: center;
+}
+
+#frmadicionarPreguntaModulo {
+  display: grid;
+  grid-template-columns: 1fr 100px 240px;
+  grid-gap: 5px;
+  margin: 10px;
+  text-align: center;
+  justify-items: center;
+  align-items: baseline;
+  justify-content: center;
+}
+
+#frmAdicionar1 {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  grid-gap: 5px;
+  margin: 10px;
+  text-align: center;
+  justify-items: center;
+  align-items: baseline;
+  justify-content: center;
+}
+
+#frmAdicionar2 {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  grid-gap: 5px;
+  margin: 10px;
+  text-align: center;
+  justify-items: center;
+  align-items: baseline;
+  justify-content: center;
+}
+
+#frmAdicionar3 {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  grid-gap: 5px;
+  margin: 10px;
+  text-align: center;
+  justify-items: center;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.btnguardar {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+#frmAdicionarMateriaPrima {
+  display: grid;
+  grid-template-columns: 100px repeat(2, 1fr);
+  grid-gap: 10px;
+  margin: 10px;
+  text-align: center;
+  justify-items: center;
+  align-items: baseline;
+  justify-content: center;
+}
+
+#btnguardarMateriaPrima {
+  grid-column-start: 3;
+  grid-column-end: 4;
+}
+
+#btnguardarCondiciones {
+  grid-column-start: 3;
+  grid-column-end: 4;
+}
+
+/* Organizar inputs y label para establecer tiempos */
+
+form.frmAdicionar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1em;
+  margin: 10px;
+  text-align: center;
+  justify-items: center;
+  align-items: baseline;
+  justify-content: center;
+}
+
+form.frmAdicionarMinMax {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1em;
+  margin: 10px;
+  text-align: center;
+  justify-items: center;
+  align-items: baseline;
+  justify-content: center;
+}
+
+#frmadInstructivo {
+  display: grid;
+  grid-template-columns: 1fr 100px;
+  grid-gap: 1em;
+  margin: 10px;
+  text-align: center;
+  justify-items: center;
+  align-items: baseline;
+  justify-content: center;
+}
+
+#txtguardarInstructivo {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+#desinfectante {
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+#concentracion {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+#guardarDesinfectante {
+  grid-column-start: 3;
+  grid-column-end: 4;
+}
+
+.tabla1 {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+/* #densidad {
+  grid-column-start: 2;
+  grid-column-end: 3;
+} */
+
+#guardarDesinfectante {
+  grid-column-start: 3;
+  grid-column-end: 4;
+}
+
+/* organizar maquinaria */
+#txtEquipo {
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+#cmbLinea {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+/* Preguntas */
+
+#btnguardarDespeje {
+  grid-column-start: 3;
+}
+
+/*
+/* #lblPregunta {
+  grid-column: 1/4;
+} */
+
+/* #txtRespuesta {
+  grid-column: 1/2;
+} */
+
+/* Organizar seleccion formulas */
+.selproductos {
+  display: flex;
+}
+
+/* organizar adicionar Formula */
+
+#frmadFormulas {
+  display: grid;
+  grid-template-columns: 120px repeat(2, 1fr) 100px;
+  grid-gap: 1em;
+  margin: 10px;
+  text-align: center;
+  justify-items: center;
+  align-items: baseline;
+  justify-content: center;
+}
+
+#guardarFormula {
+  grid-column-start: 4;
+  grid-column-end: 5;
+}
+
+#frmaddMP {
+  display: grid;
+  grid-template-columns: 100px repeat(2, 1fr);
+  grid-gap: 1em;
+  margin: 10px;
+  text-align: center;
+  justify-items: center;
+  align-items: baseline;
+  justify-content: center;
+}
+
+#guardarMP {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  justify-self: self-end;
+}

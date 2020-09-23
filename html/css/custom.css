@@ -1,0 +1,41 @@
+.dataTable tbody td {
+    font-size: 15px;
+}
+
+.displayallinfo {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.25;
+    color: #464a4c;
+    background-color: #fff;
+    background-image: none;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+    height: 38px !important;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+
+.card-header b {
+    font-size: 1.2rem;
+}
+
+.card-header .btn-link {
+    font-size: 1.2rem;
+}
+
+.text-sucess {
+    color: #5cb85c !important;
+}
+
+.proceso-instructivo {
+    color: #67757c;
+}
+
+#tablePesaje tbody tr {
+    font-size: 13px;
+}
