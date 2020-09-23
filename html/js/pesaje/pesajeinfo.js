@@ -89,9 +89,9 @@ $(document).ready(function () {
             $.extend(true, {}, {
                 extend: 'pdfHtml5',
                 text: 'Exportar PDF',
-                title: 'DISPENSACIÓN ' + numero_orden,  //DEJAR LA OP EN VEZ DE LA REFERENCIA DEL PRODUCTO
+                title: 'DISPENSACIÓN ' + batch.numero_orden,  
 
-                messageTop: 'Ingrese el número de Tanque   _____ ', //VALIDAR PARA QUE SE PREGUNTE EL NÚMERO DE TANQUE
+                //messageTop: 'Ingrese el número de Tanque   _____ ', //VALIDAR PARA QUE SE PREGUNTE EL NÚMERO DE TANQUE
 
                 exportOptions: {
                     columns: [0, 1, 3]
