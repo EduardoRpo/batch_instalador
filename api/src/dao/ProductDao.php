@@ -42,7 +42,7 @@
       viscosidad.limite_superior as limite_superior_viscosidad,
       densidad_gravedad.limite_inferior as limite_inferior_densidad_gravedad,
       densidad_gravedad.limite_superior as limite_superior_densidad_gravedad,
-      untuosidad.nombre, poder_espumoso.nombre,
+      untuosidad.nombre as untuosidd, poder_espumoso.nombre as poder_espumoso,
       grado_alcohol.limite_inferior as limite_inferior_grado_alcohol,
       grado_alcohol.limite_superior as limite_superior_grado_alcohol,
       ph.limite_inferior as limite_inferior_ph,
