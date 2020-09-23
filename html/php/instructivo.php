@@ -8,4 +8,4 @@ $sql = "SELECT * FROM instructivo_preparacion WHERE id_producto = :referencia";
 $query = $conn->prepare($sql);
 $result = $query->execute(['referencia' => $referencia]);
 
-ejecutarQuery($result, $conn);
+ejecutarQuerySelect($conn, $query);
