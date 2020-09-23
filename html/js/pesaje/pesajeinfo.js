@@ -1,7 +1,5 @@
 let flagWeight = false;
 
-
-
 /* Carga de Cargos  */
 
 $.ajax({
@@ -91,7 +89,7 @@ $(document).ready(function () {
             $.extend(true, {}, {
                 extend: 'pdfHtml5',
                 text: 'Exportar PDF',
-                title: 'DISPENSACIÓN ' + batch.referencia,  //DEJAR LA OP EN VEZ DE LA REFERENCIA DEL PRODUCTO
+                title: 'DISPENSACIÓN ' + numero_orden,  //DEJAR LA OP EN VEZ DE LA REFERENCIA DEL PRODUCTO
 
                 messageTop: 'Ingrese el número de Tanque   _____ ', //VALIDAR PARA QUE SE PREGUNTE EL NÚMERO DE TANQUE
 
