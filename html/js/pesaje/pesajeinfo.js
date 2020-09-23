@@ -89,7 +89,7 @@ $(document).ready(function () {
             $.extend(true, {}, {
                 extend: 'pdfHtml5',
                 text: 'Exportar PDF',
-                title: 'DISPENSACIÓN ' + batch.numero_orden,  
+                title: 'DISPENSACIÓN ', //+ batch.numero_orden,  
 
                 //messageTop: 'Ingrese el número de Tanque   _____ ', //VALIDAR PARA QUE SE PREGUNTE EL NÚMERO DE TANQUE
 
