@@ -5,8 +5,6 @@ let proceso = $('h1:first').text();
 var batch;
 let template;
 
-
-
 Date.prototype.toDateInputValue = (function () {
     var local = new Date(this);
     local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
@@ -161,16 +159,16 @@ $(document).ready(function () {
 
     $.ajax({
         'type': 'POST',
-        'url': '../../html/php/condicionesmedio.php',
+        'url': '../../php/condicionesmedio.php',
         'data': { operacion: "1", modulo: proceso },
         
         success: function (resp) {
             let t = JSON.parse(resp);
-            let tiempo = Math.round(Math.random() * (t.t_max - t.t_min) + parseInt(t.t_min));
-            //setTimeout(function(){  $("#m_CondicionesMedio").modal("show").modal({backdrop: 'static', keyboard: false}); }, tiempo*60000);
+            let tiempo = Math.round(Math.random() * (t.data[0].t_max - t.data[0].t_min) + parseInt(t.t_min));
+            
             setTimeout(function () {
                 $("#m_CondicionesMedio").modal("show");
-            }, tiempo * 60000); //.modal({backdrop: 'static', keyboard: false})
+            }, tiempo * 60000); 
         }
     });
     return false;
