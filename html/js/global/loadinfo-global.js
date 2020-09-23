@@ -171,7 +171,7 @@ $(document).ready(function () {
             }, tiempo * 60000); 
         }
     });
-    return false;
+    //return false;
 
 });
 
@@ -207,7 +207,7 @@ function guardar_condicionesMedio() {
             alertify.set("notifier", "position", "top-right"); alertify.success("Condiciones del Medio Almacenado");
         }
     });
-    return false;
+   //return false;
 }
 
 

@@ -162,8 +162,12 @@ $.ajax({
 /* Carga instructivo preparación para producto */
 
 $.ajax({
-    url: `/api/instructivos/${referencia}`,
-    type: 'GET'
+    /* url: `/api/instructivos/${referencia}`,
+    type: 'GET' */
+    type: "POST",
+    url: '../../html/php/instructivo.php',
+    data: {referencia: referencia}
+    
 }).done((data, status, xhr) => {
     $('#pasos_instructivo').html('');
     pasos = data;
