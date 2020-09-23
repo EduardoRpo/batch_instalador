@@ -165,7 +165,7 @@ $.ajax({
     /* url: `/api/instructivos/${referencia}`,
     type: 'GET' */
     type: "POST",
-    url: '../../php/instructivo.php',
+    url: '../../html/php/instructivo.php',
     data: {referencia: referencia}
 
 }).done((data, status, xhr) => {

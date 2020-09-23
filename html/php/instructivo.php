@@ -8,4 +8,10 @@ $sql = "SELECT * FROM instructivo_preparacion WHERE id_producto = :referencia";
 $query = $conn->prepare($sql);
 $result = $query->execute(['referencia' => $referencia]);
 
-ejecutarQuerySelect($conn, $query);
+if ($result) {
+    while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
+        $arreglo["data"][] = $data;
+    }
+
+    echo json_encode(utf8ize($arreglo), JSON_UNESCAPED_UNICODE);
+}
