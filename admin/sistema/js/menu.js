@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 $('#inicio').click(function (e) {
     e.preventDefault();
     $('.contenedor-menu .menu ul.abrir').slideUp();
@@ -5,6 +6,9 @@ $('#inicio').click(function (e) {
     $('.contenedor-menu .menu ul.abrir2').slideUp();
     $(location).attr('href', "index.php");
 });
+=======
+
+>>>>>>> bdcf3eded27049ef6a38761b92ec5a19772fac9b
 
 $('#parametrosg').click(function (e) {
     e.preventDefault();

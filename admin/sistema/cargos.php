@@ -1,4 +1,12 @@
+<<<<<<< HEAD
 <?php require_once('php/sesion/sesion.php');?>
+=======
+<?php
+//include('./modal/m_crearUsuarios.php');
+?>
+
+
+>>>>>>> bdcf3eded27049ef6a38761b92ec5a19772fac9b
 <!DOCTYPE html>
 <html lang="es">
 
@@ -46,7 +54,11 @@
       <div class="panel-header panel-header-sm"></div>
       <div class="content">
         <div class="row">
+<<<<<<< HEAD
           <div class="col-md-10">
+=======
+          <div class="col-md-8">
+>>>>>>> bdcf3eded27049ef6a38761b92ec5a19772fac9b
             <div class="card">
               <div class="card-header">
                 <h4 class="card-title">Cargos</h4>

@@ -52,12 +52,26 @@ include('./html/modal/modal_recuperarClave.php');
 			</span>
 		</div>
 
+<<<<<<< HEAD
 		<div class="mb-3">
 			<a href="" data-toggle="modal" data-target="#ModalRecuperarClave">Recuperar Contraseña</a>
 		</div>
 
 		<button class="btn btn-lg btn-success btn-block mb-3" type="submit">Iniciar</button>
 		<!-- <div class=""></div> -->
+=======
+
+		<div class="mb-3">
+			<!-- <div class="form-check">
+    			<input type="checkbox" class="form-check-input" id="Adminchecked">
+    				<label class="form-check-label" for="Adminchecked">Administrador</label>
+			</div> -->
+			<a href="" data-toggle="modal" data-target="#ModalRecuperarClave">Recuperar Contraseña</a>
+		</div>
+
+		<button class="btn btn-lg btn-success btn-block mb-3" type="submit">Iniciar</button><!-- onclick="window.location='/html/crear-batch.php'" -->
+		<div class=""></div>
+>>>>>>> bdcf3eded27049ef6a38761b92ec5a19772fac9b
 		<div class="alert alert-danger mb" role="alert"> <?php echo isset($alert) ? $alert : ''; ?> </div>
 		<p class="mt-5 mb-3 text-muted">&copy; 2020</p>
 	</form>

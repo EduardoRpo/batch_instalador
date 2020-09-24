@@ -18,7 +18,11 @@
                <i class="fa fa-user-circle" aria-hidden="true"></i> <!-- <i class="fas fa-chevron-circle-down"> </i>--></a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuenlace">
               <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modalCambiarContrasena">Cambiar contraseña</a>
+<<<<<<< HEAD
               <a href="sesion/salir.php" class="dropdown-item">Cerrar sesión</a>
+=======
+              <a href="salir.php" class="dropdown-item">Cerrar sesión</a>
+>>>>>>> bdcf3eded27049ef6a38761b92ec5a19772fac9b
             </div>
           </li>
         </ul>
