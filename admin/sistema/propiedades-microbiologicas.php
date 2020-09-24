@@ -1,11 +1,4 @@
-<<<<<<< HEAD
 <?php require_once('php/sesion/sesion.php');?>
-=======
-<?php
-//include('./modal/m_crearUsuarios.php');
-?>
-
->>>>>>> bdcf3eded27049ef6a38761b92ec5a19772fac9b
 
 <!DOCTYPE html>
 <html lang="es">

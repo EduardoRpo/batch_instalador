@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 <?php require_once('php/sesion/sesion.php');?>
 
-=======
->>>>>>> bdcf3eded27049ef6a38761b92ec5a19772fac9b
 <!DOCTYPE html>
 <html lang="es">
 
@@ -19,10 +16,7 @@
   <!-- CSS Files -->
   <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
   <link href="../assets/css/now-ui-dashboard.css?v=1.5.0" rel="stylesheet" />
-<<<<<<< HEAD
   <link href="../sistema/css/estilos.css" rel="stylesheet" />
-=======
->>>>>>> bdcf3eded27049ef6a38761b92ec5a19772fac9b
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <!-- <link href="../assets/demo/demo.css" rel="stylesheet" /> -->
   <!-- Icons -->
