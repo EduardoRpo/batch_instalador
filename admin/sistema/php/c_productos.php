@@ -41,7 +41,7 @@ switch ($op) {
     case 3: // Guardar data
         if (!empty($_POST)) {
             $editar = $_POST['editar'];
-
+            
             //carga la informacion del POST
             foreach ($_POST as $nombre_campo => $valor) {
                 $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";
@@ -51,7 +51,7 @@ switch ($op) {
             $nombre = strtoupper($nombre);
 
             if ($editar > 0) {
-                $query = "UPDATE producto SET referencia=:referencia, nombre_referencia=':nombre', unidad_empaque=:empaque, 
+                $sql = "UPDATE producto SET referencia=:referencia, nombre_referencia=':nombre', unidad_empaque=:empaque, 
             id_nombre_producto =:nombre_producto, id_notificacion_sanitaria =:notificacion_sanitaria, id_linea = :linea, 
             id_marca =:marca, id_propietario =:propietario, id_presentacion_comercial= :presentacion_comercial, 
             id_color =:color, id_olor= :olor, id_apariencia = :apariencia, id_untuosidad=:untuosidad, 
@@ -78,33 +78,48 @@ switch ($op) {
 
                 //valida si el registro existe
 
-                $query = "SELECT * FROM producto WHERE referencia='$referencia'";
+                $sql = "SELECT * FROM producto WHERE referencia =:referencia";
                 $query = $conn->prepare($sql);
-                $query->execute(['cargo' => $cargo]);
+                $query->execute(['referencia' => $referencia]);
                 $rows = $query->rowCount();
 
                 if ($rows > 0) {
                     echo '2';
                     exit();
                 } else {
-                    $query = "INSERT INTO producto (referencia, nombre_referencia, unidad_empaque, id_nombre_producto, 
+                    $sql = "INSERT INTO producto (referencia, nombre_referencia, unidad_empaque, id_nombre_producto, 
                     id_notificacion_sanitaria, id_linea, id_marca, id_propietario, id_presentacion_comercial, id_color, id_olor, 
                     id_apariencia, id_untuosidad, id_poder_espumoso, id_recuento_mesofilos, id_pseudomona, id_escherichia, 
                     id_staphylococcus, id_ph, id_viscosidad, id_densidad_gravedad, id_grado_alcohol)
-                    VALUES (:referencia, ':nombre', :empaque, :nombre_producto, :notificacion_sanitaria, 
+                    VALUES (:referencia, :nombre, :empaque, :nombre_producto, :notificacion_sanitaria, 
                     :linea, :marca, :propietario, :presentacion_comercial, :color, :olor, :apariencia, 
                     :untuosidad, :poder_espumoso, :recuento_mesofilos, :pseudomona, :escherichia, :staphylococcus,
                     :ph, :viscosidad, :densidad_gravedad, :grado_alcohol)";
 
                     $query = $conn->prepare($sql);
                     $result = $query->execute([
-                        'referencia' => $referencia, 'nombre' => $nombre, 'empaque' => $empaque, 'nombre_producto' => $nombre_producto,
-                        'notificacion_sanitaria' => $notificacion_sanitaria, 'linea' => $linea, 'marca' => $marca, 'propietario' => $propietario,
-                        'presentacion_comercial' => $presentacion_comercial, 'color' => $color, 'olor' => $olor, 'apariencia' => $apariencia,
-                        'untuosidad' => $untuosidad, 'poder_espumoso' => $poder_espumoso, 'recuento_mesofilos' => $recuento_mesofilos,
-                        'pseudomona' => $pseudomona, 'escherichia' => $escherichia, 'staphylococcus' => $staphylococcus, 'ph' => $ph,
-                        'viscosidad' => $viscosidad, 'densidad_gravedad' => $densidad_gravedad, 'grado_alcohol' => $grado_alcohol,
-                        'id_referencia' => $id_referencia
+                        'referencia' => $referencia, 
+                        'nombre' => $nombre, 
+                        'empaque' => $empaque, 
+                        'nombre_producto' => $nombre_producto,
+                        'notificacion_sanitaria' => $notificacion_sanitaria, 
+                        'linea' => $linea, 
+                        'marca' => $marca, 
+                        'propietario' => $propietario,
+                        'presentacion_comercial' => $presentacion_comercial, 
+                        'color' => $color, 
+                        'olor' => $olor, 
+                        'apariencia' => $apariencia,
+                        'untuosidad' => $untuosidad, 
+                        'poder_espumoso' => $poder_espumoso, 
+                        'recuento_mesofilos' => $recuento_mesofilos,
+                        'pseudomona' => $pseudomona, 
+                        'escherichia' => $escherichia, 
+                        'staphylococcus' => $staphylococcus, 
+                        'ph' => $ph,
+                        'viscosidad' => $viscosidad, 
+                        'densidad_gravedad' => $densidad_gravedad, 
+                        'grado_alcohol' => $grado_alcohol,
                     ]);
                     ejecutarQuery($result, $conn);
                 }

@@ -44,7 +44,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                   <a class="dropdown-item" href="#">Cambiar Contraseña</a>
-                  <a class="dropdown-item" href="salir.php">Cerrar Sesión</a>
+                  <a class="dropdown-item" href="php/sesion/salir.php">Cerrar Sesión</a>
                 </div>
               </li>
 <!--               <li class="nav-item">

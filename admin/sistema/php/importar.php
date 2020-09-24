@@ -1,5 +1,4 @@
 <?php
-header("Content-Type: text/html;charset=utf-8");
 
 if (!empty($_POST)) {
 	require_once('../../../conexion.php');
@@ -17,9 +16,6 @@ if (!empty($_POST)) {
 	foreach ($datos as $data) {
 		$dataList[] = explode(";", strtoupper($data));
 	}
-
-	//print_r($dataList);
-	/* exit();  */
 
 	//Buscar operacion y ejecutar
 
@@ -41,7 +37,7 @@ if (!empty($_POST)) {
 			$conn->query("ALTER TABLE condicionesmedio_tiempo AUTO_INCREMENT = 1");
 
 			foreach ($dataList as $data) {
-				$conn->query("INSERT INTO condicionesmedio_tiempo (id_modulo, min, max) 
+				$conn->query("INSERT INTO condicionesmedio_tiempo (id_modulo, t_min, t_max) 
 				  VALUES ('{$data[0]}', '{$data[1]}', '{$data[2]}')");
 			}
 			break;

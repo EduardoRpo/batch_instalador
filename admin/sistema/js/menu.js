@@ -1,4 +1,10 @@
-
+$('#inicio').click(function (e) {
+    e.preventDefault();
+    $('.contenedor-menu .menu ul.abrir').slideUp();
+    $('.contenedor-menu .menu ul.abrir1').slideUp();
+    $('.contenedor-menu .menu ul.abrir2').slideUp();
+    $(location).attr('href', "index.php");
+});
 
 $('#parametrosg').click(function (e) {
     e.preventDefault();

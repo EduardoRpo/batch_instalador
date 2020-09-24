@@ -3,8 +3,9 @@
 if (!empty($_SESSION['active'])) {
     header('location: html/batch.php');
 } else {
-    $alert = '';
+
     if (!empty($_POST)) {
+        $alert = '';
         if (empty($_POST['usuario']) or empty($_POST['clave'])) {
             $alert = "Ingrese su usuario y password";
         } else {
@@ -13,6 +14,8 @@ if (!empty($_SESSION['active'])) {
             $usuario = $_POST['usuario'];
             $pass = md5($_POST['clave']);
 
+            print_r($usuario);
+
             $sql = "SELECT * FROM usuario, modulo WHERE user = :usuario AND clave=:pass AND modulo.id=usuario.id_modulo";
             $query = $conn->prepare($sql);
             $query->execute(['usuario' => $usuario, 'pass' => $pass]);
@@ -20,7 +23,7 @@ if (!empty($_SESSION['active'])) {
 
             if ($rows > 0) {
                 $data = $query->fetch(PDO::FETCH_ASSOC);
-                $_SESSION['active'] = true;
+                $_SESSION['estado'] = true;
                 $_SESSION['idUser'] = $data['id'];
                 $_SESSION['nombre'] = $data['nombre'];
                 $_SESSION['apellido'] = $data['apellido'];
@@ -28,14 +31,18 @@ if (!empty($_SESSION['active'])) {
                 $_SESSION['idModulo'] = $data['id_modulo'];
                 $_SESSION['cargo'] = $data['id_cargo'];
                 $_SESSION['modulo'] = $data['modulo'];
+                $_SESSION['rol'] = $data['rol'];
+                //$_SESSION['actividad'] = time();
                 $modulo = $data['modulo'];
 
-                if ($data['id_modulo'] == 0) {
+                if ($data['rol'] == 1) {
                     header('location: admin/sistema/index.php');
-                } else if ($data['id_modulo'] == 1) {
+                } else if ($data['rol'] == 2) {
                     header('location: html/batch.php');
-                } else {
+                } else if ($data['rol'] == 3) {
                     header("location: {$modulo}");
+                } else {
+                    header('location: admin/sistema/index.php');
                 }
             } else {
                 $alert = "El usuario o la contraseña no son validos";

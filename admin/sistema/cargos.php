@@ -1,8 +1,4 @@
-<?php
-//include('./modal/m_crearUsuarios.php');
-?>
-
-
+<?php require_once('php/sesion/sesion.php');?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -50,7 +46,7 @@
       <div class="panel-header panel-header-sm"></div>
       <div class="content">
         <div class="row">
-          <div class="col-md-8">
+          <div class="col-md-10">
             <div class="card">
               <div class="card-header">
                 <h4 class="card-title">Cargos</h4>

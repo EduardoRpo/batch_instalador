@@ -1,5 +1,6 @@
-<?php
-include_once('./modal/m_productos.php');
+<?php 
+require_once('php/sesion/sesion.php');
+require_once('modal/m_productos.php');
 ?>
 
 <!DOCTYPE html>

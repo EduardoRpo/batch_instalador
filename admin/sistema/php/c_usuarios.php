@@ -6,7 +6,7 @@ $op = $_POST['operacion'];
 
 switch ($op) {
     case 1: //listar Usuarios
-        $query = "SELECT u.id, u.nombre, u.apellido, u.email, c.cargo, m.modulo, u.user FROM usuario u INNER JOIN cargo c INNER JOIN modulo m ON u.id_cargo = c.id AND u.id_modulo = m.id";
+        $query = "SELECT u.id, u.nombre, u.apellido, u.email, c.cargo, m.modulo, u.user, u.rol FROM usuario u INNER JOIN cargo c INNER JOIN modulo m ON u.id_cargo = c.id AND u.id_modulo = m.id";
         ejecutarQuerySelect($conn, $query);
         break;
 
@@ -24,20 +24,9 @@ switch ($op) {
             $email = $_POST['email'];
             $cargo = $_POST['cargo'];
             $modulo = $_POST['modulo'];
+            $rol = $_POST['rol'];
             $usuario = $_POST['usuario'];
             $clave = $_POST['clave'];
-
-
-            /*  var_dump($nombres);
-            var_dump($apellidos);
-            var_dump($email);
-            var_dump($cargo);
-            var_dump($modulo);
-            var_dump($editar);
-            var_dump($clave);
-            var_dump($usuario);
-
-            exit(); */
 
             if ($editar == 0) {
                 $sql = "SELECT * FROM usuario WHERE user= :usuario";
@@ -49,8 +38,8 @@ switch ($op) {
                     echo '2';
                     exit();
                 } else {
-                    $sql = "INSERT INTO usuario (nombre, apellido, email, user, clave, id_modulo, id_cargo) 
-                            VALUES(:nombre, :apellido, :email, :user, :clave, :id_modulo, :id_cargo)";
+                    $sql = "INSERT INTO usuario (nombre, apellido, email, user, clave, rol, id_modulo, id_cargo) 
+                            VALUES(:nombre, :apellido, :email, :user, :clave, :rol, :id_modulo, :id_cargo)";
                     $query = $conn->prepare($sql);
                     $result = $query->execute([
                         'nombre' => $nombres,
@@ -58,6 +47,7 @@ switch ($op) {
                         'email' => $email,
                         'user' => $usuario,
                         'clave' => md5($clave),
+                        'rol' => $rol,
                         'id_modulo' => $modulo,
                         'id_cargo' => $cargo
                     ]);
@@ -67,19 +57,20 @@ switch ($op) {
                 $id = $_POST['id'];
 
                 if (empty($clave)) {
-                    $sql = "UPDATE usuario SET nombre =:nombre, apellido =:apellido, email =:email, user =:user, id_modulo =:modulo, id_cargo =:cargo WHERE id = :id";
+                    $sql = "UPDATE usuario SET nombre =:nombre, apellido =:apellido, email =:email, user =:user, rol =:rol, id_modulo =:modulo, id_cargo =:cargo WHERE id = :id";
                     $query = $conn->prepare($sql);
                     $result = $query->execute([
                         'nombre' => $nombres,
                         'apellido' => $apellidos,
                         'email' => $email,
                         'user' => $usuario,
+                        'rol' => $rol,
                         'modulo' => $modulo,
                         'cargo' => $cargo,
                         'id' => $id
                     ]);
                 } else {
-                    $sql = "UPDATE usuario SET nombre =:nombre, apellido =:apellido, email =:email, user =:user, clave =:clave, id_modulo =:modulo, id_cargo =:cargo WHERE id = :id";
+                    $sql = "UPDATE usuario SET nombre =:nombre, apellido =:apellido, email =:email, user =:user, clave =:clave, rol=:rol, id_modulo =:modulo, id_cargo =:cargo WHERE id = :id";
                     $query = $conn->prepare($sql);
                     $result = $query->execute([
                         'nombre' => $nombres,
@@ -87,6 +78,7 @@ switch ($op) {
                         'email' => $email,
                         'user' => $usuario,
                         'clave' => md5($clave),
+                        'rol' => $rol,
                         'modulo' => $modulo,
                         'cargo' => $cargo,
                         'id' => $id

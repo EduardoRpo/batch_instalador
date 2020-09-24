@@ -13,9 +13,11 @@ $('.contenedor-menu .menu ul.abrir2').show();
 
 $(document).ready(function () {
     $("#listaUsuarios").DataTable({
-        scrollY: '50vh',
+         /* scrollY: '50vh', */
+
+        pageLength: 5,
         scrollCollapse: true,
-        paging: false,
+        /* paging: false, */
         language: { url: 'admin_componentes/es-ar.json' },
 
         "ajax": {
@@ -33,7 +35,13 @@ $(document).ready(function () {
             { "data": "email" },
             { "data": "cargo" },
             { "data": "modulo" },
-            { "data": "user" }
+            { "data": "user" },
+            { "data": "rol" ,
+            render: (data, type, row) => {
+                'use strict';
+                return data == 1 ? 'Superusuario' : data == 2 ? 'Administrador' : 'Usuario';
+            }
+        }
         ]
     });
 });

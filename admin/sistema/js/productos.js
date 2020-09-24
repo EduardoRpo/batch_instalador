@@ -12,7 +12,8 @@ cargarDatosProductos();
 $(document).ready(function () {
 
   $('#tblProductos').DataTable({
-    scrollY: '45vh',
+    /* scrollY: '45vh', */
+    pageLength: 5,
     scrollCollapse: true,
     paging: false,
     language: { url: 'admin_componentes/es-ar.json' },
@@ -55,6 +56,7 @@ $(document).ready(function () {
 /* Cargar Modal para Crear productos */
 
 function cargarModalProductos() {
+
   editar = 0;
   $('#m_productos').modal('show');
   $('#m_productos').find("input, select").val('').end();
@@ -174,7 +176,7 @@ $(document).on('click', '#btnguardarProductos', function (e) {
     }
   }
 
-  /* Construye un ForData de todos los datos */
+  /* Construye un FormData para todos los datos */
 
   const producto = new FormData($('#frmagregarProductos')[0]);
   producto.set('operacion', 3);
@@ -187,7 +189,7 @@ $(document).on('click', '#btnguardarProductos', function (e) {
     processData: false,
     contentType: false,
 
-    success: function (response) {
+    success: function (r) {
 
       if (r == 1) {
         alertify.set("notifier", "position", "top-right"); alertify.success("Almacenado con éxito.");

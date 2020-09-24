@@ -75,6 +75,17 @@
                           <input type="password" name="clave" id="clave" class="form-control" placeholder="Clave de Acceso" required>
                         </div>
                       </div>
+                      <div class="col-md-4 pl-1">
+                        <div class="form-group">
+                          <label>Rol</label>
+                          <select class="form-control" name="rol" id="rol">
+                            <option value="" disabled selected>Selecciona una opción</option>
+                            <option value="1">SUPERUSUARIO</option>
+                            <option value="2">ADMINISTRADOR</option>
+                            <option value="3">USUARIO</option>
+                          </select>
+                        </div>
+                      </div>
                     </div>
                     <button id="btnCerrar" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     <button id="btnguardarUsuarios" type="submit" class="btn btn-primary">Crear Usuario</button>

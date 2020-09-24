@@ -1,6 +1,8 @@
 <?php
+require_once('php/sesion/sesion.php');
 include_once('./modal/m_crearUsuarios.php');
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -71,6 +73,7 @@ include_once('./modal/m_crearUsuarios.php');
                         <th>Cargo</th>
                         <th>Módulo</th>
                         <th>Usuario</th>
+                        <th>Rol</th>
                       </tr>
                     </thead>
                     <tbody>

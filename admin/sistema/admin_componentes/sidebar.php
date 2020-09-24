@@ -1,7 +1,3 @@
-<?php
-    //require_once('../sistema/salir.php');
-?>
-
 <div class="sidebar" data-color="orange">
     <div class="logo">
         <!-- <a href="# class="simple-text logo-mini"></a> -->
@@ -9,7 +5,7 @@
     </div>
     <div class="sidebar-wrapper contenedor-menu" id="sidebar-wrapper">
         <ul class="nav menu">
-            <li><a href="./index.php"><i class="now-ui-icons design_app"></i>
+            <li id="inicio"><a href="./"><i class="now-ui-icons design_app"></i>
                     <p>Inicio</p>
                 </a></li>
             <!-- <li><a href="./icons.php"><i class="now-ui-icons education_atom"></i>
