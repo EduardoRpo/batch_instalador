@@ -318,10 +318,7 @@
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script><!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
   <!-- <script src="../assets/demo/demo.js"></script> -->
-<<<<<<< HEAD
   <script src="js/menu.js"></script>
-=======
->>>>>>> bdcf3eded27049ef6a38761b92ec5a19772fac9b
   <script>
    /*  $(document).ready(function() {
       // Javascript method's body can be found in assets/js/demos.js

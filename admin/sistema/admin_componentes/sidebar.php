@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-=======
-<?php
-    //require_once('../sistema/salir.php');
-?>
-
->>>>>>> bdcf3eded27049ef6a38761b92ec5a19772fac9b
 <div class="sidebar" data-color="orange">
     <div class="logo">
         <!-- <a href="# class="simple-text logo-mini"></a> -->
@@ -12,11 +5,7 @@
     </div>
     <div class="sidebar-wrapper contenedor-menu" id="sidebar-wrapper">
         <ul class="nav menu">
-<<<<<<< HEAD
             <li id="inicio"><a href="./"><i class="now-ui-icons design_app"></i>
-=======
-            <li><a href="./index.php"><i class="now-ui-icons design_app"></i>
->>>>>>> bdcf3eded27049ef6a38761b92ec5a19772fac9b
                     <p>Inicio</p>
                 </a></li>
             <!-- <li><a href="./icons.php"><i class="now-ui-icons education_atom"></i>
