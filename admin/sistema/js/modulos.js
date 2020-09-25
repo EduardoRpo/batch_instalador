@@ -19,7 +19,7 @@ $(document).ready(function () {
             url: "php/c_modulos.php",
             data: { operacion: 1 },
         },
-
+        
         "columns": [
             { "data": "id" },
             { "data": "modulo" },
@@ -27,7 +27,9 @@ $(document).ready(function () {
             { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" }
 
         ]
+        
     });
+  
 });
 
 /* Adicionar Proceso */

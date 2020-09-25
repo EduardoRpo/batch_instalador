@@ -24,6 +24,13 @@ $(document).ready(function () {
       data: { operacion: 1 },
     },
 
+    "fnDrawCallback": function() {
+      
+      setTimeout(function() {
+          $('.loader').remove()
+        }, 20000);
+      },
+
     "columns": [
       { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Editar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
       { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" },

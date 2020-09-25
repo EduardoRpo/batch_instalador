@@ -57,8 +57,9 @@ require_once('modal/m_productos.php');
                 <button type="button" class="btn btn-primary" onclick="cargarModalProductos();">Crear Productos</button>
               </div>
               <div class="card-body">
+                <div class="loader"></div> 
                 <div class="table-responsive">
-                  <table id="tblProductos" class="display" style="width:100%">
+                  <table id="tblProductos" class="display" style="width:100%; font-size: small;">
                     <thead>
                       <tr>
                         <th></th>

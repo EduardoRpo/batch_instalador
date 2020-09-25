@@ -62,6 +62,7 @@
                 </form>
                 <hr>
               </div>
+              
               <div class="card-body">
                 <div class="table-responsive">
                   <table id="tblModulos" class="table-striped row-borde" style="width:100%">
