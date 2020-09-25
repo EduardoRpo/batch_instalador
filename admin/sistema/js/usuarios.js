@@ -13,17 +13,11 @@ $('.contenedor-menu .menu ul.abrir2').show();
 
 $(document).ready(function () {
     $("#listaUsuarios").DataTable({
-<<<<<<< HEAD
          /* scrollY: '50vh', */
 
         pageLength: 5,
         scrollCollapse: true,
         /* paging: false, */
-=======
-        scrollY: '50vh',
-        scrollCollapse: true,
-        paging: false,
->>>>>>> bdcf3eded27049ef6a38761b92ec5a19772fac9b
         language: { url: 'admin_componentes/es-ar.json' },
 
         "ajax": {
@@ -41,7 +35,6 @@ $(document).ready(function () {
             { "data": "email" },
             { "data": "cargo" },
             { "data": "modulo" },
-<<<<<<< HEAD
             { "data": "user" },
             { "data": "rol" ,
             render: (data, type, row) => {
@@ -49,9 +42,6 @@ $(document).ready(function () {
                 return data == 1 ? 'Superusuario' : data == 2 ? 'Administrador' : 'Usuario';
             }
         }
-=======
-            { "data": "user" }
->>>>>>> bdcf3eded27049ef6a38761b92ec5a19772fac9b
         ]
     });
 });
@@ -62,12 +52,12 @@ function cargarselectores(selector) {
 
     $.ajax({
         method: 'POST',
-        url: 'php/c_productos.php',
+        url: 'php/c_usuarios.php',
         data: { tabla: selector, operacion: 4 },
 
         success: function (response) {
-            var info = JSON.parse(response);
-            let $select = $(`#${selector}`);
+            const info = JSON.parse(response);
+            const $select = $(`#${selector}`);
 
             $select.empty();
             $select.append('<option disabled selected>' + "Seleccionar" + '</option>');

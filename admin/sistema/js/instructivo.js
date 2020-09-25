@@ -79,7 +79,7 @@ function cargarTablaFormulas(referencia) {
             { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" },
             { "data": "id" },
             { "data": "proceso" },
-            { "data": "tiempo" },
+            { "data": "tiempo", className: "centrado",},
         ],
         columnDefs: [
             { width: "10%", "targets": 0 },

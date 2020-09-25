@@ -12,12 +12,8 @@ cargarDatosProductos();
 $(document).ready(function () {
 
   $('#tblProductos').DataTable({
-<<<<<<< HEAD
     /* scrollY: '45vh', */
     pageLength: 5,
-=======
-    scrollY: '45vh',
->>>>>>> bdcf3eded27049ef6a38761b92ec5a19772fac9b
     scrollCollapse: true,
     paging: false,
     language: { url: 'admin_componentes/es-ar.json' },
@@ -60,10 +56,6 @@ $(document).ready(function () {
 /* Cargar Modal para Crear productos */
 
 function cargarModalProductos() {
-<<<<<<< HEAD
-
-=======
->>>>>>> bdcf3eded27049ef6a38761b92ec5a19772fac9b
   editar = 0;
   $('#m_productos').modal('show');
   $('#m_productos').find("input, select").val('').end();
@@ -183,11 +175,7 @@ $(document).on('click', '#btnguardarProductos', function (e) {
     }
   }
 
-<<<<<<< HEAD
   /* Construye un FormData para todos los datos */
-=======
-  /* Construye un ForData de todos los datos */
->>>>>>> bdcf3eded27049ef6a38761b92ec5a19772fac9b
 
   const producto = new FormData($('#frmagregarProductos')[0]);
   producto.set('operacion', 3);
@@ -200,11 +188,7 @@ $(document).on('click', '#btnguardarProductos', function (e) {
     processData: false,
     contentType: false,
 
-<<<<<<< HEAD
     success: function (r) {
-=======
-    success: function (response) {
->>>>>>> bdcf3eded27049ef6a38761b92ec5a19772fac9b
 
       if (r == 1) {
         alertify.set("notifier", "position", "top-right"); alertify.success("Almacenado con éxito.");

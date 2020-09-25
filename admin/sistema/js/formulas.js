@@ -79,7 +79,7 @@ function cargarTablaFormulas(referencia) {
             { "data": "referencia" },
             { "data": "nombre" },
             { "data": "alias" },
-            { "data": "porcentaje", className: "centrado" },
+            { "data": "porcentaje", className: "centrado" , render: $.fn.dataTable.render.number(',', '.', 1, '', '%') },
             { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
             { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" }
         ],

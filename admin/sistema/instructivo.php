@@ -100,7 +100,7 @@
                         <th></th>
                         <th>Id</th>
                         <th>Actividad</th>
-                        <th>Tiempo</th>
+                        <th>Tiempo (min)</th>
                       </tr>
                     </thead>
                     <tbody>

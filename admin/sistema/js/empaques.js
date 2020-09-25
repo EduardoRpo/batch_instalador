@@ -6,7 +6,7 @@ var editar;
 /* Mostrar Menu seleccionado */
 $('.contenedor-menu .menu a').removeAttr('style');
 $('.contenedor-menu .menu ul.abrir1').show();
-$('#linkGenerales').css('text-decoration', 'revert')
+$('#linkEmpaques').css('text-decoration', 'revert')
 
 /* Ocultar tablas Propiedades Generales */
 

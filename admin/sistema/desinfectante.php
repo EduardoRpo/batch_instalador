@@ -47,7 +47,7 @@
       <div class="panel-header panel-header-sm"></div>
       <div class="content">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-8">
             <div class="card">
               <div class="card-header">
                 <h4 class="card-title">Desinfectantes Registrados</h4>
