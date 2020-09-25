@@ -1,9 +1,9 @@
 <?php
-
+/* 
 if (!empty($_SESSION['active'])) {
     header('location: html/batch.php');
 } else {
-
+ */
     if (!empty($_POST)) {
         $alert = '';
         if (empty($_POST['usuario']) or empty($_POST['clave'])) {
@@ -23,7 +23,7 @@ if (!empty($_SESSION['active'])) {
 
             if ($rows > 0) {
                 $data = $query->fetch(PDO::FETCH_ASSOC);
-                $_SESSION['estado'] = true;
+                $_SESSION['active'] = true;
                 $_SESSION['idUser'] = $data['id'];
                 $_SESSION['nombre'] = $data['nombre'];
                 $_SESSION['apellido'] = $data['apellido'];
@@ -32,7 +32,7 @@ if (!empty($_SESSION['active'])) {
                 $_SESSION['cargo'] = $data['id_cargo'];
                 $_SESSION['modulo'] = $data['modulo'];
                 $_SESSION['rol'] = $data['rol'];
-                //$_SESSION['actividad'] = time();
+                $_SESSION["timeout"] = time();
                 $modulo = $data['modulo'];
 
                 if ($data['rol'] == 1) {
@@ -51,4 +51,4 @@ if (!empty($_SESSION['active'])) {
             }
         }
     }
-}
+/* } */
