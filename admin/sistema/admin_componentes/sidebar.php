@@ -40,7 +40,7 @@
                 <li><a href="materiaprima.php" id="linkMateriaPrima"><i class="fas fa-draw-polygon"></i><span>Materia Prima</span></a></li>
                 <li><a href="formulas.php" id="linkFormulas"><i class="fas fa-vote-yea"></i><span>Formulas</span></a></li>
                 <li><a href="instructivo.php" id="linkPreparaciones"><i class="far fa-clipboard"></i><span>Instructivo Preparación</span></a></li>
-                <li><a href="instructivo.php" id="linkPreparaciones"><i class="fas fa-superscript"></i><span>Multipresentación</span></a></li>
+                <li><a href="multipresentacion.php" id="linkMultipresentacion"><i class="fas fa-superscript"></i><span>Multipresentación</span></a></li>
             </ul>
             <li id="usuarios"><a href=""><i class="fa fa-chevron-down"></i><span>Usuarios</span></a></li>
             <ul class="abrir2">

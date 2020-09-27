@@ -1,7 +1,4 @@
-<?php 
-require_once('php/sesion/sesion.php');
-require_once('modal/m_productos.php');
-?>
+<?php require_once('php/sesion/sesion.php'); ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -11,7 +8,7 @@ require_once('modal/m_productos.php');
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>Samara Cosmetics | Actualizar/Adicionar</title>
+  <title>Samara Cosmetics | Multipresentacion</title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
 
   <!--     Fonts and icons     -->
@@ -35,8 +32,9 @@ require_once('modal/m_productos.php');
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
 
-  <!-- CSS Just for demo purpose, don't include it in your project -->
-  <!-- <link href="../assets/demo/demo.css" rel="stylesheet" /> -->
+  <!-- Multiselect -->
+  <link rel="stylesheet" href="../../assets/multiselect/css/multi-select.css">
+
 </head>
 
 <body class="">
@@ -49,55 +47,74 @@ require_once('modal/m_productos.php');
       <div class="panel-header panel-header-sm"></div>
       <div class="content">
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-10">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title"> <strong>Productos Registrados</strong></h4>
-                <!-- <a class="btn btn-primary" href="crearUsuarios.php" role="button">Crear Producto</a> -->
-                <button type="button" class="btn btn-primary" onclick="cargarModalProductos();">Crear Productos</button>
+                <h4 class="card-title">Multipresentación</h4>
+
+                <hr>
+                <!-- <select multiple="multiple" class="form-control" name="cmbMultipresentacion[]" id="cmbMultipresentacion"></select> -->
+                <div class="ms-multi">
+                  <input type="text" class="form-control" id="busquedaproductos" placeholder="Bucar Productos">
+                  <select multiple="multiple" id="cmbproductos" name="cmbproductos[]" class="form-control List mt-3 mb-3">
+
+                  </select>
+                  <div class="centrado">
+                    <button class="btn btn-primary" id="seleccionar">▼</button>
+                    <button class="btn btn-primary" id="borrar">▲</button>
+                  </div>
+                  <div class="input-group">
+                    <input type="text" class="form-control" id="busquedamulti" placeholder="Buscar Multipresentacion">
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" id="btnBuscarMulti">Buscar</button>
+                    </div>
+                  </div>
+                  <label style="font-style: italic; color:red; font-weight:bolder" class="warning" hidden>Ingrese una referencia</label>
+
+                  <select multiple="multiple" id="cmbmulti" name="cmbmulti[]" class="form-control mt-3">
+                  </select>
+
+                  <div class="derecha mt-5">
+                    <button class="btn btn-primary" id="btnCrearMulti">Crear</button>
+                    <button class="btn btn-primary" id="btnEliminarMulti">Eliminar</button>
+                  </div>
+                </div>
+
+                <!-- <button type="button" class="btn btn-primary" id="adEquipos">Configurar</button> -->
+                <!-- <form id="frmadParametro" style="display: none;">
+                  <label for=""><b>Equipo</b></label>
+                  <label for=""><b>Línea</b></label>
+                  <input type="text" id="txtid_Equipo" readonly hidden>
+                  <input type="text" name="txtEquipo" id="txtEquipo" class="form-control" placeholder="Linea" style="width: 500px;" required>
+                  
+                  <select name="linea" id="cmbLinea" class="form-control"></select>
+                  <button type="button" class="btn btn-primary" id="btnguardarEquipos">Guardar</button>
+                </form> -->
+
+                <hr>
               </div>
               <div class="card-body">
-                <!-- <div class="loader"></div>  -->
-                <div class="table-responsive">
-                  <table id="tblProductos" class="display" style="width:100%; font-size: small;">
+                <!-- <div class="table-responsive">
+                   <table id="listarEquipos" class="table-striped row-borde" style="width:100%">
                     <thead>
                       <tr>
-                        <th></th>
-                        <th></th>
-                        <th>Referencia</th>
-                        <th>Nombre</th>
-                        <th>Unidad Empaque</th>
-                        <th>Producto</th>
-                        <th>Notificación Sanitaria</th>
+                        <th>id</th>
+                        <th>Equipo</th>
                         <th>Linea</th>
-                        <th>Marca</th>
-                        <th>Propietario</th>
-                        <th>Presentación</th>
-                        <th>Color</th>
-                        <th>Olor</th>
-                        <th>Apariencia</th>
-                        <th>Untuosidad</th>
-                        <th>Poder Espumoso</th>
-                        <th>Recuento Mesofilos</th>
-                        <th>Pseudomona</th>
-                        <th>Escherichia</th>
-                        <th>Staphylococcus</th>
-                        <th>PH</th>
-                        <th>Viscosidad</th>
-                        <th>Densidad</th>
-                        <th>Alcohol</th>
+                        <th></th>
+                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
 
                     </tbody>
-                  </table>
-                </div>
+                  </table> 
+                </div>-->
               </div>
-              <form action="" id="formDataExcel7" enctype="multipart/form-data">
-                <input type="file" name="datosExcel7" id="datosExcel7" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
-                <button type="button" id="btnCargarExcel7" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel7.value, 'producto', 7);" disabled="disabled">Cargar Datos</button>
-              </form>
+              <!-- <form action="" id="formDataExcel" enctype="multipart/form-data">
+                <input type="file" name="datosExcel" id="datosExcel" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
+                <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value, 4);" disabled="disabled">Cargar Datos</button>
+              </form> -->
             </div>
           </div>
         </div>
@@ -105,7 +122,6 @@ require_once('modal/m_productos.php');
       <?php include('./admin_componentes/footer.php'); ?>
     </div>
   </div>
-
 
 
   <!--   Core JS Files   -->
@@ -133,10 +149,16 @@ require_once('modal/m_productos.php');
   <!-- Alertify -->
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
+  <!-- Multiselect -->
+  <script src="../../assets/multiselect/js/jquery.multi-select.js" type="text/javascript"></script>
+
   <!-- javascript inicializacion datatables -->
-  <script src="js/productos.js"></script>
+  <script src="js/multipresentacion.js"></script>
   <script src="js/menu.js"></script>
-  <script src="js/importarProductos.js"></script>
+  <!-- <script src="js/cargarDatos.js"></script> -->
+
+
+
 
 </body>
 

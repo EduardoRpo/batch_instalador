@@ -20,7 +20,7 @@ else if (isset($_FILES['datosExcel7']))
 	$datos = $_FILES['datosExcel7'];
 
 $tabla = $_POST['tabla'];
-print_r($tabla);
+
 $datos = strtoupper(file_get_contents($datos['tmp_name']));
 
 $datos = explode("\n", $datos);
@@ -30,7 +30,6 @@ $datos = array_filter($datos);
 foreach ($datos as $data) {
 	$dataList[] = explode(";", $data);
 }
-print_r($dataList);
 
 /* Elimina todos los datos */
 $conn->query("DELETE FROM $tabla");
@@ -64,5 +63,3 @@ if ($tabla == 'producto') {
 						  VALUES ('{$data[0]}')");
 	}
 }
-
-$conn->close();

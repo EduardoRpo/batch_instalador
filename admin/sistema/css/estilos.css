@@ -69,6 +69,10 @@
   text-align: center;
 }
 
+.derecha {
+  text-align: right;
+}
+
 /* no muestra las viñetas */
 
 .contenedor-menu ul {
@@ -321,3 +325,8 @@ form.frmAdicionarMinMax {
   grid-column-end: 4;
   justify-self: self-end;
 }
+
+/* .ms-multi{
+  background: transparent url('../../../assets/images/custom-select.png') no-repeat 50% 50%;
+ 
+} */
