@@ -10,7 +10,7 @@
                   <h5 class="title">Registro de Usuarios</h5>
                 </div>
                 <div class="card-body">
-                  <form id="frmagregarUsuarios" method="POST">
+                  <form id="frmagregarUsuarios" method="POST" enctype="multipart/form-data">
                     <div class="row">
                       <div class="col-md-6 pr-1">
                         <div class="form-group">
@@ -47,8 +47,8 @@
                         <div class="form-group">
                           <label>Firma y Huella</label>
                           <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="customFileLang" lang="es">
-                            <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+                            <input type="file" class="custom-file-input" name="firma" id="firma" lang="es">
+                            <label class="custom-file-label" for="firma">Seleccionar Archivo</label>
                           </div>
                         </div>
                       </div>

@@ -27,6 +27,14 @@ switch ($op) {
             $rol = $_POST['rol'];
             $usuario = $_POST['usuario'];
             $clave = $_POST['clave'];
+            $firma = $_FILES['firma'];
+            
+            $nombre_temp = $_FILES['firma']['tmp_name'];
+            $nombre = $_FILES['firma']['name'];
+
+            $destino = '../../assets/img/firmas/' . $nombre;
+            move_uploaded_file($nombre_temp, $destino);
+           
 
             if ($editar == 0) {
                 $sql = "SELECT * FROM usuario WHERE user= :usuario";
@@ -38,8 +46,8 @@ switch ($op) {
                     echo '2';
                     exit();
                 } else {
-                    $sql = "INSERT INTO usuario (nombre, apellido, email, user, clave, rol, id_modulo, id_cargo) 
-                            VALUES(:nombre, :apellido, :email, :user, :clave, :rol, :id_modulo, :id_cargo)";
+                    $sql = "INSERT INTO usuario (nombre, apellido, email, user, clave, urlfirma, rol, id_modulo, id_cargo) 
+                            VALUES(:nombre, :apellido, :email, :user, :clave, :urlfirma, :rol, :id_modulo, :id_cargo)";
                     $query = $conn->prepare($sql);
                     $result = $query->execute([
                         'nombre' => $nombres,
@@ -47,6 +55,7 @@ switch ($op) {
                         'email' => $email,
                         'user' => $usuario,
                         'clave' => md5($clave),
+                        'urlfirma' => $destino,
                         'rol' => $rol,
                         'id_modulo' => $modulo,
                         'id_cargo' => $cargo
@@ -56,7 +65,7 @@ switch ($op) {
             } else {
                 $id = $_POST['id'];
 
-                if (empty($clave)) {
+                if (empty($clave) || empty($firma)) {
                     $sql = "UPDATE usuario SET nombre =:nombre, apellido =:apellido, email =:email, user =:user, rol =:rol, id_modulo =:modulo, id_cargo =:cargo WHERE id = :id";
                     $query = $conn->prepare($sql);
                     $result = $query->execute([
@@ -70,7 +79,7 @@ switch ($op) {
                         'id' => $id
                     ]);
                 } else {
-                    $sql = "UPDATE usuario SET nombre =:nombre, apellido =:apellido, email =:email, user =:user, clave =:clave, rol=:rol, id_modulo =:modulo, id_cargo =:cargo WHERE id = :id";
+                    $sql = "UPDATE usuario SET nombre =:nombre, apellido =:apellido, email =:email, user =:user, clave =:clave, urlfirma =:urlfirma, rol=:rol, id_modulo =:modulo, id_cargo =:cargo WHERE id = :id";
                     $query = $conn->prepare($sql);
                     $result = $query->execute([
                         'nombre' => $nombres,
@@ -78,6 +87,7 @@ switch ($op) {
                         'email' => $email,
                         'user' => $usuario,
                         'clave' => md5($clave),
+                        'urlfirma' => $destino,
                         'rol' => $rol,
                         'modulo' => $modulo,
                         'cargo' => $cargo,

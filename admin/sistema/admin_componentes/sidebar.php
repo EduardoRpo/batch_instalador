@@ -19,15 +19,13 @@
                 </a></li> -->
             <li id="parametrosg"><a href=""><i class="fa fa-chevron-down"></i><span>Parametros Generales</span></a></li>
             <ul class="abrir">
-                <li><a href="modulos.php" id="link6"><i class="fas fa-list-ul"></i><span>Procesos</span></a></li>
-                <li><a href="condicionesMedio.php" id="linkCondicionesMedio"><i class="fas fa-list-ul"></i><span>Condiciones del Medio</span></a></li>
-                <li><a href="desinfectante.php" id="linkDesinfectante"><i class="fas fa-list-ul"></i><span>Desinfectantes</span></a></li>
-                <!-- <li><a href="" id="link3"><i class='large material-icons'>portrait</i><span>Incidencias</span></a></li> -->
-                <!-- <li><a href="lineas.php" id="link4"><i class='large material-icons'>portrait</i><span>Líneas</span></a></li> -->
+                <li><a href="modulos.php" id="link6"><i class="fas fa-boxes"></i><span>Procesos</span></a></li>
+                <li><a href="condicionesMedio.php" id="linkCondicionesMedio"><i class="fas fa-history"></i><span>Condiciones del Medio</span></a></li>
+                <li><a href="desinfectante.php" id="linkDesinfectante"><i class="fas fa-bug"></i><span>Desinfectantes</span></a></li>
                 <li><a href="maquinaria.php" id="linkEquipos"><i class="fas fa-list-ul"></i><span>Equipos</span></a></li>
-                <li><a href="preguntas.php" id="linkPreguntas"><i class="fas fa-list-ul"></i><span>Preguntas</span></a></li>
-                <li><a href="despejedelinea.php" id="linkDespeje"><i class="fas fa-list-ul"></i><span>Despeje</span></a></li>
-                <li><a href="tanques.php" id="link8"><i class="fas fa-list-ul"></i><span>Tanques</span></a></li>
+                <li><a href="preguntas.php" id="linkPreguntas"><i class="fas fa-question-circle"></i><span>Preguntas</span></a></li>
+                <li><a href="despejedelinea.php" id="linkDespeje"><i class="fas fa-clipboard-list"></i><span>Despeje</span></a></li>
+                <li><a href="tanques.php" id="link8"><i class="fas fa-database"></i><span>Tanques</span></a></li>
 
             </ul>
             <li id="productos"><a href=""><i class="fa fa-chevron-down"></i><span>Productos</span></a></li>

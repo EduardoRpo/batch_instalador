@@ -330,3 +330,9 @@ form.frmAdicionarMinMax {
   background: transparent url('../../../assets/images/custom-select.png') no-repeat 50% 50%;
  
 } */
+
+/* Modificar el nombre del boton cargar archivo */
+
+.custom-file-input ~ .custom-file-label::after {
+  content: "Elegir";
+}

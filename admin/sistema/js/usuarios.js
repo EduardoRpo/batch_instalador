@@ -13,7 +13,7 @@ $('.contenedor-menu .menu ul.abrir2').show();
 
 $(document).ready(function () {
     $("#listaUsuarios").DataTable({
-         /* scrollY: '50vh', */
+        /* scrollY: '50vh', */
 
         pageLength: 5,
         scrollCollapse: true,
@@ -36,12 +36,13 @@ $(document).ready(function () {
             { "data": "cargo" },
             { "data": "modulo" },
             { "data": "user" },
-            { "data": "rol" ,
-            render: (data, type, row) => {
-                'use strict';
-                return data == 1 ? 'Superusuario' : data == 2 ? 'Administrador' : 'Usuario';
+            {
+                "data": "rol",
+                render: (data, type, row) => {
+                    'use strict';
+                    return data == 1 ? 'Superusuario' : data == 2 ? 'Administrador' : 'Usuario';
+                }
             }
-        }
         ]
     });
 });
@@ -101,6 +102,7 @@ $('#btnCrearUsuarios').click(function () {
 $(document).ready(function () {
     $('#btnguardarUsuarios').click(function (e) {
         e.preventDefault();
+
         let nombres = $('#nombres').val();
         let apellidos = $('#apellidos').val();
         let email = $('#email').val();
@@ -108,24 +110,33 @@ $(document).ready(function () {
         let modulo = $('#modulo').val();
         let user = $('#usuario').val();
         let clave = $('#clave').val();
-        
+
         if (editar == 1) {
             if (nombres === '' || apellidos === '' || cargo === '' || modulo === '' || user === '') {
                 alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos.");
                 return false;
             }
-        }else{
+        } else {
             if (nombres === '' || apellidos === '' || email === '' || cargo === '' || modulo === '' || user === '' || clave === '') {
                 alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos.");
                 return false;
             }
         }
 
+        const archivo = $("#firma").val();
+        let extensiones = archivo.substring(archivo.lastIndexOf("."));
+
+        if (extensiones != ".jpg" && extensiones != ".png") {
+            alertify.set("notifier", "position", "top-right"); alertify.error("El archivo de tipo " + extensiones + " no es válido");
+            return false;
+        }
+
+
         const usuario = new FormData($('#frmagregarUsuarios')[0]);
         usuario.set('operacion', 3);
         usuario.set('editar', editar);
         usuario.set('id', id);
-
+        debugger;
         $.ajax({
             type: "POST",
             url: "php/c_usuarios.php",
@@ -204,3 +215,14 @@ function refreshTable() {
     $('#listaUsuarios').DataTable().clear();
     $('#listaUsuarios').DataTable().ajax.reload();
 }
+
+/* Mostrar el nombre del archivo al seleccionarlo */
+
+$('.custom-file-input').on('change', function(event) {
+    var inputFile = event.currentTarget;
+    $(inputFile).parent()
+        .find('.custom-file-label')
+        .html(inputFile.files[0].name);
+});
+
+$('.custom-file-label::after').val('Buscar');
