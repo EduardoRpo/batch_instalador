@@ -39,3 +39,7 @@
 #tablePesaje tbody tr {
     font-size: 13px;
 }
+
+.modal-xl {
+    max-width: 90% !important;
+}

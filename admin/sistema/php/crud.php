@@ -34,7 +34,7 @@ function ejecutarEliminar($conn, $sql, $id)
 {
     $query = $conn->prepare($sql);
     $result = $query->execute(['id' => $id]);
-    
+
     if ($result) {
         echo '1';
     } else {
@@ -69,6 +69,10 @@ function ejecutarQuerySelect($conn, $query)
     //Almacena la data en array
     while ($data = $result->fetch(PDO::FETCH_ASSOC)) {
         $arreglo["data"][] = $data;
+    }
+    if (empty($arreglo)) {
+        echo '3';
+        exit();
     }
 
     echo json_encode(utf8ize($arreglo), JSON_UNESCAPED_UNICODE);

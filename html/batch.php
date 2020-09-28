@@ -1,10 +1,11 @@
 <?php
 require_once('./sesion/sesion.php');
 require_once('../conexion.php');
-include("modal/modal_clonar.php");
-include("modal/m_crearbatch.php");
-include("modal/modal_multipresentacion.php");
-include("modal/modal_cambiarContrasena.php");
+include_once("modal/modal_clonar.php");
+include_once("modal/m_batchEliminados.php");
+include_once("modal/m_crearbatch.php");
+include_once("modal/modal_multipresentacion.php");
+include_once("modal/modal_cambiarContrasena.php");
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +19,7 @@ include("modal/modal_cambiarContrasena.php");
   <meta name="author" content="Teenus SAS">
 
   <!-- Favicon icon -->
-  <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
+  <!-- <link rel="icon" type="image/png" sizes="16x16" href="../BatchR/htdocs/assets/images/favicon.png"> -->
 
   <title>Samara Cosmetics</title>
 
@@ -44,7 +45,7 @@ include("modal/modal_cambiarContrasena.php");
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item" href="#" onclick="multipresentacion()">Multipresentación</a>
             <a class="dropdown-item" href="#" onclick="clonar()">Clonar</a>
-            <a class="dropdown-item" href="#" onclick="eliminado()">Batch Eliminados</a>
+            <a class="dropdown-item" href="#" onclick="batchEliminados()">Batch Eliminados</a>
           </div>
         </div>
         <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md btn-filtrar" style="background-color:#fff;color:#FF8D6D" onclick="filtrarfechas()">Filtrar</button>
@@ -80,7 +81,7 @@ include("modal/modal_cambiarContrasena.php");
       <div class="card">
         <div class="card-block">
           <div class="table-responsive">
-            <table class="table table-striped table-bordered" id="tablaBatch" name="tablaBatch">
+            <table class="table table-striped table-bordered " id="tablaBatch" name="tablaBatch">
               <thead>
                 <tr>
                   <th></th>
@@ -143,6 +144,8 @@ include("modal/modal_cambiarContrasena.php");
     <script src="js/batch/filtradofechas.js"></script>
     <script src="js/calendario/calendar.js"></script>
     <script src="js/global/loadinfo-global.js"></script>
+    <script src="js/batch/batcheliminados.js"></script>
+
 
 
     <!--Alertify-->

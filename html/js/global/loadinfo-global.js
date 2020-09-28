@@ -31,13 +31,13 @@ $('#in_fecha').attr('min', new Date().toDateInputValue());
 
 /* function preguntas(data) { */
 
-    $.ajax({
-        url: `../../api/questions/${proceso}`,
-        type: 'GET'
-    }).done((data, status, xhr) => {
-        $('#preguntas-div').html('');
-        data.forEach((question, indx) => {
-            $('#preguntas-div').append(`<div class="col-md-10 col-2 align-self-right">
+$.ajax({
+    url: `../../api/questions/${proceso}`,
+    type: 'GET'
+}).done((data, status, xhr) => {
+    $('#preguntas-div').html('');
+    data.forEach((question, indx) => {
+        $('#preguntas-div').append(`<div class="col-md-10 col-2 align-self-right">
                     <a for="recipient-name" class="col-form-label">${question.pregunta}</a>
                   </div>
                   <div class="col-md-1 col-0 align-self-center">
@@ -48,9 +48,9 @@ $('#in_fecha').attr('min', new Date().toDateInputValue());
                     <label class="checkbox"> <input type="radio" name="question-${question.id}" value="no"/>
                     </label>
                   </div>`);
-        });
-
     });
+
+});
 /* } */
 
 /* Carga de datos de informacion del batch record seleccionado */
@@ -161,14 +161,17 @@ $(document).ready(function () {
         'type': 'POST',
         'url': '../../html/php/condicionesmedio.php',
         'data': { operacion: "1", modulo: proceso },
-        
+
         success: function (resp) {
+            if (resp == 3) {
+                return false;
+            }
             let t = JSON.parse(resp);
             let tiempo = Math.round(Math.random() * (t.data[0].t_max - t.data[0].t_min) + parseInt(t.data[0].t_min));
-            
+
             setTimeout(function () {
                 $("#m_CondicionesMedio").modal("show");
-            }, tiempo * 60000); 
+            }, tiempo * 60000);
         }
     });
     //return false;
@@ -207,7 +210,7 @@ function guardar_condicionesMedio() {
             alertify.set("notifier", "position", "top-right"); alertify.success("Condiciones del Medio Almacenado");
         }
     });
-   //return false;
+    //return false;
 }
 
 
@@ -296,7 +299,9 @@ function cargarMaquinas() {
 /* formato de numeros */
 
 const formatoCO = (number) => {
-
+    if (number === undefined) {
+        return false;
+    }
     const exp = /(\d)(?=(\d{3})+(?!\d))/g;
     const rep = '$1.';
     let arr = number.toString().split('.');

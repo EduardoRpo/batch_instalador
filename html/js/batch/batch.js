@@ -38,7 +38,6 @@ function crearTablaBatch(columna_busqueda='', minDateFilter='', maxDateFilter=''
             {"data": "numero_orden", className: "uniqueClassName"},
             {"data": "referencia", className: "uniqueClassName"},
             {"data": "nombre_referencia"},
-            /* {"data": "presentacion"}, */
             {"data": "numero_lote"},
             {"data": "tamano_lote", className: "uniqueClassName" , render: $.fn.dataTable.render.number( '.', ',', 0, '' )},
             {"data": "nombre"},

@@ -3,7 +3,7 @@
     <nav class="navbar top-navbar navbar-toggleable-sm navbar-light">
       <div class="navbar-header">
         <a class="navbar-brand">
-          <span><img src="../assets/images/logo-light-text2.png" class="light-logo" alt="homepage"/></span>
+          <span><img src="../assets/images/logo-light-text2.png" class="light-logo" alt="Samara Cosmetics"/></span>
         </a>
       </div>
       <div class="navbar-collapse">
