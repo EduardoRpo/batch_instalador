@@ -10,8 +10,7 @@ function cargar(btn){
         alertify.set("notifier","position", "top-right"); alertify.error("Debe firmar en orden, primero el 'Realizado'.");
         return false;
     }else{
-        //$('#plantillaEtiquetas').modal('show');
-        //<a href="javascript:void(window.open('http://www.htmltopdfconverter.net/?convert='+window.location))">Convert To PDF</a>
+ 
         $('#m_firmar').modal('show');
         cont = 0;
     }
@@ -24,8 +23,8 @@ function enviar() {
 
    //VALIDAR PARA LA FIRMA DE VERIFICADO SI TODOS LOS CHECKBOX ESTAN CHEQUEADOS APARECER
     
-   let template = '<img id="" src="/html/firmas/BerneyMontoya/:firma:" alt="firma_usuario" height="130">'; 
-    
+   let template = '<img id="" src=":firma:" alt="firma_usuario" height="130">'; 
+
     datos = {
         user: $('#usuario').val(),
         password: $('#clave').val(),
@@ -37,7 +36,6 @@ function enviar() {
         data: datos,
     
         success: function (datos) {
-            debugger
             data = JSON.parse(datos);
             
             if(data==""){

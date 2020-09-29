@@ -28,13 +28,13 @@ switch ($op) {
             $usuario = $_POST['usuario'];
             $clave = $_POST['clave'];
             $firma = $_FILES['firma'];
-            
+
             $nombre_temp = $_FILES['firma']['tmp_name'];
             $nombre = $_FILES['firma']['name'];
 
-            $destino = '../../assets/img/firmas/' . $nombre;
+            $destino = '../../../admin/assets/img/firmas/' . $nombre;
             move_uploaded_file($nombre_temp, $destino);
-           
+
 
             if ($editar == 0) {
                 $sql = "SELECT * FROM usuario WHERE user= :usuario";
@@ -64,8 +64,9 @@ switch ($op) {
                 }
             } else {
                 $id = $_POST['id'];
-
-                if (empty($clave) || empty($firma)) {
+                
+                
+                if (empty($clave) && empty($firma)) {
                     $sql = "UPDATE usuario SET nombre =:nombre, apellido =:apellido, email =:email, user =:user, rol =:rol, id_modulo =:modulo, id_cargo =:cargo WHERE id = :id";
                     $query = $conn->prepare($sql);
                     $result = $query->execute([
@@ -73,6 +74,34 @@ switch ($op) {
                         'apellido' => $apellidos,
                         'email' => $email,
                         'user' => $usuario,
+                        'rol' => $rol,
+                        'modulo' => $modulo,
+                        'cargo' => $cargo,
+                        'id' => $id
+                    ]);
+                } else if (empty($clave)) {
+                    $sql = "UPDATE usuario SET nombre =:nombre, apellido =:apellido, email =:email, user =:user, urlfirma =:urlfirma, rol =:rol, id_modulo =:modulo, id_cargo =:cargo WHERE id = :id";
+                    $query = $conn->prepare($sql);
+                    $result = $query->execute([
+                        'nombre' => $nombres,
+                        'apellido' => $apellidos,
+                        'email' => $email,
+                        'user' => $usuario,
+                        'urlfirma' => $destino,
+                        'rol' => $rol,
+                        'modulo' => $modulo,
+                        'cargo' => $cargo,
+                        'id' => $id
+                    ]);
+                } else if (empty($firma)) {
+                    $sql = "UPDATE usuario SET nombre =:nombre, apellido =:apellido, email =:email, user =:user, clave =:clave, rol =:rol, id_modulo =:modulo, id_cargo =:cargo WHERE id = :id";
+                    $query = $conn->prepare($sql);
+                    $result = $query->execute([
+                        'nombre' => $nombres,
+                        'apellido' => $apellidos,
+                        'email' => $email,
+                        'user' => $usuario,
+                        'clave' => md5($clave),
                         'rol' => $rol,
                         'modulo' => $modulo,
                         'cargo' => $cargo,

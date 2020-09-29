@@ -136,7 +136,7 @@ $(document).ready(function () {
         usuario.set('operacion', 3);
         usuario.set('editar', editar);
         usuario.set('id', id);
-        debugger;
+        
         $.ajax({
             type: "POST",
             url: "php/c_usuarios.php",
@@ -176,6 +176,7 @@ $(document).on('click', '.link-editar', function (e) {
     let cargo = $(this).parent().parent().children().eq(6).text();
     let modulo = $(this).parent().parent().children().eq(7).text();
     let usuario = $(this).parent().parent().children().eq(8).text();
+    let rol = $(this).parent().parent().children().eq(9).text();
 
     $('#ModalCrearUsuarios').modal('show');
     $('#btnguardarUsuarios').html('Actualizar');
@@ -184,6 +185,7 @@ $(document).on('click', '.link-editar', function (e) {
     $('#email').val(email);
     $("#cargo option:contains(" + cargo + ")").attr("selected", true);
     $("#modulo option:contains(" + modulo + ")").attr("selected", true);
+    $("#rol option:contains(" + rol + ")").attr("selected", true);
     $('#usuario').val(usuario);
 });
 
@@ -192,8 +194,8 @@ $(document).on('click', '.link-editar', function (e) {
 
 $(document).on('click', '.link-borrar', function (e) {
     e.preventDefault();
-
-    let id = $(this).parent().parent().children().first().text();
+  
+    let id = $(this).parent().parent().children().eq(2).text();
     let confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este usuario?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
 
     confirm.set('onok', function (r) {
