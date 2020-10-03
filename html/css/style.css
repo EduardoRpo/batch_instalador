@@ -8262,7 +8262,7 @@ div.displayallinfo {
 
 .parametrosControl{
   display: grid;
-  grid-template-columns: minmax(50px, 1070px) minmax(80px, 100px) minmax(80px, 110px);
+  grid-template-columns: minmax(50px, 1070px) minmax(15px, 80px) minmax(80px, 18px);
   grid-gap: 1em;
   margin: 20px;
   background-color: #C0C0C0;

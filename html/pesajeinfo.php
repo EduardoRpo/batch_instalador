@@ -210,7 +210,8 @@ include_once('modal/modal_condicionesMedio.php');
                   </div>
 
                   <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                    <input type="button" class="btn btn-danger in_desinfeccion" id="despeje_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
+                    <input type="text" id="idbtn" hidden>
+                    <input type="button" class="btn btn-danger" id="despeje_realizado" onclick="cargar(this, 'firma1')" style="width: 100%; height: 38px;" value="Firmar">
                   </div>
 
                   <div class="col-md-4 col-2 align-self-center">
@@ -219,7 +220,7 @@ include_once('modal/modal_condicionesMedio.php');
                   </div>
 
                   <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                    <input type="button" class="btn btn-danger in_desinfeccion" id="despeje_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
+                    <input type="button" class="btn btn-danger in_desinfeccion" id="despeje_verificado" onclick="cargar(this, 'firma2')" style="width: 100%; height: 38px;" value="Firmar">
                   </div>
                 </div>
                 <div class="row justify-content-end mt-5" style="margin: 1%; text-align: right">
@@ -273,19 +274,19 @@ include_once('modal/modal_condicionesMedio.php');
             </div>
             <hr>
 
-            <div class="row" style="margin: 1%">
+            <!-- <div class="row" style="margin: 1%">
               <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down" data-toggle="modal" data-target="#modalObservaciones" style="margin-left: 1%">
                 Observaciones y/o Incidencias en el proceso
               </button>
-            </div>
-            <hr>
+            </div> 
+            <hr>-->
 
-            <div class="row" style="margin: 1%">
+           <!--  <div class="row" style="margin: 1%">
               <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down" id="imprimirEtiquetasVirtuales">Imprimir Etiquetas Virtuales
               </button>
               <iframe id="printf" name="printf" src="../../html/modal/m_plantillaEtiquetas.php" width="0" height="0" style="display:none;"></iframe>
             </div>
-            <hr>
+            <hr> -->
             <div class="row" style="margin: 1%">
               <div class="col-md-3 col-2 align-self-center">
                 <label for="pesaje_realizado" class="col-form-label">Realizado Por:</label>
@@ -293,7 +294,7 @@ include_once('modal/modal_condicionesMedio.php');
               </div>
 
               <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                <input type="button" class="btn btn-danger" id="pesaje_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
+                <input type="button" class="btn btn-danger" id="pesaje_realizado" onclick="cargar(this, 'firma3')" style="width: 100%; height: 38px;" value="Firmar">
               </div>
 
               <div class="col-md-3 col-2 align-self-center">
@@ -301,17 +302,17 @@ include_once('modal/modal_condicionesMedio.php');
                 <input type="text" class="form-control" id="pesaje_verificado" readonly>
               </div>
               <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                <input type="button" class="btn btn-danger" id="pesaje_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
+                <input type="button" class="btn btn-danger" id="pesaje_verificado" onclick="cargar(this, 'firma4')" style="width: 100%; height: 38px;" value="Firmar">
               </div>
             </div>
 
-            <div class="row justify-content-end mt-5" style="margin: 1%;text-align: right">
+            <!-- <div class="row justify-content-end mt-5" style="margin: 1%;text-align: right">
               <div class="col-md-12 col-2 align-self-end">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#m_CondicionesMedio">Aceptar
                 </button>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

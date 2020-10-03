@@ -1,9 +1,12 @@
 
 let idBatch = location.href.split('/')[4];
 let referencia = location.href.split('/')[5];
-let proceso = $('h1:first').text();
+let proceso = $('h1:eq(1)').text();
+let modulo;
 var batch;
 let template;
+let cantidadpreguntas;
+let completo = 0;
 
 Date.prototype.toDateInputValue = (function () {
     var local = new Date(this);
@@ -16,42 +19,53 @@ $('#in_fecha').attr('min', new Date().toDateInputValue());
 
 /* Modulo */
 
-/* $.ajax({
-    method: 'POST',
-    url: '../../html/php/modulo.php',
-    data: { proceso: proceso },
+$(document).ready(function () {
+    $.ajax({
+        method: 'POST',
+        url: '../../html/php/modulo.php',
+        data: { proceso: proceso },
 
-}).done((data, status, xhr) => {
-    const info = JSON.parse(data);
-    preguntas(info[0].id);
+        success: function (data) {
+            if (data !== '') {
+                let info = JSON.parse(data);
+                modulo = info[0].id;
+                cargueDesinfectantes();
+                carguepreguntas(modulo);
+                cargueCondicionesMedio();
+            }
 
-}); */
+        }
+    });
+});
+
 
 /* cargue de preguntas */
+function carguepreguntas(data) {
+    proceso = data;
 
-/* function preguntas(data) { */
+    $.ajax({
+        url: `../../api/questions/${proceso}`,
+        type: 'GET'
+    }).done((data, status, xhr) => {
+        cantidadpreguntas = data.length;
 
-$.ajax({
-    url: `../../api/questions/${proceso}`,
-    type: 'GET'
-}).done((data, status, xhr) => {
-    $('#preguntas-div').html('');
-    data.forEach((question, indx) => {
-        $('#preguntas-div').append(`<div class="col-md-10 col-2 align-self-right">
-                    <a for="recipient-name" class="col-form-label">${question.pregunta}</a>
+        $('#preguntas-div').html('');
+        data.forEach((question, indx) => {
+            $('#preguntas-div').append(`<div class="col-md-10 col-2 align-self-right">
+                    <a for="recipient-name" class="col-form-label" id="${question.id}">${question.pregunta}</a>
                   </div>
                   <div class="col-md-1 col-0 align-self-center">
-                    <label class="checkbox"> <input type="radio" class="questions" name="question-${question.id}" value="si"/>
+                    <label class="checkbox"> <input type="radio" class="questions" name="question-${question.id}" id="${question.id_pregunta}" value="1"/>
                     </label>
                   </div>
                   <div class="col-md-1 col-0 align-self-center">
-                    <label class="checkbox"> <input type="radio" name="question-${question.id}" value="no"/>
+                    <label class="checkbox"> <input type="radio" name="question-${question.id}" id="${question.id_pregunta}" value="0"/>
                     </label>
                   </div>`);
-    });
+        });
 
-});
-/* } */
+    });
+}
 
 /* Carga de datos de informacion del batch record seleccionado */
 
@@ -155,8 +169,8 @@ function controlProceso(cantidad) {
 
 /* Mostrar ventana de Condiciones Medio de acuerdo con el tiempo establecido en la BD*/
 
-$(document).ready(function () {
 
+function cargueCondicionesMedio() {
     $.ajax({
         'type': 'POST',
         'url': '../../html/php/condicionesmedio.php',
@@ -174,9 +188,8 @@ $(document).ready(function () {
             }, tiempo * 60000);
         }
     });
-    //return false;
+}
 
-});
 
 /* Almacenar informacion de condiciones del medio */
 
@@ -213,22 +226,25 @@ function guardar_condicionesMedio() {
     //return false;
 }
 
-
 /* Cargar desinfectantes */
+function cargueDesinfectantes() {
 
-$.ajax({
-    url: `../../api/desinfectantes`,
-    type: 'GET'
-}).done((data, status, xhr) => {
-    data.forEach(desinfectante => {
-        $('#sel_producto_desinfeccion').append(`<option value="${desinfectante.id}">${desinfectante.nombre}</option>`);
+    $.ajax({
+        url: `../../api/desinfectantes`,
+        type: 'GET'
+    }).done((data, status, xhr) => {
+        data.forEach(desinfectante => {
+            $('#sel_producto_desinfeccion').append(`<option value="${desinfectante.id}">${desinfectante.nombre}</option>`);
+        });
     });
-});
+}
+
 
 //Validacion campos de preguntas diligenciados
 
 $('.in_desinfeccion').click((event) => {
     event.preventDefault();
+
     let flag = false;
     $('.questions').each((indx, question) => {
         if (flag) {
@@ -247,8 +263,33 @@ $('.in_desinfeccion').click((event) => {
             });
         }
     });
-
 });
+
+
+function validarParametrosControl() {
+    let flag = false;
+    $('.questions').each((indx, question) => {
+        if (flag) {
+            return;
+        }
+        let name = $(question).attr('name');
+        if (!$(`input[name='${name}']:radio`).is(':checked')) {
+            flag = true;
+
+            $.alert({
+                theme: 'white',
+                icon: 'fa fa-warning',
+                title: 'Samara Cosmetics',
+                content: 'Antes de continuar, complete todas las preguntas',
+                confirmButtonClass: 'btn-info',
+            });
+            completo = 0;
+            return false;
+        }
+        completo = 1;
+    });
+}
+
 
 /* Calcular la fecha del dia  */
 

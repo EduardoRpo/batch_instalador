@@ -62,7 +62,7 @@ function cargarReferencias() {
         success: function(r){
             var $select = $('#cmbNoReferencia');
                 $('#cmbNoReferencia').empty();
-                debugger;
+               
                 var info = JSON.parse(r);            
                                 
                 $select.append('<option disabled selected>' + "Referencia" + '</option>');

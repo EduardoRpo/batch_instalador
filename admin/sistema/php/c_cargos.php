@@ -1,23 +1,26 @@
 <?php
-require_once('../../../conexion.php');
-require_once('./crud.php');
 
-$op = $_POST['operacion'];
+if (!empty($_POST)) {
 
-switch ($op) {
-    case 1: //listar Condiciones del medio
-        $query = "SELECT * FROM cargo";
-        ejecutarQuerySelect($conn, $query);
-        break;
+    require_once('../../../conexion.php');
+    require_once('./crud.php');
 
-    case 2: //Eliminar
-        $id = $_POST['id'];
-        $sql = "DELETE FROM cargo WHERE id = :id";
-        ejecutarEliminar($conn, $sql, $id);
-        break;
+    $op = $_POST['operacion'];
 
-    case 3: // Actualizar y Guardar data
-        if (!empty($_POST)) {
+    switch ($op) {
+        case 1: //listar Condiciones del medio
+            $query = "SELECT * FROM cargo";
+            ejecutarQuerySelect($conn, $query);
+            break;
+
+        case 2: //Eliminar
+            $id = $_POST['id'];
+            $sql = "DELETE FROM cargo WHERE id = :id";
+            ejecutarEliminar($conn, $sql, $id);
+            break;
+
+        case 3: // Actualizar y Guardar data
+
             $editar = $_POST['editar'];
             $cargo = strtoupper($_POST['cargo']);
 
@@ -47,6 +50,6 @@ switch ($op) {
                     exit();
                 }
             }
-        }
-        break;
+            break;
+    }
 }

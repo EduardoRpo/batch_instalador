@@ -1,5 +1,19 @@
 let flagWeight = false;
 
+/* validar y Cargar informacion almacenada en el batch */
+
+$.ajax({
+    type: "POST",
+    url: "url",
+    data: "data",
+    dataType: "dataType",
+    success: function (response) {
+        
+    }
+});
+
+
+
 /* Carga de Cargos  */
 
 $.ajax({
@@ -136,6 +150,18 @@ function calcularxNoTanques() {
         return false;
     }
 }
+
+/* Cargar informacion guardada del batch */
+
+/* $.ajax({
+    type: "POST",
+    url: "url",
+    data: "data",
+    dataType: "dataType",
+    success: function (response) {
+        
+    }
+}); */
 
 /* imprimir etiquetas virtuales */
 
