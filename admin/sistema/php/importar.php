@@ -1,8 +1,4 @@
 <?php
-<<<<<<< HEAD
-=======
-header("Content-Type: text/html;charset=utf-8");
->>>>>>> bdcf3eded27049ef6a38761b92ec5a19772fac9b
 
 if (!empty($_POST)) {
 	require_once('../../../conexion.php');
@@ -21,12 +17,6 @@ if (!empty($_POST)) {
 		$dataList[] = explode(";", strtoupper($data));
 	}
 
-<<<<<<< HEAD
-=======
-	//print_r($dataList);
-	/* exit();  */
-
->>>>>>> bdcf3eded27049ef6a38761b92ec5a19772fac9b
 	//Buscar operacion y ejecutar
 
 	switch ($operacion) {
@@ -47,11 +37,7 @@ if (!empty($_POST)) {
 			$conn->query("ALTER TABLE condicionesmedio_tiempo AUTO_INCREMENT = 1");
 
 			foreach ($dataList as $data) {
-<<<<<<< HEAD
 				$conn->query("INSERT INTO condicionesmedio_tiempo (id_modulo, t_min, t_max) 
-=======
-				$conn->query("INSERT INTO condicionesmedio_tiempo (id_modulo, min, max) 
->>>>>>> bdcf3eded27049ef6a38761b92ec5a19772fac9b
 				  VALUES ('{$data[0]}', '{$data[1]}', '{$data[2]}')");
 			}
 			break;

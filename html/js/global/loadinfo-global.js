@@ -2,7 +2,7 @@
 let idBatch = location.href.split('/')[4];
 let referencia = location.href.split('/')[5];
 let proceso = $('h1:eq(1)').text();
-let modulo;
+var modulo;
 var batch;
 let template;
 let cantidadpreguntas;
@@ -17,29 +17,49 @@ Date.prototype.toDateInputValue = (function () {
 $('#in_fecha').val(new Date().toDateInputValue());
 $('#in_fecha').attr('min', new Date().toDateInputValue());
 
-/* Modulo */
-
 $(document).ready(function () {
-    $.ajax({
-        method: 'POST',
-        url: '../../html/php/modulo.php',
-        data: { proceso: proceso },
-
-        success: function (data) {
-            if (data !== '') {
-                let info = JSON.parse(data);
-                modulo = info[0].id;
-                cargueDesinfectantes();
-                carguepreguntas(modulo);
-                cargueCondicionesMedio();
-            }
-
-        }
-    });
+    setTimeout(() => {
+        cargarBatch();
+    }, 1000);
 });
 
 
+/* Modulo */
+
+$.ajax({
+    method: 'POST',
+    url: '../../html/php/modulo.php',
+    data: { proceso: proceso },
+
+    success: function (data) {
+        if (data !== '') {
+            const info = JSON.parse(data);
+            modulo = info[0].id;
+
+            cargueDesinfectantes();
+            carguepreguntas(modulo);
+            cargueCondicionesMedio();
+            validarTanques(modulo);
+        }
+    }
+});
+
+
+/* Cargar desinfectantes */
+function cargueDesinfectantes() {
+
+    $.ajax({
+        url: `../../api/desinfectantes`,
+        type: 'GET'
+    }).done((data, status, xhr) => {
+        data.forEach(desinfectante => {
+            $('#sel_producto_desinfeccion').append(`<option value="${desinfectante.id}">${desinfectante.nombre}</option>`);
+        });
+    });
+}
+
 /* cargue de preguntas */
+
 function carguepreguntas(data) {
     proceso = data;
 
@@ -51,21 +71,41 @@ function carguepreguntas(data) {
 
         $('#preguntas-div').html('');
         data.forEach((question, indx) => {
-            $('#preguntas-div').append(`<div class="col-md-10 col-2 align-self-right">
+            $('#preguntas-div').append(`
                     <a for="recipient-name" class="col-form-label" id="${question.id}">${question.pregunta}</a>
-                  </div>
-                  <div class="col-md-1 col-0 align-self-center">
-                    <label class="checkbox"> <input type="radio" class="questions" name="question-${question.id}" id="${question.id_pregunta}" value="1"/>
-                    </label>
-                  </div>
-                  <div class="col-md-1 col-0 align-self-center">
-                    <label class="checkbox"> <input type="radio" name="question-${question.id}" id="${question.id_pregunta}" value="0"/>
-                    </label>
-                  </div>`);
+                    <label class="checkbox"> 
+                    <input type="radio" class="questions" name="question-${question.id}" id="S${question.id_pregunta}" value="1"/></label>
+                    <label class="checkbox"> 
+                    <input type="radio" name="question-${question.id}" id="N${question.id_pregunta}" value="0"/></label>`
+            );
         });
 
     });
 }
+
+/* Mostrar ventana de Condiciones Medio de acuerdo con el tiempo establecido en la BD*/
+
+function cargueCondicionesMedio() {
+    $.ajax({
+        'type': 'POST',
+        'url': '../../html/php/condicionesmedio.php',
+        'data': { operacion: "1", modulo: proceso },
+
+        success: function (resp) {
+
+            if (resp == 3) {
+                return false;
+            }
+            let t = JSON.parse(resp);
+            let tiempo = Math.round(Math.random() * (t[0].t_max - t[0].t_min) + parseInt(t[0].t_min));
+
+            setTimeout(function () {
+                $("#m_CondicionesMedio").modal("show");
+            }, tiempo * 60000);
+        }
+    });
+}
+
 
 /* Carga de datos de informacion del batch record seleccionado */
 
@@ -91,6 +131,68 @@ $.ajax({
     }
 });
 
+
+/* Carga de tanques para mostrar en los proceso de pesaje, preparacion y aprobacion */
+
+function validarTanques(modulo) {
+    if (modulo == 2 || modulo == 3 || modulo == 4) {
+        let cantidad = 0;
+        ocultarfilasTanques(5);
+    }
+
+}
+
+/* Ocultar filas tanques */
+
+function ocultarfilasTanques(filas) {
+    filas = filas + 1;
+    for (let i = filas; i < 6; i++) {
+        $(`#fila${i}`).attr("hidden", true);
+    }
+    cargarTanques();
+}
+
+/* Cargar Tanques de acuerdo al batch */
+
+function cargarTanques() {
+    $.ajax({
+
+        'method': 'POST',
+        'url': '../../html/php/tanques.php',
+        'data': { id: idBatch },
+
+        success: function (data) {
+            var info = JSON.parse(data);
+            if (info == '') { return false; }
+
+            var j = 1;
+
+            for (let i = 0; i < info.length; i++) {
+                $(`#tanque${j}`).html(formatoCO(info[i].tanque));
+                $(`#cantidad${j}`).html(info[i].cantidad);
+                $(`#total${j}`).html(formatoCO(info[i].tanque * info[i].cantidad));
+                j++;
+
+                cantidad = cantidad + parseInt(info[i].cantidad);
+            }
+            ocultarfilasTanques(info.length);
+
+            if (proceso === "2" || proceso === "3") {
+                controlProceso(cantidad);
+            } else if (proceso === "4") {
+                cargaTanquesControl(cantidad);
+            }
+
+
+        },
+        error: function (r) {
+            alertify.set("notifier", "position", "top-right"); alertify.error("Error al Cargar los tanques.");
+        }
+
+    });
+}
+
+
 /* tabla de observaciones en la pestaña de informacion del producto */
 
 $(document).ready(function () {
@@ -105,53 +207,6 @@ $(document).ready(function () {
     $('.dataTables_length').addClass('bs-select');
 });
 
-/* Carga de tanques para mostrar en los proceso de pesaje, preparacion y aprobacion */
-let cantidad = 0;
-ocultarfilasTanques(5);
-$.ajax({
-
-    'method': 'POST',
-    'url': '../../html/php/tanques.php',
-    'data': { id: idBatch },
-
-    success: function (data) {
-        var info = JSON.parse(data);
-        var j = 1;
-
-        for (let i = 0; i < info.length; i++) {
-            $(`#tanque${j}`).html(formatoCO(info[i].tanque));
-            $(`#cantidad${j}`).html(info[i].cantidad);
-            $(`#total${j}`).html(formatoCO(info[i].tanque * info[i].cantidad));
-            j++;
-
-            cantidad = cantidad + parseInt(info[i].cantidad);
-        }
-        ocultarfilasTanques(info.length);
-
-        if (proceso === "2" || proceso === "3") {
-            controlProceso(cantidad);
-        } else if (proceso === "4") {
-            cargaTanquesControl(cantidad);
-        }
-
-
-    },
-    error: function (r) {
-        alertify.set("notifier", "position", "top-right"); alertify.error("Error al Cargar los tanques.");
-    }
-
-});
-
-/* Ocultar filas tanques */
-
-function ocultarfilasTanques(filas) {
-    filas = filas + 1;
-    for (let i = filas; i < 6; i++) {
-        $(`#fila${i}`).attr("hidden", true);
-    }
-
-}
-
 
 /* Mostrar los checkbox de acuerdo con la cantidad de tanques */
 
@@ -164,32 +219,7 @@ function controlProceso(cantidad) {
     for (let i = 1; i <= cantidad; i++) {
         $(".chk-control").append(`<input type="checkbox" id="chkcontrolTanques${i}" style="height: 30px; width:30px;">`);
     }
-
 }
-
-/* Mostrar ventana de Condiciones Medio de acuerdo con el tiempo establecido en la BD*/
-
-
-function cargueCondicionesMedio() {
-    $.ajax({
-        'type': 'POST',
-        'url': '../../html/php/condicionesmedio.php',
-        'data': { operacion: "1", modulo: proceso },
-
-        success: function (resp) {
-            if (resp == 3) {
-                return false;
-            }
-            let t = JSON.parse(resp);
-            let tiempo = Math.round(Math.random() * (t.data[0].t_max - t.data[0].t_min) + parseInt(t.data[0].t_min));
-
-            setTimeout(function () {
-                $("#m_CondicionesMedio").modal("show");
-            }, tiempo * 60000);
-        }
-    });
-}
-
 
 /* Almacenar informacion de condiciones del medio */
 
@@ -225,20 +255,6 @@ function guardar_condicionesMedio() {
     });
     //return false;
 }
-
-/* Cargar desinfectantes */
-function cargueDesinfectantes() {
-
-    $.ajax({
-        url: `../../api/desinfectantes`,
-        type: 'GET'
-    }).done((data, status, xhr) => {
-        data.forEach(desinfectante => {
-            $('#sel_producto_desinfeccion').append(`<option value="${desinfectante.id}">${desinfectante.nombre}</option>`);
-        });
-    });
-}
-
 
 //Validacion campos de preguntas diligenciados
 
@@ -358,107 +374,3 @@ const formatoGeneral = (number) => {
 
 
 }
-
-
-
-/* function enviar() {
-    $('#myModal2').modal('hide');
-    let usuario = $('#usuariomodal2').val();
-    console.log(usuario);
-    let contrasena = $('#contrasenamodal2').val();
-    let user = {
-        email: usuario,
-        password: contrasena
-    };
-    $.ajax({
-        type: 'POST',
-        url: '/api/user',
-        data: JSON.stringify(user),
-        dataType: 'json',
-        contentType: 'application/json; charset=utf-8',
-
-        success: function (resp) {
-
-            let parent = $('#in_realizado').parent();
-            $('#in_realizado').remove();
-            parent.append(`<img id="in_verificado" src="data:image/png;base64, ${resp.firma}" height="130">`);
-        }
-    });
-    return false;
-
-}
-
-function enviar2() {
-
-    $('#myModal3').modal('hide');
-    let usuario = $('#usuariomodal3').val();
-    let contrasena = $('#contrasenamodal3').val();
-    let user = {
-        email: usuario,
-        password: contrasena
-    };
-    $.ajax({
-        type: 'POST',
-        url: '/api/user',
-        data: JSON.stringify(user),
-        dataType: 'json',
-        contentType: 'application/json; charset=utf-8',
-        success: function (resp) {
-            let parent = $('#in_verificado').parent();
-            $('#in_verificado').remove();
-            parent.append(`<img id="in_verificado" src="data:image/png;base64, ${resp.firma}" height="130">`);
-        }
-    });
-    return false;
-
-}
-
-function enviar3() {
-    $('#myModal4').modal('hide');
-    let usuario = $('#usuariomodal4').val();
-    let contrasena = $('#contrasenamodal4').val();
-    let user = {
-        email: usuario,
-        password: contrasena
-    };
-    $.ajax({
-        type: 'POST',
-        url: '/api/user',
-        data: JSON.stringify(user),
-        dataType: 'json',
-        contentType: 'application/json; charset=utf-8',
-        success: function (resp) {
-
-            let parent = $('#in_realizado_2').parent();
-            $('#in_realizado_2').remove();
-            parent.append(`<img id="in_realizado_2" src="data:image/png;base64, ${resp.firma}" height="130">`);
-        }
-    });
-    return false;
-
-}
-
-function enviar4() {
-
-    $('#myModal5').modal('hide');
-    let usuario = $('#usuariomodal5').val();
-    let contrasena = $('#contrasenamodal5').val();
-    let user = {
-        email: usuario,
-        password: contrasena
-    };
-    $.ajax({
-        type: 'POST',
-        url: '/api/user',
-        data: JSON.stringify(user),
-        dataType: 'json',
-        contentType: 'application/json; charset=utf-8',
-        success: function (resp) {
-            let parent = $('#in_verificado_2').parent();
-            $('#in_verificado_2').remove();
-            parent.append(`<img  id="in_verificado_2" src="data:image/png;base64, ${resp.firma}" height="130">`);
-        }
-    });
-    return false;
-
-} */

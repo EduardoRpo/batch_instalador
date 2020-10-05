@@ -101,6 +101,8 @@ function validarPreguntas() {
 
     json = JSON.stringify(list);
     let obj = JSON.parse(json);
+    console.log(obj);
+    debugger;
     desinfectante = $('#sel_producto_desinfeccion').val();
     observaciones = $('#in_observaciones').val();
 
@@ -108,6 +110,7 @@ function validarPreguntas() {
         type: 'POST',
         url: "../../html/php/pesaje.php",
         data: {
+            operacion: 2,
             respuestas: obj,
             modulo: modulo,
             batch: idBatch,

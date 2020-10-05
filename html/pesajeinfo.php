@@ -179,13 +179,14 @@ include_once('modal/modal_condicionesMedio.php');
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
               <div class="card-body">
                 <div class="parametrosControl">
-                  <h3 for="recipient-name" class="col-form-label" style="text-align: center">Parámetros de Control</h3>
-                  <h3 for="recipient-name" class="col-form-label">&nbsp;&nbsp;&nbsp;Si</h3>
-                  <h3 for="recipient-name" class="col-form-label">&nbsp;&nbsp;&nbsp;No</h3>
-                </div>
-                <div class="row" id="preguntas-div" style="margin: 1%">
-                </div>
 
+                  <h3 for="recipient-name" class="col-form-label" style="text-align: center;">Parámetros de Control</h3>
+                  <h3 for="recipient-name" class="col-form-label">Si</h3>
+                  <h3 for="recipient-name" class="col-form-label">No</h3>
+                </div>
+                
+                <div class="row parametrosControlPreguntas" id="preguntas-div"></div>
+                
                 <div class="row" style="margin: 1%">
                   <div class="col-md-12 col-2 align-self-right">
                     <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Desinfección </h3>
@@ -281,7 +282,7 @@ include_once('modal/modal_condicionesMedio.php');
             </div> 
             <hr>-->
 
-           <!--  <div class="row" style="margin: 1%">
+            <!--  <div class="row" style="margin: 1%">
               <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down" id="imprimirEtiquetasVirtuales">Imprimir Etiquetas Virtuales
               </button>
               <iframe id="printf" name="printf" src="../../html/modal/m_plantillaEtiquetas.php" width="0" height="0" style="display:none;"></iframe>

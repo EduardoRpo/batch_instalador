@@ -11,15 +11,18 @@ if (!empty($_POST)) {
 
     switch ($op) {
         case 1: //validar si el batch tiene informacion y cargarla
-            
-            $modulo = $_POST['modulo'];
-            $batch = $_POST['batch'];
-            
+
+            $batch = $_POST['idbatch'];
+            $modulo = $_POST['module'];
+
             $sql = "SELECT * FROM solucion_pregunta WHERE id_batch= :batch AND id_modulo= :modulo";
             $query = $conn->prepare($sql);
             $query->execute(['batch' => $batch, 'modulo' => $modulo]);
             $rows = $query->rowCount();
-            
+
+            if ($rows > 0) {
+                ejecutarSelect($conn, $query);
+            }
 
             break;
         case 2: //Almacenar datos de despeje de lineas de proceso
