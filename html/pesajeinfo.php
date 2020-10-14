@@ -161,8 +161,6 @@ include_once('modal/modal_condicionesMedio.php');
                   <input type="text" class="form-control" id="in_numero_lote" readonly>
                   <input type="text" class="form-control" id="in_linea" readonly>
                 </div>
-                <!-- <div class="contenedorInfoObs">
-                </div> -->
               </div>
             </div>
           </div>
@@ -184,9 +182,9 @@ include_once('modal/modal_condicionesMedio.php');
                   <h3 for="recipient-name" class="col-form-label">Si</h3>
                   <h3 for="recipient-name" class="col-form-label">No</h3>
                 </div>
-                
+
                 <div class="row parametrosControlPreguntas" id="preguntas-div"></div>
-                
+
                 <div class="row" style="margin: 1%">
                   <div class="col-md-12 col-2 align-self-right">
                     <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Desinfección </h3>
@@ -275,19 +273,6 @@ include_once('modal/modal_condicionesMedio.php');
             </div>
             <hr>
 
-            <!-- <div class="row" style="margin: 1%">
-              <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down" data-toggle="modal" data-target="#modalObservaciones" style="margin-left: 1%">
-                Observaciones y/o Incidencias en el proceso
-              </button>
-            </div> 
-            <hr>-->
-
-            <!--  <div class="row" style="margin: 1%">
-              <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down" id="imprimirEtiquetasVirtuales">Imprimir Etiquetas Virtuales
-              </button>
-              <iframe id="printf" name="printf" src="../../html/modal/m_plantillaEtiquetas.php" width="0" height="0" style="display:none;"></iframe>
-            </div>
-            <hr> -->
             <div class="row" style="margin: 1%">
               <div class="col-md-3 col-2 align-self-center">
                 <label for="pesaje_realizado" class="col-form-label">Realizado Por:</label>
@@ -306,14 +291,6 @@ include_once('modal/modal_condicionesMedio.php');
                 <input type="button" class="btn btn-danger" id="pesaje_verificado" onclick="cargar(this, 'firma4')" style="width: 100%; height: 38px;" value="Firmar">
               </div>
             </div>
-
-            <!-- <div class="row justify-content-end mt-5" style="margin: 1%;text-align: right">
-              <div class="col-md-12 col-2 align-self-end">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#m_CondicionesMedio">Aceptar
-                </button>
-              </div>
-            </div> -->
           </div>
         </div>
       </div>
@@ -347,7 +324,12 @@ include_once('modal/modal_condicionesMedio.php');
   <script src="../../html/vendor/jquery-confirm/jquery-confirm.min.js"></script>
   <!-- <script src="../../html/js/datatables.js"></script> -->
   <script src="../../html/js/global/loadinfo-global.js"></script>
+  <script src="../../html/js/global/despeje.js"></script>
+  <script src="../../html/js/global/tanques.js"></script>
+  <script src="../../html/js/global/condicionesdelMedio.js"></script>
+  <script src="../../html/js/global/cargarDespeje.js"></script>
   <script src="../../html/js/pesaje/pesajeinfo.js"></script>
+  <script src="../../html/js/firmar/firmar.js"></script>
   <script src="../../html/js/firmar/firmar.js"></script>
 
   <!--Alertify-->

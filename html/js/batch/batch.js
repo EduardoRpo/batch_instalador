@@ -56,8 +56,8 @@ function crearTablaBatch(columna_busqueda='', minDateFilter='', maxDateFilter=''
                 return data == 1 ? '<i class="fa fa-superscript link-editarMulti" aria-hidden="true" data-toggle="tooltip" title="Editar Multipresentación" style="color:rgb(59, 131, 189)" aria-hidden="true"></i>' : '';
             }
             },
-            {"defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Editar Batch Record' style='color:rgb(255, 193, 7)'>&#xE254;</i></a>"},
-            {"defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar Batch Record' style='color:rgb(234, 67, 54)'>delete_forever</i></a>"}
+            {"defaultContent": "<a href='#' <i class='fa fa-pencil-square-o fa-2x link-editar' data-toggle='tooltip' title='Editar Batch Record' style='color:rgb(255, 193, 7);'></i></a>"},
+            {"defaultContent": "<a href='#' <i class='fa fa-trash link-borrar fa-2x' data-toggle='tooltip' title='Eliminar Batch Record' style='color:rgb(234, 67, 54)'></i></a>"}
             
         ],
 

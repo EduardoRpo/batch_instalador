@@ -161,19 +161,13 @@
             </div>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
               <div class="card-body">
-                <div class="row justify-content-center" style="margin: 1%;  background-color: #C0C0C0">
-                  <div class="col-md-10 col-2 align-self-right">
-                    <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Parámetros de control</h3>
-                  </div>
-                  <div class="col-md-1 col-0 align-self-center">
-                    <h3 for="recipient-name" class="col-form-label" style=" background-color: #C0C0C0">&nbsp;&nbsp;&nbsp;Si</h3>
-                  </div>
-                  <div class="col-md-1 col-0 align-self-center">
-                    <h3 for="recipient-name" class="col-form-label" style=" background-color: #C0C0C0">&nbsp;&nbsp;&nbsp;No</h3>
-                  </div>
+                <div class="parametrosControl">
+                  <h3 for="recipient-name" class="col-form-label" style="text-align: center;">Parámetros de control</h3>
+                  <h3 for="recipient-name" class="col-form-label">Si</h3>
+                  <h3 for="recipient-name" class="col-form-label">No</h3>
                 </div>
 
-                <div class="row" id="preguntas-div" style="margin: 1%"></div>
+                <div class="row parametrosControlPreguntas" id="preguntas-div"></div>
 
                 <div class="row" style="margin: 1%">
                   <div class="col-md-12 col-2 align-self-right">
@@ -522,6 +516,11 @@
         <script src="../../html/js/global/loadinfo-global.js"></script>
         <script src="../../html/js/pesaje/pesajeinfo.js"></script>
         <script src="../../html/js/firmar/firmar.js"></script>
+        <script src="../../html/js/global/despeje.js"></script>
+        <script src="../../html/js/global/tanques.js"></script>
+        <script src="../../html/js/global/equipos.js"></script>
+        <script src="../../html/js/global/condicionesdelMedio.js"></script>
+        <script src="../../html/js/global/cargarDespeje.js"></script>
         <script src="../../html/js/acondicionamiento/acondicionamientoinfo.js"></script>
         <!-- <script src="../../html/js/validadores.js"></script> -->
         <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->

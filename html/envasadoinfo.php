@@ -170,19 +170,13 @@ include('modal/m_muestras.php');
             </div>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
               <div class="card-body">
-                <div class="row justify-content-center" style="margin: 1%;  background-color: #C0C0C0">
-                  <div class="col-md-10 col-2 align-self-right">
-                    <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Parámetros de control</h3>
-                  </div>
-                  <div class="col-md-1 col-0 align-self-center">
-                    <h3 for="recipient-name" class="col-form-label" style=" background-color: #C0C0C0">&nbsp;&nbsp;&nbsp;Si</h3>
-                  </div>
-                  <div class="col-md-1 col-0 align-self-center">
-                    <h3 for="recipient-name" class="col-form-label" style=" background-color: #C0C0C0">&nbsp;&nbsp;&nbsp;No</h3>
-                  </div>
+                <div class="parametrosControl">
+                  <h3 for="recipient-name" class="col-form-label" style="text-align: center;">Parámetros de control</h3>
+                  <h3 for="recipient-name" class="col-form-label">Si</h3>
+                  <h3 for="recipient-name" class="col-form-label">No</h3>
                 </div>
 
-                <div class="row" id="preguntas-div" style="margin: 1%"></div>
+                <div class="row parametrosControlPreguntas" id="preguntas-div"></div>
 
                 <div class="row" style="margin: 1%">
                   <div class="col-md-12 col-2 align-self-right">
@@ -219,10 +213,7 @@ include('modal/m_muestras.php');
                   </div>
                 </div>
                 <div class="row justify-content-end mt-5" style="margin: 1%; text-align: right">
-                  <div class="col-md-12 col-2 align-self-end">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary">Aceptar</button>
-                  </div>
+
                 </div>
               </div>
             </div>
@@ -1291,6 +1282,11 @@ include('modal/m_muestras.php');
           <script src="../../html/vendor/jquery-confirm/jquery-confirm.min.js"></script>
           <!-- <script src="../../html/js/datatables.js"></script> -->
           <script src="../../html/js/global/loadinfo-global.js"></script>
+          <script src="../../html/js/global/despeje.js"></script>
+          <script src="../../html/js/global/tanques.js"></script>
+          <script src="../../html/js/global/equipos.js"></script>
+          <script src="../../html/js/global/condicionesdelMedio.js"></script>
+          <script src="../../html/js/global/cargarDespeje.js"></script>
           <script src="../../html/js/pesaje/pesajeinfo.js"></script>
           <script src="../../html/js/firmar/firmar.js"></script>
           <script src="../../html/js/envasado/envasadoinfo.js"></script>

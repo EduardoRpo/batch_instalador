@@ -174,12 +174,12 @@ include("modal/modal_condicionesMedio.php");
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
               <div class="card-body">
                 <div class="parametrosControl">
-                  <h3>Parámetros de control</h3>
-                  <h3>Si</h3>
-                  <h3>No</h3>
+                <h3 for="recipient-name" class="col-form-label" style="text-align: center;">Parámetros de Control</h3>
+                  <h3 for="recipient-name" class="col-form-label">Si</h3>
+                  <h3 for="recipient-name" class="col-form-label">No</h3>
                 </div>
 
-                <div class="row" id="preguntas-div" style="margin: 1%"></div>
+                <div class="row parametrosControlPreguntas" id="preguntas-div"></div>
 
                 <div class="row" style="margin: 1%">
                   <div class="col-md-12 col-2 align-self-right">
@@ -242,15 +242,8 @@ include("modal/modal_condicionesMedio.php");
                   <select class="selectpicker form-control" id="select-Linea"></select>
                   <input type="text" id="sel_agitador" class="form-control" readonly>
                   <input type="text" id="sel_marmita" class="form-control" readonly>
-                  <!-- <select class="selectpicker form-control" id="sel_agitador">
-                    <option selected hidden>Seleccione</option>
-                  </select>-->
-
-                  <!-- select class="selectpicker form-control" id="sel_marmita">
-                    <option selected hidden>Seleccione</option>
-                  </select> -->
+  
                 </div>
-                <!-- </div> -->
                 <div class="row" style="margin: 1%">
                   <div class="col-md-12 col-2 align-self-center">
                     <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">
@@ -258,7 +251,7 @@ include("modal/modal_condicionesMedio.php");
                   </div>
                   <div class="chk-control m-3">
                     <label for="" class="lblchk-control">Control Preparación Tanques</label>
-                    <!-- Control de Tanques -->
+
                   </div>
                   <hr>
                   <div class="col-md-8 col-2 align-self-center">
@@ -493,7 +486,10 @@ include("modal/modal_condicionesMedio.php");
   <script src="../../assets/plugins/jquery/jquery.number.min.js"></script>
 
   <script src="../../html/js/global/loadinfo-global.js"></script>
-
+  <script src="../../html/js/global/despeje.js"></script>
+  <script src="../../html/js/global/tanques.js"></script>
+  <script src="../../html/js/global/condicionesdelMedio.js"></script>
+  <script src="../../html/js/global/cargarDespeje.js"></script>
   <script src="../../html/js/pesaje/pesajeinfo.js"></script>
   <script src="../../html/js/preparacion/preparacioninfo.js"></script>
   <script src="../../html/js/firmar/firmar.js"></script>

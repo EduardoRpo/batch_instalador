@@ -68,7 +68,7 @@ function ejecutarQuerySelect($conn, $query)
 
     //Almacena la data en array
     while ($data = $result->fetch(PDO::FETCH_ASSOC)) {
-        $arreglo[] = $data;
+        $arreglo["data"][] = $data;
     }
     if (empty($arreglo)) {
         echo '3';
@@ -91,4 +91,17 @@ function ejecutarSelect($conn, $query)
     }
 
     echo json_encode(utf8ize($arreglo), JSON_UNESCAPED_UNICODE);
+}
+
+function ejecutarSelect1($query)
+{
+    //Almacena la data en array
+    $data = $query->fetch(PDO::FETCH_ASSOC); 
+    
+    if (empty($data)) {
+        echo '3';
+        exit();
+    }
+
+    echo json_encode(utf8ize($data), JSON_UNESCAPED_UNICODE);
 }

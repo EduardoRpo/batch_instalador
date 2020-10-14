@@ -1,35 +1,5 @@
 let flagWeight = false;
 
-/* validar y Cargar informacion almacenada en el batch */
-
-function cargarBatch() {
-
-
-
-    debugger;
-    $.ajax({
-        type: "POST",
-        url: "../../html/php/pesaje.php",
-        data: { operacion: 1, module: modulo, idbatch: idBatch },
-
-        success: function (response) {
-            let preg = $('#1').val();
-            let info = JSON.parse(response);
-
-            if (info !== '') {
-                for (let i = 0; i < info.data.length; i++) {
-                    let question = "question-" + info.data[i].id;
-                    let valor = info.data[i].solucion;
-                    $("input:radio[name=" + question + "][value=" + valor + "]").prop('checked', true);
-                }
-            }
-            else
-                return false;
-        }
-    });
-}
-
-
 /* Carga de Cargos  */
 
 $.ajax({

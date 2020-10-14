@@ -15,7 +15,7 @@ if (!empty($_POST)) {
             $batch = $_POST['idbatch'];
             $modulo = $_POST['module'];
 
-            $sql = "SELECT * FROM solucion_pregunta WHERE id_batch= :batch AND id_modulo= :modulo";
+            $sql = "SELECT * FROM batch_solucion_pregunta WHERE id_batch= :batch AND id_modulo= :modulo";
             $query = $conn->prepare($sql);
             $query->execute(['batch' => $batch, 'modulo' => $modulo]);
             $rows = $query->rowCount();
@@ -25,7 +25,23 @@ if (!empty($_POST)) {
             }
 
             break;
-        case 2: //Almacenar datos de despeje de lineas de proceso
+
+        case 2:
+            $batch = $_POST['idbatch'];
+            $modulo = $_POST['module'];
+
+            $sql = "SELECT * FROM batch_desinfectante_seleccionado WHERE modulo =:modulo AND batch =:batch ";
+            $query = $conn->prepare($sql);
+            $query->execute(['batch' => $batch, 'modulo' => $modulo]);
+            $rows = $query->rowCount();
+
+            if ($rows > 0) {
+                ejecutarSelect1($query);
+            }
+
+            break;
+
+        case 3: //Almacenar datos de despeje de lineas de proceso
 
             $respuestas = $_POST['respuestas'];
             $modulo = $_POST['modulo'];
@@ -34,7 +50,7 @@ if (!empty($_POST)) {
             $observaciones = $_POST['observaciones'];
 
 
-            $sql = "SELECT * FROM solucion_pregunta WHERE id_batch= :batch AND id_modulo= :modulo";
+            $sql = "SELECT * FROM batch_solucion_pregunta WHERE id_batch= :batch AND id_modulo= :modulo";
             $query = $conn->prepare($sql);
             $query->execute(['batch' => $batch, 'modulo' => $modulo]);
             $rows = $query->rowCount();
@@ -42,7 +58,7 @@ if (!empty($_POST)) {
             if ($rows > 0) {
                 foreach ($respuestas as $valor) {
                     foreach ($valor as $item) {
-                        $sql = "UPDATE solucion_pregunta SET solucion = :solucion 
+                        $sql = "UPDATE batch_solucion_pregunta SET solucion = :solucion 
                 WHERE id_pregunta= :pregunta AND id_modulo= :modulo AND id_batch= :batch";
                         $query = $conn->prepare($sql);
                         $result = $query->execute([
@@ -59,7 +75,7 @@ if (!empty($_POST)) {
                     }
                 }
 
-                $sql = "UPDATE desinfectante_sel SET desinfectante = :desinfectante,  observaciones = :observaciones, modulo = :modulo, batch = :batch
+                $sql = "UPDATE batch_desinfectante_seleccionado SET desinfectante = :desinfectante,  observaciones = :observaciones, modulo = :modulo, batch = :batch
                         WHERE id_pregunta= :pregunta AND id_modulo= :modulo AND id_batch= :batch";
                 $query = $conn->prepare($sql);
                 $result = $query->execute([
@@ -76,7 +92,7 @@ if (!empty($_POST)) {
             } else {
                 foreach ($respuestas as $valor) {
                     foreach ($valor as $item) {
-                        $sql = "INSERT INTO solucion_pregunta (solucion, id_pregunta, id_modulo, id_batch) 
+                        $sql = "INSERT INTO batch_solucion_pregunta (solucion, id_pregunta, id_modulo, id_batch) 
                         VALUES(:solucion, :id_pregunta, :id_modulo, :id_batch)";
                         $query = $conn->prepare($sql);
                         $result = $query->execute([
@@ -88,7 +104,7 @@ if (!empty($_POST)) {
                         ejecutarQuery($result, $conn);
                     }
                 }
-                $sql = "INSERT INTO desinfectante_sel (desinfectante, observaciones, modulo, batch) 
+                $sql = "INSERT INTO batch_desinfectante_seleccionado (desinfectante, observaciones, modulo, batch) 
                 VALUES(:desinfectante, :observaciones, :modulo, :batch)";
                 $query = $conn->prepare($sql);
                 $result = $query->execute([
