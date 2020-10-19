@@ -53,7 +53,6 @@ $('#guardarIncidencias').click(function (e) {
         }
     }
 
-
     var datos = [];
     var objeto = {};
 
@@ -70,10 +69,7 @@ $('#guardarIncidencias').click(function (e) {
     }
 
     objeto.datos = datos;
-    //console.log(JSON.stringify(objeto));
     incidencias = JSON.stringify(objeto)
-    //console.log(JSON.parse(incidencias));
-
 
     $.ajax({
         method: 'POST',
