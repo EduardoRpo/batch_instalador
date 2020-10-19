@@ -36,10 +36,12 @@ $.ajax({
             const info = JSON.parse(data);
             modulo = info[0].id;
 
-            cargueDesinfectantes();
             carguepreguntas(modulo);
+            desinfectantes();
             cargueCondicionesMedio();
             validarTanques(modulo);
+            cargarSelectorIncidencias();
+
         }
     }
 });

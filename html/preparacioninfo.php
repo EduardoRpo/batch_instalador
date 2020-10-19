@@ -61,7 +61,7 @@ include("modal/modal_condicionesMedio.php");
       <nav class="navbar top-navbar navbar-toggleable-sm navbar-light">
         <div class="navbar-header">
           <a class="navbar-brand">
-            <span><img src="../../assets/images/logo-light-text2.png" class="light-logo" alt="homepage" /></span>
+            <span><img src="../../assets/images/logo/logo-light-text2.png" class="light-logo" alt="homepage" /></span>
           </a>
         </div>
         <div class="navbar-collapse">
@@ -174,7 +174,7 @@ include("modal/modal_condicionesMedio.php");
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
               <div class="card-body">
                 <div class="parametrosControl">
-                <h3 for="recipient-name" class="col-form-label" style="text-align: center;">Parámetros de Control</h3>
+                  <h3 for="recipient-name" class="col-form-label" style="text-align: center;">Parámetros de Control</h3>
                   <h3 for="recipient-name" class="col-form-label">Si</h3>
                   <h3 for="recipient-name" class="col-form-label">No</h3>
                 </div>
@@ -204,246 +204,245 @@ include("modal/modal_condicionesMedio.php");
                     <input type="text" class="form-control " id="despeje_realizado" readonly>
                   </div>
                   <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                    <input type="button" class="btn btn-danger" id="despeje_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
-                  </div>
+                  <input type="button" class="btn btn-danger" id="despeje_realizado" onclick="cargar(this, 'firma1')" style="width: 100%; height: 38px;" value="Firmar">
+                </div>
 
-                  <div class="col-md-4 col-2 align-self-center">
-                    <label for="despeje_verificado" class="col-form-label">Verificado Por</label>
-                    <input type="text" class="form-control" id="despeje_verificado" readonly>
-                  </div>
-                  <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                    <input type="button" class="btn btn-danger" id="despeje_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
-                  </div>
+                <div class="col-md-4 col-2 align-self-center">
+                  <label for="despeje_verificado" class="col-form-label">Verificado Por</label>
+                  <input type="text" class="form-control" id="despeje_verificado" readonly>
+                </div>
+                <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
+                  <input type="button" class="btn btn-danger" id="despeje_verificado" onclick="cargar(this, 'firma2')" style="width: 100%; height: 38px;" value="Firmar">
                 </div>
               </div>
             </div>
           </div>
+        </div>
 
-          <div class="card">
-            <div class="card-header" id="headingThree">
-              <h5 class="mb-0">
-                <button class="btn btn-link collapsed text-uppercase" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
-                  Preparación
-                </button>
-              </h5>
-            </div>
-            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-              <div class="card-body">
-                <!-- <div class="row" style="margin: 1%">
+        <div class="card">
+          <div class="card-header" id="headingThree">
+            <h5 class="mb-0">
+              <button class="btn btn-link collapsed text-uppercase" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
+                Preparación
+              </button>
+            </h5>
+          </div>
+          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+            <div class="card-body">
+              <!-- <div class="row" style="margin: 1%">
               <div class="col-md-12 col-2 align-self-center">
                 <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Máquinas</h3>
               </div> -->
-                <h3 class="subtitulo" style="text-align: center; background-color: #C0C0C0; margin:25px; height:40px">Máquinas</h3>
-                <div class="maquinasPreparacion">
+              <h3 class="subtitulo" style="text-align: center; background-color: #C0C0C0; margin:25px; height:40px">Máquinas</h3>
+              <div class="maquinasPreparacion">
 
-                  <label for="">Linea</label>
-                  <label for="sel_agitador">Identificación Agitador</label>
-                  <label for="sel_marmita">Identificación Marmita o Tanque</label>
-                  <select class="selectpicker form-control" id="select-Linea"></select>
-                  <input type="text" id="sel_agitador" class="form-control" readonly>
-                  <input type="text" id="sel_marmita" class="form-control" readonly>
-  
+                <label for="">Linea</label>
+                <label for="sel_agitador">Identificación Agitador</label>
+                <label for="sel_marmita">Identificación Marmita o Tanque</label>
+                <select class="selectpicker form-control" id="select-Linea"></select>
+                <input type="text" id="sel_agitador" class="form-control" readonly>
+                <input type="text" id="sel_marmita" class="form-control" readonly>
+
+              </div>
+              <div class="row" style="margin: 1%">
+                <div class="col-md-12 col-2 align-self-center">
+                  <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">
+                    Instructivo de Preparación</h3>
                 </div>
-                <div class="row" style="margin: 1%">
-                  <div class="col-md-12 col-2 align-self-center">
-                    <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">
-                      Instructivo de Preparación</h3>
-                  </div>
-                  <div class="chk-control m-3">
-                    <label for="" class="lblchk-control">Control Preparación Tanques</label>
+                <div class="chk-control m-3">
+                  <label for="" class="lblchk-control">Control Preparación Tanques</label>
 
-                  </div>
-                  <hr>
-                  <div class="col-md-8 col-2 align-self-center">
+                </div>
+                <hr>
+                <div class="col-md-8 col-2 align-self-center">
 
-                    <div id="pasos_instructivo" class="col-form-label"></div>
+                  <div id="pasos_instructivo" class="col-form-label"></div>
 
-                  </div>
-                  <div class="col-md-4 col-2 align-self-center">
-                    <section class="clock">
-                      <div class="container">
-                        <div class="row">
-                          <div class="col-md-10 input-wrapper">
-                            <div class="input">
-                              <input type="number" id="tiempo_instructivo" class="form-control" min="0" readonly>
-                              <select id="measure" class="form-control" disabled>
-                                <option value="s">Segundos</option>
-                              </select>
-                            </div>
-                            <div class="buttons-wrapper">
-                              <button class="btn" id="start-countdown">Iniciar</button>
-                            </div>
-                          </div>
-                          <div id="timer" class="col-12">
-                            <div class="clock-wrapper">
-                              <span class="hours">00</span>
-                              <span class="dots">:</span>
-                              <span class="minutes">00</span>
-                              <span class="dots">:</span>
-                              <span class="seconds">00</span>
-                            </div>
+                </div>
+                <div class="col-md-4 col-2 align-self-center">
+                  <section class="clock">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-md-10 input-wrapper">
+                          <div class="input">
+                            <input type="number" id="tiempo_instructivo" class="form-control" min="0" readonly>
+                            <select id="measure" class="form-control" disabled>
+                              <option value="s">Segundos</option>
+                            </select>
                           </div>
                           <div class="buttons-wrapper">
-                            <button class="btn" id="resume-timer">Continuar</button>
-                            <button class="btn" id="stop-timer">Pausa</button>
-                            <button class="btn" id="reset-timer">Reiniciar</button>
+                            <button class="btn" id="start-countdown">Iniciar</button>
                           </div>
                         </div>
-                      </div>
-                    </section>
-
-                  </div>
-                </div>
-
-
-                <div class="row" style="margin: 1%">
-                  <div class="col-md-12 col-2 align-self-center">
-                    <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #c0c0c0">Control de proceso</h3>
-                  </div>
-                  <div class="col-md-12 col-2 align-self-center">
-                    <div class="card">
-                      <div class="card-block">
-                        <!--<h4 class="card-title">Basic Table</h4>
-                   <h6 class="card-subtitle">Add class <code>.table</code></h6>-->
-                        <div class="table-responsive">
-                          <table id="tblControlProcesoPreparacion" class="table table-striped table-bordered">
-                            <thead>
-                              <tr>
-                                <th style="text-align: center;">PARAMETROS</th>
-                                <th style="text-align: center;">ESPECIFICACIONES</th>
-                                <th style="text-align: center;">RESULTADOS</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td>Color</td>
-                                <td id="espec_color"></td>
-                                <td><select class="selectpicker form-control">
-                                    <option selected hidden></option>
-                                    <option>CUMPLE</option>
-                                    <option>NO CUMPLE</option>
-                                    <option>NO APLICA</option>
-                                  </select>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>Olor</td>
-                                <td id="espec_olor"></td>
-                                <td><select class="selectpicker form-control">
-                                    <option selected hidden></option>
-                                    <option>CUMPLE</option>
-                                    <option>NO CUMPLE</option>
-                                    <option>NO APLICA</option>
-                                  </select>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>Apariencia</td>
-                                <td id="espec_apariencia"></td>
-                                <td><select class="selectpicker form-control">
-                                    <option selected hidden></option>
-                                    <option>CUMPLE</option>
-                                    <option>NO CUMPLE</option>
-                                    <option>NO APLICA</option>
-                                  </select>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>PH</td>
-                                <td id="espec_ph"></td>
-                                <td><input type="number" id="in_ph" class="selectpicker form-control">
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>Viscocidad CPS</td>
-                                <td id="espec_viscidad"></td>
-                                <td><input type="number" class="selectpicker form-control" id="in_viscocidad">
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>Densidad</td>
-                                <td id="espec_densidad"></td>
-                                <td><input class="selectpicker form-control" type="number" id="in_densidad">
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>Untuosidad</td>
-                                <td id="espec_untosidad"></td>
-                                <td><select class="selectpicker form-control">
-                                    <option selected hidden></option>
-                                    <option>CUMPLE</option>
-                                    <option>NO CUMPLE</option>
-                                    <option>NO APLICA</option>
-                                  </select>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>Poder Espumoso</td>
-                                <td id="espec_poder_espumoso"></td>
-                                <td><select class="selectpicker form-control">
-                                    <option selected hidden></option>
-                                    <option>CUMPLE</option>
-                                    <option>NO CUMPLE</option>
-                                    <option>NO APLICA</option>
-                                  </select>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>Grado Alcohol</td>
-                                <td id="espec_grado_alcohol"></td>
-                                <td><input class="selectpicker form-control" type="number" id="in_grado_alcohol">
-                                </td>
-                              </tr>
-                          </table>
+                        <div id="timer" class="col-12">
+                          <div class="clock-wrapper">
+                            <span class="hours">00</span>
+                            <span class="dots">:</span>
+                            <span class="minutes">00</span>
+                            <span class="dots">:</span>
+                            <span class="seconds">00</span>
+                          </div>
                         </div>
+                        <div class="buttons-wrapper">
+                          <button class="btn" id="resume-timer">Continuar</button>
+                          <button class="btn" id="stop-timer">Pausa</button>
+                          <button class="btn" id="reset-timer">Reiniciar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+
+                </div>
+              </div>
+
+
+              <div class="row" style="margin: 1%">
+                <div class="col-md-12 col-2 align-self-center">
+                  <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #c0c0c0">Control de proceso</h3>
+                </div>
+                <div class="col-md-12 col-2 align-self-center">
+                  <div class="card">
+                    <div class="card-block">
+                      <!--<h4 class="card-title">Basic Table</h4>
+                   <h6 class="card-subtitle">Add class <code>.table</code></h6>-->
+                      <div class="table-responsive">
+                        <table id="tblControlProcesoPreparacion" class="table table-striped table-bordered">
+                          <thead>
+                            <tr>
+                              <th style="text-align: center;">PARAMETROS</th>
+                              <th style="text-align: center;">ESPECIFICACIONES</th>
+                              <th style="text-align: center;">RESULTADOS</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Color</td>
+                              <td id="espec_color"></td>
+                              <td><select class="selectpicker form-control">
+                                  <option selected hidden></option>
+                                  <option>CUMPLE</option>
+                                  <option>NO CUMPLE</option>
+                                  <option>NO APLICA</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Olor</td>
+                              <td id="espec_olor"></td>
+                              <td><select class="selectpicker form-control">
+                                  <option selected hidden></option>
+                                  <option>CUMPLE</option>
+                                  <option>NO CUMPLE</option>
+                                  <option>NO APLICA</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Apariencia</td>
+                              <td id="espec_apariencia"></td>
+                              <td><select class="selectpicker form-control">
+                                  <option selected hidden></option>
+                                  <option>CUMPLE</option>
+                                  <option>NO CUMPLE</option>
+                                  <option>NO APLICA</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>PH</td>
+                              <td id="espec_ph"></td>
+                              <td><input type="number" id="in_ph" class="selectpicker form-control">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Viscocidad CPS</td>
+                              <td id="espec_viscidad"></td>
+                              <td><input type="number" class="selectpicker form-control" id="in_viscocidad">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Densidad</td>
+                              <td id="espec_densidad"></td>
+                              <td><input class="selectpicker form-control" type="number" id="in_densidad">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Untuosidad</td>
+                              <td id="espec_untosidad"></td>
+                              <td><select class="selectpicker form-control">
+                                  <option selected hidden></option>
+                                  <option>CUMPLE</option>
+                                  <option>NO CUMPLE</option>
+                                  <option>NO APLICA</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Poder Espumoso</td>
+                              <td id="espec_poder_espumoso"></td>
+                              <td><select class="selectpicker form-control">
+                                  <option selected hidden></option>
+                                  <option>CUMPLE</option>
+                                  <option>NO CUMPLE</option>
+                                  <option>NO APLICA</option>
+                                </select>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>Grado Alcohol</td>
+                              <td id="espec_grado_alcohol"></td>
+                              <td><input class="selectpicker form-control" type="number" id="in_grado_alcohol">
+                              </td>
+                            </tr>
+                        </table>
                       </div>
                     </div>
                   </div>
                 </div>
-                <hr>
-                <div class="row" style="margin: 1%">
-                  <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down" data-toggle="modal" data-target="#modalAjuste" style="margin-left: 1%">
-                    ¿Se requiere algún ajuste?
-                  </button>
-                </div>
-                <hr>
+              </div>
+              <hr>
+              <div class="row" style="margin: 1%">
+                <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down" data-toggle="modal" data-target="#modalAjuste" style="margin-left: 1%">
+                  ¿Se requiere algún ajuste?
+                </button>
+              </div>
+              <hr>
 
-                <div class="row" style="margin: 1%">
-                  <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down" data-toggle="modal" data-target="#modalObservaciones" style="margin-left: 1%">
-                    Observaciones y/o Incidencias en el proceso
-                  </button>
-                </div>
-                <hr>
-                <div class="row" style="margin: 1%">
-                  <!-- <div class="col-md-2 col-2 align-self-right">
+              <div class="row" style="margin: 1%">
+                <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down" data-toggle="modal" data-target="#modalObservaciones" style="margin-left: 1%">
+                  Observaciones y/o Incidencias en el proceso
+                </button>
+              </div>
+              <hr>
+              <div class="row" style="margin: 1%">
+                <!-- <div class="col-md-2 col-2 align-self-right">
                 <label for="in_realizado_2" class="col-form-label">Fecha</label>
                 <input type="text" class="form-control" id="in_realizado_2" readonly>
               </div> -->
-                  <div class="col-md-4 col-2 align-self-center">
-                    <label for="preparacion_realizado" class="col-form-label">Realizado Por</label>
-                    <input type="text" class="form-control" id="preparacion_realizado" readonly>
-                  </div>
-                  <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                    <input type="button" class="btn btn-danger" id="preparacion_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
-                  </div>
-
-                  <div class="col-md-4 col-2 align-self-center">
-                    <!-- APARECER SOLO AL CHEQUEAR EL ULTIMO CHECKBOX -->
-                    <label for="preparacion_verificado" class="col-form-label">Verificado Por</label>
-                    <input type="text" class="form-control" id="preparacion_verificado" readonly>
-                  </div>
-                  <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                    <input type="button" class="btn btn-danger" id="preparacion_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
-                  </div>
+                <div class="col-md-4 col-2 align-self-center">
+                  <label for="preparacion_realizado" class="col-form-label">Realizado Por</label>
+                  <input type="text" class="form-control" id="preparacion_realizado" readonly>
                 </div>
-                <hr>
+                <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
+                  <input type="button" class="btn btn-danger" id="preparacion_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
+                </div>
 
-                <div class="row" style="margin: 1%">
-                  <div class="col-md-12 col-2 align-self-center" style="margin-left: 85%">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <!-- <button type="button" class="btn btn-primary" onclick="window.location.href = '../html/aprobacion.html';">Aceptar -->
-                    <button type="button" class="btn btn-primary" onclick="guardarBatchPreparacion();">Guardar</button>
-                  </div>
+                <div class="col-md-4 col-2 align-self-center">
+                  <!-- APARECER SOLO AL CHEQUEAR EL ULTIMO CHECKBOX -->
+                  <label for="preparacion_verificado" class="col-form-label">Verificado Por</label>
+                  <input type="text" class="form-control" id="preparacion_verificado" readonly>
+                </div>
+                <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
+                  <input type="button" class="btn btn-danger" id="preparacion_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
+                </div>
+              </div>
+              <hr>
+
+              <div class="row" style="margin: 1%">
+                <div class="col-md-12 col-2 align-self-center" style="margin-left: 85%">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                  <!-- <button type="button" class="btn btn-primary" onclick="window.location.href = '../html/aprobacion.html';">Aceptar -->
+                  <button type="button" class="btn btn-primary" onclick="guardarBatchPreparacion();">Guardar</button>
                 </div>
               </div>
             </div>
@@ -451,6 +450,7 @@ include("modal/modal_condicionesMedio.php");
         </div>
       </div>
     </div>
+  </div>
   </div>
   </div>
 

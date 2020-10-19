@@ -30,7 +30,11 @@ if (!empty($_POST)) {
             $batch = $_POST['idbatch'];
             $modulo = $_POST['module'];
 
-            $sql = "SELECT * FROM batch_desinfectante_seleccionado WHERE modulo =:modulo AND batch =:batch ";
+            $sql = "SELECT d.desinfectante, d.observaciones, u.urlfirma 
+                    FROM batch_desinfectante_seleccionado d 
+                    INNER JOIN usuario u ON u.id = d.realizo
+                    WHERE modulo = :modulo AND batch = :batch";
+                    
             $query = $conn->prepare($sql);
             $query->execute(['batch' => $batch, 'modulo' => $modulo]);
             $rows = $query->rowCount();
@@ -48,6 +52,7 @@ if (!empty($_POST)) {
             $batch = $_POST['batch'];
             $desinfectante = $_POST['desinfectante'];
             $observaciones = $_POST['observaciones'];
+            $realizo = $_POST['realizo'];
 
 
             $sql = "SELECT * FROM batch_solucion_pregunta WHERE id_batch= :batch AND id_modulo= :modulo";
@@ -56,7 +61,8 @@ if (!empty($_POST)) {
             $rows = $query->rowCount();
 
             if ($rows > 0) {
-                foreach ($respuestas as $valor) {
+                echo '2';
+                /* foreach ($respuestas as $valor) {
                     foreach ($valor as $item) {
                         $sql = "UPDATE batch_solucion_pregunta SET solucion = :solucion 
                 WHERE id_pregunta= :pregunta AND id_modulo= :modulo AND id_batch= :batch";
@@ -88,7 +94,7 @@ if (!empty($_POST)) {
                 if ($result) {
                     echo '3';
                     exit();
-                }
+                } */
             } else {
                 foreach ($respuestas as $valor) {
                     foreach ($valor as $item) {
@@ -104,14 +110,15 @@ if (!empty($_POST)) {
                         ejecutarQuery($result, $conn);
                     }
                 }
-                $sql = "INSERT INTO batch_desinfectante_seleccionado (desinfectante, observaciones, modulo, batch) 
-                VALUES(:desinfectante, :observaciones, :modulo, :batch)";
+                $sql = "INSERT INTO batch_desinfectante_seleccionado (desinfectante, observaciones, modulo, batch, realizo) 
+                VALUES(:desinfectante, :observaciones, :modulo, :batch, :realizo)";
                 $query = $conn->prepare($sql);
                 $result = $query->execute([
                     'desinfectante' => $desinfectante,
                     'observaciones' => $observaciones,
                     'modulo' => $modulo,
                     'batch' => $batch,
+                    'realizo' => $realizo,
                 ]);
                 ejecutarQuery($result, $conn);
             }

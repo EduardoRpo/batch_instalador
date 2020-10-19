@@ -8407,6 +8407,12 @@ div.displayallinfo {
   align-items: center;
 }
 
+.backbtn {
+  background-color: #e74c3c;
+  border: 1px solid #e74c3c;
+  color: #fff;
+}
+
 /* Maquinas preparacion */
 
 .maquinasPreparacion{

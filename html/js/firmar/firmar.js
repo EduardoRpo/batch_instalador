@@ -4,7 +4,7 @@ let cont = 1;
 
 function cargar(btn, idbtn) {
     $('#idbtn').val(idbtn);
-
+    
     id = btn.id;
     btnOprimido = id.split('_');
 
@@ -45,7 +45,6 @@ function enviar() {
                     alertify.set("notifier", "position", "top-right"); alertify.error("usuario y/o contraseña no coinciden.");
                     return false;
                 } else {
-                    debugger;
                     if ($("#firma1").length == 0) {
                         firmar(datos);
                     } /* else if ($("#firma2").length == 0) {
@@ -62,8 +61,8 @@ function enviar() {
 }
 
 function firmar(datos) {
+    debugger;
     data = JSON.parse(datos);
-
     let template = '<img id=":id:" src=":firma:" alt="firma_usuario" height="130">';
     let parent = $('#' + id).parent();
 
@@ -81,13 +80,13 @@ function firmar(datos) {
     }
 
     if (btn_id == 'firma1')
-        validarPreguntas();
+        validarPreguntas(data[0].id);
     if (btn_id == 'firma3')
         cargarObsIncidencias();
 
 }
 
-function validarPreguntas() {
+function validarPreguntas(idfirma) {
     var list = { 'datos': [] };
 
     $("input:radio:checked").each(function () {
@@ -115,11 +114,13 @@ function validarPreguntas() {
             batch: idBatch,
             desinfectante: desinfectante,
             observaciones: observaciones,
+            realizo: idfirma,
         },
         success: function (response) {
 
             if (response > 0) {
                 console.log('Almacenado');
+                $('#despeje_realizado').prop("disabled", true);
             }
         }
     });

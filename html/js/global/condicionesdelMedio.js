@@ -26,7 +26,8 @@ function cargueCondicionesMedio() {
 
 function guardar_condicionesMedio() {
 
-    let proceso = $('h1').text();
+    //let proceso = $('h1').text();
+    let proceso = modulo;
     let temperatura = $('#temperatura').val();
     let humedad = $('#humedad').val();
     let url = $(location).attr('href');
@@ -51,7 +52,12 @@ function guardar_condicionesMedio() {
         },
 
         success: function (resp) {
-            alertify.set("notifier", "position", "top-right"); alertify.success("Condiciones del Medio Almacenado");
+            if (resp == 1) {
+                alertify.set("notifier", "position", "top-right"); alertify.success("Condiciones del Medio Almacenado");
+            } else {
+                alertify.set("notifier", "position", "top-right"); alertify.error("Error");
+            }
+
         }
     });
     //return false;

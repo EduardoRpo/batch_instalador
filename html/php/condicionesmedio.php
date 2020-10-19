@@ -19,19 +19,19 @@ if (!empty($_POST)) {
 
     case 2: // guardar Condiciones del Medio
       if (!empty($_POST)) {
-        $nombre_modulo = $_POST['modulo'];
         $temperatura = $_POST['temperatura'];
-        $humedad =  $_POST['humedad'];
+        $humedad =  $_POST['humedad'];  
+        $modulo = $_POST['modulo'];
         $id_batch =  $_POST['id'];
 
-        $sql = "INSERT INTO condicionesmedio (fecha, temperatura, humedad, id_batch, id_modulo) 
-                  VALUES( NOW() , :temperatura, :humedad, :id_batch, (SELECT modulo.id FROM modulo WHERE modulo.modulo = :nombre_modulo) )";
+        $sql = "INSERT INTO batch_condicionesmedio (fecha, temperatura, humedad, id_batch, id_modulo) 
+                  VALUES( NOW() , :temperatura, :humedad, :id_batch, :modulo)";
         $query = $conn->prepare($sql);
         $result = $query->execute([
           'temperatura' => $temperatura,
           'humedad' => $humedad,
           'id_batch' => $id_batch,
-          'nombre_modulo' => $nombre_modulo,
+          'modulo' => $modulo,
         ]);
         if ($result) 
           echo '1';

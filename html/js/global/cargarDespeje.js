@@ -9,17 +9,19 @@ function cargarBatch() {
         data: { operacion: 1, module: modulo, idbatch: idBatch },
 
         success: function (response) {
-            if (response=='')
+            if (response == '')
                 return false;
-                
+
             let preg = $('#1').val();
             let info = JSON.parse(response);
-            
+
             if (info !== '') {
+                let j = 1;
                 for (let i = 0; i < info.data.length; i++) {
-                    let question = "question-" + info.data[i].id;
+                    let question = "question-" + j;
                     let valor = info.data[i].solucion;
                     $("input:radio[name=" + question + "][value=" + valor + "]").prop('checked', true);
+                    j++;
                 }
                 cargarDesinfectante();
             }
@@ -29,7 +31,7 @@ function cargarBatch() {
     });
 }
 
-function cargarDesinfectante(){
+function cargarDesinfectante() {
     $.ajax({
         type: "POST",
         url: "../../html/php/despeje.php",
@@ -40,9 +42,26 @@ function cargarDesinfectante(){
             let info = JSON.parse(response);
             desinfectante = info.desinfectante;
             observacion = info.observaciones;
+            firma = info.urlfirma;
 
             $('#sel_producto_desinfeccion').val(desinfectante);
             $('#in_observaciones').val(observacion);
+            firmado(firma);
         }
     });
+}
+
+
+function firmado(datos) {
+
+    let template = '<img id=":id:" src=":firma:" alt="firma_usuario" height="130">';
+    let parent = $('#despeje_realizado').parent();
+    btn_id = $('#idbtn').val();
+    $('#despeje_realizado').remove();
+
+    let firma = template.replace(':firma:', datos);
+    //firma = firma.replace(':id:', btn_id);
+    parent.append(firma).html
+    $('#despeje_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
+    //$('#despeje_realizado')
 }

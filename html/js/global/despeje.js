@@ -1,18 +1,4 @@
 
-/* Cargar desinfectantes */
-
-function cargueDesinfectantes() {
-
-    $.ajax({
-        url: `../../api/desinfectantes`,
-        type: 'GET'
-    }).done((data, status, xhr) => {
-        data.forEach(desinfectante => {
-            $('#sel_producto_desinfeccion').append(`<option value="${desinfectante.id}">${desinfectante.nombre}</option>`);
-        });
-    });
-}
-
 /* cargue de preguntas */
 
 function carguepreguntas(data) {
@@ -35,6 +21,21 @@ function carguepreguntas(data) {
             );
         });
 
+    });
+}
+
+
+/* Cargar desinfectantes */
+
+function desinfectantes() {
+
+    $.ajax({
+        url: `../../api/desinfectantes`,
+        type: 'GET'
+    }).done((data, status, xhr) => {
+        data.forEach(desinfectante => {
+            $('#sel_producto_desinfeccion').append(`<option value="${desinfectante.id}">${desinfectante.nombre}</option>`);
+        });
     });
 }
 
