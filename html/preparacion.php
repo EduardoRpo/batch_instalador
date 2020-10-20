@@ -34,7 +34,7 @@
     <header class="topbar">
       <nav class="navbar top-navbar navbar-toggleable-sm navbar-light">
         <div class="navbar-header">
-          <a class="navbar-brand"><span><img src="../assets/images/logo-light-text2.png" class="light-logo" alt="homepage"/></span></a>
+          <a class="navbar-brand"><span><img src="assets/images/logo/logo-samara.png" width="65%" class="light-logo" alt="homepage"/></span></a>
         </div>
         <div class="navbar-collapse">
           <ul class="navbar-nav mr-auto mt-md-0">

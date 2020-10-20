@@ -17,6 +17,18 @@ Date.prototype.toDateInputValue = (function () {
 $('#in_fecha').val(new Date().toDateInputValue());
 $('#in_fecha').attr('min', new Date().toDateInputValue());
 
+/* Deshabilitar bon verificado */
+$(document).ready(function () {
+    /* $('#despeje_verificado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true); */
+    
+    
+    $('#despeje_verificado').prop("disabled", false);
+
+
+});
+
+/* cargar batch al finalizar la carga de los demas procesos */
+
 $(document).ready(function () {
     setTimeout(() => {
         cargarBatch();

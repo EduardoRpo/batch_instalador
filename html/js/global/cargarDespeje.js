@@ -63,5 +63,6 @@ function firmado(datos) {
     //firma = firma.replace(':id:', btn_id);
     parent.append(firma).html
     $('#despeje_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
+    $('#despeje_verificado').prop("disabled", false);
     //$('#despeje_realizado')
 }

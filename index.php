@@ -38,7 +38,7 @@ include('./html/modal/modal_recuperarClave.php');
 
 <body class="text-center">
 	<form class="form-signin" action="" method="POST">
-		<img class="mb-4" src="/assets/images/logo-light-text2.png" alt="" width="200" height="100">
+		<img class="mb-4" src="assets/images/logo/logo-samara.png" alt="" width="200" height="100">
 		<h1 class="h3 mb-3 font-weight-normal" style="color:slategrey">Iniciar Sesión</h1><br>
 
 		<input type="text" name="usuario" class="form-control mb-3" placeholder="Usuario" autocomplete="off" required autofocus>

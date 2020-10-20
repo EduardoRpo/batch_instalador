@@ -6,12 +6,12 @@ function cargar(btn, idbtn) {
     $('#idbtn').val(idbtn);
     
     id = btn.id;
-    btnOprimido = id.split('_');
+    //btnOprimido = id.split('_');
 
-    if (btnOprimido[1] == 'verificado' && cont == 1) {
+    /* if (btnOprimido[1] == 'verificado' && cont == 1) {
         alertify.set("notifier", "position", "top-right"); alertify.error("Debe firmar en orden, primero el 'Realizado'.");
         return false;
-    } else {
+    } else { */
         validarParametrosControl();
 
         if (completo !== 0) {
@@ -19,7 +19,7 @@ function cargar(btn, idbtn) {
             cont = 0;
         }
 
-    }
+   /*  } */
 
 }
 
@@ -40,20 +40,21 @@ function enviar() {
             data: datos,
 
             success: function (datos) {
-
+                debugger;
                 if (datos.length < 1) {
                     alertify.set("notifier", "position", "top-right"); alertify.error("usuario y/o contraseña no coinciden.");
                     return false;
                 } else {
-                    if ($("#firma1").length == 0) {
+                    firmar(datos);
+                    /* if ($("#firma1").length == 0) {
                         firmar(datos);
-                    } /* else if ($("#firma2").length == 0) {
+                    }  else if ($("#firma2").length == 0) {
                         firmar(datos);
-                    } */ else if ($("#firma3").length == 0) {
+                    }  else if ($("#firma3").length == 0) {
                         firmar(datos);
                     } else if ($("#firma4").length == 0) {
                         firmar(datos);
-                    }
+                    } */
                 }
             }
         });
@@ -73,11 +74,14 @@ function firmar(datos) {
     firma = firma.replace(':id:', btn_id);
     parent.append(firma).html
 
+    /* habilitar boton firma verificada */
+
+
     /* $('#imprimirEtiquetas').show(); /* Imprimir etiquetas */
 
-    if (btnOprimido[1] == 'verificado') {
+    /* if (btnOprimido[1] == 'verificado') {
         cont = 1;
-    }
+    } */
 
     if (btn_id == 'firma1')
         validarPreguntas(data[0].id);
@@ -121,6 +125,7 @@ function validarPreguntas(idfirma) {
             if (response > 0) {
                 console.log('Almacenado');
                 $('#despeje_realizado').prop("disabled", true);
+                $('#despeje_verificado').prop("disabled", false);
             }
         }
     });

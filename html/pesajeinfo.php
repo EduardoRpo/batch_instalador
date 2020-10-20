@@ -59,7 +59,7 @@ include_once('modal/modal_condicionesMedio.php');
       <nav class="navbar top-navbar navbar-toggleable-sm navbar-light">
         <div class="navbar-header">
           <a class="navbar-brand">
-            <span><img src="../../assets/images/logo-light-text2.png" class="light-logo" alt="homepage" /></span>
+            <span><img src="../../assets/images/logo/logo-samara.png" width="65%" class="light-logo" alt="homepage" /></span>
           </a>
         </div>
         <div class="navbar-collapse">
@@ -219,7 +219,7 @@ include_once('modal/modal_condicionesMedio.php');
                   </div>
 
                   <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                    <input type="button" class="btn btn-danger in_desinfeccion" id="despeje_verificado" onclick="cargar(this, 'firma2')" style="width: 100%; height: 38px;" value="Firmar">
+                    <input type="button" class="btn btn-danger in_desinfeccion" id="despeje_verificado" onclick="cargar(this, 'firma2')" style="width: 100%; height: 38px;" value="Firmar" disabled>
                   </div>
                 </div>
                 <div class="row justify-content-end mt-5" style="margin: 1%; text-align: right">

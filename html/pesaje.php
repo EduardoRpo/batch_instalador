@@ -52,7 +52,7 @@ include('modal/modal_cambiarContrasena.php');
         <div class="navbar-header">
           <a class="navbar-brand">
             <span>
-              <img src="assets/images/logo-light-text2.png" class="light-logo" alt="Samara Cosmetics" /></span>
+              <img src="assets/images/logo/logo-samara.png" width="65%" class="light-logo" alt="Samara Cosmetics" /></span>
           </a>
         </div>
         <div class="navbar-collapse">

@@ -61,7 +61,7 @@ include("modal/modal_condicionesMedio.php");
       <nav class="navbar top-navbar navbar-toggleable-sm navbar-light">
         <div class="navbar-header">
           <a class="navbar-brand">
-            <span><img src="../../assets/images/logo/logo-light-text2.png" class="light-logo" alt="homepage" /></span>
+            <span><img src="../../assets/images/logo/logo-samara.png" width="65%" class="light-logo" alt="homepage" /></span>
           </a>
         </div>
         <div class="navbar-collapse">

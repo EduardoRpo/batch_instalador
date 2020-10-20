@@ -17,9 +17,6 @@
 $(document).ready(function () {
     $('#tablaPesajes').DataTable({
         ajax: {
-            //method: "POST",
-            //url : "html/php/listarBatch.php",
-            //data : {"operacion" : "1", "proceso": "2"},
             url: '/api/pesajes',
             dataSrc: ''
         },
