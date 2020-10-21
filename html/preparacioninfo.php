@@ -204,7 +204,7 @@ include("modal/modal_condicionesMedio.php");
                     <input type="text" class="form-control " id="despeje_realizado" readonly>
                   </div>
                   <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                  <input type="button" class="btn btn-danger" id="despeje_realizado" onclick="cargar(this, 'firma1')" style="width: 100%; height: 38px;" value="Firmar">
+                  <input type="button" class="btn btn-danger despeje_realizado" id="despeje_realizado" onclick="cargar(this, 'firma1')" style="width: 100%; height: 38px;" value="Firmar">
                 </div>
 
                 <div class="col-md-4 col-2 align-self-center">
@@ -212,7 +212,7 @@ include("modal/modal_condicionesMedio.php");
                   <input type="text" class="form-control" id="despeje_verificado" readonly>
                 </div>
                 <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                  <input type="button" class="btn btn-danger" id="despeje_verificado" onclick="cargar(this, 'firma2')" style="width: 100%; height: 38px;" value="Firmar">
+                  <input type="button" class="btn btn-danger despeje_verificado" id="despeje_verificado" onclick="cargar(this, 'firma2')" style="width: 100%; height: 38px;" value="Firmar">
                 </div>
               </div>
             </div>
@@ -424,7 +424,7 @@ include("modal/modal_condicionesMedio.php");
                   <input type="text" class="form-control" id="preparacion_realizado" readonly>
                 </div>
                 <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                  <input type="button" class="btn btn-danger" id="preparacion_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
+                  <input type="button" class="btn btn-danger preparacion_realizado" id="preparacion_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
                 </div>
 
                 <div class="col-md-4 col-2 align-self-center">
@@ -433,7 +433,7 @@ include("modal/modal_condicionesMedio.php");
                   <input type="text" class="form-control" id="preparacion_verificado" readonly>
                 </div>
                 <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                  <input type="button" class="btn btn-danger" id="preparacion_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
+                  <input type="button" class="btn btn-danger preparacion_verificado" id="preparacion_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
                 </div>
               </div>
               <hr>

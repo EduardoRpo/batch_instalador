@@ -9,6 +9,7 @@ function cargarBatch() {
         data: { operacion: 1, module: modulo, idbatch: idBatch },
 
         success: function (response) {
+
             if (response == '')
                 return false;
 
@@ -46,23 +47,54 @@ function cargarDesinfectante() {
 
             $('#sel_producto_desinfeccion').val(desinfectante);
             $('#in_observaciones').val(observacion);
-            firmado(firma);
+            firmado(firma, 1);
+
+
+            $.ajax({
+                type: "POST",
+                url: "../../html/php/despeje.php",
+                data: { operacion: 3, module: modulo, idbatch: idBatch },
+
+                success: function (response) {
+                    let info = JSON.parse(response);
+                    firma = info.urlfirma;
+                    firmado(firma, 2);
+                }
+            });
+
         }
     });
 }
 
 
-function firmado(datos) {
+function firmado(datos, posicion) {
 
     let template = '<img id=":id:" src=":firma:" alt="firma_usuario" height="130">';
-    let parent = $('#despeje_realizado').parent();
+    let parent;
+
     btn_id = $('#idbtn').val();
-    $('#despeje_realizado').remove();
+
+    if (posicion == 1) {
+        parent = $('#despeje_realizado').parent();
+        $('#despeje_realizado').remove();
+    }
+
+    if (posicion == 2){
+        parent = $('#despeje_verificado').parent();
+        $('#despeje_verificado').remove();
+    }
+        
 
     let firma = template.replace(':firma:', datos);
     //firma = firma.replace(':id:', btn_id);
     parent.append(firma).html
-    $('#despeje_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
-    $('#despeje_verificado').prop("disabled", false);
-    //$('#despeje_realizado')
+
+    if (posicion == 1) {
+        $('#despeje_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
+        $('.despeje_verificado').prop('disabled', false);
+    } else if (posicion == 2) {
+        $('.despeje_verificado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
+    }
+
+
 }

@@ -4,7 +4,7 @@ let cont = 1;
 
 function cargar(btn, idbtn) {
     $('#idbtn').val(idbtn);
-    
+
     id = btn.id;
     //btnOprimido = id.split('_');
 
@@ -12,14 +12,14 @@ function cargar(btn, idbtn) {
         alertify.set("notifier", "position", "top-right"); alertify.error("Debe firmar en orden, primero el 'Realizado'.");
         return false;
     } else { */
-        validarParametrosControl();
+    validarParametrosControl();
 
-        if (completo !== 0) {
-            $('#m_firmar').modal('show');
-            cont = 0;
-        }
+    if (completo !== 0) {
+        $('#m_firmar').modal('show');
+        cont = 0;
+    }
 
-   /*  } */
+    /*  } */
 
 }
 
@@ -40,21 +40,12 @@ function enviar() {
             data: datos,
 
             success: function (datos) {
-                debugger;
+
                 if (datos.length < 1) {
                     alertify.set("notifier", "position", "top-right"); alertify.error("usuario y/o contraseña no coinciden.");
                     return false;
                 } else {
                     firmar(datos);
-                    /* if ($("#firma1").length == 0) {
-                        firmar(datos);
-                    }  else if ($("#firma2").length == 0) {
-                        firmar(datos);
-                    }  else if ($("#firma3").length == 0) {
-                        firmar(datos);
-                    } else if ($("#firma4").length == 0) {
-                        firmar(datos);
-                    } */
                 }
             }
         });
@@ -62,7 +53,7 @@ function enviar() {
 }
 
 function firmar(datos) {
-    debugger;
+
     data = JSON.parse(datos);
     let template = '<img id=":id:" src=":firma:" alt="firma_usuario" height="130">';
     let parent = $('#' + id).parent();
@@ -74,21 +65,15 @@ function firmar(datos) {
     firma = firma.replace(':id:', btn_id);
     parent.append(firma).html
 
-    /* habilitar boton firma verificada */
-
-
-    /* $('#imprimirEtiquetas').show(); /* Imprimir etiquetas */
-
-    /* if (btnOprimido[1] == 'verificado') {
-        cont = 1;
-    } */
-
     if (btn_id == 'firma1')
         validarPreguntas(data[0].id);
+    if (btn_id == 'firma2')
+        firmarVerficadoDespeje(data[0].id);
     if (btn_id == 'firma3')
         cargarObsIncidencias();
 
 }
+/* Almacenar datos */
 
 function validarPreguntas(idfirma) {
     var list = { 'datos': [] };
@@ -112,7 +97,7 @@ function validarPreguntas(idfirma) {
         type: 'POST',
         url: "../../html/php/despeje.php",
         data: {
-            operacion: 3,
+            operacion: 4,
             respuestas: obj,
             modulo: modulo,
             batch: idBatch,
@@ -124,16 +109,38 @@ function validarPreguntas(idfirma) {
 
             if (response > 0) {
                 console.log('Almacenado');
-                $('#despeje_realizado').prop("disabled", true);
-                $('#despeje_verificado').prop("disabled", false);
+                $('.despeje_realizado').prop('disabled', true);
+                $('.despeje_verificado').prop('disabled', false);
+
             }
         }
     });
 }
 
+/* firma verificado despeje */
+
+function firmarVerficadoDespeje(idfirma) {
+    $.ajax({
+        type: "POST",
+        url: "../../html/php/despeje.php",
+        data: {
+            operacion: 5,
+            verifico: idfirma,
+            modulo: modulo,
+            batch: idBatch,
+        },
+
+        success: function (response) {
+            alertify.set("notifier", "position", "top-right"); alertify.success("Firmado satisfactoriamente");
+            $('.despeje_verificado').prop('disabled', true);
+        }
+    });
+}
+
+
 function cargarObsIncidencias() {
     $('#modalObservaciones').modal('show');
-  }
+}
 
 
 function imprimirPDF() {

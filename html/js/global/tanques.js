@@ -44,8 +44,11 @@ function cargarTanques() {
 
         success: function (data) {
             var info = JSON.parse(data);
-            if (info == '') { return false; }
+            //debugger;
+            if (info == '')
+                return false;
 
+            //let cantidad = 0;
             var j = 1;
 
             for (let i = 0; i < info.length; i++) {

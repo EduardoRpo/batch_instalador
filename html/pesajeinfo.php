@@ -20,7 +20,7 @@ include_once('modal/modal_condicionesMedio.php');
   <title>Samara Cosmetics</title>
 
   <!-- Favicon icon -->
-  <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="#">
 
   <!-- Bootstrap Core CSS -->
   <link href="../../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -210,7 +210,7 @@ include_once('modal/modal_condicionesMedio.php');
 
                   <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
                     <input type="text" id="idbtn" hidden>
-                    <input type="button" class="btn btn-danger" id="despeje_realizado" onclick="cargar(this, 'firma1')" style="width: 100%; height: 38px;" value="Firmar">
+                    <input type="button" class="btn btn-danger despeje_realizado" id="despeje_realizado" onclick="cargar(this, 'firma1')" style="width: 100%; height: 38px;" value="Firmar">
                   </div>
 
                   <div class="col-md-4 col-2 align-self-center">
@@ -219,7 +219,7 @@ include_once('modal/modal_condicionesMedio.php');
                   </div>
 
                   <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                    <input type="button" class="btn btn-danger in_desinfeccion" id="despeje_verificado" onclick="cargar(this, 'firma2')" style="width: 100%; height: 38px;" value="Firmar" disabled>
+                    <input type="button" class="btn btn-danger despeje_verificado in_desinfeccion" id="despeje_verificado" onclick="cargar(this, 'firma2')" style="width: 100%; height: 38px;" value="Firmar">
                   </div>
                 </div>
                 <div class="row justify-content-end mt-5" style="margin: 1%; text-align: right">
@@ -274,21 +274,21 @@ include_once('modal/modal_condicionesMedio.php');
             <hr>
 
             <div class="row" style="margin: 1%">
-              <div class="col-md-3 col-2 align-self-center">
+              <div class="col-md-4 col-2 align-self-center">
                 <label for="pesaje_realizado" class="col-form-label">Realizado Por:</label>
                 <input type="text" class="form-control" id="pesaje_realizado" readonly>
               </div>
 
               <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                <input type="button" class="btn btn-danger" id="pesaje_realizado" onclick="cargar(this, 'firma3')" style="width: 100%; height: 38px;" value="Firmar">
+                <input type="button" class="btn btn-danger pesaje_realizado" id="pesaje_realizado" onclick="cargar(this, 'firma3')" style="width: 100%; height: 38px;" value="Firmar">
               </div>
 
-              <div class="col-md-3 col-2 align-self-center">
+              <div class="col-md-4 col-2 align-self-center">
                 <label for="pesaje_verificado" class="col-form-label">Verificado Por:</label>
                 <input type="text" class="form-control" id="pesaje_verificado" readonly>
               </div>
-              <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                <input type="button" class="btn btn-danger" id="pesaje_verificado" onclick="cargar(this, 'firma4')" style="width: 100%; height: 38px;" value="Firmar">
+              <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%" mb-5>
+                <input type="button" class="btn btn-danger pesaje_verificado" id="pesaje_verificado" onclick="cargar(this, 'firma4')" style="width: 100%; height: 38px;" value="Firmar">
               </div>
             </div>
           </div>

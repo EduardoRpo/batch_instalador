@@ -34,7 +34,7 @@ if (!empty($_POST)) {
                     FROM batch_desinfectante_seleccionado d 
                     INNER JOIN usuario u ON u.id = d.realizo
                     WHERE modulo = :modulo AND batch = :batch";
-                    
+
             $query = $conn->prepare($sql);
             $query->execute(['batch' => $batch, 'modulo' => $modulo]);
             $rows = $query->rowCount();
@@ -44,8 +44,24 @@ if (!empty($_POST)) {
             }
 
             break;
+        case 3:
+            $batch = $_POST['idbatch'];
+            $modulo = $_POST['module'];
 
-        case 3: //Almacenar datos de despeje de lineas de proceso
+            $sql = "SELECT u.urlfirma 
+                    FROM batch_desinfectante_seleccionado d 
+                    INNER JOIN usuario u ON u.id = d.verifico
+                    WHERE modulo = :modulo AND batch = :batch";
+
+            $query = $conn->prepare($sql);
+            $query->execute(['batch' => $batch, 'modulo' => $modulo]);
+            $rows = $query->rowCount();
+
+            if ($rows > 0) {
+                ejecutarSelect1($query);
+            }
+            break;
+        case 4: //Almacenar datos de despeje de lineas de proceso
 
             $respuestas = $_POST['respuestas'];
             $modulo = $_POST['modulo'];
@@ -122,6 +138,26 @@ if (!empty($_POST)) {
                 ]);
                 ejecutarQuery($result, $conn);
             }
+            break;
+        case 5: // almacenar firma calidad
+
+            $modulo = $_POST['modulo'];
+            $batch = $_POST['batch'];
+            $verifico = $_POST['verifico'];
+
+            $sql = "UPDATE batch_desinfectante_seleccionado SET verifico = :verifico
+                    WHERE modulo= :modulo AND batch= :batch";
+            $query = $conn->prepare($sql);
+            $result = $query->execute([
+                'modulo' => $modulo,
+                'batch' => $batch,
+                'verifico' => $verifico,
+            ]);
+
+            if ($result) {
+                echo '1';
+            }
+
             break;
     }
 }
