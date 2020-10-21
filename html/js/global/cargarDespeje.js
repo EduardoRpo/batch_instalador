@@ -56,6 +56,9 @@ function cargarDesinfectante() {
                 data: { operacion: 3, module: modulo, idbatch: idBatch },
 
                 success: function (response) {
+                    if (response == '')
+                        return false;
+                        
                     let info = JSON.parse(response);
                     firma = info.urlfirma;
                     firmado(firma, 2);
@@ -79,11 +82,11 @@ function firmado(datos, posicion) {
         $('#despeje_realizado').remove();
     }
 
-    if (posicion == 2){
+    if (posicion == 2) {
         parent = $('#despeje_verificado').parent();
         $('#despeje_verificado').remove();
     }
-        
+
 
     let firma = template.replace(':firma:', datos);
     //firma = firma.replace(':id:', btn_id);

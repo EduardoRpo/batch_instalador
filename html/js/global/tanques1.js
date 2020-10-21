@@ -18,48 +18,53 @@ $(document).ready(function () {
 function validarTanques(modulo) {
     if (modulo == 2 || modulo == 3 || modulo == 4) {
         let cantidad = 0;
-        //ocultarfilasTanques(5);
+        ocultarfilasTanques(5);
     }
 
 }
 
 /* Ocultar filas tanques */
 
-/* function ocultarfilasTanques(filas) {
+function ocultarfilasTanques(filas) {
     filas = filas + 1;
     for (let i = filas; i < 6; i++) {
         $(`#fila${i}`).attr("hidden", true);
     }
     cargarTanques();
 }
- */
+
 /* Cargar Tanques de acuerdo al batch */
 
-cargarTanques();
-
 function cargarTanques() {
-
     $.ajax({
+
         'method': 'POST',
         'url': '../../html/php/tanques.php',
         'data': { id: idBatch },
 
         success: function (data) {
             var info = JSON.parse(data);
-
             if (info == '') { return false; }
-            /* cargar tabla de tanques en info */
-            $(`#tanque1`).html(formatoCO(info[0].tanque));
-            $(`#cantidad1`).html(info[0].cantidad);
-            $(`#total1`).html(formatoCO(info[0].tanque * info[0].cantidad));
 
-            /* iniciar proceso para colocar checks de tanques */
-            cantidad = parseInt(info[0].cantidad);
+            var j = 1;
 
-            if (proceso === "2" || proceso === "3")
+            for (let i = 0; i < info.length; i++) {
+                $(`#tanque${j}`).html(formatoCO(info[i].tanque));
+                $(`#cantidad${j}`).html(info[i].cantidad);
+                $(`#total${j}`).html(formatoCO(info[i].tanque * info[i].cantidad));
+                j++;
+
+                cantidad = cantidad + parseInt(info[i].cantidad);
+            }
+            ocultarfilasTanques(info.length);
+
+            if (proceso === "2" || proceso === "3") {
                 controlProceso(cantidad);
-            else if (proceso === "4")
+            } else if (proceso === "4") {
                 cargaTanquesControl(cantidad);
+            }
+
+
         },
         error: function (r) {
             alertify.set("notifier", "position", "top-right"); alertify.error("Error al Cargar los tanques.");
@@ -71,7 +76,7 @@ function cargarTanques() {
 /* Mostrar los checkbox de acuerdo con la cantidad de tanques */
 
 function controlProceso(cantidad) {
-    debugger;
+
     if (cantidad > 10) {
         cantidad = 10;
     }
