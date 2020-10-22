@@ -4,6 +4,7 @@ referencia = location.href.split('/')[5];
 let queeProcess = 0;
 let pasos;
 
+instructivo();
 
 /* Inicializar tabla control de proceso */
 /* $(document).ready(function() {
@@ -95,6 +96,7 @@ $.ajax({
 }); */
 
 /* Cargar lineas */
+
 $(document).ready(function () {
     $.ajax({
         type: "POST",
@@ -155,28 +157,33 @@ $.ajax({
     $('#in_viscocidad').attr('min', data.limite_inferior_viscosidad);
     $('#in_viscocidad').attr('max', data.limite_superior_viscosidad);
 
-    
+
 });
 
 
 /* Carga instructivo preparación para producto */
+function instructivo() {
+    
+    $.ajax({
+            url: `/api/instructivos/${referencia}`,
+            type: 'GET'
+        
+        }).done((data, status, xhr) => {
+            $('#pasos_instructivo').html('');
+            
+            pasos = data;
+            let i = 1;
+            data.forEach((instructivo, indx) => {
+                $('#pasos_instructivo').append(`<a href="javascript:void(0)" onclick="procesoTiempo(event)" 
+                class="proceso-instructivo" attr-indx="${indx}" attr-id="${instructivo.id}" id="proceso-instructivo${i}" 
+                attr-tiempo="${instructivo.tiempo}">PASO ${indx + 1}: ${instructivo.proceso} </a>  <br/>`);
+                i++;
+            });
+            ocultarInstructivo();
+        });
 
-$.ajax({
-    url: `/api/instructivos/${referencia}`,
-    type: 'GET'
+}
 
-}).done((data, status, xhr) => {
-    $('#pasos_instructivo').html('');
-    pasos = data;
-    var i = 1;
-    data.forEach((instructivo, indx) => {
-        $('#pasos_instructivo').append(`<a href="javascript:void(0)" onclick="procesoTiempo(event)" 
-        class="proceso-instructivo" attr-indx="${indx}" attr-id="${instructivo.id}" id="proceso-instructivo${i}" 
-        attr-tiempo="${instructivo.tiempo}">PASO ${indx + 1}: ${instructivo.proceso} </a>  <br/>`);
-        i++;
-    });
-    ocultarInstructivo();
-});
 
 function procesoTiempo(event) {
     let tiempo = $(event.target).attr('attr-tiempo');
@@ -211,7 +218,7 @@ function refreshInstructivo() {
 
 /* Ocultar las instrucciones del paso 3 en adelante */
 
-var paso = 4;
+//var paso = 4;
 
 function ocultarInstructivo() {
 

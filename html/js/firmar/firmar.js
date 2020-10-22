@@ -1,26 +1,26 @@
 let id;
 let btnOprimido;
 let cont = 1;
+let firma_realizado;
 
 function cargar(btn, idbtn) {
     $('#idbtn').val(idbtn);
-
     id = btn.id;
-    //btnOprimido = id.split('_');
 
-    /* if (btnOprimido[1] == 'verificado' && cont == 1) {
-        alertify.set("notifier", "position", "top-right"); alertify.error("Debe firmar en orden, primero el 'Realizado'.");
-        return false;
-    } else { */
+    //Validacion de control de tanques en pesaje
+    if (id == "pesaje_realizado") {
+        if ($("#chkcontrolTanques1").is(':not(:checked)')) {
+            alertify.set("notifier", "position", "top-right"); alertify.error("No hay tanques chequeados");
+            return false;
+        }
+    }
+
     validarParametrosControl();
 
     if (completo !== 0) {
         $('#m_firmar').modal('show');
         cont = 0;
     }
-
-    /*  } */
-
 }
 
 
@@ -53,8 +53,11 @@ function enviar() {
 }
 
 function firmar(datos) {
-
     data = JSON.parse(datos);
+
+    if (btn_id == 'firma3')
+        cargarObsIncidencias(data[0].id);
+
     let template = '<img id=":id:" src=":firma:" alt="firma_usuario" height="130">';
     let parent = $('#' + id).parent();
 
@@ -69,8 +72,7 @@ function firmar(datos) {
         validarPreguntas(data[0].id);
     if (btn_id == 'firma2')
         firmarVerficadoDespeje(data[0].id);
-    if (btn_id == 'firma3')
-        cargarObsIncidencias();
+
 
 }
 /* Almacenar datos */
@@ -111,7 +113,7 @@ function validarPreguntas(idfirma) {
                 console.log('Almacenado');
                 $('.despeje_realizado').prop('disabled', true);
                 $('.despeje_verificado').prop('disabled', false);
-
+                $('.pesaje_realizado').prop('disabled', true);
             }
         }
     });
@@ -137,11 +139,14 @@ function firmarVerficadoDespeje(idfirma) {
     });
 }
 
+/* Cargar formulario incidencias */
 
-function cargarObsIncidencias() {
+function cargarObsIncidencias(idFirma) {
+    firma_realizado = idFirma;
     $('#modalObservaciones').modal('show');
 }
 
+/* Imprimir pdf */
 
 function imprimirPDF() {
     $('#m_firmar').modal('show');

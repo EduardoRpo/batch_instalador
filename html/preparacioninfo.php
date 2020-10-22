@@ -147,7 +147,7 @@ include("modal/modal_condicionesMedio.php");
                   </table>
 
                   <input type="date" class="form-control" id="in_fecha" readonly>
-                  <input type="text" class="form-control" id="in_numero_orden" readonly style="font-size:x-large">
+                  <input type="text" class="form-control" id="in_numero_orden" readonly>
                   <input type="text" class="form-control" id="in_referencia" readonly>
 
                   <label></label>
@@ -408,11 +408,6 @@ include("modal/modal_condicionesMedio.php");
               </div>
               <hr>
 
-              <div class="row" style="margin: 1%">
-                <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down" data-toggle="modal" data-target="#modalObservaciones" style="margin-left: 1%">
-                  Observaciones y/o Incidencias en el proceso
-                </button>
-              </div>
               <hr>
               <div class="row" style="margin: 1%">
                 <!-- <div class="col-md-2 col-2 align-self-right">
@@ -489,10 +484,13 @@ include("modal/modal_condicionesMedio.php");
   <script src="../../html/js/global/despeje.js"></script>
   <script src="../../html/js/global/tanques.js"></script>
   <script src="../../html/js/global/condicionesdelMedio.js"></script>
-  <script src="../../html/js/global/cargarDespeje.js"></script>
+  <script src="../../html/js/global/cargarBatch.js"></script>
   <script src="../../html/js/pesaje/pesajeinfo.js"></script>
   <script src="../../html/js/preparacion/preparacioninfo.js"></script>
   <script src="../../html/js/firmar/firmar.js"></script>
+  <script src="../../html/js/global/equipos.js"></script>
+  <script src="../../html/js/global/incidencias.js"></script>
+
 </body>
 
 </html>

@@ -58,10 +58,26 @@ function cargarDesinfectante() {
                 success: function (response) {
                     if (response == '')
                         return false;
-                        
+
                     let info = JSON.parse(response);
                     firma = info.urlfirma;
                     firmado(firma, 2);
+                }
+            });
+
+            $.ajax({
+                type: "POST",
+                url: "../../html/php/proceso.php",
+                data: { operacion: 1, modulo: modulo, batch: idBatch },
+
+                success: function (response) {
+                    debugger;
+                    if (response == '')
+                        return false;
+
+                    let info = JSON.parse(response);
+                    firma = info.data[0].urlfirma;
+                    firmado(firma, 3);
                 }
             });
 
@@ -80,24 +96,26 @@ function firmado(datos, posicion) {
     if (posicion == 1) {
         parent = $('#despeje_realizado').parent();
         $('#despeje_realizado').remove();
+        $('#despeje_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
+        $('.despeje_verificado').prop('disabled', false);
+        $('.pesaje_realizado').prop('disabled', false);
     }
 
     if (posicion == 2) {
         parent = $('#despeje_verificado').parent();
         $('#despeje_verificado').remove();
-    }
-
-
-    let firma = template.replace(':firma:', datos);
-    //firma = firma.replace(':id:', btn_id);
-    parent.append(firma).html
-
-    if (posicion == 1) {
-        $('#despeje_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
-        $('.despeje_verificado').prop('disabled', false);
-    } else if (posicion == 2) {
         $('.despeje_verificado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
     }
+
+    if (posicion == 3) {
+        parent = $('#pesaje_realizado').parent();
+        $('#pesaje_realizado').remove();
+        $('.pesaje_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
+        $('.pesaje_verificado').prop('disabled', false);
+    }
+
+    let firma = template.replace(':firma:', datos);
+    parent.append(firma).html
 
 
 }

@@ -1,5 +1,6 @@
 <?php
-// Actualizar y Guardar data
+
+// Actualizar y Guardar data 1ra seccion
 
 if (!empty($_POST)) {
 
@@ -26,7 +27,7 @@ if (!empty($_POST)) {
 
             break;
 
-        case 2:
+        case 2: // cargar 1ra firma despeje
             $batch = $_POST['idbatch'];
             $modulo = $_POST['module'];
 
@@ -44,7 +45,7 @@ if (!empty($_POST)) {
             }
 
             break;
-        case 3:
+        case 3: // cargar 2da firma despeje
             $batch = $_POST['idbatch'];
             $modulo = $_POST['module'];
 
@@ -61,7 +62,7 @@ if (!empty($_POST)) {
                 ejecutarSelect1($query);
             }
             break;
-        case 4: //Almacenar datos de despeje de lineas de proceso
+        case 4: //Almacenar datos y firma 1ra seccion
 
             $respuestas = $_POST['respuestas'];
             $modulo = $_POST['modulo'];
@@ -139,7 +140,7 @@ if (!empty($_POST)) {
                 ejecutarQuery($result, $conn);
             }
             break;
-        case 5: // almacenar firma calidad
+        case 5: // almacenar firma calidad 1ra seccion
 
             $modulo = $_POST['modulo'];
             $batch = $_POST['batch'];
@@ -159,5 +160,6 @@ if (!empty($_POST)) {
             }
 
             break;
+        
     }
 }

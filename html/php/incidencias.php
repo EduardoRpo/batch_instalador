@@ -15,6 +15,11 @@ if (!empty($_POST)) {
             break;
         case 2: //almacenar incidencias
             $incidencias = $_POST['incidencias'];
+            $firma = $_POST['firma'];
+            $modulo = $_POST['modulo'];
+            $batch = $_POST['batch'];
+            $observaciones = $_POST['observaciones'];
+
             $datos = json_decode($incidencias, true);
 
             foreach ($datos as $valor) {
@@ -29,13 +34,29 @@ if (!empty($_POST)) {
                         'modulo' => $incidencia['modulo'],
                         'batch' => $incidencia['batch'],
                     ]);
-
-                    if ($result) {
-                        echo '1';
-                    }else
-                    echo '0';
                 }
             }
+
+            if (!$result) 
+                exit();
+
+            //Almacenado de firmas
+
+            $sql = "INSERT INTO batch_firmas2seccion (observaciones, modulo, batch, realizo) 
+            VALUES (:observaciones, :modulo, :batch, :realizo)";
+            $query = $conn->prepare($sql);
+            $result = $query->execute([
+                'realizo' => $firma,
+                'modulo' => $modulo,
+                'batch' => $batch,
+                'observaciones' => $observaciones,
+            ]);
+
+            if ($result) {
+                echo '1';
+            } else
+                echo '0';
+
             break;
     }
 }

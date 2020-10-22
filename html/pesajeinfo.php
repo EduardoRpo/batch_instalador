@@ -329,7 +329,7 @@ include_once('modal/modal_condicionesMedio.php');
   <script src="../../html/js/global/tanques.js"></script>
   <script src="../../html/js/global/condicionesdelMedio.js"></script>
   <script src="../../html/js/firmar/firmar.js"></script>
-  <script src="../../html/js/global/cargarDespeje.js"></script>
+  <script src="../../html/js/global/cargarBatch.js"></script>
   <script src="../../html/js/global/incidencias.js"></script>
 
   <!--Alertify-->

@@ -70,14 +70,21 @@ $('#guardarIncidencias').click(function (e) {
 
     objeto.datos = datos;
     incidencias = JSON.stringify(objeto)
-
+    let observaciones = $('.txtObservaciones').val();
     $.ajax({
         method: 'POST',
         url: '../../html/php/incidencias.php',
-        data: { operacion: 2, incidencias },
+        data: {
+            operacion: 2, incidencias,
+            firma: firma_realizado,
+            modulo: modulo,
+            batch: idBatch,
+            observaciones: observaciones,
+        },
 
         success: function (response) {
             alertify.set("notifier", "position", "top-right"); alertify.success("Incidencias Reportadas exitosamente!");
+            $('#modalObservaciones').modal('hide');
         }
 
     });

@@ -1,4 +1,5 @@
 
+var cantidad = 0;
 /* tabla de observaciones en la pestaña de informacion del producto */
 
 $(document).ready(function () {
@@ -71,7 +72,7 @@ function cargarTanques() {
 /* Mostrar los checkbox de acuerdo con la cantidad de tanques */
 
 function controlProceso(cantidad) {
-    debugger;
+
     if (cantidad > 10) {
         cantidad = 10;
     }

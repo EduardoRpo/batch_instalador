@@ -17,10 +17,12 @@ Date.prototype.toDateInputValue = (function () {
 $('#in_fecha').val(new Date().toDateInputValue());
 $('#in_fecha').attr('min', new Date().toDateInputValue());
 
-/* Deshabilitar boton verificado */
+/* Deshabilitar botones de firmas */
 
 $(document).ready(function () {
     $('.despeje_verificado').prop('disabled', true);
+    $('.pesaje_realizado').prop('disabled', true);
+    $('.pesaje_verificado').prop('disabled', true);
     
 });
 
@@ -90,7 +92,7 @@ function fechaHoy() {
     var fechaActual = d.getFullYear() + '/' + (mes < 10 ? '0' : '') + mes + '/' + (dia < 10 ? '0' : '') + dia;
 }
 
-/* formato de numeros */
+/* formato de numeros miles y decimales */
 
 const formatoCO = (number) => {
     if (number === undefined) {
