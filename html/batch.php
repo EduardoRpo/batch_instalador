@@ -38,8 +38,42 @@ include_once("modal/modal_cambiarContrasena.php");
     </div>
     <div id="main-wrapper">
       <?php include('./partials/header.php'); ?>
+
+
       <div class="contenedorPrincipal">
-        <h1 class="text-themecolor tituloProceso"><b>Batch Record</b></h1>
+
+      <div class="tituloProceso">
+  <h1 class="text-themecolor"><b>Batch Record</b></h1>
+</div>
+        
+
+      <div class="botones-group">
+
+      <div class="dropdown btn-acciones">
+          <button class="btn btn-secondary dropdown-toggle " style="background-color:#fff;color:#FF8D6D; border-color:#FF8D6D;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Acciones
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#" onclick="multipresentacion()">Multipresentación</a>
+            <a class="dropdown-item" href="#" onclick="clonar()">Clonar</a>
+            <a class="dropdown-item" href="#" onclick="batchEliminados()">Batch Eliminados</a>
+          </div>
+        </div>
+
+
+     <!-- ambos botones tienen hidden-sm-down -->
+        <button type="button" class="btn waves-effect waves-light btn-danger  btn-filtrar" style="background-color:#fff;color:#FF8D6D" onclick="filtrarfechas()">
+          Filtrar
+        </button>
+
+        <button type="button" class="btn waves-effect waves-light btn-danger btn-crearbatch" onclick="mostrarModal();">
+          <strong>Crear Batch Record</strong>
+        </button>
+
+      </div>
+
+
+        <!-- <h1 class="text-themecolor tituloProceso"><b>Batch Record</b></h1>
         <div class="dropdown btn-acciones">
           <button class="btn btn-secondary dropdown-toggle btn-md " style="background-color:#fff;color:#FF8D6D; border-color:#FF8D6D;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -49,7 +83,9 @@ include_once("modal/modal_cambiarContrasena.php");
           </div>
         </div>
         <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md btn-filtrar" style="background-color:#fff;color:#FF8D6D" onclick="filtrarfechas()">Filtrar</button>
-        <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md btn-crearbatch" onclick="mostrarModal();"><strong>Crear Batch Record</strong></button>
+        <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md btn-crearbatch" onclick="mostrarModal();"><strong>Crear Batch Record</strong></button> -->
+
+
       </div>
     </div>
 
@@ -77,7 +113,7 @@ include_once("modal/modal_cambiarContrasena.php");
       </div>
     </div>
 
-    <div class="col-md-12 col-2 align-self-right">
+    <div class="col-md-12 align-self-right">
       <div class="card">
         <div class="card-block">
           <div class="table-responsive">
