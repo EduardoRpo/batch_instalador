@@ -4,7 +4,7 @@ referencia = location.href.split('/')[5];
 let queeProcess = 0;
 let pasos;
 
-instructivo();
+/* instructivo(); */
 
 /* Inicializar tabla control de proceso */
 /* $(document).ready(function() {
@@ -162,7 +162,7 @@ $.ajax({
 
 
 /* Carga instructivo preparación para producto */
-function instructivo() {
+/* function instructivo() { */
     
     $.ajax({
             url: `/api/instructivos/${referencia}`,
@@ -185,6 +185,7 @@ function instructivo() {
         // inclusive para parsearla json ahí que quitar el número de referencia que esta antes del array
         // así llega desde la api.
         let data = JSON.parse(err.responseText.slice(5));
+        pasos = data;
         var i = 1;
         data.forEach((instructivo, indx) => {
             $('#pasos_instructivo').append(`<a href="javascript:void(0)" onclick="procesoTiempo(event)" 
@@ -194,7 +195,7 @@ function instructivo() {
         });
         ocultarInstructivo();
     });
-}
+/* } */
 
 
 function procesoTiempo(event) {
