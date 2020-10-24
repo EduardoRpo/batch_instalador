@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -27,33 +31,10 @@
   </div>
 
   <div id="main-wrapper" style="padding-top:15px; padding-left:15px; padding-right:15px">
-    <header class="topbar">
-      <nav class="navbar top-navbar navbar-toggleable-sm navbar-light">
-        <div class="navbar-header">
-          <a class="navbar-brand"><span><img src="../assets/images/logo-light-text2.png" class="light-logo" alt="homepage"/></span></a>
-        </div>
-        <div class="navbar-collapse">
-          <ul class="navbar-nav mr-auto mt-md-0">
-          <li class="nav-item"><a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark"
-                                  href="javascript:void(0)"><i class="mdi mdi-menu"></i></a></li>
-        </ul>
-        <ul class="navbar-nav my-lg-0">
-          <li class="nav-item dropdown">
-            <!-- <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/campana.png" alt="noty" class="profile-pic m-r-12" /></a>-->
-            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" data-toggle="dropdown"
-               aria-haspopup="true" aria-expanded="true" id="dropdownMenuenlace">Berney Montoya 
-                <i class="large material-icons">account_circle</i></i></a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuenlace">
-                  <a href="#" class="dropdown-item">Cambiar contraseña</a>
-                  <!-- <a href="./" class="dropdown-item">Cerrar sesión</a> -->
-                  <a href="../html/salir.php" class="dropdown-item">Cerrar sesión</a>
 
-                </div> 
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
+     <!-- HEADER -->
+    <!--  <?php include('partials/header.php'); ?> -->
+   <!-- FIN HEADER -->
   
   <div class="row page-titles">
     <div class="col-md-8 col-2 align-self-right">

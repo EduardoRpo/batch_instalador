@@ -4,7 +4,7 @@ referencia = location.href.split('/')[5];
 let queeProcess = 0;
 let pasos;
 
-instructivo();
+/* instructivo(); */
 
 /* Inicializar tabla control de proceso */
 /* $(document).ready(function() {
@@ -160,16 +160,14 @@ $.ajax({
 
 });
 
-
 /* Carga instructivo preparación para producto */
-function instructivo() {
+/* function instructivo() { */
     
-    $.ajax({
+     $.ajax({
             url: `/api/instructivos/${referencia}`,
-            type: 'GET'
-        
-}).done((data, status, xhr) => {
-    /*     $('#pasos_instructivo').html('');
+            type: 'GET',
+}).done((data, status, xhr) => { 
+         $('#pasos_instructivo').html('');
         pasos = data;
         var i = 1;
         data.forEach((instructivo, indx) => {
@@ -178,23 +176,11 @@ function instructivo() {
             attr-tiempo="${instructivo.tiempo}">PASO ${indx + 1}: ${instructivo.proceso} </a>  <br/>`);
             i++;
         });
-        ocultarInstructivo(); */
-    }).fail(err => {
-        $('#pasos_instructivo').html('');
-        // Desde el objeto err se puede ver que la response tiene status 200, y en responseText está la data
-        // inclusive para parsearla json ahí que quitar el número de referencia que esta antes del array
-        // así llega desde la api.
-        let data = JSON.parse(err.responseText.slice(5));
-        var i = 1;
-        data.forEach((instructivo, indx) => {
-            $('#pasos_instructivo').append(`<a href="javascript:void(0)" onclick="procesoTiempo(event)" 
-            class="proceso-instructivo" attr-indx="${indx}" attr-id="${instructivo.id}" id="proceso-instructivo${i}" 
-            attr-tiempo="${instructivo.tiempo}">PASO ${indx + 1}: ${instructivo.proceso} </a>  <br/>`);
-            i++;
-        });
-        ocultarInstructivo();
+        ocultarInstructivo(); 
+     }).fail(err => {
+        console.log(err);
     });
-}
+/* } */
 
 
 function procesoTiempo(event) {

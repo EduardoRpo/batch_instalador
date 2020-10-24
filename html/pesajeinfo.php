@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once('modal/modal_cambiarContrasena.php');
 include_once('modal/modal_observaciones.php');
 include_once('modal/modal_imprimirEtiquetas.php');
@@ -55,34 +56,8 @@ include_once('modal/modal_condicionesMedio.php');
     </svg>
   </div>
   <div id="main-wrapper">
-    <header class="topbar">
-      <nav class="navbar top-navbar navbar-toggleable-sm navbar-light">
-        <div class="navbar-header">
-          <a class="navbar-brand">
-            <span><img src="../../assets/images/logo/logo-samara.png" width="65%" class="light-logo" alt="homepage" /></span>
-          </a>
-        </div>
-        <div class="navbar-collapse">
-          <ul class="navbar-nav mr-auto mt-md-0">
-            <li class="nav-item"><a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="mdi mdi-menu"></i></a></li>
-          </ul>
-          <ul class="navbar-nav my-lg-0">
-            <li class="nav-item dropdown">
-              <!-- <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/campana.png" alt="noty" class="profile-pic m-r-12" /></a>-->
-              <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" id="dropdownMenuenlace">Berney Montoya
-                <i class="large material-icons">account_circle</i>
-                <!-- <i
-              class="fas fa-chevron-circle-down"> --></i></a>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuenlace">
-                <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modalCambiarContrasena">Cambiar contraseña</a>
-                <!-- <a href="../../index.php" class="dropdown-item">Cerrar sesión</a> -->
-                <a href="../html/salir.php" class="dropdown-item">Cerrar sesión</a>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </header>
+
+  <?php include('partials/header.php'); ?>
 
     <div class="container-fluid">
       <div class="row page-titles">
@@ -105,13 +80,50 @@ include_once('modal/modal_condicionesMedio.php');
             </div>
 
             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-              <div class="card-body">
-                <div class="contenedorInfo">
-                  <label>Fecha Programación</label>
-                  <label>No Orden</label>
-                  <label>Referencia</label>
+       
+       <!-- SE MODIFICO ESTE CARD BODY DESDE CERO PARA HACERLO RESPONSIVE -->
+            <div class="card-body">
+            <!--     <div class="contenedorInfo"> -->
+               <div class="row" style="padding: 1.5rem"> 
 
-                  <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:80%; height: 30px;">
+               <div class="col-md-8 row">
+               <div class="form-group col-4">
+                <label>Fecha Programación</label>
+                <input type="text" class="form-control" id="in_fecha_programacion" readonly>
+                </div>
+             
+                <div class="form-group  col-4">
+                <label>No Orden</label>
+                  <input type="text" class="form-control" id="in_numero_orden" readonly>
+                </div>
+                  
+                <div class="form-group  col-4">
+                <label>Referencia</label>
+                  <input type="text" class="form-control" id="in_referencia" readonly>
+                </div>
+
+                <div class="form-group col-4">
+                  <label>Tamaño Lote (Kg)</label>
+                  <input type="text" class="form-control" id="in_tamano_lote" readonly>
+                  </div>
+                  
+<div class="form-group col-4">
+<label>No. Lote</label>
+<input type="text" class="form-control" id="in_numero_lote" readonly>
+</div>
+
+  <div class="form-group col-4">
+  <label>Línea</label> 
+                  <input type="text" class="form-control" id="in_linea" readonly>
+  </div>
+               </div>
+              
+
+
+            
+  <div class="col-md-4">
+
+                  <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:70%; height: 30px;">
                     <thead>
                       <tr>
                         <th>Tanque</th>
@@ -147,21 +159,12 @@ include_once('modal/modal_condicionesMedio.php');
                       </tr>
                     </tbody>
                   </table>
-
-                  <input type="text" class="form-control" id="in_fecha_programacion" readonly>
-                  <input type="text" class="form-control" id="in_numero_orden" readonly>
-                  <input type="text" class="form-control" id="in_referencia" readonly>
-
-                  <label></label>
-                  <label>Tamaño Lote (Kg)</label>
-                  <label>No. Lote</label>
-                  <label>Línea</label>
-
-                  <input type="text" class="form-control" id="in_tamano_lote" readonly>
-                  <input type="text" class="form-control" id="in_numero_lote" readonly>
-                  <input type="text" class="form-control" id="in_linea" readonly>
+                  </div>
                 </div>
               </div>
+
+             <!--  </div> -->
+
             </div>
           </div>
 
@@ -186,39 +189,39 @@ include_once('modal/modal_condicionesMedio.php');
                 <div class="row parametrosControlPreguntas" id="preguntas-div"></div>
 
                 <div class="row" style="margin: 1%">
-                  <div class="col-md-12 col-2 align-self-right">
+                  <div class="col-md-12 align-self-right">
                     <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Desinfección </h3>
                   </div>
                 </div>
                 <div class="row" style="margin: 1%">
-                  <div class="col-md-4 col-2 align-self-right">
+                  <div class="col-md-4 align-self-right">
                     <label for="sel_producto_desinfeccion" class="col-form-label">Producto de desinfección</label>
                     <select class="selectpicker form-control in_desinfeccion" id="sel_producto_desinfeccion">
                       <option selected>Seleccione</option>
                     </select>
                   </div>
-                  <div class="col-md-8 col-2 align-self-center">
+                  <div class="col-md-8 align-self-center">
                     <label for="in_observaciones" class="col-form-label">Observaciones:</label>
                     <input type="text" class="form-control in_desinfeccion" id="in_observaciones">
                   </div>
                 </div>
                 <div class="row" style="margin: 1%">
-                  <div class="col-md-4 col-2 align-self-center">
+                  <div class="col-md-4 align-self-center">
                     <label for="despeje_realizado" class="col-form-label">Realizado Por:</label>
                     <input type="text" class="form-control in_desinfeccion" id="despeje_realizado" readonly>
                   </div>
 
-                  <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
+                  <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
                     <input type="text" id="idbtn" hidden>
                     <input type="button" class="btn btn-danger despeje_realizado" id="despeje_realizado" onclick="cargar(this, 'firma1')" style="width: 100%; height: 38px;" value="Firmar">
                   </div>
 
-                  <div class="col-md-4 col-2 align-self-center">
+                  <div class="col-md-4 align-self-center">
                     <label for="despeje_verificado" class="col-form-label">Verificado Por:</label>
                     <input type="text" class="form-control in_desinfeccion" id="despeje_verificado" readonly>
                   </div>
 
-                  <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
+                  <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
                     <input type="button" class="btn btn-danger despeje_verificado in_desinfeccion" id="despeje_verificado" onclick="cargar(this, 'firma2')" style="width: 100%; height: 38px;" value="Firmar">
                   </div>
                 </div>
@@ -240,7 +243,7 @@ include_once('modal/modal_condicionesMedio.php');
           <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
             <div class="card-body">
               <div class="row" style="margin: 1%">
-                <div class="col-md-12 col-2 align-self-center">
+                <div class="col-md-12 align-self-center">
                   <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">
                     Formula Maestra</h3>
                 </div>
@@ -265,29 +268,30 @@ include_once('modal/modal_condicionesMedio.php');
                 </div>
                 <hr>
                 <form>
-                  <div class="table-responsive"></div>
+                  <div class="table-responsive">
                   <table class="table" id="tablePesaje" style="width: 100%;">
                   </table>
+                  </div>
                 </form>
               </div>
             </div>
             <hr>
 
             <div class="row" style="margin: 1%">
-              <div class="col-md-4 col-2 align-self-center">
+              <div class="col-md-4 align-self-center">
                 <label for="pesaje_realizado" class="col-form-label">Realizado Por:</label>
                 <input type="text" class="form-control" id="pesaje_realizado" readonly>
               </div>
 
-              <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
+              <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
                 <input type="button" class="btn btn-danger pesaje_realizado" id="pesaje_realizado" onclick="cargar(this, 'firma3')" style="width: 100%; height: 38px;" value="Firmar">
               </div>
 
-              <div class="col-md-4 col-2 align-self-center">
+              <div class="col-md-4 align-self-center">
                 <label for="pesaje_verificado" class="col-form-label">Verificado Por:</label>
                 <input type="text" class="form-control" id="pesaje_verificado" readonly>
               </div>
-              <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%" mb-5>
+              <div class="col-md-2 align-self-center" style="margin-top: 2.8%" mb-5>
                 <input type="button" class="btn btn-danger pesaje_verificado" id="pesaje_verificado" onclick="cargar(this, 'firma4')" style="width: 100%; height: 38px;" value="Firmar">
               </div>
             </div>

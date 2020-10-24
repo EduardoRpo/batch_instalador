@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('modal/m_firma.php');
 include("modal/modal_observaciones.php");
 include("modal/modal_req_ajuste.php");
@@ -57,32 +58,10 @@ include("modal/modal_condicionesMedio.php");
   </div>
 
   <div id="main-wrapper">
-    <header class="topbar">
-      <nav class="navbar top-navbar navbar-toggleable-sm navbar-light">
-        <div class="navbar-header">
-          <a class="navbar-brand">
-            <span><img src="../../assets/images/logo/logo-samara.png" width="65%" class="light-logo" alt="homepage" /></span>
-          </a>
-        </div>
-        <div class="navbar-collapse">
-          <ul class="navbar-nav mr-auto mt-md-0">
-            <li class="nav-item"><a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="mdi mdi-menu"></i></a></li>
-          </ul>
-          <ul class="navbar-nav my-lg-0">
-            <li class="nav-item dropdown">
-              <!-- <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../assets/images/campana.png" alt="noty" class="profile-pic m-r-12" /></a>-->
-              <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" id="dropdownMenuenlace">Berney Montoya
-                <i class="large material-icons">account_circle</i></i></a><!-- <i class="fas fa-chevron-circle-down"></i></a> -->
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuenlace">
-                <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modalCambiarContrasena">Cambiar contraseña</a>
-                <!-- <a href="../../index.php" class="dropdown-item">Cerrar sesión</a> -->
-                <a href="../html/salir.php" class="dropdown-item">Cerrar sesión</a>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </header>
+
+  <?php include('partials/header.php'); ?>
+
+  
     <div class="container-fluid">
       <div class="row page-titles">
         <h1 hidden>3</h1>
@@ -105,7 +84,83 @@ include("modal/modal_condicionesMedio.php");
 
             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
               <div class="card-body">
-                <div class="contenedorInfo">
+
+
+              <div class="contenedorInfo2">
+
+                <div class="contenedorInfo__group">
+                  <label for="recipient-name" class="col-form-label">Fecha Programación</label>
+                  <input type="date" class="form-control" id="in_fecha" width="50px" readonly>
+                </div>
+                
+                <div class="contenedorInfo__group">
+                <label for="recipient-name" class="col-form-label">No Orden de Producción</label>
+                <input type="text" class="form-control" id="in_numero_orden" readonly>
+                </div>
+
+                <div class="contenedorInfo__group">
+                <label for="recipient-name" class="col-form-label">Referencia</label>
+                <input type="text" class="form-control" id="in_referencia" readonly>
+                  </div>
+
+                  <div class="contenedorInfo__group">
+
+                  <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:80%; height: 30px;">
+                    <thead>
+                      <tr>
+                        <th>Tanque</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr id="fila1">
+                        <td id="tanque1" style="text-align: end;font-size:14px;"></td>
+                        <td id="cantidad1" style="text-align: end;font-size:14px;"></td>
+                        <td id="total1" style="text-align: end;font-size:14px;"></td>
+                      </tr>
+                      <tr id="fila2">
+                        <td id="tanque2" style="text-align: end;font-size:14px;"></td>
+                        <td id="cantidad2" style="text-align: end;font-size:14px;"></td>
+                        <td id="total2" style="text-align: end;font-size:14px;"></td>
+                      </tr>
+                      <tr id="fila3">
+                        <td id="tanque3" style="text-align: end;font-size:14px;"></td>
+                        <td id="cantidad3" style="text-align: end;font-size:14px;"></td>
+                        <td id="total3" style="text-align: end;font-size:14px;"></td>
+                      </tr>
+                      <tr id="fila4">
+                        <td id="tanque4" style="text-align: end;font-size:14px;"></td>
+                        <td id="cantidad4" style="text-align: end;font-size:14px;"></td>
+                        <td id="total4" style="text-align: end;font-size:14px;"></td>
+                      </tr>
+                      <tr id="fila5">
+                        <td id="tanque5" style="text-align: end;font-size:14px;"></td>
+                        <td id="cantidad5" style="text-align: end;font-size:14px;"></td>
+                        <td id="total5" style="text-align: end;font-size:14px;"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+</div>
+
+                  <div class="contenedorInfo__group">
+                  <label for="in_tamano_lote" class="col-form-label">Tamaño Lote (kg)</label>
+                  <input type="text" class="form-control" id="in_tamano_lote" readonly>
+                  </div>
+
+                  <div class="contenedorInfo__group">
+                  <label for="recipient-name" class="col-form-label">No. Lote</label>
+                  <input type="text" class="form-control" id="in_numero_lote" readonly>
+                  </div>
+
+                  <div class="contenedorInfo__group">
+                  <label for="recipient-name" class="col-form-label">Linea</label>
+                  <input type="text" class="form-control" id="in_linea" readonly>
+                  </div>
+                  
+                </div>
+
+           <!--      <div class="contenedorInfo2">
                   <label for="recipient-name" class="col-form-label">Fecha Programación</label>
                   <label for="recipient-name" class="col-form-label">No Orden de Producción</label>
                   <label for="recipient-name" class="col-form-label">Referencia</label>
@@ -158,7 +213,10 @@ include("modal/modal_condicionesMedio.php");
                   <input type="text" class="form-control" id="in_tamano_lote" readonly>
                   <input type="text" class="form-control" id="in_numero_lote" readonly>
                   <input type="text" class="form-control" id="in_linea" readonly>
-                </div>
+                </div> -->
+
+
+
               </div>
             </div>
           </div>
@@ -182,36 +240,36 @@ include("modal/modal_condicionesMedio.php");
                 <div class="row parametrosControlPreguntas" id="preguntas-div"></div>
 
                 <div class="row" style="margin: 1%">
-                  <div class="col-md-12 col-2 align-self-right">
+                  <div class="col-md-12 align-self-right">
                     <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Desinfección </h3>
                   </div>
                 </div>
                 <div class="row" style="margin: 1%">
-                  <div class="col-md-4 col-2 align-self-right">
+                  <div class="col-md-4 align-self-right">
                     <label for="sel_producto_desinfeccion" class="col-form-label">Producto Desinfección</label>
                     <select class="selectpicker form-control in_desinfeccion" id="sel_producto_desinfeccion">
                       <option selected>Seleccione</option>
                     </select>
                   </div>
-                  <div class="col-md-8 col-2 align-self-center">
+                  <div class="col-md-8 align-self-center">
                     <label for="in_observaciones" class="col-form-label ">Observaciones</label>
                     <input type="text" class="form-control in_desinfeccion" id="in_observaciones">
                   </div>
                 </div>
                 <div class="row" style="margin: 1%">
-                  <div class="col-md-4 col-2 align-self-center">
+                  <div class="col-md-4 align-self-center">
                     <label for="despeje_realizado" class="col-form-label">Realizado Por</label>
                     <input type="text" class="form-control " id="despeje_realizado" readonly>
                   </div>
-                  <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
+                  <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
                   <input type="button" class="btn btn-danger despeje_realizado" id="despeje_realizado" onclick="cargar(this, 'firma1')" style="width: 100%; height: 38px;" value="Firmar">
                 </div>
 
-                <div class="col-md-4 col-2 align-self-center">
+                <div class="col-md-4 align-self-center">
                   <label for="despeje_verificado" class="col-form-label">Verificado Por</label>
                   <input type="text" class="form-control" id="despeje_verificado" readonly>
                 </div>
-                <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
+                <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
                   <input type="button" class="btn btn-danger despeje_verificado" id="despeje_verificado" onclick="cargar(this, 'firma2')" style="width: 100%; height: 38px;" value="Firmar">
                 </div>
               </div>
@@ -236,16 +294,27 @@ include("modal/modal_condicionesMedio.php");
               <h3 class="subtitulo" style="text-align: center; background-color: #C0C0C0; margin:25px; height:40px">Máquinas</h3>
               <div class="maquinasPreparacion">
 
-                <label for="">Linea</label>
-                <label for="sel_agitador">Identificación Agitador</label>
-                <label for="sel_marmita">Identificación Marmita o Tanque</label>
-                <select class="selectpicker form-control" id="select-Linea"></select>
-                <input type="text" id="sel_agitador" class="form-control" readonly>
+              <div class="maquinasPreparacion__group">
+              <label for="">Linea</label>
+              <select class="selectpicker form-control" id="select-Linea"></select>
+              </div>
+
+              <div class="maquinasPreparacion__group">
+              <label for="sel_agitador">Identificación Agitador</label>
+              <input type="text" id="sel_agitador" class="form-control" readonly>
+              </div>
+
+              <div class="maquinasPreparacion__group">
+              <label for="sel_marmita">Identificación Marmita o Tanque</label>
                 <input type="text" id="sel_marmita" class="form-control" readonly>
+             </div>
+                
+                
+               
 
               </div>
               <div class="row" style="margin: 1%">
-                <div class="col-md-12 col-2 align-self-center">
+                <div class="col-md-12 align-self-center">
                   <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">
                     Instructivo de Preparación</h3>
                 </div>
@@ -254,12 +323,12 @@ include("modal/modal_condicionesMedio.php");
 
                 </div>
                 <hr>
-                <div class="col-md-8 col-2 align-self-center">
+                <div class="col-md-8 align-self-center">
 
                   <div id="pasos_instructivo" class="col-form-label"></div>
 
                 </div>
-                <div class="col-md-4 col-2 align-self-center">
+                <div class="col-md-4 align-self-center">
                   <section class="clock">
                     <div class="container">
                       <div class="row">
@@ -297,10 +366,10 @@ include("modal/modal_condicionesMedio.php");
 
 
               <div class="row" style="margin: 1%">
-                <div class="col-md-12 col-2 align-self-center">
+                <div class="col-md-12 align-self-center">
                   <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #c0c0c0">Control de proceso</h3>
                 </div>
-                <div class="col-md-12 col-2 align-self-center">
+                <div class="col-md-12 align-self-center">
                   <div class="card">
                     <div class="card-block">
                       <!--<h4 class="card-title">Basic Table</h4>
@@ -414,30 +483,32 @@ include("modal/modal_condicionesMedio.php");
                 <label for="in_realizado_2" class="col-form-label">Fecha</label>
                 <input type="text" class="form-control" id="in_realizado_2" readonly>
               </div> -->
-                <div class="col-md-4 col-2 align-self-center">
+                <div class="col-md-4 align-self-center">
                   <label for="preparacion_realizado" class="col-form-label">Realizado Por</label>
                   <input type="text" class="form-control" id="preparacion_realizado" readonly>
                 </div>
-                <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
+                <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
                   <input type="button" class="btn btn-danger preparacion_realizado" id="preparacion_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
                 </div>
 
-                <div class="col-md-4 col-2 align-self-center">
+                <div class="col-md-4 align-self-center">
                   <!-- APARECER SOLO AL CHEQUEAR EL ULTIMO CHECKBOX -->
                   <label for="preparacion_verificado" class="col-form-label">Verificado Por</label>
                   <input type="text" class="form-control" id="preparacion_verificado" readonly>
                 </div>
-                <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
+                <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
                   <input type="button" class="btn btn-danger preparacion_verificado" id="preparacion_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
                 </div>
               </div>
               <hr>
 
-              <div class="row" style="margin: 1%">
-                <div class="col-md-12 col-2 align-self-center" style="margin-left: 85%">
+              <div class="row buttons-group-container" style="margin: 1%">
+              <div class="buttons-group">
+                <!-- <div class="col-md-12 align-self-center" style="margin-left: 85%; background-color:red"> -->
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                   <!-- <button type="button" class="btn btn-primary" onclick="window.location.href = '../html/aprobacion.html';">Aceptar -->
                   <button type="button" class="btn btn-primary" onclick="guardarBatchPreparacion();">Guardar</button>
+                <!-- </div> -->
                 </div>
               </div>
             </div>

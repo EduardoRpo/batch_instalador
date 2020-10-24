@@ -21,7 +21,6 @@
 
     public function findByProduct($idProduct)
     {
-      echo $idProduct;
       $connection = Connection::getInstance()->getConnection();
       $stmt = $connection->prepare("SELECT * FROM instructivo_preparacion WHERE id_producto = :referencia");
       $stmt->execute(array('referencia' => $idProduct));

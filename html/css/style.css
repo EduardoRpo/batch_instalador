@@ -8171,6 +8171,40 @@ div.displayallinfo {
   align-self: flex-end;
 } */
 
+/* Se cambiaron estos estilos, los originales están
+para mejorar el responsive enseguida*/
+.contenedorPrincipal {
+    margin: 2rem 0 .7rem;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .contenedorPrincipal .tituloProceso {
+    flex-grow: 4;
+    flex-shrink: 0;
+    flex-basis: 500px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .contenedorPrincipal .botones-group {
+    flex-grow: 1;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center
+  }
+  
+  .contenedorPrincipal .botones-group button {
+    width: 9.5rem;
+    height: 2.8rem;
+  }
+
+
+
+/* 
 .contenedorPrincipal{
   display: grid;
   grid-template-columns: repeat(13, 1fr);
@@ -8197,23 +8231,48 @@ div.displayallinfo {
 .btn-crearbatch{
   grid-column-start: 12;
   grid-column-end: 14;
+} */
+
+.contenedorInfo2 {
+ padding: 1.5rem;
+ display: grid;
+ grid-template-columns: repeat(5, 1fr);
+ gap: 1rem;
+}
+
+.contenedorInfo__group:nth-of-type(4) {
+  grid-column: 4 / -1;
+  grid-row: span 2;
+}
+
+@media screen and (max-width: 800px) {
+  .contenedorInfo2 {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, auto);
+  }
+
+  .contenedorInfo__group:nth-of-type(4) {
+    grid-column: 1 / -1;
+    grid-row: 4 / -1;
+  }
 }
 
 
-/* Cabecera Info */
 
-.contenedorInfo{
+/* Cabecera Info  */
+
+/* .contenedorInfo{
   display: grid;
   grid-template-columns: repeat(3, 1fr) 350px;
   grid-template-rows: 1em 2em 1em 2em;
   grid-gap: 1em;
   margin: 20px;
 
-}
+} */
 
 /* Pesaje */
 
-#in_tamano_lote{
+/* #in_tamano_lote{
   grid-row-start: 4;
   grid-row-end: 5;
 
@@ -8238,7 +8297,7 @@ div.displayallinfo {
   grid-column-start: 3;
   grid-column-end: 4;
   text-align: start;
-}
+} */
 
 .contenedorInfoGeneral{
   display: grid;
@@ -8416,6 +8475,17 @@ div.displayallinfo {
 /* Maquinas preparacion */
 
 .maquinasPreparacion{
+  padding: 0 2rem 3rem 2rem ;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.maquinasPreparacion__group {
+  margin-top: 1rem;
+  width: 300px;
+}
+/* .maquinasPreparacion{
   display: grid;
   grid-template-columns: 250px repeat(2, 1fr);
   
@@ -8427,7 +8497,7 @@ div.displayallinfo {
 .maquinasPreparacion .subtitulo{
   grid-column-start: 1;
   grid-column-end: 3;
-}
+} */
 
 /* Aprobacion */
 
@@ -8614,4 +8684,9 @@ input::placeholder {
 
 table.dataTable tbody td {
   vertical-align: middle;
+}
+
+.buttons-group-container {
+  display: flex;
+  justify-content: flex-end;
 }
