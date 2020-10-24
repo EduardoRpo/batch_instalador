@@ -110,7 +110,6 @@ function validarPreguntas(idfirma) {
         success: function (response) {
 
             if (response > 0) {
-                console.log('Almacenado');
                 $('.despeje_realizado').prop('disabled', true);
                 $('.despeje_verificado').prop('disabled', false);
                 $('.pesaje_realizado').prop('disabled', true);

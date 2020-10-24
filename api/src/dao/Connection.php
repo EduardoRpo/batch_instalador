@@ -12,7 +12,7 @@ use Symfony\Component\Dotenv\Dotenv;
 /**
  * Class Connection
  * @package BatchRecord\Dao
- * @author Alexis Holguin <MoraHol>
+ * @author Teenus <Teenus-SAS>
  */
 class Connection
 {

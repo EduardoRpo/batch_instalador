@@ -11,7 +11,7 @@
   /**
    * Class MateriaPrimaDao
    * @package BatchRecord\dao
-   * @author Teenus SAS
+   * @author Teenus <Teenus-SAS>
    */
   
    class MateriaPrimaDao
