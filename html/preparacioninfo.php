@@ -261,7 +261,9 @@ include("modal/modal_condicionesMedio.php");
                     <label for="despeje_realizado" class="col-form-label">Realizado Por</label>
                     <input type="text" class="form-control " id="despeje_realizado" readonly>
                   </div>
+
                   <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
+                  <input type="text" id="idbtn" hidden>
                   <input type="button" class="btn btn-danger despeje_realizado" id="despeje_realizado" onclick="cargar(this, 'firma1')" style="width: 100%; height: 38px;" value="Firmar">
                 </div>
 
@@ -308,10 +310,7 @@ include("modal/modal_condicionesMedio.php");
               <label for="sel_marmita">Identificación Marmita o Tanque</label>
                 <input type="text" id="sel_marmita" class="form-control" readonly>
              </div>
-                
-                
-               
-
+ 
               </div>
               <div class="row" style="margin: 1%">
                 <div class="col-md-12 align-self-center">
@@ -388,10 +387,10 @@ include("modal/modal_condicionesMedio.php");
                               <td>Color</td>
                               <td id="espec_color"></td>
                               <td><select class="selectpicker form-control">
-                                  <option selected hidden></option>
-                                  <option>CUMPLE</option>
-                                  <option>NO CUMPLE</option>
-                                  <option>NO APLICA</option>
+                                  <option selected hidden>Seleccionar</option>
+                                  <option value="1">Cumple   </option>
+                                  <option value="2">No Cumple</option>
+                                  <option value="3">No Aplica</option>
                                 </select>
                               </td>
                             </tr>
@@ -400,9 +399,9 @@ include("modal/modal_condicionesMedio.php");
                               <td id="espec_olor"></td>
                               <td><select class="selectpicker form-control">
                                   <option selected hidden></option>
-                                  <option>CUMPLE</option>
-                                  <option>NO CUMPLE</option>
-                                  <option>NO APLICA</option>
+                                  <option value="1">Cumple   </option>
+                                  <option value="2">No Cumple</option>
+                                  <option value="3">No Aplica</option>
                                 </select>
                               </td>
                             </tr>
@@ -411,9 +410,9 @@ include("modal/modal_condicionesMedio.php");
                               <td id="espec_apariencia"></td>
                               <td><select class="selectpicker form-control">
                                   <option selected hidden></option>
-                                  <option>CUMPLE</option>
-                                  <option>NO CUMPLE</option>
-                                  <option>NO APLICA</option>
+                                  <option value="1">Cumple   </option>
+                                  <option value="2">No Cumple</option>
+                                  <option value="3">No Aplica</option>
                                 </select>
                               </td>
                             </tr>
@@ -440,9 +439,9 @@ include("modal/modal_condicionesMedio.php");
                               <td id="espec_untosidad"></td>
                               <td><select class="selectpicker form-control">
                                   <option selected hidden></option>
-                                  <option>CUMPLE</option>
-                                  <option>NO CUMPLE</option>
-                                  <option>NO APLICA</option>
+                                  <option value="1">Cumple   </option>
+                                  <option value="2">No Cumple</option>
+                                  <option value="3">No Aplica</option>
                                 </select>
                               </td>
                             </tr>
@@ -451,9 +450,9 @@ include("modal/modal_condicionesMedio.php");
                               <td id="espec_poder_espumoso"></td>
                               <td><select class="selectpicker form-control">
                                   <option selected hidden></option>
-                                  <option>CUMPLE</option>
-                                  <option>NO CUMPLE</option>
-                                  <option>NO APLICA</option>
+                                  <option value="1">Cumple   </option>
+                                  <option value="2">No Cumple</option>
+                                  <option value="3">No Aplica</option>
                                 </select>
                               </td>
                             </tr>
@@ -475,7 +474,7 @@ include("modal/modal_condicionesMedio.php");
                   ¿Se requiere algún ajuste?
                 </button>
               </div>
-              <hr>
+              <!-- <hr> -->
 
               <hr>
               <div class="row" style="margin: 1%">
@@ -500,17 +499,17 @@ include("modal/modal_condicionesMedio.php");
                   <input type="button" class="btn btn-danger preparacion_verificado" id="preparacion_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
                 </div>
               </div>
-              <hr>
+              <!-- <hr> -->
 
-              <div class="row buttons-group-container" style="margin: 1%">
+              <!-- <div class="row buttons-group-container" style="margin: 1%">
               <div class="buttons-group">
-                <!-- <div class="col-md-12 align-self-center" style="margin-left: 85%; background-color:red"> -->
+                <div class="col-md-12 align-self-center" style="margin-left: 85%; background-color:red">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                  <!-- <button type="button" class="btn btn-primary" onclick="window.location.href = '../html/aprobacion.html';">Aceptar -->
+                  <button type="button" class="btn btn-primary" onclick="window.location.href = '../html/aprobacion.html';">Aceptar
                   <button type="button" class="btn btn-primary" onclick="guardarBatchPreparacion();">Guardar</button>
-                <!-- </div> -->
                 </div>
-              </div>
+                </div>
+              </div> -->
             </div>
           </div>
         </div>

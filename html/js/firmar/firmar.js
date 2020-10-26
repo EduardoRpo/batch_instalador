@@ -67,7 +67,7 @@ function firmar(datos) {
     let firma = template.replace(':firma:', data[0].urlfirma);
     firma = firma.replace(':id:', btn_id);
     parent.append(firma).html
-
+    debugger;
     if (btn_id == 'firma1')
         validarPreguntas(data[0].id);
     if (btn_id == 'firma2')
