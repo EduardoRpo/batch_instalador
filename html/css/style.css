@@ -8759,33 +8759,93 @@ input::placeholder {
 }
 
 /* acondicionamiento */
-
-.conciliacionrendimiento{
+/* .conciliacionrendimiento{
   display: grid;
   grid-template-columns: repeat(4, 1fr) ;
   grid-gap: 1em;
   margin: 40px;
+} */
+.conciliacionrendimiento {
+  display:grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  padding: 1rem 2rem; 
 }
-.firma{
+
+.conciliacionrendimiento__group {
+  display: grid;
+  grid-template-columns: 150px 60%;
+  align-items: center;
+  column-gap: 1rem;
+}
+
+@media screen and (min-width: 840px) {
+  .conciliacionrendimiento {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 3rem;
+  }
+  .conciliacionrendimiento__group {
+    grid-template-columns: 200px auto;
+    column-gap: 0;
+  }
+}
+
+
+.firma {
+  display: grid;
+  margin-left: 1rem;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  justify-content: flex-end;
+  column-gap: 1rem;
+}
+
+.firma #recipient2-name {
+  grid-row: 2;
+  grid-column: 1 / 2;
+}
+
+.firma button {
+  grid-row: 2;
+  grid-column: 2 / -1;
+}
+
+
+@media screen and (min-width: 520px){
+  .firma{
+    grid-template-columns: auto auto 180px;
+}
+.firma #recipient2-name {
+  grid-row: initial;
+  grid-column: initial;
+}
+
+.firma button {
+  grid-row: initial;
+  grid-column: initial;
+}
+} 
+
+/* .firma{
   display: grid;
   grid-template-columns: repeat(6, 1fr) ;
   grid-gap: 1em;
   margin: 40px;
-}
-
+} */
+/* 
 .entrego-acon{
   display: flex;
   justify-content: flex-end;
   grid-column-start: 4;
   grid-column-end: 5;
-}
+} */
 
-#txtPorcentaje-Unidades{
+/* #txtPorcentaje-Unidades{
   grid-row-start: 3;
   grid-row-end: 4;
   grid-column-start: 4;
   grid-column-end: 5;
-}
+} */
 
 /* Alamacen despachos */
 .almacen-despachos{

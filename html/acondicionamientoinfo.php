@@ -73,12 +73,24 @@ session_start();
 
             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
               <div class="card-body">
-                <div class="contenedorInfo">
 
-                  <label for="recipient-name" class="col-form-label">Fecha Programación</label>
-                  <label for="recipient-name" class="col-form-label">No Orden</label>
-                  <label for="recipient-name" class="col-form-label">Referencia</label>
+                <div class="contenedorInfo2">
 
+                      <div class="contenedorInfo__group">
+                      <label for="recipient-name" class="col-form-label">Fecha Programación</label>
+                      <input type="date" class="form-control" id="in_fecha" readonly>
+                      </div>
+                      <div class="contenedorInfo__group">
+                      <label for="recipient-name" class="col-form-label">No Orden</label>
+                      <input type="text" class="form-control" id="in_numero_orden" readonly>
+                        </div>
+                        <div class="contenedorInfo__group">
+                        <label for="recipient-name" class="col-form-label">Referencia</label>
+                        <input type="text" class="form-control" id="in_referencia" readonly>
+                        </div>
+
+                        <div class="contenedorInfo__group">
+                            
                   <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:80%; height: 30px;">
                     <thead>
                       <tr>
@@ -115,20 +127,26 @@ session_start();
                       </tr>
                     </tbody>
                   </table>
+                        </div>
 
-                  <input type="date" class="form-control" id="in_fecha" readonly>
-                  <input type="text" class="form-control" id="in_numero_orden" readonly>
-                  <input type="text" class="form-control" id="in_referencia" readonly>
+                        <div class="contenedorInfo__group">
+                        <label for="in_tamano_lote" class="col-form-label">Tamaño Lote (Kg)</label>
+                        <input type="text" class="form-control" id="in_tamano_lote" readonly>
+                        </div>
 
-                  <label></label>
-                  <label for="in_tamano_lote" class="col-form-label">Tamaño Lote (Kg)</label>
-                  <label for="recipient-name" class="col-form-label">No. Lote</label>
-                  <label for="recipient-name" class="col-form-label">Linea</label>
+                        <div class="contenedorInfo__group">
+                        <label for="recipient-name" class="col-form-label">No. Lote</label>
+                        <input type="text" class="form-control" id="in_numero_lote" readonly>
+                        </div>
 
-                  <input type="text" class="form-control" id="in_tamano_lote" readonly>
-                  <input type="text" class="form-control" id="in_numero_lote" readonly>
-                  <input type="text" class="form-control" id="in_linea" readonly>
+                        <div class="contenedorInfo__group">
+                        <label for="recipient-name" class="col-form-label">Linea</label>
+                        <input type="text" class="form-control" id="in_linea" readonly>
+                        </div>
+
                 </div>
+
+             
               </div>
             </div>
           </div>
@@ -152,43 +170,43 @@ session_start();
                 <div class="row parametrosControlPreguntas" id="preguntas-div"></div>
 
                 <div class="row" style="margin: 1%">
-                  <div class="col-md-12 col-2 align-self-right">
+                  <div class="col-md-12 align-self-right">
                     <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Desinfección </h3>
                   </div>
                 </div>
                 <div class="row" style="margin: 1%">
-                  <div class="col-md-4 col-2 align-self-right">
+                  <div class="col-md-4 align-self-right">
                     <label for="sel_producto_desinfeccion" class="col-form-label">Producto de desinfección</label>
                     <select class="selectpicker form-control in_desinfeccion" id="sel_producto_desinfeccion">
                       <option selected>Seleccione</option>
                     </select>
                   </div>
-                  <div class="col-md-8 col-2 align-self-center">
+                  <div class="col-md-8 align-self-center">
                     <label for="in_observaciones" class="col-form-label">Observaciones:</label>
                     <input type="text" class="form-control in_desinfeccion" id="in_observaciones">
                   </div>
                 </div>
                 <div class="row" style="margin: 1%">
-                  <div class="col-md-4 col-2 align-self-center">
+                  <div class="col-md-4 align-self-center">
                     <label for="despeje_realizado" class="col-form-label">Realizado Por:</label>
                     <input type="text" class="form-control in_desinfeccion" id="despeje_realizado" readonly>
                   </div>
 
-                  <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
+                  <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
                     <input type="button" class="btn btn-danger in_desinfeccion" id="despeje_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar"> <!-- data-toggle="modal" data-target="#m_firmar" -->
                   </div>
 
-                  <div class="col-md-4 col-2 align-self-center">
+                  <div class="col-md-4 align-self-center">
                     <label for="despeje_verificado" class="col-form-label">Verificado Por:</label>
                     <input type="text" class="form-control in_desinfeccion" id="despeje_verificado" readonly>
                   </div>
 
-                  <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
+                  <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
                     <input type="button" class="btn btn-danger in_desinfeccion" id="despeje_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar"> <!-- data-toggle="modal" data-target="#m_firmar" -->
                   </div>
                 </div>
                 <div class="row justify-content-end mt-5" style="margin: 1%; text-align: right">
-                  <div class="col-md-12 col-2 align-self-end">
+                  <div class="col-md-12 align-self-end">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <button type="button" class="btn btn-primary">Aceptar</button>
                   </div>
@@ -209,10 +227,10 @@ session_start();
           <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
             <div class="card-body">
               <div class="row" style="margin: 1%">
-                <div class="col-md-12 col-2 align-self-center">
+                <div class="col-md-12 align-self-center">
                   <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Recepcion Material</h3>
                 </div>
-                <div class="col-md-12 col-2 align-self-center">
+                <div class="col-md-12 align-self-center">
                   <div class="card">
                     <div class="card-block">
 
@@ -261,15 +279,15 @@ session_start();
                 </div>
               </div>
 
-              <div class="row" style="margin: 1%">
-                <div class="col-md-12 col-2 align-self-center" style="margin-left: 85%">
+              <div class="row buttons-group-container" style="margin: 1%">
+                <!-- <div class="col-md-12 col-2 align-self-center" style="margin-left: 85%"> -->
+                  <div>
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                   <button type="button" class="btn btn-primary" onclick="window.location.href = '../html/acondicionamiento.html';">Aceptar</button>
-                </div>
-
-
+                  </div>
+                <!-- /div> -->
               </div>
-              <div class="col-md-12 col-2 align-self-center">
+              <div class="col-md-12 align-self-center">
                 <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Línea de Producción</h3>
               </div>
               <div class="linea-produccion">
@@ -291,42 +309,42 @@ session_start();
 
               </div>
               <div class="row" style="margin: 1%">
-                <div class="col-md-12 col-2 align-self-center">
+                <div class="col-md-12 align-self-center">
                   <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Control de proceso</h3>
                 </div>
 
-                <div class="col-md-3 col-2 align-self-center" style="margin-top: 1%">
+                <div class="col-md-3 align-self-center" style="margin-top: 1%">
                   <label for="recipient-name" class="col-form-label">Cantidad de Muestras</label>
                 </div>
-                <div class="col-md-3 col-2 align-self-center" style="margin-top: 1%">
+                <div class="col-md-3 align-self-center" style="margin-top: 1%">
                   <input type="text" class="form-control" id="Muestras">
                 </div>
-                <div class="col-md-1 col-2 align-self-center" style="margin-top: 1%">
-                  <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;">Iniciar</button>
+                <div class="col-md-1 align-self-center" style="margin-top: 1%">
+                  <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 180px; height: 38px;">Iniciar</button>
                 </div>
               </div>
               <div class="row" style="margin: 1%">
-                <div class="col-md-4 col-2 align-self-center">
+                <div class="col-md-4 align-self-center">
                   <label for="recipient-name" class="col-form-label">Realizado Por</label>
                   <input type="text" class="form-control" id="recipient2-name" readonly>
                 </div>
-                <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                  <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;">Firmar</button>
+                <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
+                  <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 180px; height: 38px;">Firmar</button>
                 </div>
 
-                <div class="col-md-4 col-2 align-self-center">
+                <div class="col-md-4 align-self-center">
                   <label for="recipient-name" class="col-form-label">Verificado Por</label>
                   <input type="text" class="form-control" id="recipient2-name" readonly>
                 </div>
-                <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                  <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;">Firmar</button>
+                <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
+                  <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 180px; height: 38px;">Firmar</button>
                 </div>
               </div>
-              <div class="col-md-12 col-2 align-self-center">
+              <div class="col-md-12 align-self-center">
                 <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Devolución Material Sobrante</h3>
               </div>
 
-              <div class="col-md-12 col-2 align-self-center">
+              <div class="col-md-12 align-self-center">
                 <div class="card">
                   <div class="card-block">
 
@@ -382,58 +400,83 @@ session_start();
                   </div>
                 </div>
                 <div class="row" style="margin: 1%">
-                  <div class="col-md-4 col-2 align-self-center">
+                  <div class="col-md-4 align-self-center">
                     <label for="recipient-name" class="col-form-label">Realizado Por</label>
                     <input type="text" class="form-control" id="recipient2-name" readonly>
                   </div>
-                  <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                    <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;">Firmar</button>
+                  <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
+                    <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 180px; height: 38px;">Firmar</button>
                   </div>
 
-                  <div class="col-md-4 col-2 align-self-center">
+                  <div class="col-md-4 align-self-center">
                     <label for="recipient-name" class="col-form-label">Verificado Por</label>
                     <input type="text" class="form-control" id="recipient2-name" readonly>
                   </div>
-                  <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
-                    <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;">Firmar</button>
+                  <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
+                    <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 180px; height: 38px;">Firmar</button>
                   </div>
                 </div>
                 <div class="row " style="margin: 1%">
-                  <div class="col-md-12 col-2 align-self-center">
+                  <div class="col-md-12 align-self-center">
                     <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Conciliación Rendimiento</h3>
                   </div>
                 </div>
                 <div class="conciliacionrendimiento">
+
+                  <div class="conciliacionrendimiento__group">
                   <label for="recipient-name" class="col-form-label">Unidades Producidas:</label>
                   <input type="number" class="form-control centrado" id="txtUnidadesProducidas"> <!-- Este valor se valide con lo envasado por el usuario en envasado txtEnvasado1 Alert(Las unidades producidads son diferentes a las envasadas, notificar al jefe de producción) -->
-
+                  </div>
+              
+                  <div class="conciliacionrendimiento__group">
                   <label for="recipient-name" class="col-form-label">No Muestras de Retención:</label>
                   <input type="number" class="form-control centrado" id="txtMuestras-Retencion" onkeyup="conciliacionRendimiento(this.value);"><!-- impresion etiquetas para muestras (No produccion, lote, cod barras, cod producto, fecha ) -->
+                  </div>
+             
 
+                  <div class="conciliacionrendimiento__group">
                   <label for="recipient-name" class="col-form-label">Total Cajas:</label>
                   <input type="text" class="form-control centrado" id="txtTotal-Cajas" readonly>
+                    </div>
+          
 
+                  <div class="conciliacionrendimiento__group">
                   <label for="recipient-name" class="col-form-label">Total a Entregar Bodega/Cliente:</label>
                   <input type="text" class="form-control centrado" id="txtEntrega-Bodega" readonly>
+                    </div>
+               
 
+                  <div class="conciliacionrendimiento__group">
                   <label for="recipient-name" class="col-form-label">Rendimiento Producto:</label>
                   <input type="text" class="form-control centrado" id="txtRendimiento-Producto">
+                    </div>
+         
 
+                  <div class="conciliacionrendimiento__group">
                   <label for="recipient-name" class="col-form-label">Porcentaje Unidades:</label>
                   <input type="text" class="form-control centrado" id="txtPorcentaje-Unidades">
+                    </div>
+  
 
+                  <div class="conciliacionrendimiento__group">
                   <label for="recipient-name" class="col-form-label">No Movimiento Ofimatica:</label>
                   <input type="number" class="form-control centrado" id="txtNoMovimiento">
+                    </div>
+  
 
+                  <div class="conciliacionrendimiento__group">
                   <label for="recipient-name" class="col-form-label">Responsable Movimiento Ofimatica:</label>
                   <input type="text" class="form-control centrado" id="txtReponsable" value="Director de Producción (CRC)" readonly>
+                    </div>
+     
 
                 </div>
+
                 <div class="firma mt-5">
                   <label for="recipient-name" class="col-form-label entrego-acon">Entregó</label>
-                  <input type="text" class="form-control" id="recipient2-name" readonly>
+                  <input type="text" class="form-control" id="recipient2-name" style="width: 180px" readonly>
 
-                  <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;">Firmar</button>
+                  <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 180px; height: 38px;">Firmar</button>
                 </div>
 
                 <!-- <div class="row" style="margin: 1%"> -->
@@ -452,13 +495,14 @@ session_start();
 
         
                 </div> -->
-                <div class="row" style="margin: 1%">
-                  <div class="col-md-12 col-2 align-self-center" style="margin-left: 85%">
+                <div class="row buttons-group-container" style="margin: 1%">
+                 <!--  <div class="col-md-12 col-2 align-self-center" style="margin-left: 85%"> -->
+                   <div>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <button type="button" class="btn btn-primary" onclick="" ;">Aceptar</button>
-                  </div>
+                <!--   </div> -->
 
-
+                </div>
                 </div>
               </div>
 
