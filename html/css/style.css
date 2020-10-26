@@ -6591,8 +6591,9 @@ File: scss
 @media (max-width: 767px) {
   /*Header*/
   .topbar {
-    position: fixed;
-    width: 100%; }
+  /*   position: fixed; */
+    width: 100%; 
+  }
     .topbar .top-navbar {
       padding-right: 15px;
       -webkit-box-orient: horizontal;
