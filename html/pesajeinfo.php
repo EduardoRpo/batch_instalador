@@ -87,32 +87,32 @@ include_once('modal/modal_condicionesMedio.php');
                <div class="row" style="padding: 1.5rem"> 
 
                <div class="col-md-8 row">
-               <div class="form-group col-4">
+               <div class="form-group col-6 col-md-4">
                 <label>Fecha Programación</label>
                 <input type="text" class="form-control" id="in_fecha_programacion" readonly>
                 </div>
              
-                <div class="form-group  col-4">
+                <div class="form-group  col-6 col-md-4">
                 <label>No Orden</label>
                   <input type="text" class="form-control" id="in_numero_orden" readonly>
                 </div>
                   
-                <div class="form-group  col-4">
+                <div class="form-group  col-6 col-md-4">
                 <label>Referencia</label>
                   <input type="text" class="form-control" id="in_referencia" readonly>
                 </div>
 
-                <div class="form-group col-4">
+                <div class="form-group col-6 col-md-4">
                   <label>Tamaño Lote (Kg)</label>
                   <input type="text" class="form-control" id="in_tamano_lote" readonly>
                   </div>
                   
-<div class="form-group col-4">
+<div class="form-group col-6 col-md-4">
 <label>No. Lote</label>
 <input type="text" class="form-control" id="in_numero_lote" readonly>
 </div>
 
-  <div class="form-group col-4">
+  <div class="form-group col-6 col-md-4">
   <label>Línea</label> 
                   <input type="text" class="form-control" id="in_linea" readonly>
   </div>

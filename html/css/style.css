@@ -8179,6 +8179,7 @@ para mejorar el responsive enseguida*/
     height: 80px;
     display: flex;
     flex-wrap: wrap;
+    /* background-color: red; */
   }
   
   .contenedorPrincipal .tituloProceso {
@@ -8194,14 +8195,18 @@ para mejorar el responsive enseguida*/
     flex-shrink: 0;
     display: flex;
     justify-content: space-evenly;
-    align-items: center
+    align-items: center;
   }
   
-  .contenedorPrincipal .botones-group button {
+  .contenedorPrincipal .botones-group .btn-crearbatch {
     width: 9.5rem;
-    height: 2.8rem;
+    height: 2.9rem;
   }
 
+  .contenedorPrincipal .botones-group button {
+    width: 6.2rem;
+    height: 2.5rem;
+  }
 
 
 /* 
@@ -8515,18 +8520,83 @@ para mejorar el responsive enseguida*/
   grid-column-end: 11;
 }
 
-.especificaciones_tecnicas{
+/* .especificaciones_tecnicas{
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   
   grid-column-gap: 2em;
   margin: 20px;
   text-align: center;
+} */
+
+.especificaciones_tecnicas {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 1rem;
+    margin: 1.5rem 0;
+    padding: 0 1rem;
+}
+
+@media screen and (min-width: 840px) {
+  .especificaciones_tecnicas {
+      grid-template-columns: auto auto auto;
+      gap: 2rem
+  }
+
+  .especificaciones__group {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    column-gap: 1rem;
+  }
 }
 
 /* envasadora */
 
 .id_envasadora_loteadora{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+ @media screen and (min-width: 840px) {
+  .id_envasadora_loteadora{
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 1fr 1fr;
+    column-gap: 1.2rem;
+    row-gap: 1.2rem;
+    padding: 0 .5rem;
+  }
+  
+  .id_envasadora_loteadora .group {
+   display: grid;
+   grid-template-columns: auto 1fr; 
+   align-items: center;
+   justify-items: center;
+   column-gap: 1rem;
+  }
+  
+  .id_envasadora_loteadora .group:first-of-type {
+    grid-column: 1 / span 2;
+   }
+  
+   .id_envasadora_loteadora .group:nth-of-type(2) {
+    grid-column:  span 2;
+   }
+  
+   .id_envasadora_loteadora .group:nth-of-type(3) {
+    grid-row: 2 / -1;
+    grid-column:  span 3;
+   }
+  
+   .id_envasadora_loteadora .group:last-of-type {
+    grid-row: 2 / -1;
+    grid-column:  span 3;
+   } 
+ }
+
+
+/* .id_envasadora_loteadora{
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   
@@ -8571,7 +8641,7 @@ para mejorar el responsive enseguida*/
   grid-column-start: 5;
   grid-column-end: 7;
 }
-
+ */
 .txtMuestras{
   display: grid;
   grid-template-columns: repeat(8, 1fr);
@@ -8594,7 +8664,51 @@ input::placeholder {
   font-style: italic;
 }
 
-.firmas_envasado{
+/* FIRMAS ENVASADO */
+
+.firmas_envasado {
+  padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr ;
+  grid-template-rows: auto auto;
+  grid-auto-columns: 1fr;
+  gap: .8rem;
+}
+
+.firmas_envasado__group {
+  display: grid;
+  grid-template-columns: auto 30%;
+  column-gap: .8rem;
+}
+
+.firmas_envasado__group-btn {
+  justify-self: end;
+}
+
+.firmas_envasado__group label {
+  grid-column: 1 / -1;
+}
+
+@media screen and (min-width: 840px) {
+  .firmas_envasado {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  .firmas_envasado__group {
+    grid-template-columns: auto 1fr 20%;
+  }
+
+  .firmas_envasado__group label {
+    grid-column-end: 2;
+  }
+
+  .firmas_envasado__group-btn {
+    grid-column: 2 / -1;
+  }
+}
+
+/* .firmas_envasado{
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   
@@ -8602,7 +8716,7 @@ input::placeholder {
   grid-gap: 1.5em;
   margin: 20px;
   text-align: center;
-}
+} */
 
 .btn-cancelar{
   grid-column-start: 5;
@@ -8687,6 +8801,39 @@ table.dataTable tbody td {
 }
 
 .buttons-group-container {
+  padding-top: .7rem;
+  padding-right: 1.5rem;
   display: flex;
   justify-content: flex-end;
+}
+
+
+/* contenedor fechas */
+
+.contenedor-fechas {
+  width: 90%;
+  position: relative;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.contenedor-fechas .input-date {
+  border-radius: 3px;
+  outline: none;
+  border: none;
+  padding: 5px 2px;
+}
+
+@media screen and (max-width: 660px) {
+  .contenedor-fechas {
+    align-items: flex-start;
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .contenedor-fechas {
+    align-items: center;
+  }
 }

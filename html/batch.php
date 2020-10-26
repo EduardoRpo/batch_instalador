@@ -90,10 +90,10 @@ include_once("modal/modal_cambiarContrasena.php");
     </div>
 
     <div class="panel panel-primary">
-      <div class="container" id="filtrafechas" style="left:800px">
+      <div class="contenedor-fechas" id="filtrafechas">
         <form id="formFechas">
           <div class="row">
-            <div class="col-md-6 col-2 align-self-center" style="padding-bottom: 10px;left:50px">
+            <div class="col-md-6 col-2 align-self-center" style="padding-bottom: 10px;left:50px; display:flex">
               <input type="checkbox" class="form-check-input" id="checkFechaCreacion" name="typeFilter" hidden>
               <label class="form-check-label" for="checkFechaCreacion" style="padding-right: 10px;">Creación</label>
               <input type="checkbox" class="form-check-input" id="checkFechaProgramacion" name="typeFilter" hidden>
@@ -102,10 +102,10 @@ include_once("modal/modal_cambiarContrasena.php");
           </div>
 
           <div class="row fechasfiltrado">
-            <div class="col-md-3 col-2 align-self-center">
+            <div class="col-7 align-self-center">
               <input type="text" name="daterange" id="daterange" value="" class="form-control" />
             </div>
-            <div class="col-md-1 col-2 align-self-center">
+            <div class="col-2 align-self-center">
               <button id="btnfiltrar" class="btn btn-info" type="button">Eliminar Filtro</button>
             </div>
           </div>

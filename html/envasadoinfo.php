@@ -77,7 +77,79 @@ include('modal/m_muestras.php');
 
             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
               <div class="card-body">
-                <div class="contenedorInfo">
+
+              <div class="contenedorInfo2">
+
+<div class="contenedorInfo__group">
+<label for="recipient-name" class="col-form-label">Fecha Programación</label>
+<input type="date" class="form-control" id="in_fecha" readonly>
+</div>
+
+<div class="contenedorInfo__group">
+<label for="recipient-name" class="col-form-label">No Orden</label>
+<input type="text" class="form-control" id="in_numero_orden" readonly>
+</div>
+
+<div class="contenedorInfo__group">
+<label for="recipient-name" class="col-form-label">Referencia</label>
+<input type="text" class="form-control" id="in_referencia" readonly>
+</div>
+
+<div class="contenedorInfo__group">
+<table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:80%; height: 30px;">
+                    <thead>
+                      <tr>
+                        <th>Presentación</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr id="fila1">
+                        <td id="tanque1" style="text-align: end;font-size:14px;"></td>
+                        <td id="cantidad1" style="text-align: end;font-size:14px;"></td>
+                        <td id="total1" style="text-align: end;font-size:14px;"></td>
+                      </tr>
+                      <tr id="fila2">
+                        <td id="tanque2" style="text-align: end;font-size:14px;"></td>
+                        <td id="cantidad2" style="text-align: end;font-size:14px;"></td>
+                        <td id="total2" style="text-align: end;font-size:14px;"></td>
+                      </tr>
+                      <tr id="fila3">
+                        <td id="tanque3" style="text-align: end;font-size:14px;"></td>
+                        <td id="cantidad3" style="text-align: end;font-size:14px;"></td>
+                        <td id="total3" style="text-align: end;font-size:14px;"></td>
+                      </tr>
+                      <tr id="fila4">
+                        <td id="tanque4" style="text-align: end;font-size:14px;"></td>
+                        <td id="cantidad4" style="text-align: end;font-size:14px;"></td>
+                        <td id="total4" style="text-align: end;font-size:14px;"></td>
+                      </tr>
+                      <tr id="fila5">
+                        <td id="tanque5" style="text-align: end;font-size:14px;"></td>
+                        <td id="cantidad5" style="text-align: end;font-size:14px;"></td>
+                        <td id="total5" style="text-align: end;font-size:14px;"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+</div>
+
+<div class="contenedorInfo__group">
+<label for="in_tamano_lote" class="col-form-label">Tamaño Lote (Kg)</label>
+<input type="text" class="form-control" id="in_tamano_lote" readonly>
+</div>
+
+<div class="contenedorInfo__group">
+<label for="recipient-name" class="col-form-label">No. Lote</label>
+<input type="text" class="form-control" id="in_numero_lote" readonly>
+</div>
+
+<div class="contenedorInfo__group">
+<label for="recipient-name" class="col-form-label">Linea</label>
+<input type="text" class="form-control" id="in_linea" readonly>
+</div>
+
+              <!--   <div class="contenedorInfo">
                   <label for="recipient-name" class="col-form-label">Fecha Programación</label>
                   <label for="recipient-name" class="col-form-label">No Orden</label>
                   <label for="recipient-name" class="col-form-label">Referencia</label>
@@ -131,7 +203,7 @@ include('modal/m_muestras.php');
                   <input type="text" class="form-control" id="in_tamano_lote" readonly>
                   <input type="text" class="form-control" id="in_numero_lote" readonly>
                   <input type="text" class="form-control" id="in_linea" readonly>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -155,36 +227,36 @@ include('modal/m_muestras.php');
                 <div class="row parametrosControlPreguntas" id="preguntas-div"></div>
 
                 <div class="row" style="margin: 1%">
-                  <div class="col-md-12 col-2 align-self-right">
+                  <div class="col-md-12 align-self-right">
                     <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Desinfección </h3>
                   </div>
                 </div>
                 <div class="row" style="margin: 1%">
-                  <div class="col-md-4 col-2 align-self-right">
+                  <div class="col-md-4 align-self-right">
                     <label for="sel_producto_desinfeccion" class="col-form-label">Producto de desinfección</label>
                     <select class="selectpicker form-control in_desinfeccion" id="sel_producto_desinfeccion">
                       <option selected>Seleccione</option>
                     </select>
                   </div>
-                  <div class="col-md-8 col-2 align-self-center">
+                  <div class="col-md-8 align-self-center">
                     <label for="in_observaciones" class="col-form-label">Observaciones</label>
                     <input type="text" class="form-control in_desinfeccion" id="in_observaciones">
                   </div>
                 </div>
                 <div class="row" style="margin: 1%">
-                  <div class="col-md-4 col-2 align-self-center">
+                  <div class="col-md-4 align-self-center">
                     <label for="despeje_realizado" class="col-form-label">Realizado Por</label>
                     <input type="text" class="form-control in_desinfeccion" id="despeje_realizado" readonly>
                   </div>
-                  <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
+                  <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
                     <input type="button" class="btn btn-danger in_desinfeccion" id="despeje_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
                   </div>
 
-                  <div class="col-md-4 col-2 align-self-center">
+                  <div class="col-md-4 align-self-center">
                     <label for="despeje_verificado" class="col-form-label">Verificado Por</label>
                     <input type="text" class="form-control in_desinfeccion" id="despeje_verificado" readonly>
                   </div>
-                  <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
+                  <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
                     <input type="button" class="btn btn-danger in_desinfeccion" id="despeje_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
                   </div>
                 </div>
@@ -206,11 +278,11 @@ include('modal/m_muestras.php');
             <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
               <div class="card-body">
                 <div class="row" style="margin: 1%">
-                  <div class="col-md-12 col-2 align-self-center">
+                  <div class="col-md-12 align-self-center">
                     <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Entrega Material Envase</h3>
                   </div>
 
-                  <div class="col-md-12 col-2 align-self-center">
+                  <div class="col-md-12 align-self-center">
                     <div class="card">
                       <div class="card-block">
 
@@ -251,6 +323,8 @@ include('modal/m_muestras.php');
                     </div>
 
                     <div class="id_envasadora_loteadora">
+                 
+                      <div class="group">
                       <label for="recipient-name" class="col-form-label">Linea</label>
                       <select class="selectpicker form-control" id="select-Linea">
                         <option selected hidden>Seleccionar Linea</option>
@@ -258,77 +332,90 @@ include('modal/m_muestras.php');
                         <option>SOLIDOS</option>
                         <option>SEMISOLIDOS</option>
                       </select>
-
+                      </div>
+                  
+                      <div class="group">  
                       <label for="recipient-name" class="col-form-label">Digite el lote requerido</label>
                       <input type="text" class="form-control" onclick="validarLote(this.value);">
+                      </div>
 
+                      <div class="group">
                       <label for="recipient-name" class="col-form-label envasadora">Identificación Envasadora</label>
                       <input type="text" class="form-control txtEnvasadora" readonly>
+                      </div>
 
+                      <div class="group">
                       <label for="recipient-name" class="col-form-label loteadora">Identificación Loteadora</label>
                       <input type="text" class="form-control txtLoteadora" readonly>
-
-
+</div>
 
                     </div>
                     <hr>
 
-                    <div class="col-md-12 col-2 align-self-center">
+                    <div class="col-md-12 align-self-center">
                       <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Especificaciones Técnicas</h3>
                     </div>
                     <div class="especificaciones_tecnicas">
-                      <label for="recipient-name" class="col-form-label">Mínimo:</label>
-                      <input type="text" class="form-control centrado" id="Minimo" readonly>
 
+                    <div class="especificaciones__group">
+                    <label for="recipient-name" class="col-form-label">Mínimo:</label>
+                      <input type="text" class="form-control centrado" id="Minimo" readonly>
+                    </div>
+                      
+                      <div class="especificaciones__group">
                       <label for="recipient-name" class="col-form-label">Medio:</label>
                       <input type="text" class="form-control centrado" id="Medio" readonly>
-
+                      </div>
+                     
+                      <div class="especificaciones__group">
                       <label for="recipient-name" class="col-form-label">Máximo:</label>
                       <input type="text" class="form-control centrado" id="Maximo" readonly>
+                      </div>
+                     
                     </div>
                     <!-- </div> -->
                     <div class="row" style="margin: 1%">
-                      <div class="col-md-12 col-2 align-self-center">
+                      <div class="col-md-12 align-self-center">
                         <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Control de Peso en Proceso</h3>
                       </div>
-                      <div class="col-md-2 col-2 align-self-center" style="margin-top: 1%">
+                      <div class="col-md-2 align-self-center" style="margin-top: 1%">
                         <label for="recipient-name" class="col-form-label">No. Muestras</label>
                       </div>
-                      <div class="col-md-2 col-2 align-self-center" style="margin-top: 1%">
+                      <div class="col-md-2 align-self-center" style="margin-top: 1%">
                         <input type="text" class="form-control" id="Muestras" style="text-align: center;" readonly>
                       </div>
-                      <div class="col-md-1 col-2 align-self-center" style="margin-top: 1%">
+                      <div class="col-md-1 align-self-center" style="margin-top: 1%">
                         <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;" onclick="muestrasEnvase();" data-toggle="modal" data-target="#m_muestras">Iniciar</button>
                       </div>
-                      <div class="col-md-1 col-2 align-self-center" style="margin-top: 1%">
+                      <div class="col-md-1 align-self-center" style="margin-top: 1%">
                         <label for="recipient-name" class="col-form-label">Promedio</label>
                       </div>
-                      <div class="col-md-3 col-2 align-self-center" style="margin-top: 1%">
+                      <div class="col-md-3 align-self-center" style="margin-top: 1%">
                         <input type="text" class="form-control" id="Promedio">
                       </div>
-                      <div class="col-md-4 col-2 align-self-center">
+                      <div class="col-md-4 align-self-center">
                         <label for="controlpeso_realizado" class="col-form-label">Realizado Por</label>
                         <input type="text" class="form-control" id="controlpeso_realizado" readonly>
                       </div>
-                      <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
+                      <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
                         <button type="button" class="btn waves-effect waves-light btn-danger" id="controlpeso_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;">Firmar</button>
                       </div>
 
-                      <div class="col-md-4 col-2 align-self-center">
+                      <div class="col-md-4 align-self-center">
                         <label for="controlpeso_verificado" class="col-form-label">Verificado Por</label>
                         <input type="text" class="form-control" id="controlpeso_verificado" readonly>
                       </div>
-                      <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
+                      <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
                         <button type="button" class="btn waves-effect waves-light btn-danger" id="controlpeso_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;">Firmar</button>
                       </div>
 
                     </div>
                     <div class="row" style="margin: 1%">
-                      <div class="col-md-12 col-2 align-self-center">
+                      <div class="col-md-12 align-self-center">
                         <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Devolución Material Envase Sobrante</h3>
                       </div>
 
-                      <div class="col-md-12 col-2 align-self-center">
+                      <div class="col-md-12 align-self-center">
                         <div class="card">
                           <div class="card-block">
 
@@ -382,18 +469,24 @@ include('modal/m_muestras.php');
                     </div>
                     <div class="firmas_envasado">
 
-                      <label for="devolucion_realizado" class="col-form-label">Realizado Por:</label>
+                    <div class="firmas_envasado__group">
+                    <label for="devolucion_realizado" class="col-form-label">Realizado Por:</label>
                       <input type="text" class="form-control" id="devolucion_realizado" readonly>
-
                       <button type="button" class="btn waves-effect waves-light btn-danger" id="devolucion_realizado">Firmar</button>
-
-                      <label for="devolucion_verificado" class="col-form-label">Verificado Por:</label>
+                    </div>
+                      
+                    <div class="firmas_envasado__group">
+                    <label for="devolucion_verificado" class="col-form-label">Verificado Por:</label>
                       <input type="text" class="form-control" id="devolucion_verificado" readonly>
-
                       <button type="button" class="btn waves-effect waves-light btn-danger" id="devolucion_verificado">Firmar</button>
+                    </div>
 
+
+                      <div class="firmas_envasado__group-btn">
                       <button type="button" class="btn btn-secondary btn-cancelar" style="width: 100px; justify-self:end;">Cancelar</button>
                       <button type="button" class="btn btn-primary btn-aceptar" style="width: 100px; ">Aceptar</button>
+                      </div>
+                  
 
                     </div>
                   </div>
@@ -413,11 +506,11 @@ include('modal/m_muestras.php');
             <div id="collapseFour" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
               <div class="card-body">
                 <div class="row" style="margin: 1%">
-                  <div class="col-md-12 col-2 align-self-center">
+                  <div class="col-md-12 align-self-center">
                     <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Entrega Material Envase</h3>
                   </div>
 
-                  <div class="col-md-12 col-2 align-self-center">
+                  <div class="col-md-12 align-self-center">
                     <div class="card">
                       <div class="card-block">
 
@@ -458,6 +551,8 @@ include('modal/m_muestras.php');
                     </div>
 
                     <div class="id_envasadora_loteadora">
+
+                    <div class="form-group">
                       <label for="recipient-name" class="col-form-label">Linea</label>
                       <select class="selectpicker form-control" id="select-Linea">
                         <option selected hidden>Seleccionar Linea</option>
@@ -465,9 +560,12 @@ include('modal/m_muestras.php');
                         <option>SOLIDOS</option>
                         <option>SEMISOLIDOS</option>
                       </select>
+                      </div>
 
+                      <div class="form-group">
                       <label for="recipient-name" class="col-form-label">Digite el lote requerido</label>
                       <input type="text" class="form-control">
+                      </div>
 
                       <label for="recipient-name" class="col-form-label envasadora">Identificación Envasadora</label>
                       <input type="text" class="form-control txtEnvasadora" readonly>
@@ -587,7 +685,7 @@ include('modal/m_muestras.php');
                         </div>
                       </div>
                     </div>
-                    <div class="firmas_envasado">
+                    <div class="firmas_envasado" style="background-color: red">
 
                       <label for="devolucion_realizado" class="col-form-label">Realizado Por:</label>
                       <input type="text" class="form-control" id="devolucion_realizado" readonly>
