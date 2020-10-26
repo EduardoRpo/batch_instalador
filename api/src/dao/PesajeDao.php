@@ -11,6 +11,7 @@
   /**
    * Class PesajeDao
    * @package BatchRecord\Dao
+   * @author Teenus <Teenus-SAS>
    */
   
   class PesajeDao

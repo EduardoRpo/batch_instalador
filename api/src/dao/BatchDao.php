@@ -12,7 +12,7 @@
    *
    * Class BatchDao
    * @package BatchRecord\dao
-   * @author Sergio Velandia <svelandia>
+   * @author Teenus <Teenus-SAS>
    */
   class BatchDao
   {

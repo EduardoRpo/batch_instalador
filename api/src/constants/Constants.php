@@ -4,7 +4,7 @@
   /**
    * Class Constants
    * @package BatchRecord\Constants
-   * @author Alexis Holguin <MoraHol>
+   * @author Teenus <Teenus-SAS>
    */
   class Constants
   {

@@ -12,7 +12,7 @@
   /**
    * Class PreguntaDao
    * @package BatchRecord\dao
-   * @author Alexis Holguin <MoraHol>
+   * @author Teenus <Teenus-SAS>
    */
   class PreguntaDao
   {

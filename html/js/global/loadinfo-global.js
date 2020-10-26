@@ -23,7 +23,12 @@ $(document).ready(function () {
     $('.despeje_verificado').prop('disabled', true);
     $('.pesaje_realizado').prop('disabled', true);
     $('.pesaje_verificado').prop('disabled', true);
-    
+
+    if (modulo == 3) {
+        $('.preparacion_realizado').prop('disabled', true);
+        $('.preparacion_verificado').prop('disabled', true);
+    }
+
 });
 
 /* cargar batch al finalizar la carga de los demas procesos */

@@ -41,12 +41,12 @@
     return Router::getRenderedHTML('html/envasadoinfo.php');
   });
 
-  $router->add('/loteado', function () {
+  /* $router->add('/loteado', function () {
     return Router::getRenderedHTML('html/loteado.php');
   });
   $router->add('/loteadoinfo/:idBatch/:referencia', function ($idBatch, $referencia) {
     return Router::getRenderedHTML('html/loteadoinfo.php');
-  });
+  }); */
 
   $router->add('/acondicionamiento', function () {
     return Router::getRenderedHTML('html/acondicionamiento.php');

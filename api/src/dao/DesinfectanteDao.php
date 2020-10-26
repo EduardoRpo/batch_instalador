@@ -12,7 +12,7 @@
   /**
    * Class DesinfectanteDao
    * @package BatchRecord\dao
-   * @author Alexis Holguin <MoraHol>
+   * @author Teenus <Teenus-SAS>
    */
   class DesinfectanteDao
   {

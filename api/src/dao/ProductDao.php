@@ -11,7 +11,7 @@
   /**
    * Class ProductDao
    * @package BatchRecord\Dao
-   * @author Alexis Holguin <MoraHol>
+   * @author Teenus <Teenus-SAS>
    */
   class ProductDao
   {
