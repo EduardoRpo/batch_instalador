@@ -58,7 +58,7 @@ include('modal/m_firma.php');
       <div class="row page-titles">
         <h1 hidden>4</h1>
         <h1 class="text-themecolor m-b-0 m-t-0"><b>Aprobación</b></h1>
-        <a href="../../aprobacion" style="background-color:#fff;color:#FF8D6D" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md" role="button">Cola de Trabajo</a>
+        <a href="../../aprobacion" style="background-color:#fff;color:#FF8D6D" class="btn waves-effect waves-light btn-danger pull-right btn-md" role="button">Cola de Trabajo</a>
       </div>
     </div>
 

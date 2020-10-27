@@ -8489,8 +8489,22 @@ para mejorar el responsive enseguida*/
 
 .maquinasPreparacion__group {
   margin-top: 1rem;
-  width: 300px;
+  flex-basis: 490px;
 }
+
+.maquinasPreparacion__group:first-of-type {
+ 
+  flex-basis: 140px;
+  justify-self: self-start;
+}
+
+@media screen and (max-width:740px) {
+  
+.maquinasPreparacion{
+  justify-content: unset;
+}
+}
+
 /* .maquinasPreparacion{
   display: grid;
   grid-template-columns: 250px repeat(2, 1fr);

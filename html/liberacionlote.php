@@ -37,7 +37,7 @@ session_start();
    <!-- FIN HEADER -->
   
   <div class="row page-titles">
-    <div class="col-md-8 col-2 align-self-right">
+    <div class="col-md-8 col-10 align-self-right">
       <h1 class="text-themecolor m-b-0 m-t-0" style="margin-left: 7%"><b>Liberación Lote</b></h1>
     </div>
     <div class="col-md-3 col-4 align-self-center">

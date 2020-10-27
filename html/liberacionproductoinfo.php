@@ -119,7 +119,7 @@ session_start();
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 col-2 align-self-center">
-                        <h1 class="text-themecolor m-b-0 m-t-0">Acondicionamiento</h1> 
+                        <h1 class="text-themecolor m-b-4 m-t-0">Acondicionamiento</h1> 
                     </div>
                     <div class="col-md-3 col-4 align-self-center">
                         <!-- Search form -->
@@ -130,9 +130,10 @@ session_start();
                     </div>
 
 
-    <div class="col-md-2 col-4 align-self-center">
+    <div class="col-md-2 col-5 align-self-center">
     <div class="container">
   <!-- Trigger the modal with a button -->
+
 
   <select class="selectpicker form-control">
                         <option selected hidden>Acciones</option>
