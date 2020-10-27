@@ -27,6 +27,10 @@ $(document).ready(function () {
     if (modulo == 3) {
         $('.preparacion_realizado').prop('disabled', true);
         $('.preparacion_verificado').prop('disabled', true);
+        
+    } else if (modulo == 4) {
+        $('.preparacion_realizado').prop('disabled', true);
+        $('.preparacion_verificado').prop('disabled', true);
     }
 
 });

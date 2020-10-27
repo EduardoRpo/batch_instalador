@@ -9,15 +9,15 @@ function carguepreguntas(data) {
         type: 'GET'
     }).done((data, status, xhr) => {
         cantidadpreguntas = data.length;
-
+        debugger;
         $('#preguntas-div').html('');
         data.forEach((question, indx) => {
             $('#preguntas-div').append(`
                     <a for="recipient-name" class="col-form-label" id="${question.id}">${question.pregunta}</a>
                     <label class="checkbox"> 
-                    <input type="radio" class="questions" name="question-${question.id}" id="S${question.id_pregunta}" value="1"/></label>
+                    <input type="radio" class="questions" name="question-${question.id}" id="${question.id_pregunta}" value="1"/></label>
                     <label class="checkbox"> 
-                    <input type="radio" name="question-${question.id}" id="N${question.id_pregunta}" value="0"/></label>`
+                    <input type="radio" name="question-${question.id}" id="${question.id_pregunta}" value="0"/></label>`
             );
         });
 

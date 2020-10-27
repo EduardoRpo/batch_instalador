@@ -1,5 +1,6 @@
 
 var cantidad = 0;
+var tanques = 0;
 /* tabla de observaciones en la pestaña de informacion del producto */
 
 $(document).ready(function () {
@@ -77,7 +78,10 @@ function controlProceso(cantidad) {
         cantidad = 10;
     }
 
-    for (let i = 1; i <= cantidad; i++) {
+    for (var i = 1; i <= cantidad; i++) {
         $(".chk-control").append(`<input type="checkbox" id="chkcontrolTanques${i}" style="height: 30px; width:30px;">`);
     }
+
+    tanques = i - 1;
+    debugger;
 }

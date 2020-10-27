@@ -59,9 +59,9 @@ include("modal/modal_condicionesMedio.php");
 
   <div id="main-wrapper">
 
-  <?php include('partials/header.php'); ?>
+    <?php include('partials/header.php'); ?>
 
-  
+
     <div class="container-fluid">
       <div class="row page-titles">
         <h1 hidden>3</h1>
@@ -86,81 +86,81 @@ include("modal/modal_condicionesMedio.php");
               <div class="card-body">
 
 
-              <div class="contenedorInfo2">
+                <div class="contenedorInfo2">
 
-                <div class="contenedorInfo__group">
-                  <label for="recipient-name" class="col-form-label">Fecha Programación</label>
-                  <input type="date" class="form-control" id="in_fecha" width="50px" readonly>
+                  <div class="contenedorInfo__group">
+                    <label for="recipient-name" class="col-form-label">Fecha Programación</label>
+                    <input type="date" class="form-control" id="in_fecha" width="50px" readonly>
+                  </div>
+
+                  <div class="contenedorInfo__group">
+                    <label for="recipient-name" class="col-form-label">No Orden de Producción</label>
+                    <input type="text" class="form-control" id="in_numero_orden" readonly>
+                  </div>
+
+                  <div class="contenedorInfo__group">
+                    <label for="recipient-name" class="col-form-label">Referencia</label>
+                    <input type="text" class="form-control" id="in_referencia" readonly>
+                  </div>
+
+                  <div class="contenedorInfo__group">
+
+                    <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:80%; height: 30px;">
+                      <thead>
+                        <tr>
+                          <th>Tanque</th>
+                          <th>Cantidad</th>
+                          <th>Total</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr id="fila1">
+                          <td id="tanque1" style="text-align: end;font-size:14px;"></td>
+                          <td id="cantidad1" style="text-align: end;font-size:14px;"></td>
+                          <td id="total1" style="text-align: end;font-size:14px;"></td>
+                        </tr>
+                        <tr id="fila2">
+                          <td id="tanque2" style="text-align: end;font-size:14px;"></td>
+                          <td id="cantidad2" style="text-align: end;font-size:14px;"></td>
+                          <td id="total2" style="text-align: end;font-size:14px;"></td>
+                        </tr>
+                        <tr id="fila3">
+                          <td id="tanque3" style="text-align: end;font-size:14px;"></td>
+                          <td id="cantidad3" style="text-align: end;font-size:14px;"></td>
+                          <td id="total3" style="text-align: end;font-size:14px;"></td>
+                        </tr>
+                        <tr id="fila4">
+                          <td id="tanque4" style="text-align: end;font-size:14px;"></td>
+                          <td id="cantidad4" style="text-align: end;font-size:14px;"></td>
+                          <td id="total4" style="text-align: end;font-size:14px;"></td>
+                        </tr>
+                        <tr id="fila5">
+                          <td id="tanque5" style="text-align: end;font-size:14px;"></td>
+                          <td id="cantidad5" style="text-align: end;font-size:14px;"></td>
+                          <td id="total5" style="text-align: end;font-size:14px;"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div class="contenedorInfo__group">
+                    <label for="in_tamano_lote" class="col-form-label">Tamaño Lote (kg)</label>
+                    <input type="text" class="form-control" id="in_tamano_lote" readonly>
+                  </div>
+
+                  <div class="contenedorInfo__group">
+                    <label for="recipient-name" class="col-form-label">No. Lote</label>
+                    <input type="text" class="form-control" id="in_numero_lote" readonly>
+                  </div>
+
+                  <div class="contenedorInfo__group">
+                    <label for="recipient-name" class="col-form-label">Linea</label>
+                    <input type="text" class="form-control" id="in_linea" readonly>
+                  </div>
+
                 </div>
-                
-                <div class="contenedorInfo__group">
-                <label for="recipient-name" class="col-form-label">No Orden de Producción</label>
-                <input type="text" class="form-control" id="in_numero_orden" readonly>
-                </div>
 
-                <div class="contenedorInfo__group">
-                <label for="recipient-name" class="col-form-label">Referencia</label>
-                <input type="text" class="form-control" id="in_referencia" readonly>
-                  </div>
-
-                  <div class="contenedorInfo__group">
-
-                  <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:80%; height: 30px;">
-                    <thead>
-                      <tr>
-                        <th>Tanque</th>
-                        <th>Cantidad</th>
-                        <th>Total</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr id="fila1">
-                        <td id="tanque1" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad1" style="text-align: end;font-size:14px;"></td>
-                        <td id="total1" style="text-align: end;font-size:14px;"></td>
-                      </tr>
-                      <tr id="fila2">
-                        <td id="tanque2" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad2" style="text-align: end;font-size:14px;"></td>
-                        <td id="total2" style="text-align: end;font-size:14px;"></td>
-                      </tr>
-                      <tr id="fila3">
-                        <td id="tanque3" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad3" style="text-align: end;font-size:14px;"></td>
-                        <td id="total3" style="text-align: end;font-size:14px;"></td>
-                      </tr>
-                      <tr id="fila4">
-                        <td id="tanque4" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad4" style="text-align: end;font-size:14px;"></td>
-                        <td id="total4" style="text-align: end;font-size:14px;"></td>
-                      </tr>
-                      <tr id="fila5">
-                        <td id="tanque5" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad5" style="text-align: end;font-size:14px;"></td>
-                        <td id="total5" style="text-align: end;font-size:14px;"></td>
-                      </tr>
-                    </tbody>
-                  </table>
-</div>
-
-                  <div class="contenedorInfo__group">
-                  <label for="in_tamano_lote" class="col-form-label">Tamaño Lote (kg)</label>
-                  <input type="text" class="form-control" id="in_tamano_lote" readonly>
-                  </div>
-
-                  <div class="contenedorInfo__group">
-                  <label for="recipient-name" class="col-form-label">No. Lote</label>
-                  <input type="text" class="form-control" id="in_numero_lote" readonly>
-                  </div>
-
-                  <div class="contenedorInfo__group">
-                  <label for="recipient-name" class="col-form-label">Linea</label>
-                  <input type="text" class="form-control" id="in_linea" readonly>
-                  </div>
-                  
-                </div>
-
-           <!--      <div class="contenedorInfo2">
+                <!--      <div class="contenedorInfo2">
                   <label for="recipient-name" class="col-form-label">Fecha Programación</label>
                   <label for="recipient-name" class="col-form-label">No Orden de Producción</label>
                   <label for="recipient-name" class="col-form-label">Referencia</label>
@@ -263,245 +263,245 @@ include("modal/modal_condicionesMedio.php");
                   </div>
 
                   <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                  <input type="text" id="idbtn" hidden>
-                  <input type="button" class="btn btn-danger despeje_realizado" id="despeje_realizado" onclick="cargar(this, 'firma1')" style="width: 100%; height: 38px;" value="Firmar">
-                </div>
+                    <input type="text" id="idbtn" hidden>
+                    <input type="button" class="btn btn-danger despeje_realizado" id="despeje_realizado" onclick="cargar(this, 'firma1')" style="width: 100%; height: 38px;" value="Firmar">
+                  </div>
 
-                <div class="col-md-4 align-self-center">
-                  <label for="despeje_verificado" class="col-form-label">Verificado Por</label>
-                  <input type="text" class="form-control" id="despeje_verificado" readonly>
-                </div>
-                <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                  <input type="button" class="btn btn-danger despeje_verificado" id="despeje_verificado" onclick="cargar(this, 'firma2')" style="width: 100%; height: 38px;" value="Firmar">
+                  <div class="col-md-4 align-self-center">
+                    <label for="despeje_verificado" class="col-form-label">Verificado Por</label>
+                    <input type="text" class="form-control" id="despeje_verificado" readonly>
+                  </div>
+                  <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
+                    <input type="button" class="btn btn-danger despeje_verificado" id="despeje_verificado" onclick="cargar(this, 'firma2')" style="width: 100%; height: 38px;" value="Firmar">
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="card">
-          <div class="card-header" id="headingThree">
-            <h5 class="mb-0">
-              <button class="btn btn-link collapsed text-uppercase" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
-                Preparación
-              </button>
-            </h5>
-          </div>
-          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-            <div class="card-body">
-              <!-- <div class="row" style="margin: 1%">
+          <div class="card">
+            <div class="card-header" id="headingThree">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed text-uppercase" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
+                  Preparación
+                </button>
+              </h5>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+              <div class="card-body">
+                <!-- <div class="row" style="margin: 1%">
               <div class="col-md-12 col-2 align-self-center">
                 <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Máquinas</h3>
               </div> -->
-              <h3 class="subtitulo" style="text-align: center; background-color: #C0C0C0; margin:25px; height:40px">Máquinas</h3>
-              <div class="maquinasPreparacion">
+                <h3 class="subtitulo" style="text-align: center; background-color: #C0C0C0; margin:25px; height:40px">Máquinas</h3>
+                <div class="maquinasPreparacion">
 
-              <div class="maquinasPreparacion__group">
-              <label for="">Linea</label>
-              <select class="selectpicker form-control" id="select-Linea"></select>
-              </div>
+                  <div class="maquinasPreparacion__group">
+                    <label for="">Linea</label>
+                    <select class="selectpicker form-control" id="select-Linea"></select>
+                  </div>
 
-              <div class="maquinasPreparacion__group">
-              <label for="sel_agitador">Identificación Agitador</label>
-              <input type="text" id="sel_agitador" class="form-control" readonly>
-              </div>
+                  <div class="maquinasPreparacion__group">
+                    <label for="sel_agitador">Identificación Agitador</label>
+                    <input type="text" id="sel_agitador" class="form-control" readonly>
+                  </div>
 
-              <div class="maquinasPreparacion__group">
-              <label for="sel_marmita">Identificación Marmita o Tanque</label>
-                <input type="text" id="sel_marmita" class="form-control" readonly>
-             </div>
- 
-              </div>
-              <div class="row" style="margin: 1%">
-                <div class="col-md-12 align-self-center">
-                  <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">
-                    Instructivo de Preparación</h3>
-                </div>
-                <div class="chk-control m-3">
-                  <label for="" class="lblchk-control">Control Preparación Tanques</label>
+                  <div class="maquinasPreparacion__group">
+                    <label for="sel_marmita">Identificación Marmita o Tanque</label>
+                    <input type="text" id="sel_marmita" class="form-control" readonly>
+                  </div>
 
                 </div>
-                <hr>
-                <div class="col-md-8 align-self-center">
+                <div class="row" style="margin: 1%">
+                  <div class="col-md-12 align-self-center">
+                    <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">
+                      Instructivo de Preparación</h3>
+                  </div>
+                  <div class="chk-control m-3">
+                    <label for="" class="lblchk-control">Control Preparación Tanques</label>
 
-                  <div id="pasos_instructivo" class="col-form-label"></div>
+                  </div>
+                  <hr>
+                  <div class="col-md-8 align-self-center">
 
-                </div>
-                <div class="col-md-4 align-self-center">
-                  <section class="clock">
-                    <div class="container">
-                      <div class="row">
-                        <div class="col-md-10 input-wrapper">
-                          <div class="input">
-                            <input type="number" id="tiempo_instructivo" class="form-control" min="0" readonly>
-                            <select id="measure" class="form-control" disabled>
-                              <option value="s">Segundos</option>
-                            </select>
+                    <div id="pasos_instructivo" class="col-form-label"></div>
+
+                  </div>
+                  <div class="col-md-4 align-self-center">
+                    <section class="clock">
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-md-10 input-wrapper">
+                            <div class="input">
+                              <input type="number" id="tiempo_instructivo" class="form-control" min="0" readonly>
+                              <select id="measure" class="form-control" disabled>
+                                <option value="s">Segundos</option>
+                              </select>
+                            </div>
+                            <div class="buttons-wrapper">
+                              <button class="btn" id="start-countdown">Iniciar</button>
+                            </div>
+                          </div>
+                          <div id="timer" class="col-12">
+                            <div class="clock-wrapper">
+                              <span class="hours">00</span>
+                              <span class="dots">:</span>
+                              <span class="minutes">00</span>
+                              <span class="dots">:</span>
+                              <span class="seconds">00</span>
+                            </div>
                           </div>
                           <div class="buttons-wrapper">
-                            <button class="btn" id="start-countdown">Iniciar</button>
+                            <button class="btn" id="resume-timer">Continuar</button>
+                            <button class="btn" id="stop-timer">Pausa</button>
+                            <button class="btn" id="reset-timer">Reiniciar</button>
                           </div>
-                        </div>
-                        <div id="timer" class="col-12">
-                          <div class="clock-wrapper">
-                            <span class="hours">00</span>
-                            <span class="dots">:</span>
-                            <span class="minutes">00</span>
-                            <span class="dots">:</span>
-                            <span class="seconds">00</span>
-                          </div>
-                        </div>
-                        <div class="buttons-wrapper">
-                          <button class="btn" id="resume-timer">Continuar</button>
-                          <button class="btn" id="stop-timer">Pausa</button>
-                          <button class="btn" id="reset-timer">Reiniciar</button>
                         </div>
                       </div>
-                    </div>
-                  </section>
+                    </section>
 
+                  </div>
                 </div>
-              </div>
 
 
-              <div class="row" style="margin: 1%">
-                <div class="col-md-12 align-self-center">
-                  <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #c0c0c0">Control de proceso</h3>
-                </div>
-                <div class="col-md-12 align-self-center">
-                  <div class="card">
-                    <div class="card-block">
-                      <!--<h4 class="card-title">Basic Table</h4>
+                <div class="row" style="margin: 1%">
+                  <div class="col-md-12 align-self-center">
+                    <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #c0c0c0">Control de proceso</h3>
+                  </div>
+                  <div class="col-md-12 align-self-center">
+                    <div class="card">
+                      <div class="card-block">
+                        <!--<h4 class="card-title">Basic Table</h4>
                    <h6 class="card-subtitle">Add class <code>.table</code></h6>-->
-                      <div class="table-responsive">
-                        <table id="tblControlProcesoPreparacion" class="table table-striped table-bordered">
-                          <thead>
-                            <tr>
-                              <th style="text-align: center;">PARAMETROS</th>
-                              <th style="text-align: center;">ESPECIFICACIONES</th>
-                              <th style="text-align: center;">RESULTADOS</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>Color</td>
-                              <td id="espec_color"></td>
-                              <td><select class="selectpicker form-control">
-                                  <option selected hidden>Seleccionar</option>
-                                  <option value="1">Cumple   </option>
-                                  <option value="2">No Cumple</option>
-                                  <option value="3">No Aplica</option>
-                                </select>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>Olor</td>
-                              <td id="espec_olor"></td>
-                              <td><select class="selectpicker form-control">
-                                  <option selected hidden></option>
-                                  <option value="1">Cumple   </option>
-                                  <option value="2">No Cumple</option>
-                                  <option value="3">No Aplica</option>
-                                </select>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>Apariencia</td>
-                              <td id="espec_apariencia"></td>
-                              <td><select class="selectpicker form-control">
-                                  <option selected hidden></option>
-                                  <option value="1">Cumple   </option>
-                                  <option value="2">No Cumple</option>
-                                  <option value="3">No Aplica</option>
-                                </select>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>PH</td>
-                              <td id="espec_ph"></td>
-                              <td><input type="number" id="in_ph" class="selectpicker form-control">
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>Viscocidad CPS</td>
-                              <td id="espec_viscidad"></td>
-                              <td><input type="number" class="selectpicker form-control" id="in_viscocidad">
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>Densidad</td>
-                              <td id="espec_densidad"></td>
-                              <td><input class="selectpicker form-control" type="number" id="in_densidad">
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>Untuosidad</td>
-                              <td id="espec_untosidad"></td>
-                              <td><select class="selectpicker form-control">
-                                  <option selected hidden></option>
-                                  <option value="1">Cumple   </option>
-                                  <option value="2">No Cumple</option>
-                                  <option value="3">No Aplica</option>
-                                </select>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>Poder Espumoso</td>
-                              <td id="espec_poder_espumoso"></td>
-                              <td><select class="selectpicker form-control">
-                                  <option selected hidden></option>
-                                  <option value="1">Cumple   </option>
-                                  <option value="2">No Cumple</option>
-                                  <option value="3">No Aplica</option>
-                                </select>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>Grado Alcohol</td>
-                              <td id="espec_grado_alcohol"></td>
-                              <td><input class="selectpicker form-control" type="number" id="in_grado_alcohol">
-                              </td>
-                            </tr>
-                        </table>
+                        <div class="table-responsive">
+                          <table id="tblControlProcesoPreparacion" class="table table-striped table-bordered">
+                            <thead>
+                              <tr>
+                                <th style="text-align: center;">PARAMETROS</th>
+                                <th style="text-align: center;">ESPECIFICACIONES</th>
+                                <th style="text-align: center;">RESULTADOS</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>Color</td>
+                                <td id="espec_color"></td>
+                                <td><select class="selectpicker form-control">
+                                    <option selected hidden>Seleccionar</option>
+                                    <option value="1">Cumple </option>
+                                    <option value="2">No Cumple</option>
+                                    <option value="3">No Aplica</option>
+                                  </select>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Olor</td>
+                                <td id="espec_olor"></td>
+                                <td><select class="selectpicker form-control">
+                                    <option selected hidden></option>
+                                    <option value="1">Cumple </option>
+                                    <option value="2">No Cumple</option>
+                                    <option value="3">No Aplica</option>
+                                  </select>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Apariencia</td>
+                                <td id="espec_apariencia"></td>
+                                <td><select class="selectpicker form-control">
+                                    <option selected hidden></option>
+                                    <option value="1">Cumple </option>
+                                    <option value="2">No Cumple</option>
+                                    <option value="3">No Aplica</option>
+                                  </select>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>PH</td>
+                                <td id="espec_ph"></td>
+                                <td><input type="number" id="in_ph" class="selectpicker form-control">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Viscocidad CPS</td>
+                                <td id="espec_viscidad"></td>
+                                <td><input type="number" class="selectpicker form-control" id="in_viscocidad">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Densidad</td>
+                                <td id="espec_densidad"></td>
+                                <td><input class="selectpicker form-control" type="number" id="in_densidad">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Untuosidad</td>
+                                <td id="espec_untosidad"></td>
+                                <td><select class="selectpicker form-control">
+                                    <option selected hidden></option>
+                                    <option value="1">Cumple </option>
+                                    <option value="2">No Cumple</option>
+                                    <option value="3">No Aplica</option>
+                                  </select>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Poder Espumoso</td>
+                                <td id="espec_poder_espumoso"></td>
+                                <td><select class="selectpicker form-control">
+                                    <option selected hidden></option>
+                                    <option value="1">Cumple </option>
+                                    <option value="2">No Cumple</option>
+                                    <option value="3">No Aplica</option>
+                                  </select>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Grado Alcohol</td>
+                                <td id="espec_grado_alcohol"></td>
+                                <td><input class="selectpicker form-control" type="number" id="in_grado_alcohol">
+                                </td>
+                              </tr>
+                          </table>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <hr>
-              <div class="row" style="margin: 1%">
-                <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down" data-toggle="modal" data-target="#modalAjuste" style="margin-left: 1%">
-                  ¿Se requiere algún ajuste?
-                </button>
-              </div>
-              <!-- <hr> -->
+                <hr>
+                <div class="row" style="margin: 1%">
+                  <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down" data-toggle="modal" data-target="#modalAjuste" style="margin-left: 1%">
+                    ¿Se requiere algún ajuste?
+                  </button>
+                </div>
+                <!-- <hr> -->
 
-              <hr>
-              <div class="row" style="margin: 1%">
-                <!-- <div class="col-md-2 col-2 align-self-right">
+                <hr>
+                <div class="row" style="margin: 1%">
+                  <!-- <div class="col-md-2 col-2 align-self-right">
                 <label for="in_realizado_2" class="col-form-label">Fecha</label>
                 <input type="text" class="form-control" id="in_realizado_2" readonly>
               </div> -->
-                <div class="col-md-4 align-self-center">
-                  <label for="preparacion_realizado" class="col-form-label">Realizado Por</label>
-                  <input type="text" class="form-control" id="preparacion_realizado" readonly>
-                </div>
-                <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                  <input type="button" class="btn btn-danger preparacion_realizado" id="preparacion_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
-                </div>
+                  <div class="col-md-4 align-self-center">
+                    <label for="preparacion_realizado" class="col-form-label">Realizado Por</label>
+                    <input type="text" class="form-control" id="preparacion_realizado" readonly>
+                  </div>
+                  <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
+                    <input type="button" class="btn btn-danger preparacion_realizado" id="preparacion_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
+                  </div>
 
-                <div class="col-md-4 align-self-center">
-                  <!-- APARECER SOLO AL CHEQUEAR EL ULTIMO CHECKBOX -->
-                  <label for="preparacion_verificado" class="col-form-label">Verificado Por</label>
-                  <input type="text" class="form-control" id="preparacion_verificado" readonly>
+                  <div class="col-md-4 align-self-center">
+                    <!-- APARECER SOLO AL CHEQUEAR EL ULTIMO CHECKBOX -->
+                    <label for="preparacion_verificado" class="col-form-label">Verificado Por</label>
+                    <input type="text" class="form-control" id="preparacion_verificado" readonly>
+                  </div>
+                  <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
+                    <input type="button" class="btn btn-danger preparacion_verificado" id="preparacion_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
+                  </div>
                 </div>
-                <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                  <input type="button" class="btn btn-danger preparacion_verificado" id="preparacion_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
-                </div>
-              </div>
-              <!-- <hr> -->
+                <!-- <hr> -->
 
-              <!-- <div class="row buttons-group-container" style="margin: 1%">
+                <!-- <div class="row buttons-group-container" style="margin: 1%">
               <div class="buttons-group">
                 <div class="col-md-12 align-self-center" style="margin-left: 85%; background-color:red">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -510,12 +510,12 @@ include("modal/modal_condicionesMedio.php");
                 </div>
                 </div>
               </div> -->
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
   </div>
   </div>
 

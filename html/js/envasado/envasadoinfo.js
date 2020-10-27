@@ -3,7 +3,7 @@
 $(document).ready(function () {
   //let cantidad = 0;
   ocultarEnvasado();
-  ocultarfilasTanques(5);
+  /* ocultarfilasTanques(5); */
 
   $.ajax({
 
