@@ -15,7 +15,7 @@ function cargarBatch() {
 
             let preg = $('#1').val();
             let info = JSON.parse(response);
-            debugger;
+            
             if (info !== '') {
                 let j = 1;
                 for (let i = 0; i < info.data.length; i++) {
@@ -71,7 +71,7 @@ function cargarDesinfectante() {
                 data: { operacion: 1, modulo: modulo, batch: idBatch },
 
                 success: function (response) {
-                    debugger;
+                    
                     if (response == '')
                         return false;
 

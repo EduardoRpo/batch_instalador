@@ -83,5 +83,4 @@ function controlProceso(cantidad) {
     }
 
     tanques = i - 1;
-    debugger;
 }

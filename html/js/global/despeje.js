@@ -9,7 +9,7 @@ function carguepreguntas(data) {
         type: 'GET'
     }).done((data, status, xhr) => {
         cantidadpreguntas = data.length;
-        debugger;
+        
         $('#preguntas-div').html('');
         data.forEach((question, indx) => {
             $('#preguntas-div').append(`

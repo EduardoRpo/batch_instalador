@@ -3,6 +3,7 @@ idBatch = location.href.split('/')[4];
 referencia = location.href.split('/')[5];
 let queeProcess = 0;
 let pasos;
+let paso = 4;
 
 /* instructivo(); */
 
@@ -231,7 +232,7 @@ function ocultarInstructivo() {
 /* Mostrar siguiente paso */
 
 function mostrarInstructivo() {
-
+       
     $("#proceso-instructivo" + paso).css("color", "#67757c");
     paso = paso + 1;
 }
@@ -243,7 +244,7 @@ function guardarBatchPreparacion() {
         var cantidad = $(this).find('td').eq(0).html();
         var descripcion = $(this).find('td').eq(1).html();
         var valorUnitario = $(this).find('td').eq(3).html();
-        debugger
+        
         valor = new Array(cantidad, descripcion, valorUnitario);
         valores.push(valor);
     });
