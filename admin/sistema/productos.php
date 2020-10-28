@@ -89,7 +89,7 @@ require_once('modal/m_productos.php');
                         <th>Envase</th>
                         <th>Tapa</th>
                         <th>Etiqueta</th>
-                        <th>Otros Empaque</th>
+                      <!--   <th>Otros Empaque</th> -->
                         <th>Otros</th>
                       </tr>
                     </thead>
