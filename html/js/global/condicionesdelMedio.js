@@ -1,4 +1,3 @@
-
 /* Mostrar ventana de Condiciones Medio de acuerdo con el tiempo establecido en la BD*/
 
 function cargueCondicionesMedio() {
@@ -16,7 +15,10 @@ function cargueCondicionesMedio() {
             let tiempo = Math.round(Math.random() * (t.data[0].t_max - t.data[0].t_min) + parseInt(t.data[0].t_min));
 
             setTimeout(function () {
-                $("#m_CondicionesMedio").modal("show");
+                $("#m_CondicionesMedio").modal({
+                    show: true,
+                    backdrop: 'static'
+                });
             }, tiempo * 60000);
         }
     });

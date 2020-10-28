@@ -58,7 +58,7 @@ include('modal/m_firma.php');
       <div class="row page-titles">
         <h1 hidden>4</h1>
         <h1 class="text-themecolor m-b-0 m-t-0"><b>Aprobación</b></h1>
-        <a href="../../aprobacion" style="background-color:#fff;color:#FF8D6D" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md" role="button">Cola de Trabajo</a>
+        <a href="../../aprobacion" style="background-color:#fff;color:#FF8D6D" class="btn waves-effect waves-light btn-danger pull-right btn-md" role="button">Cola de Trabajo</a>
       </div>
     </div>
 
@@ -76,7 +76,81 @@ include('modal/m_firma.php');
 
             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
               <div class="card-body">
-                <div class="contenedorInfo">
+
+                <div class="contenedorInfo2">
+                
+                  <div class="contenedorInfo__group">
+                  <label for="recipient-name" class="col-form-label">Fecha Programación</label>
+                  <input type="date" class="form-control" id="in_fecha" readonly>
+                  </div>
+
+                  <div class="contenedorInfo__group">
+                  <label for="recipient-name" class="col-form-label">No Orden</label>
+                  <input type="text" class="form-control" id="in_numero_orden" readonly>
+                  </div>
+
+                  <div class="contenedorInfo__group">
+                  <label for="recipient-name" class="col-form-label">Referencia</label>
+                  <input type="text" class="form-control" id="in_referencia" readonly>
+                  </div>
+
+                  <div class="contenedorInfo__group">
+                  <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:80%; height: 30px;">
+                    <thead>
+                      <tr>
+                        <th>Tanque</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr id="fila1">
+                        <td id="tanque1" style="text-align: end;font-size:14px;"></td>
+                        <td id="cantidad1" style="text-align: end;font-size:14px;"></td>
+                        <td id="total1" style="text-align: end;font-size:14px;"></td>
+                      </tr>
+                      <tr id="fila2">
+                        <td id="tanque2" style="text-align: end;font-size:14px;"></td>
+                        <td id="cantidad2" style="text-align: end;font-size:14px;"></td>
+                        <td id="total2" style="text-align: end;font-size:14px;"></td>
+                      </tr>
+                      <tr id="fila3">
+                        <td id="tanque3" style="text-align: end;font-size:14px;"></td>
+                        <td id="cantidad3" style="text-align: end;font-size:14px;"></td>
+                        <td id="total3" style="text-align: end;font-size:14px;"></td>
+                      </tr>
+                      <tr id="fila4">
+                        <td id="tanque4" style="text-align: end;font-size:14px;"></td>
+                        <td id="cantidad4" style="text-align: end;font-size:14px;"></td>
+                        <td id="total4" style="text-align: end;font-size:14px;"></td>
+                      </tr>
+                      <tr id="fila5">
+                        <td id="tanque5" style="text-align: end;font-size:14px;"></td>
+                        <td id="cantidad5" style="text-align: end;font-size:14px;"></td>
+                        <td id="total5" style="text-align: end;font-size:14px;"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  </div>
+
+                  <div class="contenedorInfo__group">
+                  <label for="in_tamano_lote" class="col-form-label">Tamaño Lote (Kg)</label>
+                  <input type="text" class="form-control" id="in_tamano_lote" readonly>
+                  </div>
+
+                  <div class="contenedorInfo__group">
+                  <label for="recipient-name" class="col-form-label">No. Lote</label>
+                  <input type="text" class="form-control" id="in_numero_lote" readonly>
+                  </div>
+
+                  <div class="contenedorInfo__group">
+                  <label for="recipient-name" class="col-form-label">Linea</label>
+                  <input type="text" class="form-control" id="in_linea" readonly>
+                  </div>
+                
+                </div>
+
+                <!-- <div class="contenedorInfo">
                   <label for="recipient-name" class="col-form-label">Fecha Programación</label>
                   <label for="recipient-name" class="col-form-label">No Orden</label>
                   <label for="recipient-name" class="col-form-label">Referencia</label>
@@ -130,7 +204,9 @@ include('modal/m_firma.php');
                   <input type="text" class="form-control" id="in_tamano_lote" readonly>
                   <input type="text" class="form-control" id="in_numero_lote" readonly>
                   <input type="text" class="form-control" id="in_linea" readonly>
-                </div>
+                </div> -->
+
+
               </div>
             </div>
           </div>
@@ -146,18 +222,18 @@ include('modal/m_firma.php');
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
               <div class="card-body">
                 <div class="row" style="margin: 1%">
-                  <div class="col-md-12 col-2 align-self-right">
+                  <div class="col-md-12 align-self-right">
                     <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Desinfección </h3>
                   </div>
                 </div>
                 <div class="row" style="margin: 1%">
-                  <div class="col-md-4 col-2 align-self-right">
+                  <div class="col-md-4 align-self-right">
                     <label for="sel_producto_desinfeccion" class="col-form-label">Producto de desinfección</label>
                     <select class="selectpicker form-control" id="sel_producto_desinfeccion">
                       <option selected hidden></option>
                     </select>
                   </div>
-                  <div class="col-md-8 col-2 align-self-center">
+                  <div class="col-md-8 align-self-center">
                     <label for="recipient-name" class="col-form-label">Observaciones:</label>
                     <input type="text" class="form-control" id="recipient2-name">
                   </div>
@@ -165,11 +241,11 @@ include('modal/m_firma.php');
 
               </div>
               <div class="row" style="margin: 1%">
-                <div class="col-md-12 col-2 align-self-center">
+                <div class="col-md-12 align-self-center">
                   <h3 for="recipient-name" class="col-form-label mt-3" style="text-align: center; background-color: #c0c0c0"> Control de proceso</h3>
                 </div>
 
-                <div class="col-md-12 col-2 align-self-center">
+                <div class="col-md-12 align-self-center">
                   <div class=" checkbox-aprobacion mt-3">
                     <label class="lblControlTanques">Control de Tanques</label>
                     <!-- Control Tanques -->
@@ -287,25 +363,27 @@ include('modal/m_firma.php');
               <hr>
 
               <div class="row" style="margin: 1%">
-                <div class="col-md-4 col-2 align-self-center">
+                <div class="col-md-4 align-self-center">
                   <label for="desinfeccion_realizado" class="col-form-label">Realizado Por:</label>
                   <input type="text" class="form-control" id="desinfeccion_realizado" readonly>
                 </div>
-                <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
+                <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
                   <input type="button" class="btn btn-danger" id="desinfeccion_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
                 </div>
 
-                <div class="col-md-4 col-2 align-self-center">
+                <div class="col-md-4 align-self-center">
                   <label for="desinfeccion_verificado" class="col-form-label">Verificado Por:</label>
                   <input type="text" class="form-control" id="desinfeccion_verificado" readonly>
                 </div>
-                <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
+                <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
                   <input type="button" class="btn btn-danger" id="desinfeccion_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
                 </div>
               </div>
 
-              <div class="row" style="margin: 1%">
-                <div class="col-md-12 col-2 align-self-center" style="margin-left: 85%">
+              <hr>
+
+              <div class="row buttons-group-container" style="margin: 1%">
+                <div class="buttons-group">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                   <!-- <button type="button" class="btn btn-primary"
                       onclick="window.location.href = '../html/envasado.html';">Aceptar -->
@@ -313,6 +391,8 @@ include('modal/m_firma.php');
                 </div>
               </div>
             </div>
+
+          
 
 
           </div>

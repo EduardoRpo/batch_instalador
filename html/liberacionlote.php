@@ -33,11 +33,11 @@ session_start();
   <div id="main-wrapper" style="padding-top:15px; padding-left:15px; padding-right:15px">
 
      <!-- HEADER -->
-    <!--  <?php include('partials/header.php'); ?> -->
+     <?php include('partials/header.php'); ?>
    <!-- FIN HEADER -->
   
   <div class="row page-titles">
-    <div class="col-md-8 col-2 align-self-right">
+    <div class="col-md-8 col-10 align-self-right">
       <h1 class="text-themecolor m-b-0 m-t-0" style="margin-left: 7%"><b>Liberación Lote</b></h1>
     </div>
     <div class="col-md-3 col-4 align-self-center">
@@ -52,11 +52,11 @@ session_start();
 
 
 <div class="row">
-    <div class="col-md-12 col-2 align-self-center">
+    <div class="col-md-12 align-self-center">
       <div class="card">
         <div class="card-block">
           <div class="table-responsive">
-            <table class="table table-striped table-bordered" id="preparacionTable" style="width: 100%;">
+            <table class="table table-striped table-bordered" id="preparacionTabla" style="width: 100%;">
 
             </table>
           </div>
@@ -76,18 +76,18 @@ session_start();
 <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="html/vendor/datatables/datatables.min.js"></script>
 <!-- slimscrollbar scrollbar JavaScript -->
-<script src="html/js/jquery.slimscroll.js"></script>
+<script src="html/js/utils/jquery.slimscroll.js"></script>
 <!--Wave Effects -->
-<script src="html/js/waves.js"></script>
+<script src="html/js/utils/waves.js"></script>
 <!--Menu sidebar -->
-<script src="html/js/sidebarmenu.js"></script>
+<script src="html/js/utils/sidebarmenu.js"></script>
 <!--stickey kit -->
 <script src="../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
 <!--Custom JavaScript -->
-<script src="html/js/custom.min.js"></script>
-<script src="html/js/datatables.js"></script>
+<script src="html/js/utils/custom.min.js"></script>
+<script src="html/js/utils/datatables.js"></script>
 <script src="../assets/plugins/jquery/jquery.number.min.js"></script>
-<script src="html/js/utils/preparacion.js"></script>
+<script src="html/js/preparacion/preparacion.js"></script>
 
 </body>
 
