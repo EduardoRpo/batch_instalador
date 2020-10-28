@@ -56,6 +56,11 @@ $(document).ready(function () {
       { "data": "viscosidad" },
       { "data": "densidad" },
       { "data": "alcohol" },
+      { "data": "envase" },
+      { "data": "tapa" },
+      { "data": "etiqueta" },
+      { "data": "otros_empaque" },
+      { "data": "otros" },
     ]
   });
 });

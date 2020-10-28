@@ -237,7 +237,9 @@ function mostrarInstructivo() {
     paso = paso + 1;
 }
 
-function guardarBatchPreparacion() {
+//Alistar datos control proceso preparacion
+
+function guardarControlProcesoPreparacion() {
     valores = new Array();
 
     $('#tblControlProcesoPreparacion tr').each(function () {
@@ -249,3 +251,4 @@ function guardarBatchPreparacion() {
         valores.push(valor);
     });
 }
+

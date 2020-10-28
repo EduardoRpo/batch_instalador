@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once('php/sesion/sesion.php');
 require_once('modal/m_productos.php');
 ?>
@@ -86,6 +86,11 @@ require_once('modal/m_productos.php');
                         <th>Viscosidad</th>
                         <th>Densidad</th>
                         <th>Alcohol</th>
+                        <th>Envase</th>
+                        <th>Tapa</th>
+                        <th>Etiqueta</th>
+                        <th>Otros Empaque</th>
+                        <th>Otros</th>
                       </tr>
                     </thead>
                     <tbody>
