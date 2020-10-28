@@ -249,6 +249,7 @@ include('modal/m_muestras.php');
                     <input type="text" class="form-control in_desinfeccion despeje_realizado" id="despeje_realizado" readonly>
                   </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
                   <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
                     <input type="text" id="idbtn" hidden>
                     <input type="button" class="btn btn-danger in_desinfeccion despeje_realizado" id="despeje_realizado" onclick="cargar(this, 'firma1')" style="width: 100%; height: 38px;" value="Firmar">
@@ -256,6 +257,13 @@ include('modal/m_muestras.php');
                   <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
                     <input type="button" class="btn btn-danger in_desinfeccion" id="despeje_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
 >>>>>>> edc1bf0f3de814581dd8dc500b3de6212e46db55
+=======
+
+                  <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
+                  <input type="text" id="idbtn" hidden>  
+                  <input type="button" class="btn btn-danger in_desinfeccion" despeje_realizado" id="despeje_realizado" onclick="cargar(this, 'firma1')" style="width: 100%; height: 38px;" value="Firmar">
+
+>>>>>>> 608efa39cc38de71e646b8a4ad706bbbacb1bf2a
                   </div>
 
                   <div class="col-md-4 align-self-center">
@@ -263,12 +271,18 @@ include('modal/m_muestras.php');
                     <input type="text" class="form-control in_desinfeccion despeje_verificado" id="despeje_verificado" readonly>
                   </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
                   <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
                     <input type="button" class="btn btn-danger in_desinfeccion despeje_verificado" id="despeje_verificado" onclick="cargar(this, 'firma2')" style="width: 100%; height: 38px;" value="Firmar">
 =======
                   <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
                     <input type="button" class="btn btn-danger in_desinfeccion" id="despeje_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
 >>>>>>> edc1bf0f3de814581dd8dc500b3de6212e46db55
+=======
+
+                  <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
+                    <input type="button" class="btn btn-danger in_desinfeccion" despeje_verificado" id="despeje_verificado" onclick="cargar(this, 'firma2')" style="width: 100%; height: 38px;" value="Firmar">
+>>>>>>> 608efa39cc38de71e646b8a4ad706bbbacb1bf2a
                   </div>
                 </div>
                 <div class="row justify-content-end mt-5" style="margin: 1%; text-align: right">
