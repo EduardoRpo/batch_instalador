@@ -15,7 +15,7 @@ function cargarBatch() {
 
             let preg = $('#1').val();
             let info = JSON.parse(response);
-
+            debugger;
             if (info !== '') {
                 let j = 1;
                 for (let i = 0; i < info.data.length; i++) {

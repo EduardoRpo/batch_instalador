@@ -45,7 +45,7 @@ $(document).ready(function () {
                 let tnq = $('#Notanques').val();
 
                 if (tnq === "") {
-                    $('#Notanques').val(1);
+                    $('#Notanques').val(tanques).prop("disabled", true);
                 }
 
                 if (flagWeight) {

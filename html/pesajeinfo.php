@@ -249,7 +249,7 @@ include_once('modal/modal_condicionesMedio.php');
                 </div>
                 <div class="formulaMaestra">
                   <label for="cargo-1" class="col-form-label"><b>Entrega de formula Maestra para solicitud de materia prima</b></label>
-                  <label for="cargo-2" class="col-form-label"><b>Lleva Materia prima a la escusa</b></label>
+                  <label for="cargo-2" class="col-form-label"><b>Lleva Materia prima a la esclusa</b></label>
                   <label for="cargo-3" class="col-form-label"><b>Verificación del estado de Identificación y Aprobación Materias primas</b></label>
                   <label for="cargo-4" class="col-form-label"><b>Toma de materia prima de la esclusa</b></label>
 

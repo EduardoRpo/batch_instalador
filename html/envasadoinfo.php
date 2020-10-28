@@ -51,9 +51,9 @@ include('modal/m_muestras.php');
 
   <div id="main-wrapper">
 
-       <!-- HEADER -->
-   <?php include('partials/header.php'); ?>
-   <!-- FIN HEADER -->
+    <!-- HEADER -->
+    <?php include('partials/header.php'); ?>
+    <!-- FIN HEADER -->
 
     <div class="container-fluid">
       <div class="row page-titles">
@@ -246,18 +246,22 @@ include('modal/m_muestras.php');
                 <div class="row" style="margin: 1%">
                   <div class="col-md-4 align-self-center">
                     <label for="despeje_realizado" class="col-form-label">Realizado Por</label>
-                    <input type="text" class="form-control in_desinfeccion" id="despeje_realizado" readonly>
+                    <input type="text" class="form-control in_desinfeccion despeje_realizado" id="despeje_realizado" readonly>
                   </div>
+
                   <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                    <input type="button" class="btn btn-danger in_desinfeccion" id="despeje_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
+                  <input type="text" id="idbtn" hidden>  
+                  <input type="button" class="btn btn-danger in_desinfeccion" despeje_realizado" id="despeje_realizado" onclick="cargar(this, 'firma1')" style="width: 100%; height: 38px;" value="Firmar">
+
                   </div>
 
                   <div class="col-md-4 align-self-center">
                     <label for="despeje_verificado" class="col-form-label">Verificado Por</label>
-                    <input type="text" class="form-control in_desinfeccion" id="despeje_verificado" readonly>
+                    <input type="text" class="form-control in_desinfeccion despeje_verificado" id="despeje_verificado" readonly>
                   </div>
+
                   <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                    <input type="button" class="btn btn-danger in_desinfeccion" id="despeje_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
+                    <input type="button" class="btn btn-danger in_desinfeccion" despeje_verificado" id="despeje_verificado" onclick="cargar(this, 'firma2')" style="width: 100%; height: 38px;" value="Firmar">
                   </div>
                 </div>
                 <div class="row justify-content-end mt-5" style="margin: 1%; text-align: right">
@@ -1194,8 +1198,6 @@ include('modal/m_muestras.php');
                       <label for="recipient-name" class="col-form-label loteadora">Identificación Loteadora</label>
                       <input type="text" class="form-control txtLoteadora" readonly>
 
-
-
                     </div>
                     <hr>
 
@@ -1360,10 +1362,11 @@ include('modal/m_muestras.php');
           <script src="../../html/js/global/tanques.js"></script>
           <script src="../../html/js/global/equipos.js"></script>
           <script src="../../html/js/global/condicionesdelMedio.js"></script>
-          <script src="../../html/js/global/cargarDespeje.js"></script>
-          <script src="../../html/js/pesaje/pesajeinfo.js"></script>
+          <script src="../../html/js/global/cargarBatch.js"></script>
+          <!-- <script src="../../html/js/pesaje/pesajeinfo.js"></script> -->
           <script src="../../html/js/firmar/firmar.js"></script>
           <script src="../../html/js/envasado/envasadoinfo.js"></script>
+          <script src="../../html/js/global/incidencias.js"></script>
 
           <!--Alertify-->
           <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
