@@ -19,7 +19,7 @@ switch ($op) {
   case 3: // Guardar y actualizar data
     if (!empty($_POST)) {
       $editar = $_POST['editar'];
-      $pregunta = strtoupper($_POST['pregunta']);
+      $pregunta = ucfirst(strtolower($_POST['pregunta']));
 
       if ($editar == 0) {
         $sql = "SELECT * FROM preguntas WHERE pregunta=:pregunta";

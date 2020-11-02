@@ -14,7 +14,7 @@ if (!empty($_POST)) {
 
 	// preparar datos
 	foreach ($datos as $data) {
-		$dataList[] = explode(";", strtoupper($data));
+		$dataList[] = explode(";", ucfirst(strtolower($data)));
 	}
 
 	//Buscar operacion y ejecutar

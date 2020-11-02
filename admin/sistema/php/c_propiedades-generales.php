@@ -30,7 +30,7 @@ switch ($op) {
 
             $editar = $_POST['editar'];
             $tabla = $_POST['tabla'];
-            $dato =  strtoupper($_POST['datos']);
+            $dato =  ucfirst(strtolower($_POST['datos']));
 
             if ($editar == 0) {
                 $sql = "SELECT * FROM $tabla WHERE nombre= :dato";

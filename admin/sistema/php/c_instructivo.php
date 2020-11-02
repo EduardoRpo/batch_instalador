@@ -26,7 +26,7 @@ switch ($op) {
         if (!empty($_POST)) {
             $editar = $_POST['editar'];
             $referencia = $_POST['referencia'];
-            $actividad = strtoupper($_POST['actividad']);
+            $actividad = ucfirst(strtolower($_POST['actividad']));
             $tiempo = $_POST['tiempo'];
 
             if ($editar == 0) {

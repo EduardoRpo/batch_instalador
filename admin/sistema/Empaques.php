@@ -54,11 +54,11 @@
                 <p class="category">Propiedades<a href=""></a></p>
               </div>
               <div class="card-body">
-                <button class="btn btn-primary mb-5" id="tapa" onclick="parametros(id, 1);">Tapa</button>
-                <button class="btn btn-light mb-5" id="envase" onclick="parametros(id, 2)">Envase</button>
-                <button class="btn btn-primary mb-5" id="etiqueta" onclick="parametros(id, 3)">Etiqueta</button>
-                <button class="btn btn-light mb-5" id="otros" onclick="parametros(id, 4)">Otros Caja</button>
-                <button class="btn btn-primary mb-5" id="otro_empaque" onclick="parametros(id, 5)">Otros</button>
+                <button class="btn btn-primary mb-5" id="tapa" onclick="parametros(id, 1);">Tapas</button>
+                <button class="btn btn-light mb-5" id="envase" onclick="parametros(id, 2)">Envases</button>
+                <button class="btn btn-primary mb-5" id="etiqueta" onclick="parametros(id, 3)">Etiquetas</button>
+                <button class="btn btn-light mb-5" id="empaque" onclick="parametros(id, 4)">Cajas</button>
+                <button class="btn btn-primary mb-5" id="otros" onclick="parametros(id, 5)">Otros</button>
               </div>
             </div>
           </div>
@@ -73,7 +73,7 @@
                 <button type="button" class="btn btn-primary" onclick="adicionar(1);">Adicionar</button>
                 <form id="frmAdicionar1" style="display: none;">
                   <label for=""><b>Código</b></label>
-                  <label for=""><b>Descripcion de Tapa</b></label>
+                  <label for=""><b>Descripción de Tapa</b></label>
 
                   <input type="number" name="txt-Id1" id="txt-Id1" class="form-control" hidden>
                   <input type="number" name="codigo1" id="codigo1" class="form-control" placeholder="Codigo" style="text-align: center;">
@@ -114,13 +114,13 @@
                 <button type="button" class="btn btn-primary" onclick="adicionar(2);">Adicionar</button>
                 <form id="frmAdicionar2" style="display: none;">
                   <label for=""><b>Código</b></label>
-                  <label for=""><b>Descripcion de Envase</b></label>
+                  <label for=""><b>Descripción de Envase</b></label>
 
                   <input type="number" name="txt-Id2" id="txt-Id2" class="form-control" hidden>
                   <input type="number" name="codigo2" id="codigo2" class="form-control" placeholder="Codigo" style="text-align: center;">
                   <input type="text" name="input2" id="input2" class="form-control" placeholder="Descripcion Envase">
 
-                  <button type="button" class="btn btn-primary btnguardar" id="envase" onclick="guardarDatosGenerales(id, 2);">G>Guardar</button>
+                  <button type="button" class="btn btn-primary btnguardar" id="envase" onclick="guardarDatosGenerales(id, 2);">Guardar</button>
                 </form>
                 <hr>
               </div>
@@ -154,13 +154,13 @@
                 <button type="button" class="btn btn-primary" onclick="adicionar(3);">Adicionar</button>
                 <form id="frmAdicionar3" style="display: none;">
                   <label for=""><b>Código</b></label>
-                  <label for=""><b>Descripcion Etiqueta</b></label>
+                  <label for=""><b>Descripción Etiqueta</b></label>
 
                   <input type="number" name="txt-Id3" id="txt-Id3" class="form-control" hidden>
                   <input type="number" name="codigo3" id="codigo3" class="form-control" placeholder="Codigo" style="text-align: center;">
                   <input type="text" name="input3" id="input3" class="form-control" placeholder="Descripcion Etiqueta">
 
-                  <button type="button" class="btn btn-primary btnguardar" id="etiqueta" onclick="guardarDatosGenerales(id, 3);">G>Guardar</button>
+                  <button type="button" class="btn btn-primary btnguardar" id="etiqueta" onclick="guardarDatosGenerales(id, 3);">Guardar</button>
                 </form>
                 <hr>
               </div>
@@ -186,18 +186,18 @@
           <div class="col-md-12">
             <div class="card" id="4">
               <div class="card-header">
-                <h4 class="card-title">Otros</h4>
+                <h4 class="card-title">Cajas</h4>
                 <hr>
                 <button type="button" class="btn btn-primary" onclick="adicionar(4);">Adicionar</button>
                 <form id="frmAdicionar4" style="display: none;">
                   <label for=""><b>Código</b></label>
-                  <label for=""><b>Descripcion Otros</b></label>
+                  <label for=""><b>Descripción</b></label>
 
                   <input type="number" name="txt-Id4" id="txt-Id4" class="form-control" hidden>
                   <input type="number" name="codigo4" id="codigo4" class="form-control" placeholder="Codigo" style="text-align: center;">
                   <input type="text" name="input4" id="input4" class="form-control" placeholder="Descripcion Otros">
 
-                  <button type="button" class="btn btn-primary btnguardar" id="otros" onclick="guardarDatosGenerales(id, 4);">G>Guardar</button>
+                  <button type="button" class="btn btn-primary btnguardar" id="empaque" onclick="guardarDatosGenerales(id, 4);">Guardar</button>
                 </form>
                 <hr>
               </div>
@@ -237,7 +237,7 @@
                   <input type="number" name="codigo5" id="codigo5" class="form-control" placeholder="Codigo" style="text-align: center;">
                   <input type="text" name="input5" id="input5" class="form-control" placeholder="Descripcion Otros">
 
-                  <button type="button" class="btn btn-primary btnguardar" id="otro_empaque" onclick="guardarDatosGenerales(id, 5);">G>Guardar</button>
+                  <button type="button" class="btn btn-primary btnguardar" id="otros" onclick="guardarDatosGenerales(id, 5);">Guardar</button>
                 </form>
                 <hr>
               </div>

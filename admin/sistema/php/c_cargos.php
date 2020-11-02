@@ -22,7 +22,7 @@ if (!empty($_POST)) {
         case 3: // Actualizar y Guardar data
 
             $editar = $_POST['editar'];
-            $cargo = strtoupper($_POST['cargo']);
+            $cargo = ucfirst(strtolower($_POST['cargo']));
 
             if ($editar == 0) {
                 $sql = "SELECT * FROM cargo WHERE cargo= :cargo";

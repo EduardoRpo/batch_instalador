@@ -25,7 +25,7 @@ switch ($op) {
             $editar = $_POST['editar'];
             $tabla = $_POST['nombre'];
             $codigo =  $_POST['codigo'];
-            $descripcion =  strtoupper($_POST['descripcion']);
+            $descripcion =  ucfirst(strtolower($_POST['descripcion']));
 
             if ($editar == 0) {
                 $sql = "SELECT * FROM $tabla WHERE id = :codigo";

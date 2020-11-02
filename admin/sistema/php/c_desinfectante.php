@@ -23,7 +23,7 @@ switch ($op) {
             $editar = $_POST['editar'];
 
             $id = $_POST['id'];
-            $desinfectante = strtoupper($_POST['desinfectante']);
+            $desinfectante = ucfirst(strtolower($_POST['desinfectante']));
             $concentracion = $_POST['concentracion'];
 
             if ($editar == 0) {
