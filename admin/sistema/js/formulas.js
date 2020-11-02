@@ -79,7 +79,7 @@ function cargarTablaFormulas(referencia) {
             { "data": "referencia" },
             { "data": "nombre" },
             { "data": "alias" },
-            { "data": "porcentaje", className: "centrado" , render: $.fn.dataTable.render.number(',', '.', 1, '', '%') },
+            { "data": "porcentaje", className: "centrado", render: $.fn.dataTable.render.number(',', '.', 1, '', '%') },
             { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
             { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" }
         ],
@@ -151,10 +151,15 @@ function guardarFormulaMateriaPrima() {
     let ref_producto = $('#cmbReferenciaProductos').val();
     let ref_materiaprima = $('#cmbreferencia').val();
     let porcentaje = $('#porcentaje').val();
-
-    if (ref_materiaprima === null) {
+  
+    if (ref_materiaprima === null)
         ref_materiaprima = $('#textReferencia').val();
+
+    if (porcentaje === null || porcentaje === '') {
+        alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los campos");
+        return false;
     }
+
 
     $.ajax({
         type: "POST",
@@ -181,7 +186,7 @@ function guardarFormulaMateriaPrima() {
 
 $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
-    
+
     editar = 1;
     let id = $(this).parent().parent().children().first().text();
     let mp = $(this).parent().parent().children().eq(1).text();

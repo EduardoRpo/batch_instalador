@@ -71,7 +71,7 @@
                 <h4 class="card-title">Tapas</h4>
                 <hr>
                 <button type="button" class="btn btn-primary" onclick="adicionar(1);">Adicionar</button>
-                <form id="frmAdicionar1" style="display: none;">
+                <form id="frmAdicionar1" class="frmAdicionar2" style="display: none;">
                   <label for=""><b>Código</b></label>
                   <label for=""><b>Descripción de Tapa</b></label>
 
@@ -112,7 +112,7 @@
                 <h4 class="card-title">Envases</h4>
                 <hr>
                 <button type="button" class="btn btn-primary" onclick="adicionar(2);">Adicionar</button>
-                <form id="frmAdicionar2" style="display: none;">
+                <form id="frmAdicionar2"  class="frmAdicionar2" style="display: none;">
                   <label for=""><b>Código</b></label>
                   <label for=""><b>Descripción de Envase</b></label>
 
@@ -152,7 +152,7 @@
                 <h4 class="card-title">Etiquetas</h4>
                 <hr>
                 <button type="button" class="btn btn-primary" onclick="adicionar(3);">Adicionar</button>
-                <form id="frmAdicionar3" style="display: none;">
+                <form id="frmAdicionar3"  class="frmAdicionar2" style="display: none;">
                   <label for=""><b>Código</b></label>
                   <label for=""><b>Descripción Etiqueta</b></label>
 
@@ -189,7 +189,7 @@
                 <h4 class="card-title">Cajas</h4>
                 <hr>
                 <button type="button" class="btn btn-primary" onclick="adicionar(4);">Adicionar</button>
-                <form id="frmAdicionar4" style="display: none;">
+                <form id="frmAdicionar4"  class="frmAdicionar2" style="display: none;">
                   <label for=""><b>Código</b></label>
                   <label for=""><b>Descripción</b></label>
 
@@ -229,7 +229,7 @@
                 <h4 class="card-title">Otros</h4>
                 <hr>
                 <button type="button" class="btn btn-primary" onclick="adicionar(5);">Adicionar</button>
-                <form id="frmAdicionar5" style="display: none;">
+                <form id="frmAdicionar5" class="frmAdicionar2" style="display: none;">
                   <label for=""><b>Código</b></label>
                   <label for=""><b>Otros Adicionales</b></label>
 

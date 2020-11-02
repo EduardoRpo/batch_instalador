@@ -76,7 +76,7 @@
                 <h4 class="card-title">Nombres Productos</h4>
                 <hr>
                 <button type="button" class="btn btn-primary" onclick="adicionar(1);">Adicionar</button>
-                <form id="frmAdicionar1" class="frmAdicionar" style="display: none;">
+                <form id="frmAdicionar1" class="frmAdicionar1" style="display: none;">
                   <label for=""><b>Nombre Producto</b></label>
                   <input type="text" name="txt-Id1" id="txt-Id1" class="form-control" hidden>
                   <input type="text" name="input1" id="input1" class="form-control" placeholder="Nombre Producto" style="width: 350px;">
@@ -114,10 +114,11 @@
 
                 <hr>
                 <button type="button" class="btn btn-primary" onclick="adicionar(2);">Adicionar</button>
-                <form id="frmAdicionar2" class="frmAdicionar" style="display: none;">
+                <form id="frmAdicionar2" class="frmAdicionar4" style="display: none;">
                   <label for=""><b>Notificacion Sanitaria</b></label>
                   <input type="text" name="txt-Id2" id="txt-Id2" class="form-control" hidden>
                   <input type="text" name="input2" id="input2" class="form-control" placeholder="Notificacion Sanitaria">
+                  <input type="date" name="input21" id="input21" class="form-control" placeholder="Fecha de Vencimiento">
                   <button type="button" class="btn btn-primary tabla2" id="notificacion_sanitaria" onclick="guardarDatosGenerales(id, 2);">Guardar</button>
                 </form>
                 <hr>
@@ -149,7 +150,7 @@
         </div>
 
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-8">
             <div class="card" id="3">
               <div class="card-header">
                 <h4 class="card-title">Lineas</h4>
@@ -188,7 +189,7 @@
               </form>
             </div>
           </div>
-          <div class="col-md-10">
+          <div class="col-md-8">
             <div class="card" id="4">
               <div class="card-header">
                 <h4 class="card-title">Marcas</h4>

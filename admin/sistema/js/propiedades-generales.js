@@ -138,7 +138,7 @@ function adicionar(id) {
     $(`#input${id}`).val('');
     $(`#min${id}`).val('');
     $(`#max${id}`).val('');
-    
+
 }
 
 /* Borrar registros */
@@ -170,18 +170,23 @@ $(document).on('click', '.link-editar', function (e) {
 
     let id = $(this).parent().parent().children().first().text();
     let nombre = $(this).parent().parent().children().eq(1).text();
+    let otro = $(this).parent().parent().children().eq(2).text();
 
     $(`#frmAdicionar${id_tbl}`).slideDown();
     $(`.tabla${id_tbl}`).html('Actualizar');
     $(`#txt-Id${id_tbl}`).val(id);
-
+    debugger
     if (id_tbl === 4 || id_tbl === 5 || id_tbl === 6 || id_tbl === 8) {
         var res = nombre.split(" - ");
         $(`#min${id_tbl}`).val(res[0]);
         $(`#max${id_tbl}`).val(res[1]);
 
-    } else
+    } else {
         $(`#input${id_tbl}`).val(nombre);
+        if (tablaBD == 'linea')
+            $(`#input${id_tbl}1`).val(otro);
+    }
+
 
 });
 
@@ -197,7 +202,7 @@ function guardarDatosGenerales(nombre, id) {
         alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos");
         return false;
     }
-    
+
     $.ajax({
         type: "POST",
         url: "php/c_propiedades-generales.php",
@@ -239,11 +244,11 @@ function guardarDatosGeneralesMinMax(nombre, id) {
     $.ajax({
         type: "POST",
         url: "php/c_propiedades-generales.php",
-        data : { min: min, max: max, id_registro: id_registro, tabla: nombre, operacion: 4, editar:editar },
+        data: { min: min, max: max, id_registro: id_registro, tabla: nombre, operacion: 4, editar: editar },
 
         success: function (r) {
 
-             if (r == 1) {
+            if (r == 1) {
                 alertify.set("notifier", "position", "top-right"); alertify.success("Almacenado con éxito.");
                 refreshTable(id);
             } else if (r == 2) {

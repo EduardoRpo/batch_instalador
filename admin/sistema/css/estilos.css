@@ -131,9 +131,9 @@
   justify-content: center;
 }
 
-#frmAdicionar1 {
+.frmAdicionar1 {
   display: grid;
-  grid-template-columns: 150px 1fr;
+  grid-template-columns: auto auto auto;
   grid-gap: 5px;
   margin: 10px;
   text-align: center;
@@ -142,9 +142,9 @@
   justify-content: center;
 }
 
-#frmAdicionar2 {
+.frmAdicionar2 {
   display: grid;
-  grid-template-columns: 150px 1fr;
+  grid-template-columns: 150px 2fr;
   grid-gap: 5px;
   margin: 10px;
   text-align: center;
@@ -153,9 +153,20 @@
   justify-content: center;
 }
 
-#frmAdicionar3 {
+.frmAdicionar3 {
   display: grid;
-  grid-template-columns: 150px 1fr;
+  grid-template-columns: 150px 150px 150px 90px;
+  grid-gap: 5px;
+  margin: 10px;
+  text-align: center;
+  justify-items: center;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.frmAdicionar4 {
+  display: grid;
+  grid-template-columns: 150px 160px 170px 90px;
   grid-gap: 5px;
   margin: 10px;
   text-align: center;

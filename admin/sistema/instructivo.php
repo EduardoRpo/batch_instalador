@@ -66,10 +66,10 @@
                 <button type="button" class="btn btn-primary" id="adicionarInstructivo">Adicionar</button>
                 <form id="frmadInstructivo" style="display: none;">
                   <label for=""><b>Actividad</b></label>
-                  <label for="">Tiempo</label>
+                  <label for="">Tiempo/Min</label>
                   <input type="text" id="txtId" class="form-control" hidden>
                   <input type="text" id="txtActividad" class="form-control">
-                  <input type="number" name="txtTiempo" id="txtTiempo" class="form-control" placeholder="Tiempo" style="text-align: center;">
+                  <input type="number" name="txtTiempo" id="txtTiempo" class="form-control" placeholder="Minutos" style="text-align: center;">
                   <button type="button" class="btn btn-primary" id="txtguardarInstructivo" onclick="guardarInstructivo();">Guardar</button>
                 </form>
               </div>

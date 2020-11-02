@@ -17,7 +17,7 @@ $.ajax({
     data: { operacion: "1" },
 
     success: function (response) {
-      
+
         var info = JSON.parse(response);
         let $selectProductos = $('#cmbReferenciaProductos');
 
@@ -79,7 +79,7 @@ function cargarTablaFormulas(referencia) {
             { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" },
             { "data": "id" },
             { "data": "proceso" },
-            { "data": "tiempo", className: "centrado",},
+            { "data": "tiempo", className: "centrado", },
         ],
         columnDefs: [
             { width: "10%", "targets": 0 },
@@ -110,13 +110,13 @@ $(document).on('click', '.link-editar', function (e) {
     let id = $(this).parent().parent().children().eq(2).text();
     let actividad = $(this).parent().parent().children().eq(3).text();
     let tiempo = $(this).parent().parent().children().eq(4).text();
-    
+
     $("#frmadInstructivo").slideDown();
     $('#txtguardarInstructivo').html('Actualizar');
     $('#txtId').val(id);
     $('#txtActividad').val(actividad);
     $('#txtTiempo').val(tiempo);
-    
+
 });
 
 
@@ -127,16 +127,26 @@ function guardarInstructivo() {
     let referencia = $('#cmbReferenciaProductos').val();
     let actividad = $('#txtActividad').val();
     let tiempo = $('#txtTiempo').val();
-    
+
+    if (referencia === null || actividad == '' || tiempo == '') {
+        alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos.");
+        return false;
+    }
+
+
+    debugger;
+
     $.ajax({
         type: "POST",
         url: "php/c_instructivo.php",
-        data: { operacion: 4, 
-                editar: editar, 
-                referencia: referencia, 
-                id: id, 
-                actividad: actividad, 
-                tiempo: tiempo },
+        data: {
+            operacion: 4,
+            editar: editar,
+            referencia: referencia,
+            id: id,
+            actividad: actividad,
+            tiempo: tiempo
+        },
 
         success: function (r) {
             if (r == 1) {
