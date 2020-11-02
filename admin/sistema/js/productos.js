@@ -60,7 +60,7 @@ $(document).ready(function () {
       { "data": "id_envase" },
       { "data": "id_tapa" },
       { "data": "id_etiqueta" },
-     /*  { "data": "otros_empaque" }, */
+      /*  { "data": "otros_empaque" }, */
       { "data": "id_otros" },
     ]
   });
@@ -93,6 +93,8 @@ function cargarDatosProductos() {
   }
 }
 
+/* Cargar selectores para adicionar productos */
+
 function cargarselectores(selector) {
 
   $.ajax({
@@ -101,8 +103,9 @@ function cargarselectores(selector) {
     data: { tabla: selector, operacion: 4 },
 
     success: function (response) {
-      var info = JSON.parse(response);
 
+      var info = JSON.parse(response);
+      debugger;
       let $select = $(`#${selector}`);
       $select.empty();
 

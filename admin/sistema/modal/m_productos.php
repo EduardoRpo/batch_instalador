@@ -174,11 +174,44 @@
                       </div>
                     </div>
 
+                    <hr>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="envase">Envase</label>
+                          <select class="form-control n23" name="envase" id="envase"></select>
+                        </div>
+                      </div>
+                      <div class="col-md-4 pl-1">
+                        <div class="form-group">
+                          <label for="tapa">Tapa</label>
+                          <select class="form-control n24" name="tapa" id="tapa"></select>
+                        </div>
+                      </div>
+                      <div class="col-md-4 pl-1">
+                        <div class="form-group">
+                          <label for="etiqueta">Etiqueta</label>
+                          <select class="form-control n25" name="etiqueta" id="etiqueta"></select>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="empaque">Caja</label>
+                          <select class="form-control n26" name="empaque" id="empaque"></select>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="otros">Otros</label>
+                          <select class="form-control n27" name="otros" id="otros"></select>
+                        </div>
+                      </div>
+                     
+                    </div>
+
                     <button id="btnCerrar" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     <button id="btnguardarProductos" type="submit" class="btn btn-primary">Crear Producto</button>
 
-                    <!-- <div> <?php //echo ($alert); 
-                                ?> </div> -->
                   </form>
                 </div>
               </div>

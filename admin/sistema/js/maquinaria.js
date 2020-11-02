@@ -104,7 +104,7 @@ $(document).on('click', '.link-editar', function (e) {
 
     $('#txtid_Equipo').val(id);
     $('#txtEquipo').val(nombre);
-    $(`#cmbLinea option:contains(${linea})`).attr('selected', true);
+    $(`#cmbLinea option:contains(${linea})`).prop('selected', true);
 });
 
 
