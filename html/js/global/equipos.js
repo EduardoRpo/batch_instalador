@@ -11,7 +11,7 @@ function cargarMaquinas() {
 
         success: function (response) {
             const info = JSON.parse(response);
-
+            debugger;
             $('.txtEnvasadora').val('');
             $('.txtLoteadora').val('');
             $('#sel_agitador').val('');

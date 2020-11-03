@@ -15,14 +15,14 @@ function cargarBatch() {
 
             let preg = $('#1').val();
             let info = JSON.parse(response);
-            
+            debugger;
             if (info !== '') {
-                let j = 1;
+                /* let j = 1; */
                 for (let i = 0; i < info.data.length; i++) {
-                    let question = "question-" + j;
+                    let question = "question-" + `${info.data[i].id_pregunta}`;
                     let valor = info.data[i].solucion;
                     $("input:radio[name=" + question + "][value=" + valor + "]").prop('checked', true);
-                    j++;
+                    /* j++; */
                 }
                 cargarDesinfectante();
             }

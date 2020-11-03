@@ -79,7 +79,7 @@ function firmar(datos) {
 
 function validarPreguntas(idfirma) {
     var list = { 'datos': [] };
-
+debugger;
     $("input:radio:checked").each(function () {
         list.datos.push({
             "pregunta": $(this).attr("id"),
