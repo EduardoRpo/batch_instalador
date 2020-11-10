@@ -132,6 +132,7 @@ $.ajax({
     url: `/api/productsDetails/${referencia}`,
     type: 'GET'
 }).done((data, status, xhr) => {
+
     $('#espec_color').html(data.color);
     $('#espec_olor').html(data.olor);
     $('#espec_apariencia').html(data.apariencia);
@@ -163,24 +164,24 @@ $.ajax({
 
 /* Carga instructivo preparación para producto */
 /* function instructivo() { */
-    
-     $.ajax({
-            url: `/api/instructivos/${referencia}`,
-            type: 'GET',
-}).done((data, status, xhr) => { 
-         $('#pasos_instructivo').html('');
-        pasos = data;
-        var i = 1;
-        data.forEach((instructivo, indx) => {
-            $('#pasos_instructivo').append(`<a href="javascript:void(0)" onclick="procesoTiempo(event)" 
+
+$.ajax({
+    url: `/api/instructivos/${referencia}`,
+    type: 'GET',
+}).done((data, status, xhr) => {
+    $('#pasos_instructivo').html('');
+    pasos = data;
+    var i = 1;
+    data.forEach((instructivo, indx) => {
+        $('#pasos_instructivo').append(`<a href="javascript:void(0)" onclick="procesoTiempo(event)" 
             class="proceso-instructivo" attr-indx="${indx}" attr-id="${instructivo.id}" id="proceso-instructivo${i}" 
             attr-tiempo="${instructivo.tiempo}">PASO ${indx + 1}: ${instructivo.proceso} </a>  <br/>`);
-            i++;
-        });
-        ocultarInstructivo(); 
-     }).fail(err => {
-        console.log(err);
+        i++;
     });
+    ocultarInstructivo();
+}).fail(err => {
+    console.log(err);
+});
 /* } */
 
 
@@ -232,23 +233,27 @@ function ocultarInstructivo() {
 /* Mostrar siguiente paso */
 
 function mostrarInstructivo() {
-       
+
     $("#proceso-instructivo" + paso).css("color", "#67757c");
     paso = paso + 1;
 }
 
 //Alistar datos control proceso preparacion
 
-function guardarControlProcesoPreparacion() {
+/* function guardarControlProcesoPreparacion() {
     valores = new Array();
-
+    debugger;
     $('#tblControlProcesoPreparacion tr').each(function () {
         var cantidad = $(this).find('td').eq(0).html();
         var descripcion = $(this).find('td').eq(1).html();
+        var valorUnitario = $(this).find('td').eq(2).html();
         var valorUnitario = $(this).find('td').eq(3).html();
         
         valor = new Array(cantidad, descripcion, valorUnitario);
         valores.push(valor);
     });
-}
+    
+} */
+
+
 

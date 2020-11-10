@@ -13,6 +13,7 @@ if (!empty($_POST)) {
             ejecutarQuerySelect($conn, $query);
 
             break;
+
         case 2: //almacenar incidencias
             $incidencias = $_POST['incidencias'];
             $firma = $_POST['firma'];
@@ -37,7 +38,7 @@ if (!empty($_POST)) {
                 }
             }
 
-            if (!$result) 
+            if (!$result)
                 exit();
 
             //Almacenado de firmas
@@ -57,6 +58,26 @@ if (!empty($_POST)) {
             } else
                 echo '0';
 
+            break;
+        case 3: //Almacenarr firma 2da seccion sin incidencias
+            $firma = $_POST['firma'];
+            $modulo = $_POST['modulo'];
+            $batch = $_POST['batch'];
+
+            $sql = "INSERT INTO batch_firmas2seccion (modulo, batch, realizo) 
+                    VALUES (:modulo, :batch, :realizo)";
+
+            $query = $conn->prepare($sql);
+            $result = $query->execute([
+                'realizo' => $firma,
+                'modulo' => $modulo,
+                'batch' => $batch,
+            ]);
+
+            if ($result) {
+                echo '1';
+            } else
+                echo '0';
             break;
     }
 }

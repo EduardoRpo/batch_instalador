@@ -1,5 +1,15 @@
 
-//Cargar incidencias
+let firma_realizado;
+
+/* Cargar formulario incidencias */
+
+function cargarObsIncidencias(idFirma) {
+    firma_realizado = idFirma;
+    $('#modalObservaciones').modal('show');
+}
+
+
+//Cargar selectores
 
 function cargarSelectorIncidencias() {
 
@@ -71,6 +81,7 @@ $('#guardarIncidencias').click(function (e) {
     objeto.datos = datos;
     incidencias = JSON.stringify(objeto)
     let observaciones = $('.txtObservaciones').val();
+
     $.ajax({
         method: 'POST',
         url: '../../html/php/incidencias.php',
@@ -85,7 +96,14 @@ $('#guardarIncidencias').click(function (e) {
         success: function (response) {
             alertify.set("notifier", "position", "top-right"); alertify.success("Incidencias Reportadas exitosamente!");
             $('#modalObservaciones').modal('hide');
+            firmar(data);
         }
 
     });
+});
+
+$('#cerrarIncidencias').click(function (e) {
+    e.preventDefault();
+    $('#modalObservaciones').modal('hide');
+    firmar(data);
 });

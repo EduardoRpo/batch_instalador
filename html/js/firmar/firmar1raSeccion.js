@@ -1,16 +1,18 @@
 let id;
 let btnOprimido;
 let cont = 1;
-let firma_realizado;
+let contadorchecks;
+
 
 function cargar(btn, idbtn) {
+
     $('#idbtn').val(idbtn);
     id = btn.id;
 
     //Validacion de control de tanques en pesaje
     if (id == "pesaje_realizado") {
         if ($("#chkcontrolTanques1").is(':not(:checked)')) {
-            alertify.set("notifier", "position", "top-right"); alertify.error("No hay tanques chequeados");
+            alertify.set("notifier", "position", "top-right"); alertify.error("Chequee el 1er Tanque");
             return false;
         }
     }
@@ -18,17 +20,21 @@ function cargar(btn, idbtn) {
     validarParametrosControl();
 
     if (completo !== 0) {
+        /* limpia campos del formulario */
+        $('#usuario').val('');
+        $('#clave').val('');
+        /* Cargamos el modal */
         $('#m_firmar').modal('show');
         cont = 0;
     }
 }
 
-
+/* Valida el usuario si existe en la base de datos */
 function enviar() {
     $('#m_firmar').modal('hide');
     btn_id = $('#idbtn').val();
     //VALIDAR PARA LA FIRMA DE VERIFICADO SI TODOS LOS CHECKBOX ESTAN CHEQUEADOS APARECER
-
+    debugger;
     datos = {
         user: $('#usuario').val(),
         password: $('#clave').val(),
@@ -45,41 +51,49 @@ function enviar() {
                     alertify.set("notifier", "position", "top-right"); alertify.error("usuario y/o contraseña no coinciden.");
                     return false;
                 } else {
-                    firmar(datos);
+                    preparar(datos);
                 }
             }
         });
     return false;
 }
 
-function firmar(datos) {
+/* Si el usuario existe, ejeucta la opcion de acuerdo con el boton oprimido */
+
+function preparar(datos) {
     data = JSON.parse(datos);
 
-    if (btn_id == 'firma3')
-        cargarObsIncidencias(data[0].id);
-
-    let template = '<img id=":id:" src=":firma:" alt="firma_usuario" height="130">';
-    let parent = $('#' + id).parent();
-
-    $('#' + id).remove();
-    id = '';
-
-    let firma = template.replace(':firma:', data[0].urlfirma);
-    firma = firma.replace(':id:', btn_id);
-    parent.append(firma).html
-    debugger;
-    if (btn_id == 'firma1')
+    if (btn_id == 'firma1') {
         validarPreguntas(data[0].id);
-    if (btn_id == 'firma2')
+        firmar(data);
+    }
+
+    if (btn_id == 'firma2') {
         firmarVerficadoDespeje(data[0].id);
+        firmar(data);
+    }
 
+    if (btn_id == 'firma3') {
+        if (modulo == 2) {
+            firmarSeccionPesaje();
+        }
 
+        if (modulo == 3) {
+            var exito = guardarControlProcesoPreparacion();
+            if (exito == 0)
+                return false;
+            else
+                cargarObsIncidencias(data[0].id);
+        }
+
+    }
 }
+
 /* Almacenar datos */
 
 function validarPreguntas(idfirma) {
     var list = { 'datos': [] };
-debugger;
+
     $("input:radio:checked").each(function () {
         list.datos.push({
             "pregunta": $(this).attr("id"),
@@ -112,7 +126,7 @@ debugger;
             if (response > 0) {
                 $('.despeje_realizado').prop('disabled', true);
                 $('.despeje_verificado').prop('disabled', false);
-                $('.pesaje_realizado').prop('disabled', true);
+                $('.pesaje_realizado').prop('disabled', false);
             }
         }
     });
@@ -138,11 +152,17 @@ function firmarVerficadoDespeje(idfirma) {
     });
 }
 
-/* Cargar formulario incidencias */
+function firmar() {
+    debugger;
+    let template = '<img id=":id:" src=":firma:" alt="firma_usuario" height="130">';
+    let parent = $('#' + id).parent();
 
-function cargarObsIncidencias(idFirma) {
-    firma_realizado = idFirma;
-    $('#modalObservaciones').modal('show');
+    $('#' + id).remove();
+    id = '';
+
+    let firma = template.replace(':firma:', data[0].urlfirma);
+    firma = firma.replace(':id:', btn_id);
+    parent.append(firma).html
 }
 
 /* Imprimir pdf */

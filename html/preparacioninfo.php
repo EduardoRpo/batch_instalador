@@ -386,7 +386,7 @@ include("modal/modal_condicionesMedio.php");
                               <tr>
                                 <td>Color</td>
                                 <td id="espec_color"></td>
-                                <td><select class="selectpicker form-control">
+                                <td><select class="selectpicker form-control color">
                                     <option selected hidden>Seleccionar</option>
                                     <option value="1">Cumple </option>
                                     <option value="2">No Cumple</option>
@@ -397,7 +397,7 @@ include("modal/modal_condicionesMedio.php");
                               <tr>
                                 <td>Olor</td>
                                 <td id="espec_olor"></td>
-                                <td><select class="selectpicker form-control">
+                                <td><select class="selectpicker form-control olor">
                                     <option selected hidden></option>
                                     <option value="1">Cumple </option>
                                     <option value="2">No Cumple</option>
@@ -408,7 +408,7 @@ include("modal/modal_condicionesMedio.php");
                               <tr>
                                 <td>Apariencia</td>
                                 <td id="espec_apariencia"></td>
-                                <td><select class="selectpicker form-control">
+                                <td><select class="selectpicker form-control apariencia">
                                     <option selected hidden></option>
                                     <option value="1">Cumple </option>
                                     <option value="2">No Cumple</option>
@@ -419,7 +419,7 @@ include("modal/modal_condicionesMedio.php");
                               <tr>
                                 <td>PH</td>
                                 <td id="espec_ph"></td>
-                                <td><input type="number" id="in_ph" class="selectpicker form-control">
+                                <td><input type="number" id="in_ph" class="selectpicker form-control ph">
                                 </td>
                               </tr>
                               <tr>
@@ -437,7 +437,7 @@ include("modal/modal_condicionesMedio.php");
                               <tr>
                                 <td>Untuosidad</td>
                                 <td id="espec_untosidad"></td>
-                                <td><select class="selectpicker form-control">
+                                <td><select class="selectpicker form-control untuosidad">
                                     <option selected hidden></option>
                                     <option value="1">Cumple </option>
                                     <option value="2">No Cumple</option>
@@ -448,7 +448,7 @@ include("modal/modal_condicionesMedio.php");
                               <tr>
                                 <td>Poder Espumoso</td>
                                 <td id="espec_poder_espumoso"></td>
-                                <td><select class="selectpicker form-control">
+                                <td><select class="selectpicker form-control espumoso">
                                     <option selected hidden></option>
                                     <option value="1">Cumple </option>
                                     <option value="2">No Cumple</option>
@@ -487,7 +487,7 @@ include("modal/modal_condicionesMedio.php");
                     <input type="text" class="form-control" id="preparacion_realizado" readonly>
                   </div>
                   <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                    <input type="button" class="btn btn-danger preparacion_realizado" id="preparacion_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
+                    <input type="button" class="btn btn-danger preparacion_realizado" id="preparacion_realizado" onclick="cargar(this, 'firma3')" style="width: 100%; height: 38px;" value="Firmar">
                   </div>
 
                   <div class="col-md-4 align-self-center">
@@ -496,7 +496,7 @@ include("modal/modal_condicionesMedio.php");
                     <input type="text" class="form-control" id="preparacion_verificado" readonly>
                   </div>
                   <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                    <input type="button" class="btn btn-danger preparacion_verificado" id="preparacion_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
+                    <input type="button" class="btn btn-danger preparacion_verificado" id="preparacion_verificado" onclick="cargar(this, 'firma4')" style="width: 100%; height: 38px;" value="Firmar">
                   </div>
                 </div>
                 <!-- <hr> -->
@@ -560,6 +560,8 @@ include("modal/modal_condicionesMedio.php");
   <script src="../../html/js/firmar/firmar.js"></script>
   <script src="../../html/js/global/equipos.js"></script>
   <script src="../../html/js/global/incidencias.js"></script>
+  <script src="../../html/js/global/requerimiento_ajuste.js"></script>
+  <script src="../../html/js/preparacion/firmar_controlproceso.js"></script>
 
 </body>
 
