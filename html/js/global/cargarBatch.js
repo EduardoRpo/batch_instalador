@@ -57,8 +57,11 @@ function cargarDesinfectante() {
                 data: { operacion: 3, module: modulo, idbatch: idBatch },
 
                 success: function (response) {
-                    if (response == '')
+
+                    if (response == '') {
+                        cargarfirma2daSeccion();
                         return false;
+                    }
 
                     /* Carga segunda firma */
 
@@ -106,6 +109,7 @@ function cargarfirma2daSeccion() {
         data: { modulo, idBatch, operacion: 2 },
 
         success: function (response) {
+
             var data = JSON.parse(response);
             T_tanques = data[0].tanques;
             T_tanquesOk = data[0].tanquesOk;
@@ -123,6 +127,7 @@ function cargarfirma2daSeccion() {
             /* Valida que todos los tanques esten chequeados para proceder a firmar */
 
             if (T_tanquesOk == T_tanques) {
+
                 $.ajax({
                     type: "POST",
                     url: "../../html/php/batch_tanques.php",
@@ -134,8 +139,13 @@ function cargarfirma2daSeccion() {
                         if (data == '')
                             return false;
 
-                        let firma = data.urlfirma;
+                        let firma = data.realizo;
+                        let verifico = data.verifico;
+                        
                         firmado(firma, 3);
+                        
+                        if (verifico !== undefined)
+                            firmado(verifico, 4);
                     }
                 });
             }
@@ -166,6 +176,7 @@ function cargarfirma2daSeccion() {
 /* Registro de Firma */
 
 function firmado(datos, posicion) {
+
     let template = '<img id=":id:" src=":firma:" alt="firma_usuario" height="130">';
     let parent;
 
@@ -191,6 +202,21 @@ function firmado(datos, posicion) {
             $('#pesaje_realizado').remove();
             $('.pesaje_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
             $('.pesaje_verificado').prop('disabled', false);
+        } /* else if (modulo == 3) {
+            parent = $('#preparacion_realizado').parent();
+            $('#preparacion_realizado').remove();
+            $('.preparacion_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
+            $('.preparacion_verificado').prop('disabled', false);
+
+        } */
+
+
+    if (posicion == 4)
+        if (modulo == 2) {
+            parent = $('#pesaje_verificado').parent();
+            $('#pesaje_verificado').remove();
+            $('.pesaje_verificado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
+
         } /* else if (modulo == 3) {
             parent = $('#preparacion_realizado').parent();
             $('#preparacion_realizado').remove();

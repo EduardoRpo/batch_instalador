@@ -4,7 +4,7 @@
 function firmarSeccionPesaje() {
 
     let tanquesOk = 0;
-    debugger;
+
     /* validar tanque seleccionados */
     for (let i = 1; i <= tanques; i++) {
         if ($(`#chkcontrolTanques${i}`).is(":checked"))
@@ -19,7 +19,7 @@ function firmarSeccionPesaje() {
         data: { operacion: 1, tanques, tanquesOk, modulo, idBatch },
 
         success: function (response) {
-            debugger;
+
             if (response == 1) {
                 alertify.set("notifier", "position", "top-right"); alertify.success("Proceso ejecutado con éxito");
                 $(`#chkcontrolTanques${tanquesOk}`).prop('disabled', true);
@@ -35,7 +35,7 @@ function firmarSeccionPesaje() {
 }
 
 function firmarSeccionCierreProceso() {
-    debugger;
+
 
     //confirmacion de incidencias 
     alertify.confirm('Incidencias', 'Durante la fabricación de la orden ' + idBatch + ' XXX cantidad total XXX durante alguno de los tanques hubo incidencias', function () {
@@ -44,8 +44,8 @@ function firmarSeccionCierreProceso() {
         deshabilitarbtn();
 
     }, function () {
-        alertify.error('No se reportaron Incidencias');
-        debugger;
+        alertify.error('No reporto Incidencias');
+
         $.ajax({
             method: 'POST',
             url: '../../html/php/incidencias.php',
@@ -66,6 +66,28 @@ function firmarSeccionCierreProceso() {
     });
 
 }
+
+/* almacenar firma calidad 2da seccion */
+
+function almacenarfirma(id){
+    debugger;
+    $.ajax({
+        type: "POST",
+        url: "../../html/php/incidencias.php",
+        data: {
+            operacion: 4,
+            modulo: modulo,
+            batch: idBatch,
+            firma: id,
+        },
+
+        success: function (response) {
+            alertify.set("notifier", "position", "top-right"); alertify.success("Firmado satisfactoriamente");
+            $('.despeje_verificado').prop('disabled', true);
+        }
+    });
+}
+
 
 function deshabilitarbtn() {
     $('.pesaje_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);

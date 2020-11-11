@@ -12,6 +12,9 @@ function cargueCondicionesMedio() {
                 return false;
             }
             let t = JSON.parse(resp);
+            
+            /* Calculo del tiempo para aparecer la ventana para ingresar las condiciones del medio */
+
             let tiempo = Math.round(Math.random() * (t.data[0].t_max - t.data[0].t_min) + parseInt(t.data[0].t_min));
 
             setTimeout(function () {
@@ -28,15 +31,23 @@ function cargueCondicionesMedio() {
 
 function guardar_condicionesMedio() {
 
-    //let proceso = $('h1').text();
     let proceso = modulo;
     let temperatura = $('#temperatura').val();
     let humedad = $('#humedad').val();
     let url = $(location).attr('href');
     let id_batch = url.split("/");
 
+    /* Validar que existan datos en los campos */
+
     if (temperatura === "" || humedad === "") {
         alertify.set("notifier", "position", "top-right"); alertify.error("Complete todos los datos para continuar con el proceso.");
+        return false;
+    }
+
+    /* Validacion del nivel de temperatura y humedad de acuerdo con los valores */
+
+    if (temperatura < 15 || humedad < 50) {
+        alertify.set("notifier", "position", "top-right"); alertify.error("Revise nuevamente la temperatura o la humedad.");
         return false;
     }
 
@@ -62,5 +73,4 @@ function guardar_condicionesMedio() {
 
         }
     });
-    //return false;
 }

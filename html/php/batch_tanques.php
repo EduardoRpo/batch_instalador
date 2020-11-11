@@ -77,6 +77,7 @@ if (!empty($_POST)) {
                 echo json_encode(utf8ize($arreglo), JSON_UNESCAPED_UNICODE);
             }
             break;
+
         case 3:
 
             $batch = $_POST['idBatch'];
@@ -95,13 +96,14 @@ if (!empty($_POST)) {
                 echo json_encode(utf8ize($arreglo), JSON_UNESCAPED_UNICODE);
             }
             break;
+
         case 4: // cargar 2da firma despeje
             $batch = $_POST['idBatch'];
             $modulo = $_POST['modulo'];
 
-            $sql = "SELECT u.urlfirma 
+            $sql = "SELECT u.urlfirma as realizo, us.urlfirma as verifico
                     FROM batch_firmas2seccion d 
-                    INNER JOIN usuario u ON u.id = d.realizo
+                    INNER JOIN usuario u ON u.id = d.realizo INNER JOIN usuario us ON us.id = d.verifico
                     WHERE modulo = :modulo AND batch = :batch";
 
             $query = $conn->prepare($sql);
@@ -110,7 +112,26 @@ if (!empty($_POST)) {
 
             if ($rows > 0) {
                 ejecutarSelect1($query);
+            } else {
+
+                $sql = "SELECT u.urlfirma as realizo
+                FROM batch_firmas2seccion d 
+                INNER JOIN usuario u ON u.id = d.realizo
+                WHERE modulo = :modulo AND batch = :batch";
+
+                $query = $conn->prepare($sql);
+                $query->execute(['batch' => $batch, 'modulo' => $modulo]);
+                $rows = $query->rowCount();
+
+                if ($rows > 0) {
+                    ejecutarSelect1($query);
+                }
             }
+
+
+
+
+
 
             break;
     }

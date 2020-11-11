@@ -470,7 +470,7 @@ include("modal/modal_condicionesMedio.php");
                 </div>
                 <hr>
                 <div class="row" style="margin: 1%">
-                  <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down" data-toggle="modal" data-target="#modalAjuste" style="margin-left: 1%">
+                  <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down" data-toggle="modal" data-target="#m_req_ajuste" style="margin-left: 1%">
                     ¿Se requiere algún ajuste?
                   </button>
                 </div>
@@ -557,11 +557,13 @@ include("modal/modal_condicionesMedio.php");
   <script src="../../html/js/global/cargarBatch.js"></script>
   <script src="../../html/js/pesaje/pesajeinfo.js"></script>
   <script src="../../html/js/preparacion/preparacioninfo.js"></script>
-  <script src="../../html/js/firmar/firmar.js"></script>
+  <script src="../../html/js/firmar/firmar1raSeccion.js"></script>
+  <script src="../../html/js/firmar/firmar2daSeccion.js"></script>
   <script src="../../html/js/global/equipos.js"></script>
   <script src="../../html/js/global/incidencias.js"></script>
   <script src="../../html/js/global/requerimiento_ajuste.js"></script>
   <script src="../../html/js/preparacion/firmar_controlproceso.js"></script>
+
 
 </body>
 

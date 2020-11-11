@@ -79,5 +79,25 @@ if (!empty($_POST)) {
             } else
                 echo '0';
             break;
+        case 4: //Almacenar firma 2da seccion calidad 
+            $firma = $_POST['firma'];
+            $modulo = $_POST['modulo'];
+            $batch = $_POST['batch'];
+
+            $sql = "UPDATE batch_firmas2seccion SET verifico =:firma
+                    WHERE modulo =:modulo AND batch =:batch";
+
+            $query = $conn->prepare($sql);
+            $result = $query->execute([
+                'firma' => $firma,
+                'modulo' => $modulo,
+                'batch' => $batch,
+            ]);
+
+            if ($result) {
+                echo '1';
+            } else
+                echo '0';
+            break;
     }
 }

@@ -1,4 +1,4 @@
-<!-- Modal para Imprmir Etiquetas -->
+<!-- Modal para Imprimir Etiquetas -->
 
 <!DOCTYPE html>
 <html lang="es">

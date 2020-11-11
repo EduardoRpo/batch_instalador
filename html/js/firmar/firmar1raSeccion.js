@@ -33,8 +33,7 @@ function cargar(btn, idbtn) {
 function enviar() {
     $('#m_firmar').modal('hide');
     btn_id = $('#idbtn').val();
-    //VALIDAR PARA LA FIRMA DE VERIFICADO SI TODOS LOS CHECKBOX ESTAN CHEQUEADOS APARECER
-    debugger;
+    
     datos = {
         user: $('#usuario').val(),
         password: $('#clave').val(),
@@ -86,6 +85,12 @@ function preparar(datos) {
                 cargarObsIncidencias(data[0].id);
         }
 
+    }
+
+    if (btn_id == 'firma4') {
+        
+        almacenarfirma(data[0].id);
+        firmar(data);
     }
 }
 
@@ -153,7 +158,7 @@ function firmarVerficadoDespeje(idfirma) {
 }
 
 function firmar() {
-    debugger;
+
     let template = '<img id=":id:" src=":firma:" alt="firma_usuario" height="130">';
     let parent = $('#' + id).parent();
 
