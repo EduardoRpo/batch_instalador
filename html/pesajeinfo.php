@@ -57,7 +57,7 @@ include_once('modal/modal_condicionesMedio.php');
   </div>
   <div id="main-wrapper">
 
-  <?php include('partials/header.php'); ?>
+    <?php include('partials/header.php'); ?>
 
     <div class="container-fluid">
       <div class="row page-titles">
@@ -80,90 +80,87 @@ include_once('modal/modal_condicionesMedio.php');
             </div>
 
             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-       
-       <!-- SE MODIFICO ESTE CARD BODY DESDE CERO PARA HACERLO RESPONSIVE -->
-            <div class="card-body">
-            <!--     <div class="contenedorInfo"> -->
-               <div class="row" style="padding: 1.5rem"> 
 
-               <div class="col-md-8 row">
-               <div class="form-group col-6 col-md-4">
-                <label>Fecha Programación</label>
-                <input type="text" class="form-control" id="in_fecha_programacion" readonly>
-                </div>
-             
-                <div class="form-group  col-6 col-md-4">
-                <label>No Orden</label>
-                  <input type="text" class="form-control" id="in_numero_orden" readonly>
-                </div>
-                  
-                <div class="form-group  col-6 col-md-4">
-                <label>Referencia</label>
-                  <input type="text" class="form-control" id="in_referencia" readonly>
-                </div>
+              <!-- SE MODIFICO ESTE CARD BODY DESDE CERO PARA HACERLO RESPONSIVE -->
+              <div class="card-body">
+                <!--     <div class="contenedorInfo"> -->
+                <div class="row" style="padding: 1.5rem">
 
-                <div class="form-group col-6 col-md-4">
-                  <label>Tamaño Lote (Kg)</label>
-                  <input type="text" class="form-control" id="in_tamano_lote" readonly>
+                  <div class="col-md-8 row">
+                    <div class="form-group col-6 col-md-4">
+                      <label>Fecha Programación</label>
+                      <input type="text" class="form-control" id="in_fecha_programacion" readonly>
+                    </div>
+
+                    <div class="form-group  col-6 col-md-4">
+                      <label>No Orden</label>
+                      <input type="text" class="form-control" id="in_numero_orden" readonly>
+                    </div>
+
+                    <div class="form-group  col-6 col-md-4">
+                      <label>Referencia</label>
+                      <input type="text" class="form-control" id="in_referencia" readonly>
+                    </div>
+
+                    <div class="form-group col-6 col-md-4">
+                      <label>Tamaño Lote (Kg)</label>
+                      <input type="text" class="form-control" id="in_tamano_lote" readonly>
+                    </div>
+
+                    <div class="form-group col-6 col-md-4">
+                      <label>No. Lote</label>
+                      <input type="text" class="form-control" id="in_numero_lote" readonly>
+                    </div>
+
+                    <div class="form-group col-6 col-md-4">
+                      <label>Línea</label>
+                      <input type="text" class="form-control" id="in_linea" readonly>
+                    </div>
                   </div>
-                  
-<div class="form-group col-6 col-md-4">
-<label>No. Lote</label>
-<input type="text" class="form-control" id="in_numero_lote" readonly>
-</div>
 
-  <div class="form-group col-6 col-md-4">
-  <label>Línea</label> 
-                  <input type="text" class="form-control" id="in_linea" readonly>
-  </div>
-               </div>
-              
+                  <div class="col-md-4">
 
-
-            
-  <div class="col-md-4">
-
-                  <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:70%; height: 30px;">
-                    <thead>
-                      <tr>
-                        <th>Tanque</th>
-                        <th>Cantidad</th>
-                        <th>Total</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr id="fila1">
-                        <td id="tanque1" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad1" style="text-align: end;font-size:14px;"></td>
-                        <td id="total1" style="text-align: end;font-size:14px;"></td>
-                      </tr>
-                      <tr id="fila2">
-                        <td id="tanque2" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad2" style="text-align: end;font-size:14px;"></td>
-                        <td id="total2" style="text-align: end;font-size:14px;"></td>
-                      </tr>
-                      <tr id="fila3">
-                        <td id="tanque3" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad3" style="text-align: end;font-size:14px;"></td>
-                        <td id="total3" style="text-align: end;font-size:14px;"></td>
-                      </tr>
-                      <tr id="fila4">
-                        <td id="tanque4" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad4" style="text-align: end;font-size:14px;"></td>
-                        <td id="total4" style="text-align: end;font-size:14px;"></td>
-                      </tr>
-                      <tr id="fila5">
-                        <td id="tanque5" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad5" style="text-align: end;font-size:14px;"></td>
-                        <td id="total5" style="text-align: end;font-size:14px;"></td>
-                      </tr>
-                    </tbody>
-                  </table>
+                    <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:70%; height: 30px;">
+                      <thead>
+                        <tr>
+                          <th class="centrado">Tanque</th>
+                          <th class="centrado">Cantidad</th>
+                          <th class="centrado">Total</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr id="fila1">
+                          <td id="tanque1" class="centrado"></td>
+                          <td id="cantidad1" class="centrado"></td>
+                          <td id="total1" class="centrado"></td>
+                        </tr>
+                        <tr id="fila2">
+                          <td id="tanque2" class="centrado"></td>
+                          <td id="cantidad2" class="centrado"></td>
+                          <td id="total2" class="centrado"></td>
+                        </tr>
+                        <!-- <tr id="fila3">
+                          <td id="tanque3" style="text-align: end;font-size:14px;"></td>
+                          <td id="cantidad3" style="text-align: end;font-size:14px;"></td>
+                          <td id="total3" style="text-align: end;font-size:14px;"></td>
+                        </tr>
+                        <tr id="fila4">
+                          <td id="tanque4" style="text-align: end;font-size:14px;"></td>
+                          <td id="cantidad4" style="text-align: end;font-size:14px;"></td>
+                          <td id="total4" style="text-align: end;font-size:14px;"></td>
+                        </tr>
+                        <tr id="fila5">
+                          <td id="tanque5" style="text-align: end;font-size:14px;"></td>
+                          <td id="cantidad5" style="text-align: end;font-size:14px;"></td>
+                          <td id="total5" style="text-align: end;font-size:14px;"></td>
+                        </tr> -->
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
 
-             <!--  </div> -->
+              <!--  </div> -->
 
             </div>
           </div>
@@ -269,8 +266,8 @@ include_once('modal/modal_condicionesMedio.php');
                 <hr>
                 <form>
                   <div class="table-responsive">
-                  <table class="table" id="tablePesaje" style="width: 100%;">
-                  </table>
+                    <table class="table" id="tablePesaje" style="width: 100%;">
+                    </table>
                   </div>
                 </form>
               </div>

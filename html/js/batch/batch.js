@@ -200,14 +200,20 @@ function actualizarTabla() {
 /* Guardar datos de Crear y Actualizar batch*/
 
 function guardarDatos() {
-
+    debugger;
     const lote = $('#tamanototallote').val();
     const tamano_lote = formatoGeneral(lote);
 
     const presentacion = $('#presentacioncomercial').val();
     const presentacion_comercial = formatoGeneral(presentacion);
 
-    const sumaTanques = $('.sumaTanques').val();
+    let sumaTanques = $('.sumaTanques').val();
+
+    if (sumaTanques == ''){
+        alertify.set("notifier", "position", "top-right"); alertify.error("Configure la cantidad de Tanques para el Batch.");
+        return false;
+    }
+
     let tqn = [];
     let tmn = [];
 
@@ -267,7 +273,7 @@ function guardarDatos() {
             tqns: tqn,
             tmn: tmn,
         };
-    }   
+    }
 
     $.ajax({
         type: "POST",

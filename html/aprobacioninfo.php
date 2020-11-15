@@ -98,23 +98,23 @@ include('modal/m_firma.php');
                   <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:80%; height: 30px;">
                     <thead>
                       <tr>
-                        <th>Tanque</th>
-                        <th>Cantidad</th>
-                        <th>Total</th>
+                        <th class="centrado">Tanque</th>
+                        <th class="centrado">Cantidad</th>
+                        <th class="centrado">Total</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr id="fila1">
-                        <td id="tanque1" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad1" style="text-align: end;font-size:14px;"></td>
-                        <td id="total1" style="text-align: end;font-size:14px;"></td>
+                        <td class="centrado" id="tanque1"></td>
+                        <td class="centrado" id="cantidad1"></td>
+                        <td class="centrado" id="total1"></td>
                       </tr>
                       <tr id="fila2">
-                        <td id="tanque2" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad2" style="text-align: end;font-size:14px;"></td>
-                        <td id="total2" style="text-align: end;font-size:14px;"></td>
+                        <td id="tanque2"></td>
+                        <td id="cantidad2"></td>
+                        <td id="total2"></td>
                       </tr>
-                      <tr id="fila3">
+                      <!-- <tr id="fila3">
                         <td id="tanque3" style="text-align: end;font-size:14px;"></td>
                         <td id="cantidad3" style="text-align: end;font-size:14px;"></td>
                         <td id="total3" style="text-align: end;font-size:14px;"></td>
@@ -128,7 +128,7 @@ include('modal/m_firma.php');
                         <td id="tanque5" style="text-align: end;font-size:14px;"></td>
                         <td id="cantidad5" style="text-align: end;font-size:14px;"></td>
                         <td id="total5" style="text-align: end;font-size:14px;"></td>
-                      </tr>
+                      </tr> -->
                     </tbody>
                   </table>
                   </div>
