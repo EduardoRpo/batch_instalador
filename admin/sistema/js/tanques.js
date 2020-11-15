@@ -86,7 +86,7 @@ $(document).ready(function () {
 
         let id = $('#txtid_tanques').val();
         let capacidad = $('#txtCapacidad').val();
-        debugger;
+
         $.ajax({
             type: "POST",
             url: "php/c_tanques.php",

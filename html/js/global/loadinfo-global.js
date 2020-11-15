@@ -25,9 +25,10 @@ $(document).ready(function () {
     $('.pesaje_verificado').prop('disabled', true);
 
     if (modulo == 3) {
+
         $('.preparacion_realizado').prop('disabled', true);
         $('.preparacion_verificado').prop('disabled', true);
-        
+
     } else if (modulo == 4) {
         $('.preparacion_realizado').prop('disabled', true);
         $('.preparacion_verificado').prop('disabled', true);
@@ -39,7 +40,8 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     setTimeout(() => {
-        cargarBatch();
+        if (modulo !== undefined)
+            cargarBatch();
     }, 1000);
 });
 

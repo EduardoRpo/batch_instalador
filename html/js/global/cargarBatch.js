@@ -176,7 +176,7 @@ function cargarfirma2daSeccion() {
 /* Registro de Firma */
 
 function firmado(datos, posicion) {
-
+ 
     let template = '<img id=":id:" src=":firma:" alt="firma_usuario" height="130">';
     let parent;
 
@@ -186,8 +186,13 @@ function firmado(datos, posicion) {
         parent = $('#despeje_realizado').parent();
         $('#despeje_realizado').remove();
         $('#despeje_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
+        
         $('.despeje_verificado').prop('disabled', false);
         $('.pesaje_realizado').prop('disabled', false);
+        
+        $('.preparacion_realizado').prop('disabled', false);
+        $('.preparacion_verificado').prop('disabled', true);
+        
     }
 
     if (posicion == 2) {

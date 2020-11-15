@@ -133,9 +133,6 @@ function guardarInstructivo() {
         return false;
     }
 
-
-    debugger;
-
     $.ajax({
         type: "POST",
         url: "php/c_instructivo.php",

@@ -58,6 +58,34 @@ if (!empty($_POST)) {
                     echo '0';
             }
 
+            /* Almacena el formulario de control del módulo de preparación */
+
+            if ($modulo == 3) {
+                $controlProducto = $_POST['controlProducto'];
+
+                $sql = "INSERT INTO batch_control_especificaciones (color, olor, apariencia, ph, viscosidad, densidad, untuosidad, espumoso, alcohol, modulo, batch) 
+                        VALUES(:color, :olor, :apariencia, :ph, :viscosidad, :densidad, :untuosidad, :espumoso, :alcohol, :modulo, :batch)";
+                $query = $conn->prepare($sql);
+                $result = $query->execute([
+                    'color' => $controlProducto[0],
+                    'olor' => $controlProducto[1],
+                    'apariencia' => $controlProducto[2],
+                    'ph' => $controlProducto[3],
+                    'viscosidad' => $controlProducto[4],
+                    'densidad' => $controlProducto[5],
+                    'untuosidad' => $controlProducto[6],
+                    'espumoso' => $controlProducto[7],
+                    'alcohol' => $controlProducto[8],
+                    'modulo' => $modulo,
+                    'batch' => $batch,
+                ]);
+                if ($result)
+                    echo '1';
+                else
+                    echo '0';
+            }
+
+
             break;
 
         case 2:

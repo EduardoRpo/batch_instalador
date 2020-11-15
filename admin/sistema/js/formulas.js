@@ -17,7 +17,7 @@ $.ajax({
     data: { operacion: "1" },
 
     success: function (response) {
-        debugger;
+
         var info = JSON.parse(response);
 
         let $selectProductos = $('#cmbReferenciaProductos');

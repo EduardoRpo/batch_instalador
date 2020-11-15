@@ -108,36 +108,21 @@ include("modal/modal_condicionesMedio.php");
                     <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:80%; height: 30px;">
                       <thead>
                         <tr>
-                          <th>Tanque</th>
-                          <th>Cantidad</th>
-                          <th>Total</th>
+                          <th class="centrado">Tanque</th>
+                          <th class="centrado">Cantidad</th>
+                          <th class="centrado">Total</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr id="fila1">
-                          <td id="tanque1" style="text-align: end;font-size:14px;"></td>
-                          <td id="cantidad1" style="text-align: end;font-size:14px;"></td>
-                          <td id="total1" style="text-align: end;font-size:14px;"></td>
+                          <td class="centrado" id="tanque1"></td>
+                          <td class="centrado" id="cantidad1"></td>
+                          <td class="centrado" id="total1"></td>
                         </tr>
                         <tr id="fila2">
-                          <td id="tanque2" style="text-align: end;font-size:14px;"></td>
-                          <td id="cantidad2" style="text-align: end;font-size:14px;"></td>
-                          <td id="total2" style="text-align: end;font-size:14px;"></td>
-                        </tr>
-                        <tr id="fila3">
-                          <td id="tanque3" style="text-align: end;font-size:14px;"></td>
-                          <td id="cantidad3" style="text-align: end;font-size:14px;"></td>
-                          <td id="total3" style="text-align: end;font-size:14px;"></td>
-                        </tr>
-                        <tr id="fila4">
-                          <td id="tanque4" style="text-align: end;font-size:14px;"></td>
-                          <td id="cantidad4" style="text-align: end;font-size:14px;"></td>
-                          <td id="total4" style="text-align: end;font-size:14px;"></td>
-                        </tr>
-                        <tr id="fila5">
-                          <td id="tanque5" style="text-align: end;font-size:14px;"></td>
-                          <td id="cantidad5" style="text-align: end;font-size:14px;"></td>
-                          <td id="total5" style="text-align: end;font-size:14px;"></td>
+                          <td class="centrado" id="tanque2"></td>
+                          <td class="centrado" id="cantidad2"></td>
+                          <td class="centrado" id="total2"></td>
                         </tr>
                       </tbody>
                     </table>
@@ -377,17 +362,17 @@ include("modal/modal_condicionesMedio.php");
                           <table id="tblControlProcesoPreparacion" class="table table-striped table-bordered">
                             <thead>
                               <tr>
-                                <th style="text-align: center;">PARAMETROS</th>
-                                <th style="text-align: center;">ESPECIFICACIONES</th>
-                                <th style="text-align: center;">RESULTADOS</th>
+                                <th style="text-align: center;font-weight: bold;">PARAMETROS</th>
+                                <th style="text-align: center;font-weight: bold;">ESPECIFICACIONES</th>
+                                <th style="text-align: center;font-weight: bold;">RESULTADOS</th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr>
                                 <td>Color</td>
                                 <td id="espec_color"></td>
-                                <td><select class="selectpicker form-control color">
-                                    <option selected hidden>Seleccionar</option>
+                                <td><select class="selectpicker form-control color especificacion">
+                                    <option value="0" selected hidden>Seleccionar</option>
                                     <option value="1">Cumple </option>
                                     <option value="2">No Cumple</option>
                                     <option value="3">No Aplica</option>
@@ -397,8 +382,8 @@ include("modal/modal_condicionesMedio.php");
                               <tr>
                                 <td>Olor</td>
                                 <td id="espec_olor"></td>
-                                <td><select class="selectpicker form-control olor">
-                                    <option selected hidden></option>
+                                <td><select class="selectpicker form-control olor especificacion">
+                                    <option value="0" selected hidden>Seleccionar</option>
                                     <option value="1">Cumple </option>
                                     <option value="2">No Cumple</option>
                                     <option value="3">No Aplica</option>
@@ -408,8 +393,8 @@ include("modal/modal_condicionesMedio.php");
                               <tr>
                                 <td>Apariencia</td>
                                 <td id="espec_apariencia"></td>
-                                <td><select class="selectpicker form-control apariencia">
-                                    <option selected hidden></option>
+                                <td><select class="selectpicker form-control apariencia especificacion">
+                                    <option value="0" selected hidden>Seleccionar</option>
                                     <option value="1">Cumple </option>
                                     <option value="2">No Cumple</option>
                                     <option value="3">No Aplica</option>
@@ -419,26 +404,26 @@ include("modal/modal_condicionesMedio.php");
                               <tr>
                                 <td>PH</td>
                                 <td id="espec_ph"></td>
-                                <td><input type="number" id="in_ph" class="selectpicker form-control ph">
+                                <td><input type="number" id="in_ph" class="selectpicker form-control ph especificacionInput">
                                 </td>
                               </tr>
                               <tr>
                                 <td>Viscocidad CPS</td>
                                 <td id="espec_viscidad"></td>
-                                <td><input type="number" class="selectpicker form-control" id="in_viscocidad">
+                                <td><input type="number" class="selectpicker form-control" id="in_viscocidad especificacionInput">
                                 </td>
                               </tr>
                               <tr>
                                 <td>Densidad</td>
                                 <td id="espec_densidad"></td>
-                                <td><input class="selectpicker form-control" type="number" id="in_densidad">
+                                <td><input class="selectpicker form-control" type="number" id="in_densidad especificacionInput">
                                 </td>
                               </tr>
                               <tr>
                                 <td>Untuosidad</td>
                                 <td id="espec_untosidad"></td>
-                                <td><select class="selectpicker form-control untuosidad">
-                                    <option selected hidden></option>
+                                <td><select class="selectpicker form-control untuosidad especificacion">
+                                    <option value="0" selected hidden>Seleccionar</option>
                                     <option value="1">Cumple </option>
                                     <option value="2">No Cumple</option>
                                     <option value="3">No Aplica</option>
@@ -448,8 +433,8 @@ include("modal/modal_condicionesMedio.php");
                               <tr>
                                 <td>Poder Espumoso</td>
                                 <td id="espec_poder_espumoso"></td>
-                                <td><select class="selectpicker form-control espumoso">
-                                    <option selected hidden></option>
+                                <td><select class="selectpicker form-control espumoso especificacion">
+                                    <option value="0" selected hidden>Seleccionar</option>
                                     <option value="1">Cumple </option>
                                     <option value="2">No Cumple</option>
                                     <option value="3">No Aplica</option>
@@ -459,7 +444,7 @@ include("modal/modal_condicionesMedio.php");
                               <tr>
                                 <td>Grado Alcohol</td>
                                 <td id="espec_grado_alcohol"></td>
-                                <td><input class="selectpicker form-control" type="number" id="in_grado_alcohol">
+                                <td><input class="selectpicker form-control" type="number" id="in_grado_alcohol especificacionInput">
                                 </td>
                               </tr>
                           </table>
@@ -556,13 +541,14 @@ include("modal/modal_condicionesMedio.php");
   <script src="../../html/js/global/condicionesdelMedio.js"></script>
   <script src="../../html/js/global/cargarBatch.js"></script>
   <script src="../../html/js/pesaje/pesajeinfo.js"></script>
-  <script src="../../html/js/preparacion/preparacioninfo.js"></script>
+
   <script src="../../html/js/firmar/firmar1raSeccion.js"></script>
   <script src="../../html/js/firmar/firmar2daSeccion.js"></script>
   <script src="../../html/js/global/equipos.js"></script>
   <script src="../../html/js/global/incidencias.js"></script>
   <script src="../../html/js/global/requerimiento_ajuste.js"></script>
-  <script src="../../html/js/preparacion/firmar_controlproceso.js"></script>
+  <script src="../../html/js/preparacion/preparacioninfo.js"></script>
+  <!-- <script src="../../html/js/preparacion/firmar_controlproceso.js"></script> -->
 
 
 </body>

@@ -17,7 +17,7 @@ function guardarRequerimientoAjuste() {
         data: { materia_prima: materiales, procedimiento: procedimiento, modulo: modulo, batch: idBatch },
 
         success: function (response) {
-            debugger
+
             if (response == 1)
                 alertify.set("notifier", "position", "top-right"); alertify.success("Requerimiento Enviado.");
             $('#m_req_ajuste').modal('hide');

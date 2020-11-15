@@ -111,7 +111,7 @@ function cargarSelectorPreguntas() {
 
 $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
-    debugger;
+
     editar = 1;
     let id = $(this).parent().parent().children().first().text();
     let pregunta = $(this).parent().parent().children().eq(1).text();
@@ -153,8 +153,6 @@ $(document).on('click', '.link-borrar', function (e) {
 
 $('#btnguardarDespeje').click(function (e) {
     e.preventDefault();
-
-    debugger;
 
     let pregunta = $('#cmbPregunta').val();
     let respuesta = $('#cmbRespuesta').val();

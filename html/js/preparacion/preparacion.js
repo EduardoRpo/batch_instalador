@@ -2,9 +2,6 @@ $(document).ready(function () {
     $('#preparacionTabla').dataTable({
         ajax: {
             url: '/api/batch',
-            //method: "POST",
-            //url : "html/php/listarBatch.php",
-            //data : {"operacion" : "1", "proceso": "2"},
             dataSrc: ''
         },
         language:{

@@ -63,6 +63,7 @@ if (!empty($_POST)) {
             $firma = $_POST['firma'];
             $modulo = $_POST['modulo'];
             $batch = $_POST['batch'];
+           
 
             $sql = "INSERT INTO batch_firmas2seccion (modulo, batch, realizo) 
                     VALUES (:modulo, :batch, :realizo)";
@@ -73,6 +74,8 @@ if (!empty($_POST)) {
                 'modulo' => $modulo,
                 'batch' => $batch,
             ]);
+
+            
 
             if ($result) {
                 echo '1';

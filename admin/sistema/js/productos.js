@@ -105,7 +105,7 @@ function cargarselectores(selector) {
     success: function (response) {
 
       var info = JSON.parse(response);
-      debugger;
+
       let $select = $(`#${selector}`);
       $select.empty();
 

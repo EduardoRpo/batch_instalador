@@ -268,7 +268,7 @@ function guardarDatos() {
             tmn: tmn,
         };
     }   
-    debugger;
+
     $.ajax({
         type: "POST",
         url: "php/listarBatch.php",

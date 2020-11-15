@@ -175,7 +175,7 @@ $(document).on('click', '.link-editar', function (e) {
     $(`#frmAdicionar${id_tbl}`).slideDown();
     $(`.tabla${id_tbl}`).html('Actualizar');
     $(`#txt-Id${id_tbl}`).val(id);
-    debugger
+
     if (id_tbl === 4 || id_tbl === 5 || id_tbl === 6 || id_tbl === 8) {
         var res = nombre.split(" - ");
         $(`#min${id_tbl}`).val(res[0]);

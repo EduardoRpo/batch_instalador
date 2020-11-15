@@ -2,7 +2,7 @@
 /* Mostrar contraseña */
 
 function mostrarPassword() {
-    debugger
+
     if ($('#clave').val()==='') {
         alertify.set("notifier","position", "top-right"); alertify.error("Ingrese la password");
         return false;        

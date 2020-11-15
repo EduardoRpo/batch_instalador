@@ -130,7 +130,7 @@ $(document).ready(function () {
             return false;
         }
         console.log(editar);
-        debugger;
+
         $.ajax({
             type: "POST",
             url: "php/c_condiciones.php",

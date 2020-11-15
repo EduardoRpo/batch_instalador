@@ -4,29 +4,8 @@ referencia = location.href.split('/')[5];
 let queeProcess = 0;
 let pasos;
 let paso = 4;
-
-/* instructivo(); */
-
-/* Inicializar tabla control de proceso */
-/* $(document).ready(function() {
-    
-    var table = $('#tbControlProceso').DataTable({
-        columnDefs: [{
-            orderable: false,
-            targets: [1,2,3]
-        }]
-    });
- 
-    $('button').click( function() {
-        var data = table.$('input, select').serialize();
-        alert(
-            "The following data would have been submitted to the server: \n\n"+
-            data.substr( 0, 120 )+'...'
-        );
-        return false;
-    });
-
-}); */
+let tanqueOk = 0;
+var controlProducto = [];
 
 /* Cargar tabla de obaservaciones */
 
@@ -163,7 +142,7 @@ $.ajax({
 });
 
 /* Carga instructivo preparación para producto */
-/* function instructivo() { */
+
 
 $.ajax({
     url: `/api/instructivos/${referencia}`,
@@ -182,10 +161,15 @@ $.ajax({
 }).fail(err => {
     console.log(err);
 });
-/* } */
 
+/* Cargar el tiempo del proceso */
 
 function procesoTiempo(event) {
+
+    validar = controlTanques();
+    if (validar == 0)
+        return false;
+
     let tiempo = $(event.target).attr('attr-tiempo');
     let id = $(event.target).attr('attr-id');
     let proceso = pasos[queeProcess];
@@ -207,6 +191,18 @@ function procesoTiempo(event) {
     }
 }
 
+/* Validar que la linea ha sido seleccionada */
+
+function validarLinea() {
+    const linea = $('#select-Linea').val();
+
+    if (linea == null) {
+        alertify.set("notifier", "position", "top-right"); alertify.error("Antes de continuar, seleccione la linea para identificar el Equipo a usar para la linea de producción");
+        return 0;
+    }
+}
+
+
 function refreshInstructivo() {
     $('#tiempo_instructivo').val(0);
     $('.proceso-instructivo').each(function (link) {
@@ -217,8 +213,6 @@ function refreshInstructivo() {
 }
 
 /* Ocultar las instrucciones del paso 3 en adelante */
-
-//var paso = 4;
 
 function ocultarInstructivo() {
 
@@ -238,22 +232,33 @@ function mostrarInstructivo() {
     paso = paso + 1;
 }
 
-//Alistar datos control proceso preparacion
+/* Valida que todos los datos del formulario de control sean cargados */
 
-/* function guardarControlProcesoPreparacion() {
-    valores = new Array();
+function validardatosresultadosPreparacion() {
     debugger;
-    $('#tblControlProcesoPreparacion tr').each(function () {
-        var cantidad = $(this).find('td').eq(0).html();
-        var descripcion = $(this).find('td').eq(1).html();
-        var valorUnitario = $(this).find('td').eq(2).html();
-        var valorUnitario = $(this).find('td').eq(3).html();
-        
-        valor = new Array(cantidad, descripcion, valorUnitario);
-        valores.push(valor);
-    });
-    
-} */
+    /* Almacenar los datos del formulario en un array */
 
+    $("#tblControlProcesoPreparacion tr").each(function () {
+        let control = ($(this).find("td:eq(2) select option:selected").val());
 
+        if (control != undefined && control != "" && control != 'Seleccionar') {
+            controlProducto.push(control);
+        } else {
+            let valor = $(this).find("td:eq(2) input").val();
+            if (valor != undefined && valor != "")
+                controlProducto.push(valor);
+            else
+                controlProducto = [];
+        }
+    })
 
+    console.log(controlProducto);
+
+    /* Validar que toda la informacion esta completa */
+
+    if (controlProducto.length < 9) {
+        alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los campos para el control del proceso");
+        return 0;
+    } else
+        return 1;
+}

@@ -1,7 +1,7 @@
 
 /* firmar pesaje  */
 
-function firmarSeccionPesaje() {
+function firmar2daSeccion() {
 
     let tanquesOk = 0;
 
@@ -11,18 +11,32 @@ function firmarSeccionPesaje() {
             tanquesOk++;
     }
 
-    /* Validar si todos los tanques estan chequeados */
+    /* carga data de acuerdo con el modulo */
+
+    if (modulo == 2)
+        data = { operacion: 1, tanques, tanquesOk, modulo, idBatch };
+    if (modulo == 3)
+        data = { operacion: 1, tanques, tanquesOk, modulo, idBatch, controlProducto };
 
     $.ajax({
         type: "POST",
         url: "../../html/php/batch_tanques.php",
-        data: { operacion: 1, tanques, tanquesOk, modulo, idBatch },
+        data: data,
 
         success: function (response) {
 
-            if (response == 1) {
+            if (response > 1) {
                 alertify.set("notifier", "position", "top-right"); alertify.success("Proceso ejecutado con éxito");
                 $(`#chkcontrolTanques${tanquesOk}`).prop('disabled', true);
+
+                if (modulo == 3) {
+                    $(`.especificacion`).val('0')
+                    $(`.especificacionInput`).empty();
+                }
+
+
+
+
 
                 if (tanques == tanquesOk)
                     firmarSeccionCierreProceso();
@@ -36,14 +50,18 @@ function firmarSeccionPesaje() {
 
 function firmarSeccionCierreProceso() {
 
+    //confirmación de incidencias 
 
-    //confirmacion de incidencias 
-    alertify.confirm('Incidencias', 'Durante la fabricación de la orden ' + idBatch + ' XXX cantidad total XXX durante alguno de los tanques hubo incidencias', function () {
+    var confirm = alertify.confirm('Incidencias y Observaciones', 'Durante la fabricación de la orden ' + idBatch + ' XXX cantidad total XXX durante alguno de los tanques hubo incidencias', null, null).set('labels', { ok: 'Si', cancel: 'No' });
 
+    /* confirm.set({ transition: 'slide' }); */
+
+    confirm.set('onok', function () { //callbak al pulsar botón positivo
         cargarObsIncidencias(data[0].id);
         deshabilitarbtn();
+    });
 
-    }, function () {
+    confirm.set('oncancel', function () { //callbak al pulsar botón negativo
         alertify.error('No reporto Incidencias');
 
         $.ajax({
@@ -54,6 +72,7 @@ function firmarSeccionCierreProceso() {
                 firma: data[0].id,
                 modulo: modulo,
                 batch: idBatch,
+
             },
 
             success: function (response) {
@@ -65,12 +84,17 @@ function firmarSeccionCierreProceso() {
         });
     });
 
+
+
+
+
+
 }
 
 /* almacenar firma calidad 2da seccion */
 
-function almacenarfirma(id){
-    debugger;
+function almacenarfirma(id) {
+
     $.ajax({
         type: "POST",
         url: "../../html/php/incidencias.php",
@@ -92,4 +116,7 @@ function almacenarfirma(id){
 function deshabilitarbtn() {
     $('.pesaje_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
     $('.pesaje_verificado').prop('disabled', false);
+
+    $('.preparacion_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
+    $('.preparacion_verificado').prop('disabled', false);
 }

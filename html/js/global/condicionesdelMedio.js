@@ -46,8 +46,8 @@ function guardar_condicionesMedio() {
 
     /* Validacion del nivel de temperatura y humedad de acuerdo con los valores */
 
-    if (temperatura < 15 || humedad < 50) {
-        alertify.set("notifier", "position", "top-right"); alertify.error("Revise nuevamente la temperatura o la humedad.");
+    if (temperatura < 16 || humedad < 51) {
+        alertify.set("notifier", "position", "top-right"); alertify.error("La temperatura y/o humedad ingresada están por debajo de los mínimos establecidos. Valide nuevamente!!");
         return false;
     }
 

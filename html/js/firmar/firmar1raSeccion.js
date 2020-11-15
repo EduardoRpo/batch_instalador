@@ -5,17 +5,30 @@ let contadorchecks;
 
 
 function cargar(btn, idbtn) {
-
+    debugger;
     $('#idbtn').val(idbtn);
     id = btn.id;
 
-    //Validacion de control de tanques en pesaje
-    if (id == "pesaje_realizado") {
-        if ($("#chkcontrolTanques1").is(':not(:checked)')) {
-            alertify.set("notifier", "position", "top-right"); alertify.error("Chequee el 1er Tanque");
+    //Validacion de control de tanques
+    if (id == "pesaje_realizado" || id == "preparacion_realizado") {
+        validar = controlTanques();
+        if (validar == 0) {
             return false;
         }
     }
+
+
+    /* Validacion que todos los datos en linea y el formulario de control en preparacion no esten vacios */
+    if (modulo == 3) {
+        validar = validarLinea();
+        if (validar == 0)
+            return false;
+
+        validar = validardatosresultadosPreparacion();
+        if (validar == 0)
+            return false;
+    }
+
 
     validarParametrosControl();
 
@@ -29,11 +42,12 @@ function cargar(btn, idbtn) {
     }
 }
 
+
 /* Valida el usuario si existe en la base de datos */
 function enviar() {
     $('#m_firmar').modal('hide');
     btn_id = $('#idbtn').val();
-    
+
     datos = {
         user: $('#usuario').val(),
         password: $('#clave').val(),
@@ -73,22 +87,10 @@ function preparar(datos) {
     }
 
     if (btn_id == 'firma3') {
-        if (modulo == 2) {
-            firmarSeccionPesaje();
-        }
-
-        if (modulo == 3) {
-            var exito = guardarControlProcesoPreparacion();
-            if (exito == 0)
-                return false;
-            else
-                cargarObsIncidencias(data[0].id);
-        }
-
+        firmar2daSeccion();
     }
 
     if (btn_id == 'firma4') {
-        
         almacenarfirma(data[0].id);
         firmar(data);
     }

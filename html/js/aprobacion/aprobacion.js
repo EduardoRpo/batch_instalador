@@ -9,6 +9,10 @@ $('#aprobacionTable').dataTable({
     },
     columns: [
         {
+            title: 'Batch',
+            data: "id_batch", className: 'uniqueClassName'
+        },
+        {
             title: 'Fecha Programación',
             data: 'fecha_programacion', className: 'uniqueClassName'
         },

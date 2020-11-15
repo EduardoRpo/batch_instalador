@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function () {
     const measure = $('select#measure')
     const ammount = $('input#tiempo_instructivo')
     const timer = $('#timer')
@@ -13,22 +13,18 @@ $(document).ready(function(){
     var interval = null;
     var clockType = undefined;
 
-    $('button#start-countdown').on('click', function(){
+    $('button#start-countdown').on('click', function () {
 
-        const agitador = $('#sel_agitador').val();
-        const marmita = $('#sel_marmita').val();
-        
-        if(agitador == "Seleccione" || marmita == "Seleccione"){
-            alertify.set("notifier","position", "top-right"); alertify.error("Antes de continuar, seleccione el Agitador y la Marmita o Tanque");
-            return false;
-        }
+        const validar = validarLinea();
+        if (validar == 0)
+            return false
 
-        if($(ammount).val() != '' && $(ammount).val() > 0 && $(measure).val() != 0) {
+        if ($(ammount).val() != '' && $(ammount).val() > 0 && $(measure).val() != 0) {
             clockType = 'countdown'
             startClock()
         }
         else if ($(ammount).val() == '') {
-            alertify.set("notifier","position", "top-right"); alertify.error("Seleccione el primer 'PASO' a Ejecutar.");
+            alertify.set("notifier", "position", "top-right"); alertify.error("Seleccione el primer 'PASO' a Ejecutar.");
         }
         else if ($(measure).val() == 0) {
             alert('Select the Unit')
@@ -37,27 +33,27 @@ $(document).ready(function(){
 
 
 
-    $('button#stop-timer').on('click', function() {
+    $('button#stop-timer').on('click', function () {
         pauseClock()
     })
 
-    $('button#reset-timer').on('click', function() {
+    $('button#reset-timer').on('click', function () {
         restartClock()
     })
 
-    $('button#resume-timer').on('click', function() {
-      $('button#resume-timer').fadeOut(100)
-      $('button#reset-timer').fadeOut(100)
-      switch (clockType) {
-          case 'countdown':
-               countdown()
-               break
-           case 'cronometer':
-               cronometer()
-               break
-          default:
-              break;
-      }
+    $('button#resume-timer').on('click', function () {
+        $('button#resume-timer').fadeOut(100)
+        $('button#reset-timer').fadeOut(100)
+        switch (clockType) {
+            case 'countdown':
+                countdown()
+                break
+            case 'cronometer':
+                cronometer()
+                break
+            default:
+                break;
+        }
     })
 
     function pad(d) {
@@ -111,28 +107,28 @@ $(document).ready(function(){
         }
 
         if (seconds <= 10 && clockType == 'countdown' && minutes == 0 && hours == 0) {
-          $(timer).find('span').addClass('red')
+            $(timer).find('span').addClass('red')
         }
 
         refreshClock()
 
         $('.input-wrapper').slideUp(350)
-        setTimeout(function(){
+        setTimeout(function () {
             $('#timer').fadeIn(350)
             $('#stop-timer').fadeIn(350)
 
         }, 350)
 
-       switch (clockType) {
-           case 'countdown':
+        switch (clockType) {
+            case 'countdown':
                 countdown()
                 break
             case 'cronometer':
                 cronometer()
                 break
-           default:
-               break;
-       }
+            default:
+                break;
+        }
     }
 
     function restartClock() {
@@ -154,15 +150,15 @@ $(document).ready(function(){
         $('#stop-timer').fadeOut(100)
         $('button#resume-timer').fadeOut(100)
         $('button#reset-timer').fadeOut(100)
-        setTimeout(function(){
+        setTimeout(function () {
             $('.input-wrapper').slideDown(350)
-        },350)
+        }, 350)
     }
 
     function pauseClock() {
-      clear(interval)
-      $('#resume-timer').fadeIn()
-      $('#reset-timer').fadeIn()
+        clear(interval)
+        $('#resume-timer').fadeIn()
+        $('#reset-timer').fadeIn()
     }
 
     var hasStarted = false
@@ -174,19 +170,19 @@ $(document).ready(function(){
     function countdown() {
         hasStarted = true
         interval = setInterval(() => {
-            if(hasEnded == false) {
+            if (hasEnded == false) {
                 if (seconds <= 11 && minutes == 0 && hours == 0) {
-                  $(timer).find('span').addClass('red')
+                    $(timer).find('span').addClass('red')
                 }
 
-                if(seconds == 0 && minutes == 0 || (hours > 0  && minutes == 0 && seconds == 0)) {
+                if (seconds == 0 && minutes == 0 || (hours > 0 && minutes == 0 && seconds == 0)) {
                     hours--
                     minutes = 59
                     seconds = 60
                     refreshClock()
                 }
 
-                if(seconds > 0) {
+                if (seconds > 0) {
                     seconds--
                     refreshClock()
                 }
@@ -218,7 +214,7 @@ $(document).ready(function(){
 
         if (hours == 0 && minutes == 0 && seconds == 0 && hasStarted == true) {
             hasEnded = true
-            alertify.set("notifier","position", "top-right"); alertify.error("Tiempo completado.");
+            alertify.set("notifier", "position", "top-right"); alertify.success("Tiempo Finalizado.");
             queeProcess++;
             refreshInstructivo();
             mostrarInstructivo();

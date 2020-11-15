@@ -49,7 +49,7 @@ $('#btnadicionarMateriaPrima').click(function (e) {
 
 $(document).on('click', '.link-borrar', function (e) {
     e.preventDefault();
-    debugger;
+
     let id = $(this).parent().parent().children().first().text();
     let confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este registro?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
 

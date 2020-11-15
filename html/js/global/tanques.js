@@ -20,21 +20,10 @@ $(document).ready(function () {
 function validarTanques(modulo) {
     if (modulo == 2 || modulo == 3 || modulo == 4) {
         let cantidad = 0;
-        //ocultarfilasTanques(5);
     }
 
 }
 
-/* Ocultar filas tanques */
-
-/* function ocultarfilasTanques(filas) {
-    filas = filas + 1;
-    for (let i = filas; i < 6; i++) {
-        $(`#fila${i}`).attr("hidden", true);
-    }
-    cargarTanques();
-}
- */
 /* Cargar Tanques de acuerdo al batch */
 
 cargarTanques();
@@ -83,4 +72,29 @@ function controlProceso(cantidad) {
     }
 
     tanques = i - 1;
+}
+
+
+/* Control de Tanques */
+
+function controlTanques() {
+
+    for (let i = 1; i <= tanques; i++) {
+        /* Valida los tanques que yan han sido aprobados */
+        if ($(`#chkcontrolTanques${i}`).is(":disabled")) {
+            for (let j = 1; j <= tanques; j++) {
+                if ($(`#chkcontrolTanques${j}`).is(":disabled")) {
+                    i++;
+                }
+            }
+        }
+        /* Continua el proceso si el tanque va a ser ejecutado */
+        if ($(`#chkcontrolTanques${i}`).is(':checked')) { //$(`#chkcontrolTanques${i}`).is(':not(:checked)')
+            break;
+        } else {
+            alertify.set("notifier", "position", "top-right"); alertify.error(`Chequee el Tanque No. ${i}`);
+            return 0;
+
+        }
+    }
 }
