@@ -104,7 +104,6 @@ include("modal/modal_condicionesMedio.php");
                   </div>
 
                   <div class="contenedorInfo__group">
-
                     <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:80%; height: 30px;">
                       <thead>
                         <tr>
@@ -362,9 +361,9 @@ include("modal/modal_condicionesMedio.php");
                           <table id="tblControlProcesoPreparacion" class="table table-striped table-bordered">
                             <thead>
                               <tr>
-                                <th style="text-align: center;font-weight: bold;">PARAMETROS</th>
-                                <th style="text-align: center;font-weight: bold;">ESPECIFICACIONES</th>
-                                <th style="text-align: center;font-weight: bold;">RESULTADOS</th>
+                                <th class="titulo">PARAMETROS</th>
+                                <th class="titulo">ESPECIFICACIONES</th>
+                                <th class="titulo">RESULTADOS</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -408,15 +407,15 @@ include("modal/modal_condicionesMedio.php");
                                 </td>
                               </tr>
                               <tr>
-                                <td>Viscocidad CPS</td>
+                                <td>Viscosidad CPS</td>
                                 <td id="espec_viscidad"></td>
-                                <td><input type="number" class="selectpicker form-control" id="in_viscocidad especificacionInput">
+                                <td><input type="number" class="selectpicker form-control especificacionInput" id="in_viscocidad">
                                 </td>
                               </tr>
                               <tr>
                                 <td>Densidad</td>
                                 <td id="espec_densidad"></td>
-                                <td><input class="selectpicker form-control" type="number" id="in_densidad especificacionInput">
+                                <td><input class="selectpicker form-control especificacionInput" type="number" id="in_densidad">
                                 </td>
                               </tr>
                               <tr>
@@ -444,7 +443,7 @@ include("modal/modal_condicionesMedio.php");
                               <tr>
                                 <td>Grado Alcohol</td>
                                 <td id="espec_grado_alcohol"></td>
-                                <td><input class="selectpicker form-control" type="number" id="in_grado_alcohol especificacionInput">
+                                <td><input class="selectpicker form-control especificacionInput" type="number" id="in_grado_alcohol">
                                 </td>
                               </tr>
                           </table>
@@ -476,7 +475,6 @@ include("modal/modal_condicionesMedio.php");
                   </div>
 
                   <div class="col-md-4 align-self-center">
-                    <!-- APARECER SOLO AL CHEQUEAR EL ULTIMO CHECKBOX -->
                     <label for="preparacion_verificado" class="col-form-label">Verificado Por</label>
                     <input type="text" class="form-control" id="preparacion_verificado" readonly>
                   </div>
@@ -547,7 +545,9 @@ include("modal/modal_condicionesMedio.php");
   <script src="../../html/js/global/equipos.js"></script>
   <script src="../../html/js/global/incidencias.js"></script>
   <script src="../../html/js/global/requerimiento_ajuste.js"></script>
+  <script src="../../html/js/global/validaciones.js"></script>
   <script src="../../html/js/preparacion/preparacioninfo.js"></script>
+  
   <!-- <script src="../../html/js/preparacion/firmar_controlproceso.js"></script> -->
 
 

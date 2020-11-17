@@ -1,7 +1,8 @@
 
 /* carga de maquinas */
 
-function cargarMaquinas() {
+function cargarEquipos() {
+
     const linea = $("#select-Linea").val();
 
     $.ajax({

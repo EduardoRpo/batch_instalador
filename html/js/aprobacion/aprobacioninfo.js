@@ -1,4 +1,6 @@
 
+completo = 1;
+
 /* Carge control de Tanques */
 
 function cargaTanquesControl(cantidad) {
@@ -7,9 +9,10 @@ function cargaTanquesControl(cantidad) {
         cantidad = 10;
     }
 
-    for (let i = 1; i <= cantidad; i++) {
-        $(".checkbox-aprobacion").append(`<input type="checkbox" id="chkcontrolTanques${i}" style="height: 30px; width:30px;">`);
+    for (var i = 1; i <= cantidad; i++) {
+        $(".checkbox-aprobacion").append(`<input type="checkbox" id="chkcontrolTanques${i}" class="chkcontrol" style="height: 30px; width:30px;">`);
     }
+    tanques = i - 1;
 }
 
 

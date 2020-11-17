@@ -49,7 +49,7 @@ function cargarTanques() {
 
             if (proceso === "2" || proceso === "3")
                 controlProceso(cantidad);
-            else if (proceso === "4")
+            else if (modulo == "4")
                 cargaTanquesControl(cantidad);
         },
         error: function (r) {
@@ -68,19 +68,19 @@ function controlProceso(cantidad) {
     }
 
     for (var i = 1; i <= cantidad; i++) {
-        $(".chk-control").append(`<input type="checkbox" id="chkcontrolTanques${i}" style="height: 30px; width:30px;">`);
+        $(".chk-control").append(`<input type="checkbox" id="chkcontrolTanques${i}" class="chkcontrol" style="height: 30px; width:30px;">`);
     }
 
     tanques = i - 1;
 }
 
 
-/* Control de Tanques */
+/* Control de Tanques seleccionados */
 
 function controlTanques() {
 
     for (let i = 1; i <= tanques; i++) {
-        /* Valida los tanques que yan han sido aprobados */
+        /* Valida los tanques que ya han sido aprobados */
         if ($(`#chkcontrolTanques${i}`).is(":disabled")) {
             for (let j = 1; j <= tanques; j++) {
                 if ($(`#chkcontrolTanques${j}`).is(":disabled")) {

@@ -50,9 +50,9 @@ include('modal/m_firma.php');
 
   <div id="main-wrapper">
 
-  <!-- HEADER -->
-  <?php include('partials/header.php'); ?>
-   <!-- FIN HEADER -->
+    <!-- HEADER -->
+    <?php include('partials/header.php'); ?>
+    <!-- FIN HEADER -->
 
     <div class="container-fluid">
       <div class="row page-titles">
@@ -78,43 +78,43 @@ include('modal/m_firma.php');
               <div class="card-body">
 
                 <div class="contenedorInfo2">
-                
+
                   <div class="contenedorInfo__group">
-                  <label for="recipient-name" class="col-form-label">Fecha Programación</label>
-                  <input type="date" class="form-control" id="in_fecha" readonly>
+                    <label for="recipient-name" class="col-form-label">Fecha Programación</label>
+                    <input type="date" class="form-control" id="in_fecha" readonly>
                   </div>
 
                   <div class="contenedorInfo__group">
-                  <label for="recipient-name" class="col-form-label">No Orden</label>
-                  <input type="text" class="form-control" id="in_numero_orden" readonly>
+                    <label for="recipient-name" class="col-form-label">No Orden</label>
+                    <input type="text" class="form-control" id="in_numero_orden" readonly>
                   </div>
 
                   <div class="contenedorInfo__group">
-                  <label for="recipient-name" class="col-form-label">Referencia</label>
-                  <input type="text" class="form-control" id="in_referencia" readonly>
+                    <label for="recipient-name" class="col-form-label">Referencia</label>
+                    <input type="text" class="form-control" id="in_referencia" readonly>
                   </div>
 
                   <div class="contenedorInfo__group">
-                  <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:80%; height: 30px;">
-                    <thead>
-                      <tr>
-                        <th class="centrado">Tanque</th>
-                        <th class="centrado">Cantidad</th>
-                        <th class="centrado">Total</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr id="fila1">
-                        <td class="centrado" id="tanque1"></td>
-                        <td class="centrado" id="cantidad1"></td>
-                        <td class="centrado" id="total1"></td>
-                      </tr>
-                      <tr id="fila2">
-                        <td id="tanque2"></td>
-                        <td id="cantidad2"></td>
-                        <td id="total2"></td>
-                      </tr>
-                      <!-- <tr id="fila3">
+                    <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:80%; height: 30px;">
+                      <thead>
+                        <tr>
+                          <th class="centrado">Tanque</th>
+                          <th class="centrado">Cantidad</th>
+                          <th class="centrado">Total</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr id="fila1">
+                          <td class="centrado" id="tanque1"></td>
+                          <td class="centrado" id="cantidad1"></td>
+                          <td class="centrado" id="total1"></td>
+                        </tr>
+                        <tr id="fila2">
+                          <td class="centrado" id="tanque2"></td>
+                          <td class="centrado" id="cantidad2"></td>
+                          <td class="centrado" id="total2"></td>
+                        </tr>
+                        <!-- <tr id="fila3">
                         <td id="tanque3" style="text-align: end;font-size:14px;"></td>
                         <td id="cantidad3" style="text-align: end;font-size:14px;"></td>
                         <td id="total3" style="text-align: end;font-size:14px;"></td>
@@ -129,25 +129,25 @@ include('modal/m_firma.php');
                         <td id="cantidad5" style="text-align: end;font-size:14px;"></td>
                         <td id="total5" style="text-align: end;font-size:14px;"></td>
                       </tr> -->
-                    </tbody>
-                  </table>
+                      </tbody>
+                    </table>
                   </div>
 
                   <div class="contenedorInfo__group">
-                  <label for="in_tamano_lote" class="col-form-label">Tamaño Lote (Kg)</label>
-                  <input type="text" class="form-control" id="in_tamano_lote" readonly>
+                    <label for="in_tamano_lote" class="col-form-label">Tamaño Lote (Kg)</label>
+                    <input type="text" class="form-control" id="in_tamano_lote" readonly>
                   </div>
 
                   <div class="contenedorInfo__group">
-                  <label for="recipient-name" class="col-form-label">No. Lote</label>
-                  <input type="text" class="form-control" id="in_numero_lote" readonly>
+                    <label for="recipient-name" class="col-form-label">No. Lote</label>
+                    <input type="text" class="form-control" id="in_numero_lote" readonly>
                   </div>
 
                   <div class="contenedorInfo__group">
-                  <label for="recipient-name" class="col-form-label">Linea</label>
-                  <input type="text" class="form-control" id="in_linea" readonly>
+                    <label for="recipient-name" class="col-form-label">Linea</label>
+                    <input type="text" class="form-control" id="in_linea" readonly>
                   </div>
-                
+
                 </div>
 
                 <!-- <div class="contenedorInfo">
@@ -230,7 +230,7 @@ include('modal/m_firma.php');
                   <div class="col-md-4 align-self-right">
                     <label for="sel_producto_desinfeccion" class="col-form-label">Producto de desinfección</label>
                     <select class="selectpicker form-control" id="sel_producto_desinfeccion">
-                      <option selected hidden></option>
+                      <option selected hidden>Seleccionar</option>
                     </select>
                   </div>
                   <div class="col-md-8 align-self-center">
@@ -260,91 +260,93 @@ include('modal/m_firma.php');
                  <h6 class="card-subtitle">Add class <code>.table</code></h6>-->
                       <div class="table-responsive">
 
-                        <table class="table table-striped table-bordered">
+                        <table id="tblControlProcesoPreparacion" class="table table-striped table-bordered">
                           <thead>
                             <tr>
-                              <th>Parametros</th>
-                              <th>Especificaciones</th>
-                              <th>Resultados</th>
+                              <th class="titulo">PARAMETROS</th>
+                              <th class="titulo">ESPECIFICACIONES</th>
+                              <th class="titulo">RESULTADOS</th>
                             </tr>
                           </thead>
                           <tbody>
                             <tr>
                               <td>Color</td>
-                              <td id="espec_color">Especificacion del area</td>
-                              <td><select class="selectpicker form-control">
-                                  <option selected hidden></option>
-                                  <option>Cumple</option>
-                                  <option>No cumple</option>
-                                  <option>No aplica</option>
+                              <td id="espec_color"></td>
+                              <td><select class="selectpicker form-control color especificacion">
+                                  <option value="0" selected hidden>Seleccionar</option>
+                                  <option value="1">Cumple</option>
+                                  <option value="2">No cumple</option>
+                                  <option value="3">No aplica</option>
                                 </select>
                               </td>
                             </tr>
                             <tr>
                               <td>Olor</td>
-                              <td id="espec_olor">Especificacion del area</td>
-                              <td><select class="selectpicker form-control">
-                                  <option selected hidden></option>
-                                  <option>Cumple</option>
-                                  <option>No cumple</option>
-                                  <option>No aplica</option>
+                              <td id="espec_olor"></td>
+                              <td><select class="selectpicker form-control olor especificacion">
+                                  <option value="0" selected hidden>Seleccionar</option>
+                                  <option value="1">Cumple</option>
+                                  <option value="2">No cumple</option>
+                                  <option value="3">No aplica</option>
                                 </select>
                               </td>
                             </tr>
                             <tr>
                               <td>Apariencia</td>
-                              <td id="espec_apariencia">Especificacion del area</td>
-                              <td><select class="selectpicker form-control">
-                                  <option selected hidden></option>
-                                  <option>Cumple</option>
-                                  <option>No cumple</option>
-                                  <option>No aplica</option>
+                              <td id="espec_apariencia"></td>
+                              <td><select class="selectpicker form-control apariencia especificacion">
+                                  <option value="0" selected hidden>Seleccionar</option>
+                                  <option value="1">Cumple</option>
+                                  <option value="2">No cumple</option>
+                                  <option value="3">No aplica</option>
                                 </select>
                               </td>
                             </tr>
                             <tr>
                               <td>PH</td>
-                              <td id="espec_ph">Especificacion del area</td>
-                              <td><input type="number" id="in_ph" class="selectpicker form-control">
+                              <td id="espec_ph"></td>
+                              <td><input type="number" id="in_ph" class="selectpicker form-control ph especificacionInput">
                               </td>
                             </tr>
                             <tr>
                               <td>Viscocidad CPS </td>
-                              <td id="espec_viscidad">Especificacion del area  </td>
-                              <td><input type="number" class="selectpicker form-control" id="in_viscocidad">
+                              <td id="espec_viscidad"></td>
+                              <td><input type="number" class="selectpicker form-control especificacionInput" id="in_viscocidad">
                               </td>
                             </tr>
                             <tr>
-                              <td>Densidad o gravedad especifica G/ML <input type="text" class="form-control" style="width: 60px;" readonly></td>
-                              <td id="espec_densidad">Especificacion del area</td>
-                              <td><input class="selectpicker form-control" type="number" id="in_densidad"></td>
+                              <td>Densidad o gravedad especifica G/ML
+                                <!-- <input type="text" class="form-control" style="width: 60px;" readonly> -->
+                              </td>
+                              <td id="espec_densidad"></td>
+                              <td><input class="selectpicker form-control especificacionInput" type="number" id="in_densidad"></td>
                             </tr>
                             <tr>
                               <td>Untuosidad</td>
-                              <td id="espec_untosidad">Especificacion del area</td>
-                              <td><select class="selectpicker form-control">
-                                  <option selected hidden></option>
-                                  <option>Cumple</option>
-                                  <option>No cumple</option>
-                                  <option>No aplica</option>
+                              <td id="espec_untosidad"></td>
+                              <td><select class="selectpicker form-control untuosidad especificacion">
+                                  <option value="0" selected hidden>Seleccionar</option>
+                                  <option value="1">Cumple</option>
+                                  <option value="2">No cumple</option>
+                                  <option value="3">No aplica</option>
                                 </select>
                               </td>
                             </tr>
                             <tr>
                               <td>Poder Espumoso</td>
-                              <td id="espec_poder_espumoso">Especificacion del area</td>
-                              <td><select class="selectpicker form-control">
-                                  <option selected hidden></option>
-                                  <option>Cumple</option>
-                                  <option>No cumple</option>
-                                  <option>No aplica</option>
+                              <td id="espec_poder_espumoso"></td>
+                              <td><select class="selectpicker form-control espumoso especificacion">
+                                  <option value="0" selected hidden>Seleccionar</option>
+                                  <option value="1">Cumple</option>
+                                  <option value="2">No cumple</option>
+                                  <option value="3">No aplica</option>
                                 </select>
                               </td>
                             </tr>
                             <tr>
                               <td>Grado Alcohol</td>
-                              <td id="espec_grado_alcohol">Especificacion del area</td>
-                              <td><input class="selectpicker form-control" type="number" id="in_grado_alcohol">
+                              <td id="espec_grado_alcohol"></td>
+                              <td><input class="selectpicker form-control especificacionInput" type="number" id="in_grado_alcohol">
                               </td>
                             </tr>
                         </table>
@@ -353,11 +355,10 @@ include('modal/m_firma.php');
                   </div>
                 </div>
 
-
               </div>
               <hr>
               <div class="row" style="margin: 1%">
-                <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down" data-toggle="modal" data-target="#modalAjuste" style="margin-left: 1%">¿Se requiere algún ajuste?
+                <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down" data-toggle="modal" data-target="#m_req_ajuste" style="margin-left: 1%">¿Se requiere algún ajuste?
                 </button>
               </div>
               <hr>
@@ -365,18 +366,18 @@ include('modal/m_firma.php');
               <div class="row" style="margin: 1%">
                 <div class="col-md-4 align-self-center">
                   <label for="desinfeccion_realizado" class="col-form-label">Realizado Por:</label>
-                  <input type="text" class="form-control" id="desinfeccion_realizado" readonly>
+                  <input type="text" class="form-control" id="aprobacion_realizado" readonly>
                 </div>
                 <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                  <input type="button" class="btn btn-danger" id="desinfeccion_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
+                  <input type="button" class="btn btn-danger" id="aprobacion_realizado" onclick="cargar(this, 'firma3')" style="width: 100%; height: 38px;" value="Firmar">
                 </div>
 
                 <div class="col-md-4 align-self-center">
                   <label for="desinfeccion_verificado" class="col-form-label">Verificado Por:</label>
-                  <input type="text" class="form-control" id="desinfeccion_verificado" readonly>
+                  <input type="text" class="form-control" id="aprobacion_verificado" readonly>
                 </div>
                 <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                  <input type="button" class="btn btn-danger" id="desinfeccion_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar">
+                  <input type="button" class="btn btn-danger aprobacion_verificado" id="aprobacion_verificado" onclick="cargar(this, 'firma4')" style="width: 100%; height: 38px;" value="Firmar">
                 </div>
               </div>
 
@@ -385,27 +386,16 @@ include('modal/m_firma.php');
               <div class="row buttons-group-container" style="margin: 1%">
                 <div class="buttons-group">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                  <!-- <button type="button" class="btn btn-primary"
-                      onclick="window.location.href = '../html/envasado.html';">Aceptar -->
                   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalObservaciones">Aceptar</button>
                 </div>
               </div>
             </div>
-
-          
-
-
           </div>
-
         </div>
       </div>
     </div>
   </div>
   </div>
-  <!-- ============================================================== -->
-  <!-- All Jquery -->
-  <!-- ============================================================== -->
-
 
   <script src="../../assets/plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap tether Core JavaScript -->
@@ -426,8 +416,17 @@ include('modal/m_firma.php');
   <script src="../../html/js/utils/custom.min.js"></script>
   <!-- <script src="../../html/js/datatables.js"></script> -->
   <script src="../../html/js/global/loadinfo-global.js"></script>
+  <script src="../../html/js/global/despeje.js"></script>
   <script src="../../html/js/aprobacion/aprobacioninfo.js"></script>
-  <script src="../../html/js/firmar/firmar.js"></script>
+  <script src="../../html/js/firmar/firmar1raSeccion.js"></script>
+  <script src="../../html/js/firmar/firmar2daSeccion.js"></script>
+  <script src="../../html/js/global/incidencias.js"></script>
+  <script src="../../html/js/global/requerimiento_ajuste.js"></script>
+  <script src="../../html/js/global/condicionesdelMedio.js"></script>
+  <script src="../../html/js/global/cargarBatchAprobacion.js"></script>
+  <script src="../../html/js/global/validaciones.js"></script>
+  <script src="../../html/js/global/tanques.js"></script>
+
 </body>
 
 </html>

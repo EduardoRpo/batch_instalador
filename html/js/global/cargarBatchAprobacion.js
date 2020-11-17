@@ -2,33 +2,8 @@
 /* validar y Cargar informacion almacenada en el batch */
 
 function cargarBatch() {
-
-    $.ajax({
-        type: "POST",
-        url: "../../html/php/despeje.php",
-        data: { operacion: 1, module: modulo, idbatch: idBatch },
-
-        success: function (response) {
-
-            if (response == '')
-                return false;
-
-            let info = JSON.parse(response);
-
-            /* Carga todas las preguntas y su respuesta almacenada */
-
-            if (info !== '') {
-                for (let i = 0; i < info.data.length; i++) {
-                    let question = "question-" + `${info.data[i].id_pregunta}`;
-                    let valor = info.data[i].solucion;
-                    $("input:radio[name=" + question + "][value=" + valor + "]").prop('checked', true);
-                }
-                cargarDesinfectante();
-            }
-            else
-                return false;
-        }
-    });
+    cargarDesinfectante();
+    $('.aprobacion_verificado').prop('disabled', true);
 }
 
 /* Carga desinfectante y observaciones almacenadas en el batch */
@@ -50,7 +25,7 @@ function cargarDesinfectante() {
 
             $('#sel_producto_desinfeccion').val(desinfectante);
             $('#in_observaciones').val(observacion);
-            firmado(firma, 1);
+            /* firmado(firma, 1); */
 
 
             $.ajax({
@@ -61,9 +36,6 @@ function cargarDesinfectante() {
                 success: function (response) {
 
                     if (response == '') {
-                        if (modulo == 3)
-                            cargarLinea();
-
                         cargarfirma2daSeccion();
                         return false;
                     }
@@ -77,51 +49,6 @@ function cargarDesinfectante() {
                     cargarfirma2daSeccion();
                 }
             });
-        }
-    });
-}
-
-/* cargar linea de equipos en el proceso de preparacion  */
-
-function cargarLinea() {
-
-    $.ajax({
-        type: "POST",
-        url: "../../html/php/cargarLineas.php",
-        data: { operacion: 2, modulo, idBatch },
-
-        success: function (response) {
-            const data = JSON.parse(response);
-            $("#select-Linea").val(data[0].linea);
-            cargarEquipos();
-            cargarControlProceso();
-        }
-    });
-
-}
-
-
-function cargarControlProceso() {
-    $.ajax({
-        type: "POST",
-        url: "../../html/php/controlProceso.php",
-        data: { modulo, idBatch },
-
-        success: function (response) {
-
-            let info = JSON.parse(response);
-            let index = info.data.length
-
-            $('.color').val(info.data[index - 1].color);
-            $('.olor').val(info.data[index - 1].olor);
-            $('.apariencia').val(info.data[index - 1].apariencia);
-            $('.ph').val(info.data[index - 1].ph);
-            $('#in_viscocidad').val(info.data[index - 1].viscosidad);
-            $('#in_densidad').val(info.data[index - 1].densidad);
-            $('.untuosidad').val(info.data[index - 1].untuosidad);
-            $('.espumoso').val(info.data[index - 1].espumoso);
-            $('#in_grado_alcohol').val(info.data[index - 1].alcohol);
-
         }
     });
 }
@@ -153,6 +80,9 @@ function cargarfirma2daSeccion() {
                 $(`#chkcontrolTanques${i}`).prop('checked', true);
                 $(`#chkcontrolTanques${i}`).prop('disabled', true);
             }
+            /* carga formulario */
+
+            cargarControlProceso()
 
             /* Valida que todos los tanques esten chequeados para proceder a firmar */
 
@@ -181,27 +111,35 @@ function cargarfirma2daSeccion() {
             }
         }
     });
-
-
-
 }
 
-/* function firmar2daSeccion() {
-    debugger;
-     if (posicion == 3)
-    if (modulo == 2) {
-        parent = $('#pesaje_realizado').parent();
-        $('#pesaje_realizado').remove();
-        $('.pesaje_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
-        $('.pesaje_verificado').prop('disabled', false);
-    }  else if (modulo == 3) {
-            parent = $('#preparacion_realizado').parent();
-            $('#preparacion_realizado').remove();
-            $('.preparacion_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
-            $('.preparacion_verificado').prop('disabled', false);
+/* Carga formulario */
+
+function cargarControlProceso() {
+    $.ajax({
+        type: "POST",
+        url: "../../html/php/controlProceso.php",
+        data: { modulo, idBatch },
+
+        success: function (response) {
+            debugger
+            let info = JSON.parse(response);
+            let index = info.data.length
+
+            $('.color').val(info.data[index - 1].color);
+            $('.olor').val(info.data[index - 1].olor);
+            $('.apariencia').val(info.data[index - 1].apariencia);
+            $('.ph').val(info.data[index - 1].ph);
+            $('#in_viscocidad').val(info.data[index - 1].viscosidad);
+            $('#in_densidad').val(info.data[index - 1].densidad);
+            $('.untuosidad').val(info.data[index - 1].untuosidad);
+            $('.espumoso').val(info.data[index - 1].espumoso);
+            $('#in_grado_alcohol').val(info.data[index - 1].alcohol);
 
         }
-} */
+    });
+}
+
 
 /* Registro de Firma */
 

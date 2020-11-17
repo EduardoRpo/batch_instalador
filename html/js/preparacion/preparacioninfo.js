@@ -5,7 +5,6 @@ let queeProcess = 0;
 let pasos;
 let paso = 4;
 let tanqueOk = 0;
-var controlProducto = [];
 
 /* Cargar tabla de obaservaciones */
 
@@ -81,7 +80,8 @@ $(document).ready(function () {
     $.ajax({
         type: "POST",
         url: '../../html/php/cargarLineas.php',
-
+        data: { operacion: 1 },
+        
         success: function (r) {
             info = JSON.parse(r);
 
@@ -102,7 +102,7 @@ $(document).ready(function () {
 /* Cargar maquinas de acuerdo con la linea */
 
 $("#select-Linea").change(function () {
-    cargarMaquinas();
+    cargarEquipos();
 })
 
 /* Carga tabla de propiedades del producto */
@@ -230,35 +230,4 @@ function mostrarInstructivo() {
 
     $("#proceso-instructivo" + paso).css("color", "#67757c");
     paso = paso + 1;
-}
-
-/* Valida que todos los datos del formulario de control sean cargados */
-
-function validardatosresultadosPreparacion() {
-    debugger;
-    /* Almacenar los datos del formulario en un array */
-
-    $("#tblControlProcesoPreparacion tr").each(function () {
-        let control = ($(this).find("td:eq(2) select option:selected").val());
-
-        if (control != undefined && control != "" && control != 'Seleccionar') {
-            controlProducto.push(control);
-        } else {
-            let valor = $(this).find("td:eq(2) input").val();
-            if (valor != undefined && valor != "")
-                controlProducto.push(valor);
-            else
-                controlProducto = [];
-        }
-    })
-
-    console.log(controlProducto);
-
-    /* Validar que toda la informacion esta completa */
-
-    if (controlProducto.length < 9) {
-        alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los campos para el control del proceso");
-        return 0;
-    } else
-        return 1;
 }

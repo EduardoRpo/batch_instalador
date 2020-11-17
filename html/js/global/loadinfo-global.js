@@ -58,7 +58,8 @@ $.ajax({
             const info = JSON.parse(data);
             modulo = info[0].id;
 
-            carguepreguntas(modulo);
+            if (modulo != 4)
+                carguepreguntas(modulo);
             desinfectantes();
             cargueCondicionesMedio();
             validarTanques(modulo);

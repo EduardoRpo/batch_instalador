@@ -1,16 +1,14 @@
 
 <?php
-/* Almacena los checks creados para tanques y su valor */
-
 if (!empty($_POST)) {
-
     require_once('../../conexion.php');
     require_once('../../admin/sistema/php/crud.php');
-
+    /* Almacena los checks creados para tanques y su valor */
     $op = $_POST['operacion'];
 
     switch ($op) {
-        case 1:
+        case 1: //Insertar o actualizar tanques y linea
+            $linea = $_POST['linea'];
             $tanques = $_POST['tanques'];
             $tanquesOk = $_POST['tanquesOk'];
             $batch = $_POST['idBatch'];
@@ -27,26 +25,30 @@ if (!empty($_POST)) {
             ]);
             $rows = $query->rowCount();
 
+
             /* Si existe un registro actualiza de lo contrario lo inserta */
 
             if ($rows > 0) {
-                $sql = "UPDATE batch_tanques_chks SET tanquesOk =:tanquesOk 
+                $sql = "UPDATE batch_tanques_chks SET linea =:linea, tanquesOk =:tanquesOk 
                         WHERE modulo = :modulo AND batch = :batch";
                 $query = $conn->prepare($sql);
                 $result = $query->execute([
+                    'linea' => $linea,
                     'tanquesOk' => $tanquesOk,
                     'modulo' => $modulo,
                     'batch' => $batch,
                 ]);
-                if ($result)
+                if ($result) {
                     echo '1';
-                else
+                } else {
                     echo '0';
+                }
             } else {
-                $sql = "INSERT INTO batch_tanques_chks (tanques, tanquesOk, modulo, batch) 
-                        VALUES(:tanques, :tanquesOk, :modulo, :batch)";
+                $sql = "INSERT INTO batch_tanques_chks (linea, tanques, tanquesOk, modulo, batch) 
+                        VALUES(:linea, :tanques, :tanquesOk, :modulo, :batch)";
                 $query = $conn->prepare($sql);
                 $result = $query->execute([
+                    'linea' => $linea,
                     'tanques' => $tanques,
                     'tanquesOk' => $tanquesOk,
                     'modulo' => $modulo,
@@ -58,9 +60,30 @@ if (!empty($_POST)) {
                     echo '0';
             }
 
+            /* Almacena el desinfectante del modulo de aprobacion */
+
+            if ($modulo == 4) {
+                $desinfectante = $_POST['desinfectante'];
+                $firma = $_POST['firma'];
+
+                $sql = "INSERT INTO batch_desinfectante_seleccionado (desinfectante, modulo, batch, realizo) 
+                        VALUES(:desinfectante, :modulo, :batch, :realizo)";
+                $query = $conn->prepare($sql);
+                $result = $query->execute([
+                    'desinfectante' => $desinfectante,
+                    'modulo' => $modulo,
+                    'batch' => $batch,
+                    'realizo' => $firma,
+                ]);
+                if ($result)
+                    echo '1';
+                else
+                    echo '0';
+            }
+
             /* Almacena el formulario de control del módulo de preparación */
 
-            if ($modulo == 3) {
+            if ($modulo == 3 || $modulo == 4) {
                 $controlProducto = $_POST['controlProducto'];
 
                 $sql = "INSERT INTO batch_control_especificaciones (color, olor, apariencia, ph, viscosidad, densidad, untuosidad, espumoso, alcohol, modulo, batch) 
@@ -88,7 +111,7 @@ if (!empty($_POST)) {
 
             break;
 
-        case 2:
+        case 2: //Seleccionar toda la informacion de los tanques
             $batch = $_POST['idBatch'];
             $modulo = $_POST['modulo'];
 
@@ -106,7 +129,7 @@ if (!empty($_POST)) {
             }
             break;
 
-        case 3:
+        case 3: //Seleccionar 2da firma
 
             $batch = $_POST['idBatch'];
             $modulo = $_POST['modulo'];
@@ -137,6 +160,8 @@ if (!empty($_POST)) {
             $query = $conn->prepare($sql);
             $query->execute(['batch' => $batch, 'modulo' => $modulo]);
             $rows = $query->rowCount();
+            /* print_r($rows);
+            exit(); */
 
             if ($rows > 0) {
                 ejecutarSelect1($query);
@@ -153,6 +178,8 @@ if (!empty($_POST)) {
 
                 if ($rows > 0) {
                     ejecutarSelect1($query);
+                } else {
+                    echo 0;
                 }
             }
 
@@ -164,8 +191,3 @@ if (!empty($_POST)) {
             break;
     }
 }
-
-
-?>
-
-

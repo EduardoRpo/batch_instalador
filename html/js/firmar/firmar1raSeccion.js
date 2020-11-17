@@ -1,42 +1,58 @@
 let id;
-let btnOprimido;
+/* let btnOprimido; */
 let cont = 1;
 let contadorchecks;
-
+/* let data; */
 
 function cargar(btn, idbtn) {
-    debugger;
-    $('#idbtn').val(idbtn);
+
+    /* $('#idbtn').val(idbtn); */
+    localStorage.setItem("idbtn", idbtn);
     id = btn.id;
 
     //Validacion de control de tanques
-    if (id == "pesaje_realizado" || id == "preparacion_realizado") {
+    if (id == "pesaje_realizado" || id == "preparacion_realizado" || id == "aprobacion_realizado") {
         validar = controlTanques();
         if (validar == 0) {
             return false;
         }
     }
 
-
     /* Validacion que todos los datos en linea y el formulario de control en preparacion no esten vacios */
-    if (modulo == 3) {
+
+    if (modulo == 3 && id == 'preparacion_realizado') {
         validar = validarLinea();
         if (validar == 0)
             return false;
+    }
 
+    /* Validacion que el formulario se encuentre completamente lleno */
+
+    if (modulo == 3 && id == 'preparacion_realizado' || modulo == 4 && id == 'aprobacion_realizado') {
         validar = validardatosresultadosPreparacion();
         if (validar == 0)
             return false;
     }
 
+    /* Valida que se ha seleccionado el producto de desinfeccion para el proceso de aprobacion */
 
-    validarParametrosControl();
+    if (modulo == 4) {
+        let seleccion = $('#sel_producto_desinfeccion').val();
+        if (seleccion == "Seleccionar") {
+            alertify.set("notifier", "position", "top-right"); alertify.error("Seleccione el producto para desinfección.");
+            return false;
+        }
+    }
+
+    if (modulo != 4) {
+        validarParametrosControl();
+    }
+
+    /* Carga el modal para la autenticacion */
 
     if (completo !== 0) {
-        /* limpia campos del formulario */
         $('#usuario').val('');
         $('#clave').val('');
-        /* Cargamos el modal */
         $('#m_firmar').modal('show');
         cont = 0;
     }
@@ -46,7 +62,8 @@ function cargar(btn, idbtn) {
 /* Valida el usuario si existe en la base de datos */
 function enviar() {
     $('#m_firmar').modal('hide');
-    btn_id = $('#idbtn').val();
+    /* btn_id = $('#idbtn').val(); */
+    btn_id = localStorage.getItem("idbtn");
 
     datos = {
         user: $('#usuario').val(),
@@ -71,28 +88,28 @@ function enviar() {
     return false;
 }
 
-/* Si el usuario existe, ejeucta la opcion de acuerdo con el boton oprimido */
+/* Si el usuario existe, ejecuta la opcion de acuerdo con el boton oprimido */
 
 function preparar(datos) {
-    data = JSON.parse(datos);
+    info = JSON.parse(datos);
 
     if (btn_id == 'firma1') {
-        validarPreguntas(data[0].id);
-        firmar(data);
+        validarPreguntas(info[0].id);
+        firmar(info);
     }
 
     if (btn_id == 'firma2') {
-        firmarVerficadoDespeje(data[0].id);
-        firmar(data);
+        firmarVerficadoDespeje(info[0].id);
+        firmar(info);
     }
 
     if (btn_id == 'firma3') {
-        firmar2daSeccion();
+        firmar2daSeccion(info);
     }
 
     if (btn_id == 'firma4') {
-        almacenarfirma(data[0].id);
-        firmar(data);
+        almacenarfirma(info[0].id);
+        firmar(info);
     }
 }
 
@@ -159,7 +176,7 @@ function firmarVerficadoDespeje(idfirma) {
     });
 }
 
-function firmar() {
+function firmar(firm) {
 
     let template = '<img id=":id:" src=":firma:" alt="firma_usuario" height="130">';
     let parent = $('#' + id).parent();
@@ -167,7 +184,7 @@ function firmar() {
     $('#' + id).remove();
     id = '';
 
-    let firma = template.replace(':firma:', data[0].urlfirma);
+    let firma = template.replace(':firma:', firm[0].urlfirma);
     firma = firma.replace(':id:', btn_id);
     parent.append(firma).html
 }
