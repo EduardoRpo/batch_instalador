@@ -72,7 +72,7 @@ function firmarSeccionCierreProceso(firma) {
 
     confirm.set('oncancel', function () { //callbak al pulsar No
         alertify.error('No reporto Incidencias');
-
+        /* Almacenar firma 2da seccion */
         $.ajax({
             method: 'POST',
             url: '../../html/php/incidencias.php',

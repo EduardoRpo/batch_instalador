@@ -150,41 +150,14 @@ function firmado(datos, posicion) {
 
     btn_id = $('#idbtn').val();
 
-    if (posicion == 1) {
-        parent = $('#despeje_realizado').parent();
-        $('#despeje_realizado').remove();
-        $('#despeje_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
-
-        $('.despeje_verificado').prop('disabled', false);
-        $('.pesaje_realizado').prop('disabled', false);
-
-        $('.preparacion_realizado').prop('disabled', false);
-        $('.preparacion_verificado').prop('disabled', true);
-
-    }
-
-    if (posicion == 2) {
-        parent = $('#despeje_verificado').parent();
-        $('#despeje_verificado').remove();
-        $('.despeje_verificado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
-    }
-
     if (posicion == 3) {
-        if (modulo == 2) {
-            parent = $('#pesaje_realizado').parent();
-            $('#pesaje_realizado').remove();
-            $('.pesaje_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
-            $('.pesaje_verificado').prop('disabled', false);
-        }
-        if (modulo == 3) {
-            parent = $('#preparacion_realizado').parent();
-            $('#preparacion_realizado').remove();
-            $('.preparacion_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
-            $('.preparacion_verificado').prop('disabled', false);
-
+        if (modulo == 4) {
+            parent = $('#aprobacion_realizado').parent();
+            $('#aprobacion_realizado').remove();
+            $('.aprobacion_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
+            $('.aprobacion_verificado').prop('disabled', false);
         }
     }
-
 
     if (posicion == 4)
         if (modulo == 2) {
@@ -199,6 +172,8 @@ function firmado(datos, posicion) {
             $('.preparacion_verificado').prop('disabled', false);
 
         } */
+
+
 
 
     let firma = template.replace(':firma:', datos);
