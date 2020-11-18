@@ -58,7 +58,7 @@ function firmar2daSeccion(firma) {
 }
 
 function firmarSeccionCierreProceso(firma) {
-
+    debugger;
     //confirmación de incidencias 
 
     var confirm = alertify.confirm('Incidencias y Observaciones', 'Durante la fabricación de la orden ' + idBatch + ' XXX cantidad total XXX durante alguno de los tanques hubo incidencias', null, null).set('labels', { ok: 'Si', cancel: 'No' });
@@ -66,7 +66,7 @@ function firmarSeccionCierreProceso(firma) {
     /* confirm.set({ transition: 'slide' }); */
 
     confirm.set('onok', function () { //callbak al pulsar Si
-        cargarObsIncidencias(data[0].id);
+        cargarObsIncidencias(firma[0].id);
         deshabilitarbtn();
     });
 

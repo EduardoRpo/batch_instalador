@@ -11,7 +11,7 @@ switch ($op) {
                   ON np.id = p.id_nombre_producto AND linea.id = p.id_linea AND ns.id = p.id_notificacion_sanitaria AND p.id_marca= m.id AND p.id_propietario = pr.id AND p.id_presentacion_comercial = pc.id AND p.id_color=c.id AND p.id_olor=o.id AND p.id_apariencia=ap.id AND p.id_untuosidad=u.id AND p.id_poder_espumoso=pe.id AND p.id_recuento_mesofilos=rm.id AND p.id_pseudomona=psm.id AND p.id_staphylococcus=st.id AND p.id_ph = ph.id AND p.id_viscosidad=v.id AND p.id_densidad_gravedad=d.id AND p.id_grado_alcohol = a.id"; */
         $query = "SELECT * FROM producto";
         ejecutarQuerySelect($conn, $query);
-        break; 
+        break;
 
 
     case 2: //Eliminar
@@ -23,7 +23,7 @@ switch ($op) {
     case 3: // Guardar data
         if (!empty($_POST)) {
             $editar = $_POST['editar'];
-            
+
             //carga la informacion del POST
             foreach ($_POST as $nombre_campo => $valor) {
                 $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";
@@ -33,23 +33,25 @@ switch ($op) {
             $nombre = ucfirst(strtolower($nombre));
 
             if ($editar > 0) {
-                $sql = "UPDATE producto SET referencia=:referencia, nombre_referencia=':nombre', unidad_empaque=:empaque, 
+                $sql = "UPDATE producto SET  referencia=:referencia, nombre_referencia=':nombre', unidad_empaque=:uniEmpaque, 
             id_nombre_producto =:nombre_producto, id_notificacion_sanitaria =:notificacion_sanitaria, id_linea = :linea, 
             id_marca =:marca, id_propietario =:propietario, id_presentacion_comercial= :presentacion_comercial, 
             id_color =:color, id_olor= :olor, id_apariencia = :apariencia, id_untuosidad=:untuosidad, 
             id_poder_espumoso =:poder_espumoso, id_recuento_mesofilos =:recuento_mesofilos, id_pseudomona=:pseudomona, 
             id_escherichia =:escherichia, id_staphylococcus=:staphylococcus, id_ph =:ph, id_viscosidad =:viscosidad, 
-            id_densidad_gravedad =:densidad_gravedad, id_grado_alcohol = :grado_alcohol WHERE referencia = :id_referencia";
+            id_densidad_gravedad =:densidad_gravedad, id_grado_alcohol = :grado_alcohol, id_envase = :envase, id_tapa = :tapa, 
+            id_etiqueta = :etiqueta, id_empaque =:empaque, id_otros = :otros WHERE referencia = :referencia";
 
                 $query = $conn->prepare($sql);
                 $result = $query->execute([
-                    'referencia' => $referencia, 'nombre' => $nombre, 'empaque' => $empaque, 'nombre_producto' => $nombre_producto,
+                    'referencia' => $id_referencia,  'nombre' => $nombre, 'uniEmpaque' => $uniEmpaque, 'nombre_producto' => $nombre_producto,
                     'notificacion_sanitaria' => $notificacion_sanitaria, 'linea' => $linea, 'marca' => $marca, 'propietario' => $propietario,
                     'presentacion_comercial' => $presentacion_comercial, 'color' => $color, 'olor' => $olor, 'apariencia' => $apariencia,
                     'untuosidad' => $untuosidad, 'poder_espumoso' => $poder_espumoso, 'recuento_mesofilos' => $recuento_mesofilos,
                     'pseudomona' => $pseudomona, 'escherichia' => $escherichia, 'staphylococcus' => $staphylococcus, 'ph' => $ph,
                     'viscosidad' => $viscosidad, 'densidad_gravedad' => $densidad_gravedad, 'grado_alcohol' => $grado_alcohol,
-                    'id_referencia' => $id_referencia
+                    'envase' => $envase, 'tapa' => $tapa, 'etiqueta' => $etiqueta, 'empaque' => $empaque, 'otros' => $otros, 
+                    'referencia' => $id_referencia,
                 ]);
 
                 if ($result) {
@@ -72,36 +74,22 @@ switch ($op) {
                     $sql = "INSERT INTO producto (referencia, nombre_referencia, unidad_empaque, id_nombre_producto, 
                     id_notificacion_sanitaria, id_linea, id_marca, id_propietario, id_presentacion_comercial, id_color, id_olor, 
                     id_apariencia, id_untuosidad, id_poder_espumoso, id_recuento_mesofilos, id_pseudomona, id_escherichia, 
-                    id_staphylococcus, id_ph, id_viscosidad, id_densidad_gravedad, id_grado_alcohol)
-                    VALUES (:referencia, :nombre, :empaque, :nombre_producto, :notificacion_sanitaria, 
+                    id_staphylococcus, id_ph, id_viscosidad, id_densidad_gravedad, id_grado_alcohol, id_envase, id_tapa, id_etiqueta, 
+                    id_empaque, id_otros)
+                    VALUES (:referencia, :nombre, :uniEmpaque, :nombre_producto, :notificacion_sanitaria, 
                     :linea, :marca, :propietario, :presentacion_comercial, :color, :olor, :apariencia, 
                     :untuosidad, :poder_espumoso, :recuento_mesofilos, :pseudomona, :escherichia, :staphylococcus,
-                    :ph, :viscosidad, :densidad_gravedad, :grado_alcohol)";
+                    :ph, :viscosidad, :densidad_gravedad, :grado_alcohol, :envase, :tapa, :etiqueta, :empaque, :otros)";
 
                     $query = $conn->prepare($sql);
                     $result = $query->execute([
-                        'referencia' => $referencia, 
-                        'nombre' => $nombre, 
-                        'empaque' => $empaque, 
-                        'nombre_producto' => $nombre_producto,
-                        'notificacion_sanitaria' => $notificacion_sanitaria, 
-                        'linea' => $linea, 
-                        'marca' => $marca, 
-                        'propietario' => $propietario,
-                        'presentacion_comercial' => $presentacion_comercial, 
-                        'color' => $color, 
-                        'olor' => $olor, 
-                        'apariencia' => $apariencia,
-                        'untuosidad' => $untuosidad, 
-                        'poder_espumoso' => $poder_espumoso, 
-                        'recuento_mesofilos' => $recuento_mesofilos,
-                        'pseudomona' => $pseudomona, 
-                        'escherichia' => $escherichia, 
-                        'staphylococcus' => $staphylococcus, 
-                        'ph' => $ph,
-                        'viscosidad' => $viscosidad, 
-                        'densidad_gravedad' => $densidad_gravedad, 
-                        'grado_alcohol' => $grado_alcohol,
+                        'referencia' => $referencia, 'nombre' => $nombre, 'uniEmpaque' => $uniEmpaque, 'nombre_producto' => $nombre_producto,
+                        'notificacion_sanitaria' => $notificacion_sanitaria, 'linea' => $linea, 'marca' => $marca, 'propietario' => $propietario,
+                        'presentacion_comercial' => $presentacion_comercial, 'color' => $color, 'olor' => $olor, 'apariencia' => $apariencia,
+                        'untuosidad' => $untuosidad, 'poder_espumoso' => $poder_espumoso, 'recuento_mesofilos' => $recuento_mesofilos,
+                        'pseudomona' => $pseudomona, 'escherichia' => $escherichia, 'staphylococcus' => $staphylococcus, 'ph' => $ph,
+                        'viscosidad' => $viscosidad, 'densidad_gravedad' => $densidad_gravedad, 'grado_alcohol' => $grado_alcohol,
+                        'envase' => $envase, 'tapa' => $tapa, 'etiqueta' => $etiqueta, 'empaque' => $empaque, 'otros' => $otros,
                     ]);
                     ejecutarQuery($result, $conn);
                 }

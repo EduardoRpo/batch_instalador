@@ -60,7 +60,7 @@ $(document).ready(function () {
       { "data": "id_envase" },
       { "data": "id_tapa" },
       { "data": "id_etiqueta" },
-      /*  { "data": "otros_empaque" }, */
+      { "data": "id_empaque" },
       { "data": "id_otros" },
     ]
   });
@@ -133,25 +133,29 @@ $(document).on('click', '.link-editar', function (e) {
   $('#btnguardarProductos').html('Actualizar Producto');
 
   //carga el array con los datos de la tabla
-  for (let i = 2; i < 23; i++) {
+  for (let i = 2; i < 29; i++) {
     propiedad = $(this).parent().parent().children().eq(i).text();
     producto.push(propiedad);
   }
+  console.log(producto);
 
   //carga todos los campos con la info del array
-  for (let i = 0; i <= 2; i++) {
+  for (let i = 0; i <= 29; i++) {
     $(`.n${j}`).val(producto[i]);
     j++;
   }
 
-  for (let i = 3; i < 23; i++) {
-    $(`.n${j} option:contains(${producto[i]})`).attr('selected', true);
+  /* for (let i = 3; i < 29; i++) {
+    //$(`.n${j} option:contains(${producto[i]})`).prop('selected', true);
+    $(`.n${j}`).val(`${producto[i]}`);
     j++;
-  }
+  } */
 
-  //para actualizar guarda la referencia inicia
+  //para actualizar guarda la referencia iniciaL
   let referencia = $('#referencia').val();
   $('#id_referencia').val(referencia);
+  /* $('#referencia').prop('disabled', true); */
+
 
 });
 

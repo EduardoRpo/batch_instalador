@@ -8,7 +8,6 @@ session_start();
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Batch Record">
   <meta name="author" content="Teenus SAS">
@@ -46,9 +45,9 @@ session_start();
 
   <div id="main-wrapper">
 
-     <!-- HEADER -->
-     <?php include('partials/header.php'); ?>
-   <!-- FIN HEADER -->
+    <!-- HEADER -->
+    <?php include('partials/header.php'); ?>
+    <!-- FIN HEADER -->
 
 
     <div class="container-fluid">
@@ -76,77 +75,63 @@ session_start();
 
                 <div class="contenedorInfo2">
 
-                      <div class="contenedorInfo__group">
-                      <label for="recipient-name" class="col-form-label">Fecha Programación</label>
-                      <input type="date" class="form-control" id="in_fecha" readonly>
-                      </div>
-                      <div class="contenedorInfo__group">
-                      <label for="recipient-name" class="col-form-label">No Orden</label>
-                      <input type="text" class="form-control" id="in_numero_orden" readonly>
-                        </div>
-                        <div class="contenedorInfo__group">
-                        <label for="recipient-name" class="col-form-label">Referencia</label>
-                        <input type="text" class="form-control" id="in_referencia" readonly>
-                        </div>
+                  <div class="contenedorInfo__group">
+                    <label for="recipient-name" class="col-form-label">Fecha Programación</label>
+                    <input type="date" class="form-control" id="in_fecha" readonly>
+                  </div>
+                  <div class="contenedorInfo__group">
+                    <label for="recipient-name" class="col-form-label">No Orden</label>
+                    <input type="text" class="form-control" id="in_numero_orden" readonly>
+                  </div>
+                  <div class="contenedorInfo__group">
+                    <label for="recipient-name" class="col-form-label">Referencia</label>
+                    <input type="text" class="form-control" id="in_referencia" readonly>
+                  </div>
 
-                        <div class="contenedorInfo__group">
-                            
-                  <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:80%; height: 30px;">
-                    <thead>
-                      <tr>
-                        <th>Multipresentación</th>
-                        <th>Cantidad</th>
-                        <th>Total</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr id="fila1">
-                        <td id="tanque1" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad1" style="text-align: end;font-size:14px;"></td>
-                        <td id="total1" style="text-align: end;font-size:14px;"></td>
-                      </tr>
-                      <tr id="fila2">
-                        <td id="tanque2" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad2" style="text-align: end;font-size:14px;"></td>
-                        <td id="total2" style="text-align: end;font-size:14px;"></td>
-                      </tr>
-                      <tr id="fila3">
-                        <td id="tanque3" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad3" style="text-align: end;font-size:14px;"></td>
-                        <td id="total3" style="text-align: end;font-size:14px;"></td>
-                      </tr>
-                      <tr id="fila4">
-                        <td id="tanque4" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad4" style="text-align: end;font-size:14px;"></td>
-                        <td id="total4" style="text-align: end;font-size:14px;"></td>
-                      </tr>
-                      <tr id="fila5">
-                        <td id="tanque5" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad5" style="text-align: end;font-size:14px;"></td>
-                        <td id="total5" style="text-align: end;font-size:14px;"></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                        </div>
+                  <div class="contenedorInfo__group">
 
-                        <div class="contenedorInfo__group">
-                        <label for="in_tamano_lote" class="col-form-label">Tamaño Lote (Kg)</label>
-                        <input type="text" class="form-control" id="in_tamano_lote" readonly>
-                        </div>
+                    <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:80%; height: 30px;">
+                      <thead>
+                        <tr>
+                          <th class="centrado">Multipresentación</th>
+                          <th class="centrado">Cantidad</th>
+                          <th class="centrado">Total</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr id="fila1">
+                          <td id="tanque1" class="centrado"></td>
+                          <td id="cantidad1" class="centrado"></td>
+                          <td id="total1" class="centrado"></td>
+                        </tr>
+                        <tr id="fila2">
+                          <td id="tanque2" class="centrado"></td>
+                          <td id="cantidad2" class="centrado"></td>
+                          <td id="total2" class="centrado"></td>
+                        </tr>
 
-                        <div class="contenedorInfo__group">
-                        <label for="recipient-name" class="col-form-label">No. Lote</label>
-                        <input type="text" class="form-control" id="in_numero_lote" readonly>
-                        </div>
+                      </tbody>
+                    </table>
+                  </div>
 
-                        <div class="contenedorInfo__group">
-                        <label for="recipient-name" class="col-form-label">Linea</label>
-                        <input type="text" class="form-control" id="in_linea" readonly>
-                        </div>
+                  <div class="contenedorInfo__group">
+                    <label for="in_tamano_lote" class="col-form-label">Tamaño Lote (Kg)</label>
+                    <input type="text" class="form-control" id="in_tamano_lote" readonly>
+                  </div>
+
+                  <div class="contenedorInfo__group">
+                    <label for="recipient-name" class="col-form-label">No. Lote</label>
+                    <input type="text" class="form-control" id="in_numero_lote" readonly>
+                  </div>
+
+                  <div class="contenedorInfo__group">
+                    <label for="recipient-name" class="col-form-label">Linea</label>
+                    <input type="text" class="form-control" id="in_linea" readonly>
+                  </div>
 
                 </div>
 
-             
+
               </div>
             </div>
           </div>
@@ -228,7 +213,7 @@ session_start();
             <div class="card-body">
               <div class="row" style="margin: 1%">
                 <div class="col-md-12 align-self-center">
-                  <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Recepcion Material</h3>
+                  <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Recepción Material</h3>
                 </div>
                 <div class="col-md-12 align-self-center">
                   <div class="card">
@@ -281,10 +266,10 @@ session_start();
 
               <div class="row buttons-group-container" style="margin: 1%">
                 <!-- <div class="col-md-12 col-2 align-self-center" style="margin-left: 85%"> -->
-                  <div>
+                <div>
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                   <button type="button" class="btn btn-primary" onclick="window.location.href = '../html/acondicionamiento.html';">Aceptar</button>
-                  </div>
+                </div>
                 <!-- /div> -->
               </div>
               <div class="col-md-12 align-self-center">
@@ -297,7 +282,7 @@ session_start();
                 <label for="recipient-name" class="col-form-label">Tunel Termo</label>
 
                 <select class="selectpicker form-control" id="select-Linea">
-                  <option selected hidden></option>
+                  <option selected hidden>Seleccionar</option>
                   <option>LIQUIDOS</option>
                   <option>SOLIDOS</option>
                   <option>SEMISOLIDOS</option>
@@ -424,51 +409,51 @@ session_start();
                 <div class="conciliacionrendimiento">
 
                   <div class="conciliacionrendimiento__group">
-                  <label for="recipient-name" class="col-form-label">Unidades Producidas:</label>
-                  <input type="number" class="form-control centrado" id="txtUnidadesProducidas"> <!-- Este valor se valide con lo envasado por el usuario en envasado txtEnvasado1 Alert(Las unidades producidads son diferentes a las envasadas, notificar al jefe de producción) -->
+                    <label for="recipient-name" class="col-form-label">Unidades Producidas:</label>
+                    <input type="number" class="form-control centrado" id="txtUnidadesProducidas"> <!-- Este valor se valide con lo envasado por el usuario en envasado txtEnvasado1 Alert(Las unidades producidads son diferentes a las envasadas, notificar al jefe de producción) -->
                   </div>
-              
+
                   <div class="conciliacionrendimiento__group">
-                  <label for="recipient-name" class="col-form-label">No Muestras de Retención:</label>
-                  <input type="number" class="form-control centrado" id="txtMuestras-Retencion" onkeyup="conciliacionRendimiento(this.value);"><!-- impresion etiquetas para muestras (No produccion, lote, cod barras, cod producto, fecha ) -->
+                    <label for="recipient-name" class="col-form-label">No Muestras de Retención:</label>
+                    <input type="number" class="form-control centrado" id="txtMuestras-Retencion" onkeyup="conciliacionRendimiento(this.value);"><!-- impresion etiquetas para muestras (No produccion, lote, cod barras, cod producto, fecha ) -->
                   </div>
-             
+
 
                   <div class="conciliacionrendimiento__group">
-                  <label for="recipient-name" class="col-form-label">Total Cajas:</label>
-                  <input type="text" class="form-control centrado" id="txtTotal-Cajas" readonly>
-                    </div>
-          
+                    <label for="recipient-name" class="col-form-label">Total Cajas:</label>
+                    <input type="text" class="form-control centrado" id="txtTotal-Cajas" readonly>
+                  </div>
+
 
                   <div class="conciliacionrendimiento__group">
-                  <label for="recipient-name" class="col-form-label">Total a Entregar Bodega/Cliente:</label>
-                  <input type="text" class="form-control centrado" id="txtEntrega-Bodega" readonly>
-                    </div>
-               
+                    <label for="recipient-name" class="col-form-label">Total a Entregar Bodega/Cliente:</label>
+                    <input type="text" class="form-control centrado" id="txtEntrega-Bodega" readonly>
+                  </div>
+
 
                   <div class="conciliacionrendimiento__group">
-                  <label for="recipient-name" class="col-form-label">Rendimiento Producto:</label>
-                  <input type="text" class="form-control centrado" id="txtRendimiento-Producto">
-                    </div>
-         
+                    <label for="recipient-name" class="col-form-label">Rendimiento Producto:</label>
+                    <input type="text" class="form-control centrado" id="txtRendimiento-Producto">
+                  </div>
+
 
                   <div class="conciliacionrendimiento__group">
-                  <label for="recipient-name" class="col-form-label">Porcentaje Unidades:</label>
-                  <input type="text" class="form-control centrado" id="txtPorcentaje-Unidades">
-                    </div>
-  
+                    <label for="recipient-name" class="col-form-label">Porcentaje Unidades:</label>
+                    <input type="text" class="form-control centrado" id="txtPorcentaje-Unidades">
+                  </div>
+
 
                   <div class="conciliacionrendimiento__group">
-                  <label for="recipient-name" class="col-form-label">No Movimiento Ofimatica:</label>
-                  <input type="number" class="form-control centrado" id="txtNoMovimiento">
-                    </div>
-  
+                    <label for="recipient-name" class="col-form-label">No Movimiento Ofimatica:</label>
+                    <input type="number" class="form-control centrado" id="txtNoMovimiento">
+                  </div>
+
 
                   <div class="conciliacionrendimiento__group">
-                  <label for="recipient-name" class="col-form-label">Responsable Movimiento Ofimatica:</label>
-                  <input type="text" class="form-control centrado" id="txtReponsable" value="Director de Producción (CRC)" readonly>
-                    </div>
-     
+                    <label for="recipient-name" class="col-form-label">Responsable Movimiento Ofimatica:</label>
+                    <input type="text" class="form-control centrado" id="txtReponsable" value="Director de Producción (CRC)" readonly>
+                  </div>
+
 
                 </div>
 
@@ -496,13 +481,13 @@ session_start();
         
                 </div> -->
                 <div class="row buttons-group-container" style="margin: 1%">
-                 <!--  <div class="col-md-12 col-2 align-self-center" style="margin-left: 85%"> -->
-                   <div>
+                  <!--  <div class="col-md-12 col-2 align-self-center" style="margin-left: 85%"> -->
+                  <div>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <button type="button" class="btn btn-primary" onclick="" ;">Aceptar</button>
-                <!--   </div> -->
+                    <!--   </div> -->
 
-                </div>
+                  </div>
                 </div>
               </div>
 

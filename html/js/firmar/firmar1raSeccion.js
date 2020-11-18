@@ -178,7 +178,7 @@ function firmarVerficadoDespeje(idfirma) {
 }
 
 function firmar(firm) {
-
+    debugger;
     let template = '<img id=":id:" src=":firma:" alt="firma_usuario" height="130">';
     let parent = $('#' + id).parent();
 

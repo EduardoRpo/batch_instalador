@@ -96,7 +96,7 @@ $('#guardarIncidencias').click(function (e) {
         success: function (response) {
             alertify.set("notifier", "position", "top-right"); alertify.success("Incidencias Reportadas exitosamente!");
             $('#modalObservaciones').modal('hide');
-            firmar(data);
+            firmar(firma);
         }
 
     });
@@ -105,5 +105,5 @@ $('#guardarIncidencias').click(function (e) {
 $('#cerrarIncidencias').click(function (e) {
     e.preventDefault();
     $('#modalObservaciones').modal('hide');
-    firmar(data);
+    firmar(firma);
 });

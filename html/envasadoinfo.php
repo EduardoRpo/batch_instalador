@@ -13,7 +13,6 @@ include('modal/m_muestras.php');
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Batch Record">
   <meta name="author" content="Teenus SAS">
@@ -67,6 +66,7 @@ include('modal/m_muestras.php');
       <div class="col-lg-12">
         <div id="accordion">
           <div class="card">
+
             <div class="card-header" id="headingOne">
               <h5 class="mb-0">
                 <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="width: 100%">
@@ -115,21 +115,6 @@ include('modal/m_muestras.php');
                           <td id="cantidad2" class="centrado"></td>
                           <td id="total2" class="centrado"></td>
                         </tr>
-                        <!-- <tr id="fila3">
-                          <td id="tanque3" style="text-align: end;font-size:14px;"></td>
-                          <td id="cantidad3" style="text-align: end;font-size:14px;"></td>
-                          <td id="total3" style="text-align: end;font-size:14px;"></td>
-                        </tr>
-                        <tr id="fila4">
-                          <td id="tanque4" style="text-align: end;font-size:14px;"></td>
-                          <td id="cantidad4" style="text-align: end;font-size:14px;"></td>
-                          <td id="total4" style="text-align: end;font-size:14px;"></td>
-                        </tr>
-                        <tr id="fila5">
-                          <td id="tanque5" style="text-align: end;font-size:14px;"></td>
-                          <td id="cantidad5" style="text-align: end;font-size:14px;"></td>
-                          <td id="total5" style="text-align: end;font-size:14px;"></td>
-                        </tr> -->
                       </tbody>
                     </table>
                   </div>
@@ -148,62 +133,6 @@ include('modal/m_muestras.php');
                     <label for="recipient-name" class="col-form-label">Linea</label>
                     <input type="text" class="form-control" id="in_linea" readonly>
                   </div>
-
-                  <!--   <div class="contenedorInfo">
-                  <label for="recipient-name" class="col-form-label">Fecha Programación</label>
-                  <label for="recipient-name" class="col-form-label">No Orden</label>
-                  <label for="recipient-name" class="col-form-label">Referencia</label>
-
-                  <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:80%; height: 30px;">
-                    <thead>
-                      <tr>
-                        <th>Presentación</th>
-                        <th>Cantidad</th>
-                        <th>Total</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr id="fila1">
-                        <td id="tanque1" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad1" style="text-align: end;font-size:14px;"></td>
-                        <td id="total1" style="text-align: end;font-size:14px;"></td>
-                      </tr>
-                      <tr id="fila2">
-                        <td id="tanque2" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad2" style="text-align: end;font-size:14px;"></td>
-                        <td id="total2" style="text-align: end;font-size:14px;"></td>
-                      </tr>
-                      <tr id="fila3">
-                        <td id="tanque3" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad3" style="text-align: end;font-size:14px;"></td>
-                        <td id="total3" style="text-align: end;font-size:14px;"></td>
-                      </tr>
-                      <tr id="fila4">
-                        <td id="tanque4" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad4" style="text-align: end;font-size:14px;"></td>
-                        <td id="total4" style="text-align: end;font-size:14px;"></td>
-                      </tr>
-                      <tr id="fila5">
-                        <td id="tanque5" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad5" style="text-align: end;font-size:14px;"></td>
-                        <td id="total5" style="text-align: end;font-size:14px;"></td>
-                      </tr>
-                    </tbody>
-                  </table>
-
-                  <input type="date" class="form-control" id="in_fecha" readonly>
-                  <input type="text" class="form-control" id="in_numero_orden" readonly>
-                  <input type="text" class="form-control" id="in_referencia" readonly>
-
-                  <label></label>
-                  <label for="in_tamano_lote" class="col-form-label">Tamaño Lote (Kg)</label>
-                  <label for="recipient-name" class="col-form-label">No. Lote</label>
-                  <label for="recipient-name" class="col-form-label">Linea</label>
-
-                  <input type="text" class="form-control" id="in_tamano_lote" readonly>
-                  <input type="text" class="form-control" id="in_numero_lote" readonly>
-                  <input type="text" class="form-control" id="in_linea" readonly>
-                </div> -->
                 </div>
               </div>
             </div>
@@ -262,7 +191,6 @@ include('modal/m_muestras.php');
                     </div>
                   </div>
                   <div class="row justify-content-end mt-5" style="margin: 1%; text-align: right">
-
                   </div>
                 </div>
               </div>

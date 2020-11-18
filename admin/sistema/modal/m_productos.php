@@ -34,8 +34,8 @@
                       </div>
                       <div class="col-md-2 pl-1">
                         <div class="form-group">
-                          <label for="empaque">Unidad Empaque</label>
-                          <input type="number" name="empaque" id="empaque" class="form-control n3" placeholder="Cantidad" class="required">
+                          <label for="uniEmpaque">Unidad Empaque</label>
+                          <input type="number" name="uniEmpaque" id="uniEmpaque" class="form-control n3" placeholder="Cantidad" class="required">
                         </div>
                       </div>
                     </div>

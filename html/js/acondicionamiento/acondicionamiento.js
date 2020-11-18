@@ -9,6 +9,10 @@ $('#preparacionTable').dataTable({
     },
     columns: [
         {
+            title: 'Batch',
+            data: "id_batch", className: 'uniqueClassName'
+        },
+        {
             title: 'Fecha Programación',
             data: 'fecha_programacion', className: 'uniqueClassName'
         },
@@ -36,14 +40,14 @@ $('#preparacionTable').dataTable({
                 return $.number(data, 0, ',', '.');
             } */
         },
-      /*   {
-            title: 'Estado',
-            data: 'estado',
-            render: (data, type, row) => {
-                'use strict';
-                return data === 1 ? 'Activo' : 'Inactivo';
-            }
-        }, */
+        /*   {
+              title: 'Estado',
+              data: 'estado',
+              render: (data, type, row) => {
+                  'use strict';
+                  return data === 1 ? 'Activo' : 'Inactivo';
+              }
+          }, */
         {
             title: 'Ingresar', className: 'uniqueClassName',
             data: '',
