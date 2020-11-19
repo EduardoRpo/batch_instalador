@@ -36,9 +36,10 @@ function cargar(btn, idbtn) {
 
     /* Valida que se ha seleccionado el producto de desinfeccion para el proceso de aprobacion */
 
-    if (modulo == 4) {
+    if (modulo == 4 || modulo == 2) {
+        debugger;
         let seleccion = $('#sel_producto_desinfeccion').val();
-        if (seleccion == "Seleccionar") {
+        if (seleccion == "Seleccione") {
             alertify.set("notifier", "position", "top-right"); alertify.error("Seleccione el producto para desinfección.");
             return false;
         }

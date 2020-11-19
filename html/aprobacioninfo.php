@@ -230,7 +230,7 @@ include('modal/m_firma.php');
                   <div class="col-md-4 align-self-right">
                     <label for="sel_producto_desinfeccion" class="col-form-label">Producto de desinfección</label>
                     <select class="selectpicker form-control" id="sel_producto_desinfeccion">
-                      <option selected hidden>Seleccionar</option>
+                      <option selected hidden>Seleccione</option>
                     </select>
                   </div>
                   <div class="col-md-8 align-self-center">
