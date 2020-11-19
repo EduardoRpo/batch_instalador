@@ -20,7 +20,7 @@ switch ($op) {
 
         if (!empty($_POST)) {
             $editar = $_POST['editar'];
-            $proceso = ucfirst(strtolower($_POST['proceso']));
+            $proceso = ucfirst(mb_strtolower($_POST['proceso'], "UTF-8"));
 
             if ($editar == 0) {
                 $sql = "SELECT * FROM modulo WHERE modulo= :proceso";

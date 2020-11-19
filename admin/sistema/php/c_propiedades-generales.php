@@ -30,7 +30,7 @@ switch ($op) {
 
             $editar = $_POST['editar'];
             $tabla = $_POST['tabla'];
-            $dato =  ucfirst(strtolower($_POST['datos']));
+            $dato =  ucfirst(mb_strtolower($_POST['datos'], "UTF-8"));
 
             if ($editar == 0) {
                 $sql = "SELECT * FROM $tabla WHERE nombre= :dato";
