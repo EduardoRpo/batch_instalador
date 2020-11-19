@@ -1,10 +1,12 @@
 
 let firma_realizado;
-
+let infofirma;
 /* Cargar formulario incidencias */
 
-function cargarObsIncidencias(idFirma) {
-    firma_realizado = idFirma;
+function cargarObsIncidencias(firma) {
+    debugger;
+    firma_realizado = firma[0].id;
+    infofirma = firma;
     $('#modalObservaciones').modal('show');
 }
 
@@ -96,7 +98,7 @@ $('#guardarIncidencias').click(function (e) {
         success: function (response) {
             alertify.set("notifier", "position", "top-right"); alertify.success("Incidencias Reportadas exitosamente!");
             $('#modalObservaciones').modal('hide');
-            firmar(firma);
+            firmar(infofirma);
         }
 
     });
@@ -105,5 +107,5 @@ $('#guardarIncidencias').click(function (e) {
 $('#cerrarIncidencias').click(function (e) {
     e.preventDefault();
     $('#modalObservaciones').modal('hide');
-    firmar(firma);
+    firmar(infofirma);
 });

@@ -66,7 +66,7 @@ function firmarSeccionCierreProceso(firma) {
     /* confirm.set({ transition: 'slide' }); */
 
     confirm.set('onok', function () { //callbak al pulsar Si
-        cargarObsIncidencias(firma[0].id);
+        cargarObsIncidencias(firma);
         deshabilitarbtn();
     });
 
