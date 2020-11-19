@@ -36,7 +36,7 @@ function cargar(btn, idbtn) {
 
     /* Valida que se ha seleccionado el producto de desinfeccion para el proceso de aprobacion */
 
-    if ( modulo == 2 || modulo == 3 || modulo == 4) {
+    if (modulo == 2 || modulo == 3 || modulo == 4) {
         debugger;
         let seleccion = $('#sel_producto_desinfeccion').val();
         if (seleccion == "Seleccione") {
@@ -152,7 +152,11 @@ function validarPreguntas(idfirma) {
             if (response > 0) {
                 $('.despeje_realizado').prop('disabled', true);
                 $('.despeje_verificado').prop('disabled', false);
-                $('.pesaje_realizado').prop('disabled', false);
+
+                if (modulo == 2)
+                    $('.pesaje_realizado').prop('disabled', false);
+                if (modulo == 3)
+                    $('.preparacion_realizado').prop('disabled', false);
             }
         }
     });
@@ -176,6 +180,7 @@ function firmarVerficadoDespeje(idfirma) {
             $('.despeje_verificado').prop('disabled', true);
         }
     });
+
 }
 
 function firmar(firm) {
