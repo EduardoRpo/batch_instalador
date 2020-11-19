@@ -58,10 +58,11 @@ function firmar2daSeccion(firma) {
 }
 
 function firmarSeccionCierreProceso(firma) {
-    debugger;
+ 
     //confirmación de incidencias 
 
-    var confirm = alertify.confirm('Incidencias y Observaciones', 'Durante la fabricación de la orden ' + idBatch + ' XXX cantidad total XXX durante alguno de los tanques hubo incidencias', null, null).set('labels', { ok: 'Si', cancel: 'No' });
+    var confirm = alertify.confirm('Incidencias y Observaciones', '¿Durante la fabricacion de la orden de produccion XXXX con cantidad total XXXX, se presento alguna incidencia u observaciòn al desarrollar el proceso?', 
+    null, null).set('labels', { ok: 'Si', cancel: 'No' });
 
     /* confirm.set({ transition: 'slide' }); */
 
@@ -109,7 +110,7 @@ function almacenarfirma(id) {
 
         success: function (response) {
             alertify.set("notifier", "position", "top-right"); alertify.success("Firmado satisfactoriamente");
-            $('.despeje_verificado').prop('disabled', true);
+            $('.pesaje_verificado').prop('disabled', true);
         }
     });
 }

@@ -46,7 +46,7 @@ function guardar_condicionesMedio() {
 
     /* Validacion del nivel de temperatura y humedad de acuerdo con los valores */
     debugger;
-    if (temperatura < 15 || temperatura > 40 && humedad < 55 || humedad > 75) {
+    if (temperatura < 15 || temperatura > 40 || humedad < 55 || humedad > 75) {
         alertify.set("notifier", "position", "top-right"); alertify.error("La temperatura y/o humedad ingresada están por fuera de los rangos establecidos. Valide nuevamente!!");
         return false;
     }
