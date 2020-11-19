@@ -59,7 +59,7 @@ switch ($op) {
         $arreglo["data"][] = $data;
       }
 
-      echo json_encode(utf8ize($arreglo), JSON_UNESCAPED_UNICODE);
+      echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
 
       exit();
     } else {
@@ -106,7 +106,7 @@ switch ($op) {
         $arreglo[] = $data;
       }
 
-      echo json_encode(utf8ize($arreglo), JSON_UNESCAPED_UNICODE);
+      echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
       //echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
     } else {
       echo json_encode('');
@@ -298,7 +298,7 @@ exit; */
         $arreglo[] = $data;
       }
 
-      echo json_encode(utf8ize($arreglo), JSON_UNESCAPED_UNICODE);
+      echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
       //echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
       //exit();
 
@@ -318,7 +318,7 @@ exit; */
         $arreglo[] = $data;
       }
 
-      echo json_encode(utf8ize($arreglo), JSON_UNESCAPED_UNICODE);
+      echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
       //echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
     } else {
       echo json_encode('');
@@ -339,7 +339,7 @@ exit; */
       $data = mysqli_fetch_assoc($query_clonar);
       $arreglo[] = $data;
 
-      echo json_encode(utf8ize($arreglo), JSON_UNESCAPED_UNICODE);
+      echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
     } else {
       echo json_encode('');
     }

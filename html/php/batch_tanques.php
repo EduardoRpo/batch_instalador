@@ -125,7 +125,7 @@ if (!empty($_POST)) {
             if ($result > 0) {
                 $data = $query->fetch(PDO::FETCH_ASSOC);
                 $arreglo[] = $data;
-                echo json_encode(utf8ize($arreglo), JSON_UNESCAPED_UNICODE);
+                echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
             }
             break;
 
@@ -144,7 +144,7 @@ if (!empty($_POST)) {
             if ($result > 0) {
                 $data = $query->fetch(PDO::FETCH_ASSOC);
                 $arreglo[] = $data;
-                echo json_encode(utf8ize($arreglo), JSON_UNESCAPED_UNICODE);
+                echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
             }
             break;
 

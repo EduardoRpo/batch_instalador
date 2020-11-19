@@ -1,4 +1,5 @@
 <?php
+header("Content-Type: text/html;charset=utf-8");
 require_once('../../../conexion.php');
 require_once('./crud.php');
 
@@ -8,7 +9,7 @@ switch ($op) {
   case 1: //listar parametros
     $query = "SELECT * FROM preguntas";
     ejecutarQuerySelect($conn, $query);
-
+    
     break;
 
   case 2: //Eliminar
@@ -19,7 +20,7 @@ switch ($op) {
   case 3: // Guardar y actualizar data
     if (!empty($_POST)) {
       $editar = $_POST['editar'];
-      $pregunta = ucfirst(strtolower($_POST['pregunta']));
+      $pregunta = ucfirst(mb_strtolower($_POST['pregunta'], "UTF-8"));
 
       if ($editar == 0) {
         $sql = "SELECT * FROM preguntas WHERE pregunta=:pregunta";
