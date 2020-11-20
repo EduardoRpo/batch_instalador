@@ -1,3 +1,4 @@
 env.php
 *.log
 *.env
+.vscode/launch.json

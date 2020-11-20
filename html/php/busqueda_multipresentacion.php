@@ -32,7 +32,7 @@
         while($data = mysqli_fetch_assoc($query_busq_multi)){
           $arreglo[] = $data;
         }
-        echo json_encode(utf8ize($arreglo), JSON_UNESCAPED_UNICODE);
+        echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
 
       }else{
         echo json_encode('');

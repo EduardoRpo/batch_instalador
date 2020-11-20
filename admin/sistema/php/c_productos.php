@@ -30,7 +30,7 @@ switch ($op) {
                 eval($asignacion);
             }
 
-            $nombre = ucfirst(strtolower($nombre));
+            $nombre = ucfirst(mb_strtolower($nombre, "UTF-8"));
 
             if ($editar > 0) {
                 $sql = "UPDATE producto SET  referencia=:referencia, nombre_referencia=':nombre', unidad_empaque=:uniEmpaque, 

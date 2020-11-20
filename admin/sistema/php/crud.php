@@ -75,7 +75,7 @@ function ejecutarQuerySelect($conn, $query)
         exit();
     }
 
-    echo json_encode(utf8ize($arreglo), JSON_UNESCAPED_UNICODE);
+    echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
 }
 
 
@@ -90,7 +90,7 @@ function ejecutarSelect($conn, $query)
         exit();
     }
 
-    echo json_encode(utf8ize($arreglo), JSON_UNESCAPED_UNICODE);
+    echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
 }
 
 function ejecutarSelect1($query)
@@ -103,5 +103,5 @@ function ejecutarSelect1($query)
         exit();
     }
 
-    echo json_encode(utf8ize($data), JSON_UNESCAPED_UNICODE);
+    echo json_encode($data, JSON_UNESCAPED_UNICODE);
 }

@@ -136,6 +136,7 @@ include('modal/m_muestras.php');
                 </div>
               </div>
             </div>
+          </div>
 
             <div class="card">
               <div class="card-header" id="headingTwo">

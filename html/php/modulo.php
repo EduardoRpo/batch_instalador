@@ -18,6 +18,6 @@ if (!empty($_POST)) {
         $data = $query->fetch(PDO::FETCH_ASSOC);
         $arreglo[] = $data;
 
-        echo json_encode(utf8ize($arreglo), JSON_UNESCAPED_UNICODE);
+        echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
     }
 }

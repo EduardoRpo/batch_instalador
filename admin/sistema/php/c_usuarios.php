@@ -19,8 +19,8 @@ switch ($op) {
     case 3: // Actualizar y Guardar data
         if (!empty($_POST)) {
             $editar = $_POST['editar'];
-            $nombres = ucfirst(strtolower($_POST['nombres']));
-            $apellidos = ucfirst(strtolower($_POST['apellidos']));
+            $nombres = ucfirst(mb_strtolower($_POST['nombres'], "UTF-8"));
+            $apellidos = ucfirst(mb_strtolower($_POST['apellidos'], "UTF-8"));
             $email = $_POST['email'];
             $cargo = $_POST['cargo'];
             $modulo = $_POST['modulo'];

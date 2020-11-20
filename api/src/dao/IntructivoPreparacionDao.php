@@ -8,6 +8,7 @@
   use Monolog\Handler\RotatingFileHandler;
   use Monolog\Handler\StreamHandler;
   use Monolog\Logger;
+  use PDO;
 
   class IntructivoPreparacionDao
   {
@@ -23,7 +24,8 @@
     {
       $connection = Connection::getInstance()->getConnection();
       $stmt = $connection->prepare("SELECT * FROM instructivo_preparacion WHERE id_producto = :referencia");
-      $stmt->execute(array('referencia' => $idProduct));
+      $stmt->bindValue(':referencia', $idProduct, PDO::PARAM_INT);
+      $stmt->execute();
       $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
       $pesajes = $stmt->fetchAll($connection::FETCH_ASSOC);
       $this->logger->notice("instructivo Obtenidas", array('materias Primas' => $pesajes));

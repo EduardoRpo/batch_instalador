@@ -25,7 +25,7 @@ switch ($op) {
             $editar = $_POST['editar'];
             $tabla = $_POST['nombre'];
             $codigo =  $_POST['codigo'];
-            $descripcion =  ucfirst(strtolower($_POST['descripcion']));
+            $descripcion =  ucfirst(mb_strtolower($_POST['descripcion'], "UTF-8"));
 
             if ($editar == 0) {
                 $sql = "SELECT * FROM $tabla WHERE id = :codigo";

@@ -26,7 +26,7 @@ switch ($op) {
     if (!empty($_POST)) {
       $editar = $_POST['editar'];
       $id = $_POST['id'];
-      $equipo = ucfirst(strtolower($_POST['equipo']));
+      $equipo = ucfirst(mb_strtolower($_POST['equipo'], "UTF-8"));
       $linea = $_POST['linea'];
 
       if ($editar == 0) {
