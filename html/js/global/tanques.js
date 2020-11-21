@@ -47,7 +47,7 @@ function cargarTanques() {
             /* iniciar proceso para colocar checks de tanques */
             cantidad = parseInt(info[0].cantidad);
 
-            if (proceso === "2" || proceso === "3")
+            if (proceso == "2" || proceso == "3")
                 controlProceso(cantidad);
             else if (modulo == "4")
                 cargaTanquesControl(cantidad);

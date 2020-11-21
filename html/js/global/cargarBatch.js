@@ -92,6 +92,10 @@ function cargarLinea() {
 
         success: function (response) {
             const data = JSON.parse(response);
+
+            if (data == 'false')
+                return false;
+
             $("#select-Linea").val(data[0].linea);
             cargarEquipos();
             cargarControlProceso();

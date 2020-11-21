@@ -2,7 +2,6 @@
 /* firmar 2da sección  */
 
 function firmar2daSeccion(firma) {
-
     let tanquesOk = 0;
 
     /* validar tanque seleccionados */
@@ -19,6 +18,7 @@ function firmar2daSeccion(firma) {
     }
 
     if (modulo == 3) {
+ 
         let linea = $('#select-Linea').val();
         data = { operacion: 1, linea, tanques, tanquesOk, modulo, idBatch, controlProducto };
     }
@@ -58,11 +58,11 @@ function firmar2daSeccion(firma) {
 }
 
 function firmarSeccionCierreProceso(firma) {
- 
+
     //confirmación de incidencias 
 
-    var confirm = alertify.confirm('Incidencias y Observaciones', '¿Durante la fabricacion de la orden de produccion XXXX con cantidad total XXXX, se presento alguna incidencia u observaciòn al desarrollar el proceso?', 
-    null, null).set('labels', { ok: 'Si', cancel: 'No' });
+    var confirm = alertify.confirm('Incidencias y Observaciones', '¿Durante la fabricacion de la orden de produccion XXXX con cantidad total XXXX, se presento alguna incidencia u observaciòn al desarrollar el proceso?',
+        null, null).set('labels', { ok: 'Si', cancel: 'No' });
 
     /* confirm.set({ transition: 'slide' }); */
 
@@ -111,6 +111,7 @@ function almacenarfirma(id) {
         success: function (response) {
             alertify.set("notifier", "position", "top-right"); alertify.success("Firmado satisfactoriamente");
             $('.pesaje_verificado').prop('disabled', true);
+            /* $('.aprobacion_realizado').prop('disabled', true); */
         }
     });
 }

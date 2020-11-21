@@ -10,7 +10,7 @@ function validardatosresultadosPreparacion() {
     $("#tblControlProcesoPreparacion tr").each(function () {
         let control = ($(this).find("td:eq(2) select option:selected").val());
 
-        if (control != undefined && control != "" && control != 'Seleccionar') {
+        if (control != undefined && control != "" && control != '0') {
             controlProducto.push(control);
         } else {
             let valor = $(this).find("td:eq(2) input").val();
@@ -36,11 +36,11 @@ function validardatosresultadosPreparacion() {
 /* Limpiar campos en el modulo de preparacion y aprobacion*/
 
 $(document).on('click', '.chkcontrol', function () {
- 
+
     if ($(this).is(':checked')) {
+        pasoEjecutado = 0;
         $(`.especificacion`).val('0')
         $(`.especificacionInput`).val('');
     }
 });
-    
-    
+

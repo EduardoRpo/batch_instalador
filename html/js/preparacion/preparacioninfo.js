@@ -2,9 +2,11 @@
 idBatch = location.href.split('/')[4];
 referencia = location.href.split('/')[5];
 let queeProcess = 0;
-let pasos;
+var pasos;
 let paso = 4;
 let tanqueOk = 0;
+let tiempoTotal = 0;
+let pasoEjecutado= 0
 
 /* Cargar tabla de obaservaciones */
 
@@ -81,7 +83,7 @@ $(document).ready(function () {
         type: "POST",
         url: '../../html/php/cargarLineas.php',
         data: { operacion: 1 },
-        
+
         success: function (r) {
             info = JSON.parse(r);
 
@@ -151,12 +153,16 @@ $.ajax({
     $('#pasos_instructivo').html('');
     pasos = data;
     var i = 1;
+
     data.forEach((instructivo, indx) => {
         $('#pasos_instructivo').append(`<a href="javascript:void(0)" onclick="procesoTiempo(event)" 
             class="proceso-instructivo" attr-indx="${indx}" attr-id="${instructivo.id}" id="proceso-instructivo${i}" 
             attr-tiempo="${instructivo.tiempo}">PASO ${indx + 1}: ${instructivo.proceso} </a>  <br/>`);
+        tiempoTotal = tiempoTotal + instructivo.tiempo;
         i++;
     });
+    var pasos = i;
+    localStorage.setItem("pasos", pasos);
     ocultarInstructivo();
 }).fail(err => {
     console.log(err);
@@ -165,7 +171,7 @@ $.ajax({
 /* Cargar el tiempo del proceso */
 
 function procesoTiempo(event) {
-
+    pasoEjecutado = pasoEjecutado + 1;
     validar = controlTanques();
     if (validar == 0)
         return false;

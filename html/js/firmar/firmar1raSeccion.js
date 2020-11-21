@@ -37,7 +37,6 @@ function cargar(btn, idbtn) {
     /* Valida que se ha seleccionado el producto de desinfeccion para el proceso de aprobacion */
 
     if (modulo == 2 || modulo == 3 || modulo == 4) {
-        debugger;
         let seleccion = $('#sel_producto_desinfeccion').val();
         if (seleccion == "Seleccione") {
             alertify.set("notifier", "position", "top-right"); alertify.error("Seleccione el producto para desinfección.");
@@ -47,6 +46,16 @@ function cargar(btn, idbtn) {
 
     if (modulo != 4) {
         validarParametrosControl();
+    }
+
+    /* valida que el instructivo se haya ejecutado */
+    
+    if (modulo == 3) {
+        pasos = localStorage.getItem("pasos");
+        if (pasoEjecutado < pasos) {
+            alertify.set("notifier", "position", "top-right"); alertify.error('Para continuar. Complete todo el instructivo');
+            return false;
+        }
     }
 
     /* Carga el modal para la autenticacion */
@@ -105,6 +114,7 @@ function preparar(datos) {
     }
 
     if (btn_id == 'firma3') {
+        debugger;
         firmar2daSeccion(info);
         /* firmar(info); */
     }
