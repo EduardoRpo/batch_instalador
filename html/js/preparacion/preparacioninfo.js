@@ -6,7 +6,7 @@ var pasos;
 let paso = 4;
 let tanqueOk = 0;
 let tiempoTotal = 0;
-let pasoEjecutado= 0
+let pasoEjecutado = 0
 
 /* Cargar tabla de obaservaciones */
 
@@ -29,6 +29,7 @@ $.ajax({
     $('#in_referencia').val(data.referencia);
     $('#in_nombre_referencia').val(data.nombre_referencia);
     $('#in_linea').val(data.linea);
+
 });
 
 /* Carga preguntas */
@@ -118,7 +119,7 @@ $.ajax({
     $('#espec_olor').html(data.olor);
     $('#espec_apariencia').html(data.apariencia);
     $('#espec_poder_espumoso').html(data.poder_espumoso);
-    //$('#espec_untosidad').html(data.untosidad);
+
     $('#espec_untosidad').html(data.untuosidad);
     $('#espec_ph').html(`${data.limite_inferior_ph} a ${data.limite_superior_ph}`);
 
@@ -155,14 +156,17 @@ $.ajax({
     var i = 1;
 
     data.forEach((instructivo, indx) => {
+
+        instructivo.tiempo = instructivo.tiempo * 60;
+
         $('#pasos_instructivo').append(`<a href="javascript:void(0)" onclick="procesoTiempo(event)" 
             class="proceso-instructivo" attr-indx="${indx}" attr-id="${instructivo.id}" id="proceso-instructivo${i}" 
             attr-tiempo="${instructivo.tiempo}">PASO ${indx + 1}: ${instructivo.proceso} </a>  <br/>`);
         tiempoTotal = tiempoTotal + instructivo.tiempo;
         i++;
     });
-    var pasos = i;
-    localStorage.setItem("pasos", pasos);
+    var ordenpasos = i;
+    localStorage.setItem("ordenpasos", ordenpasos - 1);
     ocultarInstructivo();
 }).fail(err => {
     console.log(err);
@@ -171,6 +175,7 @@ $.ajax({
 /* Cargar el tiempo del proceso */
 
 function procesoTiempo(event) {
+
     pasoEjecutado = pasoEjecutado + 1;
     validar = controlTanques();
     if (validar == 0)
@@ -208,6 +213,7 @@ function validarLinea() {
     }
 }
 
+/* Marque la linea del instructivo al ser ejecutado como exitosa */
 
 function refreshInstructivo() {
     $('#tiempo_instructivo').val(0);
@@ -236,4 +242,11 @@ function mostrarInstructivo() {
 
     $("#proceso-instructivo" + paso).css("color", "#67757c");
     paso = paso + 1;
+}
+
+/* Reiniciar instructivo */
+
+function reiniciarInstructivo() {
+    $('.proceso-instructivo').removeClass('text-sucess');
+    ocultarInstructivo();
 }

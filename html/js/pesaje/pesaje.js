@@ -16,6 +16,7 @@
  */
 $(document).ready(function () {
     $('#tablaPesajes').DataTable({
+        "order": [[ 1, "desc" ]],
         ajax: {
             url: '/api/pesajes',
             dataSrc: ''

@@ -85,6 +85,9 @@ $.ajax({
     $('#in_linea').val(data.linea);
     $('#in_fecha_programacion').val(data.fecha_programacion);
     $('#in_tamano_lote').val(tamano_lote);
+    
+    localStorage.setItem("orden", data.numero_orden);
+    localStorage.setItem("tamano_lote",data.tamano_lote);
 
     if (proceso === 'Envasado') {
         cargarTablaEnvase(batch);

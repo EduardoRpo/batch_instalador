@@ -21,7 +21,7 @@ function validardatosresultadosPreparacion() {
         }
     })
 
-    console.log(controlProducto);
+    //console.log(controlProducto);
 
     /* Validar que toda la informacion esta completa */
 
@@ -39,6 +39,7 @@ $(document).on('click', '.chkcontrol', function () {
 
     if ($(this).is(':checked')) {
         pasoEjecutado = 0;
+        reiniciarInstructivo();
         $(`.especificacion`).val('0')
         $(`.especificacionInput`).val('');
     }

@@ -200,7 +200,7 @@ function actualizarTabla() {
 /* Guardar datos de Crear y Actualizar batch*/
 
 function guardarDatos() {
-    debugger;
+    
     const lote = $('#tamanototallote').val();
     const tamano_lote = formatoGeneral(lote);
 
@@ -209,7 +209,7 @@ function guardarDatos() {
 
     let sumaTanques = $('.sumaTanques').val();
 
-    if (sumaTanques == ''){
+    if (sumaTanques == '' || sumaTanques == 0){
         alertify.set("notifier", "position", "top-right"); alertify.error("Configure la cantidad de Tanques para el Batch.");
         return false;
     }

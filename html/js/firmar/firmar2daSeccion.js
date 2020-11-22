@@ -59,9 +59,12 @@ function firmar2daSeccion(firma) {
 
 function firmarSeccionCierreProceso(firma) {
 
+    let orden = localStorage.getItem("orden");
+    let tamano_lote = localStorage.getItem("tamano_lote");
+
     //confirmación de incidencias 
 
-    var confirm = alertify.confirm('Incidencias y Observaciones', '¿Durante la fabricacion de la orden de produccion XXXX con cantidad total XXXX, se presento alguna incidencia u observaciòn al desarrollar el proceso?',
+    var confirm = alertify.confirm('Incidencias y Observaciones', `¿Durante la fabricación de la orden de producción `+ orden +` con cantidad total de `+tamano_lote+` kg, se presentó alguna incidencia u observación al desarrollar el proceso?`,
         null, null).set('labels', { ok: 'Si', cancel: 'No' });
 
     /* confirm.set({ transition: 'slide' }); */

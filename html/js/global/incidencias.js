@@ -4,7 +4,7 @@ let infofirma;
 /* Cargar formulario incidencias */
 
 function cargarObsIncidencias(firma) {
-    debugger;
+
     firma_realizado = firma[0].id;
     infofirma = firma;
     $('#modalObservaciones').modal('show');
