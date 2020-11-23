@@ -1,5 +1,5 @@
 $("#select-Linea").change(function () {
-    cargarMaquinas();
+    cargarEquipos();
 })
 
 let unidad = $('txtUnidadesProducidas').val();

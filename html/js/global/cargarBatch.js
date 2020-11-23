@@ -134,7 +134,8 @@ function cargarControlProceso() {
 /* Cargar Tanques */
 
 function cargarfirma2daSeccion() {
-
+    if (modulo == 3)
+        cargarLinea();
     /* obtener los tanques chequeados */
 
     $.ajax({

@@ -77,31 +77,6 @@ $.ajax({
     });
 }); */
 
-/* Cargar lineas */
-
-$(document).ready(function () {
-    $.ajax({
-        type: "POST",
-        url: '../../html/php/cargarLineas.php',
-        data: { operacion: 1 },
-
-        success: function (r) {
-            info = JSON.parse(r);
-
-            let $select = $('#select-Linea');
-            $select.empty();
-
-            $select.append('<option disabled selected>' + "Seleccionar" + '</option>');
-
-            $.each(info.data, function (i, value) {
-                $select.append('<option value ="' + value.id + '">' + value.linea + '</option>');
-            });
-        }
-    });
-});
-
-
-
 /* Cargar maquinas de acuerdo con la linea */
 
 $("#select-Linea").change(function () {

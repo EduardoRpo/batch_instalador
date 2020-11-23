@@ -1,4 +1,5 @@
 $('#tablaEnvasado').dataTable({
+    "order": [[ 1, "desc" ]],
     ajax: {
         url: '/api/batch',
         dataSrc: ''

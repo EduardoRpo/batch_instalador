@@ -903,9 +903,7 @@ include('modal/m_muestras.php');
                         <label for="recipient-name" class="col-form-label">Linea</label>
                         <select class="selectpicker form-control" id="select-Linea">
                           <option selected hidden>Seleccionar Linea</option>
-                          <option>LIQUIDOS</option>
-                          <option>SOLIDOS</option>
-                          <option>SEMISOLIDOS</option>
+
                         </select>
 
                         <label for="recipient-name" class="col-form-label">Digite el lote requerido</label>
@@ -1289,8 +1287,8 @@ include('modal/m_muestras.php');
             <script src="../../html/js/global/equipos.js"></script>
             <script src="../../html/js/global/condicionesdelMedio.js"></script>
             <script src="../../html/js/global/cargarBatch.js"></script>
-            <!-- <script src="../../html/js/pesaje/pesajeinfo.js"></script> -->
-            <script src="../../html/js/firmar/firmar.js"></script>
+            <script src="../../html/js/firmar/firmar1raSeccion.js"></script>
+            <script src="../../html/js/firmar/firmar2daSeccion.js"></script>
             <script src="../../html/js/envasado/envasadoinfo.js"></script>
             <script src="../../html/js/global/incidencias.js"></script>
 

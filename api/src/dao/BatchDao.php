@@ -47,8 +47,10 @@
     public function findById($id)
     {
       $connection = Connection::getInstance()->getConnection();
-      $stmt = $connection->prepare("SELECT p.referencia, p.nombre_referencia, batch.numero_orden, batch.tamano_lote, batch.numero_lote, linea.nombre as linea, batch.fecha_programacion 
-                                    FROM producto p INNER JOIN batch ON batch.id_producto = p.referencia INNER JOIN linea ON linea.id = p.id_linea 
+      $stmt = $connection->prepare("SELECT p.referencia, p.nombre_referencia, batch.numero_orden, batch.tamano_lote, batch.numero_lote, linea.nombre as linea, batch.fecha_programacion, pc.nombre as presentacion
+                                    FROM producto p
+                                    INNER JOIN batch ON batch.id_producto = p.referencia INNER JOIN linea ON linea.id = p.id_linea
+                                    INNER JOIN presentacion_comercial pc ON pc.id=p.id_presentacion_comercial 
                                     WHERE id_batch =:idBatch");
       
       $stmt->execute(array('idBatch' => $id));

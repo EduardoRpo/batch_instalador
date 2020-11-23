@@ -39,7 +39,8 @@ $(document).on('click', '.chkcontrol', function () {
 
     if ($(this).is(':checked')) {
         pasoEjecutado = 0;
-        reiniciarInstructivo();
+        if (modulo == 3)
+            reiniciarInstructivo();
         $(`.especificacion`).val('0')
         $(`.especificacionInput`).val('');
     }

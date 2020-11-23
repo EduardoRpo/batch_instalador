@@ -75,6 +75,7 @@ $.ajax({
     url: `../../api/batch/${idBatch}`,
     type: 'GET'
 }).done((data, status, xhr) => {
+    
     batch = data;
     const tamano_lote = formatoCO(data.tamano_lote);
 
@@ -88,10 +89,10 @@ $.ajax({
     
     localStorage.setItem("orden", data.numero_orden);
     localStorage.setItem("tamano_lote",data.tamano_lote);
-
-    if (proceso === 'Envasado') {
+    
+    if (proceso == 5) {
         cargarTablaEnvase(batch);
-        calcularPeso(batch);
+        identificarDensidad(batch);
         calcularMuestras(batch);
     }
 });
@@ -127,3 +128,26 @@ const formatoGeneral = (number) => {
     return numero1;
 
 }
+
+/* Cargar lineas */
+
+$(document).ready(function () {
+    $.ajax({
+        type: "POST",
+        url: '../../html/php/cargarLineas.php',
+        data: { operacion: 1 },
+
+        success: function (r) {
+            info = JSON.parse(r);
+
+            let $select = $('#select-Linea');
+            $select.empty();
+
+            $select.append('<option disabled selected>' + "Seleccionar" + '</option>');
+
+            $.each(info.data, function (i, value) {
+                $select.append('<option value ="' + value.id + '">' + value.linea + '</option>');
+            });
+        }
+    });
+});

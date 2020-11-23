@@ -54,13 +54,38 @@ function ocultarEnvasado() {
 /* Cargar linea y maquinas de acuerdo con la seleccion */
 
 $("#select-Linea").change(function () {
-  cargarMaquinas();
+  cargarEquipos();
 })
 
 /* Calcular peso minimo, maximo y promedio */
 
-function calcularPeso(batch) {
-  var peso_min = batch.lote_presentacion * batch.densidad; // DENSIDAD DEBE TRAERSE DE LA GUARDADO EN APROBACION POR CALIDAD
+/* Identificar densidad */
+
+function identificarDensidad(batch) {
+  let densidadAprobada = 0;
+  $.ajax({
+    type: "POST",
+    url: "../../html/php/controlProceso.php",
+    data: { modulo: 4, idBatch },
+
+    success: function (response) {
+
+      let espec = JSON.parse(response);
+
+      for (let i = 0; i < espec.data.length; i++) {
+        densidadAprobada = densidadAprobada + espec.data[i].densidad;
+      }
+      densidadAprobada = densidadAprobada / espec.data.length;
+      calcularPeso(densidadAprobada);
+    }
+  });
+}
+
+function calcularPeso(densidadAprobada) {
+
+  /* densidadAprobada = identificarDensidad(); */
+
+  var peso_min = batch.presentacion * densidadAprobada; // DENSIDAD DEBE TRAERSE DE LA GUARDADO EN APROBACION POR CALIDAD
   var peso_minimo = formatoCO(peso_min);
 
   var peso_max = peso_min * (1 + 0.03);
@@ -73,6 +98,7 @@ function calcularPeso(batch) {
   $('#Maximo').val(peso_maximo);
   $('#Medio').val(promedio);
 }
+
 
 
 /* Cargar el numero de muestras de acuerdo con las unidades a producir*/
@@ -220,7 +246,7 @@ function devolucionMaterialTotal(valor, id) {
 function validarLote(data) {
   let lote = $('#in_numero_lote').val();
 
-  if(lote != data){
+  if (lote != data) {
     alertify.set("notifier", "position", "top-right"); alertify.error("Lote digitado no corresponde al procesado");
     return false;
   }
