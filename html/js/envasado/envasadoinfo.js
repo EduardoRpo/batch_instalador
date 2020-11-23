@@ -197,7 +197,7 @@ function cargarTablaEnvase(batch) {
     $('#otros').html(info.data[0].id_otros);
     $('#descripcion_otros').html(info.data[0].otros);
 
-    for (let i = 1; i < 7; i++) {
+    for (let i = 1; i < 11; i++) {
       $('#unidades' + i).html(unidades);
     }
 
@@ -229,12 +229,16 @@ function devolucionMaterialEnvasada(valor) {
   if (isNaN(unidades_envasadas)) {
     unidades_envasadas = 0;
   }
-  $('#txtEnvasada2').html(unidades_envasadas);
-  $('#txtEnvasada3').html(unidades_envasadas);
+
+  for (let i = 1; i < 11; i++) {
+    $(`#txtEnvasada${i}`).html(unidades_envasadas);
+
+  }
+
 }
 
 function devolucionMaterialTotal(valor, id) {
-
+debugger;
   //let recibida= parseInt(formatoGeneral($(`#unidades${id}`).html()));
   let envasada = parseInt($(`#txtEnvasada${id}`).val());
 
@@ -244,7 +248,6 @@ function devolucionMaterialTotal(valor, id) {
   }
 
   let averias = parseInt($(`#averias${id}`).val());
-
   let total = envasada + averias + parseInt(valor);
 
   total = formatoCO(parseInt(total));

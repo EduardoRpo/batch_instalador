@@ -230,27 +230,27 @@ include('modal/m_muestras.php');
                               <tr>
                                 <td id="tapa" class="centrado"></td>
                                 <td id="descripcion_tapa"></td>
-                                <td id="unidades1"></td>
+                                <td id="unidades1" class="centrado"></td>
                               </tr>
                               <tr>
                                 <td id="envase" class="centrado"></td>
                                 <td id="descripcion_envase"></td>
-                                <td id="unidades2"></td>
+                                <td id="unidades2" class="centrado"></td>
                               </tr>
                               <tr>
                                 <td id="etiqueta" class="centrado"></td>
                                 <td id="descripcion_etiqueta"></td>
-                                <td id="unidades3"></td>
+                                <td id="unidades3" class="centrado"></td>
                               </tr>
                               <tr>
                                 <td id="empaque" class="centrado"></td>
                                 <td id="descripcion_empaque"></td>
-                                <td id="unidades4"></td>
+                                <td id="unidades4" class="centrado"></td>
                               </tr>
                               <tr>
                                 <td id="otros" class="centrado"></td>
                                 <td id="descripcion_otros"></td>
-                                <td id="unidades5"></td>
+                                <td id="unidades5" class="centrado"></td>
                               </tr>
                           </table>
                           </form>
@@ -390,28 +390,28 @@ include('modal/m_muestras.php');
                                     <td id="etiqueta1"></td>
                                     <td id="descripcion_etiqueta1"></td>
                                     <td id="unidades8"></td>
-                                    <td id="txtEnvasada2" class="centrado"></td>
-                                    <td><input type="number" id="averias2" class="form-control centrado" style="width: 110px;"></td>
-                                    <td><input type="number" id="sobrante2" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 2);"></td>
-                                    <td id="totalDevolucion2" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
+                                    <td id="txtEnvasada3" class="centrado"></td>
+                                    <td><input type="number" id="averias3" class="form-control centrado" style="width: 110px;"></td>
+                                    <td><input type="number" id="sobrante3" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 3);"></td>
+                                    <td id="totalDevolucion3" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
                                   </tr>
                                   <tr>
                                     <td id="empaque1"></td>
                                     <td id="descripcion_empaque1"></td>
                                     <td id="unidades9"></td>
-                                    <td id="txtEnvasada2" class="centrado"></td>
-                                    <td><input type="number" id="averias2" class="form-control centrado" style="width: 110px;"></td>
-                                    <td><input type="number" id="sobrante2" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 2);"></td>
-                                    <td id="totalDevolucion2" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
+                                    <td id="txtEnvasada4" class="centrado"></td>
+                                    <td><input type="number" id="averias4" class="form-control centrado" style="width: 110px;"></td>
+                                    <td><input type="number" id="sobrante4" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 4);"></td>
+                                    <td id="totalDevolucion4" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
                                   </tr>
                                   <tr>
                                     <td id="otros1"></td>
                                     <td id="descripcion_otros1"></td>
                                     <td id="unidades10"></td>
-                                    <td id="txtEnvasada3" class="centrado"></td>
-                                    <td><input type="number" id="averias3" class="form-control centrado" style="width: 110px;"></td>
-                                    <td><input type="number" id="sobrante3" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 3);"></td>
-                                    <td id="totalDevolucion3" class="centrado"></td> <!-- <input type="number" id="totalDevolucion3" class="form-control centrado" readonly> -->
+                                    <td id="txtEnvasada5" class="centrado"></td>
+                                    <td><input type="number" id="averias5" class="form-control centrado" style="width: 110px;"></td>
+                                    <td><input type="number" id="sobrante5" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 5);"></td>
+                                    <td id="totalDevolucion5" class="centrado"></td> <!-- <input type="number" id="totalDevolucion3" class="form-control centrado" readonly> -->
                                   </tr>
                               </table>
                             </div>
