@@ -62,6 +62,7 @@ $("#select-Linea").change(function () {
 /* Identificar densidad */
 
 function identificarDensidad(batch) {
+
   let densidadAprobada = 0;
   $.ajax({
     type: "POST",
@@ -177,7 +178,7 @@ function cargarTablaEnvase(batch) {
     data: { referencia: batch.referencia },
 
   }).done((data, status, xhr) => {
-    debugger;
+
     var info = JSON.parse(data);
     unidades = formatoCO(batch.unidad_lote);
 
