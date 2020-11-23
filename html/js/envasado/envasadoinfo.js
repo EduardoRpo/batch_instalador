@@ -241,12 +241,13 @@ function devolucionMaterialEnvasada(valor) {
   if (isNaN(unidades_envasadas)) {
     unidades_envasadas = 0;
   }
-
+  debugger;
   for (let i = 1; i < 11; i++) {
-    $(`#txtEnvasada${i}`).html(unidades_envasadas);
-
+    if (i == 4)
+      $(`#txtEnvasada${i}`).html(empaqueEnvasado);
+    else
+      $(`#txtEnvasada${i}`).html(unidades_envasadas);
   }
-
 }
 
 function devolucionMaterialTotal(valor, id) {
