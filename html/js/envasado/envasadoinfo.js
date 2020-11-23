@@ -100,7 +100,17 @@ function calcularPeso(densidadAprobada) {
   $('#Medio').val(promedio);
 }
 
+/* Validar que el lote digitado sea el correcto */
 
+function validarLote(data) {
+  let lote = $('#in_numero_lote').val();
+
+  if (lote != data) {
+    alertify.set("notifier", "position", "top-right"); alertify.error("Lote digitado no corresponde al procesado");
+    return false;
+  }
+
+}
 
 /* Cargar el numero de muestras de acuerdo con las unidades a producir*/
 
@@ -180,6 +190,7 @@ function cargarTablaEnvase(batch) {
   }).done((data, status, xhr) => {
 
     var info = JSON.parse(data);
+    empaqueEnvasado = Math.round(info.data[0].id_empaque / batch.unidad_lote);
     unidades = formatoCO(batch.unidad_lote);
 
     $('#tapa').html(info.data[0].id_tapa);
@@ -198,7 +209,10 @@ function cargarTablaEnvase(batch) {
     $('#descripcion_otros').html(info.data[0].otros);
 
     for (let i = 1; i < 11; i++) {
-      $('#unidades' + i).html(unidades);
+      if (i == 4 || i == 9)
+        $('#unidades' + i).html(empaqueEnvasado);
+      else
+        $('#unidades' + i).html(unidades);
     }
 
     $('#tapa1').html(info.data[0].id_tapa);
@@ -215,8 +229,6 @@ function cargarTablaEnvase(batch) {
 
     $('#otros1').html(info.data[0].id_otros);
     $('#descripcion_otros1').html(info.data[0].otros);
-
-
   });
 }
 
@@ -238,7 +250,7 @@ function devolucionMaterialEnvasada(valor) {
 }
 
 function devolucionMaterialTotal(valor, id) {
-debugger;
+  debugger;
   //let recibida= parseInt(formatoGeneral($(`#unidades${id}`).html()));
   let envasada = parseInt($(`#txtEnvasada${id}`).val());
 
@@ -257,15 +269,5 @@ debugger;
 
   //$(`#totalDevolucion${id}`).val(total);
   $(`#totalDevolucion${id}`).html(total);
-
-}
-
-function validarLote(data) {
-  let lote = $('#in_numero_lote').val();
-
-  if (lote != data) {
-    alertify.set("notifier", "position", "top-right"); alertify.error("Lote digitado no corresponde al procesado");
-    return false;
-  }
 
 }

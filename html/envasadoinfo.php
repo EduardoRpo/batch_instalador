@@ -371,7 +371,7 @@ include('modal/m_muestras.php');
                                   <tr>
                                     <td id="tapa1"></td>
                                     <td id="descripcion_tapa1"></td>
-                                    <td id="unidades6"></td>
+                                    <td id="unidades6" class="centrado"></td>
                                     <td><input type="number" id="txtEnvasada1" min="1" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialEnvasada(this.value);"></td>
                                     <td><input type="number" id="averias1" class="form-control centrado" style="width: 110px;"></td>
                                     <td><input type="number" id="sobrante1" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 1);"></td>
@@ -380,7 +380,7 @@ include('modal/m_muestras.php');
                                   <tr>
                                     <td id="envase1"></td>
                                     <td id="descripcion_envase1"></td>
-                                    <td id="unidades7"></td>
+                                    <td id="unidades7" class="centrado"></td>
                                     <td id="txtEnvasada2" class="centrado"></td>
                                     <td><input type="number" id="averias2" class="form-control centrado" style="width: 110px;"></td>
                                     <td><input type="number" id="sobrante2" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 2);"></td>
@@ -389,7 +389,7 @@ include('modal/m_muestras.php');
                                   <tr>
                                     <td id="etiqueta1"></td>
                                     <td id="descripcion_etiqueta1"></td>
-                                    <td id="unidades8"></td>
+                                    <td id="unidades8" class="centrado"></td>
                                     <td id="txtEnvasada3" class="centrado"></td>
                                     <td><input type="number" id="averias3" class="form-control centrado" style="width: 110px;"></td>
                                     <td><input type="number" id="sobrante3" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 3);"></td>
@@ -398,7 +398,7 @@ include('modal/m_muestras.php');
                                   <tr>
                                     <td id="empaque1"></td>
                                     <td id="descripcion_empaque1"></td>
-                                    <td id="unidades9"></td>
+                                    <td id="unidades9" class="centrado"></td>
                                     <td id="txtEnvasada4" class="centrado"></td>
                                     <td><input type="number" id="averias4" class="form-control centrado" style="width: 110px;"></td>
                                     <td><input type="number" id="sobrante4" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 4);"></td>
@@ -407,7 +407,7 @@ include('modal/m_muestras.php');
                                   <tr>
                                     <td id="otros1"></td>
                                     <td id="descripcion_otros1"></td>
-                                    <td id="unidades10"></td>
+                                    <td id="unidades10" class="centrado"></td>
                                     <td id="txtEnvasada5" class="centrado"></td>
                                     <td><input type="number" id="averias5" class="form-control centrado" style="width: 110px;"></td>
                                     <td><input type="number" id="sobrante5" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 5);"></td>
