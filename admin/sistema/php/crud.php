@@ -105,3 +105,32 @@ function ejecutarSelect1($query)
 
     echo json_encode($data, JSON_UNESCAPED_UNICODE);
 }
+
+function transaccion($conn, $query1, $query2)
+{
+    try{
+        $conn->beginTransaction();
+        /* $result = $conn->query("SELECT * FROM productos2temp"); */
+        $result = $conn->query($query1);
+        $arreglo;
+  /*       $conn->exec($query2); */
+  while ($data = $result->fetch(PDO::FETCH_ASSOC)) {
+    $arreglo["data"][] = $data;
+}
+
+$resultt = $conn->query($query2);
+/*       $conn->exec($query2); */
+$i = 0;
+while ($data = $resultt->fetch(PDO::FETCH_ASSOC)) {
+  $arreglo["data"][$i] = array_merge($arreglo["data"][$i], $data);
+  $i++;
+}
+
+        $conn->commit();
+        echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+    }
+  catch(Exception $ex) {
+    $conn->rollBack();
+    echo "Error :: ". $ex->getMessage();
+  }
+}
