@@ -174,34 +174,47 @@ function cargarTablaEnvase(batch) {
   $.ajax({
     url: '../../html/php/envase.php',
     type: 'POST',
-    data: { id: batch.referencia },
+    data: { referencia: batch.referencia },
 
   }).done((data, status, xhr) => {
-
+    debugger;
     var info = JSON.parse(data);
     unidades = formatoCO(batch.unidad_lote);
 
-    $('#tapa').html(info[0].referencia);
-    $('#descripcion_tapa').html(info[0].descripcion);
+    $('#tapa').html(info.data[0].id_tapa);
+    $('#descripcion_tapa').html(info.data[0].tapa);
 
-    $('#envase').html(info[1].referencia);
-    $('#descripcion_envase').html(info[1].descripcion);
+    $('#envase').html(info.data[0].id_envase);
+    $('#descripcion_envase').html(info.data[0].envase);
 
-    $('#otro').html(info[2].referencia);
-    $('#descripcion_otro').html(info[2].descripcion);
+    $('#etiqueta').html(info.data[0].id_etiqueta);
+    $('#descripcion_etiqueta').html(info.data[0].etiqueta);
 
-    $('#tapa1').html(info[0].referencia);
-    $('#descripcion_tapa1').html(info[0].descripcion);
+    $('#empaque').html(info.data[0].id_empaque);
+    $('#descripcion_empaque').html(info.data[0].empaque);
 
-    $('#envase1').html(info[1].referencia);
-    $('#descripcion_envase1').html(info[1].descripcion);
-
-    $('#otro1').html(info[2].referencia);
-    $('#descripcion_otro1').html(info[2].descripcion);
+    $('#otros').html(info.data[0].id_otros);
+    $('#descripcion_otros').html(info.data[0].otros);
 
     for (let i = 1; i < 7; i++) {
       $('#unidades' + i).html(unidades);
     }
+
+    $('#tapa1').html(info.data[0].id_tapa);
+    $('#descripcion_tapa1').html(info.data[0].tapa);
+
+    $('#envase1').html(info.data[0].id_envase);
+    $('#descripcion_envase1').html(info.data[0].envase);
+
+    $('#etiqueta1').html(info.data[0].id_etiqueta);
+    $('#descripcion_etiqueta1').html(info.data[0].etiqueta);
+
+    $('#empaque1').html(info.data[0].id_empaque);
+    $('#descripcion_empaque1').html(info.data[0].empaque);
+
+    $('#otros1').html(info.data[0].id_otros);
+    $('#descripcion_otros1').html(info.data[0].otros);
+
 
   });
 }

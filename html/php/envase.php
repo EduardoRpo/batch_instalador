@@ -1,43 +1,29 @@
 <?php
-  require_once('../../conexion2.php');
 
-  function utf8ize($d) {
-    if (is_array($d)) 
-        foreach ($d as $k => $v) 
-            $d[$k] = utf8ize($v);
+if (!empty($_POST)) {
 
-     else if(is_object($d))
-        foreach ($d as $k => $v) 
-            $d->$k = utf8ize($v);
+    require_once('../../conexion.php');
 
-     else 
-        return utf8_encode($d);
+    $referencia = $_POST['referencia'];
 
-    return $d;
+    $sql = "SELECT envase.id as id_envase ,envase.nombre as envase, tapa.id as id_tapa,tapa.nombre as tapa, etiqueta.id as id_etiqueta, etiqueta.nombre as etiqueta, empaque.id as id_empaque, empaque.nombre as empaque, otros.id as id_otros ,otros.nombre as otros FROM producto p 
+            INNER JOIN envase INNER JOIN TAPA INNER JOIN etiqueta INNER JOIN empaque INNER JOIN otros
+            ON p.id_envase = envase.id AND tapa.id = p.id_tapa AND etiqueta.id=p.id_etiqueta AND empaque.id=p.id_empaque AND otros.id = p.id_otros 
+            WHERE p.referencia = :referencia";
+
+    $query = $conn->prepare($sql);
+    $result = $query->execute([
+        'referencia' => $referencia,
+    ]);
+
+    //Almacena la data en array
+    while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
+        $arreglo["data"][] = $data;
+    }
+    if (empty($arreglo)) {
+        echo '3';
+        exit();
     }
 
-// obtener firma y huella del usuario
-
-    $id_batch = $_POST['id'];
-    
-    $query_envase = $conn -> query("SELECT * FROM envase WHERE id_producto='$id_batch'");
-    $result = mysqli_num_rows($query_envase);
-      
-    if($result > 0){
-        while($envase = mysqli_fetch_assoc($query_envase)){
-            $empaque[] = $envase;
-        }
-        
-        //$info = mysqli_fetch_assoc($query_envase);
-        echo json_encode($empaque, JSON_UNESCAPED_UNICODE);
-      
-    }
-    else{
-      echo json_encode('');
-    }
-    
-    mysqli_free_result($query_envase);
-    mysqli_close($conn);
-
-  
-?>
+    echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+}
