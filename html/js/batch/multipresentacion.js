@@ -5,7 +5,16 @@ $('#tablaBatch tbody').on('click', 'tr', function () {
     data = tabla.row(this).data();
 });
 
+/* Almacenar referencias para los procesos de clonado y multipresentacion */
+
+$(document).on('click', '.link-select', function (e) {
+    var referencia = $(this).parent().parent().children().eq(3).text();
+    localStorage.setItem('referencia', referencia);
+});
+
+
 /* Validar si un producto puede tener multipresentacion */
+
 
 function multipresentacion() {
 
@@ -20,6 +29,11 @@ function multipresentacion() {
                 var info = JSON.parse(r);
 
                 if (info != '') {
+                    for (let i = 1; i < 6; i++) {
+                        $(`#txtcantidadMulti${i}`).val('');
+                        $(`#txttamanoloteMulti${i}`).val('');
+                    }
+                    $(`#sumaMulti`).val('');
                     $('#Modal_Multipresentacion').modal('show');
                     OcultarMultipresentacion();
                     cargarMulti();
@@ -57,7 +71,7 @@ function OcultarMultipresentacion() {
 /* Adicionar referencia para crear multipresentacion en un batch*/
 
 $("#adicionarMultipresentacion").on('click', function () {
-    
+
     contarMultipresentacion();
     const cantidad = $('#txtcantidadMulti' + cont).val();
 
@@ -88,7 +102,7 @@ function contarMultipresentacion() {
 /* Insertar Multipresentacion Nueva */
 
 function insertarMulti() {
-    
+
     addMulti = cont + 1;
 
     $('#cmbMultiReferencia' + addMulti).show();
@@ -101,7 +115,7 @@ function insertarTotales() {
 
     $('.labelcenter').show();
     $('#loteTotal').show().val(data.tamano_lote);
-    
+
     $('#sumaMulti').show();
 }
 
@@ -123,20 +137,25 @@ function bloquearCeldasMulti() {
 
 function cargarMulti() {
 
+    referencia = localStorage.getItem('referencia');
+
     $.ajax({
         type: "POST",
         'url': 'php/multi.php',
-        'data': { "operacion": "1", id: data.id_batch },
+        /* 'data': { "operacion": "1", id: data.id_batch }, */
+        'data': { "operacion": "1", id: referencia },
         success: function (r) {
+            debugger;
             var info = JSON.parse(r);
             for (i = 1; i < 6; i++) {
 
                 let $select = $('#cmbMultiReferencia' + i);
                 $select.empty();
-                $select.append('<option disabled selected>' + "MULTIPRESENTACIÓN" + '</option>');
+                $select.append('<option disabled selected>' + "Multipresentación" + '</option>');
 
                 $.each(info, function (i, value) {
-                    $select.append(`<option value="${value.nombre_referencia}">${value.nombre_referencia}</option>`);
+                    /* $select.append(`<option value="${value.nombre_referencia}">${value.nombre_referencia}</option>`); */
+                    $select.append(`<option value="${value.referencia}">${value.nombre_referencia}</option>`);
 
                 })
             }
@@ -147,30 +166,33 @@ function cargarMulti() {
 /* cargar datos de acuerdo con la seleccion de multipresentacion */
 
 function cargarReferenciaM(id) {
+    debugger;
+    /* const opcion = $("#cmbMultiReferencia" + id + " option:selected").text(); */
+    const opcion = $("#cmbMultiReferencia" + id).val();
 
-    const opcion = $("#cmbMultiReferencia" + id + " option:selected").text();
-
-    $.ajax({
+    /* $.ajax({
         type: "POST",
         'url': 'php/multi.php',
         'data': { "operacion": "2", "nombre_referencia": opcion },
 
         success: function (r) {
+            var info = JSON.parse(r); */
+    $.ajax({
+        type: "POST",
+        'url': 'php/multi.php',
+        /* 'data': { "operacion": "3", "id": info[0].referencia }, */
+        'data': { "operacion": "3", "id": opcion },
+
+        success: function (r) {
+            debugger;
             var info = JSON.parse(r);
-            $.ajax({
-                type: "POST",
-                'url': 'php/multi.php',
-                'data': { "operacion": "3", "id": info[0].referencia },
-
-                success: function (r) {
-                    var info = JSON.parse(r);
-                    $('#txtpresentacionMulti' + id).val(info[0].presentacion);
-                    $('#txtdensidadMulti' + id).val(info[0].densidad);
-                }
-            });
-
+            $('#txtpresentacionMulti' + id).val(info[0].presentacion);
+            $('#txtdensidadMulti' + id).val(info[0].densidad);
         }
     });
+
+    /*  } */
+    /* }); */
     calcularMulti(id);
 }
 
@@ -188,7 +210,7 @@ function calcularMulti(id) {
 /* calcular Tamaño del Lote */
 
 function CalculoloteMulti(id, cantidad) {
-
+    debugger;
     const opcion = $('#cmbMultiReferencia' + id).val();
     const densidad = $('#txtdensidadMulti' + id).val();
     const presentacion = $('#txtpresentacionMulti' + id).val();
@@ -335,7 +357,7 @@ $(document).on('click', '.link-editarMulti', function (e) {
 
             for (let k = 1; k <= info.length; k++) {
                 insertarMulti();
-              
+
                 $(`#loteTotal`).val(tamano);
                 $(`#cmbMultiReferencia${k}`).val(info[cont].nombre_referencia);
                 $('#txtcantidadMulti' + k).val(info[cont].cantidad);

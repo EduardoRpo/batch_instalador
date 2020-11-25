@@ -12,6 +12,7 @@ $(document).ready(function () {
     'data': { id: idBatch },
 
     success: function (data) {
+      debugger;
       var info = JSON.parse(data);
       let j = 1;
       for (let i = 0; i < info.length; i++) {

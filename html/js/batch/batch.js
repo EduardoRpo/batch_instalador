@@ -34,7 +34,7 @@ function crearTablaBatch(columna_busqueda = '', minDateFilter = '', maxDateFilte
         },
 
         columns: [
-            { "defaultContent": "<input type='radio' id='express' name='optradio'>" },
+            { "defaultContent": "<input type='radio' id='express' name='optradio' class='link-select'>" },
             { "data": "id_batch" },
             { "data": "numero_orden", className: "uniqueClassName" },
             { "data": "referencia", className: "uniqueClassName" },

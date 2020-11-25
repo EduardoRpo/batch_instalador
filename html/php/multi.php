@@ -24,9 +24,11 @@
     case 1: //Cargar Select Multipresentacion
         $id_batch = $_POST['id'];
     
-        $query_nref = mysqli_query($conn, "SELECT @curRow := @curRow + 1 AS id, nombre_referencia FROM producto JOIN (SELECT @curRow := 0) r WHERE multi = 
+        /* $query_nref = mysqli_query($conn, "SELECT @curRow := @curRow + 1 AS id, nombre_referencia FROM producto JOIN (SELECT @curRow := 0) r WHERE multi = 
                                           (SELECT multi FROM producto WHERE producto.referencia = 
-                                          (SELECT batch.id_producto FROM batch WHERE batch.id_batch = $id_batch)) AND multi>0");
+                                          (SELECT batch.id_producto FROM batch WHERE batch.id_batch = $id_batch)) AND multi>0"); */
+        $query_nref = mysqli_query($conn, "SELECT p.referencia, p.nombre_referencia FROM producto p WHERE multi>0");
+                                          
       
         $result = mysqli_num_rows($query_nref);
         
@@ -76,10 +78,10 @@
     case 3: //recargar datos de acuerdo con seleccion de referencia
         $id_referencia = $_POST['id'];
         
-        $query_producto = mysqli_query($conn, "SELECT p.referencia, p.nombre_referencia as nombre, m.nombre as marca, ns.notificacion_sanitaria, pp.nombre as propietario, np.nombre_producto as producto, pc.presentacion, l.nombre_linea as linea, l.densidad 
-                                               FROM producto p INNER JOIN marca m INNER JOIN notificacion_sanitaria ns INNER JOIN propietario pp INNER JOIN nombre_producto np INNER JOIN presentacion_comercial pc INNER JOIN linea l 
-                                               ON p.id_marca = m.id AND p.id_notificacion_sanitaria = ns.id AND p.id_propietario=pp.id AND p.id_nombre_producto= np.id AND p.id_presentacion_comercial=pc.id AND p.id_linea=l.id 
-                                               WHERE p.referencia = $id_referencia");
+        $query_producto = mysqli_query($conn, "SELECT p.referencia, p.nombre_referencia as nombre, m.nombre as marca, ns.nombre as notificacion, pp.nombre as propietario, np.nombre as producto, pc.nombre as presentacion, l.nombre as linea, l.densidad 
+                                              FROM producto p INNER JOIN marca m INNER JOIN notificacion_sanitaria ns INNER JOIN propietario pp INNER JOIN nombre_producto np INNER JOIN presentacion_comercial pc INNER JOIN linea l 
+                                              ON p.id_marca = m.id AND p.id_notificacion_sanitaria = ns.id AND p.id_propietario=pp.id AND p.id_nombre_producto= np.id AND p.id_presentacion_comercial=pc.id AND p.id_linea=l.id 
+                                              WHERE p.referencia = $id_referencia");
                                                
         $result = mysqli_num_rows($query_producto);
     
@@ -169,4 +171,3 @@
 
     break;
 }
-?>
