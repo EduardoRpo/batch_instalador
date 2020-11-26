@@ -200,7 +200,7 @@ function actualizarTabla() {
 /* Guardar datos de Crear y Actualizar batch*/
 
 function guardarDatos() {
-    
+    //validar consecutivo del lote en la base de datos (trigger)
     const lote = $('#tamanototallote').val();
     const tamano_lote = formatoGeneral(lote);
 

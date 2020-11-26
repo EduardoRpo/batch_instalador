@@ -41,9 +41,10 @@ function cargarTanques() {
         'method': 'POST',
         'url': '../../html/php/tanques.php',
         'data': { id: idBatch },
-
+        
         success: function (data) {
             var info = JSON.parse(data);
+            
             if (info == '') { return false; }
 
             var j = 1;

@@ -1,6 +1,6 @@
 /* Cargar Multipresentacion */
 
-$(document).ready(function () {
+function busqueda_multi(batch) {
   //let cantidad = 0;
   ocultarEnvasado();
   /* ocultarfilasTanques(5); */
@@ -12,37 +12,37 @@ $(document).ready(function () {
     'data': { id: idBatch },
 
     success: function (data) {
-      debugger;
       var info = JSON.parse(data);
+      
       let j = 1;
-      for (let i = 0; i < info.length; i++) {
-        $(`#tanque${j}`).html(formatoCO(info[i].presentacion));
-        $(`#cantidad${j}`).html(formatoCO(info[i].cantidad));
-        $(`#total${j}`).html(formatoCO(info[i].cantidad));
+      if (info !== "") {
+        //validar las presentacion para una sola referencia y validar en el servidor que se esta repitiendo las presentaciones
 
-        $(`#fila${j}`).attr("hidden", false);
-        $(`#envasado${j}`).attr("hidden", false);
-        $(`#envasadoMulti${j}`).html('ENVASADO PRESENTACIÓN: ' + info[i].presentacion);
-        j++;
+        for (let i = 0; i < info.length; i++) {
+          $(`#tanque${j}`).html(formatoCO(info[i].presentacion));
+          $(`#cantidad${j}`).html(formatoCO(info[i].cantidad));
+          $(`#total${j}`).html(formatoCO(info[i].total));
 
-        //cantidad = cantidad + parseInt(info[i].cantidad);
+          $(`#fila${j}`).attr("hidden", false);
+          $(`#envasado${j}`).attr("hidden", false);
+          $(`#envasadoMulti${j}`).html('ENVASADO PRESENTACIÓN: ' + info[i].presentacion);
+          j++;
+        }
+      } else {
+        
+        //batch = localStorage.getItem('batch');
+        
+        $(`#tanque${j}`).html(formatoCO(batch.presentacion));
+        $(`#cantidad${j}`).html(formatoCO(batch.unidad_lote));
+        $(`#total${j}`).html(formatoCO(batch.tamano_lote));
       }
-      //ocultarfilasTanques(info.length);
-
-      /* if (proceso === "Pesaje" || proceso === "Preparación") {
-        controlProceso(cantidad);
-      } else if (proceso === "Aprobación") {
-        cargaTanquesControl(cantidad);
-      } */
-
-
     },
     error: function (r) {
       alertify.set("notifier", "position", "top-right"); alertify.error("Error al Cargar la multipresentacion.");
     }
 
   });
-});
+};
 
 /* Ocultar Envasado */
 
@@ -71,14 +71,18 @@ function identificarDensidad(batch) {
     data: { modulo: 4, idBatch },
 
     success: function (response) {
+      //validar densidad para una sola presentacion
+      if (response == 3)
+        console.log('nada');
+      else {
+        let espec = JSON.parse(response);
+        for (let i = 0; i < espec.data.length; i++) {
+          densidadAprobada = densidadAprobada + espec.data[i].densidad;
+        }
+        densidadAprobada = densidadAprobada / espec.data.length;
+        calcularPeso(densidadAprobada);
 
-      let espec = JSON.parse(response);
-
-      for (let i = 0; i < espec.data.length; i++) {
-        densidadAprobada = densidadAprobada + espec.data[i].densidad;
       }
-      densidadAprobada = densidadAprobada / espec.data.length;
-      calcularPeso(densidadAprobada);
     }
   });
 }
@@ -247,7 +251,7 @@ function devolucionMaterialEnvasada(valor) {
     if (i == 4)
       $(`#txtEnvasada${i}`).html(empaqueEnvasado);
     else
-    //si la cantidad de envasado es diferente a los recibido envie una notificacion, la orden de produccion, diferencia entre recibida y envasada y presentacion
+      //si la cantidad de envasado es diferente a los recibido envie una notificacion, la orden de produccion, diferencia entre recibida y envasada y presentacion
       $(`#txtEnvasada${i}`).html(unidades_envasadas);
   }
 }

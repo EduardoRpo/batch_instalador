@@ -1,4 +1,6 @@
 
+let totallotexpresentacion = [];
+
 /* Validar Batch Record y si existe Cargar Multipresentación */
 
 $('#tablaBatch tbody').on('click', 'tr', function () {
@@ -84,8 +86,6 @@ $("#adicionarMultipresentacion").on('click', function () {
     } else {
         alertify.set("notifier", "position", "top-right"); alertify.error("Diligencie todos los campos vacios.");
     }
-
-
 });
 
 /* Contar objetos creados para Multipresentacion */
@@ -142,10 +142,9 @@ function cargarMulti() {
     $.ajax({
         type: "POST",
         'url': 'php/multi.php',
-        /* 'data': { "operacion": "1", id: data.id_batch }, */
         'data': { "operacion": "1", id: referencia },
+
         success: function (r) {
-            debugger;
             var info = JSON.parse(r);
             for (i = 1; i < 6; i++) {
 
@@ -154,7 +153,6 @@ function cargarMulti() {
                 $select.append('<option disabled selected>' + "Multipresentación" + '</option>');
 
                 $.each(info, function (i, value) {
-                    /* $select.append(`<option value="${value.nombre_referencia}">${value.nombre_referencia}</option>`); */
                     $select.append(`<option value="${value.referencia}">${value.nombre_referencia}</option>`);
 
                 })
@@ -197,6 +195,7 @@ function calcularMulti(id) {
 
 function CalculoloteMulti(id, cantidad) {
 
+
     const opcion = $('#cmbMultiReferencia' + id).val();
     const densidad = $('#txtdensidadMulti' + id).val();
     const presentacion = $('#txtpresentacionMulti' + id).val();
@@ -211,6 +210,10 @@ function CalculoloteMulti(id, cantidad) {
     }
 
     total = parseInt(((densidad * cantidad * presentacion) / 1000) * (1 + 0.005)); // guardar campo en nueva columna en base de datos para obterla en envasado como total (kg)
+    debugger;
+    totallotexpresentacion.push(total);
+    console.log(totallotexpresentacion);
+
     $('#txttamanoloteMulti' + id).val(total);
 
     for (i = 1; i < 6; i++) {
@@ -265,22 +268,28 @@ function eliminarMulti(id) {
 /* Guardar Multi */
 
 function guardar_Multi() {
-    var ref = [];
-    var cant = [];
-
-    var j = 1;
+    let ref = [];
+    let cant = [];
+    let totalpresentacion = [];
+    let j = 1;
 
     contarMultipresentacion();
-
+    //obtener referencias
     for (i = 0; i < cont; i++) {
         ref[i] = $('#cmbMultiReferencia' + j + ' option:selected').text();
         j++;
     }
 
+    //obtener cantidades
     j = 1;
-
     for (i = 0; i < cont; i++) {
         cant[i] = $('#txtcantidadMulti' + j).val();
+        j++;
+    }
+    //obtener totales
+    j = 1;
+    for (i = 0; i < cont; i++) {
+        totalpresentacion[i] = $('#txttamanoloteMulti' + j).val();
         j++;
     }
 
@@ -289,6 +298,7 @@ function guardar_Multi() {
             operacion: "4",
             ref: ref,
             cant: cant,
+            tot: totalpresentacion,
             id: data.id_batch
         };
 
@@ -297,6 +307,7 @@ function guardar_Multi() {
             operacion: "5",
             ref: ref,
             cant: cant,
+            tot: totalpresentacion,
             id: data.id_batch
         };
     }

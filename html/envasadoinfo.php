@@ -100,8 +100,8 @@ include('modal/m_muestras.php');
                       <thead>
                         <tr>
                           <th class="centrado">Presentación</th>
-                          <th class="centrado">Cantidad</th>
-                          <th class="centrado">Total</th>
+                          <th class="centrado">Unidades</th>
+                          <th class="centrado">Total (Kg)</th>
                         </tr>
                       </thead>
                       <tbody>

@@ -43,6 +43,7 @@ function firmar2daSeccion(firma) {
                 $(`#chkcontrolTanques${tanquesOk}`).prop('disabled', true);
 
                 if (modulo == 3 || modulo == 4) {
+                    //para el modulo de preparacion imprimir la etiqueta tanque, lote, orden de produccion, fecha. tamaño lote.
                     $(`.especificacion`).val('0')
                     $(`.especificacionInput`).val('');
                 }

@@ -77,6 +77,7 @@ $.ajax({
 }).done((data, status, xhr) => {
 
     batch = data;
+    debugger;
     const tamano_lote = formatoCO(data.tamano_lote);
 
     $('#in_numero_orden').val(data.numero_orden);
@@ -89,8 +90,10 @@ $.ajax({
 
     localStorage.setItem("orden", data.numero_orden);
     localStorage.setItem("tamano_lote", data.tamano_lote);
+    //localStorage.setItem("batch", batch);
 
     if (proceso == 5) {
+        busqueda_multi(batch);
         cargarTablaEnvase(batch);
         identificarDensidad(batch);
         calcularMuestras(batch);
