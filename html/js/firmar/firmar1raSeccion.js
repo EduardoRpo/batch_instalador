@@ -37,8 +37,9 @@ function cargar(btn, idbtn) {
     /* Valida que se ha seleccionado el producto de desinfeccion para el proceso de aprobacion */
 
     if (modulo == 2 || modulo == 4 || modulo == 3) {
+        debugger;
         let seleccion = $('#sel_producto_desinfeccion').val();
-        if (modulo == 3)
+        if (modulo == 3 && seleccion != "Seleccione")
             seleccion = $('#select-Linea').val();
 
         if (seleccion == "Seleccione") {

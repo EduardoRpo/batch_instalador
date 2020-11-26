@@ -75,7 +75,7 @@ $.ajax({
     url: `../../api/batch/${idBatch}`,
     type: 'GET'
 }).done((data, status, xhr) => {
-    
+
     batch = data;
     const tamano_lote = formatoCO(data.tamano_lote);
 
@@ -86,10 +86,10 @@ $.ajax({
     $('#in_linea').val(data.linea);
     $('#in_fecha_programacion').val(data.fecha_programacion);
     $('#in_tamano_lote').val(tamano_lote);
-    
+
     localStorage.setItem("orden", data.numero_orden);
-    localStorage.setItem("tamano_lote",data.tamano_lote);
-    
+    localStorage.setItem("tamano_lote", data.tamano_lote);
+
     if (proceso == 5) {
         cargarTablaEnvase(batch);
         identificarDensidad(batch);

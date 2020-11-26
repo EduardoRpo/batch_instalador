@@ -166,33 +166,19 @@ function cargarMulti() {
 /* cargar datos de acuerdo con la seleccion de multipresentacion */
 
 function cargarReferenciaM(id) {
-    debugger;
-    /* const opcion = $("#cmbMultiReferencia" + id + " option:selected").text(); */
     const opcion = $("#cmbMultiReferencia" + id).val();
 
-    /* $.ajax({
-        type: "POST",
-        'url': 'php/multi.php',
-        'data': { "operacion": "2", "nombre_referencia": opcion },
-
-        success: function (r) {
-            var info = JSON.parse(r); */
     $.ajax({
         type: "POST",
         'url': 'php/multi.php',
-        /* 'data': { "operacion": "3", "id": info[0].referencia }, */
         'data': { "operacion": "3", "id": opcion },
 
         success: function (r) {
-            debugger;
             var info = JSON.parse(r);
             $('#txtpresentacionMulti' + id).val(info[0].presentacion);
             $('#txtdensidadMulti' + id).val(info[0].densidad);
         }
     });
-
-    /*  } */
-    /* }); */
     calcularMulti(id);
 }
 
@@ -210,7 +196,7 @@ function calcularMulti(id) {
 /* calcular Tamaño del Lote */
 
 function CalculoloteMulti(id, cantidad) {
-    debugger;
+
     const opcion = $('#cmbMultiReferencia' + id).val();
     const densidad = $('#txtdensidadMulti' + id).val();
     const presentacion = $('#txtpresentacionMulti' + id).val();
@@ -224,7 +210,7 @@ function CalculoloteMulti(id, cantidad) {
         return false;
     }
 
-    total = parseInt(((densidad * cantidad * presentacion) / 1000) * (1 + 0.03));
+    total = parseInt(((densidad * cantidad * presentacion) / 1000) * (1 + 0.005)); // guardar campo en nueva columna en base de datos para obterla en envasado como total (kg)
     $('#txttamanoloteMulti' + id).val(total);
 
     for (i = 1; i < 6; i++) {

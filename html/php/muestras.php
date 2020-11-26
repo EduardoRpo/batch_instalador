@@ -1,26 +1,12 @@
 <?php
 require_once('../../conexion2.php');
 
-function utf8ize($d)
-{
-    if (is_array($d))
-        foreach ($d as $k => $v)
-            $d[$k] = utf8ize($v);
-
-    else if (is_object($d))
-        foreach ($d as $k => $v)
-            $d->$k = utf8ize($v);
-
-    else
-        return utf8_encode($d);
-
-    return $d;
-}
-
 // guardar el numero de muestras
 
 $id_batch = $_POST['id'];
 $muestras = $_POST['muestras'];
+
+//la popup de muestras guarda solo una porcion hasta el final cuando firma debe validarse que todas las muestras estan almacenadas
 
 $query_eliminar_tanque = mysqli_query($conn, "DELETE FROM batch_muestras WHERE id_batch ='$id_batch'");
 

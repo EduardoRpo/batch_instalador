@@ -128,7 +128,7 @@ function CalculoTamanolote (valor) {
     }
     
     
-    total = ((unidades * densidad * presentacion)/1000)*(1 + 0.03);
+    total = ((unidades * densidad * presentacion)/1000)*(1 + 0.005);
     total1 = formatoCO(total.toFixed(2));
     
     $('#tamanototallote').val(total1);

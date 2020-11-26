@@ -22,7 +22,7 @@ $(document).ready(function () {
 
         $(`#fila${j}`).attr("hidden", false);
         $(`#envasado${j}`).attr("hidden", false);
-        $(`#envasadoMulti${j}`).html('ENVASADO PRESENTACION: ' + info[i].presentacion);
+        $(`#envasadoMulti${j}`).html('ENVASADO PRESENTACIÓN: ' + info[i].presentacion);
         j++;
 
         //cantidad = cantidad + parseInt(info[i].cantidad);
@@ -118,9 +118,9 @@ function validarLote(data) {
 function calcularMuestras(batch) {
   let muestras = batch.unidad_lote;
 
-  if (muestras < 2001) {
+  if (muestras <= 2000) {
     $('#Muestras').val(20);
-  } else if (muestras > 2000 && muestras < 4001) {
+  } else if (muestras >= 2001 && muestras < 4001) {
     $('#Muestras').val(40);
   } else {
     $('#Muestras').val(60);
@@ -151,12 +151,12 @@ function guardarMuestras() {
   let cantidad_muestras = $('#Muestras').val();
   let muestras = [];
 
-  for (i = 1; i <= cantidad_muestras; i++) {
+  /* for (i = 1; i <= cantidad_muestras; i++) {
     if ($(`#txtMuestra${i}`).val() === '') {
       alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todas las muestras");
       return false;
     }
-  }
+  } */
 
   for (i = 1; i <= cantidad_muestras; i++) {
     muestras.push($(`#txtMuestra${i}`).val());
@@ -189,7 +189,7 @@ function cargarTablaEnvase(batch) {
     data: { referencia: batch.referencia },
 
   }).done((data, status, xhr) => {
-
+    //no debe traer la cantidad total de lote original sino de la cantidad de multipresentacion
     var info = JSON.parse(data);
     empaqueEnvasado = Math.round(info.data[0].id_empaque / batch.unidad_lote);
     unidades = formatoCO(batch.unidad_lote);
@@ -247,6 +247,7 @@ function devolucionMaterialEnvasada(valor) {
     if (i == 4)
       $(`#txtEnvasada${i}`).html(empaqueEnvasado);
     else
+    //si la cantidad de envasado es diferente a los recibido envie una notificacion, la orden de produccion, diferencia entre recibida y envasada y presentacion
       $(`#txtEnvasada${i}`).html(unidades_envasadas);
   }
 }
