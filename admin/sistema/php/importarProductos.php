@@ -21,7 +21,10 @@ else if (isset($_FILES['datosExcel7']))
 
 $tabla = $_POST['tabla'];
 
-$datos = strtoupper(file_get_contents($datos['tmp_name']));
+if ($tabla == 'notificacion_sanitaria')
+	$datos = strtoupper(file_get_contents($datos['tmp_name']));
+else
+	$datos = ucfirst(mb_strtolower(file_get_contents($datos['tmp_name'])));
 
 $datos = explode("\n", $datos);
 $datos = array_filter($datos);
@@ -55,6 +58,15 @@ if ($tabla == 'producto') {
 } else if ($tabla == 'densidad_gravedad' || $tabla == 'grado_alcohol' || $tabla == 'ph' || $tabla == 'viscosidad') {
 	foreach ($dataList as $data) {
 		$conn->query("INSERT INTO $tabla (limite_inferior, limite_superior) 
+						  VALUES ('{$data[0]}', '{$data[1]}')");
+	}
+} else if ($tabla == 'notificacion_sanitaria') {
+	foreach ($dataList as $data) {
+		/* print_r($data[0]);
+		print_r(' ');
+		print_r($data[1]); */
+
+		$conn->query("INSERT INTO $tabla (nombre, vencimiento) 
 						  VALUES ('{$data[0]}', '{$data[1]}')");
 	}
 } else {

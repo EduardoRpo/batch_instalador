@@ -45,7 +45,7 @@ function comprobarExtension(formulario, archivo, tabla, id) {
 
         $("#btnCargarExcel").prop("disabled", false);
 
-        let confirm = alertify.confirm('Samara Cosmetics', 'Todos los datos serán eliminados y reemplazados por el nuevo archivo ¿Esta seguro de ejecutar la operación?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
+        let confirm = alertify.confirm('Samara Cosmetics', 'Todos los datos serán eliminados y reemplazados por el nuevo archivo ¿Esta seguro de ejecutar la operación? Valide que los datos no contengan espacios en blanco, de lo contrario podria generar error la carga', null, null).set('labels', { ok: 'Si', cancel: 'No' });
         confirm.set('onok', function (r) {
             if (r) {
                 cargarDataExcel(tabla, id);

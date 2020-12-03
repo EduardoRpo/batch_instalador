@@ -172,7 +172,7 @@ $(document).on('click', '.link-editar', function (e) {
     let id = $(this).parent().parent().children().first().text();
     let nombre = $(this).parent().parent().children().eq(1).text();
     let otro = $(this).parent().parent().children().eq(2).text();
-    debugger;
+
     $(`#frmAdicionar${id_tbl}`).slideDown();
     $(`.tabla${id_tbl}`).html('Actualizar');
     $(`#txt-Id${id_tbl}`).val(id);
@@ -193,7 +193,7 @@ $(document).on('click', '.link-editar', function (e) {
 /* Almacenar Registros */
 
 function guardarDatosGenerales(nombre, id) {
-    debugger;
+
     const datos = $(`#input${id}`).val();
     const id_registro = $(`#txt-Id${id}`).val();
     if (nombre == 'notificacion_sanitaria')

@@ -11,10 +11,10 @@ function comprobarExtension(formulario, archivo, id) {
     confirm.set('onok', function (r) {
         if (r) {
 
-            let extensiones_permitidas = ".csv";
+            let extension_permitida = ".csv";
             let extension = (archivo.substring(archivo.lastIndexOf("."))).toLowerCase();
 
-            if (extensiones_permitidas === extension) {
+            if (extension_permitida === extension) {
                 cargarDataExcel(id);
             } else {
                 alertify.set("notifier", "position", "top-right"); alertify.error("Valide la extensión del archivo, debe ser '.csv'");

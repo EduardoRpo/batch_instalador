@@ -142,7 +142,7 @@
                 </div>
               </div>
               <form id="formDataExcel2" enctype="multipart/form-data">
-                <input type="file" name="datosExcel2" id="datosExcel2" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
+                <input type="file" name="datosExcel2" id="datosExcel2" class="form-control mb-3 ml-3" style="width: 500px; display:inline-flex">
                 <button type="button" id="btnCargarExcel2" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel2.value, 'notificacion_sanitaria', 2);" disabled="disabled">Cargar Datos</button>
               </form>
             </div>
