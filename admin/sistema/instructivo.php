@@ -96,8 +96,7 @@
                   <table id="tblInstructivo" class="table-striped row-borde" style="width:100%">
                     <thead>
                       <tr>
-                        <th></th>
-                        <th></th>
+                        <th class="centrado"></th>
                         <th>Id</th>
                         <th>Actividad</th>
                         <th>Tiempo (min)</th>

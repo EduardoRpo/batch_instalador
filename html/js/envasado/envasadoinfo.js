@@ -1,3 +1,18 @@
+
+//Carga el proceso despues de cargar la data  del Batch
+
+$(document).ready(function () {
+  setTimeout(() => {
+    if (proceso == 5) {
+      busqueda_multi(batch);
+      cargarTablaEnvase(batch);
+      identificarDensidad(batch);
+      calcularMuestras(batch);
+    }
+  }, 500);
+});
+
+
 /* Cargar Multipresentacion */
 
 function busqueda_multi(batch) {
@@ -12,29 +27,30 @@ function busqueda_multi(batch) {
     'data': { id: idBatch },
 
     success: function (data) {
-      var info = JSON.parse(data);
-      
+      var batchMulti = JSON.parse(data);
+
       let j = 1;
-      if (info !== "") {
+      if (batchMulti !== "") {
         //validar las presentacion para una sola referencia y validar en el servidor que se esta repitiendo las presentaciones
 
-        for (let i = 0; i < info.length; i++) {
-          $(`#tanque${j}`).html(formatoCO(info[i].presentacion));
-          $(`#cantidad${j}`).html(formatoCO(info[i].cantidad));
-          $(`#total${j}`).html(formatoCO(info[i].total));
+        for (let i = 0; i < batchMulti.length; i++) {
+          $(`#tanque${j}`).html(formatoCO(batchMulti[i].presentacion));
+          $(`#cantidad${j}`).html(formatoCO(batchMulti[i].cantidad));
+          $(`#total${j}`).html(formatoCO(batchMulti[i].total));
 
           $(`#fila${j}`).attr("hidden", false);
           $(`#envasado${j}`).attr("hidden", false);
-          $(`#envasadoMulti${j}`).html('ENVASADO PRESENTACIÓN: ' + info[i].presentacion);
+          $(`#envasadoMulti${j}`).html('ENVASADO PRESENTACIÓN: ' + batchMulti[i].presentacion);
           j++;
         }
       } else {
-        
-        //batch = localStorage.getItem('batch');
-        
+
+        batchMulti = localStorage.getItem('batch');
+        debugger;
         $(`#tanque${j}`).html(formatoCO(batch.presentacion));
         $(`#cantidad${j}`).html(formatoCO(batch.unidad_lote));
         $(`#total${j}`).html(formatoCO(batch.tamano_lote));
+        $(`#envasadoMulti${j}`).html('ENVASADO PRESENTACIÓN: ' + batch.presentacion);
       }
     },
     error: function (r) {
@@ -73,7 +89,7 @@ function identificarDensidad(batch) {
     success: function (response) {
       //validar densidad para una sola presentacion
       if (response == 3)
-        console.log('nada');
+        console.log('');
       else {
         let espec = JSON.parse(response);
         for (let i = 0; i < espec.data.length; i++) {

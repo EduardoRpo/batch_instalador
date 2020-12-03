@@ -138,6 +138,7 @@ function adicionar(id) {
     $(`#input${id}`).val('');
     $(`#min${id}`).val('');
     $(`#max${id}`).val('');
+    $(`#input21`).val('');
 
 }
 
@@ -171,7 +172,7 @@ $(document).on('click', '.link-editar', function (e) {
     let id = $(this).parent().parent().children().first().text();
     let nombre = $(this).parent().parent().children().eq(1).text();
     let otro = $(this).parent().parent().children().eq(2).text();
-
+    debugger;
     $(`#frmAdicionar${id_tbl}`).slideDown();
     $(`.tabla${id_tbl}`).html('Actualizar');
     $(`#txt-Id${id_tbl}`).val(id);
@@ -183,30 +184,36 @@ $(document).on('click', '.link-editar', function (e) {
 
     } else {
         $(`#input${id_tbl}`).val(nombre);
-        if (tablaBD == 'linea')
+        if (tablaBD == 'linea' || tablaBD == 'notificacion_sanitaria')
             $(`#input${id_tbl}1`).val(otro);
     }
-
-
 });
 
 
 /* Almacenar Registros */
 
 function guardarDatosGenerales(nombre, id) {
+    debugger;
+    const datos = $(`#input${id}`).val();
+    const id_registro = $(`#txt-Id${id}`).val();
+    if (nombre == 'notificacion_sanitaria')
+        vencimiento = $('#input21').val();
 
-    let datos = $(`#input${id}`).val();
-    let id_registro = $(`#txt-Id${id}`).val();
-
-    if (!datos) {
+    if (!datos || nombre == 'notificacion_sanitaria' && vencimiento == '') {
         alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos");
         return false;
+    }
+
+    if (nombre == 'notificacion_sanitaria') {
+        data = { datos, id_registro, tabla: nombre, operacion: 3, editar, vencimiento }
+    } else {
+        data = { datos, id_registro, tabla: nombre, operacion: 3, editar }
     }
 
     $.ajax({
         type: "POST",
         url: "php/c_propiedades-generales.php",
-        data: { datos: datos, id_registro: id_registro, tabla: nombre, operacion: 3, editar: editar },
+        data: data,
 
         success: function (r) {
 

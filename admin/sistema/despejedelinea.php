@@ -1,4 +1,4 @@
-<?php require_once('php/sesion/sesion.php');?>
+<?php require_once('php/sesion/sesion.php'); ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -53,8 +53,8 @@
                   <label><b>Pregunta</b></label>
                   <label><b>Respuesta</b></label>
                   <label for=""><b>Proceso</b></label>
-                  <select name="cmbPregunta" id="cmbPregunta" class="form-control" ></select>
-                  <select name="cmbRespuesta" id="cmbRespuesta" class="form-control" >
+                  <select name="cmbPregunta" id="cmbPregunta" class="form-control"></select>
+                  <select name="cmbRespuesta" id="cmbRespuesta" class="form-control">
                     <option disabled selected>Seleccionar</option>
                     <option value="1">Si</option>
                     <option value="0">No</option>
@@ -75,7 +75,6 @@
                         <th>Pregunta</th>
                         <th>Respuesta Correcta</th>
                         <th>Proceso</th>
-                        <th></th>
                         <th></th>
                       </tr>
                     </thead>

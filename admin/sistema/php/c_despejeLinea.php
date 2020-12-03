@@ -1,35 +1,37 @@
 <?php
-require_once('../../../conexion.php');
-require_once('./crud.php');
 
-$op = $_POST['operacion'];
+if (!empty($_POST)) {
+  require_once('../../../conexion.php');
+  require_once('./crud.php');
 
-switch ($op) {
-  case 1: //listar parametros
-    $query = "SELECT mp.id, p.pregunta, mp.resp, m.modulo FROM modulo_pregunta mp INNER JOIN preguntas p INNER JOIN modulo m ON mp.id_pregunta=p.id AND mp.id_modulo=m.id";
-    ejecutarQuerySelect($conn, $query);
+  $op = $_POST['operacion'];
 
-    break;
+  switch ($op) {
+    case 1: //listar parametros
+      $query = "SELECT mp.id, p.pregunta, mp.resp, m.modulo FROM modulo_pregunta mp INNER JOIN preguntas p INNER JOIN modulo m ON mp.id_pregunta=p.id AND mp.id_modulo=m.id";
+      ejecutarQuerySelect($conn, $query);
 
-  case 2: //Cargar Select Proceso
-    $query = "SELECT * FROM modulo";
-    ejecutarQuerySelect($conn, $query);
+      break;
 
-    break;
+    case 2: //Cargar Select Proceso
+      $query = "SELECT * FROM modulo";
+      ejecutarQuerySelect($conn, $query);
 
-  case 3: //Cargar Select preguntas
-    $query = "SELECT * FROM preguntas";
-    ejecutarQuerySelect($conn, $query);
+      break;
 
-    break;
+    case 3: //Cargar Select preguntas
+      $query = "SELECT * FROM preguntas";
+      ejecutarQuerySelect($conn, $query);
 
-  case 4: //Eliminar
-    $id = $_POST['id'];
-    $sql = "DELETE FROM preguntas WHERE id = :id";
-    ejecutarEliminar($conn, $sql, $id);
+      break;
 
-  case 5: // Guardar y actualizar data
-    if (!empty($_POST)) {
+    case 4: //Eliminar
+      $id = $_POST['id'];
+      $sql = "DELETE FROM preguntas WHERE id = :id";
+      ejecutarEliminar($conn, $sql, $id);
+      break;
+    case 5: // Guardar y actualizar data
+
       $editar = $_POST['editar'];
 
       $id_pregunta = $_POST['pregunta'];
@@ -61,6 +63,6 @@ switch ($op) {
           exit();
         }
       }
-    }
-    break;
+      break;
+  }
 }

@@ -75,8 +75,8 @@ function cargarTablaFormulas(referencia) {
         },
 
         "columns": [
-            { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
-            { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" },
+            { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" },
+            /* { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" }, */
             { "data": "id" },
             { "data": "proceso" },
             { "data": "tiempo", className: "centrado", },
@@ -107,9 +107,9 @@ $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
 
     editar = 1;
-    let id = $(this).parent().parent().children().eq(2).text();
-    let actividad = $(this).parent().parent().children().eq(3).text();
-    let tiempo = $(this).parent().parent().children().eq(4).text();
+    const id = $(this).parent().parent().children().eq(1).text();
+    const actividad = $(this).parent().parent().children().eq(2).text();
+    const tiempo = $(this).parent().parent().children().eq(3).text();
 
     $("#frmadInstructivo").slideDown();
     $('#txtguardarInstructivo').html('Actualizar');
@@ -165,8 +165,8 @@ function guardarInstructivo() {
 
 $(document).on('click', '.link-borrar', function (e) {
     e.preventDefault();
-
-    let id = $(this).parent().parent().children().eq(2).text();
+    debugger;
+    let id = $(this).parent().parent().children().eq(1).text();
 
     let confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este registro?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
     confirm.set('onok', function (r) {

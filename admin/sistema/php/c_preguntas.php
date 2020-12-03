@@ -1,24 +1,27 @@
 <?php
 header("Content-Type: text/html;charset=utf-8");
-require_once('../../../conexion.php');
-require_once('./crud.php');
+if (!empty($_POST)) {
 
-$op = $_POST['operacion'];
+  require_once('../../../conexion.php');
+  require_once('./crud.php');
 
-switch ($op) {
-  case 1: //listar parametros
-    $query = "SELECT * FROM preguntas";
-    ejecutarQuerySelect($conn, $query);
-    
-    break;
+  $op = $_POST['operacion'];
 
-  case 2: //Eliminar
-    $id_pregunta = $_POST['id'];
-    $sql = "DELETE FROM preguntas WHERE id = :id";
-    ejecutarEliminar($conn, $sql, $id);
+  switch ($op) {
+    case 1: //listar parametros
+      $query = "SELECT * FROM preguntas";
+      ejecutarQuerySelect($conn, $query);
 
-  case 3: // Guardar y actualizar data
-    if (!empty($_POST)) {
+      break;
+
+    case 2: //Eliminar
+      $id = $_POST['id'];
+
+      $sql = "DELETE FROM preguntas WHERE id = :id";
+      ejecutarEliminar($conn, $sql, $id);
+      break;
+    case 3: // Guardar y actualizar data
+
       $editar = $_POST['editar'];
       $pregunta = ucfirst(mb_strtolower($_POST['pregunta'], "UTF-8"));
 
@@ -48,6 +51,7 @@ switch ($op) {
           exit();
         }
       }
-    }
-    break;
+
+      break;
+  }
 }

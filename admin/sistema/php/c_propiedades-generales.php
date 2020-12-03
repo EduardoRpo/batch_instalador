@@ -1,69 +1,106 @@
 <?php
-require_once('../../../conexion.php');
-require_once('./crud.php');
+if (!empty($_POST)) {
+    require_once('../../../conexion.php');
+    require_once('./crud.php');
 
-$op = $_POST['operacion'];
+    $op = $_POST['operacion'];
 
-switch ($op) {
+    switch ($op) {
 
-    case 1: //listar tablas Generales
-        $tabla = $_POST['tabla'];
+        case 1: //listar tablas Generales
+            $tabla = $_POST['tabla'];
 
-        if ($tabla == 'densidad_gravedad' || $tabla == 'grado_alcohol' || $tabla == 'ph' || $tabla == 'viscosidad')
-            $query = "SELECT id, CONCAT(limite_inferior, ' - ' ,limite_superior) AS nombre FROM $tabla";
-        else
-            $query = "SELECT * FROM $tabla";
+            if ($tabla == 'densidad_gravedad' || $tabla == 'grado_alcohol' || $tabla == 'ph' || $tabla == 'viscosidad') {
+                $query = "SELECT id, CONCAT(limite_inferior, ' - ' ,limite_superior) AS nombre FROM $tabla";
+            } else {
+                $query = "SELECT * FROM $tabla";
+            }
 
-        ejecutarQuerySelect($conn, $query);
-        break;
+            ejecutarQuerySelect($conn, $query);
+            break;
 
-    case 2: //Eliminar
-        $id = $_POST['id'];
-        $tabla = $_POST['tabla'];
+        case 2: //Eliminar
+            $id = $_POST['id'];
+            $tabla = $_POST['tabla'];
 
-        $sql = "DELETE FROM $tabla WHERE id = :id";
-        ejecutarEliminar($conn, $sql, $id);
-        break;
+            $sql = "DELETE FROM $tabla WHERE id = :id";
+            ejecutarEliminar($conn, $sql, $id);
+            break;
 
-    case 3: // Guardar o actualizar data
-        if (!empty($_POST)) {
+        case 3: // Guardar o actualizar data
 
             $editar = $_POST['editar'];
             $tabla = $_POST['tabla'];
-            $dato =  ucfirst(mb_strtolower($_POST['datos'], "UTF-8"));
 
-            if ($editar == 0) {
-                $sql = "SELECT * FROM $tabla WHERE nombre= :dato";
-                $query = $conn->prepare($sql);
-                $query->execute(['dato' => $dato]);
-                $rows = $query->rowCount();
+            if ($tabla == 'notificacion_sanitaria')
+                $dato =  mb_strtoupper($_POST['datos'], "UTF-8");
+            else
+                $dato =  ucfirst(mb_strtolower($_POST['datos'], "UTF-8"));
 
-                if ($rows > 0) {
-                    echo '2';
-                    exit();
-                } else {
-                    $sql = "INSERT INTO $tabla (nombre) VALUES(:dato)";
+            if ($tabla == 'notificacion_sanitaria') {
+
+                $vencimiento = $_POST['vencimiento'];
+
+                if ($editar == 0) {
+                    $sql = "SELECT * FROM $tabla WHERE nombre= :dato";
                     $query = $conn->prepare($sql);
-                    $result = $query->execute(['dato' => $dato]);
-                    ejecutarQuery($result, $conn);
+                    $query->execute(['dato' => $dato]);
+                    $rows = $query->rowCount();
+
+                    if ($rows > 0) {
+                        echo '2';
+                        exit();
+                    } else {
+                        $sql = "INSERT INTO $tabla (nombre, vencimiento) VALUES(:dato, :vencimiento)";
+                        $query = $conn->prepare($sql);
+                        $result = $query->execute(['dato' => $dato, 'vencimiento' => $vencimiento]);
+                        ejecutarQuery($result, $conn);
+                    }
+                } else {
+                    $id_registro = $_POST['id_registro'];
+                    $sql = "UPDATE $tabla SET nombre = :dato, vencimiento =:vencimiento WHERE id = :registro";
+                    $query = $conn->prepare($sql);
+                    $result = $query->execute(['dato' => $dato, 'vencimiento' => $vencimiento, 'registro' => $id_registro]);
+
+                    if ($result) {
+                        echo '3';
+                        exit();
+                    }
                 }
             } else {
-                $id_registro = $_POST['id_registro'];
-                $sql = "UPDATE $tabla SET nombre = :dato WHERE id = :registro";
-                $query = $conn->prepare($sql);
-                $result = $query->execute(['dato' => $dato, 'registro' => $id_registro]);
+                if ($editar == 0) {
+                    $sql = "SELECT * FROM $tabla WHERE nombre= :dato";
+                    $query = $conn->prepare($sql);
+                    $query->execute(['dato' => $dato]);
+                    $rows = $query->rowCount();
 
-                if ($result) {
-                    echo '3';
-                    exit();
+                    if ($rows > 0) {
+                        echo '2';
+                        exit();
+                    } else {
+                        $sql = "INSERT INTO $tabla (nombre) VALUES(:dato)";
+                        $query = $conn->prepare($sql);
+                        $result = $query->execute(['dato' => $dato]);
+                        ejecutarQuery($result, $conn);
+                    }
+                } else {
+                    $id_registro = $_POST['id_registro'];
+                    $sql = "UPDATE $tabla SET nombre = :dato WHERE id = :registro";
+                    $query = $conn->prepare($sql);
+                    $result = $query->execute(['dato' => $dato, 'registro' => $id_registro]);
+
+                    if ($result) {
+                        echo '3';
+                        exit();
+                    }
                 }
             }
-        }
 
-        break;
 
-    case 4: // Guardar o actualizar data en parametros min y max
-        if (!empty($_POST)) {
+            break;
+
+        case 4: // Guardar o actualizar data en parametros min y max
+
 
             $editar = $_POST['editar'];
             $tabla = $_POST['tabla'];
@@ -96,6 +133,6 @@ switch ($op) {
                     exit();
                 }
             }
-        }
-        break;
+            break;
+    }
 }

@@ -63,7 +63,8 @@ $(document).on('click', '.link-editar', function (e) {
 $(document).on('click', '.link-borrar', function (e) {
     e.preventDefault();
 
-    let id = $(this).parent().parent().children().first().text();
+    const id = $(this).parent().parent().children().first().text();
+
     var confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este registro?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
 
     confirm.set('onok', function (r) {
@@ -71,7 +72,7 @@ $(document).on('click', '.link-borrar', function (e) {
             $.ajax({
                 'method': 'POST',
                 'url': 'php/c_preguntas.php',
-                'data': { operacion: "2", id: id }
+                'data': { operacion: "2", id }
             });
             refreshTable();
             alertify.success('Registro Eliminado');
