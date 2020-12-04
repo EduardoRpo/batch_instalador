@@ -127,11 +127,16 @@ if (!empty($_POST)) {
 			break;
 		case '10': // importar multipresentacion
 
-			//$conn->query("DELETE FROM instructivo_preparacion");
-			//$conn->query("ALTER TABLE instructivo_preparacion AUTO_INCREMENT = 1");
-
+			/* Eliminar todos los productos con multipresentacion */
+			$sql = "UPDATE producto SET multi =:multi";
+			$query = $conn->prepare($sql);
+			$result = $query->execute([
+				'multi' => '',
+			]);
+			
+			/* Cargar todas las multipresentaciones */
 			foreach ($dataList as $data) {
-				
+
 				$sql = "UPDATE producto SET multi =:multi WHERE referencia = :ref";
 				$query = $conn->prepare($sql);
 				$result = $query->execute([

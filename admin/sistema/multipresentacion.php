@@ -1,4 +1,4 @@
-<?php require_once('php/sesion/sesion.php'); ?>
+<?php require_once('php/sesion/sesion.php'); include_once('modal/m_multipresentacion.php'); ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -47,38 +47,14 @@
       <div class="panel-header panel-header-sm"></div>
       <div class="content">
         <div class="row">
-          <div class="col-md-10">
+          <div class="col-md-12">
             <div class="card">
               <div class="card-header">
                 <h4 class="card-title">Multipresentación</h4>
-
                 <hr>
+                <button type="button" class="btn btn-primary" id="adicionarMulti">Crear</button>
                 <!-- <select multiple="multiple" class="form-control" name="cmbMultipresentacion[]" id="cmbMultipresentacion"></select> -->
-                <div class="ms-multi">
-                  <input type="text" class="form-control" id="busquedaproductos" placeholder="Bucar Productos">
-                  <select multiple="multiple" id="cmbproductos" name="cmbproductos[]" class="form-control List mt-3 mb-3">
 
-                  </select>
-                  <div class="centrado">
-                    <button class="btn btn-primary" id="seleccionar">▼</button>
-                    <button class="btn btn-primary" id="borrar">▲</button>
-                  </div>
-                  <div class="input-group">
-                    <input type="text" class="form-control" id="busquedamulti" placeholder="Buscar Multipresentacion">
-                    <div class="input-group-append">
-                      <button class="btn btn-primary" id="btnBuscarMulti">Buscar</button>
-                    </div>
-                  </div>
-                  <label style="font-style: italic; color:red; font-weight:bolder" class="warning" hidden>Ingrese una referencia</label>
-
-                  <select multiple="multiple" id="cmbmulti" name="cmbmulti[]" class="form-control mt-3">
-                  </select>
-
-                  <div class="derecha mt-5">
-                    <button class="btn btn-primary" id="btnCrearMulti">Crear</button>
-                    <button class="btn btn-primary" id="btnEliminarMulti">Eliminar</button>
-                  </div>
-                </div>
 
                 <!-- <button type="button" class="btn btn-primary" id="adEquipos">Configurar</button> -->
                 <!-- <form id="frmadParametro" style="display: none;">
@@ -91,26 +67,27 @@
                   <button type="button" class="btn btn-primary" id="btnguardarEquipos">Guardar</button>
                 </form> -->
 
-                <hr>
+                <!-- <hr>
               </div>
-              <div class="card-body">
-                <!-- <div class="table-responsive">
-                   <table id="listarEquipos" class="table-striped row-borde" style="width:100%">
+              <div class="card-body"> -->
+                <div class="table-responsive">
+                  <table id="tblMulti" class="table-striped row-borde" style="width:100%">
                     <thead>
                       <tr>
-                        <th>id</th>
-                        <th>Equipo</th>
-                        <th>Linea</th>
-                        <th></th>
-                        <th></th>
+                        <th>Referencia</th>
+                        <th>Nombre Referencia</th>
+                        <!-- <th>Producto</th>-->
+                        <th>Multipresentación</th> 
+                        <th>Acciones</th>
                       </tr>
                     </thead>
                     <tbody>
 
                     </tbody>
-                  </table> 
-                </div>-->
+                  </table>
+                </div>
               </div>
+              <hr>
               <form action="" id="formDataExcel" enctype="multipart/form-data">
                 <input type="file" name="datosExcel" id="datosExcel" class="form-control mb-3 ml-3" style="width: 500px; display:inline-flex">
                 <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value, 10);" disabled="disabled">Cargar Datos</button>
@@ -141,7 +118,7 @@
   <script src="../assets/js/plugins/bootstrap-notify.js"></script>
 
   <script src="../assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script>
-  
+
   <!-- Alertify -->
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 

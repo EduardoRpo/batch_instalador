@@ -8,6 +8,61 @@ $('.contenedor-menu .menu a').removeAttr('style');
 $('#linkMultipresentacion').css('text-decoration', 'revert')
 $('.contenedor-menu .menu ul.abrir1').show();
 
+/* Cargue de Multipresentacion en DataTable */
+
+$(document).ready(function () {
+    $("#tblMulti").DataTable({
+        destroy: true,
+        scrollY: '50vh',
+        scrollCollapse: true,
+        paging: false,
+        language: { url: 'admin_componentes/es-ar.json' },
+
+        "ajax": {
+            method: "POST",
+            url: "php/c_multipresentacion.php",
+            data: { operacion: 6 },
+        },
+
+        "columns": [
+            { "data": "referencia" },
+            { "data": "nombre_referencia" },
+            { "data": "multi", className: "centrado" },
+            { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>", className: "centrado" },
+        ]
+    });
+});
+
+/* Cargar Modal */
+
+$('#adicionarMulti').click(function (e) {
+    e.preventDefault();
+    $('#ModalCrearMulti').modal('show');
+
+});
+
+/* Actualizar Modal */
+
+
+/* Eliminar multipresentacion */
+$(document).on('click', '.link-borrar', function (e) {
+    e.preventDefault();
+
+    const referencia = $(this).parent().parent().children().first().text();
+
+    $.ajax({
+        type: "POST",
+        url: 'php/c_multipresentacion.php',
+        data: { referencia, operacion: 5 },
+
+        success: function (response) {
+            refreshTable();
+            alertify.set("notifier", "position", "top-right"); alertify.success("Multipresentacion Eliminada");
+        }
+    });
+});
+
+
 
 /* Cargar productos */
 
@@ -88,7 +143,7 @@ $('#btnBuscarMulti').click(function (e) {
 
         success: function (response) {
 
-            if (response == 2 || response == 3 ) {
+            if (response == 2 || response == 3) {
                 alertify.set("notifier", "position", "top-right"); alertify.error("La referencia no tiene Multipresentación");
             } else {
                 const info = JSON.parse(response);
@@ -129,7 +184,8 @@ $(document).ready(function () {
             success: function (r) {
                 if (r > 1) {
                     alertify.set("notifier", "position", "top-right"); alertify.success("Multipresentacion creada.");
-
+                    $('#ModalCrearMulti').modal('hide');
+                    refreshTable();
                 } else {
                     alertify.set("notifier", "position", "top-right"); alertify.error("Error.");
                 }
@@ -140,7 +196,6 @@ $(document).ready(function () {
 
 
 /* Eliminar multipresentacion */
-
 
 $(document).ready(function () {
     $('#btnEliminarMulti').click(function (e) {
@@ -171,3 +226,10 @@ $(document).ready(function () {
         });
     });
 });
+
+/* Actualizar tabla */
+
+function refreshTable() {
+    $('#tblMulti').DataTable().clear();
+    $('#tblMulti').DataTable().ajax.reload();
+}
