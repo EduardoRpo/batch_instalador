@@ -168,7 +168,7 @@ $(document).on('click', '.link-borrar', function (e) {
 $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
     editar = 1;
-
+    debugger;
     let id = $(this).parent().parent().children().first().text();
     let nombre = $(this).parent().parent().children().eq(1).text();
     let otro = $(this).parent().parent().children().eq(2).text();
@@ -177,7 +177,7 @@ $(document).on('click', '.link-editar', function (e) {
     $(`.tabla${id_tbl}`).html('Actualizar');
     $(`#txt-Id${id_tbl}`).val(id);
 
-    if (id_tbl === 4 || id_tbl === 5 || id_tbl === 6 || id_tbl === 8) {
+    if (id_tbl === 4 & tablaBD!=='marca' || id_tbl === 5 || id_tbl === 6 || id_tbl === 8) {
         var res = nombre.split(" - ");
         $(`#min${id_tbl}`).val(res[0]);
         $(`#max${id_tbl}`).val(res[1]);

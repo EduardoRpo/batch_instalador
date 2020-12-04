@@ -31,7 +31,8 @@ $datos = array_filter($datos);
 
 // preparar datos
 foreach ($datos as $data) {
-	$dataList[] = explode(";", $data);
+	//$dataList[] = explode(";", $data);
+	$dataList[] = explode(";", ucfirst(mb_strtolower($data, 'utf-8')));
 }
 
 /* Elimina todos los datos */

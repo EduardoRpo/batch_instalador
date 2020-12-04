@@ -222,7 +222,7 @@
                 </div>
               </div>
               <form id="formDataExcel4" enctype="multipart/form-data">
-                <input type="file" name="datosExcel4" id="datosExcel4" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
+                <input type="file" name="datosExcel4" id="datosExcel4" class="form-control mb-3 ml-3" style="width: 500px; display:inline-flex">
                 <button type="button" id="btnCargarExcel4" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel4.value, 'marca',4);" disabled="disabled">Cargar Datos</button>
               </form>
             </div>
