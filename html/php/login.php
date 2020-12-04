@@ -14,8 +14,10 @@ if (!empty($_SESSION['active'])) {
             $usuario = $_POST['usuario'];
             $pass = md5($_POST['clave']);
 
-            //print_r($usuario);
-
+            /* print_r($usuario);
+            print_r(' ');
+            print_r($pass);
+            exit(); */
             $sql = "SELECT * FROM usuario, modulo WHERE user = :usuario AND clave=:pass AND modulo.id=usuario.id_modulo";
             $query = $conn->prepare($sql);
             $query->execute(['usuario' => $usuario, 'pass' => $pass]);

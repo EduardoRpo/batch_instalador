@@ -80,9 +80,9 @@
                           <label>Rol</label>
                           <select class="form-control" name="rol" id="rol">
                             <option value="" disabled selected>Selecciona una opción</option>
-                            <option value="1">SUPERUSUARIO</option>
-                            <option value="2">ADMINISTRADOR</option>
-                            <option value="3">USUARIO</option>
+                            <option value="1">Superusuario</option>
+                            <option value="2">Administrador</option>
+                            <option value="3">Usuario</option>
                           </select>
                         </div>
                       </div>

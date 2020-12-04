@@ -193,19 +193,25 @@ $(document).on('click', '.link-editar', function (e) {
 /* Almacenar Registros */
 
 function guardarDatosGenerales(nombre, id) {
-
+    debugger;
     const datos = $(`#input${id}`).val();
     const id_registro = $(`#txt-Id${id}`).val();
+
     if (nombre == 'notificacion_sanitaria')
         vencimiento = $('#input21').val();
 
-    if (!datos || nombre == 'notificacion_sanitaria' && vencimiento == '') {
+    if (nombre == 'linea')
+        densidad = $('#input31').val();
+
+    if (!datos || nombre == 'notificacion_sanitaria' && vencimiento == '' || nombre == 'linea' && densidad == '') {
         alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos");
         return false;
     }
 
     if (nombre == 'notificacion_sanitaria') {
         data = { datos, id_registro, tabla: nombre, operacion: 3, editar, vencimiento }
+    } else if (nombre == 'linea') {
+        data = { datos, id_registro, tabla: nombre, operacion: 3, editar, densidad }
     } else {
         data = { datos, id_registro, tabla: nombre, operacion: 3, editar }
     }

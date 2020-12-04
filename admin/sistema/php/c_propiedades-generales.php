@@ -38,7 +38,6 @@ if (!empty($_POST)) {
                 $dato =  ucfirst(mb_strtolower($_POST['datos'], "UTF-8"));
 
             if ($tabla == 'notificacion_sanitaria') {
-
                 $vencimiento = $_POST['vencimiento'];
 
                 if ($editar == 0) {
@@ -61,6 +60,36 @@ if (!empty($_POST)) {
                     $sql = "UPDATE $tabla SET nombre = :dato, vencimiento =:vencimiento WHERE id = :registro";
                     $query = $conn->prepare($sql);
                     $result = $query->execute(['dato' => $dato, 'vencimiento' => $vencimiento, 'registro' => $id_registro]);
+
+                    if ($result) {
+                        echo '3';
+                        exit();
+                    }
+                }
+            } else if ($tabla == 'linea') {
+
+                $densidad = $_POST['densidad'];
+
+                if ($editar == 0) {
+                    $sql = "SELECT * FROM $tabla WHERE nombre= :dato";
+                    $query = $conn->prepare($sql);
+                    $query->execute(['dato' => $dato]);
+                    $rows = $query->rowCount();
+
+                    if ($rows > 0) {
+                        echo '2';
+                        exit();
+                    } else {
+                        $sql = "INSERT INTO $tabla (nombre, densidad) VALUES(:dato, :densidad)";
+                        $query = $conn->prepare($sql);
+                        $result = $query->execute(['dato' => $dato, 'densidad' => $densidad]);
+                        ejecutarQuery($result, $conn);
+                    }
+                } else {
+                    $id_registro = $_POST['id_registro'];
+                    $sql = "UPDATE $tabla SET nombre = :dato, densidad =:densidad WHERE id = :registro";
+                    $query = $conn->prepare($sql);
+                    $result = $query->execute(['dato' => $dato, 'densidad' => $densidad, 'registro' => $id_registro]);
 
                     if ($result) {
                         echo '3';

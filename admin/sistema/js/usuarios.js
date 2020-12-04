@@ -122,7 +122,7 @@ $(document).ready(function () {
                 return false;
             }
         }
-
+        
         const archivo = $("#firma").val();
         let extensiones = archivo.substring(archivo.lastIndexOf("."));
 

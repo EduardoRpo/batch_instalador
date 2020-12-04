@@ -40,7 +40,7 @@ $('#adLineas').click(function (e) {
 
 $(document).on('click', '.link-borrar', function (e) {
     e.preventDefault();
-
+    debugger;
     let id = $(this).parent().parent().children().first().text();
 
     var confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este registro?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
@@ -90,7 +90,11 @@ $(document).on('click', '.link-editar', function (e) {
 $(document).ready(function () {
     $('#btnguardarPregunta').click(function (e) {
         e.preventDefault();
+        debugger;
         var datos = $('#frmpreguntas').serialize();
+        console.log(datos);
+        //return false;
+
         $.ajax({
             type: "POST",
             url: "php/operacionesDespejedelinea.php",
