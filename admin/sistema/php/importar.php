@@ -6,9 +6,9 @@ if (!empty($_POST)) {
 	//obtener datos
 	$datos = $_FILES['datosExcel'];
 	$operacion = $_POST['operacion'];
-	
+
 	$datos = file_get_contents($datos['tmp_name']);
-	
+
 	$datos = explode("\n", $datos);
 	$datos = array_filter($datos);
 
@@ -109,7 +109,7 @@ if (!empty($_POST)) {
 				$referencia = $data[0];
 				$nombre = ucfirst(mb_strtolower($data[1], "utf-8"));
 				$alias = ucfirst(mb_strtolower($data[2], "utf-8"));
-				
+
 				$conn->query("INSERT INTO materia_prima (referencia, nombre, alias) 
 							  VALUES ('{$referencia}', '{$nombre}', '{$alias}')");
 			}
@@ -124,6 +124,22 @@ if (!empty($_POST)) {
 				$conn->query("INSERT INTO instructivo_preparacion (proceso, tiempo, id_producto) 
 								  VALUES ('{$data[0]}', '{$data[1]}', '{$data[2]}')");
 			}
+			break;
+		case '10': // importar multipresentacion
+
+			//$conn->query("DELETE FROM instructivo_preparacion");
+			//$conn->query("ALTER TABLE instructivo_preparacion AUTO_INCREMENT = 1");
+
+			foreach ($dataList as $data) {
+				
+				$sql = "UPDATE producto SET multi =:multi WHERE referencia = :ref";
+				$query = $conn->prepare($sql);
+				$result = $query->execute([
+					'ref' => $data[0],
+					'multi' => $data[1],
+				]);
+			}
+			echo ('multi');
 			break;
 	}
 }

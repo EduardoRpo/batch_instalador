@@ -6,7 +6,7 @@ $("#datosExcel").change(function () {
 });
 
 function comprobarExtension(formulario, archivo, id) {
-    debugger;
+
     let confirm = alertify.confirm('Samara Cosmetics', 'Todos los datos serán eliminados y reemplazados por el nuevo archivo ¿Esta seguro de ejecutar la operación?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
     confirm.set('onok', function (r) {
         if (r) {
@@ -41,7 +41,8 @@ function cargarDataExcel(id) {
 
         success: function (data) {
             alertify.set("notifier", "position", "top-right"); alertify.success("Operación exitosa");
-            refreshTable();
+            if (data !== 'multi')
+                refreshTable();
             $('#datosExcel').val('');
             $("#btnCargarExcel").prop("disabled", true);
         }

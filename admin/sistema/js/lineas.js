@@ -90,11 +90,10 @@ $(document).on('click', '.link-editar', function (e) {
 $(document).ready(function () {
     $('#btnguardarPregunta').click(function (e) {
         e.preventDefault();
-        debugger;
+
         var datos = $('#frmpreguntas').serialize();
         console.log(datos);
-        //return false;
-
+  
         $.ajax({
             type: "POST",
             url: "php/operacionesDespejedelinea.php",
