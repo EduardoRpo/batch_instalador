@@ -27,7 +27,7 @@ if (!empty($_POST)) {
 
     case 4: //Eliminar
       $id = $_POST['id'];
-      $sql = "DELETE FROM preguntas WHERE id = :id";
+      $sql = "DELETE FROM modulo_pregunta WHERE id = :id";
       ejecutarEliminar($conn, $sql, $id);
       break;
     case 5: // Guardar y actualizar data

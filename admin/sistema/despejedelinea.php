@@ -76,6 +76,7 @@
                         <th>Respuesta Correcta</th>
                         <th>Proceso</th>
                         <th></th>
+                        <th></th>
                       </tr>
                     </thead>
                     <tbody>

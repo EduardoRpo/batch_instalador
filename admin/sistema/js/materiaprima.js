@@ -7,7 +7,6 @@ $('.contenedor-menu .menu ul.abrir1').show();
 
 /* Cargue de Parametros de Control en DataTable */
 
-/* function cargarTablaFormulas(referencia) { */
 $("#tblMateriaPrima").DataTable({
     destroy: true,
     scrollY: '50vh',
@@ -25,11 +24,9 @@ $("#tblMateriaPrima").DataTable({
         { "data": "referencia" },
         { "data": "nombre" },
         { "data": "alias" },
-        { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
-        { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" }
+        { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" },
     ]
 });
-/* } */
 
 /* Ocultar */
 

@@ -45,7 +45,7 @@ function comprobarExtension(formulario, archivo, tabla, id) {
 
         $("#btnCargarExcel").prop("disabled", false);
 
-        let confirm = alertify.confirm('Samara Cosmetics', 'Todos los datos serán eliminados y reemplazados por el nuevo archivo ¿Esta seguro de ejecutar la operación? Valide que los datos no contengan espacios en blanco, de lo contrario podria generar error la carga', null, null).set('labels', { ok: 'Si', cancel: 'No' });
+        let confirm = alertify.confirm('Samara Cosmetics', 'Todos los datos serán eliminados y reemplazados por el nuevo archivo ¿Esta seguro de ejecutar la operación?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
         confirm.set('onok', function (r) {
             if (r) {
                 cargarDataExcel(tabla, id);
@@ -74,9 +74,13 @@ function cargarDataExcel(tabla, id) {
         contentType: false,
 
         success: function (data) {
-            alertify.set("notifier", "position", "top-right"); alertify.success("Operación exitosa");
-            refreshTable(id);
-
+            if (data !== '') {
+                alertify.set("notifier", "position", "top-right"); alertify.error("los datos se cargaron con algún error. Valide que los datos no tengas espacios en blanco ó caractereres extraños");
+            }
+            else {
+                alertify.set("notifier", "position", "top-right"); alertify.success("Operación exitosa");
+                refreshTable(id);
+            }
         }
     });
 }

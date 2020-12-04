@@ -14,8 +14,11 @@ if (!empty($_POST)) {
 
 	// preparar datos
 	foreach ($datos as $data) {
-		$dataList[] = explode(";", ucfirst(mb_strtolower($data, "UTF-8")));
+		$dataList[] = explode(";", ucfirst(mb_strtolower($data, 'utf-8')));
 	}
+
+	/* print_r($dataList);
+	exit(); */
 
 	//Buscar operacion y ejecutar
 
@@ -103,10 +106,15 @@ if (!empty($_POST)) {
 			$conn->query("ALTER TABLE materia_prima AUTO_INCREMENT = 1");
 
 			foreach ($dataList as $data) {
+				$referencia = $data[0];
+				$nombre = ucfirst(mb_strtolower($data[1], "utf-8"));
+				$alias = ucfirst(mb_strtolower($data[2], "utf-8"));
+				
 				$conn->query("INSERT INTO materia_prima (referencia, nombre, alias) 
-							  VALUES ('{$data[0]}', '{$data[1]}', '{$data[2]}')");
+							  VALUES ('{$referencia}', '{$nombre}', '{$alias}')");
 			}
 			break;
+
 		case '9': // insertar en la BD instructivo
 
 			$conn->query("DELETE FROM instructivo_preparacion");
