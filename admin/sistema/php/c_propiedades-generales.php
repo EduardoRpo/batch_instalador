@@ -34,6 +34,8 @@ if (!empty($_POST)) {
 
             if ($tabla == 'notificacion_sanitaria')
                 $dato =  mb_strtoupper($_POST['datos'], "UTF-8");
+            else if ($tabla == 'propietario')
+                $dato =  ucwords(mb_strtolower($_POST['datos'], "UTF-8"));
             else
                 $dato =  ucfirst(mb_strtolower($_POST['datos'], "UTF-8"));
 
@@ -114,6 +116,7 @@ if (!empty($_POST)) {
                     }
                 } else {
                     $id_registro = $_POST['id_registro'];
+                    
                     $sql = "UPDATE $tabla SET nombre = :dato WHERE id = :registro";
                     $query = $conn->prepare($sql);
                     $result = $query->execute(['dato' => $dato, 'registro' => $id_registro]);

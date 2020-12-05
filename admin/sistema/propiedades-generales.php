@@ -251,7 +251,7 @@
                     <thead>
                       <tr>
                         <th>id</th>
-                        <th>Propieario</th>
+                        <th>Propietario</th>
                         <th></th>
                         <th></th>
                       </tr>
@@ -263,7 +263,7 @@
                 </div>
               </div>
               <form id="formDataExcel5" enctype="multipart/form-data">
-                <input type="file" name="datosExcel5" id="datosExcel5" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
+                <input type="file" name="datosExcel5" id="datosExcel5" class="form-control mb-3 ml-3" style="width: 500px; display:inline-flex">
                 <button type="button" id="btnCargarExcel5" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel5.value, 'propietario',5);" disabled="disabled">Cargar Datos</button>
               </form>
             </div>

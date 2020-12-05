@@ -177,7 +177,7 @@ $(document).on('click', '.link-editar', function (e) {
     $(`.tabla${id_tbl}`).html('Actualizar');
     $(`#txt-Id${id_tbl}`).val(id);
 
-    if (id_tbl === 4 & tablaBD!=='marca' || id_tbl === 5 || id_tbl === 6 || id_tbl === 8) {
+    if (id_tbl === 4 && tablaBD!=='marca' || id_tbl === 5  && tablaBD!=='propietario' || id_tbl === 6 || id_tbl === 8) {
         var res = nombre.split(" - ");
         $(`#min${id_tbl}`).val(res[0]);
         $(`#max${id_tbl}`).val(res[1]);
