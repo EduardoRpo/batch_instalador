@@ -122,7 +122,7 @@ function cargarControlProceso() {
         data: { modulo, idBatch },
 
         success: function (response) {
-            debugger
+            
             let info = JSON.parse(response);
             let index = info.data.length
 
@@ -144,7 +144,7 @@ function cargarControlProceso() {
 /* Registro de Firma */
 
 function firmado(datos, posicion) {
-
+    debugger;
     let template = '<img id=":id:" src=":firma:" alt="firma_usuario" height="130">';
     let parent;
 
@@ -154,7 +154,7 @@ function firmado(datos, posicion) {
         if (modulo == 4) {
             parent = $('#aprobacion_realizado').parent();
             $('#aprobacion_realizado').remove();
-            $('.aprobacion_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
+            $('#aprobacion_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
             $('.aprobacion_verificado').prop('disabled', false);
         }
     }

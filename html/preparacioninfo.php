@@ -282,7 +282,7 @@ include("modal/modal_condicionesMedio.php");
 
                   <div class="maquinasPreparacion__group">
                     <label for="">Linea</label>
-                    <select class="selectpicker form-control" id="select-Linea"></select>
+                    <select class="selectpicker form-control select-linea" id="select-Linea"></select>
                   </div>
 
                   <div class="maquinasPreparacion__group">

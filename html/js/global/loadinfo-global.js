@@ -142,7 +142,7 @@ $(document).ready(function () {
         success: function (r) {
             info = JSON.parse(r);
 
-            let $select = $('#select-Linea');
+            let $select = $('.select-Linea');
             $select.empty();
 
             $select.append('<option disabled selected>' + "Seleccionar" + '</option>');

@@ -19,7 +19,7 @@
       
   }
   if (empty($arreglo)) {
-      echo '3';
+      echo '0';
       exit();
   }
 

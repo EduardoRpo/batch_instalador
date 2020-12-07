@@ -38,7 +38,7 @@ function guardar_condicionesMedio() {
     let id_batch = url.split("/");
 
     /* Validar que existan datos en los campos */
-
+    debugger;
     if (temperatura === "" || humedad === "") {
         alertify.set("notifier", "position", "top-right"); alertify.error("Complete todos los datos para continuar con el proceso.");
         return false;

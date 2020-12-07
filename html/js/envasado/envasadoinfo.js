@@ -5,9 +5,7 @@ $(document).ready(function () {
   setTimeout(() => {
     if (proceso == 5) {
       busqueda_multi(batch);
-      cargarTablaEnvase(batch);
       identificarDensidad(batch);
-      calcularMuestras(batch);
     }
   }, 500);
 });
@@ -27,31 +25,38 @@ function busqueda_multi(batch) {
     'data': { id: idBatch },
 
     success: function (data) {
-      var batchMulti = JSON.parse(data);
+      batchMulti = JSON.parse(data);
 
       let j = 1;
-      if (batchMulti !== "") {
-        //validar las presentacion para una sola referencia y validar en el servidor que se esta repitiendo las presentaciones
-
+      if (batchMulti !== 0) {
         for (let i = 0; i < batchMulti.length; i++) {
-          $(`#tanque${j}`).html(formatoCO(batchMulti[i].presentacion));
-          $(`#cantidad${j}`).html(formatoCO(batchMulti[i].cantidad));
-          $(`#total${j}`).html(formatoCO(batchMulti[i].total));
+          referencia = batchMulti[i].referencia;
+          presentacion = batchMulti[i].presentacion;
+          cantidad = batchMulti[i].cantidad;
+          total = batchMulti[i].total;
+
+          $(`#tanque${j}`).html(formatoCO(presentacion));
+          $(`#cantidad${j}`).html(formatoCO(cantidad));
+          $(`#total${j}`).html(formatoCO(total));
 
           $(`#fila${j}`).attr("hidden", false);
           $(`#envasado${j}`).attr("hidden", false);
-          $(`#envasadoMulti${j}`).html('ENVASADO PRESENTACIÓN: ' + batchMulti[i].presentacion);
+          $(`#envasadoMulti${j}`).html('ENVASADO PRESENTACIÓN: ' + presentacion);
+          cargarTablaEnvase(j, referencia, cantidad);
+          calcularMuestras(j, cantidad);
           j++;
         }
       } else {
 
-        batchMulti = localStorage.getItem('batch');
-        debugger;
         $(`#tanque${j}`).html(formatoCO(batch.presentacion));
         $(`#cantidad${j}`).html(formatoCO(batch.unidad_lote));
         $(`#total${j}`).html(formatoCO(batch.tamano_lote));
         $(`#envasadoMulti${j}`).html('ENVASADO PRESENTACIÓN: ' + batch.presentacion);
+
+        cargarTablaEnvase(j, batch.referencia, batch.unidad_lote);
+        calcularMuestras(j, batch.unidad_lote);
       }
+      multi = j + 1;
     },
     error: function (r) {
       alertify.set("notifier", "position", "top-right"); alertify.error("Error al Cargar la multipresentacion.");
@@ -70,7 +75,7 @@ function ocultarEnvasado() {
 
 /* Cargar linea y maquinas de acuerdo con la seleccion */
 
-$("#select-Linea").change(function () {
+$(".select-Linea").change(function () {
   cargarEquipos();
 })
 
@@ -87,7 +92,7 @@ function identificarDensidad(batch) {
     data: { modulo: 4, idBatch },
 
     success: function (response) {
-      //validar densidad para una sola presentacion
+      debugger;
       if (response == 3)
         console.log('');
       else {
@@ -104,7 +109,7 @@ function identificarDensidad(batch) {
 }
 
 function calcularPeso(densidadAprobada) {
-
+  debugger;
   /* densidadAprobada = identificarDensidad(); */
 
   var peso_min = batch.presentacion * densidadAprobada; // DENSIDAD DEBE TRAERSE DE LA GUARDADO EN APROBACION POR CALIDAD
@@ -116,43 +121,47 @@ function calcularPeso(densidadAprobada) {
   var prom = (parseInt(peso_min) + peso_max) / 2;
   var promedio = formatoCO(prom);
 
-  $('#Minimo').val(peso_minimo);
-  $('#Maximo').val(peso_maximo);
-  $('#Medio').val(promedio);
-}
-
-/* Validar que el lote digitado sea el correcto */
-
-function validarLote(data) {
-  let lote = $('#in_numero_lote').val();
-
-  if (lote != data) {
-    alertify.set("notifier", "position", "top-right"); alertify.error("Lote digitado no corresponde al procesado");
-    return false;
-  }
+  $(`.minimo`).val(peso_minimo);
+  $(`.maximo`).val(peso_maximo);
+  $(`.medio`).val(promedio);
 
 }
+
+/* Validar que el valor del lote corresponda */
+
+$(document).ready(function () {
+  $(".validarLote").blur(function () {
+    let data = $(".validarLote").val();
+    let lote = $('#in_numero_lote').val();
+
+    if (lote != data) {
+      alertify.set("notifier", "position", "top-right"); alertify.error("Lote digitado no corresponde al procesado. Valide nuevamente!");
+      $("#validarLote").val('').css('border-color', 'red');
+      return false;
+    }
+    $("#validarLote").css('border-color', '#67757c');
+  });
+});
 
 /* Cargar el numero de muestras de acuerdo con las unidades a producir*/
 
-function calcularMuestras(batch) {
-  let muestras = batch.unidad_lote;
+function calcularMuestras(j, unidades) {
 
-  if (muestras <= 2000) {
-    $('#Muestras').val(20);
-  } else if (muestras >= 2001 && muestras < 4001) {
-    $('#Muestras').val(40);
+  if (unidades <= 2000) {
+    $(`#muestras${j}`).val(20);
+  } else if (unidades >= 2001 && unidades < 4001) {
+    $(`#muestras${j}`).val(40);
   } else {
-    $('#Muestras').val(60);
+    $(`#muestras${j}`).val(60);
   }
 }
 
 
 /* Cargar el numero de muestras */
 
-function muestrasEnvase() {
+function muestrasEnvase(id) {
 
-  let muestras = $('#Muestras').val();
+  let muestras =  $(`#muestras${id}`).val();
 
   for (let i = 1; i < 61; i++) {
     $(`#txtMuestra${i}`).remove();
@@ -200,80 +209,59 @@ function guardarMuestras() {
 }
 
 
-/* Carga tabla de propiedades del producto */
-function cargarTablaEnvase(batch) {
+/* Carga tabla de envase del producto */
+
+function cargarTablaEnvase(j, referencia, cantidad) {
 
   $.ajax({
     url: '../../html/php/envase.php',
     type: 'POST',
-    data: { referencia: batch.referencia },
+    data: { referencia },
 
   }).done((data, status, xhr) => {
-    //no debe traer la cantidad total de lote original sino de la cantidad de multipresentacion
+
     var info = JSON.parse(data);
-    empaqueEnvasado = Math.round(info.data[0].id_empaque / batch.unidad_lote);
-    unidades = formatoCO(batch.unidad_lote);
+    empaqueEnvasado = Math.round(cantidad / info.data[0].unidad_empaque);
+    unidades = formatoCO(cantidad);
 
-    $('#tapa').html(info.data[0].id_tapa);
-    $('#descripcion_tapa').html(info.data[0].tapa);
+    $(`.tapa${j}`).html(info.data[0].id_tapa);
+    $(`.descripcion_tapa${j}`).html(info.data[0].tapa);
 
-    $('#envase').html(info.data[0].id_envase);
-    $('#descripcion_envase').html(info.data[0].envase);
+    $(`.envase${j}`).html(info.data[0].id_envase);
+    $(`.descripcion_envase${j}`).html(info.data[0].envase);
 
-    $('#etiqueta').html(info.data[0].id_etiqueta);
-    $('#descripcion_etiqueta').html(info.data[0].etiqueta);
+    $(`.etiqueta${j}`).html(info.data[0].id_etiqueta);
+    $(`.descripcion_etiqueta${j}`).html(info.data[0].etiqueta);
 
-    $('#empaque').html(info.data[0].id_empaque);
-    $('#descripcion_empaque').html(info.data[0].empaque);
+    $(`.empaque${j}`).html(info.data[0].id_empaque);
+    $(`.descripcion_empaque${j}`).html(info.data[0].empaque);
 
-    $('#otros').html(info.data[0].id_otros);
-    $('#descripcion_otros').html(info.data[0].otros);
+    $(`.otros${j}`).html(info.data[0].id_otros);
+    $(`.descripcion_otros${j}`).html(info.data[0].otros);
+    $(`.unidades${j}`).html(unidades);
+    $(`.unidades${j}e`).html(empaqueEnvasado);
 
-    for (let i = 1; i < 11; i++) {
-      if (i == 4 || i == 9)
-        $('#unidades' + i).html(empaqueEnvasado);
-      else
-        $('#unidades' + i).html(unidades);
-    }
-
-    $('#tapa1').html(info.data[0].id_tapa);
-    $('#descripcion_tapa1').html(info.data[0].tapa);
-
-    $('#envase1').html(info.data[0].id_envase);
-    $('#descripcion_envase1').html(info.data[0].envase);
-
-    $('#etiqueta1').html(info.data[0].id_etiqueta);
-    $('#descripcion_etiqueta1').html(info.data[0].etiqueta);
-
-    $('#empaque1').html(info.data[0].id_empaque);
-    $('#descripcion_empaque1').html(info.data[0].empaque);
-
-    $('#otros1').html(info.data[0].id_otros);
-    $('#descripcion_otros1').html(info.data[0].otros);
   });
 }
 
 /* Calculo de la devolucion de material */
 
-function devolucionMaterialEnvasada(valor) {
+function devolucionMaterialEnvasada(valor, id) {
 
   let unidades_envasadas = formatoCO(parseInt(valor));
+  empaqueEnvasado = $(`.unidades${id}e`).html();
 
   if (isNaN(unidades_envasadas)) {
     unidades_envasadas = 0;
   }
-  debugger;
-  for (let i = 1; i < 11; i++) {
-    if (i == 4)
-      $(`#txtEnvasada${i}`).html(empaqueEnvasado);
-    else
-      //si la cantidad de envasado es diferente a los recibido envie una notificacion, la orden de produccion, diferencia entre recibida y envasada y presentacion
-      $(`#txtEnvasada${i}`).html(unidades_envasadas);
-  }
+//si la cantidad de envasado es diferente a los recibido envie una notificacion, la orden de produccion, diferencia entre recibida y envasada y presentacion
+  $(`.envasada${id}`).html(unidades_envasadas);
+  $(`.envasada${id}e`).html(empaqueEnvasado);
+
 }
 
 function devolucionMaterialTotal(valor, id) {
-  debugger;
+
   //let recibida= parseInt(formatoGeneral($(`#unidades${id}`).html()));
   let envasada = parseInt($(`#txtEnvasada${id}`).val());
 
