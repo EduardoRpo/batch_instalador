@@ -305,7 +305,7 @@ include('modal/m_muestras.php');
                       </div>
 
                     </div>
-                    <!-- </div> -->
+
                     <div class="row" style="margin: 1%">
                       <div class="col-md-12 align-self-center mb-3">
                         <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Control de Peso en Proceso</h3>
@@ -317,13 +317,13 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="muestras1" style="text-align: center;" readonly>
                       </div>
                       <div class="col-md-1 align-self-center" style="margin-top: 1%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;" onclick="muestrasEnvase(1);" data-toggle="modal" data-target="#m_muestras">Iniciar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;" onclick="muestrasEnvase(1);" data-toggle="modal" data-target="#m_muestras">Iniciar</button> <!--   -->
                       </div>
                       <div class="col-md-1 align-self-center" style="margin-top: 1%">
                         <label for="recipient-name" class="col-form-label">Promedio</label>
                       </div>
                       <div class="col-md-3 align-self-center" style="margin-top: 1%">
-                        <input type="text" class="form-control" id="Promedio">
+                        <input type="text" class="form-control" id="promedio1" disabled>
                       </div>
                       <div class="col-md-4 align-self-center">
                         <label for="controlpeso_realizado" class="col-form-label">Realizado Por</label>
@@ -431,11 +431,6 @@ include('modal/m_muestras.php');
                         <button type="button" class="btn waves-effect waves-light btn-danger" id="devolucion_verificado">Firmar</button>
                       </div>
 
-
-                      <!-- <div class="firmas_envasado__group-btn">
-                        <button type="button" class="btn btn-secondary btn-cancelar" style="width: 100px; justify-self:end;">Cancelar</button>
-                        <button type="button" class="btn btn-primary btn-aceptar" style="width: 100px; ">Aceptar</button>
-                      </div> -->
                     </div>
                   </div>
                 </div>
@@ -569,7 +564,7 @@ include('modal/m_muestras.php');
                         <label for="recipient-name" class="col-form-label">Promedio</label>
                       </div>
                       <div class="col-md-3 align-self-center" style="margin-top: 1%">
-                        <input type="text" class="form-control" id="Promedio">
+                        <input type="text" class="form-control" id="promedio2" disabled>
                       </div>
                       <div class="col-md-4 align-self-center">
                         <label for="controlpeso_realizado" class="col-form-label">Realizado Por</label>
@@ -817,7 +812,7 @@ include('modal/m_muestras.php');
                         <label for="recipient-name" class="col-form-label">Promedio</label>
                       </div>
                       <div class="col-md-3 align-self-center" style="margin-top: 1%">
-                        <input type="text" class="form-control" id="Promedio">
+                        <input type="text" class="form-control" id="promedio3" disabled>
                       </div>
                       <div class="col-md-4 align-self-center">
                         <label for="controlpeso_realizado" class="col-form-label">Realizado Por</label>

@@ -1,4 +1,4 @@
-
+var pres;
 //Carga el proceso despues de cargar la data  del Batch
 
 $(document).ready(function () {
@@ -92,9 +92,9 @@ function identificarDensidad(batch) {
     data: { modulo: 4, idBatch },
 
     success: function (response) {
-      debugger;
-      if (response == 3)
-        console.log('');
+
+      if (response == 0)
+        return false;
       else {
         let espec = JSON.parse(response);
         for (let i = 0; i < espec.data.length; i++) {
@@ -109,7 +109,7 @@ function identificarDensidad(batch) {
 }
 
 function calcularPeso(densidadAprobada) {
-  debugger;
+
   /* densidadAprobada = identificarDensidad(); */
 
   var peso_min = batch.presentacion * densidadAprobada; // DENSIDAD DEBE TRAERSE DE LA GUARDADO EN APROBACION POR CALIDAD
@@ -160,52 +160,67 @@ function calcularMuestras(j, unidades) {
 /* Cargar el numero de muestras */
 
 function muestrasEnvase(id) {
+  pres = id;
+  let envase = $(`#envasadoMulti${pres}`).html();
+  let presentacion = envase.slice(23, envase.length);
+  let muestras = $(`#muestras${id}`).val();
+  let recoveredData = localStorage.getItem(presentacion)
+  let j = 1;
 
-  let muestras =  $(`#muestras${id}`).val();
-
-  for (let i = 1; i < 61; i++) {
+  for (let i = 1; i <= muestras; i++) {
     $(`#txtMuestra${i}`).remove();
   }
 
   for (let i = 1; i <= muestras; i++) {
     $(".txtMuestras").append(`<input type='number' min='1' class='form-control' id='txtMuestra${i}' placeholder='${i}'>`);
   }
-
-
-  //$('#m_muestras').show();
+  
+  if (recoveredData !== null) {
+    let data = JSON.parse(recoveredData)
+    for (let i = 0; i <= data.length; i++) {
+      $(`#txtMuestra${j}`).val(data[i]);
+      j++;
+    }
+  }
 }
 
 function guardarMuestras() {
+  let envase = $(`#envasadoMulti${pres}`).html();
+  let presentacion = envase.slice(23, envase.length);
 
-  let cantidad_muestras = $('#Muestras').val();
+  let cantidad_muestras = $('#muestras1').val();
   let muestras = [];
+  let recoveredData = localStorage.getItem(presentacion)
 
-  /* for (i = 1; i <= cantidad_muestras; i++) {
-    if ($(`#txtMuestra${i}`).val() === '') {
-      alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todas las muestras");
-      return false;
-    }
-  } */
-
-  for (i = 1; i <= cantidad_muestras; i++) {
-    muestras.push($(`#txtMuestra${i}`).val());
+  if (recoveredData !== '') {
+    localStorage.removeItem(presentacion);
   }
 
+  for (i = 1; i <= cantidad_muestras; i++) {
+    muestra = $(`#txtMuestra${i}`).val()
+    if (muestra !== '')
+      muestras.push(muestra);
+    else
+      break;
+  }
 
-  $.ajax({
-    method: 'POST',
-    url: '../../html/php/muestras.php',
-    data: { id: idBatch, muestras: muestras },
+  localStorage.setItem(presentacion, JSON.stringify(muestras));
+  
+  if (i = cantidad_muestras) {
+    $.ajax({
+      method: 'POST',
+      url: '../../html/php/muestras.php',
+      data: { id: idBatch, muestras: muestras },
 
-    success: function (response) {
-      alertify.set("notifier", "position", "top-right"); alertify.error("Muestras almacenadas satisfactoriamente");
-      $('#m_muestras').hide();
-    },
-    error: function (response) {
-      console.log(response);
-    }
-  })
-
+      success: function (response) {
+        alertify.set("notifier", "position", "top-right"); alertify.success("Muestras almacenadas satisfactoriamente");
+        $('#m_muestras').modal('hide');
+      },
+      error: function (response) {
+        console.log(response);
+      }
+    })
+  }
 }
 
 
@@ -254,7 +269,7 @@ function devolucionMaterialEnvasada(valor, id) {
   if (isNaN(unidades_envasadas)) {
     unidades_envasadas = 0;
   }
-//si la cantidad de envasado es diferente a los recibido envie una notificacion, la orden de produccion, diferencia entre recibida y envasada y presentacion
+  //si la cantidad de envasado es diferente a los recibido envie una notificacion, la orden de produccion, diferencia entre recibida y envasada y presentacion
   $(`.envasada${id}`).html(unidades_envasadas);
   $(`.envasada${id}e`).html(empaqueEnvasado);
 
