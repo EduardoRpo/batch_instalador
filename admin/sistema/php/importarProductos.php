@@ -67,11 +67,11 @@ if ($tabla == 'producto') {
 	}
 } else if ($tabla == 'tapa') {
 	foreach ($dataList as $data) {
-		print_r($data[0]);
+		/* print_r($data[0]);
 		print_r(' ');
 		$nombre = ucfirst(mb_strtolower($data[1]));
-		print_r($nombre);
-		
+		print_r($nombre); */
+
 		$conn->query("INSERT INTO $tabla (id, nombre) 
 						  VALUES ('{$data[0]}', '{$data[1]}')");
 	}
