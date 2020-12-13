@@ -65,7 +65,7 @@ if ($tabla == 'producto') {
 		$conn->query("INSERT INTO $tabla (nombre, vencimiento) 
 						  VALUES ('{$data[0]}', '{$data[1]}')");
 	}
-} else if ($tabla == 'tapa') {
+} else if ($tabla == 'tapa' || $tabla == 'envase' || $tabla == 'etiqueta' || $tabla == 'empaque' || $tabla == 'otros') {
 	foreach ($dataList as $data) {
 		/* print_r($data[0]);
 		print_r(' ');
