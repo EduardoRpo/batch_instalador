@@ -100,8 +100,8 @@ require_once('modal/m_productos.php');
                 </div>
               </div>
               <form action="" id="formDataExcel7" enctype="multipart/form-data">
-                <input type="file" name="datosExcel7" id="datosExcel7" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
-                <button type="button" id="btnCargarExcel7" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel7.value, 'producto', 7);" disabled="disabled">Cargar Datos</button>
+                <input type="file" name="datosExcel7" id="datosExcel7" class="form-control datosExcel mb-3 ml-3" style="width: 500px; display:inline-flex">
+                <button type="button" id="btnCargarExcel7" class="btn btn-primary btnCargarExcel ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel7.value, 'producto', 7);" disabled="disabled">Cargar Datos</button>
               </form>
             </div>
           </div>

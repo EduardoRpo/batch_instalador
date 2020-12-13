@@ -1,4 +1,4 @@
-<?php require_once('php/sesion/sesion.php');?>
+<?php require_once('php/sesion/sesion.php'); ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -100,9 +100,9 @@
                   </table>
                 </div>
               </div>
-              <form action="" id="formDataExcel" enctype="multipart/form-data">
-                <input type="file" name="datosExcel" id="datosExcel" class="form-control mb-3 ml-3" style="width: auto; display:inline-flex">
-                <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value);" disabled="disabled">Cargar Datos</button>
+              <form id="formDataExcel1" enctype="multipart/form-data">
+                <input type="file" name="datosExcel1" id="datosExcel1" class="form-control datosExcel mb-3 ml-3" style="width: 500px; display:inline-flex">
+                <button type="button" id="btnCargarExcel1" class="btn btn-primary btnCargarExcel ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel1.value, 'tapa',1);" disabled="disabled">Cargar Datos</button>
               </form>
             </div>
           </div>
@@ -112,7 +112,7 @@
                 <h4 class="card-title">Envases</h4>
                 <hr>
                 <button type="button" class="btn btn-primary" onclick="adicionar(2);">Adicionar</button>
-                <form id="frmAdicionar2"  class="frmAdicionar2" style="display: none;">
+                <form id="frmAdicionar2" class="frmAdicionar2" style="display: none;">
                   <label for=""><b>Código</b></label>
                   <label for=""><b>Descripción de Envase</b></label>
 
@@ -141,6 +141,10 @@
                   </table>
                 </div>
               </div>
+              <form action="" id="formDataExcel2" enctype="multipart/form-data">
+                <input type="file" name="datosExcel2" id="datosExcel2" class="form-control datosExcel mb-3 ml-3" style="width: 500px; display:inline-flex">
+                <button type="button" id="btnCargarExcel2" class="btn btn-primary btnCargarExcel ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel2.value, 'envase', 2);" disabled="disabled">Cargar Datos</button>
+              </form>
             </div>
           </div>
         </div>
@@ -152,7 +156,7 @@
                 <h4 class="card-title">Etiquetas</h4>
                 <hr>
                 <button type="button" class="btn btn-primary" onclick="adicionar(3);">Adicionar</button>
-                <form id="frmAdicionar3"  class="frmAdicionar2" style="display: none;">
+                <form id="frmAdicionar3" class="frmAdicionar2" style="display: none;">
                   <label for=""><b>Código</b></label>
                   <label for=""><b>Descripción Etiqueta</b></label>
 
@@ -181,6 +185,10 @@
                   </table>
                 </div>
               </div>
+              <form action="" id="formDataExcel3" enctype="multipart/form-data">
+                <input type="file" name="datosExcel3" id="datosExcel3" class="form-control datosExcel mb-3 ml-3" style="width: 500px; display:inline-flex">
+                <button type="button" id="btnCargarExcel3" class="btn btn-primary btnCargarExcel ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel3.value, 'etiqueta', 3);" disabled="disabled">Cargar Datos</button>
+              </form>
             </div>
           </div>
           <div class="col-md-12">
@@ -189,7 +197,7 @@
                 <h4 class="card-title">Cajas</h4>
                 <hr>
                 <button type="button" class="btn btn-primary" onclick="adicionar(4);">Adicionar</button>
-                <form id="frmAdicionar4"  class="frmAdicionar2" style="display: none;">
+                <form id="frmAdicionar4" class="frmAdicionar2" style="display: none;">
                   <label for=""><b>Código</b></label>
                   <label for=""><b>Descripción</b></label>
 
@@ -218,7 +226,12 @@
                   </table>
                 </div>
               </div>
+              <form id="formDataExcel4" enctype="multipart/form-data">
+                <input type="file" name="datosExcel4" id="datosExcel4" class="form-control datosExcel mb-3 ml-3" style="width: 500px; display:inline-flex">
+                <button type="button" id="btnCargarExcel4" class="btn btn-primary btnCargarExcel ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel4.value, 'empaque', 4);" disabled="disabled">Cargar Datos</button>
+              </form>
             </div>
+
           </div>
         </div>
 
@@ -258,7 +271,12 @@
                   </table>
                 </div>
               </div>
+              <form action="" id="formDataExcel5" enctype="multipart/form-data">
+              <input type="file" name="datosExcel5" id="datosExcel5" class="form-control datosExcel mb-3 ml-3" style="width: 500px; display:inline-flex">
+              <button type="button" id="btnCargarExcel5" class="btn btn-primary btnCargarExcel ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel5.value, 'otros', 5);" disabled="disabled">Cargar Datos</button>
+            </form>
             </div>
+            
           </div>
 
         </div>
@@ -289,7 +307,7 @@
   <script src="../assets/js/plugins/bootstrap-notify.js"></script>
 
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script><!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
+  <script src="../assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script>
   <!-- <script src="../assets/demo/demo.js"></script> -->
 
   <!-- Alertify -->
@@ -298,7 +316,7 @@
   <!-- javascript inicializacion datatables -->
   <script src="js/empaques.js"></script>
   <script src="js/menu.js"></script>
-  <script src="js/cargarDatos.js"></script>
+  <script src="js/ImportarProductos.js"></script>
 
 </body>
 

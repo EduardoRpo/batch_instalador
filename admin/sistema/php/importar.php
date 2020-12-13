@@ -17,9 +17,6 @@ if (!empty($_POST)) {
 		$dataList[] = explode(";", ucfirst(mb_strtolower($data, 'utf-8')));
 	}
 
-	/* print_r($dataList);
-	exit(); */
-
 	//Buscar operacion y ejecutar
 
 	switch ($operacion) {

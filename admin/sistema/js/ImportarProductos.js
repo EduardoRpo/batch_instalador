@@ -1,40 +1,12 @@
 
 /* Activar el boton de carga hasta que solo se haya seleccionado un archivo */
 
-$("#datosExcel1").change(function (e) {
+$(".datosExcel").change(function (e) {
     e.preventDefault();
-    activarBoton(1);
+    $(`.btnCargarExcel`).prop("disabled", false);
 });
 
-$("#datosExcel2").change(function (e) {
-    e.preventDefault();
-    activarBoton(2);
-});
-$("#datosExcel3").change(function (e) {
-    e.preventDefault();
-    activarBoton(3);
-});
-$("#datosExcel4").change(function (e) {
-    e.preventDefault();
-    activarBoton(4);
-});
-$("#datosExcel5").change(function (e) {
-    e.preventDefault();
-    activarBoton(5);
-});
-$("#datosExcel6").change(function (e) {
-    e.preventDefault();
-    activarBoton(6);
-});
-$("#datosExcel7").change(function (e) {
-    e.preventDefault();
-    activarBoton(7);
-});
-
-function activarBoton(id) {
-    $(`#btnCargarExcel${id}`).prop("disabled", false);
-}
-
+/* Comprobar extension del archivo para cargar */
 
 function comprobarExtension(formulario, archivo, tabla, id) {
 
@@ -76,9 +48,12 @@ function cargarDataExcel(tabla, id) {
         success: function (data) {
             if (data !== '') {
                 alertify.set("notifier", "position", "top-right"); alertify.error("los datos se cargaron con algún error. Valide que los datos no tengas espacios en blanco ó caractereres extraños");
+                $(`#datosExcel${id}`).val('');
+                refreshTable(id);
             }
             else {
                 alertify.set("notifier", "position", "top-right"); alertify.success("Operación exitosa");
+                $(`#datosExcel${id}`).val('');
                 refreshTable(id);
             }
         }

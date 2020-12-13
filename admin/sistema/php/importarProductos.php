@@ -31,7 +31,6 @@ $datos = array_filter($datos);
 
 // preparar datos
 foreach ($datos as $data) {
-	//$dataList[] = explode(";", $data);
 	$dataList[] = explode(";", ucfirst(mb_strtolower($data, 'utf-8')));
 }
 
@@ -63,11 +62,17 @@ if ($tabla == 'producto') {
 	}
 } else if ($tabla == 'notificacion_sanitaria') {
 	foreach ($dataList as $data) {
-		/* print_r($data[0]);
-		print_r(' ');
-		print_r($data[1]); */
-
 		$conn->query("INSERT INTO $tabla (nombre, vencimiento) 
+						  VALUES ('{$data[0]}', '{$data[1]}')");
+	}
+} else if ($tabla == 'tapa') {
+	foreach ($dataList as $data) {
+		print_r($data[0]);
+		print_r(' ');
+		$nombre = ucfirst(mb_strtolower($data[1]));
+		print_r($nombre);
+		
+		$conn->query("INSERT INTO $tabla (id, nombre) 
 						  VALUES ('{$data[0]}', '{$data[1]}')");
 	}
 } else {
