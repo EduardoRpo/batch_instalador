@@ -30,7 +30,8 @@
     public function findAll()
     {
       $connection = Connection::getInstance()->getConnection();
-      $stmt = $connection->prepare("SELECT * FROM producto INNER JOIN batch ON batch.id_producto = producto.referencia INNER JOIN linea ON producto.id_linea = linea.id INNER JOIN propietario ON producto.id_propietario = propietario.id INNER JOIN presentacion_comercial ON producto.id_presentacion_comercial = presentacion_comercial.id WHERE batch.estado = 1 OR batch.estado = 2 AND batch.fecha_programacion = CURRENT_DATE()");
+      //$stmt = $connection->prepare("SELECT * FROM producto INNER JOIN batch ON batch.id_producto = producto.referencia INNER JOIN linea ON producto.id_linea = linea.id INNER JOIN propietario ON producto.id_propietario = propietario.id WHERE batch.estado = 1 OR batch.estado = 2 AND batch.fecha_programacion = CURRENT_DATE()");
+      $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.id_producto as referencia, batch.numero_lote, producto.nombre_referencia FROM batch INNER JOIN producto ON producto.referencia = batch.id_producto WHERE batch.estado = 1 OR batch.estado = 2 AND batch.fecha_programacion = CURRENT_DATE() ORDER BY batch.id_batch DESC");
       $stmt->execute();
       $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
       $pesajes = $stmt->fetchAll($connection::FETCH_ASSOC);
@@ -47,10 +48,8 @@
     public function findById($id)
     {
       $connection = Connection::getInstance()->getConnection();
-      $stmt = $connection->prepare("SELECT p.referencia, p.nombre_referencia, batch.numero_orden, batch.tamano_lote, batch.numero_lote, batch.unidad_lote, linea.nombre as linea, batch.fecha_programacion, pc.nombre as presentacion
-                                    FROM producto p
+      $stmt = $connection->prepare("SELECT p.referencia, p.nombre_referencia,  p.presentacion_comercial as presentacion, batch.numero_orden, batch.tamano_lote, batch.numero_lote, batch.unidad_lote, linea.nombre as linea, batch.fecha_programacion FROM producto p
                                     INNER JOIN batch ON batch.id_producto = p.referencia INNER JOIN linea ON linea.id = p.id_linea
-                                    INNER JOIN presentacion_comercial pc ON pc.id=p.id_presentacion_comercial 
                                     WHERE id_batch =:idBatch");
       
       $stmt->execute(array('idBatch' => $id));

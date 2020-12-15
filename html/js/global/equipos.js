@@ -2,7 +2,7 @@
 /* carga de maquinas */
 
 function cargarEquipos() {
-    debugger;
+    
     const linea = $(".select-Linea").val();
 
     $.ajax({

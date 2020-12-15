@@ -330,7 +330,7 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="controlpeso_realizado" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger" id="controlpeso_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger" id="controlpeso_realizado" onclick="cargar(this, 'firma3')" style="width: 100%; height: 38px;">Firmar</button>
                       </div>
 
                       <div class="col-md-4 align-self-center">
@@ -338,7 +338,7 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="controlpeso_verificado" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger" id="controlpeso_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger" id="controlpeso_verificado" onclick="cargar(this, 'firma4')" style="width: 100%; height: 38px;">Firmar</button>
                       </div>
 
                     </div>
@@ -819,7 +819,7 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="controlpeso_realizado" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger" id="controlpeso_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger" id="controlpeso_realizado" onclick="cargar(this, 'firma3')" style="width: 100%; height: 38px;">Firmar Hola</button>
                       </div>
 
                       <div class="col-md-4 align-self-center">
@@ -827,7 +827,7 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="controlpeso_verificado" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger" id="controlpeso_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger" id="controlpeso_verificado" onclick="cargar(this, 'firma4')" style="width: 100%; height: 38px;">Firmar</button>
                       </div>
 
                     </div>
@@ -968,7 +968,7 @@ include('modal/m_muestras.php');
           <script src="../../html/js/global/condicionesdelMedio.js"></script>
           <script src="../../html/js/global/cargarBatch.js"></script>
           <script src="../../html/js/firmar/firmar1raSeccion.js"></script>
-          <script src="../../html/js/firmar/firmar2daSeccion.js"></script>
+          <script src="../../html/js/firmar/firmar2daSeccionEnvasado.js"></script>
           <script src="../../html/js/envasado/envasadoinfo.js"></script>
           <script src="../../html/js/global/incidencias.js"></script>
 

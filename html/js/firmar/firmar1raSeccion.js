@@ -20,8 +20,14 @@ function cargar(btn, idbtn) {
 
     /* Validacion que todos los datos en linea y el formulario de control en preparacion no esten vacios */
 
-    if (modulo == 3 && id == 'preparacion_realizado') {
+    if (modulo == 3 && id == 'preparacion_realizado' || modulo == 5 && id == 'controlpeso_realizado') {
         validar = validarLinea();
+        if (validar == 0)
+            return false;
+    }
+
+    if (modulo == 5 && id == 'controlpeso_realizado') {
+        validar = validarLote();
         if (validar == 0)
             return false;
     }
@@ -36,8 +42,8 @@ function cargar(btn, idbtn) {
 
     /* Valida que se ha seleccionado el producto de desinfeccion para el proceso de aprobacion */
 
-    if (modulo == 2 || modulo == 4 || modulo == 3) {
-        debugger;
+    if (modulo == 2 || modulo == 4 || modulo == 3 || modulo == 5) {
+
         let seleccion = $('#sel_producto_desinfeccion').val();
         if (modulo == 3 && seleccion != "Seleccione")
             seleccion = $('#select-Linea').val();
@@ -117,9 +123,9 @@ function preparar(datos) {
         firmarVerficadoDespeje(info[0].id);
         firmar(info);
     }
-
+    debugger;
     if (btn_id == 'firma3') {
-        firmar2daSeccion(info);
+       firmar2daSeccion(info);
         /* firmar(info); */
     }
 

@@ -96,8 +96,8 @@ function ejecutarSelect($conn, $query)
 function ejecutarSelect1($query)
 {
     //Almacena la data en array
-    $data = $query->fetch(PDO::FETCH_ASSOC); 
-    
+    $data = $query->fetch(PDO::FETCH_ASSOC);
+
     if (empty($data)) {
         echo '3';
         exit();
@@ -108,29 +108,28 @@ function ejecutarSelect1($query)
 
 function transaccion($conn, $query1, $query2)
 {
-    try{
+    try {
         $conn->beginTransaction();
         /* $result = $conn->query("SELECT * FROM productos2temp"); */
         $result = $conn->query($query1);
-        $arreglo;
-  /*       $conn->exec($query2); */
-  while ($data = $result->fetch(PDO::FETCH_ASSOC)) {
-    $arreglo["data"][] = $data;
-}
+        //$arreglo;
+        /*       $conn->exec($query2); */
+        while ($data = $result->fetch(PDO::FETCH_ASSOC)) {
+            $arreglo["data"][] = $data;
+        }
 
-$resultt = $conn->query($query2);
-/*       $conn->exec($query2); */
-$i = 0;
-while ($data = $resultt->fetch(PDO::FETCH_ASSOC)) {
-  $arreglo["data"][$i] = array_merge($arreglo["data"][$i], $data);
-  $i++;
-}
+        $resultt = $conn->query($query2);
+        /*       $conn->exec($query2); */
+        $i = 0;
+        while ($data = $resultt->fetch(PDO::FETCH_ASSOC)) {
+            $arreglo["data"][$i] = array_merge($arreglo["data"][$i], $data);
+            $i++;
+        }
 
         $conn->commit();
         echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+    } catch (Exception $ex) {
+        $conn->rollBack();
+        echo "Error :: " . $ex->getMessage();
     }
-  catch(Exception $ex) {
-    $conn->rollBack();
-    echo "Error :: ". $ex->getMessage();
-  }
 }

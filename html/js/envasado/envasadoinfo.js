@@ -25,6 +25,7 @@ function busqueda_multi(batch) {
     'data': { id: idBatch },
 
     success: function (data) {
+
       batchMulti = JSON.parse(data);
 
       let j = 1;
@@ -296,4 +297,27 @@ function devolucionMaterialTotal(valor, id) {
   //$(`#totalDevolucion${id}`).val(total);
   $(`#totalDevolucion${id}`).html(total);
 
+}
+
+/* Validar linea seleccionada */
+
+function validarLinea() {
+  
+  const linea = $('.select-linea').val();
+
+  if (linea == null) {
+      alertify.set("notifier", "position", "top-right"); alertify.error("Antes de continuar, seleccione la linea para identificar el Equipo a usar para la linea de producción");
+      return 0;
+  }
+}
+
+function validarLote(){
+  
+  const lote = $('.validarLote').val();
+
+  if (lote == '') {
+      alertify.set("notifier", "position", "top-right"); alertify.error("Antes de continuar, ingrese el lote");
+      $("#validarLote").val('').css('border-color', 'red');
+      return 0;
+  }
 }

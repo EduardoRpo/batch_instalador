@@ -173,9 +173,6 @@ function firmado(datos, posicion) {
 
         } */
 
-
-
-
     let firma = template.replace(':firma:', datos);
     parent.append(firma).html
 }

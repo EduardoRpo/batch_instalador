@@ -33,7 +33,7 @@ $(document).ready(function () {
       }, */
 
     "columns": [
-      { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Editar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
+      /* { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Editar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
       { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" },
       { "data": "referencia" },
       { "data": "nombre_referencia" },
@@ -61,7 +61,36 @@ $(document).ready(function () {
       { "data": "tapa" },
       { "data": "etiqueta" },
       { "data": "empaque" },
-      { "data": "otros" },
+      { "data": "otros" }, */
+      { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Editar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
+      { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" },
+      { "data": "referencia" },
+      { "data": "nombre_referencia" },
+      { "data": "unidad_empaque" },
+      { "data": "id_nombre_producto" },
+      { "data": "id_notificacion_sanitaria" },
+      { "data": "id_linea" },
+      { "data": "id_marca" },
+      { "data": "id_propietario" },
+      { "data": "presentacion_comercial" },
+      { "data": "id_color" },
+      { "data": "id_olor" },
+      { "data": "id_apariencia" },
+      { "data": "id_untuosidad" },
+      { "data": "id_poder_espumoso" },
+      { "data": "id_recuento_mesofilos" },
+      { "data": "id_pseudomona" },
+      { "data": "id_escherichia" },
+      { "data": "id_staphylococcus" },
+      { "data": "id_ph" },
+      { "data": "id_viscosidad" },
+      { "data": "id_densidad_gravedad" },
+      { "data": "id_grado_alcohol" },
+      { "data": "id_envase" },
+      { "data": "id_tapa" },
+      { "data": "id_etiqueta" },
+      { "data": "id_empaque" },
+      { "data": "id_otros" },
     ]
   });
 });
@@ -103,7 +132,7 @@ function cargarselectores(selector) {
     data: { tabla: selector, operacion: 4 },
 
     success: function (response) {
-
+      debugger;
       var info = JSON.parse(response);
 
       let $select = $(`#${selector}`);
@@ -111,9 +140,17 @@ function cargarselectores(selector) {
 
       $select.append('<option disabled selected>' + "Seleccionar" + '</option>');
 
-      $.each(info.data, function (i, value) {
-        $select.append('<option value ="' + value.id + '">' + value.nombre + '</option>');
-      });
+      if (selector == 'presentacion_comercial') {
+        $.each(info.data, function (i, value) {
+          $select.append('<option value ="' + value.nombre + '">' + value.nombre + '</option>');
+        });
+      } else {
+        $.each(info.data, function (i, value) {
+          $select.append('<option value ="' + value.id + '">' + value.nombre + '</option>');
+        });
+      }
+
+
     },
     error: function (response) {
       console.log(response);
@@ -137,7 +174,7 @@ $(document).on('click', '.link-editar', function (e) {
     propiedad = $(this).parent().parent().children().eq(i).text();
     producto.push(propiedad);
   }
-  console.log(producto);
+  //console.log(producto);
 
   //carga todos los campos con la info del array
   for (let i = 0; i <= 29; i++) {
@@ -201,7 +238,7 @@ $(document).on('click', '#btnguardarProductos', function (e) {
   const producto = new FormData($('#frmagregarProductos')[0]);
   producto.set('operacion', 3);
   producto.set('editar', editar);
-
+  debugger;
   $.ajax({
     type: "POST",
     url: "php/c_productos.php",
@@ -210,7 +247,7 @@ $(document).on('click', '#btnguardarProductos', function (e) {
     contentType: false,
 
     success: function (r) {
-
+      debugger;
       if (r == 1) {
         alertify.set("notifier", "position", "top-right"); alertify.success("Almacenado con éxito.");
         refreshTable();

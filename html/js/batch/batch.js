@@ -120,9 +120,9 @@ $(document).on('click', '.link-editar', function (e) {
         data: { operacion: "6", id: id },
 
         success: function (response) {
-
+            debugger;
             const info = JSON.parse(response);
-            const presentacion = formatoCO(info[0].presentacion);
+            const presentacion = formatoCO(info[0].presentacion_comercial);
             const tamano_lote = formatoCO(info[0].tamano_lote);
             batch = info;
 

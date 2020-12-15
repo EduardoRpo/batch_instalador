@@ -39,9 +39,9 @@ switch ($op) {
                                             ORDER BY batch.id_batch desc; ");
     } else {
 
-      $query = "SELECT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, pc.nombre, batch.numero_lote, batch.tamano_lote, propietario.nombre,batch.fecha_creacion, batch.fecha_programacion, batch.estado, batch.multi
-                  FROM batch INNER JOIN producto INNER JOIN presentacion_comercial pc INNER JOIN propietario
-                  ON batch.id_producto = producto.referencia AND producto.id_presentacion_comercial = pc.id AND producto.id_propietario = propietario.id";
+      $query = "SELECT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, producto.presentacion_comercial, batch.numero_lote, batch.tamano_lote, propietario.nombre,batch.fecha_creacion, batch.fecha_programacion, batch.estado, batch.multi
+                FROM batch INNER JOIN producto INNER JOIN propietario
+                ON batch.id_producto = producto.referencia AND producto.id_propietario = propietario.id";
 
       if ($fecha_busqueda) {
         $query .= " WHERE $fecha_busqueda BETWEEN '$fecha_inicio' AND '$fecha_final' ";
@@ -118,10 +118,10 @@ switch ($op) {
   case 4: //recargar datos de acuerdo con seleccion de referencia
     $id_referencia = $_POST['id'];
 
-    $query_producto = mysqli_query($conn, "SELECT p.referencia, p.nombre_referencia as nombre, m.nombre as marca, ns.nombre as notificacion_sanitaria, pp.nombre as propietario, np.nombre as producto, pc.nombre as presentacion, l.nombre as linea, l.densidad 
-      FROM producto p INNER JOIN marca m INNER JOIN notificacion_sanitaria ns INNER JOIN propietario pp INNER JOIN nombre_producto np INNER JOIN presentacion_comercial pc INNER JOIN linea l 
-      ON p.id_marca = m.id AND p.id_notificacion_sanitaria = ns.id AND p.id_propietario=pp.id AND p.id_nombre_producto= np.id AND p.id_presentacion_comercial=pc.id AND p.id_linea=l.id 
-      WHERE p.referencia = '$id_referencia'");
+    $query_producto = mysqli_query($conn, "SELECT p.referencia, p.nombre_referencia as nombre, m.nombre as marca, ns.nombre as notificacion_sanitaria, pp.nombre as propietario, np.nombre as producto, p.presentacion_comercial, l.nombre as linea, l.densidad 
+                                            FROM producto p INNER JOIN marca m INNER JOIN notificacion_sanitaria ns INNER JOIN propietario pp INNER JOIN nombre_producto np INNER JOIN linea l 
+                                            ON p.id_marca = m.id AND p.id_notificacion_sanitaria = ns.id AND p.id_propietario=pp.id AND p.id_nombre_producto= np.id AND p.id_linea=l.id 
+                                            WHERE p.referencia = '$id_referencia'");
 
     $result = mysqli_num_rows($query_producto);
 
@@ -198,10 +198,10 @@ switch ($op) {
   case 6: //Cargar datos para Actualizar
     $id_batch = $_POST['id'];
 
-    $query_buscar = mysqli_query($conn, "SELECT bt.id_batch, p.referencia, p.nombre_referencia, m.nombre as marca, pp.nombre as propietario, np.nombre, pc.nombre as presentacion, linea.nombre as linea, linea.densidad, ns.nombre as notificacion_sanitaria, bt.unidad_lote, bt.tamano_lote, bt.fecha_programacion 
-                                            FROM producto p INNER JOIN marca m INNER JOIN propietario pp INNER JOIN nombre_producto np INNER JOIN presentacion_comercial pc INNER JOIN linea INNER JOIN notificacion_sanitaria ns INNER JOIN batch bt
-                                            ON p.id_marca=m.id AND p.id_propietario=pp.id AND p.id_nombre_producto=np.id AND p.id_presentacion_comercial=pc.id AND p.id_linea=linea.id AND p.id_notificacion_sanitaria=ns.id AND bt.id_producto=p.referencia
-                                            WHERE bt.id_batch = $id_batch");
+    $query_buscar = mysqli_query($conn, "SELECT bt.id_batch, p.referencia, p.nombre_referencia, m.nombre as marca, pp.nombre as propietario, np.nombre, p.presentacion_comercial, linea.nombre as linea, linea.densidad, ns.nombre as notificacion_sanitaria, bt.unidad_lote, bt.tamano_lote, bt.fecha_programacion 
+                                        FROM producto p INNER JOIN marca m INNER JOIN propietario pp INNER JOIN nombre_producto np INNER JOIN linea INNER JOIN notificacion_sanitaria ns INNER JOIN batch bt
+                                        ON p.id_marca=m.id AND p.id_propietario=pp.id AND p.id_nombre_producto=np.id AND p.id_linea=linea.id AND p.id_notificacion_sanitaria=ns.id AND bt.id_producto=p.referencia
+                                        WHERE bt.id_batch = $id_batch");
 
     $data[] = mysqli_fetch_assoc($query_buscar);
 

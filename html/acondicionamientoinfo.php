@@ -190,12 +190,12 @@ session_start();
                     <input type="button" class="btn btn-danger in_desinfeccion" id="despeje_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar"> <!-- data-toggle="modal" data-target="#m_firmar" -->
                   </div>
                 </div>
-                <div class="row justify-content-end mt-5" style="margin: 1%; text-align: right">
+                <!-- <div class="row justify-content-end mt-5" style="margin: 1%; text-align: right">
                   <div class="col-md-12 align-self-end">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <button type="button" class="btn btn-primary">Aceptar</button>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -264,14 +264,14 @@ session_start();
                 </div>
               </div>
 
-              <div class="row buttons-group-container" style="margin: 1%">
-                <!-- <div class="col-md-12 col-2 align-self-center" style="margin-left: 85%"> -->
+              <!-- <div class="row buttons-group-container" style="margin: 1%">
+                
                 <div>
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                   <button type="button" class="btn btn-primary" onclick="window.location.href = '../html/acondicionamiento.html';">Aceptar</button>
                 </div>
-                <!-- /div> -->
-              </div>
+                
+              </div> -->
               <div class="col-md-12 align-self-center">
                 <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Línea de Producción</h3>
               </div>
@@ -281,11 +281,8 @@ session_start();
                 <label for="recipient-name" class="col-form-label">Etiquetadora</label>
                 <label for="recipient-name" class="col-form-label">Tunel Termo</label>
 
-                <select class="selectpicker form-control" id="select-Linea">
-                  <option selected hidden>Seleccionar</option>
-                  <option>LIQUIDOS</option>
-                  <option>SOLIDOS</option>
-                  <option>SEMISOLIDOS</option>
+                <select class="selectpicker form-control select-Linea" id="select-Linea">
+
                 </select>
 
                 <input type="text" class="form-control" id="txtBanda" readonly><!-- <div class="col-md-4 col-2 align-self-center"> -->
@@ -525,13 +522,17 @@ session_start();
         <script src="../../html/vendor/jquery-confirm/jquery-confirm.min.js"></script>
         <!-- <script src="../../html/js/datatables.js"></script> -->
         <script src="../../html/js/global/loadinfo-global.js"></script>
-        <script src="../../html/js/pesaje/pesajeinfo.js"></script>
-        <script src="../../html/js/firmar/firmar.js"></script>
+        <!-- <script src="../../html/js/pesaje/pesajeinfo.js"></script> -->
         <script src="../../html/js/global/despeje.js"></script>
+        <script src="../../html/js/firmar/firmar1raSeccion.js"></script>
+        <script src="../../html/js/firmar/firmar2daSeccion.js"></script>
+        <script src="../../html/js/global/despeje.js"></script>
+        <script src="../../html/js/global/incidencias.js"></script>
         <script src="../../html/js/global/tanques.js"></script>
         <script src="../../html/js/global/equipos.js"></script>
         <script src="../../html/js/global/condicionesdelMedio.js"></script>
-        <script src="../../html/js/global/cargarDespeje.js"></script>
+        <!-- <script src="../../html/js/global/cargarDespeje.js"></script> -->
+        <script src="../../html/js/global/cargarBatch.js"></script>
         <script src="../../html/js/acondicionamiento/acondicionamientoinfo.js"></script>
         <!-- <script src="../../html/js/validadores.js"></script> -->
         <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->

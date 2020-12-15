@@ -15,6 +15,7 @@ function fechaActual(){
 //Clonar un Batch Record
 
 function clonar() {
+    
     if ($("input[name='optradio']:radio").is(':checked')) {
         
         $('#txtCantidadCB').val('');
@@ -24,10 +25,6 @@ function clonar() {
         alertify.set("notifier","position", "top-right"); alertify.error("Para Clonar seleccione un Batch Record");
     }
 }
-
-/* $('#myModal').on('shown.bs.modal', function () {
-    $('#myInput').trigger('focus')
-  }) */
 
 
 $('#tablaBatch tbody').on( 'click', 'tr', function () {  
@@ -41,8 +38,7 @@ $('#form_clonar').submit(function (event) {
        clonarCantidad = parseInt(duplicar);
         
         if(clonarCantidad > 10){
-            console.log(duplicar);
-            alertify.set("notifier","position", "top-right"); alertify.error("El número máximo para clonar son 9 Batch Record");
+             alertify.set("notifier","position", "top-right"); alertify.error("El número máximo para clonar son 9 Batch Record");
             return false;
         }else{
 

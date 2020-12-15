@@ -38,14 +38,14 @@ function guardar_condicionesMedio() {
     let id_batch = url.split("/");
 
     /* Validar que existan datos en los campos */
-    debugger;
-    if (temperatura === "" || humedad === "") {
-        alertify.set("notifier", "position", "top-right"); alertify.error("Complete todos los datos para continuar con el proceso.");
+
+    if (temperatura == "" || humedad == "" || isNaN(temperatura) || isNaN(humedad)) {
+        alertify.set("notifier", "position", "top-right"); alertify.error("Complete to dos los datos para continuar con el proceso.");
         return false;
     }
 
     /* Validacion del nivel de temperatura y humedad de acuerdo con los valores */
-    debugger;
+    
     if (temperatura < 15 || temperatura > 40 || humedad < 55 || humedad > 75) {
         alertify.set("notifier", "position", "top-right"); alertify.error("La temperatura y/o humedad ingresada están por fuera de los rangos establecidos. Valide nuevamente!!");
         return false;

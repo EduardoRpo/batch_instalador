@@ -18,7 +18,7 @@ function firmar2daSeccion(firma) {
     }
 
     if (modulo == 3) {
- 
+
         let linea = $('#select-Linea').val();
         data = { operacion: 1, linea, tanques, tanquesOk, modulo, idBatch, controlProducto };
     }
@@ -28,7 +28,6 @@ function firmar2daSeccion(firma) {
         let desinfectante = $('#sel_producto_desinfeccion').val();
         data = { operacion: 1, linea, tanques, tanquesOk, modulo, idBatch, desinfectante, firma: firma[0].id, controlProducto };
     }
-
 
     $.ajax({
         type: "POST",
@@ -65,7 +64,7 @@ function firmarSeccionCierreProceso(firma) {
 
     //confirmación de incidencias 
 
-    var confirm = alertify.confirm('Incidencias y Observaciones', `¿Durante la fabricación de la orden de producción `+ orden +` con cantidad total de `+tamano_lote+` kg, se presentó alguna incidencia u observación al desarrollar el proceso?`,
+    var confirm = alertify.confirm('Incidencias y Observaciones', `¿Durante la fabricación de la orden de producción ` + orden + ` con cantidad total de ` + tamano_lote + ` kg, se presentó alguna incidencia u observación al desarrollar el proceso?`,
         null, null).set('labels', { ok: 'Si', cancel: 'No' });
 
     /* confirm.set({ transition: 'slide' }); */

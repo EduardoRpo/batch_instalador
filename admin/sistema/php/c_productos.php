@@ -6,30 +6,22 @@ $op = $_POST['operacion'];
 
 switch ($op) {
     case 1: // Listar productos
+        $query = "SELECT * FROM producto";
+        ejecutarQuerySelect($conn, $query);
+        break;
 
-        $query1 = "SELECT * FROM productostemp";
+        /* $query1 = "SELECT * FROM productostemp";
 
-            $query2 = "SELECT 
-ot.nombre AS otros,
-psm.nombre as pseudomona,
-t.nombre AS tapa,
-et.nombre AS etiqueta,
-em.nombre AS empaque
-FROM
-producto p
-INNER JOIN otros AS ot
-ON p.id_otros = ot.id
-INNER JOIN pseudomona AS psm
-ON psm.id = p.id_pseudomona
-INNER JOIN tapa AS t
-ON p.id_tapa = t.id
-INNER JOIN etiqueta AS et
-ON et.id = p.id_etiqueta
-INNER JOIN empaque AS em
-ON em.id = p.id_empaque
-            ";
-            transaccion($conn, $query1, $query2);
- /*        ejecutarQuerySelect($conn, $query1);
+        $query2 = "SELECT ot.nombre AS otros, psm.nombre as pseudomona, t.nombre AS tapa, et.nombre AS etiqueta, em.nombre AS empaque
+                    FROM producto p
+                    INNER JOIN otros AS ot ON p.id_otros = ot.id
+                    INNER JOIN pseudomona AS psm ON psm.id = p.id_pseudomona
+                    INNER JOIN tapa AS t ON p.id_tapa = t.id
+                    INNER JOIN etiqueta AS et ON et.id = p.id_etiqueta
+                    INNER JOIN empaque AS em ON em.id = p.id_empaque";
+
+        transaccion($conn, $query1, $query2); */
+        /*        ejecutarQuerySelect($conn, $query1);
         ejecutarQuerySelect($conn, $query2); */
         break;
 
@@ -53,9 +45,9 @@ ON em.id = p.id_empaque
             $nombre = ucfirst(mb_strtolower($nombre, "UTF-8"));
 
             if ($editar > 0) {
-                $sql = "UPDATE producto SET  referencia=:referencia, nombre_referencia=':nombre', unidad_empaque=:uniEmpaque, 
-            id_nombre_producto =:nombre_producto, id_notificacion_sanitaria =:notificacion_sanitaria, id_linea = :linea, 
-            id_marca =:marca, id_propietario =:propietario, id_presentacion_comercial= :presentacion_comercial, 
+                $sql = "UPDATE producto SET  /* referencia = :referencia, */ nombre_referencia =:nombre, unidad_empaque = :uniEmpaque, 
+            id_nombre_producto = :nombre_producto, id_notificacion_sanitaria = :notificacion_sanitaria, id_linea = :linea, 
+            id_marca =:marca, id_propietario =:propietario, presentacion_comercial= :presentacion_comercial, 
             id_color =:color, id_olor= :olor, id_apariencia = :apariencia, id_untuosidad=:untuosidad, 
             id_poder_espumoso =:poder_espumoso, id_recuento_mesofilos =:recuento_mesofilos, id_pseudomona=:pseudomona, 
             id_escherichia =:escherichia, id_staphylococcus=:staphylococcus, id_ph =:ph, id_viscosidad =:viscosidad, 
@@ -70,8 +62,8 @@ ON em.id = p.id_empaque
                     'untuosidad' => $untuosidad, 'poder_espumoso' => $poder_espumoso, 'recuento_mesofilos' => $recuento_mesofilos,
                     'pseudomona' => $pseudomona, 'escherichia' => $escherichia, 'staphylococcus' => $staphylococcus, 'ph' => $ph,
                     'viscosidad' => $viscosidad, 'densidad_gravedad' => $densidad_gravedad, 'grado_alcohol' => $grado_alcohol,
-                    'envase' => $envase, 'tapa' => $tapa, 'etiqueta' => $etiqueta, 'empaque' => $empaque, 'otros' => $otros, 
-                    'referencia' => $id_referencia,
+                    'envase' => $envase, 'tapa' => $tapa, 'etiqueta' => $etiqueta, 'empaque' => $empaque, 'otros' => $otros,
+                    /* 'referencia' => $id_referencia, */
                 ]);
 
                 if ($result) {

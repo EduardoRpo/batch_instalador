@@ -38,8 +38,11 @@ function cargarTanques() {
         success: function (data) {
             var info = JSON.parse(data);
 
-            if (info == '') { return false; }
+            if (info == '' || modulo == 5 || modulo == 6) {
+                return false;
+            }
             /* cargar tabla de tanques en info */
+            
             $(`#tanque1`).html(formatoCO(info[0].tanque));
             $(`#cantidad1`).html(info[0].cantidad);
             $(`#total1`).html(formatoCO(info[0].tanque * info[0].cantidad));
