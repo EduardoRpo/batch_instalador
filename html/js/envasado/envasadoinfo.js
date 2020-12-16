@@ -1,4 +1,13 @@
-var pres;
+let pres;
+let envase;
+let presentacion;
+
+/* Carga botones  */
+$(document).ready(function () {
+  $('#controlpeso_realizado').prop('disabled', false);
+  
+});
+
 //Carga el proceso despues de cargar la data  del Batch
 
 $(document).ready(function () {
@@ -162,8 +171,8 @@ function calcularMuestras(j, unidades) {
 
 function muestrasEnvase(id) {
   pres = id;
-  let envase = $(`#envasadoMulti${pres}`).html();
-  let presentacion = envase.slice(23, envase.length);
+  envase = $(`#envasadoMulti${pres}`).html();
+  presentacion = envase.slice(23, envase.length);
   let muestras = $(`#muestras${id}`).val();
   let recoveredData = localStorage.getItem(presentacion)
   let j = 1;
@@ -175,7 +184,7 @@ function muestrasEnvase(id) {
   for (let i = 1; i <= muestras; i++) {
     $(".txtMuestras").append(`<input type='number' min='1' class='form-control' id='txtMuestra${i}' placeholder='${i}'>`);
   }
-  
+
   if (recoveredData !== null) {
     let data = JSON.parse(recoveredData)
     for (let i = 0; i <= data.length; i++) {
@@ -186,42 +195,42 @@ function muestrasEnvase(id) {
 }
 
 function guardarMuestras() {
-  let envase = $(`#envasadoMulti${pres}`).html();
-  let presentacion = envase.slice(23, envase.length);
 
   let cantidad_muestras = $('#muestras1').val();
   let muestras = [];
   let recoveredData = localStorage.getItem(presentacion)
+  let promedio = 0;
 
   if (recoveredData !== '') {
     localStorage.removeItem(presentacion);
   }
 
+  /* cargar el array con las muestras */
+  debugger;
   for (i = 1; i <= cantidad_muestras; i++) {
-    muestra = $(`#txtMuestra${i}`).val()
-    if (muestra !== '')
+    muestra = parseInt($(`#txtMuestra${i}`).val());
+    if (muestra !== '') {
       muestras.push(muestra);
+      promedio = promedio + muestra;
+    }
     else
       break;
   }
 
-  localStorage.setItem(presentacion, JSON.stringify(muestras));
-  
-  if (i = cantidad_muestras) {
-    $.ajax({
-      method: 'POST',
-      url: '../../html/php/muestras.php',
-      data: { id: idBatch, muestras: muestras },
+  /* almacena las muestras */
 
-      success: function (response) {
-        alertify.set("notifier", "position", "top-right"); alertify.success("Muestras almacenadas satisfactoriamente");
-        $('#m_muestras').modal('hide');
-      },
-      error: function (response) {
-        console.log(response);
-      }
-    })
-  }
+  localStorage.setItem(presentacion, JSON.stringify(muestras));
+  i = muestras.length;
+  localStorage.setItem('totalmuestras', JSON.stringify(i));
+
+  $('#m_muestras').modal('hide');
+
+  //calcula el promedio de las muestras almacenadas
+
+  debugger;
+  promedio = promedio / muestras.length;
+  $(`#promedio${pres}`).val(promedio);
+
 }
 
 
@@ -302,22 +311,22 @@ function devolucionMaterialTotal(valor, id) {
 /* Validar linea seleccionada */
 
 function validarLinea() {
-  
+
   const linea = $('.select-linea').val();
 
   if (linea == null) {
-      alertify.set("notifier", "position", "top-right"); alertify.error("Antes de continuar, seleccione la linea para identificar el Equipo a usar para la linea de producción");
-      return 0;
+    alertify.set("notifier", "position", "top-right"); alertify.error("Antes de continuar, seleccione la linea para identificar el Equipo a usar para la linea de producción");
+    return 0;
   }
 }
 
-function validarLote(){
-  
+function validarLote() {
+
   const lote = $('.validarLote').val();
 
   if (lote == '') {
-      alertify.set("notifier", "position", "top-right"); alertify.error("Antes de continuar, ingrese el lote");
-      $("#validarLote").val('').css('border-color', 'red');
-      return 0;
+    alertify.set("notifier", "position", "top-right"); alertify.error("Antes de continuar, ingrese el lote");
+    $("#validarLote").val('').css('border-color', 'red');
+    return 0;
   }
 }

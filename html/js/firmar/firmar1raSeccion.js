@@ -69,6 +69,15 @@ function cargar(btn, idbtn) {
             }
     }
 
+    /* Valida que todas las muestras se almacenaron correctamente */
+    if (modulo == 5) {
+        i = localStorage.getItem('totalmuestras')
+        cantidad_muestras = $('#muestras1').val();
+        if (i != cantidad_muestras) {
+            alertify.set("notifier", "position", "top-right"); alertify.error("Para continuar, Ingrese todas las muestras");
+            return false;
+        }
+    }
     /* Carga el modal para la autenticacion */
 
     if (completo !== 0) {
@@ -125,7 +134,7 @@ function preparar(datos) {
     }
     debugger;
     if (btn_id == 'firma3') {
-       firmar2daSeccion(info);
+        firmar2daSeccion(info);
         /* firmar(info); */
     }
 

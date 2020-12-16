@@ -40,7 +40,7 @@ function guardar_condicionesMedio() {
     /* Validar que existan datos en los campos */
 
     if (temperatura == "" || humedad == "" || isNaN(temperatura) || isNaN(humedad)) {
-        alertify.set("notifier", "position", "top-right"); alertify.error("Complete to dos los datos para continuar con el proceso.");
+        alertify.set("notifier", "position", "top-right"); alertify.error("Complete todos los datos para continuar con el proceso.");
         return false;
     }
 

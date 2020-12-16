@@ -3,6 +3,28 @@
 /* firmar 2da sección  */
 
 function firmar2daSeccion(firma) {
+    debugger;
+    if (presentacion == undefined){
+        alertify.set("notifier", "position", "top-right"); alertify.error("Valide que todas las muestras se encuentran completas");
+        return false;
+    }
+
+    let muestras = JSON.parse(localStorage.getItem(presentacion))
+
+    if (i == cantidad_muestras) {
+        $.ajax({
+            method: 'POST',
+            url: '../../html/php/muestras.php',
+            data: { id: idBatch, muestras, referencia },
+
+            success: function (response) {
+                alertify.set("notifier", "position", "top-right"); alertify.success("Muestras almacenadas satisfactoriamente");
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        })
+    }
 
     let linea = $('#select-Linea1').val();
     let id_firma = firma[0].id
@@ -23,7 +45,7 @@ function firmar2daSeccion(firma) {
 /* almacenar firma calidad 2da seccion */
 
 function almacenarfirma(id_firma) {
-    debugger;
+
     $.ajax({
         type: "POST",
         url: '../../html/php/envasado.php',

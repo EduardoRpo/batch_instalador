@@ -323,7 +323,7 @@ include('modal/m_muestras.php');
                         <label for="recipient-name" class="col-form-label">Promedio</label>
                       </div>
                       <div class="col-md-3 align-self-center" style="margin-top: 1%">
-                        <input type="text" class="form-control" id="promedio1" disabled>
+                        <input type="text" class="form-control" id="promedio1" style="text-align:center;" disabled>
                       </div>
                       <div class="col-md-4 align-self-center">
                         <label for="controlpeso_realizado" class="col-form-label">Realizado Por</label>

@@ -1,29 +1,31 @@
 <?php
-require_once('../../conexion2.php');
+if (!empty($_POST)) {
 
-// guardar el numero de muestras
+  require_once('../../conexion.php');
 
-$id_batch = $_POST['id'];
-$muestras = $_POST['muestras'];
+  //Carga las variables
 
-//la popup de muestras guarda solo una porcion hasta el final cuando firma debe validarse que todas las muestras estan almacenadas
+  $batch = $_POST['id'];
+  $muestras = $_POST['muestras'];
+  $referencia = $_POST['referencia'];
 
-$query_eliminar_tanque = mysqli_query($conn, "DELETE FROM batch_muestras WHERE id_batch ='$id_batch'");
+  // Guardar el numero de muestras
 
-if(count($muestras) > 0 ){
-    for($i=0; $i < count($muestras); ++$i){
-      $query_muestras = "INSERT INTO batch_muestras (muestra, id_batch) VALUES('$muestras[$i]', '$id_batch')";
-      $result = mysqli_query($conn, $query_muestras);
+  if (count($muestras) > 0) {
+    for ($i = 0; $i < count($muestras); ++$i) {
+      $sql = "INSERT INTO batch_muestras (muestra, id_batch, referencia) VALUES (:muestras, :batch, :referencia)";
+      $query = $conn->prepare($sql);
+      $result = $query->execute([
+        'muestras' => $muestras[$i],
+        'batch' => $batch,
+        'referencia' => $referencia,
+      ]);
     }
   }
-//$result = mysqli_num_rows($query_muestras);
 
-if ($result) {
-    echo "Muestras insertadas";
-} else {
-    echo "Error al insertar las muestras"; //. msqli_error($conn);
+  if ($result) {
+    echo "1";
+  } else {
+    echo "0";
+  }
 }
-
-mysqli_close($conn);
-
-?>
