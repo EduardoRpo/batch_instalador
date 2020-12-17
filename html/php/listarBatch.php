@@ -60,10 +60,8 @@ switch ($op) {
       }
 
       echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
-
-      exit();
     } else {
-      echo json_encode('');
+      echo ('0');
     }
     mysqli_free_result($query_batch);
     mysqli_close($conn);
