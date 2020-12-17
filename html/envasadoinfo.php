@@ -327,18 +327,18 @@ include('modal/m_muestras.php');
                       </div>
                       <div class="col-md-4 align-self-center">
                         <label for="controlpeso_realizado" class="col-form-label">Realizado Por</label>
-                        <input type="text" class="form-control" id="controlpeso_realizado" readonly>
+                        <input type="text" class="form-control" id="controlpeso_realizado1" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger" id="controlpeso_realizado" onclick="cargar(this, 'firma3')" style="width: 100%; height: 38px;">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger" id="controlpeso_realizado1" onclick="cargar(this, 'firma3')" style="width: 100%; height: 38px;">Firmar</button>
                       </div>
 
                       <div class="col-md-4 align-self-center">
                         <label for="controlpeso_verificado" class="col-form-label">Verificado Por</label>
-                        <input type="text" class="form-control" id="controlpeso_verificado" readonly>
+                        <input type="text" class="form-control" id="controlpeso_verificado1" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger" id="controlpeso_verificado" onclick="cargar(this, 'firma4')" style="width: 100%; height: 38px;">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger" id="controlpeso_verificado1" onclick="cargar(this, 'firma4')" style="width: 100%; height: 38px;">Firmar</button>
                       </div>
 
                     </div>
@@ -421,16 +421,16 @@ include('modal/m_muestras.php');
 
                       <div class="firmas_envasado__group">
                         <label for="devolucion_realizado" class="col-form-label">Realizado Por:</label>
-                        <input type="text" class="form-control" id="devolucion_realizado" readonly>
-                        <button type="button" class="btn waves-effect waves-light btn-danger" id="devolucion_realizado">Firmar</button>
+                        <input type="text" class="form-control" id="devolucion_realizado1" readonly>
+                        <button type="button" class="btn waves-effect waves-light btn-danger" id="devolucion_realizado1">Firmar</button>
                       </div>
 
                       <div class="firmas_envasado__group">
                         <label for="devolucion_verificado" class="col-form-label">Verificado Por:</label>
-                        <input type="text" class="form-control" id="devolucion_verificado" readonly>
-                        <button type="button" class="btn waves-effect waves-light btn-danger" id="devolucion_verificado">Firmar</button>
+                        <input type="text" class="form-control" id="devolucion_verificado1" readonly>
+                        <button type="button" class="btn waves-effect waves-light btn-danger" id="devolucion_verificado1">Firmar</button>
                       </div>
-
+                      
                     </div>
                   </div>
                 </div>
@@ -966,7 +966,7 @@ include('modal/m_muestras.php');
           <script src="../../html/js/global/tanques.js"></script>
           <script src="../../html/js/global/equipos.js"></script>
           <script src="../../html/js/global/condicionesdelMedio.js"></script>
-          <script src="../../html/js/global/cargarBatch.js"></script>
+          <script src="../../html/js/global/cargarBatchEnvasado.js"></script>
           <script src="../../html/js/firmar/firmar1raSeccion.js"></script>
           <script src="../../html/js/firmar/firmar2daSeccionEnvasado.js"></script>
           <script src="../../html/js/envasado/envasadoinfo.js"></script>

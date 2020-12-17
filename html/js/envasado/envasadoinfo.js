@@ -2,12 +2,6 @@ let pres;
 let envase;
 let presentacion;
 
-/* Carga botones  */
-$(document).ready(function () {
-  $('#controlpeso_realizado').prop('disabled', false);
-  
-});
-
 //Carga el proceso despues de cargar la data  del Batch
 
 $(document).ready(function () {
@@ -23,7 +17,7 @@ $(document).ready(function () {
 /* Cargar Multipresentacion */
 
 function busqueda_multi(batch) {
-  //let cantidad = 0;
+
   ocultarEnvasado();
   /* ocultarfilasTanques(5); */
 
@@ -180,9 +174,9 @@ function muestrasEnvase(id) {
   for (let i = 1; i <= muestras; i++) {
     $(`#txtMuestra${i}`).remove();
   }
-
+  debugger;
   for (let i = 1; i <= muestras; i++) {
-    $(".txtMuestras").append(`<input type='number' min='1' class='form-control' id='txtMuestra${i}' placeholder='${i}'>`);
+    $(".txtMuestras").append(`<input type='number' min='1' class='form-control' id='txtMuestra${i}' placeholder='${i}' style='text-align:center; color:#67757c;'>`);// placeholder='${i}' style="border:0; border-bottom:1px solid #67757c"
   }
 
   if (recoveredData !== null) {
@@ -195,7 +189,7 @@ function muestrasEnvase(id) {
 }
 
 function guardarMuestras() {
-
+  debugger;
   let cantidad_muestras = $('#muestras1').val();
   let muestras = [];
   let recoveredData = localStorage.getItem(presentacion)
@@ -206,19 +200,20 @@ function guardarMuestras() {
   }
 
   /* cargar el array con las muestras */
-  debugger;
+
   for (i = 1; i <= cantidad_muestras; i++) {
     muestra = parseInt($(`#txtMuestra${i}`).val());
-    if (muestra !== '') {
+    if (muestra == '' || isNaN(muestra)) {
+      break;
+    }
+    else {
       muestras.push(muestra);
       promedio = promedio + muestra;
     }
-    else
-      break;
   }
 
   /* almacena las muestras */
-
+  debugger;
   localStorage.setItem(presentacion, JSON.stringify(muestras));
   i = muestras.length;
   localStorage.setItem('totalmuestras', JSON.stringify(i));
@@ -227,7 +222,6 @@ function guardarMuestras() {
 
   //calcula el promedio de las muestras almacenadas
 
-  debugger;
   promedio = promedio / muestras.length;
   $(`#promedio${pres}`).val(promedio);
 

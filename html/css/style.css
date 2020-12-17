@@ -8674,8 +8674,8 @@ para mejorar el responsive enseguida*/
 }
 
 input::placeholder {
-  color: greenyellow ;
-  font-size: 10px;
+  color: red ;
+  font-size: 9px;
   font-style: italic;
 }
 

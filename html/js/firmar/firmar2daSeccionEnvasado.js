@@ -4,7 +4,7 @@
 
 function firmar2daSeccion(firma) {
     debugger;
-    if (presentacion == undefined){
+    if (presentacion == undefined) {
         alertify.set("notifier", "position", "top-right"); alertify.error("Valide que todas las muestras se encuentran completas");
         return false;
     }
@@ -18,28 +18,32 @@ function firmar2daSeccion(firma) {
             data: { id: idBatch, muestras, referencia },
 
             success: function (response) {
-                alertify.set("notifier", "position", "top-right"); alertify.success("Muestras almacenadas satisfactoriamente");
+                
+                if (response == 0) {
+                    alertify.set("notifier", "position", "top-right"); alertify.error("Error al almacenar las muestras, valide nuevamente");
+                    return false;
+                }
+
+                let linea = $('#select-Linea1').val();
+                let id_firma = firma[0].id
+
+                $.ajax({
+                    type: "POST",
+                    url: '../../html/php/envasado.php',
+                    data: { operacion: 1, linea, id_firma, modulo, idBatch },
+
+                    success: function (response) {
+                        alertify.set("notifier", "position", "top-right"); alertify.success("Firmado satisfactoriamente");
+                        firmar(firma);
+                        $('#controlpeso_realizado1').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
+                    }
+                });
             },
             error: function (response) {
                 console.log(response);
             }
         })
     }
-
-    let linea = $('#select-Linea1').val();
-    let id_firma = firma[0].id
-
-    $.ajax({
-        type: "POST",
-        url: '../../html/php/envasado.php',
-        data: { operacion: 1, linea, id_firma, modulo, idBatch },
-
-        success: function (response) {
-            alertify.set("notifier", "position", "top-right"); alertify.success("Firmado satisfactoriamente");
-            firmar(firma);
-            $('#controlpeso_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
-        }
-    });
 }
 
 /* almacenar firma calidad 2da seccion */
@@ -53,7 +57,7 @@ function almacenarfirma(id_firma) {
 
         success: function (response) {
             alertify.set("notifier", "position", "top-right"); alertify.success("Firmado satisfactoriamente");
-            $('#controlpeso_verificado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
+            $('#controlpeso_verificado1').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
         }
     });
 }

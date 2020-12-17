@@ -18,24 +18,30 @@ function cargar(btn, idbtn) {
         }
     }
 
-    /* Validacion que todos los datos en linea y el formulario de control en preparacion no esten vacios */
+    /* valida que el instructivo se haya ejecutado */
 
-    if (modulo == 3 && id == 'preparacion_realizado' || modulo == 5 && id == 'controlpeso_realizado') {
-        validar = validarLinea();
-        if (validar == 0)
-            return false;
-    }
-
-    if (modulo == 5 && id == 'controlpeso_realizado') {
-        validar = validarLote();
-        if (validar == 0)
-            return false;
+    if (modulo == 3) {
+        ordenpasos = localStorage.getItem("ordenpasos");
+        if (pasoEjecutado != 0)
+            if (pasoEjecutado < ordenpasos) {
+                alertify.set("notifier", "position", "top-right"); alertify.error('Para continuar. Complete todo el instructivo');
+                return false;
+            }
     }
 
     /* Validacion que el formulario se encuentre completamente lleno */
 
     if (modulo == 3 && id == 'preparacion_realizado' || modulo == 4 && id == 'aprobacion_realizado') {
         validar = validardatosresultadosPreparacion();
+        if (validar == 0)
+            return false;
+    }
+
+
+    /* Validacion que todos los datos en linea y el formulario de control en preparacion no esten vacios */
+    
+    if (modulo == 3 && id == 'preparacion_realizado' || modulo == 5 && id == 'controlpeso_realizado') {
+        validar = validarLinea();
         if (validar == 0)
             return false;
     }
@@ -58,21 +64,17 @@ function cargar(btn, idbtn) {
         validarParametrosControl();
     }
 
-    /* valida que el instructivo se haya ejecutado */
+    /* Valida que todas las muestras y el lote se encuentren correctas*/
+    debugger;
+    if (modulo == 5 && id == 'controlpeso_realizado1') {
+        
+        validar = validarLote();
+        if (validar == 0)
+            return false;
 
-    if (modulo == 3) {
-        ordenpasos = localStorage.getItem("ordenpasos");
-        if (pasoEjecutado != 0)
-            if (pasoEjecutado < ordenpasos) {
-                alertify.set("notifier", "position", "top-right"); alertify.error('Para continuar. Complete todo el instructivo');
-                return false;
-            }
-    }
-
-    /* Valida que todas las muestras se almacenaron correctamente */
-    if (modulo == 5) {
         i = localStorage.getItem('totalmuestras')
         cantidad_muestras = $('#muestras1').val();
+
         if (i != cantidad_muestras) {
             alertify.set("notifier", "position", "top-right"); alertify.error("Para continuar, Ingrese todas las muestras");
             return false;
@@ -90,6 +92,7 @@ function cargar(btn, idbtn) {
 
 
 /* Valida el usuario si existe en la base de datos */
+
 function enviar() {
     $('#m_firmar').modal('hide');
     /* btn_id = $('#idbtn').val(); */
@@ -132,7 +135,7 @@ function preparar(datos) {
         firmarVerficadoDespeje(info[0].id);
         firmar(info);
     }
-    debugger;
+
     if (btn_id == 'firma3') {
         firmar2daSeccion(info);
         /* firmar(info); */
@@ -179,6 +182,7 @@ function validarPreguntas(idfirma) {
         success: function (response) {
 
             if (response > 0) {
+                debugger;
                 $('.despeje_realizado').prop('disabled', true);
                 $('.despeje_verificado').prop('disabled', false);
 
@@ -186,6 +190,8 @@ function validarPreguntas(idfirma) {
                     $('.pesaje_realizado').prop('disabled', false);
                 if (modulo == 3)
                     $('.preparacion_realizado').prop('disabled', false);
+                if (modulo == 5)
+                    $('#controlpeso_realizado1').prop('disabled', false);
             }
         }
     });
@@ -216,7 +222,7 @@ function firmar(firm) {
 
     let template = '<img id=":id:" src=":firma:" alt="firma_usuario" height="130">';
     let parent = $('#' + id).parent();
-
+    debugger;
     $('#' + id).remove();
     id = '';
 
