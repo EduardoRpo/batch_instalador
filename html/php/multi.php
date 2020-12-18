@@ -78,10 +78,10 @@ switch ($op) {
   case 3: //recargar datos de acuerdo con seleccion de referencia
     $id_referencia = $_POST['id'];
 
-    $query_producto = mysqli_query($conn, "SELECT p.referencia, p.nombre_referencia as nombre, m.nombre as marca, ns.nombre as notificacion, pp.nombre as propietario, np.nombre as producto, pc.nombre as presentacion, l.nombre as linea, l.densidad 
-                                              FROM producto p INNER JOIN marca m INNER JOIN notificacion_sanitaria ns INNER JOIN propietario pp INNER JOIN nombre_producto np INNER JOIN presentacion_comercial pc INNER JOIN linea l 
-                                              ON p.id_marca = m.id AND p.id_notificacion_sanitaria = ns.id AND p.id_propietario=pp.id AND p.id_nombre_producto= np.id AND p.id_presentacion_comercial=pc.id AND p.id_linea=l.id 
-                                              WHERE p.referencia = $id_referencia");
+    $query_producto = mysqli_query($conn, "SELECT p.referencia, p.nombre_referencia as nombre, m.nombre as marca, ns.nombre as notificacion, pp.nombre as propietario, np.nombre as producto, p.presentacion_comercial as presentacion, l.nombre as linea, l.densidad 
+                                           FROM producto p INNER JOIN marca m INNER JOIN notificacion_sanitaria ns INNER JOIN propietario pp INNER JOIN nombre_producto np INNER JOIN linea l 
+                                           ON p.id_marca = m.id AND p.id_notificacion_sanitaria = ns.id AND p.id_propietario=pp.id AND p.id_nombre_producto= np.id AND p.id_linea=l.id 
+                                           WHERE p.referencia = $id_referencia");
 
     $result = mysqli_num_rows($query_producto);
 
@@ -119,9 +119,7 @@ switch ($op) {
       $result = mysqli_query($conn, $query_id_referencia);
     }
 
-    $query_batch_multi = "  UPDATE batch 
-                                  SET multi = '1' 
-                                  WHERE id_batch='$id_batch'";
+    $query_batch_multi = "  UPDATE batch SET multi = '1' WHERE id_batch='$id_batch'";
 
     $result1 = mysqli_query($conn, $query_batch_multi);
 
@@ -144,10 +142,10 @@ switch ($op) {
   case 6: // Cargar datos para actualizar Multipresentacion
     $id_batch = $_POST['id'];
 
-    $query_multi = mysqli_query($conn, "SELECT multipresentacion.id, multipresentacion.id_batch, multipresentacion.referencia, producto.nombre_referencia, multipresentacion.cantidad, densidad, presentacion_comercial.presentacion 
-                                            FROM multipresentacion INNER JOIN producto INNER JOIN linea INNER JOIN presentacion_comercial
-                                            ON multipresentacion.referencia = producto.referencia AND producto.id_linea = linea.id AND producto.id_presentacion_comercial=presentacion_comercial.id
-                                            WHERE id_batch='$id_batch'");
+    $query_multi = mysqli_query($conn, "SELECT multipresentacion.id, multipresentacion.id_batch, multipresentacion.referencia, producto.nombre_referencia, multipresentacion.cantidad, densidad, producto.presentacion_comercial 
+                                        FROM multipresentacion INNER JOIN producto INNER JOIN linea
+                                        ON multipresentacion.referencia = producto.referencia AND producto.id_linea = linea.id 
+                                        WHERE id_batch='$id_batch'");
 
     $result = mysqli_num_rows($query_multi);
 

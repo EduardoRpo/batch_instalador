@@ -164,6 +164,7 @@ function cargarMulti() {
 /* cargar datos de acuerdo con la seleccion de multipresentacion */
 
 function cargarReferenciaM(id) {
+
     const opcion = $("#cmbMultiReferencia" + id).val();
 
     $.ajax({
@@ -210,7 +211,6 @@ function CalculoloteMulti(id, cantidad) {
     }
 
     total = parseInt(((densidad * cantidad * presentacion) / 1000) * (1 + 0.005)); // guardar campo en nueva columna en base de datos para obterla en envasado como total (kg)
-    debugger;
     totallotexpresentacion.push(total);
     console.log(totallotexpresentacion);
 

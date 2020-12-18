@@ -63,7 +63,7 @@ switch ($op) {
     } else {
       echo ('0');
     }
-    mysqli_free_result($query_batch);
+    //mysqli_free_result($query_batch);
     mysqli_close($conn);
 
     break;

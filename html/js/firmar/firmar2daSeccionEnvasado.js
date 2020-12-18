@@ -12,13 +12,14 @@ function firmar2daSeccion(firma) {
     let muestras = JSON.parse(localStorage.getItem(presentacion))
 
     if (i == cantidad_muestras) {
+        //Almacena las muestras
         $.ajax({
             method: 'POST',
             url: '../../html/php/muestras.php',
             data: { id: idBatch, muestras, referencia },
 
             success: function (response) {
-                
+
                 if (response == 0) {
                     alertify.set("notifier", "position", "top-right"); alertify.error("Error al almacenar las muestras, valide nuevamente");
                     return false;
@@ -26,7 +27,7 @@ function firmar2daSeccion(firma) {
 
                 let linea = $('#select-Linea1').val();
                 let id_firma = firma[0].id
-
+                //Almacena la firma 
                 $.ajax({
                     type: "POST",
                     url: '../../html/php/envasado.php',
@@ -62,8 +63,11 @@ function almacenarfirma(id_firma) {
     });
 }
 
-function firmarSeccionCierreProceso(firma) {
+$(selector).click(function (e) {
+    e.preventDefault();
 
+    /* function firmarSeccionCierreProceso(firma) {
+     */
     let orden = localStorage.getItem("orden");
     let tamano_lote = localStorage.getItem("tamano_lote");
 
@@ -100,8 +104,8 @@ function firmarSeccionCierreProceso(firma) {
             }
         });
     });
-}
-
+    /* } */
+});
 
 
 function deshabilitarbtn() {

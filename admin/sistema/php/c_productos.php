@@ -84,7 +84,7 @@ switch ($op) {
                     exit();
                 } else {
                     $sql = "INSERT INTO producto (referencia, nombre_referencia, unidad_empaque, id_nombre_producto, 
-                    id_notificacion_sanitaria, id_linea, id_marca, id_propietario, id_presentacion_comercial, id_color, id_olor, 
+                    id_notificacion_sanitaria, id_linea, id_marca, id_propietario, presentacion_comercial, id_color, id_olor, 
                     id_apariencia, id_untuosidad, id_poder_espumoso, id_recuento_mesofilos, id_pseudomona, id_escherichia, 
                     id_staphylococcus, id_ph, id_viscosidad, id_densidad_gravedad, id_grado_alcohol, id_envase, id_tapa, id_etiqueta, 
                     id_empaque, id_otros)

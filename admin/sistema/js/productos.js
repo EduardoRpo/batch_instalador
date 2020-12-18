@@ -132,7 +132,7 @@ function cargarselectores(selector) {
     data: { tabla: selector, operacion: 4 },
 
     success: function (response) {
-      debugger;
+
       var info = JSON.parse(response);
 
       let $select = $(`#${selector}`);
@@ -238,7 +238,7 @@ $(document).on('click', '#btnguardarProductos', function (e) {
   const producto = new FormData($('#frmagregarProductos')[0]);
   producto.set('operacion', 3);
   producto.set('editar', editar);
-  debugger;
+
   $.ajax({
     type: "POST",
     url: "php/c_productos.php",
@@ -247,7 +247,7 @@ $(document).on('click', '#btnguardarProductos', function (e) {
     contentType: false,
 
     success: function (r) {
-      debugger;
+
       if (r == 1) {
         alertify.set("notifier", "position", "top-right"); alertify.success("Almacenado con éxito.");
         refreshTable();
