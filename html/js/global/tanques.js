@@ -1,11 +1,13 @@
 
 var cantidad = 0;
 var tanques = 0;
+
 /* tabla de observaciones en la pestaña de informacion del producto */
 
 $(document).ready(function () {
+    
     $('#txtobservacionesTanques').DataTable({
-        "scrollY": "100px", "scrollCollapse": true, searching: false, paging: false, info: false, ordering: false,
+        "scrollY": "120px", "scrollCollapse": true, searching: false, paging: false, info: false, ordering: false,
         columnDefs: [{
             targets: "_all",
             sortable: false

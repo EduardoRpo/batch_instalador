@@ -170,6 +170,7 @@ function guardarFormulaMateriaPrima() {
             if (r == 1) {
                 alertify.set("notifier", "position", "top-right"); alertify.success("Almacenada con éxito.");
                 refreshTable();
+                
             } else if (r == 2) {
                 alertify.set("notifier", "position", "top-right"); alertify.error("Código ya existe.");
             } else if (r == 3) {

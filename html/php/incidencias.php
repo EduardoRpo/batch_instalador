@@ -20,9 +20,10 @@ if (!empty($_POST)) {
             $modulo = $_POST['modulo'];
             $batch = $_POST['batch'];
             $observaciones = $_POST['observaciones'];
-
+            /* print_r($incidencias); */
             $datos = json_decode($incidencias, true);
-
+            /* print_r($datos); */
+            exit();
             foreach ($datos as $valor) {
                 foreach ($valor as $i => $incidencia) {
 

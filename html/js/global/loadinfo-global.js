@@ -20,25 +20,20 @@ $('#in_fecha').attr('min', new Date().toDateInputValue());
 /* Deshabilitar botones de firmas */
 
 $(document).ready(function () {
+    setTimeout(() => {
 
-    $('.despeje_verificado').prop('disabled', true);
-    $('.pesaje_realizado').prop('disabled', true);
-    $('.pesaje_verificado').prop('disabled', true);
+        $('.despeje_verificado').prop('disabled', true);
+        $('.pesaje_realizado').prop('disabled', true);
+        $('.pesaje_verificado').prop('disabled', true);
 
-    if (modulo == 3) {
-        $('.preparacion_realizado').prop('disabled', true);
-        $('.preparacion_verificado').prop('disabled', true);
-    } else if (modulo == 4) {
-        $('.preparacion_realizado').prop('disabled', true);
-        $('.preparacion_verificado').prop('disabled', true);
-    } else if (modulo == 5) {
-        $('#controlpeso_realizado1').prop('disabled', true);
-        $('#controlpeso_verificado1').prop('disabled', true);
-
-        $('#devolucion_realizado1').prop('disabled', true);
-        $('#devolucion_verificado1').prop('disabled', true);
-    }
-
+        if (modulo == 3) {
+            $('.preparacion_realizado').prop('disabled', true);
+            $('.preparacion_verificado').prop('disabled', true);
+        } else if (modulo == 4) {
+            $('.preparacion_realizado').prop('disabled', true);
+            $('.preparacion_verificado').prop('disabled', true);
+        }
+    }, 500);
 });
 
 /* cargar batch al finalizar la carga de los demas procesos */
@@ -65,6 +60,7 @@ $.ajax({
 
             if (modulo != 4)
                 carguepreguntas(modulo);
+
             desinfectantes();
             cargueCondicionesMedio();
             validarTanques(modulo);

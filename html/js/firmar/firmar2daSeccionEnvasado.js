@@ -3,7 +3,7 @@
 /* firmar 2da sección  */
 
 function firmar2daSeccion(firma) {
-    debugger;
+
     if (presentacion == undefined) {
         alertify.set("notifier", "position", "top-right"); alertify.error("Valide que todas las muestras se encuentran completas");
         return false;
@@ -63,20 +63,22 @@ function almacenarfirma(id_firma) {
     });
 }
 
-$(selector).click(function (e) {
-    e.preventDefault();
 
-    /* function firmarSeccionCierreProceso(firma) {
-     */
+
+/* $(selector).click(function (e) {
+    e.preventDefault(); */
+
+function firmarSeccionCierreProceso(firma) {
+
     let orden = localStorage.getItem("orden");
-    let tamano_lote = localStorage.getItem("tamano_lote");
+    let tamano_lote = localStorage.getItem("tamano_lote"); 
 
     //confirmación de incidencias 
 
     var confirm = alertify.confirm('Incidencias y Observaciones', `¿Durante la fabricación de la orden de producción ` + orden + ` con cantidad total de ` + tamano_lote + ` kg, se presentó alguna incidencia u observación al desarrollar el proceso?`,
         null, null).set('labels', { ok: 'Si', cancel: 'No' });
 
-    /* confirm.set({ transition: 'slide' }); */
+    confirm.set({ transition: 'slide' }); 
 
     confirm.set('onok', function () { //callbak al pulsar Si
         cargarObsIncidencias(firma);
@@ -104,8 +106,8 @@ $(selector).click(function (e) {
             }
         });
     });
-    /* } */
-});
+} 
+
 
 
 function deshabilitarbtn() {

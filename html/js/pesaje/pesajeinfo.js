@@ -1,5 +1,40 @@
 let flagWeight = false;
 
+function cargar(btn, idbtn) {
+    
+    localStorage.setItem("idbtn", idbtn);
+    id = btn.id;
+
+    //Validacion de control de tanques
+    if (id == "pesaje_realizado" || id == "preparacion_realizado" || id == "aprobacion_realizado") {
+        validar = controlTanques();
+        if (validar == 0) {
+            return false;
+        }
+    }
+
+    /* Valida que se ha seleccionado el producto de desinfeccion para el proceso de aprobacion */
+
+    let seleccion = $('#sel_producto_desinfeccion').val();
+
+    if (seleccion == "Seleccione") {
+        alertify.set("notifier", "position", "top-right"); alertify.error("Seleccione el producto para desinfección.");
+        return false;
+    }
+
+    /* Carga el modal para la autenticacion */
+
+    $('#usuario').val('');
+    $('#clave').val('');
+    $('#m_firmar').modal('show');
+}
+
+/* habilitar botones */
+
+function habilitarbotones(){
+    $('.pesaje_realizado').prop('disabled', false);
+}
+
 /* Carga de Cargos  */
 
 $.ajax({

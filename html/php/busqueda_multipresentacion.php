@@ -9,7 +9,7 @@ if (!empty($_POST)) {
   $sql = "SELECT m.id, m.id_batch, m.referencia, p.nombre_referencia, p.presentacion_comercial as presentacion, m.cantidad, m.total 
             FROM multipresentacion m INNER JOIN producto p  
             ON m.referencia = p.referencia 
-            WHERE m.id_batch = :id_batch";
+            WHERE m.id_batch = :id_batch ORDER BY presentacion";
 
   $query = $conn->prepare($sql);
   $result = $query->execute([

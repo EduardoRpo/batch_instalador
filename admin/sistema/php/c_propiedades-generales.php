@@ -32,10 +32,8 @@ if (!empty($_POST)) {
             $editar = $_POST['editar'];
             $tabla = $_POST['tabla'];
 
-            if ($tabla == 'notificacion_sanitaria')
+            if ($tabla == 'nombre_producto' || $tabla == 'notificacion_sanitaria' || $tabla == 'linea' || $tabla == 'marca' || $tabla == 'propietario')
                 $dato =  mb_strtoupper($_POST['datos'], "UTF-8");
-            else if ($tabla == 'propietario')
-                $dato =  ucwords(mb_strtolower($_POST['datos'], "UTF-8"));
             else
                 $dato =  ucfirst(mb_strtolower($_POST['datos'], "UTF-8"));
 

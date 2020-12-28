@@ -59,7 +59,7 @@ function cargarDesinfectante() {
                 data: { operacion: 3, module: modulo, idbatch: idBatch },
 
                 success: function (response) {
-
+                    
                     if (response == '') {
                         if (modulo == 3)
                             cargarLinea();
@@ -84,7 +84,7 @@ function cargarDesinfectante() {
 /* cargar linea de equipos en el proceso de preparacion  */
 
 function cargarLinea() {
-
+    
     $.ajax({
         type: "POST",
         url: "../../html/php/cargarLineas.php",

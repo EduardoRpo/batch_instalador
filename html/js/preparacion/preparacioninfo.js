@@ -8,7 +8,75 @@ let tanqueOk = 0;
 let tiempoTotal = 0;
 let pasoEjecutado = 0
 
-/* Cargar tabla de obaservaciones */
+
+function cargar(btn, idbtn) {
+    
+    localStorage.setItem("idbtn", idbtn);
+    id = btn.id;
+
+    /* Valida que se ha seleccionado el producto de desinfeccion para el proceso */
+
+    let seleccion = $('#sel_producto_desinfeccion').val();
+    if (modulo == 3 && seleccion != "Seleccione")
+        seleccion = $('#select-Linea').val();
+
+    if (seleccion == "Seleccione") {
+        alertify.set("notifier", "position", "top-right"); alertify.error("Seleccione el producto para desinfección.");
+        return false;
+    }
+
+    /* Validacion que todos los datos en linea no esten vacios */
+
+    if (id == 'preparacion_realizado') {
+        validar = validarLinea();
+        if (validar == 0)
+            return false;
+    }
+
+    //Validacion de control de tanques
+
+    if (id == "preparacion_realizado") {
+        validar = controlTanques();
+        if (validar == 0) {
+            return false;
+        }
+    }
+
+    /* valida que el instructivo se haya ejecutado */
+
+    ordenpasos = localStorage.getItem("ordenpasos");
+
+    if (pasoEjecutado !== 0 || pasoEjecutado == 0)
+        if (pasoEjecutado < ordenpasos) {
+            alertify.set("notifier", "position", "top-right"); alertify.error('Para continuar. Complete todo el instructivo');
+            return false;
+        }
+
+    /* Validacion que el formulario se encuentre completamente lleno */
+
+    if (id == 'preparacion_realizado') {
+        validar = validardatosresultadosPreparacion();
+        if (validar == 0)
+            return false;
+    }
+
+
+    /* Carga el modal para la autenticacion */
+
+    $('#usuario').val('');
+    $('#clave').val('');
+    $('#m_firmar').modal('show');
+
+}
+
+
+/* Habilitar Botones */
+
+function habilitarbotones(){
+    $('.preparacion_realizado').prop('disabled', false);
+}
+
+/* Cargar tabla de observaciones */
 
 Date.prototype.toDateInputValue = (function () {
     var local = new Date(this);

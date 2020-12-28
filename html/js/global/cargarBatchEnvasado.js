@@ -66,6 +66,7 @@ function cargarDesinfectante() {
                         cargarfirma2();
                         return false;
                     } else
+                        $('.controlpeso_realizado1').prop('disabled', false);
                         cargarfirma2();
                 }
             });
@@ -85,12 +86,16 @@ function cargarfirma2() {
         success: function (response) {
             let info = JSON.parse(response);
             debugger;
+            if (info == 3) {
+                return false;
+            }
+
             $("#select-Linea1").val(info.data[0].linea);
             $(".validarLote").val(batch.numero_lote);
             cargarEquipos();
             firmado(info.data[0].urlfirma, 3)
-            
-            }
+
+        }
     });
 }
 

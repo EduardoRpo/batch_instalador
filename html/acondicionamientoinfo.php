@@ -230,7 +230,7 @@ session_start();
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
+                            <!-- <tr>
                               <td>Etiquetas</td>
                               <td>Auto</td>
                               <td>Unidades con la que sc reo el Batch Record</td>
@@ -245,7 +245,7 @@ session_start();
                               <td>Auto</td>
                               <td>Unidades con la que sc reo el Batch Record</td>
                             </tr>
-                            <tr>
+                            <tr> -->
                               <td>Cajas</td>
                               <td>Auto</td>
                               <td> Unidades con la que se creo el Batch Record / la unidad de empaque, se aproxima por el mayor y es entero</td>
