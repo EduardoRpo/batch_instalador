@@ -76,7 +76,7 @@ function deshabilitarbotones() {
 }
 
 function habilitarbotones() {
-  debugger;
+  
   btn_id = localStorage.getItem("idbtn");
 
   if (btn_id == 'firma1')
