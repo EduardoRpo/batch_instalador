@@ -39,5 +39,6 @@ $('#instructivoss').click(function (e) {
     $('.contenedor-menu .menu ul.abrir2').slideUp();
    // $('.contenedor-menu .menu ul.abrir1').slideToggle();
     $('.contenedor-menu .menu ul.abrir').slideUp();
+    
 });
 
