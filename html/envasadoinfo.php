@@ -205,10 +205,9 @@ include('modal/m_muestras.php');
           <div class="card" id="envasado1">
             <div class="card-header" id="headingThree">
               <h5 class="mb-0">
-                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
+                <button class="btn btn-link collapsed ref_multi1" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
                   <b id="envasadoMulti1">ENVASADO</b>
-                  <input type="text" id="ref1">
-                  <input type="text" id="id_ref1" value="1">
+                  <input type="text" class="ref1" id="ref1" hidden>
                 </button>
               </h5>
             </div>
@@ -275,17 +274,17 @@ include('modal/m_muestras.php');
 
                       <div class="group">
                         <label for="recipient-name" class="col-form-label">Digite el lote (requerido)</label>
-                        <input type="text" class="form-control validarLote" id="validarLote1">
+                        <input type="text" class="form-control validarLote" id="validarLote1" onblur="revisarLote();">
                       </div>
 
                       <div class="group">
                         <label for="recipient-name" class="col-form-label envasadora">Identificación Envasadora</label>
-                        <input type="text" class="form-control txtEnvasadora" readonly>
+                        <input type="text" class="form-control envasadora1" readonly>
                       </div>
 
                       <div class="group">
                         <label for="recipient-name" class="col-form-label loteadora">Identificación Loteadora</label>
-                        <input type="text" class="form-control txtLoteadora" readonly>
+                        <input type="text" class="form-control loteadora1" readonly>
                       </div>
 
                     </div>
@@ -324,7 +323,7 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="muestras1" style="text-align: center;" readonly>
                       </div>
                       <div class="col-md-1 align-self-center" style="margin-top: 1%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;" onclick="muestrasEnvase(1);" data-toggle="modal" data-target="#m_muestras">Iniciar</button> <!--   -->
+                        <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;" onclick="muestrasEnvase();" data-toggle="modal" data-target="#m_muestras">Iniciar</button> <!--   -->
                       </div>
                       <div class="col-md-1 align-self-center" style="margin-top: 1%">
                         <label for="recipient-name" class="col-form-label">Promedio</label>
@@ -448,10 +447,9 @@ include('modal/m_muestras.php');
           <div class="card" id="envasado2">
             <div class="card-header" id="headingThree">
               <h5 class="mb-0">
-                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
+                <button class="btn btn-link collapsed ref_multi2" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
                   <b id="envasadoMulti2">ENVASADO</b>
-                  <input type="text" id="ref2">
-                  <input type="text" id="id_ref2" value="2">
+                  <input type="text" id="ref2" hidden>
                 </button>
               </h5>
             </div>
@@ -510,7 +508,7 @@ include('modal/m_muestras.php');
 
                       <div class="group">
                         <label for="recipient-name" class="col-form-label">Linea</label>
-                        <select class="selectpicker form-control select-linea" id="select-Linea1">
+                        <select class="selectpicker form-control select-linea" id="select-Linea2">
                           <option selected hidden>Seleccionar Linea</option>
 
                         </select>
@@ -518,17 +516,17 @@ include('modal/m_muestras.php');
 
                       <div class="group">
                         <label for="recipient-name" class="col-form-label">Digite el lote (requerido)</label>
-                        <input type="text" class="form-control validarLote" id="validarLote2">
+                        <input type="text" class="form-control validarLote" id="validarLote2" onblur="revisarLote();">
                       </div>
 
                       <div class="group">
-                        <label for="recipient-name" class="col-form-label envasadora">Identificación Envasadora</label>
-                        <input type="text" class="form-control txtEnvasadora" readonly>
+                        <label for="recipient-name" class="col-form-label envasadora2">Identificación Envasadora</label>
+                        <input type="text" class="form-control envasadora2" readonly>
                       </div>
 
                       <div class="group">
                         <label for="recipient-name" class="col-form-label loteadora">Identificación Loteadora</label>
-                        <input type="text" class="form-control txtLoteadora" readonly>
+                        <input type="text" class="form-control loteadora2" readonly>
                       </div>
 
                     </div>
@@ -567,7 +565,7 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="muestras2" style="text-align: center;" readonly>
                       </div>
                       <div class="col-md-1 align-self-center" style="margin-top: 1%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;" onclick="muestrasEnvase(1);" data-toggle="modal" data-target="#m_muestras">Iniciar</button> <!--   -->
+                        <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;" onclick="muestrasEnvase();" data-toggle="modal" data-target="#m_muestras">Iniciar</button> <!--   -->
                       </div>
                       <div class="col-md-1 align-self-center" style="margin-top: 1%">
                         <label for="recipient-name" class="col-form-label">Promedio</label>
@@ -691,10 +689,9 @@ include('modal/m_muestras.php');
           <div class="card" id="envasado3">
             <div class="card-header" id="headingFive">
               <h5 class="mb-0">
-                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
+                <button id="ref_multi1" class="btn btn-link collapsed ref_multi3" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
                   <b id="envasadoMulti3">ENVASADO</b>
-                  <input type="text" id="ref3">
-                  <input type="text" id="id_ref3" value="3">
+                  <input type="text" id="ref3" hidden>
                 </button>
               </h5>
             </div>
@@ -753,25 +750,24 @@ include('modal/m_muestras.php');
 
                       <div class="group">
                         <label for="recipient-name" class="col-form-label">Linea</label>
-                        <select class="selectpicker form-control select-linea" id="select-Linea1">
+                        <select class="selectpicker form-control select-linea" id="select-Linea3">
                           <option selected hidden>Seleccionar Linea</option>
-
                         </select>
                       </div>
 
                       <div class="group">
                         <label for="recipient-name" class="col-form-label">Digite el lote (requerido)</label>
-                        <input type="text" class="form-control validarLote" id="validarLote3">
+                        <input type="text" class="form-control validarLote" id="validarLote3" onblur="revisarLote();">
                       </div>
 
                       <div class="group">
-                        <label for="recipient-name" class="col-form-label envasadora">Identificación Envasadora</label>
-                        <input type="text" class="form-control txtEnvasadora" readonly>
+                        <label for="recipient-name" class="col-form-label envasadora3">Identificación Envasadora</label>
+                        <input type="text" class="form-control envasadora3" readonly>
                       </div>
 
                       <div class="group">
-                        <label for="recipient-name" class="col-form-label loteadora">Identificación Loteadora</label>
-                        <input type="text" class="form-control txtLoteadora" readonly>
+                        <label for="recipient-name" class="col-form-label loteadora3">Identificación Loteadora</label>
+                        <input type="text" class="form-control loteadora3" readonly>
                       </div>
 
                     </div>
@@ -810,7 +806,7 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="muestras3" style="text-align: center;" readonly>
                       </div>
                       <div class="col-md-1 align-self-center" style="margin-top: 1%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;" onclick="muestrasEnvase(1);" data-toggle="modal" data-target="#m_muestras">Iniciar</button> <!--   -->
+                        <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;" onclick="muestrasEnvase();" data-toggle="modal" data-target="#m_muestras">Iniciar</button> <!--   -->
                       </div>
                       <div class="col-md-1 align-self-center" style="margin-top: 1%">
                         <label for="recipient-name" class="col-form-label">Promedio</label>
@@ -823,7 +819,7 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="controlpeso_realizado3" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_realizado3" id="controlpeso_realizado3" onclick="cargar(this, 'firma3')" style="width: 100%; height: 38px;">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_realizado1" id="controlpeso_realizado3" onclick="cargar(this, 'firma3')" style="width: 100%; height: 38px;">Firmar</button>
                       </div>
 
                       <div class="col-md-4 align-self-center">
@@ -963,7 +959,6 @@ include('modal/m_muestras.php');
           <script src="../../html/js/global/loadinfo-global.js"></script>
           <script src="../../html/js/global/despeje.js"></script>
           <script src="../../html/js/global/tanques.js"></script>
-          <script src="../../html/js/global/equipos.js"></script>
           <script src="../../html/js/global/condicionesdelMedio.js"></script>
           <script src="../../html/js/global/cargarBatchEnvasado.js"></script>
           <script src="../../html/js/firmar/firmar1raSeccion.js"></script>

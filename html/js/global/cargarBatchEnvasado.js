@@ -81,7 +81,7 @@ function cargarfirma2() {
     $.ajax({
         type: "POST",
         url: "../../html/php/envasado.php",
-        data: { operacion: 3, modulo, idBatch },
+        data: { operacion: 3, modulo, idBatch, ref_multi },
 
         success: function (response) {
             let info = JSON.parse(response);

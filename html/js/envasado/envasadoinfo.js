@@ -5,13 +5,13 @@ let presentacion;
 //validacion de campos y botones
 
 function cargar(btn, idbtn) {
-
+  debugger;
   localStorage.setItem("idbtn", idbtn);
-  id = btn.id;
+  btn = btn.id;
 
   /* Validacion que todos los datos en linea y el formulario de control en preparacion no esten vacios */
 
-  if (id == 'controlpeso_realizado1') {
+  if (btn == `controlpeso_realizado${id}`) {
     validar = validarLinea();
     if (validar == 0)
       return false;
@@ -29,7 +29,7 @@ function cargar(btn, idbtn) {
 
   /* Valida que todas las muestras y el lote se encuentren correctas*/
 
-  if (id == 'controlpeso_realizado1') {
+  if (btn == `controlpeso_realizado${id}`) {
 
     validar = validarLote();
     if (validar == 0)
@@ -39,7 +39,7 @@ function cargar(btn, idbtn) {
     cantidad_muestras = $('#muestras1').val();
 
     if (i != cantidad_muestras) {
-      alertify.set("notifier", "position", "top-right"); alertify.error("Para continuar, Ingrese todas las muestras");
+      alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todas las muestras");
       return false;
     }
   }
@@ -69,14 +69,16 @@ $(document).ready(function () {
 
 function deshabilitarbotones() {
 
-  $('.controlpeso_realizado1').prop('disabled', true);
-  $('.controlpeso_verificado1').prop('disabled', true);
-  $('.devolucion_realizado1').prop('disabled', true);
-  $('.devolucion_verificado1').prop('disabled', true);
+  for (let i = 1; i < 4; i++) {
+    $(`.controlpeso_realizado${i}`).prop('disabled', true);
+    $(`.controlpeso_verificado${i}`).prop('disabled', true);
+    $(`.devolucion_realizado${i}`).prop('disabled', true);
+    $(`.devolucion_verificado${i}`).prop('disabled', true);
+  }
 }
 
 function habilitarbotones() {
-  
+
   btn_id = localStorage.getItem("idbtn");
 
   if (btn_id == 'firma1')
@@ -148,6 +150,36 @@ function ocultarEnvasado() {
   }
 }
 
+/* Cargar referencia */
+
+$('.ref_multi1').click(function (e) {
+  e.preventDefault();
+  ref_multi = $(`.ref1`).val();
+  id = 1;
+  presentacion_multi();
+});
+
+$('.ref_multi2').click(function (e) {
+  e.preventDefault();
+  ref_multi = $(`#ref2`).val();
+  id = 2;
+  presentacion_multi();
+});
+
+$('.ref_multi3').click(function (e) {
+  e.preventDefault();
+  ref_multi = $(`#ref3`).val();
+  id = 3;
+  presentacion_multi();
+});
+
+function presentacion_multi() {
+  envase = $(`#envasadoMulti${id}`).html();
+  presentacion = envase.slice(23, envase.length);
+}
+
+
+
 /* Cargar linea y maquinas de acuerdo con la seleccion */
 
 $(".select-Linea").change(function () {
@@ -204,19 +236,30 @@ function calcularPeso(densidadAprobada) {
 
 /* Validar que el valor del lote corresponda */
 
-$(document).ready(function () {
-  $(".validarLote").blur(function () {
-    let data = $(".validarLote").val();
-    let lote = $('#in_numero_lote').val();
+function validarLote() {
 
-    if (lote != data) {
-      alertify.set("notifier", "position", "top-right"); alertify.error("Lote digitado no corresponde al procesado. Valide nuevamente!");
-      $("#validarLote").val('').css('border-color', 'red');
-      return false;
-    }
-    $("#validarLote").css('border-color', '#67757c');
-  });
-});
+  const lote = $('.validarLote').val();
+
+  if (lote == '') {
+    alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese el número del lote");
+    $("#validarLote").val('').css('border-color', 'red');
+    return 0;
+  }
+}
+
+
+function revisarLote() {
+
+  let data = $(`#validarLote${id}`).val();
+  let lote = $('#in_numero_lote').val();
+
+  if (lote != data) {
+    alertify.set("notifier", "position", "top-right"); alertify.error("Lote digitado no corresponde al procesado. Valide nuevamente!");
+    $(`#validarLote${id}`).val('').css('border-color', 'red');
+    return false;
+  }
+  $(`#validarLote${id}`).css('border-color', '#67757c');
+};
 
 /* Cargar el numero de muestras de acuerdo con las unidades a producir*/
 
@@ -234,20 +277,20 @@ function calcularMuestras(j, unidades) {
 
 /* Cargar el numero de muestras */
 
-function muestrasEnvase(id) {
-  pres = id;
-  envase = $(`#envasadoMulti${pres}`).html();
-  presentacion = envase.slice(23, envase.length);
+function muestrasEnvase() {
+
   let muestras = $(`#muestras${id}`).val();
   let recoveredData = localStorage.getItem(presentacion)
   let j = 1;
 
-  for (let i = 1; i <= muestras; i++) {
+  /* Elimina los campos para muestras */
+  for (let i = 1; i <= 60; i++) {
     $(`#txtMuestra${i}`).remove();
   }
 
-  for (let i = 1; i <= muestras; i++) {
-    $(".txtMuestras").append(`<input type='number' min='1' class='form-control' id='txtMuestra${i}' placeholder='${i}' style='text-align:center; color:#67757c;'>`);// placeholder='${i}' style="border:0; border-bottom:1px solid #67757c"
+  /* Crea los campos para muestras para la referencia */
+  for (let j = 1; j <= muestras; j++) {
+    $(".txtMuestras").append(`<input type='number' min='1' class='form-control' id='txtMuestra${j}' placeholder='${j}' style='text-align:center; color:#67757c;'>`);// placeholder='${i}' style="border:0; border-bottom:1px solid #67757c"
   }
 
   if (recoveredData !== null) {
@@ -261,7 +304,7 @@ function muestrasEnvase(id) {
 
 function guardarMuestras() {
 
-  let cantidad_muestras = $('#muestras1').val();
+  let cantidad_muestras = $(`#muestras${id}`).val();
   let muestras = [];
   let recoveredData = localStorage.getItem(presentacion)
   let promedio = 0;
@@ -295,7 +338,7 @@ function guardarMuestras() {
   promedio = promedio / muestras.length
   promedio = formatoCO(promedio.toFixed(2));
 
-  $(`#promedio${pres}`).val(promedio);
+  $(`#promedio${id}`).val(promedio);
 }
 
 
@@ -380,21 +423,11 @@ function validarLinea() {
   const linea = $('.select-linea').val();
 
   if (linea == null) {
-    alertify.set("notifier", "position", "top-right"); alertify.error("Antes de continuar, seleccione la linea para identificar el Equipo a usar para la linea de producción");
+    alertify.set("notifier", "position", "top-right"); alertify.error("Seleccione la linea");
     return 0;
   }
 }
 
-function validarLote() {
-
-  const lote = $('.validarLote').val();
-
-  if (lote == '') {
-    alertify.set("notifier", "position", "top-right"); alertify.error("Antes de continuar, ingrese el lote");
-    $("#validarLote").val('').css('border-color', 'red');
-    return 0;
-  }
-}
 
 function validarDevoluciones(id) {
   //valida que los datos han sido cargados
@@ -455,4 +488,28 @@ function validarDevoluciones(id) {
     });
 
   };
+}
+
+/* carga de maquinas */
+
+function cargarEquipos() {
+
+  const linea = $(`#select-Linea${id}`).val();
+
+  $.ajax({
+    method: 'POST',
+    url: '../../html/php/cargarMaquinas.php',
+    data: { linea: linea },
+
+    success: function (response) {
+      const info = JSON.parse(response);
+      $(`.envasadora${id}`).val('');
+      $(`.loteadora${id}`).val('');
+      $(`.envasadora${id}`).val(info.data[2].maquina);
+      $(`.loteadora${id}`).val(info.data[4].maquina);
+    },
+    error: function (response) {
+      console.log(response);
+    }
+  })
 }

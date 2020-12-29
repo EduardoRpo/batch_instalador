@@ -8,7 +8,7 @@ function firmar2daSeccion(firma) {
         alertify.set("notifier", "position", "top-right"); alertify.error("Valide que todas las muestras se encuentran completas");
         return false;
     }
-
+    debugger;
     let muestras = JSON.parse(localStorage.getItem(presentacion))
 
     if (i == cantidad_muestras) {
@@ -16,7 +16,7 @@ function firmar2daSeccion(firma) {
         $.ajax({
             method: 'POST',
             url: '../../html/php/muestras.php',
-            data: { id: idBatch, muestras, referencia },
+            data: { id: idBatch, muestras, ref_multi },
 
             success: function (response) {
 
@@ -31,7 +31,7 @@ function firmar2daSeccion(firma) {
                 $.ajax({
                     type: "POST",
                     url: '../../html/php/envasado.php',
-                    data: { operacion: 1, linea, id_firma, modulo, idBatch },
+                    data: { operacion: 1, linea, id_firma, modulo, idBatch, ref_multi },
 
                     success: function (response) {
                         alertify.set("notifier", "position", "top-right"); alertify.success("Firmado satisfactoriamente");
@@ -54,7 +54,7 @@ function almacenarfirma(id_firma) {
     $.ajax({
         type: "POST",
         url: '../../html/php/envasado.php',
-        data: { operacion: 2, id_firma, modulo, idBatch },
+        data: { operacion: 2, id_firma, modulo, idBatch, ref_multi },
 
         success: function (response) {
             alertify.set("notifier", "position", "top-right"); alertify.success("Firmado satisfactoriamente");
@@ -71,14 +71,14 @@ function almacenarfirma(id_firma) {
 function firmarSeccionCierreProceso(firma) {
 
     let orden = localStorage.getItem("orden");
-    let tamano_lote = localStorage.getItem("tamano_lote"); 
+    let tamano_lote = localStorage.getItem("tamano_lote");
 
     //confirmación de incidencias 
 
     var confirm = alertify.confirm('Incidencias y Observaciones', `¿Durante la fabricación de la orden de producción ` + orden + ` con cantidad total de ` + tamano_lote + ` kg, se presentó alguna incidencia u observación al desarrollar el proceso?`,
         null, null).set('labels', { ok: 'Si', cancel: 'No' });
 
-    confirm.set({ transition: 'slide' }); 
+    confirm.set({ transition: 'slide' });
 
     confirm.set('onok', function () { //callbak al pulsar Si
         cargarObsIncidencias(firma);
@@ -106,7 +106,7 @@ function firmarSeccionCierreProceso(firma) {
             }
         });
     });
-} 
+}
 
 
 
