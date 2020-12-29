@@ -15,7 +15,6 @@ $('#parametrosg').click(function (e) {
     $('.contenedor-menu .menu ul.abrir2').slideUp();
 });
 
-
 $('#productos').click(function (e) {
     e.preventDefault();
     $('.contenedor-menu .menu ul.abrir1 ul.abrir3').slideUp();

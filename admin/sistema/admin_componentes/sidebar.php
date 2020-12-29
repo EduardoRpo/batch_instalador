@@ -46,8 +46,7 @@
                 <li><a href="instructivo.php" id="linkPreparaciones"><i class="fas fa-chess-king"></i><span>Instructivo </span></a></li>
                 <li><a href="bases.php" id="linkPreparaciones"><i class="fas fa-chess-queen"></i><span>Bases </span></a></li>
                 </ul>
-                
-                
+                                
 
                 <li><a href="multipresentacion.php" id="linkMultipresentacion"><i class="fas fa-superscript"></i><span>Multipresentación</span></a></li>
             </ul>
