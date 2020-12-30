@@ -26,8 +26,9 @@
                 <li><a href="preguntas.php" id="linkPreguntas"><i class="fas fa-question-circle"></i><span>Preguntas</span></a></li>
                 <li><a href="despejedelinea.php" id="linkDespeje"><i class="fas fa-clipboard-list"></i><span>Despeje</span></a></li>
                 <li><a href="tanques.php" id="link8"><i class="fas fa-database"></i><span>Tanques</span></a></li>
-
             </ul>
+
+
             <li id="productos"><a href=""><i class="fa fa-chevron-down"></i><span>Productos</span></a></li>
             <ul class="abrir1">
                 <li><a href="productos.php" id="linkMaestro"><i class="fas fa-coins    "></i><span>Maestro Productos</span></a></li>
@@ -37,9 +38,20 @@
                 <li><a href="empaques.php" id="linkEmpaques"><i class="fas fa-box-open"></i><span>Empaques</span></a></li>
                 <li><a href="materiaprima.php" id="linkMateriaPrima"><i class="fas fa-draw-polygon"></i><span>Materia Prima</span></a></li>
                 <li><a href="formulas.php" id="linkFormulas"><i class="fas fa-vote-yea"></i><span>Formulas</span></a></li>
-                <li><a href="instructivo.php" id="linkPreparaciones"><i class="far fa-clipboard"></i><span>Instructivo Preparación</span></a></li>
+
+
+
+                <li id="instructivoss"><a href=""><i class="fa fa-chevron-down"></i><span>Instructivos</span></a></li>
+                <ul class="abrir3">
+                <li><a href="instructivo.php" id="linkPreparaciones"><i class="fas fa-chess-king"></i><span>Instructivo </span></a></li>
+                <li><a href="bases.php" id="linkPreparaciones"><i class="fas fa-chess-queen"></i><span>Bases </span></a></li>
+                </ul>
+                                
+
                 <li><a href="multipresentacion.php" id="linkMultipresentacion"><i class="fas fa-superscript"></i><span>Multipresentación</span></a></li>
             </ul>
+
+
             <li id="usuarios"><a href=""><i class="fa fa-chevron-down"></i><span>Usuarios</span></a></li>
             <ul class="abrir2">
                 <li><a href="usuarios.php" id="linkMaestroUsuarios"><i class="fas fa-user-check"></i><span>Maestro Usuarios</span></a></li>
