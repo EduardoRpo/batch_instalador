@@ -1,14 +1,12 @@
 let id;
-/* let btnOprimido; */
 let cont = 1;
 let contadorchecks;
-/* let data; */
 
 /* Valida el usuario si existe en la base de datos */
 
 function enviar() {
+
     $('#m_firmar').modal('hide');
-    /* btn_id = $('#idbtn').val(); */
     btn_id = localStorage.getItem("idbtn");
 
     datos = {
@@ -50,17 +48,22 @@ function preparar(datos) {
     }
 
     if (btn_id == 'firma3') {
-        debugger;
-        firmar2daSeccion(info);
-        /* firmar(info); */
+        almacenar_muestras(info);
+        firmar(info);
     }
 
     if (btn_id == 'firma4') {
         almacenarfirma(info[0].id);
         firmar(info);
     }
+
     if (btn_id == 'firma5') {
-        (info[0].id);
+        registrarMaterialSobrante(info[0].id);
+        firmar(info);
+    }
+
+    if (btn_id == 'firma6') {
+        firmaCalidad(info[0].id);
         firmar(info);
     }
 }

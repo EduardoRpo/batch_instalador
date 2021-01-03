@@ -336,7 +336,7 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="controlpeso_realizado1" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_realizado1" id="controlpeso_realizado1" onclick="cargar(this, 'firma3')" style="width: 100%; height: 38px;">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_realizado1" onclick="cargar(this, 'firma3')" style="width: 100%; height: 38px;">Firmar</button>
                       </div>
 
                       <div class="col-md-4 align-self-center">
@@ -344,7 +344,7 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="controlpeso_verificado1" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_verificado1" id="controlpeso_verificado1" onclick="cargar(this, 'firma4')" style="width: 100%; height: 38px;">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_verificado1" onclick="cargar(this, 'firma4')" style="width: 100%; height: 38px;">Firmar</button>
                       </div>
 
                     </div>
@@ -358,7 +358,7 @@ include('modal/m_muestras.php');
                           <div class="card-block">
 
                             <div class="table-responsive">
-                              <table class="table table-striped table-bordered">
+                              <table id="envases" class="table table-striped table-bordered">
                                 <thead>
                                   <tr>
                                     <!-- <th>Fecha</th> -->
@@ -423,18 +423,24 @@ include('modal/m_muestras.php');
                         </div>
                       </div>
                     </div>
-                    <div class="firmas_envasado">
-
-                      <div class="firmas_envasado__group">
+                    <!-- <div class="firmas_envasado"> -->
+                    <div class="row" style="margin: 1%">
+                      <!-- <div class="firmas_envasado__group"> -->
+                      <div class="col-md-4 align-self-center">
                         <label for="devolucion_realizado" class="col-form-label">Realizado Por:</label>
                         <input type="text" class="form-control" id="devolucion_realizado1" readonly>
-                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_realizado1" id="devolucion_realizado1" onclick="validarDevoluciones(1);">Firmar</button>
+                      </div>
+                      <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
+                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_realizado1" style="width: 100%; height: 38px;" onclick="cargar(this, 'firma5')">Firmar</button>
                       </div>
 
-                      <div class="firmas_envasado__group">
+                      <!-- <div class="firmas_envasado__group"> -->
+                      <div class="col-md-4 align-self-center">
                         <label for="devolucion_verificado" class="col-form-label">Verificado Por:</label>
                         <input type="text" class="form-control" id="devolucion_verificado1" readonly>
-                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_verificado1" id="devolucion_verificado1">Firmar</button>
+                      </div>
+                      <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
+                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_verificado1" style="width: 100%; height: 38px;" onclick="cargar(this, 'firma6')">Firmar</button>
                       </div>
 
                     </div>
@@ -670,13 +676,13 @@ include('modal/m_muestras.php');
                       <div class="firmas_envasado__group">
                         <label for="devolucion_realizado" class="col-form-label">Realizado Por:</label>
                         <input type="text" class="form-control" id="devolucion_realizado2" readonly>
-                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_realizado2" id="devolucion_realizado2" onclick="validarDevoluciones(1);">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_realizado2" id="devolucion_realizado2" onclick="cargar(this, 'firma5')">Firmar</button>
                       </div>
 
                       <div class="firmas_envasado__group">
                         <label for="devolucion_verificado" class="col-form-label">Verificado Por:</label>
                         <input type="text" class="form-control" id="devolucion_verificado2" readonly>
-                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_verificado2" id="devolucion_verificado2">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_verificado2" id="devolucion_verificado2" onclick="cargar(this, 'firma6')">Firmar</button>
                       </div>
 
                     </div>
@@ -961,7 +967,7 @@ include('modal/m_muestras.php');
           <script src="../../html/js/global/tanques.js"></script>
           <script src="../../html/js/global/condicionesdelMedio.js"></script>
           <script src="../../html/js/global/cargarBatchEnvasado.js"></script>
-          <script src="../../html/js/firmar/firmar1raSeccion.js"></script>
+          <script src="../../html/js/firmar/firmar1raSeccionEnvasado.js"></script>
           <script src="../../html/js/firmar/firmar2daSeccionEnvasado.js"></script>
           <script src="../../html/js/envasado/envasadoinfo.js"></script>
           <script src="../../html/js/global/incidencias.js"></script>

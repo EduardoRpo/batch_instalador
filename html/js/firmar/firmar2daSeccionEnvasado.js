@@ -2,49 +2,46 @@
 
 /* firmar 2da sección  */
 
-function firmar2daSeccion(firma) {
+function almacenar_muestras(firma) {
 
-    if (presentacion == undefined) {
-        alertify.set("notifier", "position", "top-right"); alertify.error("Valide que todas las muestras se encuentran completas");
-        return false;
-    }
-    debugger;
-    let muestras = JSON.parse(localStorage.getItem(presentacion))
+    let muestras = JSON.parse(localStorage.getItem(presentacion + ref_multi))
 
-    if (i == cantidad_muestras) {
-        //Almacena las muestras
-        $.ajax({
-            method: 'POST',
-            url: '../../html/php/muestras.php',
-            data: { id: idBatch, muestras, ref_multi },
+    //Almacena las muestras
+    $.ajax({
+        method: 'POST',
+        url: '../../html/php/muestras.php',
+        data: { operacion: 1, idBatch, muestras, modulo, ref_multi },
 
-            success: function (response) {
+        success: function (response) {
+            localStorage.removeItem(presentacion + ref_multi);
+            localStorage.removeItem('totalmuestras');
 
-                if (response == 0) {
-                    alertify.set("notifier", "position", "top-right"); alertify.error("Error al almacenar las muestras, valide nuevamente");
-                    return false;
-                }
-
-                let linea = $('#select-Linea1').val();
-                let id_firma = firma[0].id
-                //Almacena la firma 
-                $.ajax({
-                    type: "POST",
-                    url: '../../html/php/envasado.php',
-                    data: { operacion: 1, linea, id_firma, modulo, idBatch, ref_multi },
-
-                    success: function (response) {
-                        alertify.set("notifier", "position", "top-right"); alertify.success("Firmado satisfactoriamente");
-                        firmar(firma);
-                        $('#controlpeso_realizado1').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
-                    }
-                });
-            },
-            error: function (response) {
-                console.log(response);
+            if (response == 0) {
+                alertify.set("notifier", "position", "top-right"); alertify.error("Error al almacenar las muestras, valide nuevamente");
+                return false;
             }
-        })
-    }
+
+            let linea = $('#select-Linea1').val();
+            let id_firma = firma[0].id
+            //Almacena la firma 
+            $.ajax({
+                type: "POST",
+                url: '../../html/php/envasado.php',
+                data: { operacion: 1, linea, id_firma, modulo, idBatch, ref_multi },
+
+                success: function (response) {
+                    
+                    alertify.set("notifier", "position", "top-right"); alertify.success("Firmado satisfactoriamente");
+                    $('#controlpeso_realizado1').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
+                    $('.controlpeso_verificado1').prop('disabled', false);
+                    $('.devolucion_realizado1').prop('disabled', false);
+                }
+            });
+        },
+        error: function (response) {
+            console.log(response);
+        }
+    })
 }
 
 /* almacenar firma calidad 2da seccion */
@@ -63,7 +60,21 @@ function almacenarfirma(id_firma) {
     });
 }
 
+function firmaCalidad(id_firma) {
+    $.ajax({
+        type: "POST",
+        url: '../../html/php/envasado.php',
+        data: { operacion: 5, id_firma, modulo, idBatch, ref_multi },
 
+        success: function (response) {
+            if (response == 1) {
+                alertify.set("notifier", "position", "top-right"); alertify.success("Firmado satisfactoriamente");
+                $(`#controlpeso_verificado${id_multi}`).css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
+                $(`#devolucion_verificado${id_multi}`).css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
+            }
+        }
+    });
+}
 
 /* $(selector).click(function (e) {
     e.preventDefault(); */
