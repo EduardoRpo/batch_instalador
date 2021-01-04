@@ -2,8 +2,8 @@ let editar;
 
 /* Mostrar Menu seleccionadp */
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#link6').css('text-decoration', 'revert')
-$('.contenedor-menu .menu ul.abrir').show();
+$('#link_procesos').css('text-decoration', 'revert')
+$('.contenedor-menu .menu ul.menu_generales').show();
 
 /* Cargue de Parametros de Control en DataTable */
 

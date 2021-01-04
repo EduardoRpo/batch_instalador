@@ -3,8 +3,8 @@ let editar;
 /* Mostrar Menu seleccionadp */
 
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#linkCargos').css('text-decoration', 'revert')
-$('.contenedor-menu .menu ul.abrir2').show();
+$('#link_cargos').css('text-decoration', 'revert')
+$('.contenedor-menu .menu ul.menu_usuarios').show();
 
 /* Cargue de Parametros de Control en DataTable */
 

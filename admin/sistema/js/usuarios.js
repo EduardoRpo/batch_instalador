@@ -6,8 +6,8 @@ cargarselectores('modulo');
 
 /* Mostrar Menu seleccionado */
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#linkMaestroUsuarios').css('text-decoration', 'revert')
-$('.contenedor-menu .menu ul.abrir2').show();
+$('#link_menu_usuarios').css('text-decoration', 'revert')
+$('.contenedor-menu .menu ul.menu_usuarios').show();
 
 //Cargue de datos Tabla Usuarios
 

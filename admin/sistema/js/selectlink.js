@@ -1,2 +1,2 @@
-$('#linkFisicoQuimicas').css('text-decoration', 'revert')
-$('#linkGenerales').css('text-decoration', 'none');
+$('#link_fisico_quimicas').css('text-decoration', 'revert')
+$('#link_generales').css('text-decoration', 'none');

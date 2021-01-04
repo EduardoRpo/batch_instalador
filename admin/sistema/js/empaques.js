@@ -5,9 +5,8 @@ var editar;
 
 /* Mostrar Menu seleccionado */
 $('.contenedor-menu .menu a').removeAttr('style');
-$('.contenedor-menu .menu ul.abrir1').show();
-$('#linkEmpaques').css('text-decoration', 'revert')
-
+$('#link_empaques').css('text-decoration', 'revert')
+$('.contenedor-menu .menu ul.menu_productos').show();
 /* Ocultar tablas Propiedades Generales */
 
 $(document).ready(function () {

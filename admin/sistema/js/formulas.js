@@ -4,8 +4,8 @@ var editar;
 /* Mostrar Menu seleccionadp */
 
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#linkFormulas').css('text-decoration', 'revert')
-$('.contenedor-menu .menu ul.abrir1').show();
+$('#link_formulas').css('text-decoration', 'revert')
+$('.contenedor-menu .menu ul.menu_productos').show();
 
 /* Cargue select referencias */
 

@@ -9,7 +9,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>Samara Cosmetics | Preparación</title>
+  <title>Samara Cosmetics | Bases Preparación</title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
 
   <!--     Fonts and icons     -->
@@ -54,7 +54,7 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h5 class="title">Instructivo de Preparación</h5>
+                <h5 class="title">Bases Instructivo Preparación</h5>
                 <p class="category">Samara Cosmetics <a href=""></a></p>
               </div>
               <div class="card-body">
@@ -96,7 +96,6 @@
                   <table id="tblInstructivo" class="table-striped row-borde" style="width:100%">
                     <thead>
                       <tr>
-                        <th></th>
                         <th></th>
                         <th>Id</th>
                         <th>Actividad</th>
@@ -148,7 +147,7 @@
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
   <!-- javascript inicializacion datatables -->
-  <script src="js/instructivo.js"></script>
+  <script src="js/bases.js"></script>
   <script src="js/menu.js"></script>
   <script src="js/cargarDatos.js"></script>
 

@@ -2,8 +2,8 @@ let editar;
 /* Mostrar Menu seleccionadp */
 
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#linkDesinfectante').css('text-decoration', 'revert')
-$('.contenedor-menu .menu ul.abrir').show();
+$('#link_desinfectante').css('text-decoration', 'revert')
+$('.contenedor-menu .menu ul.menu_generales').show();
 
 
 /* Cargue de Parametros de Condiciones del medio */

@@ -2,9 +2,9 @@ let editar;
 
 /* Mostrar Menu seleccionado */
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#linkMateriaPrima').css('text-decoration', 'revert')
-$('.contenedor-menu .menu ul.abrir1').show();
-
+$('#link_materia_prima').css('text-decoration', 'revert')
+$('.contenedor-menu .menu ul.menu_productos').show();
+	
 /* Cargue de Parametros de Control en DataTable */
 
 $("#tblMateriaPrima").DataTable({

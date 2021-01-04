@@ -2,8 +2,8 @@ let editar;
 
 /* Mostrar Menu seleccionado */
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#linkDespeje').css('text-decoration', 'revert')
-$('.contenedor-menu .menu ul.abrir').show();
+$('#link_despeje').css('text-decoration', 'revert')
+$('.contenedor-menu .menu ul.menu_generales').show();
 
 cargarSelectorProceso();
 cargarSelectorPreguntas();

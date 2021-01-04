@@ -1,12 +1,13 @@
 var tabla;
 var editar;
 
-/* Mostrar Menu seleccionadp */
+/* Mostrar Menu seleccionado */
 
 $('.contenedor-menu .menu a').removeAttr('style');
 $('.contenedor-menu .menu ul.menu_productos').show();
 $('.contenedor-menu .menu ul.menu_productos ul.menu_instructivos').show();
-$('#link_preparaciones').css('text-decoration', 'revert')
+$('#link_bases').css('text-decoration', 'revert')
+
 /* Cargue select referencias */
 
 //function cargarSelectorModulo() {

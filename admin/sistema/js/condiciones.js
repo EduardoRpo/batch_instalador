@@ -2,9 +2,10 @@ let editar;
 
 /* Mostrar Menu seleccionado */
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#linkCondicionesMedio').css('text-decoration', 'revert')
-$('.contenedor-menu .menu ul.abrir').show();
+$('#link_condiciones_medio').css('text-decoration', 'revert')
+$('.contenedor-menu .menu ul.menu_generales').show();
 cargarSelectorModulo();
+
 /* Cargue de Parametros de Condiciones del medio */
 
 $(document).ready(function () {

@@ -4,8 +4,8 @@ cargarSelectorLinea();
 /* Mostrar Menu seleccionado */
 
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#linkEquipos').css('text-decoration', 'revert')
-$('.contenedor-menu .menu ul.abrir').show();
+$('#link_equipos').css('text-decoration', 'revert')
+$('.contenedor-menu .menu ul.menu_generales').show();
 
 /* Cargue de Equipos*/
 

@@ -5,16 +5,14 @@ var editar;
 
 /* Mostrar Menu seleccionado */
 $('.contenedor-menu .menu a').removeAttr('style');
-$('.contenedor-menu .menu ul.abrir1').show();
-$('#linkGenerales').css('text-decoration', 'revert')
+$('#link_generales').css('text-decoration', 'revert')
+$('.contenedor-menu .menu ul.menu_productos').show();
 
 /* Ocultar tablas Propiedades Generales */
 
 $(document).ready(function () {
-
     for (i = 1; i < 10; i++) {
         $(`#${i}`).hide();
-
     }
 })
 
@@ -65,7 +63,6 @@ function cargarTablaNotificacion(id, tabla) {
             { "data": "vencimiento" },
             { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a>", className: "centrado" },
             { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>", className: "centrado" }
-
         ]
     });
 };
@@ -168,7 +165,7 @@ $(document).on('click', '.link-borrar', function (e) {
 $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
     editar = 1;
-    debugger;
+  
     let id = $(this).parent().parent().children().first().text();
     let nombre = $(this).parent().parent().children().eq(1).text();
     let otro = $(this).parent().parent().children().eq(2).text();
@@ -193,7 +190,7 @@ $(document).on('click', '.link-editar', function (e) {
 /* Almacenar Registros */
 
 function guardarDatosGenerales(nombre, id) {
-    debugger;
+
     const datos = $(`#input${id}`).val();
     const id_registro = $(`#txt-Id${id}`).val();
 
