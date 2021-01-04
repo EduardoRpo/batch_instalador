@@ -128,18 +128,21 @@ function cargardevolucionmaterial() {
         success: function (response) {
             let info = JSON.parse(response);
 
-            j = 1;
+            j = 0;
 
             if (info == 3)
                 return false;
 
-            $(`#txtEnvasada${id_multi}`).val(info.data[0].envasada);
+            $(`.txtEnvasada${id_multi}`).val(info.data[0].envasada);
             $(`.envasada${id_multi}`).html(info.data[0].envasada);
 
-            for (i = 0; i < 3; i++) {
-                $(`#averias${j}`).val(info.data[i].averias);
-                $(`#sobrante${j}`).val(info.data[i].sobrante);
-                devolucionMaterialTotal(info.data[i].sobrante, j);
+            //validar en que multipresentacion se encuentra
+            id_multi == 1 ? (start = 1, end = 4) : id_multi == 2 ? (start = 4, end = 7) : (start = 7, end = 10)
+
+            for (i = start; i < end; i++) {
+                $(`#averias${i}`).val(info.data[j].averias);
+                $(`#sobrante${i}`).val(info.data[j].sobrante);
+                devolucionMaterialTotal(info.data[j].sobrante, j);
                 j++;
             }
 

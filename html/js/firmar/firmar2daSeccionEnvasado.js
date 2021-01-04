@@ -3,7 +3,7 @@
 /* firmar 2da sección  */
 
 function almacenar_muestras(firma) {
-    
+
     let muestras = JSON.parse(localStorage.getItem(presentacion + ref_multi))
 
     //Almacena las muestras
@@ -13,7 +13,7 @@ function almacenar_muestras(firma) {
         data: { operacion: 1, idBatch, muestras, modulo, ref_multi },
 
         success: function (response) {
-            
+
             if (response == 0) {
                 alertify.set("notifier", "position", "top-right"); alertify.error("Error al almacenar las muestras, valide nuevamente");
                 return false;
@@ -31,7 +31,7 @@ function almacenar_muestras(firma) {
                 data: { operacion: 1, linea, id_firma, modulo, idBatch, ref_multi },
 
                 success: function (response) {
-                    
+
                     alertify.set("notifier", "position", "top-right"); alertify.success("Firmado satisfactoriamente");
                     $(`.controlpeso_realizado${id_multi}`).css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
                     $(`.controlpeso_verificado${id_multi}`).prop('disabled', false);
@@ -80,7 +80,7 @@ function firmaCalidad(id_firma) {
 /* $(selector).click(function (e) {
     e.preventDefault(); */
 
-function firmarSeccionCierreProceso(firma) {
+function observaciones_incidencias() {
 
     let orden = localStorage.getItem("orden");
     let tamano_lote = localStorage.getItem("tamano_lote");
@@ -113,8 +113,8 @@ function firmarSeccionCierreProceso(firma) {
 
             success: function (response) {
                 $('#modalObservaciones').modal('hide');
-                firmar(firma);
-                deshabilitarbtn();
+                $(`.devolucion_realizado${id_multi}`).css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
+                $(`.devolucion_verificado${id_multi}`).prop('disabled', false);
             }
         });
     });

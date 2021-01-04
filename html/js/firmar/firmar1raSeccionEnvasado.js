@@ -58,8 +58,7 @@ function preparar(datos) {
     }
 
     if (btn_id == 'firma5') {
-        registrarMaterialSobrante(info[0].id);
-        firmar(info);
+        $.when(registrarMaterialSobrante(info[0].id), observaciones_incidencias()).done(firmar(info));
     }
 
     if (btn_id == 'firma6') {
@@ -101,7 +100,7 @@ function validarPreguntas(idfirma) {
             realizo: idfirma,
         },
         success: function (response) {
-            
+
             if (response > 0) {
                 $('.despeje_realizado').prop('disabled', true);
                 $('.despeje_verificado').prop('disabled', false);

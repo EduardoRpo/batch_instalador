@@ -46,14 +46,18 @@ function cargar(btn, idbtn) {
 
     if (btn == `devolucion_realizado${id_multi}`) {
 
-      let cantidadEnvasada = $(`#txtEnvasada${id_multi}`).val();
+      let cantidadEnvasada = $(`.txtEnvasada${id_multi}`).val();
 
       if (cantidadEnvasada == '') {
         alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos");
         return false;
       }
-
-      for (let i = 1; i < 4; i++) {
+      
+      //validar en que multipresentacion se encuentra
+      id_multi == 1 ? (start = 1, end = 4) : id_multi == 2 ? (start = 4, end = 7) : (start = 7, end = 10)
+      
+      //validar que los datos de toda la tabla se encuentran completos
+      for (let i = start; i < end; i++) {
         let averias = $(`#averias${i}`).val();
         let sobrante = $(`#sobrante${i}`).val();
         if (averias == '' || sobrante == '') {
@@ -99,7 +103,7 @@ function deshabilitarbotones() {
 }
 
 function habilitarbotones() {
-  debugger;
+
   btn_id = localStorage.getItem("idbtn");
 
   if (btn_id == 'firma1')
@@ -420,28 +424,29 @@ function cargarTablaEnvase(j, referencia, cantidad) {
 
 /* Calculo de la devolucion de material */
 
-function devolucionMaterialEnvasada(valor, id) {
-
+function devolucionMaterialEnvasada(valor) {
+  
   let unidades_envasadas = formatoCO(parseInt(valor));
-  empaqueEnvasado = $(`.unidades${id}e`).html();
+  //empaqueEnvasado = $(`.unidades${id}e`).html();
 
   if (isNaN(unidades_envasadas)) {
     unidades_envasadas = 0;
   }
   //si la cantidad de envasado es diferente a los recibido envie una notificacion, la orden de produccion, diferencia entre recibida y envasada y presentacion
-  $(`.envasada${id}`).html(unidades_envasadas);
-  $(`.envasada${id}e`).html(empaqueEnvasado);
+  $(`.envasada${id_multi}`).html(unidades_envasadas);
+  //$(`.envasada${id}e`).html(empaqueEnvasado);
 
+  //devolucionMaterialTotal(unidades_envasadas);
 }
 
 function devolucionMaterialTotal(valor, id) {
 
-  let envasada = parseInt($(`#txtEnvasada${id}`).val());
+  let envasada = parseInt($(`.txtEnvasada${id_multi}`).val());
 
-  if (isNaN(envasada)) {
+  /* if (isNaN(envasada)) {
     envasada = $(`#txtEnvasada${id}`).html();
     envasada = parseInt(formatoGeneral(envasada));
-  }
+  } */
 
   let averias = parseInt($(`#averias${id}`).val());
   let total = envasada + averias + parseInt(valor);
@@ -474,13 +479,13 @@ function registrarMaterialSobrante(info) {
 
   let materialsobrante = [];
 
-  for (let i = 1; i < 4; i++) {
+  for (let i = start; i < end; i++) {
     let datasobrante = {};
-    let itemref = $(`.refEmpaque${i}`).html();
-    let envasada = formatoGeneral($(`#txtEnvasada${i}`).html());
+    let itemref = $(`.refEmpaque${id_multi}`).html();
+    let envasada = formatoGeneral($(`.txtEnvasada${id_multi}`).html());
 
     if (envasada == '')
-      envasada = formatoGeneral($(`#txtEnvasada${i}`).val());
+      envasada = formatoGeneral($(`.txtEnvasada${id_multi}`).val());
 
     let averias = $(`#averias${i}`).val();
     let sobrante = $(`#sobrante${i}`).val();
@@ -490,7 +495,6 @@ function registrarMaterialSobrante(info) {
     datasobrante.averias = averias;
     datasobrante.sobrante = sobrante;
     materialsobrante.push(datasobrante);
-
   }
 
   $.ajax({
@@ -500,8 +504,6 @@ function registrarMaterialSobrante(info) {
 
     success: function (response) {
       alertify.set("notifier", "position", "top-right"); alertify.success("Firmado satisfactoriamente");
-      $(`.devolucion_realizado${id_multi}`).css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
-      $(`.devolucion_verificado${id_multi}`).prop('disabled', false);
     }
   });
 

@@ -376,7 +376,7 @@ include('modal/m_muestras.php');
                                     <td id="envase1" class="envase1 refEmpaque1"></td>
                                     <td id="descripcion_envase1" class="descripcion_envase1"></td>
                                     <td id="unidades5" class="centrado unidades1"></td>
-                                    <td><input type="number" id="txtEnvasada1" min="1" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialEnvasada(this.value, 1);"></td>
+                                    <td><input type="number" id="txtEnvasada1" min="1" class="form-control centrado txtEnvasada1" style="width: 110px;" onkeyup="devolucionMaterialEnvasada(this.value);"></td>
                                     <td><input type="number" id="averias1" min="1" class="form-control centrado" style="width: 110px;"></td>
                                     <td><input type="number" id="sobrante1" min="1" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 1);"></td>
                                     <td id="totalDevolucion1" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
@@ -440,7 +440,7 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="devolucion_verificado1" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_verificado1" style="width: 100%; height: 38px;" onclick="cargar('devolucion_verificado1', 'firma3')">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_verificado1" style="width: 100%; height: 38px;" onclick="cargar('devolucion_verificado1', 'firma6')">Firmar</button>
                       </div>
 
                     </div>
@@ -624,28 +624,28 @@ include('modal/m_muestras.php');
                                     <td id="envase2" class="envase2 refEmpaque2"></td>
                                     <td id="descripcion_envase2" class="descripcion_envase2"></td>
                                     <td id="unidades5" class="centrado unidades2"></td>
-                                    <td><input type="number" id="txtEnvasada2" min="1" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialEnvasada(this.value, 1);"></td>
-                                    <td><input type="number" id="averias2" min="1" class="form-control centrado" style="width: 110px;"></td>
-                                    <td><input type="number" id="sobrante2" min="1" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 1);"></td>
-                                    <td id="totalDevolucion2" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
+                                    <td><input type="number" id="txtEnvasada2" min="1" class="form-control centrado txtEnvasada2" style="width: 110px;" onkeyup="devolucionMaterialEnvasada(this.value);"></td>
+                                    <td><input type="number" id="averias4" min="1" class="form-control centrado" style="width: 110px;"></td>
+                                    <td><input type="number" id="sobrante4" min="1" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 4);"></td>
+                                    <td id="totalDevolucion4" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
                                   </tr>
                                   <tr>
                                     <td id="tapa2" class="tapa2 refEmpaque2"></td>
                                     <td id="descripcion_tapa2" class="descripcion_tapa2"></td>
                                     <td id="unidades6" class="centrado unidades2"></td>
                                     <td id="txtEnvasada2" class="centrado envasada2"></td>
-                                    <td><input type="number" id="averias2" min="1" class="form-control centrado" style="width: 110px;"></td>
-                                    <td><input type="number" id="sobrante2" min="1" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 2);"></td>
-                                    <td id="totalDevolucion2" class="centrado"></td><!-- <input type="number" id="totalDevolucion1" class="form-control centrado" readonly> -->
+                                    <td><input type="number" id="averias5" min="1" class="form-control centrado" style="width: 110px;"></td>
+                                    <td><input type="number" id="sobrante5" min="1" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 5);"></td>
+                                    <td id="totalDevolucion5" class="centrado"></td><!-- <input type="number" id="totalDevolucion1" class="form-control centrado" readonly> -->
                                   </tr>
                                   <tr>
                                     <td id="etiqueta2" class="etiqueta2 refEmpaque3"></td>
                                     <td id="descripcion_etiqueta2" class="descripcion_etiqueta2"></td>
                                     <td id="unidades7" class="centrado unidades2"></td>
                                     <td id="txtEnvasada3" class="centrado envasada2"></td>
-                                    <td><input type="number" id="averias3" min="1" class="form-control centrado" style="width: 110px;"></td>
-                                    <td><input type="number" id="sobrante3" min="1" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 3);"></td>
-                                    <td id="totalDevolucion3" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
+                                    <td><input type="number" id="averias6" min="1" class="form-control centrado" style="width: 110px;"></td>
+                                    <td><input type="number" id="sobrante6" min="1" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 6);"></td>
+                                    <td id="totalDevolucion6" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
                                   </tr>
                                   <!-- <tr>
                                     <td id="empaque1" class="empaque1"></td>
@@ -671,18 +671,24 @@ include('modal/m_muestras.php');
                         </div>
                       </div>
                     </div>
-                    <div class="firmas_envasado">
-
-                      <div class="firmas_envasado__group">
+                    <!-- <div class="firmas_envasado"> -->
+                    <div class="row" style="margin: 1%">
+                      <!-- <div class="firmas_envasado__group"> -->
+                      <div class="col-md-4 align-self-center">
                         <label for="devolucion_realizado" class="col-form-label">Realizado Por:</label>
                         <input type="text" class="form-control" id="devolucion_realizado2" readonly>
-                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_realizado2" onclick="cargar('devolucion_realizado2', 'firma5')">Firmar</button>
+                      </div>
+                      <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
+                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_realizado2" style="width: 100%; height: 38px;" onclick="cargar('devolucion_realizado2', 'firma5')">Firmar</button>
                       </div>
 
-                      <div class="firmas_envasado__group">
+                      <!-- <div class="firmas_envasado__group"> -->
+                      <div class="col-md-4 align-self-center">
                         <label for="devolucion_verificado" class="col-form-label">Verificado Por:</label>
                         <input type="text" class="form-control" id="devolucion_verificado2" readonly>
-                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_verificado2" onclick="cargar('devolucion_verificado2', 'firma6')">Firmar</button>
+                      </div>
+                      <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
+                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_verificado2" style="width: 100%; height: 38px;" onclick="cargar('devolucion_verificado2', 'firma6')">Firmar</button>
                       </div>
 
                     </div>
@@ -865,28 +871,28 @@ include('modal/m_muestras.php');
                                     <td id="envase3" class="envase3 refEmpaque3"></td>
                                     <td id="descripcion_envase3" class="descripcion_envase3"></td>
                                     <td id="unidades5" class="centrado unidades3"></td>
-                                    <td><input type="number" id="txtEnvasada3" min="1" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialEnvasada(this.value, 1);"></td>
-                                    <td><input type="number" id="averias3" min="1" class="form-control centrado" style="width: 110px;"></td>
-                                    <td><input type="number" id="sobrante3" min="1" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 1);"></td>
-                                    <td id="totalDevolucion3" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
+                                    <td><input type="number" id="txtEnvasada3" min="1" class="form-control centrado txtEnvasada3" style="width: 110px;" onkeyup="devolucionMaterialEnvasada(this.value);"></td>
+                                    <td><input type="number" id="averias7" min="1" class="form-control centrado" style="width: 110px;"></td>
+                                    <td><input type="number" id="sobrante7" min="1" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 7);"></td>
+                                    <td id="totalDevolucion7" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
                                   </tr>
                                   <tr>
                                     <td id="tapa3" class="tapa3 refEmpaque3"></td>
                                     <td id="descripcion_tapa3" class="descripcion_tapa3"></td>
                                     <td id="unidades6" class="centrado unidades3"></td>
                                     <td id="txtEnvasada3" class="centrado envasada3"></td>
-                                    <td><input type="number" id="averias3" min="1" class="form-control centrado" style="width: 110px;"></td>
-                                    <td><input type="number" id="sobrante3" min="1" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 2);"></td>
-                                    <td id="totalDevolucion3" class="centrado"></td><!-- <input type="number" id="totalDevolucion1" class="form-control centrado" readonly> -->
+                                    <td><input type="number" id="averias8" min="1" class="form-control centrado" style="width: 110px;"></td>
+                                    <td><input type="number" id="sobrante8" min="1" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 8);"></td>
+                                    <td id="totalDevolucion8" class="centrado"></td><!-- <input type="number" id="totalDevolucion1" class="form-control centrado" readonly> -->
                                   </tr>
                                   <tr>
                                     <td id="etiqueta3" class="etiqueta3 refEmpaque3"></td>
                                     <td id="descripcion_etiqueta3" class="descripcion_etiqueta3"></td>
                                     <td id="unidades7" class="centrado unidades3"></td>
                                     <td id="txtEnvasada3" class="centrado envasada3"></td>
-                                    <td><input type="number" id="averias3" min="1" class="form-control centrado" style="width: 110px;"></td>
-                                    <td><input type="number" id="sobrante3" min="1" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 3);"></td>
-                                    <td id="totalDevolucion3" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
+                                    <td><input type="number" id="averias9" min="1" class="form-control centrado" style="width: 110px;"></td>
+                                    <td><input type="number" id="sobrante9" min="1" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 9);"></td>
+                                    <td id="totalDevolucion9" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
                                   </tr>
                                   <!-- <tr>
                                     <td id="empaque1" class="empaque1"></td>
@@ -912,18 +918,24 @@ include('modal/m_muestras.php');
                         </div>
                       </div>
                     </div>
-                    <div class="firmas_envasado">
-
-                      <div class="firmas_envasado__group">
+                    <!-- <div class="firmas_envasado"> -->
+                    <div class="row" style="margin: 1%">
+                      <!-- <div class="firmas_envasado__group"> -->
+                      <div class="col-md-4 align-self-center">
                         <label for="devolucion_realizado" class="col-form-label">Realizado Por:</label>
                         <input type="text" class="form-control" id="devolucion_realizado3" readonly>
-                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_realizado3" id="devolucion_realizado3" onclick="validarDevoluciones(1);">Firmar</button>
+                      </div>
+                      <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
+                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_realizado3" style="width: 100%; height: 38px;" onclick="cargar('devolucion_realizado3', 'firma5')">Firmar</button>
                       </div>
 
-                      <div class="firmas_envasado__group">
+                      <!-- <div class="firmas_envasado__group"> -->
+                      <div class="col-md-4 align-self-center">
                         <label for="devolucion_verificado" class="col-form-label">Verificado Por:</label>
                         <input type="text" class="form-control" id="devolucion_verificado3" readonly>
-                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_verificado3" id="devolucion_verificado3">Firmar</button>
+                      </div>
+                      <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
+                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_verificado3" style="width: 100%; height: 38px;" onclick="cargar('devolucion_realizado3', 'firma6')">Firmar</button>
                       </div>
 
                     </div>
