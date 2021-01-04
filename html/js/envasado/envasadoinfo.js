@@ -5,62 +5,63 @@ let presentacion;
 //validacion de campos y botones
 
 function cargar(btn, idbtn) {
-  debugger;
+
   localStorage.setItem("idbtn", idbtn);
-  btn = btn.id;
+  //btn = btn;
   id = btn;
 
-  /* Validacion que todos los datos en linea y el formulario de control en preparacion no esten vacios */
+  if (typeof id_multi !== 'undefined') {
+    /* Validacion que todos los datos en linea y el formulario de control en preparacion no esten vacios */
 
-  if (btn == `controlpeso_realizado${id_multi}`) {
-    validar = validarLinea();
+    if (btn == `controlpeso_realizado${id_multi}`) {
+      validar = validarLinea();
 
-    if (validar == 0)
-      return false;
+      if (validar == 0)
+        return false;
 
-    /* Valida que todas las muestras y el lote se encuentren correctas*/
+      /* Valida que todas las muestras y el lote se encuentren correctas*/
 
-    validar = validarLote();
+      validar = validarLote();
 
-    if (validar == 0)
-      return false;
+      if (validar == 0)
+        return false;
 
-    i = localStorage.getItem('totalmuestras')
-    cantidad_muestras = $('#muestras1').val();
+      i = localStorage.getItem('totalmuestras')
+      cantidad_muestras = $(`#muestras${id_multi}`).val();
 
-    if (i != cantidad_muestras) {
-      alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todas las muestras");
-      return false;
-    }
-  }
-
-  /* Valida que se ha seleccionado el producto de desinfeccion para el proceso de aprobacion */
-
-  let seleccion = $('#sel_producto_desinfeccion').val();
-
-  if (seleccion == "Seleccione") {
-    alertify.set("notifier", "position", "top-right"); alertify.error("Seleccione el producto para desinfección.");
-    return false;
-  }
-
-  if (btn == `devolucion_realizado${id_multi}`) {
-
-    let cantidadEnvasada = $(`#txtEnvasada${id_multi}`).val();
-
-    if (cantidadEnvasada == '') {
-      alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos");
-      return false;
-    }
-
-    for (let i = 1; i < 4; i++) {
-      let averias = $(`#averias${i}`).val();
-      let sobrante = $(`#sobrante${i}`).val();
-      if (averias == '' || sobrante == '') {
-        alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos");
+      if (i != cantidad_muestras) {
+        alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todas las muestras");
         return false;
       }
     }
 
+    /* Valida que se ha seleccionado el producto de desinfeccion para el proceso de aprobacion */
+
+    let seleccion = $('#sel_producto_desinfeccion').val();
+
+    if (seleccion == "Seleccione") {
+      alertify.set("notifier", "position", "top-right"); alertify.error("Seleccione el producto para desinfección.");
+      return false;
+    }
+
+    if (btn == `devolucion_realizado${id_multi}`) {
+
+      let cantidadEnvasada = $(`#txtEnvasada${id_multi}`).val();
+
+      if (cantidadEnvasada == '') {
+        alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos");
+        return false;
+      }
+
+      for (let i = 1; i < 4; i++) {
+        let averias = $(`#averias${i}`).val();
+        let sobrante = $(`#sobrante${i}`).val();
+        if (averias == '' || sobrante == '') {
+          alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos");
+          return false;
+        }
+      }
+    }
   }
 
   /* Carga el modal para la autenticacion */
@@ -98,11 +99,11 @@ function deshabilitarbotones() {
 }
 
 function habilitarbotones() {
-
+  debugger;
   btn_id = localStorage.getItem("idbtn");
 
   if (btn_id == 'firma1')
-    $('.controlpeso_realizado1').prop('disabled', false);
+    $(`.controlpeso_realizado${id_multi}`).prop('disabled', false);
 }
 
 /* Cargar Multipresentacion */
@@ -181,14 +182,14 @@ $('.ref_multi1').click(function (e) {
 
 $('.ref_multi2').click(function (e) {
   e.preventDefault();
-  ref_multi = $(`#ref2`).val();
+  ref_multi = $(`.ref2`).val();
   id_multi = 2;
   presentacion_multi();
 });
 
 $('.ref_multi3').click(function (e) {
   e.preventDefault();
-  ref_multi = $(`#ref3`).val();
+  ref_multi = $(`.ref3`).val();
   id_multi = 3;
   presentacion_multi();
 });
@@ -250,16 +251,13 @@ function calcularPeso(densidadAprobada) {
   $(`.minimo`).val(peso_minimo);
   $(`.maximo`).val(peso_maximo);
   $(`.medio`).val(promedio);
-
-
-
 }
 
 /* Validar que el valor del lote corresponda */
 
 function validarLote() {
 
-  const lote = $('.validarLote').val();
+  const lote = $(`#validarLote${id_multi}`).val();
 
   if (lote == '') {
     alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese el número del lote");
@@ -461,7 +459,7 @@ function devolucionMaterialTotal(valor, id) {
 
 function validarLinea() {
 
-  const linea = $('.select-linea').val();
+  const linea = $(`#select-Linea${id_multi}`).val();
 
   if (linea == null) {
     alertify.set("notifier", "position", "top-right"); alertify.error("Seleccione la linea");

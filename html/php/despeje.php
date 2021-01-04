@@ -46,8 +46,8 @@ if (!empty($_POST)) {
 
             break;
         case 3: // cargar 2da firma despeje
-            $batch = $_POST['idbatch'];
-            $modulo = $_POST['module'];
+            $batch = $_POST['idBatch'];
+            $modulo = $_POST['modulo'];
 
             $sql = "SELECT u.urlfirma 
                     FROM batch_desinfectante_seleccionado d 
@@ -71,7 +71,6 @@ if (!empty($_POST)) {
             $observaciones = $_POST['observaciones'];
             $realizo = $_POST['realizo'];
 
-
             $sql = "SELECT * FROM batch_solucion_pregunta WHERE id_batch= :batch AND id_modulo= :modulo";
             $query = $conn->prepare($sql);
             $query->execute(['batch' => $batch, 'modulo' => $modulo]);
@@ -79,39 +78,6 @@ if (!empty($_POST)) {
 
             if ($rows > 0) {
                 echo '2';
-                /* foreach ($respuestas as $valor) {
-                    foreach ($valor as $item) {
-                        $sql = "UPDATE batch_solucion_pregunta SET solucion = :solucion 
-                WHERE id_pregunta= :pregunta AND id_modulo= :modulo AND id_batch= :batch";
-                        $query = $conn->prepare($sql);
-                        $result = $query->execute([
-                            'solucion' => $item["solucion"],
-                            'pregunta' => $item["pregunta"],
-                            'modulo' => $item["modulo"],
-                            'batch' => $item["batch"],
-                        ]);
-
-                        if ($result) {
-                            echo '3';
-                            exit();
-                        }
-                    }
-                }
-
-                $sql = "UPDATE batch_desinfectante_seleccionado SET desinfectante = :desinfectante,  observaciones = :observaciones, modulo = :modulo, batch = :batch
-                        WHERE id_pregunta= :pregunta AND id_modulo= :modulo AND id_batch= :batch";
-                $query = $conn->prepare($sql);
-                $result = $query->execute([
-                    'desinfectante' => $desinfectante,
-                    'observaciones' => $observaciones,
-                    'modulo' => $modulo,
-                    'batch' => $batch,
-                ]);
-
-                if ($result) {
-                    echo '3';
-                    exit();
-                } */
             } else {
                 foreach ($respuestas as $valor) {
                     foreach ($valor as $item) {
@@ -160,6 +126,5 @@ if (!empty($_POST)) {
             }
 
             break;
-        
     }
 }

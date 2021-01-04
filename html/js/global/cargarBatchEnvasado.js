@@ -42,6 +42,9 @@ function cargarDesinfectante() {
 
         success: function (response) {
 
+            if (response == '')
+                return false;
+
             /* Carga observaciones, desinfectante y firma */
 
             let info = JSON.parse(response);
@@ -51,14 +54,16 @@ function cargarDesinfectante() {
 
             $('#sel_producto_desinfeccion').val(desinfectante);
             $('#in_observaciones').val(observacion);
-            
+
             firmado(firma, 1);
-            $('.controlpeso_realizado1').prop('disabled', false);
+
+            for (i = 1; i < 4; i++)
+                $(`.controlpeso_realizado${i}`).prop('disabled', false);
 
             $.ajax({
                 type: "POST",
                 url: "../../html/php/despeje.php",
-                data: { operacion: 3, module: modulo, idbatch: idBatch },
+                data: { operacion: 3, modulo, idBatch },
 
                 success: function (response) {
 
@@ -68,8 +73,8 @@ function cargarDesinfectante() {
                         firmado(firma, 2);
                         cargarfirma2();
                         return false;
-                    } else
-                        $('.controlpeso_realizado1').prop('disabled', false);
+                    } else if (typeof id_multi !== 'undefined')
+                        $(`.controlpeso_realizado${id_multi}`).prop('disabled', false);
                     //cargarfirma2();
                 }
             });
@@ -88,29 +93,19 @@ function cargarfirma2() {
 
     $.ajax({
         type: "POST",
-        url: "url",
-        data: "data",
-        dataType: "dataType",
-        success: function (response) {
-            
-        }
-    });
-
-
-    $.ajax({
-        type: "POST",
         url: "../../html/php/envasado.php",
         data: { operacion: 3, modulo, idBatch, ref_multi },
 
         success: function (response) {
+
             let info = JSON.parse(response);
 
             if (info == 3)
                 return false;
 
             for (i = 1; i <= info.data.length; i++) {
-                $("#select-Linea1").val(info.data[0].linea);
-                $(".validarLote").val(batch.numero_lote);
+                $(`#select-Linea${id_multi}`).val(info.data[0].linea);
+                $(`#validarLote${id_multi}`).val(batch.numero_lote);
 
                 cargarEquipos();
                 firmado(info.data[0].realizo, 3);
@@ -138,8 +133,8 @@ function cargardevolucionmaterial() {
             if (info == 3)
                 return false;
 
-            $('#txtEnvasada1').val(info.data[0].envasada);
-            $('.envasada1').html(info.data[0].envasada);
+            $(`#txtEnvasada${id_multi}`).val(info.data[0].envasada);
+            $(`.envasada${id_multi}`).html(info.data[0].envasada);
 
             for (i = 0; i < 3; i++) {
                 $(`#averias${j}`).val(info.data[i].averias);
@@ -147,7 +142,7 @@ function cargardevolucionmaterial() {
                 devolucionMaterialTotal(info.data[i].sobrante, j);
                 j++;
             }
-            
+
             firmado(info.data[0].realizo, 5);
             firmado(info.data[0].verifico, 6);
         }
@@ -158,7 +153,7 @@ function cargardevolucionmaterial() {
 /* Registro de Firma */
 
 function firmado(datos, posicion) {
-   
+
     if (datos == undefined)
         return false;
 

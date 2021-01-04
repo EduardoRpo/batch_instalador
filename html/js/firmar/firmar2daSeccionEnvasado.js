@@ -3,7 +3,7 @@
 /* firmar 2da sección  */
 
 function almacenar_muestras(firma) {
-
+    
     let muestras = JSON.parse(localStorage.getItem(presentacion + ref_multi))
 
     //Almacena las muestras
@@ -13,15 +13,16 @@ function almacenar_muestras(firma) {
         data: { operacion: 1, idBatch, muestras, modulo, ref_multi },
 
         success: function (response) {
-            localStorage.removeItem(presentacion + ref_multi);
-            localStorage.removeItem('totalmuestras');
-
+            
             if (response == 0) {
                 alertify.set("notifier", "position", "top-right"); alertify.error("Error al almacenar las muestras, valide nuevamente");
                 return false;
             }
 
-            let linea = $('#select-Linea1').val();
+            localStorage.removeItem(presentacion + ref_multi);
+            localStorage.removeItem('totalmuestras');
+
+            let linea = $(`#select-Linea${id_multi}`).val();
             let id_firma = firma[0].id
             //Almacena la firma 
             $.ajax({
@@ -32,9 +33,9 @@ function almacenar_muestras(firma) {
                 success: function (response) {
                     
                     alertify.set("notifier", "position", "top-right"); alertify.success("Firmado satisfactoriamente");
-                    $('#controlpeso_realizado1').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
-                    $('.controlpeso_verificado1').prop('disabled', false);
-                    $('.devolucion_realizado1').prop('disabled', false);
+                    $(`.controlpeso_realizado${id_multi}`).css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
+                    $(`.controlpeso_verificado${id_multi}`).prop('disabled', false);
+                    $(`.devolucion_realizado${id_multi}`).prop('disabled', false);
                 }
             });
         },
@@ -55,7 +56,7 @@ function almacenarfirma(id_firma) {
 
         success: function (response) {
             alertify.set("notifier", "position", "top-right"); alertify.success("Firmado satisfactoriamente");
-            $('#controlpeso_verificado1').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
+            $(`.controlpeso_verificado${id_multi}`).css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
         }
     });
 }
@@ -69,8 +70,8 @@ function firmaCalidad(id_firma) {
         success: function (response) {
             if (response == 1) {
                 alertify.set("notifier", "position", "top-right"); alertify.success("Firmado satisfactoriamente");
-                $(`#controlpeso_verificado${id_multi}`).css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
-                $(`#devolucion_verificado${id_multi}`).css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
+                $(`.controlpeso_verificado${id_multi}`).css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
+                //$(`.devolucion_verificado${id_multi}`).css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
             }
         }
     });

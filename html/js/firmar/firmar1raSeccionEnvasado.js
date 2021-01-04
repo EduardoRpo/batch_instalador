@@ -101,7 +101,7 @@ function validarPreguntas(idfirma) {
             realizo: idfirma,
         },
         success: function (response) {
-
+            
             if (response > 0) {
                 $('.despeje_realizado').prop('disabled', true);
                 $('.despeje_verificado').prop('disabled', false);

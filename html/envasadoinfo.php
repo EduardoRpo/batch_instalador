@@ -336,7 +336,7 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="controlpeso_realizado1" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_realizado1" onclick="cargar(this, 'firma3')" style="width: 100%; height: 38px;">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_realizado1" onclick="cargar('controlpeso_realizado1', 'firma3')" style="width: 100%; height: 38px;">Firmar</button>
                       </div>
 
                       <div class="col-md-4 align-self-center">
@@ -344,7 +344,7 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="controlpeso_verificado1" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_verificado1" onclick="cargar(this, 'firma4')" style="width: 100%; height: 38px;">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_verificado1" onclick="cargar('controlpeso_realizado1', 'firma4')" style="width: 100%; height: 38px;">Firmar</button>
                       </div>
 
                     </div>
@@ -431,7 +431,7 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="devolucion_realizado1" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_realizado1" style="width: 100%; height: 38px;" onclick="cargar(this, 'firma5')">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_realizado1" style="width: 100%; height: 38px;" onclick="cargar('devolucion_realizado1', 'firma5')">Firmar</button>
                       </div>
 
                       <!-- <div class="firmas_envasado__group"> -->
@@ -440,7 +440,7 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="devolucion_verificado1" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_verificado1" style="width: 100%; height: 38px;" onclick="cargar(this, 'firma6')">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_verificado1" style="width: 100%; height: 38px;" onclick="cargar('devolucion_verificado1', 'firma3')">Firmar</button>
                       </div>
 
                     </div>
@@ -455,7 +455,7 @@ include('modal/m_muestras.php');
               <h5 class="mb-0">
                 <button class="btn btn-link collapsed ref_multi2" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
                   <b id="envasadoMulti2">ENVASADO</b>
-                  <input type="text" id="ref2" hidden>
+                  <input type="text" class="ref2" id="ref2" hidden>
                 </button>
               </h5>
             </div>
@@ -584,7 +584,7 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="controlpeso_realizado2" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_realizado1" id="controlpeso_realizado2" onclick="cargar(this, 'firma3')" style="width: 100%; height: 38px;">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_realizado2" onclick="cargar('controlpeso_realizado2', 'firma3')" style="width: 100%; height: 38px;">Firmar</button>
                       </div>
 
                       <div class="col-md-4 align-self-center">
@@ -592,7 +592,7 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="controlpeso_verificado2" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_verificado2" id="controlpeso_verificado2" onclick="cargar(this, 'firma4')" style="width: 100%; height: 38px;">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_verificado2" onclick="cargar('controlpeso_verificado2', 'firma4')" style="width: 100%; height: 38px;">Firmar</button>
                       </div>
 
                     </div>
@@ -676,13 +676,13 @@ include('modal/m_muestras.php');
                       <div class="firmas_envasado__group">
                         <label for="devolucion_realizado" class="col-form-label">Realizado Por:</label>
                         <input type="text" class="form-control" id="devolucion_realizado2" readonly>
-                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_realizado2" id="devolucion_realizado2" onclick="cargar(this, 'firma5')">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_realizado2" onclick="cargar('devolucion_realizado2', 'firma5')">Firmar</button>
                       </div>
 
                       <div class="firmas_envasado__group">
                         <label for="devolucion_verificado" class="col-form-label">Verificado Por:</label>
                         <input type="text" class="form-control" id="devolucion_verificado2" readonly>
-                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_verificado2" id="devolucion_verificado2" onclick="cargar(this, 'firma6')">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_verificado2" onclick="cargar('devolucion_verificado2', 'firma6')">Firmar</button>
                       </div>
 
                     </div>
@@ -697,7 +697,7 @@ include('modal/m_muestras.php');
               <h5 class="mb-0">
                 <button id="ref_multi1" class="btn btn-link collapsed ref_multi3" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
                   <b id="envasadoMulti3">ENVASADO</b>
-                  <input type="text" id="ref3" hidden>
+                  <input type="text" class="ref3" id="ref3" hidden>
                 </button>
               </h5>
             </div>
@@ -825,7 +825,7 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="controlpeso_realizado3" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_realizado1" id="controlpeso_realizado3" onclick="cargar(this, 'firma3')" style="width: 100%; height: 38px;">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_realizado3" onclick="cargar('controlpeso_realizado3', 'firma3')" style="width: 100%; height: 38px;">Firmar</button>
                       </div>
 
                       <div class="col-md-4 align-self-center">
@@ -833,7 +833,7 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="controlpeso_verificado3" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_verificado3" id="controlpeso_verificado3" onclick="cargar(this, 'firma4')" style="width: 100%; height: 38px;">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_verificado3" onclick="cargar('controlpeso_verificado3', 'firma4')" style="width: 100%; height: 38px;">Firmar</button>
                       </div>
 
                     </div>
