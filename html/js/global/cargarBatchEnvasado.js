@@ -142,7 +142,7 @@ function cargardevolucionmaterial() {
             for (i = start; i < end; i++) {
                 $(`#averias${i}`).val(info.data[j].averias);
                 $(`#sobrante${i}`).val(info.data[j].sobrante);
-                devolucionMaterialTotal(info.data[j].sobrante, j);
+                devolucionMaterialTotal(info.data[j].sobrante, i);
                 j++;
             }
 
