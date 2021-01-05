@@ -1,4 +1,4 @@
-<?php require_once('php/sesion/sesion.php');?>
+<?php require_once('php/sesion/sesion.php'); ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -34,7 +34,7 @@
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
 
-  
+
 
 </head>
 
@@ -59,8 +59,8 @@
               </div>
               <div class="card-body">
                 <div class="selproductos">
-                  <select name="cmbReferenciaProductos" id="cmbReferenciaProductos" class="form-control" style="width: 200px;"></select>
-                  <input type="text" class="form-control ml-3" id="txtnombreProducto">
+                  <select name="cmbReferenciaProductos" id="cmbReferenciaProductos" class="form-control" style="width: auto;"></select>
+                  <!-- <input type="text" class="form-control ml-3" id="txtnombreProducto"> -->
                 </div>
                 <hr>
                 <button type="button" class="btn btn-primary" id="adicionarInstructivo">Adicionar</button>
@@ -93,7 +93,7 @@
               </div> -->
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="tblInstructivo" class="table-striped row-borde" style="width:100%">
+                  <table id="tabla_bases_instructivo" class="table-striped row-borde" style="width:100%">
                     <thead>
                       <tr>
                         <th></th>
