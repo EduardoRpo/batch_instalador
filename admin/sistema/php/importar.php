@@ -158,20 +158,20 @@ if (!empty($_POST)) {
 					'referencia' => $data[0],
 					'pasos' => $data[1]
 				]);
-				
+
 				$info = $query->fetch(PDO::FETCH_ASSOC);
 				$id = $info["id"];
-				
+
 				$rows = $query->rowCount();
 
 				if ($rows > 0) {
-					$sql = "UPDATE instructivos_base SET producto = :producto, pasos = :pasos, tiempo = :tiempo WHERE id = :id)";
+					$sql = "UPDATE instructivos_base SET producto =:producto, pasos =:pasos, tiempo =:tiempo WHERE id =:id";
 					$query = $conn->prepare($sql);
 					$result = $query->execute([
-						'id' => $id,
 						'producto' => $data[0],
 						'pasos' => $data[1],
 						'tiempo' => $data[2],
+						'id' => $id,
 					]);
 				} else {
 					$sql = "INSERT INTO instructivos_base (producto, pasos, tiempo) VALUE (:producto, :pasos, :tiempo)";
@@ -182,13 +182,12 @@ if (!empty($_POST)) {
 						'tiempo' => $data[2],
 					]);
 				}
-
-				if ($result)
-					echo '1';
-				else
-					echo '0';
 			}
-
+			
+			if ($result)
+				echo 'multi';
+			else
+				echo '0';
 
 
 

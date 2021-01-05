@@ -43,6 +43,7 @@ function cargarDataExcel(id) {
             alertify.set("notifier", "position", "top-right"); alertify.success("Operación exitosa");
             if (data !== 'multi')
                 refreshTable();
+            
             $('#datosExcel').val('');
             $("#btnCargarExcel").prop("disabled", true);
         }
