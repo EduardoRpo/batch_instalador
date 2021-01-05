@@ -31,7 +31,7 @@ switch ($op) {
             $tiempo = $_POST['tiempo'];
 
             if ($editar == 0) {
-                $sql = "SELECT * FROM instructivos_base WHERE pasos = :pasos AND id_producto =:referencia";
+                $sql = "SELECT * FROM instructivos_base WHERE pasos = :pasos AND producto =:referencia";
                 $query = $conn->prepare($sql);
                 $query->execute(['pasos' => $actividad, 'referencia' => $referencia]);
                 $rows = $query->rowCount();
@@ -42,7 +42,10 @@ switch ($op) {
                 } else {
                     $sql = "INSERT INTO instructivos_base (pasos, tiempo, producto) VALUES (:pasos, :tiempo, :referencia )";
                     $query = $conn->prepare($sql);
-                    $result = $query->execute(['pasos' => $actividad, 'tiempo' => $tiempo, 'referencia' => $referencia]);
+                    $result = $query->execute([
+                        'pasos' => $actividad, 
+                        'tiempo' => $tiempo, 
+                        'referencia' => $referencia]);
                     if ($result) {
                         echo '1';
                         exit();

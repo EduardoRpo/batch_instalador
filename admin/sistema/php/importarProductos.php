@@ -28,10 +28,13 @@ else
 
 $datos = explode("\n", $datos);
 $datos = array_filter($datos);
+$i = 0;
 
 // preparar datos
 foreach ($datos as $data) {
-	$dataList[] = explode(";", ucfirst(mb_strtolower($data, 'utf-8')));
+	if ($i !== 0)
+		$dataList[] = explode(";", ucfirst(mb_strtolower($data, 'utf-8')));
+	$i++;
 }
 
 /* Elimina todos los datos */

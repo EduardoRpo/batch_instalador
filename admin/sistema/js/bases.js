@@ -108,6 +108,7 @@ $(document).on('click', '.link-editar', function (e) {
 /* Almacenar Registros */
 
 function guardarInstructivo() {
+    
     let id = $('#txtId').val();
     let referencia = $('#cmbReferenciaProductos').val();
     let actividad = $('#txtActividad').val();
@@ -164,7 +165,7 @@ $(document).on('click', '.link-borrar', function (e) {
 
 /* Actualizar tabla */
 
-function refreshTable(tabla) {
+function refreshTable() {
     $('#tabla_bases_instructivo').DataTable().clear();
     $('#tabla_bases_instructivo').DataTable().ajax.reload();
 }

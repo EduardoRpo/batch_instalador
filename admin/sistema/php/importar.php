@@ -8,13 +8,15 @@ if (!empty($_POST)) {
 	$operacion = $_POST['operacion'];
 
 	$datos = file_get_contents($datos['tmp_name']);
-
 	$datos = explode("\n", $datos);
 	$datos = array_filter($datos);
+	$i = 0;
 
 	// preparar datos
 	foreach ($datos as $data) {
-		$dataList[] = explode(";", ucfirst(mb_strtolower($data, 'utf-8')));
+		if ($i !== 0)
+			$dataList[] = explode(";", ucfirst(mb_strtolower($data, 'utf-8')));
+		$i++;
 	}
 
 	//Buscar operacion y ejecutar
@@ -130,7 +132,7 @@ if (!empty($_POST)) {
 			$result = $query->execute([
 				'multi' => '',
 			]);
-			
+
 			/* Cargar todas las multipresentaciones */
 			foreach ($dataList as $data) {
 
@@ -142,6 +144,54 @@ if (!empty($_POST)) {
 				]);
 			}
 			echo ('multi');
+
+			break;
+		case '11': // insertar en la BD instructivo
+
+			//$conn->query("DELETE FROM instructivos_base");
+			//$conn->query("ALTER TABLE instructivos_base AUTO_INCREMENT = 0");
+
+			foreach ($dataList as $data) {
+				$sql = "SELECT id FROM instructivos_base WHERE producto =:referencia AND pasos = :pasos";
+				$query = $conn->prepare($sql);
+				$query->execute([
+					'referencia' => $data[0],
+					'pasos' => $data[1]
+				]);
+				
+				$info = $query->fetch(PDO::FETCH_ASSOC);
+				$id = $info["id"];
+				
+				$rows = $query->rowCount();
+
+				if ($rows > 0) {
+					$sql = "UPDATE instructivos_base SET producto = :producto, pasos = :pasos, tiempo = :tiempo WHERE id = :id)";
+					$query = $conn->prepare($sql);
+					$result = $query->execute([
+						'id' => $id,
+						'producto' => $data[0],
+						'pasos' => $data[1],
+						'tiempo' => $data[2],
+					]);
+				} else {
+					$sql = "INSERT INTO instructivos_base (producto, pasos, tiempo) VALUE (:producto, :pasos, :tiempo)";
+					$query = $conn->prepare($sql);
+					$result = $query->execute([
+						'producto' => $data[0],
+						'pasos' => $data[1],
+						'tiempo' => $data[2],
+					]);
+				}
+
+				if ($result)
+					echo '1';
+				else
+					echo '0';
+			}
+
+
+
+
 			break;
 	}
 }
