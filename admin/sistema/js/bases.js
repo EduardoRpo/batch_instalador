@@ -108,7 +108,7 @@ $(document).on('click', '.link-editar', function (e) {
 /* Almacenar Registros */
 
 function guardarInstructivo() {
-    
+
     let id = $('#txtId').val();
     let referencia = $('#cmbReferenciaProductos').val();
     let actividad = $('#txtActividad').val();
@@ -148,7 +148,7 @@ $(document).on('click', '.link-borrar', function (e) {
     e.preventDefault();
     let referencia = $('#cmbReferenciaProductos').val();
     let id = $(this).parent().parent().children().eq(2).text();
-             
+
     let confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este registro?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
     confirm.set('onok', function (r) {
         if (r) {

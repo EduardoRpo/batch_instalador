@@ -59,7 +59,7 @@
                 <form id="frmadParametro" style="display: none;">
                   <label for=""><b>Cargo</b></label>
                   <input type="text" name="txtId" id="txtId" class="form-control" hidden>
-                  <input type="text" name="txtCargo" id="txtCargo" class="form-control" placeholder="Cargo" style="width: 300px;">
+                  <input type="text" name="txtCargo" id="txtCargo" class="form-control" placeholder="Cargo" style="width: 600px;">
                   <button type="button" class="btn btn-primary" id="guardarCargo">Guardar</button>
                 </form>
                 <hr>
