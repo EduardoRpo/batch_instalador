@@ -101,7 +101,7 @@
               </div>
               <form id="formDataExcel1" enctype="multipart/form-data">
                 <input type="file" name="datosExcel1" id="datosExcel1" class="form-control mb-3 ml-3" style="width: 600px; display:inline-flex">
-                <button type="button" id="btnCargarExcel1" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel1.value, 'recuento_mesofilos', 1);" disabled="disabled">Cargar Datos</button>
+                <button type="button" id="btnCargarExcel1" class="btn btn-primary ml-3 btnCargarExcel" onclick="comprobarExtension(this.form, this.form.datosExcel1.value, 'recuento_mesofilos', 1);" disabled="disabled">Cargar Datos</button>
               </form>
             </div>
           </div>
@@ -139,7 +139,7 @@
               </div>
               <form id="formDataExcel2" enctype="multipart/form-data">
                 <input type="file" name="datosExcel2" id="datosExcel2" class="form-control mb-3 ml-3" style="width: 600px; display:inline-flex">
-                <button type="button" id="btnCargarExcel2" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel2.value, 'pseudomona', 2);" disabled="disabled">Cargar Datos</button>
+                <button type="button" id="btnCargarExcel2" class="btn btn-primary ml-3 btnCargarExcel" onclick="comprobarExtension(this.form, this.form.datosExcel2.value, 'pseudomona', 2);" disabled="disabled">Cargar Datos</button>
               </form>
             </div>
           </div>
@@ -180,7 +180,7 @@
               </div>
               <form id="formDataExcel3" enctype="multipart/form-data">
                 <input type="file" name="datosExcel3" id="datosExcel3" class="form-control mb-3 ml-3" style="width: 600px; display:inline-flex">
-                <button type="button" id="btnCargarExcel3" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel3.value, 'escherichia', 3);" disabled="disabled">Cargar Datos</button>
+                <button type="button" id="btnCargarExcel3" class="btn btn-primary ml-3 btnCargarExcel" onclick="comprobarExtension(this.form, this.form.datosExcel3.value, 'escherichia', 3);" disabled="disabled">Cargar Datos</button>
               </form>
             </div>
           </div>
@@ -218,7 +218,7 @@
               </div>
               <form id="formDataExcel7" enctype="multipart/form-data">
                 <input type="file" name="datosExcel7" id="datosExcel7" class="form-control mb-3 ml-3" style="width: 600px; display:inline-flex">
-                <button type="button" id="btnCargarExcel7" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel7.value, 'staphylococcus', 7);" disabled="disabled">Cargar Datos</button>
+                <button type="button" id="btnCargarExcel7" class="btn btn-primary ml-3 btnCargarExcel" onclick="comprobarExtension(this.form, this.form.datosExcel7.value, 'staphylococcus', 7);" disabled="disabled">Cargar Datos</button>
               </form>
             </div>
           </div>
