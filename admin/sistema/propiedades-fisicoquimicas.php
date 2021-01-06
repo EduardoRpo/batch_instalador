@@ -105,7 +105,7 @@
                 </div>
               </div>
               <form id="formDataExcel1" enctype="multipart/form-data">
-                <input type="file" name="datosExcel1" id="datosExcel1" class="form-control mb-3 ml-3" style="width: 600px; display:inline-flex">
+                <input type="file" name="datosExcel1" id="datosExcel1" class="form-control mb-3 ml-3 datosExcel" style="width: 600px; display:inline-flex">
                 <button type="button" id="btnCargarExcel1" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel1.value, 'apariencia',1);" disabled="disabled">Cargar Datos</button>
               </form>
             </div>
@@ -143,7 +143,7 @@
                 </div>
               </div>
               <form id="formDataExcel2" enctype="multipart/form-data">
-                <input type="file" name="datosExcel2" id="datosExcel2" class="form-control mb-3 ml-3" style="width: 600px; display:inline-flex">
+                <input type="file" name="datosExcel2" id="datosExcel2" class="form-control mb-3 ml-3 datosExcel" style="width: 600px; display:inline-flex">
                 <button type="button" id="btnCargarExcel2" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel2.value, 'color', 2);" disabled="disabled">Cargar Datos</button>
               </form>
             </div>
@@ -184,7 +184,7 @@
                 </div>
               </div>
               <form id="formDataExcel3" enctype="multipart/form-data">
-                <input type="file" name="datosExcel3" id="datosExcel3" class="form-control mb-3 ml-3" style="width: 600px; display:inline-flex">
+                <input type="file" name="datosExcel3" id="datosExcel3" class="form-control mb-3 ml-3 datosExcel" style="width: 600px; display:inline-flex">
                 <button type="button" id="btnCargarExcel3" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel3.value, 'olor', 3);" disabled="disabled">Cargar Datos</button>
               </form>
             </div>
@@ -223,7 +223,7 @@
                 </div>
               </div>
               <form id="formDataExcel4" enctype="multipart/form-data">
-                <input type="file" name="datosExcel4" id="datosExcel4" class="form-control mb-3 ml-3" style="width: 600px; display:inline-flex">
+                <input type="file" name="datosExcel4" id="datosExcel4" class="form-control mb-3 ml-3 datosExcel" style="width: 600px; display:inline-flex">
                 <button type="button" id="btnCargarExcel4" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel4.value, 'densidad_gravedad', 4);" disabled="disabled">Cargar Datos</button>
               </form>
 
@@ -266,7 +266,7 @@
                 </div>
               </div>
               <form id="formDataExcel5" enctype="multipart/form-data">
-                <input type="file" name="datosExcel5" id="datosExcel5" class="form-control mb-3 ml-3" style="width: 600px; display:inline-flex">
+                <input type="file" name="datosExcel5" id="datosExcel5" class="form-control mb-3 ml-3 datosExcel" style="width: 600px; display:inline-flex">
                 <button type="button" id="btnCargarExcel5" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel5.value, 'grado_alcohol', 5);" disabled="disabled">Cargar Datos</button>
               </form>
 
@@ -306,7 +306,7 @@
                 </div>
               </div>
               <form id="formDataExcel6" enctype="multipart/form-data">
-                <input type="file" name="datosExcel6" id="datosExcel6" class="form-control mb-3 ml-3" style="width: 600px; display:inline-flex">
+                <input type="file" name="datosExcel6" id="datosExcel6" class="form-control mb-3 ml-3 datosExcel" style="width: 600px; display:inline-flex">
                 <button type="button" id="btnCargarExcel6" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel6.value, 'ph', 6);" disabled="disabled">Cargar Datos</button>
               </form>
 
@@ -347,7 +347,7 @@
                 </div>
               </div>
               <form id="formDataExcel7" enctype="multipart/form-data">
-                <input type="file" name="datosExcel7" id="datosExcel7" class="form-control mb-3 ml-3" style="width: 600px; display:inline-flex">
+                <input type="file" name="datosExcel7" id="datosExcel7" class="form-control mb-3 ml-3 datosExcel" style="width: 600px; display:inline-flex">
                 <button type="button" id="btnCargarExcel7" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel7.value, 'color', 7);" disabled="disabled">Cargar Datos</button>
               </form>
 
@@ -386,7 +386,7 @@
                 </div>
               </div>
               <form id="formDataExcel8" enctype="multipart/form-data">
-                <input type="file" name="datosExcel8" id="datosExce83" class="form-control mb-3 ml-3" style="width: 600px; display:inline-flex">
+                <input type="file" name="datosExcel8" id="datosExce83" class="form-control mb-3 ml-3 datosExcel" style="width: 600px; display:inline-flex">
                 <button type="button" id="btnCargarExcel8" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel8.value, 'color', 8);" disabled="disabled">Cargar Datos</button>
               </form>
 
@@ -427,7 +427,7 @@
                 </div>
               </div>
               <form id="formDataExcel9" enctype="multipart/form-data">
-                <input type="file" name="datosExcel9" id="datosExcel9" class="form-control mb-3 ml-3" style="width: 600px; display:inline-flex">
+                <input type="file" name="datosExcel9" id="datosExcel9" class="form-control mb-3 ml-3 datosExcel" style="width: 600px; display:inline-flex">
                 <button type="button" id="btnCargarExcel9" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel9.value, 'color', 9);" disabled="disabled">Cargar Datos</button>
               </form>
 
