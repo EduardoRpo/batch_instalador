@@ -50,11 +50,13 @@ function cargarDataExcel(tabla, id) {
                 alertify.set("notifier", "position", "top-right"); alertify.error("los datos se cargaron con algún error. Valide que los datos no tengas espacios en blanco ó caractereres extraños");
                 $(`#datosExcel${id}`).val('');
                 refreshTable(id);
+                $(`.btnCargarExcel`).prop("disabled", false);
             }
             else {
                 alertify.set("notifier", "position", "top-right"); alertify.success("Operación exitosa");
                 $(`#datosExcel${id}`).val('');
                 refreshTable(id);
+                $(`.btnCargarExcel`).prop("disabled", false);
             }
         }
     });
