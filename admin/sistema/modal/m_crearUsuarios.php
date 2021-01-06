@@ -43,26 +43,6 @@
                     </div>
                     <hr>
                     <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label>Firma y Huella</label>
-                          <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="firma" id="firma" lang="es">
-                            <label class="custom-file-label" for="firma">Seleccionar Archivo</label>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6 pl-1">
-                        <div class="form-group">
-                          <label>Módulo de Acceso</label>
-                          <select class="form-control" name="modulo" id="modulo">
-                            <option value="" disabled selected>Selecciona una opción</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    <hr>
-                    <div class="row">
                       <div class="col-md-4 pr-1">
                         <div class="form-group">
                           <label>Usuario</label>
@@ -83,6 +63,26 @@
                             <option value="1">Superusuario</option>
                             <option value="2">Administrador</option>
                             <option value="3">Usuario</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row" id="firma_y_modulo">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Firma y Huella</label>
+                          <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="firma" id="firma" lang="es">
+                            <label class="custom-file-label" for="firma">Seleccionar Archivo</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6 pl-1">
+                        <div class="form-group">
+                          <label>Módulo de Acceso</label>
+                          <select class="form-control" name="modulo" id="modulo">
+                            <option value="" disabled selected>Selecciona una opción</option>
                           </select>
                         </div>
                       </div>

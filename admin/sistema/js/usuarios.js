@@ -96,6 +96,15 @@ $('#btnCrearUsuarios').click(function () {
 
 });
 
+$('#rol').change(function (e) {
+    e.preventDefault();
+    let rol = $('#rol').val();
+    if (rol == 1)
+        $("#firma_y_modulo").css('display', 'none');
+    else
+        $("#firma_y_modulo").css('display', 'flex');
+});
+
 
 //Almacenar los usuarios
 
@@ -110,6 +119,10 @@ $(document).ready(function () {
         let modulo = $('#modulo').val();
         let user = $('#usuario').val();
         let clave = $('#clave').val();
+        let rol = $('#rol').val();
+
+        if (rol == 1)
+            modulo = "1";
 
         if (editar == 1) {
             if (nombres === '' || apellidos === '' || cargo === '' || modulo === '' || user === '') {
@@ -117,26 +130,27 @@ $(document).ready(function () {
                 return false;
             }
         } else {
-            if (nombres === '' || apellidos === '' || email === '' || cargo === '' || modulo === '' || user === '' || clave === '') {
+            if (nombres === '' || apellidos === '' || email === '' || cargo === '' || modulo === '' || user === '' || clave === '' || rol === null) {
                 alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos.");
                 return false;
             }
         }
-        
-        const archivo = $("#firma").val();
-        let extensiones = archivo.substring(archivo.lastIndexOf("."));
 
-        if (extensiones != ".jpg" && extensiones != ".png") {
-            alertify.set("notifier", "position", "top-right"); alertify.error("El archivo de tipo " + extensiones + " no es válido");
-            return false;
+        if (rol != 1) {
+            const archivo = $("#firma").val();
+            let extensiones = archivo.substring(archivo.lastIndexOf("."));
+
+            if (extensiones != ".jpg" && extensiones != ".png") {
+                alertify.set("notifier", "position", "top-right"); alertify.error("El archivo de tipo " + extensiones + " no es válido");
+                return false;
+            }
         }
-
 
         const usuario = new FormData($('#frmagregarUsuarios')[0]);
         usuario.set('operacion', 3);
         usuario.set('editar', editar);
         usuario.set('id', id);
-        
+
         $.ajax({
             type: "POST",
             url: "php/c_usuarios.php",
@@ -147,16 +161,18 @@ $(document).ready(function () {
             success: function (r) {
                 if (r == 1) {
                     alertify.set("notifier", "position", "top-right"); alertify.success("Almacenado con éxito.");
+                    $('#ModalCrearUsuarios').modal('hide');
                     refreshTable();
                 } else if (r == 2) {
                     alertify.set("notifier", "position", "top-right"); alertify.error("El usuario ya existe.");
                 } else if (r == 3) {
                     alertify.set("notifier", "position", "top-right"); alertify.success("Usuario actualizado.");
+                    $('#ModalCrearUsuarios').modal('hide');
                     refreshTable();
                 } else {
                     alertify.set("notifier", "position", "top-right"); alertify.error("Error.");
                 }
-                $('#ModalCrearUsuarios').modal('hide');
+
             }
         });
         return false;
@@ -194,7 +210,7 @@ $(document).on('click', '.link-editar', function (e) {
 
 $(document).on('click', '.link-borrar', function (e) {
     e.preventDefault();
-  
+
     let id = $(this).parent().parent().children().eq(2).text();
     let confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este usuario?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
 
@@ -220,7 +236,7 @@ function refreshTable() {
 
 /* Mostrar el nombre del archivo al seleccionarlo */
 
-$('.custom-file-input').on('change', function(event) {
+$('.custom-file-input').on('change', function (event) {
     var inputFile = event.currentTarget;
     $(inputFile).parent()
         .find('.custom-file-label')
