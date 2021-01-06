@@ -57,7 +57,7 @@ include('./html/modal/modal_recuperarClave.php');
 		</div>
 
 		<button class="btn btn-lg btn-success btn-block mb-3" type="submit">Iniciar</button>
-		<!-- <div class=""></div> -->
+		<div class=""></div>
 		<div class="alert alert-danger mb" role="alert" hidden> <?php echo isset($alert) ? $alert : ''; ?> </div>
 		<p class="mt-5 mb-3 text-muted">&copy; 2020</p>
 	</form>

@@ -1,4 +1,4 @@
-<?php require_once('php/sesion/sesion.php');?>
+<?php require_once('php/sesion/sesion.php'); ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -68,12 +68,21 @@
                   <label for="">Materia Prima</label>
                   <label for="">Alias</label>
                   <label for="">%</label>
-
                   <input type="text" id="textReferencia" class="form-control">
                   <select name="" id="cmbreferencia" class="form-control"></select>
                   <input type="text" name="txtMateria-Prima" id="txtMateria-Prima" class="form-control" placeholder="Materia Prima">
                   <input type="text" name="alias" id="alias" class="form-control" placeholder="alias">
                   <input type="number" name="porcentaje" id="porcentaje" class="form-control" placeholder="%" style="text-align: center;">
+
+                  <div class="formula">
+                    <label for="" class="mr-3"> <b>Insertar en: </b> </label>
+                    <input type="radio" id="formula" name="formula" value="6">
+                    <label for="formula" class="mr-3">Formula</label>
+                    <input type="radio" id="fantasma" name="formula" value="7">
+                    <label for="fantasma" class="mr-3">Formula Fantasma</label>
+                    <input type="radio" id="ambos" name="formula" value="8">
+                    <label for="ambos">Ambos</label>
+                  </div>
                   <button type="button" class="btn btn-primary" id="guardarFormula" onclick="guardarFormulaMateriaPrima();">Guardar</button>
                 </form>
               </div>
@@ -98,14 +107,14 @@
               <div class="card-body">
                 <div class="table-responsive">
                   <table id="tblFormulas" class="table-striped row-borde" style="width:100%">
+                    <label for="">Formulas</label>
                     <thead>
                       <tr>
                         <th>Referencia</th>
                         <th>Materia Prima</th>
                         <th>Alias</th>
                         <th>Porcentaje</th>
-                        <th></th>
-                        <th></th>
+                        <th>Acciones</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -117,7 +126,7 @@
               <form id="formDataExcel" enctype="multipart/form-data">
                 <input type="file" name="datosExcel" id="datosExcel" class="form-control mb-3 ml-3" style="width: 600px; display:inline-flex">
                 <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value, 1);" disabled="disabled">Cargar Datos</button>
-              </form> 
+              </form>
             </div>
           </div>
         </div>
@@ -137,15 +146,15 @@
               </div> -->
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="tblFormulas" class="table-striped row-borde" style="width:100%">
+                  <table id="tbl_formulas_f" class="table-striped row-borde" style="width:100%">
+                    <label for="">Tabla Fantasma</label>
                     <thead>
                       <tr>
                         <th>Referencia</th>
                         <th>Materia Prima</th>
                         <th>Alias</th>
                         <th>Porcentaje</th>
-                        <th></th>
-                        <th></th>
+                        <th>Acciones</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -157,7 +166,7 @@
               <form id="formDataExcel" enctype="multipart/form-data">
                 <input type="file" name="datosExcel" id="datosExcel" class="form-control mb-3 ml-3" style="width: 600px; display:inline-flex">
                 <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value, 1);" disabled="disabled">Cargar Datos</button>
-              </form> 
+              </form>
             </div>
           </div>
         </div>

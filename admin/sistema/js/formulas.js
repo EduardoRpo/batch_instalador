@@ -23,7 +23,7 @@ $.ajax({
         let $selectProductos = $('#cmbReferenciaProductos');
 
         $selectProductos.empty();
-        $selectProductos.append('<option disabled selected>' + "Seleccionar" + '</option>');
+        $selectProductos.append('<option disabled selected>' + "Referencia" + '</option>');
 
         $.each(info.data, function (i, value) {
             $selectProductos.append('<option value ="' + value.referencia + '">' + value.referencia + '</option>');
@@ -55,6 +55,7 @@ $('#cmbReferenciaProductos').change(function (e) {
     });
 
     cargarTablaFormulas(seleccion);
+    cargar_formulas_f(seleccion);
 });
 
 
@@ -80,8 +81,38 @@ function cargarTablaFormulas(referencia) {
             { "data": "nombre" },
             { "data": "alias" },
             { "data": "porcentaje", className: "centrado", render: $.fn.dataTable.render.number(',', '.', 1, '', '%') },
-            { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
-            { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" }
+            { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" }
+        ],
+        columnDefs: [
+            { width: "10%", "targets": 0 },
+        ]
+    });
+}
+
+
+/* Cargue de Parametros de Control en DataTable */
+
+function cargar_formulas_f(referencia) {
+    tabla = $("#tbl_formulas_f").DataTable({
+
+        destroy: true,
+        scrollY: '50vh',
+        scrollCollapse: true,
+        paging: false,
+        language: { url: 'admin_componentes/es-ar.json' },
+
+        "ajax": {
+            method: "POST",
+            url: "php/c_formulas.php",
+            data: { operacion: "9", referencia },
+        },
+
+        "columns": [
+            { "data": "referencia" },
+            { "data": "nombre" },
+            { "data": "alias" },
+            { "data": "porcentaje", className: "centrado", render: $.fn.dataTable.render.number(',', '.', 1, '', '%') },
+            { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a><a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" }
         ],
         columnDefs: [
             { width: "10%", "targets": 0 },
@@ -148,10 +179,17 @@ $('#cmbreferencia').change(function (e) {
 /* Almacenar Registros */
 
 function guardarFormulaMateriaPrima() {
+    let operacion = $('input:radio[name=formula]:checked').val();
     let ref_producto = $('#cmbReferenciaProductos').val();
     let ref_materiaprima = $('#cmbreferencia').val();
-    let porcentaje = $('#porcentaje').val();
-  
+    let porcentaje = parseInt($('#porcentaje').val());
+
+
+    if (ref_producto === null){
+        alertify.set("notifier", "position", "top-right"); alertify.error("Seleccione la referencia");
+        return false;
+    }
+    
     if (ref_materiaprima === null)
         ref_materiaprima = $('#textReferencia').val();
 
@@ -160,17 +198,21 @@ function guardarFormulaMateriaPrima() {
         return false;
     }
 
+    if (operacion === undefined) {
+        alertify.set("notifier", "position", "top-right"); alertify.error("Seleccione la tabla para insertar el dato");
+        return false;
+    }
 
     $.ajax({
         type: "POST",
         url: "php/c_formulas.php",
-        data: { operacion: "6", ref_producto: ref_producto, ref_materiaprima: ref_materiaprima, porcentaje: porcentaje, editar: editar },
+        data: { operacion, ref_producto, ref_materiaprima, porcentaje, editar },
 
         success: function (r) {
             if (r == 1) {
                 alertify.set("notifier", "position", "top-right"); alertify.success("Almacenada con éxito.");
                 refreshTable();
-                
+
             } else if (r == 2) {
                 alertify.set("notifier", "position", "top-right"); alertify.error("Código ya existe.");
             } else if (r == 3) {
@@ -219,7 +261,7 @@ $(document).on('click', '.link-borrar', function (e) {
             $.ajax({
                 'method': 'POST',
                 'url': 'php/c_formulas.php',
-                'data': { operacion: "7", ref_producto: ref_producto, ref_materiaprima: ref_materiaprima }
+                'data': { operacion: "8", ref_producto: ref_producto, ref_materiaprima: ref_materiaprima }
             });
             refreshTable();
             alertify.set("notifier", "position", "top-right"); alertify.success("Eliminado");
@@ -232,4 +274,6 @@ $(document).on('click', '.link-borrar', function (e) {
 function refreshTable(tabla) {
     $('#tblFormulas').DataTable().clear();
     $('#tblFormulas').DataTable().ajax.reload();
+    $('#tbl_formulas_f').DataTable().clear();
+    $('#tbl_formulas_f').DataTable().ajax.reload();
 }

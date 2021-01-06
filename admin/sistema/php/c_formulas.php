@@ -33,7 +33,7 @@ switch ($op) {
         ejecutarQuerySelect($conn, $query);
         break;
 
-    case 6: // Guardar data
+    case 6: // Guardar data Formula
         if (!empty($_POST)) {
             $editar = $_POST['editar'];
             $id_producto = $_POST['ref_producto'];
@@ -62,7 +62,11 @@ switch ($op) {
                 $id = $_POST['id'];
                 $sql = "UPDATE formula SET porcentaje=:porcentaje WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
                 $query = $conn->prepare($sql);
-                $result = $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto, 'porcentaje' => $porcentaje]);
+                $result = $query->execute([
+                    'id_materiaprima' => $id_materiaprima,
+                    'id_producto' => $id_producto,
+                    'porcentaje' => $porcentaje,
+                ]);
 
                 if ($result) {
                     echo '3';
@@ -72,7 +76,56 @@ switch ($op) {
         }
         break;
 
-    case 7: //Eliminar
+    case 7: // Guardar data tabla fantasma
+        if (!empty($_POST)) {
+            $editar = $_POST['editar'];
+            $id_producto = $_POST['ref_producto'];
+            $id_materiaprima = $_POST['ref_materiaprima'];
+            $porcentaje = $_POST['porcentaje'];
+
+            if ($editar == 0) {
+                $sql = "SELECT * FROM formula_f WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
+                $query = $conn->prepare($sql);
+                $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto]);
+                $rows = $query->rowCount();
+
+                if ($rows > 0) {
+                    echo '2';
+                    exit();
+                } else {
+                    $sql = "INSERT INTO formula_f (id_producto, id_materiaprima, porcentaje) 
+                            VALUES (:id_producto, :id_materiaprima, :porcentaje )";
+                    $query = $conn->prepare($sql);
+                    $result = $query->execute([
+                        'id_producto' => $id_producto,
+                        'id_materiaprima' => $id_materiaprima,
+                        'porcentaje' => $porcentaje,
+                    ]);
+                    if ($result) {
+                        echo '1';
+                        exit();
+                    }
+                }
+            } else {
+                
+                $sql = "UPDATE formula_f SET porcentaje=:porcentaje 
+                        WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
+                $query = $conn->prepare($sql);
+                $result = $query->execute([
+                    'porcentaje' => $porcentaje,
+                    'id_materiaprima' => $id_materiaprima,
+                    'id_producto' => $id_producto,
+                ]);
+
+                if ($result) {
+                    echo '3';
+                    exit();
+                }
+            }
+        }
+        break;
+
+    case 8: //Eliminar
         $ref_materiaprima = $_POST['ref_materiaprima'];
         $ref_producto = $_POST['ref_producto'];
 
@@ -88,5 +141,10 @@ switch ($op) {
             print_r('Error: ' . mysqli_error($conn));
         }
 
+        break;
+    case 9: //Listar Formula fantasma
+        $referencia = $_POST['referencia'];
+        $query = "SELECT f.id_producto, f.id_materiaprima as referencia, m.nombre, m.alias, f.porcentaje FROM formula_f f INNER JOIN materia_prima m ON f.id_materiaprima=m.referencia WHERE f.id_producto = '$referencia'";
+        ejecutarQuerySelect($conn, $query);
         break;
 }
