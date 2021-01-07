@@ -1,7 +1,6 @@
 
-completo = 1;
 
-//valida que todos los campos esten diligenciados para el proceso y la firma deseada
+//valida que todos los campos esten diligenciados para el proceso y la firma
 
 function cargar(btn, idbtn) {
     

@@ -47,7 +47,7 @@
       <div class="panel-header panel-header-sm"></div>
       <div class="content">
         <div class="row">
-          <div class="col-md-10">
+          <div class="col-md-8">
             <div class="card">
               <div class="card-header">
                 <h4 class="card-title">Cargos</h4>
@@ -59,7 +59,7 @@
                 <form id="frmadParametro" style="display: none;">
                   <label for=""><b>Cargo</b></label>
                   <input type="text" name="txtId" id="txtId" class="form-control" hidden>
-                  <input type="text" name="txtCargo" id="txtCargo" class="form-control" placeholder="Cargo" style="width: 600px;">
+                  <input type="text" name="txtCargo" id="txtCargo" class="form-control" placeholder="Cargo" style="width: 300px;">
                   <button type="button" class="btn btn-primary" id="guardarCargo">Guardar</button>
                 </form>
                 <hr>
@@ -69,10 +69,11 @@
                   <table id="tblCargos" class="table-striped row-borde" style="width:100%">
                     <thead>
                       <tr>
-                        <th>id</th>
+                        <th>Acciones</th>
+                        <th>Id</th>
                         <th>Cargo</th>
-                        <th>Actualizar</th>
-                        <th>Eliminar</th>
+                        <!-- <th>Actualizar</th>
+                        <th>Eliminar</th> -->
                       </tr>
                     </thead>
                     <tbody>

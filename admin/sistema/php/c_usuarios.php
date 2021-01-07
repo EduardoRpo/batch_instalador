@@ -6,7 +6,9 @@ $op = $_POST['operacion'];
 
 switch ($op) {
     case 1: //listar Usuarios
-        $query = "SELECT u.id, u.nombre, u.apellido, u.email, c.cargo, m.modulo, u.user, u.rol FROM usuario u INNER JOIN cargo c INNER JOIN modulo m ON u.id_cargo = c.id AND u.id_modulo = m.id";
+        $query = "SELECT u.id, u.nombre, u.apellido, u.email, c.cargo, m.modulo, u.user, u.rol 
+                    FROM usuario u INNER JOIN cargo c INNER JOIN modulo m ON u.id_cargo = c.id AND u.id_modulo = m.id 
+                    ORDER BY id ASC";
         ejecutarQuerySelect($conn, $query);
         break;
 

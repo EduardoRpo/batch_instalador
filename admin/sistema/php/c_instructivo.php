@@ -12,14 +12,57 @@ switch ($op) {
 
     case 2: //Obtener nombre producto
         $referencia = $_POST['referencia'];
-        $query = "SELECT p.referencia, p.nombre_referencia FROM producto p WHERE referencia = $referencia";
+        $query = "SELECT p.referencia, p.nombre_referencia, ibp.base_instructivo 
+                  FROM producto p 
+                  INNER JOIN instructivo_base_preparacion ibp ON p.referencia = ibp.referencia
+                  WHERE p.referencia = $referencia";
         ejecutarQuerySelect($conn, $query);
         break;
 
     case 3: //Listar Instructivo
         $referencia = $_POST['referencia'];
-        $query = "SELECT ip.id, ip.proceso, ip.tiempo FROM instructivo_preparacion ip WHERE ip.id_producto = $referencia";
-        ejecutarQuerySelect($conn, $query);
+
+        $sql = "SELECT * FROM instructivo_base_preparacion WHERE referencia =:referencia";
+        $query = $conn->prepare($sql);
+        $query->execute([
+            'referencia' => $referencia
+        ]);
+
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        $tabla = $data["base_instructivo"];
+        $producto = $data["producto"];
+
+        if ($tabla == 0) {
+            $query = "SELECT ip.id, ip.pasos, ip.tiempo FROM instructivo_preparacion ip WHERE ip.id_producto = $referencia";
+            ejecutarQuerySelect($conn, $query);
+        } else {
+
+            $sql = "SELECT id, pasos, tiempo FROM instructivos_base WHERE producto = :producto";
+            $query = $conn->prepare($sql);
+            $result = $query->execute([
+                'producto' => $producto
+            ]);
+
+            if ($result) {
+                while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
+                    $arreglo["data"][] = $data;
+                }
+
+                if (empty($arreglo)) {
+                    echo '3';
+                    exit();
+                }
+            } else {
+                echo '2';
+            }
+
+            echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+        }
+
+
+
+
+
         break;
 
     case 4: // Guardar data
@@ -30,7 +73,7 @@ switch ($op) {
             $tiempo = $_POST['tiempo'];
 
             if ($editar == 0) {
-                $sql = "SELECT * FROM instructivo_preparacion WHERE proceso = :proceso AND id_producto =:referencia";
+                $sql = "SELECT * FROM instructivo_preparacion WHERE pasos = :proceso AND id_producto =:referencia";
                 $query = $conn->prepare($sql);
                 $query->execute(['proceso' => $actividad, 'referencia' => $referencia]);
                 $rows = $query->rowCount();
@@ -39,7 +82,7 @@ switch ($op) {
                     echo '2';
                     exit();
                 } else {
-                    $sql = "INSERT INTO instructivo_preparacion (proceso, tiempo, id_producto) VALUES (:proceso, :tiempo, :referencia )";
+                    $sql = "INSERT INTO instructivo_preparacion (pasos, tiempo, id_producto) VALUES (:proceso, :tiempo, :referencia )";
                     $query = $conn->prepare($sql);
                     $result = $query->execute(['proceso' => $actividad, 'tiempo' => $tiempo, 'referencia' => $referencia]);
                     if ($result) {
@@ -49,7 +92,7 @@ switch ($op) {
                 }
             } else {
                 $id = $_POST['id'];
-                $sql = "UPDATE instructivo_preparacion SET proceso=:proceso, tiempo=:tiempo WHERE id = :id";
+                $sql = "UPDATE instructivo_preparacion SET pasos=:proceso, tiempo=:tiempo WHERE id = :id";
                 $query = $conn->prepare($sql);
                 $result = $query->execute(['id' => $id, 'proceso' => $actividad, 'tiempo' => $tiempo]);
 

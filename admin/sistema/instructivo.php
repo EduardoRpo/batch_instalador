@@ -1,4 +1,4 @@
-<?php require_once('php/sesion/sesion.php');?>
+<?php require_once('php/sesion/sesion.php'); ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -63,15 +63,23 @@
                   <input type="text" class="form-control ml-3" id="txtnombreProducto">
                 </div>
                 <hr>
-                <button type="button" class="btn btn-primary" id="adicionarInstructivo">Adicionar</button>
-                <form id="frmadInstructivo" style="display: none;">
-                  <label for=""><b>Actividad</b></label>
-                  <label for="">Tiempo/Min</label>
-                  <input type="text" id="txtId" class="form-control" hidden>
-                  <input type="text" id="txtActividad" class="form-control">
-                  <input type="number" name="txtTiempo" id="txtTiempo" class="form-control" placeholder="Minutos" style="text-align: center;">
-                  <button type="button" class="btn btn-primary" id="txtguardarInstructivo" onclick="guardarInstructivo();">Guardar</button>
-                </form>
+                <div class="adicionarInstructivo">
+                  <button type="button" class="btn btn-primary btnadicionarInstructivo" id="adicionarInstructivo">Adicionar</button>
+                  <form id="frmadInstructivo" style="display: none;">
+                    <label for=""><b>Actividad</b></label>
+                    <label for="">Tiempo/Min</label>
+                    <input type="text" id="txtId" class="form-control" hidden>
+                    <input type="text" id="txtActividad" class="form-control">
+                    <input type="number" name="txtTiempo" id="txtTiempo" class="form-control" placeholder="Minutos" style="text-align: center;">
+                    <button type="button" class="btn btn-primary" id="txtguardarInstructivo" onclick="guardarInstructivo();">Guardar</button>
+                  </form>
+                </div>
+                <div class="alert alert-success alert-dismissible fade show alert_instructivos_base" role="alert" style="background: cadetblue;">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  <strong>Para adicionar o eliminar instrucciones</strong> use el apartado en Instructivos -> Bases.
+                </div>
               </div>
             </div>
           </div>

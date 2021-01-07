@@ -63,6 +63,7 @@
                             <option value="1">Superusuario</option>
                             <option value="2">Administrador</option>
                             <option value="3">Usuario</option>
+                            <option value="4">Usuario QC</option>
                           </select>
                         </div>
                       </div>

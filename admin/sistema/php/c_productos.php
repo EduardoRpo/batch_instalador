@@ -7,6 +7,29 @@ $op = $_POST['operacion'];
 switch ($op) {
     case 1: // Listar productos
         $query = "SELECT * FROM producto";
+        /*$query = "SELECT p.referencia, p.nombre_referencia, p.presentacion_comercial as presentacion, p.unidad_empaque, np.nombre as producto, 
+        linea.nombre as linea, ns.nombre as notificaciones, marca.nombre as marca, ow.nombre as propietario, color.nombre as color, 
+        olor.nombre as olor, ap.nombre as apariencia, un.nombre as untuosidad, pe.nombre as espumoso, rm.nombre as mesofilos, 
+        ps.nombre as pseudomona, es.nombre as escherichia, st.nombre as staphylococcus,  ph.ph, v.viscosidad
+        FROM producto p 
+        INNER JOIN nombre_producto np ON np.id=p.id_nombre_producto
+        INNER JOIN notificacion_sanitaria ns ON ns.id=p.id_notificacion_sanitaria
+        INNER JOIN linea ON linea.id=p.id_linea
+        INNER JOIN marca ON marca.id=p.id_marca
+        INNER JOIN propietario ow ON ow.id=p.id_propietario
+        
+        INNER JOIN color ON color.id=p.id_color
+        INNER JOIN olor ON olor.id=p.id_olor
+        INNER JOIN apariencia ap ON ap.id=p.id_apariencia
+        INNER JOIN untuosidad un ON un.id=p.id_untuosidad
+        INNER JOIN poder_espumoso pe ON pe.id=p.id_poder_espumoso
+        INNER JOIN recuento_mesofilos rm ON rm.id=p.id_recuento_mesofilos
+        INNER JOIN pseudomona ps ON ps.id=p.id_pseudomona
+        INNER JOIN escherichia es ON es.id=p.id_escherichia
+        INNER JOIN staphylococcus st ON st.id=p.id_staphylococcus
+        INNER JOIN ph ON ph.id=p.id_ph
+        INNER JOIN viscosidad v ON v.id=p.id_viscosidad ";*/
+
         ejecutarQuerySelect($conn, $query);
         break;
 
@@ -22,8 +45,8 @@ switch ($op) {
 
         transaccion($conn, $query1, $query2); */
         /*        ejecutarQuerySelect($conn, $query1);
-        ejecutarQuerySelect($conn, $query2); */
-        break;
+        ejecutarQuerySelect($conn, $query2); 
+        break;*/
 
 
     case 2: //Eliminar

@@ -7,6 +7,7 @@ $('.contenedor-menu .menu a').removeAttr('style');
 $('.contenedor-menu .menu ul.menu_productos').show();
 $('.contenedor-menu .menu ul.menu_productos ul.menu_instructivos').show();
 $('#link_preparaciones').css('text-decoration', 'revert')
+$('.alert_instructivos_base').hide();
 /* Cargue select referencias */
 
 //function cargarSelectorModulo() {
@@ -39,21 +40,32 @@ $.ajax({
 
 $('#cmbReferenciaProductos').change(function (e) {
     e.preventDefault();
-    let seleccion = $("select option:selected").val();
+    let referencia = $("select option:selected").val();
 
     $.ajax({
         type: "POST",
         url: "php/c_instructivo.php",
-        data: { operacion: "2", referencia: seleccion },
+        data: { operacion: "2", referencia },
 
         success: function (response) {
             var info = JSON.parse(response);
             $('#txtnombreProducto').val('');
             $('#txtnombreProducto').val(info.data[0].nombre_referencia);
+
+            if (info.data[0].base_instructivo == 1) {
+                $('.adicionarInstructivo').slideUp();
+                $('.btnadicionarInstructivo').prop('disabled', true);
+                $('.alert_instructivos_base').slideDown();
+            }
+            else {
+                $('.adicionarInstructivo').slideDown();
+                $('.btnadicionarInstructivo').prop('disabled', false);
+                $('.alert_instructivos_base').slideUp();
+            }
         }
     });
 
-    cargarTablaFormulas(seleccion);
+    cargarTablaFormulas(referencia);
 });
 
 
@@ -71,14 +83,13 @@ function cargarTablaFormulas(referencia) {
         "ajax": {
             method: "POST",
             url: "php/c_instructivo.php",
-            data: { operacion: "3", referencia: referencia },
+            data: { operacion: "3", referencia },
         },
 
         "columns": [
             { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" },
-            /* { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" }, */
             { "data": "id" },
-            { "data": "proceso" },
+            { "data": "pasos" },
             { "data": "tiempo", className: "centrado", },
         ],
         columnDefs: [
@@ -153,6 +164,11 @@ function guardarInstructivo() {
                 alertify.set("notifier", "position", "top-right"); alertify.error("Actividad ya existe.");
             } else if (r == 3) {
                 alertify.set("notifier", "position", "top-right"); alertify.success("Registro actualizado.");
+                editar = 0;
+                $('#txtguardarInstructivo').html('Crear');
+                $('txtId').val('');
+                $('#txtActividad').val('');
+                $('#txtTiempo').val('');
                 refreshTable();
             } else {
                 alertify.set("notifier", "position", "top-right"); alertify.error("Error.");
@@ -165,7 +181,7 @@ function guardarInstructivo() {
 
 $(document).on('click', '.link-borrar', function (e) {
     e.preventDefault();
-    debugger;
+
     let id = $(this).parent().parent().children().eq(1).text();
 
     let confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este registro?', null, null).set('labels', { ok: 'Si', cancel: 'No' });

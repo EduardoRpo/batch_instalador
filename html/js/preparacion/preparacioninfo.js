@@ -204,7 +204,7 @@ $.ajax({
 
         $('#pasos_instructivo').append(`<a href="javascript:void(0)" onclick="procesoTiempo(event)" 
             class="proceso-instructivo" attr-indx="${indx}" attr-id="${instructivo.id}" id="proceso-instructivo${i}" 
-            attr-tiempo="${instructivo.tiempo}">PASO ${indx + 1}: ${instructivo.proceso} </a>  <br/>`);
+            attr-tiempo="${instructivo.tiempo}">PASO ${indx + 1}: ${instructivo.pasos} </a>  <br/>`);
         tiempoTotal = tiempoTotal + instructivo.tiempo;
         i++;
     });

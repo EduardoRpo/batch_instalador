@@ -1,5 +1,9 @@
 <?php
 session_start();
+include("modal/modal_firma.php");
+include("modal/modal_req_ajuste.php");
+include("modal/modal_observaciones.php");
+include('modal/m_firma.php');
 ?>
 
 <!DOCTYPE html>
@@ -178,7 +182,7 @@ session_start();
                   </div>
 
                   <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                    <input type="button" class="btn btn-danger in_desinfeccion" id="despeje_realizado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar"> <!-- data-toggle="modal" data-target="#m_firmar" -->
+                    <input type="button" class="btn btn-danger in_desinfeccion" id="despeje_realizado" onclick="cargar(this, 'firma1')" style="width: 100%; height: 38px;" value="Firmar"> <!-- data-toggle="modal" data-target="#m_firmar" -->
                   </div>
 
                   <div class="col-md-4 align-self-center">
@@ -187,7 +191,7 @@ session_start();
                   </div>
 
                   <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                    <input type="button" class="btn btn-danger in_desinfeccion" id="despeje_verificado" onclick="cargar(this)" style="width: 100%; height: 38px;" value="Firmar"> <!-- data-toggle="modal" data-target="#m_firmar" -->
+                    <input type="button" class="btn btn-danger in_desinfeccion" id="despeje_verificado" onclick="cargar(this, 'firma2')" style="width: 100%; height: 38px;" value="Firmar"> <!-- data-toggle="modal" data-target="#m_firmar" -->
                   </div>
                 </div>
                 <!-- <div class="row justify-content-end mt-5" style="margin: 1%; text-align: right">

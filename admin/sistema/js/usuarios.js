@@ -13,11 +13,10 @@ $('.contenedor-menu .menu ul.menu_usuarios').show();
 
 $(document).ready(function () {
     $("#listaUsuarios").DataTable({
-        /* scrollY: '50vh', */
-
-        pageLength: 5,
+        //scrollY: '50vh',
         scrollCollapse: true,
-        /* paging: false, */
+        paging: false,
+        /* pageLength: 5, */
         language: { url: 'admin_componentes/es-ar.json' },
 
         "ajax": {
@@ -27,8 +26,7 @@ $(document).ready(function () {
         },
 
         "columns": [
-            { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Editar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
-            { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" },
+            { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Editar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" },
             { "data": "id" },
             { "data": "nombre" },
             { "data": "apellido" },
@@ -121,8 +119,9 @@ $(document).ready(function () {
         let clave = $('#clave').val();
         let rol = $('#rol').val();
 
-        if (rol == 1)
+        if (rol == 1) {
             modulo = "1";
+        }
 
         if (editar == 1) {
             if (nombres === '' || apellidos === '' || cargo === '' || modulo === '' || user === '') {
@@ -150,6 +149,9 @@ $(document).ready(function () {
         usuario.set('operacion', 3);
         usuario.set('editar', editar);
         usuario.set('id', id);
+
+        if (rol == 1)
+            usuario.set('modulo', '1');
 
         $.ajax({
             type: "POST",
@@ -203,6 +205,10 @@ $(document).on('click', '.link-editar', function (e) {
     $("#modulo option:contains(" + modulo + ")").attr("selected", true);
     $("#rol option:contains(" + rol + ")").attr("selected", true);
     $('#usuario').val(usuario);
+
+    rol == 'Superusuario' ? id_rol = 1 : rol == 'Administrador' ? id_rol = 2 : id_rol = 3;
+    $('#rol').val(id_rol);
+    $('#rol').change();
 });
 
 

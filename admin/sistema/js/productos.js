@@ -33,23 +33,22 @@ $(document).ready(function () {
       }, */
 
     "columns": [
-      /* { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Editar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
-      { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" },
+      /*{ "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" },
       { "data": "referencia" },
       { "data": "nombre_referencia" },
+      { "data": "presentacion" },
       { "data": "unidad_empaque" },
       { "data": "producto" },
       { "data": "notificaciones" },
       { "data": "linea" },
       { "data": "marca" },
       { "data": "propietario" },
-      { "data": "presentacion" },
       { "data": "color" },
       { "data": "olor" },
       { "data": "apariencia" },
       { "data": "untuosidad" },
-      { "data": "poder_espumoso" },
-      { "data": "recuento_mesofilos" },
+      { "data": "espumoso" },
+      { "data": "mesofilos" },
       { "data": "pseudomona" },
       { "data": "escherichia" },
       { "data": "staphylococcus" },
@@ -63,16 +62,16 @@ $(document).ready(function () {
       { "data": "empaque" },
       { "data": "otros" }, */
       { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Editar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
-      { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" },
+      /* { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" }, */
       { "data": "referencia" },
       { "data": "nombre_referencia" },
-      { "data": "unidad_empaque" },
+      { "data": "presentacion_comercial", className: "centrado" },
+      { "data": "unidad_empaque", className: "centrado" },
       { "data": "id_nombre_producto" },
       { "data": "id_notificacion_sanitaria" },
       { "data": "id_linea" },
       { "data": "id_marca" },
       { "data": "id_propietario" },
-      { "data": "presentacion_comercial" },
       { "data": "id_color" },
       { "data": "id_olor" },
       { "data": "id_apariencia" },
@@ -261,7 +260,7 @@ $(document).on('click', '#btnguardarProductos', function (e) {
       } else {
         alertify.set("notifier", "position", "top-right"); alertify.error("Error.");
       }
-      
+
     },
     error: function (response) {
       alertify.set("notifier", "position", "top-right"); alertify.error("Error.");

@@ -22,11 +22,9 @@ $(document).ready(function () {
         },
 
         "columns": [
+            { "defaultContent": "<a href='#' <i class='large material-icons link-editar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>", className: "centrado" },
             { "data": "id" },
             { "data": "cargo" },
-            { "defaultContent": "<a href='#' <i class='large material-icons link-editar' style='color:rgb(255, 165, 0)'>edit</i></a>", className: "centrado" },
-            { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>", className: "centrado" }
-
         ]
     });
 });
@@ -49,9 +47,9 @@ $('#adicionarCargo').click(function (e) {
 $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
     editar = 1;
-    let id = $(this).parent().parent().children().first().text();
-    let cargo = $(this).parent().parent().children().eq(1).text();
-
+    let id = $(this).parent().parent().children().eq(1).text();
+    let cargo = $(this).parent().parent().children().eq(2).text();
+    
     $('#txtId').val(id);
     $('#txtCargo').val(cargo);
     $('#frmadParametro').slideDown();
@@ -64,7 +62,7 @@ $(document).on('click', '.link-editar', function (e) {
 $(document).on('click', '.link-borrar', function (e) {
     e.preventDefault();
 
-    let id = $(this).parent().parent().children().first().text();
+    let id = $(this).parent().parent().children().eq(1).text();
 
     var confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este registro?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
 

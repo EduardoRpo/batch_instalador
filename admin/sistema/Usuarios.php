@@ -65,7 +65,7 @@ include_once('./modal/m_crearUsuarios.php');
                     <thead>
                       <tr>
                         <th></th>
-                        <th></th>
+                        <!-- <th></th> -->
                         <th>id</th>
                         <th>Nombres</th>
                         <th>Apellidos</th>
