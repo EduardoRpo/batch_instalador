@@ -58,10 +58,6 @@ switch ($op) {
             echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
         }
 
-
-
-
-
         break;
 
     case 4: // Guardar data
@@ -91,9 +87,16 @@ switch ($op) {
                 }
             } else {
                 $id = $_POST['id'];
-                $sql = "UPDATE instructivo_preparacion SET pasos=:proceso, tiempo=:tiempo WHERE id = :id";
+                $sql = "UPDATE instructivo_preparacion 
+                        SET pasos = :instruccion, tiempo = :tiempo 
+                        WHERE pasos = :id AND id_producto = CAST(:referencia AS INT)";
                 $query = $conn->prepare($sql);
-                $result = $query->execute(['id' => $id, 'proceso' => $actividad, 'tiempo' => $tiempo]);
+                $result = $query->execute([
+                    'id' => $id,
+                    'instruccion' => $actividad,
+                    'tiempo' => $tiempo,
+                    'referencia' => intval($referencia),
+                ]);
 
                 if ($result) {
                     echo '3';
@@ -105,10 +108,15 @@ switch ($op) {
 
     case 5: //Eliminar
         $id = $_POST['id'];
-
-        $sql = "DELETE FROM instructivo_preparacion WHERE id = :id";
+        $referencia = $_POST['referencia'];
+        
+        $sql = "DELETE FROM instructivo_preparacion 
+                WHERE pasos = :id AND id_producto = CAST(:referencia AS INT)";
         $query = $conn->prepare($sql);
-        $result = $query->execute(['id' => $id]);
+        $result = $query->execute([
+            'id' => $id,
+            'referencia' => $referencia,
+            ]);
 
         if ($result) {
             echo '1';

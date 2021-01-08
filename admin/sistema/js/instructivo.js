@@ -96,6 +96,11 @@ function cargarTablaFormulas(referencia) {
             { width: "10%", "targets": 0 },
         ]
     });
+    tabla.on('order.dt search.dt', function () {
+        tabla.column(1, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+        });
+    }).draw();
 }
 
 /* Ocultar */
@@ -118,7 +123,7 @@ $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
 
     editar = 1;
-    const id = $(this).parent().parent().children().eq(1).text();
+    const id = $(this).parent().parent().children().eq(2).text();
     const actividad = $(this).parent().parent().children().eq(2).text();
     const tiempo = $(this).parent().parent().children().eq(3).text();
 
@@ -147,14 +152,7 @@ function guardarInstructivo() {
     $.ajax({
         type: "POST",
         url: "php/c_instructivo.php",
-        data: {
-            operacion: 4,
-            editar: editar,
-            referencia: referencia,
-            id: id,
-            actividad: actividad,
-            tiempo: tiempo
-        },
+        data: { operacion: 4, editar, referencia, id, actividad, tiempo },
 
         success: function (r) {
             if (r == 1) {
@@ -182,7 +180,8 @@ function guardarInstructivo() {
 $(document).on('click', '.link-borrar', function (e) {
     e.preventDefault();
 
-    let id = $(this).parent().parent().children().eq(1).text();
+    let id = $(this).parent().parent().children().eq(2).text();
+    let referencia = $('#cmbReferenciaProductos').val();
 
     let confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este registro?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
     confirm.set('onok', function (r) {
@@ -190,7 +189,7 @@ $(document).on('click', '.link-borrar', function (e) {
             $.ajax({
                 'method': 'POST',
                 'url': 'php/c_instructivo.php',
-                'data': { operacion: 5, id: id }
+                'data': { operacion: 5, id, referencia }
             });
             refreshTable();
             alertify.set("notifier", "position", "top-right"); alertify.success("Eliminado");

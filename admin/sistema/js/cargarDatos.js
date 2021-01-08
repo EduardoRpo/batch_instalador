@@ -17,7 +17,7 @@ function comprobarExtension(formulario, archivo, id) {
             if (extension_permitida === extension) {
                 cargarDataExcel(id);
             } else {
-                alertify.set("notifier", "position", "top-right"); alertify.error("Valide la extensión del archivo, debe ser '.csv'");
+                alertify.set("notifier", "position", "top-right"); alertify.error("Tipo de archivo no permitido, debe ser '.csv'");
             }
         }
     });

@@ -19,6 +19,8 @@ if (!empty($_POST)) {
 		$i++;
 	}
 
+	/* print_r($dataList);
+	exit(); */
 	//Buscar operacion y ejecutar
 
 	switch ($operacion) {
@@ -120,7 +122,7 @@ if (!empty($_POST)) {
 			$conn->query("ALTER TABLE instructivo_preparacion AUTO_INCREMENT = 1");
 
 			foreach ($dataList as $data) {
-				$conn->query("INSERT INTO instructivo_preparacion (proceso, tiempo, id_producto) 
+				$conn->query("INSERT INTO instructivo_preparacion (pasos, tiempo, id_producto) 
 								  VALUES ('{$data[0]}', '{$data[1]}', '{$data[2]}')");
 			}
 			break;
