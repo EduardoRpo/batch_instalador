@@ -23,19 +23,19 @@
                         <div class="form-group">
                           <label for="referencia">Referencia</label>
                           <input type="text" name="id_referencia" id="id_referencia" class="form-control" hidden>
-                          <input type="text" name="referencia" id="referencia" class="form-control n1" placeholder="Referencia" class="required">
+                          <input class="form-control n1" type="text" name="referencia" id="referencia"  placeholder="Referencia" class="required">
                         </div>
                       </div>
                       <div class="col-md-8 pl-1">
                         <div class="form-group">
                           <label for="nombre">Nombre</label>
-                          <input type="text" name="nombre" id="nombre" class="form-control n2" placeholder="Nombre" class="validate[required]">
+                          <input class="form-control n2" type="text" name="nombre" id="nombre"  placeholder="Nombre" class="validate[required]">
                         </div>
                       </div>
                       <div class="col-md-2 pl-1">
                         <div class="form-group">
                           <label for="uniEmpaque">Unidad Empaque</label>
-                          <input type="number" name="uniEmpaque" id="uniEmpaque" class="form-control n3" placeholder="Cantidad" class="required">
+                          <input class="form-control n3" type="number" name="uniEmpaque" id="uniEmpaque" placeholder="Cantidad" class="required">
                         </div>
                       </div>
                     </div>
@@ -206,9 +206,30 @@
                           <select class="form-control n27" name="otros" id="otros"></select>
                         </div>
                       </div>
-                     
-                    </div>
 
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label for="instructivo">Instructivo</label>
+                          <!-- <select class="form-control n23" name="instructivo" id="instructivo"></select> -->
+                          <div class="form-group">
+                            <label for=""></label>
+                            <select class="form-control instructivo n28" name="base_instructivo" id="base_instructivo">
+                              <option value="1">Base</option>
+                              <option value="0">Personalizado</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 pl-1 cmb_bases_instructivo">
+                        <div class="form-group">
+                          <label for="bases_instructivo">Base</label>
+                          <select class="form-control n29" name="instructivo" id="instructivo"></select>
+                        </div>
+                      </div>
+                    </div>
                     <button id="btnCerrar" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     <button id="btnguardarProductos" type="submit" class="btn btn-primary">Crear Producto</button>
 

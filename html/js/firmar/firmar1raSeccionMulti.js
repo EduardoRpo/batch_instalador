@@ -102,7 +102,7 @@ function validarPreguntas(idfirma) {
         success: function (response) {
 
             if (response > 0) {
-                $('.despeje_realizado').prop('disabled', true);
+                $('.despeje_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
                 $('.despeje_verificado').prop('disabled', false);
                 habilitarbotones();
             }

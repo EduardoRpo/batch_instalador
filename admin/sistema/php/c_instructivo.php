@@ -12,9 +12,8 @@ switch ($op) {
 
     case 2: //Obtener nombre producto
         $referencia = $_POST['referencia'];
-        $query = "SELECT p.referencia, p.nombre_referencia, ibp.base_instructivo 
+        $query = "SELECT p.referencia, p.nombre_referencia, p.base_instructivo 
                   FROM producto p 
-                  INNER JOIN instructivo_base_preparacion ibp ON p.referencia = ibp.referencia
                   WHERE p.referencia = $referencia";
         ejecutarQuerySelect($conn, $query);
         break;
@@ -22,7 +21,7 @@ switch ($op) {
     case 3: //Listar Instructivo
         $referencia = $_POST['referencia'];
 
-        $sql = "SELECT * FROM instructivo_base_preparacion WHERE referencia =:referencia";
+        $sql = "SELECT * FROM producto WHERE referencia =:referencia";
         $query = $conn->prepare($sql);
         $query->execute([
             'referencia' => $referencia
@@ -30,7 +29,7 @@ switch ($op) {
 
         $data = $query->fetch(PDO::FETCH_ASSOC);
         $tabla = $data["base_instructivo"];
-        $producto = $data["producto"];
+        $producto = $data["instructivo"];
 
         if ($tabla == 0) {
             $query = "SELECT ip.id, ip.pasos, ip.tiempo FROM instructivo_preparacion ip WHERE ip.id_producto = $referencia";

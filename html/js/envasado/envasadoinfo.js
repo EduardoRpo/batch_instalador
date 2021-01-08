@@ -10,6 +10,15 @@ function cargar(btn, idbtn) {
   //btn = btn;
   id = btn;
 
+  /* Valida que se ha seleccionado el producto de desinfeccion para el proceso de aprobacion */
+
+  let seleccion = $('.in_desinfeccion').val();
+
+  if (seleccion == "Seleccione") {
+    alertify.set("notifier", "position", "top-right"); alertify.error("Seleccione el producto para desinfección.");
+    return false;
+  }
+
   if (typeof id_multi !== 'undefined') {
     /* Validacion que todos los datos en linea y el formulario de control en preparacion no esten vacios */
 
@@ -35,15 +44,6 @@ function cargar(btn, idbtn) {
       }
     }
 
-    /* Valida que se ha seleccionado el producto de desinfeccion para el proceso de aprobacion */
-
-    let seleccion = $('#sel_producto_desinfeccion').val();
-
-    if (seleccion == "Seleccione") {
-      alertify.set("notifier", "position", "top-right"); alertify.error("Seleccione el producto para desinfección.");
-      return false;
-    }
-
     if (btn == `devolucion_realizado${id_multi}`) {
 
       let cantidadEnvasada = $(`.txtEnvasada${id_multi}`).val();
@@ -52,10 +52,10 @@ function cargar(btn, idbtn) {
         alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos");
         return false;
       }
-      
+
       //validar en que multipresentacion se encuentra
       id_multi == 1 ? (start = 1, end = 4) : id_multi == 2 ? (start = 4, end = 7) : (start = 7, end = 10)
-      
+
       //validar que los datos de toda la tabla se encuentran completos
       for (let i = start; i < end; i++) {
         let averias = $(`#averias${i}`).val();
@@ -284,108 +284,6 @@ function revisarLote() {
   $(`#validarLote${id_multi}`).css('border-color', '#67757c');
 };
 
-/* Cargar el numero de muestras de acuerdo con las unidades a producir*/
-
-function calcularMuestras(j, unidades) {
-
-  if (unidades <= 2000) {
-    $(`#muestras${j}`).val(20);
-  } else if (unidades >= 2001 && unidades < 4001) {
-    $(`#muestras${j}`).val(40);
-  } else {
-    $(`#muestras${j}`).val(60);
-  }
-}
-
-
-/* Cargar el numero de muestras */
-
-function muestrasEnvase() {
-
-  let muestras = $(`#muestras${id_multi}`).val();
-  let recoveredData = localStorage.getItem(presentacion + ref_multi)
-  let j = 1;
-
-  /* Elimina los campos para muestras */
-  for (let i = 1; i <= 60; i++) {
-    $(`#txtMuestra${i}`).remove();
-  }
-
-  /* Crea los campos para muestras para la referencia */
-  for (let j = 1; j <= muestras; j++) {
-    $(".txtMuestras").append(`<input type='number' min='1' class='form-control' id='txtMuestra${j}' placeholder='${j}' style='text-align:center; color:#67757c;'>`);// placeholder='${i}' style="border:0; border-bottom:1px solid #67757c"
-  }
-
-  if (recoveredData !== null) {
-    let data = JSON.parse(recoveredData)
-    for (let i = 0; i <= data.length; i++) {
-      $(`#txtMuestra${j}`).val(data[i]);
-      j++;
-    }
-  } else {
-    $.ajax({
-      type: "POST",
-      url: '../../html/php/muestras.php',
-      data: { operacion: 2, idBatch, modulo, ref_multi },
-
-      success: function (response) {
-        let promedio = 0;
-        let info = JSON.parse(response)
-        j = 1;
-
-        for (let i = 0; i < info.data.length; i++) {
-          $(`#txtMuestra${j}`).val(info.data[i].muestra);
-          promedio = promedio + info.data[i].muestra
-          j++;
-        }
-        promedio = promedio / $(`#muestras${id_multi}`).val();
-        $(`#promedio${id_multi}`).val(promedio);
-
-      }
-    });
-  }
-}
-
-function guardarMuestras() {
-
-  let cantidad_muestras = $(`#muestras${id_multi}`).val();
-  let muestras = [];
-  let recoveredData = localStorage.getItem(presentacion + ref_multi)
-  let promedio = 0;
-
-  if (recoveredData !== '') {
-    localStorage.removeItem(presentacion + ref_multi);
-  }
-
-  /* cargar el array con las muestras */
-
-  for (i = 1; i <= cantidad_muestras; i++) {
-    muestra = parseInt($(`#txtMuestra${i}`).val());
-    if (muestra == '' || isNaN(muestra)) {
-      break;
-    }
-    else {
-      muestras.push(muestra);
-      promedio = promedio + muestra;
-    }
-  }
-
-  /* almacena las muestras */
-
-  localStorage.setItem(presentacion + ref_multi, JSON.stringify(muestras));
-  i = muestras.length;
-  localStorage.setItem('totalmuestras', JSON.stringify(i));
-
-  $('#m_muestras').modal('hide');
-
-  //calcula el promedio de las muestras almacenadas
-  promedio = promedio / muestras.length
-  promedio = formatoCO(promedio.toFixed(2));
-
-  $(`#promedio${id_multi}`).val(promedio);
-}
-
-
 /* Carga tabla de envase del producto */
 
 function cargarTablaEnvase(j, referencia, cantidad) {
@@ -425,7 +323,7 @@ function cargarTablaEnvase(j, referencia, cantidad) {
 /* Calculo de la devolucion de material */
 
 function devolucionMaterialEnvasada(valor) {
-  
+
   let unidades_envasadas = formatoCO(parseInt(valor));
   //empaqueEnvasado = $(`.unidades${id}e`).html();
 

@@ -1,9 +1,10 @@
 <?php
 session_start();
-include("modal/modal_firma.php");
-include("modal/modal_req_ajuste.php");
-include("modal/modal_observaciones.php");
+include('modal/modal_firma.php');
+include('modal/modal_cambiarContrasena.php');
+include('modal/modal_observaciones.php');
 include('modal/m_firma.php');
+include('modal/m_muestras.php');
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +45,8 @@ include('modal/m_firma.php');
 
   <div class="preloader">
     <svg class="circular" viewBox="25 25 50 50">
-      <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
+      <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+    </svg>
   </div>
 
   <div id="main-wrapper">
@@ -76,7 +78,6 @@ include('modal/m_firma.php');
 
             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
               <div class="card-body">
-
                 <div class="contenedorInfo2">
 
                   <div class="contenedorInfo__group">
@@ -93,7 +94,6 @@ include('modal/m_firma.php');
                   </div>
 
                   <div class="contenedorInfo__group">
-
                     <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:80%; height: 30px;">
                       <thead>
                         <tr>
@@ -113,7 +113,11 @@ include('modal/m_firma.php');
                           <td id="cantidad2" class="centrado"></td>
                           <td id="total2" class="centrado"></td>
                         </tr>
-
+                        <tr id="fila3">
+                          <td id="tanque3" class="centrado"></td>
+                          <td id="cantidad3" class="centrado"></td>
+                          <td id="total3" class="centrado"></td>
+                        </tr>
                       </tbody>
                     </table>
                   </div>
@@ -134,8 +138,6 @@ include('modal/m_firma.php');
                   </div>
 
                 </div>
-
-
               </div>
             </div>
           </div>
@@ -182,7 +184,7 @@ include('modal/m_firma.php');
                   </div>
 
                   <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                    <input type="button" class="btn btn-danger in_desinfeccion" id="despeje_realizado" onclick="cargar(this, 'firma1')" style="width: 100%; height: 38px;" value="Firmar"> <!-- data-toggle="modal" data-target="#m_firmar" -->
+                    <input type="button" class="btn btn-danger in_desinfeccion despeje_realizado" id="despeje_realizado" onclick="cargar(this, 'firma1')" style="width: 100%; height: 38px;" value="Firmar">
                   </div>
 
                   <div class="col-md-4 align-self-center">
@@ -191,25 +193,20 @@ include('modal/m_firma.php');
                   </div>
 
                   <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                    <input type="button" class="btn btn-danger in_desinfeccion" id="despeje_verificado" onclick="cargar(this, 'firma2')" style="width: 100%; height: 38px;" value="Firmar"> <!-- data-toggle="modal" data-target="#m_firmar" -->
+                    <input type="button" class="btn btn-danger in_desinfeccion despeje_verificado" id="despeje_verificado" onclick="cargar(this, 'firma2')" style="width: 100%; height: 38px;" value="Firmar">
                   </div>
                 </div>
-                <!-- <div class="row justify-content-end mt-5" style="margin: 1%; text-align: right">
-                  <div class="col-md-12 align-self-end">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary">Aceptar</button>
-                  </div>
-                </div> -->
               </div>
             </div>
           </div>
 
         </div>
-        <div class="card">
+        <div class="card" id="acondicionamiento1">
           <div class="card-header" id="headingThree">
             <h5 class="mb-0">
-              <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
-                ACONDICIONAMIENTO
+              <button class="btn btn-link collapsed ref_multi1" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
+                <b id="acondicionamientoMulti1">ACONDICIONAMIENTO</b>
+                <input type="text" class="ref1" id="ref1" hidden>
               </button>
             </h5>
           </div>
@@ -224,58 +221,42 @@ include('modal/m_firma.php');
                     <div class="card-block">
 
                       <div class="table-responsive">
-
                         <table class="table table-striped table-bordered">
                           <thead>
                             <tr>
                               <th>Referencia</th>
                               <th>Descripción</th>
-                              <th>Cantidad Recibida</th>
+                              <th>Cantidad</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <!-- <tr>
-                              <td>Etiquetas</td>
-                              <td>Auto</td>
-                              <td>Unidades con la que sc reo el Batch Record</td>
+                            <tr>
+                              <td id="empaque1" class="centrado empaque1"></td>
+                              <td id="descripcion_empaque1" class="descripcion_empaque1"></td>
+                              <td id="unidades1e" class="centrado unidades1e"></td>
                             </tr>
                             <tr>
-                              <td>Bandas</td>
-                              <td>Auto</td>
-                              <td>Unidades con la que sc reo el Batch Record</td>
+                              <td id="otros1" class="centrado otros1"></td>
+                              <td id="descripcion_otros1" class="descripcion_otros1"></td>
+                              <td id="unidades4" class="centrado unidades1"></td>
                             </tr>
-                            <tr>
-                              <td>Sellos de Seguridad</td>
-                              <td>Auto</td>
-                              <td>Unidades con la que sc reo el Batch Record</td>
-                            </tr>
-                            <tr> -->
-                              <td>Cajas</td>
-                              <td>Auto</td>
-                              <td> Unidades con la que se creo el Batch Record / la unidad de empaque, se aproxima por el mayor y es entero</td>
+                            <!-- <td>Cajas</td>
+                            <td>Auto</td>
+                            <td> Unidades con la que se creo el Batch Record / la unidad de empaque, se aproxima por el mayor y es entero</td>
                             </tr>
                             <tr>
                               <td>Otros</td>
                               <td>Auto</td>
                               <td>Unidades con la que sc reo el Batch Record</td>
-                            </tr>
-
+                            </tr> -->
+                          </tbody>
                         </table>
-                        </form>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <!-- <div class="row buttons-group-container" style="margin: 1%">
-                
-                <div>
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                  <button type="button" class="btn btn-primary" onclick="window.location.href = '../html/acondicionamiento.html';">Aceptar</button>
-                </div>
-                
-              </div> -->
               <div class="col-md-12 align-self-center">
                 <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Línea de Producción</h3>
               </div>
@@ -284,15 +265,10 @@ include('modal/m_firma.php');
                 <label for="recipient-name" class="col-form-label">Banda Transportadora</label>
                 <label for="recipient-name" class="col-form-label">Etiquetadora</label>
                 <label for="recipient-name" class="col-form-label">Tunel Termo</label>
-
-                <select class="selectpicker form-control select-Linea" id="select-Linea">
-
-                </select>
-
-                <input type="text" class="form-control" id="txtBanda" readonly><!-- <div class="col-md-4 col-2 align-self-center"> -->
+                <select class="selectpicker form-control select-Linea" id="select-Linea"></select>
+                <input type="text" class="form-control" id="txtBanda" readonly>
                 <input type="text" class="form-control" id="txtEtiqueteadora" readonly>
                 <input type="text" class="form-control" id="txtTunel" readonly>
-
               </div>
               <div class="row" style="margin: 1%">
                 <div class="col-md-12 align-self-center">
@@ -303,15 +279,16 @@ include('modal/m_firma.php');
                   <label for="recipient-name" class="col-form-label">Cantidad de Muestras</label>
                 </div>
                 <div class="col-md-3 align-self-center" style="margin-top: 1%">
-                  <input type="text" class="form-control" id="Muestras">
+                  <input type="text" class="form-control" id="muestras1" style="text-align: center;" readonly>
                 </div>
                 <div class="col-md-1 align-self-center" style="margin-top: 1%">
-                  <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 180px; height: 38px;">Iniciar</button>
+                  <!-- <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 180px; height: 38px;" onclick="muestrasEnvase();">Iniciar</button> -->
+                  <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 180px; height: 38px;" onclick="muestrasEnvase();" data-toggle="modal" data-target="#m_muestras">Iniciar</button> <!--   -->
                 </div>
               </div>
               <div class="row" style="margin: 1%">
                 <div class="col-md-4 align-self-center">
-                  <label for="recipient-name" class="col-form-label">Realizado Por</label>
+                  <label for="recipient-name" class="col-form-label">Realizado por:</label>
                   <input type="text" class="form-control" id="recipient2-name" readonly>
                 </div>
                 <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
@@ -319,7 +296,7 @@ include('modal/m_firma.php');
                 </div>
 
                 <div class="col-md-4 align-self-center">
-                  <label for="recipient-name" class="col-form-label">Verificado Por</label>
+                  <label for="recipient-name" class="col-form-label">Verificado por:</label>
                   <input type="text" class="form-control" id="recipient2-name" readonly>
                 </div>
                 <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
@@ -333,9 +310,7 @@ include('modal/m_firma.php');
               <div class="col-md-12 align-self-center">
                 <div class="card">
                   <div class="card-block">
-
                     <div class="table-responsive">
-
                       <table class="table table-striped table-bordered">
                         <thead>
                           <tr>
@@ -350,38 +325,25 @@ include('modal/m_firma.php');
                         </thead>
                         <tbody>
                           <tr>
-                            <td></td>
-                            <td>Cod etiqueta</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td id="empaque1" class="empaque1"></td>
+                            <td id="descripcion_empaque1" class="descripcion_empaque1"></td>
+                            <td id="unidades2e" class="centrado unidades1e"></td>
+                            <td id="txtEnvasada4" class="centrado envasada1e"></td>
+                            <td><input type="number" id="averias4" class="form-control centrado" style="width: 110px;"></td>
+                            <td><input type="number" id="sobrante4" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 4);"></td>
+                            <td id="totalDevolucion4" class="centrado"></td>
                           </tr>
                           <tr>
-                            <td></td>
-                            <td>Cod etiqueta</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                          </tr>
-                          <tr>
-                            <td></td>
-                            <td>Cod etiqueta</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td id="otros1" class="otros1"></td>
+                            <td id="descripcion_otros1" class="descripcion_otros1"></td>
+                            <td id="unidades8" class="centrado unidades1"></td>
+                            <td id="txtEnvasada5" class="centrado envasada1"></td>
+                            <td><input type="number" id="averias5" class="form-control centrado" style="width: 110px;"></td>
+                            <td><input type="number" id="sobrante5" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 5);"></td>
+                            <td id="totalDevolucion5" class="centrado"></td>
                           </tr>
                         </tbody>
                       </table>
-                      </form>
                     </div>
                   </div>
                 </div>
@@ -528,12 +490,13 @@ include('modal/m_firma.php');
         <script src="../../html/js/global/loadinfo-global.js"></script>
         <!-- <script src="../../html/js/pesaje/pesajeinfo.js"></script> -->
         <script src="../../html/js/global/despeje.js"></script>
-        <script src="../../html/js/firmar/firmar1raSeccion.js"></script>
-        <script src="../../html/js/firmar/firmar2daSeccion.js"></script>
+        <script src="../../html/js/firmar/firmar1raSeccionMulti.js"></script>
+        <script src="../../html/js/firmar/firmar2daSeccionMulti.js"></script>
         <script src="../../html/js/global/despeje.js"></script>
         <script src="../../html/js/global/incidencias.js"></script>
         <script src="../../html/js/global/tanques.js"></script>
         <script src="../../html/js/global/equipos.js"></script>
+        <script src="../../html/js/global/muestras.js"></script>
         <script src="../../html/js/global/condicionesdelMedio.js"></script>
         <!-- <script src="../../html/js/global/cargarDespeje.js"></script> -->
         <script src="../../html/js/global/cargarBatch.js"></script>

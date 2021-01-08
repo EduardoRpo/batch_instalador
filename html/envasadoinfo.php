@@ -256,8 +256,8 @@ include('modal/m_muestras.php');
                                 <td id="descripcion_otros1" class="descripcion_otros1"></td>
                                 <td id="unidades4" class="centrado unidades1"></td>
                               </tr> -->
+                            </tbody>
                           </table>
-                          </form>
                         </div>
                       </div>
                     </div>
@@ -977,10 +977,11 @@ include('modal/m_muestras.php');
           <script src="../../html/js/global/loadinfo-global.js"></script>
           <script src="../../html/js/global/despeje.js"></script>
           <script src="../../html/js/global/tanques.js"></script>
+          <script src="../../html/js/global/muestras.js"></script>
           <script src="../../html/js/global/condicionesdelMedio.js"></script>
           <script src="../../html/js/global/cargarBatchEnvasado.js"></script>
-          <script src="../../html/js/firmar/firmar1raSeccionEnvasado.js"></script>
-          <script src="../../html/js/firmar/firmar2daSeccionEnvasado.js"></script>
+          <script src="../../html/js/firmar/firmar1raSeccionMulti.js"></script>
+          <script src="../../html/js/firmar/firmar2daSeccionMulti.js"></script>
           <script src="../../html/js/envasado/envasadoinfo.js"></script>
           <script src="../../html/js/global/incidencias.js"></script>
 

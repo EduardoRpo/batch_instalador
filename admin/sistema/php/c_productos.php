@@ -75,7 +75,8 @@ switch ($op) {
             id_poder_espumoso =:poder_espumoso, id_recuento_mesofilos =:recuento_mesofilos, id_pseudomona=:pseudomona, 
             id_escherichia =:escherichia, id_staphylococcus=:staphylococcus, id_ph =:ph, id_viscosidad =:viscosidad, 
             id_densidad_gravedad =:densidad_gravedad, id_grado_alcohol = :grado_alcohol, id_envase = :envase, id_tapa = :tapa, 
-            id_etiqueta = :etiqueta, id_empaque =:empaque, id_otros = :otros WHERE referencia = :referencia";
+            id_etiqueta = :etiqueta, id_empaque =:empaque, id_otros = :otros, base_instructivo=:base_instructivo, instructivo=:instructivo 
+            WHERE referencia = :referencia";
 
                 $query = $conn->prepare($sql);
                 $result = $query->execute([
@@ -86,6 +87,7 @@ switch ($op) {
                     'pseudomona' => $pseudomona, 'escherichia' => $escherichia, 'staphylococcus' => $staphylococcus, 'ph' => $ph,
                     'viscosidad' => $viscosidad, 'densidad_gravedad' => $densidad_gravedad, 'grado_alcohol' => $grado_alcohol,
                     'envase' => $envase, 'tapa' => $tapa, 'etiqueta' => $etiqueta, 'empaque' => $empaque, 'otros' => $otros,
+                    'base_instructivo' => $base_instructivo, 'instructivo' => $instructivo,
                     /* 'referencia' => $id_referencia, */
                 ]);
 
@@ -110,11 +112,12 @@ switch ($op) {
                     id_notificacion_sanitaria, id_linea, id_marca, id_propietario, presentacion_comercial, id_color, id_olor, 
                     id_apariencia, id_untuosidad, id_poder_espumoso, id_recuento_mesofilos, id_pseudomona, id_escherichia, 
                     id_staphylococcus, id_ph, id_viscosidad, id_densidad_gravedad, id_grado_alcohol, id_envase, id_tapa, id_etiqueta, 
-                    id_empaque, id_otros)
+                    id_empaque, id_otros, base_instructivo, instructivo)
                     VALUES (:referencia, :nombre, :uniEmpaque, :nombre_producto, :notificacion_sanitaria, 
                     :linea, :marca, :propietario, :presentacion_comercial, :color, :olor, :apariencia, 
                     :untuosidad, :poder_espumoso, :recuento_mesofilos, :pseudomona, :escherichia, :staphylococcus,
-                    :ph, :viscosidad, :densidad_gravedad, :grado_alcohol, :envase, :tapa, :etiqueta, :empaque, :otros)";
+                    :ph, :viscosidad, :densidad_gravedad, :grado_alcohol, :envase, :tapa, :etiqueta, :empaque, :otros, 
+                    :base_instructivo, :instructivo)";
 
                     $query = $conn->prepare($sql);
                     $result = $query->execute([
@@ -125,6 +128,7 @@ switch ($op) {
                         'pseudomona' => $pseudomona, 'escherichia' => $escherichia, 'staphylococcus' => $staphylococcus, 'ph' => $ph,
                         'viscosidad' => $viscosidad, 'densidad_gravedad' => $densidad_gravedad, 'grado_alcohol' => $grado_alcohol,
                         'envase' => $envase, 'tapa' => $tapa, 'etiqueta' => $etiqueta, 'empaque' => $empaque, 'otros' => $otros,
+                        'base_instructivo' => $base_instructivo, 'instructivo' => $instructivo,
                     ]);
                     ejecutarQuery($result, $conn);
                 }
@@ -132,7 +136,6 @@ switch ($op) {
         }
 
         break;
-
 
     case 4: // Cargar Selectores
         $tabla = $_POST['tabla'];
@@ -142,6 +145,13 @@ switch ($op) {
         else
             $query = "SELECT * FROM $tabla";
 
+        ejecutarQuerySelect($conn, $query);
+        break;
+
+    case 5: //cargar select base
+        $query = "SELECT DISTINCT np.id, np.nombre as producto_base 
+                  FROM instructivos_base ib 
+                  INNER JOIN nombre_producto np ON np.id = ib.producto";
         ejecutarQuerySelect($conn, $query);
         break;
 }

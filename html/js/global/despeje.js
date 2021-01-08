@@ -40,8 +40,8 @@ function desinfectantes() {
 }
 
 //Validacion campos de preguntas diligenciados
-
-$('.in_desinfeccion').click((event) => {
+$('.in_desinfeccion').click(function (event) { 
+//$('.in_desinfeccion').click((event) => {
     event.preventDefault();
 
     let flag = false;
@@ -65,7 +65,7 @@ $('.in_desinfeccion').click((event) => {
 });
 
 
-function validarParametrosControl() {
+/* function validarParametrosControl() {
     let flag = false;
     $('.questions').each((indx, question) => {
         if (flag) {
@@ -87,4 +87,4 @@ function validarParametrosControl() {
         }
         completo = 1;
     });
-}
+} */

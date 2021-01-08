@@ -25,13 +25,7 @@ $(document).ready(function () {
       data: { operacion: 1 },
     },
 
-    /* "fnDrawCallback": function() {
-      
-      setTimeout(function() {
-          $('.loader').remove()
-        }, 20000);
-      }, */
-
+   
     "columns": [
       /*{ "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" },
       { "data": "referencia" },
@@ -61,36 +55,38 @@ $(document).ready(function () {
       { "data": "etiqueta" },
       { "data": "empaque" },
       { "data": "otros" }, */
-      { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Editar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
-      /* { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" }, */
+      { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Editar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" },
       { "data": "referencia" },
       { "data": "nombre_referencia" },
       { "data": "presentacion_comercial", className: "centrado" },
       { "data": "unidad_empaque", className: "centrado" },
-      { "data": "id_nombre_producto" },
-      { "data": "id_notificacion_sanitaria" },
-      { "data": "id_linea" },
-      { "data": "id_marca" },
-      { "data": "id_propietario" },
-      { "data": "id_color" },
-      { "data": "id_olor" },
-      { "data": "id_apariencia" },
-      { "data": "id_untuosidad" },
-      { "data": "id_poder_espumoso" },
-      { "data": "id_recuento_mesofilos" },
-      { "data": "id_pseudomona" },
-      { "data": "id_escherichia" },
-      { "data": "id_staphylococcus" },
-      { "data": "id_ph" },
-      { "data": "id_viscosidad" },
-      { "data": "id_densidad_gravedad" },
-      { "data": "id_grado_alcohol" },
-      { "data": "id_envase" },
-      { "data": "id_tapa" },
-      { "data": "id_etiqueta" },
-      { "data": "id_empaque" },
-      { "data": "id_otros" },
-    ]
+      { "data": "id_nombre_producto", className: "centrado" },
+      { "data": "id_notificacion_sanitaria", className: "centrado" },
+      { "data": "id_linea", className: "centrado" },
+      { "data": "id_marca", className: "centrado" },
+      { "data": "id_propietario", className: "centrado" },
+      { "data": "id_color", className: "centrado" },
+      { "data": "id_olor", className: "centrado" },
+      { "data": "id_apariencia", className: "centrado" },
+      { "data": "id_untuosidad", className: "centrado" },
+      { "data": "id_poder_espumoso", className: "centrado" },
+      { "data": "id_recuento_mesofilos", className: "centrado" },
+      { "data": "id_pseudomona", className: "centrado" },
+      { "data": "id_escherichia", className: "centrado" },
+      { "data": "id_staphylococcus", className: "centrado" },
+      { "data": "id_ph", className: "centrado" },
+      { "data": "id_viscosidad", className: "centrado" },
+      { "data": "id_densidad_gravedad", className: "centrado" },
+      { "data": "id_grado_alcohol", className: "centrado" },
+      { "data": "id_envase", className: "centrado" },
+      { "data": "id_tapa", className: "centrado" },
+      { "data": "id_etiqueta", className: "centrado" },
+      { "data": "id_empaque", className: "centrado" },
+      { "data": "id_otros", className: "centrado" },
+    ],
+
+    columnDefs: [{ width: "10%", "targets": 1 },],
+
   });
 });
 
@@ -119,6 +115,8 @@ function cargarDatosProductos() {
     cargarselectores(propiedad);
     j++;
   }
+  /* cargar bases */
+  cargar_selector_bases();
 }
 
 /* Cargar selectores para adicionar productos */
@@ -157,6 +155,34 @@ function cargarselectores(selector) {
   });
 }
 
+/* cargar selectores bases */
+
+function cargar_selector_bases() {
+
+  $.ajax({
+    method: 'POST',
+    url: 'php/c_productos.php',
+    data: { operacion: 5 },
+
+    success: function (response) {
+
+      var info = JSON.parse(response);
+
+      let $select = $(`#bases_instructivo`);
+      $select.empty();
+      $select.append('<option disabled selected>' + "Seleccionar" + '</option>');
+
+      $.each(info.data, function (i, value) {
+        $select.append('<option value ="' + value.id + '">' + value.producto_base + '</option>');
+      });
+
+    },
+    error: function (response) {
+      console.log(response);
+    }
+  });
+}
+
 /* Cargar datos para Actualizar registros */
 
 $(document).on('click', '.link-editar', function (e) {
@@ -173,7 +199,6 @@ $(document).on('click', '.link-editar', function (e) {
     propiedad = $(this).parent().parent().children().eq(i).text();
     producto.push(propiedad);
   }
-  //console.log(producto);
 
   //carga todos los campos con la info del array
   for (let i = 0; i <= 29; i++) {
@@ -200,7 +225,7 @@ $(document).on('click', '.link-editar', function (e) {
 
 $(document).on('click', '.link-borrar', function (e) {
 
-  let id = $(this).parent().parent().children().eq(2).text();
+  let id = $(this).parent().parent().children().eq(1).text();
 
   $.ajax({
     type: "POST",
@@ -222,9 +247,19 @@ $(document).on('click', '.link-borrar', function (e) {
 
 $(document).on('click', '#btnguardarProductos', function (e) {
   e.preventDefault();
+  debugger;
+  /* Validar el numero de input a solicitar */
+  let base = $('.n28').val();
+  
+  if (base == null)
+    limite = 28;
+  else if (base == '0')
+    limite = 28;
+  else
+    limite = 29;
 
   /* Validar todos los datos del formulario */
-  for (let i = 1; i <= 23; i++) {
+  for (let i = 1; i <= limite; i++) {
     let validar = $(`.n${i}`).val();
     if (validar === '' || validar === null) {
       alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos.");
@@ -266,6 +301,19 @@ $(document).on('click', '#btnguardarProductos', function (e) {
       alertify.set("notifier", "position", "top-right"); alertify.error("Error.");
     }
   });
+});
+
+/* Seleccionar base a partir del instructivo */
+$('.instructivo').change(function (e) {
+  e.preventDefault();
+  let select = $('.instructivo').val();
+
+  if (select == 1)
+    $('.cmb_bases_instructivo').hide();
+  else {
+    $('.cmb_bases_instructivo').show();
+    $('#bases_instructivo').val('');
+  }
 });
 
 /* Actualizar tabla */

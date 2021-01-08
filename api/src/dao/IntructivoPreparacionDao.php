@@ -24,7 +24,7 @@ class IntructivoPreparacionDao
   {
     $connection = Connection::getInstance()->getConnection();
 
-    $sql = "SELECT * FROM instructivo_base_preparacion WHERE referencia =:referencia";
+    $sql = "SELECT * FROM producto WHERE referencia =:referencia";
     $query = $connection->prepare($sql);
     $query->execute([
       'referencia' => $idProduct,
@@ -32,7 +32,7 @@ class IntructivoPreparacionDao
 
     $data = $query->fetch(PDO::FETCH_ASSOC);
     $tabla = $data["base_instructivo"];
-    $producto = $data["producto"];
+    $producto = $data["id_nombre_producto"];
 
     if ($tabla == 0){
       $stmt = $connection->prepare("SELECT * FROM instructivo_preparacion WHERE id_producto = :referencia");
