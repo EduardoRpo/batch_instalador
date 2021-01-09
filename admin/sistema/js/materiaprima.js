@@ -4,10 +4,10 @@ let editar;
 $('.contenedor-menu .menu a').removeAttr('style');
 $('#link_materia_prima').css('text-decoration', 'revert')
 $('.contenedor-menu .menu ul.menu_productos').show();
-	
+
 /* Cargue de Parametros de Control en DataTable */
 
-$("#tblMateriaPrima").DataTable({
+tabla = $("#tblMateriaPrima").DataTable({
     destroy: true,
     scrollY: '50vh',
     scrollCollapse: true,
@@ -21,12 +21,22 @@ $("#tblMateriaPrima").DataTable({
     },
 
     "columns": [
-        { "data": "referencia" },
+        { "data": "referencia", className: "centrado" },
+        { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" },
+        { "data": "referencia", className: "centrado", },
         { "data": "nombre" },
         { "data": "alias" },
-        { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" },
+
     ]
 });
+
+/* Enumera los registros en la tabla */
+
+tabla.on('order.dt search.dt', function () {
+    tabla.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+        cell.innerHTML = i + 1;
+    });
+}).draw();
 
 /* Ocultar */
 
@@ -47,7 +57,7 @@ $('#btnadicionarMateriaPrima').click(function (e) {
 $(document).on('click', '.link-borrar', function (e) {
     e.preventDefault();
 
-    let id = $(this).parent().parent().children().first().text();
+    let id = $(this).parent().parent().children().eq(2).text();
     let confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este registro?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
 
     confirm.set('onok', function (r) {
@@ -68,9 +78,9 @@ $(document).on('click', '.link-borrar', function (e) {
 $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
     editar = 1;
-    let referencia = $(this).parent().parent().children().first().text();
-    let materiaprima = $(this).parent().parent().children().eq(1).text();
-    let alias = $(this).parent().parent().children().eq(2).text();
+    let referencia = $(this).parent().parent().children().eq(2).text();
+    let materiaprima = $(this).parent().parent().children().eq(3).text();
+    let alias = $(this).parent().parent().children().eq(4).text();
 
     $('#frmAdicionarMateriaPrima').slideDown();
     $('#txtId').val(referencia);
@@ -99,7 +109,7 @@ $('#btnguardarMateriaPrima').click(function (e) {
     $.ajax({
         type: "POST",
         url: "php/c_materiaprima.php",
-        data: { operacion: 3, editar: editar, id: id, referencia: ref, materiaprima: materiaprima, alias: alias },
+        data: { operacion: 3, editar, id, ref, materiaprima, alias },
 
         success: function (r) {
             if (r == 1) {

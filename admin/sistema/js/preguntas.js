@@ -9,7 +9,7 @@ $('.contenedor-menu .menu ul.menu_generales').show();
 /* Cargue de Preguntas en DataTable */
 
 $(document).ready(function () {
-    $("#tblPreguntas").DataTable({
+    tabla = $("#tblPreguntas").DataTable({
         scrollY: '50vh',
         scrollCollapse: true,
         paging: false,
@@ -22,13 +22,18 @@ $(document).ready(function () {
         },
 
         "columns": [
-            { "data": "id" },
-            { "data": "pregunta" },
-            { "defaultContent": "<a href='#' <i class='large material-icons link-editar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
-            { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" }
-
+            { "data": "id", className: "centrado" },
+            { "defaultContent": "<a href='#' <i class='large material-icons link-editar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" },
+            { "data": "pregunta" }
         ]
     });
+    /* Enumera los registros en la tabla */
+
+    tabla.on('order.dt search.dt', function () {
+        tabla.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+        });
+    }).draw();
 });
 
 /* Mostrar formulario adicionar preguntas */
@@ -48,8 +53,8 @@ $('#adicionarParametro').click(function (e) {
 $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
     editar = 1;
-    let id = $(this).parent().parent().children().first().text();
-    let pregunta = $(this).parent().parent().children().eq(1).text();
+    let id = $(this).parent().parent().children().eq(2).text();
+    let pregunta = $(this).parent().parent().children().eq(2).text();
 
     $('#frmadicionarPregunta').slideDown();
     $('#btnAlmacenarPregunta').html('Actualizar');
@@ -63,8 +68,7 @@ $(document).on('click', '.link-editar', function (e) {
 $(document).on('click', '.link-borrar', function (e) {
     e.preventDefault();
 
-    const id = $(this).parent().parent().children().first().text();
-
+    const id = $(this).parent().parent().children().eq(2).text();
     var confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este registro?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
 
     confirm.set('onok', function (r) {
@@ -86,14 +90,13 @@ $(document).on('click', '.link-borrar', function (e) {
 $('#btnAlmacenarPregunta').click(function (e) {
     e.preventDefault();
 
-
     let id = $('#txtIdPregunta').val();
     let pregunta = $('#txtPregunta').val();
 
     $.ajax({
         type: "POST",
         url: "php/c_preguntas.php",
-        data: { operacion: 3, editar: editar, id: id, pregunta: pregunta },
+        data: { operacion: 3, editar, id, pregunta },
 
         success: function (r) {
 

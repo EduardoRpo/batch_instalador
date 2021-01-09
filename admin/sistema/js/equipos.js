@@ -10,7 +10,7 @@ $('.contenedor-menu .menu ul.menu_generales').show();
 /* Cargue de Equipos*/
 
 $(document).ready(function () {
-    $("#listarEquipos").DataTable({
+    tabla = $("#listarEquipos").DataTable({
         scrollY: '50vh',
         scrollCollapse: true,
         paging: false,
@@ -23,14 +23,22 @@ $(document).ready(function () {
         },
 
         "columns": [
-            { "data": "id" },
+            { "data": "maquina", className: "centrado" },
+            { "defaultContent": "<a href='#' <i class='large material-icons link-editar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" },
             { "data": "maquina" },
             { "data": "nombre" },
-            { "defaultContent": "<a href='#' <i class='large material-icons link-editar' style='color:rgb(255, 165, 0)'>edit</i></a>" },
-            { "defaultContent": "<a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" }
         ]
     });
+    /* Enumera los registros en la tabla */
+
+    tabla.on('order.dt search.dt', function () {
+        tabla.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1;
+        });
+    }).draw();
 });
+
+
 
 /* Adicionar Equipos */
 
@@ -73,7 +81,7 @@ function cargarSelectorLinea() {
 $(document).on('click', '.link-borrar', function (e) {
     e.preventDefault();
 
-    let id = $(this).parent().parent().children().first().text();
+    let id = $(this).parent().parent().children().eq(2).text();
 
     var confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este registro?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
 
@@ -82,7 +90,7 @@ $(document).on('click', '.link-borrar', function (e) {
             $.ajax({
                 'method': 'POST',
                 'url': 'php/c_maquinaria.php',
-                'data': { operacion: 3, id: id }
+                'data': { operacion: 3, id }
             });
             refreshTable();
             alertify.success('Registro Eliminado');
@@ -95,9 +103,9 @@ $(document).on('click', '.link-borrar', function (e) {
 $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
     editar = 1;
-    let id = $(this).parent().parent().children().first().text();
-    let nombre = $(this).parent().parent().children().eq(1).text();
-    let linea = $(this).parent().parent().children().eq(2).text();
+    let id = $(this).parent().parent().children().eq(2).text();
+    let nombre = $(this).parent().parent().children().eq(2).text();
+    let linea = $(this).parent().parent().children().eq(3).text();
 
     $('#frmadParametro').slideDown();
     $('#btnguardarEquipos').html('Actualizar');

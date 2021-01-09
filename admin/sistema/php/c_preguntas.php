@@ -17,16 +17,16 @@ if (!empty($_POST)) {
     case 2: //Eliminar
       $id = $_POST['id'];
 
-      $sql = "DELETE FROM preguntas WHERE id = :id";
+      $sql = "DELETE FROM preguntas WHERE pregunta = :id";
       ejecutarEliminar($conn, $sql, $id);
       break;
-    case 3: // Guardar y actualizar data
 
+    case 3: // Guardar y actualizar data
       $editar = $_POST['editar'];
       $pregunta = ucfirst(mb_strtolower($_POST['pregunta'], "UTF-8"));
 
       if ($editar == 0) {
-        $sql = "SELECT * FROM preguntas WHERE pregunta=:pregunta";
+        $sql = "SELECT * FROM preguntas WHERE pregunta = :pregunta";
         $query = $conn->prepare($sql);
         $query->execute(['pregunta' => $pregunta]);
         $rows = $query->rowCount();
@@ -42,9 +42,12 @@ if (!empty($_POST)) {
         }
       } else {
         $id = $_POST['id'];
-        $sql = "UPDATE preguntas SET pregunta = :pregunta WHERE id = :id";
+        $sql = "UPDATE preguntas SET pregunta = :pregunta WHERE pregunta = :id";
         $query = $conn->prepare($sql);
-        $result = $query->execute(['pregunta' => $pregunta, 'id' => $id]);
+        $result = $query->execute([
+          'pregunta' => $pregunta,
+          'id' => $id
+        ]);
 
         if ($result) {
           echo '3';

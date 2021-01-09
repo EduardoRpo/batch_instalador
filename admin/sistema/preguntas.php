@@ -1,4 +1,4 @@
-<?php require_once('php/sesion/sesion.php');?>
+<?php require_once('php/sesion/sesion.php'); ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -61,10 +61,9 @@
                   <table id="tblPreguntas" class="table-striped row-borde" style="width:100%">
                     <thead>
                       <tr>
-                        <th>Id</th>
+                        <th>No.</th>
+                        <th>Acciones</th>
                         <th>Pregunta</th>
-                        <th></th>
-                        <th></th>
                       </tr>
                     </thead>
                     <tbody>

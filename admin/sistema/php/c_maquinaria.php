@@ -18,7 +18,7 @@ switch ($op) {
 
   case 3: //Eliminar
     $id = $_POST['id'];
-    $sql = "DELETE FROM maquinaria WHERE id = :id";
+    $sql = "DELETE FROM maquinaria WHERE maquina = :id";
     ejecutarEliminar($conn, $sql, $id);
     break;
 
@@ -39,16 +39,21 @@ switch ($op) {
           echo '2';
           exit();
         } else {
-          $sql = "INSERT INTO maquinaria (maquina, linea) VALUES(:equipo, :linea)";
+          $sql = "INSERT INTO maquinaria (maquina, linea) 
+                  VALUES(:equipo, :linea)";
           $query = $conn->prepare($sql);
           $result = $query->execute(['equipo' => $equipo, 'linea' => $linea]);
           ejecutarQuery($result, $conn);
         }
       } else {
         $id = $_POST['id'];
-        $sql = "UPDATE maquinaria SET maquina = :equipo, linea=:linea WHERE id = :id";
+        $sql = "UPDATE maquinaria SET maquina = :equipo, linea=:linea WHERE maquina = :id";
         $query = $conn->prepare($sql);
-        $result = $query->execute(['equipo' => $equipo, 'linea' => $linea, 'id' => $id]);
+        $result = $query->execute([
+          'equipo' => $equipo,
+          'linea' => $linea,
+          'id' => $id
+        ]);
 
         if ($result) {
           echo '3';

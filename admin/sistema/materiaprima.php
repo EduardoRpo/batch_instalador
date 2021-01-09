@@ -70,10 +70,11 @@
                   <table id="tblMateriaPrima" class="table-striped row-borde" style="width:100%">
                     <thead>
                       <tr>
-                        <th>Código</th>
+                        <th>No.</th>
+                        <th>Acciones</th>
+                        <th>Referencia</th>
                         <th>Materia Prima</th>
                         <th>Alias</th>
-                        <th>Acciones</th>
                       </tr>
                     </thead>
                     <tbody>

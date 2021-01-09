@@ -1,4 +1,4 @@
-<?php require_once('php/sesion/sesion.php');?>
+<?php require_once('php/sesion/sesion.php'); ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -59,7 +59,7 @@
                   <label for=""><b>Línea</b></label>
                   <input type="text" id="txtid_Equipo" readonly hidden>
                   <input type="text" name="txtEquipo" id="txtEquipo" class="form-control" placeholder="Linea" style="width: 500px;" required>
-                  
+
                   <select name="linea" id="cmbLinea" class="form-control"></select>
                   <button type="button" class="btn btn-primary" id="btnguardarEquipos">Guardar</button>
                 </form>
@@ -70,11 +70,10 @@
                   <table id="listarEquipos" class="table-striped row-borde" style="width:100%">
                     <thead>
                       <tr>
-                        <th>id</th>
+                        <th>No</th>
+                        <th>Acciones</th>
                         <th>Equipo</th>
                         <th>Linea</th>
-                        <th></th>
-                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
