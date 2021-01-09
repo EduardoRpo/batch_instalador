@@ -1,5 +1,5 @@
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#link4').css('text-decoration', 'revert')
+$('#link4').css('background', 'coral')
 $('.contenedor-menu .menu ul.abrir').show();
 
 /* Cargue de lineas*/

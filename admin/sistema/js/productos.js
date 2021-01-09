@@ -2,7 +2,7 @@ let editar;
 
 /* Mostrar Menu seleccionado */
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#link_productos').css('text-decoration', 'revert');
+$('#link_productos').css('background', 'coral');
 $('.contenedor-menu .menu ul.menu_productos').show();
 
 cargarDatosProductos();

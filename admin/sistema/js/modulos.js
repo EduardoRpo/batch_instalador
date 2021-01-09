@@ -2,7 +2,7 @@ let editar;
 
 /* Mostrar Menu seleccionadp */
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#link_procesos').css('text-decoration', 'revert')
+$('#link_procesos').css('background', 'coral')
 $('.contenedor-menu .menu ul.menu_generales').show();
 
 /* Cargue de Parametros de Control en DataTable */

@@ -2,7 +2,7 @@ let editar;
 
 /* Mostrar Menu seleccionado */
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#link_tanques').css('text-decoration', 'revert')
+$('#link_tanques').css('background', 'coral')
 $('.contenedor-menu .menu ul.menu_generales').show();
 
 /* Cargue de Parametros de Condiciones del medio */

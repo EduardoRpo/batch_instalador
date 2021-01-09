@@ -4,7 +4,7 @@ cargarSelectorLinea();
 /* Mostrar Menu seleccionado */
 
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#link_equipos').css('text-decoration', 'revert')
+$('#link_equipos').css('background', 'coral')
 $('.contenedor-menu .menu ul.menu_generales').show();
 
 /* Cargue de Equipos*/

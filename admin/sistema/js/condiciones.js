@@ -2,7 +2,7 @@ let editar;
 
 /* Mostrar Menu seleccionado */
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#link_condiciones_medio').css('text-decoration', 'revert')
+$('#link_condiciones_medio').css('background', 'coral');
 $('.contenedor-menu .menu ul.menu_generales').show();
 cargarSelectorModulo();
 

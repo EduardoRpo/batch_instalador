@@ -5,7 +5,7 @@ cargarSelectorProductos();
 /* Mostrar Menu seleccionado */
 
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#link_multipresentacion').css('text-decoration', 'revert')
+$('#link_multipresentacion').css('background', 'coral')
 $('.contenedor-menu .menu ul.menu_productos').show();
 
 /* Cargue de Multipresentacion en DataTable */

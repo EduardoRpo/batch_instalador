@@ -6,7 +6,7 @@ cargarselectores('modulo');
 
 /* Mostrar Menu seleccionado */
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#link_menu_usuarios').css('text-decoration', 'revert')
+$('#link_menu_usuarios').css('background', 'coral')
 $('.contenedor-menu .menu ul.menu_usuarios').show();
 
 //Cargue de datos Tabla Usuarios

@@ -2,7 +2,7 @@ let editar;
 
 /* Mostrar Menu seleccionado */
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#link_materia_prima').css('text-decoration', 'revert')
+$('#link_materia_prima').css('background', 'coral')
 $('.contenedor-menu .menu ul.menu_productos').show();
 
 /* Cargue de Parametros de Control en DataTable */
@@ -22,7 +22,7 @@ tabla = $("#tblMateriaPrima").DataTable({
 
     "columns": [
         { "data": "referencia", className: "centrado" },
-        { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" },
+        { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>", className: "centrado" },
         { "data": "referencia", className: "centrado", },
         { "data": "nombre" },
         { "data": "alias" },

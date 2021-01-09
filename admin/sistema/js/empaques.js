@@ -5,7 +5,7 @@ var editar;
 
 /* Mostrar Menu seleccionado */
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#link_empaques').css('text-decoration', 'revert')
+$('#link_empaques').css('background', 'coral')
 $('.contenedor-menu .menu ul.menu_productos').show();
 /* Ocultar tablas Propiedades Generales */
 

@@ -2,7 +2,7 @@ let editar;
 
 /* Mostrar Menu seleccionado */
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#link_despeje').css('text-decoration', 'revert')
+$('#link_despeje').css('background', 'coral')
 $('.contenedor-menu .menu ul.menu_generales').show();
 
 cargarSelectorProceso();

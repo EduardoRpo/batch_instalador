@@ -6,7 +6,7 @@ var editar;
 $('.contenedor-menu .menu a').removeAttr('style');
 $('.contenedor-menu .menu ul.menu_productos').show();
 $('.contenedor-menu .menu ul.menu_productos ul.menu_instructivos').show();
-$('#link_bases').css('text-decoration', 'revert')
+$('#link_bases').css('background', 'coral')
 
 /* Cargue select referencias */
 
