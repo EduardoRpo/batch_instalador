@@ -13,8 +13,8 @@ if (!empty($_POST)) {
     switch ($op) {
         case 1: //validar si el batch tiene informacion y cargarla
 
-            $batch = $_POST['idbatch'];
-            $modulo = $_POST['module'];
+            $batch = $_POST['idBatch'];
+            $modulo = $_POST['modulo'];
 
             $sql = "SELECT * FROM batch_solucion_pregunta WHERE id_batch= :batch AND id_modulo= :modulo";
             $query = $conn->prepare($sql);
@@ -28,8 +28,8 @@ if (!empty($_POST)) {
             break;
 
         case 2: // cargar 1ra firma despeje
-            $batch = $_POST['idbatch'];
-            $modulo = $_POST['module'];
+            $batch = $_POST['idBatch'];
+            $modulo = $_POST['modulo'];
 
             $sql = "SELECT d.desinfectante, d.observaciones, u.urlfirma 
                     FROM batch_desinfectante_seleccionado d 

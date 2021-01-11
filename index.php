@@ -37,14 +37,14 @@ include('./html/modal/modal_recuperarClave.php');
 </head>
 
 <body class="text-center">
-	<form class="form-signin" action="" method="POST">
+	<form class="form-signin" id="login" action="" method="POST">
 		<img class="mb-4" src="assets/images/logo/logo-samara.png" alt="" width="200" height="100">
 		<h1 class="h3 mb-3 font-weight-normal" style="color:slategrey">Iniciar Sesión</h1><br>
 
-		<input type="text" name="usuario" class="form-control mb-3" placeholder="Usuario" autocomplete="off" required autofocus>
+		<input type="text" id="usuario" name="usuario" class="form-control mb-3" placeholder="Usuario" autocomplete="off" required autofocus>
 
 		<div class="input-group">
-			<input type="password" name="clave" id="clave" class="form-control" placeholder="Contraseña" required>
+			<input type="password" id="clave" name="pass" id="clave" class="form-control" placeholder="Contraseña" required>
 			<span class="input-group-btn" style="height:42px;">
 				<button id="show_password" class="btn btn-success" type="button" onclick="mostrarPassword()">
 					<span class="fa fa-eye-slash icon"></span>
@@ -57,8 +57,10 @@ include('./html/modal/modal_recuperarClave.php');
 		</div>
 
 		<button class="btn btn-lg btn-success btn-block mb-3" type="submit">Iniciar</button>
-		<div class=""></div>
-		<div class="alert alert-danger mb" role="alert" hidden> <?php echo isset($alert) ? $alert : ''; ?> </div>
+		<!-- <button class="btn btn-lg btn-success btn-block mb-3" type="button" onclick="validar_usuario();">Iniciar</button> -->
+		<!-- <input type="button" class="btn btn-lg btn-success btn-block mb-3 btnlogin" value="Iniciar"> -->
+		<!-- <div class=""></div> -->
+		<!-- <div class="alert alert-danger mb" role="alert" hidden> <?php //echo isset($alert) ? $alert : ''; ?> </div> -->
 		<p class="mt-5 mb-3 text-muted">&copy; 2020</p>
 	</form>
 

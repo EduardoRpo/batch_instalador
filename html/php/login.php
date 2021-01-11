@@ -1,23 +1,19 @@
 <?php
-/* 
+
 if (!empty($_SESSION['active'])) {
     header('location: html/batch.php');
 } else {
- */
+
     if (!empty($_POST)) {
         $alert = '';
-        if (empty($_POST['usuario']) or empty($_POST['clave'])) {
+        if (empty($_POST['usuario']) or empty($_POST['pass'])) {
             $alert = "Ingrese su usuario y password";
         } else {
             require_once('./conexion.php');
 
             $usuario = $_POST['usuario'];
-            $pass = md5($_POST['clave']);
+            $pass = md5($_POST['pass']);
 
-            /* print_r($usuario);
-            print_r(' ');
-            print_r($pass);
-            exit(); */
             $sql = "SELECT * FROM usuario, modulo WHERE user = :usuario AND clave=:pass AND modulo.id=usuario.id_modulo";
             $query = $conn->prepare($sql);
             $query->execute(['usuario' => $usuario, 'pass' => $pass]);
@@ -37,20 +33,16 @@ if (!empty($_SESSION['active'])) {
                 $_SESSION["timeout"] = time();
                 $modulo = $data['modulo'];
 
-                if ($data['rol'] == 1) {
+                if ($data['rol'] == 1)
                     header('location: admin/sistema/index.php');
-                } else if ($data['rol'] == 2) {
+                else if ($data['rol'] == 2)
                     header('location: html/batch.php');
-                } else if ($data['rol'] == 3) {
+                else if ($data['rol'] == 3)
                     header("location: {$modulo}");
-                } else {
-                    header('location: admin/sistema/index.php');
-                }
             } else {
-                $alert = "El usuario o la contraseña no son validos";
-                echo '<script>alertify.set("notifier","position", "top-right"); alertify.error("El usuario o contraseña no son validos.");</script>';
+                echo '0';
                 session_destroy();
             }
         }
     }
-/* } */
+}

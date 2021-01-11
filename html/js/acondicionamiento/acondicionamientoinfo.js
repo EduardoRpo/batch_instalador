@@ -122,7 +122,7 @@ $('.ref_multi3').click(function (e) {
 function presentacion_multi() {
     envase = $(`#acondicionamientoMulti${id_multi}`).html();
     presentacion = envase.slice(32, envase.length);
-    cargarfirma2();
+    /*  cargarfirma2(); */
 }
 
 /* Cargar tabla Material */
@@ -151,7 +151,7 @@ function cargarTablaEnvase(j, referencia, cantidad) {
 
         $(`.empaque${j}`).html(info.data[0].id_empaque);
         $(`.descripcion_empaque${j}`).html(info.data[0].empaque);
-    
+
         $(`.otros${j}`).html(info.data[0].id_otros);
         $(`.descripcion_otros${j}`).html(info.data[0].otros);
 
@@ -168,7 +168,6 @@ function cargar(btn, idbtn) {
     id = btn.id;
 
     /* Valida que se ha seleccionado el producto de desinfeccion para el proceso de aprobacion */
-
     let seleccion = $('.in_desinfeccion').val();
 
     if (seleccion == "Seleccione") {
@@ -176,26 +175,24 @@ function cargar(btn, idbtn) {
         return false;
     }
 
-
-    //Validacion de control de tanques
-    /*  if (id == "aprobacion_realizado") {
-         validar = controlTanques();
-         if (validar == 0) {
-             return false;
-         }
-     } */
-
-    /* Validacion que el formulario se encuentre completamente lleno */
-
-    /* if (id == 'aprobacion_realizado') {
-        validar = validardatosresultadosPreparacion();
-        if (validar == 0)
+    /* Valida el proceso para la segunda seccion */
+    if (id != 'despeje_realizado') {
+        let seleccion = $('.select-Linea').val();
+        
+        if (seleccion == null) {
+            alertify.set("notifier", "position", "top-right"); alertify.error("Seleccione Los equipos de la linea de producción.");
             return false;
-    }*/
+        }
 
-    //validar que todos los campso se encuentres completos en el formularios
+        /* validar que todas las muestras se registraron */
+        i = localStorage.getItem(`totalmuestras${id_multi}`)
+        cantidad_muestras = $(`#muestras${id_multi}`).val() * 5;
 
-    /*   validarParametrosControl(); */
+        if (i != cantidad_muestras) {
+            alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todas las muestras");
+            return false;
+        }
+    }
 
     /* Carga el modal para la autenticacion */
 

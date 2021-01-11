@@ -7,7 +7,7 @@ function cargarBatch() {
     $.ajax({
         type: "POST",
         url: "../../html/php/despeje.php",
-        data: { operacion: 1, module: modulo, idbatch: idBatch },
+        data: { operacion: 1, modulo, idBatch },
 
         success: function (response) {
 
@@ -38,7 +38,7 @@ function cargarDesinfectante() {
     $.ajax({
         type: "POST",
         url: "../../html/php/despeje.php",
-        data: { operacion: 2, module: modulo, idbatch: idBatch },
+        data: { operacion: 2, modulo, idBatch },
 
         success: function (response) {
 
@@ -75,7 +75,7 @@ function cargarDesinfectante() {
                         return false;
                     } else if (typeof id_multi !== 'undefined')
                         $(`.controlpeso_realizado${id_multi}`).prop('disabled', false);
-                    //cargarfirma2();
+                    cargarfirma2();
                 }
             });
         }

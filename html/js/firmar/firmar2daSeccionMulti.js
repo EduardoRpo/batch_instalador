@@ -4,13 +4,14 @@
 
 function almacenar_muestras(firma) {
 
-    let muestras = JSON.parse(localStorage.getItem(presentacion + ref_multi))
+    modulo == 6 ? operacion = 3 : operacion = 1;
+    let muestras = JSON.parse(localStorage.getItem(presentacion + ref_multi + modulo))
 
     //Almacena las muestras
     $.ajax({
         method: 'POST',
         url: '../../html/php/muestras.php',
-        data: { operacion: 1, idBatch, muestras, modulo, ref_multi },
+        data: { operacion, idBatch, muestras, modulo, ref_multi },
 
         success: function (response) {
 
@@ -19,8 +20,8 @@ function almacenar_muestras(firma) {
                 return false;
             }
 
-            localStorage.removeItem(presentacion + ref_multi);
-            localStorage.removeItem('totalmuestras');
+            //localStorage.removeItem(presentacion + ref_multi + modulo);
+            //localStorage.removeItem('totalmuestras');
 
             let linea = $(`#select-Linea${id_multi}`).val();
             let id_firma = firma[0].id

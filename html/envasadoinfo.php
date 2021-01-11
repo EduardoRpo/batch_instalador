@@ -979,7 +979,7 @@ include('modal/m_muestras.php');
           <script src="../../html/js/global/tanques.js"></script>
           <script src="../../html/js/global/muestras.js"></script>
           <script src="../../html/js/global/condicionesdelMedio.js"></script>
-          <script src="../../html/js/global/cargarBatchEnvasado.js"></script>
+          <script src="../../html/js/global/cargarBatchMulti.js"></script>
           <script src="../../html/js/firmar/firmar1raSeccionMulti.js"></script>
           <script src="../../html/js/firmar/firmar2daSeccionMulti.js"></script>
           <script src="../../html/js/envasado/envasadoinfo.js"></script>

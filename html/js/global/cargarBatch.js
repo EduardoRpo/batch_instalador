@@ -6,7 +6,7 @@ function cargarBatch() {
     $.ajax({
         type: "POST",
         url: "../../html/php/despeje.php",
-        data: { operacion: 1, module: modulo, idbatch: idBatch },
+        data: { operacion: 1, modulo, idBatch },
 
         success: function (response) {
 
@@ -37,7 +37,7 @@ function cargarDesinfectante() {
     $.ajax({
         type: "POST",
         url: "../../html/php/despeje.php",
-        data: { operacion: 2, module: modulo, idbatch: idBatch },
+        data: { operacion: 2, modulo, idBatch },
 
         success: function (response) {
 
@@ -56,7 +56,7 @@ function cargarDesinfectante() {
             $.ajax({
                 type: "POST",
                 url: "../../html/php/despeje.php",
-                data: { operacion: 3, module: modulo, idbatch: idBatch },
+                data: { operacion: 3, modulo, idBatch },
 
                 success: function (response) {
                     

@@ -4,7 +4,7 @@ include('modal/modal_firma.php');
 include('modal/modal_cambiarContrasena.php');
 include('modal/modal_observaciones.php');
 include('modal/m_firma.php');
-include('modal/m_muestras.php');
+include('modal/m_muestras_acondicionamiento.php');
 ?>
 
 <!DOCTYPE html>
@@ -265,7 +265,7 @@ include('modal/m_muestras.php');
                 <label for="recipient-name" class="col-form-label">Banda Transportadora</label>
                 <label for="recipient-name" class="col-form-label">Etiquetadora</label>
                 <label for="recipient-name" class="col-form-label">Tunel Termo</label>
-                <select class="selectpicker form-control select-Linea" id="select-Linea"></select>
+                <select class="selectpicker form-control select-Linea" id="select-Linea1"></select>
                 <input type="text" class="form-control" id="txtBanda" readonly>
                 <input type="text" class="form-control" id="txtEtiqueteadora" readonly>
                 <input type="text" class="form-control" id="txtTunel" readonly>
@@ -279,28 +279,28 @@ include('modal/m_muestras.php');
                   <label for="recipient-name" class="col-form-label">Cantidad de Muestras</label>
                 </div>
                 <div class="col-md-3 align-self-center" style="margin-top: 1%">
-                  <input type="text" class="form-control" id="muestras1" style="text-align: center;" readonly>
+                  <input type="text" class="form-control muestras1" id="muestras1" style="text-align: center;" readonly>
                 </div>
                 <div class="col-md-1 align-self-center" style="margin-top: 1%">
                   <!-- <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 180px; height: 38px;" onclick="muestrasEnvase();">Iniciar</button> -->
-                  <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 180px; height: 38px;" onclick="muestrasEnvase();" data-toggle="modal" data-target="#m_muestras">Iniciar</button> <!--   -->
+                  <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 180px; height: 38px;" onclick="muestras_acondicionamiento();" data-toggle="modal" data-target="#m_muestras_acond">Iniciar</button> <!--   -->
                 </div>
               </div>
               <div class="row" style="margin: 1%">
                 <div class="col-md-4 align-self-center">
                   <label for="recipient-name" class="col-form-label">Realizado por:</label>
-                  <input type="text" class="form-control" id="recipient2-name" readonly>
+                  <input type="text" class="form-control" id="controlpeso_realizado1" readonly>
                 </div>
                 <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                  <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 180px; height: 38px;">Firmar</button>
+                  <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_realizado1" id="controlpeso_realizado1" style="width: 180px; height: 38px;" onclick="cargar('controlpeso_realizado1', 'firma3')">Firmar</button>
                 </div>
 
                 <div class="col-md-4 align-self-center">
                   <label for="recipient-name" class="col-form-label">Verificado por:</label>
-                  <input type="text" class="form-control" id="recipient2-name" readonly>
+                  <input type="text" class="form-control" id="controlpeso_verificado1" readonly>
                 </div>
                 <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                  <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 180px; height: 38px;">Firmar</button>
+                  <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_verificado1" id="controlpeso_verificado1" style="width: 180px; height: 38px;" onclick="cargar('controlpeso_verificado1', 'firma4')">Firmar</button>
                 </div>
               </div>
               <div class="col-md-12 align-self-center">
@@ -350,18 +350,18 @@ include('modal/m_muestras.php');
                 <div class="row" style="margin: 1%">
                   <div class="col-md-4 align-self-center">
                     <label for="recipient-name" class="col-form-label">Realizado Por</label>
-                    <input type="text" class="form-control" id="recipient2-name" readonly>
+                    <input type="text" class="form-control" id="devolucion_realizado1" readonly>
                   </div>
                   <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                    <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 180px; height: 38px;">Firmar</button>
+                    <button type="button" class="btn waves-effect waves-light btn-danger devolucion_realizado1" id="devolucion_realizado1" style="width: 180px; height: 38px;">Firmar</button>
                   </div>
 
                   <div class="col-md-4 align-self-center">
                     <label for="recipient-name" class="col-form-label">Verificado Por</label>
-                    <input type="text" class="form-control" id="recipient2-name" readonly>
+                    <input type="text" class="form-control" id="devolucion_verificado1" readonly>
                   </div>
                   <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                    <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 180px; height: 38px;">Firmar</button>
+                    <button type="button" class="btn waves-effect waves-light btn-danger devolucion_verificado1" id="devolucion_verificado1"  style="width: 180px; height: 38px;">Firmar</button>
                   </div>
                 </div>
                 <div class="row " style="margin: 1%">
@@ -499,7 +499,7 @@ include('modal/m_muestras.php');
         <script src="../../html/js/global/muestras.js"></script>
         <script src="../../html/js/global/condicionesdelMedio.js"></script>
         <!-- <script src="../../html/js/global/cargarDespeje.js"></script> -->
-        <script src="../../html/js/global/cargarBatch.js"></script>
+        <script src="../../html/js/global/cargarBatchMulti.js"></script>
         <script src="../../html/js/acondicionamiento/acondicionamientoinfo.js"></script>
         <!-- <script src="../../html/js/validadores.js"></script> -->
         <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
