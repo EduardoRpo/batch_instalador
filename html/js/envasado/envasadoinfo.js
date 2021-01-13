@@ -7,8 +7,8 @@ let presentacion;
 function cargar(btn, idbtn) {
 
   localStorage.setItem("idbtn", idbtn);
-  //btn = btn;
-  id = btn;
+  localStorage.setItem("btn", btn.id);
+  id = btn.id;
 
   /* Valida que se ha seleccionado el producto de desinfeccion para el proceso de aprobacion */
 
@@ -22,7 +22,7 @@ function cargar(btn, idbtn) {
   if (typeof id_multi !== 'undefined') {
     /* Validacion que todos los datos en linea y el formulario de control en preparacion no esten vacios */
 
-    if (btn == `controlpeso_realizado${id_multi}`) {
+    if (id == `controlpeso_realizado${id_multi}`) {
       validar = validarLinea();
 
       if (validar == 0)
@@ -44,7 +44,7 @@ function cargar(btn, idbtn) {
       }
     }
 
-    if (btn == `devolucion_realizado${id_multi}`) {
+    if (id == `devolucion_realizado${id_multi}`) {
 
       let cantidadEnvasada = $(`.txtEnvasada${id_multi}`).val();
 
@@ -100,14 +100,6 @@ function deshabilitarbotones() {
     $(`.devolucion_realizado${i}`).prop('disabled', true);
     $(`.devolucion_verificado${i}`).prop('disabled', true);
   }
-}
-
-function habilitarbotones() {
-
-  btn_id = localStorage.getItem("idbtn");
-
-  if (btn_id == 'firma1')
-    $(`.controlpeso_realizado${id_multi}`).prop('disabled', false);
 }
 
 /* Cargar Multipresentacion */
@@ -325,36 +317,43 @@ function cargarTablaEnvase(j, referencia, cantidad) {
 function devolucionMaterialEnvasada(valor) {
 
   let unidades_envasadas = formatoCO(parseInt(valor));
-  //empaqueEnvasado = $(`.unidades${id}e`).html();
 
   if (isNaN(unidades_envasadas)) {
     unidades_envasadas = 0;
   }
+
   //si la cantidad de envasado es diferente a los recibido envie una notificacion, la orden de produccion, diferencia entre recibida y envasada y presentacion
   $(`.envasada${id_multi}`).html(unidades_envasadas);
-  //$(`.envasada${id}e`).html(empaqueEnvasado);
 
-  //devolucionMaterialTotal(unidades_envasadas);
+  recalcular_valores();
+
 }
 
-function devolucionMaterialTotal(valor, id) {
+//recalcular valores en al tabla de devolucion de materiales envase
+function recalcular_valores() {
 
-  let envasada = parseInt($(`.txtEnvasada${id_multi}`).val());
-
-  /* if (isNaN(envasada)) {
-    envasada = $(`#txtEnvasada${id}`).html();
-    envasada = parseInt(formatoGeneral(envasada));
-  } */
-
-  let averias = parseInt($(`#averias${id}`).val());
-  let total = envasada + averias + parseInt(valor);
-
-  total = formatoCO(parseInt(total));
-  if (isNaN(total)) {
-    total = "";
+  if (id_multi == 1) {
+    envasada = $(`.txtEnvasada1`).val();
+    min = 1; max = 4;
+  }
+  if (id_multi == 2) {
+    envasada = $(`.txtEnvasada2`).val();
+    min = 4; max = 7;
+  }
+  if (id_multi == 3) {
+    envasada = $(`.txtEnvasada3`).val();
+    min = 7; max = 10;
   }
 
-  $(`#totalDevolucion${id}`).html(total);
+  for (let i = min; i < max; i++) {
+    let averias = $(`#averias${i}`).val();
+    let sobrante = $(`#sobrante${i}`).val();
+    averias == '' ? averias = 0 : averias;
+    sobrante == '' ? sobrante = 0 : sobrante;
+    let total = parseInt(envasada) + parseInt(averias) + parseInt(sobrante);
+    total = formatoCO(parseInt(total));
+    $(`#totalDevolucion${i}`).html(total);
+  }
 
 }
 
@@ -430,4 +429,24 @@ function cargarEquipos() {
       console.log(response);
     }
   })
+}
+
+function deshabilitarbtn() {
+  //$(`.controlpeso_realizado${id_multi}`).css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
+  btn = localStorage.getItem('btn');
+
+  if (btn == 'despeje_realizado')
+    for (let i = 1; i < 4; i++)
+      $(`.controlpeso_realizado${i}`).prop('disabled', false);
+
+  if (btn == `controlpeso_realizado${id_multi}`) {
+    $(`.controlpeso_realizado${id_multi}`).css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
+    $(`.controlpeso_verificado${id_multi}`).prop('disabled', false);
+  }
+
+  if (btn == `devolucion_realizado${id_multi}`) {
+    $(`.devolucion_realizado${id_multi}`).css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
+    $(`.devolucion_realizado${id_multi}`).prop('disabled', false);
+  }
+
 }

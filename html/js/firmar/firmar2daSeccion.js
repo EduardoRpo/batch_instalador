@@ -47,10 +47,13 @@ function firmar2daSeccion(firma) {
                     $(`.especificacionInput`).val('');
                 }
 
+                if (modulo == 3)
+                    reiniciarInstructivo();
+
                 if (tanques == tanquesOk)
                     firmarSeccionCierreProceso(firma);
-            } else {
 
+            } else {
                 alertify.set("notifier", "position", "top-right"); alertify.error("Error");
             }
         }
@@ -75,18 +78,13 @@ function firmarSeccionCierreProceso(firma) {
     });
 
     confirm.set('oncancel', function () { //callbak al pulsar No
-        alertify.error('No reporto Incidencias');
+        alertify.error('No reportó Incidencias');
         /* Almacenar firma 2da seccion */
+
         $.ajax({
             method: 'POST',
             url: '../../html/php/incidencias.php',
-            data: {
-                operacion: 3,
-                firma: firma[0].id,
-                modulo: modulo,
-                batch: idBatch,
-
-            },
+            data: { operacion: 3, firma: firma[0].id, modulo, idBatch, },
 
             success: function (response) {
                 $('#modalObservaciones').modal('hide');
@@ -113,17 +111,8 @@ function almacenarfirma(id) {
 
         success: function (response) {
             alertify.set("notifier", "position", "top-right"); alertify.success("Firmado satisfactoriamente");
-            $('.pesaje_verificado').prop('disabled', true);
+            $('.pesaje_verificado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
             /* $('.aprobacion_realizado').prop('disabled', true); */
         }
     });
-}
-
-
-function deshabilitarbtn() {
-    $('.pesaje_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
-    $('.pesaje_verificado').prop('disabled', false);
-
-    $('.preparacion_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
-    $('.preparacion_verificado').prop('disabled', false);
 }

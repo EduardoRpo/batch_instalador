@@ -9,10 +9,7 @@ function enviar() {
     $('#m_firmar').modal('hide');
     btn_id = localStorage.getItem("idbtn");
 
-    datos = {
-        user: $('#usuario').val(),
-        password: $('#clave').val(),
-    },
+    datos = { user: $('#usuario').val(), password: $('#clave').val() },
 
         $.ajax({
             type: 'POST',
@@ -38,7 +35,7 @@ function preparar(datos) {
     info = JSON.parse(datos);
 
     if (btn_id == 'firma1') {
-        validarPreguntas(info[0].id);
+        guardar_preguntas(info[0].id);
         firmar(info);
     }
 
@@ -69,7 +66,7 @@ function preparar(datos) {
 
 /* Almacenar datos de preguntas */
 
-function validarPreguntas(idfirma) {
+function guardar_preguntas(idfirma) {
     var list = { 'datos': [] };
 
     $("input:radio:checked").each(function () {
@@ -90,21 +87,13 @@ function validarPreguntas(idfirma) {
     $.ajax({
         type: 'POST',
         url: "../../html/php/despeje.php",
-        data: {
-            operacion: 4,
-            respuestas: obj,
-            modulo: modulo,
-            batch: idBatch,
-            desinfectante: desinfectante,
-            observaciones: observaciones,
-            realizo: idfirma,
-        },
+        data: { operacion: 4, respuestas: obj, modulo, idBatch, desinfectante, observaciones, realizo: idfirma },
         success: function (response) {
 
             if (response > 0) {
                 $('.despeje_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
                 $('.despeje_verificado').prop('disabled', false);
-                habilitarbotones();
+                deshabilitarbtn();
             }
         }
     });
@@ -116,12 +105,7 @@ function firmarVerficadoDespeje(idfirma) {
     $.ajax({
         type: "POST",
         url: "../../html/php/despeje.php",
-        data: {
-            operacion: 5,
-            verifico: idfirma,
-            modulo: modulo,
-            batch: idBatch,
-        },
+        data: { operacion: 5, verifico: idfirma, modulo, idBatch },
 
         success: function (response) {
             alertify.set("notifier", "position", "top-right"); alertify.success("Firmado satisfactoriamente");
@@ -132,7 +116,7 @@ function firmarVerficadoDespeje(idfirma) {
 }
 
 function firmar(firm) {
-    debugger;
+
     let template = '<img id=":id:" src=":firma:" alt="firma_usuario" height="130">';
     let parent = $('#' + id).parent();
 

@@ -1,7 +1,7 @@
 let flagWeight = false;
 
 function cargar(btn, idbtn) {
-    
+
     localStorage.setItem("idbtn", idbtn);
     id = btn.id;
 
@@ -31,7 +31,7 @@ function cargar(btn, idbtn) {
 
 /* habilitar botones */
 
-function habilitarbotones(){
+function habilitarbotones() {
     $('.pesaje_realizado').prop('disabled', false);
 }
 
@@ -180,3 +180,8 @@ $(document).ready(function () {
         window.frames["printf"].print();
     });
 });
+
+function deshabilitarbtn() {
+    $('.pesaje_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
+    $('.pesaje_verificado').prop('disabled', false);
+}

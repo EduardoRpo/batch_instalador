@@ -1,29 +1,23 @@
-<?php 
+<?php
 
-    require_once('../../conexion2.php');
+/* Obtener los tanques registrados para el batch record */
 
-    $id_batch = $_POST['id'];
+if (!empty($_POST)) {
+    require_once('../../conexion.php');
 
-    $query_tanques = mysqli_query($conn, " SELECT tanque, cantidad
-                                    FROM batch_tanques
-                                    WHERE id_batch = '$id_batch'");
-                                        
+    $batch = $_POST['idBatch'];
 
-    $result = mysqli_num_rows($query_tanques);
+    $sql = "SELECT tanque, cantidad FROM batch_tanques WHERE id_batch = :batch";
+    $query = $conn->prepare($sql);
+    $query->execute([
+        'batch' => $batch
+    ]);
 
-    if($result > 0){
-    while($data = mysqli_fetch_assoc($query_tanques)){
+    $rows = $query->rowCount();
+
+    if ($rows > 0) {
+        $data = $query->fetch(PDO::FETCH_ASSOC);
         $arreglo[] = $data;
+        echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
     }
-    
-    echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
-
-    }else{
-
-        echo json_encode('');
-    }
-    
-    mysqli_free_result($query_tanques);
-    mysqli_close($conn);
-
-?>
+}

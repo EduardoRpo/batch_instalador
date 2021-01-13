@@ -49,9 +49,9 @@ $(document).ready(function () {
 /* Modulo */
 
 $.ajax({
-    method: 'POST',
-    url: '../../html/php/modulo.php',
-    data: { proceso: proceso },
+    'method': 'POST',
+    'url': '../../html/php/modulo.php',
+    'data': { proceso },
 
     success: function (data) {
         if (data !== '') {
@@ -62,10 +62,8 @@ $.ajax({
                 carguepreguntas(modulo);
 
             desinfectantes();
-            cargueCondicionesMedio();
+            cargar_condiciones_medio();
             validarTanques(modulo);
-            cargarSelectorIncidencias();
-
         }
     }
 });

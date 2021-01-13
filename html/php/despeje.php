@@ -65,15 +65,19 @@ if (!empty($_POST)) {
         case 4: //Almacenar datos y firma 1ra seccion
 
             $respuestas = $_POST['respuestas'];
-            $modulo = $_POST['modulo'];
-            $batch = $_POST['batch'];
             $desinfectante = $_POST['desinfectante'];
             $observaciones = $_POST['observaciones'];
             $realizo = $_POST['realizo'];
+            $modulo = $_POST['modulo'];
+            $batch = $_POST['idBatch'];
 
             $sql = "SELECT * FROM batch_solucion_pregunta WHERE id_batch= :batch AND id_modulo= :modulo";
             $query = $conn->prepare($sql);
-            $query->execute(['batch' => $batch, 'modulo' => $modulo]);
+            $query->execute([
+                'batch' => $batch,
+                'modulo' => $modulo
+            ]);
+            
             $rows = $query->rowCount();
 
             if ($rows > 0) {
@@ -109,7 +113,7 @@ if (!empty($_POST)) {
         case 5: // almacenar firma calidad 1ra seccion
 
             $modulo = $_POST['modulo'];
-            $batch = $_POST['batch'];
+            $batch = $_POST['idBatch'];
             $verifico = $_POST['verifico'];
 
             $sql = "UPDATE batch_desinfectante_seleccionado SET verifico = :verifico

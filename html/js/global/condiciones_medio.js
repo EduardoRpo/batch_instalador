@@ -1,6 +1,7 @@
+
 /* Mostrar ventana de Condiciones Medio de acuerdo con el tiempo establecido en la BD*/
 
-function cargueCondicionesMedio() {
+function cargar_condiciones_medio() {
     $.ajax({
         'type': 'POST',
         'url': '../../html/php/condicionesmedio.php',

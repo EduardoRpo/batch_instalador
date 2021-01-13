@@ -180,7 +180,7 @@ function cargar(btn, idbtn) {
         let seleccion = $('.select-Linea').val();
         
         if (seleccion == null) {
-            alertify.set("notifier", "position", "top-right"); alertify.error("Seleccione Los equipos de la linea de producción.");
+            alertify.set("notifier", "position", "top-right"); alertify.error("Seleccione la linea de producción.");
             return false;
         }
 
@@ -203,7 +203,7 @@ function cargar(btn, idbtn) {
 
 
 
-$("#select-Linea").change(function () {
+$(`#select-Linea1`).change(function () {
     cargarEquipos();
 })
 

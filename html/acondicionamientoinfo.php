@@ -292,7 +292,7 @@ include('modal/m_muestras_acondicionamiento.php');
                   <input type="text" class="form-control" id="controlpeso_realizado1" readonly>
                 </div>
                 <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                  <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_realizado1" id="controlpeso_realizado1" style="width: 180px; height: 38px;" onclick="cargar('controlpeso_realizado1', 'firma3')">Firmar</button>
+                  <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_realizado1" id="controlpeso_realizado1" style="width: 180px; height: 38px;" onclick="cargar(this, 'firma3')">Firmar</button>
                 </div>
 
                 <div class="col-md-4 align-self-center">
@@ -300,7 +300,7 @@ include('modal/m_muestras_acondicionamiento.php');
                   <input type="text" class="form-control" id="controlpeso_verificado1" readonly>
                 </div>
                 <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                  <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_verificado1" id="controlpeso_verificado1" style="width: 180px; height: 38px;" onclick="cargar('controlpeso_verificado1', 'firma4')">Firmar</button>
+                  <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_verificado1" id="controlpeso_verificado1" style="width: 180px; height: 38px;" onclick="cargar(this, 'firma4')">Firmar</button>
                 </div>
               </div>
               <div class="col-md-12 align-self-center">
@@ -353,7 +353,7 @@ include('modal/m_muestras_acondicionamiento.php');
                     <input type="text" class="form-control" id="devolucion_realizado1" readonly>
                   </div>
                   <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                    <button type="button" class="btn waves-effect waves-light btn-danger devolucion_realizado1" id="devolucion_realizado1" style="width: 180px; height: 38px;">Firmar</button>
+                    <button type="button" class="btn waves-effect waves-light btn-danger devolucion_realizado1" id="devolucion_realizado1" onclick="cargar(this, 'firma5')" style="width: 180px; height: 38px;">Firmar</button>
                   </div>
 
                   <div class="col-md-4 align-self-center">
@@ -361,7 +361,7 @@ include('modal/m_muestras_acondicionamiento.php');
                     <input type="text" class="form-control" id="devolucion_verificado1" readonly>
                   </div>
                   <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                    <button type="button" class="btn waves-effect waves-light btn-danger devolucion_verificado1" id="devolucion_verificado1"  style="width: 180px; height: 38px;">Firmar</button>
+                    <button type="button" class="btn waves-effect waves-light btn-danger devolucion_verificado1" id="devolucion_verificado1" onclick="cargar(this, 'firma6')" style="width: 180px; height: 38px;">Firmar</button>
                   </div>
                 </div>
                 <div class="row " style="margin: 1%">
@@ -422,9 +422,9 @@ include('modal/m_muestras_acondicionamiento.php');
 
                 <div class="firma mt-5">
                   <label for="recipient-name" class="col-form-label entrego-acon">Entregó</label>
-                  <input type="text" class="form-control" id="recipient2-name" style="width: 180px" readonly>
+                  <input type="text" class="form-control conciliacion_realizado1" id="conciliacion_realizado1" style="width: 180px" readonly>
 
-                  <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 180px; height: 38px;">Firmar</button>
+                  <button type="button" class="btn waves-effect waves-light btn-danger conciliacion_realizado1 " id="conciliacion_realizado1" onclick="cargar(this, 'firma7')" style="width: 180px; height: 38px;">Firmar</button>
                 </div>
 
                 <!-- <div class="row" style="margin: 1%"> -->

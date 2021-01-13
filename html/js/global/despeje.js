@@ -65,7 +65,7 @@ $('.in_desinfeccion').click(function (event) {
 });
 
 
-/* function validarParametrosControl() {
+function validarParametrosControl() {
     let flag = false;
     $('.questions').each((indx, question) => {
         if (flag) {
@@ -87,4 +87,4 @@ $('.in_desinfeccion').click(function (event) {
         }
         completo = 1;
     });
-} */
+}

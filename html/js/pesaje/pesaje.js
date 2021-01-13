@@ -16,15 +16,16 @@
  */
 $(document).ready(function () {
     $('#tablaPesajes').DataTable({
-        //"order": [[ 1, "desc" ]],
+        order: [[0, "desc"]],
+
         ajax: {
             url: '/api/pesajes',
             dataSrc: ''
         },
-        language:{
+        language: {
             url: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json'
         },
-        
+
         columns: [
             {
                 title: 'Batch',
@@ -42,7 +43,7 @@ $(document).ready(function () {
                 title: 'Referencia',
                 data: 'referencia', className: 'uniqueClassName'
             },
-             {
+            {
                 title: 'No Lote',
                 data: 'numero_lote', className: 'uniqueClassName'
             },
@@ -57,8 +58,8 @@ $(document).ready(function () {
     });
     //table.destroy();
 
-// Event listener to the two range filtering inputs to redraw on input
-/* $('#est').keyup(function () {
-        table.draw();
-    }); */
+    // Event listener to the two range filtering inputs to redraw on input
+    /* $('#est').keyup(function () {
+            table.draw();
+        }); */
 });

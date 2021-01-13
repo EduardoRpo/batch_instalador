@@ -20,9 +20,6 @@ function almacenar_muestras(firma) {
                 return false;
             }
 
-            //localStorage.removeItem(presentacion + ref_multi + modulo);
-            //localStorage.removeItem('totalmuestras');
-
             let linea = $(`#select-Linea${id_multi}`).val();
             let id_firma = firma[0].id
             //Almacena la firma 
@@ -32,11 +29,8 @@ function almacenar_muestras(firma) {
                 data: { operacion: 1, linea, id_firma, modulo, idBatch, ref_multi },
 
                 success: function (response) {
-
                     alertify.set("notifier", "position", "top-right"); alertify.success("Firmado satisfactoriamente");
-                    $(`.controlpeso_realizado${id_multi}`).css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
-                    $(`.controlpeso_verificado${id_multi}`).prop('disabled', false);
-                    $(`.devolucion_realizado${id_multi}`).prop('disabled', false);
+                    deshabilitarbtn();
                 }
             });
         },
@@ -72,14 +66,10 @@ function firmaCalidad(id_firma) {
             if (response == 1) {
                 alertify.set("notifier", "position", "top-right"); alertify.success("Firmado satisfactoriamente");
                 $(`.controlpeso_verificado${id_multi}`).css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
-                //$(`.devolucion_verificado${id_multi}`).css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
             }
         }
     });
 }
-
-/* $(selector).click(function (e) {
-    e.preventDefault(); */
 
 function observaciones_incidencias() {
 
@@ -119,14 +109,4 @@ function observaciones_incidencias() {
             }
         });
     });
-}
-
-
-
-function deshabilitarbtn() {
-    $('.pesaje_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
-    $('.pesaje_verificado').prop('disabled', false);
-
-    $('.preparacion_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
-    $('.preparacion_verificado').prop('disabled', false);
 }

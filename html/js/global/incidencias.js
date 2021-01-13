@@ -4,7 +4,7 @@ let infofirma;
 /* Cargar formulario incidencias */
 
 function cargarObsIncidencias(firma) {
-
+    cargarSelectorIncidencias();
     firma_realizado = firma[0].id;
     infofirma = firma;
     $('#modalObservaciones').modal('show');
@@ -52,7 +52,7 @@ function cargarSelectorIncidencias() {
 
 $('#guardarIncidencias').click(function (e) {
     e.preventDefault();
-
+    debugger;
     let incidencias = [];
     let incidencia = [];
 
@@ -87,13 +87,7 @@ $('#guardarIncidencias').click(function (e) {
     $.ajax({
         method: 'POST',
         url: '../../html/php/incidencias.php',
-        data: {
-            operacion: 2, incidencias,
-            firma: firma_realizado,
-            modulo: modulo,
-            batch: idBatch,
-            observaciones: observaciones,
-        },
+        data: { operacion: 2, incidencias, firma: firma_realizado, modulo, idBatch, observaciones },
 
         success: function (response) {
             alertify.set("notifier", "position", "top-right"); alertify.success("Incidencias Reportadas exitosamente!");

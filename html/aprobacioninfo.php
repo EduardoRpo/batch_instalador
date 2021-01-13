@@ -369,7 +369,7 @@ include('modal/m_firma.php');
                   <input type="text" class="form-control" id="aprobacion_realizado" readonly>
                 </div>
                 <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                  <input type="button" class="btn btn-danger" id="aprobacion_realizado" onclick="cargar(this, 'firma3')" style="width: 100%; height: 38px;" value="Firmar">
+                  <input type="button" class="btn btn-danger aprobacion_realizado" id="aprobacion_realizado" onclick="cargar(this, 'firma3')" style="width: 100%; height: 38px;" value="Firmar">
                 </div>
 
                 <div class="col-md-4 align-self-center">
@@ -378,15 +378,6 @@ include('modal/m_firma.php');
                 </div>
                 <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
                   <input type="button" class="btn btn-danger aprobacion_verificado" id="aprobacion_verificado" onclick="cargar(this, 'firma4')" style="width: 100%; height: 38px;" value="Firmar">
-                </div>
-              </div>
-
-              <hr>
-
-              <div class="row buttons-group-container" style="margin: 1%">
-                <div class="buttons-group">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalObservaciones">Aceptar</button>
                 </div>
               </div>
             </div>
@@ -422,7 +413,7 @@ include('modal/m_firma.php');
   <script src="../../html/js/firmar/firmar2daSeccion.js"></script>
   <script src="../../html/js/global/incidencias.js"></script>
   <script src="../../html/js/global/requerimiento_ajuste.js"></script>
-  <script src="../../html/js/global/condicionesdelMedio.js"></script>
+  <script src="../../html/js/global/condiciones_medio.js"></script>
   <script src="../../html/js/global/cargarBatchAprobacion.js"></script>
   <script src="../../html/js/global/validaciones.js"></script>
   <script src="../../html/js/global/tanques.js"></script>

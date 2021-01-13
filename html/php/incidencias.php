@@ -8,7 +8,6 @@ if (!empty($_POST)) {
 
     switch ($op) {
         case 1: // listar incidencias
-
             $query = "SELECT * FROM incidencias_motivo";
             ejecutarQuerySelect($conn, $query);
 
@@ -18,12 +17,10 @@ if (!empty($_POST)) {
             $incidencias = $_POST['incidencias'];
             $firma = $_POST['firma'];
             $modulo = $_POST['modulo'];
-            $batch = $_POST['batch'];
+            $batch = $_POST['idBatch'];
             $observaciones = $_POST['observaciones'];
-            /* print_r($incidencias); */
             $datos = json_decode($incidencias, true);
-            /* print_r($datos); */
-            exit();
+
             foreach ($datos as $valor) {
                 foreach ($valor as $i => $incidencia) {
 
@@ -42,7 +39,7 @@ if (!empty($_POST)) {
             if (!$result)
                 exit();
 
-            //Almacenado de firmas
+            //Almacenado de firmas con incidencias
 
             $sql = "INSERT INTO batch_firmas2seccion (observaciones, modulo, batch, realizo) 
             VALUES (:observaciones, :modulo, :batch, :realizo)";
@@ -60,11 +57,12 @@ if (!empty($_POST)) {
                 echo '0';
 
             break;
-        case 3: //Almacenarr firma 2da seccion sin incidencias
+
+        case 3: //Almacenar firma 2da seccion sin incidencias
             $firma = $_POST['firma'];
             $modulo = $_POST['modulo'];
-            $batch = $_POST['batch'];
-           
+            $batch = $_POST['idBatch'];
+
 
             $sql = "INSERT INTO batch_firmas2seccion (modulo, batch, realizo) 
                     VALUES (:modulo, :batch, :realizo)";
@@ -76,13 +74,12 @@ if (!empty($_POST)) {
                 'batch' => $batch,
             ]);
 
-            
-
             if ($result) {
                 echo '1';
             } else
                 echo '0';
             break;
+
         case 4: //Almacenar firma 2da seccion calidad 
             $firma = $_POST['firma'];
             $modulo = $_POST['modulo'];

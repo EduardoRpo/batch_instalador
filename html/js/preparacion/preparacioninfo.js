@@ -10,7 +10,7 @@ let pasoEjecutado = 0
 
 
 function cargar(btn, idbtn) {
-    
+
     localStorage.setItem("idbtn", idbtn);
     id = btn.id;
 
@@ -43,14 +43,15 @@ function cargar(btn, idbtn) {
     }
 
     /* valida que el instructivo se haya ejecutado */
+    if (id == 'preparacion_realizado') {
+        ordenpasos = localStorage.getItem("ordenpasos");
 
-    ordenpasos = localStorage.getItem("ordenpasos");
-
-    if (pasoEjecutado !== 0 || pasoEjecutado == 0)
-        if (pasoEjecutado < ordenpasos) {
-            alertify.set("notifier", "position", "top-right"); alertify.error('Para continuar. Complete todo el instructivo');
-            return false;
-        }
+        if (pasoEjecutado !== 0 || pasoEjecutado == 0)
+            if (pasoEjecutado < ordenpasos) {
+                alertify.set("notifier", "position", "top-right"); alertify.error('Para continuar. Complete todo el instructivo');
+                return false;
+            }
+    }
 
     /* Validacion que el formulario se encuentre completamente lleno */
 
@@ -72,7 +73,7 @@ function cargar(btn, idbtn) {
 
 /* Habilitar Botones */
 
-function habilitarbotones(){
+function habilitarbotones() {
     $('.preparacion_realizado').prop('disabled', false);
 }
 
@@ -291,5 +292,11 @@ function mostrarInstructivo() {
 
 function reiniciarInstructivo() {
     $('.proceso-instructivo').removeClass('text-sucess');
+    queeProcess = 0;
     ocultarInstructivo();
+}
+
+function deshabilitarbtn() {
+    $('.preparacion_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
+    $('.preparacion_verificado').prop('disabled', false);
 }

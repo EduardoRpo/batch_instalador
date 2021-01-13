@@ -185,7 +185,7 @@ include('modal/m_muestras.php');
                   </div>
                   <div class="col-md-2 col-2 align-self-center" style="margin-top: 2.8%">
                     <input type="text" id="idbtn" hidden>
-                    <input type="button" class="btn btn-danger in_desinfeccion despeje_realizado" id="despeje_realizado" onclick="cargar(this, 'firma1')" style="width: 100%; height: 38px;" value="Firmar">
+                    <input type="button" class="btn btn-danger despeje_realizado" id="despeje_realizado" onclick="cargar(this, 'firma1')" style="width: 100%; height: 38px;" value="Firmar">
                   </div>
 
                   <div class="col-md-4 align-self-center">
@@ -336,7 +336,7 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="controlpeso_realizado1" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_realizado1" onclick="cargar('controlpeso_realizado1', 'firma3')" style="width: 100%; height: 38px;">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_realizado1" id="controlpeso_realizado1" onclick="cargar(this, 'firma3')" style="width: 100%; height: 38px;">Firmar</button>
                       </div>
 
                       <div class="col-md-4 align-self-center">
@@ -344,7 +344,7 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="controlpeso_verificado1" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_verificado1" onclick="cargar('controlpeso_realizado1', 'firma4')" style="width: 100%; height: 38px;">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_verificado1" id="controlpeso_verificado1" onclick="cargar(this, 'firma4')" style="width: 100%; height: 38px;">Firmar</button>
                       </div>
 
                     </div>
@@ -377,8 +377,8 @@ include('modal/m_muestras.php');
                                     <td id="descripcion_envase1" class="descripcion_envase1"></td>
                                     <td id="unidades5" class="centrado unidades1"></td>
                                     <td><input type="number" id="txtEnvasada1" min="1" class="form-control centrado txtEnvasada1" style="width: 110px;" onkeyup="devolucionMaterialEnvasada(this.value);"></td>
-                                    <td><input type="number" id="averias1" min="1" class="form-control centrado" style="width: 110px;"></td>
-                                    <td><input type="number" id="sobrante1" min="1" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 1);"></td>
+                                    <td><input type="number" id="averias1" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td><input type="number" id="sobrante1" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();" ></td>
                                     <td id="totalDevolucion1" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
                                   </tr>
                                   <tr>
@@ -386,8 +386,8 @@ include('modal/m_muestras.php');
                                     <td id="descripcion_tapa1" class="descripcion_tapa1"></td>
                                     <td id="unidades6" class="centrado unidades1"></td>
                                     <td id="txtEnvasada2" class="centrado envasada1"></td>
-                                    <td><input type="number" id="averias2" min="1" class="form-control centrado" style="width: 110px;"></td>
-                                    <td><input type="number" id="sobrante2" min="1" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 2);"></td>
+                                    <td><input type="number" id="averias2" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td><input type="number" id="sobrante2" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
                                     <td id="totalDevolucion2" class="centrado"></td><!-- <input type="number" id="totalDevolucion1" class="form-control centrado" readonly> -->
                                   </tr>
                                   <tr>
@@ -395,8 +395,8 @@ include('modal/m_muestras.php');
                                     <td id="descripcion_etiqueta1" class="descripcion_etiqueta1"></td>
                                     <td id="unidades7" class="centrado unidades1"></td>
                                     <td id="txtEnvasada3" class="centrado envasada1"></td>
-                                    <td><input type="number" id="averias3" min="1" class="form-control centrado" style="width: 110px;"></td>
-                                    <td><input type="number" id="sobrante3" min="1" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 3);"></td>
+                                    <td><input type="number" id="averias3" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td><input type="number" id="sobrante3" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
                                     <td id="totalDevolucion3" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
                                   </tr>
                                   <!-- <tr>
@@ -431,7 +431,7 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="devolucion_realizado1" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_realizado1" style="width: 100%; height: 38px;" onclick="cargar('devolucion_realizado1', 'firma5')">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_realizado1" style="width: 100%; height: 38px;" id="devolucion_realizado1" onclick="cargar(this, 'firma5')">Firmar</button>
                       </div>
 
                       <!-- <div class="firmas_envasado__group"> -->
@@ -440,7 +440,7 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="devolucion_verificado1" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_verificado1" style="width: 100%; height: 38px;" onclick="cargar('devolucion_verificado1', 'firma6')">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_verificado1" style="width: 100%; height: 38px;" id ="devolucion_verificadodo1" onclick="cargar(this, 'firma6')">Firmar</button>
                       </div>
 
                     </div>
@@ -584,7 +584,7 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="controlpeso_realizado2" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_realizado2" onclick="cargar('controlpeso_realizado2', 'firma3')" style="width: 100%; height: 38px;">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_realizado2" id="'controlpeso_realizado2'" onclick="cargar(this, 'firma3')" style="width: 100%; height: 38px;">Firmar</button>
                       </div>
 
                       <div class="col-md-4 align-self-center">
@@ -592,7 +592,7 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="controlpeso_verificado2" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_verificado2" onclick="cargar('controlpeso_verificado2', 'firma4')" style="width: 100%; height: 38px;">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_verificado2" id="controlpeso_verificado2" onclick="cargar(this, 'firma4')" style="width: 100%; height: 38px;">Firmar</button>
                       </div>
 
                     </div>
@@ -625,8 +625,8 @@ include('modal/m_muestras.php');
                                     <td id="descripcion_envase2" class="descripcion_envase2"></td>
                                     <td id="unidades5" class="centrado unidades2"></td>
                                     <td><input type="number" id="txtEnvasada2" min="1" class="form-control centrado txtEnvasada2" style="width: 110px;" onkeyup="devolucionMaterialEnvasada(this.value);"></td>
-                                    <td><input type="number" id="averias4" min="1" class="form-control centrado" style="width: 110px;"></td>
-                                    <td><input type="number" id="sobrante4" min="1" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 4);"></td>
+                                    <td><input type="number" id="averias4" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td><input type="number" id="sobrante4" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
                                     <td id="totalDevolucion4" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
                                   </tr>
                                   <tr>
@@ -634,8 +634,8 @@ include('modal/m_muestras.php');
                                     <td id="descripcion_tapa2" class="descripcion_tapa2"></td>
                                     <td id="unidades6" class="centrado unidades2"></td>
                                     <td id="txtEnvasada2" class="centrado envasada2"></td>
-                                    <td><input type="number" id="averias5" min="1" class="form-control centrado" style="width: 110px;"></td>
-                                    <td><input type="number" id="sobrante5" min="1" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 5);"></td>
+                                    <td><input type="number" id="averias5" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td><input type="number" id="sobrante5" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
                                     <td id="totalDevolucion5" class="centrado"></td><!-- <input type="number" id="totalDevolucion1" class="form-control centrado" readonly> -->
                                   </tr>
                                   <tr>
@@ -643,8 +643,8 @@ include('modal/m_muestras.php');
                                     <td id="descripcion_etiqueta2" class="descripcion_etiqueta2"></td>
                                     <td id="unidades7" class="centrado unidades2"></td>
                                     <td id="txtEnvasada3" class="centrado envasada2"></td>
-                                    <td><input type="number" id="averias6" min="1" class="form-control centrado" style="width: 110px;"></td>
-                                    <td><input type="number" id="sobrante6" min="1" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 6);"></td>
+                                    <td><input type="number" id="averias6" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td><input type="number" id="sobrante6" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
                                     <td id="totalDevolucion6" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
                                   </tr>
                                   <!-- <tr>
@@ -679,7 +679,7 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="devolucion_realizado2" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_realizado2" style="width: 100%; height: 38px;" onclick="cargar('devolucion_realizado2', 'firma5')">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_realizado2" style="width: 100%; height: 38px;" id="devolucion_realizado2" onclick="cargar(this, 'firma5')">Firmar</button>
                       </div>
 
                       <!-- <div class="firmas_envasado__group"> -->
@@ -688,7 +688,7 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="devolucion_verificado2" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_verificado2" style="width: 100%; height: 38px;" onclick="cargar('devolucion_verificado2', 'firma6')">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_verificado2" style="width: 100%; height: 38px;" id="devolucion_verificado2" onclick="cargar(this, 'firma6')">Firmar</button>
                       </div>
 
                     </div>
@@ -831,7 +831,7 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="controlpeso_realizado3" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_realizado3" onclick="cargar('controlpeso_realizado3', 'firma3')" style="width: 100%; height: 38px;">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_realizado3" id="controlpeso_realizado3" onclick="cargar(this, 'firma3')" style="width: 100%; height: 38px;">Firmar</button>
                       </div>
 
                       <div class="col-md-4 align-self-center">
@@ -839,7 +839,7 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="controlpeso_verificado3" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_verificado3" onclick="cargar('controlpeso_verificado3', 'firma4')" style="width: 100%; height: 38px;">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_verificado3" id="controlpeso_verificado3" onclick="cargar(this, 'firma4')" style="width: 100%; height: 38px;">Firmar</button>
                       </div>
 
                     </div>
@@ -872,8 +872,8 @@ include('modal/m_muestras.php');
                                     <td id="descripcion_envase3" class="descripcion_envase3"></td>
                                     <td id="unidades5" class="centrado unidades3"></td>
                                     <td><input type="number" id="txtEnvasada3" min="1" class="form-control centrado txtEnvasada3" style="width: 110px;" onkeyup="devolucionMaterialEnvasada(this.value);"></td>
-                                    <td><input type="number" id="averias7" min="1" class="form-control centrado" style="width: 110px;"></td>
-                                    <td><input type="number" id="sobrante7" min="1" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 7);"></td>
+                                    <td><input type="number" id="averias7" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td><input type="number" id="sobrante7" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
                                     <td id="totalDevolucion7" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
                                   </tr>
                                   <tr>
@@ -881,8 +881,8 @@ include('modal/m_muestras.php');
                                     <td id="descripcion_tapa3" class="descripcion_tapa3"></td>
                                     <td id="unidades6" class="centrado unidades3"></td>
                                     <td id="txtEnvasada3" class="centrado envasada3"></td>
-                                    <td><input type="number" id="averias8" min="1" class="form-control centrado" style="width: 110px;"></td>
-                                    <td><input type="number" id="sobrante8" min="1" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 8);"></td>
+                                    <td><input type="number" id="averias8" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td><input type="number" id="sobrante8" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
                                     <td id="totalDevolucion8" class="centrado"></td><!-- <input type="number" id="totalDevolucion1" class="form-control centrado" readonly> -->
                                   </tr>
                                   <tr>
@@ -890,8 +890,8 @@ include('modal/m_muestras.php');
                                     <td id="descripcion_etiqueta3" class="descripcion_etiqueta3"></td>
                                     <td id="unidades7" class="centrado unidades3"></td>
                                     <td id="txtEnvasada3" class="centrado envasada3"></td>
-                                    <td><input type="number" id="averias9" min="1" class="form-control centrado" style="width: 110px;"></td>
-                                    <td><input type="number" id="sobrante9" min="1" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 9);"></td>
+                                    <td><input type="number" id="averias9" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td><input type="number" id="sobrante9" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
                                     <td id="totalDevolucion9" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
                                   </tr>
                                   <!-- <tr>
@@ -926,7 +926,7 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="devolucion_realizado3" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_realizado3" style="width: 100%; height: 38px;" onclick="cargar('devolucion_realizado3', 'firma5')">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_realizado3" id="devolucion_realizado3" style="width: 100%; height: 38px;" onclick="cargar(this, 'firma5')">Firmar</button>
                       </div>
 
                       <!-- <div class="firmas_envasado__group"> -->
@@ -935,7 +935,7 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="devolucion_verificado3" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_verificado3" style="width: 100%; height: 38px;" onclick="cargar('devolucion_realizado3', 'firma6')">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_verificado3" i="devolucion_verificado3" style="width: 100%; height: 38px;" onclick="cargar(this, 'firma6')">Firmar</button>
                       </div>
 
                     </div>
@@ -944,8 +944,6 @@ include('modal/m_muestras.php');
               </div>
             </div>
           </div>
-
-
 
           <!-- jquery -->
           <script src="../../assets/plugins/jquery/jquery.min.js"></script>
@@ -978,7 +976,7 @@ include('modal/m_muestras.php');
           <script src="../../html/js/global/despeje.js"></script>
           <script src="../../html/js/global/tanques.js"></script>
           <script src="../../html/js/global/muestras.js"></script>
-          <script src="../../html/js/global/condicionesdelMedio.js"></script>
+          <script src="../../html/js/global/condiciones_medio.js"></script>
           <script src="../../html/js/global/cargarBatchMulti.js"></script>
           <script src="../../html/js/firmar/firmar1raSeccionMulti.js"></script>
           <script src="../../html/js/firmar/firmar2daSeccionMulti.js"></script>

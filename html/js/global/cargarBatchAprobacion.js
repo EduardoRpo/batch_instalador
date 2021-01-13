@@ -12,13 +12,16 @@ function cargarDesinfectante() {
     $.ajax({
         type: "POST",
         url: "../../html/php/despeje.php",
-        data: { operacion: 2, module: modulo, idbatch: idBatch },
+        data: { operacion: 2, modulo, idBatch },
 
-        success: function (response) {
+        success: function (r) {
+
+            if (r == '')
+                return false;
 
             /* Carga observaciones, desinfectante y firma */
 
-            let info = JSON.parse(response);
+            let info = JSON.parse(r);
             desinfectante = info.desinfectante;
             observacion = info.observaciones;
             firma = info.urlfirma;
@@ -31,7 +34,7 @@ function cargarDesinfectante() {
             $.ajax({
                 type: "POST",
                 url: "../../html/php/despeje.php",
-                data: { operacion: 3, module: modulo, idbatch: idBatch },
+                data: { operacion: 3, modulo, idBatch },
 
                 success: function (response) {
 
@@ -122,7 +125,7 @@ function cargarControlProceso() {
         data: { modulo, idBatch },
 
         success: function (response) {
-            
+
             let info = JSON.parse(response);
             let index = info.data.length
 
@@ -144,7 +147,7 @@ function cargarControlProceso() {
 /* Registro de Firma */
 
 function firmado(datos, posicion) {
-    debugger;
+
     let template = '<img id=":id:" src=":firma:" alt="firma_usuario" height="130">';
     let parent;
 

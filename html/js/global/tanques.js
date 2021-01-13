@@ -5,7 +5,7 @@ var tanques = 0;
 /* tabla de observaciones en la pestaña de informacion del producto */
 
 $(document).ready(function () {
-    
+
     $('#txtobservacionesTanques').DataTable({
         "scrollY": "120px", "scrollCollapse": true, searching: false, paging: false, info: false, ordering: false,
         columnDefs: [{
@@ -33,18 +33,17 @@ cargarTanques();
 function cargarTanques() {
 
     $.ajax({
-        'method': 'POST',
-        'url': '../../html/php/tanques.php',
-        'data': { id: idBatch },
+        method: 'POST',
+        url: '../../html/php/tanques.php',
+        data: { idBatch },
 
         success: function (data) {
-            var info = JSON.parse(data);
-
             if (info == '' || modulo == 5 || modulo == 6) {
                 return false;
             }
             /* cargar tabla de tanques en info */
-            
+            var info = JSON.parse(data);
+
             $(`#tanque1`).html(formatoCO(info[0].tanque));
             $(`#cantidad1`).html(info[0].cantidad);
             $(`#total1`).html(formatoCO(info[0].tanque * info[0].cantidad));

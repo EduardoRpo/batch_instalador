@@ -40,7 +40,7 @@ function preparar(datos) {
     info = JSON.parse(datos);
 
     if (btn_id == 'firma1') {
-        validarPreguntas(info[0].id);
+        guardar_preguntas(info[0].id);
         firmar(info);
     }
 
@@ -50,7 +50,6 @@ function preparar(datos) {
     }
 
     if (btn_id == 'firma3') {
-        debugger;
         firmar2daSeccion(info);
         /* firmar(info); */
     }
@@ -67,7 +66,7 @@ function preparar(datos) {
 
 /* Almacenar datos de preguntas */
 
-function validarPreguntas(idfirma) {
+function guardar_preguntas(idfirma) {
     var list = { 'datos': [] };
 
     $("input:radio:checked").each(function () {
@@ -88,19 +87,11 @@ function validarPreguntas(idfirma) {
     $.ajax({
         type: 'POST',
         url: "../../html/php/despeje.php",
-        data: {
-            operacion: 4,
-            respuestas: obj,
-            modulo: modulo,
-            batch: idBatch,
-            desinfectante: desinfectante,
-            observaciones: observaciones,
-            realizo: idfirma,
-        },
+        data: { operacion: 4, respuestas: obj, modulo, idBatch, desinfectante, observaciones, realizo: idfirma, },
         success: function (response) {
 
             if (response > 0) {
-                $('.despeje_realizado').prop('disabled', true);
+                $('.despeje_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
                 $('.despeje_verificado').prop('disabled', false);
                 habilitarbotones();
             }
@@ -123,14 +114,14 @@ function firmarVerficadoDespeje(idfirma) {
 
         success: function (response) {
             alertify.set("notifier", "position", "top-right"); alertify.success("Firmado satisfactoriamente");
-            $('.despeje_verificado').prop('disabled', true);
+            $('.despeje_verificado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
         }
     });
 
 }
 
 function firmar(firm) {
-    debugger;
+
     let template = '<img id=":id:" src=":firma:" alt="firma_usuario" height="130">';
     let parent = $('#' + id).parent();
 
