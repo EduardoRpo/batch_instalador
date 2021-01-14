@@ -102,6 +102,8 @@ function guardarMuestras() {
     $(`#promedio${id_multi}`).val(promedio);
 }
 
+/* Crear selects de muestras en la ventana de muestras acondicionamiento */
+
 function muestras_acondicionamiento() {
 
     muestras = $(`#muestras${id_multi}`).val();

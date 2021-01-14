@@ -45,7 +45,7 @@ function cargarDesinfectante() {
             if (response == '')
                 return false;
 
-            /* Carga observaciones, desinfectante y firma */
+            /* Carga observaciones, desinfectante y firma operador */
 
             let info = JSON.parse(response);
             desinfectante = info.desinfectante;
@@ -54,12 +54,12 @@ function cargarDesinfectante() {
 
             $('#sel_producto_desinfeccion').val(desinfectante);
             $('#in_observaciones').val(observacion);
-
+            /* firma  */
             firmado(firma, 1);
-
+            /* habilitar botones para siguiente seccion */
             for (i = 1; i < 4; i++)
                 $(`.controlpeso_realizado${i}`).prop('disabled', false);
-
+            /* Carga firma calidad */
             $.ajax({
                 type: "POST",
                 url: "../../html/php/despeje.php",
@@ -71,11 +71,11 @@ function cargarDesinfectante() {
                         let info = JSON.parse(response);
                         firma = info.urlfirma;
                         firmado(firma, 2);
-                        cargarfirma2();
+                        /* cargarfirma2(); */
                         return false;
                     } else if (typeof id_multi !== 'undefined')
                         $(`.controlpeso_realizado${id_multi}`).prop('disabled', false);
-                    cargarfirma2();
+                    /* cargarfirma2(); */
                 }
             });
         }
@@ -86,7 +86,7 @@ function cargarDesinfectante() {
 
 function cargarfirma2() {
 
-    if (typeof id_multi == 'undefined')
+    if (typeof id_multi == 'undefined' || c != 1)
         return false
 
     ref_multi = $(`.ref${id_multi}`).val();
@@ -133,21 +133,37 @@ function cargardevolucionmaterial() {
             if (info == 3)
                 return false;
 
-            $(`.txtEnvasada${id_multi}`).val(info.data[0].envasada);
-            $(`.envasada${id_multi}`).html(info.data[0].envasada);
-
             //validar en que multipresentacion se encuentra
-            id_multi == 1 ? (start = 1, end = 4) : id_multi == 2 ? (start = 4, end = 7) : (start = 7, end = 10)
+            if (modulo == 5) {
+                $(`.txtEnvasada${id_multi}`).val(info.data[0].envasada);
+                $(`.envasada${id_multi}`).html(info.data[0].envasada);
 
-            for (i = start; i < end; i++) {
-                $(`#averias${i}`).val(info.data[j].averias);
-                $(`#sobrante${i}`).val(info.data[j].sobrante);
-                recalcular_valores();
-                j++;
+                id_multi == 1 ? (start = 1, end = 4) : id_multi == 2 ? (start = 4, end = 7) : (start = 7, end = 10)
+
+                for (i = start; i < end; i++) {
+                    $(`#averias${i}`).val(info.data[j].averias);
+                    $(`#sobrante${i}`).val(info.data[j].sobrante);
+                    recalcular_valores();
+                    j++;
+                }
+
+                firmado(info.data[0].realizo, 5);
+                firmado(info.data[0].verifico, 6);
+            } else {
+                id_multi == 1 ? (start = 1, end = 3) : id_multi == 2 ? (start = 4, end = 7) : (start = 7, end = 10)
+
+                for (i = start; i < end; i++) {
+                    $(`#txtUtilizada${i}`).val(info.data[j].envasada);
+                    $(`#averias${i}`).val(info.data[j].averias);
+                    $(`#sobrante${i}`).val(info.data[j].sobrante);
+                    recalcular_valores();
+                    j++;
+                }
+
+                firmado(info.data[0].realizo, 5);
+                firmado(info.data[0].verifico, 6);
             }
 
-            firmado(info.data[0].realizo, 5);
-            firmado(info.data[0].verifico, 6);
         }
     });
 }

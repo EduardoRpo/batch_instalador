@@ -8145,7 +8145,7 @@ div.displayallinfo {
   height: 38px !important;
 }
 
-/* Aqui inicie */
+/* Inicio */
 
 /* Color en boton Crear Batch */
 .tcrearBatch {
@@ -8171,6 +8171,12 @@ div.displayallinfo {
   margin-right: 700px;
   align-self: flex-end;
 } */
+
+.firma_caja{
+  border:none;
+  border-bottom: 2px solid #67757c;
+
+}
 
 /* Se cambiaron estos estilos, los originales están
 para mejorar el responsive enseguida*/

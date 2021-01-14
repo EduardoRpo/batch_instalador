@@ -55,7 +55,9 @@ function preparar(datos) {
     }
 
     if (btn_id == 'firma5') {
-        $.when(registrarMaterialSobrante(info[0].id), observaciones_incidencias()).done(firmar(info));
+        registrar_material_sobrante(info[0].id);
+        observaciones_incidencias(info);
+        firmar(info);
     }
 
     if (btn_id == 'firma6') {

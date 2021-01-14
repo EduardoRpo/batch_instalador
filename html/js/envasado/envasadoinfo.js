@@ -1,6 +1,7 @@
 let pres;
 let envase;
 let presentacion;
+let c = 0;
 
 //validacion de campos y botones
 
@@ -173,6 +174,7 @@ $('.ref_multi1').click(function (e) {
   e.preventDefault();
   ref_multi = $(`.ref1`).val();
   id_multi = 1;
+  c++;
   presentacion_multi();
 });
 
@@ -180,6 +182,7 @@ $('.ref_multi2').click(function (e) {
   e.preventDefault();
   ref_multi = $(`.ref2`).val();
   id_multi = 2;
+  c++;
   presentacion_multi();
 });
 
@@ -187,6 +190,7 @@ $('.ref_multi3').click(function (e) {
   e.preventDefault();
   ref_multi = $(`.ref3`).val();
   id_multi = 3;
+  c++;
   presentacion_multi();
 });
 
@@ -329,7 +333,7 @@ function devolucionMaterialEnvasada(valor) {
 
 }
 
-//recalcular valores en al tabla de devolucion de materiales envase
+//recalcular valores en la tabla de devolucion de materiales envase
 function recalcular_valores() {
 
   if (id_multi == 1) {
@@ -372,7 +376,7 @@ function validarLinea() {
 
 /* Almacena la info de tabla devolucion material */
 
-function registrarMaterialSobrante(info) {
+function registrar_material_sobrante(info) {
 
   let materialsobrante = [];
 
