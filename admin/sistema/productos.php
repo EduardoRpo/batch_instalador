@@ -66,12 +66,12 @@ require_once('modal/m_productos.php');
                         <th>Referencia</th>
                         <th>Nombre</th>
                         <th>Presentación</th>
-                        <th>Unidad Empaque</th>
                         <th>Producto</th>
                         <th>Notificación Sanitaria</th>
                         <th>Linea</th>
                         <th>Marca</th>
                         <th>Propietario</th>
+                        <th>Unidad Empaque</th>
                         <th>Color</th>
                         <th>Olor</th>
                         <th>Apariencia</th>
@@ -82,7 +82,7 @@ require_once('modal/m_productos.php');
                         <th>Escherichia</th>
                         <th>Staphylococcus</th>
                         <th>PH</th>
-                         <th>Viscosidad</th>
+                        <th>Viscosidad</th>
                         <th>Densidad</th>
                         <th>Alcohol</th>
                         <th>Envase</th>

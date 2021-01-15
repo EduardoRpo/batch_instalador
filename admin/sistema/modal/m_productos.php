@@ -34,8 +34,8 @@
                       </div>
                       <div class="col-md-2 pl-1">
                         <div class="form-group">
-                          <label for="uniEmpaque">Unidad Empaque</label>
-                          <input class="form-control n3" type="number" name="uniEmpaque" id="uniEmpaque" placeholder="Cantidad" class="required">
+                          <label for="presentacion">Presentación</label>
+                          <select class="form-control n3" name="presentacion_comercial" id="presentacion_comercial"></select>
                         </div>
                       </div>
                     </div>
@@ -78,8 +78,8 @@
                       </div>
                       <div class="col-md-2 pl-1">
                         <div class="form-group">
-                          <label for="presentacion">Presentación</label>
-                          <select class="form-control n9" name="presentacion_comercial" id="presentacion_comercial"></select>
+                          <label for="uniEmpaque">Unidad Empaque</label>
+                          <input class="form-control n9" type="number" name="uniEmpaque" id="uniEmpaque" placeholder="Cantidad" class="required">
                         </div>
                       </div>
                     </div>
