@@ -23,13 +23,13 @@
                         <div class="form-group">
                           <label for="referencia">Referencia</label>
                           <input type="text" name="id_referencia" id="id_referencia" class="form-control" hidden>
-                          <input class="form-control n1" type="text" name="referencia" id="referencia"  placeholder="Referencia" class="required">
+                          <input class="form-control n1" type="text" name="referencia" id="referencia" placeholder="Referencia" class="required">
                         </div>
                       </div>
                       <div class="col-md-8 pl-1">
                         <div class="form-group">
                           <label for="nombre">Nombre</label>
-                          <input class="form-control n2" type="text" name="nombre" id="nombre"  placeholder="Nombre" class="validate[required]">
+                          <input class="form-control n2" type="text" name="nombre" id="nombre" placeholder="Nombre" class="validate[required]">
                         </div>
                       </div>
                       <div class="col-md-2 pl-1">
@@ -213,20 +213,18 @@
                       <div class="col-md-4">
                         <div class="form-group">
                           <label for="instructivo">Instructivo</label>
-                          <!-- <select class="form-control n23" name="instructivo" id="instructivo"></select> -->
                           <div class="form-group">
-                            <label for=""></label>
-                            <select class="form-control instructivo n28" name="base_instructivo" id="base_instructivo">
-                              <option value="1">Base</option>
-                              <option value="0">Personalizado</option>
+                            <select class="form-control bases_instructivo n28" name="bases_instructivo" id="bases_instructivo">
+                              <option value="0">Base</option>
+                              <option value="1">Personalizado</option>
                             </select>
                           </div>
                         </div>
                       </div>
-                      <div class="col-md-4 pl-1 cmb_bases_instructivo">
+                      <div class="col-md-4 pl-1 ">
                         <div class="form-group">
                           <label for="bases_instructivo">Base</label>
-                          <select class="form-control n29" name="instructivo" id="instructivo"></select>
+                          <select class="form-control instructivo n29" name="instructivo" id="instructivo"></select>
                         </div>
                       </div>
                     </div>

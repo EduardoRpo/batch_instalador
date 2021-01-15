@@ -25,7 +25,7 @@ $(document).ready(function () {
       data: { operacion: 1 },
     },
 
-   
+
     "columns": [
       /*{ "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" },
       { "data": "referencia" },
@@ -83,6 +83,8 @@ $(document).ready(function () {
       { "data": "id_etiqueta", className: "centrado" },
       { "data": "id_empaque", className: "centrado" },
       { "data": "id_otros", className: "centrado" },
+      { "data": "base_instructivo", className: "centrado" },
+      { "data": "instructivo", className: "centrado" },
     ],
 
     columnDefs: [{ width: "10%", "targets": 1 },],
@@ -107,7 +109,9 @@ function cargarDatosProductos() {
   let j = 0;
 
   $('select').each(function () {
-    sel.push($(this).prop('id'));
+    let id_sel = $(this).prop('id')
+    if (id_sel != 'bases_instructivo' && $(this).prop('id') != 'instructivo')
+      sel.push($(this).prop('id'));
   });
 
   for (i = 1; i <= sel.length; i++) {
@@ -168,7 +172,7 @@ function cargar_selector_bases() {
 
       var info = JSON.parse(response);
 
-      let $select = $(`#bases_instructivo`);
+      let $select = $(`#instructivo`);
       $select.empty();
       $select.append('<option disabled selected>' + "Seleccionar" + '</option>');
 
@@ -195,28 +199,22 @@ $(document).on('click', '.link-editar', function (e) {
   $('#btnguardarProductos').html('Actualizar Producto');
 
   //carga el array con los datos de la tabla
-  for (let i = 2; i < 29; i++) {
+  for (let i = 1; i < 30; i++) {
     propiedad = $(this).parent().parent().children().eq(i).text();
     producto.push(propiedad);
   }
 
   //carga todos los campos con la info del array
-  for (let i = 0; i <= 29; i++) {
+  for (let i = 0; i <= 30; i++) {
     $(`.n${j}`).val(producto[i]);
     j++;
   }
-
-  /* for (let i = 3; i < 29; i++) {
-    //$(`.n${j} option:contains(${producto[i]})`).prop('selected', true);
-    $(`.n${j}`).val(`${producto[i]}`);
-    j++;
-  } */
+  /* Ocultar input de bases de acuerdo con el producto */
+  $('#bases_instructivo').change();
 
   //para actualizar guarda la referencia iniciaL
   let referencia = $('#referencia').val();
   $('#id_referencia').val(referencia);
-  /* $('#referencia').prop('disabled', true); */
-
 
 });
 
@@ -247,16 +245,14 @@ $(document).on('click', '.link-borrar', function (e) {
 
 $(document).on('click', '#btnguardarProductos', function (e) {
   e.preventDefault();
-  debugger;
+
   /* Validar el numero de input a solicitar */
   let base = $('.n28').val();
-  
-  if (base == null)
-    limite = 28;
-  else if (base == '0')
-    limite = 28;
-  else
+
+  if (base == 0)
     limite = 29;
+  else
+    limite = 28;
 
   /* Validar todos los datos del formulario */
   for (let i = 1; i <= limite; i++) {
@@ -272,6 +268,11 @@ $(document).on('click', '#btnguardarProductos', function (e) {
   const producto = new FormData($('#frmagregarProductos')[0]);
   producto.set('operacion', 3);
   producto.set('editar', editar);
+
+  /* Si el instructivo es personalizado se carga 0 */
+  if (producto.get('bases_instructivo') == "1") {
+    producto.set('instructivo', 0);
+  }
 
   $.ajax({
     type: "POST",
@@ -304,16 +305,17 @@ $(document).on('click', '#btnguardarProductos', function (e) {
 });
 
 /* Seleccionar base a partir del instructivo */
-$('.instructivo').change(function (e) {
+$('#bases_instructivo').change(function (e) {
   e.preventDefault();
-  let select = $('.instructivo').val();
+  let select = $('.bases_instructivo').val();
 
-  if (select == 1)
-    $('.cmb_bases_instructivo').hide();
-  else {
-    $('.cmb_bases_instructivo').show();
-    $('#bases_instructivo').val('');
+  if (select == 1) {
+    $('.instructivo').hide();
+    $('.instructivo').val('');
   }
+  else
+    $('.bases_instructivo').show();
+
 });
 
 /* Actualizar tabla */

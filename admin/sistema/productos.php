@@ -90,6 +90,8 @@ require_once('modal/m_productos.php');
                         <th>Etiqueta</th>
                         <th>Empaque</th>
                         <th>Otros</th>
+                        <th>Base Instructivo</th>
+                        <th>Instructivo</th>
                       </tr>
                     </thead>
                     <tbody>
