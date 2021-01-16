@@ -22,7 +22,7 @@
                       <div class="col-md-2 pr-1">
                         <div class="form-group">
                           <label for="referencia">Referencia</label>
-                          <input type="text" name="id_referencia" id="id_referencia" class="form-control" hidden>
+                          <!-- <input type="text" name="id_referencia" id="id_referencia" class="form-control" hidden> -->
                           <input class="form-control n1" type="text" name="referencia" id="referencia" placeholder="Referencia" class="required">
                         </div>
                       </div>
@@ -79,7 +79,7 @@
                       <div class="col-md-2 pl-1">
                         <div class="form-group">
                           <label for="uniEmpaque">Unidad Empaque</label>
-                          <input class="form-control n9" type="number" name="uniEmpaque" id="uniEmpaque" placeholder="Cantidad" class="required">
+                          <input class="form-control n9" type="number" min="1" name="uniEmpaque" id="uniEmpaque" placeholder="Cantidad" class="required">
                         </div>
                       </div>
                     </div>

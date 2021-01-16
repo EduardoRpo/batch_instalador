@@ -1,23 +1,24 @@
 <?php
-require_once('../../../conexion.php');
-require_once('./crud.php');
+if (!empty($_POST)) {
+    require_once('../../../conexion.php');
+    require_once('./crud.php');
 
-$op = $_POST['operacion'];
+    $op = $_POST['operacion'];
 
-switch ($op) {
-    case 1: // Listar productos
-        $query = "SELECT * FROM producto";
-        /*$query = "SELECT p.referencia, p.nombre_referencia, p.presentacion_comercial as presentacion, p.unidad_empaque, np.nombre as producto, 
-        linea.nombre as linea, ns.nombre as notificaciones, marca.nombre as marca, ow.nombre as propietario, color.nombre as color, 
-        olor.nombre as olor, ap.nombre as apariencia, un.nombre as untuosidad, pe.nombre as espumoso, rm.nombre as mesofilos, 
+    switch ($op) {
+        case 1: // Listar productos
+            $query = "SELECT * FROM producto";
+            /*$query = "SELECT p.referencia, p.nombre_referencia, p.presentacion_comercial as presentacion, p.unidad_empaque, np.nombre as producto,
+        linea.nombre as linea, ns.nombre as notificaciones, marca.nombre as marca, ow.nombre as propietario, color.nombre as color,
+        olor.nombre as olor, ap.nombre as apariencia, un.nombre as untuosidad, pe.nombre as espumoso, rm.nombre as mesofilos,
         ps.nombre as pseudomona, es.nombre as escherichia, st.nombre as staphylococcus,  ph.ph, v.viscosidad
-        FROM producto p 
+        FROM producto p
         INNER JOIN nombre_producto np ON np.id=p.id_nombre_producto
         INNER JOIN notificacion_sanitaria ns ON ns.id=p.id_notificacion_sanitaria
         INNER JOIN linea ON linea.id=p.id_linea
         INNER JOIN marca ON marca.id=p.id_marca
         INNER JOIN propietario ow ON ow.id=p.id_propietario
-        
+
         INNER JOIN color ON color.id=p.id_color
         INNER JOIN olor ON olor.id=p.id_olor
         INNER JOIN apariencia ap ON ap.id=p.id_apariencia
@@ -30,10 +31,10 @@ switch ($op) {
         INNER JOIN ph ON ph.id=p.id_ph
         INNER JOIN viscosidad v ON v.id=p.id_viscosidad ";*/
 
-        ejecutarQuerySelect($conn, $query);
-        break;
+            ejecutarQuerySelect($conn, $query);
+            break;
 
-        /* $query1 = "SELECT * FROM productostemp";
+            /* $query1 = "SELECT * FROM productostemp";
 
         $query2 = "SELECT ot.nombre AS otros, psm.nombre as pseudomona, t.nombre AS tapa, et.nombre AS etiqueta, em.nombre AS empaque
                     FROM producto p
@@ -44,19 +45,19 @@ switch ($op) {
                     INNER JOIN empaque AS em ON em.id = p.id_empaque";
 
         transaccion($conn, $query1, $query2); */
-        /*        ejecutarQuerySelect($conn, $query1);
-        ejecutarQuerySelect($conn, $query2); 
+            /*        ejecutarQuerySelect($conn, $query1);
+        ejecutarQuerySelect($conn, $query2);
         break;*/
 
 
-    case 2: //Eliminar
-        $id = $_POST['id'];
-        $sql = "DELETE FROM producto WHERE referencia = :id";
-        ejecutarEliminar($conn, $sql, $id);
-        break;
+        case 2: //Eliminar
+            $id = $_POST['id'];
+            $sql = "DELETE FROM producto WHERE referencia = :id";
+            ejecutarEliminar($conn, $sql, $id);
+            break;
 
-    case 3: // Guardar data
-        if (!empty($_POST)) {
+        case 3: // Crear o actualizar datos de productos
+
             $editar = $_POST['editar'];
 
             //carga la informacion del POST
@@ -68,28 +69,28 @@ switch ($op) {
             //$nombre = ucfirst(mb_strtolower($nombre, "UTF-8"));
 
             if ($editar > 0) {
-                $sql = "UPDATE producto SET  /* referencia = :referencia, */ nombre_referencia =:nombre, unidad_empaque = :uniEmpaque, 
+                $sql = "UPDATE producto SET /* referencia = :referencia, */  nombre_referencia =:nombre,  unidad_empaque = :uniEmpaque,  
             id_nombre_producto = :nombre_producto, id_notificacion_sanitaria = :notificacion_sanitaria, id_linea = :linea, 
             id_marca =:marca, id_propietario =:propietario, presentacion_comercial= :presentacion_comercial, 
             id_color =:color, id_olor= :olor, id_apariencia = :apariencia, id_untuosidad=:untuosidad, 
             id_poder_espumoso =:poder_espumoso, id_recuento_mesofilos =:recuento_mesofilos, id_pseudomona=:pseudomona, 
             id_escherichia =:escherichia, id_staphylococcus=:staphylococcus, id_ph =:ph, id_viscosidad =:viscosidad, 
-            id_densidad_gravedad =:densidad_gravedad, id_grado_alcohol = :grado_alcohol, id_envase = :envase, id_tapa = :tapa, 
+            id_densidad_gravedad =:densidad_gravedad, id_grado_alcohol = :grado_alcohol, id_tapa = :tapa, id_envase = :envase, 
             id_etiqueta = :etiqueta, id_empaque =:empaque, id_otros = :otros, base_instructivo = :bases_instructivo, 
-            instructivo =: instructivo 
-            WHERE referencia = :referencia";
+            instructivo = :instructivo 
+            WHERE referencia = :id_referencia";
 
                 $query = $conn->prepare($sql);
                 $result = $query->execute([
-                    'referencia' => $id_referencia,  'nombre' => $nombre, 'uniEmpaque' => $uniEmpaque, 'nombre_producto' => $nombre_producto,
+                    /* 'referencia' => $referencia, */  
+                    'nombre' => $nombre, 'uniEmpaque' => $uniEmpaque, 'nombre_producto' => $nombre_producto,
                     'notificacion_sanitaria' => $notificacion_sanitaria, 'linea' => $linea, 'marca' => $marca, 'propietario' => $propietario,
                     'presentacion_comercial' => $presentacion_comercial, 'color' => $color, 'olor' => $olor, 'apariencia' => $apariencia,
                     'untuosidad' => $untuosidad, 'poder_espumoso' => $poder_espumoso, 'recuento_mesofilos' => $recuento_mesofilos,
                     'pseudomona' => $pseudomona, 'escherichia' => $escherichia, 'staphylococcus' => $staphylococcus, 'ph' => $ph,
                     'viscosidad' => $viscosidad, 'densidad_gravedad' => $densidad_gravedad, 'grado_alcohol' => $grado_alcohol,
-                    'envase' => $envase, 'tapa' => $tapa, 'etiqueta' => $etiqueta, 'empaque' => $empaque, 'otros' => $otros,
-                    'bases_instructivo' => $bases_instructivo, 'instructivo' => $instructivo,
-                    /* 'referencia' => $id_referencia, */
+                    'tapa' => $tapa, 'envase' => $envase, 'etiqueta' => $etiqueta, 'empaque' => $empaque, 'otros' => $otros,
+                    'bases_instructivo' => $bases_instructivo,'instructivo' => $instructivo, 'id_referencia' => $referencia
                 ]);
 
                 if ($result) {
@@ -113,12 +114,12 @@ switch ($op) {
                     id_notificacion_sanitaria, id_linea, id_marca, id_propietario, presentacion_comercial, id_color, id_olor, 
                     id_apariencia, id_untuosidad, id_poder_espumoso, id_recuento_mesofilos, id_pseudomona, id_escherichia, 
                     id_staphylococcus, id_ph, id_viscosidad, id_densidad_gravedad, id_grado_alcohol, id_envase, id_tapa, id_etiqueta, 
-                    id_empaque, id_otros, base_instructivo, instructivo)
+                    id_empaque, id_otros, multi, base_instructivo, instructivo)
                     VALUES (:referencia, :nombre, :uniEmpaque, :nombre_producto, :notificacion_sanitaria, 
                     :linea, :marca, :propietario, :presentacion_comercial, :color, :olor, :apariencia, 
                     :untuosidad, :poder_espumoso, :recuento_mesofilos, :pseudomona, :escherichia, :staphylococcus,
-                    :ph, :viscosidad, :densidad_gravedad, :grado_alcohol, :envase, :tapa, :etiqueta, :empaque, :otros, 
-                    :base_instructivo, :instructivo)";
+                    :ph, :viscosidad, :densidad_gravedad, :grado_alcohol, :envase, :tapa, :etiqueta, :empaque, :otros, :multi, 
+                    :bases_instructivo, :instructivo)";
 
                     $query = $conn->prepare($sql);
                     $result = $query->execute([
@@ -129,30 +130,32 @@ switch ($op) {
                         'pseudomona' => $pseudomona, 'escherichia' => $escherichia, 'staphylococcus' => $staphylococcus, 'ph' => $ph,
                         'viscosidad' => $viscosidad, 'densidad_gravedad' => $densidad_gravedad, 'grado_alcohol' => $grado_alcohol,
                         'envase' => $envase, 'tapa' => $tapa, 'etiqueta' => $etiqueta, 'empaque' => $empaque, 'otros' => $otros,
-                        'bases_instructivo' => $bases_instructivo, 'instructivo' => $instructivo,
+                        'multi' => $multi, 'bases_instructivo' => $bases_instructivo, 'instructivo' => $instructivo,
                     ]);
                     ejecutarQuery($result, $conn);
                 }
             }
-        }
 
-        break;
 
-    case 4: // Cargar Selectores
-        $tabla = $_POST['tabla'];
+            break;
 
-        if ($tabla == 'ph' || $tabla == 'viscosidad' || $tabla == 'densidad_gravedad' || $tabla == 'grado_alcohol')
-            $query = "SELECT id, CONCAT(limite_inferior, ' - ', limite_superior) as nombre FROM $tabla";
-        else
-            $query = "SELECT * FROM $tabla";
+        case 4: // Cargar Selectores
+            $tabla = $_POST['tabla'];
 
-        ejecutarQuerySelect($conn, $query);
-        break;
+            if ($tabla == 'ph' || $tabla == 'viscosidad' || $tabla == 'densidad_gravedad' || $tabla == 'grado_alcohol') {
+                $query = "SELECT id, CONCAT(limite_inferior, ' - ', limite_superior) as nombre FROM $tabla";
+            } else {
+                $query = "SELECT * FROM $tabla";
+            }
 
-    case 5: //cargar select base
-        $query = "SELECT DISTINCT np.id, np.nombre as producto_base 
+            ejecutarQuerySelect($conn, $query);
+            break;
+
+        case 5: //cargar select base
+            $query = "SELECT DISTINCT np.id, np.nombre as producto_base 
                   FROM instructivos_base ib 
                   INNER JOIN nombre_producto np ON np.id = ib.producto";
-        ejecutarQuerySelect($conn, $query);
-        break;
+            ejecutarQuerySelect($conn, $query);
+            break;
+    }
 }

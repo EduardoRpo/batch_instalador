@@ -197,6 +197,8 @@ $(document).on('click', '.link-editar', function (e) {
   //muestra el modal
   $('#m_productos').modal('show');
   $('#btnguardarProductos').html('Actualizar Producto');
+  /* $('#id_referencia').val($('#referencia').val()); */
+  /* $('#referencia').prop('disabled', true); */
 
   //carga el array con los datos de la tabla
   for (let i = 1; i < 30; i++) {
@@ -264,15 +266,13 @@ $(document).on('click', '#btnguardarProductos', function (e) {
   }
 
   /* Construye un FormData para todos los datos */
-
   const producto = new FormData($('#frmagregarProductos')[0]);
-  producto.set('operacion', 3);
-  producto.set('editar', editar);
-
   /* Si el instructivo es personalizado se carga 0 */
   if (producto.get('bases_instructivo') == "1") {
     producto.set('instructivo', 0);
   }
+  producto.set('operacion', 3);
+  producto.set('editar', editar);
 
   $.ajax({
     type: "POST",
@@ -314,7 +314,7 @@ $('#bases_instructivo').change(function (e) {
     $('.instructivo').val('');
   }
   else
-    $('.bases_instructivo').show();
+    $('.instructivo').show();
 
 });
 
