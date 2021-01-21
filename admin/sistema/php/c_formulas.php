@@ -59,7 +59,7 @@ switch ($op) {
                     }
                 }
             } else {
-                $id = $_POST['id'];
+                //$id = $_POST['id'];
                 $sql = "UPDATE formula SET porcentaje=:porcentaje WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
                 $query = $conn->prepare($sql);
                 $result = $query->execute([

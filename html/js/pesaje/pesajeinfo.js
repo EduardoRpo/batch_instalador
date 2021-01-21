@@ -84,9 +84,9 @@ $(document).ready(function () {
                 }
 
                 if (flagWeight) {
-                    return (data * batch.tamano_lote / 1000).toFixed(2).replace('.', ',');
+                    return ((data / 100) * batch.tamano_lote).toFixed(2).replace('.', ',');
                 } else {
-                    return (data * batch.tamano_lote).toFixed(2).replace('.', ',');
+                    return ((data / 100) * batch.tamano_lote * 1000).toFixed(2).replace('.', ',');
                 }
             },
 
@@ -97,9 +97,9 @@ $(document).ready(function () {
             render: (data, type, row) => {
 
                 if (flagWeight) {
-                    return (data * batch.tamano_lote / 1000 / $('#Notanques').val()).toFixed(2).replace('.', ',');
+                    return ((data / 100) * batch.tamano_lote / $('#Notanques').val()).toFixed(2).replace('.', ',');
                 } else {
-                    return (data * batch.tamano_lote / $('#Notanques').val()).toFixed(2).replace('.', ',');
+                    return ((data / 100) * batch.tamano_lote * 1000 / $('#Notanques').val()).toFixed(2).replace('.', ',');
                 }
 
             },
