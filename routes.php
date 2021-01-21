@@ -58,7 +58,7 @@
   $router->add('/despachos', function () {
     return Router::getRenderedHTML('html/despachos.php');
   });
-  $router->add('/despachoinfo/:idBatch/:referencia', function ($idBatch, $referencia) {
+  $router->add('/despachosinfo/:idBatch/:referencia', function ($idBatch, $referencia) {
     return Router::getRenderedHTML('html/despachosinfo.php');
   });
 
