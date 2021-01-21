@@ -92,7 +92,7 @@ function recargarDatos() {
 
         success: function (r) {
             var info = JSON.parse(r);
-            debugger;
+            
             $('#idbatch').val(info[0].referencia);
             $('#nombrereferencia').val(info[0].nombre);
             $('#marca').val(info[0].marca);
@@ -109,7 +109,7 @@ function recargarDatos() {
 /* calcular Tamaño del Lote */
 
 function CalculoTamanolote(valor) {
-    debugger;
+    
     var total = 0;
     unidades = parseInt(valor);
 
@@ -118,7 +118,7 @@ function CalculoTamanolote(valor) {
     if (batch === false) {
         presentacion = formatoGeneral($('#presentacioncomercial').val());
     } else {
-        presentacion = batch[0].presentacion;
+        presentacion = batch[0].presentacion_comercial;
     }
 
 

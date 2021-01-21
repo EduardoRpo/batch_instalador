@@ -239,7 +239,7 @@ function identificarDensidad(batch) {
 
 function calcularPeso(densidadAprobada) {
 
-  var peso_min = batch.presentacion * densidadAprobada;
+  var peso_min = batch.presentacion_comercial * densidadAprobada;
   var peso_minimo = formatoCO(peso_min);
 
   var peso_max = peso_min * (1 + 0.03);
