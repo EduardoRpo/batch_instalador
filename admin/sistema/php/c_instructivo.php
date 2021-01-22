@@ -31,7 +31,7 @@ switch ($op) {
         $tabla = $data["base_instructivo"];
         $producto = $data["instructivo"];
 
-        if ($tabla == 0) {
+        if ($tabla == 1) {
             $query = "SELECT ip.id, ip.pasos, ip.tiempo FROM instructivo_preparacion ip WHERE ip.id_producto = $referencia";
             ejecutarQuerySelect($conn, $query);
         } else {

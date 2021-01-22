@@ -34,7 +34,7 @@ class IntructivoPreparacionDao
     $tabla = $data["base_instructivo"];
     $producto = $data["id_nombre_producto"];
 
-    if ($tabla == 0){
+    if ($tabla == 1){
       $stmt = $connection->prepare("SELECT * FROM instructivo_preparacion WHERE id_producto = :referencia");
       $stmt->bindValue(':referencia', $idProduct, PDO::PARAM_INT);
     }

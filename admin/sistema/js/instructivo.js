@@ -52,7 +52,7 @@ $('#cmbReferenciaProductos').change(function (e) {
             $('#txtnombreProducto').val('');
             $('#txtnombreProducto').val(info.data[0].nombre_referencia);
 
-            if (info.data[0].base_instructivo == 1) {
+            if (info.data[0].base_instructivo == 0) {
                 $('.adicionarInstructivo').slideUp();
                 $('.btnadicionarInstructivo').prop('disabled', true);
                 $('.alert_instructivos_base').slideDown();
