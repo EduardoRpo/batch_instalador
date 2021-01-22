@@ -105,12 +105,7 @@ function firmarVerficadoDespeje(idfirma) {
     $.ajax({
         type: "POST",
         url: "../../html/php/despeje.php",
-        data: {
-            operacion: 5,
-            verifico: idfirma,
-            modulo: modulo,
-            batch: idBatch,
-        },
+        data: { operacion: 5, verifico: idfirma, modulo, idBatch },
 
         success: function (response) {
             alertify.set("notifier", "position", "top-right"); alertify.success("Firmado satisfactoriamente");
