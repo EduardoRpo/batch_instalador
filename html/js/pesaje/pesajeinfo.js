@@ -88,6 +88,7 @@ $(document).ready(function () {
                 } else {
                     return ((data / 100) * batch.tamano_lote * 1000).toFixed(2).replace('.', ',');
                 }
+                
             },
 
         },

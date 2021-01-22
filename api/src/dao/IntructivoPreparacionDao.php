@@ -32,13 +32,12 @@ class IntructivoPreparacionDao
 
     $data = $query->fetch(PDO::FETCH_ASSOC);
     $tabla = $data["base_instructivo"];
-    $producto = $data["id_nombre_producto"];
+    $producto = $data["instructivo"];
 
-    if ($tabla == 1){
+    if ($tabla == 1) {
       $stmt = $connection->prepare("SELECT * FROM instructivo_preparacion WHERE id_producto = :referencia");
       $stmt->bindValue(':referencia', $idProduct, PDO::PARAM_INT);
-    }
-    else{
+    } else {
       $stmt = $connection->prepare("SELECT id, pasos, tiempo FROM instructivos_base WHERE producto = :producto");
       $stmt->bindValue(':producto', $producto, PDO::PARAM_INT);
     }

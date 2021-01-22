@@ -319,7 +319,7 @@ include('modal/m_firma.php');
                                 <!-- <input type="text" class="form-control" style="width: 60px;" readonly> -->
                               </td>
                               <td id="espec_densidad"></td>
-                              <td><input class="selectpicker form-control especificacionInput" type="number" id="in_densidad"></td>
+                              <td><input class="selectpicker form-control especificacionInput" type="number" id="in_densidad" onkeyup="validar_densidad();"></td>
                             </tr>
                             <tr>
                               <td>Untuosidad</td>

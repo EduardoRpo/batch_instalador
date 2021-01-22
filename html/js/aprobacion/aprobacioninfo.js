@@ -3,7 +3,7 @@
 //valida que todos los campos esten diligenciados para el proceso y la firma
 
 function cargar(btn, idbtn) {
-    
+
     localStorage.setItem("idbtn", idbtn);
     id = btn.id;
 
@@ -103,4 +103,22 @@ function deshabilitarbtn() {
 
     $('.aprobacion_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
     $('.aprobacion_verificado').prop('disabled', false);
+}
+
+/* validar min y max en densidad */
+
+function validar_densidad() {
+    min = $('#in_densidad').attr('min');
+    max = $('#in_densidad').attr('max');
+   
+    min = parseFloat(min) - 0.05;
+    max = parseFloat(max) + 0.05;
+
+    densidad = parseFloat($('#in_densidad').val());
+
+    if (densidad > max || densidad < min) {
+        alertify.set("notifier", "position", "top-right"); alertify.error("La densidad se encuentra fuera de los rangos, valide nuevamente.");
+        return false;
+    }
+
 }
