@@ -53,7 +53,7 @@ $.ajax({
     'url': '../../html/php/modulo.php',
     'data': { proceso },
 
-    success: function (data) {
+    success: function (data, status, xhr) {
         if (data !== '') {
             const info = JSON.parse(data);
             modulo = info[0].id;
@@ -69,10 +69,35 @@ $.ajax({
 });
 
 /* Carga de datos de informacion del batch record seleccionado */
+function batch_record() {
+    $.ajax({
+        url: `../../api/batch/${idBatch}`,
+        type: 'GET',
+
+    }).done((data, status, xhr) => {
+
+        batch = data;
+        const tamano_lote = formatoCO(data.tamano_lote);
+
+        $('#in_numero_orden').val(data.numero_orden);
+        $('#in_numero_lote').val(data.numero_lote);
+        $('#in_referencia').val(data.referencia);
+        $('#in_nombre_referencia').val(data.nombre_referencia);
+        $('#in_linea').val(data.linea);
+        $('#in_fecha_programacion').val(data.fecha_programacion);
+        $('#in_tamano_lote').val(tamano_lote);
+
+        localStorage.setItem("orden", data.numero_orden);
+        localStorage.setItem("tamano_lote", data.tamano_lote);
+        return batch;
+    });
+}
+
 
 $.ajax({
     url: `../../api/batch/${idBatch}`,
-    type: 'GET'
+    type: 'GET',
+
 }).done((data, status, xhr) => {
 
     batch = data;
@@ -88,8 +113,8 @@ $.ajax({
 
     localStorage.setItem("orden", data.numero_orden);
     localStorage.setItem("tamano_lote", data.tamano_lote);
+    return batch;
 });
-
 
 /* Calcular la fecha del dia  */
 

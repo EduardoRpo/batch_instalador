@@ -104,7 +104,7 @@
                         <label class="labelTanques"></label>
 
                         <select class="form-control tnq" id="cmbTanque1" onchange="validarTanque(1);"></select>
-                        <input type="number" class="form-control tnq" id="txtCantidad1" onblur="CalcularTanque(1)">
+                        <input type="number" class="form-control tnq" id="txtCantidad1" onkeyup="CalcularTanque(1)">
                         <input type="number" class="form-control tnq" id="txtTotal1">
                         <button class="btn btn-warning" id="btnEliminar1" type="button" onclick="eliminarTanque(1);">X</button>
 

@@ -1,7 +1,7 @@
 let pres;
 let envase;
 let presentacion;
-let c = 0;
+let r1, r2, r3 = 0;
 
 //validacion de campos y botones
 
@@ -84,7 +84,7 @@ $(document).ready(function () {
   setTimeout(() => {
     if (proceso == 5) {
 
-      busqueda_multi(batch);
+      busqueda_multi();
       identificarDensidad(batch);
       deshabilitarbotones();
     }
@@ -105,8 +105,8 @@ function deshabilitarbotones() {
 
 /* Cargar Multipresentacion */
 
-function busqueda_multi(batch) {
-
+function busqueda_multi() {
+  //batch = batch_record();
   ocultarEnvasado();
   /* ocultarfilasTanques(5); */
 
@@ -114,7 +114,7 @@ function busqueda_multi(batch) {
 
     'method': 'POST',
     'url': '../../html/php/busqueda_multipresentacion.php',
-    'data': { id: idBatch },
+    'data': { idBatch },
 
     success: function (data) {
 
@@ -174,7 +174,7 @@ $('.ref_multi1').click(function (e) {
   e.preventDefault();
   ref_multi = $(`.ref1`).val();
   id_multi = 1;
-  c++;
+  r1++;
   presentacion_multi();
 });
 
@@ -182,7 +182,7 @@ $('.ref_multi2').click(function (e) {
   e.preventDefault();
   ref_multi = $(`.ref2`).val();
   id_multi = 2;
-  c++;
+  r2++;
   presentacion_multi();
 });
 
@@ -190,7 +190,7 @@ $('.ref_multi3').click(function (e) {
   e.preventDefault();
   ref_multi = $(`.ref3`).val();
   id_multi = 3;
-  c++;
+  r3++;
   presentacion_multi();
 });
 
@@ -239,7 +239,7 @@ function identificarDensidad(batch) {
 
 function calcularPeso(densidadAprobada) {
 
-  var peso_min = batch.presentacion_comercial * densidadAprobada;
+  var peso_min = batch.presentacion * densidadAprobada;
   var peso_minimo = formatoCO(peso_min);
 
   var peso_max = peso_min * (1 + 0.03);

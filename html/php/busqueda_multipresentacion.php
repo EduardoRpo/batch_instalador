@@ -4,16 +4,17 @@ if (!empty($_POST)) {
 
   // Buscar mulipresentacion para cargar en observaciones
 
-  $id_batch = $_POST['id'];
+  $batch = $_POST['idBatch'];
 
-  $sql = "SELECT m.id, m.id_batch, m.referencia, p.nombre_referencia, p.presentacion_comercial as presentacion, m.cantidad, m.total 
-            FROM multipresentacion m INNER JOIN producto p  
-            ON m.referencia = p.referencia 
+  $sql = "SELECT m.id, m.id_batch, m.referencia, p.nombre_referencia, p.presentacion_comercial as presentacion, linea.densidad, m.cantidad, m.total 
+            FROM multipresentacion m 
+            INNER JOIN producto p ON m.referencia = p.referencia 
+            INNER JOIN linea ON p.id_linea = linea.id
             WHERE m.id_batch = :id_batch ORDER BY presentacion";
 
   $query = $conn->prepare($sql);
   $result = $query->execute([
-    'id_batch' => $id_batch,
+    'id_batch' => $batch,
   ]);
   while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
     $arreglo[] = $data;

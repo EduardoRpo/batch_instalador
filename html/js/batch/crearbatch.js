@@ -11,6 +11,7 @@ function mostrarModal() {
     $("#modalCrearBatch").find("input,textarea,select").val("");
     $('#guardarBatch').html('Crear');
     $('.tcrearBatch').html('Crear Batch Record');
+    batch_record();
     cargarReferencias();
     cargarTanques();
     OcultarTanques();

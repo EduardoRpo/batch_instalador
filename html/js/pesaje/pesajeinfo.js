@@ -1,5 +1,6 @@
 let flagWeight = false;
 
+
 function cargar(btn, idbtn) {
 
     localStorage.setItem("idbtn", idbtn);
@@ -51,7 +52,7 @@ $.ajax({
 /* Formula Materia Prima  */
 
 $(document).ready(function () {
-
+    batch_record();
     tablePesaje = $('#tablePesaje').dataTable({
 
         ajax: {

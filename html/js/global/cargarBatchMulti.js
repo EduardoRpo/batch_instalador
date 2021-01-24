@@ -86,8 +86,10 @@ function cargarDesinfectante() {
 
 function cargarfirma2() {
 
-    if (typeof id_multi == 'undefined' || c != 1)
-        return false
+    if (typeof id_multi == 'undefined')
+        return false;
+    if (r1 > 1 || r2 > 1 || r3 > 1)
+        return false;
 
     ref_multi = $(`.ref${id_multi}`).val();
 
@@ -150,20 +152,20 @@ function cargardevolucionmaterial() {
                 firmado(info.data[0].realizo, 5);
                 firmado(info.data[0].verifico, 6);
             } else {
-                id_multi == 1 ? (start = 1, end = 3) : id_multi == 2 ? (start = 4, end = 7) : (start = 7, end = 10)
-
-                for (i = start; i < end; i++) {
-                    $(`#txtUtilizada${i}`).val(info.data[j].envasada);
-                    $(`#averias${i}`).val(info.data[j].averias);
-                    $(`#sobrante${i}`).val(info.data[j].sobrante);
-                    recalcular_valores();
-                    j++;
-                }
+                
+                $(`#utilizada_empaque${id_multi}`).val(info.data[0].envasada);
+                $(`#averias_empaque${id_multi}`).val(info.data[0].averias);
+                $(`#sobrante_empaque${id_multi}`).val(info.data[0].sobrante);
+                //recalcular_valores();
+                $(`#utilizada_otros${id_multi}`).val(info.data[1].envasada);
+                $(`#averias_otros${id_multi}`).val(info.data[1].averias);
+                $(`#sobrante_otros${id_multi}`).val(info.data[1].sobrante);
+                recalcular_valores();
 
                 firmado(info.data[0].realizo, 5);
                 firmado(info.data[0].verifico, 6);
             }
-
+            rendimiento_producto();
         }
     });
 }
@@ -215,12 +217,19 @@ function firmado(datos, posicion) {
         $(`#devolucion_realizado${id_multi}`).remove();
         $(`.devolucion_realizado${id_multi}`).css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
         $(`.devolucion_verificado${id_multi}`).prop('disabled', false);
+        $(`.conciliacion_realizado${id_multi}`).prop('disabled', false);
     }
 
     if (posicion == 6) {
         parent = $(`#devolucion_verificado${id_multi}`).parent();
         $(`#devolucion_verificado${id_multi}`).remove();
         $(`.devolucion_verificado${id_multi}`).css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
+    }
+
+    if (posicion == 7) {
+        parent = $(`#conciliacion_realizado${id_multi}`).parent();
+        $(`#conciliacion_realizado${id_multi}`).remove();
+        $(`.conciliacion_realizado${id_multi}`).css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
     }
 
     let firma = template.replace(':firma:', datos);

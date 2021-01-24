@@ -210,6 +210,7 @@ function guardarDatos() {
     let sumaTanques = $('.sumaTanques').val();
 
     if (sumaTanques == '' || sumaTanques == 0){
+        $('#sumaTanques').css('border-color', 'red');
         alertify.set("notifier", "position", "top-right"); alertify.error("Configure la cantidad de Tanques para el Batch.");
         return false;
     }

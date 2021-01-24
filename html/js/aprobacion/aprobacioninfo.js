@@ -1,5 +1,5 @@
 
-
+batch_record();
 //valida que todos los campos esten diligenciados para el proceso y la firma
 
 function cargar(btn, idbtn) {
@@ -105,7 +105,7 @@ function deshabilitarbtn() {
     $('.aprobacion_verificado').prop('disabled', false);
 }
 
-/* validar min y max en densidad */
+/* validar min y max en densidad aprobacion */
 
 function validar_densidad() {
     min = $('#in_densidad').attr('min');

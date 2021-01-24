@@ -119,7 +119,12 @@ function muestras_acondicionamiento() {
         $("#table_muestras_acondicionamiento").append(`
             <tbody>    
                 <tr id="fila${j}">
-                    <th>${j}</th>
+                    <td>${j}</td>
+                    <td>
+                        <div class="form-check">
+                            <input type="checkbox" class="check${j}" id="${j}" onclick="cumple_muestras(this)">
+                        </div>
+                    </td>
                     <td>
                         <select class="form-control apariencia_etiquetas${j}" name="" id="apariencia_etiquetas${j}">
                             <option disabled selected></option>    
@@ -266,3 +271,14 @@ $('#guardar_muestras_acondicionamiento').click(function (e) {
 
     $('#m_muestras_acond').modal('hide');
 });
+
+/* Genera cumple para todas las opciones en acondicionamiento */
+
+function cumple_muestras(obj) {
+    id = obj.id;
+    $(`#apariencia_etiquetas${id}`).val(1);
+    $(`#apariencia_termoencogible${id}`).val(1);
+    $(`#cumplimiento_empaque${id}`).val(1);
+    $(`#posicion_producto${id}`).val(1);
+    $(`#rotulo_caja${id}`).val(1);
+}

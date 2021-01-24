@@ -15,7 +15,8 @@
                         <table class="table table-bordered" id="table_muestras_acondicionamiento">
                             <thead>
                                 <tr>
-                                    <th class="centrado">No.</th>
+                                    <th class="centrado">No</th>
+                                    <th class="centrado"></th>
                                     <th class="centrado">Apariencia Etiquetas
                                         <!-- (Arrugas, quiebres, sucios, alineada, adherencia) -->
                                     </th>

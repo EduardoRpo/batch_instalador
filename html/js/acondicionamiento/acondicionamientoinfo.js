@@ -1,15 +1,81 @@
 let presentacion;
-let c = 0;
+let r1 = 0, r2 = 0, r3 = 0;
+let id_multi = 1;
 //Carga el proceso despues de cargar la data  del Batch
 
 $(document).ready(function () {
     setTimeout(() => {
-        busqueda_multi(batch);
+        busqueda_multi();
         /* identificarDensidad(batch); */
         deshabilitarbotones();
 
     }, 500);
 });
+
+/* Cargar Multipresentacion */
+
+function busqueda_multi() {
+
+    ocultar_acondicionamiento();
+    /* ocultarfilasTanques(5); */
+
+    $.ajax({
+
+        'method': 'POST',
+        'url': '../../html/php/busqueda_multipresentacion.php',
+        'data': { idBatch },
+
+        success: function (data) {
+
+            batchMulti = JSON.parse(data);
+
+            let j = 1;
+            if (batchMulti !== 0) {
+                for (let i = 0; i < batchMulti.length; i++) {
+                    referencia = batchMulti[i].referencia;
+                    presentacion = batchMulti[i].presentacion;
+                    cantidad = batchMulti[i].cantidad;
+                    densidad = batchMulti[i].densidad;
+                    total = batchMulti[i].total;
+
+                    $(`#ref${j}`).val(referencia);
+
+                    $(`#tanque${j}`).html(formatoCO(presentacion));
+                    $(`#cantidad${j}`).html(formatoCO(cantidad));
+                    $(`#unidadesProgramadas${j}`).val(cantidad);
+                    $(`#total${j}`).html(formatoCO(total));
+
+                    $(`#fila${j}`).attr("hidden", false);
+                    $(`#acondicionamiento${j}`).attr("hidden", false);
+                    $(`#acondicionamientoMulti${j}`).html('ACONDICIONAMIENTO PRESENTACIÓN: ' + presentacion);
+                    cargarTablaEnvase(j, referencia, cantidad);
+                    calcularMuestras(j, cantidad);
+                    rendimiento = rendimiento_producto(referencia, presentacion, cantidad, densidad, total);
+                    $(`#rendimientoProducto${j}`).val(rendimiento);
+                    j++;
+                }
+            } else {
+
+                $(`#tanque${j}`).html(formatoCO(batch.presentacion));
+                $(`#cantidad${j}`).html(formatoCO(batch.unidad_lote));
+                $(`#unidadesProgramadas${j}`).val(batch.unidad_lote);
+                $(`#total${j}`).html(formatoCO(batch.tamano_lote));
+                $(`#acondicionamientoMulti${j}`).html('ACONDICIONAMIENTO PRESENTACIÓN: ' + batch.presentacion);
+                $(`#ref${j}`).val(referencia);
+
+                cargarTablaEnvase(j, batch.referencia, batch.unidad_lote);
+                calcularMuestras(j, batch.unidad_lote);
+                rendimiento = rendimiento_producto(referencia, batch.presentacion, batch.unidad_lote, batch.densidad, batch.tamano_lote);
+                $(`#rendimientoProducto${j}`).val(rendimiento);
+            }
+            multi = j + 1;
+        },
+        error: function (r) {
+            alertify.set("notifier", "position", "top-right"); alertify.error("Error al Cargar la multipresentacion.");
+        }
+
+    });
+};
 
 /* deshabilitar botones */
 
@@ -32,63 +98,6 @@ function habilitarbotones() {
         $(`.controlpeso_realizado${id_multi}`).prop('disabled', false);
 }
 
-/* Cargar Multipresentacion */
-
-function busqueda_multi(batch) {
-
-    ocultar_acondicionamiento();
-    /* ocultarfilasTanques(5); */
-
-    $.ajax({
-
-        'method': 'POST',
-        'url': '../../html/php/busqueda_multipresentacion.php',
-        'data': { id: idBatch },
-
-        success: function (data) {
-
-            batchMulti = JSON.parse(data);
-
-            let j = 1;
-            if (batchMulti !== 0) {
-                for (let i = 0; i < batchMulti.length; i++) {
-                    referencia = batchMulti[i].referencia;
-                    presentacion = batchMulti[i].presentacion;
-                    cantidad = batchMulti[i].cantidad;
-                    total = batchMulti[i].total;
-
-                    $(`#ref${j}`).val(referencia);
-
-                    $(`#tanque${j}`).html(formatoCO(presentacion));
-                    $(`#cantidad${j}`).html(formatoCO(cantidad));
-                    $(`#total${j}`).html(formatoCO(total));
-
-                    $(`#fila${j}`).attr("hidden", false);
-                    $(`#acondicionamiento${j}`).attr("hidden", false);
-                    $(`#acondicionamientoMulti${j}`).html('ACONDICIONAMIENTO PRESENTACIÓN: ' + presentacion);
-                    cargarTablaEnvase(j, referencia, cantidad);
-                    calcularMuestras(j, cantidad);
-                    j++;
-                }
-            } else {
-
-                $(`#tanque${j}`).html(formatoCO(batch.presentacion));
-                $(`#cantidad${j}`).html(formatoCO(batch.unidad_lote));
-                $(`#total${j}`).html(formatoCO(batch.tamano_lote));
-                $(`#acondicionamientoMulti${j}`).html('ACONDICIONAMIENTO PRESENTACIÓN: ' + batch.presentacion);
-                $(`#ref${j}`).val(referencia);
-                cargarTablaEnvase(j, batch.referencia, batch.unidad_lote);
-                calcularMuestras(j, batch.unidad_lote);
-            }
-            multi = j + 1;
-        },
-        error: function (r) {
-            alertify.set("notifier", "position", "top-right"); alertify.error("Error al Cargar la multipresentacion.");
-        }
-
-    });
-};
-
 /* Ocultar Envasado */
 
 function ocultar_acondicionamiento() {
@@ -103,7 +112,7 @@ $('.ref_multi1').click(function (e) {
     e.preventDefault();
     ref_multi = $(`.ref1`).val();
     id_multi = 1;
-    c++;
+    r1++;
     presentacion_multi();
 });
 
@@ -111,7 +120,7 @@ $('.ref_multi2').click(function (e) {
     e.preventDefault();
     ref_multi = $(`.ref2`).val();
     id_multi = 2;
-    c++;
+    r2++;
     presentacion_multi();
 });
 
@@ -119,7 +128,7 @@ $('.ref_multi3').click(function (e) {
     e.preventDefault();
     ref_multi = $(`.ref3`).val();
     id_multi = 3;
-    c++;
+    r3++;
     presentacion_multi();
 });
 
@@ -182,7 +191,7 @@ function cargar(btn, idbtn) {
 
     /* Valida el proceso para la segunda seccion */
     if (id != 'despeje_realizado') {
-        let seleccion = $('.select-Linea').val();
+        let seleccion = $(`#select-Linea${id_multi}`).val();
 
         if (seleccion == null) {
             alertify.set("notifier", "position", "top-right"); alertify.error("Seleccione la linea de producción.");
@@ -200,19 +209,23 @@ function cargar(btn, idbtn) {
     }
 
     if (id == `devolucion_realizado${id_multi}`) {
-        //validar en que multipresentacion se encuentra
-        id_multi == 1 ? (start = 1, end = 4) : id_multi == 2 ? (start = 4, end = 7) : (start = 7, end = 10)
+        let utilizada = $(`#utilizada_empaque${id_multi}`).val();
+        let averias = $(`#averias_empaque${id_multi}`).val();
+        let sobrante = $(`#sobrante_empaque${id_multi}`).val();
 
-        //validar que los datos de toda la tabla se encuentran completos
-        for (let i = start; i < end; i++) {
-            let utilizada = $(`#txtUtilizada${i}`).val();
-            let averias = $(`#averias${i}`).val();
-            let sobrante = $(`#sobrante${i}`).val();
 
-            if ((utilizada * averias * sobrante) == 0) {
-                alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos");
-                return false;
-            }
+        if (utilizada == '' || averias == '' || sobrante == '') {
+            alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos");
+            return false;
+        }
+
+        utilizada = $(`#utilizada_otros${id_multi}`).val();
+        averias = $(`#averias_otros${id_multi}`).val();
+        sobrante = $(`#sobrante_otros${id_multi}`).val();
+
+        if (utilizada == '' || averias == '' || sobrante == '') {
+            alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos");
+            return false;
         }
     }
     /* Carga el modal para la autenticacion */
@@ -222,67 +235,43 @@ function cargar(btn, idbtn) {
     $('#m_firmar').modal('show');
 }
 
-$(`#select-Linea1`).change(function () {
+
+
+$(`#select-Linea1, #select-Linea2, #select-Linea3`).change(function () {
     cargarEquipos();
 })
+
 
 //recalcular valores en la tabla de devolucion de materiales envase
 function recalcular_valores() {
 
-    if (id_multi == 1)
-        min = 1; max = 3
+    let utilizada = $(`#utilizada_empaque${id_multi}`).val();
+    let averias = $(`#averias_empaque${id_multi}`).val();
+    let sobrante = $(`#sobrante_empaque${id_multi}`).val();
 
-    if (id_multi == 2) {
+    utilizada == '' ? utilizada = 0 : utilizada;
+    averias == '' ? averias = 0 : averias;
+    sobrante == '' ? sobrante = 0 : sobrante;
 
-    }
-    if (id_multi == 3) {
+    let total = parseInt(utilizada) + parseInt(averias) + parseInt(sobrante);
+    total = formatoCO(parseInt(total));
+    $(`#totalDevolucion_empaque${id_multi}`).html(total);
 
-    }
+    utilizada = $(`#utilizada_otros${id_multi}`).val();
+    averias = $(`#averias_otros${id_multi}`).val();
+    sobrante = $(`#sobrante_otros${id_multi}`).val();
 
-    for (let i = min; i < max; i++) {
+    utilizada == '' ? utilizada = 0 : utilizada;
+    averias == '' ? averias = 0 : averias;
+    sobrante == '' ? sobrante = 0 : sobrante;
 
-        let utilizada = $(`#txtUtilizada${i}`).val();
-        let averias = $(`#averias${i}`).val();
-        let sobrante = $(`#sobrante${i}`).val();
-
-        utilizada == '' ? utilizada = 0 : utilizada;
-        averias == '' ? averias = 0 : averias;
-        sobrante == '' ? sobrante = 0 : sobrante;
-
-        let total = parseInt(utilizada) + parseInt(averias) + parseInt(sobrante);
-        total = formatoCO(parseInt(total));
-        $(`#totalDevolucion${i}`).html(total);
-    }
-
-}
-
-
-let unidad = $('txtUnidadesProducidas').val();
-/* validar unidades producidads vs la envasada - 
-Enviar notificacion -- 
-Texto (Existe una diferencia entre las unidades envasadas y las 
-    acondicionadas de la orden de produccion XXX referencia XXXX)
- */
-
-function conciliacionRendimiento(retencion) {
-    let unidadEmpaque = 10; //se debe cargar desde envasado
-    let UnidadesProducidas = $(`#txtUnidadesProducidas${id_multi}`).val()
-
-    if (parseInt(retencion) > parseInt(UnidadesProducidas)) {
-        alertify.set("notifier", "position", "top-right"); alertify.error("La cantidad de muestras de retención no debe ser superior a la cantidad de Unidades Producidas");
-        var totalCajas = ''
-        var entregarBodega = ''
-    } else {
-        totalCajas = Math.floor((UnidadesProducidas - retencion) / unidadEmpaque);
-        entregarBodega = (UnidadesProducidas - retencion);
-    }
-
-    $(`#txtTotal-Cajas${id_multi}`).val(formatoCO(totalCajas));
-    $(`#txtEntrega-Bodega${id_multi}`).val(formatoCO(entregarBodega));
-
-    //txtReponsable, cargar el cargo de la tablar cargos el 1
+    total = parseInt(utilizada) + parseInt(averias) + parseInt(sobrante);
+    total = formatoCO(parseInt(total));
+    $(`#totalDevolucion_otros${id_multi}`).html(total);
 
 }
+
+
 
 function deshabilitarbtn() {
     //$(`.controlpeso_realizado${id_multi}`).css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
@@ -310,21 +299,31 @@ function deshabilitarbtn() {
 function registrar_material_sobrante(info) {
 
     let materialsobrante = [];
+    let datasobrante = {};
 
-    for (let i = 1; i < 3; i++) {
-        let datasobrante = {};
+    let itemref = $(`#refempaque${id_multi}`).html();
+    let envasada = $(`#utilizada_empaque${id_multi}`).val();
+    let averias = $(`#averias_empaque${id_multi}`).val();
+    let sobrante = $(`#sobrante_empaque${id_multi}`).val();
 
-        let itemref = $(`#refempaque${i}`).html();
-        let envasada = $(`#txtUtilizada${i}`).val();
-        let averias = $(`#averias${i}`).val();
-        let sobrante = $(`#sobrante${i}`).val();
+    datasobrante.referencia = itemref;
+    datasobrante.envasada = envasada;
+    datasobrante.averias = averias;
+    datasobrante.sobrante = sobrante;
+    materialsobrante.push(datasobrante);
 
-        datasobrante.referencia = itemref;
-        datasobrante.envasada = envasada;
-        datasobrante.averias = averias;
-        datasobrante.sobrante = sobrante;
-        materialsobrante.push(datasobrante);
-    }
+    datasobrante = {};
+    itemref = $(`#refempaque2`).html();
+    envasada = $(`#utilizada_otros${id_multi}`).val();
+    averias = $(`#averias_otros${id_multi}`).val();
+    sobrante = $(`#sobrante_otros${id_multi}`).val();
+
+    datasobrante.referencia = itemref;
+    datasobrante.envasada = envasada;
+    datasobrante.averias = averias;
+    datasobrante.sobrante = sobrante;
+    materialsobrante.push(datasobrante);
+
 
     $.ajax({
         type: "POST",
@@ -337,3 +336,42 @@ function registrar_material_sobrante(info) {
     });
 
 };
+
+let unidad = $('txtUnidadesProducidas').val();
+/* validar unidades producidads vs la envasada - 
+Enviar notificacion -- 
+Texto (Existe una diferencia entre las unidades envasadas y las 
+    acondicionadas de la orden de produccion XXX referencia XXXX)
+ */
+
+function conciliacionRendimiento() {
+    let unidadEmpaque = 10; //se debe cargar desde envasado
+    let unidadesProducidas = parseInt($(`#txtUnidadesProducidas${id_multi}`).val());
+    let retencion = $(`#txtMuestrasRetencion${id_multi}`).val();
+    let unidadesProgramadas = parseInt($(`#unidadesProgramadas${id_multi}`).val());
+
+    if (retencion == undefined || retencion == '')
+        retencion = 0;
+
+    if (parseInt(retencion) > parseInt(unidadesProducidas)) {
+        alertify.set("notifier", "position", "top-right"); alertify.error("La cantidad de muestras de retención no debe ser superior a la cantidad de Unidades Producidas");
+        var totalCajas = ''
+        var entregarBodega = ''
+    } else {
+        totalCajas = Math.floor((unidadesProducidas - retencion) / unidadEmpaque);
+        entregarBodega = (unidadesProducidas - retencion);
+    }
+
+    $(`#txtTotal-Cajas${id_multi}`).val(formatoCO(totalCajas));
+    $(`#txtEntrega-Bodega${id_multi}`).val(formatoCO(entregarBodega));
+    $(`#txtPorcentaje-Unidades${id_multi}`).val(((unidadesProducidas / unidadesProgramadas) * 100).toFixed(2) + "%");
+
+}
+
+function rendimiento_producto(referencia, presentacion, cantidad, densidad, total) {
+
+    let rendimiento = (presentacion * cantidad * densidad) / 1000;
+    rendimiento = ((rendimiento / total) * 100).toFixed(2) + "%";
+    return rendimiento;
+
+}

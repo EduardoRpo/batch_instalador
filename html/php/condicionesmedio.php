@@ -9,18 +9,29 @@ if (!empty($_POST)) {
   switch ($op) {
     case 1: // obtener el tiempo para mostrar modal
       $id_modulo = intval($_POST['modulo']);
+      $batch =  $_POST['idBatch'];
 
-      $query = "SELECT t_min, t_max 
-              FROM condicionesmedio_tiempo 
-              WHERE id_modulo = $id_modulo";
+      $sql = "SELECT realizo FROM batch_firmas2seccion WHERE modulo = :modulo AND batch = :batch";
+      $query = $conn->prepare($sql);
+      $query->execute([
+        'batch' => $batch,
+        'modulo' => $id_modulo,
+      ]);
 
-      ejecutarQuerySelect($conn, $query);
+      $rows = $query->rowCount();
+
+      if ($rows == 0) {
+        $query = "SELECT t_min, t_max FROM condicionesmedio_tiempo WHERE id_modulo = $id_modulo";
+        ejecutarQuerySelect($conn, $query);
+      } else
+        echo '3';
+
       break;
 
     case 2: // guardar Condiciones del Medio
       if (!empty($_POST)) {
         $temperatura = $_POST['temperatura'];
-        $humedad =  $_POST['humedad'];  
+        $humedad =  $_POST['humedad'];
         $modulo = $_POST['modulo'];
         $id_batch =  $_POST['id'];
 
@@ -33,11 +44,10 @@ if (!empty($_POST)) {
           'id_batch' => $id_batch,
           'modulo' => $modulo,
         ]);
-        if ($result) 
+        if ($result)
           echo '1';
         else
           echo '2';
-
       }
       break;
   }

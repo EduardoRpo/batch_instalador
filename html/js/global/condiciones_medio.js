@@ -2,18 +2,19 @@
 /* Mostrar ventana de Condiciones Medio de acuerdo con el tiempo establecido en la BD*/
 
 function cargar_condiciones_medio() {
+
     $.ajax({
         'type': 'POST',
         'url': '../../html/php/condicionesmedio.php',
-        'data': { operacion: "1", modulo: proceso },
+        'data': { operacion: "1", modulo: proceso, idBatch },
 
         success: function (resp) {
 
-            if (resp == 3) {
+            if (resp == 3)
                 return false;
-            }
+
             let t = JSON.parse(resp);
-            
+
             /* Calculo del tiempo para aparecer la ventana para ingresar las condiciones del medio */
 
             let tiempo = Math.round(Math.random() * (t.data[0].t_max - t.data[0].t_min) + parseInt(t.data[0].t_min));
@@ -33,7 +34,7 @@ function cargar_condiciones_medio() {
 function guardar_condicionesMedio() {
 
     let proceso = modulo;
-    let temperatura = parseInt ($('#temperatura').val());
+    let temperatura = parseInt($('#temperatura').val());
     let humedad = parseInt($('#humedad').val());
     let url = $(location).attr('href');
     let id_batch = url.split("/");
@@ -46,7 +47,7 @@ function guardar_condicionesMedio() {
     }
 
     /* Validacion del nivel de temperatura y humedad de acuerdo con los valores */
-    
+
     if (temperatura < 15 || temperatura > 40 || humedad < 55 || humedad > 75) {
         alertify.set("notifier", "position", "top-right"); alertify.error("La temperatura y/o humedad ingresada están por fuera de los rangos establecidos. Valide nuevamente!!");
         return false;
