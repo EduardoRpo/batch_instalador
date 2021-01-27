@@ -18,6 +18,8 @@ else if (isset($_FILES['datosExcel6']))
 	$datos = $_FILES['datosExcel6'];
 else if (isset($_FILES['datosExcel7']))
 	$datos = $_FILES['datosExcel7'];
+else if (isset($_FILES['datosExcel8']))
+	$datos = $_FILES['datosExcel8'];
 
 $tabla = $_POST['tabla'];
 
@@ -37,6 +39,8 @@ foreach ($datos as $data) {
 	$i++;
 }
 
+/* print_r($tabla);
+exit(); */
 /* Elimina todos los datos */
 $conn->query("DELETE FROM $tabla");
 

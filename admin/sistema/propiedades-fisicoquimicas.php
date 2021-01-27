@@ -387,7 +387,7 @@
               </div>
               <form id="formDataExcel8" enctype="multipart/form-data">
                 <input type="file" name="datosExcel8" id="datosExce83" class="form-control mb-3 ml-3 datosExcel" style="width: 600px; display:inline-flex">
-                <button type="button" id="btnCargarExcel8" class="btn btn-primary ml-3 btnCargarExcel" onclick="comprobarExtension(this.form, this.form.datosExcel8.value, 'color', 8);" disabled="disabled">Cargar Datos</button>
+                <button type="button" id="btnCargarExcel8" class="btn btn-primary ml-3 btnCargarExcel" onclick="comprobarExtension(this.form, this.form.datosExcel8.value, 'viscosidad', 8);" disabled="disabled">Cargar Datos</button>
               </form>
 
             </div>
