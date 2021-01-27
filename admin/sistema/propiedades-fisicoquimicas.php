@@ -348,7 +348,7 @@
               </div>
               <form id="formDataExcel7" enctype="multipart/form-data">
                 <input type="file" name="datosExcel7" id="datosExcel7" class="form-control mb-3 ml-3 datosExcel" style="width: 600px; display:inline-flex">
-                <button type="button" id="btnCargarExcel7" class="btn btn-primary ml-3 btnCargarExcel" onclick="comprobarExtension(this.form, this.form.datosExcel7.value, 'color', 7);" disabled="disabled">Cargar Datos</button>
+                <button type="button" id="btnCargarExcel7" class="btn btn-primary ml-3 btnCargarExcel" onclick="comprobarExtension(this.form, this.form.datosExcel7.value, 'untuosidad', 7);" disabled="disabled">Cargar Datos</button>
               </form>
 
             </div>
@@ -428,7 +428,7 @@
               </div>
               <form id="formDataExcel9" enctype="multipart/form-data">
                 <input type="file" name="datosExcel9" id="datosExcel9" class="form-control mb-3 ml-3 datosExcel" style="width: 600px; display:inline-flex">
-                <button type="button" id="btnCargarExcel9" class="btn btn-primary ml-3 btnCargarExcel" onclick="comprobarExtension(this.form, this.form.datosExcel9.value, 'color', 9);" disabled="disabled">Cargar Datos</button>
+                <button type="button" id="btnCargarExcel9" class="btn btn-primary ml-3 btnCargarExcel" onclick="comprobarExtension(this.form, this.form.datosExcel9.value, 'poder_espumoso', 9);" disabled="disabled">Cargar Datos</button>
               </form>
 
             </div>
