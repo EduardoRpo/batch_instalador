@@ -64,6 +64,11 @@ function preparar(datos) {
         firmaCalidad(info[0].id);
         firmar(info);
     }
+
+    if (btn_id == 'firma7') {
+        registrar_conciliacion(info[0].id);
+        firmar(info);
+    }
 }
 
 /* Almacenar datos de preguntas */

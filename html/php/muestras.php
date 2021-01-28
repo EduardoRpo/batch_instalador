@@ -101,5 +101,27 @@ if (!empty($_POST)) {
         echo "0";
       }
       break;
+
+      case 4:
+        $sql = "SELECT * FROM batch_muestras_acondicionamiento 
+                WHERE modulo = :modulo AND batch = :batch AND referencia = :ref_multi";
+  
+        $query = $conn->prepare($sql);
+        $result = $query->execute([
+          'modulo' => $modulo,
+          'batch' => $batch,
+          'ref_multi' => $ref_multi,
+        ]);
+  
+        while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
+          $arreglo["data"][] = $data;
+        }
+  
+        if (empty($arreglo))
+          echo '3';
+        else
+          echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+  
+        break;
   }
 }

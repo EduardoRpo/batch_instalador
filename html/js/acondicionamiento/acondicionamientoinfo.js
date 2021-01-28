@@ -55,7 +55,7 @@ function busqueda_multi() {
                     j++;
                 }
             } else {
-
+                batch == undefined ? location.reload() : batch;
                 $(`#tanque${j}`).html(formatoCO(batch.presentacion));
                 $(`#cantidad${j}`).html(formatoCO(batch.unidad_lote));
                 $(`#unidadesProgramadas${j}`).val(batch.unidad_lote);
@@ -197,8 +197,9 @@ function cargar(btn, idbtn) {
             alertify.set("notifier", "position", "top-right"); alertify.error("Seleccione la linea de producción.");
             return false;
         }
-
-        /* validar que todas las muestras se registraron */
+    }
+    /* validar que todas las muestras se registraron */
+    if (id == `controlpeso_realizado${id_multi}`) {
         i = localStorage.getItem(`totalmuestras${id_multi}`)
         cantidad_muestras = $(`#muestras${id_multi}`).val() * 5;
 
@@ -227,6 +228,20 @@ function cargar(btn, idbtn) {
             alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos");
             return false;
         }
+    }
+
+    if (id == `conciliacion_realizado${id_multi}`) {
+        let unidades = $(`#txtUnidadesProducidas${id_multi}`).val();
+        let retencion = $(`#txtMuestrasRetencion${id_multi}`).val();
+        let mov = $(`#txtNoMovimiento${id_multi}`).val();
+
+        let conciliacion = unidades * retencion * mov;
+
+        if (conciliacion == 0) {
+            alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos");
+            return false;
+        }
+
     }
     /* Carga el modal para la autenticacion */
 
@@ -331,6 +346,8 @@ function registrar_material_sobrante(info) {
         data: { materialsobrante, ref_multi, idBatch, modulo, info },
 
         success: function (response) {
+            if (modulo = 6)
+                $(`.conciliacion_realizado${id_multi}`).prop('disabled', false);
             alertify.set("notifier", "position", "top-right"); alertify.success("Firmado satisfactoriamente");
         }
     });
@@ -353,6 +370,8 @@ function conciliacionRendimiento() {
     if (retencion == undefined || retencion == '')
         retencion = 0;
 
+    isNaN(unidadesProducidas) ? unidadesProducidas = 0 : unidadesProducidas;
+
     if (parseInt(retencion) > parseInt(unidadesProducidas)) {
         alertify.set("notifier", "position", "top-right"); alertify.error("La cantidad de muestras de retención no debe ser superior a la cantidad de Unidades Producidas");
         var totalCajas = ''
@@ -373,5 +392,21 @@ function rendimiento_producto(referencia, presentacion, cantidad, densidad, tota
     let rendimiento = (presentacion * cantidad * densidad) / 1000;
     rendimiento = ((rendimiento / total) * 100).toFixed(2) + "%";
     return rendimiento;
+}
 
+function registrar_conciliacion(idfirma) {
+
+    let unidades = $(`#txtUnidadesProducidas${id_multi}`).val();
+    let retencion = $(`#txtMuestrasRetencion${id_multi}`).val();
+    let mov = $(`#txtNoMovimiento${id_multi}`).val();
+    let operacion = 1;
+
+    $.post("../../html/php/conciliacion_rendimiento.php", data = { operacion, unidades, retencion, mov, modulo, idBatch, ref_multi, idfirma },
+        function (data, textStatus, jqXHR) {
+            if (textStatus == 'success') {
+                alertify.set("notifier", "position", "top-right"); alertify.success("Conciliación registrada satisfactoriamente");
+                $(`.conciliacion_realizado${id_multi}`).css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
+            }
+        },
+    );
 }

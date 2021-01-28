@@ -152,7 +152,7 @@ function cargardevolucionmaterial() {
                 firmado(info.data[0].realizo, 5);
                 firmado(info.data[0].verifico, 6);
             } else {
-                
+
                 $(`#utilizada_empaque${id_multi}`).val(info.data[0].envasada);
                 $(`#averias_empaque${id_multi}`).val(info.data[0].averias);
                 $(`#sobrante_empaque${id_multi}`).val(info.data[0].sobrante);
@@ -166,10 +166,31 @@ function cargardevolucionmaterial() {
                 firmado(info.data[0].verifico, 6);
             }
             rendimiento_producto();
+            cargar_conciliacion();
         }
     });
 }
 
+/* Cargar conciliacion  */
+function cargar_conciliacion() {
+    let operacion = 2;
+    $.post("../../html/php/conciliacion_rendimiento.php", data = { operacion, idBatch, ref_multi },
+        function (data, textStatus, jqXHR) {
+            if (textStatus == 'success') {
+                let info = JSON.parse(data);
+                if (data == 0)
+                    return false;
+                $(`#txtUnidadesProducidas${id_multi}`).val(info[0].unidades_producidas);
+                $(`#txtMuestrasRetencion${id_multi}`).val(info[0].muestras_retencion);
+                $(`#txtNoMovimiento${id_multi}`).val(info[0].mov_inventario);
+                conciliacionRendimiento();
+                firmado(info[0].urlfirma, 7);
+            } else {
+                return false;
+            }
+        },
+    );
+}
 
 /* Registro de Firma */
 

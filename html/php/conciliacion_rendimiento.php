@@ -1,0 +1,57 @@
+<?php
+if (!empty($_POST)) {
+    require_once('../../conexion.php');
+
+
+    $op = $_POST['operacion'];
+    $batch =  $_POST['idBatch'];
+    $referencia = $_POST['ref_multi'];
+
+    switch ($op) {
+        case 1: //almacenar conciliacion
+
+            $unidades =  $_POST['unidades'];
+            $retencion =  $_POST['retencion'];
+            $movimiento =  $_POST['mov'];
+            $modulo = $_POST['modulo'];
+            $entrego = $_POST['idfirma'];
+
+            $sql = "INSERT INTO batch_conciliacion_rendimiento 
+            SET unidades_producidas = :unidades, muestras_retencion = :retencion, mov_inventario = :movimiento, 
+                batch = :batch, modulo = :modulo, ref_multi = :referencia, entrego = :entrego";
+            $query = $conn->prepare($sql);
+            $query->execute([
+                'unidades' => $unidades,
+                'retencion' => $retencion,
+                'movimiento' => $movimiento,
+                'batch' => $batch,
+                'modulo' => $modulo,
+                'referencia' => $referencia,
+                'entrego' => $entrego,
+            ]);
+            break;
+
+        case 2:
+            $sql = "SELECT c.unidades_producidas, c.muestras_retencion, c.mov_inventario, u.urlfirma 
+                    FROM batch_conciliacion_rendimiento c
+                    INNER JOIN usuario u ON u.id = c.entrego
+                    WHERE batch = :batch AND ref_multi = :referencia";
+            $query = $conn->prepare($sql);
+            $query->execute([
+                'batch' => $batch,
+                'referencia' => $referencia,
+            ]);
+
+            while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
+                $arreglo[] = $data;
+            }
+            if (empty($arreglo)) {
+                echo '0';
+                exit();
+            }
+
+            echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+
+            break;
+    }
+}

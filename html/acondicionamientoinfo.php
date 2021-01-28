@@ -287,7 +287,7 @@ include('modal/m_muestras_acondicionamiento.php');
                     <input type="text" class="form-control" id="controlpeso_realizado1" readonly>
                   </div>
                   <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                    <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_realizado1" id="controlpeso_realizado1" style="width: 180px; height: 38px;" onclick="cargar(this, 'firma3')">Firmar</button>
+                    <button type="button" class="btn waves-effect waves-light btn-danger controlpeso controlpeso_realizado1" id="controlpeso_realizado1" style="width: 180px; height: 38px;" onclick="cargar(this, 'firma3')">Firmar</button>
                   </div>
 
                   <div class="col-md-4 align-self-center">
@@ -295,7 +295,7 @@ include('modal/m_muestras_acondicionamiento.php');
                     <input type="text" class="form-control" id="controlpeso_verificado1" readonly>
                   </div>
                   <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                    <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_verificado1" id="controlpeso_verificado1" style="width: 180px; height: 38px;" onclick="cargar(this, 'firma4')">Firmar</button>
+                    <button type="button" class="btn waves-effect waves-light btn-danger controlpeso controlpeso_verificado1" id="controlpeso_verificado1" style="width: 180px; height: 38px;" onclick="cargar(this, 'firma4')">Firmar</button>
                   </div>
                 </div>
                 <div class="col-md-12 align-self-center">
@@ -416,12 +416,28 @@ include('modal/m_muestras_acondicionamiento.php');
 
                   </div>
 
-                  <div class="firma mt-5 mb-5 mr-4">
+                  <div class="row" style="margin: 1%">
+                    <div class="col-md-4 align-self-center">
+                    </div>
+                    <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
+                    </div>
+
+                    <div class="col-md-4 align-self-center  mb-5">
+                      <label for="recipient-name" class="col-form-label">Entregado por:</label>
+                      <input type="text" class="form-control conciliacion_realizado1" id="conciliacion_realizado1" readonly>
+                    </div>
+                    <div class="col-md-2 align-self-center mb-5" style="margin-top: 2.8%">
+                      <button type="button" class="btn waves-effect waves-light btn-danger conciliacion_realizado1" id="conciliacion_realizado1" onclick="cargar(this, 'firma7')" style="width: 180px; height: 38px;">Firmar</button>
+                    </div>
+                  </div>
+
+
+                  <!-- <div class="firma mt-5 mb-5 mr-4">
                     <label for="recipient-name" class="col-form-label entrego-acon">Entregó</label>
                     <input type="text" class="form-control conciliacion_realizado1" id="conciliacion_realizado1" style="width: 180px" readonly>
 
                     <button type="button" class="btn waves-effect waves-light btn-danger conciliacion_realizado1 " id="conciliacion_realizado1" onclick="cargar(this, 'firma7')" style="width: 180px; height: 38px;">Firmar</button>
-                  </div>
+                  </div> -->
 
                   <!-- <div class="row" style="margin: 1%"> -->
                   <!--          <div class="col-md-12 col-2 align-self-center">
@@ -543,7 +559,7 @@ include('modal/m_muestras_acondicionamiento.php');
                     <input type="text" class="form-control" id="controlpeso_realizado2" readonly>
                   </div>
                   <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                    <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_realizado2" id="controlpeso_realizado2" style="width: 180px; height: 38px;" onclick="cargar(this, 'firma3')">Firmar</button>
+                    <button type="button" class="btn waves-effect waves-light btn-danger controlpeso controlpeso_realizado2" id="controlpeso_realizado2" style="width: 180px; height: 38px;" onclick="cargar(this, 'firma3')">Firmar</button>
                   </div>
 
                   <div class="col-md-4 align-self-center">
@@ -668,16 +684,30 @@ include('modal/m_muestras_acondicionamiento.php');
                       <label for="recipient-name" class="col-form-label">Responsable Movimiento Ofimatica:</label>
                       <input type="text" class="form-control centrado" id="txtReponsable2" value="Director de Producción (CRC)" readonly>
                     </div>
-
-
                   </div>
 
-                  <div class="firma mt-5 mb-5 mr-4">
+
+                  <div class="row" style="margin: 1%">
+                    <div class="col-md-4 align-self-center">
+                    </div>
+                    <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
+                    </div>
+
+                    <div class="col-md-4 align-self-center  mb-5">
+                      <label for="recipient-name" class="col-form-label">Entregado por:</label>
+                      <input type="text" class="form-control conciliacion_realizado2" id="conciliacion_realizado2" readonly>
+                    </div>
+                    <div class="col-md-2 align-self-center mb-5" style="margin-top: 2.8%">
+                      <button type="button" class="btn waves-effect waves-light btn-danger conciliacion_realizado2" id="conciliacion_realizado2" onclick="cargar(this, 'firma7')" style="width: 180px; height: 38px;">Firmar</button>
+                    </div>
+                  </div>
+
+                  <!-- <div class="firma mt-5 mb-5 mr-4">
                     <label for="recipient-name" class="col-form-label entrego-acon">Entregó</label>
                     <input type="text" class="form-control conciliacion_realizado2" id="conciliacion_realizado2" style="width: 180px" readonly>
 
                     <button type="button" class="btn waves-effect waves-light btn-danger conciliacion_realizado2" id="conciliacion_realizado2" onclick="cargar(this, 'firma7')" style="width: 180px; height: 38px;">Firmar</button>
-                  </div>
+                  </div> -->
 
                   <!-- <div class="row" style="margin: 1%"> -->
                   <!--          <div class="col-md-12 col-2 align-self-center">
@@ -799,7 +829,7 @@ include('modal/m_muestras_acondicionamiento.php');
                     <input type="text" class="form-control" id="controlpeso_realizado3" readonly>
                   </div>
                   <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                    <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_realizado3" id="controlpeso_realizado3" style="width: 180px; height: 38px;" onclick="cargar(this, 'firma3')">Firmar</button>
+                    <button type="button" class="btn waves-effect waves-light btn-danger controlpeso controlpeso_realizado3" id="controlpeso_realizado3" style="width: 180px; height: 38px;" onclick="cargar(this, 'firma3')">Firmar</button>
                   </div>
 
                   <div class="col-md-4 align-self-center">
@@ -924,16 +954,31 @@ include('modal/m_muestras_acondicionamiento.php');
                       <label for="recipient-name" class="col-form-label">Responsable Movimiento Ofimatica:</label>
                       <input type="text" class="form-control centrado" id="txtReponsable3" value="Director de Producción (CRC)" readonly>
                     </div>
-
-
                   </div>
 
-                  <div class="firma mt-5 mb-5 mr-4">
+                  <div class="row" style="margin: 1%">
+                    <div class="col-md-4 align-self-center">
+                    </div>
+                    <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
+                    </div>
+
+                    <div class="col-md-4 align-self-center  mb-5">
+                      <label for="recipient-name" class="col-form-label">Entregado por:</label>
+                      <input type="text" class="form-control conciliacion_realizado3" id="conciliacion_realizado3" readonly>
+                    </div>
+                    <div class="col-md-2 align-self-center mb-5" style="margin-top: 2.8%">
+                      <button type="button" class="btn waves-effect waves-light btn-danger conciliacion_realizado3" id="conciliacion_realizado3" onclick="cargar(this, 'firma7')" style="width: 180px; height: 38px;">Firmar</button>
+                    </div>
+                  </div>
+
+
+                  <!-- <div class="firma mt-5 mb-5 mr-4">
                     <label for="recipient-name" class="col-form-label entrego-acon">Entregó</label>
                     <input type="text" class="form-control conciliacion_realizado3" id="conciliacion_realizado3" style="width: 180px" readonly>
 
                     <button type="button" class="btn waves-effect waves-light btn-danger conciliacion_realizado3" id="conciliacion_realizado2" onclick="cargar(this, 'firma7')" style="width: 180px; height: 38px;">Firmar</button>
-                  </div>
+                  </div> -->
+
 
                   <!-- <div class="row" style="margin: 1%"> -->
                   <!--          <div class="col-md-12 col-2 align-self-center">

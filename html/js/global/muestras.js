@@ -182,18 +182,22 @@ function muestras_acondicionamiento() {
         $.ajax({
             type: "POST",
             url: '../../html/php/muestras.php',
-            data: { operacion: 2, idBatch, modulo, ref_multi },
+            data: { operacion: 4, idBatch, modulo, ref_multi },
 
             success: function (response) {
                 if (response == 3)
                     return false;
 
                 let info = JSON.parse(response)
-                j = 1;
+                i = 1;
 
-                for (let i = 0; i < info.data.length; i++) {
-                    $(`#txtMuestra${j}`).val(info.data[i].muestra);
-                    j++;
+                for (let j = 0; j < info.data.length; j++) {
+                    $(`#apariencia_etiquetas${i}`).val(info.data[j].apariencia_etiquetas);
+                    $(`#apariencia_termoencogible${i}`).val(info.data[j].apariencia_termoencogible);
+                    $(`#cumplimiento_empaque${i}`).val(info.data[j].cumplimiento_empaque);
+                    $(`#posicion_producto${i}`).val(info.data[j].posicion_producto);
+                    $(`#rotulo_caja${i}`).val(info.data[j].rotulo_caja);
+                    i++;
                 }
             }
         });
