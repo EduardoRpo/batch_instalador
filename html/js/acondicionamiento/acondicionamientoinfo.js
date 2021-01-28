@@ -39,6 +39,7 @@ function busqueda_multi() {
                     total = batchMulti[i].total;
 
                     $(`#ref${j}`).val(referencia);
+                    $(`#unidad_empaque${j}`).val(batchMulti[i].unidad_empaque);
 
                     $(`#tanque${j}`).html(formatoCO(presentacion));
                     $(`#cantidad${j}`).html(formatoCO(cantidad));
@@ -62,6 +63,7 @@ function busqueda_multi() {
                 $(`#total${j}`).html(formatoCO(batch.tamano_lote));
                 $(`#acondicionamientoMulti${j}`).html('ACONDICIONAMIENTO PRESENTACIÓN: ' + batch.presentacion);
                 $(`#ref${j}`).val(referencia);
+                $(`#unidad_empaque${j}`).val(batch.unidad_empaque);
 
                 cargarTablaEnvase(j, batch.referencia, batch.unidad_lote);
                 calcularMuestras(j, batch.unidad_lote);
@@ -362,7 +364,7 @@ Texto (Existe una diferencia entre las unidades envasadas y las
  */
 
 function conciliacionRendimiento() {
-    let unidadEmpaque = 10; //se debe cargar desde envasado
+    let unidadEmpaque = $(`#unidad_empaque${id_multi}`).val(); //se debe cargar desde envasado
     let unidadesProducidas = parseInt($(`#txtUnidadesProducidas${id_multi}`).val());
     let retencion = $(`#txtMuestrasRetencion${id_multi}`).val();
     let unidadesProgramadas = parseInt($(`#unidadesProgramadas${id_multi}`).val());

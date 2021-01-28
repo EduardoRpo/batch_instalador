@@ -202,6 +202,7 @@ include('modal/m_muestras_acondicionamiento.php');
                 <button class="btn btn-link collapsed ref_multi1" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
                   <b id="acondicionamientoMulti1">ACONDICIONAMIENTO</b>
                   <input type="text" class="ref1" id="ref1" hidden>
+                  <input type="text" class="unidad_empaque1" id="unidad_empaque1" hidden>
                 </button>
               </h5>
             </div>
@@ -287,7 +288,7 @@ include('modal/m_muestras_acondicionamiento.php');
                     <input type="text" class="form-control" id="controlpeso_realizado1" readonly>
                   </div>
                   <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                    <button type="button" class="btn waves-effect waves-light btn-danger controlpeso controlpeso_realizado1" id="controlpeso_realizado1" style="width: 180px; height: 38px;" onclick="cargar(this, 'firma3')">Firmar</button>
+                    <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_realizado1" id="controlpeso_realizado1" style="width: 180px; height: 38px;" onclick="cargar(this, 'firma3')">Firmar</button>
                   </div>
 
                   <div class="col-md-4 align-self-center">
@@ -474,6 +475,7 @@ include('modal/m_muestras_acondicionamiento.php');
                 <button class="btn btn-link ref_multi2 collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
                   <b id="acondicionamientoMulti2">ACONDICIONAMIENTO</b>
                   <input type="text" class="ref2" id="ref2" hidden>
+                  <input type="text" class="unidad_empaque2" id="unidad_empaque2" hidden>
                 </button>
               </h5>
             </div>
@@ -559,7 +561,7 @@ include('modal/m_muestras_acondicionamiento.php');
                     <input type="text" class="form-control" id="controlpeso_realizado2" readonly>
                   </div>
                   <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                    <button type="button" class="btn waves-effect waves-light btn-danger controlpeso controlpeso_realizado2" id="controlpeso_realizado2" style="width: 180px; height: 38px;" onclick="cargar(this, 'firma3')">Firmar</button>
+                    <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_realizado2" id="controlpeso_realizado2" style="width: 180px; height: 38px;" onclick="cargar(this, 'firma3')">Firmar</button>
                   </div>
 
                   <div class="col-md-4 align-self-center">
@@ -744,6 +746,7 @@ include('modal/m_muestras_acondicionamiento.php');
                 <button class="btn btn-link collapsed ref_multi3" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
                   <b id="acondicionamientoMulti3">ACONDICIONAMIENTO</b>
                   <input type="text" class="ref3" id="ref3" hidden>
+                  <input type="text" class="unidad_empaque3" id="unidad_empaque3" hidden>
                 </button>
               </h5>
             </div>
@@ -829,7 +832,7 @@ include('modal/m_muestras_acondicionamiento.php');
                     <input type="text" class="form-control" id="controlpeso_realizado3" readonly>
                   </div>
                   <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                    <button type="button" class="btn waves-effect waves-light btn-danger controlpeso controlpeso_realizado3" id="controlpeso_realizado3" style="width: 180px; height: 38px;" onclick="cargar(this, 'firma3')">Firmar</button>
+                    <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_realizado3" id="controlpeso_realizado3" style="width: 180px; height: 38px;" onclick="cargar(this, 'firma3')">Firmar</button>
                   </div>
 
                   <div class="col-md-4 align-self-center">
