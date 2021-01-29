@@ -1,10 +1,9 @@
 <?php
 session_start();
-include('modal/modal_firma.php');
+//include('modal/modal_firma.php');
 include('modal/modal_cambiarContrasena.php');
-include('modal/modal_observaciones.php');
+//include('modal/modal_observaciones.php');
 include('modal/m_firma.php');
-include('modal/m_muestras.php');
 ?>
 
 <!DOCTYPE html>
@@ -149,6 +148,7 @@ include('modal/m_muestras.php');
                 <button class="btn btn-link collapsed ref_multi1" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
                   <b id="despachosMulti1">DESPACHOS</b>
                   <input type="text" class="ref1" id="ref1" hidden>
+                  <input type="text" class="unidad_empaque1" id="unidad_empaque1" hidden>
                 </button>
               </h5>
             </div>
@@ -156,247 +156,87 @@ include('modal/m_muestras.php');
               <div class="card-body">
                 <div class="row" style="margin: 1%">
                   <div class="col-md-12 align-self-center">
-                    <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Entrega Material Envase</h3>
+                    <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Despachos</h3>
                   </div>
 
                   <div class="col-md-12 align-self-center">
                     <div class="card">
                       <div class="card-block">
-                        <div class="table-responsive">
-                          <table class="table table-striped table-bordered">
-                            <thead>
-                              <tr>
-                                <th class="centrado">Referencia</th>
-                                <th class="centrado">Descripción</th>
-                                <th class="centrado">Cantidad</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td id="envase1" class="centrado envase1"></td>
-                                <td id="descripcion_envase1" class="descripcion_envase1"></td>
-                                <td id="unidades2" class="centrado unidades1"></td>
-                              </tr>
-                              <tr>
-                                <td id="tapa1" class="centrado tapa1"></td>
-                                <td id="descripcion_tapa1" class="descripcion_tapa1"></td>
-                                <td id="unidades1" class="centrado unidades1"></td>
-                              </tr>
-                              <tr>
-                                <td id="etiqueta1" class="centrado etiqueta1"></td>
-                                <td id="descripcion_etiqueta1" class="descripcion_etiqueta1"></td>
-                                <td id="unidades3" class="centrado unidades1"></td>
-                              </tr>
-                              <!--<tr>
-                                <td id="empaque1" class="centrado empaque1"></td>
-                                <td id="descripcion_empaque1" class="descripcion_empaque1"></td>
-                                <td id="unidades1e" class="centrado unidades1e"></td>
-                              </tr>
-                              <tr>
-                                <td id="otros1" class="centrado otros1"></td>
-                                <td id="descripcion_otros1" class="descripcion_otros1"></td>
-                                <td id="unidades4" class="centrado unidades1"></td>
-                              </tr> -->
-                            </tbody>
-                          </table>
+                        <div class="despachos">
+
+                          <div class="group">
+                            <label for="recipient-name" class="col-form-label">Unidades Recibidas</label>
+                            <input type="number" class="form-control centrado" id="unidades_recibidas_acond1" readonly>
+                          </div>
+
+                          <div class="group">
+                            <label for="recipient-name" class="col-form-label">Cajas</label>
+                            <input type="number" class="form-control centrado" id="cajas_acond1" readonly>
+                          </div>
+
+                          <div class=" group">
+                            <label for="recipient-name" class="col-form-label">No Movimiento Inventario</label>
+                            <input type="number" class="form-control centrado" id="mov_inventario_acond1" oncopy="return false" readonly>
+                          </div>
+
+                          <div class=" group">
+                            <label for="recipient-name" class="col-form-label">Muestras retención</label>
+                            <input type="number" class="form-control centrado" id="mestras_retencion_acond1" readonly>
+                          </div>
+
+                          <div class="group">
+                            <label for="recipient-name" class="col-form-label">Unidades Recibidas</label>
+                            <input type="number" class="form-control centrado" id="unidades_recibidas1">
+                          </div>
+
+                          <div class="group">
+                            <label for="recipient-name" class="col-form-label">Cajas</label>
+                            <input type="number" class="form-control centrado" id="cajas1">
+                          </div>
+
+                          <div class=" group">
+                            <label for="recipient-name" class="col-form-label">No Movimiento Inventario</label>
+                            <input type="number" class="form-control centrado" id="mov_inventario1">
+                          </div>
+
+                          <div class=" group">
+                            <!-- <label for="recipient-name" class="col-form-label">Muestras retención</label>
+                            <input type="number" class="form-control centrado" id="mestras_retencion_acond1" readonly> -->
+                          </div>
+
+                          <div class="group obs">
+                            <label for="recipient-name" class="col-form-label">Observaciones</label>
+                            <textarea class="form-control" aria-label="With textarea" id="obs1"></textarea>
+                          </div>
+
                         </div>
-                      </div>
-                    </div>
 
-                    <div class="id_despachosra_loteadora">
-
-                      <div class="group">
-                        <label for="recipient-name" class="col-form-label">Linea</label>
-                        <select class="selectpicker form-control select-linea" id="select-Linea1">
-                          <option selected hidden>Seleccionar Linea</option>
-
-                        </select>
-                      </div>
-
-                      <div class="group">
-                        <label for="recipient-name" class="col-form-label">Digite el lote (requerido)</label>
-                        <input type="text" class="form-control validarLote" id="validarLote1" onblur="revisarLote();">
-                      </div>
-
-                      <div class="group">
-                        <label for="recipient-name" class="col-form-label despachosra">Identificación despachosra</label>
-                        <input type="text" class="form-control despachosra1" readonly>
-                      </div>
-
-                      <div class="group">
-                        <label for="recipient-name" class="col-form-label loteadora">Identificación Loteadora</label>
-                        <input type="text" class="form-control loteadora1" readonly>
-                      </div>
-
-                    </div>
-                    <hr>
-
-                    <div class="col-md-12 align-self-center">
-                      <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Especificaciones Técnicas</h3>
-                    </div>
-                    <div class="especificaciones_tecnicas">
-
-                      <div class="especificaciones__group">
-                        <label for="recipient-name" class="col-form-label">Mínimo:</label>
-                        <input type="text" class="form-control centrado minimo" id="minimo1" readonly>
-                      </div>
-
-                      <div class="especificaciones__group">
-                        <label for="recipient-name" class="col-form-label">Medio:</label>
-                        <input type="text" class="form-control centrado medio" id="medio1" readonly>
-                      </div>
-
-                      <div class="especificaciones__group">
-                        <label for="recipient-name" class="col-form-label">Máximo:</label>
-                        <input type="text" class="form-control centrado maximo" id="maximo1" readonly>
-                      </div>
-
-                    </div>
-
-                    <div class="row" style="margin: 1%">
-                      <div class="col-md-12 align-self-center mb-3">
-                        <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Control de Peso en Proceso</h3>
-                      </div>
-                      <div class="col-md-2 align-self-center" style="margin-top: 1%">
-                        <label for="recipient-name" class="col-form-label">No. Muestras</label>
-                      </div>
-                      <div class="col-md-2 align-self-center" style="margin-top: 1%">
-                        <input type="text" class="form-control" id="muestras1" style="text-align: center;" readonly>
-                      </div>
-                      <div class="col-md-1 align-self-center" style="margin-top: 1%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;" onclick="muestrasEnvase();" data-toggle="modal" data-target="#m_muestras">Iniciar</button> <!--   -->
-                      </div>
-                      <div class="col-md-1 align-self-center" style="margin-top: 1%">
-                        <label for="recipient-name" class="col-form-label">Promedio</label>
-                      </div>
-                      <div class="col-md-3 align-self-center" style="margin-top: 1%">
-                        <input type="text" class="form-control" id="promedio1" style="text-align:center;" disabled>
-                      </div>
-                      <div class="col-md-4 align-self-center">
-                        <label for="controlpeso_realizado" class="col-form-label">Realizado Por</label>
-                        <input type="text" class="form-control" id="controlpeso_realizado1" readonly>
-                      </div>
-                      <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_realizado1" id="controlpeso_realizado1" onclick="cargar(this, 'firma3')" style="width: 100%; height: 38px;">Firmar</button>
-                      </div>
-
-                      <div class="col-md-4 align-self-center">
-                        <label for="controlpeso_verificado" class="col-form-label">Verificado Por</label>
-                        <input type="text" class="form-control" id="controlpeso_verificado1" readonly>
-                      </div>
-                      <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_verificado1" id="controlpeso_verificado1" onclick="cargar(this, 'firma4')" style="width: 100%; height: 38px;">Firmar</button>
-                      </div>
-
-                    </div>
-                    <div class="row" style="margin: 1%">
-                      <div class="col-md-12 align-self-center mt-3">
-                        <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Devolución Material Envase Sobrante</h3>
-                      </div>
-
-                      <div class="col-md-12 align-self-center">
-                        <div class="card">
-                          <div class="card-block">
-
-                            <div class="table-responsive">
-                              <table id="envases" class="table table-striped table-bordered">
-                                <thead>
-                                  <tr>
-                                    <!-- <th>Fecha</th> -->
-                                    <th>Referencia</th>
-                                    <th>Descripción</th>
-                                    <th>Recibida</th>
-                                    <th>Envasada</th>
-                                    <th>Averias</th>
-                                    <th>Sobrante</th>
-                                    <th>Total</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                    <td id="envase1" class="envase1 refEmpaque1"></td>
-                                    <td id="descripcion_envase1" class="descripcion_envase1"></td>
-                                    <td id="unidades5" class="centrado unidades1"></td>
-                                    <td><input type="number" id="txtEnvasada1" min="1" class="form-control centrado txtEnvasada1" style="width: 110px;" onkeyup="devolucionMaterialEnvasada(this.value);"></td>
-                                    <td><input type="number" id="averias1" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td><input type="number" id="sobrante1" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();" ></td>
-                                    <td id="totalDevolucion1" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
-                                  </tr>
-                                  <tr>
-                                    <td id="tapa1" class="tapa1 refEmpaque2"></td>
-                                    <td id="descripcion_tapa1" class="descripcion_tapa1"></td>
-                                    <td id="unidades6" class="centrado unidades1"></td>
-                                    <td id="txtEnvasada2" class="centrado envasada1"></td>
-                                    <td><input type="number" id="averias2" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td><input type="number" id="sobrante2" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td id="totalDevolucion2" class="centrado"></td><!-- <input type="number" id="totalDevolucion1" class="form-control centrado" readonly> -->
-                                  </tr>
-                                  <tr>
-                                    <td id="etiqueta1" class="etiqueta1 refEmpaque3"></td>
-                                    <td id="descripcion_etiqueta1" class="descripcion_etiqueta1"></td>
-                                    <td id="unidades7" class="centrado unidades1"></td>
-                                    <td id="txtEnvasada3" class="centrado envasada1"></td>
-                                    <td><input type="number" id="averias3" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td><input type="number" id="sobrante3" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td id="totalDevolucion3" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
-                                  </tr>
-                                  <!-- <tr>
-                                    <td id="empaque1" class="empaque1"></td>
-                                    <td id="descripcion_empaque1" class="descripcion_empaque1"></td>
-                                    <td id="unidades2e" class="centrado unidades1e"></td>
-                                    <td id="txtEnvasada4" class="centrado envasada1e"></td>
-                                    <td><input type="number" id="averias4" class="form-control centrado" style="width: 110px;"></td>
-                                    <td><input type="number" id="sobrante4" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 4);"></td>
-                                    <td id="totalDevolucion4" class="centrado"></td>
-                                  </tr>
-                                  <tr>
-                                    <td id="otros1" class="otros1"></td>
-                                    <td id="descripcion_otros1" class="descripcion_otros1"></td>
-                                    <td id="unidades8" class="centrado unidades1"></td>
-                                    <td id="txtEnvasada5" class="centrado envasada1"></td>
-                                    <td><input type="number" id="averias5" class="form-control centrado" style="width: 110px;"></td>
-                                    <td><input type="number" id="sobrante5" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 5);"></td>
-                                    <td id="totalDevolucion5" class="centrado"></td> 
-                                  </tr> -->
-                              </table>
-                            </div>
+                        <div class="row" style="margin: 2%">
+                          <div class="col-md-4 align-self-center">
+                            <label for="controlpeso_realizado" class="col-form-label">Realizado Por</label>
+                            <input type="text" class="form-control" id="despacho1" readonly>
+                          </div>
+                          <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
+                            <button type="button" class="btn waves-effect waves-light btn-danger despacho1" id="despacho1" onclick="autenticacion(this);" style="width: 100%; height: 38px;">Firmar</button>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                    <!-- <div class="firmas_despachos"> -->
-                    <div class="row" style="margin: 1%">
-                      <!-- <div class="firmas_despachos__group"> -->
-                      <div class="col-md-4 align-self-center">
-                        <label for="devolucion_realizado" class="col-form-label">Realizado Por:</label>
-                        <input type="text" class="form-control" id="devolucion_realizado1" readonly>
-                      </div>
-                      <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_realizado1" style="width: 100%; height: 38px;" id="devolucion_realizado1" onclick="cargar(this, 'firma5')">Firmar</button>
-                      </div>
 
-                      <!-- <div class="firmas_despachos__group"> -->
-                      <div class="col-md-4 align-self-center">
-                        <label for="devolucion_verificado" class="col-form-label">Verificado Por:</label>
-                        <input type="text" class="form-control" id="devolucion_verificado1" readonly>
                       </div>
-                      <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_verificado1" style="width: 100%; height: 38px;" id ="devolucion_verificadodo1" onclick="cargar(this, 'firma6')">Firmar</button>
-                      </div>
-
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+
           </div>
 
           <div class="card" id="despachos2">
-            <div class="card-header" id="headingThree">
+            <div class="card-header" id="headingFour">
               <h5 class="mb-0">
-                <button class="btn btn-link collapsed ref_multi2" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
+                <button class="btn btn-link collapsed ref_multi1" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapsefour" style="width: 100%">
                   <b id="despachosMulti2">DESPACHOS</b>
                   <input type="text" class="ref2" id="ref2" hidden>
+                  <input type="text" class="unidad_empaque2" id="unidad_empaque2" hidden>
                 </button>
               </h5>
             </div>
@@ -404,486 +244,142 @@ include('modal/m_muestras.php');
               <div class="card-body">
                 <div class="row" style="margin: 1%">
                   <div class="col-md-12 align-self-center">
-                    <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Entrega Material Envase</h3>
+                    <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Despachos</h3>
                   </div>
 
                   <div class="col-md-12 align-self-center">
                     <div class="card">
                       <div class="card-block">
-                        <div class="table-responsive">
-                          <table class="table table-striped table-bordered">
-                            <thead>
-                              <tr>
-                                <th class="centrado">Referencia</th>
-                                <th class="centrado">Descripción</th>
-                                <th class="centrado">Cantidad</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td id="envase2" class="centrado envase1"></td>
-                                <td id="descripcion_envase2" class="descripcion_envase1"></td>
-                                <td id="unidades2" class="centrado unidades2"></td>
-                              </tr>
-                              <tr>
-                                <td id="tapa1" class="centrado tapa1"></td>
-                                <td id="descripcion_tapa1" class="descripcion_tapa1"></td>
-                                <td id="unidades1" class="centrado unidades2"></td>
-                              </tr>
-                              <tr>
-                                <td id="etiqueta1" class="centrado etiqueta1"></td>
-                                <td id="descripcion_etiqueta1" class="descripcion_etiqueta1"></td>
-                                <td id="unidades3" class="centrado unidades2"></td>
-                              </tr>
-                              <!--<tr>
-                                <td id="empaque1" class="centrado empaque1"></td>
-                                <td id="descripcion_empaque1" class="descripcion_empaque1"></td>
-                                <td id="unidades1e" class="centrado unidades1e"></td>
-                              </tr>
-                              <tr>
-                                <td id="otros1" class="centrado otros1"></td>
-                                <td id="descripcion_otros1" class="descripcion_otros1"></td>
-                                <td id="unidades4" class="centrado unidades1"></td>
-                              </tr> -->
-                          </table>
-                          </form>
+                        <div class="despachos">
+
+                          <div class="group">
+                            <label for="recipient-name" class="col-form-label">Unidades Recibidas</label>
+                            <input type="number" class="form-control centrado" id="unidades_recibidas_acond2" readonly>
+                          </div>
+
+                          <div class="group">
+                            <label for="recipient-name" class="col-form-label">Cajas</label>
+                            <input type="number" class="form-control centrado" id="cajas3_acond2" readonly>
+                          </div>
+
+                          <div class=" group">
+                            <label for="recipient-name" class="col-form-label">No Movimiento Inventario</label>
+                            <input type="number" class="form-control centrado" id="mov_inventario_acond2" oncopy="return false" readonly>
+                          </div>
+
+                          <div class="group">
+                            <label for="recipient-name" class="col-form-label">Unidades Recibidas</label>
+                            <input type="number" class="form-control centrado" id="unidades_recibidas2">
+                          </div>
+
+                          <div class="group">
+                            <label for="recipient-name" class="col-form-label">Cajas</label>
+                            <input type="number" class="form-control centrado" id="cajas2">
+                          </div>
+
+                          <div class=" group">
+                            <label for="recipient-name" class="col-form-label">No Movimiento Inventario</label>
+                            <input type="number" class="form-control centrado" id="mov_inventario2">
+                          </div>
+
+                          <div class="group obs">
+                            <label for="recipient-name" class="col-form-label">Observaciones</label>
+                            <textarea class="form-control" aria-label="With textarea" id="obs2"></textarea>
+                          </div>
+
                         </div>
-                      </div>
-                    </div>
-
-                    <div class="id_despachosra_loteadora">
-
-                      <div class="group">
-                        <label for="recipient-name" class="col-form-label">Linea</label>
-                        <select class="selectpicker form-control select-linea" id="select-Linea2">
-                          <option selected hidden>Seleccionar Linea</option>
-
-                        </select>
-                      </div>
-
-                      <div class="group">
-                        <label for="recipient-name" class="col-form-label">Digite el lote (requerido)</label>
-                        <input type="text" class="form-control validarLote" id="validarLote2" onblur="revisarLote();">
-                      </div>
-
-                      <div class="group">
-                        <label for="recipient-name" class="col-form-label despachosra2">Identificación despachosra</label>
-                        <input type="text" class="form-control despachosra2" readonly>
-                      </div>
-
-                      <div class="group">
-                        <label for="recipient-name" class="col-form-label loteadora">Identificación Loteadora</label>
-                        <input type="text" class="form-control loteadora2" readonly>
-                      </div>
-
-                    </div>
-                    <hr>
-
-                    <div class="col-md-12 align-self-center">
-                      <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Especificaciones Técnicas</h3>
-                    </div>
-                    <div class="especificaciones_tecnicas">
-
-                      <div class="especificaciones__group">
-                        <label for="recipient-name" class="col-form-label">Mínimo:</label>
-                        <input type="text" class="form-control centrado minimo" id="minimo2" readonly>
-                      </div>
-
-                      <div class="especificaciones__group">
-                        <label for="recipient-name" class="col-form-label">Medio:</label>
-                        <input type="text" class="form-control centrado medio" id="medio2" readonly>
-                      </div>
-
-                      <div class="especificaciones__group">
-                        <label for="recipient-name" class="col-form-label">Máximo:</label>
-                        <input type="text" class="form-control centrado maximo" id="maximo2" readonly>
-                      </div>
-
-                    </div>
-
-                    <div class="row" style="margin: 1%">
-                      <div class="col-md-12 align-self-center mb-3">
-                        <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Control de Peso en Proceso</h3>
-                      </div>
-                      <div class="col-md-2 align-self-center" style="margin-top: 1%">
-                        <label for="recipient-name" class="col-form-label">No. Muestras</label>
-                      </div>
-                      <div class="col-md-2 align-self-center" style="margin-top: 1%">
-                        <input type="text" class="form-control" id="muestras2" style="text-align: center;" readonly>
-                      </div>
-                      <div class="col-md-1 align-self-center" style="margin-top: 1%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;" onclick="muestrasEnvase();" data-toggle="modal" data-target="#m_muestras">Iniciar</button> <!--   -->
-                      </div>
-                      <div class="col-md-1 align-self-center" style="margin-top: 1%">
-                        <label for="recipient-name" class="col-form-label">Promedio</label>
-                      </div>
-                      <div class="col-md-3 align-self-center" style="margin-top: 1%">
-                        <input type="text" class="form-control" id="promedio2" style="text-align:center;" disabled>
-                      </div>
-                      <div class="col-md-4 align-self-center">
-                        <label for="controlpeso_realizado" class="col-form-label">Realizado Por</label>
-                        <input type="text" class="form-control" id="controlpeso_realizado2" readonly>
-                      </div>
-                      <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_realizado2" id="'controlpeso_realizado2'" onclick="cargar(this, 'firma3')" style="width: 100%; height: 38px;">Firmar</button>
-                      </div>
-
-                      <div class="col-md-4 align-self-center">
-                        <label for="controlpeso_verificado" class="col-form-label">Verificado Por</label>
-                        <input type="text" class="form-control" id="controlpeso_verificado2" readonly>
-                      </div>
-                      <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_verificado2" id="controlpeso_verificado2" onclick="cargar(this, 'firma4')" style="width: 100%; height: 38px;">Firmar</button>
-                      </div>
-
-                    </div>
-                    <div class="row" style="margin: 1%">
-                      <div class="col-md-12 align-self-center mt-3">
-                        <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Devolución Material Envase Sobrante</h3>
-                      </div>
-
-                      <div class="col-md-12 align-self-center">
-                        <div class="card">
-                          <div class="card-block">
-
-                            <div class="table-responsive">
-                              <table class="table table-striped table-bordered">
-                                <thead>
-                                  <tr>
-                                    <!-- <th>Fecha</th> -->
-                                    <th>Referencia</th>
-                                    <th>Descripción</th>
-                                    <th>Recibida</th>
-                                    <th>Envasada</th>
-                                    <th>Averias</th>
-                                    <th>Sobrante</th>
-                                    <th>Total</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                    <td id="envase2" class="envase2 refEmpaque2"></td>
-                                    <td id="descripcion_envase2" class="descripcion_envase2"></td>
-                                    <td id="unidades5" class="centrado unidades2"></td>
-                                    <td><input type="number" id="txtEnvasada2" min="1" class="form-control centrado txtEnvasada2" style="width: 110px;" onkeyup="devolucionMaterialEnvasada(this.value);"></td>
-                                    <td><input type="number" id="averias4" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td><input type="number" id="sobrante4" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td id="totalDevolucion4" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
-                                  </tr>
-                                  <tr>
-                                    <td id="tapa2" class="tapa2 refEmpaque2"></td>
-                                    <td id="descripcion_tapa2" class="descripcion_tapa2"></td>
-                                    <td id="unidades6" class="centrado unidades2"></td>
-                                    <td id="txtEnvasada2" class="centrado envasada2"></td>
-                                    <td><input type="number" id="averias5" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td><input type="number" id="sobrante5" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td id="totalDevolucion5" class="centrado"></td><!-- <input type="number" id="totalDevolucion1" class="form-control centrado" readonly> -->
-                                  </tr>
-                                  <tr>
-                                    <td id="etiqueta2" class="etiqueta2 refEmpaque3"></td>
-                                    <td id="descripcion_etiqueta2" class="descripcion_etiqueta2"></td>
-                                    <td id="unidades7" class="centrado unidades2"></td>
-                                    <td id="txtEnvasada3" class="centrado envasada2"></td>
-                                    <td><input type="number" id="averias6" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td><input type="number" id="sobrante6" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td id="totalDevolucion6" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
-                                  </tr>
-                                  <!-- <tr>
-                                    <td id="empaque1" class="empaque1"></td>
-                                    <td id="descripcion_empaque1" class="descripcion_empaque1"></td>
-                                    <td id="unidades2e" class="centrado unidades1e"></td>
-                                    <td id="txtEnvasada4" class="centrado envasada1e"></td>
-                                    <td><input type="number" id="averias4" class="form-control centrado" style="width: 110px;"></td>
-                                    <td><input type="number" id="sobrante4" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 4);"></td>
-                                    <td id="totalDevolucion4" class="centrado"></td>
-                                  </tr>
-                                  <tr>
-                                    <td id="otros1" class="otros1"></td>
-                                    <td id="descripcion_otros1" class="descripcion_otros1"></td>
-                                    <td id="unidades8" class="centrado unidades1"></td>
-                                    <td id="txtEnvasada5" class="centrado envasada1"></td>
-                                    <td><input type="number" id="averias5" class="form-control centrado" style="width: 110px;"></td>
-                                    <td><input type="number" id="sobrante5" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 5);"></td>
-                                    <td id="totalDevolucion5" class="centrado"></td> 
-                                  </tr> -->
-                              </table>
-                            </div>
+                        <div class="row" style="margin: 2%">
+                          <div class="col-md-4 align-self-center">
+                            <label for="controlpeso_realizado" class="col-form-label">Realizado Por</label>
+                            <input type="text" class="form-control" id="despacho2" readonly>
+                          </div>
+                          <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
+                            <button type="button" class="btn waves-effect waves-light btn-danger despacho2" id="despacho2" onclick="autenticacion(this);" style="width: 100%; height: 38px;">Firmar</button>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <!-- <div class="firmas_despachos"> -->
-                    <div class="row" style="margin: 1%">
-                      <!-- <div class="firmas_despachos__group"> -->
-                      <div class="col-md-4 align-self-center">
-                        <label for="devolucion_realizado" class="col-form-label">Realizado Por:</label>
-                        <input type="text" class="form-control" id="devolucion_realizado2" readonly>
-                      </div>
-                      <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_realizado2" style="width: 100%; height: 38px;" id="devolucion_realizado2" onclick="cargar(this, 'firma5')">Firmar</button>
-                      </div>
-
-                      <!-- <div class="firmas_despachos__group"> -->
-                      <div class="col-md-4 align-self-center">
-                        <label for="devolucion_verificado" class="col-form-label">Verificado Por:</label>
-                        <input type="text" class="form-control" id="devolucion_verificado2" readonly>
-                      </div>
-                      <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_verificado2" style="width: 100%; height: 38px;" id="devolucion_verificado2" onclick="cargar(this, 'firma6')">Firmar</button>
-                      </div>
-
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+
           </div>
 
           <div class="card" id="despachos3">
             <div class="card-header" id="headingFive">
               <h5 class="mb-0">
-                <button id="ref_multi1" class="btn btn-link collapsed ref_multi3" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
+                <button class="btn btn-link collapsed ref_multi3" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" style="width: 100%">
                   <b id="despachosMulti3">DESPACHOS</b>
                   <input type="text" class="ref3" id="ref3" hidden>
+                  <input type="text" class="unidad_empaque3" id="unidad_empaque3" hidden>
                 </button>
               </h5>
             </div>
-            <div id="collapseFive" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
               <div class="card-body">
                 <div class="row" style="margin: 1%">
                   <div class="col-md-12 align-self-center">
-                    <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Entrega Material Envase</h3>
+                    <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Despachos</h3>
                   </div>
 
                   <div class="col-md-12 align-self-center">
                     <div class="card">
                       <div class="card-block">
-                        <div class="table-responsive">
-                          <table class="table table-striped table-bordered">
-                            <thead>
-                              <tr>
-                                <th class="centrado">Referencia</th>
-                                <th class="centrado">Descripción</th>
-                                <th class="centrado">Cantidad</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td id="envase3" class="centrado envase3"></td>
-                                <td id="descripcion_envase3" class="descripcion_envase3"></td>
-                                <td id="unidades2" class="centrado unidades3"></td>
-                              </tr>
-                              <tr>
-                                <td id="tapa3" class="centrado tapa3"></td>
-                                <td id="descripcion_tapa1" class="descripcion_tapa3"></td>
-                                <td id="unidades1" class="centrado unidades3"></td>
-                              </tr>
-                              <tr>
-                                <td id="etiqueta3" class="centrado etiqueta3"></td>
-                                <td id="descripcion_etiqueta3" class="descripcion_etiqueta3"></td>
-                                <td id="unidades3" class="centrado unidades3"></td>
-                              </tr>
-                              <!--<tr>
-                                <td id="empaque1" class="centrado empaque1"></td>
-                                <td id="descripcion_empaque1" class="descripcion_empaque1"></td>
-                                <td id="unidades1e" class="centrado unidades1e"></td>
-                              </tr>
-                              <tr>
-                                <td id="otros1" class="centrado otros1"></td>
-                                <td id="descripcion_otros1" class="descripcion_otros1"></td>
-                                <td id="unidades4" class="centrado unidades1"></td>
-                              </tr> -->
-                          </table>
-                          </form>
+                        <div class="despachos">
+
+                          <div class="group">
+                            <label for="recipient-name" class="col-form-label">Unidades Recibidas</label>
+                            <input type="number" class="form-control centrado" id="unidades_recibidas_acond3" readonly>
+                          </div>
+
+                          <div class="group">
+                            <label for="recipient-name" class="col-form-label">Cajas</label>
+                            <input type="number" class="form-control centrado" id="cajas_acond3" readonly>
+                          </div>
+
+                          <div class=" group">
+                            <label for="recipient-name" class="col-form-label">No Movimiento Inventario</label>
+                            <input type="number" class="form-control centrado" id="mov_inventario_acond3" oncopy="return false" readonly>
+                          </div>
+
+                          <div class="group">
+                            <label for="recipient-name" class="col-form-label">Unidades Recibidas</label>
+                            <input type="number" class="form-control centrado" id="unidades_recibidas3">
+                          </div>
+
+                          <div class="group">
+                            <label for="recipient-name" class="col-form-label">Cajas</label>
+                            <input type="number" class="form-control centrado" id="cajas3">
+                          </div>
+
+                          <div class=" group">
+                            <label for="recipient-name" class="col-form-label">No Movimiento Inventario</label>
+                            <input type="number" class="form-control centrado" id="mov_inventario3">
+                          </div>
+
+                          <div class="group obs">
+                            <label for="recipient-name" class="col-form-label">Observaciones</label>
+                            <textarea class="form-control" aria-label="With textarea" id="obs3"></textarea>
+                          </div>
+
                         </div>
-                      </div>
-                    </div>
-
-                    <div class="id_despachosra_loteadora">
-
-                      <div class="group">
-                        <label for="recipient-name" class="col-form-label">Linea</label>
-                        <select class="selectpicker form-control select-linea" id="select-Linea3">
-                          <option selected hidden>Seleccionar Linea</option>
-                        </select>
-                      </div>
-
-                      <div class="group">
-                        <label for="recipient-name" class="col-form-label">Digite el lote (requerido)</label>
-                        <input type="text" class="form-control validarLote" id="validarLote3" onblur="revisarLote();">
-                      </div>
-
-                      <div class="group">
-                        <label for="recipient-name" class="col-form-label despachosra3">Identificación despachosra</label>
-                        <input type="text" class="form-control despachosra3" readonly>
-                      </div>
-
-                      <div class="group">
-                        <label for="recipient-name" class="col-form-label loteadora3">Identificación Loteadora</label>
-                        <input type="text" class="form-control loteadora3" readonly>
-                      </div>
-
-                    </div>
-                    <hr>
-
-                    <div class="col-md-12 align-self-center">
-                      <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Especificaciones Técnicas</h3>
-                    </div>
-                    <div class="especificaciones_tecnicas">
-
-                      <div class="especificaciones__group">
-                        <label for="recipient-name" class="col-form-label">Mínimo:</label>
-                        <input type="text" class="form-control centrado minimo" id="minimo3" readonly>
-                      </div>
-
-                      <div class="especificaciones__group">
-                        <label for="recipient-name" class="col-form-label">Medio:</label>
-                        <input type="text" class="form-control centrado medio" id="medio3" readonly>
-                      </div>
-
-                      <div class="especificaciones__group">
-                        <label for="recipient-name" class="col-form-label">Máximo:</label>
-                        <input type="text" class="form-control centrado maximo" id="maximo3" readonly>
-                      </div>
-
-                    </div>
-
-                    <div class="row" style="margin: 1%">
-                      <div class="col-md-12 align-self-center mb-3">
-                        <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Control de Peso en Proceso</h3>
-                      </div>
-                      <div class="col-md-2 align-self-center" style="margin-top: 1%">
-                        <label for="recipient-name" class="col-form-label">No. Muestras</label>
-                      </div>
-                      <div class="col-md-2 align-self-center" style="margin-top: 1%">
-                        <input type="text" class="form-control" id="muestras3" style="text-align: center;" readonly>
-                      </div>
-                      <div class="col-md-1 align-self-center" style="margin-top: 1%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;" onclick="muestrasEnvase();" data-toggle="modal" data-target="#m_muestras">Iniciar</button> <!--   -->
-                      </div>
-                      <div class="col-md-1 align-self-center" style="margin-top: 1%">
-                        <label for="recipient-name" class="col-form-label">Promedio</label>
-                      </div>
-                      <div class="col-md-3 align-self-center" style="margin-top: 1%">
-                        <input type="text" class="form-control" id="promedio3" style="text-align:center;" disabled>
-                      </div>
-                      <div class="col-md-4 align-self-center">
-                        <label for="controlpeso_realizado" class="col-form-label">Realizado Por</label>
-                        <input type="text" class="form-control" id="controlpeso_realizado3" readonly>
-                      </div>
-                      <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_realizado3" id="controlpeso_realizado3" onclick="cargar(this, 'firma3')" style="width: 100%; height: 38px;">Firmar</button>
-                      </div>
-
-                      <div class="col-md-4 align-self-center">
-                        <label for="controlpeso_verificado" class="col-form-label">Verificado Por</label>
-                        <input type="text" class="form-control" id="controlpeso_verificado3" readonly>
-                      </div>
-                      <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_verificado3" id="controlpeso_verificado3" onclick="cargar(this, 'firma4')" style="width: 100%; height: 38px;">Firmar</button>
-                      </div>
-
-                    </div>
-                    <div class="row" style="margin: 1%">
-                      <div class="col-md-12 align-self-center mt-3">
-                        <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Devolución Material Envase Sobrante</h3>
-                      </div>
-
-                      <div class="col-md-12 align-self-center">
-                        <div class="card">
-                          <div class="card-block">
-
-                            <div class="table-responsive">
-                              <table class="table table-striped table-bordered">
-                                <thead>
-                                  <tr>
-                                    <!-- <th>Fecha</th> -->
-                                    <th>Referencia</th>
-                                    <th>Descripción</th>
-                                    <th>Recibida</th>
-                                    <th>Envasada</th>
-                                    <th>Averias</th>
-                                    <th>Sobrante</th>
-                                    <th>Total</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                    <td id="envase3" class="envase3 refEmpaque3"></td>
-                                    <td id="descripcion_envase3" class="descripcion_envase3"></td>
-                                    <td id="unidades5" class="centrado unidades3"></td>
-                                    <td><input type="number" id="txtEnvasada3" min="1" class="form-control centrado txtEnvasada3" style="width: 110px;" onkeyup="devolucionMaterialEnvasada(this.value);"></td>
-                                    <td><input type="number" id="averias7" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td><input type="number" id="sobrante7" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td id="totalDevolucion7" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
-                                  </tr>
-                                  <tr>
-                                    <td id="tapa3" class="tapa3 refEmpaque3"></td>
-                                    <td id="descripcion_tapa3" class="descripcion_tapa3"></td>
-                                    <td id="unidades6" class="centrado unidades3"></td>
-                                    <td id="txtEnvasada3" class="centrado envasada3"></td>
-                                    <td><input type="number" id="averias8" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td><input type="number" id="sobrante8" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td id="totalDevolucion8" class="centrado"></td><!-- <input type="number" id="totalDevolucion1" class="form-control centrado" readonly> -->
-                                  </tr>
-                                  <tr>
-                                    <td id="etiqueta3" class="etiqueta3 refEmpaque3"></td>
-                                    <td id="descripcion_etiqueta3" class="descripcion_etiqueta3"></td>
-                                    <td id="unidades7" class="centrado unidades3"></td>
-                                    <td id="txtEnvasada3" class="centrado envasada3"></td>
-                                    <td><input type="number" id="averias9" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td><input type="number" id="sobrante9" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td id="totalDevolucion9" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
-                                  </tr>
-                                  <!-- <tr>
-                                    <td id="empaque1" class="empaque1"></td>
-                                    <td id="descripcion_empaque1" class="descripcion_empaque1"></td>
-                                    <td id="unidades2e" class="centrado unidades1e"></td>
-                                    <td id="txtEnvasada4" class="centrado envasada1e"></td>
-                                    <td><input type="number" id="averias4" class="form-control centrado" style="width: 110px;"></td>
-                                    <td><input type="number" id="sobrante4" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 4);"></td>
-                                    <td id="totalDevolucion4" class="centrado"></td>
-                                  </tr>
-                                  <tr>
-                                    <td id="otros1" class="otros1"></td>
-                                    <td id="descripcion_otros1" class="descripcion_otros1"></td>
-                                    <td id="unidades8" class="centrado unidades1"></td>
-                                    <td id="txtEnvasada5" class="centrado envasada1"></td>
-                                    <td><input type="number" id="averias5" class="form-control centrado" style="width: 110px;"></td>
-                                    <td><input type="number" id="sobrante5" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 5);"></td>
-                                    <td id="totalDevolucion5" class="centrado"></td> 
-                                  </tr> -->
-                              </table>
-                            </div>
+                        <div class="row" style="margin: 2%">
+                          <div class="col-md-4 align-self-center">
+                            <label for="controlpeso_realizado" class="col-form-label">Realizado Por</label>
+                            <input type="text" class="form-control" id="despacho3" readonly>
+                          </div>
+                          <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
+                            <button type="button" class="btn waves-effect waves-light btn-danger despacho3" id="despacho3" onclick="autenticacion(this);" style="width: 100%; height: 38px;">Firmar</button>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <!-- <div class="firmas_despachos"> -->
-                    <div class="row" style="margin: 1%">
-                      <!-- <div class="firmas_despachos__group"> -->
-                      <div class="col-md-4 align-self-center">
-                        <label for="devolucion_realizado" class="col-form-label">Realizado Por:</label>
-                        <input type="text" class="form-control" id="devolucion_realizado3" readonly>
-                      </div>
-                      <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_realizado3" id="devolucion_realizado3" style="width: 100%; height: 38px;" onclick="cargar(this, 'firma5')">Firmar</button>
-                      </div>
-
-                      <!-- <div class="firmas_despachos__group"> -->
-                      <div class="col-md-4 align-self-center">
-                        <label for="devolucion_verificado" class="col-form-label">Verificado Por:</label>
-                        <input type="text" class="form-control" id="devolucion_verificado3" readonly>
-                      </div>
-                      <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_verificado3" i="devolucion_verificado3" style="width: 100%; height: 38px;" onclick="cargar(this, 'firma6')">Firmar</button>
-                      </div>
-
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+
           </div>
 
           <!-- jquery -->
@@ -905,15 +401,17 @@ include('modal/m_muestras.php');
           <script src="../../html/vendor/jquery-confirm/jquery-confirm.min.js"></script>
           <!-- <script src="../../html/js/datatables.js"></script> -->
           <script src="../../html/js/global/loadinfo-global.js"></script>
-          <script src="../../html/js/global/despeje.js"></script>
+          <script src="../../html/js/despachos/despachosinfo.js"></script>
+          <script src="../../html/js/despachos/cargarBatch_despachos.js"></script>
+          <!-- <script src="../../html/js/global/despeje.js"></script> -->
           <script src="../../html/js/global/tanques.js"></script>
-          <script src="../../html/js/global/muestras.js"></script>
+          <!--<script src="../../html/js/global/muestras.js"></script>
           <script src="../../html/js/global/condiciones_medio.js"></script>
           <script src="../../html/js/global/cargarBatchMulti.js"></script>
           <script src="../../html/js/firmar/firmar1raSeccionMulti.js"></script>
           <script src="../../html/js/firmar/firmar2daSeccionMulti.js"></script>
           <script src="../../html/js/despachos/despachosinfo.js"></script>
-          <script src="../../html/js/global/incidencias.js"></script>
+          <script src="../../html/js/global/incidencias.js"></script> -->
 
           <!--Alertify-->
           <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>

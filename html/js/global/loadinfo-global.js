@@ -40,7 +40,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     setTimeout(() => {
-        if (modulo !== undefined)
+        if (modulo !== undefined && modulo != 9)
             cargarBatch();
     }, 1000);
 });
@@ -58,12 +58,14 @@ $.ajax({
             const info = JSON.parse(data);
             modulo = info[0].id;
 
-            if (modulo != 4)
+            if (modulo != 4 && modulo != 9)
                 carguepreguntas(modulo);
 
-            desinfectantes();
-            cargar_condiciones_medio();
-            validarTanques(modulo);
+            if (modulo != 9) {
+                desinfectantes();
+                cargar_condiciones_medio();
+                validarTanques(modulo);
+            }
         }
     }
 });
