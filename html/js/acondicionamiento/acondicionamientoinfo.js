@@ -40,6 +40,9 @@ function busqueda_multi() {
 
                     $(`#ref${j}`).val(referencia);
                     $(`#unidad_empaque${j}`).val(batchMulti[i].unidad_empaque);
+                    $(`#presentacion${j}`).val(presentacion);
+                    $(`#densidad${j}`).val(densidad);
+                    $(`#total${j}`).val(total);
 
                     $(`#tanque${j}`).html(formatoCO(presentacion));
                     $(`#cantidad${j}`).html(formatoCO(cantidad));
@@ -51,8 +54,9 @@ function busqueda_multi() {
                     $(`#acondicionamientoMulti${j}`).html('ACONDICIONAMIENTO PRESENTACIÓN: ' + presentacion);
                     cargarTablaEnvase(j, referencia, cantidad);
                     calcularMuestras(j, cantidad);
-                    rendimiento = rendimiento_producto(referencia, presentacion, cantidad, densidad, total);
-                    $(`#rendimientoProducto${j}`).val(rendimiento);
+
+                    //rendimiento = rendimiento_producto(referencia, presentacion, densidad, total);
+                    //$(`#rendimientoProducto${j}`).val(rendimiento);
                     j++;
                 }
             } else {
@@ -62,13 +66,17 @@ function busqueda_multi() {
                 $(`#unidadesProgramadas${j}`).val(batch.unidad_lote);
                 $(`#total${j}`).html(formatoCO(batch.tamano_lote));
                 $(`#acondicionamientoMulti${j}`).html('ACONDICIONAMIENTO PRESENTACIÓN: ' + batch.presentacion);
+
                 $(`#ref${j}`).val(referencia);
                 $(`#unidad_empaque${j}`).val(batch.unidad_empaque);
+                $(`#presentacion${j}`).val(batch.presentacion);
+                $(`#densidad${j}`).val(batch.densidad);
+                /* $(`#total${j}`).val(batch.tamano_lote); */
 
                 cargarTablaEnvase(j, batch.referencia, batch.unidad_lote);
                 calcularMuestras(j, batch.unidad_lote);
-                rendimiento = rendimiento_producto(referencia, batch.presentacion, batch.unidad_lote, batch.densidad, batch.tamano_lote);
-                $(`#rendimientoProducto${j}`).val(rendimiento);
+                //rendimiento = rendimiento_producto(referencia, batch.presentacion, batch.unidad_lote, batch.densidad, batch.tamano_lote);
+                //$(`#rendimientoProducto${j}`).val(rendimiento);
             }
             multi = j + 1;
         },
@@ -387,13 +395,19 @@ function conciliacionRendimiento() {
     $(`#txtEntrega-Bodega${id_multi}`).val(formatoCO(entregarBodega));
     $(`#txtPorcentaje-Unidades${id_multi}`).val(((unidadesProducidas / unidadesProgramadas) * 100).toFixed(2) + "%");
 
+    rendimiento_producto();
 }
 
-function rendimiento_producto(referencia, presentacion, cantidad, densidad, total) {
+function rendimiento_producto() {
+    cantidad = $(`#txtUnidadesProducidas${id_multi}`).val();
+    presentacion = $(`#presentacion${id_multi}`).val();
+    densidad = $(`#densidad${id_multi}`).val();
+    total = $(`#in_tamano_lote`).val();
+    total = total.replace('.','')
 
     let rendimiento = (presentacion * cantidad * densidad) / 1000;
     rendimiento = ((rendimiento / total) * 100).toFixed(2) + "%";
-    return rendimiento;
+    $(`#rendimientoProducto${id_multi}`).val(rendimiento);
 }
 
 function registrar_conciliacion(idfirma) {

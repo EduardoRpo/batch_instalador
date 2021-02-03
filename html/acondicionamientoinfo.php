@@ -203,7 +203,9 @@ include('modal/m_muestras_acondicionamiento.php');
                   <b id="acondicionamientoMulti1">ACONDICIONAMIENTO</b>
                   <input type="text" class="ref1" id="ref1" hidden>
                   <input type="text" class="unidad_empaque1" id="unidad_empaque1" hidden>
-                </button>
+                  <input type="text" class="presentacion1" id="presentacion1" hidden>
+                  <input type="text" class="densidad1" id="densidad1" hidden>
+                  </button>
               </h5>
             </div>
             <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
@@ -476,6 +478,8 @@ include('modal/m_muestras_acondicionamiento.php');
                   <b id="acondicionamientoMulti2">ACONDICIONAMIENTO</b>
                   <input type="text" class="ref2" id="ref2" hidden>
                   <input type="text" class="unidad_empaque2" id="unidad_empaque2" hidden>
+                  <input type="text" class="presentacion1" id="presentacion2" hidden>
+                  <input type="text" class="densidad1" id="densidad2" hidden>
                 </button>
               </h5>
             </div>
@@ -747,6 +751,8 @@ include('modal/m_muestras_acondicionamiento.php');
                   <b id="acondicionamientoMulti3">ACONDICIONAMIENTO</b>
                   <input type="text" class="ref3" id="ref3" hidden>
                   <input type="text" class="unidad_empaque3" id="unidad_empaque3" hidden>
+                  <input type="text" class="presentacion1" id="presentacion3" hidden>
+                  <input type="text" class="densidad1" id="densidad3" hidden>
                 </button>
               </h5>
             </div>
