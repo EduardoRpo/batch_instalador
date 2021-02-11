@@ -163,7 +163,7 @@ switch ($op) {
     $query .= $fechaprogramacion != null ? "'$fechaprogramacion'" : "NULL";
     $query .= ",'$fechahoy', 'OP012020',' X0010320', '$tamanototallote', '$tamanolotepresentacion', '$unidadesxlote', '$estado', '$id')";
 
-    var_dump($query);
+    //var_dump($query);
 
     if (isset($cantidad)) {
 

@@ -6,6 +6,7 @@ include_once("modal/m_batchEliminados.php");
 include_once("modal/m_crearbatch.php");
 include_once("modal/modal_multipresentacion.php");
 include_once("modal/modal_cambiarContrasena.php");
+include_once("modal/m_batch_pdf.php");
 ?>
 
 <!DOCTYPE html>
@@ -39,53 +40,33 @@ include_once("modal/modal_cambiarContrasena.php");
     <div id="main-wrapper">
       <?php include('./partials/header.php'); ?>
 
-
       <div class="contenedorPrincipal">
 
-      <div class="tituloProceso">
-  <h1 class="text-themecolor"><b>Batch Record</b></h1>
-</div>
-        
+        <div class="tituloProceso">
+          <h1 class="text-themecolor"><b>Batch Record</b></h1>
+        </div>
 
-      <div class="botones-group">
+        <div class="botones-group">
+          <div class="dropdown btn-acciones">
+            <button class="btn btn-secondary dropdown-toggle " style="background-color:#fff;color:#FF8D6D; border-color:#FF8D6D;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#" onclick="multipresentacion()"><i class="fa fa-superscript"></i> Multipresentación</a>
+              <a class="dropdown-item" href="#" onclick="clonar()"><i class="fa fa-clone"></i> Clonar</a>
+              <a class="dropdown-item" href="#" onclick="batchEliminados()"><i class="fa fa-eraser"></i> Batch Eliminados</a>
+              <a class="dropdown-item pdf" href="#"><i class="fa fa-download"></i> Imprimir PDF</a>
+            </div>
+          </div>
 
-      <div class="dropdown btn-acciones">
-          <button class="btn btn-secondary dropdown-toggle " style="background-color:#fff;color:#FF8D6D; border-color:#FF8D6D;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Acciones
+          <!-- ambos botones tienen hidden-sm-down -->
+          <button type="button" class="btn waves-effect waves-light btn-danger  btn-filtrar" style="background-color:#fff;color:#FF8D6D" onclick="filtrarfechas()">
+            Filtrar
           </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#" onclick="multipresentacion()">Multipresentación</a>
-            <a class="dropdown-item" href="#" onclick="clonar()">Clonar</a>
-            <a class="dropdown-item" href="#" onclick="batchEliminados()">Batch Eliminados</a>
-          </div>
+
+          <button type="button" class="btn waves-effect waves-light btn-danger btn-crearbatch" onclick="mostrarModal();">
+            <strong>Crear Batch Record</strong>
+          </button>
+
         </div>
-
-
-     <!-- ambos botones tienen hidden-sm-down -->
-        <button type="button" class="btn waves-effect waves-light btn-danger  btn-filtrar" style="background-color:#fff;color:#FF8D6D" onclick="filtrarfechas()">
-          Filtrar
-        </button>
-
-        <button type="button" class="btn waves-effect waves-light btn-danger btn-crearbatch" onclick="mostrarModal();">
-          <strong>Crear Batch Record</strong>
-        </button>
-
-      </div>
-
-
-        <!-- <h1 class="text-themecolor tituloProceso"><b>Batch Record</b></h1>
-        <div class="dropdown btn-acciones">
-          <button class="btn btn-secondary dropdown-toggle btn-md " style="background-color:#fff;color:#FF8D6D; border-color:#FF8D6D;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#" onclick="multipresentacion()">Multipresentación</a>
-            <a class="dropdown-item" href="#" onclick="clonar()">Clonar</a>
-            <a class="dropdown-item" href="#" onclick="batchEliminados()">Batch Eliminados</a>
-          </div>
-        </div>
-        <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md btn-filtrar" style="background-color:#fff;color:#FF8D6D" onclick="filtrarfechas()">Filtrar</button>
-        <button type="button" class="btn waves-effect waves-light btn-danger pull-right hidden-sm-down btn-md btn-crearbatch" onclick="mostrarModal();"><strong>Crear Batch Record</strong></button> -->
-
-
       </div>
     </div>
 
@@ -181,8 +162,7 @@ include_once("modal/modal_cambiarContrasena.php");
     <script src="js/calendario/calendar.js"></script>
     <script src="js/global/loadinfo-global.js"></script>
     <script src="js/batch/batcheliminados.js"></script>
-
-
+    <script src="js/batch/batch_pdf.js"></script>
 
     <!--Alertify-->
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>

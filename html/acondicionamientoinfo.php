@@ -205,7 +205,7 @@ include('modal/m_muestras_acondicionamiento.php');
                   <input type="text" class="unidad_empaque1" id="unidad_empaque1" hidden>
                   <input type="text" class="presentacion1" id="presentacion1" hidden>
                   <input type="text" class="densidad1" id="densidad1" hidden>
-                  </button>
+                </button>
               </h5>
             </div>
             <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
