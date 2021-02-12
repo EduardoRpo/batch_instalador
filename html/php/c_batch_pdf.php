@@ -30,15 +30,16 @@ switch ($op) {
     case 3:
 
         $id = $_POST['id'];
-        $modulo = $_POST['modulo'];
+        /* $modulo = $_POST['modulo']; */
 
-        $sql = "SELECT p.pregunta, bsp.solucion 
+        $sql = "SELECT p.pregunta, bsp.solucion, bsp.id_modulo 
                 FROM batch_solucion_pregunta bsp
                 INNER JOIN preguntas p ON p.id = bsp.id_pregunta
-                WHERE id_batch = :id AND id_modulo= :modulo";
+                WHERE id_batch = :id
+                ORDER BY bsp.id_modulo";
 
         $query = $conn->prepare($sql);
-        $query->execute(['id' => $id, 'modulo' => $modulo]);
+        $query->execute(['id' => $id/* , 'modulo' => $modulo */]);
 
         while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
             $arreglo[] = $data;
@@ -50,14 +51,22 @@ switch ($op) {
 
     case 4:
 
-        $modulo = $_POST['modulo'];
+        $query = "SELECT descripcion, modulo FROM area_desinfeccion ORDER BY modulo";
+        ejecutarQuerySelect($conn, $query);
 
-        $sql = "SELECT descripcion
-                FROM area_desinfeccion
-                WHERE modulo= :modulo";
+        break;
+
+    case 5:
+
+        /* $modulo = $_POST['modulo']; */
+        $batch = $_POST['id'];
+
+        $sql = "SELECT d.nombre as desinfectante, d.concentracion, bds.modulo FROM desinfectante d 
+                INNER JOIN batch_desinfectante_seleccionado bds ON bds.desinfectante = d.id 
+                WHERE bds.batch = :batch";
 
         $query = $conn->prepare($sql);
-        $query->execute(['modulo' => $modulo]);
+        $query->execute([/* 'modulo' => $modulo,  */'batch' => $batch]);
 
         while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
             $arreglo[] = $data;
@@ -66,36 +75,33 @@ switch ($op) {
 
         break;
 
-    case 5:
-
-        $modulo = $_POST['modulo'];
-        $batch = $_POST['id'];
-
-        $sql = "SELECT d.nombre as desinfectante, d.concentracion FROM desinfectante d 
-                INNER JOIN batch_desinfectante_seleccionado bds ON bds.desinfectante = d.id 
-                WHERE modulo = :modulo AND bds.batch = :batch";
-
-        $query = $conn->prepare($sql);
-        $query->execute(['modulo' => $modulo, 'batch' => $batch]);
-
-        $data = $query->fetch(PDO::FETCH_ASSOC);
-        echo json_encode($data, JSON_UNESCAPED_UNICODE);
-        
-        break;
-
     case 6:
 
         $id = $_POST['id'];
-        $modulo = $_POST['modulo'];
 
-        $sql = "SELECT fecha, temperatura, humedad 
-                    FROM batch_condicionesmedio
-                    WHERE id_batch = :id AND id_modulo= :modulo";
-
+        $sql = "SELECT fecha, temperatura, humedad, id_modulo as modulo FROM batch_condicionesmedio WHERE id_batch = :id";
         $query = $conn->prepare($sql);
-        $query->execute(['id' => $id, 'modulo' => $modulo]);
-        $data = $query->fetch(PDO::FETCH_ASSOC);
-        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        $query->execute(['id' => $id]);
+
+        while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
+            $arreglo[] = $data;
+        }
+        echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+
+        break;
+
+    case 10:
+
+        $id = $_POST['id'];
+
+        $sql = "SELECT * FROM batch_control_especificaciones WHERE batch = :id";
+        $query = $conn->prepare($sql);
+        $query->execute(['id' => $id]);
+
+        while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
+            $arreglo[] = $data;
+        }
+        echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
 
         break;
 

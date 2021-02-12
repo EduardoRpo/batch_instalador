@@ -40,12 +40,6 @@
             width: 15%;
         }
 
-        @media only screen and (max-width: 600px) {
-            .light-logo {
-                width: 45%;
-            }
-        }
-
         .head {
             background: lightgray;
             color: black;
@@ -112,12 +106,6 @@
             padding-right: 20px;
         }
 
-        @media only screen and (max-width: 600px) {
-            .equipos {
-                display: block;
-            }
-        }
-
         .ajustes .resp {
             display: grid;
             grid-template-columns: repeat(4, 100px);
@@ -127,12 +115,6 @@
             padding-right: 20px;
             justify-content: center;
             text-align: center;
-        }
-
-        @media only screen and (max-width: 600px) {
-            .ajustes .resp {
-                grid-template-columns: repeat(4, 1fr);
-            }
         }
 
         .ajustes .obs {
@@ -153,12 +135,6 @@
             padding-right: 20px;
         }
 
-        @media only screen and (max-width: 600px) {
-            .envasadora {
-                display: block;
-            }
-        }
-
         .espec_tecnicas {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
@@ -173,12 +149,6 @@
             grid-template-columns: 150px 1fr 150px 1fr;
             gap: 10px 20px;
             justify-items: center;
-        }
-
-        @media only screen and (max-width: 600px) {
-            .proceso {
-                display: block;
-            }
         }
     </style>
 </head>
@@ -525,52 +495,52 @@
                     <tbody>
                         <tr>
                             <td class="centrado">Color</td>
-                            <td class="centrado">Conforme al estándar</td>
-                            <td class="centrado">Cumple</td>
+                            <td class="centrado" id="espec_color"></td>
+                            <td class="centrado color3"></td>
                         </tr>
                         <tr>
                             <td class="centrado">Olor</td>
-                            <td class="centrado">Conforme al estándar, con adición de fragancia</td>
-                            <td class="centrado">Cumple</td>
+                            <td class="centrado" id="espec_olor"></td>
+                            <td class="centrado olor3"></td>
 
                         </tr>
                         <tr>
                             <td class="centrado">Apariencia</td>
-                            <td class="centrado">Líquido viscoso homogéneo, libre de partículas extrañas.</td>
-                            <td class="centrado">Cumple</td>
+                            <td class="centrado" id="espec_apariencia"></td>
+                            <td class="centrado apariencia3"></td>
 
                         </tr>
                         <tr>
                             <td class="centrado">PH</td>
-                            <td class="centrado">5.0 – 6.5</td>
-                            <td class="centrado">6.5</td>
+                            <td class="centrado" id="espec_ph"></td>
+                            <td class="centrado ph3"></td>
 
                         </tr>
                         <tr>
                             <td class="centrado">Viscosidad (cps)</td>
-                            <td class="centrado">2.500 a 6000 cps</td>
-                            <td class="centrado">3.500</td>
+                            <td class="centrado" id="espec_viscidad"></td>
+                            <td class="centrado viscosidad3"></td>
 
                         </tr>
                         <tr>
                             <td class="centrado">Densidad o gravedad específica (g/ml)</td>
-                            <td class="centrado">0.950 – 1.050 g/mL</td>
-                            <td class="centrado">1</td>
+                            <td class="centrado" id="espec_densidad"></td>
+                            <td class="centrado densidad3"></td>
                         </tr>
                         <tr>
                             <td class="centrado">Untuosidad</td>
-                            <td class="centrado">Suave al tacto</td>
-                            <td class="centrado">Cumple</td>
+                            <td class="centrado" id="espec_untosidad"></td>
+                            <td class="centrado untuosidad3"></td>
                         </tr>
                         <tr>
                             <td class="centrado">Poder Espumoso</td>
-                            <td class="centrado">Genere espuma</td>
-                            <td class="centrado">Cumple</td>
+                            <td class="centrado" id="espec_poder_espumoso"></td>
+                            <td class="centrado espumoso3"></td>
                         </tr>
                         <tr>
                             <td class="centrado">Grado de Alcohol</td>
-                            <td class="centrado">N.A</td>
-                            <td class="centrado">No Aplica</td>
+                            <td class="centrado" id="espec_grado_alcohol"></td>
+                            <td class="centrado alcohol3"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -663,51 +633,51 @@
                         <tr>
                             <td class="centrado">Color</td>
                             <td class="centrado">Conforme al estándar</td>
-                            <td class="centrado">Cumple</td>
+                            <td class="centrado color4"></td>
                         </tr>
                         <tr>
                             <td class="centrado">Olor</td>
                             <td class="centrado">Conforme al estándar, con adición de fragancia</td>
-                            <td class="centrado">Cumple</td>
+                            <td class="centrado olor4"></td>
 
                         </tr>
                         <tr>
                             <td class="centrado">Apariencia</td>
                             <td class="centrado">Líquido viscoso homogéneo, libre de partículas extrañas.</td>
-                            <td class="centrado">Cumple</td>
+                            <td class="centrado apariencia4"></td>
 
                         </tr>
                         <tr>
                             <td class="centrado">PH</td>
                             <td class="centrado">5.0 – 6.5</td>
-                            <td class="centrado">6.5</td>
+                            <td class="centrado ph4"></td>
 
                         </tr>
                         <tr>
                             <td class="centrado">Viscosidad (cps)</td>
                             <td class="centrado">2.500 a 6000 cps</td>
-                            <td class="centrado">3.500</td>
+                            <td class="centrado viscosidad4"></td>
 
                         </tr>
                         <tr>
                             <td class="centrado">Densidad o gravedad específica (g/ml)</td>
                             <td class="centrado">0.950 – 1.050 g/mL</td>
-                            <td class="centrado">1</td>
+                            <td class="centrado densidad4"></td>
                         </tr>
                         <tr>
                             <td class="centrado">Untuosidad</td>
                             <td class="centrado">Suave al tacto</td>
-                            <td class="centrado">Cumple</td>
+                            <td class="centrado untuosidad"></td>
                         </tr>
                         <tr>
                             <td class="centrado">Poder Espumoso</td>
                             <td class="centrado">Genere espuma</td>
-                            <td class="centrado">Cumple</td>
+                            <td class="centrado espumoso4"></td>
                         </tr>
                         <tr>
                             <td class="centrado">Grado de Alcohol</td>
                             <td class="centrado">N.A</td>
-                            <td class="centrado">No Aplica</td>
+                            <td class="centrado alcohol4"></td>
                         </tr>
                     </tbody>
                 </table>

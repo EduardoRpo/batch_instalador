@@ -20,12 +20,6 @@ body {
   width: 15%;
 }
 
-@media only screen and (max-width: 600px) {
-  .light-logo {
-    width: 45%;
-  }
-}
-
 .head {
   background: lightgray;
   color: black;
@@ -37,9 +31,10 @@ body {
   text-align: center;
 }
 
-.bold{
+.bold {
   font-weight: bold;
 }
+
 .der {
   text-align: right;
 }
@@ -91,12 +86,6 @@ body {
   padding-right: 20px;
 }
 
-@media only screen and (max-width: 600px) {
-  .equipos {
-    display: block;
-  }
-}
-
 .ajustes .resp {
   display: grid;
   grid-template-columns: repeat(4, 100px);
@@ -106,12 +95,6 @@ body {
   padding-right: 20px;
   justify-content: center;
   text-align: center;
-}
-
-@media only screen and (max-width: 600px) {
-  .ajustes .resp {
-    grid-template-columns: repeat(4, 1fr);
-  }
 }
 
 .ajustes .obs {
@@ -132,11 +115,6 @@ body {
   padding-right: 20px;
 }
 
-@media only screen and (max-width: 600px) {
-  .envasadora {
-    display: block;
-  }
-}
 .espec_tecnicas {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -155,6 +133,18 @@ body {
 
 @media only screen and (max-width: 600px) {
   .proceso {
+    display: block;
+  }
+  .light-logo {
+    width: 45%;
+  }
+  .equipos {
+    display: block;
+  }
+  .ajustes .resp {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .envasadora {
     display: block;
   }
 }
