@@ -4834,9 +4834,9 @@ Bootstrap Switch
 .onoffswitch {
   position: relative;
   width: 90px;
-  -webkit-user-select: none;
+  /* -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
+  -ms-user-select: none; */
 }
 
 .onoffswitch-checkbox {
@@ -8744,13 +8744,13 @@ form p:last-child {
   height: 25px;
   line-height: 25px;
   font-size: 1rem;
-  -webkit-user-select: none;
+ /*  -webkit-user-select: none; */
   /* webkit (safari, chrome) browsers */
-  -moz-user-select: none;
+  /* -moz-user-select: none; */
   /* mozilla browsers */
-  -khtml-user-select: none;
+  /* -khtml-user-select: none; */
   /* webkit (konqueror) browsers */
-  -ms-user-select: none;
+  /* -ms-user-select: none; */
   /* IE10+ */
 }
 
@@ -8944,13 +8944,13 @@ form p:last-child {
 
 /* Switch
    ========================================================================== */
-.switch,
-.switch * {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -ms-user-select: none;
-}
+/* .switch,
+.switch * { */
+  /* -webkit-user-select: none; */
+  /* -moz-user-select: none; */
+  /* -khtml-user-select: none; */
+  /* -ms-user-select: none; */
+/* } */
 
 .switch label {
   cursor: pointer;
@@ -10684,11 +10684,19 @@ para mejorar el responsive enseguida*/
 
 /* Maquinas preparacion */
 
-.maquinasPreparacion {
+/* .maquinasPreparacion {
   padding: 0 2rem 3rem 2rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+} */
+
+.maquinasPreparacion {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+  margin-left: 30px;
+  margin-right: 30px;
 }
 
 .maquinasPreparacion__group {
@@ -10703,7 +10711,8 @@ para mejorar el responsive enseguida*/
 
 @media screen and (max-width: 740px) {
   .maquinasPreparacion {
-    justify-content: unset;
+    /* justify-content: unset; */
+    display: block;
   }
 }
 
@@ -10768,6 +10777,11 @@ para mejorar el responsive enseguida*/
   }
 }
 
+.validarLote {
+  width: auto;
+  margin-left: 10px;
+}
+
 /* envasadora */
 
 .id_envasadora_loteadora {
@@ -10776,6 +10790,14 @@ para mejorar el responsive enseguida*/
   gap: 1.2rem;
 }
 
+@media (max-width: 600px) {
+  /* @media screen and (min-width: 600px) { */
+  .id_envasadora_loteadora {
+    display: block;
+  }
+}
+
+/* 
 @media screen and (min-width: 840px) {
   .id_envasadora_loteadora {
     grid-template-columns: repeat(6, 1fr);
@@ -10783,9 +10805,9 @@ para mejorar el responsive enseguida*/
     column-gap: 1.2rem;
     row-gap: 1.2rem;
     padding: 0 0.5rem;
-  }
+  } */
 
-  .id_envasadora_loteadora .group {
+/* .id_envasadora_loteadora .group {
     display: grid;
     grid-template-columns: auto 1fr;
     align-items: center;
@@ -10810,7 +10832,7 @@ para mejorar el responsive enseguida*/
     grid-row: 2 / -1;
     grid-column: span 3;
   }
-}
+} */
 
 /* .id_envasadora_loteadora{
   display: grid;
@@ -10970,13 +10992,19 @@ input::placeholder {
 
 .linea-produccion {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 
   grid-column-gap: 1em;
   grid-gap: 0.5em;
   margin: 20px;
   text-align: center;
 }
+
+/* @media (max-width: 600px) {
+  .linea-produccion {
+    display: block;
+  }
+} */
 
 /* acondicionamiento */
 /* .conciliacionrendimiento{
@@ -11120,7 +11148,7 @@ table.dataTable tbody td {
   grid-gap: 1em;
   margin: 40px;
 }
-.obs{
+.obs {
   grid-column-start: 1;
   grid-column-end: 4;
 }

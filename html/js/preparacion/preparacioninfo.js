@@ -124,23 +124,41 @@ $.ajax({
 
 }); */
 
-/* Carga maquina agitadores */
-/* 
+/* Carga Equipos */
 $.ajax({
+    url: `/api/equipos`,
+    type: 'GET'
+}).done((data, status, xhr) => {
+    $('#sel_agitador').append(`<option value="">Seleccionar</option>`);
+    $('#sel_marmita').append(`<option value="">Seleccionar</option>`);
+    data.forEach(equipo => {
+        if (equipo.tipo == 'agitador')
+            $('#sel_agitador').append(`<option value="${equipo.id}">${equipo.descripcion}</option>`);
+        if (equipo.tipo == 'marmita')
+            $('#sel_marmita').append(`<option value="${equipo.id}">${equipo.descripcion}</option>`);
+    });
+});
+
+
+/* Carga maquina agitadores */
+
+/* $.ajax({
     url: `/api/agitadores`,
     type: 'GET'
 }).done((data, status, xhr) => {
+    $('#sel_agitador').append(`<option value="">Seleccionar</option>`);
     data.forEach(agitador => {
         $('#sel_agitador').append(`<option value="${agitador.id}">${agitador.nombre}</option>`);
     });
-});
- */
+}); */
+
 /* Carga maquina marmitas */
 
 /* $.ajax({
     url: `/api/marmitas`,
     type: 'GET'
 }).done((data, status, xhr) => {
+    $('#sel_marmita').append(`<option value="">Seleccionar</option>`);
     data.forEach(agitador => {
         $('#sel_marmita').append(`<option value="${agitador.id}">${agitador.nombre}</option>`);
     });

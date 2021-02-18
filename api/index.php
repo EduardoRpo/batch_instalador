@@ -7,6 +7,7 @@
   use BatchRecord\dao\DesinfectanteDao;
   use BatchRecord\dao\IntructivoPreparacionDao;
   use BatchRecord\dao\MarmitaDao;
+  use BatchRecord\dao\EquipoDao;
   use BatchRecord\dao\MateriaPrimaDao;
   use BatchRecord\Dao\PesajeDao;
   use BatchRecord\dao\PreguntaDao;
@@ -35,6 +36,7 @@
   $materiaPrimaDao = new MateriaPrimaDao();
   $cargoDao = new CargoDao();
   $agitadorDAo = new AgitadorDao();
+  $equipoDao = new EquipoDao();
   $marmitaDao = new MarmitaDao();
   $instructivoPreparacionDao = new IntructivoPreparacionDao();
   $userDao = new UserDao();
@@ -137,13 +139,25 @@
     return $response->withHeader('Content-Type', 'application/json');
   });
 
-  $app->get('/agitadores', function (Request $request, Response $response, $args) use ($agitadorDAo) {
+  /* $app->get('/agitadores', function (Request $request, Response $response, $args) use ($agitadorDAo) {
     $batch = $agitadorDAo->findAll();
     $response->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');
-  });
+  }); */
 
-  $app->get('/marmitas', function (Request $request, Response $response, $args) use ($marmitaDao) {
+  /* $app->get('/marmitas', function (Request $request, Response $response, $args) use ($marmitaDao) {
+    $batch = $marmitaDao->findAll();
+    $response->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));
+    return $response->withHeader('Content-Type', 'application/json');
+  });*/
+
+  $app->get('/equipos', function (Request $request, Response $response, $args) use ($equipoDao) {
+    $batch = $equipoDao->findAll();
+    $response->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));
+    return $response->withHeader('Content-Type', 'application/json');
+  });
+ 
+  $app->get('/loteadoras', function (Request $request, Response $response, $args) use ($marmitaDao) {
     $batch = $marmitaDao->findAll();
     $response->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');

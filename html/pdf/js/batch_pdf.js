@@ -2,6 +2,7 @@
 /* bloquear inputs */
 $("input").prop('readonly', true);
 
+
 /* Imprimir pdf */
 $(document).on('click', '.link-imprimir', function (e) {
     e.preventDefault();
@@ -18,6 +19,8 @@ $(document).on('click', '.link-cerrar', function (e) {
 
 $(document).ready(function () {
     id = sessionStorage.getItem('id');
+
+    cargar_Alertas();
     info_General();
     parametros_Control();
     area_desinfeccion();
@@ -27,7 +30,25 @@ $(document).ready(function () {
 });
 
 
+function cargar_Alertas() {
+    $.post("../../html/php/c_batch_pdf.php", data = { operacion: 7 },
+        function (data, textStatus, jqXHR) {
 
+            info = JSON.parse(data);
+
+            for (let i = 0; i < info.length; i++) {
+                data = Object.values(JSON.parse(info[i].descripcion));
+                $(`#title${info[i].ubicacion}`).html('<b>' + data[0].titulo + '</b>');
+
+                for (let j = 0; j < data[0].vinetas.length; j++) {
+                    $(`#vinetas${info[i].ubicacion}`).append(
+                        `<li>${data[0].vinetas[j]}</li>`
+
+                    );
+                }
+            }
+        });
+}
 
 function info_General() {
 
@@ -36,19 +57,19 @@ function info_General() {
             if (data == 'false')
                 return false;
             let info = JSON.parse(data);
-            $('#ref').val(info.referencia);
-            $('#nref').val(info.nombre_referencia);
-            $('#marca').val(info.marca);
-            $('#propietario').val(info.propietario);
-            $('#notificacion').val(info.notificacion);
-            $('#presentacion').val(info.presentacion);
-            $('#orden').val(info.numero_orden);
-            $('#lote').val(info.numero_lote);
-            $('.fecha').val(info.fecha_creacion);
-            $('#tamanolt').val(info.tamano_lote);
-            $('#tamanol').val(info.tamano_lote);
-            $('#unidades').val(info.unidad_lote);
-            $('.fecha').html(info.fecha_creacion);
+            $('#ref').html(info.referencia);
+            $('#nref').html('<b>' + info.nombre_referencia + '</b>');
+            $('#marca').html('<b>' + info.marca + '</b>');
+            $('#propietario').html('<b>' + info.propietario + '</b>');
+            $('#notificacion').html('<b>' + info.notificacion + '</b>');
+            $('#presentacion').html('<b>' + info.presentacion + '</b>');
+            $('#orden').html('<b>' + info.numero_orden + '</b>');
+            $('#lote').html('<b>' + info.numero_lote + '</b>');
+            $('.fecha').html('<b>' + info.fecha_creacion + '</b>');
+            $('#tamanolt').html('<b>' + info.tamano_lote + '</b>');
+            $('#tamanol').html('<b>' + info.tamano_lote + '</b>');
+            $('#unidades').html('<b>' + info.unidad_lote + '</b>');
+            $('.fecha').html('<b>' + info.fecha_creacion + '</b>');
             especificaciones_producto();
         });
 }
@@ -81,9 +102,6 @@ function parametros_Control() {
                         <td class="centrado">${info[i].solucion == 1 ? 'X' : ''}</td>
                         <td class="centrado">${info[i].solucion == 0 ? 'X' : ''}</td>
                     </tr>`);
-
-
-
             }
 
         });
@@ -101,12 +119,12 @@ function area_desinfeccion() {
 
             for (let i = 0; i < info.data.length; i++) {
                 $(`#area_desinfeccion${info.data[i].modulo}`).append(`
-                        <tr>
-                            <td>${info.data[i].descripcion}</td>
-                            <td class="centrado desinfectante${info.data[i].modulo}"></td>
-                            <td class="centrado concentracion${info.data[i].modulo}"></td>
-                            <td></td>
-                        </tr>`
+                    <tr>
+                        <td>${info.data[i].descripcion}</td>
+                        <td class="centrado desinfectante${info.data[i].modulo}"></td>
+                        <td class="centrado concentracion${info.data[i].modulo}"></td>
+                        <td></td>
+                    </tr>`
                 )
             }
         });
@@ -123,8 +141,28 @@ function desinfectante() {
 
             let info = JSON.parse(data);
             for (let i = 0; i < info.length; i++) {
+                $(`#blank_rea${info[i].modulo}`).hide();
+                $(`#blank_ver${info[i].modulo}`).hide();
                 $(`.desinfectante${info[i].modulo}`).html(info[i].desinfectante);
-                $(`.concentracion${info[i].modulo}`).html(info[i].concentracion);
+                $(`.concentracion${info[i].modulo}`).html(info[i].concentracion * 100 + '%');
+                $(`#fecha${info[i].modulo}`).html(info[i].fecha_registro);
+
+                if (info[i].realizo != 0) {
+                    $(`#f_realizo${info[i].modulo}`).prop('src', info[i].realizo);
+                    $(`#user_realizo${info[i].modulo}`).html('Realizó: ' + '<b>' + info[i].nombre_realizo + '</b>');
+                } else if (info[i].realizo == 0) {
+                    $(`#f_realizo${info[i].modulo}`).prop('hide', true);
+                    $(`#blank_rea${info[i].modulo}`).show();
+                    $(`#user_realizo${info[i].modulo}`).html('Realizó: ' + '<b> Sin firmar</b>');
+                }
+                if (info[i].verifico != 0) {
+                    $(`#f_verifico${info[i].modulo}`).prop('src', info[i].verifico);
+                    $(`#user_verifico${info[i].modulo}`).html('Verificó: ' + '<b>' + info[i].nombre_verifico + '</b>');
+                } else {
+                    $(`#f_verifico${info[i].modulo}`).hide();
+                    $(`#blank_ver${info[i].modulo}`).show()
+                    $(`#user_verifico${info[i].modulo}`).html('Verificó: ' + '<b>Sin firmar</b>');
+                }
             }
 
         });
@@ -147,7 +185,8 @@ function condiciones_medio() {
 }
 
 function especificaciones_producto() {
-    referencia = $('#ref').val();
+    
+    referencia = $('#ref').html();
     $.ajax({
         url: `/api/productsDetails/${referencia}`,
 

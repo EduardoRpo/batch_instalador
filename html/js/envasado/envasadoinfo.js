@@ -3,6 +3,23 @@ let envase;
 let presentacion;
 let r1, r2, r3 = 0;
 
+//Cargar equipos
+
+$.ajax({
+  url: `/api/equipos`,
+  type: 'GET'
+}).done((data, status, xhr) => {
+  $('#sel_envasadora').append(`<option value="">Seleccionar</option>`);
+  $('#sel_loteadora').append(`<option value="">Seleccionar</option>`);
+  data.forEach(equipo => {
+    if (equipo.tipo == 'envasadora')
+      $('#sel_envasadora').append(`<option value="${equipo.id}">${equipo.descripcion}</option>`);
+    if (equipo.tipo == 'loteadora')
+      $('#sel_loteadora').append(`<option value="${equipo.id}">${equipo.descripcion}</option>`);
+  });
+});
+
+
 //validacion de campos y botones
 
 function cargar(btn, idbtn) {
@@ -204,9 +221,9 @@ function presentacion_multi() {
 
 /* Cargar linea y maquinas de acuerdo con la seleccion */
 
-$(".select-Linea").change(function () {
+/* $(".select-Linea").change(function () {
   cargarEquipos();
-})
+}) */
 
 /* Calcular peso minimo, maximo y promedio */
 

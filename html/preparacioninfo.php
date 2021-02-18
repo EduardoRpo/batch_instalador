@@ -280,19 +280,21 @@ include("modal/modal_condicionesMedio.php");
                 <h3 class="subtitulo" style="text-align: center; background-color: #C0C0C0; margin:25px; height:40px">Máquinas</h3>
                 <div class="maquinasPreparacion">
 
-                  <div class="maquinasPreparacion__group">
+                  <!--  <div class="maquinasPreparacion__group">
                     <label for="">Linea</label>
                     <select class="selectpicker form-control select-linea" id="select-Linea"></select>
-                  </div>
+                  </div> -->
 
                   <div class="maquinasPreparacion__group">
                     <label for="sel_agitador">Identificación Agitador</label>
-                    <input type="text" id="sel_agitador" class="form-control" readonly>
+                    <select class="selectpicker form-control" id="sel_agitador"></select>
+                    <!-- <input type="text" id="sel_agitador" class="form-control" readonly> -->
                   </div>
 
                   <div class="maquinasPreparacion__group">
                     <label for="sel_marmita">Identificación Marmita o Tanque</label>
-                    <input type="text" id="sel_marmita" class="form-control" readonly>
+                    <select class="selectpicker form-control" id="sel_marmita"></select>
+                    <!-- <input type="text" id="sel_marmita" class="form-control" readonly> -->
                   </div>
 
                 </div>
@@ -547,7 +549,7 @@ include("modal/modal_condicionesMedio.php");
   <script src="../../html/js/global/requerimiento_ajuste.js"></script>
   <script src="../../html/js/global/validaciones.js"></script>
   <script src="../../html/js/preparacion/preparacioninfo.js"></script>
-  
+
   <!-- <script src="../../html/js/preparacion/firmar_controlproceso.js"></script> -->
 
 

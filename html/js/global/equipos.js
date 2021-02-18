@@ -13,9 +13,11 @@ function cargarEquipos() {
         data: { linea: linea },
 
         success: function (response) {
+            if (response == "")
+                return false;
             const info = JSON.parse(response);
 
-            $('.txtEnvasadora').val('');
+            /* $('.txtEnvasadora').val('');
             $('.txtLoteadora').val('');
             $('#sel_agitador').val('');
             $('#sel_marmita').val('');
@@ -29,7 +31,7 @@ function cargarEquipos() {
             $(`#txtEtiqueteadora${id_multi}`).val(info.data[3].maquina);
             $('.txtLoteadora').val(info.data[4].maquina);
             $('#sel_marmita').val(info.data[5].maquina);
-            $(`#txtTunel${id_multi}`).val(info.data[6].maquina);
+            $(`#txtTunel${id_multi}`).val(info.data[6].maquina); */
 
         },
         error: function (response) {

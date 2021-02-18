@@ -1,6 +1,7 @@
 let presentacion;
 let r1 = 0, r2 = 0, r3 = 0;
 let id_multi = 1;
+
 //Carga el proceso despues de cargar la data  del Batch
 
 $(document).ready(function () {
@@ -10,6 +11,27 @@ $(document).ready(function () {
         deshabilitarbotones();
 
     }, 500);
+});
+
+
+/* Carga Equipos */
+
+$.ajax({
+    url: `/api/equipos`,
+    type: 'GET'
+}).done((data, status, xhr) => {
+    $('#sel_banda').append(`<option value="">Seleccionar</option>`);
+    $('#sel_etiqueteadora').append(`<option value="">Seleccionar</option>`);
+    $('#sel_tunel').append(`<option value="">Seleccionar</option>`);
+
+    data.forEach(equipo => {
+        if (equipo.tipo == 'banda')
+            $('#sel_banda').append(`<option value="${equipo.id}">${equipo.descripcion}</option>`);
+        if (equipo.tipo == 'etiqueteadora')
+            $('#sel_etiqueteadora').append(`<option value="${equipo.id}">${equipo.descripcion}</option>`);
+        if (equipo.tipo == 'tunel')
+            $('#sel_tunel').append(`<option value="${equipo.id}">${equipo.descripcion}</option>`);
+    });
 });
 
 /* Cargar Multipresentacion */
@@ -262,9 +284,9 @@ function cargar(btn, idbtn) {
 
 
 
-$(`#select-Linea1, #select-Linea2, #select-Linea3`).change(function () {
+/* $(`#select-Linea1, #select-Linea2, #select-Linea3`).change(function () {
     cargarEquipos();
-})
+}) */
 
 
 //recalcular valores en la tabla de devolucion de materiales envase
@@ -403,7 +425,7 @@ function rendimiento_producto() {
     presentacion = $(`#presentacion${id_multi}`).val();
     densidad = $(`#densidad${id_multi}`).val();
     total = $(`#in_tamano_lote`).val();
-    total = total.replace('.','')
+    total = total.replace('.', '')
 
     let rendimiento = (presentacion * cantidad * densidad) / 1000;
     rendimiento = ((rendimiento / total) * 100).toFixed(2) + "%";

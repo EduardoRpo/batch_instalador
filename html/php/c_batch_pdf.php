@@ -58,15 +58,27 @@ switch ($op) {
 
     case 5:
 
-        /* $modulo = $_POST['modulo']; */
         $batch = $_POST['id'];
 
-        $sql = "SELECT d.nombre as desinfectante, d.concentracion, bds.modulo FROM desinfectante d 
-                INNER JOIN batch_desinfectante_seleccionado bds ON bds.desinfectante = d.id 
-                WHERE bds.batch = :batch";
+
+
+
+        $sql = "SELECT d.nombre as desinfectante, d.concentracion, bds.modulo, bds.realizo, u.urlfirma as realizo, CONCAt(u.nombre, ' ', u.apellido) as nombre_realizo, us.urlfirma as verifico, CONCAt(us.nombre, ' ' ,us.apellido) as nombre_verifico, bds.verifico as firma ,bds.fecha_registro 
+                FROM desinfectante d INNER JOIN batch_desinfectante_seleccionado bds ON bds.desinfectante = d.id 
+                INNER JOIN	usuario u ON u.id = bds.realizo
+                INNER JOIN	usuario us ON us.id = bds.verifico
+                WHERE bds.batch = 6 
+        
+                UNION
+
+                SELECT d.nombre as desinfectante, d.concentracion, bds.modulo, bds.realizo, u.urlfirma as realizo, CONCAt(u.nombre, ' ', u.apellido) as nombre_realizo, bds.verifico, bds.verifico as nombre_verifico, bds.verifico as firma, bds.fecha_registro 
+                FROM desinfectante d INNER JOIN batch_desinfectante_seleccionado bds ON bds.desinfectante = d.id 
+                INNER JOIN	usuario u ON u.id = bds.realizo
+                WHERE bds.batch = :batch AND verifico = 0
+                ORDER BY modulo";
 
         $query = $conn->prepare($sql);
-        $query->execute([/* 'modulo' => $modulo,  */'batch' => $batch]);
+        $query->execute(['batch' => $batch]);
 
         while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
             $arreglo[] = $data;
@@ -78,10 +90,26 @@ switch ($op) {
     case 6:
 
         $id = $_POST['id'];
-
-        $sql = "SELECT fecha, temperatura, humedad, id_modulo as modulo FROM batch_condicionesmedio WHERE id_batch = :id";
+        
+        $sql = "SELECT fecha, temperatura, humedad, id_modulo as modulo 
+                FROM batch_condicionesmedio 
+                WHERE id_batch = :id";
         $query = $conn->prepare($sql);
         $query->execute(['id' => $id]);
+
+        while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
+            $arreglo[] = $data;
+        }
+        echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+
+        break;
+
+
+    case 7:
+
+        $sql = "SELECT * FROM pdf_textos";
+        $query = $conn->prepare($sql);
+        $query->execute();
 
         while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
             $arreglo[] = $data;

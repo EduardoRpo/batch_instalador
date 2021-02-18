@@ -262,33 +262,34 @@ include('modal/m_muestras.php');
                       </div>
                     </div>
 
-                    <div class="id_envasadora_loteadora">
+                    <div class="mb-3 ml-3 mr-3">
+                      <label>Digite el lote (requerido)</label>
+                      <input type="text" class="form-control validarLote" id="validarLote1" onblur="revisarLote();">
+                    </div>
 
-                      <div class="group">
-                        <label for="recipient-name" class="col-form-label">Linea</label>
-                        <select class="selectpicker form-control select-linea" id="select-Linea1">
-                          <option selected hidden>Seleccionar Linea</option>
-
-                        </select>
-                      </div>
-
-                      <div class="group">
-                        <label for="recipient-name" class="col-form-label">Digite el lote (requerido)</label>
-                        <input type="text" class="form-control validarLote" id="validarLote1" onblur="revisarLote();">
-                      </div>
+                    <div class="id_envasadora_loteadora mb-3 ml-3 mr-3">
 
                       <div class="group">
                         <label for="recipient-name" class="col-form-label envasadora">Identificación Envasadora</label>
-                        <input type="text" class="form-control envasadora1" readonly>
+                        <select class="selectpicker form-control" id="sel_envasadora"></select>
+                        <!--  <input type="text" class="form-control envasadora1" readonly> -->
                       </div>
 
                       <div class="group">
                         <label for="recipient-name" class="col-form-label loteadora">Identificación Loteadora</label>
-                        <input type="text" class="form-control loteadora1" readonly>
+                        <select class="selectpicker form-control" id="sel_loteadora"></select>
+                        <!-- <input type="text" class="form-control loteadora1" readonly> -->
                       </div>
 
+
+                      <div class="group">
+                        <!-- <label for="recipient-name" class="col-form-label">Linea</label>
+                        <select class="selectpicker form-control select-linea" id="select-Linea1">
+                          <option selected hidden>Seleccionar Linea</option>
+
+                        </select> -->
+                      </div>
                     </div>
-                    <hr>
 
                     <div class="col-md-12 align-self-center">
                       <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Especificaciones Técnicas</h3>
@@ -378,7 +379,7 @@ include('modal/m_muestras.php');
                                     <td id="unidades5" class="centrado unidades1"></td>
                                     <td><input type="number" id="txtEnvasada1" min="1" class="form-control centrado txtEnvasada1" style="width: 110px;" onkeyup="devolucionMaterialEnvasada(this.value);"></td>
                                     <td><input type="number" id="averias1" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td><input type="number" id="sobrante1" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();" ></td>
+                                    <td><input type="number" id="sobrante1" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
                                     <td id="totalDevolucion1" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
                                   </tr>
                                   <tr>
@@ -440,7 +441,7 @@ include('modal/m_muestras.php');
                         <input type="text" class="form-control" id="devolucion_verificado1" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_verificado1" style="width: 100%; height: 38px;" id ="devolucion_verificadodo1" onclick="cargar(this, 'firma6')">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_verificado1" style="width: 100%; height: 38px;" id="devolucion_verificadodo1" onclick="cargar(this, 'firma6')">Firmar</button>
                       </div>
 
                     </div>
