@@ -78,10 +78,33 @@ function controlProceso(cantidad) {
     tanques = i - 1;
 }
 
+$('.chkcontrol').change(function (e) { 
+    e.preventDefault();
+    
+    if ($(this).is(':checked')) {
+        // Hacer algo si el checkbox ha sido seleccionado
+        alert("El checkbox con valor " + $(this).val() + " ha sido seleccionado");
+    } else {
+        // Hacer algo si el checkbox ha sido deseleccionado
+        alert("El checkbox con valor " + $(this).val() + " ha sido deseleccionado");
+    }
+});
+
 
 /* Control de Tanques seleccionados */
 
 function controlTanques() {
+    let count = 0;
+    for (let i = 1; i <= tanques; i++) {
+        if ($(`#chkcontrolTanques${i}`).is(':checked'))
+            count++;
+    }
+
+    if (count > 1) {
+        alertify.set("notifier", "position", "top-right"); alertify.error(`Chequee un solo tanque`);
+        count = 0;
+        return false;
+    }
 
     for (let i = 1; i <= tanques; i++) {
         /* Valida los tanques que ya han sido aprobados */

@@ -27,11 +27,11 @@ function cargar(btn, idbtn) {
 
     /* Validacion que todos los datos en linea no esten vacios */
 
-    if (id == 'preparacion_realizado') {
+   /*  if (id == 'preparacion_realizado') {
         validar = validarLinea();
         if (validar == 0)
             return false;
-    }
+    } */
 
     //Validacion de control de tanques
 
@@ -129,8 +129,8 @@ $.ajax({
     url: `/api/equipos`,
     type: 'GET'
 }).done((data, status, xhr) => {
-    $('#sel_agitador').append(`<option value="">Seleccionar</option>`);
-    $('#sel_marmita').append(`<option value="">Seleccionar</option>`);
+    $('#sel_agitador').append(`<option value="0" selected>Seleccionar</option>`);
+    $('#sel_marmita').append(`<option value="0" selected>Seleccionar</option>`);
     data.forEach(equipo => {
         if (equipo.tipo == 'agitador')
             $('#sel_agitador').append(`<option value="${equipo.id}">${equipo.descripcion}</option>`);
@@ -166,9 +166,9 @@ $.ajax({
 
 /* Cargar maquinas de acuerdo con la linea */
 
-$("#select-Linea").change(function () {
+/* $("#select-Linea").change(function () {
     cargarEquipos();
-})
+}) */
 
 /* Carga tabla de propiedades del producto */
 
@@ -266,11 +266,12 @@ function procesoTiempo(event) {
 
 /* Validar que la linea ha sido seleccionada */
 
-function validarLinea() {
-    const linea = $('#select-Linea').val();
+function validarEquipos() {
+    const equipo1 = $('#sel_agitador').val();
+    const equipo2 = $('#sel_marmita').val();
 
-    if (linea == null) {
-        alertify.set("notifier", "position", "top-right"); alertify.error("Antes de continuar, seleccione la linea para identificar el Equipo a usar para la linea de producción");
+    if (equipo1 * equipo2 == 0) {
+        alertify.set("notifier", "position", "top-right"); alertify.error("Antes de continuar, seleccione los Equipos a usar para la linea de producción");
         return 0;
     }
 }

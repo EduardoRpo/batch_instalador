@@ -42,7 +42,7 @@ $(document).ready(function () {
     setTimeout(() => {
         if (modulo !== undefined && modulo != 9)
             cargarBatch();
-    }, 1000);
+    }, 500);
 });
 
 

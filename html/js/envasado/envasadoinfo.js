@@ -98,14 +98,14 @@ function cargar(btn, idbtn) {
 
 $(document).ready(function () {
 
-  setTimeout(() => {
-    if (proceso == 5) {
-
+  /* setTimeout(() => {
+    if (proceso == 5) { */
+      batch_record();
       busqueda_multi();
       identificarDensidad(batch);
       deshabilitarbotones();
-    }
-  }, 500);
+ /*    }
+  }, 500); */
 });
 
 /* deshabilitar botones */
@@ -119,6 +119,7 @@ function deshabilitarbotones() {
     $(`.devolucion_verificado${i}`).prop('disabled', true);
   }
 }
+
 
 /* Cargar Multipresentacion */
 
@@ -159,6 +160,7 @@ function busqueda_multi() {
           j++;
         }
       } else {
+        //debugger;
 
         $(`#tanque${j}`).html(formatoCO(batch.presentacion));
         $(`#cantidad${j}`).html(formatoCO(batch.unidad_lote));

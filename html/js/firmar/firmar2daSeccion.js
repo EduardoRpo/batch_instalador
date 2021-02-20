@@ -12,21 +12,21 @@ function firmar2daSeccion(firma) {
 
     /* carga data de acuerdo con el modulo */
 
-    if (modulo == 2) {
-        linea = '0';
-        data = { operacion: 1, linea, tanques, tanquesOk, modulo, idBatch };
+    if (modulo == 2)
+        data = { operacion: 1, tanques, tanquesOk, modulo, idBatch };
+
+
+    if (modulo == 3){
+        equipos = [];
+        equipos.push($('#sel_agitador').val());
+        equipos.push($('#sel_marmita').val());
+        data = { operacion: 1, equipos, tanques, tanquesOk, modulo, idBatch, controlProducto };
     }
 
-    if (modulo == 3) {
-
-        let linea = $('#select-Linea').val();
-        data = { operacion: 1, linea, tanques, tanquesOk, modulo, idBatch, controlProducto };
-    }
 
     if (modulo == 4) {
-        linea = '0';
         let desinfectante = $('#sel_producto_desinfeccion').val();
-        data = { operacion: 1, linea, tanques, tanquesOk, modulo, idBatch, desinfectante, firma: firma[0].id, controlProducto };
+        data = { operacion: 1, tanques, tanquesOk, modulo, idBatch, desinfectante, firma: firma[0].id, controlProducto };
     }
 
     $.ajax({

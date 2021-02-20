@@ -8,7 +8,6 @@ if (!empty($_POST)) {
 
     switch ($op) {
         case 1: //Insertar o actualizar tanques y linea
-            $linea = $_POST['linea'];
             $tanques = $_POST['tanques'];
             $tanquesOk = $_POST['tanquesOk'];
             $batch = $_POST['idBatch'];
@@ -29,11 +28,10 @@ if (!empty($_POST)) {
             /* Si existe un registro actualiza de lo contrario lo inserta */
 
             if ($rows > 0) {
-                $sql = "UPDATE batch_tanques_chks SET linea =:linea, tanquesOk =:tanquesOk 
+                $sql = "UPDATE batch_tanques_chks SET tanquesOk =:tanquesOk 
                         WHERE modulo = :modulo AND batch = :batch";
                 $query = $conn->prepare($sql);
                 $result = $query->execute([
-                    'linea' => $linea,
                     'tanquesOk' => $tanquesOk,
                     'modulo' => $modulo,
                     'batch' => $batch,
@@ -44,11 +42,10 @@ if (!empty($_POST)) {
                     echo '0';
                 }
             } else {
-                $sql = "INSERT INTO batch_tanques_chks (linea, tanques, tanquesOk, modulo, batch) 
-                        VALUES(:linea, :tanques, :tanquesOk, :modulo, :batch)";
+                $sql = "INSERT INTO batch_tanques_chks (tanques, tanquesOk, modulo, batch) 
+                        VALUES(:tanques, :tanquesOk, :modulo, :batch)";
                 $query = $conn->prepare($sql);
                 $result = $query->execute([
-                    'linea' => $linea,
                     'tanques' => $tanques,
                     'tanquesOk' => $tanquesOk,
                     'modulo' => $modulo,
@@ -59,6 +56,27 @@ if (!empty($_POST)) {
                 else
                     echo '0';
             }
+
+            if ($modulo == 3) {
+                $equipos = $_POST['equipos'];
+
+                foreach ($equipos as $equipo) {
+                    $sql = "INSERT INTO batch_equipos (equipo, batch, modulo) 
+                            VALUES(:equipo, :batch, :modulo)";
+                    $query = $conn->prepare($sql);
+                    $result = $query->execute([
+                        'equipo' => $equipo,
+                        'batch' => $batch,
+                        'modulo' => $modulo,
+                    ]);
+                }
+
+                if ($result)
+                    echo '1';
+                else
+                    echo '0';
+            }
+
 
             /* Almacena el desinfectante del modulo de aprobacion */
 

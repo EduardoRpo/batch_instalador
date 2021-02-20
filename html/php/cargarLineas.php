@@ -16,8 +16,8 @@ if (!empty($_POST)) {
       $batch = $_POST['idBatch'];
       $modulo = $_POST['modulo'];
 
-      $sql = "SELECT linea FROM batch_tanques_chks  
-                    WHERE modulo = :modulo AND batch = :batch";
+      $sql = "SELECT * FROM batch_equipos  
+              WHERE modulo = :modulo AND batch = :batch";
       $query = $conn->prepare($sql);
       $result = $query->execute([
         'modulo' => $modulo,

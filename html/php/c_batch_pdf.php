@@ -90,7 +90,7 @@ switch ($op) {
     case 6:
 
         $id = $_POST['id'];
-        
+
         $sql = "SELECT fecha, temperatura, humedad, id_modulo as modulo 
                 FROM batch_condicionesmedio 
                 WHERE id_batch = :id";
@@ -106,6 +106,19 @@ switch ($op) {
 
 
     case 7:
+
+        $sql = "SELECT * FROM pdf_textos";
+        $query = $conn->prepare($sql);
+        $query->execute();
+
+        while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
+            $arreglo[] = $data;
+        }
+        echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+
+        break;
+
+    case 8:
 
         $sql = "SELECT * FROM pdf_textos";
         $query = $conn->prepare($sql);

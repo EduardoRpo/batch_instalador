@@ -7,6 +7,7 @@ use Monolog\Handler\RotatingFileHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use PDO;
+use PDOException;
 use Symfony\Component\Dotenv\Dotenv;
 
 /**

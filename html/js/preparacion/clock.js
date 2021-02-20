@@ -15,7 +15,7 @@ $(document).ready(function () {
 
     $('button#start-countdown').on('click', function () {
 
-        const validar = validarLinea();
+        const validar = validarEquipos();
         if (validar == 0)
             return false
 

@@ -6,7 +6,29 @@ $("input").prop('readonly', true);
 /* Imprimir pdf */
 $(document).on('click', '.link-imprimir', function (e) {
     e.preventDefault();
-    $(location).attr('href', "pdf.php");
+    //$(location).attr('href', "pdf.php");
+    $('#pdf').printThis({
+        debug: false,               // show the iframe for debugging
+        importCSS: true,            // import parent page css
+        importStyle: false,         // import style tags
+        printContainer: true,       // print outer container/$.selector
+        loadCSS: "",                // path to additional css file - use an array [] for multiple
+        pageTitle: "",              // add title to print page
+        removeInline: true,        // remove inline styles from print elements
+        removeInlineSelector: "*",  // custom selectors to filter inline styles. removeInline must be true
+        printDelay: 333,            // variable print delay
+        header: null,               // prefix to html
+        footer: null,               // postfix to html
+        base: false,                // preserve the BASE tag or accept a string for the URL
+        formValues: true,           // preserve input/form values
+        canvas: false,              // copy canvas content
+        doctypeString: '...',       // enter a different doctype for older markup
+        removeScripts: false,       // remove script tags from print content
+        copyTagClasses: false,      // copy classes from the html & body tag
+        beforePrintEvent: null,     // function for printEvent in iframe
+        beforePrint: null,          // function called before iframe is filled
+        afterPrint: null            // function called before iframe is removed
+    });
 });
 
 /* cerrar ventana */
@@ -27,6 +49,7 @@ $(document).ready(function () {
     desinfectante();
     condiciones_medio();
     control_proceso();
+    equipos();
 });
 
 
@@ -38,13 +61,18 @@ function cargar_Alertas() {
 
             for (let i = 0; i < info.length; i++) {
                 data = Object.values(JSON.parse(info[i].descripcion));
+
                 $(`#title${info[i].ubicacion}`).html('<b>' + data[0].titulo + '</b>');
+                if (`${info[i].ubicacion}` == 3)
+                    $('.desin_titulo').html(data[0].titulo);
 
                 for (let j = 0; j < data[0].vinetas.length; j++) {
                     $(`#vinetas${info[i].ubicacion}`).append(
                         `<li>${data[0].vinetas[j]}</li>`
-
                     );
+                    if (`${info[i].ubicacion}` == 3) {
+                        $('.desinfectante').append(`<li>${data[0].vinetas[j]}</li>`);
+                    }
                 }
             }
         });
@@ -184,8 +212,17 @@ function condiciones_medio() {
         });
 }
 
+function equipos() {
+    $.get(`/api/equipos`,
+        function (data, textStatus, jqXHR) {
+            $('#agitador').val(data[0].descripcion);
+            $('#marmita').val(data[1].descripcion);
+
+        });
+}
+
 function especificaciones_producto() {
-    
+
     referencia = $('#ref').html();
     $.ajax({
         url: `/api/productsDetails/${referencia}`,
@@ -243,5 +280,13 @@ function control_proceso() {
                 $(`.alcohol${info[i].modulo}`).html(info[0].alcohol == 1 ? 'Cumple' : info[0].color == 2 ? 'No Cumple' : 'No aplica');
             }
         });
+}
 
+function entrega_material_envase(){
+   $.post("../../html/php/c_batch_pdf.php", data,
+       function (data, textStatus, jqXHR) {
+           
+       },
+       "dataType"
+   );
 }

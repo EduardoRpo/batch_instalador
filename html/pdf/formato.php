@@ -17,143 +17,10 @@
     <link href="style_pdf.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../../html/vendor/datatables/datatables.min.css">
     <link rel="stylesheet" type="text/css" href="../../html/vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css">
-    <style>
-        body {
-            margin-top: 15px;
-            margin-left: 35px;
-            margin-right: 35px;
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        }
 
-        .flotante {
-            display: scroll;
-            position: fixed;
-            bottom: 320px;
-            right: 0px;
-        }
-
-        .position {
-            bottom: 280px;
-        }
-
-        .light-logo {
-            width: 15%;
-        }
-
-        .head {
-            background: lightgray;
-            color: black;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        .centrado {
-            text-align: center;
-        }
-
-        .bold {
-            font-weight: bold;
-        }
-
-        .der {
-            text-align: right;
-        }
-
-        .group-info-ref {
-            display: grid;
-            grid-template-columns: 150px 1fr 190px 1fr;
-            gap: 3px 20px;
-        }
-
-        .group-info-batch {
-            display: grid;
-            grid-template-columns: 200px 1fr 280px 1fr;
-            gap: 3px 20px;
-        }
-
-        .card-header {
-            background: green;
-            color: white;
-            font-size: 18px;
-        }
-
-        .subtitle {
-            background: lightslategray;
-            color: white;
-            text-align: center;
-            margin-top: 15px;
-            margin-left: 15px;
-            margin-right: 15px;
-            font-size: 17px;
-        }
-
-        .subtitleProcess {
-            background: coral;
-            color: white;
-            text-align: center;
-            margin-top: 15px;
-            margin-left: 1px;
-            margin-right: 1px;
-            font-size: 22px;
-        }
-
-        .equipos {
-            display: grid;
-            grid-template-columns: 170px 1fr 220px 1fr;
-            gap: 15px;
-            padding-top: 15px;
-            padding-left: 20px;
-            padding-right: 20px;
-        }
-
-        .ajustes .resp {
-            display: grid;
-            grid-template-columns: repeat(4, 100px);
-            gap: 15px;
-            padding-top: 15px;
-            padding-left: 20px;
-            padding-right: 20px;
-            justify-content: center;
-            text-align: center;
-        }
-
-        .ajustes .obs {
-            display: grid;
-            grid-template-columns: 250px 1fr;
-            gap: 15px;
-            padding-top: 15px;
-            padding-left: 20px;
-            padding-right: 20px;
-        }
-
-        .envasadora {
-            display: grid;
-            grid-template-columns: 200px 500px;
-            gap: 15px;
-            padding-top: 15px;
-            padding-left: 20px;
-            padding-right: 20px;
-        }
-
-        .espec_tecnicas {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 15px;
-            padding-top: 15px;
-            padding-left: 20px;
-            padding-right: 20px;
-        }
-
-        .proceso {
-            display: grid;
-            grid-template-columns: 150px 1fr 150px 1fr;
-            gap: 10px 20px;
-            justify-items: center;
-        }
-    </style>
 </head>
 
-<body>
+<body id="pdf">
 
     <div class="mb-3">
         <a><span><img src="img/logo-samara.png" style="width: 15%;" class="light-logo" alt="Samara Cosmetics" /></span></a>
@@ -247,7 +114,7 @@
                 </div>
             </div>
 
-            <div class="subtitle"><label for="">Entrega de Materias Primas</label></div>
+            <div class="subtitle"><label for="">3.1 Entrega de Materias Primas</label></div>
 
             <div class="table-responsive p-3">
                 <table class="table table-striped table-condensed table-bordered">
@@ -311,7 +178,7 @@
                 </table>
             </div>
             <div class="subtitle">
-                <label for="">Condiciones del Medio</label>
+                <label for="">3.3 Condiciones del Medio</label>
             </div>
             <div class="table-responsive p-3">
                 <table class="table table-striped table-bordered">
@@ -441,12 +308,12 @@
                     <div class="subtitle"><label for="">Equipos</label></div>
                     <div class="equipos">
                         <label for="">Identificación Agitador</label>
-                        <input type="text" class="form-control">
                         <label for="">Identificación Marmita o Taque</label>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" id="agitador">
+                        <input type="text" class="form-control" id="marmita">
                     </div>
 
-                    <div class="subtitle"><label for="">Liberación de Agua por parte de Calidad</label></div>
+                    <div class="subtitle"><label for="">4.2 Liberación de Agua Desionizada por parte de Calidad</label></div>
                     <div class="table-responsive p-3">
                         <table class="table table-bordered table-striped">
                             <thead class="head">
@@ -454,8 +321,6 @@
                                     <td>Fecha</td>
                                     <td>Parametros</td>
                                     <td>Cumple</td>
-                                    <td>Realizado por</td>
-                                    <td>Verificado por</td>
                                     <td>Observaciones</td>
                                 </tr>
                             </thead>
@@ -465,15 +330,11 @@
                                     <td class="centrado">Color</td>
                                     <td class="centrado">Si</td>
                                     <td class="centrado"></td>
-                                    <td class="centrado"></td>
-                                    <td class="centrado"></td>
                                 </tr>
                                 <tr>
                                     <td class="centrado">05/02/2020</td>
                                     <td class="centrado">Olor</td>
                                     <td class="centrado">Si</td>
-                                    <td class="centrado"></td>
-                                    <td class="centrado"></td>
                                     <td class="centrado"></td>
                                 </tr>
                                 <tr>
@@ -481,15 +342,12 @@
                                     <td class="centrado">Apariencia</td>
                                     <td class="centrado">Si</td>
                                     <td class="centrado"></td>
-                                    <td class="centrado"></td>
-                                    <td class="centrado"></td>
+
                                 </tr>
                                 <tr>
                                     <td class="centrado">05/02/2020</td>
                                     <td class="centrado">Conductividad 1</td>
                                     <td class="centrado">Si</td>
-                                    <td class="centrado"></td>
-                                    <td class="centrado"></td>
                                     <td class="centrado"></td>
                                 </tr>
                                 <tr>
@@ -497,15 +355,11 @@
                                     <td class="centrado">Conductividad 2</td>
                                     <td class="centrado">Si</td>
                                     <td class="centrado"></td>
-                                    <td class="centrado"></td>
-                                    <td class="centrado"></td>
                                 </tr>
                                 <tr>
                                     <td class="centrado">05/02/2020</td>
                                     <td class="centrado">Cloro Libre</td>
                                     <td class="centrado">Si</td>
-                                    <td class="centrado"></td>
-                                    <td class="centrado"></td>
                                     <td class="centrado"></td>
                                 </tr>
                                 <tr>
@@ -513,19 +367,28 @@
                                     <td class="centrado">Nitratos</td>
                                     <td class="centrado">Si</td>
                                     <td class="centrado"></td>
-                                    <td class="centrado"></td>
-                                    <td class="centrado"></td>
                                 </tr>
                                 <tr>
                                     <td class="centrado">05/02/2020</td>
                                     <td class="centrado">Dureza</td>
                                     <td class="centrado">Si</td>
                                     <td class="centrado"></td>
-                                    <td class="centrado"></td>
-                                    <td class="centrado"></td>
                                 </tr>
                             </tbody>
                         </table>
+
+                        <div class="firmas" id="firmas2">
+                            <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
+                            <label id="fecha2" style="font-weight:bold; justify-self: baseline"></label>
+
+                            <!-- <div id="blank_rea2"></div> -->
+                            <img id="f_realizo2" src="" alt="firma_usuario" height="130">
+                            <!-- <div id="blank_ver2"></div> -->
+                            <img id="f_verifico2" src="" alt="firma_usuario" height="130">
+
+                            <label id="user_realizo2">Realizado por:</label>
+                            <label id="user_verifico2">Verificado por:</label>
+                        </div>
                     </div>
 
                     <div class="subtitle"><label for="">Condiciones del Medio</label></div>
@@ -913,11 +776,20 @@
                 </div>
             </div>
             <div class="card mt-3">
-                <div class="card-header centrado"><b>ENVASADO</b></div>
+                <div class="card-header centrado"><b>6. ENVASADO</b></div>
                 <div class="card-body">
-                    <div class="alertas" id="alert_pesaje"></div>
+                    <div class="alertas" id="alert_pesaje">
+                        <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <label class="" id="title15"></label>
+                            <ul class="" id="vinetas15">
+                            </ul>
+                        </div>
+                    </div>
                     <div class="subtitle">
-                        <label for="">Limpieza y Desinfección</label>
+                        <label for="">6.1 Limpieza y Desinfección</label>
                     </div>
                     <div class="p-3">
                         <table class="table table-bordered table-striped" id="area_desinfeccion5">
@@ -935,8 +807,17 @@
                         </table>
                     </div>
 
-                    <div class="subtitle"><label for="">Entrega Material Envase</label></div>
-                    <div class="alertas" id="alert_pesaje"></div>
+                    <div class="subtitle"><label for="">6.2 Entrega Material Envase</label></div>
+                    <div class="alertas" id="alert_pesaje">
+                        <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <label class="" id="title16"></label>
+                            <ul class="" id="vinetas16">
+                            </ul>
+                        </div>
+                    </div>
                     <div class="table-responsive p-3">
                         <table class="table table-bordered table-striped">
                             <thead class="head centrado">
@@ -1450,6 +1331,7 @@
             <script src="../../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
             <script src="https://use.fontawesome.com/15242848ba.js"></script>
             <script src="js/batch_pdf.js"></script>
+            <script src="js/printThis.js"></script>
 
 </body>
 

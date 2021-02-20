@@ -59,10 +59,12 @@ function cargarDesinfectante() {
                 data: { operacion: 3, modulo, idBatch },
 
                 success: function (response) {
-                    
+
                     if (response == '') {
-                        if (modulo == 3)
-                            cargarLinea();
+                        if (modulo == 3) {
+                            cargarEquipos();
+                            cargarControlProceso();
+                        }
 
                         cargarfirma2daSeccion();
                         return false;
@@ -84,7 +86,7 @@ function cargarDesinfectante() {
 /* cargar linea de equipos en el proceso de preparacion  */
 
 function cargarLinea() {
-    
+
     $.ajax({
         type: "POST",
         url: "../../html/php/cargarLineas.php",
@@ -135,7 +137,7 @@ function cargarControlProceso() {
 
 function cargarfirma2daSeccion() {
     if (modulo == 3)
-        cargarLinea();
+        cargarEquipos();
     /* obtener los tanques chequeados */
 
     $.ajax({
