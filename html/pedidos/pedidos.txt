@@ -1,0 +1,6 @@
+[{"Nro_Pedido":"15228","cantidad":420,"producto":"21159","Facturado":false,"Fecha_Dcto":"2021-02-24T00:00:00.000Z","F_vencim":"2021-02-25T00:00:00.000Z"},
+ {"Nro_Pedido":"15159","cantidad":7960,"producto":"20003","Facturado":false,"Fecha_Dcto":"2021-02-26T00:00:00.000Z","F_vencim":"2021-02-27T00:00:00.000Z"},
+ {"Nro_Pedido":"15159","cantidad":1330,"producto":"20018","Facturado":false,"Fecha_Dcto":"2021-02-25T00:00:00.000Z","F_vencim":"2021-02-26T00:00:00.000Z"}, 
+ {"Nro_Pedido":"15159","cantidad":100,"producto":"20657","Facturado":false,"Fecha_Dcto":"2021-02-18T00:00:00.000Z","F_vencim":"2021-02-19T00:00:00.000Z"},
+ {"Nro_Pedido":"15159","cantidad":16000,"producto":"20789","Facturado":false,"Fecha_Dcto":"2021-02-25T00:00:00.000Z","F_vencim":"2021-02-26T00:00:00.000Z"},
+ {"Nro_Pedido":"15159","cantidad":2014,"producto":"21254","Facturado":false,"Fecha_Dcto":"2021-02-27T00:00:00.000Z","F_vencim":"2021-02-28T00:00:00.000Z"}]

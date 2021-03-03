@@ -9,7 +9,7 @@ function cargarBatch() {
         data: { operacion: 1, modulo, idBatch },
 
         success: function (response) {
-
+   
             if (response == '')
                 return false;
 
@@ -21,7 +21,8 @@ function cargarBatch() {
                 for (let i = 0; i < info.data.length; i++) {
                     let question = "question-" + `${info.data[i].id_pregunta}`;
                     let valor = info.data[i].solucion;
-                    $("input:radio[name=" + question + "][value=" + valor + "]").prop('checked', true);
+                    //$("input:radio[name=" + question + "][value=" + valor + "]").prop('checked', true);
+                    $(`input:radio[name="${question}"][value="${valor}"]`).prop('checked', true);
                 }
                 cargarDesinfectante();
             }

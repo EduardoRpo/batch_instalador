@@ -129,6 +129,7 @@ $.ajax({
     url: `/api/equipos`,
     type: 'GET'
 }).done((data, status, xhr) => {
+    debugger;
     $('#sel_agitador').append(`<option value="0" selected>Seleccionar</option>`);
     $('#sel_marmita').append(`<option value="0" selected>Seleccionar</option>`);
     data.forEach(equipo => {

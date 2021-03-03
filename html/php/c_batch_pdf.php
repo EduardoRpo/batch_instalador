@@ -67,18 +67,18 @@ switch ($op) {
                 FROM desinfectante d INNER JOIN batch_desinfectante_seleccionado bds ON bds.desinfectante = d.id 
                 INNER JOIN	usuario u ON u.id = bds.realizo
                 INNER JOIN	usuario us ON us.id = bds.verifico
-                WHERE bds.batch = 6 
+                WHERE bds.batch = :batch 
         
                 UNION
 
                 SELECT d.nombre as desinfectante, d.concentracion, bds.modulo, bds.realizo, u.urlfirma as realizo, CONCAt(u.nombre, ' ', u.apellido) as nombre_realizo, bds.verifico, bds.verifico as nombre_verifico, bds.verifico as firma, bds.fecha_registro 
                 FROM desinfectante d INNER JOIN batch_desinfectante_seleccionado bds ON bds.desinfectante = d.id 
                 INNER JOIN	usuario u ON u.id = bds.realizo
-                WHERE bds.batch = :batch AND verifico = 0
+                WHERE bds.batch = :batch1 AND verifico = 0
                 ORDER BY modulo";
 
         $query = $conn->prepare($sql);
-        $query->execute(['batch' => $batch]);
+        $query->execute(['batch' => $batch, 'batch1' => $batch]);
 
         while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
             $arreglo[] = $data;

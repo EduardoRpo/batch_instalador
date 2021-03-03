@@ -26,8 +26,8 @@ class EquipoDao
   {
     $connection = Connection::getInstance()->getConnection();
     $stmt = $connection->prepare("SELECT * 
-                                  FROM batch_equipos beq 
-                                  INNER JOIN equipos ON equipos.id = beq.equipo");
+                                  FROM /* batch_ */equipos beq 
+                                  /* INNER JOIN equipos ON equipos.id = beq.equipo */");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $equipos = $stmt->fetchAll($connection::FETCH_ASSOC);
@@ -49,4 +49,20 @@ class EquipoDao
     $this->logger->notice("Equipos Obtenidos", array('equipos' => $equipos));
     return $equipos;
   }
+
+  public function findByBatch($batch)
+  {
+    $connection = Connection::getInstance()->getConnection();
+    $stmt = $connection->prepare("SELECT *
+                                  FROM batch_equipos beq 
+                                  INNER JOIN equipos ON equipos.id = beq.equipo
+                                  WHERE batch = :batch");
+    $stmt->bindValue(':batch', $batch, PDO::PARAM_INT);
+    $stmt->execute();
+    $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+    $equipos = $stmt->fetchAll($connection::FETCH_ASSOC);
+    $this->logger->notice("Equipos Obtenidos", array('equipos' => $equipos));
+    return $equipos;
+  }
+
 }

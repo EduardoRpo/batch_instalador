@@ -1,18 +1,21 @@
 <?php
 
-use BatchRecord\dao\AgitadorDao;
+//use BatchRecord\dao\AgitadorDao;
 use BatchRecord\dao\BatchDao;
 use BatchRecord\dao\CargoDao;
 use BatchRecord\Dao\Connection;
 use BatchRecord\dao\DesinfectanteDao;
 use BatchRecord\dao\IntructivoPreparacionDao;
-use BatchRecord\dao\MarmitaDao;
+//use BatchRecord\dao\MarmitaDao;
 use BatchRecord\dao\EquipoDao;
 use BatchRecord\dao\MateriaPrimaDao;
 use BatchRecord\Dao\PesajeDao;
 use BatchRecord\dao\PreguntaDao;
 use BatchRecord\Dao\ProductDao;
 use BatchRecord\dao\UserDao;
+use BatchRecord\dao\ControlProcesoDao;
+use BatchRecord\dao\PedidosDao;
+
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
@@ -29,11 +32,13 @@ $preguntaDao = new PreguntaDao();
 $desinfectanteDao = new DesinfectanteDao();
 $materiaPrimaDao = new MateriaPrimaDao();
 $cargoDao = new CargoDao();
-$agitadorDAo = new AgitadorDao();
+//$agitadorDAo = new AgitadorDao();
 $equipoDao = new EquipoDao();
-$marmitaDao = new MarmitaDao();
+//$marmitaDao = new MarmitaDao();
 $instructivoPreparacionDao = new IntructivoPreparacionDao();
 $userDao = new UserDao();
+$controlProcesoDao = new ControlProcesoDao();
+$pedidosDao = new PedidosDao();
 
 $app = AppFactory::create();
 $app->setBasePath('/api');
@@ -45,11 +50,12 @@ $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
 
 // Define app routes
-$app->get('/', function (Request $request, Response $response, $args) {
+/* $app->get('/', function (Request $request, Response $response, $args) {
   $connection = Connection::getInstance()->getConnection();
   $response->getBody()->write("hello world");
   return $response;
-});
+}); */
+
 $app->get('/products', function (Request $request, Response $response, $args) use ($productDao) {
   $products = $productDao->findAll();
   $response->getBody()->write(json_encode($products), JSON_NUMERIC_CHECK);
@@ -131,26 +137,15 @@ $app->get('/cargos', function (Request $request, Response $response, $args) use 
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-/* $app->get('/agitadores', function (Request $request, Response $response, $args) use ($agitadorDAo) {
-    $batch = $agitadorDAo->findAll();
-    $response->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));
-    return $response->withHeader('Content-Type', 'application/json');
-  }); */
-
-/* $app->get('/marmitas', function (Request $request, Response $response, $args) use ($marmitaDao) {
-    $batch = $marmitaDao->findAll();
-    $response->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));
-    return $response->withHeader('Content-Type', 'application/json');
-  });*/
 
 $app->get('/equipos', function (Request $request, Response $response, $args) use ($equipoDao) {
-  $batch = $equipoDao->findAll();
-  $response->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));
+  $equipos = $equipoDao->findAll();
+  $response->getBody()->write(json_encode($equipos, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->get('/equipos/{idModule}', function (Request $request, Response $response, $args) use ($equipoDao) {
-  $array = $equipoDao->findByModule($args["idModule"]);
+$app->get('/equipos/{idBatch}', function (Request $request, Response $response, $args) use ($equipoDao) {
+  $array = $equipoDao->findByBatch($args["idBatch"]);
   $response->getBody()->write(json_encode($array));
 
   return $response->withHeader('Content-Type', 'application/json');
@@ -192,5 +187,43 @@ $app->post('/user', function (Request $request, Response $response, $args) use (
     return $response->withStatus(404)->withHeader('Content-Type', 'application/json');
   }
 });
+
+$app->get('/controlproceso', function (Request $request, Response $response, $args) use ($controlProcesoDao) {
+  $array = $controlProcesoDao->findAll();
+  $response->getBody()->write(json_encode($array));
+
+  return $response->withHeader('Content-Type', 'application/json');
+});
+
+$app->get('/controlproceso/{idBatch}', function (Request $request, Response $response, $args) use ($controlProcesoDao) {
+  $array = $controlProcesoDao->findByBatch($args["idBatch"]);
+  $response->getBody()->write(json_encode($array));
+
+  return $response->withHeader('Content-Type', 'application/json');
+});
+
+$app->get('/pedidos', function (Request $request, Response $response, $args) use ($pedidosDao) {
+  $array = $pedidosDao->findAll();
+  $response->getBody()->write(json_encode($array));
+
+  return $response->withHeader('Content-Type', 'application/json');
+});
+
+$app->get('/pedidos/{idPedido}', function (Request $request, Response $response, $args) use ($pedidosDao) {
+  $array = $pedidosDao->findByOrder($args["idPedido"]);
+  $response->getBody()->write(json_encode($array));
+
+  return $response->withHeader('Content-Type', 'application/json');
+});
+
+$app->post('/pedidos/nuevos', function (Request $request, Response $response, $args)  use ($pedidosDao) {
+  /* $data = file_get_contents('../pedidos.txt'); */
+  $data = file_get_contents('../html/pedidos/pedidos.txt');
+  $array = $pedidosDao->save($data);
+  $response->getBody()->write(json_encode($array));
+  
+  return $response->withHeader('Content-Type', 'application/json');
+});
+
 // Run app
 $app->run();

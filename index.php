@@ -16,10 +16,10 @@ include('./html/modal/modal_recuperarClave.php');
 
 
 	<!-- Bootstrap Core CSS -->
-	<link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
+	<link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	
 	<!-- Custom CSS -->
-	<link href="/html/css/sesion.css" rel="stylesheet">
+	<link href="html/css/sesion.css" rel="stylesheet">
 
 	<!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> -->
 	<link rel="stylesheet" type="text/css" href="html/vendor/datatables/datatables.min.css">

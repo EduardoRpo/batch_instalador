@@ -19,7 +19,7 @@ function crearTablaBatch(columna_busqueda = '', minDateFilter = '', maxDateFilte
 
         responsive: true,
         scrollCollapse: true,
-        language: { url: '/admin/sistema/admin_componentes/es-ar.json' },
+        language: { url: '../../../admin/sistema/admin_componentes/es-ar.json' },
 
         ajax: {
             method: "POST",
@@ -49,7 +49,7 @@ function crearTablaBatch(columna_busqueda = '', minDateFilter = '', maxDateFilte
                 className: "uniqueClassName",
                 render: (data, type, row) => {
                     'use strict';
-                    return data == 1 ? 'Activo' : 'Inactivo';
+                    return data == 1 ? 'Sin Formula' : 'Inactivo';
                 }
             },
             {

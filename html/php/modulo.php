@@ -12,11 +12,11 @@ if (!empty($_POST)) {
     $sql = "SELECT id FROM modulo WHERE modulo = :modulo";
     $query = $conn->prepare($sql);
     $query->execute(['modulo' => $modulo]);
-    $rows = $query->rowCount();
+    /* $rows = $query->rowCount();
 
-    if ($rows > 0) {
+    if ($rows > 0) { */
         $data = $query->fetch(PDO::FETCH_ASSOC);
-        $arreglo[] = $data;
-        echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+        /* $arreglo[] = $data; */
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
     }
-}
+/* } */

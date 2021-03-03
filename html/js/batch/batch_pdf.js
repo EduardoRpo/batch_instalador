@@ -47,7 +47,7 @@ $(document).on('click', '.link-ver', function (e) {
     e.preventDefault();
     let id = $(this).parent().parent().children().first().text();
     sessionStorage.setItem('id', id);
-    window.open("../../html/pdf/formato.php", '_blank');
+    window.open("../html/pdf/formato.php", '_blank');
 });
 
 /* Imprimir pdf */

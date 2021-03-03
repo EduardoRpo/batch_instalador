@@ -98,14 +98,14 @@ function cargar(btn, idbtn) {
 
 $(document).ready(function () {
 
-  /* setTimeout(() => {
-    if (proceso == 5) { */
+   setTimeout(() => {
+   /* if (proceso == 5) { */
       batch_record();
       busqueda_multi();
       identificarDensidad(batch);
       deshabilitarbotones();
- /*    }
-  }, 500); */
+    /* } */
+  }, 300);
 });
 
 /* deshabilitar botones */

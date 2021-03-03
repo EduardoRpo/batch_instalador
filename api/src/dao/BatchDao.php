@@ -66,9 +66,9 @@
     {
       $connection = Connection::getInstance()->getConnection();
       $query = "INSERT INTO batch (fecha_creacion, fecha_programacion, fecha_actual, numero_orden, numero_lote, 
-tamano_lote, lote_presentacion, unidad_lote, estado, id_producto ) VALUES(
-:fecha_creacion, :fecha_programacion, :fecha_actual,:numero_orden,:numero_lote,:tamano_lote,
-:lote_presentacion,:unidad_lote,:estado,:id_producto)";
+                            tamano_lote, lote_presentacion, unidad_lote, estado, id_producto ) VALUES(
+                            :fecha_creacion, :fecha_programacion, :fecha_actual,:numero_orden,:numero_lote,:tamano_lote,
+                            :lote_presentacion,:unidad_lote,:estado,:id_producto)";
       $stmt = $connection->prepare($query);
       $rows = $stmt->execute(
         array(

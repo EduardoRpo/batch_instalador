@@ -13,9 +13,14 @@
     return file_get_contents('index.php');
   });
 
+  /* $router->add('/batch', function () {
+    return Router::getRenderedHTML('html/batch.php');
+  }); */
+
   $router->add('/pesaje', function () {
     return Router::getRenderedHTML('html/pesaje.php');
   });
+
   $router->add('/pesajeinfo/:idBatch/:referencia', function ($idBatch, $referencia) {
     return Router::getRenderedHTML('html/pesajeinfo.php');
   });

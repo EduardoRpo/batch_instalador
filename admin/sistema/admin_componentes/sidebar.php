@@ -1,4 +1,3 @@
-
 <div class="sidebar" data-color="orange">
     <div class="logo">
         <!-- <a href="# class="simple-text logo-mini"></a> -->
@@ -54,6 +53,13 @@
                 <li><a href="usuarios.php" id="link_menu_usuarios"><i class="fas fa-user-check"></i><span>Maestro Usuarios</span></a></li>
                 <li><a href="cargos.php" id="link_cargos"><i class="fas fa-sitemap"></i><span>Cargos</span></a></li>
             </ul>
+
+            <li id="horarios"><a href=""><i class="fa fa-chevron-down"></i><span>Bath Record Automático</span></a></li>
+            <ul class="menu_horarios">
+                <li><a href="horarios-batchRecord.php" id="link_menu_horarios"><i class="fas fa-user-check"></i><span>Horarios</span></a></li>
+
+            </ul>
+
         </ul>
     </div>
 </div>
