@@ -56,7 +56,7 @@
 
             <li id="horarios"><a href=""><i class="fa fa-chevron-down"></i><span>Bath Record Automático</span></a></li>
             <ul class="menu_horarios">
-                <li><a href="horarios-batchRecord.php" id="link_menu_horarios"><i class="fas fa-user-check"></i><span>Horarios</span></a></li>
+                <li><a href="horarios.php" id="link_menu_horarios"><i class="fa fa-clock-o"></i><span>Horarios</span></a></li>
 
             </ul>
 

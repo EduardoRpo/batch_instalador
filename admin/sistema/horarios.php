@@ -22,6 +22,7 @@ require_once('php/sesion/sesion.php');
   <link href="../assets/css/now-ui-dashboard.css?v=1.5.0" rel="stylesheet" />
   <link href="../sistema/css/estilos.css" rel="stylesheet" />
 
+
   <!-- Datatables -->
   <!-- <link rel="stylesheet" href="../assets/datatables/datatables.min.css">
   <link rel="stylesheet" href="./htdocs/assets/datatables/DataTables-1.10.21/css/dataTables.bootstrap4.css"> -->
@@ -68,19 +69,39 @@ require_once('php/sesion/sesion.php');
                 <div class="" style="display: flex;">
                   <label for="timeOne">Seleccione la Hora:</label>
                   <input type="time" id="timeOne" class="form-control ml-3 mr-3" style="width: 20%; height:fit-content;">
+                  <button type="button" class="btn btn-primary" id="btnSeleccionarHorariosBatch" style="height:fit-content; margin-top:0px;"><i class="fa fa-angle-right fa-1x" aria-hidden="true"></i></button>
                   <!-- <label for="timeTwo">Segundo Horarios</label>
                   <input type="time" id="timeTwo" class="form-control ml-3" style="width: 20%;"> -->
                   <div id="tiempos" style="margin-left: 300px;">
                     <label for=""><b>Horas Configuradas</b></label>
+                    <div class="table-responsive">
+                      <table id="tb_hora" class="table-bordered">
+                        <thead>
+                          <tr>
+                            <th class="col-sm-2 centrado">No.</th>
+                            <th class="col-sm-3 centrado">Hora Programada</th>
+                            <th class="col-sm-3 centrado">Acciones</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th class="centrado">1</th>
+                            <th class="centrado" id="hora1"></th>
+                            <th class="centrado" id="1"><a href="#"><i id="1" class="fa fa-trash-o link-eliminar" aria-hidden="true"></i></a></th>
+                          </tr>
+                          <tr>
+                            <th class="centrado">2</th>
+                            <th class="centrado" id="hora2"></th>
+                            <th class="centrado" id="2"><a href="#"><i id="2" class="fa fa-trash-o link-eliminar" aria-hidden="true"></i></a></th>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
-                <div style="display: flex;">
-                  <button type="button" class="btn btn-primary mt-3" id="btnEliminarHorariosBatch" style="margin-left: 450px;">
-                    <</button>
-                      <button type="button" class="btn btn-primary mt-3" id="btnSeleccionarHorariosBatch">></button>
-
+                <div style="display: flex; justify-content:center">
+                  <button type="button" class="btn btn-primary mt-3" id="btnGuardarHorariosBatch">Guardar</button>
                 </div>
-                <button type="button" class="btn btn-primary mt-3" id="btnGuardarHorariosBatch" style="margin-left: 410px; width:200px ">Guardar</button>
               </div>
             </div>
           </div>
@@ -112,7 +133,7 @@ require_once('php/sesion/sesion.php');
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script><!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
   <!-- <script src="../assets/demo/demo.js"></script> -->
-
+  <script src="https://kit.fontawesome.com/d35ea76538.js" crossorigin="anonymous"></script>
   <!-- Alertify -->
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
