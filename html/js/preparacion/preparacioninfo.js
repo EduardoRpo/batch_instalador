@@ -1,104 +1,97 @@
-
-idBatch = location.href.split('/')[4];
-referencia = location.href.split('/')[5];
+idBatch = location.href.split("/")[4];
+referencia = location.href.split("/")[5];
 let queeProcess = 0;
 var pasos;
 let paso = 4;
 let tanqueOk = 0;
 let tiempoTotal = 0;
-let pasoEjecutado = 0
-
+let pasoEjecutado = 0;
 
 function cargar(btn, idbtn) {
+  localStorage.setItem("idbtn", idbtn);
+  id = btn.id;
 
-    localStorage.setItem("idbtn", idbtn);
-    id = btn.id;
+  /* Valida que se ha seleccionado el producto de desinfeccion para el proceso */
 
-    /* Valida que se ha seleccionado el producto de desinfeccion para el proceso */
+  let seleccion = $("#sel_producto_desinfeccion").val();
+  //if (seleccion != "Seleccione") seleccion = $("#select-Linea").val();
 
-    let seleccion = $('#sel_producto_desinfeccion').val();
-    if (modulo == 3 && seleccion != "Seleccione")
-        seleccion = $('#select-Linea').val();
+  if (seleccion == "Seleccione") {
+    alertify.set("notifier", "position", "top-right");
+    alertify.error("Seleccione el producto para desinfección.");
+    return false;
+  }
 
-    if (seleccion == "Seleccione") {
-        alertify.set("notifier", "position", "top-right"); alertify.error("Seleccione el producto para desinfección.");
-        return false;
-    }
+  /* Validacion que todos los datos en linea no esten vacios */
 
-    /* Validacion que todos los datos en linea no esten vacios */
-
-   /*  if (id == 'preparacion_realizado') {
+  /*  if (id == 'preparacion_realizado') {
         validar = validarLinea();
         if (validar == 0)
             return false;
     } */
 
-    //Validacion de control de tanques
+  //Validacion de control de tanques
 
-    if (id == "preparacion_realizado") {
-        validar = controlTanques();
-        if (validar == 0) {
-            return false;
-        }
+  if (id == "preparacion_realizado") {
+    validar = controlTanques();
+    if (validar == 0) {
+      return false;
     }
+  }
 
-    /* valida que el instructivo se haya ejecutado */
-    if (id == 'preparacion_realizado') {
-        ordenpasos = localStorage.getItem("ordenpasos");
+  /* valida que el instructivo se haya ejecutado */
+  if (id == "preparacion_realizado") {
+    ordenpasos = localStorage.getItem("ordenpasos");
 
-        if (pasoEjecutado !== 0 || pasoEjecutado == 0)
-            if (pasoEjecutado < ordenpasos) {
-                alertify.set("notifier", "position", "top-right"); alertify.error('Para continuar. Complete todo el instructivo');
-                return false;
-            }
-    }
+    if (pasoEjecutado !== 0 || pasoEjecutado == 0)
+      if (pasoEjecutado < ordenpasos) {
+        alertify.set("notifier", "position", "top-right");
+        alertify.error("Para continuar. Complete todo el instructivo");
+        return false;
+      }
+  }
 
-    /* Validacion que el formulario se encuentre completamente lleno */
+  /* Validacion que el formulario se encuentre completamente lleno */
 
-    if (id == 'preparacion_realizado') {
-        validar = validardatosresultadosPreparacion();
-        if (validar == 0)
-            return false;
-    }
+  if (id == "preparacion_realizado") {
+    validar = validardatosresultadosPreparacion();
+    if (validar == 0) return false;
+  }
 
+  /* Carga el modal para la autenticacion */
 
-    /* Carga el modal para la autenticacion */
-
-    $('#usuario').val('');
-    $('#clave').val('');
-    $('#m_firmar').modal('show');
-
+  $("#usuario").val("");
+  $("#clave").val("");
+  $("#m_firmar").modal("show");
 }
-
 
 /* Habilitar Botones */
 
 function habilitarbotones() {
-    $('.preparacion_realizado').prop('disabled', false);
+  $(".preparacion_realizado").prop("disabled", false);
 }
 
 /* Cargar tabla de observaciones */
 
-Date.prototype.toDateInputValue = (function () {
-    var local = new Date(this);
-    local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
-    return local.toJSON().slice(0, 10);
-});
+Date.prototype.toDateInputValue = function () {
+  var local = new Date(this);
+  local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+  return local.toJSON().slice(0, 10);
+};
 
 /* Carga info del producto */
 
-$('#in_fecha').attr('min', new Date().toDateInputValue());
+$("#in_fecha").attr("min", new Date().toDateInputValue());
 $.ajax({
-    url: `../../api/batch/${idBatch}`,
-    type: 'GET'
+  url: `../../api/batch/${idBatch}`,
+  type: "GET",
 }).done((data, status, xhr) => {
-    $('#in_numero_orden').val(data.numero_orden);
-    $('#in_numero_lote').val(data.numero_lote);
-    $('#in_fecha').val(data.fecha_programacion);
-    $('#in_referencia').val(data.referencia);
-    $('#in_nombre_referencia').val(data.nombre_referencia);
-    $('#in_linea').val(data.linea);
-
+  $("#in_numero_orden").val(data.numero_orden);
+  $("#in_numero_lote").val(data.numero_lote);
+  $("#in_fecha").val(data.fecha_programacion);
+  $("#in_referencia").val(data.referencia);
+  $("#in_nombre_referencia").val(data.nombre_referencia);
+  $("#in_linea").val(data.linea);
 });
 
 /* Carga preguntas */
@@ -126,44 +119,22 @@ $.ajax({
 
 /* Carga Equipos */
 $.ajax({
-    url: `/api/equipos`,
-    type: 'GET'
+  url: `/api/equipos`,
+  type: "GET",
 }).done((data, status, xhr) => {
-    debugger;
-    $('#sel_agitador').append(`<option value="0" selected>Seleccionar</option>`);
-    $('#sel_marmita').append(`<option value="0" selected>Seleccionar</option>`);
-    data.forEach(equipo => {
-        if (equipo.tipo == 'agitador')
-            $('#sel_agitador').append(`<option value="${equipo.id}">${equipo.descripcion}</option>`);
-        if (equipo.tipo == 'marmita')
-            $('#sel_marmita').append(`<option value="${equipo.id}">${equipo.descripcion}</option>`);
-    });
+  $("#sel_agitador").append(`<option value="0" selected>Seleccionar</option>`);
+  $("#sel_marmita").append(`<option value="0" selected>Seleccionar</option>`);
+  data.forEach((equipo) => {
+    if (equipo.tipo == "agitador")
+      $("#sel_agitador").append(
+        `<option value="${equipo.id}">${equipo.descripcion}</option>`
+      );
+    if (equipo.tipo == "marmita")
+      $("#sel_marmita").append(
+        `<option value="${equipo.id}">${equipo.descripcion}</option>`
+      );
+  });
 });
-
-
-/* Carga maquina agitadores */
-
-/* $.ajax({
-    url: `/api/agitadores`,
-    type: 'GET'
-}).done((data, status, xhr) => {
-    $('#sel_agitador').append(`<option value="">Seleccionar</option>`);
-    data.forEach(agitador => {
-        $('#sel_agitador').append(`<option value="${agitador.id}">${agitador.nombre}</option>`);
-    });
-}); */
-
-/* Carga maquina marmitas */
-
-/* $.ajax({
-    url: `/api/marmitas`,
-    type: 'GET'
-}).done((data, status, xhr) => {
-    $('#sel_marmita').append(`<option value="">Seleccionar</option>`);
-    data.forEach(agitador => {
-        $('#sel_marmita').append(`<option value="${agitador.id}">${agitador.nombre}</option>`);
-    });
-}); */
 
 /* Cargar maquinas de acuerdo con la linea */
 
@@ -174,149 +145,159 @@ $.ajax({
 /* Carga tabla de propiedades del producto */
 
 $.ajax({
-    url: `/api/productsDetails/${referencia}`,
-    type: 'GET'
+  url: `/api/productsDetails/${referencia}`,
+  type: "GET",
 }).done((data, status, xhr) => {
+  $("#espec_color").html(data.color);
+  $("#espec_olor").html(data.olor);
+  $("#espec_apariencia").html(data.apariencia);
+  $("#espec_poder_espumoso").html(data.poder_espumoso);
 
-    $('#espec_color').html(data.color);
-    $('#espec_olor').html(data.olor);
-    $('#espec_apariencia').html(data.apariencia);
-    $('#espec_poder_espumoso').html(data.poder_espumoso);
+  $("#espec_untosidad").html(data.untuosidad);
+  $("#espec_ph").html(
+    `${data.limite_inferior_ph} a ${data.limite_superior_ph}`
+  );
 
-    $('#espec_untosidad').html(data.untuosidad);
-    $('#espec_ph').html(`${data.limite_inferior_ph} a ${data.limite_superior_ph}`);
+  $("#in_ph").attr("min", data.limite_inferior_ph);
+  $("#in_ph").attr("max", data.limite_superior_ph);
 
-    $('#in_ph').attr('min', data.limite_inferior_ph);
-    $('#in_ph').attr('max', data.limite_superior_ph);
+  $("#espec_densidad").html(
+    `${data.limite_inferior_densidad_gravedad} a ${data.limite_superior_densidad_gravedad}`
+  );
 
-    $('#espec_densidad').html(`${data.limite_inferior_densidad_gravedad} a ${data.limite_superior_densidad_gravedad}`);
+  $("#in_densidad").attr("min", data.limite_inferior_densidad_gravedad);
+  $("#in_densidad").attr("max", data.limite_superior_densidad_gravedad);
 
-    $('#in_densidad').attr('min', data.limite_inferior_densidad_gravedad);
-    $('#in_densidad').attr('max', data.limite_superior_densidad_gravedad);
+  $("#espec_grado_alcohol").html(
+    `${data.limite_inferior_grado_alcohol} a ${data.limite_superior_grado_alcohol}`
+  );
 
-    $('#espec_grado_alcohol').html(`${data.limite_inferior_grado_alcohol} a ${data.limite_superior_grado_alcohol}`);
+  $("#in_grado_alcohol").attr("min", data.limite_inferior_grado_alcohol);
+  $("#in_grado_alcohol").attr("max", data.limite_superior_grado_alcohol);
 
-    $('#in_grado_alcohol').attr('min', data.limite_inferior_grado_alcohol);
-    $('#in_grado_alcohol').attr('max', data.limite_superior_grado_alcohol);
+  $("#espec_viscidad").html(
+    `${data.limite_inferior_viscosidad} a ${data.limite_superior_viscosidad}`
+  );
 
-    $('#espec_viscidad').html(`${data.limite_inferior_viscosidad} a ${data.limite_superior_viscosidad}`);
-
-    $('#in_viscocidad').attr('min', data.limite_inferior_viscosidad);
-    $('#in_viscocidad').attr('max', data.limite_superior_viscosidad);
-
-
+  $("#in_viscocidad").attr("min", data.limite_inferior_viscosidad);
+  $("#in_viscocidad").attr("max", data.limite_superior_viscosidad);
 });
 
 /* Carga instructivo preparación para producto */
 
-
 $.ajax({
-    url: `/api/instructivos/${referencia}`,
-    type: 'GET',
-}).done((data, status, xhr) => {
-    $('#pasos_instructivo').html('');
+  url: `/api/instructivos/${referencia}`,
+  type: "GET",
+})
+  .done((data, status, xhr) => {
+    $("#pasos_instructivo").html("");
     pasos = data;
     var i = 1;
 
     data.forEach((instructivo, indx) => {
+      instructivo.tiempo = instructivo.tiempo * 60;
 
-        instructivo.tiempo = instructivo.tiempo * 60;
-
-        $('#pasos_instructivo').append(`<a href="javascript:void(0)" onclick="procesoTiempo(event)" 
-            class="proceso-instructivo" attr-indx="${indx}" attr-id="${instructivo.id}" id="proceso-instructivo${i}" 
-            attr-tiempo="${instructivo.tiempo}">PASO ${indx + 1}: ${instructivo.pasos} </a>  <br/>`);
-        tiempoTotal = tiempoTotal + instructivo.tiempo;
-        i++;
+      $("#pasos_instructivo")
+        .append(`<a href="javascript:void(0)" onclick="procesoTiempo(event)" 
+            class="proceso-instructivo" attr-indx="${indx}" attr-id="${
+        instructivo.id
+      }" id="proceso-instructivo${i}" 
+            attr-tiempo="${instructivo.tiempo}">PASO ${indx + 1}: ${
+        instructivo.pasos
+      } </a>  <br/>`);
+      tiempoTotal = tiempoTotal + instructivo.tiempo;
+      i++;
     });
     var ordenpasos = i;
     localStorage.setItem("ordenpasos", ordenpasos - 1);
     ocultarInstructivo();
-}).fail(err => {
+  })
+  .fail((err) => {
     console.log(err);
-});
+  });
 
 /* Cargar el tiempo del proceso */
 
 function procesoTiempo(event) {
+  pasoEjecutado = pasoEjecutado + 1;
+  validar = controlTanques();
+  if (validar == 0) return false;
 
-    pasoEjecutado = pasoEjecutado + 1;
-    validar = controlTanques();
-    if (validar == 0)
-        return false;
+  let tiempo = $(event.target).attr("attr-tiempo");
+  let id = $(event.target).attr("attr-id");
+  let proceso = pasos[queeProcess];
 
-    let tiempo = $(event.target).attr('attr-tiempo');
-    let id = $(event.target).attr('attr-id');
-    let proceso = pasos[queeProcess];
+  /* marcar el check del tanque siguiente y validar */
 
-    /* marcar el check del tanque siguiente y validar */
-
-    if (proceso.id == id) {
-        $('#tiempo_instructivo').val(tiempo);
-    } else {
-
-        $.alert({
-            theme: 'white',
-            icon: 'fa fa-warning',
-            title: 'Samara Cosmetics',
-            content: 'Siga el orden del instructivo',
-            confirmButtonClass: 'btn-info',
-            type: 'warning',
-        });
-    }
+  if (proceso.id == id) {
+    $("#tiempo_instructivo").val(tiempo);
+  } else {
+    $.alert({
+      theme: "white",
+      icon: "fa fa-warning",
+      title: "Samara Cosmetics",
+      content: "Siga el orden del instructivo",
+      confirmButtonClass: "btn-info",
+      type: "warning",
+    });
+  }
 }
 
 /* Validar que la linea ha sido seleccionada */
 
 function validarEquipos() {
-    const equipo1 = $('#sel_agitador').val();
-    const equipo2 = $('#sel_marmita').val();
+  const equipo1 = $("#sel_agitador").val();
+  const equipo2 = $("#sel_marmita").val();
 
-    if (equipo1 * equipo2 == 0) {
-        alertify.set("notifier", "position", "top-right"); alertify.error("Antes de continuar, seleccione los Equipos a usar para la linea de producción");
-        return 0;
-    }
+  if (equipo1 * equipo2 == 0) {
+    alertify.set("notifier", "position", "top-right");
+    alertify.error(
+      "Antes de continuar, seleccione los Equipos a usar para la linea de producción"
+    );
+    return 0;
+  }
 }
 
 /* Marque la linea del instructivo al ser ejecutado como exitosa */
 
 function refreshInstructivo() {
-    $('#tiempo_instructivo').val(0);
-    $('.proceso-instructivo').each(function (link) {
-        if ($(this).attr('attr-indx') < queeProcess) {
-            $(this).addClass('text-sucess');
-        }
-    });
+  $("#tiempo_instructivo").val(0);
+  $(".proceso-instructivo").each(function (link) {
+    if ($(this).attr("attr-indx") < queeProcess) {
+      $(this).addClass("text-sucess");
+    }
+  });
 }
 
 /* Ocultar las instrucciones del paso 3 en adelante */
 
 function ocultarInstructivo() {
+  var numElem = $("#pasos_instructivo .proceso-instructivo").length;
 
-    var numElem = $('#pasos_instructivo .proceso-instructivo').length;
-
-    for (i = 4; i <= numElem; i++) {
-        $("#proceso-instructivo" + i).css("color", "#FFFFFF");
-        $("#proceso-instructivo" + i).css("outline", "none");
-    }
+  for (i = 4; i <= numElem; i++) {
+    $("#proceso-instructivo" + i).css("color", "#FFFFFF");
+    $("#proceso-instructivo" + i).css("outline", "none");
+  }
 }
 
 /* Mostrar siguiente paso */
 
 function mostrarInstructivo() {
-
-    $("#proceso-instructivo" + paso).css("color", "#67757c");
-    paso = paso + 1;
+  $("#proceso-instructivo" + paso).css("color", "#67757c");
+  paso = paso + 1;
 }
 
 /* Reiniciar instructivo */
 
 function reiniciarInstructivo() {
-    $('.proceso-instructivo').removeClass('text-sucess');
-    queeProcess = 0;
-    ocultarInstructivo();
+  $(".proceso-instructivo").removeClass("text-sucess");
+  queeProcess = 0;
+  ocultarInstructivo();
 }
 
 function deshabilitarbtn() {
-    $('.preparacion_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
-    $('.preparacion_verificado').prop('disabled', false);
+  $(".preparacion_realizado")
+    .css({ background: "lightgray", border: "gray" })
+    .prop("disabled", true);
+  $(".preparacion_verificado").prop("disabled", false);
 }

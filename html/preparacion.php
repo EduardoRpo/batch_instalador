@@ -12,7 +12,7 @@ session_start();
   <meta name="description" content="Batch Record">
   <meta name="author" content="Samara Cosmetics">
   <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-  <title>Samara Cosmetics</title>
+  <title>Preparacion | Samara Cosmetics</title>
 
   <link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="html/css/style.css" rel="stylesheet">

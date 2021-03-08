@@ -51,7 +51,7 @@ function preparar(datos) {
 
     if (btn_id == 'firma3') {
         firmar2daSeccion(info);
-        /* firmar(info); */
+        firmar(info);
     }
 
     if (btn_id == 'firma4') {

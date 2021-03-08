@@ -18,7 +18,7 @@ include_once('modal/modal_condicionesMedio.php');
   <meta name="description" content="Batch Record">
   <meta name="author" content="Samara Cosmetics">
 
-  <title>Samara Cosmetics</title>
+  <title>Pesaje | Samara Cosmetics</title>
 
   <!-- Favicon icon -->
   <link rel="icon" type="image/png" sizes="16x16" href="#">

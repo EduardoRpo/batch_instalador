@@ -24,7 +24,6 @@ if (!empty($_POST)) {
             ]);
             $rows = $query->rowCount();
 
-
             /* Si existe un registro actualiza de lo contrario lo inserta */
 
             if ($rows > 0) {

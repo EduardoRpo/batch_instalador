@@ -1,7 +1,7 @@
 $('#tablaEnvasado').dataTable({
     "order": [[ 1, "desc" ]],
     ajax: {
-        url: '/api/batch',
+        url: '/api/envasado',
         dataSrc: ''
     },
     language: {

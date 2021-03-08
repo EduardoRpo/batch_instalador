@@ -17,7 +17,7 @@ include("modal/modal_condicionesMedio.php");
   <meta name="description" content="Batch Record">
   <meta name="author" content="Teenus SAS">
 
-  <title>Samara Cosmetics</title>
+  <title>Preparacion | Samara Cosmetics</title>
 
   <!-- Favicon icon -->
   <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">

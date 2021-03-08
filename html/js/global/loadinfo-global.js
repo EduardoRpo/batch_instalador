@@ -38,8 +38,9 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   setTimeout(() => {
-    if (modulo !== undefined && modulo != 9) cargarBatch();
-  }, 500);
+    if (modulo !== undefined || modulo != 9) 
+      cargarBatch();
+  }, 1300);
 });
 
 /* Modulo */
@@ -50,15 +51,14 @@ $.ajax({
   data: { proceso },
 
   success: function (data, status, xhr) {
-
     if (data !== "") {
       const info = JSON.parse(data);
       modulo = info.id;
 
-      if (modulo != 4 && modulo != 9) 
+      if (modulo != 4 && modulo != 9 && modulo != undefined)
         carguepreguntas(modulo);
 
-      if (modulo != 9) {
+      if (modulo != 9 && modulo != undefined) {
         desinfectantes();
         cargar_condiciones_medio();
         validarTanques(modulo);

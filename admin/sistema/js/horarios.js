@@ -35,21 +35,24 @@ $("#btnSeleccionarHorariosBatch").click(function (e) {
     tiempo = $("#timeOne").val();
 
     if (tiempo == "") {
-      alertify.set("notifier", "position", "top-right");alertify.error("Ingrese una hora.");
+      alertify.set("notifier", "position", "top-right");
+      alertify.error("Ingrese una hora.");
       return false;
     }
 
     if (tiempos.length < 1) {
       $("#hora1").html(tiempo);
     } else if (tiempo == tiempos[0]) {
-      alertify.set("notifier", "position", "top-right");alertify.error("Los horarios son iguales, seleccionar otra hora.");
+      alertify.set("notifier", "position", "top-right");
+      alertify.error("Los horarios son iguales, seleccionar otra hora.");
       return false;
     } else {
       $("#hora2").html(tiempo);
     }
     tiempos.push(tiempo);
   } else {
-    alertify.set("notifier", "position", "top-right");alertify.error("Ingrese máximo dos horarios.");
+    alertify.set("notifier", "position", "top-right");
+    alertify.error("Ingrese máximo dos horarios.");
   }
 });
 
@@ -74,11 +77,21 @@ $("#btnGuardarHorariosBatch").click(function (e) {
     data: { tiempos, operacion: 3 },
     success: function (response) {
       if (response == 1) {
-        alertify.set("notifier", "position", "top-right");alertify.success("Horarios Almacenados Correctamente.");
+        alertify.set("notifier", "position", "top-right");
+        alertify.success("Horarios Almacenados Correctamente.");
       } else {
-        alertify.set("notifier", "position", "top-right");alertify.success("Error al almacenar los horarios, intente de nuevo.");
+        alertify.set("notifier", "position", "top-right");
+        alertify.success("Error al almacenar los horarios, intente de nuevo.");
       }
     },
+  });
+});
+
+$("#btnEjecutarHorariosBatch").click(function (e) {
+  e.preventDefault();
+
+  $.when(ejecutarPedidos()).then(function () {
+    alertify.success("Pedidos cargados y/o actualizados correctamente.");
   });
 });
 

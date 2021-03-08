@@ -19,7 +19,7 @@ include('modal/m_firma.php');
 
   <!-- Favicon icon -->
   <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
-  <title>Samara Cosmetics</title>
+  <title>Aprobacion  | Samara Cosmetics</title>
 
   <!-- Bootstrap Core CSS -->
   <link href="../../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">

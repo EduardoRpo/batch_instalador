@@ -22,7 +22,7 @@ include_once("modal/m_batch_pdf.php");
   <!-- Favicon icon -->
   <!-- <link rel="icon" type="image/png" sizes="16x16" href="../BatchR/htdocs/assets/images/favicon.png"> -->
 
-  <title>Samara Cosmetics</title>
+  <title>Batch | Samara Cosmetics</title>
 
   <?php include('./partials/scripts.php'); ?>
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />

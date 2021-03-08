@@ -1,15 +1,14 @@
 <?php
 
-//use BatchRecord\dao\AgitadorDao;
 use BatchRecord\dao\BatchDao;
 use BatchRecord\dao\CargoDao;
 use BatchRecord\Dao\Connection;
 use BatchRecord\dao\DesinfectanteDao;
 use BatchRecord\dao\IntructivoPreparacionDao;
-//use BatchRecord\dao\MarmitaDao;
 use BatchRecord\dao\EquipoDao;
 use BatchRecord\dao\MateriaPrimaDao;
 use BatchRecord\Dao\PesajeDao;
+use BatchRecord\Dao\BatchLineaDao;
 use BatchRecord\dao\PreguntaDao;
 use BatchRecord\Dao\ProductDao;
 use BatchRecord\dao\UserDao;
@@ -27,14 +26,13 @@ include_once __DIR__ . '/AutoloaderSourceCode.php';
 
 $productDao = new ProductDao();
 $pesajeDao = new PesajeDao();
+$batchLineaDao = new BatchLineaDao();
 $batchDao = new BatchDao();
 $preguntaDao = new PreguntaDao();
 $desinfectanteDao = new DesinfectanteDao();
 $materiaPrimaDao = new MateriaPrimaDao();
 $cargoDao = new CargoDao();
-//$agitadorDAo = new AgitadorDao();
 $equipoDao = new EquipoDao();
-//$marmitaDao = new MarmitaDao();
 $instructivoPreparacionDao = new IntructivoPreparacionDao();
 $userDao = new UserDao();
 $controlProcesoDao = new ControlProcesoDao();
@@ -69,9 +67,33 @@ $app->get('/productsDetails/{idProducto}', function (Request $request, Response 
   return $response;
 });
 
-$app->get('/pesajes', function (Request $request, Response $response, $args) use ($pesajeDao) {
-  $pesajes = $pesajeDao->findAll();
+$app->get('/pesajes', function (Request $request, Response $response, $args) use ($batchLineaDao) {
+  $pesajes = $batchLineaDao->findBatchPesajes();
   $response->getBody()->write(json_encode($pesajes, JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
+});
+
+$app->get('/preparacion', function (Request $request, Response $response, $args) use ($batchLineaDao) {
+  $preparacion = $batchLineaDao->findBatchPrepacion();
+  $response->getBody()->write(json_encode($preparacion, JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
+});
+
+$app->get('/aprobacion', function (Request $request, Response $response, $args) use ($batchLineaDao) {
+  $aprobacion = $batchLineaDao->findBatchAprobacion();
+  $response->getBody()->write(json_encode($aprobacion, JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
+});
+
+$app->get('/envasado', function (Request $request, Response $response, $args) use ($batchLineaDao) {
+  $envasado = $batchLineaDao->findBatchEnvasado();
+  $response->getBody()->write(json_encode($envasado, JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
+});
+
+$app->get('/acondicionamiento', function (Request $request, Response $response, $args) use ($batchLineaDao) {
+  $acondicionamiento = $batchLineaDao->findBatchAcondicionamiento();
+  $response->getBody()->write(json_encode($acondicionamiento, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
 
@@ -81,10 +103,10 @@ $app->get('/batch/{id}', function (Request $request, Response $response, $args) 
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->get('/batch', function (Request $request, Response $response, $args) use ($batchDao) {
+$app->get('/batch', function (Request $request, Response $data, $args) use ($batchDao) {
   $batch = $batchDao->findAll();
-  $response->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));
-  return $response->withHeader('Content-Type', 'application/json');
+  $data->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));
+  return $data->withHeader('Content-Type', 'application/json');
 });
 
 $app->post('/clonebatch', function (Request $request, Response $response, $args) use ($batchDao) {
@@ -137,7 +159,6 @@ $app->get('/cargos', function (Request $request, Response $response, $args) use 
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-
 $app->get('/equipos', function (Request $request, Response $response, $args) use ($equipoDao) {
   $equipos = $equipoDao->findAll();
   $response->getBody()->write(json_encode($equipos, JSON_NUMERIC_CHECK));
@@ -150,12 +171,6 @@ $app->get('/equipos/{idBatch}', function (Request $request, Response $response, 
 
   return $response->withHeader('Content-Type', 'application/json');
 });
-
-/* $app->get('/loteadoras', function (Request $request, Response $response, $args) use ($marmitaDao) {
-    $batch = $marmitaDao->findAll();
-    $response->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));
-    return $response->withHeader('Content-Type', 'application/json');
-  }); */
 
 $app->get('/instructivos/{idProducto}', function (Request $request, Response $response, $args) use ($instructivoPreparacionDao) {
   $batch = $instructivoPreparacionDao->findByProduct($args["idProducto"]);
@@ -221,9 +236,23 @@ $app->post('/pedidos/nuevos', function (Request $request, Response $response, $a
   $data = file_get_contents('../html/pedidos/pedidos.txt');
   $array = $pedidosDao->save($data);
   $response->getBody()->write(json_encode($array));
-  
+
   return $response->withHeader('Content-Type', 'application/json');
 });
+
+/* $app->post('/incidencias', function (Request $request, Response $response, $args) use ($batchDao) {
+  $requestBody = json_decode($request->getBody(), true);
+  $batch = $batchDao->findById($requestBody['idbatch']);
+  //$batch["unidad_lote"] = $requestBody['unidades'];
+  $duplicates = $requestBody['cantidad'];
+  for ($i = 0; $i < $duplicates; $i++) {
+    $rows = $batchDao->save($batch);
+  }
+  $resp = array('success' => ($rows > 0));
+  $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
+}); */
+
 
 // Run app
 $app->run();

@@ -1,4 +1,6 @@
 <?php
+/* namespace BatchRecord\dao;
+use BatchRecord\dao\BatchDao; */
 
 if (!empty($_POST)) {
     require_once('../../conexion.php');
@@ -51,6 +53,33 @@ if (!empty($_POST)) {
                 'observaciones' => $observaciones,
             ]);
 
+            switch ($modulo) {
+                case '2':
+                    $estado = 4;
+                    break;
+                case '3':
+                    $estado = 6;
+                    break;
+                case '4':
+                    $estado = 8;
+                    break;
+                case '5':
+                    $estado = 10;
+                    break;
+                case '6':
+                    $estado = 12;
+                    break;
+                default:
+                    $estado = 14;
+                    break;
+            }
+
+
+            //Modifica el estado de acuerdo con el modulo
+            $sql = "UPDATE batch SET estado = :estado WHERE id_batch = :batch";
+            $query = $conn->prepare($sql);
+            $query->execute(['batch' => $batch, 'estado' => $estado]);
+
             if ($result) {
                 echo '1';
             } else
@@ -74,6 +103,33 @@ if (!empty($_POST)) {
                 'batch' => $batch,
             ]);
 
+            switch ($modulo) {
+                case '2':
+                    $estado = 4;
+                    break;
+                case '3':
+                    $estado = 6;
+                    break;
+                case '4':
+                    $estado = 8;
+                    break;
+                case '5':
+                    $estado = 10;
+                    break;
+                case '6':
+                    $estado = 12;
+                    break;
+                default:
+                    $estado = 14;
+                    break;
+            }
+
+
+            //Modifica el estado de acuerdo con el modulo
+            $sql = "UPDATE batch SET estado = :estado WHERE id_batch = :batch";
+            $query = $conn->prepare($sql);
+            $query->execute(['batch' => $batch, 'estado' => $estado]);
+
             if ($result) {
                 echo '1';
             } else
@@ -85,9 +141,7 @@ if (!empty($_POST)) {
             $modulo = $_POST['modulo'];
             $batch = $_POST['batch'];
 
-            $sql = "UPDATE batch_firmas2seccion SET verifico =:firma
-                    WHERE modulo =:modulo AND batch =:batch";
-
+            $sql = "UPDATE batch_firmas2seccion SET verifico =:firma WHERE modulo =:modulo AND batch =:batch";
             $query = $conn->prepare($sql);
             $result = $query->execute([
                 'firma' => $firma,
@@ -99,6 +153,7 @@ if (!empty($_POST)) {
                 echo '1';
             } else
                 echo '0';
+
             break;
     }
 }
