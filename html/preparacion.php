@@ -11,7 +11,8 @@ session_start();
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Batch Record">
   <meta name="author" content="Samara Cosmetics">
-  <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
+  
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/icon/favicon.png">
   <title>Preparacion | Samara Cosmetics</title>
 
   <link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">

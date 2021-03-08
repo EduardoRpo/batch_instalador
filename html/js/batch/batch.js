@@ -65,11 +65,11 @@ function crearTablaBatch(
             ? "Pesaje"
             : data == 4
             ? "Preparación"
-            : data == 7
+            : data == 5
             ? "Aprobación"
-            : data == 8
+            : data == 6
             ? "Envasado"
-            : data == 9
+            : data == 7
             ? "Acondicionamiento"
             : "Pesaje";
         },

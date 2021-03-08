@@ -16,7 +16,7 @@ include('modal/modal_cambiarContrasena.php');
   <meta name="author" content="Samara Cosmetics">
 
   <!-- Favicon icon -->
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/icon/favicon.png">
   <title>Pesaje | Samara Cosmetics</title>
 
   <!-- Bootstrap Core CSS -->

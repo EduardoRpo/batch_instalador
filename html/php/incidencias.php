@@ -58,19 +58,19 @@ if (!empty($_POST)) {
                     $estado = 4;
                     break;
                 case '3':
-                    $estado = 6;
+                    $estado = 5;
                     break;
                 case '4':
-                    $estado = 8;
+                    $estado = 6;
                     break;
                 case '5':
-                    $estado = 10;
+                    $estado = 7;
                     break;
                 case '6':
-                    $estado = 12;
+                    $estado = 8;
                     break;
                 default:
-                    $estado = 14;
+                    $estado = 9;
                     break;
             }
 
@@ -108,19 +108,19 @@ if (!empty($_POST)) {
                     $estado = 4;
                     break;
                 case '3':
-                    $estado = 6;
+                    $estado = 5;
                     break;
                 case '4':
-                    $estado = 8;
+                    $estado = 6;
                     break;
                 case '5':
-                    $estado = 10;
+                    $estado = 7;
                     break;
                 case '6':
-                    $estado = 12;
+                    $estado = 8;
                     break;
                 default:
-                    $estado = 14;
+                    $estado = 9;
                     break;
             }
 
