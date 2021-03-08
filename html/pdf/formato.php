@@ -7,7 +7,7 @@
     <title>pfd Batch Record</title>
 
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/icon/favicon.png">
     <title>Samara Cosmetics</title>
 
     <!-- Bootstrap Core CSS -->

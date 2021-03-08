@@ -133,6 +133,7 @@ $app->get('/questions', function (Request $request, Response $response, $args) u
   }
   return $response->withHeader('Content-Type', 'application/json');
 });
+
 // preguntas por modulo
 $app->get('/questions/{idModule}', function (Request $request, Response $response, $args) use ($preguntaDao) {
   $array = $preguntaDao->findByModule($args["idModule"]);

@@ -181,7 +181,7 @@ class PedidosDao
           $formula = $this->findFormula($pedido['producto']);
 
           // determina el estado de creacion del batch 
-          $formula > 0 ? $estado = '1' : $estado = '2';
+          $formula > 0 ? $estado = '2' : $estado = '1';
 
           // Crea el batch record
           $this->saveBatch($fechahoy, $tamanolote, $presentacion, $pedido['cantidad'], $pedido['producto'], $pedido['Nro_Pedido'], $estado);

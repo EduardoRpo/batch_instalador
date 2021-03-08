@@ -1,3 +1,5 @@
+let id;
+
 /* bloquear inputs */
 $("input").prop("readonly", true);
 
@@ -45,13 +47,16 @@ $(document).ready(function () {
   parametros_Control();
   area_desinfeccion();
   desinfectante();
-  condiciones_medio();
+  //condiciones_medio();
   control_proceso();
   equipos();
 });
 
 function cargar_Alertas() {
-  $.post("../../html/php/c_batch_pdf.php", (data = { operacion: 7 }), function (data, textStatus, jqXHR) {
+  $.post(
+    "../../html/php/c_batch_pdf.php",
+    (data = { operacion: 7 }),
+    function (data, textStatus, jqXHR) {
       info = JSON.parse(data);
 
       for (let i = 0; i < info.length; i++) {
@@ -209,6 +214,7 @@ function condiciones_medio() {
     "../../html/php/c_batch_pdf.php",
     data,
     function (data, textStatus, jqXHR) {
+      debugger;
       if (data == "false") return false;
       let info = JSON.parse(data);
 
@@ -222,7 +228,7 @@ function condiciones_medio() {
 }
 
 function equipos() {
-  $.get(`/api/equipos/{id}`, function (data, textStatus, jqXHR) {
+  $.get(`/api/equipos/${id}`, function (data, textStatus, jqXHR) {
     if (data.length == 0) return false;
     $("#agitador").val(data[0].descripcion);
     $("#marmita").val(data[1].descripcion);
@@ -273,11 +279,11 @@ function especificaciones_producto() {
 }
 
 function control_proceso() {
-  $.get(`/controlproceso/{id}`, function (data, textStatus, jqXHR) {
+  $.get(`/api/controlproceso/${id}`, function (info, textStatus, jqXHR) {
     debugger;
 
-    if (data == "false") return false;
-    let info = JSON.parse(data);
+    if (info == "false") return false;
+    //info = data;
     for (let i = 0; i < info.length; i++) {
       $(`.color${info[i].modulo}`).html(
         info[0].color == 1

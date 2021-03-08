@@ -60,9 +60,6 @@ switch ($op) {
 
         $batch = $_POST['id'];
 
-
-
-
         $sql = "SELECT d.nombre as desinfectante, d.concentracion, bds.modulo, bds.realizo, u.urlfirma as realizo, CONCAt(u.nombre, ' ', u.apellido) as nombre_realizo, us.urlfirma as verifico, CONCAt(us.nombre, ' ' ,us.apellido) as nombre_verifico, bds.verifico as firma ,bds.fecha_registro 
                 FROM desinfectante d INNER JOIN batch_desinfectante_seleccionado bds ON bds.desinfectante = d.id 
                 INNER JOIN	usuario u ON u.id = bds.realizo
@@ -91,8 +88,7 @@ switch ($op) {
 
         $id = $_POST['id'];
 
-        $sql = "SELECT fecha, temperatura, humedad, id_modulo as modulo 
-                FROM batch_condicionesmedio 
+        $sql = "SELECT fecha, temperatura, humedad, id_modulo as modulo FROM batch_condicionesmedio 
                 WHERE id_batch = :id";
         $query = $conn->prepare($sql);
         $query->execute(['id' => $id]);
