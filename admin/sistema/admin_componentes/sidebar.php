@@ -57,7 +57,11 @@
             <li id="horarios"><a href=""><i class="fa fa-chevron-down"></i><span>Bath Record Automático</span></a></li>
             <ul class="menu_horarios">
                 <li><a href="horarios.php" id="link_menu_horarios"><i class="fa fa-clock-o"></i><span>Horarios</span></a></li>
+            </ul>
 
+            <li id="pdf"><a href=""><i class="fa fa-chevron-down"></i><span>PDF</span></a></li>
+            <ul class="menu_pdf">
+                <li><a href="pdf.php" id="link_menu_pdf"><i class="fa fa-clock-o"></i><span>Textos</span></a></li>
             </ul>
 
         </ul>

@@ -14,6 +14,7 @@ use BatchRecord\Dao\ProductDao;
 use BatchRecord\dao\UserDao;
 use BatchRecord\dao\ControlProcesoDao;
 use BatchRecord\dao\PedidosDao;
+use BatchRecord\dao\TextosPDFDao;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -37,6 +38,7 @@ $instructivoPreparacionDao = new IntructivoPreparacionDao();
 $userDao = new UserDao();
 $controlProcesoDao = new ControlProcesoDao();
 $pedidosDao = new PedidosDao();
+$textospdfDao = new TextosPDFDao();
 
 $app = AppFactory::create();
 $app->setBasePath('/api');
@@ -254,6 +256,12 @@ $app->post('/pedidos/nuevos', function (Request $request, Response $response, $a
   return $response->withHeader('Content-Type', 'application/json');
 }); */
 
+
+$app->get('/pdftextos', function (Request $request, Response $response, $args) use ($textospdfDao) {
+  $textos = $textospdfDao->findAll();
+  $response->getBody()->write(json_encode($textos, JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
+});
 
 // Run app
 $app->run();

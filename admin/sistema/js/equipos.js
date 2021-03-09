@@ -1,4 +1,4 @@
-let editar;
+
 cargarSelectorLinea();
 
 /* Mostrar Menu seleccionado */
@@ -23,10 +23,10 @@ $(document).ready(function () {
         },
 
         "columns": [
-            { "data": "maquina", className: "centrado" },
+            { "data": "id", className: "centrado" },
             { "defaultContent": "<a href='#' <i class='large material-icons link-editar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" },
-            { "data": "maquina" },
-            { "data": "nombre" },
+            { "data": "descripcion" },
+            { "data": "tipo" },
         ]
     });
     /* Enumera los registros en la tabla */
@@ -44,7 +44,6 @@ $(document).ready(function () {
 
 $('#adEquipos').click(function (e) {
     e.preventDefault();
-    editar = 0;
     $("#frmadParametro").slideToggle();
     $('#btnguardarEquipos').html('Crear');
     $('#txtEquipo').val('');
@@ -61,13 +60,13 @@ function cargarSelectorLinea() {
         success: function (response) {
             var info = JSON.parse(response);
 
-            let $select = $('#cmbLinea');
+            let $select = $('#cmbTipo');
             $select.empty();
 
             $select.append('<option disabled selected>' + "Seleccionar" + '</option>');
 
             $.each(info.data, function (i, value) {
-                $select.append('<option value ="' + value.id + '">' + value.linea + '</option>');
+                $select.append('<option value ="' + value.tipo + '">' + value.tipo + '</option>');
             });
         },
         error: function (response) {
@@ -102,17 +101,16 @@ $(document).on('click', '.link-borrar', function (e) {
 
 $(document).on('click', '.link-editar', function (e) {
     e.preventDefault();
-    editar = 1;
     let id = $(this).parent().parent().children().eq(2).text();
-    let nombre = $(this).parent().parent().children().eq(2).text();
-    let linea = $(this).parent().parent().children().eq(3).text();
+    let equipo = $(this).parent().parent().children().eq(2).text();
+    let tipo = $(this).parent().parent().children().eq(3).text();
 
     $('#frmadParametro').slideDown();
     $('#btnguardarEquipos').html('Actualizar');
 
     $('#txtid_Equipo').val(id);
-    $('#txtEquipo').val(nombre);
-    $(`#cmbLinea option:contains(${linea})`).prop('selected', true);
+    $('#txtEquipo').val(equipo);
+    $(`#cmbTipo option:contains(${tipo})`).prop('selected', true);
 });
 
 
@@ -124,9 +122,9 @@ $(document).ready(function () {
 
         let id = $('#txtid_Equipo').val();
         let equipo = $('#txtEquipo').val();
-        let linea = $('#cmbLinea').val();
+        let tipo = $('#cmbTipo').val();
 
-        if (equipo == '' || linea == null) {
+        if (equipo == '' || tipo == null) {
             alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos");
             return false();
         }
@@ -134,7 +132,7 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: "php/c_maquinaria.php",
-            data: { operacion: 4, editar: editar, id: id, equipo: equipo, linea: linea },
+            data: { operacion: 4, id, equipo, tipo },
 
             success: function (r) {
                 if (r == 1) {

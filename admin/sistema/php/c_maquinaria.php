@@ -6,59 +6,58 @@ $op = $_POST['operacion'];
 
 switch ($op) {
   case 1: //listar Equipos
-    $query = "SELECT m.id, m.maquina, l.nombre FROM maquinaria m INNER JOIN linea l ON l.id = m.linea ORDER BY m.id ASC";
+    $query = "SELECT * FROM equipos";
     ejecutarQuerySelect($conn, $query);
     break;
 
-  case 2: //Select lineas
-    $query =  "SELECT id, nombre as linea FROM linea";
+  case 2: //Select Tipo
+    $query =  "SELECT DISTINCT tipo FROM equipos";
     ejecutarQuerySelect($conn, $query);
 
     break;
 
   case 3: //Eliminar
     $id = $_POST['id'];
-    $sql = "DELETE FROM maquinaria WHERE maquina = :id";
+    $sql = "DELETE FROM equipos WHERE id = :id";
     ejecutarEliminar($conn, $sql, $id);
     break;
 
   case 4: // Guardar y actualizar data
     if (!empty($_POST)) {
-      $editar = $_POST['editar'];
+
       $id = $_POST['id'];
       $equipo = ucfirst(mb_strtolower($_POST['equipo'], "UTF-8"));
-      $linea = $_POST['linea'];
+      $tipo = $_POST['tipo'];
 
-      if ($editar == 0) {
-        $sql = "SELECT * FROM maquinaria WHERE maquina=:equipo";
-        $query = $conn->prepare($sql);
-        $query->execute(['equipo' => $equipo]);
-        $rows = $query->rowCount();
+      $sql = "SELECT * FROM equipos WHERE descripcion = :id";
+      $query = $conn->prepare($sql);
+      $query->execute(['id' => $id]);
+      $rows = $query->rowCount();
 
-        if ($rows > 0) {
-          echo '2';
-          exit();
-        } else {
-          $sql = "INSERT INTO maquinaria (maquina, linea) 
-                  VALUES(:equipo, :linea)";
-          $query = $conn->prepare($sql);
-          $result = $query->execute(['equipo' => $equipo, 'linea' => $linea]);
-          ejecutarQuery($result, $conn);
-        }
-      } else {
+      if ($rows > 0) {
         $id = $_POST['id'];
-        $sql = "UPDATE maquinaria SET maquina = :equipo, linea=:linea WHERE maquina = :id";
+        $sql = "UPDATE equipos SET descripcion = :equipo, tipo = :tipo WHERE descripcion = :id";
         $query = $conn->prepare($sql);
         $result = $query->execute([
           'equipo' => $equipo,
-          'linea' => $linea,
+          'tipo' => $tipo,
           'id' => $id
         ]);
 
         if ($result) {
           echo '3';
-          exit();
         }
+        exit();
+
+      } else {
+        $sql = "INSERT INTO equipos (descripcion, tipo) VALUES (:equipo, :tipo)";
+        $query = $conn->prepare($sql);
+        $result = $query->execute(['equipo' => $equipo, 'tipo' => $tipo]);
+        ejecutarQuery($result, $conn);
+      }
+
+      if ($result) {
+        echo '1';
       }
     }
     break;

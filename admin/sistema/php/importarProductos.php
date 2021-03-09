@@ -42,10 +42,10 @@ foreach ($datos as $data) {
 /* print_r($tabla);
 exit(); */
 /* Elimina todos los datos */
-$conn->query("DELETE FROM $tabla");
+//$conn->query("DELETE FROM $tabla");
 
 /* Restablece contador BD */
-$conn->query("ALTER TABLE $tabla AUTO_INCREMENT = 1");
+//$conn->query("ALTER TABLE $tabla AUTO_INCREMENT = 1");
 
 /* Insertar datos del archivo */
 

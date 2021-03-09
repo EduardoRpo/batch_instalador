@@ -71,7 +71,7 @@ function crearTablaBatch(
             ? "Envasado"
             : data == 7
             ? "Acondicionamiento"
-            : "Pesaje";
+            : "Otro";
         },
       },
       {

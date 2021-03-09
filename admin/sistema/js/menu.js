@@ -46,3 +46,12 @@ $("#horarios").click(function (e) {
     $(".contenedor-menu .menu ul.menu_usuarios").slideUp();
     $(".contenedor-menu .menu ul.menu_horarios").slideToggle();
   });
+
+  $("#pdf").click(function (e) {
+    e.preventDefault();
+    $(".contenedor-menu .menu ul.menu_generales").slideUp();
+    $(".contenedor-menu .menu ul.menu_productos").slideUp();
+    $(".contenedor-menu .menu ul.menu_usuarios").slideUp();
+    $(".contenedor-menu .menu ul.menu_horarios").slideUp();
+    $(".contenedor-menu .menu ul.menu_pdf").slideToggle();
+  });
