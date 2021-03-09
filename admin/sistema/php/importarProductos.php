@@ -26,7 +26,8 @@ $tabla = $_POST['tabla'];
 if ($tabla == 'notificacion_sanitaria')
 	$datos = strtoupper(file_get_contents($datos['tmp_name']));
 else
-	$datos = ucfirst(mb_strtolower(file_get_contents($datos['tmp_name'])));
+	$datos = utf8_encode(file_get_contents($datos['tmp_name']));
+
 
 $datos = explode("\n", $datos);
 $datos = array_filter($datos);
@@ -39,8 +40,6 @@ foreach ($datos as $data) {
 	$i++;
 }
 
-/* print_r($tabla);
-exit(); */
 /* Elimina todos los datos */
 //$conn->query("DELETE FROM $tabla");
 

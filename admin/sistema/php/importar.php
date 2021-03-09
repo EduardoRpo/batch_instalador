@@ -7,7 +7,7 @@ if (!empty($_POST)) {
 	$datos = $_FILES['datosExcel'];
 	$operacion = $_POST['operacion'];
 
-	$datos = file_get_contents($datos['tmp_name']);
+	$datos = utf8_encode(file_get_contents($datos['tmp_name']));
 	$datos = explode("\n", $datos);
 	$datos = array_filter($datos);
 	$i = 0;
