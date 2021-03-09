@@ -22,22 +22,26 @@ else if (isset($_FILES['datosExcel8']))
 	$datos = $_FILES['datosExcel8'];
 
 $tabla = $_POST['tabla'];
-
-if ($tabla == 'notificacion_sanitaria')
-	$datos = strtoupper(file_get_contents($datos['tmp_name']));
-else
-	$datos = utf8_encode(file_get_contents($datos['tmp_name']));
-
+$datos = utf8_encode(file_get_contents($datos['tmp_name']));
 
 $datos = explode("\n", $datos);
 $datos = array_filter($datos);
 $i = 0;
 
 // preparar datos
-foreach ($datos as $data) {
-	if ($i !== 0)
-		$dataList[] = explode(";", ucfirst(mb_strtolower($data, 'utf-8')));
-	$i++;
+
+if ($tabla == 'notificacion_sanitaria' || $tabla == 'nombre_producto' || $tabla == 'propietario') {
+	foreach ($datos as $data) {
+		if ($i !== 0)
+			$dataList[] = explode(";", strtoupper($data, 'utf-8'));
+		$i++;
+	}
+} else {
+	foreach ($datos as $data) {
+		if ($i !== 0)
+			$dataList[] = explode(";", ucfirst(mb_strtolower($data, 'utf-8')));
+		$i++;
+	}
 }
 
 /* Elimina todos los datos */
