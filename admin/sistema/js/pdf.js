@@ -13,7 +13,7 @@ $(document).ready(function () {
     scrollCollapse: true,
     paging: false,
     language: { url: "admin_componentes/es-ar.json" },
-
+    
     ajax: {
       method: "GET",
       url: "/api/pdftextos",
@@ -34,8 +34,12 @@ $(document).ready(function () {
         data: "id",
       },
       {
+        title: "Titulo",
+        data: "descripcion.titulo[, ]",
+      },
+      {
         title: "Descripción",
-        data: "modulo",
+        data: "descripcion.1.descripcion.0",
       },
       {
         title: "Acciones",

@@ -427,7 +427,7 @@
                 </div>
               </div>
               <form id="formDataExcel9" enctype="multipart/form-data">
-                <input type="file" name="datosExcel9" id="datosExcel9" class="form-control mb-3 ml-3 datosExcel" style="width: 600px; display:inline-flex">
+                <input type="file" name="datosExcel9" id="datosExcel9" class="form-control mb-3 ml-3 datosExcel" style="width: 450px; display:inline-flex">
                 <button type="button" id="btnCargarExcel9" class="btn btn-primary ml-3 btnCargarExcel" onclick="comprobarExtension(this.form, this.form.datosExcel9.value, 'poder_espumoso', 9);" disabled="disabled">Cargar Datos</button>
               </form>
 

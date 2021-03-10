@@ -4,22 +4,12 @@ require_once('../../../conexion.php');
 
 //obtener datos
 
-if (isset($_FILES['datosExcel1']))
-	$datos = $_FILES['datosExcel1'];
-else if (isset($_FILES['datosExcel2']))
-	$datos = $_FILES['datosExcel2'];
-else if (isset($_FILES['datosExcel3']))
-	$datos = $_FILES['datosExcel3'];
-else if (isset($_FILES['datosExcel4']))
-	$datos = $_FILES['datosExcel4'];
-else if (isset($_FILES['datosExcel5']))
-	$datos = $_FILES['datosExcel5'];
-else if (isset($_FILES['datosExcel6']))
-	$datos = $_FILES['datosExcel6'];
-else if (isset($_FILES['datosExcel7']))
-	$datos = $_FILES['datosExcel7'];
-else if (isset($_FILES['datosExcel8']))
-	$datos = $_FILES['datosExcel8'];
+for ($i = 1; $i < 10; $i++) {
+	if (isset($_FILES["datosExcel$i"])) {
+		$datos = $_FILES["datosExcel$i"];
+		break;
+	}
+}
 
 $tabla = $_POST['tabla'];
 $datos = utf8_encode(file_get_contents($datos['tmp_name']));
@@ -30,10 +20,10 @@ $i = 0;
 
 // preparar datos
 
-if ($tabla == 'notificacion_sanitaria' || $tabla == 'nombre_producto' || $tabla == 'propietario') {
+if ($tabla == 'notificacion_sanitaria' || $tabla == 'nombre_producto' || $tabla == 'propietario' || $tabla == 'marca') {
 	foreach ($datos as $data) {
 		if ($i !== 0)
-			$dataList[] = explode(";", strtoupper($data, 'utf-8'));
+			$dataList[] = explode(";", (mb_strtoupper($data, 'utf-8')));
 		$i++;
 	}
 } else {
@@ -67,27 +57,18 @@ if ($tabla == 'producto') {
 	}
 } else if ($tabla == 'densidad_gravedad' || $tabla == 'grado_alcohol' || $tabla == 'ph' || $tabla == 'viscosidad') {
 	foreach ($dataList as $data) {
-		$conn->query("INSERT INTO $tabla (limite_inferior, limite_superior) 
-						  VALUES ('{$data[0]}', '{$data[1]}')");
+		$conn->query("INSERT INTO $tabla (limite_inferior, limite_superior) VALUES ('{$data[0]}', '{$data[1]}')");
 	}
 } else if ($tabla == 'notificacion_sanitaria') {
 	foreach ($dataList as $data) {
-		$conn->query("INSERT INTO $tabla (nombre, vencimiento) 
-						  VALUES ('{$data[0]}', '{$data[1]}')");
+		$conn->query("INSERT INTO $tabla (nombre, vencimiento) VALUES ('{$data[0]}', '{$data[1]}')");
 	}
 } else if ($tabla == 'tapa' || $tabla == 'envase' || $tabla == 'etiqueta' || $tabla == 'empaque' || $tabla == 'otros') {
 	foreach ($dataList as $data) {
-		/* print_r($data[0]);
-		print_r(' ');
-		$nombre = ucfirst(mb_strtolower($data[1]));
-		print_r($nombre); */
-
-		$conn->query("INSERT INTO $tabla (id, nombre) 
-						  VALUES ('{$data[0]}', '{$data[1]}')");
+		$conn->query("INSERT INTO $tabla (id, nombre) VALUES ('{$data[0]}', '{$data[1]}')");
 	}
 } else {
 	foreach ($dataList as $data) {
-		$conn->query("INSERT INTO $tabla (nombre) 
-						  VALUES ('{$data[0]}')");
+		$conn->query("INSERT INTO $tabla (nombre) VALUES ('{$data[0]}')");
 	}
 }
