@@ -5,18 +5,8 @@
     </div>
     <div class="sidebar-wrapper contenedor-menu" id="sidebar-wrapper">
         <ul class="nav menu">
-            <li id="inicio"><a href="./"><i class="now-ui-icons design_app"></i>
-                    <p>Inicio</p>
-                </a></li>
-            <!-- <li><a href="./icons.php"><i class="now-ui-icons education_atom"></i>
-                    <p>Icons</p>
-                </a></li>
-            <li><a href="./map.php"><i class="now-ui-icons location_map-big"></i>
-                    <p>Maps</p>
-                </a></li>
-            <li><a href="./notifications.php"><i class='large material-icons'>portrait</i>
-                    <p>Notifications</p>
-                </a></li> -->
+            <li id="inicio"><a href="./"><i class="now-ui-icons design_app"></i><p>Inicio</p></a></li>
+
             <li id="parametrosg"><a href=""><i class="fa fa-chevron-down"></i><span>Parametros Generales</span></a></li>
             <ul class="menu_generales">
                 <li><a href="modulos.php" id="link_procesos"><i class="fas fa-boxes"></i><span>Procesos</span></a></li>
@@ -27,7 +17,6 @@
                 <li><a href="despejedelinea.php" id="link_despeje"><i class="fas fa-clipboard-list"></i><span>Despeje</span></a></li>
                 <li><a href="tanques.php" id="link_tanques"><i class="fas fa-database"></i><span>Tanques</span></a></li>
             </ul>
-
 
             <li id="productos"><a href=""><i class="fa fa-chevron-down"></i><span>Productos</span></a></li>
             <ul class="menu_productos">
@@ -56,12 +45,12 @@
 
             <li id="horarios"><a href=""><i class="fa fa-chevron-down"></i><span>Bath Record Automático</span></a></li>
             <ul class="menu_horarios">
-                <li><a href="horarios.php" id="link_menu_horarios"><i class="fa fa-clock-o"></i><span>Horarios</span></a></li>
+                <li><a href="horarios.php" id="link_menu_horarios"><i class="fa fa-clock-o" aria-hidden="true"></i><span>Horarios</span></a></li>
             </ul>
 
             <li id="pdf"><a href=""><i class="fa fa-chevron-down"></i><span>PDF</span></a></li>
             <ul class="menu_pdf">
-                <li><a href="pdf.php" id="link_menu_pdf"><i class="fa fa-clock-o"></i><span>Textos</span></a></li>
+                <li><a href="pdf.php" id="link_menu_pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i><span>Textos</span></a></li>
             </ul>
 
         </ul>

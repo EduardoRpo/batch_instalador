@@ -114,6 +114,7 @@
 
   <!-- javascript inicializacion datatables -->
   <script src="js/preguntas.js"></script>
+  <script src="js/menu.js"></script>
   <script src="js/cargarDatos.js"></script>
 
   <!-- Multiple Seleccion -->

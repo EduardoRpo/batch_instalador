@@ -1,8 +1,8 @@
 let editar;
 
 /* Mostrar Menu seleccionadp */
-$(".contenedor-menu .menu a").removeAttr("style");
-$("#link_procesos").css("background", "coral");
+$('.contenedor-menu .menu a').removeAttr("style");
+$("#link_menu_pdf").css("background", "coral");
 $(".contenedor-menu .menu ul.menu_pdf").show();
 
 /* Cargue de Parametros de Control en DataTable */
@@ -13,46 +13,30 @@ $(document).ready(function () {
     scrollCollapse: true,
     paging: false,
     language: { url: "admin_componentes/es-ar.json" },
-    
+
     ajax: {
-      method: "GET",
+      //method: "GET",
       url: "/api/pdftextos",
+      dataSrc: "",
     },
 
-    /* columns: [
-      { data: "id" },
-      {
-        defaultContent:
-          "<a href='#' <i class='large material-icons link-editar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>",
-      },
-      { data: "descripcion" },
-    ], */
-
     columns: [
+      { data: "id" },
+      { data: "titulo" },
+      { data: "descripcion" },
+      { data: "ubicacion", className: "centrado"},
+      /* { data: "modulo", className: "centrado"}, */
       {
-        title: "Id",
-        data: "id",
-      },
-      {
-        title: "Titulo",
-        data: "descripcion.titulo[, ]",
-      },
-      {
-        title: "Descripción",
-        data: "descripcion.1.descripcion.0",
-      },
-      {
-        title: "Acciones",
         defaultContent:
           "<a href='#' <i class='large material-icons link-editar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>",
-      }
+      },
     ],
   });
 });
 
 /* Adicionar Proceso */
 
-$("#adProceso").click(function (e) {
+/* $("#adProceso").click(function (e) {
   e.preventDefault();
 
   editar = 0;
@@ -61,11 +45,11 @@ $("#adProceso").click(function (e) {
   $("#txtid_Proceso").val("");
   $("#btnguardarModulos").html("Crear");
   $("#txtProceso").val("");
-});
+}); */
 
 /* Borrar registros */
 
-$(document).on("click", ".link-borrar", function (e) {
+/* $(document).on("click", ".link-borrar", function (e) {
   e.preventDefault();
 
   const id = $(this).parent().parent().children().first().text();
@@ -100,11 +84,11 @@ $(document).on("click", ".link-borrar", function (e) {
       });
     }
   });
-});
+}); */
 
 /* Cargar datos para Actualizar registros */
 
-$(document).on("click", ".link-editar", function (e) {
+/* $(document).on("click", ".link-editar", function (e) {
   e.preventDefault();
 
   let id = $(this).parent().parent().children().first().text();
@@ -117,10 +101,10 @@ $(document).on("click", ".link-editar", function (e) {
   $("#txtid_Proceso").val(id);
   $("#txtProceso").val(proceso);
 });
-
+ */
 /* Almacenar Registros */
 
-$(document).ready(function () {
+/* $(document).ready(function () {
   $("#btnguardarModulos").click(function (e) {
     e.preventDefault();
     let id = $("#txtid_Proceso").val();
@@ -150,7 +134,7 @@ $(document).ready(function () {
       },
     });
   });
-});
+}); */
 
 /* Actualizar tabla */
 

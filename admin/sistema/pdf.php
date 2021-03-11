@@ -11,7 +11,7 @@
   <title>Textos PDF | Samara Cosmetics</title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
 
-  <!--     Fonts and icons     -->
+  <!-- Fonts and icons -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
@@ -59,16 +59,19 @@
               <div class="card-body">
                 <div class="table-responsive">
                   <table id="tblTextos" class="table-striped row-borde" style="width:100%">
-                    <!-- <thead>
+                    <thead>
                       <tr>
                         <th>No.</th>
-                        <th>Acciones</th>
+                        <th>Titulo</th>
                         <th>Texto</th>
+                        <th>Posición</th>
+                        <!-- <th>Módulo</th> -->
+                        <th>Acciones</th>
                       </tr>
                     </thead>
                     <tbody>
 
-                    </tbody> -->
+                    </tbody>
                   </table>
                 </div>
               </div>
@@ -114,6 +117,7 @@
 
   <!-- javascript inicializacion datatables -->
   <script src="js/pdf.js"></script>
+  <script src="js/menu.js"></script>
   <script src="js/cargarDatos.js"></script>
 
   <!-- Multiple Seleccion -->

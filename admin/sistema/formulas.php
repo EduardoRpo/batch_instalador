@@ -108,6 +108,12 @@
                 <div class="table-responsive">
                   <table id="tblFormulas" class="table-striped row-borde" style="width:100%">
                     <label for="">Formulas</label>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                      La Formula<strong> no cumple </strong>con el 100%. Valide nuevamente.
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
                     <thead>
                       <tr>
                         <th>Referencia</th>
