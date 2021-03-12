@@ -40,13 +40,13 @@ if (!empty($_SESSION['active'])) {
                     $_SESSION["timeout"] = time();
                     $modulo = $data['modulo'];
 
-                    if ($data['rol'] == 1) {
+                    if ($data['rol'] == 1 || $data['rol'] == 2) {
                         header('location: admin/sistema/index.php');
-                    } elseif ($data['rol'] == 2) {
+                    } else/* if ($data['rol'] == 5) { */
                         header('location: html/batch.php');
-                    } elseif ($data['rol'] == 3) {
+                    /* } elseif ($data['rol'] == 3) {
                         header("location: {$modulo}");
-                    }
+                    } */
                 } else {
                     $new_trie = ++$tries;
                     file_put_contents('tries.txt', $new_trie);

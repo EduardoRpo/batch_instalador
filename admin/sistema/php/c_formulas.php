@@ -50,7 +50,7 @@ switch ($op) {
                     echo '2';
                     exit();
                 } else {
-                    $sql = "INSERT INTO formula (id_producto, id_materiaprima, porcentaje) VALUES (:id_producto, :id_materiaprima, :porcentaje )";
+                    $sql = "INSERT INTO formula (id_producto, id_materiaprima, porcentaje) VALUES (:id_producto, :id_materiaprima, AES_ENCRYPT(:porcentaje,'AES') )";
                     $query = $conn->prepare($sql);
                     $result = $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto, 'porcentaje' => $porcentaje]);
                     if ($result) {

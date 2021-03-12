@@ -96,7 +96,7 @@ function recargarDatos() {
 
     success: function (r) {
       var info = JSON.parse(r);
-
+      
       $("#idbatch").val(info[0].referencia);
       $("#nombrereferencia").val(info[0].nombre);
       $("#marca").val(info[0].marca);

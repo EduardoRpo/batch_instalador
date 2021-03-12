@@ -5,7 +5,9 @@
     </div>
     <div class="sidebar-wrapper contenedor-menu" id="sidebar-wrapper">
         <ul class="nav menu">
-            <li id="inicio"><a href="./"><i class="now-ui-icons design_app"></i><p>Inicio</p></a></li>
+            <li id="inicio"><a href="./"><i class="now-ui-icons design_app"></i>
+                    <p>Inicio</p>
+                </a></li>
 
             <li id="parametrosg"><a href=""><i class="fa fa-chevron-down"></i><span>Parametros Generales</span></a></li>
             <ul class="menu_generales">
@@ -26,7 +28,9 @@
                 <li><a href="propiedades-microbiologicas.php" id="link_microbiologicas"><i class="fas fa-biohazard"></i><span>Propiedades Microbiologicas</span></a></li>
                 <li><a href="empaques.php" id="link_empaques"><i class="fas fa-box-open"></i><span>Empaques</span></a></li>
                 <li><a href="materiaprima.php" id="link_materia_prima"><i class="fas fa-draw-polygon"></i><span>Materia Prima</span></a></li>
-                <li><a href="formulas.php" id="link_formulas"><i class="fas fa-vote-yea"></i><span>Formulas</span></a></li>
+                <?php if ($_SESSION['rol'] == 1) { ?>
+                    <li><a href="formulas.php" id="link_formulas"><i class="fas fa-vote-yea"></i><span>Formulas</span></a></li>
+                <?php  } ?>
 
                 <li id="instructivos"><a href=""><i class="fa fa-chevron-down"></i><span>Instructivos</span></a></li>
                 <ul class="menu_instructivos">
@@ -36,13 +40,13 @@
 
                 <li><a href="multipresentacion.php" id="link_multipresentacion"><i class="fas fa-superscript"></i><span>Multipresentación</span></a></li>
             </ul>
-
-            <li id="usuarios"><a href=""><i class="fa fa-chevron-down"></i><span>Usuarios</span></a></li>
-            <ul class="menu_usuarios">
-                <li><a href="usuarios.php" id="link_menu_usuarios"><i class="fas fa-user-check"></i><span>Maestro Usuarios</span></a></li>
-                <li><a href="cargos.php" id="link_cargos"><i class="fas fa-sitemap"></i><span>Cargos</span></a></li>
-            </ul>
-
+            <?php if ($_SESSION['rol'] == 1) { ?>
+                <li id="usuarios"><a href=""><i class="fa fa-chevron-down"></i><span>Usuarios</span></a></li>
+                <ul class="menu_usuarios">
+                    <li><a href="usuarios.php" id="link_menu_usuarios"><i class="fas fa-user-check"></i><span>Maestro Usuarios</span></a></li>
+                    <li><a href="cargos.php" id="link_cargos"><i class="fas fa-sitemap"></i><span>Cargos</span></a></li>
+                </ul>
+            <?php  } ?>
             <li id="horarios"><a href=""><i class="fa fa-chevron-down"></i><span>Bath Record Automático</span></a></li>
             <ul class="menu_horarios">
                 <li><a href="horarios.php" id="link_menu_horarios"><i class="fa fa-clock-o" aria-hidden="true"></i><span>Horarios</span></a></li>

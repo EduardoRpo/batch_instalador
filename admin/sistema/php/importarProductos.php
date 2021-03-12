@@ -46,14 +46,13 @@ if ($tabla == 'producto') {
 	foreach ($dataList as $data) {
 		$conn->query("INSERT INTO producto (referencia, nombre_referencia, unidad_empaque, id_nombre_producto, 
 									id_notificacion_sanitaria, id_linea, id_marca, id_propietario, 
-									id_presentacion_comercial, id_color, id_olor, id_apariencia, id_untuosidad, 
+									presentacion_comercial, id_color, id_olor, id_apariencia, id_untuosidad, 
 									id_poder_espumoso, id_recuento_mesofilos, id_pseudomona, id_escherichia, 
 									id_staphylococcus, id_ph, id_viscosidad, id_densidad_gravedad, id_grado_alcohol) 
-							  VALUES ('{$data[0]}', '{$data[1]}', '{$data[2]}', '{$data[3]}', '{$data[4]}',
-									  '{$data[5]}', '{$data[6]}', '{$data[7]}', '{$data[8]}', '{$data[9]}',
-									  '{$data[10]}', '{$data[11]}', '{$data[12]}', '{$data[13]}', '{$data[14]}',
-									  '{$data[15]}', '{$data[16]}', '{$data[17]}', '{$data[18]}', '{$data[19]}',
-									  '{$data[20]}', '{$data[21]}')");
+					VALUES ('{$data[0]}', '{$data[1]}', '{$data[2]}', '{$data[3]}', '{$data[4]}',
+					'{$data[5]}', '{$data[6]}', '{$data[7]}', '{$data[8]}', '{$data[9]}', '{$data[10]}', '{$data[11]}', '{$data[12]}', 
+					'{$data[13]}', '{$data[14]}', '{$data[15]}', '{$data[16]}', '{$data[17]}', '{$data[18]}', '{$data[19]}', '{$data[20]}', 
+					'{$data[21]}')");
 	}
 } else if ($tabla == 'densidad_gravedad' || $tabla == 'grado_alcohol' || $tabla == 'ph' || $tabla == 'viscosidad') {
 	foreach ($dataList as $data) {
