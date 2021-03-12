@@ -1,32 +1,29 @@
 let editar;
 
 /* Mostrar Menu seleccionado */
-$('.contenedor-menu .menu a').removeAttr('style');
-$('#link_productos').css('background', 'coral');
-$('.contenedor-menu .menu ul.menu_productos').show();
+$(".contenedor-menu .menu a").removeAttr("style");
+$("#link_productos").css("background", "coral");
+$(".contenedor-menu .menu ul.menu_productos").show();
 
 cargarDatosProductos();
-
 
 //Cargue de tablas de Productos
 
 $(document).ready(function () {
-
-  $('#tblProductos').DataTable({
+  $("#tblProductos").DataTable({
     /* scrollY: '45vh', */
     pageLength: 5,
     scrollCollapse: true,
     paging: false,
-    language: { url: 'admin_componentes/es-ar.json' },
+    language: { url: "admin_componentes/es-ar.json" },
 
-    "ajax": {
+    ajax: {
       method: "POST",
       url: "php/c_productos.php",
       data: { operacion: 1 },
     },
 
-
-    "columns": [
+    columns: [
       /*{ "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" },
       { "data": "referencia" },
       { "data": "nombre_referencia" },
@@ -55,51 +52,52 @@ $(document).ready(function () {
       { "data": "etiqueta" },
       { "data": "empaque" },
       { "data": "otros" }, */
-      { "defaultContent": "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Editar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>" },
-      { "data": "referencia" },
-      { "data": "nombre_referencia" },
-      { "data": "presentacion_comercial", className: "centrado" },
-      { "data": "id_nombre_producto", className: "centrado" },
-      { "data": "id_notificacion_sanitaria", className: "centrado" },
-      { "data": "id_linea", className: "centrado" },
-      { "data": "id_marca", className: "centrado" },
-      { "data": "id_propietario", className: "centrado" },
-      { "data": "unidad_empaque", className: "centrado" },
-      { "data": "id_color", className: "centrado" },
-      { "data": "id_olor", className: "centrado" },
-      { "data": "id_apariencia", className: "centrado" },
-      { "data": "id_untuosidad", className: "centrado" },
-      { "data": "id_poder_espumoso", className: "centrado" },
-      { "data": "id_recuento_mesofilos", className: "centrado" },
-      { "data": "id_pseudomona", className: "centrado" },
-      { "data": "id_escherichia", className: "centrado" },
-      { "data": "id_staphylococcus", className: "centrado" },
-      { "data": "id_ph", className: "centrado" },
-      { "data": "id_viscosidad", className: "centrado" },
-      { "data": "id_densidad_gravedad", className: "centrado" },
-      { "data": "id_grado_alcohol", className: "centrado" },
-      { "data": "id_envase", className: "centrado" },
-      { "data": "id_tapa", className: "centrado" },
-      { "data": "id_etiqueta", className: "centrado" },
-      { "data": "id_empaque", className: "centrado" },
-      { "data": "id_otros", className: "centrado" },
-      { "data": "base_instructivo", className: "centrado" },
-      { "data": "instructivo", className: "centrado" },
+      {
+        defaultContent:
+          "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Editar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>",
+      },
+      { data: "referencia" },
+      { data: "nombre_referencia" },
+      { data: "presentacion_comercial", className: "centrado" },
+      { data: "id_nombre_producto", className: "centrado" },
+      { data: "id_notificacion_sanitaria", className: "centrado" },
+      { data: "id_linea", className: "centrado" },
+      { data: "id_marca", className: "centrado" },
+      { data: "id_propietario", className: "centrado" },
+      { data: "unidad_empaque", className: "centrado" },
+      { data: "id_color", className: "centrado" },
+      { data: "id_olor", className: "centrado" },
+      { data: "id_apariencia", className: "centrado" },
+      { data: "id_untuosidad", className: "centrado" },
+      { data: "id_poder_espumoso", className: "centrado" },
+      { data: "id_recuento_mesofilos", className: "centrado" },
+      { data: "id_pseudomona", className: "centrado" },
+      { data: "id_escherichia", className: "centrado" },
+      { data: "id_staphylococcus", className: "centrado" },
+      { data: "id_ph", className: "centrado" },
+      { data: "id_viscosidad", className: "centrado" },
+      { data: "id_densidad_gravedad", className: "centrado" },
+      { data: "id_grado_alcohol", className: "centrado" },
+      { data: "id_envase", className: "centrado" },
+      { data: "id_tapa", className: "centrado" },
+      { data: "id_etiqueta", className: "centrado" },
+      { data: "id_empaque", className: "centrado" },
+      { data: "id_otros", className: "centrado" },
+      { data: "base_instructivo", className: "centrado" },
+      { data: "instructivo", className: "centrado" },
     ],
 
-    columnDefs: [{ width: "10%", "targets": 1 },],
-
+    columnDefs: [{ width: "10%", targets: 1 }],
   });
 });
-
 
 /* Cargar Modal para Crear productos */
 
 function cargarModalProductos() {
   editar = 0;
-  $('#m_productos').modal('show');
-  $('#m_productos').find("input, select").val('').end();
-  $('#btnguardarProductos').html('Crear Producto');
+  $("#m_productos").modal("show");
+  $("#m_productos").find("input, select").val("").end();
+  $("#btnguardarProductos").html("Crear Producto");
 }
 
 /* Cargar selectores y data */
@@ -108,10 +106,10 @@ function cargarDatosProductos() {
   let sel = [];
   let j = 0;
 
-  $('select').each(function () {
-    let id_sel = $(this).prop('id')
-    if (id_sel != 'bases_instructivo' && $(this).prop('id') != 'instructivo')
-      sel.push($(this).prop('id'));
+  $("select").each(function () {
+    let id_sel = $(this).prop("id");
+    if (id_sel != "bases_instructivo" && $(this).prop("id") != "instructivo")
+      sel.push($(this).prop("id"));
   });
 
   for (i = 1; i <= sel.length; i++) {
@@ -126,77 +124,88 @@ function cargarDatosProductos() {
 /* Cargar selectores para adicionar productos */
 
 function cargarselectores(selector) {
-
   $.ajax({
-    method: 'POST',
-    url: 'php/c_productos.php',
+    method: "POST",
+    url: "php/c_productos.php",
     data: { tabla: selector, operacion: 4 },
 
     success: function (response) {
-
       var info = JSON.parse(response);
 
       let $select = $(`#${selector}`);
       $select.empty();
 
-      $select.append('<option disabled selected>' + "Seleccionar" + '</option>');
+      $select.append(
+        "<option disabled selected>" + "Seleccionar" + "</option>"
+      );
 
-      if (selector == 'presentacion_comercial') {
+      if (selector == "presentacion_comercial") {
         $.each(info.data, function (i, value) {
-          $select.append('<option value ="' + value.nombre + '">' + value.nombre + '</option>');
+          $select.append(
+            '<option value ="' +
+              value.nombre +
+              '">' +
+              value.nombre +
+              "</option>"
+          );
         });
       } else {
         $.each(info.data, function (i, value) {
-          $select.append('<option value ="' + value.id + '">' + value.nombre + '</option>');
+          $select.append(
+            '<option value ="' + value.id + '">' + value.nombre + "</option>"
+          );
         });
       }
-
-
     },
     error: function (response) {
       console.log(response);
-    }
+    },
   });
 }
 
 /* cargar selectores bases */
 
 function cargar_selector_bases() {
-
   $.ajax({
-    method: 'POST',
-    url: 'php/c_productos.php',
+    method: "POST",
+    url: "php/c_productos.php",
     data: { operacion: 5 },
 
     success: function (response) {
-
       var info = JSON.parse(response);
 
       let $select = $(`#instructivo`);
       $select.empty();
-      $select.append('<option disabled selected>' + "Seleccionar" + '</option>');
+      $select.append(
+        "<option disabled selected>" + "Seleccionar" + "</option>"
+      );
 
       $.each(info.data, function (i, value) {
-        $select.append('<option value ="' + value.id + '">' + value.producto_base + '</option>');
+        $select.append(
+          '<option value ="' +
+            value.id +
+            '">' +
+            value.producto_base +
+            "</option>"
+        );
       });
-
     },
     error: function (response) {
       console.log(response);
-    }
+    },
   });
 }
 
 /* Cargar datos para Actualizar registros */
 
-$(document).on('click', '.link-editar', function (e) {
+$(document).on("click", ".link-editar", function (e) {
   editar = 1;
   let j = 1;
   let producto = [];
 
   //muestra el modal
-  $('#m_productos').modal('show');
-  $('#btnguardarProductos').html('Actualizar Producto');
+  $("#m_productos").modal("show");
+  $("#btnguardarProductos").html("Actualizar Producto");
   /* $('#id_referencia').val($('#referencia').val()); */
   /* $('#referencia').prop('disabled', true); */
 
@@ -212,19 +221,16 @@ $(document).on('click', '.link-editar', function (e) {
     j++;
   }
   /* Ocultar input de bases de acuerdo con el producto */
-  $('#bases_instructivo').change();
+  $("#bases_instructivo").change();
 
   //para actualizar guarda la referencia iniciaL
-  let referencia = $('#referencia').val();
-  $('#id_referencia').val(referencia);
-
+  let referencia = $("#referencia").val();
+  $("#id_referencia").val(referencia);
 });
-
 
 /* Eliminar registros */
 
-$(document).on('click', '.link-borrar', function (e) {
-
+$(document).on("click", ".link-borrar", function (e) {
   let id = $(this).parent().parent().children().eq(1).text();
 
   $.ajax({
@@ -233,46 +239,47 @@ $(document).on('click', '.link-borrar', function (e) {
     data: { operacion: 2, id: id },
 
     success: function (response) {
-      alertify.set("notifier", "position", "top-right"); alertify.success("Registro Eliminado.");
-      refreshTable();
+      if (response == 1) {
+        alertify.set("notifier", "position", "top-right");
+        alertify.success("Registro Eliminado.");
+        refreshTable();
+      } else {
+        alertify.set("notifier", "position", "top-right");
+        alertify.error("El producto no se puede eliminar se encuentra relacionado con uno a varios Batch Records.");
+      }
     },
-
-    error: function (response) {
-      alertify.set("notifier", "position", "top-right"); alertify.error("Error.");
-    }
   });
 });
 
 /* Guardar o actualizar data*/
 
-$(document).on('click', '#btnguardarProductos', function (e) {
+$(document).on("click", "#btnguardarProductos", function (e) {
   e.preventDefault();
 
   /* Validar el numero de input a solicitar */
-  let base = $('.n28').val();
+  let base = $(".n28").val();
 
-  if (base == 0)
-    limite = 29;
-  else
-    limite = 28;
+  if (base == 0) limite = 29;
+  else limite = 28;
 
   /* Validar todos los datos del formulario */
   for (let i = 1; i <= limite; i++) {
     let validar = $(`.n${i}`).val();
-    if (validar === '' || validar === null) {
-      alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos.");
+    if (validar === "" || validar === null) {
+      alertify.set("notifier", "position", "top-right");
+      alertify.error("Ingrese todos los datos.");
       return false;
     }
   }
 
   /* Construye un FormData para todos los datos */
-  const producto = new FormData($('#frmagregarProductos')[0]);
+  const producto = new FormData($("#frmagregarProductos")[0]);
   /* Si el instructivo es personalizado se carga 0 */
-  if (producto.get('bases_instructivo') == "1") {
-    producto.set('instructivo', 0);
+  if (producto.get("bases_instructivo") == "1") {
+    producto.set("instructivo", 0);
   }
-  producto.set('operacion', 3);
-  producto.set('editar', editar);
+  producto.set("operacion", 3);
+  producto.set("editar", editar);
 
   $.ajax({
     type: "POST",
@@ -282,45 +289,45 @@ $(document).on('click', '#btnguardarProductos', function (e) {
     contentType: false,
 
     success: function (r) {
-
       if (r == 1) {
-        alertify.set("notifier", "position", "top-right"); alertify.success("Almacenado con éxito.");
+        alertify.set("notifier", "position", "top-right");
+        alertify.success("Almacenado con éxito.");
         refreshTable();
-        $('#m_productos').modal('hide');
+        $("#m_productos").modal("hide");
       } else if (r == 2) {
-        alertify.set("notifier", "position", "top-right"); alertify.error("La Referencia ya existe.");
+        alertify.set("notifier", "position", "top-right");
+        alertify.error("La Referencia ya existe.");
       } else if (r == 3) {
-        alertify.set("notifier", "position", "top-right"); alertify.success("Registro actualizado.");
+        alertify.set("notifier", "position", "top-right");
+        alertify.success("Registro actualizado.");
         refreshTable();
-        $('#m_productos').modal('hide');
+        $("#m_productos").modal("hide");
       } else {
-        alertify.set("notifier", "position", "top-right"); alertify.error("Error.");
+        alertify.set("notifier", "position", "top-right");
+        alertify.error("Error.");
       }
-
     },
     error: function (response) {
-      alertify.set("notifier", "position", "top-right"); alertify.error("Error.");
-    }
+      alertify.set("notifier", "position", "top-right");
+      alertify.error("Error.");
+    },
   });
 });
 
 /* Seleccionar base a partir del instructivo */
-$('#bases_instructivo').change(function (e) {
+$("#bases_instructivo").change(function (e) {
   e.preventDefault();
-  let select = $('.bases_instructivo').val();
+  let select = $(".bases_instructivo").val();
 
   if (select == 1) {
-    $('.instructivo').hide();
-    $('.instructivo').val('');
-  }
-  else
-    $('.instructivo').show();
-
+    $(".instructivo").hide();
+    $(".instructivo").val("");
+  } else $(".instructivo").show();
 });
 
 /* Actualizar tabla */
 
 function refreshTable() {
-  $('#tblProductos').DataTable().clear();
-  $('#tblProductos').DataTable().ajax.reload();
+  $("#tblProductos").DataTable().clear();
+  $("#tblProductos").DataTable().ajax.reload();
 }

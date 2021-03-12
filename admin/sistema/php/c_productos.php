@@ -114,11 +114,11 @@ if (!empty($_POST)) {
                     id_notificacion_sanitaria, id_linea, id_marca, id_propietario, presentacion_comercial, id_color, id_olor, 
                     id_apariencia, id_untuosidad, id_poder_espumoso, id_recuento_mesofilos, id_pseudomona, id_escherichia, 
                     id_staphylococcus, id_ph, id_viscosidad, id_densidad_gravedad, id_grado_alcohol, id_envase, id_tapa, id_etiqueta, 
-                    id_empaque, id_otros, multi, base_instructivo, instructivo)
+                    id_empaque, id_otros, base_instructivo, instructivo)
                     VALUES (:referencia, :nombre, :uniEmpaque, :nombre_producto, :notificacion_sanitaria, 
                     :linea, :marca, :propietario, :presentacion_comercial, :color, :olor, :apariencia, 
                     :untuosidad, :poder_espumoso, :recuento_mesofilos, :pseudomona, :escherichia, :staphylococcus,
-                    :ph, :viscosidad, :densidad_gravedad, :grado_alcohol, :envase, :tapa, :etiqueta, :empaque, :otros, :multi, 
+                    :ph, :viscosidad, :densidad_gravedad, :grado_alcohol, :envase, :tapa, :etiqueta, :empaque, :otros,
                     :bases_instructivo, :instructivo)";
 
                     $query = $conn->prepare($sql);
@@ -130,7 +130,7 @@ if (!empty($_POST)) {
                         'pseudomona' => $pseudomona, 'escherichia' => $escherichia, 'staphylococcus' => $staphylococcus, 'ph' => $ph,
                         'viscosidad' => $viscosidad, 'densidad_gravedad' => $densidad_gravedad, 'grado_alcohol' => $grado_alcohol,
                         'envase' => $envase, 'tapa' => $tapa, 'etiqueta' => $etiqueta, 'empaque' => $empaque, 'otros' => $otros,
-                        'multi' => $multi, 'bases_instructivo' => $bases_instructivo, 'instructivo' => $instructivo,
+                        'bases_instructivo' => $bases_instructivo, 'instructivo' => $instructivo,
                     ]);
                     ejecutarQuery($result, $conn);
                 }
