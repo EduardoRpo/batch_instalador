@@ -70,7 +70,7 @@ $(document).on('click', '.link-editar', function (e) {
         data: { operacion: "3", id: id },
 
         success: function (response) {
-            var info = JSON.parse(response);
+            let info = JSON.parse(response);
             $('#pregunta').val(info.pregunta);
             $('#resp').val(info.resp);
             $('#btnguardarPregunta').html('Actualizar');

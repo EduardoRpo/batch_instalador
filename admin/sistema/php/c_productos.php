@@ -82,7 +82,7 @@ if (!empty($_POST)) {
 
                 $query = $conn->prepare($sql);
                 $result = $query->execute([
-                    /* 'referencia' => $referencia, */  
+                    /* 'referencia' => $referencia, */
                     'nombre' => $nombre, 'uniEmpaque' => $uniEmpaque, 'nombre_producto' => $nombre_producto,
                     'notificacion_sanitaria' => $notificacion_sanitaria, 'linea' => $linea, 'marca' => $marca, 'propietario' => $propietario,
                     'presentacion_comercial' => $presentacion_comercial, 'color' => $color, 'olor' => $olor, 'apariencia' => $apariencia,
@@ -90,7 +90,7 @@ if (!empty($_POST)) {
                     'pseudomona' => $pseudomona, 'escherichia' => $escherichia, 'staphylococcus' => $staphylococcus, 'ph' => $ph,
                     'viscosidad' => $viscosidad, 'densidad_gravedad' => $densidad_gravedad, 'grado_alcohol' => $grado_alcohol,
                     'tapa' => $tapa, 'envase' => $envase, 'etiqueta' => $etiqueta, 'empaque' => $empaque, 'otros' => $otros,
-                    'bases_instructivo' => $bases_instructivo,'instructivo' => $instructivo, 'id_referencia' => $referencia
+                    'bases_instructivo' => $bases_instructivo, 'instructivo' => $instructivo, 'id_referencia' => $referencia
                 ]);
 
                 if ($result) {
@@ -135,7 +135,6 @@ if (!empty($_POST)) {
                     ejecutarQuery($result, $conn);
                 }
             }
-
 
             break;
 

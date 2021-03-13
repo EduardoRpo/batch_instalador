@@ -1,6 +1,7 @@
 <?php
 require_once('php/sesion/sesion.php');
 require_once('modal/m_productos.php');
+require_once('modal/m_validacionProductos.php');
 ?>
 
 <!DOCTYPE html>
