@@ -58,7 +58,6 @@ require_once('modal/m_validacionProductos.php');
                 <button type="button" class="btn btn-primary" onclick="cargarModalProductos();">Crear Productos</button>
               </div>
               <div class="card-body">
-                <!-- <div class="loader"></div>  -->
                 <div class="table-responsive">
                   <table id="tblProductos" class="display" style="width:100%; font-size: small;">
                     <thead>
@@ -104,6 +103,7 @@ require_once('modal/m_validacionProductos.php');
               <form action="" id="formDataExcel7" enctype="multipart/form-data">
                 <input type="file" name="datosExcel7" id="datosExcel7" class="form-control datosExcel mb-3 ml-3" style="width: 500px; display:inline-flex">
                 <button type="button" id="btnCargarExcel7" class="btn btn-primary btnCargarExcel ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel7.value, 'producto', 7);" disabled="disabled">Cargar Datos</button>
+                <div id="spinner" class="spinner-border text-danger" style="display: none;"></div>
               </form>
             </div>
           </div>

@@ -45,11 +45,13 @@ function cargarDataExcel(tabla, id) {
     data: formulario,
     processData: false,
     contentType: false,
+    beforeSend: function () {
+      $("#spinner").css("display", "block");
+    },
 
     success: function (data) {
       let info = JSON.parse(data);
       const finalArray = Object.values(info);
-
       $("#validacionProductos").modal("show");
 
       finalArray.forEach((element, index) => {
@@ -60,7 +62,7 @@ function cargarDataExcel(tabla, id) {
           }</b> no existe en la tabla <b>${data[0]}</b></td></tr>`
         );
       });
-
+      $("#spinner").css("display", "none");
       if (data == "error") {
         alertify.set("notifier", "position", "top-right");
         alertify.error(

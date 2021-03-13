@@ -63,7 +63,6 @@ if ($tabla == 'producto') {
 	if ($e > 0) {
 		$finalLog = array_unique($Log);
 		echo json_encode($finalLog, JSON_UNESCAPED_UNICODE);
-		//echo 'error';
 		exit();
 	} else {
 		foreach ($dataList as $data) {
