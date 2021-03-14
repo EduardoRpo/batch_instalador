@@ -50,30 +50,28 @@ function cargarDataExcel(tabla, id) {
     },
 
     success: function (data) {
-      let info = JSON.parse(data);
-      const finalArray = Object.values(info);
-      $("#validacionProductos").modal("show");
+      if (data != "") {
+        let info = JSON.parse(data);
+        const finalArray = Object.values(info);
+        $("#validacionProductos").modal("show");
 
-      finalArray.forEach((element, index) => {
-        let data = element.split(" ");
-        $("#prodnoencontrados").append(
-          `<tr><td style="text-align:center;">${index + 1}. El id <b>${
-            data[1]
-          }</b> no existe en la tabla <b>${data[0]}</b></td></tr>`
-        );
-      });
-      $("#spinner").css("display", "none");
-      if (data == "error") {
-        alertify.set("notifier", "position", "top-right");
-        alertify.error(
-          "No se encontró la data en una o varias tablas, valide el log de errores"
-        );
+        finalArray.forEach((element, index) => {
+          let data = element.split(" ");
+          $("#prodnoencontrados").append(
+            `<tr><td style="text-align:center;">${index + 1}. El id <b>${
+              data[1]
+            }</b> no existe en la tabla <b>${data[0]}</b></td></tr>`
+          );
+        });
+        $("#spinner").css("display", "none");
+
         $(`#datosExcel${id}`).val("");
         //refreshTable(id);
         $(`.btnCargarExcel`).prop("disabled", false);
       } else {
         alertify.set("notifier", "position", "top-right");
-        alertify.success("Operación exitosa");
+        alertify.success("Productos importaods exitosamente");
+        $("#spinner").css("display", "none");
         $(`#datosExcel${id}`).val("");
         refreshTable(id);
         $(`.btnCargarExcel`).prop("disabled", false);

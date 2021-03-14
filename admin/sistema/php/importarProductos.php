@@ -50,14 +50,21 @@ if ($tabla == 'producto') {
 		'untuosidad', 'poder_espumoso', 'recuento_mesofilos', 'pseudomona', 'escherichia', 'staphylococcus', 'ph', 'viscosidad', 'densidad_gravedad',
 		'grado_alcohol', 'tapa', 'envase', 'etiqueta', 'empaque', 'otros'
 	];
+
 	$col = 3;
+
 	for ($t = 0; $t < sizeof($array); $t++) {
-		$sql = "SELECT * FROM $array[$t]";
-		$query = $conn->prepare($sql);
-		$query->execute();
-		$propiedad_producto = $query->fetchAll($conn::FETCH_ASSOC);
-		findNombre($dataList, $propiedad_producto, $col, $array[$t]);
-		$col++;
+		if ($array[$t] == 'presentacion_comercial') {
+			$col++;
+		}
+		if ($array[$t] != 'presentacion_comercial') {
+			$sql = "SELECT * FROM $array[$t]";
+			$query = $conn->prepare($sql);
+			$query->execute();
+			$propiedad_producto = $query->fetchAll($conn::FETCH_ASSOC);
+			findNombre($dataList, $propiedad_producto, $col, $array[$t]);
+			$col++;
+		}
 	}
 
 	if ($e > 0) {
@@ -65,16 +72,35 @@ if ($tabla == 'producto') {
 		echo json_encode($finalLog, JSON_UNESCAPED_UNICODE);
 		exit();
 	} else {
+		/* Busca referencia en la tabla */
 		foreach ($dataList as $data) {
-			$conn->query("INSERT INTO producto (referencia, nombre_referencia, unidad_empaque, id_nombre_producto, 
-										id_notificacion_sanitaria, id_linea, id_marca, id_propietario, 
-										presentacion_comercial, id_color, id_olor, id_apariencia, id_untuosidad, 
-										id_poder_espumoso, id_recuento_mesofilos, id_pseudomona, id_escherichia, 
-										id_staphylococcus, id_ph, id_viscosidad, id_densidad_gravedad, id_grado_alcohol) 
-						VALUES ('{$data[0]}', '{$data[1]}', '{$data[2]}', '{$data[3]}', '{$data[4]}',
-						'{$data[5]}', '{$data[6]}', '{$data[7]}', '{$data[8]}', '{$data[9]}', '{$data[10]}', '{$data[11]}', '{$data[12]}', 
-						'{$data[13]}', '{$data[14]}', '{$data[15]}', '{$data[16]}', '{$data[17]}', '{$data[18]}', '{$data[19]}', '{$data[20]}', 
-						'{$data[21]}')");
+			$sql = "SELECT * FROM producto WHERE referencia = :referencia";
+			$query = $conn->prepare($sql);
+			$query->execute(['referencia' => $data[0]]);
+			$rows = $query->rowCount();
+
+			if ($rows > 0) {
+				$conn->query("UPDATE producto SET nombre_referencia = '{$data[1]}', unidad_empaque = '{$data[2]}', id_nombre_producto= '{$data[3]}', 
+								id_notificacion_sanitaria= '{$data[4]}', id_linea= '{$data[5]}', id_marca= '{$data[6]}', id_propietario= '{$data[7]}', 
+								presentacion_comercial= '{$data[8]}', id_color= '{$data[9]}', id_olor= '{$data[10]}', id_apariencia= '{$data[11]}', 
+								id_untuosidad= '{$data[12]}', id_poder_espumoso= '{$data[13]}', id_recuento_mesofilos= '{$data[14]}', id_pseudomona= '{$data[15]}', 
+								id_escherichia= '{$data[16]}', id_staphylococcus= '{$data[17]}', id_ph= '{$data[18]}', id_viscosidad= '{$data[19]}', 
+								id_densidad_gravedad= '{$data[20]}', id_grado_alcohol= '{$data[21]}', id_tapa= '{$data[22]}', id_envase= '{$data[23]}', 
+								id_etiqueta= '{$data[24]}', id_empaque= '{$data[25]}', id_otros= '{$data[26]}', multi= '{$data[27]}', base_instructivo= '{$data[28]}', 
+								instructivo= '{$data[29]}' 
+							WHERE referencia = '{$data[0]}'");
+			} else {
+				$conn->query("INSERT INTO producto (referencia, nombre_referencia, unidad_empaque, id_nombre_producto, id_notificacion_sanitaria, 
+								id_linea, id_marca, id_propietario, presentacion_comercial, id_color, id_olor, id_apariencia, 
+								id_untuosidad, id_poder_espumoso, id_recuento_mesofilos, id_pseudomona, id_escherichia, 
+								id_staphylococcus, id_ph, id_viscosidad, id_densidad_gravedad, id_grado_alcohol, id_tapa, id_envase, 
+								id_etiqueta, id_empaque, id_otros, multi, base_instructivo, instructivo) 
+							VALUES (
+								'{$data[0]}', '{$data[1]}', '{$data[2]}', '{$data[3]}', '{$data[4]}', '{$data[5]}', '{$data[6]}', '{$data[7]}', 
+								'{$data[8]}', '{$data[9]}', '{$data[10]}', '{$data[11]}', '{$data[12]}', '{$data[13]}', '{$data[14]}', '{$data[15]}', 
+								'{$data[16]}', '{$data[17]}', '{$data[18]}', '{$data[19]}', '{$data[20]}', '{$data[21]}', '{$data[22]}', '{$data[23]}', 
+								'{$data[24]}', '{$data[25]}', '{$data[26]}', '{$data[27]}', '{$data[28]}', '{$data[29]}')");
+			}
 		}
 	}
 } else if ($tabla == 'densidad_gravedad' || $tabla == 'grado_alcohol' || $tabla == 'ph' || $tabla == 'viscosidad') {
