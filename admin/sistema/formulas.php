@@ -129,9 +129,10 @@
                   </table>
                 </div>
               </div>
-              <form id="formDataExcel" enctype="multipart/form-data">
-                <input type="file" name="datosExcel" id="datosExcel" class="form-control mb-3 ml-3" style="width: 600px; display:inline-flex">
-                <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value, 1);" disabled="disabled">Cargar Datos</button>
+              <form id="formDataExcel1" enctype="multipart/form-data">
+                <input type="file" name="datosExcel1" id="datosExcel1" class="form-control datosExcel mb-3 ml-3" style="width: 600px; display:inline-flex">
+                <button type="button" id="btnCargarExcel1" class="btn btn-primary ml-3 btnCargarExcel" onclick="comprobarExtension(this.form, this.form.datosExcel1.value, 'formula',1);" disabled="disabled">Cargar Datos</button>
+                <div id="spinner" class="spinner-border text-danger" style="display: none;"></div>
               </form>
             </div>
           </div>
@@ -169,9 +170,10 @@
                   </table>
                 </div>
               </div>
-              <form id="formDataExcel" enctype="multipart/form-data">
-                <input type="file" name="datosExcel" id="datosExcel" class="form-control mb-3 ml-3" style="width: 600px; display:inline-flex">
-                <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value, 1);" disabled="disabled">Cargar Datos</button>
+              <form id="formDataExcel2" enctype="multipart/form-data">
+                <input type="file" name="datosExcel2" id="datosExcel2" class="form-control datosExcel mb-3 ml-3" style="width: 600px; display:inline-flex">
+                <button type="button" id="btnCargarExcel2" class="btn btn-primary ml-3 btnCargarExcel" onclick="comprobarExtension(this.form, this.form.datosExcel2.value, 'formula_f',2);" disabled="disabled">Cargar Datos</button>
+                <div id="spinner" class="spinner-border text-danger" style="display: none;"></div>
               </form>
             </div>
           </div>
@@ -209,6 +211,7 @@
 
   <!-- javascript inicializacion datatables -->
   <script src="js/formulas.js"></script>
+  <script src="js/importarProductos.js"></script>
   <script src="js/menu.js"></script>
 
 </body>

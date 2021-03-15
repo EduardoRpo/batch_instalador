@@ -18,7 +18,7 @@ switch ($op) {
 
     case 3: //Listar Formula
         $referencia = $_POST['referencia'];
-        $query = "SELECT f.id_producto, f.id_materiaprima as referencia, m.nombre, m.alias, f.porcentaje FROM formula f INNER JOIN materia_prima m ON f.id_materiaprima=m.referencia WHERE f.id_producto = '$referencia'";
+        $query = "SELECT f.id_producto, f.id_materiaprima as referencia, m.alias as alias, m.nombre, cast(AES_DECRYPT(porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje FROM formula f INNER JOIN materia_prima m ON f.id_materiaprima=m.referencia WHERE f.id_producto = '$referencia'";
         ejecutarQuerySelect($conn, $query);
         break;
 
@@ -50,7 +50,7 @@ switch ($op) {
                     echo '2';
                     exit();
                 } else {
-                    $sql = "INSERT INTO formula (id_producto, id_materiaprima, porcentaje) VALUES (:id_producto, :id_materiaprima, AES_ENCRYPT(:porcentaje,'AES') )";
+                    $sql = "INSERT INTO formula (id_producto, id_materiaprima, porcentaje) VALUES (:id_producto, :id_materiaprima, AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') )";
                     $query = $conn->prepare($sql);
                     $result = $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto, 'porcentaje' => $porcentaje]);
                     if ($result) {
@@ -107,9 +107,8 @@ switch ($op) {
                     }
                 }
             } else {
-                
-                $sql = "UPDATE formula_f SET porcentaje=:porcentaje 
-                        WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
+
+                $sql = "UPDATE formula_f SET porcentaje=:porcentaje WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
                 $query = $conn->prepare($sql);
                 $result = $query->execute([
                     'porcentaje' => $porcentaje,

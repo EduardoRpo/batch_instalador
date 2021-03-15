@@ -115,6 +115,23 @@ if ($tabla == 'producto') {
 	foreach ($dataList as $data) {
 		$conn->query("INSERT INTO $tabla (id, nombre) VALUES ('{$data[0]}', '{$data[1]}')");
 	}
+} else if ($tabla == 'formula') {
+	foreach ($dataList as $data) {
+
+		$sql = "SELECT * FROM formula WHERE id_producto = :referencia AND id_materiaprima = :materiaprima";
+		$query = $conn->prepare($sql);
+		$query->execute(['referencia' => $data[0], 'materiaprima' => $data[1]]);
+		$rows = $query->rowCount();
+
+		if ($rows > 0)
+			$conn->query("UPDATE $tabla SET porcentaje = '{$data[2]}' WHERE id_producto = '{$data[0]}' AND id_materiaprima = '{$data[1]}' ");
+		else {
+			$sql = "INSERT INTO $tabla (id_producto, id_materiaprima, porcentaje) VALUES (:referencia, :materiaprima, AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD'))";
+			$query = $conn->prepare($sql);
+			$query->execute(['referencia' => $data[0], 'materiaprima' => $data[1], 'porcentaje' => $data[2]]);
+			//$conn->query("INSERT INTO $tabla (id_producto, id_materiaprima, porcentaje) VALUES ('{$data[0]}', '{$data[1]}', AES_ENCRYPT('{$data[2]}','Wf[Ht^}2YL=D^DPD')");
+		}
+	}
 } else {
 	foreach ($dataList as $data) {
 		$conn->query("INSERT INTO $tabla (nombre) VALUES ('{$data[0]}')");
