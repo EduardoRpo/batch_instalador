@@ -21,24 +21,18 @@ $i = 0;
 // preparar datos
 
 if ($tabla == 'notificacion_sanitaria' || $tabla == 'nombre_producto' || $tabla == 'propietario' || $tabla == 'marca') {
-	foreach ($datos as $data) {
+	foreach ($datos as $dato) {
 		if ($i !== 0)
-			$dataList[] = explode(";", (mb_strtoupper($data, 'utf-8')));
+			$dataList[] = explode(";", (mb_strtoupper($dato, 'utf-8')));
 		$i++;
 	}
 } else {
 	foreach ($datos as $data) {
 		if ($i !== 0)
-			$dataList[] = explode(";", ucfirst(mb_strtolower($data, 'utf-8')));
+			$dataList[] = explode(";", ucfirst(mb_strtolower($dato, 'utf-8')));
 		$i++;
 	}
 }
-
-/* Elimina todos los datos */
-//$conn->query("DELETE FROM $tabla");
-
-/* Restablece contador BD */
-//$conn->query("ALTER TABLE $tabla AUTO_INCREMENT = 1");
 
 /* Insertar datos del archivo */
 
@@ -54,17 +48,17 @@ if ($tabla == 'producto') {
 	$col = 3;
 
 	for ($t = 0; $t < sizeof($array); $t++) {
-		if ($array[$t] == 'presentacion_comercial') {
+		/* if ($array[$t] == 'presentacion_comercial') {
 			$col++;
-		}
-		if ($array[$t] != 'presentacion_comercial') {
-			$sql = "SELECT * FROM $array[$t]";
-			$query = $conn->prepare($sql);
-			$query->execute();
-			$propiedad_producto = $query->fetchAll($conn::FETCH_ASSOC);
-			findNombre($dataList, $propiedad_producto, $col, $array[$t]);
-			$col++;
-		}
+		} */
+		/* if ($array[$t] != 'presentacion_comercial') { */
+		$sql = "SELECT * FROM $array[$t]";
+		$query = $conn->prepare($sql);
+		$query->execute();
+		$propiedad_producto = $query->fetchAll($conn::FETCH_ASSOC);
+		findNombre($dataList, $propiedad_producto, $col, $array[$t]);
+		$col++;
+		/* } */
 	}
 
 	if ($e > 0) {
