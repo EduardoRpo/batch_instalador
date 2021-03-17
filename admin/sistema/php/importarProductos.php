@@ -163,11 +163,11 @@ if ($tabla == 'producto') {
 		$rows = $query->rowCount();
 
 		if ($rows > 0) {
-			$conn->query("UPDATE $tabla SET nombre = :nombre WHERE id = :id");
+			$sql = "UPDATE $tabla SET nombre = :nombre WHERE id = :id";
 			$query = $conn->prepare($sql);
 			$query->execute(['id' => $data[0], 'nombre' => $data[1]]);
 		} else {
-			$conn->query("INSERT INTO $tabla (id, nombre) VALUES(:id, :nombre)");
+			$sql = "INSERT INTO $tabla (id, nombre) VALUES(:id, :nombre)";
 			$query = $conn->prepare($sql);
 			$query->execute(['id' => $data[0], 'nombre' => $data[1]]);
 		}
