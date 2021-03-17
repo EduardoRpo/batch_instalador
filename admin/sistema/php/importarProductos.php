@@ -84,7 +84,7 @@ if ($tabla == 'producto') {
 								instructivo= '{$data[29]}' 
 							WHERE referencia = '{$data[0]}'");
 			} else {
-				$conn->query("INSERT INTO producto (referencia, nombre_referencia, unidad_empaque, id_nombre_producto, id_notificacion_sanitaria, 
+				/* $conn->query("INSERT INTO producto (referencia, nombre_referencia, unidad_empaque, id_nombre_producto, id_notificacion_sanitaria, 
 								id_linea, id_marca, id_propietario, presentacion_comercial, id_color, id_olor, id_apariencia, 
 								id_untuosidad, id_poder_espumoso, id_recuento_mesofilos, id_pseudomona, id_escherichia, 
 								id_staphylococcus, id_ph, id_viscosidad, id_densidad_gravedad, id_grado_alcohol, id_tapa, id_envase, 
@@ -93,7 +93,28 @@ if ($tabla == 'producto') {
 								'{$data[0]}', '{$data[1]}', '{$data[2]}', '{$data[3]}', '{$data[4]}', '{$data[5]}', '{$data[6]}', '{$data[7]}', 
 								'{$data[8]}', '{$data[9]}', '{$data[10]}', '{$data[11]}', '{$data[12]}', '{$data[13]}', '{$data[14]}', '{$data[15]}', 
 								'{$data[16]}', '{$data[17]}', '{$data[18]}', '{$data[19]}', '{$data[20]}', '{$data[21]}', '{$data[22]}', '{$data[23]}', 
-								'{$data[24]}', '{$data[25]}', '{$data[26]}', '{$data[27]}', '{$data[28]}', '{$data[29]}')");
+								'{$data[24]}', '{$data[25]}', '{$data[26]}', '{$data[27]}', '{$data[28]}', '{$data[29]}')"); */
+				$sql = "INSERT INTO producto (referencia, nombre_referencia, unidad_empaque, id_nombre_producto, id_notificacion_sanitaria, 
+										id_linea, id_marca, id_propietario, presentacion_comercial, id_color, id_olor, id_apariencia, 
+										id_untuosidad, id_poder_espumoso, id_recuento_mesofilos, id_pseudomona, id_escherichia, 
+										id_staphylococcus, id_ph, id_viscosidad, id_densidad_gravedad, id_grado_alcohol, id_tapa, id_envase, 
+										id_etiqueta, id_empaque, id_otros, multi, base_instructivo, instructivo) 
+						VALUE (:referencia, :nombre_referencia, :unidad_empaque, :id_nombre_producto, :id_notificacion_sanitaria, 
+								:id_linea, :id_marca, :id_propietario, :presentacion_comercial, :id_color, :id_olor, :id_apariencia, 
+								:id_untuosidad, :id_poder_espumoso, :id_recuento_mesofilos, :id_pseudomona, :id_escherichia, 
+								:id_staphylococcus, :id_ph, :id_viscosidad, :id_densidad_gravedad, :id_grado_alcohol, :id_tapa, :id_envase, 
+								:id_etiqueta, :id_empaque, :id_otros, :multi, :base_instructivo, :instructivo)";
+				$query = $conn->prepare($sql);
+				$result = $query->execute([
+					'producto' => $data[0], 'referencia' => $data[1], 'nombre_referencia' => $data[2], 'unidad_empaque' => $data[3],
+					'id_nombre_producto' => $data[4], 'id_notificacion_sanitaria' => $data[5], 'id_linea' => $data[6], 'id_marca' => $data[7],
+					'id_propietario' => $data[8], 'presentacion_comercial' => $data[9], 'id_color' => $data[10], 'id_olor' => $data[11],
+					'id_apariencia' => $data[12], 'id_untuosidad' => $data[13], 'id_poder_espumoso' => $data[14], 'id_recuento_mesofilos' => $data[15],
+					'id_pseudomona' => $data[16], 'id_escherichia' => $data[17], 'id_staphylococcus' => $data[18], 'id_ph' => $data[19],
+					'id_viscosidad' => $data[20], 'id_densidad_gravedad' => $data[21], 'id_grado_alcohol' => $data[22], 'id_tapa' => $data[23],
+					'id_envase' => $data[24], 'id_etiqueta' => $data[25], 'id_empaque' => $data[26], 'id_otros' => $data[27], 'multi' => $data[28],
+					'base_instructivo' => $data[29], 'instructivo' => $data[30]
+				]);
 			}
 		}
 	}
