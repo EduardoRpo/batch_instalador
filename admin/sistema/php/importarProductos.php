@@ -27,7 +27,7 @@ if ($tabla == 'notificacion_sanitaria' || $tabla == 'nombre_producto' || $tabla 
 		$i++;
 	}
 } else {
-	foreach ($datos as $data) {
+	foreach ($datos as $dato) {
 		if ($i !== 0)
 			$dataList[] = explode(";", ucfirst(mb_strtolower($dato, 'utf-8')));
 		$i++;
