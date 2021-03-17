@@ -155,6 +155,23 @@ if ($tabla == 'producto') {
 			$query->execute(['referencia' => $data[0], 'materiaprima' => $data[1], 'porcentaje' => $data[2]]);
 		}
 	}
+} else if ($tabla == 'presentacion_comercial') {
+	foreach ($dataList as $data) {
+		$sql = "SELECT * FROM presentacion_comercial WHERE id = :id";
+		$query = $conn->prepare($sql);
+		$query->execute(['id' => $data[0]]);
+		$rows = $query->rowCount();
+
+		if ($rows > 0) {
+			$conn->query("UPDATE $tabla SET nombre = :nombre WHERE id = :id");
+			$query = $conn->prepare($sql);
+			$query->execute(['id' => $data[0], 'nombre' => $data[1]]);
+		} else {
+			$conn->query("INSERT INTO $tabla (id, nombre) VALUES(:id, :nombre)");
+			$query = $conn->prepare($sql);
+			$query->execute(['id' => $data[0], 'nombre' => $data[1]]);
+		}
+	}
 } else {
 	foreach ($dataList as $data) {
 		$conn->query("INSERT INTO $tabla (nombre) VALUES ('{$data[0]}')");
