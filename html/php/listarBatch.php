@@ -116,10 +116,14 @@ switch ($op) {
   case 4: //recargar datos de acuerdo con seleccion de referencia
     $id_referencia = $_POST['id'];
 
-    $query_producto = mysqli_query($conn, "SELECT p.referencia, p.nombre_referencia as nombre, m.nombre as marca, ns.nombre as notificacion_sanitaria, pp.nombre as propietario, np.nombre as producto, p.presentacion_comercial, l.nombre as linea, l.densidad 
-                                            FROM producto p INNER JOIN marca m INNER JOIN notificacion_sanitaria ns INNER JOIN propietario pp INNER JOIN nombre_producto np INNER JOIN linea l 
-                                            ON p.id_marca = m.id AND p.id_notificacion_sanitaria = ns.id AND p.id_propietario=pp.id AND p.id_nombre_producto= np.id AND p.id_linea=l.id 
-                                            WHERE p.referencia = '$id_referencia'");
+    $query_producto = mysqli_query(
+      $conn,
+      "SELECT p.referencia, p.nombre_referencia as nombre, m.nombre as marca, ns.nombre as notificacion_sanitaria, pp.nombre as propietario, np.nombre as producto, pc.nombre as presentacion_comercial, l.nombre as linea, l.densidad 
+        FROM producto p 
+        INNER JOIN marca m INNER JOIN notificacion_sanitaria ns INNER JOIN propietario pp INNER JOIN nombre_producto np INNER JOIN linea l INNER JOIN presentacion_comercial pc 
+        ON p.id_marca = m.id AND p.id_notificacion_sanitaria = ns.id AND p.id_propietario=pp.id AND p.id_nombre_producto= np.id AND p.id_linea=l.id AND pc.id = p.presentacion_comercial 
+        WHERE p.referencia = '$id_referencia'"
+    );
 
     $result = mysqli_num_rows($query_producto);
 
@@ -269,7 +273,7 @@ switch ($op) {
 
 
     $query_actualizar = "UPDATE batch SET unidad_lote = '$unidades', tamano_lote = '$lote', estado = '3', fecha_programacion = ";
-    $query_actualizar .= $fechaprogramacion != null ? "'$fechaprogramacion'" : "NULL " ;
+    $query_actualizar .= $fechaprogramacion != null ? "'$fechaprogramacion'" : "NULL ";
     $query_actualizar .= "WHERE id_batch ='$id_batch'";
 
     $result = mysqli_query($conn, $query_actualizar);

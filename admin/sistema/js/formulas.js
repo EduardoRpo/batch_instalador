@@ -144,18 +144,24 @@ function cargar_formulas_f(referencia) {
       };
 
       // Total over all pages
-      total = api.column(4).data().reduce(function (a, b) {
+      total = api
+        .column(4)
+        .data()
+        .reduce(function (a, b) {
           return intVal(a) + intVal(b);
         }, 0);
 
       // Total over this page
-      pageTotal = api.column(3, { page: "current" }).data().reduce(function (a, b) {
+      pageTotal = api
+        .column(3, { page: "current" })
+        .data()
+        .reduce(function (a, b) {
           return intVal(a) + intVal(b);
         }, 0);
 
       // Update footer
       $(api.column(3).footer()).html(`${pageTotal}`);
-    }
+    },
   });
 }
 
@@ -260,6 +266,11 @@ function guardarFormulaMateriaPrima() {
       if (r == 1) {
         alertify.set("notifier", "position", "top-right");
         alertify.success("Almacenada con éxito.");
+        debugger;
+        $("#cmbreferencia").val("");
+        $("#txtMateria-Prima").val("");
+        $("#alias").val("");
+        $("#porcentaje").val("");
         refreshTable();
       } else if (r == 2) {
         alertify.set("notifier", "position", "top-right");

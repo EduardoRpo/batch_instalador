@@ -1,6 +1,7 @@
 <?php
 //include('/Desarrollo/BatchRecord/htdocs/conexion.php');
 require_once('../../conexion2.php');
+require_once('../../conexion.php');
 
 function utf8ize($d)
 {
@@ -23,31 +24,41 @@ $op = $_POST['operacion'];
 
 switch ($op) {
   case 1: //Cargar Select Multipresentacion
-    $id_batch = $_POST['id'];
+    $referencia = $_POST['id'];
 
-    /* $query_nref = mysqli_query($conn, "SELECT @curRow := @curRow + 1 AS id, nombre_referencia FROM producto JOIN (SELECT @curRow := 0) r WHERE multi = 
-                                          (SELECT multi FROM producto WHERE producto.referencia = 
-                                          (SELECT batch.id_producto FROM batch WHERE batch.id_batch = $id_batch)) AND multi>0"); */
-    $query_nref = mysqli_query($conn, "SELECT p.referencia, p.nombre_referencia FROM producto p WHERE multi>0");
+    $sql = "SELECT multi FROM producto WHERE referencia = :referencia";
+    $query = $conn->prepare($sql);
+    $query->execute(['referencia' => $referencia]);
+    $ids = $query->fetchAll($conn::FETCH_ASSOC);
+    foreach ($ids as $id)
+      $multi = $id['multi'];
+
+    $rows = $query->rowCount();
+
+    if ($rows > 0) {
+      $sql = "SELECT p.referencia, p.nombre_referencia FROM producto p WHERE multi = :multi";
+      $query = $conn->prepare($sql);
+      $query->execute(['multi' => $multi]);
+      $id_multi = $query->fetchAll($conn::FETCH_ASSOC);
+      echo json_encode($id_multi, JSON_UNESCAPED_UNICODE);
+    } else {
+      echo '3';
+    }
 
 
+
+    /* $query_nref = mysqli_query($conn, "SELECT p.referencia, p.nombre_referencia FROM producto p WHERE multi > 0");
     $result = mysqli_num_rows($query_nref);
-
     mysqli_close($conn);
 
     if ($result > 0) {
-
       while ($data = mysqli_fetch_assoc($query_nref)) {
         $arreglo[] = $data;
       }
-
       echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
-      //echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
-      //exit();
-
     } else {
       echo json_encode('');
-    }
+    } */
 
 
     break;
