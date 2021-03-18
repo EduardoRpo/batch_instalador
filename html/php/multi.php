@@ -120,7 +120,7 @@ switch ($op) {
 
     $tmn = sizeof($nom_referencia);
 
-    for ($i = 0; $i <= $tmn; ++$i) {
+    for ($i = 0; $i < $tmn; ++$i) {
 
       /* $query_id_referencia = "INSERT INTO multipresentacion (id_batch, referencia, cantidad, total) 
                                     SELECT '$id_batch', referencia, '$cantidad[$i]', '$total[$i]' 
@@ -131,18 +131,22 @@ switch ($op) {
       $sql = "INSERT INTO multipresentacion (id_batch, referencia, cantidad, total) 
               SELECT :id_batch, referencia, :cantidad, :total 
               FROM producto 
-              WHERE nombre_referencia = :nombre:_referencia";
+              WHERE nombre_referencia = :nombre_referencia";
       $query = $conn->prepare($sql);
       $query->execute([
-        'nombre_referencia' => $nombre_referencia,
+        'nombre_referencia' => $nom_referencia[$i],
         'id_batch' => $id_batch,
         'cantidad' => $cantidad[$i],
         'total' => $total[$i]
       ]);
     }
 
-    $query_batch_multi = "  UPDATE batch SET multi = '1' WHERE id_batch='$id_batch'";
-    $result1 = mysqli_query($conn, $query_batch_multi);
+    /* $query_batch_multi = "  UPDATE batch SET multi = '1' WHERE id_batch='$id_batch'";
+    $result1 = mysqli_query($conn, $query_batch_multi); */
+
+    $sql = "UPDATE batch SET multi = '1' WHERE id_batch= :id_batch";
+    $query = $conn->prepare($sql);
+    $result = $query->execute(['id_batch' => $id_batch,]);
 
     if (!$result) {
       die('Error');
@@ -150,8 +154,6 @@ switch ($op) {
     } else {
       echo 'Almacenado';
     }
-
-    mysqli_close($conn);
 
     break;
 

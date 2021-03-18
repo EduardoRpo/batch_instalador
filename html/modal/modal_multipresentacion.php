@@ -13,7 +13,7 @@
           <label class="labelcenter ml-3 mr-3">Tamaño Total Lote (Kg)</label>
           <input type="text" id="loteTotal" class="form-control" style="width: 100px;" readonly>
         </div>
-        <div class="insertarRefMulti mb-3 mt-3" style="justify-items:center">
+        <div class="insertarRefMulti mb-3 mt-3" id="etiquetasMulti" style="justify-items:center; display: none;">
           <p><b>Presentación</b></p>
           <p><b>Unidades</b></p>
           <p><b>Lote</b></p>

@@ -82,6 +82,7 @@ function OcultarMultipresentacion() {
 $("#adicionarMultipresentacion").on("click", function () {
   contarMultipresentacion();
   const cantidad = $("#txtcantidadMulti" + cont).val();
+  $("#etiquetasMulti").css("display", "grid");
 
   if (cont == 0) {
     insertarMulti();
