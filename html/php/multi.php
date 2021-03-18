@@ -45,8 +45,6 @@ switch ($op) {
       echo '3';
     }
 
-
-
     /* $query_nref = mysqli_query($conn, "SELECT p.referencia, p.nombre_referencia FROM producto p WHERE multi > 0");
     $result = mysqli_num_rows($query_nref);
     mysqli_close($conn);
@@ -65,49 +63,52 @@ switch ($op) {
 
   case 2: //seleccionar ID para Cargar datos de acuerdo con la selección de multipresentación
     $nombre_referencia = $_POST['nombre_referencia'];
-
-    $query_producto = mysqli_query($conn, "SELECT referencia FROM `producto` WHERE nombre_referencia='$nombre_referencia'");
-
+    /*$query_producto = mysqli_query($conn, "SELECT referencia FROM `producto` WHERE nombre_referencia='$nombre_referencia'");
     $result = mysqli_num_rows($query_producto);
-
     mysqli_close($conn);
 
     if ($result > 0) {
-
       while ($data = mysqli_fetch_assoc($query_producto)) {
         $arreglo[] = $data;
       }
-
       echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
     } else {
       echo json_encode('');
-    }
+    } */
 
+    $sql = "SELECT referencia FROM `producto` WHERE nombre_referencia = :nombre_referencia";
+    $query = $conn->prepare($sql);
+    $query->execute(['multi' => $nombre_referencia]);
+    $nombres_ref = $query->fetchAll($conn::FETCH_ASSOC);
+    echo json_encode($nombres_ref, JSON_UNESCAPED_UNICODE);
 
     break;
 
   case 3: //recargar datos de acuerdo con seleccion de referencia
-    $id_referencia = $_POST['id'];
-
-    $query_producto = mysqli_query($conn, "SELECT p.referencia, p.nombre_referencia as nombre, m.nombre as marca, ns.nombre as notificacion, pp.nombre as propietario, np.nombre as producto, p.presentacion_comercial as presentacion, l.nombre as linea, l.densidad 
+    $referencia = $_POST['referencia'];
+    /* $query_producto = mysqli_query($conn, "SELECT p.referencia, p.nombre_referencia as nombre, m.nombre as marca, ns.nombre as notificacion, pp.nombre as propietario, np.nombre as producto, p.presentacion_comercial as presentacion, l.nombre as linea, l.densidad 
                                            FROM producto p INNER JOIN marca m INNER JOIN notificacion_sanitaria ns INNER JOIN propietario pp INNER JOIN nombre_producto np INNER JOIN linea l 
                                            ON p.id_marca = m.id AND p.id_notificacion_sanitaria = ns.id AND p.id_propietario=pp.id AND p.id_nombre_producto= np.id AND p.id_linea=l.id 
                                            WHERE p.referencia = $id_referencia");
-
     $result = mysqli_num_rows($query_producto);
-
     mysqli_close($conn);
-
     if ($result > 0) {
-
       while ($data = mysqli_fetch_assoc($query_producto)) {
         $arreglo[] = $data;
       }
-
       echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
     } else {
       echo json_encode('');
-    }
+    } */
+
+    $sql = "SELECT p.referencia, p.nombre_referencia as nombre, m.nombre as marca, ns.nombre as notificacion, pp.nombre as propietario, np.nombre as producto, pc.nombre as presentacion, l.nombre as linea, l.densidad 
+            FROM producto p INNER JOIN marca m INNER JOIN notificacion_sanitaria ns INNER JOIN propietario pp INNER JOIN nombre_producto np INNER JOIN linea l INNER JOIN presentacion_comercial pc
+            ON p.id_marca = m.id AND p.id_notificacion_sanitaria = ns.id AND p.id_propietario=pp.id AND p.id_nombre_producto= np.id AND p.id_linea=l.id AND pc.id = p.presentacion_comercial
+            WHERE p.referencia = :referencia";
+    $query = $conn->prepare($sql);
+    $query->execute(['referencia' => $referencia]);
+    $nombres_ref = $query->fetchAll($conn::FETCH_ASSOC);
+    echo json_encode($nombres_ref, JSON_UNESCAPED_UNICODE);
 
     break;
 
@@ -120,21 +121,28 @@ switch ($op) {
     $tmn = sizeof($nom_referencia);
 
     for ($i = 0; $i <= $tmn; ++$i) {
-      //$query_tanque = "INSERT INTO batch_tanques (tanque, cantidad, id_batch) VALUES('$tanque[$i]' , '$tamanotqn[$i]', '$id')";
 
-      $query_id_referencia = "INSERT INTO multipresentacion (id_batch, referencia, cantidad, total) 
+      /* $query_id_referencia = "INSERT INTO multipresentacion (id_batch, referencia, cantidad, total) 
                                     SELECT '$id_batch', referencia, '$cantidad[$i]', '$total[$i]' 
                                     FROM producto 
                                     WHERE nombre_referencia = '$nom_referencia[$i]'";
 
-      $result = mysqli_query($conn, $query_id_referencia);
+      $result = mysqli_query($conn, $query_id_referencia); */
+      $sql = "INSERT INTO multipresentacion (id_batch, referencia, cantidad, total) 
+              SELECT :id_batch, referencia, :cantidad, :total 
+              FROM producto 
+              WHERE nombre_referencia = :nombre:_referencia";
+      $query = $conn->prepare($sql);
+      $query->execute([
+        'nombre_referencia' => $nombre_referencia,
+        'id_batch' => $id_batch,
+        'cantidad' => $cantidad[$i],
+        'total' => $total[$i]
+      ]);
     }
 
     $query_batch_multi = "  UPDATE batch SET multi = '1' WHERE id_batch='$id_batch'";
-
     $result1 = mysqli_query($conn, $query_batch_multi);
-
-
 
     if (!$result) {
       die('Error');

@@ -23,7 +23,6 @@ function multipresentacion() {
       data: { operacion: "1", id: data.referencia },
 
       success: function (r) {
-        debugger;
         var info = JSON.parse(r);
 
         if (info != "") {
@@ -139,16 +138,6 @@ function bloquearCeldasMulti() {
 /* Cargar Select Referencias con Multipresentacion */
 
 function cargarMulti(multi) {
-  debugger;
-  //referencia = localStorage.getItem("referencia");
-
-  /*  $.ajax({
-    type: "POST",
-    url: "php/multi.php",
-    data: { operacion: "1", id: referencia },
-
-    success: function (r) { 
-      var info = JSON.parse(r);*/
   for (i = 1; i < 6; i++) {
     let $select = $("#cmbMultiReferencia" + i);
     $select.empty();
@@ -162,19 +151,17 @@ function cargarMulti(multi) {
       );
     });
   }
-  /* },
-  }); */
 }
 
 /* cargar datos de acuerdo con la seleccion de multipresentacion */
 
 function cargarReferenciaM(id) {
-  const opcion = $("#cmbMultiReferencia" + id).val();
+  const referencia = $("#cmbMultiReferencia" + id).val();
 
   $.ajax({
     type: "POST",
     url: "php/multi.php",
-    data: { operacion: "3", id: opcion },
+    data: { operacion: "3", referencia },
 
     success: function (r) {
       var info = JSON.parse(r);
@@ -197,7 +184,7 @@ function calcularMulti(id) {
 /* calcular Tamaño del Lote */
 
 function CalculoloteMulti(id, cantidad) {
-  const opcion = $("#cmbMultiReferencia" + id).val();
+  const referencia = $("#cmbMultiReferencia" + id).val();
   const densidad = $("#txtdensidadMulti" + id).val();
   const presentacion = $("#txtpresentacionMulti" + id).val();
   const lote = $("#loteTotal").val();
@@ -205,9 +192,9 @@ function CalculoloteMulti(id, cantidad) {
   cantidad = $("#txtcantidadMulti" + id).val();
   let sumaMulti = 0;
 
-  if (opcion == undefined) {
+  if (referencia == undefined) {
     alertify.set("notifier", "position", "top-right");
-    alertify.error("Seleccione la presentacion.");
+    alertify.error("Seleccione la presentación.");
     return false;
   }
 
