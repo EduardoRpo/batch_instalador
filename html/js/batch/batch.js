@@ -235,6 +235,7 @@ function actualizarTabla() {
 
 function guardarDatos() {
   //validar consecutivo del lote en la base de datos (trigger)
+  debugger;
   const lote = $("#tamanototallote").val();
   const tamano_lote = formatoGeneral(lote);
 
@@ -289,12 +290,16 @@ function guardarDatos() {
     j++;
   }
 
-  j = 1;
+  ref =  $("#referencia").val(),
+  id_batch =  $("#idbatch").val(),
 
+  j = 1;
+  debugger;
   if (!editar) {
     datos = {
       operacion: "5",
-      ref: $("#idbatch").val(),
+      ref: $("#referencia").val(),
+      id_batch: $("#idbatch").val(),
       unidades: $("#unidadesxlote").val(),
       lote: tamano_lote,
       presentacion: presentacion_comercial,
@@ -307,7 +312,8 @@ function guardarDatos() {
   } else {
     datos = {
       operacion: "7",
-      ref: $("#idbatch").val(),
+      ref: $("#referencia").val(),
+      id_batch: $("#idbatch").val(),
       unidades: $("#unidadesxlote").val(),
       lote: tamano_lote,
       programacion: $("#fechaprogramacion").val(),

@@ -146,8 +146,8 @@ switch ($op) {
 
     //Inicializa variables
     $cantidad = $_POST['cantidad'];
-    $id = $_POST['ref'];
-    //$nombreReferencia = $_POST['nref'];
+    $id_batch     = $_POST['id_batch'];
+    $referencia     = $_POST['ref'];
     $unidadesxlote          = $_POST['unidades'];
     $tamanototallote        = $_POST['lote'];
     $fechaprogramacion      = $_POST['programacion'];
@@ -158,7 +158,7 @@ switch ($op) {
 
 
     //Valida formula
-    $query_buscarFormula =  mysqli_query($conn, "SELECT * FROM formula WHERE id_producto = $id");
+    $query_buscarFormula =  mysqli_query($conn, "SELECT * FROM formula WHERE id_producto = $id_batch");
     $result = mysqli_num_rows($query_buscarFormula);
 
     if ($result <= 0) {
@@ -180,7 +180,7 @@ switch ($op) {
     $query = "INSERT INTO batch (fecha_creacion, fecha_programacion, fecha_actual, numero_orden, numero_lote, tamano_lote, lote_presentacion, unidad_lote, estado, id_producto) 
 			VALUES ('$fechahoy',";
     $query .= $fechaprogramacion != null ? "'$fechaprogramacion'" : "NULL";
-    $query .= ",'$fechahoy', 'OP012020',' X0010320', '$tamanototallote', '$tamanolotepresentacion', '$unidadesxlote', '$estado', '$id')";
+    $query .= ",'$fechahoy', 'OP012020',' X0010320', '$tamanototallote', '$tamanolotepresentacion', '$unidadesxlote', '$estado', '$id_batch')";
 
     //var_dump($query);
 
@@ -215,10 +215,10 @@ switch ($op) {
   case 6: //Cargar datos para Actualizar
     $id_batch = $_POST['id'];
 
-    $query_buscar = mysqli_query($conn, "SELECT bt.id_batch, p.referencia, p.nombre_referencia, m.nombre as marca, pp.nombre as propietario, np.nombre, p.presentacion_comercial, linea.nombre as linea, linea.densidad, ns.nombre as notificacion_sanitaria, bt.unidad_lote, bt.tamano_lote, bt.fecha_programacion 
-                                        FROM producto p INNER JOIN marca m INNER JOIN propietario pp INNER JOIN nombre_producto np INNER JOIN linea INNER JOIN notificacion_sanitaria ns INNER JOIN batch bt
-                                        ON p.id_marca=m.id AND p.id_propietario=pp.id AND p.id_nombre_producto=np.id AND p.id_linea=linea.id AND p.id_notificacion_sanitaria=ns.id AND bt.id_producto=p.referencia
-                                        WHERE bt.id_batch = $id_batch");
+    $query_buscar = mysqli_query($conn, "SELECT bt.id_batch, p.referencia, p.nombre_referencia, m.nombre as marca, pp.nombre as propietario, np.nombre, pc.nombre as presentacion_comercial, linea.nombre as linea, linea.densidad, ns.nombre as notificacion_sanitaria, bt.unidad_lote, bt.tamano_lote, bt.fecha_programacion 
+                                          FROM producto p INNER JOIN marca m INNER JOIN propietario pp INNER JOIN nombre_producto np INNER JOIN linea INNER JOIN notificacion_sanitaria ns INNER JOIN batch bt INNER JOIN presentacion_comercial pc
+                                          ON p.id_marca=m.id AND p.id_propietario=pp.id AND p.id_nombre_producto=np.id AND p.id_linea=linea.id AND p.id_notificacion_sanitaria=ns.id AND bt.id_producto=p.referencia AND p.presentacion_comercial = pc.id
+                                          WHERE bt.id_batch = $id_batch");
 
     $data[] = mysqli_fetch_assoc($query_buscar);
 
@@ -246,7 +246,8 @@ switch ($op) {
     break;
 
   case 7: //Actualiza datos
-    $id_batch     = $_POST['ref'];
+    $id_batch     = $_POST['id_batch'];
+    $referencia     = $_POST['ref'];
     $unidades     = $_POST['unidades'];
     $lote         = $_POST['lote'];
     $fechaprogramacion = $_POST['programacion'];
@@ -254,7 +255,7 @@ switch ($op) {
     $tamanotqn    = $_POST['tmn'];
 
     //Valida formula
-    $query_buscarFormula =  mysqli_query($conn, "SELECT * FROM formula WHERE id_producto = $id_batch");
+    $query_buscarFormula =  mysqli_query($conn, "SELECT * FROM formula WHERE id_producto = $referencia");
     $result = mysqli_num_rows($query_buscarFormula);
 
     if ($result <= 0) {
