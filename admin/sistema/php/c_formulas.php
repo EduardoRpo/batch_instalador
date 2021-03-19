@@ -35,79 +35,50 @@ switch ($op) {
 
     case 6: // Guardar data Formula
         if (!empty($_POST)) {
-            $editar = $_POST['editar'];
+            //$editar = $_POST['editar'];
             $id_producto = $_POST['ref_producto'];
             $id_materiaprima = $_POST['ref_materiaprima'];
             $porcentaje = $_POST['porcentaje'];
 
-            if ($editar == 0) {
-                $sql = "SELECT * FROM formula WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
-                $query = $conn->prepare($sql);
-                $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto]);
-                $rows = $query->rowCount();
+            $sql = "SELECT * FROM formula WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
+            $query = $conn->prepare($sql);
+            $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto]);
+            $rows = $query->rowCount();
 
-                if ($rows > 0) {
-                    echo '2';
-                    exit();
-                } else {
-                    $sql = "INSERT INTO formula (id_producto, id_materiaprima, porcentaje) VALUES (:id_producto, :id_materiaprima, AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') )";
-                    $query = $conn->prepare($sql);
-                    $result = $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto, 'porcentaje' => $porcentaje]);
-                    if ($result) {
-                        echo '1';
-                        exit();
-                    }
-                }
-            } else {
-                //$id = $_POST['id'];
-                $sql = "UPDATE formula SET porcentaje=:porcentaje WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
+            if ($rows > 0) {
+
+                $sql = "UPDATE formula SET porcentaje = AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
                 $query = $conn->prepare($sql);
                 $result = $query->execute([
                     'id_materiaprima' => $id_materiaprima,
                     'id_producto' => $id_producto,
                     'porcentaje' => $porcentaje,
                 ]);
-
-                if ($result) {
+                if ($result)
                     echo '3';
-                    exit();
-                }
+            } else {
+                $sql = "INSERT INTO formula (id_producto, id_materiaprima, porcentaje) VALUES (:id_producto, :id_materiaprima, AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') )";
+                $query = $conn->prepare($sql);
+                $result = $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto, 'porcentaje' => $porcentaje]);
+                if ($result)
+                    echo '1';
             }
         }
         break;
 
     case 7: // Guardar data tabla fantasma
         if (!empty($_POST)) {
-            $editar = $_POST['editar'];
+
             $id_producto = $_POST['ref_producto'];
             $id_materiaprima = $_POST['ref_materiaprima'];
             $porcentaje = $_POST['porcentaje'];
 
-            if ($editar == 0) {
-                $sql = "SELECT * FROM formula_f WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
-                $query = $conn->prepare($sql);
-                $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto]);
-                $rows = $query->rowCount();
+            $sql = "SELECT * FROM formula_f WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
+            $query = $conn->prepare($sql);
+            $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto]);
+            $rows = $query->rowCount();
 
-                if ($rows > 0) {
-                    echo '2';
-                    exit();
-                } else {
-                    $sql = "INSERT INTO formula_f (id_producto, id_materiaprima, porcentaje) 
-                            VALUES (:id_producto, :id_materiaprima, :porcentaje )";
-                    $query = $conn->prepare($sql);
-                    $result = $query->execute([
-                        'id_producto' => $id_producto,
-                        'id_materiaprima' => $id_materiaprima,
-                        'porcentaje' => $porcentaje,
-                    ]);
-                    if ($result) {
-                        echo '1';
-                        exit();
-                    }
-                }
-            } else {
-
+            if ($rows > 0) {
                 $sql = "UPDATE formula_f SET porcentaje=:porcentaje WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
                 $query = $conn->prepare($sql);
                 $result = $query->execute([
@@ -116,10 +87,19 @@ switch ($op) {
                     'id_producto' => $id_producto,
                 ]);
 
-                if ($result) {
+                if ($result)
                     echo '3';
-                    exit();
-                }
+            } else {
+                $sql = "INSERT INTO formula_f (id_producto, id_materiaprima, porcentaje) 
+                            VALUES (:id_producto, :id_materiaprima, :porcentaje )";
+                $query = $conn->prepare($sql);
+                $result = $query->execute([
+                    'id_producto' => $id_producto,
+                    'id_materiaprima' => $id_materiaprima,
+                    'porcentaje' => $porcentaje,
+                ]);
+                if ($result)
+                    echo '1';
             }
         }
         break;

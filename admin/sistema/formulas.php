@@ -75,13 +75,13 @@
                   <input type="number" name="porcentaje" id="porcentaje" class="form-control" placeholder="%" style="text-align: center;">
 
                   <div class="formula">
-                    <label for="" class="mr-3"> <b>Insertar en: </b> </label>
+                    <label for="formula" class="mr-3"> <b>Insertar en: </b> </label>
                     <input type="radio" id="formula" name="formula" value="6">
                     <label for="formula" class="mr-3">Formula</label>
                     <input type="radio" id="fantasma" name="formula" value="7">
                     <label for="fantasma" class="mr-3">Formula Fantasma</label>
-                    <input type="radio" id="ambos" name="formula" value="8">
-                    <label for="ambos">Ambos</label>
+                    <!-- <input type="radio" id="ambos" name="formula" value="8">
+                    <label for="ambos">Ambos</label> -->
                   </div>
                   <button type="button" class="btn btn-primary" id="guardarFormula" onclick="guardarFormulaMateriaPrima();">Guardar</button>
                 </form>

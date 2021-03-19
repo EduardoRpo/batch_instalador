@@ -235,7 +235,11 @@ function guardarFormulaMateriaPrima() {
   let operacion = $("input:radio[name=formula]:checked").val();
   let ref_producto = $("#cmbReferenciaProductos").val();
   let ref_materiaprima = $("#cmbreferencia").val();
-  let porcentaje = parseInt($("#porcentaje").val());
+  let porcentaje = parseFloat($("#porcentaje").val());
+
+  ref_materiaprima === null
+    ? (ref_materiaprima = $("#textReferencia").val())
+    : ref_materiaprima;
 
   if (ref_producto === null) {
     alertify.set("notifier", "position", "top-right");
@@ -243,9 +247,19 @@ function guardarFormulaMateriaPrima() {
     return false;
   }
 
-  if (ref_materiaprima === null) ref_materiaprima = $("#textReferencia").val();
+  if (ref_materiaprima === null) {
+    alertify.set("notifier", "position", "top-right");
+    alertify.error("Seleccione la referencia de la materia prima");
+    ref_materiaprima = $("#textReferencia").val();
+    return false;
+  }
 
-  if (porcentaje === null || porcentaje === "") {
+  if (
+    porcentaje === undefined ||
+    porcentaje === null ||
+    porcentaje === "" ||
+    isNaN(porcentaje)
+  ) {
     alertify.set("notifier", "position", "top-right");
     alertify.error("Ingrese todos los campos");
     return false;
@@ -266,15 +280,6 @@ function guardarFormulaMateriaPrima() {
       if (r == 1) {
         alertify.set("notifier", "position", "top-right");
         alertify.success("Almacenada con éxito.");
-        debugger;
-        $("#cmbreferencia").val("");
-        $("#txtMateria-Prima").val("");
-        $("#alias").val("");
-        $("#porcentaje").val("");
-        refreshTable();
-      } else if (r == 2) {
-        alertify.set("notifier", "position", "top-right");
-        alertify.error("Código ya existe.");
       } else if (r == 3) {
         alertify.set("notifier", "position", "top-right");
         alertify.success("Registro actualizado.");
@@ -283,6 +288,12 @@ function guardarFormulaMateriaPrima() {
         alertify.set("notifier", "position", "top-right");
         alertify.error("Error.");
       }
+
+      $("#cmbreferencia").val("");
+      $("#txtMateria-Prima").val("");
+      $("#alias").val("");
+      $("#porcentaje").val("");
+      refreshTable();
     },
   });
 }
@@ -297,6 +308,7 @@ $(document).on("click", ".link-editar", function (e) {
   let mp = $(this).parent().parent().children().eq(1).text();
   let alias = $(this).parent().parent().children().eq(2).text();
   let porcentaje = $(this).parent().parent().children().eq(3).text();
+  porcentaje = parseInt(porcentaje);
 
   $("#cmbreferencia").val("");
   $("#frmadFormulas").slideDown();
