@@ -88,7 +88,7 @@ $(document).ready(function () {
 function recargarDatos() {
   var combo = document.getElementById("cmbNoReferencia");
   var sel = combo.options[combo.selectedIndex].text;
-
+  debugger;
   $.ajax({
     type: "POST",
     url: "php/listarBatch.php",
@@ -96,7 +96,7 @@ function recargarDatos() {
 
     success: function (r) {
       var info = JSON.parse(r);
-      
+
       $("#idbatch").val(info[0].referencia);
       $("#nombrereferencia").val(info[0].nombre);
       $("#marca").val(info[0].marca);
@@ -115,7 +115,7 @@ function recargarDatos() {
 function CalculoTamanolote(valor) {
   var total = 0;
   unidades = parseInt(valor);
-
+  debugger;
   densidad = $("#densidad").val();
 
   if (batch == undefined || batch == false) {

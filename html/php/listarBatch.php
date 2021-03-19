@@ -182,10 +182,7 @@ switch ($op) {
     $query .= $fechaprogramacion != null ? "'$fechaprogramacion'" : "NULL";
     $query .= ",'$fechahoy', 'OP012020',' X0010320', '$tamanototallote', '$tamanolotepresentacion', '$unidadesxlote', '$estado', '$id_batch')";
 
-    //var_dump($query);
-
     if (isset($cantidad)) {
-
       while ($i <= $cantidad) {
         $result = mysqli_query($conn, $query); //or die ("Problemas al insertar" . mysqli_error($conn));    
         $i++;

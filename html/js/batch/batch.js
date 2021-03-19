@@ -290,10 +290,7 @@ function guardarDatos() {
     j++;
   }
 
-  ref =  $("#referencia").val(),
-  id_batch =  $("#idbatch").val(),
-
-  j = 1;
+  (ref = $("#referencia").val()), (id_batch = $("#idbatch").val()), (j = 1);
   debugger;
   if (!editar) {
     datos = {
