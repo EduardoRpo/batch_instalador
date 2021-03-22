@@ -75,8 +75,8 @@
                   <label for=""><b>Código</b></label>
                   <label for=""><b>Descripción de Tapa</b></label>
 
-                  <input type="number" name="txt-Id1" id="txt-Id1" class="form-control" hidden>
-                  <input type="number" name="codigo1" id="codigo1" class="form-control" placeholder="Codigo" style="text-align: center;">
+                  <input type="text" name="txt-Id1" id="txt-Id1" class="form-control" hidden>
+                  <input type="text" name="codigo1" id="codigo1" class="form-control" placeholder="Codigo" style="text-align: center;">
                   <input type="text" name="input1" id="input1" class="form-control" placeholder="Descripcion Tapa">
 
                   <button type="button" class="btn btn-primary btnguardar" id="tapa" onclick="guardarDatosGenerales(id, 1);">Guardar</button>

@@ -139,7 +139,7 @@ function cargarselectores(selector) {
         "<option disabled selected>" + "Seleccionar" + "</option>"
       );
 
-      if (selector == "presentacion_comercial") {
+      /* if (selector == "presentacion_comercial") {
         $.each(info.data, function (i, value) {
           $select.append(
             '<option value ="' +
@@ -149,13 +149,13 @@ function cargarselectores(selector) {
               "</option>"
           );
         });
-      } else {
+      } else { */
         $.each(info.data, function (i, value) {
           $select.append(
             '<option value ="' + value.id + '">' + value.nombre + "</option>"
           );
         });
-      }
+      /* } */
     },
     error: function (response) {
       console.log(response);
