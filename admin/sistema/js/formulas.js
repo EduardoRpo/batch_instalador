@@ -87,7 +87,7 @@ function cargarTablaFormulas(referencia) {
       {
         data: "porcentaje",
         className: "centrado",
-        render: $.fn.dataTable.render.number(",", ".", 1, "", "%"),
+        render: $.fn.dataTable.render.number(",", ".", 2, "", "%"),
       },
       {
         defaultContent:
@@ -121,7 +121,7 @@ function cargar_formulas_f(referencia) {
       {
         data: "porcentaje",
         className: "centrado",
-        //render: $.fn.dataTable.render.number(",", ".", 3, "", "%"),
+        render: $.fn.dataTable.render.number(",", ".", 2, "", "%"),
       },
       {
         defaultContent:
