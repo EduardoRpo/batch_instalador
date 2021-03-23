@@ -285,17 +285,17 @@ include("modal/modal_condicionesMedio.php");
                     <select class="selectpicker form-control select-linea" id="select-Linea"></select>
                   </div> -->
 
-                  <div class="maquinasPreparacion__group">
-                    <label for="sel_agitador">Identificación Agitador</label>
-                    <select class="selectpicker form-control equipo" id="sel_agitador"></select>
-                    <!-- <input type="text" id="sel_agitador" class="form-control" readonly> -->
-                  </div>
+                  <!-- <div class="maquinasPreparacion__group"> -->
+                  <label for="sel_agitador">Identificación Agitador</label>
+                  <label for="sel_marmita">Identificación Marmita o Tanque</label>
+                  <!-- <input type="text" id="sel_agitador" class="form-control" readonly> -->
+                  <!-- </div> -->
 
-                  <div class="maquinasPreparacion__group">
-                    <label for="sel_marmita">Identificación Marmita o Tanque</label>
-                    <select class="selectpicker form-control equipo" id="sel_marmita"></select>
-                    <!-- <input type="text" id="sel_marmita" class="form-control" readonly> -->
-                  </div>
+                  <!-- <div class="maquinasPreparacion__group"> -->
+                  <select class="selectpicker form-control equipo" id="sel_agitador"></select>
+                  <select class="selectpicker form-control equipo" id="sel_marmita"></select>
+                  <!-- <input type="text" id="sel_marmita" class="form-control" readonly> -->
+                  <!-- </div> -->
 
                 </div>
                 <div class="row" style="margin: 1%">
