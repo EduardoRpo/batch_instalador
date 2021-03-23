@@ -35,7 +35,7 @@ switch ($op) {
 
     $rows = $query->rowCount();
 
-    if ($rows > 0) {
+    if ($rows > 0 && $multi != 0) {
       $sql = "SELECT p.referencia, p.nombre_referencia FROM producto p WHERE multi = :multi";
       $query = $conn->prepare($sql);
       $query->execute(['multi' => $multi]);
