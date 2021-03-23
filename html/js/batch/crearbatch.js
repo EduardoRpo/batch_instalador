@@ -88,7 +88,7 @@ $(document).ready(function () {
 function recargarDatos() {
   var combo = document.getElementById("cmbNoReferencia");
   var sel = combo.options[combo.selectedIndex].text;
-  debugger;
+  
   $.ajax({
     type: "POST",
     url: "php/listarBatch.php",
@@ -115,7 +115,7 @@ function recargarDatos() {
 function CalculoTamanolote(valor) {
   var total = 0;
   unidades = parseInt(valor);
-  debugger;
+ 
   densidad = $("#densidad").val();
 
   if (batch == undefined || batch == false) {

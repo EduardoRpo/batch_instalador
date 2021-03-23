@@ -50,5 +50,25 @@ if (!empty($_POST)) {
           echo '2';
       }
       break;
+
+    case 3:
+      $modulo = $_POST['modulo'];
+      $batch =  $_POST['idBatch'];
+
+      $sql = "SELECT * FROM batch_condicionesmedio WHERE id_batch = :batch AND id_modulo = :modulo";
+      $query = $conn->prepare($sql);
+      $result = $query->execute([
+        'batch' => $batch,
+        'modulo' => $modulo,
+      ]);
+
+      $rows = $query->rowCount();
+
+      if ($rows > 0)
+        echo '0';
+      else
+        echo '1';
+
+      break;
   }
 }
