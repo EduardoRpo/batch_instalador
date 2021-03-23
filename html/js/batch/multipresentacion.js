@@ -1,5 +1,5 @@
 let totallotexpresentacion = [];
-
+editar = false;
 /* Validar Batch Record y si existe Cargar Multipresentación */
 
 $("#tablaBatch tbody").on("click", "tr", function () {
@@ -16,7 +16,7 @@ $(document).on("click", ".link-select", function (e) {
 /* Validar si un producto puede tener multipresentacion */
 
 function multipresentacion() {
-  if ($("input[name='optradio']:radio").is(":checked")) {
+  if ($("input[name='optradio']:radio").is(":checked") || editar === true) {
     $.ajax({
       type: "POST",
       url: "php/multi.php",
@@ -140,7 +140,8 @@ function bloquearCeldasMulti() {
 
 function cargarMulti(multi) {
   for (i = 1; i < 6; i++) {
-    let $select = $("#cmbMultiReferencia" + i);
+    let $select = $(`#cmbMultiReferencia${i}`);
+
     $select.empty();
     $select.append(
       "<option disabled selected>" + "Multipresentación" + "</option>"
@@ -201,7 +202,7 @@ function CalculoloteMulti(id, cantidad) {
 
   total = parseInt(((densidad * cantidad * presentacion) / 1000) * (1 + 0.005)); // guardar campo en nueva columna en base de datos para obterla en envasado como total (kg)
   totallotexpresentacion.push(total);
-  console.log(totallotexpresentacion);
+  //console.log(totallotexpresentacion);
 
   $("#txttamanoloteMulti" + id).val(total);
 
@@ -349,7 +350,9 @@ $(document).on("click", ".link-editarMulti", function (e) {
 
   limpiarMultipresentacion();
   OcultarMultipresentacion();
-  cargarMulti();
+
+  multipresentacion();
+  //cargarMulti(info);
 
   $.ajax({
     method: "POST",
@@ -358,22 +361,26 @@ $(document).on("click", ".link-editarMulti", function (e) {
 
     success: function (response) {
       cont = 0;
+      let cantidadTotal = 0;
       const info = JSON.parse(response);
-      console.log(batch);
 
       insertarTotales();
 
       for (let k = 1; k <= info.length; k++) {
         insertarMulti();
-
+        let referencia = info[cont].referencia;
         $(`#loteTotal`).val(tamano);
-        $(`#cmbMultiReferencia${k}`).val(info[cont].nombre_referencia);
+        $(`#cmbMultiReferencia${k} option[value=${referencia}]`).attr(
+          "selected",
+          true
+        );
         $("#txtcantidadMulti" + k).val(info[cont].cantidad);
-        $("#txttamanoloteMulti" + k).val(info[cont].tamano);
-        $("#txtdensidadMulti" + k).val(info[cont].densidad);
-        $("#txtpresentacionMulti" + k).val(info[cont].presentacion);
-        CalculoloteMulti(k, info[cont].cantidad);
+        $("#txttamanoloteMulti" + k).val(info[cont].total);
+        cantidadTotal = cantidadTotal + info[cont].total;
+        $("#sumaMulti").val(cantidadTotal);
+
         cont++;
+        bloquearCeldasMulti();
       }
     },
   });

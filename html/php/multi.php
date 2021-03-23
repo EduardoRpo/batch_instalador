@@ -161,9 +161,14 @@ switch ($op) {
     break;
 
   case 6: // Cargar datos para actualizar Multipresentacion
-    $id_batch = $_POST['id'];
+    $batch = $_POST['id'];
 
-    $query_multi = mysqli_query($conn, "SELECT multipresentacion.id, multipresentacion.id_batch, multipresentacion.referencia, producto.nombre_referencia, multipresentacion.cantidad, densidad, producto.presentacion_comercial 
+    $sql = "SELECT * FROM multipresentacion WHERE id_batch = :batch";
+    $query = $conn->prepare($sql);
+    $query->execute(['batch' => $batch]);
+    $multi = $query->fetchAll($conn::FETCH_ASSOC);
+    echo json_encode($multi, JSON_UNESCAPED_UNICODE);
+    /* $query_multi = mysqli_query($conn, "SELECT multipresentacion.id, multipresentacion.id_batch, multipresentacion.referencia, producto.nombre_referencia, multipresentacion.cantidad, densidad, producto.presentacion_comercial 
                                         FROM multipresentacion INNER JOIN producto INNER JOIN linea
                                         ON multipresentacion.referencia = producto.referencia AND producto.id_linea = linea.id 
                                         WHERE id_batch='$id_batch'");
@@ -182,7 +187,7 @@ switch ($op) {
       //echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
       //exit();
 
-    }/* else{
+    } *//* else{
           echo json_encode('');
         }  
  */
