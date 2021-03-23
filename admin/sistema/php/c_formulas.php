@@ -6,13 +6,13 @@ $op = $_POST['operacion'];
 
 switch ($op) {
     case 1: //listar referencias Productos
-        $query = "SELECT p.referencia FROM producto p";
+        $query = "SELECT p.referencia FROM producto p ORDER BY p.referencia";
         ejecutarQuerySelect($conn, $query);
         break;
 
     case 2: //Obtener nombre producto
         $referencia = $_POST['referencia'];
-        $query = "SELECT p.referencia, p.nombre_referencia FROM producto p WHERE referencia = $referencia";
+        $query = "SELECT p.referencia, p.nombre_referencia FROM producto p WHERE referencia = '$referencia'";
         ejecutarQuerySelect($conn, $query);
         break;
 
@@ -29,7 +29,7 @@ switch ($op) {
 
     case 5: //Obtener Materia Prima y Alias
         $referencia = $_POST['referencia'];
-        $query = "SELECT mp.referencia, mp.nombre, mp.alias FROM materia_prima mp WHERE referencia = $referencia";
+        $query = "SELECT mp.referencia, mp.nombre, mp.alias FROM materia_prima mp WHERE referencia = '$referencia'";
         ejecutarQuerySelect($conn, $query);
         break;
 

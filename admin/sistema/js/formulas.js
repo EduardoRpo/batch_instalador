@@ -121,7 +121,7 @@ function cargar_formulas_f(referencia) {
       {
         data: "porcentaje",
         className: "centrado",
-        render: $.fn.dataTable.render.number(",", ".", 1, "", "%"),
+        //render: $.fn.dataTable.render.number(",", ".", 3, "", "%"),
       },
       {
         defaultContent:
@@ -135,13 +135,13 @@ function cargar_formulas_f(referencia) {
         data;
 
       // Remove the formatting to get integer data for summation
-      var intVal = function (i) {
+      /* var intVal = function (i) {
         return typeof i === "string"
           ? i.replace(/[\$,]/g, "") * 1
           : typeof i === "number"
           ? i
           : 0;
-      };
+      }; */
 
       // Total over all pages
       total = api
