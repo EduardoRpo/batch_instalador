@@ -77,7 +77,7 @@ function cargarTablaFormulas(referencia) {
     ajax: {
       method: "POST",
       url: "php/c_formulas.php",
-      data: { operacion: "3", referencia: referencia },
+      data: { operacion: "3", referencia },
     },
 
     columns: [
@@ -87,7 +87,7 @@ function cargarTablaFormulas(referencia) {
       {
         data: "porcentaje",
         className: "centrado",
-        render: $.fn.dataTable.render.number(",", ".", 2, "", "%"),
+        render: $.fn.dataTable.render.number(",", ".", 3, "", "%"),
       },
       {
         defaultContent:
@@ -121,7 +121,7 @@ function cargar_formulas_f(referencia) {
       {
         data: "porcentaje",
         className: "centrado",
-        render: $.fn.dataTable.render.number(",", ".", 2, "", "%"),
+        render: $.fn.dataTable.render.number(",", ".", 3, "", "%"),
       },
       {
         defaultContent:

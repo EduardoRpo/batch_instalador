@@ -82,22 +82,42 @@ switch ($op) {
 
     for ($i = 0; $i < $tmn; ++$i) {
 
-      $sql = "INSERT INTO multipresentacion (id_batch, referencia, cantidad, total) 
-              SELECT :id_batch, referencia, :cantidad, :total 
-              FROM producto 
-              WHERE nombre_referencia = :nombre_referencia";
+      $sql = "SELECT * FROM multipresentacion WHERE id_batch = :id_batch AND referencia = :referencia";
       $query = $conn->prepare($sql);
       $query->execute([
-        'nombre_referencia' => $nom_referencia[$i],
+        'referencia' => $referencia[$i],
         'id_batch' => $id_batch,
-        'cantidad' => $cantidad[$i],
-        'total' => $total[$i]
       ]);
-    }
+      $rows = $query->rowCount();
 
-    $sql = "UPDATE batch SET multi = '1' WHERE id_batch= :id_batch";
-    $query = $conn->prepare($sql);
-    $result = $query->execute(['id_batch' => $id_batch,]);
+      if ($rows > 0) {
+        $sql = "UPDATE multipresentacion SET cantidad = :cantidad, total = :total 
+                WHERE id_batch = :id_batch AND referencia = :referencia";
+        $query = $conn->prepare($sql);
+        $result = $query->execute([
+          'referencia' => $referencia[$i],
+          'id_batch' => $id_batch,
+          'cantidad' => $cantidad[$i],
+          'total' => $total[$i],
+        ]);
+      } else {
+        $sql = "INSERT INTO multipresentacion (id_batch, referencia, cantidad, total) 
+                SELECT :id_batch, referencia, :cantidad, :total 
+                FROM producto 
+                WHERE nombre_referencia = :nombre_referencia";
+        $query = $conn->prepare($sql);
+        $query->execute([
+          'nombre_referencia' => $nom_referencia[$i],
+          'id_batch' => $id_batch,
+          'cantidad' => $cantidad[$i],
+          'total' => $total[$i]
+        ]);
+      }
+
+      $sql = "UPDATE batch SET multi = '1' WHERE id_batch= :id_batch";
+      $query = $conn->prepare($sql);
+      $result = $query->execute(['id_batch' => $id_batch,]);
+    }
 
     if (!$result) {
       die('Error');

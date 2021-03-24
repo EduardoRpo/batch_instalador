@@ -296,23 +296,13 @@ function guardar_Multi() {
     j++;
   }
 
-  if (!editar) {
-    datos = {
-      operacion: "4",
-      ref: ref,
-      cant: cant,
-      tot: totalpresentacion,
-      id: data.id_batch,
-    };
-  } else {
-    datos = {
-      operacion: "5",
-      ref: ref,
-      cant: cant,
-      tot: totalpresentacion,
-      id: data.id_batch,
-    };
-  }
+  datos = {
+    operacion: "4",
+    ref,
+    cant,
+    tot: totalpresentacion,
+    id: data.id_batch,
+  };
 
   $.ajax({
     type: "POST",
@@ -369,7 +359,10 @@ $(document).on("click", ".link-editarMulti", function (e) {
         $("#sumaMulti").val(cantidadTotal);
 
         cont++;
-        bloquearCeldasMulti();
+        $("#cmbMultiReferencia" + cont).attr("disabled", "disabled");
+        /* $("#txtcantidadMulti" + cont).attr("disabled", "disabled");
+        $("#txttamanoloteMulti" + cont).attr("disabled", "disabled");
+        $(".btneliminarMulti" + cont).attr("disabled", "disabled"); */
       }
     },
   });
