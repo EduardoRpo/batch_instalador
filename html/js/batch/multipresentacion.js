@@ -286,13 +286,13 @@ function guardar_Multi() {
   let j = 1;
 
   contarMultipresentacion();
-  
+
   //obtener referencias
-  
+
   for (i = 0; i < cont; i++) {
-    ref[i] = $("#cmbMultiReferencia" + j + " option:selected").text();
-    cant[i] = $("#txtcantidadMulti" + j).val();
-    totalpresentacion[i] = $("#txttamanoloteMulti" + j).val();
+    ref[i] = $(`#cmbMultiReferencia${j} option:selected`).text();
+    cant[i] = $(`#txtcantidadMulti${j}`).val();
+    totalpresentacion[i] = $(`#txttamanoloteMulti${j}`).val();
     j++;
   }
 
