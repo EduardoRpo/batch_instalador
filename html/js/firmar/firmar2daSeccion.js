@@ -62,7 +62,9 @@ function firmar2daSeccion(firma) {
 
         if (modulo == 3) reiniciarInstructivo();
 
-        if (tanques == tanquesOk) firmarSeccionCierreProceso(firma);
+        if (tanques == tanquesOk) {
+          firmarSeccionCierreProceso(firma);
+        }
       } else {
         alertify.set("notifier", "position", "top-right");
         alertify.error("Error");
@@ -80,11 +82,8 @@ function firmarSeccionCierreProceso(firma) {
   var confirm = alertify
     .confirm(
       "Incidencias y Observaciones",
-      `¿Durante la fabricación de la orden de producción ` +
-        orden +
-        ` con cantidad total de ` +
-        tamano_lote +
-        ` kg, se presentó alguna incidencia u observación al desarrollar el proceso?`,
+      `¿Durante la fabricación de la orden de producción ${orden} con cantidad total de
+       ${tamano_lote} kg, se presentó alguna incidencia u observación al desarrollar el proceso?`,
       null,
       null
     )
@@ -120,7 +119,6 @@ function firmarSeccionCierreProceso(firma) {
 /* almacenar firma calidad 2da seccion */
 
 function almacenarfirma(id) {
-  
   $.ajax({
     type: "POST",
     url: "../../html/php/incidencias.php",

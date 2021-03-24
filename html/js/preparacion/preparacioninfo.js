@@ -136,12 +136,6 @@ $.ajax({
   });
 });
 
-/* Cargar maquinas de acuerdo con la linea */
-
-/* $("#select-Linea").change(function () {
-    cargarEquipos();
-}) */
-
 /* Carga tabla de propiedades del producto */
 
 $.ajax({

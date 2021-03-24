@@ -94,8 +94,11 @@ validarCondicionesMedio = () => {
     data: { operacion: 3, modulo, idBatch },
 
     success: function (response) {
-      if (response == 0) return false;
-      else $("#m_CondicionesMedio").modal({ show: true, backdrop: "static" });
+      if (response == 0) {
+        return false;
+      } else {
+        $("#m_CondicionesMedio").modal({ show: true, backdrop: "static" });
+      }
     },
   });
 };

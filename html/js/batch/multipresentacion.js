@@ -286,21 +286,12 @@ function guardar_Multi() {
   let j = 1;
 
   contarMultipresentacion();
+  
   //obtener referencias
+  
   for (i = 0; i < cont; i++) {
     ref[i] = $("#cmbMultiReferencia" + j + " option:selected").text();
-    j++;
-  }
-
-  //obtener cantidades
-  j = 1;
-  for (i = 0; i < cont; i++) {
     cant[i] = $("#txtcantidadMulti" + j).val();
-    j++;
-  }
-  //obtener totales
-  j = 1;
-  for (i = 0; i < cont; i++) {
     totalpresentacion[i] = $("#txttamanoloteMulti" + j).val();
     j++;
   }
@@ -350,9 +341,7 @@ $(document).on("click", ".link-editarMulti", function (e) {
 
   limpiarMultipresentacion();
   OcultarMultipresentacion();
-
   multipresentacion();
-  //cargarMulti(info);
 
   $.ajax({
     method: "POST",
@@ -387,8 +376,6 @@ $(document).on("click", ".link-editarMulti", function (e) {
 
   $("#Modal_Multipresentacion").modal("show");
 });
-
-/*  */
 
 /* Limpiar campos de Multipresentacion */
 

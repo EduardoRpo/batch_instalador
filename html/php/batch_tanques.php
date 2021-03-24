@@ -22,6 +22,7 @@ if (!empty($_POST)) {
                 'modulo' => $modulo,
                 'batch' => $batch,
             ]);
+
             $rows = $query->rowCount();
 
             /* Si existe un registro actualiza de lo contrario lo inserta */
@@ -50,10 +51,42 @@ if (!empty($_POST)) {
                     'modulo' => $modulo,
                     'batch' => $batch,
                 ]);
-                if ($result)
+
+                switch ($modulo) {
+                    case '2':
+                        $estado = 4;
+                        break;
+                    case '3':
+                        $estado = 5;
+                        break;
+                    case '4':
+                        $estado = 6;
+                        break;
+                    case '5':
+                        $estado = 7;
+                        break;
+                    case '6':
+                        $estado = 8;
+                        break;
+                    default:
+                        $estado = 9;
+                        break;
+                }
+
+                //Modifica el estado de acuerdo con el modulo
+                $sql = "UPDATE batch SET estado = :estado WHERE id_batch = :batch";
+                $query = $conn->prepare($sql);
+                $query->execute(['batch' => $batch, 'estado' => $estado]);
+
+                if ($result) {
+                    echo '1';
+                } else
+                    echo '0';
+
+                /* if ($result)
                     echo '1';
                 else
-                    echo '0';
+                    echo '0'; */
             }
 
             if ($modulo == 3) {

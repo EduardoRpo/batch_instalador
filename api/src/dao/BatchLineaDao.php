@@ -36,6 +36,7 @@ class BatchLineaDao
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $pesajes = $stmt->fetchAll($connection::FETCH_ASSOC);
     $this->logger->notice("Pesajes Obtenidos", array('pesajes' => $pesajes));
+    
     return $pesajes;
   }
 
