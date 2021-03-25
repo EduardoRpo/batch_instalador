@@ -41,8 +41,6 @@ switch ($op) {
       $query->execute(['multi' => $multi]);
       $id_multi = $query->fetchAll($conn::FETCH_ASSOC);
       echo json_encode($id_multi, JSON_UNESCAPED_UNICODE);
-    } else {
-      echo '3';
     }
 
     break;
@@ -73,19 +71,16 @@ switch ($op) {
     break;
 
   case 4: // Guardar Multipresentacion
-    $nom_referencia = $_POST['ref'];
-    $cantidad       = $_POST['cant'];
-    $total          = $_POST['tot'];
+    $multipresentaciones = $_POST['ref'];
+    /* $cantidad       = $_POST['cant'];
+    $total          = $_POST['tot']; */
     $id_batch       = $_POST['id'];
 
-    $tmn = sizeof($nom_referencia);
-
-    for ($i = 0; $i < $tmn; ++$i) {
-
+    foreach ($multipresentaciones as $multipresentacion) {
       $sql = "SELECT * FROM multipresentacion WHERE id_batch = :id_batch AND referencia = :referencia";
       $query = $conn->prepare($sql);
       $query->execute([
-        'referencia' => $referencia[$i],
+        'referencia' => $multipresentacion['referencia'],
         'id_batch' => $id_batch,
       ]);
       $rows = $query->rowCount();
@@ -95,28 +90,27 @@ switch ($op) {
                 WHERE id_batch = :id_batch AND referencia = :referencia";
         $query = $conn->prepare($sql);
         $result = $query->execute([
-          'referencia' => $referencia[$i],
+          'referencia' => $multipresentacion['referencia'],
           'id_batch' => $id_batch,
-          'cantidad' => $cantidad[$i],
-          'total' => $total[$i],
+          'cantidad' => $multipresentacion['cantidadunidades'],
+          'total' => $multipresentacion['tamaniopresentacion'],
         ]);
       } else {
         $sql = "INSERT INTO multipresentacion (id_batch, referencia, cantidad, total) 
-                SELECT :id_batch, referencia, :cantidad, :total 
-                FROM producto 
-                WHERE nombre_referencia = :nombre_referencia";
+                VALUES (:id_batch, :referencia, :cantidad, :total)";
         $query = $conn->prepare($sql);
-        $query->execute([
-          'nombre_referencia' => $nom_referencia[$i],
+        $result = $query->execute([
           'id_batch' => $id_batch,
-          'cantidad' => $cantidad[$i],
-          'total' => $total[$i]
+          'referencia' => $multipresentacion['referencia'],
+          'cantidad' => $multipresentacion['cantidadunidades'],
+          'total' => $multipresentacion['tamaniopresentacion'],
         ]);
       }
-
-      $sql = "UPDATE batch SET multi = '1' WHERE id_batch= :id_batch";
-      $query = $conn->prepare($sql);
-      $result = $query->execute(['id_batch' => $id_batch,]);
+      if ($result) {
+        $sql = "UPDATE batch SET multi = '1' WHERE id_batch= :id_batch";
+        $query = $conn->prepare($sql);
+        $result = $query->execute(['id_batch' => $id_batch,]);
+      }
     }
 
     if (!$result) {

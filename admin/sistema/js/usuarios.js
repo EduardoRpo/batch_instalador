@@ -162,7 +162,7 @@ $(document).ready(function () {
       const archivo = $("#firma").val();
       let extensiones = archivo.substring(archivo.lastIndexOf("."));
 
-      if (extensiones != ".jpg" && extensiones != ".png") {
+      if (extensiones != ".jpg" && extensiones != ".png" && extensiones != ".JPG" && extensiones != ".PNG") {
         alertify.set("notifier", "position", "top-right");
         alertify.error("El archivo de tipo " + extensiones + " no es válido");
         return false;

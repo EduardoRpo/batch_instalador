@@ -105,7 +105,7 @@ $(document).ready(function () {
         title:
           '<input type="text" class="form-control" id="Notanques" placeholder="Tanques" style="width:52px; text-align:center" onkeydown="calcularxNoTanques();">',
         data: "porcentaje",
-        className: "uniqueClassName", //colocar numero limite de tanques a 10; y por defecto quede con 1
+        className: "uniqueClassName",
         render: (data, type, row) => {
           if (flagWeight) {
             return (((data / 100) * batch.tamano_lote) / $("#Notanques").val())
