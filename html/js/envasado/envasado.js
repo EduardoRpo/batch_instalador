@@ -24,14 +24,6 @@ $('#tablaEnvasado').dataTable({
             title: 'Referencia',
             data: 'referencia', className: 'uniqueClassName'
         },
-        /* {
-            title: 'Presentación Comercial',
-            data: 'presentacion_comercial'
-        }, */
-        /*{
-            title: 'Tamaño Lote',
-            data: 'tamano_lote'
-        },*/
         {
             title: 'No Lote',
             data: 'numero_lote', className: 'uniqueClassName'
@@ -40,14 +32,6 @@ $('#tablaEnvasado').dataTable({
                 return $.number(data, 0, ',', '.');
             } */
         },
-      /*   {
-            title: 'Estado',
-            data: 'estado',
-            render: (data, type, row) => {
-                'use strict';
-                return data === 1 ? 'Activo' : 'Inactivo';
-            }
-        }, */
         {
             title: 'Ingresar', className: 'uniqueClassName',
             data: '',

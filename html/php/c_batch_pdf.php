@@ -12,9 +12,10 @@ switch ($op) {
 
     case 2:
         $id = $_POST['id'];
-        $sql = "SELECT p.referencia, p.nombre_referencia, m.nombre as marca, pp.nombre as propietario, p.presentacion_comercial as presentacion, ns.nombre as notificacion, b.numero_orden, b.numero_lote, b.fecha_creacion, b.tamano_lote, b.unidad_lote, b.lote_presentacion 
+        $sql = "SELECT p.referencia, p.nombre_referencia, m.nombre as marca, pp.nombre as propietario, pc.nombre as presentacion, ns.nombre as notificacion, b.numero_orden, b.numero_lote, b.fecha_creacion, b.tamano_lote, b.unidad_lote, b.lote_presentacion 
                 FROM batch b 
                 INNER JOIN producto p ON p.referencia= b.id_producto 
+                INNER JOIN presentacion_comercial pc ON p.presentacion_comercial = pc.id
                 INNER JOIN marca m ON m.id = p.id_marca 
                 INNER JOIN propietario pp ON pp.id = p.id_propietario 
                 INNER JOIN notificacion_sanitaria ns ON ns.id = p.id_notificacion_sanitaria 
