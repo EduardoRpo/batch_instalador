@@ -1,9 +1,9 @@
 <?php
 //include('/Desarrollo/BatchRecord/htdocs/conexion.php');
-require_once('../../conexion2.php');
+/* require_once('../../conexion2.php'); */
 require_once('../../conexion.php');
 
-function utf8ize($d)
+/* function utf8ize($d)
 {
   if (is_array($d))
     foreach ($d as $k => $v)
@@ -17,7 +17,7 @@ function utf8ize($d)
     return utf8_encode($d);
 
   return $d;
-}
+} */
 
 
 $op = $_POST['operacion'];
@@ -36,8 +36,13 @@ switch ($op) {
     $rows = $query->rowCount();
 
     if ($rows > 0 && $multi != 0) {
-      $sql = "SELECT p.referencia, p.nombre_referencia FROM producto p WHERE multi = :multi";
+      //$sql = "SELECT p.referencia, p.nombre_referencia FROM producto p WHERE multi = :multi";
+      $sql = "SELECT p.referencia, p.nombre_referencia as nombre, m.nombre as marca, ns.nombre as notificacion, pp.nombre as propietario, np.nombre as producto, pc.nombre as presentacion, l.nombre as linea, l.densidad 
+              FROM producto p INNER JOIN marca m INNER JOIN notificacion_sanitaria ns INNER JOIN propietario pp INNER JOIN nombre_producto np INNER JOIN linea l INNER JOIN presentacion_comercial pc
+              ON p.id_marca = m.id AND p.id_notificacion_sanitaria = ns.id AND p.id_propietario=pp.id AND p.id_nombre_producto= np.id AND p.id_linea=l.id AND pc.id = p.presentacion_comercial
+              WHERE multi = :multi";
       $query = $conn->prepare($sql);
+      $query->execute(['multi' => $multi]);
       $query->execute(['multi' => $multi]);
       $id_multi = $query->fetchAll($conn::FETCH_ASSOC);
       echo json_encode($id_multi, JSON_UNESCAPED_UNICODE);
@@ -57,7 +62,7 @@ switch ($op) {
     break;
 
   case 3: //recargar datos de acuerdo con seleccion de referencia
-    $referencia = $_POST['referencia'];
+    /* $referencia = $_POST['referencia'];
 
     $sql = "SELECT p.referencia, p.nombre_referencia as nombre, m.nombre as marca, ns.nombre as notificacion, pp.nombre as propietario, np.nombre as producto, pc.nombre as presentacion, l.nombre as linea, l.densidad 
             FROM producto p INNER JOIN marca m INNER JOIN notificacion_sanitaria ns INNER JOIN propietario pp INNER JOIN nombre_producto np INNER JOIN linea l INNER JOIN presentacion_comercial pc
@@ -68,13 +73,11 @@ switch ($op) {
     $nombres_ref = $query->fetchAll($conn::FETCH_ASSOC);
     echo json_encode($nombres_ref, JSON_UNESCAPED_UNICODE);
 
-    break;
+    break; */
 
   case 4: // Guardar Multipresentacion
     $multipresentaciones = $_POST['ref'];
-    /* $cantidad       = $_POST['cant'];
-    $total          = $_POST['tot']; */
-    $id_batch       = $_POST['id'];
+    $id_batch = $_POST['id'];
 
     foreach ($multipresentaciones as $multipresentacion) {
       $sql = "SELECT * FROM multipresentacion WHERE id_batch = :id_batch AND referencia = :referencia";
@@ -117,18 +120,34 @@ switch ($op) {
       die('Error');
       echo 'No guardado. Error: ' . mysqli_error($conn);
     } else {
-      echo 'Almacenado';
+      echo '1';
     }
 
     break;
 
-  case 5: //Guardar Actualizacion
+  case 5: //Delete batch multi
+    $batch = $_POST['id'];
+    $referencia = $_POST['ref'];
+
+    $sql = "DELETE FROM multipresentacion WHERE id_batch = :batch AND referencia = :referencia";
+    $query = $conn->prepare($sql);
+    $result = $query->execute([
+      'batch' => $batch,
+      'referencia' => $referencia,
+    ]);
+
+
     break;
 
   case 6: // Cargar datos para actualizar Multipresentacion
     $batch = $_POST['id'];
 
-    $sql = "SELECT * FROM multipresentacion WHERE id_batch = :batch";
+    $sql = "SELECT p.referencia, multi.id_batch, multi.cantidad, multi.total,linea.densidad, pc.nombre as presentacion 
+            FROM producto p 
+            INNER JOIN multipresentacion multi ON p.referencia = multi.referencia 
+            INNER JOIN linea ON p.id_linea = linea.id 
+            INNER JOIN presentacion_comercial pc ON p.presentacion_comercial = pc.id 
+            WHERE id_batch = :batch";
     $query = $conn->prepare($sql);
     $query->execute(['batch' => $batch]);
     $multi = $query->fetchAll($conn::FETCH_ASSOC);
