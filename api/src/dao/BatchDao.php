@@ -31,9 +31,9 @@ class BatchDao
   {
     $connection = Connection::getInstance()->getConnection();
     //$stmt = $connection->prepare("SELECT * FROM producto INNER JOIN batch ON batch.id_producto = producto.referencia INNER JOIN linea ON producto.id_linea = linea.id INNER JOIN propietario ON producto.id_propietario = propietario.id WHERE batch.estado = 1 OR batch.estado = 2 AND batch.fecha_programacion = CURRENT_DATE()");
-    $stmt = $connection->prepare("SELECT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, producto.presentacion_comercial, batch.numero_lote, batch.tamano_lote, propietario.nombre,batch.fecha_creacion, batch.fecha_programacion, batch.estado, batch.multi
-                                  FROM batch INNER JOIN producto INNER JOIN propietario
-                                  ON batch.id_producto = producto.referencia AND producto.id_propietario = propietario.id");
+    $stmt = $connection->prepare("SELECT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, pc.nombre  as presentacion_comercial, batch.numero_lote, batch.tamano_lote, propietario.nombre,batch.fecha_creacion, batch.fecha_programacion, batch.estado, batch.multi
+                                  FROM batch INNER JOIN producto INNER JOIN propietario INNER JOIN presentacion_comercial pc
+                                  ON batch.id_producto = producto.referencia AND producto.id_propietario = propietario.id AND producto.presentacion_comercial = pc.id");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $batch = $stmt->fetchAll($connection::FETCH_ASSOC);
@@ -49,7 +49,7 @@ class BatchDao
   public function findById($id)
   {
     $connection = Connection::getInstance()->getConnection();
-    $stmt = $connection->prepare("SELECT p.referencia, p.nombre_referencia,  pc.nombre as presentacion, p.unidad_empaque, batch.numero_orden, batch.tamano_lote, batch.numero_lote, batch.unidad_lote, linea.nombre as linea, linea.densidad, batch.fecha_programacion 
+    $stmt = $connection->prepare("SELECT p.referencia, p.nombre_referencia, pc.nombre as presentacion, p.unidad_empaque, batch.numero_orden, batch.tamano_lote, batch.numero_lote, batch.unidad_lote, linea.nombre as linea, linea.densidad, batch.fecha_programacion 
                                   FROM producto p
                                   INNER JOIN batch ON batch.id_producto = p.referencia 
                                   INNER JOIN presentacion_comercial pc ON pc.id = p.presentacion_comercial

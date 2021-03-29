@@ -77,7 +77,7 @@ function cargarDesinfectante() {
 
 /* cargar linea de equipos en el proceso de preparacion  */
 
-function cargarLinea() {
+/* function cargarLinea() {
   $.ajax({
     type: "POST",
     url: "../../html/php/cargarLineas.php",
@@ -93,7 +93,7 @@ function cargarLinea() {
       cargarControlProceso();
     },
   });
-}
+} */
 
 function cargarControlProceso() {
   $.ajax({

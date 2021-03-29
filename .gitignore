@@ -2,6 +2,9 @@ env.php
 *.log
 *.env
 *.txt
+*.jpg
+*.png
 .vscode/launch.json
+
 
 

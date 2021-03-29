@@ -39,9 +39,9 @@ switch ($op) {
                                             ORDER BY batch.id_batch desc; ");
     } else {
 
-      $query = "SELECT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, producto.presentacion_comercial, batch.numero_lote, batch.tamano_lote, propietario.nombre,batch.fecha_creacion, batch.fecha_programacion, batch.estado, batch.multi
-                FROM batch INNER JOIN producto INNER JOIN propietario
-                ON batch.id_producto = producto.referencia AND producto.id_propietario = propietario.id";
+      $query = "SELECT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, pc.nombre  as presentacion_comercial, batch.numero_lote, batch.tamano_lote, propietario.nombre,batch.fecha_creacion, batch.fecha_programacion, batch.estado, batch.multi
+                FROM batch INNER JOIN producto INNER JOIN propietario INNER JOIN presentacion_comercial pc
+                ON batch.id_producto = producto.referencia AND producto.id_propietario = propietario.id AND producto.presentacion_comercial = pc.id";
 
       if ($fecha_busqueda) {
         $query .= " WHERE $fecha_busqueda BETWEEN '$fecha_inicio' AND '$fecha_final' ";
