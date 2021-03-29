@@ -25,30 +25,7 @@ function cargarDesinfectante() {
 
       $("#sel_producto_desinfeccion").val(desinfectante);
       $("#in_observaciones").val(observacion);
-      /* firmado(firma, 1); */
       cargarfirma2daSeccion();
-
-      /* $.ajax({
-                type: "POST",
-                url: "../../html/php/despeje.php",
-                data: { operacion: 3, modulo, idBatch },
-
-                success: function (response) {
-
-                    if (response == '') {
-                        cargarfirma2daSeccion();
-                        return false;
-                    }
-
-                   
-
-                    let info = JSON.parse(response);
-                    firma = info.urlfirma;
-                    firmado(firma, 2);
-
-                    cargarfirma2daSeccion();
-                }
-            }); */
     },
   });
 }

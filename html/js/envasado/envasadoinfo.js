@@ -135,7 +135,7 @@ $(document).ready(function () {
     identificarDensidad(batch);
     deshabilitarbotones();
     /* } */
-  }, 800);
+  }, 450);
 });
 
 /* deshabilitar botones */
@@ -441,19 +441,17 @@ function registrar_material_sobrante(info) {
 /* carga de maquinas */
 
 function cargarEquipos() {
-  linea = $(`#select-Linea${id_multi}`).val();
+  /* linea = $(`#select-Linea${id_multi}`).val(); */
 
   $.ajax({
     method: "POST",
     url: "../../html/php/cargarMaquinas.php",
-    data: { linea: linea },
+    data: { modulo, idBatch },
 
     success: function (response) {
       const info = JSON.parse(response);
-      $(`.envasadora${id_multi}`).val("");
-      $(`.loteadora${id_multi}`).val("");
-      $(`.envasadora${id_multi}`).val(info.data[2].maquina);
-      $(`.loteadora${id_multi}`).val(info.data[4].maquina);
+      $(`#sel_envasadora`).val(info[0].equipo);
+      $(`#sel_loteadora`).val(info[1].equipo);
     },
     error: function (response) {
       console.log(response);

@@ -13,7 +13,6 @@ if (!empty($_POST)) {
     switch ($op) {
         case 1: //firma realizo 2da seccion 
 
-            /* $linea = $_POST['linea']; */
             $firma = $_POST['id_firma'];
             $ref_multi = $_POST['ref_multi'];
 
@@ -21,7 +20,6 @@ if (!empty($_POST)) {
             VALUES (:modulo, :batch, :ref_multi, :realizo)";
             $query = $conn->prepare($sql);
             $result = $query->execute([
-                /* 'observaciones' => $linea, */
                 'modulo' => $modulo,
                 'batch' => $batch,
                 'ref_multi' => $ref_multi,
