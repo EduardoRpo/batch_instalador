@@ -13,15 +13,15 @@ if (!empty($_POST)) {
     switch ($op) {
         case 1: //firma realizo 2da seccion 
 
-            $linea = $_POST['linea'];
+            /* $linea = $_POST['linea']; */
             $firma = $_POST['id_firma'];
             $ref_multi = $_POST['ref_multi'];
 
-            $sql = "INSERT INTO batch_firmas2seccion (observaciones, modulo, batch, ref_multi, realizo) 
-            VALUES (:observaciones, :modulo, :batch, :ref_multi, :realizo)";
+            $sql = "INSERT INTO batch_firmas2seccion (modulo, batch, ref_multi, realizo) 
+            VALUES (:modulo, :batch, :ref_multi, :realizo)";
             $query = $conn->prepare($sql);
             $result = $query->execute([
-                'observaciones' => $linea,
+                /* 'observaciones' => $linea, */
                 'modulo' => $modulo,
                 'batch' => $batch,
                 'ref_multi' => $ref_multi,

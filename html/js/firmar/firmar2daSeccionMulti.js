@@ -20,13 +20,13 @@ function almacenar_muestras(firma) {
                 return false;
             }
 
-            let linea = $(`#select-Linea${id_multi}`).val();
+            /* let linea = $(`#select-Linea${id_multi}`).val(); */
             let id_firma = firma[0].id
             //Almacena la firma 
             $.ajax({
                 type: "POST",
                 url: '../../html/php/envasado.php',
-                data: { operacion: 1, linea, id_firma, modulo, idBatch, ref_multi },
+                data: { operacion: 1, /* linea, */ id_firma, modulo, idBatch, ref_multi },
 
                 success: function (response) {
                     alertify.set("notifier", "position", "top-right"); alertify.success("Firmado satisfactoriamente");
