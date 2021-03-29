@@ -4,6 +4,7 @@ let presentacion;
 let r1,
   r2,
   r3 = 0;
+const equipos = [];
 
 //Cargar equipos
 
@@ -51,14 +52,26 @@ function cargar(btn, idbtn) {
       //return false;
 
       /* Validar equipos */
-      const envasadora = $("#sel_envasadora").val();
-      const loteadora = $("#sel_loteadora").val();
+      const eq1 = $("#sel_envasadora").val();
+      const eq2 = $("#sel_loteadora").val();
 
-      if (!envasadora || !loteadora) {
+      if (!eq1 || !eq2) {
         alertify.set("notifier", "position", "top-right");
         alertify.error("Seleccione los equipos a usar.");
         return false;
       }
+
+      const eq3 = {};
+      eq3.equipo = eq1;
+      eq3.modulo = modulo;
+      eq3.batch = idBatch;
+      equipos.push(eq3);
+
+      const eq4 = {};
+      eq4.equipo = eq2;
+      eq4.modulo = modulo;
+      eq4.batch = idBatch;
+      equipos.push(eq4);
 
       /* Valida que todas las muestras y el lote se encuentren correctas*/
 
@@ -122,7 +135,7 @@ $(document).ready(function () {
     identificarDensidad(batch);
     deshabilitarbotones();
     /* } */
-  }, 500);
+  }, 800);
 });
 
 /* deshabilitar botones */
@@ -236,15 +249,7 @@ function presentacion_multi() {
   cargarfirma2();
 }
 
-/* Cargar linea y maquinas de acuerdo con la seleccion */
-
-/* $(".select-Linea").change(function () {
-  cargarEquipos();
-}) */
-
 /* Calcular peso minimo, maximo y promedio */
-
-/* Identificar densidad */
 
 function identificarDensidad(batch) {
   let densidadAprobada = 0;
