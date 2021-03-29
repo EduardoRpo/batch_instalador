@@ -4,7 +4,6 @@ if (!empty($_POST)) {
   require_once('../../conexion.php');
 
   $op = $_POST['operacion'];
-
   $batch = $_POST['idBatch'];
   $modulo = $_POST['modulo'];
   $ref_multi = $_POST['ref_multi'];
@@ -61,14 +60,14 @@ if (!empty($_POST)) {
     case 3:
       $muestras = $_POST['muestras'];
       $cantidad_muestras = count($muestras) / 5;
-      
+
       // Guardar el numero de muestras de acondicionamiento
       $ae = 0;
       $at = 1;
       $ce = 2;
       $pp = 3;
       $rc = 4;
-      
+
       if (count($muestras) > 0) {
         for ($i = 1; $i <= $cantidad_muestras; ++$i) {
           $sql = "INSERT INTO batch_muestras_acondicionamiento 
@@ -102,26 +101,26 @@ if (!empty($_POST)) {
       }
       break;
 
-      case 4:
-        $sql = "SELECT * FROM batch_muestras_acondicionamiento 
+    case 4:
+      $sql = "SELECT * FROM batch_muestras_acondicionamiento 
                 WHERE modulo = :modulo AND batch = :batch AND referencia = :ref_multi";
-  
-        $query = $conn->prepare($sql);
-        $result = $query->execute([
-          'modulo' => $modulo,
-          'batch' => $batch,
-          'ref_multi' => $ref_multi,
-        ]);
-  
-        while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
-          $arreglo["data"][] = $data;
-        }
-  
-        if (empty($arreglo))
-          echo '3';
-        else
-          echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
-  
-        break;
+
+      $query = $conn->prepare($sql);
+      $result = $query->execute([
+        'modulo' => $modulo,
+        'batch' => $batch,
+        'ref_multi' => $ref_multi,
+      ]);
+
+      while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
+        $arreglo["data"][] = $data;
+      }
+
+      if (empty($arreglo))
+        echo '3';
+      else
+        echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+
+      break;
   }
 }
