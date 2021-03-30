@@ -14,6 +14,12 @@ function cargarEquipos() {
         $("#sel_agitador").val(info[0].equipo);
         $("#sel_marmita").val(info[1].equipo);
       }
+
+      if (modulo == 5) {
+        $("#sel_envasadora").val(info[0].equipo);
+        $("#sel_loteadora").val(info[1].equipo);
+      }
+
       if (modulo == 6) {
         $(`#sel_banda${id_multi}`).val(info[0].equipo);
         $(`#sel_etiquetadora${id_multi}`).val(info[1].equipo);

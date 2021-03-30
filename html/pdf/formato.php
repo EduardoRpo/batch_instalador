@@ -854,8 +854,12 @@
                     <div class="subtitle"><label for="">Equipos</label></div>
                     <div class="envasadora">
                         <label for="">Identificacion Envasadora</label>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" id="envasadora">
+                        <label for="">Identificacion Loteadora</label>
+                        <input type="text" class="form-control" id="loteadora">
+
                     </div>
+
 
                     <div class="subtitle"><label for="">Condiciones del Medio</label></div>
                     <div class="table-responsive p-3">

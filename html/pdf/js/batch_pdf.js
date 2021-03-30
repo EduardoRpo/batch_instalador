@@ -214,7 +214,6 @@ function condiciones_medio() {
     "../../html/php/c_batch_pdf.php",
     data,
     function (data, textStatus, jqXHR) {
-      debugger;
       if (data == "false") return false;
       let info = JSON.parse(data);
 
@@ -280,8 +279,6 @@ function especificaciones_producto() {
 
 function control_proceso() {
   $.get(`/api/controlproceso/${id}`, function (info, textStatus, jqXHR) {
-    debugger;
-
     if (info == "false") return false;
     //info = data;
     for (let i = 0; i < info.length; i++) {

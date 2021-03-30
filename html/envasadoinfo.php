@@ -983,6 +983,7 @@ include('modal/m_muestras.php');
           <script src="../../html/js/firmar/firmar2daSeccionMulti.js"></script>
           <script src="../../html/js/envasado/envasadoinfo.js"></script>
           <script src="../../html/js/global/incidencias.js"></script>
+          <script src="../../html/js/global/equipos.js"></script>
 
           <!--Alertify-->
           <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
