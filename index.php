@@ -17,7 +17,7 @@ include('./html/modal/modal_recuperarClave.php');
 
 	<!-- Bootstrap Core CSS -->
 	<link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	
+
 	<!-- Custom CSS -->
 	<link href="html/css/sesion.css" rel="stylesheet">
 
@@ -40,7 +40,14 @@ include('./html/modal/modal_recuperarClave.php');
 	<form class="form-signin" id="login" action="" method="POST">
 		<img class="mb-4" src="assets/images/logo/logo-samara.png" alt="" width="200" height="100">
 		<h1 class="h3 mb-3 font-weight-normal" style="color:slategrey">Iniciar Sesión</h1><br>
-
+		<div>
+			<label for="">Seleccione el modulo / rol</label>
+			<select name="modulos" id="modulos" class="form-control mt-3 mb-3">
+				<option value="1">administrador</option>
+				<option value="2">pesaje</option>
+				<option value="3">preparacion</option>
+			</select>
+		</div>
 		<input type="text" id="usuario" name="usuario" class="form-control mb-3" placeholder="Usuario" autocomplete="off" required autofocus>
 
 		<div class="input-group">
@@ -51,7 +58,7 @@ include('./html/modal/modal_recuperarClave.php');
 				</button>
 			</span>
 		</div>
-
+		
 		<div class="mb-3">
 			<a href="" data-toggle="modal" data-target="#ModalRecuperarClave">Recuperar Contraseña</a>
 		</div>
@@ -60,7 +67,8 @@ include('./html/modal/modal_recuperarClave.php');
 		<!-- <button class="btn btn-lg btn-success btn-block mb-3" type="button" onclick="validar_usuario();">Iniciar</button> -->
 		<!-- <input type="button" class="btn btn-lg btn-success btn-block mb-3 btnlogin" value="Iniciar"> -->
 		<!-- <div class=""></div> -->
-		<!-- <div class="alert alert-danger mb" role="alert" hidden> <?php //echo isset($alert) ? $alert : ''; ?> </div> -->
+		<!-- <div class="alert alert-danger mb" role="alert" hidden> <?php //echo isset($alert) ? $alert : ''; 
+																		?> </div> -->
 		<p class="mt-5 mb-3 text-muted">&copy; 2020</p>
 	</form>
 

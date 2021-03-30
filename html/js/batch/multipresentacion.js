@@ -179,7 +179,7 @@ $(document).on("click", ".link-editarMulti", function (e) {
           $(`#presentacionMulti${id}`).val(element.presentacion);
           $(`#sumaMulti${id}`).val(CalculoloteMulti(id));
           id++;
-        }, 100);
+        }, 400);
       });
     },
   });
