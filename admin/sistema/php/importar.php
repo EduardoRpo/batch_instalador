@@ -25,6 +25,8 @@ if (!empty($_POST)) {
 		case '1': // insertar en la BD procesos
 
 			foreach ($dataList as $data) {
+				$data[0] = preg_replace("[\n|\r|\n\r]", "", $data[0]);
+				
 				$conn->query("INSERT INTO modulo (modulo) 
 					  VALUES ('{$data[0]}')");
 			}
@@ -33,6 +35,10 @@ if (!empty($_POST)) {
 		case '2': // insertar en la BD condiciones
 
 			foreach ($dataList as $data) {
+				$data[0] = preg_replace("[\n|\r|\n\r]", "", $data[0]);
+				$data[1] = preg_replace("[\n|\r|\n\r]", "", $data[1]);
+				$data[2] = preg_replace("[\n|\r|\n\r]", "", $data[2]);
+				
 				$conn->query("INSERT INTO condicionesmedio_tiempo (id_modulo, t_min, t_max) 
 				  VALUES ('{$data[0]}', '{$data[1]}', '{$data[2]}')");
 			}
@@ -41,6 +47,8 @@ if (!empty($_POST)) {
 		case '3': // insertar en la BD desinfectante
 
 			foreach ($dataList as $data) {
+				$data[0] = preg_replace("[\n|\r|\n\r]", "", $data[0]);
+				$data[1] = preg_replace("[\n|\r|\n\r]", "", $data[1]);
 				$conn->query("INSERT INTO desinfectante (nombre, concentracion) 
 				  VALUES ('{$data[0]}', '{$data[1]}')");
 			}
@@ -49,6 +57,9 @@ if (!empty($_POST)) {
 		case '4': // insertar en la BD equipos
 
 			foreach ($dataList as $data) {
+				$data[0] = preg_replace("[\n|\r|\n\r]", "", $data[0]);
+				$data[1] = preg_replace("[\n|\r|\n\r]", "", $data[1]);
+				
 				$conn->query("INSERT INTO equipos (descripcion, tipo ) 
 				  VALUES ('{$data[0]}', '{$data[1]}')");
 			}
@@ -57,6 +68,8 @@ if (!empty($_POST)) {
 		case '5': // insertar en la BD preguntas
 
 			foreach ($dataList as $data) {
+				$data[0] = preg_replace("[\n|\r|\n\r]", "", $data[0]);
+				
 				$conn->query("INSERT INTO preguntas (pregunta ) 
 					  VALUES ('{$data[0]}')");
 			}
@@ -65,6 +78,10 @@ if (!empty($_POST)) {
 		case '6': // insertar en la BD despeje
 
 			foreach ($dataList as $data) {
+				$data[0] = preg_replace("[\n|\r|\n\r]", "", $data[0]);
+				$data[1] = preg_replace("[\n|\r|\n\r]", "", $data[1]);
+				$data[2] = preg_replace("[\n|\r|\n\r]", "", $data[2]);
+				
 				$conn->query("INSERT INTO modulo_pregunta (id_pregunta, resp, id_modulo ) 
 						  VALUES ('{$data[0]}', '{$data[1]}', '{$data[2]}')");
 			}
@@ -73,6 +90,8 @@ if (!empty($_POST)) {
 		case '7': // insertar en la BD tanques
 
 			foreach ($dataList as $data) {
+				$data[0] = preg_replace("[\n|\r|\n\r]", "", $data[0]);
+				
 				$conn->query("INSERT INTO tanques (capacidad) 
 						  VALUES ('{$data[0]}')");
 			}
@@ -101,6 +120,10 @@ if (!empty($_POST)) {
 		case '9': // insertar en la BD instructivo
 
 			foreach ($dataList as $data) {
+				$data[0] = preg_replace("[\n|\r|\n\r]", "", $data[0]);
+				$data[1] = preg_replace("[\n|\r|\n\r]", "", $data[1]);
+				$data[2] = preg_replace("[\n|\r|\n\r]", "", $data[2]);
+				
 				$conn->query("INSERT INTO instructivo_preparacion (pasos, tiempo, id_producto) 
 								  VALUES ('{$data[0]}', '{$data[1]}', '{$data[2]}')");
 			}

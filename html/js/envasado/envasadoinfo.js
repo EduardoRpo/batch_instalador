@@ -135,7 +135,7 @@ $(document).ready(function () {
     identificarDensidad(batch);
     deshabilitarbotones();
     /* } */
-  }, 450);
+  }, 650);
 });
 
 /* deshabilitar botones */

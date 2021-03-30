@@ -65,11 +65,9 @@ function cargarDesinfectante() {
             let info = JSON.parse(response);
             firma = info.urlfirma;
             firmado(firma, 2);
-            /* cargarfirma2(); */
             return false;
           } else if (typeof id_multi !== "undefined")
             $(`.controlpeso_realizado${id_multi}`).prop("disabled", false);
-          /* cargarfirma2(); */
         },
       });
     },
@@ -95,10 +93,9 @@ function cargarfirma2() {
       if (info == 3) return false;
 
       for (i = 1; i <= info.data.length; i++) {
-        //$(`#select-Linea${id_multi}`).val(info.data[0].linea);
         $(`#validarLote${id_multi}`).val(batch.numero_lote);
-
         cargarEquipos();
+        promedio();
         firmado(info.data[0].realizo, 3);
         firmado(info.data[0].verifico, 4);
       }
@@ -153,8 +150,10 @@ function cargardevolucionmaterial() {
         firmado(info.data[0].realizo, 5);
         firmado(info.data[0].verifico, 6);
       }
-      rendimiento_producto();
-      cargar_conciliacion();
+      if (modulo === 6) {
+        rendimiento_producto();
+        cargar_conciliacion();
+      }
     },
   });
 }

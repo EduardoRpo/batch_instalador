@@ -122,5 +122,19 @@ if (!empty($_POST)) {
         echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
 
       break;
+
+    case 5:
+      $sql = "SELECT AVG(muestra) as promedio FROM batch_muestras WHERE modulo = :modulo AND batch = :batch";
+
+      $query = $conn->prepare($sql);
+      $result = $query->execute([
+        'modulo' => $modulo,
+        'batch' => $batch,
+      ]);
+
+      $data = $query->fetchAll(PDO::FETCH_ASSOC);
+      echo json_encode($data, JSON_UNESCAPED_UNICODE);
+
+      break;
   }
 }
