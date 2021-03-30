@@ -42,11 +42,8 @@ if (!empty($_SESSION['active'])) {
 
                     if ($data['rol'] == 1 || $data['rol'] == 2) {
                         header('location: admin/sistema/index.php');
-                    } else/* if ($data['rol'] == 5) { */
+                    } else
                         header('location: html/batch.php');
-                    /* } elseif ($data['rol'] == 3) {
-                        header("location: {$modulo}");
-                    } */
                 } else {
                     $new_trie = ++$tries;
                     file_put_contents('tries.txt', $new_trie);

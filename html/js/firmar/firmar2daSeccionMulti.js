@@ -13,7 +13,7 @@ function almacenar_muestras(firma) {
     data: { operacion, idBatch, muestras, modulo, ref_multi },
 
     success: function (response) {
-      if (response == 0) {
+      if (!response) {
         alertify.set("notifier", "position", "top-right");
         alertify.error("Error al almacenar las muestras, valide nuevamente");
         return false;

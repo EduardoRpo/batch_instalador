@@ -3,6 +3,7 @@ let r1 = 0,
   r2 = 0,
   r3 = 0;
 let id_multi = 1;
+const equipos = [];
 
 //Carga el proceso despues de cargar la data  del Batch
 
@@ -21,7 +22,7 @@ $.ajax({
   type: "GET",
 }).done((data, status, xhr) => {
   $(".banda").append(`<option value="">Seleccionar</option>`);
-  $(".etiqueteadora").append(`<option value="">Seleccionar</option>`);
+  $(".etiquetadora").append(`<option value="">Seleccionar</option>`);
   $(".tunel").append(`<option value="">Seleccionar</option>`);
 
   data.forEach((equipo) => {
@@ -30,7 +31,7 @@ $.ajax({
         `<option value="${equipo.id}">${equipo.descripcion}</option>`
       );
     if (equipo.tipo == "etiquetadora")
-      $(".etiqueteadora").append(
+      $(".etiquetadora").append(
         `<option value="${equipo.id}">${equipo.descripcion}</option>`
       );
     if (equipo.tipo == "tunel")
@@ -225,12 +226,24 @@ function cargar(btn, idbtn) {
 
   /* Valida el proceso para la segunda seccion */
   if (id != "despeje_realizado") {
-    let seleccion = $(`#select-Linea${id_multi}`).val();
+    let banda = $(`#sel_banda${id_multi}`).val();
+    let etiquetadora = $(`#sel_etiquetadora${id_multi}`).val();
+    let tunel = $(`#sel_tunel${id_multi}`).val();
 
-    if (seleccion == null) {
+    if (!banda || !etiquetadora || !tunel) {
       alertify.set("notifier", "position", "top-right");
-      alertify.error("Seleccione la linea de producción.");
+      alertify.error("Seleccione los equipos de la linea de producción.");
       return false;
+    } else {
+      for (i = 1; i < 4; i++) {
+        const equipo = {};
+        if (i === 1) equipo.equipo = banda;
+        if (i === 2) equipo.equipo = etiquetadora;
+        if (i === 3) equipo.equipo = tunel;
+        equipo.batch = idBatch;
+        equipo.modulo = modulo;
+        equipos.push(equipo);
+      }
     }
   }
   /* validar que todas las muestras se registraron */

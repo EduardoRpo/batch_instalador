@@ -266,7 +266,7 @@ include('modal/m_muestras_acondicionamiento.php');
                   <!-- <select class="selectpicker form-control select-Linea" id="select-Linea1"></select> -->
 
                   <select class="selectpicker form-control banda" id="sel_banda1"></select>
-                  <select class="selectpicker form-control etiqueteadora" id="sel_etiqueteadora1"></select>
+                  <select class="selectpicker form-control etiquetadora" id="sel_etiquetadora1"></select>
                   <select class="selectpicker form-control tunel" id="sel_tunel1"></select>
 
                 </div>
@@ -542,7 +542,7 @@ include('modal/m_muestras_acondicionamiento.php');
                   <label for="recipient-name" class="col-form-label">Tunel Termo</label>
 
                   <select class="selectpicker form-control banda" id="sel_banda2"></select>
-                  <select class="selectpicker form-control etiqueteadora" id="sel_etiqueteadora2"></select>
+                  <select class="selectpicker form-control etiquetadora" id="sel_etiquetadora2"></select>
                   <select class="selectpicker form-control tunel" id="sel_tunel2"></select>
                 </div>
                 <div class="row" style="margin: 1%">
@@ -809,13 +809,13 @@ include('modal/m_muestras_acondicionamiento.php');
                   <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Línea de Producción</h3>
                 </div>
                 <div class="linea-produccion">
-                  
+
                   <label for="recipient-name" class="col-form-label">Banda Transportadora</label>
                   <label for="recipient-name" class="col-form-label">Etiquetadora</label>
                   <label for="recipient-name" class="col-form-label">Tunel Termo</label>
-                  
+
                   <select class="selectpicker form-control banda" id="sel_banda3"></select>
-                  <select class="selectpicker form-control etiqueteadora" id="sel_etiqueteadora3"></select>
+                  <select class="selectpicker form-control etiquetadora" id="sel_etiquetadora3"></select>
                   <select class="selectpicker form-control tunel" id="sel_tunel3"></select>
                 </div>
                 <div class="row" style="margin: 1%">

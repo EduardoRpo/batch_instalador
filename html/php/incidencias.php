@@ -60,7 +60,6 @@ if (!empty($_POST)) {
             $modulo = $_POST['modulo'];
             $batch = $_POST['idBatch'];
 
-
             $sql = "INSERT INTO batch_firmas2seccion (modulo, batch, realizo) 
                     VALUES (:modulo, :batch, :realizo)";
 
