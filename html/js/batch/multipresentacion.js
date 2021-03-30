@@ -2,6 +2,7 @@
 //cont = 0;
 let multi;
 let objetos;
+editar = false;
 
 /* Cargar la data de la fila */
 
@@ -19,7 +20,12 @@ $(document).on("click", ".link-select", function (e) {
 /* Validar si un producto puede tener multipresentacion */
 
 function multipresentacion() {
-  if (data.multi > 0 && editar == false) {
+  if (!data) {
+    alertify.set("notifier", "position", "top-right");
+    alertify.error("Seleccione un registro");
+    return false;
+  }
+  if (data.multi > 0 && editar === false) {
     alertify.set("notifier", "position", "top-right");
     alertify.error(
       "Esta referencia ya tiene Multipresentación. Ingrese por el icono de Multipresentación para actualizar"
