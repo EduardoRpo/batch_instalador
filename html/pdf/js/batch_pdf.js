@@ -39,19 +39,6 @@ $(document).on("click", ".link-cerrar", function (e) {
 
 /* Cargar data */
 
-$(document).ready(function () {
-  id = sessionStorage.getItem("id");
-
-  cargar_Alertas();
-  info_General();
-  parametros_Control();
-  area_desinfeccion();
-  desinfectante();
-  //condiciones_medio();
-  control_proceso();
-  equipos();
-});
-
 function cargar_Alertas() {
   $.post(
     "../../html/php/c_batch_pdf.php",
@@ -231,6 +218,11 @@ function equipos() {
     if (data.length == 0) return false;
     $("#agitador").val(data[0].descripcion);
     $("#marmita").val(data[1].descripcion);
+    $("#envasadora").val(data[2].descripcion);
+    $("#loteadora").val(data[3].descripcion);
+    $("#banda").val(data[4].descripcion);
+    $("#etiquetadora").val(data[5].descripcion);
+    $("#tunel").val(data[6].descripcion);
   });
 }
 
@@ -339,3 +331,16 @@ function entrega_material_envase() {
     "dataType"
   );
 }
+
+$(document).ready(function () {
+  id = sessionStorage.getItem("id");
+
+  cargar_Alertas();
+  info_General();
+  parametros_Control();
+  area_desinfeccion();
+  desinfectante();
+  //condiciones_medio();
+  control_proceso();
+  equipos();
+});
