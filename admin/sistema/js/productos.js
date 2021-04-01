@@ -138,24 +138,11 @@ function cargarselectores(selector) {
       $select.append(
         "<option disabled selected>" + "Seleccionar" + "</option>"
       );
-
-      /* if (selector == "presentacion_comercial") {
-        $.each(info.data, function (i, value) {
-          $select.append(
-            '<option value ="' +
-              value.nombre +
-              '">' +
-              value.nombre +
-              "</option>"
-          );
-        });
-      } else { */
-        $.each(info.data, function (i, value) {
-          $select.append(
-            '<option value ="' + value.id + '">' + value.nombre + "</option>"
-          );
-        });
-      /* } */
+      $.each(info.data, function (i, value) {
+        $select.append(
+          `<option value = ${value.id}> ${value.id} - ${value.nombre} </option>`
+        );
+      });
     },
     error: function (response) {
       console.log(response);
@@ -245,7 +232,9 @@ $(document).on("click", ".link-borrar", function (e) {
         refreshTable();
       } else {
         alertify.set("notifier", "position", "top-right");
-        alertify.error("El producto no se puede eliminar se encuentra relacionado con uno a varios Batch Records.");
+        alertify.error(
+          "El producto no se puede eliminar se encuentra relacionado con uno a varios Batch Records."
+        );
       }
     },
   });

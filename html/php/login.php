@@ -47,9 +47,11 @@ if (!empty($_SESSION['active'])) {
                 } else {
                     $new_trie = ++$tries;
                     file_put_contents('tries.txt', $new_trie);
+                    $alert = "Su usuario y/o password no son correctos";
                     //session_destroy();
                 }
-            }
+            } else
+                $alert = "Número maximo de intentos superados. Vuelva a intentar en unos minutos";
         }
     }
 }

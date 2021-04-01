@@ -91,7 +91,7 @@ function cargarMulti(multi) {
 
   $.each(multi, function (i, value) {
     $select.append(
-      `<option value="${value.referencia}">${value.nombre}</option>`
+      `<option value="${value.referencia}">${value.referencia} - ${value.nombre}</option>`
     );
   });
 }

@@ -8,12 +8,12 @@
           <span class="navbar-toggler-bar bar3"></span>
         </button>
       </div>
-      <a class="navbar-brand" href="#">Batch Record</a>
-      <a class="navbar-brand" href="#">Pesaje</a>
-      <a class="navbar-brand" href="#">Preparación</a>
-      <a class="navbar-brand" href="#">Aprobación</a>
-      <a class="navbar-brand" href="#">Envasado</a>
-      <a class="navbar-brand" href="#">Acondicionamiento</a>
+      <a class="navbar-brand" href="/html/batch.php" target="_blank" target="_blank">Batch Record</a>
+      <a class="navbar-brand" href="/../pesaje" target="_blank">Pesaje</a>
+      <a class="navbar-brand" href="/../preparacion" target="_blank">Preparación</a>
+      <a class="navbar-brand" href="/../aprobacion" target="_blank">Aprobación</a>
+      <a class="navbar-brand" href="/../envasado" target="_blank">Envasado</a>
+      <a class="navbar-brand" href="/../acondicionamiento" target="_blank">Acondicionamiento</a>
     </div>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">

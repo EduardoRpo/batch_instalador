@@ -37,12 +37,14 @@ include('./html/modal/modal_recuperarClave.php');
 </head>
 
 <body class="text-center">
+
 	<form class="form-signin" id="login" action="" method="POST">
+
 		<img class="mb-4" src="assets/images/logo/logo-samara.png" alt="" width="200" height="100">
 		<h1 class="h3 mb-3 font-weight-normal" style="color:slategrey">Iniciar Sesión</h1><br>
 		<div>
 			<label for="">Seleccione el modulo / rol</label>
-			<select name="modulos" id="modulos" class="form-control mt-3 mb-3">
+			<select name="modulos" id="modulos" class="form-control mb-5">
 				<option value="1">administrador</option>
 				<option value="2">pesaje</option>
 				<option value="3">preparacion</option>
@@ -58,7 +60,7 @@ include('./html/modal/modal_recuperarClave.php');
 				</button>
 			</span>
 		</div>
-		
+
 		<div class="mb-3">
 			<a href="" data-toggle="modal" data-target="#ModalRecuperarClave">Recuperar Contraseña</a>
 		</div>
@@ -67,18 +69,22 @@ include('./html/modal/modal_recuperarClave.php');
 		<!-- <button class="btn btn-lg btn-success btn-block mb-3" type="button" onclick="validar_usuario();">Iniciar</button> -->
 		<!-- <input type="button" class="btn btn-lg btn-success btn-block mb-3 btnlogin" value="Iniciar"> -->
 		<!-- <div class=""></div> -->
-		<!-- <div class="alert alert-danger mb" role="alert" hidden> <?php //echo isset($alert) ? $alert : ''; 
-																		?> </div> -->
+		<?php echo isset($alert) ? '<div class="alert alert-danger mb" role="alert">' . $alert : '';
+		?> </div>
 		<p class="mt-5 mb-3 text-muted">&copy; 2020</p>
 	</form>
 
 	<script src="html/vendor/jquery/jquery-3.2.1.min.js" type="text/javascript"></script>
 	<script src="html/vendor/bootstrap/js/popper.js" type="text/javascript"></script>
 	<script src="html/vendor/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-
 	<!-- Alertify -->
 	<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 	<script src="html/js/login/login.js"></script>
+	<script>
+		
+		let intentos = `<?= $new_trie; ?>`;
+		!intentos ? intentos = 0 : intentos;
+	</script>
 </body>
 
 
