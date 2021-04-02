@@ -84,6 +84,7 @@ function info_General() {
       $("#unidades").html("<b>" + info.unidad_lote + "</b>");
       $(".fecha").html("<b>" + info.fecha_creacion + "</b>");
       especificaciones_producto();
+      entrega_material_envase();
     }
   );
 }
@@ -321,12 +322,116 @@ function control_proceso() {
 }
 
 function entrega_material_envase() {
-  $.post("../../html/php/c_batch_pdf.php",
-    data,
-    function (data, textStatus, jqXHR) {},
-    
-  );
+  referencia = $("#ref").html();
+  $.ajax({
+    url: "../../html/php/envase.php",
+    type: "POST",
+    data: { referencia },
+  }).done((data, status, xhr) => {
+    info = JSON.parse(data);
+    $(`.envase`).html(info[0].id_envase);
+    $(`.descripcion_envase`).html(info[0].envase);
+
+    $(`.tapa`).html(info[0].id_tapa);
+    $(`.descripcion_tapa`).html(info[0].tapa);
+
+    $(`.etiqueta`).html(info[0].id_etiqueta);
+    $(`.descripcion_etiqueta`).html(info[0].etiqueta);
+
+    $(`.unidades`).html(unidades);
+    //$(`.unidadese`).html(empaqueEnvasado);
+  });
 }
+
+/* Calcular peso minimo, maximo y promedio */
+
+identificarDensidad = (batch = "") => {
+  let densidadAprobada = 0;
+  idBatch = id;
+  $.ajax({
+    type: "POST",
+    url: "../../html/php/controlProceso.php",
+    data: { modulo: 4, idBatch },
+
+    success: function (response) {
+      if (response == 0) return false;
+      else {
+        let espec = JSON.parse(response);
+        for (let i = 0; i < espec.data.length; i++) {
+          densidadAprobada = densidadAprobada + espec.data[i].densidad;
+        }
+        densidadAprobada = densidadAprobada / espec.data.length;
+        calcularPeso(densidadAprobada);
+      }
+    },
+  });
+};
+
+function calcularPeso(densidadAprobada) {
+  presentacion = $("#presentacion").html();
+  presentacion = getNumbersInString(presentacion);
+
+  var peso_min = presentacion * densidadAprobada;
+  var peso_max = peso_min * (1 + 0.03);
+  var prom = (parseInt(peso_min) + peso_max) / 2;
+
+  $(`.minimo`).val(peso_min.toFixed(2));
+  $(`.maximo`).val(peso_max.toFixed(2));
+  $(`.medio`).val(prom.toFixed(2));
+}
+
+function getNumbersInString(string) {
+  var tmp = string.split("");
+  var map = tmp.map(function (current) {
+    if (!isNaN(parseInt(current))) {
+      return current;
+    }
+  });
+
+  var numbers = map.filter(function (value) {
+    return value != undefined;
+  });
+
+  return numbers.join("");
+}
+
+/* Obtener muestras */
+
+obtenerMuestras = () => {
+  idBatch = id;
+  $.ajax({
+    type: "POST",
+    url: "../../html/php/muestras.php",
+    data: { operacion: 6, idBatch },
+
+    success: function (response) {
+      if (response == 3) return false;
+
+      let promedio = 0;
+      let info = JSON.parse(response);
+      j = 1;
+
+      $(`#muestrasEnvasado1`).append(`
+        <thead class="head">
+          <tr>
+            <th colspan="${info.length}" class="centrado">Resultados</th>
+          </tr>
+        </thead>`);
+
+      for (let i = 0; i < info.length; i++) {
+        $(`#muestrasEnvasado1`).append(`
+          <td class="centrado">${info[i].muestra}</td>
+        `);
+
+        //$(`#txtMuestra${j}`).val(info[i].muestra);
+        promedio = promedio + info[i].muestra;
+        j++;
+      }
+      promedio = promedio / info.length;
+      $(`#promedioMuestras1`).val(promedio);
+    },
+  });
+};
 
 $(document).ready(function () {
   id = sessionStorage.getItem("id");
@@ -339,4 +444,6 @@ $(document).ready(function () {
   condiciones_medio();
   control_proceso();
   equipos();
+  identificarDensidad();
+  obtenerMuestras();
 });

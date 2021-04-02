@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>pfd Batch Record</title>
+    <title>pfd | Batch Record</title>
 
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/icon/favicon.png">
@@ -627,11 +627,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <td class="centrado">04/02/2020</td>
+                                <td class="centrado bold" id="fecha_medio4"></td>
                                 <td class="centrado">18 - 25 °C</td>
-                                <td class="centrado">17 °C</td>
+                                <td class="centrado bold" id="temperatura4"></td>
                                 <td class="centrado">30 - 75 %</td>
-                                <td class="centrado">35 %</td>
+                                <td class="centrado bold" id="humedad4"></td>
                             </tbody>
                         </table>
                     </div>
@@ -830,22 +830,22 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>21/05/2020</td>
-                                    <td>50006</td>
-                                    <td>envase bala x 120 ml</td>
-                                    <td>1.270</td>
+                                    <td class="centrado">21/05/2020</td>
+                                    <td class="envase centrado"></td>
+                                    <td class="descripcion_envase centrado"></td>
+                                    <td class="unidades centrado"></td>
                                 </tr>
                                 <tr>
-                                    <td>21/05/2020</td>
-                                    <td>50039</td>
-                                    <td>tapa flip-top 18/415 traslucido</td>
-                                    <td>1.270</td>
+                                    <td class="centrado">21/05/2020</td>
+                                    <td class="tapa centrado"></td>
+                                    <td class="descripcion_tapa centrado"></td>
+                                    <td class="unidades centrado"></td>
                                 </tr>
                                 <tr>
-                                    <td>21/05/2020</td>
-                                    <td>50081</td>
-                                    <td>etiqueta - 20781-1 - te capilar anticaida - isabely (120 ml) - usa</td>
-                                    <td>1.270</td>
+                                    <td class="centrado">21/05/2020</td>
+                                    <td class="etiqueta centrado"></td>
+                                    <td class="descripcion_etiqueta centrado"></td>
+                                    <td class="unidades centrado"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -857,9 +857,7 @@
                         <input type="text" class="form-control" id="envasadora">
                         <label for="">Identificacion Loteadora</label>
                         <input type="text" class="form-control" id="loteadora">
-
                     </div>
-
 
                     <div class="subtitle"><label for="">Condiciones del Medio</label></div>
                     <div class="table-responsive p-3">
@@ -878,11 +876,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <td class="centrado">04/02/2020</td>
+                                <td class="centrado bold" id="fecha_medio5"></td>
                                 <td class="centrado">18 - 25 °C</td>
-                                <td class="centrado">17 °C</td>
+                                <td class="centrado bold" id="temperatura5"></td>
                                 <td class="centrado">30 - 75 %</td>
-                                <td class="centrado">35 %</td>
+                                <td class="centrado bold" id="humedad5"></td>
                             </tbody>
                         </table>
                     </div>
@@ -891,100 +889,22 @@
                     <div class="subtitle"><label for="">Especificaciones Tecnicas</label></div>
                     <div class="espec_tecnicas">
                         <label for="" class="centrado">Mínimo</label>
-                        <input type="text" class="form-control class=" centrado"">
+                        <input type="text" class="form-control centrado minimo">
                         <label for="" class="centrado">Medio</label>
-                        <input type="text" class="form-control class=" centrado"">
+                        <input type="text" class="form-control centrado medio">
                         <label for="" class="centrado">Máximo</label>
-                        <input type="text" class="form-control class=" centrado"">
+                        <input type="text" class="form-control centrado maximo">
                     </div>
 
                     <div class="subtitle"><label for="">Control de peso en el Proceso</label></div>
 
                     <div class="p-3">
-                        <table class="table table-bordered table-striped">
-                            <thead class="head">
-                                <tr>
-                                    <th colspan="10" class="centrado">Resultados</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th class="centrado">1</th>
-                                    <th class="centrado">2</th>
-                                    <th class="centrado">3</th>
-                                    <th class="centrado">4</th>
-                                    <th class="centrado">5</th>
-                                    <th class="centrado">6</th>
-                                    <th class="centrado">7</th>
-                                    <th class="centrado">8</th>
-                                    <th class="centrado">9</th>
-                                    <th class="centrado">10</th>
-                                </tr>
-                                <tr>
-                                    <th class="centrado">1</th>
-                                    <th class="centrado">2</th>
-                                    <th class="centrado">3</th>
-                                    <th class="centrado">4</th>
-                                    <th class="centrado">5</th>
-                                    <th class="centrado">6</th>
-                                    <th class="centrado">7</th>
-                                    <th class="centrado">8</th>
-                                    <th class="centrado">9</th>
-                                    <th class="centrado">10</th>
-                                </tr>
-                                <tr>
-                                    <th class="centrado">1</th>
-                                    <th class="centrado">2</th>
-                                    <th class="centrado">3</th>
-                                    <th class="centrado">4</th>
-                                    <th class="centrado">5</th>
-                                    <th class="centrado">6</th>
-                                    <th class="centrado">7</th>
-                                    <th class="centrado">8</th>
-                                    <th class="centrado">9</th>
-                                    <th class="centrado">10</th>
-                                </tr>
-                                <tr>
-                                    <th class="centrado">1</th>
-                                    <th class="centrado">2</th>
-                                    <th class="centrado">3</th>
-                                    <th class="centrado">4</th>
-                                    <th class="centrado">5</th>
-                                    <th class="centrado">6</th>
-                                    <th class="centrado">7</th>
-                                    <th class="centrado">8</th>
-                                    <th class="centrado">9</th>
-                                    <th class="centrado">10</th>
-                                </tr>
-                                <tr>
-                                    <th class="centrado">1</th>
-                                    <th class="centrado">2</th>
-                                    <th class="centrado">3</th>
-                                    <th class="centrado">4</th>
-                                    <th class="centrado">5</th>
-                                    <th class="centrado">6</th>
-                                    <th class="centrado">7</th>
-                                    <th class="centrado">8</th>
-                                    <th class="centrado">9</th>
-                                    <th class="centrado">10</th>
-                                </tr>
-                                <tr>
-                                    <th class="centrado">1</th>
-                                    <th class="centrado">2</th>
-                                    <th class="centrado">3</th>
-                                    <th class="centrado">4</th>
-                                    <th class="centrado">5</th>
-                                    <th class="centrado">6</th>
-                                    <th class="centrado">7</th>
-                                    <th class="centrado">8</th>
-                                    <th class="centrado">9</th>
-                                    <th class="centrado">10</th>
-                                </tr>
-                            </tbody>
+                        <table class="table table-bordered table-striped" id="muestrasEnvasado1">
+                            <tbody> </tbody>
                         </table>
                         <div>
                             <label for="" class="mr-5">Promedio</label>
-                            <input type="text" class="form-control" style="width: 10%; display:inline">
+                            <input type="text" class="form-control centrado" id="promedioMuestras1" style="width: 10%; display:inline">
                         </div>
                     </div>
 
@@ -1004,12 +924,12 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="centrado">50006</td>
-                                    <td>envase bala x 120 ml</td>
-                                    <td class="der">1.270</td>
-                                    <td class="der">1.270</td>
-                                    <td class="der">0</td>
-                                    <td class="der">0</td>
+                                    <td class="centrado"></td>
+                                    <td></td>
+                                    <td class="der"></td>
+                                    <td class="der"></td>
+                                    <td class="der"></td>
+                                    <td class="der"></td>
                                 </tr>
                                 <tr>
                                     <td class="centrado">50039</td>
@@ -1118,11 +1038,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <td class="centrado">04/02/2020</td>
+                                <td class="centrado bold" id="fecha_medio6"></td>
                                 <td class="centrado">18 - 25 °C</td>
-                                <td class="centrado">17 °C</td>
+                                <td class="centrado bold" id="temperatura6"></td>
                                 <td class="centrado">30 - 75 %</td>
-                                <td class="centrado">35 %</td>
+                                <td class="centrado bold" id="humedad6"></td>
                             </tbody>
                         </table>
                     </div>
@@ -1153,21 +1073,21 @@
                             <tbody>
                                 <tr>
                                     <td>21/05/2020</td>
-                                    <td>50006</td>
-                                    <td>envase bala x 120 ml</td>
-                                    <td>1.270</td>
+                                    <td class="envase"></td>
+                                    <td class="descripcion_envase"></td>
+                                    <td class="unidades"></td>
                                 </tr>
                                 <tr>
                                     <td>21/05/2020</td>
-                                    <td>50039</td>
-                                    <td>tapa flip-top 18/415 traslucido</td>
-                                    <td>1.270</td>
+                                    <td class="tapa"></td>
+                                    <td class="descripcion_tapa"></td>
+                                    <td class="unidades"></td>
                                 </tr>
                                 <tr>
                                     <td>21/05/2020</td>
-                                    <td>50081</td>
-                                    <td>etiqueta - 20781-1 - te capilar anticaida - isabely (120 ml) - usa</td>
-                                    <td>1.270</td>
+                                    <td class="etiquetas"></td>
+                                    <td class="descripcion_etiquetas"></td>
+                                    <td class="unidades"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1176,11 +1096,11 @@
                     <div class="subtitle"><label for="">Especificaciones Tecnicas</label></div>
                     <div class="espec_tecnicas">
                         <label for="" class="centrado">Mínimo</label>
-                        <input type="text" class="form-control class=" centrado"">
+                        <input type="text" class="form-control centrado minimo">
                         <label for="" class="centrado">Medio</label>
-                        <input type="text" class="form-control class=" centrado"">
+                        <input type="text" class="form-control centrado medio">
                         <label for="" class="centrado">Máximo</label>
-                        <input type="text" class="form-control class=" centrado"">
+                        <input type="text" class="form-control centrado maximo">
                     </div>
 
                     <div class="subtitle"><label for="">Control de peso en el Proceso</label></div>

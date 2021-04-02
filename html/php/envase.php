@@ -12,18 +12,18 @@ if (!empty($_POST)) {
             WHERE p.referencia = :referencia";
 
     $query = $conn->prepare($sql);
-    $result = $query->execute([
-        'referencia' => $referencia,
-    ]);
+    $result = $query->execute(['referencia' => $referencia,]);
 
     //Almacena la data en array
-    while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
+    $data = $query->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($data, JSON_UNESCAPED_UNICODE);
+    /* while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
         $arreglo["data"][] = $data;
-    }
-    if (empty($arreglo)) {
+    } */
+    if (empty($data)) {
         echo '3';
         exit();
     }
 
-    echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+    //echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
 }

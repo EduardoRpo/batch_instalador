@@ -5,11 +5,12 @@ if (!empty($_POST)) {
 
   $op = $_POST['operacion'];
   $batch = $_POST['idBatch'];
-  $modulo = $_POST['modulo'];
-  $ref_multi = $_POST['ref_multi'];
 
   switch ($op) {
     case 1:
+      $modulo = $_POST['modulo'];
+      $ref_multi = $_POST['ref_multi'];
+
       //Carga las variables
       $muestras = $_POST['muestras'];
 
@@ -36,6 +37,9 @@ if (!empty($_POST)) {
       break;
 
     case 2:
+      $modulo = $_POST['modulo'];
+      $ref_multi = $_POST['ref_multi'];
+
       $sql = "SELECT * FROM batch_muestras 
               WHERE modulo = :modulo AND batch = :batch AND referencia = :ref_multi";
 
@@ -58,6 +62,8 @@ if (!empty($_POST)) {
       break;
 
     case 3:
+      $modulo = $_POST['modulo'];
+      $ref_multi = $_POST['ref_multi'];
       $muestras = $_POST['muestras'];
       $cantidad_muestras = count($muestras) / 5;
 
@@ -102,15 +108,11 @@ if (!empty($_POST)) {
       break;
 
     case 4:
-      $sql = "SELECT * FROM batch_muestras_acondicionamiento 
-                WHERE modulo = :modulo AND batch = :batch AND referencia = :ref_multi";
-
+      $modulo = $_POST['modulo'];
+      $ref_multi = $_POST['ref_multi'];
+      $sql = "SELECT * FROM batch_muestras_acondicionamiento WHERE modulo = :modulo AND batch = :batch AND referencia = :ref_multi";
       $query = $conn->prepare($sql);
-      $result = $query->execute([
-        'modulo' => $modulo,
-        'batch' => $batch,
-        'ref_multi' => $ref_multi,
-      ]);
+      $result = $query->execute(['modulo' => $modulo, 'batch' => $batch, 'ref_multi' => $ref_multi,]);
 
       while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
         $arreglo["data"][] = $data;
@@ -124,17 +126,21 @@ if (!empty($_POST)) {
       break;
 
     case 5:
+      $modulo = $_POST['modulo'];
+      $ref_multi = $_POST['ref_multi'];
       $sql = "SELECT AVG(muestra) as promedio FROM batch_muestras WHERE modulo = :modulo AND batch = :batch";
-
       $query = $conn->prepare($sql);
-      $result = $query->execute([
-        'modulo' => $modulo,
-        'batch' => $batch,
-      ]);
-
+      $result = $query->execute(['modulo' => $modulo, 'batch' => $batch,]);
       $data = $query->fetchAll(PDO::FETCH_ASSOC);
       echo json_encode($data, JSON_UNESCAPED_UNICODE);
 
+      break;
+    case 6:
+      $sql = "SELECT * FROM batch_muestras WHERE batch = :batch";
+      $query = $conn->prepare($sql);
+      $result = $query->execute(['batch' => $batch,]);
+      $data = $query->fetchAll(PDO::FETCH_ASSOC);
+      echo json_encode($data, JSON_UNESCAPED_UNICODE);
       break;
   }
 }
