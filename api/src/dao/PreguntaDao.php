@@ -24,7 +24,7 @@
       $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20,Logger::DEBUG));
     }
 
-    public function findEmpaque():array
+    public function findAll():array
     {
       $connection = Connection::getInstance()->getConnection();
       $stmt = $connection->prepare("SELECT * FROM preguntas");
