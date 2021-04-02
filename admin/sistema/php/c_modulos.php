@@ -6,8 +6,11 @@ $op = $_POST['operacion'];
 
 switch ($op) {
     case 1: //listar Modulos
-        $query = "SELECT * FROM modulo";
-        ejecutarQuerySelect($conn, $query);
+        $sql = "SELECT * FROM modulo";
+        $query = $conn->prepare($sql);
+        $result = $query->execute();
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
         break;
 
     case 2: //Eliminar

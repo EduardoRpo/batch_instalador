@@ -108,16 +108,12 @@ function parametros_Control() {
         }
 
         $(`#despeje_linea${info[i].id_modulo}`).append(`
-                    <tr>
-                        <th scope="row" class="centrado">${j}</th>
-                        <td>${info[i].pregunta}</td>
-                        <td class="centrado">${
-                          info[i].solucion == 1 ? "X" : ""
-                        }</td>
-                        <td class="centrado">${
-                          info[i].solucion == 0 ? "X" : ""
-                        }</td>
-                    </tr>`);
+          <tr>
+              <th scope="row" class="centrado">${j}</th>
+              <td>${info[i].pregunta}</td>
+              <td class="centrado">${info[i].solucion == 1 ? "X" : ""}</td>
+              <td class="centrado">${info[i].solucion == 0 ? "X" : ""}</td>
+          </tr>`);
       }
     }
   );
@@ -136,15 +132,16 @@ function area_desinfeccion() {
 
       for (let i = 0; i < info.data.length; i++) {
         $(`#area_desinfeccion${info.data[i].modulo}`).append(`
-                    <tr>
-                        <td>${info.data[i].descripcion}</td>
-                        <td class="centrado desinfectante${info.data[i].modulo}"></td>
-                        <td class="centrado concentracion${info.data[i].modulo}"></td>
-                        <td></td>
-                    </tr>`);
+          <tr>
+              <td>${info.data[i].descripcion}</td>
+              <td class="centrado desinfectante${info.data[i].modulo}"></td>
+              <td class="centrado concentracion${info.data[i].modulo}"></td>
+              <td></td>
+          </tr>`);
       }
     }
   );
+  desinfectante();
 }
 
 function desinfectante() {
@@ -324,11 +321,10 @@ function control_proceso() {
 }
 
 function entrega_material_envase() {
-  $.post(
-    "../../html/php/c_batch_pdf.php",
+  $.post("../../html/php/c_batch_pdf.php",
     data,
     function (data, textStatus, jqXHR) {},
-    "dataType"
+    
   );
 }
 
@@ -339,8 +335,8 @@ $(document).ready(function () {
   info_General();
   parametros_Control();
   area_desinfeccion();
-  desinfectante();
-  //condiciones_medio();
+  //desinfectante();
+  condiciones_medio();
   control_proceso();
   equipos();
 });

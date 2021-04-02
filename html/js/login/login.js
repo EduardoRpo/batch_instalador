@@ -34,10 +34,17 @@
 modulos = () => {
   $.ajax({
     type: "POST",
-    url: "url",
-    data: "data",
-    dataType: "dataType",
-    success: function (response) {},
+    url: "../../../admin/sistema/php/c_modulos.php",
+    data: { operacion: 1 },
+
+    success: function (resp) {
+      data = JSON.parse(resp);
+      data.forEach((equipo) => {
+        $("#modulos").append(
+          `<option value="${equipo.id}">${equipo.modulo}</option>`
+        );
+      });
+    },
   });
 };
 
@@ -66,9 +73,10 @@ $(document).ready(function () {
         url: "../../../html/php/loginTries.php",
 
         success: function (response) {
-          windows.location.href = "../../../index.php";
+          location.reload();
         },
       });
     }, 60000);
   }
 });
+modulos();

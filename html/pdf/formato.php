@@ -382,9 +382,9 @@
                             <label id="fecha2" style="font-weight:bold; justify-self: baseline"></label>
 
                             <!-- <div id="blank_rea2"></div> -->
-                            <img id="f_realizo2" src="" alt="firma_usuario" height="130">
+                            <!-- <img id="f_realizo2" src="" alt="firma_usuario" height="130"> -->
                             <!-- <div id="blank_ver2"></div> -->
-                            <img id="f_verifico2" src="" alt="firma_usuario" height="130">
+                            <!-- <img id="f_verifico2" src="" alt="firma_usuario" height="130"> -->
 
                             <label id="user_realizo2">Realizado por:</label>
                             <label id="user_verifico2">Verificado por:</label>

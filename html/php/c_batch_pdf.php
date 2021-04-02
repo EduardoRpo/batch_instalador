@@ -143,6 +143,21 @@ switch ($op) {
 
         break;
 
+    case 11:
+
+        $id = $_POST['id'];
+
+        $sql = "SELECT * FROM batch_control_especificaciones WHERE batch = :id";
+        $query = $conn->prepare($sql);
+        $query->execute(['id' => $id]);
+
+        while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
+            $arreglo[] = $data;
+        }
+        echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+
+        break;
+
     default:
 
         break;

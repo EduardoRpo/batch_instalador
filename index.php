@@ -43,11 +43,9 @@ include('./html/modal/modal_recuperarClave.php');
 		<img class="mb-4" src="assets/images/logo/logo-samara.png" alt="" width="200" height="100">
 		<h1 class="h3 mb-3 font-weight-normal" style="color:slategrey">Iniciar Sesión</h1><br>
 		<div>
-			<label for="">Seleccione el modulo / rol</label>
+			<label for="">Seleccione el módulo / rol</label>
 			<select name="modulos" id="modulos" class="form-control mb-5">
-				<option value="1">administrador</option>
-				<option value="2">pesaje</option>
-				<option value="3">preparacion</option>
+				<option value="1">ADMINISTRACIÓN</option>
 			</select>
 		</div>
 		<input type="text" id="usuario" name="usuario" class="form-control mb-3" placeholder="Usuario" autocomplete="off" required autofocus>
@@ -81,8 +79,7 @@ include('./html/modal/modal_recuperarClave.php');
 	<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 	<script src="html/js/login/login.js"></script>
 	<script>
-		
-		let intentos = `<?= $new_trie; ?>`;
+		let intentos = `<?= $tries; ?>`;
 		!intentos ? intentos = 0 : intentos;
 	</script>
 </body>
