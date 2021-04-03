@@ -31,8 +31,6 @@ switch ($op) {
     case 3:
 
         $id = $_POST['id'];
-        /* $modulo = $_POST['modulo']; */
-
         $sql = "SELECT p.pregunta, bsp.solucion, bsp.id_modulo 
                 FROM batch_solucion_pregunta bsp
                 INNER JOIN preguntas p ON p.id = bsp.id_pregunta
@@ -40,13 +38,9 @@ switch ($op) {
                 ORDER BY bsp.id_modulo";
 
         $query = $conn->prepare($sql);
-        $query->execute(['id' => $id/* , 'modulo' => $modulo */]);
-
-        while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
-            $arreglo[] = $data;
-        }
-
-        echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+        $query->execute(['id' => $id]);
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
 
         break;
 

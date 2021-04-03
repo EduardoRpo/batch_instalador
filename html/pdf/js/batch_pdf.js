@@ -1,4 +1,4 @@
-let id;
+let idBatch;
 
 /* bloquear inputs */
 $("input").prop("readonly", true);
@@ -39,7 +39,7 @@ $(document).on("click", ".link-cerrar", function (e) {
 
 /* Cargar data */
 
-function cargar_Alertas() {
+cargar_Alertas = () => {
   $.post(
     "../../html/php/c_batch_pdf.php",
     (data = { operacion: 7 }),
@@ -61,15 +61,16 @@ function cargar_Alertas() {
       }
     }
   );
-}
+};
 
-function info_General() {
+info_General = () => {
   $.post(
     "../../html/php/c_batch_pdf.php",
     (data = { operacion: 2, id }),
     function (data, textStatus, jqXHR) {
       if (data == "false") return false;
       let info = JSON.parse(data);
+      idBatch = id;
       $("#ref").html(info.referencia);
       $("#nref").html("<b>" + info.nombre_referencia + "</b>");
       $("#marca").html("<b>" + info.marca + "</b>");
@@ -85,11 +86,15 @@ function info_General() {
       $(".fecha").html("<b>" + info.fecha_creacion + "</b>");
       especificaciones_producto();
       entrega_material_envase();
+      obtenerMuestras();
+      identificarDensidad();
+      material_envase_sobrante();
+      area_desinfeccion();
     }
   );
-}
+};
 
-function parametros_Control() {
+parametros_Control = () => {
   let data = { operacion: 3, id };
 
   $.post(
@@ -118,7 +123,7 @@ function parametros_Control() {
       }
     }
   );
-}
+};
 
 function area_desinfeccion() {
   let data = { operacion: 4 };
@@ -419,9 +424,10 @@ obtenerMuestras = () => {
         </thead>`);
 
       for (let i = 0; i < info.length; i++) {
-        $(`#muestrasEnvasado1`).append(`
-          <td class="centrado">${info[i].muestra}</td>
-        `);
+        //if (i === 10) $(`#muestrasEnvasado1`).append(`<th></th>`);
+        $(`#muestrasEnvasado1`).append(
+          `<td class="centrado">${info[i].muestra}</td>`
+        );
 
         //$(`#txtMuestra${j}`).val(info[i].muestra);
         promedio = promedio + info[i].muestra;
@@ -433,17 +439,42 @@ obtenerMuestras = () => {
   });
 };
 
+material_envase_sobrante = () => {
+  $.ajax({
+    type: "POST",
+    url: "../../html/php/envasado.php",
+    data: { operacion: 7, idBatch },
+
+    success: function (response) {
+      let info = JSON.parse(response);
+      info.forEach((item) => {
+        if (item.modulo == 5) {
+          $(`#devolucionMaterialSorbrante`).append(`
+            <tr>
+              <td class="centrado">${item.ref_material}</td>
+              <td></td>
+              <td class="der">${item.envasada}</td>
+              <td class="der">${item.envasada}</td>
+              <td class="der">${item.averias}</td>
+              <td class="der">${item.sobrante}</td>
+            </tr>`);
+        }
+      });
+    },
+  });
+};
+
+entrega_material_acondicionamiento = () => {};
+
 $(document).ready(function () {
   id = sessionStorage.getItem("id");
 
   cargar_Alertas();
   info_General();
   parametros_Control();
-  area_desinfeccion();
+  /* area_desinfeccion(); */
   //desinfectante();
   condiciones_medio();
   control_proceso();
   equipos();
-  identificarDensidad();
-  obtenerMuestras();
 });

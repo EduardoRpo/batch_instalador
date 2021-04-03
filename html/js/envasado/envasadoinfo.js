@@ -324,17 +324,17 @@ function cargarTablaEnvase(j, referencia, cantidad) {
     data: { referencia },
   }).done((data, status, xhr) => {
     var info = JSON.parse(data);
-    empaqueEnvasado = Math.round(cantidad / info.data[0].unidad_empaque);
+    empaqueEnvasado = Math.round(cantidad / info[0].unidad_empaque);
     unidades = formatoCO(cantidad);
 
-    $(`.envase${j}`).html(info.data[0].id_envase);
-    $(`.descripcion_envase${j}`).html(info.data[0].envase);
+    $(`.envase${j}`).html(info[0].id_envase);
+    $(`.descripcion_envase${j}`).html(info[0].envase);
 
-    $(`.tapa${j}`).html(info.data[0].id_tapa);
-    $(`.descripcion_tapa${j}`).html(info.data[0].tapa);
+    $(`.tapa${j}`).html(info[0].id_tapa);
+    $(`.descripcion_tapa${j}`).html(info[0].tapa);
 
-    $(`.etiqueta${j}`).html(info.data[0].id_etiqueta);
-    $(`.descripcion_etiqueta${j}`).html(info.data[0].etiqueta);
+    $(`.etiqueta${j}`).html(info[0].id_etiqueta);
+    $(`.descripcion_etiqueta${j}`).html(info[0].etiqueta);
 
     /* $(`.empaque${j}`).html(info.data[0].id_empaque);
     $(`.descripcion_empaque${j}`).html(info.data[0].empaque);

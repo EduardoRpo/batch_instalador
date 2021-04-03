@@ -185,9 +185,7 @@ function cargarTablaEnvase(j, referencia, cantidad) {
     data: { referencia },
   }).done((data, status, xhr) => {
     var info = JSON.parse(data);
-    empaqueEnvasado = formatoCO(
-      Math.round(cantidad / info.data[0].unidad_empaque)
-    );
+    empaqueEnvasado = formatoCO(Math.round(cantidad / info[0].unidad_empaque));
     unidades = formatoCO(cantidad);
 
     /* $(`.envase${j}`).html(info.data[0].id_envase);
@@ -199,11 +197,11 @@ function cargarTablaEnvase(j, referencia, cantidad) {
         $(`.etiqueta${j}`).html(info.data[0].id_etiqueta);
         $(`.descripcion_etiqueta${j}`).html(info.data[0].etiqueta); */
 
-    $(`.empaque${j}`).html(info.data[0].id_empaque);
-    $(`.descripcion_empaque${j}`).html(info.data[0].empaque);
+    $(`.empaque${j}`).html(info[0].id_empaque);
+    $(`.descripcion_empaque${j}`).html(info[0].empaque);
 
-    $(`.otros${j}`).html(info.data[0].id_otros);
-    $(`.descripcion_otros${j}`).html(info.data[0].otros);
+    $(`.otros${j}`).html(info[0].id_otros);
+    $(`.descripcion_otros${j}`).html(info[0].otros);
 
     $(`.unidades${j}`).html(unidades);
     $(`.unidades${j}e`).html(empaqueEnvasado);

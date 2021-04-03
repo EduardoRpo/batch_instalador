@@ -6,8 +6,8 @@ if (!empty($_POST)) {
     require_once('../../admin/sistema/php/crud.php');
 
     $op = $_POST['operacion'];
-
-    $modulo = $_POST['modulo'];
+    if (isset($_POST['modulo']))
+        $modulo = $_POST['modulo'];
     $batch = $_POST['idBatch'];
 
     switch ($op) {
@@ -180,6 +180,23 @@ if (!empty($_POST)) {
             }
             echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
 
+            break;
+        case 7: // Obtener material sobrante
+            $batch = $_POST['idBatch'];
+            /* $sql = "SELECT id_producto FROM batch WHERE id_batch = :batch";
+            $query = $conn->prepare($sql);
+            $result = $query->execute(['batch' => $batch]);
+            $referencia = $query->fetch(PDO::FETCH_ASSOC); */
+
+            $sql = "SELECT bms.id, bms.ref_material, bms.envasada, bms.averias, bms.sobrante, bms.ref_producto, bms.batch, bms.modulo, u.urlfirma as realizo 
+            FROM batch_material_sobrante bms 
+            INNER JOIN usuario u ON u.id = bms.realizo
+            WHERE batch = :batch";
+            $query = $conn->prepare($sql);
+            /* $result = $query->execute(['referencia' => $referencia['id_producto']]); */
+            $result = $query->execute(['batch' => $batch]);
+            $data = $query->fetchAll(PDO::FETCH_ASSOC);
+            echo json_encode($data, JSON_UNESCAPED_UNICODE);
             break;
     }
 }

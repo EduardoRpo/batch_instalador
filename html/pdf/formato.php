@@ -911,7 +911,7 @@
                     <div class="subtitle"><label for="">Devolución Material de Envase Sobrante</label></div>
                     <div class="alertas" id="alert_pesaje"></div>
                     <div class="table-responsive p-3">
-                        <table class="table table-bordered table-striped">
+                        <table class="table table-bordered table-striped" id="devolucionMaterialSorbrante">
                             <thead class="head centrado">
                                 <tr>
                                     <td class="centrado">Referencia</td>
@@ -923,30 +923,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="centrado"></td>
-                                    <td></td>
-                                    <td class="der"></td>
-                                    <td class="der"></td>
-                                    <td class="der"></td>
-                                    <td class="der"></td>
-                                </tr>
-                                <tr>
-                                    <td class="centrado">50039</td>
-                                    <td>tapa flip-top 18/415 traslucido</td>
-                                    <td class="der">1.270</td>
-                                    <td class="der">1.270</td>
-                                    <td class="der">0</td>
-                                    <td class="der">0</td>
-                                </tr>
-                                <tr>
-                                    <td class="centrado">50081</td>
-                                    <td>etiqueta - 20781-1 - te capilar anticaida - isabely (120 ml) - usa</td>
-                                    <td class="der">1.270</td>
-                                    <td class="der">1.270</td>
-                                    <td class="der">0</td>
-                                    <td class="der">0</td>
-                                </tr>
+
                             </tbody>
                         </table>
                     </div>
@@ -991,11 +968,20 @@
                 </div>
             </div>
             <div class="card mt-3">
-                <div class="card-header centrado"><b>LOTEADO</b></div>
+                <div class="card-header centrado"><b>LOTEADO Y ACONDICIONAMIENTO</b></div>
                 <div class="card-body">
-
                     <div class="subtitle">
                         <label for="">Limpieza y Desinfección</label>
+                    </div>
+                    <div class="alertas" id="alert_pesaje">
+                        <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <label class="" id="title17"></label>
+                            <ul class="" id="vinetas17">
+                            </ul>
+                        </div>
                     </div>
                     <div class="p-3">
                         <table class="table table-bordered table-striped" id="area_desinfeccion6">
@@ -1012,13 +998,41 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="subtitle">
+                        <label for="">Recepción de Material de Acondicionamiento</label>
+                    </div>
+                    <div class="alertas" id="alert_pesaje">
+                        <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <label class="" id="title18"></label>
+                            <ul class="" id="vinetas18">
+                            </ul>
+                        </div>
+                    </div>
+                   <!--  <div class="p-3">
+                        <table class="table table-bordered table-striped" id="area_desinfeccion6">
+                            <thead class="head centrado">
+                                <tr>
+                                    <td class="centrado">Referencia</td>
+                                    <td class="centrado">Dscripción</td>
+                                    <td class="centrado">Cantidad</td>
+                                </tr>
+                            </thead>
+                            <tbody>
 
+                            </tbody>
+                        </table>
+                    </div> -->
                     <div class="subtitle"><label for="">Equipos</label></div>
                     <div class="equipos">
                         <label for="">Banda Transportadora</label>
-                        <input type="text" class="form-control">
-                        <label for="">Loteadora Video Jet</label>
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" id="banda">
+                        <label for="">Etiqueadora</label>
+                        <input type="text" class="form-control" id="etiquetadora">
+                        <label for="">Tunel</label>
+                        <input type="text" class="form-control" id="tunel">
                     </div>
 
                     <div class="subtitle"><label for="">Condiciones del Medio</label></div>
@@ -1048,7 +1062,16 @@
                     </div>
 
                     <div class="subtitle"><label for="">Control de Proceso</label></div>
-
+                    <div class="alertas" id="alert_pesaje">
+                        <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <label class="" id="title19"></label>
+                            <ul class="" id="vinetas19">
+                            </ul>
+                        </div>
+                    </div>
                     <div class="p-3 proceso">
                         <label for="">Producto</label><input type="text" class="form-control">
                         <label for="">Lote</label><input type="text" class="form-control">
@@ -1093,7 +1116,7 @@
                         </table>
                     </div>
 
-                    <div class="subtitle"><label for="">Especificaciones Tecnicas</label></div>
+                   <!--  <div class="subtitle"><label for="">Especificaciones Tecnicas</label></div>
                     <div class="espec_tecnicas">
                         <label for="" class="centrado">Mínimo</label>
                         <input type="text" class="form-control centrado minimo">
@@ -1101,7 +1124,7 @@
                         <input type="text" class="form-control centrado medio">
                         <label for="" class="centrado">Máximo</label>
                         <input type="text" class="form-control centrado maximo">
-                    </div>
+                    </div> -->
 
                     <div class="subtitle"><label for="">Control de peso en el Proceso</label></div>
 
@@ -1109,7 +1132,12 @@
                         <table class="table table-bordered table-striped">
                             <thead class="head">
                                 <tr>
-                                    <th colspan="10" class="centrado">Resultados</th>
+                                    <th colspan="1" class="centrado">Muestra</th>
+                                    <th colspan="1" class="centrado">APARIENCIA ETIQUETA (Arrugas, quiebres, sucios, alineada,dherencia)</th>
+                                    <th colspan="1" class="centrado">APARIENCIA LOTE/ TERMOENCOGIBLE</th>
+                                    <th colspan="1" class="centrado">CUMPLIMIENTO CON LA UNIDAD DE EMPAQUE</th>
+                                    <th colspan="1" class="centrado">POSICIÓN DEL PRODUCTO DENTRO DE LA CAJA</th>
+                                    <th colspan="1" class="centrado">RÓTULO DE LA CAJA</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -1120,10 +1148,7 @@
                                     <th class="centrado">4</th>
                                     <th class="centrado">5</th>
                                     <th class="centrado">6</th>
-                                    <th class="centrado">7</th>
-                                    <th class="centrado">8</th>
-                                    <th class="centrado">9</th>
-                                    <th class="centrado">10</th>
+                                    
                                 </tr>
                                 <tr>
                                     <th class="centrado">1</th>
@@ -1132,10 +1157,7 @@
                                     <th class="centrado">4</th>
                                     <th class="centrado">5</th>
                                     <th class="centrado">6</th>
-                                    <th class="centrado">7</th>
-                                    <th class="centrado">8</th>
-                                    <th class="centrado">9</th>
-                                    <th class="centrado">10</th>
+                                    
                                 </tr>
                                 <tr>
                                     <th class="centrado">1</th>
@@ -1144,10 +1166,7 @@
                                     <th class="centrado">4</th>
                                     <th class="centrado">5</th>
                                     <th class="centrado">6</th>
-                                    <th class="centrado">7</th>
-                                    <th class="centrado">8</th>
-                                    <th class="centrado">9</th>
-                                    <th class="centrado">10</th>
+                                    
                                 </tr>
                                 <tr>
                                     <th class="centrado">1</th>
@@ -1156,10 +1175,7 @@
                                     <th class="centrado">4</th>
                                     <th class="centrado">5</th>
                                     <th class="centrado">6</th>
-                                    <th class="centrado">7</th>
-                                    <th class="centrado">8</th>
-                                    <th class="centrado">9</th>
-                                    <th class="centrado">10</th>
+                                   
                                 </tr>
                                 <tr>
                                     <th class="centrado">1</th>
@@ -1168,10 +1184,7 @@
                                     <th class="centrado">4</th>
                                     <th class="centrado">5</th>
                                     <th class="centrado">6</th>
-                                    <th class="centrado">7</th>
-                                    <th class="centrado">8</th>
-                                    <th class="centrado">9</th>
-                                    <th class="centrado">10</th>
+                                    
                                 </tr>
                                 <tr>
                                     <th class="centrado">1</th>
@@ -1180,10 +1193,7 @@
                                     <th class="centrado">4</th>
                                     <th class="centrado">5</th>
                                     <th class="centrado">6</th>
-                                    <th class="centrado">7</th>
-                                    <th class="centrado">8</th>
-                                    <th class="centrado">9</th>
-                                    <th class="centrado">10</th>
+                                    
                                 </tr>
                             </tbody>
                         </table>
