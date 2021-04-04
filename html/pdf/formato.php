@@ -103,7 +103,7 @@
         <div class="card-body">
 
             <div class="alertas" id="alert_pesaje">
-                <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+                <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -137,7 +137,7 @@
                 </table>
             </div>
             <div class="alertas" id="alert_pesaje">
-                <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+                <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -152,7 +152,7 @@
                 <label for="">3.2 Limpieza y Desinfección</label>
             </div>
             <div class="alertas" id="alert_pesaje">
-                <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+                <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -208,7 +208,7 @@
                 <label for="">3.4 Procedimiento de Pesaje</label>
             </div>
             <div class="alertas" id="alert_pesaje">
-                <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+                <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -223,7 +223,7 @@
                 <label for="">3.5 Devolucion de Materias primas por producto terminado</label>
             </div>
             <div class="alertas" id="alert_pesaje">
-                <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+                <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -279,7 +279,7 @@
                         <label for="">Limpieza y Desinfección</label>
                     </div>
                     <div class="alertas" id="alert_pesaje">
-                        <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+                        <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -419,7 +419,7 @@
 
                     <div class="subtitle"><label for="">Procedimiento de Preparación</label></div>
                     <div class="alertas" id="alert_pesaje">
-                        <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+                        <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -438,7 +438,7 @@
 
                     <div class="subtitle"><label for="">Control del Proceso</label></div>
                     <div class="alertas" id="alert_pesaje">
-                        <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+                        <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -510,7 +510,7 @@
                             </tbody>
                         </table>
                         <div class="alertas" id="alert_pesaje">
-                            <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+                            <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -541,7 +541,7 @@
                 </div>
                 <div class="subtitle"><label for="">Almacenamiento Granel</label></div>
                 <div class="alertas" id="alert_pesaje">
-                    <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+                    <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -573,7 +573,7 @@
                 <div class="alertas" id="alert_pesaje"></div>
                 <div class="card-body">
                     <div class="alertas" id="alert_pesaje">
-                        <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+                        <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -585,7 +585,7 @@
 
                     <div class="subtitle"><label for="">Limpieza y Desinfección</label></div>
                     <div class="alertas" id="alert_pesaje">
-                        <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+                        <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -638,7 +638,7 @@
 
                     <div class="subtitle"><label for="">Control del Proceso</label></div>
                     <div class="alertas" id="alert_pesaje">
-                        <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+                        <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -710,7 +710,7 @@
                         </table>
                     </div>
                     <div class="alertas" id="alert_pesaje">
-                        <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+                        <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -779,7 +779,7 @@
                 <div class="card-header centrado"><b>6. ENVASADO</b></div>
                 <div class="card-body">
                     <div class="alertas" id="alert_pesaje">
-                        <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+                        <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -809,7 +809,7 @@
 
                     <div class="subtitle"><label for="">6.2 Entrega Material Envase</label></div>
                     <div class="alertas" id="alert_pesaje">
-                        <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+                        <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -974,7 +974,7 @@
                         <label for="">Limpieza y Desinfección</label>
                     </div>
                     <div class="alertas" id="alert_pesaje">
-                        <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+                        <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -1002,7 +1002,7 @@
                         <label for="">Recepción de Material de Acondicionamiento</label>
                     </div>
                     <div class="alertas" id="alert_pesaje">
-                        <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+                        <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -1063,7 +1063,7 @@
 
                     <div class="subtitle"><label for="">Control de Proceso</label></div>
                     <div class="alertas" id="alert_pesaje">
-                        <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+                        <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>

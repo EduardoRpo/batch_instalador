@@ -219,13 +219,36 @@ function condiciones_medio() {
 function equipos() {
   $.get(`/api/equipos/${id}`, function (data, textStatus, jqXHR) {
     if (data.length == 0) return false;
-    $("#agitador").val(data[0].descripcion);
-    $("#marmita").val(data[1].descripcion);
-    $("#envasadora").val(data[2].descripcion);
-    $("#loteadora").val(data[3].descripcion);
-    $("#banda").val(data[4].descripcion);
-    $("#etiquetadora").val(data[5].descripcion);
-    $("#tunel").val(data[6].descripcion);
+    for (i = 0; i < data.length; i++) {
+      if (data[i].tipo === "agitador") {
+        $("#agitador").val(data[i].descripcion);
+        continue;
+      }
+      if (data[i].tipo === "marmita") {
+        $("#marmita").val(data[i].descripcion);
+        continue;
+      }
+      if (data[i].tipo === "envasadora") {
+        $("#envasadora").val(data[i].descripcion);
+        continue;
+      }
+      if (data[i].tipo === "loteadora") {
+        $("#loteadora").val(data[i].descripcion);
+        continue;
+      }
+      if (data[i].tipo === "banda") {
+        $("#banda").val(data[4].descripcion);
+        continue;
+      }
+      if (data[i].tipo === "etiquetadora") {
+        $("#etiquetadora").val(data[i].descripcion);
+        continue;
+      }
+      if (data[i].tipo === "tunel") {
+        $("#tunel").val(data[i].descripcion);
+        continue;
+      }
+    }
   });
 }
 
