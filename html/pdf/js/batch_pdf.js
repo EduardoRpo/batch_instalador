@@ -198,7 +198,7 @@ desinfectante = () => {
       }
     }
   );
-}
+};
 
 function condiciones_medio() {
   let data = { operacion: 6, idBatch };
@@ -303,47 +303,47 @@ function control_proceso() {
     //info = data;
     for (let i = 0; i < info.length; i++) {
       $(`.color${info[i].modulo}`).html(
-        info[0].color == 1
+        info[i].color == 1
           ? "Cumple"
-          : info[0].color == 2
+          : info[i].color == 2
           ? "No Cumple"
           : "No aplica"
       );
       $(`.olor${info[i].modulo}`).html(
-        info[0].olor == 1
+        info[i].olor == 1
           ? "Cumple"
-          : info[0].color == 2
+          : info[i].color == 2
           ? "No Cumple"
           : "No aplica"
       );
       $(`.apariencia${info[i].modulo}`).html(
-        info[0].apariencia == 1
+        info[i].apariencia == 1
           ? "Cumple"
-          : info[0].color == 2
+          : info[i].color == 2
           ? "No Cumple"
           : "No aplica"
       );
-      $(`.ph${info[i].modulo}`).html(info[0].ph);
-      $(`.viscosidad${info[i].modulo}`).html(info[0].viscosidad);
-      $(`.densidad${info[i].modulo}`).html(info[0].densidad);
+      $(`.ph${info[i].modulo}`).html(info[i].ph);
+      $(`.viscosidad${info[i].modulo}`).html(info[i].viscosidad);
+      $(`.densidad${info[i].modulo}`).html(info[i].densidad);
       $(`.untuosidad${info[i].modulo}`).html(
-        info[0].untuosidad == 1
+        info[i].untuosidad == 1
           ? "Cumple"
           : info[0].color == 2
           ? "No Cumple"
           : "No aplica"
       );
       $(`.espumoso${info[i].modulo}`).html(
-        info[0].espumoso == 1
+        info[i].espumoso == 1
           ? "Cumple"
-          : info[0].color == 2
+          : info[i].color == 2
           ? "No Cumple"
           : "No aplica"
       );
       $(`.alcohol${info[i].modulo}`).html(
-        info[0].alcohol == 1
+        info[i].alcohol == 1
           ? "Cumple"
-          : info[0].color == 2
+          : info[i].color == 2
           ? "No Cumple"
           : "No aplica"
       );
@@ -377,7 +377,7 @@ function entrega_material_envase() {
     type: "POST",
     data: { referencia: referencia },
   }).done((data, status, xhr) => {
-    if (!data) {
+    if (data != "") {
       info = JSON.parse(data);
       $(`.envase`).html(info[0].id_envase);
       $(`.descripcion_envase`).html(info[0].envase);
@@ -396,7 +396,7 @@ function entrega_material_envase() {
 
 /* Calcular peso minimo, maximo y promedio */
 
-identificarDensidad = (batch = "") => {
+identificarDensidad = () => {
   let densidadAprobada = 0;
   $.ajax({
     type: "POST",
@@ -458,15 +458,16 @@ obtenerMuestras = () => {
 
       let promedio = 0;
       let info = JSON.parse(response);
+      $("#cantidadMuestras1").val(info.length);
       j = 1;
 
-      $(`#muestrasEnvasado1`).append(`
+      /* $(`#muestrasEnvasado1`).append(`
         <thead class="head">
           <tr>
             <th colspan="${info.length}" class="centrado">Resultados</th>
           </tr>
         </thead>`);
-
+ */
       for (let i = 0; i < info.length; i++) {
         //if (i === 10) $(`#muestrasEnvasado1`).append(`<th></th>`);
         $(`#muestrasEnvasado1`).append(
@@ -508,7 +509,51 @@ material_envase_sobrante = () => {
   });
 };
 
-entrega_material_acondicionamiento = () => {};
+entrega_material_acondicionamiento = () => {
+  $.ajax({
+    type: "POST",
+    url: "../../html/php/muestras.php",
+    data: { operacion: 7, idBatch },
+    success: function (response) {
+      data = JSON.parse(response);
+      for (i = 0; i < data.length; i++) {
+        data.map(function (dato) {
+          if (dato.apariencia_etiquetas == 1) dato.apariencia_etiquetas = "Cumple";
+          if (dato.apariencia_etiquetas == 2) dato.apariencia_etiquetas = "No Cumple";
+          if (dato.apariencia_etiquetas == 3) dato.apariencia_etiquetas = "No aplica";
+
+          if (dato.apariencia_termoencogible == 1) dato.apariencia_termoencogible = "Cumple";
+          if (dato.apariencia_termoencogible == 2) dato.apariencia_termoencogible = "No Cumple";
+          if (dato.apariencia_termoencogible == 3) dato.apariencia_termoencogible = "No Aplica";
+
+          if (dato.cumplimiento_empaque == 1) dato.cumplimiento_empaque = "Cumple";
+          if (dato.cumplimiento_empaque == 2) dato.cumplimiento_empaque = "No Cumple";
+          if (dato.cumplimiento_empaque == 3) dato.cumplimiento_empaque = "No Aplica";
+
+          if (dato.posicion_producto == 1) dato.posicion_producto = "Cumple";
+          if (dato.posicion_producto == 2) dato.posicion_producto = "No Cumple";
+          if (dato.posicion_producto == 3) dato.posicion_producto = "No Aplica";
+
+          if (dato.rotulo_caja == 1) dato.rotulo_caja = "Cumple";
+          if (dato.rotulo_caja == 2) dato.rotulo_caja = "No Cumple";
+          if (dato.rotulo_caja == 3) dato.rotulo_caja = "No Aplica";
+          return dato;
+        });
+
+        $(`#muestrasAcondicionamiento1`).append(
+          `<tr>
+            <th class="centrado">${data[i].id}</th>
+            <th class="centrado">${data[i].apariencia_etiquetas}</th>
+            <th class="centrado">${data[i].apariencia_termoencogible}</th>
+            <th class="centrado">${data[i].cumplimiento_empaque}</th>
+            <th class="centrado">${data[i].posicion_producto}</th>
+            <th class="centrado">${data[i].rotulo_caja}</th>
+          </tr>`
+        );
+      }
+    },
+  });
+};
 
 $(document).ready(function () {
   idBatch = sessionStorage.getItem("id");
@@ -527,4 +572,5 @@ $(document).ready(function () {
   control_proceso();
   equipos();
   ajustes();
+  entrega_material_acondicionamiento();
 });

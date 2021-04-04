@@ -49,7 +49,7 @@
       ph.limite_inferior as limite_inferior_ph,
       ph.limite_superior as limite_superior_ph
       FROM producto
-      LEFT JOIN olor ON olor.id = producto.id_color
+      LEFT JOIN olor ON olor.id = producto.id_olor
       LEFT JOIN color ON color.id = producto.id_color
       LEFT JOIN apariencia ON apariencia.id = producto.id_apariencia
       LEFT JOIN ph ON ph.id = producto.id_ph

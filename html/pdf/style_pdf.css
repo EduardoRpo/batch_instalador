@@ -139,6 +139,15 @@ body {
   justify-items: center;
 }
 
+#muestrasEnvasado1 {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-column-gap: 1em;
+  grid-gap: 1em;
+  /* margin: 20px; */
+  text-align: center;
+}
+
 @media only screen and (max-width: 600px) {
   .proceso {
     display: block;

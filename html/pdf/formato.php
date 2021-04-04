@@ -694,7 +694,7 @@
                                 <tr>
                                     <td class="centrado">Untuosidad</td>
                                     <td class="centrado">Suave al tacto</td>
-                                    <td class="centrado untuosidad"></td>
+                                    <td class="centrado untuosidad4"></td>
                                 </tr>
                                 <tr>
                                     <td class="centrado">Poder Espumoso</td>
@@ -897,14 +897,19 @@
                     </div>
 
                     <div class="subtitle"><label for="">Control de peso en el Proceso</label></div>
-
+                    <div class="subtitle"><label for="">Resultados</label></div>
                     <div class="p-3">
-                        <table class="table table-bordered table-striped" id="muestrasEnvasado1">
-                            <tbody> </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped" id="muestrasEnvasado1">
+
+                            </table>
+                        </div>
+
                         <div>
-                            <label for="" class="mr-5">Promedio</label>
+                            <label>Promedio</label>
                             <input type="text" class="form-control centrado" id="promedioMuestras1" style="width: 10%; display:inline">
+                            <label class="ml-3">Cantidad de Muestras</label>
+                            <input type="text" class="form-control centrado" id="cantidadMuestras1" style="width: 10%; display:inline">
                         </div>
                     </div>
 
@@ -1011,20 +1016,6 @@
                             </ul>
                         </div>
                     </div>
-                    <!--  <div class="p-3">
-                        <table class="table table-bordered table-striped" id="area_desinfeccion6">
-                            <thead class="head centrado">
-                                <tr>
-                                    <td class="centrado">Referencia</td>
-                                    <td class="centrado">Dscripción</td>
-                                    <td class="centrado">Cantidad</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                            </tbody>
-                        </table>
-                    </div> -->
                     <div class="subtitle"><label for="">Equipos</label></div>
                     <div class="equipos">
                         <label for="">Banda Transportadora</label>
@@ -1116,20 +1107,10 @@
                         </table>
                     </div>
 
-                    <!--  <div class="subtitle"><label for="">Especificaciones Tecnicas</label></div>
-                    <div class="espec_tecnicas">
-                        <label for="" class="centrado">Mínimo</label>
-                        <input type="text" class="form-control centrado minimo">
-                        <label for="" class="centrado">Medio</label>
-                        <input type="text" class="form-control centrado medio">
-                        <label for="" class="centrado">Máximo</label>
-                        <input type="text" class="form-control centrado maximo">
-                    </div> -->
-
                     <div class="subtitle"><label for="">Control de peso en el Proceso</label></div>
 
                     <div class="p-3">
-                        <table class="table table-bordered table-striped">
+                        <table class="table table-bordered table-striped" id="muestrasAcondicionamiento1">
                             <thead class="head">
                                 <tr>
                                     <th colspan="1" class="centrado">Muestra</th>
@@ -1141,66 +1122,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th class="centrado">1</th>
-                                    <th class="centrado">2</th>
-                                    <th class="centrado">3</th>
-                                    <th class="centrado">4</th>
-                                    <th class="centrado">5</th>
-                                    <th class="centrado">6</th>
 
-                                </tr>
-                                <tr>
-                                    <th class="centrado">1</th>
-                                    <th class="centrado">2</th>
-                                    <th class="centrado">3</th>
-                                    <th class="centrado">4</th>
-                                    <th class="centrado">5</th>
-                                    <th class="centrado">6</th>
-
-                                </tr>
-                                <tr>
-                                    <th class="centrado">1</th>
-                                    <th class="centrado">2</th>
-                                    <th class="centrado">3</th>
-                                    <th class="centrado">4</th>
-                                    <th class="centrado">5</th>
-                                    <th class="centrado">6</th>
-
-                                </tr>
-                                <tr>
-                                    <th class="centrado">1</th>
-                                    <th class="centrado">2</th>
-                                    <th class="centrado">3</th>
-                                    <th class="centrado">4</th>
-                                    <th class="centrado">5</th>
-                                    <th class="centrado">6</th>
-
-                                </tr>
-                                <tr>
-                                    <th class="centrado">1</th>
-                                    <th class="centrado">2</th>
-                                    <th class="centrado">3</th>
-                                    <th class="centrado">4</th>
-                                    <th class="centrado">5</th>
-                                    <th class="centrado">6</th>
-
-                                </tr>
-                                <tr>
-                                    <th class="centrado">1</th>
-                                    <th class="centrado">2</th>
-                                    <th class="centrado">3</th>
-                                    <th class="centrado">4</th>
-                                    <th class="centrado">5</th>
-                                    <th class="centrado">6</th>
-
-                                </tr>
                             </tbody>
                         </table>
-                        <div>
-                            <label for="" class="mr-5">Promedio</label>
-                            <input type="text" class="form-control" style="width: 10%; display:inline">
-                        </div>
                     </div>
 
                     <div class="subtitle"><label for="">Devolución Material de Envase</label></div>
