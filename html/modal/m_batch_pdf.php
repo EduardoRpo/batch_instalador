@@ -16,7 +16,7 @@
                 <th>Orden</th>
                 <th>Lote</th>
                 <th>Tamaño</th>
-                <th>Producto</th>
+                <th>Referencia</th>
                 <th>Presentación</th>
                 <th>Unidad</th>
                 <th>F.Creación</th>
@@ -29,8 +29,6 @@
             </tbody>
           </table>
         </div>
-
-
       </div>
       <div class="modal-footer">
         <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button> -->

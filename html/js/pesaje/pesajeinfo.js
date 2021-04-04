@@ -199,6 +199,7 @@ function calcularxNoTanques() {
   }
 }
 
+
 /* imprimir etiquetas virtuales */
 
 $(document).ready(function () {

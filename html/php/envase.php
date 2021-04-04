@@ -14,6 +14,6 @@ if (!empty($_POST)) {
     $result = $query->execute(['referencia' => $referencia,]);
     $data = $query->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($data, JSON_UNESCAPED_UNICODE);
-    if (empty($data))
-        echo '3';
+/*     if (empty($data))
+        echo '3'; */
 }

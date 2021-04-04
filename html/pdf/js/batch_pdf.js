@@ -1,13 +1,21 @@
 let idBatch;
+let referencia;
 
 /* bloquear inputs */
 $("input").prop("readonly", true);
 
 /* Imprimir pdf */
+
 $(document).on("click", ".link-imprimir", function (e) {
   e.preventDefault();
-  //$(location).attr('href', "pdf.php");
-  $("#pdf").printThis({
+  window.print();
+  return false;
+});
+
+//$(document).on("click", ".link-imprimir", function (e) {
+//e.preventDefault();
+//$(location).attr('href', "pdf.php");
+/* $("#pdf").printThis({
     debug: false, // show the iframe for debugging
     importCSS: true, // import parent page css
     importStyle: false, // import style tags
@@ -29,7 +37,7 @@ $(document).on("click", ".link-imprimir", function (e) {
     beforePrint: null, // function called before iframe is filled
     afterPrint: null, // function called before iframe is removed
   });
-});
+}); */
 
 /* cerrar ventana */
 $(document).on("click", ".link-cerrar", function (e) {
@@ -66,11 +74,11 @@ cargar_Alertas = () => {
 info_General = () => {
   $.post(
     "../../html/php/c_batch_pdf.php",
-    (data = { operacion: 2, id }),
+    (data = { operacion: 2, idBatch }),
     function (data, textStatus, jqXHR) {
       if (data == "false") return false;
       let info = JSON.parse(data);
-      idBatch = id;
+
       $("#ref").html(info.referencia);
       $("#nref").html("<b>" + info.nombre_referencia + "</b>");
       $("#marca").html("<b>" + info.marca + "</b>");
@@ -84,18 +92,12 @@ info_General = () => {
       $("#tamanol").html("<b>" + info.tamano_lote + "</b>");
       $("#unidades").html("<b>" + info.unidad_lote + "</b>");
       $(".fecha").html("<b>" + info.fecha_creacion + "</b>");
-      especificaciones_producto();
-      entrega_material_envase();
-      obtenerMuestras();
-      identificarDensidad();
-      material_envase_sobrante();
-      area_desinfeccion();
     }
   );
 };
 
 parametros_Control = () => {
-  let data = { operacion: 3, id };
+  let data = { operacion: 3, idBatch };
 
   $.post(
     "../../html/php/c_batch_pdf.php",
@@ -125,7 +127,7 @@ parametros_Control = () => {
   );
 };
 
-function area_desinfeccion() {
+area_desinfeccion = () => {
   let data = { operacion: 4 };
 
   $.post(
@@ -148,10 +150,10 @@ function area_desinfeccion() {
     }
   );
   desinfectante();
-}
+};
 
-function desinfectante() {
-  let data = { operacion: 5, id };
+desinfectante = () => {
+  let data = { operacion: 5, idBatch };
 
   $.post(
     "../../html/php/c_batch_pdf.php",
@@ -199,7 +201,7 @@ function desinfectante() {
 }
 
 function condiciones_medio() {
-  let data = { operacion: 6, id };
+  let data = { operacion: 6, idBatch };
   $.post(
     "../../html/php/c_batch_pdf.php",
     data,
@@ -217,7 +219,7 @@ function condiciones_medio() {
 }
 
 function equipos() {
-  $.get(`/api/equipos/${id}`, function (data, textStatus, jqXHR) {
+  $.get(`/api/equipos/${idBatch}`, function (data, textStatus, jqXHR) {
     if (data.length == 0) return false;
     for (i = 0; i < data.length; i++) {
       if (data[i].tipo === "agitador") {
@@ -253,7 +255,7 @@ function equipos() {
 }
 
 function especificaciones_producto() {
-  referencia = $("#ref").html();
+  /* referencia = $("#ref").html(); */
   $.ajax({
     url: `/api/productsDetails/${referencia}`,
 
@@ -296,7 +298,7 @@ function especificaciones_producto() {
 }
 
 function control_proceso() {
-  $.get(`/api/controlproceso/${id}`, function (info, textStatus, jqXHR) {
+  $.get(`/api/controlproceso/${idBatch}`, function (info, textStatus, jqXHR) {
     if (info == "false") return false;
     //info = data;
     for (let i = 0; i < info.length; i++) {
@@ -349,25 +351,46 @@ function control_proceso() {
   });
 }
 
+ajustes = () => {
+  $.ajax({
+    url: "../../html/php/ajustes.php",
+    type: "POST",
+    data: idBatch,
+  }).done((data, status, xhr) => {
+    info = JSON.parse(data);
+    $(`#No3`).val("X");
+    $(`#No4`).val("X");
+
+    for (i = 0; i < info.length; i++) {
+      $(`#Si${info[i].modulo}`).val("X");
+      $(`#No${info[i].modulo}`).val("");
+      $(`#materiaPrimaAjustes${info[i].modulo}`).val(info[i].materia_prima);
+      $(`#procedimientoAjustes${info[i].modulo}`).val(info[i].procedimiento);
+    }
+  });
+};
+
 function entrega_material_envase() {
-  referencia = $("#ref").html();
+  /* referencia = $("#ref").html(); */
   $.ajax({
     url: "../../html/php/envase.php",
     type: "POST",
-    data: { referencia },
+    data: { referencia: referencia },
   }).done((data, status, xhr) => {
-    info = JSON.parse(data);
-    $(`.envase`).html(info[0].id_envase);
-    $(`.descripcion_envase`).html(info[0].envase);
+    if (!data) {
+      info = JSON.parse(data);
+      $(`.envase`).html(info[0].id_envase);
+      $(`.descripcion_envase`).html(info[0].envase);
 
-    $(`.tapa`).html(info[0].id_tapa);
-    $(`.descripcion_tapa`).html(info[0].tapa);
+      $(`.tapa`).html(info[0].id_tapa);
+      $(`.descripcion_tapa`).html(info[0].tapa);
 
-    $(`.etiqueta`).html(info[0].id_etiqueta);
-    $(`.descripcion_etiqueta`).html(info[0].etiqueta);
+      $(`.etiqueta`).html(info[0].id_etiqueta);
+      $(`.descripcion_etiqueta`).html(info[0].etiqueta);
 
-    $(`.unidades`).html(unidades);
-    //$(`.unidadese`).html(empaqueEnvasado);
+      $(`.unidades`).html(unidades);
+      //$(`.unidadese`).html(empaqueEnvasado);
+    }
   });
 }
 
@@ -375,7 +398,6 @@ function entrega_material_envase() {
 
 identificarDensidad = (batch = "") => {
   let densidadAprobada = 0;
-  idBatch = id;
   $.ajax({
     type: "POST",
     url: "../../html/php/controlProceso.php",
@@ -426,7 +448,6 @@ function getNumbersInString(string) {
 /* Obtener muestras */
 
 obtenerMuestras = () => {
-  idBatch = id;
   $.ajax({
     type: "POST",
     url: "../../html/php/muestras.php",
@@ -490,14 +511,20 @@ material_envase_sobrante = () => {
 entrega_material_acondicionamiento = () => {};
 
 $(document).ready(function () {
-  id = sessionStorage.getItem("id");
+  idBatch = sessionStorage.getItem("id");
+  referencia = sessionStorage.getItem("referencia");
 
   cargar_Alertas();
   info_General();
   parametros_Control();
-  /* area_desinfeccion(); */
-  //desinfectante();
+  especificaciones_producto();
+  entrega_material_envase();
+  obtenerMuestras();
+  identificarDensidad();
+  material_envase_sobrante();
+  area_desinfeccion();
   condiciones_medio();
   control_proceso();
   equipos();
+  ajustes();
 });

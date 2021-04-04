@@ -525,15 +525,15 @@
                     <div class="ajustes">
                         <div class="resp">
                             <label for="">Si</label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control centrado" id="Si3">
                             <label for="">No</label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control centrado" id="No3">
                         </div>
                         <div class="obs mb-5">
                             <label for="">Materia(s) primas para adicionar </label>
-                            <input type="textarea" class="form-control">
+                            <input type="textarea" class="form-control" id="materiaPrimaAjustes3">
                             <label for="">Procedimiento de Ajuste</label>
-                            <input type="textarea" class="form-control">
+                            <input type="textarea" class="form-control" id="procedimientoAjustes3">
                         </div>
 
                     </div>
@@ -723,15 +723,15 @@
                     <div class="ajustes">
                         <div class="resp">
                             <label for="">Si</label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control centrado" id="Si4">
                             <label for="">No</label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control centrado" id="No4">
                         </div>
                         <div class="obs mb-5">
                             <label for="">Materia(s) primas para adicionar </label>
-                            <input type="textarea" class="form-control">
+                            <input type="textarea" class="form-control" id="materiaPrimaAjustes4">
                             <label for="">Procedimiento de Ajuste</label>
-                            <input type="textarea" class="form-control">
+                            <input type="textarea" class="form-control" id="procedimientoAjustes4">
                         </div>
 
                     </div>
@@ -1011,7 +1011,7 @@
                             </ul>
                         </div>
                     </div>
-                   <!--  <div class="p-3">
+                    <!--  <div class="p-3">
                         <table class="table table-bordered table-striped" id="area_desinfeccion6">
                             <thead class="head centrado">
                                 <tr>
@@ -1116,7 +1116,7 @@
                         </table>
                     </div>
 
-                   <!--  <div class="subtitle"><label for="">Especificaciones Tecnicas</label></div>
+                    <!--  <div class="subtitle"><label for="">Especificaciones Tecnicas</label></div>
                     <div class="espec_tecnicas">
                         <label for="" class="centrado">Mínimo</label>
                         <input type="text" class="form-control centrado minimo">
@@ -1148,7 +1148,7 @@
                                     <th class="centrado">4</th>
                                     <th class="centrado">5</th>
                                     <th class="centrado">6</th>
-                                    
+
                                 </tr>
                                 <tr>
                                     <th class="centrado">1</th>
@@ -1157,7 +1157,7 @@
                                     <th class="centrado">4</th>
                                     <th class="centrado">5</th>
                                     <th class="centrado">6</th>
-                                    
+
                                 </tr>
                                 <tr>
                                     <th class="centrado">1</th>
@@ -1166,7 +1166,7 @@
                                     <th class="centrado">4</th>
                                     <th class="centrado">5</th>
                                     <th class="centrado">6</th>
-                                    
+
                                 </tr>
                                 <tr>
                                     <th class="centrado">1</th>
@@ -1175,7 +1175,7 @@
                                     <th class="centrado">4</th>
                                     <th class="centrado">5</th>
                                     <th class="centrado">6</th>
-                                   
+
                                 </tr>
                                 <tr>
                                     <th class="centrado">1</th>
@@ -1184,7 +1184,7 @@
                                     <th class="centrado">4</th>
                                     <th class="centrado">5</th>
                                     <th class="centrado">6</th>
-                                    
+
                                 </tr>
                                 <tr>
                                     <th class="centrado">1</th>
@@ -1193,7 +1193,7 @@
                                     <th class="centrado">4</th>
                                     <th class="centrado">5</th>
                                     <th class="centrado">6</th>
-                                    
+
                                 </tr>
                             </tbody>
                         </table>

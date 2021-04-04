@@ -17,44 +17,32 @@ if (!empty($_POST)) {
     case 2: //Eliminar
       $id = $_POST['id'];
 
-      $sql = "DELETE FROM preguntas WHERE pregunta = :id";
-      ejecutarEliminar($conn, $sql, $id);
+      $sql = "DELETE FROM preguntas WHERE id = :id";
+      $query = $conn->prepare($sql);
+      $query->execute(['id' => $id]);
       break;
 
     case 3: // Guardar y actualizar data
-      $editar = $_POST['editar'];
+
+      $id = $_POST['id'];
       $pregunta = ucfirst(mb_strtolower($_POST['pregunta'], "UTF-8"));
 
-      if ($editar == 0) {
-        $sql = "SELECT * FROM preguntas WHERE pregunta = :pregunta";
-        $query = $conn->prepare($sql);
-        $query->execute(['pregunta' => $pregunta]);
-        $rows = $query->rowCount();
+      $sql = "SELECT * FROM preguntas WHERE id = :id";
+      $query = $conn->prepare($sql);
+      $query->execute(['id' => $id]);
+      $rows = $query->rowCount();
 
-        if ($rows > 0) {
-          echo '2';
-          exit();
-        } else {
-          $sql = "INSERT INTO preguntas (pregunta) VALUES(:pregunta)";
-          $query = $conn->prepare($sql);
-          $result = $query->execute(['pregunta' => $pregunta]);
-          ejecutarQuery($result, $conn);
-        }
+      if ($rows > 0) {
+        $sql = "UPDATE preguntas SET pregunta = :pregunta WHERE id = :id";
+        $query = $conn->prepare($sql);
+        $result = $query->execute(['pregunta' => $pregunta, 'id' => $id]);
+        if ($result) echo '3';
       } else {
-        $id = $_POST['id'];
-        $sql = "UPDATE preguntas SET pregunta = :pregunta WHERE pregunta = :id";
+        $sql = "INSERT INTO preguntas (pregunta) VALUES(:pregunta)";
         $query = $conn->prepare($sql);
-        $result = $query->execute([
-          'pregunta' => $pregunta,
-          'id' => $id
-        ]);
-
-        if ($result) {
-          echo '3';
-          exit();
-        }
+        $result = $query->execute(['pregunta' => $pregunta]);
+        if ($result) echo '1';
       }
-
       break;
   }
 }

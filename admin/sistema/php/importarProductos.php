@@ -48,17 +48,12 @@ if ($tabla == 'producto') {
 	$col = 3;
 
 	for ($t = 0; $t < sizeof($array); $t++) {
-		/* if ($array[$t] == 'presentacion_comercial') {
-			$col++;
-		} */
-		/* if ($array[$t] != 'presentacion_comercial') { */
 		$sql = "SELECT * FROM $array[$t]";
 		$query = $conn->prepare($sql);
 		$query->execute();
 		$propiedad_producto = $query->fetchAll($conn::FETCH_ASSOC);
 		findNombre($dataList, $propiedad_producto, $col, $array[$t]);
 		$col++;
-		/* } */
 	}
 
 	if ($e > 0) {
