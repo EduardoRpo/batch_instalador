@@ -736,17 +736,17 @@
 
                     </div>
                     <div class="subtitle"><label for="">Cierre</label></div>
-                    <div class="firmas" id="firmas5">
+                    <div class="firmas" id="firmas4">
                         <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
-                        <label id="fecha5" style="font-weight:bold; justify-self: baseline"></label>
+                        <label id="fecha4" style="font-weight:bold; justify-self: baseline"></label>
 
-                        <div id="blank_rea5"></div>
-                        <img id="f_realizo5" src="" alt="firma_usuario" height="130">
-                        <div id="blank_ver5"></div>
-                        <img id="f_verifico5" src="" alt="firma_usuario" height="130">
+                        <div id="blank_rea4"></div>
+                        <img id="f_realizo4" src="" alt="firma_usuario" height="130">
+                        <div id="blank_ver4"></div>
+                        <img id="f_verifico4" src="" alt="firma_usuario" height="130">
 
-                        <label id="user_realizo5"></label>
-                        <label id="user_verifico5"></label>
+                        <label id="user_realizo4"></label>
+                        <label id="user_verifico4"></label>
                     </div>
                 </div>
             </div>

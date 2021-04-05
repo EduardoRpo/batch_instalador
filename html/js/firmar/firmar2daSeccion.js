@@ -76,7 +76,7 @@ function firmar2daSeccion(firma) {
 function firmarSeccionCierreProceso(firma) {
   let orden = localStorage.getItem("orden");
   let tamano_lote = localStorage.getItem("tamano_lote");
-
+  
   //confirmación de incidencias
 
   var confirm = alertify
