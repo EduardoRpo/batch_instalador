@@ -357,7 +357,7 @@ $(document).on("click", ".link-borrar", function (e) {
 
 /* Actualizar tabla */
 
-function refreshTable(tabla) {
+function refreshTable() {
   $("#tblFormulas").DataTable().clear();
   $("#tblFormulas").DataTable().ajax.reload();
   $("#tbl_formulas_f").DataTable().clear();

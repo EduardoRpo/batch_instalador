@@ -379,16 +379,16 @@ function entrega_material_envase() {
   }).done((data, status, xhr) => {
     if (data != "") {
       info = JSON.parse(data);
-      $(`.envase`).html(info[0].id_envase);
-      $(`.descripcion_envase`).html(info[0].envase);
+      $(`.envase1`).html(info[0].id_envase);
+      $(`.descripcion_envase1`).html(info[0].envase);
 
-      $(`.tapa`).html(info[0].id_tapa);
-      $(`.descripcion_tapa`).html(info[0].tapa);
+      $(`.tapa1`).html(info[0].id_tapa);
+      $(`.descripcion_tapa1`).html(info[0].tapa);
 
-      $(`.etiqueta`).html(info[0].id_etiqueta);
-      $(`.descripcion_etiqueta`).html(info[0].etiqueta);
+      $(`.etiqueta1`).html(info[0].id_etiqueta);
+      $(`.descripcion_etiqueta1`).html(info[0].etiqueta);
 
-      $(`.unidades`).html(unidades);
+      $(`.unidades1`).html(unidades);
       //$(`.unidadese`).html(empaqueEnvasado);
     }
   });
@@ -492,9 +492,13 @@ material_envase_sobrante = () => {
 
     success: function (response) {
       let info = JSON.parse(response);
+
       info.forEach((item) => {
         if (item.modulo == 5) {
-          $(`#devolucionMaterialSorbrante`).append(`
+          
+          
+          
+          /* $(`#devolucionMaterialSorbrante`).append(`
             <tr>
               <td class="centrado">${item.ref_material}</td>
               <td></td>
@@ -502,14 +506,14 @@ material_envase_sobrante = () => {
               <td class="der">${item.envasada}</td>
               <td class="der">${item.averias}</td>
               <td class="der">${item.sobrante}</td>
-            </tr>`);
+            </tr>`); */
         }
       });
     },
   });
 };
 
-entrega_material_acondicionamiento = () => {
+muestras_acondicionamiento = () => {
   $.ajax({
     type: "POST",
     url: "../../html/php/muestras.php",
@@ -518,17 +522,26 @@ entrega_material_acondicionamiento = () => {
       data = JSON.parse(response);
       for (i = 0; i < data.length; i++) {
         data.map(function (dato) {
-          if (dato.apariencia_etiquetas == 1) dato.apariencia_etiquetas = "Cumple";
-          if (dato.apariencia_etiquetas == 2) dato.apariencia_etiquetas = "No Cumple";
-          if (dato.apariencia_etiquetas == 3) dato.apariencia_etiquetas = "No aplica";
+          if (dato.apariencia_etiquetas == 1)
+            dato.apariencia_etiquetas = "Cumple";
+          if (dato.apariencia_etiquetas == 2)
+            dato.apariencia_etiquetas = "No Cumple";
+          if (dato.apariencia_etiquetas == 3)
+            dato.apariencia_etiquetas = "No aplica";
 
-          if (dato.apariencia_termoencogible == 1) dato.apariencia_termoencogible = "Cumple";
-          if (dato.apariencia_termoencogible == 2) dato.apariencia_termoencogible = "No Cumple";
-          if (dato.apariencia_termoencogible == 3) dato.apariencia_termoencogible = "No Aplica";
+          if (dato.apariencia_termoencogible == 1)
+            dato.apariencia_termoencogible = "Cumple";
+          if (dato.apariencia_termoencogible == 2)
+            dato.apariencia_termoencogible = "No Cumple";
+          if (dato.apariencia_termoencogible == 3)
+            dato.apariencia_termoencogible = "No Aplica";
 
-          if (dato.cumplimiento_empaque == 1) dato.cumplimiento_empaque = "Cumple";
-          if (dato.cumplimiento_empaque == 2) dato.cumplimiento_empaque = "No Cumple";
-          if (dato.cumplimiento_empaque == 3) dato.cumplimiento_empaque = "No Aplica";
+          if (dato.cumplimiento_empaque == 1)
+            dato.cumplimiento_empaque = "Cumple";
+          if (dato.cumplimiento_empaque == 2)
+            dato.cumplimiento_empaque = "No Cumple";
+          if (dato.cumplimiento_empaque == 3)
+            dato.cumplimiento_empaque = "No Aplica";
 
           if (dato.posicion_producto == 1) dato.posicion_producto = "Cumple";
           if (dato.posicion_producto == 2) dato.posicion_producto = "No Cumple";
@@ -554,6 +567,18 @@ entrega_material_acondicionamiento = () => {
     },
   });
 };
+entrega_material_acondicionamiento = () => {};
+devolucion_empaque_acondicionamiento = () => {
+  $.ajax({
+    type: "POST",
+    url: "../../html/php/envasado.php",
+    data: { operacion: 8, idBatch },
+
+    success: function (response) {
+      let info = JSON.parse(response);
+    },
+  });
+};
 
 $(document).ready(function () {
   idBatch = sessionStorage.getItem("id");
@@ -572,5 +597,7 @@ $(document).ready(function () {
   control_proceso();
   equipos();
   ajustes();
+  muestras_acondicionamiento();
   entrega_material_acondicionamiento();
+  devolucion_empaque_acondicionamiento();
 });

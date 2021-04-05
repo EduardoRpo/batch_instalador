@@ -831,21 +831,21 @@
                             <tbody>
                                 <tr>
                                     <td class="centrado">21/05/2020</td>
-                                    <td class="envase centrado"></td>
-                                    <td class="descripcion_envase centrado"></td>
-                                    <td class="unidades centrado"></td>
+                                    <td class="envase1 centrado"></td>
+                                    <td class="descripcion_envase1 centrado"></td>
+                                    <td class="unidades1 centrado"></td>
                                 </tr>
                                 <tr>
                                     <td class="centrado">21/05/2020</td>
-                                    <td class="tapa centrado"></td>
-                                    <td class="descripcion_tapa centrado"></td>
-                                    <td class="unidades centrado"></td>
+                                    <td class="tapa1 centrado"></td>
+                                    <td class="descripcion_tapa1 centrado"></td>
+                                    <td class="unidades1 centrado"></td>
                                 </tr>
                                 <tr>
                                     <td class="centrado">21/05/2020</td>
-                                    <td class="etiqueta centrado"></td>
-                                    <td class="descripcion_etiqueta centrado"></td>
-                                    <td class="unidades centrado"></td>
+                                    <td class="etiqueta1 centrado"></td>
+                                    <td class="descripcion_etiqueta1 centrado"></td>
+                                    <td class="unidades1 centrado"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -916,7 +916,7 @@
                     <div class="subtitle"><label for="">Devolución Material de Envase Sobrante</label></div>
                     <div class="alertas" id="alert_pesaje"></div>
                     <div class="table-responsive p-3">
-                        <table class="table table-bordered table-striped" id="devolucionMaterialSorbrante">
+                        <table class="table table-bordered table-striped" id="devolucionMaterialSobrante1">
                             <thead class="head centrado">
                                 <tr>
                                     <td class="centrado">Referencia</td>
@@ -928,7 +928,30 @@
                                 </tr>
                             </thead>
                             <tbody>
-
+                                <tr>
+                                    <td id="envase1" class="envase1 refEmpaque1"></td>
+                                    <td id="descripcion_envase1" class="descripcion_envase1"></td>
+                                    <td id="unidades1" class="centrado unidades1"></td>
+                                    <td id="txtEnvasada1" class="centrado txtEnvasada1"></td>
+                                    <td id="averiasEnvase1" class="centrado"></td>
+                                    <td id="sobranteEnvase1" class="centrado"></td>
+                                </tr>
+                                <tr>
+                                    <td id="tapa1" class="tapa1 refEmpaque1"></td>
+                                    <td id="descripcion_tapa1" class="descripcion_tapa1"></td>
+                                    <td id="unidades1" class="centrado unidades1"></td>
+                                    <td id="txtEnvasada1" class="centrado envasada1"></td>
+                                    <td id="averiasTapa1" class="centrado"></td>
+                                    <td id="sobranteTapa1" class="centrado"></td>
+                                </tr>
+                                <tr>
+                                    <td id="etiqueta1" class="etiqueta1 refEmpaque1"></td>
+                                    <td id="descripcion_etiqueta1" class="descripcion_etiqueta1"></td>
+                                    <td id="unidades1" class="centrado unidades1"></td>
+                                    <td id="txtEnvasada3" class="centrado envasada1"></td>
+                                    <td id="averiasEtiqueta1" class="centrado"></td>
+                                    <td id="sobranteEtiqueta1" class="centrado"></td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -1086,22 +1109,16 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>21/05/2020</td>
-                                    <td class="envase"></td>
-                                    <td class="descripcion_envase"></td>
-                                    <td class="unidades"></td>
+                                    <td id="fecha1" class="centrado empaque1"></td>
+                                    <td id="empaque1" class="centrado empaque1"></td>
+                                    <td id="descripcion_empaque1" class="descripcion_empaque1"></td>
+                                    <td id="unidades1e" class="centrado unidades1e"></td>
                                 </tr>
                                 <tr>
-                                    <td>21/05/2020</td>
-                                    <td class="tapa"></td>
-                                    <td class="descripcion_tapa"></td>
-                                    <td class="unidades"></td>
-                                </tr>
-                                <tr>
-                                    <td>21/05/2020</td>
-                                    <td class="etiquetas"></td>
-                                    <td class="descripcion_etiquetas"></td>
-                                    <td class="unidades"></td>
+                                    <td id="fecha1" class="centrado empaque1"></td>
+                                    <td id="otros1" class="centrado otros1"></td>
+                                    <td id="descripcion_otros1" class="descripcion_otros1"></td>
+                                    <td id="unidades4" class="centrado unidades1"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -1134,41 +1151,47 @@
                                 <tr>
                                     <td class="centrado">Referencia</td>
                                     <td class="centrado">Descripción</td>
-                                    <td class="centrado">Cantidad</td>
-                                    <td class="centrado">Envasada</td>
+                                    <td class="centrado">Recibida</td>
+                                    <td class="centrado">Utilizadas</td>
                                     <td class="centrado">Averias</td>
                                     <td class="centrado">Sobrante</td>
+                                    <td class="centrado">Total</td>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="centrado">50006</td>
-                                    <td>envase bala x 120 ml</td>
-                                    <td class="der">1.270</td>
-                                    <td class="der">1.270</td>
-                                    <td class="der">0</td>
-                                    <td class="der">0</td>
+                                    <td id="refempaque1" class="empaque1"></td>
+                                    <td id="descripcion_empaque1" class="descripcion_empaque1"></td>
+                                    <td id="unidades2e" class="centrado unidades1e"></td>
+                                    <td id="utilizada_empaque1" class="centrado envasada1e" style="width: 110px;"></td>
+                                    <td id="averias_empaque1" class="centrado" style="width: 110px;"></td>
+                                    <td id="sobrante_empaque1" class="centrado" style="width: 110px;"></td>
+                                    <td id="totalDevolucion_empaque1" class="centrado"></td>
                                 </tr>
                                 <tr>
-                                    <td class="centrado">50039</td>
-                                    <td>tapa flip-top 18/415 traslucido</td>
-                                    <td class="der">1.270</td>
-                                    <td class="der">1.270</td>
-                                    <td class="der">0</td>
-                                    <td class="der">0</td>
-                                </tr>
-                                <tr>
-                                    <td class="centrado">50081</td>
-                                    <td>etiqueta - 20781-1 - te capilar anticaida - isabely (120 ml) - usa</td>
-                                    <td class="der">1.270</td>
-                                    <td class="der">1.270</td>
-                                    <td class="der">0</td>
-                                    <td class="der">0</td>
+                                    <td id="refempaque2" class="otros1"></td>
+                                    <td id="descripcion_otros1" class="descripcion_otros1"></td>
+                                    <td id="unidades8" class="centrado unidades1"></td>
+                                    <td id="utilizada_otros1" class="centrado envasada1e" style="width: 110px;"></td>
+                                    <td id="averias_otros1" class="centrado" style="width: 110px;"></td>
+                                    <td id="sobrante_otros1" class="centrado" style="width: 110px;"></td>
+                                    <td id="totalDevolucion_otros1" class="centrado"></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-
+                    <div class="subtitle"><label>Conciliacion de rendimiento</label></div>
+                    <div class="subtitle"><label>Almacen Despachos</label></div>
+                    <div class="alertas" id="alert_pesaje">
+                        <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <label class="" id="title20"></label>
+                            <ul class="" id="vinetas20">
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- fin acondicionamiento -->

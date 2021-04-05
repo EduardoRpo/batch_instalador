@@ -86,7 +86,7 @@ if (!empty($_POST)) {
             $sql = "SELECT fecha, temperatura, humedad, id_modulo as modulo FROM batch_condicionesmedio WHERE id_batch = :id";
             $query = $conn->prepare($sql);
             $query->execute(['id' => $id]);
-            $data = $query->fetch(PDO::FETCH_ASSOC);
+            $data = $query->fetchAll(PDO::FETCH_ASSOC);
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
 
             break;

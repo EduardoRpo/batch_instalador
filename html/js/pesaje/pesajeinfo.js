@@ -159,9 +159,18 @@ $(document).ready(function () {
 
 /* Seleccion multiple */
 
-$("#tablePesaje tbody").on("click", "tr", function () {
+//table = $("#tablePesaje").DataTable();
+/* $("#tablePesaje tbody").on("click", "tr", function () {
   $(this).toggleClass("selected");
-});
+}); */
+
+/* $("#tablePesaje").on("click", "tr", function () { */
+  $("#tablePesaje").click(function (e) { 
+    e.preventDefault();
+    $(this).toggleClass("selected");
+    /* $(this).addClass("tr_hover"); */
+  });
+/* }); */
 
 Date.prototype.toDateInputValue = function () {
   var local = new Date(this);
@@ -198,7 +207,6 @@ function calcularxNoTanques() {
     return false;
   }
 }
-
 
 /* imprimir etiquetas virtuales */
 

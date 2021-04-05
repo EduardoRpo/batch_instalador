@@ -8744,7 +8744,7 @@ form p:last-child {
   height: 25px;
   line-height: 25px;
   font-size: 1rem;
- /*  -webkit-user-select: none; */
+  /*  -webkit-user-select: none; */
   /* webkit (safari, chrome) browsers */
   /* -moz-user-select: none; */
   /* mozilla browsers */
@@ -8946,10 +8946,10 @@ form p:last-child {
    ========================================================================== */
 /* .switch,
 .switch * { */
-  /* -webkit-user-select: none; */
-  /* -moz-user-select: none; */
-  /* -khtml-user-select: none; */
-  /* -ms-user-select: none; */
+/* -webkit-user-select: none; */
+/* -moz-user-select: none; */
+/* -khtml-user-select: none; */
+/* -ms-user-select: none; */
 /* } */
 
 .switch label {
@@ -11128,6 +11128,11 @@ table.dataTable tbody td {
   outline: none;
   border: none;
   padding: 5px 2px;
+}
+
+.tr_hover {
+  background-color: #1853c0;
+  color: white;
 }
 
 @media screen and (max-width: 660px) {

@@ -198,5 +198,16 @@ if (!empty($_POST)) {
             $data = $query->fetchAll(PDO::FETCH_ASSOC);
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
             break;
+
+        case 8: // Obtener material sobrante y firmas
+
+            $sql = "SELECT bms.id, bms.ref_material, bms.envasada, bms.averias, bms.sobrante, bms.ref_producto, bms.batch, bms.modulo, u.urlfirma as realizo 
+                        FROM batch_material_sobrante bms INNER JOIN usuario u ON u.id = bms.realizo
+                        WHERE batch = :batch";
+            $query = $conn->prepare($sql);
+            $result = $query->execute(['batch' => $batch]);
+            $data = $query->fetchAll(PDO::FETCH_ASSOC);
+            echo json_encode($data, JSON_UNESCAPED_UNICODE);
+            break;
     }
 }
