@@ -11,18 +11,17 @@ if (!empty($_POST)) {
       $id_modulo = intval($_POST['modulo']);
       $batch =  $_POST['idBatch'];
 
-      $sql = "SELECT realizo FROM batch_firmas2seccion WHERE modulo = :modulo AND batch = :batch";
+      $sql = "SELECT * FROM batch_condicionesmedio WHERE id_batch = :batch AND id_modulo = :modulo";
       $query = $conn->prepare($sql);
-      $query->execute([
-        'batch' => $batch,
-        'modulo' => $id_modulo,
-      ]);
-
+      $query->execute(['batch' => $batch, 'modulo' => $id_modulo]);
       $rows = $query->rowCount();
 
       if ($rows == 0) {
-        $query = "SELECT t_min, t_max FROM condicionesmedio_tiempo WHERE id_modulo = $id_modulo";
-        ejecutarQuerySelect($conn, $query);
+        $sql = "SELECT t_min, t_max FROM condicionesmedio_tiempo WHERE id_modulo = :modulo";
+        $query = $conn->prepare($sql);
+        $query->execute(['modulo' => $id_modulo]);
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
       } else
         echo '3';
 

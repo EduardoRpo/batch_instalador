@@ -4,18 +4,17 @@ function cargar_condiciones_medio() {
   $.ajax({
     type: "POST",
     url: "../../html/php/condicionesmedio.php",
-    data: { operacion: "1", modulo: proceso, idBatch },
+    data: { operacion: "1", modulo, idBatch },
 
     success: function (resp) {
       if (resp == 3) return false;
 
       let t = JSON.parse(resp);
 
-      /* Calculo del tiempo para aparecer la ventana para ingresar las condiciones del medio */
+      /* Calculo del tiempo para mostrar el modal condiciones del medio */
 
       let tiempo = Math.round(
-        Math.random() * (t.data[0].t_max - t.data[0].t_min) +
-          parseInt(t.data[0].t_min)
+        Math.random() * (t[0].t_max - t[0].t_min) + parseInt(t[0].t_min)
       );
 
       setTimeout(function () {
