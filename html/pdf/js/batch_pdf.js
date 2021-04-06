@@ -90,7 +90,8 @@ info_General = () => {
       $(".fecha").html("<b>" + info.fecha_creacion + "</b>");
       $("#tamanolt").html("<b>" + info.tamano_lote + "</b>");
       $("#tamanol").html("<b>" + info.tamano_lote + "</b>");
-      $("#unidades").html("<b>" + info.unidad_lote + "</b>");
+      $("#unidadesLote").html("<b>" + info.unidad_lote + "</b>");
+      $(".unidades1").html("<b>" + info.unidad_lote + "</b>");
       $(".fecha").html("<b>" + info.fecha_creacion + "</b>");
     }
   );
@@ -387,9 +388,6 @@ function entrega_material_envase() {
 
       $(`.etiqueta1`).html(info[0].id_etiqueta);
       $(`.descripcion_etiqueta1`).html(info[0].etiqueta);
-
-      $(`.unidades1`).html(unidades);
-      //$(`.unidadese`).html(empaqueEnvasado);
     }
   });
 }
@@ -455,28 +453,16 @@ obtenerMuestras = () => {
 
     success: function (response) {
       if (response == 3) return false;
-
       let promedio = 0;
       let info = JSON.parse(response);
       $("#cantidadMuestras1").val(info.length);
-      j = 1;
 
-      /* $(`#muestrasEnvasado1`).append(`
-        <thead class="head">
-          <tr>
-            <th colspan="${info.length}" class="centrado">Resultados</th>
-          </tr>
-        </thead>`);
- */
       for (let i = 0; i < info.length; i++) {
-        //if (i === 10) $(`#muestrasEnvasado1`).append(`<th></th>`);
         $(`#muestrasEnvasado1`).append(
           `<td class="centrado">${info[i].muestra}</td>`
         );
 
-        //$(`#txtMuestra${j}`).val(info[i].muestra);
         promedio = promedio + info[i].muestra;
-        j++;
       }
       promedio = promedio / info.length;
       $(`#promedioMuestras1`).val(promedio);
@@ -493,22 +479,17 @@ material_envase_sobrante = () => {
     success: function (response) {
       let info = JSON.parse(response);
 
-      info.forEach((item) => {
-        if (item.modulo == 5) {
-          
-          
-          
-          /* $(`#devolucionMaterialSorbrante`).append(`
-            <tr>
-              <td class="centrado">${item.ref_material}</td>
-              <td></td>
-              <td class="der">${item.envasada}</td>
-              <td class="der">${item.envasada}</td>
-              <td class="der">${item.averias}</td>
-              <td class="der">${item.sobrante}</td>
-            </tr>`); */
-        }
-      });
+      $("#usadaEnvase1").html(info[0].envasada);
+      $("#averiasEnvase1").html(info[0].averias);
+      $("#sobranteEnvase1").html(info[0].sobrante);
+
+      $("#usadaTapa1").html(info[1].envasada);
+      $("#averiasTapa1").html(info[1].averias);
+      $("#sobranteTapa1").html(info[1].sobrante);
+
+      $("#usadaEtiqueta1").html(info[2].envasada);
+      $("#averiasEtiqueta1").html(info[2].averias);
+      $("#sobranteEtiqueta1").html(info[2].sobrante);
     },
   });
 };

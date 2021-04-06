@@ -5,6 +5,7 @@ include('modal/modal_cambiarContrasena.php');
 include('modal/modal_observaciones.php');
 include('modal/m_firma.php');
 include('modal/m_muestras.php');
+include('modal/modal_condicionesMedio.php');
 ?>
 
 <!DOCTYPE html>
@@ -264,7 +265,7 @@ include('modal/m_muestras.php');
 
                     <div class="mb-3 ml-3 mr-3">
                       <label>Digite el lote (requerido)</label>
-                      <input type="text" class="form-control validarLote" id="validarLote1" onblur="revisarLote();">
+                      <input type="text" class="form-control validarLote" id="validarLote1" autocomplete="off" onblur="revisarLote();">
                     </div>
 
                     <div class="id_envasadora_loteadora mb-3 ml-3 mr-3">
@@ -523,7 +524,7 @@ include('modal/m_muestras.php');
 
                       <div class="group">
                         <label for="recipient-name" class="col-form-label">Digite el lote (requerido)</label>
-                        <input type="text" class="form-control validarLote" id="validarLote2" onblur="revisarLote();">
+                        <input type="text" class="form-control validarLote" id="validarLote2" autocomplete="off" onblur="revisarLote();">
                       </div>
 
                       <div class="group">
@@ -770,7 +771,7 @@ include('modal/m_muestras.php');
 
                       <div class="group">
                         <label for="recipient-name" class="col-form-label">Digite el lote (requerido)</label>
-                        <input type="text" class="form-control validarLote" id="validarLote3" onblur="revisarLote();">
+                        <input type="text" class="form-control validarLote" id="validarLote3"  autocomplete="off" onblur="revisarLote();">
                       </div>
 
                       <div class="group">

@@ -36,36 +36,24 @@
         <div class="card-header centrado"><b>1. INFORMACIÓN DEL PRODUCTO</b></div>
         <div class="card-body">
             <div class="group-info-ref p-3">
-                <label>Referencia:</label>
-                <label class="bold" id="ref"></label>
-                <label>Nombre Referencia:</label>
-                <label id="nref"></label>
-                <label>Marca:</label>
-                <label id="marca"></label>
-                <label>Propietario:</label>
-                <label id="propietario"></label>
-                <label>Notificación Sanitaria:</label>
-                <label id="notificacion"></label>
-                <label>Presentación Comercial:</label>
-                <label id="presentacion"></label>
+                <label>Referencia:</label><label class="bold" id="ref"></label>
+                <label>Nombre Referencia:</label><label id="nref"></label>
+                <label>Marca:</label><label id="marca"></label>
+                <label>Propietario:</label><label id="propietario"></label>
+                <label>Notificación Sanitaria:</label><label id="notificacion"></label>
+                <label>Presentación Comercial:</label><label id="presentacion"></label>
             </div>
             <hr style="width: 95%;">
             <div class="group-info-batch p-3">
 
-                <label>Orden de Producción:</label>
-                <label id="orden"></label>
-                <label>Lote:</label>
-                <label id="lote"></label>
-                <label>Fecha:</label>
-                <label class="fecha"></label>
+                <label>Orden de Producción:</label><label id="orden"></label>
+                <label>Lote:</label><label id="lote"></label>
+                <label>Fecha:</label><label class="fecha"></label>
                 <!-- <label for="">Tamaño del producto</label>
                 <input type="text" class="form-control centrado" id="tamanop"> -->
-                <label>Tamaño del Lote por presentación (kg):</label>
-                <label id="tamanol"></label>
-                <label>Tamaño del lote total (kg):</label>
-                <label id="tamanolt"></label>
-                <label>Unidades por Lote solicitadas:</label>
-                <label id="unidades"></label>
+                <label>Tamaño del Lote por presentación (kg):</label><label id="tamanol"></label>
+                <label>Tamaño del lote total (kg):</label><label id="tamanolt"></label>
+                <label>Unidades por Lote solicitadas:</label><label id="unidadesLote"></label>
             </div>
             <hr style="width: 95%;">
             <div class="group-info-batch p-3">
@@ -897,7 +885,7 @@
                     </div>
 
                     <div class="subtitle"><label for="">Control de peso en el Proceso</label></div>
-                    <div class="subtitle"><label for="">Resultados</label></div>
+                    <div class="subtitle" style="background:lightgrey;"><label for="">Muestras</label></div>
                     <div class="p-3">
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped" id="muestrasEnvasado1">
@@ -932,7 +920,7 @@
                                     <td id="envase1" class="envase1 refEmpaque1"></td>
                                     <td id="descripcion_envase1" class="descripcion_envase1"></td>
                                     <td id="unidades1" class="centrado unidades1"></td>
-                                    <td id="txtEnvasada1" class="centrado txtEnvasada1"></td>
+                                    <td id="usadaEnvase1" class="centrado txtEnvasada1"></td>
                                     <td id="averiasEnvase1" class="centrado"></td>
                                     <td id="sobranteEnvase1" class="centrado"></td>
                                 </tr>
@@ -940,7 +928,7 @@
                                     <td id="tapa1" class="tapa1 refEmpaque1"></td>
                                     <td id="descripcion_tapa1" class="descripcion_tapa1"></td>
                                     <td id="unidades1" class="centrado unidades1"></td>
-                                    <td id="txtEnvasada1" class="centrado envasada1"></td>
+                                    <td id="usadaTapa1" class="centrado envasada1"></td>
                                     <td id="averiasTapa1" class="centrado"></td>
                                     <td id="sobranteTapa1" class="centrado"></td>
                                 </tr>
@@ -948,7 +936,7 @@
                                     <td id="etiqueta1" class="etiqueta1 refEmpaque1"></td>
                                     <td id="descripcion_etiqueta1" class="descripcion_etiqueta1"></td>
                                     <td id="unidades1" class="centrado unidades1"></td>
-                                    <td id="txtEnvasada3" class="centrado envasada1"></td>
+                                    <td id="usadaEtiqueta1" class="centrado envasada1"></td>
                                     <td id="averiasEtiqueta1" class="centrado"></td>
                                     <td id="sobranteEtiqueta1" class="centrado"></td>
                                 </tr>
@@ -956,17 +944,17 @@
                         </table>
                     </div>
                     <div class="subtitle"><label for="">Cierre</label></div>
-                    <div class="firmas" id="firmas6">
+                    <div class="firmas" id="firmas5">
                         <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
-                        <label id="fecha6" style="font-weight:bold; justify-self: baseline"></label>
+                        <label id="fecha5" style="font-weight:bold; justify-self: baseline"></label>
 
-                        <div id="blank_rea6"></div>
-                        <img id="f_realizo6" src="" alt="firma_usuario" height="130">
-                        <div id="blank_ver6"></div>
-                        <img id="f_verifico6" src="" alt="firma_usuario" height="130">
+                        <div id="blank_rea5"></div>
+                        <img id="f_realizo5" src="" alt="firma_usuario" height="130">
+                        <div id="blank_ver5"></div>
+                        <img id="f_verifico5" src="" alt="firma_usuario" height="130">
 
-                        <label id="user_realizo6"></label>
-                        <label id="user_verifico6"></label>
+                        <label id="user_realizo5"></label>
+                        <label id="user_verifico5"></label>
                     </div>
                 </div>
             </div>

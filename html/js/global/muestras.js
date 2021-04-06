@@ -289,7 +289,7 @@ $("#guardar_muestras_acondicionamiento").click(function (e) {
 function cumple_muestras(obj) {
   id = obj.id;
   $(`#apariencia_etiquetas${id}`).val(1);
-  $(`#apariencia_termoencogible${id}`).val(1);
+  $(`#apariencia_termoencogible${id}`).val(3);
   $(`#cumplimiento_empaque${id}`).val(1);
   $(`#posicion_producto${id}`).val(1);
   $(`#rotulo_caja${id}`).val(1);

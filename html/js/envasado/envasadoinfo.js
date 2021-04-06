@@ -410,7 +410,7 @@ function registrar_material_sobrante(info) {
 
   for (let i = start; i < end; i++) {
     let datasobrante = {};
-    let itemref = $(`.refEmpaque${id_multi}`).html();
+    let itemref = $(`.refEmpaque${i}`).html();
     let envasada = formatoGeneral($(`.txtEnvasada${id_multi}`).html());
 
     if (envasada == "")
