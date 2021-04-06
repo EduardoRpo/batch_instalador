@@ -1,5 +1,9 @@
 let idBatch;
 let referencia;
+let cantidad;
+let presentacion;
+let densidad;
+let tamanioLote;
 
 /* bloquear inputs */
 $("input").prop("readonly", true);
@@ -78,7 +82,10 @@ info_General = () => {
     function (data, textStatus, jqXHR) {
       if (data == "false") return false;
       let info = JSON.parse(data);
-
+      cantidad = info.unidad_lote;
+      presentacion = info.presentacion;
+      densidad = info.densidad;
+      tamanioLote = info.tamano_lote;
       $("#ref").html(info.referencia);
       $("#nref").html("<b>" + info.nombre_referencia + "</b>");
       $("#marca").html("<b>" + info.marca + "</b>");
@@ -490,6 +497,14 @@ material_envase_sobrante = () => {
       $("#usadaEtiqueta1").html(info[2].envasada);
       $("#averiasEtiqueta1").html(info[2].averias);
       $("#sobranteEtiqueta1").html(info[2].sobrante);
+
+      $("#utilizada_empaque1").html(info[3].envasada);
+      $("#averias_empaque1").html(info[3].averias);
+      $("#sobrante_empaque1").html(info[3].sobrante);
+
+      $("#utilizada_otros1").html(info[4].envasada);
+      $("#averias_otros1").html(info[4].averias);
+      $("#sobrante_otros1").html(info[4].sobrante);
     },
   });
 };
@@ -548,15 +563,40 @@ muestras_acondicionamiento = () => {
     },
   });
 };
-entrega_material_acondicionamiento = () => {};
-devolucion_empaque_acondicionamiento = () => {
+
+entrega_material_acondicionamiento = () => {
+  $.ajax({
+    url: "../../html/php/envase.php",
+    type: "POST",
+    data: { referencia },
+  }).done((data, status, xhr) => {
+    var info = JSON.parse(data);
+    empaqueEnvasado = Math.round(cantidad / info[0].unidad_empaque);
+    unidades = cantidad;
+
+    $(`.empaque1`).html(info[0].id_empaque);
+    $(`.descripcion_empaque1`).html(info[0].empaque);
+
+    $(`.otros1`).html(info[0].id_otros);
+    $(`.descripcion_otros1`).html(info[0].otros);
+
+    $(`.unidades1`).html(unidades);
+    $(`.unidades1e`).html(empaqueEnvasado);
+  });
+};
+
+conciliacion = () => {
   $.ajax({
     type: "POST",
-    url: "../../html/php/envasado.php",
-    data: { operacion: 8, idBatch },
+    url: "../../html/php/conciliacion_rendimiento.php",
+    data: { operacion: 5, idBatch },
 
     success: function (response) {
       let info = JSON.parse(response);
+      let rendimiento = (presentacion * cantidad * densidad) / 1000;
+      rendimiento = ((rendimiento / tamanioLote) * 100).toFixed(2) + "%";
+      $(`#conciliacionRendimiento1`).val(rendimiento);
+      $(`#f_realizo20`).prop("src", info[0].urlfirma);
     },
   });
 };
@@ -580,5 +620,5 @@ $(document).ready(function () {
   ajustes();
   muestras_acondicionamiento();
   entrega_material_acondicionamiento();
-  devolucion_empaque_acondicionamiento();
+  $.when(info_General()).then(conciliacion());
 });

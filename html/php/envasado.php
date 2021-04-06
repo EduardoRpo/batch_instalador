@@ -209,5 +209,6 @@ if (!empty($_POST)) {
             $data = $query->fetchAll(PDO::FETCH_ASSOC);
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
             break;
+
     }
 }

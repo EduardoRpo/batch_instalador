@@ -164,11 +164,11 @@ $(document).ready(function () {
   $(this).toggleClass("selected");
 }); */
 
-/* $("#tablePesaje").on("click", "tr", function () { */
-  $("#tablePesaje").click(function (e) { 
+$("#tablePesaje tbody").on("click", "td", function () {
+  /* $("#tablePesaje").click(function (e) {  */
     e.preventDefault();
-    $(this).toggleClass("selected");
-    /* $(this).addClass("tr_hover"); */
+    //$(this).toggleClass("selected");
+    $(this).addClass("tr_hover");
   });
 /* }); */
 

@@ -1143,7 +1143,7 @@
                                     <td class="centrado">Utilizadas</td>
                                     <td class="centrado">Averias</td>
                                     <td class="centrado">Sobrante</td>
-                                    <td class="centrado">Total</td>
+                                    <!-- <td class="centrado">Total</td> -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -1154,7 +1154,7 @@
                                     <td id="utilizada_empaque1" class="centrado envasada1e" style="width: 110px;"></td>
                                     <td id="averias_empaque1" class="centrado" style="width: 110px;"></td>
                                     <td id="sobrante_empaque1" class="centrado" style="width: 110px;"></td>
-                                    <td id="totalDevolucion_empaque1" class="centrado"></td>
+                                    <!-- <td id="totalDevolucion_empaque1" class="centrado"></td> -->
                                 </tr>
                                 <tr>
                                     <td id="refempaque2" class="otros1"></td>
@@ -1163,12 +1163,29 @@
                                     <td id="utilizada_otros1" class="centrado envasada1e" style="width: 110px;"></td>
                                     <td id="averias_otros1" class="centrado" style="width: 110px;"></td>
                                     <td id="sobrante_otros1" class="centrado" style="width: 110px;"></td>
-                                    <td id="totalDevolucion_otros1" class="centrado"></td>
+                                    <!-- <td id="totalDevolucion_otros1" class="centrado"></td> -->
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="subtitle"><label>Conciliacion de rendimiento</label></div>
+                    <div class="conciliacion">
+                        <label>Conciliacion rendimiento</label>
+                        <input type="text" class="form-control" id="conciliacionRendimiento1"  readonly>
+
+                    </div>
+                    <div class="firmas" id="firmas6">
+                        <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
+                        <label id="fecha6" style="font-weight:bold; justify-self: baseline"></label>
+
+                        <!-- <div id="blank_rea6"></div> -->
+                        <label id="user_realizo6"></label>
+                        <img id="f_realizo6" src="" alt="firma_usuario" height="130">
+                       <!--  <div id="blank_ver6"></div>
+                        <img id="f_verifico6" src="" alt="firma_usuario" height="130"> -->
+
+                        <!-- <label id="user_verifico6"></label> -->
+                    </div>
                     <div class="subtitle"><label>Almacen Despachos</label></div>
                     <div class="alertas" id="alert_pesaje">
                         <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">

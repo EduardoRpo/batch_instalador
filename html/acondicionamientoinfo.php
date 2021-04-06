@@ -410,7 +410,7 @@ include('modal/modal_condicionesMedio.php');
 
                     <div class="conciliacionrendimiento__group">
                       <label for="recipient-name" class="col-form-label">No Movimiento Inventario:</label>
-                      <input type="number" class="form-control centrado" id="txtNoMovimiento1" min="1">
+                      <input type="text" class="form-control centrado" id="txtNoMovimiento1" min="1">
                     </div>
 
 

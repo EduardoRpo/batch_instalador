@@ -5,7 +5,9 @@ if (!empty($_POST)) {
 
     $op = $_POST['operacion'];
     $batch =  $_POST['idBatch'];
-    $referencia = $_POST['ref_multi'];
+
+    if (!empty($_POST['ref_multi']))
+        $referencia = $_POST['ref_multi'];
 
     switch ($op) {
         case 1: //almacenar conciliacion
@@ -101,6 +103,17 @@ if (!empty($_POST)) {
             }
 
             echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+
+            break;
+
+        case 5:
+
+            $sql = "SELECT c.unidades_producidas, c.muestras_retencion, c.mov_inventario, c.cajas, u.urlfirma 
+                    FROM batch_conciliacion_rendimiento c INNER JOIN usuario u ON u.id = c.entrego WHERE batch = :batch";
+            $query = $conn->prepare($sql);
+            $query->execute(['batch' => $batch]);
+            $data = $query->fetchAll(PDO::FETCH_ASSOC);
+            echo json_encode($data, JSON_UNESCAPED_UNICODE);
 
             break;
     }

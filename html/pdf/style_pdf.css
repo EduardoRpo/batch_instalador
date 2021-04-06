@@ -139,6 +139,14 @@ body {
   justify-items: center;
 }
 
+.firmasRendimiento {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-top: 10px;
+  margin-left: 30px;
+  justify-items: center;
+}
+
 #muestrasEnvasado1 {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
@@ -146,6 +154,16 @@ body {
   grid-gap: 1em;
   /* margin: 20px; */
   text-align: center;
+}
+
+.conciliacion {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+  margin-top: 10px;
+  margin-left: 30px;
+  margin-right: 30px;
+  justify-items: center;
 }
 
 @media only screen and (max-width: 600px) {
