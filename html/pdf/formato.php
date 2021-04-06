@@ -1170,9 +1170,8 @@
                     </div>
                     <div class="subtitle"><label>Conciliacion de rendimiento</label></div>
                     <div class="conciliacion">
-                        <label>Conciliacion rendimiento</label>
-                        <input type="text" class="form-control" id="conciliacionRendimiento1"  readonly>
-
+                        <label style="justify-self: end;">Conciliacion rendimiento</label>
+                        <input type="text" class="form-control centrado" id="conciliacionRendimiento1" style="width: 30%;justify-self: baseline" readonly>
                     </div>
                     <div class="firmas" id="firmas6">
                         <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
@@ -1181,7 +1180,7 @@
                         <!-- <div id="blank_rea6"></div> -->
                         <label id="user_realizo6"></label>
                         <img id="f_realizo6" src="" alt="firma_usuario" height="130">
-                       <!--  <div id="blank_ver6"></div>
+                        <!--  <div id="blank_ver6"></div>
                         <img id="f_verifico6" src="" alt="firma_usuario" height="130"> -->
 
                         <!-- <label id="user_verifico6"></label> -->

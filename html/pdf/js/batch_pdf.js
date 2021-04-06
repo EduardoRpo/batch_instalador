@@ -619,6 +619,10 @@ $(document).ready(function () {
   equipos();
   ajustes();
   muestras_acondicionamiento();
-  entrega_material_acondicionamiento();
-  $.when(info_General()).then(conciliacion());
+  
+  setTimeout(() => {
+    entrega_material_acondicionamiento();
+    conciliacion();
+  }, 50);
+  //$.when(info_General()).then(conciliacion());
 });
