@@ -68,7 +68,7 @@ function crearTablaBatch(
             : data == 5
             ? "Aprobación"
             : data == 6
-            ? "Envasado"
+            ? "Envasado y Acondicionamiento"
             : data == 7
             ? "Acondicionamiento"
             : "Otro";
@@ -99,6 +99,7 @@ function crearTablaBatch(
 /* Cambiar puntero del mouse al tocar los botones de actualizar y eliminar */
 
 $(".link-editar").css("cursor", "pointer");
+$(".link-editarMulti").css("cursor", "pointer");
 
 /* Borrar registro */
 

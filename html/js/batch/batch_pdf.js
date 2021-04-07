@@ -23,6 +23,8 @@ function cargartablabatch_pdf() {
       method: "POST",
       url: "php/c_batch_pdf.php",
       data: { operacion: 1 },
+      dataSrc: "",
+      order: [[ 1, "desc" ]]
     },
 
     columns: [

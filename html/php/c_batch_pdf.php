@@ -7,8 +7,11 @@ if (!empty($_POST)) {
 
     switch ($op) {
         case 1:
-            $query = "SELECT * FROM batch";
-            ejecutarQuerySelect($conn, $query);
+            $sql = "SELECT * FROM batch ORDER BY id_batch DESC";
+            $query = $conn->prepare($sql);
+            $query->execute();
+            $data = $query->fetchAll(PDO::FETCH_ASSOC);
+            echo json_encode($data, JSON_UNESCAPED_UNICODE);
             break;
 
         case 2:
@@ -20,7 +23,6 @@ if (!empty($_POST)) {
             $query->execute(['id' => $id,]);
             $data = $query->fetch(PDO::FETCH_ASSOC);
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
-
             break;
 
         case 3:
@@ -31,12 +33,10 @@ if (!empty($_POST)) {
                 INNER JOIN preguntas p ON p.id = bsp.id_pregunta
                 WHERE id_batch = :id
                 ORDER BY bsp.id_modulo";
-
             $query = $conn->prepare($sql);
             $query->execute(['id' => $id]);
             $data = $query->fetchAll(PDO::FETCH_ASSOC);
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
-
             break;
 
         case 4:

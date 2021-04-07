@@ -127,6 +127,9 @@
 
                     </tbody>
                   </table>
+                  <div style="display: flex;justify-content: flex-end;">
+                    <input type="text" id="totalPorcentajeFormulas" style="border: none;margin-right:100px;text-align:center" disabled>
+                  </div>
                 </div>
               </div>
               <form id="formDataExcel1" enctype="multipart/form-data">

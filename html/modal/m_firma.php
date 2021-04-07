@@ -13,13 +13,13 @@
               <div class="row page">
                 <div class="col-md-12 col-2 align-self-center">
                   <label for="usuariomodal2" class="col-form-label">Usuario:</label>
-                  <input type="text" class="form-control" id="usuario" name="usuario" required>
+                  <input type="text" class="form-control" id="usuario" name="usuario" autocomplete="off" required>
                 </div>
               </div>
               <div class="row page">
                 <div class="col-md-12 col-2 align-self-center">
                   <label for="contrasenamodal2" class="col-form-label">Contraseña:</label>
-                  <input type="password" class="form-control" id="clave" name="contrasena" required>
+                  <input type="password" class="form-control" id="clave" name="contrasena" autocomplete="off" required>
                 </div>
               </div>
             </div>
@@ -30,5 +30,4 @@
         </div>
       </div>
     </div>
-  </div>
-  
+    </div>

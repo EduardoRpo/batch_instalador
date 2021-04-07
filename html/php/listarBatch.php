@@ -41,7 +41,8 @@ switch ($op) {
 
       $query = "SELECT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, pc.nombre  as presentacion_comercial, batch.numero_lote, batch.tamano_lote, propietario.nombre,batch.fecha_creacion, batch.fecha_programacion, batch.estado, batch.multi
                 FROM batch INNER JOIN producto INNER JOIN propietario INNER JOIN presentacion_comercial pc
-                ON batch.id_producto = producto.referencia AND producto.id_propietario = propietario.id AND producto.presentacion_comercial = pc.id";
+                ON batch.id_producto = producto.referencia AND producto.id_propietario = propietario.id AND producto.presentacion_comercial = pc.id
+                WHERE estado > 0";
 
       if ($fecha_busqueda) {
         $query .= " WHERE $fecha_busqueda BETWEEN '$fecha_inicio' AND '$fecha_final' ";
@@ -70,24 +71,29 @@ switch ($op) {
 
   case 2: //Eliminar
     $id_batch = $_POST['id'];
-    //echo $id_batch;  
+    $query_batch_Eliminar = "UPDATE batch SET estado = 0 WHERE id_batch = $id_batch";
+    $result_eliminar = mysqli_query($conn, $query_batch_Eliminar);
 
+    //echo $id_batch;  
+    /* 
     $query_batch_Insert = "INSERT INTO batch_eliminado 
                              SELECT id_batch, fecha_creacion, fecha_programacion, NOW(), numero_orden, numero_lote, tamano_lote, lote_presentacion, unidad_lote, id_producto 
                              FROM batch 
                              WHERE id_batch = $id_batch";
 
-    $result_insert = mysqli_query($conn, $query_batch_Insert);
+    $result_insert = mysqli_query($conn, $query_batch_Insert); */
+
+    /* 
 
     $query_batch_Eliminar = "DELETE FROM batch WHERE id_batch = $id_batch";
-    $result_eliminar = mysqli_query($conn, $query_batch_Eliminar);
+    $result_eliminar = mysqli_query($conn, $query_batch_Eliminar); */
 
-    if ($result_eliminar) {
+    /* if ($result_eliminar) {
       $query_batch_tanques = "DELETE FROM batch_tanques WHERE id_batch = $id_batch";
       $result_tanques = mysqli_query($conn, $query_batch_tanques);
     } else {
       echo 'No Eliminado. Error: ' . mysqli_error($conn);
-    }
+    } */
     //mysqli_free_result($query_batch);
     //mysqli_free_result($query_batch_tanques);
     mysqli_close($conn);

@@ -43,6 +43,7 @@ function multipresentacion() {
         if (resp == "") {
           alertify.set("notifier", "position", "top-right");
           alertify.error("Esta referencia no tiene Multipresentación.");
+          return false;
         } else {
           multi = JSON.parse(resp);
           $("#loteTotal").val(data.tamano_lote);

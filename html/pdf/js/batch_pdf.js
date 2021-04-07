@@ -607,19 +607,19 @@ $(document).ready(function () {
 
   cargar_Alertas();
   info_General();
+  area_desinfeccion();
   parametros_Control();
   especificaciones_producto();
   entrega_material_envase();
   obtenerMuestras();
   identificarDensidad();
   material_envase_sobrante();
-  area_desinfeccion();
   condiciones_medio();
   control_proceso();
   equipos();
   ajustes();
   muestras_acondicionamiento();
-  
+
   setTimeout(() => {
     entrega_material_acondicionamiento();
     conciliacion();
