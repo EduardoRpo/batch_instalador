@@ -155,22 +155,13 @@ $(document).ready(function () {
       ),
     ],
   });
-});
 
-/* Seleccion multiple */
+  /* Seleccion multiple */
 
-//table = $("#tablePesaje").DataTable();
-/* $("#tablePesaje tbody").on("click", "tr", function () {
-  $(this).toggleClass("selected");
-}); */
-
-$("#tablePesaje tbody").on("click", "td", function () {
-  /* $("#tablePesaje").click(function (e) {  */
-    e.preventDefault();
-    //$(this).toggleClass("selected");
-    $(this).addClass("tr_hover");
+  tablePesaje.on("click", "tbody tr", function () {
+    $(this).toggleClass("tr_hover ");
   });
-/* }); */
+});
 
 Date.prototype.toDateInputValue = function () {
   var local = new Date(this);

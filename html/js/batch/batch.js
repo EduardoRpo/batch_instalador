@@ -148,6 +148,12 @@ $(document).on("click", ".link-editar", function (e) {
   limpiarTanques();
   OcultarTanques();
 
+  if (data.estado > 2) {
+    alertify.set("notifier", "position", "top-right");
+    alertify.error("Batch Record en proceso. No es posible actualizarlo.");
+    return false;
+  }
+
   const texto = $(this).parent().parent().children()[1];
   const id = $(texto).text();
 
@@ -236,7 +242,14 @@ function actualizarTabla() {
 
 function guardarDatos() {
   //validar consecutivo del lote en la base de datos (trigger)
-  debugger;
+
+  if (data.estado > 2) {
+    alertify.set("notifier", "position", "top-right");
+    alertify.error("Batch Record en proceso. No es posible actualizarlo.");
+    cerrarModal();
+    return false;
+  }
+
   const lote = $("#tamanototallote").val();
   const tamano_lote = formatoGeneral(lote);
 
@@ -327,10 +340,17 @@ function guardarDatos() {
     data: datos,
 
     success: function (r) {
-      alertify.set("notifier", "position", "top-right");
-      alertify.success("Batch Record registrado con éxito.");
-      cerrarModal();
-      actualizarTabla();
+      if (r == 3) {
+        cerrarModal();
+        alertify.set("notifier", "position", "top-right");
+        alertify.error("Batch Record en proceso. No es posible actualizarlo...");
+        
+      } else {
+        cerrarModal();
+        actualizarTabla();
+        alertify.set("notifier", "position", "top-right");
+        alertify.success("Batch Record registrado con éxito.");
+      }
     },
     error: function (r) {
       alertify.set("notifier", "position", "top-right");
