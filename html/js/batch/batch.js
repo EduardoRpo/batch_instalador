@@ -243,11 +243,13 @@ function actualizarTabla() {
 function guardarDatos() {
   //validar consecutivo del lote en la base de datos (trigger)
 
-  if (data.estado > 2) {
-    alertify.set("notifier", "position", "top-right");
-    alertify.error("Batch Record en proceso. No es posible actualizarlo.");
-    cerrarModal();
-    return false;
+  if (data !== undefined) {
+    if (data.estado > 2) {
+      alertify.set("notifier", "position", "top-right");
+      alertify.error("Batch Record en proceso. No es posible actualizarlo.");
+      cerrarModal();
+      return false;
+    }
   }
 
   const lote = $("#tamanototallote").val();
@@ -343,8 +345,9 @@ function guardarDatos() {
       if (r == 3) {
         cerrarModal();
         alertify.set("notifier", "position", "top-right");
-        alertify.error("Batch Record en proceso. No es posible actualizarlo...");
-        
+        alertify.error(
+          "Batch Record en proceso. No es posible actualizarlo..."
+        );
       } else {
         cerrarModal();
         actualizarTabla();
