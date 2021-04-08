@@ -71,45 +71,19 @@ switch ($op) {
 
   case 2: //Eliminar
     $id_batch = $_POST['id'];
-    $query_batch_Eliminar = "UPDATE batch SET estado = 0 WHERE id_batch = $id_batch";
+    $query_batch_Eliminar = "UPDATE batch SET estado = 0, fecha_eliminacion = CURDATE() WHERE id_batch = $id_batch";
     $result_eliminar = mysqli_query($conn, $query_batch_Eliminar);
-
-    //echo $id_batch;  
-    /* 
-    $query_batch_Insert = "INSERT INTO batch_eliminado 
-                             SELECT id_batch, fecha_creacion, fecha_programacion, NOW(), numero_orden, numero_lote, tamano_lote, lote_presentacion, unidad_lote, id_producto 
-                             FROM batch 
-                             WHERE id_batch = $id_batch";
-
-    $result_insert = mysqli_query($conn, $query_batch_Insert); */
-
-    /* 
-
-    $query_batch_Eliminar = "DELETE FROM batch WHERE id_batch = $id_batch";
-    $result_eliminar = mysqli_query($conn, $query_batch_Eliminar); */
-
-    /* if ($result_eliminar) {
-      $query_batch_tanques = "DELETE FROM batch_tanques WHERE id_batch = $id_batch";
-      $result_tanques = mysqli_query($conn, $query_batch_tanques);
-    } else {
-      echo 'No Eliminado. Error: ' . mysqli_error($conn);
-    } */
-    //mysqli_free_result($query_batch);
-    //mysqli_free_result($query_batch_tanques);
     mysqli_close($conn);
     break;
 
   case 3: //cargar selector de referencias
 
     $query_referencia = mysqli_query($conn, "SELECT @curRow := @curRow + 1 AS id, referencia FROM producto JOIN (SELECT @curRow := 0) r ORDER BY `producto`.`referencia` ASC");
-
     $result = mysqli_num_rows($query_referencia);
-
     if ($result > 0) {
       while ($data = mysqli_fetch_assoc($query_referencia)) {
         $arreglo[] = $data;
       }
-
       echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
       //echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
     } else {
@@ -121,7 +95,6 @@ switch ($op) {
 
   case 4: //recargar datos de acuerdo con seleccion de referencia
     $id_referencia = $_POST['id'];
-
     $query_producto = mysqli_query(
       $conn,
       "SELECT p.referencia, p.nombre_referencia as nombre, m.nombre as marca, ns.nombre as notificacion_sanitaria, pp.nombre as propietario, np.nombre as producto, pc.nombre as presentacion_comercial, l.nombre as linea, l.densidad 
@@ -132,25 +105,20 @@ switch ($op) {
     );
 
     $result = mysqli_num_rows($query_producto);
-
     mysqli_close($conn);
 
     if ($result > 0) {
-
       while ($data = mysqli_fetch_assoc($query_producto)) {
         $arreglo[] = $data;
       }
-
       echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
     } else {
       echo json_encode('');
     }
-
     break;
 
   case 5: // Guardar
 
-    //Inicializa variables
     $cantidad = $_POST['cantidad'];
     $id_batch     = $_POST['id_batch'];
     $referencia     = $_POST['ref'];
@@ -180,7 +148,6 @@ switch ($op) {
       $estado = '3';  //Pesaje
     }
 
-
     $i = 1;
 
     $query = "INSERT INTO batch (fecha_creacion, fecha_programacion, fecha_actual, numero_orden, numero_lote, tamano_lote, lote_presentacion, unidad_lote, estado, id_producto) 
@@ -196,9 +163,7 @@ switch ($op) {
     }
 
     if (count($tanque) > 0) {
-
       $id = mysqli_insert_id($conn);
-
       for ($i = 0; $i < count($tanque); ++$i) {
         $query_tanque = "INSERT INTO batch_tanques (tanque, cantidad, id_batch) VALUES('$tanque[$i]' , '$tamanotqn[$i]', '$id')";
         $result = mysqli_query($conn, $query_tanque);
@@ -224,12 +189,10 @@ switch ($op) {
                                           WHERE bt.id_batch = $id_batch");
 
     $data[] = mysqli_fetch_assoc($query_buscar);
-
     $query_buscarTanque =  mysqli_query($conn, "SELECT tanque, cantidad FROM batch_tanques btnq WHERE btnq.id_batch = $id_batch");
     $result = mysqli_num_rows($query_buscarTanque);
 
     if ($result > 0) {
-
       while ($tnq = mysqli_fetch_assoc($query_buscarTanque)) {
         $tanques[] = $tnq;
       }
@@ -244,7 +207,6 @@ switch ($op) {
     }
 
     echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
-
     mysqli_close($conn);
     break;
 
@@ -281,7 +243,6 @@ switch ($op) {
     if ($result > 0 && $fechaprogramacion != '') {
       $estado = '3';  //Pesaje
     }
-
 
     $query_actualizar = "UPDATE batch SET unidad_lote = '$unidades', tamano_lote = '$lote', estado = '3', fecha_programacion = ";
     $query_actualizar .= $fechaprogramacion != null ? "'$fechaprogramacion'" : "NULL ";
@@ -373,36 +334,43 @@ switch ($op) {
 
   case 10: // Clonar Batch
     $id_batch = $_POST['id'];
-    //echo $id_batch;
+    $referencia = $_POST['referencia'];
+    $clonarCantidad = $_POST['clonarCantidad'];
 
-    $query_clonar = mysqli_query($conn, "SELECT * FROM batch WHERE id_batch = $id_batch");
-    $result = mysqli_num_rows($query_clonar);
+    /* validar formula que exista la formula*/
+    $query_buscarFormula =  mysqli_query($conn, "SELECT * FROM formula WHERE id_producto = $referencia");
+    $resultFormula = mysqli_num_rows($query_buscarFormula);
 
-    if ($result > 0) {
-      $data = mysqli_fetch_assoc($query_clonar);
-      $arreglo[] = $data;
+    /* validar que exista el instructivo */
+    $query_buscarInstructivo =  mysqli_query($conn, "SELECT * FROM instructivo_preparacion WHERE id_producto = $referencia");
+    $resultPreparacion = mysqli_num_rows($query_buscarInstructivo);
 
-      echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
-    } else {
-      echo json_encode('');
+    if ($resultFormula <= 0 || $resultPreparacion <= 0)
+      $estado = '1';  //Sin formula
+    else
+      $estado = '2'; // Inactivo  
+
+    /* Clonar batch */
+    for ($i = 0; $i < $clonarCantidad; $i++) {
+      $query_clonar = mysqli_query($conn, "INSERT INTO batch (fecha_creacion, fecha_actual, tamano_lote, lote_presentacion, unidad_lote, id_producto, estado, multi)
+                                           SELECT CURRENT_DATE, CURRENT_DATE, tamano_lote, lote_presentacion, unidad_lote, id_producto, $estado, multi 
+                                           FROM batch WHERE id_batch = $id_batch");
     }
-    exit();
+
+    if ($query_clonar)
+      echo '1';
 
     break;
 
   case 11: //seleccionar ID para Cargar datos de acuerdo con la selección de multipresentación
     $nombre_referencia = $_POST['nombre_referencia'];
-
     $query_producto = mysqli_query($conn, "SELECT referencia FROM `producto` WHERE nombre_referencia='$nombre_referencia'");
-
     $result = mysqli_num_rows($query_producto);
 
     if ($result > 0) {
-
       while ($data = mysqli_fetch_assoc($query_producto)) {
         $arreglo[] = $data;
       }
-
       echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
     } else {
       echo json_encode('');
