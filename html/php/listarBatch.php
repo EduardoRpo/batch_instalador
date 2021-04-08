@@ -189,7 +189,7 @@ switch ($op) {
                                           WHERE bt.id_batch = $id_batch");
 
     $data[] = mysqli_fetch_assoc($query_buscar);
-    $query_buscarTanque =  mysqli_query($conn, "SELECT tanque, cantidad FROM batch_tanques btnq WHERE btnq.id_batch = $id_batch");
+    $query_buscarTanque =  mysqli_query($conn, "SELECT tanque, cantidad FROM batch_tanques btnq WHERE btnq.id_batch = '$id_batch'");
     $result = mysqli_num_rows($query_buscarTanque);
 
     if ($result > 0) {
@@ -220,14 +220,14 @@ switch ($op) {
     $tamanotqn    = $_POST['tmn'];
 
     //Validar estado
-    $query_buscarEstado =  mysqli_query($conn, "SELECT * FROM batch WHERE id_batch = $id_batch");
+    $query_buscarEstado =  mysqli_query($conn, "SELECT * FROM batch WHERE id_batch = '$id_batch'");
     $data = mysqli_fetch_all($query_buscarEstado, MYSQLI_ASSOC);
     if ($data[0]['estado'] > 2) {
       echo '3';
       exit();
     }
     //Valida formula
-    $query_buscarFormula =  mysqli_query($conn, "SELECT * FROM formula WHERE id_producto = $referencia");
+    $query_buscarFormula =  mysqli_query($conn, "SELECT * FROM formula WHERE id_producto = '$referencia'");
     $result = mysqli_num_rows($query_buscarFormula);
 
     if ($result <= 0) {
@@ -338,11 +338,11 @@ switch ($op) {
     $clonarCantidad = $_POST['clonarCantidad'];
 
     /* validar formula que exista la formula*/
-    $query_buscarFormula =  mysqli_query($conn, "SELECT * FROM formula WHERE id_producto = $referencia");
+    $query_buscarFormula =  mysqli_query($conn, "SELECT * FROM formula WHERE id_producto = '$referencia'");
     $resultFormula = mysqli_num_rows($query_buscarFormula);
 
     /* validar que exista el instructivo */
-    $query_buscarInstructivo =  mysqli_query($conn, "SELECT * FROM instructivo_preparacion WHERE id_producto = $referencia");
+    $query_buscarInstructivo =  mysqli_query($conn, "SELECT * FROM instructivo_preparacion WHERE id_producto = '$referencia'");
     $resultPreparacion = mysqli_num_rows($query_buscarInstructivo);
 
     if ($resultFormula <= 0 || $resultPreparacion <= 0)
@@ -353,7 +353,7 @@ switch ($op) {
     /* Clonar batch */
     for ($i = 0; $i < $clonarCantidad; $i++) {
       $query_clonar = mysqli_query($conn, "INSERT INTO batch (fecha_creacion, fecha_actual, tamano_lote, lote_presentacion, unidad_lote, id_producto, estado, multi)
-                                           SELECT CURRENT_DATE, CURRENT_DATE, tamano_lote, lote_presentacion, unidad_lote, id_producto, $estado, multi 
+                                           SELECT CURRENT_DATE, CURRENT_DATE, tamano_lote, lote_presentacion, unidad_lote, id_producto, '$estado', multi 
                                            FROM batch WHERE id_batch = $id_batch");
     }
 

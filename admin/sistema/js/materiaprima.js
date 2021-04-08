@@ -151,4 +151,7 @@ $("#btnguardarMateriaPrima").click(function (e) {
 function refreshTable(tabla) {
   $("#tblMateriaPrima").DataTable().clear();
   $("#tblMateriaPrima").DataTable().ajax.reload();
+  $("#txtCodigo").val("");
+  $("#txtMP").val("");
+  $("#txtAlias").val("");
 }
