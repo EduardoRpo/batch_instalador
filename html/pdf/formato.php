@@ -1168,7 +1168,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="subtitle"><label>Conciliacion de rendimiento</label></div>
+                    <div class="subtitle"><label>Conciliación de rendimiento</label></div>
                     <div class="conciliacion">
                         <label style="justify-self: end;">Conciliacion rendimiento</label>
                         <input type="text" class="form-control centrado" id="conciliacionRendimiento1" style="width: 30%;justify-self: baseline" readonly>

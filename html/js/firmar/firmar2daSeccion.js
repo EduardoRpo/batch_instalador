@@ -76,7 +76,7 @@ function firmar2daSeccion(firma) {
 function firmarSeccionCierreProceso(firma) {
   let orden = localStorage.getItem("orden");
   let tamano_lote = localStorage.getItem("tamano_lote");
-  
+
   //confirmación de incidencias
 
   var confirm = alertify
@@ -132,10 +132,15 @@ function almacenarfirma(id) {
     success: function (response) {
       alertify.set("notifier", "position", "top-right");
       alertify.success("Firmado satisfactoriamente");
-      $(".pesaje_verificado")
-        .css({ background: "lightgray", border: "gray" })
-        .prop("disabled", true);
-      /* $('.aprobacion_realizado').prop('disabled', true); */
+      if (modulo == 2)
+        $(".pesaje_verificado")
+          .css({ background: "lightgray", border: "gray" })
+          .prop("disabled", true);
+
+      if (modulo == 4)
+        $(".aprobacion_verificado")
+          .css({ background: "lightgray", border: "gray" })
+          .prop("disabled", true);
     },
   });
 }

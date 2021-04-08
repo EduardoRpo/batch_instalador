@@ -603,7 +603,9 @@ conciliacion = () => {
 
 $(document).ready(function () {
   idBatch = sessionStorage.getItem("id");
-  referencia = sessionStorage.getItem("referencia");
+  let referencias = sessionStorage.getItem("multi");
+  referencias = JSON.parse(referencias);
+  if (!referencias) referencia = sessionStorage.getItem("referencia");
 
   cargar_Alertas();
   info_General();
@@ -624,5 +626,5 @@ $(document).ready(function () {
     entrega_material_acondicionamiento();
     conciliacion();
   }, 50);
-  //$.when(info_General()).then(conciliacion());
+  
 });

@@ -24,7 +24,7 @@ function cargartablabatch_pdf() {
       url: "php/c_batch_pdf.php",
       data: { operacion: 1 },
       dataSrc: "",
-      order: [[ 1, "desc" ]]
+      order: [[1, "desc"]],
     },
 
     columns: [
@@ -60,9 +60,20 @@ $(document).on("click", ".link-ver", function (e) {
   e.preventDefault();
   let id = $(this).parent().parent().children().first().text();
   let referencia = $(this).parent().parent().children().eq(4).text();
-  sessionStorage.setItem("id", id);
-  sessionStorage.setItem("referencia", referencia);
-  window.open("../html/pdf/formato.php", "_blank");
+
+  $.ajax({
+    type: "POST",
+    url: "../../html/php/busqueda_multipresentacion.php",
+    data: { idBatch: id },
+
+    success: function (response) {
+      data = JSON.parse(response);
+      sessionStorage.setItem("id", id);
+      sessionStorage.setItem("referencia", referencia);
+      sessionStorage.setItem("multi", JSON.stringify(data));
+      window.open("../html/pdf/formato.php", "_blank");
+    },
+  });
 });
 
 /* Imprimir pdf */
