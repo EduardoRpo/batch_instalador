@@ -58,7 +58,7 @@ function crearTablaBatch(
         render: (data, type, row) => {
           "use strict";
           return data == 1
-            ? "Sin Formula"
+            ? "Sin Formula y/o Instructivo"
             : data == 2
             ? "Inactivo"
             : data == 3
