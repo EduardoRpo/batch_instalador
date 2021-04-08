@@ -18,36 +18,31 @@ switch ($op) {
 
     case 3: // Almacenar o actualizar data
         if (!empty($_POST)) {
-            $editar = $_POST['editar'];
+
             $referencia = $_POST['referencia'];
             $materia_prima = $_POST['materiaprima'];
             $alias = $_POST['alias'];
 
-            if ($editar == 0) {
-                $sql = "SELECT * FROM materia_prima WHERE referencia=:referencia";
-                $query = $conn->prepare($sql);
-                $query->execute(['referencia' => $referencia]);
-                $rows = $query->rowCount();
+            $sql = "SELECT * FROM materia_prima WHERE referencia = :referencia";
+            $query = $conn->prepare($sql);
+            $query->execute(['referencia' => $referencia]);
+            $rows = $query->rowCount();
 
-                if ($rows > 0) {
-                    echo '2';
-                    exit();
-                } else {
-                    $sql = "INSERT INTO materia_prima (referencia, nombre, alias) VALUES(:referencia, :materia_prima, :alias)";
-                    $query = $conn->prepare($sql);
-                    $result = $query->execute(['referencia' => $referencia, 'materia_prima' => $materia_prima, 'alias' => $alias]);
-                    ejecutarQuery($result, $conn);
-                }
-            } else {
-                $id = $_POST['id'];
-                $sql = "UPDATE materia_prima SET referencia =:referencia, nombre=:materia_prima, alias=:alias WHERE referencia = :id";
+            if ($rows > 0) {
+                $sql = "UPDATE materia_prima SET nombre = :materia_prima, alias = :alias WHERE referencia = :referencia";
                 $query = $conn->prepare($sql);
-                $result = $query->execute(['referencia' => $referencia, 'materia_prima' => $materia_prima, 'alias' => $alias, 'id' => $id]);
+                $result = $query->execute(['referencia' => $referencia, 'materia_prima' => $materia_prima, 'alias' => $alias]);
 
-                if ($result) {
+                if ($result)
                     echo '3';
-                    exit();
-                }
+            } else {
+                $sql = "INSERT INTO materia_prima (referencia, nombre, alias) VALUES(:referencia, :materia_prima, :alias)";
+                $query = $conn->prepare($sql);
+                $result = $query->execute(['referencia' => $referencia, 'materia_prima' => $materia_prima, 'alias' => $alias]);
+                ejecutarQuery($result, $conn);
+
+                if ($result)
+                    echo '1';
             }
         }
         break;
