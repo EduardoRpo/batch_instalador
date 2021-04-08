@@ -143,6 +143,17 @@ function firmado(datos, posicion) {
 
         } */
 
+  if (posicion == 4) {
+    if (modulo == 4) {
+      parent = $("#aprobacion_verificado").parent();
+      $("#aprobacion_verificado").remove();
+      $("#aprobacion_verificado")
+        .css({ background: "lightgray", border: "gray" })
+        .prop("disabled", true);
+      $(".aprobacion_verificado").prop("disabled", true);
+    }
+  }
+
   let firma = template.replace(":firma:", datos);
   parent.append(firma).html;
 }
