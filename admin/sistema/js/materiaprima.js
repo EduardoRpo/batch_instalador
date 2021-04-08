@@ -57,6 +57,7 @@ $("#btnadicionarMateriaPrima").click(function (e) {
   $("#txtMP").val("");
   $("#txtAlias").val("");
   $("#btnguardarMateriaPrima").html("Crear");
+  $("#txtCodigo").prop("disabled", false);
 });
 
 /* Borrar registros */
@@ -91,7 +92,7 @@ $(document).on("click", ".link-borrar", function (e) {
 
 $(document).on("click", ".link-editar", function (e) {
   e.preventDefault();
-  
+
   let referencia = $(this).parent().parent().children().eq(2).text();
   let materiaprima = $(this).parent().parent().children().eq(3).text();
   let alias = $(this).parent().parent().children().eq(4).text();
@@ -109,7 +110,7 @@ $(document).on("click", ".link-editar", function (e) {
 
 $("#btnguardarMateriaPrima").click(function (e) {
   e.preventDefault();
-  let id = $("#txtId").val();
+
   let ref = $("#txtCodigo").val();
   let materiaprima = $("#txtMP").val();
   let alias = $("#txtAlias").val();
@@ -123,7 +124,7 @@ $("#btnguardarMateriaPrima").click(function (e) {
   $.ajax({
     type: "POST",
     url: "php/c_materiaprima.php",
-    data: { operacion: 3, editar, id, ref, materiaprima, alias },
+    data: { operacion: 3, ref, materiaprima, alias },
 
     success: function (r) {
       if (r == 1) {

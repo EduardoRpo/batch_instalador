@@ -19,7 +19,7 @@ switch ($op) {
     case 3: // Almacenar o actualizar data
         if (!empty($_POST)) {
 
-            $referencia = $_POST['referencia'];
+            $referencia = $_POST['ref'];
             $materia_prima = $_POST['materiaprima'];
             $alias = $_POST['alias'];
 
@@ -39,7 +39,6 @@ switch ($op) {
                 $sql = "INSERT INTO materia_prima (referencia, nombre, alias) VALUES(:referencia, :materia_prima, :alias)";
                 $query = $conn->prepare($sql);
                 $result = $query->execute(['referencia' => $referencia, 'materia_prima' => $materia_prima, 'alias' => $alias]);
-                ejecutarQuery($result, $conn);
 
                 if ($result)
                     echo '1';
