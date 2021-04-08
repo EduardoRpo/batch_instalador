@@ -131,20 +131,24 @@ switch ($op) {
     $tamanotqn              = $_POST['tmn'];
 
 
-    //Valida formula
-    $query_buscarFormula =  mysqli_query($conn, "SELECT * FROM formula WHERE id_producto = $id_batch");
-    $result = mysqli_num_rows($query_buscarFormula);
+    /* validar formula que exista la formula*/
+    $query_buscarFormula =  mysqli_query($conn, "SELECT * FROM formula WHERE id_producto = '$referencia'");
+    $resultFormula = mysqli_num_rows($query_buscarFormula);
 
-    if ($result <= 0) {
+    /* validar que exista el instructivo */
+    $query_buscarInstructivo =  mysqli_query($conn, "SELECT * FROM instructivo_preparacion WHERE id_producto = '$referencia'");
+    $resultPreparacion = mysqli_num_rows($query_buscarInstructivo);
+
+    if ($resultFormula <= 0 || $resultPreparacion <= 0) {
       $estado = '1';  //Sin formula
       $fechaprogramacion = '';
     }
 
-    if ($result > 0 && $fechaprogramacion == '') {
+    if ($resultFormula > 0 && $resultPreparacion > 0 && $fechaprogramacion == '') {
       $estado = '2'; // Inactivo  
     }
 
-    if ($result > 0 && $fechaprogramacion != '') {
+    if ($resultFormula > 0 && $resultPreparacion > 0 && $fechaprogramacion != '') {
       $estado = '3';  //Pesaje
     }
 
