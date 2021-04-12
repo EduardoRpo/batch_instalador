@@ -123,9 +123,12 @@ $(document).ready(function () {
       },
       {
         title: "Impresión",
-        defaultContent:
-          '<a href="#" data-toggle="modal" data-target="#imprimirEtiquetas"><i class="large material-icons">print</i></a>',
+        data: "",
         className: "uniqueClassName",
+        render: (data, type, row) => {
+          return `<a id="${row.referencia}" href="#" onclick="imprimirEtiquetas(this);"><i class="large material-icons">print</i></a>`;
+          /* return `<a id="${row.referencia}" href="#" data-toggle="modal" data-target="#imprimirEtiquetas"><i class="large material-icons">print</i></a>` */
+        },
       },
     ],
 
@@ -157,7 +160,6 @@ $(document).ready(function () {
   });
 
   /* Seleccion multiple */
-
   tablePesaje.on("click", "tbody tr", function () {
     $(this).toggleClass("tr_hover ");
   });

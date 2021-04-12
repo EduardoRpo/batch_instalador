@@ -10,6 +10,7 @@ function mostrarModal() {
   $("#modalCrearBatch").find("input,textarea,select").val("");
   $("#guardarBatch").html("Crear");
   $(".tcrearBatch").html("Crear Batch Record");
+  data = "";
   batch_record();
   cargarReferencias();
   cargarTanques();
@@ -88,7 +89,7 @@ $(document).ready(function () {
 function recargarDatos() {
   var combo = document.getElementById("cmbNoReferencia");
   var sel = combo.options[combo.selectedIndex].text;
-  
+
   $.ajax({
     type: "POST",
     url: "php/listarBatch.php",
@@ -115,7 +116,7 @@ function recargarDatos() {
 function CalculoTamanolote(valor) {
   var total = 0;
   unidades = parseInt(valor);
- 
+
   densidad = $("#densidad").val();
 
   if (batch == undefined || batch == false) {
