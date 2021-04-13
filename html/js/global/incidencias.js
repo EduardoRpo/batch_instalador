@@ -32,7 +32,7 @@ function observaciones_incidencias(firma) {
 
   confirm.set("oncancel", function () {
     //callbak al pulsar No
-    alertify.warning("No se reportaron Incidencias");
+    alertify.info("No se reportaron Incidencias");
     /* Almacenar firma 2da seccion */
     $.ajax({
       method: "POST",
