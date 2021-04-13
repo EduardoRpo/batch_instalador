@@ -97,7 +97,7 @@
                     </div>
 
                     <div class="row page mostrarTanque">
-                        
+
                         <label class="labelTanques">Tanque</label>
                         <label class="labelTanques">Cantidad</label>
                         <label class="labelTanques">Total</label>
@@ -127,7 +127,7 @@
                         <input type="number" class="form-control tnq" id="txtCantidad5" onblur="CalcularTanque(5)">
                         <input type="number" class="form-control tnq" id="txtTotal5">
                         <button class="btn btn-warning eliminarTanque" id="btnEliminar5" type="button" onclick="eliminarTanque(5);">X</button> -->
-                        
+
                         <label for="" class="labelTotalTanques">Total</label>
                         <input type="number" class="form-control sumaTanques tnq" id="sumaTanques" readonly>
                     </div>

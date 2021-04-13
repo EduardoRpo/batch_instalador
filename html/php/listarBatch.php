@@ -119,9 +119,9 @@ switch ($op) {
 
   case 5: // Guardar
 
-    $cantidad = $_POST['cantidad'];
-    $id_batch     = $_POST['id_batch'];
-    $referencia     = $_POST['ref'];
+    $cantidad               = $_POST['cantidad'];
+    $id_batch               = $_POST['id_batch'];
+    $referencia             = $_POST['ref'];
     $unidadesxlote          = $_POST['unidades'];
     $tamanototallote        = $_POST['lote'];
     $fechaprogramacion      = $_POST['programacion'];

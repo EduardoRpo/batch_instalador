@@ -251,13 +251,15 @@ function guardarDatos() {
       return false;
     }
   }
-
+  let ref = $("#cmbNoReferencia").val();
+  if (ref == null) ref = $("#referencia").val();
+  const id_batch = $("#idbatch").val();
+  const unidades = $("#unidadesxlote").val();
   const lote = $("#tamanototallote").val();
   const tamano_lote = formatoGeneral(lote);
-
   const presentacion = $("#presentacioncomercial").val();
   const presentacion_comercial = formatoGeneral(presentacion);
-
+  const programacion = $("#fechaprogramacion").val();
   let sumaTanques = $(".sumaTanques").val();
 
   if (sumaTanques == "" || sumaTanques == 0) {
@@ -306,17 +308,17 @@ function guardarDatos() {
     j++;
   }
 
-  (ref = $("#referencia").val()), (id_batch = $("#idbatch").val()), (j = 1);
-  debugger;
+  j = 1;
+
   if (!editar) {
     datos = {
       operacion: "5",
-      ref: $("#referencia").val(),
-      id_batch: $("#idbatch").val(),
-      unidades: $("#unidadesxlote").val(),
+      ref,
+      id_batch,
+      unidades,
       lote: tamano_lote,
       presentacion: presentacion_comercial,
-      programacion: $("#fechaprogramacion").val(),
+      programacion,
       fecha: fechaActual,
       cantidad: "1",
       tqns: tqn,
@@ -325,11 +327,11 @@ function guardarDatos() {
   } else {
     datos = {
       operacion: "7",
-      ref: $("#referencia").val(),
-      id_batch: $("#idbatch").val(),
-      unidades: $("#unidadesxlote").val(),
+      ref,
+      id_batch,
+      unidades,
       lote: tamano_lote,
-      programacion: $("#fechaprogramacion").val(),
+      programacion,
       fecha: fechaActual,
       tqns: tqn,
       tmn: tmn,
