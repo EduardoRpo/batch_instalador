@@ -18,7 +18,10 @@ function cargarBatch() {
           let question = "question-" + `${info.data[i].id_pregunta}`;
           let valor = info.data[i].solucion;
           //$("input:radio[name=" + question + "][value=" + valor + "]").prop('checked', true);
-          $(`input:radio[name="${question}"][value="${valor}"]`).prop("checked", true);
+          $(`input:radio[name="${question}"][value="${valor}"]`).prop(
+            "checked",
+            true
+          );
         }
         cargarDesinfectante();
       } else return false;
@@ -74,26 +77,6 @@ function cargarDesinfectante() {
     },
   });
 }
-
-/* cargar linea de equipos en el proceso de preparacion  */
-
-/* function cargarLinea() {
-  $.ajax({
-    type: "POST",
-    url: "../../html/php/cargarLineas.php",
-    data: { operacion: 2, modulo, idBatch },
-
-    success: function (response) {
-      const data = JSON.parse(response);
-
-      if (data == "false") return false;
-
-      $("#select-Linea").val(data[0].linea);
-      cargarEquipos();
-      cargarControlProceso();
-    },
-  });
-} */
 
 function cargarControlProceso() {
   $.ajax({

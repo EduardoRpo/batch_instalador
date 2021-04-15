@@ -6,6 +6,7 @@ include('modal/modal_observaciones.php');
 include('modal/m_firma.php');
 include('modal/m_muestras_acondicionamiento.php');
 include('modal/modal_condicionesMedio.php');
+include('modal/image.php')
 ?>
 
 <!DOCTYPE html>
@@ -1058,6 +1059,7 @@ include('modal/modal_condicionesMedio.php');
         <script src="../../html/js/global/condiciones_medio.js"></script>
         <script src="../../html/js/global/cargarBatchMulti.js"></script>
         <script src="../../html/js/acondicionamiento/acondicionamientoinfo.js"></script>
+        <script src="../../html/js/global/image.js"></script>
 
         <!--Alertify-->
         <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>

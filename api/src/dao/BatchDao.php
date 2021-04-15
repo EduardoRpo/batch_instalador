@@ -49,12 +49,12 @@ class BatchDao
   public function findById($id)
   {
     $connection = Connection::getInstance()->getConnection();
-    $stmt = $connection->prepare("SELECT p.referencia, p.nombre_referencia, pc.nombre as presentacion, p.unidad_empaque, batch.numero_orden, batch.tamano_lote, batch.numero_lote, batch.unidad_lote, linea.nombre as linea, linea.densidad, batch.fecha_programacion 
+    $stmt = $connection->prepare("SELECT p.referencia, p.nombre_referencia, pc.nombre as presentacion, p.unidad_empaque, batch.numero_orden, batch.tamano_lote, batch.numero_lote, batch.unidad_lote, linea.nombre as linea, linea.densidad, batch.fecha_programacion, p.img 
                                   FROM producto p
                                   INNER JOIN batch ON batch.id_producto = p.referencia 
                                   INNER JOIN presentacion_comercial pc ON pc.id = p.presentacion_comercial
                                   INNER JOIN linea ON linea.id = p.id_linea
-                                  WHERE id_batch =:idBatch");
+                                  WHERE id_batch = :idBatch");
 
     $stmt->execute(array('idBatch' => $id));
 

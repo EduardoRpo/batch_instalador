@@ -6,6 +6,7 @@ include('modal/modal_observaciones.php');
 include('modal/m_firma.php');
 include('modal/m_muestras.php');
 include('modal/modal_condicionesMedio.php');
+include('modal/image.php')
 ?>
 
 <!DOCTYPE html>
@@ -771,7 +772,7 @@ include('modal/modal_condicionesMedio.php');
 
                       <div class="group">
                         <label for="recipient-name" class="col-form-label">Digite el lote (requerido)</label>
-                        <input type="text" class="form-control validarLote" id="validarLote3"  autocomplete="off" onblur="revisarLote();">
+                        <input type="text" class="form-control validarLote" id="validarLote3" autocomplete="off" onblur="revisarLote();">
                       </div>
 
                       <div class="group">
@@ -985,6 +986,7 @@ include('modal/modal_condicionesMedio.php');
           <script src="../../html/js/envasado/envasadoinfo.js"></script>
           <script src="../../html/js/global/incidencias.js"></script>
           <script src="../../html/js/global/equipos.js"></script>
+          <script src="../../html/js/global/image.js"></script>
 
           <!--Alertify-->
           <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
