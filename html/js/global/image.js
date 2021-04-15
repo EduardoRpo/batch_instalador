@@ -1,30 +1,8 @@
-$("#envasadoMulti1").mouseover(function () {
-  ref = $("#ref1").val();
-  cargarImagen(ref);
-});
-
-$("#envasadoMulti2").mouseover(function () {
-  ref = $("#ref2").val();
-  cargarImagen(ref);
-});
-
-$("#envasadoMulti3").mouseover(function () {
-  ref = $("#ref3").val();
-  cargarImagen(ref);
-});
-
-$("#acondicionamientoMulti1").mouseover(function () {
-  ref = $("#ref1").val();
-  cargarImagen(ref);
-});
-
-$("#acondicionamientoMulti2").mouseover(function () {
-  ref = $("#ref2").val();
-  cargarImagen(ref);
-});
-
-$("#acondicionamientoMulti3").mouseover(function () {
-  ref = $("#ref3").val();
+$(".img_ref").mouseover(function () {
+  let input;
+  let ref;
+  input = this.nextElementSibling.className;
+  ref = $(`.${input}`).val();
   cargarImagen(ref);
 });
 

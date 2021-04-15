@@ -202,7 +202,7 @@ include('modal/image.php')
             <div class="card-header" id="headingThree">
               <h5 class="mb-0">
                 <button class="btn btn-link collapsed ref_multi1" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
-                  <b id="acondicionamientoMulti1">ACONDICIONAMIENTO</b>
+                  <b id="acondicionamientoMulti1" class="img_ref">ACONDICIONAMIENTO</b>
                   <input type="text" class="ref1" id="ref1" hidden>
                   <input type="text" class="unidad_empaque1" id="unidad_empaque1" hidden>
                   <input type="text" class="presentacion1" id="presentacion1" hidden>
@@ -479,7 +479,7 @@ include('modal/image.php')
             <div class="card-header" id="headingFour">
               <h5 class="mb-0">
                 <button class="btn btn-link ref_multi2 collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
-                  <b id="acondicionamientoMulti2">ACONDICIONAMIENTO</b>
+                  <b id="acondicionamientoMulti2" class="img_ref">ACONDICIONAMIENTO</b>
                   <input type="text" class="ref2" id="ref2" hidden>
                   <input type="text" class="unidad_empaque2" id="unidad_empaque2" hidden>
                   <input type="text" class="presentacion1" id="presentacion2" hidden>
@@ -752,7 +752,7 @@ include('modal/image.php')
             <div class="card-header" id="headingFive">
               <h5 class="mb-0">
                 <button class="btn btn-link collapsed ref_multi3" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
-                  <b id="acondicionamientoMulti3">ACONDICIONAMIENTO</b>
+                  <b id="acondicionamientoMulti3" class="img_ref">ACONDICIONAMIENTO</b>
                   <input type="text" class="ref3" id="ref3" hidden>
                   <input type="text" class="unidad_empaque3" id="unidad_empaque3" hidden>
                   <input type="text" class="presentacion1" id="presentacion3" hidden>

@@ -208,7 +208,7 @@ include('modal/image.php')
             <div class="card-header" id="headingThree">
               <h5 class="mb-0">
                 <button class="btn btn-link collapsed ref_multi1" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
-                  <b id="envasadoMulti1">ENVASADO</b>
+                  <b id="envasadoMulti1" class="img_ref">ENVASADO</b>
                   <input type="text" class="ref1" id="ref1" hidden>
                 </button>
               </h5>
@@ -456,8 +456,8 @@ include('modal/image.php')
           <div class="card" id="envasado2">
             <div class="card-header" id="headingThree">
               <h5 class="mb-0">
-                <button class="btn btn-link collapsed ref_multi2" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
-                  <b id="envasadoMulti2">ENVASADO</b>
+                <button class="btn btn-link collapsed img_ref ref_multi2" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
+                  <b id="envasadoMulti2" class="img_ref">ENVASADO</b>
                   <input type="text" class="ref2" id="ref2" hidden>
                 </button>
               </h5>
@@ -704,8 +704,8 @@ include('modal/image.php')
           <div class="card" id="envasado3">
             <div class="card-header" id="headingFive">
               <h5 class="mb-0">
-                <button id="ref_multi1" class="btn btn-link collapsed ref_multi3" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
-                  <b id="envasadoMulti3">ENVASADO</b>
+                <button id="ref_multi1" class="btn btn-link collapsed img_ref ref_multi3" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
+                  <b id="envasadoMulti3" class="img_ref">ENVASADO</b>
                   <input type="text" class="ref3" id="ref3" hidden>
                 </button>
               </h5>
