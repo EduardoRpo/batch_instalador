@@ -11135,9 +11135,9 @@ table.dataTable tbody td {
   color: white;
 }
 
-.modal-dialog {
+#imageRef {
   top: 25%;
-  right: -5%;
+  right: 0%;
   outline: none;
   overflow: hidden;
 }
