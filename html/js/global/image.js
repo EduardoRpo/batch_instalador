@@ -6,6 +6,10 @@ $(".img_ref").mouseover(function () {
   cargarImagen(ref);
 });
 
+$(".img_ref").mouseleave(function () {
+  $("#imageRef").modal("hide");
+});
+
 const cargarImagen = (ref) => {
   let mbatch;
   let img;

@@ -1,6 +1,6 @@
 /* Mostrar ventana de Condiciones Medio de acuerdo con el tiempo establecido en la BD*/
 
-function cargar_condiciones_medio() {
+const cargar_condicionesMedio = () => {
   $.ajax({
     type: "POST",
     url: "../../html/php/condicionesmedio.php",
@@ -21,20 +21,38 @@ function cargar_condiciones_medio() {
         $("#m_CondicionesMedio").modal({
           show: true,
           backdrop: "static",
+          keyboard: "false",
         });
       }, tiempo * 60000);
     },
   });
-}
+};
+
+/* Validar si las condiciones del medio ya fueron almacenadas */
+
+const validar_condicionesMedio = () => {
+  $.ajax({
+    type: "POST",
+    url: "../../html/php/condicionesmedio.php",
+    data: { operacion: 3, modulo, idBatch },
+
+    success: function (response) {
+      if (response == "true") return false;
+      else
+        $("#m_CondicionesMedio").modal({
+          show: true,
+          backdrop: "static",
+          keyboard: false,
+        });
+    },
+  });
+};
 
 /* Almacenar informacion de condiciones del medio */
 
-function guardar_condicionesMedio() {
-  let proceso = modulo;
+const guardar_condicionesMedio = () => {
   let temperatura = parseInt($("#temperatura").val());
   let humedad = parseInt($("#humedad").val());
-  let url = $(location).attr("href");
-  let id_batch = url.split("/");
 
   /* Validar que existan datos en los campos */
 
@@ -66,10 +84,10 @@ function guardar_condicionesMedio() {
     url: "../../html/php/condicionesmedio.php",
     data: {
       operacion: "2",
-      modulo: proceso,
-      temperatura: temperatura,
-      humedad: humedad,
-      id: id_batch[4],
+      modulo,
+      temperatura,
+      humedad,
+      idBatch,
     },
 
     success: function (resp) {
@@ -79,24 +97,6 @@ function guardar_condicionesMedio() {
       } else {
         alertify.set("notifier", "position", "top-right");
         alertify.error("Error");
-      }
-    },
-  });
-}
-
-/* Validar si las condiciones del medio ya fueron almacenadas */
-
-validarCondicionesMedio = () => {
-  $.ajax({
-    type: "POST",
-    url: "../../html/php/condicionesmedio.php",
-    data: { operacion: 3, modulo, idBatch },
-
-    success: function (response) {
-      if (response == 0) {
-        return false;
-      } else {
-        $("#m_CondicionesMedio").modal({ show: true, backdrop: "static" });
       }
     },
   });

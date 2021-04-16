@@ -13,19 +13,19 @@ $(document).ready(function () {
       JSONData.peso = peso;
       arrayData.push(JSONData);
       sessionStorage.setItem("batch", batch);
-      window.open("../../html/modal/m_plantillaEtiquetas.php", "_blank");
-      //$("#imprimirEtiquetas").modal("show");
+      //window.open("../../html/modal/m_plantillaEtiquetas.php", "_blank");
+      $("#imprimirEtiquetas").modal("show");
     });
   };
 });
 
 $("#btnimprimirEtiquetas").click(function (e) {
   e.preventDefault();
-  //imprimirEtiquetasJSON();
+  exportarEtiquetas();
   //imprimirEtiquetasVirtuales();
 });
 
-function imprimirEtiquetasJSON() {
+function exportarEtiquetas() {
   const createXLSLFormatObj = [];
   let xlsHeader = ["orden", "referencia", "peso"];
 
@@ -65,6 +65,39 @@ function imprimirEtiquetasJSON() {
   });
 }
 
+const imprimirEtiquetasFull = () => {
+  arrayData = [];
+  $("#tablePesaje tbody tr").each(function (index) {
+    var campo1, campo2, campo3;
+    $(this)
+      .children("td")
+      .each(function (index2) {
+        switch (index2) {
+          case 0:
+            campo1 = $(this).text();
+            break;
+          case 1:
+            campo2 = $(this).text();
+            break;
+          case 2:
+            campo3 = $(this).text();
+            break;
+          case 3:
+            campo4 = $(this).text();
+            break;
+        }
+      });
+
+    JSONData = {};
+    JSONData.orden = batch.numero_orden;
+    JSONData.referencia = campo1;
+    JSONData.peso = campo4;
+    arrayData.push(JSONData);
+  });
+  console.log(arrayData);
+  exportarEtiquetas();
+};
+
 imprimirEtiquetasVirtuales = () => {
   batch = sessionStorage.getItem("batch");
   const ref = batch.referencia;
@@ -100,4 +133,9 @@ imprimirEtiquetasVirtuales = () => {
 $("#btnEtiquetasPrueba").click(function (e) {
   e.preventDefault();
   imprimirEtiquetasVirtuales();
+});
+
+$("#btnImprimirTodaslasEtiquetas").click(function (e) {
+  e.preventDefault();
+  imprimirEtiquetasFull();
 });

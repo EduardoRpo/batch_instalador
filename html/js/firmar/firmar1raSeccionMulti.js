@@ -55,7 +55,7 @@ function preparar(datos) {
   if (btn_id == "firma5") {
     registrar_material_sobrante(info[0].id);
     observaciones_incidencias(info);
-    validarCondicionesMedio();
+    //validarCondicionesMedio();
     firmar(info);
   }
 

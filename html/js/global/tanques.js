@@ -73,7 +73,7 @@ function controlProceso(cantidad) {
 
   for (var i = 1; i <= cantidad; i++) {
     $(".chk-control").append(
-      `<input type="checkbox" id="chkcontrolTanques${i}" class="chkcontrol" style="height: 30px; width:30px;">`
+      `<input type="checkbox" id="chkcontrolTanques${i}" class="chkcontrol chktanque" style="height: 30px; width:30px;" onclick="validar_condicionesMedio();">`
     );
   }
 

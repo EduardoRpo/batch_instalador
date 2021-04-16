@@ -50,9 +50,9 @@ function preparar(datos) {
 
   if (btn_id == "firma3") {
     firmar2daSeccion(info);
-    validarCondicionesMedio();
+    //validarCondicionesMedio();
     //imprimirEtiquetasVirtuales();
-    //firmar(info);
+    firmar(info);
   }
 
   if (btn_id == "firma4") {

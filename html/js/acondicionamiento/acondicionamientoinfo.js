@@ -442,7 +442,7 @@ function rendimiento_producto() {
   cantidad = $(`#txtUnidadesProducidas${id_multi}`).val();
   presentacion = $(`#presentacion${id_multi}`).val();
   densidad = $(`#densidad${id_multi}`).val();
-  total = $(`#in_tamano_lote`).val();
+  total = $(`#in_tamano_lote`).val(); //total de la presentacion
   total = total.replace(".", "");
 
   let rendimiento = (presentacion * cantidad * densidad) / 1000;

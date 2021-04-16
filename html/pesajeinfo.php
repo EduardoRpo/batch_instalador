@@ -261,6 +261,7 @@ include_once('modal/modal_condicionesMedio.php');
               <div class="card-body">
                 <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Pesaje</h3>
                 <div class="chk-control m-3">
+                  <button class="btn btn-primary" id="btnImprimirTodaslasEtiquetas">ImprimirEtiquetas</button>
                   <label for="" class="lblchk-control">Control Pesaje Tanques</label>
                 </div>
                 <hr>
