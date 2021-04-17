@@ -99,6 +99,12 @@ $app->get('/acondicionamiento', function (Request $request, Response $response, 
   return $response->withHeader('Content-Type', 'application/json');
 });
 
+$app->get('/despachos', function (Request $request, Response $response, $args) use ($batchLineaDao) {
+  $despachos = $batchLineaDao->findBatchDespachos();
+  $response->getBody()->write(json_encode($despachos, JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
+});
+
 $app->get('/batch/{id}', function (Request $request, Response $response, $args) use ($batchDao) {
   $batch = $batchDao->findById($args["id"]);
   $response->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));

@@ -149,9 +149,15 @@ $(document).on("click", ".link-editar", function (e) {
   OcultarTanques();
 
   if (data.estado > 2) {
-    alertify.set("notifier", "position", "top-right");
-    alertify.error("Batch Record en proceso. No es posible actualizarlo.");
-    return false;
+    f1 = new Date();
+    f2 = new Date(data.fecha_programacion);
+    f1.setHours(0, 0, 0, 0);
+    f2.setHours(0, 0, 0, 0);
+    if (f1.getTime() == f2.getTime()) {
+      alertify.set("notifier", "position", "top-right");
+      alertify.error("Batch Record en proceso. No es posible actualizarlo.");
+      return false;
+    }
   }
 
   const texto = $(this).parent().parent().children()[1];
@@ -245,12 +251,18 @@ function guardarDatos() {
 
   if (data !== undefined) {
     if (data.estado > 2) {
-      alertify.set("notifier", "position", "top-right");
-      alertify.error("Batch Record en proceso. No es posible actualizarlo.");
-      cerrarModal();
-      return false;
+      f1 = new Date();
+      f2 = new Date(data.fecha_programacion);
+      f1.setHours(0, 0, 0, 0);
+      f2.setHours(0, 0, 0, 0);
+      if (f1.getTime() == f2.getTime()) {
+        alertify.set("notifier", "position", "top-right");
+        alertify.error("Batch Record en proceso. No es posible actualizarlo.");
+        return false;
+      }
     }
   }
+
   let ref = $("#cmbNoReferencia").val();
   if (ref == null) ref = $("#referencia").val();
   const id_batch = $("#idbatch").val();

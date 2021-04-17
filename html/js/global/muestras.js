@@ -1,18 +1,15 @@
 /* Cargar el numero de muestras de acuerdo con las unidades a producir*/
 
 function calcularMuestras(j, unidades) {
-  if (unidades <= 2000) {
-    $(`#muestras${j}`).val(20);
-  } else if (unidades >= 2001 && unidades < 4001) {
-    $(`#muestras${j}`).val(40);
-  } else {
-    $(`#muestras${j}`).val(60);
-  }
+  if (unidades <= 2000) $(`#muestras${j}`).val(20);
+  else if (unidades >= 2001 && unidades < 4001) $(`#muestras${j}`).val(40);
+  else $(`#muestras${j}`).val(60);
 }
 
 /* Cargar el numero de muestras */
 
 function muestrasEnvase() {
+  //$("#m_muestras").modal("show");
   let muestras = $(`#muestras${id_multi}`).val();
   let recoveredData = localStorage.getItem(presentacion + ref_multi + modulo);
   let j = 1;
@@ -26,7 +23,7 @@ function muestrasEnvase() {
   for (let j = 1; j <= muestras; j++) {
     $(".txtMuestras").append(
       `<input type='number' min='1' class='form-control' id='txtMuestra${j}' placeholder='${j}' style='text-align:center; color:#67757c;'>`
-    ); // placeholder='${i}' style="border:0; border-bottom:1px solid #67757c"
+    );
   }
 
   if (recoveredData !== null) {
@@ -82,17 +79,15 @@ function guardarMuestras() {
   let recoveredData = localStorage.getItem(presentacion + ref_multi + modulo);
   let promedio = 0;
 
-  if (recoveredData !== "") {
+  if (recoveredData !== "")
     localStorage.removeItem(presentacion + ref_multi + modulo);
-  }
 
   /* cargar el array con las muestras */
 
   for (i = 1; i <= cantidad_muestras; i++) {
     muestra = parseInt($(`#txtMuestra${i}`).val());
-    if (muestra == "" || isNaN(muestra)) {
-      break;
-    } else {
+    if (muestra == "" || isNaN(muestra)) break;
+    else {
       muestras.push(muestra);
       promedio = promedio + muestra;
     }
@@ -220,7 +215,6 @@ function muestras_acondicionamiento() {
   }
 }
 
-/* function guardar_muestras_acondicionamiento() { */
 $("#guardar_muestras_acondicionamiento").click(function (e) {
   e.preventDefault();
   muestras_acon = $(`#muestras${id_multi}`).val();

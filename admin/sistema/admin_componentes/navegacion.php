@@ -14,6 +14,7 @@
       <a class="navbar-brand" href="/../aprobacion" target="_blank">Aprobación</a>
       <a class="navbar-brand" href="/../envasado" target="_blank">Envasado</a>
       <a class="navbar-brand" href="/../acondicionamiento" target="_blank">Acondicionamiento</a>
+      <a class="navbar-brand" href="/../despachos" target="_blank">Despachos</a>
     </div>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">

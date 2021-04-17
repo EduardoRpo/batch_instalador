@@ -73,24 +73,12 @@ function controlProceso(cantidad) {
 
   for (var i = 1; i <= cantidad; i++) {
     $(".chk-control").append(
-      `<input type="checkbox" id="chkcontrolTanques${i}" class="chkcontrol chktanque" style="height: 30px; width:30px;" onclick="validar_condicionesMedio();">`
+      `<input type="checkbox" id="chkcontrolTanques${i}" class="chkcontrol" style="height: 30px; width:30px;" onclick="validar_condicionesMedio();">`
     );
   }
 
   tanques = i - 1;
 }
-
-$(".chkcontrol").change(function (e) {
-  e.preventDefault();
-
-  if ($(this).is(":checked")) {
-    // Hacer algo si el checkbox ha sido seleccionado
-    alert("El checkbox con valor " + $(this).val() + " ha sido seleccionado");
-  } else {
-    // Hacer algo si el checkbox ha sido deseleccionado
-    alert("El checkbox con valor " + $(this).val() + " ha sido deseleccionado");
-  }
-});
 
 /* Control de Tanques seleccionados */
 
@@ -121,7 +109,6 @@ function controlTanques() {
     }
     /* Continua el proceso si el tanque va a ser ejecutado */
     if ($(`#chkcontrolTanques${i}`).is(":checked")) {
-      //$(`#chkcontrolTanques${i}`).is(':not(:checked)')
       break;
     } else {
       alertify.set("notifier", "position", "top-right");

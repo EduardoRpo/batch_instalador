@@ -15,7 +15,6 @@ if (!empty($_POST)) {
 
             $firma = $_POST['id_firma'];
             $ref_multi = $_POST['ref_multi'];
-
             $sql = "INSERT INTO batch_firmas2seccion (modulo, batch, ref_multi, realizo) 
             VALUES (:modulo, :batch, :ref_multi, :realizo)";
             $query = $conn->prepare($sql);
@@ -26,10 +25,9 @@ if (!empty($_POST)) {
                 'realizo' => $firma,
             ]);
 
-            if ($result) {
-                echo '1';
-            } else
-                echo '0';
+            if ($result) echo '1';
+            else echo '0';
+
             break;
 
         case 2: // firma calidad 2da seccion 
@@ -209,6 +207,5 @@ if (!empty($_POST)) {
             $data = $query->fetchAll(PDO::FETCH_ASSOC);
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
             break;
-
     }
 }

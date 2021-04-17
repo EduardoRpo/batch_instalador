@@ -132,14 +132,14 @@ $(document).ready(function () {
       },
     ],
 
-    dom: "Bfrtip",
-    buttons: [
+    //dom: "Bfrtip",
+    /* buttons: [
       /* $.extend( true, {}, buttonCommon, {
                 extend: 'copyHtml5'
             } ),
             $.extend( true, {}, buttonCommon, {
                 extend: 'excelHtml5'
-            } ), */
+            } ), 
 
       $.extend(
         true,
@@ -149,14 +149,14 @@ $(document).ready(function () {
           text: "Exportar PDF",
           title: "DISPENSACIÓN ", //+ batch.numero_orden,
 
-          //messageTop: 'Ingrese el número de Tanque   _____ ', //VALIDAR PARA QUE SE PREGUNTE EL NÚMERO DE TANQUE
+          messageTop: 'Ingrese el número de Tanque   _____ ', //VALIDAR PARA QUE SE PREGUNTE EL NÚMERO DE TANQUE
 
           exportOptions: {
             columns: [0, 1, 3],
           },
         }
       ),
-    ],
+    ], */
   });
 
   /* Seleccion multiple */

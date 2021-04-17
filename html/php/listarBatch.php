@@ -224,12 +224,13 @@ switch ($op) {
     $tamanotqn    = $_POST['tmn'];
 
     //Validar estado
-    $query_buscarEstado =  mysqli_query($conn, "SELECT * FROM batch WHERE id_batch = '$id_batch'");
+    /* $query_buscarEstado =  mysqli_query($conn, "SELECT * FROM batch WHERE id_batch = '$id_batch'");
     $data = mysqli_fetch_all($query_buscarEstado, MYSQLI_ASSOC);
     if ($data[0]['estado'] > 2) {
       echo '3';
       exit();
-    }
+    } */
+
     //Valida formula
     $query_buscarFormula =  mysqli_query($conn, "SELECT * FROM formula WHERE id_producto = '$referencia'");
     $result = mysqli_num_rows($query_buscarFormula);

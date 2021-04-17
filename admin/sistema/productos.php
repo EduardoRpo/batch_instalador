@@ -56,6 +56,15 @@ require_once('modal/m_validacionProductos.php');
                 <h4 class="card-title"> <strong>Productos Registrados</strong></h4>
                 <!-- <a class="btn btn-primary" href="crearUsuarios.php" role="button">Crear Producto</a> -->
                 <button type="button" class="btn btn-primary" onclick="cargarModalProductos();">Crear Productos</button>
+                <button type="button" class="btn btn-primary" id="btnCargarImagenes">Cargar Imagenes</button>
+                <div class="imgImportar">
+                  <form id="uploadForm" enctype="multipart/form-data">
+                    <label id="etiqueta">Cargar Imagenes de Productos</label>
+                    <input type="file" class="form-control" name="images[]" id="fileInput" multiple>
+                    <input type="submit" class="form-control btn-primary" name="submit" value="Importar" />
+                  </form>
+                  <div id="uploadStatus"></div>
+                </div>
               </div>
               <div class="card-body">
                 <div class="table-responsive">

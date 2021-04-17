@@ -83,11 +83,11 @@ if (!empty($_POST)) {
                 case '5':
                     $estado = 7;
                     break;
-                case '6':
+                /* case '6':
                     $estado = 8;
                     break;
                 default:
-                    $estado = 9;
+                    $estado = 9; */
                     break;
             }
 

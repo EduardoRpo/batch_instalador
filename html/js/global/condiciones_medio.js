@@ -8,11 +8,7 @@ const cargar_condicionesMedio = () => {
 
     success: function (resp) {
       if (resp == 3) return false;
-
       let t = JSON.parse(resp);
-
-      /* Calculo del tiempo para mostrar el modal condiciones del medio */
-
       let tiempo = Math.round(
         Math.random() * (t[0].t_max - t[0].t_min) + parseInt(t[0].t_min)
       );
@@ -21,7 +17,7 @@ const cargar_condicionesMedio = () => {
         $("#m_CondicionesMedio").modal({
           show: true,
           backdrop: "static",
-          keyboard: "false",
+          keyboard: false,
         });
       }, tiempo * 60000);
     },
@@ -101,3 +97,7 @@ const guardar_condicionesMedio = () => {
     },
   });
 };
+
+$("#m_CondicionesMedio").on("hidden.bs.modal", function () {
+  modulo == 5 ? muestrasEnvase() : muestras_acondicionamiento();
+});

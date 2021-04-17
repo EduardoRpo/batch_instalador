@@ -93,4 +93,17 @@ class BatchLineaDao
     $this->logger->notice("Acondicionamiento Obtenidos", array('acondicionamiento' => $acondicionamiento));
     return $acondicionamiento;
   }
+
+  public function findBatchDespachos()
+  {
+    $connection = Connection::getInstance()->getConnection();
+    $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote  
+                                  FROM batch INNER JOIN producto p ON p.referencia = batch.id_producto 
+                                  WHERE (batch.estado >= 8) ORDER BY batch.id_batch DESC");
+    $stmt->execute();
+    $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+    $despachos = $stmt->fetchAll($connection::FETCH_ASSOC);
+    $this->logger->notice("Despachos Obtenidos", array('despachos' => $despachos));
+    return $despachos;
+  }
 }

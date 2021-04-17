@@ -7,7 +7,7 @@ if (!empty($_POST)) {
   $idBatch = $_POST['idBatch'];
   $modulo = $_POST['modulo'];
   $id_firma = $_POST['info'];
-  
+
   foreach ($material as $valor) {
     $sql = "INSERT INTO batch_material_sobrante (ref_material, envasada, averias, sobrante, ref_producto, batch, modulo, realizo) 
             VALUES(:referencia, :envasada, :averias, :sobrante, :producto, :batch, :modulo, :realizo)";
@@ -23,8 +23,6 @@ if (!empty($_POST)) {
       'realizo' => $id_firma,
     ]);
   }
-  if ($result)
-    echo '1';
-  else
-    echo '0';
+  if ($result) echo '1';
+  else echo '0';
 }

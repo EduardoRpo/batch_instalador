@@ -8,47 +8,8 @@ if (!empty($_POST)) {
     switch ($op) {
         case 1: // Listar productos
             $query = "SELECT * FROM producto";
-            /*$query = "SELECT p.referencia, p.nombre_referencia, p.presentacion_comercial as presentacion, p.unidad_empaque, np.nombre as producto,
-        linea.nombre as linea, ns.nombre as notificaciones, marca.nombre as marca, ow.nombre as propietario, color.nombre as color,
-        olor.nombre as olor, ap.nombre as apariencia, un.nombre as untuosidad, pe.nombre as espumoso, rm.nombre as mesofilos,
-        ps.nombre as pseudomona, es.nombre as escherichia, st.nombre as staphylococcus,  ph.ph, v.viscosidad
-        FROM producto p
-        INNER JOIN nombre_producto np ON np.id=p.id_nombre_producto
-        INNER JOIN notificacion_sanitaria ns ON ns.id=p.id_notificacion_sanitaria
-        INNER JOIN linea ON linea.id=p.id_linea
-        INNER JOIN marca ON marca.id=p.id_marca
-        INNER JOIN propietario ow ON ow.id=p.id_propietario
-
-        INNER JOIN color ON color.id=p.id_color
-        INNER JOIN olor ON olor.id=p.id_olor
-        INNER JOIN apariencia ap ON ap.id=p.id_apariencia
-        INNER JOIN untuosidad un ON un.id=p.id_untuosidad
-        INNER JOIN poder_espumoso pe ON pe.id=p.id_poder_espumoso
-        INNER JOIN recuento_mesofilos rm ON rm.id=p.id_recuento_mesofilos
-        INNER JOIN pseudomona ps ON ps.id=p.id_pseudomona
-        INNER JOIN escherichia es ON es.id=p.id_escherichia
-        INNER JOIN staphylococcus st ON st.id=p.id_staphylococcus
-        INNER JOIN ph ON ph.id=p.id_ph
-        INNER JOIN viscosidad v ON v.id=p.id_viscosidad ";*/
-
             ejecutarQuerySelect($conn, $query);
             break;
-
-            /* $query1 = "SELECT * FROM productostemp";
-
-        $query2 = "SELECT ot.nombre AS otros, psm.nombre as pseudomona, t.nombre AS tapa, et.nombre AS etiqueta, em.nombre AS empaque
-                    FROM producto p
-                    INNER JOIN otros AS ot ON p.id_otros = ot.id
-                    INNER JOIN pseudomona AS psm ON psm.id = p.id_pseudomona
-                    INNER JOIN tapa AS t ON p.id_tapa = t.id
-                    INNER JOIN etiqueta AS et ON et.id = p.id_etiqueta
-                    INNER JOIN empaque AS em ON em.id = p.id_empaque";
-
-        transaccion($conn, $query1, $query2); */
-            /*        ejecutarQuerySelect($conn, $query1);
-        ejecutarQuerySelect($conn, $query2);
-        break;*/
-
 
         case 2: //Eliminar
             $id = $_POST['id'];
@@ -70,15 +31,15 @@ if (!empty($_POST)) {
 
             if ($editar > 0) {
                 $sql = "UPDATE producto SET /* referencia = :referencia, */  nombre_referencia =:nombre,  unidad_empaque = :uniEmpaque,  
-            id_nombre_producto = :nombre_producto, id_notificacion_sanitaria = :notificacion_sanitaria, id_linea = :linea, 
-            id_marca =:marca, id_propietario =:propietario, presentacion_comercial= :presentacion_comercial, 
-            id_color =:color, id_olor= :olor, id_apariencia = :apariencia, id_untuosidad=:untuosidad, 
-            id_poder_espumoso =:poder_espumoso, id_recuento_mesofilos =:recuento_mesofilos, id_pseudomona=:pseudomona, 
-            id_escherichia =:escherichia, id_staphylococcus=:staphylococcus, id_ph =:ph, id_viscosidad =:viscosidad, 
-            id_densidad_gravedad =:densidad_gravedad, id_grado_alcohol = :grado_alcohol, id_tapa = :tapa, id_envase = :envase, 
-            id_etiqueta = :etiqueta, id_empaque =:empaque, id_otros = :otros, base_instructivo = :bases_instructivo, 
-            instructivo = :instructivo 
-            WHERE referencia = :id_referencia";
+                        id_nombre_producto = :nombre_producto, id_notificacion_sanitaria = :notificacion_sanitaria, id_linea = :linea, 
+                        id_marca =:marca, id_propietario =:propietario, presentacion_comercial= :presentacion_comercial, 
+                        id_color =:color, id_olor= :olor, id_apariencia = :apariencia, id_untuosidad=:untuosidad, 
+                        id_poder_espumoso =:poder_espumoso, id_recuento_mesofilos =:recuento_mesofilos, id_pseudomona=:pseudomona, 
+                        id_escherichia =:escherichia, id_staphylococcus=:staphylococcus, id_ph =:ph, id_viscosidad =:viscosidad, 
+                        id_densidad_gravedad =:densidad_gravedad, id_grado_alcohol = :grado_alcohol, id_tapa = :tapa, id_envase = :envase, 
+                        id_etiqueta = :etiqueta, id_empaque =:empaque, id_otros = :otros, base_instructivo = :bases_instructivo, 
+                        instructivo = :instructivo 
+                        WHERE referencia = :id_referencia";
 
                 $query = $conn->prepare($sql);
                 $result = $query->execute([
@@ -110,6 +71,8 @@ if (!empty($_POST)) {
                     echo '2';
                     exit();
                 } else {
+                    $path = '../../html/img/referencias/' . $referencia . '.jpg';
+
                     $sql = "INSERT INTO producto (referencia, nombre_referencia, unidad_empaque, id_nombre_producto, 
                     id_notificacion_sanitaria, id_linea, id_marca, id_propietario, presentacion_comercial, id_color, id_olor, 
                     id_apariencia, id_untuosidad, id_poder_espumoso, id_recuento_mesofilos, id_pseudomona, id_escherichia, 
@@ -119,7 +82,7 @@ if (!empty($_POST)) {
                     :linea, :marca, :propietario, :presentacion_comercial, :color, :olor, :apariencia, 
                     :untuosidad, :poder_espumoso, :recuento_mesofilos, :pseudomona, :escherichia, :staphylococcus,
                     :ph, :viscosidad, :densidad_gravedad, :grado_alcohol, :envase, :tapa, :etiqueta, :empaque, :otros,
-                    :bases_instructivo, :instructivo)";
+                    :bases_instructivo, :instructivo, :img)";
 
                     $query = $conn->prepare($sql);
                     $result = $query->execute([
@@ -130,7 +93,7 @@ if (!empty($_POST)) {
                         'pseudomona' => $pseudomona, 'escherichia' => $escherichia, 'staphylococcus' => $staphylococcus, 'ph' => $ph,
                         'viscosidad' => $viscosidad, 'densidad_gravedad' => $densidad_gravedad, 'grado_alcohol' => $grado_alcohol,
                         'envase' => $envase, 'tapa' => $tapa, 'etiqueta' => $etiqueta, 'empaque' => $empaque, 'otros' => $otros,
-                        'bases_instructivo' => $bases_instructivo, 'instructivo' => $instructivo,
+                        'bases_instructivo' => $bases_instructivo, 'instructivo' => $instructivo, 'img' => $path
                     ]);
                     ejecutarQuery($result, $conn);
                 }
@@ -155,6 +118,30 @@ if (!empty($_POST)) {
                   FROM instructivos_base ib 
                   INNER JOIN nombre_producto np ON np.id = ib.producto";
             ejecutarQuerySelect($conn, $query);
+            break;
+        case 6: // Cargar imagenes
+            if (!empty($_FILES['images'])) {
+                // File upload configuration
+                $targetDir = "../../../html/img/referencias/";
+                $allowTypes = array('jpg', 'jpeg');
+
+                $images_arr = array();
+                foreach ($_FILES['images']['name'] as $key => $val) {
+                    $image_name = $_FILES['images']['name'][$key];
+                    $tmp_name   = $_FILES['images']['tmp_name'][$key];
+                    $size       = $_FILES['images']['size'][$key];
+                    $type       = $_FILES['images']['type'][$key];
+                    $error      = $_FILES['images']['error'][$key];
+
+                    $fileName = basename($_FILES['images']['name'][$key]);
+                    $targetFilePath = $targetDir . $image_name;
+                    $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+                    if (in_array($fileType, $allowTypes)) {
+                        move_uploaded_file($tmp_name, $targetFilePath);
+                    }
+                }
+            }
+
             break;
     }
 }
