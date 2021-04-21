@@ -4,19 +4,31 @@ function actualizarEstado($batch, $modulo, $conn)
 {
 
     switch ($modulo) {
-        case '2':
+        case '2': //pesaje
             $estado = 3.5;
             break;
-        case '3':
+        case '3': //preparacion
             $estado = 4.5;
             break;
-        case '4':
-            $estado = 6.5;
+        case '4': //aprobacion
+            $estado = 5.5;
             break;
-        case '5':
-            $estado = 6.5;
+        case '5': //envasado
+            $estado = 7;
             break;
-        case '6':
+        case '6': //acondicionamiento
+            $estado = 7.5;
+            break;
+        case '7': //despachos
+            $estado = 8.5;
+            break;
+        case '8': //microbiologico
+            $estado = 8.5;
+            break;
+        case '9': //fisicoquimico
+            $estado = 7.5;
+            break;
+        case '10': //liberacion lote
             $estado = 7.5;
             break;
     }

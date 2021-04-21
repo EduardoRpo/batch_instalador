@@ -7,8 +7,8 @@ function cargarEquipos() {
     data: { modulo, idBatch },
 
     success: function (response) {
-      if (response == "") return false;
       const info = JSON.parse(response);
+      if (info.length < 1) return false;
 
       if (modulo == 3) {
         $("#sel_agitador").val(info[0].equipo);
