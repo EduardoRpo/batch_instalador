@@ -5,14 +5,13 @@ use BatchRecord\dao\BatchDao; */
 if (!empty($_POST)) {
     require_once('../../conexion.php');
     require_once('../../admin/sistema/php/crud.php');
-
+    require_once('actualizarEstado.php');
     $op = $_POST['operacion'];
 
     switch ($op) {
         case 1: // listar incidencias
             $query = "SELECT * FROM incidencias_motivo";
             ejecutarQuerySelect($conn, $query);
-
             break;
 
         case 2: //almacenar incidencias
@@ -47,12 +46,8 @@ if (!empty($_POST)) {
             VALUES (:observaciones, :modulo, :batch, :realizo)";
             $query = $conn->prepare($sql);
             $result = $query->execute([
-                'realizo' => $firma,
-                'modulo' => $modulo,
-                'batch' => $batch,
-                'observaciones' => $observaciones,
+                'realizo' => $firma, 'modulo' => $modulo, 'batch' => $batch, 'observaciones' => $observaciones,
             ]);
-
             break;
 
         case 3: //Almacenar firma 2da seccion sin incidencias
@@ -60,47 +55,10 @@ if (!empty($_POST)) {
             $modulo = $_POST['modulo'];
             $batch = $_POST['idBatch'];
 
-            $sql = "INSERT INTO batch_firmas2seccion (modulo, batch, realizo) 
-                    VALUES (:modulo, :batch, :realizo)";
-
+            $sql = "INSERT INTO batch_firmas2seccion (modulo, batch, realizo) VALUES (:modulo, :batch, :realizo)";
             $query = $conn->prepare($sql);
-            $result = $query->execute([
-                'realizo' => $firma,
-                'modulo' => $modulo,
-                'batch' => $batch,
-            ]);
-
-            switch ($modulo) {
-                case '2':
-                    $estado = 4;
-                    break;
-                case '3':
-                    $estado = 5;
-                    break;
-                case '4':
-                    $estado = 6;
-                    break;
-                case '5':
-                    $estado = 7;
-                    break;
-                /* case '6':
-                    $estado = 8;
-                    break;
-                default:
-                    $estado = 9; */
-                    break;
-            }
-
-
-            //Modifica el estado de acuerdo con el modulo
-            $sql = "UPDATE batch SET estado = :estado WHERE id_batch = :batch";
-            $query = $conn->prepare($sql);
-            $query->execute(['batch' => $batch, 'estado' => $estado]);
-
-            if ($result) {
-                echo '1';
-            } else
-                echo '0';
+            $result = $query->execute(['realizo' => $firma, 'modulo' => $modulo, 'batch' => $batch,]);
+            actualizarEstado($batch, $modulo, $conn);
             break;
 
         case 4: //Almacenar firma 2da seccion calidad 
@@ -110,19 +68,10 @@ if (!empty($_POST)) {
 
             $sql = "UPDATE batch_firmas2seccion SET verifico =:firma WHERE modulo =:modulo AND batch =:batch";
             $query = $conn->prepare($sql);
-            $result = $query->execute([
-                'firma' => $firma,
-                'modulo' => $modulo,
-                'batch' => $batch,
-            ]);
-
-            /* Actualizar estado  segunda firma calidad*/
-
-            if ($result) {
-                echo '1';
-            } else
-                echo '0';
-
+            $result = $query->execute(['firma' => $firma, 'modulo' => $modulo, 'batch' => $batch,]);
+            cerrarEstado($batch, $modulo, $conn);
+            if ($result) echo '1';
+            else echo '0';
             break;
     }
 }

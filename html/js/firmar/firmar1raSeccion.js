@@ -1,14 +1,11 @@
 let id;
-/* let btnOprimido; */
 let cont = 1;
 let contadorchecks;
-/* let data; */
 
 /* Valida el usuario si existe en la base de datos */
 
 function enviar() {
   $("#m_firmar").modal("hide");
-  /* btn_id = $('#idbtn').val(); */
   btn_id = localStorage.getItem("idbtn");
 
   (datos = {
@@ -52,7 +49,6 @@ function preparar(datos) {
     firmar2daSeccion(info);
     //validarCondicionesMedio();
     //imprimirEtiquetasVirtuales();
-    firmar(info);
   }
 
   if (btn_id == "firma4") {

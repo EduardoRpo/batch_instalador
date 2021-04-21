@@ -8,10 +8,7 @@ if (!empty($_POST)) {
 
     $sql = "SELECT * FROM batch_equipos WHERE modulo = :modulo AND batch = :batch";
     $query = $conn->prepare($sql);
-    $query->execute([
-        'modulo' => $modulo,
-        'batch' => $batch,
-    ]);
+    $query->execute(['modulo' => $modulo, 'batch' => $batch]);
     $data = $query->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($data, JSON_UNESCAPED_UNICODE);
 }

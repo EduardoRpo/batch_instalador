@@ -1,6 +1,7 @@
 /* Mostrar ventana de Condiciones Medio de acuerdo con el tiempo establecido en la BD*/
 
 const cargar_condicionesMedio = () => {
+  //Condiciones debe aparecer en aprobacion????
   $.ajax({
     type: "POST",
     url: "../../html/php/condicionesmedio.php",

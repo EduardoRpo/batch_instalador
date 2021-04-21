@@ -27,16 +27,16 @@ class BatchLineaDao
   public function findBatchPesajes()
   {
     $connection = Connection::getInstance()->getConnection();
-    $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, batch.numero_lote 
-                                    FROM batch 
-                                    WHERE (batch.estado >= 3) AND  batch.fecha_programacion  
-                                    BETWEEN CURRENT_DATE() AND CURDATE() + INTERVAL 1 DAY OR batch.fecha_programacion <= CURRENT_DATE() 
-                                    ORDER BY batch.id_batch DESC");
+    $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, batch.numero_lote, batch.estado 
+                                  FROM batch 
+                                  WHERE batch.fecha_programacion  
+                                  BETWEEN CURRENT_DATE() AND CURDATE() + INTERVAL 1 DAY /* OR batch.fecha_programacion <= CURRENT_DATE() */
+                                  AND (batch.estado > 2 AND batch.estado < 4)");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $pesajes = $stmt->fetchAll($connection::FETCH_ASSOC);
     $this->logger->notice("Pesajes Obtenidos", array('pesajes' => $pesajes));
-    
+
     return $pesajes;
   }
 
@@ -45,7 +45,7 @@ class BatchLineaDao
     $connection = Connection::getInstance()->getConnection();
     $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, batch.numero_lote 
                                     FROM batch 
-                                    WHERE (batch.estado >= 4)
+                                    WHERE (batch.estado >= 3.5 AND batch.estado <= 4.5)
                                     ORDER BY batch.id_batch DESC");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
@@ -59,7 +59,7 @@ class BatchLineaDao
     $connection = Connection::getInstance()->getConnection();
     $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote  
                                   FROM batch INNER JOIN producto p ON p.referencia = batch.id_producto 
-                                  WHERE (batch.estado >= 5) ORDER BY batch.id_batch DESC");
+                                  WHERE (batch.estado >= 4.5 AND batch.estado <= 5.5) ORDER BY batch.id_batch DESC");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $aprobacion = $stmt->fetchAll($connection::FETCH_ASSOC);
@@ -72,7 +72,7 @@ class BatchLineaDao
     $connection = Connection::getInstance()->getConnection();
     $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, batch.numero_lote 
                                     FROM batch 
-                                    WHERE (batch.estado >= 6)
+                                    WHERE (batch.estado >= 5.5 AND batch.estado <= 6.5)
                                     ORDER BY batch.id_batch DESC");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
@@ -86,7 +86,7 @@ class BatchLineaDao
     $connection = Connection::getInstance()->getConnection();
     $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote  
                                   FROM batch INNER JOIN producto p ON p.referencia = batch.id_producto 
-                                  WHERE (batch.estado >= 6) ORDER BY batch.id_batch DESC");
+                                  WHERE (batch.estado >= 5.5 AND batch.estado <= 7.5) ORDER BY batch.id_batch DESC");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $acondicionamiento = $stmt->fetchAll($connection::FETCH_ASSOC);
@@ -99,7 +99,7 @@ class BatchLineaDao
     $connection = Connection::getInstance()->getConnection();
     $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote  
                                   FROM batch INNER JOIN producto p ON p.referencia = batch.id_producto 
-                                  WHERE (batch.estado >= 8) ORDER BY batch.id_batch DESC");
+                                  WHERE (batch.estado >= 7.5 AND batch.estado <= 8.5) ORDER BY batch.id_batch DESC");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $despachos = $stmt->fetchAll($connection::FETCH_ASSOC);

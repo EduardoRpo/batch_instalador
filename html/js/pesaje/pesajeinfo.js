@@ -26,6 +26,16 @@ function cargar(btn, idbtn) {
     return false;
   }
 
+  if (id !== "despeje_verificado") {
+    if ($("#despeje_verificado").is(":disabled") == false) {
+      alertify.set("notifier", "position", "top-right");
+      alertify.error(
+        "Primero ejecute la firma para Calidad en la sección de Despeje de Lineas y Procesos."
+      );
+      return false;
+    }
+  }
+
   /* Carga el modal para la autenticacion */
 
   $("#usuario").val("");

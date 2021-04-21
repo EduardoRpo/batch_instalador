@@ -63,14 +63,24 @@ function crearTablaBatch(
             ? "Inactivo"
             : data == 3
             ? "Pesaje"
+            : data == 3.5
+            ? "Preparación"
             : data == 4
             ? "Preparación"
+            : data == 4.5
+            ? "Aprobación"
             : data == 5
             ? "Aprobación"
+            : data == 5.5
+            ? "Envasado y Acondicionamiento"
             : data == 6
             ? "Envasado y Acondicionamiento"
-            : data == 7
-            ? "Acondicionamiento"
+            : data == 6.5
+            ? "Envasado y Acondicionamiento"
+            : data == 7.5
+            ? "Despachos"
+            : data == 8
+            ? "Despachos"
             : "Otro";
         },
       },

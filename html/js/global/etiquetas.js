@@ -25,77 +25,24 @@ $("#btnimprimirEtiquetas").click(function (e) {
   //imprimirEtiquetasVirtuales();
 });
 
-function exportarEtiquetas() {
-  const createXLSLFormatObj = [];
-  let xlsHeader = ["orden", "referencia", "peso"];
-
-  createXLSLFormatObj.push(xlsHeader);
-  $.each(arrayData, function (index, value) {
-    var innerRowData = [];
-    $("tbody").append(
-      "<tr><td>" + value.orden + "</td><td>" + value.referencia + "</td></tr>"
-    );
-    $.each(value, function (ind, val) {
-      innerRowData.push(val);
-    });
-    createXLSLFormatObj.push(innerRowData);
-  });
-
-  const filename = "etiquetas_Dispensacion.xlsx";
-  const ws_name = "etiquetas_Dispensacion";
-
-  if (typeof console !== "undefined") console.log(new Date());
-  var wb = XLSX.utils.book_new(),
-    ws = XLSX.utils.aoa_to_sheet(createXLSLFormatObj);
-
-  XLSX.utils.book_append_sheet(wb, ws, ws_name);
-
+const imprimirEtiquetasFull = () => {
+  const ref = batch.referencia;
   $.ajax({
-    type: "POST",
-    url: "../../html/php/deleteFiles.php",
+    url: `../../api/materiasp/${ref}`,
     success: function (response) {
-      alertify.set("notifier", "position", "top-right");
-      alertify.success(
-        "Para imprimir las <b>Etiquetas</b> ingrese a labelJoy y actualice"
-      );
-      $("#cantidadEtiquetas").val("");
-      $("#imprimirEtiquetas").modal("hide");
-      XLSX.writeFile(wb, filename);
+      arrayData = [];
+      for (let i = 0; i < response.length; i++) {
+        pesaje = {};
+        pesaje.orden = batch.numero_orden;
+        pesaje.referencia = response[i].referencia;
+        pesaje.peso =
+          ((response[i].porcentaje / 100) * batch.tamano_lote) /
+          $("#Notanques").val();
+        arrayData.push(pesaje);
+      }
+      exportarEtiquetas();
     },
   });
-}
-
-const imprimirEtiquetasFull = () => {
-  arrayData = [];
-  $("#tablePesaje tbody tr").each(function (index) {
-    var campo1, campo2, campo3;
-    $(this)
-      .children("td")
-      .each(function (index2) {
-        switch (index2) {
-          case 0:
-            campo1 = $(this).text();
-            break;
-          case 1:
-            campo2 = $(this).text();
-            break;
-          case 2:
-            campo3 = $(this).text();
-            break;
-          case 3:
-            campo4 = $(this).text();
-            break;
-        }
-      });
-
-    JSONData = {};
-    JSONData.orden = batch.numero_orden;
-    JSONData.referencia = campo1;
-    JSONData.peso = campo4;
-    arrayData.push(JSONData);
-  });
-  console.log(arrayData);
-  exportarEtiquetas();
 };
 
 imprimirEtiquetasVirtuales = () => {
@@ -129,6 +76,49 @@ imprimirEtiquetasVirtuales = () => {
     },
   });
 };
+
+function exportarEtiquetas() {
+  const createXLSLFormatObj = [];
+  let xlsHeader = ["orden", "referencia", "peso"];
+
+  createXLSLFormatObj.push(xlsHeader);
+  $.each(arrayData, function (index, value) {
+    var innerRowData = [];
+    /* $("tbody").append(
+      "<tr><td>" + value.orden + "</td><td>" + value.referencia + "</td></tr>"
+    ); */
+    $.each(value, function (ind, val) {
+      innerRowData.push(val);
+    });
+    createXLSLFormatObj.push(innerRowData);
+  });
+
+  const filename = "etiquetas_Dispensacion.xlsx";
+  const ws_name = "etiquetas_Dispensacion";
+
+  //if (typeof console !== "undefined") console.log(new Date());
+  var wb = XLSX.utils.book_new(),
+    ws = XLSX.utils.aoa_to_sheet(createXLSLFormatObj);
+
+  XLSX.utils.book_append_sheet(wb, ws, ws_name);
+
+  $.ajax({
+    type: "POST",
+    url: "../../html/php/deleteFiles.php",
+    success: function (response) {
+      alertify.set("notifier", "position", "top-right");
+      alertify.success(
+        "Para imprimir las <b>Etiquetas</b> ingrese a labelJoy y actualice"
+      );
+      $("#cantidadEtiquetas").val("");
+      if ($("#imprimirEtiquetas").is(":visible"))
+        $("#imprimirEtiquetas").modal("hide");
+      //if (typeof console !== "undefined") console.log(new Date());
+      XLSX.writeFile(wb, filename);
+      //if (typeof console !== "undefined") console.log(new Date());
+    },
+  });
+}
 
 $("#btnEtiquetasPrueba").click(function (e) {
   e.preventDefault();
