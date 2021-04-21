@@ -336,7 +336,7 @@ $("#uploadForm").on("submit", function (e) {
   datos.append("operacion", "6");
   $.ajax({
     type: "POST",
-    url: "php/c_productos.php",
+    url: "../../html/php/c_productos.php",
     data: datos,
     contentType: false,
     cache: false,
