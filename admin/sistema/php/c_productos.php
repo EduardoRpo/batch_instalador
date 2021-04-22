@@ -77,7 +77,7 @@ if (!empty($_POST)) {
                     id_notificacion_sanitaria, id_linea, id_marca, id_propietario, presentacion_comercial, id_color, id_olor, 
                     id_apariencia, id_untuosidad, id_poder_espumoso, id_recuento_mesofilos, id_pseudomona, id_escherichia, 
                     id_staphylococcus, id_ph, id_viscosidad, id_densidad_gravedad, id_grado_alcohol, id_envase, id_tapa, id_etiqueta, 
-                    id_empaque, id_otros, base_instructivo, instructivo)
+                    id_empaque, id_otros, base_instructivo, instructivo, img)
                     VALUES (:referencia, :nombre, :uniEmpaque, :nombre_producto, :notificacion_sanitaria, 
                     :linea, :marca, :propietario, :presentacion_comercial, :color, :olor, :apariencia, 
                     :untuosidad, :poder_espumoso, :recuento_mesofilos, :pseudomona, :escherichia, :staphylococcus,

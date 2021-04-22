@@ -11135,12 +11135,12 @@ table.dataTable tbody td {
   color: white;
 }
 
-#imageRef {
+/* #imageRef {
   top: 25%;
   right: 0%;
   outline: none;
   overflow: hidden;
-}
+} */
 
 @media screen and (max-width: 660px) {
   .contenedor-fechas {
