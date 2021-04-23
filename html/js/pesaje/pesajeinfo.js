@@ -133,15 +133,15 @@ $(document).ready(function () {
           }
         },
       },
-      {
-        title: "Impresión",
-        data: "",
-        className: "uniqueClassName",
-        render: (data, type, row) => {
-          return `<a id="${row.referencia}" href="#" onclick="imprimirEtiquetas(this);"><i class="large material-icons">print</i></a>`;
+      //{
+       // title: "Impresión",
+        //data: "",
+        //className: "uniqueClassName",
+        //render: (data, type, row) => {
+         // return `<a id="${row.referencia}" href="#" onclick="imprimirEtiquetas(this);"><i class="large material-icons">print</i></a>`;
           /* return `<a id="${row.referencia}" href="#" data-toggle="modal" data-target="#imprimirEtiquetas"><i class="large material-icons">print</i></a>` */
-        },
-      },
+        //},
+      //},
     ],
 
     //dom: "Bfrtip",

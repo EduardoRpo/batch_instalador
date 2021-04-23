@@ -4,6 +4,7 @@ session_start();
 include('modal/modal_cambiarContrasena.php');
 //include('modal/modal_observaciones.php');
 include('modal/m_firma.php');
+include('modal/image.php')
 ?>
 
 <!DOCTYPE html>
@@ -146,7 +147,7 @@ include('modal/m_firma.php');
             <div class="card-header" id="headingThree">
               <h5 class="mb-0">
                 <button class="btn btn-link collapsed ref_multi1" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
-                  <b id="despachosMulti1">DESPACHOS</b>
+                  <b id="despachosMulti1" class="img_ref">DESPACHOS</b>
                   <input type="text" class="ref1" id="ref1" hidden>
                   <input type="text" class="unidad_empaque1" id="unidad_empaque1" hidden>
                 </button>
@@ -234,7 +235,7 @@ include('modal/m_firma.php');
             <div class="card-header" id="headingFour">
               <h5 class="mb-0">
                 <button class="btn btn-link collapsed ref_multi1" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapsefour" style="width: 100%">
-                  <b id="despachosMulti2">DESPACHOS</b>
+                  <b id="despachosMulti2" class="img_ref">DESPACHOS</b>
                   <input type="text" class="ref2" id="ref2" hidden>
                   <input type="text" class="unidad_empaque2" id="unidad_empaque2" hidden>
                 </button>
@@ -310,7 +311,7 @@ include('modal/m_firma.php');
             <div class="card-header" id="headingFive">
               <h5 class="mb-0">
                 <button class="btn btn-link collapsed ref_multi3" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive" style="width: 100%">
-                  <b id="despachosMulti3">DESPACHOS</b>
+                  <b id="despachosMulti3" class="img_ref">DESPACHOS</b>
                   <input type="text" class="ref3" id="ref3" hidden>
                   <input type="text" class="unidad_empaque3" id="unidad_empaque3" hidden>
                 </button>
@@ -405,6 +406,7 @@ include('modal/m_firma.php');
           <script src="../../html/js/despachos/cargarBatch_despachos.js"></script>
           <!-- <script src="../../html/js/global/despeje.js"></script> -->
           <script src="../../html/js/global/tanques.js"></script>
+          <script src="../../html/js/global/image.js"></script>
           <!--<script src="../../html/js/global/muestras.js"></script>
           <script src="../../html/js/global/condiciones_medio.js"></script>
           <script src="../../html/js/global/cargarBatchMulti.js"></script>
