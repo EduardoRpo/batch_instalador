@@ -1,0 +1,15 @@
+{
+    "name": "teenus-sas/batchrecord",
+    "description": "Ordenes de Pedido Samara",
+    "type": "project",
+    "authors": [
+        {
+            "name": "teenus sas",
+            "email": "info@teenus.com.co"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "phpoffice/phpspreadsheet": "^1.17"
+    }
+}

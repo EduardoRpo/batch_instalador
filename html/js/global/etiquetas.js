@@ -40,7 +40,7 @@ const imprimirEtiquetasFull = () => {
           $("#Notanques").val();
         arrayData.push(pesaje);
       }
-      exportarEtiquetas();
+      exportarEtiquetas(arrayData);
     },
   });
 };
@@ -77,16 +77,27 @@ imprimirEtiquetasVirtuales = () => {
   });
 };
 
-function exportarEtiquetas() {
+const exportarEtiquetas = (arrayData) => {
+  $.ajax({
+    type: "POST",
+    url: "../../html/php/exportar.php",
+    data: { array: arrayData },
+
+    success: function (response) {
+      alertify.set("notifier", "position", "top-right");
+      alertify.success("Datos para etiquetas exportados correctamente");
+    },
+  });
+};
+
+/* function exportarEtiquetas() {
   const createXLSLFormatObj = [];
   let xlsHeader = ["orden", "referencia", "peso"];
 
   createXLSLFormatObj.push(xlsHeader);
   $.each(arrayData, function (index, value) {
     var innerRowData = [];
-    /* $("tbody").append(
-      "<tr><td>" + value.orden + "</td><td>" + value.referencia + "</td></tr>"
-    ); */
+   
     $.each(value, function (ind, val) {
       innerRowData.push(val);
     });
@@ -96,7 +107,7 @@ function exportarEtiquetas() {
   const filename = "etiquetas_Dispensacion.xlsx";
   const ws_name = "etiquetas_Dispensacion";
 
-  //if (typeof console !== "undefined") console.log(new Date());
+  
   var wb = XLSX.utils.book_new(),
     ws = XLSX.utils.aoa_to_sheet(createXLSLFormatObj);
 
@@ -113,12 +124,10 @@ function exportarEtiquetas() {
       $("#cantidadEtiquetas").val("");
       if ($("#imprimirEtiquetas").is(":visible"))
         $("#imprimirEtiquetas").modal("hide");
-      //if (typeof console !== "undefined") console.log(new Date());
       XLSX.writeFile(wb, filename);
-      //if (typeof console !== "undefined") console.log(new Date());
     },
   });
-}
+} */
 
 $("#btnEtiquetasPrueba").click(function (e) {
   e.preventDefault();
