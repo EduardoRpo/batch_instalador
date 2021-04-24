@@ -117,7 +117,7 @@
                   <label for=""><b>Descripción de Envase</b></label>
 
                   <input type="number" name="txt-Id2" id="txt-Id2" class="form-control" hidden>
-                  <input type="number" name="codigo2" id="codigo2" class="form-control" placeholder="Codigo" style="text-align: center;">
+                  <input type="text" name="codigo2" id="codigo2" class="form-control" placeholder="Codigo" style="text-align: center;">
                   <input type="text" name="input2" id="input2" class="form-control" placeholder="Descripcion Envase">
 
                   <button type="button" class="btn btn-primary btnguardar" id="envase" onclick="guardarDatosGenerales(id, 2);">Guardar</button>
@@ -161,7 +161,7 @@
                   <label for=""><b>Descripción Etiqueta</b></label>
 
                   <input type="number" name="txt-Id3" id="txt-Id3" class="form-control" hidden>
-                  <input type="number" name="codigo3" id="codigo3" class="form-control" placeholder="Codigo" style="text-align: center;">
+                  <input type="text" name="codigo3" id="codigo3" class="form-control" placeholder="Codigo" style="text-align: center;">
                   <input type="text" name="input3" id="input3" class="form-control" placeholder="Descripcion Etiqueta">
 
                   <button type="button" class="btn btn-primary btnguardar" id="etiqueta" onclick="guardarDatosGenerales(id, 3);">Guardar</button>
@@ -202,7 +202,7 @@
                   <label for=""><b>Descripción</b></label>
 
                   <input type="number" name="txt-Id4" id="txt-Id4" class="form-control" hidden>
-                  <input type="number" name="codigo4" id="codigo4" class="form-control" placeholder="Codigo" style="text-align: center;">
+                  <input type="text" name="codigo4" id="codigo4" class="form-control" placeholder="Codigo" style="text-align: center;">
                   <input type="text" name="input4" id="input4" class="form-control" placeholder="Descripcion Otros">
 
                   <button type="button" class="btn btn-primary btnguardar" id="empaque" onclick="guardarDatosGenerales(id, 4);">Guardar</button>
@@ -247,7 +247,7 @@
                   <label for=""><b>Otros Adicionales</b></label>
 
                   <input type="number" name="txt-Id5" id="txt-Id5" class="form-control" hidden>
-                  <input type="number" name="codigo5" id="codigo5" class="form-control" placeholder="Codigo" style="text-align: center;">
+                  <input type="text" name="codigo5" id="codigo5" class="form-control" placeholder="Codigo" style="text-align: center;">
                   <input type="text" name="input5" id="input5" class="form-control" placeholder="Descripcion Otros">
 
                   <button type="button" class="btn btn-primary btnguardar" id="otros" onclick="guardarDatosGenerales(id, 5);">Guardar</button>
