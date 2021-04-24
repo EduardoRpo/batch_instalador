@@ -128,7 +128,9 @@ function guardarDatosGenerales(nombre, id) {
   let codigo = $(`#codigo${id}`).val();
   let descripcion = $(`#input${id}`).val();
 
-  if (!codigo || !nombre) {
+  val = codigo.length * descripcion.length * nombre.length;
+
+  if (val <= 0) {
     alertify.set("notifier", "position", "top-right");
     alertify.error("Ingrese todos los datos");
     return false;
