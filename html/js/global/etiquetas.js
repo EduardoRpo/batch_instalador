@@ -38,6 +38,7 @@ const imprimirEtiquetasFull = () => {
         pesaje.peso =
           ((response[i].porcentaje / 100) * batch.tamano_lote) /
           $("#Notanques").val();
+        pesaje.producto = batch.nombre_referencia;
         arrayData.push(pesaje);
       }
       exportarEtiquetas(arrayData);

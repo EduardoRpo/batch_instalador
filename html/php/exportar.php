@@ -11,6 +11,7 @@ if (!empty($_POST)) {
     $sheet->setCellValue('A1', 'Orden');
     $sheet->setCellValue('B1', 'Referencia');
     $sheet->setCellValue('C1', 'Peso');
+    $sheet->setCellValue('D1', 'Producto');
     $sheet->fromArray($etiquetas, NULL, 'A2');
     $writer = new Xlsx($spreadsheet);
     $writer->save('C:\desarrollo\batchRecord\htdocs\html\etiquetas\etiquetasDispensacion.xlsx');
