@@ -212,14 +212,15 @@ $(document).ready(function () {
 $(document).on("click", ".link-editar", function (e) {
   e.preventDefault();
   editar = 1;
-  id = $(this).parent().parent().children().eq(2).text();
-  let nombres = $(this).parent().parent().children().eq(3).text();
-  let apellidos = $(this).parent().parent().children().eq(4).text();
-  let email = $(this).parent().parent().children().eq(5).text();
-  let cargo = $(this).parent().parent().children().eq(6).text();
-  let modulo = $(this).parent().parent().children().eq(7).text();
-  let usuario = $(this).parent().parent().children().eq(8).text();
-  let rol = $(this).parent().parent().children().eq(9).text();
+  
+  id = $(this).parent().parent().children().eq(1).text();
+  let nombres = $(this).parent().parent().children().eq(2).text();
+  let apellidos = $(this).parent().parent().children().eq(3).text();
+  let email = $(this).parent().parent().children().eq(4).text();
+  let cargo = $(this).parent().parent().children().eq(5).text();
+  let modulo = $(this).parent().parent().children().eq(6).text();
+  let usuario = $(this).parent().parent().children().eq(7).text();
+  let rol = $(this).parent().parent().children().eq(8).text();
 
   $("#ModalCrearUsuarios").modal("show");
   $("#btnguardarUsuarios").html("Actualizar");

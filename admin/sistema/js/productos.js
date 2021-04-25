@@ -352,6 +352,12 @@ $("#uploadForm").on("submit", function (e) {
       );
     },
     success: function (data) {
+      if (data === "false") {
+        $("#uploadStatus").html(
+          '<span style="color:#EA4335;">No existe la referencia asociada a la imagen.<span>'
+        );
+        return false;
+      }
       $("#uploadForm")[0].reset();
       $("#uploadStatus").html(
         '<span style="color:#28A74B;">Imagenes cargadas correctamente.<span>'

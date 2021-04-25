@@ -127,18 +127,32 @@ if (!empty($_POST)) {
 
                 $images_arr = array();
                 foreach ($_FILES['images']['name'] as $key => $val) {
+
                     $image_name = $_FILES['images']['name'][$key];
                     $tmp_name   = $_FILES['images']['tmp_name'][$key];
                     $size       = $_FILES['images']['size'][$key];
                     $type       = $_FILES['images']['type'][$key];
                     $error      = $_FILES['images']['error'][$key];
-
-                    $fileName = basename($_FILES['images']['name'][$key]);
                     $targetFilePath = $targetDir . $image_name;
-                    $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
-                    if (in_array($fileType, $allowTypes)) {
-                        move_uploaded_file($tmp_name, $targetFilePath);
-                    }
+                    $referencia = substr($image_name, 0, -4);
+
+                    $sql = "SELECT img FROM producto WHERE referencia = :referencia";
+                    $query = $conn->prepare($sql);
+                    $query->execute(['referencia' => $referencia]);
+                    $rows = $query->rowCount();
+
+                    if ($rows > 0) {
+                        $sql = "UPDATE producto SET img = :img WHERE referencia = :referencia";
+                        $query = $conn->prepare($sql);
+                        $result = $query->execute(['referencia' => $referencia, 'img' => $targetFilePath]);
+
+                        $fileName = basename($_FILES['images']['name'][$key]);
+                        $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+                        if (in_array($fileType, $allowTypes)) {
+                            move_uploaded_file($tmp_name, $targetFilePath);
+                        }
+                    } else
+                        echo "false";
                 }
             }
 
