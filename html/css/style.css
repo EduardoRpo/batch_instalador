@@ -11142,6 +11142,18 @@ table.dataTable tbody td {
   overflow: hidden;
 } */
 
+.obj3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+}
+
+.obj2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+}
+
 @media screen and (max-width: 660px) {
   .contenedor-fechas {
     align-items: flex-start;

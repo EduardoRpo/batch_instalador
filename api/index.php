@@ -50,11 +50,6 @@ $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
 
 // Define app routes
-/* $app->get('/', function (Request $request, Response $response, $args) {
-  $connection = Connection::getInstance()->getConnection();
-  $response->getBody()->write("hello world");
-  return $response;
-}); */
 
 $app->get('/products', function (Request $request, Response $response, $args) use ($productDao) {
   $products = $productDao->findAll();
@@ -102,6 +97,24 @@ $app->get('/acondicionamiento', function (Request $request, Response $response, 
 $app->get('/despachos', function (Request $request, Response $response, $args) use ($batchLineaDao) {
   $despachos = $batchLineaDao->findBatchDespachos();
   $response->getBody()->write(json_encode($despachos, JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
+});
+
+$app->get('/microbiologia', function (Request $request, Response $response, $args) use ($batchLineaDao) {
+  $microbiologia = $batchLineaDao->findBatchMicrobiologia();
+  $response->getBody()->write(json_encode($microbiologia, JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
+});
+
+$app->get('/fisicoquimica', function (Request $request, Response $response, $args) use ($batchLineaDao) {
+  $fisicoquimica = $batchLineaDao->findBatchFisicoquimica();
+  $response->getBody()->write(json_encode($fisicoquimica, JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
+});
+
+$app->get('/liberacionlote', function (Request $request, Response $response, $args) use ($batchLineaDao) {
+  $liberacionlote = $batchLineaDao->findBatchliberacionlote();
+  $response->getBody()->write(json_encode($liberacionlote, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
 

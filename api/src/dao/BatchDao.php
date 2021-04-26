@@ -65,37 +65,6 @@ class BatchDao
     return $batch;
   }
 
-  public function actualizarEstado($modulo, $batch)
-  {
-
-    switch ($modulo) {
-      case '2':
-        $estado = 4;
-        break;
-      case '3':
-        $estado = 6;
-        break;
-      case '4':
-        $estado = 8;
-        break;
-      case '5':
-        $estado = 10;
-        break;
-      case '6':
-        $estado = 12;
-        break;
-      default:
-        $estado = 14;
-        break;
-    }
-
-    $connection = Connection::getInstance()->getConnection();
-    $sql = "UPDATE batch SET estado = :estado WHERE batch = :batch";
-    $query = $connection->prepare($sql);
-    $query->execute(['batch' => $batch, 'estado' => $estado]);
-  }
-
-
   public function save($batch)
   {
     $connection = Connection::getInstance()->getConnection();
