@@ -139,6 +139,12 @@ switch ($op) {
     $query_buscarInstructivo =  mysqli_query($conn, "SELECT * FROM instructivo_preparacion WHERE id_producto = '$referencia'");
     $resultPreparacion = mysqli_num_rows($query_buscarInstructivo);
 
+    /* validar que exista el instructivo en Bases*/
+    if ($resultPreparacion == 0) {
+      $query_buscarInstructivo =  mysqli_query($conn, "SELECT instructivo FROM producto WHERE referencia = '$referencia'");
+      $resultPreparacion = mysqli_fetch_assoc($query_buscarInstructivo);
+    }
+
     if ($resultFormula <= 0 || $resultPreparacion <= 0) {
       $estado = '1';  //Sin formula
       $fechaprogramacion = '';
