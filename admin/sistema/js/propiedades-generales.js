@@ -240,8 +240,8 @@ function guardarDatosGenerales(nombre, id) {
 function guardarDatosGeneralesMinMax(nombre, id) {
 
     id_registro = $(`#txt-Id${id_tbl}`).val();
-    let min = parsefloat($(`#min${id}`).val());
-    let max = parsefloat($(`#max${id}`).val());
+    let min = parseFloat($(`#min${id}`).val());
+    let max = parseFloat($(`#max${id}`).val());
 
     if (max < min) {
         alertify.set("notifier", "position", "top-right"); alertify.error("El valor mínimo no puede ser mayor al valor máximo");
