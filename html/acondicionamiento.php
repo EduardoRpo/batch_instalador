@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once('./html/sesion/sesionacondicionamiento.php');
 ?>
 
 <!DOCTYPE html>

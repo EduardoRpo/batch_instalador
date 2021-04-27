@@ -85,7 +85,7 @@ function busqueda_multi(batch) {
 
           $(`#fila${j}`).attr("hidden", false);
           $(`#despachos${j}`).attr("hidden", false);
-          $(`#despachosMulti${j}`).html('DESPACHOS PRESENTACIÓN: ' + presentacion);
+          $(`#despachosMulti${j}`).html(`DESPACHOS PRESENTACIÓN: ${presentacion} REFERENCIA ${referencia}`);
 
           j++;
         }
@@ -94,7 +94,7 @@ function busqueda_multi(batch) {
         $(`#tanque${j}`).html(formatoCO(batch.presentacion));
         $(`#cantidad${j}`).html(formatoCO(batch.unidad_lote));
         $(`#total${j}`).html(formatoCO(batch.tamano_lote));
-        $(`#despachosMulti${j}`).html('DESPACHOS PRESENTACIÓN: ' + batch.presentacion);
+        $(`#despachosMulti${j}`).html(`DESPACHOS PRESENTACIÓN: ${batch.presentacion} REFERENCIA: ${batch.referencia}`);
         $(`#ref${j}`).val(referencia);
         $(`#unidad_empaque${j}`).val(batch.unidad_empaque);
 

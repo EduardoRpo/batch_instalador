@@ -78,7 +78,7 @@ function busqueda_multi() {
           $(`#fila${j}`).attr("hidden", false);
           $(`#acondicionamiento${j}`).attr("hidden", false);
           $(`#acondicionamientoMulti${j}`).html(
-            "ACONDICIONAMIENTO PRESENTACIÓN: " + presentacion
+            `ACONDICIONAMIENTO PRESENTACIÓN: ${presentacion} REFERENCIA ${referencia}`
           );
           cargarTablaEnvase(j, referencia, cantidad);
           calcularMuestras(j, cantidad);
@@ -94,7 +94,7 @@ function busqueda_multi() {
         $(`#unidadesProgramadas${j}`).val(batch.unidad_lote);
         $(`#total${j}`).html(formatoCO(batch.tamano_lote));
         $(`#acondicionamientoMulti${j}`).html(
-          "ACONDICIONAMIENTO PRESENTACIÓN: " + batch.presentacion
+          `ACONDICIONAMIENTO PRESENTACIÓN: ${batch.presentacion} REFERENCIA: ${batch.referencia}`
         );
 
         $(`#ref${j}`).val(referencia);

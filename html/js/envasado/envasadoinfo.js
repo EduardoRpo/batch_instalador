@@ -181,20 +181,18 @@ function busqueda_multi() {
           $(`#fila${j}`).attr("hidden", false);
           $(`#envasado${j}`).attr("hidden", false);
           $(`#envasadoMulti${j}`).html(
-            "ENVASADO PRESENTACIÓN: " + presentacion
+            `ENVASADO PRESENTACIÓN: ${presentacion} REFERENCIA ${referencia}`
           );
           cargarTablaEnvase(j, referencia, cantidad);
           calcularMuestras(j, cantidad);
           j++;
         }
       } else {
-        //debugger;
-
         $(`#tanque${j}`).html(formatoCO(batch.presentacion));
         $(`#cantidad${j}`).html(formatoCO(batch.unidad_lote));
         $(`#total${j}`).html(formatoCO(batch.tamano_lote));
         $(`#envasadoMulti${j}`).html(
-          "ENVASADO PRESENTACIÓN: " + batch.presentacion
+          `ENVASADO PRESENTACIÓN: ${batch.presentacion} REFERENCIA: ${batch.referencia}`
         );
         $(`#ref${j}`).val(referencia);
         cargarTablaEnvase(j, batch.referencia, batch.unidad_lote);

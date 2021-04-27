@@ -39,11 +39,54 @@ if (!empty($_SESSION['active'])) {
                     $_SESSION['rol'] = $data['rol'];
                     $_SESSION["timeout"] = time();
                     $modulo = $data['modulo'];
+                    $rol = $data['rol'];
 
-                    if ($data['rol'] == 1 || $data['rol'] == 2) {
-                        header('location: admin/sistema/index.php');
+                    if ($rol === 1 || $rol == 2)
+                        $variable = 1;
+                    else {
+                        $modulo = $data['id_modulo'];
+                        $variable = $rol . $modulo;
+                    }
+
+                    switch ($variable) {
+                        case '1':
+                            header('location: admin/sistema/index.php');
+                            break;
+                        case '31':
+                            header('location: /html/batch.php');
+                            break;
+                        case '32':
+                            header('location: /pesaje');
+                            break;
+                        case '33':
+                            header('location: /preparacion');
+                            break;
+                        case '34':
+                            header('location: /aprobacion');
+                            break;
+                        case '35':
+                            header('location: /envasado');
+                            break;
+                        case '36':
+                            header('location: /acondicionamiento');
+                            break;
+                        case '37':
+                            header('location: /despachos');
+                            break;
+                        case '38':
+                            header('location: /microbiologia');
+                            break;
+                        case '39':
+                            header('location: /fisicoquimica');
+                            break;
+                        case '310':
+                            header('location: /liberacionlote');
+                            break;
+                    }
+
+                    /*  if ($data['rol'] == 1 || $data['rol'] == 2) {
                     } else
-                        header('location: html/batch.php');
+                        header('location: html/batch.php'); */
                 } else {
                     $new_trie = ++$tries;
                     file_put_contents('tries.txt', $new_trie);
