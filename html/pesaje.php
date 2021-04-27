@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once('./html/sesion/sesionpesaje.php');
 include('modal/modal_cambiarContrasena.php');
 ?>

@@ -3,8 +3,10 @@ session_start();
 
 if (empty($_SESSION['active'])) {
   header('location: ../');
-} else if ($_SESSION['idModulo'] != 7) {
-  session_destroy();
-  header('location: ../../');
+} else if ($_SESSION['rol'] != 1) {
+  if ($_SESSION['idModulo'] != 7) {
+    session_destroy();
+    header('location: ../../');
+  }
 }
 
