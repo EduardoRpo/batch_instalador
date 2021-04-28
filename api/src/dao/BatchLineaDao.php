@@ -30,7 +30,7 @@ class BatchLineaDao
     $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, batch.numero_lote, batch.estado 
                                   FROM batch 
                                   WHERE batch.fecha_programacion  
-                                  BETWEEN CURRENT_DATE() AND CURDATE() + INTERVAL 1 DAY /* OR batch.fecha_programacion <= CURRENT_DATE() */
+                                  BETWEEN CURRENT_DATE() AND CURDATE() + INTERVAL 1 DAY OR batch.fecha_programacion <= CURRENT_DATE()
                                   AND (batch.estado > 2 AND batch.estado < 4)");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
