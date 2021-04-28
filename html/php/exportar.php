@@ -14,5 +14,11 @@ if (!empty($_POST)) {
     $sheet->setCellValue('D1', 'Producto');
     $sheet->fromArray($etiquetas, NULL, 'A2');
     $writer = new Xlsx($spreadsheet);
-    $writer->save('C:\desarrollo\batchRecord\htdocs\html\etiquetas\etiquetasDispensacion.xlsx');
+
+    $fileLabels = 'C:/label';
+    if (!file_exists($fileLabels)) {
+        mkdir($fileLabels, 0777, true);
+    }
+
+    $writer->save('C:\label\etiquetasDispensacion.xlsx');
 }
