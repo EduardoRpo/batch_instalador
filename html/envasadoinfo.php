@@ -248,16 +248,6 @@ include('modal/image.php')
                                 <td id="descripcion_etiqueta1" class="descripcion_etiqueta1"></td>
                                 <td id="unidades3" class="centrado unidades1"></td>
                               </tr>
-                              <!--<tr>
-                                <td id="empaque1" class="centrado empaque1"></td>
-                                <td id="descripcion_empaque1" class="descripcion_empaque1"></td>
-                                <td id="unidades1e" class="centrado unidades1e"></td>
-                              </tr>
-                              <tr>
-                                <td id="otros1" class="centrado otros1"></td>
-                                <td id="descripcion_otros1" class="descripcion_otros1"></td>
-                                <td id="unidades4" class="centrado unidades1"></td>
-                              </tr> -->
                             </tbody>
                           </table>
                         </div>
@@ -270,26 +260,14 @@ include('modal/image.php')
                     </div>
 
                     <div class="id_envasadora_loteadora mb-3 ml-3 mr-3">
-
                       <div class="group">
                         <label for="recipient-name" class="col-form-label envasadora">Identificación Envasadora</label>
-                        <select class="selectpicker form-control" id="sel_envasadora"></select>
-                        <!--  <input type="text" class="form-control envasadora1" readonly> -->
+                        <select class="selectpicker form-control sel_envasadora sel_equipos" id="sel_envasadora1"></select>
                       </div>
 
                       <div class="group">
                         <label for="recipient-name" class="col-form-label loteadora">Identificación Loteadora</label>
-                        <select class="selectpicker form-control" id="sel_loteadora"></select>
-                        <!-- <input type="text" class="form-control loteadora1" readonly> -->
-                      </div>
-
-
-                      <div class="group">
-                        <!-- <label for="recipient-name" class="col-form-label">Linea</label>
-                        <select class="selectpicker form-control select-linea" id="select-Linea1">
-                          <option selected hidden>Seleccionar Linea</option>
-
-                        </select> -->
+                        <select class="selectpicker form-control sel_loteadora sel_equipos" id="sel_loteadora1"></select>
                       </div>
                     </div>
 
@@ -497,47 +475,29 @@ include('modal/image.php')
                                 <td id="descripcion_etiqueta1" class="descripcion_etiqueta1"></td>
                                 <td id="unidades3" class="centrado unidades2"></td>
                               </tr>
-                              <!--<tr>
-                                <td id="empaque1" class="centrado empaque1"></td>
-                                <td id="descripcion_empaque1" class="descripcion_empaque1"></td>
-                                <td id="unidades1e" class="centrado unidades1e"></td>
-                              </tr>
-                              <tr>
-                                <td id="otros1" class="centrado otros1"></td>
-                                <td id="descripcion_otros1" class="descripcion_otros1"></td>
-                                <td id="unidades4" class="centrado unidades1"></td>
-                              </tr> -->
                           </table>
                           </form>
                         </div>
                       </div>
                     </div>
 
-                    <div class="id_envasadora_loteadora">
+                    <div class="mb-3 ml-3 mr-3">
+                      <label>Digite el lote (requerido)</label>
+                      <input type="text" class="form-control validarLote" id="validarLote1" autocomplete="off" onblur="revisarLote();">
+                    </div>
 
+                    <div class="id_envasadora_loteadora mb-3 ml-3 mr-3">
                       <div class="group">
-                        <label for="recipient-name" class="col-form-label">Linea</label>
-                        <select class="selectpicker form-control select-linea" id="select-Linea2">
-                          <option selected hidden>Seleccionar Linea</option>
-
-                        </select>
-                      </div>
-
-                      <div class="group">
-                        <label for="recipient-name" class="col-form-label">Digite el lote (requerido)</label>
-                        <input type="text" class="form-control validarLote" id="validarLote2" autocomplete="off" onblur="revisarLote();">
-                      </div>
-
-                      <div class="group">
-                        <label for="recipient-name" class="col-form-label envasadora2">Identificación Envasadora</label>
-                        <input type="text" class="form-control envasadora2" readonly>
+                        <label for="recipient-name" class="col-form-label envasadora">Identificación Envasadora</label>
+                        <select class="selectpicker form-control sel_envasadora sel_equipos" id="sel_envasadora2"></select>
+                        <!--  <input type="text" class="form-control envasadora1" readonly> -->
                       </div>
 
                       <div class="group">
                         <label for="recipient-name" class="col-form-label loteadora">Identificación Loteadora</label>
-                        <input type="text" class="form-control loteadora2" readonly>
+                        <select class="selectpicker form-control sel_loteadora sel_equipos" id="sel_loteadora2"></select>
+                        <!-- <input type="text" class="form-control loteadora1" readonly> -->
                       </div>
-
                     </div>
                     <hr>
 
@@ -745,46 +705,27 @@ include('modal/image.php')
                                 <td id="descripcion_etiqueta3" class="descripcion_etiqueta3"></td>
                                 <td id="unidades3" class="centrado unidades3"></td>
                               </tr>
-                              <!--<tr>
-                                <td id="empaque1" class="centrado empaque1"></td>
-                                <td id="descripcion_empaque1" class="descripcion_empaque1"></td>
-                                <td id="unidades1e" class="centrado unidades1e"></td>
-                              </tr>
-                              <tr>
-                                <td id="otros1" class="centrado otros1"></td>
-                                <td id="descripcion_otros1" class="descripcion_otros1"></td>
-                                <td id="unidades4" class="centrado unidades1"></td>
-                              </tr> -->
                           </table>
                           </form>
                         </div>
                       </div>
                     </div>
 
-                    <div class="id_envasadora_loteadora">
+                    <div class="mb-3 ml-3 mr-3">
+                      <label>Digite el lote (requerido)</label>
+                      <input type="text" class="form-control validarLote" id="validarLote1" autocomplete="off" onblur="revisarLote();">
+                    </div>
 
+                    <div class="id_envasadora_loteadora mb-3 ml-3 mr-3">
                       <div class="group">
-                        <label for="recipient-name" class="col-form-label">Linea</label>
-                        <select class="selectpicker form-control select-linea" id="select-Linea3">
-                          <option selected hidden>Seleccionar Linea</option>
-                        </select>
+                        <label for="recipient-name" class="col-form-label envasadora">Identificación Envasadora</label>
+                        <select class="selectpicker form-control sel_envasadora sel_equipos" id="sel_envasadora3"></select>
                       </div>
 
                       <div class="group">
-                        <label for="recipient-name" class="col-form-label">Digite el lote (requerido)</label>
-                        <input type="text" class="form-control validarLote" id="validarLote3" autocomplete="off" onblur="revisarLote();">
+                        <label for="recipient-name" class="col-form-label loteadora">Identificación Loteadora</label>
+                        <select class="selectpicker form-control sel_loteadora sel_equipos" id="sel_loteadora3"></select>
                       </div>
-
-                      <div class="group">
-                        <label for="recipient-name" class="col-form-label envasadora3">Identificación Envasadora</label>
-                        <input type="text" class="form-control envasadora3" readonly>
-                      </div>
-
-                      <div class="group">
-                        <label for="recipient-name" class="col-form-label loteadora3">Identificación Loteadora</label>
-                        <input type="text" class="form-control loteadora3" readonly>
-                      </div>
-
                     </div>
                     <hr>
 
@@ -897,24 +838,6 @@ include('modal/image.php')
                                     <td><input type="number" id="sobrante9" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
                                     <td id="totalDevolucion9" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
                                   </tr>
-                                  <!-- <tr>
-                                    <td id="empaque1" class="empaque1"></td>
-                                    <td id="descripcion_empaque1" class="descripcion_empaque1"></td>
-                                    <td id="unidades2e" class="centrado unidades1e"></td>
-                                    <td id="txtEnvasada4" class="centrado envasada1e"></td>
-                                    <td><input type="number" id="averias4" class="form-control centrado" style="width: 110px;"></td>
-                                    <td><input type="number" id="sobrante4" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 4);"></td>
-                                    <td id="totalDevolucion4" class="centrado"></td>
-                                  </tr>
-                                  <tr>
-                                    <td id="otros1" class="otros1"></td>
-                                    <td id="descripcion_otros1" class="descripcion_otros1"></td>
-                                    <td id="unidades8" class="centrado unidades1"></td>
-                                    <td id="txtEnvasada5" class="centrado envasada1"></td>
-                                    <td><input type="number" id="averias5" class="form-control centrado" style="width: 110px;"></td>
-                                    <td><input type="number" id="sobrante5" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 5);"></td>
-                                    <td id="totalDevolucion5" class="centrado"></td> 
-                                  </tr> -->
                               </table>
                             </div>
                           </div>
@@ -948,33 +871,16 @@ include('modal/image.php')
             </div>
           </div>
 
-          <!-- jquery -->
           <script src="../../assets/plugins/jquery/jquery.min.js"></script>
-
-          <!-- Bootstrap tether Core JavaScript -->
           <script src="../../assets/plugins/bootstrap/js/tether.min.js"></script>
           <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-
-          <!-- Datatables -->
           <script type="text/javascript" src="../../html/vendor/datatables/datatables.min.js"></script>
-          <!-- <script src="html/vendor/bootstrap/js/popper.js"></script> -->
-          <!-- slimscrollbar scrollbar JavaScript -->
-
           <script src="../../html/js/utils/jquery.slimscroll.js"></script>
-
-          <!--Wave Effects -->
           <script src="../../html/js/utils/waves.js"></script>
-
-          <!--Menu sidebar -->
           <script src="../../html/js/utils/sidebarmenu.js"></script>
-
-          <!--stickey kit -->
           <script src="../../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
-
-          <!--Custom JavaScript -->
           <script src="../../html/js/utils/custom.min.js"></script>
           <script src="../../html/vendor/jquery-confirm/jquery-confirm.min.js"></script>
-          <!-- <script src="../../html/js/datatables.js"></script> -->
           <script src="../../html/js/global/loadinfo-global.js"></script>
           <script src="../../html/js/global/despeje.js"></script>
           <script src="../../html/js/global/tanques.js"></script>
@@ -987,8 +893,7 @@ include('modal/image.php')
           <script src="../../html/js/global/incidencias.js"></script>
           <script src="../../html/js/global/equipos.js"></script>
           <script src="../../html/js/global/image.js"></script>
-
-          <!--Alertify-->
+          <script src="../../html/js/global/presentacionReferenciaMulti.js"></script>
           <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
 </body>

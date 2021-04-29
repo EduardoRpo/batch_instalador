@@ -1,8 +1,8 @@
-let presentacion;
-let r1 = 0,
+/*let presentacion;
+ let r1 = 0,
   r2 = 0,
   r3 = 0;
-let id_multi = 1;
+let id_multi = 1; */
 const equipos = [];
 
 //Carga el proceso despues de cargar la data  del Batch
@@ -10,35 +10,8 @@ const equipos = [];
 $(document).ready(function () {
   setTimeout(() => {
     busqueda_multi();
-    /* identificarDensidad(batch); */
     deshabilitarbotones();
   }, 500);
-});
-
-/* Carga Equipos */
-
-$.ajax({
-  url: `/api/equipos`,
-  type: "GET",
-}).done((data, status, xhr) => {
-  $(".banda").append(`<option value="">Seleccionar</option>`);
-  $(".etiquetadora").append(`<option value="">Seleccionar</option>`);
-  $(".tunel").append(`<option value="">Seleccionar</option>`);
-
-  data.forEach((equipo) => {
-    if (equipo.tipo == "banda")
-      $(".banda").append(
-        `<option value="${equipo.id}">${equipo.descripcion}</option>`
-      );
-    if (equipo.tipo == "etiquetadora")
-      $(".etiquetadora").append(
-        `<option value="${equipo.id}">${equipo.descripcion}</option>`
-      );
-    if (equipo.tipo == "tunel")
-      $(".tunel").append(
-        `<option value="${equipo.id}">${equipo.descripcion}</option>`
-      );
-  });
 });
 
 /* Cargar Multipresentacion */
@@ -144,38 +117,6 @@ function ocultar_acondicionamiento() {
   }
 }
 
-/* Cargar referencia */
-
-$(".ref_multi1").click(function (e) {
-  e.preventDefault();
-  ref_multi = $(`.ref1`).val();
-  id_multi = 1;
-  r1++;
-  presentacion_multi();
-});
-
-$(".ref_multi2").click(function (e) {
-  e.preventDefault();
-  ref_multi = $(`.ref2`).val();
-  id_multi = 2;
-  r2++;
-  presentacion_multi();
-});
-
-$(".ref_multi3").click(function (e) {
-  e.preventDefault();
-  ref_multi = $(`.ref3`).val();
-  id_multi = 3;
-  r3++;
-  presentacion_multi();
-});
-
-function presentacion_multi() {
-  envase = $(`#acondicionamientoMulti${id_multi}`).html();
-  presentacion = envase.slice(32, envase.length);
-  cargarfirma2();
-}
-
 /* Cargar tabla Material */
 
 function cargarTablaEnvase(j, referencia, cantidad) {
@@ -187,15 +128,6 @@ function cargarTablaEnvase(j, referencia, cantidad) {
     var info = JSON.parse(data);
     empaqueEnvasado = formatoCO(Math.round(cantidad / info[0].unidad_empaque));
     unidades = formatoCO(cantidad);
-
-    /* $(`.envase${j}`).html(info.data[0].id_envase);
-        $(`.descripcion_envase${j}`).html(info.data[0].envase);
-
-        $(`.tapa${j}`).html(info.data[0].id_tapa);
-        $(`.descripcion_tapa${j}`).html(info.data[0].tapa);
-
-        $(`.etiqueta${j}`).html(info.data[0].id_etiqueta);
-        $(`.descripcion_etiqueta${j}`).html(info.data[0].etiqueta); */
 
     $(`.empaque${j}`).html(info[0].id_empaque);
     $(`.descripcion_empaque${j}`).html(info[0].empaque);
@@ -298,10 +230,6 @@ function cargar(btn, idbtn) {
   $("#m_firmar").modal("show");
 }
 
-/* $(`#select-Linea1, #select-Linea2, #select-Linea3`).change(function () {
-    cargarEquipos();
-}) */
-
 //recalcular valores en la tabla de devolucion de materiales envase
 function recalcular_valores() {
   let utilizada = $(`#utilizada_empaque${id_multi}`).val();
@@ -330,7 +258,6 @@ function recalcular_valores() {
 }
 
 function deshabilitarbtn() {
-  //$(`.controlpeso_realizado${id_multi}`).css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
   btn = localStorage.getItem("btn");
 
   if (btn == "despeje_realizado")

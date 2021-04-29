@@ -21,7 +21,7 @@ include('modal/modal_condicionesMedio.php');
 
   <!-- Favicon icon -->
   <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
-  <title>Aprobacion  | Samara Cosmetics</title>
+  <title>Aprobacion | Samara Cosmetics</title>
 
   <!-- Bootstrap Core CSS -->
   <link href="../../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -391,23 +391,15 @@ include('modal/modal_condicionesMedio.php');
   </div>
 
   <script src="../../assets/plugins/jquery/jquery.min.js"></script>
-  <!-- Bootstrap tether Core JavaScript -->
   <script src="../../assets/plugins/bootstrap/js/tether.min.js"></script>
   <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="../../html/vendor/datatables/datatables.min.js"></script>
-  <!-- slimscrollbar scrollbar JavaScript -->
   <script src="../../html/js/utils/jquery.slimscroll.js"></script>
-  <!--Wave Effects -->
   <script src="../../html/js/utils/waves.js"></script>
-  <!--Menu sidebar -->
   <script src="../../html/js/utils/sidebarmenu.js"></script>
-  <!--stickey kit -->
   <script src="../../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
-  <!--Alertify-->
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-  <!--Custom JavaScript -->
   <script src="../../html/js/utils/custom.min.js"></script>
-  <!-- <script src="../../html/js/datatables.js"></script> -->
   <script src="../../html/js/global/loadinfo-global.js"></script>
   <script src="../../html/js/global/despeje.js"></script>
   <script src="../../html/js/aprobacion/aprobacioninfo.js"></script>
@@ -419,6 +411,7 @@ include('modal/modal_condicionesMedio.php');
   <script src="../../html/js/global/cargarBatchAprobacion.js"></script>
   <script src="../../html/js/global/validaciones.js"></script>
   <script src="../../html/js/global/tanques.js"></script>
+  <script src="../../html/js/global/propiedadesProducto.js"></script>
 
 </body>
 

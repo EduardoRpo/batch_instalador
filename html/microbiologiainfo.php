@@ -144,9 +144,9 @@ include("modal/modal_condicionesMedio.php");
                   <label for="recipient-name" class="col-form-label envasadora">Identificación Incubadora</label>
                   <label for="recipient-name" class="col-form-label loteadora">Identificación Autoclave</label>
                   <label for="recipient-name" class="col-form-label loteadora">Identificación Cabina de Flujo Laminar</label>
-                  <select class="selectpicker form-control" id="sel_incubadora"></select>
-                  <select class="selectpicker form-control" id="sel_autoclave"></select>
-                  <select class="selectpicker form-control" id="sel_cabina"></select>
+                  <select class="selectpicker form-control sel_equipos" id="sel_incubadora"></select>
+                  <select class="selectpicker form-control sel_equipos" id="sel_autoclave"></select>
+                  <select class="selectpicker form-control sel_equipos" id="sel_cabina"></select>
                 </div>
 
                 <div class="parametrosControl">
@@ -233,8 +233,6 @@ include("modal/modal_condicionesMedio.php");
               </div>
             </div>
           </div>
-
-
         </div>
       </div>
     </div>

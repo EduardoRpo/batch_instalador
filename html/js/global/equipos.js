@@ -1,3 +1,57 @@
+/* Carga Equipos */
+
+$.ajax({
+  url: `/api/equipos`,
+  type: "GET",
+}).done((data, status, xhr) => {
+  $(".sel_equipos").append(
+    `<option value="0" selected disabled>Seleccionar</option>`
+  );
+
+  data.forEach((equipo) => {
+    if (equipo.tipo == "agitador")
+      $("#sel_agitador").append(
+        `<option value="${equipo.id}">${equipo.descripcion}</option>`
+      );
+    if (equipo.tipo == "marmita")
+      $("#sel_marmita").append(
+        `<option value="${equipo.id}">${equipo.descripcion}</option>`
+      );
+    if (equipo.tipo == "envasadora")
+      $(".sel_envasadora").append(
+        `<option value="${equipo.id}">${equipo.descripcion}</option>`
+      );
+    if (equipo.tipo == "loteadora")
+      $(".sel_loteadora").append(
+        `<option value="${equipo.id}">${equipo.descripcion}</option>`
+      );
+    if (equipo.tipo == "banda")
+      $(".banda").append(
+        `<option value="${equipo.id}">${equipo.descripcion}</option>`
+      );
+    if (equipo.tipo == "etiquetadora")
+      $(".etiquetadora").append(
+        `<option value="${equipo.id}">${equipo.descripcion}</option>`
+      );
+    if (equipo.tipo == "tunel")
+      $(".tunel").append(
+        `<option value="${equipo.id}">${equipo.descripcion}</option>`
+      );
+    if (equipo.tipo == "incubadora")
+      $(".tunel").append(
+        `<option value="${equipo.id}">${equipo.descripcion}</option>`
+      );
+    if (equipo.tipo == "auotclave")
+      $(".tunel").append(
+        `<option value="${equipo.id}">${equipo.descripcion}</option>`
+      );
+    if (equipo.tipo == "cabina")
+      $(".tunel").append(
+        `<option value="${equipo.id}">${equipo.descripcion}</option>`
+      );
+  });
+});
+
 /* carga de maquinas */
 
 function cargarEquipos() {
@@ -25,9 +79,30 @@ function cargarEquipos() {
         $(`#sel_etiquetadora${id_multi}`).val(info[1].equipo);
         $(`#sel_tunel${id_multi}`).val(info[2].equipo);
       }
+
+      if (modulo == 8) {
+        $(`#sel_incubadora${id_multi}`).val(info[0].equipo);
+        $(`#sel_autoclave${id_multi}`).val(info[1].equipo);
+        $(`#sel_cabina${id_multi}`).val(info[2].equipo);
+      }
     },
     error: function (response) {
       console.log(response);
     },
   });
+}
+
+/* Validar que la linea ha sido seleccionada */
+
+function validarEquipos() {
+  const equipo1 = $("#sel_agitador").val();
+  const equipo2 = $("#sel_marmita").val();
+
+  if (equipo1 * equipo2 == 0) {
+    alertify.set("notifier", "position", "top-right");
+    alertify.error(
+      "Antes de continuar, seleccione los Equipos a usar para la linea de producción"
+    );
+    return 0;
+  }
 }

@@ -400,22 +400,12 @@ include('modal/image.php')
           <!--Custom JavaScript -->
           <script src="../../html/js/utils/custom.min.js"></script>
           <script src="../../html/vendor/jquery-confirm/jquery-confirm.min.js"></script>
-          <!-- <script src="../../html/js/datatables.js"></script> -->
           <script src="../../html/js/global/loadinfo-global.js"></script>
           <script src="../../html/js/despachos/despachosinfo.js"></script>
           <script src="../../html/js/despachos/cargarBatch_despachos.js"></script>
-          <!-- <script src="../../html/js/global/despeje.js"></script> -->
           <script src="../../html/js/global/tanques.js"></script>
           <script src="../../html/js/global/image.js"></script>
-          <!--<script src="../../html/js/global/muestras.js"></script>
-          <script src="../../html/js/global/condiciones_medio.js"></script>
-          <script src="../../html/js/global/cargarBatchMulti.js"></script>
-          <script src="../../html/js/firmar/firmar1raSeccionMulti.js"></script>
-          <script src="../../html/js/firmar/firmar2daSeccionMulti.js"></script>
-          <script src="../../html/js/despachos/despachosinfo.js"></script>
-          <script src="../../html/js/global/incidencias.js"></script> -->
-
-          <!--Alertify-->
+          <script src="../../html/js/global/presentacionReferenciaMulti.js"></script>
           <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
 </body>

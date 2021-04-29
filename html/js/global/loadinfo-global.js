@@ -38,8 +38,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   setTimeout(() => {
-    if (modulo != undefined && modulo != 9) 
-      cargarBatch();
+    if (modulo != undefined && modulo != 9) cargarBatch();
   }, 1300);
 });
 
@@ -68,6 +67,7 @@ $.ajax({
 });
 
 /* Carga de datos de informacion del batch record seleccionado */
+
 function batch_record() {
   $.ajax({
     url: `/api/batch/${idBatch}`,
@@ -145,30 +145,3 @@ const formatoGeneral = (number) => {
   const numero1 = numero.replace(",", ".");
   return numero1;
 };
-
-/* Cargar lineas */
-
-/* $(document).ready(function () {
-  $.ajax({
-    type: "POST",
-    url: "php/cargarLineas.php",
-    data: { operacion: 1 },
-
-    success: function (r) {
-      info = JSON.parse(r);
-
-      let $select = $(".select-Linea");
-      $select.empty();
-
-      $select.append(
-        "<option disabled selected>" + "Seleccionar" + "</option>"
-      );
-
-      $.each(info.data, function (i, value) {
-        $select.append(
-          '<option value ="' + value.id + '">' + value.linea + "</option>"
-        );
-      });
-    },
-  });
-}); */

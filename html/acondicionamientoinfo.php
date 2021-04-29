@@ -240,15 +240,6 @@ include('modal/image.php')
                                 <td id="descripcion_otros1" class="descripcion_otros1"></td>
                                 <td id="unidades4" class="centrado unidades1"></td>
                               </tr>
-                              <!-- <td>Cajas</td>
-                            <td>Auto</td>
-                            <td> Unidades con la que se creo el Batch Record / la unidad de empaque, se aproxima por el mayor y es entero</td>
-                            </tr>
-                            <tr>
-                              <td>Otros</td>
-                              <td>Auto</td>
-                              <td>Unidades con la que sc reo el Batch Record</td>
-                            </tr> -->
                             </tbody>
                           </table>
                         </div>
@@ -261,15 +252,13 @@ include('modal/image.php')
                   <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Línea de Producción</h3>
                 </div>
                 <div class="linea-produccion">
-                  <!-- <label for="recipient-name" class="col-form-label">Linea de Producción No</label> -->
                   <label for="recipient-name" class="col-form-label">Banda Transportadora</label>
                   <label for="recipient-name" class="col-form-label">Etiquetadora</label>
                   <label for="recipient-name" class="col-form-label">Tunel Termo</label>
-                  <!-- <select class="selectpicker form-control select-Linea" id="select-Linea1"></select> -->
 
-                  <select class="selectpicker form-control banda" id="sel_banda1"></select>
-                  <select class="selectpicker form-control etiquetadora" id="sel_etiquetadora1"></select>
-                  <select class="selectpicker form-control tunel" id="sel_tunel1"></select>
+                  <select class="selectpicker form-control banda sel_equipos" id="sel_banda1"></select>
+                  <select class="selectpicker form-control etiquetadora sel_equipos" id="sel_etiquetadora1"></select>
+                  <select class="selectpicker form-control tunel sel_equipos" id="sel_tunel1"></select>
 
                 </div>
                 <div class="row" style="margin: 1%">
@@ -517,15 +506,6 @@ include('modal/image.php')
                                 <td id="descripcion_otros2" class="descripcion_otros2"></td>
                                 <td id="unidades2" class="centrado unidades2"></td>
                               </tr>
-                              <!-- <td>Cajas</td>
-                            <td>Auto</td>
-                            <td> Unidades con la que se creo el Batch Record / la unidad de empaque, se aproxima por el mayor y es entero</td>
-                            </tr>
-                            <tr>
-                              <td>Otros</td>
-                              <td>Auto</td>
-                              <td>Unidades con la que sc reo el Batch Record</td>
-                            </tr> -->
                             </tbody>
                           </table>
                         </div>
@@ -543,9 +523,9 @@ include('modal/image.php')
                   <label for="recipient-name" class="col-form-label">Etiquetadora</label>
                   <label for="recipient-name" class="col-form-label">Tunel Termo</label>
 
-                  <select class="selectpicker form-control banda" id="sel_banda2"></select>
-                  <select class="selectpicker form-control etiquetadora" id="sel_etiquetadora2"></select>
-                  <select class="selectpicker form-control tunel" id="sel_tunel2"></select>
+                  <select class="selectpicker form-control banda sel_equipos" id="sel_banda2"></select>
+                  <select class="selectpicker form-control etiquetadora sel_equipos" id="sel_etiquetadora2"></select>
+                  <select class="selectpicker form-control tunel sel_equipos" id="sel_tunel2"></select>
                 </div>
                 <div class="row" style="margin: 1%">
                   <div class="col-md-12 align-self-center">
@@ -790,15 +770,6 @@ include('modal/image.php')
                                 <td id="descripcion_otros3" class="descripcion_otros3"></td>
                                 <td id="unidades3" class="centrado unidades3"></td>
                               </tr>
-                              <!-- <td>Cajas</td>
-                            <td>Auto</td>
-                            <td> Unidades con la que se creo el Batch Record / la unidad de empaque, se aproxima por el mayor y es entero</td>
-                            </tr>
-                            <tr>
-                              <td>Otros</td>
-                              <td>Auto</td>
-                              <td>Unidades con la que sc reo el Batch Record</td>
-                            </tr> -->
                             </tbody>
                           </table>
                         </div>
@@ -816,9 +787,9 @@ include('modal/image.php')
                   <label for="recipient-name" class="col-form-label">Etiquetadora</label>
                   <label for="recipient-name" class="col-form-label">Tunel Termo</label>
 
-                  <select class="selectpicker form-control banda" id="sel_banda3"></select>
-                  <select class="selectpicker form-control etiquetadora" id="sel_etiquetadora3"></select>
-                  <select class="selectpicker form-control tunel" id="sel_tunel3"></select>
+                  <select class="selectpicker form-control banda sel_equipos" id="sel_banda3"></select>
+                  <select class="selectpicker form-control etiquetadora sel_equipos" id="sel_etiquetadora3"></select>
+                  <select class="selectpicker form-control tunel sel_equipos" id="sel_tunel3"></select>
                 </div>
                 <div class="row" style="margin: 1%">
                   <div class="col-md-12 align-self-center">
@@ -832,7 +803,6 @@ include('modal/image.php')
                     <input type="text" class="form-control muestras2" id="muestras3" style="text-align: center;" readonly>
                   </div>
                   <div class="col-md-1 align-self-center" style="margin-top: 1%">
-                    <!-- <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 180px; height: 38px;" onclick="muestrasEnvase();">Iniciar</button> -->
                     <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 180px; height: 38px;" onclick="muestras_acondicionamiento();" data-toggle="modal" data-target="#m_muestras_acond">Iniciar</button> <!--   -->
                   </div>
                 </div>
@@ -983,71 +953,23 @@ include('modal/image.php')
                       <button type="button" class="btn waves-effect waves-light btn-danger conciliacion_realizado3" id="conciliacion_realizado3" onclick="cargar(this, 'firma7')" style="width: 180px; height: 38px;">Firmar</button>
                     </div>
                   </div>
-
-
-                  <!-- <div class="firma mt-5 mb-5 mr-4">
-                    <label for="recipient-name" class="col-form-label entrego-acon">Entregó</label>
-                    <input type="text" class="form-control conciliacion_realizado3" id="conciliacion_realizado3" style="width: 180px" readonly>
-
-                    <button type="button" class="btn waves-effect waves-light btn-danger conciliacion_realizado3" id="conciliacion_realizado2" onclick="cargar(this, 'firma7')" style="width: 180px; height: 38px;">Firmar</button>
-                  </div> -->
-
-
-                  <!-- <div class="row" style="margin: 1%"> -->
-                  <!--          <div class="col-md-12 col-2 align-self-center">
-                    <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Almacen Despachos</h3>
-                  </div>
-                   <div class="almacen-despachos">
-                    <label for="recipient-name"  class="col-form-label">Número del Traslado ofimatico</label>
-                    <input type="text" class="form-control" id="Notraslado">
-                    <label for="recipient-name" class="col-form-label" style="display: flex; justify-content:flex-end">Recibió</label>
-                    <input type="text" class="form-control" id="recipient2-name">
-
-                    input total cajas y total entrega cliente
-                    informativo input muestras de retencion
-                    input total a facturar unidades validadas + muestras de retencion
-
-        
-                </div> -->
-                  <!-- <div class="row buttons-group-container" style="margin: 1%">
-                  <div>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" onclick="" ;">Aceptar</button>
-                  </div>
-                </div> -->
                 </div>
-
               </div>
             </div>
 
           </div>
         </div>
-        <!-- jquery -->
-        <script src="../../assets/plugins/jquery/jquery.min.js"></script>
 
-        <!-- Bootstrap tether Core JavaScript -->
+        <script src="../../assets/plugins/jquery/jquery.min.js"></script>
         <script src="../../assets/plugins/bootstrap/js/tether.min.js"></script>
         <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-
-        <!-- Datatables -->
         <script type="text/javascript" src="../../html/vendor/datatables/datatables.min.js"></script>
-
-        <!-- slimscrollbar scrollbar JavaScript -->
         <script src="../../html/js/utils/jquery.slimscroll.js"></script>
-
-        <!--Wave Effects -->
         <script src="../../html/js/utils/waves.js"></script>
-
-        <!--Menu sidebar -->
         <script src="../../html/js/utils/sidebarmenu.js"></script>
-
-        <!--stickey kit -->
         <script src="../../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
-
-        <!--Custom JavaScript -->
         <script src="../../html/js/utils/custom.min.js"></script>
         <script src="../../html/vendor/jquery-confirm/jquery-confirm.min.js"></script>
-        <!-- <script src="../../html/js/datatables.js"></script> -->
         <script src="../../html/js/global/loadinfo-global.js"></script>
         <script src="../../html/js/global/despeje.js"></script>
         <script src="../../html/js/firmar/firmar1raSeccionMulti.js"></script>
@@ -1060,10 +982,8 @@ include('modal/image.php')
         <script src="../../html/js/global/cargarBatchMulti.js"></script>
         <script src="../../html/js/acondicionamiento/acondicionamientoinfo.js"></script>
         <script src="../../html/js/global/image.js"></script>
-
-        <!--Alertify-->
+        <script src="../../html/js/global/presentacionReferenciaMulti.js"></script>
         <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-
 </body>
 
 </html>

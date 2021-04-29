@@ -26,10 +26,10 @@ function actualizarEstado($batch, $modulo, $conn)
             $estado = 8.5;
             break;
         case '9': //fisicoquimico
-            $estado = 7.5;
+            $estado = 8.5;
             break;
         case '10': //liberacion lote
-            $estado = 7.5;
+            $estado = 8.5;
             break;
     }
 

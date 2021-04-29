@@ -1,30 +1,10 @@
 let pres;
-let envase;
+/* let envase;
 let presentacion;
 let r1,
   r2,
-  r3 = 0;
+  r3 = 0; */
 const equipos = [];
-
-//Cargar equipos
-
-$.ajax({
-  url: `/api/equipos`,
-  type: "GET",
-}).done((data, status, xhr) => {
-  $("#sel_envasadora").append(`<option value="">Seleccionar</option>`);
-  $("#sel_loteadora").append(`<option value="">Seleccionar</option>`);
-  data.forEach((equipo) => {
-    if (equipo.tipo == "envasadora")
-      $("#sel_envasadora").append(
-        `<option value="${equipo.id}">${equipo.descripcion}</option>`
-      );
-    if (equipo.tipo == "loteadora")
-      $("#sel_loteadora").append(
-        `<option value="${equipo.id}">${equipo.descripcion}</option>`
-      );
-  });
-});
 
 //validacion de campos y botones
 
@@ -215,37 +195,6 @@ function ocultarEnvasado() {
   }
 }
 
-/* Cargar referencia */
-
-$(".ref_multi1").click(function (e) {
-  e.preventDefault();
-  ref_multi = $(`.ref1`).val();
-  id_multi = 1;
-  r1++;
-  presentacion_multi();
-});
-
-$(".ref_multi2").click(function (e) {
-  e.preventDefault();
-  ref_multi = $(`.ref2`).val();
-  id_multi = 2;
-  r2++;
-  presentacion_multi();
-});
-
-$(".ref_multi3").click(function (e) {
-  e.preventDefault();
-  ref_multi = $(`.ref3`).val();
-  id_multi = 3;
-  r3++;
-  presentacion_multi();
-});
-
-function presentacion_multi() {
-  envase = $(`#envasadoMulti${id_multi}`).html();
-  presentacion = envase.slice(23, envase.length);
-  cargarfirma2();
-}
 
 /* Calcular peso minimo, maximo y promedio */
 
@@ -432,27 +381,6 @@ function registrar_material_sobrante(info) {
     success: function (response) {
       alertify.set("notifier", "position", "top-right");
       alertify.success("Firmado satisfactoriamente");
-    },
-  });
-}
-
-/* carga de maquinas */
-
-function cargarEquipos() {
-  /* linea = $(`#select-Linea${id_multi}`).val(); */
-
-  $.ajax({
-    method: "POST",
-    url: "../../html/php/cargarMaquinas.php",
-    data: { modulo, idBatch },
-
-    success: function (response) {
-      const info = JSON.parse(response);
-      $(`#sel_envasadora`).val(info[0].equipo);
-      $(`#sel_loteadora`).val(info[1].equipo);
-    },
-    error: function (response) {
-      console.log(response);
     },
   });
 }

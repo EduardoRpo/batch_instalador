@@ -143,64 +143,6 @@ include("modal/modal_condicionesMedio.php");
                   </div>
 
                 </div>
-
-                <!--      <div class="contenedorInfo2">
-                  <label for="recipient-name" class="col-form-label">Fecha Programación</label>
-                  <label for="recipient-name" class="col-form-label">No Orden de Producción</label>
-                  <label for="recipient-name" class="col-form-label">Referencia</label>
-                  <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:80%; height: 30px;">
-                    <thead>
-                      <tr>
-                        <th>Tanque</th>
-                        <th>Cantidad</th>
-                        <th>Total</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr id="fila1">
-                        <td id="tanque1" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad1" style="text-align: end;font-size:14px;"></td>
-                        <td id="total1" style="text-align: end;font-size:14px;"></td>
-                      </tr>
-                      <tr id="fila2">
-                        <td id="tanque2" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad2" style="text-align: end;font-size:14px;"></td>
-                        <td id="total2" style="text-align: end;font-size:14px;"></td>
-                      </tr>
-                      <tr id="fila3">
-                        <td id="tanque3" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad3" style="text-align: end;font-size:14px;"></td>
-                        <td id="total3" style="text-align: end;font-size:14px;"></td>
-                      </tr>
-                      <tr id="fila4">
-                        <td id="tanque4" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad4" style="text-align: end;font-size:14px;"></td>
-                        <td id="total4" style="text-align: end;font-size:14px;"></td>
-                      </tr>
-                      <tr id="fila5">
-                        <td id="tanque5" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad5" style="text-align: end;font-size:14px;"></td>
-                        <td id="total5" style="text-align: end;font-size:14px;"></td>
-                      </tr>
-                    </tbody>
-                  </table>
-
-                  <input type="date" class="form-control" id="in_fecha" readonly>
-                  <input type="text" class="form-control" id="in_numero_orden" readonly>
-                  <input type="text" class="form-control" id="in_referencia" readonly>
-
-                  <label></label>
-                  <label for="in_tamano_lote" class="col-form-label">Tamaño Lote (kg)</label>
-                  <label for="recipient-name" class="col-form-label">No. Lote</label>
-                  <label for="recipient-name" class="col-form-label">Linea</label>
-
-                  <input type="text" class="form-control" id="in_tamano_lote" readonly>
-                  <input type="text" class="form-control" id="in_numero_lote" readonly>
-                  <input type="text" class="form-control" id="in_linea" readonly>
-                </div> -->
-
-
-
               </div>
             </div>
           </div>
@@ -273,29 +215,12 @@ include("modal/modal_condicionesMedio.php");
             </div>
             <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
               <div class="card-body">
-                <!-- <div class="row" style="margin: 1%">
-              <div class="col-md-12 col-2 align-self-center">
-                <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Máquinas</h3>
-              </div> -->
                 <h3 class="subtitulo" style="text-align: center; background-color: #C0C0C0; margin:25px; height:40px">Máquinas</h3>
                 <div class="maquinasPreparacion">
-
-                  <!--  <div class="maquinasPreparacion__group">
-                    <label for="">Linea</label>
-                    <select class="selectpicker form-control select-linea" id="select-Linea"></select>
-                  </div> -->
-
-                  <!-- <div class="maquinasPreparacion__group"> -->
                   <label for="sel_agitador">Identificación Agitador</label>
                   <label for="sel_marmita">Identificación Marmita o Tanque</label>
-                  <!-- <input type="text" id="sel_agitador" class="form-control" readonly> -->
-                  <!-- </div> -->
-
-                  <!-- <div class="maquinasPreparacion__group"> -->
-                  <select class="selectpicker form-control equipo" id="sel_agitador"></select>
-                  <select class="selectpicker form-control equipo" id="sel_marmita"></select>
-                  <!-- <input type="text" id="sel_marmita" class="form-control" readonly> -->
-                  <!-- </div> -->
+                  <select class="selectpicker form-control equipo sel_equipos" id="sel_agitador"></select>
+                  <select class="selectpicker form-control equipo sel_equipos" id="sel_marmita"></select>
 
                 </div>
                 <div class="row" style="margin: 1%">
@@ -549,8 +474,8 @@ include("modal/modal_condicionesMedio.php");
   <script src="../../html/js/global/requerimiento_ajuste.js"></script>
   <script src="../../html/js/global/validaciones.js"></script>
   <script src="../../html/js/preparacion/preparacioninfo.js"></script>
+  <script src="../../html/js/global/propiedadesProducto.js"></script>
 
-  <!-- <script src="../../html/js/preparacion/firmar_controlproceso.js"></script> -->
 
 
 </body>

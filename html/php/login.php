@@ -83,18 +83,13 @@ if (!empty($_SESSION['active'])) {
                             header('location: /liberacionlote');
                             break;
                     }
-
-                    /*  if ($data['rol'] == 1 || $data['rol'] == 2) {
-                    } else
-                        header('location: html/batch.php'); */
                 } else {
                     $new_trie = ++$tries;
                     file_put_contents('tries.txt', $new_trie);
                     $alert = "Su usuario y/o password no son correctos";
-                    //session_destroy();
                 }
             } else
-                $alert = "Número maximo de intentos superados. Vuelva a intentar en unos minutos";
+                $alert = "Número máximo de intentos superados. Vuelva a intentar en unos minutos";
         }
     }
 }
