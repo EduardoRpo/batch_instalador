@@ -81,14 +81,11 @@ switch ($op) {
     $query_referencia = mysqli_query($conn, "SELECT @curRow := @curRow + 1 AS id, referencia FROM producto JOIN (SELECT @curRow := 0) r ORDER BY `producto`.`referencia` ASC");
     $result = mysqli_num_rows($query_referencia);
     if ($result > 0) {
-      while ($data = mysqli_fetch_assoc($query_referencia)) {
+      while ($data = mysqli_fetch_assoc($query_referencia))
         $arreglo[] = $data;
-      }
       echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
-      //echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
-    } else {
+    } else
       echo json_encode('');
-    }
     mysqli_free_result($query_referencia);
     mysqli_close($conn);
     break;
@@ -119,78 +116,45 @@ switch ($op) {
 
   case 5: // Guardar
 
-    $cantidad               = $_POST['cantidad'];
+    //$cantidad               = $_POST['cantidad'];
     $id_batch               = $_POST['id_batch'];
     $referencia             = $_POST['ref'];
     $unidadesxlote          = $_POST['unidades'];
     $tamanototallote        = $_POST['lote'];
     $fechaprogramacion      = $_POST['programacion'];
-    $fechahoy               = $_POST['fecha'];
     $tamanolotepresentacion = $_POST['presentacion'];
-    $tanque                 = $_POST['tqns'];
-    $tamanotqn              = $_POST['tmn'];
+    $tanque                 = $_POST['tanque'];
+    $cantidades             = $_POST['cantidades'];
+    $fechahoy               = date("Y-m-d");
 
+    $result = estadoInicial($conn, $referencia, $fechaprogramacion);
+    $estado = $result['0'];
+    $fechaprogramacion = $result['1'];
 
-    /* validar formula que exista la formula*/
-    $query_buscarFormula =  mysqli_query($conn, "SELECT * FROM formula WHERE id_producto = '$referencia'");
-    $resultFormula = mysqli_num_rows($query_buscarFormula);
-
-    /* validar que exista el instructivo */
-    $query_buscarInstructivo =  mysqli_query($conn, "SELECT * FROM instructivo_preparacion WHERE id_producto = '$referencia'");
-    $resultPreparacion = mysqli_num_rows($query_buscarInstructivo);
-
-    /* validar que exista el instructivo en Bases*/
-    if ($resultPreparacion == 0) {
-      $query_buscarInstructivo =  mysqli_query($conn, "SELECT instructivo FROM producto WHERE referencia = '$referencia'");
-      $resultPreparacion = mysqli_fetch_assoc($query_buscarInstructivo);
-    }
-
-    if ($resultFormula <= 0 || $resultPreparacion <= 0) {
-      $estado = '1';  //Sin formula
-      $fechaprogramacion = '';
-    }
-
-    if ($resultFormula > 0 && $resultPreparacion > 0 && $fechaprogramacion == '') {
-      $estado = '2'; // Inactivo  
-    }
-
-    if ($resultFormula > 0 && $resultPreparacion > 0 && $fechaprogramacion != '') {
-      $estado = '3';  //Pesaje
-    }
-
-    $i = 1;
-
+    /* $i = 1; */
     $query = "INSERT INTO batch (fecha_creacion, fecha_programacion, fecha_actual, numero_orden, numero_lote, tamano_lote, lote_presentacion, unidad_lote, estado, id_producto) 
 			VALUES ('$fechahoy',";
     $query .= $fechaprogramacion != null ? "'$fechaprogramacion'" : "NULL";
     $query .= ",'$fechahoy', 'OP012020',' X0010320', '$tamanototallote', '$tamanolotepresentacion', '$unidadesxlote', '$estado', '$id_batch')";
+    $result = mysqli_query($conn, $query); //or die ("Problemas al insertar" . mysqli_error($conn));    
 
-    if (isset($cantidad)) {
-      while ($i <= $cantidad) {
-        $result = mysqli_query($conn, $query); //or die ("Problemas al insertar" . mysqli_error($conn));    
-        $i++;
-      }
-    }
-
-    if (count($tanque) > 0) {
+    /* Inserte tanque y cantidades */
+    if ($result) {
       $id = mysqli_insert_id($conn);
-      for ($i = 0; $i < count($tanque); ++$i) {
-        $query_tanque = "INSERT INTO batch_tanques (tanque, cantidad, id_batch) VALUES('$tanque[$i]' , '$tamanotqn[$i]', '$id')";
-        $result = mysqli_query($conn, $query_tanque);
-      }
+      $query_tanque = "INSERT INTO batch_tanques (tanque, cantidad, id_batch) VALUES('$tanque' , '$cantidades', '$id')";
+      $result = mysqli_query($conn, $query_tanque);
     }
 
     mysqli_close($conn);
 
-    if (!$result) {
-      die('Error');
-      echo 'No guardado. Error: ' . mysqli_error($conn);
-    } else {
-      echo 'Almacenado';
-    }
+    if (!$result)
+      echo 'false' . mysqli_error($conn);
+    else
+      echo 'true';
+
     break;
 
-  case 6: //Cargar datos para Actualizar
+  case 6: //Cargar datos al modal para Actualizar
     $id_batch = $_POST['id'];
 
     $query_buscar = mysqli_query($conn, "SELECT bt.id_batch, p.referencia, p.nombre_referencia, m.nombre as marca, pp.nombre as propietario, np.nombre, pc.nombre as presentacion_comercial, linea.nombre as linea, linea.densidad, ns.nombre as notificacion_sanitaria, bt.unidad_lote, bt.tamano_lote, bt.fecha_programacion 
@@ -222,78 +186,35 @@ switch ($op) {
 
   case 7: //Actualiza datos
     $id_batch     = $_POST['id_batch'];
-    $referencia     = $_POST['ref'];
+    $referencia   = $_POST['ref'];
     $unidades     = $_POST['unidades'];
     $lote         = $_POST['lote'];
     $fechaprogramacion = $_POST['programacion'];
-    $tanque       = $_POST['tqns'];
-    $tamanotqn    = $_POST['tmn'];
+    $tanque    = $_POST['tanque'];
+    $cantidades  = $_POST['cantidades'];
 
-    //Validar estado
-    /* $query_buscarEstado =  mysqli_query($conn, "SELECT * FROM batch WHERE id_batch = '$id_batch'");
-    $data = mysqli_fetch_all($query_buscarEstado, MYSQLI_ASSOC);
-    if ($data[0]['estado'] > 2) {
-      echo '3';
-      exit();
-    } */
+    /* asigna el estado */
+    $result = estadoInicial($conn, $referencia, $fechaprogramacion);
+    $estado = $result['0'];
+    $fechaprogramacion = $result['1'];
 
-    //Valida formula
-    $query_buscarFormula =  mysqli_query($conn, "SELECT * FROM formula WHERE id_producto = '$referencia'");
-    $result = mysqli_num_rows($query_buscarFormula);
-
-    if ($result <= 0) {
-      $estado = '1';  //Sin formula
-      $fechaprogramacion = null;
-    }
-
-    if ($result > 0 && $fechaprogramacion == '') {
-      $estado = '2'; // Inactivo  
-      $fechaprogramacion = null;
-    }
-
-    if ($result > 0 && $fechaprogramacion != '') {
-      $estado = '3';  //Pesaje
-    }
-
-    $query_actualizar = "UPDATE batch SET unidad_lote = '$unidades', tamano_lote = '$lote', estado = '3', fecha_programacion = ";
+    /* Actualiza el batch */
+    $query_actualizar = "UPDATE batch SET unidad_lote = '$unidades', tamano_lote = '$lote', estado = '$estado', fecha_programacion = ";
     $query_actualizar .= $fechaprogramacion != null ? "'$fechaprogramacion'" : "NULL ";
     $query_actualizar .= "WHERE id_batch ='$id_batch'";
-
     $result = mysqli_query($conn, $query_actualizar);
 
+    /* Actualizar los tanques */
     if ($result) {
-      echo "Exitoso actualizacion datos batch record";
-    } else {
-      echo "No Exitoso actualizacion datos Batch record";
-      echo 'No Cargado. Error: ' . mysqli_error($conn);
+      $query_tanque = "UPDATE batch_tanques SET tanque = '$tanque', cantidad = '$cantidades' WHERE id_batch = '$id_batch'";
+      $result = mysqli_query($conn, $query_tanque);
     }
 
-    $query_eliminar_tanque = mysqli_query($conn, "DELETE FROM batch_tanques WHERE id_batch ='$id_batch'");
+    if ($result)
+      echo "true";
+    else
+      echo 'false ' . mysqli_error($conn);
 
-    if (count($tanque) > 0) {
-      for ($i = 0; $i < count($tanque); ++$i) {
-        $query_tanque = "INSERT INTO batch_tanques (tanque, cantidad, id_batch) VALUES('$tanque[$i]' , '$tamanotqn[$i]', '$id_batch')";
-        $result = mysqli_query($conn, $query_tanque);
-
-        $query_tanque_chk = "UPDATE batch_tanques_chks SET tanques = '$tamanotqn[$i]' WHERE modulo = '2' AND batch = '$id_batch'";
-        $result = mysqli_query($conn, $query_tanque_chk);
-      }
-    }
-
-    if ($result) {
-      echo "Exitoso actualización datos batch record";
-    } else {
-      echo 'No Cargado. Error: ' . mysqli_error($conn);
-    }
-
-    if ($result) {
-      echo "Exitoso";
-    } else {
-      echo "Error";
-      echo 'No Cargado. Error: ' . mysqli_error($conn);
-    }
-
-    //mysqli_free_result($query_actualizar);
     mysqli_close($conn);
 
     break;
@@ -308,18 +229,12 @@ switch ($op) {
     $result = mysqli_num_rows($query_nref);
 
     if ($result > 0) {
-
-      while ($data = mysqli_fetch_assoc($query_nref)) {
+      while ($data = mysqli_fetch_assoc($query_nref))
         $arreglo[] = $data;
-      }
-
       echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
-      //echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
-      //exit();
-
-    } else {
+    } else
       echo json_encode('');
-    }
+
 
     break;
 
@@ -329,15 +244,11 @@ switch ($op) {
     $result = mysqli_num_rows($query_tanque);
 
     if ($result > 0) {
-      while ($data = mysqli_fetch_assoc($query_tanque)) {
+      while ($data = mysqli_fetch_assoc($query_tanque))
         $arreglo[] = $data;
-      }
-
       echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
-      //echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
-    } else {
+    } else
       echo json_encode('');
-    }
     mysqli_free_result($query_tanque);
     mysqli_close($conn);
 
@@ -347,19 +258,12 @@ switch ($op) {
     $id_batch = $_POST['id'];
     $referencia = $_POST['referencia'];
     $clonarCantidad = $_POST['clonarCantidad'];
-
-    /* validar formula que exista la formula*/
-    $query_buscarFormula =  mysqli_query($conn, "SELECT * FROM formula WHERE id_producto = '$referencia'");
-    $resultFormula = mysqli_num_rows($query_buscarFormula);
-
-    /* validar que exista el instructivo */
-    $query_buscarInstructivo =  mysqli_query($conn, "SELECT * FROM instructivo_preparacion WHERE id_producto = '$referencia'");
-    $resultPreparacion = mysqli_num_rows($query_buscarInstructivo);
-
-    if ($resultFormula <= 0 || $resultPreparacion <= 0)
-      $estado = '1';  //Sin formula
-    else
-      $estado = '2'; // Inactivo  
+    $fechaprogramacion = "";
+    
+    /* asigna el estado */
+    $result = estadoInicial($conn, $referencia, $fechaprogramacion);
+    $estado = $result['0'];
+    $fechaprogramacion = $result['1'];
 
     /* Clonar batch */
     for ($i = 0; $i < $clonarCantidad; $i++) {
@@ -409,13 +313,9 @@ switch ($op) {
       //$query_tanque = "INSERT INTO batch_tanques (tanque, cantidad, id_batch) VALUES('$tanque[$i]' , '$tamanotqn[$i]', '$id')";
 
       $query_id_referencia = "INSERT INTO multipresentacion (id_batch, referencia, cantidad) 
-                                SELECT '$id_batch', referencia, '$cantidad[$i]' 
-                                FROM producto 
-                                WHERE nombre_referencia = '$nom_referencia[$i]'";
-      $query_batch_multi = "  UPDATE batch 
-                                SET multi = '1' 
-                                WHERE id_batch='$id_batch'";
-
+                              SELECT '$id_batch', referencia, '$cantidad[$i]' FROM producto 
+                              WHERE nombre_referencia = '$nom_referencia[$i]'";
+      $query_batch_multi = " UPDATE batch SET multi = '1' WHERE id_batch='$id_batch'";
       $result = mysqli_query($conn, $query_id_referencia);
       $result1 = mysqli_query($conn, $query_batch_multi);
     }
@@ -428,4 +328,40 @@ switch ($op) {
     }
 
     break;
+}
+
+function estadoInicial($conn, $referencia, $fechaprogramacion)
+{
+  /* validar que exista la formula*/
+  $query_buscarFormula =  mysqli_query($conn, "SELECT * FROM formula WHERE id_producto = '$referencia'");
+  $resultFormula = mysqli_num_rows($query_buscarFormula);
+
+  /* validar que exista el instructivo */
+  $query_buscarInstructivo =  mysqli_query($conn, "SELECT * FROM instructivo_preparacion WHERE id_producto = '$referencia'");
+  $resultPreparacionInstructivos = mysqli_num_rows($query_buscarInstructivo);
+
+  /* si el instructivo no existe valida que exista el instructivo en Bases*/
+  if ($resultPreparacionInstructivos == 0) {
+    $query_buscarInstructivo =  mysqli_query($conn, "SELECT instructivo FROM producto WHERE referencia = '$referencia'");
+    $resultPreparacion = mysqli_fetch_assoc($query_buscarInstructivo);
+    $resultPreparacionInstructivos = $resultPreparacion['instructivo'];
+  }
+
+  /* consolida resultados */
+  $result = $resultFormula * $resultPreparacionInstructivos;
+
+  /* Asigna el estado de acuerdo con el resultado */
+  if ($result === 0) {
+    $estado = '1';  //Sin formula
+    $fechaprogramacion = '';
+  }
+
+  if ($result > 0 && $fechaprogramacion == '') {
+    $estado = '2'; // Inactivo  
+  }
+
+  if ($result > 0 && $fechaprogramacion != '') {
+    $estado = '3';  //Pesaje
+  }
+  return array($estado, $fechaprogramacion);
 }

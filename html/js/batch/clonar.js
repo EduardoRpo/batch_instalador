@@ -3,8 +3,8 @@
 function clonar() {
   if ($("input[name='optradio']:radio").is(":checked")) {
     $("#txtCantidadCB").val("");
-    $("#txtCantidadCB").trigger("focus");
     $("#ClonarModal").modal("show");
+    $("#txtCantidadCB").focus();
   } else {
     alertify.set("notifier", "position", "top-right");
     alertify.error("Para Clonar seleccione un Batch Record");

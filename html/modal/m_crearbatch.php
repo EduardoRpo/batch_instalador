@@ -86,18 +86,13 @@
 
                     </div>
                     <hr>
-                    <div class="row page">
+                    <!-- <div class="row page">
                         <div class="col-md-6 col-2 align-self-center">
                             <label for="recipient-name" class="col-form-label">Observaciones Pesaje / Preparación</label>
                         </div>
-                    </div>
-
-                    <div>
-                        <button id="adicionarPesaje" name="adicionarPesaje" type="button" class="btn btn-primary">Adicionar</button>
-                    </div>
+                    </div> -->
 
                     <div class="row page mostrarTanque">
-
                         <label class="labelTanques">Tanque</label>
                         <label class="labelTanques">Cantidad</label>
                         <label class="labelTanques">Total</label>
@@ -106,27 +101,7 @@
                         <select class="form-control tnq" id="cmbTanque1" onchange="validarTanque(1);"></select>
                         <input type="number" class="form-control tnq" id="txtCantidad1" onkeyup="CalcularTanque(1)">
                         <input type="number" class="form-control tnq" id="txtTotal1">
-                        <button class="btn btn-warning" id="btnEliminar1" type="button" onclick="eliminarTanque(1);">X</button>
-
-                        <!-- <select class="form-control tnq" id="cmbTanque2" onchange="validarTanque(2);"></select>
-                        <input type="number" class="form-control tnq" id="txtCantidad2" onblur="CalcularTanque(2)">
-                        <input type="number" class="form-control tnq" id="txtTotal2">
-                        <button class="btn btn-warning" id="btnEliminar2" type="button" onclick="eliminarTanque(2);">X</button>
-
-                        <select class="form-control tnq" id="cmbTanque3" onchange="validarTanque(3);"></select>
-                        <input type="number" class="form-control tnq" id="txtCantidad3" onblur="CalcularTanque(3)">
-                        <input type="number" class="form-control tnq" id="txtTotal3">
-                        <button class="btn btn-warning" id="btnEliminar3" type="button" onclick="eliminarTanque(3);">X</button>
-
-                        <select class="form-control tnq" id="cmbTanque4" onchange="validarTanque(4);"></select>
-                        <input type="number" class="form-control tnq" id="txtCantidad4" onblur="CalcularTanque(4)">
-                        <input type="number" class="form-control tnq" id="txtTotal4">
-                        <button class="btn btn-warning" id="btnEliminar4" type="button" onclick="eliminarTanque(4);">X</button>
-
-                        <select class="form-control tnq" id="cmbTanque5" onchange="validarTanque(5);"></select>
-                        <input type="number" class="form-control tnq" id="txtCantidad5" onblur="CalcularTanque(5)">
-                        <input type="number" class="form-control tnq" id="txtTotal5">
-                        <button class="btn btn-warning eliminarTanque" id="btnEliminar5" type="button" onclick="eliminarTanque(5);">X</button> -->
+                        <!-- <button class="btn btn-warning" id="btnEliminar1" type="button" onclick="eliminarTanque(1);">X</button> -->
 
                         <label for="" class="labelTotalTanques">Total</label>
                         <input type="number" class="form-control sumaTanques tnq" id="sumaTanques" readonly>

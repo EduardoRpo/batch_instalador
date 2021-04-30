@@ -10,17 +10,9 @@
       <form id="form_clonar">
         <div class="modal-body">
           <div class="row page">
-            <!-- <div class="col-md-12 col-2">
-              <label for="recipient-name" class="col-form-label"><strong>Unidades</strong></label>
-              <input type="text" class="form-control" id="numero" name="unidades">
-            </div> -->
-            <!-- <div class="col-md-4 col-2 align-self-center">
-              <label for="recipient-name" class="col-form-label"><strong>Presentación</strong></label>
-              <input type="text" class="form-control" id="numero1" name="presentacion">
-            </div> -->
-            <div class="col-md-12 col-2"> <!-- align-self-center -->
+            <div class="col-md-12 col-2">
               <label for="recipient-name" class="col-form-label"><strong>Cantidad</strong></label>
-              <input type="number" class="form-control" id="txtCantidadCB" name="txtCantidadCB" autocomplete="off" required >
+              <input type="number" class="form-control" id="txtCantidadCB" name="txtCantidadCB" autocomplete="off" required>
             </div>
           </div>
 

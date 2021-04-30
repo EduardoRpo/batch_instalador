@@ -17,29 +17,6 @@ function mostrarModal() {
   OcultarTanques();
 }
 
-/* Ocultar Tanques al inicial el Batch Record */
-
-function OcultarTanques() {
-  $(".labelTotalTanques").hide();
-  $(".labelTanques").hide();
-  $(".sumaTanques").hide();
-
-  for (i = 1; i < 6; i++) {
-    $("#cmbTanque" + i)
-      .hide()
-      .removeAttr("disable");
-    $("#txtCantidad" + i)
-      .hide()
-      .removeAttr("disable");
-    $("#txtTotal" + i)
-      .hide()
-      .removeAttr("disable");
-    $("#btnEliminar" + i)
-      .hide()
-      .removeAttr("disable");
-  }
-}
-
 /* Eliminar los tanques generados */
 
 function limpiarTanques() {
@@ -116,18 +93,14 @@ function recargarDatos() {
 function CalculoTamanolote(valor) {
   var total = 0;
   unidades = parseInt(valor);
-
   densidad = $("#densidad").val();
 
-  if (batch == undefined || batch == false) {
+  if (batch == undefined || batch == false)
     presentacion = formatoGeneral($("#presentacioncomercial").val());
-  } else {
-    presentacion = batch[0].presentacion_comercial;
-  }
+  else presentacion = batch[0].presentacion_comercial;
 
   total = ((unidades * densidad * presentacion) / 1000) * (1 + 0.005);
   total1 = formatoCO(total.toFixed(2));
-
   $("#tamanototallote").val(total1);
 }
 
@@ -138,59 +111,6 @@ $("#cmbNoReferencia").change(function () {
   $("#unidadesxlote").val("");
   $("#fechaprogramacion").val("");
 });
-
-/* Adicionar y elimina campos para los tanques al crear batch record */
-
-$("#adicionarPesaje").on("click", function () {
-  const unidades = $("#unidadesxlote").val();
-  const lote = $("#tamanototallote").val();
-  const sumaTanques = $("#sumaTanques").val();
-
-  contarTanques();
-
-  if (unidades === "" || unidades === 0 || lote === 0) {
-    alertify.set("notifier", "position", "top-right");
-    alertify.error("Complete todos los campos.");
-    return false;
-  }
-
-  if (
-    addtnq == 1 ||
-    (addtnq > 1 && addtnq < 6 && sumaTanques != "0" && sumaTanques !== "")
-  ) {
-    insertar();
-    bloquearCeldas();
-  } else {
-    alertify.set("notifier", "position", "top-right");
-    alertify.error(
-      "Diligencie todos los campos vacios o reconfigure los tanques."
-    );
-  }
-});
-
-function insertar() {
-  insertarTanques();
-  $(".sumaTanques").val("");
-  $(".labelTotalTanques").show();
-  $(".labelTanques").show();
-}
-
-function insertarTanques() {
-  $("#cmbTanque" + addtnq).show();
-  $("#txtCantidad" + addtnq).show();
-  $("#txtTotal" + addtnq).show();
-  $("#btnEliminar" + addtnq).show();
-  $("#sumaTanques").show();
-  addtnq++;
-}
-
-function bloquearCeldas() {
-  addtnq = addtnq - 2;
-  $("#cmbTanque" + addtnq).attr("disabled", "disabled");
-  $("#txtCantidad" + addtnq).attr("disabled", "disabled");
-  $("#txtTotal" + addtnq).attr("disabled", "disabled");
-  $("#btnEliminar" + addtnq).attr("disabled", "disabled");
-}
 
 /* Cargar tanques */
 
@@ -278,46 +198,6 @@ function CalcularTanque(id) {
     $("#sumaTanques").val(sumaTanques);
   }
 }
-
-/* Eliminar Tanque */
-function eliminarTanque(id) {
-  contarTanques();
-
-  $("#cmbTanque" + id)
-    .hide()
-    .val("");
-  $("#txtCantidad" + id)
-    .hide()
-    .val("");
-  $("#txtTotal" + id)
-    .hide()
-    .val("");
-  $("#btnEliminar" + id).hide();
-
-  $("#cmbTanque" + (id - 1)).removeAttr("disabled");
-  $("#txtCantidad" + (id - 1)).removeAttr("disabled");
-  $("#txtTotal" + (id - 1)).removeAttr("disabled");
-  $("#btnEliminar" + (id - 1)).removeAttr("disabled");
-
-  Notanques--;
-
-  if (Notanques == 0) {
-    $(".labelTotalTanques").hide();
-    $(".labelTanques").hide();
-    $("#sumaTanques").hide();
-  }
-
-  sumaTanques = 0;
-
-  for (i = 1; i < 6; i++) {
-    var total = $("#txtTotal" + i).val();
-    if (total != "") sumaTanques = parseInt(sumaTanques) + parseInt(total);
-  }
-
-  $("#sumaTanques").val(sumaTanques);
-}
-
-/* cerrar modal al crear Batch */
 
 function cerrarModal() {
   $("#modalCrearBatch").modal("hide");

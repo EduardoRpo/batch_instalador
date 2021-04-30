@@ -156,7 +156,7 @@ $(document).on("click", ".link-editar", function (e) {
   e.preventDefault();
   editar = true;
   limpiarTanques();
-  OcultarTanques();
+  //OcultarTanques();
 
   if (data.estado > 2) {
     f1 = new Date();
@@ -197,55 +197,22 @@ $(document).on("click", ".link-editar", function (e) {
       $("#unidadesxlote").val(info[0].unidad_lote);
       $("#tamanototallote").val(tamano_lote);
       $("#fechaprogramacion").val(info[0].fecha_programacion);
-
-      mostrarTanques(info);
+      $("#cmbNoReferencia").css("display", "none");
+      $("#referencia").css("display", "block");
+      $("#guardarBatch").html("Actualizar");
+      $(".tcrearBatch").html("Actualizar Batch Record");
+      if (info.length === 2) {
+        $("#cmbTanque1").val(info[1].tanque);
+        $("#txtCantidad1").val(info[1].cantidad);
+        CalcularTanque(1);
+      }
+      $("#modalCrearBatch").modal("show");
     },
     error: function (response) {
       console.log(response);
     },
   });
 });
-
-function mostrarTanques(info) {
-  let sum = 0;
-  for (k = 1; k < info.length; k++) {
-    const cantidad = info[k].cantidad;
-    const tanque = info[k].tanque;
-    const total = cantidad * tanque;
-
-    $("#cmbTanque" + k)
-      .show()
-      .val(tanque);
-    $("#txtCantidad" + k)
-      .show()
-      .val(cantidad);
-    $("#txtTotal" + k)
-      .show()
-      .val(total);
-    $("#btnEliminar" + k).show();
-
-    sum = sum + total;
-    $(".sumatanques").val(sum);
-    $(".labelTanques").show();
-    $(".labelTotalTanques").show();
-    $(".sumaTanques").show();
-  }
-
-  contarTanques();
-
-  for (k = 1; k < info.length - 1; k++) {
-    $("#cmbTanque" + k).attr("disabled", "disabled");
-    $("#txtCantidad" + k).attr("disabled", "disabled");
-    $("#txtTotal" + k).attr("disabled", "disabled");
-    $("#btnEliminar" + k).attr("disabled", "disabled");
-  }
-
-  $("#cmbNoReferencia").css("display", "none");
-  $("#referencia").css("display", "block");
-  $("#guardarBatch").html("Actualizar");
-  $(".tcrearBatch").html("Actualizar Batch Record");
-  $("#modalCrearBatch").modal("show");
-}
 
 /* Actualizar tabla */
 
@@ -257,8 +224,6 @@ function actualizarTabla() {
 /* Guardar datos de Crear y Actualizar batch*/
 
 function guardarDatos() {
-  //validar consecutivo del lote en la base de datos (trigger)
-
   if (data !== undefined) {
     if (data.estado > 2) {
       f1 = new Date();
@@ -282,6 +247,8 @@ function guardarDatos() {
   const presentacion = $("#presentacioncomercial").val();
   const presentacion_comercial = formatoGeneral(presentacion);
   const programacion = $("#fechaprogramacion").val();
+  const tanque = $("#cmbTanque1").val();
+  const cantidades = $("#txtCantidad1").val();
   let sumaTanques = $(".sumaTanques").val();
 
   if (sumaTanques == "" || sumaTanques == 0) {
@@ -291,46 +258,11 @@ function guardarDatos() {
     return false;
   }
 
-  let tqn = [];
-  let tmn = [];
-
-  contarTanques();
-
   if ((cont !== 0 && sumaTanques == "") || lote == "") {
     alertify.set("notifier", "position", "top-right");
     alertify.error("Ingrese todos los datos.");
     return false;
   }
-
-  var d = new Date();
-  var mes = d.getMonth() + 1;
-  var dia = d.getDate();
-  var fechaActual =
-    d.getFullYear() +
-    "/" +
-    (mes < 10 ? "0" : "") +
-    mes +
-    "/" +
-    (dia < 10 ? "0" : "") +
-    dia;
-
-  var j = 0;
-
-  for (i = 1; i <= Notanques; i++) {
-    let tanque = $("#cmbTanque" + i).val();
-    tqn[j] = tanque;
-    j++;
-  }
-
-  j = 0;
-
-  for (i = 1; i <= Notanques; i++) {
-    let cantidad = $("#txtCantidad" + i).val();
-    tmn[j] = cantidad;
-    j++;
-  }
-
-  j = 1;
 
   if (!editar) {
     datos = {
@@ -341,10 +273,8 @@ function guardarDatos() {
       lote: tamano_lote,
       presentacion: presentacion_comercial,
       programacion,
-      fecha: fechaActual,
-      cantidad: "1",
-      tqns: tqn,
-      tmn: tmn,
+      tanque,
+      cantidades,
     };
   } else {
     datos = {
@@ -354,9 +284,8 @@ function guardarDatos() {
       unidades,
       lote: tamano_lote,
       programacion,
-      fecha: fechaActual,
-      tqns: tqn,
-      tmn: tmn,
+      tanque,
+      cantidades,
     };
   }
 
@@ -384,26 +313,4 @@ function guardarDatos() {
       alertify.error("Error al registrar el Batch Record.");
     },
   });
-}
-
-/* Contar Tanques */
-
-function contarTanques() {
-  addtnq = 0;
-  cont = 0;
-  Notanques = 0;
-
-  for (i = 1; i < 6; i++) {
-    const txtTotal = $("#txtTotal" + i).val();
-    parseInt(txtTotal, 10);
-
-    if (txtTotal != "" && txtTotal != "0" && txtTotal > 0) {
-      addtnq++;
-      cont++;
-    }
-    if ($("#txtTotal" + i).is(":visible")) {
-      Notanques++;
-    }
-  }
-  addtnq++;
 }
