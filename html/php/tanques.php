@@ -6,13 +6,9 @@ if (!empty($_POST)) {
     require_once('../../conexion.php');
 
     $batch = $_POST['idBatch'];
-
     $sql = "SELECT tanque, cantidad FROM batch_tanques WHERE id_batch = :batch";
     $query = $conn->prepare($sql);
-    $query->execute([
-        'batch' => $batch
-    ]);
-
+    $query->execute(['batch' => $batch]);
     $rows = $query->rowCount();
 
     if ($rows > 0) {

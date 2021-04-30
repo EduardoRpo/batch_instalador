@@ -41,7 +41,7 @@ function cargarTanques() {
     data: { idBatch },
 
     success: function (data) {
-      if (info == "" || modulo == 5 || modulo == 6) {
+      if (data == "" || modulo == 5 || modulo == 6) {
         return false;
       }
       /* cargar tabla de tanques en info */
