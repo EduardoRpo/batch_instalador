@@ -65,5 +65,5 @@ function cerrarEstado($batch, $modulo, $conn)
 
     $sql = "UPDATE batch SET estado = :estado WHERE id_batch = :batch";
     $query = $conn->prepare($sql);
-    $query->execute(['batch' => $batch, 'estado' => $estado]);
+    $query->execute(['estado' => $estado, 'batch' => $batch]);
 }

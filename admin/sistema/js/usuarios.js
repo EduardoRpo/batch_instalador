@@ -13,10 +13,8 @@ $(".contenedor-menu .menu ul.menu_usuarios").show();
 
 $(document).ready(function () {
   $("#listaUsuarios").DataTable({
-    //scrollY: '50vh',
     scrollCollapse: true,
     paging: false,
-    /* pageLength: 5, */
     language: { url: "admin_componentes/es-ar.json" },
 
     ajax: {
@@ -45,7 +43,11 @@ $(document).ready(function () {
             ? "Superusuario"
             : data == 2
             ? "Administrador"
-            : "Usuario";
+            : data == 3
+            ? "Usuario"
+            : data == 4
+            ? "Usuario QC"
+            : "Director QC"  
         },
       },
     ],
@@ -162,7 +164,12 @@ $(document).ready(function () {
       const archivo = $("#firma").val();
       let extensiones = archivo.substring(archivo.lastIndexOf("."));
 
-      if (extensiones != ".jpg" && extensiones != ".png" && extensiones != ".JPG" && extensiones != ".PNG") {
+      if (
+        extensiones != ".jpg" &&
+        extensiones != ".png" &&
+        extensiones != ".JPG" &&
+        extensiones != ".PNG"
+      ) {
         alertify.set("notifier", "position", "top-right");
         alertify.error("El archivo de tipo " + extensiones + " no es válido");
         return false;
@@ -212,7 +219,7 @@ $(document).ready(function () {
 $(document).on("click", ".link-editar", function (e) {
   e.preventDefault();
   editar = 1;
-  
+
   id = $(this).parent().parent().children().eq(1).text();
   let nombres = $(this).parent().parent().children().eq(2).text();
   let apellidos = $(this).parent().parent().children().eq(3).text();
