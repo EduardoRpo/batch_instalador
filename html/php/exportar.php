@@ -20,7 +20,7 @@ if (!empty($_POST)) {
         mkdir($fileLabels, 0777, true);
         echo 'file created';
     } else
-        echo 'file created';
+        echo 'file has been created';
 
     $writer->save('C:\label\etiquetasDispensacion.xlsx');
 }

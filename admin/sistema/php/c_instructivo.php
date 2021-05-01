@@ -97,7 +97,7 @@ switch ($op) {
                     'tiempo' => $tiempo,
                     'referencia' => intval($referencia),
                 ]);
-
+                /* Actualizar estado */    
                 if ($result) {
                     echo '3';
                     exit();
@@ -122,7 +122,7 @@ switch ($op) {
             echo '1';
         } else {
             die('Error');
-            print_r('Error: ' . mysqli_error($conn));
+            print_r('Error: '/*  . mysqli_error($conn) */);
         }
 
         break;

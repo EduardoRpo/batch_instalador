@@ -1,6 +1,7 @@
 <?php
 require_once('../../../conexion.php');
 require_once('./crud.php');
+require_once('../../../html/php/estadoInicial.php');
 
 $op = $_POST['operacion'];
 
@@ -60,8 +61,12 @@ switch ($op) {
                 $sql = "INSERT INTO formula (id_producto, id_materiaprima, porcentaje) VALUES (:id_producto, :id_materiaprima, AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') )";
                 $query = $conn->prepare($sql);
                 $result = $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto, 'porcentaje' => $porcentaje]);
+                
                 /* Valida si existen batch sin formula y actualiza */
-                $sql = "UPDATE batch SET estado = IF(estado = 1 , 2, estado) WHERE id_producto = :referencia";
+                $result = estadoInicial($conn, $referencia, $fechaprogramacion = "");
+                $estado = $result['0'];
+                
+                $sql = "UPDATE batch SET estado = $estado WHERE id_producto = :referencia";
                 $query = $conn->prepare($sql);
                 $result = $query->execute(['referencia' => $id_producto]);
 
@@ -122,7 +127,7 @@ switch ($op) {
             echo '1';
         } else {
             die('Error');
-            print_r('Error: ' . mysqli_error($conn));
+            print_r('Error: ' /* . mysqli_error($conn) */);
         }
 
         break;

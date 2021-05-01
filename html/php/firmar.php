@@ -9,7 +9,7 @@ if (!empty($_POST)) {
   $user = $_POST['user'];
   $clave = md5($_POST['password']);
 
-  $sql = "SELECT id, urlfirma FROM usuario WHERE user = :user AND clave = :clave";
+  $sql = "SELECT id, rol, urlfirma FROM usuario WHERE user = :user AND clave = :clave";
   $query = $conn->prepare($sql);
   $query->execute(['clave' => $clave, 'user' => $user]);
   $result = $query->rowCount();
