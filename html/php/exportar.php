@@ -16,11 +16,11 @@ if (!empty($_POST)) {
     $writer = new Xlsx($spreadsheet);
 
     $fileLabels = 'C:/label';
-    if (!file_exists($fileLabels)) {
+    //if (!file_exists($fileLabels)) {
         mkdir($fileLabels, 0777, true);
         echo 'file created';
-    } else
-        echo 'file has been created';
+    //|} else
+       // echo 'file has been created';
 
     $writer->save('C:\label\etiquetasDispensacion.xlsx');
 }
