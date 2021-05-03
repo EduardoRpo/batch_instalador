@@ -19,19 +19,19 @@ if (!empty($_POST)) {
   }
 
   if ($result > 0) {
-    $data = $query->fetch(PDO::FETCH_ASSOC);
+    $data[] = $query->fetch(PDO::FETCH_ASSOC);
 
-    if ($data['rol'] !== 3 && $data['rol'] !== 4) {
+    if ($data[0]['rol'] !== 3 && $data[0]['rol'] !== 4) {
       echo '1';
       exit();
     }
 
-    if ($btn === 'firma1' || $btn === 'firma3' && $data['rol'] !== 3) {
+    if ($btn === 'firma1' && $btn === 'firma3' && $data[0]['rol'] !== 3) {
       echo '1';
       exit();
     }
 
-    if ($btn === 'firma2' || $btn === 'firma4' && $data['rol'] !== 4) {
+    if ($btn === 'firma2' && $btn === 'firma4' && $data[0]['rol'] !== 4) {
       echo '1';
       exit();
     }

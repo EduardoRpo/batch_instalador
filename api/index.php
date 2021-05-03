@@ -144,9 +144,9 @@ $app->post('/clonebatch', function (Request $request, Response $response, $args)
 });
 
 $app->get('/questions', function (Request $request, Response $response, $args) use ($preguntaDao) {
-  $array = $preguntaDao->findAll();
+  $batch = $preguntaDao->findAll();
   //$batch = utf8_string_array_encode($array);
-  $batch = utf8_encode($array);
+  //$batch = utf8_encode($array);
   if ($batch == null) {
     $response->getBody()->write('');
   } else {
@@ -225,6 +225,12 @@ $app->post('/user', function (Request $request, Response $response, $args) use (
   }
 });
 
+$app->get('/user/{modulo}/{batch}', function (Request $request, Response $response, $args) use ($userDao) {
+  $user = $userDao->findByBatch($args["modulo"], $args["batch"]);
+  $response->getBody()->write(json_encode($user, JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
+});
+
 $app->get('/controlproceso', function (Request $request, Response $response, $args) use ($controlProcesoDao) {
   $array = $controlProcesoDao->findAll();
   $response->getBody()->write(json_encode($array));
@@ -261,20 +267,6 @@ $app->post('/pedidos/nuevos', function (Request $request, Response $response, $a
 
   return $response->withHeader('Content-Type', 'application/json');
 });
-
-/* $app->post('/incidencias', function (Request $request, Response $response, $args) use ($batchDao) {
-  $requestBody = json_decode($request->getBody(), true);
-  $batch = $batchDao->findById($requestBody['idbatch']);
-  //$batch["unidad_lote"] = $requestBody['unidades'];
-  $duplicates = $requestBody['cantidad'];
-  for ($i = 0; $i < $duplicates; $i++) {
-    $rows = $batchDao->save($batch);
-  }
-  $resp = array('success' => ($rows > 0));
-  $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
-  return $response->withHeader('Content-Type', 'application/json');
-}); */
-
 
 $app->get('/pdftextos', function (Request $request, Response $response, $args) use ($textospdfDao) {
   $textos = $textospdfDao->findAll();

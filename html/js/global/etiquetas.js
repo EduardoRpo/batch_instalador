@@ -13,7 +13,6 @@ $(document).ready(function () {
       JSONData.peso = peso;
       arrayData.push(JSONData);
       sessionStorage.setItem("batch", batch);
-      //window.open("../../html/modal/m_plantillaEtiquetas.php", "_blank");
       $("#imprimirEtiquetas").modal("show");
     });
   };
@@ -30,6 +29,13 @@ const imprimirEtiquetasFull = () => {
   $.ajax({
     url: `../../api/materiasp/${ref}`,
     success: function (response) {
+      $.ajax({
+        url: `../../api/user/${modulo}/${idBatch}`,
+        success: function (response) {
+          console.log(response);
+        },
+      });
+
       arrayData = [];
       for (let i = 0; i < response.length; i++) {
         pesaje = {};
