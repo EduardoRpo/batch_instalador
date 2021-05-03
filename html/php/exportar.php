@@ -19,8 +19,8 @@ if (!empty($_POST)) {
     $sheet->fromArray($etiquetas, NULL, 'A2');
     $writer = new Xlsx($spreadsheet);
 
-    $fileLabels = 'C:/Label';
-    echo substr(sprintf('%o', fileperms('/Label')), -4);
+    $fileLabels = 'C:/label';
+    echo substr(sprintf('%o', fileperms('/label')), -4);
     if (!file_exists($fileLabels)) {
         mkdir($fileLabels, 0777, true);
         echo 'file created';
