@@ -31,20 +31,18 @@ if (!empty($_POST)) {
             $batch = $_POST['idBatch'];
             $modulo = $_POST['modulo'];
 
-            $sql = "SELECT d.desinfectante, d.observaciones, u.urlfirma 
-                    FROM batch_desinfectante_seleccionado d 
-                    INNER JOIN usuario u ON u.id = d.realizo
-                    WHERE modulo = :modulo AND batch = :batch";
+            $sql = "SELECT d.desinfectante, d.observaciones, u.urlfirma FROM batch_desinfectante_seleccionado d 
+                    INNER JOIN usuario u ON u.id = d.realizo WHERE modulo = :modulo AND batch = :batch";
 
             $query = $conn->prepare($sql);
             $query->execute(['batch' => $batch, 'modulo' => $modulo]);
             $rows = $query->rowCount();
 
-            if ($rows > 0) {
+            if ($rows > 0)
                 ejecutarSelect1($query);
-            }
 
             break;
+
         case 3: // cargar 2da firma despeje
             $batch = $_POST['idBatch'];
             $modulo = $_POST['modulo'];
@@ -77,7 +75,7 @@ if (!empty($_POST)) {
                 'batch' => $batch,
                 'modulo' => $modulo
             ]);
-            
+
             $rows = $query->rowCount();
 
             if ($rows > 0) {

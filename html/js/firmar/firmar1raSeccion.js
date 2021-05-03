@@ -11,6 +11,7 @@ function enviar() {
   (datos = {
     user: $("#usuario").val(),
     password: $("#clave").val(),
+    btn_id,
   }),
     $.ajax({
       type: "POST",
@@ -18,13 +19,20 @@ function enviar() {
       data: datos,
 
       success: function (datos) {
-        if (datos.length < 1) {
+        if (datos == 0) {
           alertify.set("notifier", "position", "top-right");
           alertify.error("usuario y/o contraseña no coinciden.");
           return false;
-        } else {
-          preparar(datos);
         }
+
+        if (datos == 1) {
+          alertify.set("notifier", "position", "top-right");
+          alertify.error("Usuario No autorizado para firmar.");
+          return false;
+        }
+
+        preparar(datos);
+        sessionStorage.setItem("firm", datos);
       },
     });
   return false;
@@ -34,7 +42,6 @@ function enviar() {
 
 function preparar(datos) {
   info = JSON.parse(datos);
-
   if (btn_id == "firma1") {
     guardar_preguntas(info[0].id);
     firmar(info);

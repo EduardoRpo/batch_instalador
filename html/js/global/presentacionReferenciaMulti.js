@@ -31,9 +31,10 @@ $(".ref_multi3").click(function (e) {
 });
 
 function presentacion_multi() {
-  if (batchMulti)
+  if (batchMulti) {
     batch = batchMulti.find((elemento) => elemento.referencia == ref_multi);
-  else presentacion = batch.presentacion;
+    presentacion = batch.presentacion;
+  } else presentacion = batch.presentacion;
   cargarImagen(ref_multi);
   cargarfirma2();
   if (modulo === 7) {
