@@ -27,8 +27,8 @@
     </div>
 
     <div>
-        <a href='#' <i class='fa fa-print fa-2x link-imprimir flotante' data-toggle='tooltip' title='Imprimir Batch Record' style='color:green;'></i></a>
-        <a href='#' <i class='fa fa-times-circle fa-2x link-cerrar flotante position' data-toggle='tooltip' title='Cerrar ventana' style='color:red;'></i></a>
+        <a href='#'> <i class='fa fa-print fa-2x link-imprimir flotante' data-toggle='tooltip' title='Imprimir Batch Record' style='color:green;'></i></a>
+        <a href='#'> <i class='fa fa-times-circle fa-2x link-cerrar flotante position' data-toggle='tooltip' title='Cerrar ventana' style='color:red;'></i></a>
     </div>
 
 
@@ -92,9 +92,9 @@
 
             <div class="alertas" id="alert_pesaje">
                 <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <!--  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                    </button>
+                    </button> -->
                     <label id="title1"></label>
                     <ul id="vinetas1">
 

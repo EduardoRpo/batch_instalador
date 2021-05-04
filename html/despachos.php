@@ -1,6 +1,7 @@
 <?php
-require_once('./html/sesion/sesiondespachos.php');
+require_once('./html/sesiones/sesion.php');
 include('modal/modal_cambiarContrasena.php');
+sesiones(7);
 ?>
 
 <!DOCTYPE html>

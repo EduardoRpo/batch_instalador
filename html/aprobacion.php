@@ -1,5 +1,7 @@
 <?php
-require_once('./html/sesion/sesionaprobacion.php');
+require_once('./html/sesiones/sesion.php');
+include('modal/modal_cambiarContrasena.php');
+sesiones(4);
 ?>
 
 <!DOCTYPE html>

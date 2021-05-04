@@ -1,7 +1,9 @@
 <?php
 session_start();
 require_once('./html/php/login.php');
+include('./html/modal/linkProcesos.php');
 include('./html/modal/modal_recuperarClave.php');
+
 ?>
 
 <!DOCTYPE html>

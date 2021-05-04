@@ -1,5 +1,6 @@
 <?php
-session_start();
+require_once('./html/sesiones/sesion.php');
+sesiones(9);
 ?>
 
 <!DOCTYPE html>

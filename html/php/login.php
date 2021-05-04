@@ -41,17 +41,19 @@ if (!empty($_SESSION['active'])) {
                     $modulo = $data['modulo'];
                     $rol = $data['rol'];
 
-                    if ($rol === 1 || $rol == 2)
-                        $variable = 1;
-                    else {
+                    if ($rol === 1 || $rol == 2) {
+                        header('location: admin/sistema/index.php');
+                        exit();
+                    } else if ($rol == 4) {
+                        header('location: admin/sistema/calidad.php');
+                        exit();
+                    } else {
                         $modulo = $data['id_modulo'];
                         $variable = $rol . $modulo;
                     }
 
                     switch ($variable) {
-                        case '1':
-                            header('location: admin/sistema/index.php');
-                            break;
+
                         case '31':
                             header('location: /html/batch.php');
                             break;

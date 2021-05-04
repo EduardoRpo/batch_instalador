@@ -1,6 +1,7 @@
 <?php
-require_once('./html/sesion/sesionpesaje.php');
+require_once('./html/sesiones/sesion.php');
 include('modal/modal_cambiarContrasena.php');
+sesiones(2);
 ?>
 
 <!DOCTYPE html>

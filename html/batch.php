@@ -1,5 +1,6 @@
 <?php
-require_once('./sesion/sesionbatch.php');
+require_once('./html/sesiones/sesion.php');
+sesiones(1);
 require_once('../conexion.php');
 include_once("modal/modal_clonar.php");
 include_once("modal/m_batchEliminados.php");
