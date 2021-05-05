@@ -1,6 +1,7 @@
 <?php
 require_once('../../../conexion.php');
 require_once('./crud.php');
+require_once('../../../html/php/estadoInicial.php');
 
 $op = $_POST['operacion'];
 
@@ -74,34 +75,24 @@ switch ($op) {
                 $rows = $query->rowCount();
 
                 if ($rows > 0) {
-                    echo '2';
-                    exit();
-                } else {
-                    $sql = "INSERT INTO instructivo_preparacion (pasos, tiempo, id_producto) VALUES (:proceso, :tiempo, :referencia )";
-                    $query = $conn->prepare($sql);
-                    $result = $query->execute(['proceso' => $actividad, 'tiempo' => $tiempo, 'referencia' => $referencia]);
-                    if ($result) {
-                        echo '1';
-                        exit();
-                    }
-                }
-            } else {
-                $id = $_POST['id'];
-                $sql = "UPDATE instructivo_preparacion 
+                    $id = $_POST['id'];
+                    $sql = "UPDATE instructivo_preparacion 
                         SET pasos = :instruccion, tiempo = :tiempo 
                         WHERE pasos = :id AND id_producto = CAST(:referencia AS INT)";
-                $query = $conn->prepare($sql);
-                $result = $query->execute([
-                    'id' => $id,
-                    'instruccion' => $actividad,
-                    'tiempo' => $tiempo,
-                    'referencia' => intval($referencia),
-                ]);
-                /* Actualizar estado */    
-                if ($result) {
-                    echo '3';
-                    exit();
+                    $query = $conn->prepare($sql);
+                    $result = $query->execute([
+                        'id' => $id, 'instruccion' => $actividad, 'tiempo' => $tiempo, 'referencia' => intval($referencia),
+                    ]);
+                    $result = estadoInicial($conn, $referencia, $fechaprogramacion = "");
                 }
+            } else {
+                $sql = "INSERT INTO instructivo_preparacion (pasos, tiempo, id_producto) VALUES (:proceso, :tiempo, :referencia )";
+                $query = $conn->prepare($sql);
+                $result = $query->execute(['proceso' => $actividad, 'tiempo' => $tiempo, 'referencia' => $referencia]);
+                $result = estadoInicial($conn, $referencia, $fechaprogramacion = "");
+            }
+            if ($result) {
+                echo '1';
             }
         }
         break;
@@ -109,14 +100,14 @@ switch ($op) {
     case 5: //Eliminar
         $id = $_POST['id'];
         $referencia = $_POST['referencia'];
-        
+
         $sql = "DELETE FROM instructivo_preparacion 
                 WHERE pasos = :id AND id_producto = CAST(:referencia AS INT)";
         $query = $conn->prepare($sql);
         $result = $query->execute([
             'id' => $id,
             'referencia' => $referencia,
-            ]);
+        ]);
 
         if ($result) {
             echo '1';
