@@ -205,15 +205,15 @@ switch ($op) {
 
     /* Actualizar los tanques */
     if ($result) {
-      $query_tanque = "SELECT * batch_tanques WHERE id_batch = '$id_batch'";
+      $query_tanque = "SELECT * FROM batch_tanques WHERE id_batch = '$id_batch'";
       $result = mysqli_query($conn, $query_tanque);
       if ($result) {
         $query_tanque = "UPDATE batch_tanques SET tanque = '$tanque', cantidad = '$cantidades' WHERE id_batch = '$id_batch'";
         $result = mysqli_query($conn, $query_tanque);
-      } else {
+      } /* else {
         $query_tanque = "INSERT INTO batch_tanques (tanque, cantidad, id_batch) VALUES('$tanque' , '$cantidades', '$id_batch')";
         $result = mysqli_query($conn, $query_tanque);
-      }
+      } */
     }
 
     if ($result)
