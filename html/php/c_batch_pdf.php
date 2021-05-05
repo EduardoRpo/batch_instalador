@@ -16,9 +16,9 @@ if (!empty($_POST)) {
 
         case 2:
             $id = $_POST['idBatch'];
-            $sql = "SELECT p.referencia, p.nombre_referencia, m.nombre as marca, pp.nombre as propietario, pc.nombre as presentacion, ns.nombre as notificacion, b.numero_orden, b.numero_lote, b.fecha_creacion, b.tamano_lote, b.unidad_lote, b.lote_presentacion, linea.densidad 
-            FROM batch b INNER JOIN producto p ON p.referencia= b.id_producto INNER JOIN presentacion_comercial pc ON p.presentacion_comercial = pc.id INNER JOIN marca m ON m.id = p.id_marca INNER JOIN propietario pp ON pp.id = p.id_propietario INNER JOIN notificacion_sanitaria ns ON ns.id = p.id_notificacion_sanitaria INNER JOIN linea ON linea.id = p.id_linea 
-            WHERE id_batch = :id";
+            $sql = "SELECT p.referencia, UPPER(p.nombre_referencia) AS nombre_referencia, m.nombre as marca, pp.nombre as propietario, pc.nombre as presentacion, ns.nombre as notificacion, b.numero_orden, b.numero_lote, b.fecha_creacion, b.tamano_lote, b.unidad_lote, b.lote_presentacion, linea.densidad 
+                    FROM batch b INNER JOIN producto p ON p.referencia= b.id_producto INNER JOIN presentacion_comercial pc ON p.presentacion_comercial = pc.id INNER JOIN marca m ON m.id = p.id_marca INNER JOIN propietario pp ON pp.id = p.id_propietario INNER JOIN notificacion_sanitaria ns ON ns.id = p.id_notificacion_sanitaria 
+                    INNER JOIN linea ON linea.id = p.id_linea WHERE id_batch = :id";
             $query = $conn->prepare($sql);
             $query->execute(['id' => $id,]);
             $data = $query->fetch(PDO::FETCH_ASSOC);
@@ -67,10 +67,10 @@ if (!empty($_POST)) {
             $query = $conn->prepare($sql);
             $query->execute(['batch' => $batch, 'batch1' => $batch]);
 
-            while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
-                $arreglo[] = $data;
-            }
-            echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+            $data = $query->fetchAll(PDO::FETCH_ASSOC);
+            //$arreglo[] = $data;
+
+            echo json_encode($data, JSON_UNESCAPED_UNICODE);
 
             break;
 

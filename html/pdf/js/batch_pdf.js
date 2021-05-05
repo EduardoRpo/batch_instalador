@@ -4,6 +4,7 @@ let cantidad;
 let presentacion;
 let densidad;
 let tamanioLote;
+let infoBatch;
 
 /* bloquear inputs */
 $("input").prop("readonly", true);
@@ -55,6 +56,7 @@ info_General = () => {
     function (data, textStatus, jqXHR) {
       if (data == "false") return false;
       let info = JSON.parse(data);
+      infoBatch = info;
       cantidad = info.unidad_lote;
       presentacion = info.presentacion;
       densidad = info.densidad;
@@ -73,6 +75,8 @@ info_General = () => {
       $("#unidadesLote").html("<b>" + info.unidad_lote + "</b>");
       $(".unidades1").html("<b>" + info.unidad_lote + "</b>");
       $(".fecha").html("<b>" + info.fecha_creacion + "</b>");
+      lote_anterior();
+      desinfectante();
     }
   );
 };
@@ -108,7 +112,19 @@ parametros_Control = () => {
   );
 };
 
-area_desinfeccion = () => {
+lote_anterior = () => {
+  let lote = infoBatch.numero_lote;
+  let linea = lote.slice(0, 2);
+  let serie = lote.slice(2, 5);
+  let fecha = lote.slice(5, 9);
+  serie = parseInt(serie);
+  serie = serie - 1;
+
+  lote = linea.concat("00", serie, fecha);
+  area_desinfeccion(lote);
+};
+
+area_desinfeccion = (lote) => {
   let data = { operacion: 4 };
 
   $.post(
@@ -122,15 +138,14 @@ area_desinfeccion = () => {
       for (let i = 0; i < info.data.length; i++) {
         $(`#area_desinfeccion${info.data[i].modulo}`).append(`
           <tr>
-              <td>${info.data[i].descripcion}</td>
-              <td class="centrado desinfectante${info.data[i].modulo}"></td>
-              <td class="centrado concentracion${info.data[i].modulo}"></td>
-              <td></td>
+            <td>${info.data[i].descripcion}</td>
+            <td class="centrado desinfectante${info.data[i].modulo}"></td>
+            <td class="centrado concentracion${info.data[i].modulo}"></td>
+            <td class="centrado">${lote}</td>
           </tr>`);
       }
     }
   );
-  desinfectante();
 };
 
 desinfectante = () => {
@@ -584,7 +599,7 @@ $(document).ready(function () {
 
   cargar_Alertas();
   info_General();
-  area_desinfeccion();
+  //area_desinfeccion();
   parametros_Control();
   especificaciones_producto();
   entrega_material_envase();
