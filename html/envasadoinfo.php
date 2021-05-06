@@ -887,7 +887,7 @@ include('modal/image.php')
           <script src="../../html/js/global/muestras.js"></script>
           <script src="../../html/js/global/condiciones_medio.js"></script>
           <script src="../../html/js/global/cargarBatchMulti.js"></script>
-          <script src="../../html/js/firmar/firmar1raSeccionMulti.js"></script>
+          <script src="../../html/js/firmar/firmar1raSeccion.js"></script>
           <script src="../../html/js/firmar/firmar2daSeccionMulti.js"></script>
           <script src="../../html/js/envasado/envasadoinfo.js"></script>
           <script src="../../html/js/global/incidencias.js"></script>

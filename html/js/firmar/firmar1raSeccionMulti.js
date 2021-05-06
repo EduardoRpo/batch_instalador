@@ -8,19 +8,21 @@ function enviar() {
   $("#m_firmar").modal("hide");
   btn_id = localStorage.getItem("idbtn");
 
-  (datos = { user: $("#usuario").val(), password: $("#clave").val() }),
+  (datos = { user: $("#usuario").val(), password: $("#clave").val(), btn_id }),
     $.ajax({
       type: "POST",
       url: "../../html/php/firmar.php",
       data: datos,
 
       success: function (datos) {
+        modulo;
         if (datos.length < 1) {
           alertify.set("notifier", "position", "top-right");
           alertify.error("usuario y/o contraseña no coinciden.");
           return false;
         } else {
           preparar(datos);
+          sessionStorage.setItem("firm", datos);
         }
       },
     });
@@ -44,7 +46,7 @@ function preparar(datos) {
 
   if (btn_id == "firma3") {
     almacenar_muestras(info);
-    firmar(info);
+    //firmar(info);
   }
 
   if (btn_id == "firma4") {

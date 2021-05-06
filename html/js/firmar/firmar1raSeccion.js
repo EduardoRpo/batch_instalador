@@ -63,8 +63,15 @@ function preparar(datos) {
     firmar(info);
   }
   if (btn_id == "firma5") {
-    info[0].id;
-    firmar(info);
+    if (modulo != 5 && modulo != 6) {
+      info[0].id;
+      firmar(info);
+    } else {
+      registrar_material_sobrante(info[0].id);
+      observaciones_incidencias(info);
+      //validarCondicionesMedio();
+      firmar(info);
+    }
   }
 }
 
@@ -106,6 +113,7 @@ function guardar_preguntas(idfirma) {
           .css({ background: "lightgray", border: "gray" })
           .prop("disabled", true);
         $(".despeje_verificado").prop("disabled", false);
+        js;
         habilitarbotones();
       }
     },

@@ -972,7 +972,7 @@ include('modal/image.php')
         <script src="../../html/vendor/jquery-confirm/jquery-confirm.min.js"></script>
         <script src="../../html/js/global/loadinfo-global.js"></script>
         <script src="../../html/js/global/despeje.js"></script>
-        <script src="../../html/js/firmar/firmar1raSeccionMulti.js"></script>
+        <script src="../../html/js/firmar/firmar1raSeccion.js"></script>
         <script src="../../html/js/firmar/firmar2daSeccionMulti.js"></script>
         <script src="../../html/js/global/incidencias.js"></script>
         <script src="../../html/js/global/tanques.js"></script>

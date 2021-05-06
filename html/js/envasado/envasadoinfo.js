@@ -32,10 +32,10 @@ function cargar(btn, idbtn) {
       //return false;
 
       /* Validar equipos */
-      const eq1 = $("#sel_envasadora").val();
-      const eq2 = $("#sel_loteadora").val();
+      let eq1 = $(`#sel_envasadora${id_multi}`).val();
+      let eq2 = $(`#sel_loteadora${id_multi}`).val();
 
-      if (!eq1 || !eq2) {
+      if (eq1 === null || eq2 === null) {
         alertify.set("notifier", "position", "top-right");
         alertify.error("Seleccione los equipos a usar.");
         return false;
@@ -194,7 +194,6 @@ function ocultarEnvasado() {
     $(`#envasado${i}`).attr("hidden", true);
   }
 }
-
 
 /* Calcular peso minimo, maximo y promedio */
 
