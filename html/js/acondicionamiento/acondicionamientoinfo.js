@@ -1,8 +1,8 @@
-/*let presentacion;
+let presentacion;
  let r1 = 0,
   r2 = 0,
   r3 = 0;
-let id_multi = 1; */
+let id_multi = 1;
 const equipos = [];
 
 //Carga el proceso despues de cargar la data  del Batch

@@ -298,7 +298,7 @@
                     <div class="equipos">
                         <label for="">Identificación Agitador</label>
                         <input type="text" class="form-control" id="agitador">
-                        <label for="">Identificación Marmita o Taque</label>
+                        <label for="">Identificación Marmita o Tanque</label>
                         <input type="text" class="form-control" id="marmita">
                     </div>
 
