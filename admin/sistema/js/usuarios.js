@@ -47,7 +47,7 @@ $(document).ready(function () {
             ? "Usuario"
             : data == 4
             ? "Usuario QC"
-            : "Director QC"  
+            : "Director QC";
         },
       },
     ],
@@ -127,40 +127,32 @@ $(document).ready(function () {
     let clave = $("#clave").val();
     let rol = $("#rol").val();
 
+    let datosIniciales =
+      nombres.length *
+      apellidos.length *
+      cargo.length *
+      modulo.length *
+      user.length;
+
     if (rol == 1) {
       modulo = "1";
     }
 
     if (editar == 1) {
-      if (
-        nombres === "" ||
-        apellidos === "" ||
-        cargo === "" ||
-        modulo === "" ||
-        user === ""
-      ) {
+      if (datosIniciales === 0) {
         alertify.set("notifier", "position", "top-right");
         alertify.error("Ingrese todos los datos.");
         return false;
       }
     } else {
-      if (
-        nombres === "" ||
-        apellidos === "" ||
-        email === "" ||
-        cargo === "" ||
-        modulo === "" ||
-        user === "" ||
-        clave === "" ||
-        rol === null
-      ) {
+      if (datosIniciales == 0 || clave === "" || rol === null) {
         alertify.set("notifier", "position", "top-right");
         alertify.error("Ingrese todos los datos.");
         return false;
       }
     }
 
-    if (rol != 1 && rol != 2) {
+    if (rol != 1 && rol != 2 && editar == 1) {
       const archivo = $("#firma").val();
       let extensiones = archivo.substring(archivo.lastIndexOf("."));
 
@@ -243,7 +235,10 @@ $(document).on("click", ".link-editar", function (e) {
     ? (id_rol = 1)
     : rol == "Administrador"
     ? (id_rol = 2)
-    : (id_rol = 3);
+    : rol == "Usuario"
+    ? (id_rol = 3)
+    : (id_rol = 4);
+
   $("#rol").val(id_rol);
   $("#rol").change();
 });
@@ -281,6 +276,7 @@ $(document).on("click", ".link-borrar", function (e) {
 function refreshTable() {
   $("#listaUsuarios").DataTable().clear();
   $("#listaUsuarios").DataTable().ajax.reload();
+  $("#firma").val("");
 }
 
 /* Mostrar el nombre del archivo al seleccionarlo */
