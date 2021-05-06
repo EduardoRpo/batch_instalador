@@ -377,8 +377,8 @@
 
                             <label id="user_realizo2">Realizado por:</label>
                             <label id="user_verifico2">Verificado por:</label>
-                            <img id="f_realizo3" src="../../../admin/assets/img/firmas/JUAN PABLO LLANO.jpg" alt="firma_usuario" height="130">
-                            <img id="f_realizo3" src="../../../admin/assets/img/firmas/LUISA VILLA.jpg" alt="firma_usuario" height="130">
+                            <img id="f_realizo7" src="../../../admin/assets/img/firmas/JUAN PABLO LLANO.jpg" alt="firma_usuario" height="130">
+                            <img id="f_realizo7" src="../../../admin/assets/img/firmas/LUISA VILLA.jpg" alt="firma_usuario" height="130">
                         </div>
                     </div>
 
