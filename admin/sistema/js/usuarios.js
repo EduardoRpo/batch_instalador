@@ -152,7 +152,7 @@ $(document).ready(function () {
       }
     }
 
-    if (rol != 1 && rol != 2 && editar == 1) {
+    if (rol != 1 && rol != 2 && editar != 1) {
       const archivo = $("#firma").val();
       let extensiones = archivo.substring(archivo.lastIndexOf("."));
 
