@@ -106,7 +106,7 @@
             <div class="subtitle"><label for="">3.1 Entrega de Materias Primas</label></div>
 
             <div class="table-responsive p-3">
-                <table class="table table-striped table-condensed table-bordered">
+                <table id="entregaMateriales" class="table table-striped table-condensed table-bordered">
                     <thead class="head">
                         <tr>
                             <td class="centrado">FECHA</td>
@@ -118,10 +118,10 @@
                     </thead>
                     <tbody>
                         <td class="centrado fecha"></td>
-                        <td class="centrado">Director de Produccion</td>
+                        <td class="centrado">Director de Producción</td>
                         <td class="centrado">Operario de Pesaje</td>
-                        <td class="centrado">Calidad</td>
-                        <td class="centrado">Operario Produccion</td>
+                        <td class="centrado">Auxiliar de Calidad</td>
+                        <td class="centrado">Operario Producción</td>
                     </tbody>
                 </table>
             </div>
@@ -369,7 +369,7 @@
                         <div class="firmas" id="firmas2">
                             <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
                             <label id="fecha2" style="font-weight:bold; justify-self: baseline"></label>
-
+                            <!-- <input type="text" id="fecha2"> -->
                             <!-- <div id="blank_rea2"></div> -->
                             <!-- <img id="f_realizo2" src="" alt="firma_usuario" height="130"> -->
                             <!-- <div id="blank_ver2"></div> -->
@@ -377,6 +377,8 @@
 
                             <label id="user_realizo2">Realizado por:</label>
                             <label id="user_verifico2">Verificado por:</label>
+                            <img id="f_realizo3" src="../../../admin/assets/img/firmas/JUAN PABLO LLANO.jpg" alt="firma_usuario" height="130">
+                            <img id="f_realizo3" src="../../../admin/assets/img/firmas/LUISA VILLA.jpg" alt="firma_usuario" height="130">
                         </div>
                     </div>
 

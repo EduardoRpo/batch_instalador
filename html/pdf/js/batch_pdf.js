@@ -196,6 +196,24 @@ desinfectante = () => {
   );
 };
 
+var d = new Date();
+
+var month = d.getMonth() + 1;
+var day = d.getDate();
+
+var output =
+  d.getFullYear() +
+  "/" +
+  (("" + month).length < 2 ? "0" : "") +
+  month +
+  "/" +
+  (("" + day).length < 2 ? "0" : "") +
+  day;
+
+// No carga la fecha
+$("#fecha2").html(output);
+//$("#fecha2").val(output);
+
 function condiciones_medio() {
   let data = { operacion: 6, idBatch };
   $.post(
