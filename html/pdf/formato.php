@@ -22,8 +22,9 @@
 
 <body id="pdf">
 
-    <div class="mb-3">
-        <a><span><img src="img/logo-samara.png" style="width: 15%;" class="light-logo" alt="Samara Cosmetics" /></span></a>
+    <div class="mb-3" style="display: flex;justify-content:space-between">
+        <a><span><img src="img/logo-samara.png" style="width: 80%;" class="light-logo" alt="Samara Cosmetics" /></span></a>
+        <span><b>Codigo:</b> F-CC-65 <b>Versión:</b>01 <b>Fecha:</b>16/03/2021</span>
     </div>
 
     <div>
