@@ -2,6 +2,7 @@
 require_once('../../../conexion.php');
 require_once('./crud.php');
 require_once('../../../html/php/estadoInicial.php');
+require_once('actualizarBatch.php');
 
 $op = $_POST['operacion'];
 
@@ -47,31 +48,19 @@ switch ($op) {
             $rows = $query->rowCount();
 
             if ($rows > 0) {
-
                 $sql = "UPDATE formula SET porcentaje = AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
                 $query = $conn->prepare($sql);
-                $result = $query->execute([
-                    'id_materiaprima' => $id_materiaprima,
-                    'id_producto' => $id_producto,
-                    'porcentaje' => $porcentaje,
-                ]);
-                if ($result)
-                    echo '3';
+                $result = $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto, 'porcentaje' => $porcentaje,]);
+                if ($result) echo '3';
             } else {
                 $sql = "INSERT INTO formula (id_producto, id_materiaprima, porcentaje) VALUES (:id_producto, :id_materiaprima, AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') )";
                 $query = $conn->prepare($sql);
                 $result = $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto, 'porcentaje' => $porcentaje]);
-                
+
                 /* Valida si existen batch sin formula y actualiza */
                 $result = estadoInicial($conn, $referencia, $fechaprogramacion = "");
-                $estado = $result['0'];
-                
-                $sql = "UPDATE batch SET estado = $estado WHERE id_producto = :referencia";
-                $query = $conn->prepare($sql);
-                $result = $query->execute(['referencia' => $id_producto]);
-
-                if ($result)
-                    echo '1';
+                $result = ActualizarBatch($conn, $result, $id_producto);
+                if ($result) echo '1';
             }
         }
         break;

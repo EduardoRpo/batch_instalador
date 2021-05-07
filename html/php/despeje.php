@@ -47,8 +47,7 @@ if (!empty($_POST)) {
             $batch = $_POST['idBatch'];
             $modulo = $_POST['modulo'];
 
-            $sql = "SELECT u.urlfirma 
-                    FROM batch_desinfectante_seleccionado d 
+            $sql = "SELECT u.urlfirma FROM batch_desinfectante_seleccionado d 
                     INNER JOIN usuario u ON u.id = d.verifico
                     WHERE modulo = :modulo AND batch = :batch";
 
@@ -71,11 +70,7 @@ if (!empty($_POST)) {
 
             $sql = "SELECT * FROM batch_solucion_pregunta WHERE id_batch= :batch AND id_modulo= :modulo";
             $query = $conn->prepare($sql);
-            $query->execute([
-                'batch' => $batch,
-                'modulo' => $modulo
-            ]);
-
+            $query->execute(['batch' => $batch, 'modulo' => $modulo]);
             $rows = $query->rowCount();
 
             if ($rows > 0) {
@@ -114,19 +109,10 @@ if (!empty($_POST)) {
             $batch = $_POST['idBatch'];
             $verifico = $_POST['verifico'];
 
-            $sql = "UPDATE batch_desinfectante_seleccionado SET verifico = :verifico
-                    WHERE modulo= :modulo AND batch= :batch";
+            $sql = "UPDATE batch_desinfectante_seleccionado SET verifico = :verifico WHERE modulo= :modulo AND batch= :batch";
             $query = $conn->prepare($sql);
-            $result = $query->execute([
-                'modulo' => $modulo,
-                'batch' => $batch,
-                'verifico' => $verifico,
-            ]);
-
-            if ($result) {
-                echo '1';
-            }
-
+            $result = $query->execute(['modulo' => $modulo, 'batch' => $batch, 'verifico' => $verifico]);
+            if ($result) echo '1';
             break;
     }
 }

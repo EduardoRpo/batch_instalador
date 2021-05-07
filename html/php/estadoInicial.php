@@ -35,3 +35,46 @@ function estadoInicial($conn, $referencia, $fechaprogramacion)
     }
     return array($estado, $fechaprogramacion);
 }
+
+function estadoInicial1($conn, $referencia, $fechaprogramacion)
+{
+    /* validar que exista la formula*/
+
+    $query_buscarFormula = "SELECT * FROM formula WHERE id_producto = :referencia";
+    $query = $conn->prepare($query_buscarFormula);
+    $query->execute(['referencia' => $referencia]);
+    $resultFormula = $query->rowCount();
+
+    /* validar que exista el instructivo */
+
+    $query_buscarInstructivo = "SELECT * FROM instructivo_preparacion WHERE id_producto = :referencia";
+    $query = $conn->prepare($query_buscarInstructivo);
+    $query->execute(['referencia' => $referencia]);
+    $resultPreparacionInstructivos = $query->rowCount();
+
+    /* si el instructivo no existe valida que exista el instructivo en Bases*/
+    if ($resultPreparacionInstructivos == 0) {
+        $query_buscarInstructivo = "SELECT * FROM instructivo WHERE id_producto = :referencia";
+        $query = $conn->prepare($query_buscarInstructivo);
+        $query->execute(['referencia' => $referencia]);
+        $resultPreparacionInstructivos = $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /* consolida resultados */
+    $result = $resultFormula * $resultPreparacionInstructivos;
+
+    /* Asigna el estado de acuerdo con el resultado */
+    if ($result === 0) {
+        $estado = '1';  //Sin formula
+        $fechaprogramacion = '';
+    }
+
+    if ($result > 0 && $fechaprogramacion == '') {
+        $estado = '2'; // Inactivo  
+    }
+
+    if ($result > 0 && $fechaprogramacion != '') {
+        $estado = '3';  //Pesaje
+    }
+    return array('estado' => $estado, 'fechaprogramacion' => $fechaprogramacion);
+}

@@ -1,7 +1,7 @@
-let presentacion;
- let r1 = 0,
+//let presentacion;
+ /* let r1 = 0,
   r2 = 0,
-  r3 = 0;
+  r3 = 0; */
 let id_multi = 1;
 const equipos = [];
 

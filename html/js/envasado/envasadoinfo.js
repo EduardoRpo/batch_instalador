@@ -1,9 +1,9 @@
 let pres;
-/* let envase;
+let envase;
 let presentacion;
 let r1,
   r2,
-  r3 = 0; */
+  r3 = 0;
 const equipos = [];
 
 //validacion de campos y botones

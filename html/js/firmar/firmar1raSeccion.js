@@ -113,7 +113,6 @@ function guardar_preguntas(idfirma) {
           .css({ background: "lightgray", border: "gray" })
           .prop("disabled", true);
         $(".despeje_verificado").prop("disabled", false);
-        js;
         habilitarbotones();
       }
     },
