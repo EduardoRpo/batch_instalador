@@ -99,7 +99,7 @@ function firmarSeccionCierreProceso(firma) {
 
   confirm.set("oncancel", function () {
     //callbak al pulsar No
-    alertify.error("No reportó Incidencias");
+    alertify.success("No reportó Incidencias");
     /* Almacenar firma 2da seccion */
 
     $.ajax({
@@ -134,6 +134,11 @@ function almacenarfirma(id) {
       alertify.success("Firmado satisfactoriamente");
       if (modulo == 2)
         $(".pesaje_verificado")
+          .css({ background: "lightgray", border: "gray" })
+          .prop("disabled", true);
+
+      if (modulo == 3)
+        $(".preparacion_verificado")
           .css({ background: "lightgray", border: "gray" })
           .prop("disabled", true);
 

@@ -124,8 +124,7 @@ if (!empty($_POST)) {
             $batch = $_POST['idBatch'];
             $modulo = $_POST['modulo'];
 
-            $sql = "SELECT u.urlfirma as realizo, us.urlfirma as verifico
-                    FROM batch_firmas2seccion d 
+            $sql = "SELECT u.urlfirma as realizo, us.urlfirma as verifico FROM batch_firmas2seccion d 
                     INNER JOIN usuario u ON u.id = d.realizo INNER JOIN usuario us ON us.id = d.verifico
                     WHERE modulo = :modulo AND batch = :batch";
 

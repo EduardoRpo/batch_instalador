@@ -22,7 +22,8 @@ if (!empty($_POST)) {
             $rows = $query->rowCount();
 
             if ($rows > 0) {
-                ejecutarSelect($conn, $query);
+                $data = $query->fetchAll(PDO::FETCH_ASSOC);
+                echo json_encode($data, JSON_UNESCAPED_UNICODE);
             }
 
             break;
@@ -47,8 +48,7 @@ if (!empty($_POST)) {
             $batch = $_POST['idBatch'];
             $modulo = $_POST['modulo'];
 
-            $sql = "SELECT u.urlfirma FROM batch_desinfectante_seleccionado d 
-                    INNER JOIN usuario u ON u.id = d.verifico
+            $sql = "SELECT u.urlfirma FROM batch_desinfectante_seleccionado d INNER JOIN usuario u ON u.id = d.verifico
                     WHERE modulo = :modulo AND batch = :batch";
 
             $query = $conn->prepare($sql);

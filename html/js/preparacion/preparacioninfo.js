@@ -178,6 +178,7 @@ function ocultarInstructivo() {
     $(`#proceso-instructivo${i}`).css("color", "#FFFFFF");
     $(`#proceso-instructivo${i}`).css("outline", "none");
   }
+  paso = 4;
 }
 
 /* Mostrar siguiente paso */

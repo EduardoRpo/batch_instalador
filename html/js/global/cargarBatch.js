@@ -14,10 +14,9 @@ function cargarBatch() {
       /* Carga todas las preguntas y su respuesta almacenada */
 
       if (info !== "") {
-        for (let i = 0; i < info.data.length; i++) {
-          let question = "question-" + `${info.data[i].id_pregunta}`;
-          let valor = info.data[i].solucion;
-          //$("input:radio[name=" + question + "][value=" + valor + "]").prop('checked', true);
+        for (let i = 0; i < info.length; i++) {
+          let question = "question-" + `${info[i].id_pregunta}`;
+          let valor = info[i].solucion;
           $(`input:radio[name="${question}"][value="${valor}"]`).prop(
             "checked",
             true
@@ -224,20 +223,23 @@ function firmado(datos, posicion) {
     }
   }
 
-  if (posicion == 4)
+  if (posicion == 4) {
     if (modulo == 2) {
       parent = $("#pesaje_verificado").parent();
       $("#pesaje_verificado").remove();
       $(".pesaje_verificado")
         .css({ background: "lightgray", border: "gray" })
         .prop("disabled", true);
-    } /* else if (modulo == 3) {
-            parent = $('#preparacion_realizado').parent();
-            $('#preparacion_realizado').remove();
-            $('.preparacion_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
-            $('.preparacion_verificado').prop('disabled', false);
-
-        } */
+    }
+    if (modulo == 3) {
+      parent = $("#preparacion_verificado").parent();
+      $("#preparacion_verificado").remove();
+      $(".preparacion_verificado")
+        .css({ background: "lightgray", border: "gray" })
+        .prop("disabled", true);
+      $(".preparacion_verificado").prop("disabled", false);
+    }
+  }
 
   let firma = template.replace(":firma:", datos);
   parent.append(firma).html;

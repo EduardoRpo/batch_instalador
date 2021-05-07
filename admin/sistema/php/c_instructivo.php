@@ -67,9 +67,11 @@ switch ($op) {
                 $sql = "INSERT INTO instructivo_preparacion (pasos, tiempo, id_producto) VALUES (:proceso, :tiempo, :referencia )";
                 $query = $conn->prepare($sql);
                 $result = $query->execute(['proceso' => $actividad, 'tiempo' => $tiempo, 'referencia' => $referencia]);
+                if ($rows == 0) {
+                    $result = estadoInicial1($conn, $referencia, $fechaprogramacion = "");
+                    $result = ActualizarBatch($conn, $result, $referencia);
+                }
             }
-            $result = estadoInicial1($conn, $referencia, $fechaprogramacion = "");
-            $result = ActualizarBatch($conn, $result, $referencia);
             if ($result) echo '1';
         }
         break;

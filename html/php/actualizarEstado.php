@@ -34,10 +34,7 @@ function actualizarEstado($batch, $modulo, $conn)
     }
 
     //Modifica el estado de acuerdo con el modulo
-
-    $sql = "UPDATE batch SET estado = :estado WHERE id_batch = :batch";
-    $query = $conn->prepare($sql);
-    $query->execute(['batch' => $batch, 'estado' => $estado]);
+    ActualizarBatchEstado($conn, $batch, $estado);
 }
 
 function cerrarEstado($batch, $modulo, $conn)
@@ -62,7 +59,11 @@ function cerrarEstado($batch, $modulo, $conn)
     }
 
     //Modifica el estado de acuerdo con el modulo
+    ActualizarBatchEstado($conn, $batch, $estado);
+}
 
+function ActualizarBatchEstado($conn, $batch, $estado)
+{
     $sql = "UPDATE batch SET estado = :estado WHERE id_batch = :batch";
     $query = $conn->prepare($sql);
     $query->execute(['estado' => $estado, 'batch' => $batch]);

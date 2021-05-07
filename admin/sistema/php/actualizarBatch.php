@@ -3,8 +3,8 @@
 function ActualizarBatch($conn, $result, $id_producto)
 {
     $estado = $result['estado'];
-    $sql = "UPDATE batch SET estado = $estado WHERE id_producto = :referencia";
+    $sql = "UPDATE batch SET estado = :estado WHERE id_producto = :referencia";
     $query = $conn->prepare($sql);
-    $result = $query->execute(['referencia' => $id_producto]);
+    $result = $query->execute(['estado' => $estado, 'referencia' => $id_producto]);
     return $result;
 }
