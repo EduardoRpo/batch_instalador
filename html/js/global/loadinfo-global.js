@@ -59,7 +59,7 @@ $.ajax({
 
       if (modulo != 9 && modulo != undefined) {
         desinfectantes();
-        cargar_condicionesMedio();
+        //cargar_condicionesMedio();
         validarTanques(modulo);
       }
     }

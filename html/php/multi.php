@@ -118,7 +118,7 @@ switch ($op) {
 
     if (!$result) {
       die('Error');
-      echo 'No guardado. Error: ' . mysqli_error($conn);
+      echo 'No guardado. Error: ' //. mysqli_error($conn);
     } else {
       echo '1';
     }

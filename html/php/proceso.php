@@ -16,8 +16,7 @@ if (!empty($_POST)) {
             $batch = $_POST['batch'];
             $modulo = $_POST['modulo'];
 
-            $sql = "SELECT u.urlfirma 
-                    FROM batch_firmas2seccion f 
+            $sql = "SELECT u.urlfirma FROM batch_firmas2seccion f 
                     INNER JOIN usuario u ON u.id = f.realizo 
                     WHERE batch= :batch AND modulo= :modulo";
 
@@ -25,11 +24,10 @@ if (!empty($_POST)) {
             $query->execute(['batch' => $batch, 'modulo' => $modulo]);
             $rows = $query->rowCount();
 
-            if ($rows > 0) {
+            if ($rows > 0)
                 ejecutarSelect($conn, $query);
-            }
+
 
             break;
-        
     }
 }
