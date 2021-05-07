@@ -3,7 +3,7 @@
 function almacenar_muestras(firma) {
   modulo == 6 ? (operacion = 3) : (operacion = 1);
   let muestras = JSON.parse(
-    localStorage.getItem(presentacion + ref_multi + modulo)
+    sessionStorage.getItem(presentacion + ref_multi + modulo)
   );
 
   //Almacena las muestras
@@ -25,28 +25,22 @@ function almacenar_muestras(firma) {
         data: { equipos },
 
         success: function (response) {
-          if (!response) return false;
-        },
-      });
+          if (response === "false") return false;
+          let id_firma = firma[0].id;
 
-      let id_firma = firma[0].id;
+          //Almacena la firma
+          $.ajax({
+            type: "POST",
+            url: "../../html/php/envasado.php",
+            data: { operacion: 1, id_firma, modulo, idBatch, ref_multi },
 
-      //Almacena la firma
-      $.ajax({
-        type: "POST",
-        url: "../../html/php/envasado.php",
-        data: {
-          operacion: 1,
-          /* linea, */ id_firma,
-          modulo,
-          idBatch,
-          ref_multi,
-        },
-
-        success: function (response) {
-          alertify.set("notifier", "position", "top-right");
-          alertify.success("Firmado satisfactoriamente");
-          deshabilitarbtn();
+            success: function (response) {
+              alertify.set("notifier", "position", "top-right");
+              alertify.success("Firmado satisfactoriamente");
+              firmar(firma);
+              deshabilitarbtn();
+            },
+          });
         },
       });
     },

@@ -53,7 +53,7 @@ function preparar(datos) {
   }
 
   if (btn_id == "firma3") {
-    firmar2daSeccion(info);
+    modulo === 5 ? almacenar_muestras(info) : firmar2daSeccion(info);
     //validarCondicionesMedio();
     //imprimirEtiquetasVirtuales();
   }

@@ -15,9 +15,9 @@ function cargarBatch() {
       /* Carga todas las preguntas y su respuesta almacenada */
 
       if (info !== "") {
-        for (let i = 0; i < info.data.length; i++) {
-          let question = "question-" + `${info.data[i].id_pregunta}`;
-          let valor = info.data[i].solucion;
+        for (let i = 0; i < info.length; i++) {
+          let question = "question-" + `${info[i].id_pregunta}`;
+          let valor = info[i].solucion;
           $("input:radio[name=" + question + "][value=" + valor + "]").prop(
             "checked",
             true

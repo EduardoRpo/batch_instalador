@@ -11,7 +11,7 @@ function calcularMuestras(j, unidades) {
 function muestrasEnvase() {
   //$("#m_muestras").modal("show");
   let muestras = $(`#muestras${id_multi}`).val();
-  let recoveredData = localStorage.getItem(presentacion + ref_multi + modulo);
+  let recoveredData = sessionStorage.getItem(presentacion + ref_multi + modulo);
   let j = 1;
 
   /* Elimina los campos para muestras */
@@ -45,9 +45,9 @@ function muestrasEnvase() {
         let info = JSON.parse(response);
         j = 1;
 
-        for (let i = 0; i < info.data.length; i++) {
-          $(`#txtMuestra${j}`).val(info.data[i].muestra);
-          promedio = promedio + info.data[i].muestra;
+        for (let i = 0; i < info.length; i++) {
+          $(`#txtMuestra${j}`).val(info[i].muestra);
+          promedio = promedio + info[i].muestra;
           j++;
         }
         promedio = promedio / $(`#muestras${id_multi}`).val();
@@ -76,11 +76,11 @@ promedio = () => {
 function guardarMuestras() {
   let cantidad_muestras = $(`#muestras${id_multi}`).val();
   let muestras = [];
-  let recoveredData = localStorage.getItem(presentacion + ref_multi + modulo);
+  let recoveredData = sessionStorage.getItem(presentacion + ref_multi + modulo);
   let promedio = 0;
 
   if (recoveredData !== "")
-    localStorage.removeItem(presentacion + ref_multi + modulo);
+    sessionStorage.removeItem(presentacion + ref_multi + modulo);
 
   /* cargar el array con las muestras */
 
@@ -95,12 +95,12 @@ function guardarMuestras() {
 
   /* almacena las muestras */
 
-  localStorage.setItem(
+  sessionStorage.setItem(
     presentacion + ref_multi + modulo,
     JSON.stringify(muestras)
   );
   i = muestras.length;
-  localStorage.setItem("totalmuestras", JSON.stringify(i));
+  sessionStorage.setItem("totalmuestras", JSON.stringify(i));
 
   $("#m_muestras").modal("hide");
 
@@ -115,7 +115,7 @@ function guardarMuestras() {
 
 function muestras_acondicionamiento() {
   muestras = $(`#muestras${id_multi}`).val();
-  let recoveredData = localStorage.getItem(presentacion + ref_multi + modulo);
+  let recoveredData = sessionStorage.getItem(presentacion + ref_multi + modulo);
   j = 1;
 
   /* Elimina los campos para muestras */
@@ -234,10 +234,10 @@ $("#guardar_muestras_acondicionamiento").click(function (e) {
 
   let cantidad_muestras = $(`#muestras${id_multi}`).val();
   let muestras = [];
-  let recoveredData = localStorage.getItem(presentacion + ref_multi + modulo);
+  let recoveredData = sessionStorage.getItem(presentacion + ref_multi + modulo);
 
   if (recoveredData !== "") {
-    localStorage.removeItem(presentacion + ref_multi + modulo);
+    sessionStorage.removeItem(presentacion + ref_multi + modulo);
   }
 
   /* cargar el array con las muestras */
@@ -273,7 +273,7 @@ $("#guardar_muestras_acondicionamiento").click(function (e) {
     JSON.stringify(muestras)
   );
   i = muestras.length;
-  localStorage.setItem(`totalmuestras${id_multi}`, JSON.stringify(i));
+  sessionStorage.setItem(`totalmuestras${id_multi}`, JSON.stringify(i));
 
   $("#m_muestras_acond").modal("hide");
 });
