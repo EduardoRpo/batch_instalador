@@ -89,15 +89,14 @@ function cargarfirma2() {
 
     success: function (response) {
       let info = JSON.parse(response);
-
       if (info == 3) return false;
 
-      for (i = 1; i <= info.data.length; i++) {
+      for (i = 1; i <= info.length; i++) {
         $(`#validarLote${id_multi}`).val(batch.numero_lote);
         cargarEquipos();
         promedio();
-        firmado(info.data[0].realizo, 3);
-        firmado(info.data[0].verifico, 4);
+        firmado(info[0].realizo, 3);
+        firmado(info[0].verifico, 4);
       }
       cargardevolucionmaterial();
     },

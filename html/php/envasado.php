@@ -49,43 +49,28 @@ if (!empty($_POST)) {
 
             $ref_multi = $_POST['ref_multi'];
 
-            $sql = "SELECT bf2.observaciones as linea, bf2.modulo, bf2.batch, u.urlfirma as realizo, u.urlfirma as verifico 
-                    FROM batch_firmas2seccion bf2 
-                    INNER JOIN usuario u ON u.id = bf2.realizo
-                    INNER JOIN usuario us ON us.id = bf2.verifico
+            $sql = "SELECT bf2.observaciones as linea, bf2.modulo, bf2.batch, u.urlfirma as realizo, us.urlfirma as verifico 
+                    FROM batch_firmas2seccion bf2 INNER JOIN usuario u ON u.id = bf2.realizo INNER JOIN usuario us ON us.id = bf2.verifico
                     WHERE modulo = :modulo AND batch = :batch AND ref_multi = :ref_multi";
             $query = $conn->prepare($sql);
-            $result = $query->execute([
-                'modulo' => $modulo,
-                'batch' => $batch,
-                'ref_multi' => $ref_multi,
-            ]);
+            $result = $query->execute(['modulo' => $modulo, 'batch' => $batch, 'ref_multi' => $ref_multi]);
+            $data = $query->fetchAll(PDO::FETCH_ASSOC);
 
-            while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
-                $arreglo["data"][] = $data;
-            }
-            if (empty($arreglo)) {
+            if (empty($data)) {
                 $sql = "SELECT bf2.observaciones as linea, bf2.modulo, bf2.batch, u.urlfirma as realizo 
-                    FROM batch_firmas2seccion bf2 
-                    INNER JOIN usuario u ON u.id = bf2.realizo
+                    FROM batch_firmas2seccion bf2 INNER JOIN usuario u ON u.id = bf2.realizo
                     WHERE modulo = :modulo AND batch = :batch AND ref_multi = :ref_multi";
                 $query = $conn->prepare($sql);
-                $result = $query->execute([
-                    'modulo' => $modulo,
-                    'batch' => $batch,
-                    'ref_multi' => $ref_multi,
-                ]);
+                $result = $query->execute(['modulo' => $modulo, 'batch' => $batch, 'ref_multi' => $ref_multi]);
+                $data = $query->fetchAll(PDO::FETCH_ASSOC);
 
-                while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
-                    $arreglo["data"][] = $data;
-                }
-                if (empty($arreglo)) {
+                if (empty($data)) {
                     echo '3';
                     exit();
                 }
             }
 
-            echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+            echo json_encode($data, JSON_UNESCAPED_UNICODE);
 
             break;
 

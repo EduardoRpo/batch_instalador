@@ -81,6 +81,11 @@ function firmaCalidad(id_firma) {
         $(`.controlpeso_verificado${id_multi}`)
           .css({ background: "lightgray", border: "gray" })
           .prop("disabled", true);
+        if (modulo === 5) {
+          $(`.devolucion_verificado${id_multi}`)
+            .css({ background: "lightgray", border: "gray" })
+            .prop("disabled", true);
+        }
       }
     },
   });

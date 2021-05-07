@@ -380,24 +380,7 @@ include('modal/image.php')
                                     <td><input type="number" id="sobrante3" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
                                     <td id="totalDevolucion3" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
                                   </tr>
-                                  <!-- <tr>
-                                    <td id="empaque1" class="empaque1"></td>
-                                    <td id="descripcion_empaque1" class="descripcion_empaque1"></td>
-                                    <td id="unidades2e" class="centrado unidades1e"></td>
-                                    <td id="txtEnvasada4" class="centrado envasada1e"></td>
-                                    <td><input type="number" id="averias4" class="form-control centrado" style="width: 110px;"></td>
-                                    <td><input type="number" id="sobrante4" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 4);"></td>
-                                    <td id="totalDevolucion4" class="centrado"></td>
-                                  </tr>
-                                  <tr>
-                                    <td id="otros1" class="otros1"></td>
-                                    <td id="descripcion_otros1" class="descripcion_otros1"></td>
-                                    <td id="unidades8" class="centrado unidades1"></td>
-                                    <td id="txtEnvasada5" class="centrado envasada1"></td>
-                                    <td><input type="number" id="averias5" class="form-control centrado" style="width: 110px;"></td>
-                                    <td><input type="number" id="sobrante5" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 5);"></td>
-                                    <td id="totalDevolucion5" class="centrado"></td> 
-                                  </tr> -->
+
                               </table>
                             </div>
                           </div>
@@ -421,7 +404,7 @@ include('modal/image.php')
                         <input type="text" class="form-control" id="devolucion_verificado1" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_verificado1" style="width: 100%; height: 38px;" id="devolucion_verificadodo1" onclick="cargar(this, 'firma6')">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_verificado1" style="width: 100%; height: 38px;" id="devolucion_verificado1" onclick="cargar(this, 'firma6')">Firmar</button>
                       </div>
 
                     </div>
@@ -610,24 +593,7 @@ include('modal/image.php')
                                     <td><input type="number" id="sobrante6" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
                                     <td id="totalDevolucion6" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
                                   </tr>
-                                  <!-- <tr>
-                                    <td id="empaque1" class="empaque1"></td>
-                                    <td id="descripcion_empaque1" class="descripcion_empaque1"></td>
-                                    <td id="unidades2e" class="centrado unidades1e"></td>
-                                    <td id="txtEnvasada4" class="centrado envasada1e"></td>
-                                    <td><input type="number" id="averias4" class="form-control centrado" style="width: 110px;"></td>
-                                    <td><input type="number" id="sobrante4" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 4);"></td>
-                                    <td id="totalDevolucion4" class="centrado"></td>
-                                  </tr>
-                                  <tr>
-                                    <td id="otros1" class="otros1"></td>
-                                    <td id="descripcion_otros1" class="descripcion_otros1"></td>
-                                    <td id="unidades8" class="centrado unidades1"></td>
-                                    <td id="txtEnvasada5" class="centrado envasada1"></td>
-                                    <td><input type="number" id="averias5" class="form-control centrado" style="width: 110px;"></td>
-                                    <td><input type="number" id="sobrante5" class="form-control centrado" style="width: 110px;" onkeyup="devolucionMaterialTotal(this.value, 5);"></td>
-                                    <td id="totalDevolucion5" class="centrado"></td> 
-                                  </tr> -->
+                                  
                               </table>
                             </div>
                           </div>
