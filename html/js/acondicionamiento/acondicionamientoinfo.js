@@ -1,5 +1,5 @@
 //let presentacion;
- /* let r1 = 0,
+/* let r1 = 0,
   r2 = 0,
   r3 = 0; */
 let id_multi = 1;
@@ -103,7 +103,7 @@ function deshabilitarbotones() {
 }
 
 function habilitarbotones() {
-  btn_id = localStorage.getItem("idbtn");
+  btn_id = sessionStorage.getItem("idbtn");
 
   if (btn_id == "firma1")
     $(`.controlpeso_realizado${id_multi}`).prop("disabled", false);
@@ -141,8 +141,8 @@ function cargarTablaEnvase(j, referencia, cantidad) {
 }
 
 function cargar(btn, idbtn) {
-  localStorage.setItem("idbtn", idbtn);
-  localStorage.setItem("btn", btn.id);
+  sessionStorage.setItem("idbtn", idbtn);
+  sessionStorage.setItem("btn", btn.id);
   id = btn.id;
 
   /* Valida que se ha seleccionado el producto de desinfeccion para el proceso de aprobacion */
@@ -155,7 +155,7 @@ function cargar(btn, idbtn) {
   }
 
   /* Valida el proceso para la segunda seccion */
-  if (id != "despeje_realizado") {
+  if (id != "despeje_realizado" && id != "despeje_verificado") {
     let banda = $(`#sel_banda${id_multi}`).val();
     let etiquetadora = $(`#sel_etiquetadora${id_multi}`).val();
     let tunel = $(`#sel_tunel${id_multi}`).val();
@@ -178,7 +178,7 @@ function cargar(btn, idbtn) {
   }
   /* validar que todas las muestras se registraron */
   if (id == `controlpeso_realizado${id_multi}`) {
-    i = localStorage.getItem(`totalmuestras${id_multi}`);
+    i = sessionStorage.getItem(`totalmuestras${id_multi}`);
     cantidad_muestras = $(`#muestras${id_multi}`).val() * 5;
 
     if (i != cantidad_muestras) {
@@ -258,7 +258,7 @@ function recalcular_valores() {
 }
 
 function deshabilitarbtn() {
-  btn = localStorage.getItem("btn");
+  btn = sessionStorage.getItem("btn");
 
   if (btn == "despeje_realizado")
     for (let i = 1; i < 4; i++)
@@ -315,7 +315,7 @@ function registrar_material_sobrante(info) {
     data: { materialsobrante, ref_multi, idBatch, modulo, info },
 
     success: function (response) {
-      if ((modulo = 6))
+      if (modulo == 6)
         $(`.conciliacion_realizado${id_multi}`).prop("disabled", false);
       alertify.set("notifier", "position", "top-right");
       alertify.success("Firmado satisfactoriamente");

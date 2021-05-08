@@ -268,7 +268,7 @@ $("#guardar_muestras_acondicionamiento").click(function (e) {
 
   /* almacena las muestras */
 
-  localStorage.setItem(
+  sessionStorage.setItem(
     presentacion + ref_multi + modulo,
     JSON.stringify(muestras)
   );

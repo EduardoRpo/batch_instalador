@@ -9,8 +9,8 @@ const equipos = [];
 //validacion de campos y botones
 
 function cargar(btn, idbtn) {
-  localStorage.setItem("idbtn", idbtn);
-  localStorage.setItem("btn", btn.id);
+  sessionStorage.setItem("idbtn", idbtn);
+  sessionStorage.setItem("btn", btn.id);
   id = btn.id;
 
   /* Valida que se ha seleccionado el producto de desinfeccion para el proceso de aprobacion */
@@ -59,7 +59,7 @@ function cargar(btn, idbtn) {
 
       if (validar == 0) return false;
 
-      i = localStorage.getItem("totalmuestras");
+      i = sessionStorage.getItem("totalmuestras");
       cantidad_muestras = $(`#muestras${id_multi}`).val();
 
       if (i != cantidad_muestras) {
@@ -386,7 +386,7 @@ function registrar_material_sobrante(info) {
 
 function deshabilitarbtn() {
   //$(`.controlpeso_realizado${id_multi}`).css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
-  btn = localStorage.getItem("btn");
+  btn = sessionStorage.getItem("btn");
 
   if (btn == "despeje_realizado")
     for (let i = 1; i < 4; i++)

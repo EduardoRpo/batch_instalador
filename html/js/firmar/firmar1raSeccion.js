@@ -6,7 +6,7 @@ let contadorchecks;
 
 function enviar() {
   $("#m_firmar").modal("hide");
-  btn_id = localStorage.getItem("idbtn");
+  btn_id = sessionStorage.getItem("idbtn");
 
   (datos = {
     user: $("#usuario").val(),
@@ -53,7 +53,9 @@ function preparar(datos) {
   }
 
   if (btn_id == "firma3") {
-    modulo === 5 ? almacenar_muestras(info) : firmar2daSeccion(info);
+    modulo === 5 || modulo === 6
+      ? almacenar_muestras(info)
+      : firmar2daSeccion(info);
     //validarCondicionesMedio();
     //imprimirEtiquetasVirtuales();
   }
