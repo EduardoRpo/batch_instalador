@@ -24,7 +24,7 @@
 
     <div class="mb-3" style="display: flex;justify-content:space-between">
         <a><span><img src="img/logo-samara.png" style="width: 80%;" class="light-logo" alt="Samara Cosmetics" /></span></a>
-        <span><b>Codigo:</b> F-CC-65 <b>Versión:</b>01 <b>Fecha:</b>16/03/2021</span>
+        <span><b>Codigo:</b> F-Pr-13 <b>Versión:</b>10 <b>Fecha:</b>26/04/2021</span>
     </div>
 
     <div>
@@ -307,7 +307,6 @@
                         <table class="table table-bordered table-striped">
                             <thead class="head">
                                 <tr>
-                                    <td>Fecha</td>
                                     <td>Parametros</td>
                                     <td>Cumple</td>
                                     <td>Observaciones</td>
@@ -315,50 +314,42 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="centrado">05/02/2020</td>
                                     <td class="centrado">Color</td>
                                     <td class="centrado">Si</td>
                                     <td class="centrado"></td>
                                 </tr>
                                 <tr>
-                                    <td class="centrado">05/02/2020</td>
                                     <td class="centrado">Olor</td>
                                     <td class="centrado">Si</td>
                                     <td class="centrado"></td>
                                 </tr>
                                 <tr>
-                                    <td class="centrado">05/02/2020</td>
                                     <td class="centrado">Apariencia</td>
                                     <td class="centrado">Si</td>
                                     <td class="centrado"></td>
 
                                 </tr>
                                 <tr>
-                                    <td class="centrado">05/02/2020</td>
                                     <td class="centrado">Conductividad 1</td>
                                     <td class="centrado">Si</td>
                                     <td class="centrado"></td>
                                 </tr>
                                 <tr>
-                                    <td class="centrado">05/02/2020</td>
                                     <td class="centrado">Conductividad 2</td>
                                     <td class="centrado">Si</td>
                                     <td class="centrado"></td>
                                 </tr>
                                 <tr>
-                                    <td class="centrado">05/02/2020</td>
                                     <td class="centrado">Cloro Libre</td>
                                     <td class="centrado">Si</td>
                                     <td class="centrado"></td>
                                 </tr>
                                 <tr>
-                                    <td class="centrado">05/02/2020</td>
                                     <td class="centrado">Nitratos</td>
                                     <td class="centrado">Si</td>
                                     <td class="centrado"></td>
                                 </tr>
                                 <tr>
-                                    <td class="centrado">05/02/2020</td>
                                     <td class="centrado">Dureza</td>
                                     <td class="centrado">Si</td>
                                     <td class="centrado"></td>
@@ -369,12 +360,6 @@
                         <div class="firmas" id="firmas2">
                             <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
                             <label id="fecha2" style="font-weight:bold; justify-self: baseline"></label>
-                            <!-- <input type="text" id="fecha2"> -->
-                            <!-- <div id="blank_rea2"></div> -->
-                            <!-- <img id="f_realizo2" src="" alt="firma_usuario" height="130"> -->
-                            <!-- <div id="blank_ver2"></div> -->
-                            <!-- <img id="f_verifico2" src="" alt="firma_usuario" height="130"> -->
-
                             <label id="user_realizo2">Realizado por:</label>
                             <label id="user_verifico2">Verificado por:</label>
                             <img id="f_realizo7" src="../../../admin/assets/img/firmas/JUAN PABLO LLANO.jpg" alt="firma_usuario" height="130">
@@ -813,7 +798,6 @@
                         <table class="table table-bordered table-striped">
                             <thead class="head centrado">
                                 <tr>
-                                    <td class="centrado">Fecha</td>
                                     <td class="centrado">Referencia</td>
                                     <td class="centrado">Descripción</td>
                                     <td class="centrado">Cantidad</td>
@@ -821,19 +805,16 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="centrado">21/05/2020</td>
                                     <td class="envase1 centrado"></td>
                                     <td class="descripcion_envase1 centrado"></td>
                                     <td class="unidades1 centrado"></td>
                                 </tr>
                                 <tr>
-                                    <td class="centrado">21/05/2020</td>
                                     <td class="tapa1 centrado"></td>
                                     <td class="descripcion_tapa1 centrado"></td>
                                     <td class="unidades1 centrado"></td>
                                 </tr>
                                 <tr>
-                                    <td class="centrado">21/05/2020</td>
                                     <td class="etiqueta1 centrado"></td>
                                     <td class="descripcion_etiqueta1 centrado"></td>
                                     <td class="unidades1 centrado"></td>
