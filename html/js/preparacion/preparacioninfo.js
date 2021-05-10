@@ -8,7 +8,7 @@ let tiempoTotal = 0;
 let pasoEjecutado = 0;
 
 function cargar(btn, idbtn) {
-  localStorage.setItem("idbtn", idbtn);
+  sessionStorage.setItem("idbtn", idbtn);
   id = btn.id;
 
   /* Valida que se ha seleccionado el producto de desinfeccion para el proceso */
@@ -33,7 +33,7 @@ function cargar(btn, idbtn) {
 
   /* valida que el instructivo se haya ejecutado */
   if (id == "preparacion_realizado") {
-    ordenpasos = localStorage.getItem("ordenpasos");
+    ordenpasos = sessionStorage.getItem("ordenpasos");
 
     if (pasoEjecutado !== 0 || pasoEjecutado == 0)
       if (pasoEjecutado < ordenpasos) {
@@ -124,7 +124,7 @@ $.ajax({
       i++;
     });
     var ordenpasos = i;
-    localStorage.setItem("ordenpasos", ordenpasos - 1);
+    sessionStorage.setItem("ordenpasos", ordenpasos - 1);
     ocultarInstructivo();
   })
   .fail((err) => {

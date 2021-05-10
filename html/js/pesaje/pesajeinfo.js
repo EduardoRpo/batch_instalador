@@ -1,7 +1,7 @@
 let flagWeight = false;
 
 function cargar(btn, idbtn) {
-  localStorage.setItem("idbtn", idbtn);
+  sessionStorage.setItem("idbtn", idbtn);
   id = btn.id;
 
   //Validacion de control de tanques
