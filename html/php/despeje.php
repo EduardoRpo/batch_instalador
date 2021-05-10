@@ -68,6 +68,7 @@ if (!empty($_POST)) {
             $modulo = $_POST['modulo'];
             $batch = $_POST['idBatch'];
 
+            /* validar si existen las preguntas */
             $sql = "SELECT * FROM batch_solucion_pregunta WHERE id_batch= :batch AND id_modulo= :modulo";
             $query = $conn->prepare($sql);
             $query->execute(['batch' => $batch, 'modulo' => $modulo]);
@@ -90,6 +91,15 @@ if (!empty($_POST)) {
                         ejecutarQuery($result, $conn);
                     }
                 }
+            }
+
+            /* validar si existen las firmas */
+            $sql = "SELECT * FROM batch_desinfectante_seleccionado WHERE batch= :batch AND modulo= :modulo";
+            $query = $conn->prepare($sql);
+            $query->execute(['batch' => $batch, 'modulo' => $modulo]);
+            $rows = $query->rowCount();
+
+            if ($rows == 0) {
                 $sql = "INSERT INTO batch_desinfectante_seleccionado (desinfectante, observaciones, modulo, batch, realizo) 
                 VALUES(:desinfectante, :observaciones, :modulo, :batch, :realizo)";
                 $query = $conn->prepare($sql);
@@ -102,6 +112,7 @@ if (!empty($_POST)) {
                 ]);
                 ejecutarQuery($result, $conn);
             }
+
             break;
         case 5: // almacenar firma calidad 1ra seccion
 

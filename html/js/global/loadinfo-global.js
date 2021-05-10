@@ -107,7 +107,6 @@ $.ajax({
 
   localStorage.setItem("orden", data.numero_orden);
   localStorage.setItem("tamano_lote", data.tamano_lote);
-  return batch;
 });
 
 /* Calcular la fecha del dia  */
