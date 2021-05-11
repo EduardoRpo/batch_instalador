@@ -54,6 +54,7 @@ function muestrasEnvase() {
         $(`#promedio${id_multi}`).val(promedio);
       },
     });
+    validar_condicionesMedio();
   }
 }
 
@@ -276,6 +277,7 @@ $("#guardar_muestras_acondicionamiento").click(function (e) {
   sessionStorage.setItem(`totalmuestras${id_multi}`, JSON.stringify(i));
 
   $("#m_muestras_acond").modal("hide");
+  validar_condicionesMedio();
 });
 
 /* Genera cumple para todas las opciones en acondicionamiento */

@@ -72,16 +72,16 @@ function crearTablaBatch(
             : data == 5
             ? "Aprobación"
             : data == 5.5
-            ? "Envasado y Acondicionamiento"
+            ? "Envasado, Acondicionamiento y Despachos"
             : data == 6
-            ? "Envasado y Acondicionamiento"
+            ? "Envasado, Acondicionamiento y Despachos"
             : data == 6.5
-            ? "Envasado y Acondicionamiento"
-            : data == 7.5
-            ? "Despachos"
+            ? "Microbiologico y Fisicoquimico"
+            : data == 7
+            ? "Microbiologico y Fisicoquimico"
             : data == 8
-            ? "Despachos"
-            : "Otro";
+            ? "Liberación Lote"
+            : data == 9;
         },
       },
       {

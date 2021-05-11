@@ -28,7 +28,7 @@ const cargar_condicionesMedio = () => {
 /* Validar si las condiciones del medio ya fueron almacenadas */
 
 const validar_condicionesMedio = () => {
-  imprimirEtiquetasFull();
+  if (modulo === 2) imprimirEtiquetasFull();
   $.ajax({
     type: "POST",
     url: "../../html/php/condicionesmedio.php",
