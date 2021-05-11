@@ -102,12 +102,16 @@ function deshabilitarbotones() {
   }
 }
 
-function habilitarbotones() {
-  btn_id = sessionStorage.getItem("idbtn");
+/* function habilitarbotones() {
+   btn_id = sessionStorage.getItem("idbtn");
 
   if (btn_id == "firma1")
     $(`.controlpeso_realizado${id_multi}`).prop("disabled", false);
-}
+
+  for (let index = 1; index < 4; index++) {
+    $(`.controlpeso_realizado${index}`).prop("disabled", false);
+  }
+} */
 
 /* Ocultar Envasado */
 
@@ -126,7 +130,7 @@ function cargarTablaEnvase(j, referencia, cantidad) {
     data: { referencia },
   }).done((data, status, xhr) => {
     var info = JSON.parse(data);
-    if (info[0].unidad_empaque === 0) empaqueEnvasado = 'Sin unidad de Empaque';
+    if (info[0].unidad_empaque === 0) empaqueEnvasado = "Sin unidad de Empaque";
     else
       empaqueEnvasado = formatoCO(
         Math.round(cantidad / info[0].unidad_empaque)
@@ -261,7 +265,7 @@ function recalcular_valores() {
   $(`#totalDevolucion_otros${id_multi}`).html(total);
 }
 
-function deshabilitarbtn() {
+/* function deshabilitarbtn() {
   btn = sessionStorage.getItem("btn");
 
   if (btn == "despeje_realizado")
@@ -282,7 +286,7 @@ function deshabilitarbtn() {
       .prop("disabled", true);
     $(`.devolucion_realizado${id_multi}`).prop("disabled", false);
   }
-}
+} */
 
 /* Almacena la info de tabla devolucion material */
 
@@ -319,10 +323,9 @@ function registrar_material_sobrante(info) {
     data: { materialsobrante, ref_multi, idBatch, modulo, info },
 
     success: function (response) {
-      if (modulo == 6)
-        $(`.conciliacion_realizado${id_multi}`).prop("disabled", false);
       alertify.set("notifier", "position", "top-right");
       alertify.success("Firmado satisfactoriamente");
+      habilitarbtn(btn_id);
     },
   });
 }
@@ -336,6 +339,14 @@ Texto (Existe una diferencia entre las unidades envasadas y las
 
 function conciliacionRendimiento() {
   let unidadEmpaque = $(`#unidad_empaque${id_multi}`).val(); //se debe cargar desde envasado
+  if (unidadEmpaque === "0") {
+    alertify.set("notifier", "position", "top-right");
+    alertify.error(
+      "Valide las unidades de empaque del producto con el administrador, presenta valor cero (0)"
+    );
+    $("#txtTotal-Cajas1").val("Valide unidades de Empaque");
+    return false;
+  }
   let unidadesProducidas = parseInt(
     $(`#txtUnidadesProducidas${id_multi}`).val()
   );

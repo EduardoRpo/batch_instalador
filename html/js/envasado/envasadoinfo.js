@@ -27,10 +27,6 @@ function cargar(btn, idbtn) {
     /* Validacion que todos los datos en linea y el formulario de control en preparacion no esten vacios */
 
     if (id == `controlpeso_realizado${id_multi}`) {
-      //validar = validarLinea();
-      //if (validar == 0)
-      //return false;
-
       /* Validar equipos */
       let eq1 = $(`#sel_envasadora${id_multi}`).val();
       let eq2 = $(`#sel_loteadora${id_multi}`).val();
@@ -282,12 +278,6 @@ function cargarTablaEnvase(j, referencia, cantidad) {
     $(`.etiqueta${j}`).html(info[0].id_etiqueta);
     $(`.descripcion_etiqueta${j}`).html(info[0].etiqueta);
 
-    /* $(`.empaque${j}`).html(info.data[0].id_empaque);
-    $(`.descripcion_empaque${j}`).html(info.data[0].empaque);
-
-    $(`.otros${j}`).html(info.data[0].id_otros);
-    $(`.descripcion_otros${j}`).html(info.data[0].otros); */
-
     $(`.unidades${j}`).html(unidades);
     $(`.unidades${j}e`).html(empaqueEnvasado);
   });
@@ -380,29 +370,7 @@ function registrar_material_sobrante(info) {
     success: function (response) {
       alertify.set("notifier", "position", "top-right");
       alertify.success("Firmado satisfactoriamente");
+      habilitarbtn(btn_id);
     },
   });
-}
-
-function deshabilitarbtn() {
-  //$(`.controlpeso_realizado${id_multi}`).css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
-  btn = sessionStorage.getItem("btn");
-
-  if (btn == "despeje_realizado")
-    for (let i = 1; i < 4; i++)
-      $(`.controlpeso_realizado${i}`).prop("disabled", false);
-
-  if (btn == `controlpeso_realizado${id_multi}`) {
-    $(`.controlpeso_realizado${id_multi}`)
-      .css({ background: "lightgray", border: "gray" })
-      .prop("disabled", true);
-    $(`.controlpeso_verificado${id_multi}`).prop("disabled", false);
-  }
-
-  if (btn == `devolucion_realizado${id_multi}`) {
-    $(`.devolucion_realizado${id_multi}`)
-      .css({ background: "lightgray", border: "gray" })
-      .prop("disabled", true);
-    $(`.devolucion_realizado${id_multi}`).prop("disabled", false);
-  }
 }

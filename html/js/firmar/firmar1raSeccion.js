@@ -1,6 +1,7 @@
 let id;
 let cont = 1;
 let contadorchecks;
+let btn_id;
 
 /* Valida el usuario si existe en la base de datos */
 

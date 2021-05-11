@@ -27,7 +27,7 @@ function observaciones_incidencias(firma) {
   confirm.set("onok", function () {
     //callbak al pulsar Si
     cargarObsIncidencias(firma);
-    deshabilitarbtn();
+    //deshabilitarbtn();
   });
 
   confirm.set("oncancel", function () {
@@ -46,7 +46,7 @@ function observaciones_incidencias(firma) {
 
       success: function (response) {
         $("#modalObservaciones").modal("hide");
-        deshabilitarbtn();
+        //deshabilitarbtn();
       },
     });
   });

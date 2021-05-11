@@ -37,8 +37,8 @@ function almacenar_muestras(firma) {
             success: function (response) {
               alertify.set("notifier", "position", "top-right");
               alertify.success("Firmado satisfactoriamente");
+              habilitarbtn(btn_id);
               firmar(firma);
-              deshabilitarbtn();
             },
           });
         },
@@ -81,11 +81,12 @@ function firmaCalidad(id_firma) {
         $(`.controlpeso_verificado${id_multi}`)
           .css({ background: "lightgray", border: "gray" })
           .prop("disabled", true);
-        if (modulo === 5) {
+        if (modulo === 5 || modulo === 6) {
           $(`.devolucion_verificado${id_multi}`)
             .css({ background: "lightgray", border: "gray" })
             .prop("disabled", true);
         }
+        
       }
     },
   });

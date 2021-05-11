@@ -860,6 +860,7 @@ include('modal/image.php')
           <script src="../../html/js/global/equipos.js"></script>
           <script src="../../html/js/global/image.js"></script>
           <script src="../../html/js/global/presentacionReferenciaMulti.js"></script>
+          <script src="../../html/js/global/habilitarbtn.js"></script>
           <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
 </body>

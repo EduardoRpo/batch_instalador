@@ -94,7 +94,7 @@ function firmarSeccionCierreProceso(firma) {
   confirm.set("onok", function () {
     //callbak al pulsar Si
     cargarObsIncidencias(firma);
-    deshabilitarbtn();
+    //deshabilitarbtn();
   });
 
   confirm.set("oncancel", function () {
@@ -110,7 +110,7 @@ function firmarSeccionCierreProceso(firma) {
       success: function (response) {
         $("#modalObservaciones").modal("hide");
         firmar(firma);
-        deshabilitarbtn();
+        //deshabilitarbtn();
       },
     });
   });
