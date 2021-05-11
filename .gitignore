@@ -3,6 +3,7 @@ env.php
 *.env
 *.txt
 *.jpg
+*.JPG
 *.png
 .vscode/launch.json
 tries.txt

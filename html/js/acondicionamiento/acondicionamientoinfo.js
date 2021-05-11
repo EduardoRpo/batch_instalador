@@ -126,7 +126,11 @@ function cargarTablaEnvase(j, referencia, cantidad) {
     data: { referencia },
   }).done((data, status, xhr) => {
     var info = JSON.parse(data);
-    empaqueEnvasado = formatoCO(Math.round(cantidad / info[0].unidad_empaque));
+    if (info[0].unidad_empaque === 0) empaqueEnvasado = 'Sin unidad de Empaque';
+    else
+      empaqueEnvasado = formatoCO(
+        Math.round(cantidad / info[0].unidad_empaque)
+      );
     unidades = formatoCO(cantidad);
 
     $(`.empaque${j}`).html(info[0].id_empaque);
