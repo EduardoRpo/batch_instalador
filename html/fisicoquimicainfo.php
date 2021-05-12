@@ -17,7 +17,7 @@ include("modal/modal_condicionesMedio.php");
   <meta name="description" content="Batch Record">
   <meta name="author" content="Teenus SAS">
 
-  <title>FisicoQuimica | Samara Cosmetics</title>
+  <title>FisicoQuimico | Samara Cosmetics</title>
 
   <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
   <link href="../../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -47,7 +47,7 @@ include("modal/modal_condicionesMedio.php");
     <div class="container-fluid">
       <div class="row page-titles">
         <h1 hidden>3</h1>
-        <h1 class="text-themecolor m-b-0 m-t-0"><b>Fisicoquímica</b></h1>
+        <h1 class="text-themecolor m-b-0 m-t-0"><b>FisicoQuímico</b></h1>
         <a href="../../fisicoquimica" style="background-color:#fff;color:#FF8D6D" class="btn waves-effect waves-light btn-danger pull-right btn-md" role="button">Cola de Trabajo</a>
       </div>
     </div>

@@ -17,7 +17,7 @@
         <a class="navbar-brand" href="/../acondicionamiento" target="_blank">Acondicionamiento</a>
         <a class="navbar-brand" href="/../despachos" target="_blank">Despachos</a>
         <a class="navbar-brand" href="/../microbiologia" target="_blank">Microbiologia</a>
-        <a class="navbar-brand" href="/../fisicoquimica" target="_blank">FisicoQuimica</a>
+        <a class="navbar-brand" href="/../fisicoquimica" target="_blank">FisicoQuimico</a>
         <a class="navbar-brand" href="/../liberacionlote" target="_blank">LiberacionLote</a>
       </div>
     </div>

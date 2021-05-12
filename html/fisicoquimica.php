@@ -13,7 +13,7 @@ sesiones(9);
   <meta name="description" content="Batch Record">
   <meta name="author" content="Samara Cosmetics">
   <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-  <title>FisicoQuimica | Samara Cosmetics</title>
+  <title>FisicoQuimico | Samara Cosmetics</title>
 
   <link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="html/css/style.css" rel="stylesheet">
@@ -35,7 +35,7 @@ sesiones(9);
     <?php include('partials/header.php'); ?>
     <div class="row page-titles">
       <div class="col-md-8 col-2 align-self-right">
-        <h1 class="text-themecolor m-b-0 m-t-0" style="margin-left: 7%"><b>FisicoQuimica</b></h1>
+        <h1 class="text-themecolor m-b-0 m-t-0" style="margin-left: 7%"><b>FisicoQuimico</b></h1>
       </div>
       <div class="col-md-3 col-4 align-self-center">
         <input type="text" name="fechahoy" value="" readonly="" class="form-control datepicker" hidden="">

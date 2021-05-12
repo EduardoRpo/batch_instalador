@@ -60,22 +60,16 @@ function cargarfirma2daSeccion() {
       /* Valida que todos los tanques esten chequeados para proceder a firmar */
 
       if (T_tanquesOk == T_tanques) {
+        firmado(firma, 3);
         $.ajax({
           type: "POST",
-          url: "../../html/php/batch_tanques.php",
-          data: { operacion: 4, modulo, idBatch },
+          url: "../../html/php/despeje.php",
+          data: { operacion: 3, modulo, idBatch },
 
           success: function (response) {
+            if (response == "") return false;
             let data = JSON.parse(response);
-
-            if (data == 0) return false;
-
-            let firma = data.realizo;
-            let verifico = data.verifico;
-
-            firmado(firma, 3);
-
-            if (verifico !== undefined) firmado(verifico, 4);
+            firmado(data.urlfirma, 4);
           },
         });
       }
