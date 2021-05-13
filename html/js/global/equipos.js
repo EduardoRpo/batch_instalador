@@ -9,46 +9,57 @@ $.ajax({
   );
 
   data.forEach((equipo) => {
-    if (equipo.tipo == "agitador")
-      $("#sel_agitador").append(
-        `<option value="${equipo.id}">${equipo.descripcion}</option>`
-      );
-    if (equipo.tipo == "marmita")
-      $("#sel_marmita").append(
-        `<option value="${equipo.id}">${equipo.descripcion}</option>`
-      );
-    if (equipo.tipo == "envasadora")
-      $(".sel_envasadora").append(
-        `<option value="${equipo.id}">${equipo.descripcion}</option>`
-      );
-    if (equipo.tipo == "loteadora")
-      $(".sel_loteadora").append(
-        `<option value="${equipo.id}">${equipo.descripcion}</option>`
-      );
-    if (equipo.tipo == "banda")
-      $(".banda").append(
-        `<option value="${equipo.id}">${equipo.descripcion}</option>`
-      );
-    if (equipo.tipo == "etiquetadora")
-      $(".etiquetadora").append(
-        `<option value="${equipo.id}">${equipo.descripcion}</option>`
-      );
-    if (equipo.tipo == "tunel")
-      $(".tunel").append(
-        `<option value="${equipo.id}">${equipo.descripcion}</option>`
-      );
-    if (equipo.tipo == "incubadora")
-      $(".tunel").append(
-        `<option value="${equipo.id}">${equipo.descripcion}</option>`
-      );
-    if (equipo.tipo == "auotclave")
-      $(".tunel").append(
-        `<option value="${equipo.id}">${equipo.descripcion}</option>`
-      );
-    if (equipo.tipo == "cabina")
-      $(".tunel").append(
-        `<option value="${equipo.id}">${equipo.descripcion}</option>`
-      );
+    if (modulo == 3) {
+      if (equipo.tipo == "agitador")
+        $("#sel_agitador").append(
+          `<option value="${equipo.id}">${equipo.descripcion}</option>`
+        );
+      if (equipo.tipo == "marmita")
+        $("#sel_marmita").append(
+          `<option value="${equipo.id}">${equipo.descripcion}</option>`
+        );
+    }
+
+    if (modulo == 5) {
+      if (equipo.tipo == "envasadora")
+        $(`.sel_envasadora`).append(
+          `<option value="${equipo.id}">${equipo.descripcion}</option>`
+        );
+      if (equipo.tipo == "loteadora")
+        $(`.sel_loteadora`).append(
+          `<option value="${equipo.id}">${equipo.descripcion}</option>`
+        );
+    }
+
+    if (modulo == 6) {
+      if (equipo.tipo == "banda")
+        $(".banda").append(
+          `<option value="${equipo.id}">${equipo.descripcion}</option>`
+        );
+      if (equipo.tipo == "etiquetadora")
+        $(".etiquetadora").append(
+          `<option value="${equipo.id}">${equipo.descripcion}</option>`
+        );
+      if (equipo.tipo == "tunel")
+        $(".tunel").append(
+          `<option value="${equipo.id}">${equipo.descripcion}</option>`
+        );
+    }
+
+    if (modulo == 8) {
+      if (equipo.tipo == "incubadora")
+        $(".sel_incubadora").append(
+          `<option value="${equipo.id}">${equipo.descripcion}</option>`
+        );
+      if (equipo.tipo == "autoclave")
+        $(".sel_autoclave").append(
+          `<option value="${equipo.id}">${equipo.descripcion}</option>`
+        );
+      if (equipo.tipo == "cabina")
+        $(".sel_cabina").append(
+          `<option value="${equipo.id}">${equipo.descripcion}</option>`
+        );
+    }
   });
 });
 

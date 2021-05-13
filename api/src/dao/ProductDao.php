@@ -42,12 +42,12 @@
       viscosidad.limite_superior as limite_superior_viscosidad,
       densidad_gravedad.limite_inferior as limite_inferior_densidad_gravedad,
       densidad_gravedad.limite_superior as limite_superior_densidad_gravedad,
-      untuosidad.nombre as untuosidad, 
+      untuosidad.nombre as untuosidad,
       poder_espumoso.nombre as poder_espumoso,
       grado_alcohol.limite_inferior as limite_inferior_grado_alcohol,
       grado_alcohol.limite_superior as limite_superior_grado_alcohol,
       ph.limite_inferior as limite_inferior_ph,
-      ph.limite_superior as limite_superior_ph
+      ph.limite_superior as limite_superior_ph, recuento_mesofilos.nombre as mesofilos, pseudomona.nombre as pseudomona, escherichia.nombre as escherichia, staphylococcus.nombre as staphylococcus
       FROM producto
       LEFT JOIN olor ON olor.id = producto.id_olor
       LEFT JOIN color ON color.id = producto.id_color
@@ -58,6 +58,10 @@
       LEFT JOIN untuosidad ON untuosidad.id = producto.id_untuosidad
       LEFT JOIN poder_espumoso ON poder_espumoso.id = producto.id_poder_espumoso
       LEFT JOIN grado_alcohol ON grado_alcohol.id = producto.id_grado_alcohol
+      LEFT JOIN recuento_mesofilos ON recuento_mesofilos.id = producto.id_recuento_mesofilos
+      LEFT JOIN pseudomona ON pseudomona.id = producto.id_pseudomona
+      LEFT JOIN escherichia ON escherichia.id = producto.id_escherichia
+      LEFT JOIN staphylococcus ON staphylococcus.id = producto.id_staphylococcus
       WHERE producto.referencia = ?");
       $stmt->execute(array($idProduct));
       $products = $stmt->fetch($connection::FETCH_ASSOC);

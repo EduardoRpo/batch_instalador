@@ -302,9 +302,10 @@ include("modal/modal_condicionesMedio.php");
   <script src="../../html/js/preparacion/clock.js"></script>
   <script src="../../assets/plugins/jquery/jquery.number.min.js"></script>
   <script src="../../html/js/global/loadinfo-global.js"></script>
+  <script src="../../html/js/global/tanques.js"></script>
   <script src="../../html/js/firmar/firmar1raSeccion.js"></script>
   <script src="../../html/js/firmar/firmar2daSeccion.js"></script>
-  <script src="../../html/js/global/equipos.js"></script>
+  <script src="../../html/js/global/propiedadesProducto.js"></script>
   <script src="../../html/js/global/incidencias.js"></script>
   <script src="../../html/js/global/validaciones.js"></script>
 </body>

@@ -144,9 +144,9 @@ include("modal/modal_condicionesMedio.php");
                   <label for="recipient-name" class="col-form-label envasadora">Identificación Incubadora</label>
                   <label for="recipient-name" class="col-form-label loteadora">Identificación Autoclave</label>
                   <label for="recipient-name" class="col-form-label loteadora">Identificación Cabina de Flujo Laminar</label>
-                  <select class="selectpicker form-control sel_equipos" id="sel_incubadora"></select>
-                  <select class="selectpicker form-control sel_equipos" id="sel_autoclave"></select>
-                  <select class="selectpicker form-control sel_equipos" id="sel_cabina"></select>
+                  <select class="selectpicker form-control sel_equipos sel_incubadora" id="sel_incubadora"></select>
+                  <select class="selectpicker form-control sel_equipos sel_autoclave" id="sel_autoclave"></select>
+                  <select class="selectpicker form-control sel_equipos sel_cabina" id="sel_cabina"></select>
                 </div>
 
                 <div class="parametrosControl">
@@ -169,27 +169,42 @@ include("modal/modal_condicionesMedio.php");
                           <tbody>
                             <tr>
                               <th>Recuento de Mesófilos Aerobios Totales</th>
-                              <td></td>
-                              <td></td>
-                              <td></td>
+                              <td id="mesofilos"></td>
+                              <td class="metodo"></td>
+                              <td><input type="text" class="form-control"></td>
                             </tr>
                             <tr>
                               <th>Pseudomona Aeruginosa</th>
-                              <td></td>
-                              <td></td>
-                              <td></td>
+                              <td id="pseudomona"></td>
+                              <td class="metodo"></td>
+                              <td><select class="selectpicker form-control">
+                                  <option value="0" selected hidden>Seleccionar</option>
+                                  <option value="1">Ausencia</option>
+                                  <option value="2">Presencia</option>
+                                  <option value="3">No Aplica</option>
+                                </select></td>
                             </tr>
                             <tr>
                               <th>Escherichia Coli y Coliformes Totales</th>
-                              <td></td>
-                              <td></td>
-                              <td></td>
+                              <td id="escherichia"></td>
+                              <td class="metodo"></td>
+                              <td><select class="selectpicker form-control">
+                                  <option value="0" selected hidden>Seleccionar</option>
+                                  <option value="1">Ausencia</option>
+                                  <option value="2">Presencia</option>
+                                  <option value="3">No Aplica</option>
+                                </select></td>
                             </tr>
                             <tr>
                               <th>Staphylococcus Aureus</th>
-                              <td></td>
-                              <td></td>
-                              <td></td>
+                              <td id="staphylococcus"></td>
+                              <td class="metodo"></td>
+                              <td><select class="selectpicker form-control">
+                                  <option value="0" selected hidden>Seleccionar</option>
+                                  <option value="1">Ausencia</option>
+                                  <option value="2">Presencia</option>
+                                  <option value="3">No Aplica</option>
+                                </select></td>
                             </tr>
 
                           </tbody>
@@ -255,11 +270,14 @@ include("modal/modal_condicionesMedio.php");
   <script src="../../html/js/utils/custom.min.js"></script>
   <script src="../../html/js/utils/datatables.js"></script>
   <script src="../../html/vendor/jquery-confirm/jquery-confirm.min.js"></script>
-  <script src="../../html/js/preparacion/clock.js"></script>
   <script src="../../assets/plugins/jquery/jquery.number.min.js"></script>
-  <script src="../../html/js/global/loadinfo-global.js"></script>
+  <script src="../../html/js/microbiologia/microbiologiainfo.js"></script>
   <script src="../../html/js/firmar/firmar1raSeccion.js"></script>
   <script src="../../html/js/firmar/firmar2daSeccion.js"></script>
+  <script src="../../html/js/global/propiedadesProducto.js"></script>
+  <script src="../../html/js/global/loadinfo-global.js"></script>
+  <script src="../../html/js/global/cargarBatch.js"></script>
+  <script src="../../html/js/global/tanques.js"></script>
   <script src="../../html/js/global/equipos.js"></script>
   <script src="../../html/js/global/incidencias.js"></script>
   <script src="../../html/js/global/validaciones.js"></script>

@@ -54,10 +54,10 @@ $.ajax({
       const info = JSON.parse(data);
       modulo = info.id;
 
-      if (modulo != 4 && modulo != 9 && modulo != undefined)
+      if (modulo != 4 && modulo != 8 && modulo != 9 && modulo != undefined)
         carguepreguntas(modulo);
 
-      if (modulo != 9 && modulo != undefined) {
+      if (modulo != 8 && modulo != 9 && modulo != undefined) {
         desinfectantes();
         //cargar_condicionesMedio();
         validarTanques(modulo);
