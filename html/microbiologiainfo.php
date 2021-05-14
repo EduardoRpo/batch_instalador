@@ -139,7 +139,7 @@ include("modal/modal_condicionesMedio.php");
                 <div class="parametrosControl">
                   <h3 for="recipient-name" class="col-form-label" style="text-align: center;">Equipos</h3>
                 </div>
-
+              
                 <div class="obj3 mb-3 ml-3 mr-3">
                   <label for="recipient-name" class="col-form-label envasadora">Identificación Incubadora</label>
                   <label for="recipient-name" class="col-form-label loteadora">Identificación Autoclave</label>
@@ -171,13 +171,13 @@ include("modal/modal_condicionesMedio.php");
                               <th>Recuento de Mesófilos Aerobios Totales</th>
                               <td id="mesofilos"></td>
                               <td class="metodo"></td>
-                              <td><input type="text" class="form-control"></td>
+                              <td><input type="text" id="inputMesofilos" class="form-control"></td>
                             </tr>
                             <tr>
                               <th>Pseudomona Aeruginosa</th>
                               <td id="pseudomona"></td>
                               <td class="metodo"></td>
-                              <td><select class="selectpicker form-control">
+                              <td><select class="selectpicker form-control pseudomona" id="pseudomona">
                                   <option value="0" selected hidden>Seleccionar</option>
                                   <option value="1">Ausencia</option>
                                   <option value="2">Presencia</option>
@@ -188,7 +188,7 @@ include("modal/modal_condicionesMedio.php");
                               <th>Escherichia Coli y Coliformes Totales</th>
                               <td id="escherichia"></td>
                               <td class="metodo"></td>
-                              <td><select class="selectpicker form-control">
+                              <td><select class="selectpicker form-control escherichia" id="escherichia">
                                   <option value="0" selected hidden>Seleccionar</option>
                                   <option value="1">Ausencia</option>
                                   <option value="2">Presencia</option>
@@ -199,7 +199,7 @@ include("modal/modal_condicionesMedio.php");
                               <th>Staphylococcus Aureus</th>
                               <td id="staphylococcus"></td>
                               <td class="metodo"></td>
-                              <td><select class="selectpicker form-control">
+                              <td><select class="selectpicker form-control staphylococcus" id="staphylococcus">
                                   <option value="0" selected hidden>Seleccionar</option>
                                   <option value="1">Ausencia</option>
                                   <option value="2">Presencia</option>

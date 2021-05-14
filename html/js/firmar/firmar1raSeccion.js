@@ -44,7 +44,11 @@ function enviar() {
 function preparar(datos) {
   info = JSON.parse(datos);
   if (btn_id == "firma1") {
-    guardar_preguntas(info[0].id);
+    if (modulo === 8) {
+      guardar_microbiologia();
+    } else {
+      guardar_preguntas(info[0].id);
+    }
     firmar(info);
   }
 

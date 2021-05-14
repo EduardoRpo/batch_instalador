@@ -275,8 +275,6 @@ include("modal/modal_condicionesMedio.php");
               </div>
             </div>
           </div>
-
-
         </div>
       </div>
     </div>
