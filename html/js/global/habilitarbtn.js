@@ -7,6 +7,13 @@ function habilitarbotones() {
 }
 
 habilitarbtn = (btn) => {
+  if (btn == "firma1") {
+    $(`.microbiologia_realizado${id_multi}`)
+      .css({ background: "lightgray", border: "gray" })
+      .prop("disabled", true);
+    $(`.microbiologia_verificado`).prop("disabled", false);
+  }
+
   if (btn == "firma3") {
     $(`.controlpeso_realizado${id_multi}`)
       .css({ background: "lightgray", border: "gray" })

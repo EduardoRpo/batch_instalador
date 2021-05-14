@@ -38,7 +38,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   setTimeout(() => {
-    if (modulo != undefined && modulo != 9) cargarBatch();
+    if (modulo != undefined && modulo != 8 && modulo != 9) cargarBatch();
   }, 1300);
 });
 

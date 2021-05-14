@@ -139,7 +139,7 @@ include("modal/modal_condicionesMedio.php");
                 <div class="parametrosControl">
                   <h3 for="recipient-name" class="col-form-label" style="text-align: center;">Equipos</h3>
                 </div>
-              
+
                 <div class="obj3 mb-3 ml-3 mr-3">
                   <label for="recipient-name" class="col-form-label envasadora">Identificación Incubadora</label>
                   <label for="recipient-name" class="col-form-label loteadora">Identificación Autoclave</label>
@@ -276,11 +276,11 @@ include("modal/modal_condicionesMedio.php");
   <script src="../../html/js/firmar/firmar2daSeccion.js"></script>
   <script src="../../html/js/global/propiedadesProducto.js"></script>
   <script src="../../html/js/global/loadinfo-global.js"></script>
-  <script src="../../html/js/global/cargarBatch.js"></script>
   <script src="../../html/js/global/tanques.js"></script>
   <script src="../../html/js/global/equipos.js"></script>
   <script src="../../html/js/global/incidencias.js"></script>
   <script src="../../html/js/global/validaciones.js"></script>
+  <script src="../../html/js/global/habilitarbtn.js"></script>
 </body>
 
 </html>

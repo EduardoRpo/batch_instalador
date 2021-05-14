@@ -45,7 +45,7 @@ function preparar(datos) {
   info = JSON.parse(datos);
   if (btn_id == "firma1") {
     if (modulo === 8) {
-      guardar_microbiologia();
+      guardar_microbiologia(info);
     } else {
       guardar_preguntas(info[0].id);
     }
@@ -53,7 +53,11 @@ function preparar(datos) {
   }
 
   if (btn_id == "firma2") {
-    firmarVerficadoDespeje(info[0].id);
+    if (modulo === 8) {
+      guardar_microbiologia_calidad(info);
+    } else {
+      firmarVerficadoDespeje(info[0].id);
+    }
     firmar(info);
   }
 
