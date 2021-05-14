@@ -7,8 +7,9 @@ if (!empty($_POST)) {
 
     switch ($op) {
         case '1': //Consulta
+            $modulo = $_POST['modulo'];
             $sql = "SELECT equipos.id, equipos.descripcion FROM equipos INNER JOIN batch_equipos ON batch_equipos.equipo = equipos.id
-                    WHERE batch_equipos.batch = :batch";
+                    WHERE batch_equipos.batch = :batch AND modulo = :modulo";
             $query = $conn->prepare($sql);
             $query->execute(['batch' => $batch]);
             $result = $query->rowCount();
