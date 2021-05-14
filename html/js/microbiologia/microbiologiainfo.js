@@ -113,7 +113,7 @@ $(document).ready(function () {
     $.ajax({
       type: "POST",
       url: "../../html/php/microbiologia.php",
-      data: { op: 1, idBatch },
+      data: { op: 1, idBatch, modulo },
       success: function (r) {
         if (r == "") return false;
         data = JSON.parse(r);
