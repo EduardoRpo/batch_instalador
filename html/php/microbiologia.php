@@ -11,7 +11,7 @@ if (!empty($_POST)) {
             $sql = "SELECT equipos.id, equipos.descripcion FROM equipos INNER JOIN batch_equipos ON batch_equipos.equipo = equipos.id
                     WHERE batch_equipos.batch = :batch AND modulo = :modulo";
             $query = $conn->prepare($sql);
-            $query->execute(['batch' => $batch]);
+            $query->execute(['batch' => $batch, 'modulo' => $modulo]);
             $result = $query->rowCount();
 
             if ($result > 0)

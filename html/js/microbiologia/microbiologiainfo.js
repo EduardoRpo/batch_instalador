@@ -140,7 +140,7 @@ $(document).ready(function () {
     });
   };
 
-  cargarBatchMicro();
+  //cargarBatchMicro();
 });
 
 /* Registro de Firma */
