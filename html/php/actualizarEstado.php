@@ -3,7 +3,8 @@
 function actualizarEstado($batch, $modulo, $conn)
 {
 
-    $modulo === 6 || $modulo === 7 ? $modulo = 5 : $modulo;
+    $modulo == 6 || $modulo == 7 ? $modulo = 5 : $modulo;
+    $modulo == 8 || $modulo == 9 ? $modulo = 5 : $modulo;
 
     switch ($modulo) {
 
@@ -28,8 +29,8 @@ function actualizarEstado($batch, $modulo, $conn)
 function cerrarEstado($batch, $modulo, $conn)
 {
 
-    $modulo === 6 || $modulo === 7 ? $modulo = 5 : $modulo;
-    $modulo === 8 || $modulo === 9 ? $modulo = 6 : $modulo;
+    $modulo == 6 || $modulo == 7 ? $modulo = 5 : $modulo;
+    $modulo == 8 || $modulo == 9 ? $modulo = 6 : $modulo;
 
     switch ($modulo) {
         case '2': // pesaje

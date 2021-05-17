@@ -77,32 +77,6 @@ function cargarDesinfectante() {
   });
 }
 
-function cargarControlProceso() {
-  $.ajax({
-    type: "POST",
-    url: "../../html/php/controlProceso.php",
-    data: { modulo, idBatch },
-
-    success: function (response) {
-      if (response == "" || response == 0) {
-        return false;
-      }
-      let info = JSON.parse(response);
-      let index = info.data.length;
-
-      $(".color").val(info.data[index - 1].color);
-      $(".olor").val(info.data[index - 1].olor);
-      $(".apariencia").val(info.data[index - 1].apariencia);
-      $(".ph").val(info.data[index - 1].ph);
-      $("#in_viscocidad").val(info.data[index - 1].viscosidad);
-      $("#in_densidad").val(info.data[index - 1].densidad);
-      $(".untuosidad").val(info.data[index - 1].untuosidad);
-      $(".espumoso").val(info.data[index - 1].espumoso);
-      $("#in_grado_alcohol").val(info.data[index - 1].alcohol);
-    },
-  });
-}
-
 /* Cargar Tanques */
 
 function cargarfirma2daSeccion() {
@@ -115,19 +89,23 @@ function cargarfirma2daSeccion() {
     data: { modulo, idBatch, operacion: 2 },
 
     success: function (response) {
-      var data = JSON.parse(response);
-      T_tanques = data[0].tanques;
-      T_tanquesOk = data[0].tanquesOk;
+      if (response == "\r\n1") {
+        T_tanques = 0;
+        T_tanquesOk = 0;
+      } else {
+        var data = JSON.parse(response);
+        T_tanques = data[0].tanques;
+        T_tanquesOk = data[0].tanquesOk;
 
-      if (data == "") return false;
+        if (data == "") return false;
 
-      /* Chequea todos los tanques de acuerdo con la BD */
+        /* Chequea todos los tanques de acuerdo con la BD */
 
-      for (i = 1; i <= data[0].tanquesOk; i++) {
-        $(`#chkcontrolTanques${i}`).prop("checked", true);
-        $(`#chkcontrolTanques${i}`).prop("disabled", true);
+        for (i = 1; i <= data[0].tanquesOk; i++) {
+          $(`#chkcontrolTanques${i}`).prop("checked", true);
+          $(`#chkcontrolTanques${i}`).prop("disabled", true);
+        }
       }
-
       /* Valida que todos los tanques esten chequeados para proceder a firmar */
 
       if (T_tanquesOk == T_tanques) {
@@ -221,6 +199,14 @@ function firmado(datos, posicion) {
         .prop("disabled", true);
       $(".preparacion_verificado").prop("disabled", false);
     }
+    if (modulo == 9) {
+      parent = $("#fisicoquimica_realizado").parent();
+      $("#fisicoquimica_realizado").remove();
+      $(".fisicoquimica_realizado")
+        .css({ background: "lightgray", border: "gray" })
+        .prop("disabled", true);
+      $(".fisicoquimica_verificado").prop("disabled", false);
+    }
   }
 
   if (posicion == 4) {
@@ -238,6 +224,14 @@ function firmado(datos, posicion) {
         .css({ background: "lightgray", border: "gray" })
         .prop("disabled", true);
       $(".preparacion_verificado").prop("disabled", false);
+    }
+    if (modulo == 9) {
+      parent = $("#fisicoquimica_verificado").parent();
+      $("#fisicoquimica_verificado").remove();
+      $(".fisicoquimica_verificado")
+        .css({ background: "lightgray", border: "gray" })
+        .prop("disabled", true);
+      $(".fisicoquimica_verificado").prop("disabled", false);
     }
   }
 

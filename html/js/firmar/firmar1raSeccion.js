@@ -46,6 +46,8 @@ function preparar(datos) {
   if (btn_id == "firma1") {
     if (modulo === 8) {
       guardar_microbiologia(info);
+    } else if (modulo === 9) {
+      firmar2daSeccion(info);
     } else {
       guardar_preguntas(info[0].id);
     }
@@ -55,6 +57,8 @@ function preparar(datos) {
   if (btn_id == "firma2") {
     if (modulo === 8) {
       guardar_microbiologia_calidad(info);
+    } else if (modulo === 9) {
+      almacenarfirma(info[0].id);
     } else {
       firmarVerficadoDespeje(info[0].id);
     }

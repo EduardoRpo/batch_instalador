@@ -2,6 +2,7 @@
 /* let presentacion;
 let a = 0, b = 0, c = 0; */
 let id;
+modulo = 7;
 /* Carga el modal para la autenticacion */
 
 function autenticacion(obj) {

@@ -2,6 +2,7 @@
 /* let r1 = 0,
   r2 = 0,
   r3 = 0; */
+modulo = 6;
 let id_multi = 1;
 const equipos = [];
 

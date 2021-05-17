@@ -2,8 +2,6 @@
 session_start();
 include('modal/m_firma.php');
 include("modal/modal_observaciones.php");
-include("modal/modal_req_ajuste.php");
-include("modal/modal_cambiarContrasena.php");
 include("modal/modal_condicionesMedio.php");
 ?>
 
@@ -17,7 +15,7 @@ include("modal/modal_condicionesMedio.php");
   <meta name="description" content="Batch Record">
   <meta name="author" content="Teenus SAS">
 
-  <title>FisicoQuimico | Samara Cosmetics</title>
+  <title>Fisicoquimico | Samara Cosmetics</title>
 
   <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
   <link href="../../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -47,7 +45,7 @@ include("modal/modal_condicionesMedio.php");
     <div class="container-fluid">
       <div class="row page-titles">
         <h1 hidden>3</h1>
-        <h1 class="text-themecolor m-b-0 m-t-0"><b>FisicoQuímico</b></h1>
+        <h1 class="text-themecolor m-b-0 m-t-0"><b>Fisicoquimico</b></h1>
         <a href="../../fisicoquimica" style="background-color:#fff;color:#FF8D6D" class="btn waves-effect waves-light btn-danger pull-right btn-md" role="button">Cola de Trabajo</a>
       </div>
     </div>
@@ -144,99 +142,100 @@ include("modal/modal_condicionesMedio.php");
                   <div class="card">
                     <div class="card-block">
                       <div class="table-responsive">
-                        <table class="table table-striped">
-                          <thead>
-                            <tr>
-                              <th class="titulo">PARAMETROS</th>
-                              <th class="titulo">ESPECIFICACIONES</th>
-                              <th class="titulo">RESULTADOS</th>
-                            </tr>
-                          </thead>
+                        <form id="especificaciones">
+                          <table id="tblControlEspecificaciones" class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th class="titulo">PARAMETROS</th>
+                                <th class="titulo">ESPECIFICACIONES</th>
+                                <th class="titulo">RESULTADOS</th>
+                              </tr>
+                            </thead>
 
-                          <tbody>
-                            <tr>
-                              <td>Color</td>
-                              <td id="espec_color"></td>
-                              <td><select class="selectpicker form-control color especificacion">
-                                  <option value="0" selected hidden>Seleccionar</option>
-                                  <option value="1">Cumple</option>
-                                  <option value="2">No cumple</option>
-                                  <option value="3">No aplica</option>
-                                </select>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>Olor</td>
-                              <td id="espec_olor"></td>
-                              <td><select class="selectpicker form-control olor especificacion">
-                                  <option value="0" selected hidden>Seleccionar</option>
-                                  <option value="1">Cumple</option>
-                                  <option value="2">No cumple</option>
-                                  <option value="3">No aplica</option>
-                                </select>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>Apariencia</td>
-                              <td id="espec_apariencia"></td>
-                              <td><select class="selectpicker form-control apariencia especificacion">
-                                  <option value="0" selected hidden>Seleccionar</option>
-                                  <option value="1">Cumple</option>
-                                  <option value="2">No cumple</option>
-                                  <option value="3">No aplica</option>
-                                </select>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>PH</td>
-                              <td id="espec_ph"></td>
-                              <td><input type="number" id="in_ph" class="selectpicker form-control ph especificacionInput">
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>Viscocidad CPS </td>
-                              <td id="espec_viscidad"></td>
-                              <td><input type="number" class="selectpicker form-control especificacionInput" id="in_viscocidad">
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>Densidad o gravedad especifica G/ML
-                                <!-- <input type="text" class="form-control" style="width: 60px;" readonly> -->
-                              </td>
-                              <td id="espec_densidad"></td>
-                              <td><input class="selectpicker form-control" type="number" id="in_densidad" onkeyup="validar_densidad();"></td>
-                            </tr>
-                            <tr>
-                              <td>Untuosidad</td>
-                              <td id="espec_untosidad"></td>
-                              <td><select class="selectpicker form-control untuosidad especificacion">
-                                  <option value="0" selected hidden>Seleccionar</option>
-                                  <option value="1">Cumple</option>
-                                  <option value="2">No cumple</option>
-                                  <option value="3">No aplica</option>
-                                </select>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>Poder Espumoso</td>
-                              <td id="espec_poder_espumoso"></td>
-                              <td><select class="selectpicker form-control espumoso especificacion">
-                                  <option value="0" selected hidden>Seleccionar</option>
-                                  <option value="1">Cumple</option>
-                                  <option value="2">No cumple</option>
-                                  <option value="3">No aplica</option>
-                                </select>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>Grado Alcohol</td>
-                              <td id="espec_grado_alcohol"></td>
-                              <td><input class="selectpicker form-control especificacionInput" type="number" id="in_grado_alcohol">
-                              </td>
-                            </tr>
-
-                          </tbody>
-                        </table>
+                            <tbody>
+                              <tr>
+                                <td>Color</td>
+                                <td id="espec_color"></td>
+                                <td><select class="selectpicker form-control color especificacion">
+                                    <option value="0" selected hidden>Seleccionar</option>
+                                    <option value="1">Cumple</option>
+                                    <option value="2">No cumple</option>
+                                    <option value="3">No aplica</option>
+                                  </select>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Olor</td>
+                                <td id="espec_olor"></td>
+                                <td><select class="selectpicker form-control olor especificacion">
+                                    <option value="0" selected hidden>Seleccionar</option>
+                                    <option value="1">Cumple</option>
+                                    <option value="2">No cumple</option>
+                                    <option value="3">No aplica</option>
+                                  </select>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Apariencia</td>
+                                <td id="espec_apariencia"></td>
+                                <td><select class="selectpicker form-control apariencia especificacion">
+                                    <option value="0" selected hidden>Seleccionar</option>
+                                    <option value="1">Cumple</option>
+                                    <option value="2">No cumple</option>
+                                    <option value="3">No aplica</option>
+                                  </select>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>PH</td>
+                                <td id="espec_ph"></td>
+                                <td><input type="number" id="in_ph" class="selectpicker form-control ph especificacionInput">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Viscocidad CPS </td>
+                                <td id="espec_viscidad"></td>
+                                <td><input type="number" class="selectpicker form-control especificacionInput" id="in_viscocidad">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Densidad o gravedad especifica G/ML
+                                  <!-- <input type="text" class="form-control" style="width: 60px;" readonly> -->
+                                </td>
+                                <td id="espec_densidad"></td>
+                                <td><input class="selectpicker form-control" type="number" id="in_densidad"></td>
+                              </tr>
+                              <tr>
+                                <td>Untuosidad</td>
+                                <td id="espec_untosidad"></td>
+                                <td><select class="selectpicker form-control untuosidad especificacion">
+                                    <option value="0" selected hidden>Seleccionar</option>
+                                    <option value="1">Cumple</option>
+                                    <option value="2">No cumple</option>
+                                    <option value="3">No aplica</option>
+                                  </select>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Poder Espumoso</td>
+                                <td id="espec_poder_espumoso"></td>
+                                <td><select class="selectpicker form-control espumoso especificacion">
+                                    <option value="0" selected hidden>Seleccionar</option>
+                                    <option value="1">Cumple</option>
+                                    <option value="2">No cumple</option>
+                                    <option value="3">No aplica</option>
+                                  </select>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>Grado Alcohol</td>
+                                <td id="espec_grado_alcohol"></td>
+                                <td><input class="selectpicker form-control especificacionInput" type="number" id="in_grado_alcohol">
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </form>
                       </div>
                     </div>
                   </div>
@@ -299,13 +298,16 @@ include("modal/modal_condicionesMedio.php");
   <script src="../../html/vendor/jquery-confirm/jquery-confirm.min.js"></script>
   <script src="../../html/js/preparacion/clock.js"></script>
   <script src="../../assets/plugins/jquery/jquery.number.min.js"></script>
+
   <script src="../../html/js/global/loadinfo-global.js"></script>
   <script src="../../html/js/global/tanques.js"></script>
+  <script src="../../html/js/global/propiedadesProducto.js"></script>
   <script src="../../html/js/firmar/firmar1raSeccion.js"></script>
   <script src="../../html/js/firmar/firmar2daSeccion.js"></script>
-  <script src="../../html/js/global/propiedadesProducto.js"></script>
   <script src="../../html/js/global/incidencias.js"></script>
-  <script src="../../html/js/global/validaciones.js"></script>
+  <script src="../../html/js/global/controlEspecificaciones.js"></script>
+  <script src="../../html/js/global/cargarBatch.js"></script>
+  <script src="../../html/js/fisicoquimica/fisicoquimicainfo.js"></script>
 </body>
 
 </html>

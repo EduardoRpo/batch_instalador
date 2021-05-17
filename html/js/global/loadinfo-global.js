@@ -39,32 +39,33 @@ $(document).ready(function () {
 $(document).ready(function () {
   setTimeout(() => {
     if (modulo != undefined && modulo != 8 && modulo != 9) cargarBatch();
-    if (modulo == 8 ) cargarBatchMicro();
+    if (modulo == 8) cargarBatchMicro();
   }, 1300);
 });
 
 /* Modulo */
+$(document).ready(function () {
+  /* $.ajax({
+    method: "POST",
+    url: "/html/php/modulo.php",
+    data: { proceso },
+  
+    success: function (data, status, xhr) {
+      if (data !== "") {
+        const info = JSON.parse(data);
+        data == "false" ? (modulo = modulo) : (modulo = info.id); */
 
-$.ajax({
-  method: "POST",
-  url: "/html/php/modulo.php",
-  data: { proceso },
+  if (modulo != 4 && modulo != 8 && modulo != 9 && modulo != undefined)
+    carguepreguntas(modulo);
 
-  success: function (data, status, xhr) {
-    if (data !== "") {
-      const info = JSON.parse(data);
-      modulo = info.id;
-
-      if (modulo != 4 && modulo != 8 && modulo != 9 && modulo != undefined)
-        carguepreguntas(modulo);
-
-      if (modulo != 8 && modulo != 9 && modulo != undefined) {
-        desinfectantes();
-        //cargar_condicionesMedio();
-        validarTanques(modulo);
-      }
-    }
-  },
+  if (modulo != 8 && modulo != 9 && modulo != undefined) {
+    desinfectantes();
+    //cargar_condicionesMedio();
+    validarTanques(modulo);
+  }
+  /*  }
+    },
+  }); */
 });
 
 /* Carga de datos de informacion del batch record seleccionado */

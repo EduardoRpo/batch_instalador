@@ -285,7 +285,7 @@ include("modal/modal_condicionesMedio.php");
                         <!--<h4 class="card-title">Basic Table</h4>
                    <h6 class="card-subtitle">Add class <code>.table</code></h6>-->
                         <div class="table-responsive">
-                          <table id="tblControlProcesoPreparacion" class="table table-striped table-bordered">
+                          <table id="tblControlEspecificaciones" class="table table-striped table-bordered">
                             <thead>
                               <tr>
                                 <th class="titulo">PARAMETROS</th>
@@ -457,7 +457,7 @@ include("modal/modal_condicionesMedio.php");
   <script src="../../html/js/global/equipos.js"></script>
   <script src="../../html/js/global/incidencias.js"></script>
   <script src="../../html/js/global/requerimiento_ajuste.js"></script>
-  <script src="../../html/js/global/validaciones.js"></script>
+  <script src="../../html/js/global/controlEspecificaciones.js"></script>
   <script src="../../html/js/preparacion/preparacioninfo.js"></script>
   <script src="../../html/js/global/propiedadesProducto.js"></script>
 

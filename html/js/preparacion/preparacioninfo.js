@@ -6,6 +6,7 @@ let paso = 4;
 let tanqueOk = 0;
 let tiempoTotal = 0;
 let pasoEjecutado = 0;
+modulo = 3;
 
 function cargar(btn, idbtn) {
   sessionStorage.setItem("idbtn", idbtn);
@@ -43,10 +44,10 @@ function cargar(btn, idbtn) {
       }
   }
 
-  /* Validacion que el formulario se encuentre completamente lleno */
+  /* Almacenar la data en un array */
 
   if (id == "preparacion_realizado") {
-    validar = validardatosresultadosPreparacion();
+    validar = cargarResultadosEspecificaciones();
     if (validar == 0) return false;
   }
 

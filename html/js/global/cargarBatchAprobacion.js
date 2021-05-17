@@ -79,7 +79,7 @@ function cargarfirma2daSeccion() {
 
 /* Carga formulario */
 
-function cargarControlProceso() {
+/* function cargarControlProceso() {
   $.ajax({
     type: "POST",
     url: "../../html/php/controlProceso.php",
@@ -100,7 +100,7 @@ function cargarControlProceso() {
       $("#in_grado_alcohol").val(info.data[index - 1].alcohol);
     },
   });
-}
+} */
 
 /* Registro de Firma */
 

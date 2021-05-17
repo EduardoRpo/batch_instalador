@@ -9,33 +9,36 @@ if (!empty($_POST)) {
 
     switch ($op) {
         case 1: //Insertar o actualizar tanques y linea
-            $tanques = $_POST['tanques'];
-            $tanquesOk = $_POST['tanquesOk'];
             $batch = $_POST['idBatch'];
             $modulo = $_POST['modulo'];
 
-            /* revisar si existen un registro del modulo y batch para actualizar o insertar */
+            if ($modulo != 9) {
+                $tanques = $_POST['tanques'];
+                $tanquesOk = $_POST['tanquesOk'];
 
-            $sql = "SELECT * FROM batch_tanques_chks WHERE modulo = :modulo AND batch = :batch";
-            $query = $conn->prepare($sql);
-            $result = $query->execute(['modulo' => $modulo, 'batch' => $batch,]);
-            $rows = $query->rowCount();
+                /* revisar si existen un registro del modulo y batch para actualizar o insertar */
 
-            /* Si existe un registro actualiza de lo contrario lo inserta */
-
-            if ($rows > 0) {
-                $sql = "UPDATE batch_tanques_chks SET tanquesOk =:tanquesOk WHERE modulo = :modulo AND batch = :batch";
+                $sql = "SELECT * FROM batch_tanques_chks WHERE modulo = :modulo AND batch = :batch";
                 $query = $conn->prepare($sql);
-                $result = $query->execute(['tanquesOk' => $tanquesOk, 'modulo' => $modulo, 'batch' => $batch]);
-                if ($result) echo '1';
-                else echo '0';
-            } else {
-                $sql = "INSERT INTO batch_tanques_chks (tanques, tanquesOk, modulo, batch) VALUES(:tanques, :tanquesOk, :modulo, :batch)";
-                $query = $conn->prepare($sql);
-                $result = $query->execute(['tanques' => $tanques, 'tanquesOk' => $tanquesOk, 'modulo' => $modulo, 'batch' => $batch]);
-                actualizarEstado($batch, $modulo, $conn);
-                if ($result) echo '1';
-                else echo '0';
+                $result = $query->execute(['modulo' => $modulo, 'batch' => $batch,]);
+                $rows = $query->rowCount();
+
+                /* Si existe un registro actualiza de lo contrario lo inserta */
+
+                if ($rows > 0) {
+                    $sql = "UPDATE batch_tanques_chks SET tanquesOk =:tanquesOk WHERE modulo = :modulo AND batch = :batch";
+                    $query = $conn->prepare($sql);
+                    $result = $query->execute(['tanquesOk' => $tanquesOk, 'modulo' => $modulo, 'batch' => $batch]);
+                    if ($result) echo '1';
+                    else echo '0';
+                } else {
+                    $sql = "INSERT INTO batch_tanques_chks (tanques, tanquesOk, modulo, batch) VALUES(:tanques, :tanquesOk, :modulo, :batch)";
+                    $query = $conn->prepare($sql);
+                    $result = $query->execute(['tanques' => $tanques, 'tanquesOk' => $tanquesOk, 'modulo' => $modulo, 'batch' => $batch]);
+                    actualizarEstado($batch, $modulo, $conn);
+                    if ($result) echo '1';
+                    else echo '0';
+                }
             }
 
             if ($modulo == 3) {
@@ -67,7 +70,7 @@ if (!empty($_POST)) {
 
             /* Almacena el formulario de control del módulo de preparación */
 
-            if ($modulo == 3 || $modulo == 4) {
+            if ($modulo == 3 || $modulo == 4 || $modulo == 9) {
                 $controlProducto = $_POST['controlProducto'];
 
                 $sql = "INSERT INTO batch_control_especificaciones (color, olor, apariencia, ph, viscosidad, densidad, untuosidad, espumoso, alcohol, modulo, batch) 
@@ -95,13 +98,17 @@ if (!empty($_POST)) {
             $batch = $_POST['idBatch'];
             $modulo = $_POST['modulo'];
 
-            $sql = "SELECT * FROM batch_tanques_chks WHERE modulo = :modulo AND batch = :batch";
-            $query = $conn->prepare($sql);
-            $result = $query->execute(['modulo' => $modulo, 'batch' => $batch]);
-            if ($result > 0) {
-                $data = $query->fetch(PDO::FETCH_ASSOC);
-                $arreglo[] = $data;
-                echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+            if ($modulo != 9) {
+                $sql = "SELECT * FROM batch_tanques_chks WHERE modulo = :modulo AND batch = :batch";
+                $query = $conn->prepare($sql);
+                $result = $query->execute(['modulo' => $modulo, 'batch' => $batch]);
+                if ($result > 0) {
+                    $data = $query->fetch(PDO::FETCH_ASSOC);
+                    $arreglo[] = $data;
+                    echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+                }
+            } else {
+                echo '1';
             }
             break;
 

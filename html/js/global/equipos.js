@@ -63,7 +63,7 @@ $.ajax({
   });
 });
 
-/* carga de maquinas */
+/* Carga de maquinas guardadas */
 
 function cargarEquipos() {
   $.ajax({

@@ -1,4 +1,5 @@
 let flagWeight = false;
+modulo = 2;
 
 function cargar(btn, idbtn) {
   sessionStorage.setItem("idbtn", idbtn);

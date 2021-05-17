@@ -4,9 +4,8 @@ function firmar2daSeccion(firma) {
   let tanquesOk = 0;
 
   /* validar tanque seleccionados */
-  for (let i = 1; i <= tanques; i++) {
+  for (let i = 1; i <= tanques; i++)
     if ($(`#chkcontrolTanques${i}`).is(":checked")) tanquesOk++;
-  }
 
   /* carga data de acuerdo con el modulo */
 
@@ -27,8 +26,9 @@ function firmar2daSeccion(firma) {
     };
   }
 
-  if (modulo == 4) {
+  if (modulo == 4 || modulo == 9) {
     let desinfectante = $("#sel_producto_desinfeccion").val();
+    desinfectante === undefined ? (desinfectante = "") : desinfectante;
     data = {
       operacion: 1,
       tanques,
@@ -89,18 +89,12 @@ function firmarSeccionCierreProceso(firma) {
     )
     .set("labels", { ok: "Si", cancel: "No" });
 
-  /* confirm.set({ transition: 'slide' }); */
-
   confirm.set("onok", function () {
-    //callbak al pulsar Si
     cargarObsIncidencias(firma);
-    //deshabilitarbtn();
   });
 
   confirm.set("oncancel", function () {
-    //callbak al pulsar No
     alertify.success("No reportó Incidencias");
-    /* Almacenar firma 2da seccion */
 
     $.ajax({
       method: "POST",
@@ -110,10 +104,10 @@ function firmarSeccionCierreProceso(firma) {
       success: function (response) {
         $("#modalObservaciones").modal("hide");
         firmar(firma);
-        //deshabilitarbtn();
       },
     });
   });
+  deshabilitarbtn();
 }
 
 /* almacenar firma calidad 2da seccion */
@@ -144,6 +138,14 @@ function almacenarfirma(id) {
 
       if (modulo == 4)
         $(".aprobacion_verificado")
+          .css({ background: "lightgray", border: "gray" })
+          .prop("disabled", true);
+      if (modulo == 8)
+        $(".aprobacion_verificado")
+          .css({ background: "lightgray", border: "gray" })
+          .prop("disabled", true);
+      if (modulo == 9)
+        $(".fisicoquimica_verificado")
           .css({ background: "lightgray", border: "gray" })
           .prop("disabled", true);
     },

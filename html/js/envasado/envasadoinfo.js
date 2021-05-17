@@ -1,4 +1,5 @@
 let pres;
+modulo = 5;
 //let envase;
 //let presentacion;
 /* let r1,

@@ -116,21 +116,6 @@ include('modal/modal_condicionesMedio.php');
                           <td class="centrado" id="cantidad2"></td>
                           <td class="centrado" id="total2"></td>
                         </tr>
-                        <!-- <tr id="fila3">
-                        <td id="tanque3" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad3" style="text-align: end;font-size:14px;"></td>
-                        <td id="total3" style="text-align: end;font-size:14px;"></td>
-                      </tr>
-                      <tr id="fila4">
-                        <td id="tanque4" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad4" style="text-align: end;font-size:14px;"></td>
-                        <td id="total4" style="text-align: end;font-size:14px;"></td>
-                      </tr>
-                      <tr id="fila5">
-                        <td id="tanque5" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad5" style="text-align: end;font-size:14px;"></td>
-                        <td id="total5" style="text-align: end;font-size:14px;"></td>
-                      </tr> -->
                       </tbody>
                     </table>
                   </div>
@@ -151,64 +136,6 @@ include('modal/modal_condicionesMedio.php');
                   </div>
 
                 </div>
-
-                <!-- <div class="contenedorInfo">
-                  <label for="recipient-name" class="col-form-label">Fecha Programación</label>
-                  <label for="recipient-name" class="col-form-label">No Orden</label>
-                  <label for="recipient-name" class="col-form-label">Referencia</label>
-
-                  <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:80%; height: 30px;">
-                    <thead>
-                      <tr>
-                        <th>Tanque</th>
-                        <th>Cantidad</th>
-                        <th>Total</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr id="fila1">
-                        <td id="tanque1" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad1" style="text-align: end;font-size:14px;"></td>
-                        <td id="total1" style="text-align: end;font-size:14px;"></td>
-                      </tr>
-                      <tr id="fila2">
-                        <td id="tanque2" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad2" style="text-align: end;font-size:14px;"></td>
-                        <td id="total2" style="text-align: end;font-size:14px;"></td>
-                      </tr>
-                      <tr id="fila3">
-                        <td id="tanque3" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad3" style="text-align: end;font-size:14px;"></td>
-                        <td id="total3" style="text-align: end;font-size:14px;"></td>
-                      </tr>
-                      <tr id="fila4">
-                        <td id="tanque4" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad4" style="text-align: end;font-size:14px;"></td>
-                        <td id="total4" style="text-align: end;font-size:14px;"></td>
-                      </tr>
-                      <tr id="fila5">
-                        <td id="tanque5" style="text-align: end;font-size:14px;"></td>
-                        <td id="cantidad5" style="text-align: end;font-size:14px;"></td>
-                        <td id="total5" style="text-align: end;font-size:14px;"></td>
-                      </tr>
-                    </tbody>
-                  </table>
-
-                  <input type="date" class="form-control" id="in_fecha" readonly>
-                  <input type="text" class="form-control" id="in_numero_orden" readonly>
-                  <input type="text" class="form-control" id="in_referencia" readonly>
-
-                  <label></label>
-                  <label for="in_tamano_lote" class="col-form-label">Tamaño Lote (Kg)</label>
-                  <label for="recipient-name" class="col-form-label">No. Lote</label>
-                  <label for="recipient-name" class="col-form-label">Linea</label>
-
-                  <input type="text" class="form-control" id="in_tamano_lote" readonly>
-                  <input type="text" class="form-control" id="in_numero_lote" readonly>
-                  <input type="text" class="form-control" id="in_linea" readonly>
-                </div> -->
-
-
               </div>
             </div>
           </div>
@@ -258,11 +185,9 @@ include('modal/modal_condicionesMedio.php');
 
                   <div class="card mt-3">
                     <div class="card-block">
-                      <!--<h4 class="card-title">Basic Table</h4>
-                 <h6 class="card-subtitle">Add class <code>.table</code></h6>-->
                       <div class="table-responsive">
 
-                        <table id="tblControlProcesoPreparacion" class="table table-striped table-bordered">
+                        <table id="tblControlEspecificaciones" class="table table-striped table-bordered">
                           <thead>
                             <tr>
                               <th class="titulo">PARAMETROS</th>
@@ -393,7 +318,7 @@ include('modal/modal_condicionesMedio.php');
   <script src="../../assets/plugins/jquery/jquery.min.js"></script>
   <script src="../../assets/plugins/bootstrap/js/tether.min.js"></script>
   <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="../../html/vendor/datatables/datatables.min.js"></script>
+  <script src="../../html/vendor/datatables/datatables.min.js" type="text/javascript"></script>
   <script src="../../html/js/utils/jquery.slimscroll.js"></script>
   <script src="../../html/js/utils/waves.js"></script>
   <script src="../../html/js/utils/sidebarmenu.js"></script>
@@ -409,7 +334,7 @@ include('modal/modal_condicionesMedio.php');
   <script src="../../html/js/global/requerimiento_ajuste.js"></script>
   <script src="../../html/js/global/condiciones_medio.js"></script>
   <script src="../../html/js/global/cargarBatchAprobacion.js"></script>
-  <script src="../../html/js/global/validaciones.js"></script>
+  <script src="../../html/js/global/controlEspecificaciones.js"></script>
   <script src="../../html/js/global/tanques.js"></script>
   <script src="../../html/js/global/propiedadesProducto.js"></script>
 

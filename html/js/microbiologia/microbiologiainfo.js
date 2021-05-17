@@ -1,5 +1,6 @@
 /* Cargue tabla especificaciones */
 let dataMicro = [];
+modulo = 8;
 
 $(document).ready(function () {
   $(".metodo").html("Siembra Total");
@@ -119,11 +120,11 @@ $(document).ready(function () {
         data = JSON.parse(r);
         firm = [];
         let incubadora = data[0]["id"];
-        setTimeout(() => {
-          $(".sel_incubadora").val(incubadora);
-          $(".sel_autoclave").val(data[1]["id"]);
-          $(".sel_cabina").val(data[2]["id"]);
-        }, 1300);
+        //setTimeout(() => {
+        $(".sel_incubadora").val(incubadora);
+        $(".sel_autoclave").val(data[1]["id"]);
+        $(".sel_cabina").val(data[2]["id"]);
+        //}, 100);
         $("#inputMesofilos").val(data[3]["mesofilos"]);
         $(".pseudomona").val(data[3]["pseudomona"]);
         $(".escherichia").val(data[3]["escherichia"]);
