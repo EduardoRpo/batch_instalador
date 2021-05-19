@@ -8,45 +8,49 @@ if (!empty($_POST)) {
     switch ($op) {
         case '1': //Consulta
             $modulo = $_POST['modulo'];
+
             $sql = "SELECT equipos.id, equipos.descripcion FROM equipos INNER JOIN batch_equipos ON batch_equipos.equipo = equipos.id
                     WHERE batch_equipos.batch = :batch AND modulo = :modulo";
             $query = $conn->prepare($sql);
             $query->execute(['batch' => $batch, 'modulo' => $modulo]);
             $result = $query->rowCount();
 
-            if ($result > 0)
+            if ($result > 0) {
+
+
                 $equipos = $query->fetchAll(PDO::FETCH_ASSOC);
 
-            $sql = "SELECT * FROM `batch_analisis_microbiologico` WHERE batch = :batch";
-            $query = $conn->prepare($sql);
-            $query->execute(['batch' => $batch]);
-            $result = $query->rowCount();
-
-            if ($result > 0)
-                $analisis = $query->fetchAll(PDO::FETCH_ASSOC);
-
-            $sql = "SELECT * FROM `usuario` WHERE id = :id";
-            $query = $conn->prepare($sql);
-            $query->execute(['id' => $analisis[0]['realizo']]);
-            $result = $query->rowCount();
-
-            if ($result > 0)
-                $usuarioRealizo = $query->fetchAll(PDO::FETCH_ASSOC);
-
-            if ($analisis[0]['verifico'] == 0) {
-                $usuarioVerifico[] = 'false';
-            } else {
-                $sql = "SELECT * FROM `usuario` WHERE id = :id";
+                $sql = "SELECT * FROM `batch_analisis_microbiologico` WHERE batch = :batch";
                 $query = $conn->prepare($sql);
-                $query->execute(['id' => $analisis[0]['verifico']]);
+                $query->execute(['batch' => $batch]);
                 $result = $query->rowCount();
 
                 if ($result > 0)
-                    $usuarioVerifico = $query->fetchAll(PDO::FETCH_ASSOC);
-            }
+                    $analisis = $query->fetchAll(PDO::FETCH_ASSOC);
 
-            $result = array_merge($equipos, $analisis, $usuarioRealizo, $usuarioVerifico);
-            echo json_encode($result, JSON_UNESCAPED_UNICODE);
+                $sql = "SELECT * FROM `usuario` WHERE id = :id";
+                $query = $conn->prepare($sql);
+                $query->execute(['id' => $analisis[0]['realizo']]);
+                $result = $query->rowCount();
+
+                if ($result > 0)
+                    $usuarioRealizo = $query->fetchAll(PDO::FETCH_ASSOC);
+
+                if ($analisis[0]['verifico'] == 0) {
+                    $usuarioVerifico[] = 'false';
+                } else {
+                    $sql = "SELECT * FROM `usuario` WHERE id = :id";
+                    $query = $conn->prepare($sql);
+                    $query->execute(['id' => $analisis[0]['verifico']]);
+                    $result = $query->rowCount();
+
+                    if ($result > 0)
+                        $usuarioVerifico = $query->fetchAll(PDO::FETCH_ASSOC);
+                }
+
+                $result = array_merge($equipos, $analisis, $usuarioRealizo, $usuarioVerifico);
+                echo json_encode($result, JSON_UNESCAPED_UNICODE);
+            }
             break;
 
         case 2: // Guardar

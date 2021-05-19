@@ -1,10 +1,21 @@
 /* Cargue tabla especificaciones */
 let dataMicro = [];
 modulo = 8;
+$("#observacionesLote").slideUp();
 
 $(document).ready(function () {
   $(".metodo").html("Siembra Total");
   $(`.microbiologia_verificado`).prop("disabled", true);
+
+  $("#btnRechazado").change(function (e) {
+    e.preventDefault();
+    $("#observacionesLote").slideDown();
+  });
+
+  $("#btnAceptado").change(function (e) {
+    e.preventDefault();
+    $("#observacionesLote").slideUp();
+  });
 });
 
 cargar = (btn, Nobtn) => {
@@ -26,9 +37,15 @@ cargar = (btn, Nobtn) => {
   equipos = sel_incubadora * sel_autoclave * sel_cabina;
   analisis = pseudomona * escherichia * staphylococcus;
 
-  if (mesofilos == "" || equipos === 0) {
+  if (equipos === 0) {
     alertify.set("notifier", "position", "top-right");
     alertify.error("Seleccione los Equipos");
+    return false;
+  }
+
+  if (mesofilos == "") {
+    alertify.set("notifier", "position", "top-right");
+    alertify.error("Ingrese el resultado para el Recuento de Mesofilos");
     return false;
   }
 
@@ -42,27 +59,33 @@ cargar = (btn, Nobtn) => {
 
   if (fechaSiembra === "" || fechaResultados == "") {
     alertify.set("notifier", "position", "top-right");
-    alertify.error("Selecciones las fechas de Siembra y Resultados");
+    alertify.error("Seleccione las fechas de Siembra y Resultados");
     return false;
   }
 
-  let dataMicrobiologia = {};
-  dataMicrobiologia.equipo1 = sel_incubadora;
-  dataMicrobiologia.equipo2 = sel_autoclave;
-  dataMicrobiologia.equipo3 = sel_cabina;
-  dataMicrobiologia.mesofilos = mesofilos;
-  dataMicrobiologia.pseudomona = pseudomona;
-  dataMicrobiologia.escherichia = escherichia;
-  dataMicrobiologia.staphylococcus = staphylococcus;
-  dataMicrobiologia.fechaSiembra = fechaSiembra;
-  dataMicrobiologia.fechaResultados = fechaResultados;
-  dataMicro.push(dataMicrobiologia);
+  let continuar = validarSeleccion();
+  if (continuar != 0) {
+    let dataMicrobiologia = {};
+    dataMicrobiologia.equipo1 = sel_incubadora;
+    dataMicrobiologia.equipo2 = sel_autoclave;
+    dataMicrobiologia.equipo3 = sel_cabina;
+    dataMicrobiologia.mesofilos = mesofilos;
+    dataMicrobiologia.pseudomona = pseudomona;
+    dataMicrobiologia.escherichia = escherichia;
+    dataMicrobiologia.staphylococcus = staphylococcus;
+    dataMicrobiologia.fechaSiembra = fechaSiembra;
+    dataMicrobiologia.fechaResultados = fechaResultados;
+    dataMicrobiologia.text = text;
+    dataMicro.push(dataMicrobiologia);
 
-  /* Carga el modal para la autenticacion */
+    if (dataMicro.length > 1) dataMicro.shift();
 
-  $("#usuario").val("");
-  $("#clave").val("");
-  $("#m_firmar").modal("show");
+    /* Carga el modal para la autenticacion */
+
+    $("#usuario").val("");
+    $("#clave").val("");
+    $("#m_firmar").modal("show");
+  }
 };
 
 /* Almacenar info */

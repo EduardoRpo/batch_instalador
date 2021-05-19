@@ -6,6 +6,7 @@ var batch;
 let template;
 let cantidadpreguntas;
 let completo = 0;
+let text;
 
 Date.prototype.toDateInputValue = function () {
   var local = new Date(this);
@@ -55,10 +56,16 @@ $(document).ready(function () {
         const info = JSON.parse(data);
         data == "false" ? (modulo = modulo) : (modulo = info.id); */
 
-  if (modulo != 4 && modulo != 8 && modulo != 9 && modulo != undefined)
+  if (
+    modulo != 4 &&
+    modulo != 7 &&
+    modulo != 8 &&
+    modulo != 9 &&
+    modulo != undefined
+  )
     carguepreguntas(modulo);
 
-  if (modulo != 8 && modulo != 9 && modulo != undefined) {
+  if (modulo != 7 && modulo != 8 && modulo != 9 && modulo != undefined) {
     desinfectantes();
     //cargar_condicionesMedio();
     validarTanques(modulo);
@@ -127,6 +134,29 @@ function fechaHoy() {
     (dia < 10 ? "0" : "") +
     dia;
 }
+
+//Validar seleccion en microbiologia
+
+let validarSeleccion = () => {
+  if ($("input[name='rdbtnConfirmacion']:radio").is(":checked")) {
+  } else {
+    alertify.set("notifier", "position", "top-right");
+    alertify.error("Seleccione Rechazado o Aprobado para el Batch Record ");
+    return false;
+  }
+  let btnSeleccionado = $("input:radio[name=rdbtnConfirmacion]:checked").val();
+  if (btnSeleccionado == 0) {
+    text = $("#observacionesLoteRechazado").val();
+    if (text.lenght == 0 || text == "") {
+      alertify.set("notifier", "position", "top-right");
+      alertify.error("Ingrese el motivo por el cual es Rechazado");
+      return false;
+    }
+  } else {
+    $("#observacionesLoteRechazado").val("");
+    text = "";
+  }
+};
 
 /* formato de numeros miles y decimales */
 
