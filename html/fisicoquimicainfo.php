@@ -251,7 +251,36 @@ include("modal/modal_condicionesMedio.php");
                     </div>
                   </div>
                 </div>
-
+                <div class="col-md-12 align-self-center">
+                  <div class="card" style="height: 60px;">
+                    <div class="card-block">
+                      <form id="fmSolicitudConfirmacion">
+                        <div style="text-align: center;">
+                          <div class="form-check form-check-inline mr-3">
+                            <input class="form-check-input" type="radio" name="rdbtnConfirmacion" id="btnRechazado" value="0" hidden>
+                            <label class="form-check-label" for="btnRechazado">Rechazado</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="rdbtnConfirmacion" id="btnAceptado" value="1" hidden>
+                            <label class="form-check-label" for="btnAceptado">Aprobado</label>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12 align-self-center" id="observacionesLote">
+                  <div class="card" style="height: 130px;">
+                    <div class="card-block">
+                      <form id="fmConfirmacion">
+                        <div>
+                          <label for="observacionesLoteRechazado">Motivo</label>
+                          <input type="area" class="form-control" name="observacionesLoteRechazado" id="observacionesLoteRechazado" width="50%">
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
                 <div class="row" style="margin: 1%">
                   <div class="col-md-4 align-self-center">
                     <label for="fisicoquimica_realizado" class="col-form-label">Realizado Por</label>

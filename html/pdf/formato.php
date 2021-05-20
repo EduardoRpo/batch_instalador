@@ -93,12 +93,8 @@
 
             <div class="alertas" id="alert_pesaje">
                 <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
-                    <!--  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button> -->
                     <label id="title1"></label>
                     <ul id="vinetas1">
-
                     </ul>
                 </div>
             </div>
@@ -127,9 +123,6 @@
             </div>
             <div class="alertas" id="alert_pesaje">
                 <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
                     <label id="title2"></label>
                     <ul id="vinetas2">
 
@@ -142,9 +135,6 @@
             </div>
             <div class="alertas" id="alert_pesaje">
                 <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
                     <label id="title3"></label>
                     <ul id="vinetas3">
 
@@ -198,9 +188,7 @@
             </div>
             <div class="alertas" id="alert_pesaje">
                 <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+
                     <label id="title4"></label>
                     <ul id="vinetas4">
 
@@ -213,12 +201,8 @@
             </div>
             <div class="alertas" id="alert_pesaje">
                 <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
                     <label id="title5"></label>
                     <ul id="vinetas5">
-
                     </ul>
                 </div>
             </div>
@@ -269,9 +253,6 @@
                     </div>
                     <div class="alertas" id="alert_pesaje">
                         <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
                             <label id="title6"></label>
                             <ul id="vinetas6">
 
@@ -359,7 +340,7 @@
 
                         <div class="firmas" id="firmas2">
                             <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
-                            <label id="fecha2" style="font-weight:bold; justify-self: baseline"></label>
+                            <label id="fecha2" class="fecha2" style="font-weight:bold; justify-self: baseline"></label>
                             <label id="user_realizo2">Realizado por:</label>
                             <label id="user_verifico2">Verificado por:</label>
                             <img id="f_realizo7" src="../../../admin/assets/img/firmas/JUAN PABLO LLANO.jpg" alt="firma_usuario" height="130">
@@ -396,12 +377,8 @@
                     <div class="subtitle"><label for="">Procedimiento de Preparación</label></div>
                     <div class="alertas" id="alert_pesaje">
                         <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
                             <label id="title7"></label>
                             <ul id="vinetas7">
-
                             </ul>
                         </div>
                     </div>
@@ -415,9 +392,6 @@
                     <div class="subtitle"><label for="">Control del Proceso</label></div>
                     <div class="alertas" id="alert_pesaje">
                         <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
                             <label id="title8"></label>
                             <ul id="vinetas8">
 
@@ -487,9 +461,6 @@
                         </table>
                         <div class="alertas" id="alert_pesaje">
                             <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
                                 <label id="title9"></label>
                                 <ul id="vinetas9">
                                 </ul>
@@ -518,9 +489,6 @@
                 <div class="subtitle"><label for="">Almacenamiento Granel</label></div>
                 <div class="alertas" id="alert_pesaje">
                     <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
                         <label id="title10"></label>
                         <ul id="vinetas10">
                         </ul>
@@ -615,9 +583,6 @@
                     <div class="subtitle"><label for="">Control del Proceso</label></div>
                     <div class="alertas" id="alert_pesaje">
                         <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
                             <label id="title13"></label>
                             <ul id="vinetas13">
                             </ul>

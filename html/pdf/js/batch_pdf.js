@@ -211,8 +211,7 @@ var output =
   day;
 
 // No carga la fecha
-$("#fecha2").html(output);
-//$("#fecha2").val(output);
+$(".fecha2").html(output);
 
 function condiciones_medio() {
   let data = { operacion: 6, idBatch };
@@ -369,7 +368,7 @@ ajustes = () => {
   $.ajax({
     url: "../../html/php/ajustes.php",
     type: "POST",
-    data: idBatch,
+    data: { batch: idBatch },
   }).done((data, status, xhr) => {
     info = JSON.parse(data);
     $(`#No3`).val("X");
