@@ -75,7 +75,7 @@ cargar = (btn, Nobtn) => {
     dataMicrobiologia.staphylococcus = staphylococcus;
     dataMicrobiologia.fechaSiembra = fechaSiembra;
     dataMicrobiologia.fechaResultados = fechaResultados;
-    dataMicrobiologia.text = text;
+    dataMicrobiologia.observaciones = text;
     dataMicro.push(dataMicrobiologia);
 
     if (dataMicro.length > 1) dataMicro.shift();
@@ -99,6 +99,10 @@ guardar_microbiologia = (info) => {
       if (r == "true") {
         alertify.set("notifier", "position", "top-right");
         alertify.success("Datos almacenados correctamente");
+        $(".microbiologia_realizado")
+          .css({ background: "lightgray", border: "gray" })
+          .prop("disabled", true);
+        $(".microbiologia_verificado").prop("disabled", false);
       }
 
       if (r == "false") {
@@ -121,6 +125,9 @@ guardar_microbiologia_calidad = (info) => {
       if (r == "true") {
         alertify.set("notifier", "position", "top-right");
         alertify.success("Datos almacenados correctamente");
+        $(".microbiologia_verificado")
+          .css({ background: "lightgray", border: "gray" })
+          .prop("disabled", true);
       }
 
       if (r == "false") {
@@ -154,6 +161,16 @@ $(document).ready(function () {
         $(".staphylococcus").val(data[3]["staphylococcus"]);
         $("#fechaSiembra").val(data[3]["fecha_siembra"]);
         $("#fechaResultados").val(data[3]["fecha_resultados"]);
+
+        observaciones = data[3]["observaciones"];
+        if (observaciones != "") {
+          $("#observacionesLote").slideDown();
+          $("#observacionesLoteRechazado").val(data[3]["observaciones"]);
+          $("#btnRechazado").prop("checked", true);
+        } else {
+          $("#btnAceptado").prop("checked", true);
+        }
+
         firm.push(data[4]);
         firmado(firm, 1);
         if (data[5] != "false") {

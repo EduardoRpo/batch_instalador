@@ -118,7 +118,7 @@ switch ($op) {
 
     if (!$result) {
       die('Error');
-      echo '0';;
+      echo '0';
     } else {
       echo '1';
     }

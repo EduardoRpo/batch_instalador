@@ -66,8 +66,8 @@ if (!empty($_POST)) {
                 $query->execute(['equipo' => $dataMicrobiologia[0]["equipo$i"], 'batch' => $batch, 'modulo' => $modulo]);
             }
 
-            $sql = "INSERT INTO `batch_analisis_microbiologico`(mesofilos, pseudomona, escherichia, staphylococcus, fecha_siembra, fecha_resultados, realizo, batch, modulo) 
-                    VALUES(:mesofilos, :pseudomona, :escherichia, :staphylococcus, :fecha_siembra, :fecha_resultados, :realizo, :batch, :modulo)";
+            $sql = "INSERT INTO `batch_analisis_microbiologico`(mesofilos, pseudomona, escherichia, staphylococcus, fecha_siembra, fecha_resultados, observaciones, realizo, batch, modulo) 
+                    VALUES(:mesofilos, :pseudomona, :escherichia, :staphylococcus, :fecha_siembra, :fecha_resultados, :observaciones, :realizo, :batch, :modulo)";
             $query = $conn->prepare($sql);
             $result = $query->execute([
                 'mesofilos' => $dataMicrobiologia[0]["mesofilos"],
@@ -76,6 +76,7 @@ if (!empty($_POST)) {
                 'staphylococcus' => $dataMicrobiologia[0]["staphylococcus"],
                 'fecha_siembra' => $dataMicrobiologia[0]["fechaSiembra"],
                 'fecha_resultados' => $dataMicrobiologia[0]["fechaResultados"],
+                'observaciones' => $dataMicrobiologia[0]["observaciones"],
                 'realizo' => $realizo[0]["id"],
                 'batch' => $batch,
                 'modulo' => $modulo
