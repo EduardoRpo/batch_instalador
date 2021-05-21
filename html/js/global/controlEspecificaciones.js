@@ -49,17 +49,17 @@ function cargarControlProceso() {
       if (response == "" || response == 0) return false;
 
       let info = JSON.parse(response);
-      let index = info.data.length;
+      let index = info.length;
 
-      $(".color").val(info.data[index - 1].color);
-      $(".olor").val(info.data[index - 1].olor);
-      $(".apariencia").val(info.data[index - 1].apariencia);
-      $(".ph").val(info.data[index - 1].ph);
-      $("#in_viscocidad").val(info.data[index - 1].viscosidad);
-      $("#in_densidad").val(info.data[index - 1].densidad);
-      $(".untuosidad").val(info.data[index - 1].untuosidad);
-      $(".espumoso").val(info.data[index - 1].espumoso);
-      $("#in_grado_alcohol").val(info.data[index - 1].alcohol);
+      $(".color").val(info[index - 1].color);
+      $(".olor").val(info[index - 1].olor);
+      $(".apariencia").val(info[index - 1].apariencia);
+      $(".ph").val(info[index - 1].ph);
+      $("#in_viscocidad").val(info[index - 1].viscosidad);
+      $("#in_densidad").val(info[index - 1].densidad);
+      $(".untuosidad").val(info[index - 1].untuosidad);
+      $(".espumoso").val(info[index - 1].espumoso);
+      $("#in_grado_alcohol").val(info[index - 1].alcohol);
     },
   });
 }

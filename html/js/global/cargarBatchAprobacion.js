@@ -77,31 +77,6 @@ function cargarfirma2daSeccion() {
   });
 }
 
-/* Carga formulario */
-
-/* function cargarControlProceso() {
-  $.ajax({
-    type: "POST",
-    url: "../../html/php/controlProceso.php",
-    data: { modulo, idBatch },
-
-    success: function (response) {
-      let info = JSON.parse(response);
-      let index = info.data.length;
-
-      $(".color").val(info.data[index - 1].color);
-      $(".olor").val(info.data[index - 1].olor);
-      $(".apariencia").val(info.data[index - 1].apariencia);
-      $(".ph").val(info.data[index - 1].ph);
-      $("#in_viscocidad").val(info.data[index - 1].viscosidad);
-      $("#in_densidad").val(info.data[index - 1].densidad);
-      $(".untuosidad").val(info.data[index - 1].untuosidad);
-      $(".espumoso").val(info.data[index - 1].espumoso);
-      $("#in_grado_alcohol").val(info.data[index - 1].alcohol);
-    },
-  });
-} */
-
 /* Registro de Firma */
 
 function firmado(datos, posicion) {

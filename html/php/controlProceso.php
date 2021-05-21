@@ -7,29 +7,11 @@ if (!empty($_POST)) {
     $modulo = $_POST['modulo'];
     $batch = $_POST['idBatch'];
 
-    $sql = "SELECT * FROM batch_control_especificaciones  
-            WHERE modulo = :modulo AND batch = :batch";
+    $sql = "SELECT * FROM batch_control_especificaciones WHERE modulo = :modulo AND batch = :batch";
     $query = $conn->prepare($sql);
-    $result = $query->execute([
-        'modulo' => $modulo,
-        'batch' => $batch,
-    ]);
-    /* if ($result > 0) {
-        $data = $query->fetch(PDO::FETCH_ASSOC);
-        $arreglo[] = $data;
-        echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
-    } */
+    $result = $query->execute(['modulo' => $modulo, 'batch' => $batch]);
 
-    //$result = $conn->query($query);
-
-    //Almacena la data en array
-    while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
-        $arreglo["data"][] = $data;
-    }
-    if (empty($arreglo)) {
-        echo '0';
-        exit();
-    }
-
-    echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+    $data = $query->fetchAll(PDO::FETCH_ASSOC);
+    if (empty($data)) echo '0';
+    else echo json_encode($data, JSON_UNESCAPED_UNICODE);
 }

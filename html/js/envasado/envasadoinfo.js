@@ -205,10 +205,10 @@ function identificarDensidad(batch) {
       if (response == 0) return false;
       else {
         let espec = JSON.parse(response);
-        for (let i = 0; i < espec.data.length; i++) {
-          densidadAprobada = densidadAprobada + espec.data[i].densidad;
+        for (let i = 0; i < espec.length; i++) {
+          densidadAprobada = densidadAprobada + espec[i].densidad;
         }
-        densidadAprobada = densidadAprobada / espec.data.length;
+        densidadAprobada = densidadAprobada / espec.length;
         calcularPeso(densidadAprobada);
       }
     },
@@ -217,13 +217,8 @@ function identificarDensidad(batch) {
 
 function calcularPeso(densidadAprobada) {
   var peso_min = batch.presentacion * densidadAprobada;
-  //var peso_minimo = formatoCO(peso_min);
-
   var peso_max = peso_min * (1 + 0.03);
-  //var peso_maximo = formatoCO(peso_max);
-
   var prom = (parseInt(peso_min) + peso_max) / 2;
-  //var promedio = formatoCO(prom);
 
   $(`.minimo`).val(peso_min.toFixed(2));
   $(`.maximo`).val(peso_max.toFixed(2));

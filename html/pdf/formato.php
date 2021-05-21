@@ -410,51 +410,51 @@
                             <tbody>
                                 <tr>
                                     <td class="centrado">Color</td>
-                                    <td class="centrado" id="espec_color"></td>
+                                    <td class="centrado espec_color"></td>
                                     <td class="centrado color3"></td>
                                 </tr>
                                 <tr>
                                     <td class="centrado">Olor</td>
-                                    <td class="centrado" id="espec_olor"></td>
+                                    <td class="centrado espec_olor"></td>
                                     <td class="centrado olor3"></td>
 
                                 </tr>
                                 <tr>
                                     <td class="centrado">Apariencia</td>
-                                    <td class="centrado" id="espec_apariencia"></td>
+                                    <td class="centrado espec_apariencia"></td>
                                     <td class="centrado apariencia3"></td>
 
                                 </tr>
                                 <tr>
                                     <td class="centrado">PH</td>
-                                    <td class="centrado" id="espec_ph"></td>
+                                    <td class="centrado espec_ph"></td>
                                     <td class="centrado ph3"></td>
 
                                 </tr>
                                 <tr>
                                     <td class="centrado">Viscosidad (cps)</td>
-                                    <td class="centrado" id="espec_viscidad"></td>
+                                    <td class="centrado espec_viscosidad"></td>
                                     <td class="centrado viscosidad3"></td>
 
                                 </tr>
                                 <tr>
                                     <td class="centrado">Densidad o gravedad específica (g/ml)</td>
-                                    <td class="centrado" id="espec_densidad"></td>
+                                    <td class="centrado espec_densidad"></td>
                                     <td class="centrado densidad3"></td>
                                 </tr>
                                 <tr>
                                     <td class="centrado">Untuosidad</td>
-                                    <td class="centrado" id="espec_untosidad"></td>
+                                    <td class="centrado espec_untuosidad"></td>
                                     <td class="centrado untuosidad3"></td>
                                 </tr>
                                 <tr>
                                     <td class="centrado">Poder Espumoso</td>
-                                    <td class="centrado" id="espec_poder_espumoso"></td>
+                                    <td class="centrado espec_poder_espumoso"></td>
                                     <td class="centrado espumoso3"></td>
                                 </tr>
                                 <tr>
                                     <td class="centrado">Grado de Alcohol</td>
-                                    <td class="centrado" id="espec_grado_alcohol"></td>
+                                    <td class="centrado espec_grado_alcohol"></td>
                                     <td class="centrado alcohol3"></td>
                                 </tr>
                             </tbody>
@@ -518,9 +518,6 @@
                 <div class="card-body">
                     <div class="alertas" id="alert_pesaje">
                         <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
                             <label id="title11"></label>
                             <ul id="vinetas11">
                             </ul>
@@ -530,9 +527,6 @@
                     <div class="subtitle"><label for="">Limpieza y Desinfección</label></div>
                     <div class="alertas" id="alert_pesaje">
                         <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
                             <label id="title12"></label>
                             <ul id="vinetas12">
                             </ul>
@@ -600,51 +594,51 @@
                             <tbody>
                                 <tr>
                                     <td class="centrado">Color</td>
-                                    <td class="centrado">Conforme al estándar</td>
+                                    <td class="centrado espec_color"></td>
                                     <td class="centrado color4"></td>
                                 </tr>
                                 <tr>
                                     <td class="centrado">Olor</td>
-                                    <td class="centrado">Conforme al estándar, con adición de fragancia</td>
+                                    <td class="centrado espec_olor"></td>
                                     <td class="centrado olor4"></td>
 
                                 </tr>
                                 <tr>
                                     <td class="centrado">Apariencia</td>
-                                    <td class="centrado">Líquido viscoso homogéneo, libre de partículas extrañas.</td>
+                                    <td class="centrado espec_apariencia"></td>
                                     <td class="centrado apariencia4"></td>
 
                                 </tr>
                                 <tr>
                                     <td class="centrado">PH</td>
-                                    <td class="centrado">5.0 – 6.5</td>
+                                    <td class="centrado espec_ph"></td>
                                     <td class="centrado ph4"></td>
 
                                 </tr>
                                 <tr>
                                     <td class="centrado">Viscosidad (cps)</td>
-                                    <td class="centrado">2.500 a 6000 cps</td>
+                                    <td class="centrado espec_viscosidad"></td>
                                     <td class="centrado viscosidad4"></td>
 
                                 </tr>
                                 <tr>
                                     <td class="centrado">Densidad o gravedad específica (g/ml)</td>
-                                    <td class="centrado">0.950 – 1.050 g/mL</td>
+                                    <td class="centrado espec_densidad"></td>
                                     <td class="centrado densidad4"></td>
                                 </tr>
                                 <tr>
                                     <td class="centrado">Untuosidad</td>
-                                    <td class="centrado">Suave al tacto</td>
+                                    <td class="centrado espec_untuosidad"></td>
                                     <td class="centrado untuosidad4"></td>
                                 </tr>
                                 <tr>
                                     <td class="centrado">Poder Espumoso</td>
-                                    <td class="centrado">Genere espuma</td>
+                                    <td class="centrado espec_poder_espumoso"></td>
                                     <td class="centrado espumoso4"></td>
                                 </tr>
                                 <tr>
                                     <td class="centrado">Grado de Alcohol</td>
-                                    <td class="centrado">N.A</td>
+                                    <td class="centrado espec_grado_alcohol"></td>
                                     <td class="centrado alcohol4"></td>
                                 </tr>
                             </tbody>
@@ -652,9 +646,6 @@
                     </div>
                     <div class="alertas" id="alert_pesaje">
                         <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
                             <label id="title14"></label>
                             <ul id="vinetas14">
                             </ul>
@@ -721,9 +712,6 @@
                 <div class="card-body">
                     <div class="alertas" id="alert_pesaje">
                         <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
                             <label class="" id="title15"></label>
                             <ul class="" id="vinetas15">
                             </ul>
@@ -751,9 +739,6 @@
                     <div class="subtitle"><label for="">6.2 Entrega Material Envase</label></div>
                     <div class="alertas" id="alert_pesaje">
                         <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
                             <label class="" id="title16"></label>
                             <ul class="" id="vinetas16">
                             </ul>
@@ -837,9 +822,7 @@
                     <div class="subtitle" style="background:lightgrey;"><label for="">Muestras</label></div>
                     <div class="p-3">
                         <div class="table-responsive">
-                            <table class="table table-bordered table-striped" id="muestrasEnvasado1">
-
-                            </table>
+                            <table class="table table-bordered table-striped" id="muestrasEnvasado1"></table>
                         </div>
 
                         <div>
@@ -940,9 +923,6 @@
                     </div>
                     <div class="alertas" id="alert_pesaje">
                         <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
                             <label class="" id="title17"></label>
                             <ul class="" id="vinetas17">
                             </ul>
@@ -968,9 +948,6 @@
                     </div>
                     <div class="alertas" id="alert_pesaje">
                         <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
                             <label class="" id="title18"></label>
                             <ul class="" id="vinetas18">
                             </ul>
@@ -1015,9 +992,6 @@
                     <div class="subtitle"><label for="">Control de Proceso</label></div>
                     <div class="alertas" id="alert_pesaje">
                         <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
                             <label class="" id="title19"></label>
                             <ul class="" id="vinetas19">
                             </ul>
@@ -1137,9 +1111,6 @@
                     <div class="subtitle"><label>Almacen Despachos</label></div>
                     <div class="alertas" id="alert_pesaje">
                         <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
                             <label class="" id="title20"></label>
                             <ul class="" id="vinetas20">
                             </ul>
