@@ -242,8 +242,8 @@
                 <form id="frmAdicionar5" class="frmAdicionarMinMax" style="display: none;">
                   <label for=""><b>Grado de Alcohol</b></label>
                   <input type="text" name="txt-Id5" id="txt-Id5" class="form-control" hidden>
-                  <input type="number" name="min5" id="min" class="form-control centrado" placeholder="Mínimo">
-                  <input type="number" name="max5" id="max" class="form-control centrado" placeholder="Máximo">
+                  <input type="number" name="min5" id="min5" class="form-control centrado" placeholder="Mínimo">
+                  <input type="number" name="max5" id="max5" class="form-control centrado" placeholder="Máximo">
                   <button type="button" class="btn btn-primary tabla5" id="grado_alcohol" onclick="guardarDatosGeneralesMinMax(id, 5);">Guardar</button>
                 </form>
                 <hr>

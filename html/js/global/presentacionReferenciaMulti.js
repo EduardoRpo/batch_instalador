@@ -36,7 +36,7 @@ function presentacion_multi() {
     presentacion = batch.presentacion;
   } else presentacion = batch.presentacion;
   cargarImagen(ref_multi);
-  cargarfirma2();
+  if (modulo !== 7) cargarfirma2();
   if (modulo === 7) {
     cargar_despacho();
     cargarBatch();

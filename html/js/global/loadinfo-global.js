@@ -39,7 +39,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   setTimeout(() => {
-    if (modulo != undefined && modulo != 8 && modulo != 9) cargarBatch();
+    if (modulo != undefined && modulo != 7 && modulo != 8 && modulo != 9) cargarBatch();
     if (modulo == 8) cargarBatchMicro();
   }, 1300);
 });
