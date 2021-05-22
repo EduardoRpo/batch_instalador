@@ -113,7 +113,7 @@ function cargar_despacho() {
         return false;
       unidades = $(`#unidad_empaque${id_multi}`).val();
       $(`#unidades_recibidas_acond${id_multi}`).val(info.unidades_producidas);
-      $(`#cajas_acond${id_multi}`).val((info.unidades_producidas - info.muestras_retencion) / unidades);
+      $(`#cajas_acond${id_multi}`).val(((info.unidades_producidas - info.muestras_retencion) / unidades).toFixed(0));
       $(`#mov_inventario_acond${id_multi}`).val(info.mov_inventario);
       $(`#mestras_retencion_acond${id_multi}`).val(info.muestras_retencion);
     },

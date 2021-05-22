@@ -23,7 +23,7 @@ if (!empty($_POST)) {
             $data = $query->fetch(PDO::FETCH_ASSOC);
 
             if (empty($data))
-                echo '3';
+                echo '0';
             else
                 echo json_encode($data, JSON_UNESCAPED_UNICODE);
 
