@@ -346,7 +346,7 @@ function conciliacionRendimiento() {
       "Valide las unidades de empaque del producto con el administrador, presenta valor cero (0)"
     );
     $("#txtTotal-Cajas1").val("Valide unidades de Empaque");
-    return false;
+    //return false;
   }
   let unidadesProducidas = parseInt(
     $(`#txtUnidadesProducidas${id_multi}`).val()

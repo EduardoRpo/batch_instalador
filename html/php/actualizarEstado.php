@@ -4,7 +4,7 @@ function actualizarEstado($batch, $modulo, $conn)
 {
 
     $modulo == 6 || $modulo == 7 ? $modulo = 5 : $modulo;
-    $modulo == 8 || $modulo == 9 ? $modulo = 5 : $modulo;
+    $modulo == 8 || $modulo == 9 ? $modulo = 6 : $modulo;
 
     switch ($modulo) {
 
@@ -19,6 +19,9 @@ function actualizarEstado($batch, $modulo, $conn)
             break;
         case '5': //envasado, acondicionamiento, despachos
             $estado = 6.5;
+            break;
+        case '6': //envasado, acondicionamiento, despachos
+            $estado = 7.5;
             break;
     }
 
@@ -48,7 +51,7 @@ function cerrarEstado($batch, $modulo, $conn)
         case '6': // Microbiologia y FisicoQuimico
             $estado = 8;
             break;
-        case '7': // Liberacion Lote
+        case '10': // Liberacion Lote
             $estado = 9;
             break;
     }
