@@ -70,9 +70,12 @@ class BatchLineaDao
   public function findBatchEnvasado()
   {
     $connection = Connection::getInstance()->getConnection();
-    $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, batch.numero_lote 
+    /* $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, batch.numero_lote 
                                     FROM batch 
                                     WHERE (batch.estado >= 5.5 AND batch.estado <= 6.5)
+                                    ORDER BY batch.id_batch DESC"); */
+    $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, batch.numero_lote 
+                                    FROM batch WHERE batch.id_batch NOT IN (SELECT batch FROM batch_material_sobrante WHERE verifico > 0) AND batch.estado >= 5.5
                                     ORDER BY batch.id_batch DESC");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
