@@ -397,6 +397,7 @@ function registrar_conciliacion(idfirma) {
   let unidades = $(`#txtUnidadesProducidas${id_multi}`).val();
   let retencion = $(`#txtMuestrasRetencion${id_multi}`).val();
   let mov = $(`#txtNoMovimiento${id_multi}`).val();
+  let cajas = $(`#txtTotal-Cajas${id_multi}`).val();
   let operacion = 1;
 
   $.post(
@@ -405,6 +406,7 @@ function registrar_conciliacion(idfirma) {
       operacion,
       unidades,
       retencion,
+      cajas,
       mov,
       modulo,
       idBatch,

@@ -218,7 +218,7 @@ include('modal/image.php')
                             <input type="text" class="form-control" id="despacho1" readonly>
                           </div>
                           <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                            <button type="button" class="btn waves-effect waves-light btn-danger despacho1" id="despacho1" onclick="autenticacion(this);" style="width: 100%; height: 38px;">Firmar</button>
+                            <button type="button" class="btn waves-effect waves-light btn-danger despacho1" id="despacho1" onclick="cargar(this, 'firma1')" style="width: 100%; height: 38px;">Firmar</button>
                           </div>
                         </div>
 
@@ -295,7 +295,7 @@ include('modal/image.php')
                             <input type="text" class="form-control" id="despacho2" readonly>
                           </div>
                           <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                            <button type="button" class="btn waves-effect waves-light btn-danger despacho2" id="despacho2" onclick="autenticacion(this);" style="width: 100%; height: 38px;">Firmar</button>
+                            <button type="button" class="btn waves-effect waves-light btn-danger despacho2" id="despacho2" onclick="cargar(this, 'firma1')" style="width: 100%; height: 38px;">Firmar</button>
                           </div>
                         </div>
                       </div>
@@ -371,7 +371,7 @@ include('modal/image.php')
                             <input type="text" class="form-control" id="despacho3" readonly>
                           </div>
                           <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                            <button type="button" class="btn waves-effect waves-light btn-danger despacho3" id="despacho3" onclick="autenticacion(this);" style="width: 100%; height: 38px;">Firmar</button>
+                            <button type="button" class="btn waves-effect waves-light btn-danger despacho3" id="despacho3" onclick="cargar(this, 'firma1')" style="width: 100%; height: 38px;">Firmar</button>
                           </div>
                         </div>
                       </div>
@@ -402,6 +402,7 @@ include('modal/image.php')
           <script src="../../html/vendor/jquery-confirm/jquery-confirm.min.js"></script>
           <script src="../../html/js/global/loadinfo-global.js"></script>
           <script src="../../html/js/despachos/despachosinfo.js"></script>
+          <script src="../../html/js/firmar/firmar1raSeccion.js"></script>
           <script src="../../html/js/despachos/cargarBatch_despachos.js"></script>
           <script src="../../html/js/global/tanques.js"></script>
           <script src="../../html/js/global/image.js"></script>

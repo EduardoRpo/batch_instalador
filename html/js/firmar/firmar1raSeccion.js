@@ -39,12 +39,14 @@ function enviar() {
   return false;
 }
 
-/* Si el usuario existe, ejecuta la opcion de acuerdo con el boton oprimido */
+/* Si el usuario existe, ejecuta la opcion de acuerdo con el boton seleccionado */
 
 function preparar(datos) {
   info = JSON.parse(datos);
   if (btn_id == "firma1") {
-    if (modulo === 8) {
+    if (modulo === 7) {
+      guardar_despacho(info);
+    } else if (modulo === 8) {
       guardar_microbiologia(info);
     } else if (modulo === 9) {
       firmar2daSeccion(info);
