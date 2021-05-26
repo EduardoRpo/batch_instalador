@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>pfd | Batch Record</title>
+    <title>pdf | Batch Record</title>
 
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/icon/favicon.png">
@@ -27,17 +27,17 @@
         <span><b>Codigo:</b> F-Pr-13 <b>Versión:</b>10 <b>Fecha:</b>26/04/2021</span>
     </div>
 
-    <div>
+    <!-- <div>
         <a href='#'> <i class='fa fa-print fa-2x link-imprimir flotante' data-toggle='tooltip' title='Imprimir Batch Record' style='color:green;'></i></a>
         <a href='#'> <i class='fa fa-times-circle fa-2x link-cerrar flotante position' data-toggle='tooltip' title='Cerrar ventana' style='color:red;'></i></a>
-    </div>
+    </div> -->
 
 
     <div class="card">
         <div class="card-header centrado"><b>1. INFORMACIÓN DEL PRODUCTO</b></div>
         <div class="card-body">
             <div class="group-info-ref p-3">
-                <label>Referencia:</label><label class="bold" id="ref"></label>
+                <label>Referencia:</label><label class="bold ref"></label>
                 <label>Nombre Referencia:</label><label id="nref"></label>
                 <label>Marca:</label><label id="marca"></label>
                 <label>Propietario:</label><label id="propietario"></label>
@@ -47,11 +47,9 @@
             <hr style="width: 95%;">
             <div class="group-info-batch p-3">
 
-                <label>Orden de Producción:</label><label id="orden"></label>
-                <label>Lote:</label><label id="lote"></label>
+                <label>Orden de Producción:</label><label class="orden" id="orden"></label>
+                <label>Lote:</label><label class="lote" id="lote"></label>
                 <label>Fecha:</label><label class="fecha"></label>
-                <!-- <label for="">Tamaño del producto</label>
-                <input type="text" class="form-control centrado" id="tamanop"> -->
                 <label>Tamaño del Lote por presentación (kg):</label><label id="tamanol"></label>
                 <label>Tamaño del lote total (kg):</label><label id="tamanolt"></label>
                 <label>Unidades por Lote solicitadas:</label><label id="unidadesLote"></label>
@@ -998,12 +996,12 @@
                         </div>
                     </div>
                     <div class="p-3 proceso">
-                        <label for="">Producto</label><input type="text" class="form-control">
-                        <label for="">Lote</label><input type="text" class="form-control">
-                        <label for="">Fecha</label><input type="text" class="form-control">
-                        <label for="">Orden</label><input type="text" class="form-control">
-                        <label for="">Responsable</label><input type="text" class="form-control">
-                        <label for="">Aprobado por</label><input type="text" class="form-control">
+                        <label for="">Producto</label><label for="" class="ref" style="font-weight: bold;"></label>
+                        <label for="">Lote</label><label for="" class="lote"></label>
+                        <label for="">Fecha</label><label for="" class="fecha"></label>
+                        <label for="">Orden</label><label for="" class="orden"></label>
+                        <label for="">Responsable</label><label for="" class=""></label>
+                        <label for="">Aprobado por</label><label for="" class=""></label>
                     </div>
 
                     <div class="subtitle"><label for="">Entrega Material Envase</label></div>
@@ -1108,6 +1106,9 @@
 
                         <!-- <label id="user_verifico6"></label> -->
                     </div>
+                    <!-- fin acondicionamiento -->
+                    <!-- inicio despachos -->
+                    <div class="subtitleProcess"><label for=""> <b>DESPACHOS</b></label></div>
                     <div class="subtitle"><label>Almacen Despachos</label></div>
                     <div class="alertas" id="alert_pesaje">
                         <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
@@ -1116,9 +1117,25 @@
                             </ul>
                         </div>
                     </div>
+                    <div class="despachos">
+                        <label for="">Entregó:</label><label for=""><b>JEFE DE PRODUCCIÓN</b></label>
+                        <label for="">Recibió:</label><label for=""><b>AUX ALMACEN PRODUCTO TERMINADO</b></label>
+                    </div>
+                    <div class="firmas" id="firmas6">
+                        <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
+                        <label id="fecha6" style="font-weight:bold; justify-self: baseline"></label>
+
+                        <!-- <div id="blank_rea6"></div> -->
+                        <label id="user_realizo6"></label>
+                        <img id="f_realizo6" src="" alt="firma_usuario" height="130">
+                        <!--  <div id="blank_ver6"></div>
+                        <img id="f_verifico6" src="" alt="firma_usuario" height="130"> -->
+
+                        <!-- <label id="user_verifico6"></label> -->
+                    </div>
                 </div>
             </div>
-            <!-- fin acondicionamiento -->
+            <!-- fin despachos -->
 
 
 

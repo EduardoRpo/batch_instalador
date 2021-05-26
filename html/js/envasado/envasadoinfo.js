@@ -112,7 +112,7 @@ $(document).ready(function () {
     identificarDensidad(batch);
     deshabilitarbotones();
     /* } */
-  }, 650);
+  }, 750);
 });
 
 /* deshabilitar botones */

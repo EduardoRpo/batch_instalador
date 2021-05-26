@@ -61,14 +61,14 @@ info_General = () => {
       presentacion = info.presentacion;
       densidad = info.densidad;
       tamanioLote = info.tamano_lote;
-      $("#ref").html(info.referencia);
+      $(".ref").html(info.referencia);
       $("#nref").html("<b>" + info.nombre_referencia + "</b>");
       $("#marca").html("<b>" + info.marca + "</b>");
       $("#propietario").html("<b>" + info.propietario + "</b>");
       $("#notificacion").html("<b>" + info.notificacion + "</b>");
       $("#presentacion").html("<b>" + info.presentacion + "</b>");
-      $("#orden").html("<b>" + info.numero_orden + "</b>");
-      $("#lote").html("<b>" + info.numero_lote + "</b>");
+      $(".orden").html("<b>" + info.numero_orden + "</b>");
+      $(".lote").html("<b>" + info.numero_lote + "</b>");
       $(".fecha").html("<b>" + info.fecha_creacion + "</b>");
       $("#tamanolt").html("<b>" + info.tamano_lote + "</b>");
       $("#tamanol").html("<b>" + info.tamano_lote + "</b>");
@@ -192,26 +192,12 @@ desinfectante = () => {
           );
         }
       }
+
+      let fecha = $("#fecha2").html();
+      $(".fecha2").html(fecha);
     }
   );
 };
-
-var d = new Date();
-
-var month = d.getMonth() + 1;
-var day = d.getDate();
-
-var output =
-  d.getFullYear() +
-  "/" +
-  (("" + month).length < 2 ? "0" : "") +
-  month +
-  "/" +
-  (("" + day).length < 2 ? "0" : "") +
-  day;
-
-// No carga la fecha
-$(".fecha2").html(output);
 
 function condiciones_medio() {
   let data = { operacion: 6, idBatch };
@@ -276,12 +262,20 @@ function especificaciones_producto() {
     $(".espec_color").html(data.color);
     $(".espec_olor").html(data.olor);
     $(".espec_apariencia").html(data.apariencia);
-    $(".espec_ph").html(`${data.limite_inferior_ph} a ${data.limite_superior_ph}`);
-    $(".espec_viscosidad").html(`${data.limite_inferior_viscosidad} a ${data.limite_superior_viscosidad}`);
-    $(".espec_densidad").html(`${data.limite_inferior_densidad_gravedad} a ${data.limite_superior_densidad_gravedad}`);
+    $(".espec_ph").html(
+      `${data.limite_inferior_ph} a ${data.limite_superior_ph}`
+    );
+    $(".espec_viscosidad").html(
+      `${data.limite_inferior_viscosidad} a ${data.limite_superior_viscosidad}`
+    );
+    $(".espec_densidad").html(
+      `${data.limite_inferior_densidad_gravedad} a ${data.limite_superior_densidad_gravedad}`
+    );
     $(".espec_untuosidad").html(data.untuosidad);
     $(".espec_poder_espumoso").html(data.poder_espumoso);
-    $(".espec_grado_alcohol").html(`${data.limite_inferior_grado_alcohol} a ${data.limite_superior_grado_alcohol}`);
+    $(".espec_grado_alcohol").html(
+      `${data.limite_inferior_grado_alcohol} a ${data.limite_superior_grado_alcohol}`
+    );
 
     $("#in_ph").attr("min", data.limite_inferior_ph);
     $("#in_ph").attr("max", data.limite_superior_ph);
