@@ -1,5 +1,22 @@
 modulo = 9;
 
+$("#observacionesLote").slideUp();
+
+$(document).ready(function () {
+  $(".metodo").html("Siembra Total");
+  $(`.microbiologia_verificado`).prop("disabled", true);
+
+  $("#btnRechazado").change(function (e) {
+    e.preventDefault();
+    $("#observacionesLote").slideDown();
+  });
+
+  $("#btnAceptado").change(function (e) {
+    e.preventDefault();
+    $("#observacionesLote").slideUp();
+  });
+});
+
 /* Validar qque todos los campos este llenos */
 
 cargar = (btn, idbtn) => {
@@ -30,9 +47,12 @@ cargar = (btn, idbtn) => {
   validar = cargarResultadosEspecificaciones();
   if (validar == 0) return false;
 
-  $("#usuario").val("");
-  $("#clave").val("");
-  $("#m_firmar").modal("show");
+  let continuar = validarSeleccion();
+  if (continuar != 0) {
+    $("#usuario").val("");
+    $("#clave").val("");
+    $("#m_firmar").modal("show");
+  }
 };
 
 deshabilitarbtn = () => {

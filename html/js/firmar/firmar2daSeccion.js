@@ -26,7 +26,7 @@ function firmar2daSeccion(firma) {
     };
   }
 
-  if (modulo == 4 || modulo == 9) {
+  if (modulo == 4) {
     let desinfectante = $("#sel_producto_desinfeccion").val();
     desinfectante === undefined ? (desinfectante = "") : desinfectante;
     data = {
@@ -36,6 +36,20 @@ function firmar2daSeccion(firma) {
       modulo,
       idBatch,
       desinfectante,
+      firma: firma[0].id,
+      controlProducto,
+    };
+  }
+
+  if (modulo == 9) {
+    let observaciones = $("#observacionesLoteRechazado").val();
+    data = {
+      operacion: 1,
+      tanques,
+      tanquesOk,
+      modulo,
+      idBatch,
+      observaciones,
       firma: firma[0].id,
       controlProducto,
     };
