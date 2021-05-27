@@ -277,6 +277,8 @@ include('modal/modal_condicionesMedio.php');
                               </td>
                             </tr>
                         </table>
+                        <label for="" class="mt-3"><b>Observaciones</b></label>
+                        <input type="text" class="form-control" id="observacionesAprobacion">
                       </div>
                     </div>
                   </div>

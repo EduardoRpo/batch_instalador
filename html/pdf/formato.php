@@ -645,10 +645,14 @@
                     <div class="alertas" id="alert_pesaje">
                         <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
                             <label id="title14"></label>
+                            <ul id="observacionesAprobacion">Hola</ul>
                             <ul id="vinetas14">
                             </ul>
+                            
                         </div>
                     </div>
+                    
+
                     <div class="subtitle"><label for="">Ajustes</label></div>
                     <div class="ajustes">
                         <div class="resp">

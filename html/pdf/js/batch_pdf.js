@@ -77,6 +77,7 @@ info_General = () => {
       $(".fecha").html("<b>" + info.fecha_creacion + "</b>");
       lote_anterior();
       desinfectante();
+      observacionesAprobacion();
     }
   );
 };
@@ -194,6 +195,7 @@ desinfectante = () => {
       }
 
       let fecha = $("#fecha2").html();
+      fecha = fecha.substr(0, 10);
       $(".fecha2").html(fecha);
     }
   );
@@ -582,6 +584,18 @@ conciliacion = () => {
       rendimiento = ((rendimiento / tamanioLote) * 100).toFixed(2) + "%";
       $(`#conciliacionRendimiento1`).val(rendimiento);
       $(`#f_realizo20`).prop("src", info[0].urlfirma);
+    },
+  });
+};
+
+observacionesAprobacion = () => {
+  $.ajax({
+    type: "POST",
+    url: "../../html/php/c_batch_pdf.php",
+    data: { operacion: 12, idBatch },
+    success: function (response) {
+      data = JSON.parse(response);
+      $("#observacionesAprobacion").html(data[0].observaciones);
     },
   });
 };

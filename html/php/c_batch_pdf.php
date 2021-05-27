@@ -66,10 +66,7 @@ if (!empty($_POST)) {
 
             $query = $conn->prepare($sql);
             $query->execute(['batch' => $batch, 'batch1' => $batch]);
-
             $data = $query->fetchAll(PDO::FETCH_ASSOC);
-            //$arreglo[] = $data;
-
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
 
             break;
@@ -141,7 +138,13 @@ if (!empty($_POST)) {
 
             break;
 
-        default:
+        case 12: // Observaciones aprobacion por validar
+            $batch = $_POST['idBatch'];
+            $sql = "SELECT * FROM observaciones WHERE id_batch = :batch";
+            $query = $conn->prepare($sql);
+            $query->execute(['batch' => $batch]);
+            $data = $query->fetchAll(PDO::FETCH_ASSOC);
+            echo json_encode($data, JSON_UNESCAPED_UNICODE);
 
             break;
     }
