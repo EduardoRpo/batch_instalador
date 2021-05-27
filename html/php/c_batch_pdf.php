@@ -138,9 +138,18 @@ if (!empty($_POST)) {
 
             break;
 
-        case 12: // Observaciones aprobacion por validar
+        case 12: // Observaciones aprobacion
             $batch = $_POST['idBatch'];
             $sql = "SELECT * FROM observaciones WHERE id_batch = :batch";
+            $query = $conn->prepare($sql);
+            $query->execute(['batch' => $batch]);
+            $data = $query->fetchAll(PDO::FETCH_ASSOC);
+            echo json_encode($data, JSON_UNESCAPED_UNICODE);
+
+            break;
+        case 13: // Firma despachos
+            $batch = $_POST['idBatch'];
+            $sql = "SELECT * FROM batch_conciliacion_rendimiento WHERE batch = :batch";
             $query = $conn->prepare($sql);
             $query->execute(['batch' => $batch]);
             $data = $query->fetchAll(PDO::FETCH_ASSOC);

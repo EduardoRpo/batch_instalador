@@ -201,6 +201,23 @@ desinfectante = () => {
   );
 };
 
+despachos = () => {
+  $.ajax({
+    type: "POST",
+    url: "../../html/php/c_batch_pdf.php",
+    data: { operacion: 13, idBatch },
+    success: function (response) {
+      info = JSON.parse(response);
+      for(let i=0;i<info.length;i++){
+        $(`#f_verifico7`).prop("src", info[i].entrego);
+        $(`#user_verifico7`).html(
+          "Verificó: " + "<b>" + info[i].nombre_verifico + "</b>"
+        );
+      } 
+    },
+  });
+};
+
 function condiciones_medio() {
   let data = { operacion: 6, idBatch };
   $.post(
@@ -620,6 +637,7 @@ $(document).ready(function () {
   equipos();
   ajustes();
   muestras_acondicionamiento();
+  despachos();
 
   setTimeout(() => {
     entrega_material_acondicionamiento();

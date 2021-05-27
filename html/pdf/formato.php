@@ -1130,8 +1130,8 @@
                         <label id="fecha6" style="font-weight:bold; justify-self: baseline"></label>
 
                         <!-- <div id="blank_rea6"></div> -->
-                        <label id="user_realizo6"></label>
-                        <img id="f_realizo6" src="" alt="firma_usuario" height="130">
+                        <label id="user_realizo7"></label>
+                        <img id="f_realizo7" src="" alt="firma_usuario" height="130">
                         <!--  <div id="blank_ver6"></div>
                         <img id="f_verifico6" src="" alt="firma_usuario" height="130"> -->
 
