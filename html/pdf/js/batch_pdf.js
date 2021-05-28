@@ -208,12 +208,12 @@ despachos = () => {
     data: { operacion: 13, idBatch },
     success: function (response) {
       info = JSON.parse(response);
-      for(let i=0;i<info.length;i++){
-        $(`#f_verifico7`).prop("src", info[i].entrego);
-        $(`#user_verifico7`).html(
-          "Verificó: " + "<b>" + info[i].nombre_verifico + "</b>"
+      for (let i = 0; i < info.length; i++) {
+        $(`#user_realizo7`).html(
+          "Realizó: " + "<b>" + info[i].nombre + " " + info[i].apellido + "</b>"
         );
-      } 
+        $(`#f_realizo7`).prop("src", info[i].urlfirma);
+      }
     },
   });
 };
@@ -266,6 +266,18 @@ function equipos() {
       }
       if (data[i].tipo === "tunel") {
         $("#tunel").val(data[i].descripcion);
+        continue;
+      }
+      if (data[i].tipo === "incubadora") {
+        $("#incubadora").val(data[i].descripcion);
+        continue;
+      }
+      if (data[i].tipo === "autoclave") {
+        $("#autoclave").val(data[i].descripcion);
+        continue;
+      }
+      if (data[i].tipo === "cabina") {
+        $("#cabina").val(data[i].descripcion);
         continue;
       }
     }
@@ -611,6 +623,7 @@ observacionesAprobacion = () => {
     url: "../../html/php/c_batch_pdf.php",
     data: { operacion: 12, idBatch },
     success: function (response) {
+      if (response == "[]") return false;
       data = JSON.parse(response);
       $("#observacionesAprobacion").html(data[0].observaciones);
     },

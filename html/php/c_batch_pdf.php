@@ -142,14 +142,15 @@ if (!empty($_POST)) {
             $batch = $_POST['idBatch'];
             $sql = "SELECT * FROM observaciones WHERE id_batch = :batch";
             $query = $conn->prepare($sql);
-            $query->execute(['batch' => $batch]);
-            $data = $query->fetchAll(PDO::FETCH_ASSOC);
+            $result = $query->execute(['batch' => $batch]);
+            if ($result) $data = $query->fetchAll(PDO::FETCH_ASSOC);
+            else echo 'false';
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
 
             break;
         case 13: // Firma despachos
             $batch = $_POST['idBatch'];
-            $sql = "SELECT * FROM batch_conciliacion_rendimiento WHERE batch = :batch";
+            $sql = "SELECT * FROM batch_conciliacion_rendimiento bcr INNER JOIN usuario ON bcr.entrego = usuario.id WHERE batch = :batch";
             $query = $conn->prepare($sql);
             $query->execute(['batch' => $batch]);
             $data = $query->fetchAll(PDO::FETCH_ASSOC);

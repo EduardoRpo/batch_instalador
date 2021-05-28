@@ -27,10 +27,10 @@
         <span><b>Codigo:</b> F-Pr-13 <b>Versión:</b>10 <b>Fecha:</b>26/04/2021</span>
     </div>
 
-    <!-- <div>
+    <div class="noImprimir">
         <a href='#'> <i class='fa fa-print fa-2x link-imprimir flotante' data-toggle='tooltip' title='Imprimir Batch Record' style='color:green;'></i></a>
         <a href='#'> <i class='fa fa-times-circle fa-2x link-cerrar flotante position' data-toggle='tooltip' title='Cerrar ventana' style='color:red;'></i></a>
-    </div> -->
+    </div>
 
 
     <div class="card">
@@ -64,6 +64,8 @@
     </div>
     </div>
     <!-- pesaje -->
+    <h1 class="SaltoDePagina"> </h1>
+
     <div class="subtitleProcess"><label for=""> <b>PESAJE</b></label></div>
 
     <div class="card mt-3">
@@ -85,6 +87,7 @@
             </div>
         </div>
     </div>
+
     <div class="card mt-3">
         <div class="card-header centrado"><b>3. PESAJE Y DISPENSACIÓN</b></div>
         <div class="card-body">
@@ -221,6 +224,7 @@
             <!-- fin pesaje -->
 
             <!-- Preparacion -->
+            <h1 class="SaltoDePagina"> </h1>
             <div class="subtitleProcess"><label for=""> <b>PREPARACIÓN</b></label></div>
 
             <div class="card mt-3">
@@ -508,6 +512,7 @@
             <!-- fin preparación -->
 
             <!-- Aprobación -->
+            <h1 class="SaltoDePagina"> </h1>
             <div class="subtitleProcess"><label for=""> <b>APROBACIÓN</b></label></div>
 
             <div class="card mt-3">
@@ -648,10 +653,10 @@
                             <ul id="observacionesAprobacion">Hola</ul>
                             <ul id="vinetas14">
                             </ul>
-                            
+
                         </div>
                     </div>
-                    
+
 
                     <div class="subtitle"><label for="">Ajustes</label></div>
                     <div class="ajustes">
@@ -687,6 +692,7 @@
             <!-- fin aprobación -->
 
             <!-- Envasado -->
+            <h1 class="SaltoDePagina"> </h1>
             <div class="subtitleProcess"><label for=""> <b>ENVASADO</b></label></div>
 
             <div class="card mt-3">
@@ -738,7 +744,7 @@
                         </table>
                     </div>
 
-                    <div class="subtitle"><label for="">6.2 Entrega Material Envase</label></div>
+                    <div class="subtitle"><label for="">6.2 Entrega Material de Empaque</label></div>
                     <div class="alertas" id="alert_pesaje">
                         <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
                             <label class="" id="title16"></label>
@@ -835,7 +841,7 @@
                         </div>
                     </div>
 
-                    <div class="subtitle"><label for="">Devolución Material de Envase Sobrante</label></div>
+                    <div class="subtitle"><label for="">Devolución Material de Empaque Sobrante</label></div>
                     <div class="alertas" id="alert_pesaje"></div>
                     <div class="table-responsive p-3">
                         <table class="table table-bordered table-striped" id="devolucionMaterialSobrante1">
@@ -895,6 +901,7 @@
             <!-- fin envasado -->
 
             <!-- Acondicionamiento -->
+            <h1 class="SaltoDePagina"> </h1>
             <div class="subtitleProcess"><label for=""> <b>ACONDICIONAMIENTO</b></label></div>
 
             <div class="card mt-3">
@@ -1004,11 +1011,23 @@
                         <label for="">Lote</label><label for="" class="lote"></label>
                         <label for="">Fecha</label><label for="" class="fecha"></label>
                         <label for="">Orden</label><label for="" class="orden"></label>
-                        <label for="">Responsable</label><label for="" class=""></label>
-                        <label for="">Aprobado por</label><label for="" class=""></label>
                     </div>
 
-                    <div class="subtitle"><label for="">Entrega Material Envase</label></div>
+                    <div class="enlinea mt-3">
+                        <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
+                        <label id="fecha5" style="font-weight:bold; justify-self: baseline">22/05/2020</label>
+                    </div>
+
+                    <div class="firmas" id="firmas5">
+                        <img id="f_realizo5" src="" alt="firma_usuario" height="130">
+                        <img id="f_verifico5" src="" alt="firma_usuario" height="130">
+                        <label id="user_realizo5">Sergio</label>
+                        <label id="user_verifico5">Sergio</label>
+                    </div>
+
+
+
+                    <div class="subtitle"><label for="">Entrega Insumos Acondicionamiento</label></div>
 
                     <div class="table-responsive p-3">
                         <table class="table table-bordered table-striped">
@@ -1037,7 +1056,7 @@
                         </table>
                     </div>
 
-                    <div class="subtitle"><label for="">Control de peso en el Proceso</label></div>
+                    <div class="subtitle"><label for="">Control de Proceso</label></div>
 
                     <div class="p-3">
                         <table class="table table-bordered table-striped" id="muestrasAcondicionamiento1">
@@ -1045,9 +1064,9 @@
                                 <tr>
                                     <th colspan="1" class="centrado">Muestra</th>
                                     <th colspan="1" class="centrado">APARIENCIA ETIQUETA (Arrugas, quiebres, sucios, alineada,dherencia)</th>
-                                    <th colspan="1" class="centrado">APARIENCIA LOTE/ TERMOENCOGIBLE</th>
-                                    <th colspan="1" class="centrado">CUMPLIMIENTO CON LA UNIDAD DE EMPAQUE</th>
-                                    <th colspan="1" class="centrado">POSICIÓN DEL PRODUCTO DENTRO DE LA CAJA</th>
+                                    <th colspan="1" class="centrado">APARIENCIA TERMOENCOGIBLE</th>
+                                    <th colspan="1" class="centrado">APARIENCIA LOTE</th>
+                                    <th colspan="1" class="centrado">CUMPLIMIENTO UNIDAD DE EMPAQUE Y POSICIÓN DENTRO DE LA CAJA</th>
                                     <th colspan="1" class="centrado">RÓTULO DE LA CAJA</th>
                                 </tr>
                             </thead>
@@ -1057,7 +1076,7 @@
                         </table>
                     </div>
 
-                    <div class="subtitle"><label for="">Devolución Material de Envase</label></div>
+                    <div class="subtitle"><label for="">Devolución Insumos de Acondicionamiento</label></div>
                     <div class="table-responsive p-3">
                         <table class="table table-bordered table-striped">
                             <thead class="head centrado">
@@ -1098,20 +1117,20 @@
                         <label style="justify-self: end;">Conciliacion rendimiento</label>
                         <input type="text" class="form-control centrado" id="conciliacionRendimiento1" style="width: 30%;justify-self: baseline" readonly>
                     </div>
-                    <div class="firmas" id="firmas6">
+
+                    <div class="enlinea mt-3">
                         <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
                         <label id="fecha6" style="font-weight:bold; justify-self: baseline"></label>
+                    </div>
 
-                        <!-- <div id="blank_rea6"></div> -->
-                        <label id="user_realizo6"></label>
+                    <div class="col1" id="firmas6">
                         <img id="f_realizo6" src="" alt="firma_usuario" height="130">
-                        <!--  <div id="blank_ver6"></div>
-                        <img id="f_verifico6" src="" alt="firma_usuario" height="130"> -->
-
-                        <!-- <label id="user_verifico6"></label> -->
+                        <label id="user_realizo6"></label>
                     </div>
                     <!-- fin acondicionamiento -->
+
                     <!-- inicio despachos -->
+                    <h1 class="SaltoDePagina"> </h1>
                     <div class="subtitleProcess"><label for=""> <b>DESPACHOS</b></label></div>
                     <div class="subtitle"><label>Almacen Despachos</label></div>
                     <div class="alertas" id="alert_pesaje">
@@ -1125,21 +1144,367 @@
                         <label for="">Entregó:</label><label for=""><b>JEFE DE PRODUCCIÓN</b></label>
                         <label for="">Recibió:</label><label for=""><b>AUX ALMACEN PRODUCTO TERMINADO</b></label>
                     </div>
-                    <div class="firmas" id="firmas6">
+
+                    <div class="enlinea">
                         <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
-                        <label id="fecha6" style="font-weight:bold; justify-self: baseline"></label>
+                        <label id="fecha7" style="font-weight:bold; justify-self: baseline"></label>
+                    </div>
 
-                        <!-- <div id="blank_rea6"></div> -->
-                        <label id="user_realizo7"></label>
+                    <div class="col1 mt-5" id="firmas7">
                         <img id="f_realizo7" src="" alt="firma_usuario" height="130">
-                        <!--  <div id="blank_ver6"></div>
-                        <img id="f_verifico6" src="" alt="firma_usuario" height="130"> -->
-
-                        <!-- <label id="user_verifico6"></label> -->
+                        <label id="user_realizo7"></label>
                     </div>
                 </div>
             </div>
             <!-- fin despachos -->
+            <!-- Inicio Microbiologia -->
+            <h1 class="SaltoDePagina"> </h1>
+
+            <div class="subtitleProcess"><label for=""> <b>MICROBIOLOGIA</b></label></div>
+            <div class="subtitle"><label for="">Toma de muestras para análisis</label></div>
+            <div class="alertas" id="alert_pesaje">
+                <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
+                    <label class="" id="title21"></label>
+                    <ul class="" id="vinetas21">
+                    </ul>
+                </div>
+            </div>
+            <div class="subtitle"><label>Limpieza y Desinfección</label></div>
+            <div class="alertas" id="alert_pesaje">
+                <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
+                    <label class="" id="title22"></label>
+                    <ul class="" id="vinetas22">
+                    </ul>
+                </div>
+            </div>
+            <div class="table-responsive p-3">
+                <table class="table table-bordered table-striped" id="area_desinfeccion3">
+                    <thead class="head">
+                        <tr>
+                            <td>Área/Equipo</td>
+                            <td>Desinfectante</td>
+                            <td>%</td>
+                            <td>Número de Lote</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="subtitle"><label>Equipos</label></div>
+            <div class="col2">
+                <label for="">Identificación Incubadora</label>
+                <input type="text" class="form-control" id="incubadora">
+                <label for="">Identificación del Autoclave</label>
+                <input type="text" class="form-control" id="autoclave">
+                <label for="">Identificación de la cabina de Flujo de Laminar</label>
+                <input type="text" class="form-control" id="cabina">
+            </div>
+            <div class="subtitle">
+                <label for="">3.3 Condiciones del Medio</label>
+            </div>
+            <div class="table-responsive p-3">
+                <table class="table table-striped table-bordered">
+                    <thead class="head">
+                        <tr>
+                            <th rowspan="2" class="centrado" style="vertical-align: middle;">Fecha y Hora</th>
+                            <th colspan="2" class="centrado">Temperatura</th>
+                            <th colspan="2" class="centrado">Humedad</th>
+                        </tr>
+                        <tr>
+                            <th class="centrado">Especificaciones</th>
+                            <th class="centrado">lectura</th>
+                            <th class="centrado">Especificaciones</th>
+                            <th class="centrado">lectura</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <td class="centrado bold" id="fecha_medio2"></td>
+                        <td class="centrado">18 - 25 °C</td>
+                        <td class="centrado bold" id="temperatura2"></td>
+                        <td class="centrado">30 - 75 %</td>
+                        <td class="centrado bold" id="humedad2"></td>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="subtitle"><label for="">Análisis Microbiologico</label></div>
+
+            <div class="table-responsive p-3">
+                <table class="table table-striped table-bordered">
+                    <thead class="head">
+                        <tr>
+                            <th class="centrado" style="vertical-align: middle;">Análisis</th>
+                            <th class="centrado">Especificaciones</th>
+                            <th class="centrado">Método</th>
+                            <th class="centrado">Resultado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="centrado">Recuento de Mesófilos Aerobios Totales</td>
+                            <td class="centrado bold" id="espec1"></td>
+                            <td class="centrado"></td>
+                            <td class="centrado bold" id="result1"></td>
+                        </tr>
+                        <tr>
+                            <td class="centrado">Pseudomona Aeruginosa</td>
+                            <td class="centrado bold" id="espec2"></td>
+                            <td class="centrado"></td>
+                            <td class="centrado bold" id="result2"></td>
+                        </tr>
+                        <tr>
+                            <td class="centrado">Escherichia Coli y Coliformes Totales</td>
+                            <td class="centrado bold" id="espec3"></td>
+                            <td class="centrado"></td>
+                            <td class="centrado bold" id="result3"></td>
+                        </tr>
+                        <tr>
+                            <td class="centrado">Staphylococcus Aureus</td>
+                            <td class="centrado bold" id="espec4"></td>
+                            <td class="centrado"></td>
+                            <td class="centrado bold" id="result4"></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col4">
+                <label for="">Fecha Siembra</label>
+                <input type="text" class="form-control">
+                <label for="">Fecha Resultados</label>
+                <input type="text" class="form-control">
+            </div>
+
+            <div class="marco m-5">
+                <div class="col2sm m-3">
+                    <label for="">Aprobado</label>
+                    <label for="">Rechazado</label>
+                    <input type="checkbox" name="" id="">
+                    <input type="checkbox" name="" id="">
+                </div>
+            </div>
+
+            <div class="enlinea">
+                <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
+                <label id="fecha5" style="font-weight:bold; justify-self: baseline">22/05/2020</label>
+            </div>
+
+            <div class="firmas" id="firmas5">
+                <img id="f_realizo5" src="" alt="firma_usuario" height="130">
+                <img id="f_verifico5" src="" alt="firma_usuario" height="130">
+                <label id="user_realizo5">Sergio</label>
+                <label id="user_verifico5">Sergio</label>
+            </div>
+
+            <!-- Fin Microbiologia -->
+
+            <!-- Inicio Fisicoquimico -->
+            <h1 class="SaltoDePagina"> </h1>
+
+            <div class="subtitleProcess"><label for=""> <b>FISICOQUIMICO</b></label></div>
+            <div class="subtitle"><label for="">Toma de Muestra</label></div>
+            <div class="alertas" id="alert_pesaje">
+                <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
+                    <label class="" id="title23"></label>
+                    <ul class="" id="vinetas23"></ul>
+                </div>
+            </div>
+            <div class="subtitle"><label for="">Limpieza y Desinfección</label></div>
+            <div class="alertas" id="alert_pesaje">
+                <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
+                    <label class="" id="title24"></label>
+                    <ul class="" id="vinetas24"></ul>
+                </div>
+            </div>
+            <div class="table-responsive p-3">
+                <table class="table table-bordered table-striped" id="area_desinfeccion3">
+                    <thead class="head">
+                        <tr>
+                            <td>Área/Equipo</td>
+                            <td>Desinfectante</td>
+                            <td>%</td>
+                            <td>Número de Lote</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="subtitle">
+                <label for="">3.3 Condiciones del Medio</label>
+            </div>
+            <div class="table-responsive p-3">
+                <table class="table table-striped table-bordered">
+                    <thead class="head">
+                        <tr>
+                            <th rowspan="2" class="centrado" style="vertical-align: middle;">Fecha y Hora</th>
+                            <th colspan="2" class="centrado">Temperatura</th>
+                            <th colspan="2" class="centrado">Humedad</th>
+                        </tr>
+                        <tr>
+                            <th class="centrado">Especificaciones</th>
+                            <th class="centrado">lectura</th>
+                            <th class="centrado">Especificaciones</th>
+                            <th class="centrado">lectura</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <td class="centrado bold" id="fecha_medio2"></td>
+                        <td class="centrado">18 - 25 °C</td>
+                        <td class="centrado bold" id="temperatura2"></td>
+                        <td class="centrado">30 - 75 %</td>
+                        <td class="centrado bold" id="humedad2"></td>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="subtitle"><label for="">Análisis Fisicoquimico</label></div>
+
+            <div class="p-3">
+                <table class="table table-bordered table-striped">
+                    <thead class="head">
+                        <tr>
+                            <td class="centrado">Parametros</td>
+                            <td class="centrado">Especificacion</td>
+                            <td class="centrado">Resultado</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="centrado">Color</td>
+                            <td class="centrado espec_color"></td>
+                            <td class="centrado color4"></td>
+                        </tr>
+                        <tr>
+                            <td class="centrado">Olor</td>
+                            <td class="centrado espec_olor"></td>
+                            <td class="centrado olor4"></td>
+
+                        </tr>
+                        <tr>
+                            <td class="centrado">Apariencia</td>
+                            <td class="centrado espec_apariencia"></td>
+                            <td class="centrado apariencia4"></td>
+
+                        </tr>
+                        <tr>
+                            <td class="centrado">PH</td>
+                            <td class="centrado espec_ph"></td>
+                            <td class="centrado ph4"></td>
+
+                        </tr>
+                        <tr>
+                            <td class="centrado">Viscosidad (cps)</td>
+                            <td class="centrado espec_viscosidad"></td>
+                            <td class="centrado viscosidad4"></td>
+
+                        </tr>
+                        <tr>
+                            <td class="centrado">Densidad o gravedad específica (g/ml)</td>
+                            <td class="centrado espec_densidad"></td>
+                            <td class="centrado densidad4"></td>
+                        </tr>
+                        <tr>
+                            <td class="centrado">Untuosidad</td>
+                            <td class="centrado espec_untuosidad"></td>
+                            <td class="centrado untuosidad4"></td>
+                        </tr>
+                        <tr>
+                            <td class="centrado">Poder Espumoso</td>
+                            <td class="centrado espec_poder_espumoso"></td>
+                            <td class="centrado espumoso4"></td>
+                        </tr>
+                        <tr>
+                            <td class="centrado">Grado de Alcohol</td>
+                            <td class="centrado espec_grado_alcohol"></td>
+                            <td class="centrado alcohol4"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="subtitle"><label for="">Ajustes</label></div>
+            <div class="ajustes">
+                <div class="resp">
+                    <label for="">Si</label>
+                    <input type="text" class="form-control centrado" id="Si3">
+                    <label for="">No</label>
+                    <input type="text" class="form-control centrado" id="No3">
+                </div>
+                <div class="obs mb-5">
+                    <label for="">Materia(s) primas para adicionar </label>
+                    <input type="textarea" class="form-control" id="materiaPrimaAjustes3">
+                    <label for="">Procedimiento de Ajuste</label>
+                    <input type="textarea" class="form-control" id="procedimientoAjustes3">
+                </div>
+            </div>
+
+            <div class="subtitle">Resultado</div>
+
+            <div class="marco m-5">
+                <div class="col2sm m-3">
+                    <label for="">Aprobado</label>
+                    <label for="">Rechazado</label>
+                    <input type="checkbox" name="" id="">
+                    <input type="checkbox" name="" id="">
+                </div>
+            </div>
+
+            <div class="enlinea">
+                <label class="mr-3 fechaHora" style="justify-self: end;">Fecha y hora</label>
+                <label id="fecha5" style="font-weight:bold; justify-self: baseline"></label>
+            </div>
+
+            <div class="firmas" id="firmas5">
+                <img id="f_realizo5" src="" alt="firma_usuario" height="130">
+                <img id="f_verifico5" src="" alt="firma_usuario" height="130">
+                <label id="user_realizo5">Sergio</label>
+                <label id="user_verifico5">Sergio</label>
+            </div>
+
+            <!-- Fin Fisicoquimico -->
+
+            <!-- inicio liberacion Lote -->
+            <h1 class="SaltoDePagina"> </h1>
+
+            <div class="subtitleProcess"><label for=""> <b>LIBERACIÓN LOTE</b></label></div>
+            <div class="m-3 ml-3">
+                <div class="col3">
+                    <label for="" class="item1">* Revisión general de la información registrada en el Batch Record corroborando que el producto se encuentra en optimas condiciones para ser liberado y autorizada su comercialización.
+                        ¿El producto está apto para liberar?</label>
+                    <label for="">SI</label>
+                    <label for="">NO</label>
+                    <label for=""></label>
+                    <label for="">X</label>
+                </div>
+                <div>
+                    <label for="">Observaciones</label>
+                    <label for=""></label>
+                </div>
+
+                <div class="enlinea">
+                    <label class="mr-3 fechaHora" style="justify-self: end;">Fecha y hora</label>
+                    <label id="fecha5" style="font-weight:bold; justify-self: baseline"></label>
+                </div>
+
+                <div class="coln3 mt-5" id="firmas5">
+                    <img id="f_realizo5" src="" alt="firma_usuario" height="130">
+                    <img id="f_verifico5" src="" alt="firma_usuario" height="130">
+                    <img id="f_verifico5" src="" alt="firma_usuario" height="130">
+                    <label id="user_realizo5"></label>
+                    <label id="user_verifico5"></label>
+                    <label id="user_verifico5"></label>
+                    <label for="">Director de Producción</label>
+                    <label for="">Director de Calidad</label>
+                    <label for="">Director Técnico</label>
+                </div>
+            </div>
+            <!-- fin liberacion lote  -->
 
 
 

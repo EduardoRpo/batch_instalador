@@ -111,6 +111,7 @@ if (!empty($_POST)) {
                     'realizo' => $realizo,
                 ]);
                 ejecutarQuery($result, $conn);
+                /* inventario_firmas(); */
             }
 
             break;

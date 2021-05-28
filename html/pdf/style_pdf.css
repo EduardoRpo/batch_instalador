@@ -166,7 +166,7 @@ body {
   justify-items: center;
 }
 
-.despachos{
+.despachos {
   display: grid;
   grid-template-columns: 200px 1fr 200px 1fr;
   gap: 1em;
@@ -176,8 +176,105 @@ body {
   justify-items: center;
 }
 
+.marco {
+  background-color: #eceeef;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #eceeef;
+  border-radius: 5px;
+}
+
+input[type="checkbox"] {
+  transform: scale(2);
+}
+
+.enlinea {
+  display: flex;
+  justify-content: center;
+}
+
+.col1 {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+}
+
+.col2 {
+  display: grid;
+  grid-template-columns: 500px 1fr;
+  gap: 1em;
+  margin-top: 10px;
+  margin-left: 30px;
+  margin-right: 30px;
+  justify-items: center;
+}
+
+.col2sm {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 50px;
+  justify-items: center;
+}
+
+.coln3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  /* gap: 1em; */
+  /* margin-top: 10px; */
+  /* margin-left: 30px; */
+  /* margin-right: 30px; */
+  justify-items: center;
+}
+
+.col3 {
+  display: grid;
+  grid-template-columns: 1fr 100px 100px;
+  /* gap: 1em; */
+  /* margin-top: 10px; */
+  /* margin-left: 30px; */
+  /* margin-right: 30px; */
+  justify-items: center;
+}
+
+.col4 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  /* gap: 1em; */
+  /* margin-top: 10px; */
+  /* margin-left: 30px; */
+  margin-right: 30px;
+  justify-items: center;
+}
+
+.item1 {
+  grid-row: 1 / span 2;
+}
+
+.fechaHora {
+  grid-row: 1 / span 2;
+}
+
 #entregaMateriales td:first-child {
   width: 150px;
+}
+
+.SaltoDePagina {
+  page-break-after: always;
+}
+
+@media print {
+  .card-header {
+    color: black;
+  }
+  .subtitle {
+    color: black;
+  }
+  .subtitleProcess {
+    color: black;
+  }
+  .noImprimir {
+    display: none;
+  }
 }
 
 @media only screen and (max-width: 600px) {

@@ -20,11 +20,11 @@
                                     <th class="centrado">Apariencia Etiquetas
                                         <!-- (Arrugas, quiebres, sucios, alineada, adherencia) -->
                                     </th>
-                                    <th class="centrado">Apariencia Lote/Termoencogible
+                                    <th class="centrado">Apariencia Termoencogible
                                         <!-- (Cuando Aplique) -->
                                     </th>
-                                    <th class="centrado">Cumplimiento Empaque</th>
-                                    <th class="centrado">Posicion producto en caja</th>
+                                    <th class="centrado">Apariencia Lote</th>
+                                    <th class="centrado">Unid Emp y Pos en la Caja</th>
                                     <th class="centrado">Rotulo Caja</th>
                                 </tr>
                             </thead>
