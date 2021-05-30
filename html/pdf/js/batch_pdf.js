@@ -621,8 +621,15 @@ conciliacion = () => {
       let rendimiento = (presentacion * cantidad * densidad) / 1000;
       rendimiento = ((rendimiento / tamanioLote) * 100).toFixed(2) + "%";
       $(`#conciliacionRendimiento1`).val(rendimiento);
-      $(`#f_realizoConciliacion`).prop("src", info[1].urlfirma);
-      $(`#user_realizoConciliacion`).html(info[1].nombre);
+      for (let i = 0; i < info.length; i++) {
+        if (info[i].modulo == 6) {
+          $(`#f_realizoConciliacion`).prop("src", info[i].urlfirma);
+          $(`#user_realizoConciliacion`).html(info[i].nombre);
+        }else if(info[i].modulo == 7){
+          $(`#user_entrego`).html("Realizó: " + "<b>" + info[i].nombre + " " + info[i].apellido + "</b>");
+          $(`#f_entrego`).prop("src", info[i].urlfirma);
+        }
+      }
     },
   });
 };
@@ -711,7 +718,7 @@ $(document).ready(function () {
   equipos();
   ajustes();
   muestras_acondicionamiento();
-  despachos();
+  //despachos();
   analisisMicrobiologico();
 
   setTimeout(() => {
