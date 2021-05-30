@@ -111,7 +111,7 @@ if (!empty($_POST)) {
 
         case 5:
 
-            $sql = "SELECT c.unidades_producidas, c.muestras_retencion, c.mov_inventario, c.cajas, u.urlfirma, CONCAT(u.nombre, ' ', u.apellido) as nombre FROM batch_conciliacion_rendimiento c INNER JOIN usuario u ON u.id = c.entrego WHERE batch = :batch";
+            $sql = "SELECT c.unidades_producidas, c.muestras_retencion, c.mov_inventario, c.cajas, u.urlfirma, CONCAT(u.nombre, ' ', u.apellido) as nombre, modulo FROM batch_conciliacion_rendimiento c INNER JOIN usuario u ON u.id = c.entrego WHERE batch = :batch";
             $query = $conn->prepare($sql);
             $query->execute(['batch' => $batch]);
             $data = $query->fetchAll(PDO::FETCH_ASSOC);
