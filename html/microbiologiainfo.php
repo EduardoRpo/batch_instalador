@@ -313,6 +313,7 @@ include("modal/modal_condicionesMedio.php");
   <script src="../../html/js/global/tanques.js"></script>
   <script src="../../html/js/global/equipos.js"></script>
   <script src="../../html/js/global/incidencias.js"></script>
+  <script src="../../html/js/global/condiciones_medio.js"></script>
   <!-- <script src="../../html/js/global/validaciones.js"></script> -->
   <script src="../../html/js/global/habilitarbtn.js"></script>
 </body>

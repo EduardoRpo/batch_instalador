@@ -650,7 +650,7 @@
                     <div class="alertas" id="alert_pesaje">
                         <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
                             <label id="title14"></label>
-                            <ul id="observacionesAprobacion">Hola</ul>
+                            <ul id="observacionesAprobacion"></ul>
                             <ul id="vinetas14">
                             </ul>
 
@@ -1019,10 +1019,10 @@
                     </div>
 
                     <div class="firmas" id="firmas5">
-                        <img id="f_realizo5" src="" alt="firma_usuario" height="130">
-                        <img id="f_verifico5" src="" alt="firma_usuario" height="130">
-                        <label id="user_realizo5">Sergio</label>
-                        <label id="user_verifico5">Sergio</label>
+                        <img id="f_realizo6" src="" alt="firma_usuario" height="130">
+                        <img id="f_verifico6" src="" alt="firma_usuario" height="130">
+                        <label id="user_realizo6"></label>
+                        <label id="user_verifico6"></label>
                     </div>
 
 
@@ -1124,8 +1124,8 @@
                     </div>
 
                     <div class="col1" id="firmas6">
-                        <img id="f_realizo6" src="" alt="firma_usuario" height="130">
-                        <label id="user_realizo6"></label>
+                        <img id="f_realizoConciliacion" src="" alt="firma_usuario" height="130">
+                        <label id="user_realizoConciliacion"></label>
                     </div>
                     <!-- fin acondicionamiento -->
 
@@ -1151,8 +1151,8 @@
                     </div>
 
                     <div class="col1 mt-5" id="firmas7">
-                        <img id="f_realizo7" src="" alt="firma_usuario" height="130">
-                        <label id="user_realizo7"></label>
+                        <img id="f_entrego" src="" alt="firma_usuario" height="130">
+                        <label id="user_entrego"></label>
                     </div>
                 </div>
             </div>
@@ -1178,7 +1178,7 @@
                 </div>
             </div>
             <div class="table-responsive p-3">
-                <table class="table table-bordered table-striped" id="area_desinfeccion3">
+                <table class="table table-bordered table-striped" id="area_desinfeccion8">
                     <thead class="head">
                         <tr>
                             <td>Área/Equipo</td>
@@ -1221,11 +1221,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <td class="centrado bold" id="fecha_medio2"></td>
+                        <td class="centrado bold" id="fecha_medio8"></td>
                         <td class="centrado">18 - 25 °C</td>
-                        <td class="centrado bold" id="temperatura2"></td>
+                        <td class="centrado bold" id="temperatura8"></td>
                         <td class="centrado">30 - 75 %</td>
-                        <td class="centrado bold" id="humedad2"></td>
+                        <td class="centrado bold" id="humedad8"></td>
                     </tbody>
                 </table>
             </div>
@@ -1246,26 +1246,26 @@
                         <tr>
                             <td class="centrado">Recuento de Mesófilos Aerobios Totales</td>
                             <td class="centrado bold" id="espec1"></td>
-                            <td class="centrado"></td>
-                            <td class="centrado bold" id="result1"></td>
+                            <td class="centrado">Siembra Total</td>
+                            <td class="centrado bold" id="mesofilos"></td>
                         </tr>
                         <tr>
                             <td class="centrado">Pseudomona Aeruginosa</td>
                             <td class="centrado bold" id="espec2"></td>
-                            <td class="centrado"></td>
-                            <td class="centrado bold" id="result2"></td>
+                            <td class="centrado">Siembra Total</td>
+                            <td class="centrado bold" id="pseudomona"></td>
                         </tr>
                         <tr>
                             <td class="centrado">Escherichia Coli y Coliformes Totales</td>
                             <td class="centrado bold" id="espec3"></td>
-                            <td class="centrado"></td>
-                            <td class="centrado bold" id="result3"></td>
+                            <td class="centrado">Siembra Total</td>
+                            <td class="centrado bold" id="escherichia"></td>
                         </tr>
                         <tr>
                             <td class="centrado">Staphylococcus Aureus</td>
                             <td class="centrado bold" id="espec4"></td>
-                            <td class="centrado"></td>
-                            <td class="centrado bold" id="result4"></td>
+                            <td class="centrado">Siembra Total</td>
+                            <td class="centrado bold" id="staphylococcus"></td>
                         </tr>
 
                     </tbody>
@@ -1274,17 +1274,17 @@
 
             <div class="col4">
                 <label for="">Fecha Siembra</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" id="fsiembra">
                 <label for="">Fecha Resultados</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" id="fresultados">
             </div>
 
             <div class="marco m-5">
                 <div class="col2sm m-3">
                     <label for="">Aprobado</label>
                     <label for="">Rechazado</label>
-                    <input type="checkbox" name="" id="">
-                    <input type="checkbox" name="" id="">
+                    <input type="checkbox" name="chkAprobado" id="chkAprobado">
+                    <input type="checkbox" name="chkRechazado" id="chkRechazado">
                 </div>
             </div>
 
@@ -1294,10 +1294,10 @@
             </div>
 
             <div class="firmas" id="firmas5">
-                <img id="f_realizo5" src="" alt="firma_usuario" height="130">
-                <img id="f_verifico5" src="" alt="firma_usuario" height="130">
-                <label id="user_realizo5">Sergio</label>
-                <label id="user_verifico5">Sergio</label>
+                <img id="f_realizoMicro" src="" alt="firma_usuario" height="130">
+                <img id="f_verificoMicro" src="" alt="firma_usuario" height="130">
+                <label id="user_realizoMicro"></label>
+                <label id="user_verificoMicro"></label>
             </div>
 
             <!-- Fin Microbiologia -->
@@ -1321,7 +1321,7 @@
                 </div>
             </div>
             <div class="table-responsive p-3">
-                <table class="table table-bordered table-striped" id="area_desinfeccion3">
+                <table class="table table-bordered table-striped" id="area_desinfeccion9">
                     <thead class="head">
                         <tr>
                             <td>Área/Equipo</td>
@@ -1354,11 +1354,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <td class="centrado bold" id="fecha_medio2"></td>
+                        <td class="centrado bold" id="fecha_medio9"></td>
                         <td class="centrado">18 - 25 °C</td>
-                        <td class="centrado bold" id="temperatura2"></td>
+                        <td class="centrado bold" id="temperatura9"></td>
                         <td class="centrado">30 - 75 %</td>
-                        <td class="centrado bold" id="humedad2"></td>
+                        <td class="centrado bold" id="humedad9"></td>
                     </tbody>
                 </table>
             </div>
@@ -1378,51 +1378,51 @@
                         <tr>
                             <td class="centrado">Color</td>
                             <td class="centrado espec_color"></td>
-                            <td class="centrado color4"></td>
+                            <td class="centrado color9"></td>
                         </tr>
                         <tr>
                             <td class="centrado">Olor</td>
                             <td class="centrado espec_olor"></td>
-                            <td class="centrado olor4"></td>
+                            <td class="centrado olor9"></td>
 
                         </tr>
                         <tr>
                             <td class="centrado">Apariencia</td>
                             <td class="centrado espec_apariencia"></td>
-                            <td class="centrado apariencia4"></td>
+                            <td class="centrado apariencia9"></td>
 
                         </tr>
                         <tr>
                             <td class="centrado">PH</td>
                             <td class="centrado espec_ph"></td>
-                            <td class="centrado ph4"></td>
+                            <td class="centrado ph9"></td>
 
                         </tr>
                         <tr>
                             <td class="centrado">Viscosidad (cps)</td>
                             <td class="centrado espec_viscosidad"></td>
-                            <td class="centrado viscosidad4"></td>
+                            <td class="centrado viscosidad9"></td>
 
                         </tr>
                         <tr>
                             <td class="centrado">Densidad o gravedad específica (g/ml)</td>
                             <td class="centrado espec_densidad"></td>
-                            <td class="centrado densidad4"></td>
+                            <td class="centrado densidad9"></td>
                         </tr>
                         <tr>
                             <td class="centrado">Untuosidad</td>
                             <td class="centrado espec_untuosidad"></td>
-                            <td class="centrado untuosidad4"></td>
+                            <td class="centrado untuosidad9"></td>
                         </tr>
                         <tr>
                             <td class="centrado">Poder Espumoso</td>
                             <td class="centrado espec_poder_espumoso"></td>
-                            <td class="centrado espumoso4"></td>
+                            <td class="centrado espumoso9"></td>
                         </tr>
                         <tr>
                             <td class="centrado">Grado de Alcohol</td>
                             <td class="centrado espec_grado_alcohol"></td>
-                            <td class="centrado alcohol4"></td>
+                            <td class="centrado alcohol9"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -1432,15 +1432,15 @@
             <div class="ajustes">
                 <div class="resp">
                     <label for="">Si</label>
-                    <input type="text" class="form-control centrado" id="Si3">
+                    <input type="text" class="form-control centrado" id="Si9">
                     <label for="">No</label>
-                    <input type="text" class="form-control centrado" id="No3">
+                    <input type="text" class="form-control centrado" id="No9">
                 </div>
                 <div class="obs mb-5">
                     <label for="">Materia(s) primas para adicionar </label>
-                    <input type="textarea" class="form-control" id="materiaPrimaAjustes3">
+                    <input type="textarea" class="form-control" id="materiaPrimaAjustes9">
                     <label for="">Procedimiento de Ajuste</label>
-                    <input type="textarea" class="form-control" id="procedimientoAjustes3">
+                    <input type="textarea" class="form-control" id="procedimientoAjustes9">
                 </div>
             </div>
 
@@ -1463,8 +1463,8 @@
             <div class="firmas" id="firmas5">
                 <img id="f_realizo5" src="" alt="firma_usuario" height="130">
                 <img id="f_verifico5" src="" alt="firma_usuario" height="130">
-                <label id="user_realizo5">Sergio</label>
-                <label id="user_verifico5">Sergio</label>
+                <label id="user_realizo5"></label>
+                <label id="user_verifico5"></label>
             </div>
 
             <!-- Fin Fisicoquimico -->

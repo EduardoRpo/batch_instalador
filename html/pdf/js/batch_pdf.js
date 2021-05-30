@@ -145,6 +145,7 @@ area_desinfeccion = (lote) => {
             <td class="centrado">${lote}</td>
           </tr>`);
       }
+      desinfectante();
     }
   );
 };
@@ -162,6 +163,7 @@ desinfectante = () => {
       for (let i = 0; i < info.length; i++) {
         $(`#blank_rea${info[i].modulo}`).hide();
         $(`#blank_ver${info[i].modulo}`).hide();
+
         $(`.desinfectante${info[i].modulo}`).html(info[i].desinfectante);
         $(`.concentracion${info[i].modulo}`).html(
           info[i].concentracion * 100 + "%"
@@ -180,6 +182,7 @@ desinfectante = () => {
             "Realizó: " + "<b> Sin firmar</b>"
           );
         }
+
         if (info[i].verifico != 0) {
           $(`#f_verifico${info[i].modulo}`).prop("src", info[i].verifico);
           $(`#user_verifico${info[i].modulo}`).html(
@@ -209,10 +212,10 @@ despachos = () => {
     success: function (response) {
       info = JSON.parse(response);
       for (let i = 0; i < info.length; i++) {
-        $(`#user_realizo7`).html(
+        $(`#user_entrego`).html(
           "Realizó: " + "<b>" + info[i].nombre + " " + info[i].apellido + "</b>"
         );
-        $(`#f_realizo7`).prop("src", info[i].urlfirma);
+        $(`#f_entrego`).prop("src", info[i].urlfirma);
       }
     },
   });
@@ -316,6 +319,11 @@ function especificaciones_producto() {
     $("#in_grado_alcohol").attr("max", data.limite_superior_grado_alcohol);
     $("#in_viscocidad").attr("min", data.limite_inferior_viscosidad);
     $("#in_viscocidad").attr("max", data.limite_superior_viscosidad);
+
+    $("#espec1").html(data.mesofilos);
+    $("#espec2").html(data.pseudomona);
+    $("#espec3").html(data.escherichia);
+    $("#espec4").html(data.staphylococcus);
   });
 }
 
@@ -382,6 +390,7 @@ ajustes = () => {
     info = JSON.parse(data);
     $(`#No3`).val("X");
     $(`#No4`).val("X");
+    $(`#No9`).val("X");
 
     for (i = 0; i < info.length; i++) {
       $(`#Si${info[i].modulo}`).val("X");
@@ -612,7 +621,8 @@ conciliacion = () => {
       let rendimiento = (presentacion * cantidad * densidad) / 1000;
       rendimiento = ((rendimiento / tamanioLote) * 100).toFixed(2) + "%";
       $(`#conciliacionRendimiento1`).val(rendimiento);
-      $(`#f_realizo20`).prop("src", info[0].urlfirma);
+      $(`#f_realizoConciliacion`).prop("src", info[1].urlfirma);
+      $(`#user_realizoConciliacion`).html(info[1].nombre);
     },
   });
 };
@@ -626,6 +636,57 @@ observacionesAprobacion = () => {
       if (response == "[]") return false;
       data = JSON.parse(response);
       $("#observacionesAprobacion").html(data[0].observaciones);
+    },
+  });
+};
+
+analisisMicrobiologico = () => {
+  $.ajax({
+    type: "POST",
+    url: "../../html/php/c_batch_pdf.php",
+    data: { operacion: 14, idBatch },
+    success: function (response) {
+      if (response == "[]") return false;
+      data = JSON.parse(response);
+      let result1, result2, result3;
+      data[0].pseudomona == 1
+        ? (result1 = "Ausencia")
+        : (data[0].pseudomona = 2
+            ? (result1 = "Presencia")
+            : (result1 = "No Aplica"));
+
+      data[0].escherichia == 1
+        ? (result2 = "Ausencia")
+        : (data[0].escherichia = 2
+            ? (result2 = "Presencia")
+            : (result2 = "No Aplica"));
+
+      data[0].staphylococcus == 1
+        ? (result3 = "Ausencia")
+        : (data[0].staphylococcus = 2
+            ? (result3 = "Presencia")
+            : (result3 = "No Aplica"));
+
+      $("#mesofilos").html(data[0].mesofilos);
+      $("#pseudomona").html(result1);
+      $("#escherichia").html(result2);
+      $("#staphylococcus").html(result3);
+      $("#fsiembra").val(data[0].fecha_siembra).css("text-align", "center");
+      $("#fresultados")
+        .val(data[0].fecha_resultados)
+        .css("text-align", "center");
+
+      $(`#f_realizoMicro`).prop("src", data[0].realizo);
+      $(`#f_verificoMicro`).prop("src", data[0].verifico);
+      $(`#user_realizoMicro`).html(
+        "Realizó: " + "<b>" + data[0].nombre_realizo + "</b>"
+      );
+      $(`#user_verificoMicro`).html(
+        "Verificó: " + "<b>" + data[0].nombre_verifico + "</b>"
+      );
+
+      if (data[0].observaciones == "") $("#chkAprobado").prop("checked", true);
+      else $("#chkAprobado").prop("checked", true);
     },
   });
 };
@@ -651,6 +712,7 @@ $(document).ready(function () {
   ajustes();
   muestras_acondicionamiento();
   despachos();
+  analisisMicrobiologico();
 
   setTimeout(() => {
     entrega_material_acondicionamiento();

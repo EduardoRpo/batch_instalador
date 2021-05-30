@@ -29,6 +29,7 @@ const cargar_condicionesMedio = () => {
 
 const validar_condicionesMedio = () => {
   if (modulo === 2) imprimirEtiquetasFull();
+
   $.ajax({
     type: "POST",
     url: "../../html/php/condicionesmedio.php",
@@ -42,6 +43,7 @@ const validar_condicionesMedio = () => {
           backdrop: "static",
           keyboard: false,
         });
+      
     },
   });
 };

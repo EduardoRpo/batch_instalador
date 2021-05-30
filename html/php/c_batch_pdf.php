@@ -157,5 +157,17 @@ if (!empty($_POST)) {
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
 
             break;
+        case 14: // datos microbiologia
+            $batch = $_POST['idBatch'];
+            $sql = "SELECT bam.mesofilos, bam.pseudomona, bam.escherichia, bam.staphylococcus, bam.fecha_siembra, bam.fecha_resultados, bam.fecha_resultados, bam.observaciones, CONCAT(ur.nombre, ' ' ,ur.apellido) as nombre_realizo, ur.urlfirma AS realizo, CONCAT(uv.nombre, ' ' ,uv.apellido) as nombre_verifico, uv.urlfirma AS verifico 
+                    FROM batch_analisis_microbiologico bam 
+                    INNER JOIN usuario ur ON bam.realizo = ur.id INNER JOIN usuario uv ON bam.verifico = uv.id 
+                    WHERE batch = :batch";
+            $query = $conn->prepare($sql);
+            $query->execute(['batch' => $batch]);
+            $data = $query->fetchAll(PDO::FETCH_ASSOC);
+            echo json_encode($data, JSON_UNESCAPED_UNICODE);
+
+            break;
     }
 }

@@ -64,6 +64,7 @@ cargar = (btn, Nobtn) => {
   }
 
   let continuar = validarSeleccion();
+
   if (continuar != 0) {
     let dataMicrobiologia = {};
     dataMicrobiologia.equipo1 = sel_incubadora;
@@ -79,6 +80,8 @@ cargar = (btn, Nobtn) => {
     dataMicro.push(dataMicrobiologia);
 
     if (dataMicro.length > 1) dataMicro.shift();
+
+    //validar_condicionesMedio();
 
     /* Carga el modal para la autenticacion */
 
