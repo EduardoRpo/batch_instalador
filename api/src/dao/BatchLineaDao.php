@@ -70,10 +70,6 @@ class BatchLineaDao
   public function findBatchEnvasado()
   {
     $connection = Connection::getInstance()->getConnection();
-    /* $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, batch.numero_lote 
-                                    FROM batch 
-                                    WHERE (batch.estado >= 5.5 AND batch.estado <= 6.5)
-                                    ORDER BY batch.id_batch DESC"); */
     $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, batch.numero_lote, batch.estado 
                                   FROM batch WHERE batch.estado >= 5.5 AND batch.id_batch 
                                   NOT IN (SELECT DISTINCT batch FROM `batch_desinfectante_seleccionado` bds 

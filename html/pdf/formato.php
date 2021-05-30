@@ -149,7 +149,7 @@
                             <td>Área/Equipo</td>
                             <td>Desinfectante</td>
                             <td>%</td>
-                            <td>Número de Lote</td>
+                            <td>Número de Lote Anterior</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -268,7 +268,7 @@
                                     <td>Área/Equipo</td>
                                     <td>Desinfectante</td>
                                     <td>%</td>
-                                    <td>Número de Lote</td>
+                                    <td>Número de Lote Anterior</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -542,7 +542,7 @@
                                     <td>Área/Equipo</td>
                                     <td>Desinfectante</td>
                                     <td>%</td>
-                                    <td>Número de Lote</td>
+                                    <td>Número de Lote Anterior</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -735,7 +735,7 @@
                                     <td class="centrado">Área/Equipo</td>
                                     <td class="centrado">Desinfectante</td>
                                     <td class="centrado">%</td>
-                                    <td class="centrado">Número de Lote</td>
+                                    <td class="centrado">Número de Lote Anterior</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -944,7 +944,7 @@
                                     <td class="centrado">Área/Equipo</td>
                                     <td class="centrado">Desinfectante</td>
                                     <td class="centrado">%</td>
-                                    <td class="centrado">Número de Lote</td>
+                                    <td class="centrado">Número de Lote Anterior</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -1184,7 +1184,7 @@
                             <td>Área/Equipo</td>
                             <td>Desinfectante</td>
                             <td>%</td>
-                            <td>Número de Lote</td>
+                            <td>Número de Lote Anterior</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -1327,7 +1327,7 @@
                             <td>Área/Equipo</td>
                             <td>Desinfectante</td>
                             <td>%</td>
-                            <td>Número de Lote</td>
+                            <td>Número de Lote Anterior</td>
                         </tr>
                     </thead>
                     <tbody>
