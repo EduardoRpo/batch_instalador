@@ -260,7 +260,7 @@ function equipos() {
         continue;
       }
       if (data[i].tipo === "banda") {
-        $("#banda").val(data[4].descripcion);
+        $("#banda").val(data[i].descripcion);
         continue;
       }
       if (data[i].tipo === "etiquetadora") {
