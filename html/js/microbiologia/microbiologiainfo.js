@@ -22,8 +22,11 @@ cargar = (btn, Nobtn) => {
   sessionStorage.setItem("idbtn", Nobtn);
   sessionStorage.setItem("btn", btn.id);
   id = btn.id;
+
   /* Validacion de equipos */
 
+  let desinfectante = $("#sel_producto_desinfeccion").val();
+  let desinfectante_observaciones = $("#desinfectante_obs").val();
   let sel_incubadora = $(".sel_incubadora").val();
   let sel_autoclave = $(".sel_autoclave").val();
   let sel_cabina = $(".sel_cabina").val();
@@ -36,6 +39,12 @@ cargar = (btn, Nobtn) => {
 
   equipos = sel_incubadora * sel_autoclave * sel_cabina;
   analisis = pseudomona * escherichia * staphylococcus;
+
+  if (desinfectante == "Seleccione") {
+    alertify.set("notifier", "position", "top-right");
+    alertify.error("Seleccione el producto para desinfección");
+    return false;
+  }
 
   if (equipos === 0) {
     alertify.set("notifier", "position", "top-right");
@@ -67,6 +76,8 @@ cargar = (btn, Nobtn) => {
 
   if (continuar != 0) {
     let dataMicrobiologia = {};
+    dataMicrobiologia.desinfectante = desinfectante;
+    dataMicrobiologia.desinfectante_observaciones = desinfectante_observaciones;
     dataMicrobiologia.equipo1 = sel_incubadora;
     dataMicrobiologia.equipo2 = sel_autoclave;
     dataMicrobiologia.equipo3 = sel_cabina;
@@ -152,20 +163,21 @@ $(document).ready(function () {
         if (r == "") return false;
         data = JSON.parse(r);
         firm = [];
-        let incubadora = data[0]["id"];
-        //setTimeout(() => {
-        $(".sel_incubadora").val(incubadora);
-        $(".sel_autoclave").val(data[1]["id"]);
-        $(".sel_cabina").val(data[2]["id"]);
-        //}, 100);
-        $("#inputMesofilos").val(data[3]["mesofilos"]);
-        $(".pseudomona").val(data[3]["pseudomona"]);
-        $(".escherichia").val(data[3]["escherichia"]);
-        $(".staphylococcus").val(data[3]["staphylococcus"]);
-        $("#fechaSiembra").val(data[3]["fecha_siembra"]);
-        $("#fechaResultados").val(data[3]["fecha_resultados"]);
+        $("#sel_producto_desinfeccion").val(data[0].desinfectante);
+        $("#desinfectante_obs").val(data[0].observaciones);
 
-        observaciones = data[3]["observaciones"];
+        $(".sel_incubadora").val(data[1]["id"]);
+        $(".sel_autoclave").val(data[2]["id"]);
+        $(".sel_cabina").val(data[3]["id"]);
+
+        $("#inputMesofilos").val(data[4]["mesofilos"]);
+        $(".pseudomona").val(data[4]["pseudomona"]);
+        $(".escherichia").val(data[4]["escherichia"]);
+        $(".staphylococcus").val(data[4]["staphylococcus"]);
+        $("#fechaSiembra").val(data[4]["fecha_siembra"]);
+        $("#fechaResultados").val(data[4]["fecha_resultados"]);
+
+        observaciones = data[4]["observaciones"];
         if (observaciones != "") {
           $("#observacionesLote").slideDown();
           $("#observacionesLoteRechazado").val(data[3]["observaciones"]);
@@ -174,7 +186,7 @@ $(document).ready(function () {
           $("#btnAceptado").prop("checked", true);
         }
 
-        firm.push(data[4]);
+        firm.push(data[5]);
         firmado(firm, 1);
         if (data[5] != "false") {
           firm.push(data[5]);

@@ -39,7 +39,8 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   setTimeout(() => {
-    if (modulo != undefined && modulo != 7 && modulo != 8 && modulo != 9) cargarBatch();
+    if (modulo != undefined && modulo != 7 && modulo != 8 && modulo != 9)
+      cargarBatch();
     if (modulo == 8) cargarBatchMicro();
   }, 1300);
 });
@@ -65,7 +66,7 @@ $(document).ready(function () {
   )
     carguepreguntas(modulo);
 
-  if (modulo != 7 && modulo != 8 && modulo != 9 && modulo != undefined) {
+  if (modulo != 7 && modulo != undefined) {
     desinfectantes();
     //cargar_condicionesMedio();
     validarTanques(modulo);

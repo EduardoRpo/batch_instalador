@@ -134,6 +134,23 @@ include("modal/modal_condicionesMedio.php");
             </div>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
               <div class="card-body">
+                <div class="row" style="margin: 1%">
+                  <div class="col-md-12 align-self-right">
+                    <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Desinfección </h3>
+                  </div>
+                </div>
+                <div class="row" style="margin: 1%">
+                  <div class="col-md-4 align-self-right">
+                    <label for="sel_producto_desinfeccion" class="col-form-label">Producto de desinfección</label>
+                    <select class="selectpicker form-control" id="sel_producto_desinfeccion">
+                      <option selected hidden>Seleccione</option>
+                    </select>
+                  </div>
+                  <div class="col-md-8 align-self-center">
+                    <label for="recipient-name" class="col-form-label">Observaciones:</label>
+                    <input type="text" class="form-control" id="recipient2-name">
+                  </div>
+                </div>
                 <div class="parametrosControl">
                   <h3 for="recipient-name" class="col-form-label" style="text-align: center;">Análisis Fisicoquímico</h3>
                 </div>
@@ -330,6 +347,7 @@ include("modal/modal_condicionesMedio.php");
 
   <script src="../../html/js/global/loadinfo-global.js"></script>
   <script src="../../html/js/global/tanques.js"></script>
+  <script src="../../html/js/global/despeje.js"></script>
   <script src="../../html/js/global/propiedadesProducto.js"></script>
   <script src="../../html/js/firmar/firmar1raSeccion.js"></script>
   <script src="../../html/js/firmar/firmar2daSeccion.js"></script>

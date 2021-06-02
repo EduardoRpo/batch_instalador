@@ -17,6 +17,7 @@ $(document).ready(function () {
   });
 });
 
+desinfectantes();
 /* Validar qque todos los campos este llenos */
 
 cargar = (btn, idbtn) => {
