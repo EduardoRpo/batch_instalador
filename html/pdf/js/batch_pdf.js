@@ -121,7 +121,7 @@ lote_anterior = () => {
   serie = parseInt(serie);
   serie = serie - 1;
 
-  lote = linea.concat("00", serie, fecha);
+  lote = linea.concat("0", serie, fecha);
   area_desinfeccion(lote);
 };
 
@@ -575,7 +575,7 @@ muestras_acondicionamiento = () => {
 
         $(`#muestrasAcondicionamiento1`).append(
           `<tr>
-            <th class="centrado">${data[i].id}</th>
+            <th class="centrado">${i + 1}</th>
             <th class="centrado">${data[i].apariencia_etiquetas}</th>
             <th class="centrado">${data[i].apariencia_termoencogible}</th>
             <th class="centrado">${data[i].cumplimiento_empaque}</th>
@@ -709,6 +709,7 @@ $(document).ready(function () {
   idBatch = sessionStorage.getItem("id");
   let referencias = sessionStorage.getItem("multi");
   referencias = JSON.parse(referencias);
+  if (referencias.length > 1) referencia = referencias[0].referencia;
   if (!referencias) referencia = sessionStorage.getItem("referencia");
 
   cargar_Alertas();
