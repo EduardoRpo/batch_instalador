@@ -94,9 +94,14 @@ if (!empty($_POST)) {
             $verifico = $_POST['verifico'];
             $batch = $_POST['idBatch'];
 
+            $sql = "UPDATE `batch_desinfectante_seleccionado` SET verifico = :verifico WHERE batch = :batch";
+            $query = $conn->prepare($sql);
+            $result = $query->execute(['verifico' => $verifico, 'batch' => $batch]);
+
             $sql = "UPDATE `batch_analisis_microbiologico` SET verifico = :verifico WHERE batch = :batch";
             $query = $conn->prepare($sql);
             $result = $query->execute(['verifico' => $verifico, 'batch' => $batch]);
+            
             if ($result) echo 'true';
 
             break;

@@ -188,8 +188,8 @@ $(document).ready(function () {
 
         firm.push(data[5]);
         firmado(firm, 1);
-        if (data[5] != "false") {
-          firm.push(data[5]);
+        if (data[6] != "false") {
+          firm.push(data[6]);
           firmado(firm, 2);
         }
       },
