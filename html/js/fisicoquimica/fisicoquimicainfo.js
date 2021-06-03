@@ -1,6 +1,7 @@
 modulo = 9;
 
 $("#observacionesLote").slideUp();
+$(".fisicoquimica_verificado").prop("disabled", true);
 
 $(document).ready(function () {
   $(".metodo").html("Siembra Total");
@@ -17,15 +18,22 @@ $(document).ready(function () {
   });
 });
 
-desinfectantes();
 /* Validar qque todos los campos este llenos */
 
 cargar = (btn, idbtn) => {
   sessionStorage.setItem("idbtn", idbtn);
   id = btn.id;
 
+  const desinfectante = $("#sel_producto_desinfeccion").val();
+  const observaciones_desinfectante = $("#fisicoq_obs").val();
   const inputs = $("#especificaciones input");
   const selects = $("#especificaciones select");
+
+  if (desinfectante == "Seleccione") {
+    alertify.set("notifier", "position", "top-right");
+    alertify.error("Ingrese el producto de desinfección.");
+    return false;
+  }
 
   for (i = 0; i < inputs.length; i++) {
     if (inputs[i].value == "") {

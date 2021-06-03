@@ -57,7 +57,7 @@ if (!empty($_POST)) {
 
             /* Almacena el desinfectante del modulo de aprobacion */
 
-            if ($modulo == 4) {
+            if ($modulo == 4 || $modulo == 9) {
                 $desinfectante = $_POST['desinfectante'];
                 $firma = $_POST['firma'];
 

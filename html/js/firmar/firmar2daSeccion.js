@@ -42,11 +42,15 @@ function firmar2daSeccion(firma) {
   }
 
   if (modulo == 9) {
-    let observaciones = $("#observacionesLoteRechazado").val();
+    const desinfectante = $("#sel_producto_desinfeccion").val();
+    const obs_desinfectante = $("#fisicoq_obs").val();
+    const observaciones = $("#observacionesLoteRechazado").val();
     data = {
       operacion: 1,
       tanques,
       tanquesOk,
+      desinfectante,
+      obs_desinfectante,
       modulo,
       idBatch,
       observaciones,
