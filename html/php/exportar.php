@@ -55,6 +55,7 @@ if (!empty($_POST)) {
 
             $writer->save('C:\label\etiquetasPreparacion.xls');
             break;
+
         case '3': //Impresion acondicionamiento
             $acondicionamiento = $_POST['array'];
 
@@ -66,6 +67,7 @@ if (!empty($_POST)) {
             $etiquetas[] = $acondicionamiento['usuario'];
             $etiquetas[] = $acondicionamiento['numero_lote'];
             $etiquetas[] = $acondicionamiento['numero_orden'];
+            $cajas = ceil($acondicionamiento['unidad_lote'] / $acondicionamiento['unidad_empaque']);
 
             $spreadsheet = new Spreadsheet();
             $sheet = $spreadsheet->getActiveSheet();
@@ -77,14 +79,16 @@ if (!empty($_POST)) {
             $sheet->setCellValue('F1', 'Usuario');
             $sheet->setCellValue('G1', 'Lote');
             $sheet->setCellValue('H1', 'Orden_Produccion');
-            $sheet->fromArray($etiquetas, NULL, 'A2');
-            $writer = new Xlsx($spreadsheet);
+            for ($i = 2; $i <= $cajas + 1; $i++) {
+                $sheet->fromArray($etiquetas, NULL, "A$i");
+                $writer = new Xlsx($spreadsheet);
 
-            $fileLabels = 'C:/label';
-            if (!file_exists($fileLabels))
-                mkdir($fileLabels, 0777, true);
+                $fileLabels = 'C:/label';
+                if (!file_exists($fileLabels))
+                    mkdir($fileLabels, 0777, true);
 
-            $writer->save('C:\label\etiquetasAcondicionamiento.xls');
+                $writer->save('C:\label\etiquetasAcondicionamiento.xls');
+            }
             break;
     }
 }

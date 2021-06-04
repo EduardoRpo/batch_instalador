@@ -32,6 +32,13 @@ const imprimirEtiquetasFull = (marmita) => {
       $.ajax({
         url: `../../api/user/${modulo}/${idBatch}`,
         success: function (usuario) {
+          if (usuario == "") {
+            alertify.set("notifier", "position", "top-right");
+            alertify.success(
+              "Finalice el proceso de despeje antes de continuar"
+            );
+            return false;
+          }
           modulo == 2
             ? imprimirEtiquetasPesaje(materiaPrima, usuario)
             : modulo == 3
@@ -72,6 +79,10 @@ const imprimirEtiquetasAcondicionamiento = (usuario) => {
   operacion = 3;
   batch.usuario = usuario.nombres;
   exportarEtiquetas(operacion, batch);
+};
+
+const imprimirEtiquetasRetencion = () => {
+  operacion = 4;
 };
 
 const exportarEtiquetas = (operacion, arrayData) => {

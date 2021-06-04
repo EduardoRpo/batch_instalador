@@ -153,8 +153,8 @@ function cargarTablaEnvase(j, referencia, cantidad) {
 $(".sel_equipos").change(function (e) {
   e.preventDefault();
   //if (flag == 0) {
-    imprimirEtiquetasFull();
-    flag = flag + 1;
+  imprimirEtiquetasFull();
+  flag = flag + 1;
   //}
 });
 
@@ -275,29 +275,6 @@ function recalcular_valores() {
   $(`#totalDevolucion_otros${id_multi}`).html(total);
 }
 
-/* function deshabilitarbtn() {
-  btn = sessionStorage.getItem("btn");
-
-  if (btn == "despeje_realizado")
-    for (let i = 1; i < 4; i++)
-      $(`.controlpeso_realizado${i}`).prop("disabled", false);
-
-  if (btn == `controlpeso_realizado${id_multi}`) {
-    $(`.controlpeso_realizado${id_multi}`)
-      .css({ background: "lightgray", border: "gray" })
-      .prop("disabled", true);
-    $(`.controlpeso_verificado${id_multi}`).prop("disabled", false);
-    $(`.devolucion_realizado${id_multi}`).prop("disabled", false);
-  }
-
-  if (btn == `devolucion_realizado${id_multi}`) {
-    $(`.devolucion_realizado${id_multi}`)
-      .css({ background: "lightgray", border: "gray" })
-      .prop("disabled", true);
-    $(`.devolucion_realizado${id_multi}`).prop("disabled", false);
-  }
-} */
-
 /* Almacena la info de tabla devolucion material */
 
 function registrar_material_sobrante(info) {
@@ -377,7 +354,7 @@ function conciliacionRendimiento() {
     var totalCajas = "";
     var entregarBodega = "";
   } else {
-    totalCajas = Math.floor((unidadesProducidas - retencion) / unidadEmpaque);
+    totalCajas = Math.ceil((unidadesProducidas - retencion) / unidadEmpaque); //aproximar por encima
     entregarBodega = unidadesProducidas - retencion;
   }
 
