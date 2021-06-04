@@ -34,7 +34,9 @@ const imprimirEtiquetasFull = (marmita) => {
         success: function (usuario) {
           modulo == 2
             ? imprimirEtiquetasPesaje(materiaPrima, usuario)
-            : imprimirEtiquetasPreparacion(marmita, usuario);
+            : modulo == 3
+            ? imprimirEtiquetasPreparacion(marmita, usuario)
+            : imprimirEtiquetasAcondicionamiento(usuario);
         },
       });
     },
@@ -63,6 +65,12 @@ const imprimirEtiquetasPreparacion = (marmita, usuario) => {
   let preparacion = batch;
   preparacion.tanque = marmita;
   preparacion.usuario = usuario.nombres;
+  exportarEtiquetas(operacion, preparacion);
+};
+
+const imprimirEtiquetasAcondicionamiento = (usuario) => {
+  operacion = 3;
+  batch.usuario = usuario.nombres;
   exportarEtiquetas(operacion, batch);
 };
 

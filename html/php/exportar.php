@@ -55,5 +55,36 @@ if (!empty($_POST)) {
 
             $writer->save('C:\label\etiquetasPreparacion.xls');
             break;
+        case '3': //Impresion acondicionamiento
+            $acondicionamiento = $_POST['array'];
+
+            $etiquetas[] = $acondicionamiento['referencia'];
+            $etiquetas[] = $acondicionamiento['nombre_referencia'];
+            $etiquetas[] = $acondicionamiento['presentacion'];
+            $etiquetas[] = $acondicionamiento['unidad_empaque'];
+            $etiquetas[] = $acondicionamiento['propietario'];
+            $etiquetas[] = $acondicionamiento['usuario'];
+            $etiquetas[] = $acondicionamiento['numero_lote'];
+            $etiquetas[] = $acondicionamiento['numero_orden'];
+
+            $spreadsheet = new Spreadsheet();
+            $sheet = $spreadsheet->getActiveSheet();
+            $sheet->setCellValue('A1', 'Referencia');
+            $sheet->setCellValue('B1', 'Producto');
+            $sheet->setCellValue('C1', 'Presentacion');
+            $sheet->setCellValue('D1', 'Und x Caja');
+            $sheet->setCellValue('E1', 'Propietario');
+            $sheet->setCellValue('F1', 'Usuario');
+            $sheet->setCellValue('G1', 'Lote');
+            $sheet->setCellValue('H1', 'Orden_Produccion');
+            $sheet->fromArray($etiquetas, NULL, 'A2');
+            $writer = new Xlsx($spreadsheet);
+
+            $fileLabels = 'C:/label';
+            if (!file_exists($fileLabels))
+                mkdir($fileLabels, 0777, true);
+
+            $writer->save('C:\label\etiquetasAcondicionamiento.xls');
+            break;
     }
 }

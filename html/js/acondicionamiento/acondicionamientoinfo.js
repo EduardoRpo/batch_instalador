@@ -4,6 +4,7 @@
   r3 = 0; */
 modulo = 6;
 let id_multi = 1;
+let flag = 0;
 const equipos = [];
 
 //Carga el proceso despues de cargar la data  del Batch
@@ -148,6 +149,14 @@ function cargarTablaEnvase(j, referencia, cantidad) {
     $(`.unidades${j}e`).html(empaqueEnvasado);
   });
 }
+
+$(".sel_equipos").change(function (e) {
+  e.preventDefault();
+  //if (flag == 0) {
+    imprimirEtiquetasFull();
+    flag = flag + 1;
+  //}
+});
 
 function cargar(btn, idbtn) {
   sessionStorage.setItem("idbtn", idbtn);
