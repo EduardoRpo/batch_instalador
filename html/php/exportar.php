@@ -13,6 +13,7 @@ if (!empty($_POST)) {
     $sheet->setCellValue('B1', 'Referencia');
     $sheet->setCellValue('C1', 'Peso');
     $sheet->setCellValue('D1', 'Producto');
+    $sheet->setCellValue('E1', 'Usuario');
     $sheet->fromArray($etiquetas, NULL, 'A2');
     $writer = new Xlsx($spreadsheet);
 

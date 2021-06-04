@@ -37,7 +37,7 @@ class UserDao
     $idUsuario = $stmt->fetchAll($connection::FETCH_ASSOC);
 
     $stmt = $connection->prepare("SELECT CONCAT(nombre, ' ',apellido) AS nombres FROM `usuario` WHERE id = :idUser");
-    $stmt->execute(array('idUser' => $idUsuario));
+    $stmt->execute(array('idUser' => $idUsuario[0]['realizo']));
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $user = $stmt->fetch($connection::FETCH_ASSOC);
     $this->logger->notice("usuarios Obtenidos", array('usuarios' => $user));

@@ -31,23 +31,22 @@ const imprimirEtiquetasFull = () => {
     success: function (response) {
       $.ajax({
         url: `../../api/user/${modulo}/${idBatch}`,
-        success: function (response) {
-          console.log(response);
+        success: function (r) {
+          arrayData = [];
+          for (let i = 0; i < response.length; i++) {
+            pesaje = {};
+            pesaje.orden = batch.numero_orden;
+            pesaje.referencia = response[i].referencia;
+            pesaje.peso =
+              ((response[i].porcentaje / 100) * batch.tamano_lote) /
+              $("#Notanques").val();
+            pesaje.producto = batch.nombre_referencia;
+            pesaje.user = r.nombres;
+            arrayData.push(pesaje);
+          }
+          exportarEtiquetas(arrayData);
         },
       });
-
-      arrayData = [];
-      for (let i = 0; i < response.length; i++) {
-        pesaje = {};
-        pesaje.orden = batch.numero_orden;
-        pesaje.referencia = response[i].referencia;
-        pesaje.peso =
-          ((response[i].porcentaje / 100) * batch.tamano_lote) /
-          $("#Notanques").val();
-        pesaje.producto = batch.nombre_referencia;
-        arrayData.push(pesaje);
-      }
-      exportarEtiquetas(arrayData);
     },
   });
 };
