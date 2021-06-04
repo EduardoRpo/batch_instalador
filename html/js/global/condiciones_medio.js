@@ -28,8 +28,17 @@ const cargar_condicionesMedio = () => {
 /* Validar si las condiciones del medio ya fueron almacenadas */
 
 const validar_condicionesMedio = () => {
+  //imprimirEtiquetas();
   if (modulo === 2) imprimirEtiquetasFull();
-
+  if (modulo === 3) {
+    const marmita = $('select[id="sel_marmita"] option:selected').text();
+    if (marmita === null) {
+      alertify.set("notifier", "position", "top-right");
+      alertify.success("Seleccione los equipos");
+      $(".chkcontrol").prop("checked", false);
+      return false;
+    } else imprimirEtiquetasFull(marmita);
+  }
   $.ajax({
     type: "POST",
     url: "../../html/php/condicionesmedio.php",
@@ -43,7 +52,6 @@ const validar_condicionesMedio = () => {
           backdrop: "static",
           keyboard: false,
         });
-      
     },
   });
 };

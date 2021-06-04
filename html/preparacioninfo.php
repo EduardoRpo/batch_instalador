@@ -455,6 +455,7 @@ include("modal/modal_condicionesMedio.php");
   <script src="../../html/js/firmar/firmar1raSeccion.js"></script>
   <script src="../../html/js/firmar/firmar2daSeccion.js"></script>
   <script src="../../html/js/global/equipos.js"></script>
+  <script src="../../html/js/global/etiquetas.js"></script>
   <script src="../../html/js/global/incidencias.js"></script>
   <script src="../../html/js/global/requerimiento_ajuste.js"></script>
   <script src="../../html/js/global/controlEspecificaciones.js"></script>

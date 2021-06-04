@@ -24,32 +24,72 @@ $("#btnimprimirEtiquetas").click(function (e) {
   //imprimirEtiquetasVirtuales();
 });
 
-const imprimirEtiquetasFull = () => {
+const imprimirEtiquetasFull = (marmita) => {
   const ref = batch.referencia;
   $.ajax({
     url: `../../api/materiasp/${ref}`,
-    success: function (response) {
+    success: function (materiaPrima) {
       $.ajax({
         url: `../../api/user/${modulo}/${idBatch}`,
-        success: function (r) {
-          arrayData = [];
-          for (let i = 0; i < response.length; i++) {
-            pesaje = {};
-            pesaje.orden = batch.numero_orden;
-            pesaje.referencia = response[i].referencia;
-            pesaje.peso =
-              ((response[i].porcentaje / 100) * batch.tamano_lote) /
-              $("#Notanques").val();
-            pesaje.producto = batch.nombre_referencia;
-            pesaje.user = r.nombres;
-            arrayData.push(pesaje);
-          }
-          exportarEtiquetas(arrayData);
+        success: function (usuario) {
+          modulo == 2
+            ? imprimirEtiquetasPesaje(materiaPrima, usuario)
+            : imprimirEtiquetasPreparacion(marmita, usuario);
         },
       });
     },
   });
 };
+
+const imprimirEtiquetasPesaje = (materiaPrima, usuario) => {
+  operacion = 1;
+  arrayData = [];
+  for (let i = 0; i < materiaPrima.length; i++) {
+    pesaje = {};
+    pesaje.orden = batch.numero_orden;
+    pesaje.referencia = materiaPrima[i].referencia;
+    pesaje.peso =
+      ((materiaPrima[i].porcentaje / 100) * batch.tamano_lote) /
+      $("#Notanques").val();
+    pesaje.producto = batch.nombre_referencia;
+    pesaje.user = usuario.nombres;
+    arrayData.push(pesaje);
+  }
+  exportarEtiquetas(operacion, arrayData);
+};
+
+const imprimirEtiquetasPreparacion = (marmita, usuario) => {
+  operacion = 2;
+  let preparacion = batch;
+  preparacion.tanque = marmita;
+  preparacion.usuario = usuario.nombres;
+  exportarEtiquetas(operacion, batch);
+};
+
+const exportarEtiquetas = (operacion, arrayData) => {
+  $.ajax({
+    type: "POST",
+    url: "../../html/php/exportar.php",
+    data: { operacion, array: arrayData },
+
+    success: function (response) {
+      alertify.set("notifier", "position", "top-right");
+      alertify.success("Datos para etiquetas exportados correctamente");
+    },
+  });
+};
+
+/* Etiquetas virtuales */
+
+$("#btnEtiquetasPrueba").click(function (e) {
+  e.preventDefault();
+  imprimirEtiquetasVirtuales();
+});
+
+$("#btnImprimirTodaslasEtiquetas").click(function (e) {
+  e.preventDefault();
+  imprimirEtiquetasFull();
+});
 
 imprimirEtiquetasVirtuales = () => {
   batch = sessionStorage.getItem("batch");
@@ -82,65 +122,3 @@ imprimirEtiquetasVirtuales = () => {
     },
   });
 };
-
-const exportarEtiquetas = (arrayData) => {
-  $.ajax({
-    type: "POST",
-    url: "../../html/php/exportar.php",
-    data: { array: arrayData },
-
-    success: function (response) {
-      alertify.set("notifier", "position", "top-right");
-      alertify.success("Datos para etiquetas exportados correctamente");
-    },
-  });
-};
-
-/* function exportarEtiquetas() {
-  const createXLSLFormatObj = [];
-  let xlsHeader = ["orden", "referencia", "peso"];
-
-  createXLSLFormatObj.push(xlsHeader);
-  $.each(arrayData, function (index, value) {
-    var innerRowData = [];
-   
-    $.each(value, function (ind, val) {
-      innerRowData.push(val);
-    });
-    createXLSLFormatObj.push(innerRowData);
-  });
-
-  const filename = "etiquetas_Dispensacion.xlsx";
-  const ws_name = "etiquetas_Dispensacion";
-
-  
-  var wb = XLSX.utils.book_new(),
-    ws = XLSX.utils.aoa_to_sheet(createXLSLFormatObj);
-
-  XLSX.utils.book_append_sheet(wb, ws, ws_name);
-
-  $.ajax({
-    type: "POST",
-    url: "../../html/php/deleteFiles.php",
-    success: function (response) {
-      alertify.set("notifier", "position", "top-right");
-      alertify.success(
-        "Para imprimir las <b>Etiquetas</b> ingrese a labelJoy y actualice"
-      );
-      $("#cantidadEtiquetas").val("");
-      if ($("#imprimirEtiquetas").is(":visible"))
-        $("#imprimirEtiquetas").modal("hide");
-      XLSX.writeFile(wb, filename);
-    },
-  });
-} */
-
-$("#btnEtiquetasPrueba").click(function (e) {
-  e.preventDefault();
-  imprimirEtiquetasVirtuales();
-});
-
-$("#btnImprimirTodaslasEtiquetas").click(function (e) {
-  e.preventDefault();
-  imprimirEtiquetasFull();
-});
