@@ -32,13 +32,13 @@ const imprimirEtiquetasFull = (marmita) => {
       $.ajax({
         url: `../../api/user/${modulo}/${idBatch}`,
         success: function (usuario) {
-          if (usuario == "") {
+          /* if (usuario == "") {
             alertify.set("notifier", "position", "top-right");
             alertify.success(
               "Finalice el proceso de despeje antes de continuar"
             );
             return false;
-          }
+          } */
           modulo == 2
             ? imprimirEtiquetasPesaje(materiaPrima, usuario)
             : modulo == 3
@@ -83,6 +83,28 @@ const imprimirEtiquetasAcondicionamiento = (usuario) => {
 
 const imprimirEtiquetasRetencion = () => {
   operacion = 4;
+  const referencia = batch.referencia;
+  $.ajax({
+    type: "POST",
+    url: "../../../html/php/etiquetas.php",
+    data: { idBatch, referencia },
+    success: function (response) {
+      $muestras_retencion = JSON.parse(response);
+      arrayData = [];
+      for (let i = 0; i < $muestras_retencion.length + 1; i++) {
+        retencion = {};
+        retencion.referencia = batch.referencia;
+        retencion.producto = batch.nombre_referencia;
+        retencion.lote = batch.numero_lote;
+        retencion.orden = batch.numero_orden;
+        if (i < $muestras_retencion.length)
+          retencion.consecutivo = $muestras_retencion[i]["muestra"];
+        else retencion.consecutivo = "Microbiología";
+        arrayData.push(retencion);
+      }
+      exportarEtiquetas(operacion, arrayData);
+    },
+  });
 };
 
 const exportarEtiquetas = (operacion, arrayData) => {

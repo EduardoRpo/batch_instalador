@@ -90,5 +90,27 @@ if (!empty($_POST)) {
                 $writer->save('C:\label\etiquetasAcondicionamiento.xls');
             }
             break;
+
+        case '4': //Impresion Etiquetas Retencion
+            $retencion = $_POST['array'];
+
+            $spreadsheet = new Spreadsheet();
+            $sheet = $spreadsheet->getActiveSheet();
+            $sheet->setCellValue('A1', 'Referencia');
+            $sheet->setCellValue('B1', 'Producto');
+            $sheet->setCellValue('C1', 'Presentacion');
+            $sheet->setCellValue('D1', 'Lote');
+            $sheet->setCellValue('E1', 'Orden_Produccion');
+            $sheet->setCellValue('F1', 'consecutivo');
+            $sheet->fromArray($retencion, NULL, "A2");
+            $writer = new Xlsx($spreadsheet);
+
+            $fileLabels = 'C:/label';
+            if (!file_exists($fileLabels))
+                mkdir($fileLabels, 0777, true);
+
+            $writer->save('C:\label\etiquetasRetencion.xls');
+
+            break;
     }
 }

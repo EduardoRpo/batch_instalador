@@ -401,6 +401,7 @@ function registrar_conciliacion(idfirma) {
     }),
     function (data, textStatus, jqXHR) {
       if (textStatus == "success") {
+        imprimirEtiquetasRetencion();
         alertify.set("notifier", "position", "top-right");
         alertify.success("Conciliación registrada satisfactoriamente");
         $(`.conciliacion_realizado${id_multi}`)
