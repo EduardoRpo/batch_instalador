@@ -10,7 +10,7 @@ require_once('php/sesion/sesion.php');
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>Samara Cosmetics | Usuarios</title>
+  <title>Samara Cosmetics | Firmas</title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
 
   <!--     Fonts and icons     -->
@@ -53,40 +53,32 @@ require_once('php/sesion/sesion.php');
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title">Seguimiento control de Condiciones del Medio(T/H)</h4>
+                <h4 class="card-title">Seguimiento control Firmas(Realizo - Verifico)(31)</h4>
               </div>
 
               <div class="card-body">
                 <div class="" style="display: flex;">
 
                   <div class="table-responsive">
-                    <table id="tb_medios" class="table-bordered">
+                    <table id="tb_firmas" class="table-bordered">
                       <thead>
                         <label for="" class="mr-3">Buscar</label>
-                        <input type="search" id="buscarmedios" class="form-control mb-3">
+                        <input type="search" id="buscarFirmas" class="form-control mb-3">
                         <tr>
                           <th class="col-sm-2 centrado">Batch</th>
-                          <th class="col-sm-3 centrado">Pesaje</th>
-                          <th class="col-sm-3 centrado">Preparacion</th>
-                          <th class="col-sm-3 centrado">Aprobacion</th>
-                          <th class="col-sm-3 centrado">Envasado</th>
-                          <th class="col-sm-3 centrado">Acondicionamiento</th>
-                          <th class="col-sm-3 centrado">Microbiologia</th>
-                          <th class="col-sm-3 centrado">Fisicoquimico</th>
+                          <th class="col-sm-3 centrado">Pesaje(4)</th>
+                          <th class="col-sm-3 centrado">Preparacion(4)</th>
+                          <th class="col-sm-3 centrado">Aprobacion(2)</th>
+                          <th class="col-sm-3 centrado">Envasado(6)</th>
+                          <th class="col-sm-3 centrado">Acondicionamiento(7)</th>
+                          <th class="col-sm-3 centrado">Despachos(1)</th>
+                          <th class="col-sm-3 centrado">Microbiologia(2)</th>
+                          <th class="col-sm-3 centrado">Fisicoquimico(2)</th>
+                          <th class="col-sm-3 centrado">Liberacion Lote(3)</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <!-- <tr>
-                          <th class="centrado" id="batch"></th>
-                          <th class="centrado" id="pesaje"></th>
-                          <th class="centrado" id="preparacion"></th>
-                          <th class="centrado" id="aprobacion"></th>
-                          <th class="centrado" id="envasado"></th>
-                          <th class="centrado" id="acondicionamiento"></th>
-                          <th class="centrado" id="microbiologia"></th>
-                          <th class="centrado" id="fisicoquimico"></th>
-                        </tr> -->
-
+                        
                       </tbody>
                     </table>
                   </div>
@@ -128,7 +120,7 @@ require_once('php/sesion/sesion.php');
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
   <!-- javascript inicializacion datatables -->
-  <script src="js/validacionCondiciones.js"></script>
+  <script src="js/validacionFirmas.js"></script>
   <script src="js/menu.js"></script>
 
 </body>

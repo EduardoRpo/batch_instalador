@@ -56,6 +56,12 @@
             <ul class="menu_pdf">
                 <li><a href="pdf.php" id="link_menu_pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i><span>Textos</span></a></li>
             </ul>
+            <li id="auditoria"><a href=""><i class="fa fa-chevron-down"></i><span>Auditoria</span></a></li>
+            <ul class="menu_auditoria">
+                <li><a href="controlCondicionesMedio.php" id="link_menu_pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i><span>Condiciones del Medio</span></a></li>
+                <li><a href="controlFirmas.php" id="link_menu_pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i><span>Control de firmas</span></a></li>
+            </ul>
+
 
         </ul>
     </div>
