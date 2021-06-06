@@ -15,10 +15,10 @@ if ($batch == 1) {
         if ($firmas_despeje[$i]['verifico'] > 0)
             $cantidad = $cantidad + 1;
 
-        $objeto = new stdClass();
+        $objeto = [];
         $modulo = $firmas_despeje[$i]['modulo'];
-        $objeto->batch = $firmas_despeje[$i]['batch'];
-        $objeto->$modulo = $cantidad;
+        $objeto['batch'] = $firmas_despeje[$i]['batch'];
+        $objeto[$modulo] = $cantidad;
 
         if (isset($firma)) {
             for ($i = 0; $i < sizeof($firma); $i++) {
@@ -40,11 +40,12 @@ if ($batch == 1) {
     $firmas_proceso = $query->fetchAll(PDO::FETCH_ASSOC);
 
     for ($i = 0; $i < sizeof($firmas_proceso); $i++) {
-        if ($firmas_proceso[$i]['realizo'] > 0)
-            $cantidad = $cantidad + 1;
-        if ($firmas_proceso[$i]['verifico'] > 0)
-            $cantidad = $cantidad + 1;
-
+        if ($firmas_proceso[$i]['modulo'] != 4) {
+            if ($firmas_proceso[$i]['realizo'] > 0)
+                $cantidad = $cantidad + 1;
+            if ($firmas_proceso[$i]['verifico'] > 0)
+                $cantidad = $cantidad + 1;
+        }
         $modulo = $firmas_proceso[$i]['modulo'];
         $indice = array_key_exists($modulo, $firmas);
 
@@ -140,11 +141,12 @@ if ($batch == 1) {
     $firmas_proceso = $query->fetchAll(PDO::FETCH_ASSOC);
 
     for ($i = 0; $i < sizeof($firmas_proceso); $i++) {
-        if ($firmas_proceso[$i]['realizo'] > 0)
-            $cantidad = $cantidad + 1;
-        if ($firmas_proceso[$i]['verifico'] > 0)
-            $cantidad = $cantidad + 1;
-
+        if ($firmas_proceso[$i]['modulo'] != 4) {
+            if ($firmas_proceso[$i]['realizo'] > 0)
+                $cantidad = $cantidad + 1;
+            if ($firmas_proceso[$i]['verifico'] > 0)
+                $cantidad = $cantidad + 1;
+        }
         $modulo = $firmas_proceso[$i]['modulo'];
         $indice = array_key_exists($modulo, $firmas);
 
@@ -202,20 +204,39 @@ if ($batch == 1) {
     $firmas_material = $query->fetchAll(PDO::FETCH_ASSOC);
 
     for ($i = 0; $i < sizeof($firmas_material); $i++) {
-        if ($firmas_material[$i]['realizo'] > 0)
-            $cantidad = $cantidad + 1;
-        if ($firmas_material[$i]['verifico'] > 0)
-            $cantidad = $cantidad + 1;
-
-        $modulo = $firmas_material[$i]['modulo'];
-        $indice = array_key_exists($modulo, $firmas);
-
-        if ($indice)
-            $firmas[$firmas_material[$i]['modulo']] = $firmas[$modulo] + $cantidad;
-        else
-            $firmas[$modulo] =  $cantidad;
-        $cantidad = 0;
+        if ($firmas_material[$i]['modulo'] == 5) {
+            if ($firmas_material[$i]['realizo'] > 0)
+                $cantidad = $cantidad + 1;
+            if ($firmas_material[$i]['verifico'] > 0)
+                $cantidad = $cantidad + 1;
+        }
     }
+    $modulo = 5;
+    $indice = array_key_exists($modulo, $firmas);
+
+    if ($indice && $cantidad == 6)
+        $firmas[$modulo] = $firmas[$modulo] + 2;
+    else
+        $firmas[$modulo] =  1;
+    $cantidad = 0;
+
+
+    for ($i = 0; $i < sizeof($firmas_material); $i++) {
+        if ($firmas_material[$i]['modulo'] == 6) {
+            if ($firmas_material[$i]['realizo'] > 0)
+                $cantidad = $cantidad + 1;
+            if ($firmas_material[$i]['verifico'] > 0)
+                $cantidad = $cantidad + 1;
+        }
+    }
+    $modulo = 6;
+    $indice = array_key_exists($modulo, $firmas);
+
+    if ($indice && $cantidad == 4)
+        $firmas[$modulo] = $firmas[$modulo] + 2;
+    else
+        $firmas[$modulo] =  1;
+    $cantidad = 0;
 
     echo json_encode($firmas, JSON_UNESCAPED_UNICODE);
 }
