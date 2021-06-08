@@ -98,4 +98,4 @@ promedioDensidad = () => {
     },
   });
 };
-promedioDensidad();
+//promedioDensidad();

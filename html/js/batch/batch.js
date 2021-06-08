@@ -127,21 +127,31 @@ $(document).on("click", ".link-borrar", function (e) {
 
   confirm.set("onok", function (r) {
     if (r) {
-      $.ajax({
-        method: "POST",
-        url: "php/listarBatch.php",
-        data: { operacion: "2", id: id },
+      alertify.prompt(
+        "Motivo de Eliminación",
+        "",
+        "",
+        function (evt, value) {
+          $.ajax({
+            method: "POST",
+            url: "php/listarBatch.php",
+            data: { operacion: "2", id: id, value },
 
-        success: function (r) {
-          alertify.set("notifier", "position", "top-right");
-          alertify.success("Batch Record Eliminado.");
-          actualizarTabla();
+            success: function (r) {
+              alertify.set("notifier", "position", "top-right");
+              alertify.success("Batch Record Eliminado.");
+              actualizarTabla();
+            },
+            error: function (r) {
+              alertify.set("notifier", "position", "top-right");
+              alertify.error("Error al Eliminar el Batch Record.");
+            },
+          });
         },
-        error: function (r) {
-          alertify.set("notifier", "position", "top-right");
-          alertify.error("Error al Eliminar el Batch Record.");
-        },
-      });
+        function () {
+          alertify.error("Cancelado");
+        }
+      );
     }
   });
 });
