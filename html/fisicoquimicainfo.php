@@ -142,13 +142,13 @@ include("modal/modal_condicionesMedio.php");
                 <div class="row" style="margin: 1%">
                   <div class="col-md-4 align-self-right">
                     <label for="sel_producto_desinfeccion" class="col-form-label">Producto de desinfección</label>
-                    <select class="selectpicker form-control" id="sel_producto_desinfeccion">
+                    <select class="selectpicker form-control sel_producto_desinfeccion" id="sel_producto_desinfeccion">
                       <option selected hidden>Seleccione</option>
                     </select>
                   </div>
                   <div class="col-md-8 align-self-center">
                     <label for="recipient-name" class="col-form-label">Observaciones:</label>
-                    <input type="text" class="form-control" id="fisicoq_obs">
+                    <input type="text" class="form-control" id="in_observaciones">
                   </div>
                 </div>
                 <div class="parametrosControl">
@@ -354,6 +354,7 @@ include("modal/modal_condicionesMedio.php");
   <script src="../../html/js/global/incidencias.js"></script>
   <script src="../../html/js/global/controlEspecificaciones.js"></script>
   <script src="../../html/js/global/cargarBatch.js"></script>
+  <script src="../../html/js/global/condiciones_medio.js"></script>
   <script src="../../html/js/fisicoquimica/fisicoquimicainfo.js"></script>
 </body>
 

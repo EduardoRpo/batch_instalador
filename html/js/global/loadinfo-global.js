@@ -47,16 +47,6 @@ $(document).ready(function () {
 
 /* Modulo */
 $(document).ready(function () {
-  /* $.ajax({
-    method: "POST",
-    url: "/html/php/modulo.php",
-    data: { proceso },
-  
-    success: function (data, status, xhr) {
-      if (data !== "") {
-        const info = JSON.parse(data);
-        data == "false" ? (modulo = modulo) : (modulo = info.id); */
-
   if (
     modulo != 4 &&
     modulo != 7 &&
@@ -71,9 +61,6 @@ $(document).ready(function () {
     //cargar_condicionesMedio();
     validarTanques(modulo);
   }
-  /*  }
-    },
-  }); */
 });
 
 /* Carga de datos de informacion del batch record seleccionado */
@@ -136,7 +123,7 @@ function fechaHoy() {
     dia;
 }
 
-//Validar seleccion en microbiologia
+//Validar seleccion en microbiologia y fisicoquimico
 
 let validarSeleccion = () => {
   if ($("input[name='rdbtnConfirmacion']:radio").is(":checked")) {

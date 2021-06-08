@@ -1283,8 +1283,8 @@
                 <div class="col2sm m-3">
                     <label for="">Aprobado</label>
                     <label for="">Rechazado</label>
-                    <input type="checkbox" name="chkAprobado" id="chkAprobado">
-                    <input type="checkbox" name="chkRechazado" id="chkRechazado">
+                    <input class="chkAprobado" type="checkbox" name="chkAprobado" id="chkAprobado">
+                    <input class="chkRechazado" type="checkbox" name="chkRechazado" id="chkRechazado">
                 </div>
             </div>
 
@@ -1294,8 +1294,11 @@
             </div>
 
             <div class="firmas" id="firmas5">
+                <div id="blank_rea8"></div>
                 <img id="f_realizoMicro" src="" alt="firma_usuario" height="130">
+                <div id="blank_ver8"></div>
                 <img id="f_verificoMicro" src="" alt="firma_usuario" height="130">
+
                 <label id="user_realizoMicro"></label>
                 <label id="user_verificoMicro"></label>
             </div>
@@ -1450,8 +1453,8 @@
                 <div class="col2sm m-3">
                     <label for="">Aprobado</label>
                     <label for="">Rechazado</label>
-                    <input type="checkbox" name="" id="">
-                    <input type="checkbox" name="" id="">
+                    <input class="chkAprobado" type="checkbox" name="chkAprobado" id="chkAprobado">
+                    <input class="chkRechazado" type="checkbox" name="chkRechazado" id="chkRechazado">
                 </div>
             </div>
 
@@ -1461,10 +1464,10 @@
             </div>
 
             <div class="firmas" id="firmas5">
-                <img id="f_realizo5" src="" alt="firma_usuario" height="130">
-                <img id="f_verifico5" src="" alt="firma_usuario" height="130">
-                <label id="user_realizo5"></label>
-                <label id="user_verifico5"></label>
+                <img id="f_realizo9" src="" alt="firma_usuario" height="130">
+                <img id="f_verifico9" src="" alt="firma_usuario" height="130">
+                <label id="user_realizo9"></label>
+                <label id="user_verifico9"></label>
             </div>
 
             <!-- Fin Fisicoquimico -->

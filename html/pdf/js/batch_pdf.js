@@ -211,6 +211,7 @@ despachos = () => {
     data: { operacion: 13, idBatch },
     success: function (response) {
       info = JSON.parse(response);
+      $("#fecha7").html(info[0].fecha_registro);
       for (let i = 0; i < info.length; i++) {
         $(`#user_entrego`).html(
           "Realizó: " + "<b>" + info[i].nombre + " " + info[i].apellido + "</b>"
@@ -658,8 +659,8 @@ analisisMicrobiologico = () => {
     success: function (response) {
       if (response == "[]") return false;
 
-      $("#chkAprobado").prop("disabled", true);
-      $("#chkRechazado").prop("disabled", true);
+      $(".chkAprobado").prop("disabled", true);
+      $(".chkRechazado").prop("disabled", true);
 
       data = JSON.parse(response);
       let result1, result2, result3;
@@ -690,17 +691,56 @@ analisisMicrobiologico = () => {
         .val(data[0].fecha_resultados)
         .css("text-align", "center");
 
-      $(`#f_realizoMicro`).prop("src", data[0].realizo);
-      $(`#f_verificoMicro`).prop("src", data[0].verifico);
-      $(`#user_realizoMicro`).html(
-        "Realizó: " + "<b>" + data[0].nombre_realizo + "</b>"
-      );
-      $(`#user_verificoMicro`).html(
-        "Verificó: " + "<b>" + data[0].nombre_verifico + "</b>"
-      );
+      if (data[0].realizo) {
+        $(`#f_realizoMicro`).prop("src", data[0].realizo);
+        $(`#user_realizoMicro`).html(
+          "Realizó: " + "<b>" + data[0].nombre_realizo + "</b>"
+        );
+      }
 
-      if (data[0].observaciones == "") $("#chkAprobado").prop("checked", true);
-      else $("#chkAprobado").prop("checked", true);
+      if (data[0].verifico) {
+        $(`#f_verificoMicro`).prop("src", data[0].verifico);
+        $(`#user_verificoMicro`).html(
+          "Verificó: " + "<b>" + data[0].nombre_verifico + "</b>"
+        );
+      } else {
+        $(`#f_verificoMicro`).hide();
+        $(`#blank_ver`).show();
+        $(`#user_verificoMicro`).html("Verificó: " + "<b>Sin firmar</b>");
+      }
+      $(".chkAprobado").prop("checked", true);
+      /* if (data[0].observaciones == "") $(".chkAprobado").prop("checked", true);
+      else $(".chkAprobado").prop("checked", true); */
+    },
+  });
+};
+
+const fisicoquimico = () => {
+  $.ajax({
+    type: "POST",
+    url: "../../html/php/c_batch_pdf.php",
+    data: { operacion: 15, idBatch },
+    success: function (response) {
+      if (response == "[]") return false;
+      data = JSON.parse(response);
+
+      if (data[0].realizo) {
+        $(`#f_realizoMicro`).prop("src", data[0].realizo);
+        $(`#user_realizoMicro`).html(
+          "Realizó: " + "<b>" + data[0].nombre_realizo + "</b>"
+        );
+      }
+
+      if (data[0].verifico) {
+        $(`#f_verificoMicro`).prop("src", data[0].verifico);
+        $(`#user_verificoMicro`).html(
+          "Verificó: " + "<b>" + data[0].nombre_verifico + "</b>"
+        );
+      } else {
+        $(`#f_verificoMicro`).hide();
+        $(`#blank_ver`).show();
+        $(`#user_verificoMicro`).html("Verificó: " + "<b>Sin firmar</b>");
+      }
     },
   });
 };
@@ -726,8 +766,9 @@ $(document).ready(function () {
   equipos();
   ajustes();
   muestras_acondicionamiento();
-  //despachos();
+  despachos();
   analisisMicrobiologico();
+  //fisicoquimico();
 
   setTimeout(() => {
     entrega_material_acondicionamiento();

@@ -141,7 +141,7 @@ if ($batch == 1) {
     $firmas_proceso = $query->fetchAll(PDO::FETCH_ASSOC);
 
     for ($i = 0; $i < sizeof($firmas_proceso); $i++) {
-        if ($firmas_proceso[$i]['modulo'] != 4) {
+        if ($firmas_proceso[$i]['modulo'] != 4 && $firmas_proceso[$i]['modulo'] != 8 ) {
             if ($firmas_proceso[$i]['realizo'] > 0)
                 $cantidad = $cantidad + 1;
             if ($firmas_proceso[$i]['verifico'] > 0)

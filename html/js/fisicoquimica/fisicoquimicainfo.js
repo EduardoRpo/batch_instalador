@@ -18,7 +18,7 @@ $(document).ready(function () {
   });
 });
 
-/* Validar qque todos los campos este llenos */
+/* Validar que todos los campos este llenos */
 
 cargar = (btn, idbtn) => {
   sessionStorage.setItem("idbtn", idbtn);
@@ -71,7 +71,12 @@ deshabilitarbtn = () => {
   $(`.fisicoquimica_verificado`).prop("disabled", false);
 };
 
+$(".color").change(function (e) {
+  e.preventDefault();
+  validar_condicionesMedio();
+});
+
 /* Carga formulario */
 
 cargarControlProceso();
-cargarfirma2daSeccion();
+cargarDesinfectante();

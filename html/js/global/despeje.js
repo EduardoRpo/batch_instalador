@@ -12,11 +12,11 @@ function carguepreguntas(data) {
     $("#preguntas-div").html("");
     data.forEach((question, indx) => {
       $("#preguntas-div").append(`
-                    <a for="recipient-name" class="col-form-label" id="${question.id_pregunta}">${question.pregunta}</a>
-                    <label class="checkbox"> 
-                    <input type="radio" class="questions" name="question-${question.id_pregunta}" id="${question.id_pregunta}" value="1"/></label>
-                    <label class="checkbox"> 
-                    <input type="radio" name="question-${question.id_pregunta}" id="${question.id_pregunta}" value="0"/></label>`);
+        <a for="recipient-name" class="col-form-label" id="${question.id_pregunta}">${question.pregunta}</a>
+        <label class="checkbox"> 
+        <input type="radio" class="questions" name="question-${question.id_pregunta}" id="${question.id_pregunta}" value="1"/></label>
+        <label class="checkbox"> 
+        <input type="radio" name="question-${question.id_pregunta}" id="${question.id_pregunta}" value="0"/></label>`);
     });
   });
 }

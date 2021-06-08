@@ -44,6 +44,8 @@ function cargarDesinfectante() {
       observacion = info.observaciones;
       firma = info.urlfirma;
 
+      console.log($("#sel_producto_desinfeccion").val(desinfectante));
+
       $("#sel_producto_desinfeccion").val(desinfectante);
       $("#in_observaciones").val(observacion);
       firmado(firma, 1);
@@ -116,14 +118,10 @@ function cargarfirma2daSeccion() {
 
           success: function (response) {
             let data = JSON.parse(response);
-
             if (data == 0) return false;
-
             let firma = data.realizo;
             let verifico = data.verifico;
-
             firmado(firma, 3);
-
             if (verifico !== undefined) firmado(verifico, 4);
           },
         });
@@ -131,23 +129,6 @@ function cargarfirma2daSeccion() {
     },
   });
 }
-
-/* function firmar2daSeccion() {
-    debugger;
-     if (posicion == 3)
-    if (modulo == 2) {
-        parent = $('#pesaje_realizado').parent();
-        $('#pesaje_realizado').remove();
-        $('.pesaje_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
-        $('.pesaje_verificado').prop('disabled', false);
-    }  else if (modulo == 3) {
-            parent = $('#preparacion_realizado').parent();
-            $('#preparacion_realizado').remove();
-            $('.preparacion_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
-            $('.preparacion_verificado').prop('disabled', false);
-
-        }
-} */
 
 /* Registro de Firma */
 
