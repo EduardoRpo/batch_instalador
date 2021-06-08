@@ -211,12 +211,17 @@ despachos = () => {
     data: { operacion: 13, idBatch },
     success: function (response) {
       info = JSON.parse(response);
-      $("#fecha7").html(info[0].fecha_registro);
-      for (let i = 0; i < info.length; i++) {
-        $(`#user_entrego`).html(
-          "Realizó: " + "<b>" + info[i].nombre + " " + info[i].apellido + "</b>"
-        );
-        $(`#f_entrego`).prop("src", info[i].urlfirma);
+      if (info.length > 0) {
+        $("#fecha7").html(info[0].fecha_registro);
+        for (let i = 0; i < info.length; i++) {
+          $(`#user_entrego`).html(
+            `Realizó:<b>${info[i].nombre} ${info[i].apellido}</b>`
+          );
+          $(`#f_entrego`).prop("src", info[i].urlfirma);
+        }
+      } else {
+        $(`#f_entrego`).hide();
+        $(`#user_entrego`).html("Verificó: " + "<b>Sin firmar</b>");
       }
     },
   });
@@ -628,10 +633,8 @@ conciliacion = () => {
           $(`#f_realizoConciliacion`).prop("src", info[i].urlfirma);
           $(`#user_realizoConciliacion`).html(info[i].nombre);
         } else if (info[i].modulo == 7) {
-          $(`#user_entrego`).html(
-            "Realizó: " + "<b>" + info[i].nombre + "</b>"
-          );
-          $(`#f_entrego`).prop("src", info[i].urlfirma);
+          $(`#f_realizoConciliacion`).hide();
+          $(`#user_realizoConciliacion`).html("Sin firmar");
         }
       }
     },

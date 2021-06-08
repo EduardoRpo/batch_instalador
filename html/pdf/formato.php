@@ -1464,7 +1464,9 @@
             </div>
 
             <div class="firmas" id="firmas5">
+                <div id="blank_rea9"></div>
                 <img id="f_realizo9" src="" alt="firma_usuario" height="130">
+                <div id="blank_ver9"></div>
                 <img id="f_verifico9" src="" alt="firma_usuario" height="130">
                 <label id="user_realizo9"></label>
                 <label id="user_verifico9"></label>
@@ -1476,7 +1478,7 @@
             <h1 class="SaltoDePagina"> </h1>
 
             <div class="subtitleProcess"><label for=""> <b>LIBERACIÓN LOTE</b></label></div>
-            <div class="m-3 ml-3">
+            <div class="m-3 ml-3 mb-5">
                 <div class="col3">
                     <label for="" class="item1">* Revisión general de la información registrada en el Batch Record corroborando que el producto se encuentra en optimas condiciones para ser liberado y autorizada su comercialización.
                         ¿El producto está apto para liberar?</label>
@@ -1508,24 +1510,25 @@
                 </div>
             </div>
             <!-- fin liberacion lote  -->
+        </div>
+    </div>
 
 
-
-            <script src="../../assets/plugins/jquery/jquery.min.js"></script>
-            <script src="../../assets/plugins/bootstrap/js/tether.min.js"></script>
-            <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-            <script src="../../html/vendor/datatables/datatables.min.js" type="text/javascript"></script>
-            <!-- slimscrollbar scrollbar JavaScript -->
-            <script src="../../html/js/utils/jquery.slimscroll.js"></script>
-            <!--Wave Effects -->
-            <script src="../../html/js/utils/waves.js"></script>
-            <!--Menu sidebar -->
-            <script src="../../html/js/utils/sidebarmenu.js"></script>
-            <!--stickey kit -->
-            <script src="../../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
-            <script src="https://use.fontawesome.com/15242848ba.js"></script>
-            <script src="js/batch_pdf.js"></script>
-            <script src="js/printThis.js"></script>
+    <script src="../../assets/plugins/jquery/jquery.min.js"></script>
+    <script src="../../assets/plugins/bootstrap/js/tether.min.js"></script>
+    <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../html/vendor/datatables/datatables.min.js" type="text/javascript"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="../../html/js/utils/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="../../html/js/utils/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="../../html/js/utils/sidebarmenu.js"></script>
+    <!--stickey kit -->
+    <script src="../../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="https://use.fontawesome.com/15242848ba.js"></script>
+    <script src="js/batch_pdf.js"></script>
+    <script src="js/printThis.js"></script>
 
 </body>
 
