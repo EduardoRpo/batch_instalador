@@ -95,6 +95,7 @@ const imprimirEtiquetasRetencion = () => {
         retencion = {};
         retencion.referencia = batch.referencia;
         retencion.producto = batch.nombre_referencia;
+        retencion.presentacion = batch.presentacion;
         retencion.lote = batch.numero_lote;
         retencion.orden = batch.numero_orden;
         if (i < $muestras_retencion.length)

@@ -23,6 +23,11 @@ $(document).on("click", ".link-cerrar", function (e) {
   window.close();
 });
 
+/* Mostrar multipresentacion */
+
+$("#multipresentacion2").hide();
+$("#multipresentacion3").hide();
+
 /* Cargar data */
 
 cargar_Alertas = () => {
