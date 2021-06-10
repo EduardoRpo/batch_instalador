@@ -22,6 +22,8 @@
                 <th>F.Creación</th>
                 <th>F.Programación</th>
                 <th>F.Eliminación</th>
+                <th>Motivo</th>
+
               </tr>
             </thead>
             <tbody>

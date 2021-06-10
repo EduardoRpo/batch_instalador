@@ -10,7 +10,7 @@ function batchEliminados() {
 
 function cargartablaEliminados() {
     $("#tablabatchEliminados").DataTable({
-        scrollY: '100vh',
+        //scrollY: '100vh',
         responsive: true,
         scrollCollapse: true,
         //paging: false,
@@ -33,6 +33,7 @@ function cargartablaEliminados() {
             { "data": "fecha_creacion", className: "centrado" },
             { "data": "fecha_programacion", className: "centrado" },
             { "data": "fecha_eliminacion", className: "centrado" },
+            { "data": "observaciones", className: "centrado" },
         ],
     });
 };
