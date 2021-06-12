@@ -71,13 +71,13 @@ switch ($op) {
 
   case 2: //Eliminar
     $id_batch = $_POST['id'];
-    $observaciones = $_POST['value'];
+    $motivo = $_POST['value'];
 
     $query_batch_Eliminar = "UPDATE batch SET estado = 0, fecha_eliminacion = CURDATE() WHERE id_batch = $id_batch";
     $result_eliminar = mysqli_query($conn, $query_batch_Eliminar);
 
-    $query_observaciones = "INSERT INTO batch_eliminados (batch, observaciones) VALUES('$id_batch', '$observaciones')";
-    $result_observaciones = mysqli_query($conn, $query_observaciones);
+    $query_motivo = "INSERT INTO batch_eliminados (batch, motivo) VALUES('$id_batch', '$motivo')";
+    $result_motivo = mysqli_query($conn, $query_motivo);
     mysqli_close($conn);
 
     break;

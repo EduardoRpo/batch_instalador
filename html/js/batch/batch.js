@@ -118,40 +118,43 @@ $(document).on("click", ".link-borrar", function (e) {
 
   const confirm = alertify
     .confirm(
-      "Samara Cosmetics",
-      "¿Está seguro de eliminar este registro?",
+      `¿Está seguro de eliminar el Batch ${id}?`,
+      `<label>Motivo de Eliminación: </label>
+      <select style='width: 100%' class="form-control" id="motivoEliminacion">
+        <option value='' disabled selected>Seleccione</option>
+        <option value='1'>Cancelado por el usuario</option>
+        <option value='2'>Falta de Materia Prima o Insumos</option>
+        <option value='3'>Producto descontinuado</option>
+        <option value='4'>Otros</option>
+      </select>`,
       null,
       null
     )
     .set("labels", { ok: "Si", cancel: "No" });
 
   confirm.set("onok", function (r) {
+    let value = $("#motivoEliminacion").val();
+    if (value == null) {
+      alertify.set("notifier", "position", "top-right");
+      alertify.error(`Seleccione el motivo de <b>Eliminación</b>`);
+      return false;
+    }
     if (r) {
-      alertify.prompt(
-        "Motivo de Eliminación",
-        "",
-        "",
-        function (evt, value) {
-          $.ajax({
-            method: "POST",
-            url: "php/listarBatch.php",
-            data: { operacion: "2", id: id, value },
+      $.ajax({
+        method: "POST",
+        url: "php/listarBatch.php",
+        data: { operacion: "2", id: id, value },
 
-            success: function (r) {
-              alertify.set("notifier", "position", "top-right");
-              alertify.success("Batch Record Eliminado.");
-              actualizarTabla();
-            },
-            error: function (r) {
-              alertify.set("notifier", "position", "top-right");
-              alertify.error("Error al Eliminar el Batch Record.");
-            },
-          });
+        success: function (r) {
+          alertify.set("notifier", "position", "top-right");
+          alertify.success("Batch Record Eliminado.");
+          actualizarTabla();
         },
-        function () {
-          alertify.error("Cancelado");
-        }
-      );
+        error: function (r) {
+          alertify.set("notifier", "position", "top-right");
+          alertify.error("Error al Eliminar el Batch Record.");
+        },
+      });
     }
   });
 });

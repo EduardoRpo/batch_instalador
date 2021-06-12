@@ -134,7 +134,7 @@ guardar_microbiologia_calidad = (info) => {
   $.ajax({
     type: "POST",
     url: "../../html/php/microbiologia.php",
-    data: { op: 3, idBatch, verifico },
+    data: { op: 3, idBatch, verifico, modulo },
     success: function (r) {
       if (r == "true") {
         alertify.set("notifier", "position", "top-right");

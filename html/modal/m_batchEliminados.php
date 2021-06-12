@@ -9,7 +9,7 @@
       </div>
       <div class="modal-body">
         <div class="table-responsive">
-          <table class="table table-striped table-bordered" id="tablabatchEliminados" name="tablabatchEliminados">
+          <table class="table table-striped" id="tablabatchEliminados" name="tablabatchEliminados">
             <thead>
               <tr>
                 <th>No</th>
@@ -18,12 +18,10 @@
                 <th>Tamaño</th>
                 <th>Producto</th>
                 <th>Presentación</th>
-                <th>Unidad</th>
+                <th>Unidades</th>
                 <th>F.Creación</th>
-                <th>F.Programación</th>
                 <th>F.Eliminación</th>
                 <th>Motivo</th>
-
               </tr>
             </thead>
             <tbody>
@@ -35,7 +33,6 @@
 
       </div>
       <div class="modal-footer">
-        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button> -->
         <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
       </div>
     </div>

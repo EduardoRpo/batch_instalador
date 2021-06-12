@@ -3,6 +3,7 @@
 if (!empty($_POST)) {
 
     require_once('../../conexion.php');
+    require_once('./controlFirmas.php');
     require_once('../../admin/sistema/php/crud.php');
 
     $op = $_POST['operacion'];
@@ -24,7 +25,7 @@ if (!empty($_POST)) {
                 'ref_multi' => $ref_multi,
                 'realizo' => $firma,
             ]);
-
+            registrarFirmas($conn, $batch, $modulo);
             if ($result) echo '1';
             else echo '0';
 
@@ -43,6 +44,7 @@ if (!empty($_POST)) {
                 'batch' => $batch,
                 'ref_multi' => $ref_multi,
             ]);
+            registrarFirmas($conn, $batch, $modulo);
             break;
 
         case 3: //Obtener los datos y firmas de la tabla firma2 
@@ -134,7 +136,7 @@ if (!empty($_POST)) {
                 'ref_multi' => $ref_multi,
                 'verifico' => $firma,
             ]);
-
+            registrarFirmas($conn, $batch, $modulo);
             if ($result) {
                 echo '1';
             } else

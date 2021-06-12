@@ -2,6 +2,8 @@
 
 if (!empty($_POST)) {
     require_once('../../conexion.php');
+    require_once('./controlFirmas.php');
+
     $op = $_POST['op'];
     $batch = $_POST['idBatch'];
 
@@ -86,6 +88,8 @@ if (!empty($_POST)) {
                 'modulo' => $modulo
             ]);
 
+            registrarFirmas($conn, $batch, $modulo);
+
             if ($result) echo 'true';
             else echo 'false';
             break;
@@ -93,6 +97,7 @@ if (!empty($_POST)) {
         case '3': // Guardar firma calidad
             $verifico = $_POST['verifico'];
             $batch = $_POST['idBatch'];
+            $modulo = $_POST['modulo'];
 
             $sql = "UPDATE `batch_desinfectante_seleccionado` SET verifico = :verifico WHERE batch = :batch";
             $query = $conn->prepare($sql);
@@ -101,6 +106,8 @@ if (!empty($_POST)) {
             $sql = "UPDATE `batch_analisis_microbiologico` SET verifico = :verifico WHERE batch = :batch";
             $query = $conn->prepare($sql);
             $result = $query->execute(['verifico' => $verifico, 'batch' => $batch]);
+
+            registrarFirmas($conn, $batch, $modulo);
             
             if ($result) echo 'true';
 

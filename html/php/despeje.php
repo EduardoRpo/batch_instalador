@@ -6,7 +6,7 @@ if (!empty($_POST)) {
 
     require_once('../../conexion.php');
     require_once('../../admin/sistema/php/crud.php');
-
+    require_once('./controlFirmas.php');
 
     $op = $_POST['operacion'];
 
@@ -34,11 +34,9 @@ if (!empty($_POST)) {
 
             $sql = "SELECT d.desinfectante, d.observaciones, u.urlfirma FROM batch_desinfectante_seleccionado d 
                     INNER JOIN usuario u ON u.id = d.realizo WHERE modulo = :modulo AND batch = :batch";
-
             $query = $conn->prepare($sql);
             $query->execute(['batch' => $batch, 'modulo' => $modulo]);
             $rows = $query->rowCount();
-
             if ($rows > 0)
                 ejecutarSelect1($query);
 
@@ -111,8 +109,11 @@ if (!empty($_POST)) {
                     'realizo' => $realizo,
                 ]);
                 ejecutarQuery($result, $conn);
-                /* inventario_firmas(); */
+                /* Auditoria de Firmas */
+                registrarFirmas($conn, $batch, $modulo);
+                
             }
+            
 
             break;
         case 5: // almacenar firma calidad 1ra seccion
@@ -125,6 +126,8 @@ if (!empty($_POST)) {
             $query = $conn->prepare($sql);
             $result = $query->execute(['modulo' => $modulo, 'batch' => $batch, 'verifico' => $verifico]);
             if ($result) echo '1';
+             /* Auditoria de Firmas */
+             registrarFirmas($conn, $batch, $modulo);
             break;
     }
 }

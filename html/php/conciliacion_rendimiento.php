@@ -1,7 +1,7 @@
 <?php
 if (!empty($_POST)) {
     require_once('../../conexion.php');
-
+    require_once('./controlFirmas.php');
 
     $op = $_POST['operacion'];
     $batch =  $_POST['idBatch'];
@@ -33,6 +33,8 @@ if (!empty($_POST)) {
                 'referencia' => $referencia,
                 'entrego' => $entrego,
             ]);
+
+            registrarFirmas($conn, $batch, $modulo);
 
             /* Almacenar muestras retencion */
 
@@ -102,6 +104,8 @@ if (!empty($_POST)) {
                 'referencia' => $referencia,
                 'entrego' => $entrego,
             ]);
+            
+            registrarFirmas($conn, $batch, $modulo);
             break;
 
         case 4:

@@ -4,7 +4,7 @@ if (!empty($_POST)) {
 
   $material = $_POST['materialsobrante'];
   $ref_producto = $_POST['ref_multi'];
-  $idBatch = $_POST['idBatch'];
+  $batch = $_POST['idBatch'];
   $modulo = $_POST['modulo'];
   $id_firma = $_POST['info'];
 
@@ -18,11 +18,12 @@ if (!empty($_POST)) {
       'averias' => $valor['averias'],
       'sobrante' => $valor['sobrante'],
       'producto' => $ref_producto,
-      'batch' => $idBatch,
+      'batch' => $batch,
       'modulo' => $modulo,
       'realizo' => $id_firma,
     ]);
   }
+  registrarFirmas($conn, $batch, $modulo);
   if ($result) echo '1';
   else echo '0';
 }
