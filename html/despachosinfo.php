@@ -210,6 +210,10 @@ include('modal/image.php')
                             <textarea class="form-control" aria-label="With textarea" id="obs1"></textarea>
                           </div>
 
+                          <div class="group obs">
+                            <button class="btn btn-primary">Entrega parcial</button>
+                          </div>
+
                         </div>
 
                         <div class="row" style="margin: 2%">
@@ -253,7 +257,7 @@ include('modal/image.php')
                       <div class="card-block">
                         <div class="despachos">
 
-                        <div class="group">
+                          <div class="group">
                             <label for="recipient-name" class="col-form-label">Unidades Recibidas</label>
                             <input type="number" class="form-control centrado" id="unidades_recibidas_acond2" readonly>
                           </div>
@@ -297,6 +301,9 @@ include('modal/image.php')
                             <label for="recipient-name" class="col-form-label">Observaciones</label>
                             <textarea class="form-control" aria-label="With textarea" id="obs2"></textarea>
                           </div>
+                          <div class="group obs">
+                            <button class="btn btn-primary">Entrega parcial</button>
+                          </div>
 
                         </div>
                         <div class="row" style="margin: 2%">
@@ -339,7 +346,7 @@ include('modal/image.php')
                       <div class="card-block">
                         <div class="despachos">
 
-                        <div class="group">
+                          <div class="group">
                             <label for="recipient-name" class="col-form-label">Unidades Recibidas</label>
                             <input type="number" class="form-control centrado" id="unidades_recibidas_acond3" readonly>
                           </div>
@@ -382,6 +389,9 @@ include('modal/image.php')
                           <div class="group obs">
                             <label for="recipient-name" class="col-form-label">Observaciones</label>
                             <textarea class="form-control" aria-label="With textarea" id="obs3"></textarea>
+                          </div>
+                          <div class="group obs">
+                            <button class="btn btn-primary">Entrega parcial</button>
                           </div>
 
                         </div>
