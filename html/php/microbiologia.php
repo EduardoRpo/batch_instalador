@@ -3,6 +3,7 @@
 if (!empty($_POST)) {
     require_once('../../conexion.php');
     require_once('./controlFirmas.php');
+    require_once('./firmas.php');
 
     $op = $_POST['op'];
     $batch = $_POST['idBatch'];
@@ -50,67 +51,25 @@ if (!empty($_POST)) {
         case 2: // Guardar
             $modulo = $_POST['modulo'];
             $dataMicrobiologia = $_POST['dataMicro'];
-            $realizo = $_POST['info'];
-
+            
             /* Almacenar equipos */
             $sql = "INSERT INTO `batch_equipos`(equipo, batch, modulo) VALUES(:equipo, :batch, :modulo)";
             $query = $conn->prepare($sql);
-
+            
             for ($i = 1; $i < 4; $i++) {
                 $query->execute(['equipo' => $dataMicrobiologia[0]["equipo$i"], 'batch' => $batch, 'modulo' => $modulo]);
             }
-
-            $sql = "INSERT INTO `batch_analisis_microbiologico`(mesofilos, pseudomona, escherichia, staphylococcus, fecha_siembra, fecha_resultados, observaciones, realizo, batch, modulo) 
-                    VALUES(:mesofilos, :pseudomona, :escherichia, :staphylococcus, :fecha_siembra, :fecha_resultados, :observaciones, :realizo, :batch, :modulo)";
-            $query = $conn->prepare($sql);
-            $result = $query->execute([
-                'mesofilos' => $dataMicrobiologia[0]["mesofilos"],
-                'pseudomona' => $dataMicrobiologia[0]["pseudomona"],
-                'escherichia' => $dataMicrobiologia[0]["escherichia"],
-                'staphylococcus' => $dataMicrobiologia[0]["staphylococcus"],
-                'fecha_siembra' => $dataMicrobiologia[0]["fechaSiembra"],
-                'fecha_resultados' => $dataMicrobiologia[0]["fechaResultados"],
-                'observaciones' => $dataMicrobiologia[0]["observaciones"],
-                'realizo' => $realizo[0]["id"],
-                'batch' => $batch,
-                'modulo' => $modulo
-            ]);
-
-
-            $sql = "INSERT INTO `batch_desinfectante_seleccionado`(desinfectante, observaciones, modulo, batch, realizo) 
-                    VALUES(:desinfectante, :observaciones, :modulo, :batch, :realizo)";
-            $query = $conn->prepare($sql);
-            $result = $query->execute([
-                'desinfectante' => $dataMicrobiologia[0]["desinfectante"],
-                'observaciones' => $dataMicrobiologia[0]["desinfectante_observaciones"],
-                'realizo' => $realizo[0]["id"],
-                'batch' => $batch,
-                'modulo' => $modulo
-            ]);
-
-            registrarFirmas($conn, $batch, $modulo);
-
-            if ($result) echo 'true';
-            else echo 'false';
+            
+            analisisMicrobiologiaRealizo($conn);
+            desinfectanteRealizo($conn);
+            
             break;
 
         case '3': // Guardar firma calidad
-            $verifico = $_POST['verifico'];
-            $batch = $_POST['idBatch'];
-            $modulo = $_POST['modulo'];
-
-            $sql = "UPDATE `batch_desinfectante_seleccionado` SET verifico = :verifico WHERE batch = :batch";
-            $query = $conn->prepare($sql);
-            $result = $query->execute(['verifico' => $verifico, 'batch' => $batch]);
-
-            $sql = "UPDATE `batch_analisis_microbiologico` SET verifico = :verifico WHERE batch = :batch";
-            $query = $conn->prepare($sql);
-            $result = $query->execute(['verifico' => $verifico, 'batch' => $batch]);
-
-            registrarFirmas($conn, $batch, $modulo);
             
-            if ($result) echo 'true';
-
+            AnalisisMicrobiologiaVerifico($conn);
+            desinfectanteVerifico($conn);
+            
             break;
     }
 } else

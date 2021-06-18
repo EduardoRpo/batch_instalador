@@ -164,7 +164,7 @@ include('modal/modal_condicionesMedio.php');
                   </div>
                   <div class="col-md-8 align-self-center">
                     <label for="recipient-name" class="col-form-label">Observaciones:</label>
-                    <input type="text" class="form-control" id="recipient2-name">
+                    <input type="text" class="form-control" id="in_observaciones">
                   </div>
                 </div>
 

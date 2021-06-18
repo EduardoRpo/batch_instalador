@@ -5,7 +5,7 @@
 modulo = 6;
 let id_multi = 1;
 let flag = 0;
-const equipos = [];
+let equipos = [];
 
 //Carga el proceso despues de cargar la data  del Batch
 
@@ -104,17 +104,6 @@ function deshabilitarbotones() {
   }
 }
 
-/* function habilitarbotones() {
-   btn_id = sessionStorage.getItem("idbtn");
-
-  if (btn_id == "firma1")
-    $(`.controlpeso_realizado${id_multi}`).prop("disabled", false);
-
-  for (let index = 1; index < 4; index++) {
-    $(`.controlpeso_realizado${index}`).prop("disabled", false);
-  }
-} */
-
 /* Ocultar Envasado */
 
 function ocultar_acondicionamiento() {
@@ -183,6 +172,7 @@ function cargar(btn, idbtn) {
       alertify.error("Seleccione los equipos de la linea de producción.");
       return false;
     } else {
+      equipos = [];
       for (i = 1; i < 4; i++) {
         const equipo = {};
         if (i === 1) equipo.equipo = banda;
@@ -190,6 +180,7 @@ function cargar(btn, idbtn) {
         if (i === 3) equipo.equipo = tunel;
         equipo.batch = idBatch;
         equipo.modulo = modulo;
+        equipo.referencia = ref_multi;
         equipos.push(equipo);
       }
     }
@@ -277,7 +268,7 @@ function recalcular_valores() {
 
 /* Almacena la info de tabla devolucion material */
 
-function registrar_material_sobrante(info) {
+function registrar_material_sobrante(realizo) {
   let materialsobrante = [];
   let datasobrante = {};
 
@@ -307,7 +298,7 @@ function registrar_material_sobrante(info) {
   $.ajax({
     type: "POST",
     url: "../../html/php/c_devolucionMaterial.php",
-    data: { materialsobrante, ref_multi, idBatch, modulo, info },
+    data: { materialsobrante, ref_multi, idBatch, modulo, realizo },
 
     success: function (response) {
       alertify.set("notifier", "position", "top-right");
@@ -397,7 +388,7 @@ function registrar_conciliacion(idfirma) {
       modulo,
       idBatch,
       ref_multi,
-      idfirma,
+      realizo: idfirma,
     }),
     function (data, textStatus, jqXHR) {
       if (textStatus == "success") {

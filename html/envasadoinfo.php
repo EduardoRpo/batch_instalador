@@ -466,7 +466,7 @@ include('modal/image.php')
 
                     <div class="mb-3 ml-3 mr-3">
                       <label>Digite el lote (requerido)</label>
-                      <input type="text" class="form-control validarLote" id="validarLote1" autocomplete="off" onblur="revisarLote();">
+                      <input type="text" class="form-control validarLote" id="validarLote2" autocomplete="off" onblur="revisarLote();">
                     </div>
 
                     <div class="id_envasadora_loteadora mb-3 ml-3 mr-3">
@@ -530,7 +530,7 @@ include('modal/image.php')
                         <input type="text" class="form-control" id="controlpeso_realizado2" readonly>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_realizado2" id="'controlpeso_realizado2'" onclick="cargar(this, 'firma3')" style="width: 100%; height: 38px;">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_realizado2" id="controlpeso_realizado2" onclick="cargar(this, 'firma3')" style="width: 100%; height: 38px;">Firmar</button>
                       </div>
 
                       <div class="col-md-4 align-self-center">
@@ -679,7 +679,7 @@ include('modal/image.php')
 
                     <div class="mb-3 ml-3 mr-3">
                       <label>Digite el lote (requerido)</label>
-                      <input type="text" class="form-control validarLote" id="validarLote1" autocomplete="off" onblur="revisarLote();">
+                      <input type="text" class="form-control validarLote" id="validarLote3" autocomplete="off" onblur="revisarLote();">
                     </div>
 
                     <div class="id_envasadora_loteadora mb-3 ml-3 mr-3">

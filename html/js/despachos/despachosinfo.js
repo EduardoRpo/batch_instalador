@@ -112,7 +112,7 @@ function cargar_despacho() {
       let info = JSON.parse(data);
 
       if (info == 0) return false;
-      unidades = $(`#unidad_empaque${id_multi}`).val();
+      unidades = parseFloat($(`#unidad_empaque${id_multi}`).val());
       $(`#unidades_recibidas_acond${id_multi}`).val(info.unidades_producidas);
       $(`#cajas_acond${id_multi}`).val(
         (

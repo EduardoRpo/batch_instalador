@@ -6,9 +6,9 @@ if (!empty($_POST)) {
     $equipos = $_POST['equipos'];
 
     foreach ($equipos as $equipo) {
-        $sql = "INSERT INTO batch_equipos (equipo, batch, modulo) VALUES(:equipo, :batch, :modulo)";
+        $sql = "INSERT INTO batch_equipos (equipo, referencia, batch, modulo) VALUES(:equipo, :referencia, :batch, :modulo)";
         $query = $conn->prepare($sql);
-        $result = $query->execute(['equipo' => $equipo['equipo'], 'batch' => $equipo['batch'], 'modulo' => $equipo['modulo']]);
+        $result = $query->execute(['equipo' => $equipo['equipo'], 'referencia' => $equipo['referencia'], 'batch' => $equipo['batch'], 'modulo' => $equipo['modulo']]);
         if ($result) echo 'true';
         else echo 'false';
     }

@@ -26,13 +26,13 @@ function almacenar_muestras(firma) {
 
         success: function (response) {
           if (response === "false") return false;
-          let id_firma = firma[0].id;
+          let realizo = firma[0].id;
 
           //Almacena la firma
           $.ajax({
             type: "POST",
             url: "../../html/php/envasado.php",
-            data: { operacion: 1, id_firma, modulo, idBatch, ref_multi },
+            data: { operacion: 1, realizo, modulo, idBatch, ref_multi },
 
             success: function (response) {
               alertify.set("notifier", "position", "top-right");
@@ -52,11 +52,11 @@ function almacenar_muestras(firma) {
 
 /* almacenar firma calidad 2da seccion */
 
-function almacenarfirma(id_firma) {
+function almacenarfirma(verifico) {
   $.ajax({
     type: "POST",
     url: "../../html/php/envasado.php",
-    data: { operacion: 2, id_firma, modulo, idBatch, ref_multi },
+    data: { operacion: 2, verifico, modulo, idBatch, ref_multi },
 
     success: function (response) {
       alertify.set("notifier", "position", "top-right");
@@ -68,25 +68,22 @@ function almacenarfirma(id_firma) {
   });
 }
 
-function firmaCalidad(id_firma) {
+function firmaCalidad(verifico) {
   $.ajax({
     type: "POST",
     url: "../../html/php/envasado.php",
-    data: { operacion: 5, id_firma, modulo, idBatch, ref_multi },
+    data: { operacion: 5, verifico, modulo, idBatch, ref_multi },
 
     success: function (response) {
-      if (response == 1) {
-        alertify.set("notifier", "position", "top-right");
-        alertify.success("Firmado satisfactoriamente");
-        $(`.controlpeso_verificado${id_multi}`)
+      alertify.set("notifier", "position", "top-right");
+      alertify.success("Firmado satisfactoriamente");
+      $(`.controlpeso_verificado${id_multi}`)
+        .css({ background: "lightgray", border: "gray" })
+        .prop("disabled", true);
+      if (modulo === 5 || modulo === 6) {
+        $(`.devolucion_verificado${id_multi}`)
           .css({ background: "lightgray", border: "gray" })
           .prop("disabled", true);
-        if (modulo === 5 || modulo === 6) {
-          $(`.devolucion_verificado${id_multi}`)
-            .css({ background: "lightgray", border: "gray" })
-            .prop("disabled", true);
-        }
-        
       }
     },
   });

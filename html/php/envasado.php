@@ -4,6 +4,7 @@ if (!empty($_POST)) {
 
     require_once('../../conexion.php');
     require_once('./controlFirmas.php');
+    require_once('./firmas.php');
     require_once('../../admin/sistema/php/crud.php');
 
     $op = $_POST['operacion'];
@@ -13,38 +14,11 @@ if (!empty($_POST)) {
 
     switch ($op) {
         case 1: //firma realizo 2da seccion 
-
-            $firma = $_POST['id_firma'];
-            $ref_multi = $_POST['ref_multi'];
-            $sql = "INSERT INTO batch_firmas2seccion (modulo, batch, ref_multi, realizo) 
-            VALUES (:modulo, :batch, :ref_multi, :realizo)";
-            $query = $conn->prepare($sql);
-            $result = $query->execute([
-                'modulo' => $modulo,
-                'batch' => $batch,
-                'ref_multi' => $ref_multi,
-                'realizo' => $firma,
-            ]);
-            registrarFirmas($conn, $batch, $modulo);
-            if ($result) echo '1';
-            else echo '0';
-
+            segundaSeccionRealizo($conn);
             break;
 
         case 2: // firma calidad 2da seccion 
-
-            $firma = $_POST['id_firma'];
-            $ref_multi = $_POST['ref_multi'];
-
-            $sql = "UPDATE batch_firmas2seccion SET verifico = :verifico WHERE modulo = :modulo AND batch = :batch AND ref_multi = :ref_multi";
-            $query = $conn->prepare($sql);
-            $result = $query->execute([
-                'verifico' => $firma,
-                'modulo' => $modulo,
-                'batch' => $batch,
-                'ref_multi' => $ref_multi,
-            ]);
-            registrarFirmas($conn, $batch, $modulo);
+            segundaSeccionVerifico($conn);
             break;
 
         case 3: //Obtener los datos y firmas de la tabla firma2 
@@ -87,11 +61,7 @@ if (!empty($_POST)) {
                     WHERE modulo = :modulo AND batch = :batch AND ref_producto = :ref_multi";
 
             $query = $conn->prepare($sql);
-            $result = $query->execute([
-                'modulo' => $modulo,
-                'batch' => $batch,
-                'ref_multi' => $ref_multi,
-            ]);
+            $result = $query->execute(['modulo' => $modulo, 'batch' => $batch, 'ref_multi' => $ref_multi,]);
 
             while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
                 $arreglo["data"][] = $data;
@@ -122,39 +92,16 @@ if (!empty($_POST)) {
             break;
 
         case 5: // Insertar Firma Calidad
+            materialSobranteVerifico($conn);
 
-            $ref_multi = $_POST['ref_multi'];
-            $firma = $_POST['id_firma'];
-
-            $sql = "UPDATE batch_material_sobrante 
-                    SET verifico=:verifico 
-                    WHERE modulo = :modulo AND batch = :batch AND ref_producto = :ref_multi";
-            $query = $conn->prepare($sql);
-            $result = $query->execute([
-                'modulo' => $modulo,
-                'batch' => $batch,
-                'ref_multi' => $ref_multi,
-                'verifico' => $firma,
-            ]);
-            registrarFirmas($conn, $batch, $modulo);
-            if ($result) {
-                echo '1';
-            } else
-                echo '0';
             break;
 
         case 6:
             $ref_multi = $_POST['ref_multi'];
 
-            $sql = "SELECT * 
-                    FROM batch_muestras 
-                    WHERE batch = :batch AND ref_multi = :ref_multi";
+            $sql = "SELECT * FROM batch_muestras WHERE batch = :batch AND ref_multi = :ref_multi";
             $query = $conn->prepare($sql);
-            $result = $query->execute([
-                'modulo' => $modulo,
-                'batch' => $batch,
-                'ref_multi' => $ref_multi,
-            ]);
+            $result = $query->execute(['modulo' => $modulo, 'batch' => $batch, 'ref_multi' => $ref_multi,]);
 
             while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
                 $arreglo["data"][] = $data;
@@ -168,10 +115,6 @@ if (!empty($_POST)) {
             break;
         case 7: // Obtener material sobrante
             $batch = $_POST['idBatch'];
-            /* $sql = "SELECT id_producto FROM batch WHERE id_batch = :batch";
-            $query = $conn->prepare($sql);
-            $result = $query->execute(['batch' => $batch]);
-            $referencia = $query->fetch(PDO::FETCH_ASSOC); */
 
             $sql = "SELECT bms.id, bms.ref_material, bms.envasada, bms.averias, bms.sobrante, bms.ref_producto, bms.batch, bms.modulo, u.urlfirma as realizo 
             FROM batch_material_sobrante bms 

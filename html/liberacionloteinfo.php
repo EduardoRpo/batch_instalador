@@ -48,7 +48,7 @@ include("modal/modal_condicionesMedio.php");
       <div class="row page-titles">
         <h1 hidden>3</h1>
         <h1 class="text-themecolor m-b-0 m-t-0"><b>Liberación Lote</b></h1>
-        <a href="../../fisicoquimica" style="background-color:#fff;color:#FF8D6D" class="btn waves-effect waves-light btn-danger pull-right btn-md" role="button">Cola de Trabajo</a>
+        <a href="../../liberacionlote" style="background-color:#fff;color:#FF8D6D" class="btn waves-effect waves-light btn-danger pull-right btn-md" role="button">Cola de Trabajo</a>
       </div>
     </div>
 
@@ -143,42 +143,52 @@ include("modal/modal_condicionesMedio.php");
                 <div class="m-5 obj2">
                   <label for="liberacion" style="justify-self: end;">No</label>
                   <label for="liberacion">Si</label>
-                  <input type="radio" name="liberacion" value="No" style="justify-self: end;">
-                  <input type="radio" name="liberacion" value="Si">
+                  <input type="radio" id="radioLiberacionNo" name="liberacion" value="0" style="justify-self: end;">
+                  <input type="radio" id="radioLiberacionSi" name="liberacion" value="1">
                 </div>
                 <div class="m-5">
                   <label for="">Observaciones</label>
                   <input type="text" id="observacioneslote" class="form-control" />
                 </div>
 
-                <div class="row" style="margin: 1%">
-                  <div class="col-md-4 align-self-center">
-                    <label for="liberacion_realizado" class="col-form-label">Realizado Por</label>
-                    <input type="text" class="form-control" id="liberacion_realizado" readonly>
+                <div class="firmasLiberacion">
+                  <div class="align-self-end">
+                    <label for="produccion_realizado" class="col-form-label">Dirección Producción</label>
+                    <input type="text" class="form-control" id="produccion_realizado" readonly>
                   </div>
 
-                  <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
+                  <div class="align-self-end">
                     <input type="text" id="idbtn" hidden>
-                    <input type="button" class="btn btn-danger liberacion_realizado" id="liberacion_realizado" onclick="cargar(this, 'firma1')" style="width: 100%; height: 38px;" value="Firmar">
+                    <input type="button" class="btn btn-danger produccion_realizado" id="produccion_realizado" onclick="cargar(this, 'firma1')" style="width: 100%; height: 38px;" value="Firmar">
                   </div>
 
-                  <div class="col-md-4 align-self-center">
-                    <label for="liberacion_verificado" class="col-form-label">Verificado Por</label>
-                    <input type="text" class="form-control" id="liberacion_verificado" readonly>
+                  <div class="align-self-end">
+                    <label for="calidad_verificado" class="col-form-label">Dirección Calidad</label>
+                    <input type="text" class="form-control" id="calidad_verificado" readonly>
                   </div>
-                  <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                    <input type="button" class="btn btn-danger liberacion_verificado" id="liberacion_verificado" onclick="cargar(this, 'firma2')" style="width: 100%; height: 38px;" value="Firmar">
+                  <div class="align-self-end">
+                    <input type="button" class="btn btn-danger calidad_verificado" id="calidad_verificado" onclick="cargar(this, 'firma2')" style="width: 100%; height: 38px;" value="Firmar">
                   </div>
+
+                  <div class="align-self-end">
+                    <label for="tecnica_realizado" class="col-form-label">Dirección Técnica</label>
+                    <input type="text" class="form-control" id="tecnica_realizado" readonly>
+                  </div>
+
+                  <div class="align-self-end">
+                    <input type="text" id="idbtn" hidden>
+                    <input type="button" class="btn btn-danger tecnica_realizado" id="tecnica_realizado" onclick="cargar(this, 'firma3')" style="width: 100%; height: 38px;" value="Firmar">
+                  </div>
+
                 </div>
               </div>
             </div>
+
+
           </div>
-
-
         </div>
       </div>
     </div>
-  </div>
   </div>
 
 
@@ -200,10 +210,9 @@ include("modal/modal_condicionesMedio.php");
   <script src="../../assets/plugins/jquery/jquery.number.min.js"></script>
 
   <script src="../../html/js/global/loadinfo-global.js"></script>
-  <script src="../../html/js/global/tanques.js"></script>
+  <script src="../../html/js/liberacionlote/liberacionloteinfo.js"></script>
   <script src="../../html/js/firmar/firmar1raSeccion.js"></script>
-  <script src="../../html/js/firmar/firmar2daSeccion.js"></script>
-
+  
 </body>
 
 </html>

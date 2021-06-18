@@ -5,6 +5,7 @@ if (!empty($_POST)) {
     require_once('../../admin/sistema/php/crud.php');
     require_once('actualizarEstado.php');
     require_once('./controlFirmas.php');
+    require_once('./firmas.php');
 
     /* Almacena los checks creados para tanques y su valor */
     $op = $_POST['operacion'];
@@ -60,17 +61,8 @@ if (!empty($_POST)) {
             /* Almacena el desinfectante del modulo de aprobacion y fisicoquimico */
 
             if ($modulo == 4 || $modulo == 9) {
-                $desinfectante = $_POST['desinfectante'];
-                $realizo = $_POST['firma'];
-                $observaciones = "";
-
-                 $sql = "INSERT INTO batch_desinfectante_seleccionado (desinfectante, modulo, batch, realizo) VALUES(:desinfectante, :modulo, :batch, :realizo)";
-                $query = $conn->prepare($sql);
-                $result = $query->execute(['desinfectante' => $desinfectante, 'modulo' => $modulo, 'batch' => $batch, 'realizo' => $realizo]);
-                
-                //desinfectante($conn, $desinfectante, $observaciones, $modulo, $batch, $realizo);
-                if ($result) echo '1';
-                else echo '0';
+                desinfectanteRealizo($conn);
+                segundaSeccionRealizo($conn);
             }
 
             /* Almacena el formulario de control del módulo de preparación */

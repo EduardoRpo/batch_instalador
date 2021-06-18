@@ -5,7 +5,7 @@ modulo = 5;
 /* let r1,
   r2,
   r3 = 0; */
-const equipos = [];
+let equipos = [];
 
 //validacion de campos y botones
 
@@ -38,14 +38,17 @@ function cargar(btn, idbtn) {
         return false;
       }
 
+      equipos = [];
       const eq3 = {};
       eq3.equipo = eq1;
+      eq3.referencia = referencia;
       eq3.modulo = modulo;
       eq3.batch = idBatch;
       equipos.push(eq3);
 
       const eq4 = {};
       eq4.equipo = eq2;
+      eq4.referencia = referencia;
       eq4.modulo = modulo;
       eq4.batch = idBatch;
       equipos.push(eq4);
@@ -337,12 +340,12 @@ function validarLinea() {
 
 /* Almacena la info de tabla devolucion material */
 
-function registrar_material_sobrante(info) {
+function registrar_material_sobrante(realizo) {
   let materialsobrante = [];
 
   for (let i = start; i < end; i++) {
     let datasobrante = {};
-    let itemref = $(`.refEmpaque${i}`).html();
+    let itemref = $(`.refEmpaque${id_multi}`).html();
     let envasada = formatoGeneral($(`.txtEnvasada${id_multi}`).html());
 
     if (envasada == "")
@@ -361,7 +364,7 @@ function registrar_material_sobrante(info) {
   $.ajax({
     type: "POST",
     url: "../../html/php/c_devolucionMaterial.php",
-    data: { materialsobrante, ref_multi, idBatch, modulo, info },
+    data: { materialsobrante, ref_multi, idBatch, modulo, realizo },
 
     success: function (response) {
       alertify.set("notifier", "position", "top-right");

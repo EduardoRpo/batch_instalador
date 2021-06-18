@@ -1,12 +1,34 @@
 <?php
 
 if (!empty($_POST)) {
-    $realizo = $_POST['firma'];
+    require_once('../../conexion.php');
 
-    $sql = "INSERT INTO batch_desinfectante_seleccionado (modulo, batch, realizo) VALUES(:modulo, :batch, :realizo)";
+    $batch = $_POST['idBatch'];
+    $modulo = $_POST['modulo'];
+
+    $sql = "SELECT * FROM batch_desinfectante_seleccionado WHERE modulo = :modulo AND batch = :batch";
     $query = $conn->prepare($sql);
-    $result = $query->execute(['modulo' => $modulo, 'batch' => $batch, 'realizo' => $realizo]);
-    registrarFirmas($conn, $batch, $modulo);
-    if ($result) echo '1';
-    else echo '0';
+    $query->execute(['modulo' => $modulo, 'batch' => $batch]);
+    $desinfectante = $query->fetch(PDO::FETCH_ASSOC);
+    if ($desinfectante > 0) {
+
+        $sql = "SELECT bf.observaciones as obsBatch, u.urlfirma as realizo, us.urlfirma as verifico FROM batch_firmas2seccion bf 
+                INNER JOIN usuario u ON u.id = bf.realizo INNER JOIN usuario us ON us.id = bf.verifico 
+                WHERE modulo = :modulo AND batch = :batch";
+        $query = $conn->prepare($sql);
+        $query->execute(['modulo' => $modulo, 'batch' => $batch]);
+        $result = $query->rowCount();
+        
+        if ($result == 0) {
+            $sql = "SELECT bf.observaciones as obsBatch,u.urlfirma as realizo FROM batch_firmas2seccion bf 
+                    INNER JOIN usuario u ON u.id = bf.realizo WHERE modulo = :modulo AND batch = :batch";
+            $query = $conn->prepare($sql);
+            $query->execute(['modulo' => $modulo, 'batch' => $batch]);
+            $segundaSeccion = $query->fetch(PDO::FETCH_ASSOC);
+        } else
+            $segundaSeccion = $query->fetch(PDO::FETCH_ASSOC);
+
+        $data = array_merge($desinfectante, $segundaSeccion);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+    }
 }

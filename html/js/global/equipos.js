@@ -81,8 +81,8 @@ function cargarEquipos() {
       }
 
       if (modulo == 5) {
-        $("#sel_envasadora").val(info[0].equipo);
-        $("#sel_loteadora").val(info[1].equipo);
+        $(`#sel_envasadora${id_multi}`).val(info[0].equipo);
+        $(`#sel_loteadora${id_multi}`).val(info[1].equipo);
       }
 
       if (modulo == 6) {

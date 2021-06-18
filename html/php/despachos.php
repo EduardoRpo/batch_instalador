@@ -11,7 +11,7 @@ if (!empty($_POST)) {
 
     switch ($op) {
         case 1:
-            $sql = "SELECT unidades_producidas, mov_inventario, muestras_retencion FROM batch_conciliacion_rendimiento WHERE batch = :batch AND ref_multi = :referencia";
+            $sql = "SELECT * FROM batch_conciliacion_rendimiento WHERE batch = :batch AND ref_multi = :referencia";
             $query = $conn->prepare($sql);
             $result = $query->execute(['batch' => $batch, 'referencia' => $referencia]);
             $data = $query->fetch(PDO::FETCH_ASSOC);

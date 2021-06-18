@@ -1,5 +1,8 @@
 modulo = 9;
 
+/* $("#btnRechazado").prop("checked", false);
+$("#btnAprobado").prop("checked", false); */
+
 $("#observacionesLote").slideUp();
 $(".fisicoquimica_verificado").prop("disabled", true);
 
@@ -76,7 +79,30 @@ $(".color").change(function (e) {
   validar_condicionesMedio();
 });
 
+cargarFisicoquimico = () => {
+  $.post(
+    "../../html/php/fisicoquimica.php",
+    { idBatch, modulo },
+    function (data, textStatus, jqXHR) {
+      let info = JSON.parse(data);
+      setTimeout(() => {
+        $("#sel_producto_desinfeccion").val(info.desinfectante);
+      }, 500);
+
+      $("#in_observaciones").val(info.observaciones);
+      if (info.obsBatch != "" && info.obsBatch != undefined) {
+        $("#btnRechazado").prop("checked", true);
+        $("#btnRechazado").change();
+        $("#observacionesLoteRechazado").val(info.obsBatch);
+      } else $("#btnAceptado").prop("checked", true);
+
+      firmado(info.realizo, 1);
+      if (info.verifico != 0) firmado(info.verifico, 2);
+    }
+  );
+};
+
 /* Carga formulario */
 
 cargarControlProceso();
-cargarDesinfectante();
+cargarFisicoquimico();

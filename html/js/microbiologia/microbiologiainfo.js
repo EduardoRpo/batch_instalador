@@ -104,25 +104,26 @@ cargar = (btn, Nobtn) => {
 
 /* Almacenar info */
 
-guardar_microbiologia = (info) => {
+guardar_microbiologia = (realizo) => {
+  realizo = realizo[0].id;
   $.ajax({
     type: "POST",
     url: "../../html/php/microbiologia.php",
-    data: { op: 2, dataMicro, modulo, idBatch, info },
+    data: { op: 2, dataMicro, modulo, idBatch, realizo },
     success: function (r) {
-      if (r == "true") {
+      /* if (r == "true") { */
         alertify.set("notifier", "position", "top-right");
         alertify.success("Datos almacenados correctamente");
         $(".microbiologia_realizado")
           .css({ background: "lightgray", border: "gray" })
           .prop("disabled", true);
         $(".microbiologia_verificado").prop("disabled", false);
-      }
+      /* }
 
       if (r == "false") {
         alertify.set("notifier", "position", "top-right");
         alertify.success("Valide nuevamente. Datos No almacenados");
-      }
+       } */
     },
   });
 };
@@ -136,18 +137,18 @@ guardar_microbiologia_calidad = (info) => {
     url: "../../html/php/microbiologia.php",
     data: { op: 3, idBatch, verifico, modulo },
     success: function (r) {
-      if (r == "true") {
+     /*  if (r == "true") { */
         alertify.set("notifier", "position", "top-right");
         alertify.success("Datos almacenados correctamente");
         $(".microbiologia_verificado")
           .css({ background: "lightgray", border: "gray" })
           .prop("disabled", true);
-      }
+     /*  }
 
       if (r == "false") {
         alertify.set("notifier", "position", "top-right");
         alertify.success("Valide nuevamente. Datos No almacenados");
-      }
+      } */
     },
   });
 };
@@ -180,7 +181,7 @@ $(document).ready(function () {
         observaciones = data[4]["observaciones"];
         if (observaciones != "") {
           $("#observacionesLote").slideDown();
-          $("#observacionesLoteRechazado").val(data[3]["observaciones"]);
+          $("#observacionesLoteRechazado").val(data[4]["observaciones"]);
           $("#btnRechazado").prop("checked", true);
         } else {
           $("#btnAceptado").prop("checked", true);

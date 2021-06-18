@@ -44,8 +44,6 @@ function cargarDesinfectante() {
       observacion = info.observaciones;
       firma = info.urlfirma;
 
-      console.log($("#sel_producto_desinfeccion").val(desinfectante));
-
       $("#sel_producto_desinfeccion").val(desinfectante);
       $("#in_observaciones").val(observacion);
       firmado(firma, 1);
@@ -140,27 +138,45 @@ function firmado(datos, posicion) {
   btn_id = $("#idbtn").val();
 
   if (posicion == 1) {
-    parent = $("#despeje_realizado").parent();
-    $("#despeje_realizado").remove();
-    $("#despeje_realizado")
-      .css({ background: "lightgray", border: "gray" })
-      .prop("disabled", true);
+    if (modulo == 9) {
+      parent = $("#fisicoquimica_realizado").parent();
+      $("#fisicoquimica_realizado").remove();
+      $("#fisicoquimica_realizado")
+        .css({ background: "lightgray", border: "gray" })
+        .prop("disabled", true);
 
-    $(".despeje_verificado").prop("disabled", false);
-    $(".pesaje_realizado").prop("disabled", false);
+      $(".fisicoquimica_verificado").prop("disabled", false);
+    } else {
+      parent = $("#despeje_realizado").parent();
+      $("#despeje_realizado").remove();
+      $("#despeje_realizado")
+        .css({ background: "lightgray", border: "gray" })
+        .prop("disabled", true);
 
-    $(".preparacion_realizado").prop("disabled", false);
-    $(".preparacion_verificado").prop("disabled", true);
+      $(".despeje_verificado").prop("disabled", false);
+      $(".pesaje_realizado").prop("disabled", false);
 
-    $("#controlpeso_realizado1").prop("disabled", false);
+      $(".preparacion_realizado").prop("disabled", false);
+      $(".preparacion_verificado").prop("disabled", true);
+
+      $("#controlpeso_realizado1").prop("disabled", false);
+    }
   }
 
   if (posicion == 2) {
-    parent = $("#despeje_verificado").parent();
-    $("#despeje_verificado").remove();
-    $(".despeje_verificado")
-      .css({ background: "lightgray", border: "gray" })
-      .prop("disabled", true);
+    if (modulo == 9) {
+      parent = $("#fisicoquimica_verificado").parent();
+      $("#fisicoquimica_verificado").remove();
+      $("#fisicoquimica_verificado")
+        .css({ background: "lightgray", border: "gray" })
+        .prop("disabled", true);
+    } else {
+      parent = $("#despeje_verificado").parent();
+      $("#despeje_verificado").remove();
+      $(".despeje_verificado")
+        .css({ background: "lightgray", border: "gray" })
+        .prop("disabled", true);
+    }
   }
 
   if (posicion == 3) {

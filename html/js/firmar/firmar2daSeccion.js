@@ -28,7 +28,9 @@ function firmar2daSeccion(firma) {
 
   if (modulo == 4) {
     let desinfectante = $("#sel_producto_desinfeccion").val();
+    const obs_desinfectante = $("#in_observaciones").val();
     desinfectante === undefined ? (desinfectante = "") : desinfectante;
+    const obs_batch = $("#observacionesAprobacion").val();
     data = {
       operacion: 1,
       tanques,
@@ -36,25 +38,25 @@ function firmar2daSeccion(firma) {
       modulo,
       idBatch,
       desinfectante,
-      firma: firma[0].id,
+      obs_desinfectante,
+      obs_batch,
+      realizo: firma[0].id,
       controlProducto,
     };
   }
 
   if (modulo == 9) {
     const desinfectante = $("#sel_producto_desinfeccion").val();
-    const obs_desinfectante = $("#fisicoq_obs").val();
-    const observaciones = $("#observacionesLoteRechazado").val();
+    const obs_desinfectante = $("#in_observaciones").val();
+    const obs_batch = $("#observacionesLoteRechazado").val();
     data = {
       operacion: 1,
-      tanques,
-      tanquesOk,
       desinfectante,
       obs_desinfectante,
+      obs_batch,
       modulo,
       idBatch,
-      observaciones,
-      firma: firma[0].id,
+      realizo: firma[0].id,
       controlProducto,
     };
   }
@@ -68,21 +70,19 @@ function firmar2daSeccion(firma) {
       let info = JSON.parse(response);
 
       if (info >= 1) {
-        alertify.set("notifier", "position", "top-right");
-        alertify.success(`Tanque No. ${tanquesOk} ejecutado con éxito`);
-        $(`#chkcontrolTanques${tanquesOk}`).prop("disabled", true);
+        if (modulo != 9) {
+          alertify.set("notifier", "position", "top-right");
+          alertify.success(`Tanque No. ${tanquesOk} ejecutado con éxito`);
+          $(`#chkcontrolTanques${tanquesOk}`).prop("disabled", true);
+        }
 
         if (modulo == 3 || modulo == 4) {
-          //para el modulo de preparacion imprimir la etiqueta tanque, lote, orden de produccion, fecha. tamaño lote.
           $(`.especificacion`).val("0");
           $(`.especificacionInput`).val("");
         }
 
         if (modulo == 3) reiniciarInstructivo();
-
-        if (tanques == tanquesOk) {
-          firmarSeccionCierreProceso(firma);
-        }
+        if (tanques == tanquesOk) firmarSeccionCierreProceso(firma);
       } else {
         alertify.set("notifier", "position", "top-right");
         alertify.error("Error");
@@ -94,6 +94,9 @@ function firmar2daSeccion(firma) {
 function firmarSeccionCierreProceso(firma) {
   let orden = localStorage.getItem("orden");
   let tamano_lote = localStorage.getItem("tamano_lote");
+  modulo === 10
+    ? (obs_batch = $("#observacionesLoteRechazado").val())
+    : (obs_batch = "");
 
   //confirmación de incidencias
 
@@ -117,7 +120,7 @@ function firmarSeccionCierreProceso(firma) {
     $.ajax({
       method: "POST",
       url: "../../html/php/incidencias.php",
-      data: { operacion: 3, firma: firma[0].id, modulo, idBatch },
+      data: { operacion: 3, realizo: firma[0].id, modulo, idBatch },
 
       success: function (response) {
         $("#modalObservaciones").modal("hide");
@@ -134,12 +137,7 @@ function almacenarfirma(id) {
   $.ajax({
     type: "POST",
     url: "../../html/php/incidencias.php",
-    data: {
-      operacion: 4,
-      modulo: modulo,
-      batch: idBatch,
-      firma: id,
-    },
+    data: { operacion: 4, modulo: modulo, idBatch, verifico: id },
 
     success: function (response) {
       alertify.set("notifier", "position", "top-right");

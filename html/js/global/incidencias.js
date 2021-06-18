@@ -12,11 +12,7 @@ function observaciones_incidencias(firma) {
   var confirm = alertify
     .confirm(
       "Incidencias y Observaciones",
-      `¿Durante la fabricación de la orden de producción ` +
-        orden +
-        ` con cantidad total de ` +
-        tamano_lote +
-        ` kg, se presentó alguna incidencia u observación al desarrollar el proceso?`,
+      `¿Durante la fabricación de la orden de producción ${orden} con cantidad total de ${tamano_lote} kg, se presentó alguna incidencia u observación al desarrollar el proceso?`,
       null,
       null
     )
@@ -25,15 +21,11 @@ function observaciones_incidencias(firma) {
   confirm.set({ transition: "slide" });
 
   confirm.set("onok", function () {
-    //callbak al pulsar Si
     cargarObsIncidencias(firma);
-    //deshabilitarbtn();
   });
 
   confirm.set("oncancel", function () {
-    //callbak al pulsar No
     alertify.success("No se reportaron Incidencias");
-    /* Almacenar firma 2da seccion */
     $.ajax({
       method: "POST",
       url: "../../html/php/incidencias.php",
@@ -46,7 +38,6 @@ function observaciones_incidencias(firma) {
 
       success: function (response) {
         $("#modalObservaciones").modal("hide");
-        //deshabilitarbtn();
       },
     });
   });
@@ -58,7 +49,11 @@ function cargarObsIncidencias(firma) {
   cargarSelectorIncidencias();
   firma_realizado = firma[0].id;
   infofirma = firma;
-  $("#modalObservaciones").modal("show");
+  $("#modalObservaciones").modal({
+    show: true,
+    backdrop: "static",
+    keyboard: false,
+  });
 }
 
 //Cargar selectores
@@ -105,7 +100,6 @@ function cargarSelectorIncidencias() {
 
 $("#guardarIncidencias").click(function (e) {
   e.preventDefault();
-  debugger;
   let incidencias = [];
   let incidencia = [];
 
@@ -142,7 +136,7 @@ $("#guardarIncidencias").click(function (e) {
     data: {
       operacion: 2,
       incidencias,
-      firma: firma_realizado,
+      realizo: firma_realizado,
       modulo,
       idBatch,
       observaciones,
@@ -160,5 +154,17 @@ $("#guardarIncidencias").click(function (e) {
 $("#cerrarIncidencias").click(function (e) {
   e.preventDefault();
   $("#modalObservaciones").modal("hide");
-  firmar(infofirma);
+  alertify.success("No reportó Incidencias");
+  realizo = JSON.parse(sessionStorage.getItem("firm"));
+  realizo = realizo[0].id;
+  $.ajax({
+    method: "POST",
+    url: "../../html/php/incidencias.php",
+    data: { operacion: 3, realizo, modulo, idBatch },
+
+    success: function (response) {
+      $("#modalObservaciones").modal("hide");
+      firmar(infofirma);
+    },
+  });
 });

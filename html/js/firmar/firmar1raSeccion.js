@@ -39,40 +39,33 @@ function enviar() {
   return false;
 }
 
-/* Si el usuario existe, ejecuta la opcion de acuerdo con el boton seleccionado */
+/* Si el usuario existe, ejecuta la opción de acuerdo con la seleccion */
 
 function preparar(datos) {
   info = JSON.parse(datos);
   if (btn_id == "firma1") {
-    if (modulo === 7) {
-      guardar_despacho(info);
-    } else if (modulo === 8) {
-      guardar_microbiologia(info);
-    } else if (modulo === 9) {
-      firmar2daSeccion(info);
-    } else {
-      guardar_preguntas(info[0].id);
-    }
+    if (modulo === 7) guardar_despacho(info);
+    if (modulo === 8) guardar_microbiologia(info);
+    if (modulo === 9) firmar2daSeccion(info);
+    if (modulo === 10) guardarLiberacion(info);
+    else if (modulo !== 8 || modulo !== 9) guardar_preguntas(info[0].id);
     firmar(info);
   }
 
   if (btn_id == "firma2") {
-    if (modulo === 8) {
-      guardar_microbiologia_calidad(info);
-    } else if (modulo === 9) {
-      almacenarfirma(info[0].id);
-    } else {
-      firmarVerficadoDespeje(info[0].id);
-    }
+    if (modulo === 8) guardar_microbiologia_calidad(info);
+    if (modulo === 9) almacenarfirma(info[0].id);
+    if (modulo === 10) guardarLiberacion(info);
+    else if (modulo !== 8 && modulo !== 9) firmarVerficadoDespeje(info[0].id);
     firmar(info);
   }
 
   if (btn_id == "firma3") {
-    modulo === 5 || modulo === 6
-      ? almacenar_muestras(info)
-      : firmar2daSeccion(info);
-    //validarCondicionesMedio();
-    //imprimirEtiquetasVirtuales();
+    if (modulo === 5 || modulo === 6) almacenar_muestras(info);
+    if (modulo == 10) {
+      guardarLiberacion(info);
+      firmar(info);
+    } else firmar2daSeccion(info);
   }
 
   if (btn_id == "firma4") {
@@ -86,7 +79,6 @@ function preparar(datos) {
     } else {
       registrar_material_sobrante(info[0].id);
       observaciones_incidencias(info);
-      //validarCondicionesMedio();
       firmar(info);
     }
   }
@@ -119,7 +111,7 @@ function guardar_preguntas(idfirma) {
   let obj = JSON.parse(json);
 
   desinfectante = $("#sel_producto_desinfeccion").val();
-  observaciones = $("#in_observaciones").val();
+  obs_desinfectante = $("#in_observaciones").val();
 
   $.ajax({
     type: "POST",
@@ -130,7 +122,7 @@ function guardar_preguntas(idfirma) {
       modulo,
       idBatch,
       desinfectante,
-      observaciones,
+      obs_desinfectante,
       realizo: idfirma,
     },
     success: function (response) {

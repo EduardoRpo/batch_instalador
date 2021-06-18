@@ -2,6 +2,7 @@
 if (!empty($_POST)) {
     require_once('../../conexion.php');
     require_once('./controlFirmas.php');
+    require_once('./firmas.php');
 
     $op = $_POST['operacion'];
     $batch =  $_POST['idBatch'];
@@ -11,30 +12,8 @@ if (!empty($_POST)) {
 
     switch ($op) {
         case 1: //almacenar conciliacion
-
-            $unidades =  $_POST['unidades'];
             $retencion =  $_POST['retencion'];
-            $movimiento =  $_POST['mov'];
-            $cajas = $_POST['cajas'];
-            $modulo = $_POST['modulo'];
-            $entrego = $_POST['idfirma'];
-
-            $sql = "INSERT INTO batch_conciliacion_rendimiento 
-                    SET unidades_producidas = :unidades, muestras_retencion = :retencion, mov_inventario = :movimiento, cajas = :cajas, 
-                        batch = :batch, modulo = :modulo, ref_multi = :referencia, entrego = :entrego";
-            $query = $conn->prepare($sql);
-            $query->execute([
-                'unidades' => $unidades,
-                'retencion' => $retencion,
-                'movimiento' => $movimiento,
-                'cajas' => $cajas,
-                'batch' => $batch,
-                'modulo' => $modulo,
-                'referencia' => $referencia,
-                'entrego' => $entrego,
-            ]);
-
-            registrarFirmas($conn, $batch, $modulo);
+            conciliacionRendimientoRealizo($conn);
 
             /* Almacenar muestras retencion */
 
@@ -62,10 +41,7 @@ if (!empty($_POST)) {
                     FROM batch_conciliacion_rendimiento c INNER JOIN usuario u ON u.id = c.entrego
                     WHERE batch = :batch AND ref_multi = :referencia";
             $query = $conn->prepare($sql);
-            $query->execute([
-                'batch' => $batch,
-                'referencia' => $referencia,
-            ]);
+            $query->execute(['batch' => $batch, 'referencia' => $referencia,]);
 
             while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
                 $arreglo[] = $data;
@@ -104,7 +80,7 @@ if (!empty($_POST)) {
                 'referencia' => $referencia,
                 'entrego' => $entrego,
             ]);
-            
+
             registrarFirmas($conn, $batch, $modulo);
             break;
 

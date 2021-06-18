@@ -127,10 +127,12 @@ if ($batch == 1) {
     $firmas_despeje = $query->fetchAll(PDO::FETCH_ASSOC);
     $cantidad = 0;
     for ($i = 0; $i < sizeof($firmas_despeje); $i++) {
-        if ($firmas_despeje[$i]['realizo'] > 0)
-            $cantidad = $cantidad + 1;
-        if ($firmas_despeje[$i]['verifico'] > 0)
-            $cantidad = $cantidad + 1;
+        if ($firmas_despeje[$i]['modulo'] != 9) {
+            if ($firmas_despeje[$i]['realizo'] > 0)
+                $cantidad = $cantidad + 1;
+            if ($firmas_despeje[$i]['verifico'] > 0)
+                $cantidad = $cantidad + 1;
+        }
         $firmas[$firmas_despeje[$i]['modulo']] =  $cantidad;
         $cantidad = 0;
     }
@@ -141,7 +143,7 @@ if ($batch == 1) {
     $firmas_proceso = $query->fetchAll(PDO::FETCH_ASSOC);
 
     for ($i = 0; $i < sizeof($firmas_proceso); $i++) {
-        if ($firmas_proceso[$i]['modulo'] != 4 && $firmas_proceso[$i]['modulo'] != 8 ) {
+        if ($firmas_proceso[$i]['modulo'] != 4 && $firmas_proceso[$i]['modulo'] != 8) {
             if ($firmas_proceso[$i]['realizo'] > 0)
                 $cantidad = $cantidad + 1;
             if ($firmas_proceso[$i]['verifico'] > 0)

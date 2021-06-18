@@ -104,13 +104,7 @@ function firmado(datos, posicion) {
       $(".pesaje_verificado")
         .css({ background: "lightgray", border: "gray" })
         .prop("disabled", true);
-    } /* else if (modulo == 3) {
-            parent = $('#preparacion_realizado').parent();
-            $('#preparacion_realizado').remove();
-            $('.preparacion_realizado').css({ 'background': 'lightgray', 'border': 'gray' }).prop('disabled', true);
-            $('.preparacion_verificado').prop('disabled', false);
-
-        } */
+    }
 
   if (posicion == 4) {
     if (modulo == 4) {

@@ -9,9 +9,9 @@
   border-radius: 2px;
 }
 .alertify .ajs-header {
-  color: black;
+  color: white;
   font-weight: bold;
-  background: #fafafa;
+  background: #125f34;
   border-bottom: #eee 1px solid;
   border-radius: 2px 2px 0 0;
 }

@@ -234,7 +234,7 @@ include('modal/image.php')
           <div class="card" id="despachos2">
             <div class="card-header" id="headingFour">
               <h5 class="mb-0">
-                <button class="btn btn-link collapsed ref_multi1" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapsefour" style="width: 100%">
+                <button class="btn btn-link collapsed ref_multi2" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapsefour" style="width: 100%">
                   <b id="despachosMulti2" class="img_ref">DESPACHOS</b>
                   <input type="text" class="ref2" id="ref2" hidden>
                   <input type="text" class="unidad_empaque2" id="unidad_empaque2" hidden>
@@ -253,19 +253,24 @@ include('modal/image.php')
                       <div class="card-block">
                         <div class="despachos">
 
-                          <div class="group">
+                        <div class="group">
                             <label for="recipient-name" class="col-form-label">Unidades Recibidas</label>
                             <input type="number" class="form-control centrado" id="unidades_recibidas_acond2" readonly>
                           </div>
 
                           <div class="group">
                             <label for="recipient-name" class="col-form-label">Cajas</label>
-                            <input type="number" class="form-control centrado" id="cajas3_acond2" readonly>
+                            <input type="number" class="form-control centrado" id="cajas_acond2" readonly>
                           </div>
 
                           <div class=" group">
                             <label for="recipient-name" class="col-form-label">No Movimiento Inventario</label>
                             <input type="number" class="form-control centrado" id="mov_inventario_acond2" oncopy="return false" readonly>
+                          </div>
+
+                          <div class=" group">
+                            <label for="recipient-name" class="col-form-label">Muestras retención</label>
+                            <input type="number" class="form-control centrado" id="mestras_retencion_acond2" readonly>
                           </div>
 
                           <div class="group">
@@ -281,6 +286,11 @@ include('modal/image.php')
                           <div class=" group">
                             <label for="recipient-name" class="col-form-label">No Movimiento Inventario</label>
                             <input type="number" class="form-control centrado" id="mov_inventario2">
+                          </div>
+
+                          <div class=" group">
+                            <!-- <label for="recipient-name" class="col-form-label">Muestras retención</label>
+                            <input type="number" class="form-control centrado" id="mestras_retencion_acond1" readonly> -->
                           </div>
 
                           <div class="group obs">
@@ -329,7 +339,7 @@ include('modal/image.php')
                       <div class="card-block">
                         <div class="despachos">
 
-                          <div class="group">
+                        <div class="group">
                             <label for="recipient-name" class="col-form-label">Unidades Recibidas</label>
                             <input type="number" class="form-control centrado" id="unidades_recibidas_acond3" readonly>
                           </div>
@@ -342,6 +352,11 @@ include('modal/image.php')
                           <div class=" group">
                             <label for="recipient-name" class="col-form-label">No Movimiento Inventario</label>
                             <input type="number" class="form-control centrado" id="mov_inventario_acond3" oncopy="return false" readonly>
+                          </div>
+
+                          <div class=" group">
+                            <label for="recipient-name" class="col-form-label">Muestras retención</label>
+                            <input type="number" class="form-control centrado" id="mestras_retencion_acond3" readonly>
                           </div>
 
                           <div class="group">
@@ -357,6 +372,11 @@ include('modal/image.php')
                           <div class=" group">
                             <label for="recipient-name" class="col-form-label">No Movimiento Inventario</label>
                             <input type="number" class="form-control centrado" id="mov_inventario3">
+                          </div>
+
+                          <div class=" group">
+                            <!-- <label for="recipient-name" class="col-form-label">Muestras retención</label>
+                            <input type="number" class="form-control centrado" id="mestras_retencion_acond1" readonly> -->
                           </div>
 
                           <div class="group obs">
