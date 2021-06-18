@@ -82,7 +82,7 @@ include('modal/image.php')
 
                   <div class="contenedorInfo__group">
                     <label for="recipient-name" class="col-form-label">Fecha Programación</label>
-                    <input type="date" class="form-control" id="in_fecha" readonly>
+                    <input type="date" class="form-control" id="in_fecha_programacion" readonly>
                   </div>
 
                   <div class="contenedorInfo__group">
