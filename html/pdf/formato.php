@@ -1018,7 +1018,7 @@
 
                         <div class="enlinea mt-3">
                             <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
-                            <label id="fecha5" style="font-weight:bold; justify-self: baseline">22/05/2020</label>
+                            <label id="fecha6" style="font-weight:bold; justify-self: baseline">22/05/2020</label>
                         </div>
 
                         <div class="firmas" id="firmas5">
@@ -1484,7 +1484,7 @@
 
                         <div class="enlinea mt-3">
                             <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
-                            <label id="fecha5" style="font-weight:bold; justify-self: baseline">22/05/2020</label>
+                            <label id="fecha6" style="font-weight:bold; justify-self: baseline">22/05/2020</label>
                         </div>
 
                         <div class="firmas" id="firmas5">
@@ -1950,7 +1950,7 @@
 
                         <div class="enlinea mt-3">
                             <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
-                            <label id="fecha5" style="font-weight:bold; justify-self: baseline">22/05/2020</label>
+                            <label id="fecha6" style="font-weight:bold; justify-self: baseline">22/05/2020</label>
                         </div>
 
                         <div class="firmas" id="firmas5">
@@ -2226,7 +2226,7 @@
 
             <div class="enlinea">
                 <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
-                <label id="fecha5" style="font-weight:bold; justify-self: baseline">22/05/2020</label>
+                <label id="fecha8" style="font-weight:bold; justify-self: baseline">22/05/2020</label>
             </div>
 
             <div class="firmas" id="firmas5">
@@ -2396,7 +2396,7 @@
 
             <div class="enlinea">
                 <label class="mr-3 fechaHora" style="justify-self: end;">Fecha y hora</label>
-                <label id="fecha5" style="font-weight:bold; justify-self: baseline"></label>
+                <label id="fecha9" style="font-weight:bold; justify-self: baseline"></label>
             </div>
 
             <div class="firmas" id="firmas5">
@@ -2430,7 +2430,7 @@
 
                 <div class="enlinea">
                     <label class="mr-3 fechaHora" style="justify-self: end;">Fecha y hora</label>
-                    <label id="fecha5" style="font-weight:bold; justify-self: baseline"></label>
+                    <label id="fecha10" style="font-weight:bold; justify-self: baseline"></label>
                 </div>
 
                 <div class="coln3 mt-5" id="firmas5">
