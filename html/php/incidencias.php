@@ -47,7 +47,6 @@ if (!empty($_POST)) {
             $modulo = $_POST['modulo'];
             $batch = $_POST['idBatch'];
             segundaSeccionRealizo($conn);
-            actualizarEstado($batch, $modulo, $conn);
 
             break;
 
@@ -57,7 +56,6 @@ if (!empty($_POST)) {
             $batch = $_POST['idBatch'];
             if ($modulo == 4 || $modulo == 9) desinfectanteVerifico($conn);
             segundaSeccionVerifico($conn);
-            cerrarEstado($batch, $modulo, $conn);
 
             break;
     }

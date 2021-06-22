@@ -2,6 +2,7 @@
 
 //require_once('../../conexion.php');
 require_once('./controlFirmas.php');
+require_once('./actualizarEstado.php');
 
 
 function desinfectanteRealizo($conn)
@@ -86,6 +87,7 @@ function segundaSeccionRealizo($conn)
         $query = $conn->prepare($sql);
         $query->execute(['observaciones' => $observaciones, 'ref_multi' => $ref_multi, 'realizo' => $realizo, 'verifico' => $verifico, 'modulo' => $modulo, 'batch' => $batch]);
         registrarFirmas($conn, $batch, $modulo);
+        if ($modulo == 2 || $modulo == 3 || $modulo == 4) actualizarEstado($batch, $modulo, $conn);
     }
 }
 
@@ -115,6 +117,7 @@ function segundaSeccionVerifico($conn)
         }
 
         registrarFirmas($conn, $batch, $modulo);
+        if ($modulo == 2 || $modulo == 3 || $modulo == 4) cerrarEstado($batch, $modulo, $conn);
     }
 }
 
@@ -194,7 +197,7 @@ function conciliacionRendimientoRealizo($conn)
     $batch =  $_POST['idBatch'];
     $modulo =  $_POST['modulo'];
     $referencia = $_POST['ref_multi'];
-    
+
     $sql = "SELECT * FROM batch_conciliacion_rendimiento WHERE modulo = :modulo AND batch = :batch AND ref_multi = :referencia";
     $query = $conn->prepare($sql);
     $query->execute(['modulo' => $modulo, 'batch' => $batch, 'referencia' => $referencia]);
