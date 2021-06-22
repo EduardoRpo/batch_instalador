@@ -2429,7 +2429,7 @@
                 </div>
 
                 <div class="enlinea">
-                    <label class="mr-3 fechaHora" style="justify-self: end;">Fecha y hora</label>
+                    <label class="mr-3 fechaHoraLiberacion" style="justify-self: end;">Fecha y hora</label>
                     <label id="fecha10" style="font-weight:bold; justify-self: baseline"></label>
                 </div>
 

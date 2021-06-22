@@ -148,7 +148,7 @@ if (!empty($_POST)) {
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
 
             break;
-        case 13: // Firma despachos
+        case 13: // Firma conciliacion acondicionamiento y despachos
             $batch = $_POST['idBatch'];
             $sql = "SELECT * FROM batch_conciliacion_rendimiento bcr INNER JOIN usuario ON bcr.entrego = usuario.id WHERE batch = :batch";
             $query = $conn->prepare($sql);
@@ -182,7 +182,7 @@ if (!empty($_POST)) {
 
             break;
 
-        case 14: // datos fisicoquimico
+        case 15: // datos fisicoquimico
             $batch = $_POST['idBatch'];
 
             $sql = "SELECT CONCAT(ur.nombre, ' ' ,ur.apellido) as nombre_realizo, ur.urlfirma AS realizo, CONCAT(uv.nombre, ' ' ,uv.apellido) as nombre_verifico, uv.urlfirma AS verifico 
@@ -205,6 +205,21 @@ if (!empty($_POST)) {
             $data = $query->fetchAll(PDO::FETCH_ASSOC);
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
 
+            break;
+
+        case 16: // liberacion Lote
+            $batch = $_POST['idBatch'];
+
+            $sql = "SELECT b.aprobacion, b.observaciones, u.urlfirma as produccion, us.urlfirma as calidad, usu.urlfirma as tecnica 
+                    FROM batch_liberacion b 
+                    LEFT JOIN usuario u ON b.dir_produccion=u.id 
+                    LEFT JOIN usuario us ON b.dir_calidad = us.id 
+                    LEFT JOIN usuario usu ON b.dir_tecnica = usu.id 
+                    WHERE batch = :batch";
+            $query = $conn->prepare($sql);
+            $query->execute(['batch' => $batch]);
+            $data = $query->fetchAll(PDO::FETCH_ASSOC);
+            echo json_encode($data, JSON_UNESCAPED_UNICODE);
             break;
     }
 }

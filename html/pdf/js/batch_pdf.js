@@ -83,6 +83,7 @@ info_General = () => {
       lote_anterior();
       desinfectante();
       observacionesAprobacion();
+      identificarDensidad();
     }
   );
 };
@@ -220,13 +221,13 @@ despachos = () => {
         $("#fecha7").html(info[0].fecha_registro);
         for (let i = 0; i < info.length; i++) {
           $(`#user_entrego`).html(
-            `Realizó:<b>${info[i].nombre} ${info[i].apellido}</b>`
+            `Realizó: <b>${info[i].nombre} ${info[i].apellido}</b>`
           );
           $(`#f_entrego`).prop("src", info[i].urlfirma);
         }
       } else {
         $(`#f_entrego`).hide();
-        $(`#user_entrego`).html("Verificó: " + "<b>Sin firmar</b>");
+        $(`#user_entrego`).html(`Verificó: <b>Sin firmar</b>`);
       }
     },
   });
@@ -636,10 +637,9 @@ conciliacion = () => {
       for (let i = 0; i < info.length; i++) {
         if (info[i].modulo == 6) {
           $(`#f_realizoConciliacion`).prop("src", info[i].urlfirma);
-          $(`#user_realizoConciliacion`).html(info[i].nombre);
-        } else if (info[i].modulo == 7) {
-          $(`#f_realizoConciliacion`).hide();
-          $(`#user_realizoConciliacion`).html("Sin firmar");
+          $(`#user_realizoConciliacion`).html(
+            `Realizó: <b>${info[i].nombre}</b>`
+          );
         }
       }
     },
@@ -708,6 +708,8 @@ analisisMicrobiologico = () => {
 
       if (data[0].verifico) {
         $(`#f_verificoMicro`).prop("src", data[0].verifico);
+        $(`#blank_rea8`).hide();
+        $(`#blank_ver8`).hide();
         $(`#user_verificoMicro`).html(
           "Verificó: " + "<b>" + data[0].nombre_verifico + "</b>"
         );
@@ -753,6 +755,17 @@ const fisicoquimico = () => {
   });
 };
 
+const liberacion_lote = () => {
+  $.post(
+    "../../html/php/c_batch_pdf.php",
+    { idBatch, operacion: 16 },
+    function (data, textStatus, jqXHR) {
+      info = JSON.parse(data);
+      $(".fechaHoraLiberacion").html(`fecha y Hora: <b>${info[0]["fecha_registro"]}</b>`);
+    }
+  );
+};
+
 $(document).ready(function () {
   idBatch = sessionStorage.getItem("id");
   let referencias = sessionStorage.getItem("multi");
@@ -767,7 +780,7 @@ $(document).ready(function () {
   especificaciones_producto();
   entrega_material_envase();
   obtenerMuestras();
-  identificarDensidad();
+  //identificarDensidad();
   material_envase_sobrante();
   condiciones_medio();
   control_proceso();
@@ -781,5 +794,6 @@ $(document).ready(function () {
   setTimeout(() => {
     entrega_material_acondicionamiento();
     conciliacion();
+    liberacion_lote();
   }, 50);
 });
