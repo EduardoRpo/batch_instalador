@@ -45,7 +45,7 @@ function cargarfirma2daSeccion() {
       T_tanques = data[0].tanques;
       T_tanquesOk = data[0].tanquesOk;
 
-      if (data == "") return false;
+      if (data == "" || data[0] == false) return false;
 
       /* Chequea todos los tanques de acuerdo con la BD */
 
