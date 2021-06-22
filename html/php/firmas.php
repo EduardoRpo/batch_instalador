@@ -87,7 +87,7 @@ function segundaSeccionRealizo($conn)
         $query = $conn->prepare($sql);
         $query->execute(['observaciones' => $observaciones, 'ref_multi' => $ref_multi, 'realizo' => $realizo, 'verifico' => $verifico, 'modulo' => $modulo, 'batch' => $batch]);
         registrarFirmas($conn, $batch, $modulo);
-        if ($modulo == 2 || $modulo == 3 || $modulo == 4) actualizarEstado($batch, $modulo, $conn);
+        
     }
 }
 

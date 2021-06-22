@@ -3,7 +3,6 @@
 if (!empty($_POST)) {
     require_once('../../conexion.php');
     require_once('../../admin/sistema/php/crud.php');
-    require_once('./actualizarEstado.php');
     require_once('./controlFirmas.php');
     require_once('./firmas.php');
 
