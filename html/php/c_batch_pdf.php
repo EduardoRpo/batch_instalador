@@ -210,7 +210,7 @@ if (!empty($_POST)) {
         case 16: // liberacion Lote
             $batch = $_POST['idBatch'];
 
-            $sql = "SELECT b.aprobacion, b.observaciones, u.urlfirma as produccion, us.urlfirma as calidad, usu.urlfirma as tecnica 
+            $sql = "SELECT b.aprobacion, b.observaciones, u.urlfirma as produccion, us.urlfirma as calidad, usu.urlfirma as tecnica, fecha_registro 
                     FROM batch_liberacion b 
                     LEFT JOIN usuario u ON b.dir_produccion=u.id 
                     LEFT JOIN usuario us ON b.dir_calidad = us.id 

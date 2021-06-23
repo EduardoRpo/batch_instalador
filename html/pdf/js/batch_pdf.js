@@ -761,7 +761,22 @@ const liberacion_lote = () => {
     { idBatch, operacion: 16 },
     function (data, textStatus, jqXHR) {
       info = JSON.parse(data);
-      $(".fechaHoraLiberacion").html(`fecha y Hora: <b>${info[0]["fecha_registro"]}</b>`);
+      $(".fechaHoraLiberacion").html(
+        `fecha y Hora: <b>${info[0]["fecha_registro"]}</b>`
+      );
+
+      $(`#f_realizoPRO`).prop("src", info[0].produccion);
+      $(`#user_realizoMicro`).html(`Verifico: <b>${info[0].nombre_realizo}</b>`);
+
+      $(`#f_realizoCA`).prop("src", info[0].calidad);
+      $(`#user_realizoMicro`).html(`Verifico: <b>${info[0].nombre_realizo}</b>`);
+      
+      $(`#f_realizoTEC`).prop("src", info[0].tecnica);
+      $(`#user_realizoMicro`).html(`Verifico: <b>${info[0].nombre_realizo}</b>`);
+
+      $(`#f_verificoMicro`).hide();
+      $(`#blank_ver`).show();
+      $(`#user_verificoMicro`).html("Verificó: " + "<b>Sin firmar</b>");
     }
   );
 };

@@ -86,7 +86,7 @@ include("modal/modal_condicionesMedio.php");
                     <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:80%; height: 30px;">
                       <thead>
                         <tr>
-                          <th class="centrado">Tanque</th>
+                          <th class="centrado">Multipresentación</th>
                           <th class="centrado">Cantidad</th>
                           <th class="centrado">Total</th>
                         </tr>
@@ -212,6 +212,7 @@ include("modal/modal_condicionesMedio.php");
   <script src="../../html/js/global/loadinfo-global.js"></script>
   <script src="../../html/js/liberacionlote/liberacionloteinfo.js"></script>
   <script src="../../html/js/firmar/firmar1raSeccion.js"></script>
+  <script src="../../html/js/global/tanques.js"></script>
   
 </body>
 

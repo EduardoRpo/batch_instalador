@@ -2434,9 +2434,9 @@
                 </div>
 
                 <div class="coln3 mt-5" id="firmas5">
-                    <img id="f_realizo5" src="" alt="firma_usuario" height="130">
-                    <img id="f_verifico5" src="" alt="firma_usuario" height="130">
-                    <img id="f_verifico5" src="" alt="firma_usuario" height="130">
+                    <img id="f_realizoPRO" src="" alt="firma_usuario" height="130">
+                    <img id="f_realizoCA" src="" alt="firma_usuario" height="130">
+                    <img id="f_realizoTEC" src="" alt="firma_usuario" height="130">
                     <label id="user_realizo5"></label>
                     <label id="user_verifico5"></label>
                     <label id="user_verifico5"></label>
