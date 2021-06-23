@@ -29,7 +29,7 @@ const guardarLiberacion = () => {
     { radio, id, info, obs, idBatch, op: 1 },
     function (data, textStatus, jqXHR) {
       alertify.set("notifier", "position", "top-right");
-      alertify.error("Firmado exitosamente");
+      alertify.success("Firmado exitosamente");
       id = sessionStorage.getItem("idbtn");
       if (id == "firma1")
         $(".produccion_realizado")

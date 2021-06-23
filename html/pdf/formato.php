@@ -2420,8 +2420,8 @@
                         ¿El producto está apto para liberar?</label>
                     <label for="">SI</label>
                     <label for="">NO</label>
-                    <label for=""></label>
-                    <label for="">X</label>
+                    <label for="" id="LiberacionSi"></label>
+                    <label for="" id="LiberacionNo"></label>
                 </div>
                 <div>
                     <label for="">Observaciones</label>
@@ -2437,9 +2437,10 @@
                     <img id="f_realizoPRO" src="" alt="firma_usuario" height="130">
                     <img id="f_realizoCA" src="" alt="firma_usuario" height="130">
                     <img id="f_realizoTEC" src="" alt="firma_usuario" height="130">
-                    <label id="user_realizo5"></label>
-                    <label id="user_verifico5"></label>
-                    <label id="user_verifico5"></label>
+                    <label id="dirNameProd" class="col-form-label"></label>
+                    <label id="dirNameCa" class="col-form-label"></label>
+                    <label id="dirNameTec" class="col-form-label"></label>
+                    
                     <label for="">Director de Producción</label>
                     <label for="">Director de Calidad</label>
                     <label for="">Director Técnico</label>

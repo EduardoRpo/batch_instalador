@@ -210,7 +210,8 @@ if (!empty($_POST)) {
         case 16: // liberacion Lote
             $batch = $_POST['idBatch'];
 
-            $sql = "SELECT b.aprobacion, b.observaciones, u.urlfirma as produccion, us.urlfirma as calidad, usu.urlfirma as tecnica, fecha_registro 
+            $sql = "SELECT b.aprobacion, b.observaciones, CONCAT(u.nombre, ' ', u.apellido) as dirProd, u.urlfirma as produccion, 
+                    CONCAT(us.nombre, ' ', us.apellido) as dirCa, us.urlfirma as calidad, CONCAT(usu.nombre, ' ', usu.apellido) as dirTec, usu.urlfirma as tecnica,  fecha_registro 
                     FROM batch_liberacion b 
                     LEFT JOIN usuario u ON b.dir_produccion=u.id 
                     LEFT JOIN usuario us ON b.dir_calidad = us.id 
@@ -218,7 +219,7 @@ if (!empty($_POST)) {
                     WHERE batch = :batch";
             $query = $conn->prepare($sql);
             $query->execute(['batch' => $batch]);
-            $data = $query->fetchAll(PDO::FETCH_ASSOC);
+            $data = $query->fetch(PDO::FETCH_ASSOC);
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
             break;
     }

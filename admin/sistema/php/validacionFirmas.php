@@ -127,7 +127,8 @@ if ($batch == 1) {
     $firmas_despeje = $query->fetchAll(PDO::FETCH_ASSOC);
     $cantidad = 0;
     for ($i = 0; $i < sizeof($firmas_despeje); $i++) {
-        if ($firmas_despeje[$i]['modulo'] != 9) {
+        $fmodulo = $firmas_despeje[$i]['modulo'];
+        if ($fmodulo != 9 && $fmodulo != 8) {
             if ($firmas_despeje[$i]['realizo'] > 0)
                 $cantidad = $cantidad + 1;
             if ($firmas_despeje[$i]['verifico'] > 0)
@@ -239,6 +240,33 @@ if ($batch == 1) {
     else
         $firmas[$modulo] =  1;
     $cantidad = 0;
+
+
+    $sql = "SELECT * FROM batch_liberacion WHERE batch = :batch";
+    $query = $conn->prepare($sql);
+    $query->execute(['batch' => $batch]);
+    $firmas_liberacion = $query->fetch(PDO::FETCH_ASSOC);
+
+    if ($firmas_liberacion) {
+        if ($firmas_liberacion['dir_produccion'] > 0)
+            $cantidad = $cantidad + 1;
+
+        if ($firmas_liberacion['dir_calidad'] > 0)
+            $cantidad = $cantidad + 1;
+
+        if ($firmas_liberacion['dir_tecnica'] > 0)
+            $cantidad = $cantidad + 1;
+
+        $modulo = 10;
+        $indice = array_key_exists($modulo, $firmas);
+
+        if ($indice)
+            $firmas[$firmas_liberacion[$i]['modulo']] = $firmas[$modulo] + $cantidad;
+        else
+            $firmas[$modulo] =  $cantidad;
+        $cantidad = 0;
+    }
+
 
     echo json_encode($firmas, JSON_UNESCAPED_UNICODE);
 }

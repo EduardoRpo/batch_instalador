@@ -34,21 +34,27 @@ function inserteDesinfectante($conn, $i, $batch, $moduloDif)
 {
 
     $modulofaltantes = array_values($moduloDif);
+    /* print_r($moduloDif);
+    exit(); */
+
     for ($i = 0; $i < sizeof($moduloDif); $i++) {
         $modulo = $modulofaltantes[$i];
 
-        $sql = "SELECT * FROM `batch_firmas2seccion` WHERE modulo = :modulo AND batch = :batch";
-        $query = $conn->prepare($sql);
-        $query->execute(['modulo' => $modulo, 'batch' => $batch]);
-        $data = $query->fetch(PDO::FETCH_ASSOC);
+        if ($modulo == 9) {
 
-        if ($data) {
-            if ($modulo == 9) {
+            $sql = "SELECT * FROM `batch_firmas2seccion` WHERE modulo = :modulo AND batch = :batch";
+            $query = $conn->prepare($sql);
+            $query->execute(['modulo' => $modulo, 'batch' => $batch]);
+            $data = $query->fetch(PDO::FETCH_ASSOC);
+
+            if ($data) {
+
+
                 if ($data['fecha_registro'] <= '2021-04-30')
                     $desinfectante = 1;
                 else if ($data['fecha_registro'] >= '2021-05-01' && $data['fecha_registro'] <= '2021-05-15')
                     $desinfectante = 5;
-                else if ($data['fecha_registro'] >= '2021-05-16' && $data['fecha_registro'] <= '2021-05-31')
+                else if ($data['fecha_registro'] >= '2021-05-16' && $data['fecha_registro'] < '2021-06-01')
                     $desinfectante = 3;
                 else if ($data['fecha_registro'] >= '2021-06-01' && $data['fecha_registro'] <= '2021-06-15')
                     $desinfectante = 4;
@@ -63,32 +69,36 @@ function inserteDesinfectante($conn, $i, $batch, $moduloDif)
                 $query = $conn->prepare($sql);
                 $query->execute(['desinfectante' => $desinfectante, 'modulo' => $modulo, 'batch' => $batch, 'realizo' => $realizo, 'verifico' => $verifico, 'fecha_registro' => $data['fecha_registro']]);
             }
+        }
 
-            if ($modulo == 8) {
+        if ($modulo == 8) {
 
-                $sql = "SELECT * FROM `batch_analisis_microbiologico` WHERE modulo = :modulo AND batch = :batch";
-                $query = $conn->prepare($sql);
-                $query->execute(['modulo' => $modulo, 'batch' => $batch]);
-                $data = $query->fetch(PDO::FETCH_ASSOC);
-                    
-                if ($data['fecha_registro'] <= '2021-04-30')
+            $sql = "SELECT * FROM `batch_analisis_microbiologico` WHERE modulo = :modulo AND batch = :batch";
+            $query = $conn->prepare($sql);
+            $query->execute(['modulo' => $modulo, 'batch' => $batch]);
+            $data = $query->fetch(PDO::FETCH_ASSOC);
+
+            if ($data) {
+
+                if ($data['fecha_siembra'] <= '2021-04-30')
                     $desinfectante = 1;
-                else if ($data['fecha_registro'] >= '2021-05-01' && $data['fecha_registro'] <= '2021-05-15')
+                else if ($data['fecha_siembra'] >= '2021-05-01' && $data['fecha_siembra'] <= '2021-05-15')
                     $desinfectante = 5;
-                else if ($data['fecha_registro'] >= '2021-05-16' && $data['fecha_registro'] <= '2021-05-31')
+                else if ($data['fecha_siembra'] >= '2021-05-16' && $data['fecha_siembra'] <= '2021-05-31')
                     $desinfectante = 3;
-                else if ($data['fecha_registro'] >= '2021-06-01' && $data['fecha_registro'] <= '2021-06-15')
+                else if ($data['fecha_siembra'] >= '2021-06-01' && $data['fecha_siembra'] <= '2021-06-15')
                     $desinfectante = 4;
-                else if ($data['fecha_registro'] >= '2021-06-16' && $data['fecha_registro'] <= '2021-06-30')
+                else if ($data['fecha_siembra'] >= '2021-06-16' && $data['fecha_siembra'] <= '2021-06-30')
                     $desinfectante = 1;
 
                 $realizo = 6;
                 $verifico = 41;
+                $fecha_registro = $data['fecha_siembra'];
 
                 $sql = "INSERT INTO batch_desinfectante_seleccionado (desinfectante, modulo, batch, realizo, verifico, fecha_registro) 
-                        VALUES(:desinfectante, :modulo, :batch, :realizo, :verifico, :fecha_registro)";
+                            VALUES(:desinfectante, :modulo, :batch, :realizo, :verifico, :fecha_registro)";
                 $query = $conn->prepare($sql);
-                $query->execute(['desinfectante' => $desinfectante, 'modulo' => $modulo, 'batch' => $batch, 'realizo' => $realizo, 'verifico' => $verifico, 'fecha_registro' => $data['fecha_registro']]);
+                $query->execute(['desinfectante' => $desinfectante, 'modulo' => $modulo, 'batch' => $batch, 'realizo' => $realizo, 'verifico' => $verifico, 'fecha_registro' => $fecha_registro]);
             }
         }
     }

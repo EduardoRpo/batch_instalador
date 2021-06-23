@@ -760,19 +760,42 @@ const liberacion_lote = () => {
     "../../html/php/c_batch_pdf.php",
     { idBatch, operacion: 16 },
     function (data, textStatus, jqXHR) {
+      if (data == "false") {
+        $(`#f_realizoPRO`).hide();
+        $(`#f_realizoCA`).hide();
+        $(`#f_realizoTEC`).hide();
+        return false;
+      }
       info = JSON.parse(data);
       $(".fechaHoraLiberacion").html(
         `fecha y Hora: <b>${info[0]["fecha_registro"]}</b>`
       );
 
-      $(`#f_realizoPRO`).prop("src", info[0].produccion);
-      $(`#user_realizoMicro`).html(`Verifico: <b>${info[0].nombre_realizo}</b>`);
+      info[0].aprobacion == 0
+        ? $("#LiberacionNo").html("<b>X</b>")
+        : $("#LiberacionSi").html("<b>X</b>");
 
+      info[0].observaciones == ""
+        ? $("#observacioneslote").html("<b>X</b>")
+        : $("#observacioneslote").html(info[0].observaciones);
+
+      $(`#dirNameProd`).html(`<b>${info[0].dirProd}</b>`);
+      $(`#f_realizoPRO`).prop("src", info[0].produccion);
+      $(`#user_realizoMicro`).html(
+        `Verifico: <b>${info[0].nombre_realizo}</b>`
+      );
+
+      $(`#dirNameCa`).html(`<b>${info[0].dirCa}</b>`);
       $(`#f_realizoCA`).prop("src", info[0].calidad);
-      $(`#user_realizoMicro`).html(`Verifico: <b>${info[0].nombre_realizo}</b>`);
-      
+      $(`#user_realizoMicro`).html(
+        `Verifico: <b>${info[0].nombre_realizo}</b>`
+      );
+
+      $(`#dirNameTec`).html(`<b>${info[0].dirTec}</b>`);
       $(`#f_realizoTEC`).prop("src", info[0].tecnica);
-      $(`#user_realizoMicro`).html(`Verifico: <b>${info[0].nombre_realizo}</b>`);
+      $(`#user_realizoMicro`).html(
+        `Verifico: <b>${info[0].nombre_realizo}</b>`
+      );
 
       $(`#f_verificoMicro`).hide();
       $(`#blank_ver`).show();
