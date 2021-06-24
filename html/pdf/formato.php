@@ -2434,13 +2434,16 @@
                 </div>
 
                 <div class="coln3 mt-5" id="firmas5">
+                    <div id="blank_prod"></div>
                     <img id="f_realizoPRO" src="" alt="firma_usuario" height="130">
+                    <div id="blank_cal"></div>
                     <img id="f_realizoCA" src="" alt="firma_usuario" height="130">
+                    <div id="blank_tec"></div>
                     <img id="f_realizoTEC" src="" alt="firma_usuario" height="130">
                     <label id="dirNameProd" class="col-form-label"></label>
                     <label id="dirNameCa" class="col-form-label"></label>
                     <label id="dirNameTec" class="col-form-label"></label>
-                    
+
                     <label for="">Director de Producción</label>
                     <label for="">Director de Calidad</label>
                     <label for="">Director Técnico</label>

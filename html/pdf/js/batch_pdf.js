@@ -767,35 +767,48 @@ const liberacion_lote = () => {
         return false;
       }
       info = JSON.parse(data);
+      let produccion = info["dirProd"];
+      let calidad = info["dirCa"];
+      let tecnica = info["dirTec"];
+
       $(".fechaHoraLiberacion").html(
-        `fecha y Hora: <b>${info[0]["fecha_registro"]}</b>`
+        `fecha y Hora: <b>${info["fecha_registro"]}</b>`
       );
 
-      info[0].aprobacion == 0
+      info["aprobacion"] == 0
         ? $("#LiberacionNo").html("<b>X</b>")
         : $("#LiberacionSi").html("<b>X</b>");
 
-      info[0].observaciones == ""
+      info["observaciones"] == ""
         ? $("#observacioneslote").html("<b>X</b>")
-        : $("#observacioneslote").html(info[0].observaciones);
+        : $("#observacioneslote").html(info["observaciones"]);
 
-      $(`#dirNameProd`).html(`<b>${info[0].dirProd}</b>`);
-      $(`#f_realizoPRO`).prop("src", info[0].produccion);
-      $(`#user_realizoMicro`).html(
-        `Verifico: <b>${info[0].nombre_realizo}</b>`
-      );
+      if (produccion != null) {
+        $(`#dirNameProd`).html(`<b>${info["dirProd"]}</b>`);
+        $(`#f_realizoPRO`).prop("src", info["produccion"]);
+        $(`#blank_prod`).hide();
+      } else {
+        $(`#blank_prod`).show();
+        $(`#f_realizoPRO`).hide();
+      }
 
-      $(`#dirNameCa`).html(`<b>${info[0].dirCa}</b>`);
-      $(`#f_realizoCA`).prop("src", info[0].calidad);
-      $(`#user_realizoMicro`).html(
-        `Verifico: <b>${info[0].nombre_realizo}</b>`
-      );
+      if (calidad != null) {
+        $(`#dirNameCa`).html(`<b>${info["dirCa"]}</b>`);
+        $(`#f_realizoCA`).prop("src", info["calidad"]);
+        $(`#blank_cal`).hide();
+      } else {
+        $(`#blank_cal`).show();
+        $(`#f_realizoCA`).hide();
+      }
 
-      $(`#dirNameTec`).html(`<b>${info[0].dirTec}</b>`);
-      $(`#f_realizoTEC`).prop("src", info[0].tecnica);
-      $(`#user_realizoMicro`).html(
-        `Verifico: <b>${info[0].nombre_realizo}</b>`
-      );
+      if (tecnica != null) {
+        $(`#dirNameTec`).html(`<b>${info["dirTec"]}</b>`);
+        $(`#f_realizoTEC`).prop("src", info["tecnica"]);
+        $(`#blank_tec`).hide();
+      } else {
+        $(`#blank_tec`).show();
+        $(`#f_realizoTEC`).hide();
+      }
 
       $(`#f_verificoMicro`).hide();
       $(`#blank_ver`).show();
