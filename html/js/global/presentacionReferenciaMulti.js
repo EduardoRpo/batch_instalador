@@ -11,6 +11,7 @@ $(".ref_multi1").click(function (e) {
   ref_multi = $(`.ref1`).val();
   id_multi = 1;
   r1++;
+  identificarDensidad(batch);
   presentacion_multi();
 });
 
@@ -20,6 +21,7 @@ $(".ref_multi2").click(function (e) {
   id_multi = 2;
   r2++;
   presentacion_multi();
+  identificarDensidad(batch);
 });
 
 $(".ref_multi3").click(function (e) {
@@ -28,6 +30,7 @@ $(".ref_multi3").click(function (e) {
   id_multi = 3;
   r3++;
   presentacion_multi();
+  identificarDensidad(batch);
 });
 
 function presentacion_multi() {

@@ -70,7 +70,7 @@ class BatchLineaDao
   public function findBatchEnvasado()
   {
     $connection = Connection::getInstance()->getConnection();
-    $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, batch.numero_lote, batch.estado 
+    $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, batch.numero_lote, batch.estado, batch.multi 
                                   FROM batch WHERE batch.estado >= 5.5 AND batch.id_batch 
                                   NOT IN (SELECT DISTINCT batch FROM `batch_desinfectante_seleccionado` bds 
                                   INNER JOIN batch_material_sobrante bms USING (batch) 
@@ -86,7 +86,7 @@ class BatchLineaDao
   public function findBatchAcondicionamiento()
   {
     $connection = Connection::getInstance()->getConnection();
-    $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote, batch.estado 
+    $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote, batch.estado, batch.multi 
                                   FROM batch INNER JOIN producto p ON batch.id_producto = p.referencia 
                                   WHERE batch.estado >= 5.5 AND batch.id_batch 
                                   NOT IN (SELECT DISTINCT batch FROM `batch_desinfectante_seleccionado` bds INNER JOIN batch_material_sobrante bms USING (batch) 
@@ -102,7 +102,7 @@ class BatchLineaDao
   public function findBatchDespachos()
   {
     $connection = Connection::getInstance()->getConnection();
-    $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote 
+    $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote, batch.multi 
                                   FROM batch INNER JOIN producto p ON batch.id_producto = p.referencia 
                                   WHERE batch.estado >= 5.5 AND batch.id_batch 
                                   NOT IN (SELECT batch FROM `batch_conciliacion_rendimiento` WHERE modulo = 7) 

@@ -18,6 +18,7 @@ function crearTablaBatch(
   maxDateFilter = ""
 ) {
   tabla = $("#tablaBatch").DataTable({
+    pageLength: 50,
     responsive: true,
     scrollCollapse: true,
     language: { url: "../../../admin/sistema/admin_componentes/es-ar.json" },

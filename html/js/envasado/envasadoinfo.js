@@ -112,7 +112,7 @@ $(document).ready(function () {
     /* if (proceso == 5) { */
     batch_record();
     busqueda_multi();
-    identificarDensidad(batch);
+    //identificarDensidad(batch);
     deshabilitarbotones();
     /* } */
   }, 750);
