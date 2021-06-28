@@ -155,3 +155,30 @@ function refreshTable(tabla) {
   $("#txtMP").val("");
   $("#txtAlias").val("");
 }
+
+/* Materia Prima_f */
+tabla = $("#tblMateriaPrimaf").DataTable({
+  destroy: true,
+  scrollY: "50vh",
+  scrollCollapse: true,
+  paging: false,
+  language: { url: "admin_componentes/es-ar.json" },
+
+  ajax: {
+    method: "POST",
+    url: "php/c_materiaprima.php",
+    data: { operacion: "4" },
+  },
+
+  columns: [
+    { data: "referencia", className: "centrado" },
+    {
+      defaultContent:
+        "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>",
+      className: "centrado",
+    },
+    { data: "referencia", className: "centrado" },
+    { data: "nombre" },
+    { data: "alias" },
+  ],
+});

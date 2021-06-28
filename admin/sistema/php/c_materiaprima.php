@@ -45,4 +45,8 @@ switch ($op) {
             }
         }
         break;
+    case '4':
+        $query = "SELECT * FROM materia_prima_f";
+        ejecutarQuerySelect($conn, $query);
+        break;
 }

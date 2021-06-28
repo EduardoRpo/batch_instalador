@@ -51,7 +51,8 @@
             <div class="card">
               <div class="card-header">
                 <h4 class="card-title">Materia Prima</h4>
-                <hr>
+              </div>
+              <div class="card-body">
                 <button type="button" class="btn btn-primary" id="btnadicionarMateriaPrima">Adicionar</button>
                 <form id="frmAdicionarMateriaPrima" style="display: none;">
                   <label for=""><b>Codigo</b></label>
@@ -63,37 +64,69 @@
                   <input type="text" name="txtAlias" id="txtAlias" class="form-control" placeholder="Alias" required>
                   <button type="button" class="btn btn-primary" id="btnguardarMateriaPrima">Guardar</button>
                 </form>
-                <hr>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table id="tblMateriaPrima" class="table-striped row-borde" style="width:100%">
-                    <thead>
-                      <tr>
-                        <th>No.</th>
-                        <th>Acciones</th>
-                        <th>Referencia</th>
-                        <th>Materia Prima</th>
-                        <th>Alias</th>
-                      </tr>
-                    </thead>
-                    <tbody>
 
-                    </tbody>
-                  </table>
-                </div>
               </div>
-              <form id="formDataExcel" enctype="multipart/form-data">
-                <input type="file" name="datosExcel" id="datosExcel" class="form-control mb-3 ml-3" style="width: 500px; display:inline-flex">
-                <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value, 8);" disabled="disabled">Cargar Datos</button>
-              </form>
+
             </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">Materia Prima</div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table id="tblMateriaPrima" class="table-striped row-borde" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>Acciones</th>
+                    <th>Referencia</th>
+                    <th>Materia Prima</th>
+                    <th>Alias</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">Materia Prima Fantasma</div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table id="tblMateriaPrimaf" class="table-striped row-borde" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>Acciones</th>
+                    <th>Referencia</th>
+                    <th>Materia Prima</th>
+                    <th>Alias</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">Importar Materias Primas</div>
+          <div class="card-body">
+            <form id="formDataExcel" enctype="multipart/form-data">
+              <input type="file" name="datosExcel" id="datosExcel" class="form-control mb-3 ml-3" style="width: 500px; display:inline-flex">
+              <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value, 8);" disabled="disabled">Cargar Datos</button>
+            </form>
           </div>
         </div>
       </div>
       <?php include('./admin_componentes/footer.php'); ?>
     </div>
+
   </div>
+
 
 
   <!--   Core JS Files   -->
