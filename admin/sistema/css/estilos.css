@@ -181,7 +181,7 @@
 
 #frmAdicionarMateriaPrima {
   display: grid;
-  grid-template-columns: 100px repeat(2, 1fr);
+  grid-template-columns: 100px repeat(2, 1fr) 100px;
   grid-gap: 10px;
   margin: 10px;
   text-align: center;
@@ -190,7 +190,11 @@
   justify-content: center;
 }
 
-#btnguardarMateriaPrima {
+.mp {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+.mpf {
   grid-column-start: 3;
   grid-column-end: 4;
 }

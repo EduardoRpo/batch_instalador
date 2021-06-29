@@ -12,7 +12,15 @@ switch ($op) {
 
     case 2: //Eliminar
         $id = $_POST['id'];
-        $sql = "DELETE FROM materia_prima WHERE referencia = :id";
+        $tb = $_POST['tbmateriaPrima'];
+
+        if ($tb == 0)
+            $tbl = 'materia_prima_f';
+        else
+            $tbl = 'materia_prima';
+
+
+        $sql = "DELETE FROM $tbl WHERE referencia = :id";
         ejecutarEliminar($conn, $sql, $id);
         break;
 
@@ -22,21 +30,28 @@ switch ($op) {
             $referencia = $_POST['ref'];
             $materia_prima = $_POST['materiaprima'];
             $alias = $_POST['alias'];
+            $tb = $_POST['tbmateriaPrima'];
 
-            $sql = "SELECT * FROM materia_prima WHERE referencia = :referencia";
+            if ($tb == 0)
+                $tbl = 'materia_prima_f';
+            else
+                $tbl = 'materia_prima';
+
+
+            $sql = "SELECT * FROM $tbl WHERE referencia = :referencia";
             $query = $conn->prepare($sql);
             $query->execute(['referencia' => $referencia]);
             $rows = $query->rowCount();
 
             if ($rows > 0) {
-                $sql = "UPDATE materia_prima SET nombre = :materia_prima, alias = :alias WHERE referencia = :referencia";
+                $sql = "UPDATE $tbl SET nombre = :materia_prima, alias = :alias WHERE referencia = :referencia";
                 $query = $conn->prepare($sql);
                 $result = $query->execute(['referencia' => $referencia, 'materia_prima' => $materia_prima, 'alias' => $alias]);
 
                 if ($result)
                     echo '3';
             } else {
-                $sql = "INSERT INTO materia_prima (referencia, nombre, alias) VALUES(:referencia, :materia_prima, :alias)";
+                $sql = "INSERT INTO $tbl (referencia, nombre, alias) VALUES(:referencia, :materia_prima, :alias)";
                 $query = $conn->prepare($sql);
                 $result = $query->execute(['referencia' => $referencia, 'materia_prima' => $materia_prima, 'alias' => $alias]);
 

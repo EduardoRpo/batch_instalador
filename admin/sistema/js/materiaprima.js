@@ -7,7 +7,7 @@ $(".contenedor-menu .menu ul.menu_productos").show();
 
 /* Cargue de Parametros de Control en DataTable */
 
-tabla = $("#tblMateriaPrima").DataTable({
+tablamp = $("#tblMateriaPrima").DataTable({
   destroy: true,
   scrollY: "50vh",
   scrollCollapse: true,
@@ -24,7 +24,7 @@ tabla = $("#tblMateriaPrima").DataTable({
     { data: "referencia", className: "centrado" },
     {
       defaultContent:
-        "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>",
+        "<a href='#' <i class='large material-icons link-editar-mp' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar-mp' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>",
       className: "centrado",
     },
     { data: "referencia", className: "centrado" },
@@ -35,9 +35,9 @@ tabla = $("#tblMateriaPrima").DataTable({
 
 /* Enumera los registros en la tabla */
 
-tabla
+tablamp
   .on("order.dt search.dt", function () {
-    tabla
+    tablamp
       .column(0, { search: "applied", order: "applied" })
       .nodes()
       .each(function (cell, i) {
@@ -62,10 +62,20 @@ $("#btnadicionarMateriaPrima").click(function (e) {
 
 /* Borrar registros */
 
-$(document).on("click", ".link-borrar", function (e) {
+$(document).on("click", ".link-borrar-mp", function (e) {
   e.preventDefault();
-
+  tbl = 1;
   let id = $(this).parent().parent().children().eq(2).text();
+  eliminarRegistro(id, tbl);
+});
+
+$(document).on("click", ".link-borrar-mpf", function (e) {
+  tbl = 0;
+  let id = $(this).parent().parent().children().eq(2).text();
+  eliminarRegistro(id, tbl);
+});
+
+const eliminarRegistro = (id, tbl) => {
   let confirm = alertify
     .confirm(
       "Samara Cosmetics",
@@ -80,23 +90,37 @@ $(document).on("click", ".link-borrar", function (e) {
       $.ajax({
         method: "POST",
         url: "php/c_materiaprima.php",
-        data: { operacion: "2", id: id },
+        data: { operacion: "2", id: id, tbmateriaPrima: tbl },
       });
       refreshTable();
       alertify.success("Registro Eliminado");
     }
   });
-});
+};
 
 /* Cargar datos para Actualizar registros */
 
-$(document).on("click", ".link-editar", function (e) {
+$(document).on("click", ".link-editar-mp", function (e) {
   e.preventDefault();
-
+  rb = 1;
   let referencia = $(this).parent().parent().children().eq(2).text();
   let materiaprima = $(this).parent().parent().children().eq(3).text();
   let alias = $(this).parent().parent().children().eq(4).text();
+  editarmp(rb, referencia, materiaprima, alias);
+});
 
+$(document).on("click", ".link-editar-mpf", function (e) {
+  e.preventDefault();
+  rb = 0;
+  let referencia = $(this).parent().parent().children().eq(2).text();
+  let materiaprima = $(this).parent().parent().children().eq(3).text();
+  let alias = $(this).parent().parent().children().eq(4).text();
+  editarmp(rb, referencia, materiaprima, alias);
+});
+
+const editarmp = (rb, referencia, materiaprima, alias) => {
+  if (rb == 1) $("#mp").prop("checked", true);
+  else $("#mpf").prop("checked", true);
   $("#txtCodigo").prop("disabled", true);
   $("#frmAdicionarMateriaPrima").slideDown();
   $("#txtId").val(referencia);
@@ -104,8 +128,7 @@ $(document).on("click", ".link-editar", function (e) {
   $("#txtMP").val(materiaprima);
   $("#txtAlias").val(alias);
   $("#btnguardarMateriaPrima").html("Actualizar");
-});
-
+};
 /* Almacenar Registros */
 
 $("#btnguardarMateriaPrima").click(function (e) {
@@ -114,8 +137,16 @@ $("#btnguardarMateriaPrima").click(function (e) {
   let ref = $("#txtCodigo").val();
   let materiaprima = $("#txtMP").val();
   let alias = $("#txtAlias").val();
+  let tbmateriaPrima;
+  if ($("#mp").prop("checked")) tbmateriaPrima = $("#mp").val();
+  if ($("#mpf").prop("checked")) tbmateriaPrima = $("#mpf").val();
 
-  if (ref == "" || materiaprima == "" || alias == "") {
+  if (
+    ref == "" ||
+    materiaprima == "" ||
+    alias == "" ||
+    tbmateriaPrima == undefined
+  ) {
     alertify.set("notifier", "position", "top-right");
     alertify.error("Ingrese todos los datos.");
     return false;
@@ -124,7 +155,7 @@ $("#btnguardarMateriaPrima").click(function (e) {
   $.ajax({
     type: "POST",
     url: "php/c_materiaprima.php",
-    data: { operacion: 3, ref, materiaprima, alias },
+    data: { operacion: 3, ref, materiaprima, alias, tbmateriaPrima },
 
     success: function (r) {
       if (r == 1) {
@@ -148,16 +179,18 @@ $("#btnguardarMateriaPrima").click(function (e) {
 
 /* Actualizar tabla */
 
-function refreshTable(tabla) {
+function refreshTable() {
   $("#tblMateriaPrima").DataTable().clear();
   $("#tblMateriaPrima").DataTable().ajax.reload();
+  $("#tblMateriaPrimaf").DataTable().clear();
+  $("#tblMateriaPrimaf").DataTable().ajax.reload();
   $("#txtCodigo").val("");
   $("#txtMP").val("");
   $("#txtAlias").val("");
 }
 
 /* Materia Prima_f */
-tabla = $("#tblMateriaPrimaf").DataTable({
+tablampf = $("#tblMateriaPrimaf").DataTable({
   destroy: true,
   scrollY: "50vh",
   scrollCollapse: true,
@@ -174,7 +207,7 @@ tabla = $("#tblMateriaPrimaf").DataTable({
     { data: "referencia", className: "centrado" },
     {
       defaultContent:
-        "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>",
+        "<a href='#' <i class='large material-icons link-editar-mpf' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar-mpf' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>",
       className: "centrado",
     },
     { data: "referencia", className: "centrado" },
@@ -182,3 +215,16 @@ tabla = $("#tblMateriaPrimaf").DataTable({
     { data: "alias" },
   ],
 });
+
+/* Enumera los registros en la tabla */
+
+tablampf
+  .on("order.dt search.dt", function () {
+    tablampf
+      .column(0, { search: "applied", order: "applied" })
+      .nodes()
+      .each(function (cell, i) {
+        cell.innerHTML = i + 1;
+      });
+  })
+  .draw();

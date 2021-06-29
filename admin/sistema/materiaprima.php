@@ -54,15 +54,27 @@
               </div>
               <div class="card-body">
                 <button type="button" class="btn btn-primary" id="btnadicionarMateriaPrima">Adicionar</button>
+
+
                 <form id="frmAdicionarMateriaPrima" style="display: none;">
                   <label for=""><b>Codigo</b></label>
                   <label for=""><b>Materia Pima</b></label>
                   <label for=""><b>Alias</b></label>
+                  <label for="">Acciones</label>
                   <input type="number" name="txtId" id="txtId" class="form-control" hidden>
                   <input type="number" name="txtCodigo" id="txtCodigo" class="form-control" placeholder="Codigo" required>
                   <input type="text" name="txtMP" id="txtMP" class="form-control" placeholder="Materia Prima" required>
                   <input type="text" name="txtAlias" id="txtAlias" class="form-control" placeholder="Alias" required>
                   <button type="button" class="btn btn-primary" id="btnguardarMateriaPrima">Guardar</button>
+                  <div class="mp" style="justify-self: right;">
+                    <input type="radio" id="mp" name="radio_materiales" value="1">
+                    <label for="mp">Materia Prima</label><br>
+                  </div>
+                  <div class="mpf" style="justify-self: left;">
+                    <input type="radio" id="mpf" name="radio_materiales" value="0">
+                    <label for="mpf">Materia Prima Fantasma</label><br>
+                  </div>
+
                 </form>
 
               </div>
