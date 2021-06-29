@@ -54,7 +54,7 @@ cargar_Alertas = () => {
   );
 };
 
-info_General = () => {
+function info_General() {
   $.post(
     "../../html/php/c_batch_pdf.php",
     (data = { operacion: 2, idBatch }),
@@ -84,9 +84,10 @@ info_General = () => {
       desinfectante();
       observacionesAprobacion();
       identificarDensidad();
+      multi();
     }
   );
-};
+}
 
 parametros_Control = () => {
   let data = { operacion: 3, idBatch };
@@ -817,6 +818,28 @@ const liberacion_lote = () => {
   );
 };
 
+/* Multipresentacion */
+const multi = () => {
+  $.post(
+    "../../html/php/c_batch_pdf.php",
+    { idBatch, operacion: 17 },
+    function (data, textStatus, jqXHR) {
+      if (data == 0) return false;
+      console.log(data);
+      info = JSON.parse(data);
+      if (info.length == 2) $("#multipresentacion2").show();
+      else if (info.length == 3) $("#multipresentacion3").show();
+      j = 1;
+      for (let i = 0; i < info.length; i++) {
+        $(`#titulo_envasado${j}`).html(
+          `<b>ENVASADO <br>REFERENCIA: ${info[i].referencia}</b>`
+        );
+        j++;
+      }
+    }
+  );
+};
+
 $(document).ready(function () {
   idBatch = sessionStorage.getItem("id");
   let referencias = sessionStorage.getItem("multi");
@@ -841,7 +864,7 @@ $(document).ready(function () {
   despachos();
   analisisMicrobiologico();
   //fisicoquimico();
-
+  multi();
   setTimeout(() => {
     entrega_material_acondicionamiento();
     conciliacion();

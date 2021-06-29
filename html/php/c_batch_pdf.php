@@ -222,5 +222,15 @@ if (!empty($_POST)) {
             $data = $query->fetch(PDO::FETCH_ASSOC);
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
             break;
+        case '17': //busqueda_multipresentacion
+            $batch = $_POST['idBatch'];
+
+            $sql = "SELECT * FROM multipresentacion WHERE id_batch = :batch";
+            $query = $conn->prepare($sql);
+            $query->execute(['batch' => $batch]);
+            $data = $query->fetchAll(PDO::FETCH_ASSOC);
+            sizeof($data) == 0 ? $data = 0 : $data;
+            echo json_encode($data, JSON_UNESCAPED_UNICODE);
+            break;
     }
 }
