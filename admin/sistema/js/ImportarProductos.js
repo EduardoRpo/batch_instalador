@@ -70,7 +70,7 @@ function cargarDataExcel(tabla, id) {
         $(`.btnCargarExcel`).prop("disabled", false);
       } else {
         alertify.set("notifier", "position", "top-right");
-        alertify.success("Productos importaods exitosamente");
+        alertify.success("Productos importados exitosamente");
         $("#spinner").css("display", "none");
         $(`#datosExcel${id}`).val("");
         refreshTable(id);

@@ -134,10 +134,10 @@ if ($tabla == 'producto') {
 		else
 			$conn->query("INSERT INTO $tabla (id, nombre) VALUES ('{$data[0]}', '{$data[1]}')");
 	}
-} else if ($tabla == 'formula') {
+} else if ($tabla == 'formula' || $tabla == 'formula_f') {
 	foreach ($dataList as $data) {
 
-		$sql = "SELECT * FROM formula WHERE id_producto = :referencia AND id_materiaprima = :materiaprima";
+		$sql = "SELECT * FROM $tabla WHERE id_producto = :referencia AND id_materiaprima = :materiaprima";
 		$query = $conn->prepare($sql);
 		$query->execute(['referencia' => $data[0], 'materiaprima' => $data[1]]);
 		$rows = $query->rowCount();
@@ -145,11 +145,12 @@ if ($tabla == 'producto') {
 		$data[0] = preg_replace("[\n|\r|\n\r]", "", $data[0]);
 		$data[1] = preg_replace("[\n|\r|\n\r]", "", $data[1]);
 		$data[2] = preg_replace("[\n|\r|\n\r]", "", $data[2]);
-		$data[2] = str_replace(",", ".", $data[2]);
+		$data[2] = floatval(str_replace(",", ".", $data[2]));
 
 		if ($rows > 0) {
 			//$conn->query("UPDATE formula SET porcentaje = AES_ENCRYPT('{$data[2]}','Wf[Ht^}2YL=D^DPD') WHERE id_producto = '{$data[0]}' AND id_materiaprima = '{$data[1]}' ");
-			$sql = "UPDATE formula SET porcentaje = AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
+			$sql = "UPDATE $tabla SET porcentaje = AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') 
+					WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
 			$query = $conn->prepare($sql);
 			$result = $query->execute([
 				'id_producto' => $data[0],
@@ -157,7 +158,8 @@ if ($tabla == 'producto') {
 				'porcentaje' => $data[2],
 			]);
 		} else {
-			$sql = "INSERT INTO formula (id_producto, id_materiaprima, porcentaje) VALUES (:referencia, :materiaprima, AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD'))";
+			$sql = "INSERT INTO $tabla (id_producto, id_materiaprima, porcentaje) 
+					VALUES (:referencia, :materiaprima, AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD'))";
 			$query = $conn->prepare($sql);
 			$query->execute(['referencia' => $data[0], 'materiaprima' => $data[1], 'porcentaje' => $data[2]]);
 		}
