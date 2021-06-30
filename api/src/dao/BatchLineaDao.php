@@ -149,7 +149,7 @@ class BatchLineaDao
     $connection = Connection::getInstance()->getConnection();
     $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote  
                                   FROM batch INNER JOIN producto p ON p.referencia = batch.id_producto 
-                                  WHERE batch.estado >= 5.5 AND batch.id_batch NOT IN (SELECT batch FROM `batch_liberacion` WHERE dir_produccion > 0 AND dir_calidad > 0 and dir_tecnica > 0) ORDER BY `batch`.`id_batch` DESC");
+                                  WHERE batch.estado >= 10 AND batch.id_batch NOT IN (SELECT batch FROM `batch_liberacion` WHERE dir_produccion > 0 AND dir_calidad > 0 and dir_tecnica > 0) ORDER BY `batch`.`id_batch` DESC");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $liberacionlote = $stmt->fetchAll($connection::FETCH_ASSOC);

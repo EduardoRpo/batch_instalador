@@ -206,41 +206,41 @@ if ($batch == 1) {
     $query->execute(['batch' => $batch]);
     $firmas_material = $query->fetchAll(PDO::FETCH_ASSOC);
 
-    for ($i = 0; $i < sizeof($firmas_material); $i++) {
-        if ($firmas_material[$i]['modulo'] == 5) {
-            if ($firmas_material[$i]['realizo'] > 0)
-                $cantidad = $cantidad + 1;
-            if ($firmas_material[$i]['verifico'] > 0)
-                $cantidad = $cantidad + 1;
+    if (sizeof($firmas_material) > 0) {
+        for ($i = 0; $i < sizeof($firmas_material); $i++) {
+            if ($firmas_material[$i]['modulo'] == 5) {
+                if ($firmas_material[$i]['realizo'] > 0)
+                    $cantidad = $cantidad + 1;
+                if ($firmas_material[$i]['verifico'] > 0)
+                    $cantidad = $cantidad + 1;
+            }
         }
-    }
-    $modulo = 5;
-    $indice = array_key_exists($modulo, $firmas);
+        $modulo = 5;
+        $indice = array_key_exists($modulo, $firmas);
 
-    if ($indice && $cantidad == 6)
-        $firmas[$modulo] = $firmas[$modulo] + 2;
-    else
-        $firmas[$modulo] =  1;
-    $cantidad = 0;
+        if ($indice && $cantidad == 6)
+            $firmas[$modulo] = $firmas[$modulo] + 2;
+        else
+            $firmas[$modulo] =  1;
+        $cantidad = 0;
 
-
-    for ($i = 0; $i < sizeof($firmas_material); $i++) {
-        if ($firmas_material[$i]['modulo'] == 6) {
-            if ($firmas_material[$i]['realizo'] > 0)
-                $cantidad = $cantidad + 1;
-            if ($firmas_material[$i]['verifico'] > 0)
-                $cantidad = $cantidad + 1;
+        for ($i = 0; $i < sizeof($firmas_material); $i++) {
+            if ($firmas_material[$i]['modulo'] == 6) {
+                if ($firmas_material[$i]['realizo'] > 0)
+                    $cantidad = $cantidad + 1;
+                if ($firmas_material[$i]['verifico'] > 0)
+                    $cantidad = $cantidad + 1;
+            }
         }
+        $modulo = 6;
+        $indice = array_key_exists($modulo, $firmas);
+
+        if ($indice && $cantidad == 4)
+            $firmas[$modulo] = $firmas[$modulo] + 2;
+        else
+            $firmas[$modulo] =  1;
+        $cantidad = 0;
     }
-    $modulo = 6;
-    $indice = array_key_exists($modulo, $firmas);
-
-    if ($indice && $cantidad == 4)
-        $firmas[$modulo] = $firmas[$modulo] + 2;
-    else
-        $firmas[$modulo] =  1;
-    $cantidad = 0;
-
 
     $sql = "SELECT * FROM batch_liberacion WHERE batch = :batch";
     $query = $conn->prepare($sql);
@@ -266,7 +266,6 @@ if ($batch == 1) {
             $firmas[$modulo] =  $cantidad;
         $cantidad = 0;
     }
-
 
     echo json_encode($firmas, JSON_UNESCAPED_UNICODE);
 }

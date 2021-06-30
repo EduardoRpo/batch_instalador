@@ -66,3 +66,17 @@ function ActualizarBatchEstado($conn, $batch, $estado)
     $query = $conn->prepare($sql);
     $query->execute(['estado' => $estado, 'batch' => $batch]);
 }
+
+function CerrarBatch($conn, $batch)
+{
+    $sql = "SELECT SUM(cantidad_firmas) as cantidad FROM `batch_control_firmas` WHERE batch = :batch";
+    $query = $conn->prepare($sql);
+    $query->execute(['batch' => $batch]);
+    $firmas = $query->fetch(PDO::FETCH_ASSOC);
+    
+    if ($firmas['cantidad'] == 28) {
+        $sql = "UPDATE batch SET estado = '10' WHERE id_batch = :batch";
+        $query = $conn->prepare($sql);
+        $query->execute(['batch' => $batch]);
+    }
+}

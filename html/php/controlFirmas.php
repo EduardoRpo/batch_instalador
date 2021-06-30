@@ -2,9 +2,9 @@
 
 function registrarFirmas($conn, $batch, $modulo)
 {
-    $sql = "SELECT * FROM batch_control_firmas WHERE batch = :batch";
+    $sql = "SELECT * FROM batch_control_firmas WHERE batch = :batch AND modulo = :modulo";
     $query = $conn->prepare($sql);
-    $query->execute(['batch' => $batch]);
+    $query->execute(['batch' => $batch, 'modulo' => $modulo]);
     $rows = $query->rowCount();
 
     if ($rows > 0) {

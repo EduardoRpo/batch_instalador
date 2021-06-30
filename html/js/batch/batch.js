@@ -22,6 +22,7 @@ function crearTablaBatch(
     responsive: true,
     scrollCollapse: true,
     language: { url: "../../../admin/sistema/admin_componentes/es-ar.json" },
+    oSearch: { bSmart: false },
 
     ajax: {
       method: "POST",
@@ -102,6 +103,9 @@ function crearTablaBatch(
     ],
   });
 }
+
+/* filtrado exacto */
+tabla.column(i).search($(this).val(), false, false, false).draw();
 
 /* Cambiar puntero del mouse al tocar los botones de actualizar y eliminar */
 

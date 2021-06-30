@@ -87,7 +87,6 @@ function segundaSeccionRealizo($conn)
         $query = $conn->prepare($sql);
         $query->execute(['observaciones' => $observaciones, 'ref_multi' => $ref_multi, 'realizo' => $realizo, 'verifico' => $verifico, 'modulo' => $modulo, 'batch' => $batch]);
         registrarFirmas($conn, $batch, $modulo);
-        
     }
 }
 
@@ -118,6 +117,7 @@ function segundaSeccionVerifico($conn)
 
         registrarFirmas($conn, $batch, $modulo);
         if ($modulo == 2 || $modulo == 3 || $modulo == 4) cerrarEstado($batch, $modulo, $conn);
+        CerrarBatch($conn, $batch);
     }
 }
 
@@ -188,6 +188,7 @@ function materialSobranteVerifico($conn)
         $query = $conn->prepare($sql);
         $query->execute(['modulo' => $modulo, 'batch' => $batch, 'ref_multi' => $ref_multi, 'verifico' => $verifico,]);
         registrarFirmas($conn, $batch, $modulo);
+        CerrarBatch($conn, $batch);
     }
 }
 
@@ -226,6 +227,7 @@ function conciliacionRendimientoRealizo($conn)
             'realizo' => $realizo,
         ]);
         registrarFirmas($conn, $batch, $modulo);
+        CerrarBatch($conn, $batch);
     }
 }
 
@@ -280,5 +282,6 @@ function AnalisisMicrobiologiaVerifico($conn)
         $query = $conn->prepare($sql);
         $query->execute(['verifico' => $verifico, 'batch' => $batch]);
         registrarFirmas($conn, $batch, $modulo);
+        CerrarBatch($conn, $batch);
     }
 }
