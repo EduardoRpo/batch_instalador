@@ -105,7 +105,7 @@ function crearTablaBatch(
 }
 
 /* filtrado exacto */
-tabla.column(i).search($(this).val(), false, false, false).draw();
+/* tabla.column(i).search($(this).val(), false, false, false).draw(); */
 
 /* Cambiar puntero del mouse al tocar los botones de actualizar y eliminar */
 
