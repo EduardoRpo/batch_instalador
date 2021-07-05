@@ -54,60 +54,65 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h5 class="title">Adicionar Nuevas Formulas</h5>
+                <h5 class="title">Crear Formulas</h5>
                 <p class="category">Samara Cosmetics <a href=""></a></p>
               </div>
-              <div class="card-body">
+              <div class="card-body mb-3">
                 <div class="selproductos">
                   <select name="cmbReferenciaProductos" id="cmbReferenciaProductos" class="form-control" style="width: 200px;"></select>
                   <input type="text" class="form-control ml-3" id="txtnombreProducto">
                 </div>
-                <div style="display: flex; justify-content: flex-end">
+                <!-- <div style="display: flex; justify-content: flex-end">
                   <button class="btn btn-primary" id="verMateriasPrimas">Ver Materias Primas</button>
-                </div>
-                <hr>
+                </div> -->
+
+                <!-- <hr> -->
 
 
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="content" id="materiasprimas">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card">
-                <div class="card-header">
-                  <h5 class="title">Materia Prima</h5>
-                  <p class="category">Samara Cosmetics <a href=""></a></p>
-                </div>
-                <div class="card-body">
-                  <div class="table-responsive">
-                    <table id="tblMateriasPrimas" class="table-striped row-borde" style="width:100%">
-                      <thead>
-                        <tr>
-                          <th>Referencia</th>
-                          <th>Materia Prima</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-md-12">
+          <!-- <div class="content" id="materiasprimas"> -->
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <h6 class="title">Materia Prima</h6>
+                <p class="category">Samara Cosmetics <a href=""></a></p>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table id="tblMateriasPrimas" class="table-striped row-borde" style="width:100%">
+                    <thead>
+                      <tr>
+                        <th>Referencia</th>
+                        <th>Materia Prima</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- </div> -->
+          <!-- </div> -->
+
+          <!-- <div class="row"> -->
+          <div class="col-md-6">
             <div class="card" id="cardformula_r">
+              <div class="card-header">
+                <h6 class="title">Formulas</h6>
+                <p class="category">Samara Cosmetics <a href=""></a></p>
+              </div>
               <div class="card-body">
                 <div class="table-responsive">
                   <table id="tblFormula" class="table-striped row-borde" style="width:100%">
-                    <label for="">Formulas</label>
+
                     <thead>
                       <tr>
                         <th>Referencia</th>
@@ -121,7 +126,7 @@
                     </tbody>
 
                   </table>
-                  <div style="display:flexbox;width:15%;margin-left:550px">
+                  <div style="display:flexbox;width:25%;margin-left:260px">
                     <div class="input-group mb-3">
                       <!-- <label for="">Total</label> -->
                       <input type="text" id="totalPorcentajeFormulas" class="form-control" aria-label="Amount (to the nearest dollar)" disabled>

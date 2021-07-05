@@ -6,24 +6,27 @@ $("#verMateriasPrimas").click(function (e) {
 });
 
 /* Cargue select referencias */
+const selectReferencias = () => {
+  $.ajax({
+    method: "POST",
+    url: "php/desarrollo/newformulas.php",
+    data: { operacion: "1" },
 
-$.ajax({
-  method: "POST",
-  url: "php/desarrollo/newformulas.php",
-  data: { operacion: "1" },
+    success: function (response) {
+      let info = JSON.parse(response);
+      let $selectProductos = $("#cmbReferenciaProductos");
+      const array = $.map(info, function (value, index) {
+        return [value];
+      });
+      cargarSelect(array, $selectProductos);
+    },
+    error: function (response) {
+      console.log(response);
+    },
+  });
+};
 
-  success: function (response) {
-    let info = JSON.parse(response);
-    let $selectProductos = $("#cmbReferenciaProductos");
-    const array = $.map(info, function (value, index) {
-      return [value];
-    });
-    cargarSelect(array, $selectProductos);
-  },
-  error: function (response) {
-    console.log(response);
-  },
-});
+selectReferencias();
 
 /* cargar Selects */
 
@@ -96,6 +99,11 @@ const cargartblMateriaprima = () => {
     "Ingrese el valor del porcentaje",
     "",
     function (evt, value) {
+      if (value <= 0) {
+        alertify.set("notifier", "position", "top-right");
+        alertify.error("El valor ingresado debe ser mayor a cero");
+        return false;
+      }
       sum = sum + parseFloat(value);
       t.row
         .add([
@@ -117,21 +125,20 @@ const cargartblMateriaprima = () => {
   );
 };
 
-/* Calcular la suma de los porcentajes */
-//const t = $("#tblFormula").DataTable();
-
 /* Almacenar Registros */
 
-function guardarFormulaMateriaPrima() {
-  //let operacion = $("input:radio[name=formula]:checked").val();
-  let operacion = 6;
+$("#guardarFormula").click(function (e) {
+  e.preventDefault();
+  let operacion = 3;
   let ref_producto = $("#cmbReferenciaProductos").val();
-  let ref_materiaprima = $("#cmbreferencia").val();
-  let porcentaje = parseFloat($("#porcentaje").val());
+  const t = $("#tblFormula").DataTable();
+  var data = t.rows().data();
+  array = [];
 
-  ref_materiaprima === null
-    ? (ref_materiaprima = $("#textReferencia").val())
-    : ref_materiaprima;
+  for (let i = 0; i < data.length; i++) {
+    data[i].pop();
+    array.push(data[i]);
+  }
 
   if (ref_producto === null) {
     alertify.set("notifier", "position", "top-right");
@@ -139,83 +146,51 @@ function guardarFormulaMateriaPrima() {
     return false;
   }
 
-  if (ref_materiaprima === null) {
+  if (data.length == 0) {
     alertify.set("notifier", "position", "top-right");
-    alertify.error("Seleccione la referencia de la materia prima");
-    ref_materiaprima = $("#textReferencia").val();
-    return false;
-  }
-
-  if (
-    porcentaje === undefined ||
-    porcentaje === null ||
-    porcentaje === "" ||
-    isNaN(porcentaje)
-  ) {
-    alertify.set("notifier", "position", "top-right");
-    alertify.error("Ingrese todos los campos");
+    alertify.error("Cargue la formula");
     return false;
   }
 
   $.ajax({
     type: "POST",
-    url: "php/c_formulas.php",
-    data: {
-      operacion,
-      ref_producto,
-      ref_materiaprima,
-      porcentaje,
-      tbl,
-      editar,
-    },
+    url: "php/desarrollo/newformulas.php",
+    data: { operacion, ref_producto, array },
 
     success: function (r) {
       if (r == 1) {
         alertify.set("notifier", "position", "top-right");
         alertify.success("Almacenada con éxito.");
-      } else if (r == 3) {
-        alertify.set("notifier", "position", "top-right");
-        alertify.success("Registro actualizado.");
-        refreshTable();
       } else {
         alertify.set("notifier", "position", "top-right");
-        alertify.error("Error.");
+        alertify.error("No almacenado. Valide nuevamente.");
       }
-
-      $("#cmbreferencia").val("");
-      $("#txtMateria-Prima").val("");
-      $("#alias").val("");
-      $("#porcentaje").val("");
-      refreshTable();
+      limpiarDatatable(data.length);
     },
   });
-}
+});
 
 /* Borrar registros */
 
-$(document).on("click", ".link-borrar", function (e) {
+$("#tblFormula tbody").on("click", ".link-borrar", function (e) {
   e.preventDefault();
   let porcentaje = $(this).parent().parent().children().eq(2).text();
 
-  var confirm = alertify
-    .confirm(
-      "Samara Cosmetics",
-      "¿Está seguro de eliminar este registro?",
-      null,
-      null
-    )
-    .set("labels", { ok: "Si", cancel: "No" });
-  confirm.set("onok", function (r) {
-    if (r) {
-      const t = $("#tblFormula").DataTable();
-      sum = sum - parseFloat(porcentaje);
-      $("#totalPorcentajeFormulas").val(sum);
-      t.row(":eq(0)").remove().draw();
-      alertify.set("notifier", "position", "top-right");
-      alertify.success("Eliminado");
-    }
-  });
+  const t = $("#tblFormula").DataTable();
+  sum = sum - parseFloat(porcentaje);
+  $("#totalPorcentajeFormulas").val(sum);
+  t.row($(this).parents("tr")).remove().draw();
+
+  alertify.set("notifier", "position", "top-right");
+  alertify.success("Eliminado");
 });
+
+limpiarDatatable = (rows) => {
+  const t = $("#tblFormula").DataTable();
+  for (let i = 0; i <= rows; i++) t.row().remove().draw();
+  selectReferencias();
+  $("#txtnombreProducto").val("");
+};
 
 /* Actualizar tabla */
 
