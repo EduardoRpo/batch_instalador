@@ -47,6 +47,9 @@ if (!empty($_SESSION['active'])) {
                     } else if ($rol == 4) {
                         header('location: admin/sistema/calidad.php');
                         exit();
+                    } else if ($rol == 5) {
+                        header('location: admin/sistema/Ingresoformulas.php');
+                        exit();
                     } else {
                         $modulo = $data['id_modulo'];
                         $variable = $rol . $modulo;

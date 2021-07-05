@@ -28,16 +28,15 @@ $("#form_clonar").submit(function (event) {
     } else {
       $.ajax({
         type: "POST",
-        url: "php/listarBatch.php",
+        url: "php/crearbatch/clonar.php",
         data: {
-          operacion: "10",
           id: data.id_batch,
           referencia: data.referencia,
           clonarCantidad,
         },
 
         success: function (r) {
-          if (r == 1) {
+          if (r >= 1) {
             alertify.set("notifier", "position", "top-right");
             alertify.success("Batch Record Clonado.");
             $("#ClonarModal").modal("hide");

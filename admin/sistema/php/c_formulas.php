@@ -8,31 +8,51 @@ $op = $_POST['operacion'];
 
 switch ($op) {
     case 1: //listar referencias Productos
-        $query = "SELECT p.referencia FROM producto p ORDER BY p.referencia";
-        ejecutarQuerySelect($conn, $query);
+        $sql = "SELECT p.referencia FROM producto p ORDER BY p.referencia";
+        $query = $conn->prepare($sql);
+        $query->execute();
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
         break;
 
     case 2: //Obtener nombre producto
         $referencia = $_POST['referencia'];
-        $query = "SELECT p.referencia, p.nombre_referencia FROM producto p WHERE referencia = '$referencia'";
-        ejecutarQuerySelect($conn, $query);
+        $sql = "SELECT p.referencia, p.nombre_referencia FROM producto p WHERE referencia = :referencia";
+        $query = $conn->prepare($sql);
+        $query->execute(['referencia' => $referencia]);
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+
         break;
 
     case 3: //Listar Formula
         $referencia = $_POST['referencia'];
-        $query = "SELECT f.id_producto, f.id_materiaprima as referencia, m.alias as alias, m.nombre, cast(AES_DECRYPT(porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje FROM formula f INNER JOIN materia_prima m ON f.id_materiaprima=m.referencia WHERE f.id_producto = '$referencia'";
+        $query = "SELECT f.id_producto, f.id_materiaprima as referencia, m.alias as alias, m.nombre, cast(AES_DECRYPT(porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje 
+                  FROM formula f INNER JOIN materia_prima m ON f.id_materiaprima=m.referencia 
+                  WHERE f.id_producto = '$referencia'";
         ejecutarQuerySelect($conn, $query);
         break;
 
     case 4: //Referencias Materias Primas
-        $query = "SELECT referencia FROM materia_prima";
-        ejecutarQuerySelect($conn, $query);
+        $tb = $_POST['tb'];
+        $tb == 'r' ? $tb = 'materia_prima' : $tb = 'materia_prima_f';
+        $sql = "SELECT referencia FROM $tb";
+        $query = $conn->prepare($sql);
+        $query->execute();
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
         break;
 
     case 5: //Obtener Materia Prima y Alias
         $referencia = $_POST['referencia'];
-        $query = "SELECT mp.referencia, mp.nombre, mp.alias FROM materia_prima mp WHERE referencia = '$referencia'";
-        ejecutarQuerySelect($conn, $query);
+        $tbl = $_POST['tbl'];
+        $tbl == 'r' ? $tbl = 'materia_prima' : $tbl = 'materia_prima_f';
+
+        $sql = "SELECT * FROM $tbl WHERE referencia = :referencia";
+        $query = $conn->prepare($sql);
+        $query->execute(['referencia' => $referencia]);
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
         break;
 
     case 6: // Guardar data Formula
@@ -41,25 +61,29 @@ switch ($op) {
             $id_producto = $_POST['ref_producto'];
             $id_materiaprima = $_POST['ref_materiaprima'];
             $porcentaje = $_POST['porcentaje'];
+            $tbl = $_POST['tbl'];
+            $tbl == 'r' ? $tbl = 'formula' : $tbl = 'formula_f';
 
-            $sql = "SELECT * FROM formula WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
+            $sql = "SELECT * FROM $tbl WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
             $query = $conn->prepare($sql);
             $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto]);
             $rows = $query->rowCount();
 
             if ($rows > 0) {
-                $sql = "UPDATE formula SET porcentaje = AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
+                $sql = "UPDATE $tbl SET porcentaje = AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
                 $query = $conn->prepare($sql);
-                $result = $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto, 'porcentaje' => $porcentaje,]);
-                if ($result) echo '3';
+                $result = $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto, 'porcentaje' => $porcentaje]);
+                echo '3';
             } else {
-                $sql = "INSERT INTO formula (id_producto, id_materiaprima, porcentaje) VALUES (:id_producto, :id_materiaprima, AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') )";
+                $sql = "INSERT INTO $tbl (id_producto, id_materiaprima, porcentaje) VALUES (:id_producto, :id_materiaprima, AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') )";
                 $query = $conn->prepare($sql);
                 $result = $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto, 'porcentaje' => $porcentaje]);
 
                 /* Valida si existen batch sin formula y actualiza */
-                $result = estadoInicial($conn, $referencia, $fechaprogramacion = "");
-                $result = ActualizarBatch($conn, $result, $id_producto);
+                if ($tbl == 'materia_prima') {
+                    $result = estadoInicial($conn, $id_producto, $fechaprogramacion = "");
+                    $result = ActualizarBatch($conn, $result, $id_producto);
+                }
                 if ($result) echo '1';
             }
         }
@@ -89,14 +113,9 @@ switch ($op) {
                 if ($result)
                     echo '3';
             } else {
-                $sql = "INSERT INTO formula_f (id_producto, id_materiaprima, porcentaje) 
-                            VALUES (:id_producto, :id_materiaprima, :porcentaje )";
+                $sql = "INSERT INTO formula_f (id_producto, id_materiaprima, porcentaje) VALUES (:id_producto, :id_materiaprima, :porcentaje )";
                 $query = $conn->prepare($sql);
-                $result = $query->execute([
-                    'id_producto' => $id_producto,
-                    'id_materiaprima' => $id_materiaprima,
-                    'porcentaje' => $porcentaje,
-                ]);
+                $result = $query->execute(['id_producto' => $id_producto, 'id_materiaprima' => $id_materiaprima, 'porcentaje' => $porcentaje,]);
                 if ($result)
                     echo '1';
             }
@@ -106,9 +125,12 @@ switch ($op) {
     case 8: //Eliminar
         $ref_materiaprima = $_POST['ref_materiaprima'];
         $ref_producto = $_POST['ref_producto'];
-
         $id = $_POST['id'];
-        $sql = "DELETE FROM formula WHERE id_producto = :ref_producto AND id_materiaprima = :ref_materiaprima";
+
+        $tbl = $_POST['tbl'];
+        $tbl == 'r' ? $tbl = 'formula' : $tbl = 'formula_f';
+
+        $sql = "DELETE FROM $tbl WHERE id_producto = :ref_producto AND id_materiaprima = :ref_materiaprima";
         $query = $conn->prepare($sql);
         $result = $query->execute(['ref_producto' => $ref_producto, 'ref_materiaprima' => $ref_materiaprima]);
 
@@ -116,13 +138,22 @@ switch ($op) {
             echo '1';
         } else {
             die('Error');
-            print_r('Error: ' /* . mysqli_error($conn) */);
+            print_r('Error: ');
         }
 
         break;
     case 9: //Listar Formula fantasma
         $referencia = $_POST['referencia'];
-        $query = "SELECT f.id_producto, f.id_materiaprima as referencia, m.nombre, m.alias, f.porcentaje FROM formula_f f INNER JOIN materia_prima m ON f.id_materiaprima=m.referencia WHERE f.id_producto = '$referencia'";
-        ejecutarQuerySelect($conn, $query);
+        /* SELECT f.id_producto, f.id_materiaprima as referencia, m.alias as alias, m.nombre, cast(AES_DECRYPT(porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje 
+                FROM formula f INNER JOIN materia_prima m ON f.id_materiaprima=m.referencia  */
+        /* WHERE f.id_producto = '$referencia' */
+        $sql = "SELECT f.id_producto, f.id_materiaprima as referencia, m.nombre as nombre, m.alias as alias, cast(AES_DECRYPT(f.porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje
+                FROM formula_f f INNER JOIN materia_prima_f m ON f.id_materiaprima = m.referencia 
+                WHERE f.id_producto = :referencia";
+        $query = $conn->prepare($sql);
+        $query->execute(['referencia' => $referencia]);
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+
         break;
 }

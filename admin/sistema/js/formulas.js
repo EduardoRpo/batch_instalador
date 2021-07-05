@@ -1,5 +1,6 @@
-var tabla;
-var editar;
+let tabla;
+let editar;
+let tbl;
 
 /* Mostrar Menu seleccionadp */
 
@@ -9,38 +10,81 @@ $(".contenedor-menu .menu ul.menu_productos").show();
 
 /* Cargue select referencias */
 
-//function cargarSelectorModulo() {
-
 $.ajax({
   method: "POST",
   url: "php/c_formulas.php",
   data: { operacion: "1" },
 
   success: function (response) {
-    var info = JSON.parse(response);
-
+    let info = JSON.parse(response);
     let $selectProductos = $("#cmbReferenciaProductos");
-
-    $selectProductos.empty();
-    $selectProductos.append(
-      "<option disabled selected>" + "Referencia" + "</option>"
-    );
-
-    $.each(info.data, function (i, value) {
-      $selectProductos.append(
-        '<option value ="' +
-          value.referencia +
-          '">' +
-          value.referencia +
-          "</option>"
-      );
-    });
+    cargarSelect(info, $selectProductos);
   },
   error: function (response) {
     console.log(response);
   },
 });
-//}
+
+/* Crear Formulas */
+
+$("#adicionarFormula").click(function (e) {
+  e.preventDefault();
+  editar = 0;
+
+  $("#frmadFormulas").slideToggle();
+  $("#textReferencia").hide();
+  $("#cmbreferencia").show();
+
+  $("#txtMateria-Prima").attr("disabled", true);
+  $("#alias").attr("disabled", true);
+});
+
+$("#formula_r").change(function (e) {
+  e.preventDefault();
+  $("#cardformula_f").hide();
+  $("#cardformula_r").show();
+  tbl = "r";
+  materiaPrima("r");
+});
+
+$("#formula_f").change(function (e) {
+  e.preventDefault();
+  $("#cardformula_r").hide();
+  $("#cardformula_f").show();
+  tbl = "f";
+  materiaPrima("f");
+});
+
+/* Cargar Materia Prima */
+
+const materiaPrima = (tb) => {
+  $.ajax({
+    method: "POST",
+    url: "php/c_formulas.php",
+    data: { operacion: "4", tb: tb },
+
+    success: function (response) {
+      var info = JSON.parse(response);
+      let $selectReferencia = $("#cmbreferencia");
+      cargarSelect(info, $selectReferencia);
+    },
+    error: function (response) {
+      console.log(response);
+    },
+  });
+};
+
+/* cargar Selects */
+
+const cargarSelect = (data, select) => {
+  select.empty();
+  select.append(`<option disabled selected>Seleccione</option>`);
+  $.each(data, function (i, value) {
+    select.append(
+      `<option value ="${value.referencia}">${value.referencia}</option>`
+    );
+  });
+};
 
 /* Cargar nombre de producto de acuerdo con Seleccion Referencia */
 
@@ -56,7 +100,7 @@ $("#cmbReferenciaProductos").change(function (e) {
     success: function (response) {
       var info = JSON.parse(response);
       $("#txtnombreProducto").val("");
-      $("#txtnombreProducto").val(info.data[0].nombre_referencia);
+      $("#txtnombreProducto").val(info.nombre_referencia);
     },
   });
 
@@ -64,145 +108,20 @@ $("#cmbReferenciaProductos").change(function (e) {
   cargar_formulas_f(seleccion);
 });
 
-/* Cargue de Parametros de Control en DataTable */
-
-function cargarTablaFormulas(referencia) {
-  tabla = $("#tblFormulas").DataTable({
-    destroy: true,
-    scrollY: "50vh",
-    scrollCollapse: true,
-    paging: false,
-    language: { url: "admin_componentes/es-ar.json" },
-
-    ajax: {
-      method: "POST",
-      url: "php/c_formulas.php",
-      data: { operacion: "3", referencia },
-    },
-
-    columns: [
-      { data: "referencia" },
-      { data: "nombre" },
-      { data: "alias" },
-      {
-        data: "porcentaje",
-        className: "centrado",
-        render: $.fn.dataTable.render.number(",", ".", 3, "", "%"),
-      },
-      {
-        defaultContent:
-          "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>",
-      },
-    ],
-    columnDefs: [{ width: "10%", targets: 0 }],
-
-    footerCallback: function (row, data, start, end, display) {
-      total = this.api()
-        .column(3)
-        .data()
-        .reduce(function (a, b) {
-          return parseFloat(a) + parseFloat(b);
-        }, 0);
-      total = total.toFixed(2);
-      $("#totalPorcentajeFormulas").val(`Total ${total}%`);
-    },
-  });
-}
-
-/* Cargue de Parametros de Control en DataTable */
-
-function cargar_formulas_f(referencia) {
-  tabla = $("#tbl_formulas_f").DataTable({
-    destroy: true,
-    scrollY: "50vh",
-    scrollCollapse: true,
-    paging: false,
-    language: { url: "admin_componentes/es-ar.json" },
-
-    ajax: {
-      method: "POST",
-      url: "php/c_formulas.php",
-      data: { operacion: "9", referencia },
-    },
-
-    columns: [
-      { data: "referencia" },
-      { data: "nombre" },
-      { data: "alias" },
-      {
-        data: "porcentaje",
-        className: "centrado",
-        render: $.fn.dataTable.render.number(",", ".", 3, "", "%"),
-      },
-      {
-        defaultContent:
-          "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a><a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>",
-      },
-    ],
-    columnDefs: [{ width: "10%", targets: 0 }],
-  });
-}
-
-/* Ocultar */
-
-$("#adicionarFormula").click(function (e) {
-  e.preventDefault();
-  editar = 0;
-
-  $("#frmadFormulas").slideToggle();
-  $("#textReferencia").hide();
-  $("#cmbreferencia").show();
-
-  $("#txtMateria-Prima").attr("disabled", true);
-  $("#alias").attr("disabled", true);
-
-  /* Cargar datos para Adicionar Materia Prima */
-
-  $.ajax({
-    method: "POST",
-    url: "php/c_formulas.php",
-    data: { operacion: "4" },
-
-    success: function (response) {
-      var info = JSON.parse(response);
-      let $selectReferencia = $("#cmbreferencia");
-
-      $selectReferencia.empty();
-      $selectReferencia.append(
-        "<option disabled selected>" + "Seleccionar" + "</option>"
-      );
-
-      $.each(info.data, function (i, value) {
-        $selectReferencia.append(
-          '<option value ="' +
-            value.referencia +
-            '">' +
-            value.referencia +
-            "</option>"
-        );
-      });
-    },
-    error: function (response) {
-      console.log(response);
-    },
-  });
-});
-
 /* Cargar Materia prima a guardar con la seleccion de la referencia */
 
 $("#cmbreferencia").change(function (e) {
   e.preventDefault();
   let referencia = $("#cmbreferencia option:selected").text();
-
   $.ajax({
     type: "POST",
     url: "php/c_formulas.php",
-    data: { operacion: "5", referencia: referencia },
+    data: { operacion: "5", referencia, tbl },
 
     success: function (response) {
       var info = JSON.parse(response);
-      $("#txtMateria-Prima").val(info.data[0].nombre);
-      $("#alias").val(info.data[0].alias);
+      $("#txtMateria-Prima").val(info[0].nombre);
+      $("#alias").val(info[0].alias);
     },
   });
 });
@@ -210,7 +129,8 @@ $("#cmbreferencia").change(function (e) {
 /* Almacenar Registros */
 
 function guardarFormulaMateriaPrima() {
-  let operacion = $("input:radio[name=formula]:checked").val();
+  //let operacion = $("input:radio[name=formula]:checked").val();
+  let operacion = 6;
   let ref_producto = $("#cmbReferenciaProductos").val();
   let ref_materiaprima = $("#cmbreferencia").val();
   let porcentaje = parseFloat($("#porcentaje").val());
@@ -243,16 +163,23 @@ function guardarFormulaMateriaPrima() {
     return false;
   }
 
-  if (operacion === undefined) {
+  if (porcentaje <= 0) {
     alertify.set("notifier", "position", "top-right");
-    alertify.error("Seleccione la tabla para insertar el dato");
+    alertify.error("El valor de porcentaje no es un número valido");
     return false;
   }
 
   $.ajax({
     type: "POST",
     url: "php/c_formulas.php",
-    data: { operacion, ref_producto, ref_materiaprima, porcentaje, editar },
+    data: {
+      operacion,
+      ref_producto,
+      ref_materiaprima,
+      porcentaje,
+      tbl,
+      editar,
+    },
 
     success: function (r) {
       if (r == 1) {
@@ -320,11 +247,7 @@ $(document).on("click", ".link-borrar", function (e) {
       $.ajax({
         method: "POST",
         url: "php/c_formulas.php",
-        data: {
-          operacion: "8",
-          ref_producto: ref_producto,
-          ref_materiaprima: ref_materiaprima,
-        },
+        data: { operacion: "8", ref_producto, ref_materiaprima, tbl },
       });
       refreshTable();
       alertify.set("notifier", "position", "top-right");
@@ -332,6 +255,86 @@ $(document).on("click", ".link-borrar", function (e) {
     }
   });
 });
+
+/* Cargue de Parametros de Control en DataTable */
+
+function cargarTablaFormulas(referencia) {
+  tabla = $("#tblFormulas").DataTable({
+    destroy: true,
+    scrollY: "50vh",
+    scrollCollapse: true,
+    paging: false,
+    language: { url: "admin_componentes/es-ar.json" },
+
+    ajax: {
+      method: "POST",
+      url: "php/c_formulas.php",
+      data: { operacion: "3", referencia },
+    },
+
+    columns: [
+      { data: "referencia" },
+      { data: "nombre" },
+      { data: "alias" },
+      {
+        data: "porcentaje",
+        className: "centrado",
+        render: $.fn.dataTable.render.number(",", ".", 3, "", "%"),
+      },
+      {
+        defaultContent:
+          "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>",
+      },
+    ],
+    columnDefs: [{ width: "10%", targets: 0 }],
+
+    footerCallback: function (row, data, start, end, display) {
+      total = this.api()
+        .column(3)
+        .data()
+        .reduce(function (a, b) {
+          return parseFloat(a) + parseFloat(b);
+        }, 0);
+      total = total.toFixed(2);
+      $("#totalPorcentajeFormulas").val(`Total ${total}%`);
+    },
+  });
+}
+
+/* Cargue de Parametros de Control en DataTable */
+
+function cargar_formulas_f(referencia) {
+  tabla = $("#tbl_formulas_f").DataTable({
+    destroy: true,
+    scrollY: "50vh",
+    scrollCollapse: true,
+    paging: false,
+    language: { url: "admin_componentes/es-ar.json" },
+
+    ajax: {
+      method: "POST",
+      url: "php/c_formulas.php",
+      data: { operacion: "9", referencia },
+      dataSrc: "",
+    },
+
+    columns: [
+      { data: "referencia" },
+      { data: "nombre" },
+      { data: "alias" },
+      {
+        data: "porcentaje",
+        className: "centrado",
+        render: $.fn.dataTable.render.number(",", ".", 3, "", "%"),
+      },
+      {
+        defaultContent:
+          "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a><a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>",
+      },
+    ],
+    columnDefs: [{ width: "10%", targets: 0 }],
+  });
+}
 
 /* Actualizar tabla */
 

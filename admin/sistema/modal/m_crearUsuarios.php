@@ -64,7 +64,7 @@
                             <option value="2">Administrador</option>
                             <option value="3">Usuario</option>
                             <option value="4">Usuario QC</option>
-                            <option value="5">Director Prod</option>
+                            <option value="5">Desarrollo</option>
                           </select>
                         </div>
                       </div>

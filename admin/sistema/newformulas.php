@@ -8,7 +8,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>Samara Cosmetics | formulas</title>
+  <title>formulas | Samara Cosmetics</title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
 
   <!--     Fonts and icons     -->
@@ -40,10 +40,11 @@
 <body class="">
   <div class="wrapper ">
 
-    <?php include('./admin_componentes/sidebar.php'); ?>
+    <?php include('./admin_componentes/sidebar_desarrollo.php');
+    ?>
 
     <div class="main-panel" id="main-panel">
-      <?php include('./admin_componentes/navegacion.php'); ?>
+      <?php include('./admin_componentes/navegacion_desarrollo.php'); ?>
       <div class="panel-header panel-header-sm">
 
       </div>
@@ -53,7 +54,7 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h5 class="title">Formulas</h5>
+                <h5 class="title">Adicionar Nuevas Formulas</h5>
                 <p class="category">Samara Cosmetics <a href=""></a></p>
               </div>
               <div class="card-body">
@@ -61,38 +62,40 @@
                   <select name="cmbReferenciaProductos" id="cmbReferenciaProductos" class="form-control" style="width: 200px;"></select>
                   <input type="text" class="form-control ml-3" id="txtnombreProducto">
                 </div>
+                <div style="display: flex; justify-content: flex-end">
+                  <button class="btn btn-primary" id="verMateriasPrimas">Ver Materias Primas</button>
+                </div>
                 <hr>
-                <button type="button" class="btn btn-primary" id="adicionarFormula">Adicionar</button>
-                <form id="frmadFormulas" style="display: none;">
 
-                  <div class="formula ml-5">
-                    <label class="mr-3"> <b>Seleccionar: </b> </label>
-                    <input type="radio" id="formula_r" name="formula" value="1">
-                    <label for="formula_r" class="mr-3">Formula</label>
-                    <input type="radio" id="formula_f" name="formula" value="0">
-                    <label for="formula_f" class="mr-3">Formula Invima</label>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content" id="materiasprimas">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="title">Materia Prima</h5>
+                  <p class="category">Samara Cosmetics <a href=""></a></p>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table id="tblMateriasPrimas" class="table-striped row-borde" style="width:100%">
+                      <thead>
+                        <tr>
+                          <th>Referencia</th>
+                          <th>Materia Prima</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                      </tbody>
+                    </table>
                   </div>
-                  
-                  <label for=""></label>
-                  <label for=""><b>Referencia</b></label>
-                  <label for="">Materia Prima</label>
-                  <label for="">Alias</label>
-                  <label for="">%</label>
-                  <input type="text" id="textReferencia" class="form-control">
-                  <select name="" id="cmbreferencia" class="form-control"></select>
-                  <input type="text" name="txtMateria-Prima" id="txtMateria-Prima" class="form-control" placeholder="Materia Prima">
-                  <input type="text" name="alias" id="alias" class="form-control" placeholder="alias">
-                  <input type="number" name="porcentaje" id="porcentaje" class="form-control" placeholder="%" style="text-align: center;">
-
-                  <!-- <div class="formula">
-                    <label for="formula" class="mr-3"> <b>Insertar en: </b> </label>
-                    <input type="radio" id="formula" name="formula" value="6">
-                    <label for="formula" class="mr-3">Formula</label>
-                    <input type="radio" id="fantasma" name="formula" value="7">
-                    <label for="fantasma" class="mr-3">Formula Fantasma</label>
-                                      </div> -->
-                  <button type="button" class="btn btn-primary" id="guardarFormula" onclick="guardarFormulaMateriaPrima();">Guardar</button>
-                </form>
+                </div>
               </div>
             </div>
           </div>
@@ -103,13 +106,12 @@
             <div class="card" id="cardformula_r">
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="tblFormulas" class="table-striped row-borde" style="width:100%">
+                  <table id="tblFormula" class="table-striped row-borde" style="width:100%">
                     <label for="">Formulas</label>
                     <thead>
                       <tr>
                         <th>Referencia</th>
                         <th>Materia Prima</th>
-                        <th>Alias</th>
                         <th>Porcentaje</th>
                         <th>Acciones</th>
                       </tr>
@@ -117,50 +119,30 @@
                     <tbody>
 
                     </tbody>
+
                   </table>
-                  <div style="display: flex;justify-content: flex-end;">
-                    <input type="text" id="totalPorcentajeFormulas" style="border: none;margin-right:100px;text-align:center" disabled>
+                  <div style="display:flexbox;width:15%;margin-left:550px">
+                    <div class="input-group mb-3">
+                      <!-- <label for="">Total</label> -->
+                      <input type="text" id="totalPorcentajeFormulas" class="form-control" aria-label="Amount (to the nearest dollar)" disabled>
+                      <span class="input-group-text">%</span>
+                    </div>
                   </div>
+
                 </div>
               </div>
-              <form id="formDataExcel1" enctype="multipart/form-data">
+              <div style="display: grid;justify-content: space-around;">
+                <button class="btn btn-primary" id="guardarFormula">Guardar</button>
+              </div>
+              <!-- <form id="formDataExcel1" enctype="multipart/form-data">
                 <input type="file" name="datosExcel1" id="datosExcel1" class="form-control datosExcel mb-3 ml-3" style="width: 600px; display:inline-flex">
                 <button type="button" id="btnCargarExcel1" class="btn btn-primary ml-3 btnCargarExcel" onclick="comprobarExtension(this.form, this.form.datosExcel1.value, 'formula',1);" disabled="disabled">Cargar Datos</button>
                 <div id="spinner" class="spinner-border text-danger" style="display: none;"></div>
-              </form>
+              </form> -->
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card" id="cardformula_f">
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table id="tbl_formulas_f" class="table-striped row-borde" style="width:100%">
-                    <label for="">Tabla Fantasma</label>
-                    <thead>
-                      <tr>
-                        <th>Referencia</th>
-                        <th>Materia Prima</th>
-                        <th>Alias</th>
-                        <th>Porcentaje</th>
-                        <th>Acciones</th>
-                      </tr>
-                    </thead>
-                    <tbody>
 
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <form id="formDataExcel2" enctype="multipart/form-data">
-                <input type="file" name="datosExcel2" id="datosExcel2" class="form-control datosExcel mb-3 ml-3" style="width: 600px; display:inline-flex">
-                <button type="button" id="btnCargarExcel2" class="btn btn-primary ml-3 btnCargarExcel" onclick="comprobarExtension(this.form, this.form.datosExcel2.value, 'formula_f',2);" disabled="disabled">Cargar Datos</button>
-                <div id="spinner" class="spinner-border text-danger" style="display: none;"></div>
-              </form>
-            </div>
-          </div>
-        </div>
       </div>
       <?php include('./admin_componentes/footer.php'); ?>
     </div>
@@ -193,7 +175,7 @@
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
   <!-- javascript inicializacion datatables -->
-  <script src="js/formulas.js"></script>
+  <script src="js/newformulas.js"></script>
   <script src="js/importarProductos.js"></script>
   <script src="js/menu.js"></script>
 

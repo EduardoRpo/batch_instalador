@@ -79,6 +79,8 @@ function crearTablaBatch(
             ? "Multimodulo"
             : data == 6.5
             ? "Multimodulo"
+            : data == 10
+            ? "Liberacion Lote"
             : "Multimodulo";
         },
       },

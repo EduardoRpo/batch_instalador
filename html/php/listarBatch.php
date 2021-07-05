@@ -149,6 +149,17 @@ switch ($op) {
       $id = mysqli_insert_id($conn);
       $query_tanque = "INSERT INTO batch_tanques (tanque, cantidad, id_batch) VALUES('$tanque' , '$cantidades', '$id')";
       $result = mysqli_query($conn, $query_tanque);
+
+      $query_id = "SELECT MAX(id_batch) AS id FROM batch";
+      $query_id = mysqli_query($conn, "SELECT MAX(id_batch) AS id FROM batch");
+      $result = mysqli_num_rows($query_id);
+
+      if ($result > 0)
+        $data = mysqli_fetch_assoc($query_id);
+      $id = trim($data['id']);
+
+      $query_firmas = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas) VALUES('2' , '$id', '0')";
+      $result = mysqli_query($conn, $query_firmas);
     }
 
     mysqli_close($conn);
@@ -268,25 +279,21 @@ switch ($op) {
     break;
 
   case 10: // Clonar Batch
-    $id_batch = $_POST['id'];
+    /*  $id_batch = $_POST['id'];
     $referencia = $_POST['referencia'];
     $clonarCantidad = $_POST['clonarCantidad'];
     $fechaprogramacion = "";
 
-    /* asigna el estado */
     $result = estadoInicial($conn, $referencia, $fechaprogramacion);
     $estado = $result['0'];
     $fechaprogramacion = $result['1'];
 
-    /* Clonar batch */
-    for ($i = 0; $i < $clonarCantidad; $i++) {
+     for ($i = 0; $i < $clonarCantidad; $i++) {
 
-      /* Insertar el batch */
       $query_clonar = mysqli_query($conn, "INSERT INTO batch (fecha_creacion, fecha_actual, tamano_lote, lote_presentacion, unidad_lote, id_producto, estado, multi)
                                            SELECT CURRENT_DATE, CURRENT_DATE, tamano_lote, lote_presentacion, unidad_lote, id_producto, '$estado', multi 
                                            FROM batch WHERE id_batch = $id_batch");
 
-      /* Buscar los tanques del batch clonado */
       $query_select_tanques = mysqli_query($conn, "SELECT * FROM batch_tanques WHERE id_batch = $id_batch");
       while ($data = mysqli_fetch_assoc($query_select_tanques))
         $arreglo[] = $data;
@@ -294,18 +301,17 @@ switch ($op) {
       $tanque = $arreglo[0]['tanque'];
       $cantidad = $arreglo[0]['cantidad'];
 
-      /* Buscar el id del batch registrado */
+    
       $query = mysqli_query($conn, "SELECT MAX(id_batch) AS id FROM batch");
       $max_batch = mysqli_fetch_assoc($query);
       $id_batch = $max_batch['id'];
 
-      /* Inserta los tanques clonados */
       $query_clonar_tanques = mysqli_query($conn, "INSERT INTO batch_tanques(tanque, cantidad, id_batch) 
                                                    VALUES('$tanque', '$cantidad', '$id_batch')");
-    }
+    } 
 
     if ($query_clonar)
-      echo '1';
+      echo '1';*/
 
     break;
 
