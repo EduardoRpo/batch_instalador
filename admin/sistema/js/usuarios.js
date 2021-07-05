@@ -47,7 +47,7 @@ $(document).ready(function () {
             ? "Usuario"
             : data == 4
             ? "Usuario QC"
-            : "Director QC";
+            : "Desarrollo";
         },
       },
     ],
@@ -108,7 +108,8 @@ $("#btnCrearUsuarios").click(function () {
 $("#rol").change(function (e) {
   e.preventDefault();
   let rol = $("#rol").val();
-  if (rol == 1 || rol == 2) $("#firma_y_modulo").css("display", "none");
+  if (rol == 1 || rol == 2 || rol == 5)
+    $("#firma_y_modulo").css("display", "none");
   else $("#firma_y_modulo").css("display", "flex");
 });
 
@@ -127,16 +128,16 @@ $(document).ready(function () {
     let clave = $("#clave").val();
     let rol = $("#rol").val();
 
+    if (rol == 1 || rol == 5) {
+      modulo = "1";
+    }
+
     let datosIniciales =
       nombres.length *
       apellidos.length *
       cargo.length *
       modulo.length *
       user.length;
-
-    if (rol == 1) {
-      modulo = "1";
-    }
 
     if (editar == 1) {
       if (datosIniciales === 0) {
@@ -152,7 +153,7 @@ $(document).ready(function () {
       }
     }
 
-    if (rol != 1 && rol != 2 && editar != 1) {
+    if (rol != 1 && rol != 2 && editar != 1 && rol != 5) {
       const archivo = $("#firma").val();
       let extensiones = archivo.substring(archivo.lastIndexOf("."));
 
@@ -173,7 +174,7 @@ $(document).ready(function () {
     usuario.set("editar", editar);
     usuario.set("id", id);
 
-    if (rol == 1 || rol == 2) usuario.set("modulo", "1");
+    if (rol == 1 || rol == 2 || rol == 5) usuario.set("modulo", "1");
 
     $.ajax({
       type: "POST",
