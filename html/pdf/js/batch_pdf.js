@@ -32,7 +32,7 @@ $("#multipresentacion3").hide();
 
 cargar_Alertas = () => {
   $.post(
-    "../../html/php/c_batch_pdf.php",
+    "../../html/php/servicios/c_batch_pdf.php",
     (data = { operacion: 7 }),
     function (data, textStatus, jqXHR) {
       info = JSON.parse(data);
@@ -56,7 +56,7 @@ cargar_Alertas = () => {
 
 function info_General() {
   $.post(
-    "../../html/php/c_batch_pdf.php",
+    "../../html/php/servicios/c_batch_pdf.php",
     (data = { operacion: 2, idBatch }),
     function (data, textStatus, jqXHR) {
       if (data == "false") return false;
@@ -67,19 +67,19 @@ function info_General() {
       densidad = info.densidad;
       tamanioLote = info.tamano_lote;
       $(".ref").html(info.referencia);
-      $("#nref").html("<b>" + info.nombre_referencia + "</b>");
-      $("#marca").html("<b>" + info.marca + "</b>");
-      $("#propietario").html("<b>" + info.propietario + "</b>");
-      $("#notificacion").html("<b>" + info.notificacion + "</b>");
-      $("#presentacion").html("<b>" + info.presentacion + "</b>");
-      $(".orden").html("<b>" + info.numero_orden + "</b>");
-      $(".lote").html("<b>" + info.numero_lote + "</b>");
-      $(".fecha").html("<b>" + info.fecha_creacion + "</b>");
-      $("#tamanolt").html("<b>" + info.tamano_lote + "</b>");
-      $("#tamanol").html("<b>" + info.tamano_lote + "</b>");
-      $("#unidadesLote").html("<b>" + info.unidad_lote + "</b>");
-      $(".unidades1").html("<b>" + info.unidad_lote + "</b>");
-      $(".fecha").html("<b>" + info.fecha_creacion + "</b>");
+      $("#nref").html(`<b>${info.nombre_referencia}</b>`);
+      $("#marca").html(`<b>${info.marca}</b>`);
+      $("#propietario").html(`<b>${info.propietario}</b>`);
+      $("#notificacion").html(`<b>${info.notificacion}</b>`);
+      $("#presentacion").html(`<b>${info.presentacion}</b>`);
+      $(".orden").html(`<b>${info.numero_orden}</b>`);
+      $(".lote").html(`<b>${info.numero_lote}</b>`);
+      $(".fecha").html(`<b>${info.fecha_creacion}</b>`);
+      $("#tamanolt").html(`<b>${info.tamano_lote}</b>`);
+      $("#tamanol").html(`<b>${info.tamano_lote}</b>`);
+      $("#unidadesLote").html(`<b>${info.unidad_lote}</b>`);
+      $(".unidades1").html(`<b>${info.unidad_lote}</b>`);
+      $(".fecha").html(`<b>${info.fecha_creacion}</b>`);
       lote_anterior();
       desinfectante();
       observacionesAprobacion();
@@ -93,7 +93,7 @@ parametros_Control = () => {
   let data = { operacion: 3, idBatch };
 
   $.post(
-    "../../html/php/c_batch_pdf.php",
+    "../../html/php/servicios/c_batch_pdf.php",
     data,
     function (data, textStatus, jqXHR) {
       if (data == "false") return false;
@@ -136,19 +136,19 @@ area_desinfeccion = (lote) => {
   let data = { operacion: 4 };
 
   $.post(
-    "../../html/php/c_batch_pdf.php",
+    "../../html/php/servicios/c_batch_pdf.php",
     data,
     function (data, textStatus, jqXHR) {
       if (data == "false") return false;
 
       let info = JSON.parse(data);
 
-      for (let i = 0; i < info.data.length; i++) {
-        $(`#area_desinfeccion${info.data[i].modulo}`).append(`
+      for (let i = 0; i < info.length; i++) {
+        $(`#area_desinfeccion${info[i].modulo}`).append(`
           <tr>
-            <td>${info.data[i].descripcion}</td>
-            <td class="centrado desinfectante${info.data[i].modulo}"></td>
-            <td class="centrado concentracion${info.data[i].modulo}"></td>
+            <td>${info[i].descripcion}</td>
+            <td class="centrado desinfectante${info[i].modulo}"></td>
+            <td class="centrado concentracion${info[i].modulo}"></td>
             <td class="centrado">${lote}</td>
           </tr>`);
       }
@@ -161,7 +161,7 @@ desinfectante = () => {
   let data = { operacion: 5, idBatch };
 
   $.post(
-    "../../html/php/c_batch_pdf.php",
+    "../../html/php/servicios/c_batch_pdf.php",
     data,
     function (data, textStatus, jqXHR) {
       if (data == "false") return false;
@@ -176,32 +176,6 @@ desinfectante = () => {
           info[i].concentracion * 100 + "%"
         );
         $(`#fecha${info[i].modulo}`).html(info[i].fecha_registro);
-
-        /* if (info[i].realizo != 0) {
-          $(`#f_realizo${info[i].modulo}`).prop("src", info[i].realizo);
-          $(`#user_realizo${info[i].modulo}`).html(
-            "Realizó: " + "<b>" + info[i].nombre_realizo + "</b>"
-          );
-        } else if (info[i].realizo == 0) {
-          $(`#f_realizo${info[i].modulo}`).prop("hide", true);
-          $(`#blank_rea${info[i].modulo}`).show();
-          $(`#user_realizo${info[i].modulo}`).html(
-            "Realizó: " + "<b> Sin firmar</b>"
-          );
-        }
-
-        if (info[i].verifico != 0) {
-          $(`#f_verifico${info[i].modulo}`).prop("src", info[i].verifico);
-          $(`#user_verifico${info[i].modulo}`).html(
-            "Verificó: " + "<b>" + info[i].nombre_verifico + "</b>"
-          );
-        } else {
-          $(`#f_verifico${info[i].modulo}`).hide();
-          $(`#blank_ver${info[i].modulo}`).show();
-          $(`#user_verifico${info[i].modulo}`).html(
-            "Verificó: " + "<b>Sin firmar</b>"
-          );
-        } */
       }
 
       let fecha = $("#fecha2").html();
@@ -211,10 +185,51 @@ desinfectante = () => {
   );
 };
 
-despachos = () => {
+const firmas = () => {
+  let data = { operacion: 17, idBatch };
+
+  $.post(
+    "../../html/php/servicios/c_batch_pdf.php",
+    data,
+    function (data, textStatus, jqXHR) {
+      if (data == "false") return false;
+
+      let info = JSON.parse(data);
+      for (let i = 0; i < info.length; i++) {
+        if (info[i].realizo != 0) {
+          $(`#f_realizo${info[i].modulo}`).prop("src", info[i].realizo);
+          $(`#user_realizo${info[i].modulo}`).html(
+            `Realizó: <b>${info[i].nombre_realizo}</b>`
+          );
+        } else if (info[i].realizo == 0) {
+          $(`#f_realizo${info[i].modulo}`).prop("hide", true);
+          $(`#blank_rea${info[i].modulo}`).show();
+          $(`#user_realizo${info[i].modulo}`).html(
+            `Realizó:<b> Sin firmar</b>`
+          );
+        }
+
+        if (info[i].verifico != 0) {
+          $(`#f_verifico${info[i].modulo}`).prop("src", info[i].verifico);
+          $(`#user_verifico${info[i].modulo}`).html(
+            `Verificó: <b>${info[i].nombre_verifico}</b>`
+          );
+        } else {
+          $(`#f_verifico${info[i].modulo}`).hide();
+          $(`#blank_ver${info[i].modulo}`).show();
+          $(`#user_verifico${info[i].modulo}`).html(
+            `Verificó: <b>Sin firmar</b>`
+          );
+        }
+      }
+    }
+  );
+};
+
+const despachos = () => {
   $.ajax({
     type: "POST",
-    url: "../../html/php/c_batch_pdf.php",
+    url: "../../html/php/servicios/c_batch_pdf.php",
     data: { operacion: 13, idBatch },
     success: function (response) {
       info = JSON.parse(response);
@@ -237,7 +252,7 @@ despachos = () => {
 function condiciones_medio() {
   let data = { operacion: 6, idBatch };
   $.post(
-    "../../html/php/c_batch_pdf.php",
+    "../../html/php/servicios/c_batch_pdf.php",
     data,
     function (data, textStatus, jqXHR) {
       if (data == "false") return false;
@@ -650,7 +665,7 @@ conciliacion = () => {
 observacionesAprobacion = () => {
   $.ajax({
     type: "POST",
-    url: "../../html/php/c_batch_pdf.php",
+    url: "../../html/php/servicios/c_batch_pdf.php",
     data: { operacion: 12, idBatch },
     success: function (response) {
       if (response == "[]") return false;
@@ -663,7 +678,7 @@ observacionesAprobacion = () => {
 analisisMicrobiologico = () => {
   $.ajax({
     type: "POST",
-    url: "../../html/php/c_batch_pdf.php",
+    url: "../../html/php/servicios/c_batch_pdf.php",
     data: { operacion: 14, idBatch },
     success: function (response) {
       if (response == "[]") return false;
@@ -703,21 +718,21 @@ analisisMicrobiologico = () => {
       if (data[0].realizo) {
         $(`#f_realizoMicro`).prop("src", data[0].realizo);
         $(`#user_realizoMicro`).html(
-          "Realizó: " + "<b>" + data[0].nombre_realizo + "</b>"
+          `Realizó: <b>${data[0].nombre_realizo}</b>`
         );
       }
 
       if (data[0].verifico) {
-        $(`#f_verificoMicro`).prop("src", data[0].verifico);
+        $(`#f_verificoMicro1`).prop("src", data[0].verifico);
         $(`#blank_rea8`).hide();
         $(`#blank_ver8`).hide();
-        $(`#user_verificoMicro`).html(
-          "Verificó: " + "<b>" + data[0].nombre_verifico + "</b>"
+        $(`#user_verificoMicro1`).html(
+          `Verificó: <b>${data[0].nombre_verifico}</b>`
         );
       } else {
-        $(`#f_verificoMicro`).hide();
+        $(`#f_verificoMicro1`).hide();
         $(`#blank_ver`).show();
-        $(`#user_verificoMicro`).html("Verificó: " + "<b>Sin firmar</b>");
+        $(`#user_verificoMicro1`).html(`Verificó: <b>Sin firmar</b>`);
       }
       $(".chkAprobado").prop("checked", true);
       /* if (data[0].observaciones == "") $(".chkAprobado").prop("checked", true);
@@ -726,39 +741,9 @@ analisisMicrobiologico = () => {
   });
 };
 
-const fisicoquimico = () => {
-  $.ajax({
-    type: "POST",
-    url: "../../html/php/c_batch_pdf.php",
-    data: { operacion: 15, idBatch },
-    success: function (response) {
-      if (response == "[]") return false;
-      data = JSON.parse(response);
-
-      if (data[0].realizo) {
-        $(`#f_realizoMicro`).prop("src", data[0].realizo);
-        $(`#user_realizoMicro`).html(
-          "Realizó: " + "<b>" + data[0].nombre_realizo + "</b>"
-        );
-      }
-
-      if (data[0].verifico) {
-        $(`#f_verificoMicro`).prop("src", data[0].verifico);
-        $(`#user_verificoMicro`).html(
-          "Verificó: " + "<b>" + data[0].nombre_verifico + "</b>"
-        );
-      } else {
-        $(`#f_verificoMicro`).hide();
-        $(`#blank_ver`).show();
-        $(`#user_verificoMicro`).html("Verificó: " + "<b>Sin firmar</b>");
-      }
-    },
-  });
-};
-
 const liberacion_lote = () => {
   $.post(
-    "../../html/php/c_batch_pdf.php",
+    "../../html/php/servicios/c_batch_pdf.php",
     { idBatch, operacion: 16 },
     function (data, textStatus, jqXHR) {
       if (data == "false") {
@@ -813,7 +798,7 @@ const liberacion_lote = () => {
 
       $(`#f_verificoMicro`).hide();
       $(`#blank_ver`).show();
-      $(`#user_verificoMicro`).html("Verificó: " + "<b>Sin firmar</b>");
+      $(`#user_verificoMicro`).html("Verificó: <b>Sin firmar</b>");
     }
   );
 };
@@ -821,8 +806,8 @@ const liberacion_lote = () => {
 /* Multipresentacion */
 const multi = () => {
   $.post(
-    "../../html/php/c_batch_pdf.php",
-    { idBatch, operacion: 17 },
+    "../../html/php/servicios/c_batch_pdf.php",
+    { idBatch, operacion: 18 },
     function (data, textStatus, jqXHR) {
       if (data == 0) return false;
       console.log(data);
@@ -849,12 +834,10 @@ $(document).ready(function () {
 
   cargar_Alertas();
   info_General();
-  //area_desinfeccion();
   parametros_Control();
   especificaciones_producto();
   entrega_material_envase();
   obtenerMuestras();
-  //identificarDensidad();
   material_envase_sobrante();
   condiciones_medio();
   control_proceso();
@@ -863,11 +846,11 @@ $(document).ready(function () {
   muestras_acondicionamiento();
   despachos();
   analisisMicrobiologico();
-  //fisicoquimico();
   multi();
   setTimeout(() => {
     entrega_material_acondicionamiento();
     conciliacion();
     liberacion_lote();
+    firmas();
   }, 50);
 });

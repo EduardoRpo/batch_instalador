@@ -1,7 +1,6 @@
 <?php
 if (!empty($_POST)) {
-    require_once('../../conexion.php');
-    require_once('../../admin/sistema/php/crud.php');
+    require_once('../../../conexion.php');
 
     $op = $_POST['operacion'];
 
@@ -41,8 +40,11 @@ if (!empty($_POST)) {
 
         case 4:
 
-            $query = "SELECT descripcion, modulo FROM area_desinfeccion ORDER BY modulo";
-            ejecutarQuerySelect($conn, $query);
+            $sql = "SELECT descripcion, modulo FROM area_desinfeccion ORDER BY modulo";
+            $query = $conn->prepare($sql);
+            $query->execute();
+            $data = $query->fetchAll(PDO::FETCH_ASSOC);
+            echo json_encode($data, JSON_UNESCAPED_UNICODE);
 
             break;
 
@@ -222,7 +224,22 @@ if (!empty($_POST)) {
             $data = $query->fetch(PDO::FETCH_ASSOC);
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
             break;
-        case '17': //busqueda_multipresentacion
+
+        case 17: //busqueda_firmas
+            $batch = $_POST['idBatch'];
+
+            $sql = "SELECT bf.modulo, bf.batch, bf.ref_multi, u.urlfirma as realizo, CONCAt(u.nombre, ' ', u.apellido) as nombre_realizo, us.urlfirma as verifico, CONCAt(us.nombre , ' ' , us.apellido) as nombre_verifico 
+                    FROM batch_firmas2seccion bf 
+                    INNER JOIN usuario u ON u.id = bf.realizo INNER JOIN usuario us ON us.id = bf.verifico 
+                    WHERE bf.batch = :batch";
+            $query = $conn->prepare($sql);
+            $query->execute(['batch' => $batch]);
+            $data = $query->fetchAll(PDO::FETCH_ASSOC);
+            sizeof($data) == 0 ? $data = 0 : $data;
+            echo json_encode($data, JSON_UNESCAPED_UNICODE);
+            break;
+
+        case 18: //busqueda_multipresentacion
             $batch = $_POST['idBatch'];
 
             $sql = "SELECT * FROM multipresentacion WHERE id_batch = :batch";
