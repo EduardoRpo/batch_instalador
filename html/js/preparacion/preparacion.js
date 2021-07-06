@@ -1,5 +1,6 @@
 $(document).ready(function () {
     $('#preparacionTabla').dataTable({
+        pageLength: 50,
         "order": [[ 1, "desc" ]],
         ajax: {
             url: '/api/preparacion',

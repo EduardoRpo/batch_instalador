@@ -16,6 +16,7 @@
  */
 $(document).ready(function () {
     $('#tablaPesajes').DataTable({
+        pageLength: 50,
         order: [[0, "desc"]],
 
         ajax: {

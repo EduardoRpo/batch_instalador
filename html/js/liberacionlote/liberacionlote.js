@@ -1,5 +1,6 @@
 $(document).ready(function () {
   $("#tblLiberacionLote").DataTable({
+    pageLength: 50,
     order: [[0, "desc"]],
 
     ajax: {

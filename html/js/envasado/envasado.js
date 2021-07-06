@@ -1,4 +1,5 @@
 $("#tablaEnvasado").dataTable({
+  pageLength: 50,
   order: [[1, "desc"]],
   ajax: {
     url: "/api/envasado",

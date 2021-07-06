@@ -52,8 +52,8 @@ class BatchLineaDao
     $connection = Connection::getInstance()->getConnection();
     $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, batch.numero_lote 
                                     FROM batch 
-                                    WHERE (batch.estado >= 3.5)
-                                    AND ((SELECT cantidad_firmas FROM `batch_control_firmas` WHERE batch = batch.id_batch AND modulo = 3) < 4) 
+                                    WHERE (batch.estado >= 3.5  AND batch.estado < 4.5)
+                                    /* AND ((SELECT cantidad_firmas FROM `batch_control_firmas` WHERE batch = batch.id_batch AND modulo = 3) < 4) */ 
                                     ORDER BY batch.id_batch DESC");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
@@ -67,8 +67,8 @@ class BatchLineaDao
     $connection = Connection::getInstance()->getConnection();
     $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote  
                                   FROM batch INNER JOIN producto p ON p.referencia = batch.id_producto 
-                                  WHERE (batch.estado >= 4.5) 
-                                  AND ((SELECT cantidad_firmas FROM `batch_control_firmas` WHERE batch = batch.id_batch AND modulo = 4) < 2)
+                                  WHERE (batch.estado >= 4.5  AND batch.estado < 5.5) 
+                                  /* AND ((SELECT cantidad_firmas FROM `batch_control_firmas` WHERE batch = batch.id_batch AND modulo = 4) < 2) */
                                   ORDER BY batch.id_batch DESC");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));

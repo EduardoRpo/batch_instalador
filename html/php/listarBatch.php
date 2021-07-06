@@ -160,6 +160,10 @@ switch ($op) {
 
       $query_firmas = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas) VALUES('2' , '$id', '0')";
       $result = mysqli_query($conn, $query_firmas);
+      $query_firmas = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas) VALUES('3' , '$id', '0')";
+      $result = mysqli_query($conn, $query_firmas);
+      $query_firmas = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas) VALUES('4' , '$id', '0')";
+      $result = mysqli_query($conn, $query_firmas);
     }
 
     mysqli_close($conn);

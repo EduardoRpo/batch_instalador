@@ -177,7 +177,7 @@ desinfectante = () => {
         );
         $(`#fecha${info[i].modulo}`).html(info[i].fecha_registro);
 
-        if (info[i].realizo != 0) {
+        /* if (info[i].realizo != 0) {
           $(`#f_realizo${info[i].modulo}`).prop("src", info[i].realizo);
           $(`#user_realizo${info[i].modulo}`).html(
             "Realizó: " + "<b>" + info[i].nombre_realizo + "</b>"
@@ -201,7 +201,7 @@ desinfectante = () => {
           $(`#user_verifico${info[i].modulo}`).html(
             "Verificó: " + "<b>Sin firmar</b>"
           );
-        }
+        } */
       }
 
       let fecha = $("#fecha2").html();
