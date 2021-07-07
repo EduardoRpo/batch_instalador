@@ -54,6 +54,37 @@ cargar_Alertas = () => {
   );
 };
 
+/* Multipresentacion */
+const multipresentacion = () => {
+  $.post(
+    "../../html/php/servicios/c_batch_pdf.php",
+    { idBatch, operacion: 18 },
+    function (data, textStatus, jqXHR) {
+      if (data == 0) {
+        entrega_material_envase();
+      } else {
+        multi = JSON.parse(data);
+        if (multi.length == 2) $("#multipresentacion2").show();
+        else if (multi.length == 3) $("#multipresentacion3").show();
+        j = 1;
+        for (let i = 0; i < multi.length; i++) {
+          $(`#titulo_envasado${j}`).html(
+            `<b>ENVASADO <br>REFERENCIA: ${multi[i].referencia}</b>`
+          );
+          j++;
+        }
+        j = 1;
+        for (let i = 0; i < multi.length; i++) {
+          $(`#titulo_acondicionamiento${j}`).html(
+            `<b>ACONDICIONAMIENTO <br>REFERENCIA: ${multi[i].referencia}</b>`
+          );
+          j++;
+        }
+      }
+    }
+  );
+};
+
 function info_General() {
   $.post(
     "../../html/php/servicios/c_batch_pdf.php",
@@ -84,7 +115,7 @@ function info_General() {
       desinfectante();
       observacionesAprobacion();
       identificarDensidad();
-      multi();
+      //multipresentacion();
     }
   );
 }
@@ -224,29 +255,6 @@ const firmas = () => {
       }
     }
   );
-};
-
-const despachos = () => {
-  $.ajax({
-    type: "POST",
-    url: "../../html/php/servicios/c_batch_pdf.php",
-    data: { operacion: 13, idBatch },
-    success: function (response) {
-      info = JSON.parse(response);
-      if (info.length > 0) {
-        $("#fecha7").html(info[0].fecha_registro);
-        for (let i = 0; i < info.length; i++) {
-          $(`#user_entrego`).html(
-            `Realizó: <b>${info[i].nombre} ${info[i].apellido}</b>`
-          );
-          $(`#f_entrego`).prop("src", info[i].urlfirma);
-        }
-      } else {
-        $(`#f_entrego`).hide();
-        $(`#user_entrego`).html(`Verificó: <b>Sin firmar</b>`);
-      }
-    },
-  });
 };
 
 function condiciones_medio() {
@@ -662,6 +670,29 @@ conciliacion = () => {
   });
 };
 
+const despachos = () => {
+  $.ajax({
+    type: "POST",
+    url: "../../html/php/servicios/c_batch_pdf.php",
+    data: { operacion: 13, idBatch },
+    success: function (response) {
+      info = JSON.parse(response);
+      if (info.length > 0) {
+        $("#fecha7").html(info[0].fecha_registro);
+        for (let i = 0; i < info.length; i++) {
+          $(`#user_entrego`).html(
+            `Realizó: <b>${info[i].nombre} ${info[i].apellido}</b>`
+          );
+          $(`#f_entrego`).prop("src", info[i].urlfirma);
+        }
+      } else {
+        $(`#f_entrego`).hide();
+        $(`#user_entrego`).html(`Verificó: <b>Sin firmar</b>`);
+      }
+    },
+  });
+};
+
 observacionesAprobacion = () => {
   $.ajax({
     type: "POST",
@@ -803,28 +834,6 @@ const liberacion_lote = () => {
   );
 };
 
-/* Multipresentacion */
-const multi = () => {
-  $.post(
-    "../../html/php/servicios/c_batch_pdf.php",
-    { idBatch, operacion: 18 },
-    function (data, textStatus, jqXHR) {
-      if (data == 0) return false;
-      console.log(data);
-      info = JSON.parse(data);
-      if (info.length == 2) $("#multipresentacion2").show();
-      else if (info.length == 3) $("#multipresentacion3").show();
-      j = 1;
-      for (let i = 0; i < info.length; i++) {
-        $(`#titulo_envasado${j}`).html(
-          `<b>ENVASADO <br>REFERENCIA: ${info[i].referencia}</b>`
-        );
-        j++;
-      }
-    }
-  );
-};
-
 $(document).ready(function () {
   idBatch = sessionStorage.getItem("id");
   let referencias = sessionStorage.getItem("multi");
@@ -836,7 +845,7 @@ $(document).ready(function () {
   info_General();
   parametros_Control();
   especificaciones_producto();
-  entrega_material_envase();
+  //entrega_material_envase();
   obtenerMuestras();
   material_envase_sobrante();
   condiciones_medio();
@@ -846,7 +855,7 @@ $(document).ready(function () {
   muestras_acondicionamiento();
   despachos();
   analisisMicrobiologico();
-  multi();
+  multipresentacion();
   setTimeout(() => {
     entrega_material_acondicionamiento();
     conciliacion();

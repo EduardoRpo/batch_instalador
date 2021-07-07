@@ -109,12 +109,9 @@ function cargar(btn, idbtn) {
 
 $(document).ready(function () {
   setTimeout(() => {
-    /* if (proceso == 5) { */
     batch_record();
     busqueda_multi();
-    //identificarDensidad(batch);
     deshabilitarbotones();
-    /* } */
   }, 750);
 });
 
@@ -132,9 +129,7 @@ function deshabilitarbotones() {
 /* Cargar Multipresentacion */
 
 function busqueda_multi() {
-  //batch = batch_record();
   ocultarEnvasado();
-  /* ocultarfilasTanques(5); */
 
   $.ajax({
     method: "POST",

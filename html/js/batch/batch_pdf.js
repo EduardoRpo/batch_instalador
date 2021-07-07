@@ -21,7 +21,7 @@ function cargartablabatch_pdf() {
 
     ajax: {
       method: "POST",
-      url: "php/c_batch_pdf.php",
+      url: "php/servicios/c_batch_pdf.php",
       data: { operacion: 1 },
       dataSrc: "",
       order: [[1, "desc"]],
