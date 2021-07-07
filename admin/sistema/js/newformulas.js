@@ -1,9 +1,19 @@
 let materialSelect;
 
-$("#verMateriasPrimas").click(function (e) {
+$("#instructivosBase").click(function (e) {
   e.preventDefault();
-  $("#materiasprimas").toggle(1000);
+  $(location).prop("href", "bases.php");
 });
+
+$("#instructivosPersonalizados").click(function (e) {
+  e.preventDefault();
+  $(location).prop("href", "instructivo.php");
+});
+
+$(".contenedor-menu .menu a").removeAttr("style");
+$("#link_formulas").css("background", "coral");
+$(".contenedor-menu .menu ul.menu_formulas").show();
+$("#link_bases").css("background", "coral");
 
 /* Cargue select referencias */
 const selectReferencias = () => {

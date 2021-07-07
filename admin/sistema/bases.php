@@ -41,10 +41,14 @@
 <body class="">
   <div class="wrapper ">
 
-    <?php include('./admin_componentes/sidebar.php'); ?>
 
     <div class="main-panel" id="main-panel">
-      <?php include('./admin_componentes/navegacion.php'); ?>
+      <?php
+      if ($_SESSION['rol'] != 5) include('./admin_componentes/navegacion.php');
+      else include('./admin_componentes/navegacion_desarrollo.php');
+      if ($_SESSION['rol'] != 5) include('./admin_componentes/sidebar.php');
+      else include_once('./admin_componentes/sidebar_desarrollo.php');
+      ?>
       <div class="panel-header panel-header-sm">
 
       </div>
@@ -80,17 +84,6 @@
         <div class="row">
           <div class="col-md-12">
             <div class="card" id="1">
-              <!-- <div class="card-header">
-                <h4 class="card-title">Formulas</h4>
-                <hr>
-                <button type="button" class="btn btn-primary" id="addFormula">Adicionar</button>
-                <form id="frmadParametro" style="display: none;">
-                  <label for=""><b>Nombre Producto</b></label>
-                  <input type="text" name="nombreProducto" id="nombreProducto" class="form-control" placeholder="Nombre Producto">
-                  <button type="button" class="btn btn-primary" id="guardarFormula">Guardar</button>
-                </form>
-                <hr>
-              </div> -->
               <div class="card-body">
                 <div class="table-responsive">
                   <table id="tabla_bases_instructivo" class="table-striped row-borde" style="width:100%">
@@ -122,31 +115,16 @@
 
 
   <!--   Core JS Files   -->
-  <!-- <script src="../assets/js/core/jquery.min.js"></script> -->
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-
-  <!-- DataTables -->
   <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-
-  <!--  Google Maps Plugin    -->
-  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
-  <!-- Chart JS -->
   <script src="../assets/js/plugins/chartjs.min.js"></script>
-
-  <!--  Notifications Plugin    -->
   <script src="../assets/js/plugins/bootstrap-notify.js"></script>
-
-  <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script><!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
   <!-- <script src="../assets/demo/demo.js"></script> -->
-
-  <!-- Alertify -->
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-
-  <!-- javascript inicializacion datatables -->
   <script src="js/bases.js"></script>
   <script src="js/menu.js"></script>
   <script src="js/cargarDatos.js"></script>

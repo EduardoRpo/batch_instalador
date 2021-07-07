@@ -8,8 +8,13 @@ $(".contenedor-menu .menu ul.menu_productos").show();
 $(".contenedor-menu .menu ul.menu_productos ul.menu_instructivos").show();
 $("#link_preparaciones").css("background", "coral");
 $(".alert_instructivos_base").hide();
-/* Cargue select referencias */
 
+//$(".contenedor-menu .menu a").removeAttr("style");
+//$("#link_formulas").css("background", "coral");
+$(".contenedor-menu .menu ul.menu_instructivos").show();
+$("#link_preparaciones").css("background", "coral");
+
+/* Cargue select referencias */
 //function cargarSelectorModulo() {
 
 $.ajax({

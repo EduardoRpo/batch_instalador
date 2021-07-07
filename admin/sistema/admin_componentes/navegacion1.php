@@ -9,7 +9,6 @@
         </button>
       </div>
       <div>
-
         <a class="navbar-brand" href="/../pesaje">Pesaje</a>
         <a class="navbar-brand" href="/../preparacion">Preparación</a>
         <a class="navbar-brand" href="/../envasado">Envasado</a>
@@ -18,7 +17,6 @@
         <a class="navbar-brand" href="/../microbiologia">Microbiologia</a>
         <a class="navbar-brand" href="/../fisicoquimica">Fisicoquimico</a>
         <a class="navbar-brand" href="/../liberacionAgua">Liberacion Agua</a>
-
       </div>
     </div>
 
