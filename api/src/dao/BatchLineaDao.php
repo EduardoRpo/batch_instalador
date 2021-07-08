@@ -53,7 +53,7 @@ class BatchLineaDao
     $connection = Connection::getInstance()->getConnection();
     $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, batch.numero_lote 
                                     FROM batch 
-                                    WHERE (batch.estado >= 3.5  AND batch.estado < 4.5)
+                                    WHERE (batch.estado >= 3.5  AND batch.estado <= 4.5)
                                     /* AND ((SELECT cantidad_firmas FROM `batch_control_firmas` WHERE batch = batch.id_batch AND modulo = 3) < 4) */ 
                                     ORDER BY batch.id_batch DESC");
     $stmt->execute();
