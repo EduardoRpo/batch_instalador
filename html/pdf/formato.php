@@ -176,11 +176,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <td class="centrado bold" id="fecha_medio2"></td>
+                        <td class="centrado bold fecha_medio2" id="fecha_medio2"></td>
                         <td class="centrado">18 - 25 °C</td>
-                        <td class="centrado bold" id="temperatura2"></td>
+                        <td class="centrado bold temperatura2" id="temperatura2"></td>
                         <td class="centrado">30 - 75 %</td>
-                        <td class="centrado bold" id="humedad2"></td>
+                        <td class="centrado bold humedad2" id="humedad2"></td>
                     </tbody>
                 </table>
             </div>
@@ -367,11 +367,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <td class="centrado bold" id="fecha_medio3"></td>
+                                <td class="centrado bold fecha_medio3" id="fecha_medio3"></td>
                                 <td class="centrado">18 - 25 °C</td>
-                                <td class="centrado bold" id="temperatura3"></td>
+                                <td class="centrado bold temperatura3" id="temperatura3"></td>
                                 <td class="centrado">30 - 75 %</td>
-                                <td class="centrado bold" id="humedad3"></td>
+                                <td class="centrado bold humedad3" id="humedad3"></td>
                             </tbody>
                         </table>
                     </div>
@@ -568,11 +568,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <td class="centrado bold" id="fecha_medio4"></td>
+                                <td class="centrado bold fecha_medio4" id="fecha_medio4"></td>
                                 <td class="centrado">18 - 25 °C</td>
-                                <td class="centrado bold" id="temperatura4"></td>
+                                <td class="centrado bold temperatura4" id="temperatura4"></td>
                                 <td class="centrado">30 - 75 %</td>
-                                <td class="centrado bold" id="humedad4"></td>
+                                <td class="centrado bold humedad4" id="humedad4"></td>
                             </tbody>
                         </table>
                     </div>
@@ -787,9 +787,9 @@
                         <div class="subtitle"><label for="">Equipos</label></div>
                         <div class="envasadora">
                             <label for="">Identificacion Envasadora</label>
-                            <input type="text" class="form-control" id="envasadora">
+                            <input type="text" class="form-control envasadora" id="envasadora1">
                             <label for="">Identificacion Loteadora</label>
-                            <input type="text" class="form-control" id="loteadora">
+                            <input type="text" class="form-control loteadora" id="loteadora1">
                         </div>
 
                         <div class="subtitle"><label for="">Condiciones del Medio</label></div>
@@ -809,11 +809,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <td class="centrado bold" id="fecha_medio5"></td>
+                                    <td class="centrado bold fecha_medio5" id="fecha_medio5"></td>
                                     <td class="centrado">18 - 25 °C</td>
-                                    <td class="centrado bold" id="temperatura5"></td>
+                                    <td class="centrado bold temperatura5" id="temperatura5"></td>
                                     <td class="centrado">30 - 75 %</td>
-                                    <td class="centrado bold" id="humedad5"></td>
+                                    <td class="centrado bold humedad5" id="humedad5"></td>
                                 </tbody>
                             </table>
                         </div>
@@ -921,19 +921,19 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="envase1 centrado"></td>
-                                        <td class="descripcion_envase1 centrado"></td>
-                                        <td class="unidades1 centrado"></td>
+                                        <td class="envase2 centrado"></td>
+                                        <td class="descripcion_envase2 centrado"></td>
+                                        <td class="unidades2 centrado"></td>
                                     </tr>
                                     <tr>
-                                        <td class="tapa1 centrado"></td>
-                                        <td class="descripcion_tapa1 centrado"></td>
-                                        <td class="unidades1 centrado"></td>
+                                        <td class="tapa2 centrado"></td>
+                                        <td class="descripcion_tapa2 centrado"></td>
+                                        <td class="unidades2 centrado"></td>
                                     </tr>
                                     <tr>
-                                        <td class="etiqueta1 centrado"></td>
-                                        <td class="descripcion_etiqueta1 centrado"></td>
-                                        <td class="unidades1 centrado"></td>
+                                        <td class="etiqueta2 centrado"></td>
+                                        <td class="descripcion_etiqueta2 centrado"></td>
+                                        <td class="unidades2 centrado"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -942,9 +942,9 @@
                         <div class="subtitle"><label for="">Equipos</label></div>
                         <div class="envasadora">
                             <label for="">Identificacion Envasadora</label>
-                            <input type="text" class="form-control" id="envasadora">
+                            <input type="text" class="form-control envasadora" id="envasadora2">
                             <label for="">Identificacion Loteadora</label>
-                            <input type="text" class="form-control" id="loteadora">
+                            <input type="text" class="form-control loteadora" id="loteadora2">
                         </div>
 
                         <div class="subtitle"><label for="">Condiciones del Medio</label></div>
@@ -964,11 +964,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <td class="centrado bold" id="fecha_medio5"></td>
+                                    <td class="centrado bold fecha_medio5" id="fecha_medio5"></td>
                                     <td class="centrado">18 - 25 °C</td>
-                                    <td class="centrado bold" id="temperatura5"></td>
+                                    <td class="centrado bold temperatura5" id="temperatura5"></td>
                                     <td class="centrado">30 - 75 %</td>
-                                    <td class="centrado bold" id="humedad5"></td>
+                                    <td class="centrado bold humedad5" id="humedad5"></td>
                                 </tbody>
                             </table>
                         </div>
@@ -993,16 +993,16 @@
 
                             <div>
                                 <label>Promedio</label>
-                                <input type="text" class="form-control centrado" id="promedioMuestras1" style="width: 10%; display:inline">
+                                <input type="text" class="form-control centrado" id="promedioMuestras2" style="width: 10%; display:inline">
                                 <label class="ml-3">Cantidad de Muestras</label>
-                                <input type="text" class="form-control centrado" id="cantidadMuestras1" style="width: 10%; display:inline">
+                                <input type="text" class="form-control centrado" id="cantidadMuestras2" style="width: 10%; display:inline">
                             </div>
                         </div>
 
                         <div class="subtitle"><label for="">Devolución Material de Empaque Sobrante</label></div>
                         <div class="alertas" id="alert_pesaje"></div>
                         <div class="table-responsive p-3">
-                            <table class="table table-bordered table-striped" id="devolucionMaterialSobrante1">
+                            <table class="table table-bordered table-striped" id="devolucionMaterialSobrante2">
                                 <thead class="head centrado">
                                     <tr>
                                         <td class="centrado">Referencia</td>
@@ -1015,28 +1015,28 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td id="envase1" class="envase1 refEmpaque1"></td>
-                                        <td id="descripcion_envase1" class="descripcion_envase1"></td>
-                                        <td id="unidades1" class="centrado unidades1"></td>
-                                        <td id="usadaEnvase1" class="centrado txtEnvasada1"></td>
-                                        <td id="averiasEnvase1" class="centrado"></td>
-                                        <td id="sobranteEnvase1" class="centrado"></td>
+                                        <td id="envase2" class="envase1 refEmpaque2"></td>
+                                        <td id="descripcion_envase2" class="descripcion_envase2"></td>
+                                        <td id="unidades2" class="centrado unidades2"></td>
+                                        <td id="usadaEnvase2" class="centrado txtEnvasada1"></td>
+                                        <td id="averiasEnvase2" class="centrado"></td>
+                                        <td id="sobranteEnvase2" class="centrado"></td>
                                     </tr>
                                     <tr>
-                                        <td id="tapa1" class="tapa1 refEmpaque1"></td>
-                                        <td id="descripcion_tapa1" class="descripcion_tapa1"></td>
-                                        <td id="unidades1" class="centrado unidades1"></td>
-                                        <td id="usadaTapa1" class="centrado envasada1"></td>
-                                        <td id="averiasTapa1" class="centrado"></td>
-                                        <td id="sobranteTapa1" class="centrado"></td>
+                                        <td id="tap21" class="tapa2 refEmpaque2"></td>
+                                        <td id="descripcion_tapa2" class="descripcion_tapa2"></td>
+                                        <td id="unidades2" class="centrado unidades2"></td>
+                                        <td id="usadaTapa2" class="centrado envasada2"></td>
+                                        <td id="averiasTapa2" class="centrado"></td>
+                                        <td id="sobranteTapa2" class="centrado"></td>
                                     </tr>
                                     <tr>
-                                        <td id="etiqueta1" class="etiqueta1 refEmpaque1"></td>
-                                        <td id="descripcion_etiqueta1" class="descripcion_etiqueta1"></td>
-                                        <td id="unidades1" class="centrado unidades1"></td>
-                                        <td id="usadaEtiqueta1" class="centrado envasada1"></td>
-                                        <td id="averiasEtiqueta1" class="centrado"></td>
-                                        <td id="sobranteEtiqueta1" class="centrado"></td>
+                                        <td id="etiqueta2" class="etiqueta1 refEmpaque2"></td>
+                                        <td id="descripcion_etiqueta2" class="descripcion_etiqueta2"></td>
+                                        <td id="unidades2" class="centrado unidades2"></td>
+                                        <td id="usadaEtiqueta2" class="centrado envasada2"></td>
+                                        <td id="averiasEtiqueta2" class="centrado"></td>
+                                        <td id="sobranteEtiqueta2" class="centrado"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -1076,19 +1076,19 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="envase1 centrado"></td>
-                                        <td class="descripcion_envase1 centrado"></td>
-                                        <td class="unidades1 centrado"></td>
+                                        <td class="envase3 centrado"></td>
+                                        <td class="descripcion_envase3 centrado"></td>
+                                        <td class="unidades3 centrado"></td>
                                     </tr>
                                     <tr>
-                                        <td class="tapa1 centrado"></td>
-                                        <td class="descripcion_tapa1 centrado"></td>
-                                        <td class="unidades1 centrado"></td>
+                                        <td class="tapa3 centrado"></td>
+                                        <td class="descripcion_tapa3 centrado"></td>
+                                        <td class="unidades3 centrado"></td>
                                     </tr>
                                     <tr>
-                                        <td class="etiqueta1 centrado"></td>
-                                        <td class="descripcion_etiqueta1 centrado"></td>
-                                        <td class="unidades1 centrado"></td>
+                                        <td class="etiqueta3 centrado"></td>
+                                        <td class="descripcion_etiqueta3 centrado"></td>
+                                        <td class="unidades3 centrado"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -1097,9 +1097,9 @@
                         <div class="subtitle"><label for="">Equipos</label></div>
                         <div class="envasadora">
                             <label for="">Identificacion Envasadora</label>
-                            <input type="text" class="form-control" id="envasadora">
+                            <input type="text" class="form-control envasadora" id="envasadora3">
                             <label for="">Identificacion Loteadora</label>
-                            <input type="text" class="form-control" id="loteadora">
+                            <input type="text" class="form-control loteadora" id="loteadora3">
                         </div>
 
                         <div class="subtitle"><label for="">Condiciones del Medio</label></div>
@@ -1119,11 +1119,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <td class="centrado bold" id="fecha_medio5"></td>
+                                    <td class="centrado bold fecha_medio5" id="fecha_medio5"></td>
                                     <td class="centrado">18 - 25 °C</td>
-                                    <td class="centrado bold" id="temperatura5"></td>
+                                    <td class="centrado bold temperatura5" id="temperatura5"></td>
                                     <td class="centrado">30 - 75 %</td>
-                                    <td class="centrado bold" id="humedad5"></td>
+                                    <td class="centrado bold fecha_medio5" id="humedad5"></td>
                                 </tbody>
                             </table>
                         </div>
@@ -1148,16 +1148,16 @@
 
                             <div>
                                 <label>Promedio</label>
-                                <input type="text" class="form-control centrado" id="promedioMuestras1" style="width: 10%; display:inline">
+                                <input type="text" class="form-control centrado" id="promedioMuestras3" style="width: 10%; display:inline">
                                 <label class="ml-3">Cantidad de Muestras</label>
-                                <input type="text" class="form-control centrado" id="cantidadMuestras1" style="width: 10%; display:inline">
+                                <input type="text" class="form-control centrado" id="cantidadMuestras3" style="width: 10%; display:inline">
                             </div>
                         </div>
 
                         <div class="subtitle"><label for="">Devolución Material de Empaque Sobrante</label></div>
                         <div class="alertas" id="alert_pesaje"></div>
                         <div class="table-responsive p-3">
-                            <table class="table table-bordered table-striped" id="devolucionMaterialSobrante1">
+                            <table class="table table-bordered table-striped" id="devolucionMaterialSobrante3">
                                 <thead class="head centrado">
                                     <tr>
                                         <td class="centrado">Referencia</td>
@@ -1170,28 +1170,28 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td id="envase1" class="envase1 refEmpaque1"></td>
-                                        <td id="descripcion_envase1" class="descripcion_envase1"></td>
-                                        <td id="unidades1" class="centrado unidades1"></td>
-                                        <td id="usadaEnvase1" class="centrado txtEnvasada1"></td>
-                                        <td id="averiasEnvase1" class="centrado"></td>
-                                        <td id="sobranteEnvase1" class="centrado"></td>
+                                        <td id="envase3" class="envase3 refEmpaque3"></td>
+                                        <td id="descripcion_envase3" class="descripcion_envase3"></td>
+                                        <td id="unidades3" class="centrado unidades3"></td>
+                                        <td id="usadaEnvase3" class="centrado txtEnvasada3"></td>
+                                        <td id="averiasEnvase3" class="centrado"></td>
+                                        <td id="sobranteEnvase3" class="centrado"></td>
                                     </tr>
                                     <tr>
-                                        <td id="tapa1" class="tapa1 refEmpaque1"></td>
-                                        <td id="descripcion_tapa1" class="descripcion_tapa1"></td>
-                                        <td id="unidades1" class="centrado unidades1"></td>
-                                        <td id="usadaTapa1" class="centrado envasada1"></td>
-                                        <td id="averiasTapa1" class="centrado"></td>
-                                        <td id="sobranteTapa1" class="centrado"></td>
+                                        <td id="tapa3" class="tapa1 refEmpaque3"></td>
+                                        <td id="descripcion_tapa3" class="descripcion_tapa3"></td>
+                                        <td id="unidades3" class="centrado unidades3"></td>
+                                        <td id="usadaTapa3" class="centrado envasada3"></td>
+                                        <td id="averiasTapa3" class="centrado"></td>
+                                        <td id="sobranteTapa3" class="centrado"></td>
                                     </tr>
                                     <tr>
-                                        <td id="etiqueta1" class="etiqueta1 refEmpaque1"></td>
-                                        <td id="descripcion_etiqueta1" class="descripcion_etiqueta1"></td>
-                                        <td id="unidades1" class="centrado unidades1"></td>
-                                        <td id="usadaEtiqueta1" class="centrado envasada1"></td>
-                                        <td id="averiasEtiqueta1" class="centrado"></td>
-                                        <td id="sobranteEtiqueta1" class="centrado"></td>
+                                        <td id="etiqueta3" class="etiqueta1 refEmpaque3"></td>
+                                        <td id="descripcion_etiqueta3" class="descripcion_etiqueta3"></td>
+                                        <td id="unidades3" class="centrado unidades3"></td>
+                                        <td id="usadaEtiqueta3" class="centrado envasada3"></td>
+                                        <td id="averiasEtiqueta3" class="centrado"></td>
+                                        <td id="sobranteEtiqueta3" class="centrado"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -1302,11 +1302,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <td class="centrado bold" id="fecha_medio6"></td>
+                                <td class="centrado bold fecha_medio6" id="fecha_medio6"></td>
                                 <td class="centrado">18 - 25 °C</td>
-                                <td class="centrado bold" id="temperatura6"></td>
+                                <td class="centrado bold temperatura6" id="temperatura6"></td>
                                 <td class="centrado">30 - 75 %</td>
-                                <td class="centrado bold" id="humedad6"></td>
+                                <td class="centrado bold humedad6" id="humedad6"></td>
                             </tbody>
                         </table>
                     </div>
@@ -1429,7 +1429,7 @@
                         <div class="subtitle"><label>Conciliación de rendimiento</label></div>
                         <div class="conciliacion">
                             <label style="justify-self: end;">Conciliacion rendimiento</label>
-                            <input type="text" class="form-control centrado" id="conciliacionRendimiento1" style="width: 30%;justify-self: baseline" readonly>
+                            <input type="text" class="form-control centrado" id="conciliacionRendimiento3" style="width: 30%;justify-self: baseline" readonly>
                         </div>
 
                         <div class="enlinea mt-3">
@@ -1635,7 +1635,7 @@
                         <div class="subtitle"><label>Conciliación de rendimiento</label></div>
                         <div class="conciliacion">
                             <label style="justify-self: end;">Conciliacion rendimiento</label>
-                            <input type="text" class="form-control centrado" id="conciliacionRendimiento1" style="width: 30%;justify-self: baseline" readonly>
+                            <input type="text" class="form-control centrado" id="conciliacionRendimiento2" style="width: 30%;justify-self: baseline" readonly>
                         </div>
 
                         <div class="enlinea mt-3">
@@ -1744,11 +1744,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <td class="centrado bold" id="fecha_medio8"></td>
+                        <td class="centrado bold fecha_medio8" id="fecha_medio8"></td>
                         <td class="centrado">18 - 25 °C</td>
-                        <td class="centrado bold" id="temperatura8"></td>
+                        <td class="centrado bold temperatura8" id="temperatura8"></td>
                         <td class="centrado">30 - 75 %</td>
-                        <td class="centrado bold" id="humedad8"></td>
+                        <td class="centrado bold humedad8" id="humedad8"></td>
                     </tbody>
                 </table>
             </div>
@@ -1880,11 +1880,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <td class="centrado bold" id="fecha_medio9"></td>
+                        <td class="centrado bold fecha_medio9" id="fecha_medio9"></td>
                         <td class="centrado">18 - 25 °C</td>
-                        <td class="centrado bold" id="temperatura9"></td>
+                        <td class="centrado bold temperatura9" id="temperatura9"></td>
                         <td class="centrado">30 - 75 %</td>
-                        <td class="centrado bold" id="humedad9"></td>
+                        <td class="centrado bold humedad9" id="humedad9"></td>
                     </tbody>
                 </table>
             </div>

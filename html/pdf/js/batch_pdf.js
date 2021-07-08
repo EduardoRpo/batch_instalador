@@ -5,6 +5,7 @@ let presentacion;
 let densidad;
 let tamanioLote;
 let infoBatch;
+let multi;
 
 /* bloquear inputs */
 $("input").prop("readonly", true);
@@ -61,7 +62,7 @@ const multipresentacion = () => {
     { idBatch, operacion: 18 },
     function (data, textStatus, jqXHR) {
       if (data == 0) {
-        entrega_material_envase();
+        info_General();
       } else {
         multi = JSON.parse(data);
         if (multi.length == 2) $("#multipresentacion2").show();
@@ -80,6 +81,8 @@ const multipresentacion = () => {
           );
           j++;
         }
+        entrega_material_envase();
+        material_envase_sobrante();
       }
     }
   );
@@ -109,12 +112,14 @@ function info_General() {
       $("#tamanolt").html(`<b>${info.tamano_lote}</b>`);
       $("#tamanol").html(`<b>${info.tamano_lote}</b>`);
       $("#unidadesLote").html(`<b>${info.unidad_lote}</b>`);
-      $(".unidades1").html(`<b>${info.unidad_lote}</b>`);
+      //$(".unidades1").html(`<b>${info.unidad_lote}</b>`);
       $(".fecha").html(`<b>${info.fecha_creacion}</b>`);
       lote_anterior();
       desinfectante();
       observacionesAprobacion();
       identificarDensidad();
+      entrega_material_envase();
+      material_envase_sobrante();
       //multipresentacion();
     }
   );
@@ -267,9 +272,9 @@ function condiciones_medio() {
       let info = JSON.parse(data);
 
       for (let i = 0; i < info.length; i++) {
-        $(`#fecha_medio${info[i].modulo}`).html(info[i].fecha);
-        $(`#temperatura${info[i].modulo}`).html(info[i].temperatura + " °C");
-        $(`#humedad${info[i].modulo}`).html(info[i].humedad + " %");
+        $(`.fecha_medio${info[i].modulo}`).html(info[i].fecha);
+        $(`.temperatura${info[i].modulo}`).html(info[i].temperatura + " °C");
+        $(`.humedad${info[i].modulo}`).html(info[i].humedad + " %");
       }
     }
   );
@@ -288,11 +293,11 @@ function equipos() {
         continue;
       }
       if (data[i].tipo === "envasadora") {
-        $("#envasadora").val(data[i].descripcion);
+        $(".envasadora").val(data[i].descripcion);
         continue;
       }
       if (data[i].tipo === "loteadora") {
-        $("#loteadora").val(data[i].descripcion);
+        $(".loteadora").val(data[i].descripcion);
         continue;
       }
       if (data[i].tipo === "banda") {
@@ -438,24 +443,45 @@ ajustes = () => {
 };
 
 function entrega_material_envase() {
-  /* referencia = $("#ref").html(); */
-  $.ajax({
-    url: "../../html/php/envase.php",
-    type: "POST",
-    data: { referencia: referencia },
-  }).done((data, status, xhr) => {
-    if (data != "") {
-      info = JSON.parse(data);
-      $(`.envase1`).html(info[0].id_envase);
-      $(`.descripcion_envase1`).html(info[0].envase);
-
-      $(`.tapa1`).html(info[0].id_tapa);
-      $(`.descripcion_tapa1`).html(info[0].tapa);
-
-      $(`.etiqueta1`).html(info[0].id_etiqueta);
-      $(`.descripcion_etiqueta1`).html(info[0].etiqueta);
+  if (multi) {
+    for (let i = 0; i < multi.length; i++) {
+      referencia = multi[i].referencia;
+      $.ajax({
+        url: "../../html/php/envase.php",
+        type: "POST",
+        data: { referencia: referencia },
+      }).done((data, status, xhr) => {
+        if (data != "") {
+          info = JSON.parse(data);
+          $(`.envase${i + 1}`).html(info[0].id_envase);
+          $(`.descripcion_envase${i + 1}`).html(info[0].envase);
+          $(`.tapa${i + 1}`).html(info[0].id_tapa);
+          $(`.descripcion_tapa${i + 1}`).html(info[0].tapa);
+          $(`.etiqueta${i + 1}`).html(info[0].id_etiqueta);
+          $(`.descripcion_etiqueta${i + 1}`).html(info[0].etiqueta);
+          $(`.unidades${i + 1}`).html(multi[i].cantidad);
+        }
+      });
     }
-  });
+  } else {
+    referencia = referencia;
+    $.ajax({
+      url: "../../html/php/envase.php",
+      type: "POST",
+      data: { referencia: referencia },
+    }).done((data, status, xhr) => {
+      if (data != "") {
+        info = JSON.parse(data);
+        $(`.envase${i + 1}`).html(info[0].id_envase);
+        $(`.descripcion_envase${i + 1}`).html(info[0].envase);
+        $(`.tapa${i + 1}`).html(info[0].id_tapa);
+        $(`.descripcion_tapa${i + 1}`).html(info[0].tapa);
+        $(`.etiqueta${i + 1}`).html(info[0].id_etiqueta);
+        $(`.descripcion_etiqueta${i + 1}`).html(info[0].etiqueta);
+        $(`.unidades${i + 1}`).html(info[0].cantidad);
+      }
+    });
+  }
 }
 
 /* Calcular peso minimo, maximo y promedio */
@@ -545,26 +571,30 @@ material_envase_sobrante = () => {
     success: function (response) {
       let info = JSON.parse(response);
       if (info.length === 0) return false;
+      if (multi)
+        for (let i = 0; i < info.length; i++) {
+          if (info[i]["ref_producto"] == multi[i]["referencia"]) {
+            $(`#usadaEnvase${i + 1}`).html(info[0].envasada);
+            $(`#averiasEnvase${i + 1}`).html(info[0].averias);
+            $(`#sobranteEnvase${i + 1}`).html(info[0].sobrante);
 
-      $("#usadaEnvase1").html(info[0].envasada);
-      $("#averiasEnvase1").html(info[0].averias);
-      $("#sobranteEnvase1").html(info[0].sobrante);
+            $(`#usadaTapa${i + 1}`).html(info[1].envasada);
+            $(`#averiasTapa${i + 1}`).html(info[1].averias);
+            $(`#sobranteTapa${i + 1}`).html(info[1].sobrante);
 
-      $("#usadaTapa1").html(info[1].envasada);
-      $("#averiasTapa1").html(info[1].averias);
-      $("#sobranteTapa1").html(info[1].sobrante);
+            $(`#usadaEtiqueta${i + 1}`).html(info[2].envasada);
+            $(`#averiasEtiqueta${i + 1}`).html(info[2].averias);
+            $(`#sobranteEtiqueta${i + 1}`).html(info[2].sobrante);
 
-      $("#usadaEtiqueta1").html(info[2].envasada);
-      $("#averiasEtiqueta1").html(info[2].averias);
-      $("#sobranteEtiqueta1").html(info[2].sobrante);
+            $(`#utilizada_empaque${i + 1}`).html(info[3].envasada);
+            $(`#averias_empaque${i + 1}`).html(info[3].averias);
+            $(`#sobrante_empaque${i + 1}`).html(info[3].sobrante);
 
-      $("#utilizada_empaque1").html(info[3].envasada);
-      $("#averias_empaque1").html(info[3].averias);
-      $("#sobrante_empaque1").html(info[3].sobrante);
-
-      $("#utilizada_otros1").html(info[4].envasada);
-      $("#averias_otros1").html(info[4].averias);
-      $("#sobrante_otros1").html(info[4].sobrante);
+            $(`#utilizada_otros${i + 1}`).html(info[4].envasada);
+            $(`#averias_otros${i + 1}`).html(info[4].averias);
+            $(`#sobrante_otros${i + 1}`).html(info[4].sobrante);
+          }
+        }
     },
   });
 };
@@ -640,8 +670,8 @@ entrega_material_acondicionamiento = () => {
     $(`.otros1`).html(info[0].id_otros);
     $(`.descripcion_otros1`).html(info[0].otros);
 
-    $(`.unidades1`).html(unidades);
-    $(`.unidades1e`).html(empaqueEnvasado);
+    //$(`.unidades1`).html(unidades);
+    //$(`.unidades1e`).html(empaqueEnvasado);
   });
 };
 
@@ -842,12 +872,12 @@ $(document).ready(function () {
   if (!referencias) referencia = sessionStorage.getItem("referencia");
 
   cargar_Alertas();
-  info_General();
+  //info_General();
   parametros_Control();
   especificaciones_producto();
   //entrega_material_envase();
   obtenerMuestras();
-  material_envase_sobrante();
+  //material_envase_sobrante();
   condiciones_medio();
   control_proceso();
   equipos();

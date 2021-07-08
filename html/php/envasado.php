@@ -117,11 +117,10 @@ if (!empty($_POST)) {
             $batch = $_POST['idBatch'];
 
             $sql = "SELECT bms.id, bms.ref_material, bms.envasada, bms.averias, bms.sobrante, bms.ref_producto, bms.batch, bms.modulo, u.urlfirma as realizo 
-            FROM batch_material_sobrante bms 
-            INNER JOIN usuario u ON u.id = bms.realizo
-            WHERE batch = :batch";
+                    FROM batch_material_sobrante bms 
+                    INNER JOIN usuario u ON u.id = bms.realizo
+                    WHERE batch = :batch";
             $query = $conn->prepare($sql);
-            /* $result = $query->execute(['referencia' => $referencia['id_producto']]); */
             $result = $query->execute(['batch' => $batch]);
             $data = $query->fetchAll(PDO::FETCH_ASSOC);
             echo json_encode($data, JSON_UNESCAPED_UNICODE);

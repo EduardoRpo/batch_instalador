@@ -249,5 +249,6 @@ if (!empty($_POST)) {
             sizeof($data) == 0 ? $data = 0 : $data;
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
             break;
+            
     }
 }
