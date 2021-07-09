@@ -822,11 +822,11 @@
                         <div class="subtitle"><label for="">Especificaciones Tecnicas</label></div>
                         <div class="espec_tecnicas">
                             <label for="" class="centrado">Mínimo</label>
-                            <input type="text" class="form-control centrado minimo">
+                            <input type="text" class="form-control centrado minimo1">
                             <label for="" class="centrado">Medio</label>
-                            <input type="text" class="form-control centrado medio">
+                            <input type="text" class="form-control centrado medio1">
                             <label for="" class="centrado">Máximo</label>
-                            <input type="text" class="form-control centrado maximo">
+                            <input type="text" class="form-control centrado maximo1">
                         </div>
 
                         <div class="subtitle"><label for="">Control de peso en el Proceso</label></div>
@@ -977,11 +977,11 @@
                         <div class="subtitle"><label for="">Especificaciones Tecnicas</label></div>
                         <div class="espec_tecnicas">
                             <label for="" class="centrado">Mínimo</label>
-                            <input type="text" class="form-control centrado minimo">
+                            <input type="text" class="form-control centrado minimo2">
                             <label for="" class="centrado">Medio</label>
-                            <input type="text" class="form-control centrado medio">
+                            <input type="text" class="form-control centrado medio2">
                             <label for="" class="centrado">Máximo</label>
-                            <input type="text" class="form-control centrado maximo">
+                            <input type="text" class="form-control centrado maximo2">
                         </div>
 
                         <div class="subtitle"><label for="">Control de peso en el Proceso</label></div>
@@ -1132,11 +1132,11 @@
                         <div class="subtitle"><label for="">Especificaciones Tecnicas</label></div>
                         <div class="espec_tecnicas">
                             <label for="" class="centrado">Mínimo</label>
-                            <input type="text" class="form-control centrado minimo">
+                            <input type="text" class="form-control centrado minimo3">
                             <label for="" class="centrado">Medio</label>
-                            <input type="text" class="form-control centrado medio">
+                            <input type="text" class="form-control centrado medio3">
                             <label for="" class="centrado">Máximo</label>
-                            <input type="text" class="form-control centrado maximo">
+                            <input type="text" class="form-control centrado maximo3">
                         </div>
 
                         <div class="subtitle"><label for="">Control de peso en el Proceso</label></div>

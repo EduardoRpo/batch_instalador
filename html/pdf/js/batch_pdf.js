@@ -84,6 +84,7 @@ const multipresentacion = () => {
         entrega_material_envase();
         material_envase_sobrante();
         obtenerMuestras();
+        identificarDensidad();
       }
     }
   );
@@ -118,10 +119,12 @@ function info_General() {
       lote_anterior();
       desinfectante();
       observacionesAprobacion();
-      identificarDensidad();
-      //entrega_material_envase();
-      //material_envase_sobrante();
-      //multipresentacion();
+      if (multi == undefined) {
+        identificarDensidad();
+        obtenerMuestras();
+        entrega_material_envase();
+        material_envase_sobrante();
+      }
     }
   );
 }
@@ -147,10 +150,10 @@ parametros_Control = () => {
 
         $(`#despeje_linea${info[i].id_modulo}`).append(`
           <tr>
-              <th scope="row" class="centrado">${j}</th>
-              <td>${info[i].pregunta}</td>
-              <td class="centrado">${info[i].solucion == 1 ? "X" : ""}</td>
-              <td class="centrado">${info[i].solucion == 0 ? "X" : ""}</td>
+            <th scope="row" class="centrado">${j}</th>
+            <td>${info[i].pregunta}</td>
+            <td class="centrado">${info[i].solucion == 1 ? "X" : ""}</td>
+            <td class="centrado">${info[i].solucion == 0 ? "X" : ""}</td>
           </tr>`);
       }
     }
@@ -473,13 +476,13 @@ function entrega_material_envase() {
     }).done((data, status, xhr) => {
       if (data != "") {
         info = JSON.parse(data);
-        $(`.envase${i + 1}`).html(info[0].id_envase);
-        $(`.descripcion_envase${i + 1}`).html(info[0].envase);
-        $(`.tapa${i + 1}`).html(info[0].id_tapa);
-        $(`.descripcion_tapa${i + 1}`).html(info[0].tapa);
-        $(`.etiqueta${i + 1}`).html(info[0].id_etiqueta);
-        $(`.descripcion_etiqueta${i + 1}`).html(info[0].etiqueta);
-        $(`.unidades${i + 1}`).html(info[0].cantidad);
+        $(`.envase1`).html(info[0].id_envase);
+        $(`.descripcion_envase1`).html(info[0].envase);
+        $(`.tapa1`).html(info[0].id_tapa);
+        $(`.descripcion_tapa1`).html(info[0].tapa);
+        $(`.etiqueta1`).html(info[0].id_etiqueta);
+        $(`.descripcion_etiqueta1`).html(info[0].etiqueta);
+        $(`.unidades1`).html(info[0].cantidad);
       }
     });
   }
@@ -509,16 +512,31 @@ identificarDensidad = () => {
 };
 
 function calcularPeso(densidadAprobada) {
-  presentacion = $("#presentacion").html();
-  presentacion = getNumbersInString(presentacion);
+  if (multi) {
+    for (let i = 0; i < multi.length; i++) {
+      //presentacion = $("#presentacion").html();
+      //presentacion = getNumbersInString(presentacion);
+      presentacion = multi[i]["presentacion_comercial"];
+      let peso_min = presentacion * densidadAprobada;
+      let peso_max = peso_min * (1 + 0.03);
+      let prom = (parseInt(peso_min) + peso_max) / 2;
 
-  var peso_min = presentacion * densidadAprobada;
-  var peso_max = peso_min * (1 + 0.03);
-  var prom = (parseInt(peso_min) + peso_max) / 2;
+      $(`.minimo${i + 1}`).val(peso_min.toFixed(2));
+      $(`.maximo${i + 1}`).val(peso_max.toFixed(2));
+      $(`.medio${i + 1}`).val(prom.toFixed(2));
+    }
+  } else {
+    presentacion = $("#presentacion").html();
+    presentacion = getNumbersInString(presentacion);
 
-  $(`.minimo`).val(peso_min.toFixed(2));
-  $(`.maximo`).val(peso_max.toFixed(2));
-  $(`.medio`).val(prom.toFixed(2));
+    let peso_min = presentacion * densidadAprobada;
+    let peso_max = peso_min * (1 + 0.03);
+    let prom = (parseInt(peso_min) + peso_max) / 2;
+
+    $(`.minimo1`).val(peso_min.toFixed(2));
+    $(`.maximo1`).val(peso_max.toFixed(2));
+    $(`.medio1`).val(prom.toFixed(2));
+  }
 }
 
 function getNumbersInString(string) {
@@ -551,7 +569,7 @@ const obtenerMuestras = () => {
       let sum = 0;
       let info = JSON.parse(response);
 
-      if (multi)
+      if (multi) {
         for (let i = 0; i < multi.length; i++) {
           sum = 0;
           promedio = 0;
@@ -569,6 +587,18 @@ const obtenerMuestras = () => {
             }
           }
         }
+      } else {
+        for (let j = 0; j < info.length; j++) {
+          cont = cont + 1;
+          $(`#muestrasEnvasado1`).append(
+            `<td class="centrado">${info[j]["muestra"]}</td>`
+          );
+          sum = sum + info[j]["muestra"];
+          promedio = sum / cont;
+        }
+        $(`#promedioMuestras1`).val(promedio);
+        $(`#cantidadMuestras1`).val(cont);
+      }
     },
   });
 };
