@@ -29,6 +29,9 @@ $(document).on("click", ".link-cerrar", function (e) {
 $("#multipresentacion2").hide();
 $("#multipresentacion3").hide();
 
+$("#acondicionamiento2").hide();
+$("#acondicionamiento3").hide();
+
 /* Cargar data */
 
 cargar_Alertas = () => {
