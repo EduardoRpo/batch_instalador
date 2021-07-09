@@ -155,6 +155,22 @@ body {
   /* margin: 20px; */
   text-align: center;
 }
+#muestrasEnvasado2 {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-column-gap: 1em;
+  grid-gap: 1em;
+  /* margin: 20px; */
+  text-align: center;
+}
+#muestrasEnvasado3 {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-column-gap: 1em;
+  grid-gap: 1em;
+  /* margin: 20px; */
+  text-align: center;
+}
 
 .conciliacion {
   display: grid;

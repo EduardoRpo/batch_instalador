@@ -46,72 +46,72 @@
               </div>
             </div>
           </div>
-
-          <div class="row">
-            <div class="col-md-6">
-              <div class="card">
-                <div class="card-header">
-                  <h6 class="title">Materia Prima</h6>
-                  <p class="category">Samara Cosmetics <a href=""></a></p>
-                </div>
-                <div class="card-body">
-                  <div class="table-responsive">
-                    <table id="tblMateriasPrimas" class="table-striped row-borde" style="width:100%">
-                      <thead>
-                        <tr>
-                          <th>Referencia</th>
-                          <th>Materia Prima</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <h6 class="title">Materia Prima</h6>
+                <p class="category">Samara Cosmetics <a href=""></a></p>
               </div>
-            </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table id="tblMateriasPrimas" class="table-striped row-borde" style="width:100%">
+                    <thead>
+                      <tr>
+                        <th>Referencia</th>
+                        <th>Materia Prima</th>
+                      </tr>
+                    </thead>
+                    <tbody>
 
-            <div class="col-md-6">
-              <div class="card" id="cardformula_r">
-                <div class="card-header">
-                  <h6 class="title">Formulas</h6>
-                  <p class="category">Samara Cosmetics <a href=""></a></p>
-                </div>
-                <div class="card-body">
-                  <div class="table-responsive">
-                    <table id="tblFormula" class="table-striped row-borde" style="width:100%">
-                      <thead>
-                        <tr>
-                          <th>Referencia</th>
-                          <th>Materia Prima</th>
-                          <th>Porcentaje</th>
-                          <th>Acciones</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-
-                      </tbody>
-                    </table>
-                    <div style="display:flexbox;width:25%;margin-left:260px">
-                      <div class="input-group mb-3">
-                        <input type="text" id="totalPorcentajeFormulas" class="form-control" aria-label="Amount (to the nearest dollar)" disabled>
-                        <span class="input-group-text">%</span>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-                <div style="display: grid;justify-content: space-around;">
-                  <button class="btn btn-primary" id="guardarFormula">Guardar</button>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
           </div>
 
+          <div class="col-md-6">
+            <div class="card" id="cardformula_r">
+              <div class="card-header">
+                <h6 class="title">Formulas</h6>
+                <p class="category">Samara Cosmetics <a href=""></a></p>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table id="tblFormula" class="table-striped row-borde" style="width:100%">
+                    <thead>
+                      <tr>
+                        <th>Referencia</th>
+                        <th>Materia Prima</th>
+                        <th>Porcentaje</th>
+                        <th>Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                  </table>
+                  <div style="display:flexbox;width:25%;margin-left:260px">
+                    <div class="input-group mb-3">
+                      <input type="text" id="totalPorcentajeFormulas" class="form-control" aria-label="Amount (to the nearest dollar)" disabled>
+                      <span class="input-group-text">%</span>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div style="display: grid;justify-content: space-around;">
+                <button class="btn btn-primary" id="guardarFormula">Guardar</button>
+              </div>
+            </div>
+          </div>
         </div>
-        <?php include('./admin_componentes/footer.php'); ?>
+
       </div>
+      <?php include('./admin_componentes/footer.php'); ?>
+      <!-- </div> -->
     </div>
 
 

@@ -242,7 +242,7 @@ if (!empty($_POST)) {
         case 18: //busqueda_multipresentacion
             $batch = $_POST['idBatch'];
 
-            $sql = "SELECT * FROM multipresentacion WHERE id_batch = :batch";
+            $sql = "SELECT * FROM multipresentacion WHERE id_batch = :batch ORDER BY `multipresentacion`.`referencia` ASC";
             $query = $conn->prepare($sql);
             $query->execute(['batch' => $batch]);
             $data = $query->fetchAll(PDO::FETCH_ASSOC);

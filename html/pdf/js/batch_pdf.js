@@ -83,6 +83,7 @@ const multipresentacion = () => {
         }
         entrega_material_envase();
         material_envase_sobrante();
+        obtenerMuestras();
       }
     }
   );
@@ -118,8 +119,8 @@ function info_General() {
       desinfectante();
       observacionesAprobacion();
       identificarDensidad();
-      entrega_material_envase();
-      material_envase_sobrante();
+      //entrega_material_envase();
+      //material_envase_sobrante();
       //multipresentacion();
     }
   );
@@ -537,7 +538,7 @@ function getNumbersInString(string) {
 
 /* Obtener muestras */
 
-obtenerMuestras = () => {
+const obtenerMuestras = () => {
   $.ajax({
     type: "POST",
     url: "../../html/php/muestras.php",
@@ -546,18 +547,28 @@ obtenerMuestras = () => {
     success: function (response) {
       if (response == 3) return false;
       let promedio = 0;
+      let cont = 0;
+      let sum = 0;
       let info = JSON.parse(response);
-      $("#cantidadMuestras1").val(info.length);
 
-      for (let i = 0; i < info.length; i++) {
-        $(`#muestrasEnvasado1`).append(
-          `<td class="centrado">${info[i].muestra}</td>`
-        );
-
-        promedio = promedio + info[i].muestra;
-      }
-      promedio = promedio / info.length;
-      $(`#promedioMuestras1`).val(promedio);
+      if (multi)
+        for (let i = 0; i < multi.length; i++) {
+          sum = 0;
+          promedio = 0;
+          cont = 0;
+          for (let j = 0; j < info.length; j++) {
+            if (multi[i]["referencia"] == info[j]["referencia"]) {
+              cont = cont + 1;
+              $(`#muestrasEnvasado${i + 1}`).append(
+                `<td class="centrado">${info[j]["muestra"]}</td>`
+              );
+              sum = sum + info[j]["muestra"];
+              promedio = sum / cont;
+              $(`#promedioMuestras${i + 1}`).val(promedio);
+              $(`#cantidadMuestras${i + 1}`).val(cont);
+            }
+          }
+        }
     },
   });
 };
@@ -571,30 +582,33 @@ material_envase_sobrante = () => {
     success: function (response) {
       let info = JSON.parse(response);
       if (info.length === 0) return false;
-      if (multi)
-        for (let i = 0; i < info.length; i++) {
-          if (info[i]["ref_producto"] == multi[i]["referencia"]) {
-            $(`#usadaEnvase${i + 1}`).html(info[0].envasada);
-            $(`#averiasEnvase${i + 1}`).html(info[0].averias);
-            $(`#sobranteEnvase${i + 1}`).html(info[0].sobrante);
+      if (multi) {
+        for (let i = 0; i < multi.length; i++) {
+          for (let j = 0; j < info.length; j++) {
+            if (multi[i].referencia == info[j]["ref_producto"]) {
+              $(`#usadaEnvase${i + 1}`).html(info[j].envasada);
+              $(`#averiasEnvase${i + 1}`).html(info[j].averias);
+              $(`#sobranteEnvase${i + 1}`).html(info[j].sobrante);
 
-            $(`#usadaTapa${i + 1}`).html(info[1].envasada);
-            $(`#averiasTapa${i + 1}`).html(info[1].averias);
-            $(`#sobranteTapa${i + 1}`).html(info[1].sobrante);
+              $(`#usadaTapa${i + 1}`).html(info[j].envasada);
+              $(`#averiasTapa${i + 1}`).html(info[j].averias);
+              $(`#sobranteTapa${i + 1}`).html(info[j].sobrante);
 
-            $(`#usadaEtiqueta${i + 1}`).html(info[2].envasada);
-            $(`#averiasEtiqueta${i + 1}`).html(info[2].averias);
-            $(`#sobranteEtiqueta${i + 1}`).html(info[2].sobrante);
+              $(`#usadaEtiqueta${i + 1}`).html(info[j].envasada);
+              $(`#averiasEtiqueta${i + 1}`).html(info[j].averias);
+              $(`#sobranteEtiqueta${i + 1}`).html(info[j].sobrante);
 
-            $(`#utilizada_empaque${i + 1}`).html(info[3].envasada);
-            $(`#averias_empaque${i + 1}`).html(info[3].averias);
-            $(`#sobrante_empaque${i + 1}`).html(info[3].sobrante);
+              $(`#utilizada_empaque${i + 1}`).html(info[j].envasada);
+              $(`#averias_empaque${i + 1}`).html(info[j].averias);
+              $(`#sobrante_empaque${i + 1}`).html(info[j].sobrante);
 
-            $(`#utilizada_otros${i + 1}`).html(info[4].envasada);
-            $(`#averias_otros${i + 1}`).html(info[4].averias);
-            $(`#sobrante_otros${i + 1}`).html(info[4].sobrante);
+              $(`#utilizada_otros${i + 1}`).html(info[j].envasada);
+              $(`#averias_otros${i + 1}`).html(info[j].averias);
+              $(`#sobrante_otros${i + 1}`).html(info[j].sobrante);
+            }
           }
         }
+      }
     },
   });
 };
@@ -872,11 +886,11 @@ $(document).ready(function () {
   if (!referencias) referencia = sessionStorage.getItem("referencia");
 
   cargar_Alertas();
-  //info_General();
+  info_General();
   parametros_Control();
   especificaciones_producto();
   //entrega_material_envase();
-  obtenerMuestras();
+  //obtenerMuestras();
   //material_envase_sobrante();
   condiciones_medio();
   control_proceso();

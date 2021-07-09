@@ -988,7 +988,7 @@
                         <div class="subtitle" style="background:lightgrey;"><label for="">Muestras</label></div>
                         <div class="p-3">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped" id="muestrasEnvasado1"></table>
+                                <table class="table table-bordered table-striped" id="muestrasEnvasado2"></table>
                             </div>
 
                             <div>
@@ -1143,7 +1143,7 @@
                         <div class="subtitle" style="background:lightgrey;"><label for="">Muestras</label></div>
                         <div class="p-3">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped" id="muestrasEnvasado1"></table>
+                                <table class="table table-bordered table-striped" id="muestrasEnvasado3"></table>
                             </div>
 
                             <div>
