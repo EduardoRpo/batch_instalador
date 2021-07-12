@@ -1,7 +1,7 @@
 let editar;
 
 /* Mostrar Menu seleccionadp */
-$('.contenedor-menu .menu a').removeAttr("style");
+$(".contenedor-menu .menu a").removeAttr("style");
 $("#link_menu_pdf").css("background", "coral");
 $(".contenedor-menu .menu ul.menu_pdf").show();
 
@@ -17,14 +17,14 @@ $(document).ready(function () {
     ajax: {
       //method: "GET",
       url: "/api/pdftextos",
-      dataSrc: "",
+      //dataSrc: "",
     },
 
     columns: [
       { data: "id" },
       { data: "titulo" },
       { data: "descripcion" },
-      { data: "ubicacion", className: "centrado"},
+      { data: "ubicacion", className: "centrado" },
       /* { data: "modulo", className: "centrado"}, */
       {
         defaultContent:

@@ -745,7 +745,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div id="multipresentacion1">
+                    <div id="multi-envasado1">
                         <div class="subtitleProcess"><label for="" id="titulo_envasado1"> <b></b></label></div>
                         <div class="subtitle"><label for="">6.2 Entrega Material de Empaque</label></div>
                         <div class="alertas" id="alert_pesaje">
@@ -900,7 +900,7 @@
                             <label id="user_verifico5"></label>
                         </div>
                     </div>
-                    <div id="multipresentacion2">
+                    <div id="multi-envasado2">
                         <div class="subtitleProcess"><label for="" id="titulo_envasado2"> <b>ENVASADO</b></label></div>
                         <div class="subtitle"><label for="">6.2 Entrega Material de Empaque</label></div>
                         <div class="alertas" id="alert_pesaje">
@@ -1042,20 +1042,20 @@
                             </table>
                         </div>
                         <div class="subtitle"><label for="">Cierre</label></div>
-                        <div class="firmas" id="firmas5">
+                        <div class="firmas" id="firmas2">
                             <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
-                            <label id="fecha5" style="font-weight:bold; justify-self: baseline"></label>
+                            <label id="multi_fecha2" style="font-weight:bold; justify-self: baseline"></label>
 
-                            <div id="blank_rea5"></div>
-                            <img id="f_realizo5" src="" alt="firma_usuario" height="130">
-                            <div id="blank_ver5"></div>
-                            <img id="f_verifico5" src="" alt="firma_usuario" height="130">
+                            <div id="multi_blank_realizo2"></div>
+                            <img id="multi_f_realizo2" src="" alt="firma_usuario" height="130">
+                            <div id="multi_blank_verifico2"></div>
+                            <img id="multi_f_verifico2" src="" alt="firma_usuario" height="130">
 
-                            <label id="user_realizo5"></label>
-                            <label id="user_verifico5"></label>
+                            <label id="multi_user_realizo2"></label>
+                            <label id="multi_user_verifico2"></label>
                         </div>
                     </div>
-                    <div id="multipresentacion3">
+                    <div id="multi-envasado3">
                         <div class="subtitleProcess"><label for="" id="titulo_envasado3"> <b>ENVASADO</b></label></div>
                         <div class="subtitle"><label for="">6.2 Entrega Material de Empaque</label></div>
                         <div class="alertas" id="alert_pesaje">
@@ -1197,17 +1197,17 @@
                             </table>
                         </div>
                         <div class="subtitle"><label for="">Cierre</label></div>
-                        <div class="firmas" id="firmas5">
+                        <div class="firmas" id="firmas3">
                             <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
-                            <label id="fecha5" style="font-weight:bold; justify-self: baseline"></label>
+                            <label id="multi_fecha3" style="font-weight:bold; justify-self: baseline"></label>
 
-                            <div id="blank_rea5"></div>
-                            <img id="f_realizo5" src="" alt="firma_usuario" height="130">
-                            <div id="blank_ver5"></div>
-                            <img id="f_verifico5" src="" alt="firma_usuario" height="130">
+                            <div id="multi_blank_realizo3"></div>
+                            <img id="multi_f_realizo3" src="" alt="firma_usuario" height="130">
+                            <div id="multi_blank_verifico3"></div>
+                            <img id="multi_f_verifico3" src="" alt="firma_usuario" height="130">
 
-                            <label id="user_realizo5"></label>
-                            <label id="user_verifico5"></label>
+                            <label id="multi_user_realizo3">Sin Firmar</label>
+                            <label id="multi_user_verifico3">Sin Firmar</label>
                         </div>
                     </div>
                 </div>
@@ -1339,7 +1339,7 @@
                     </div>
 
 
-                    <div id="acondicionamiento1">
+                    <div id="multi-acondicionamiento1">
                         <div class="subtitleProcess"><label for="" id="titulo_acondicionamiento1"> <b>ACONDICIONAMIENTO</b></label></div>
                         <div class="subtitle"><label for="">Entrega Insumos Acondicionamiento</label></div>
 
@@ -1442,7 +1442,7 @@
                             <label id="user_realizoConciliacion"></label>
                         </div>
                     </div>
-                    <div id="acondicionamiento2">
+                    <div id="multi-acondicionamiento2">
                         <div class="subtitleProcess"><label for="" id="titulo_acondicionamiento2"> <b>ACONDICIONAMIENTO</b></label></div>
                         <div class="subtitle"><label for="">Entrega Insumos Acondicionamiento</label></div>
 
@@ -1545,7 +1545,7 @@
                             <label id="user_realizoConciliacion"></label>
                         </div>
                     </div>
-                    <div id="acondicionamiento3">
+                    <div id="multi-acondicionamiento3">
                         <div class="subtitleProcess"><label for="" id="titulo_acondicionamiento3"> <b>ACONDICIONAMIENTO</b></label></div>
                         <div class="subtitle"><label for="">Entrega Insumos Acondicionamiento</label></div>
 

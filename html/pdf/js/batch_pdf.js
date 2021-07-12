@@ -26,11 +26,14 @@ $(document).on("click", ".link-cerrar", function (e) {
 
 /* Mostrar multipresentacion */
 
-$("#multipresentacion2").hide();
-$("#multipresentacion3").hide();
+$("#multi-envasado2").hide();
+$("#multi-envasado3").hide();
 
-$("#acondicionamiento2").hide();
-$("#acondicionamiento3").hide();
+$("#multi-acondicionamiento2").hide();
+$("#multi-acondicionamiento3").hide();
+
+$("#multi-despachos2").hide();
+$("#multi-despachos3").hide();
 
 /* Cargar data */
 
@@ -68,8 +71,15 @@ const multipresentacion = () => {
         info_General();
       } else {
         multi = JSON.parse(data);
-        if (multi.length == 2) $("#multipresentacion2").show();
-        else if (multi.length == 3) $("#multipresentacion3").show();
+        if (multi.length == 2) {
+          $("#multi-envasado2").show();
+          $("#multi-acondicionamiento2").show();
+          $("#multi-despachos2").show();
+        } else if (multi.length == 3) {
+          $("#multi-envasado3").show();
+          $("#multi-acondicionamiento3").show();
+          $("#multi-despachos3").show();
+        }
         j = 1;
         for (let i = 0; i < multi.length; i++) {
           $(`#titulo_envasado${j}`).html(
@@ -265,8 +275,39 @@ const firmas = () => {
           );
         }
       }
+      firmas_multi(info);
     }
   );
+};
+
+const firmas_multi = (info) => {
+  if (multi)
+    for (let i = 0; i < multi.length; i++)
+      for (let j = 0; j < info.length; j++)
+        if (multi[i]["referencia"] == info[j]["ref_multi"]) {
+          $(`#multi_fecha${i + 1}`).html(info[j]["fecha_registro"]);
+          $(`#multi_f_realizo${i + 1}`).prop("src", info[j].realizo);
+          $(`#multi_user_realizo${i + 1}`).html(
+            `Realizó: <b>${info[j].nombre_realizo}</b>`
+          );
+          $(`#multi_blank_realizo${i + 1}`).hide();
+
+          /*  $(`#multi_f_realizo${i + 1}`).prop("hide", true);
+          $(`#multi_blank_realizo${i + 1}`).show();
+          $(`#multi_user_realizo${i + 1}`).html(`Realizó:<b> Sin firmar</b>`); */
+
+          $(`#multi_f_verifico${info[i].modulo}`).prop("src", info[i].verifico);
+          $(`#multi_user_verifico${info[i].modulo}`).html(
+            `Verificó: <b>${info[i].nombre_verifico}</b>`
+          );
+          $(`#multi_blank_verifico${i + 1}`).hide();
+
+          /* $(`#multi_f_verifico${info[i].modulo}`).hide();
+          $(`#multi_blank_ver${info[i].modulo}`).show();
+          $(`#multi_user_verifico${info[i].modulo}`).html(
+            `Verificó: <b>Sin firmar</b>`
+          ); */
+        }
 };
 
 function condiciones_medio() {

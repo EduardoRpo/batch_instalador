@@ -54,10 +54,16 @@ function estadoInicial1($conn, $referencia, $fechaprogramacion)
 
     /* si el instructivo no existe valida que exista el instructivo en Bases*/
     if ($resultPreparacionInstructivos == 0) {
-        $query_buscarInstructivo = "SELECT * FROM instructivo WHERE id_producto = :referencia";
+
+        $query_buscarInstructivo = "SELECT id_nombre_producto as id FROM producto WHERE referencia = :referencia";
         $query = $conn->prepare($query_buscarInstructivo);
         $query->execute(['referencia' => $referencia]);
-        $resultPreparacionInstructivos = $query->fetchAll(PDO::FETCH_ASSOC);
+        $id = $query->fetch(PDO::FETCH_ASSOC);
+
+        $query_buscarInstructivo = "SELECT * FROM instructivos_base WHERE producto = :id";
+        $query = $conn->prepare($query_buscarInstructivo);
+        $query->execute(['id' => $id['id']]);
+        $resultPreparacionInstructivos = $query->rowCount();
     }
 
     /* consolida resultados */

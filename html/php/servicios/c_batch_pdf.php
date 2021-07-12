@@ -228,7 +228,7 @@ if (!empty($_POST)) {
         case 17: //busqueda_firmas
             $batch = $_POST['idBatch'];
 
-            $sql = "SELECT bf.modulo, bf.batch, bf.ref_multi, u.urlfirma as realizo, CONCAt(u.nombre, ' ', u.apellido) as nombre_realizo, us.urlfirma as verifico, CONCAt(us.nombre , ' ' , us.apellido) as nombre_verifico 
+            $sql = "SELECT bf.modulo, bf.batch, bf.ref_multi, u.urlfirma as realizo, CONCAt(u.nombre, ' ', u.apellido) as nombre_realizo, us.urlfirma as verifico, CONCAt(us.nombre , ' ' , us.apellido) as nombre_verifico, bf.fecha_registro 
                     FROM batch_firmas2seccion bf 
                     INNER JOIN usuario u ON u.id = bf.realizo INNER JOIN usuario us ON us.id = bf.verifico 
                     WHERE bf.batch = :batch";
@@ -253,6 +253,5 @@ if (!empty($_POST)) {
             sizeof($data) == 0 ? $data = 0 : $data;
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
             break;
-            
     }
 }

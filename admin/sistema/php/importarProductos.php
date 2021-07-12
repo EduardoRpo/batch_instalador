@@ -134,7 +134,7 @@ if ($tabla == 'producto') {
 		else
 			$conn->query("INSERT INTO $tabla (id, nombre) VALUES ('{$data[0]}', '{$data[1]}')");
 	}
-} else if ($tabla == 'formula' || $tabla == 'formula_f') {
+} else if ($tabla == 'formula') {
 	foreach ($dataList as $data) {
 
 		$sql = "SELECT * FROM $tabla WHERE id_producto = :referencia AND id_materiaprima = :materiaprima";
@@ -162,6 +162,34 @@ if ($tabla == 'producto') {
 					VALUES (:referencia, :materiaprima, AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD'))";
 			$query = $conn->prepare($sql);
 			$query->execute(['referencia' => $data[0], 'materiaprima' => $data[1], 'porcentaje' => $data[2]]);
+		}
+	}
+} else if ($tabla == 'formula_f') {
+	foreach ($dataList as $data) {
+		$sql = "SELECT * FROM $tabla WHERE notif_sanitaria = :notif_sanitaria AND id_materiaprima = :materiaprima";
+		$query = $conn->prepare($sql);
+		$query->execute(['notif_sanitaria' => $data[0], 'materiaprima' => $data[1]]);
+		$rows = $query->rowCount();
+
+		$data[0] = preg_replace("[\n|\r|\n\r]", "", $data[0]);
+		$data[1] = preg_replace("[\n|\r|\n\r]", "", $data[1]);
+		$data[2] = preg_replace("[\n|\r|\n\r]", "", $data[2]);
+		$data[2] = floatval(str_replace(",", ".", $data[2]));
+
+		if ($rows > 0) {
+			$sql = "UPDATE $tabla SET porcentaje = AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') 
+				WHERE id_materiaprima = :id_materiaprima AND notif_sanitaria = :notif_sanitaria";
+			$query = $conn->prepare($sql);
+			$result = $query->execute([
+				'notif_sanitaria' => $data[0],
+				'id_materiaprima' => $data[1],
+				'porcentaje' => $data[2],
+			]);
+		} else {
+			$sql = "INSERT INTO $tabla (notif_sanitaria, id_materiaprima, porcentaje) 
+				VALUES (:notif_sanitaria, :materiaprima, AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD'))";
+			$query = $conn->prepare($sql);
+			$query->execute(['notif_sanitaria' => $data[0], 'materiaprima' => $data[1], 'porcentaje' => $data[2]]);
 		}
 	}
 } else if ($tabla == 'presentacion_comercial') {

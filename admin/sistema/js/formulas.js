@@ -214,6 +214,8 @@ $(document).on("click", ".link-editar", function (e) {
   let alias = $(this).parent().parent().children().eq(2).text();
   let porcentaje = $(this).parent().parent().children().eq(3).text();
   porcentaje = parseInt(porcentaje);
+  if ($(this).hasClass("tr")) tbl = "r";
+  else tbl = "f";
 
   $("#cmbreferencia").val("");
   $("#frmadFormulas").slideDown();
@@ -233,6 +235,9 @@ $(document).on("click", ".link-borrar", function (e) {
 
   let ref_materiaprima = $(this).parent().parent().children().first().text();
   let ref_producto = $("#cmbReferenciaProductos").val();
+
+  if ($(this).hasClass("tr")) tbl = "r";
+  else tbl = "f";
 
   var confirm = alertify
     .confirm(
@@ -283,7 +288,7 @@ function cargarTablaFormulas(referencia) {
       },
       {
         defaultContent:
-          "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>",
+          "<a href='#' <i class='large material-icons link-editar tr' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar tr' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>",
       },
     ],
     columnDefs: [{ width: "10%", targets: 0 }],
@@ -329,7 +334,7 @@ function cargar_formulas_f(referencia) {
       },
       {
         defaultContent:
-          "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a><a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>",
+          "<a href='#' <i class='large material-icons link-editar tf' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a><a href='#' <i class='large material-icons link-borrar tf' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>",
       },
     ],
     columnDefs: [{ width: "10%", targets: 0 }],

@@ -57,34 +57,64 @@ switch ($op) {
 
     case 6: // Guardar data Formula
         if (!empty($_POST)) {
-            //$editar = $_POST['editar'];
             $id_producto = $_POST['ref_producto'];
             $id_materiaprima = $_POST['ref_materiaprima'];
             $porcentaje = $_POST['porcentaje'];
             $tbl = $_POST['tbl'];
             $tbl == 'r' ? $tbl = 'formula' : $tbl = 'formula_f';
 
-            $sql = "SELECT * FROM $tbl WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
-            $query = $conn->prepare($sql);
-            $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto]);
-            $rows = $query->rowCount();
 
-            if ($rows > 0) {
-                $sql = "UPDATE $tbl SET porcentaje = AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
+            if ($tbl == 'formula') {
+                $sql = "SELECT * FROM $tbl WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
                 $query = $conn->prepare($sql);
-                $result = $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto, 'porcentaje' => $porcentaje]);
-                echo '3';
-            } else {
-                $sql = "INSERT INTO $tbl (id_producto, id_materiaprima, porcentaje) VALUES (:id_producto, :id_materiaprima, AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') )";
-                $query = $conn->prepare($sql);
-                $result = $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto, 'porcentaje' => $porcentaje]);
+                $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto]);
+                $rows = $query->rowCount();
+                if ($rows > 0) {
+                    $sql = "UPDATE $tbl SET porcentaje = AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
+                    $query = $conn->prepare($sql);
+                    $result = $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto, 'porcentaje' => $porcentaje]);
+                    echo '3';
+                } else {
+                    $sql = "INSERT INTO $tbl (id_producto, id_materiaprima, porcentaje) VALUES (:id_producto, :id_materiaprima, AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') )";
+                    $query = $conn->prepare($sql);
+                    $result = $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto, 'porcentaje' => $porcentaje]);
 
-                /* Valida si existen batch sin formula y actualiza */
-                if ($tbl == 'materia_prima') {
-                    $result = estadoInicial($conn, $id_producto, $fechaprogramacion = "");
-                    $result = ActualizarBatch($conn, $result, $id_producto);
+                    /* Valida si existen batch sin formula y actualiza */
+                    if ($tbl == 'materia_prima') {
+                        $result = estadoInicial($conn, $id_producto, $fechaprogramacion = "");
+                        $result = ActualizarBatch($conn, $result, $id_producto);
+                    }
+                    if ($result) echo '1';
                 }
-                if ($result) echo '1';
+            } else {
+
+                $sql = "SELECT id_notificacion_sanitaria as id FROM producto WHERE referencia = :referencia";
+                $query = $conn->prepare($sql);
+                $query->execute(['referencia' => $id_producto]);
+                $notif_sanitaria = $query->fetch(PDO::FETCH_ASSOC);
+
+                $sql = "SELECT * FROM $tbl WHERE id_materiaprima = :id_materiaprima AND notif_sanitaria = :notif_sanitaria";
+                $query = $conn->prepare($sql);
+                $query->execute(['id_materiaprima' => $id_materiaprima, 'notif_sanitaria' => $notif_sanitaria['id']]);
+                $rows = $query->rowCount();
+
+                if ($rows > 0) {
+                    $sql = "UPDATE $tbl SET porcentaje = AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') WHERE id_materiaprima = :id_materiaprima AND notif_sanitaria = :notif_sanitaria";
+                    $query = $conn->prepare($sql);
+                    $result = $query->execute(['id_materiaprima' => $id_materiaprima, 'notif_sanitaria' => $notif_sanitaria['id'], 'porcentaje' => $porcentaje]);
+                    echo '3';
+                } else {
+                    $sql = "INSERT INTO $tbl (notif_sanitaria, id_materiaprima, porcentaje) VALUES (:notif_sanitaria, :id_materiaprima, AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') )";
+                    $query = $conn->prepare($sql);
+                    $result = $query->execute(['id_materiaprima' => $id_materiaprima, 'notif_sanitaria' => $notif_sanitaria['id'], 'porcentaje' => $porcentaje]);
+
+                    /* Valida si existen batch sin formula y actualiza */
+                    if ($tbl == 'materia_prima') {
+                        $result = estadoInicial($conn, $id_producto, $fechaprogramacion = "");
+                        $result = ActualizarBatch($conn, $result, $id_producto);
+                    }
+                    if ($result) echo '1';
+                }
             }
         }
         break;
@@ -130,9 +160,22 @@ switch ($op) {
         $tbl = $_POST['tbl'];
         $tbl == 'r' ? $tbl = 'formula' : $tbl = 'formula_f';
 
-        $sql = "DELETE FROM $tbl WHERE id_producto = :ref_producto AND id_materiaprima = :ref_materiaprima";
-        $query = $conn->prepare($sql);
-        $result = $query->execute(['ref_producto' => $ref_producto, 'ref_materiaprima' => $ref_materiaprima]);
+        if ($tbl == 'formula') {
+            $sql = "DELETE FROM $tbl WHERE id_producto = :ref_producto AND id_materiaprima = :ref_materiaprima";
+            $query = $conn->prepare($sql);
+            $result = $query->execute(['ref_producto' => $ref_producto, 'ref_materiaprima' => $ref_materiaprima]);
+        } else {
+
+            $sql = "SELECT id_notificacion_sanitaria as id FROM producto WHERE referencia = :referencia";
+            $query = $conn->prepare($sql);
+            $query->execute(['referencia' => $ref_producto]);
+            $notif_sanitaria = $query->fetch(PDO::FETCH_ASSOC);
+
+            $sql = "DELETE FROM $tbl WHERE notif_sanitaria = :notif_sanitaria AND id_materiaprima = :ref_materiaprima";
+            $query = $conn->prepare($sql);
+            $result = $query->execute(['notif_sanitaria' => $notif_sanitaria['id'], 'ref_materiaprima' => $ref_materiaprima]);
+        }
+
 
         if ($result) {
             echo '1';
@@ -144,14 +187,17 @@ switch ($op) {
         break;
     case 9: //Listar Formula fantasma
         $referencia = $_POST['referencia'];
-        /* SELECT f.id_producto, f.id_materiaprima as referencia, m.alias as alias, m.nombre, cast(AES_DECRYPT(porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje 
-                FROM formula f INNER JOIN materia_prima m ON f.id_materiaprima=m.referencia  */
-        /* WHERE f.id_producto = '$referencia' */
-        $sql = "SELECT f.id_producto, f.id_materiaprima as referencia, m.nombre as nombre, m.alias as alias, cast(AES_DECRYPT(f.porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje
-                FROM formula_f f INNER JOIN materia_prima_f m ON f.id_materiaprima = m.referencia 
-                WHERE f.id_producto = :referencia";
+
+        $sql = "SELECT id_notificacion_sanitaria as id FROM producto WHERE referencia = :referencia";
         $query = $conn->prepare($sql);
         $query->execute(['referencia' => $referencia]);
+        $notif_sanitaria = $query->fetch(PDO::FETCH_ASSOC);
+
+        $sql = "SELECT f.id_materiaprima as referencia, m.nombre as nombre, m.alias as alias, cast(AES_DECRYPT(f.porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje 
+                FROM formula_f f INNER JOIN materia_prima_f m ON f.id_materiaprima = m.referencia 
+                WHERE notif_sanitaria = :notificacion";
+        $query = $conn->prepare($sql);
+        $query->execute(['notificacion' => $notif_sanitaria['id']]);
         $data = $query->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
 
