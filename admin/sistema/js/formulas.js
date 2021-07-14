@@ -213,7 +213,7 @@ $(document).on("click", ".link-editar", function (e) {
   let mp = $(this).parent().parent().children().eq(1).text();
   let alias = $(this).parent().parent().children().eq(2).text();
   let porcentaje = $(this).parent().parent().children().eq(3).text();
-  porcentaje = parseInt(porcentaje);
+  porcentaje = parseFloat(porcentaje);
   if ($(this).hasClass("tr")) tbl = "r";
   else tbl = "f";
 
