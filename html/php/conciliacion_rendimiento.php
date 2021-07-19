@@ -6,13 +6,14 @@ if (!empty($_POST)) {
 
     $op = $_POST['operacion'];
     $batch =  $_POST['idBatch'];
+    $modulo = $_POST['modulo'];
 
     if (!empty($_POST['ref_multi']))
         $referencia = $_POST['ref_multi'];
 
     switch ($op) {
         case 1: //almacenar conciliacion
-            $retencion =  $_POST['retencion'];
+            $modulo == 6 ? $retencion =  $_POST['retencion'] : $retencion = 0;
             conciliacionRendimientoRealizo($conn);
 
             /* Almacenar muestras retencion */
@@ -36,22 +37,24 @@ if (!empty($_POST)) {
 
             break;
 
-        case 2:
+        case 2: // cargar batch Conciliacion
             $sql = "SELECT c.unidades_producidas, c.muestras_retencion, c.mov_inventario, u.urlfirma 
                     FROM batch_conciliacion_rendimiento c INNER JOIN usuario u ON u.id = c.entrego
-                    WHERE batch = :batch AND ref_multi = :referencia";
+                    WHERE batch = :batch AND ref_multi = :referencia AND modulo = :modulo";
             $query = $conn->prepare($sql);
-            $query->execute(['batch' => $batch, 'referencia' => $referencia,]);
+            $query->execute(['batch' => $batch, 'referencia' => $referencia, 'modulo' => $modulo]);
+            $data = $query->fetch(PDO::FETCH_ASSOC);
 
-            while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
-                $arreglo[] = $data;
-            }
-            if (empty($arreglo)) {
-                echo '0';
-                exit();
+            if (empty($data)) {
+                $sql = "SELECT SUM(unidades) AS unidades_producidas, SUM(retencion) AS muestras_retencion, movimiento AS mov_inventario
+                        FROM batch_conciliacion_parciales 
+                        WHERE batch = :batch AND ref_multi = :referencia AND modulo = :modulo";
+                $query = $conn->prepare($sql);
+                $query->execute(['batch' => $batch, 'referencia' => $referencia, 'modulo' => $modulo]);
+                $data = $query->fetch(PDO::FETCH_ASSOC);
             }
 
-            echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+            echo json_encode($data, JSON_UNESCAPED_UNICODE);
 
             break;
 
@@ -91,21 +94,9 @@ if (!empty($_POST)) {
                         INNER JOIN usuario u ON u.id = c.entrego
                         WHERE batch = :batch AND ref_multi = :referencia AND modulo = :modulo";
             $query = $conn->prepare($sql);
-            $query->execute([
-                'batch' => $batch,
-                'referencia' => $referencia,
-                'modulo' => $modulo,
-            ]);
-
-            while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
-                $arreglo[] = $data;
-            }
-            if (empty($arreglo)) {
-                echo '0';
-                exit();
-            }
-
-            echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+            $query->execute(['batch' => $batch, 'referencia' => $referencia, 'modulo' => $modulo]);
+            $data = $query->fetchAll(PDO::FETCH_ASSOC);
+            echo json_encode($data, JSON_UNESCAPED_UNICODE);
 
             break;
 

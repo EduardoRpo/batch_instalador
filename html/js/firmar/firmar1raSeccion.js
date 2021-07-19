@@ -49,7 +49,7 @@ function preparar(datos) {
     if (modulo === 9) firmar2daSeccion(info);
     if (modulo === 10) guardarLiberacion(info);
     else if (modulo !== 8 || modulo !== 9) guardar_preguntas(info[0].id);
-    firmar(info);
+    if (modulo != 7) firmar(info);
   }
 
   if (btn_id == "firma2") {
@@ -88,8 +88,8 @@ function preparar(datos) {
   }
 
   if (btn_id == "firma7") {
-    registrar_conciliacion(info[0].id);
-    firmar(info);
+    registrar_conciliacion(info);
+    //firmar(info);
   }
 }
 

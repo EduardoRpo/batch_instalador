@@ -360,6 +360,14 @@ include('modal/image.php')
                       <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Conciliación Rendimiento</h3>
                     </div>
                   </div>
+
+                  <div class="alert-input">
+                    <div class="alert alert-danger ajuste_alert" role="alert" id="alert_entregas1">
+                      Total unidades entregadas a la fecha
+                    </div>
+                    <input type="text" class="form-control centrado" id="parcialesUnidadesProducidas1" style="width: 100px;height:fit-content" readonly>
+                  </div>
+
                   <div class="conciliacionrendimiento">
 
                     <div class="conciliacionrendimiento__group">
@@ -367,7 +375,7 @@ include('modal/image.php')
                       <input type="number" class="form-control centrado" id="txtUnidadesProducidas1" min="1" onkeyup="conciliacionRendimiento();"> <!-- Este valor se valide con lo envasado por el usuario en envasado txtEnvasado1 Alert(Las unidades producidads son diferentes a las envasadas, notificar al jefe de producción) -->
                     </div>
 
-                    <div class="conciliacionrendimiento__group">
+                    <div class=" conciliacionrendimiento__group">
                       <label for="recipient-name" class="col-form-label">No Muestras de Retención:</label>
                       <input type="number" class="form-control centrado" id="txtMuestrasRetencion1" min="1" onkeyup="conciliacionRendimiento();"><!-- impresion etiquetas para muestras (No produccion, lote, cod barras, cod producto, fecha ) -->
                     </div>
@@ -387,13 +395,13 @@ include('modal/image.php')
 
                     <div class="conciliacionrendimiento__group">
                       <label for="recipient-name" class="col-form-label">Rendimiento Producto:</label>
-                      <input type="text" class="form-control centrado" id="rendimientoProducto1" min="1">
+                      <input type="text" class="form-control centrado" id="rendimientoProducto1" min="1" readonly>
                     </div>
 
 
                     <div class="conciliacionrendimiento__group">
                       <label for="recipient-name" class="col-form-label">Porcentaje Unidades:</label>
-                      <input type="text" class="form-control centrado" id="txtPorcentaje-Unidades1" min="1">
+                      <input type="text" class="form-control centrado" id="txtPorcentaje-Unidades1" min="1" readonly>
                       <input type="text" class="form-control centrado" id="unidadesProgramadas1" hidden>
                     </div>
 
@@ -426,39 +434,7 @@ include('modal/image.php')
                       <button type="button" class="btn waves-effect waves-light btn-danger conciliacion_realizado1" id="conciliacion_realizado1" onclick="cargar(this, 'firma7')" style="width: 180px; height: 38px;">Firmar</button>
                     </div>
                   </div>
-
-
-                  <!-- <div class="firma mt-5 mb-5 mr-4">
-                    <label for="recipient-name" class="col-form-label entrego-acon">Entregó</label>
-                    <input type="text" class="form-control conciliacion_realizado1" id="conciliacion_realizado1" style="width: 180px" readonly>
-
-                    <button type="button" class="btn waves-effect waves-light btn-danger conciliacion_realizado1 " id="conciliacion_realizado1" onclick="cargar(this, 'firma7')" style="width: 180px; height: 38px;">Firmar</button>
-                  </div> -->
-
-                  <!-- <div class="row" style="margin: 1%"> -->
-                  <!--          <div class="col-md-12 col-2 align-self-center">
-                    <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Almacen Despachos</h3>
-                  </div>
-                   <div class="almacen-despachos">
-                    <label for="recipient-name"  class="col-form-label">Número del Traslado ofimatico</label>
-                    <input type="text" class="form-control" id="Notraslado">
-                    <label for="recipient-name" class="col-form-label" style="display: flex; justify-content:flex-end">Recibió</label>
-                    <input type="text" class="form-control" id="recipient2-name">
-
-                    input total cajas y total entrega cliente
-                    informativo input muestras de retencion
-                    input total a facturar unidades validadas + muestras de retencion
-
-        
-                </div> -->
-                  <!-- <div class="row buttons-group-container" style="margin: 1%">
-                  <div>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" onclick="" ;">Aceptar</button>
-                  </div>
-                </div> -->
                 </div>
-
               </div>
             </div>
 
@@ -626,6 +602,14 @@ include('modal/image.php')
                       <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Conciliación Rendimiento</h3>
                     </div>
                   </div>
+
+                  <div class="alert-input">
+                    <div class="alert alert-danger ajuste_alert" role="alert" id="alert_entregas2">
+                      Total unidades entregadas a la fecha
+                    </div>
+                    <input type="text" class="form-control centrado" id="parcialesUnidadesProducidas2" style="width: 100px;height:fit-content" readonly>
+                  </div>
+
                   <div class="conciliacionrendimiento">
 
                     <div class="conciliacionrendimiento__group">
@@ -691,41 +675,9 @@ include('modal/image.php')
                       <button type="button" class="btn waves-effect waves-light btn-danger conciliacion_realizado2" id="conciliacion_realizado2" onclick="cargar(this, 'firma7')" style="width: 180px; height: 38px;">Firmar</button>
                     </div>
                   </div>
-
-                  <!-- <div class="firma mt-5 mb-5 mr-4">
-                    <label for="recipient-name" class="col-form-label entrego-acon">Entregó</label>
-                    <input type="text" class="form-control conciliacion_realizado2" id="conciliacion_realizado2" style="width: 180px" readonly>
-
-                    <button type="button" class="btn waves-effect waves-light btn-danger conciliacion_realizado2" id="conciliacion_realizado2" onclick="cargar(this, 'firma7')" style="width: 180px; height: 38px;">Firmar</button>
-                  </div> -->
-
-                  <!-- <div class="row" style="margin: 1%"> -->
-                  <!--          <div class="col-md-12 col-2 align-self-center">
-                    <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Almacen Despachos</h3>
-                  </div>
-                   <div class="almacen-despachos">
-                    <label for="recipient-name"  class="col-form-label">Número del Traslado ofimatico</label>
-                    <input type="text" class="form-control" id="Notraslado">
-                    <label for="recipient-name" class="col-form-label" style="display: flex; justify-content:flex-end">Recibió</label>
-                    <input type="text" class="form-control" id="recipient2-name">
-
-                    input total cajas y total entrega cliente
-                    informativo input muestras de retencion
-                    input total a facturar unidades validadas + muestras de retencion
-
-        
-                </div> -->
-                  <!-- <div class="row buttons-group-container" style="margin: 1%">
-                  <div>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" onclick="" ;">Aceptar</button>
-                  </div>
-                </div> -->
                 </div>
-
               </div>
             </div>
-
           </div>
 
           <div class="card" id="acondicionamiento3">
@@ -889,8 +841,15 @@ include('modal/image.php')
                       <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Conciliación Rendimiento</h3>
                     </div>
                   </div>
-                  <div class="conciliacionrendimiento">
 
+                  <div class="alert-input">
+                    <div class="alert alert-danger ajuste_alert" role="alert" id="alert_entregas3">
+                      Total unidades entregadas a la fecha
+                    </div>
+                    <input type="text" class="form-control centrado" id="parcialesUnidadesProducidas3" style="width: 100px;height:fit-content" readonly>
+                  </div>
+
+                  <div class="conciliacionrendimiento">
                     <div class="conciliacionrendimiento__group">
                       <label for="recipient-name" class="col-form-label">Unidades Producidas:</label>
                       <input type="number" class="form-control centrado" id="txtUnidadesProducidas3" min="1" onkeyup="conciliacionRendimiento();"> <!-- Este valor se valide con lo envasado por el usuario en envasado txtEnvasado1 Alert(Las unidades producidads son diferentes a las envasadas, notificar al jefe de producción) -->

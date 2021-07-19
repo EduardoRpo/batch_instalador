@@ -206,11 +206,31 @@ function conciliacionRendimientoRealizo($conn)
 
     if ($rows == 0) {
         $unidades =  $_POST['unidades'];
-        $retencion =  $_POST['retencion'];
+        $modulo == 6 ? $retencion =  $_POST['retencion'] : $retencion = 0;
         $movimiento =  $_POST['mov'];
         $cajas = $_POST['cajas'];
         $modulo = $_POST['modulo'];
         $realizo = $_POST['realizo'];
+
+        $sql = "SELECT SUM(unidades) as unidades FROM batch_conciliacion_parciales WHERE modulo =:modulo AND batch = :batch AND ref_multi = :ref_multi";
+        $query = $conn->prepare($sql);
+        $query->execute(['modulo' => $modulo, 'batch' => $batch, 'ref_multi' => $referencia]);
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+
+        $sql = "INSERT INTO batch_conciliacion_parciales (unidades, cajas, movimiento, modulo, batch, ref_multi, realizo)
+                VALUES(:unidades, :cajas, :movimiento, :modulo, :batch, :ref_multi, :realizo)";
+        $query = $conn->prepare($sql);
+        $query->execute([
+            'unidades' => $unidades,
+            'cajas' => $cajas,
+            'movimiento' => $movimiento,
+            'modulo' => $modulo,
+            'batch' => $batch,
+            'ref_multi' => $referencia,
+            'realizo' => $realizo,
+        ]);
+
+        $unidades = intval($unidades) + intval($data['unidades']);
 
         $sql = "INSERT INTO batch_conciliacion_rendimiento 
                 SET unidades_producidas = :unidades, muestras_retencion = :retencion, mov_inventario = :movimiento, cajas = :cajas, 

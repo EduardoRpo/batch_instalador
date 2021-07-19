@@ -11189,3 +11189,25 @@ table.dataTable tbody td {
   grid-column-start: 1;
   grid-column-end: 4;
 }
+
+.subtitle {
+  background: lightslategray;
+  color: white;
+  text-align: center;
+  margin-left: 15px;
+  margin-right: 15px;
+  font-size: 17px;
+}
+
+.ajuste_alert {
+  margin-left: 30px;
+  width: max-content;
+  justify-self: flex-end;
+  padding: 6px;
+}
+
+.alert-input {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 1em;
+}

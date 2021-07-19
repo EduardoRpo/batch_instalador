@@ -26,7 +26,7 @@ if (!empty($_POST)) {
 
 			foreach ($dataList as $data) {
 				$data[0] = preg_replace("[\n|\r|\n\r]", "", $data[0]);
-				
+
 				$conn->query("INSERT INTO modulo (modulo) 
 					  VALUES ('{$data[0]}')");
 			}
@@ -38,7 +38,7 @@ if (!empty($_POST)) {
 				$data[0] = preg_replace("[\n|\r|\n\r]", "", $data[0]);
 				$data[1] = preg_replace("[\n|\r|\n\r]", "", $data[1]);
 				$data[2] = preg_replace("[\n|\r|\n\r]", "", $data[2]);
-				
+
 				$conn->query("INSERT INTO condicionesmedio_tiempo (id_modulo, t_min, t_max) 
 				  VALUES ('{$data[0]}', '{$data[1]}', '{$data[2]}')");
 			}
@@ -59,7 +59,7 @@ if (!empty($_POST)) {
 			foreach ($dataList as $data) {
 				$data[0] = preg_replace("[\n|\r|\n\r]", "", $data[0]);
 				$data[1] = preg_replace("[\n|\r|\n\r]", "", $data[1]);
-				
+
 				$conn->query("INSERT INTO equipos (descripcion, tipo ) 
 				  VALUES ('{$data[0]}', '{$data[1]}')");
 			}
@@ -69,7 +69,7 @@ if (!empty($_POST)) {
 
 			foreach ($dataList as $data) {
 				$data[0] = preg_replace("[\n|\r|\n\r]", "", $data[0]);
-				
+
 				$conn->query("INSERT INTO preguntas (pregunta ) 
 					  VALUES ('{$data[0]}')");
 			}
@@ -81,7 +81,7 @@ if (!empty($_POST)) {
 				$data[0] = preg_replace("[\n|\r|\n\r]", "", $data[0]);
 				$data[1] = preg_replace("[\n|\r|\n\r]", "", $data[1]);
 				$data[2] = preg_replace("[\n|\r|\n\r]", "", $data[2]);
-				
+
 				$conn->query("INSERT INTO modulo_pregunta (id_pregunta, resp, id_modulo ) 
 						  VALUES ('{$data[0]}', '{$data[1]}', '{$data[2]}')");
 			}
@@ -91,7 +91,7 @@ if (!empty($_POST)) {
 
 			foreach ($dataList as $data) {
 				$data[0] = preg_replace("[\n|\r|\n\r]", "", $data[0]);
-				
+
 				$conn->query("INSERT INTO tanques (capacidad) 
 						  VALUES ('{$data[0]}')");
 			}
@@ -99,9 +99,11 @@ if (!empty($_POST)) {
 
 		case '8': // insertar en la BD Materia Prima
 
+			$tbl = $_POST['tbl'];
+			$tbl == '1' ? $tbl = 'materia_prima' : $tbl = 'materia_prima_f';
 			foreach ($dataList as $data) {
 
-				$sql = "SELECT * FROM materia_prima WHERE referencia = :referencia";
+				$sql = "SELECT * FROM $tbl WHERE referencia = :referencia";
 				$query = $conn->prepare($sql);
 				$query->execute(['referencia' => $data[0]]);
 				$rows = $query->rowCount();
@@ -111,9 +113,9 @@ if (!empty($_POST)) {
 				$alias = ucfirst(mb_strtolower($data[2], "utf-8"));
 
 				if ($rows > 0)
-					$conn->query("UPDATE materia_prima SET nombre = '{$nombre}', alias = '{$alias}' WHERE id = '{$referencia}' ");
+					$conn->query("UPDATE $tbl SET nombre = '{$nombre}', alias = '{$alias}' WHERE id = '{$referencia}' ");
 				else
-					$conn->query("INSERT INTO materia_prima (referencia, nombre, alias) VALUES ('{$referencia}', '{$nombre}', '{$alias}')");
+					$conn->query("INSERT INTO $tbl (referencia, nombre, alias) VALUES ('{$referencia}', '{$nombre}', '{$alias}')");
 			}
 			break;
 
@@ -123,7 +125,7 @@ if (!empty($_POST)) {
 				$data[0] = preg_replace("[\n|\r|\n\r]", "", $data[0]);
 				$data[1] = preg_replace("[\n|\r|\n\r]", "", $data[1]);
 				$data[2] = preg_replace("[\n|\r|\n\r]", "", $data[2]);
-				
+
 				$conn->query("INSERT INTO instructivo_preparacion (pasos, tiempo, id_producto) 
 								  VALUES ('{$data[0]}', '{$data[1]}', '{$data[2]}')");
 			}

@@ -228,7 +228,7 @@ function cargar(btn, idbtn) {
 
     if (conciliacion == 0) {
       alertify.set("notifier", "position", "top-right");
-      alertify.error("Ingrese todos los datos");
+      alertify.error("Campos vacios o con valor cero");
       return false;
     }
   }
@@ -316,18 +316,20 @@ Texto (Existe una diferencia entre las unidades envasadas y las
  */
 
 function conciliacionRendimiento() {
+  $(`#txtNoMovimiento${id_multi}`).val("");
   let unidadEmpaque = $(`#unidad_empaque${id_multi}`).val(); //se debe cargar desde envasado
   if (unidadEmpaque === "0") {
     alertify.set("notifier", "position", "top-right");
     alertify.error(
       "Valide las unidades de empaque del producto con el administrador, presenta valor cero (0)"
     );
-    $("#txtTotal-Cajas1").val("Valide unidades de Empaque");
+    $(`#txtTotal-Cajas${id_multi}`).val("Valide unidades de Empaque");
     //return false;
   }
   let unidadesProducidas = parseInt(
     $(`#txtUnidadesProducidas${id_multi}`).val()
   );
+
   let retencion = $(`#txtMuestrasRetencion${id_multi}`).val();
   let unidadesProgramadas = parseInt(
     $(`#unidadesProgramadas${id_multi}`).val()
@@ -335,13 +337,13 @@ function conciliacionRendimiento() {
 
   if (retencion == undefined || retencion == "") retencion = 0;
 
-  isNaN(unidadesProducidas) ? (unidadesProducidas = 0) : unidadesProducidas;
+  isNaN(unidadesProducidas)
+    ? (unidadesProducidas = $(`#parcialesUnidadesProducidas${id_multi}`).val())
+    : unidadesProducidas;
 
   if (parseInt(retencion) > parseInt(unidadesProducidas)) {
     alertify.set("notifier", "position", "top-right");
-    alertify.error(
-      "La cantidad de muestras de retención no debe ser superior a la cantidad de Unidades Producidas"
-    );
+    alertify.error("Muestras de retención mayor a las Unidades Producidas");
     var totalCajas = "";
     var entregarBodega = "";
   } else {
@@ -365,40 +367,97 @@ function rendimiento_producto() {
   total = $(`#in_tamano_lote`).val(); //total de la presentacion
   total = total.replace(".", "");
 
+  cantidad == ""
+    ? (cantidad = $(`#parcialesUnidadesProducidas${id_multi}`).val())
+    : cantidad;
+
   let rendimiento = (presentacion * cantidad * densidad) / 1000;
   rendimiento = ((rendimiento / total) * 100).toFixed(2) + "%";
   $(`#rendimientoProducto${id_multi}`).val(rendimiento);
 }
 
-function registrar_conciliacion(idfirma) {
+function registrar_conciliacion(info) {
+  let operacion = 1;
   let unidades = $(`#txtUnidadesProducidas${id_multi}`).val();
   let retencion = $(`#txtMuestrasRetencion${id_multi}`).val();
   let mov = $(`#txtNoMovimiento${id_multi}`).val();
   let cajas = $(`#txtTotal-Cajas${id_multi}`).val();
-  let operacion = 1;
+  data = {
+    operacion,
+    unidades,
+    retencion,
+    cajas,
+    mov,
+    modulo,
+    idBatch,
+    ref_multi,
+    realizo: info[0].id,
+  };
+  alertify
+    .confirm(
+      "Entrega",
+      "¿Entrega parcial?",
+      function () {
+        $.post(
+          "../../../html/php/servicios/parciales.php",
+          data,
+          function (data, textStatus, jqXHR) {
+            data = JSON.parse(data);
+            if (textStatus == "success") {
+              if (data.length == 1) imprimirEtiquetasRetencion();
 
-  $.post(
-    "../../html/php/conciliacion_rendimiento.php",
-    (data = {
-      operacion,
-      unidades,
-      retencion,
-      cajas,
-      mov,
-      modulo,
-      idBatch,
-      ref_multi,
-      realizo: idfirma,
-    }),
-    function (data, textStatus, jqXHR) {
-      if (textStatus == "success") {
-        imprimirEtiquetasRetencion();
-        alertify.set("notifier", "position", "top-right");
-        alertify.success("Conciliación registrada satisfactoriamente");
-        $(`.conciliacion_realizado${id_multi}`)
-          .css({ background: "lightgray", border: "gray" })
-          .prop("disabled", true);
+              alertify.set("notifier", "position", "top-right");
+              alertify.success(
+                "Conciliación parcial registrada satisfactoriamente"
+              );
+              let suma = 0;
+              data.forEach((element) => {
+                suma = suma + element.unidades;
+              });
+              alertify.alert(
+                "Entrega Parcial",
+                `Total Unidades Entregadas: <b>${suma}</b>`
+              );
+              $(`#parcialesUnidadesProducidas${id_multi}`).val(suma);
+              $(`#txtMuestrasRetencion${id_multi}`).prop("readonly", true);
+              $(`#txtUnidadesProducidas${id_multi}`).val("");
+              conciliacionRendimiento();
+            }
+          }
+        );
+      },
+      function () {
+        $.post(
+          "../../html/php/conciliacion_rendimiento.php",
+          data,
+          function (data, textStatus, jqXHR) {
+            if (textStatus == "success") {
+              //imprimirEtiquetasRetencion();
+              alertify.set("notifier", "position", "top-right");
+              alertify.success("Conciliación registrada satisfactoriamente");
+              $(`.conciliacion_realizado${id_multi}`)
+                .css({ background: "lightgray", border: "gray" })
+                .prop("disabled", true);
+              final = parseFloat($(`#txtUnidadesProducidas${id_multi}`).val());
+              parciales = parseFloat(
+                $(`#parcialesUnidadesProducidas${id_multi}`).val()
+              );
+              $(`#txtUnidadesProducidas${id_multi}`).val(final + parciales);
+              $(`#parcialesUnidadesProducidas${id_multi}`).val(
+                final + parciales
+              );
+              $(`#txtMuestrasRetencion${id_multi}`).prop("disable", "true");
+              $(`#alert_entregas${id_multi}`).removeClass("alert-danger");
+              $(`#alert_entregas${id_multi}`).addClass("alert-success");
+              conciliacionRendimiento();
+              firmar(info);
+            }
+          }
+        );
       }
-    }
-  );
+    )
+    .set("labels", {
+      ok: "Si, Parcial",
+      cancel: "No, Total",
+    });
 }

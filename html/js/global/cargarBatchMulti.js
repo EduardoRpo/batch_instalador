@@ -162,16 +162,28 @@ function cargar_conciliacion() {
   let operacion = 2;
   $.post(
     "../../html/php/conciliacion_rendimiento.php",
-    (data = { operacion, idBatch, ref_multi }),
+    (data = { operacion, idBatch, ref_multi, modulo }),
     function (data, textStatus, jqXHR) {
       if (textStatus == "success") {
         let info = JSON.parse(data);
         if (data == 0) return false;
-        $(`#txtUnidadesProducidas${id_multi}`).val(info[0].unidades_producidas);
-        $(`#txtMuestrasRetencion${id_multi}`).val(info[0].muestras_retencion);
-        $(`#txtNoMovimiento${id_multi}`).val(info[0].mov_inventario);
+        $(`#parcialUnidadesProducidas${id_multi}`).val(
+          info.unidades_producidas
+        );
+        $(`#parcialesUnidadesProducidas${id_multi}`).val(
+          info.unidades_producidas
+        );
+        if (info.muestras_retencion) {
+          $(`#txtMuestrasRetencion${id_multi}`).prop("readonly", true);
+          $(`#txtMuestrasRetencion${id_multi}`).val(info.muestras_retencion);
+        }
+        $(`#txtNoMovimiento${id_multi}`).val(info.mov_inventario);
         conciliacionRendimiento();
-        firmado(info[0].urlfirma, 7);
+        if (info.urlfirma) {
+          $(`#alert_entregas${id_multi}`).removeClass("alert-danger");
+          $(`#alert_entregas${id_multi}`).addClass("alert-success");
+          firmado(info.urlfirma, 7);
+        }
       } else {
         return false;
       }

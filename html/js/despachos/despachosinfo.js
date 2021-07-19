@@ -1,7 +1,6 @@
-/* let presentacion;
-let a = 0, b = 0, c = 0; */
-//let id;
 modulo = 7;
+let flag = 0;
+
 /* Carga el modal para la autenticacion */
 
 cargar = (btn, idbtn) => {
@@ -107,95 +106,140 @@ function cargar_despacho() {
   let op = 1;
   $.post(
     "../../html/php/despachos.php",
-    (data = { op, idBatch, ref_multi }),
+    (data = { op, idBatch, ref_multi, modulo }),
     function (data, textStatus, jqXHR) {
       let info = JSON.parse(data);
-
       if (info == 0) return false;
-      unidades = parseFloat($(`#unidad_empaque${id_multi}`).val());
-      $(`#unidades_recibidas_acond${id_multi}`).val(info.unidades_producidas);
+      unidades_empaque = parseFloat($(`#unidad_empaque${id_multi}`).val());
+
+      let unidades = 0,
+        cajas = 0,
+        retencion = 0;
+      let unidadestotales = "";
+      let number, myString;
+
+      info.forEach((element) => {
+        if (element.modulo == 6) {
+          unidades = unidades + element.unidades;
+          cajas = cajas + element.cajas;
+          retencion = retencion + element.retencion;
+        }
+      });
+
+      unidades_empaque = parseFloat($(`#unidad_empaque${id_multi}`).val());
+      for (let i = 0; i < info.length; i++) {
+        if (info[i]["modulo"] == 6) {
+          number = info[i]["unidades"];
+          cjas = info[i]["cajas"];
+          myString = `Parcial ${
+            i + 1
+          }: (${number.toString()} unidades) (${cjas.toString()} cajas) (Movimiento). `;
+          unidadestotales = unidadestotales + " " + myString;
+        }
+      }
+
+      $(`#unidades_recibidas_acond${id_multi}`).val(unidades);
       $(`#cajas_acond${id_multi}`).val(
-        (
-          (info.unidades_producidas - info.muestras_retencion) /
-          unidades
-        ).toFixed(0)
+        ((unidades - retencion) / unidades_empaque).toFixed(0)
       );
-      $(`#mov_inventario_acond${id_multi}`).val(info.mov_inventario);
-      $(`#mestras_retencion_acond${id_multi}`).val(info.muestras_retencion);
+      $(`#mov_inventario_acond${id_multi}`).val(info[0].movimiento);
+      $(`#mestras_retencion_acond${id_multi}`).val(retencion);
+      $(`#parciales${id_multi}`).val(unidadestotales);
+
+      /* Despachos */
+      unidades = 0;
+      cajas = 0;
+      for (let i = 0; i < info.length; i++) {
+        if (info[i]["modulo"] == 7) {
+          unidades = unidades + info[i]["unidades"];
+          cajas = cajas + info[i]["cajas"];
+          movimiento = info[i]["movimiento"];
+        }
+      }
+
+      $(`#consolidado_despachos_recibidas${id_multi}`).val(unidades);
+      $(`#consolidado_despachos_cajas${id_multi}`).val(cajas);
+      $(`#consolidado_despachos_mov_inventario${id_multi}`).val(movimiento);
     }
   );
+ /*  $.post(
+    "../../html/php/despachos.php",
+    (data = { op: 2, idBatch, ref_multi, modulo }),
+    function (data, textStatus, jqXHR) {
+      if (data == "") return false;
+      info = JSON.parse(data);
+      firmado(info);
+    }
+  ); */
 }
 
-/* Valida el usuario si existe en la base de datos */
-
-/* function enviar() {
-  $("#m_firmar").modal("hide");
-  (datos = {
-    user: $("#usuario").val(),
-    password: $("#clave").val(),
-  }),
-    $.ajax({
-      type: "POST",
-      url: "../../html/php/firmar.php",
-      data: datos,
-
-      success: function (datos) {
-        if (datos != "") {
-          alertify.set("notifier", "position", "top-right");
-          alertify.error("usuario y/o contraseña no coinciden.");
-          return false;
-        } else {
-          preparacion(datos);
-        }
-      },
-    });
-  return false;
-} */
-
-function guardar_despacho(data) {
+function guardar_despacho(info) {
   //infof = JSON.parse(data);
-  idfirma = data[0].id;
+  realizo = info[0].id;
   let unidades = $(`#unidades_recibidas${id_multi}`).val();
   let cajas = $(`#cajas${id_multi}`).val();
   let mov = $(`#mov_inventario${id_multi}`).val();
   let obs = $(`#obs${id_multi}`).val();
   let operacion = 3;
+  modulo == 7 ? (operacion = 1) : operacion;
 
-  $.post(
-    "../../html/php/conciliacion_rendimiento.php",
-    (data = {
-      operacion,
-      unidades,
-      cajas,
-      mov,
-      obs,
-      modulo,
-      idBatch,
-      ref_multi,
-      idfirma,
-    }),
-    function (info, textStatus, jqXHR) {
-      if (textStatus == "success") {
-        alertify.set("notifier", "position", "top-right");
-        alertify.success("Registro de despacho exitoso");
-        $(`.despacho${id_multi}`)
-          .css({ background: "lightgray", border: "gray" })
-          .prop("disabled", true);
-        firmar(infof);
+  data = {
+    operacion,
+    unidades,
+    cajas,
+    mov,
+    obs,
+    modulo,
+    idBatch,
+    ref_multi,
+    realizo,
+  };
+
+  alertify
+    .confirm(
+      "Entrega",
+      "¿Entrega parcial?",
+      function () {
+        $.post(
+          "../../html/php/servicios/parciales.php",
+          data,
+          function (info, textStatus, jqXHR) {
+            if (textStatus == "success") {
+              alertify.set("notifier", "position", "top-right");
+              alertify.success("Registro de despacho parcial exitoso");
+              $(`#unidades_recibidas${id_multi}`).val("");
+              $(`#cajas${id_multi}`).val("");
+              $(`#mov_inventario${id_multi}`).val("");
+              cargar_despacho();
+            }
+          }
+        );
+      },
+      function () {
+        $.post(
+          "../../html/php/conciliacion_rendimiento.php",
+          data,
+          function (info, textStatus, jqXHR) {
+            if (textStatus == "success") {
+              alertify.set("notifier", "position", "top-right");
+              alertify.success("Registro de despacho exitoso");
+              $(`.despacho${id_multi}`)
+                .css({ background: "lightgray", border: "gray" })
+                .prop("disabled", true);
+              cargar_despacho();
+              $(`#unidades_recibidas${id_multi}`).val("");
+              $(`#cajas${id_multi}`).val("");
+              $(`#mov_inventario${id_multi}`).val("");
+              info = sessionStorage.getItem("firm");
+              info = JSON.parse(info);
+              firmar(info);
+            }
+          }
+        );
       }
-    }
-  );
+    )
+    .set("labels", {
+      ok: "Si, Parcial",
+      cancel: "No, Total",
+    });
 }
-
-/* function firmar(info) {
-  let template =
-    '<img id=":id:" src=":firma:" alt="firma_usuario" height="130">';
-  let parent = $("#" + id).parent();
-
-  $("#" + id).remove();
-  id = "";
-
-  let firma = template.replace(":firma:", info[0].urlfirma);
-  firma = firma.replace(":id:", "btn_id");
-  parent.append(firma).html;
-} */

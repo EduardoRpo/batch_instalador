@@ -127,6 +127,10 @@
         <div class="card">
           <div class="card-header">Importar Materias Primas</div>
           <div class="card-body">
+            <div style="display: flex;justify-content: center;">
+              <label for="mpr" class="mr-3">Materia Prima</label><input type="radio" class="mr-3" name="mp" id="mpr" value="1">
+              <label for="mpf" class="mr-3">Materia Prima Invima</label><input type="radio" name="mp" id="mpf" value="0">
+            </div>
             <form id="formDataExcel" enctype="multipart/form-data">
               <input type="file" name="datosExcel" id="datosExcel" class="form-control mb-3 ml-3" style="width: 500px; display:inline-flex">
               <button type="button" id="btnCargarExcel" class="btn btn-primary ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel.value, 8);" disabled="disabled">Cargar Datos</button>
