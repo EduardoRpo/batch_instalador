@@ -187,7 +187,7 @@ include('modal/image.php')
 
                           <div class="group obs">
                             <label for="recipient-name" class="col-form-label">Parciales</label>
-                            <textarea class="form-control" aria-label="With textarea" id="parciales1" readonly></textarea>
+                            <textarea class="form-control" aria-label="With textarea" id="parciales1" style="height: 80px;" readonly></textarea>
                           </div>
 
                         </div>
@@ -206,8 +206,8 @@ include('modal/image.php')
                           </div>
 
                           <div class=" group">
-                            <label for="recipient-name" class="col-form-label">No Movimiento Inventario</label>
-                            <input type="number" class="form-control centrado" id="consolidado_despachos_mov_inventario1" readonly>
+                            <!-- <label for="recipient-name" class="col-form-label">No Movimiento Inventario</label>
+                            <input type="number" class="form-control centrado" id="consolidado_despachos_mov_inventario1" readonly> -->
                           </div>
 
                           <div class=" group">
@@ -246,7 +246,7 @@ include('modal/image.php')
                             <input type="text" class="form-control" id="despacho1" readonly>
                           </div>
                           <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                            <button type="button" class="btn waves-effect waves-light btn-danger despacho1" id="despacho1" onclick="cargar(this, 'firma1')" style="width: 100%; height: 38px;" hidden>Firmar</button>
+                            <button type="button" class="btn waves-effect waves-light btn-danger despacho1" id="despacho1" onclick="cargar(this, 'firma1')" style="width: 100%; height: 38px;">Firmar</button>
                           </div>
                         </div>
 
@@ -279,8 +279,8 @@ include('modal/image.php')
                   <div class="col-md-12 align-self-center">
                     <div class="card">
                       <div class="card-block">
+                        <div class="subtitle"><label for="">Consolidado Acondicionamiento</label></div>
                         <div class="despachos">
-
                           <div class="group">
                             <label for="recipient-name" class="col-form-label">Unidades Recibidas</label>
                             <input type="number" class="form-control centrado" id="unidades_recibidas_acond2" readonly>
@@ -296,13 +296,43 @@ include('modal/image.php')
                             <input type="number" class="form-control centrado" id="mov_inventario_acond2" oncopy="return false" readonly>
                           </div>
 
-                          <div class=" group">
+                          <div class="group">
                             <label for="recipient-name" class="col-form-label">Muestras retención</label>
                             <input type="number" class="form-control centrado" id="mestras_retencion_acond2" readonly>
                           </div>
 
+                          <div class="group obs">
+                            <label for="recipient-name" class="col-form-label">Parciales</label>
+                            <textarea class="form-control" aria-label="With textarea" id="parciales2" style="height: 80px;" readonly></textarea>
+                          </div>
+
+                        </div>
+
+                        <div class="subtitle"><label for="">Consolidado Despachos</label></div>
+                        <div class="despachos">
+
                           <div class="group">
-                            <label for="recipient-name" class="col-form-label">Unidades Recibidas</label>
+                            <label for="recipient-name" class="col-form-label">Unidades Recibidas a la fecha</label>
+                            <input type="number" class="form-control centrado" id="consolidado_despachos_recibidas2" readonly>
+                          </div>
+
+                          <div class="group">
+                            <label for="recipient-name" class="col-form-label">Cajas</label>
+                            <input type="number" class="form-control centrado" id="consolidado_despachos_cajas2" readonly>
+                          </div>
+
+                          <div class=" group">
+                            <!-- <label for="recipient-name" class="col-form-label">No Movimiento Inventario</label>
+                            <input type="number" class="form-control centrado" id="consolidado_despachos_mov_inventario2" readonly> -->
+                          </div>
+
+                          <div class=" group">
+                            <!-- <label for="recipient-name" class="col-form-label">Muestras retención</label>
+                            <input type="number" class="form-control centrado" id="mestras_retencion_acond1" readonly> -->
+                          </div>
+
+                          <div class="group">
+                            <label for="recipient-name" class="col-form-label">Unidades Recibidas por Despachos</label>
                             <input type="number" class="form-control centrado" id="unidades_recibidas2">
                           </div>
 
@@ -317,28 +347,25 @@ include('modal/image.php')
                           </div>
 
                           <div class=" group">
-                            <!-- <label for="recipient-name" class="col-form-label">Muestras retención</label>
-                            <input type="number" class="form-control centrado" id="mestras_retencion_acond1" readonly> -->
                           </div>
 
                           <div class="group obs">
                             <label for="recipient-name" class="col-form-label">Observaciones</label>
                             <textarea class="form-control" aria-label="With textarea" id="obs2"></textarea>
                           </div>
-                          <div class="group obs">
-                            <button class="btn btn-primary">Entrega parcial</button>
-                          </div>
 
                         </div>
+
                         <div class="row" style="margin: 2%">
                           <div class="col-md-4 align-self-center">
                             <label for="controlpeso_realizado" class="col-form-label">Realizado Por</label>
                             <input type="text" class="form-control" id="despacho2" readonly>
                           </div>
                           <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                            <button type="button" class="btn waves-effect waves-light btn-danger despacho2" id="despacho2" onclick="cargar(this, 'firma1')" style="width: 100%; height: 38px;" hidden>Firmar</button>
+                            <button type="button" class="btn waves-effect waves-light btn-danger despacho2" id="despacho2" onclick="cargar(this, 'firma1')" style="width: 100%; height: 38px;">Firmar</button>
                           </div>
                         </div>
+
                       </div>
                     </div>
                   </div>
@@ -368,8 +395,8 @@ include('modal/image.php')
                   <div class="col-md-12 align-self-center">
                     <div class="card">
                       <div class="card-block">
+                        <div class="subtitle"><label for="">Consolidado Acondicionamiento</label></div>
                         <div class="despachos">
-
                           <div class="group">
                             <label for="recipient-name" class="col-form-label">Unidades Recibidas</label>
                             <input type="number" class="form-control centrado" id="unidades_recibidas_acond3" readonly>
@@ -385,13 +412,43 @@ include('modal/image.php')
                             <input type="number" class="form-control centrado" id="mov_inventario_acond3" oncopy="return false" readonly>
                           </div>
 
-                          <div class=" group">
+                          <div class="group">
                             <label for="recipient-name" class="col-form-label">Muestras retención</label>
                             <input type="number" class="form-control centrado" id="mestras_retencion_acond3" readonly>
                           </div>
 
+                          <div class="group obs">
+                            <label for="recipient-name" class="col-form-label">Parciales</label>
+                            <textarea class="form-control" aria-label="With textarea" id="parciales3" style="height: 80px;" readonly></textarea>
+                          </div>
+
+                        </div>
+
+                        <div class="subtitle"><label for="">Consolidado Despachos</label></div>
+                        <div class="despachos">
+
                           <div class="group">
-                            <label for="recipient-name" class="col-form-label">Unidades Recibidas</label>
+                            <label for="recipient-name" class="col-form-label">Unidades Recibidas a la fecha</label>
+                            <input type="number" class="form-control centrado" id="consolidado_despachos_recibidas3" readonly>
+                          </div>
+
+                          <div class="group">
+                            <label for="recipient-name" class="col-form-label">Cajas</label>
+                            <input type="number" class="form-control centrado" id="consolidado_despachos_cajas3" readonly>
+                          </div>
+
+                          <div class=" group">
+                            <!-- <label for="recipient-name" class="col-form-label">No Movimiento Inventario</label>
+                            <input type="number" class="form-control centrado" id="consolidado_despachos_mov_inventario3" readonly> -->
+                          </div>
+
+                          <div class=" group">
+                            <!-- <label for="recipient-name" class="col-form-label">Muestras retención</label>
+                            <input type="number" class="form-control centrado" id="mestras_retencion_acond1" readonly> -->
+                          </div>
+
+                          <div class="group">
+                            <label for="recipient-name" class="col-form-label">Unidades Recibidas por Despachos</label>
                             <input type="number" class="form-control centrado" id="unidades_recibidas3">
                           </div>
 
@@ -406,28 +463,25 @@ include('modal/image.php')
                           </div>
 
                           <div class=" group">
-                            <!-- <label for="recipient-name" class="col-form-label">Muestras retención</label>
-                            <input type="number" class="form-control centrado" id="mestras_retencion_acond1" readonly> -->
                           </div>
 
                           <div class="group obs">
                             <label for="recipient-name" class="col-form-label">Observaciones</label>
                             <textarea class="form-control" aria-label="With textarea" id="obs3"></textarea>
                           </div>
-                          <div class="group obs">
-                            <button class="btn btn-primary">Entrega parcial</button>
-                          </div>
 
                         </div>
+
                         <div class="row" style="margin: 2%">
                           <div class="col-md-4 align-self-center">
                             <label for="controlpeso_realizado" class="col-form-label">Realizado Por</label>
                             <input type="text" class="form-control" id="despacho3" readonly>
                           </div>
                           <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                            <button type="button" class="btn waves-effect waves-light btn-danger despacho3" id="despacho3" onclick="cargar(this, 'firma1')" style="width: 100%; height: 38px;" hidden>Firmar</button>
+                            <button type="button" class="btn waves-effect waves-light btn-danger despacho3" id="despacho3" onclick="cargar(this, 'firma1')" style="width: 100%; height: 38px;">Firmar</button>
                           </div>
                         </div>
+
                       </div>
                     </div>
                   </div>

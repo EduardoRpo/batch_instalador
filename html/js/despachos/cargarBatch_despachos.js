@@ -22,6 +22,7 @@ function cargarBatch() {
 /* Registro de Firma */
 
 function firmado(datos) {
+  if (datos.length == 0) return false;
   let template =
     '<img id=":id:" src=":firma:" alt="firma_usuario" height="130">';
   let parent;

@@ -117,6 +117,7 @@ function cargar_despacho() {
         retencion = 0;
       let unidadestotales = "";
       let number, myString;
+      let j = 1;
 
       info.forEach((element) => {
         if (element.modulo == 6) {
@@ -127,22 +128,21 @@ function cargar_despacho() {
       });
 
       unidades_empaque = parseFloat($(`#unidad_empaque${id_multi}`).val());
+      cajs = Math.ceil((unidades - retencion) / unidades_empaque);
       for (let i = 0; i < info.length; i++) {
         if (info[i]["modulo"] == 6) {
           number = info[i]["unidades"];
           cjas = info[i]["cajas"];
-          myString = `Parcial ${
-            i + 1
-          }: (${number.toString()} unidades) (${cjas.toString()} cajas) (Movimiento). `;
+          mov = info[i]["movimiento"];
+          myString = `Parcial ${j}: (${number.toString()} unidades) (${cjas.toString()} cajas) (Movimiento: ${mov.toString()}).\n`;
           unidadestotales = unidadestotales + " " + myString;
+          j++;
         }
       }
-
+      j = info.length - 1;
       $(`#unidades_recibidas_acond${id_multi}`).val(unidades);
-      $(`#cajas_acond${id_multi}`).val(
-        ((unidades - retencion) / unidades_empaque).toFixed(0)
-      );
-      $(`#mov_inventario_acond${id_multi}`).val(info[0].movimiento);
+      $(`#cajas_acond${id_multi}`).val(cajs);
+      $(`#mov_inventario_acond${id_multi}`).val(info[j].movimiento);
       $(`#mestras_retencion_acond${id_multi}`).val(retencion);
       $(`#parciales${id_multi}`).val(unidadestotales);
 
@@ -162,7 +162,7 @@ function cargar_despacho() {
       $(`#consolidado_despachos_mov_inventario${id_multi}`).val(movimiento);
     }
   );
- /*  $.post(
+  $.post(
     "../../html/php/despachos.php",
     (data = { op: 2, idBatch, ref_multi, modulo }),
     function (data, textStatus, jqXHR) {
@@ -170,7 +170,7 @@ function cargar_despacho() {
       info = JSON.parse(data);
       firmado(info);
     }
-  ); */
+  );
 }
 
 function guardar_despacho(info) {
@@ -230,9 +230,6 @@ function guardar_despacho(info) {
               $(`#unidades_recibidas${id_multi}`).val("");
               $(`#cajas${id_multi}`).val("");
               $(`#mov_inventario${id_multi}`).val("");
-              info = sessionStorage.getItem("firm");
-              info = JSON.parse(info);
-              firmar(info);
             }
           }
         );
