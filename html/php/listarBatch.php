@@ -168,10 +168,8 @@ switch ($op) {
 
     mysqli_close($conn);
 
-    if (!$result)
-      echo 'false' . mysqli_error($conn);
-    else
-      echo 'true';
+    if (!$result) echo 'false' . mysqli_error($conn);
+    else echo 'true';
 
     break;
 
