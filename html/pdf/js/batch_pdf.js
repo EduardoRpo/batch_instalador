@@ -68,6 +68,8 @@ const multipresentacion = () => {
     { idBatch, operacion: 18 },
     function (data, textStatus, jqXHR) {
       if (data == 0) {
+        $(`#subtitle_envasado1`).hide();
+        $(`#subtitle_acond1`).hide();
         info_General();
       } else {
         multi = JSON.parse(data);

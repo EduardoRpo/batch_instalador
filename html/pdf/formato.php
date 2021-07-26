@@ -746,7 +746,7 @@
                         </table>
                     </div>
                     <div id="multi-envasado1">
-                        <div class="subtitleProcess"><label for="" id="titulo_envasado1"> <b></b></label></div>
+                        <div class="subtitleProcess" id="subtitle_envasado1"><label for="" id="titulo_envasado1"> <b></b></label></div>
                         <div class="subtitle"><label for="">6.2 Entrega Material de Empaque</label></div>
                         <div class="alertas" id="alert_pesaje">
                             <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
@@ -1340,7 +1340,7 @@
 
 
                     <div id="multi-acondicionamiento1">
-                        <div class="subtitleProcess"><label for="" id="titulo_acondicionamiento1"> <b>ACONDICIONAMIENTO</b></label></div>
+                        <div class="subtitleProcess" id="subtitle_acond1"><label for="" id="titulo_acondicionamiento1"> <b>ACONDICIONAMIENTO</b></label></div>
                         <div class="subtitle"><label for="">Entrega Insumos Acondicionamiento</label></div>
 
                         <div class="table-responsive p-3">
