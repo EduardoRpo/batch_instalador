@@ -14,6 +14,7 @@ for ($i = 1; $i < 10; $i++) {
 $tabla = $_POST['tabla'];
 $datos = utf8_encode(file_get_contents($datos['tmp_name']));
 
+$new_arr = array_map('trim', explode('"\n"', $datos));
 $datos = explode("\n", $datos);
 $datos = array_filter($datos);
 $i = 0;
@@ -24,6 +25,12 @@ if ($tabla == 'notificacion_sanitaria' || $tabla == 'nombre_producto' || $tabla 
 	foreach ($datos as $dato) {
 		if ($i !== 0)
 			$dataList[] = explode(";", (mb_strtoupper($dato, 'utf-8')));
+		$i++;
+	}
+} else if ($tabla == 'producto') {
+	foreach ($datos as $dato) {
+		if ($i !== 0)
+			$dataList[] = explode(";", $dato);
 		$i++;
 	}
 } else {
@@ -37,6 +44,7 @@ if ($tabla == 'notificacion_sanitaria' || $tabla == 'nombre_producto' || $tabla 
 /* Insertar datos del archivo */
 
 if ($tabla == 'producto') {
+
 	$e = 0;
 	$Log = [];
 	$array = [
@@ -79,16 +87,6 @@ if ($tabla == 'producto') {
 								instructivo= '{$data[29]}' 
 							WHERE referencia = '{$data[0]}'");
 			} else {
-				/* $conn->query("INSERT INTO producto (referencia, nombre_referencia, unidad_empaque, id_nombre_producto, id_notificacion_sanitaria, 
-								id_linea, id_marca, id_propietario, presentacion_comercial, id_color, id_olor, id_apariencia, 
-								id_untuosidad, id_poder_espumoso, id_recuento_mesofilos, id_pseudomona, id_escherichia, 
-								id_staphylococcus, id_ph, id_viscosidad, id_densidad_gravedad, id_grado_alcohol, id_tapa, id_envase, 
-								id_etiqueta, id_empaque, id_otros, multi, base_instructivo, instructivo) 
-							VALUES (
-								'{$data[0]}', '{$data[1]}', '{$data[2]}', '{$data[3]}', '{$data[4]}', '{$data[5]}', '{$data[6]}', '{$data[7]}', 
-								'{$data[8]}', '{$data[9]}', '{$data[10]}', '{$data[11]}', '{$data[12]}', '{$data[13]}', '{$data[14]}', '{$data[15]}', 
-								'{$data[16]}', '{$data[17]}', '{$data[18]}', '{$data[19]}', '{$data[20]}', '{$data[21]}', '{$data[22]}', '{$data[23]}', 
-								'{$data[24]}', '{$data[25]}', '{$data[26]}', '{$data[27]}', '{$data[28]}', '{$data[29]}')"); */
 				$sql = "INSERT INTO producto (referencia, nombre_referencia, unidad_empaque, id_nombre_producto, id_notificacion_sanitaria, 
 										id_linea, id_marca, id_propietario, presentacion_comercial, id_color, id_olor, id_apariencia, 
 										id_untuosidad, id_poder_espumoso, id_recuento_mesofilos, id_pseudomona, id_escherichia, 
@@ -224,15 +222,10 @@ function findNombre($importFile, $consulta, $col, $tabla)
 	for ($i = 0; $i < sizeof($importFile); $i++) {
 		$idImport = $importFile[$i][$col];
 		for ($j = 0; $j < sizeof($consulta); $j++) {
-			$consultaDato = $consulta[$j];
-			$idConsulta = array_values($consultaDato)[0];
-			$fin = $j + 1;
-			if ($idImport == $idConsulta)
+			$consultaId = $consulta[$j]['id'];
+			if ($idImport == $consultaId) {
 				break;
-			else if ($fin == sizeof($consulta)) {
-				/* $file = "../../../html/logs/log_errores.txt";
-				$notificacion = date("d-m-Y") . " " . date("H:i:s") . " No Encontró el id  " . $tabla . " en la tabla " . $idImport . "\n";
-				file_put_contents($file, $notificacion, FILE_APPEND | LOCK_EX); */
+			} else if ($j == sizeof($consulta)) {
 				$e++;
 				array_push($Log, ($tabla . ' ' . $idImport));
 			}
