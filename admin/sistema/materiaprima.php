@@ -54,15 +54,13 @@
               </div>
               <div class="card-body">
                 <button type="button" class="btn btn-primary" id="btnadicionarMateriaPrima">Adicionar</button>
-
-
                 <form id="frmAdicionarMateriaPrima" style="display: none;">
                   <label for=""><b>Codigo</b></label>
                   <label for=""><b>Materia Pima</b></label>
                   <label for=""><b>Alias</b></label>
                   <label for="">Acciones</label>
                   <input type="number" name="txtId" id="txtId" class="form-control" hidden>
-                  <input type="number" name="txtCodigo" id="txtCodigo" class="form-control" placeholder="Codigo" required>
+                  <input type="text" name="txtCodigo" id="txtCodigo" class="form-control" placeholder="Codigo" required>
                   <input type="text" name="txtMP" id="txtMP" class="form-control" placeholder="Materia Prima" required>
                   <input type="text" name="txtAlias" id="txtAlias" class="form-control" placeholder="Alias" required>
                   <button type="button" class="btn btn-primary" id="btnguardarMateriaPrima">Guardar</button>
@@ -76,9 +74,7 @@
                   </div>
 
                 </form>
-
               </div>
-
             </div>
           </div>
         </div>
