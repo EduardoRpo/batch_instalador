@@ -567,7 +567,7 @@ include('modal/image.php')
                                 </thead>
                                 <tbody>
                                   <tr>
-                                    <td id="envase2" class="envase2 refEmpaque2"></td>
+                                    <td id="envase2" class="envase2 refEmpaque4"></td>
                                     <td id="descripcion_envase2" class="descripcion_envase2"></td>
                                     <td id="unidades5" class="centrado unidades2"></td>
                                     <td><input type="number" id="txtEnvasada2" min="1" class="form-control centrado txtEnvasada2" style="width: 110px;" onkeyup="devolucionMaterialEnvasada(this.value);"></td>
@@ -576,7 +576,7 @@ include('modal/image.php')
                                     <td id="totalDevolucion4" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
                                   </tr>
                                   <tr>
-                                    <td id="tapa2" class="tapa2 refEmpaque2"></td>
+                                    <td id="tapa2" class="tapa2 refEmpaque5"></td>
                                     <td id="descripcion_tapa2" class="descripcion_tapa2"></td>
                                     <td id="unidades6" class="centrado unidades2"></td>
                                     <td id="txtEnvasada2" class="centrado envasada2"></td>
@@ -585,7 +585,7 @@ include('modal/image.php')
                                     <td id="totalDevolucion5" class="centrado"></td><!-- <input type="number" id="totalDevolucion1" class="form-control centrado" readonly> -->
                                   </tr>
                                   <tr>
-                                    <td id="etiqueta2" class="etiqueta2 refEmpaque3"></td>
+                                    <td id="etiqueta2" class="etiqueta2 refEmpaque6"></td>
                                     <td id="descripcion_etiqueta2" class="descripcion_etiqueta2"></td>
                                     <td id="unidades7" class="centrado unidades2"></td>
                                     <td id="txtEnvasada3" class="centrado envasada2"></td>
@@ -778,7 +778,7 @@ include('modal/image.php')
                                 </thead>
                                 <tbody>
                                   <tr>
-                                    <td id="envase3" class="envase3 refEmpaque3"></td>
+                                    <td id="envase3" class="envase3 refEmpaque7"></td>
                                     <td id="descripcion_envase3" class="descripcion_envase3"></td>
                                     <td id="unidades5" class="centrado unidades3"></td>
                                     <td><input type="number" id="txtEnvasada3" min="1" class="form-control centrado txtEnvasada3" style="width: 110px;" onkeyup="devolucionMaterialEnvasada(this.value);"></td>
@@ -787,7 +787,7 @@ include('modal/image.php')
                                     <td id="totalDevolucion7" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
                                   </tr>
                                   <tr>
-                                    <td id="tapa3" class="tapa3 refEmpaque3"></td>
+                                    <td id="tapa3" class="tapa3 refEmpaque8"></td>
                                     <td id="descripcion_tapa3" class="descripcion_tapa3"></td>
                                     <td id="unidades6" class="centrado unidades3"></td>
                                     <td id="txtEnvasada3" class="centrado envasada3"></td>
@@ -796,7 +796,7 @@ include('modal/image.php')
                                     <td id="totalDevolucion8" class="centrado"></td><!-- <input type="number" id="totalDevolucion1" class="form-control centrado" readonly> -->
                                   </tr>
                                   <tr>
-                                    <td id="etiqueta3" class="etiqueta3 refEmpaque3"></td>
+                                    <td id="etiqueta3" class="etiqueta3 refEmpaque9"></td>
                                     <td id="descripcion_etiqueta3" class="descripcion_etiqueta3"></td>
                                     <td id="unidades7" class="centrado unidades3"></td>
                                     <td id="txtEnvasada3" class="centrado envasada3"></td>
