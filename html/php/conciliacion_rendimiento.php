@@ -6,13 +6,13 @@ if (!empty($_POST)) {
 
     $op = $_POST['operacion'];
     $batch =  $_POST['idBatch'];
-    $modulo = $_POST['modulo'];
 
     if (!empty($_POST['ref_multi']))
         $referencia = $_POST['ref_multi'];
 
     switch ($op) {
         case 1: //almacenar conciliacion
+            $modulo = $_POST['modulo'];
             $modulo == 6 ? $retencion =  $_POST['retencion'] : $retencion = 0;
             conciliacionRendimientoRealizo($conn);
 
@@ -59,7 +59,7 @@ if (!empty($_POST)) {
             break;
 
         case 3: //almacenar conciliacion
-
+            $modulo = $_POST['modulo'];
             $unidades =  $_POST['unidades'];
             $cajas =  $_POST['cajas'];
             $movimiento =  $_POST['mov'];

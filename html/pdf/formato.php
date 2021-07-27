@@ -1023,7 +1023,7 @@
                                         <td id="sobranteEnvase2" class="centrado"></td>
                                     </tr>
                                     <tr>
-                                        <td id="tap21" class="tapa2 refEmpaque2"></td>
+                                        <td id="tapa2" class="tapa2 refEmpaque2"></td>
                                         <td id="descripcion_tapa2" class="descripcion_tapa2"></td>
                                         <td id="unidades2" class="centrado unidades2"></td>
                                         <td id="usadaTapa2" class="centrado envasada2"></td>
@@ -1358,7 +1358,7 @@
                                         <td id="fecha1" class="centrado empaque1"></td>
                                         <td id="empaque1" class="centrado empaque1"></td>
                                         <td id="descripcion_empaque1" class="descripcion_empaque1"></td>
-                                        <td id="unidades1e" class="centrado unidades1e"></td>
+                                        <td id="unidades1e" class="centrado unidades1"></td>
                                     </tr>
                                     <tr>
                                         <td id="fecha1" class="centrado empaque1"></td>
@@ -1408,8 +1408,8 @@
                                     <tr>
                                         <td id="refempaque1" class="empaque1"></td>
                                         <td id="descripcion_empaque1" class="descripcion_empaque1"></td>
-                                        <td id="unidades2e" class="centrado unidades1e"></td>
-                                        <td id="utilizada_empaque1" class="centrado envasada1e" style="width: 110px;"></td>
+                                        <td id="empaque_unidades1" class="centrado unidades1"></td>
+                                        <td id="utilizada_empaque1" class="centrado envasada1" style="width: 110px;"></td>
                                         <td id="averias_empaque1" class="centrado" style="width: 110px;"></td>
                                         <td id="sobrante_empaque1" class="centrado" style="width: 110px;"></td>
                                         <!-- <td id="totalDevolucion_empaque1" class="centrado"></td> -->
@@ -1429,7 +1429,7 @@
                         <div class="subtitle"><label>Conciliación de rendimiento</label></div>
                         <div class="conciliacion">
                             <label style="justify-self: end;">Conciliacion rendimiento</label>
-                            <input type="text" class="form-control centrado" id="conciliacionRendimiento3" style="width: 30%;justify-self: baseline" readonly>
+                            <input type="text" class="form-control centrado" id="conciliacionRendimiento1" style="width: 30%;justify-self: baseline" readonly>
                         </div>
 
                         <div class="enlinea mt-3">

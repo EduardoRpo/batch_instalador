@@ -72,7 +72,7 @@
                     <input type="radio" id="formula_f" name="formula" value="0">
                     <label for="formula_f" class="mr-3">Formula Invima</label>
                   </div>
-                  
+
                   <label for=""></label>
                   <label for=""><b>Referencia</b></label>
                   <label for="">Materia Prima</label>
@@ -83,14 +83,6 @@
                   <input type="text" name="txtMateria-Prima" id="txtMateria-Prima" class="form-control" placeholder="Materia Prima">
                   <input type="text" name="alias" id="alias" class="form-control" placeholder="alias">
                   <input type="number" name="porcentaje" id="porcentaje" class="form-control" placeholder="%" style="text-align: center;">
-
-                  <!-- <div class="formula">
-                    <label for="formula" class="mr-3"> <b>Insertar en: </b> </label>
-                    <input type="radio" id="formula" name="formula" value="6">
-                    <label for="formula" class="mr-3">Formula</label>
-                    <input type="radio" id="fantasma" name="formula" value="7">
-                    <label for="fantasma" class="mr-3">Formula Fantasma</label>
-                                      </div> -->
                   <button type="button" class="btn btn-primary" id="guardarFormula" onclick="guardarFormulaMateriaPrima();">Guardar</button>
                 </form>
               </div>
@@ -137,7 +129,7 @@
               <div class="card-body">
                 <div class="table-responsive">
                   <table id="tbl_formulas_f" class="table-striped row-borde" style="width:100%">
-                    <label for="">Tabla Fantasma</label>
+                    <!-- <label for="">Tabla Fantasma</label> -->
                     <thead>
                       <tr>
                         <th>Referencia</th>
@@ -173,26 +165,11 @@
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-
-  <!-- DataTables -->
   <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-
-  <!--  Google Maps Plugin    -->
-  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
-  <!-- Chart JS -->
   <script src="../assets/js/plugins/chartjs.min.js"></script>
-
-  <!--  Notifications Plugin    -->
   <script src="../assets/js/plugins/bootstrap-notify.js"></script>
-
-  <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script><!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
-  <!-- <script src="../assets/demo/demo.js"></script> -->
-
-  <!-- Alertify -->
+  <script src="../assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script>
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-
-  <!-- javascript inicializacion datatables -->
   <script src="js/formulas.js"></script>
   <script src="js/importarProductos.js"></script>
   <script src="js/menu.js"></script>
