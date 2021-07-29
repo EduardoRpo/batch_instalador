@@ -94,7 +94,7 @@
 
     <div class="grid-container-sbtitle gl mb-3">
         <div class="glsbt">ANALISIS FISICOQUÍMICO</div>
-        <div class="glsbt">FECHA</div>
+        <div class="glsbt fecha_organ" style="font-size: smaller;font-weight: 600;">FECHA</div>
     </div>
 
     <div class="grid-container-fisico gl mb-3">
