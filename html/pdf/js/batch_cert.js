@@ -3,15 +3,31 @@ let modulo = 1;
 $(document).ready(function () {
   var pathname = window.location.pathname;
   idList = pathname.split("/");
-  //idBatch = pathname.substr(13, 5);
   idBatch = idList[2];
   referencia = idList[3];
+
+  $.get(
+    "../../../html/php/certificado/certificado.php",
+    (data = { idBatch, op: 3 }),
+    function (data, textStatus, jqXHR) {
+      if (textStatus == "success") {
+        data = JSON.parse(data);
+        $(`.product`).html(data.nombre_referencia);
+        $(`.titular_id`).html(data.propietario);
+        $(`.invima_id`).html(data.notificacion_sanitaria);
+        $(`.muestra_id`).html(data.lote_presentacion);
+        $(`.lote_id`).html(data.numero_lote);
+      }
+    }
+  );
+
   $.get(
     "../../../html/php/certificado/certificado.php",
     (data = { idBatch, op: 1 }),
     function (data, textStatus, jqXHR) {
       if (textStatus == "success") {
         data = JSON.parse(data);
+        $(`.fecha_micro`).html(data[0].fecha_registro);
         $("#result_mesofilos").html(data[0].mesofilos);
 
         data[0].pseudomona == 1
@@ -45,7 +61,7 @@ $(document).ready(function () {
     function (data, textStatus, jqXHR) {
       if (textStatus == "success") {
         data = JSON.parse(data);
-
+        $(`.fecha_organ`).html(data.fecha_registro);
         data.olor == 1
           ? (result1 = "Cumple")
           : (data[0].pseudomona = 2
@@ -85,7 +101,12 @@ $(document).ready(function () {
         $("#result_untuosidad").html(result4);
         $("#result_poder").html(result5);
         $("#result_alcohol").html(data.alcohol);
+        $(`.obs`).html(data.observaciones);
       }
     }
   );
+
+  $(`#chk_aprobado`).prop("disabled", true);
+  $(`#chk_aprobado`).prop("checked", true);
+  $(`#chk_rechazado`).prop("disabled", true);
 });

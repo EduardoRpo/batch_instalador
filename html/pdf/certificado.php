@@ -41,7 +41,7 @@
 
     <div class="grid-container-sbtitle gl mb-3">
         <div class="glsbt">ANALISIS MICROBIOLOGICO</div>
-        <div class="glsbt">FECHA</div>
+        <div class="glsbt fecha_micro" style="font-size: smaller;font-weight: 600;">FECHA</div>
     </div>
 
     <div class="grid-container-micro gl mb-3">
@@ -70,7 +70,7 @@
 
     <div class="grid-container-sbtitle gl mb-3">
         <div class="glsbt">ANALISIS ORGANOLÉPTICO</div>
-        <div class="glsbt">FECHA</div>
+        <div class="glsbt fecha_organ" style="font-size: smaller;font-weight: 600;">FECHA</div>
     </div>
 
     <div class="grid-container-organo gl mb-3">
@@ -141,11 +141,11 @@
         <div>ENVASE</div>
         <div>Buen estado, cierre hermético con acople a la tapa</div>
         <div>Visual</div>
-        <div></div>
+        <div>Cumple</div>
         <div>ETIQUETA</div>
         <div>Buen estado y completa</div>
         <div>Visual</div>
-        <div></div>
+        <div>Cumple</div>
 
     </div>
 
@@ -155,17 +155,17 @@
 
     <div class="gl mb-3">
         <div class="mb-3">OBSERVACIONES</div>
-        <div class="mb-3"><input type="text" class="form-control"></div>
+        <div class="mb-3 obs"></div>
     </div>
     <div class="gl mb-3">
         <div class="check_cert">
             <div>
                 <label for="">Aprobado</label>
-                <input type="checkbox" name="" id="" class="mr-3">
+                <input type="checkbox" name="" id="chk_aprobado" class="mr-3" style="width: 20px; height: 20px;">
             </div>
             <div>
                 <label for="">Rechazado</label>
-                <input type="checkbox" name="" id="">
+                <input type="checkbox" name="" id="chk_rechazado" style="width: 20px;height: 20px;">
             </div>
         </div>
     </div>
@@ -179,13 +179,9 @@
     <script src="../../assets/plugins/bootstrap/js/tether.min.js"></script>
     <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="../../html/vendor/datatables/datatables.min.js" type="text/javascript"></script>
-    <!-- slimscrollbar scrollbar JavaScript -->
     <script src="../../html/js/utils/jquery.slimscroll.js"></script>
-    <!--Wave Effects -->
     <script src="../../html/js/utils/waves.js"></script>
-    <!--Menu sidebar -->
     <script src="../../html/js/utils/sidebarmenu.js"></script>
-    <!--stickey kit -->
     <script src="../../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <script src="https://use.fontawesome.com/15242848ba.js"></script>
     <script src="../../html/pdf/js/batch_cert.js"></script>
