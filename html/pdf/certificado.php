@@ -6,36 +6,190 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Certificado de Calidad</title>
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/icon/favicon.png">
     <title>Samara Cosmetics</title>
-
-    <!-- Bootstrap Core CSS -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/icon/favicon.png">
     <link href="../../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/style_cert.css" rel="stylesheet">
+    <link href="../../html/pdf/css/style_cert.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../../html/vendor/datatables/datatables.min.css">
     <link rel="stylesheet" type="text/css" href="../../html/vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css">
 </head>
 
 <body>
-    <div class="card bg-secondary mb-3">
-        <div class="card-header">Header</div>
-        <div class="card-body">
-            <div class="head">
-                <img src="" alt="logo_Samara">
-                <label>FORMATO</label>
-                <label>BATCH RECORD</label>
-                <label>CÓDIGO</label>
-                <label>VERSIÓN</label>
-                <label>FECHA</label>
-                <label>F-Pr-13</label>
-                <label>10</label>
-                <label>Abril de 2021</label>
+    <div class="grid-container gl mb-3">
+        <div class="logo"><img src="../../assets/images/logo/logo-samara.png" alt="logo_samara"></div>
+        <div class="title1">CERTIFICADO</div>
+        <div class="title2">BATCH RECORD</div>
+        <div class="title3">CÓDIGO</div>
+        <div class="title4">VERSIÓN</div>
+        <div class="title5">FECHA</div>
+        <div class="title6">F-Pr-13</div>
+        <div class="title7">10</div>
+        <div class="title8">27/07/2021</div>
+    </div>
+
+    <div class="grid-container-product gl mb-3">
+        <div class="product">BIOELIXIR CAPILAR (ISABELY) 60ml</div>
+        <div class="titular"><b>TITULAR:</b></div>
+        <div class="titular_id">SAMARA COSMETICS</div>
+        <div class="invima"><b>INVIMA:</b></div>
+        <div class="invima_id">NSOC82727-17CO</div>
+        <div class="muestra"><b>MUESTRA:</b></div>
+        <div class="muestra_id">500 ml</div>
+        <div class="lote"><b>LOTE:</b></div>
+        <div class="lote_id">LQ0020421</div>
+    </div>
+
+    <div class="grid-container-sbtitle gl mb-3">
+        <div class="glsbt">ANALISIS MICROBIOLOGICO</div>
+        <div class="glsbt">FECHA</div>
+    </div>
+
+    <div class="grid-container-micro gl mb-3">
+        <div class="cltitle">CONTROL</div>
+        <div class="cltitle">ESPECIFICACIONES</div>
+        <div class="cltitle">METODO</div>
+        <div class="cltitle">RESULTADOS</div>
+
+        <div>Recuento de Mesófilos aerobios totales</div>
+        <div id="mesofilos"></div>
+        <div>Siembra recuento total</div>
+        <div id="result_mesofilos"></div>
+        <div>Pseudomona aeruginosa</div>
+        <div id="pseudomona"></div>
+        <div>Siembra recuento total</div>
+        <div id="result_pseudomona"></div>
+        <div>Escherichia coli </div>
+        <div id="escherichia"></div>
+        <div>Siembra recuento total</div>
+        <div id="result_escherichia"></div>
+        <div>Staphylococcus aureus</div>
+        <div id="staphylococcus"></div>
+        <div>Siembra recuento total</div>
+        <div id="result_staphylococcus"></div>
+    </div>
+
+    <div class="grid-container-sbtitle gl mb-3">
+        <div class="glsbt">ANALISIS ORGANOLÉPTICO</div>
+        <div class="glsbt">FECHA</div>
+    </div>
+
+    <div class="grid-container-organo gl mb-3">
+        <div class="cltitle">CONTROL</div>
+        <div class="cltitle">ESPECIFICACIONES</div>
+        <div class="cltitle">METODO</div>
+        <div class="cltitle">RESULTADOS</div>
+        <div>Color</div>
+        <div id="espec_color"></div>
+        <div>Escala Cromática</div>
+        <div id="result_color"></div>
+        <div>Olor</div>
+        <div id="espec_olor"></div>
+        <div>Sensorial</div>
+        <div id="result_olor"></div>
+        <div>Apariencia</div>
+        <div id="espec_apariencia"></div>
+        <div>Sensorial</div>
+        <div id="result_apariencia"></div>
+    </div>
+
+    <div class="grid-container-sbtitle gl mb-3">
+        <div class="glsbt">ANALISIS FISICOQUÍMICO</div>
+        <div class="glsbt">FECHA</div>
+    </div>
+
+    <div class="grid-container-fisico gl mb-3">
+        <div class="cltitle">CONTROL</div>
+        <div class="cltitle">ESPECIFICACIONES</div>
+        <div class="cltitle">METODO</div>
+        <div class="cltitle">RESULTADOS</div>
+        <div>pH</div>
+        <div id="espec_ph"></div>
+        <div>pHmetro</div>
+        <div id="result_ph"></div>
+        <div>Densidad</div>
+        <div id="espec_densidad"></div>
+        <div>Picnómetro</div>
+        <div id="result_densidad"></div>
+        <div>Viscosidad (cps)</div>
+        <div id="espec_viscidad"></div>
+        <div>Viscosímetro</div>
+        <div id="result_viscosidad"></div>
+        <div>Untuosidad</div>
+        <div id="espec_untosidad"></div>
+        <div>Sensorial</div>
+        <div id="result_untuosidad"></div>
+        <div>Poder Espumoso</div>
+        <div id="espec_poder_espumoso"></div>
+        <div>Sensorial</div>
+        <div id="result_poder"></div>
+        <div>Grado Alcohol</div>
+        <div id="espec_grado_alcohol"></div>
+        <div>Alcoholímetro</div>
+        <div id="result_alcohol"></div>
+    </div>
+
+    <div class="grid-container-sbtitle gl mb-3">
+        <div class="glsbt">PARAMETROS FISICOS</div>
+    </div>
+
+    <div class="grid-container-paramfisico gl mb-3">
+        <div class="cltitle">CONTROL</div>
+        <div class="cltitle">ESPECIFICACIONES</div>
+        <div class="cltitle">METODO</div>
+        <div class="cltitle">RESULTADOS</div>
+
+        <div>ENVASE</div>
+        <div>Buen estado, cierre hermético con acople a la tapa</div>
+        <div>Visual</div>
+        <div></div>
+        <div>ETIQUETA</div>
+        <div>Buen estado y completa</div>
+        <div>Visual</div>
+        <div></div>
+
+    </div>
+
+    <div class="grid-container-nota gl mb-3">
+        <div>Los parámetros Microbiológicos se evalúan de acuerdo a la resolución 1482 del 02 de julio del 2012. En la cual ya no se evalúan mohos y levaduras, además se especifica el recuento de mesófilos aerobios totales en Máx. 5x103 UFC/ g ó mL </div>
+    </div>
+
+    <div class="gl mb-3">
+        <div class="mb-3">OBSERVACIONES</div>
+        <div class="mb-3"><input type="text" class="form-control"></div>
+    </div>
+    <div class="gl mb-3">
+        <div class="check_cert">
+            <div>
+                <label for="">Aprobado</label>
+                <input type="checkbox" name="" id="" class="mr-3">
+            </div>
+            <div>
+                <label for="">Rechazado</label>
+                <input type="checkbox" name="" id="">
             </div>
         </div>
     </div>
+    <div class="gl mb-3">
+        <div>firma</div>
+        <div><b>Ana Karina Hernandez Botero</b></div>
+        <div> <b>Directora Calidad</b></div>
+    </div>
+
+    <script src="../../assets/plugins/jquery/jquery.min.js"></script>
+    <script src="../../assets/plugins/bootstrap/js/tether.min.js"></script>
+    <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../html/vendor/datatables/datatables.min.js" type="text/javascript"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="../../html/js/utils/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="../../html/js/utils/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="../../html/js/utils/sidebarmenu.js"></script>
+    <!--stickey kit -->
+    <script src="../../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="https://use.fontawesome.com/15242848ba.js"></script>
+    <script src="../../html/pdf/js/batch_cert.js"></script>
+    <script src="../../html/js/global/propiedadesProducto.js"></script>
 
 
 </body>

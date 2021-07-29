@@ -32,7 +32,7 @@ $(document).ready(function () {
       $("#in_viscocidad").attr("max", data.limite_superior_viscosidad);
       $("#espec_untosidad").html(data.untuosidad);
     }
-    if (modulo == 8) {
+    if (modulo == 8 || modulo == 1) {
       $("#mesofilos").html(data.mesofilos);
       $("#pseudomona").html(data.pseudomona);
       $("#escherichia").html(data.escherichia);

@@ -77,8 +77,17 @@ $router->add('/fisicoquimicainfo/:idBatch/:referencia', function ($idBatch, $ref
 $router->add('/liberacionlote', function () {
   return Router::getRenderedHTML('html/liberacionlote.php');
 });
+
 $router->add('/liberacionloteinfo/:idBatch/:referencia', function ($idBatch, $referencia) {
   return Router::getRenderedHTML('html/liberacionloteinfo.php');
+});
+
+$router->add('/pdf/:idBatch/:referencia', function ($idBatch, $referencia) {
+  return Router::getRenderedHTML('html/pdf/formato.php ');
+});
+
+$router->add('/certificado/:idBatch/:referencia', function ($idBatch, $referencia) {
+  return Router::getRenderedHTML('html/pdf/certificado.php ');
 });
 
 $router->run();
