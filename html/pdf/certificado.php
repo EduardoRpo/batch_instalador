@@ -170,7 +170,7 @@
         </div>
     </div>
     <div class="gl mb-3">
-        <div>firma</div>
+        <div><img src="../../admin/assets/img/firmas/SERGIO MUÑOZ.jpg" alt="" style="width:20%"></div>
         <div><b>Ana Karina Hernandez Botero</b></div>
         <div> <b>Directora Calidad</b></div>
     </div>
