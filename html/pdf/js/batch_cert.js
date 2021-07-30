@@ -1,5 +1,16 @@
 /* seleccionar el batch */
 let modulo = 1;
+$("#cert_f").hide();
+$(".check_cert").hide();
+$(".grid-container-micro").hide();
+$(".fecha_micro").hide();
+$(".grid-container-organo").hide();
+$(".fecha_organ").hide();
+$(".grid-container-fisico").hide();
+$(".grid-container-paramfisico").hide();
+$(".grid-container-nota").hide();
+$(".observ").hide();
+
 $(document).ready(function () {
   var pathname = window.location.pathname;
   idList = pathname.split("/");
@@ -28,6 +39,7 @@ $(document).ready(function () {
     function (data, textStatus, jqXHR) {
       if (textStatus == "success") {
         data = JSON.parse(data);
+        if (!data.length) return false;
         $(`.fecha_micro`).html(`Fecha Análisis: ${data[0].fecha_registro}`);
         $("#result_mesofilos").html(data[0].mesofilos);
 
@@ -52,6 +64,8 @@ $(document).ready(function () {
         $("#result_pseudomona").html(result1);
         $("#result_escherichia").html(result2);
         $("#result_staphylococcus").html(result3);
+        $(".grid-container-micro").show();
+        $(".fecha_micro").show();
       }
     }
   );
@@ -60,8 +74,9 @@ $(document).ready(function () {
     "../../../html/php/certificado/certificado.php",
     (data = { idBatch, op: 2 }),
     function (data, textStatus, jqXHR) {
-      if (textStatus == "success") {
+      if (textStatus == "success" && data != "false") {
         data = JSON.parse(data);
+        if (!data) return false;
         $(`.fecha_organ`).html(`Fecha Análisis: ${data.fecha_registro}`);
         data.olor == 1
           ? (result1 = "Cumple")
@@ -103,6 +118,8 @@ $(document).ready(function () {
         $("#result_poder").html(result5);
         $("#result_alcohol").html(data.alcohol);
         $(`.obs`).html(data.observaciones);
+        $(".grid-container-organo").show();
+        $(".fecha_organ").show();
       }
     }
   );
@@ -110,4 +127,19 @@ $(document).ready(function () {
   $(`#chk_aprobado`).prop("disabled", true);
   $(`#chk_aprobado`).prop("checked", true);
   $(`#chk_rechazado`).prop("disabled", true);
+
+  $.get(
+    "../../../html/php/certificado/certificado.php",
+    (data = { idBatch, op: 4 }),
+    function (data, textStatus, jqXHR) {
+      if (textStatus == "success" && data != "false") {
+        $(".grid-container-fisico").show();
+        $(".grid-container-paramfisico").show();
+        $(".grid-container-nota").show();
+        $(".observ").show();
+        $(".check_cert").show();
+        $("#cert_f").show();
+      }
+    }
+  );
 });

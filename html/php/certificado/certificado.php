@@ -38,5 +38,13 @@ if (!empty($_GET)) {
             $data = $query->fetch(PDO::FETCH_ASSOC);
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
             break;
+
+        case '4':
+            $sql = "SELECT * FROM batch_liberacion WHERE batch = :batch";
+            $query = $conn->prepare($sql);
+            $query->execute(['batch' => $batch]);
+            $data = $query->fetch(PDO::FETCH_ASSOC);
+            echo json_encode($data, JSON_UNESCAPED_UNICODE);
+            break;
     }
 }

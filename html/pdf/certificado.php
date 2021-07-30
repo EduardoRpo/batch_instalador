@@ -152,7 +152,7 @@
         <div>Los parámetros Microbiológicos se evalúan de acuerdo a la resolución 1482 del 02 de julio del 2012. En la cual ya no se evalúan mohos y levaduras, además se especifica el recuento de mesófilos aerobios totales en Máx. 5x103 UFC/ g ó mL </div>
     </div>
 
-    <div class="gl mb-3">
+    <div class="gl mb-3 observ">
         <div class="mb-3">OBSERVACIONES</div>
         <div class="mb-3 obs"></div>
     </div>
@@ -168,13 +168,15 @@
             </div>
         </div>
     </div>
-    <div class="gl mb-3">
+    <div class="gl mb-3" id="cert_f">
         <div class="mt-3"><img src="../../admin/assets/img/firmas/ANA KARINA HERNANDEZ.jpg" alt="" style="width:20%"></div>
         <div><b>Ana Karina Hernandez Botero</b></div>
         <div> <b>Directora Calidad</b></div>
     </div>
 
     <div class="grid-container-nota gl mb-3">
+        <div id="fecha_imp"></div>
+        <div id="fecha_exp"></div> <!-- fecha de cierre del liberacion -->
         <div id="op">OP</div>
     </div>
 
