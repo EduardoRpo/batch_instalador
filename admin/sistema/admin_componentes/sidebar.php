@@ -55,7 +55,8 @@
 
                 <li id="pdf"><a href=""><i class="fa fa-chevron-down"></i><span>PDF</span></a></li>
                 <ul class="menu_pdf">
-                    <li><a href="pdf.php" id="link_menu_pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i><span>Textos</span></a></li>
+                    <li><a href="pdf.php" id="link_menu_pdf"><i class="fas fa-sort-alpha-up"></i><span>Textos</span></a></li>
+                    <li><a href="certificado.php" id="link_menu_certificado"><i class="far fa-newspaper"></i><span>Certificado</span></a></li>
                 </ul>
                 <li id="auditoria"><a href=""><i class="fa fa-chevron-down"></i><span>Auditoria</span></a></li>
                 <ul class="menu_auditoria">

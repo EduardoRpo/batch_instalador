@@ -18,7 +18,7 @@
     <div class="grid-container gl mb-3">
         <div class="logo"><img src="../../assets/images/logo/logo-samara.png" alt="logo_samara"></div>
         <div class="title1">CERTIFICADO</div>
-        <div class="title2">BATCH RECORD</div>
+        <div class="title2">DE ANÁLISIS</div>
         <div class="title3">CÓDIGO</div>
         <div class="title4">VERSIÓN</div>
         <div class="title5">FECHA</div>
@@ -34,7 +34,7 @@
         <div class="invima"><b>INVIMA:</b></div>
         <div class="invima_id">NSOC82727-17CO</div>
         <div class="muestra"><b>MUESTRA:</b></div>
-        <div class="muestra_id">500 ml</div>
+        <div>500 ml</div>
         <div class="lote"><b>LOTE:</b></div>
         <div class="lote_id">LQ0020421</div>
     </div>
@@ -94,7 +94,7 @@
 
     <div class="grid-container-sbtitle gl mb-3">
         <div class="glsbt">ANALISIS FISICOQUÍMICO</div>
-        <div class="glsbt fecha_organ" style="font-size: smaller;font-weight: 600;">FECHA</div>
+        <!-- <div class="glsbt fecha_organ" style="font-size: smaller;font-weight: 600;">FECHA</div> -->
     </div>
 
     <div class="grid-container-fisico gl mb-3">
@@ -170,10 +170,15 @@
         </div>
     </div>
     <div class="gl mb-3">
-        <div><img src="../../admin/assets/img/firmas/ANA KARINA HERNANDEZ.jpg" alt="" style="width:20%"></div>
+        <div class="mt-3"><img src="../../admin/assets/img/firmas/ANA KARINA HERNANDEZ.jpg" alt="" style="width:20%"></div>
         <div><b>Ana Karina Hernandez Botero</b></div>
         <div> <b>Directora Calidad</b></div>
     </div>
+
+    <div class="grid-container-nota gl mb-3">
+        <div id="op">OP</div>
+    </div>
+
 
     <script src="../../assets/plugins/jquery/jquery.min.js"></script>
     <script src="../../assets/plugins/bootstrap/js/tether.min.js"></script>

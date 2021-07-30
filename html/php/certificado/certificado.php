@@ -27,7 +27,7 @@ if (!empty($_GET)) {
             break;
 
         case '3':
-            $sql = "SELECT p.nombre_referencia, pp.nombre as propietario, b.numero_lote, b.lote_presentacion, ns.nombre as notificacion_sanitaria 
+            $sql = "SELECT b.numero_orden, p.nombre_referencia, pp.nombre as propietario, b.numero_lote, b.lote_presentacion, ns.nombre as notificacion_sanitaria 
                     FROM batch b 
                     INNER JOIN producto p ON p.referencia = b.id_producto 
                     INNER JOIN propietario pp ON pp.id = p.id_propietario 

@@ -17,6 +17,7 @@ $(document).ready(function () {
         $(`.invima_id`).html(data.notificacion_sanitaria);
         $(`.muestra_id`).html(data.lote_presentacion);
         $(`.lote_id`).html(data.numero_lote);
+        $(`#op`).html(data.numero_orden);
       }
     }
   );
@@ -27,7 +28,7 @@ $(document).ready(function () {
     function (data, textStatus, jqXHR) {
       if (textStatus == "success") {
         data = JSON.parse(data);
-        $(`.fecha_micro`).html(data[0].fecha_registro);
+        $(`.fecha_micro`).html(`Fecha Análisis: ${data[0].fecha_registro}`);
         $("#result_mesofilos").html(data[0].mesofilos);
 
         data[0].pseudomona == 1
@@ -61,7 +62,7 @@ $(document).ready(function () {
     function (data, textStatus, jqXHR) {
       if (textStatus == "success") {
         data = JSON.parse(data);
-        $(`.fecha_organ`).html(data.fecha_registro);
+        $(`.fecha_organ`).html(`Fecha Análisis: ${data.fecha_registro}`);
         data.olor == 1
           ? (result1 = "Cumple")
           : (data[0].pseudomona = 2
