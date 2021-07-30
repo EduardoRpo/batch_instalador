@@ -2045,13 +2045,9 @@
     <script src="../../assets/plugins/bootstrap/js/tether.min.js"></script>
     <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="../../html/vendor/datatables/datatables.min.js" type="text/javascript"></script>
-    <!-- slimscrollbar scrollbar JavaScript -->
     <script src="../../html/js/utils/jquery.slimscroll.js"></script>
-    <!--Wave Effects -->
     <script src="../../html/js/utils/waves.js"></script>
-    <!--Menu sidebar -->
     <script src="../../html/js/utils/sidebarmenu.js"></script>
-    <!--stickey kit -->
     <script src="../../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <script src="https://use.fontawesome.com/15242848ba.js"></script>
     <script src="js/batch_pdf.js"></script>

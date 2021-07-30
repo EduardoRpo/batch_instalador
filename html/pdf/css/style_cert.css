@@ -24,8 +24,9 @@ body {
 }
 
 .grid-container {
-  grid-template-columns: repeat(3, 1fr) 150px 150px;
+  grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
+  grid-gap: 1em;
 }
 
 .logo {
@@ -44,12 +45,11 @@ body {
 .title2 {
   grid-column-start: 2;
   grid-column-end: 4;
-  grid-row-start: 2;
+  grid-row-start: 1;
   grid-row-end: 4;
   font-weight: 800;
   font-size: x-large;
-  justify-self: center;
-  align-content: center;
+  line-height: 100px;
 }
 
 .title3 {
@@ -100,8 +100,13 @@ body {
   text-align: center;
 }
 
+.fr {
+  border: 1px solid lightgray;
+  border-radius: 3px;
+}
+
 .grid-container-product {
-  grid-template-columns: 100px 1fr 100px 200px repeat(4, 100px);
+  grid-template-columns: 100px 1fr 100px 150px repeat(4, 90px);
   grid-template-rows: repeat(2, 1fr);
 }
 
@@ -131,25 +136,67 @@ body {
 
 .grid-container-micro {
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(6, 1fr);
+  /* grid-template-rows: repeat(6, 1fr); */
+  grid-column-gap: 2px;
 }
 
 .grid-container-organo {
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  /* grid-template-rows: repeat(3, 1fr); */
+  grid-column-gap: 2px;
 }
 
 .grid-container-fisico {
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(6, 1fr);
+  /* grid-template-rows: repeat(6, 1fr); */
+  grid-column-gap: 2px;
 }
 
 .grid-container-paramfisico {
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  /* grid-template-rows: repeat(2, 1fr); */
+  grid-column-gap: 2px;
 }
 
 .check_cert {
   display: inline-flex;
   justify-content: center;
+}
+
+@media print {
+  .card-header {
+    color: black;
+  }
+  .cltitle {
+    color: black;
+  }
+  .title2 {
+    line-height: 100px;
+  }
+
+  #logo {
+    width: 130%;
+  }
+
+  .title2 {
+    font-size: 20px;
+  }
+
+  .product {
+    color: black;
+    font-size: 20px;
+  }
+  .glsbt {
+    color: black;
+    font-size: 20px;
+  }
+  .invima_id {
+    grid-column-start: 2;
+    grid-column-end: 4;
+  }
+
+  .titular_id {
+    grid-column-start: 2;
+    grid-column-end: 9;
+  }
 }

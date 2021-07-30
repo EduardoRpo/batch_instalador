@@ -16,9 +16,8 @@
 
 <body>
     <div class="grid-container gl mb-3">
-        <div class="logo"><img src="../../assets/images/logo/logo-samara.png" alt="logo_samara"></div>
-        <div class="title1">CERTIFICADO</div>
-        <div class="title2">DE ANÁLISIS</div>
+        <div class="logo"><img src="../../assets/images/logo/logo-samara.png" alt="logo_samara" id="logo"></div>
+        <div class="title2">CERTIFICADO DE ANÁLISIS</div>
         <div class="title3">CÓDIGO</div>
         <div class="title4">VERSIÓN</div>
         <div class="title5">FECHA</div>
@@ -50,22 +49,22 @@
         <div class="cltitle">METODO</div>
         <div class="cltitle">RESULTADOS</div>
 
-        <div>Recuento de Mesófilos aerobios totales</div>
-        <div id="mesofilos"></div>
-        <div>Siembra recuento total</div>
-        <div id="result_mesofilos"></div>
-        <div>Pseudomona aeruginosa</div>
-        <div id="pseudomona"></div>
-        <div>Siembra recuento total</div>
-        <div id="result_pseudomona"></div>
-        <div>Escherichia coli </div>
-        <div id="escherichia"></div>
-        <div>Siembra recuento total</div>
-        <div id="result_escherichia"></div>
-        <div>Staphylococcus aureus</div>
-        <div id="staphylococcus"></div>
-        <div>Siembra recuento total</div>
-        <div id="result_staphylococcus"></div>
+        <div class="fr">Recuento de Mesófilos aerobios totales</div>
+        <div class="fr" id="mesofilos"></div>
+        <div class="fr">Siembra recuento total</div>
+        <div class="fr" id="result_mesofilos"></div>
+        <div class="fr">Pseudomona aeruginosa</div>
+        <div class="fr" id="pseudomona"></div>
+        <div class="fr">Siembra recuento total</div>
+        <div class="fr" id="result_pseudomona"></div>
+        <div class="fr">Escherichia coli </div>
+        <div class="fr" id="escherichia"></div>
+        <div class="fr">Siembra recuento total</div>
+        <div class="fr" id="result_escherichia"></div>
+        <div class="fr">Staphylococcus aureus</div>
+        <div class="fr" id="staphylococcus"></div>
+        <div class="fr">Siembra recuento total</div>
+        <div class="fr" id="result_staphylococcus"></div>
     </div>
 
     <div class="grid-container-sbtitle gl mb-3">
@@ -78,18 +77,18 @@
         <div class="cltitle">ESPECIFICACIONES</div>
         <div class="cltitle">METODO</div>
         <div class="cltitle">RESULTADOS</div>
-        <div>Color</div>
-        <div id="espec_color"></div>
-        <div>Escala Cromática</div>
-        <div id="result_color"></div>
-        <div>Olor</div>
-        <div id="espec_olor"></div>
-        <div>Sensorial</div>
-        <div id="result_olor"></div>
-        <div>Apariencia</div>
-        <div id="espec_apariencia"></div>
-        <div>Sensorial</div>
-        <div id="result_apariencia"></div>
+        <div class="fr">Color</div>
+        <div class="fr" id="espec_color"></div>
+        <div class="fr">Escala Cromática</div>
+        <div class="fr" id="result_color"></div>
+        <div class="fr">Olor</div>
+        <div class="fr" id="espec_olor"></div>
+        <div class="fr">Sensorial</div>
+        <div class="fr" id="result_olor"></div>
+        <div class="fr">Apariencia</div>
+        <div class="fr" id="espec_apariencia"></div>
+        <div class="fr">Sensorial</div>
+        <div class="fr" id="result_apariencia"></div>
     </div>
 
     <div class="grid-container-sbtitle gl mb-3">
@@ -102,30 +101,30 @@
         <div class="cltitle">ESPECIFICACIONES</div>
         <div class="cltitle">METODO</div>
         <div class="cltitle">RESULTADOS</div>
-        <div>pH</div>
-        <div id="espec_ph"></div>
-        <div>pHmetro</div>
-        <div id="result_ph"></div>
-        <div>Densidad</div>
-        <div id="espec_densidad"></div>
-        <div>Picnómetro</div>
-        <div id="result_densidad"></div>
-        <div>Viscosidad (cps)</div>
-        <div id="espec_viscidad"></div>
-        <div>Viscosímetro</div>
-        <div id="result_viscosidad"></div>
-        <div>Untuosidad</div>
-        <div id="espec_untosidad"></div>
-        <div>Sensorial</div>
-        <div id="result_untuosidad"></div>
-        <div>Poder Espumoso</div>
-        <div id="espec_poder_espumoso"></div>
-        <div>Sensorial</div>
-        <div id="result_poder"></div>
-        <div>Grado Alcohol</div>
-        <div id="espec_grado_alcohol"></div>
-        <div>Alcoholímetro</div>
-        <div id="result_alcohol"></div>
+        <div class="fr">pH</div>
+        <div class="fr" id="espec_ph"></div>
+        <div class="fr">pHmetro</div>
+        <div class="fr" id="result_ph"></div>
+        <div class="fr">Densidad</div>
+        <div class="fr" id="espec_densidad"></div>
+        <div class="fr">Picnómetro</div>
+        <div class="fr" id="result_densidad"></div>
+        <div class="fr">Viscosidad (cps)</div>
+        <div class="fr" id="espec_viscidad"></div>
+        <div class="fr">Viscosímetro</div>
+        <div class="fr" id="result_viscosidad"></div>
+        <div class="fr">Untuosidad</div>
+        <div class="fr" id="espec_untosidad"></div>
+        <div class="fr">Sensorial</div>
+        <div class="fr" id="result_untuosidad"></div>
+        <div class="fr">Poder Espumoso</div>
+        <div class="fr" id="espec_poder_espumoso"></div>
+        <div class="fr">Sensorial</div>
+        <div class="fr" id="result_poder"></div>
+        <div class="fr">Grado Alcohol</div>
+        <div class="fr" id="espec_grado_alcohol"></div>
+        <div class="fr">Alcoholímetro</div>
+        <div class="fr" id="result_alcohol"></div>
     </div>
 
     <div class="grid-container-sbtitle gl mb-3">
@@ -138,14 +137,14 @@
         <div class="cltitle">METODO</div>
         <div class="cltitle">RESULTADOS</div>
 
-        <div>ENVASE</div>
-        <div>Buen estado, cierre hermético con acople a la tapa</div>
-        <div>Visual</div>
-        <div>Cumple</div>
-        <div>ETIQUETA</div>
-        <div>Buen estado y completa</div>
-        <div>Visual</div>
-        <div>Cumple</div>
+        <div class="fr">ENVASE</div>
+        <div class="fr">Buen estado, cierre hermético con acople a la tapa</div>
+        <div class="fr">Visual</div>
+        <div class="fr">Cumple</div>
+        <div class="fr">ETIQUETA</div>
+        <div class="fr">Buen estado y completa</div>
+        <div class="fr">Visual</div>
+        <div class="fr">Cumple</div>
 
     </div>
 
