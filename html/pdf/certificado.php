@@ -21,8 +21,8 @@
         <div class="title3">CÓDIGO</div>
         <div class="title4">VERSIÓN</div>
         <div class="title5">FECHA</div>
-        <div class="title6">F-Pr-13</div>
-        <div class="title7">10</div>
+        <div class="title6">F-CC-13</div>
+        <div class="title7">7</div>
         <div class="title8">27/07/2021</div>
     </div>
 
