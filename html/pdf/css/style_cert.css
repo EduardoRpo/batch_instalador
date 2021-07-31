@@ -163,6 +163,10 @@ body {
   justify-content: center;
 }
 
+.SaltoDePagina {
+  page-break-after: always;
+}
+
 @media print {
   .card-header {
     color: black;

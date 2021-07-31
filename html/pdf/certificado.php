@@ -90,7 +90,7 @@
         <div class="fr">Sensorial</div>
         <div class="fr" id="result_apariencia"></div>
     </div>
-
+    <h1 class="SaltoDePagina"> </h1>
     <div class="grid-container-sbtitle gl mb-3">
         <div class="glsbt">ANALISIS FISICOQUÍMICO</div>
         <!-- <div class="glsbt fecha_organ" style="font-size: smaller;font-weight: 600;">FECHA</div> -->
