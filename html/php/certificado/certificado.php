@@ -44,6 +44,8 @@ if (!empty($_GET)) {
             $query = $conn->prepare($sql);
             $query->execute(['batch' => $batch]);
             $data = $query->fetch(PDO::FETCH_ASSOC);
+            $hoy = date('Y-m-d');
+            array_push($data, $hoy);
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
             break;
     }

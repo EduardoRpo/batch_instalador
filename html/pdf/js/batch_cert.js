@@ -133,6 +133,9 @@ $(document).ready(function () {
     (data = { idBatch, op: 4 }),
     function (data, textStatus, jqXHR) {
       if (textStatus == "success" && data != "false") {
+        data = JSON.parse(data);
+        $("#fecha_exp").html(`Fecha de Expedición: <b>${data.fecha_registro}</b>`);
+        $("#fecha_imp").html(`Fecha de Impresión: <b>${data[0]}</b>`);
         $(".grid-container-fisico").show();
         $(".grid-container-paramfisico").show();
         $(".grid-container-nota").show();
