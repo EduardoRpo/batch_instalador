@@ -20,7 +20,7 @@
                                     <th class="centrado">Apariencia Etiquetas
                                         <!-- (Arrugas, quiebres, sucios, alineada, adherencia) -->
                                     </th>
-                                    <th class="centrado">Apariencia Termoencogible <br>Aplica <input type="checkbox" id="aplicaTermoencogible"> </br>
+                                    <th class="centrado">Apariencia Termoencogible <br><input type="checkbox" id="aplicaTermoencogible"> </br>
                                         <!-- (Cuando Aplique) -->
                                     </th>
                                     <th class="centrado">Apariencia Lote</th>
