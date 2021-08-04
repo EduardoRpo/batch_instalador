@@ -219,19 +219,6 @@ function muestras_acondicionamiento() {
 $("#guardar_muestras_acondicionamiento").click(function (e) {
   e.preventDefault();
   muestras_acon = $(`#muestras${id_multi}`).val();
-  /* for (i = 1; i <= muestras_acon; i++) {
-         let ae = $(`#apariencia_etiquetas${i}`).val();
-         let at = $(`#apariencia_termoencogible${i}`).val();
-         let ce = $(`#cumplimiento_empaque${i}`).val();
-         let pp = $(`#posicion_producto${i}`).val();
-         let rc = $(`#rotulo_caja${i}`).val();
-         total = ae * at * ce * pp * rc;
- 
-         if (total == 0) {
-             alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todas las muestras");
-             return false;
-         }
-     } */
 
   let cantidad_muestras = $(`#muestras${id_multi}`).val();
   let muestras = [];
@@ -290,3 +277,8 @@ function cumple_muestras(obj) {
   $(`#posicion_producto${id}`).val(1);
   $(`#rotulo_caja${id}`).val(1);
 }
+
+$("#aplicaTermoencogible").click(function (e) {
+  e.preventDefault();
+  for (let i = 1; i <= muestras; i++) $(`#apariencia_termoencogible${i}`).val(1);
+});
