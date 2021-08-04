@@ -6,15 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>pdf | Batch Record</title>
 
-    <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/icon/favicon.png">
     <title>Samara Cosmetics</title>
 
-    <!-- Bootstrap Core CSS -->
     <link href="../../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="css/style_pdf.css" rel="stylesheet">
+    <link href="../../html/pdf/css/style_pdf.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../../html/vendor/datatables/datatables.min.css">
     <link rel="stylesheet" type="text/css" href="../../html/vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css">
 
@@ -23,7 +19,7 @@
 <body id="pdf">
 
     <div class="mb-3" style="display: flex;justify-content:space-between">
-        <a><span><img src="img/logo-samara.png" style="width: 80%;" class="light-logo" alt="Samara Cosmetics" /></span></a>
+        <a><span><img src="../../assets/images/logo/logo-samara.png" style="width: 80%;" class="light-logo" alt="Samara Cosmetics" /></span></a>
         <span><b>Codigo:</b> F-Pr-13 <b>Versión:</b>10 <b>Fecha:</b>26/04/2021</span>
     </div>
 
@@ -2050,8 +2046,8 @@
     <script src="../../html/js/utils/sidebarmenu.js"></script>
     <script src="../../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <script src="https://use.fontawesome.com/15242848ba.js"></script>
-    <script src="js/batch_pdf.js"></script>
-    <script src="js/printThis.js"></script>
+    <script src="../../html/pdf/js/batch_pdf.js"></script>
+    <!-- <script src="../../html/pdf/js/printThis.js"></script> -->
 
 </body>
 

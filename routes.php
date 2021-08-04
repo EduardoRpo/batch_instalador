@@ -90,4 +90,8 @@ $router->add('/certificado/:idBatch/:referencia', function ($idBatch, $referenci
   return Router::getRenderedHTML('html/pdf/certificado.php ');
 });
 
+$router->add('/pdf/:idBatch/:referencia', function ($idBatch, $referencia) {
+  return Router::getRenderedHTML('html/pdf/formato.php');
+});
+
 $router->run();

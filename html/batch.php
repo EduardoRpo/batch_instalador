@@ -27,7 +27,7 @@ include_once("modal/m_batch_pdf.php");
 
   <?php include('./partials/scripts.php'); ?>
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">
@@ -95,65 +95,124 @@ include_once("modal/m_batch_pdf.php");
       </div>
     </div>
 
-    <div class="col-md-12 align-self-right">
-      <div class="card">
-        <div class="card-block">
-          <div class="table-responsive">
-            <table class="table table-striped table-bordered " id="tablaBatch" name="tablaBatch">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>No</th>
-                  <th>Orden</th>
-                  <th>Referencia</th>
-                  <th>Nombre</th>
-                  <th>Lote</th>
-                  <th>Tamaño(kg)</th>
-                  <th>Propietario</th>
-                  <th>Creación</th>
-                  <th>Programación</th>
-                  <th>Estado</th>
-                  <th>Multi</th>
-                  <th></th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
+    <div class="container1" style="margin-left: 10px;margin-right:10px">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header" style="background: #FCF9F8;">
+              <ul class="nav nav-tabs card-header-tabs" id="batch-list" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#description" role="tab" aria-controls="description" aria-selected="true">Activos</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#history" role="tab" aria-controls="history" aria-selected="false">Cerrados</a>
+                </li>
+              </ul>
+            </div>
+            <div class="card-body" id="cardBatchActivos">
+              <div class="tab-content mt-3">
+                <div class="tab-pane active" id="description" role="tabpanel">
+                  <div class="col-md-12 align-self-right">
+                    <div class="card">
+                      <div class="card-block">
+                        <div class="table-responsive">
+                          <table class="table table-striped table-bordered " id="tablaBatch" name="tablaBatch">
+                            <thead>
+                              <tr>
+                                <th></th>
+                                <th>No</th>
+                                <th>Orden</th>
+                                <th>Referencia</th>
+                                <th>Nombre</th>
+                                <th>Lote</th>
+                                <th>Tamaño(kg)</th>
+                                <th>Propietario</th>
+                                <th>Creación</th>
+                                <th>Programación</th>
+                                <th>Estado</th>
+                                <th>Multi</th>
+                                <th></th>
+                                <th></th>
+                              </tr>
+                            </thead>
+                            <tbody>
 
-              </tbody>
-            </table>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" id="history" role="tabpanel" aria-labelledby="history-tab"></div>
+              </div>
+            </div>
+
+            <div class="card-body" id="cardBatchCerrados">
+              <div class="tab-content mt-3">
+                <div class="tab-pane active" id="history" role="tabpanel">
+                  <div class="col-md-12 align-self-right">
+                    <div class="card">
+                      <div class="card-block">
+                        <div class="table-responsive">
+                          <table class="table table-striped table-bordered " id="tablaBatchCerrados">
+                            <thead>
+                              <tr>
+                                <th>Orden</th>
+                                <th>Referencia</th>
+                                <th>Nombre</th>
+                                <th>Lote</th>
+                                <th>Tamaño(kg)</th>
+                                <th>Propietario</th>
+                                <th>Creación</th>
+                                <th>Programación</th>
+                                <!-- <th>Estado</th> -->
+                                <th>Multi</th>
+                                <!-- <th></th>
+                                <th></th> -->
+                              </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+<!--                 <div class="tab-pane" id="history" role="tabpanel" aria-labelledby="history-tab">
+                  <p class="card-text">Batch Cerrados </p>
+                </div>
+ -->              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
+
+
+
+
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="js/utils/jquery.slimscroll.js"></script>
     <script src="vendor/jquery/jquery.serializeToJSON.min.js"></script>
-
-    <!-- Bootstrap -->
     <script src="../assets/plugins/bootstrap/js/tether.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <!-- <script src="js/waves.js"></script> -->
-
-    <!-- Datatables -->
     <script type="text/javascript" src="vendor/datatables/datatables.min.js"></script>
-
-    <!-- Calendario -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-
-    <!-- Menu -->
     <script src="js/utils/sidebarmenu.js"></script>
     <script src="../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
-
-
-    <!--Custom JavaScript -->
     <script src="js/utils/datatables.js"></script>
     <script src="vendor/jquery-confirm/jquery-confirm.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <script src="//cdn.datatables.net/plug-ins/1.10.21/api/fnGetTds.js"></script>
+
     <script src="js/utils/custom.js"></script>
     <script src="js/batch/multipresentacion.js"></script>
     <script src="js/batch/batch.js"></script>
@@ -163,11 +222,7 @@ include_once("modal/m_batch_pdf.php");
     <script src="js/calendario/calendar.js"></script>
     <script src="js/global/loadinfo-global.js"></script>
     <script src="js/batch/batcheliminados.js"></script>
-    <script src="js/batch/batch_pdf.js"></script>
-
-    <!--Alertify-->
-    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-    <script src="//cdn.datatables.net/plug-ins/1.10.21/api/fnGetTds.js"></script>
+    <script src="../html/js/batch/cargarbatchpdf.js"></script>
 
 </body>
 

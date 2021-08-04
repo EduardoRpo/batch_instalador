@@ -64,6 +64,25 @@ $app->get('/productsDetails/{idProducto}', function (Request $request, Response 
   return $response;
 });
 
+$app->get('/batch/{id}', function (Request $request, Response $response, $args) use ($batchDao) {
+  $batch = $batchDao->findById($args["id"]);
+  $response->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
+});
+
+$app->get('/batch', function (Request $request, Response $data, $args) use ($batchDao) {
+  $batch = $batchDao->findAll();
+  $data->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));
+  return $data->withHeader('Content-Type', 'application/json');
+});
+
+$app->get('/batchcerrados', function (Request $request, Response $response, $args) use ($batchDao) {
+  $batchcerrados = $batchDao->findAllClosed();
+  $response->getBody()->write(json_encode($batchcerrados, JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
+});
+
+
 $app->get('/pesajes', function (Request $request, Response $response, $args) use ($batchLineaDao) {
   $pesajes = $batchLineaDao->findBatchPesajes();
   $response->getBody()->write(json_encode($pesajes, JSON_NUMERIC_CHECK));
@@ -116,18 +135,6 @@ $app->get('/liberacionlote', function (Request $request, Response $response, $ar
   $liberacionlote = $batchLineaDao->findBatchliberacionlote();
   $response->getBody()->write(json_encode($liberacionlote, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
-});
-
-$app->get('/batch/{id}', function (Request $request, Response $response, $args) use ($batchDao) {
-  $batch = $batchDao->findById($args["id"]);
-  $response->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));
-  return $response->withHeader('Content-Type', 'application/json');
-});
-
-$app->get('/batch', function (Request $request, Response $data, $args) use ($batchDao) {
-  $batch = $batchDao->findAll();
-  $data->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));
-  return $data->withHeader('Content-Type', 'application/json');
 });
 
 $app->post('/clonebatch', function (Request $request, Response $response, $args) use ($batchDao) {

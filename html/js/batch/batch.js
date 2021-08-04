@@ -9,7 +9,17 @@ var tanques;
 
 $(document).ready(function () {
   crearTablaBatch();
+  tablaBatchCerrados();
   cargarTanques();
+  $("#cardBatchCerrados").hide();
+});
+
+$("#batch-list a").on("click", function (e) {
+  e.preventDefault();
+  let c = $(this).text();
+  if (c == "Cerrados") $("#cardBatchCerrados").show();
+  else $("#cardBatchCerrados").hide();
+  $(this).tab("show");
 });
 
 function crearTablaBatch(
@@ -106,8 +116,47 @@ function crearTablaBatch(
   });
 }
 
-/* filtrado exacto */
-/* tabla.column(i).search($(this).val(), false, false, false).draw(); */
+function tablaBatchCerrados() {
+  tabla = $("#tablaBatchCerrados").DataTable({
+    pageLength: 50,
+    responsive: true,
+    scrollCollapse: true,
+    language: { url: "../../../admin/sistema/admin_componentes/es-ar.json" },
+    oSearch: { bSmart: false },
+    bAutoWidth: false,
+
+    ajax: {
+      url: "../../../api/batchcerrados",
+      dataSrc: "",
+    },
+
+    columns: [
+      { data: "numero_orden", className: "uniqueClassName" },
+      { data: "referencia", className: "uniqueClassName" },
+      { data: "nombre_referencia" },
+      { data: "numero_lote" },
+      {
+        data: "tamano_lote",
+        className: "uniqueClassName",
+        render: $.fn.dataTable.render.number(".", ",", 0, ""),
+      },
+      { data: "nombre" },
+      { data: "fecha_creacion", className: "uniqueClassName" },
+      { data: "fecha_programacion", className: "uniqueClassName" },
+
+      {
+        data: "multi",
+        className: "uniqueClassName",
+        render: (data, type, row) => {
+          "use strict";
+          return data == 1
+            ? '<i class="fa fa-superscript link-editarMulti" aria-hidden="true" data-toggle="tooltip" title="Editar Multipresentación" style="color:rgb(59, 131, 189)" aria-hidden="true"></i>'
+            : "";
+        },
+      },
+    ],
+  });
+}
 
 /* Cambiar puntero del mouse al tocar los botones de actualizar y eliminar */
 
@@ -119,7 +168,6 @@ $(".link-editarMulti").css("cursor", "pointer");
 $(document).on("click", ".link-borrar", function (e) {
   e.preventDefault();
 
-  //let id = $(this).parent().parent().children().first().text();
   const texto = $(this).parent().parent().children()[1];
   const id = $(texto).text();
 

@@ -2,21 +2,55 @@
 
 $(".pdf").click(function (e) {
   e.preventDefault();
-
-  /* function batch_pdf() { */
   $("#m_batch_pdf").modal();
-  $("#tabla_batch_pdf").dataTable().fnDestroy();
-  cargartablabatch_pdf();
-  /* } */
+  /* $("#tabla_batch_pdf").dataTable().fnDestroy();
+  cargartablabatch_pdf(); */
 });
+
+$("#buscar_batch").click(function (e) {
+  e.preventDefault();
+  v = $("#search").val();
+  $.get(
+    "../../../admin/sistema/php/certificado.php",
+    { data: v },
+    function (data, textStatus, jqXHR) {
+      if ((textStatus = "success")) {
+        data = JSON.parse(data);
+        if (data) {
+          $("#search").val("");
+          $("#batchpdf").html(`Batch: ${data[0].id_batch}`);
+          $("#ref").html(data[0].referencia);
+          $("#prod").html(data[0].nombre_referencia);
+          $("#lote").html(data[0].numero_lote);
+          $("#accions").empty();
+          $("#accions").append(
+            `<a href="/pdf/${data[0].id_batch}/${data[0].referencia}" target="_blank"><i class="fas fa-external-link-alt"></i></a>`
+          );
+        } else {
+          alertify.set("notifier", "position", "top-right");
+          alertify.error("Valor buscado no existe.");
+          $("#search").val("");
+          $("#batchpdf").html("");
+          $("#ref").html("");
+          $("#prod").html("");
+          $("#lote").html("");
+          $("#accions").empty();
+          $("#accions").append("");
+        }
+      }
+    }
+  );
+});
+
+$('[data-toggle="popover"]').popover();
+
 /* Cargar tabla de eliminados */
 
-function cargartablabatch_pdf() {
+/* function cargartablabatch_pdf() {
   $("#tabla_batch_pdf").DataTable({
-    //scrollY: '100vh',
-    responsive: true,
+        responsive: true,
     scrollCollapse: true,
-    //paging: false,
+    
     language: { url: "/admin/sistema/admin_componentes/es-ar.json" },
 
     ajax: {
@@ -52,11 +86,11 @@ function cargartablabatch_pdf() {
       },
     ],
   });
-}
+} */
 
 /* Visualizar pdf */
 
-$(document).on("click", ".link-ver", function (e) {
+/* $(document).on("click", ".link-ver", function (e) {
   e.preventDefault();
   let id = $(this).parent().parent().children().first().text();
   let referencia = $(this).parent().parent().children().eq(4).text();
@@ -74,7 +108,7 @@ $(document).on("click", ".link-ver", function (e) {
       window.open("../html/pdf/formato.php", "_blank");
     },
   });
-});
+}); */
 
 /* Imprimir pdf */
 

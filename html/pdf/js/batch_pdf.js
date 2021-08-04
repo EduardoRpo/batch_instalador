@@ -7,6 +7,25 @@ let tamanioLote;
 let infoBatch;
 let multi;
 
+$(document).ready(function () {
+  var pathname = window.location.pathname;
+  idList = pathname.split("/");
+  idBatch = idList[2];
+  referencia = idList[3];
+
+  $.ajax({
+    type: "POST",
+    url: "../../html/php/busqueda_multipresentacion.php",
+    data: { idBatch },
+
+    success: function (response) {
+      data = JSON.parse(response);
+      multi = JSON.stringify(data);
+      //sessionStorage.setItem("multi", JSON.stringify(data));
+    },
+  });
+});
+
 /* bloquear inputs */
 $("input").prop("readonly", true);
 
@@ -996,19 +1015,16 @@ const liberacion_lote = () => {
 };
 
 $(document).ready(function () {
-  idBatch = sessionStorage.getItem("id");
-  let referencias = sessionStorage.getItem("multi");
-  referencias = JSON.parse(referencias);
+  /* idBatch = sessionStorage.getItem("idBatch"); */
+  //let referencias = sessionStorage.getItem("multi");
+  /*   referencias = JSON.parse(multi);
   if (referencias.length > 1) referencia = referencias[0].referencia;
-  if (!referencias) referencia = sessionStorage.getItem("referencia");
+  if (!referencias) referencia = sessionStorage.getItem("referencia"); */
 
   cargar_Alertas();
   info_General();
   parametros_Control();
   especificaciones_producto();
-  //entrega_material_envase();
-  //obtenerMuestras();
-  //material_envase_sobrante();
   condiciones_medio();
   control_proceso();
   equipos();
