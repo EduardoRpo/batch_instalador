@@ -129,7 +129,6 @@
               <div class="card-body">
                 <div class="table-responsive">
                   <table id="tbl_formulas_f" class="table-striped row-borde" style="width:100%">
-                    <!-- <label for="">Tabla Fantasma</label> -->
                     <thead>
                       <tr>
                         <th>Referencia</th>
@@ -143,6 +142,9 @@
 
                     </tbody>
                   </table>
+                  <div style="display: flex;justify-content: flex-end;">
+                    <input type="text" id="totalPorcentajeFormulasInvima" style="border: none;margin-right:100px;text-align:center" disabled>
+                  </div>
                 </div>
               </div>
               <form id="formDataExcel2" enctype="multipart/form-data">

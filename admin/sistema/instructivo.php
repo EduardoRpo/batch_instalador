@@ -90,17 +90,6 @@
         <div class="row">
           <div class="col-md-12">
             <div class="card" id="1">
-              <!-- <div class="card-header">
-                <h4 class="card-title">Formulas</h4>
-                <hr>
-                <button type="button" class="btn btn-primary" id="addFormula">Adicionar</button>
-                <form id="frmadParametro" style="display: none;">
-                  <label for=""><b>Nombre Producto</b></label>
-                  <input type="text" name="nombreProducto" id="nombreProducto" class="form-control" placeholder="Nombre Producto">
-                  <button type="button" class="btn btn-primary" id="guardarFormula">Guardar</button>
-                </form>
-                <hr>
-              </div> -->
               <div class="card-body">
                 <div class="table-responsive">
                   <table id="tblInstructivo" class="table-striped row-borde" style="width:100%">

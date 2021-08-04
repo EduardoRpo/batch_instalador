@@ -249,14 +249,15 @@ $(document).on("click", ".link-borrar", function (e) {
     .set("labels", { ok: "Si", cancel: "No" });
   confirm.set("onok", function (r) {
     if (r) {
-      $.ajax({
-        method: "POST",
-        url: "php/c_formulas.php",
-        data: { operacion: "8", ref_producto, ref_materiaprima, tbl },
-      });
-      refreshTable();
-      alertify.set("notifier", "position", "top-right");
-      alertify.success("Eliminado");
+      $.post(
+        "php/c_formulas.php",
+        { operacion: "8", ref_producto, ref_materiaprima, tbl },
+        function (data, textStatus, jqXHR) {
+          refreshTable();
+          alertify.set("notifier", "position", "top-right");
+          alertify.success("Eliminado");
+        }
+      );
     }
   });
 });
@@ -338,6 +339,17 @@ function cargar_formulas_f(referencia) {
       },
     ],
     columnDefs: [{ width: "10%", targets: 0 }],
+
+    footerCallback: function (row, data, start, end, display) {
+      total = this.api()
+        .column(3)
+        .data()
+        .reduce(function (a, b) {
+          return parseFloat(a) + parseFloat(b);
+        }, 0);
+      total = total.toFixed(2);
+      $("#totalPorcentajeFormulasInvima").val(`Total ${total}%`);
+    },
   });
 }
 
