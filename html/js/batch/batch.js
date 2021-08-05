@@ -117,7 +117,7 @@ function crearTablaBatch(
 }
 
 function tablaBatchCerrados() {
-  tabla = $("#tablaBatchCerrados").DataTable({
+  $("#tablaBatchCerrados").DataTable({
     pageLength: 50,
     responsive: true,
     scrollCollapse: true,

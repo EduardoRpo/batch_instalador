@@ -3,11 +3,8 @@
 require 'Router.php';
 require 'Route.php';
 
-
 $router = new Router($_SERVER['REQUEST_URI']);
-
 $router->setRequestUri($_SERVER['REQUEST_URI']);
-
 $router->setBasePath('');
 $router->add('/', function () {
   return file_get_contents('index.php');
@@ -82,9 +79,9 @@ $router->add('/liberacionloteinfo/:idBatch/:referencia', function ($idBatch, $re
   return Router::getRenderedHTML('html/liberacionloteinfo.php');
 });
 
-$router->add('/pdf/:idBatch/:referencia', function ($idBatch, $referencia) {
+/* $router->add('/pdf/:idBatch/:referencia', function ($idBatch, $referencia) {
   return Router::getRenderedHTML('html/pdf/formato.php ');
-});
+}); */
 
 $router->add('/certificado/:idBatch/:referencia', function ($idBatch, $referencia) {
   return Router::getRenderedHTML('html/pdf/certificado.php ');

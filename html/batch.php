@@ -166,10 +166,7 @@ include_once("modal/m_batch_pdf.php");
                                 <th>Propietario</th>
                                 <th>Creación</th>
                                 <th>Programación</th>
-                                <!-- <th>Estado</th> -->
                                 <th>Multi</th>
-                                <!-- <th></th>
-                                <th></th> -->
                               </tr>
                             </thead>
                             <tbody>
@@ -181,10 +178,10 @@ include_once("modal/m_batch_pdf.php");
                     </div>
                   </div>
                 </div>
-<!--                 <div class="tab-pane" id="history" role="tabpanel" aria-labelledby="history-tab">
+                <div class="tab-pane" id="history" role="tabpanel" aria-labelledby="history-tab">
                   <p class="card-text">Batch Cerrados </p>
                 </div>
- -->              </div>
+              </div>
             </div>
           </div>
         </div>
