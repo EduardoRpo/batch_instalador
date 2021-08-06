@@ -32,6 +32,7 @@ if (!empty($_POST)) {
                     $sql = "UPDATE batch_tanques_chks SET tanquesOk =:tanquesOk WHERE modulo = :modulo AND batch = :batch";
                     $query = $conn->prepare($sql);
                     $result = $query->execute(['tanquesOk' => $tanquesOk, 'modulo' => $modulo, 'batch' => $batch]);
+                    if ($modulo == 2 || $modulo == 3 || $modulo == 4) actualizarEstado($batch, $modulo, $conn);
                     if ($result) echo '1';
                     else echo '0';
                 } else {

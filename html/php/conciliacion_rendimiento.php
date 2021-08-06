@@ -38,6 +38,7 @@ if (!empty($_POST)) {
             break;
 
         case 2: // cargar batch Conciliacion
+            $modulo = $_POST['modulo'];
             $sql = "SELECT c.unidades_producidas, c.muestras_retencion, c.mov_inventario, u.urlfirma 
                     FROM batch_conciliacion_rendimiento c INNER JOIN usuario u ON u.id = c.entrego
                     WHERE batch = :batch AND ref_multi = :referencia AND modulo = :modulo";
