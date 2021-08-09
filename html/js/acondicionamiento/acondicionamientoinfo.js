@@ -348,6 +348,7 @@ function conciliacionRendimiento() {
     var entregarBodega = "";
   } else {
     totalCajas = Math.ceil((unidadesProducidas - retencion) / unidadEmpaque); //aproximar por encima
+    totalCajas == Infinity ? (totalCajas = "No Aplica") : totalCajas;
     entregarBodega = unidadesProducidas - retencion;
   }
 

@@ -1528,7 +1528,7 @@
                         <div class="subtitle"><label>Conciliación de rendimiento</label></div>
                         <div class="conciliacion">
                             <label style="justify-self: end;">Conciliacion rendimiento</label>
-                            <input type="text" class="form-control centrado" id="conciliacionRendimiento1" style="width: 30%;justify-self: baseline" readonly>
+                            <input type="text" class="form-control centrado" id="conciliacionRendimiento2" style="width: 30%;justify-self: baseline" readonly>
                         </div>
 
                         <div class="enlinea mt-3">
@@ -1631,7 +1631,7 @@
                         <div class="subtitle"><label>Conciliación de rendimiento</label></div>
                         <div class="conciliacion">
                             <label style="justify-self: end;">Conciliacion rendimiento</label>
-                            <input type="text" class="form-control centrado" id="conciliacionRendimiento2" style="width: 30%;justify-self: baseline" readonly>
+                            <input type="text" class="form-control centrado" id="conciliacionRendimiento3" style="width: 30%;justify-self: baseline" readonly>
                         </div>
 
                         <div class="enlinea mt-3">
