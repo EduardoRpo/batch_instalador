@@ -43,4 +43,17 @@ class UserDao
     $this->logger->notice("usuarios Obtenidos", array('usuarios' => $user));
     return $user;
   }
+
+  public function inactive($idUser)
+  {
+    $connection = Connection::getInstance()->getConnection();
+    $stmt = $connection->prepare("SELECT estado FROM usuario WHERE id = :user");
+    $stmt->execute(array('user' => $idUser));
+    $stdUser = $stmt->fetch($connection::FETCH_ASSOC);
+
+    $stdUser['estado'] == 1 ? $estado = 0 : $estado = 1;
+    $stmt = $connection->prepare("UPDATE usuario SET estado = :estado WHERE id = :user");
+    $stmt->execute(array('user' => $idUser, 'estado' => $estado));
+    return $estado;
+  }
 }

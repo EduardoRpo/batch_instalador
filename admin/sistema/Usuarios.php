@@ -74,6 +74,7 @@ include_once('./modal/m_crearUsuarios.php');
                         <th>Módulo</th>
                         <th>Usuario</th>
                         <th>Rol</th>
+                        <th>Estado</th>
                       </tr>
                     </thead>
                     <tbody>

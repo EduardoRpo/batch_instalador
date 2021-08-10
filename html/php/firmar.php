@@ -9,7 +9,7 @@ if (!empty($_POST)) {
   $clave = md5($_POST['password']);
   $btn = $_POST['btn_id'];
 
-  $sql = "SELECT id, CONCAT(nombre, ' ', apellido) as usuario, rol, urlfirma FROM usuario WHERE user = :user AND clave = :clave";
+  $sql = "SELECT id, CONCAT(nombre, ' ', apellido) as usuario, rol, urlfirma, estado FROM usuario WHERE user = :user AND clave = :clave";
   $query = $conn->prepare($sql);
   $query->execute(['clave' => $clave, 'user' => $user]);
   $result = $query->rowCount();
@@ -20,6 +20,12 @@ if (!empty($_POST)) {
 
   if ($result > 0) {
     $data[] = $query->fetch(PDO::FETCH_ASSOC);
+
+    if ($data[0]['estado'] == 0) {
+      echo '1';
+      exit();
+    }
+
 
     if ($data[0]['rol'] !== 3 && $data[0]['rol'] !== 4) {
       echo '1';

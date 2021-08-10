@@ -26,7 +26,7 @@ $(document).ready(function () {
     columns: [
       {
         defaultContent:
-          "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Editar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>",
+          "<a href='#' <i class='fas fa-users-cog link-inactivar' title='Inactivar/Activar' style='color: lightslategrey;'></i></a><a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Editar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>",
       },
       { data: "id" },
       { data: "nombre" },
@@ -48,6 +48,13 @@ $(document).ready(function () {
             : data == 4
             ? "Usuario QC"
             : "Desarrollo";
+        },
+      },
+      {
+        data: "estado",
+        render: (data, type, row) => {
+          "use strict";
+          return data == 1 ? "Activo" : "Inactivo";
         },
       },
     ],
@@ -269,6 +276,25 @@ $(document).on("click", ".link-borrar", function (e) {
       refreshTable();
       alertify.success("Registro Eliminado");
     }
+  });
+});
+
+/* Inactivar Usuarios */
+
+$(document).on("click", ".link-inactivar", function (e) {
+  let idUser = $(this).parent().parent().children().eq(1).text();
+  $.ajax({
+    url: `/api/user/${idUser}`,
+    type: "GET",
+  }).done((data, status, xhr) => {
+    if (data) {
+      alertify.set("notifier", "position", "top-right");
+      alertify.success("Usuario Activado.");
+    } else {
+      alertify.set("notifier", "position", "top-right");
+      alertify.success("Usuario Inactivado.");
+    }
+    refreshTable();
   });
 });
 

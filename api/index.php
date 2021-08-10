@@ -248,6 +248,12 @@ $app->get('/user/{modulo}/{batch}', function (Request $request, Response $respon
   return $response->withHeader('Content-Type', 'application/json');
 });
 
+$app->get('/user/{idUser}', function (Request $request, Response $response, $args) use ($userDao) {
+  $user = $userDao->inactive($args["idUser"]);
+  $response->getBody()->write(json_encode($user, JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
+});
+
 $app->get('/controlproceso', function (Request $request, Response $response, $args) use ($controlProcesoDao) {
   $array = $controlProcesoDao->findAll();
   $response->getBody()->write(json_encode($array));
