@@ -154,6 +154,7 @@ function info_General() {
       desinfectante();
       observacionesAprobacion();
       imprimirEtiquetasVirtuales();
+      /* etiquetasInvima(); */
       if (multi == undefined) {
         identificarDensidad();
         obtenerMuestras();

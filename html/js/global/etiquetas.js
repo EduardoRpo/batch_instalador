@@ -170,3 +170,37 @@ imprimirEtiquetasVirtuales = () => {
     },
   });
 };
+
+/* const etiquetasInvima = () => {
+  $.ajax({
+    url: `../../api/etiquetasvirtuales/${referencia}/${idBatch}`,
+    success: function (response) {
+      if (!flag) flag = 1;
+      else return false;
+
+      for (let j = 0; j < response.length; j++) {
+        if (response[j]["fecha_registro"])
+          fecha = response[j]["fecha_registro"];
+        if (response[j]["urlfirma"]) verifico = response[j]["urlfirma"];
+        if (response[j]["cantidad"]) cantidad = response[j]["cantidad"];
+      }
+
+      for (i = 0; i < response.length - 2; i++) {
+        $(".etiquetasV").append(
+          `<div class="etiquetaUnica rounded-3">
+            <div class="etiquetasVirtuales">
+                <p><b>OP: </b>${infoBatch.numero_orden}</p>
+                <p id="peso"><b>PESO: </b>${(
+                  ((response[i]["porcentaje"] / 100) * tamanioLote) /
+                  cantidad
+                ).toFixed(2)}</p>
+                <p><b>REFERENCIA:</b> ${response[i]["referencia"]}</p>
+                <p><b>FECHA: </b> ${fecha}</p>
+                <p><b>VoBo QC: </b><img src="${verifico}" style="width:60%"></p>
+            </div>
+          </div>`
+        );
+      }
+    },
+  });
+}; */

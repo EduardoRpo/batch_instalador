@@ -2053,6 +2053,23 @@
         </div>
     </div>
 
+    <!-- <h1 class="SaltoDePagina"> </h1>
+    <div class="card mt-5 mb-5">
+        <div class="card-header centrado"><b>ETIQUETAS VIRTUALES</b></div>
+        <div class="card-body">
+
+            <div id="contenedorEtiquetasV" class="contenedorEtiquetasV">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="etiquetasV">
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
     <script src="../../assets/plugins/jquery/jquery.min.js"></script>
     <script src="../../assets/plugins/bootstrap/js/tether.min.js"></script>
     <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>

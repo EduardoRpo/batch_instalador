@@ -285,6 +285,13 @@ input[type="checkbox"] {
   grid-gap: 1em;
 }
 
+.etiquetasV {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 10px;
+  grid-gap: 1em;
+}
+
 .etiquetaUnica {
   padding: 10px;
   grid-gap: 1em;
@@ -321,6 +328,12 @@ input[type="checkbox"] {
     display: none;
   }
   .etiquetas {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 10px;
+    grid-gap: 1em;
+  }
+  .etiquetasV {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     padding: 10px;
