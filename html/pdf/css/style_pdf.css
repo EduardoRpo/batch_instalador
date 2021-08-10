@@ -278,6 +278,35 @@ input[type="checkbox"] {
   page-break-after: always;
 }
 
+.etiquetas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 10px;
+  grid-gap: 1em;
+}
+
+.etiquetaUnica {
+  padding: 10px;
+  grid-gap: 1em;
+  border-width: 1px;
+  border-style: solid;
+  border-color: lightgrey;
+  border-radius: 5px;
+  height: fit-content;
+}
+
+.etiquetasVirtuales {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+#peso {
+  grid-column-start: 2;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  font-size: xx-large;
+}
+
 @media print {
   .card-header {
     color: black;
@@ -290,6 +319,12 @@ input[type="checkbox"] {
   }
   .noImprimir {
     display: none;
+  }
+  .etiquetas {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 10px;
+    grid-gap: 1em;
   }
 }
 

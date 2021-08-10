@@ -143,7 +143,7 @@ $app->post('/clonebatch', function (Request $request, Response $response, $args)
   //$batch["unidad_lote"] = $requestBody['unidades'];
   $duplicates = $requestBody['cantidad'];
   for ($i = 0; $i < $duplicates; $i++) {
-    $rows = $batchDao->save($batch);
+    $rows = $batchDao->saveBatch($batch);
   }
   $resp = array('success' => ($rows > 0));
   $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
@@ -179,6 +179,16 @@ $app->get('/desinfectantes', function (Request $request, Response $response, $ar
 $app->get('/materiasp/{idProduct}', function (Request $request, Response $response, $args) use ($materiaPrimaDao) {
   $batch = $materiaPrimaDao->findByProduct($args["idProduct"]);
   $response->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
+});
+
+$app->get('/etiquetasvirtuales/{idProduct}/{batch}', function (Request $request, Response $response, $args) use ($materiaPrimaDao) {
+  $materiasprimas = $materiaPrimaDao->findByProduct($args["idProduct"]);
+  $batch = $materiaPrimaDao->findVirtualByBatch($args["batch"]);
+  $tanques = $materiaPrimaDao->findTanksByBatch($args["batch"]);
+  $result = array_merge($materiasprimas, $batch, $tanques);
+
+  $response->getBody()->write(json_encode($result, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
 

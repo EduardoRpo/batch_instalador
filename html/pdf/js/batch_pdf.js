@@ -153,6 +153,7 @@ function info_General() {
       lote_anterior();
       desinfectante();
       observacionesAprobacion();
+      imprimirEtiquetasVirtuales();
       if (multi == undefined) {
         identificarDensidad();
         obtenerMuestras();

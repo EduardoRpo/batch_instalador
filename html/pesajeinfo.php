@@ -23,25 +23,16 @@ include_once('modal/modal_condicionesMedio.php');
   <!-- Favicon icon -->
   <link rel="icon" type="image/png" sizes="16x16" href="#">
 
-  <!-- Bootstrap Core CSS -->
   <link href="../../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Custom CSS -->
   <link href="../../html/css/style.css" rel="stylesheet">
-
-  <!-- You can change the theme colors from here -->
   <link rel="stylesheet" href="../../html/css/colors/blue.css" id="theme">
   <link rel="stylesheet" href="../../html/css/custom.css">
   <link rel="stylesheet" href="../../html/vendor/jquery-confirm/jquery-confirm.min.css">
   <!-- <link rel="stylesheet" type="text/css" href="../../html/vendor/datatables/datatables.min.css"> -->
   <link rel="stylesheet" type="text/css" href="../../html/vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
-  <!-- Alertify -->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
-
-  <!-- Exportar Archivos -->
   <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"> -->
   <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
   <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.21/b-1.6.2/b-flash-1.6.2/datatables.min.css"/> -->
@@ -139,29 +130,11 @@ include_once('modal/modal_condicionesMedio.php');
                           <td id="cantidad2" class="centrado"></td>
                           <td id="total2" class="centrado"></td>
                         </tr>
-                        <!-- <tr id="fila3">
-                          <td id="tanque3" style="text-align: end;font-size:14px;"></td>
-                          <td id="cantidad3" style="text-align: end;font-size:14px;"></td>
-                          <td id="total3" style="text-align: end;font-size:14px;"></td>
-                        </tr>
-                        <tr id="fila4">
-                          <td id="tanque4" style="text-align: end;font-size:14px;"></td>
-                          <td id="cantidad4" style="text-align: end;font-size:14px;"></td>
-                          <td id="total4" style="text-align: end;font-size:14px;"></td>
-                        </tr>
-                        <tr id="fila5">
-                          <td id="tanque5" style="text-align: end;font-size:14px;"></td>
-                          <td id="cantidad5" style="text-align: end;font-size:14px;"></td>
-                          <td id="total5" style="text-align: end;font-size:14px;"></td>
-                        </tr> -->
                       </tbody>
                     </table>
                   </div>
                 </div>
               </div>
-
-              <!--  </div> -->
-
             </div>
           </div>
 
@@ -261,7 +234,7 @@ include_once('modal/modal_condicionesMedio.php');
               <div class="card-body">
                 <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Pesaje</h3>
                 <div class="chk-control m-3">
-                  <!-- <button class="btn btn-primary" id="btnImprimirTodaslasEtiquetas">ImprimirEtiquetas</button> -->
+                  <!-- <button class="btn btn-primary" id="btnEtiquetasPrueba">ImprimirEtiquetas</button> -->
                   <label for="" class="lblchk-control">Control Pesaje Tanques</label>
                 </div>
                 <hr>
@@ -299,29 +272,15 @@ include_once('modal/modal_condicionesMedio.php');
     </div>
   </div>
 
-  <!-- jquery -->
+  
   <script src="../../assets/plugins/jquery/jquery.min.js"></script>
-
-  <!-- Bootstrap tether Core JavaScript -->
   <script src="../../assets/plugins/bootstrap/js/tether.min.js"></script>
   <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-
-  <!-- Datatables -->
   <script type="text/javascript" src="../../html/vendor/datatables/datatables.min.js"></script>
-
-  <!-- slimscrollbar scrollbar JavaScript -->
   <script src="../../html/js/utils/jquery.slimscroll.js"></script>
-
-  <!--Wave Effects -->
   <script src="../../html/js/utils/waves.js"></script>
-
-  <!--Menu sidebar -->
   <script src="../../html/js/utils/sidebarmenu.js"></script>
-
-  <!--stickey kit -->
   <script src="../../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
-
-  <!--Custom JavaScript -->
   <script src="../../html/js/utils/custom.min.js"></script>
   <script src="../../html/vendor/jquery-confirm/jquery-confirm.min.js"></script>
   <!-- <script src="../../html/js/datatables.js"></script> -->
@@ -335,10 +294,7 @@ include_once('modal/modal_condicionesMedio.php');
   <script src="../../html/js/global/cargarBatch.js"></script>
   <script src="../../html/js/global/incidencias.js"></script>
   <script src="../../html/js/global/etiquetas.js"></script>
-  <!--Alertify-->
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-
-  <!-- Imprimir PDF -->
   <script src="../../html/js/global/descargarPDF.js"></script>
 
   <!-- <script src="../../html/vendor/pdf/jspdf.min.js"></script> -->

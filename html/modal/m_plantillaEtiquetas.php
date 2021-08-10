@@ -17,34 +17,7 @@
   </div> -->
   <button id="btnEtiquetasPrueba">Impresion Etiquetas</button>
   <div id="contenedorEtiquetas" class="contenedorEtiquetas">
-    <!--  <div class="etiquetasVirtuales" style="margin-bottom: 10px;width:500px">
-      <p><b>ORDEN PROD:</b></p>
-      <p id="orden">001</p>
-      <p><b>PESO:</b></p>
-      <p id="peso">80 kg</p>
-      <p><b>REFERENCIA:</b></p>
-      <p id="ref">20003</p>
-      <p><b>FECHA</b></p>
-      <p id="fecha">13/04/2021</p>
-      <p><b>DISPENSÓ:</b></p>
-      <p id="dispenso">Sergio Velandia</p>
-      <p><b>VoBo QC:</b></p>
-      <p id="fqc">Martha Olmos</p>
-    </div>
-    <div class="etiquetasVirtuales" style=" margin-bottom: 10px;width:500px">
-      <p><b>ORDEN PROD:</b></p>
-      <p id="orden">001</p>
-      <p><b>PESO:</b></p>
-      <p id="peso">80 kg</p>
-      <p><b>REFERENCIA:</b></p>
-      <p id="ref">20003</p>
-      <p><b>FECHA</b></p>
-      <p id="fecha">13/04/2021</p>
-      <p><b>DISPENSÓ:</b></p>
-      <p id="dispenso">Sergio Velandia</p>
-      <p><b>VoBo QC:</b></p>
-      <p id="fqc">Martha Olmos</p>
-    </div> -->
+
 
   </div>
 </body>

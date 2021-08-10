@@ -1,3 +1,4 @@
+let flag = 0;
 $(document).ready(function () {
   imprimirEtiquetas = (data) => {
     tablePesaje.on("click", "tbody tr", function (e) {
@@ -123,10 +124,13 @@ const exportarEtiquetas = (operacion, arrayData) => {
 
 /* Etiquetas virtuales */
 
-$("#btnEtiquetasPrueba").click(function (e) {
+/* $("#btnEtiquetasPrueba").click(function (e) {
   e.preventDefault();
+  window.open(
+    `etiquetasvirtuales/${batch.idBatch}/${batch.referencia}", "_blank`
+  );
   imprimirEtiquetasVirtuales();
-});
+}); */
 
 $("#btnImprimirTodaslasEtiquetas").click(function (e) {
   e.preventDefault();
@@ -134,33 +138,35 @@ $("#btnImprimirTodaslasEtiquetas").click(function (e) {
 });
 
 imprimirEtiquetasVirtuales = () => {
-  batch = sessionStorage.getItem("batch");
-  const ref = batch.referencia;
   $.ajax({
-    url: `../../api/materiasp/${ref}`,
-
+    url: `../../api/etiquetasvirtuales/${referencia}/${idBatch}`,
     success: function (response) {
-      //$(location).prop("href", "");
+      if (!flag) flag = 1;
+      else return false;
 
-      //window.open("../../html/modal/m_plantillaEtiquetas.php", "_blank");
-      response.forEach((element) => {
-        $("#contenedorEtiquetas").append(
-          `<div class="etiquetasVirtuales" style="margin-bottom: 10px;width:500px">
-            <p><b>ORDEN PROD:</b></p>
-            <p id="orden">${element.numero_orden}</p>
-            <p><b>PESO:</b></p>
-            <p id="peso">80 kg</p>
-            <p><b>REFERENCIA:</b></p>
-            <p id="ref">20003</p>
-            <p><b>FECHA</b></p>
-            <p id="fecha">13/04/2021</p>
-            <p><b>DISPENSÓ:</b></p>
-            <p id="dispenso">Sergio Velandia</p>
-            <p><b>VoBo QC:</b></p>
-            <p id="fqc">Martha Olmos</p>
+      for (let j = 0; j < response.length; j++) {
+        if (response[j]["fecha_registro"])
+          fecha = response[j]["fecha_registro"];
+        if (response[j]["urlfirma"]) verifico = response[j]["urlfirma"];
+        if (response[j]["cantidad"]) cantidad = response[j]["cantidad"];
+      }
+
+      for (i = 0; i < response.length - 2; i++) {
+        $(".etiquetas").append(
+          `<div class="etiquetaUnica rounded-3">
+            <div class="etiquetasVirtuales">
+                <p><b>OP: </b>${infoBatch.numero_orden}</p>
+                <p id="peso"><b>PESO: </b>${(
+                  ((response[i]["porcentaje"] / 100) * tamanioLote) /
+                  cantidad
+                ).toFixed(2)}</p>
+                <p><b>REFERENCIA:</b> ${response[i]["referencia"]}</p>
+                <p><b>FECHA: </b> ${fecha}</p>
+                <p><b>VoBo QC: </b><img src="${verifico}" style="width:60%"></p>
+            </div>
           </div>`
         );
-      });
+      }
     },
   });
 };

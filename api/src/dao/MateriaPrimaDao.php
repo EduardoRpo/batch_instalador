@@ -35,4 +35,30 @@ class MateriaPrimaDao
     $this->logger->notice("materia Primas Obtenidas", array('materias Primas' => $pesajes));
     return $pesajes;
   }
+
+  public function findVirtualByBatch($batch)
+  {
+    $connection = Connection::getInstance()->getConnection();
+    $stmt = $connection->prepare("SELECT CONCAT(us.nombre, ' ',us.apellido) as verifico, us.urlfirma, bf2.fecha_registro 
+                                  FROM batch_firmas2seccion bf2 
+                                  INNER JOIN usuario u ON bf2.realizo = u.id 
+                                  INNER JOIN usuario us ON bf2.verifico = us.id 
+                                  WHERE batch = :batch AND modulo = :modulo");
+    $stmt->execute(array('batch' => $batch, 'modulo' => 2));
+    $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+    $etiquetasverifico = $stmt->fetchAll($connection::FETCH_ASSOC);
+    $this->logger->notice("materia Primas Obtenidas", array('materias Primas' => $etiquetasverifico));
+    return $etiquetasverifico;
+  }
+
+  public function findTanksByBatch($batch)
+  {
+    $connection = Connection::getInstance()->getConnection();
+    $stmt = $connection->prepare("SELECT cantidad FROM `batch_tanques` WHERE id_batch = :batch");
+    $stmt->execute(array('batch' => $batch));
+    $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+    $cantidadTanques = $stmt->fetchAll($connection::FETCH_ASSOC);
+    $this->logger->notice("materia Primas Obtenidas", array('materias Primas' => $cantidadTanques));
+    return $cantidadTanques;
+  }
 }

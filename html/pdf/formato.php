@@ -2036,6 +2036,22 @@
         </div>
     </div>
 
+    <h1 class="SaltoDePagina"> </h1>
+    <div class="card mt-5 mb-5">
+        <div class="card-header centrado"><b>ETIQUETAS</b></div>
+        <div class="card-body">
+
+            <div id="contenedorEtiquetas" class="contenedorEtiquetas">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="etiquetas">
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="../../assets/plugins/jquery/jquery.min.js"></script>
     <script src="../../assets/plugins/bootstrap/js/tether.min.js"></script>
@@ -2047,6 +2063,7 @@
     <script src="../../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <script src="https://use.fontawesome.com/15242848ba.js"></script>
     <script src="../../html/pdf/js/batch_pdf.js"></script>
+    <script src="../../html/js/global/etiquetas.js"></script>
     <!-- <script src="../../html/pdf/js/printThis.js"></script> -->
 
 </body>

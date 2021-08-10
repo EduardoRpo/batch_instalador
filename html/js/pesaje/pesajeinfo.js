@@ -216,12 +216,12 @@ function calcularxNoTanques() {
 
 /* imprimir etiquetas virtuales */
 
-$(document).ready(function () {
+/* $(document).ready(function () {
   $("#imprimirEtiquetasVirtuales").click(function () {
     window.frames["printf"].focus();
     window.frames["printf"].print();
   });
-});
+}); */
 
 function deshabilitarbtn() {
   $(".pesaje_realizado")
