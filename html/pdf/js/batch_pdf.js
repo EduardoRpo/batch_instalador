@@ -153,9 +153,8 @@ function info_General() {
       lote_anterior();
       desinfectante();
       observacionesAprobacion();
-      //imprimirEtiquetasVirtuales();
       ImprimirEtiquetasInvima();
-      if (multi == undefined) {
+      if (multi == undefined || multi == 0) {
         identificarDensidad();
         obtenerMuestras();
         entrega_material_envase();
@@ -216,8 +215,11 @@ area_desinfeccion = (lote) => {
     data,
     function (data, textStatus, jqXHR) {
       if (data == "false") return false;
-
       let info = JSON.parse(data);
+
+      for (let i = 0; i < info.length; i++) {
+        $(`#area_desinfeccion${info[i].modulo}`).empty();
+      }
 
       for (let i = 0; i < info.length; i++) {
         $(`#area_desinfeccion${info[i].modulo}`).append(`
@@ -579,7 +581,7 @@ identificarDensidad = () => {
 };
 
 function calcularPeso(densidadAprobada) {
-  if (multi) {
+  if ((multi = !"0")) {
     for (let i = 0; i < multi.length; i++) {
       //presentacion = $("#presentacion").html();
       //presentacion = getNumbersInString(presentacion);
@@ -679,7 +681,7 @@ material_envase_sobrante = () => {
     success: function (response) {
       let info = JSON.parse(response);
       if (info.length === 0) return false;
-      if (multi) {
+      if (multi != "0") {
         for (let i = 0; i < multi.length; i++) {
           for (let j = 0; j < info.length; j++) {
             if (multi[i].referencia == info[j]["ref_producto"]) {
@@ -812,6 +814,7 @@ entrega_material_acondicionamiento = () => {
     type: "POST",
     data: { referencia },
   }).done((data, status, xhr) => {
+    if (data == "") return false;
     var info = JSON.parse(data);
     empaqueEnvasado = Math.round(cantidad / info[0].unidad_empaque);
     unidades = cantidad;

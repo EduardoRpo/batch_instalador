@@ -185,6 +185,8 @@ const ImprimirEtiquetasInvima = () => {
         if (response[j]["cantidad"]) cantidad = response[j]["cantidad"];
       }
 
+      //$(".etiquetasV").empty();
+
       for (i = 0; i < response.length - 2; i++) {
         $(".etiquetasV").append(
           `<div class="etiquetaUnica rounded-3">

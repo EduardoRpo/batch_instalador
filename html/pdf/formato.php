@@ -139,7 +139,7 @@
                 </div>
             </div>
             <div class="table-responsive p-3">
-                <table class="table table-bordered table-striped" id="area_desinfeccion2">
+                <table class="table table-bordered table-striped" id="">
                     <thead class="head">
                         <tr>
                             <td>Área/Equipo</td>
@@ -148,7 +148,7 @@
                             <td>Número de Lote Anterior</td>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="area_desinfeccion2">
 
                     </tbody>
                 </table>
@@ -258,7 +258,7 @@
                         </div>
                     </div>
                     <div class="table-responsive p-3">
-                        <table class="table table-bordered table-striped" id="area_desinfeccion3">
+                        <table class="table table-bordered table-striped" id="">
                             <thead class="head">
                                 <tr>
                                     <td>Área/Equipo</td>
@@ -267,7 +267,7 @@
                                     <td>Número de Lote Anterior</td>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="area_desinfeccion3">
 
                             </tbody>
                         </table>
@@ -532,7 +532,7 @@
                         </div>
                     </div>
                     <div class="table-responsive p-3">
-                        <table class="table table-bordered table-striped" id="area_desinfeccion4">
+                        <table class="table table-bordered table-striped" id="">
                             <thead class="head">
                                 <tr>
                                     <td>Área/Equipo</td>
@@ -541,7 +541,7 @@
                                     <td>Número de Lote Anterior</td>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="area_desinfeccion4">
 
                             </tbody>
                         </table>
@@ -727,7 +727,7 @@
                         <label for="">6.1 Limpieza y Desinfección</label>
                     </div>
                     <div class="p-3">
-                        <table class="table table-bordered table-striped" id="area_desinfeccion5">
+                        <table class="table table-bordered table-striped" id="">
                             <thead class="head centrado">
                                 <tr>
                                     <td class="centrado">Área/Equipo</td>
@@ -736,7 +736,7 @@
                                     <td class="centrado">Número de Lote Anterior</td>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="area_desinfeccion5">
 
                             </tbody>
                         </table>
@@ -1247,7 +1247,7 @@
                         </div>
                     </div>
                     <div class="p-3">
-                        <table class="table table-bordered table-striped" id="area_desinfeccion6">
+                        <table class="table table-bordered table-striped" id="">
                             <thead class="head centrado">
                                 <tr>
                                     <td class="centrado">Área/Equipo</td>
@@ -1256,7 +1256,7 @@
                                     <td class="centrado">Número de Lote Anterior</td>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="area_desinfeccion6">
 
                             </tbody>
                         </table>
@@ -1697,7 +1697,7 @@
                 </div>
             </div>
             <div class="table-responsive p-3">
-                <table class="table table-bordered table-striped" id="area_desinfeccion8">
+                <table class="table table-bordered table-striped" id="">
                     <thead class="head">
                         <tr>
                             <td>Área/Equipo</td>
@@ -1706,7 +1706,7 @@
                             <td>Número de Lote Anterior</td>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="area_desinfeccion8">
 
                     </tbody>
                 </table>
@@ -1843,7 +1843,7 @@
                 </div>
             </div>
             <div class="table-responsive p-3">
-                <table class="table table-bordered table-striped" id="area_desinfeccion9">
+                <table class="table table-bordered table-striped" id="">
                     <thead class="head">
                         <tr>
                             <td>Área/Equipo</td>
@@ -1852,7 +1852,7 @@
                             <td>Número de Lote Anterior</td>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="area_desinfeccion9">
 
                     </tbody>
                 </table>
@@ -2062,7 +2062,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="etiquetasV">
-                        
+
                         </div>
                     </div>
                 </div>
