@@ -153,8 +153,8 @@ function info_General() {
       lote_anterior();
       desinfectante();
       observacionesAprobacion();
-      imprimirEtiquetasVirtuales();
-      /* etiquetasInvima(); */
+      //imprimirEtiquetasVirtuales();
+      ImprimirEtiquetasInvima();
       if (multi == undefined) {
         identificarDensidad();
         obtenerMuestras();
@@ -1017,12 +1017,6 @@ const liberacion_lote = () => {
 };
 
 $(document).ready(function () {
-  /* idBatch = sessionStorage.getItem("idBatch"); */
-  //let referencias = sessionStorage.getItem("multi");
-  /*   referencias = JSON.parse(multi);
-  if (referencias.length > 1) referencia = referencias[0].referencia;
-  if (!referencias) referencia = sessionStorage.getItem("referencia"); */
-
   cargar_Alertas();
   info_General();
   parametros_Control();

@@ -2036,7 +2036,7 @@
         </div>
     </div>
 
-    <h1 class="SaltoDePagina"> </h1>
+    <!-- <h1 class="SaltoDePagina"> </h1>
     <div class="card mt-5 mb-5">
         <div class="card-header centrado"><b>ETIQUETAS</b></div>
         <div class="card-body">
@@ -2051,11 +2051,11 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
-    <!-- <h1 class="SaltoDePagina"> </h1>
+    <h1 class="SaltoDePagina"> </h1>
     <div class="card mt-5 mb-5">
-        <div class="card-header centrado"><b>ETIQUETAS VIRTUALES</b></div>
+        <div class="card-header centrado"><b>ETIQUETAS PROCESO PESAJE</b></div>
         <div class="card-body">
 
             <div id="contenedorEtiquetasV" class="contenedorEtiquetasV">
@@ -2068,7 +2068,7 @@
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
 
     <script src="../../assets/plugins/jquery/jquery.min.js"></script>
     <script src="../../assets/plugins/bootstrap/js/tether.min.js"></script>

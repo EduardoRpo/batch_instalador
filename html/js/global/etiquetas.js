@@ -137,7 +137,7 @@ $("#btnImprimirTodaslasEtiquetas").click(function (e) {
   imprimirEtiquetasFull();
 });
 
-imprimirEtiquetasVirtuales = () => {
+/* imprimirEtiquetasVirtuales = () => {
   $.ajax({
     url: `../../api/etiquetasvirtuales/${referencia}/${idBatch}`,
     success: function (response) {
@@ -169,11 +169,11 @@ imprimirEtiquetasVirtuales = () => {
       }
     },
   });
-};
+}; */
 
-/* const etiquetasInvima = () => {
+const ImprimirEtiquetasInvima = () => {
   $.ajax({
-    url: `../../api/etiquetasvirtuales/${referencia}/${idBatch}`,
+    url: `../../api/etiquetasvirtualesinv/${referencia}/${idBatch}`,
     success: function (response) {
       if (!flag) flag = 1;
       else return false;
@@ -203,4 +203,4 @@ imprimirEtiquetasVirtuales = () => {
       }
     },
   });
-}; */
+};

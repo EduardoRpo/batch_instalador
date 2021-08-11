@@ -28,8 +28,28 @@ class MateriaPrimaDao
   {
     $connection = Connection::getInstance()->getConnection();
     //$stmt = $connection->prepare("SELECT * FROM formula INNER JOIN materia_prima ON formula.id_materiaprima = materia_prima.referencia WHERE formula.id_producto = :referencia");
-    $stmt = $connection->prepare("SELECT f.id, mp.referencia, mp.alias, cast(AES_DECRYPT(porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje FROM formula f INNER JOIN materia_prima mp ON f.id_materiaprima = mp.referencia WHERE f.id_producto = :referencia");
+    $stmt = $connection->prepare("SELECT f.id, mp.referencia, mp.alias, cast(AES_DECRYPT(porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje 
+                                  FROM formula f INNER JOIN materia_prima mp ON f.id_materiaprima = mp.referencia 
+                                  WHERE f.id_producto = :referencia");
     $stmt->execute(array('referencia' => $idProduct));
+    $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+    $pesajes = $stmt->fetchAll($connection::FETCH_ASSOC);
+    $this->logger->notice("materia Primas Obtenidas", array('materias Primas' => $pesajes));
+    return $pesajes;
+  }
+
+  public function findByProductInv($idProduct)
+  {
+    $connection = Connection::getInstance()->getConnection();
+
+    $stmt = $connection->prepare("SELECT id_notificacion_sanitaria FROM producto WHERE referencia = :referencia");
+    $stmt->execute(array('referencia' => $idProduct));
+    $notif_sanitaria = $stmt->fetch($connection::FETCH_ASSOC);
+
+    $stmt = $connection->prepare("SELECT f.id, mp.referencia, mp.alias, cast(AES_DECRYPT(porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje 
+                                  FROM formula_f f INNER JOIN materia_prima_f mp ON f.id_materiaprima = mp.referencia 
+                                  WHERE f.notif_sanitaria = :notif_sanitaria");
+    $stmt->execute(array('notif_sanitaria' => $notif_sanitaria['id_notificacion_sanitaria']));
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $pesajes = $stmt->fetchAll($connection::FETCH_ASSOC);
     $this->logger->notice("materia Primas Obtenidas", array('materias Primas' => $pesajes));
