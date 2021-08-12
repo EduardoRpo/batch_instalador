@@ -158,11 +158,11 @@ switch ($op) {
         $data = mysqli_fetch_assoc($query_id);
       $id = trim($data['id']);
 
-      $query_firmas = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas) VALUES('2' , '$id', '0')";
+      $query_firmas = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) VALUES('2' , '$id', '0', '4')";
       $result = mysqli_query($conn, $query_firmas);
-      $query_firmas = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas) VALUES('3' , '$id', '0')";
+      $query_firmas = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) VALUES('3' , '$id', '0', '4')";
       $result = mysqli_query($conn, $query_firmas);
-      $query_firmas = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas) VALUES('4' , '$id', '0')";
+      $query_firmas = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) VALUES('4' , '$id', '0', '2')";
       $result = mysqli_query($conn, $query_firmas);
     }
 
@@ -339,18 +339,15 @@ switch ($op) {
     $cantidad       = $_POST['cant'];
     $id_batch       = $_POST['id'];
 
-    for ($i = 0; $i < sizeof($nom_referencia); ++$i) {
+    for ($i = 0; $i < sizeof($nom_referencia); ++$i)
       echo $nom_referencia[$i];
-    }
 
-    for ($i = 0; $i < sizeof($nom_referencia); ++$i) {
+    for ($i = 0; $i < sizeof($nom_referencia); ++$i)
       echo $cantidad[$i];
-    }
 
     echo $id_batch;
 
     for ($i = 0; $i < sizeof($nom_referencia); ++$i) {
-      //$query_tanque = "INSERT INTO batch_tanques (tanque, cantidad, id_batch) VALUES('$tanque[$i]' , '$tamanotqn[$i]', '$id')";
 
       $query_id_referencia = "INSERT INTO multipresentacion (id_batch, referencia, cantidad) 
                               SELECT '$id_batch', referencia, '$cantidad[$i]' FROM producto 

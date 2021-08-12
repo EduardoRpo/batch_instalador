@@ -132,7 +132,7 @@ function info_General() {
       if (data == "false") return false;
       let info = JSON.parse(data);
       infoBatch = info;
-      cantidad = info.unidad_lote;
+      cantidad_lote = info.unidad_lote;
       presentacion = info.presentacion;
       densidad = info.densidad;
       tamanioLote = info.tamano_lote;
@@ -516,13 +516,13 @@ ajustes = () => {
 };
 
 function entrega_material_envase() {
-  if (multi) {
+  if (multi != "0") {
     for (let i = 0; i < multi.length; i++) {
-      referencia = multi[i].referencia;
+      ref = multi[i].referencia;
       $.ajax({
         url: "../../html/php/envase.php",
         type: "POST",
-        data: { referencia: referencia },
+        data: { referencia: ref },
       }).done((data, status, xhr) => {
         if (data != "") {
           info = JSON.parse(data);
@@ -537,7 +537,6 @@ function entrega_material_envase() {
       });
     }
   } else {
-    referencia = referencia;
     $.ajax({
       url: "../../html/php/envase.php",
       type: "POST",
@@ -551,7 +550,7 @@ function entrega_material_envase() {
         $(`.descripcion_tapa1`).html(info[0].tapa);
         $(`.etiqueta1`).html(info[0].id_etiqueta);
         $(`.descripcion_etiqueta1`).html(info[0].etiqueta);
-        $(`.unidades1`).html(cantidad);
+        $(`.unidades1`).html(cantidad_lote);
       }
     });
   }
@@ -839,7 +838,7 @@ conciliacion = () => {
     success: function (response) {
       let info = JSON.parse(response);
       if (info.length === 0) return false;
-      let rendimiento = (presentacion * cantidad * densidad) / 1000;
+      let rendimiento = (presentacion * cantidad_lote * densidad) / 1000;
       rendimiento = ((rendimiento / tamanioLote) * 100).toFixed(2) + "%";
       $(`#conciliacionRendimiento1`).val(rendimiento);
 

@@ -91,11 +91,9 @@ class BatchLineaDao
   {
     $connection = Connection::getInstance()->getConnection();
     $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, batch.numero_lote, batch.estado, batch.multi 
-                                  FROM batch WHERE batch.estado >= 5.5 AND batch.id_batch 
-                                  NOT IN (SELECT DISTINCT batch FROM `batch_desinfectante_seleccionado` bds 
-                                  INNER JOIN batch_material_sobrante bms USING (batch) 
-                                  WHERE bds.verifico > 0 AND bms.verifico > 0 AND bds.modulo = 5 AND bms.modulo = 5) 
-                                  ORDER BY batch.id_batch DESC");
+                                  FROM batch WHERE batch.id_batch NOT IN(SELECT batch FROM `batch_control_firmas` 
+                                  WHERE modulo = 5 AND cantidad_firmas = total_firmas) AND batch.estado >= 5.5 AND batch.id_batch 
+                                  ORDER BY `batch`.`id_batch` DESC");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $envasado = $stmt->fetchAll($connection::FETCH_ASSOC);

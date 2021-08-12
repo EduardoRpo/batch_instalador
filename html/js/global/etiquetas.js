@@ -1,4 +1,5 @@
-let flag = 0;
+let flagE = 0;
+
 $(document).ready(function () {
   imprimirEtiquetas = (data) => {
     tablePesaje.on("click", "tbody tr", function (e) {
@@ -175,7 +176,7 @@ const ImprimirEtiquetasInvima = () => {
   $.ajax({
     url: `../../api/etiquetasvirtualesinv/${referencia}/${idBatch}`,
     success: function (response) {
-      if (!flag) flag = 1;
+      if (!flagE) flagE = 1;
       else return false;
 
       for (let j = 0; j < response.length; j++) {
