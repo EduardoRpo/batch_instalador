@@ -1,8 +1,8 @@
 let envase;
 let presentacion;
-let r1,
-  r2,
-  r3 = 0;
+let r1 = 0;
+let r2 = 0;
+let r3 = 0;
 
 /* Cargar referencia */
 
