@@ -14,7 +14,7 @@ if ($batchs > 0) {
         /* $batch = 40; */
         $firmas = [];
 
-        $sql = "SELECT realizo, verifico, batch, modulo FROM batch_desinfectante_seleccionado WHERE batch = :batch AND modulo = 6";
+        $sql = "SELECT realizo, verifico, batch, modulo FROM batch_desinfectante_seleccionado WHERE batch = :batch AND modulo = 5";
         $query = $conn->prepare($sql);
         $query->execute(['batch' => $batch]);
         $firmas_despeje = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -32,7 +32,7 @@ if ($batchs > 0) {
             $cantidad = 0;
         }
 
-        $sql = "SELECT realizo, verifico, batch, modulo FROM batch_firmas2seccion WHERE batch = :batch AND modulo = 6";
+        $sql = "SELECT realizo, verifico, batch, modulo FROM batch_firmas2seccion WHERE batch = :batch AND modulo = 5";
         $query = $conn->prepare($sql);
         $query->execute(['batch' => $batch]);
         $firmas_proceso = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -54,7 +54,7 @@ if ($batchs > 0) {
             $cantidad = 0;
         }
 
-        $sql = "SELECT realizo, verifico, batch, modulo FROM batch_analisis_microbiologico WHERE batch = :batch AND modulo = 6";
+        $sql = "SELECT realizo, verifico, batch, modulo FROM batch_analisis_microbiologico WHERE batch = :batch AND modulo = 5";
         $query = $conn->prepare($sql);
         $query->execute(['batch' => $batch]);
         $firmas_microbiologico = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -76,7 +76,7 @@ if ($batchs > 0) {
         }
 
 
-        $sql = "SELECT entrego, batch, modulo FROM batch_conciliacion_rendimiento WHERE batch = :batch AND modulo = 6";
+        $sql = "SELECT entrego, batch, modulo FROM batch_conciliacion_rendimiento WHERE batch = :batch AND modulo = 5";
         $query = $conn->prepare($sql);
         $query->execute(['batch' => $batch]);
         $firmas_conciliacion = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -102,25 +102,25 @@ if ($batchs > 0) {
 
         if (sizeof($firmas_material) > 0) {
 
-            /* for ($i = 0; $i < sizeof($firmas_material); $i++) {
-        if ($firmas_material[$i]['modulo'] == 5) {
-            if ($firmas_material[$i]['realizo'] > 0)
-                $cantidad = $cantidad + 1;
-            if ($firmas_material[$i]['verifico'] > 0)
-                $cantidad = $cantidad + 1;
-        }
-    } */
-            /* $modulo = 5;
-    $indice = array_key_exists($modulo, $firmas);
- */
-            /* if ($indice) */  /* && $cantidad == 6 */
-            /*      $firmas[$modulo] = $firmas[$modulo] + $cantidad; */
-            /*  else
-                $firmas[$modulo] =  1; */
-            /* $cantidad = 0; */
-
-
             for ($i = 0; $i < sizeof($firmas_material); $i++) {
+                if ($firmas_material[$i]['modulo'] == 5) {
+                    if ($firmas_material[$i]['realizo'] > 0)
+                        $cantidad = $cantidad + 1;
+                    if ($firmas_material[$i]['verifico'] > 0)
+                        $cantidad = $cantidad + 1;
+                }
+            }
+            /* $modulo = 5;
+            $indice = array_key_exists($modulo, $firmas);
+
+            if ($indice)  */  /* && $cantidad == 6 */
+                $firmas[$modulo] = $firmas[$modulo] + $cantidad;
+            /* else
+                $firmas[$modulo] =  1;  */
+            $cantidad = 0;
+
+
+            /* for ($i = 0; $i < sizeof($firmas_material); $i++) {
                 if ($firmas_material[$i]['modulo'] == 6) {
                     if ($firmas_material[$i]['realizo'] > 0)
                         $cantidad = $cantidad + 1;
@@ -128,14 +128,14 @@ if ($batchs > 0) {
                         $cantidad = $cantidad + 1;
                 }
             }
-            /* $modulo = 6;
-    $indice = array_key_exists($modulo, $firmas); */
+            $modulo = 6;
+            $indice = array_key_exists($modulo, $firmas);
 
-            /* if ($indice *//*  && $cantidad == 4 *//* ) */
+            if ($indice * && $cantidad == 4)
             $firmas[$modulo] = $firmas[$modulo] + $cantidad;
-            /* else
-            $firmas[$modulo] =  1; */
-            $cantidad = 0;
+            else
+            $firmas[$modulo] =  1;
+            $cantidad = 0; */
         }
 
         /* $sql = "SELECT * FROM batch_liberacion WHERE batch = :batch";
