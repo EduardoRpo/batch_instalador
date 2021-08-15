@@ -229,6 +229,25 @@ function conciliacionRendimientoRealizo($conn)
             'ref_multi' => $referencia,
             'realizo' => $realizo,
         ]);
+        
+        // proceso por recalculo de parciales de datos ingresados antes de la creacion de la función
+        
+        if ($modulo == 7 && $batch < 131) { 
+            $sql = "INSERT INTO batch_conciliacion_parciales (unidades, cajas, movimiento, modulo, batch, ref_multi, realizo) 
+                    VALUES(:unidades, :cajas, :movimiento, :modulo, :batch, :ref_multi, :realizo)";
+            $query = $conn->prepare($sql);
+            $query->execute([
+                'unidades' => $unidades,
+                'cajas' => $cajas,
+                'movimiento' => $movimiento,
+                'modulo' => 6,
+                'batch' => $batch,
+                'ref_multi' => $referencia,
+                'realizo' => $realizo
+            ]);
+        }
+
+
 
         $unidades = intval($unidades) + intval($data['unidades']);
 

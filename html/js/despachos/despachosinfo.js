@@ -127,22 +127,38 @@ function cargar_despacho() {
         }
       });
 
-      unidades_empaque = parseFloat($(`#unidad_empaque${id_multi}`).val());
-      cajs = Math.ceil((unidades - retencion) / unidades_empaque);
-      for (let i = 0; i < info.length; i++) {
-        if (info[i]["modulo"] == 6) {
-          number = info[i]["unidades"];
-          cjas = info[i]["cajas"];
-          mov = info[i]["movimiento"];
-          myString = `Parcial ${j}: (${number.toString()} unidades) (${cjas.toString()} cajas) (Movimiento: ${mov.toString()}).\n`;
-          unidadestotales = unidadestotales + " " + myString;
-          j++;
+      if (!unidades && !retencion) {
+        if (info[0]["modulo"] == 6) {
+          unidades = info[0]["unidades_producidas"];
+          retencion = info[0]["muestras_retencion"];
+          movimiento = info[0]["mov_inventario"];
+          unidades_empaque = parseFloat($(`#unidad_empaque${id_multi}`).val());
+          cajs = Math.ceil((unidades - retencion) / unidades_empaque);
+        }
+      } else {
+        unidades_empaque = parseFloat($(`#unidad_empaque${id_multi}`).val());
+        cajs = Math.ceil((unidades - retencion) / unidades_empaque);
+
+        for (let i = 0; i < info.length; i++) {
+          if (info[i]["modulo"] == 6) {
+            number = info[i]["unidades"];
+            cjas = info[i]["cajas"];
+            mov = info[i]["movimiento"];
+            myString = `Parcial ${j}: (${number.toString()} unidades) (${cjas.toString()} cajas) (Movimiento: ${mov.toString()}).\n`;
+            unidadestotales = unidadestotales + " " + myString;
+            j++;
+          }
         }
       }
+
       j = info.length - 1;
       $(`#unidades_recibidas_acond${id_multi}`).val(unidades);
       $(`#cajas_acond${id_multi}`).val(cajs);
-      $(`#mov_inventario_acond${id_multi}`).val(info[j].movimiento);
+
+      if (info[j].movimiento)
+        $(`#mov_inventario_acond${id_multi}`).val(info[j].movimiento);
+      else $(`#mov_inventario_acond${id_multi}`).val(movimiento);
+
       $(`#mestras_retencion_acond${id_multi}`).val(retencion);
       $(`#parciales${id_multi}`).val(unidadestotales);
 
@@ -151,7 +167,7 @@ function cargar_despacho() {
       cajas = 0;
       for (let i = 0; i < info.length; i++) {
         if (info[i]["modulo"] == 7) {
-          unidades = unidades + info[i]["unidades"];
+          unidades = unidades + info[i]["unidades_producidas"];
           cajas = cajas + info[i]["cajas"];
           movimiento = info[i]["movimiento"];
         }

@@ -125,6 +125,12 @@ class BatchLineaDao
                                   WHERE batch.estado >= 5.5 AND batch.id_batch 
                                   NOT IN (SELECT batch FROM `batch_conciliacion_rendimiento` WHERE modulo = 7) 
                                   ORDER BY `batch`.`id_batch` ASC");
+
+    /* SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote, batch.multi 
+                                  FROM batch INNER JOIN producto p ON batch.id_producto = p.referencia 
+                                  WHERE batch.estado >= 5.5 AND batch.id_batch IN (SELECT DISTINCT batch FROM batch_conciliacion_parciales 
+                                  WHERE modulo = 6) AND batch.id_batch NOT IN (SELECT batch FROM `batch_conciliacion_rendimiento` 
+                                  WHERE modulo = 7) ORDER BY `batch`.`id_batch` ASC */
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $despachos = $stmt->fetchAll($connection::FETCH_ASSOC);

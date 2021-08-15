@@ -16,6 +16,13 @@ if (!empty($_POST)) {
                 $query = $conn->prepare($sql);
                 $query->execute(['batch' => $batch, 'referencia' => $referencia]);
                 $data = $query->fetchAll(PDO::FETCH_ASSOC);
+
+                if (!$data) {
+                    $sql = "SELECT * FROM batch_conciliacion_rendimiento WHERE batch = :batch AND ref_multi = :referencia";
+                    $query = $conn->prepare($sql);
+                    $result = $query->execute(['batch' => $batch, 'referencia' => $referencia]);
+                    $data = $query->fetchAll(PDO::FETCH_ASSOC);
+                }
             } else {
                 $sql = "SELECT * FROM batch_conciliacion_rendimiento WHERE batch = :batch AND modulo = :modulo AND ref_multi = :referencia";
                 $query = $conn->prepare($sql);
