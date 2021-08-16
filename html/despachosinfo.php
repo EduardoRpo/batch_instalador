@@ -193,6 +193,7 @@ include('modal/image.php')
                         </div>
 
                         <div class="subtitle"><label for="">Consolidado Despachos</label></div>
+
                         <div class="despachos">
 
                           <div class="group">
@@ -211,8 +212,9 @@ include('modal/image.php')
                           </div>
 
                           <div class=" group">
-                            <!-- <label for="recipient-name" class="col-form-label">Muestras retención</label>
-                            <input type="number" class="form-control centrado" id="mestras_retencion_acond1" readonly> -->
+                            <div class="alert alert-danger mt-3 fact1" id="fact1" role="alert" style="text-align:center">
+                              <label class="alert-link">Facturar muestras de retención.</label>
+                            </div>
                           </div>
 
                           <div class="group">
@@ -327,8 +329,9 @@ include('modal/image.php')
                           </div>
 
                           <div class=" group">
-                            <!-- <label for="recipient-name" class="col-form-label">Muestras retención</label>
-                            <input type="number" class="form-control centrado" id="mestras_retencion_acond1" readonly> -->
+                            <div class="alert alert-danger mt-3" id="fact2" role="alert" style="text-align:center">
+                              <label class="alert-link">Facturar muestras de retención.</label>
+                            </div>
                           </div>
 
                           <div class="group">
@@ -443,8 +446,9 @@ include('modal/image.php')
                           </div>
 
                           <div class=" group">
-                            <!-- <label for="recipient-name" class="col-form-label">Muestras retención</label>
-                            <input type="number" class="form-control centrado" id="mestras_retencion_acond1" readonly> -->
+                            <div class="alert alert-danger mt-3" id="fact3" role="alert" style="text-align:center">
+                              <label class="alert-link">Facturar muestras de retención.</label>
+                            </div>
                           </div>
 
                           <div class="group">

@@ -1,6 +1,11 @@
 modulo = 7;
 let flag = 0;
 
+/* Ocultar alerts fact */
+$(".fact1").hide();
+$("#fact2").hide();
+$("#fact3").hide();
+
 /* Carga el modal para la autenticacion */
 
 cargar = (btn, idbtn) => {
@@ -71,7 +76,7 @@ function busqueda_multi(batch) {
           $(`#despachosMulti${j}`).html(
             `DESPACHOS PRESENTACIÓN: ${presentacion} REFERENCIA ${referencia}`
           );
-
+          fact_muestras(referencia, j);
           j++;
         }
       } else {
@@ -84,6 +89,7 @@ function busqueda_multi(batch) {
         );
         $(`#ref${j}`).val(referencia);
         $(`#unidad_empaque${j}`).val(batch.unidad_empaque);
+        fact_muestras(referencia, j);
       }
       multi = j + 1;
     },
@@ -190,7 +196,6 @@ function cargar_despacho() {
 }
 
 function guardar_despacho(info) {
-  //infof = JSON.parse(data);
   realizo = info[0].id;
   let unidades = $(`#unidades_recibidas${id_multi}`).val();
   let cajas = $(`#cajas${id_multi}`).val();
@@ -256,3 +261,16 @@ function guardar_despacho(info) {
       cancel: "No, Total",
     });
 }
+
+/* Cargar facturacion de muestras */
+
+const fact_muestras = (referencia, i) => {
+  $.post(
+    "../../../html/php/servicios/despachos/fact_muestras.php",
+    { referencia },
+    function (data, textStatus, jqXHR) {
+      data = JSON.parse(data);
+      if (data[0].facturar) $(`#fact${i}`).show();
+    }
+  );
+};
