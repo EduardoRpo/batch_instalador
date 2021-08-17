@@ -49,10 +49,13 @@ class BatchDao
   public function findAllClosed()
   {
     $connection = Connection::getInstance()->getConnection();
-    $stmt = $connection->prepare("SELECT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, pc.nombre as presentacion_comercial, batch.numero_lote, batch.tamano_lote, propietario.nombre,batch.fecha_creacion, batch.fecha_programacion, batch.estado, batch.multi 
-                                  FROM batch INNER JOIN producto INNER JOIN propietario INNER JOIN presentacion_comercial pc 
-                                  ON batch.id_producto = producto.referencia AND producto.id_propietario = propietario.id AND producto.presentacion_comercial = pc.id 
-                                  WHERE batch.estado = 10");
+    $stmt = $connection->prepare("SELECT b.id_batch, b.numero_orden, p.referencia, p.nombre_referencia, pc.nombre as presentacion_comercial, b.numero_lote, b.tamano_lote, pp.nombre, b.fecha_creacion, b.fecha_programacion, b.estado, b.multi, 
+                                  bcf.cantidad_firmas, SUM(bcf.cantidad_firmas) as cantidad_firmas, SUM(bcf.total_firmas) as total_firmas, IF(SUM(bcf.cantidad_firmas) = SUM(bcf.total_firmas), 1, 0) as firmas 
+                                  FROM batch b INNER JOIN producto p ON b.id_producto = p.referencia 
+                                  INNER JOIN propietario pp ON p.id_propietario = pp.id 
+                                  INNER JOIN presentacion_comercial pc ON p.presentacion_comercial = pc.id 
+                                  INNER JOIN batch_control_firmas bcf ON b.id_batch = bcf.batch 
+                                  WHERE b.estado = 10 GROUP BY batch HAVING firmas = 1");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $batch = $stmt->fetchAll($connection::FETCH_ASSOC);

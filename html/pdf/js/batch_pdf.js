@@ -680,6 +680,7 @@ material_envase_sobrante = () => {
     success: function (response) {
       let info = JSON.parse(response);
       if (info.length === 0) return false;
+
       if (multi != "0") {
         for (let i = 0; i < multi.length; i++) {
           for (let j = 0; j < info.length; j++) {
@@ -709,42 +710,42 @@ material_envase_sobrante = () => {
       } else {
         for (let i = 0; i < info.length; i++) {
           if (info[i].modulo == 5) {
-            let envase = $(`#envase1`).html();
-            if (info[i].ref_material == envase) {
+            /* let envase = $(`#envase1`).html();
+            if (info[i].ref_material == envase) { */
               $(`#usadaEnvase1`).html(info[i].envasada);
               $(`#averiasEnvase1`).html(info[i].averias);
               $(`#sobranteEnvase1`).html(info[i].sobrante);
-              continue;
+              /* continue;
             }
             let tapa = $(`#tapa1`).html();
-            if (info[i].ref_material == tapa) {
+            if (info[i].ref_material == tapa) { */
               $(`#usadaTapa1`).html(info[i].envasada);
               $(`#averiasTapa1`).html(info[i].averias);
               $(`#sobranteTapa1`).html(info[i].sobrante);
-              continue;
+              /* continue;
             }
             let etiqueta = $(`#etiqueta1`).html();
-            if (info[i].ref_material == etiqueta) {
+            if (info[i].ref_material == etiqueta) { */
               $(`#usadaEtiqueta1`).html(info[i].envasada);
               $(`#averiasEtiqueta1`).html(info[i].averias);
               $(`#sobranteEtiqueta1`).html(info[i].sobrante);
-              continue;
+              /* continue;
             }
           }
           if (info[i].modulo == 6) {
             let empaque = $(`#refempaque1`).html();
             empaque = empaque.trim();
-            if (info[i].ref_material == empaque) {
+            if (info[i].ref_material == empaque) { */
               $(`#utilizada_empaque1`).html(info[i].envasada);
               $(`#averias_empaque1`).html(info[i].averias);
               $(`#sobrante_empaque1`).html(info[i].sobrante);
-            }
+            /* }
             let otros = $(`#refempaque2`).html();
-            if (info[i].ref_material == otros) {
+            if (info[i].ref_material == otros) { */
               $(`#utilizada_otros1`).html(info[i].envasada);
               $(`#averias_otros1`).html(info[i].averias);
               $(`#sobrante_otros1`).html(info[i].sobrante);
-            }
+            //}
           }
         }
       }
