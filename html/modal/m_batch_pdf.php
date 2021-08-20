@@ -14,7 +14,7 @@
           <div class="card-body">
             <div class='mb-3'>
               <label for="" class="ml-3">Buscar</label>
-              <input type="text" class="form-control" id="search" style="width: 30%;" data-toggle="popover" data-placement="top" data-content="Puede buscar por referencia o Lote">
+              <input type="text" class="form-control" id="search" style="width: 30%;" data-toggle="popover" data-placement="top" data-content="Puede buscar por Batch Record o Lote">
               <button class="btn btn-primary" id="buscar_batch">Buscar</button>
             </div>
           </div>
