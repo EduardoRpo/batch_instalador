@@ -3,6 +3,7 @@
 if (!empty($_POST)) {
 
     require_once('../../../conexion.php');
+    require_once('../actualizarEstado.php');
 
     $op = $_POST['operacion'];
 
@@ -38,6 +39,7 @@ if (!empty($_POST)) {
                     'ref_multi' => $ref_multi,
                     'realizo' => $realizo
                 ]);
+                actualizarEstado($batch, $modulo, $conn);
             } else {
                 $sql = "INSERT INTO batch_conciliacion_parciales (unidades, cajas, movimiento, modulo, batch, ref_multi, realizo) 
                         VALUES(:unidades, :cajas, :movimiento, :modulo, :batch, :ref_multi, :realizo)";

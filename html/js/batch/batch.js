@@ -88,7 +88,7 @@ function crearTablaBatch(
             : data == 6
             ? "Multimodulo"
             : data == 6.5
-            ? "Multimodulo"
+            ? "Despachos"
             : data == 10
             ? "Liberacion Lote"
             : "Multimodulo";

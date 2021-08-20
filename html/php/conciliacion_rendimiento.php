@@ -3,6 +3,7 @@ if (!empty($_POST)) {
     require_once('../../conexion.php');
     require_once('./controlFirmas.php');
     require_once('./firmas.php');
+    require_once('../php/actualizarEstado.php');
 
     $op = $_POST['operacion'];
     $batch =  $_POST['idBatch'];
@@ -34,7 +35,7 @@ if (!empty($_POST)) {
                 $query->execute(['referencia' => $referencia, 'muestra' => $muestra, 'batch' => $batch]);
                 $muestra = $muestra + 1;
             }
-
+            actualizarEstado($batch, $modulo, $conn);
             break;
 
         case 2: // cargar batch Conciliacion

@@ -122,15 +122,15 @@ class BatchLineaDao
     $connection = Connection::getInstance()->getConnection();
     $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote, batch.multi 
                                   FROM batch INNER JOIN producto p ON batch.id_producto = p.referencia 
-                                  WHERE batch.estado >= 5.5 AND batch.id_batch 
+                                  WHERE batch.estado >= 7 AND batch.id_batch 
                                   NOT IN (SELECT batch FROM `batch_conciliacion_rendimiento` WHERE modulo = 7) 
                                   ORDER BY `batch`.`id_batch` ASC");
 
-    /* SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote, batch.multi 
+   /*  $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote, batch.multi 
                                   FROM batch INNER JOIN producto p ON batch.id_producto = p.referencia 
-                                  WHERE batch.estado >= 5.5 AND batch.id_batch IN (SELECT DISTINCT batch FROM batch_conciliacion_parciales 
+                                  WHERE batch.estado >= 6.5 AND batch.id_batch IN (SELECT DISTINCT batch FROM batch_conciliacion_parciales 
                                   WHERE modulo = 6) AND batch.id_batch NOT IN (SELECT batch FROM `batch_conciliacion_rendimiento` 
-                                  WHERE modulo = 7) ORDER BY `batch`.`id_batch` ASC */
+                                  WHERE modulo = 7) ORDER BY `batch`.`id_batch` ASC"); */
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $despachos = $stmt->fetchAll($connection::FETCH_ASSOC);
@@ -174,16 +174,16 @@ class BatchLineaDao
     $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote  
                                   FROM batch INNER JOIN producto p ON p.referencia = batch.id_producto 
                                   WHERE batch.estado >= 10 AND batch.id_batch NOT IN (SELECT batch FROM `batch_liberacion` WHERE dir_produccion > 0 AND dir_calidad > 0 and dir_tecnica > 0) ORDER BY `batch`.`id_batch` DESC");
-                                  
-                                 
-   /*  $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote, bcf.cantidad_firmas, 
+
+
+    /*  $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote, bcf.cantidad_firmas, 
                                   SUM(bcf.cantidad_firmas) as cantidad_firmas, SUM(bcf.total_firmas) as total_firmas, IF(SUM(bcf.cantidad_firmas) = SUM(bcf.total_firmas), 1, 0) as firmas 
                                   FROM batch INNER JOIN producto p ON p.referencia = batch.id_producto 
                                   INNER JOIN batch_control_firmas bcf ON batch.id_batch = bcf.batch WHERE batch.id_batch 
                                   NOT IN (SELECT batch FROM `batch_liberacion` WHERE dir_produccion > 0 AND dir_calidad > 0 and dir_tecnica > 0) 
                                   GROUP BY batch HAVING firmas = 1"); */
-                                  
-                                 
+
+
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $liberacionlote = $stmt->fetchAll($connection::FETCH_ASSOC);

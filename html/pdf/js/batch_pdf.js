@@ -649,7 +649,7 @@ const obtenerMuestras = () => {
                 `<td class="centrado">${info[j]["muestra"]}</td>`
               );
               sum = sum + info[j]["muestra"];
-              promedio = sum / cont;
+              promedio = (sum / cont).toFixed(2);
               $(`#promedioMuestras${i + 1}`).val(promedio);
               $(`#cantidadMuestras${i + 1}`).val(cont);
             }
@@ -662,7 +662,7 @@ const obtenerMuestras = () => {
             `<td class="centrado">${info[j]["muestra"]}</td>`
           );
           sum = sum + info[j]["muestra"];
-          promedio = sum / cont;
+          promedio = (sum / cont).toFixed(2);
         }
         $(`#promedioMuestras1`).val(promedio);
         $(`#cantidadMuestras1`).val(cont);
@@ -712,39 +712,39 @@ material_envase_sobrante = () => {
           if (info[i].modulo == 5) {
             /* let envase = $(`#envase1`).html();
             if (info[i].ref_material == envase) { */
-              $(`#usadaEnvase1`).html(info[i].envasada);
-              $(`#averiasEnvase1`).html(info[i].averias);
-              $(`#sobranteEnvase1`).html(info[i].sobrante);
-              /* continue;
+            $(`#usadaEnvase1`).html(info[i].envasada);
+            $(`#averiasEnvase1`).html(info[i].averias);
+            $(`#sobranteEnvase1`).html(info[i].sobrante);
+            /* continue;
             }
             let tapa = $(`#tapa1`).html();
             if (info[i].ref_material == tapa) { */
-              $(`#usadaTapa1`).html(info[i].envasada);
-              $(`#averiasTapa1`).html(info[i].averias);
-              $(`#sobranteTapa1`).html(info[i].sobrante);
-              /* continue;
+            $(`#usadaTapa1`).html(info[i].envasada);
+            $(`#averiasTapa1`).html(info[i].averias);
+            $(`#sobranteTapa1`).html(info[i].sobrante);
+            /* continue;
             }
             let etiqueta = $(`#etiqueta1`).html();
             if (info[i].ref_material == etiqueta) { */
-              $(`#usadaEtiqueta1`).html(info[i].envasada);
-              $(`#averiasEtiqueta1`).html(info[i].averias);
-              $(`#sobranteEtiqueta1`).html(info[i].sobrante);
-              /* continue;
+            $(`#usadaEtiqueta1`).html(info[i].envasada);
+            $(`#averiasEtiqueta1`).html(info[i].averias);
+            $(`#sobranteEtiqueta1`).html(info[i].sobrante);
+            /* continue;
             }
           }
           if (info[i].modulo == 6) {
             let empaque = $(`#refempaque1`).html();
             empaque = empaque.trim();
             if (info[i].ref_material == empaque) { */
-              $(`#utilizada_empaque1`).html(info[i].envasada);
-              $(`#averias_empaque1`).html(info[i].averias);
-              $(`#sobrante_empaque1`).html(info[i].sobrante);
+            $(`#utilizada_empaque1`).html(info[i].envasada);
+            $(`#averias_empaque1`).html(info[i].averias);
+            $(`#sobrante_empaque1`).html(info[i].sobrante);
             /* }
             let otros = $(`#refempaque2`).html();
             if (info[i].ref_material == otros) { */
-              $(`#utilizada_otros1`).html(info[i].envasada);
-              $(`#averias_otros1`).html(info[i].averias);
-              $(`#sobrante_otros1`).html(info[i].sobrante);
+            $(`#utilizada_otros1`).html(info[i].envasada);
+            $(`#averias_otros1`).html(info[i].averias);
+            $(`#sobrante_otros1`).html(info[i].sobrante);
             //}
           }
         }
