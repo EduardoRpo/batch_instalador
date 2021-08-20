@@ -22,6 +22,8 @@ function registrarFirmas($conn, $batch, $modulo)
         if ($modulo == 5) $rows == 0 ? $total_firmas = 6 : $total_firmas = ($rows * 4) + 2;
         if ($modulo == 6) $rows == 0 ? $total_firmas = 7 : $total_firmas = ($rows * 5) + 2;
         if ($modulo == 7) $rows == 0 ? $total_firmas = 1 : $total_firmas = $rows;
+        if ($modulo == 8) $rows == 0 ? $total_firmas = 2 : $total_firmas = $rows;
+        if ($modulo == 9) $rows == 0 ? $total_firmas = 2 : $total_firmas = $rows;
 
         $sql = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) VALUES(:modulo, :batch, :cantidad_firmas, :total_firmas)";
         $query = $conn->prepare($sql);
