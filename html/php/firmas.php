@@ -211,14 +211,15 @@ function conciliacionRendimientoRealizo($conn)
         $cajas = $_POST['cajas'];
         $modulo = $_POST['modulo'];
         $realizo = $_POST['realizo'];
+        $entrega_final = $_POST['entrega_final'];
 
         $sql = "SELECT SUM(unidades) as unidades FROM batch_conciliacion_parciales WHERE modulo =:modulo AND batch = :batch AND ref_multi = :ref_multi";
         $query = $conn->prepare($sql);
         $query->execute(['modulo' => $modulo, 'batch' => $batch, 'ref_multi' => $referencia]);
         $data = $query->fetch(PDO::FETCH_ASSOC);
 
-        $sql = "INSERT INTO batch_conciliacion_parciales (unidades, cajas, movimiento, modulo, batch, ref_multi, realizo)
-                VALUES(:unidades, :cajas, :movimiento, :modulo, :batch, :ref_multi, :realizo)";
+        $sql = "INSERT INTO batch_conciliacion_parciales (unidades, cajas, movimiento, modulo, batch, ref_multi, realizo, entrega_final)
+                VALUES(:unidades, :cajas, :movimiento, :modulo, :batch, :ref_multi, :realizo, :entrega_final)";
         $query = $conn->prepare($sql);
         $query->execute([
             'unidades' => $unidades,
@@ -228,11 +229,13 @@ function conciliacionRendimientoRealizo($conn)
             'batch' => $batch,
             'ref_multi' => $referencia,
             'realizo' => $realizo,
+            'entrega_final' => $entrega_final,
+
         ]);
-        
+
         // proceso por recalculo de parciales de datos ingresados antes de la creacion de la función
-        
-        if ($modulo == 7 && $batch < 131) { 
+
+        if ($modulo == 7 && $batch < 131) {
             $sql = "INSERT INTO batch_conciliacion_parciales (unidades, cajas, movimiento, modulo, batch, ref_multi, realizo) 
                     VALUES(:unidades, :cajas, :movimiento, :modulo, :batch, :ref_multi, :realizo)";
             $query = $conn->prepare($sql);

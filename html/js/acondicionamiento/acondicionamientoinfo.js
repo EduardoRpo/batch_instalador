@@ -399,6 +399,7 @@ function registrar_conciliacion(info) {
       "Entrega",
       "¿Entrega parcial?",
       function () {
+        data.entrega_final = 0;
         $.post(
           "../../../html/php/servicios/parciales.php",
           data,
@@ -428,6 +429,7 @@ function registrar_conciliacion(info) {
         );
       },
       function () {
+        data.entrega_final = 1;
         $.post(
           "../../html/php/conciliacion_rendimiento.php",
           data,
@@ -443,6 +445,8 @@ function registrar_conciliacion(info) {
               parciales = parseFloat(
                 $(`#parcialesUnidadesProducidas${id_multi}`).val()
               );
+              if (isNaN(parciales)) parciales = 0;
+
               $(`#txtUnidadesProducidas${id_multi}`).val(final + parciales);
               $(`#parcialesUnidadesProducidas${id_multi}`).val(
                 final + parciales

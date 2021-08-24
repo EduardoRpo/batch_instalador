@@ -6,6 +6,10 @@ $(".fact1").hide();
 $("#fact2").hide();
 $("#fact3").hide();
 
+$(".notif_unidades1").hide();
+$(".notif_unidades2").hide();
+$(".notif_unidades3").hide();
+
 /* Carga el modal para la autenticacion */
 
 cargar = (btn, idbtn) => {
@@ -76,7 +80,7 @@ function busqueda_multi(batch) {
           $(`#despachosMulti${j}`).html(
             `DESPACHOS PRESENTACIÓN: ${presentacion} REFERENCIA ${referencia}`
           );
-          fact_muestras(referencia, j);
+          //fact_muestras(referencia, j);
           j++;
         }
       } else {
@@ -89,7 +93,7 @@ function busqueda_multi(batch) {
         );
         $(`#ref${j}`).val(referencia);
         $(`#unidad_empaque${j}`).val(batch.unidad_empaque);
-        fact_muestras(referencia, j);
+        //fact_muestras(referencia, j);
       }
       multi = j + 1;
     },
@@ -110,12 +114,20 @@ function ocultar_presentacion_despachos() {
 
 function cargar_despacho() {
   let op = 1;
+  let cont = 0;
   $.post(
     "../../html/php/despachos.php",
     (data = { op, idBatch, ref_multi, modulo }),
     function (data, textStatus, jqXHR) {
       let info = JSON.parse(data);
       if (info == 0) return false;
+
+      //notificacion unidades finalizadas
+      for (let i = 0; i < info.length; i++)
+        cont = cont + info[i]["entrega_final"];
+      if (cont) $(`.notif_unidades${id_multi}`).show();
+      
+      //Inicializacion
       unidades_empaque = parseFloat($(`#unidad_empaque${id_multi}`).val());
 
       let unidades = 0,
@@ -140,6 +152,7 @@ function cargar_despacho() {
           movimiento = info[0]["mov_inventario"];
           unidades_empaque = parseFloat($(`#unidad_empaque${id_multi}`).val());
           cajs = Math.ceil((unidades - retencion) / unidades_empaque);
+          fact_muestras(referencia, id_multi);
         }
       } else {
         unidades_empaque = parseFloat($(`#unidad_empaque${id_multi}`).val());
@@ -159,18 +172,20 @@ function cargar_despacho() {
 
       j = info.length - 1;
       $(`#unidades_recibidas_acond${id_multi}`).val(unidades);
+      isFinite(cajs) ? cajs : (cajs = 0);
       $(`#cajas_acond${id_multi}`).val(cajs);
 
       if (info[j].movimiento)
         $(`#mov_inventario_acond${id_multi}`).val(info[j].movimiento);
       else $(`#mov_inventario_acond${id_multi}`).val(movimiento);
 
-      $(`#mestras_retencion_acond${id_multi}`).val(retencion);
+      $(`#muestras_retencion_acond${id_multi}`).val(retencion);
       $(`#parciales${id_multi}`).val(unidadestotales);
 
       /* Despachos */
       unidades = 0;
       cajas = 0;
+      movimiento = 0;
       for (let i = 0; i < info.length; i++) {
         if (info[i]["modulo"] == 7) {
           unidades = unidades + info[i]["unidades_producidas"];
@@ -270,6 +285,7 @@ const fact_muestras = (referencia, i) => {
     { referencia },
     function (data, textStatus, jqXHR) {
       data = JSON.parse(data);
+      muestras = $(`#muestras_retencion_acond${i}`).val();
       if (data[0].facturar) $(`#fact${i}`).show();
     }
   );

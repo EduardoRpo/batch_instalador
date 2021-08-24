@@ -164,6 +164,11 @@ include('modal/image.php')
                     <div class="card">
                       <div class="card-block">
                         <div class="subtitle"><label for="">Consolidado Acondicionamiento</label></div>
+
+                        <div class="alert alert-success mt-3 notif_unidades1" role="alert" style="width:98%;margin-left:12px">
+                          <label class="alert-link">Entregas finalizadas por Acondicionamiento</label>
+                        </div>
+
                         <div class="despachos">
                           <div class="group">
                             <label for="recipient-name" class="col-form-label">Unidades Recibidas</label>
@@ -182,7 +187,7 @@ include('modal/image.php')
 
                           <div class="group">
                             <label for="recipient-name" class="col-form-label">Muestras retención</label>
-                            <input type="number" class="form-control centrado" id="mestras_retencion_acond1" readonly>
+                            <input type="number" class="form-control centrado" id="muestras_retencion_acond1" readonly>
                           </div>
 
                           <div class="group obs">
@@ -282,6 +287,11 @@ include('modal/image.php')
                     <div class="card">
                       <div class="card-block">
                         <div class="subtitle"><label for="">Consolidado Acondicionamiento</label></div>
+
+                        <div class="alert alert-success mt-3 notif_unidades2" role="alert" style="width:98%;margin-left:12px">
+                          <label class="alert-link">Entregas finalizadas por Acondicionamiento</label>
+                        </div>
+
                         <div class="despachos">
                           <div class="group">
                             <label for="recipient-name" class="col-form-label">Unidades Recibidas</label>
@@ -300,7 +310,7 @@ include('modal/image.php')
 
                           <div class="group">
                             <label for="recipient-name" class="col-form-label">Muestras retención</label>
-                            <input type="number" class="form-control centrado" id="mestras_retencion_acond2" readonly>
+                            <input type="number" class="form-control centrado" id="muestras_retencion_acond2" readonly>
                           </div>
 
                           <div class="group obs">
@@ -399,6 +409,11 @@ include('modal/image.php')
                     <div class="card">
                       <div class="card-block">
                         <div class="subtitle"><label for="">Consolidado Acondicionamiento</label></div>
+
+                        <div class="alert alert-success mt-3 notif_unidades3" role="alert" style="width:98%;margin-left:12px">
+                          <label class="alert-link">Entregas finalizadas por Acondicionamiento</label>
+                        </div>
+
                         <div class="despachos">
                           <div class="group">
                             <label for="recipient-name" class="col-form-label">Unidades Recibidas</label>
@@ -410,14 +425,14 @@ include('modal/image.php')
                             <input type="number" class="form-control centrado" id="cajas_acond3" readonly>
                           </div>
 
-                          <div class=" group">
+                          <div class="group">
                             <label for="recipient-name" class="col-form-label">No Movimiento Inventario</label>
                             <input type="number" class="form-control centrado" id="mov_inventario_acond3" oncopy="return false" readonly>
                           </div>
 
                           <div class="group">
                             <label for="recipient-name" class="col-form-label">Muestras retención</label>
-                            <input type="number" class="form-control centrado" id="mestras_retencion_acond3" readonly>
+                            <input type="number" class="form-control centrado" id="muestras_retencion_acond3" readonly>
                           </div>
 
                           <div class="group obs">
