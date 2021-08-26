@@ -580,7 +580,7 @@ identificarDensidad = () => {
 };
 
 function calcularPeso(densidadAprobada) {
-  if ((multi = !"0")) {
+  if (multi != "0") {
     for (let i = 0; i < multi.length; i++) {
       //presentacion = $("#presentacion").html();
       //presentacion = getNumbersInString(presentacion);
@@ -809,25 +809,50 @@ muestras_acondicionamiento = () => {
 };
 
 entrega_material_acondicionamiento = () => {
-  $.ajax({
-    url: "../../html/php/envase.php",
-    type: "POST",
-    data: { referencia },
-  }).done((data, status, xhr) => {
-    if (data == "") return false;
-    var info = JSON.parse(data);
-    empaqueEnvasado = Math.round(cantidad / info[0].unidad_empaque);
-    unidades = cantidad;
+  if (multi != "0") {
+    for (let i = 0; i < multi.length; i++) {
+      ref = multi[i].referencia;
+      $.ajax({
+        type: "POST",
+        url: "../../html/php/envase.php",
+        data: { referencia: ref },
+      }).done((data, status, xhr) => {
+        if (data == "") return false;
+        var info = JSON.parse(data);
+        empaqueEnvasado = Math.round(cantidad / info[0].unidad_empaque);
+        unidades = cantidad;
 
-    $(`.empaque1`).html(info[0].id_empaque);
-    $(`.descripcion_empaque1`).html(info[0].empaque);
+        $(`.empaque${id_multi}`).html(info[0].id_empaque);
+        $(`.descripcion_empaque${id_multi}`).html(info[0].empaque);
 
-    $(`.otros1`).html(info[0].id_otros);
-    $(`.descripcion_otros1`).html(info[0].otros);
+        $(`.otros1`).html(info[0].id_otros);
+        $(`.descripcion_otros${id_multi}`).html(info[0].otros);
 
-    //$(`.unidades1`).html(unidades);
-    //$(`.unidades1e`).html(empaqueEnvasado);
-  });
+        //$(`.unidades1`).html(unidades);
+        //$(`.unidades1e`).html(empaqueEnvasado);
+      });
+    }
+  } else {
+    $.ajax({
+      type: "POST",
+      url: "../../html/php/envase.php",
+      data: { referencia },
+    }).done((data, status, xhr) => {
+      if (data == "") return false;
+      var info = JSON.parse(data);
+      empaqueEnvasado = Math.round(cantidad / info[0].unidad_empaque);
+      unidades = cantidad;
+
+      $(`.empaque1`).html(info[0].id_empaque);
+      $(`.descripcion_empaque1`).html(info[0].empaque);
+
+      $(`.otros1`).html(info[0].id_otros);
+      $(`.descripcion_otros1`).html(info[0].otros);
+
+      //$(`.unidades1`).html(unidades);
+      //$(`.unidades1e`).html(empaqueEnvasado);
+    });
+  }
 };
 
 conciliacion = () => {

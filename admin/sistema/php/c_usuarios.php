@@ -48,8 +48,8 @@ switch ($op) {
                     echo '2';
                     exit();
                 } else {
-                    $sql = "INSERT INTO usuario (nombre, apellido, email, user, clave, urlfirma, rol, id_modulo, id_cargo) 
-                            VALUES(:nombre, :apellido, :email, :user, :clave, :urlfirma, :rol, :id_modulo, :id_cargo)";
+                    $sql = "INSERT INTO usuario (nombre, apellido, email, user, clave, urlfirma, rol, id_modulo, id_cargo, estado) 
+                            VALUES(:nombre, :apellido, :email, :user, :clave, :urlfirma, :rol, :id_modulo, :id_cargo, :estado)";
                     $query = $conn->prepare($sql);
                     $result = $query->execute([
                         'nombre' => $nombres,
@@ -60,14 +60,15 @@ switch ($op) {
                         'urlfirma' => $destino,
                         'rol' => $rol,
                         'id_modulo' => $modulo,
-                        'id_cargo' => $cargo
+                        'id_cargo' => $cargo,
+                        'estado' => '1'
                     ]);
                     ejecutarQuery($result, $conn);
                 }
             } else {
                 $id = $_POST['id'];
-                
-                
+
+
                 if (empty($clave) && empty($firma)) {
                     $sql = "UPDATE usuario SET nombre =:nombre, apellido =:apellido, email =:email, user =:user, rol =:rol, id_modulo =:modulo, id_cargo =:cargo WHERE id = :id";
                     $query = $conn->prepare($sql);

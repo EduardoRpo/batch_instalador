@@ -135,7 +135,7 @@ $(document).ready(function () {
     let clave = $("#clave").val();
     let rol = $("#rol").val();
 
-    if (rol == 1 || rol == 5) {
+    if (rol == 1 || rol == 2 || rol == 5) {
       modulo = "1";
     }
 
