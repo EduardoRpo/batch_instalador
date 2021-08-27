@@ -1,6 +1,6 @@
 <?php
 
-require_once('../../../conexion.php');
+require_once('../../../../conexion.php');
 
 $sql = "SELECT id_batch FROM batch ORDER BY `batch`.`id_batch` ASC";
 $query = $conn->prepare($sql);
