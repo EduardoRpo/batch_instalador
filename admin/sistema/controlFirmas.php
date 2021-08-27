@@ -66,20 +66,20 @@ require_once('php/sesion/sesion.php');
                         <input type="search" id="buscarFirmas" class="form-control mb-3">
                         <tr>
                           <th class="col-sm-2 centrado">Batch</th>
-                          <th class="col-sm-3 centrado">Pesaje(4)</th>
-                          <th class="col-sm-3 centrado">Preparacion(4)</th>
-                          <th class="col-sm-3 centrado">Aprobacion(2)</th>
-                          <th class="col-sm-3 centrado">Envasado(6)</th>
-                          <th class="col-sm-3 centrado">Acondicionamiento(7)</th>
-                          <th class="col-sm-3 centrado">Despachos(1)</th>
-                          <th class="col-sm-3 centrado">Microbiologia(2)</th>
-                          <th class="col-sm-3 centrado">Fisicoquimico(2)</th>
-                          <th class="col-sm-3 centrado">Liberacion Lote(3)</th>
+                          <th class="col-sm-3 centrado">Pesaje</th>
+                          <th class="col-sm-3 centrado">Preparacion</th>
+                          <th class="col-sm-3 centrado">Aprobacion</th>
+                          <th class="col-sm-3 centrado">Envasado</th>
+                          <th class="col-sm-3 centrado">Acondicionamiento</th>
+                          <th class="col-sm-3 centrado">Despachos</th>
+                          <th class="col-sm-3 centrado">Microbiologia</th>
+                          <th class="col-sm-3 centrado">Fisicoquimico</th>
+                          <th class="col-sm-3 centrado">Liberacion Lote</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <!-- <tbody>
 
-                      </tbody>
+                      </tbody> -->
                     </table>
                   </div>
                 </div>

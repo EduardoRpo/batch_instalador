@@ -637,7 +637,7 @@ const obtenerMuestras = () => {
       let sum = 0;
       let info = JSON.parse(response);
 
-      if (multi) {
+      if (multi != 0) {
         for (let i = 0; i < multi.length; i++) {
           sum = 0;
           promedio = 0;
@@ -819,8 +819,8 @@ entrega_material_acondicionamiento = () => {
       }).done((data, status, xhr) => {
         if (data == "") return false;
         var info = JSON.parse(data);
-        empaqueEnvasado = Math.round(cantidad / info[0].unidad_empaque);
-        unidades = cantidad;
+        empaqueEnvasado = Math.round(cantidad_lote / info[0].unidad_empaque);
+        unidades = cantidad_lote;
 
         $(`.empaque${id_multi}`).html(info[0].id_empaque);
         $(`.descripcion_empaque${id_multi}`).html(info[0].empaque);
@@ -840,8 +840,8 @@ entrega_material_acondicionamiento = () => {
     }).done((data, status, xhr) => {
       if (data == "") return false;
       var info = JSON.parse(data);
-      empaqueEnvasado = Math.round(cantidad / info[0].unidad_empaque);
-      unidades = cantidad;
+      empaqueEnvasado = Math.round(cantidad_lote / info[0].unidad_empaque);
+      unidades = cantidad_lote;
 
       $(`.empaque1`).html(info[0].id_empaque);
       $(`.descripcion_empaque1`).html(info[0].empaque);

@@ -3,8 +3,8 @@
 function actualizarEstado($batch, $modulo, $conn)
 {
 
-    $modulo == 6 || $modulo == 7 ? $modulo = 5 : $modulo;
-    $modulo == 8 || $modulo == 9 ? $modulo = 6 : $modulo;
+    $modulo == 6 ? $modulo = 5 : $modulo;
+    $modulo == 8 || $modulo == 9 ? $modulo = 7 : $modulo;
 
     switch ($modulo) {
 
