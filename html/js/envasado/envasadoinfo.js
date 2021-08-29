@@ -280,29 +280,28 @@ function cargarTablaEnvase(j, referencia, cantidad) {
     /* Carga valores sin referencia mp  */
 
     for (let i = 1; i < 4; i++) {
+      id_multi = i;
       if (info[0].id_envase == 50000) {
-        id_multi = 1;
         $(`#txtEnvasada${i}`).val(0).prop("disabled", true);
         $(`#averias${i}`).val(0).prop("disabled", true);
         $(`#sobrante${i}`).val(0).prop("disabled", true);
         $(`#txtEnvasada${i}`);
+        devolucionMaterialEnvasada(0);
+        recalcular_valores();
+      }
 
-        devolucionMaterialEnvasada(0);
-        recalcular_valores();
-      }
       if (info[0].id_tapa == 50000) {
-        id_multi = 1;
-        $(`#txtEnvasada${i}`).val(0);
-        $(`#averias${i}`).val(0);
-        $(`#sobrante${i}`).val(0);
+        $(`#txtEnvasada${i}`).val(0).prop("disabled", true);
+        $(`#averias${i}`).val(0).prop("disabled", true);
+        $(`#sobrante${i}`).val(0).prop("disabled", true);
         devolucionMaterialEnvasada(0);
         recalcular_valores();
       }
+
       if (info[0].id_etiqueta == 50000) {
-        id_multi = 1;
-        $(`#txtEnvasada${i}`).val(0);
-        $(`#averias${i}`).val(0);
-        $(`#sobrante${i}`).val(0);
+        $(`#txtEnvasada${i}`).val(0).prop("disabled", true);
+        $(`#averias${i}`).val(0).prop("disabled", true);
+        $(`#sobrante${i}`).val(0).prop("disabled", true);
         devolucionMaterialEnvasada(0);
         recalcular_valores();
       }

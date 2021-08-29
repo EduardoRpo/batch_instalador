@@ -139,17 +139,15 @@ function cargarTablaEnvase(j, referencia, cantidad) {
 
     for (let i = 1; i < 4; i++) {
       if (info[0].id_empaque == 50000) {
-        id_multi = 1;
-        $(`#utilizada_empaque${i}`).val(0).prop("disabled", true);
-        $(`#averias_empaque${i}`).val(0).prop("disabled", true);
-        $(`#sobrante_empaque${i}`).val(0).prop("disabled", true);
+        $(`#utilizada_empaque${j}`).val(0).prop("disabled", true);
+        $(`#averias_empaque${j}`).val(0).prop("disabled", true);
+        $(`#sobrante_empaque${j}`).val(0).prop("disabled", true);
         recalcular_valores();
       }
       if (info[0].id_otros == 50000) {
-        id_multi = 1;
-        $(`#utilizada_otros${i}`).val(0).prop("disabled", true);
-        $(`#averias_otros${i}`).val(0).prop("disabled", true);
-        $(`#sobrante_otros${i}`).val(0).prop("disabled", true);
+        $(`#utilizada_otros${j}`).val(0).prop("disabled", true);
+        $(`#averias_otros${j}`).val(0).prop("disabled", true);
+        $(`#sobrante_otros${j}`).val(0).prop("disabled", true);
         recalcular_valores();
       }
     }
