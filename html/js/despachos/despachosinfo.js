@@ -236,6 +236,7 @@ function guardar_despacho(info) {
       "Entrega",
       "¿Entrega parcial?",
       function () {
+        data.entrega_final = 0;
         $.post(
           "../../html/php/servicios/parciales.php",
           data,
@@ -252,6 +253,7 @@ function guardar_despacho(info) {
         );
       },
       function () {
+        data.entrega_final = 1;
         $.post(
           "../../html/php/conciliacion_rendimiento.php",
           data,
