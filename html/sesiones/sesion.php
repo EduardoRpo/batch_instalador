@@ -8,6 +8,22 @@ function sesiones($modulo)
     if ($_SESSION['idModulo'] != $modulo) {
       session_destroy();
       header('location: ../../');
+    } else if (isset($_SESSION["timeout"])) {
+      $inactividad = 1500;
+      $sessionTTL = time() - $_SESSION["timeout"];
+
+      if ($sessionTTL > $inactividad) {
+        session_destroy();
+        header('location: ../..');
+      }
+    }
+  } else if (isset($_SESSION["timeout"])) {
+    $inactividad = 1500;
+    $sessionTTL = time() - $_SESSION["timeout"];
+
+    if ($sessionTTL > $inactividad) {
+      session_destroy();
+      header('location: ../..');
     }
   }
 }

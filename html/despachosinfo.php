@@ -1,5 +1,6 @@
 <?php
 session_start();
+$_SESSION["timeout"] = time();
 //include('modal/modal_firma.php');
 include('modal/modal_cambiarContrasena.php');
 //include('modal/modal_observaciones.php');

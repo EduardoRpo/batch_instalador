@@ -1,7 +1,6 @@
 <?php
-//require_once('../../conexion.php');
 session_start();
-//echo $_SESSION['active'];
+
 if (empty($_SESSION['active'])) {
   header('location: ../../');
 } else if (isset($_SESSION["timeout"])) {

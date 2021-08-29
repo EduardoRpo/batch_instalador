@@ -1,5 +1,6 @@
 <?php
 session_start();
+$_SESSION["timeout"] = time();
 include_once('modal/modal_cambiarContrasena.php');
 include_once('modal/modal_observaciones.php');
 include_once('modal/modal_imprimirEtiquetas.php');

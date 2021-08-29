@@ -1,4 +1,4 @@
-<footer class="footer">
+<footer class="footer mt-5">
     <div class=" container-fluid ">
         <div class="copyright" id="copyright">
         &copy; <script>

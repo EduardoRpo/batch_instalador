@@ -44,12 +44,6 @@ include('./html/modal/modal_recuperarClave.php');
 
 		<img class="mb-4" src="assets/images/logo/logo-samara.png" alt="" width="200" height="100">
 		<h1 class="h3 mb-3 font-weight-normal" style="color:slategrey">Iniciar Sesión</h1><br>
-		<!-- <div>
-			<label for="">Seleccione el módulo / rol</label>
-			<select name="modulos" id="modulos" class="form-control mb-5">
-				<option value="1">ADMINISTRACIÓN</option>
-			</select>
-		</div> -->
 		<input type="text" id="usuario" name="usuario" class="form-control mb-3" placeholder="Usuario" autocomplete="off" required autofocus>
 
 		<div class="input-group">
@@ -66,9 +60,6 @@ include('./html/modal/modal_recuperarClave.php');
 		</div>
 
 		<button class="btn btn-lg btn-success btn-block mb-3" type="submit">Iniciar</button>
-		<!-- <button class="btn btn-lg btn-success btn-block mb-3" type="button" onclick="validar_usuario();">Iniciar</button> -->
-		<!-- <input type="button" class="btn btn-lg btn-success btn-block mb-3 btnlogin" value="Iniciar"> -->
-		<!-- <div class=""></div> -->
 		<?php echo isset($alert) ? '<div class="alert alert-danger mb" role="alert">' . $alert : '';
 		?> </div>
 		<p class="mt-5 mb-3 text-muted">&copy; 2020</p>
@@ -77,7 +68,6 @@ include('./html/modal/modal_recuperarClave.php');
 	<script src="html/vendor/jquery/jquery-3.2.1.min.js" type="text/javascript"></script>
 	<script src="html/vendor/bootstrap/js/popper.js" type="text/javascript"></script>
 	<script src="html/vendor/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-	<!-- Alertify -->
 	<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 	<script src="html/js/login/login.js"></script>
 	<script>

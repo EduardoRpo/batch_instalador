@@ -1,5 +1,6 @@
 <?php
 session_start();
+$_SESSION["timeout"] = time();
 include('modal/modal_firma.php');
 include('modal/modal_cambiarContrasena.php');
 include('modal/modal_observaciones.php');
@@ -593,7 +594,7 @@ include('modal/image.php')
                                     <td><input type="number" id="sobrante6" min="1" class="form-control centrado" style="width: 110px;" onkeyup="recalcular_valores();"></td>
                                     <td id="totalDevolucion6" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
                                   </tr>
-                                  
+
                               </table>
                             </div>
                           </div>

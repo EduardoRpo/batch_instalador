@@ -1,5 +1,6 @@
 <?php
 session_start();
+$_SESSION["timeout"] = time();
 include('modal/m_firma.php');
 include("modal/modal_observaciones.php");
 include("modal/modal_req_ajuste.php");
