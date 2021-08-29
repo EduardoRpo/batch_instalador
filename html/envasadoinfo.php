@@ -444,18 +444,18 @@ include('modal/image.php')
                             </thead>
                             <tbody>
                               <tr>
-                                <td id="envase2" class="centrado envase1"></td>
-                                <td id="descripcion_envase2" class="descripcion_envase1"></td>
+                                <td id="envase2" class="centrado envase2"></td>
+                                <td id="descripcion_envase2" class="descripcion_envase2"></td>
                                 <td id="unidades2" class="centrado unidades2"></td>
                               </tr>
                               <tr>
-                                <td id="tapa1" class="centrado tapa1"></td>
-                                <td id="descripcion_tapa1" class="descripcion_tapa1"></td>
+                                <td id="tapa2" class="centrado tapa2"></td>
+                                <td id="descripcion_tapa2" class="descripcion_tapa2"></td>
                                 <td id="unidades1" class="centrado unidades2"></td>
                               </tr>
                               <tr>
-                                <td id="etiqueta1" class="centrado etiqueta1"></td>
-                                <td id="descripcion_etiqueta1" class="descripcion_etiqueta1"></td>
+                                <td id="etiqueta2" class="centrado etiqueta2"></td>
+                                <td id="descripcion_etiqueta2" class="descripcion_etiqueta2"></td>
                                 <td id="unidades3" class="centrado unidades2"></td>
                               </tr>
                           </table>

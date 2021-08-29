@@ -263,6 +263,8 @@ function cargarTablaEnvase(j, referencia, cantidad) {
     empaqueEnvasado = Math.round(cantidad / info[0].unidad_empaque);
     unidades = formatoCO(cantidad);
 
+    /* Carga datos material referencia */
+
     $(`.envase${j}`).html(info[0].id_envase);
     $(`.descripcion_envase${j}`).html(info[0].envase);
 
@@ -274,6 +276,37 @@ function cargarTablaEnvase(j, referencia, cantidad) {
 
     $(`.unidades${j}`).html(unidades);
     $(`.unidades${j}e`).html(empaqueEnvasado);
+
+    /* Carga valores sin referencia mp  */
+
+    for (let i = 1; i < 4; i++) {
+      if (info[0].id_envase == 50000) {
+        id_multi = 1;
+        $(`#txtEnvasada${i}`).val(0).prop("disabled", true);
+        $(`#averias${i}`).val(0).prop("disabled", true);
+        $(`#sobrante${i}`).val(0).prop("disabled", true);
+        $(`#txtEnvasada${i}`);
+
+        devolucionMaterialEnvasada(0);
+        recalcular_valores();
+      }
+      if (info[0].id_tapa == 50000) {
+        id_multi = 1;
+        $(`#txtEnvasada${i}`).val(0);
+        $(`#averias${i}`).val(0);
+        $(`#sobrante${i}`).val(0);
+        devolucionMaterialEnvasada(0);
+        recalcular_valores();
+      }
+      if (info[0].id_etiqueta == 50000) {
+        id_multi = 1;
+        $(`#txtEnvasada${i}`).val(0);
+        $(`#averias${i}`).val(0);
+        $(`#sobrante${i}`).val(0);
+        devolucionMaterialEnvasada(0);
+        recalcular_valores();
+      }
+    }
   });
 }
 
