@@ -36,7 +36,7 @@ function cerrarEstado($batch, $modulo, $conn)
 {
 
     //$modulo == 6 || $modulo == 7 ? $modulo = 5 : $modulo;
-    $modulo == 8 || $modulo == 9 ? $modulo = 6 : $modulo;
+    //$modulo == 8 || $modulo == 9 ? $modulo = 6 : $modulo;
 
     switch ($modulo) {
         case '2': // pesaje
