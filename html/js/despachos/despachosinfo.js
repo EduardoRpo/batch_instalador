@@ -188,7 +188,7 @@ function cargar_despacho() {
       movimiento = 0;
       for (let i = 0; i < info.length; i++) {
         if (info[i]["modulo"] == 7) {
-          unidades = unidades + info[i]["unidades_producidas"];
+          unidades = unidades + info[i]["unidades"];
           cajas = cajas + info[i]["cajas"];
           movimiento = info[i]["movimiento"];
         }
