@@ -164,7 +164,7 @@ controlFirmasBuscar = (batch) => {
           if (j == 7) $(`#despachos${batch}`).css("color", "red");
           if (j == 8) $(`#microbiologia${batch}`).css("color", "red");
           if (j == 9) $(`#fisicoquimico${batch}`).css("color", "red");
-          if (j == 10) $(`#liberacion${batch}`).css("color", "red");
+          if (j == 10) $(`#liberacionLote${batch}`).css("color", "red");
         }
         j++;
       }

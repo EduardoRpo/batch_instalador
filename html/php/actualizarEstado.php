@@ -26,6 +26,12 @@ function actualizarEstado($batch, $modulo, $conn)
         case '7': //Microbiologia y Acondicionamiento
             $estado = 8.5;
             break;
+        /* case '8': //liberacion
+            $estado = 9.5;
+            break;
+        case '9': //liberacion
+            $estado = 9.5;
+            break; */
     }
 
     //Modifica el estado de acuerdo con el modulo
@@ -35,7 +41,7 @@ function actualizarEstado($batch, $modulo, $conn)
 function cerrarEstado($batch, $modulo, $conn)
 {
 
-    //$modulo == 6 || $modulo == 7 ? $modulo = 5 : $modulo;
+    $modulo == 5 || $modulo == 7 ? $modulo = 6 : $modulo;
     //$modulo == 8 || $modulo == 9 ? $modulo = 6 : $modulo;
 
     switch ($modulo) {
@@ -79,7 +85,7 @@ function CerrarBatch($conn, $batch)
     $query = $conn->prepare($sql);
     $query->execute(['batch' => $batch]);
     $firmas = $query->fetch(PDO::FETCH_ASSOC);
-    
+
     if ($firmas['cantidad'] == 28) {
         $sql = "UPDATE batch SET estado = '10' WHERE id_batch = :batch";
         $query = $conn->prepare($sql);
