@@ -39,6 +39,8 @@ if (!empty($_POST)) {
                     $sql = "INSERT INTO batch_tanques_chks (tanques, tanquesOk, modulo, batch) VALUES(:tanques, :tanquesOk, :modulo, :batch)";
                     $query = $conn->prepare($sql);
                     $result = $query->execute(['tanques' => $tanques, 'tanquesOk' => $tanquesOk, 'modulo' => $modulo, 'batch' => $batch]);
+
+                    /* Actualiza el estado de los modulo pesaje, preparacion y aprobacion */
                     if ($modulo == 2 || $modulo == 3 || $modulo == 4) actualizarEstado($batch, $modulo, $conn);
                     if ($result) echo '1';
                     else echo '0';

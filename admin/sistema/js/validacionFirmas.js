@@ -100,6 +100,13 @@ controlFirmasBuscar = (batch) => {
         $(`#fila${i}`).remove();
       }
       i = 0;
+
+      if (data == 0) {
+        alertify.set("notifier", "position", "top-right");
+        alertify.error("Batch Eliminado");
+        return false;
+      }
+
       $("#tb_firmas").append(` 
           <tr id="${batch}">
             <th class="centrado" id="batch">${batch}</th>

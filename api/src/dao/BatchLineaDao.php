@@ -27,13 +27,6 @@ class BatchLineaDao
   public function findBatchPesajes()
   {
     $connection = Connection::getInstance()->getConnection();
-    /* $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, batch.numero_lote, batch.estado 
-                                  FROM batch WHERE batch.fecha_programacion 
-                                  BETWEEN '2020-01-01' AND CURDATE() + INTERVAL 1 DAY 
-                                  AND (batch.estado > 2 AND batch.estado < 4)
-                                  AND ((SELECT cantidad_firmas FROM `batch_control_firmas` WHERE batch = batch.id_batch AND modulo = 2) < 4) 
-                                  ORDER BY `batch`.`id_batch` ASC"); */
-
     $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, batch.numero_lote, batch.estado, bcf.cantidad_firmas, bcf.modulo 
                                   FROM batch INNER JOIN batch_control_firmas bcf ON bcf.batch = batch.id_batch 
                                   WHERE batch.fecha_programacion BETWEEN '2020-01-01' AND CURDATE() + INTERVAL 1 DAY 
@@ -50,11 +43,6 @@ class BatchLineaDao
   public function findBatchPrepacion()
   {
     $connection = Connection::getInstance()->getConnection();
-    /* $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, batch.numero_lote 
-                                    FROM batch 
-                                    WHERE (batch.estado > 3  AND batch.estado < 5)
-                                    AND ((SELECT cantidad_firmas FROM `batch_control_firmas` WHERE batch = batch.id_batch AND modulo = 3) < 4)
-                                    ORDER BY batch.id_batch DESC"); */
     $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, batch.numero_lote, batch.estado, bcf.cantidad_firmas, bcf.modulo 
                                     FROM batch 
                                     INNER JOIN batch_control_firmas bcf ON bcf.batch = batch.id_batch 
@@ -70,11 +58,6 @@ class BatchLineaDao
   public function findBatchAprobacion()
   {
     $connection = Connection::getInstance()->getConnection();
-    /* $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote  
-                                  FROM batch INNER JOIN producto p ON p.referencia = batch.id_producto 
-                                  WHERE (batch.estado > 4  AND batch.estado < 6) 
-                                  AND ((SELECT cantidad_firmas FROM `batch_control_firmas` WHERE batch = batch.id_batch AND modulo = 4) < 2)
-                                  ORDER BY batch.id_batch DESC"); */
     $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote, batch.estado, bcf.cantidad_firmas, bcf.modulo   
                                   FROM batch INNER JOIN producto p ON p.referencia = batch.id_producto
                                   INNER JOIN batch_control_firmas bcf ON bcf.batch = batch.id_batch  
@@ -127,7 +110,7 @@ class BatchLineaDao
                                   WHERE modulo = 7 AND cantidad_firmas = total_firmas) 
                                   ORDER BY `batch`.`id_batch` ASC");
 
-   /*  $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote, batch.multi 
+    /*  $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote, batch.multi 
                                   FROM batch INNER JOIN producto p ON batch.id_producto = p.referencia 
                                   WHERE batch.estado >= 6.5 AND batch.id_batch IN (SELECT DISTINCT batch FROM batch_conciliacion_parciales 
                                   WHERE modulo = 6) AND batch.id_batch NOT IN (SELECT batch FROM `batch_conciliacion_rendimiento` 
