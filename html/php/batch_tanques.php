@@ -92,6 +92,10 @@ if (!empty($_POST)) {
                 if ($result) echo '1';
                 else echo '0';
             }
+            /* Actualiza estado  modulo fisicoquimico */
+            if ($modulo == 9)
+                actualizarEstado($batch, $modulo, $conn);
+
             break;
 
         case 2: //Seleccionar toda la informacion de los tanques

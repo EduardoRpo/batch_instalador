@@ -39,7 +39,6 @@ if (!empty($_POST)) {
                     'ref_multi' => $ref_multi,
                     'realizo' => $realizo
                 ]);
-                actualizarEstado($batch, $modulo, $conn);
             } else {
                 $sql = "INSERT INTO batch_conciliacion_parciales (unidades, cajas, movimiento, modulo, batch, ref_multi, realizo) 
                         VALUES(:unidades, :cajas, :movimiento, :modulo, :batch, :ref_multi, :realizo)";
@@ -54,7 +53,9 @@ if (!empty($_POST)) {
                     'realizo' => $realizo
                 ]);
             }
-
+            
+            actualizarEstado($batch, $modulo, $conn);
+            
             $sql = "SELECT * FROM batch_conciliacion_parciales WHERE batch = :batch AND ref_multi = :ref_multi AND modulo = :modulo";
             $query = $conn->prepare($sql);
             $query->execute(['batch' => $batch, 'ref_multi' => $ref_multi, 'modulo' => $modulo]);

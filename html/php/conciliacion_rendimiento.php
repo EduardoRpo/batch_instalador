@@ -35,7 +35,10 @@ if (!empty($_POST)) {
                 $query->execute(['referencia' => $referencia, 'muestra' => $muestra, 'batch' => $batch]);
                 $muestra = $muestra + 1;
             }
-            actualizarEstado($batch, $modulo, $conn);
+
+            //if ($modulo == 6)
+            cerrarEstado($batch, $modulo, $conn);
+            //actualizarEstado($batch, $modulo, $conn);
             break;
 
         case 2: // cargar batch Conciliacion

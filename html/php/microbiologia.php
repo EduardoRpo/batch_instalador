@@ -67,14 +67,14 @@ if (!empty($_POST)) {
 
             analisisMicrobiologiaRealizo($conn);
             desinfectanteRealizo($conn);
-
+            actualizarEstado($batch, $modulo, $conn);
             break;
 
         case '3': // Guardar firma calidad
 
             AnalisisMicrobiologiaVerifico($conn);
             desinfectanteVerifico($conn);
-
+            cerrarEstado($batch, $modulo, $conn);
             break;
     }
 } else
