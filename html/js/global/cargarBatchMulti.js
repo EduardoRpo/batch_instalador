@@ -118,7 +118,39 @@ function cargardevolucionmaterial() {
 
       //validar en que multipresentacion se encuentra
       if (modulo == 5) {
-        $(`.txtEnvasada${id_multi}`).val(info.data[0].envasada);
+        $(`#envaseEnvasada${id_multi}`).val(info.data[0].envasada);
+        $(`#envaseAverias${id_multi}`).val(info.data[0].averias);
+        $(`#envaseSobrante${id_multi}`).val(info.data[0].sobrante);
+        $(`.envasada${id_multi}`).html(info.data[0].envasada);
+
+        $(`#envaseDevolucion${id_multi}`).html(
+          parseInt($(`#envaseEnvasada${id_multi}`).val()) +
+            parseInt($(`#envaseAverias${id_multi}`).val()) +
+            parseInt($(`#envaseSobrante${id_multi}`).val())
+        );
+
+        $(`#tapaEnvasada${id_multi}`).val(info.data[1].envasada);
+        $(`#tapaAverias${id_multi}`).val(info.data[1].averias);
+        $(`#tapaSobrante${id_multi}`).val(info.data[1].sobrante);
+
+        $(`#tapaDevolucion${id_multi}`).html(
+          parseInt($(`#tapaEnvasada${id_multi}`).val()) +
+            parseInt($(`#tapaAverias${id_multi}`).val()) +
+            parseInt($(`#tapaSobrante${id_multi}`).val())
+        );
+
+        $(`#etiquetaEnvasada${id_multi}`).val(info.data[2].envasada);
+        $(`#etiquetaAverias${id_multi}`).val(info.data[2].averias);
+        $(`#etiquetaSobrante${id_multi}`).val(info.data[2].sobrante);
+
+        $(`#etiquetaDevolucion${id_multi}`).html(
+          parseInt($(`#etiquetaEnvasada${id_multi}`).val()) +
+            parseInt($(`#etiquetaAverias${id_multi}`).val()) +
+            parseInt($(`#etiquetaSobrante${id_multi}`).val())
+        );
+        // recalcular_valores();
+
+        /* $(`.txtEnvasada${id_multi}`).val(info.data[0].envasada);
         $(`.envasada${id_multi}`).html(info.data[0].envasada);
 
         id_multi == 1
@@ -132,7 +164,7 @@ function cargardevolucionmaterial() {
           $(`#sobrante${i}`).val(info.data[j].sobrante);
           recalcular_valores();
           j++;
-        }
+        } */
 
         firmado(info.data[0].realizo, 5);
         firmado(info.data[0].verifico, 6);

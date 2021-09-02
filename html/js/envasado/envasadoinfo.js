@@ -87,9 +87,14 @@ function cargar(btn, idbtn) {
 
       //validar que los datos de toda la tabla se encuentran completos
       for (let i = start; i < end; i++) {
-        let averias = $(`#averias${i}`).val();
-        let sobrante = $(`#sobrante${i}`).val();
-        if (averias == "" || sobrante == "") {
+        let averias = $(`.averias${i}`).val();
+        let sobrante = $(`.sobrante${i}`).val();
+        if (
+          averias == "" ||
+          sobrante == "" ||
+          averias == undefined ||
+          sobrante == undefined
+        ) {
           alertify.set("notifier", "position", "top-right");
           alertify.error("Ingrese todos los datos");
           return false;
@@ -279,32 +284,26 @@ function cargarTablaEnvase(j, referencia, cantidad) {
 
     /* Carga valores sin referencia mp  */
 
-    for (let i = 1; i < 4; i++) {
-      id_multi = i;
-      if (info[0].id_envase == 50000) {
-        $(`#txtEnvasada${i}`).val(0).prop("disabled", true);
-        $(`#averias${i}`).val(0).prop("disabled", true);
-        $(`#sobrante${i}`).val(0).prop("disabled", true);
-        $(`#txtEnvasada${i}`);
-        devolucionMaterialEnvasada(0);
-        recalcular_valores();
-      }
+    id_multi = j;
+    if (info[0].id_envase == 50000) {
+      $(`#envaseEnvasada${j}`).val(0).prop("disabled", true);
+      $(`#envaseAverias${j}`).val(0).prop("disabled", true);
+      $(`#envaseSobrante${j}`).val(0).prop("disabled", true);
+      $(`#envaseDevolucion${j}`).html(0);
+    }
 
-      if (info[0].id_tapa == 50000) {
-        $(`#txtEnvasada${i}`).val(0).prop("disabled", true);
-        $(`#averias${i}`).val(0).prop("disabled", true);
-        $(`#sobrante${i}`).val(0).prop("disabled", true);
-        devolucionMaterialEnvasada(0);
-        recalcular_valores();
-      }
+    if (info[0].id_tapa == 50000) {
+      $(`#tapaEnvasada${j}`).val(0).prop("disabled", true);
+      $(`#tapaAverias${j}`).val(0).prop("disabled", true);
+      $(`#tapaSobrante${j}`).val(0).prop("disabled", true);
+      $(`#tapaDevolucion${j}`).html(0);
+    }
 
-      if (info[0].id_etiqueta == 50000) {
-        $(`#txtEnvasada${i}`).val(0).prop("disabled", true);
-        $(`#averias${i}`).val(0).prop("disabled", true);
-        $(`#sobrante${i}`).val(0).prop("disabled", true);
-        devolucionMaterialEnvasada(0);
-        recalcular_valores();
-      }
+    if (info[0].id_etiqueta == 50000) {
+      $(`#etiquetaEnvasada${j}`).val(0).prop("disabled", true);
+      $(`#etiquetaAverias${j}`).val(0).prop("disabled", true);
+      $(`#etiquetaSobrante${j}`).val(0).prop("disabled", true);
+      $(`#etiquetaDevolucion${j}`).html(0);
     }
   });
 }
@@ -320,37 +319,28 @@ function devolucionMaterialEnvasada(valor) {
 
   //si la cantidad de envasado es diferente a los recibido envie una notificacion, la orden de produccion, diferencia entre recibida y envasada y presentacion
   $(`.envasada${id_multi}`).html(unidades_envasadas);
-
   recalcular_valores();
 }
 
 //recalcular valores en la tabla de devolucion de materiales envase
-function recalcular_valores() {
-  if (id_multi == 1) {
-    envasada = $(`.txtEnvasada1`).val();
-    min = 1;
-    max = 4;
-  }
-  if (id_multi == 2) {
-    envasada = $(`.txtEnvasada2`).val();
-    min = 4;
-    max = 7;
-  }
-  if (id_multi == 3) {
-    envasada = $(`.txtEnvasada3`).val();
-    min = 7;
-    max = 10;
-  }
 
-  for (let i = min; i < max; i++) {
-    let averias = $(`#averias${i}`).val();
-    let sobrante = $(`#sobrante${i}`).val();
-    averias == "" ? (averias = 0) : averias;
-    sobrante == "" ? (sobrante = 0) : sobrante;
-    let total = parseInt(envasada) + parseInt(averias) + parseInt(sobrante);
-    total = formatoCO(parseInt(total));
-    $(`#totalDevolucion${i}`).html(total);
-  }
+function recalcular_valores() {
+  let envasada = $(`#envaseEnvasada${id_multi}`).val();
+  let averias = $(`#envaseAverias${id_multi}`).val();
+  let sobrante = $(`#envaseSobrante${id_multi}`).val();
+  let totalEnvase = parseInt(envasada) + parseInt(averias) + parseInt(sobrante);
+  $(`#envaseDevolucion${id_multi}`).html(totalEnvase);
+
+  averias = $(`#tapaAverias${id_multi}`).val();
+  sobrante = $(`#tapaSobrante${id_multi}`).val();
+  let totalTapa = parseInt(envasada) + parseInt(averias) + parseInt(sobrante);
+  $(`#tapaDevolucion${id_multi}`).html(totalTapa);
+
+  averias = $(`#etiquetaAverias${id_multi}`).val();
+  sobrante = $(`#etiquetaSobrante${id_multi}`).val();
+  let totalEtiqueta =
+    parseInt(envasada) + parseInt(averias) + parseInt(sobrante);
+  $(`#etiquetaDevolucion${id_multi}`).html(totalEtiqueta);
 }
 
 /* Validar linea seleccionada */
@@ -369,17 +359,21 @@ function validarLinea() {
 
 function registrar_material_sobrante(realizo) {
   let materialsobrante = [];
+  id_multi == 1
+    ? ((start = 1), (end = 3))
+    : id_multi == 2
+    ? ((start = 4), (end = 6))
+    : ((start = 7), (end = 9));
 
-  for (let i = start; i < end; i++) {
+  for (let i = start; i <= end; i++) {
     let datasobrante = {};
     let itemref = $(`.refEmpaque${i}`).html();
-    let envasada = formatoGeneral($(`.txtEnvasada${id_multi}`).html());
-
-    if (envasada == "")
-      envasada = formatoGeneral($(`.txtEnvasada${id_multi}`).val());
-
-    let averias = $(`#averias${i}`).val();
-    let sobrante = $(`#sobrante${i}`).val();
+    let envasada = $(`.envasada${i}`).val();
+    envasada == "" || envasada == undefined
+      ? (envasada = $(`.envasada${start}`).val())
+      : envasada;
+    let averias = $(`.averias${i}`).val();
+    let sobrante = $(`.sobrante${i}`).val();
 
     datasobrante.referencia = itemref;
     datasobrante.envasada = envasada;
@@ -393,7 +387,7 @@ function registrar_material_sobrante(realizo) {
     url: "../../html/php/c_devolucionMaterial.php",
     data: { materialsobrante, ref_multi, idBatch, modulo, realizo },
 
-    success: function (response) {
+    success: function (r) {
       alertify.set("notifier", "position", "top-right");
       alertify.success("Firmado satisfactoriamente");
       habilitarbtn(btn_id);

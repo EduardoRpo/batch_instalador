@@ -164,3 +164,16 @@ const formatoGeneral = (number) => {
   const numero1 = numero.replace(",", ".");
   return numero1;
 };
+
+//const number = document.querySelector(".number");
+
+/* function formatNumber(n) {
+  n = String(n).replace(/\D/g, "");
+  return n === "" ? n : Number(n).toLocaleString();
+}
+
+number.addEventListener("keyup", (e) => {
+  const element = e.target;
+  const value = element.value;
+  element.value = formatNumber(value);
+}); */

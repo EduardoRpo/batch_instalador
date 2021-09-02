@@ -10648,6 +10648,7 @@ para mejorar el responsive enseguida*/
 
 .centrado {
   text-align: center;
+  vertical-align: middle !important;
 }
 /* pesaje */
 
