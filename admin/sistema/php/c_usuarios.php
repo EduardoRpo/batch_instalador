@@ -31,12 +31,12 @@ switch ($op) {
             $clave = $_POST['clave'];
             $firma = $_FILES['firma'];
 
-            $nombre_temp = $_FILES['firma']['tmp_name'];
-            $nombre = $_FILES['firma']['name'];
-
-            $destino = '../../../admin/assets/img/firmas/' . $nombre;
-            move_uploaded_file($nombre_temp, $destino);
-
+            if ($firma['name'] != "") {
+                $nombre_temp = $_FILES['firma']['tmp_name'];
+                $nombre = $_FILES['firma']['name'];
+                $destino = '../../../admin/assets/img/firmas/' . $nombre;
+                move_uploaded_file($nombre_temp, $destino);
+            }
 
             if ($editar == 0) {
                 $sql = "SELECT * FROM usuario WHERE user= :usuario";
@@ -96,7 +96,7 @@ switch ($op) {
                         'cargo' => $cargo,
                         'id' => $id
                     ]);
-                } else if (empty($firma)) {
+                } else if ($firma['name'] == "") {
                     $sql = "UPDATE usuario SET nombre =:nombre, apellido =:apellido, email =:email, user =:user, clave =:clave, rol =:rol, id_modulo =:modulo, id_cargo =:cargo WHERE id = :id";
                     $query = $conn->prepare($sql);
                     $result = $query->execute([
