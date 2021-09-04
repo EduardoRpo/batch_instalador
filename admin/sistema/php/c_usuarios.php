@@ -31,12 +31,10 @@ switch ($op) {
             $clave = $_POST['clave'];
             $firma = $_FILES['firma'];
 
-            if ($firma['name'] != "") {
-                $nombre_temp = $_FILES['firma']['tmp_name'];
-                $nombre = $_FILES['firma']['name'];
-                $destino = '../../../admin/assets/img/firmas/' . $nombre;
-                move_uploaded_file($nombre_temp, $destino);
-            }
+            $nombre_temp = $_FILES['firma']['tmp_name'];
+            $nombre = $_FILES['firma']['name'];
+            $destino = '../../../admin/assets/img/firmas/' . $nombre;
+            move_uploaded_file($nombre_temp, $destino);
 
             if ($editar == 0) {
                 $sql = "SELECT * FROM usuario WHERE user= :usuario";
