@@ -1,5 +1,6 @@
 let id;
 let editar;
+let archivo;
 
 cargarselectores("cargo");
 cargarselectores("modulo");
@@ -171,7 +172,8 @@ $(document).ready(function () {
         extensiones != ".PNG"
       ) {
         alertify.set("notifier", "position", "top-right");
-        alertify.error("El archivo de tipo " + extensiones + " no es válido");
+        alertify.error(`El archivo de tipo ${extensiones} no es válido`);
+        $("#firma").val("");
         return false;
       }
     }
@@ -238,6 +240,7 @@ $(document).on("click", ".link-editar", function (e) {
   $("#modulo option:contains(" + modulo + ")").attr("selected", true);
   $("#rol option:contains(" + rol + ")").attr("selected", true);
   $("#usuario").val(usuario);
+  $(`#firma`).val('');
 
   rol == "Superusuario"
     ? (id_rol = 1)

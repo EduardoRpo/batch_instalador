@@ -73,11 +73,13 @@
                     <div class="row" id="firma_y_modulo">
                       <div class="col-md-6">
                         <div class="form-group">
-                          <label>Firma y Huella</label>
-                          <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="firma" id="firma" lang="es">
-                            <label class="custom-file-label" for="firma">Seleccionar Archivo</label>
-                          </div>
+                          <form>
+                            <label>Firma y Huella</label>
+                            <div class="custom-file">
+                              <input type="file" class="custom-file-input firma" name="firma" id="firma" lang="es">
+                              <label class="custom-file-label" for="firma">Seleccionar Archivo</label>
+                            </div>
+                          </form>
                         </div>
                       </div>
                       <div class="col-md-6 pl-1">

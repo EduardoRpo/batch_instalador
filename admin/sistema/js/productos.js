@@ -220,24 +220,35 @@ $(document).on("click", ".link-editar", function (e) {
 $(document).on("click", ".link-borrar", function (e) {
   let id = $(this).parent().parent().children().eq(1).text();
 
-  $.ajax({
-    type: "POST",
-    url: "php/c_productos.php",
-    data: { operacion: 2, id: id },
+  alertify
+    .confirm(
+      "Eliminar Producto",
+      "¿Está seguro de Eliminar este producto?",
+      function () {
+        $.ajax({
+          type: "POST",
+          url: "php/c_productos.php",
+          data: { operacion: 2, id: id },
 
-    success: function (response) {
-      if (response == 1) {
-        alertify.set("notifier", "position", "top-right");
-        alertify.success("Registro Eliminado.");
-        refreshTable();
-      } else {
-        alertify.set("notifier", "position", "top-right");
-        alertify.error(
-          "El producto no se puede eliminar se encuentra relacionado con uno a varios Batch Records."
-        );
+          success: function (response) {
+            if (response == 1) {
+              alertify.set("notifier", "position", "top-right");
+              alertify.success("Registro Eliminado.");
+              refreshTable();
+            } else {
+              alertify.set("notifier", "position", "top-right");
+              alertify.error(
+                "El producto no se puede eliminar se encuentra relacionado con uno a varios Batch Records."
+              );
+            }
+          },
+        });
+      },
+      function () {
+        alertify.error("Cancelado");
       }
-    },
-  });
+    )
+    .set("labels", { ok: "Si", cancel: "No" });
 });
 
 /* Guardar o actualizar data*/
