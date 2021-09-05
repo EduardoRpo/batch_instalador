@@ -52,11 +52,12 @@ $(document).ready(function () {
     modulo != 7 &&
     modulo != 8 &&
     modulo != 9 &&
+    modulo != 10 &&
     modulo != undefined
   )
     carguepreguntas(modulo);
 
-  if (modulo != 7 && modulo != undefined) {
+  if (modulo != 7 && modulo != 10 && modulo != undefined) {
     desinfectantes();
     //cargar_condicionesMedio();
     validarTanques(modulo);

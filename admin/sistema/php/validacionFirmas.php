@@ -7,24 +7,15 @@ if (!empty($_POST)) {
     $batch = $_POST['batch'];
 
     if ($batch == 1) {
-        $sql = "SELECT * FROM batch_control_firmas";
+
+        $sql = "SELECT * FROM batch_control_firmas GROUP BY batch, modulo;";
         $query = $conn->prepare($sql);
         $query->execute();
     } else {
 
-        /* $sql = "SELECT estado FROM batch WHERE id_batch = :batch";
-        $query = $conn->prepare($sql);
-        $query->execute(['batch' => $batch]);
-        $estado_batch = $query->fetch(PDO::FETCH_ASSOC);
-
-        if ($estado_batch['estado'] != '0') { */
         $sql = "SELECT * FROM batch_control_firmas WHERE batch = :batch ORDER BY modulo";
         $query = $conn->prepare($sql);
         $query->execute(['batch' => $batch]);
-        /* } else {
-            echo 0;
-            exit();
-        } */
     }
 
     $firmas = $query->fetchAll(PDO::FETCH_ASSOC);

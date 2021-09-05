@@ -9,81 +9,109 @@ controlFirmas = () => {
       const data = JSON.parse(r);
       filas = data.length;
 
-      /* for (let i = 0; i < data.length; i++) {
-        if (i == 0) {
-          $("#tb_firmas").append(` 
-          <tr id="fila${i}">
-            <th class="centrado" id="batch">${data[i].batch}</th>
-            <th class="centrado" id="pesaje">
-              ${
-                data[0].cantidad_firmas + " " + "(" + data[0].total_firmas + ")"
-              }
-            </th>
-            <th class="centrado" id="preparacion">
-              ${
-                data[1].cantidad_firmas + " " + "(" + data[1].total_firmas + ")"
-              }
-            </th>
-            <th class="centrado" id="aprobacion">${
-              data[2].cantidad_firmas + " " + "(" + data[2].total_firmas + ")"
-            }</th>
-            <th class="centrado" id="envasado">${
-              data[3].cantidad_firmas + " " + "(" + data[3].total_firmas + ")"
-            }</th>
-            <th class="centrado" id="acondicionamiento">${
-              data[4].cantidad_firmas + " " + "(" + data[4].total_firmas + ")"
-            }</th>
-            <th class="centrado" id="despachos">${
-              data[5].cantidad_firmas + " " + "(" + data[5].total_firmas + ")"
-            }</th>
-            <th class="centrado" id="microbiologia">${
-              data[6].cantidad_firmas + " " + "(" + data[6].total_firmas + ")"
-            }</th>
-            <th class="centrado" id="fisicoquimico">${
-              data[7].cantidad_firmas + " " + "(" + data[7].total_firmas + ")"
-            }</th>
-            <th class="centrado" id="liberacionLote">${
-              data[8].cantidad_firmas + " " + "(" + data[8].total_firmas + ")"
-            }</th>
-          </tr>`);
-        } else if (data[i].batch != data[i - 1].batch) {
-          $("#tb_firmas").append(` 
-          <tr id="fila${i}">
-            <th class="centrado" id="batch">${data[i].batch}</th>
-            <th class="centrado" id="pesaje">
-              ${
-                data[0].cantidad_firmas + " " + "(" + data[0].total_firmas + ")"
-              }
-            </th>
-            <th class="centrado" id="preparacion">
-              ${
-                data[1].cantidad_firmas + " " + "(" + data[1].total_firmas + ")"
-              }
-            </th>
-            <th class="centrado" id="aprobacion">${
-              data[2].cantidad_firmas + " " + "(" + data[2].total_firmas + ")"
-            }</th>
-            <th class="centrado" id="envasado">${
-              data[3].cantidad_firmas + " " + "(" + data[3].total_firmas + ")"
-            }</th>
-            <th class="centrado" id="acondicionamiento">${
-              data[4].cantidad_firmas + " " + "(" + data[4].total_firmas + ")"
-            }</th>
-            <th class="centrado" id="despachos">${
-              data[5].cantidad_firmas + " " + "(" + data[5].total_firmas + ")"
-            }</th>
-            <th class="centrado" id="microbiologia">${
-              data[6].cantidad_firmas + " " + "(" + data[6].total_firmas + ")"
-            }</th>
-            <th class="centrado" id="fisicoquimico">${
-              data[7].cantidad_firmas + " " + "(" + data[7].total_firmas + ")"
-            }</th>
-            <th class="centrado" id="liberacionLote">${
-              data[8].cantidad_firmas + " " + "(" + data[8].total_firmas + ")"
-            }</th>
-          </tr>`);
+      for (let i = 0; i < data.length; i++) {
+        $("#tb_firmas").append(` 
+        <tr id="${data[i].batch}">
+          <th class="centrado" id="batch">${data[i].batch}</th>
+          <th class="centrado mod2" id="pesaje${data[i].batch}">${
+          data[i] && data[i].modulo == 2
+            ? data[i].cantidad_firmas + " " + "(" + data[i].total_firmas + ")"
+            : 0
         }
-      } */
+          <th class="centrado mod3" id="preparacion${data[i].batch}">${
+          data[i + 1] && data[i + 1].modulo == 3
+            ? data[i + 1].cantidad_firmas +
+              " " +
+              "(" +
+              data[i + 1].total_firmas +
+              ")"
+            : 0
+        }
+          <th class="centrado mod4" id="aprobacion${data[i].batch}">${
+          data[i + 2] && data[i + 2].modulo == 4
+            ? data[+2].cantidad_firmas +
+              " " +
+              "(" +
+              data[i + 2].total_firmas +
+              ")"
+            : 0
+        }
+          <th class="centrado mod5" id="envasado${data[i].batch}">${
+          data[i + 3] && data[i + 3].modulo == 5
+            ? data[i + 3].cantidad_firmas +
+              " " +
+              "(" +
+              data[i + 3].total_firmas +
+              ")"
+            : 0
+        }
+          <th class="centrado mod6" id="acondicionamiento${data[i].batch}">${
+          data[i + 4] && data[i + 4].modulo == 6
+            ? data[i + 4].cantidad_firmas +
+              " " +
+              "(" +
+              data[i + 4].total_firmas +
+              ")"
+            : 0
+        }
+          <th class="centrado mod7" id="despachos${data[i].batch}">${
+          data[i + 5] && data[i + 5].modulo == 7
+            ? data[i + 5].cantidad_firmas +
+              " " +
+              "(" +
+              data[i + 5].total_firmas +
+              ")"
+            : 0
+        }
+          </th>
+          <th class="centrado mod8" id="microbiologia${data[i].batch}">${
+          data[i + 6] && data[i + 6].modulo == 8
+            ? data[i + 6].cantidad_firmas +
+              " " +
+              "(" +
+              data[i + 6].total_firmas +
+              ")"
+            : 0
+        }
+          <th class="centrado mod9" id="fisicoquimico${data[i].batch}">${
+          data[i + 7] && data[i + 7].modulo == 9
+            ? data[i + 7].cantidad_firmas +
+              " " +
+              "(" +
+              data[i + 7].total_firmas +
+              ")"
+            : 0
+        }
+          <th class="centrado mod10" id="liberacionLote${data[i].batci}">${
+          data[i + 8] && data[i + 8].modulo == 10
+            ? data[i + 8].cantidad_firmas +
+              " " +
+              "(" +
+              data[i + 8].total_firmas +
+              ")"
+            : 0
+        }
+        </tr>`);
+
+        i = i + 8;
+        /* let j = 2;
+        for (let i = 0; i < data.length; i++) {
+          cantidad_firmas = data[i].cantidad_firmas;
+          total_firmas = data[i].total_firmas;
+          if (cantidad_firmas != total_firmas) {
+            if (j == 2) $(`#pesaje${batch}`).css("color", "red");
+            if (j == 3) $(`#preparacion${batch}`).css("color", "red");
+            if (j == 4) $(`#aprobacion${batch}`).css("color", "red");
+            if (j == 5) $(`#envasado${batch}`).css("color", "red");
+            if (j == 6) $(`#acondicionamiento${batch}`).css("color", "red");
+            if (j == 7) $(`#despachos${batch}`).css("color", "red");
+            if (j == 8) $(`#microbiologia${batch}`).css("color", "red");
+            if (j == 9) $(`#fisicoquimico${batch}`).css("color", "red");
+            if (j == 10) $(`#liberacionLote${batch}`).css("color", "red");
+          }
+          j++;
+        } */
+      }
     },
   });
 };
@@ -187,4 +215,4 @@ $("#buscarFirmas").change(function (e) {
   controlFirmasBuscar(buscar_batch);
 });
 
-controlFirmas();
+//controlFirmas();

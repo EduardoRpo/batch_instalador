@@ -1,6 +1,7 @@
 <?php
 
 require_once('../../conexion.php');
+require_once('./controlFirmas.php');
 
 if (!empty($_POST)) {
     $batch = $_POST['idBatch'];
@@ -65,6 +66,7 @@ if (!empty($_POST)) {
                     'batch' => $batch,
                 ]);
             }
+            registrarFirmas($conn, $batch, 10);
             break;
 
         case '2':

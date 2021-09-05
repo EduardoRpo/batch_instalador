@@ -26,10 +26,12 @@ function desinfectanteRealizo($conn)
         $verifico = '0';
 
         $sql = "INSERT INTO batch_desinfectante_seleccionado (desinfectante, observaciones, modulo, batch, realizo, verifico) 
-        VALUES(:desinfectante, :observaciones, :modulo, :batch, :realizo, :verifico)";
+                VALUES(:desinfectante, :observaciones, :modulo, :batch, :realizo, :verifico)";
         $query = $conn->prepare($sql);
         $query->execute(['desinfectante' => $desinfectante, 'observaciones' => $obs_desinfectante, 'modulo' => $modulo, 'batch' => $batch, 'realizo' => $realizo, 'verifico' => $verifico]);
-        registrarFirmas($conn, $batch, $modulo);
+
+        if ($modulo != 4 && $modulo != 8 && $modulo != 9)
+            registrarFirmas($conn, $batch, $modulo);
     }
 }
 
@@ -49,7 +51,8 @@ function desinfectanteVerifico($conn)
         $sql = "UPDATE batch_desinfectante_seleccionado SET verifico = :verifico WHERE batch = :batch AND modulo = :modulo";
         $query = $conn->prepare($sql);
         $query->execute(['modulo' => $modulo, 'batch' => $batch, 'verifico' => $verifico]);
-        registrarFirmas($conn, $batch, $modulo);
+        if ($modulo != 4 && $modulo != 8 && $modulo != 9)
+            registrarFirmas($conn, $batch, $modulo);
     }
 }
 
