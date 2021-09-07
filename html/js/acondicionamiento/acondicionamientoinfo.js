@@ -156,10 +156,10 @@ function cargarTablaEnvase(j, referencia, cantidad) {
 
 $(".sel_equipos").change(function (e) {
   e.preventDefault();
-  //if (flag == 0) {
-  imprimirEtiquetasFull();
-  flag = flag + 1;
-  //}
+  if (flag == 0) {
+    imprimirEtiquetasFull();
+    flag = flag + 1;
+  }
 });
 
 function cargar(btn, idbtn) {
