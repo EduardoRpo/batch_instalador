@@ -13,12 +13,16 @@ if (!empty($_POST)) {
         $query->execute();
     } else {
 
+        /* Busca el batch requerido */
+
         $sql = "SELECT estado FROM batch WHERE id_batch = :batch";
         $query = $conn->prepare($sql);
         $query->execute(['batch' => $batch]);
-        $batch = $query->fetch(PDO::FETCH_ASSOC);
+        $batch_estado = $query->fetch(PDO::FETCH_ASSOC);
 
-        if ($batch['estado'] != 0) {
+        /* Valida que el batch no haya sido eliminado */
+
+        if ($batch_estado['estado'] != 0) {
             $sql = "SELECT * FROM batch_control_firmas WHERE batch = :batch ORDER BY modulo";
             $query = $conn->prepare($sql);
             $query->execute(['batch' => $batch]);
@@ -29,12 +33,15 @@ if (!empty($_POST)) {
     $firmas = $query->fetchAll(PDO::FETCH_ASSOC);
     $array = [];
 
+    /* valida si el batch tiene multipresentacion y cuantas son */
     $sql = "SELECT * FROM multipresentacion WHERE id_batch = :batch";
     $query = $conn->prepare($sql);
     $query->execute(['batch' => $batch]);
     $rows = $query->rowCount();
 
     $rows > 0 ? $rows : $rows = 1;
+
+    /* Calcula el total de firmas por cada batch */
 
     if (sizeof($firmas) != 9) {
         for ($i = 2; $i < 11; $i++) {
