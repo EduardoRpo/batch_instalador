@@ -102,6 +102,7 @@ if (!empty($_POST)) {
             $sheet->setCellValue('D1', 'Lote');
             $sheet->setCellValue('E1', 'Orden_Produccion');
             $sheet->setCellValue('F1', 'consecutivo');
+            $sheet->setCellValue('G1', 'codigo');
             $sheet->fromArray($retencion, NULL, "A2");
             $writer = new Xlsx($spreadsheet);
 
