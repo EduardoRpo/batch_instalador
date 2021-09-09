@@ -36,9 +36,9 @@ if (!empty($_POST)) {
                 if (!$key) {
                     $array['modulo'] = $i;
                     if ($i == 5)
-                        $total_firmas = 5 * $rows;
+                        $total_firmas = (4 * $rows) + 2;
                     if ($i == 6)
-                        $total_firmas = 6 * $rows;
+                        $total_firmas = (5 * $rows) + 2;
                     if ($i == 7)
                         $total_firmas = 1 * $rows;
                     if ($i == 8)
