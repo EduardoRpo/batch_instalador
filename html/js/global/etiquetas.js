@@ -103,6 +103,10 @@ const imprimirEtiquetasRetencion = () => {
         if (i < $muestras_retencion.length)
           retencion.consecutivo = $muestras_retencion[i]["muestra"];
         else retencion.consecutivo = "Microbiología";
+        retencion.codigo = `"Microbiología" /
+          ${batch.numero_orden} /
+          ${batch.numero_lote} /
+            ${batch.referencia}`;
         arrayData.push(retencion);
       }
       exportarEtiquetas(operacion, arrayData);

@@ -187,6 +187,7 @@ $(document).on("click", ".link-borrar", function (e) {
         <option value='2'>Falta de Materia Prima o Insumos</option>
         <option value='3'>Producto descontinuado</option>
         <option value='4'>Otros</option>
+        <option value='5'>Por prueba preinicio</option>
       </select>`,
       null,
       null
