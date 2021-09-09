@@ -49,6 +49,7 @@ function cargartablaEliminados() {
           if (data == "2") return "Falta de Materia Prima o Insumos";
           if (data == "3") return "Producto Descontinuado";
           if (data == "4") return "Otros";
+          if (data == "5") return "Por prueba preinicio";
           else return " ";
         },
       },
