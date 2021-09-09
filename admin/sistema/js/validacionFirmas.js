@@ -123,6 +123,11 @@ controlFirmasBuscar = (batch) => {
     url: "../../../admin/sistema/php/validacionFirmas.php",
     data: { batch: batch },
     success: function (r) {
+      if (r == "") {
+        alertify.set("notifier", "position", "top-right");
+        alertify.error("Batch Eliminado.");
+        return false;
+      }
       const data = JSON.parse(r);
       for (let i = 0; i <= filas; i++) {
         $(`#fila${i}`).remove();
