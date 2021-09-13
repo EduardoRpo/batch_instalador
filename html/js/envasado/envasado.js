@@ -50,8 +50,13 @@ $("#tablaEnvasado").dataTable({
       },
     },
     {
-      title: "Firmas",
+      title: "Firmas G",
       data: "cantidad_firmas",
+      className: "uniqueClassName",
+    },
+    {
+      title: "Firmas T",
+      data: "total_firmas",
       className: "uniqueClassName",
     },
     {
