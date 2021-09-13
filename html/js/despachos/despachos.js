@@ -47,6 +47,11 @@ $("#tablaDespachos").dataTable({
       },
     },
     {
+      title: "Firmas",
+      data: "cantidad_firmas",
+      className: "uniqueClassName",
+    },
+    {
       title: "Ingresar",
       className: "uniqueClassName",
       data: "",

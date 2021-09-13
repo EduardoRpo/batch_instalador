@@ -34,20 +34,16 @@ $("#aprobacionTable").dataTable({
       data: "nombre_referencia",
       className: "uniqueClassName",
     },
-    /*{
-            title: 'Tamaño Lote',
-            data: 'tamano_lote'
-        },*/
     {
       title: "No Lote",
       data: "numero_lote",
       className: "uniqueClassName",
-      /* render: (data, type, row) => {
-                'use strict';
-                return $.number(data, 0, ',', '.');
-            } */
     },
-
+    {
+      title: "Firmas",
+      data: "cantidad_firmas",
+      className: "uniqueClassName",
+    },
     {
       title: "Ingresar",
       className: "uniqueClassName",

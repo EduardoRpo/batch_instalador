@@ -137,7 +137,6 @@ switch ($op) {
     $estado = $result['0'];
     $fechaprogramacion = $result['1'];
 
-    /* $i = 1; */
     $query = "INSERT INTO batch (fecha_creacion, fecha_programacion, fecha_actual, numero_orden, numero_lote, tamano_lote, lote_presentacion, unidad_lote, estado, id_producto) 
 			VALUES ('$fechahoy',";
     $query .= $fechaprogramacion != null ? "'$fechaprogramacion'" : "NULL";
@@ -163,6 +162,18 @@ switch ($op) {
       $query_firmas = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) VALUES('3' , '$id', '0', '4')";
       $result = mysqli_query($conn, $query_firmas);
       $query_firmas = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) VALUES('4' , '$id', '0', '2')";
+      $result = mysqli_query($conn, $query_firmas);
+      $query_firmas = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) VALUES('5' , '$id', '0', '6')";
+      $result = mysqli_query($conn, $query_firmas);
+      $query_firmas = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) VALUES('6' , '$id', '0', '7')";
+      $result = mysqli_query($conn, $query_firmas);
+      $query_firmas = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) VALUES('7' , '$id', '0', '1')";
+      $result = mysqli_query($conn, $query_firmas);
+      $query_firmas = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) VALUES('8' , '$id', '0', '2')";
+      $result = mysqli_query($conn, $query_firmas);
+      $query_firmas = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) VALUES('9' , '$id', '0', '2')";
+      $result = mysqli_query($conn, $query_firmas);
+      $query_firmas = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) VALUES('10' , '$id', '0', '3')";
       $result = mysqli_query($conn, $query_firmas);
     }
 
@@ -277,43 +288,6 @@ switch ($op) {
       echo json_encode('');
     mysqli_free_result($query_tanque);
     mysqli_close($conn);
-
-    break;
-
-  case 10: // Clonar Batch
-    /*  $id_batch = $_POST['id'];
-    $referencia = $_POST['referencia'];
-    $clonarCantidad = $_POST['clonarCantidad'];
-    $fechaprogramacion = "";
-
-    $result = estadoInicial($conn, $referencia, $fechaprogramacion);
-    $estado = $result['0'];
-    $fechaprogramacion = $result['1'];
-
-     for ($i = 0; $i < $clonarCantidad; $i++) {
-
-      $query_clonar = mysqli_query($conn, "INSERT INTO batch (fecha_creacion, fecha_actual, tamano_lote, lote_presentacion, unidad_lote, id_producto, estado, multi)
-                                           SELECT CURRENT_DATE, CURRENT_DATE, tamano_lote, lote_presentacion, unidad_lote, id_producto, '$estado', multi 
-                                           FROM batch WHERE id_batch = $id_batch");
-
-      $query_select_tanques = mysqli_query($conn, "SELECT * FROM batch_tanques WHERE id_batch = $id_batch");
-      while ($data = mysqli_fetch_assoc($query_select_tanques))
-        $arreglo[] = $data;
-
-      $tanque = $arreglo[0]['tanque'];
-      $cantidad = $arreglo[0]['cantidad'];
-
-    
-      $query = mysqli_query($conn, "SELECT MAX(id_batch) AS id FROM batch");
-      $max_batch = mysqli_fetch_assoc($query);
-      $id_batch = $max_batch['id'];
-
-      $query_clonar_tanques = mysqli_query($conn, "INSERT INTO batch_tanques(tanque, cantidad, id_batch) 
-                                                   VALUES('$tanque', '$cantidad', '$id_batch')");
-    } 
-
-    if ($query_clonar)
-      echo '1';*/
 
     break;
 

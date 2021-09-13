@@ -38,6 +38,11 @@ $(document).ready(function () {
         className: "uniqueClassName",
       },
       {
+        title: "Firmas",
+        data: "cantidad_firmas",
+        className: "uniqueClassName",
+      },
+      {
         title: "Ingresar",
         data: "",
         className: "uniqueClassName",

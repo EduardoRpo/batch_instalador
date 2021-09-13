@@ -73,10 +73,15 @@ class BatchLineaDao
   public function findBatchEnvasado()
   {
     $connection = Connection::getInstance()->getConnection();
-    $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, batch.numero_lote, batch.estado, batch.multi 
+    /* $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, batch.numero_lote, batch.estado, batch.multi 
                                   FROM batch WHERE batch.id_batch NOT IN(SELECT batch FROM `batch_control_firmas` 
                                   WHERE modulo = 5 AND cantidad_firmas = total_firmas) AND batch.estado >= 5.5 AND batch.id_batch 
-                                  ORDER BY `batch`.`id_batch` DESC");
+                                  ORDER BY `batch`.`id_batch` DESC"); */
+    $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, batch.numero_lote, batch.estado, batch.multi, bcf.cantidad_firmas 
+                                  FROM batch 
+                                  INNER JOIN batch_control_firmas bcf ON batch.id_batch = bcf.batch
+                                  WHERE batch.estado >= 5.5 AND batch.id_batch AND bcf.modulo = 5 AND batch.id_batch NOT IN(SELECT batch FROM `batch_control_firmas` 
+                                  WHERE modulo = 5 AND cantidad_firmas = total_firmas) ORDER BY id_batch DESC;");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $envasado = $stmt->fetchAll($connection::FETCH_ASSOC);
@@ -87,12 +92,19 @@ class BatchLineaDao
   public function findBatchAcondicionamiento()
   {
     $connection = Connection::getInstance()->getConnection();
-    $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, producto.nombre_referencia, batch.numero_lote, batch.estado, batch.multi 
+    /* $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, producto.nombre_referencia, batch.numero_lote, batch.estado, batch.multi 
                                   FROM batch 
                                   INNER JOIN producto ON producto.referencia = batch.id_producto
                                   WHERE batch.id_batch NOT IN(SELECT batch FROM `batch_control_firmas` 
                                   WHERE modulo = 6 AND cantidad_firmas = total_firmas) AND batch.estado >= 5.5 AND batch.id_batch 
-                                  ORDER BY `batch`.`id_batch` DESC");
+                                  ORDER BY `batch`.`id_batch` DESC"); */
+    $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, producto.nombre_referencia, batch.numero_lote, batch.estado, batch.multi, bcf.cantidad_firmas 
+                                  FROM batch 
+                                  INNER JOIN producto ON producto.referencia = batch.id_producto 
+                                  INNER JOIN batch_control_firmas bcf ON batch.id_batch = bcf.batch 
+                                  WHERE bcf.modulo = 6 AND batch.id_batch NOT IN(SELECT batch FROM `batch_control_firmas` WHERE modulo = 6 AND cantidad_firmas = total_firmas) 
+                                  AND batch.estado >= 5.5 AND batch.id_batch 
+                                  ORDER BY `batch`.`id_batch` DESC;");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $acondicionamiento = $stmt->fetchAll($connection::FETCH_ASSOC);
@@ -103,12 +115,18 @@ class BatchLineaDao
   public function findBatchDespachos()
   {
     $connection = Connection::getInstance()->getConnection();
-    $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote, batch.multi 
+    /* $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote, batch.multi 
                                   FROM batch INNER JOIN producto p ON batch.id_producto = p.referencia 
                                   WHERE batch.estado >= 6.5 AND batch.id_batch 
                                   NOT IN (SELECT batch FROM `batch_control_firmas` 
                                   WHERE modulo = 7 AND cantidad_firmas = total_firmas) 
-                                  ORDER BY `batch`.`id_batch` ASC");
+                                  ORDER BY `batch`.`id_batch` ASC"); */
+    $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote, batch.multi, bcf.cantidad_firmas 
+                                  FROM batch 
+                                  INNER JOIN producto p ON batch.id_producto = p.referencia 
+                                  INNER JOIN batch_control_firmas bcf ON batch.id_batch = bcf.batch WHERE batch.estado >= 6.5 AND bcf.modulo = 7 
+                                  AND batch.id_batch NOT IN (SELECT batch FROM `batch_control_firmas` 
+                                  WHERE modulo = 7 AND cantidad_firmas = total_firmas) ORDER BY `batch`.`id_batch` ASC;");
 
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
@@ -120,11 +138,18 @@ class BatchLineaDao
   public function findBatchMicrobiologia()
   {
     $connection = Connection::getInstance()->getConnection();
-    $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote 
+    /* $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote 
                                   FROM batch INNER JOIN producto p ON batch.id_producto = p.referencia 
                                   WHERE batch.estado >= 5.5 AND batch.id_batch 
                                   NOT IN (SELECT batch FROM `batch_analisis_microbiologico` WHERE modulo = 8 AND verifico > 0) 
-                                  ORDER BY `batch`.`id_batch` ASC");
+                                  ORDER BY `batch`.`id_batch` ASC"); */
+    $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote, bcf.cantidad_firmas 
+                                  FROM batch 
+                                  INNER JOIN producto p ON batch.id_producto = p.referencia 
+                                  INNER JOIN batch_control_firmas bcf ON batch.id_batch = bcf.batch
+                                  WHERE batch.estado >= 5.5 AND bcf.modulo = 8 AND batch.id_batch 
+                                  NOT IN (SELECT batch FROM `batch_analisis_microbiologico` WHERE modulo = 8 AND verifico > 0) 
+                                  ORDER BY `batch`.`id_batch` ASC;");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $microbiologia = $stmt->fetchAll($connection::FETCH_ASSOC);
@@ -135,9 +160,11 @@ class BatchLineaDao
   public function findBatchFisicoquimica()
   {
     $connection = Connection::getInstance()->getConnection();
-    $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote 
-                                  FROM batch INNER JOIN producto p ON batch.id_producto = p.referencia 
-                                  WHERE batch.estado >= 5.5 AND batch.id_batch 
+    $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote, bcf.cantidad_firmas  
+                                  FROM batch 
+                                  INNER JOIN producto p ON batch.id_producto = p.referencia 
+                                  INNER JOIN batch_control_firmas bcf ON batch.id_batch = bcf.batch
+                                  WHERE batch.estado >= 5.5 AND bcf.modulo = 9 AND batch.id_batch 
                                   NOT IN (SELECT batch FROM `batch_firmas2seccion` WHERE modulo = 9 AND verifico > 0) 
                                   ORDER BY `batch`.`id_batch` ASC");
     $stmt->execute();
@@ -150,9 +177,13 @@ class BatchLineaDao
   public function findBatchLiberacionlote()
   {
     $connection = Connection::getInstance()->getConnection();
-    $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote  
-                                  FROM batch INNER JOIN producto p ON p.referencia = batch.id_producto 
-                                  WHERE batch.estado >= 10 AND batch.id_batch NOT IN (SELECT batch FROM `batch_liberacion` WHERE dir_produccion > 0 AND dir_calidad > 0 and dir_tecnica > 0) ORDER BY `batch`.`id_batch` DESC");
+    $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote, bcf.cantidad_firmas    
+                                  FROM batch 
+                                  INNER JOIN producto p ON p.referencia = batch.id_producto 
+                                  INNER JOIN batch_control_firmas bcf ON batch.id_batch = bcf.batch
+                                  WHERE batch.estado >= 10 AND bcf.modulo = 10
+                                  AND batch.id_batch NOT IN (SELECT batch FROM `batch_liberacion` WHERE dir_produccion > 0 AND dir_calidad > 0 and dir_tecnica > 0) 
+                                  ORDER BY `batch`.`id_batch` DESC");
 
 
     /*  $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote, bcf.cantidad_firmas, 
