@@ -445,12 +445,13 @@ function registrar_conciliacion(info) {
       },
       function () {
         data.entrega_final = 1;
+        imprimirEtiquetasRetencion();
+
         $.post(
           "../../html/php/conciliacion_rendimiento.php",
           data,
           function (data, textStatus, jqXHR) {
             if (textStatus == "success") {
-              //imprimirEtiquetasRetencion();
               alertify.set("notifier", "position", "top-right");
               alertify.success("Conciliación registrada satisfactoriamente");
               $(`.conciliacion_realizado${id_multi}`)
