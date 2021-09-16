@@ -4,6 +4,7 @@ if (!empty($_POST)) {
     require_once('./controlFirmas.php');
     require_once('./firmas.php');
     require_once('../php/actualizarEstado.php');
+    require_once('../php/servicios/acondicionamiento/muestras_retencion.php');
 
     $op = $_POST['operacion'];
     $batch =  $_POST['idBatch'];
@@ -16,27 +17,7 @@ if (!empty($_POST)) {
             $modulo = $_POST['modulo'];
             $modulo == 6 ? $retencion =  $_POST['retencion'] : $retencion = 0;
             conciliacionRendimientoRealizo($conn);
-
-            /* Almacenar muestras retencion */
-
-            $sql = "SELECT MAX(muestra) as consecutivo FROM  batch_muestras_retencion";
-            $query = $conn->prepare($sql);
-            $query->execute();
-            $data = $query->fetch(PDO::FETCH_ASSOC);
-
-            if ($data['consecutivo'] == null)
-                $muestra = 1;
-            else
-                $muestra = $data['consecutivo'] + 1;
-
-            for ($i = 1; $i < $retencion; $i++) {
-                $sql = "INSERT INTO batch_muestras_retencion SET referencia = :referencia, muestra = :muestra,  batch = :batch";
-                $query = $conn->prepare($sql);
-                $query->execute(['referencia' => $referencia, 'muestra' => $muestra, 'batch' => $batch]);
-                $muestra = $muestra + 1;
-            }
-
-            //if ($modulo == 6)
+            almacenar_muestras_retencion($conn, $retencion, $referencia, $batch);
             cerrarEstado($batch, $modulo, $conn);
             //actualizarEstado($batch, $modulo, $conn);
             break;

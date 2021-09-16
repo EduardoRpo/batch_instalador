@@ -4,6 +4,7 @@ if (!empty($_POST)) {
 
     require_once('../../../conexion.php');
     require_once('../actualizarEstado.php');
+    require_once('../servicios/acondicionamiento/muestras_retencion.php');
 
     $op = $_POST['operacion'];
 
@@ -25,6 +26,7 @@ if (!empty($_POST)) {
 
             if ($modulo == 6) {
                 if ($data) $retencion = 0;
+                else almacenar_muestras_retencion($conn, $retencion, $ref_multi, $batch);
 
                 $sql = "INSERT INTO batch_conciliacion_parciales (unidades, retencion, cajas, movimiento, modulo, batch, ref_multi, realizo) 
                         VALUES(:unidades, :retencion, :cajas, :movimiento, :modulo, :batch, :ref_multi, :realizo)";
@@ -53,9 +55,9 @@ if (!empty($_POST)) {
                     'realizo' => $realizo
                 ]);
             }
-            
+
             actualizarEstado($batch, $modulo, $conn);
-            
+
             $sql = "SELECT * FROM batch_conciliacion_parciales WHERE batch = :batch AND ref_multi = :ref_multi AND modulo = :modulo";
             $query = $conn->prepare($sql);
             $query->execute(['batch' => $batch, 'ref_multi' => $ref_multi, 'modulo' => $modulo]);
