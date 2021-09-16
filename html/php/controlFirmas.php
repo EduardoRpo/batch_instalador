@@ -19,10 +19,7 @@ function registrarFirmas($conn, $batch, $modulo)
     if ($modulo == 5) $rows_multi == 0 ? $total_firmas = 6 : $total_firmas = ($rows_multi * 4) + 2;
     if ($modulo == 6) $rows_multi == 0 ? $total_firmas = 7 : $total_firmas = ($rows_multi * 5) + 2;
     if ($modulo == 7) $rows_multi == 0 ? $total_firmas = 1 : $total_firmas = $rows_multi;
-    if ($modulo == 8) $rows_multi == 0 ? $total_firmas = 2 : $total_firmas = $rows_multi;
-    if ($modulo == 9) $rows_multi == 0 ? $total_firmas = 2 : $total_firmas = $rows_multi;
-    if ($modulo == 10) $rows_multi == 0 ? $total_firmas = 3 : $total_firmas = $rows_multi;
-
+    
     if ($rows > 0) {
         $data = $query->fetchAll(PDO::FETCH_ASSOC);
 
