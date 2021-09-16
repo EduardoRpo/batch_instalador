@@ -1,24 +1,7 @@
 <?php
-//include('/Desarrollo/BatchRecord/htdocs/conexion.php');
-/* require_once('../../conexion2.php'); */
+
 require_once('../../conexion.php');
-
-/* function utf8ize($d)
-{
-  if (is_array($d))
-    foreach ($d as $k => $v)
-      $d[$k] = utf8ize($v);
-
-  else if (is_object($d))
-    foreach ($d as $k => $v)
-      $d->$k = utf8ize($v);
-
-  else
-    return utf8_encode($d);
-
-  return $d;
-} */
-
+require_once('../php/servicios/control_firmas/control_firmas_multi.php');
 
 $op = $_POST['operacion'];
 
@@ -115,6 +98,10 @@ switch ($op) {
         $result = $query->execute(['id_batch' => $id_batch,]);
       }
     }
+
+    /* Actualizar tabla firmas con multipresentacion */
+    control_firmas_multi($conn, $id_batch);
+
 
     if (!$result) {
       die('Error');
