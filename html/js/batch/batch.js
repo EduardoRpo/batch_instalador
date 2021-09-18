@@ -84,9 +84,9 @@ function crearTablaBatch(
             : data == 5
             ? "Aprobación"
             : data == 5.5
-            ? "Multimodulo"
+            ? "Envasado/Acondicionamiento"
             : data == 6
-            ? "Multimodulo"
+            ? "Envasado/Acondicionamiento"
             : data == 6.5
             ? "Despachos"
             : data == 7
