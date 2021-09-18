@@ -102,7 +102,7 @@ include_once("modal/m_batch_pdf.php");
             <div class="card-header" style="background: #FCF9F8;">
               <ul class="nav nav-tabs card-header-tabs" id="batch-list" role="tablist">
                 <li class="nav-item">
-                  <a class="nav-link active" href="#description" role="tab" aria-controls="description" aria-selected="true">Activos</a>
+                  <a class="nav-link active" href="#description" role="tab" aria-controls="description" aria-selected="true">Abiertos</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#history" role="tab" aria-controls="history" aria-selected="false">Cerrados</a>
