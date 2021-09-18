@@ -123,6 +123,11 @@ include('modal/image.php')
                           <td id="cantidad3" class="centrado"></td>
                           <td id="total3" class="centrado"></td>
                         </tr>
+                        <tr id="fila4">
+                          <td id="tanque4" class="centrado"></td>
+                          <td id="cantidad4" class="centrado"></td>
+                          <td id="total4" class="centrado"></td>
+                        </tr>
                       </tbody>
                     </table>
                   </div>
@@ -838,10 +843,10 @@ include('modal/image.php')
             </div>
           </div>
 
-         <!--  <div class="card" id="envasado4">
+          <!-- <div class="card" id="envasado4">
             <div class="card-header" id="headingSix">
               <h5 class="mb-0">
-                <button id="ref_multi1" class="btn btn-link collapsed img_ref ref_multi4" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
+                <button id="ref_multi4" class="btn btn-link collapsed img_ref ref_multi4" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
                   <b id="envasadoMulti4" class="img_ref">ENVASADO</b>
                   <input type="text" class="ref4" id="ref4" hidden>
                 </button>
@@ -880,7 +885,7 @@ include('modal/image.php')
                               <tr>
                                 <td id="etiqueta4" class="centrado etiqueta4"></td>
                                 <td id="descripcion_etiqueta4" class="descripcion_etiqueta4"></td>
-                                <td id="unidades3" class="centrado unidades3"></td>
+                                <td id="unidades3" class="centrado unidades4"></td>
                               </tr>
                           </table>
                           </form>
@@ -939,7 +944,7 @@ include('modal/image.php')
                         <input type="text" class="form-control" id="muestras3" style="text-align: center;" readonly>
                       </div>
                       <div class="col-md-1 align-self-center" style="margin-top: 1%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;" onclick="muestrasEnvase();" data-toggle="modal" data-target="#m_muestras">Iniciar</button> 
+                        <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;" onclick="muestrasEnvase();" data-toggle="modal" data-target="#m_muestras">Iniciar</button>
                       </div>
                       <div class="col-md-1 align-self-center" style="margin-top: 1%">
                         <label for="recipient-name" class="col-form-label">Promedio</label>
@@ -977,7 +982,7 @@ include('modal/image.php')
                               <table class="table table-striped table-bordered">
                                 <thead>
                                   <tr>
-                                    
+
                                     <th>Referencia</th>
                                     <th>Descripción</th>
                                     <th>Recibida</th>
@@ -1021,9 +1026,9 @@ include('modal/image.php')
                         </div>
                       </div>
                     </div>
-                    
+
                     <div class="row" style="margin: 1%">
-                    
+
                       <div class="col-md-4 align-self-center">
                         <label for="devolucion_realizado" class="col-form-label">Realizado Por:</label>
                         <input type="text" class="form-control" id="devolucion_realizado4" readonly>
@@ -1032,7 +1037,7 @@ include('modal/image.php')
                         <button type="button" class="btn waves-effect waves-light btn-danger devolucion_realizado4" id="devolucion_realizado4" style="width: 100%; height: 38px;" onclick="cargar(this, 'firma5')">Firmar</button>
                       </div>
 
-                      
+
                       <div class="col-md-4 align-self-center">
                         <label for="devolucion_verificado" class="col-form-label">Verificado Por:</label>
                         <input type="text" class="form-control" id="devolucion_verificado4" readonly>

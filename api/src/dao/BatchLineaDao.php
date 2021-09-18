@@ -80,7 +80,7 @@ class BatchLineaDao
     $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, batch.numero_lote, batch.estado, batch.multi, bcf.cantidad_firmas, bcf.total_firmas 
                                   FROM batch 
                                   INNER JOIN batch_control_firmas bcf ON batch.id_batch = bcf.batch
-                                  WHERE batch.estado >= 5.5 AND batch.id_batch AND bcf.modulo = 5 AND batch.id_batch NOT IN(SELECT batch FROM `batch_control_firmas` 
+                                  WHERE batch.estado > 5 AND batch.id_batch AND bcf.modulo = 5 AND batch.id_batch NOT IN(SELECT batch FROM `batch_control_firmas` 
                                   WHERE modulo = 5 AND cantidad_firmas = total_firmas) ORDER BY id_batch DESC;");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
@@ -103,7 +103,7 @@ class BatchLineaDao
                                   INNER JOIN producto ON producto.referencia = batch.id_producto 
                                   INNER JOIN batch_control_firmas bcf ON batch.id_batch = bcf.batch 
                                   WHERE bcf.modulo = 6 AND batch.id_batch NOT IN(SELECT batch FROM `batch_control_firmas` WHERE modulo = 6 AND cantidad_firmas = total_firmas) 
-                                  AND batch.estado >= 5.5 AND batch.id_batch 
+                                  AND batch.estado > 5 AND batch.id_batch 
                                   ORDER BY `batch`.`id_batch` DESC;");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
@@ -124,7 +124,7 @@ class BatchLineaDao
     $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote, batch.multi, bcf.cantidad_firmas, bcf.total_firmas 
                                   FROM batch 
                                   INNER JOIN producto p ON batch.id_producto = p.referencia 
-                                  INNER JOIN batch_control_firmas bcf ON batch.id_batch = bcf.batch WHERE batch.estado >= 6.5 AND bcf.modulo = 7 
+                                  INNER JOIN batch_control_firmas bcf ON batch.id_batch = bcf.batch WHERE batch.estado > 6 AND bcf.modulo = 7 
                                   AND batch.id_batch NOT IN (SELECT batch FROM `batch_control_firmas` 
                                   WHERE modulo = 7 AND cantidad_firmas = total_firmas) ORDER BY `batch`.`id_batch` ASC;");
 
@@ -147,7 +147,7 @@ class BatchLineaDao
                                   FROM batch 
                                   INNER JOIN producto p ON batch.id_producto = p.referencia 
                                   INNER JOIN batch_control_firmas bcf ON batch.id_batch = bcf.batch
-                                  WHERE batch.estado >= 5.5 AND bcf.modulo = 8 AND batch.id_batch 
+                                  WHERE batch.estado > 7 AND bcf.modulo = 8 AND batch.id_batch 
                                   NOT IN (SELECT batch FROM `batch_analisis_microbiologico` WHERE modulo = 8 AND verifico > 0) 
                                   ORDER BY `batch`.`id_batch` ASC;");
     $stmt->execute();
@@ -164,7 +164,7 @@ class BatchLineaDao
                                   FROM batch 
                                   INNER JOIN producto p ON batch.id_producto = p.referencia 
                                   INNER JOIN batch_control_firmas bcf ON batch.id_batch = bcf.batch
-                                  WHERE batch.estado >= 5.5 AND bcf.modulo = 9 AND batch.id_batch 
+                                  WHERE batch.estado > 7 AND bcf.modulo = 9 AND batch.id_batch 
                                   NOT IN (SELECT batch FROM `batch_firmas2seccion` WHERE modulo = 9 AND verifico > 0) 
                                   ORDER BY `batch`.`id_batch` ASC");
     $stmt->execute();

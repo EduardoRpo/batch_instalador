@@ -33,6 +33,15 @@ $(".ref_multi3").click(function (e) {
   presentacion_multi();
 });
 
+$(".ref_multi4").click(function (e) {
+  e.preventDefault();
+  ref_multi = $(`.ref4`).val();
+  id_multi = 4;
+  r4++;
+  if (modulo == 5) identificarDensidad(batch);
+  presentacion_multi();
+});
+
 function presentacion_multi() {
   if (batchMulti) {
     batch = batchMulti.find((elemento) => elemento.referencia == ref_multi);
