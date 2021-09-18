@@ -95,6 +95,8 @@ function crearTablaBatch(
             ? "Microbiologia/Fisicoquimico"
             : data == 8
             ? "Microbiologia/Fisicoquimico"
+            : data == 8.5
+            ? "Microbiologia/Fisicoquimico"
             : data == 10
             ? "Liberacion Lote"
             : "Multimodulo";
