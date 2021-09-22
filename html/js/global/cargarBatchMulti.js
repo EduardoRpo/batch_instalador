@@ -52,7 +52,7 @@ function cargarDesinfectante() {
       /* firma  */
       firmado(firma, 1);
       /* habilitar botones para siguiente seccion */
-      for (i = 1; i < 4; i++)
+      for (i = 1; i < 5; i++)
         $(`.controlpeso_realizado${i}`).prop("disabled", false);
       /* Carga firma calidad */
       $.ajax({

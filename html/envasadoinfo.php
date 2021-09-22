@@ -843,7 +843,7 @@ include('modal/image.php')
             </div>
           </div>
 
-          <!-- <div class="card" id="envasado4">
+          <div class="card" id="envasado4">
             <div class="card-header" id="headingSix">
               <h5 class="mb-0">
                 <button id="ref_multi4" class="btn btn-link collapsed img_ref ref_multi4" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
@@ -941,7 +941,7 @@ include('modal/image.php')
                         <label for="recipient-name" class="col-form-label">No. Muestras</label>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 1%">
-                        <input type="text" class="form-control" id="muestras3" style="text-align: center;" readonly>
+                        <input type="text" class="form-control" id="muestras4" style="text-align: center;" readonly>
                       </div>
                       <div class="col-md-1 align-self-center" style="margin-top: 1%">
                         <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;" onclick="muestrasEnvase();" data-toggle="modal" data-target="#m_muestras">Iniciar</button>
@@ -982,7 +982,6 @@ include('modal/image.php')
                               <table class="table table-striped table-bordered">
                                 <thead>
                                   <tr>
-
                                     <th>Referencia</th>
                                     <th>Descripción</th>
                                     <th>Recibida</th>
@@ -994,30 +993,30 @@ include('modal/image.php')
                                 </thead>
                                 <tbody>
                                   <tr>
-                                    <td id="envase4" class="envase4 refEmpaque7 centrado"></td>
+                                    <td id="envase4" class="envase4 refEmpaque10 centrado"></td>
                                     <td id="descripcion_envase4" class="descripcion_envase3" style="vertical-align: middle;"></td>
                                     <td id="unidades5" class="centrado unidades3"></td>
-                                    <td><input type="number" id="envaseEnvasada4" min="1" class="form-control centrado envasada7" style="width: 110px;" onkeyup="devolucionMaterialEnvasada(this.value);"></td>
-                                    <td><input type="number" id="envaseAverias4" min="1" class="form-control centrado averias7" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td><input type="number" id="envaseSobrante4" min="1" class="form-control centrado sobrante7" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td><input type="number" id="envaseEnvasada4" min="1" class="form-control centrado envasada10" style="width: 110px;" onkeyup="devolucionMaterialEnvasada(this.value);"></td>
+                                    <td><input type="number" id="envaseAverias4" min="1" class="form-control centrado averias10" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td><input type="number" id="envaseSobrante4" min="1" class="form-control centrado sobrante10" style="width: 110px;" onkeyup="recalcular_valores();"></td>
                                     <td id="envaseDevolucion4" class="centrado"></td>
                                   </tr>
                                   <tr>
-                                    <td id="tapa4" class="tapa4 refEmpaque8 centrado"></td>
+                                    <td id="tapa4" class="tapa4 refEmpaque11 centrado"></td>
                                     <td id="descripcion_tapa4" class="descripcion_tapa4" style="vertical-align: middle;"></td>
                                     <td id="unidades6" class="centrado unidades4"></td>
                                     <td id="tapaEnvasada4" class="centrado envasada4"></td>
-                                    <td><input type="number" id="tapaAverias4" min="1" class="form-control centrado averias8" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td><input type="number" id="tapaSobrante4" min="1" class="form-control centrado sobrante8" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td><input type="number" id="tapaAverias4" min="1" class="form-control centrado averias11" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td><input type="number" id="tapaSobrante4" min="1" class="form-control centrado sobrante11" style="width: 110px;" onkeyup="recalcular_valores();"></td>
                                     <td id="tapaDevolucion4" class="centrado"></td>
                                   </tr>
                                   <tr>
-                                    <td id="etiqueta4" class="etiqueta4 refEmpaque9 centrado"></td>
+                                    <td id="etiqueta4" class="etiqueta4 refEmpaque12 centrado"></td>
                                     <td id="descripcion_etiqueta4" class="descripcion_etiqueta4" style="vertical-align: middle;"></td>
                                     <td id="unidades7" class="centrado unidades4"></td>
                                     <td id="etiquetaEnvasada4" class="centrado envasada4"></td>
-                                    <td><input type="number" id="etiquetaAverias4" min="1" class="form-control centrado averias9" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td><input type="number" id="etiquetaSobrante4" min="1" class="form-control centrado sobrante9" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td><input type="number" id="etiquetaAverias4" min="1" class="form-control centrado averias12" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td><input type="number" id="etiquetaSobrante4" min="1" class="form-control centrado sobrante12" style="width: 110px;" onkeyup="recalcular_valores();"></td>
                                     <td id="etiquetaDevolucion4" class="centrado"></td>
                                   </tr>
                               </table>
@@ -1033,17 +1032,18 @@ include('modal/image.php')
                         <label for="devolucion_realizado" class="col-form-label">Realizado Por:</label>
                         <input type="text" class="form-control" id="devolucion_realizado4" readonly>
                       </div>
+
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
                         <button type="button" class="btn waves-effect waves-light btn-danger devolucion_realizado4" id="devolucion_realizado4" style="width: 100%; height: 38px;" onclick="cargar(this, 'firma5')">Firmar</button>
                       </div>
-
 
                       <div class="col-md-4 align-self-center">
                         <label for="devolucion_verificado" class="col-form-label">Verificado Por:</label>
                         <input type="text" class="form-control" id="devolucion_verificado4" readonly>
                       </div>
+
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_verificado4" i="devolucion_verificado4" style="width: 100%; height: 38px;" onclick="cargar(this, 'firma6')">Firmar</button>
+                        <button type="button" class="btn waves-effect waves-light btn-danger devolucion_verificado4" id="devolucion_verificado4" style="width: 100%; height: 38px;" onclick="cargar(this, 'firma6')">Firmar</button>
                       </div>
 
                     </div>
@@ -1051,7 +1051,7 @@ include('modal/image.php')
                 </div>
               </div>
             </div>
-          </div> -->
+          </div>
 
           <script src="../../assets/plugins/jquery/jquery.min.js"></script>
           <script src="../../assets/plugins/bootstrap/js/tether.min.js"></script>

@@ -1,7 +1,7 @@
 /* Habilitar Botones */
 
 function habilitarbotones() {
-  for (let index = 1; index < 4; index++) {
+  for (let index = 1; index < 5; index++) {
     $(`.controlpeso_realizado${index}`).prop("disabled", false);
   }
 }
@@ -37,7 +37,7 @@ function deshabilitarbtn() {
   btn = sessionStorage.getItem("btn");
 
   if (btn == "despeje_realizado")
-    for (let i = 1; i < 4; i++)
+    for (let i = 1; i < 5; i++)
       $(`.controlpeso_realizado${i}`).prop("disabled", false);
 
   if (btn == `controlpeso_realizado${id_multi}`) {

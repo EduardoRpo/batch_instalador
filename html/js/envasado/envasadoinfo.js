@@ -83,7 +83,9 @@ function cargar(btn, idbtn) {
         ? ((start = 1), (end = 4))
         : id_multi == 2
         ? ((start = 4), (end = 7))
-        : ((start = 7), (end = 10));
+        : id_multi == 3
+        ? ((start = 7), (end = 10))
+        : ((start = 10), (end = 12));
 
       //validar que los datos de toda la tabla se encuentran completos
       for (let i = start; i < end; i++) {
@@ -123,7 +125,7 @@ $(document).ready(function () {
 /* deshabilitar botones */
 
 function deshabilitarbotones() {
-  for (let i = 1; i < 4; i++) {
+  for (let i = 1; i < 5; i++) {
     $(`.controlpeso_realizado${i}`).prop("disabled", true);
     $(`.controlpeso_verificado${i}`).prop("disabled", true);
     $(`.devolucion_realizado${i}`).prop("disabled", true);
@@ -360,10 +362,12 @@ function validarLinea() {
 function registrar_material_sobrante(realizo) {
   let materialsobrante = [];
   id_multi == 1
-    ? ((start = 1), (end = 3))
+    ? ((start = 1), (end = 4))
     : id_multi == 2
-    ? ((start = 4), (end = 6))
-    : ((start = 7), (end = 9));
+    ? ((start = 4), (end = 7))
+    : id_multi == 3
+    ? ((start = 7), (end = 10))
+    : ((start = 10), (end = 12));
 
   for (let i = start; i <= end; i++) {
     let datasobrante = {};

@@ -95,7 +95,7 @@ function busqueda_multi() {
 /* deshabilitar botones */
 
 function deshabilitarbotones() {
-  for (let i = 1; i < 4; i++) {
+  for (let i = 1; i < 5; i++) {
     $(`.controlpeso_realizado${i}`).prop("disabled", true);
     $(`.controlpeso_verificado${i}`).prop("disabled", true);
     $(`.devolucion_realizado${i}`).prop("disabled", true);
