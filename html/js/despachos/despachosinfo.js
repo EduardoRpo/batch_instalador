@@ -5,10 +5,12 @@ let flag = 0;
 $(".fact1").hide();
 $("#fact2").hide();
 $("#fact3").hide();
+$("#fact4").hide();
 
 $(".notif_unidades1").hide();
 $(".notif_unidades2").hide();
 $(".notif_unidades3").hide();
+$(".notif_unidades4").hide();
 
 /* Carga el modal para la autenticacion */
 

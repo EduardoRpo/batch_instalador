@@ -511,6 +511,128 @@ include('modal/image.php')
 
           </div>
 
+          <div class="card" id="despachos4">
+            <div class="card-header" id="headingSix">
+              <h5 class="mb-0">
+                <button class="btn btn-link collapsed ref_multi4" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseFive" style="width: 100%">
+                  <b id="despachosMulti4" class="img_ref">DESPACHOS</b>
+                  <input type="text" class="ref4" id="ref4" hidden>
+                  <input type="text" class="unidad_empaque4" id="unidad_empaque4" hidden>
+                </button>
+              </h5>
+            </div>
+            <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+              <div class="card-body">
+                <div class="row" style="margin: 1%">
+                  <div class="col-md-12 align-self-center">
+                    <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Despachos</h3>
+                  </div>
+
+                  <div class="col-md-12 align-self-center">
+                    <div class="card">
+                      <div class="card-block">
+                        <div class="subtitle"><label for="">Consolidado Acondicionamiento</label></div>
+
+                        <div class="alert alert-success mt-3 notif_unidades4" role="alert" style="width:98%;margin-left:12px">
+                          <label class="alert-link">Entregas finalizadas por Acondicionamiento</label>
+                        </div>
+
+                        <div class="despachos">
+                          <div class="group">
+                            <label for="recipient-name" class="col-form-label">Unidades Recibidas</label>
+                            <input type="number" class="form-control centrado" id="unidades_recibidas_acond4" readonly>
+                          </div>
+
+                          <div class="group">
+                            <label for="recipient-name" class="col-form-label">Cajas</label>
+                            <input type="number" class="form-control centrado" id="cajas_acond4" readonly>
+                          </div>
+
+                          <div class="group">
+                            <label for="recipient-name" class="col-form-label">No Movimiento Inventario</label>
+                            <input type="number" class="form-control centrado" id="mov_inventario_acond4" oncopy="return false" readonly>
+                          </div>
+
+                          <div class="group">
+                            <label for="recipient-name" class="col-form-label">Muestras retención</label>
+                            <input type="number" class="form-control centrado" id="muestras_retencion_acond4" readonly>
+                          </div>
+
+                          <div class="group obs">
+                            <label for="recipient-name" class="col-form-label">Parciales</label>
+                            <textarea class="form-control" aria-label="With textarea" id="parciales4" style="height: 80px;" readonly></textarea>
+                          </div>
+
+                        </div>
+
+                        <div class="subtitle"><label for="">Consolidado Despachos</label></div>
+                        <div class="despachos">
+
+                          <div class="group">
+                            <label for="recipient-name" class="col-form-label">Unidades Recibidas a la fecha</label>
+                            <input type="number" class="form-control centrado" id="consolidado_despachos_recibidas4" readonly>
+                          </div>
+
+                          <div class="group">
+                            <label for="recipient-name" class="col-form-label">Cajas</label>
+                            <input type="number" class="form-control centrado" id="consolidado_despachos_cajas4" readonly>
+                          </div>
+
+                          <div class=" group">
+                            <!-- <label for="recipient-name" class="col-form-label">No Movimiento Inventario</label>
+                            <input type="number" class="form-control centrado" id="consolidado_despachos_mov_inventario3" readonly> -->
+                          </div>
+
+                          <div class=" group">
+                            <div class="alert alert-danger mt-3" id="fact4" role="alert" style="text-align:center">
+                              <label class="alert-link">Facturar muestras de retención.</label>
+                            </div>
+                          </div>
+
+                          <div class="group">
+                            <label for="recipient-name" class="col-form-label">Unidades Recibidas por Despachos</label>
+                            <input type="number" class="form-control centrado" id="unidades_recibidas4">
+                          </div>
+
+                          <div class="group">
+                            <label for="recipient-name" class="col-form-label">Cajas</label>
+                            <input type="number" class="form-control centrado" id="cajas4">
+                          </div>
+
+                          <div class=" group">
+                            <label for="recipient-name" class="col-form-label">No Movimiento Inventario</label>
+                            <input type="number" class="form-control centrado" id="mov_inventario4">
+                          </div>
+
+                          <div class=" group">
+                          </div>
+
+                          <div class="group obs">
+                            <label for="recipient-name" class="col-form-label">Observaciones</label>
+                            <textarea class="form-control" aria-label="With textarea" id="obs4"></textarea>
+                          </div>
+
+                        </div>
+
+                        <div class="row" style="margin: 2%">
+                          <div class="col-md-4 align-self-center">
+                            <label for="controlpeso_realizado" class="col-form-label">Realizado Por</label>
+                            <input type="text" class="form-control" id="despacho4" readonly>
+                          </div>
+                          <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
+                            <button type="button" class="btn waves-effect waves-light btn-danger despacho3" id="despacho4" onclick="cargar(this, 'firma1')" style="width: 100%; height: 38px;">Firmar</button>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
           <!-- jquery -->
           <script src="../../assets/plugins/jquery/jquery.min.js"></script>
 
