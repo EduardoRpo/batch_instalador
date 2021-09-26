@@ -44,4 +44,14 @@ switch ($op) {
         echo 1;
 
         break;
+
+    case '4': //Consultar referencias programadas
+
+        $sql = "SELECT b.id_batch, b.numero_orden, b.id_producto, p.nombre_referencia FROM batch b INNER JOIN producto p ON b.id_producto = p.referencia WHERE b.estado = 1";
+        $query = $conn->prepare($sql);
+        $query->execute();
+        $batch_sin_formula = $query->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($batch_sin_formula, JSON_UNESCAPED_UNICODE);
+
+        break;
 }

@@ -44,6 +44,9 @@
                   <input type="text" class="form-control ml-3" id="txtnombreProducto">
                 </div>
               </div>
+
+              <div class="alert alert-primary ml-3 mr-3" role="alert" id="sinformula" style="background: indianred;"> </div>
+
             </div>
           </div>
         </div>
