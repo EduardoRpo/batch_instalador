@@ -6,6 +6,7 @@ if (!empty($_POST)) {
     require_once('actualizarEstado.php');
     require_once('./controlFirmas.php');
     require_once('./firmas.php');
+    require_once('servicios/pesaje/registrar_lotes.php');
 
     /* Almacena los checks creados para tanques y su valor */
     $op = $_POST['operacion'];
@@ -45,6 +46,10 @@ if (!empty($_POST)) {
                     if ($result) echo '1';
                     else echo '0';
                 }
+            }
+
+            if ($modulo == 2) {
+                registrarLotes($conn);
             }
 
             if ($modulo == 3) {

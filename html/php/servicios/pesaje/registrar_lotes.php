@@ -1,0 +1,13 @@
+<?php
+
+function registrarLotes($conn)
+{
+
+    $lotes = $_POST['lotes'];
+
+    foreach ($lotes as $lote) {
+        $sql = "INSERT INTO batch_lote_materiales (ref_material, lote, tanque, batch) VALUES (:ref_material, :lote, :tanque, :batch)";
+        $query = $conn->prepare($sql);
+        $query->execute(['ref_material' => $lote['referenciaMP'], 'lote' => $lote['lote'], 'tanque' => $lote['tanque'], 'batch' => $lote['batch']]);
+    }
+}

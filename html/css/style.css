@@ -10361,6 +10361,11 @@ div.displayallinfo {
   text-align: center;
 }
 
+.not-active {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 /* Cabecera Colas */
 /* .contenedorPrincipal{
   display: flex;
