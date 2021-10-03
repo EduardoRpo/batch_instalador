@@ -42,7 +42,7 @@ if (!empty($_SESSION['active'])) {
                         $_SESSION['cargo'] = $data['id_cargo'];
                         $_SESSION['modulo'] = $data['modulo'];
                         $_SESSION['rol'] = $data['rol'];
-                        $_SESSION['activo'] = $data['activo'];
+                        /* $_SESSION['activo'] = $data['activo']; */
                         $_SESSION["timeout"] = time();
                         $modulo = $data['modulo'];
                         $rol = $data['rol'];
