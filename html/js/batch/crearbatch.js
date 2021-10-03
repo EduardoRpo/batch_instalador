@@ -14,7 +14,7 @@ function mostrarModal() {
   batch_record();
   cargarReferencias();
   cargarTanques();
-  OcultarTanques();
+  /* OcultarTanques(); */
 }
 
 /* Eliminar los tanques generados */
