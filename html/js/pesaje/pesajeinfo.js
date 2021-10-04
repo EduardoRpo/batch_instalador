@@ -41,13 +41,16 @@ function cargar(btn, idbtn) {
   }
 
   /* Validar que todos los registros se han seleccionado */
-  let filas = $(tablePesaje).find('tbody tr').length
-  if (filas != lotes.length) {
-    alertify.set('notifier', 'position', 'top-right')
-    alertify.error('Ingrese todos los lotes, seleccionando cada materia prima.')
-    return false
+  if (id == 'pesaje_realizado') {
+    let filas = $(tablePesaje).find('tbody tr').length
+    if (filas != lotes.length) {
+      alertify.set('notifier', 'position', 'top-right')
+      alertify.error(
+        'Ingrese todos los lotes, seleccionando cada materia prima.',
+      )
+      return false
+    }
   }
-
   /* Carga el modal para la autenticacion */
 
   $('#usuario').val('')
@@ -169,7 +172,9 @@ $(document).ready(function () {
           if (value == 0 || value == '') {
             if (linea.firstChild.innerText != 10003) {
               alertify.set('notifier', 'position', 'top-right')
-              alertify.error('El Lote no puede ser cero(0) o vacio para materias primas diferentes al agua.')
+              alertify.error(
+                'El Lote no puede ser cero(0) o vacio para materias primas diferentes al agua.',
+              )
               return false
             }
           }
