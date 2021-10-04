@@ -100,7 +100,7 @@ $(document).ready(function () {
       {
         title: 'Lote',
         defaultContent: '',
-        className: 'uniqueClassName valor',
+        className: 'uniqueClassName',
       },
       {
         title:
@@ -207,7 +207,7 @@ $('#in_fecha_pesaje').attr('min', new Date().toDateInputValue())
 function cambioConversion() {
   flagWeight = !flagWeight
   tablePesaje.api().ajax.reload()
-  $(tablePesaje.api().column(2).header()).html(
+  $(tablePesaje.api().column(3).header()).html(
     `Peso (<a href="javascript:cambioConversion();" class="conversion_weight">${
       flagWeight ? 'Kg' : 'g'
     }</a>)`,
