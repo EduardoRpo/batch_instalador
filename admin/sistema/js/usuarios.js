@@ -259,7 +259,7 @@ $(document).on("click", ".link-editar", function (e) {
 $(document).on("click", ".link-borrar", function (e) {
   e.preventDefault();
 
-  let id = $(this).parent().parent().children().eq(2).text();
+  let id = $(this).parent().parent().children().eq(1).text();
   let confirm = alertify
     .confirm(
       "Samara Cosmetics",

@@ -1,6 +1,7 @@
 <?php
 //include('/Desarrollo/BatchRecord/htdocs/conexion.php');
 require_once('../../conexion2.php');
+require_once('servicios/explosion/explosion.php');
 
 function utf8ize($d)
 {
@@ -157,6 +158,8 @@ switch ($op) {
         $data = mysqli_fetch_assoc($query_id);
       $id = trim($data['id']);
 
+      /* registre modulos y cantidad de firmas */
+
       $query_firmas = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) VALUES('2' , '$id', '0', '4')";
       $result = mysqli_query($conn, $query_firmas);
       $query_firmas = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) VALUES('3' , '$id', '0', '4')";
@@ -175,6 +178,9 @@ switch ($op) {
       $result = mysqli_query($conn, $query_firmas);
       $query_firmas = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) VALUES('10' , '$id', '0', '3')";
       $result = mysqli_query($conn, $query_firmas);
+
+      if ($batch < 555) exit();
+      else explosion($conn, $referencia, $tamanototallote);
     }
 
     mysqli_close($conn);

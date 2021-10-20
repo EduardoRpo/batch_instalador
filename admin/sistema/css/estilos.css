@@ -369,3 +369,9 @@ form.frmAdicionarMinMax {
   grid-column-start: 1;
   grid-column-end: 3;
 }
+
+/* Explosion de Materiales */
+
+.uniqueClass{
+  text-align: end;
+}

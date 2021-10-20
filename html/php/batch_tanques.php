@@ -7,6 +7,7 @@ if (!empty($_POST)) {
     require_once('./controlFirmas.php');
     require_once('./firmas.php');
     require_once('servicios/pesaje/registrar_lotes.php');
+    require_once __DIR__ . '/servicios/pesaje/explosion_materiales_uso.php';
 
     /* Almacena los checks creados para tanques y su valor */
     $op = $_POST['operacion'];
@@ -50,6 +51,7 @@ if (!empty($_POST)) {
 
             if ($modulo == 2) {
                 registrarLotes($conn);
+                registrarExplosionMaterialesUso($conn);
             }
 
             if ($modulo == 3) {

@@ -101,7 +101,7 @@ require_once('php/sesion/sesion.php');
                 </div>
                 <div style="display: flex; justify-content:space-around">
                   <button type="button" class="btn btn-primary mt-3" id="btnGuardarHorariosBatch">Guardar</button>
-                  <button type="button" class="btn btn-primary mt-3" id="btnEjecutarHorariosBatch">Ejecutar</button>
+                  <!-- <button type="button" class="btn btn-primary mt-3" id="btnEjecutarHorariosBatch">Ejecutar</button> -->
                 </div>
 
 

@@ -9,7 +9,7 @@ use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use PDO;
 
-class MuestrasDao
+class PedidosDao
 {
 
   private $logger;
@@ -23,19 +23,19 @@ class MuestrasDao
   public function findAll()
   {
     $connection = Connection::getInstance()->getConnection();
-    $stmt = $connection->prepare("SELECT * FROM batch_muestras");
+    $stmt = $connection->prepare("SELECT * FROM pedidos");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
-    $muestras = $stmt->fetchAll($connection::FETCH_ASSOC);
-    $this->logger->notice("Muestras Obtenidos", array('muestras' => $muestras));
-    return $muestras;
+    $pedidos = $stmt->fetchAll($connection::FETCH_ASSOC);
+    $this->logger->notice("Pedidos Obtenidos", array('especificaciones' => $pedidos));
+    return $pedidos;
   }
 
-  public function findByIdBatch($batch)
+  public function findByOrder($pedido)
   {
     $connection = Connection::getInstance()->getConnection();
-    $stmt = $connection->prepare("SELECT * FROM batch_muestras WHERE id = :pedido");
-    $stmt->bindValue(':pedido', $batch, PDO::PARAM_INT);
+    $stmt = $connection->prepare("SELECT * FROM pedidos WHERE pedido = :pedido");
+    $stmt->bindValue(':pedido', $pedido, PDO::PARAM_INT);
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $pedido = $stmt->fetchAll($connection::FETCH_ASSOC);

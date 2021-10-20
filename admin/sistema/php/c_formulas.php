@@ -27,9 +27,15 @@ switch ($op) {
 
     case 3: //Listar Formula
         $referencia = $_POST['referencia'];
-        $query = "SELECT f.id_producto, f.id_materiaprima as referencia, m.alias as alias, m.nombre, cast(AES_DECRYPT(porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje 
-                  FROM formula f INNER JOIN materia_prima m ON f.id_materiaprima=m.referencia 
-                  WHERE f.id_producto = '$referencia'";
+        if ($referencia != 1) {
+            $query = "SELECT f.id_producto, f.id_materiaprima as referencia, m.alias as alias, m.nombre, cast(AES_DECRYPT(porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje 
+                    FROM formula f INNER JOIN materia_prima m ON f.id_materiaprima=m.referencia 
+                    WHERE f.id_producto = '$referencia'";
+        } else {
+            $query = "SELECT f.id_producto, f.id_materiaprima as referencia, m.alias as alias, m.nombre, cast(AES_DECRYPT(porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje 
+                    FROM formula f INNER JOIN materia_prima m ON f.id_materiaprima=m.referencia";
+        }
+
         ejecutarQuerySelect($conn, $query);
         break;
 

@@ -8,6 +8,8 @@ include_once("modal/m_crearbatch.php");
 include_once("modal/modal_multipresentacion.php");
 include_once("modal/modal_cambiarContrasena.php");
 include_once("modal/m_batch_pdf.php");
+include_once("modal/modalPedidos.php");
+
 ?>
 
 <!DOCTYPE html>
@@ -55,6 +57,7 @@ include_once("modal/m_batch_pdf.php");
               <a class="dropdown-item" href="#" onclick="clonar()"><i class="fa fa-clone"></i> Clonar</a>
               <a class="dropdown-item" href="#" onclick="batchEliminados()"><i class="fa fa-eraser"></i> Batch Eliminados</a>
               <a class="dropdown-item pdf" href="#"><i class="fa fa-download"></i> Imprimir PDF</a>
+              <a class="dropdown-item" href="#" id="btnCargarExcel"><i class="fa fa-download"></i> Pedidos</a>
             </div>
           </div>
 
@@ -220,6 +223,7 @@ include_once("modal/m_batch_pdf.php");
     <script src="js/global/loadinfo-global.js"></script>
     <script src="js/batch/batcheliminados.js"></script>
     <script src="../html/js/batch/cargarbatchpdf.js"></script>
+    <script src="../html/js/batch/pedidos.js"></script>
 
 </body>
 

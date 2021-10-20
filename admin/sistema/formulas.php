@@ -24,8 +24,7 @@
   <!-- <link rel="stylesheet" href="../assets/datatables/datatables.min.css">
   <link rel="stylesheet" href="./htdocs/assets/datatables/DataTables-1.10.21/css/dataTables.bootstrap4.css"> -->
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
-
-
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.0.1/css/buttons.dataTables.min.css">
   <!-- Icons -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 
@@ -58,13 +57,14 @@
               </div>
               <div class="card-body">
                 <div class="selproductos">
-                  <select name="cmbReferenciaProductos" id="cmbReferenciaProductos" class="form-control" style="width: 200px;"></select>
+                  <select name="cmbReferenciaProductos" id="cmbReferenciaProductos" class="form-control" style="width: 200px;">
+                  </select>
                   <input type="text" class="form-control ml-3" id="txtnombreProducto">
                 </div>
                 <hr>
                 <button type="button" class="btn btn-primary" id="adicionarFormula">Adicionar</button>
-                <form id="frmadFormulas" style="display: none;">
 
+                <form id="frmadFormulas" style="display: none;">
                   <div class="formula ml-5">
                     <label class="mr-3"> <b>Seleccionar: </b> </label>
                     <input type="radio" id="formula_r" name="formula" value="1">
@@ -167,8 +167,17 @@
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  
   <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-  <script src="../assets/js/plugins/chartjs.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
+
+
+
   <script src="../assets/js/plugins/bootstrap-notify.js"></script>
   <script src="../assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script>
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>

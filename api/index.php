@@ -45,7 +45,6 @@ $app->setBasePath('/api');
 
 // Add Routing Middleware
 $app->addRoutingMiddleware();
-
 $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
 
@@ -67,6 +66,7 @@ $app->get('/productsDetails/{idProducto}', function (Request $request, Response 
 $app->get('/batch/{id}', function (Request $request, Response $response, $args) use ($batchDao) {
   $batch = $batchDao->findById($args["id"]);
   $response->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));
+  $batch = $batchDao->findById($args["id"]);
   return $response->withHeader('Content-Type', 'application/json');
 });
 
@@ -280,34 +280,17 @@ $app->get('/controlproceso/{idBatch}', function (Request $request, Response $res
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->get('/pedidos', function (Request $request, Response $response, $args) use ($pedidosDao) {
-  $array = $pedidosDao->findAll();
-  $response->getBody()->write(json_encode($array));
 
-  return $response->withHeader('Content-Type', 'application/json');
-});
-
-$app->get('/pedidos/{idPedido}', function (Request $request, Response $response, $args) use ($pedidosDao) {
-  $array = $pedidosDao->findByOrder($args["idPedido"]);
-  $response->getBody()->write(json_encode($array));
-
-  return $response->withHeader('Content-Type', 'application/json');
-});
-
-$app->post('/pedidos/nuevos', function (Request $request, Response $response, $args)  use ($pedidosDao) {
-  /* $data = file_get_contents('../pedidos.txt'); */
-  $data = file_get_contents('../html/pedidos/pedidos.txt');
-  $array = $pedidosDao->save($data);
-  $response->getBody()->write(json_encode($array));
-
-  return $response->withHeader('Content-Type', 'application/json');
-});
 
 $app->get('/pdftextos', function (Request $request, Response $response, $args) use ($textospdfDao) {
   $textos = $textospdfDao->findAll();
   $response->getBody()->write(json_encode($textos, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
+
+require_once __DIR__ . '/src/routes/explosion_materiales.php';
+require_once __DIR__ . '/src/routes/pedidos.php';
+
 
 // Run app
 $app->run();

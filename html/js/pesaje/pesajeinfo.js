@@ -166,7 +166,7 @@ $(document).ready(function () {
     alertify
       .prompt(
         'Samara Cosmetics - Trazabilidad Lotes MP',
-        'Ingrese el Número del lote. <br><p style="font-size:13px;color:coral">Si cuenta con más de un lote separelos con un doble asterisco (**)<p>',
+        `Ingrese el Número del lote para la MP ${linea.firstChild.innerText}<br><p style="font-size:13px;color:coral">Si cuenta con más de un lote separelos con un doble asterisco (**)<p>`,
         '',
         function (evt, value) {
           if (value == 0 || value == '') {
