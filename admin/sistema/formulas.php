@@ -98,12 +98,7 @@
                   <table id="tblFormulas" class="table-striped row-borde" style="width:100%">
                     <label for="">Formulas</label>
                     <thead>
-                      <tr>
-                        <th>Referencia</th>
-                        <th>Materia Prima</th>
-                        <th>Alias</th>
-                        <th>Porcentaje</th>
-                        <th>Acciones</th>
+                      
                       </tr>
                     </thead>
                     <tbody>

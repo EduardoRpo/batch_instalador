@@ -37,7 +37,16 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title"> <strong>Explosión de Materiales Pedidos</strong></h4>
+                <h4 class="card-title"> <strong>Explosión de Materiales</strong></h4>
+                <hr>
+                <button type="button" class="btn btn-primary" id="btnCargarExcel">Importar Pedidos</button>
+                <div class="excelImportar">
+                  <form id="uploadForm" enctype="multipart/form-data">
+                    <input type="file" class="form-control" name="fileExcel" id="fileInput" accept=".xlsx">
+                    <input type="button" class="form-control btn-primary" name="importarFile" value="Importar" />
+                  </form>
+                  <div id="uploadStatus"></div>
+                </div>
                 <hr>
 
               </div>
@@ -46,7 +55,7 @@
                   <div class="table-responsive">
                     <table id="tblExplosionMaterialesPedidos" class="table-striped row-borde" style="width:100%">
                       <thead>
-                        
+
                       </thead>
                       <tbody>
 
@@ -77,10 +86,11 @@
   <script src="../assets/js/plugins/bootstrap-notify.js"></script>
   <!-- <script src="../assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script> -->
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-  <script src="js/explosion.js"></script>
+  <!-- <script src="js/explosion.js"></script> -->
+  <script src="../../admin/assets/js/xlsx/xlsx.full.min.js"></script>
   <script src="js/menu.js"></script>
   <script src="js/explosion_materiales_pedidos.js"></script>
-  
+
 
 
 </body>

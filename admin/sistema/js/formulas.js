@@ -105,7 +105,9 @@ $('#cmbReferenciaProductos').change(function (e) {
     },
   })
 
-  cargarTablaFormulas(seleccion)
+  seleccion == 1
+    ? cargarTablaTodasFormulas(seleccion)
+    : cargarTablaFormulas(seleccion)
   if (seleccion != 1) cargar_formulas_f(seleccion)
 })
 
@@ -263,21 +265,22 @@ $(document).on('click', '.link-borrar', function (e) {
   })
 })
 
-/* Cargue de Parametros de Control en DataTable */
+/* Carga tabla de formulas para todos los productos */
 
-function cargarTablaFormulas(referencia) {
+function cargarTablaTodasFormulas(referencia) {
   tabla = $('#tblFormulas').DataTable({
     destroy: true,
     scrollY: '50vh',
     scrollCollapse: true,
     paging: false,
     dom: 'Bfrtip',
+    order: [[0, 'asc']],
     buttons: [
       {
         extend: 'excel',
         className: 'btn btn-primary',
         exportOptions: {
-          columns: [0, 3],
+          columns: [0, 1, 4],
         },
       },
     ],
@@ -290,15 +293,75 @@ function cargarTablaFormulas(referencia) {
     },
 
     columns: [
-      { data: 'referencia' },
-      { data: 'nombre' },
-      { data: 'alias' },
+      { title: 'Producto', data: 'id_producto' },
+      { title: 'Referencia MP', data: 'referencia' },
+      { title: 'Materia prima', data: 'nombre' },
+      { title: 'Alias', data: 'alias' },
       {
+        title: '%',
         data: 'porcentaje',
         className: 'centrado',
         render: $.fn.dataTable.render.number(',', '.', 3, '', '%'),
       },
       {
+        title: 'Acciones',
+        defaultContent:
+          "<a href='#' <i class='large material-icons link-editar tr' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar tr' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>",
+      },
+    ],
+    columnDefs: [{ width: '10%', targets: 0 }],
+
+    footerCallback: function (row, data, start, end, display) {
+      total = this.api()
+        .column(3)
+        .data()
+        .reduce(function (a, b) {
+          return parseFloat(a) + parseFloat(b)
+        }, 0)
+      total = total.toFixed(2)
+      $('#totalPorcentajeFormulas').val(`Total ${total}%`)
+    },
+  })
+}
+
+/* Cargue de Parametros de Control en DataTable */
+
+function cargarTablaFormulas(referencia) {
+  tabla = $('#tblFormulas').DataTable({
+    destroy: true,
+    scrollY: '50vh',
+    scrollCollapse: true,
+    paging: false,
+    /* dom: 'Bfrtip',
+    buttons: [
+      {
+        extend: 'excel',
+        className: 'btn btn-primary',
+        exportOptions: {
+          columns: [0, 3],
+        },
+      },
+    ], */
+    language: { url: 'admin_componentes/es-ar.json' },
+
+    ajax: {
+      method: 'POST',
+      url: 'php/c_formulas.php',
+      data: { operacion: '3', referencia },
+    },
+
+    columns: [
+      { title: 'Referencia', data: 'referencia' },
+      { title: 'Materia prima', data: 'nombre' },
+      { title: 'Alias', data: 'alias' },
+      {
+        title: '%',
+        data: 'porcentaje',
+        className: 'centrado',
+        render: $.fn.dataTable.render.number(',', '.', 3, '', '%'),
+      },
+      {
+        title: 'Acciones',
         defaultContent:
           "<a href='#' <i class='large material-icons link-editar tr' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar tr' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>",
       },

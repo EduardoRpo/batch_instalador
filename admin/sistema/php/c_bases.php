@@ -84,7 +84,7 @@ switch ($op) {
             echo '1';
         } else {
             die('Error');
-            print_r('Error: ' . mysqli_error($conn));
+            //print_r('Error: ' . mysqli_error($conn));
         }
 
         break;
