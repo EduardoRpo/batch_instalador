@@ -275,6 +275,7 @@ function cargarTablaFormulas(referencia) {
     buttons: [
       {
         extend: 'excel',
+        className: 'btn btn-primary',
         exportOptions: {
           columns: [0, 3],
         },
