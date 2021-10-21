@@ -43,9 +43,13 @@ function registrarExplosionMaterialesUso($conn)
 
             /* Actualiza */
 
-            $sql = "UPDATE batch_explosion_materiales SET uso = :uso WHERE id_materiaprima = :id_materia_prima";
+            $sql = "UPDATE batch_explosion_materiales SET uso = :uso WHERE batch = :batch AND id_materiaprima = :id_materia_prima";
             $query = $conn->prepare($sql);
-            $query->execute(['uso' => $cantidadUsoNueva, 'id_materia_prima' => $material['referencia']]);
+            $query->execute([
+                'uso' => $cantidadUsoNueva,
+                'batch' => $batch,
+                'id_materia_prima' => $material['referencia']
+            ]);
         } else {
             $sql = "INSERT INTO batch_explosion_materiales (id_materiaprima, cantidad) 
                     VALUES(:id_materiaprima, :cantidad)";

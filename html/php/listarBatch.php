@@ -179,8 +179,8 @@ switch ($op) {
       $query_firmas = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) VALUES('10' , '$id', '0', '3')";
       $result = mysqli_query($conn, $query_firmas);
 
-      if ($batch < 555) exit();
-      else explosion($conn, $referencia, $tamanototallote);
+      if ($id < 555) exit();
+      else explosion($conn, $id, $referencia, $tamanototallote);
     }
 
     mysqli_close($conn);

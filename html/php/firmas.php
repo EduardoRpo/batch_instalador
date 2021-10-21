@@ -3,6 +3,7 @@
 //require_once('../../conexion.php');
 require_once('./controlFirmas.php');
 require_once('./actualizarEstado.php');
+require_once '../php/servicios/explosion/cierre_explosion_materiales_batch.php';
 
 
 function desinfectanteRealizo($conn)
@@ -120,6 +121,15 @@ function segundaSeccionVerifico($conn)
 
         registrarFirmas($conn, $batch, $modulo);
         if ($modulo == 2 || $modulo == 3 || $modulo == 4) cerrarEstado($batch, $modulo, $conn);
+
+        /* Elimina los registros en explosion de materiales */
+        if ($modulo == 2) {
+            $sql = "SELECT id_producto FROM batch WHERE id_batch = :id_batch";
+            $query = $conn->prepare($sql);
+            $query->execute(['id_batch' => $batch]);
+            $referencia = $query->fetch(PDO::FETCH_ASSOC);
+            cierreExplosionMaterialesBatch($conn, $batch, $referencia['id_producto']);
+        }
         CerrarBatch($conn, $batch);
     }
 }
