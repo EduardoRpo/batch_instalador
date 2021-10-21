@@ -6,7 +6,7 @@ function registrarExplosionMaterialesUso($conn)
     $batch = $_POST['idBatch'];
 
     /* Inicio Batch para cargar informacion de pesaje materia prima */
-    if ($batch < 555) exit();
+    if ($batch < 600) exit();
 
     /* buscar la referencia del producto */
 
