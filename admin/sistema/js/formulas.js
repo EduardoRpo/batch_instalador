@@ -105,9 +105,17 @@ $('#cmbReferenciaProductos').change(function (e) {
     },
   })
 
-  seleccion == 1
-    ? cargarTablaTodasFormulas(seleccion)
-    : cargarTablaFormulas(seleccion)
+  if (seleccion == 1) {
+    $('#formulas').hide()
+    $('#formghost').hide()
+    $('#allformulas').show()
+    cargarTablaTodasFormulas(seleccion)
+  } else {
+    $('#formulas').show()
+    $('#formghost').show()
+    $('#allformulas').hide()
+    cargarTablaFormulas(seleccion)
+  }
   if (seleccion != 1) cargar_formulas_f(seleccion)
 })
 
@@ -268,11 +276,12 @@ $(document).on('click', '.link-borrar', function (e) {
 /* Carga tabla de formulas para todos los productos */
 
 function cargarTablaTodasFormulas(referencia) {
-  tabla = $('#tblFormulas').DataTable({
+  tabla = $('#tblFormulastodas').DataTable({
     destroy: true,
     scrollY: '50vh',
     scrollCollapse: true,
     paging: false,
+    oLanguage: {sProcessing: "<div id='loader'></div>"},
     dom: 'Bfrtip',
     order: [[0, 'asc']],
     buttons: [
@@ -290,6 +299,7 @@ function cargarTablaTodasFormulas(referencia) {
       method: 'POST',
       url: 'php/c_formulas.php',
       data: { operacion: '3', referencia },
+      dataSrc: '',
     },
 
     columns: [
@@ -310,17 +320,6 @@ function cargarTablaTodasFormulas(referencia) {
       },
     ],
     columnDefs: [{ width: '10%', targets: 0 }],
-
-    footerCallback: function (row, data, start, end, display) {
-      total = this.api()
-        .column(3)
-        .data()
-        .reduce(function (a, b) {
-          return parseFloat(a) + parseFloat(b)
-        }, 0)
-      total = total.toFixed(2)
-      $('#totalPorcentajeFormulas').val(`Total ${total}%`)
-    },
   })
 }
 
@@ -348,6 +347,7 @@ function cargarTablaFormulas(referencia) {
       method: 'POST',
       url: 'php/c_formulas.php',
       data: { operacion: '3', referencia },
+      dataSrc: '',
     },
 
     columns: [

@@ -27,16 +27,23 @@ switch ($op) {
 
     case 3: //Listar Formula
         $referencia = $_POST['referencia'];
+
         if ($referencia != 1) {
             $query = "SELECT f.id_producto, f.id_materiaprima as referencia, m.alias as alias, m.nombre, cast(AES_DECRYPT(porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje 
-                    FROM formula f INNER JOIN materia_prima m ON f.id_materiaprima=m.referencia 
-                    WHERE f.id_producto = '$referencia'";
+                      FROM formula f INNER JOIN materia_prima m ON f.id_materiaprima=m.referencia 
+                      WHERE f.id_producto = :referencia";
+            $query = $conn->prepare($query);
+            $query->execute(['referencia' => $referencia]);
         } else {
             $query = "SELECT f.id_producto, f.id_materiaprima as referencia, m.alias as alias, m.nombre, cast(AES_DECRYPT(porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje 
                     FROM formula f INNER JOIN materia_prima m ON f.id_materiaprima=m.referencia";
+            $query = $conn->prepare($query);
+            $query->execute();
         }
 
-        ejecutarQuerySelect($conn, $query);
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+
         break;
 
     case 4: //Referencias Materias Primas
