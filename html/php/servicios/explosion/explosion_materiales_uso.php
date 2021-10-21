@@ -30,9 +30,13 @@ function registrarExplosionMaterialesUso($conn)
         $tanques = $_POST['tanques'];
         $cantidad = (($material['porcentaje'] / 100) * $productoTamanio['tamano_lote']) / $tanques;
 
-        $sql = "SELECT * FROM batch_explosion_materiales WHERE id_materiaprima = :id_materia_prima";
+        $sql = "SELECT * FROM batch_explosion_materiales WHERE batch = :batch AND id_producto = :id_producto AND id_materiaprima = :id_materia_prima";
         $query = $conn->prepare($sql);
-        $query->execute(['id_materia_prima' => $material['referencia']]);
+        $query->execute([
+            'batch' => $batch,
+            'id_producto' => $productoTamanio['id_producto'],
+            'id_materia_prima' => $material['referencia']
+        ]);
         $rows = $query->rowCount();
 
         if ($rows > 0) {
@@ -43,18 +47,19 @@ function registrarExplosionMaterialesUso($conn)
 
             /* Actualiza */
 
-            $sql = "UPDATE batch_explosion_materiales SET uso = :uso WHERE batch = :batch AND id_materiaprima = :id_materia_prima";
+            $sql = "UPDATE batch_explosion_materiales SET uso = :uso WHERE batch = :batch AND id_producto = :id_producto AND id_materiaprima = :id_materia_prima";
             $query = $conn->prepare($sql);
             $query->execute([
                 'uso' => $cantidadUsoNueva,
+                'id_producto' => $productoTamanio['id_producto'],
                 'batch' => $batch,
                 'id_materia_prima' => $material['referencia']
             ]);
-        } else {
+        } /* else {
             $sql = "INSERT INTO batch_explosion_materiales (id_materiaprima, cantidad) 
                     VALUES(:id_materiaprima, :cantidad)";
             $query = $conn->prepare($sql);
             $query->execute(['id_materia_prima' => $material['id_materiaprima'], 'uso' => $cantidad]);
-        }
+        } */
     }
 }
