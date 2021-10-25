@@ -45,7 +45,7 @@
                                     INNER JOIN materia_prima m ON e.id_materiaprima = m.referencia
                                     LEFT JOIN batch_explosion_materiales ep ON ep.id_materiaprima = m.referencia
                                     GROUP BY id_materiaprima  
-                                    ORDER BY `GAP`  DESC;");
+                                    ORDER BY `e`.`id_materiaprima` ASC");
       $stmt->execute();
       $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
       $batchExplosionMateriales = $stmt->fetchAll($connection::FETCH_ASSOC);

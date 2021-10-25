@@ -12,43 +12,7 @@ $('#btnCargarExcel').click(function (e) {
   $('.excelImportar').toggle(600)
 })
 
-/* Cargar Archivo Excel */
-
-/* $('#uploadForm').on('submit', function (e) {
-  e.preventDefault()
-  datos = new FormData(this)
-  //datos.append("operacion", "6");
-  $.ajax({
-    type: 'POST',
-    url: '../../../admin/sistema/php/explosion_materiales/pedidos.php',
-    data: datos,
-    contentType: false,
-    cache: false,
-    processData: false,
-    beforeSend: function () {
-      $('#uploadStatus').html(
-        '<img src="images/uploading.gif" style="height:100px"/>',
-      )
-    },
-    error: function () {
-      $('#uploadStatus').html(
-        '<span style="color:#EA4335;">No se importó el archivo correctamente, trate nuevamente.<span>',
-      )
-    },
-    success: function (data) {
-      if (data === 'false') {
-        $('#uploadStatus').html(
-          '<span style="color:#EA4335;">No existe la referencia asociada a la imagen.<span>',
-        )
-        return false
-      }
-      $('#uploadForm')[0].reset()
-      $('#uploadStatus').html(
-        '<span style="color:#28A74B;">Archivo importado correctamente.<span>',
-      )
-    },
-  })
-}) */
+/* Importar pedidos */
 
 $('#importarFile').on('click', function (e) {
   if (selectedFile) {
@@ -107,6 +71,8 @@ $('#fileInput').change(function (e) {
   }
 })
 
+/* Datatable consolidado */
+
 $('#tblExplosionMaterialesPedidos').dataTable({
   pageLength: 50,
   order: [[1, 'desc']],
@@ -115,6 +81,7 @@ $('#tblExplosionMaterialesPedidos').dataTable({
   buttons: [
     {
       extend: 'excel',
+      text: 'Exportar',
       className: 'btn btn-primary',
       exportOptions: {
         columns: [0, 1, 5],
@@ -140,28 +107,51 @@ $('#tblExplosionMaterialesPedidos').dataTable({
       className: 'uniqueClassName',
     },
     {
-      title: 'Cantidad Requerida Batch (Kg)',
+      title: 'Requerida Batch',
       data: 'cantidad_batch',
       className: 'uniqueClass',
       render: $.fn.dataTable.render.number('.', ',', 2),
     },
     {
-      title: 'Cantidad Requerida Pedidos (Kg)',
+      title: 'Requerida Pedidos',
       data: 'cantidad_pedidos',
       className: 'uniqueClass',
       render: $.fn.dataTable.render.number('.', ',', 2),
     },
     {
-      title: 'Usos (Kg)',
+      title: 'Utilizada',
       data: 'cantidad_batch_uso',
       className: 'uniqueClass',
       render: $.fn.dataTable.render.number('.', ',', 2),
     },
     {
-      title: 'GAP (Kg)',
+      title: 'Gap',
       data: 'gap',
       className: 'uniqueClass',
       render: $.fn.dataTable.render.number('.', ',', 2),
     },
   ],
+})
+
+/* Referencias sin formula */
+
+$('#btnReferenciasSinFormula').click(function (e) {
+  e.preventDefault()
+
+  data = localStorage.getItem('referencias')
+  data = data.split(',')
+
+  Data = []
+  for (let j = 0; j < data.length; j++) {
+    arry = {}
+    arry.id = j + 1
+    arry.ref = data[j]
+    Data.push(arry)
+  }
+
+  let ws = XLSX.utils.json_to_sheet(Data)
+  let wb = XLSX.utils.book_new()
+  XLSX.utils.book_append_sheet(wb, ws, 'Referencias')
+
+  XLSX.writeFile(wb, 'referenciasSinFormula.xlsx')
 })

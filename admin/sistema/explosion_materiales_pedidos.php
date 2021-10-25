@@ -40,7 +40,9 @@
               <div class="card-header">
                 <h4 class="card-title"> <strong>Explosión de Materiales</strong></h4>
                 <hr>
-                <button type="button" class="btn btn-primary" id="btnCargarExcel">Importar Pedidos</button>
+                <button type="button" class="btn btn-primary" id="btnCargarExcel"><i class="fas fa-cloud-upload-alt"></i> Importar Pedidos</button>
+                <button type="button" class="btn btn-info" id="btnReferenciasSinFormula"><i class="fas fa-exclamation-triangle"></i> Referencias sin formula</button>
+
                 <div class="excelImportar">
                   <form id="uploadForm" enctype="multipart/form-data">
                     <input type="file" class="form-control" name="fileExcel" id="fileInput" accept=".xlsx">
@@ -56,7 +58,17 @@
                   <div class="table-responsive">
                     <table id="tblExplosionMaterialesPedidos" class="table-striped row-borde" style="width:100%">
                       <thead>
-
+                        <tr>
+                          <th rowspan="2">Referencia</th>
+                          <th rowspan="2">Materia Prima</th>
+                          <th colspan="4" style="text-align: center;">Cantidad(Kg)</th>
+                        </tr>
+                        <tr>
+                          <th>Requerida Batch</th>
+                          <th>Requerida Pedidos</th>
+                          <th>Utilizada</th>
+                          <th>Gap</th>
+                        </tr>
                       </thead>
                       <tbody>
 
