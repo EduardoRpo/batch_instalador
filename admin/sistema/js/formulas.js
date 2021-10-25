@@ -289,7 +289,7 @@ function cargarTablaTodasFormulas(referencia) {
         extend: 'excel',
         className: 'btn btn-primary',
         exportOptions: {
-          columns: [0, 1, 4],
+          columns: [0, 1, 5],
         },
       },
     ],

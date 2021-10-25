@@ -1,68 +1,103 @@
 <?php
 
 if (!empty($_POST)) {
-
+	require_once '../../../../conexion.php';
 	$pedidos = $_POST['data'];
-
+	$referenciaSinFormula = [];
+	$c = 0;
 	foreach ($pedidos as $pedido) {
-
-		/* Busca si el pedido ya fue registrado */
-		$query = "SELECT * FROM pedidos WHERE pedido = :pedido AND id_producto = :id_producto";
+		$c = $c + 1;
+		/* Busca la materia prima de acuerdo con la referencia */
+		
+		$query = "SELECT * FROM formula WHERE id_producto = :id_producto";
 		$query = $conn->prepare($query);
-		$query->execute(['pedido' => $pedido['Documento'], 'id_producto' => $pedido['Producto']]);
+		$query->execute(['id_producto' => trim($pedido['Producto'])]);
 		$rows = $query->rowCount();
 
-		/* si existe el pedido, carga la materia prima de acuerdo con la referencia del pedido */
-		if ($rows > 0) {
+		/* Guardar las referencias sin formulas y dar una alerta */
 
-			$query = "UPDATE FROM pedidos SET cantidad = :cantidad WHERE pedido = :pedido AND id_producto = :id_producto ";
-			$query = $conn->prepare($query);
-			$query->execute(['cantidad' => $pedido['Cant_Original'], 'pedido' => $pedido['Documento'], 'id_producto' => $pedido['Producto']]);
-
-			/* Busca la materia prima de acuerdo con la referencia */
-			$query = "SELECT f.id, f.id_materiaprima, cast(AES_DECRYPT(porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje 
-					  FROM formula f WHERE f.id_producto = :id_producto";
-			$query = $conn->prepare($query);
-			$query->execute(['id_producto' => $pedido['Producto']]);
-			$materiales = $query->fetchAll(PDO::FETCH_ASSOC);
-
-			/* Validar si no hay formula guardar referencia y pedido y generar alerta */
-
-			foreach ($materiales as $material) {
-				$cantidad = ($material['porcentaje'] / 100) * $pedido['Cant_Original'] /* presentacion * densidad * 3 % */
-
-				$query = "SELECT * FROM batch_explosion_materiales WHERE id_materiaprima = :id_materiaprima";
-				$query = $conn->prepare($query);
-				$query->execute(['id_materiaprima' => $ $material['id_materiaprima']]);
-				$rows = $query->rowCount();
-
-				if ($rows > 0) {
-					$materia_prima = $query->fetchAll(PDO::FETCH_ASSOC);
-
-					$cantidadOld = floatval($materia_prima['cantidad']);
-					$cantidadNueva = $cantidad + $cantidadOld;
-
-					$query = "UPDATE `batch_explosion_materiales` SET `cantidad` = :cantidadNueva 
-							WHERE `batch_explosion_materiales`.`id_materiaprima` =  :id_materiaprima";
-					$query = $conn->prepare($query);
-					$query->execute(['cantidadNueva' => $cantidadNueva, 'id_materiaprima' => $id_materiaprima]);
-				} else {
-
-					$query = "INSERT INTO batch_explosion_materiales (id_materiaprima, cantidad) 
-							  VALUES(:id_materiaprima , :cantidad)";
-					$query = $conn->prepare($query);
-					$query->execute(['cantidad' => $cantidad, 'id_materiaprima' => $id_materiaprima]);
-				}
-			}
+		if ($rows == 0) {
+			array_push($referenciaSinFormula, trim($pedido['Producto']));
 		} else {
-			$query = "INSERT INTO pedidos (pedido, id_producto, cantidad, fecha_pedido) 
-					  VALUES(:pedido, :id_producto, :cantidad, :fecha_pedido)";
+
+			/* Busca si el pedido ya fue registrado */
+
+			$query = "SELECT * FROM pedidos WHERE pedido = :pedido AND id_producto = :id_producto";
+			$query = $conn->prepare($query);
+			$query->execute(['pedido' => trim($pedido['Documento']), 'id_producto' => trim($pedido['Producto'])]);
+			$rows = $query->rowCount();
+
+			/* si existe el pedido, carga la materia prima de acuerdo con la referencia del pedido */
+
+			if ($rows > 0) {
+				$query = "UPDATE pedidos SET unidades = :unidades WHERE pedido = :pedido AND id_producto = :id_producto";
+				$query = $conn->prepare($query);
+				$query->execute([
+					'unidades' => trim($pedido['Cant_Original']),
+					'pedido' => trim($pedido['Documento']),
+					'id_producto' => trim($pedido['Producto'])
+				]);
+			} else {
+				$query = "INSERT INTO pedidos (pedido, id_producto, unidades, fecha_pedido) VALUES(:pedido, :id_producto, :unidades, :fecha_pedido)";
+				$query = $conn->prepare($query);
+				$query->execute([
+					'pedido' => trim($pedido['Documento']),
+					'id_producto' => trim($pedido['Producto']),
+					'unidades' => trim($pedido['Cant_Original']),
+					'fecha_pedido' => trim($pedido['Fecha_Dcto']),
+				]);
+			}
+			explosionMateriales($conn, $pedido);
+		}
+	}
+	echo json_encode($referenciaSinFormula, JSON_UNESCAPED_UNICODE);
+}
+
+
+function explosionMateriales($conn, $pedido)
+{
+	/* Busca la materia prima de acuerdo con la referencia */
+
+	$query = "SELECT f.id, f.id_materiaprima, cast(AES_DECRYPT(porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje, p.presentacion_comercial, l.densidad
+	     	  FROM formula f INNER JOIN producto p ON f.id_producto = p.referencia INNER JOIN linea l ON l.id = p.id_linea 
+			  WHERE f.id_producto = :id_producto";
+	$query = $conn->prepare($query);
+	$query->execute(['id_producto' => trim($pedido['Producto'])]);
+	$materiales = $query->fetchAll(PDO::FETCH_ASSOC);
+
+	/* Carga la materia prima de la referencia */
+
+	foreach ($materiales as $material) {
+		$tamanioLote = ((trim($pedido['Cant_Original']) * trim($material['densidad'])) * trim($material['presentacion_comercial']) / 1000) * (1 + 0.005);
+		$cantidad = (($material['porcentaje'] / 100) * $tamanioLote);
+
+		$query = "SELECT * FROM batch_explosion_materiales_pedidos WHERE id_pedido = :pedido AND id_producto = :id_producto AND id_materiaprima = :id_materiaprima";
+		$query = $conn->prepare($query);
+		$query->execute([
+			'pedido' => trim($pedido['Documento']),
+			'id_producto' => trim($pedido['Producto']),
+			'id_materiaprima' => trim($material['id_materiaprima'])
+		]);
+		$rows = $query->rowCount();
+
+		if ($rows > 0) {
+			$query = "UPDATE batch_explosion_materiales_pedidos SET cantidad = :cantidad 
+					  WHERE id_pedido = :pedido AND id_producto = :id_producto AND id_materiaprima = :id_materiaprima";
 			$query = $conn->prepare($query);
 			$query->execute([
-				'pedido' => $pedido['Documento'],
-				'id_producto' => $pedido['Producto'],
-				'cantidad' => $pedido['Cant_Original'],
-				'fecha_pedido' => $pedido['Fecha_Dcto'],
+				'cantidad' => trim($cantidad),
+				'pedido' => trim($pedido['Documento']),
+				'id_producto' => trim($pedido['Producto']),
+				'id_materiaprima' => trim($material['id_materiaprima'])
+			]);
+		} else {
+			$query = "INSERT INTO batch_explosion_materiales_pedidos (id_pedido, id_producto, id_materiaprima, cantidad) VALUES(:id_pedido, :id_producto, :id_materiaprima , :cantidad)";
+			$query = $conn->prepare($query);
+			$query->execute([
+				'id_pedido' => trim($pedido['Documento']),
+				'id_producto' => trim($pedido['Producto']),
+				'id_materiaprima' => trim($material['id_materiaprima']),
+				'cantidad' => trim($cantidad)
 			]);
 		}
 	}

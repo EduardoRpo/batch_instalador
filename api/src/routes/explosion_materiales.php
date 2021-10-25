@@ -11,3 +11,9 @@ $app->get('/explosionMaterialesBatch', function (Request $request, Response $res
     $response->getBody()->write(json_encode($explosionMateriales, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');
 });
+
+$app->get('/explosionMaterialesPedidos', function (Request $request, Response $response, $args) use ($explosionMaterialesDao) {
+    $explosionMateriales = $explosionMaterialesDao->findAllPedidos();
+    $response->getBody()->write(json_encode($explosionMateriales, JSON_NUMERIC_CHECK));
+    return $response->withHeader('Content-Type', 'application/json');
+});

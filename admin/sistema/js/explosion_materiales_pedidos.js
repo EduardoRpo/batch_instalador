@@ -50,7 +50,7 @@ $('#btnCargarExcel').click(function (e) {
   })
 }) */
 
-$('#uploadForm').on('click', function (e) {
+$('#importarFile').on('click', function (e) {
   if (selectedFile) {
     let fileReader = new FileReader()
     fileReader.readAsBinaryString(selectedFile)
@@ -64,24 +64,27 @@ $('#uploadForm').on('click', function (e) {
           workbook.Sheets[sheet],
         )
         data = rowObject
-        //console.log(rowObject)
-        /* pedidos = JSON.stringify(rowObject, undefined, 4)
-        console.log(pedidos)
- */
-        /* document.getElementById('jsondata').innerHTML = JSON.stringify(
-          rowObject,
-          undefined,
-          4,
-        ) */
 
         $.ajax({
           type: 'POST',
           url: '../../../admin/sistema/php/explosion_materiales/pedidos.php',
           data: { data: data },
-
+          beforeSend: function () {
+            $('#uploadStatus').html(
+              '<img src="images/uploading.gif" style="height:100px"/>',
+            )
+          },
+          error: function () {
+            $('#uploadStatus').html(
+              '<span style="color:#EA4335;">No se importó el archivo correctamente, trate nuevamente.<span>',
+            )
+          },
           success: function (response) {
-            alertify.set('notifier', 'position', 'top-right')
-            alertify.success('Datos importados exitosamente.')
+            let data = JSON.parse(response)
+            localStorage.setItem('referencias', data)
+            $('#uploadStatus').html(
+              '<span style="color:#28A74B;">Datos importados correctamente.<span>',
+            )
             $('#fileInput').val('')
           },
         })
@@ -107,8 +110,19 @@ $('#fileInput').change(function (e) {
 $('#tblExplosionMaterialesPedidos').dataTable({
   pageLength: 50,
   order: [[1, 'desc']],
+  dom: 'Bfrtip',
+  order: [[0, 'asc']],
+  buttons: [
+    {
+      extend: 'excel',
+      className: 'btn btn-primary',
+      exportOptions: {
+        columns: [0, 1, 5],
+      },
+    },
+  ],
   ajax: {
-    url: '/api/explosionMaterialesBatch',
+    url: '/api/explosionMaterialesPedidos',
     dataSrc: '',
   },
   language: {
@@ -126,9 +140,28 @@ $('#tblExplosionMaterialesPedidos').dataTable({
       className: 'uniqueClassName',
     },
     {
-      title: 'Cantidad (Kg)',
-      data: 'cantidad',
-      className: 'uniqueClassName',
+      title: 'Cantidad Requerida Batch (Kg)',
+      data: 'cantidad_batch',
+      className: 'uniqueClass',
+      render: $.fn.dataTable.render.number('.', ',', 2),
+    },
+    {
+      title: 'Cantidad Requerida Pedidos (Kg)',
+      data: 'cantidad_pedidos',
+      className: 'uniqueClass',
+      render: $.fn.dataTable.render.number('.', ',', 2),
+    },
+    {
+      title: 'Usos (Kg)',
+      data: 'cantidad_batch_uso',
+      className: 'uniqueClass',
+      render: $.fn.dataTable.render.number('.', ',', 2),
+    },
+    {
+      title: 'GAP (Kg)',
+      data: 'gap',
+      className: 'uniqueClass',
+      render: $.fn.dataTable.render.number('.', ',', 2),
     },
   ],
 })
