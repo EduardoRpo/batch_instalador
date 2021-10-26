@@ -44,8 +44,6 @@ $('#importarFile').on('click', function (e) {
             )
           },
           success: function (response) {
-            let data = JSON.parse(response)
-            localStorage.setItem('referencias', data)
             $('#uploadStatus').html(
               '<span style="color:#28A74B;">Datos importados correctamente.<span>',
             )
@@ -71,9 +69,13 @@ $('#fileInput').change(function (e) {
   }
 })
 
+/* $("#example").append(
+  $('<tfoot/>').append( $("#example thead tr").clone() )
+); */
+
 /* Datatable consolidado */
 
-$('#tblExplosionMaterialesPedidos').dataTable({
+let tableConsolidado = $('#tblExplosionMaterialesPedidos').dataTable({
   pageLength: 50,
   order: [[1, 'desc']],
   dom: 'Bfrtip',
@@ -88,6 +90,7 @@ $('#tblExplosionMaterialesPedidos').dataTable({
       },
     },
   ],
+
   ajax: {
     url: '/api/explosionMaterialesPedidos',
     dataSrc: '',
@@ -106,52 +109,118 @@ $('#tblExplosionMaterialesPedidos').dataTable({
       data: 'nombre',
       className: 'uniqueClassName',
     },
+
     {
-      title: 'Requerida Batch',
-      data: 'cantidad_batch',
-      className: 'uniqueClass',
-      render: $.fn.dataTable.render.number('.', ',', 2),
-    },
-    {
-      title: 'Requerida Pedidos',
+      title: '0. MP Requerida Pedidos',
       data: 'cantidad_pedidos',
       className: 'uniqueClass',
       render: $.fn.dataTable.render.number('.', ',', 2),
     },
     {
-      title: 'Utilizada',
+      title: '1. MP Requerida Batch',
+      data: 'cantidad_batch',
+      className: 'uniqueClass',
+      render: $.fn.dataTable.render.number('.', ',', 2),
+    },
+    {
+      title: '2. MP Pesada',
       data: 'cantidad_batch_uso',
       className: 'uniqueClass',
       render: $.fn.dataTable.render.number('.', ',', 2),
     },
     {
-      title: 'Gap',
-      data: 'gap',
+      title: 'Gap Pedidos <br/> (0 - 2)',
+      data: 'gap_pedidos',
+      className: 'uniqueClass',
+      render: $.fn.dataTable.render.number('.', ',', 2),
+    },
+    {
+      title: 'Gap Batch <br/> (1 - 2)',
+      data: 'gap_batch',
       className: 'uniqueClass',
       render: $.fn.dataTable.render.number('.', ',', 2),
     },
   ],
+
+  footerCallback: function (tfoot, data, start, end, display) {
+    var api = this.api()
+    $(api.column(2).footer()).html(
+      api
+        .column(2)
+        .data()
+        .reduce(function (a, b) {
+          return a + b
+        }, 0),
+    )
+    /* $(api.column(3).footer()).html(
+      api
+        .column(3)
+        .data()
+        .reduce(function (a, b) {
+          return a + b
+        }, 0),
+    )
+    $(api.column(4).footer()).html(
+      api
+        .column(4)
+        .data()
+        .reduce(function (a, b) {
+          return a + b
+        }, 0),
+    )
+    $(api.column(5).footer()).html(
+      api
+        .column(5)
+        .data()
+        .reduce(function (a, b) {
+          return a + b
+        }, 0),
+    )
+    $(api.column(6).footer()).html(
+      api
+        .column(6)
+        .data()
+        .reduce(function (a, b) {
+          return a + b
+        }, 0),
+    ) */
+  },
 })
+
+async function referencias() {
+  let result
+
+  result = await $.ajax({
+    url: '/api/explosionMaterialesReferencias',
+  })
+
+  return result
+}
 
 /* Referencias sin formula */
 
 $('#btnReferenciasSinFormula').click(function (e) {
   e.preventDefault()
 
-  data = localStorage.getItem('referencias')
-  data = data.split(',')
+  data = sessionStorage.getItem('referencias')
 
-  Data = []
-  for (let j = 0; j < data.length; j++) {
-    arry = {}
-    arry.id = j + 1
-    arry.ref = data[j]
-    Data.push(arry)
+  if (data === null) {
+    referencias().then((data) => {
+      sessionStorage.setItem('referencias', JSON.stringify(data))
+      referenciasSinFormula(data)
+    })
+  } else {
+    data = JSON.parse(data)
+    referenciasSinFormula(data)
   }
+})
 
+/* Cargar excel */
+
+const referenciasSinFormula = (Data) => {
   let ws = XLSX.utils.json_to_sheet(Data)
   let wb = XLSX.utils.book_new()
   XLSX.utils.book_append_sheet(wb, ws, 'Referencias')
 
   XLSX.writeFile(wb, 'referenciasSinFormula.xlsx')
-})
+}

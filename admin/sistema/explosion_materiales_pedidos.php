@@ -22,7 +22,6 @@
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
-
 </head>
 
 <body class="">
@@ -68,11 +67,23 @@
                           <th>Requerida Pedidos</th>
                           <th>Utilizada</th>
                           <th>Gap</th>
+                          <th>Gap</th>
                         </tr>
                       </thead>
                       <tbody>
 
                       </tbody>
+                      <tfoot>
+                        <tr>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                        </tr>
+                      </tfoot>
                     </table>
                   </div>
                 </div>
@@ -101,6 +112,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
   <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
   <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
+  <script src="//cdn.datatables.net/plug-ins/1.11.3/api/sum().js"></script>
 
   <script src="../assets/js/plugins/chartjs.min.js"></script>
   <script src="../assets/js/plugins/bootstrap-notify.js"></script>

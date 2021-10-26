@@ -3,26 +3,37 @@
 if (!empty($_POST)) {
 	require_once '../../../../conexion.php';
 	$pedidos = $_POST['data'];
-	$referenciaSinFormula = [];
+	/* $referenciaSinFormula = []; */
 	$c = 0;
 	foreach ($pedidos as $pedido) {
 		$c = $c + 1;
 		/* Busca la materia prima de acuerdo con la referencia */
-		
+
 		$query = "SELECT * FROM formula WHERE id_producto = :id_producto";
 		$query = $conn->prepare($query);
 		$query->execute(['id_producto' => trim($pedido['Producto'])]);
 		$rows = $query->rowCount();
 
-		/* Guardar las referencias sin formulas y dar una alerta */
+		/* Guardar las referencias sin formulas*/
 
 		if ($rows == 0) {
-			array_push($referenciaSinFormula, trim($pedido['Producto']));
+
+			$query = "SELECT * FROM explosion_materiales_referencias WHERE referencia = :id_producto";
+			$query = $conn->prepare($query);
+			$query->execute(['id_producto' => $pedido['Producto']]);
+			$rows = $query->rowCount();
+
+			if ($rows == 0) {
+				$query = "INSERT INTO explosion_materiales_referencias (referencia) VALUES(:id_producto)";
+				$query = $conn->prepare($query);
+				$query->execute(['id_producto' => trim($pedido['Producto'])]);
+				//array_push($referenciaSinFormula, trim($pedido['Producto']));
+			}
 		} else {
 
 			/* Busca si el pedido ya fue registrado */
 
-			$query = "SELECT * FROM pedidos WHERE pedido = :pedido AND id_producto = :id_producto";
+			$query = "SELECT * FROM explosion_materiales_pedidos_registro WHERE pedido = :pedido AND id_producto = :id_producto";
 			$query = $conn->prepare($query);
 			$query->execute(['pedido' => trim($pedido['Documento']), 'id_producto' => trim($pedido['Producto'])]);
 			$rows = $query->rowCount();
@@ -30,7 +41,7 @@ if (!empty($_POST)) {
 			/* si existe el pedido, carga la materia prima de acuerdo con la referencia del pedido */
 
 			if ($rows > 0) {
-				$query = "UPDATE pedidos SET unidades = :unidades WHERE pedido = :pedido AND id_producto = :id_producto";
+				$query = "UPDATE explosion_materiales_pedidos_registro SET unidades = :unidades WHERE pedido = :pedido AND id_producto = :id_producto";
 				$query = $conn->prepare($query);
 				$query->execute([
 					'unidades' => trim($pedido['Cant_Original']),
@@ -38,7 +49,7 @@ if (!empty($_POST)) {
 					'id_producto' => trim($pedido['Producto'])
 				]);
 			} else {
-				$query = "INSERT INTO pedidos (pedido, id_producto, unidades, fecha_pedido) VALUES(:pedido, :id_producto, :unidades, :fecha_pedido)";
+				$query = "INSERT INTO explosion_materiales_pedidos_registro (pedido, id_producto, unidades, fecha_pedido) VALUES(:pedido, :id_producto, :unidades, :fecha_pedido)";
 				$query = $conn->prepare($query);
 				$query->execute([
 					'pedido' => trim($pedido['Documento']),
@@ -50,8 +61,42 @@ if (!empty($_POST)) {
 			explosionMateriales($conn, $pedido);
 		}
 	}
-	echo json_encode($referenciaSinFormula, JSON_UNESCAPED_UNICODE);
+
+	/* Validar las refencias vs formulas */
+	referenciasSinFormula($conn);
+
+	//echo json_encode($referenciaSinFormula, JSON_UNESCAPED_UNICODE);
 }
+
+
+function referenciasSinFormula($conn)
+{
+
+	/* Busca la referencias */
+
+	$query = "SELECT * FROM explosion_materiales_referencias";
+	$query = $conn->prepare($query);
+	$query->execute();
+	$referencias = $query->fetchAll(PDO::FETCH_ASSOC);
+
+	foreach ($referencias as $id_producto) {
+
+		/* Busca la materia prima de acuerdo con la referencia */
+
+		$query = "SELECT * FROM formula WHERE id_producto = :id_producto";
+		$query = $conn->prepare($query);
+		$query->execute(['id_producto' => $id_producto['referencia']]);
+		$rows = $query->rowCount();
+
+		if ($rows != 0) {
+			$query = "DELETE FROM explosion_materiales_referencias WHERE referencia = :id_producto";
+			$query = $conn->prepare($query);
+			$query->execute(['id_producto' => $id_producto['referencia']]);
+			$rows = $query->rowCount();
+		}
+	}
+}
+
 
 
 function explosionMateriales($conn, $pedido)
@@ -71,7 +116,7 @@ function explosionMateriales($conn, $pedido)
 		$tamanioLote = ((trim($pedido['Cant_Original']) * trim($material['densidad'])) * trim($material['presentacion_comercial']) / 1000) * (1 + 0.005);
 		$cantidad = (($material['porcentaje'] / 100) * $tamanioLote);
 
-		$query = "SELECT * FROM batch_explosion_materiales_pedidos WHERE id_pedido = :pedido AND id_producto = :id_producto AND id_materiaprima = :id_materiaprima";
+		$query = "SELECT * FROM explosion_materiales_pedidos WHERE id_pedido = :pedido AND id_producto = :id_producto AND id_materiaprima = :id_materiaprima";
 		$query = $conn->prepare($query);
 		$query->execute([
 			'pedido' => trim($pedido['Documento']),
@@ -81,7 +126,7 @@ function explosionMateriales($conn, $pedido)
 		$rows = $query->rowCount();
 
 		if ($rows > 0) {
-			$query = "UPDATE batch_explosion_materiales_pedidos SET cantidad = :cantidad 
+			$query = "UPDATE explosion_materiales_pedidos SET cantidad = :cantidad 
 					  WHERE id_pedido = :pedido AND id_producto = :id_producto AND id_materiaprima = :id_materiaprima";
 			$query = $conn->prepare($query);
 			$query->execute([
@@ -91,7 +136,7 @@ function explosionMateriales($conn, $pedido)
 				'id_materiaprima' => trim($material['id_materiaprima'])
 			]);
 		} else {
-			$query = "INSERT INTO batch_explosion_materiales_pedidos (id_pedido, id_producto, id_materiaprima, cantidad) VALUES(:id_pedido, :id_producto, :id_materiaprima , :cantidad)";
+			$query = "INSERT INTO explosion_materiales_pedidos (id_pedido, id_producto, id_materiaprima, cantidad) VALUES(:id_pedido, :id_producto, :id_materiaprima , :cantidad)";
 			$query = $conn->prepare($query);
 			$query->execute([
 				'id_pedido' => trim($pedido['Documento']),

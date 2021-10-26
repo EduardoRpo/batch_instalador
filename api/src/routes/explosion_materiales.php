@@ -17,3 +17,9 @@ $app->get('/explosionMaterialesPedidos', function (Request $request, Response $r
     $response->getBody()->write(json_encode($explosionMateriales, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');
 });
+
+$app->get('/explosionMaterialesReferencias', function (Request $request, Response $response, $args) use ($explosionMaterialesDao) {
+    $explosionMateriales = $explosionMaterialesDao->findReferenciasSinFormula();
+    $response->getBody()->write(json_encode($explosionMateriales, JSON_NUMERIC_CHECK));
+    return $response->withHeader('Content-Type', 'application/json');
+});
