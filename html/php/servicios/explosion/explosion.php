@@ -18,7 +18,7 @@ function explosion($conn, $id, $referencia, $tamanototallote)
         $cantidad = ($material['porcentaje'] / 100) * $tamanototallote;
         $id_materiaprima = $material['id_materiaprima'];
 
-        $query_explosion = "INSERT INTO batch_explosion_materiales (batch, id_producto, id_materiaprima, cantidad) 
+        $query_explosion = "INSERT INTO explosion_materiales_batch (batch, id_producto, id_materiaprima, cantidad) 
                                 VALUES('$id', '$referencia', '$id_materiaprima' , '$cantidad')";
         mysqli_query($conn, $query_explosion);
     }

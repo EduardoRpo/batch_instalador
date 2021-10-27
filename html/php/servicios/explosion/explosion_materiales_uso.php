@@ -30,7 +30,7 @@ function registrarExplosionMaterialesUso($conn)
         $tanques = $_POST['tanques'];
         $cantidad = (($material['porcentaje'] / 100) * $productoTamanio['tamano_lote']) / $tanques;
 
-        $sql = "SELECT * FROM batch_explosion_materiales WHERE batch = :batch AND id_producto = :id_producto AND id_materiaprima = :id_materia_prima";
+        $sql = "SELECT * FROM explosion_materiales_batch WHERE batch = :batch AND id_producto = :id_producto AND id_materiaprima = :id_materia_prima";
         $query = $conn->prepare($sql);
         $query->execute([
             'batch' => $batch,
@@ -47,7 +47,7 @@ function registrarExplosionMaterialesUso($conn)
 
             /* Actualiza */
 
-            $sql = "UPDATE batch_explosion_materiales SET uso = :uso WHERE batch = :batch AND id_producto = :id_producto AND id_materiaprima = :id_materia_prima";
+            $sql = "UPDATE explosion_materiales_batch SET uso = :uso WHERE batch = :batch AND id_producto = :id_producto AND id_materiaprima = :id_materia_prima";
             $query = $conn->prepare($sql);
             $query->execute([
                 'uso' => $cantidadUsoNueva,
