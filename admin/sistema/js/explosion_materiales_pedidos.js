@@ -48,6 +48,9 @@ $('#importarFile').on('click', function (e) {
               '<span style="color:#28A74B;">Datos importados correctamente.<span>',
             )
             $('#fileInput').val('')
+            setTimeout(() => {
+              $('.excelImportar').toggle(600)
+            }, 700)
           },
         })
       })
@@ -86,7 +89,7 @@ let tableConsolidado = $('#tblExplosionMaterialesPedidos').dataTable({
       text: 'Exportar',
       className: 'btn btn-primary',
       exportOptions: {
-        columns: [0, 1, 5],
+        columns: [0, 1, 5, 6],
       },
     },
   ],
