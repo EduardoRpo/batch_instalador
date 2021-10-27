@@ -27,7 +27,6 @@ if (!empty($_POST)) {
 				$query = "INSERT INTO explosion_materiales_referencias (referencia) VALUES(:id_producto)";
 				$query = $conn->prepare($query);
 				$query->execute(['id_producto' => trim($pedido['Producto'])]);
-				//array_push($referenciaSinFormula, trim($pedido['Producto']));
 			}
 		} else {
 
@@ -103,9 +102,11 @@ function explosionMateriales($conn, $pedido)
 {
 	/* Busca la materia prima de acuerdo con la referencia */
 
-	$query = "SELECT f.id, f.id_materiaprima, cast(AES_DECRYPT(porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje, p.presentacion_comercial, l.densidad
-	     	  FROM formula f INNER JOIN producto p ON f.id_producto = p.referencia INNER JOIN linea l ON l.id = p.id_linea 
-			  WHERE f.id_producto = :id_producto";
+	$query = "SELECT f.id, f.id_materiaprima, cast(AES_DECRYPT(porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje, pc.nombre as presentacion_comercial, l.densidad 
+			FROM formula f 
+			INNER JOIN producto p ON f.id_producto = p.referencia 
+			INNER JOIN linea l ON l.id = p.id_linea 
+			INNER JOIN presentacion_comercial pc ON pc.id = p.presentacion_comercial WHERE f.id_producto = :id_producto";
 	$query = $conn->prepare($query);
 	$query->execute(['id_producto' => trim($pedido['Producto'])]);
 	$materiales = $query->fetchAll(PDO::FETCH_ASSOC);
