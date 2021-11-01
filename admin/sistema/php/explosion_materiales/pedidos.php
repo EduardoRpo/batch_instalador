@@ -43,7 +43,7 @@ if (!empty($_POST)) {
 				$query = "UPDATE explosion_materiales_pedidos_registro SET unidades = :unidades WHERE pedido = :pedido AND id_producto = :id_producto";
 				$query = $conn->prepare($query);
 				$query->execute([
-					'unidades' => trim($pedido['Cant_Original']),
+					'unidades' => trim($pedido['Cantidad']),
 					'pedido' => trim($pedido['Documento']),
 					'id_producto' => trim($pedido['Producto'])
 				]);
@@ -53,7 +53,7 @@ if (!empty($_POST)) {
 				$query->execute([
 					'pedido' => trim($pedido['Documento']),
 					'id_producto' => trim($pedido['Producto']),
-					'unidades' => trim($pedido['Cant_Original']),
+					'unidades' => trim($pedido['Cantidad']),
 					'fecha_pedido' => trim($pedido['Fecha_Dcto']),
 				]);
 			}
@@ -101,20 +101,20 @@ function referenciasSinFormula($conn)
 function explosionMateriales($conn, $pedido)
 {
 	/* Busca la materia prima de acuerdo con la referencia */
-
+	$id_producto = trim($pedido['Producto']);
 	$query = "SELECT f.id, f.id_materiaprima, cast(AES_DECRYPT(porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje, pc.nombre as presentacion_comercial, l.densidad 
 			FROM formula f 
 			INNER JOIN producto p ON f.id_producto = p.referencia 
 			INNER JOIN linea l ON l.id = p.id_linea 
 			INNER JOIN presentacion_comercial pc ON pc.id = p.presentacion_comercial WHERE f.id_producto = :id_producto";
 	$query = $conn->prepare($query);
-	$query->execute(['id_producto' => trim($pedido['Producto'])]);
+	$query->execute(['id_producto' => $id_producto]);
 	$materiales = $query->fetchAll(PDO::FETCH_ASSOC);
 
 	/* Carga la materia prima de la referencia */
 
 	foreach ($materiales as $material) {
-		$tamanioLote = ((trim($pedido['Cant_Original']) * trim($material['densidad'])) * trim($material['presentacion_comercial']) / 1000) * (1 + 0.005);
+		$tamanioLote = ((trim($pedido['Cantidad']) * trim($material['densidad'])) * trim($material['presentacion_comercial']) / 1000) * (1 + 0.005);
 		$cantidad = (($material['porcentaje'] / 100) * $tamanioLote);
 
 		$query = "SELECT * FROM explosion_materiales_pedidos WHERE id_pedido = :pedido AND id_producto = :id_producto AND id_materiaprima = :id_materiaprima";

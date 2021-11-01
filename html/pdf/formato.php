@@ -51,6 +51,11 @@
                 <label>Unidades por Lote solicitadas:</label><label id="unidadesLote"></label>
             </div>
             <hr style="width: 95%;">
+            <div class="ml-3" id="infoMulti">
+                <label for=""><b>Multipresentación</b></label>
+                <div class="group-info-batch-multi p-3" id="InfoMultipresentacion"></div>
+            </div>
+
             <div class="group-info-batch p-3">
                 <label for="">Autorizado por:</label>
                 <label id="autorizado"> <b>Camilo Restrepo</b> </label>
@@ -713,6 +718,7 @@
                     </div>
                 </div>
             </div>
+            <!-- Envasado -->
             <div class="card mt-3">
                 <div class="card-header centrado"><b>6. ENVASADO</b></div>
                 <div class="card-body">
@@ -829,7 +835,7 @@
                         <div class="subtitle" style="background:lightgrey;"><label for="">Muestras</label></div>
                         <div class="p-3">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped" id="muestrasEnvasado1"></table>
+                                <table class="table table-bordered table-striped muestrasEnvasado" id="muestrasEnvasado1"></table>
                             </div>
 
                             <div>
@@ -977,7 +983,7 @@
                         <div class="subtitle" style="background:lightgrey;"><label for="">Muestras</label></div>
                         <div class="p-3">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped" id="muestrasEnvasado2"></table>
+                                <table class="table table-bordered table-striped muestrasEnvasado" id="muestrasEnvasado2"></table>
                             </div>
 
                             <div>
@@ -1125,7 +1131,7 @@
                         <div class="subtitle" style="background:lightgrey;"><label for="">Muestras</label></div>
                         <div class="p-3">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped" id="muestrasEnvasado3"></table>
+                                <table class="table table-bordered table-striped muestrasEnvasado" id="muestrasEnvasado3"></table>
                             </div>
 
                             <div>
@@ -1190,6 +1196,154 @@
 
                             <label id="multi_user_realizo3">Sin Firmar</label>
                             <label id="multi_user_verifico3">Sin Firmar</label>
+                        </div>
+                    </div>
+                    <div id="multi-envasado4">
+                        <div class="subtitleProcess"><label for="" id="titulo_envasado4"> <b>ENVASADO</b></label></div>
+                        <div class="subtitle"><label for="">6.2 Entrega Material de Empaque</label></div>
+                        <div class="table-responsive p-3">
+                            <table class="table table-bordered table-striped">
+                                <thead class="head centrado">
+                                    <tr>
+                                        <td class="centrado">Referencia</td>
+                                        <td class="centrado">Descripción</td>
+                                        <td class="centrado">Cantidad</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="envase4 centrado"></td>
+                                        <td class="descripcion_envase4 centrado"></td>
+                                        <td class="unidades4 centrado"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="tapa4 centrado"></td>
+                                        <td class="descripcion_tapa4 centrado"></td>
+                                        <td class="unidades3 centrado"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="etiqueta4 centrado"></td>
+                                        <td class="descripcion_etiqueta4 centrado"></td>
+                                        <td class="unidades4 centrado"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="subtitle"><label for="">Equipos</label></div>
+                        <div class="envasadora">
+                            <label for="">Identificacion Envasadora</label>
+                            <input type="text" class="form-control envasadora" id="envasadora4">
+                            <label for="">Identificacion Loteadora</label>
+                            <input type="text" class="form-control loteadora" id="loteadora4">
+                        </div>
+
+                        <div class="subtitle"><label for="">Condiciones del Medio</label></div>
+                        <div class="table-responsive p-3">
+                            <table class="table table-striped table-bordered">
+                                <thead class="head">
+                                    <tr>
+                                        <th rowspan="2" class="centrado" style="vertical-align: middle;">Fecha y Hora</th>
+                                        <th colspan="2" class="centrado">Temperatura</th>
+                                        <th colspan="2" class="centrado">Humedad</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="centrado">Especificaciones</th>
+                                        <th class="centrado">lectura</th>
+                                        <th class="centrado">Especificaciones</th>
+                                        <th class="centrado">lectura</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <td class="centrado bold fecha_medio5" id="fecha_medio5"></td>
+                                    <td class="centrado">18 - 25 °C</td>
+                                    <td class="centrado bold temperatura5" id="temperatura5"></td>
+                                    <td class="centrado">30 - 75 %</td>
+                                    <td class="centrado bold fecha_medio5" id="humedad5"></td>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="subtitle"><label for="">Procedimiento de Envasado</label></div>
+                        <div class="alertas" id="alert_pesaje"></div>
+                        <div class="subtitle"><label for="">Especificaciones Tecnicas</label></div>
+                        <div class="espec_tecnicas">
+                            <label for="" class="centrado">Mínimo</label>
+                            <input type="text" class="form-control centrado minimo4">
+                            <label for="" class="centrado">Medio</label>
+                            <input type="text" class="form-control centrado medio4">
+                            <label for="" class="centrado">Máximo</label>
+                            <input type="text" class="form-control centrado maximo4">
+                        </div>
+
+                        <div class="subtitle"><label for="">Control de peso en el Proceso</label></div>
+                        <div class="subtitle" style="background:lightgrey;"><label for="">Muestras</label></div>
+                        <div class="p-3">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped muestrasEnvasado" id="muestrasEnvasado4"></table>
+                            </div>
+
+                            <div>
+                                <label>Promedio</label>
+                                <input type="text" class="form-control centrado" id="promedioMuestras4" style="width: 10%; display:inline">
+                                <label class="ml-3">Cantidad de Muestras</label>
+                                <input type="text" class="form-control centrado" id="cantidadMuestras4" style="width: 10%; display:inline">
+                            </div>
+                        </div>
+
+                        <div class="subtitle"><label for="">Devolución Material de Empaque Sobrante</label></div>
+                        <div class="alertas" id="alert_pesaje"></div>
+                        <div class="table-responsive p-3">
+                            <table class="table table-bordered table-striped" id="devolucionMaterialSobrante3">
+                                <thead class="head centrado">
+                                    <tr>
+                                        <td class="centrado">Referencia</td>
+                                        <td class="centrado">Descripción</td>
+                                        <td class="centrado">Cantidad</td>
+                                        <td class="centrado">Envasada</td>
+                                        <td class="centrado">Averias</td>
+                                        <td class="centrado">Sobrante</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td id="envase4" class="envase4 refEmpaque4"></td>
+                                        <td id="descripcion_envase4" class="descripcion_envase4"></td>
+                                        <td id="unidades4" class="centrado unidades4"></td>
+                                        <td id="usadaEnvase4" class="centrado txtEnvasada4"></td>
+                                        <td id="averiasEnvase4" class="centrado"></td>
+                                        <td id="sobranteEnvase4" class="centrado"></td>
+                                    </tr>
+                                    <tr>
+                                        <td id="tapa4" class="tapa1 refEmpaque4"></td>
+                                        <td id="descripcion_tapa3" class="descripcion_tapa4"></td>
+                                        <td id="unidades4" class="centrado unidades4"></td>
+                                        <td id="usadaTapa4" class="centrado envasada4"></td>
+                                        <td id="averiasTapa4" class="centrado"></td>
+                                        <td id="sobranteTapa4" class="centrado"></td>
+                                    </tr>
+                                    <tr>
+                                        <td id="etiqueta4" class="etiqueta1 refEmpaque4"></td>
+                                        <td id="descripcion_etiqueta4" class="descripcion_etiqueta4"></td>
+                                        <td id="unidades4" class="centrado unidades4"></td>
+                                        <td id="usadaEtiqueta4" class="centrado envasada4"></td>
+                                        <td id="averiasEtiqueta4" class="centrado"></td>
+                                        <td id="sobranteEtiqueta4" class="centrado"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="subtitle"><label for="">Cierre</label></div>
+                        <div class="firmas" id="firmas3">
+                            <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
+                            <label id="multi_fecha4" style="font-weight:bold; justify-self: baseline"></label>
+
+                            <div id="multi_blank_realizo4"></div>
+                            <img id="multi_f_realizo4" src="" alt="firma_usuario" height="130">
+                            <div id="multi_blank_verifico4"></div>
+                            <img id="multi_f_verifico4" src="" alt="firma_usuario" height="130">
+
+                            <label id="multi_user_realizo4">Sin Firmar</label>
+                            <label id="multi_user_verifico4">Sin Firmar</label>
                         </div>
                     </div>
                 </div>
@@ -1420,8 +1574,8 @@
                         </div>
 
                         <div class="col1" id="firmas6">
-                            <img id="f_realizoConciliacion" src="" alt="firma_usuario" height="130">
-                            <label id="user_realizoConciliacion"></label>
+                            <img id="f_realizoConciliacion1" src="" alt="firma_usuario" height="130">
+                            <label id="user_realizoConciliacion1"></label>
                         </div>
                     </div>
                     <div id="multi-acondicionamiento2">
@@ -1441,9 +1595,9 @@
                                 <tbody>
                                     <tr>
                                         <td id="fecha2" class="centrado fecha2"></td>
-                                        <td id="empaque2" class="centrado empaque1"></td>
-                                        <td id="descripcion_empaque1" class="descripcion_empaque2"></td>
-                                        <td id="unidades2e" class="centrado unidades2e"></td>
+                                        <td id="empaque2" class="centrado empaque2"></td>
+                                        <td id="descripcion_empaque2" class="descripcion_empaque2"></td>
+                                        <td id="unidades2e" class="centrado unidades2"></td>
                                     </tr>
                                     <tr>
                                         <td id="fecha2" class="centrado fecha2"></td>
@@ -1458,7 +1612,7 @@
                         <div class="subtitle"><label for="">Control de Proceso</label></div>
 
                         <div class="p-3">
-                            <table class="table table-bordered table-striped" id="muestrasAcondicionamiento1">
+                            <table class="table table-bordered table-striped" id="muestrasAcondicionamiento2">
                                 <thead class="head">
                                     <tr>
                                         <th colspan="1" class="centrado">Muestra</th>
@@ -1491,21 +1645,21 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td id="refempaque1" class="empaque1"></td>
-                                        <td id="descripcion_empaque1" class="descripcion_empaque1"></td>
-                                        <td id="unidades2e" class="centrado unidades1e"></td>
-                                        <td id="utilizada_empaque1" class="centrado envasada1e" style="width: 110px;"></td>
-                                        <td id="averias_empaque1" class="centrado" style="width: 110px;"></td>
-                                        <td id="sobrante_empaque1" class="centrado" style="width: 110px;"></td>
+                                        <td id="refempaque2" class="empaque2"></td>
+                                        <td id="descripcion_empaque2" class="descripcion_empaque2"></td>
+                                        <td id="unidades2" class="centrado unidades2"></td>
+                                        <td id="utilizada_empaque2" class="centrado envasada2" style="width: 110px;"></td>
+                                        <td id="averias_empaque2" class="centrado" style="width: 110px;"></td>
+                                        <td id="sobrante_empaque2" class="centrado" style="width: 110px;"></td>
                                         <!-- <td id="totalDevolucion_empaque1" class="centrado"></td> -->
                                     </tr>
                                     <tr>
                                         <td id="refempaque2" class="otros1"></td>
-                                        <td id="descripcion_otros1" class="descripcion_otros1"></td>
-                                        <td id="unidades8" class="centrado unidades1"></td>
-                                        <td id="utilizada_otros1" class="centrado envasada1e" style="width: 110px;"></td>
-                                        <td id="averias_otros1" class="centrado" style="width: 110px;"></td>
-                                        <td id="sobrante_otros1" class="centrado" style="width: 110px;"></td>
+                                        <td id="descripcion_otros2" class="descripcion_otros2"></td>
+                                        <td id="unidades8" class="centrado unidades2"></td>
+                                        <td id="utilizada_otros2" class="centrado envasada2" style="width: 110px;"></td>
+                                        <td id="averias_otros2" class="centrado" style="width: 110px;"></td>
+                                        <td id="sobrante_otros2" class="centrado" style="width: 110px;"></td>
                                         <!-- <td id="totalDevolucion_otros1" class="centrado"></td> -->
                                     </tr>
                                 </tbody>
@@ -1523,8 +1677,8 @@
                         </div>
 
                         <div class="col1" id="firmas6">
-                            <img id="f_realizoConciliacion" src="" alt="firma_usuario" height="130">
-                            <label id="user_realizoConciliacion"></label>
+                            <img id="f_realizoConciliacion2" src="" alt="firma_usuario" height="130">
+                            <label id="user_realizoConciliacion2"></label>
                         </div>
                     </div>
                     <div id="multi-acondicionamiento3">
@@ -1546,10 +1700,10 @@
                                         <td id="fecha3" class="centrado fecha3"></td>
                                         <td id="empaque3" class="centrado empaque3"></td>
                                         <td id="descripcion_empaque3" class="descripcion_empaque3"></td>
-                                        <td id="unidades3e" class="centrado unidades3e"></td>
+                                        <td id="unidades3e" class="centrado unidades3"></td>
                                     </tr>
                                     <tr>
-                                        <td id="fecha3" class="centrado empaque3"></td>
+                                        <td id="fecha3" class="centrado fecha3"></td>
                                         <td id="otros3" class="centrado otros3"></td>
                                         <td id="descripcion_otros3" class="descripcion_otros3"></td>
                                         <td id="unidades3" class="centrado unidades3"></td>
@@ -1561,7 +1715,7 @@
                         <div class="subtitle"><label for="">Control de Proceso</label></div>
 
                         <div class="p-3">
-                            <table class="table table-bordered table-striped" id="muestrasAcondicionamiento1">
+                            <table class="table table-bordered table-striped" id="muestrasAcondicionamiento3">
                                 <thead class="head">
                                     <tr>
                                         <th colspan="1" class="centrado">Muestra</th>
@@ -1594,21 +1748,21 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td id="refempaque1" class="empaque1"></td>
-                                        <td id="descripcion_empaque1" class="descripcion_empaque1"></td>
-                                        <td id="unidades2e" class="centrado unidades1e"></td>
-                                        <td id="utilizada_empaque1" class="centrado envasada1e" style="width: 110px;"></td>
-                                        <td id="averias_empaque1" class="centrado" style="width: 110px;"></td>
-                                        <td id="sobrante_empaque1" class="centrado" style="width: 110px;"></td>
+                                        <td id="refempaque3" class="empaque3"></td>
+                                        <td id="descripcion_empaque3" class="descripcion_empaque3"></td>
+                                        <td id="unidades3" class="centrado unidades3"></td>
+                                        <td id="utilizada_empaque3" class="centrado envasada3" style="width: 110px;"></td>
+                                        <td id="averias_empaque3" class="centrado" style="width: 110px;"></td>
+                                        <td id="sobrante_empaque3" class="centrado" style="width: 110px;"></td>
                                         <!-- <td id="totalDevolucion_empaque1" class="centrado"></td> -->
                                     </tr>
                                     <tr>
-                                        <td id="refempaque2" class="otros1"></td>
-                                        <td id="descripcion_otros1" class="descripcion_otros1"></td>
-                                        <td id="unidades8" class="centrado unidades1"></td>
-                                        <td id="utilizada_otros1" class="centrado envasada1e" style="width: 110px;"></td>
-                                        <td id="averias_otros1" class="centrado" style="width: 110px;"></td>
-                                        <td id="sobrante_otros1" class="centrado" style="width: 110px;"></td>
+                                        <td id="refempaque3" class="otros3"></td>
+                                        <td id="descripcion_otros3" class="descripcion_otros3"></td>
+                                        <td id="unidades8" class="centrado unidades3"></td>
+                                        <td id="utilizada_otros3" class="centrado envasada3" style="width: 110px;"></td>
+                                        <td id="averias_otros3" class="centrado" style="width: 110px;"></td>
+                                        <td id="sobrante_otros3" class="centrado" style="width: 110px;"></td>
                                         <!-- <td id="totalDevolucion_otros1" class="centrado"></td> -->
                                     </tr>
                                 </tbody>
@@ -1626,8 +1780,111 @@
                         </div>
 
                         <div class="col1" id="firmas6">
-                            <img id="f_realizoConciliacion" src="" alt="firma_usuario" height="130">
-                            <label id="user_realizoConciliacion"></label>
+                            <img id="f_realizoConciliacion3" src="" alt="firma_usuario" height="130">
+                            <label id="user_realizoConciliacion3"></label>
+                        </div>
+                    </div>
+                    <div id="multi-acondicionamiento4">
+                        <div class="subtitleProcess"><label for="" id="titulo_acondicionamiento4"> <b>ACONDICIONAMIENTO</b></label></div>
+                        <div class="subtitle"><label for="">Entrega Insumos Acondicionamiento</label></div>
+
+                        <div class="table-responsive p-3">
+                            <table class="table table-bordered table-striped">
+                                <thead class="head centrado">
+                                    <tr>
+                                        <td class="centrado">Fecha</td>
+                                        <td class="centrado">Referencia</td>
+                                        <td class="centrado">Descripción</td>
+                                        <td class="centrado">Cantidad</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td id="fecha4" class="centrado fecha4"></td>
+                                        <td id="empaque4" class="centrado empaque4"></td>
+                                        <td id="descripcion_empaque4" class="descripcion_empaque4"></td>
+                                        <td id="unidades4" class="centrado unidades4"></td>
+                                    </tr>
+                                    <tr>
+                                        <td id="fecha4" class="centrado fecha4"></td>
+                                        <td id="otros4" class="centrado otros4"></td>
+                                        <td id="descripcion_otros4" class="descripcion_otros4"></td>
+                                        <td id="unidades4" class="centrado unidades4"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="subtitle"><label for="">Control de Proceso</label></div>
+
+                        <div class="p-3">
+                            <table class="table table-bordered table-striped" id="muestrasAcondicionamiento4">
+                                <thead class="head">
+                                    <tr>
+                                        <th colspan="1" class="centrado">Muestra</th>
+                                        <th colspan="1" class="centrado">APARIENCIA ETIQUETA (Arrugas, quiebres, sucios, alineada,dherencia)</th>
+                                        <th colspan="1" class="centrado">APARIENCIA TERMOENCOGIBLE</th>
+                                        <th colspan="1" class="centrado">APARIENCIA LOTE</th>
+                                        <th colspan="1" class="centrado">CUMPLIMIENTO UNIDAD DE EMPAQUE Y POSICIÓN DENTRO DE LA CAJA</th>
+                                        <th colspan="1" class="centrado">RÓTULO DE LA CAJA</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="subtitle"><label for="">Devolución Insumos de Acondicionamiento</label></div>
+                        <div class="table-responsive p-3">
+                            <table class="table table-bordered table-striped">
+                                <thead class="head centrado">
+                                    <tr>
+                                        <td class="centrado">Referencia</td>
+                                        <td class="centrado">Descripción</td>
+                                        <td class="centrado">Recibida</td>
+                                        <td class="centrado">Utilizadas</td>
+                                        <td class="centrado">Averias</td>
+                                        <td class="centrado">Sobrante</td>
+                                        <!-- <td class="centrado">Total</td> -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td id="refempaque4" class="empaque4"></td>
+                                        <td id="descripcion_empaque4" class="descripcion_empaque4"></td>
+                                        <td id="unidades4" class="centrado unidades4"></td>
+                                        <td id="utilizada_empaque4" class="centrado envasada4e" style="width: 110px;"></td>
+                                        <td id="averias_empaque4" class="centrado" style="width: 110px;"></td>
+                                        <td id="sobrante_empaque4" class="centrado" style="width: 110px;"></td>
+                                        <!-- <td id="totalDevolucion_empaque1" class="centrado"></td> -->
+                                    </tr>
+                                    <tr>
+                                        <td id="refempaque4" class="otros4"></td>
+                                        <td id="descripcion_otros4" class="descripcion_otros4"></td>
+                                        <td id="unidades4" class="centrado unidades4"></td>
+                                        <td id="utilizada_otros4" class="centrado envasada4e" style="width: 110px;"></td>
+                                        <td id="averias_otros4" class="centrado" style="width: 110px;"></td>
+                                        <td id="sobrante_otros4" class="centrado" style="width: 110px;"></td>
+                                        <!-- <td id="totalDevolucion_otros1" class="centrado"></td> -->
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="subtitle"><label>Conciliación de rendimiento</label></div>
+                        <div class="conciliacion">
+                            <label style="justify-self: end;">Conciliacion rendimiento</label>
+                            <input type="text" class="form-control centrado" id="conciliacionRendimiento4" style="width: 30%;justify-self: baseline" readonly>
+                        </div>
+
+                        <div class="enlinea mt-3">
+                            <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
+                            <label id="fecha6" style="font-weight:bold; justify-self: baseline"></label>
+                        </div>
+
+                        <div class="col1" id="firmas6">
+                            <img id="f_realizoConciliacion4" src="" alt="firma_usuario" height="130">
+                            <label id="user_realizoConciliacion4"></label>
                         </div>
                     </div>
                     <!-- fin acondicionamiento -->
@@ -2021,23 +2278,6 @@
             <!-- fin liberacion lote  -->
         </div>
     </div>
-
-    <!-- <h1 class="SaltoDePagina"> </h1>
-    <div class="card mt-5 mb-5">
-        <div class="card-header centrado"><b>ETIQUETAS</b></div>
-        <div class="card-body">
-
-            <div id="contenedorEtiquetas" class="contenedorEtiquetas">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="etiquetas">
-                        
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
 
     <h1 class="SaltoDePagina"> </h1>
     <div class="card mt-5 mb-5">

@@ -250,7 +250,6 @@ if (!empty($_POST)) {
             $query = $conn->prepare($sql);
             $query->execute(['batch' => $batch]);
             $data = $query->fetchAll(PDO::FETCH_ASSOC);
-            sizeof($data) == 0 ? $data = 0 : $data;
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
             break;
     }
