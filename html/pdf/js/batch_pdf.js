@@ -109,11 +109,14 @@ const cargarMultipresentacion = (data) => {
             $(`#infoMulti`).show();
             $(`#InfoMultipresentacion`).append(`
                     <label>Referencia:</label>
-                    <label class="" id=""><b>${data[i].referencia}</b></label>
-                    <label>Presentación Comercial:</label>
-                    <label class="" id=""><b>${data[i].presentacion_comercial}</b></label>
-                    <label>Tamaño del lote total (kg):</label>
-                    <label class="" id=""><b>${data[i].total}</b></label>`);
+                    <label><b>${data[i].referencia}</b></label>
+                    <label>Presentación:</label>
+                    <label><b>${data[i].presentacion_comercial}</b></label>
+                    <label>Lote total(kg):</label>
+                    <label><b>${data[i].total}</b></label>
+                    <label>Cantidad:</label>
+                    <label><b>${data[i].cantidad}</b></label>
+                    `);
         }
 
         j = 1;

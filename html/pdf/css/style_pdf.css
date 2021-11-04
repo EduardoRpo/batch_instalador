@@ -53,7 +53,7 @@ body {
 
 .group-info-batch-multi {
     display: grid;
-    grid-template-columns: 200px 1fr 280px 1fr 280px 1fr;
+    grid-template-columns: repeat(8, 140px);
     gap: 3px 20px;
 }
 

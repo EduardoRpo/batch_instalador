@@ -97,8 +97,8 @@ include('modal/image.php')
                       <thead>
                         <tr>
                           <th class="centrado">Multipresentación</th>
-                          <th class="centrado">Cantidad</th>
-                          <th class="centrado">Total</th>
+                          <th class="centrado">Cantidad(Und)</th>
+                          <th class="centrado">Total(Kg)</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -116,6 +116,11 @@ include('modal/image.php')
                           <td id="tanque3" class="centrado"></td>
                           <td id="cantidad3" class="centrado"></td>
                           <td id="total3" class="centrado"></td>
+                        </tr>
+                        <tr id="fila4">
+                          <td id="tanque4" class="centrado"></td>
+                          <td id="cantidad4" class="centrado"></td>
+                          <td id="total4" class="centrado"></td>
                         </tr>
                       </tbody>
                     </table>
