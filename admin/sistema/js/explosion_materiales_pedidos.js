@@ -7,69 +7,69 @@ $('.contenedor-menu .menu ul.menu_explosion').show()
 
 $('.excelImportar').hide()
 
-$('#btnCargarExcel').click(function (e) {
-  e.preventDefault()
-  $('.excelImportar').toggle(600)
+$('#btnCargarExcel').click(function(e) {
+    e.preventDefault()
+    $('.excelImportar').toggle(600)
 })
 
 /* Importar pedidos */
 
-$('#importarFile').on('click', function (e) {
-  if (selectedFile) {
-    let fileReader = new FileReader()
-    fileReader.readAsBinaryString(selectedFile)
+$('#importarFile').on('click', function(e) {
+    if (selectedFile) {
+        let fileReader = new FileReader()
+        fileReader.readAsBinaryString(selectedFile)
 
-    fileReader.onload = (e) => {
-      let data = e.target.result
-      let workbook = XLSX.read(data, { type: 'binary' })
+        fileReader.onload = (e) => {
+            let data = e.target.result
+            let workbook = XLSX.read(data, { type: 'binary' })
 
-      workbook.SheetNames.forEach((sheet) => {
-        let rowObject = XLSX.utils.sheet_to_row_object_array(
-          workbook.Sheets[sheet],
-        )
-        data = rowObject
+            workbook.SheetNames.forEach((sheet) => {
+                let rowObject = XLSX.utils.sheet_to_row_object_array(
+                    workbook.Sheets[sheet],
+                )
+                data = rowObject
 
-        $.ajax({
-          type: 'POST',
-          url: '../../../admin/sistema/php/explosion_materiales/pedidos.php',
-          data: { data: data },
-          beforeSend: function () {
-            $('#uploadStatus').html(
-              '<img src="images/uploading.gif" style="height:100px"/>',
-            )
-          },
-          error: function () {
-            $('#uploadStatus').html(
-              '<span style="color:#EA4335;">No se importó el archivo correctamente, trate nuevamente.<span>',
-            )
-          },
-          success: function (response) {
-            $('#uploadStatus').html(
-              '<span style="color:#28A74B;">Datos importados correctamente.<span>',
-            )
-            $('#fileInput').val('')
-            setTimeout(() => {
-              $('.excelImportar').toggle(600)
-            }, 700)
-          },
-        })
-      })
+                $.ajax({
+                    type: 'POST',
+                    url: '../../../admin/sistema/php/explosion_materiales/pedidos.php',
+                    data: { data: data },
+                    beforeSend: function() {
+                        $('#uploadStatus').html(
+                            '<img src="images/uploading.gif" style="height:100px"/>',
+                        )
+                    },
+                    error: function() {
+                        $('#uploadStatus').html(
+                            '<span style="color:#EA4335;">No se importó el archivo correctamente, trate nuevamente.<span>',
+                        )
+                    },
+                    success: function(response) {
+                        $('#uploadStatus').html(
+                            '<span style="color:#28A74B;">Datos importados correctamente.<span>',
+                        )
+                        $('#fileInput').val('')
+                        setTimeout(() => {
+                            $('.excelImportar').toggle(600)
+                        }, 700)
+                    },
+                })
+            })
+        }
     }
-  }
 })
 
 // File type validation
-$('#fileInput').change(function (e) {
-  selectedFile = e.target.files[0]
-  archivo = $('#fileInput').val()
-  let extensiones = archivo.substring(archivo.lastIndexOf('.'))
+$('#fileInput').change(function(e) {
+    selectedFile = e.target.files[0]
+    archivo = $('#fileInput').val()
+    let extensiones = archivo.substring(archivo.lastIndexOf('.'))
 
-  if (extensiones != '.xlsx') {
-    alertify.set('notifier', 'position', 'top-right')
-    alertify.error('Seleccione una imagen valida con formato (xlsx).')
-    $('#fileInput').val('')
-    return false
-  }
+    if (extensiones != '.xlsx') {
+        alertify.set('notifier', 'position', 'top-right')
+        alertify.error('Seleccione una imagen valida con formato (xlsx).')
+        $('#fileInput').val('')
+        return false
+    }
 })
 
 /* $("#example").append(
@@ -79,151 +79,166 @@ $('#fileInput').change(function (e) {
 /* Datatable consolidado */
 
 let tableConsolidado = $('#tblExplosionMaterialesPedidos').dataTable({
-  pageLength: 50,
-  order: [[1, 'desc']],
-  dom: 'Bfrtip',
-  order: [[0, 'asc']],
-  buttons: [
-    {
-      extend: 'excel',
-      text: 'Exportar',
-      className: 'btn btn-primary',
-      exportOptions: {
-        columns: [0, 1, 5, 6],
-      },
-    },
-  ],
+    pageLength: 50,
+    order: [
+        [1, 'desc']
+    ],
+    dom: 'Bfrtip',
+    order: [
+        [0, 'asc']
+    ],
+    buttons: [{
+        extend: 'excel',
+        text: 'Exportar',
+        className: 'btn btn-primary',
+        exportOptions: {
+            columns: [0, 1, 5, 6],
+        },
+    }, ],
 
-  ajax: {
-    url: '/api/explosionMaterialesPedidos',
-    dataSrc: '',
-  },
-  language: {
-    url: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json',
-  },
-  columns: [
-    {
-      title: 'Referencia',
-      data: 'id_materiaprima',
-      className: 'uniqueClassName',
+    ajax: {
+        url: '/api/explosionMaterialesPedidos',
+        dataSrc: '',
     },
-    {
-      title: 'Materia Prima',
-      data: 'nombre',
-      className: 'uniqueClassName',
+    language: {
+        url: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json',
     },
+    columns: [{
+            title: 'Referencia',
+            data: 'id_materiaprima',
+            className: 'uniqueClassName',
+        },
+        {
+            title: 'Materia Prima',
+            data: 'nombre',
+            className: 'uniqueClassName',
+        },
 
-    {
-      title: '0. MP Requerida Pedidos',
-      data: 'cantidad_pedidos',
-      className: 'uniqueClass',
-      render: $.fn.dataTable.render.number('.', ',', 2),
-    },
-    {
-      title: '1. MP Requerida Batch',
-      data: 'cantidad_batch',
-      className: 'uniqueClass',
-      render: $.fn.dataTable.render.number('.', ',', 2),
-    },
-    {
-      title: '2. MP Pesada',
-      data: 'cantidad_batch_uso',
-      className: 'uniqueClass',
-      render: $.fn.dataTable.render.number('.', ',', 2),
-    },
-    {
-      title: 'Gap Pedidos <br/> (0 - 2)',
-      data: 'gap_pedidos',
-      className: 'uniqueClass',
-      render: $.fn.dataTable.render.number('.', ',', 2),
-    },
-    {
-      title: 'Gap Batch <br/> (1 - 2)',
-      data: 'gap_batch',
-      className: 'uniqueClass',
-      render: $.fn.dataTable.render.number('.', ',', 2),
-    },
-  ],
+        {
+            title: '0. MP Requerida Pedidos',
+            data: 'cantidad_pedidos',
+            className: 'uniqueClass',
+            render: $.fn.dataTable.render.number('.', ',', 2),
+        },
+        {
+            title: '1. MP Requerida Batch',
+            data: 'cantidad_batch',
+            className: 'uniqueClass',
+            render: $.fn.dataTable.render.number('.', ',', 2),
+        },
+        {
+            title: '2. MP Pesada',
+            data: 'uso_batch',
+            className: 'uniqueClass',
+            render: $.fn.dataTable.render.number('.', ',', 2),
+        },
+        {
+            title: 'Gap Pedidos <br/> (0 - 2)',
+            data: 'gap_pedidos',
+            className: 'uniqueClass',
+            render: $.fn.dataTable.render.number('.', ',', 2),
+        },
+        {
+            title: 'Gap Batch <br/> (1 - 2)',
+            data: 'gap_batch',
+            className: 'uniqueClass',
+            render: $.fn.dataTable.render.number('.', ',', 2),
+        },
+    ],
 
-  footerCallback: function (tfoot, data, start, end, display) {
-    var api = this.api()
-    $(api.column(2).footer()).html(
-      api
-        .column(2)
-        .data()
-        .reduce(function (a, b) {
-          return a + b
-        }, 0),
-    )
-    /* $(api.column(3).footer()).html(
-      api
-        .column(3)
-        .data()
-        .reduce(function (a, b) {
-          return a + b
-        }, 0),
-    )
-    $(api.column(4).footer()).html(
-      api
-        .column(4)
-        .data()
-        .reduce(function (a, b) {
-          return a + b
-        }, 0),
-    )
-    $(api.column(5).footer()).html(
-      api
-        .column(5)
-        .data()
-        .reduce(function (a, b) {
-          return a + b
-        }, 0),
-    )
-    $(api.column(6).footer()).html(
-      api
-        .column(6)
-        .data()
-        .reduce(function (a, b) {
-          return a + b
-        }, 0),
-    ) */
-  },
+    "footerCallback": function(row, data, start, end, display) {
+        var api = this.api(),
+            data;
+
+        // converting to interger to find total
+        var intVal = function(i) {
+            return typeof i === 'string' ?
+                i.replace(/[\$,]/g, '') * 1 :
+                typeof i === 'number' ?
+                i : 0;
+        };
+
+        // computing column Total of the complete result 
+        var mpRequeridaPedidos = api
+            .column(2)
+            .data()
+            .reduce(function(a, b) {
+                return intVal(a) + intVal(b);
+            }, 0);
+
+        var mpRequeridaBatch = api
+            .column(3)
+            .data()
+            .reduce(function(a, b) {
+                return intVal(a) + intVal(b);
+            }, 0);
+
+        var mpPesada = api
+            .column(4)
+            .data()
+            .reduce(function(a, b) {
+                return intVal(a) + intVal(b);
+            }, 0);
+
+        var gapPedidos = api
+            .column(5)
+            .data()
+            .reduce(function(a, b) {
+                return intVal(a) + intVal(b);
+            }, 0);
+
+        var gapBatch = api
+            .column(6)
+            .data()
+            .reduce(function(a, b) {
+                return intVal(a) + intVal(b);
+            }, 0);
+
+        // Update footer by showing the total with the reference of the column index 
+        $(api.column(0).footer()).html('Total');
+        $(api.column(2).footer()).html(mpRequeridaPedidos.toLocaleString("de-DE", { minimumFractionDigits: 2 }));
+        $(api.column(3).footer()).html(mpRequeridaBatch.toLocaleString("de-DE", { minimumFractionDigits: 2 }));
+        $(api.column(4).footer()).html(mpPesada.toLocaleString("de-DE", { minimumFractionDigits: 2 }));
+        $(api.column(5).footer()).html(gapPedidos.toLocaleString("de-DE", { minimumFractionDigits: 2 }));
+        $(api.column(6).footer()).html(gapBatch.toLocaleString("de-DE", { minimumFractionDigits: 2 }));
+
+    },
 })
 
 async function referencias() {
-  let result
+    let result
 
-  result = await $.ajax({
-    url: '/api/explosionMaterialesReferencias',
-  })
+    result = await $.ajax({
+        url: '/api/explosionMaterialesReferencias',
+    })
 
-  return result
+    return result
 }
 
 /* Referencias sin formula */
 
-$('#btnReferenciasSinFormula').click(function (e) {
-  e.preventDefault()
+$('#btnReferenciasSinFormula').click(function(e) {
+    e.preventDefault()
 
-  data = sessionStorage.getItem('referencias')
+    data = sessionStorage.getItem('referencias')
 
-  if (data === null) {
-    referencias().then((data) => {
-      sessionStorage.setItem('referencias', JSON.stringify(data))
-      referenciasSinFormula(data)
-    })
-  } else {
-    data = JSON.parse(data)
-    referenciasSinFormula(data)
-  }
+    if (data === null) {
+        referencias().then((data) => {
+            sessionStorage.setItem('referencias', JSON.stringify(data))
+            referenciasSinFormula(data)
+        })
+    } else {
+        data = JSON.parse(data)
+        referenciasSinFormula(data)
+    }
 })
 
 /* Cargar excel */
 
 const referenciasSinFormula = (Data) => {
-  let ws = XLSX.utils.json_to_sheet(Data)
-  let wb = XLSX.utils.book_new()
-  XLSX.utils.book_append_sheet(wb, ws, 'Referencias')
+    let ws = XLSX.utils.json_to_sheet(Data)
+    let wb = XLSX.utils.book_new()
+    XLSX.utils.book_append_sheet(wb, ws, 'Referencias')
 
-  XLSX.writeFile(wb, 'referenciasSinFormula.xlsx')
+    XLSX.writeFile(wb, 'referenciasSinFormula.xlsx')
 }

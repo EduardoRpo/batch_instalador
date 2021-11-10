@@ -1,5 +1,5 @@
 <?php
-require_once('../../conexion.php');
+require_once('../../../conexion.php');
 
 $sql = "SELECT batch.id_batch, ct.id_modulo,ct.temperatura, ct.humedad, ct.fecha 
         FROM batch LEFT JOIN batch_condicionesmedio ct ON batch.id_batch = ct.id_batch 

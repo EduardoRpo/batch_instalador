@@ -7,7 +7,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 $explosionMaterialesDao = new ExplosionMaterialesDao();
 
 $app->get('/explosionMaterialesBatch', function (Request $request, Response $response, $args) use ($explosionMaterialesDao) {
-    $explosionMateriales = $explosionMaterialesDao->findAll();
+    $explosionMateriales = $explosionMaterialesDao->findAllBatch();
     $response->getBody()->write(json_encode($explosionMateriales, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');
 });
