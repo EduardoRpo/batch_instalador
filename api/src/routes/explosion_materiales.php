@@ -23,3 +23,9 @@ $app->get('/explosionMaterialesReferencias', function (Request $request, Respons
     $response->getBody()->write(json_encode($explosionMateriales, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');
 });
+
+$app->get('/explosionMaterialesCantidades', function (Request $request, Response $response, $args) use ($explosionMaterialesDao) {
+    $explosionMateriales = $explosionMaterialesDao->findRefExplosionMateriales();
+    $response->getBody()->write(json_encode($explosionMateriales, JSON_NUMERIC_CHECK));
+    return $response->withHeader('Content-Type', 'application/json');
+});

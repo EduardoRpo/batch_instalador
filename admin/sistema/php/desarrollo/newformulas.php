@@ -37,7 +37,8 @@ switch ($op) {
         $referencia = $_POST['ref_producto'];
 
         foreach ($datos as $dato) {
-            $sql = "INSERT INTO formula (id_producto, id_materiaprima, porcentaje) VALUES(:referencia, :materiaprima, AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD'))";
+            $sql = "INSERT INTO formula (id_producto, id_materiaprima, porcentaje) 
+                    VALUES(:referencia, :materiaprima, AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD'))";
             $query = $conn->prepare($sql);
             $query->execute(['referencia' => $referencia, 'materiaprima' => $dato[0], 'porcentaje' => $dato[2]]);
         }

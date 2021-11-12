@@ -935,7 +935,14 @@ analisisMicrobiologico = () => {
         url: "../../html/php/servicios/c_batch_pdf.php",
         data: { operacion: 14, idBatch },
         success: function(response) {
-            if (response == "[]") return false;
+            if (response == "[]") {
+                $(`#f_realizoMicro`).hide();
+                $(`#f_verificoMicro1`).hide();
+
+                $(`#user_realizoMicro`).html(`Realizó: <b>Sin Firmar</b>`);
+                $(`#user_verificoMicro1`).html(`Verificó: <b>Sin Firmar</b>`);
+                return false;
+            }
 
             $(".chkAprobado").prop("disabled", true);
             $(".chkRechazado").prop("disabled", true);

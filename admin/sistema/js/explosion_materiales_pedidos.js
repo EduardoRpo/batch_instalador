@@ -242,3 +242,16 @@ const referenciasSinFormula = (Data) => {
 
     XLSX.writeFile(wb, 'referenciasSinFormula.xlsx')
 }
+
+/* Calcular referencias Batch y Pedidos*/
+
+$.get("/api/explosionMaterialesCantidades",
+    function(data, textStatus, jqXHR) {
+        $('#cantidadesExplosion').append(` 
+            <p id="batchExplosion"><b>Batch:</b> ${data[0].total_batch}</p>
+            <p id="pedidosExplosion"><b>Pedidos:</b>  ${data[2].total_pedidos}</p>
+            <p id="pedidosExplosion"><b>Referencias Batch:</b>  ${data[1].total_id_materiaprima}</p>
+            <p id="pedidosExplosion"><b>Referencias pedidos:</b>  ${data[3].total_MP_pedidos}</p>
+            `);
+    },
+);

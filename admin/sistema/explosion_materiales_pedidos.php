@@ -39,9 +39,17 @@
               <div class="card-header">
                 <h4 class="card-title"> <strong>Explosión de Materiales</strong></h4>
                 <hr>
-                <button type="button" class="btn btn-primary" id="btnCargarExcel"><i class="fas fa-cloud-upload-alt"></i> Importar Pedidos</button>
-                <button type="button" class="btn btn-info" id="btnReferenciasSinFormula"><i class="fas fa-exclamation-triangle"></i> Referencias sin formula</button>
+                <div style="display: grid; grid-template-columns:1fr 1fr">
+                  <div>
+                    <button type="button" class="btn btn-primary" id="btnCargarExcel"><i class="fas fa-cloud-upload-alt"></i> Importar Pedidos</button>
+                    <button type="button" class="btn btn-info" id="btnReferenciasSinFormula"><i class="fas fa-exclamation-triangle"></i> Referencias sin formula</button>
+                  </div>
+                  <div id="cantidadesExplosion">
+                    <div class="mb-1 txtTitleExplosion"><p><b>Datos Procesados</b></p></div>
+                    
 
+                  </div>
+                </div>
                 <div class="excelImportar">
                   <form id="uploadForm" enctype="multipart/form-data">
                     <input type="file" class="form-control" name="fileExcel" id="fileInput" accept=".xlsx">
