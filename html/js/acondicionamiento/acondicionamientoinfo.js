@@ -13,7 +13,7 @@ $(document).ready(function() {
     setTimeout(() => {
         busqueda_multi();
         deshabilitarbotones();
-    }, 500);
+    }, 1000);
 });
 
 /* Cargar Multipresentacion */
