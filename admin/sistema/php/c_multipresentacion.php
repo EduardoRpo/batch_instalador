@@ -13,19 +13,56 @@ if (!empty($_POST)) {
 
     case 2: //Almacenar multipresentacion
 
-
       $multi = $_POST['multi'];
+      $sinFormulas = [];
+
+      /* Crea multipresentacion en productos */
 
       $sql = "SELECT MAX(multi) + 1 FROM producto";
       foreach ($conn->query($sql) as $row) {
         //print($row[0]);
       }
 
-      foreach ($multi as &$valor) {
+      /* Crea la multipresentacion para cada referencia */
+
+      foreach ($multi as $valor) {
         $sql = "UPDATE producto SET multi = $row[0] WHERE referencia = :valor";
         $query = $conn->prepare($sql);
         $result = $query->execute(['valor' => $valor]);
         ejecutarQuery($result, $conn);
+      }
+
+      /* Revisar si existe formula para todas la referencias */
+
+      foreach ($multi as $ref) {
+
+        $sql = "SELECT f.id_producto, f.id_materiaprima as referencia, cast(AES_DECRYPT(porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje 
+                FROM formula f WHERE f.id_producto = :id_producto";
+        $query = $conn->prepare($sql);
+        $query->execute(['id_producto' => $ref]);
+
+        $rows = $query->rowCount();
+        if ($rows > 0) {
+          $formulas = $query->fetchAll(PDO::FETCH_ASSOC);
+        }
+        $sinFormulas[$ref] =  $rows;
+      }
+
+      /* insertar la formula para las referencias sin formula */
+      
+      foreach ($sinFormulas as $sinFormula => $value) {
+        if ($value == 0) {
+          foreach ($formulas as $formula) {
+            $sql = "INSERT INTO formula (id_producto, id_materiaprima, porcentaje) 
+                  VALUES (:id_producto, :id_materiaprima, AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') )";
+            $query = $conn->prepare($sql);
+            $result = $query->execute([
+              'id_producto' => $sinFormula,
+              'id_materiaprima' => $formula['referencia'],
+              'porcentaje' => $formula['porcentaje']
+            ]);
+          }
+        }
       }
 
       break;
@@ -40,6 +77,8 @@ if (!empty($_POST)) {
         $result = $query->execute(['valor' => $valor]);
         ejecutarQuery($result, $conn);
       }
+
+
 
       break;
 
@@ -77,10 +116,10 @@ if (!empty($_POST)) {
       break;
 
     case 6: //listar Multipresentacion
-      
+
       $query = "SELECT referencia, nombre_referencia, multi FROM producto WHERE multi>0 ORDER BY nombre_referencia ASC";
       ejecutarQuerySelect($conn, $query);
-      
-    break;
+
+      break;
   }
 }
