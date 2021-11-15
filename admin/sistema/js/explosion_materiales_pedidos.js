@@ -196,11 +196,11 @@ let tableConsolidado = $('#tblExplosionMaterialesPedidos').dataTable({
 
         // Update footer by showing the total with the reference of the column index 
         $(api.column(0).footer()).html('Total');
-        $(api.column(2).footer()).html(mpRequeridaPedidos.toLocaleString("de-DE", { minimumFractionDigits: 2 }));
-        $(api.column(3).footer()).html(mpRequeridaBatch.toLocaleString("de-DE", { minimumFractionDigits: 2 }));
-        $(api.column(4).footer()).html(mpPesada.toLocaleString("de-DE", { minimumFractionDigits: 2 }));
-        $(api.column(5).footer()).html(gapPedidos.toLocaleString("de-DE", { minimumFractionDigits: 2 }));
-        $(api.column(6).footer()).html(gapBatch.toLocaleString("de-DE", { minimumFractionDigits: 2 }));
+        $(api.column(2).footer()).html(mpRequeridaPedidos.toLocaleString("de-DE", { minimumFractionDigits: 2, 'maximumFractionDigits': 2 }));
+        $(api.column(3).footer()).html(mpRequeridaBatch.toLocaleString("de-DE", { minimumFractionDigits: 2, 'maximumFractionDigits': 2 }));
+        $(api.column(4).footer()).html(mpPesada.toLocaleString("de-DE", { minimumFractionDigits: 2, 'maximumFractionDigits': 2 }));
+        $(api.column(5).footer()).html(gapPedidos.toLocaleString("de-DE", { minimumFractionDigits: 2, 'maximumFractionDigits': 2 }));
+        $(api.column(6).footer()).html(gapBatch.toLocaleString("de-DE", { minimumFractionDigits: 2, 'maximumFractionDigits': 2 }));
 
     },
 })

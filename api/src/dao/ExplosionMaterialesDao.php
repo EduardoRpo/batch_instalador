@@ -85,20 +85,31 @@ class ExplosionMaterialesDao
 
   public function findRefExplosionMateriales()
   {
+    /* Validar la fecha y si no es exacta eliminar los batch en explosion de materiales con estado 4 */
+    $fecha_actual = strtotime(date("d-m-Y H:i:00", time()));
+    $fecha_entrada = strtotime("d-m-Y 21:00:00");
+
+    if ($fecha_actual < $fecha_entrada) {
+      
+      echo "La fecha comparada es igual o menor";
+    }
+
+
+    /* Consultar datos procesados */
     $explosionMateriales = [];
     $connection = Connection::getInstance()->getConnection();
     $stmt = $connection->prepare("SELECT COUNT(DISTINCT batch) AS total_batch FROM `explosion_materiales_batch`");
     $stmt->execute();
     $total_batch = $stmt->fetchAll($connection::FETCH_ASSOC);
-    
+
     $stmt = $connection->prepare("SELECT COUNT(DISTINCT id_materiaprima) AS total_id_materiaprima FROM `explosion_materiales_batch`;");
     $stmt->execute();
     $total_referencias = $stmt->fetchAll($connection::FETCH_ASSOC);
-    
+
     $stmt = $connection->prepare("SELECT COUNT(DISTINCT id_pedido) AS total_pedidos FROM `explosion_materiales_pedidos`;");
     $stmt->execute();
     $total_pedidos = $stmt->fetchAll($connection::FETCH_ASSOC);
-    
+
     $stmt = $connection->prepare("SELECT COUNT(DISTINCT id_materiaprima) AS total_MP_pedidos FROM `explosion_materiales_pedidos`;");
     $stmt->execute();
     $total_refPedidos = $stmt->fetchAll($connection::FETCH_ASSOC);
