@@ -404,17 +404,24 @@ form.frmAdicionarMinMax {
 
 #cantidadesExplosion {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     text-align: center;
     padding-left: 30px;
     padding-right: 30px;
     border-style: dashed;
     border-color: #fa7a50;
+    border-width: 1px;
+}
+
+.txtTitleExplosionGenerico {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    justify-self: center;
 }
 
 .txtTitleExplosion {
     grid-column-start: 1;
-    grid-column-end: 4;
+    grid-column-end: 3;
     justify-self: center;
 }
 

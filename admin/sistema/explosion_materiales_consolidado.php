@@ -41,7 +41,7 @@ require_once('php/sesion/sesion.php');
               <div class="card-header">
                 <h4 class="card-title"> <strong>Explosión de Materiales</strong></h4>
                 <hr>
-                <div style="display: grid; grid-template-columns:700px">
+                <div style="display: grid; grid-template-columns:500px">
                   <div id="cantidadesExplosion">
                     <div class="mb-1 txtTitleExplosion">
                       <p><b>Datos Procesados</b></p>

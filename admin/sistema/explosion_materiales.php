@@ -40,9 +40,9 @@
               <div class="card-header">
                 <h4 class="card-title"> <strong>Materia Prima Requerida (Batch)</strong></h4>
                 <hr>
-                <div style="display: grid; grid-template-columns:700px">
+                <div style="display: grid; grid-template-columns:500px">
                   <div id="cantidadesExplosion">
-                    <div class="mb-1 txtTitleExplosion">
+                    <div class="mb-1 txtTitleExplosionGenerico">
                       <p><b>Datos Procesados</b></p>
                     </div>
 

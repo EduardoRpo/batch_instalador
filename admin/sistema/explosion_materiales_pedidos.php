@@ -46,7 +46,7 @@
                     <button type="button" class="btn btn-info" id="btnReferenciasSinFormula"><i class="fas fa-exclamation-triangle"></i> Referencias sin formula</button>
                   </div>
                   <div id="cantidadesExplosion">
-                    <div class="mb-1 txtTitleExplosion"><p><b>Datos Procesados</b></p></div>
+                    <div class="mb-1 txtTitleExplosionGenerico"><p><b>Datos Procesados</b></p></div>
                     
 
                   </div>
