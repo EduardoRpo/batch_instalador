@@ -1,4 +1,6 @@
-<?php require_once('php/sesion/sesion.php'); ?>
+<?php
+require_once('php/sesion/sesion.php');
+?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -39,23 +41,12 @@
               <div class="card-header">
                 <h4 class="card-title"> <strong>Explosión de Materiales</strong></h4>
                 <hr>
-                <div style="display: grid; grid-template-columns:1fr 1fr">
-                  <!-- <div>
-                    <button type="button" class="btn btn-primary" id="btnCargarExcel"><i class="fas fa-cloud-upload-alt"></i> Importar Pedidos</button>
-                    <button type="button" class="btn btn-info" id="btnReferenciasSinFormula"><i class="fas fa-exclamation-triangle"></i> Referencias sin formula</button>
-                  </div> -->
+                <div style="display: grid; grid-template-columns:700px">
                   <div id="cantidadesExplosion">
-                    <div class="mb-1 txtTitleExplosion"><p><b>Datos Procesados</b></p></div>
-                    
-
+                    <div class="mb-1 txtTitleExplosion">
+                      <p><b>Datos Procesados</b></p>
+                    </div>
                   </div>
-                </div>
-                <div class="excelImportar">
-                  <form id="uploadForm" enctype="multipart/form-data">
-                    <input type="file" class="form-control" name="fileExcel" id="fileInput" accept=".xlsx">
-                    <input type="button" class="form-control btn-primary" id="importarFile" name="importarFile" value="Importar" />
-                  </form>
-                  <div id="uploadStatus"></div>
                 </div>
                 <hr>
 
@@ -131,7 +122,8 @@
   <!-- <script src="js/explosion.js"></script> -->
   <script src="../../admin/assets/js/xlsx/xlsx.full.min.js"></script>
   <script src="js/menu.js"></script>
-  <script src="js/explosion_materiales_consolidado.js"></script>
+  <script src="js/explosionMateriales/explosion_materiales_consolidado.js"></script>
+  <script src="js/explosionMateriales/referenciasSinFormula.js"></script>
 
 
 

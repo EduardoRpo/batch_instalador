@@ -1,4 +1,5 @@
-<?php require_once('php/sesion/sesion.php'); ?>
+<?php require_once('php/sesion/sesion.php');
+?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -39,14 +40,22 @@
               <div class="card-header">
                 <h4 class="card-title"> <strong>Materia Prima Requerida (Batch)</strong></h4>
                 <hr>
+                <div style="display: grid; grid-template-columns:700px">
+                  <div id="cantidadesExplosion">
+                    <div class="mb-1 txtTitleExplosion">
+                      <p><b>Datos Procesados</b></p>
+                    </div>
 
+
+                  </div>
+                </div>
               </div>
               <div class="card-body">
                 <div>
                   <div class="table-responsive">
                     <table id="tblExplosionMaterialesBatch" class="table-striped row-borde" style="width:100%">
                       <thead>
-                        
+
                       </thead>
                       <tbody>
 
@@ -79,8 +88,9 @@
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
   <script src="js/explosion.js"></script>
   <script src="js/menu.js"></script>
-  <script src="js/explosion_materiales.js"></script>
-  
+  <script src="js/explosionMateriales/explosion_materiales.js"></script>
+  <script src="js/explosionMateriales/referenciasSinFormula.js"></script>
+
 
 
 </body>

@@ -404,7 +404,8 @@ form.frmAdicionarMinMax {
 
 #cantidadesExplosion {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
     padding-left: 30px;
     padding-right: 30px;
     border-style: dashed;
@@ -413,7 +414,7 @@ form.frmAdicionarMinMax {
 
 .txtTitleExplosion {
     grid-column-start: 1;
-    grid-column-end: 3;
+    grid-column-end: 4;
     justify-self: center;
 }
 

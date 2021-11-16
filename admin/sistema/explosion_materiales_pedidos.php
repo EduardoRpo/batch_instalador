@@ -1,4 +1,5 @@
-<?php require_once('php/sesion/sesion.php'); ?>
+<?php require_once('php/sesion/sesion.php'); 
+?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -102,7 +103,8 @@
   <!-- <script src="js/explosion.js"></script> -->
   <script src="../../admin/assets/js/xlsx/xlsx.full.min.js"></script>
   <script src="js/menu.js"></script>
-  <script src="js/explosion_materiales_pedidos.js"></script>
+  <script src="js/explosionMateriales/explosion_materiales_pedidos.js"></script>
+  <script src="js/explosionMateriales/referenciasSinFormula.js"></script>
 
 
 
