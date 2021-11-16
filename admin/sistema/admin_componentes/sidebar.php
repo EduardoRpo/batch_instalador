@@ -41,11 +41,12 @@
 
                     <li><a href="multipresentacion.php" id="link_multipresentacion"><i class="fas fa-superscript"></i><span>Multipresentación</span></a></li>
                 </ul>
-                <?php if ($_SESSION['rol'] == 2) { ?>
+                <?php if ($_SESSION['rol'] == 1 || $_SESSION['rol'] == 2) { ?>
                     <li id="explosion_materiales"><a href=""><i class="fa fa-chevron-down"></i><span>Explosion Materiales</span></a></li>
                     <ul class="menu_explosion">
                         <li><a href="explosion_materiales.php" id="link_menu_explosion"><i class="fas fa-asterisk"></i><span>Batch Record</span></a></li>
-                        <li><a href="explosion_materiales_pedidos.php" id="link_menu_explosion_pedidos"><i class="fas fa-asterisk"></i><span>Consolidado</span></a></li>
+                        <li><a href="explosion_materiales_pedidos.php" id="link_menu_explosion_pedidos"><i class="fas fa-asterisk"></i><span>Pedidos</span></a></li>
+                        <li><a href="explosion_materiales_consolidado.php" id="link_menu_explosion_consolidado"><i class="fas fa-asterisk"></i><span>Consolidado</span></a></li>
                     </ul>
                 <?php  } ?>
                 <?php if ($_SESSION['rol'] == 1) { ?>

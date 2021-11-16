@@ -37,13 +37,13 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title"> <strong>Materia Prima Requerida (Pedidos)</strong></h4>
+                <h4 class="card-title"> <strong>Explosión de Materiales</strong></h4>
                 <hr>
                 <div style="display: grid; grid-template-columns:1fr 1fr">
-                  <div>
+                  <!-- <div>
                     <button type="button" class="btn btn-primary" id="btnCargarExcel"><i class="fas fa-cloud-upload-alt"></i> Importar Pedidos</button>
                     <button type="button" class="btn btn-info" id="btnReferenciasSinFormula"><i class="fas fa-exclamation-triangle"></i> Referencias sin formula</button>
-                  </div>
+                  </div> -->
                   <div id="cantidadesExplosion">
                     <div class="mb-1 txtTitleExplosion"><p><b>Datos Procesados</b></p></div>
                     
@@ -64,7 +64,36 @@
                 <div>
                   <div class="table-responsive">
                     <table id="tblExplosionMaterialesPedidos" class="table-striped row-borde" style="width:100%">
-                      
+                      <thead>
+                        <tr>
+                          <th rowspan="2">No.</th>
+                          <th rowspan="2">Referencia</th>
+                          <th rowspan="2">Materia Prima</th>
+                          <th colspan="5" style="text-align: center;">Cantidad(Kg)</th>
+                        </tr>
+                        <tr>
+                          <th>Requerida Batch</th>
+                          <th>Requerida Pedidos</th>
+                          <th>Utilizada</th>
+                          <th>Gap</th>
+                          <th>Gap</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                        </tr>
+                      </tfoot>
                     </table>
                   </div>
                 </div>
@@ -102,7 +131,7 @@
   <!-- <script src="js/explosion.js"></script> -->
   <script src="../../admin/assets/js/xlsx/xlsx.full.min.js"></script>
   <script src="js/menu.js"></script>
-  <script src="js/explosion_materiales_pedidos.js"></script>
+  <script src="js/explosion_materiales_consolidado.js"></script>
 
 
 

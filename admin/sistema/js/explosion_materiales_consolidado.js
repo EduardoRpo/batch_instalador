@@ -2,7 +2,7 @@ let selectedFile
 
 /* Mostrar Menu seleccionadp */
 $('.contenedor-menu .menu a').removeAttr('style')
-$('#link_menu_explosion_pedidos').css('background', 'coral')
+$('#link_menu_explosion_consolidado').css('background', 'coral')
 $('.contenedor-menu .menu ul.menu_explosion').show()
 
 $('.excelImportar').hide()
@@ -129,6 +129,12 @@ let tableConsolidado = $('#tblExplosionMaterialesPedidos').dataTable({
             render: $.fn.dataTable.render.number('.', ',', 2),
         },
         {
+            title: '1. MP Requerida Batch',
+            data: 'cantidad_batch',
+            className: 'uniqueClass',
+            render: $.fn.dataTable.render.number('.', ',', 2),
+        },
+        {
             title: '2. MP Pesada',
             data: 'uso_batch',
             className: 'uniqueClass',
@@ -140,7 +146,12 @@ let tableConsolidado = $('#tblExplosionMaterialesPedidos').dataTable({
             className: 'uniqueClass',
             render: $.fn.dataTable.render.number('.', ',', 2),
         },
-
+        {
+            title: 'Gap Batch <br/> (1 - 2)',
+            data: 'gap_batch',
+            className: 'uniqueClass',
+            render: $.fn.dataTable.render.number('.', ',', 2),
+        },
     ],
 
     "footerCallback": function(row, data, start, end, display) {
@@ -163,15 +174,29 @@ let tableConsolidado = $('#tblExplosionMaterialesPedidos').dataTable({
                 return intVal(a) + intVal(b);
             }, 0);
 
-        var mpPesada = api
+        var mpRequeridaBatch = api
             .column(4)
             .data()
             .reduce(function(a, b) {
                 return intVal(a) + intVal(b);
             }, 0);
 
-        var gapPedidos = api
+        var mpPesada = api
             .column(5)
+            .data()
+            .reduce(function(a, b) {
+                return intVal(a) + intVal(b);
+            }, 0);
+
+        var gapPedidos = api
+            .column(6)
+            .data()
+            .reduce(function(a, b) {
+                return intVal(a) + intVal(b);
+            }, 0);
+
+        var gapBatch = api
+            .column(7)
             .data()
             .reduce(function(a, b) {
                 return intVal(a) + intVal(b);
@@ -180,9 +205,10 @@ let tableConsolidado = $('#tblExplosionMaterialesPedidos').dataTable({
         // Update footer by showing the total with the reference of the column index 
         $(api.column(2).footer()).html('Total');
         $(api.column(3).footer()).html(mpRequeridaPedidos.toLocaleString("de-DE", { minimumFractionDigits: 2, 'maximumFractionDigits': 2 }));
-        $(api.column(4).footer()).html(mpPesada.toLocaleString("de-DE", { minimumFractionDigits: 2, 'maximumFractionDigits': 2 }));
-        $(api.column(5).footer()).html(gapPedidos.toLocaleString("de-DE", { minimumFractionDigits: 2, 'maximumFractionDigits': 2 }));
-
+        $(api.column(4).footer()).html(mpRequeridaBatch.toLocaleString("de-DE", { minimumFractionDigits: 2, 'maximumFractionDigits': 2 }));
+        $(api.column(5).footer()).html(mpPesada.toLocaleString("de-DE", { minimumFractionDigits: 2, 'maximumFractionDigits': 2 }));
+        $(api.column(6).footer()).html(gapPedidos.toLocaleString("de-DE", { minimumFractionDigits: 2, 'maximumFractionDigits': 2 }));
+        $(api.column(7).footer()).html(gapBatch.toLocaleString("de-DE", { minimumFractionDigits: 2, 'maximumFractionDigits': 2 }));
 
     },
 })
@@ -232,8 +258,8 @@ $.get("/api/explosionMaterialesCantidades",
         $('#cantidadesExplosion').append(` 
             <p id="batchExplosion"><b>Batch:</b> ${data[0].total_batch}</p>
             <p id="pedidosExplosion"><b>Pedidos:</b>  ${data[2].total_pedidos}</p>
-            <p id="pedidosExplosion"><b>Referencias Batch:</b>  ${data[1].total_id_materiaprima}</p>
-            <p id="pedidosExplosion"><b>Referencias pedidos:</b>  ${data[3].total_MP_pedidos}</p>
+            <p id="pedidosExplosion"><b>No. Materias Primas:</b>  ${data[1].total_id_materiaprima}</p>
+            <p id="pedidosExplosion"><b>No. Materias Primas:</b>  ${data[3].total_MP_pedidos}</p>
             `);
     },
 );
