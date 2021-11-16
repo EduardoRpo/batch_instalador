@@ -18,13 +18,15 @@ if (!empty($_POST)) {
 
 		if ($rows == 0) {
 
-			$query = "SELECT * FROM explosion_materiales_referencias WHERE referencia = :id_producto";
+			$query = "SELECT * FROM explosion_materiales_referencias 
+			WHERE referencia = :id_producto";
 			$query = $conn->prepare($query);
 			$query->execute(['id_producto' => $pedido['Producto']]);
 			$rows = $query->rowCount();
 
 			if ($rows == 0) {
-				$query = "INSERT INTO explosion_materiales_referencias (referencia) VALUES(:id_producto)";
+				$query = "INSERT INTO explosion_materiales_referencias (referencia) 
+				VALUES(:id_producto)";
 				$query = $conn->prepare($query);
 				$query->execute(['id_producto' => trim($pedido['Producto'])]);
 			}
@@ -32,7 +34,8 @@ if (!empty($_POST)) {
 
 			/* Busca si el pedido ya fue registrado */
 
-			$query = "SELECT * FROM explosion_materiales_pedidos_registro WHERE pedido = :pedido AND id_producto = :id_producto";
+			$query = "SELECT * FROM explosion_materiales_pedidos_registro 
+			WHERE pedido = :pedido AND id_producto = :id_producto";
 			$query = $conn->prepare($query);
 			$query->execute(['pedido' => trim($pedido['Documento']), 'id_producto' => trim($pedido['Producto'])]);
 			$rows = $query->rowCount();
@@ -40,7 +43,8 @@ if (!empty($_POST)) {
 			/* si existe el pedido, carga la materia prima de acuerdo con la referencia del pedido */
 
 			if ($rows > 0) {
-				$query = "UPDATE explosion_materiales_pedidos_registro SET unidades = :unidades WHERE pedido = :pedido AND id_producto = :id_producto";
+				$query = "UPDATE explosion_materiales_pedidos_registro SET unidades = :unidades 
+				WHERE pedido = :pedido AND id_producto = :id_producto";
 				$query = $conn->prepare($query);
 				$query->execute([
 					'unidades' => trim($pedido['Cantidad']),
@@ -48,7 +52,8 @@ if (!empty($_POST)) {
 					'id_producto' => trim($pedido['Producto'])
 				]);
 			} else {
-				$query = "INSERT INTO explosion_materiales_pedidos_registro (pedido, id_producto, unidades, fecha_pedido) VALUES(:pedido, :id_producto, :unidades, :fecha_pedido)";
+				$query = "INSERT INTO explosion_materiales_pedidos_registro (pedido, id_producto, unidades, fecha_pedido) 
+						VALUES(:pedido, :id_producto, :unidades, :fecha_pedido)";
 				$query = $conn->prepare($query);
 				$query->execute([
 					'pedido' => trim($pedido['Documento']),
