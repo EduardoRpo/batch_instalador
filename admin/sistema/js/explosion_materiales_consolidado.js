@@ -92,7 +92,7 @@ let tableConsolidado = $('#tblExplosionMaterialesPedidos').dataTable({
         text: 'Exportar',
         className: 'btn btn-primary',
         exportOptions: {
-            columns: [0, 1, 5, 6],
+            columns: [1, 2, 6, 7],
         },
     }, ],
 

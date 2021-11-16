@@ -1,4 +1,5 @@
 let selectedFile
+let flag = 0
 
 /* Mostrar Menu seleccionadp */
 $('.contenedor-menu .menu a').removeAttr('style')
@@ -10,6 +11,20 @@ $('.excelImportar').hide()
 $('#btnCargarExcel').click(function(e) {
     e.preventDefault()
     $('.excelImportar').toggle(600)
+})
+
+// File type validation
+$('#fileInput').change(function(e) {
+    selectedFile = e.target.files[0]
+    archivo = $('#fileInput').val()
+    let extensiones = archivo.substring(archivo.lastIndexOf('.'))
+
+    if (extensiones != '.xlsx') {
+        alertify.set('notifier', 'position', 'top-right')
+        alertify.error('Seleccione una imagen valida con formato (xlsx).')
+        $('#fileInput').val('')
+        return false
+    }
 })
 
 /* Importar pedidos */
@@ -44,6 +59,7 @@ $('#importarFile').on('click', function(e) {
                         )
                     },
                     success: function(response) {
+                        flag = 1
                         $('#uploadStatus').html(
                             '<span style="color:#28A74B;">Datos importados correctamente.<span>',
                         )
@@ -58,43 +74,27 @@ $('#importarFile').on('click', function(e) {
     }
 })
 
-// File type validation
-$('#fileInput').change(function(e) {
-    selectedFile = e.target.files[0]
-    archivo = $('#fileInput').val()
-    let extensiones = archivo.substring(archivo.lastIndexOf('.'))
 
-    if (extensiones != '.xlsx') {
-        alertify.set('notifier', 'position', 'top-right')
-        alertify.error('Seleccione una imagen valida con formato (xlsx).')
-        $('#fileInput').val('')
-        return false
-    }
-})
-
-/* $("#example").append(
-  $('<tfoot/>').append( $("#example thead tr").clone() )
-); */
 
 /* Datatable consolidado */
 
 let tableConsolidado = $('#tblExplosionMaterialesPedidos').dataTable({
-    pageLength: 50,
+    pageLength: 100,
     order: [
         [1, 'desc']
     ],
-    dom: 'Bfrtip',
+    //dom: 'Bfrtip',
     order: [
         [0, 'asc']
     ],
-    buttons: [{
+    /* buttons: [{
         extend: 'excel',
         text: 'Exportar',
         className: 'btn btn-primary',
         exportOptions: {
-            columns: [0, 1, 5, 6],
+            columns: [1, 2, 6, 7],
         },
-    }, ],
+    }, ], */
 
     ajax: {
         url: '/api/explosionMaterialesPedidos',
@@ -202,17 +202,20 @@ async function referencias() {
 $('#btnReferenciasSinFormula').click(function(e) {
     e.preventDefault()
 
-    data = sessionStorage.getItem('referencias')
+    /* data = sessionStorage.getItem('referencias')
 
-    if (data === null) {
-        referencias().then((data) => {
+    if (flag == 1)
+        data = null
+
+    if (data === null) { */
+    referencias().then((data) => {
             sessionStorage.setItem('referencias', JSON.stringify(data))
             referenciasSinFormula(data)
         })
-    } else {
-        data = JSON.parse(data)
-        referenciasSinFormula(data)
-    }
+        /* } else {
+            data = JSON.parse(data)
+            referenciasSinFormula(data)
+        } */
 })
 
 /* Cargar excel */

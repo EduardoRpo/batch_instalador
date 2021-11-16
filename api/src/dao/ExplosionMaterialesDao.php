@@ -86,14 +86,14 @@ class ExplosionMaterialesDao
   public function findRefExplosionMateriales()
   {
     /* Validar la fecha y si no es exacta eliminar los batch en explosion de materiales con estado 4 */
-    $fecha_actual = strtotime(date("d-m-Y H:i:00", time()));
+   /*  $fecha_actual = strtotime(date("d-m-Y H:i:00", time()));
     $fecha_entrada = strtotime("d-m-Y 21:00:00");
 
     if ($fecha_actual < $fecha_entrada) {
       
       echo "La fecha comparada es igual o menor";
     }
-
+ */
 
     /* Consultar datos procesados */
     $explosionMateriales = [];
@@ -133,7 +133,7 @@ class ExplosionMaterialesDao
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $referencias = $stmt->fetchAll($connection::FETCH_ASSOC);
-    $this->logger->notice("referencias Obtenidos", array('referecnias' => $referencias));
+    $this->logger->notice("referencias Obtenidos", array('referencias' => $referencias));
     return $referencias;
   }
 }

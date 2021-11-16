@@ -3,7 +3,12 @@
 if (!empty($_POST)) {
 	require_once '../../../../conexion.php';
 	$pedidos = $_POST['data'];
-	/* $referenciaSinFormula = []; */
+
+	/* Eliminar las referencias sin formula */
+	$query = "DELETE FROM explosion_materiales_referencias";
+	$query = $conn->prepare($query);
+	$query->execute();
+
 	$c = 0;
 	foreach ($pedidos as $pedido) {
 		$c = $c + 1;
