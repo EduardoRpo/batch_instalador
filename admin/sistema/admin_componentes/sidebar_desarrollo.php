@@ -10,6 +10,7 @@
                 <li id="formulas"><a href=""><i class="fa fa-chevron-down"></i><span>Formulas</span></a></li>
                 <ul class="menu_formulas">
                     <li><a href="newformulas.php" id="link_bases"><i class="fa fa-list-alt"></i><span>Crear </span></a></li>
+                    <li><a href="formulas_desarrollo.php" id="link_formulas"><i class="fas fa-vote-yea"></i><span>Modificar Formulas</span></a></li>
                 </ul>
 
                 <li id="instructivos"><a href=""><i class="fa fa-chevron-down"></i><span>Instructivos</span></a></li>
@@ -17,8 +18,6 @@
                     <li><a href="bases.php" id="link_bases" class="link_bases"><i class="fa fa-list-alt"></i><span>Crear Bases </span></a></li>
                     <li><a href="instructivo.php" id="link_preparaciones"><i class="fa fa-bars"></i><span>Crear Instructivos </span></a></li>
                 </ul>
-
-
             </ul>
         </div>
     </div>

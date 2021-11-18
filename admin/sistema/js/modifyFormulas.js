@@ -1,21 +1,24 @@
-let tabla
-let editar
-let tbl
+let materialSelect
 
-/* Mostrar Menu seleccionado */
+$('#instructivosBase').click(function(e) {
+    e.preventDefault()
+    $(location).prop('href', 'bases.php')
+})
+
+$('#instructivosPersonalizados').click(function(e) {
+    e.preventDefault()
+    $(location).prop('href', 'instructivo.php')
+})
 
 $('.contenedor-menu .menu a').removeAttr('style')
 $('#link_formulas').css('background', 'coral')
-$('.contenedor-menu .menu ul.menu_productos').show()
-
 $('.contenedor-menu .menu ul.menu_formulas').show()
+
 
 $('#instructivos').click(function(e) {
     e.preventDefault();
-    $(".contenedor-menu .menu ul.menu_instructivos").toogle();
-
+    $(".contenedor-menu .menu ul.menu_instructivos").toggle();
 });
-
 
 /* Cargue select referencias */
 
@@ -88,7 +91,6 @@ const materiaPrima = (tb) => {
 const cargarSelect = (data, select) => {
     select.empty()
     select.append(`<option disabled selected>Seleccione</option>`)
-    select.append(`<option value='1'>Todos</option>`)
     $.each(data, function(i, value) {
         select.append(
             `<option value ="${value.referencia}">${value.referencia}</option>`,
@@ -207,17 +209,18 @@ function guardarFormulaMateriaPrima() {
                 alertify.success('Almacenada con éxito.')
             } else if (r == 3) {
                 alertify.set('notifier', 'position', 'top-right')
-                alertify.success('Registro actualizado.')
+                alertify.success('Formula actualizada correctamente.')
                 refreshTable()
             } else {
                 alertify.set('notifier', 'position', 'top-right')
                 alertify.error('Error.')
             }
 
-            $('#cmbreferencia').val('')
+            $('#textReferencia').val('')
             $('#txtMateria-Prima').val('')
             $('#alias').val('')
             $('#porcentaje').val('')
+            $('#addFormulas').toggle(500);
             refreshTable()
         },
     })
@@ -229,6 +232,7 @@ $(document).on('click', '.link-editar', function(e) {
     e.preventDefault()
 
     editar = 1
+    $('#addFormulas').toggle(500);
     let id = $(this).parent().parent().children().first().text()
     let mp = $(this).parent().parent().children().eq(1).text()
     let alias = $(this).parent().parent().children().eq(2).text()
@@ -254,6 +258,7 @@ $(document).on('click', '.link-borrar', function(e) {
     e.preventDefault()
 
     let ref_materiaprima = $(this).parent().parent().children().first().text()
+    let name_materiaprima = $(this).parent().parent().children().eq(1).text()
     let ref_producto = $('#cmbReferenciaProductos').val()
 
     if ($(this).hasClass('tr')) tbl = 'r'
@@ -262,7 +267,7 @@ $(document).on('click', '.link-borrar', function(e) {
     var confirm = alertify
         .confirm(
             'Samara Cosmetics',
-            '¿Está seguro de eliminar este registro?',
+            `¿Está seguro de eliminar la materia prima: <b>${name_materiaprima}</b>?`,
             null,
             null,
         )
@@ -274,7 +279,7 @@ $(document).on('click', '.link-borrar', function(e) {
                 function(data, textStatus, jqXHR) {
                     refreshTable()
                     alertify.set('notifier', 'position', 'top-right')
-                    alertify.success('Eliminado')
+                    alertify.success('Materia Prima eliminada correctamente')
                 },
             )
         }
