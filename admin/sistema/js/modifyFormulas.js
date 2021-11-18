@@ -145,7 +145,7 @@ $('#cmbReferenciaProductos').change(function(e) {
         $('#allformulas').hide()
         cargarTablaFormulas(seleccion)
     }
-    if (seleccion != 1) cargar_formulas_f(seleccion)
+    //if (seleccion != 1) cargar_formulas_f(seleccion)
 })
 
 /* Cargar Materia prima a guardar con la seleccion de la referencia */
@@ -301,55 +301,6 @@ $(document).on('click', '.link-borrar', function(e) {
     })
 })
 
-/* Carga tabla de formulas para todos los productos */
-
-function cargarTablaTodasFormulas(referencia) {
-    tabla = $('#tblFormulastodas').DataTable({
-        destroy: true,
-        scrollY: '50vh',
-        scrollCollapse: true,
-        paging: false,
-        oLanguage: { sProcessing: "<div id='loader'></div>" },
-        dom: 'Bfrtip',
-        order: [
-            [0, 'asc']
-        ],
-        buttons: [{
-            extend: 'excel',
-            className: 'btn btn-primary',
-            exportOptions: {
-                columns: [0, 1, 5],
-            },
-        }, ],
-        language: { url: 'admin_componentes/es-ar.json' },
-
-        ajax: {
-            method: 'POST',
-            url: 'php/c_formulas.php',
-            data: { operacion: '3', referencia },
-            dataSrc: '',
-        },
-
-        columns: [
-            { title: 'Producto', data: 'id_producto' },
-            { title: 'Referencia MP', data: 'referencia' },
-            { title: 'Materia prima', data: 'nombre' },
-            { title: 'Alias', data: 'alias' },
-            {
-                title: '%',
-                data: 'porcentaje',
-                className: 'centrado',
-                render: $.fn.dataTable.render.number(',', '.', 3, '', '%'),
-            },
-            {
-                title: 'Acciones',
-                defaultContent: "<a href='#' <i class='large material-icons link-editar tr' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar tr' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>",
-            },
-        ],
-        columnDefs: [{ width: '10%', targets: 0 }],
-    })
-}
-
 /* Cargue de Parametros de Control en DataTable */
 
 function cargarTablaFormulas(referencia) {
@@ -358,16 +309,6 @@ function cargarTablaFormulas(referencia) {
         scrollY: '50vh',
         scrollCollapse: true,
         paging: false,
-        /* dom: 'Bfrtip',
-        buttons: [
-          {
-            extend: 'excel',
-            className: 'btn btn-primary',
-            exportOptions: {
-              columns: [0, 3],
-            },
-          },
-        ], */
         language: { url: 'admin_componentes/es-ar.json' },
 
         ajax: {
@@ -392,62 +333,40 @@ function cargarTablaFormulas(referencia) {
                 defaultContent: "<a href='#' <i class='large material-icons link-editar tr' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar tr' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>",
             },
         ],
-        columnDefs: [{ width: '10%', targets: 0 }],
+        //columnDefs: [{ width: '10%', targets: 0 }],
 
-        footerCallback: function(row, data, start, end, display) {
-            total = this.api()
+        "footerCallback": function(row, data, start, end, display) {
+            /* total = this.api()
                 .column(3)
                 .data()
                 .reduce(function(a, b) {
                     return parseFloat(a) + parseFloat(b)
-                }, 0)
-            total = total.toFixed(2)
-            $('#totalPorcentajeFormulas').val(`Total ${total}%`)
-        },
-    })
-}
+                }, 0) */
 
-/* Cargue de Parametros de Control en DataTable */
+            var api = this.api(),
+                data;
 
-function cargar_formulas_f(referencia) {
-    tabla = $('#tbl_formulas_f').DataTable({
-        destroy: true,
-        scrollY: '50vh',
-        scrollCollapse: true,
-        paging: false,
-        language: { url: 'admin_componentes/es-ar.json' },
+            // converting to interger to find total
+            var intVal = function(i) {
+                return typeof i === 'string' ?
+                    i.replace(/[\$,]/g, '') * 1 :
+                    typeof i === 'number' ?
+                    i : 0;
+            };
 
-        ajax: {
-            method: 'POST',
-            url: 'php/c_formulas.php',
-            data: { operacion: '9', referencia },
-            dataSrc: '',
-        },
-
-        columns: [
-            { data: 'referencia' },
-            { data: 'nombre' },
-            { data: 'alias' },
-            {
-                data: 'porcentaje',
-                className: 'centrado',
-                render: $.fn.dataTable.render.number(',', '.', 3, '', '%'),
-            },
-            {
-                defaultContent: "<a href='#' <i class='large material-icons link-editar tf' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a><a href='#' <i class='large material-icons link-borrar tf' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>",
-            },
-        ],
-        columnDefs: [{ width: '10%', targets: 0 }],
-
-        footerCallback: function(row, data, start, end, display) {
-            total = this.api()
+            // computing column Total of the complete result 
+            var total = api
                 .column(3)
                 .data()
                 .reduce(function(a, b) {
-                    return parseFloat(a) + parseFloat(b)
-                }, 0)
-            total = total.toFixed(2)
-            $('#totalPorcentajeFormulasInvima').val(`Total ${total}%`)
+                    return intVal(a) + intVal(b);
+                }, 0);
+
+
+            $(api.column(2).footer()).html('Total');
+            $(api.column(3).footer()).html(`${total.toLocaleString("de-DE", { minimumFractionDigits: 2, 'maximumFractionDigits': 2 })}%`);
+            /* total = total.toFixed(2)
+            $('#totalPorcentajeFormulas').val(`Total ${total}%`) */
         },
     })
 }
@@ -457,6 +376,4 @@ function cargar_formulas_f(referencia) {
 function refreshTable() {
     $('#tblFormulas').DataTable().clear()
     $('#tblFormulas').DataTable().ajax.reload()
-    $('#tbl_formulas_f').DataTable().clear()
-    $('#tbl_formulas_f').DataTable().ajax.reload()
 }

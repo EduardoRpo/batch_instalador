@@ -89,16 +89,22 @@
                   <table id="tblFormulas" class="table-striped row-borde" style="width:100%">
                     <label for="">Formulas</label>
                     <thead>
-
-                      </tr>
+                     
                     </thead>
                     <tbody>
 
                     </tbody>
+                    <tfoot>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                    </tfoot>
                   </table>
-                  <div style="display: flex;justify-content: flex-end;">
+                  <!-- <div style="display: flex;justify-content: flex-end;">
                     <input type="text" id="totalPorcentajeFormulas" style="border: none;margin-right:100px;text-align:center" disabled>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
