@@ -62,18 +62,20 @@
                   <input type="text" class="form-control ml-3" id="txtnombreProducto">
                 </div>
                 <hr>
-                <div id="addFormulas" style="display: none;">
-                  <form id="frmadFormulas">
-                    <label><b>Referencia</b></label>
-                    <label>Materia Prima</label>
-                    <label>%</label>
-                    <input type="text" id="textReferencia" class="form-control">
-                    <select name="" id="cmbreferencia" class="form-control"></select>
-                    <input type="text" name="txtMateria-Prima" id="txtMateria-Prima" class="form-control" placeholder="Materia Prima">
-                    <input type="number" name="porcentaje" id="porcentaje" class="form-control" placeholder="%" style="text-align: center;">
-                  </form>
-                  <button type="button" class="btn btn-primary" id="guardarFormula" onclick="guardarFormulaMateriaPrima();">Actualizar</button>
-                </div>
+                <button type="button" class="btn btn-primary" id="adicionarFormula">Adicionar</button>
+
+                <form id="frmadFormulas" style="display: none;">
+                  <label for=""><b>Referencia</b></label>
+                  <label for="">Materia Prima</label>
+                  <label for="">Alias</label>
+                  <label for="">%</label>
+                  <input type="text" id="textReferencia" class="form-control">
+                  <select name="" id="cmbreferencia" class="form-control"></select>
+                  <input type="text" name="txtMateria-Prima" id="txtMateria-Prima" class="form-control" placeholder="Materia Prima">
+                  <input type="text" name="alias" id="alias" class="form-control" placeholder="alias">
+                  <input type="number" name="porcentaje" id="porcentaje" class="form-control" placeholder="%" style="text-align: center;">
+                  <button type="button" class="btn btn-primary" id="guardarFormula" onclick="guardarFormulaMateriaPrima();">Guardar</button>
+                </form>
               </div>
             </div>
           </div>
@@ -85,7 +87,14 @@
               <div class="card-body">
                 <div class="table-responsive">
                   <table id="tblFormulas" class="table-striped row-borde" style="width:100%">
+                    <label for="">Formulas</label>
+                    <thead>
 
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
                   </table>
                   <div style="display: flex;justify-content: flex-end;">
                     <input type="text" id="totalPorcentajeFormulas" style="border: none;margin-right:100px;text-align:center" disabled>

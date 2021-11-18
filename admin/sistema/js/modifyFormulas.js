@@ -1,4 +1,5 @@
 let materialSelect
+let tbl = 'r'
 
 $('#instructivosBase').click(function(e) {
     e.preventDefault()
@@ -19,6 +20,21 @@ $('#instructivos').click(function(e) {
     e.preventDefault();
     $(".contenedor-menu .menu ul.menu_instructivos").toggle();
 });
+
+/* Mostrar Menu seleccionado */
+
+$('.contenedor-menu .menu a').removeAttr('style')
+$('#link_formulas').css('background', 'coral')
+$('.contenedor-menu .menu ul.menu_productos').show()
+
+$('.contenedor-menu .menu ul.menu_formulas').show()
+
+$('#instructivos').click(function(e) {
+    e.preventDefault();
+    $(".contenedor-menu .menu ul.menu_instructivos").toogle();
+
+});
+
 
 /* Cargue select referencias */
 
@@ -51,7 +67,9 @@ $('#adicionarFormula').click(function(e) {
     $('#alias').attr('disabled', true)
 })
 
-$('#formula_r').change(function(e) {
+/* Cargar Materia Prima */
+
+/* $('#formula_r').change(function(e) {
     e.preventDefault()
     $('#cardformula_f').hide()
     $('#cardformula_r').show()
@@ -65,15 +83,15 @@ $('#formula_f').change(function(e) {
     $('#cardformula_f').show()
     tbl = 'f'
     materiaPrima('f')
-})
+}) */
 
-/* Cargar Materia Prima */
 
-const materiaPrima = (tb) => {
-    $.ajax({
+
+/* const materiaPrima = (r) => { */
+$.ajax({
         method: 'POST',
         url: 'php/c_formulas.php',
-        data: { operacion: '4', tb: tb },
+        data: { operacion: '4', tb: 'r' },
 
         success: function(response) {
             var info = JSON.parse(response)
@@ -84,7 +102,7 @@ const materiaPrima = (tb) => {
             console.log(response)
         },
     })
-}
+    /* } */
 
 /* cargar Selects */
 
@@ -138,7 +156,7 @@ $('#cmbreferencia').change(function(e) {
     $.ajax({
         type: 'POST',
         url: 'php/c_formulas.php',
-        data: { operacion: '5', referencia, tbl },
+        data: { operacion: '5', referencia, tbl: 'r' },
 
         success: function(response) {
             var info = JSON.parse(response)
@@ -206,7 +224,7 @@ function guardarFormulaMateriaPrima() {
         success: function(r) {
             if (r == 1) {
                 alertify.set('notifier', 'position', 'top-right')
-                alertify.success('Almacenada con éxito.')
+                alertify.success('Formula Almacenada correctamente.')
             } else if (r == 3) {
                 alertify.set('notifier', 'position', 'top-right')
                 alertify.success('Formula actualizada correctamente.')
@@ -215,12 +233,11 @@ function guardarFormulaMateriaPrima() {
                 alertify.set('notifier', 'position', 'top-right')
                 alertify.error('Error.')
             }
-
-            $('#textReferencia').val('')
+            $('#frmadFormulas').toggle();
+            $('#cmbreferencia').val('')
             $('#txtMateria-Prima').val('')
             $('#alias').val('')
             $('#porcentaje').val('')
-            $('#addFormulas').toggle(500);
             refreshTable()
         },
     })
@@ -232,7 +249,6 @@ $(document).on('click', '.link-editar', function(e) {
     e.preventDefault()
 
     editar = 1
-    $('#addFormulas').toggle(500);
     let id = $(this).parent().parent().children().first().text()
     let mp = $(this).parent().parent().children().eq(1).text()
     let alias = $(this).parent().parent().children().eq(2).text()
@@ -258,7 +274,6 @@ $(document).on('click', '.link-borrar', function(e) {
     e.preventDefault()
 
     let ref_materiaprima = $(this).parent().parent().children().first().text()
-    let name_materiaprima = $(this).parent().parent().children().eq(1).text()
     let ref_producto = $('#cmbReferenciaProductos').val()
 
     if ($(this).hasClass('tr')) tbl = 'r'
@@ -267,7 +282,7 @@ $(document).on('click', '.link-borrar', function(e) {
     var confirm = alertify
         .confirm(
             'Samara Cosmetics',
-            `¿Está seguro de eliminar la materia prima: <b>${name_materiaprima}</b>?`,
+            '¿Está seguro de eliminar este registro?',
             null,
             null,
         )
@@ -279,7 +294,7 @@ $(document).on('click', '.link-borrar', function(e) {
                 function(data, textStatus, jqXHR) {
                     refreshTable()
                     alertify.set('notifier', 'position', 'top-right')
-                    alertify.success('Materia Prima eliminada correctamente')
+                    alertify.success('Eliminado')
                 },
             )
         }
