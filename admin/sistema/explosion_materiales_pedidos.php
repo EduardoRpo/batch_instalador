@@ -65,7 +65,16 @@
                 <div>
                   <div class="table-responsive">
                     <table id="tblExplosionMaterialesPedidos" class="table-striped row-borde" style="width:100%">
-                      
+                      <thead></thead>
+                      <tbody></tbody>
+                      <tfoot>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                      </tfoot>
                     </table>
                   </div>
                 </div>

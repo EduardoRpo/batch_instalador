@@ -54,12 +54,15 @@
                 <div>
                   <div class="table-responsive">
                     <table id="tblExplosionMaterialesBatch" class="table-striped row-borde" style="width:100%">
-                      <thead>
-
-                      </thead>
-                      <tbody>
-
-                      </tbody>
+                      <thead></thead>
+                      <tbody></tbody>
+                      <tfoot>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                      </tfoot>
                     </table>
                   </div>
                 </div>
@@ -86,7 +89,7 @@
   <script src="../assets/js/plugins/bootstrap-notify.js"></script>
   <!-- <script src="../assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script> -->
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-  <script src="js/explosion.js"></script>
+  <!-- <script src="js/explosion.js"></script> -->
   <script src="js/menu.js"></script>
   <script src="js/explosionMateriales/explosion_materiales.js"></script>
   <script src="js/explosionMateriales/referenciasSinFormula.js"></script>
