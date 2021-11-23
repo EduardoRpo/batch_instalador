@@ -52,7 +52,7 @@ if (!empty($_POST)) {
 
             $batch = $_POST['idBatch'];
 
-            $sql = "SELECT d.nombre as desinfectante, d.concentracion, bds.modulo, bds.realizo, u.urlfirma as realizo, CONCAt(u.nombre, ' ', u.apellido) as nombre_realizo, us.urlfirma as verifico, CONCAt(us.nombre, ' ' ,us.apellido) as nombre_verifico, bds.verifico as firma ,bds.fecha_registro 
+            $sql = "SELECT d.nombre as desinfectante, d.concentracion, bds.modulo, bds.realizo, u.urlfirma as realizo, CONCAt(u.nombre, ' ', u.apellido) as nombre_realizo, us.urlfirma as verifico, CONCAt(us.nombre, ' ' ,us.apellido) as nombre_verifico, bds.verifico as firma, bds.fecha_registro, bds.fecha_nuevo_registro 
                 FROM desinfectante d INNER JOIN batch_desinfectante_seleccionado bds ON bds.desinfectante = d.id 
                 INNER JOIN	usuario u ON u.id = bds.realizo
                 INNER JOIN	usuario us ON us.id = bds.verifico
@@ -60,7 +60,7 @@ if (!empty($_POST)) {
         
                 UNION
 
-                SELECT d.nombre as desinfectante, d.concentracion, bds.modulo, bds.realizo, u.urlfirma as realizo, CONCAt(u.nombre, ' ', u.apellido) as nombre_realizo, bds.verifico, bds.verifico as nombre_verifico, bds.verifico as firma, bds.fecha_registro 
+                SELECT d.nombre as desinfectante, d.concentracion, bds.modulo, bds.realizo, u.urlfirma as realizo, CONCAt(u.nombre, ' ', u.apellido) as nombre_realizo, bds.verifico, bds.verifico as nombre_verifico, bds.verifico as firma, bds.fecha_registro, bds.fecha_nuevo_registro 
                 FROM desinfectante d INNER JOIN batch_desinfectante_seleccionado bds ON bds.desinfectante = d.id 
                 INNER JOIN	usuario u ON u.id = bds.realizo
                 WHERE bds.batch = :batch1 AND verifico = 0
@@ -213,7 +213,7 @@ if (!empty($_POST)) {
             $batch = $_POST['idBatch'];
 
             $sql = "SELECT b.aprobacion, b.observaciones, CONCAT(u.nombre, ' ', u.apellido) as dirProd, u.urlfirma as produccion, 
-                    CONCAT(us.nombre, ' ', us.apellido) as dirCa, us.urlfirma as calidad, CONCAT(usu.nombre, ' ', usu.apellido) as dirTec, usu.urlfirma as tecnica,  fecha_registro 
+                    CONCAT(us.nombre, ' ', us.apellido) as dirCa, us.urlfirma as calidad, CONCAT(usu.nombre, ' ', usu.apellido) as dirTec, usu.urlfirma as tecnica, fecha_registro, fecha_nuevo_registro 
                     FROM batch_liberacion b 
                     LEFT JOIN usuario u ON b.dir_produccion=u.id 
                     LEFT JOIN usuario us ON b.dir_calidad = us.id 

@@ -251,7 +251,7 @@ desinfectante = () => {
                 $(`.concentracion${info[i].modulo}`).html(
                     info[i].concentracion * 100 + "%"
                 );
-                $(`#fecha${info[i].modulo}`).html(info[i].fecha_registro);
+                $(`#fecha${info[i].modulo}`).html(info[i].fecha_nuevo_registro);
             }
 
             let fecha = $("#fecha2").html();
@@ -308,7 +308,7 @@ const firmas_multi = (info) => {
         for (let i = 0; i < multi.length; i++)
             for (let j = 0; j < info.length; j++)
                 if (multi[i]["referencia"] == info[j]["ref_multi"]) {
-                    $(`#multi_fecha${i + 1}`).html(info[j]["fecha_registro"]);
+                    $(`#multi_fecha${i + 1}`).html(info[j]["fecha_nuevo_registro"]);
                     $(`#multi_f_realizo${i + 1}`).prop("src", info[j].realizo);
                     $(`#multi_user_realizo${i + 1}`).html(
                         `Realizó: <b>${info[j].nombre_realizo}</b>`
@@ -901,7 +901,7 @@ const despachos = () => {
         success: function(response) {
             info = JSON.parse(response);
             if (info.length > 0) {
-                $("#fecha7").html(info[0].fecha_registro);
+                $("#fecha7").html(info[0].fecha_nuevo_registro);
                 for (let i = 0; i < info.length; i++) {
                     $(`#user_entrego`).html(
                         `Realizó: <b>${info[i].nombre} ${info[i].apellido}</b>`
@@ -1018,7 +1018,7 @@ const liberacion_lote = () => {
             let tecnica = info["dirTec"];
 
             $(".fechaHoraLiberacion").html(
-                `fecha y Hora: <b>${info["fecha_registro"]}</b>`
+                `fecha y Hora: <b>${info["fecha_nuevo_registro"]}</b>`
             );
 
             info["aprobacion"] == 0 ?
