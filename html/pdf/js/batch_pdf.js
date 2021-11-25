@@ -34,6 +34,7 @@ $(document).on("click", ".link-cerrar", function(e) {
 
 /* Mostrar multipresentacion */
 $(`#infoMulti`).hide();
+$("#watermark").hide();
 $("#multi-envasado2").hide();
 $("#multi-envasado3").hide();
 $("#multi-envasado4").hide();
@@ -45,6 +46,7 @@ $("#multi-acondicionamiento4").hide();
 $("#multi-despachos2").hide();
 $("#multi-despachos3").hide();
 $("#multi-despachos4").hide();
+
 
 /* Cargar data */
 
@@ -145,6 +147,9 @@ function info_General(data) {
     presentacion = info.presentacion;
     densidad = info.densidad;
     tamanioLote = info.tamano_lote;
+
+    if (info.estado == 0)
+        $('#watermark').show();
 
     $(".ref").html(info.referencia);
     $("#nref").html(`<b>${info.nombre_referencia}</b>`);
@@ -248,10 +253,15 @@ desinfectante = () => {
                 $(`#blank_ver${info[i].modulo}`).hide();
 
                 $(`.desinfectante${info[i].modulo}`).html(info[i].desinfectante);
-                $(`.concentracion${info[i].modulo}`).html(
-                    info[i].concentracion * 100 + "%"
-                );
+                $(`.concentracion${info[i].modulo}`).html(info[i].concentracion * 100 + "%");
                 $(`#fecha${info[i].modulo}`).html(info[i].fecha_nuevo_registro);
+
+                if (info[i].modulo == 6)
+                    $("#fsiembra").val(info[i].fecha_nuevo_registro).css("text-align", "center");
+                if (info[i].modulo == 8)
+                    $("#fresultados").val(info[i].fecha_nuevo_registro).css("text-align", "center");
+
+                $(`.fecha_medio${info[i].modulo}`).html(info[i].fecha_nuevo_registro);
             }
 
             let fecha = $("#fecha2").html();
@@ -343,7 +353,7 @@ function condiciones_medio() {
             let info = JSON.parse(data);
 
             for (let i = 0; i < info.length; i++) {
-                $(`.fecha_medio${info[i].modulo}`).html(info[i].fecha);
+                /* $(`.fecha_medio${info[i].modulo}`).html(info[i].fecha); */
                 $(`.temperatura${info[i].modulo}`).html(info[i].temperatura + " °C");
                 $(`.humedad${info[i].modulo}`).html(info[i].humedad + " %");
             }
@@ -971,10 +981,11 @@ analisisMicrobiologico = () => {
             $("#pseudomona").html(result1);
             $("#escherichia").html(result2);
             $("#staphylococcus").html(result3);
-            $("#fsiembra").val(data[0].fecha_siembra).css("text-align", "center");
-            $("#fresultados")
+
+            /* $("#fsiembra").val(data[0].fecha_siembra).css("text-align", "center"); */
+            /* $("#fresultados")
                 .val(data[0].fecha_resultados)
-                .css("text-align", "center");
+                .css("text-align", "center"); */
 
             if (data[0].realizo) {
                 $(`#f_realizoMicro`).prop("src", data[0].realizo);

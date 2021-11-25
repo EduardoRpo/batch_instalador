@@ -28,7 +28,7 @@
         <a href='#'> <i class='fa fa-times-circle fa-2x link-cerrar flotante position' data-toggle='tooltip' title='Cerrar ventana' style='color:red;'></i></a>
     </div>
 
-
+    
     <div class="card">
         <div class="card-header centrado"><b>1. INFORMACIÓN DEL PRODUCTO</b></div>
         <div class="card-body">
@@ -40,6 +40,11 @@
                 <label>Notificación Sanitaria:</label><label id="notificacion"></label>
                 <label>Presentación Comercial:</label><label id="presentacion"></label>
             </div>
+            
+            <div id="watermark" style="text-align: center;">
+                <p>Eliminado.</p>
+            </div>
+            
             <hr style="width: 95%;">
             <div class="group-info-batch p-3">
 

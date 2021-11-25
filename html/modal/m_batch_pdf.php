@@ -16,6 +16,7 @@
               <label for="" class="ml-3">Buscar</label>
               <input type="text" class="form-control" id="search" style="width: 30%;" data-toggle="popover" data-placement="top" data-content="Puede buscar por Batch Record o Lote">
               <button class="btn btn-primary" id="buscar_batch">Buscar</button>
+              <label class="ml-3" id="titleBatchEliminado" style="color:red">Batch Eliminado</label>
             </div>
           </div>
         </div>
