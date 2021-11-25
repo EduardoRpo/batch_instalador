@@ -702,6 +702,7 @@ material_envase_sobrante = () => {
                             $(`#sobrante_otros${i + 1}`).html(info[j].sobrante);
                         }
                     }
+                    utilizada = info[0].envasada;
                 }
             } else {
                 for (let i = 0; i < info.length; i++) {
