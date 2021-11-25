@@ -560,6 +560,8 @@ function entrega_material_envase(multi) {
                 $(`.etiqueta1`).html(info[0].id_etiqueta);
                 $(`.descripcion_etiqueta1`).html(info[0].etiqueta);
                 $(`.unidades1`).html(cantidad_lote);
+                conciliacionLote = (((cantidad_lote * presentacion * densidad) / tamanioLote) / 1000) * 100
+                $(`.conciliacionLote`).html(`<b>${conciliacionLote.toFixed(2)}%</b>`)
             }
         });
     }

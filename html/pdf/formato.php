@@ -28,7 +28,7 @@
         <a href='#'> <i class='fa fa-times-circle fa-2x link-cerrar flotante position' data-toggle='tooltip' title='Cerrar ventana' style='color:red;'></i></a>
     </div>
 
-    
+
     <div class="card">
         <div class="card-header centrado"><b>1. INFORMACIÓN DEL PRODUCTO</b></div>
         <div class="card-body">
@@ -40,11 +40,11 @@
                 <label>Notificación Sanitaria:</label><label id="notificacion"></label>
                 <label>Presentación Comercial:</label><label id="presentacion"></label>
             </div>
-            
+
             <div id="watermark" style="text-align: center;">
                 <p>Eliminado.</p>
             </div>
-            
+
             <hr style="width: 95%;">
             <div class="group-info-batch p-3">
 
@@ -56,11 +56,19 @@
                 <label>Unidades por Lote solicitadas:</label><label id="unidadesLote"></label>
             </div>
             <hr style="width: 95%;">
+            <div class="ml-3">
+                <label for="">Conciliacion de Lote</label>
+                <div class="p-3" id="InfoMultipresentacion">
+                    <label class="conciliacionLote"></label>
+                </div>
+            </div>
+            <hr style="width: 95%;">
             <div class="ml-3" id="infoMulti">
                 <label for=""><b>Multipresentación</b></label>
                 <div class="group-info-batch-multi p-3" id="InfoMultipresentacion"></div>
             </div>
 
+            <hr style="width: 95%;">
             <div class="group-info-batch p-3">
                 <label for="">Autorizado por:</label>
                 <label id="autorizado"> <b>Camilo Restrepo</b> </label>
