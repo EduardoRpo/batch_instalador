@@ -561,7 +561,7 @@ function entrega_material_envase(multi) {
                 $(`.etiqueta1`).html(info[0].id_etiqueta);
                 $(`.descripcion_etiqueta1`).html(info[0].etiqueta);
                 $(`.unidades1`).html(cantidad_lote);
-                conciliacionLote = (((cantidad_lote * presentacion * densidad) / tamanioLote) / 1000) * 100
+                conciliacionLote = (((utilizada * presentacion * densidad) / tamanioLote) / 1000) * 100
                 $(`.conciliacionLote`).html(`<b>${conciliacionLote.toFixed(2)}%</b>`)
             }
         });
@@ -876,8 +876,9 @@ conciliacion = (multi) => {
             }
 
             for (let j = 0; j < multi.length; j++) {
-                let rendimiento = (presentacion * utilizada * densidad) / 1000;
-                rendimiento = ((rendimiento / tamanioLote) * 100).toFixed(2) + "%";
+                /* let rendimiento = (presentacion * utilizada * densidad) / 1000;
+                rendimiento = ((rendimiento / tamanioLote) * 100).toFixed(2) + "%"; */
+                let rendimiento = ((utilizada / cantidad_lote) * 100).toFixed(2) + "%"
                 $(`#conciliacionRendimiento${j + 1}`).val(rendimiento);
 
                 for (let i = 0; i < info.length; i++) {

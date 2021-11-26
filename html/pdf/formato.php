@@ -62,8 +62,8 @@
                     <label class="conciliacionLote"></label>
                 </div>
             </div>
-            <hr style="width: 95%;">
             <div class="ml-3" id="infoMulti">
+                <hr style="width: 95%;">
                 <label for=""><b>Multipresentación</b></label>
                 <div class="group-info-batch-multi p-3" id="InfoMultipresentacion"></div>
             </div>
@@ -178,7 +178,7 @@
                 <table class="table table-striped table-bordered">
                     <thead class="head">
                         <tr>
-                            <th rowspan="2" class="centrado" style="vertical-align: middle;">Fecha y Hora</th>
+                            <th rowspan="2" class="centrado" style="vertical-align: middle;">Fecha</th>
                             <th colspan="2" class="centrado">Temperatura</th>
                             <th colspan="2" class="centrado">Humedad</th>
                         </tr>
@@ -223,7 +223,7 @@
             </div>
 
             <div class="firmas" id="firmas2">
-                <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
+                <label class="mr-3" style="justify-self: end;">Fecha</label>
                 <label id="fecha2" style="font-weight:bold; justify-self: baseline"></label>
 
                 <div id="blank_rea2"></div>
@@ -355,7 +355,7 @@
                         </table>
 
                         <div class="firmas" id="firmas2">
-                            <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
+                            <label class="mr-3" style="justify-self: end;">Fecha</label>
                             <label id="fecha2" class="fecha2" style="font-weight:bold; justify-self: baseline"></label>
                             <label id="user_realizo2">Realizado por:</label>
                             <label id="user_verifico2">Verificado por:</label>
@@ -369,7 +369,7 @@
                         <table class="table table-striped table-bordered">
                             <thead class="head">
                                 <tr>
-                                    <th rowspan="2" class="centrado" style="vertical-align: middle;">Fecha y Hora</th>
+                                    <th rowspan="2" class="centrado" style="vertical-align: middle;">Fecha</th>
                                     <th colspan="2" class="centrado">Temperatura</th>
                                     <th colspan="2" class="centrado">Humedad</th>
                                 </tr>
@@ -511,7 +511,7 @@
                     </div>
                 </div>
                 <div class="firmas" id="firmas3">
-                    <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
+                    <label class="mr-3" style="justify-self: end;">Fecha</label>
                     <label id="fecha3" style="font-weight:bold; justify-self: baseline"></label>
 
                     <div id="blank_rea3"></div>
@@ -570,7 +570,7 @@
                         <table class="table table-striped table-bordered">
                             <thead class="head">
                                 <tr>
-                                    <th rowspan="2" class="centrado" style="vertical-align: middle;">Fecha y Hora</th>
+                                    <th rowspan="2" class="centrado" style="vertical-align: middle;">Fecha</th>
                                     <th colspan="2" class="centrado">Temperatura</th>
                                     <th colspan="2" class="centrado">Humedad</th>
                                 </tr>
@@ -690,7 +690,7 @@
                     </div>
                     <div class="subtitle"><label for="">Cierre</label></div>
                     <div class="firmas" id="firmas4">
-                        <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
+                        <label class="mr-3" style="justify-self: end;">Fecha</label>
                         <label id="fecha4" style="font-weight:bold; justify-self: baseline"></label>
 
                         <div id="blank_rea4"></div>
@@ -812,7 +812,7 @@
                             <table class="table table-striped table-bordered">
                                 <thead class="head">
                                     <tr>
-                                        <th rowspan="2" class="centrado" style="vertical-align: middle;">Fecha y Hora</th>
+                                        <th rowspan="2" class="centrado" style="vertical-align: middle;">Fecha</th>
                                         <th colspan="2" class="centrado">Temperatura</th>
                                         <th colspan="2" class="centrado">Humedad</th>
                                     </tr>
@@ -903,7 +903,7 @@
                         </div>
                         <div class="subtitle"><label for="">Cierre</label></div>
                         <div class="firmas" id="firmas5">
-                            <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
+                            <label class="mr-3" style="justify-self: end;">Fecha</label>
                             <label id="fecha5" style="font-weight:bold; justify-self: baseline"></label>
 
                             <div id="blank_rea5"></div>
@@ -960,7 +960,7 @@
                             <table class="table table-striped table-bordered">
                                 <thead class="head">
                                     <tr>
-                                        <th rowspan="2" class="centrado" style="vertical-align: middle;">Fecha y Hora</th>
+                                        <th rowspan="2" class="centrado" style="vertical-align: middle;">Fecha</th>
                                         <th colspan="2" class="centrado">Temperatura</th>
                                         <th colspan="2" class="centrado">Humedad</th>
                                     </tr>
@@ -1051,7 +1051,7 @@
                         </div>
                         <div class="subtitle"><label for="">Cierre</label></div>
                         <div class="firmas" id="firmas2">
-                            <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
+                            <label class="mr-3" style="justify-self: end;">Fecha</label>
                             <label id="multi_fecha2" style="font-weight:bold; justify-self: baseline"></label>
 
                             <div id="multi_blank_realizo2"></div>
@@ -1108,7 +1108,7 @@
                             <table class="table table-striped table-bordered">
                                 <thead class="head">
                                     <tr>
-                                        <th rowspan="2" class="centrado" style="vertical-align: middle;">Fecha y Hora</th>
+                                        <th rowspan="2" class="centrado" style="vertical-align: middle;">Fecha</th>
                                         <th colspan="2" class="centrado">Temperatura</th>
                                         <th colspan="2" class="centrado">Humedad</th>
                                     </tr>
@@ -1199,7 +1199,7 @@
                         </div>
                         <div class="subtitle"><label for="">Cierre</label></div>
                         <div class="firmas" id="firmas3">
-                            <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
+                            <label class="mr-3" style="justify-self: end;">Fecha</label>
                             <label id="multi_fecha3" style="font-weight:bold; justify-self: baseline"></label>
 
                             <div id="multi_blank_realizo3"></div>
@@ -1256,7 +1256,7 @@
                             <table class="table table-striped table-bordered">
                                 <thead class="head">
                                     <tr>
-                                        <th rowspan="2" class="centrado" style="vertical-align: middle;">Fecha y Hora</th>
+                                        <th rowspan="2" class="centrado" style="vertical-align: middle;">Fecha</th>
                                         <th colspan="2" class="centrado">Temperatura</th>
                                         <th colspan="2" class="centrado">Humedad</th>
                                     </tr>
@@ -1347,7 +1347,7 @@
                         </div>
                         <div class="subtitle"><label for="">Cierre</label></div>
                         <div class="firmas" id="firmas3">
-                            <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
+                            <label class="mr-3" style="justify-self: end;">Fecha</label>
                             <label id="multi_fecha4" style="font-weight:bold; justify-self: baseline"></label>
 
                             <div id="multi_blank_realizo4"></div>
@@ -1439,7 +1439,7 @@
                         <table class="table table-striped table-bordered">
                             <thead class="head">
                                 <tr>
-                                    <th rowspan="2" class="centrado" style="vertical-align: middle;">Fecha y Hora</th>
+                                    <th rowspan="2" class="centrado" style="vertical-align: middle;">Fecha</th>
                                     <th colspan="2" class="centrado">Temperatura</th>
                                     <th colspan="2" class="centrado">Humedad</th>
                                 </tr>
@@ -1476,7 +1476,7 @@
                     </div>
 
                     <div class="enlinea mt-3">
-                        <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
+                        <label class="mr-3" style="justify-self: end;">Fecha</label>
                         <label id="fecha6" style="font-weight:bold; justify-self: baseline">22/05/2020</label>
                     </div>
 
@@ -1582,7 +1582,7 @@
                         </div>
 
                         <div class="enlinea mt-3">
-                            <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
+                            <label class="mr-3" style="justify-self: end;">Fecha</label>
                             <label id="fecha6" style="font-weight:bold; justify-self: baseline"></label>
                         </div>
 
@@ -1685,7 +1685,7 @@
                         </div>
 
                         <div class="enlinea mt-3">
-                            <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
+                            <label class="mr-3" style="justify-self: end;">Fecha</label>
                             <label id="fecha6" style="font-weight:bold; justify-self: baseline"></label>
                         </div>
 
@@ -1788,7 +1788,7 @@
                         </div>
 
                         <div class="enlinea mt-3">
-                            <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
+                            <label class="mr-3" style="justify-self: end;">Fecha</label>
                             <label id="fecha6" style="font-weight:bold; justify-self: baseline"></label>
                         </div>
 
@@ -1891,7 +1891,7 @@
                         </div>
 
                         <div class="enlinea mt-3">
-                            <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
+                            <label class="mr-3" style="justify-self: end;">Fecha</label>
                             <label id="fecha6" style="font-weight:bold; justify-self: baseline"></label>
                         </div>
 
@@ -1919,7 +1919,7 @@
                     </div>
 
                     <div class="enlinea">
-                        <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
+                        <label class="mr-3" style="justify-self: end;">Fecha</label>
                         <label id="fecha7" style="font-weight:bold; justify-self: baseline"></label>
                     </div>
 
@@ -1984,7 +1984,7 @@
                 <table class="table table-striped table-bordered">
                     <thead class="head">
                         <tr>
-                            <th rowspan="2" class="centrado" style="vertical-align: middle;">Fecha y Hora</th>
+                            <th rowspan="2" class="centrado" style="vertical-align: middle;">Fecha</th>
                             <th colspan="2" class="centrado">Temperatura</th>
                             <th colspan="2" class="centrado">Humedad</th>
                         </tr>
@@ -2064,7 +2064,7 @@
             </div>
 
             <div class="enlinea">
-                <label class="mr-3" style="justify-self: end;">Fecha y hora</label>
+                <label class="mr-3" style="justify-self: end;">Fecha</label>
                 <label id="fecha8" style="font-weight:bold; justify-self: baseline">22/05/2020</label>
             </div>
 
@@ -2120,7 +2120,7 @@
                 <table class="table table-striped table-bordered">
                     <thead class="head">
                         <tr>
-                            <th rowspan="2" class="centrado" style="vertical-align: middle;">Fecha y Hora</th>
+                            <th rowspan="2" class="centrado" style="vertical-align: middle;">Fecha</th>
                             <th colspan="2" class="centrado">Temperatura</th>
                             <th colspan="2" class="centrado">Humedad</th>
                         </tr>
@@ -2234,7 +2234,7 @@
             </div>
 
             <div class="enlinea">
-                <label class="mr-3 fechaHora" style="justify-self: end;">Fecha y hora</label>
+                <label class="mr-3 fechaHora" style="justify-self: end;">Fecha</label>
                 <label id="fecha9" style="font-weight:bold; justify-self: baseline"></label>
             </div>
 
@@ -2268,7 +2268,7 @@
                 </div>
 
                 <div class="enlinea">
-                    <label class="mr-3 fechaHoraLiberacion" style="justify-self: end;">Fecha y hora</label>
+                    <label class="mr-3 fechaHoraLiberacion" style="justify-self: end;">Fecha</label>
                     <label id="fecha10" style="font-weight:bold; justify-self: baseline"></label>
                 </div>
 

@@ -22,6 +22,8 @@ if (!empty($_POST)) {
 
             foreach ($datos as $valor) {
                 foreach ($valor as $i => $incidencia) {
+                    $batch =  $incidencia['batch'];
+                    $modulo =  $incidencia['modulo'];
 
                     $sql = "INSERT INTO batch_incidencias (incidencia, motivo, modulo, batch) 
                             VALUES (:incidencia, :motivo, :modulo, :batch)";
@@ -34,6 +36,15 @@ if (!empty($_POST)) {
                     ]);
                 }
             }
+
+            $sql = "INSERT INTO batch_incidencias_observaciones (observacion, batch, modulo) 
+                            VALUES (:observacion, :batch, :modulo)";
+            $query = $conn->prepare($sql);
+            $result = $query->execute([
+                'observacion' => $observaciones,
+                'batch' => $batch,
+                'modulo' => $modulo,
+            ]);
 
             if (!$result)
                 exit();
