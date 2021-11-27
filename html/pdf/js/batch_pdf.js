@@ -724,7 +724,8 @@ material_envase_sobrante = () => {
                             $(`#averias_otros${i + 1}`).html(info[j].averias);
                             $(`#sobrante_otros${i + 1}`).html(info[j].sobrante);
 
-                            utilizada = utilizada + info[j].envasada;
+                            if (info[j].modulo == 5)
+                                utilizada = utilizada + info[j].envasada;
                         }
                     }
                 }
@@ -1097,12 +1098,13 @@ $(document).ready(function() {
         if (multi.length != 0) {
             cargarMultipresentacion(multi);
             informacion_producto().then(() => { entrega_material_envase(multi) });
-            material_envase_sobrante(multi).then(() => { conciliacion(multi) });
+            //material_envase_sobrante(multi).then(() => { conciliacion(multi) });
+            material_envase_sobrante(multi)
             identificarDensidad(multi);
             muestras_envasado(multi);
             informacion_producto().then(() => { entrega_material_acondicionamiento(multi) });
             muestras_acondicionamiento(multi);
-            //conciliacion(multi);
+            conciliacion(multi);
         } else {
             informacion_producto().then(() => { entrega_material_envase() });
             material_envase_sobrante();
