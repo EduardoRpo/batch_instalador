@@ -222,6 +222,10 @@
                 </div>
             </div>
 
+            <div class="subtitle"><label for="">Observaciones</label></div>
+            <div id="obs2" class="ml-5 mt-3 mb-3"></div>
+            <div class="subtitle"><label for=""></label></div>
+
             <div class="firmas" id="firmas2">
                 <label class="mr-3" style="justify-self: end;">Fecha</label>
                 <label id="fecha2" style="font-weight:bold; justify-self: baseline"></label>
@@ -510,6 +514,11 @@
                         </ul>
                     </div>
                 </div>
+
+                <div class="subtitle"><label for="">Observaciones</label></div>
+                <div id="obs3" class="ml-5 mt-3 mb-3"></div>
+                <div class="subtitle"><label for=""></label></div>
+
                 <div class="firmas" id="firmas3">
                     <label class="mr-3" style="justify-self: end;">Fecha</label>
                     <label id="fecha3" style="font-weight:bold; justify-self: baseline"></label>
@@ -671,7 +680,6 @@
                         </div>
                     </div>
 
-
                     <div class="subtitle"><label for="">Ajustes</label></div>
                     <div class="ajustes">
                         <div class="resp">
@@ -688,6 +696,10 @@
                         </div>
 
                     </div>
+
+                    <div class="subtitle"><label for="">Observaciones</label></div>
+                    <div id="obs4" class="ml-5 mt-3 mb-3"></div>
+                    
                     <div class="subtitle"><label for="">Cierre</label></div>
                     <div class="firmas" id="firmas4">
                         <label class="mr-3" style="justify-self: end;">Fecha</label>
@@ -901,6 +913,10 @@
                                 </tbody>
                             </table>
                         </div>
+
+                        <div class="subtitle"><label for="">Observaciones</label></div>
+                        <div id="obsEnvasMulti1" class="ml-5 mt-3 mb-3"></div>
+
                         <div class="subtitle"><label for="">Cierre</label></div>
                         <div class="firmas" id="firmas5">
                             <label class="mr-3" style="justify-self: end;">Fecha</label>
@@ -1049,6 +1065,10 @@
                                 </tbody>
                             </table>
                         </div>
+
+                        <div class="subtitle"><label for="">Observaciones</label></div>
+                        <div id="obsEnvasMulti2" class="ml-5 mt-3 mb-3"></div>
+
                         <div class="subtitle"><label for="">Cierre</label></div>
                         <div class="firmas" id="firmas2">
                             <label class="mr-3" style="justify-self: end;">Fecha</label>
@@ -1197,6 +1217,10 @@
                                 </tbody>
                             </table>
                         </div>
+
+                        <div class="subtitle"><label for="">Observaciones</label></div>
+                        <div id="obsEnvasMulti1" class="ml-5 mt-3 mb-3"></div>
+                        
                         <div class="subtitle"><label for="">Cierre</label></div>
                         <div class="firmas" id="firmas3">
                             <label class="mr-3" style="justify-self: end;">Fecha</label>
@@ -1345,7 +1369,13 @@
                                 </tbody>
                             </table>
                         </div>
+
+                        <div class="subtitle"><label for="">Observaciones</label></div>
+                        <div id="obsEnvasMulti1" class="ml-5 mt-3 mb-3"></div>
+                        <div class="subtitle"><label for=""></label></div>
+
                         <div class="subtitle"><label for="">Cierre</label></div>
+
                         <div class="firmas" id="firmas3">
                             <label class="mr-3" style="justify-self: end;">Fecha</label>
                             <label id="multi_fecha4" style="font-weight:bold; justify-self: baseline"></label>
@@ -1918,6 +1948,10 @@
                         <label for="">Recibió:</label><label for=""><b>AUX ALMACEN PRODUCTO TERMINADO</b></label>
                     </div>
 
+                    <div class="subtitle"><label for="">Observaciones</label></div>
+                    <div id="obs7" class="ml-5 mt-3 mb-3"></div>
+                    <div class="subtitle"><label for=""></label></div>
+
                     <div class="enlinea">
                         <label class="mr-3" style="justify-self: end;">Fecha</label>
                         <label id="fecha7" style="font-weight:bold; justify-self: baseline"></label>
@@ -2067,6 +2101,10 @@
                 <label class="mr-3" style="justify-self: end;">Fecha</label>
                 <label id="fecha8" style="font-weight:bold; justify-self: baseline">22/05/2020</label>
             </div>
+
+            <div class="subtitle"><label for="">Observaciones</label></div>
+            <div id="obs8" class="ml-5 mt-3 mb-3"></div>
+            <div class="subtitle"><label for=""></label></div>
 
             <div class="firmas" id="firmas5">
                 <div id="blank_rea8"></div>
@@ -2238,6 +2276,10 @@
                 <label id="fecha9" style="font-weight:bold; justify-self: baseline"></label>
             </div>
 
+            <div class="subtitle"><label for="">Observaciones</label></div>
+            <div id="obs9" class="ml-5 mt-3 mb-3"></div>
+            <div class="subtitle"><label for=""></label></div>
+
             <div class="firmas" id="firmas5">
                 <div id="blank_rea9"></div>
                 <img id="f_realizo9" src="" alt="firma_usuario" height="130">
@@ -2271,6 +2313,10 @@
                     <label class="mr-3 fechaHoraLiberacion" style="justify-self: end;">Fecha</label>
                     <label id="fecha10" style="font-weight:bold; justify-self: baseline"></label>
                 </div>
+
+                <div class="subtitle"><label for="">Observaciones</label></div>
+                <div id="obs10" class="ml-5 mt-3 mb-3"></div>
+                <div class="subtitle"><label for=""></label></div>
 
                 <div class="coln3 mt-5" id="firmas5">
                     <div id="blank_prod"></div>

@@ -75,6 +75,27 @@ cargar_Alertas = () => {
     );
 };
 
+/* Cargar observaciones */
+
+const cargarObservaciones = () => {
+    $.post("../../html/php/servicios/observaciones/batch_obs_pdf.php", { batch: idBatch },
+        function(data, textStatus, jqXHR) {
+            data = JSON.parse(data)
+            for (let i = 0; i < data.length; i++) {
+                let ref = data[i].ref_multi
+                if (ref === undefined || ref == 0)
+                    $(`#obs${data[i].modulo}`).append(`${data[i].observaciones}`);
+                else
+                    $(`#obs${data[i].modulo}`).append(`Referencia: ${data[i].ref_multi} Observación: ${data[i].observaciones}`);
+            }
+
+
+        },
+    );
+}
+
+
+
 /* Multipresentacion */
 
 async function multipresentacion() {
@@ -884,9 +905,8 @@ conciliacion = (multi) => {
                 for (let i = 0; i < info.length; i++) {
                     if (info[i].modulo == 6) {
                         $(`#f_realizoConciliacion${j + 1}`).prop("src", info[i].urlfirma);
-                        $(`#user_realizoConciliacion${j + 1}`).html(
-                            `Realizó: <b>${info[i].nombre}</b>`
-                        );
+                        $(`#user_realizoConciliacion${j + 1}`).html(`Realizó: <b>${info[i].nombre}</b>`);
+                        $(`#fecha${info[i].modulo}`).html(info[i].fecha_nuevo_registro);
                     }
                 }
             }
@@ -1088,6 +1108,7 @@ $(document).ready(function() {
             muestras_envasado();
             muestras_acondicionamiento();
             conciliacion();
+            cargarObservaciones()
         }
     });
 
@@ -1105,6 +1126,7 @@ $(document).ready(function() {
         analisisMicrobiologico()
         liberacion_lote()
         ImprimirEtiquetasInvima()
+
     });
 
 });
