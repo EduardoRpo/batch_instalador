@@ -699,7 +699,7 @@
 
                     <div class="subtitle"><label for="">Observaciones</label></div>
                     <div id="obs4" class="ml-5 mt-3 mb-3"></div>
-                    
+
                     <div class="subtitle"><label for="">Cierre</label></div>
                     <div class="firmas" id="firmas4">
                         <label class="mr-3" style="justify-self: end;">Fecha</label>
@@ -1220,7 +1220,7 @@
 
                         <div class="subtitle"><label for="">Observaciones</label></div>
                         <div id="obsEnvasMulti1" class="ml-5 mt-3 mb-3"></div>
-                        
+
                         <div class="subtitle"><label for="">Cierre</label></div>
                         <div class="firmas" id="firmas3">
                             <label class="mr-3" style="justify-self: end;">Fecha</label>
@@ -2313,10 +2313,6 @@
                     <label class="mr-3 fechaHoraLiberacion" style="justify-self: end;">Fecha</label>
                     <label id="fecha10" style="font-weight:bold; justify-self: baseline"></label>
                 </div>
-
-                <div class="subtitle"><label for="">Observaciones</label></div>
-                <div id="obs10" class="ml-5 mt-3 mb-3"></div>
-                <div class="subtitle"><label for=""></label></div>
 
                 <div class="coln3 mt-5" id="firmas5">
                     <div id="blank_prod"></div>
