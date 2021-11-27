@@ -58,7 +58,7 @@
             <hr style="width: 95%;">
             <div class="ml-3">
                 <label for="">Conciliacion de Lote</label>
-                <div class="p-3" id="InfoMultipresentacion">
+                <div class="p-3">
                     <label class="conciliacionLote"></label>
                 </div>
             </div>

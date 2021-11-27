@@ -6,7 +6,7 @@ let densidad;
 let tamanioLote;
 let infoBatch;
 let multi;
-let utilizada;
+let utilizada = 0;
 
 /* obtener batch y referencia seleccionada */
 $(document).ready(function() {
@@ -564,6 +564,8 @@ function entrega_material_envase(multi) {
                     $(`.etiqueta${i + 1}`).html(info[0].id_etiqueta);
                     $(`.descripcion_etiqueta${i + 1}`).html(info[0].etiqueta);
                     $(`.unidades${i + 1}`).html(multi[i].cantidad);
+                    conciliacionLote = (((utilizada * presentacion * densidad) / tamanioLote) / 1000) * 100
+                    $(`.conciliacionLote`).html(`<b>${conciliacionLote.toFixed(2)}%</b>`)
                 }
             });
         }
@@ -721,9 +723,10 @@ material_envase_sobrante = () => {
                             $(`#utilizada_otros${i + 1}`).html(info[j].envasada);
                             $(`#averias_otros${i + 1}`).html(info[j].averias);
                             $(`#sobrante_otros${i + 1}`).html(info[j].sobrante);
+
+                            utilizada = utilizada + info[j].envasada;
                         }
                     }
-                    utilizada = info[0].envasada;
                 }
             } else {
                 for (let i = 0; i < info.length; i++) {
