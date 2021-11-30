@@ -1039,7 +1039,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td id="envaseSobrante2" class="envase1 refEmpaque2"></td>
+                                        <td id="envaseSobrante2" class="envase2 refEmpaque2"></td>
                                         <td id="descripcion_envase2" class="descripcion_envase2"></td>
                                         <td id="unidades2" class="centrado unidades2"></td>
                                         <td id="usadaEnvase2" class="centrado txtEnvasada1"></td>
@@ -1055,7 +1055,7 @@
                                         <td id="sobranteTapa2" class="centrado"></td>
                                     </tr>
                                     <tr>
-                                        <td id="etiquetaSobrante2" class="etiqueta1 refEmpaque2"></td>
+                                        <td id="etiquetaSobrante2" class="etiqueta2 refEmpaque2"></td>
                                         <td id="descripcion_etiqueta2" class="descripcion_etiqueta2"></td>
                                         <td id="unidades2" class="centrado unidades2"></td>
                                         <td id="usadaEtiqueta2" class="centrado envasada2"></td>
@@ -1526,7 +1526,6 @@
                             <table class="table table-bordered table-striped">
                                 <thead class="head centrado">
                                     <tr>
-                                        <td class="centrado">Fecha</td>
                                         <td class="centrado">Referencia</td>
                                         <td class="centrado">Descripción</td>
                                         <td class="centrado">Cantidad</td>
@@ -1534,13 +1533,11 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td id="fecha1" class="centrado fecha1"></td>
                                         <td id="empaque1" class="centrado empaque1"></td>
                                         <td id="descripcion_empaque1" class="descripcion_empaque1"></td>
                                         <td id="unidades1e" class="centrado unidades1"></td>
                                     </tr>
                                     <tr>
-                                        <td id="fecha1" class="centrado fecha1"></td>
                                         <td id="otros1" class="centrado otros1"></td>
                                         <td id="descripcion_otros1" class="descripcion_otros1"></td>
                                         <td id="unidades4" class="centrado unidades1"></td>
@@ -1629,7 +1626,6 @@
                             <table class="table table-bordered table-striped">
                                 <thead class="head centrado">
                                     <tr>
-                                        <td class="centrado">Fecha</td>
                                         <td class="centrado">Referencia</td>
                                         <td class="centrado">Descripción</td>
                                         <td class="centrado">Cantidad</td>
@@ -1637,13 +1633,11 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td id="fecha2" class="centrado fecha2"></td>
                                         <td id="empaque2" class="centrado empaque2"></td>
                                         <td id="descripcion_empaque2" class="descripcion_empaque2"></td>
                                         <td id="unidades2e" class="centrado unidades2"></td>
                                     </tr>
                                     <tr>
-                                        <td id="fecha2" class="centrado fecha2"></td>
                                         <td id="otros2" class="centrado otros2"></td>
                                         <td id="descripcion_otros2" class="descripcion_otros2"></td>
                                         <td id="unidades2" class="centrado unidades2"></td>
@@ -1740,13 +1734,13 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td id="fecha3" class="centrado fecha3"></td>
+
                                         <td id="empaque3" class="centrado empaque3"></td>
                                         <td id="descripcion_empaque3" class="descripcion_empaque3"></td>
                                         <td id="unidades3e" class="centrado unidades3"></td>
                                     </tr>
                                     <tr>
-                                        <td id="fecha3" class="centrado fecha3"></td>
+
                                         <td id="otros3" class="centrado otros3"></td>
                                         <td id="descripcion_otros3" class="descripcion_otros3"></td>
                                         <td id="unidades3" class="centrado unidades3"></td>
@@ -1843,13 +1837,11 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td id="fecha4" class="centrado fecha4"></td>
                                         <td id="empaque4" class="centrado empaque4"></td>
                                         <td id="descripcion_empaque4" class="descripcion_empaque4"></td>
                                         <td id="unidades4" class="centrado unidades4"></td>
                                     </tr>
                                     <tr>
-                                        <td id="fecha4" class="centrado fecha4"></td>
                                         <td id="otros4" class="centrado otros4"></td>
                                         <td id="descripcion_otros4" class="descripcion_otros4"></td>
                                         <td id="unidades4" class="centrado unidades4"></td>
