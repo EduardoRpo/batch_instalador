@@ -566,6 +566,7 @@ function entrega_material_envase(multi) {
                     $(`.unidades${i + 1}`).html(multi[i].cantidad);
                     conciliacionLote = (((utilizada * presentacion * densidad) / tamanioLote) / 1000) * 100
                     $(`.conciliacionLote`).html(`<b>${conciliacionLote.toFixed(2)}%</b>`)
+                    material_envase_sobrante();
                 }
             });
         }
@@ -586,6 +587,7 @@ function entrega_material_envase(multi) {
                 $(`.unidades1`).html(cantidad_lote);
                 conciliacionLote = (((utilizada * presentacion * densidad) / tamanioLote) / 1000) * 100
                 $(`.conciliacionLote`).html(`<b>${conciliacionLote.toFixed(2)}%</b>`)
+                material_envase_sobrante();
             }
         });
     }
@@ -702,27 +704,58 @@ material_envase_sobrante = () => {
 
             if (multi.length != "0") {
                 for (let i = 0; i < multi.length; i++) {
+                    envase = $(`#envaseSobrante${i + 1}`).html();
+                    tapa = $(`#tapaSobrante${i + 1}`).html();
+                    etiqueta = $(`#etiquetaSobrante${i + 1}`).html();
+
                     for (let j = 0; j < info.length; j++) {
                         if (multi[i].referencia == info[j]["ref_producto"]) {
-                            $(`#usadaEnvase${i + 1}`).html(info[j].envasada);
-                            $(`#averiasEnvase${i + 1}`).html(info[j].averias);
-                            $(`#sobranteEnvase${i + 1}`).html(info[j].sobrante);
+                            if (info[j]["modulo"] == 5) {
+                                if (envase == info[j]["ref_material"]) {
+                                    if (info[j]["ref_material"] == 50000) {
+                                        $(`#usadaEnvase${i + 1}`).html('0');
+                                        $(`#averiasEnvase${i + 1}`).html('0');
+                                        $(`#sobranteEnvase${i + 1}`).html('0');
+                                    } else {
+                                        $(`#usadaEnvase${i + 1}`).html(info[j].envasada);
+                                        $(`#averiasEnvase${i + 1}`).html(info[j].averias);
+                                        $(`#sobranteEnvase${i + 1}`).html(info[j].sobrante);
+                                    }
+                                }
+                                if (tapa == info[j]["ref_material"]) {
+                                    if (info[j]["ref_material"] == 50000) {
+                                        $(`#usadaTapa${i + 1}`).html('0');
+                                        $(`#averiasTapa${i + 1}`).html('0');
+                                        $(`#sobranteTapa${i + 1}`).html('0');
+                                    } else {
+                                        $(`#usadaTapa${i + 1}`).html(info[j + 1].envasada);
+                                        $(`#averiasTapa${i + 1}`).html(info[j + 1].averias);
+                                        $(`#sobranteTapa${i + 1}`).html(info[j + 1].sobrante);
+                                    }
+                                }
+                                if (etiqueta == info[j]["ref_material"]) {
+                                    if (info[j]["ref_material"] == 50000) {
+                                        $(`#usadaEtiqueta${i + 1}`).html('0');
+                                        $(`#averiasEtiqueta${i + 1}`).html('0');
+                                        $(`#sobranteEtiqueta${i + 1}`).html('0');
+                                    } else {
+                                        $(`#usadaEtiqueta${i + 1}`).html(info[j + 2].envasada);
+                                        $(`#averiasEtiqueta${i + 1}`).html(info[j + 2].averias);
+                                        $(`#sobranteEtiqueta${i + 1}`).html(info[j + 2].sobrante);
 
-                            $(`#usadaTapa${i + 1}`).html(info[j].envasada);
-                            $(`#averiasTapa${i + 1}`).html(info[j].averias);
-                            $(`#sobranteTapa${i + 1}`).html(info[j].sobrante);
+                                    }
+                                }
+                            } else if (info[j]["modulo"] == 6) {
 
-                            $(`#usadaEtiqueta${i + 1}`).html(info[j].envasada);
-                            $(`#averiasEtiqueta${i + 1}`).html(info[j].averias);
-                            $(`#sobranteEtiqueta${i + 1}`).html(info[j].sobrante);
+                                $(`#utilizada_empaque${i + 1}`).html(info[j].envasada);
+                                $(`#averias_empaque${i + 1}`).html(info[j].averias);
+                                $(`#sobrante_empaque${i + 1}`).html(info[j].sobrante);
 
-                            $(`#utilizada_empaque${i + 1}`).html(info[j].envasada);
-                            $(`#averias_empaque${i + 1}`).html(info[j].averias);
-                            $(`#sobrante_empaque${i + 1}`).html(info[j].sobrante);
+                                $(`#utilizada_otros${i + 1}`).html(info[j].envasada);
+                                $(`#averias_otros${i + 1}`).html(info[j].averias);
+                                $(`#sobrante_otros${i + 1}`).html(info[j].sobrante);
 
-                            $(`#utilizada_otros${i + 1}`).html(info[j].envasada);
-                            $(`#averias_otros${i + 1}`).html(info[j].averias);
-                            $(`#sobrante_otros${i + 1}`).html(info[j].sobrante);
+                            }
 
                             if (info[j].modulo == 5)
                                 utilizada = utilizada + info[j].envasada;
@@ -744,7 +777,8 @@ material_envase_sobrante = () => {
                         $(`#usadaEtiqueta1`).html(info[i].envasada);
                         $(`#averiasEtiqueta1`).html(info[i].averias);
                         $(`#sobranteEtiqueta1`).html(info[i].sobrante);
-
+                    }
+                    if (info[i].modulo == 6) {
                         $(`#utilizada_empaque1`).html(info[i].envasada);
                         $(`#averias_empaque1`).html(info[i].averias);
                         $(`#sobrante_empaque1`).html(info[i].sobrante);
@@ -1099,7 +1133,7 @@ $(document).ready(function() {
             cargarMultipresentacion(multi);
             informacion_producto().then(() => { entrega_material_envase(multi) });
             //material_envase_sobrante(multi).then(() => { conciliacion(multi) });
-            material_envase_sobrante(multi)
+            //material_envase_sobrante(multi)
             identificarDensidad(multi);
             muestras_envasado(multi);
             informacion_producto().then(() => { entrega_material_acondicionamiento(multi) });
@@ -1107,7 +1141,7 @@ $(document).ready(function() {
             conciliacion(multi);
         } else {
             informacion_producto().then(() => { entrega_material_envase() });
-            material_envase_sobrante();
+            //material_envase_sobrante();
             identificarDensidad();
             informacion_producto().then(() => { entrega_material_acondicionamiento() });
             muestras_envasado();
