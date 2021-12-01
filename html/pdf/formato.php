@@ -795,17 +795,17 @@
                                     <tr>
                                         <td class="envase1 centrado"></td>
                                         <td class="descripcion_envase1 centrado"></td>
-                                        <td class="unidades1 centrado"></td>
+                                        <td class="unidadesEnvase1 centrado"></td>
                                     </tr>
                                     <tr>
                                         <td class="tapa1 centrado"></td>
                                         <td class="descripcion_tapa1 centrado"></td>
-                                        <td class="unidades1 centrado"></td>
+                                        <td class="unidadesTapa1 centrado"></td>
                                     </tr>
                                     <tr>
                                         <td class="etiqueta1 centrado"></td>
                                         <td class="descripcion_etiqueta1 centrado"></td>
-                                        <td class="unidades1 centrado"></td>
+                                        <td class="unidadesEtiqueta1 centrado"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -889,7 +889,7 @@
                                     <tr>
                                         <td id="envaseSobrante1" class="envase1 refEmpaque1 text-center"></td>
                                         <td id="descripcion_envase1" class="descripcion_envase1"></td>
-                                        <td id="unidades1" class="centrado unidades1"></td>
+                                        <td id="unidadesEnvase1" class="centrado unidadesEnvase1"></td>
                                         <td id="usadaEnvase1" class="centrado txtEnvasada1"></td>
                                         <td id="averiasEnvase1" class="centrado"></td>
                                         <td id="sobranteEnvase1" class="centrado"></td>
@@ -897,7 +897,7 @@
                                     <tr>
                                         <td id="tapaSobrante1" class="tapa1 refEmpaque1 text-center"></td>
                                         <td id="descripcion_tapa1" class="descripcion_tapa1"></td>
-                                        <td id="unidades1" class="centrado unidades1"></td>
+                                        <td id="unidadesTapa1" class="centrado unidadesTapa1"></td>
                                         <td id="usadaTapa1" class="centrado envasada1"></td>
                                         <td id="averiasTapa1" class="centrado"></td>
                                         <td id="sobranteTapa1" class="centrado"></td>
@@ -905,7 +905,7 @@
                                     <tr>
                                         <td id="etiquetaSobrante1" class="etiqueta1 refEmpaque1 text-center"></td>
                                         <td id="descripcion_etiqueta1" class="descripcion_etiqueta1"></td>
-                                        <td id="unidades1" class="centrado unidades1"></td>
+                                        <td id="unidadesEtiqueta1" class="centrado unidadesEtiqueta1"></td>
                                         <td id="usadaEtiqueta1" class="centrado envasada1"></td>
                                         <td id="averiasEtiqueta1" class="centrado"></td>
                                         <td id="sobranteEtiqueta1" class="centrado"></td>
@@ -1041,7 +1041,7 @@
                                     <tr>
                                         <td id="envaseSobrante2" class="envase2 refEmpaque2"></td>
                                         <td id="descripcion_envase2" class="descripcion_envase2"></td>
-                                        <td id="unidades2" class="centrado unidades2"></td>
+                                        <td id="unidadesEnvase2" class="centrado unidadesEnvase2"></td>
                                         <td id="usadaEnvase2" class="centrado txtEnvasada1"></td>
                                         <td id="averiasEnvase2" class="centrado"></td>
                                         <td id="sobranteEnvase2" class="centrado"></td>
@@ -1049,7 +1049,7 @@
                                     <tr>
                                         <td id="tapaSobrante2" class="tapa2 refEmpaque2"></td>
                                         <td id="descripcion_tapa2" class="descripcion_tapa2"></td>
-                                        <td id="unidades2" class="centrado unidades2"></td>
+                                        <td id="unidadesTapa2" class="centrado unidadesTapa2"></td>
                                         <td id="usadaTapa2" class="centrado envasada2"></td>
                                         <td id="averiasTapa2" class="centrado"></td>
                                         <td id="sobranteTapa2" class="centrado"></td>
@@ -1057,7 +1057,7 @@
                                     <tr>
                                         <td id="etiquetaSobrante2" class="etiqueta2 refEmpaque2"></td>
                                         <td id="descripcion_etiqueta2" class="descripcion_etiqueta2"></td>
-                                        <td id="unidades2" class="centrado unidades2"></td>
+                                        <td id="unidadesEtiqueta2" class="centrado unidadesEtiqueta2"></td>
                                         <td id="usadaEtiqueta2" class="centrado envasada2"></td>
                                         <td id="averiasEtiqueta2" class="centrado"></td>
                                         <td id="sobranteEtiqueta2" class="centrado"></td>
@@ -1193,7 +1193,7 @@
                                     <tr>
                                         <td id="envaseSobrante3" class="envase3 refEmpaque3"></td>
                                         <td id="descripcion_envase3" class="descripcion_envase3"></td>
-                                        <td id="unidades3" class="centrado unidades3"></td>
+                                        <td id="unidadesEnvase3" class="centrado unidadesEnvase3"></td>
                                         <td id="usadaEnvase3" class="centrado txtEnvasada3"></td>
                                         <td id="averiasEnvase3" class="centrado"></td>
                                         <td id="sobranteEnvase3" class="centrado"></td>
@@ -1201,7 +1201,7 @@
                                     <tr>
                                         <td id="tapaSobrante3" class="tapa1 refEmpaque3"></td>
                                         <td id="descripcion_tapa3" class="descripcion_tapa3"></td>
-                                        <td id="unidades3" class="centrado unidades3"></td>
+                                        <td id="unidadesTapa3" class="centrado unidadesTapa3"></td>
                                         <td id="usadaTapa3" class="centrado envasada3"></td>
                                         <td id="averiasTapa3" class="centrado"></td>
                                         <td id="sobranteTapa3" class="centrado"></td>
@@ -1209,7 +1209,7 @@
                                     <tr>
                                         <td id="etiquetaSobrante3" class="etiqueta1 refEmpaque3"></td>
                                         <td id="descripcion_etiqueta3" class="descripcion_etiqueta3"></td>
-                                        <td id="unidades3" class="centrado unidades3"></td>
+                                        <td id="unidadesEtiqueta3" class="centrado unidadesEtiqueta3"></td>
                                         <td id="usadaEtiqueta3" class="centrado envasada3"></td>
                                         <td id="averiasEtiqueta3" class="centrado"></td>
                                         <td id="sobranteEtiqueta3" class="centrado"></td>
@@ -1345,7 +1345,7 @@
                                     <tr>
                                         <td id="envaseSobrante4" class="envase4 refEmpaque4"></td>
                                         <td id="descripcion_envase4" class="descripcion_envase4"></td>
-                                        <td id="unidades4" class="centrado unidades4"></td>
+                                        <td id="unidadesEnvase4" class="centrado unidadesEnvase4"></td>
                                         <td id="usadaEnvase4" class="centrado txtEnvasada4"></td>
                                         <td id="averiasEnvase4" class="centrado"></td>
                                         <td id="sobranteEnvase4" class="centrado"></td>
@@ -1353,7 +1353,7 @@
                                     <tr>
                                         <td id="tapaSobrante4" class="tapa1 refEmpaque4"></td>
                                         <td id="descripcion_tapa3" class="descripcion_tapa4"></td>
-                                        <td id="unidades4" class="centrado unidades4"></td>
+                                        <td id="unidadesTapa4" class="centrado unidadesTapa4"></td>
                                         <td id="usadaTapa4" class="centrado envasada4"></td>
                                         <td id="averiasTapa4" class="centrado"></td>
                                         <td id="sobranteTapa4" class="centrado"></td>
@@ -1361,7 +1361,7 @@
                                     <tr>
                                         <td id="etiquetaSobrante4" class="etiqueta1 refEmpaque4"></td>
                                         <td id="descripcion_etiqueta4" class="descripcion_etiqueta4"></td>
-                                        <td id="unidades4" class="centrado unidades4"></td>
+                                        <td id="unidadesEtiqueta4" class="centrado unidadesEtiqueta4"></td>
                                         <td id="usadaEtiqueta4" class="centrado envasada4"></td>
                                         <td id="averiasEtiqueta4" class="centrado"></td>
                                         <td id="sobranteEtiqueta4" class="centrado"></td>
@@ -1535,12 +1535,12 @@
                                     <tr>
                                         <td id="empaque1" class="centrado empaque1"></td>
                                         <td id="descripcion_empaque1" class="descripcion_empaque1"></td>
-                                        <td id="unidades1e" class="centrado unidades1"></td>
+                                        <td id="unidades1e" class="centrado unidadesEmpaque1"></td>
                                     </tr>
                                     <tr>
                                         <td id="otros1" class="centrado otros1"></td>
                                         <td id="descripcion_otros1" class="descripcion_otros1"></td>
-                                        <td id="unidades4" class="centrado unidades1"></td>
+                                        <td id="unidades4" class="centrado unidadesOtros1"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -1635,12 +1635,12 @@
                                     <tr>
                                         <td id="empaque2" class="centrado empaque2"></td>
                                         <td id="descripcion_empaque2" class="descripcion_empaque2"></td>
-                                        <td id="unidades2e" class="centrado unidades2"></td>
+                                        <td id="unidades2e" class="centrado unidadesEmpaque2"></td>
                                     </tr>
                                     <tr>
                                         <td id="otros2" class="centrado otros2"></td>
                                         <td id="descripcion_otros2" class="descripcion_otros2"></td>
-                                        <td id="unidades2" class="centrado unidades2"></td>
+                                        <td id="unidades2" class="centrado unidadesOtros2"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -1737,13 +1737,13 @@
 
                                         <td id="empaque3" class="centrado empaque3"></td>
                                         <td id="descripcion_empaque3" class="descripcion_empaque3"></td>
-                                        <td id="unidades3e" class="centrado unidades3"></td>
+                                        <td id="unidades3e" class="centrado unidadesEmpaque3"></td>
                                     </tr>
                                     <tr>
 
                                         <td id="otros3" class="centrado otros3"></td>
                                         <td id="descripcion_otros3" class="descripcion_otros3"></td>
-                                        <td id="unidades3" class="centrado unidades3"></td>
+                                        <td id="unidades3" class="centrado unidadesOtros3"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -1839,12 +1839,12 @@
                                     <tr>
                                         <td id="empaque4" class="centrado empaque4"></td>
                                         <td id="descripcion_empaque4" class="descripcion_empaque4"></td>
-                                        <td id="unidades4" class="centrado unidades4"></td>
+                                        <td id="unidades4" class="centrado unidadesEmpaque4"></td>
                                     </tr>
                                     <tr>
                                         <td id="otros4" class="centrado otros4"></td>
                                         <td id="descripcion_otros4" class="descripcion_otros4"></td>
-                                        <td id="unidades4" class="centrado unidades4"></td>
+                                        <td id="unidades4" class="centrado unidadesOtros4"></td>
                                     </tr>
                                 </tbody>
                             </table>

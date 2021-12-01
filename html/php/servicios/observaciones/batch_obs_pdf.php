@@ -36,7 +36,7 @@ if (!empty($_POST)) {
     for ($i = 0; $i < sizeof($data); $i++)
         $array[] = $data[$i];
 
-    $sql = "SELECT modulo, batch, observacion FROM batch_incidencias_observaciones WHERE batch = :batch";
+    $sql = "SELECT modulo, batch, observaciones FROM batch_incidencias_observaciones WHERE batch = :batch";
     $query = $conn->prepare($sql);
     $query->execute(['batch' => $batch]);
     $data = $query->fetchAll(PDO::FETCH_ASSOC);
