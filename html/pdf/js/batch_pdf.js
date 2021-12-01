@@ -704,10 +704,6 @@ function entrega_material_envase(multi) {
                     else
                         $(`.unidadesOtros${i + 1}`).html(multi[i].cantidad);
 
-
-
-
-
                     conciliacionLote = (((utilizada * presentacion * densidad) / tamanioLote) / 1000) * 100
                     $(`.conciliacionLote`).html(`<b>${conciliacionLote.toFixed(2)}%</b>`)
                     material_envase_sobrante();
@@ -752,8 +748,8 @@ material_envase_sobrante = () => {
                     envase = $(`#envaseSobrante${i + 1}`).html();
                     tapa = $(`#tapaSobrante${i + 1}`).html();
                     etiqueta = $(`#etiquetaSobrante${i + 1}`).html();
-                    empaque = $(`#empaque${i + 1}`).html();
-                    //otros = $(`.otros${i + 1}`).html();
+                    empaque = $(`.empaque${i + 1}`).html();
+                    otros = $(`.otros${i + 1}`).html();
 
                     for (let j = 0; j < info.length; j++) {
                         if (multi[i].referencia == info[j]["ref_producto"]) {
@@ -793,23 +789,30 @@ material_envase_sobrante = () => {
                                     }
                                 }
                             } else if (info[j]["modulo"] == 6) {
+                                /* if (empaque == info[j]["ref_material"]) { */
                                 if (empaque == 50000) {
                                     $(`#utilizada_empaque${i + 1}`).html('0');
                                     $(`#averias_empaque${i + 1}`).html('0');
                                     $(`#sobrante_empaque${i + 1}`).html('0');
-                                    $(`#utilizada_otros${i + 1}`).html('0');
-                                    $(`#averias_otros${i + 1}`).html('0');
-                                    $(`#sobrante_otros${i + 1}`).html('0');
                                 } else {
                                     $(`#utilizada_empaque${i + 1}`).html(info[j].envasada);
                                     $(`#averias_empaque${i + 1}`).html(info[j].averias);
                                     $(`#sobrante_empaque${i + 1}`).html(info[j].sobrante);
                                     $(`#utilizada_otros${i + 1}`).html(info[j].envasada);
+                                }
+
+                                /* } */
+                                /* if (otros == info[j]["ref_material"]) { */
+                                if (otros == 50000) {
+                                    $(`#utilizada_otros${i + 1}`).html('0');
+                                    $(`#averias_otros${i + 1}`).html('0');
+                                    $(`#sobrante_otros${i + 1}`).html('0');
+                                } else {
+                                    $(`#utilizada_otros${i + 1}`).html(info[j].envasada);
                                     $(`#averias_otros${i + 1}`).html(info[j].averias);
                                     $(`#sobrante_otros${i + 1}`).html(info[j].sobrante);
                                 }
-
-
+                                /* } */
                             }
 
                             if (info[j].modulo == 5)
@@ -938,17 +941,21 @@ entrega_material_acondicionamiento = (multi) => {
                 empaqueEnvasado = Math.round(cantidad_lote / info[0].unidad_empaque);
                 unidades = cantidad_lote;
                 for (let i = 0; i < multi.length; i++) {
-
-
-
                     $(`.empaque${i + 1}`).html(info[0].id_empaque);
                     $(`.descripcion_empaque${i + 1}`).html(info[0].empaque);
 
                     $(`.otros${i + 1}`).html(info[0].id_otros);
                     $(`.descripcion_otros${i + 1}`).html(info[0].otros);
 
-                    //$(`.unidades1`).html(unidades);
-                    //$(`.unidades1e`).html(empaqueEnvasado);
+                    if ($(`.empaque${i + 1}`).html() == 50000)
+                        $(`.unidadesEmpaque${i + 1}`).html('0');
+                    else
+                        $(`.unidadesEmpaque${i + 1}`).html(multi[i].cantidad);
+
+                    if ($(`.otros${i + 1}`).html() == 50000)
+                        $(`.unidadesOtros${i + 1}`).html('0');
+                    else
+                        $(`.unidadesOtros${i + 1}`).html(multi[i].cantidad);
                 }
             });
         }

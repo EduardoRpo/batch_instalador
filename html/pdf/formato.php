@@ -1584,7 +1584,7 @@
                                     <tr>
                                         <td id="refempaque1" class="empaque1"></td>
                                         <td id="descripcion_empaque1" class="descripcion_empaque1"></td>
-                                        <td id="empaque_unidades1" class="centrado unidades1"></td>
+                                        <td id="unidadesEmpaque1" class="centrado unidadesEmpaque1"></td>
                                         <td id="utilizada_empaque1" class="centrado envasada1" style="width: 110px;"></td>
                                         <td id="averias_empaque1" class="centrado" style="width: 110px;"></td>
                                         <td id="sobrante_empaque1" class="centrado" style="width: 110px;"></td>
@@ -1593,7 +1593,7 @@
                                     <tr>
                                         <td id="refempaque2" class="otros1"></td>
                                         <td id="descripcion_otros1" class="descripcion_otros1"></td>
-                                        <td id="unidades8" class="centrado unidades1"></td>
+                                        <td id="unidadesOtros1" class="centrado unidadesOtros1"></td>
                                         <td id="utilizada_otros1" class="centrado envasada1e" style="width: 110px;"></td>
                                         <td id="averias_otros1" class="centrado" style="width: 110px;"></td>
                                         <td id="sobrante_otros1" class="centrado" style="width: 110px;"></td>
@@ -1684,7 +1684,7 @@
                                     <tr>
                                         <td id="refempaque2" class="empaque2"></td>
                                         <td id="descripcion_empaque2" class="descripcion_empaque2"></td>
-                                        <td id="unidades2" class="centrado unidades2"></td>
+                                        <td id="unidadesEmpaque2" class="centrado unidadesEmpaque2"></td>
                                         <td id="utilizada_empaque2" class="centrado envasada2" style="width: 110px;"></td>
                                         <td id="averias_empaque2" class="centrado" style="width: 110px;"></td>
                                         <td id="sobrante_empaque2" class="centrado" style="width: 110px;"></td>
@@ -1693,7 +1693,7 @@
                                     <tr>
                                         <td id="refempaque2" class="otros1"></td>
                                         <td id="descripcion_otros2" class="descripcion_otros2"></td>
-                                        <td id="unidades8" class="centrado unidades2"></td>
+                                        <td id="unidadesOtros2" class="centrado unidadesOtros2"></td>
                                         <td id="utilizada_otros2" class="centrado envasada2" style="width: 110px;"></td>
                                         <td id="averias_otros2" class="centrado" style="width: 110px;"></td>
                                         <td id="sobrante_otros2" class="centrado" style="width: 110px;"></td>
@@ -1787,7 +1787,7 @@
                                     <tr>
                                         <td id="refempaque3" class="empaque3"></td>
                                         <td id="descripcion_empaque3" class="descripcion_empaque3"></td>
-                                        <td id="unidades3" class="centrado unidades3"></td>
+                                        <td id="unidadesEmpaque3" class="centrado unidadesEmpaque3"></td>
                                         <td id="utilizada_empaque3" class="centrado envasada3" style="width: 110px;"></td>
                                         <td id="averias_empaque3" class="centrado" style="width: 110px;"></td>
                                         <td id="sobrante_empaque3" class="centrado" style="width: 110px;"></td>
@@ -1796,7 +1796,7 @@
                                     <tr>
                                         <td id="refempaque3" class="otros3"></td>
                                         <td id="descripcion_otros3" class="descripcion_otros3"></td>
-                                        <td id="unidades8" class="centrado unidades3"></td>
+                                        <td id="unidadesOtros3" class="centrado unidadesOtros3"></td>
                                         <td id="utilizada_otros3" class="centrado envasada3" style="width: 110px;"></td>
                                         <td id="averias_otros3" class="centrado" style="width: 110px;"></td>
                                         <td id="sobrante_otros3" class="centrado" style="width: 110px;"></td>
@@ -1888,7 +1888,7 @@
                                     <tr>
                                         <td id="refempaque4" class="empaque4"></td>
                                         <td id="descripcion_empaque4" class="descripcion_empaque4"></td>
-                                        <td id="unidades4" class="centrado unidades4"></td>
+                                        <td id="unidadesEmpaque4" class="centrado unidadesEmpaque4"></td>
                                         <td id="utilizada_empaque4" class="centrado envasada4e" style="width: 110px;"></td>
                                         <td id="averias_empaque4" class="centrado" style="width: 110px;"></td>
                                         <td id="sobrante_empaque4" class="centrado" style="width: 110px;"></td>
@@ -1897,7 +1897,7 @@
                                     <tr>
                                         <td id="refempaque4" class="otros4"></td>
                                         <td id="descripcion_otros4" class="descripcion_otros4"></td>
-                                        <td id="unidades4" class="centrado unidades4"></td>
+                                        <td id="unidadesOtros4" class="centrado unidadesOtros4"></td>
                                         <td id="utilizada_otros4" class="centrado envasada4e" style="width: 110px;"></td>
                                         <td id="averias_otros4" class="centrado" style="width: 110px;"></td>
                                         <td id="sobrante_otros4" class="centrado" style="width: 110px;"></td>
