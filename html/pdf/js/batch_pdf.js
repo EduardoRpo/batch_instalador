@@ -1023,6 +1023,7 @@ conciliacion = (multi) => {
                         $(`#f_realizoConciliacion${j + 1}`).prop("src", info[i].urlfirma);
                         $(`#user_realizoConciliacion${j + 1}`).html(`Realizó: <b>${info[i].nombre}</b>`);
                         $(`#fecha${info[i].modulo}`).html(info[i].fecha_nuevo_registro);
+                        $(`#fecha${info[i].modulo}Conciliacion${j+1}`).html(info[i].fecha_nuevo_registro);
                     }
                 }
             }

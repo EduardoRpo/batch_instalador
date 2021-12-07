@@ -1507,7 +1507,7 @@
 
                     <div class="enlinea mt-3">
                         <label class="mr-3" style="justify-self: end;">Fecha</label>
-                        <label id="fecha6" style="font-weight:bold; justify-self: baseline">22/05/2020</label>
+                        <label id="fecha6" style="font-weight:bold; justify-self: baseline"></label>
                     </div>
 
                     <div class="firmas" id="firmas5">
@@ -1610,7 +1610,7 @@
 
                         <div class="enlinea mt-3">
                             <label class="mr-3" style="justify-self: end;">Fecha</label>
-                            <label id="fecha6" style="font-weight:bold; justify-self: baseline"></label>
+                            <label id="fecha6Conciliacion1" style="font-weight:bold; justify-self: baseline"></label>
                         </div>
 
                         <div class="col1" id="firmas6">
@@ -1710,7 +1710,7 @@
 
                         <div class="enlinea mt-3">
                             <label class="mr-3" style="justify-self: end;">Fecha</label>
-                            <label id="fecha6" style="font-weight:bold; justify-self: baseline"></label>
+                            <label id="fecha6Conciliacion2" style="font-weight:bold; justify-self: baseline"></label>
                         </div>
 
                         <div class="col1" id="firmas6">
@@ -1813,7 +1813,7 @@
 
                         <div class="enlinea mt-3">
                             <label class="mr-3" style="justify-self: end;">Fecha</label>
-                            <label id="fecha6" style="font-weight:bold; justify-self: baseline"></label>
+                            <label id="fecha6Conciliacion3" style="font-weight:bold; justify-self: baseline"></label>
                         </div>
 
                         <div class="col1" id="firmas6">
@@ -1914,7 +1914,7 @@
 
                         <div class="enlinea mt-3">
                             <label class="mr-3" style="justify-self: end;">Fecha</label>
-                            <label id="fecha6" style="font-weight:bold; justify-self: baseline"></label>
+                            <label id="fecha6Conciliacion4" style="font-weight:bold; justify-self: baseline"></label>
                         </div>
 
                         <div class="col1" id="firmas6">

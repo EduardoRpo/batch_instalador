@@ -194,10 +194,7 @@ const ImprimirEtiquetasInvima = () => {
                     `<div class="etiquetaUnica rounded-3">
             <div class="etiquetasVirtuales">
                 <p><b>OP: </b>${infoBatch.numero_orden}</p>
-                <p id="peso"><b>PESO: </b>${(
-                  ((response[i]["porcentaje"] / 100) * tamanioLote) /
-                  cantidad
-                ).toFixed(2)}</p>
+                <p id="peso"><b>PESO: </b>${(((response[i]["porcentaje"] / 100) * tamanioLote) /cantidad).toFixed(2)}Kg</p>
                 <p><b>REFERENCIA:</b> ${response[i]["referencia"]}</p>
                 <p><b>NOMBRE MP:</b> ${response[i]["alias"]}</p>
                 <p><b>FECHA: </b> ${fecha}</p>
