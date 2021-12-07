@@ -947,17 +947,17 @@
                                     <tr>
                                         <td class="envase2 centrado"></td>
                                         <td class="descripcion_envase2 centrado"></td>
-                                        <td class="unidades2 centrado"></td>
+                                        <td class="unidadesEnvase2 centrado"></td>
                                     </tr>
                                     <tr>
                                         <td class="tapa2 centrado"></td>
                                         <td class="descripcion_tapa2 centrado"></td>
-                                        <td class="unidades2 centrado"></td>
+                                        <td class="unidadesTapa2 centrado"></td>
                                     </tr>
                                     <tr>
                                         <td class="etiqueta2 centrado"></td>
                                         <td class="descripcion_etiqueta2 centrado"></td>
-                                        <td class="unidades2 centrado"></td>
+                                        <td class="unidadesEtiqueta2 centrado"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -1099,17 +1099,17 @@
                                     <tr>
                                         <td class="envase3 centrado"></td>
                                         <td class="descripcion_envase3 centrado"></td>
-                                        <td class="unidades3 centrado"></td>
+                                        <td class="unidadesEnvase3 centrado"></td>
                                     </tr>
                                     <tr>
                                         <td class="tapa3 centrado"></td>
                                         <td class="descripcion_tapa3 centrado"></td>
-                                        <td class="unidades3 centrado"></td>
+                                        <td class="unidadesTapa3 centrado"></td>
                                     </tr>
                                     <tr>
                                         <td class="etiqueta3 centrado"></td>
                                         <td class="descripcion_etiqueta3 centrado"></td>
-                                        <td class="unidades3 centrado"></td>
+                                        <td class="unidadesEtiqueta3 centrado"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -1251,17 +1251,17 @@
                                     <tr>
                                         <td class="envase4 centrado"></td>
                                         <td class="descripcion_envase4 centrado"></td>
-                                        <td class="unidades4 centrado"></td>
+                                        <td class="unidadesEnvase4 centrado"></td>
                                     </tr>
                                     <tr>
                                         <td class="tapa4 centrado"></td>
                                         <td class="descripcion_tapa4 centrado"></td>
-                                        <td class="unidades3 centrado"></td>
+                                        <td class="unidadesTapa4 centrado"></td>
                                     </tr>
                                     <tr>
                                         <td class="etiqueta4 centrado"></td>
                                         <td class="descripcion_etiqueta4 centrado"></td>
-                                        <td class="unidades4 centrado"></td>
+                                        <td class="unidadesEtiqueta4 centrado"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -1635,12 +1635,12 @@
                                     <tr>
                                         <td id="empaque2" class="centrado empaque2"></td>
                                         <td id="descripcion_empaque2" class="descripcion_empaque2"></td>
-                                        <td id="unidades2e" class="centrado unidadesEmpaque2"></td>
+                                        <td id="unidadesEmpaque2" class="centrado unidadesEmpaque2"></td>
                                     </tr>
                                     <tr>
                                         <td id="otros2" class="centrado otros2"></td>
                                         <td id="descripcion_otros2" class="descripcion_otros2"></td>
-                                        <td id="unidades2" class="centrado unidadesOtros2"></td>
+                                        <td id="unidadesOtros2" class="centrado unidadesOtros2"></td>
                                     </tr>
                                 </tbody>
                             </table>

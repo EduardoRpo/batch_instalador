@@ -1225,7 +1225,7 @@ $(document).ready(function() {
             muestras_envasado();
             muestras_acondicionamiento();
             conciliacion();
-            cargarObservaciones()
+
         }
     });
 
@@ -1243,6 +1243,7 @@ $(document).ready(function() {
         analisisMicrobiologico()
         liberacion_lote()
         ImprimirEtiquetasInvima()
+        cargarObservaciones()
 
     });
 
