@@ -724,9 +724,11 @@ function entrega_material_envase(multi) {
                 $(`.descripcion_tapa1`).html(info[0].tapa);
                 $(`.etiqueta1`).html(info[0].id_etiqueta);
                 $(`.descripcion_etiqueta1`).html(info[0].etiqueta);
-                $(`.unidades1`).html(cantidad_lote);
-                conciliacionLote = (((utilizada * presentacion * densidad) / tamanioLote) / 1000) * 100
-                $(`.conciliacionLote`).html(`<b>${conciliacionLote.toFixed(2)}%</b>`)
+                $(`.unidadesEnvase1`).html(cantidad_lote);
+                $(`.unidadesTapa1`).html(cantidad_lote);
+                $(`.unidadesEtiqueta1`).html(cantidad_lote);
+                /*  conciliacionLote = (((utilizada * presentacion * densidad) / tamanioLote) / 1000) * 100
+                 $(`.conciliacionLote`).html(`<b>${conciliacionLote.toFixed(2)}%</b>`) */
                 material_envase_sobrante();
             }
         });
@@ -820,6 +822,15 @@ material_envase_sobrante = () => {
                         }
                     }
                 }
+
+                for (i = 0; i < multi.length; i++) {
+
+                    utilizada = $(`#utilizada_empaque${i + 1}`).html();
+                    programada = multi[i].cantidad
+                    rendimiento = (utilizada / programada) * 100
+                    $(`#conciliacionRendimiento${i + 1}`).val(`${rendimiento.toFixed(2)}%`);
+                }
+
             } else {
                 for (let i = 0; i < info.length; i++) {
                     if (info[i].modulo == 5) {
@@ -846,7 +857,11 @@ material_envase_sobrante = () => {
                         $(`#sobrante_otros1`).html(info[i].sobrante);
 
                     }
-                    utilizada = info[0].envasada;
+                    //utilizada = info[0].envasada;
+                    unidadesEmpaque = $('#unidadesEmpaque1').html();
+                    utilizadaEmpaque = $('#utilizada_empaque1').html();
+                    rendimiento = (unidadesEmpaque / utilizadaEmpaque) * 100
+                    $('#conciliacionRendimiento1').val(`${rendimiento}%`);
                 }
             }
         },
@@ -976,8 +991,8 @@ entrega_material_acondicionamiento = (multi) => {
             $(`.otros1`).html(info[0].id_otros);
             $(`.descripcion_otros1`).html(info[0].otros);
 
-            //$(`.unidades1`).html(unidades);
-            //$(`.unidades1e`).html(empaqueEnvasado);
+            $(`.unidadesEmpaque1`).html(unidades);
+            $(`.unidadesOtros1`).html(unidades);
         });
     }
 };
@@ -1000,8 +1015,6 @@ conciliacion = (multi) => {
             }
 
             for (let j = 0; j < multi.length; j++) {
-                /* let rendimiento = (presentacion * utilizada * densidad) / 1000;
-                rendimiento = ((rendimiento / tamanioLote) * 100).toFixed(2) + "%"; */
                 let rendimiento = ((utilizada / cantidad_lote) * 100).toFixed(2) + "%"
                 $(`#conciliacionRendimiento${j + 1}`).val(rendimiento);
 
