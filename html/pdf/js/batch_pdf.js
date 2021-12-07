@@ -861,7 +861,7 @@ material_envase_sobrante = () => {
                     unidadesEmpaque = $('#unidadesEmpaque1').html();
                     utilizadaEmpaque = $('#utilizada_empaque1').html();
                     rendimiento = (unidadesEmpaque / utilizadaEmpaque) * 100
-                    $('#conciliacionRendimiento1').val(`${rendimiento}%`);
+                    $('#conciliacionRendimiento1').val(`${rendimiento.toFixed(2)}%`);
                 }
             }
         },
