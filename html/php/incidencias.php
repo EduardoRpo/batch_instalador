@@ -15,8 +15,11 @@ if (!empty($_POST)) {
             break;
 
         case 2: //almacenar incidencias
+            $batch =  $_POST['idBatch'];
+            $modulo =  $_POST['modulo'];
+
             $incidencias = $_POST['incidencias'];
-            $realizo = $_POST['firma'];
+            //$realizo = $_POST['firma'];
             $observaciones = $_POST['observaciones'];
             $datos = json_decode($incidencias, true);
 
@@ -37,11 +40,11 @@ if (!empty($_POST)) {
                 }
             }
 
-            $sql = "INSERT INTO batch_incidencias_observaciones (observacion, batch, modulo) 
-                            VALUES (:observacion, :batch, :modulo)";
+            $sql = "INSERT INTO batch_incidencias_observaciones (observaciones, batch, modulo) 
+                    VALUES (:observaciones, :batch, :modulo)";
             $query = $conn->prepare($sql);
             $result = $query->execute([
-                'observacion' => $observaciones,
+                'observaciones' => $observaciones,
                 'batch' => $batch,
                 'modulo' => $modulo,
             ]);
