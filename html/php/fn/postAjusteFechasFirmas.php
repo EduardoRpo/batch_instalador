@@ -67,8 +67,6 @@ $diasFeriados = [
     '2021-11-21',
     '2021-11-27',
     '2021-11-28',
-    '2021-12-04',
-    '2021-12-05',
     '2021-12-08',
     '2021-12-11',
     '2021-12-12',
@@ -90,7 +88,7 @@ foreach ($diasFeriados as $diasFeriado) {
 for ($i = 0; $i < sizeof($batch); $i++) {
     for ($j = 0; $j < sizeof($fechas_registro); $j++) {
 
-        if ($batch[$i]['id_batch'] >= 648) {
+        if ($batch[$i]['id_batch'] >= 563) {
             if ($batch[$i]['id_batch'] == $fechas_registro[$j]['batch']) {
 
                 $date_pesaje = "";

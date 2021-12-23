@@ -59,7 +59,7 @@ $(document).ready(function() {
 
     if (modulo != 7 && modulo != 10 && modulo != undefined) {
         desinfectantes();
-        //cargar_condicionesMedio();
+        cargar_condicionesMedio();
         validarTanques(modulo);
     }
 });
