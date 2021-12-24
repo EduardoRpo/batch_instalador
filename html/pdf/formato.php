@@ -1726,7 +1726,6 @@
                             <table class="table table-bordered table-striped">
                                 <thead class="head centrado">
                                     <tr>
-                                        <td class="centrado">Fecha</td>
                                         <td class="centrado">Referencia</td>
                                         <td class="centrado">Descripción</td>
                                         <td class="centrado">Cantidad</td>
@@ -1829,7 +1828,6 @@
                             <table class="table table-bordered table-striped">
                                 <thead class="head centrado">
                                     <tr>
-                                        <td class="centrado">Fecha</td>
                                         <td class="centrado">Referencia</td>
                                         <td class="centrado">Descripción</td>
                                         <td class="centrado">Cantidad</td>

@@ -324,11 +324,6 @@ function registrar_material_sobrante(realizo) {
 }
 
 let unidad = $("txtUnidadesProducidas").val();
-/* validar unidades producidads vs la envasada - 
-Enviar notificacion -- 
-Texto (Existe una diferencia entre las unidades envasadas y las 
-    acondicionadas de la orden de produccion XXX referencia XXXX)
- */
 
 function conciliacionRendimiento() {
     $(`#txtNoMovimiento${id_multi}`).val("");
@@ -341,14 +336,13 @@ function conciliacionRendimiento() {
         $(`#txtTotal-Cajas${id_multi}`).val("Valide unidades de Empaque");
         //return false;
     }
-    let unidadesProducidas = parseInt(
-        $(`#txtUnidadesProducidas${id_multi}`).val()
-    );
+    let unidadesProducidas = parseInt($(`#txtUnidadesProducidas${id_multi}`).val());
+    let parcialesUnidadesProducidas = parseInt($(`#parcialesUnidadesProducidas${id_multi}`).val());
+
+    unidadesProducidas = parseFloat(unidadesProducidas) + parseFloat(parcialesUnidadesProducidas)
 
     let retencion = $(`#txtMuestrasRetencion${id_multi}`).val();
-    let unidadesProgramadas = parseInt(
-        $(`#unidadesProgramadas${id_multi}`).val()
-    );
+    let unidadesProgramadas = parseInt($(`#unidadesProgramadas${id_multi}`).val());
 
     if (retencion == undefined || retencion == "") retencion = 0;
 
@@ -369,28 +363,32 @@ function conciliacionRendimiento() {
 
     $(`#txtTotal-Cajas${id_multi}`).val(formatoCO(totalCajas));
     $(`#txtEntrega-Bodega${id_multi}`).val(formatoCO(entregarBodega));
-    $(`#txtPorcentaje-Unidades${id_multi}`).val(
-        ((unidadesProducidas / unidadesProgramadas) * 100).toFixed(2) + "%"
-    );
+    $(`#txtPorcentaje-Unidades${id_multi}`).val(((unidadesProducidas / unidadesProgramadas) * 100).toFixed(2) + "%");
 
     rendimiento_producto();
 }
 
 function rendimiento_producto() {
     //cantidad = $(`#txtUnidadesProducidas${id_multi}`).val();
-    cantidad = $(`#parcialesUnidadesProducidas${id_multi}`).text();
+    cantidadparciales = $(`#parcialesUnidadesProducidas${id_multi}`).val();
+    cantidadparciales == "" ? cantidadparciales = 0 : cantidadparciales
+    cantidadIngresada = $(`#txtUnidadesProducidas${id_multi}`).val();
+    cantidadIngresada == "" ? cantidadIngresada = 0 : cantidadIngresada
+
+    cantidad = parseFloat(cantidadparciales) + parseFloat(cantidadIngresada)
+
     presentacion = $(`#presentacion${id_multi}`).val();
     densidad = $(`#densidad${id_multi}`).val();
-    //total = $(`#in_tamano_lote`).val(); //total de la presentacion
-    total = $(`#total${id_multi}`).val(); //total de la presentacion
+    total = $(`#in_tamano_lote`).val(); //total de la presentacion
+    //total = $(`#total${id_multi}`).val(); //total de la presentacion
     total = total.replace(".", "");
 
-    cantidad == "" ?
+    /* cantidad == "" ?
         (cantidad = $(`#parcialesUnidadesProducidas${id_multi}`).val()) :
         cantidad;
 
     cantidad = cantidad.replace('.', '')
-
+ */
     let rendimiento = (presentacion * cantidad * densidad) / 1000;
     rendimiento = ((rendimiento / total) * 100).toFixed(2) + "%";
     $(`#rendimientoProducto${id_multi}`).val(rendimiento);

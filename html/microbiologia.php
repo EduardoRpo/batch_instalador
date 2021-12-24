@@ -79,6 +79,7 @@ sesiones(8);
   <script src="html/js/utils/custom.min.js"></script>
   <script src="html/js/utils/datatables.js"></script>
   <script src="html/js/microbiologia/microbiologia.js"></script>
+  <script src="../../html/js/global/incidencias.js"></script>
 
 </body>
 
