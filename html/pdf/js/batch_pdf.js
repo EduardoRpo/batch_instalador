@@ -868,6 +868,8 @@ material_envase_sobrante = () => {
     });
 };
 
+/* Funcion para traer datos de multi en conciliacion rendimiento */
+
 muestras_acondicionamiento = (multi) => {
 
     $.ajax({

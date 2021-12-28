@@ -298,7 +298,7 @@ function cargarTablaTodasFormulas(referencia) {
             extend: 'excel',
             className: 'btn btn-primary',
             exportOptions: {
-                columns: [0, 1, 5],
+                columns: [0, 1, 2, 4],
             },
         }, ],
         language: { url: 'admin_componentes/es-ar.json' },
