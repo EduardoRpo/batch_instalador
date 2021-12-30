@@ -27,7 +27,7 @@ for ($i = 0; $i < $clonarCantidad; $i++) {
     /* Buscar los tanques del batch clonado */
     $sql = "SELECT * FROM batch_tanques WHERE id_batch = :id_batch";
     $query = $conn->prepare($sql);
-    $result = $query->execute(['id_batch' => $id_batch,]);
+    $result = $query->execute(['id_batch' => $id_batch]);
     $data = $query->fetchAll(PDO::FETCH_ASSOC);
 
     $tanque = $data[0]['tanque'];
@@ -43,6 +43,45 @@ for ($i = 0; $i < $clonarCantidad; $i++) {
     $sql = "INSERT INTO batch_tanques(tanque, cantidad, id_batch) VALUES(:tanque, :cantidad, :id_batch)";
     $query = $conn->prepare($sql);
     $result = $query->execute(['tanque' => $tanque, 'cantidad' => $cantidad, 'id_batch' => $data['id']]);
+
+    /* ingrese datos para el control de firmas */
+
+    $query_firmas = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) VALUES('2' , :id_batch, '0', '4')";
+    $query = $conn->prepare($query_firmas);
+    $result = $query->execute(['id_batch' => $data['id']]);
+
+    $query_firmas = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) VALUES('3' , :id_batch, '0', '4')";
+    $query = $conn->prepare($query_firmas);
+    $result = $query->execute(['id_batch' => $data['id']]);
+
+    $query_firmas = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) VALUES('4' , :id_batch, '0', '2')";
+    $query = $conn->prepare($query_firmas);
+    $result = $query->execute(['id_batch' => $data['id']]);
+
+    $query_firmas = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) VALUES('5' , :id_batch, '0', '6')";
+    $query = $conn->prepare($query_firmas);
+    $result = $query->execute(['id_batch' => $data['id']]);
+
+    $query_firmas = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) VALUES('6' , :id_batch, '0', '7')";
+    $query = $conn->prepare($query_firmas);
+    $result = $query->execute(['id_batch' => $data['id']]);
+
+    $query_firmas = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) VALUES('7' , :id_batch, '0', '1')";
+    $query = $conn->prepare($query_firmas);
+    $result = $query->execute(['id_batch' => $data['id']]);
+
+    $query_firmas = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) VALUES('8' , :id_batch, '0', '2')";
+    $query = $conn->prepare($query_firmas);
+    $result = $query->execute(['id_batch' => $data['id']]);
+
+    $query_firmas = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) VALUES('9' , :id_batch, '0', '2')";
+    $query = $conn->prepare($query_firmas);
+    $result = $query->execute(['id_batch' => $data['id']]);
+
+    $query_firmas = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) VALUES('10' , :id_batch, '0', '3')";
+    $query = $conn->prepare($query_firmas);
+    $result = $query->execute(['id_batch' => $data['id']]);
+
 
     echo '1';
 }
