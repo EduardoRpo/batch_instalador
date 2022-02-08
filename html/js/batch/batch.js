@@ -86,9 +86,9 @@ function crearTablaBatch(
                         data == 6 ?
                         "Envasado/Acondicionamiento" :
                         data == 6.5 ?
-                        "Microbiologia" :
+                        "Microbiologia/Fisicoquimico" :
                         data == 7 ?
-                        "Microbiologia" :
+                        "Microbiologia/Fisicoquimico" :
                         data == 7.5 ?
                         "Microbiologia/Fisicoquimico" :
                         data == 8 ?
