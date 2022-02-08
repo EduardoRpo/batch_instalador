@@ -1,7 +1,5 @@
-//let presentacion;
-/* let r1 = 0,
-  r2 = 0,
-  r3 = 0; */
+/* variables globales */
+
 modulo = 6;
 let id_multi = 1;
 let flag = 0;
@@ -20,7 +18,6 @@ $(document).ready(function() {
 
 function busqueda_multi() {
     ocultar_acondicionamiento();
-    /* ocultarfilasTanques(5); */
 
     $.ajax({
         method: "POST",
@@ -52,9 +49,7 @@ function busqueda_multi() {
 
                     $(`#fila${j}`).attr("hidden", false);
                     $(`#acondicionamiento${j}`).attr("hidden", false);
-                    $(`#acondicionamientoMulti${j}`).html(
-                        `ACONDICIONAMIENTO PRESENTACIÓN: ${presentacion} REFERENCIA ${referencia}`
-                    );
+                    $(`#acondicionamientoMulti${j}`).html(`ACONDICIONAMIENTO PRESENTACIÓN: ${presentacion} REFERENCIA ${referencia}`);
                     cargarTablaEnvase(j, referencia, cantidad);
                     calcularMuestras(j, cantidad);
 
@@ -68,9 +63,7 @@ function busqueda_multi() {
                 $(`#cantidad${j}`).html(formatoCO(batch.unidad_lote));
                 $(`#unidadesProgramadas${j}`).val(batch.unidad_lote);
                 $(`#total${j}`).html(formatoCO(batch.tamano_lote));
-                $(`#acondicionamientoMulti${j}`).html(
-                    `ACONDICIONAMIENTO PRESENTACIÓN: ${batch.presentacion} REFERENCIA: ${batch.referencia}`
-                );
+                $(`#acondicionamientoMulti${j}`).html(`ACONDICIONAMIENTO PRESENTACIÓN: ${batch.presentacion} REFERENCIA: ${batch.referencia}`);
 
                 $(`#ref${j}`).val(referencia);
                 $(`#unidad_empaque${j}`).val(batch.unidad_empaque);
@@ -465,22 +458,20 @@ function registrar_conciliacion(info) {
                             imprimirEtiquetasRetencion();
                             alertify.set("notifier", "position", "top-right");
                             alertify.success("Conciliación registrada satisfactoriamente");
-                            $(`.conciliacion_realizado${id_multi}`)
-                                .css({ background: "lightgray", border: "gray" })
-                                .prop("disabled", true);
+
+                            $(`.conciliacion_realizado${id_multi}`).css({ background: "lightgray", border: "gray" }).prop("disabled", true);
+
                             final = parseFloat($(`#txtUnidadesProducidas${id_multi}`).val());
-                            parciales = parseFloat(
-                                $(`#parcialesUnidadesProducidas${id_multi}`).val()
-                            );
+                            parciales = parseFloat($(`#parcialesUnidadesProducidas${id_multi}`).val());
+
                             if (isNaN(parciales)) parciales = 0;
 
                             $(`#txtUnidadesProducidas${id_multi}`).val(final + parciales);
-                            $(`#parcialesUnidadesProducidas${id_multi}`).val(
-                                final + parciales
-                            );
+                            $(`#parcialesUnidadesProducidas${id_multi}`).val(final + parciales);
                             $(`#txtMuestrasRetencion${id_multi}`).prop("disable", "true");
                             $(`#alert_entregas${id_multi}`).removeClass("alert-danger");
                             $(`#alert_entregas${id_multi}`).addClass("alert-success");
+
                             conciliacionRendimiento();
                             firmar(info);
                         }
