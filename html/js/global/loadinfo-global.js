@@ -41,7 +41,8 @@ $(document).ready(function() {
     setTimeout(() => {
         if (modulo != undefined && modulo != 7 && modulo != 8 && modulo != 9)
             cargarBatch();
-        if (modulo == 8) cargarBatchMicro();
+        if (modulo == 8)
+            cargarBatchMicro();
     }, 1300);
 });
 
@@ -59,7 +60,7 @@ $(document).ready(function() {
 
     if (modulo != 7 && modulo != 10 && modulo != undefined) {
         desinfectantes();
-        cargar_condicionesMedio();
+        //cargar_condicionesMedio();
         validarTanques(modulo);
     }
 });
@@ -106,6 +107,8 @@ $.ajax({
 
     localStorage.setItem("orden", data.numero_orden);
     localStorage.setItem("tamano_lote", data.tamano_lote);
+    batchInfo = JSON.stringify(batch)
+    sessionStorage.setItem("batch", batchInfo);
 });
 
 /* Calcular la fecha del dia  */
@@ -165,16 +168,3 @@ const formatoGeneral = (number) => {
     const numero1 = numero.replace(",", ".");
     return numero1;
 };
-
-//const number = document.querySelector(".number");
-
-/* function formatNumber(n) {
-  n = String(n).replace(/\D/g, "");
-  return n === "" ? n : Number(n).toLocaleString();
-}
-
-number.addEventListener("keyup", (e) => {
-  const element = e.target;
-  const value = element.value;
-  element.value = formatNumber(value);
-}); */

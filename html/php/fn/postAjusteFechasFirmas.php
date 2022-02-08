@@ -75,6 +75,18 @@ $diasFeriados = [
     '2021-12-25',
     '2021-12-26',
     '2022-01-01',
+    '2022-01-02',
+    '2022-01-08',
+    '2022-01-09',
+    '2022-01-10',
+    '2022-01-15',
+    '2022-01-16',
+    '2022-01-22',
+    '2022-01-23',
+    '2022-01-29',
+    '2022-01-30',
+    '2022-02-05',
+    '2022-02-06',
 ];
 
 $array_fechas = [];
@@ -88,7 +100,7 @@ foreach ($diasFeriados as $diasFeriado) {
 for ($i = 0; $i < sizeof($batch); $i++) {
     for ($j = 0; $j < sizeof($fechas_registro); $j++) {
 
-        if ($batch[$i]['id_batch'] >= 563) {
+        if ($batch[$i]['id_batch'] >= 572) {
             if ($batch[$i]['id_batch'] == $fechas_registro[$j]['batch']) {
 
                 $date_pesaje = "";

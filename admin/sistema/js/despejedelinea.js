@@ -9,7 +9,7 @@ cargarSelectorProceso();
 cargarSelectorPreguntas();
 /* Cargue de Parametros de Control en DataTable */
 
-$(document).ready(function () {
+$(document).ready(function() {
     $("#tblDespeje").DataTable({
         scrollY: '50vh',
         scrollCollapse: true,
@@ -26,7 +26,8 @@ $(document).ready(function () {
             { "data": "id" },
             { "data": "pregunta" },
             {
-                "data": "resp", className: "centrado",
+                "data": "resp",
+                className: "centrado",
                 render: (data, type, row) => {
                     'use strict';
                     return data == 1 ? 'Si' : 'No';
@@ -41,7 +42,7 @@ $(document).ready(function () {
 
 /* Mostrar formulario adicionar preguntas */
 
-$('#adicionarParametro').click(function (e) {
+$('#adicionarParametro').click(function(e) {
     e.preventDefault();
 
     editar = 0;
@@ -61,7 +62,7 @@ function cargarSelectorProceso() {
         url: 'php/c_despejeLinea.php',
         data: { operacion: "2" },
 
-        success: function (response) {
+        success: function(response) {
             var info = JSON.parse(response);
 
             let $select = $('#cmbProceso');
@@ -69,11 +70,11 @@ function cargarSelectorProceso() {
 
             $select.append('<option disabled selected>' + "Seleccionar" + '</option>');
 
-            $.each(info.data, function (i, value) {
+            $.each(info.data, function(i, value) {
                 $select.append('<option value ="' + value.id + '">' + value.modulo + '</option>');
             });
         },
-        error: function (response) {
+        error: function(response) {
             console.log(response);
         }
     })
@@ -88,7 +89,7 @@ function cargarSelectorPreguntas() {
         url: 'php/c_despejeLinea.php',
         data: { operacion: "3" },
 
-        success: function (response) {
+        success: function(response) {
             var info = JSON.parse(response);
 
             let $select = $('#cmbPregunta');
@@ -96,11 +97,11 @@ function cargarSelectorPreguntas() {
 
             $select.append('<option disabled selected>' + "Seleccionar" + '</option>');
 
-            $.each(info.data, function (i, value) {
+            $.each(info.data, function(i, value) {
                 $select.append('<option value ="' + value.id + '">' + value.pregunta + '</option>');
             });
         },
-        error: function (response) {
+        error: function(response) {
             console.log(response);
         }
     })
@@ -108,7 +109,7 @@ function cargarSelectorPreguntas() {
 
 /* Cargar datos para Actualizar registros */
 
-$(document).on('click', '.link-editar', function (e) {
+$(document).on('click', '.link-editar', function(e) {
     e.preventDefault();
 
     editar = 1;
@@ -128,13 +129,13 @@ $(document).on('click', '.link-editar', function (e) {
 
 /* Borrar registros */
 
-$(document).on('click', '.link-borrar', function (e) {
+$(document).on('click', '.link-borrar', function(e) {
     e.preventDefault();
 
     const id = $(this).parent().parent().children().first().text();
     var confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este registro?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
-    debugger;
-    confirm.set('onok', function (r) {
+
+    confirm.set('onok', function(r) {
         if (r) {
             $.ajax({
                 'method': 'POST',
@@ -150,7 +151,7 @@ $(document).on('click', '.link-borrar', function (e) {
 
 /* Almacenar Registros */
 
-$('#btnguardarDespeje').click(function (e) {
+$('#btnguardarDespeje').click(function(e) {
     e.preventDefault();
 
     let pregunta = $('#cmbPregunta').val();
@@ -158,7 +159,8 @@ $('#btnguardarDespeje').click(function (e) {
     let modulo = $('#cmbProceso').val();
 
     if (pregunta === null || respuesta === null || modulo === null) {
-        alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos.");
+        alertify.set("notifier", "position", "top-right");
+        alertify.error("Ingrese todos los datos.");
         return false;
     }
 
@@ -167,17 +169,21 @@ $('#btnguardarDespeje').click(function (e) {
         url: "php/c_despejeLinea.php",
         data: { operacion: "5", editar: editar, pregunta: pregunta, respuesta: respuesta, modulo: modulo },
 
-        success: function (r) {
+        success: function(r) {
             if (r == 1) {
-                alertify.set("notifier", "position", "top-right"); alertify.success("Almacenado con éxito.");
+                alertify.set("notifier", "position", "top-right");
+                alertify.success("Almacenado con éxito.");
                 refreshTable();
             } else if (r == 2) {
-                alertify.set("notifier", "position", "top-right"); alertify.error("Configuración ya existe.");
+                alertify.set("notifier", "position", "top-right");
+                alertify.error("Configuración ya existe.");
             } else if (r == 3) {
-                alertify.set("notifier", "position", "top-right"); alertify.success("Registro actualizado.");
+                alertify.set("notifier", "position", "top-right");
+                alertify.success("Registro actualizado.");
                 refreshTable();
             } else {
-                alertify.set("notifier", "position", "top-right"); alertify.error("Error.");
+                alertify.set("notifier", "position", "top-right");
+                alertify.error("Error.");
             }
         }
     });

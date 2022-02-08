@@ -16,10 +16,23 @@ if (!empty($_POST)) {
         case 1: //almacenar conciliacion
             $modulo = $_POST['modulo'];
             $modulo == 6 ? $retencion =  $_POST['retencion'] : $retencion = 0;
-            conciliacionRendimientoRealizo($conn);
-            almacenar_muestras_retencion($conn, $retencion, $referencia, $batch);
-            cerrarEstado($batch, $modulo, $conn);
-            //actualizarEstado($batch, $modulo, $conn);
+
+            /* validar si envasado esta completo */
+            $sql = "SELECT * FROM batch_material_sobrante WHERE batch = :batch AND ref_producto = :referencia AND modulo = :modulo";
+            $query = $conn->prepare($sql);
+            $query->execute(['batch' => $batch, 'referencia' => $referencia, 'modulo' => 5]);
+            $data = $query->fetch(PDO::FETCH_ASSOC);
+
+            if ($data) {
+                conciliacionRendimientoRealizo($conn);
+                almacenar_muestras_retencion($conn, $retencion, $referencia, $batch);
+                cerrarEstado($batch, $modulo, $conn);
+                //actualizarEstado($batch, $modulo, $conn);
+
+            } else {
+                echo 'false';
+            }
+
             break;
 
         case 2: // cargar batch Conciliacion

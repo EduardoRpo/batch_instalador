@@ -10,106 +10,113 @@ let equipos = [];
 //validacion de campos y botones
 
 function cargar(btn, idbtn) {
-    sessionStorage.setItem("idbtn", idbtn);
-    sessionStorage.setItem("btn", btn.id);
-    id = btn.id;
+    let confirm = alertify.confirm('Samara Cosmetics', '¿La información cargada es correcta?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
+    confirm.set('onok', function(r) {
+        sessionStorage.setItem("idbtn", idbtn);
+        sessionStorage.setItem("btn", btn.id);
+        id = btn.id;
 
-    /* Valida que se ha seleccionado el producto de desinfeccion para el proceso de aprobacion */
+        /* Valida que se ha seleccionado el producto de desinfeccion para el proceso de aprobacion */
 
-    let seleccion = $(".in_desinfeccion").val();
+        let seleccion = $(".in_desinfeccion").val();
 
-    if (seleccion == "Seleccione") {
-        alertify.set("notifier", "position", "top-right");
-        alertify.error("Seleccione el producto para desinfección.");
-        return false;
-    }
-
-    if (typeof id_multi !== "undefined") {
-        /* Validacion que todos los datos en linea y el formulario de control en preparacion no esten vacios */
-
-        if (id == `controlpeso_realizado${id_multi}`) {
-            /* Validar equipos */
-            let eq1 = $(`#sel_envasadora${id_multi}`).val();
-            let eq2 = $(`#sel_loteadora${id_multi}`).val();
-
-            if (eq1 === null || eq2 === null) {
-                alertify.set("notifier", "position", "top-right");
-                alertify.error("Seleccione los equipos a usar.");
-                return false;
-            }
-
-            equipos = [];
-            const eq3 = {};
-            eq3.equipo = eq1;
-            eq3.referencia = referencia;
-            eq3.modulo = modulo;
-            eq3.batch = idBatch;
-            equipos.push(eq3);
-
-            const eq4 = {};
-            eq4.equipo = eq2;
-            eq4.referencia = referencia;
-            eq4.modulo = modulo;
-            eq4.batch = idBatch;
-            equipos.push(eq4);
-
-            /* Valida que todas las muestras y el lote se encuentren correctas*/
-
-            validar = validarLote();
-
-            if (validar == 0) return false;
-
-            i = sessionStorage.getItem("totalmuestras");
-            cantidad_muestras = $(`#muestras${id_multi}`).val();
-
-            if (i != cantidad_muestras) {
-                alertify.set("notifier", "position", "top-right");
-                alertify.error("Ingrese todas las muestras");
-                return false;
-            }
+        if (seleccion == "Seleccione") {
+            alertify.set("notifier", "position", "top-right");
+            alertify.error("Seleccione el producto para desinfección.");
+            return false;
         }
 
-        if (id == `devolucion_realizado${id_multi}`) {
-            let cantidadEnvasada = $(`.txtEnvasada${id_multi}`).val();
+        if (typeof id_multi !== "undefined") {
 
-            if (cantidadEnvasada == "") {
-                alertify.set("notifier", "position", "top-right");
-                alertify.error("Ingrese todos los datos");
-                return false;
+            /* Validacion que todos los datos en linea y el formulario de control en preparacion no esten vacios */
+
+            if (id == `controlpeso_realizado${id_multi}`) {
+                /* Validar equipos */
+                let eq1 = $(`#sel_envasadora${id_multi}`).val();
+                let eq2 = $(`#sel_loteadora${id_multi}`).val();
+
+                if (eq1 === null || eq2 === null) {
+                    alertify.set("notifier", "position", "top-right");
+                    alertify.error("Seleccione los equipos a usar.");
+                    return false;
+                }
+
+                /* Crea objeto para almacenar equipos */
+
+                equipos = [];
+                const eq3 = {};
+                eq3.equipo = eq1;
+                eq3.referencia = referencia;
+                eq3.modulo = modulo;
+                eq3.batch = idBatch;
+                equipos.push(eq3);
+
+                const eq4 = {};
+                eq4.equipo = eq2;
+                eq4.referencia = referencia;
+                eq4.modulo = modulo;
+                eq4.batch = idBatch;
+                equipos.push(eq4);
+
+                /* Valida que todas las muestras y el lote se encuentren correctas*/
+
+                validar = validarLote();
+
+                if (validar == 0) return false;
+
+                i = sessionStorage.getItem("totalmuestras");
+                cantidad_muestras = $(`#muestras${id_multi}`).val();
+
+                if (i != cantidad_muestras) {
+                    alertify.set("notifier", "position", "top-right");
+                    alertify.error("Ingrese todas las muestras");
+                    return false;
+                }
             }
 
-            //validar en que multipresentacion se encuentra
-            id_multi == 1 ?
-                ((start = 1), (end = 4)) :
-                id_multi == 2 ?
-                ((start = 4), (end = 7)) :
-                id_multi == 3 ?
-                ((start = 7), (end = 10)) :
-                ((start = 10), (end = 12));
+            if (id == `devolucion_realizado${id_multi}`) {
+                let cantidadEnvasada = $(`.txtEnvasada${id_multi}`).val();
 
-            //validar que los datos de toda la tabla se encuentran completos
-            for (let i = start; i < end; i++) {
-                let averias = $(`.averias${i}`).val();
-                let sobrante = $(`.sobrante${i}`).val();
-                if (
-                    averias == "" ||
-                    sobrante == "" ||
-                    averias == undefined ||
-                    sobrante == undefined
-                ) {
+                if (cantidadEnvasada == "") {
                     alertify.set("notifier", "position", "top-right");
                     alertify.error("Ingrese todos los datos");
                     return false;
                 }
+
+                //validar en que multipresentacion se encuentra
+                id_multi == 1 ?
+                    ((start = 1), (end = 4)) :
+                    id_multi == 2 ?
+                    ((start = 4), (end = 7)) :
+                    id_multi == 3 ?
+                    ((start = 7), (end = 10)) :
+                    ((start = 10), (end = 12));
+
+                //validar que los datos de toda la tabla se encuentran completos
+
+                for (let i = start; i < end; i++) {
+                    let averias = $(`.averias${i}`).val();
+                    let sobrante = $(`.sobrante${i}`).val();
+                    if (
+                        averias == "" ||
+                        sobrante == "" ||
+                        averias == undefined ||
+                        sobrante == undefined
+                    ) {
+                        alertify.set("notifier", "position", "top-right");
+                        alertify.error("Ingrese todos los datos");
+                        return false;
+                    }
+                }
             }
         }
-    }
 
-    /* Carga el modal para la autenticacion */
+        /* Carga el modal para la autenticacion */
 
-    $("#usuario").val("");
-    $("#clave").val("");
-    $("#m_firmar").modal("show");
+        $("#usuario").val("");
+        $("#clave").val("");
+        $("#m_firmar").modal("show");
+    });
 }
 
 //Carga el proceso despues de cargar la data  del Batch
@@ -126,10 +133,11 @@ $(document).ready(function() {
 
 function deshabilitarbotones() {
     for (let i = 1; i < 5; i++) {
-        $(`.controlpeso_realizado${i}`).prop("disabled", true);
+        //  $(`.controlpeso_realizado${i}`).prop("disabled", true);
         $(`.controlpeso_verificado${i}`).prop("disabled", true);
         $(`.devolucion_realizado${i}`).prop("disabled", true);
         $(`.devolucion_verificado${i}`).prop("disabled", true);
+        $(`.btnEntregasParciales${i}`).prop("disabled", true);
     }
 }
 
@@ -162,23 +170,23 @@ function busqueda_multi() {
 
                     $(`#fila${j}`).attr("hidden", false);
                     $(`#envasado${j}`).attr("hidden", false);
-                    $(`#envasadoMulti${j}`).html(
-                        `ENVASADO PRESENTACIÓN: ${presentacion} REFERENCIA ${referencia}`
-                    );
+                    $(`#envasadoMulti${j}`).html(`ENVASADO PRESENTACIÓN: ${presentacion} REFERENCIA ${referencia}`);
+
                     cargarTablaEnvase(j, referencia, cantidad);
                     calcularMuestras(j, cantidad);
+                    cargarEntregasParciales(j, referencia)
                     j++;
                 }
             } else {
                 $(`#tanque${j}`).html(formatoCO(batch.presentacion));
                 $(`#cantidad${j}`).html(formatoCO(batch.unidad_lote));
                 $(`#total${j}`).html(formatoCO(batch.tamano_lote));
-                $(`#envasadoMulti${j}`).html(
-                    `ENVASADO PRESENTACIÓN: ${batch.presentacion} REFERENCIA: ${batch.referencia}`
-                );
+                $(`#envasadoMulti${j}`).html(`ENVASADO PRESENTACIÓN: ${batch.presentacion} REFERENCIA: ${batch.referencia}`);
                 $(`#ref${j}`).val(referencia);
+
                 cargarTablaEnvase(j, batch.referencia, batch.unidad_lote);
                 calcularMuestras(j, batch.unidad_lote);
+                cargarEntregasParciales(j, referencia)
             }
             multi = j + 1;
         },
@@ -222,7 +230,7 @@ function identificarDensidad(batch) {
 
 function calcularPeso(densidadAprobada) {
     var peso_min = batch.presentacion * densidadAprobada;
-    var peso_max = peso_min * (1 + 0.03);
+    var peso_max = peso_min * (1 + 0.01);
     var prom = (parseInt(peso_min) + peso_max) / 2;
 
     $(`.minimo`).val(peso_min.toFixed(2));
@@ -310,6 +318,27 @@ function cargarTablaEnvase(j, referencia, cantidad) {
     });
 }
 
+/* Cargar Entregas parciales */
+
+const cargarEntregasParciales = (j, referencia) => {
+
+    $.ajax({
+        type: "post",
+        url: "../../../api/cargarEntregasParciales",
+        data: { batch: idBatch, referencia: referencia },
+        success: function(resp) {
+
+            if (resp.message == 'total') {
+                $(`#unidadesEnvasadasTotales${j}`).val(resp.unidades);
+                $(`#unidadesEnvasadas${j}`).val(resp.unidades).prop('disabled', true);
+                $(`.btnEntregasParciales${j}`).prop('disabled', true);
+                $(`.devolucion_realizado${j}`).prop('disabled', false);
+
+            }
+        }
+    });
+}
+
 /* Calculo de la devolucion de material */
 
 function devolucionMaterialEnvasada(valor) {
@@ -361,15 +390,12 @@ function validarLinea() {
 
 function registrar_material_sobrante(realizo) {
     let materialsobrante = [];
-    id_multi == 1 ?
-        ((start = 1), (end = 4)) :
-        id_multi == 2 ?
-        ((start = 4), (end = 7)) :
-        id_multi == 3 ?
-        ((start = 7), (end = 10)) :
+    id_multi == 1 ? ((start = 1), (end = 4)) :
+        id_multi == 2 ? ((start = 4), (end = 7)) :
+        id_multi == 3 ? ((start = 7), (end = 10)) :
         ((start = 10), (end = 12));
 
-    for (let i = start; i <= end; i++) {
+    for (let i = start; i < end; i++) {
         let datasobrante = {};
         let itemref = $(`.refEmpaque${i}`).html();
         let envasada = $(`.envasada${i}`).val();

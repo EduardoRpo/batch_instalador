@@ -56,7 +56,42 @@ if (!empty($_POST)) {
             $writer->save('C:\label\etiquetasPreparacion.xls');
             break;
 
-        case '3': //Impresion acondicionamiento
+        case '3': //Impresion aprobacion
+            $aprobacion = $_POST['array'];
+            $tanques  = $aprobacion[0]['numero_tanques'];
+
+            $etiquetas[] = $aprobacion[0]['orden'];
+            $etiquetas[] = $aprobacion[0]['referencia'];
+            $etiquetas[] = $aprobacion[0]['producto'];
+            $etiquetas[] = $aprobacion[0]['tamanio_lote'];
+            $etiquetas[] = $aprobacion[0]['numero_lote'];
+            $etiquetas[] = $aprobacion[0]['numero_tanques'];
+            $etiquetas[] = $aprobacion[0]['user'];
+
+            $spreadsheet = new Spreadsheet();
+            $sheet = $spreadsheet->getActiveSheet();
+            $sheet->setCellValue('A1', 'Orden_Produccion');
+            $sheet->setCellValue('B1', 'Referencia');
+            $sheet->setCellValue('C1', 'Nombre Referencia');
+            $sheet->setCellValue('D1', 'Tamaño del Lote');
+            $sheet->setCellValue('E1', 'Numero Lote');
+            $sheet->setCellValue('F1', 'Numero de Tanque');
+            $sheet->setCellValue('G1', 'Usuario');
+
+
+            for ($i = 2; $i <= $tanques + 1; $i++) {
+                $sheet->fromArray($etiquetas, NULL, "A$i");
+                $writer = new Xlsx($spreadsheet);
+
+                $fileLabels = 'C:/label';
+                if (!file_exists($fileLabels))
+                    mkdir($fileLabels, 0777, true);
+
+                $writer->save('C:\label\etiquetasAprobacion.xls');
+            }
+            break;
+
+        case '4': //Impresion acondicionamiento
             $acondicionamiento = $_POST['array'];
 
             $etiquetas[] = $acondicionamiento['referencia'];
@@ -79,6 +114,7 @@ if (!empty($_POST)) {
             $sheet->setCellValue('F1', 'Usuario');
             $sheet->setCellValue('G1', 'Lote');
             $sheet->setCellValue('H1', 'Orden_Produccion');
+
             for ($i = 2; $i <= $cajas + 1; $i++) {
                 $sheet->fromArray($etiquetas, NULL, "A$i");
                 $writer = new Xlsx($spreadsheet);
@@ -91,7 +127,7 @@ if (!empty($_POST)) {
             }
             break;
 
-        case '4': //Impresion Etiquetas Retencion
+        case '5': //Impresion Etiquetas Retencion
             $retencion = $_POST['array'];
 
             $spreadsheet = new Spreadsheet();

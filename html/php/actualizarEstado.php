@@ -58,7 +58,7 @@ function cerrarEstado($batch, $modulo, $conn)
             $estado = 8;
             break;
         case '8': // Microbiologia
-            $estado = 9;
+            $estado = 10;
             break;
         case '9': // FisicoQuimico
             $estado = 9;

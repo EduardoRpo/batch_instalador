@@ -222,7 +222,7 @@ include('modal/image.php')
             <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
               <div class="card-body">
                 <div class="row" style="margin: 1%">
-                  <div class="col-md-12 align-self-center">
+                  <div class="col-md-12 mb-3 align-self-center">
                     <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Entrega Material Envase</h3>
                   </div>
 
@@ -277,11 +277,11 @@ include('modal/image.php')
                       </div>
                     </div>
 
-                    <div class="col-md-12 align-self-center">
+                    <div class="col-md-12 align-self-center" style="padding-left: 0px;padding-right: 0px;">
                       <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Especificaciones Técnicas</h3>
                     </div>
-                    <div class="especificaciones_tecnicas">
 
+                    <div class="especificaciones_tecnicas">
                       <div class="especificaciones__group">
                         <label for="recipient-name" class="col-form-label">Mínimo:</label>
                         <input type="text" class="form-control centrado minimo" id="minimo1" readonly>
@@ -296,11 +296,10 @@ include('modal/image.php')
                         <label for="recipient-name" class="col-form-label">Máximo:</label>
                         <input type="text" class="form-control centrado maximo" id="maximo1" readonly>
                       </div>
-
                     </div>
 
-                    <div class="row" style="margin: 1%">
-                      <div class="col-md-12 align-self-center mb-3">
+                    <div class="row" style="margin: 0%">
+                      <div class="col-md-12 align-self-center mb-3" style="padding-left: 0px;padding-right: 0px;">
                         <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Control de Peso en Proceso</h3>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 1%">
@@ -333,10 +332,28 @@ include('modal/image.php')
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
                         <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_verificado1" id="controlpeso_verificado1" onclick="cargar(this, 'firma4')" style="width: 100%; height: 38px;">Firmar</button>
                       </div>
-
                     </div>
-                    <div class="row" style="margin: 1%">
-                      <div class="col-md-12 align-self-center mt-3">
+
+                    <div class="row" style="margin: 0%">
+                      <div class="col-md-12 align-self-center mt-3" style="padding-left: 0px;padding-right: 0px;">
+                        <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Entregas Parciales</h3>
+                      </div>
+                      <div class="col-md-2 mt-3">
+                        <label for="">Unidades Envasadas</label>
+                        <input class="form-control text-center" type="number" name="unidadesEnvasadas1" id="unidadesEnvasadas1">
+                      </div>
+                      <div class="col-md-3 mt-3">
+                        <label for="">Unidades Envasadas a la fecha</label>
+                        <input class="form-control text-center" type="number" name="unidadesEnvasadasTotales1" id="unidadesEnvasadasTotales1" readonly>
+                      </div>
+                      <div class="col-md-2 mt-3">
+                        <div style="margin-top:33px"></div>
+                        <button class="btn btn-danger btnEntregasParciales1" id="btnEntregasParciales1">Guardar Entregas Parciales</button>
+                      </div>
+                    </div>
+
+                    <div class="row" style="margin: 0%">
+                      <div class="col-md-12 align-self-center mt-3 mb-3" style="padding-left: 0px;padding-right: 0px;">
                         <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Devolución Material Envase Sobrante</h3>
                       </div>
 
@@ -432,7 +449,7 @@ include('modal/image.php')
             <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
               <div class="card-body">
                 <div class="row" style="margin: 1%">
-                  <div class="col-md-12 align-self-center">
+                  <div class="col-md-12 mb-3 align-self-center">
                     <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Entrega Material Envase</h3>
                   </div>
 
@@ -490,7 +507,7 @@ include('modal/image.php')
                     </div>
                     <hr>
 
-                    <div class="col-md-12 align-self-center">
+                    <div class="col-md-12 align-self-center" style="padding-left: 0px;padding-right: 0px;">
                       <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Especificaciones Técnicas</h3>
                     </div>
                     <div class="especificaciones_tecnicas">
@@ -512,8 +529,8 @@ include('modal/image.php')
 
                     </div>
 
-                    <div class="row" style="margin: 1%">
-                      <div class="col-md-12 align-self-center mb-3">
+                    <div class="row" style="margin: 0%">
+                      <div class="col-md-12 align-self-center mb-3" style="padding-left: 0px;padding-right: 0px;">
                         <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Control de Peso en Proceso</h3>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 1%">
@@ -546,10 +563,29 @@ include('modal/image.php')
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
                         <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_verificado2" id="controlpeso_verificado2" onclick="cargar(this, 'firma4')" style="width: 100%; height: 38px;">Firmar</button>
                       </div>
-
                     </div>
-                    <div class="row" style="margin: 1%">
-                      <div class="col-md-12 align-self-center mt-3">
+
+                    <div class="row" style="margin: 0%">
+                      <div class="col-md-12 align-self-center mt-3" style="padding-left: 0px;padding-right: 0px;">
+                        <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Entregas Parciales</h3>
+                      </div>
+                      <div class="col-md-2 mt-3">
+                        <label for="">Unidades Envasadas</label>
+                        <input class="form-control text-center" type="number" name="unidadesEnvasadas2" id="unidadesEnvasadas2">
+                      </div>
+                      <div class="col-md-3 mt-3">
+                        <label for="">Unidades Envasadas a la fecha</label>
+                        <input class="form-control text-center" type="number" name="unidadesEnvasadasTotales2" id="unidadesEnvasadasTotales2" readonly>
+                      </div>
+                      
+                      <div class="col-md-2 mt-3">
+                        <div style="margin-top:33px"></div>
+                        <button class="btn btn-danger btnEntregasParciales2" id="btnEntregasParciales2">Guardar Entregas Parciales</button>
+                      </div>
+                    </div>
+
+                    <div class="row" style="margin: 0%">
+                      <div class="col-md-12 align-self-center mt-3 mb-3" style="padding-left: 0px;padding-right: 0px;">
                         <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Devolución Material Envase Sobrante</h3>
                       </div>
 
@@ -645,7 +681,7 @@ include('modal/image.php')
             <div id="collapseFive" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
               <div class="card-body">
                 <div class="row" style="margin: 1%">
-                  <div class="col-md-12 align-self-center">
+                  <div class="col-md-12 mb-3 align-self-center">
                     <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Entrega Material Envase</h3>
                   </div>
 
@@ -701,7 +737,7 @@ include('modal/image.php')
                     </div>
                     <hr>
 
-                    <div class="col-md-12 align-self-center">
+                    <div class="col-md-12 align-self-center" style="padding-left: 0px;padding-right:0px">
                       <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Especificaciones Técnicas</h3>
                     </div>
                     <div class="especificaciones_tecnicas">
@@ -724,7 +760,7 @@ include('modal/image.php')
                     </div>
 
                     <div class="row" style="margin: 1%">
-                      <div class="col-md-12 align-self-center mb-3">
+                      <div class="col-md-12 align-self-center mb-3" style="padding-left: 0px;padding-right:0px">
                         <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Control de Peso en Proceso</h3>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 1%">
@@ -757,10 +793,28 @@ include('modal/image.php')
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
                         <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_verificado3" id="controlpeso_verificado3" onclick="cargar(this, 'firma4')" style="width: 100%; height: 38px;">Firmar</button>
                       </div>
-
                     </div>
+
+                    <div class="row" style="margin: 0%">
+                      <div class="col-md-12 align-self-center mt-3" style="padding-left: 0px;padding-right: 0px;">
+                        <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Entregas Parciales</h3>
+                      </div>
+                      <div class="col-md-2 mt-3">
+                        <label for="">Unidades Envasadas</label>
+                        <input class="form-control text-center" type="number" name="unidadesEnvasadas3" id="unidadesEnvasadas3">
+                      </div>
+                      <div class="col-md-3 mt-3">
+                        <label for="">Unidades Envasadas a la fecha</label>
+                        <input class="form-control text-center" type="number" name="unidadesEnvasadasTotales3" id="unidadesEnvasadasTotales3" readonly>
+                      </div>
+                      <div class="col-md-2 mt-3">
+                        <div style="margin-top:33px"></div>
+                        <button class="btn btn-danger btnEntregasParciales3" id="btnEntregasParciales3">Guardar Entregas Parciales</button>
+                      </div>
+                    </div>
+
                     <div class="row" style="margin: 1%">
-                      <div class="col-md-12 align-self-center mt-3">
+                      <div class="col-md-12 align-self-center mt-3 mb-3" style="padding-left: 0px;padding-right:0px">
                         <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Devolución Material Envase Sobrante</h3>
                       </div>
 
@@ -854,8 +908,8 @@ include('modal/image.php')
             </div>
             <div id="collapseSix" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
               <div class="card-body">
-                <div class="row" style="margin: 1%">
-                  <div class="col-md-12 align-self-center">
+                <div class="row" style="margin: 0%">
+                  <div class="col-md-12 mb-3 align-self-center">
                     <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Entrega Material Envase</h3>
                   </div>
 
@@ -911,7 +965,7 @@ include('modal/image.php')
                     </div>
                     <hr>
 
-                    <div class="col-md-12 align-self-center">
+                    <div class="col-md-12 align-self-center" style="padding-left: 0px;padding-right:0px">
                       <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Especificaciones Técnicas</h3>
                     </div>
                     <div class="especificaciones_tecnicas">
@@ -933,8 +987,8 @@ include('modal/image.php')
 
                     </div>
 
-                    <div class="row" style="margin: 1%">
-                      <div class="col-md-12 align-self-center mb-3">
+                    <div class="row" style="margin: 0%">
+                      <div class="col-md-12 align-self-center mb-3" style="padding-left: 0px;padding-right:0px">
                         <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Control de Peso en Proceso</h3>
                       </div>
                       <div class="col-md-2 align-self-center" style="margin-top: 1%">
@@ -967,10 +1021,28 @@ include('modal/image.php')
                       <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
                         <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_verificado4" id="controlpeso_verificado4" onclick="cargar(this, 'firma4')" style="width: 100%; height: 38px;">Firmar</button>
                       </div>
-
                     </div>
-                    <div class="row" style="margin: 1%">
-                      <div class="col-md-12 align-self-center mt-3">
+
+                    <div class="row" style="margin: 0%">
+                      <div class="col-md-12 align-self-center mt-3" style="padding-left: 0px;padding-right: 0px;">
+                        <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Entregas Parciales</h3>
+                      </div>
+                      <div class="col-md-2 mt-3">
+                        <label for="">Unidades Envasadas</label>
+                        <input class="form-control text-center" type="number" name="unidadesEnvasadas4" id="unidadesEnvasadas4">
+                      </div>
+                      <div class="col-md-3 mt-3">
+                        <label for="">Unidades Envasadas a la fecha</label>
+                        <input class="form-control text-center" type="number" name="unidadesEnvasadasTotales4" id="unidadesEnvasadasTotales4" readonly>
+                      </div>
+                      <div class="col-md-2 mt-3">
+                        <div style="margin-top:33px"></div>
+                        <button class="btn btn-danger btnEntregasParciales4" id="btnEntregasParciales4">Guardar Entregas Parciales</button>
+                      </div>
+                    </div>
+
+                    <div class="row" style="margin: 0%">
+                      <div class="col-md-12 align-self-center mt-3" style="padding-left: 0px;padding-right:0px">
                         <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Devolución Material Envase Sobrante</h3>
                       </div>
 
@@ -1056,28 +1128,33 @@ include('modal/image.php')
           <script src="../../assets/plugins/jquery/jquery.min.js"></script>
           <script src="../../assets/plugins/bootstrap/js/tether.min.js"></script>
           <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-          <script type="text/javascript" src="../../html/vendor/datatables/datatables.min.js"></script>
+          <script src="../../html/vendor/datatables/datatables.min.js" type="text/javascript"></script>
           <script src="../../html/js/utils/jquery.slimscroll.js"></script>
           <script src="../../html/js/utils/waves.js"></script>
           <script src="../../html/js/utils/sidebarmenu.js"></script>
           <script src="../../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
           <script src="../../html/js/utils/custom.min.js"></script>
           <script src="../../html/vendor/jquery-confirm/jquery-confirm.min.js"></script>
+          <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+          
           <script src="../../html/js/global/loadinfo-global.js"></script>
           <script src="../../html/js/global/despeje.js"></script>
           <script src="../../html/js/global/tanques.js"></script>
           <script src="../../html/js/global/muestras.js"></script>
           <script src="../../html/js/global/condiciones_medio.js"></script>
           <script src="../../html/js/global/cargarBatchMulti.js"></script>
-          <script src="../../html/js/firmar/firmar1raSeccion.js"></script>
-          <script src="../../html/js/firmar/firmar2daSeccionMulti.js"></script>
-          <script src="../../html/js/envasado/envasadoinfo.js"></script>
           <script src="../../html/js/global/incidencias.js"></script>
           <script src="../../html/js/global/equipos.js"></script>
           <script src="../../html/js/global/image.js"></script>
           <script src="../../html/js/global/presentacionReferenciaMulti.js"></script>
           <script src="../../html/js/global/habilitarbtn.js"></script>
-          <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+          
+          <script src="../../html/js/firmar/firmar1raSeccion.js"></script>
+          <script src="../../html/js/firmar/firmar2daSeccion.js"></script>
+          <script src="../../html/js/firmar/firmar2daSeccionMulti.js"></script>
+          
+          <script src="../../html/js/envasado/envasadoinfo.js"></script>
+          <script src="../../html/js/envasado/entregasparciales.js"></script>
 
 </body>
 

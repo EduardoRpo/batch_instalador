@@ -13,6 +13,7 @@ switch ($op) {
     $query = $conn->prepare($sql);
     $query->execute(['referencia' => $referencia]);
     $ids = $query->fetchAll($conn::FETCH_ASSOC);
+    
     foreach ($ids as $id)
       $multi = $id['multi'];
 

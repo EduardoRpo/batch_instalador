@@ -56,7 +56,7 @@ class BatchDao
                                   INNER JOIN propietario pp ON p.id_propietario = pp.id 
                                   INNER JOIN presentacion_comercial pc ON p.presentacion_comercial = pc.id 
                                   INNER JOIN batch_control_firmas bcf ON b.id_batch = bcf.batch 
-                                  WHERE b.estado = 10 GROUP BY batch HAVING firmas = 1");
+                                  WHERE b.estado = 10 GROUP BY batch HAVING firmas = 1 ORDER BY b.id_batch DESC");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $batch = $stmt->fetchAll($connection::FETCH_ASSOC);

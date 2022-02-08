@@ -172,12 +172,12 @@ include('modal/image.php')
 
                         <div class="despachos">
                           <div class="group">
-                            <label for="recipient-name" class="col-form-label">Unidades Recibidas</label>
+                            <label for="recipient-name" class="col-form-label">Unidades Entregadas</label>
                             <input type="number" class="form-control centrado" id="unidades_recibidas_acond1" readonly>
                           </div>
 
                           <div class="group">
-                            <label for="recipient-name" class="col-form-label">Cajas</label>
+                            <label for="recipient-name" class="col-form-label">Cajas Entregadas</label>
                             <input type="number" class="form-control centrado" id="cajas_acond1" readonly>
                           </div>
 
@@ -295,12 +295,12 @@ include('modal/image.php')
 
                         <div class="despachos">
                           <div class="group">
-                            <label for="recipient-name" class="col-form-label">Unidades Recibidas</label>
+                            <label for="recipient-name" class="col-form-label">Unidades Entregas</label>
                             <input type="number" class="form-control centrado" id="unidades_recibidas_acond2" readonly>
                           </div>
 
                           <div class="group">
-                            <label for="recipient-name" class="col-form-label">Cajas</label>
+                            <label for="recipient-name" class="col-form-label">Cajas Entregadas</label>
                             <input type="number" class="form-control centrado" id="cajas_acond2" readonly>
                           </div>
 
@@ -417,12 +417,12 @@ include('modal/image.php')
 
                         <div class="despachos">
                           <div class="group">
-                            <label for="recipient-name" class="col-form-label">Unidades Recibidas</label>
+                            <label for="recipient-name" class="col-form-label">Unidades Entregadas</label>
                             <input type="number" class="form-control centrado" id="unidades_recibidas_acond3" readonly>
                           </div>
 
                           <div class="group">
-                            <label for="recipient-name" class="col-form-label">Cajas</label>
+                            <label for="recipient-name" class="col-form-label">Cajas Entregadas</label>
                             <input type="number" class="form-control centrado" id="cajas_acond3" readonly>
                           </div>
 
@@ -539,12 +539,12 @@ include('modal/image.php')
 
                         <div class="despachos">
                           <div class="group">
-                            <label for="recipient-name" class="col-form-label">Unidades Recibidas</label>
+                            <label for="recipient-name" class="col-form-label">Unidades Entregadas</label>
                             <input type="number" class="form-control centrado" id="unidades_recibidas_acond4" readonly>
                           </div>
 
                           <div class="group">
-                            <label for="recipient-name" class="col-form-label">Cajas</label>
+                            <label for="recipient-name" class="col-form-label">Cajas Entregadas</label>
                             <input type="number" class="form-control centrado" id="cajas_acond4" readonly>
                           </div>
 

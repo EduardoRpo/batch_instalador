@@ -188,7 +188,7 @@ include('modal/modal_condicionesMedio.php');
                     <div class="card-block">
                       <div class="table-responsive">
 
-                        <table id="tblControlEspecificaciones" class="table table-striped table-bordered">
+                        <table id="tblControlEspecificaciones" class="table table-striped table-border">
                           <thead>
                             <tr>
                               <th class="titulo">PARAMETROS</th>
@@ -233,13 +233,13 @@ include('modal/modal_condicionesMedio.php');
                             <tr>
                               <td>PH</td>
                               <td id="espec_ph"></td>
-                              <td><input type="number" id="in_ph" class="selectpicker form-control ph especificacionInput">
+                              <td><input type="number" id="in_ph" class="selectpicker form-control ph especificacionInput" onkeyup="validar_ph();">
                               </td>
                             </tr>
                             <tr>
                               <td>Viscocidad CPS </td>
                               <td id="espec_viscidad"></td>
-                              <td><input type="number" class="selectpicker form-control especificacionInput" id="in_viscocidad">
+                              <td><input type="number" class="selectpicker form-control especificacionInput" id="in_viscocidad" onkeyup="validar_viscosidad();">
                               </td>
                             </tr>
                             <tr>
@@ -277,9 +277,24 @@ include('modal/modal_condicionesMedio.php');
                               <td><input class="selectpicker form-control especificacionInput" type="number" id="in_grado_alcohol">
                               </td>
                             </tr>
+                            <tr>
+                              <td>Aguja</td>
+                              <td id="aguja"></td>
+                              <td><input class="selectpicker form-control especificacionInput" type="text" min="1" id="in_aguja">
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>RPM</td>
+                              <td id="rpm"></td>
+                              <td><input class="selectpicker form-control especificacionInput" type="number" min="1" id="in_rpm">
+                              </td>
+                            </tr>
                         </table>
-                        <label for="" class="mt-3"><b>Observaciones</b></label>
-                        <input type="text" class="form-control" id="observacionesAprobacion">
+                        <hr>
+                        <div>
+                          <label for="" class="mt-3"><b>Observaciones</b></label>
+                          <input type="text" class="form-control" id="observacionesAprobacion">
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -340,6 +355,8 @@ include('modal/modal_condicionesMedio.php');
   <script src="../../html/js/global/controlEspecificaciones.js"></script>
   <script src="../../html/js/global/tanques.js"></script>
   <script src="../../html/js/global/propiedadesProducto.js"></script>
+  <script src="../../html/js/global/etiquetas.js"></script>
+  <script src="../../html/js/global/validacionEspecificaciones.js"></script>
 
 </body>
 

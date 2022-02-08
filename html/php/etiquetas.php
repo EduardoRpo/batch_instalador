@@ -8,7 +8,7 @@ if (!empty($_POST)) {
 
     /* Busca a cantidad de registro de parciales del batch y referencia */
 
-    $sql = "SELECT * FROM batch_conciliacion_parciales WHERE batch = :batch AND ref_multi = :referencia";
+    $sql = "SELECT * FROM batch_conciliacion_parciales WHERE batch = :batch AND ref_multi = :referencia AND modulo = 6";
     $query = $conn->prepare($sql);
     $query->execute(['batch' => $batch, 'referencia' => $referencia]);
     $data = $query->fetchAll(PDO::FETCH_ASSOC);

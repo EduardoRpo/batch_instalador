@@ -81,6 +81,7 @@ require_once('modal/m_validacionProductos.php');
                         <th>Marca</th>
                         <th>Propietario</th>
                         <th>Unidad Empaque</th>
+                        <th>Densidad Producto</th>
                         <th>Color</th>
                         <th>Olor</th>
                         <th>Apariencia</th>

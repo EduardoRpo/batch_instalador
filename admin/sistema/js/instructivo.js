@@ -96,8 +96,12 @@ function cargarTablaFormulas(referencia) {
         },
 
         columns: [{
-                defaultContent: "<a href='#' <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>",
+                data: "id",
+                render: function(data) {
+                    return `<a href='#' id=${data} <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>`
+                }
             },
+
             { data: "id" },
             { data: "pasos" },
             { data: "tiempo", className: "centrado" },
@@ -134,7 +138,7 @@ $(document).on("click", ".link-editar", function(e) {
     e.preventDefault();
 
     editar = 1;
-    const id = $(this).parent().parent().children().eq(2).text();
+    const id = this.id;
     const actividad = $(this).parent().parent().children().eq(2).text();
     const tiempo = $(this).parent().parent().children().eq(3).text();
 

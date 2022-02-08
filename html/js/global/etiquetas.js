@@ -34,17 +34,12 @@ const imprimirEtiquetasFull = (marmita) => {
             $.ajax({
                 url: `../../api/user/${modulo}/${idBatch}`,
                 success: function(usuario) {
-                    /* if (usuario == "") {
-                      alertify.set("notifier", "position", "top-right");
-                      alertify.success(
-                        "Finalice el proceso de despeje antes de continuar"
-                      );
-                      return false;
-                    } */
                     modulo == 2 ?
                         imprimirEtiquetasPesaje(materiaPrima, usuario) :
                         modulo == 3 ?
                         imprimirEtiquetasPreparacion(marmita, usuario) :
+                        modulo == 4 ?
+                        imprimirEtiquetasAprobacion(usuario) :
                         imprimirEtiquetasAcondicionamiento(usuario);
                 },
             });
@@ -77,14 +72,36 @@ const imprimirEtiquetasPreparacion = (marmita, usuario) => {
     exportarEtiquetas(operacion, preparacion);
 };
 
-const imprimirEtiquetasAcondicionamiento = (usuario) => {
+const imprimirEtiquetasAprobacion = (usuario) => {
     operacion = 3;
+    arrayData = [];
+    numero_tanques = parseInt($("#cantidad1").html());
+
+    for (let i = 1; i <= numero_tanques; i++) {
+        aprobacion = {};
+        aprobacion.orden = batch.numero_orden;
+        aprobacion.referencia = batch.referencia;
+        aprobacion.producto = batch.nombre_referencia;
+        aprobacion.tamanio_lote = batch.tamano_lote
+        aprobacion.numero_lote = $("#in_numero_lote").val();
+        aprobacion.numero_tanques = numero_tanques;
+        aprobacion.user = usuario.nombres;
+        arrayData.push(aprobacion);
+    }
+    exportarEtiquetas(operacion, arrayData);
+};
+
+
+const imprimirEtiquetasAcondicionamiento = (usuario) => {
+    operacion = 4;
+    let batch = sessionStorage.batch
+    batch = JSON.parse(batch)
     batch.usuario = usuario.nombres;
     exportarEtiquetas(operacion, batch);
 };
 
 const imprimirEtiquetasRetencion = () => {
-    operacion = 4;
+    operacion = 5;
     const referencia = batch.referencia;
     $.ajax({
         type: "POST",
@@ -124,54 +141,12 @@ const exportarEtiquetas = (operacion, arrayData) => {
     });
 };
 
-/* Etiquetas virtuales */
-
-/* $("#btnEtiquetasPrueba").click(function (e) {
-  e.preventDefault();
-  window.open(
-    `etiquetasvirtuales/${batch.idBatch}/${batch.referencia}", "_blank`
-  );
-  imprimirEtiquetasVirtuales();
-}); */
 
 $("#btnImprimirTodaslasEtiquetas").click(function(e) {
     e.preventDefault();
     imprimirEtiquetasFull();
 });
 
-/* imprimirEtiquetasVirtuales = () => {
-  $.ajax({
-    url: `../../api/etiquetasvirtuales/${referencia}/${idBatch}`,
-    success: function (response) {
-      if (!flag) flag = 1;
-      else return false;
-
-      for (let j = 0; j < response.length; j++) {
-        if (response[j]["fecha_registro"])
-          fecha = response[j]["fecha_registro"];
-        if (response[j]["urlfirma"]) verifico = response[j]["urlfirma"];
-        if (response[j]["cantidad"]) cantidad = response[j]["cantidad"];
-      }
-
-      for (i = 0; i < response.length - 2; i++) {
-        $(".etiquetas").append(
-          `<div class="etiquetaUnica rounded-3">
-            <div class="etiquetasVirtuales">
-                <p><b>OP: </b>${infoBatch.numero_orden}</p>
-                <p id="peso"><b>PESO: </b>${(
-                  ((response[i]["porcentaje"] / 100) * tamanioLote) /
-                  cantidad
-                ).toFixed(2)}</p>
-                <p><b>REFERENCIA:</b> ${response[i]["referencia"]}</p>
-                <p><b>FECHA: </b> ${fecha}</p>
-                <p><b>VoBo QC: </b><img src="${verifico}" style="width:60%"></p>
-            </div>
-          </div>`
-        );
-      }
-    },
-  });
-}; */
 
 const ImprimirEtiquetasInvima = () => {
     $.ajax({
@@ -194,7 +169,7 @@ const ImprimirEtiquetasInvima = () => {
                     `<div class="etiquetaUnica rounded-3">
             <div class="etiquetasVirtuales">
                 <p><b>OP: </b>${infoBatch.numero_orden}</p>
-                <p id="peso"><b>PESO: </b>${(((response[i]["porcentaje"] / 100) * tamanioLote) /cantidad).toFixed(2)}Kg</p>
+                <p id="peso"><b>PESO: </b>${(((response[i]["porcentaje"] / 100) * tamanioLote) / cantidad).toFixed(2)}Kg</p>
                 <p><b>REFERENCIA:</b> ${response[i]["referencia"]}</p>
                 <p><b>NOMBRE MP:</b> ${response[i]["alias"]}</p>
                 <p><b>FECHA: </b> ${fecha}</p>

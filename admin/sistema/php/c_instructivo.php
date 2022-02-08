@@ -52,14 +52,14 @@ switch ($op) {
             $tiempo = $_POST['tiempo'];
 
             if ($editar > 0) {
-                $sql = "SELECT * FROM instructivo_preparacion WHERE pasos = :proceso AND id_producto =:referencia";
+                $id = $_POST['id'];
+                $sql = "SELECT * FROM instructivo_preparacion WHERE id = :id";
                 $query = $conn->prepare($sql);
-                $query->execute(['proceso' => $actividad, 'referencia' => $referencia]);
+                $query->execute(['id' => $id]);
                 $rows = $query->rowCount();
 
                 if ($rows > 0) {
-                    $id = $_POST['id'];
-                    $sql = "UPDATE instructivo_preparacion SET pasos = :instruccion, tiempo = :tiempo WHERE pasos = :id AND id_producto = CAST(:referencia AS INT)";
+                    $sql = "UPDATE instructivo_preparacion SET pasos = :instruccion, tiempo = :tiempo WHERE id = :id AND id_producto = CAST(:referencia AS INT)";
                     $query = $conn->prepare($sql);
                     $result = $query->execute(['id' => $id, 'instruccion' => $actividad, 'tiempo' => $tiempo, 'referencia' => intval($referencia),]);
                 }

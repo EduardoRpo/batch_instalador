@@ -9,6 +9,20 @@ if (!empty($_POST)) {
 
     switch ($op) {
         case '1':
+            $btn = $_POST['id'];
+
+            if ($btn == 'tecnica_realizado') {
+                $sql = "SELECT * FROM batch_control_firmas WHERE batch = :batch AND modulo = :modulo";
+                $query = $conn->prepare($sql);
+                $query->execute(['batch' => $batch, 'modulo' => 7]);
+                $data = $query->fetch(PDO::FETCH_ASSOC);
+
+                if ($data['cantidad_firmas'] != $data['total_firmas']) {
+                    echo 1;
+                    exit;
+                }
+            }
+
             $sql = "SELECT * FROM batch_liberacion WHERE batch = :batch";
             $query = $conn->prepare($sql);
             $query->execute(['batch' => $batch]);
@@ -67,6 +81,7 @@ if (!empty($_POST)) {
                 ]);
             }
             registrarFirmas($conn, $batch, 10);
+
             break;
 
         case '2':

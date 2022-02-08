@@ -25,7 +25,7 @@ if (!empty($_POST)) {
 
                 $sql = "SELECT * FROM batch_tanques_chks WHERE modulo = :modulo AND batch = :batch";
                 $query = $conn->prepare($sql);
-                $result = $query->execute(['modulo' => $modulo, 'batch' => $batch,]);
+                $result = $query->execute(['modulo' => $modulo, 'batch' => $batch]);
                 $rows = $query->rowCount();
 
                 /* Si existe un registro actualiza de lo contrario lo inserta */
@@ -34,54 +34,57 @@ if (!empty($_POST)) {
                     $sql = "UPDATE batch_tanques_chks SET tanquesOk =:tanquesOk WHERE modulo = :modulo AND batch = :batch";
                     $query = $conn->prepare($sql);
                     $result = $query->execute(['tanquesOk' => $tanquesOk, 'modulo' => $modulo, 'batch' => $batch]);
-                    if ($modulo == 2 || $modulo == 3 || $modulo == 4) actualizarEstado($batch, $modulo, $conn);
-                    if ($result) echo '1';
-                    else echo '0';
                 } else {
                     $sql = "INSERT INTO batch_tanques_chks (tanques, tanquesOk, modulo, batch) VALUES(:tanques, :tanquesOk, :modulo, :batch)";
                     $query = $conn->prepare($sql);
                     $result = $query->execute(['tanques' => $tanques, 'tanquesOk' => $tanquesOk, 'modulo' => $modulo, 'batch' => $batch]);
-
-                    /* Actualiza el estado de los modulo pesaje, preparacion y aprobacion */
-                    if ($modulo == 2 || $modulo == 3 || $modulo == 4) actualizarEstado($batch, $modulo, $conn);
-                    if ($result) echo '1';
-                    else echo '0';
                 }
             }
 
+            /* Actualiza el estado de los modulo pesaje y preparacion  */
             if ($modulo == 2) {
                 registrarLotes($conn);
                 registrarExplosionMaterialesUso($conn);
+                actualizarEstado($batch, $modulo, $conn);
             }
-
             if ($modulo == 3) {
+                /* Insertar equipos */
                 $equipos = $_POST['equipos'];
-
                 foreach ($equipos as $equipo) {
                     $sql = "INSERT INTO batch_equipos (equipo, batch, modulo) VALUES(:equipo, :batch, :modulo)";
                     $query = $conn->prepare($sql);
                     $result = $query->execute(['equipo' => $equipo, 'batch' => $batch, 'modulo' => $modulo]);
                 }
-
-                if ($result) echo '1';
-                else echo '0';
+                /* validar que todos los tanques esten hechos para aprobacion */
+                if ($tanques == $tanquesOk) {
+                    actualizarEstado($batch, $modulo, $conn);
+                }
             }
+            if ($result)
+                echo '1';
+            else
+                echo '0';
 
 
             /* Almacena el desinfectante del modulo de aprobacion y fisicoquimico */
 
-            if ($modulo == 4 || $modulo == 9) {
+            if ($modulo == 4) {
                 desinfectanteRealizo($conn);
                 segundaSeccionRealizo($conn);
             }
 
             /* Almacena el formulario de control del módulo de preparación */
 
-            if ($modulo == 3 || $modulo == 4 || $modulo == 9) {
+            if ($modulo == 3 || $modulo == 4) {
                 $controlProducto = $_POST['controlProducto'];
 
-                $sql = "INSERT INTO batch_control_especificaciones (color, olor, apariencia, ph, viscosidad, densidad, untuosidad, espumoso, alcohol, modulo, batch) 
-                        VALUES(:color, :olor, :apariencia, :ph, :viscosidad, :densidad, :untuosidad, :espumoso, :alcohol, :modulo, :batch)";
+                if ($modulo == 3) {
+                    $controlProducto[9] = 0;
+                    $controlProducto[10] = 0;
+                }
+
+                $sql = "INSERT INTO batch_control_especificaciones (color, olor, apariencia, ph, viscosidad, densidad, untuosidad, espumoso, alcohol, aguja, rpm, modulo, batch) 
+                        VALUES(:color, :olor, :apariencia, :ph, :viscosidad, :densidad, :untuosidad, :espumoso, :alcohol, :aguja, :rpm, :modulo, :batch)";
                 $query = $conn->prepare($sql);
                 $result = $query->execute([
                     'color' => $controlProducto[0],
@@ -93,15 +96,73 @@ if (!empty($_POST)) {
                     'untuosidad' => $controlProducto[6],
                     'espumoso' => $controlProducto[7],
                     'alcohol' => $controlProducto[8],
+                    'aguja' => $controlProducto[9],
+                    'rpm' => $controlProducto[10],
                     'modulo' => $modulo,
                     'batch' => $batch,
                 ]);
                 if ($result) echo '1';
                 else echo '0';
             }
-            /* Actualiza estado  modulo fisicoquimico */
-            if ($modulo == 9)
-                actualizarEstado($batch, $modulo, $conn);
+
+            /* Almacena informacion del control de especificaciones para el modulo de fisicoquimico */
+
+            if ($modulo == 4 && $tanques == $tanquesOk) {
+                $sql = "SELECT * FROM `batch_control_especificaciones` WHERE batch = :batch AND modulo = :modulo;";
+                $query = $conn->prepare($sql);
+                $result = $query->execute(['modulo' => $modulo, 'batch' => $batch]);
+                $rows = $query->rowCount();
+                $data = $query->fetchAll(PDO::FETCH_ASSOC);
+
+                if ($rows) {
+                    $ph = 0;
+                    $densidad = 0;
+                    $viscosidad = 0;
+                    $untuosidad = 0;
+                    $espumoso = 0;
+                    $alcohol = 0;
+
+                    for ($i = 0; $i < sizeof($data); $i++) {
+                        $ph = $ph + $data[$i]['ph'] / sizeof($data);
+                        $densidad = $densidad + $data[$i]['densidad'] / sizeof($data);
+                        $viscosidad = $viscosidad + $data[$i]['viscosidad'] / sizeof($data);
+                        $untuosidad = $untuosidad + $data[$i]['untuosidad'] / sizeof($data);
+                        $espumoso = $espumoso + $data[$i]['espumoso'] / sizeof($data);
+                        $alcohol = $alcohol + $data[$i]['alcohol'] / sizeof($data);
+                    }
+
+                    $sql = "INSERT INTO batch_control_especificaciones (color, olor, apariencia, ph, viscosidad, densidad, untuosidad, espumoso, alcohol, modulo, batch) 
+                        VALUES(:color, :olor, :apariencia, :ph, :viscosidad, :densidad, :untuosidad, :espumoso, :alcohol, :modulo, :batch)";
+                    $query = $conn->prepare($sql);
+                    $result = $query->execute([
+                        'color' => $data[0]['color'],
+                        'olor' => $data[0]['olor'],
+                        'apariencia' => $data[0]['apariencia'],
+                        'ph' => $ph,
+                        'viscosidad' => $viscosidad,
+                        'densidad' => $densidad,
+                        'untuosidad' => $untuosidad,
+                        'espumoso' => $espumoso,
+                        'alcohol' => $alcohol,
+                        'modulo' => 9,
+                        'batch' => $batch,
+                    ]);
+                }
+
+                /* Almacenar datos para el modulo de fisicoquimico de acuerdo con la informacion entregada por el modulo de aprobacion */
+
+                $_POST['modulo'] = 9;
+                desinfectanteRealizo($conn);
+                segundaSeccionRealizo($conn);
+
+                /* Actualiza estado  modulo fisicoquimico */
+                if ($modulo == 9)
+                    actualizarEstado($batch, $modulo, $conn);
+
+                if ($result) echo '1';
+                else echo '0';
+            }
+
 
             break;
 

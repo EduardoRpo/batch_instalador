@@ -152,7 +152,7 @@ include("modal/modal_condicionesMedio.php");
                   <input type="text" id="observacioneslote" class="form-control" />
                 </div>
 
-                <div class="firmasLiberacion">
+                <div class="firmasLiberacion" style="display: flex;">
                   <div class="align-self-end">
                     <label for="produccion_realizado" class="col-form-label">Dirección Producción</label>
                     <input type="text" class="form-control" id="produccion_realizado" readonly>

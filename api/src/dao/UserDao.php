@@ -31,15 +31,29 @@ class UserDao
 
   public function findByBatch($modulo, $batch)
   {
+    /* Encuentra id Usuario que firma en primera seccion */
+
     $connection = Connection::getInstance()->getConnection();
     $stmt = $connection->prepare("SELECT realizo FROM `batch_desinfectante_seleccionado` WHERE modulo = :modulo AND batch = :batch");
     $stmt->execute(array('modulo' => $modulo, 'batch' => $batch));
     $idUsuario = $stmt->fetchAll($connection::FETCH_ASSOC);
 
-    $stmt = $connection->prepare("SELECT CONCAT(nombre, ' ',apellido) AS nombres FROM `usuario` WHERE id = :idUser");
-    $stmt->execute(array('idUser' => $idUsuario[0]['realizo']));
-    $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
-    $user = $stmt->fetch($connection::FETCH_ASSOC);
+    /* Si no existe usuario en batch desinfectante */
+
+    if (empty($idUsuario)) {
+      $connection = Connection::getInstance()->getConnection();
+      $stmt = $connection->prepare("SELECT CONCAT(nombre, ' ',apellido) AS nombres FROM `usuario` WHERE id_cargo = :id_cargo");
+      $stmt->execute(['id_cargo' => 12]);
+      $user = $stmt->fetch($connection::FETCH_ASSOC);
+    } else {
+      /* Encuentra Usuario */
+
+      $stmt = $connection->prepare("SELECT CONCAT(nombre, ' ',apellido) AS nombres FROM `usuario` WHERE id = :idUser");
+      $stmt->execute(array('idUser' => $idUsuario[0]['realizo']));
+      $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+      $user = $stmt->fetch($connection::FETCH_ASSOC);
+    }
+    
     $this->logger->notice("usuarios Obtenidos", array('usuarios' => $user));
     return $user;
   }

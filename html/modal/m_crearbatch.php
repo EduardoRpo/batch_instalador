@@ -62,7 +62,8 @@
                             <input id="notificacionSanitaria" class="displayallinfo" readonly name="notificacionSanitaria" required>
                         </div>
 
-                        <input type="text" id="densidad" hidden>
+                        <input type="text" id="densidad_producto" hidden>
+                        <input type="text" id="ajuste" hidden>
                     </div>
                     <hr>
                     <div class="row page">

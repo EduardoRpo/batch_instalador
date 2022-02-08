@@ -61,7 +61,7 @@ class BatchLineaDao
     $stmt = $connection->prepare("SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote, batch.estado, bcf.cantidad_firmas, bcf.modulo, bcf.total_firmas   
                                   FROM batch INNER JOIN producto p ON p.referencia = batch.id_producto
                                   INNER JOIN batch_control_firmas bcf ON bcf.batch = batch.id_batch  
-                                  WHERE (batch.estado > 4) AND bcf.cantidad_firmas in (0, 1) AND bcf.modulo = 4
+                                  WHERE (batch.estado >= 3.5) AND bcf.cantidad_firmas in (0, 1) AND bcf.modulo = 4
                                   ORDER BY batch.id_batch DESC");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
@@ -147,7 +147,7 @@ class BatchLineaDao
                                   FROM batch 
                                   INNER JOIN producto p ON batch.id_producto = p.referencia 
                                   INNER JOIN batch_control_firmas bcf ON batch.id_batch = bcf.batch
-                                  WHERE batch.estado > 7 AND bcf.modulo = 8 AND batch.id_batch 
+                                  WHERE batch.estado >= 6.5 AND bcf.modulo = 8 AND batch.id_batch 
                                   NOT IN (SELECT batch FROM `batch_analisis_microbiologico` WHERE modulo = 8 AND verifico > 0) 
                                   ORDER BY `batch`.`id_batch` ASC;");
     $stmt->execute();
@@ -164,7 +164,7 @@ class BatchLineaDao
                                   FROM batch 
                                   INNER JOIN producto p ON batch.id_producto = p.referencia 
                                   INNER JOIN batch_control_firmas bcf ON batch.id_batch = bcf.batch
-                                  WHERE batch.estado > 7 AND bcf.modulo = 9 AND batch.id_batch 
+                                  WHERE batch.estado >= 6.5 AND bcf.modulo = 9 AND batch.id_batch 
                                   NOT IN (SELECT batch FROM `batch_firmas2seccion` WHERE modulo = 9 AND verifico > 0) 
                                   ORDER BY `batch`.`id_batch` ASC");
     $stmt->execute();

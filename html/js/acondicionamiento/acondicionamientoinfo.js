@@ -36,13 +36,13 @@ function busqueda_multi() {
                     referencia = batchMulti[i].referencia;
                     presentacion = batchMulti[i].presentacion;
                     cantidad = batchMulti[i].cantidad;
-                    densidad = batchMulti[i].densidad;
+                    densidad_producto = batchMulti[i].densidad_producto;
                     total = batchMulti[i].total;
 
                     $(`#ref${j}`).val(referencia);
                     $(`#unidad_empaque${j}`).val(batchMulti[i].unidad_empaque);
                     $(`#presentacion${j}`).val(presentacion);
-                    $(`#densidad${j}`).val(densidad);
+                    $(`#densidad${j}`).val(densidad_producto);
                     $(`#total${j}`).val(total);
 
                     $(`#tanque${j}`).html(formatoCO(presentacion));
@@ -75,7 +75,7 @@ function busqueda_multi() {
                 $(`#ref${j}`).val(referencia);
                 $(`#unidad_empaque${j}`).val(batch.unidad_empaque);
                 $(`#presentacion${j}`).val(batch.presentacion);
-                $(`#densidad${j}`).val(batch.densidad);
+                $(`#densidad${j}`).val(batch.densidad_producto);
                 /* $(`#total${j}`).val(batch.tamano_lote); */
 
                 cargarTablaEnvase(j, batch.referencia, batch.unidad_lote);
@@ -163,98 +163,102 @@ $(".sel_equipos").change(function(e) {
 });
 
 function cargar(btn, idbtn) {
-    sessionStorage.setItem("idbtn", idbtn);
-    sessionStorage.setItem("btn", btn.id);
-    id = btn.id;
+    let confirm = alertify.confirm('Samara Cosmetics', '¿La información cargada es correcta?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
+    confirm.set('onok', function(r) {
+        sessionStorage.setItem("idbtn", idbtn);
+        sessionStorage.setItem("btn", btn.id);
+        id = btn.id;
 
-    /* Valida que se ha seleccionado el producto de desinfeccion para el proceso de aprobacion */
-    let seleccion = $(".in_desinfeccion").val();
+        /* Valida que se ha seleccionado el producto de desinfeccion para el proceso de aprobacion */
+        let seleccion = $(".in_desinfeccion").val();
 
-    if (seleccion == "Seleccione") {
-        alertify.set("notifier", "position", "top-right");
-        alertify.error("Seleccione el producto para desinfección.");
-        return false;
-    }
-
-    /* Valida el proceso para la segunda seccion */
-    if (id != "despeje_realizado" && id != "despeje_verificado") {
-        let banda = $(`#sel_banda${id_multi}`).val();
-        let etiquetadora = $(`#sel_etiquetadora${id_multi}`).val();
-        let tunel = $(`#sel_tunel${id_multi}`).val();
-
-        if (!banda || !etiquetadora || !tunel) {
+        if (seleccion == "Seleccione") {
             alertify.set("notifier", "position", "top-right");
-            alertify.error("Seleccione los equipos de la linea de producción.");
+            alertify.error("Seleccione el producto para desinfección.");
             return false;
-        } else {
-            equipos = [];
-            for (i = 1; i < 4; i++) {
-                const equipo = {};
-                if (i === 1) equipo.equipo = banda;
-                if (i === 2) equipo.equipo = etiquetadora;
-                if (i === 3) equipo.equipo = tunel;
-                equipo.batch = idBatch;
-                equipo.modulo = modulo;
-                equipo.referencia = ref_multi;
-                equipos.push(equipo);
+        }
+
+        /* Valida el proceso para la segunda seccion */
+        if (id != "despeje_realizado" && id != "despeje_verificado") {
+            let banda = $(`#sel_banda${id_multi}`).val();
+            let etiquetadora = $(`#sel_etiquetadora${id_multi}`).val();
+            let tunel = $(`#sel_tunel${id_multi}`).val();
+
+            if (!banda || !etiquetadora || !tunel) {
+                alertify.set("notifier", "position", "top-right");
+                alertify.error("Seleccione los equipos de la linea de producción.");
+                return false;
+            } else {
+                equipos = [];
+                for (i = 1; i < 4; i++) {
+                    const equipo = {};
+                    if (i === 1) equipo.equipo = banda;
+                    if (i === 2) equipo.equipo = etiquetadora;
+                    if (i === 3) equipo.equipo = tunel;
+                    equipo.batch = idBatch;
+                    equipo.modulo = modulo;
+                    equipo.referencia = ref_multi;
+                    equipos.push(equipo);
+                }
             }
         }
-    }
-    /* validar que todas las muestras se registraron */
-    if (id == `controlpeso_realizado${id_multi}`) {
-        i = sessionStorage.getItem(`totalmuestras${id_multi}`);
-        cantidad_muestras = $(`#muestras${id_multi}`).val() * 5;
+        /* validar que todas las muestras se registraron */
+        if (id == `controlpeso_realizado${id_multi}`) {
+            i = sessionStorage.getItem(`totalmuestras${id_multi}`);
+            cantidad_muestras = $(`#muestras${id_multi}`).val() * 5;
 
-        if (i != cantidad_muestras) {
-            alertify.set("notifier", "position", "top-right");
-            alertify.error("Ingrese todas las muestras");
-            return false;
-        }
-    }
-
-    if (id == `devolucion_realizado${id_multi}`) {
-        let utilizada = $(`#utilizada_empaque${id_multi}`).val();
-        let averias = $(`#averias_empaque${id_multi}`).val();
-        let sobrante = $(`#sobrante_empaque${id_multi}`).val();
-
-        if (utilizada == "" || averias == "" || sobrante == "") {
-            alertify.set("notifier", "position", "top-right");
-            alertify.error("Ingrese todos los datos");
-            return false;
+            if (i != cantidad_muestras) {
+                alertify.set("notifier", "position", "top-right");
+                alertify.error("Ingrese todas las muestras");
+                return false;
+            }
         }
 
-        utilizada = $(`#utilizada_otros${id_multi}`).val();
-        averias = $(`#averias_otros${id_multi}`).val();
-        sobrante = $(`#sobrante_otros${id_multi}`).val();
+        if (id == `devolucion_realizado${id_multi}`) {
+            let utilizada = $(`#utilizada_empaque${id_multi}`).val();
+            let averias = $(`#averias_empaque${id_multi}`).val();
+            let sobrante = $(`#sobrante_empaque${id_multi}`).val();
 
-        if (utilizada == "" || averias == "" || sobrante == "") {
-            alertify.set("notifier", "position", "top-right");
-            alertify.error("Ingrese todos los datos");
-            return false;
+            if (utilizada == "" || averias == "" || sobrante == "") {
+                alertify.set("notifier", "position", "top-right");
+                alertify.error("Ingrese todos los datos");
+                return false;
+            }
+
+            utilizada = $(`#utilizada_otros${id_multi}`).val();
+            averias = $(`#averias_otros${id_multi}`).val();
+            sobrante = $(`#sobrante_otros${id_multi}`).val();
+
+            if (utilizada == "" || averias == "" || sobrante == "") {
+                alertify.set("notifier", "position", "top-right");
+                alertify.error("Ingrese todos los datos");
+                return false;
+            }
         }
-    }
 
-    if (id == `conciliacion_realizado${id_multi}`) {
-        let unidades = $(`#txtUnidadesProducidas${id_multi}`).val();
-        let retencion = $(`#txtMuestrasRetencion${id_multi}`).val();
-        let mov = $(`#txtNoMovimiento${id_multi}`).val();
+        if (id == `conciliacion_realizado${id_multi}`) {
+            let unidades = $(`#txtUnidadesProducidas${id_multi}`).val();
+            let retencion = $(`#txtMuestrasRetencion${id_multi}`).val();
+            let mov = $(`#txtNoMovimiento${id_multi}`).val();
 
-        let conciliacion = unidades * retencion * mov;
+            let conciliacion = unidades * retencion * mov;
 
-        if (conciliacion == 0) {
-            alertify.set("notifier", "position", "top-right");
-            alertify.error("Campos vacios o con valor cero");
-            return false;
+            if (conciliacion == 0) {
+                alertify.set("notifier", "position", "top-right");
+                alertify.error("Campos vacios o con valor cero");
+                return false;
+            }
         }
-    }
-    /* Carga el modal para la autenticacion */
+        /* Carga el modal para la autenticacion */
 
-    $("#usuario").val("");
-    $("#clave").val("");
-    $("#m_firmar").modal("show");
+        $("#usuario").val("");
+        $("#clave").val("");
+        $("#m_firmar").modal("show");
+    });
 }
 
 //recalcular valores en la tabla de devolucion de materiales envase
+
 function recalcular_valores() {
     let utilizada = $(`#utilizada_empaque${id_multi}`).val();
     let averias = $(`#averias_empaque${id_multi}`).val();
@@ -328,16 +332,18 @@ let unidad = $("txtUnidadesProducidas").val();
 function conciliacionRendimiento() {
     $(`#txtNoMovimiento${id_multi}`).val("");
     let unidadEmpaque = $(`#unidad_empaque${id_multi}`).val(); //se debe cargar desde envasado
+
     if (unidadEmpaque === "0") {
         alertify.set("notifier", "position", "top-right");
-        alertify.error(
-            "Valide las unidades de empaque del producto con el administrador, presenta valor cero (0)"
-        );
+        alertify.error("Valide las unidades de empaque del producto con el administrador, presenta valor cero (0)");
         $(`#txtTotal-Cajas${id_multi}`).val("Valide unidades de Empaque");
-        //return false;
+
     }
+
     let unidadesProducidas = parseInt($(`#txtUnidadesProducidas${id_multi}`).val());
     let parcialesUnidadesProducidas = parseInt($(`#parcialesUnidadesProducidas${id_multi}`).val());
+
+    isNaN(parcialesUnidadesProducidas) ? parcialesUnidadesProducidas = 0 : parcialesUnidadesProducidas
 
     unidadesProducidas = parseFloat(unidadesProducidas) + parseFloat(parcialesUnidadesProducidas)
 
@@ -368,8 +374,17 @@ function conciliacionRendimiento() {
     rendimiento_producto();
 }
 
+/* Reimprimir Etiquetas */
+
+reimprimirEtiquetas = () => {
+    imprimirEtiquetasFull();
+    alertify.set("notifier", "position", "top-right");
+    alertify.success("Reimpresion de etiquetas correctamente");
+}
+
+
 function rendimiento_producto() {
-    //cantidad = $(`#txtUnidadesProducidas${id_multi}`).val();
+
     cantidadparciales = $(`#parcialesUnidadesProducidas${id_multi}`).val();
     cantidadparciales == "" ? cantidadparciales = 0 : cantidadparciales
     cantidadIngresada = $(`#txtUnidadesProducidas${id_multi}`).val();
@@ -377,18 +392,12 @@ function rendimiento_producto() {
 
     cantidad = parseFloat(cantidadparciales) + parseFloat(cantidadIngresada)
 
-    presentacion = $(`#presentacion${id_multi}`).val();
-    densidad = $(`#densidad${id_multi}`).val();
-    total = $(`#in_tamano_lote`).val(); //total de la presentacion
-    //total = $(`#total${id_multi}`).val(); //total de la presentacion
-    total = total.replace(".", "");
+    presentacion = parseInt($(`#presentacion${id_multi}`).val());
+    densidad = parseFloat($(`#densidad${id_multi}`).val());
+    total = $(`#total${id_multi}`).html();
+    /* total = $(`#in_tamano_lote`).val(); 
+    total = total.replace(".", ""); */
 
-    /* cantidad == "" ?
-        (cantidad = $(`#parcialesUnidadesProducidas${id_multi}`).val()) :
-        cantidad;
-
-    cantidad = cantidad.replace('.', '')
- */
     let rendimiento = (presentacion * cantidad * densidad) / 1000;
     rendimiento = ((rendimiento / total) * 100).toFixed(2) + "%";
     $(`#rendimientoProducto${id_multi}`).val(rendimiento);
@@ -426,17 +435,12 @@ function registrar_conciliacion(info) {
                             if (data.length == 1) imprimirEtiquetasRetencion();
 
                             alertify.set("notifier", "position", "top-right");
-                            alertify.success(
-                                "Conciliación parcial registrada satisfactoriamente"
-                            );
+                            alertify.success("Conciliación parcial registrada satisfactoriamente");
                             let suma = 0;
                             data.forEach((element) => {
                                 suma = suma + element.unidades;
                             });
-                            alertify.alert(
-                                "Entrega Parcial",
-                                `Total Unidades Entregadas: <b>${suma}</b>`
-                            );
+                            alertify.alert("Entrega Parcial", `Total Unidades Entregadas: <b>${suma}</b>`);
                             $(`#parcialesUnidadesProducidas${id_multi}`).val(suma);
                             $(`#txtMuestrasRetencion${id_multi}`).prop("readonly", true);
                             $(`#txtUnidadesProducidas${id_multi}`).val("");
@@ -452,6 +456,11 @@ function registrar_conciliacion(info) {
                     "../../html/php/conciliacion_rendimiento.php",
                     data,
                     function(data, textStatus, jqXHR) {
+                        if (data == 'false') {
+                            alertify.set("notifier", "position", "top-right");
+                            alertify.error("No se puede hacer el cierre total. Para finalizar la entrega debe completar el módulo de envasado");
+                            return false
+                        }
                         if (textStatus == "success") {
                             imprimirEtiquetasRetencion();
                             alertify.set("notifier", "position", "top-right");

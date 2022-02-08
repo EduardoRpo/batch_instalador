@@ -99,10 +99,10 @@ switch ($op) {
     break;
 
   case 4: //recargar datos de acuerdo con seleccion de referencia
-    $id_referencia = $_POST['id'];
+    /* $id_referencia = $_POST['id'];
     $query_producto = mysqli_query(
       $conn,
-      "SELECT p.referencia, p.nombre_referencia as nombre, m.nombre as marca, ns.nombre as notificacion_sanitaria, pp.nombre as propietario, np.nombre as producto, pc.nombre as presentacion_comercial, l.nombre as linea, l.densidad 
+      "SELECT p.referencia, p.nombre_referencia as nombre, m.nombre as marca, ns.nombre as notificacion_sanitaria, pp.nombre as propietario, np.nombre as producto, pc.nombre as presentacion_comercial, l.nombre as linea, l.densidad, l.ajuste, p.densidad_producto 
         FROM producto p 
         INNER JOIN marca m INNER JOIN notificacion_sanitaria ns INNER JOIN propietario pp INNER JOIN nombre_producto np INNER JOIN linea l INNER JOIN presentacion_comercial pc 
         ON p.id_marca = m.id AND p.id_notificacion_sanitaria = ns.id AND p.id_propietario=pp.id AND p.id_nombre_producto= np.id AND p.id_linea=l.id AND pc.id = p.presentacion_comercial 
@@ -119,7 +119,7 @@ switch ($op) {
       echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
     } else {
       echo json_encode('');
-    }
+    } */
     break;
 
   case 5: // Guardar
@@ -282,7 +282,7 @@ switch ($op) {
     break;
 
   case 9: // cargar selector de Tanques
-    $query_tanque = mysqli_query($conn, "SELECT capacidad FROM tanques ORDER BY 'capacidad' ASC");
+    $query_tanque = mysqli_query($conn, "SELECT capacidad FROM tanques ORDER BY `tanques`.`capacidad` ASC");
 
     $result = mysqli_num_rows($query_tanque);
 

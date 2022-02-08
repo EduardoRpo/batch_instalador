@@ -5,7 +5,7 @@ use BatchRecord\dao\PedidosDao;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-$explosionMaterialesDao = new PedidosDao();
+$pedidosDao = new PedidosDao();
 
 $app->get('/pedidos', function (Request $request, Response $response, $args) use ($pedidosDao) {
     $array = $pedidosDao->findAll();

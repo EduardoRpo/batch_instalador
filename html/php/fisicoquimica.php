@@ -10,6 +10,7 @@ if (!empty($_POST)) {
     $query = $conn->prepare($sql);
     $query->execute(['modulo' => $modulo, 'batch' => $batch]);
     $desinfectante = $query->fetch(PDO::FETCH_ASSOC);
+    
     if ($desinfectante > 0) {
 
         $sql = "SELECT bf.observaciones as obsBatch, u.urlfirma as realizo, us.urlfirma as verifico FROM batch_firmas2seccion bf 

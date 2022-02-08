@@ -19,10 +19,10 @@ function desinfectanteRealizo($conn)
     if ($rows == 0) {
 
         if ($modulo == 8)
-            $dataMicrobiologia = $_POST['dataMicro'];
+            $dataMicrobiologia = json_decode($_POST['dataMicro'], true);
 
         $modulo == 8 ? $desinfectante = $dataMicrobiologia[0]["desinfectante"] : $desinfectante = $_POST['desinfectante'];
-        $modulo == 8 ? $obs_desinfectante = $dataMicrobiologia[0]["desinfectante_observaciones"] : $obs_desinfectante = $_POST['obs_desinfectante'];
+        $modulo == 8 ? $obs_desinfectante = $dataMicrobiologia[0]["observaciones"] : $obs_desinfectante = $_POST['obs_desinfectante'];
         $realizo = $_POST['realizo'];
         $verifico = '0';
 
@@ -111,7 +111,7 @@ function segundaSeccionVerifico($conn)
             $ref_multi = $_POST['ref_multi'];
             $sql = "UPDATE batch_firmas2seccion SET verifico = :verifico WHERE modulo = :modulo AND batch = :batch AND ref_multi = :ref_multi";
             $query = $conn->prepare($sql);
-            $query->execute(['verifico' => $verifico, 'modulo' => $modulo, 'batch' => $batch, 'ref_multi' => $ref_multi,]);
+            $query->execute(['verifico' => $verifico[0]['id'], 'modulo' => $modulo, 'batch' => $batch, 'ref_multi' => $ref_multi,]);
         } else {
             $ref_multi = 0;
             $sql = "UPDATE batch_firmas2seccion SET verifico = :verifico WHERE modulo = :modulo AND batch = :batch";
@@ -290,34 +290,44 @@ function analisisMicrobiologiaRealizo($conn)
 {
     $modulo = $_POST['modulo'];
     $batch = $_POST['idBatch'];
+    $realizo = $_POST['realizo'];
+    $dataMicrobiologia = json_decode($_POST['dataMicro'], true);
 
-    $sql = "SELECT * FROM batch_analisis_microbiologico WHERE modulo = :modulo AND batch = :batch";
-    $query = $conn->prepare($sql);
-    $query->execute(['modulo' => $modulo, 'batch' => $batch]);
-    $rows = $query->rowCount();
-
-    if ($rows == 0) {
-
-        $dataMicrobiologia = $_POST['dataMicro'];
-        $realizo = $_POST['realizo'];
-
-        $sql = "INSERT INTO `batch_analisis_microbiologico`(mesofilos, pseudomona, escherichia, staphylococcus, fecha_siembra, fecha_resultados, observaciones, realizo, batch, modulo) 
-        VALUES(:mesofilos, :pseudomona, :escherichia, :staphylococcus, :fecha_siembra, :fecha_resultados, :observaciones, :realizo, :batch, :modulo)";
+    for ($i = 2; $i < sizeof($dataMicrobiologia); $i++) {
+        $sql = "INSERT INTO `batch_analisis_microbiologico`(mesofilos, pseudomona, escherichia, staphylococcus, fecha_siembra, fecha_resultados, realizo, referencia, batch, modulo) 
+                    VALUES(:mesofilos, :pseudomona, :escherichia, :staphylococcus, :fecha_siembra, :fecha_resultados, :realizo, :referencia, :batch, :modulo)";
         $query = $conn->prepare($sql);
         $query->execute([
-            'mesofilos' => $dataMicrobiologia[0]["mesofilos"],
-            'pseudomona' => $dataMicrobiologia[0]["pseudomona"],
-            'escherichia' => $dataMicrobiologia[0]["escherichia"],
-            'staphylococcus' => $dataMicrobiologia[0]["staphylococcus"],
-            'fecha_siembra' => $dataMicrobiologia[0]["fechaSiembra"],
-            'fecha_resultados' => $dataMicrobiologia[0]["fechaResultados"],
-            'observaciones' => $dataMicrobiologia[0]["observaciones"],
+            'mesofilos' => $dataMicrobiologia[$i]["mesofilos"],
+            'pseudomona' => $dataMicrobiologia[$i]["pseudomona"],
+            'escherichia' => $dataMicrobiologia[$i]["escherichia"],
+            'staphylococcus' => $dataMicrobiologia[$i]["staphylococcus"],
+            'fecha_siembra' => $dataMicrobiologia[$i]["fechaSiembra"],
+            'fecha_resultados' => $dataMicrobiologia[$i]["fechaResultados"],
+            'referencia' => $dataMicrobiologia[$i]["referencia"],
             'realizo' => $realizo,
             'batch' => $batch,
             'modulo' => $modulo
         ]);
-        registrarFirmas($conn, $batch, $modulo);
     }
+
+    $sql = "SELECT * FROM `batch_analisis_microbiologico` WHERE batch = :batch AND modulo = :modulo";
+    $query = $conn->prepare($sql);
+    $query->execute(['batch' => $batch, 'modulo' => $modulo]);
+    $cantMicro = $query->rowCount();
+
+    $sql = "SELECT * FROM `multipresentacion` WHERE id_batch = :batch";
+    $query = $conn->prepare($sql);
+    $query->execute(['batch' => $batch]);
+    $cantMulti = $query->rowCount();
+
+    /* Validacion referencia sin multipresentacion */
+    if ($cantMulti == 0) $cantMulti = 1;
+
+    if ($cantMicro == $cantMulti)
+        echo '1';
+
+    registrarFirmas($conn, $batch, $modulo);
 }
 
 function AnalisisMicrobiologiaVerifico($conn)

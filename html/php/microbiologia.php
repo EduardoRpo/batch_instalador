@@ -55,26 +55,51 @@ if (!empty($_POST)) {
 
         case 2: // Guardar
             $modulo = $_POST['modulo'];
-            $dataMicrobiologia = $_POST['dataMicro'];
+            $dataMicrobiologia = json_decode($_POST['dataMicro'], true);
 
             /* Almacenar equipos */
-            $sql = "INSERT INTO `batch_equipos`(equipo, batch, modulo) VALUES(:equipo, :batch, :modulo)";
+            $sql = "SELECT * FROM `batch_equipos` WHERE batch = :batch AND modulo = :modulo";
             $query = $conn->prepare($sql);
+            $query->execute(['batch' => $batch, 'modulo' => $modulo]);
+            $rows = $query->rowCount();
 
-            for ($i = 1; $i < 4; $i++) {
-                $query->execute(['equipo' => $dataMicrobiologia[0]["equipo$i"], 'batch' => $batch, 'modulo' => $modulo]);
+            if ($rows == 0) {
+                $sql = "INSERT INTO `batch_equipos`(equipo, batch, modulo) VALUES(:equipo, :batch, :modulo)";
+                $query = $conn->prepare($sql);
+
+                for ($i = 1; $i < 4; $i++) {
+                    $query->execute([
+                        'equipo' => $dataMicrobiologia[1]["equipo$i"],
+                        'batch' => $batch, 'modulo' => $modulo
+                    ]);
+                }
+                desinfectanteRealizo($conn);
             }
-
             analisisMicrobiologiaRealizo($conn);
-            desinfectanteRealizo($conn);
             actualizarEstado($batch, $modulo, $conn);
+
             break;
 
         case '3': // Guardar firma calidad
+            $modulo = $_POST['modulo'];
+            /* validar que se haya cerrado fisicoquimico */
 
-            AnalisisMicrobiologiaVerifico($conn);
-            desinfectanteVerifico($conn);
-            cerrarEstado($batch, $modulo, $conn);
+            $sql = "SELECT * FROM `batch_firmas2seccion` WHERE batch = :batch AND modulo = :modulo";
+            $query = $conn->prepare($sql);
+            $query->execute(['batch' => $batch, 'modulo' => 9]);
+            $rows = $query->rowCount();
+
+            if ($rows > 0) {
+                $batch_fisicoquimco = $query->fetchAll(PDO::FETCH_ASSOC);
+                if ($batch_fisicoquimco[0]['realizo'] > 0 && $batch_fisicoquimco[0]['verifico'] > 0) {
+                    AnalisisMicrobiologiaVerifico($conn);
+                    desinfectanteVerifico($conn);
+                    cerrarEstado($batch, $modulo, $conn);
+                } else
+                    echo 'false';
+            } else
+                echo 'false';
+
             break;
     }
 } else

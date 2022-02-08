@@ -282,7 +282,7 @@ include('modal/image.php')
                     <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 180px; height: 38px;" onclick="muestras_acondicionamiento();" data-toggle="modal" data-target="#m_muestras_acond">Iniciar</button> <!--   -->
                   </div>
                   <div class="col-md-1 align-self-center" style="margin-top: 1%">
-                    <button type="button" class="btn waves-effect waves-light" style="background: seagreen;color:white" onclick=" imprimirEtiquetasFull();">Reimprimir Etiquetas</button>
+                    <button type="button" class="btn waves-effect waves-light" style="background: seagreen;color:white" onclick=" reimprimirEtiquetas();">Reimprimir Etiquetas</button>
                   </div>
                 </div>
                 <div class="row" style="margin: 1%">
@@ -527,7 +527,7 @@ include('modal/image.php')
                     <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 180px; height: 38px;" onclick="muestras_acondicionamiento();" data-toggle="modal" data-target="#m_muestras_acond">Iniciar</button> <!--   -->
                   </div>
                   <div class="col-md-1 align-self-center" style="margin-top: 1%">
-                    <button type="button" class="btn waves-effect waves-light" style="background: seagreen;color:white" onclick=" imprimirEtiquetasFull();">Reimprimir Etiquetas</button>
+                    <button type="button" class="btn waves-effect waves-light" style="background: seagreen;color:white" onclick=" reimprimirEtiquetas();">Reimprimir Etiquetas</button>
                   </div>
                 </div>
                 <div class="row" style="margin: 1%">
@@ -769,7 +769,7 @@ include('modal/image.php')
                     <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 180px; height: 38px;" onclick="muestras_acondicionamiento();" data-toggle="modal" data-target="#m_muestras_acond">Iniciar</button> <!--   -->
                   </div>
                   <div class="col-md-1 align-self-center" style="margin-top: 1%">
-                    <button type="button" class="btn waves-effect waves-light" style="background: seagreen;color:white" onclick=" imprimirEtiquetasFull();">Reimprimir Etiquetas</button>
+                    <button type="button" class="btn waves-effect waves-light" style="background: seagreen;color:white" onclick=" reimprimirEtiquetas();">Reimprimir Etiquetas</button>
                   </div>
                 </div>
                 <div class="row" style="margin: 1%">
@@ -1012,7 +1012,7 @@ include('modal/image.php')
                   </div>
 
                   <div class="col-md-1 align-self-center" style="margin-top: 1%">
-                    <button type="button" class="btn waves-effect waves-light" style="background: seagreen;color:white" onclick=" imprimirEtiquetasFull();">Reimprimir Etiquetas</button>
+                    <button type="button" class="btn waves-effect waves-light" style="background: seagreen;color:white" onclick=" reimprimirEtiquetas();">Reimprimir Etiquetas</button>
                   </div>
 
                 </div>

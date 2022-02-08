@@ -44,7 +44,7 @@ if (!empty($_POST)) {
                     VALUES (:observaciones, :batch, :modulo)";
             $query = $conn->prepare($sql);
             $result = $query->execute([
-                'observaciones' => $observaciones,
+                'observaciones' => trim(ucfirst(strtolower($observaciones))),
                 'batch' => $batch,
                 'modulo' => $modulo,
             ]);
@@ -67,9 +67,46 @@ if (!empty($_POST)) {
 
             $modulo = $_POST['modulo'];
             $batch = $_POST['idBatch'];
-            if ($modulo == 4 || $modulo == 9) desinfectanteVerifico($conn);
-            segundaSeccionVerifico($conn);
+            $result = 1;
 
+            if ($modulo == 2 || $modulo == 3) {
+                //desinfectanteVerifico($conn);
+                segundaSeccionVerifico($conn);
+            }
+
+            if ($modulo == 4 || $modulo == 9) {
+                $result = 0;
+                /* Validacion que todas las firmas de pesaje este completas*/
+                $sql = "SELECT * FROM batch_control_firmas WHERE batch = :batch";
+                $query = $conn->prepare($sql);
+                $query->execute(['batch' => $batch]);
+                $data = $query->fetchAll(PDO::FETCH_ASSOC);
+
+                if ($modulo == 4) {
+                    $modulo1 = 2;
+                    $modulo2 = 3;
+                }
+
+                if ($modulo == 9) {
+                    $modulo1 = 5;
+                    $modulo2 = 6;
+                }
+
+                for ($i = 0; $i < sizeof($data); $i++) {
+                    if ($data[$i]['modulo'] == $modulo1 && $data[$i]['cantidad_firmas'] == $data[$i]['total_firmas'])
+                        if ($data[$i + 1]['modulo'] == $modulo2 && $data[$i + 1]['cantidad_firmas'] == $data[$i + 1]['total_firmas']) {
+                            /* actualizar estado si todos las firmas esten completas */
+                            if ($modulo != 9)
+                                actualizarEstado($batch, $modulo, $conn);
+                            desinfectanteVerifico($conn);
+                            segundaSeccionVerifico($conn);
+                            $result = 1;
+                            echo $result;
+                        }
+                }
+            }
+
+            echo $result;
             break;
     }
 }

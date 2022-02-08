@@ -161,6 +161,7 @@ include_once("modal/modalPedidos.php");
                           <table class="table table-striped table-bordered " id="tablaBatchCerrados">
                             <thead>
                               <tr>
+                                <th>Batch</th>
                                 <th>Orden</th>
                                 <th>Referencia</th>
                                 <th>Nombre</th>

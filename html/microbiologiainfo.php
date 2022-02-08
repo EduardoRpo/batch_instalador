@@ -181,7 +181,10 @@ include("modal/modal_condicionesMedio.php");
                               <th class="centrado">Análisis</th>
                               <th class="centrado">Especificación</th>
                               <th class="centrado">Método</th>
-                              <th class="centrado">Resultado</th>
+                              <th class="centrado m1" id="ref1"></th>
+                              <th class="centrado m2" id="ref2"></th>
+                              <th class="centrado m3" id="ref3"></th>
+                              <th class="centrado m4" id="ref4"></th>
                             </tr>
                           </thead>
                           <tbody>
@@ -189,13 +192,34 @@ include("modal/modal_condicionesMedio.php");
                               <th>Recuento de Mesófilos Aerobios Totales</th>
                               <td id="mesofilos"></td>
                               <td class="metodo"></td>
-                              <td><input type="text" id="inputMesofilos" class="form-control"></td>
+                              <td class="m1"><input type="text" id="inputMesofilos1" class="form-control inputMesofilos1"></td>
+                              <td class="m2"><input type="text" id="inputMesofilos2" class="form-control inputMesofilos2"></td>
+                              <td class="m3"><input type="text" id="inputMesofilos3" class="form-control inputMesofilos3"></td>
+                              <td class="m4"><input type="text" id="inputMesofilos4" class="form-control inputMesofilos4"></td>
                             </tr>
                             <tr>
                               <th>Pseudomona Aeruginosa</th>
                               <td id="pseudomona"></td>
                               <td class="metodo"></td>
-                              <td><select class="selectpicker form-control pseudomona" id="pseudomona">
+                              <td class="m1"><select class="selectpicker form-control pseudomona1" id="pseudomona1">
+                                  <option value="0" selected hidden>Seleccionar</option>
+                                  <option value="1">Ausencia</option>
+                                  <option value="2">Presencia</option>
+                                  <option value="3">No Aplica</option>
+                                </select></td>
+                              <td class="m2"><select class="selectpicker form-control pseudomona2" id="pseudomona2">
+                                  <option value="0" selected hidden>Seleccionar</option>
+                                  <option value="1">Ausencia</option>
+                                  <option value="2">Presencia</option>
+                                  <option value="3">No Aplica</option>
+                                </select></td>
+                              <td class="m3"><select class="selectpicker form-control pseudomona3" id="pseudomona3">
+                                  <option value="0" selected hidden>Seleccionar</option>
+                                  <option value="1">Ausencia</option>
+                                  <option value="2">Presencia</option>
+                                  <option value="3">No Aplica</option>
+                                </select></td>
+                              <td class="m4"><select class="selectpicker form-control pseudomona4" id="pseudomona4">
                                   <option value="0" selected hidden>Seleccionar</option>
                                   <option value="1">Ausencia</option>
                                   <option value="2">Presencia</option>
@@ -206,7 +230,25 @@ include("modal/modal_condicionesMedio.php");
                               <th>Escherichia Coli y Coliformes Totales</th>
                               <td id="escherichia"></td>
                               <td class="metodo"></td>
-                              <td><select class="selectpicker form-control escherichia" id="escherichia">
+                              <td class="m1"><select class="selectpicker form-control escherichia1" id="escherichia1">
+                                  <option value="0" selected hidden>Seleccionar</option>
+                                  <option value="1">Ausencia</option>
+                                  <option value="2">Presencia</option>
+                                  <option value="3">No Aplica</option>
+                                </select></td>
+                              <td class="m2"><select class="selectpicker form-control escherichia2" id="escherichia2">
+                                  <option value="0" selected hidden>Seleccionar</option>
+                                  <option value="1">Ausencia</option>
+                                  <option value="2">Presencia</option>
+                                  <option value="3">No Aplica</option>
+                                </select></td>
+                              <td class="m3"><select class="selectpicker form-control escherichia3" id="escherichia3">
+                                  <option value="0" selected hidden>Seleccionar</option>
+                                  <option value="1">Ausencia</option>
+                                  <option value="2">Presencia</option>
+                                  <option value="3">No Aplica</option>
+                                </select></td>
+                              <td class="m4"><select class="selectpicker form-control escherichia4" id="escherichia4">
                                   <option value="0" selected hidden>Seleccionar</option>
                                   <option value="1">Ausencia</option>
                                   <option value="2">Presencia</option>
@@ -217,12 +259,48 @@ include("modal/modal_condicionesMedio.php");
                               <th>Staphylococcus Aureus</th>
                               <td id="staphylococcus"></td>
                               <td class="metodo"></td>
-                              <td><select class="selectpicker form-control staphylococcus" id="staphylococcus">
+                              <td class="m1"><select class="selectpicker form-control staphylococcus1" id="staphylococcus1">
                                   <option value="0" selected hidden>Seleccionar</option>
                                   <option value="1">Ausencia</option>
                                   <option value="2">Presencia</option>
                                   <option value="3">No Aplica</option>
                                 </select></td>
+                              <td class="m2"><select class="selectpicker form-control staphylococcus2" id="staphylococcus2">
+                                  <option value="0" selected hidden>Seleccionar</option>
+                                  <option value="1">Ausencia</option>
+                                  <option value="2">Presencia</option>
+                                  <option value="3">No Aplica</option>
+                                </select></td>
+                              <td class="m3"><select class="selectpicker form-control staphylococcus3" id="staphylococcus3">
+                                  <option value="0" selected hidden>Seleccionar</option>
+                                  <option value="1">Ausencia</option>
+                                  <option value="2">Presencia</option>
+                                  <option value="3">No Aplica</option>
+                                </select></td>
+                              <td class="m4"><select class="selectpicker form-control staphylococcus4" id="staphylococcus4">
+                                  <option value="0" selected hidden>Seleccionar</option>
+                                  <option value="1">Ausencia</option>
+                                  <option value="2">Presencia</option>
+                                  <option value="3">No Aplica</option>
+                                </select></td>
+                            </tr>
+                            <tr>
+                              <th>Fecha de Siembra</th>
+                              <th></th>
+                              <th></th>
+                              <th class="m1"><input type="date" class="form-control" id="fechaSiembra1"></th>
+                              <th class="m2"><input type="date" class="form-control" id="fechaSiembra2"></th>
+                              <th class="m3"><input type="date" class="form-control" id="fechaSiembra3"></th>
+                              <th class="m4"><input type="date" class="form-control" id="fechaSiembra4"></th>
+                            </tr>
+                            <tr>
+                              <th>Fecha de Resultados</th>
+                              <th></th>
+                              <th></th>
+                              <th class="m1"><input type="date" class="form-control" id="fechaResultados1"></th>
+                              <th class="m2"><input type="date" class="form-control" id="fechaResultados2"></th>
+                              <th class="m3"><input type="date" class="form-control" id="fechaResultados3"></th>
+                              <th class="m4"><input type="date" class="form-control" id="fechaResultados4"></th>
                             </tr>
 
                           </tbody>
@@ -231,7 +309,7 @@ include("modal/modal_condicionesMedio.php");
                     </div>
                   </div>
                 </div>
-                <div class="col-md-12 align-self-center">
+                <!-- <div class="col-md-12 align-self-center">
                   <div class="card">
                     <div class="card-block">
                       <div class="obj2 mb-3 ml-3 mr-3">
@@ -243,7 +321,7 @@ include("modal/modal_condicionesMedio.php");
 
                     </div>
                   </div>
-                </div>
+                </div> -->
 
                 <div class="col-md-12 align-self-center">
                   <div class="card" style="height: 60px;">

@@ -1,42 +1,62 @@
 <?php
 
 
-  namespace BatchRecord\Dao;
+namespace BatchRecord\Dao;
 
-  use BatchRecord\Constants\Constants;
-  use Monolog\Handler\RotatingFileHandler;
-  use Monolog\Handler\StreamHandler;
-  use Monolog\Logger;
+use BatchRecord\Constants\Constants;
+use Monolog\Handler\RotatingFileHandler;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 
-  /**
-   * Class ProductDao
-   * @package BatchRecord\Dao
-   * @author Teenus <Teenus-SAS>
-   */
-  class ProductDao
+/**
+ * Class ProductDao
+ * @package BatchRecord\Dao
+ * @author Teenus <Teenus-SAS>
+ */
+class ProductDao
+{
+  private $logger;
+
+  public function __construct()
   {
-    private $logger;
+    $this->logger = new Logger(self::class);
+    $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
+  }
 
-    public function __construct()
-    {
-      $this->logger = new Logger(self::class);
-      $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20,Logger::DEBUG));
-    }
+  public function findAll()
+  {
+    $connection = Connection::getInstance()->getConnection();
+    $stmt = $connection->prepare("SELECT * FROM producto WHERE ?");
+    $stmt->execute(array(1));
+    $products = $stmt->fetchAll($connection::FETCH_ASSOC);
+    $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+    return $products;
+  }
 
-    public function findAll()
-    {
-      $connection = Connection::getInstance()->getConnection();
-      $stmt = $connection->prepare("SELECT * FROM producto WHERE ?");
-      $stmt->execute(array(1));
-      $products = $stmt->fetchAll($connection::FETCH_ASSOC);
-      $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
-      return $products;
-    }
+  public function findProductByRef($ref)
+  {
+    $connection = Connection::getInstance()->getConnection();
+    $stmt = $connection->prepare("SELECT p.referencia, p.nombre_referencia as nombre, m.nombre as marca, ns.nombre as notificacion_sanitaria, 
+                                         pp.nombre as propietario, np.nombre as producto, pc.nombre as presentacion_comercial, l.nombre as linea, 
+                                         l.densidad, l.ajuste, p.densidad_producto 
+                                  FROM producto p 
+                                  INNER JOIN marca m ON p.id_marca = m.id
+                                  INNER JOIN notificacion_sanitaria ns ON p.id_notificacion_sanitaria = ns.id
+                                  INNER JOIN propietario pp ON p.id_propietario = pp.id
+                                  INNER JOIN nombre_producto np ON p.id_nombre_producto = np.id
+                                  INNER JOIN linea l ON p.id_linea = l.id
+                                  INNER JOIN presentacion_comercial pc ON pc.id = p.presentacion_comercial
+                                  WHERE p.referencia = :referencia");
+    $stmt->execute(['referencia' => $ref]);
+    $products = $stmt->fetchAll($connection::FETCH_ASSOC);
+    $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+    return $products;
+  }
 
-    public function findDetailsByProduct($idProduct)
-    {
-      $connection = Connection::getInstance()->getConnection();
-      $stmt = $connection->prepare("SELECT producto.referencia, producto.nombre_referencia,
+  public function findDetailsByProduct($idProduct)
+  {
+    $connection = Connection::getInstance()->getConnection();
+    $stmt = $connection->prepare("SELECT producto.referencia, producto.nombre_referencia,
       color.nombre as color, olor.nombre as olor, apariencia.nombre as apariencia,
       viscosidad.limite_inferior as limite_inferior_viscosidad ,
       viscosidad.limite_superior as limite_superior_viscosidad,
@@ -63,9 +83,9 @@
       LEFT JOIN escherichia ON escherichia.id = producto.id_escherichia
       LEFT JOIN staphylococcus ON staphylococcus.id = producto.id_staphylococcus
       WHERE producto.referencia = ?");
-      $stmt->execute(array($idProduct));
-      $products = $stmt->fetch($connection::FETCH_ASSOC);
-      $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
-      return $products;
-    }
+    $stmt->execute(array($idProduct));
+    $products = $stmt->fetch($connection::FETCH_ASSOC);
+    $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+    return $products;
   }
+}

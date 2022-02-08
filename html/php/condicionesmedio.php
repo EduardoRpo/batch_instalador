@@ -34,15 +34,23 @@ if (!empty($_POST)) {
         $modulo = $_POST['modulo'];
         $batch =  $_POST['idBatch'];
 
-        $sql = "INSERT INTO batch_condicionesmedio (fecha, temperatura, humedad, id_batch, id_modulo) 
-                VALUES( NOW() , :temperatura, :humedad, :batch, :modulo)";
+        $sql = "SELECT * FROM batch_condicionesmedio WHERE id_batch = :batch AND id_modulo = :modulo";
         $query = $conn->prepare($sql);
-        $result = $query->execute([
-          'temperatura' => $temperatura,
-          'humedad' => $humedad,
-          'batch' => $batch,
-          'modulo' => $modulo,
-        ]);
+        $result = $query->execute(['batch' => $batch, 'modulo' => $modulo]);
+        $rows = $query->rowCount();
+
+        if ($rows == 0) {
+          $sql = "INSERT INTO batch_condicionesmedio (fecha, temperatura, humedad, id_batch, id_modulo) 
+                VALUES( NOW() , :temperatura, :humedad, :batch, :modulo)";
+          $query = $conn->prepare($sql);
+          $result = $query->execute([
+            'temperatura' => $temperatura,
+            'humedad' => $humedad,
+            'batch' => $batch,
+            'modulo' => $modulo,
+          ]);
+        }
+        
         if ($result)
           echo '1';
         else

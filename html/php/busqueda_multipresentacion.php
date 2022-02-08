@@ -6,7 +6,7 @@ if (!empty($_POST)) {
 
   $batch = $_POST['idBatch'];
 
-  $sql = "SELECT m.id, m.id_batch, m.referencia, p.nombre_referencia, pc.nombre as presentacion, p.unidad_empaque, linea.densidad, m.cantidad, m.total, p.img 
+  $sql = "SELECT m.id, m.id_batch, m.referencia, p.nombre_referencia, pc.nombre as presentacion, p.unidad_empaque, linea.densidad, m.cantidad, m.total, p.img, p.densidad_producto 
             FROM producto p 
             INNER JOIN multipresentacion m ON m.referencia = p.referencia 
             INNER JOIN presentacion_comercial pc ON pc.id = p.presentacion_comercial 
