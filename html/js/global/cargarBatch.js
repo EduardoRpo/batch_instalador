@@ -134,6 +134,7 @@ function cargarfirma2daSeccion() {
 /* Registro de Firma */
 
 function firmado(datos, posicion) {
+    debugger
     let template =
         '<img id=":id:" src=":firma:" alt="firma_usuario" height="130">';
     let parent;
@@ -144,24 +145,16 @@ function firmado(datos, posicion) {
         if (modulo == 9) {
             parent = $("#fisicoquimica_realizado").parent();
             $("#fisicoquimica_realizado").remove();
-            $("#fisicoquimica_realizado")
-                .css({ background: "lightgray", border: "gray" })
-                .prop("disabled", true);
-
+            $("#fisicoquimica_realizado").css({ background: "lightgray", border: "gray" }).prop("disabled", true);
             $(".fisicoquimica_verificado").prop("disabled", false);
         } else {
             parent = $("#despeje_realizado").parent();
             $("#despeje_realizado").remove();
-            $("#despeje_realizado")
-                .css({ background: "lightgray", border: "gray" })
-                .prop("disabled", true);
-
+            $("#despeje_realizado").css({ background: "lightgray", border: "gray" }).prop("disabled", true);
             $(".despeje_verificado").prop("disabled", false);
             $(".pesaje_realizado").prop("disabled", false);
-
             $(".preparacion_realizado").prop("disabled", false);
             $(".preparacion_verificado").prop("disabled", true);
-
             $("#controlpeso_realizado1").prop("disabled", false);
         }
     }
@@ -170,15 +163,11 @@ function firmado(datos, posicion) {
         if (modulo == 9) {
             parent = $("#fisicoquimica_verificado").parent();
             $("#fisicoquimica_verificado").remove();
-            $("#fisicoquimica_verificado")
-                .css({ background: "lightgray", border: "gray" })
-                .prop("disabled", true);
+            $("#fisicoquimica_verificado").css({ background: "lightgray", border: "gray" }).prop("disabled", true);
         } else {
             parent = $("#despeje_verificado").parent();
             $("#despeje_verificado").remove();
-            $(".despeje_verificado")
-                .css({ background: "lightgray", border: "gray" })
-                .prop("disabled", true);
+            $(".despeje_verificado").css({ background: "lightgray", border: "gray" }).prop("disabled", true);
         }
     }
 
@@ -186,25 +175,19 @@ function firmado(datos, posicion) {
         if (modulo == 2) {
             parent = $("#pesaje_realizado").parent();
             $("#pesaje_realizado").remove();
-            $(".pesaje_realizado")
-                .css({ background: "lightgray", border: "gray" })
-                .prop("disabled", true);
+            $(".pesaje_realizado").css({ background: "lightgray", border: "gray" }).prop("disabled", true);
             $(".pesaje_verificado").prop("disabled", false);
         }
         if (modulo == 3) {
             parent = $("#preparacion_realizado").parent();
             $("#preparacion_realizado").remove();
-            $(".preparacion_realizado")
-                .css({ background: "lightgray", border: "gray" })
-                .prop("disabled", true);
+            $(".preparacion_realizado").css({ background: "lightgray", border: "gray" }).prop("disabled", true);
             $(".preparacion_verificado").prop("disabled", false);
         }
         if (modulo == 9) {
             parent = $("#fisicoquimica_realizado").parent();
             $("#fisicoquimica_realizado").remove();
-            $(".fisicoquimica_realizado")
-                .css({ background: "lightgray", border: "gray" })
-                .prop("disabled", true);
+            $(".fisicoquimica_realizado").css({ background: "lightgray", border: "gray" }).prop("disabled", true);
             $(".fisicoquimica_verificado").prop("disabled", false);
         }
     }
@@ -213,24 +196,18 @@ function firmado(datos, posicion) {
         if (modulo == 2) {
             parent = $("#pesaje_verificado").parent();
             $("#pesaje_verificado").remove();
-            $(".pesaje_verificado")
-                .css({ background: "lightgray", border: "gray" })
-                .prop("disabled", true);
+            $(".pesaje_verificado").css({ background: "lightgray", border: "gray" }).prop("disabled", true);
         }
         if (modulo == 3) {
             parent = $("#preparacion_verificado").parent();
             $("#preparacion_verificado").remove();
-            $(".preparacion_verificado")
-                .css({ background: "lightgray", border: "gray" })
-                .prop("disabled", true);
+            $(".preparacion_verificado").css({ background: "lightgray", border: "gray" }).prop("disabled", true);
             $(".preparacion_verificado").prop("disabled", false);
         }
         if (modulo == 9) {
             parent = $("#fisicoquimica_verificado").parent();
             $("#fisicoquimica_verificado").remove();
-            $(".fisicoquimica_verificado")
-                .css({ background: "lightgray", border: "gray" })
-                .prop("disabled", true);
+            $(".fisicoquimica_verificado").css({ background: "lightgray", border: "gray" }).prop("disabled", true);
             $(".fisicoquimica_verificado").prop("disabled", false);
         }
     }

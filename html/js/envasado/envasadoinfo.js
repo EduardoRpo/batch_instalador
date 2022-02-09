@@ -1,10 +1,9 @@
+/* Variables globales */
+
 let pres;
 modulo = 5;
-//let envase;
-//let presentacion;
-/* let r1,
-  r2,
-  r3 = 0; */
+let flagEntregas = 0
+
 let equipos = [];
 
 //validacion de campos y botones
@@ -133,11 +132,11 @@ $(document).ready(function() {
 
 function deshabilitarbotones() {
     for (let i = 1; i < 5; i++) {
-        //  $(`.controlpeso_realizado${i}`).prop("disabled", true);
+        $(`.controlpeso_realizado${i}`).prop("disabled", true);
         $(`.controlpeso_verificado${i}`).prop("disabled", true);
         $(`.devolucion_realizado${i}`).prop("disabled", true);
         $(`.devolucion_verificado${i}`).prop("disabled", true);
-        //$(`.btnEntregasParciales${i}`).prop("disabled", true);
+        $(`.btnEntregasParciales${i}`).prop("disabled", true);
     }
 }
 
@@ -257,9 +256,8 @@ function revisarLote() {
 
     if (lote != data) {
         alertify.set("notifier", "position", "top-right");
-        alertify.error(
-            "Lote digitado no corresponde al procesado. Valide nuevamente!"
-        );
+        alertify.error("Lote digitado no corresponde al procesado. Valide nuevamente!");
+
         $(`#validarLote${id_multi}`).val("").css("border-color", "red");
         return false;
     }
@@ -331,9 +329,9 @@ const cargarEntregasParciales = (j, referencia) => {
             if (resp.message == 'total') {
                 $(`#unidadesEnvasadasTotales${j}`).val(resp.unidades);
                 $(`#unidadesEnvasadas${j}`).val(resp.unidades).prop('disabled', true);
-                $(`.btnEntregasParciales${j}`).prop('disabled', true);
+                $(`.btnEntregasParciales${j}`).css({ background: "lightgray", border: "gray" }).prop("disabled", true);
                 $(`.devolucion_realizado${j}`).prop('disabled', false);
-
+                flagEntregas = 1
             }
         }
     });
@@ -344,11 +342,9 @@ const cargarEntregasParciales = (j, referencia) => {
 function devolucionMaterialEnvasada(valor) {
     let unidades_envasadas = formatoCO(parseInt(valor));
 
-    if (isNaN(unidades_envasadas)) {
+    if (isNaN(unidades_envasadas))
         unidades_envasadas = 0;
-    }
 
-    //si la cantidad de envasado es diferente a los recibido envie una notificacion, la orden de produccion, diferencia entre recibida y envasada y presentacion
     $(`.envasada${id_multi}`).html(unidades_envasadas);
     recalcular_valores();
 }
@@ -399,9 +395,11 @@ function registrar_material_sobrante(realizo) {
         let datasobrante = {};
         let itemref = $(`.refEmpaque${i}`).html();
         let envasada = $(`.envasada${i}`).val();
+
         envasada == "" || envasada == undefined ?
             (envasada = $(`.envasada${start}`).val()) :
             envasada;
+
         let averias = $(`.averias${i}`).val();
         let sobrante = $(`.sobrante${i}`).val();
 

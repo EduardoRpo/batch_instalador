@@ -1,5 +1,12 @@
-/* validar y Cargar informacion almacenada en el batch */
+/* Variables Globales */
 flag = 1;
+
+/* Desactivar btn parciales */
+
+for (let i = 1; i < 5; i++)
+    $(`btnEntregasParciales${i}`).css("disabled", true);
+
+/* validar y Cargar informacion almacenada en el batch */
 
 function cargarBatch() {
     $.ajax({
@@ -46,11 +53,16 @@ function cargarDesinfectante() {
 
             $("#sel_producto_desinfeccion").val(desinfectante);
             $("#in_observaciones").val(observacion);
+
             /* firma  */
             firmado(firma, 1);
+
             /* habilitar botones para siguiente seccion */
-            for (i = 1; i < 5; i++)
+
+            for (i = 1; i < 5; i++) {
                 $(`.controlpeso_realizado${i}`).prop("disabled", false);
+            }
+
             /* Carga firma calidad */
             $.ajax({
                 type: "POST",
@@ -213,7 +225,7 @@ function firmado(datos, posicion) {
     let parent;
 
     btn_id = $("#idbtn").val();
-
+    debugger
     if (posicion == 1) {
         parent = $("#despeje_realizado").parent();
         $("#despeje_realizado").remove();
@@ -233,7 +245,9 @@ function firmado(datos, posicion) {
         $(`#controlpeso_realizado${id_multi}`).remove();
         $(`.controlpeso_realizado${id_multi}`).css({ background: "lightgray", border: "gray" }).prop("disabled", true);
         $(`.controlpeso_verificado${id_multi}`).prop("disabled", false);
-        //$(`.btnEntregasParciales${id_multi}`).prop("disabled", false);
+
+        if (flagEntregas == 0)
+            $(`.btnEntregasParciales${id_multi}`).prop("disabled", false);
         //$(`.devolucion_realizado${id_multi}`).prop("disabled", false);
     }
 
@@ -247,6 +261,7 @@ function firmado(datos, posicion) {
         parent = $(`#devolucion_realizado${id_multi}`).parent();
         $(`#devolucion_realizado${id_multi}`).remove();
         $(`.devolucion_realizado${id_multi}`).css({ background: "lightgray", border: "gray" }).prop("disabled", true);
+        $(`.btnEntregasParciales${id_multi}`).css({ background: "lightgray", border: "gray" }).prop("disabled", true);
         $(`.devolucion_verificado${id_multi}`).prop("disabled", false);
         $(`.conciliacion_realizado${id_multi}`).prop("disabled", false);
     }
