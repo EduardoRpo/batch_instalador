@@ -164,8 +164,6 @@ $(document).on("click", ".link-editar", function(e) {
     //muestra el modal
     $("#m_productos").modal("show");
     $("#btnguardarProductos").html("Actualizar Producto");
-    /* $('#id_referencia').val($('#referencia').val()); */
-    /* $('#referencia').prop('disabled', true); */
 
     //carga el array con los datos de la tabla
     for (let i = 1; i < 30; i++) {
@@ -175,6 +173,7 @@ $(document).on("click", ".link-editar", function(e) {
 
     //carga todos los campos con la info del array
     for (let i = 0; i <= 30; i++) {
+        i == 9 ? i = i + 1 : i
         $(`.n${j}`).val(producto[i]);
         j++;
     }
