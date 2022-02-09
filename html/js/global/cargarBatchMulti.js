@@ -245,10 +245,11 @@ function firmado(datos, posicion) {
         $(`#controlpeso_realizado${id_multi}`).remove();
         $(`.controlpeso_realizado${id_multi}`).css({ background: "lightgray", border: "gray" }).prop("disabled", true);
         $(`.controlpeso_verificado${id_multi}`).prop("disabled", false);
+        $(`.devolucion_realizado${id_multi}`).prop("disabled", false);
 
-        if (flagEntregas == 0)
+        if (modulo == 5 && flagEntregas == 0)
             $(`.btnEntregasParciales${id_multi}`).prop("disabled", false);
-        //$(`.devolucion_realizado${id_multi}`).prop("disabled", false);
+
     }
 
     if (posicion == 4) {
