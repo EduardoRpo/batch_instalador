@@ -173,7 +173,7 @@ $(document).on("click", ".link-editar", function(e) {
 
     //carga todos los campos con la info del array
     for (let i = 0; i <= 30; i++) {
-        i == 9 ? i = i + 1 : i
+        i == 9 ? i = i + 1 : i // eliminacion debe generarse un nuevo campo en la interaz para densidad producto
         $(`.n${j}`).val(producto[i]);
         j++;
     }
