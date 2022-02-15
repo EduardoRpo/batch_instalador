@@ -168,27 +168,17 @@ function almacenarfirma(info) {
             }
 
             if (modulo == 2)
-                $('.pesaje_verificado')
-                .css({ background: 'lightgray', border: 'gray' })
-                .prop('disabled', true)
-
+                $('.pesaje_verificado').css({ background: 'lightgray', border: 'gray' }).prop('disabled', true)
             if (modulo == 3)
-                $('.preparacion_verificado')
-                .css({ background: 'lightgray', border: 'gray' })
-                .prop('disabled', true)
-
+                $('.preparacion_verificado').css({ background: 'lightgray', border: 'gray' }).prop('disabled', true)
             if (modulo == 4)
-                $('.aprobacion_verificado')
-                .css({ background: 'lightgray', border: 'gray' })
-                .prop('disabled', true)
+                $('.aprobacion_verificado').css({ background: 'lightgray', border: 'gray' }).prop('disabled', true)
             if (modulo == 8)
-                $('.aprobacion_verificado')
-                .css({ background: 'lightgray', border: 'gray' })
-                .prop('disabled', true)
-            if (modulo == 9)
-                $('.fisicoquimica_verificado')
-                .css({ background: 'lightgray', border: 'gray' })
-                .prop('disabled', true)
+                $('.aprobacion_verificado').css({ background: 'lightgray', border: 'gray' }).prop('disabled', true)
+            if (modulo == 9) {
+                $('.fisicoquimica_verificado').css({ background: 'lightgray', border: 'gray' }).prop('disabled', true)
+                cargarObsIncidencias(info)
+            }
 
             firmar(info);
 

@@ -60,7 +60,6 @@ function preparar(datos) {
             guardar_microbiologia_calidad(info);
         if (modulo === 9) {
             almacenarfirma(info);
-            cargarObsIncidencias(info)
         }
         if (modulo === 10) guardarLiberacion(info);
         else if (modulo !== 8 && modulo !== 9) {

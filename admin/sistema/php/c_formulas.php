@@ -88,7 +88,8 @@ switch ($op) {
                     if ($ref_multi == null) {
                         $sql = "UPDATE $tbl SET porcentaje = AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
                         $query = $conn->prepare($sql);
-                        $result = $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto, 'porcentaje' => $porcentaje]);
+                        $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto, 'porcentaje' => $porcentaje]);
+                        echo '3';
                     } else {
                         for ($i = 0; $i < sizeof($ref_multi); $i++) {
                             $sql = "UPDATE $tbl SET porcentaje = AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";

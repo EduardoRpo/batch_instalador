@@ -225,7 +225,7 @@ function firmado(datos, posicion) {
     let parent;
 
     btn_id = $("#idbtn").val();
-    debugger
+
     if (posicion == 1) {
         parent = $("#despeje_realizado").parent();
         $("#despeje_realizado").remove();

@@ -134,7 +134,7 @@ function cargarfirma2daSeccion() {
 /* Registro de Firma */
 
 function firmado(datos, posicion) {
-    debugger
+
     let template =
         '<img id=":id:" src=":firma:" alt="firma_usuario" height="130">';
     let parent;

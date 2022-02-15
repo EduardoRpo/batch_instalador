@@ -1,4 +1,5 @@
 /* Cargue tabla especificaciones */
+
 let dataMicro = [];
 modulo = 8;
 $("#observacionesLote").slideUp();

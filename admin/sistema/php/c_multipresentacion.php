@@ -44,12 +44,12 @@ if (!empty($_POST)) {
         $rows = $query->rowCount();
         if ($rows > 0) {
           $formulas = $query->fetchAll(PDO::FETCH_ASSOC);
-        }
-        $sinFormulas[$ref] =  $rows;
+        } else
+          $sinFormulas[$ref] =  $rows;
       }
 
       /* insertar la formula para las referencias sin formula */
-      
+
       foreach ($sinFormulas as $sinFormula => $value) {
         if ($value == 0) {
           foreach ($formulas as $formula) {
@@ -77,7 +77,6 @@ if (!empty($_POST)) {
         $result = $query->execute(['valor' => $valor]);
         ejecutarQuery($result, $conn);
       }
-
 
 
       break;
