@@ -51,90 +51,93 @@ $(document).ready(function() {
             sessionStorage.setItem("btn", btn.id);
             id = btn.id;
 
-            /* Validacion de equipos */
+            if (id != 'microbiologia_verificado') {
 
-            let desinfectante = $("#sel_producto_desinfeccion").val();
-            let desinfectante_observaciones = $("#desinfectante_obs").val();
-            let sel_incubadora = $(".sel_incubadora").val();
-            let sel_autoclave = $(".sel_autoclave").val();
-            let sel_cabina = $(".sel_cabina").val();
+                /* Validacion de equipos */
+                let desinfectante = $("#sel_producto_desinfeccion").val();
+                let desinfectante_observaciones = $("#desinfectante_obs").val();
+                let sel_incubadora = $(".sel_incubadora").val();
+                let sel_autoclave = $(".sel_autoclave").val();
+                let sel_cabina = $(".sel_cabina").val();
 
-            equipos = sel_incubadora * sel_autoclave * sel_cabina;
+                equipos = sel_incubadora * sel_autoclave * sel_cabina;
 
-            if (desinfectante == "Seleccione") {
-                alertify.set("notifier", "position", "top-right");
-                alertify.error("Seleccione el producto para desinfección");
-                return false;
-            }
+                if (desinfectante == "Seleccione") {
+                    alertify.set("notifier", "position", "top-right");
+                    alertify.error("Seleccione el producto para desinfección");
+                    return false;
+                }
 
-            if (equipos === 0) {
-                alertify.set("notifier", "position", "top-right");
-                alertify.error("Seleccione los Equipos");
-                return false;
-            }
+                if (equipos === 0) {
+                    alertify.set("notifier", "position", "top-right");
+                    alertify.error("Seleccione los Equipos");
+                    return false;
+                }
 
-            let continuar = validarSeleccion();
+                let continuar = validarSeleccion();
 
-            if (continuar != 0) {
+                if (continuar != 0) {
 
-                let desinfectantes = {}
-                desinfectantes.desinfectante = desinfectante;
-                desinfectantes.observaciones = desinfectante_observaciones;
-                dataMicro.push(desinfectantes);
+                    let desinfectantes = {}
+                    desinfectantes.desinfectante = desinfectante;
+                    desinfectantes.observaciones = desinfectante_observaciones;
+                    dataMicro.push(desinfectantes);
 
-                let equipos = {}
-                equipos.equipo1 = sel_incubadora;
-                equipos.equipo2 = sel_autoclave;
-                equipos.equipo3 = sel_cabina;
-                dataMicro.push(equipos);
+                    let equipos = {}
+                    equipos.equipo1 = sel_incubadora;
+                    equipos.equipo2 = sel_autoclave;
+                    equipos.equipo3 = sel_cabina;
+                    dataMicro.push(equipos);
 
-                for (let i = 0; i < cantMulti.length; i++) {
-                    referencia = $(`#ref${i + 1}`).html();
-                    let indice = referencia.indexOf("/");
-                    referencia = referencia.substring(5, indice).trim()
+                    for (let i = 0; i < cantMulti.length; i++) {
+                        referencia = $(`#ref${i + 1}`).html();
+                        let indice = referencia.indexOf("/");
+                        referencia = referencia.substring(5, indice).trim()
 
-                    if ($(`#inputMesofilos${i + 1}`).prop('disabled') == false) {
-                        mesofilos = $(`#inputMesofilos${i + 1}`).val()
+                        if ($(`#inputMesofilos${i + 1}`).prop('disabled') == false) {
+                            mesofilos = $(`#inputMesofilos${i + 1}`).val()
 
-                        if (mesofilos) {
-                            let dataMicrobiologia = {};
-                            dataMicrobiologia.multi = i + 1
-                            dataMicrobiologia.referencia = referencia
-                            dataMicrobiologia.mesofilos = $(`#inputMesofilos${i + 1}`).val();
-                            dataMicrobiologia.pseudomona = $(`#pseudomona${i + 1}`).val();
-                            dataMicrobiologia.escherichia = $(`#escherichia${i + 1}`).val();
-                            dataMicrobiologia.staphylococcus = $(`#staphylococcus${i + 1}`).val();;
-                            dataMicrobiologia.fechaSiembra = $(`#fechaSiembra${i + 1}`).val();
-                            dataMicrobiologia.fechaResultados = $(`#fechaResultados${i + 1}`).val();
-                            dataMicro.push(dataMicrobiologia)
+                            if (mesofilos) {
+                                let dataMicrobiologia = {};
+                                dataMicrobiologia.multi = i + 1
+                                dataMicrobiologia.referencia = referencia
+                                dataMicrobiologia.mesofilos = $(`#inputMesofilos${i + 1}`).val();
+                                dataMicrobiologia.pseudomona = $(`#pseudomona${i + 1}`).val();
+                                dataMicrobiologia.escherichia = $(`#escherichia${i + 1}`).val();
+                                dataMicrobiologia.staphylococcus = $(`#staphylococcus${i + 1}`).val();;
+                                dataMicrobiologia.fechaSiembra = $(`#fechaSiembra${i + 1}`).val();
+                                dataMicrobiologia.fechaResultados = $(`#fechaResultados${i + 1}`).val();
+                                dataMicro.push(dataMicrobiologia)
+                            }
                         }
                     }
-                }
 
-                /* Validacion de campos */
+                    /* Validacion de campos */
 
-                if (dataMicro.length < 3) {
-                    alertify.set("notifier", "position", "top-right");
-                    alertify.error("Seleccione e Ingrese los datos del análisis Microbiológico");
-                    dataMicro = []
-                    return false
-                }
-
-                for (let i = 2; i < dataMicro.length; i++) {
-                    if (!dataMicro[i].mesofilos || !dataMicro[i].pseudomona || !dataMicro[i].escherichia || !dataMicro[i].staphylococcus || !dataMicro[i].fechaSiembra || !dataMicro[i].fechaResultados) {
+                    if (dataMicro.length < 3) {
                         alertify.set("notifier", "position", "top-right");
                         alertify.error("Seleccione e Ingrese los datos del análisis Microbiológico");
                         dataMicro = []
                         return false
                     }
+
+                    for (let i = 2; i < dataMicro.length; i++) {
+                        if (!dataMicro[i].mesofilos || !dataMicro[i].pseudomona || !dataMicro[i].escherichia || !dataMicro[i].staphylococcus || !dataMicro[i].fechaSiembra || !dataMicro[i].fechaResultados) {
+                            alertify.set("notifier", "position", "top-right");
+                            alertify.error("Seleccione e Ingrese los datos del análisis Microbiológico");
+                            dataMicro = []
+                            return false
+                        }
+                    }
+
                 }
-
-                /* Carga el modal para la autenticacion */
-
-                $("#usuario").val("");
-                $("#clave").val("");
-                $("#m_firmar").modal("show");
             }
+
+            /* Carga el modal para la autenticacion */
+
+            $("#usuario").val("");
+            $("#clave").val("");
+            $("#m_firmar").modal("show");
         })
     };
 
