@@ -274,6 +274,8 @@ desinfectante = () => {
                 $(`#blank_rea${info[i].modulo}`).hide();
                 $(`#blank_ver${info[i].modulo}`).hide();
 
+                /* fecha nuevo registro cambia a fecha registro a partir del 1034 */
+
                 $(`.desinfectante${info[i].modulo}`).html(info[i].desinfectante);
                 $(`.concentracion${info[i].modulo}`).html(info[i].concentracion * 100 + "%");
                 $(`#fecha${info[i].modulo}`).html(info[i].fecha_nuevo_registro);

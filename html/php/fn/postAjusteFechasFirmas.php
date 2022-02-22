@@ -87,20 +87,24 @@ $diasFeriados = [
     '2022-01-30',
     '2022-02-05',
     '2022-02-06',
+    '2022-02-12',
+    '2022-02-13',
+    '2022-02-19',
+    '2022-02-20',
 ];
 
 $array_fechas = [];
 
 foreach ($diasFeriados as $diasFeriado) {
     $date = strtotime($diasFeriado);
-    echo $date . "<br>";
+    //echo $date . "<br>";
     array_push($array_fechas, $date);
 }
 
 for ($i = 0; $i < sizeof($batch); $i++) {
     for ($j = 0; $j < sizeof($fechas_registro); $j++) {
 
-        if ($batch[$i]['id_batch'] >= 572) {
+        if ($batch[$i]['id_batch'] >= 500) {
             if ($batch[$i]['id_batch'] == $fechas_registro[$j]['batch']) {
 
                 $date_pesaje = "";
@@ -109,7 +113,6 @@ for ($i = 0; $i < sizeof($batch); $i++) {
                 $date_envasado = "";
                 $date_microbiologia = "";
                 $date_liberacion = "";
-
 
                 echo $fechas_registro[$j]['batch'] . "<br><br>";
                 $batchProceso = $fechas_registro[$j]['batch'];

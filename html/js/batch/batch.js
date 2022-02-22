@@ -263,7 +263,9 @@ $(document).on("click", ".link-editar", function(e) {
             $("#presentacioncomercial").val(presentacion);
             $("#linea").val(info[0].linea);
             $("#notificacionSanitaria").val(info[0].notificacion_sanitaria);
-            $("#densidad").val(info[0].densidad);
+            $("#densidad_producto").val(info[0].densidad_producto);
+            $("#ajuste").val(info[0].ajuste);
+
             $("#unidadesxlote").val(info[0].unidad_lote);
             $("#tamanototallote").val(tamano_lote);
             $("#fechaprogramacion").val(info[0].fecha_programacion);

@@ -193,9 +193,15 @@ switch ($op) {
   case 6: //Cargar datos al modal para Actualizar
     $id_batch = $_POST['id'];
 
-    $query_buscar = mysqli_query($conn, "SELECT bt.id_batch, p.referencia, p.nombre_referencia, m.nombre as marca, pp.nombre as propietario, np.nombre, pc.nombre as presentacion_comercial, linea.nombre as linea, linea.densidad, ns.nombre as notificacion_sanitaria, bt.unidad_lote, bt.tamano_lote, bt.fecha_programacion 
-                                          FROM producto p INNER JOIN marca m INNER JOIN propietario pp INNER JOIN nombre_producto np INNER JOIN linea INNER JOIN notificacion_sanitaria ns INNER JOIN batch bt INNER JOIN presentacion_comercial pc
-                                          ON p.id_marca=m.id AND p.id_propietario=pp.id AND p.id_nombre_producto=np.id AND p.id_linea=linea.id AND p.id_notificacion_sanitaria=ns.id AND bt.id_producto=p.referencia AND p.presentacion_comercial = pc.id
+    $query_buscar = mysqli_query($conn, "SELECT bt.id_batch, p.referencia, p.nombre_referencia, m.nombre as marca, pp.nombre as propietario, np.nombre, pc.nombre as presentacion_comercial, linea.nombre as linea, linea.ajuste, ns.nombre as notificacion_sanitaria, p.densidad_producto, bt.unidad_lote, bt.tamano_lote, bt.fecha_programacion 
+                                          FROM producto p 
+                                          INNER JOIN marca m ON p.id_marca = m.id
+                                          INNER JOIN propietario pp ON p.id_propietario = pp.id
+                                          INNER JOIN nombre_producto np ON p.id_nombre_producto = np.id
+                                          INNER JOIN linea ON p.id_linea=linea.id 
+                                          INNER JOIN notificacion_sanitaria ns ON p.id_notificacion_sanitaria = ns.id
+                                          INNER JOIN batch bt ON bt.id_producto=p.referencia
+                                          INNER JOIN presentacion_comercial pc ON p.presentacion_comercial = pc.id
                                           WHERE bt.id_batch = $id_batch");
 
     $data[] = mysqli_fetch_assoc($query_buscar);

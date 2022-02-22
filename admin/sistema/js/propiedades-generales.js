@@ -1,4 +1,3 @@
-
 var tablaBD;
 var id_tbl;
 var editar;
@@ -10,7 +9,7 @@ $('.contenedor-menu .menu ul.menu_productos').show();
 
 /* Ocultar tablas Propiedades Generales */
 
-$(document).ready(function () {
+$(document).ready(function() {
     for (i = 1; i < 10; i++) {
         $(`#${i}`).hide();
     }
@@ -141,13 +140,13 @@ function adicionar(id) {
 
 /* Borrar registros */
 
-$(document).on('click', '.link-borrar', function (e) {
+$(document).on('click', '.link-borrar', function(e) {
     e.preventDefault();
 
     let id = $(this).parent().parent().children().first().text();
     var confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este registro?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
 
-    confirm.set('onok', function (r) {
+    confirm.set('onok', function(r) {
         if (r) {
             $.ajax({
                 'method': 'POST',
@@ -162,10 +161,10 @@ $(document).on('click', '.link-borrar', function (e) {
 
 /* Cargar datos para Actualizar registros */
 
-$(document).on('click', '.link-editar', function (e) {
+$(document).on('click', '.link-editar', function(e) {
     e.preventDefault();
     editar = 1;
-  
+
     let id = $(this).parent().parent().children().first().text();
     let nombre = $(this).parent().parent().children().eq(1).text();
     let otro = $(this).parent().parent().children().eq(2).text();
@@ -174,7 +173,7 @@ $(document).on('click', '.link-editar', function (e) {
     $(`.tabla${id_tbl}`).html('Actualizar');
     $(`#txt-Id${id_tbl}`).val(id);
 
-    if (id_tbl === 4 && tablaBD!=='marca' || id_tbl === 5  && tablaBD!=='propietario' || id_tbl === 6 || id_tbl === 8) {
+    if (id_tbl === 4 && tablaBD !== 'marca' || id_tbl === 5 && tablaBD !== 'propietario' || id_tbl === 8) {
         var res = nombre.split(" - ");
         $(`#min${id_tbl}`).val(res[0]);
         $(`#max${id_tbl}`).val(res[1]);
@@ -201,7 +200,8 @@ function guardarDatosGenerales(nombre, id) {
         densidad = $('#input31').val();
 
     if (!datos || nombre == 'notificacion_sanitaria' && vencimiento == '' || nombre == 'linea' && densidad == '') {
-        alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos");
+        alertify.set("notifier", "position", "top-right");
+        alertify.error("Ingrese todos los datos");
         return false;
     }
 
@@ -218,18 +218,22 @@ function guardarDatosGenerales(nombre, id) {
         url: "php/c_propiedades-generales.php",
         data: data,
 
-        success: function (r) {
+        success: function(r) {
 
             if (r == 1) {
-                alertify.set("notifier", "position", "top-right"); alertify.success("Almacenado con éxito.");
+                alertify.set("notifier", "position", "top-right");
+                alertify.success("Almacenado con éxito.");
                 refreshTable(id);
             } else if (r == 2) {
-                alertify.set("notifier", "position", "top-right"); alertify.error("Registro ya existe.");
+                alertify.set("notifier", "position", "top-right");
+                alertify.error("Registro ya existe.");
             } else if (r == 3) {
-                alertify.set("notifier", "position", "top-right"); alertify.success("Registro actualizado.");
+                alertify.set("notifier", "position", "top-right");
+                alertify.success("Registro actualizado.");
                 refreshTable(id);
             } else {
-                alertify.set("notifier", "position", "top-right"); alertify.error("Error.");
+                alertify.set("notifier", "position", "top-right");
+                alertify.error("Error.");
             }
         }
     });
@@ -244,10 +248,12 @@ function guardarDatosGeneralesMinMax(nombre, id) {
     let max = parseFloat($(`#max${id}`).val());
 
     if (max < min) {
-        alertify.set("notifier", "position", "top-right"); alertify.error("El valor mínimo no puede ser mayor al valor máximo");
+        alertify.set("notifier", "position", "top-right");
+        alertify.error("El valor mínimo no puede ser mayor al valor máximo");
         return false;
     } else if (isNaN(min) || isNaN(max)) {
-        alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos");
+        alertify.set("notifier", "position", "top-right");
+        alertify.error("Ingrese todos los datos");
         return false;
     }
 
@@ -256,18 +262,22 @@ function guardarDatosGeneralesMinMax(nombre, id) {
         url: "php/c_propiedades-generales.php",
         data: { min: min, max: max, id_registro: id_registro, tabla: nombre, operacion: 4, editar: editar },
 
-        success: function (r) {
+        success: function(r) {
 
             if (r == 1) {
-                alertify.set("notifier", "position", "top-right"); alertify.success("Almacenado con éxito.");
+                alertify.set("notifier", "position", "top-right");
+                alertify.success("Almacenado con éxito.");
                 refreshTable(id);
             } else if (r == 2) {
-                alertify.set("notifier", "position", "top-right"); alertify.error("Registro ya existe.");
+                alertify.set("notifier", "position", "top-right");
+                alertify.error("Registro ya existe.");
             } else if (r == 3) {
-                alertify.set("notifier", "position", "top-right"); alertify.success("Registro actualizado.");
+                alertify.set("notifier", "position", "top-right");
+                alertify.success("Registro actualizado.");
                 refreshTable(id);
             } else {
-                alertify.set("notifier", "position", "top-right"); alertify.error("Error.");
+                alertify.set("notifier", "position", "top-right");
+                alertify.error("Error.");
             }
         }
     });
