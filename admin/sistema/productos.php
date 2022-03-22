@@ -69,44 +69,7 @@ require_once('modal/m_validacionProductos.php');
               <div class="card-body">
                 <div class="table-responsive">
                   <table id="tblProductos" class="display" style="width:100%; font-size: small;">
-                    <thead>
-                      <tr>
-                        <th></th>
-                        <th>Referencia</th>
-                        <th>Nombre</th>
-                        <th>Presentación</th>
-                        <th>Producto</th>
-                        <th>Notificación Sanitaria</th>
-                        <th>Linea</th>
-                        <th>Marca</th>
-                        <th>Propietario</th>
-                        <th>Unidad Empaque</th>
-                        <th>Densidad Producto</th>
-                        <th>Color</th>
-                        <th>Olor</th>
-                        <th>Apariencia</th>
-                        <th>Untuosidad</th>
-                        <th>Poder Espumoso</th>
-                        <th>Recuento Mesofilos</th>
-                        <th>Pseudomona</th>
-                        <th>Escherichia</th>
-                        <th>Staphylococcus</th>
-                        <th>PH</th>
-                        <th>Viscosidad</th>
-                        <th>Densidad</th>
-                        <th>Alcohol</th>
-                        <th>Envase</th>
-                        <th>Tapa</th>
-                        <th>Etiqueta</th>
-                        <th>Empaque</th>
-                        <th>Otros</th>
-                        <th>Base Instructivo</th>
-                        <th>Instructivo</th>
-                      </tr>
-                    </thead>
-                    <tbody>
 
-                    </tbody>
                   </table>
                 </div>
               </div>
@@ -151,7 +114,10 @@ require_once('modal/m_validacionProductos.php');
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
   <!-- javascript inicializacion datatables -->
-  <script src="js/productos.js"></script>
+  <script src="js/productos/selectores.js"></script>
+  <script src="js/productos/tblProductos.js"></script>
+  <script src="js/productos/productos.js"></script>
+  <script src="js/productos/imagenProducto.js"></script>
   <script src="js/menu.js"></script>
   <script src="js/importarProductos.js"></script>
 

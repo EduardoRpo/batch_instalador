@@ -7,30 +7,30 @@ if (!empty($_POST)) {
 
     switch ($op) {
         case 1: // Listar productos
-            $query = "SELECT * FROM producto";
-            ejecutarQuerySelect($conn, $query);
+            //$query = "SELECT * FROM producto";
+            //ejecutarQuerySelect($conn, $query);
             break;
 
         case 2: //Eliminar
-            $id = $_POST['id'];
+            /* $id = $_POST['id'];
             $sql = "DELETE FROM producto WHERE referencia = :id";
-            ejecutarEliminar($conn, $sql, $id);
+            ejecutarEliminar($conn, $sql, $id); */
             break;
 
         case 3: // Crear o actualizar datos de productos
 
-            $editar = $_POST['editar'];
+            /* $editar = $_POST['editar']; */
 
             //carga la informacion del POST
-            foreach ($_POST as $nombre_campo => $valor) {
+            /* foreach ($_POST as $nombre_campo => $valor) {
                 $asignacion = "\$" . $nombre_campo . "='" . $valor . "';";
                 eval($asignacion);
-            }
+            } */
 
             //$nombre = ucfirst(mb_strtolower($nombre, "UTF-8"));
 
-            if ($editar > 0) {
-                $sql = "UPDATE producto SET /* referencia = :referencia, */  nombre_referencia =:nombre,  unidad_empaque = :uniEmpaque,  
+            /* if ($editar > 0) {
+                $sql = "UPDATE producto SET nombre_referencia =:nombre,  unidad_empaque = :uniEmpaque,  
                         id_nombre_producto = :nombre_producto, id_notificacion_sanitaria = :notificacion_sanitaria, id_linea = :linea, 
                         id_marca =:marca, id_propietario =:propietario, presentacion_comercial= :presentacion_comercial, 
                         id_color =:color, id_olor= :olor, id_apariencia = :apariencia, id_untuosidad=:untuosidad, 
@@ -43,7 +43,6 @@ if (!empty($_POST)) {
 
                 $query = $conn->prepare($sql);
                 $result = $query->execute([
-                    /* 'referencia' => $referencia, */
                     'nombre' => $nombre, 'uniEmpaque' => $uniEmpaque, 'nombre_producto' => $nombre_producto,
                     'notificacion_sanitaria' => $notificacion_sanitaria, 'linea' => $linea, 'marca' => $marca, 'propietario' => $propietario,
                     'presentacion_comercial' => $presentacion_comercial, 'color' => $color, 'olor' => $olor, 'apariencia' => $apariencia,
@@ -58,11 +57,11 @@ if (!empty($_POST)) {
                     echo '3';
                     exit();
                 }
-            } else {
+            } else { */
 
                 //valida si el registro existe
 
-                $sql = "SELECT * FROM producto WHERE referencia =:referencia";
+                /* $sql = "SELECT * FROM producto WHERE referencia =:referencia";
                 $query = $conn->prepare($sql);
                 $query->execute(['referencia' => $referencia]);
                 $rows = $query->rowCount();
@@ -97,7 +96,7 @@ if (!empty($_POST)) {
                     ]);
                     ejecutarQuery($result, $conn);
                 }
-            }
+            } */
 
             break;
 

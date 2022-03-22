@@ -71,7 +71,7 @@
             <hr style="width: 95%;">
             <div class="group-info-batch p-3">
                 <label for="">Autorizado por:</label>
-                <label id="autorizado"> <b>Camilo Restrepo</b> </label>
+                <label id="autorizado"> <b>Jefe Producción / Director Técnico</b> </label>
             </div>
         </div>
 

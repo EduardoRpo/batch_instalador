@@ -54,7 +54,7 @@ if (!empty($_POST)) {
         if ($value == 0) {
           foreach ($formulas as $formula) {
             $sql = "INSERT INTO formula (id_producto, id_materiaprima, porcentaje) 
-                  VALUES (:id_producto, :id_materiaprima, AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') )";
+                    VALUES (:id_producto, :id_materiaprima, AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') )";
             $query = $conn->prepare($sql);
             $result = $query->execute([
               'id_producto' => $sinFormula,

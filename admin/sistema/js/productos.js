@@ -18,9 +18,10 @@ $(document).ready(function() {
         language: { url: "admin_componentes/es-ar.json" },
 
         ajax: {
-            method: "POST",
-            url: "php/c_productos.php",
-            data: { operacion: 1 },
+            //method: "POST",
+            //url: "php/c_productos.php",
+            url: "/api/getproducts",
+            //data: { operacion: 1 },
         },
 
         columns: [{

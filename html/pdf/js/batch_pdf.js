@@ -342,6 +342,7 @@ const firmas_multi = (info) => {
         for (let i = 0; i < multi.length; i++)
             for (let j = 0; j < info.length; j++)
                 if (multi[i]["referencia"] == info[j]["ref_multi"]) {
+                    /* batch 984 incluido en adelante tomar fecha registro  */
                     $(`#multi_fecha${i + 1}`).html(info[j]["fecha_nuevo_registro"]);
                     $(`#multi_f_realizo${i + 1}`).prop("src", info[j].realizo);
                     $(`#multi_user_realizo${i + 1}`).html(
