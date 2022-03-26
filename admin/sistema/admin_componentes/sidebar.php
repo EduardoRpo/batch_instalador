@@ -56,6 +56,7 @@
                         <li><a href="cargos.php" id="link_cargos"><i class="fas fa-sitemap"></i><span>Cargos</span></a></li>
                     </ul>
                 <?php  } ?>
+                
                 <li id="horarios"><a href=""><i class="fa fa-chevron-down"></i><span>Bath Record Automático</span></a></li>
                 <ul class="menu_horarios">
                     <li><a href="horarios.php" id="link_menu_horarios"><i class="fa fa-clock-o" aria-hidden="true"></i><span>Horarios</span></a></li>
@@ -63,9 +64,12 @@
 
                 <li id="pdf"><a href=""><i class="fa fa-chevron-down"></i><span>PDF</span></a></li>
                 <ul class="menu_pdf">
+                    <li><a href="pdf_version.php" id="versionPDF"><i class="fas fa-sort-alpha-up"></i><span>Versión PDF</span></a></li>
+                    <li><a href="pdf_certificado.php" id="versionCert"><i class="fas fa-sort-alpha-up"></i><span>Versión Certificados</span></a></li>
                     <li><a href="pdf.php" id="link_menu_pdf"><i class="fas fa-sort-alpha-up"></i><span>Textos</span></a></li>
                     <li><a href="certificado.php" id="link_menu_certificado"><i class="far fa-newspaper"></i><span>Certificado</span></a></li>
                 </ul>
+                
                 <li id="auditoria"><a href=""><i class="fa fa-chevron-down"></i><span>Auditoria</span></a></li>
                 <ul class="menu_auditoria">
                     <li><a href="controlCondicionesMedio.php" id="link_menu_pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i><span>Condiciones del Medio</span></a></li>

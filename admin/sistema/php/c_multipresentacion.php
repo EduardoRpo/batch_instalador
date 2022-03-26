@@ -71,7 +71,7 @@ if (!empty($_POST)) {
 
       $multi = $_POST['multi'];
 
-      foreach ($multi as &$valor) {
+      foreach ($multi as $valor) {
         $sql = "UPDATE producto SET multi = 0 WHERE referencia = :valor";
         $query = $conn->prepare($sql);
         $result = $query->execute(['valor' => $valor]);

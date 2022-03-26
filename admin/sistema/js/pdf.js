@@ -7,31 +7,30 @@ $(".contenedor-menu .menu ul.menu_pdf").show();
 
 /* Cargue de Parametros de Control en DataTable */
 
-$(document).ready(function () {
-  $("#tblTextos").DataTable({
-    scrollY: "50vh",
-    scrollCollapse: true,
-    paging: false,
-    language: { url: "admin_componentes/es-ar.json" },
+$(document).ready(function() {
+    $("#tblTextos").DataTable({
+        scrollY: "50vh",
+        scrollCollapse: true,
+        paging: false,
+        language: { url: "admin_componentes/es-ar.json" },
 
-    ajax: {
-      //method: "GET",
-      url: "/api/pdftextos",
-      //dataSrc: "",
-    },
+        ajax: {
+            //method: "GET",
+            url: "/api/pdftextos",
+            //dataSrc: "",
+        },
 
-    columns: [
-      { data: "id" },
-      { data: "titulo" },
-      { data: "descripcion" },
-      { data: "ubicacion", className: "centrado" },
-      /* { data: "modulo", className: "centrado"}, */
-      {
-        defaultContent:
-          "<a href='#' <i class='large material-icons link-editar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>",
-      },
-    ],
-  });
+        columns: [
+            { data: "id" },
+            { data: "titulo" },
+            { data: "descripcion" },
+            { data: "ubicacion", className: "centrado" },
+            /* { data: "modulo", className: "centrado"}, */
+            {
+                defaultContent: "<a href='#' <i class='large material-icons link-editar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>",
+            },
+        ],
+    });
 });
 
 /* Adicionar Proceso */
@@ -139,6 +138,6 @@ $(document).ready(function () {
 /* Actualizar tabla */
 
 function refreshTable() {
-  $("#tblModulos").DataTable().clear();
-  $("#tblModulos").DataTable().ajax.reload();
+    $("#tblModulos").DataTable().clear();
+    $("#tblModulos").DataTable().ajax.reload();
 }

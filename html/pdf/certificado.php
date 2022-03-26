@@ -18,12 +18,17 @@
     <div class="grid-container gl mb-3">
         <div class="logo"><img src="../../assets/images/logo/logo-samara.png" alt="logo_samara" id="logo"></div>
         <div class="title2">CERTIFICADO DE ANÁLISIS</div>
-        <div class="title3">CÓDIGO</div>
+        <!-- <div class="title3">CÓDIGO</div>
         <div class="title4">VERSIÓN</div>
         <div class="title5">FECHA</div>
         <div class="title6">F-CC-13</div>
         <div class="title7">7</div>
-        <div class="title8">27/07/2021</div>
+        <div class="title8">27/07/2021</div> -->
+        <div>
+            <span id="codigo">Codigo</span>
+            <span id="version">Version</span>
+            <span id="fecha">Fecha</span>
+        </div>
     </div>
 
     <div class="grid-container-product gl mb-3">
@@ -190,6 +195,7 @@
     <script src="../../html/js/utils/sidebarmenu.js"></script>
     <script src="../../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <script src="https://use.fontawesome.com/15242848ba.js"></script>
+    
     <script src="../../html/pdf/js/batch_cert.js"></script>
     <script src="../../html/js/global/propiedadesProducto.js"></script>
 

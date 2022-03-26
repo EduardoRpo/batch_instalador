@@ -1,0 +1,19 @@
+.text-center {
+    text-align: center;
+}
+
+.gridx4standar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 1em;
+}
+
+.heightinput {
+    height: 35px !important;
+}
+
+.heightbtn {
+    height: 35px !important;
+    margin-top: 0px !important;
+    width: fit-content;
+}

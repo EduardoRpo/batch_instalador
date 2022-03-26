@@ -19,8 +19,9 @@
   <!-- CSS Files -->
   <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
   <link href="../assets/css/now-ui-dashboard.css?v=1.5.0" rel="stylesheet" />
-  <link href="../sistema/css/estilos.css" rel="stylesheet" />
 
+  <link href="../sistema/css/estilos.css" rel="stylesheet" />
+  
   <!-- Datatables -->
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
 

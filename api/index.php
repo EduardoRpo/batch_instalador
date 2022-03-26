@@ -34,7 +34,6 @@ require_once __DIR__ . '/src/routes/desinfectante.php';
 require_once __DIR__ . '/src/routes/materias_primas.php';
 require_once __DIR__ . '/src/routes/equipos.php';
 require_once __DIR__ . '/src/routes/etiquetas.php';
-require_once __DIR__ . '/src/routes/pdf.php';
 
 require_once __DIR__ . '/src/routes/pesaje.php';
 require_once __DIR__ . '/src/routes/preparacion.php';
@@ -42,6 +41,10 @@ require_once __DIR__ . '/src/routes/envasado.php';
 
 require_once __DIR__ . '/src/routes/explosion_materiales.php';
 require_once __DIR__ . '/src/routes/pedidos.php';
+
+require_once __DIR__ . '/src/routes/pdf.php';
+require_once __DIR__ . '/src/routes/admin/pdf/certificados.php';
+require_once __DIR__ . '/src/routes/admin/pdf/versiones.php';
 
 require_once __DIR__ . '/src/routes/productos.php';
 require_once __DIR__ . '/src/routes/usuarios.php';

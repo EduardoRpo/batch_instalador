@@ -20,7 +20,11 @@
 
     <div class="mb-3" style="display: flex;justify-content:space-between">
         <a><span><img src="../../assets/images/logo/logo-samara.png" style="width: 80%;" class="light-logo" alt="Samara Cosmetics" /></span></a>
-        <span><b>Codigo:</b> F-Pr-13 <b>Versión:</b>10 <b>Fecha:</b>26/04/2021</span>
+        <div>
+            <span id="codigo"></span>
+            <span id="version"></span>
+            <span id="fecha"></span>
+        </div>
     </div>
 
     <div class="noImprimir">

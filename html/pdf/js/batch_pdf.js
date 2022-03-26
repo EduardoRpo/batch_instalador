@@ -49,6 +49,18 @@ $("#multi-despachos3").hide();
 $("#multi-despachos4").hide();
 
 
+/* Cargar version */
+
+cargar_version_PDF = (date) => {
+    let dataVersion = JSON.parse(date)
+    $.get(`/api/getversions/${dataVersion.fecha_creacion}/1`, function(data, textStatus, jqXHR) {
+        $('#codigo').html(`Código: <b>${data.codigo}</b>`);
+        $('#version').html(`Versión: <b>${data.version}</b>`);
+        $('#fecha').html(`Fecha: <b>${data.fecha}</b>`);
+
+    });
+};
+
 /* Cargar data */
 
 cargar_Alertas = () => {
@@ -1028,7 +1040,7 @@ conciliacion = (multi) => {
                         $(`#f_realizoConciliacion${j + 1}`).prop("src", info[i].urlfirma);
                         $(`#user_realizoConciliacion${j + 1}`).html(`Realizó: <b>${info[i].nombre}</b>`);
                         $(`#fecha${info[i].modulo}`).html(info[i].fecha_nuevo_registro);
-                        $(`#fecha${info[i].modulo}Conciliacion${j+1}`).html(info[i].fecha_nuevo_registro);
+                        $(`#fecha${info[i].modulo}Conciliacion${j + 1}`).html(info[i].fecha_nuevo_registro);
                     }
                 }
             }
@@ -1250,6 +1262,7 @@ $(document).ready(function() {
         liberacion_lote()
         ImprimirEtiquetasInvima()
         cargarObservaciones()
+        cargar_version_PDF(data)
 
     });
 
