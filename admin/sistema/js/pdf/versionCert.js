@@ -77,7 +77,7 @@ $(document).ready(function() {
     })
 
     updateVersionPDF = (id_version) => {
-        debugger
+
         data = $('#frmNewVersion').serialize();
         data = `${data}&id_pdf_version=${id_version}`
 

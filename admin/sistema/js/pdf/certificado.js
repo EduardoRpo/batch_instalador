@@ -7,8 +7,10 @@ $("#buscar_cert").click(function(e) {
     e.preventDefault();
     val = $("#search").val();
     $.get(`/api/getCert/${val}`, function(data, textStatus, jqXHR) {
-            debugger
             if ((textStatus = "success")) {
+
+                info = JSON.stringify(data)
+                localStorage.setItem('batchCert', info)
                 if (data) {
                     $("#search").val("");
                     $("#id_batch").html(data[0].id_batch);

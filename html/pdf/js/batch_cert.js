@@ -16,12 +16,17 @@ $(document).ready(function() {
     idList = pathname.split("/");
     idBatch = idList[2];
     referencia = idList[3];
+    let batchCert = localStorage.getItem('batchCert')
 
-    $.get("/api/getversions/${date}/2", data,
-        function(data, textStatus, jqXHR) {
+    batchCert = JSON.parse(batchCert)
+    date = batchCert[0].fecha_creacion
 
-        },
-    );
+    $.get(`/api/getversions/${date}/2`, function(data, textStatus, jqXHR) {
+
+        $('#codigo').html(`Código: <b>${data.codigo}</b>`);
+        $('#version').html(`Versión: <b>${data.version}</b>`);
+        $('#fecha').html(`Fecha: <b>${data.fecha}</b>`);
+    });
 
 
     $.get("../../../html/php/certificado/certificado.php", (data = { idBatch, op: 3 }),

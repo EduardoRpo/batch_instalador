@@ -33,7 +33,7 @@ class CertificadosDao
     public function findCertById($val)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("SELECT b.id_batch, p.referencia, p.nombre_referencia, b.numero_lote, b.estado FROM batch b 
+        $stmt = $connection->prepare("SELECT b.id_batch, p.referencia, p.nombre_referencia, b.numero_lote, b.estado, b.fecha_creacion FROM batch b 
                                       INNER JOIN producto p ON b.id_producto = p.referencia
                                       WHERE numero_lote = :lote;");
         $stmt->execute(['lote' => $val]);
@@ -41,7 +41,7 @@ class CertificadosDao
         $dataCert = $stmt->fetchAll($connection::FETCH_ASSOC);
 
         if (sizeof($dataCert) == 0) {
-            $stmt = "SELECT b.id_batch, p.referencia, p.nombre_referencia, b.numero_lote, b.estado 
+            $stmt = "SELECT b.id_batch, p.referencia, p.nombre_referencia, b.numero_lote, b.estado, b.fecha_creacion 
                     FROM batch b 
                     INNER JOIN producto p ON b.id_producto = p.referencia
                     WHERE id_batch = :batch";
