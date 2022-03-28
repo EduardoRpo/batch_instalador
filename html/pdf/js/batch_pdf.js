@@ -9,7 +9,7 @@ let multi;
 let utilizada = 0;
 
 /* obtener batch y referencia seleccionada */
-$(document).ready(function () {
+$(document).ready(function() {
     var pathname = window.location.pathname;
     idList = pathname.split("/");
     idBatch = idList[2];
@@ -21,14 +21,14 @@ $("input").prop("readonly", true);
 
 /* Imprimir pdf */
 
-$(document).on("click", ".link-imprimir", function (e) {
+$(document).on("click", ".link-imprimir", function(e) {
     e.preventDefault();
     window.print();
     return false;
 });
 
 /* cerrar ventana */
-$(document).on("click", ".link-cerrar", function (e) {
+$(document).on("click", ".link-cerrar", function(e) {
     e.preventDefault();
     window.close();
 });
@@ -53,7 +53,7 @@ $("#multi-despachos4").hide();
 
 cargar_version_PDF = (date) => {
     let dataVersion = JSON.parse(date)
-    $.get(`/api/getversions/${dataVersion.fecha_creacion}/1`, function (data, textStatus, jqXHR) {
+    $.get(`/api/getversions/${dataVersion.fecha_creacion}/1`, function(data, textStatus, jqXHR) {
         $('#codigo').html(`Código: <b>${data.codigo}</b>`);
         $('#version').html(`Versión: <b>${data.version}</b>`);
         $('#fecha').html(`Fecha: <b>${data.fecha}</b>`);
@@ -67,7 +67,7 @@ cargar_Alertas = () => {
     $.post(
         "../../html/php/servicios/c_batch_pdf.php",
         (data = { operacion: 7 }),
-        function (data, textStatus, jqXHR) {
+        function(data, textStatus, jqXHR) {
             info = JSON.parse(data);
 
             for (let i = 0; i < info.length; i++) {
@@ -91,7 +91,7 @@ cargar_Alertas = () => {
 
 const cargarObservaciones = () => {
     $.post("../../html/php/servicios/observaciones/batch_obs_pdf.php", { batch: idBatch },
-        function (data, textStatus, jqXHR) {
+        function(data, textStatus, jqXHR) {
             data = JSON.parse(data)
             for (let i = 0; i < data.length; i++) {
                 let ref = data[i].ref_multi
@@ -207,7 +207,7 @@ parametros_Control = () => {
     $.post(
         "../../html/php/servicios/c_batch_pdf.php",
         data,
-        function (data, textStatus, jqXHR) {
+        function(data, textStatus, jqXHR) {
             if (data == "false") return false;
             let info = JSON.parse(data);
             let j = 1;
@@ -250,7 +250,7 @@ area_desinfeccion = (lote) => {
     $.post(
         "../../html/php/servicios/c_batch_pdf.php",
         data,
-        function (data, textStatus, jqXHR) {
+        function(data, textStatus, jqXHR) {
             if (data == "false") return false;
             let info = JSON.parse(data);
 
@@ -278,26 +278,32 @@ desinfectante = () => {
     $.post(
         "../../html/php/servicios/c_batch_pdf.php",
         data,
-        function (data, textStatus, jqXHR) {
+        function(data, textStatus, jqXHR) {
             if (data == "false") return false;
 
             let info = JSON.parse(data);
+
             for (let i = 0; i < info.length; i++) {
                 $(`#blank_rea${info[i].modulo}`).hide();
                 $(`#blank_ver${info[i].modulo}`).hide();
 
                 /* fecha nuevo registro cambia a fecha registro a partir del 1034 */
 
+                if (idBatch >= 984)
+                    fechaRegistro = info[i].fecha_registro
+                else
+                    fechaRegistro = info[i].fecha_nuevo_registro
+
                 $(`.desinfectante${info[i].modulo}`).html(info[i].desinfectante);
                 $(`.concentracion${info[i].modulo}`).html(info[i].concentracion * 100 + "%");
-                $(`#fecha${info[i].modulo}`).html(info[i].fecha_nuevo_registro);
+                $(`#fecha${info[i].modulo}`).html(fechaRegistro);
 
                 if (info[i].modulo == 6)
-                    $("#fsiembra").val(info[i].fecha_nuevo_registro).css("text-align", "center");
+                    $("#fsiembra").val(info[i].fechaRegistro).css("text-align", "center");
                 if (info[i].modulo == 8)
-                    $("#fresultados").val(info[i].fecha_nuevo_registro).css("text-align", "center");
+                    $("#fresultados").val(info[i].fechaRegistro).css("text-align", "center");
 
-                $(`.fecha_medio${info[i].modulo}`).html(info[i].fecha_nuevo_registro);
+                $(`.fecha_medio${info[i].modulo}`).html(info[i].fechaRegistro);
             }
 
             let fecha = $("#fecha2").html();
@@ -313,7 +319,7 @@ const firmas = () => {
     $.post(
         "../../html/php/servicios/c_batch_pdf.php",
         data,
-        function (data, textStatus, jqXHR) {
+        function(data, textStatus, jqXHR) {
             if (data == "false") return false;
 
             let info = JSON.parse(data);
@@ -354,8 +360,14 @@ const firmas_multi = (info) => {
         for (let i = 0; i < multi.length; i++)
             for (let j = 0; j < info.length; j++)
                 if (multi[i]["referencia"] == info[j]["ref_multi"]) {
+
                     /* batch 984 incluido en adelante tomar fecha registro  */
-                    $(`#multi_fecha${i + 1}`).html(info[j]["fecha_nuevo_registro"]);
+                    if (idBatch >= 984)
+                        fechaRegistro = info[j].fecha_registro
+                    else
+                        fechaRegistro = info[j].fecha_nuevo_registro
+
+                    $(`#multi_fecha${i + 1}`).html(fechaRegistro);
                     $(`#multi_f_realizo${i + 1}`).prop("src", info[j].realizo);
                     $(`#multi_user_realizo${i + 1}`).html(
                         `Realizó: <b>${info[j].nombre_realizo}</b>`
@@ -385,7 +397,7 @@ function condiciones_medio() {
     $.post(
         "../../html/php/servicios/c_batch_pdf.php",
         data,
-        function (data, textStatus, jqXHR) {
+        function(data, textStatus, jqXHR) {
             if (data == "false") return false;
             let info = JSON.parse(data);
 
@@ -399,7 +411,7 @@ function condiciones_medio() {
 }
 
 function equipos() {
-    $.get(`/api/equipos/${idBatch}`, function (data, textStatus, jqXHR) {
+    $.get(`/api/equipos/${idBatch}`, function(data, textStatus, jqXHR) {
         if (data.length == 0) return false;
         for (i = 0; i < data.length; i++) {
             if (data[i].tipo === "agitador") {
@@ -486,54 +498,54 @@ function especificaciones_producto() {
 }
 
 function control_proceso() {
-    $.get(`/api/controlproceso/${idBatch}`, function (info, textStatus, jqXHR) {
+    $.get(`/api/controlproceso/${idBatch}`, function(info, textStatus, jqXHR) {
         if (info == "false") return false;
         //info = data;
         for (let i = 0; i < info.length; i++) {
             $(`.color${info[i].modulo}`).html(
                 info[i].color == 1 ?
-                    "Cumple" :
-                    info[i].color == 2 ?
-                        "No Cumple" :
-                        "No aplica"
+                "Cumple" :
+                info[i].color == 2 ?
+                "No Cumple" :
+                "No aplica"
             );
             $(`.olor${info[i].modulo}`).html(
                 info[i].olor == 1 ?
-                    "Cumple" :
-                    info[i].color == 2 ?
-                        "No Cumple" :
-                        "No aplica"
+                "Cumple" :
+                info[i].color == 2 ?
+                "No Cumple" :
+                "No aplica"
             );
             $(`.apariencia${info[i].modulo}`).html(
                 info[i].apariencia == 1 ?
-                    "Cumple" :
-                    info[i].color == 2 ?
-                        "No Cumple" :
-                        "No aplica"
+                "Cumple" :
+                info[i].color == 2 ?
+                "No Cumple" :
+                "No aplica"
             );
             $(`.ph${info[i].modulo}`).html(info[i].ph);
             $(`.viscosidad${info[i].modulo}`).html(info[i].viscosidad);
             $(`.densidad${info[i].modulo}`).html(info[i].densidad);
             $(`.untuosidad${info[i].modulo}`).html(
                 info[i].untuosidad == 1 ?
-                    "Cumple" :
-                    info[0].color == 2 ?
-                        "No Cumple" :
-                        "No aplica"
+                "Cumple" :
+                info[0].color == 2 ?
+                "No Cumple" :
+                "No aplica"
             );
             $(`.espumoso${info[i].modulo}`).html(
                 info[i].espumoso == 1 ?
-                    "Cumple" :
-                    info[i].color == 2 ?
-                        "No Cumple" :
-                        "No aplica"
+                "Cumple" :
+                info[i].color == 2 ?
+                "No Cumple" :
+                "No aplica"
             );
             $(`.alcohol${info[i].modulo}`).html(
                 info[i].alcohol == 1 ?
-                    "Cumple" :
-                    info[i].color == 2 ?
-                        "No Cumple" :
-                        "No aplica"
+                "Cumple" :
+                info[i].color == 2 ?
+                "No Cumple" :
+                "No aplica"
             );
         }
     });
@@ -568,7 +580,7 @@ identificarDensidad = () => {
         url: "../../html/php/controlProceso.php",
         data: { modulo: 4, idBatch },
 
-        success: function (response) {
+        success: function(response) {
             if (response == 0) return false;
             else {
                 let espec = JSON.parse(response);
@@ -617,7 +629,7 @@ const muestras_envasado = () => {
         url: "../../html/php/muestras.php",
         data: { operacion: 6, idBatch },
 
-        success: function (response) {
+        success: function(response) {
             if (response == 3) return false;
             let promedio = 0;
             let cont = 0;
@@ -756,7 +768,7 @@ material_envase_sobrante = () => {
         url: "../../html/php/envasado.php",
         data: { operacion: 7, idBatch },
 
-        success: function (response) {
+        success: function(response) {
             let info = JSON.parse(response);
             if (info.length === 0) return false;
 
@@ -891,7 +903,7 @@ muestras_acondicionamiento = (multi) => {
         type: "POST",
         url: "../../html/php/muestras.php",
         data: { operacion: 7, idBatch },
-        success: function (response) {
+        success: function(response) {
             data = JSON.parse(response);
 
             /* referencia simple */
@@ -906,7 +918,7 @@ muestras_acondicionamiento = (multi) => {
                 let c = 1;
                 for (let i = 0; i < data.length; i++) {
                     if (multi[j].referencia == data[i].referencia) {
-                        data.map(function (dato) {
+                        data.map(function(dato) {
                             if (dato.apariencia_etiquetas == 1)
                                 dato.apariencia_etiquetas = "Cumple";
                             if (dato.apariencia_etiquetas == 2)
@@ -1020,7 +1032,7 @@ conciliacion = (multi) => {
         url: "../../html/php/conciliacion_rendimiento.php",
         data: { operacion: 5, idBatch },
 
-        success: function (response) {
+        success: function(response) {
             let info = JSON.parse(response);
             if (info.length === 0) return false;
 
@@ -1037,6 +1049,11 @@ conciliacion = (multi) => {
 
                 for (let i = 0; i < info.length; i++) {
                     if (info[i].modulo == 6) {
+                        if (idBatch >= 984)
+                            fecha = info[i].fecha_registro
+                        else
+                            fecha = info[i].fecha_nuevo_registro
+
                         $(`#f_realizoConciliacion${j + 1}`).prop("src", info[i].urlfirma);
                         $(`#user_realizoConciliacion${j + 1}`).html(`Realizó: <b>${info[i].nombre}</b>`);
                         $(`#fecha${info[i].modulo}`).html(info[i].fecha_nuevo_registro);
@@ -1053,9 +1070,13 @@ const despachos = () => {
         type: "POST",
         url: "../../html/php/servicios/c_batch_pdf.php",
         data: { operacion: 13, idBatch },
-        success: function (response) {
+        success: function(response) {
             info = JSON.parse(response);
             if (info.length > 0) {
+                if (idBatch >= 984)
+                    fecha = info[i].fecha_registro
+                else
+                    fecha = info[i].fecha_nuevo_registro
                 $("#fecha7").html(info[0].fecha_nuevo_registro);
                 for (let i = 0; i < info.length; i++) {
                     $(`#user_entrego`).html(
@@ -1076,7 +1097,7 @@ observacionesAprobacion = () => {
         type: "POST",
         url: "../../html/php/servicios/c_batch_pdf.php",
         data: { operacion: 12, idBatch },
-        success: function (response) {
+        success: function(response) {
             if (response == "[]") return false;
             data = JSON.parse(response);
             $("#observacionesAprobacion").html(data[0].observaciones);
@@ -1089,7 +1110,7 @@ analisisMicrobiologico = () => {
         type: "POST",
         url: "../../html/php/servicios/c_batch_pdf.php",
         data: { operacion: 14, idBatch },
-        success: function (response) {
+        success: function(response) {
             if (response == "[]") {
                 $(`#f_realizoMicro`).hide();
                 $(`#f_verificoMicro1`).hide();
@@ -1161,7 +1182,7 @@ analisisMicrobiologico = () => {
 const liberacion_lote = () => {
     $.post(
         "../../html/php/servicios/c_batch_pdf.php", { idBatch, operacion: 16 },
-        function (data, textStatus, jqXHR) {
+        function(data, textStatus, jqXHR) {
             if (data == "false") {
                 $(`#f_realizoPRO`).hide();
                 $(`#f_realizoCA`).hide();
@@ -1172,6 +1193,11 @@ const liberacion_lote = () => {
             let produccion = info["dirProd"];
             let calidad = info["dirCa"];
             let tecnica = info["dirTec"];
+
+            if (idBatch >= 984)
+                fecha = info[i].fecha_registro
+            else
+                fecha = info[i].fecha_nuevo_registro
 
             $(".fechaHoraLiberacion").html(
                 `fecha y Hora: <b>${info["fecha_nuevo_registro"]}</b>`
@@ -1220,7 +1246,7 @@ const liberacion_lote = () => {
 };
 
 
-$(document).ready(function () {
+$(document).ready(function() {
     cargar_Alertas();
 
     multipresentacion().then((data) => {
