@@ -25,9 +25,9 @@ class ExplosionMaterialesDao
   {
     $connection = Connection::getInstance()->getConnection();
     $stmt = $connection->prepare("SELECT e.id_materiaprima, m.nombre, SUM(e.cantidad) AS cantidad, SUM(e.uso) AS uso 
-                                    FROM explosion_materiales_batch e 
-                                    INNER JOIN materia_prima m ON e.id_materiaprima = m.referencia 
-                                    GROUP BY id_materiaprima;");
+                                  FROM explosion_materiales_batch e 
+                                  INNER JOIN materia_prima m ON e.id_materiaprima = m.referencia 
+                                  GROUP BY id_materiaprima;");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $batchExplosionMateriales = $stmt->fetchAll($connection::FETCH_ASSOC);

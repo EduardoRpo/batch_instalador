@@ -1,9 +1,13 @@
-
 /* tabla de observaciones en la pestaña de informacion del producto */
 
-$(document).ready(function () {
+$(document).ready(function() {
     $('#txtobservacionesTanques').DataTable({
-        "scrollY": "100px", "scrollCollapse": true, searching: false, paging: false, info: false, ordering: false,
+        "scrollY": "100px",
+        "scrollCollapse": true,
+        searching: false,
+        paging: false,
+        info: false,
+        ordering: false,
         columnDefs: [{
             targets: "_all",
             sortable: false
@@ -41,10 +45,10 @@ function cargarTanques() {
         'method': 'POST',
         'url': '../../html/php/tanques.php',
         'data': { id: idBatch },
-        
-        success: function (data) {
+
+        success: function(data) {
             var info = JSON.parse(data);
-            
+
             if (info == '') { return false; }
 
             var j = 1;
@@ -67,8 +71,9 @@ function cargarTanques() {
 
 
         },
-        error: function (r) {
-            alertify.set("notifier", "position", "top-right"); alertify.error("Error al Cargar los tanques.");
+        error: function(r) {
+            alertify.set("notifier", "position", "top-right");
+            alertify.error("Error al Cargar los tanques.");
         }
 
     });
