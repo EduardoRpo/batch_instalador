@@ -109,8 +109,8 @@ if (!empty($_POST)) {
 				$rows = $query->rowCount();
 
 				$referencia = $data[0];
-				$nombre = trim((strtoupper($data[1])),'');
-				$alias = trim((strtoupper($data[2])),'');
+				$nombre = trim((strtoupper($data[1])));
+				$alias = trim((strtoupper($data[2])));
 
 				if ($rows > 0)
 					$conn->query("UPDATE $tbl SET nombre = '{$nombre}', alias = '{$alias}' WHERE id = '{$referencia}' ");
