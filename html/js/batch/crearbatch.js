@@ -206,7 +206,7 @@ function CalcularTanque(id) {
     let cantidadLote = $("#tamanototallote").val();
     cantidadLote = formatoGeneral(cantidadLote);
 
-    if (sumaTanques > cantidadLote) {
+    if (sumaTanques <= cantidadLote) {
         alertify.set("notifier", "position", "top-right");
         alertify.error("La configuración de Tanques supera el Tamaño del lote");
         return false;
