@@ -19,7 +19,7 @@ switch ($op) {
 
     $rows = $query->rowCount();
 
-    if ($rows > 0 && $multi != 0) {
+    if ($rows > 0 /* && $multi != 0 */) {
       //$sql = "SELECT p.referencia, p.nombre_referencia FROM producto p WHERE multi = :multi";
       $sql = "SELECT p.referencia, p.nombre_referencia as nombre, m.nombre as marca, ns.nombre as notificacion, pp.nombre as propietario, np.nombre as producto, pc.nombre as presentacion, l.nombre as linea, l.densidad 
               FROM producto p INNER JOIN marca m INNER JOIN notificacion_sanitaria ns INNER JOIN propietario pp INNER JOIN nombre_producto np INNER JOIN linea l INNER JOIN presentacion_comercial pc

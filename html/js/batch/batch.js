@@ -319,9 +319,9 @@ function guardarDatos() {
     const unidades = $("#unidadesxlote").val();
     const lote = $("#tamanototallote").val();
 
-    if (total > 2000) {
+    if (total > 2500) {
         alertify.set("notifier", "position", "top-right");
-        alertify.error("El lote debe ser máximo de 2.000 kg");
+        alertify.error("El lote debe ser máximo de 2.500 kg");
         return false
     }
 

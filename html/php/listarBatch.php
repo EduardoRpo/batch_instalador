@@ -370,8 +370,8 @@ function estadoInicial($conn, $referencia, $fechaprogramacion)
   /* si el instructivo no existe valida que exista el instructivo en Bases*/
   if ($resultPreparacionInstructivos == 0) {
     $query_buscarInstructivo =  mysqli_query($conn, "SELECT instructivo FROM producto WHERE referencia = '$referencia'");
-    $resultPreparacion = mysqli_fetch_assoc($query_buscarInstructivo);
-    $resultPreparacionInstructivos = $resultPreparacion['instructivo'];
+    $resultPreparacionInstructivos = mysqli_num_rows($query_buscarInstructivo);
+    //$resultPreparacionInstructivos = $resultPreparacion['instructivo'];
   }
 
   /* consolida resultados */
