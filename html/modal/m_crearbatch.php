@@ -3,9 +3,12 @@
         <div class="modal-content">
             <div class="modal-header" style="  background-color: #FF8D6D !important;">
                 <h5 class="modal-title"><span class="tcrearBatch"><b>Crear Batch Record</b></span></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <div>
+                    <input type="text" class="form-control">
+                </div>
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
-                </button>
+                </button> -->
             </div>
             <div class="modal-body">
                 <form action="" id="formBatch" name="formBatch" method="POST" autocomplete="off">

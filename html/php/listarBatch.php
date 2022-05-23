@@ -86,7 +86,11 @@ switch ($op) {
 
   case 3: //cargar selector de referencias
 
-    $query_referencia = mysqli_query($conn, "SELECT @curRow := @curRow + 1 AS id, referencia FROM producto JOIN (SELECT @curRow := 0) r ORDER BY `producto`.`referencia` ASC");
+    $query_referencia = mysqli_query($conn, "SELECT @curRow := @curRow + 1 AS id, referencia 
+                                             FROM producto 
+                                             JOIN (SELECT @curRow := 0) r 
+                                             WHERE (referencia LIKE '%g%') 
+                                             ORDER BY `producto`.`referencia` ASC;");
     $result = mysqli_num_rows($query_referencia);
     if ($result > 0) {
       while ($data = mysqli_fetch_assoc($query_referencia))
