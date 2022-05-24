@@ -1,6 +1,7 @@
 let tnq = 1;
 let total = 0;
 let addtnq = 1;
+let products
 
 /* Mostrar Modal y Ocultar select referencias */
 
@@ -12,7 +13,8 @@ function mostrarModal() {
     $(".tcrearBatch").html("Crear Batch Record");
     data = "";
     batch_record();
-    cargarReferencias();
+    //cargarReferencias();
+    cargarNombresReferencias();
     cargarTanques();
     /* OcultarTanques(); */
 }
@@ -31,7 +33,7 @@ function limpiarTanques() {
 
 /* Llenar el selector de referencias al crear Batch */
 
-function cargarReferencias() {
+/* function cargarReferencias() {
     $.ajax({
         type: "POST",
         url: "php/listarBatch.php",
@@ -53,32 +55,87 @@ function cargarReferencias() {
             addtnq = 1;
         },
     });
+} */
+
+/* Llenar el selector de nombres referencias al crear Batch */
+
+function cargarNombresReferencias() {
+    $.ajax({
+        url: "/api/productsGranel",
+
+        success: function(resp) {
+            products = resp
+            let $selectRef = $("#cmbNoReferencia");
+            $("#cmbNoReferencia").empty();
+
+            let $selectName = $("#nombrereferencia");
+            $("#nombrereferencia").empty();
+
+            $selectRef.append(`<option disabled selected>referencia</option>`);
+            $selectName.append(`<option disabled selected>nombre_referencia</option>`);
+
+            $.each(products, function(i, value) {
+                $selectRef.append(`<option value="${value.nombre_referencia}">${value.referencia}</option>`);
+                $selectName.append(`<option value="${value.referencia}">${value.nombre_referencia}</option>`);
+            });
+
+            $("#modalCrearBatch").modal("show");
+            addtnq = 1;
+        },
+    });
 }
 
 /* Llenar campos de producto de acuerdo con la referencia del producto */
 
 $(document).ready(function() {
     $("#cmbNoReferencia").change(function() {
+        nameRef = this.value
+        $(`#nombrereferencia option:contains(${nameRef})`).prop('selected', true);
+        recargarDatos();
+    });
+
+    $("#nombrereferencia").change(function() {
+        ref = this.value
+        $(`#cmbNoReferencia option:contains(${ref})`).prop('selected', true);
         recargarDatos();
     });
 });
 
 function recargarDatos() {
+
+    ref = $('#nombrereferencia').val();
+    //ref == null ? ref = $('#cmbNoReferencia').val() : ref
+
+    for (let i = 0; i < products.length; i++) {
+        if (products[i].referencia == ref) {
+            $("#idbatch").val(products[i].referencia);
+            //$("#nombrereferencia").val(products[i].nombre);
+            $("#marca").val(products[i].marca);
+            $("#notificacionSanitaria").val(products[i].notificacion_sanitaria);
+            $("#propietario").val(products[i].propietario);
+            $("#producto").val(products[i].producto);
+            $("#presentacioncomercial").val(products[i].presentacion_comercial);
+            $("#linea").val(products[i].linea);
+            $("#densidad_producto").val(products[i].densidad_producto);
+            $("#ajuste").val(products[i].ajuste);
+        }
+    }
+
+}
+
+/* function recargarDatos() {
     var combo = document.getElementById("cmbNoReferencia");
     var sel = combo.options[combo.selectedIndex].text;
-
+    
     $.ajax({
-        //type: "POST",
-        //url: "php/listarBatch.php",
-        //data: { operacion: "4", id: sel },
         url: `../../api/product/${sel}`,
         data: { operacion: "4", id: sel },
-
+    
         success: function(r) {
             var info = JSON.parse(r);
-
+    
             $("#idbatch").val(info[0].referencia);
-            $("#nombrereferencia").val(info[0].nombre);
+            //$("#nombrereferencia").val(info[0].nombre);
             $("#marca").val(info[0].marca);
             $("#notificacionSanitaria").val(info[0].notificacion_sanitaria);
             $("#propietario").val(info[0].propietario);
@@ -87,10 +144,10 @@ function recargarDatos() {
             $("#linea").val(info[0].linea);
             $("#densidad_producto").val(info[0].densidad_producto);
             $("#ajuste").val(info[0].ajuste);
-
+    
         },
     });
-}
+} */
 
 /* calcular Tamaño del Lote */
 

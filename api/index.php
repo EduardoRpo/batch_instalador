@@ -24,11 +24,13 @@ $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 require_once __DIR__ . '/src/routes/admin/productos.php';
 
 /* App */
+require_once __DIR__ . '/src/routes/app/global/productos.php';
+
 require_once __DIR__ . '/src/routes/batch.php';
 require_once __DIR__ . '/src/routes/colasTrabajo.php';
 require_once __DIR__ . '/src/routes/multipresentacion.php';
 
-require_once __DIR__ . '/src/routes/cargo.php';
+//require_once __DIR__ . '/src/routes/cargo.php';
 require_once __DIR__ . '/src/routes/preguntas.php';
 require_once __DIR__ . '/src/routes/desinfectante.php';
 require_once __DIR__ . '/src/routes/materias_primas.php';

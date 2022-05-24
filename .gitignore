@@ -7,3 +7,5 @@ env.php
 *.png
 .vscode/launch.json
 tries.txt
+/html/img
+html/img/referencias
