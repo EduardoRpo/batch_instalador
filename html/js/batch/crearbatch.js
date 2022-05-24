@@ -75,7 +75,7 @@ function cargarNombresReferencias() {
             $selectName.append(`<option disabled selected>nombre_referencia</option>`);
 
             $.each(products, function(i, value) {
-                $selectRef.append(`<option value="${value.nombre_referencia}">${value.referencia}</option>`);
+                $selectRef.append(`<option value="${value.referencia}">${value.referencia}</option>`);
                 $selectName.append(`<option value="${value.referencia}">${value.nombre_referencia}</option>`);
             });
 
@@ -90,13 +90,13 @@ function cargarNombresReferencias() {
 $(document).ready(function() {
     $("#cmbNoReferencia").change(function() {
         nameRef = this.value
-        $(`#nombrereferencia option:contains(${nameRef})`).prop('selected', true);
+        $('#nombrereferencia').val(nameRef);
         recargarDatos();
     });
 
     $("#nombrereferencia").change(function() {
         ref = this.value
-        $(`#cmbNoReferencia option:contains(${ref})`).prop('selected', true);
+        $('#cmbNoReferencia').val(ref);
         recargarDatos();
     });
 });
