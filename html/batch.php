@@ -48,7 +48,7 @@ include_once("modal/modalPedidos.php");
         <div class="tituloProceso">
           <h1 class="text-themecolor"><b>Batch Record</b></h1>
         </div>
-
+        <?php if($_SESSION['rol'] != 6){  ?>
         <div class="botones-group">
           <div class="dropdown btn-acciones">
             <button class="btn btn-secondary dropdown-toggle " style="background-color:#fff;color:#FF8D6D; border-color:#FF8D6D;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>
@@ -71,6 +71,8 @@ include_once("modal/modalPedidos.php");
           </button>
 
         </div>
+
+        <?php } ?>
       </div>
     </div>
 
