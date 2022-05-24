@@ -66,6 +66,9 @@ if (!empty($_SESSION['active'])) {
                             case '31':
                                 header('location: /html/batch.php');
                                 break;
+                            case '61':
+                                header('location: /html/batch.php');
+                                break;
                             case '32':
                                 header('location: /pesaje');
                                 break;

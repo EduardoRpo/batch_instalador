@@ -165,9 +165,9 @@ function CalculoTamanolote(valor) {
 
     total = ((unidades * densidad_producto * presentacion) / 1000) * (1 + parseFloat(ajuste));
 
-    if (total > 2060) {
+    if (total > 2500) {
         alertify.set("notifier", "position", "top-right");
-        alertify.error("El lote debe ser máximo de 2000 kg");
+        alertify.error("El lote debe ser máximo de 2500 kg");
         $('#unidadesxlote').val('');
         $('#tamanototallote').val('');
 
