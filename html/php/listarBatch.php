@@ -86,7 +86,7 @@ switch ($op) {
 
   case 3: //cargar selector de referencias
 
-    $query_referencia = mysqli_query($conn, "SELECT @curRow := @curRow + 1 AS id, referencia 
+    /* $query_referencia = mysqli_query($conn, "SELECT @curRow := @curRow + 1 AS id, referencia 
                                              FROM producto 
                                              JOIN (SELECT @curRow := 0) r 
                                              WHERE (referencia LIKE '%g%') 
@@ -100,7 +100,7 @@ switch ($op) {
       echo json_encode('');
     mysqli_free_result($query_referencia);
     mysqli_close($conn);
-    break;
+    break; */
 
   case 4: //recargar datos de acuerdo con seleccion de referencia
     /* $id_referencia = $_POST['id'];

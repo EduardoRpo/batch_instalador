@@ -3,9 +3,9 @@
         <div class="modal-content">
             <div class="modal-header" style="  background-color: #FF8D6D !important;">
                 <h5 class="modal-title"><span class="tcrearBatch"><b>Crear Batch Record</b></span></h5>
-                <div>
+                <!-- <div>
                     <input type="text" class="form-control">
-                </div>
+                </div> -->
                 <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button> -->
@@ -23,7 +23,8 @@
 
                         <div class="col-md-9 col-2 align-self-center">
                             <label for="recipient-name" class="col-form-label">Nombre</label><br>
-                            <input id="nombrereferencia" class="displayallinfo" readonly name="nombrereferencia">
+                            <!-- <input id="nombrereferencia" class="displayallinfo" readonly name="nombrereferencia"> -->
+                            <select id="nombrereferencia" class="displayallinfo" readonly name="nombrereferencia"></select>
                         </div>
 
                     </div>
