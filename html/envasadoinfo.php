@@ -84,7 +84,7 @@ include('modal/image.php')
                 <div class="contenedorInfo2">
 
                   <div class="contenedorInfo__group">
-                    <label for="recipient-name" class="col-form-label">Fecha Programación</label>
+                    <label for="recipient-name" class="col-form-label">Fecha Actual</label>
                     <input type="date" class="form-control" id="in_fecha" readonly>
                   </div>
 

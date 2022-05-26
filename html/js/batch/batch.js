@@ -130,7 +130,7 @@ function tablaBatchCerrados() {
         bAutoWidth: false,
 
         ajax: {
-            url: "../../../api/batchcerrados",
+            url: "/api/batchcerrados",
             dataSrc: "",
         },
 
@@ -316,7 +316,7 @@ function guardarDatos() {
         ref = $("#referencia").val();
 
     const id_batch = $("#idbatch").val();
-    const unidades = $("#unidadesxlote").val();
+    //const unidades = $("#unidadesxlote").val();
     const lote = $("#tamanototallote").val();
 
     if (total > 2500) {
@@ -325,7 +325,6 @@ function guardarDatos() {
         return false
     }
 
-    const tamano_lote = formatoGeneral(lote);
     const presentacion = $("#presentacioncomercial").val();
     const presentacion_comercial = formatoGeneral(presentacion);
     const programacion = $("#fechaprogramacion").val();
@@ -346,21 +345,32 @@ function guardarDatos() {
         return false;
     }
 
+    multi = sessionStorage.getItem('multi')
+
     if (!editar) {
         datos = {
-            operacion: "5",
             ref,
             id_batch,
-            unidades,
-            lote: tamano_lote,
+            /* unidades, */
+            lote: lote,
             presentacion: presentacion_comercial,
             programacion,
             tanque,
             cantidades,
+            multi
         };
+
+        $.ajax({
+            type: "POST",
+            url: "/api/saveBatch",
+            data: datos,
+
+            success: function(r) {
+                notification(r)
+            }
+        })
     } else {
         datos = {
-            operacion: "7",
             ref,
             id_batch,
             unidades,
@@ -368,29 +378,29 @@ function guardarDatos() {
             programacion,
             tanque,
             cantidades,
+            multi
         };
-    }
-
-    $.ajax({
-        type: "POST",
-        url: "php/listarBatch.php",
-        data: datos,
-
-        success: function(r) {
-            if (r == 3) {
-                cerrarModal();
-                alertify.set("notifier", "position", "top-right");
-                alertify.error("Batch Record en proceso. No es posible actualizarlo...");
-            } else {
-                cerrarModal();
-                actualizarTabla();
-                alertify.set("notifier", "position", "top-right");
-                alertify.success("Batch Record registrado con éxito.");
+        $.ajax({
+            type: "POST",
+            url: "api/updateBatch",
+            data: datos,
+            success: function(r) {
+                debugger
+                notification(r)
             }
-        },
-        error: function(r) {
-            alertify.set("notifier", "position", "top-right");
-            alertify.error("Error al registrar el Batch Record.");
-        },
-    });
+        })
+    }
+}
+
+notification = (resp) => {
+    if (resp == 3) {
+        cerrarModal();
+        alertify.set("notifier", "position", "top-right");
+        alertify.error("Batch Record en proceso. No es posible actualizarlo...");
+    } else {
+        cerrarModal();
+        actualizarTabla();
+        alertify.set("notifier", "position", "top-right");
+        alertify.success("Batch Record registrado con éxito.");
+    }
 }

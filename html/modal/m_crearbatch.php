@@ -6,9 +6,9 @@
                 <!-- <div>
                     <input type="text" class="form-control">
                 </div> -->
-                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
-                </button> -->
+                </button>
             </div>
             <div class="modal-body">
                 <form action="" id="formBatch" name="formBatch" method="POST" autocomplete="off">
@@ -73,11 +73,14 @@
                     <div class="row page">
                         <div class="col-md-4 col-2 align-self-center">
                             <label for="recipient-name" class="col-form-label">Unidades por Lote</label>
-                            <input type="number" name="unidadesxlote" id="unidadesxlote" min="1" onkeyup="CalculoTamanolote(this.value);" class="form-control" min="1" required />
+                            <input type="number" name="unidadesxlote" id="unidadesxlote" min="1" class="form-control" min="1" required readonly/>
                         </div>
                         <div class="col-md-4 col-2 align-self-center">
                             <label for="recipient-name" class="col-form-label" type="number">Tamaño del Lote (Kg)</label>
                             <input name="tamanototallote" id="tamanototallote" class="form-control Numeric" min="1" readonly value="" style="height: 70px; font-size: xx-large; width: 200; text-align: center" />
+                        </div>
+                        <div class="col-md-4 col-2 align-self-center">
+                            <button class="btn btn-primary" id="calcTamanioLote">Calcular Tamaño Lote</button>
                         </div>
 
                     </div>
