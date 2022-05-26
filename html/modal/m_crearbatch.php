@@ -73,7 +73,7 @@
                     <div class="row page">
                         <div class="col-md-4 col-2 align-self-center">
                             <label for="recipient-name" class="col-form-label">Unidades por Lote</label>
-                            <input type="number" name="unidadesxlote" id="unidadesxlote" min="1" class="form-control" min="1" required readonly/>
+                            <input type="number" name="unidadesxlote" id="unidadesxlote" min="1" class="form-control" min="1" style="height: 70px; font-size: xx-large; width: 200; text-align: center" readonly/>
                         </div>
                         <div class="col-md-4 col-2 align-self-center">
                             <label for="recipient-name" class="col-form-label" type="number">Tamaño del Lote (Kg)</label>

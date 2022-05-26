@@ -35,9 +35,9 @@ class MultiDao extends ControlFirmasMultiDao
         if ($rows > 0 /* && $multi != 0 */) {
             //$sql = "SELECT p.referencia, p.nombre_referencia FROM producto p WHERE multi = :multi";
             $sql = "SELECT p.referencia, p.nombre_referencia as nombre, m.nombre as marca, ns.nombre as notificacion, pp.nombre as propietario, np.nombre as producto, pc.nombre as presentacion, l.nombre as linea, l.densidad 
-                  FROM producto p INNER JOIN marca m INNER JOIN notificacion_sanitaria ns INNER JOIN propietario pp INNER JOIN nombre_producto np INNER JOIN linea l INNER JOIN presentacion_comercial pc
-                  ON p.id_marca = m.id AND p.id_notificacion_sanitaria = ns.id AND p.id_propietario=pp.id AND p.id_nombre_producto= np.id AND p.id_linea=l.id AND pc.id = p.presentacion_comercial
-                  WHERE multi = :multi";
+                    FROM producto p INNER JOIN marca m INNER JOIN notificacion_sanitaria ns INNER JOIN propietario pp INNER JOIN nombre_producto np INNER JOIN linea l INNER JOIN presentacion_comercial pc
+                    ON p.id_marca = m.id AND p.id_notificacion_sanitaria = ns.id AND p.id_propietario=pp.id AND p.id_nombre_producto= np.id AND p.id_linea=l.id AND pc.id = p.presentacion_comercial
+                    WHERE multi = :multi";
             $query = $connection->prepare($sql);
             $query->execute(['multi' => $multi]);
             $query->execute(['multi' => $multi]);
@@ -46,10 +46,14 @@ class MultiDao extends ControlFirmasMultiDao
         }
     }
 
-    public function saveMulti($id_batch, $multipresentaciones)
+    public function saveMulti($id_batch, $dataBatch)
     {
         $connection = Connection::getInstance()->getConnection();
-        
+
+        $multipresentaciones = json_decode($dataBatch['multi'], true);
+
+        /* Buscar el ultimo Batch creado */
+
         foreach ($multipresentaciones as $multipresentacion) {
             $sql = "SELECT * FROM multipresentacion WHERE id_batch = :id_batch AND referencia = :referencia";
             $query = $connection->prepare($sql);
@@ -90,12 +94,5 @@ class MultiDao extends ControlFirmasMultiDao
 
         /* Actualizar tabla firmas con multipresentacion */
         $this->controlFirmasMulti($id_batch);
-
-        if (!$result) {
-            die('Error');
-            echo '0';
-        } else {
-            echo '1';
-        }
     }
 }

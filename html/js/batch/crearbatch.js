@@ -123,8 +123,6 @@ function recargarDatos() {
 
 }
 
-
-
 $(document).on('click', '#calcTamanioLote', function(e) {
     e.preventDefault();
     ref = $('#cmbNoReferencia').val();
@@ -299,6 +297,6 @@ function CalcularTanque(id) {
 }
 
 function cerrarModal() {
-    //$("#modalCrearBatch").modal("hide");
+    $("#modalCrearBatch").modal("hide");
     $("#Modal_Multipresentacion").modal("hide");
 }

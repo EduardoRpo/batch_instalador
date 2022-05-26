@@ -146,7 +146,7 @@ function CalculoloteMulti(id) {
 
     if (cantidad == 0) {
         alertify.set("notifier", "position", "top-right");
-        alertify.error("Ingrese las unidades por presentación.");
+        alertify.notify("Ingrese las unidades por presentación.");
         return false;
     }
 
@@ -249,8 +249,9 @@ function eliminarMulti(id) {
 //Guardar Multi
 
 $('#btnCargarKg').click(function(e) {
-    debugger
+
     e.preventDefault();
+    let totalCantidades = 0;
     const ref = [];
     let j = 1;
 
@@ -258,12 +259,15 @@ $('#btnCargarKg').click(function(e) {
     objetos = $(".multi").length;
     totalKg = $('#sumaMulti').val();
     //obtener referencias
-
+    debugger
     for (i = 0; i < objetos; i++) {
         const multi = {};
+
         multi.referencia = $(`#MultiReferencia${j}`).val();
         multi.cantidadunidades = $(`#cantidadMulti${j}`).val();
         multi.tamaniopresentacion = $(`#tamanioloteMulti${j}`).val();
+
+        totalCantidades = totalCantidades + parseInt($(`#cantidadMulti${j}`).val());
 
         if (multi.referencia || multi.cantidadunidades || multi.tamaniopresentacion)
             ref.push(multi);
@@ -277,7 +281,8 @@ $('#btnCargarKg').click(function(e) {
     totalKg = $('#sumaMulti').val();
     totalTamaniolote = totalKg * (1 + ajuste)
 
-    $('#tamanototallote').val(totalTamaniolote);
+    $('#tamanototallote').val(totalTamaniolote.toFixed(2));
+    $('#unidadesxlote').val(totalCantidades);
 
 });
 

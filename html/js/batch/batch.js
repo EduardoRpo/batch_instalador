@@ -286,13 +286,6 @@ $(document).on("click", ".link-editar", function(e) {
     });
 });
 
-/* Actualizar tabla */
-
-function actualizarTabla() {
-    $("#tablaBatch").DataTable().clear();
-    $("#tablaBatch").DataTable().ajax.reload();
-}
-
 /* Guardar datos de Crear y Actualizar batch*/
 
 function guardarDatos() {
@@ -365,8 +358,8 @@ function guardarDatos() {
             url: "/api/saveBatch",
             data: datos,
 
-            success: function(r) {
-                notification(r)
+            success: function(data) {
+                message(data)
             }
         })
     } else {
@@ -384,23 +377,31 @@ function guardarDatos() {
             type: "POST",
             url: "api/updateBatch",
             data: datos,
-            success: function(r) {
+            success: function(data) {
                 debugger
-                notification(r)
+                message(data)
             }
         })
     }
 }
 
-notification = (resp) => {
-    if (resp == 3) {
+/* Mensaje de exito */
+
+message = (data) => {
+    if (data.success == true) {
         cerrarModal();
-        alertify.set("notifier", "position", "top-right");
-        alertify.error("Batch Record en proceso. No es posible actualizarlo...");
-    } else {
-        cerrarModal();
+        alertify.success(data.message);
         actualizarTabla();
-        alertify.set("notifier", "position", "top-right");
-        alertify.success("Batch Record registrado con éxito.");
-    }
+        return false;
+    } else if (data.error == true)
+        alertify.error(data.message);
+    else if (data.info == true)
+        alertify.info(data.message);
+};
+
+/* Actualizar tabla */
+
+function actualizarTabla() {
+    $("#tablaBatch").DataTable().clear();
+    $("#tablaBatch").DataTable().ajax.reload();
 }

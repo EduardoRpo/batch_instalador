@@ -2,10 +2,19 @@
 
 
 use BatchRecord\dao\BatchDao;
+use BatchRecord\dao\UltimoBatchCreadoDao;
+use BatchRecord\dao\TanquesDao;
+use BatchRecord\dao\ControlFirmasDao;
+use BatchRecord\dao\MultiDao;
+
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 $batchDao = new BatchDao();
+$ultimoBatchDao = new UltimoBatchCreadoDao();
+$tanquesDao = new TanquesDao();
+$controlFirmasDao = new ControlFirmasDao();
+$multiDao = new MultiDao();
 
 $app->get('/batch/{id}', function (Request $request, Response $response, $args) use ($batchDao) {
   $batch = $batchDao->findById($args["id"]);
@@ -25,10 +34,35 @@ $app->get('/batchcerrados', function (Request $request, Response $response, $arg
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->post('/saveBatch', function (Request $request, Response $response, $args) use ($batchDao) {
+$app->post('/saveBatch', function (Request $request, Response $response, $args) use ($batchDao, $ultimoBatchDao, $tanquesDao, $controlFirmasDao, $multiDao) {
   $dataBatch = $request->getParsedBody();
-  $savedBatch = $batchDao->saveBatch($dataBatch);
-  $response->getBody()->write(json_encode($savedBatch, JSON_NUMERIC_CHECK));
+
+  /* Crear el batch */
+  $resp = $batchDao->saveBatch($dataBatch);
+
+  /* Indentifica el ultimo Batch ingresado */
+  if ($resp == null)
+    $id_batch = $ultimoBatchDao->ultimoBatchCreado();
+
+  /* Crea los tanques */
+  if ($resp == null)
+    $resp = $tanquesDao->saveTanques($id_batch['id'], $dataBatch);
+
+  /* Crea el control de formulas */
+  if ($resp == null)
+    $resp = $controlFirmasDao->saveControlFirmas($id_batch['id']);
+
+  /* Crea la multipresentacion */
+  if ($resp == null)
+    $resp = $multiDao->saveMulti($id_batch['id'], $dataBatch);
+
+  /* Notificaciones*/
+  if ($resp == null)
+    $resp = array('success' => true, 'message' => 'Nuevo Batch creado correctamente');
+  else
+    $resp = array('error' => true, 'message' => 'Ocurrio un error mientras creaba el Batch. Intentelo nuevamente');
+
+  $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
 
