@@ -2,9 +2,11 @@
 require_once('../html/sesiones/sesion.php');
 sesiones(1);
 require_once('../conexion.php');
+
 include_once("modal/modal_clonar.php");
 include_once("modal/m_batchEliminados.php");
 include_once("modal/m_crearbatch.php");
+//include_once("modal/modal_tamanioLote.php");
 include_once("modal/modal_multipresentacion.php");
 include_once("modal/modal_cambiarContrasena.php");
 include_once("modal/m_batch_pdf.php");
@@ -53,7 +55,7 @@ include_once("modal/modalPedidos.php");
           <div class="dropdown btn-acciones">
             <button class="btn btn-secondary dropdown-toggle " style="background-color:#fff;color:#FF8D6D; border-color:#FF8D6D;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#" onclick="multipresentacion()"><i class="fa fa-superscript"></i> Multipresentación</a>
+              <!-- <a class="dropdown-item" href="#" onclick="multipresentacion()"><i class="fa fa-superscript"></i> Multipresentación</a> -->
               <a class="dropdown-item" href="#" onclick="clonar()"><i class="fa fa-clone"></i> Clonar</a>
               <a class="dropdown-item" href="#" onclick="batchEliminados()"><i class="fa fa-eraser"></i> Batch Eliminados</a>
               <a class="dropdown-item pdf" href="#"><i class="fa fa-download"></i> Imprimir PDF</a>

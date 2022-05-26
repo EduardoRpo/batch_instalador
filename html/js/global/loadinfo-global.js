@@ -102,8 +102,14 @@ $.ajax({
     $("#in_referencia").val(data.referencia);
     $("#in_nombre_referencia").val(data.nombre_referencia);
     $("#in_linea").val(data.linea);
-    $("#in_fecha_programacion").val(data.fecha_programacion);
     $("#in_tamano_lote").val(tamano_lote);
+
+    var fecha = new Date(data.fecha_programacion);
+    var dias = 2; // Número de días a agregar
+    fecha.setDate(fecha.getDate() + dias);
+    $("#in_fecha_programacion").val(data.fecha_programacion);
+
+
 
     localStorage.setItem("orden", data.numero_orden);
     localStorage.setItem("tamano_lote", data.tamano_lote);

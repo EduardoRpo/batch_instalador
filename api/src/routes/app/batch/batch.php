@@ -25,15 +25,16 @@ $app->get('/batchcerrados', function (Request $request, Response $response, $arg
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->post('/clonebatch', function (Request $request, Response $response, $args) use ($batchDao) {
-  $requestBody = json_decode($request->getBody(), true);
-  $batch = $batchDao->findById($requestBody['idbatch']);
-  //$batch["unidad_lote"] = $requestBody['unidades'];
-  $duplicates = $requestBody['cantidad'];
-  for ($i = 0; $i < $duplicates; $i++) {
-    $rows = $batchDao->saveBatch($batch);
-  }
-  $resp = array('success' => ($rows > 0));
-  $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
+$app->post('/saveBatch', function (Request $request, Response $response, $args) use ($batchDao) {
+  $dataBatch = $request->getParsedBody();
+  $savedBatch = $batchDao->saveBatch($dataBatch);
+  $response->getBody()->write(json_encode($savedBatch, JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
+});
+
+$app->post('/updateBatch', function (Request $request, Response $response, $args) use ($batchDao) {
+  $dataBatch = $request->getParsedBody();
+  $updatedBatch = $batchDao->updateBatch($dataBatch);
+  $response->getBody()->write(json_encode($updatedBatch, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });

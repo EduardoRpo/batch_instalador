@@ -123,6 +123,32 @@ function recargarDatos() {
 
 }
 
+
+
+$(document).on('click', '#calcTamanioLote', function(e) {
+    e.preventDefault();
+    ref = $('#cmbNoReferencia').val();
+    multipresentacion(ref)
+});
+
+/* Adicionar referencia para crear multipresentacion en un batch*/
+
+/* $("#adicionarCantidades").on("click", function() {
+    debugger
+    objetos = $(".multi").length;
+    !objetos ? (index = 1) : index++;
+
+    if (index < 6) {
+        $(".insertarRefCantidad").append(
+            `<select class="form-control presentacion" name="presentacion" id="presentacion${index}" onchange="cargarReferenciaM(${index});"></select>
+             <input type="text" class="form-control derecha" id="cantidad${index}" name="cantidad" placeholder="cantidad" onkeyup="CalculoloteMulti(${index});">
+             <input type="text" class="form-control" id="totalKg${index}" name="totalKG" placeholder="Total Kg">
+             <button class="btn btn-warning btneliminarReg${index}" onclick="eliminarReg(${index});" type="button">X</button>`
+        );
+        //cargarMulti(multi);
+    }
+}); */
+
 /* function recargarDatos() {
     var combo = document.getElementById("cmbNoReferencia");
     var sel = combo.options[combo.selectedIndex].text;
@@ -151,7 +177,7 @@ function recargarDatos() {
 
 /* calcular Tamaño del Lote */
 
-function CalculoTamanolote(valor) {
+/* function CalculoTamanolote(valor) {
     var total = 0;
     unidades = parseInt(valor);
     densidad_producto = $("#densidad_producto").val();
@@ -179,7 +205,7 @@ function CalculoTamanolote(valor) {
 
     total1 = formatoCO(total.toFixed(2));
     $("#tamanototallote").val(total1);
-}
+} */
 
 /* Limpiar datos al cambiar referencia en el modal de crear Batch */
 
@@ -260,8 +286,8 @@ function CalcularTanque(id) {
         sumaTanques = parseInt(sumaTanques) + parseInt(total);
     }
 
-    let cantidadLote = $("#tamanototallote").val();
-    cantidadLote = formatoGeneral(cantidadLote);
+    let cantidadLote = parseFloat($("#tamanototallote").val());
+    //cantidadLote = formatoGeneral(cantidadLote);
 
     if (sumaTanques <= cantidadLote) {
         alertify.set("notifier", "position", "top-right");
@@ -273,6 +299,6 @@ function CalcularTanque(id) {
 }
 
 function cerrarModal() {
-    $("#modalCrearBatch").modal("hide");
+    //$("#modalCrearBatch").modal("hide");
     $("#Modal_Multipresentacion").modal("hide");
 }

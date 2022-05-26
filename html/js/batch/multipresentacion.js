@@ -3,13 +3,14 @@
 let multi;
 let objetos;
 editar = false;
+let ajuste = 0;
 
 /* Cargar la data de la fila */
 
-$("#tablaBatch tbody").on("click", "tr", function() {
+/* $("#tablaBatch tbody").on("click", "tr", function() {
     data = tabla.row(this).data();
 });
-
+ */
 /* Almacenar referencias para los procesos de clonado y multipresentacion */
 
 $(document).on("click", ".link-select", function(e) {
@@ -19,10 +20,11 @@ $(document).on("click", ".link-select", function(e) {
 
 /* Validar si un producto puede tener multipresentacion */
 
-function multipresentacion() {
-    if (!data) {
+function multipresentacion(ref) {
+    debugger
+    if (!ref) {
         alertify.set("notifier", "position", "top-right");
-        alertify.error("Seleccione un registro");
+        alertify.error("Seleccione la referencia Granel");
         return false;
     }
     if (data.multi > 0 && editar === false) {
@@ -31,47 +33,51 @@ function multipresentacion() {
         return false;
     }
 
-    if ($("input[name='optradio']:radio").is(":checked") || editar === true) {
-        $.ajax({
-            type: "POST",
-            url: "php/multi.php",
-            data: { operacion: "1", id: data.referencia },
-
-            success: function(resp) {
-                if (resp == "") {
-                    alertify.set("notifier", "position", "top-right");
-                    alertify.error("Esta referencia no tiene Multipresentación.");
-                    return false;
-                } else {
-                    multi = JSON.parse(resp);
-
-                    $.ajax({
-                        //type: "POST",
-                        //url: "php/listarBatch.php",
-                        //data: { operacion: "4", id: data.referencia },
-                        url: `../../api/product/${data.referencia}`,
-                        data: { id: data.referencia },
-
-                        success: function(r) {
-                            var info = JSON.parse(r);
-                            let ajuste = JSON.parse(info[0].ajuste)
-                            $("#loteTotal").val(Math.ceil(parseInt(data.tamano_lote) / (1 + ajuste)));
-                        },
-                    });
-
-                    if (editar) {
-                        $("#adicionarMultipresentacion").trigger("click");
-                    }
-                }
-                $(`#sumaMulti`).val("");
-                $("#Modal_Multipresentacion").modal("show");
-            },
-        });
-    } else {
+    /* if ($("input[name='optradio']:radio").is(":checked") || editar === true) { */
+    busquedaMulti(ref);
+    /* } else {
         alertify.set("notifier", "position", "top-right");
         alertify.error("Para Multipresentación seleccione un Batch Record");
-    }
+    } */
 }
+
+
+function busquedaMulti(ref) {
+
+    $.ajax({
+        type: "POST",
+        url: "php/multi.php",
+        data: { operacion: "1", id: ref },
+
+        success: function(resp) {
+            if (resp == "") {
+                alertify.set("notifier", "position", "top-right");
+                alertify.error("Seleccione el granel.");
+                return false;
+            } else {
+                multi = JSON.parse(resp);
+
+                $.ajax({
+                    url: `/api/product/${ref}`,
+
+                    success: function(r) {
+                        var info = JSON.parse(r);
+                        ajuste = JSON.parse(info[0].ajuste)
+                        $("#loteTotal").val(Math.ceil(parseInt(data.tamano_lote) / (1 + ajuste)));
+                    },
+                });
+
+                if (editar) {
+                    $("#adicionarMultipresentacion").trigger("click");
+                }
+            }
+            $(`#sumaMulti`).val("");
+            $("#Modal_Multipresentacion").modal("show");
+        },
+    });
+}
+
+
 
 /* Adicionar referencia para crear multipresentacion en un batch*/
 
@@ -82,11 +88,11 @@ $("#adicionarMultipresentacion").on("click", function() {
     if (index < 6) {
         $(".insertarRefMulti").append(
             `<select class="form-control multi" name="MultiReferencia" id="MultiReferencia${index}" onchange="cargarReferenciaM(${index});"></select>
-      <input type="text" class="form-control derecha" id="cantidadMulti${index}" name="cantidadMulti" onkeyup="CalculoloteMulti(${index});">
-      <input type="text" class="form-control derecha" id="tamanioloteMulti${index}" name="tamanioloteMulti" readonly placeholder="Lote">
-      <input type="text" class="form-control" id="densidadMulti${index}" name="densidadMulti" placeholder="Densidad" hidden>
-      <input type="text" class="form-control" id="presentacionMulti${index}" name="presentacionMulti" placeholder="Presentación" hidden>
-      <button class="btn btn-warning btneliminarMulti${index}" onclick="eliminarMulti(${index});" type="button">X</button>`
+            <input type="text" class="form-control text-center" id="cantidadMulti${index}" name="cantidadMulti" onkeyup="CalculoloteMulti(${index});">
+            <input type="text" class="form-control text-center" id="tamanioloteMulti${index}" name="tamanioloteMulti" readonly placeholder="Lote">
+            <input type="text" class="form-control" id="densidadMulti${index}" name="densidadMulti" placeholder="Densidad" hidden>
+            <input type="text" class="form-control" id="presentacionMulti${index}" name="presentacionMulti" placeholder="Presentación" hidden>
+            <button class="btn btn-warning btneliminarMulti${index}" onclick="eliminarMulti(${index});" type="button">X</button>`
         );
         cargarMulti(multi);
     }
@@ -123,44 +129,44 @@ function cargarReferenciaM(id) {
 //calcular Tamaño del Lote
 
 function CalculoloteMulti(id) {
+
     const referencia = $(`#MultiReferencia${id}`).val();
     const densidad = $(`#densidadMulti${id}`).val();
     const presentacion = $(`#presentacionMulti${id}`).val();
-    const lote = $("#loteTotal").val();
+    //const lote = $("#loteTotal").val();
     cantidad = $(`#cantidadMulti${id}`).val();
 
     let totalKg = 0;
+
     if (referencia == undefined) {
         alertify.set("notifier", "position", "top-right");
         alertify.error("Seleccione la presentación.");
         return false;
     }
 
-    if (cantidad == 0) return false;
+    if (cantidad == 0) {
+        alertify.set("notifier", "position", "top-right");
+        alertify.error("Ingrese las unidades por presentación.");
+        return false;
+    }
 
     /* Calcula el lote de la presentacion de acuerdo con la seleccion */
-    let lotePresentacion = parseInt(
-        ((densidad * cantidad * presentacion) / 1000) * (1 + 0.005)
-    );
 
+    let lotePresentacion = parseInt((densidad * cantidad * presentacion) / 1000);
     $(`#tamanioloteMulti${id}`).val(lotePresentacion);
 
     /* Suma todos los lotes */
 
-    for (let i = 1; i <= id; i++) {
-        totalKg =
-            parseFloat(totalKg) + parseFloat($(`#tamanioloteMulti${i}`).val());
-    }
+    for (let i = 1; i <= id; i++)
+        totalKg = parseFloat(totalKg) + parseFloat($(`#tamanioloteMulti${i}`).val());
 
     $("#sumaMulti").val(totalKg);
 
     /* Valida que un lote no este por fuera del rango */
 
-    if (totalKg > lote) {
+    if (totalKg > 2500) {
         alertify.set("notifier", "position", "top-right");
-        alertify.error(
-            "El tamaño del lote para esta referencia de Multipresentación supera el Tamaño del lote inicial"
-        );
+        alertify.error("El total en Kg supera el tamaño máximo por lote");
         $("#sumaMulti").val("");
         $(`#cantidadMulti${id}`).val("");
         $(`#tamanioloteMulti${id}`).val("");
@@ -242,13 +248,15 @@ function eliminarMulti(id) {
 
 //Guardar Multi
 
-function guardar_Multi() {
+$('#btnCargarKg').click(function(e) {
+    debugger
+    e.preventDefault();
     const ref = [];
     let j = 1;
 
     //contar Multipresentacion
     objetos = $(".multi").length;
-
+    totalKg = $('#sumaMulti').val();
     //obtener referencias
 
     for (i = 0; i < objetos; i++) {
@@ -259,26 +267,39 @@ function guardar_Multi() {
 
         if (multi.referencia || multi.cantidadunidades || multi.tamaniopresentacion)
             ref.push(multi);
-
         j++;
     }
 
+    multi = JSON.stringify(ref)
+    sessionStorage.setItem('multi', multi)
+    $('#Modal_Multipresentacion').modal('hide');
+
+    totalKg = $('#sumaMulti').val();
+    totalTamaniolote = totalKg * (1 + ajuste)
+
+    $('#tamanototallote').val(totalTamaniolote);
+
+});
+
+function guardar_Multi(ref) {
+    debugger
     $.ajax({
         type: "POST",
         url: "php/multi.php",
-        data: { operacion: "4", ref, id: data.id_batch },
+        data: { operacion: "4", ref, id: idBatch },
 
         success: function(r) {
             if (r == 1) {
                 alertify.set("notifier", "position", "top-right");
                 alertify.success("Multipresentación registrada con éxito.");
                 cerrarModal();
-                actualizarTabla();
+                debugger
+                const ajuste = $("#ajuste").val();
+                $('#tamanototallote').val(totalKg * (1 + ajuste));
+                //actualizarTabla();
             } else {
                 alertify.set("notifier", "position", "top-right");
-                alertify.error(
-                    "No se registro la Multipresentacion. Valide nuevamente."
-                );
+                alertify.error("No se registro la Multipresentacion. Valide nuevamente.");
             }
         },
         error: function(r) {
@@ -286,7 +307,9 @@ function guardar_Multi() {
             alertify.error("Error al registrar la Multipresentación.");
         },
     });
+
 }
+
 
 //Recargar modal al cierre
 

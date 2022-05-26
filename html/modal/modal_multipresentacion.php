@@ -1,5 +1,5 @@
 <div class="modal" id="Modal_Multipresentacion" role="dialog" tabindex="-1">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title"><strong style="color: white;">Multipresentación</strong></h5>
@@ -10,8 +10,8 @@
       <div class="modal-body">
         <div class="row">
           <input class="btn btn-primary ml-3" id="adicionarMultipresentacion" type="button" value="Adicionar" style="width: 150px;">
-          <label class="labelcenter ml-3 mr-3">Tamaño Total Lote (Kg)</label>
-          <input type="text" id="loteTotal" class="form-control" style="width: 100px;" readonly>
+          <!-- <label class="labelcenter ml-3 mr-3">Tamaño Total Lote (Kg)</label>
+          <input type="text" id="loteTotal" class="form-control" style="width: 100px;" readonly> -->
         </div>
         <!-- <div class="insertarRefMulti mb-3 mt-3" id="etiquetasMulti" style="justify-items:center; display: none;">
           <p><b>Presentación</b></p>
@@ -25,10 +25,11 @@
       <div class="inputcalculoTotal mb-3 mr-5" style="display: flex; justify-content:flex-end">
         <label class="labelcenter ml-3 mr-3" style="padding-right: 10px;">Total (Kg)</label>
         <input id="sumaMulti" type="text" class="form-control centrado" style="width: 28%;" readonly autocomplete="off">
+        <input id="totalKg" type="text" class="form-control centrado" style="width: 28%;" hidden>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="submit" class="btn btn-primary" onclick="guardar_Multi();">Guardar</button>
+        <button type="button" class="btn btn-primary" id="btnCargarKg">Guardar</button>
       </div>
     </div>
   </div>
