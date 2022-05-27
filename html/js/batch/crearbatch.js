@@ -11,6 +11,11 @@ function mostrarModal() {
     $("#modalCrearBatch").find("input,textarea,select").val("");
     $("#guardarBatch").html("Crear");
     $(".tcrearBatch").html("Crear Batch Record");
+
+    $('#inpNombreReferencia').hide();
+    $('#nombrereferencia').show();
+    $('#calcTamanioLote').show();
+
     data = "";
     batch_record();
     //cargarReferencias();
@@ -122,8 +127,6 @@ function recargarDatos() {
     }
 
 }
-
-
 
 $(document).on('click', '#calcTamanioLote', function(e) {
     e.preventDefault();
@@ -299,6 +302,6 @@ function CalcularTanque(id) {
 }
 
 function cerrarModal() {
-    //$("#modalCrearBatch").modal("hide");
+    $("#modalCrearBatch").modal("hide");
     $("#Modal_Multipresentacion").modal("hide");
 }

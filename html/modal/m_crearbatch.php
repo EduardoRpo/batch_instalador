@@ -23,8 +23,8 @@
 
                         <div class="col-md-9 col-2 align-self-center">
                             <label for="recipient-name" class="col-form-label">Nombre</label><br>
-                            <!-- <input id="nombrereferencia" class="displayallinfo" readonly name="nombrereferencia"> -->
-                            <select id="nombrereferencia" class="displayallinfo" readonly name="nombrereferencia"></select>
+                            <input id="inpNombreReferencia" class="displayallinfo" name="nombrereferencia" readonly>
+                            <select id="nombrereferencia" class="displayallinfo" name="nombrereferencia"></select>
                         </div>
 
                     </div>
@@ -73,19 +73,19 @@
                     <div class="row page">
                         <div class="col-md-4 col-2 align-self-center">
                             <label for="recipient-name" class="col-form-label">Unidades por Lote</label>
-                            <input type="number" name="unidadesxlote" id="unidadesxlote" min="1" class="form-control" min="1" required readonly/>
+                            <input type="number" name="unidadesxlote" id="unidadesxlote" min="1" class="form-control" min="1" style="height: 70px; font-size: xx-large; width: 200; text-align: center" readonly />
                         </div>
                         <div class="col-md-4 col-2 align-self-center">
                             <label for="recipient-name" class="col-form-label" type="number">Tamaño del Lote (Kg)</label>
                             <input name="tamanototallote" id="tamanototallote" class="form-control Numeric" min="1" readonly value="" style="height: 70px; font-size: xx-large; width: 200; text-align: center" />
                         </div>
-                        <div class="col-md-4 col-2 align-self-center">
-                            <button class="btn btn-primary" id="calcTamanioLote">Calcular Tamaño Lote</button>
-                        </div>
 
                     </div>
                     <hr>
                     <div class="row page">
+                        <div class="col-md-4 col-2 align-self-center mt-4">
+                            <button class="btn btn-primary" id="calcTamanioLote">Calcular Tamaño Lote</button>
+                        </div>
                         <div class="col-md-4 col-2 align-self-center">
                             <label for="recipient-name" class="col-form-label">Fecha de Programación</label>
                             <input type="date" class="form-control" id="fechaprogramacion" name="fechaprogramacion" value="" min="<?php $hoy = date("Y-m-d");

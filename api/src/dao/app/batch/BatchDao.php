@@ -7,7 +7,7 @@ use Monolog\Handler\RotatingFileHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 
-class BatchDao extends MultiDao
+class BatchDao extends estadoInicialDao
 
 {
     private $logger;
@@ -69,33 +69,35 @@ class BatchDao extends MultiDao
      * @return mixed
      */
 
-    public function findById($id)
+    public function findBatchById($id)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("SELECT p.referencia, p.nombre_referencia, pc.nombre as presentacion, p.unidad_empaque, pp.nombre as propietario, batch.numero_orden, batch.tamano_lote, batch.numero_lote, batch.unidad_lote, linea.nombre as linea, linea.densidad, p.densidad_producto, batch.fecha_programacion, batch.estado, p.img 
+        $stmt = $connection->prepare("SELECT id_batch, p.referencia, p.nombre_referencia, pc.nombre AS presentacion, m.nombre AS marca, ns.nombre AS notificacion_sanitaria, 
+                                             p.unidad_empaque, pp.nombre as propietario, batch.numero_orden, batch.tamano_lote, batch.numero_lote, 
+                                             batch.unidad_lote, linea.nombre as linea, linea.densidad, p.densidad_producto, batch.fecha_programacion, 
+                                             batch.estado, p.img 
                                   FROM producto p 
                                   INNER JOIN batch ON batch.id_producto = p.referencia 
                                   INNER JOIN presentacion_comercial pc ON pc.id = p.presentacion_comercial 
                                   INNER JOIN linea ON linea.id = p.id_linea 
-                                  INNER JOIN propietario pp ON pp.id = p.id_propietario WHERE id_batch = :idBatch");
+                                  INNER JOIN propietario pp ON pp.id = p.id_propietario 
+                                  INNER JOIN marca m ON m.id = p.id_marca
+                                  INNER JOIN notificacion_sanitaria ns ON ns.id = p.id_notificacion_sanitaria
+                                  WHERE id_batch = :idBatch");
 
         $stmt->execute(array('idBatch' => $id));
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         $batch = $stmt->fetch($connection::FETCH_ASSOC);
         $this->logger->notice("batch consultado", array('batch' => $batch));
-
         return $batch;
     }
 
     public function saveBatch($dataBatch)
     {
-        $id_batch               = $dataBatch['id_batch'];
         $referencia             = $dataBatch['ref'];
         $tamanototallote        = $dataBatch['lote'];
         $fechaprogramacion      = $dataBatch['programacion'];
         $tamanolotepresentacion = $dataBatch['presentacion'];
-        $tanque                 = $dataBatch['tanque'];
-        $cantidades             = $dataBatch['cantidades'];
         $multi                  = json_decode($dataBatch['multi'], true);
         $fechahoy               = date("Y-m-d");
 
@@ -107,7 +109,7 @@ class BatchDao extends MultiDao
         for ($i = 0; $i < sizeof($multi); $i++)
             $unidadesxlote = $unidadesxlote + $multi[$i]['cantidadunidades'];
 
-        /* Modifica estdo inicial */
+        /* Modifica estado inicial */
 
         $result = $this->estadoInicial($referencia, $fechaprogramacion);
         $estado = $result['0'];
@@ -132,29 +134,9 @@ class BatchDao extends MultiDao
             'id_producto' => $referencia
         ]);
 
-        /* Inserte tanque y cantidades */
-
-        if ($result) {
-            $lastIdInsert = $connection->lastInsertId();
-
-            /* Registre los tanques */
-            $this->saveTanques($dataBatch, $lastIdInsert);
-
-            /* registre modulos y cantidad de firmas */
-            $this->saveControlFirmas($lastIdInsert);
-
-            /* Insertar Multipresentacion */
-            $this->saveMulti($lastIdInsert, $multi);
-
-            /* registrar explosion */
-            /* if ($id < 602) exit();
+        /* registrar explosion */
+        /* if ($id < 602) exit();
             else explosion($connection, $id, $referencia, $tamanototallote); */
-        }
-
-        /*  mysqli_close($connection);
-
-        if (!$result) echo 'false' . mysqli_error($connection);
-        else echo 'true'; */
     }
 
     public function updateBatch()
@@ -201,121 +183,28 @@ class BatchDao extends MultiDao
         mysqli_close($connection);
     }
 
-    public function deleteBatch()
+    public function deleteBatch($id_batch)
     {
-    }
-
-
-    public function estadoInicial($referencia, $fechaprogramacion)
-    {
-        $connection = Connection::getInstance()->getConnection();
-
-        /* validar que exista la formula*/
-
-        $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("SELECT * FROM formula WHERE id_producto = :referencia");
-        $stmt->execute(['referencia' => $referencia]);
-        $resultFormula = $stmt->rowCount();
-
-        /* validar que exista el instructivo */
-
-        $stmt = $connection->prepare("SELECT * FROM instructivo_preparacion WHERE id_producto = :referencia");
-        $stmt->execute(['referencia' => $referencia]);
-        $resultPreparacionInstructivos = $stmt->rowCount();
-
-
-        /* si el instructivo no existe valida que exista el instructivo en Bases*/
-        if ($resultPreparacionInstructivos == 0) {
-            $stmt = $connection->prepare("SELECT instructivo FROM producto WHERE referencia = :referencia");
-            $stmt->execute(['referencia' => $referencia]);
-            $resultPreparacionInstructivos = $stmt->rowCount();
-        }
-
-        /* consolida resultados */
-        $result = $resultFormula * $resultPreparacionInstructivos;
-
-        /* Asigna el estado de acuerdo con el resultado */
-        if ($result === 0) {
-            $estado = '1';  //Sin formula
-            $fechaprogramacion = '';
-        }
-
-        if ($result > 0 && $fechaprogramacion == '')
-            $estado = '2'; // Inactivo  
-
-
-        if ($result > 0 && $fechaprogramacion != '')
-            $estado = '3';  //Pesaje
-
-
-        return array($estado, $fechaprogramacion);
-    }
-
-
-    public function saveTanques($dataBatch, $lastIdInsert)
-    {
-        $tanque = $dataBatch['tanque'];
-        $cantidades = $dataBatch['cantidades'];
+        $id_batch = $_POST['id'];
+        $motivo = $_POST['value'];
 
         $connection = Connection::getInstance()->getConnection();
 
-        $sql = "INSERT INTO batch_tanques (tanque, cantidad, id_batch) 
-                VALUES(:tanque, :cantidades, :id)";
-        $query_multi = $connection->prepare($sql);
-        $query_multi->execute([
-            'tanque' => $tanque,
-            'cantidades' => $cantidades,
-            'id' => $lastIdInsert
-        ]);
+        $stmt = $connection->prepare("UPDATE batch SET estado = 0, fecha_eliminacion = CURDATE() 
+                                      WHERE id_batch = $id_batch");
+        $stmt->execute(array('idBatch' => $id_batch));
+        
+        $stmt = $connection->prepare("INSERT INTO batch_eliminados (batch, motivo) 
+                                      VALUES('$id_batch', '$motivo')");
+        $stmt->execute(array('idBatch' => $id_batch));
+
+        
+        /* $query_batch_Eliminar = "UPDATE batch SET estado = 0, fecha_eliminacion = CURDATE() WHERE id_batch = $id_batch";
+        $result_eliminar = mysqli_query($connection, $query_batch_Eliminar);
+
+        $query_motivo = "INSERT INTO batch_eliminados (batch, motivo) VALUES('$id_batch', '$motivo')";
+        $result_motivo = mysqli_query($connection, $query_motivo);
+        mysqli_close($connection); */
     }
 
-    public function saveControlFirmas($lastIdInsert)
-    {
-        $connection = Connection::getInstance()->getConnection();
-
-        $sql = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) 
-                         VALUES('2' , :lastIdInsert, '0', '4')";
-        $query = $connection->prepare($sql);
-        $query->execute(['lastIdInsert' => $lastIdInsert]);
-
-        $sql = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) 
-                         VALUES('3' , :lastIdInsert, '0', '4')";
-        $query = $connection->prepare($sql);
-        $query->execute(['lastIdInsert' => $lastIdInsert]);
-
-        $sql = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) 
-                         VALUES('4' , :lastIdInsert, '0', '2')";
-        $query = $connection->prepare($sql);
-        $query->execute(['lastIdInsert' => $lastIdInsert]);
-
-        $sql = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) 
-                         VALUES('5' , :lastIdInsert, '0', '6')";
-        $query = $connection->prepare($sql);
-        $query->execute(['lastIdInsert' => $lastIdInsert]);
-
-        $sql = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) 
-                         VALUES('6' , :lastIdInsert, '0', '7')";
-        $query = $connection->prepare($sql);
-        $query->execute(['lastIdInsert' => $lastIdInsert]);
-
-        $sql = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) 
-                         VALUES('7' , :lastIdInsert, '0', '1')";
-        $query = $connection->prepare($sql);
-        $query->execute(['lastIdInsert' => $lastIdInsert]);
-
-        $sql = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) 
-                         VALUES('8' , :lastIdInsert, '0', '2')";
-        $query = $connection->prepare($sql);
-        $query->execute(['lastIdInsert' => $lastIdInsert]);
-
-        $sql = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) 
-                         VALUES('9' , :lastIdInsert, '0', '2')";
-        $query = $connection->prepare($sql);
-        $query->execute(['lastIdInsert' => $lastIdInsert]);
-
-        $sql = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) 
-                         VALUES('10' , :lastIdInsert, '0', '3')";
-        $query = $connection->prepare($sql);
-        $query->execute(['lastIdInsert' => $lastIdInsert]);
-    }
 }

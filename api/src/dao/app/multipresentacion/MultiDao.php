@@ -17,10 +17,27 @@ class MultiDao extends ControlFirmasMultiDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
-    public function findAllMultiByRef()
+    public function findMultiByBatch($id_batch)
+    {
+
+        $connection = Connection::getInstance()->getConnection();
+
+        $sql = "SELECT p.referencia, multi.id_batch, multi.cantidad, multi.total,linea.densidad, pc.nombre as presentacion 
+            FROM producto p 
+            INNER JOIN multipresentacion multi ON p.referencia = multi.referencia 
+            INNER JOIN linea ON p.id_linea = linea.id 
+            INNER JOIN presentacion_comercial pc ON p.presentacion_comercial = pc.id 
+            WHERE id_batch = :batch";
+        $query = $connection->prepare($sql);
+        $query->execute(['batch' => $id_batch]);
+        $multi = $query->fetchAll($connection::FETCH_ASSOC);
+        return $multi;
+    }
+
+
+    public function findMultiByRef($referencia)
     {
         $connection = Connection::getInstance()->getConnection();
-        $referencia = $_POST['id'];
 
         $sql = "SELECT multi FROM producto WHERE referencia = :referencia";
         $query = $connection->prepare($sql);
@@ -32,24 +49,26 @@ class MultiDao extends ControlFirmasMultiDao
 
         $rows = $query->rowCount();
 
-        if ($rows > 0 /* && $multi != 0 */) {
-            //$sql = "SELECT p.referencia, p.nombre_referencia FROM producto p WHERE multi = :multi";
+        if ($rows > 0) {
             $sql = "SELECT p.referencia, p.nombre_referencia as nombre, m.nombre as marca, ns.nombre as notificacion, pp.nombre as propietario, np.nombre as producto, pc.nombre as presentacion, l.nombre as linea, l.densidad 
-                  FROM producto p INNER JOIN marca m INNER JOIN notificacion_sanitaria ns INNER JOIN propietario pp INNER JOIN nombre_producto np INNER JOIN linea l INNER JOIN presentacion_comercial pc
-                  ON p.id_marca = m.id AND p.id_notificacion_sanitaria = ns.id AND p.id_propietario=pp.id AND p.id_nombre_producto= np.id AND p.id_linea=l.id AND pc.id = p.presentacion_comercial
-                  WHERE multi = :multi";
+                    FROM producto p INNER JOIN marca m INNER JOIN notificacion_sanitaria ns INNER JOIN propietario pp INNER JOIN nombre_producto np INNER JOIN linea l INNER JOIN presentacion_comercial pc
+                    ON p.id_marca = m.id AND p.id_notificacion_sanitaria = ns.id AND p.id_propietario=pp.id AND p.id_nombre_producto= np.id AND p.id_linea=l.id AND pc.id = p.presentacion_comercial
+                    WHERE multi = :multi";
             $query = $connection->prepare($sql);
             $query->execute(['multi' => $multi]);
-            $query->execute(['multi' => $multi]);
-            $id_multi = $query->fetchAll($connection::FETCH_ASSOC);
-            echo json_encode($id_multi, JSON_UNESCAPED_UNICODE);
+            $multi = $query->fetchAll($connection::FETCH_ASSOC);
+            return $multi;
         }
     }
 
-    public function saveMulti($id_batch, $multipresentaciones)
+    public function saveMulti($id_batch, $dataBatch)
     {
         $connection = Connection::getInstance()->getConnection();
-        
+
+        $multipresentaciones = json_decode($dataBatch['multi'], true);
+
+        /* Buscar el ultimo Batch creado */
+
         foreach ($multipresentaciones as $multipresentacion) {
             $sql = "SELECT * FROM multipresentacion WHERE id_batch = :id_batch AND referencia = :referencia";
             $query = $connection->prepare($sql);
@@ -90,12 +109,5 @@ class MultiDao extends ControlFirmasMultiDao
 
         /* Actualizar tabla firmas con multipresentacion */
         $this->controlFirmasMulti($id_batch);
-
-        if (!$result) {
-            die('Error');
-            echo '0';
-        } else {
-            echo '1';
-        }
     }
 }

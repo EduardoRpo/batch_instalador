@@ -7,7 +7,7 @@ use Monolog\Handler\RotatingFileHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 
-class TanquesDao
+class UltimoBatchCreadoDao
 {
     private $logger;
 
@@ -17,17 +17,13 @@ class TanquesDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
-    public function saveTanques($tanque, $cantidades, $lastIdInsert)
+    public function ultimoBatchCreado()
     {
         $connection = Connection::getInstance()->getConnection();
-
-        $sql = "INSERT INTO batch_tanques (tanque, cantidad, id_batch) 
-                VALUES(:tanque, :cantidades, :id)";
-        $query_multi = $connection->prepare($sql);
-        $query_multi->execute([
-            'tanque' => $tanque,
-            'cantidades' => $cantidades,
-            'id' => $lastIdInsert
-        ]);
+        $sql = "SELECT MAX(id_batch) AS id FROM batch";
+        $query = $connection->prepare($sql);
+        $query->execute();
+        $id_batch = $query->fetch($connection::FETCH_ASSOC);
+        return $id_batch;
     }
 }

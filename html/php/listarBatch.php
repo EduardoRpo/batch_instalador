@@ -128,7 +128,7 @@ switch ($op) {
 
   case 5: // Guardar
 
-    $id_batch               = $_POST['id_batch'];
+    /* $id_batch               = $_POST['id_batch'];
     $referencia             = $_POST['ref'];
     $unidadesxlote          = $_POST['unidades'];
     $tamanototallote        = $_POST['lote'];
@@ -148,7 +148,7 @@ switch ($op) {
     $query .= ",'$fechahoy', 'OP012020',' X0010320', '$tamanototallote', '$tamanolotepresentacion', '$unidadesxlote', '$estado', '$id_batch')";
     $result = mysqli_query($conn, $query); //or die ("Problemas al insertar" . mysqli_error($conn));    
 
-    /* Inserte tanque y cantidades */
+    //Inserte tanque y cantidades
     if ($result) {
       $id = mysqli_insert_id($conn);
       $query_tanque = "INSERT INTO batch_tanques (tanque, cantidad, id_batch) VALUES('$tanque' , '$cantidades', '$id')";
@@ -162,7 +162,7 @@ switch ($op) {
         $data = mysqli_fetch_assoc($query_id);
       $id = trim($data['id']);
 
-      /* registre modulos y cantidad de firmas */
+      //registre modulos y cantidad de firmas
 
       $query_firmas = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) VALUES('2' , '$id', '0', '4')";
       $result = mysqli_query($conn, $query_firmas);
@@ -190,12 +190,12 @@ switch ($op) {
     mysqli_close($conn);
 
     if (!$result) echo 'false' . mysqli_error($conn);
-    else echo 'true';
+    else echo 'true'; */
 
     break;
 
   case 6: //Cargar datos al modal para Actualizar
-    $id_batch = $_POST['id'];
+    /* $id_batch = $_POST['id'];
 
     $query_buscar = mysqli_query($conn, "SELECT bt.id_batch, p.referencia, p.nombre_referencia, m.nombre as marca, pp.nombre as propietario, np.nombre, pc.nombre as presentacion_comercial, linea.nombre as linea, linea.ajuste, ns.nombre as notificacion_sanitaria, p.densidad_producto, bt.unidad_lote, bt.tamano_lote, bt.fecha_programacion 
                                           FROM producto p 
@@ -227,7 +227,7 @@ switch ($op) {
     }
 
     echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
-    mysqli_close($conn);
+    mysqli_close($conn); */
     break;
 
   case 7: //Actualiza datos
@@ -325,7 +325,7 @@ switch ($op) {
     break;
 
   case 12: // Guardar Multipresentacion
-    $nom_referencia = $_POST['ref'];
+    /* $nom_referencia = $_POST['ref'];
     $cantidad       = $_POST['cant'];
     $id_batch       = $_POST['id'];
 
@@ -352,32 +352,32 @@ switch ($op) {
       echo 'No guardado. Error: ' . mysqli_error($conn);
     } else {
       echo 'Almacenado';
-    }
+    } */
 
     break;
 }
 
-function estadoInicial($conn, $referencia, $fechaprogramacion)
+/* function estadoInicial($conn, $referencia, $fechaprogramacion)
 {
-  /* validar que exista la formula*/
+  //validar que exista la formula
   $query_buscarFormula =  mysqli_query($conn, "SELECT * FROM formula WHERE id_producto = '$referencia'");
   $resultFormula = mysqli_num_rows($query_buscarFormula);
 
-  /* validar que exista el instructivo */
+  //validar que exista el instructivo
   $query_buscarInstructivo =  mysqli_query($conn, "SELECT * FROM instructivo_preparacion WHERE id_producto = '$referencia'");
   $resultPreparacionInstructivos = mysqli_num_rows($query_buscarInstructivo);
 
-  /* si el instructivo no existe valida que exista el instructivo en Bases*/
+  //si el instructivo no existe valida que exista el instructivo en Bases
   if ($resultPreparacionInstructivos == 0) {
     $query_buscarInstructivo =  mysqli_query($conn, "SELECT instructivo FROM producto WHERE referencia = '$referencia'");
     $resultPreparacionInstructivos = mysqli_num_rows($query_buscarInstructivo);
     //$resultPreparacionInstructivos = $resultPreparacion['instructivo'];
   }
 
-  /* consolida resultados */
+  //consolida resultados
   $result = $resultFormula * $resultPreparacionInstructivos;
 
-  /* Asigna el estado de acuerdo con el resultado */
+  //Asigna el estado de acuerdo con el resultado
   if ($result === 0) {
     $estado = '1';  //Sin formula
     $fechaprogramacion = '';
@@ -391,4 +391,4 @@ function estadoInicial($conn, $referencia, $fechaprogramacion)
     $estado = '3';  //Pesaje
   }
   return array($estado, $fechaprogramacion);
-}
+} */

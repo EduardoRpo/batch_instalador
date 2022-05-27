@@ -101,20 +101,21 @@ function crearTablaBatch(
                 },
             },
             {
-                data: "multi",
-                className: "uniqueClassName",
-                render: (data, type, row) => {
-                    "use strict";
-                    return data == 1 ?
-                        '<i class="fa fa-superscript link-editarMulti" aria-hidden="true" data-toggle="tooltip" title="Editar Multipresentación" style="color:rgb(59, 131, 189)" aria-hidden="true"></i>' :
-                        "";
+                data: 'id_batch',
+                className: 'uniqueClassName',
+                render: function(data) {
+                    return `<i class="fa fa-superscript link-editarMulti" id=${data} aria-hidden="true" data-toggle="tooltip" title="Editar Multipresentación" style="color:rgb(59, 131, 189)" aria-hidden="true"></i>`;
                 },
             },
             {
-                defaultContent: "<a href='#' <i class='fa fa-pencil-square-o fa-2x link-editar' data-toggle='tooltip' title='Editar Batch Record' style='color:rgb(255, 193, 7);'></i></a>",
-            },
-            {
-                defaultContent: "<a href='#' <i class='fa fa-trash link-borrar fa-2x' data-toggle='tooltip' title='Eliminar Batch Record' style='color:rgb(234, 67, 54)'></i></a>",
+                title: 'Acciones',
+                data: 'id_batch',
+                className: 'uniqueClassName',
+                render: function(data) {
+                    return `
+                    <a href='#' <i class='fa fa-pencil-square-o fa-2x link-editar' id=${data} data-toggle='tooltip' title='Editar Batch Record' style='color:rgb(255, 193, 7);'></i></a>
+                    <a href='#' <i class='fa fa-trash link-borrar fa-2x' id=${data} data-toggle='tooltip' title='Eliminar Batch Record' style='color:rgb(234, 67, 54)'></i></a>`;
+                },
             },
         ],
     });
@@ -225,8 +226,13 @@ $(document).on("click", ".link-borrar", function(e) {
 $(document).on("click", ".link-editar", function(e) {
     e.preventDefault();
     editar = true;
+    let idBatch = this.id
+
     limpiarTanques();
-    //OcultarTanques();
+    $('#inpNombreReferencia').show();
+    $('#nombrereferencia').hide();
+
+    $('#calcTamanioLote').hide();
 
     if (data.estado > 2) {
         f1 = new Date();
@@ -240,44 +246,38 @@ $(document).on("click", ".link-editar", function(e) {
         }
     }
 
-    const texto = $(this).parent().parent().children()[1];
-    const id = $(texto).text();
-
     $.ajax({
-        method: "POST",
-        url: "php/listarBatch.php",
-        data: { operacion: "6", id: id },
+        url: `/api/batch/${idBatch}`,
+        success: function(data) {
 
-        success: function(response) {
-            const info = JSON.parse(response);
-            const presentacion = formatoCO(info[0].presentacion_comercial);
-            const tamano_lote = formatoCO(info[0].tamano_lote);
-            batch = info;
+            $("#idbatch").val(data.id_batch);
+            $("#referencia").val(data.referencia);
+            $("#inpNombreReferencia").val(data.nombre_referencia);
+            $("#marca").val(data.marca);
+            $("#propietario").val(data.propietario);
+            $("#producto").val(data.nombre_referencia);
+            $("#presentacioncomercial").val(data.presentacion);
+            $("#linea").val(data.linea);
+            $("#notificacionSanitaria").val(data.notificacion_sanitaria);
+            $("#densidad_producto").val(data.densidad_producto);
+            $("#ajuste").val(data.ajuste);
 
-            $("#idbatch").val(info[0].id_batch);
-            $("#referencia").val(info[0].referencia);
-            $("#nombrereferencia").val(info[0].nombre_referencia);
-            $("#marca").val(info[0].marca);
-            $("#propietario").val(info[0].propietario);
-            $("#producto").val(info[0].nombre_referencia);
-            $("#presentacioncomercial").val(presentacion);
-            $("#linea").val(info[0].linea);
-            $("#notificacionSanitaria").val(info[0].notificacion_sanitaria);
-            $("#densidad_producto").val(info[0].densidad_producto);
-            $("#ajuste").val(info[0].ajuste);
+            $("#unidadesxlote").val(data.unidad_lote);
+            $("#tamanototallote").val(data.tamano_lote);
+            $("#fechaprogramacion").val(data.fecha_programacion);
 
-            $("#unidadesxlote").val(info[0].unidad_lote);
-            $("#tamanototallote").val(tamano_lote);
-            $("#fechaprogramacion").val(info[0].fecha_programacion);
             $("#cmbNoReferencia").css("display", "none");
+            $("#nombrereferencia").css("display", "none");
+
             $("#referencia").css("display", "block");
             $("#guardarBatch").html("Actualizar");
             $(".tcrearBatch").html("Actualizar Batch Record");
-            if (info.length === 2) {
-                $("#cmbTanque1").val(info[1].tanque);
-                $("#txtCantidad1").val(info[1].cantidad);
-                CalcularTanque(1);
-            }
+
+
+            $("#cmbTanque1").val(data.tanque);
+            $("#txtCantidad1").val(data.cantidad);
+            CalcularTanque(1);
+
             $("#modalCrearBatch").modal("show");
         },
         error: function(response) {
@@ -285,13 +285,6 @@ $(document).on("click", ".link-editar", function(e) {
         },
     });
 });
-
-/* Actualizar tabla */
-
-function actualizarTabla() {
-    $("#tablaBatch").DataTable().clear();
-    $("#tablaBatch").DataTable().ajax.reload();
-}
 
 /* Guardar datos de Crear y Actualizar batch*/
 
@@ -365,8 +358,8 @@ function guardarDatos() {
             url: "/api/saveBatch",
             data: datos,
 
-            success: function(r) {
-                notification(r)
+            success: function(data) {
+                message(data)
             }
         })
     } else {
@@ -384,23 +377,31 @@ function guardarDatos() {
             type: "POST",
             url: "api/updateBatch",
             data: datos,
-            success: function(r) {
+            success: function(data) {
                 debugger
-                notification(r)
+                message(data)
             }
         })
     }
 }
 
-notification = (resp) => {
-    if (resp == 3) {
+/* Mensaje de exito */
+
+message = (data) => {
+    if (data.success == true) {
         cerrarModal();
-        alertify.set("notifier", "position", "top-right");
-        alertify.error("Batch Record en proceso. No es posible actualizarlo...");
-    } else {
-        cerrarModal();
+        alertify.success(data.message);
         actualizarTabla();
-        alertify.set("notifier", "position", "top-right");
-        alertify.success("Batch Record registrado con éxito.");
-    }
+        return false;
+    } else if (data.error == true)
+        alertify.error(data.message);
+    else if (data.info == true)
+        alertify.info(data.message);
+};
+
+/* Actualizar tabla */
+
+function actualizarTabla() {
+    $("#tablaBatch").DataTable().clear();
+    $("#tablaBatch").DataTable().ajax.reload();
 }
