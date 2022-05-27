@@ -195,7 +195,7 @@ switch ($op) {
     break;
 
   case 6: //Cargar datos al modal para Actualizar
-    $id_batch = $_POST['id'];
+    /* $id_batch = $_POST['id'];
 
     $query_buscar = mysqli_query($conn, "SELECT bt.id_batch, p.referencia, p.nombre_referencia, m.nombre as marca, pp.nombre as propietario, np.nombre, pc.nombre as presentacion_comercial, linea.nombre as linea, linea.ajuste, ns.nombre as notificacion_sanitaria, p.densidad_producto, bt.unidad_lote, bt.tamano_lote, bt.fecha_programacion 
                                           FROM producto p 
@@ -227,7 +227,7 @@ switch ($op) {
     }
 
     echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
-    mysqli_close($conn);
+    mysqli_close($conn); */
     break;
 
   case 7: //Actualiza datos

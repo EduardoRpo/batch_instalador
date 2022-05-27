@@ -16,8 +16,11 @@ $tanquesDao = new TanquesDao();
 $controlFirmasDao = new ControlFirmasDao();
 $multiDao = new MultiDao();
 
-$app->get('/batch/{id}', function (Request $request, Response $response, $args) use ($batchDao) {
-  $batch = $batchDao->findById($args["id"]);
+$app->get('/batch/{id}', function (Request $request, Response $response, $args) use ($batchDao, $tanquesDao) {
+  $dataBatch = $batchDao->findBatchById($args["id"]);
+  $tanques = $tanquesDao->findTanquesById($args["id"]);
+  $batch = array_merge($dataBatch, $tanques);
+  
   $response->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });

@@ -23,8 +23,8 @@
 
                         <div class="col-md-9 col-2 align-self-center">
                             <label for="recipient-name" class="col-form-label">Nombre</label><br>
-                            <!-- <input id="nombrereferencia" class="displayallinfo" readonly name="nombrereferencia"> -->
-                            <select id="nombrereferencia" class="displayallinfo" readonly name="nombrereferencia"></select>
+                            <input id="inpNombreReferencia" class="displayallinfo" name="nombrereferencia" readonly>
+                            <select id="nombrereferencia" class="displayallinfo" name="nombrereferencia"></select>
                         </div>
 
                     </div>

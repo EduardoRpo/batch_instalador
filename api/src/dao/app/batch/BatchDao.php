@@ -69,21 +69,23 @@ class BatchDao extends estadoInicialDao
      * @return mixed
      */
 
-    public function findById($id)
+    public function findBatchById($id)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("SELECT p.referencia, p.nombre_referencia, pc.nombre as presentacion, p.unidad_empaque, pp.nombre as propietario, batch.numero_orden, batch.tamano_lote, batch.numero_lote, batch.unidad_lote, linea.nombre as linea, linea.densidad, p.densidad_producto, batch.fecha_programacion, batch.estado, p.img 
+        $stmt = $connection->prepare("SELECT id_batch, p.referencia, p.nombre_referencia, pc.nombre AS presentacion, m.nombre AS marca, ns.nombre AS notificacion_sanitaria, p.unidad_empaque, pp.nombre as propietario, batch.numero_orden, batch.tamano_lote, batch.numero_lote, batch.unidad_lote, linea.nombre as linea, linea.densidad, p.densidad_producto, batch.fecha_programacion, batch.estado, p.img 
                                   FROM producto p 
                                   INNER JOIN batch ON batch.id_producto = p.referencia 
                                   INNER JOIN presentacion_comercial pc ON pc.id = p.presentacion_comercial 
                                   INNER JOIN linea ON linea.id = p.id_linea 
-                                  INNER JOIN propietario pp ON pp.id = p.id_propietario WHERE id_batch = :idBatch");
+                                  INNER JOIN propietario pp ON pp.id = p.id_propietario 
+                                  INNER JOIN marca m ON m.id = p.id_marca
+                                  INNER JOIN notificacion_sanitaria ns ON ns.id = p.id_notificacion_sanitaria
+                                  WHERE id_batch = :idBatch");
 
         $stmt->execute(array('idBatch' => $id));
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         $batch = $stmt->fetch($connection::FETCH_ASSOC);
         $this->logger->notice("batch consultado", array('batch' => $batch));
-
         return $batch;
     }
 

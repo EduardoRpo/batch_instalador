@@ -11,6 +11,10 @@ function mostrarModal() {
     $("#modalCrearBatch").find("input,textarea,select").val("");
     $("#guardarBatch").html("Crear");
     $(".tcrearBatch").html("Crear Batch Record");
+
+    $('#inpNombreReferencia').hide();
+    $('#nombrereferencia').show();
+
     data = "";
     batch_record();
     //cargarReferencias();

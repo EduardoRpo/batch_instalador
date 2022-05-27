@@ -17,10 +17,21 @@ class TanquesDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
+    public function findTanquesById($id_batch)
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        $sql = "SELECT tanque, cantidad FROM batch_tanques WHERE id_batch = :id_batch";
+        $query = $connection->prepare($sql);
+        $query->execute(['id_batch' => $id_batch]);
+        $tanques = $query->fetch($connection::FETCH_ASSOC);
+        return $tanques;
+    }
+
     public function saveTanques($id_batch, $dataBatch)
     {
         $connection = Connection::getInstance()->getConnection();
-        
+
         $sql = "INSERT INTO batch_tanques (tanque, cantidad, id_batch) 
                 VALUES(:tanque, :cantidades, :id)";
         $query_multi = $connection->prepare($sql);
