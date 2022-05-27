@@ -1,9 +1,8 @@
-//editar = false;
-//cont = 0;
 let multi;
 let objetos;
 editar = false;
 let ajuste = 0;
+let index = 0;
 
 /* Cargar la data de la fila */
 
@@ -21,24 +20,17 @@ $(document).on("click", ".link-select", function(e) {
 /* Validar si un producto puede tener multipresentacion */
 
 function multipresentacion(ref) {
-    debugger
     if (!ref) {
         alertify.set("notifier", "position", "top-right");
         alertify.error("Seleccione la referencia Granel");
         return false;
     }
-    if (data.multi > 0 && editar === false) {
+    /* if (data.multi > 0 && editar === false) {
         alertify.set("notifier", "position", "top-right");
         alertify.error("Esta referencia ya tiene Multipresentación. Ingrese por el icono de Multipresentación para actualizar");
         return false;
-    }
-
-    /* if ($("input[name='optradio']:radio").is(":checked") || editar === true) { */
-    busquedaMulti(ref);
-    /* } else {
-        alertify.set("notifier", "position", "top-right");
-        alertify.error("Para Multipresentación seleccione un Batch Record");
     } */
+    busquedaMulti(ref);
 }
 
 
@@ -50,14 +42,15 @@ function busquedaMulti(ref) {
         data: { operacion: "1", id: ref },
 
         success: function(resp) {
+            debugger
             if (resp == "") {
                 alertify.set("notifier", "position", "top-right");
-                alertify.error("Seleccione el granel.");
+                alertify.error("No se encuentra la multipresentación.");
                 return false;
             } else {
                 multi = JSON.parse(resp);
 
-                $.ajax({
+                /* $.ajax({
                     url: `/api/product/${ref}`,
 
                     success: function(r) {
@@ -65,11 +58,11 @@ function busquedaMulti(ref) {
                         ajuste = JSON.parse(info[0].ajuste)
                         $("#loteTotal").val(Math.ceil(parseInt(data.tamano_lote) / (1 + ajuste)));
                     },
-                });
+                }); */
 
-                if (editar) {
-                    $("#adicionarMultipresentacion").trigger("click");
-                }
+                //if (editar) {
+                $("#adicionarMultipresentacion").trigger("click");
+                //}
             }
             $(`#sumaMulti`).val("");
             $("#Modal_Multipresentacion").modal("show");
@@ -80,11 +73,14 @@ function busquedaMulti(ref) {
 
 
 /* Adicionar referencia para crear multipresentacion en un batch*/
-
 $("#adicionarMultipresentacion").on("click", function() {
     objetos = $(".multi").length;
     !objetos ? (index = 1) : index++;
+    createMulti(index)
+});
 
+/* Crear objetos multi */
+createMulti = (index) => {
     if (index < 6) {
         $(".insertarRefMulti").append(
             `<select class="form-control multi" name="MultiReferencia" id="MultiReferencia${index}" onchange="cargarReferenciaM(${index});"></select>
@@ -96,7 +92,7 @@ $("#adicionarMultipresentacion").on("click", function() {
         );
         cargarMulti(multi);
     }
-});
+}
 
 //Cargar Select Referencias con Multipresentacion
 
@@ -178,28 +174,29 @@ function CalculoloteMulti(id) {
 
 $(document).on("click", ".link-editarMulti", function(e) {
     editar = true;
+    id_batch = this.id
+    debugger
 
     $.ajax({
-        method: "POST",
-        url: "php/multi.php",
-        data: { operacion: "6", id: data.id_batch },
+        url: `/api/multi/${id_batch}`,
+        success: function(resp) {
+            multi = resp
+                //$("#adicionarMultipresentacion").trigger("click");
 
-        success: function(response) {
-            info = JSON.parse(response);
             let id = 1;
-            info.forEach((element, index) => {
-                multipresentacion();
+            for (let i = 0; i < resp.length; i++) {
+                createMulti(id);
 
                 setTimeout(function() {
-                    $(`#MultiReferencia${id}`).val(element.referencia);
-                    $(`#cantidadMulti${id}`).val(element.cantidad);
-                    $(`#tamanioloteMulti${id}`).val(element.total);
-                    $(`#densidadMulti${id}`).val(element.densidad);
-                    $(`#presentacionMulti${id}`).val(element.presentacion);
+                    $(`#MultiReferencia${id}`).val(resp.referencia);
+                    $(`#cantidadMulti${id}`).val(resp.cantidad);
+                    $(`#tamanioloteMulti${id}`).val(resp.total);
+                    $(`#densidadMulti${id}`).val(resp.densidad);
+                    $(`#presentacionMulti${id}`).val(resp.presentacion);
                     $(`#sumaMulti${id}`).val(CalculoloteMulti(id));
                     id++;
                 }, 400);
-            });
+            };
         },
     });
 

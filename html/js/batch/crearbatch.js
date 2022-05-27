@@ -14,6 +14,7 @@ function mostrarModal() {
 
     $('#inpNombreReferencia').hide();
     $('#nombrereferencia').show();
+    $('#calcTamanioLote').show();
 
     data = "";
     batch_record();

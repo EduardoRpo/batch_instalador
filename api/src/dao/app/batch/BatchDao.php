@@ -72,7 +72,10 @@ class BatchDao extends estadoInicialDao
     public function findBatchById($id)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("SELECT id_batch, p.referencia, p.nombre_referencia, pc.nombre AS presentacion, m.nombre AS marca, ns.nombre AS notificacion_sanitaria, p.unidad_empaque, pp.nombre as propietario, batch.numero_orden, batch.tamano_lote, batch.numero_lote, batch.unidad_lote, linea.nombre as linea, linea.densidad, p.densidad_producto, batch.fecha_programacion, batch.estado, p.img 
+        $stmt = $connection->prepare("SELECT id_batch, p.referencia, p.nombre_referencia, pc.nombre AS presentacion, m.nombre AS marca, ns.nombre AS notificacion_sanitaria, 
+                                             p.unidad_empaque, pp.nombre as propietario, batch.numero_orden, batch.tamano_lote, batch.numero_lote, 
+                                             batch.unidad_lote, linea.nombre as linea, linea.densidad, p.densidad_producto, batch.fecha_programacion, 
+                                             batch.estado, p.img 
                                   FROM producto p 
                                   INNER JOIN batch ON batch.id_producto = p.referencia 
                                   INNER JOIN presentacion_comercial pc ON pc.id = p.presentacion_comercial 

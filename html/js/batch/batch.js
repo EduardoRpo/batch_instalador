@@ -101,13 +101,10 @@ function crearTablaBatch(
                 },
             },
             {
-                data: "multi",
-                className: "uniqueClassName",
-                render: (data, type, row) => {
-                    "use strict";
-                    return data == 1 ?
-                        '<i class="fa fa-superscript link-editarMulti" aria-hidden="true" data-toggle="tooltip" title="Editar Multipresentación" style="color:rgb(59, 131, 189)" aria-hidden="true"></i>' :
-                        "";
+                data: 'id_batch',
+                className: 'uniqueClassName',
+                render: function(data) {
+                    return `<i class="fa fa-superscript link-editarMulti" id=${data} aria-hidden="true" data-toggle="tooltip" title="Editar Multipresentación" style="color:rgb(59, 131, 189)" aria-hidden="true"></i>`;
                 },
             },
             {

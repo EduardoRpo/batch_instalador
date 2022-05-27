@@ -12,3 +12,9 @@ $app->get('/multi/{idBatch}', function (Request $request, Response $response, $a
   $response->getBody()->write(json_encode($multi, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
+
+$app->get('/multiref/{ref}', function (Request $request, Response $response, $args) use ($multiDao) {
+  $multi = $multiDao->findMultiByRef($args['ref']);
+  $response->getBody()->write(json_encode($multi, JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
+});
