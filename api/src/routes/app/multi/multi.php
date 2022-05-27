@@ -18,3 +18,12 @@ $app->get('/multiref/{ref}', function (Request $request, Response $response, $ar
   $response->getBody()->write(json_encode($multi, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
+
+$app->post('/updateMulti', function (Request $request, Response $response, $args) use ($multiDao) {
+  $dataMulti = $request->getParsedBody();
+  $multi = $multiDao->updateMulti($dataMulti);
+  $response->getBody()->write(json_encode($multi, JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
+});
+
+

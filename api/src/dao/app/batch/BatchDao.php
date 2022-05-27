@@ -139,48 +139,48 @@ class BatchDao extends estadoInicialDao
             else explosion($connection, $id, $referencia, $tamanototallote); */
     }
 
-    public function updateBatch()
+    public function updateBatch($dataBatch)
     {
-        $id_batch     = $_POST['id_batch'];
-        $referencia   = $_POST['ref'];
-        $unidades     = $_POST['unidades'];
-        $lote         = $_POST['lote'];
-        $fechaprogramacion = $_POST['programacion'];
-        $tanque    = $_POST['tanque'];
-        $cantidades  = $_POST['cantidades'];
+        $id_batch     = $dataBatch['id_batch'];
+        $referencia   = $dataBatch['ref'];
+        $fechaprogramacion = $dataBatch['programacion'];
 
         $connection = Connection::getInstance()->getConnection();
 
         /* asigna el estado */
-        $result = estadoInicial($connection, $referencia, $fechaprogramacion);
+        $result = $this->estadoInicial($referencia, $fechaprogramacion);
         $estado = $result['0'];
         $fechaprogramacion = $result['1'];
 
         /* Actualiza el batch */
-        $query_actualizar = "UPDATE batch SET unidad_lote = '$unidades', tamano_lote = '$lote', estado = '$estado', fecha_programacion = ";
-        $query_actualizar .= $fechaprogramacion != null ? "'$fechaprogramacion'" : "NULL ";
-        $query_actualizar .= "WHERE id_batch ='$id_batch'";
-        $result = mysqli_query($connection, $query_actualizar);
+        $stmt =  $connection->prepare("UPDATE batch 
+                                       SET estado = :estado, fecha_programacion = :fecha_programacion 
+                                       WHERE id_batch = :id_batch");
+        $result = $stmt->execute([
+            'fecha_programacion' => $fechaprogramacion,
+            'estado' => $estado,
+            'id_batch' => $id_batch
+        ]);
 
         /* Actualizar los tanques */
         if ($result) {
-            $query_tanque = "SELECT * FROM batch_tanques WHERE id_batch = '$id_batch'";
-            $result = mysqli_query($connection, $query_tanque);
+
+            $tanque    = $dataBatch['tanque'];
+            $cantidad  = $dataBatch['cantidades'];
+
+            $stmt =  $connection->prepare("SELECT * FROM batch_tanques WHERE id_batch = :id_batch");
+            $stmt->execute(['id_batch' => $id_batch]);
+            $result = $stmt->rowCount();
+
             if ($result) {
-                $query_tanque = "UPDATE batch_tanques SET tanque = '$tanque', cantidad = '$cantidades' WHERE id_batch = '$id_batch'";
-                $result = mysqli_query($connection, $query_tanque);
-            } /* else {
-            $query_tanque = "INSERT INTO batch_tanques (tanque, cantidad, id_batch) VALUES('$tanque' , '$cantidades', '$id_batch')";
-            $result = mysqli_query($connection, $query_tanque);
-        } */
+                $stmt =  $connection->prepare("UPDATE batch_tanques SET tanque = :tanque, cantidad = :cantidad WHERE id_batch = :id_batch");
+                $stmt->execute([
+                    'tanque' => $tanque,
+                    'cantidad' => $cantidad,
+                    'id_batch' => $id_batch
+                ]);
+            }
         }
-
-        if ($result)
-            echo "true";
-        else
-            echo 'false ' . mysqli_error($connection);
-
-        mysqli_close($connection);
     }
 
     public function deleteBatch($id_batch)
@@ -193,12 +193,12 @@ class BatchDao extends estadoInicialDao
         $stmt = $connection->prepare("UPDATE batch SET estado = 0, fecha_eliminacion = CURDATE() 
                                       WHERE id_batch = $id_batch");
         $stmt->execute(array('idBatch' => $id_batch));
-        
+
         $stmt = $connection->prepare("INSERT INTO batch_eliminados (batch, motivo) 
                                       VALUES('$id_batch', '$motivo')");
         $stmt->execute(array('idBatch' => $id_batch));
 
-        
+
         /* $query_batch_Eliminar = "UPDATE batch SET estado = 0, fecha_eliminacion = CURDATE() WHERE id_batch = $id_batch";
         $result_eliminar = mysqli_query($connection, $query_batch_Eliminar);
 
@@ -206,5 +206,4 @@ class BatchDao extends estadoInicialDao
         $result_motivo = mysqli_query($connection, $query_motivo);
         mysqli_close($connection); */
     }
-
 }

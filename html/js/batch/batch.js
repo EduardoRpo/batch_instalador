@@ -323,7 +323,9 @@ function guardarDatos() {
     const programacion = $("#fechaprogramacion").val();
     const tanque = $("#cmbTanque1").val();
     const cantidades = $("#txtCantidad1").val();
+    const unidades = $('#unidadesxlote').val();
     let sumaTanques = $(".sumaTanques").val();
+
 
     if (sumaTanques == "" || sumaTanques == 0) {
         $("#sumaTanques").css("border-color", "red");
@@ -344,7 +346,7 @@ function guardarDatos() {
         datos = {
             ref,
             id_batch,
-            /* unidades, */
+            unidades,
             lote: lote,
             presentacion: presentacion_comercial,
             programacion,
@@ -367,7 +369,7 @@ function guardarDatos() {
             ref,
             id_batch,
             unidades,
-            lote: tamano_lote,
+            lote: lote,
             programacion,
             tanque,
             cantidades,
@@ -375,10 +377,9 @@ function guardarDatos() {
         };
         $.ajax({
             type: "POST",
-            url: "api/updateBatch",
+            url: "/api/updateBatch",
             data: datos,
             success: function(data) {
-                debugger
                 message(data)
             }
         })

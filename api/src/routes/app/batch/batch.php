@@ -20,7 +20,7 @@ $app->get('/batch/{id}', function (Request $request, Response $response, $args) 
   $dataBatch = $batchDao->findBatchById($args["id"]);
   $tanques = $tanquesDao->findTanquesById($args["id"]);
   $batch = array_merge($dataBatch, $tanques);
-  
+
   $response->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
@@ -71,7 +71,14 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
 
 $app->post('/updateBatch', function (Request $request, Response $response, $args) use ($batchDao) {
   $dataBatch = $request->getParsedBody();
-  $updatedBatch = $batchDao->updateBatch($dataBatch);
-  $response->getBody()->write(json_encode($updatedBatch, JSON_NUMERIC_CHECK));
+  $resp = $batchDao->updateBatch($dataBatch);
+
+  /* Notificaciones*/
+  if ($resp == null)
+    $resp = array('success' => true, 'message' => 'Batch actualizado correctamente');
+  else
+    $resp = array('error' => true, 'message' => 'Ocurrio un error mientras actualizaba el Batch. Intentelo nuevamente');
+
+  $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
