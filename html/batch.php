@@ -50,29 +50,29 @@ include_once("modal/modalPedidos.php");
         <div class="tituloProceso">
           <h1 class="text-themecolor"><b>Batch Record</b></h1>
         </div>
-        <?php if($_SESSION['rol'] != 6){  ?>
-        <div class="botones-group">
-          <div class="dropdown btn-acciones">
-            <button class="btn btn-secondary dropdown-toggle " style="background-color:#fff;color:#FF8D6D; border-color:#FF8D6D;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <!-- <a class="dropdown-item" href="#" onclick="multipresentacion()"><i class="fa fa-superscript"></i> Multipresentación</a> -->
-              <a class="dropdown-item" href="#" onclick="clonar()"><i class="fa fa-clone"></i> Clonar</a>
-              <a class="dropdown-item" href="#" onclick="batchEliminados()"><i class="fa fa-eraser"></i> Batch Eliminados</a>
-              <a class="dropdown-item pdf" href="#"><i class="fa fa-download"></i> Imprimir PDF</a>
-              <a class="dropdown-item" href="#" id="btnCargarExcel"><i class="fa fa-download"></i> Pedidos</a>
+        <?php if ($_SESSION['rol'] != 6) {  ?>
+          <div class="botones-group">
+            <div class="dropdown btn-acciones">
+              <button class="btn btn-secondary dropdown-toggle " style="background-color:#fff;color:#FF8D6D; border-color:#FF8D6D;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <!-- <a class="dropdown-item" href="#" onclick="multipresentacion()"><i class="fa fa-superscript"></i> Multipresentación</a> -->
+                <a class="dropdown-item" href="#" onclick="clonar()"><i class="fa fa-clone"></i> Clonar</a>
+                <a class="dropdown-item" href="#" onclick="batchEliminados()"><i class="fa fa-eraser"></i> Batch Eliminados</a>
+                <a class="dropdown-item pdf" href="#"><i class="fa fa-download"></i> Imprimir PDF</a>
+                <a class="dropdown-item" href="#" id="btnCargarExcel"><i class="fa fa-download"></i> Pedidos</a>
+              </div>
             </div>
+
+            <!-- ambos botones tienen hidden-sm-down -->
+            <!-- <button type="button" class="btn waves-effect waves-light btn-danger  btn-filtrar" style="background-color:#fff;color:#FF8D6D" onclick="filtrarfechas()">
+              Filtrar
+            </button> -->
+
+            <button type="button" class="btn waves-effect waves-light btn-danger btn-crearbatch" onclick="mostrarModal();">
+              <strong>Crear Batch Record</strong>
+            </button>
+
           </div>
-
-          <!-- ambos botones tienen hidden-sm-down -->
-          <button type="button" class="btn waves-effect waves-light btn-danger  btn-filtrar" style="background-color:#fff;color:#FF8D6D" onclick="filtrarfechas()">
-            Filtrar
-          </button>
-
-          <button type="button" class="btn waves-effect waves-light btn-danger btn-crearbatch" onclick="mostrarModal();">
-            <strong>Crear Batch Record</strong>
-          </button>
-
-        </div>
 
         <?php } ?>
       </div>
@@ -109,16 +109,34 @@ include_once("modal/modalPedidos.php");
             <div class="card-header" style="background: #FCF9F8;">
               <ul class="nav nav-tabs card-header-tabs" id="batch-list" role="tablist">
                 <li class="nav-item">
-                  <a class="nav-link active" href="#description" role="tab" aria-controls="description" aria-selected="true">Abiertos</a>
+                  <a class="nav-link" id="one-tab" data-toggle="tab" href="#one" role="tab" aria-controls="One" aria-selected="false">PreProgramados</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#history" role="tab" aria-controls="history" aria-selected="false">Cerrados</a>
+                  <a class="nav-link active" id="two-tab" data-toggle="tab" href="#two" role="tab" aria-controls="Two" aria-selected="true">Abiertos</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="three-tab" data-toggle="tab" href="#three" role="tab" aria-controls="Three" aria-selected="false">Cerrados</a>
                 </li>
               </ul>
             </div>
-            <div class="card-body" id="cardBatchActivos">
-              <div class="tab-content mt-3">
-                <div class="tab-pane active" id="description" role="tabpanel">
+
+            <div class="card-body" id="cardPreBatch">
+              <div class="tab-content">
+                <div class="tab-pane fade mt-3" id="one" role="tabpanel" aria-labelledby="one-tab">
+                  <div class="col-md-12 align-self-right">
+                    <div class="card">
+                      <div class="card-block">
+                        <div class="table-responsive">
+                          <table class="table table-striped table-bordered " id="tablaPreBatch" name="tablaPreBatch">
+
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tab-pane fade show active mt-3" id="two" role="tabpanel" aria-labelledby="two-tab">
                   <div class="col-md-12 align-self-right">
                     <div class="card">
                       <div class="card-block">
@@ -151,13 +169,9 @@ include_once("modal/modalPedidos.php");
                     </div>
                   </div>
                 </div>
-                <div class="tab-pane" id="history" role="tabpanel" aria-labelledby="history-tab"></div>
-              </div>
-            </div>
 
-            <div class="card-body" id="cardBatchCerrados">
-              <div class="tab-content mt-3">
-                <div class="tab-pane active" id="history" role="tabpanel">
+
+                <div class="tab-pane fade mt-3" id="three" role="tabpanel" aria-labelledby="three-tab">
                   <div class="col-md-12 align-self-right">
                     <div class="card">
                       <div class="card-block">
@@ -186,19 +200,14 @@ include_once("modal/modalPedidos.php");
                     </div>
                   </div>
                 </div>
-                <div class="tab-pane" id="history" role="tabpanel" aria-labelledby="history-tab">
-                  <p class="card-text">Batch Cerrados </p>
-                </div>
+                <!-- <div class="tab-pane" id="history" role="tabpanel" aria-labelledby="history-tab"></div> -->
               </div>
             </div>
+
           </div>
         </div>
       </div>
     </div>
-
-
-
-
 
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
