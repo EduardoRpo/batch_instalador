@@ -16,6 +16,12 @@ $tanquesDao = new TanquesDao();
 $controlFirmasDao = new ControlFirmasDao();
 $multiDao = new MultiDao();
 
+$app->get('/batch', function (Request $request, Response $data, $args) use ($batchDao) {
+  $batch = $batchDao->findAll();
+  $data->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));
+  return $data->withHeader('Content-Type', 'application/json');
+});
+
 $app->get('/batch/{id}', function (Request $request, Response $response, $args) use ($batchDao, $tanquesDao) {
   $dataBatch = $batchDao->findBatchById($args["id"]);
   $tanques = $tanquesDao->findTanquesById($args["id"]);
@@ -23,12 +29,6 @@ $app->get('/batch/{id}', function (Request $request, Response $response, $args) 
 
   $response->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
-});
-
-$app->get('/batch', function (Request $request, Response $data, $args) use ($batchDao) {
-  $batch = $batchDao->findAll();
-  $data->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));
-  return $data->withHeader('Content-Type', 'application/json');
 });
 
 $app->get('/batchcerrados', function (Request $request, Response $response, $args) use ($batchDao) {

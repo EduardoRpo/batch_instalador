@@ -59,12 +59,12 @@ include_once("modal/modalPedidos.php");
                 <a class="dropdown-item" href="#" onclick="clonar()"><i class="fa fa-clone"></i> Clonar</a>
                 <a class="dropdown-item" href="#" onclick="batchEliminados()"><i class="fa fa-eraser"></i> Batch Eliminados</a>
                 <a class="dropdown-item pdf" href="#"><i class="fa fa-download"></i> Imprimir PDF</a>
-                <a class="dropdown-item" href="#" id="btnCargarExcel"><i class="fa fa-download"></i> Pedidos</a>
+                <a class="dropdown-item" href="#" id="btnCargarExcelPedidos"><i class="fa fa-download"></i> Pedidos</a>
               </div>
             </div>
 
             <!-- ambos botones tienen hidden-sm-down -->
-            <!-- <button type="button" class="btn waves-effect waves-light btn-danger  btn-filtrar" style="background-color:#fff;color:#FF8D6D" onclick="filtrarfechas()">
+            <!-- <button type="button" class="btn waves-effect waves-light btn-danger btn-filtrar" style="background-color:#fff;color:#FF8D6D" onclick="filtrarfechas()">
               Filtrar
             </button> -->
 
@@ -75,6 +75,22 @@ include_once("modal/modalPedidos.php");
           </div>
 
         <?php } ?>
+      </div>
+    </div>
+
+    <div class="cardImportOrders">
+      <div class="container-fluid">
+        <form id="formImportOrders">
+          <div class="card">
+            <div class="card-body p-3">
+              <label for="formFile" class="form-label"> Importar Archivo de Pedidos</label>
+              <div style="display: flex; width:50%">
+                <input class="form-control" type="file" id="formFile">
+                <button class="btn btn-warning ml-3">Importar Pedidos</button>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
 
@@ -125,6 +141,14 @@ include_once("modal/modalPedidos.php");
                 <div class="tab-pane fade mt-3" id="one" role="tabpanel" aria-labelledby="one-tab">
                   <div class="col-md-12 align-self-right">
                     <div class="card">
+                      <div class="mt-3 text-center">
+                        <button class="toggle-vis btn btn-primary" id="0">Propietario</button>
+                        <button class="toggle-vis btn btn-primary" id="1">Documento</button>
+                        <button class="toggle-vis btn btn-primary" id="2">Fecha_Dcto</button>
+                        <button class="toggle-vis btn btn-primary" id="3">Referencia</button>
+                        <button class="toggle-vis btn btn-primary" id="4">Producto</button>
+                        <button class="toggle-vis btn btn-primary" id="5">Cant_original</button>
+                      </div>
                       <div class="card-block">
                         <div class="table-responsive">
                           <table class="table table-striped table-bordered " id="tablaPreBatch" name="tablaPreBatch">
@@ -215,14 +239,15 @@ include_once("modal/modalPedidos.php");
     <script src="vendor/jquery/jquery.serializeToJSON.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/tether.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="vendor/datatables/datatables.min.js"></script>
+    <!-- <script src="vendor/datatables/datatables.min.js"></script> -->
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script src="js/utils/sidebarmenu.js"></script>
     <script src="../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
-    <script src="js/utils/datatables.js"></script>
+    <!-- <script src="js/utils/datatables.js"></script> -->
     <script src="vendor/jquery-confirm/jquery-confirm.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
     <script src="//cdn.datatables.net/plug-ins/1.10.21/api/fnGetTds.js"></script>
@@ -230,6 +255,7 @@ include_once("modal/modalPedidos.php");
     <script src="js/utils/custom.js"></script>
     <script src="js/batch/multipresentacion.js"></script>
     <script src="js/batch/batch.js"></script>
+    <script src="js/batch/dataTableBatch.js"></script>
     <script src="js/batch/clonar.js"></script>
     <script src="js/batch/crearbatch.js"></script>
     <script src="js/batch/filtradofechas.js"></script>

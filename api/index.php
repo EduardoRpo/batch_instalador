@@ -26,6 +26,9 @@ require_once __DIR__ . '/src/routes/admin/productos.php';
 /* App */
 require_once __DIR__ . '/src/routes/app/productos/productos.php';
 
+//prebatch
+require_once __DIR__ . '/src/routes/app/preBatch/preBatch.php';
+
 //require_once __DIR__ . '/src/routes/batch.php';
 require_once __DIR__ . '/src/routes/app/batch/batch.php';
 require_once __DIR__ . '/src/routes/app/batch/clonebatch.php';
