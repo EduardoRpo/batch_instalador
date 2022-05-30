@@ -1,9 +1,17 @@
 $(document).ready(function() {
-    $('.cardImportOrders').hide();
+
+    let selectedFile;
+
+    $('.cardImportarPedidos').hide();
 
     $('#btnCargarExcelPedidos').click(function(e) {
-        $('.cardImportOrders').toggle(800);
+        $('.cardImportarPedidos').toggle(800);
     })
+});
+
+$('#filePedidos').change(function(e) {
+    e.preventDefault();
+    selectedFile = e.target.files[0];
 });
 
 

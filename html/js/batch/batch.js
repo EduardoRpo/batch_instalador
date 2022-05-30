@@ -259,6 +259,6 @@ message = (data) => {
 /* Actualizar tabla */
 
 function actualizarTabla() {
-    $("#tablaBatch").DataTable().clear();
-    $("#tablaBatch").DataTable().ajax.reload();
+    $("#tablaPreBatch").DataTable().clear();
+    $("#tablaPreBatch").DataTable().ajax.reload();
 }

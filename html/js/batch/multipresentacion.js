@@ -241,7 +241,7 @@ $('#btnCargarKg').click(function(e) {
     objetos = $(".multi").length;
     totalKg = $('#sumaMulti').val();
     //obtener referencias
-    debugger
+
     for (i = 0; i < objetos; i++) {
         const multi = {};
 

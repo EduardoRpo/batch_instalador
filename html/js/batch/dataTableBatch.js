@@ -199,7 +199,13 @@ $(document).ready(function() {
             },
             {
                 title: 'Cant_Original',
-                data: 'unidades',
+                data: 'cant_original',
+                className: "text-center",
+                render: $.fn.dataTable.render.number('.', ',', 0, ' '),
+            },
+            {
+                title: 'Cantidad',
+                data: 'cantidad',
                 className: "text-center",
                 render: $.fn.dataTable.render.number('.', ',', 0, ' '),
             },
