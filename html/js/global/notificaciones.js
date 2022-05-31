@@ -4,7 +4,6 @@ $(document).ready(function() {
         if (data.success == true) {
             alertify.set("notifier", "position", "top-right");
             alertify.success(data.message);
-            updateTable();
         } else if (data.error == true) {
             alertify.set("notifier", "position", "top-right");
             alertify.error(data.message);

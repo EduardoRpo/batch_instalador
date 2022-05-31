@@ -179,13 +179,18 @@ $(document).ready(function() {
                 data: 'propietario',
             },
             {
-                title: 'Documento',
+                title: 'Pedido',
                 data: 'pedido',
                 className: "text-center",
             },
             {
                 title: 'Fecha_Dcto',
                 data: 'fecha_pedido',
+                className: "text-center",
+            },
+            {
+                title: 'Granel',
+                data: 'granel',
                 className: "text-center",
             },
             {
@@ -211,10 +216,10 @@ $(document).ready(function() {
             },
             {
                 title: 'Cant_Programar',
-                data: 'id_expense',
+                data: 'id_producto',
                 render: function(data) {
                     return `
-                    <input type="text" class="form-control-updated text-center" />`;
+                    <input type="text" class="form-control-updated text-center" id="cant-${data}" />`;
                 },
             },
             {
@@ -244,12 +249,11 @@ $(document).ready(function() {
             },
             {
                 title: 'Acciones',
-                data: 'id_expense',
+                data: 'id_producto',
                 className: 'uniqueClassName',
                 render: function(data) {
                     return `
-              <a href="javascript:;" <i id="${data}" class="bx bx-edit-alt updateExpenses" data-toggle='tooltip' title='Actualizar Gasto' style="font-size: 30px;"></i></a>    
-              <a href="javascript:;" <i id="${data}" class="mdi mdi-delete-forever deleteExpenses" data-toggle='tooltip' title='Eliminar Gasto' style="font-size: 30px;color:red"></i></a>`;
+                    <div class="form-check"><input class="form-check-input checkboxPedidos" type="checkbox" id=${data}></div>`;
                 },
             },
         ],

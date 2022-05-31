@@ -61,10 +61,12 @@ savePedidos = (data) => {
         url: '/api/addPedidos',
         data: { data: data },
         success: function(resp) {
-            if (resp.success)
+            if (resp.success) {
                 actualizarTabla()
-
-            notificacion(resp)
+                $('.cardImportarPedidos').hide(800);
+                $('#filePedidos').val('');
+            }
+            notificaciones(resp)
         }
     })
 }

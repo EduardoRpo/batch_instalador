@@ -22,7 +22,7 @@ class MultiDao extends ControlFirmasMultiDao
 
         $connection = Connection::getInstance()->getConnection();
 
-        $sql = "SELECT p.referencia, multi.id_batch, multi.cantidad, multi.total,linea.densidad, pc.nombre as presentacion 
+        $sql = "SELECT p.referencia, multi.id_batch, multi.cantidad, multi.total, linea.densidad, pc.nombre as presentacion 
             FROM producto p 
             INNER JOIN multipresentacion multi ON p.referencia = multi.referencia 
             INNER JOIN linea ON p.id_linea = linea.id 
@@ -32,6 +32,22 @@ class MultiDao extends ControlFirmasMultiDao
         $query->execute(['batch' => $id_batch]);
         $multi = $query->fetchAll($connection::FETCH_ASSOC);
         return $multi;
+    }
+
+    public function findProductMultiByRef($referencia)
+    {
+
+        $connection = Connection::getInstance()->getConnection();
+
+        $sql = "SELECT p.referencia, linea.densidad, linea.ajuste, pc.nombre as presentacion 
+                FROM producto p 
+                INNER JOIN linea ON p.id_linea = linea.id 
+                INNER JOIN presentacion_comercial pc ON p.presentacion_comercial = pc.id 
+                WHERE p.referencia = :referencia;";
+        $query = $connection->prepare($sql);
+        $query->execute(['referencia' => $referencia]);
+        $dataProduct = $query->fetch($connection::FETCH_ASSOC);
+        return $dataProduct;
     }
 
 

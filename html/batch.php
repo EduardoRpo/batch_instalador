@@ -143,13 +143,16 @@ include_once("modal/modalPedidos.php");
                     <div class="card">
                       <div class="mt-3 text-center">
                         <button class="toggle-vis btn btn-primary hideTitle" id="0">Propietario</button>
-                        <button class="toggle-vis btn btn-primary hideTitle" id="1">Documento</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="1">Pedido</button>
                         <button class="toggle-vis btn btn-primary hideTitle" id="2">Fecha_Dcto</button>
-                        <button class="toggle-vis btn btn-primary hideTitle" id="3">Referencia</button>
-                        <button class="toggle-vis btn btn-primary hideTitle" id="4">Producto</button>
-                        <button class="toggle-vis btn btn-primary hideTitle" id="5">Cant_original</button>
-                        <button class="toggle-vis btn btn-primary hideTitle" id="6">Cantidad</button>
-                        <button class="toggle-vis btn btn-primary hideTitle" id="7">Cant_Programar</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="3">Granel</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="4">Referencia</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="5">Producto</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="6">Cant_original</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="7">Cantidad</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="8">Cant_Programar</button>
+                        <button class="toggle-vis btn btn-primary" id="calcLote" style="margin-left:250px">Calcular Lote</button>
+
                       </div>
                       <div class="card-block">
                         <div class="table-responsive">
@@ -253,6 +256,8 @@ include_once("modal/modalPedidos.php");
     <script src="../html/js/import/import.js"></script>
     <script src="../html/js/batch/importPedidos.js"></script>
     <script src="../html/js/import/file.js"></script>
+    <script src="../html/js/global/notificaciones.js"></script>
+    <script src="../html/js/batch/calcularLote.js"></script>
 
 </body>
 
