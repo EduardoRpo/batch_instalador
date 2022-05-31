@@ -2319,6 +2319,23 @@ Form-conForm-control
     display: initial;
 }
 
+.form-control-updated {
+    color: #67757c;
+    display: initial;
+    width: 70%;
+    padding: 0.5rem 0.75rem;
+    line-height: 1.25;
+    font-size: 1rem;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 0.25rem;
+    -webkit-border-radius: 0.25rem;
+    -moz-border-radius: 0.25rem;
+    -ms-border-radius: 0.25rem;
+    -o-border-radius: 0.25rem;
+}
+
 .form-control-sm {
     min-height: 20px;
 }

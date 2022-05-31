@@ -40,7 +40,7 @@ switch ($op) {
                                             ORDER BY batch.id_batch desc; ");
     } else {
 
-      $query = "SELECT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, pc.nombre as presentacion_comercial, batch.numero_lote, batch.tamano_lote, propietario.nombre, batch.fecha_creacion, batch.fecha_programacion, batch.estado, batch.multi
+      /* $query = "SELECT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, pc.nombre as presentacion_comercial, batch.numero_lote, batch.tamano_lote, propietario.nombre, batch.fecha_creacion, batch.fecha_programacion, batch.estado, batch.multi
                 FROM batch INNER JOIN producto INNER JOIN propietario INNER JOIN presentacion_comercial pc
                 ON batch.id_producto = producto.referencia AND producto.id_propietario = propietario.id AND producto.presentacion_comercial = pc.id
                 WHERE estado > 0 AND batch.id_batch 
@@ -52,7 +52,7 @@ switch ($op) {
 
       $query .= " ORDER BY batch.id_batch desc";
 
-      $query_batch = mysqli_query($conn, $query);
+      $query_batch = mysqli_query($conn, $query); */
     }
 
     $result = mysqli_num_rows($query_batch);

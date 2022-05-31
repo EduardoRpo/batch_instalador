@@ -26,6 +26,10 @@ require_once __DIR__ . '/src/routes/admin/productos.php';
 /* App */
 require_once __DIR__ . '/src/routes/app/productos/productos.php';
 
+//prebatch
+require_once __DIR__ . '/src/routes/app/preBatch/preBatch.php';
+require_once __DIR__ . '/src/routes/app/preBatch/importarPedidos.php';
+
 //require_once __DIR__ . '/src/routes/batch.php';
 require_once __DIR__ . '/src/routes/app/batch/batch.php';
 require_once __DIR__ . '/src/routes/app/batch/clonebatch.php';
@@ -33,6 +37,7 @@ require_once __DIR__ . '/src/routes/colasTrabajo.php';
 
 //Multipresentacion
 require_once __DIR__ . '/src/routes/app/multi/multi.php';
+require_once __DIR__ . '/src/routes/app/multi/calcTamanioLote.php';
 
 //require_once __DIR__ . '/src/routes/cargo.php';
 require_once __DIR__ . '/src/routes/preguntas.php';

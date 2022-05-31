@@ -43,3 +43,9 @@
 .modal-xl {
     max-width: 90% !important;
 }
+
+.hideTitle {
+    background: white;
+    color: #ff8d6d;
+    border: white;
+}
