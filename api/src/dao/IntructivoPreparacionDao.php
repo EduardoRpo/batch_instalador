@@ -26,9 +26,7 @@ class IntructivoPreparacionDao
 
     $sql = "SELECT * FROM producto WHERE referencia =:referencia";
     $query = $connection->prepare($sql);
-    $query->execute([
-      'referencia' => $idProduct,
-    ]);
+    $query->execute(['referencia' => $idProduct]);
 
     $data = $query->fetch(PDO::FETCH_ASSOC);
     $tabla = $data["base_instructivo"];
@@ -36,16 +34,15 @@ class IntructivoPreparacionDao
 
     if ($tabla == 1) {
       $stmt = $connection->prepare("SELECT * FROM instructivo_preparacion WHERE id_producto = :referencia");
-      $stmt->bindValue(':referencia', $idProduct, PDO::PARAM_INT);
+      $stmt->execute(['referencia' => $idProduct]);
     } else {
       $stmt = $connection->prepare("SELECT id, pasos, tiempo FROM instructivos_base WHERE producto = :producto");
-      $stmt->bindValue(':producto', $producto, PDO::PARAM_INT);
+      $stmt->execute(['producto' => $producto]);
     }
 
-    $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
-    $pesajes = $stmt->fetchAll($connection::FETCH_ASSOC);
-    $this->logger->notice("instructivo Obtenidas", array('materias Primas' => $pesajes));
-    return $pesajes;
+    $instructivo = $stmt->fetchAll($connection::FETCH_ASSOC);
+    $this->logger->notice("instructivo Obtenidas", array('instructivos' => $instructivo));
+    return $instructivo;
   }
 }

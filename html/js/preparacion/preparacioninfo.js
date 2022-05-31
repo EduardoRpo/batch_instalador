@@ -104,7 +104,7 @@ $.ajax({
 });
 
 /* Carga instructivo preparación para producto */
-
+debugger
 $.ajax({
         url: `/api/instructivos/${referencia}`,
         type: "GET",
