@@ -1,110 +1,12 @@
 $(document).ready(function() {
 
-    tablaPreBatch = $('#tablaPreBatch').DataTable({
-        destroy: true,
-        pageLength: 50,
-        ajax: {
-            url: `/api/preBatch`,
-            dataSrc: '',
-        },
-        language: {
-            url: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json',
-        },
-        columns: [{
-                title: 'Propietario',
-                data: 'propietario',
-            },
-            {
-                title: 'Pedido',
-                data: 'pedido',
-                className: "text-center",
-            },
-            {
-                title: 'Fecha_Dcto',
-                data: 'fecha_pedido',
-                className: "text-center",
-            },
-            {
-                title: 'Granel',
-                data: 'granel',
-                className: "text-center",
-            },
-            {
-                title: 'Referencia',
-                data: 'id_producto',
-                className: "text-center",
-            },
-            {
-                title: 'Producto',
-                data: 'nombre_referencia',
-            },
-            {
-                title: 'Cant_Original',
-                data: 'cant_original',
-                className: "text-center",
-                render: $.fn.dataTable.render.number('.', ',', 0, ' '),
-            },
-            {
-                title: 'Cantidad',
-                data: 'cantidad',
-                className: "text-center",
-                render: $.fn.dataTable.render.number('.', ',', 0, ' '),
-            },
-            {
-                title: 'Cant_Programar',
-                data: 'id_producto',
-                render: function(data) {
-                    return `
-                    <input type="text" class="form-control-updated text-center" id="cant-${data}" />`;
-                },
-            },
-            {
-                title: 'Fecha Pesaje',
-                data: 'fecha_pesaje',
-                className: "text-center",
-            },
-            {
-                title: 'Fecha Preparacion',
-                data: 'fecha_preparacion',
-                className: "text-center",
-            },
-            {
-                title: 'Recepcion Insumos',
-                data: 'recepcion_insumos',
-                className: "text-center",
-            },
-            {
-                title: 'Fecha Envasado',
-                data: 'envasado',
-                className: "text-center",
-            },
-            {
-                title: 'Fecha Entrega',
-                data: 'entrega',
-                className: "text-center",
-            },
-            {
-                title: 'Acciones',
-                data: 'id_producto',
-                className: 'uniqueClassName',
-                render: function(data) {
-                    return `
-                    <div class="form-check"><input class="form-check-input checkboxPedidos" type="checkbox" id=${data}></div>`;
-                },
-            },
-        ],
-    });
-
-
-
-
     /* function crearTablaBatch(
-        columna_busqueda = "",
-        minDateFilter = "",
-        maxDateFilter = ""
-    ) {
-     */
-    tabla = $("#tablaBatch").DataTable({
+            columna_busqueda = "",
+            minDateFilter = "",
+            maxDateFilter = ""
+        ) {
+         */
+    tablaBatch = $("#tablaBatch").DataTable({
         pageLength: 50,
         responsive: true,
         scrollCollapse: true,
@@ -221,13 +123,114 @@ $(document).ready(function() {
                 className: 'uniqueClassName',
                 render: function(data) {
                     return `
-                    <a href='#' <i class='fa fa-pencil-square-o fa-2x link-editar' id=${data} data-toggle='tooltip' title='Editar Batch Record' style='color:rgb(255, 193, 7);'></i></a>
-                    <a href='#' <i class='fa fa-trash link-borrar fa-2x' id=${data} data-toggle='tooltip' title='Eliminar Batch Record' style='color:rgb(234, 67, 54)'></i></a>`;
+                        <a href='#' <i class='fa fa-pencil-square-o fa-2x link-editar' id=${data} data-toggle='tooltip' title='Editar Batch Record' style='color:rgb(255, 193, 7);'></i></a>
+                        <a href='#' <i class='fa fa-trash link-borrar fa-2x' id=${data} data-toggle='tooltip' title='Eliminar Batch Record' style='color:rgb(234, 67, 54)'></i></a>`;
                 },
             },
         ],
     });
     //}
+
+
+    tablaPreBatch = $('#tablaPreBatch').DataTable({
+        destroy: true,
+        pageLength: 50,
+        ajax: {
+            url: `/api/preBatch`,
+            dataSrc: '',
+        },
+        language: {
+            url: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json',
+        },
+        columns: [{
+                title: 'Propietario',
+                data: 'propietario',
+            },
+            {
+                title: 'Pedido',
+                data: 'pedido',
+                className: "text-center",
+            },
+            {
+                title: 'Fecha_Dcto',
+                data: 'fecha_pedido',
+                className: "text-center",
+            },
+            {
+                title: 'Granel',
+                data: 'granel',
+                className: "text-center",
+            },
+            {
+                title: 'Referencia',
+                data: 'id_producto',
+                className: "text-center",
+            },
+            {
+                title: 'Producto',
+                data: 'nombre_referencia',
+            },
+            {
+                title: 'Cant_Original',
+                data: 'cant_original',
+                className: "text-center",
+                render: $.fn.dataTable.render.number('.', ',', 0, ' '),
+            },
+            {
+                title: 'Cantidad',
+                data: 'cantidad',
+                className: "text-center",
+                render: $.fn.dataTable.render.number('.', ',', 0, ' '),
+            },
+            {
+                title: 'Cant_Programar',
+                data: 'id_producto',
+                render: function(data) {
+                    return `
+                    <input type="text" class="form-control-updated text-center" id="cant-${data}" />`;
+                },
+            },
+            {
+                title: 'Fecha Pesaje',
+                data: 'fecha_pesaje',
+                className: "text-center",
+            },
+            {
+                title: 'Fecha Preparacion',
+                data: 'fecha_preparacion',
+                className: "text-center",
+            },
+            {
+                title: 'Recepcion Insumos',
+                data: 'recepcion_insumos',
+                className: "text-center",
+            },
+            {
+                title: 'Fecha Envasado',
+                data: 'envasado',
+                className: "text-center",
+            },
+            {
+                title: 'Fecha Entrega',
+                data: 'entrega',
+                className: "text-center",
+            },
+            {
+                title: 'Acciones',
+                data: 'id_producto',
+                className: 'uniqueClassName',
+                render: function(data) {
+                    return `
+                    <div class="form-check"><input class="form-check-input checkboxPedidos" type="checkbox" id=${data}></div>`;
+                },
+            },
+        ],
+    });
+
+
+
+
+
 
 
     $("#tablaBatchCerrados").DataTable({
