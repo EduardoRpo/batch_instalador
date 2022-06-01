@@ -22,43 +22,54 @@ $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
 /* Admin */
 require_once __DIR__ . '/src/routes/admin/productos.php';
+require_once __DIR__ . '/src/routes/admin/pdf/certificados.php';
+require_once __DIR__ . '/src/routes/admin/pdf/versiones.php';
+
 
 /* App */
+
+require_once __DIR__ . '/src/routes/app/productos/granel.php';
 require_once __DIR__ . '/src/routes/app/productos/productos.php';
 
 //prebatch
 require_once __DIR__ . '/src/routes/app/preBatch/preBatch.php';
 require_once __DIR__ . '/src/routes/app/preBatch/importarPedidos.php';
 
+//Batch
 //require_once __DIR__ . '/src/routes/batch.php';
 require_once __DIR__ . '/src/routes/app/batch/batch.php';
 require_once __DIR__ . '/src/routes/app/batch/clonebatch.php';
-require_once __DIR__ . '/src/routes/colasTrabajo.php';
+require_once __DIR__ . '/src/routes/app/colas/colasTrabajo.php';
 
 //Multipresentacion
 require_once __DIR__ . '/src/routes/app/multi/multi.php';
 require_once __DIR__ . '/src/routes/app/multi/calcTamanioLote.php';
 
 //require_once __DIR__ . '/src/routes/cargo.php';
-require_once __DIR__ . '/src/routes/preguntas.php';
-require_once __DIR__ . '/src/routes/desinfectante.php';
-require_once __DIR__ . '/src/routes/materias_primas.php';
-require_once __DIR__ . '/src/routes/equipos.php';
-require_once __DIR__ . '/src/routes/etiquetas.php';
+require_once __DIR__ . '/src/routes/app/global/preguntas.php';
+require_once __DIR__ . '/src/routes/app/global/desinfectante.php';
+require_once __DIR__ . '/src/routes/app/global/materias_primas.php';
+require_once __DIR__ . '/src/routes/app/global/etiquetas.php';
 
-require_once __DIR__ . '/src/routes/pesaje.php';
-require_once __DIR__ . '/src/routes/preparacion.php';
-require_once __DIR__ . '/src/routes/envasado.php';
+//Pesaje
+require_once __DIR__ . '/src/routes/app/pesaje/pesaje.php';
 
-require_once __DIR__ . '/src/routes/explosion_materiales.php';
-require_once __DIR__ . '/src/routes/pedidos.php';
+//Preparacion
+require_once __DIR__ . '/src/routes/app/preparacion/preparacion.php';
 
-require_once __DIR__ . '/src/routes/pdf.php';
-require_once __DIR__ . '/src/routes/admin/pdf/certificados.php';
-require_once __DIR__ . '/src/routes/admin/pdf/versiones.php';
+//envasado
+require_once __DIR__ . '/src/routes/app/envasado/envasado.php';
+require_once __DIR__ . '/src/routes/app/envasado/equipos.php';
 
-require_once __DIR__ . '/src/routes/productos.php';
-require_once __DIR__ . '/src/routes/usuarios.php';
+//Explosion de Materiales
+require_once __DIR__ . '/src/routes/app/explosionMateriales/explosion_materiales.php';
+require_once __DIR__ . '/src/routes/app/explosionMateriales/pedidos.php';
+
+/* pdf */
+require_once __DIR__ . '/src/routes/app/pdf.php';
+
+
+require_once __DIR__ . '/src/routes/app/usuarios.php';
 
 
 // Run app
