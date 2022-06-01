@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(0);
 
 use BatchRecord\dao\MultiDao;
 use BatchRecord\dao\calcTamanioMultiDao;
@@ -17,19 +17,19 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
     $dataMulti = $multiDao->findProductMultiByRef($dataPedidos[$i]['referencia']);
     $tamanio_lote = $calcTamanioMultiDao->calcularTamanioLote($dataMulti, $dataPedidos[$i]['cantidad']);
     $dataPedidos[$i]['tamanio_lote'] = $tamanio_lote;
+
+    $granel = $dataPedidos[$i]['granel'];
+    $lote[$i][$granel] = $tamanio_lote;
   }
 
-  $dataGranel = [];
-  $dataGranel['tamanio_lote'] = 0;
+  $sumArray = array();
 
-  for ($i = 0; $i < sizeof($dataPedidos); $i++)
-    for ($j = $i + 1; $j < sizeof($dataPedidos); $j++) {
-      if ($dataPedidos[$i]['granel'] == $dataPedidos[$j]['granel']) {
-        $dataGranel['granel'] = $dataPedidos[$i]['granel'];
-        $dataGranel['tamanio_lote'] = $dataGranel['tamanio_lote'] + $dataPedidos[$i]['tamanio_lote'] + $dataPedidos[$j]['tamanio_lote'];
-      }
+  foreach ($lote as $k => $subArray) {
+    foreach ($subArray as $id => $value) {
+      $sumArray[$id] += $value;
     }
+  }
 
-  $response->getBody()->write(json_encode($dataGranel, JSON_NUMERIC_CHECK));
+  $response->getBody()->write(json_encode($sumArray, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });

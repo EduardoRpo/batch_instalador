@@ -57,7 +57,7 @@ $(document).ready(function() {
             url: "/api/calcTamanioLote",
             data: { data: pedidosProgramar },
             success: function(resp) {
-
+                console.log(Array.from(resp));
             }
         });
     })
