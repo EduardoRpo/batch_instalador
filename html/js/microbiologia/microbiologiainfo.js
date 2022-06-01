@@ -28,7 +28,7 @@ $(document).ready(function() {
 $(document).ready(function() {
     const multi = () => {
 
-        $.get(`../../../api/multi/${idBatch}`,
+        $.get(`/api/multi/${idBatch}`,
             function(data, textStatus, jqXHR) {
                 if (data == 0)
                     return false
