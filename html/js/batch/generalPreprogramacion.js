@@ -36,7 +36,7 @@ addRows = (data) => {
     row.push(
       `<tr>
           <td>${granel[i]}</td>
-          <td>${tamanio[i]}</td>
+          <td>${tamanio[i].toFixed(2)}</td>
           <td>${cantidad[i]}</td>
           ${(symbol = check(tamanio[i]))}
         </tr>`

@@ -19,21 +19,24 @@ $(document).ready(function () {
 
   $(document).on('change', '.checkboxPedidos', function (e) {
     e.preventDefault();
-    referencia = this.id;
-    cantidad = $(`#cant-${referencia}`).val();
+    id_checkbox = this.id;
+    referencia = id_checkbox.substr(-7, 7);
+    cantidad = $(`#cant-${id_checkbox}`).val();
+    numPedido = id_checkbox.slice(0, -8);
 
-    /*for (i = 0; i < pedidosProgramar.length; i++) {
+    for (i = 0; i < pedidosProgramar.length; i++) {
       if (
         referencia == pedidosProgramar[i].referencia &&
-        cantidad == pedidosProgramar[i].cantidad
+        //cantidad == pedidosProgramar[i].cantidad &&
+        numPedido == pedidosProgramar[i].numPedido
       )
-        deleteArray(referencia);
-    }*/
+        deleteArray(numPedido);
+    }
 
     if ($(this).is(':checked')) {
       pedidos = {};
 
-      cantidad = $(`#cant-${referencia}`).val();
+      //cantidad = $(`#cant-${referencia}`).val();
       granel = fila.granel;
 
       if (cantidad == 0) {
@@ -46,43 +49,51 @@ $(document).ready(function () {
       pedidos.referencia = referencia;
       pedidos.cantidad = cantidad;
       pedidos.granel = granel;
+      pedidos.numPedido = numPedido;
 
       pedidosProgramar.push(pedidos);
     } else {
-      $(`#cant-${referencia}`).val('');
+      $(`#cant-${id_checkbox}`).val('');
 
       // Eliminar objeto del array
-      deleteArray(referencia);
+      deleteArray(numPedido);
     }
   });
 
   // Seleccionar checkbox
   $(document).on('blur', '.cantProgram', function (e) {
+    e.preventDefault();
     id_input = this.id;
-    id_checkbox = id_input.substr(5, 9);
+    id_checkbox = id_input.substr(5, 13);
+    referencia = id_input.substr(-7, 7);
     cantidad = $(`#${id_input}`).val();
+    numPedido = id_checkbox.slice(0, -8);
 
     // Si ya existe una cantidad en esa fila remplazarla
     if (pedidosProgramar.length > 0) {
       // Eliminar objeto del array
       for (i = 0; i < pedidosProgramar.length; i++) {
         if (
-          id_checkbox == pedidosProgramar[i].referencia &&
-          cantidad != pedidosProgramar[i].tamanio
+          referencia == pedidosProgramar[i].referencia &&
+          numPedido == pedidosProgramar[i].numPedido &&
+          cantidad != pedidosProgramar[i].cantidad
         ) {
-          deleteArray(id_checkbox);
+          deleteArray(numPedido);
           $('.checkboxPedidos').change();
         }
       }
     }
 
-    if (!$(`#${id_checkbox}`).is(':checked') && cantidad > 0) {
+    if ($(`#${id_checkbox}`).is(':checked')) {
+      if (cantidad == '') $(`#${id_checkbox}`).prop('checked', false);
+    } else {
       $(`#${id_checkbox}`).prop('checked', true);
-      $('.checkboxPedidos').change();
     }
+    $('.checkboxPedidos').change();
   });
 
   $(document).on('click', '#calcLote', function (e) {
+    e.preventDefault();
     $.ajax({
       type: 'POST',
       url: '/api/calcTamanioLote',
@@ -94,11 +105,17 @@ $(document).ready(function () {
     });
   });
 
-  deleteArray = (referencia) => {
+  deleteArray = (numPedido) => {
     for (i = 0; i < pedidosProgramar.length; i++) {
-      if (pedidosProgramar[i].referencia == referencia) {
+      if (pedidosProgramar[i].numPedido == numPedido) {
         pedidosProgramar.splice(i, 1);
       }
     }
   };
+
+  // Fecha inicio
+  $(document).on('blur', '.dateInsumos', function (e) {
+    e.preventDefault();
+    id_date = this.id;
+  });
 });

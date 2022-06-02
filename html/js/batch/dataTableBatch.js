@@ -185,18 +185,18 @@ $(document).ready(function () {
       },
       {
         title: 'Cant_Programar',
-        data: 'id_producto',
+        data: null,
         render: function (data) {
           return `
-                    <input type="text" class="cantProgram form-control-updated text-center" id="cant-${data}" />`;
+                    <input type="text" class="cantProgram form-control-updated text-center" id="cant-${data.pedido}-${data.id_producto}" />`;
         },
       },
       {
         title: 'Recep_Insumos',
-        data: 'id_producto',
+        data: null,
         render: function (data) {
           return `
-                    <input type="date" class="form-control-updated text-center" id="date-${data}" />`;
+                    <input type="date" class="dateInsumos form-control-updated text-center" id="date-${data.pedido}-${data.id_producto}" />`;
         },
       },
       {
@@ -226,11 +226,11 @@ $(document).ready(function () {
       },
       {
         title: 'Acciones',
-        data: 'id_producto',
+        data: null,
         className: 'uniqueClassName',
         render: function (data) {
           return `
-                    <div class="form-check"><input class="form-check-input checkboxPedidos" type="checkbox" id=${data}></div>`;
+                    <div class="form-check"><input class="form-check-input checkboxPedidos" type="checkbox" id="${data.pedido}-${data.id_producto}"></div>`;
         },
       },
     ],
