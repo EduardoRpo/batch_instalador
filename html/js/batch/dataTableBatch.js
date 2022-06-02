@@ -191,6 +191,14 @@ $(document).ready(function() {
                 },
             },
             {
+                title: 'Recep_Insumos',
+                data: 'id_producto',
+                render: function(data) {
+                    return `
+                    <input type="date" class="form-control-updated text-center" id="date-${data}" />`;
+                },
+            },
+            {
                 title: 'Fecha Pesaje',
                 data: 'fecha_pesaje',
                 className: "text-center",

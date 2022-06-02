@@ -19,17 +19,28 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
     $dataPedidos[$i]['tamanio_lote'] = $tamanio_lote;
 
     $granel = $dataPedidos[$i]['granel'];
-    $lote[$i][$granel] = $tamanio_lote;
+    
+    $loteGranel[$i][$granel] = $tamanio_lote;
+    $loteCantidades[$i][$granel] = $dataPedidos[$i]['cantidad'];;
   }
 
-  $sumArray = array();
+  $sumArrayGranel = array();
+  $sumArrayCantidades = array();
 
-  foreach ($lote as $k => $subArray) {
+  foreach ($loteGranel as $k => $subArray) {
     foreach ($subArray as $id => $value) {
-      $sumArray[$id] += $value;
+      $sumArrayGranel[$id] += $value;
+    }
+  }
+  
+  foreach ($loteCantidades as $k => $subArray) {
+    foreach ($subArray as $id => $value) {
+      $sumArrayCantidades[$id] += $value;
     }
   }
 
-  $response->getBody()->write(json_encode($sumArray, JSON_NUMERIC_CHECK));
+  $sumArrayTotal = array_merge($sumArrayGranel, $sumArrayCantidades);
+
+  $response->getBody()->write(json_encode($sumArrayTotal, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });

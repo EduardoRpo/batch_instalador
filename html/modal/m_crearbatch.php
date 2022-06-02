@@ -91,6 +91,10 @@
                             <input type="date" class="form-control" id="fechaprogramacion" name="fechaprogramacion" value="" min="<?php $hoy = date("Y-m-d");
                                                                                                                                     echo $hoy; ?>">
                         </div>
+                        <div class="col-md-4 col-2 align-self-center">
+                            <label for="recipient-name" class="col-form-label"><b>Fecha de Pesaje (Sugerida)</b></label>
+                            <input type="date" class="form-control" id="fechaprogramacion" name="fechaprogramacion" value="" readonly min="<?php $hoy = date("Y-m-d"); echo $hoy; ?>">
+                        </div>
 
                     </div>
                     <hr>

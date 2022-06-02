@@ -65,12 +65,13 @@ $(document).ready(function() {
 
                 // Ventana
                 alertify.confirm(
-                    'Desea crear lote?',
-                    `<table class="table table-striped table-bordered dataTable no-footer text-center" aria-describedby="tablaPreBatch_info">
+                    'Samara Cosmetics',
+                    `<p>¿Desea programar los lotes?<p><br></p><table class="table table-striped table-bordered dataTable no-footer text-center" aria-describedby="tablaPreBatch_info">
                       <thead>
                         <tr>
                           <th>Granel</th>
-                          <th>Tamaño</th>
+                          <th>Tamaño (Kg)</th>
+                          <th>Cantidad (Und)</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -83,7 +84,7 @@ $(document).ready(function() {
                     function() {
                         alertify.error('Cancel');
                     }
-                );
+                ).set('labels', { ok: 'Si', cancel: 'No' });
             },
         });
     });
@@ -100,9 +101,9 @@ $(document).ready(function() {
         for (i = 0; i < data.length; i++) {
             row.push(
                 `<tr><td>${granel[i]}</td><td>${tamanio[i]
-        }</td><td style="font-size:22px; font-weight: bold">${(symbol = check(
-          tamanio[i]
-        ))}</td></tr>`
+                }</td><td style="font-size:22px; font-weight: bold">${(symbol = check(
+                    tamanio[i]
+                ))}</td></tr>`
             );
         }
 
