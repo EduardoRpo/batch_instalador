@@ -13,15 +13,19 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
   $dataPedidos = $request->getParsedBody();
   $dataPedidos = $dataPedidos['data'];
 
+  $referencia = array();
+
   for ($i = 0; $i < sizeof($dataPedidos); $i++) {
     $dataMulti = $multiDao->findProductMultiByRef($dataPedidos[$i]['referencia']);
     $tamanio_lote = $calcTamanioMultiDao->calcularTamanioLote($dataMulti, $dataPedidos[$i]['cantidad']);
     $dataPedidos[$i]['tamanio_lote'] = $tamanio_lote;
 
     $granel = $dataPedidos[$i]['granel'];
-    
+
     $loteGranel[$i][$granel] = $tamanio_lote;
-    $loteCantidades[$i][$granel] = $dataPedidos[$i]['cantidad'];;
+    $loteCantidades[$i][$granel] = $dataPedidos[$i]['cantidad'];
+
+    $referencia[$i] = $dataPedidos[$i]['referencia'];
   }
 
   $sumArrayGranel = array();
@@ -32,14 +36,19 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
       $sumArrayGranel[$id] += $value;
     }
   }
-  
+
   foreach ($loteCantidades as $k => $subArray) {
     foreach ($subArray as $id => $value) {
       $sumArrayCantidades[$id] += $value;
     }
   }
 
-  $sumArrayTotal = array_merge($sumArrayGranel, $sumArrayCantidades);
+  $sumArrayTotal = array('referencia' => array_values($referencia), 'granel' => array_keys($sumArrayGranel), 'tamanio' => array_values($sumArrayGranel), 'cantidades' => array_values($sumArrayCantidades));
+
+  /*$sumArrayTotal1['referencia'] = $referencia;
+  $sumArrayTotal1['granel'] = array_keys($sumArrayGranel);
+  $sumArrayTotal1['tamanio'] = array_values($sumArrayGranel);
+  $sumArrayTotal1['cantidad'] = array_values($sumArrayCantidades);*/
 
   $response->getBody()->write(json_encode($sumArrayTotal, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');

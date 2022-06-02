@@ -174,21 +174,21 @@ include_once("modal/modalPedidos.php");
                       <div class="card-block">
                         <div class="table-responsive">
                           <table class="table table-striped table-bordered " id="tablaBatchInactivos" name="tablaBatchInactivos">
-                            
+
                           </table>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                
+
                 <div class="tab-pane fade show active mt-3" id="three" role="tabpanel" aria-labelledby="three-tab">
                   <div class="col-md-12 align-self-right">
                     <div class="card">
                       <div class="card-block">
                         <div class="table-responsive">
                           <table class="table table-striped table-bordered " id="tablaBatch" name="tablaBatch">
-                            
+
                           </table>
                         </div>
                       </div>
@@ -203,7 +203,7 @@ include_once("modal/modalPedidos.php");
                       <div class="card-block">
                         <div class="table-responsive">
                           <table class="table table-striped table-bordered " id="tablaBatchCerrados">
-                            
+
                           </table>
                         </div>
                       </div>
@@ -239,6 +239,7 @@ include_once("modal/modalPedidos.php");
     <script src="../html/js/import/file.js"></script>
     <script src="../html/js/global/notificaciones.js"></script>
     <script src="../html/js/batch/calcularLote.js"></script>
+    <script src="../html/js/batch/generalPreprogramacion.js"></script>
 
 </body>
 
