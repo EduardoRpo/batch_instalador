@@ -128,10 +128,13 @@ include_once("modal/modalPedidos.php");
                   <a class="nav-link" id="one-tab" data-toggle="tab" href="#one" role="tab" aria-controls="One" aria-selected="false">PreProgramados</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link active" id="two-tab" data-toggle="tab" href="#two" role="tab" aria-controls="Two" aria-selected="true">Abiertos</a>
+                  <a class="nav-link" id="two-tab" data-toggle="tab" href="#two" role="tab" aria-controls="Two" aria-selected="false">Inactivos</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="three-tab" data-toggle="tab" href="#three" role="tab" aria-controls="Three" aria-selected="false">Cerrados</a>
+                  <a class="nav-link active" id="three-tab" data-toggle="tab" href="#three" role="tab" aria-controls="Three" aria-selected="true">Abiertos</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="four-tab" data-toggle="tab" href="#four" role="tab" aria-controls="Four" aria-selected="false">Cerrados</a>
                 </li>
               </ul>
             </div>
@@ -165,33 +168,27 @@ include_once("modal/modalPedidos.php");
                   </div>
                 </div>
 
-                <div class="tab-pane fade show active mt-3" id="two" role="tabpanel" aria-labelledby="two-tab">
+                <div class="tab-pane fade mt-3" id="two" role="tabpanel" aria-labelledby="two-tab">
+                  <div class="col-md-12 align-self-right">
+                    <div class="card">
+                      <div class="card-block">
+                        <div class="table-responsive">
+                          <table class="table table-striped table-bordered " id="tablaBatchInactivos" name="tablaBatchInactivos">
+                            
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="tab-pane fade show active mt-3" id="three" role="tabpanel" aria-labelledby="three-tab">
                   <div class="col-md-12 align-self-right">
                     <div class="card">
                       <div class="card-block">
                         <div class="table-responsive">
                           <table class="table table-striped table-bordered " id="tablaBatch" name="tablaBatch">
-                            <thead>
-                              <tr>
-                                <th></th>
-                                <th>No</th>
-                                <th>Orden</th>
-                                <th>Referencia</th>
-                                <th>Nombre</th>
-                                <th>Lote</th>
-                                <th>Tamaño(kg)</th>
-                                <th>Propietario</th>
-                                <th>Creación</th>
-                                <th>Programación</th>
-                                <th>Estado</th>
-                                <th>Multi</th>
-                                <th></th>
-                                <th></th>
-                              </tr>
-                            </thead>
-                            <tbody>
-
-                            </tbody>
+                            
                           </table>
                         </div>
                       </div>
@@ -200,29 +197,13 @@ include_once("modal/modalPedidos.php");
                 </div>
 
 
-                <div class="tab-pane fade mt-3" id="three" role="tabpanel" aria-labelledby="three-tab">
+                <div class="tab-pane fade mt-3" id="four" role="tabpanel" aria-labelledby="four-tab">
                   <div class="col-md-12 align-self-right">
                     <div class="card">
                       <div class="card-block">
                         <div class="table-responsive">
                           <table class="table table-striped table-bordered " id="tablaBatchCerrados">
-                            <thead>
-                              <tr>
-                                <th>Batch</th>
-                                <th>Orden</th>
-                                <th>Referencia</th>
-                                <th>Nombre</th>
-                                <th>Lote</th>
-                                <th>Tamaño(kg)</th>
-                                <th>Propietario</th>
-                                <th>Creación</th>
-                                <th>Programación</th>
-                                <th>Multi</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-
-                            </tbody>
+                            
                           </table>
                         </div>
                       </div>

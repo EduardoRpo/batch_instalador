@@ -17,8 +17,12 @@ $(document).on("mouseleave", ".link-editarMulti", function(e) {
 /* Cargar la data de la fila */
 
 $("#tablaBatch tbody").on("click", "tr", function() {
-    batch = tabla.row(this).data();
+    linea = tablaBatch.row(this).data();
 });
+
+/* $("#tablaPreBatch tbody").on("click", "tr", function() {
+    fila = tablaPreBatch.row(this).data();
+}); */
 
 /* Almacenar referencias para los procesos de clonado y multipresentacion */
 
@@ -87,7 +91,7 @@ createMulti = (index) => {
 
 //Cargar Select Referencias con Multipresentacion
 
-function cargarMulti(multi) {
+async function cargarMulti(multi) {
     let $select = $(`#MultiReferencia${index}`);
 
     $select.empty();
@@ -170,18 +174,22 @@ $(document).on("click", ".link-editarMulti", function(e) {
     $.ajax({
         url: `/api/multi/${id_batch}`,
         success: function(resp) {
-
+            lote = 0
             for (let i = 0; i < resp.length; i++)
-                multipresentacion(data.referencia)
-            debugger
-            for (let i = 0; i < resp.length; i++) {
-                $(`#MultiReferencia${i + 1}`).val(resp[i].referencia);
-                $(`#cantidadMulti${i + 1}`).val(resp[i].cantidad);
-                $(`#tamanioloteMulti${i + 1}`).val(resp[i].total);
-                $(`#densidadMulti${i + 1}`).val(resp[i].densidad);
-                $(`#presentacionMulti${i + 1}`).val(resp[i].presentacion);
-                //$(`#sumaMulti${id}`).val(CalculoloteMulti(id));
-            };
+                multipresentacion(resp[i].referencia)
+
+            setTimeout(function() {
+                for (let i = 0; i < resp.length; i++) {
+                    $(`#MultiReferencia${i + 1}`).val(resp[i].referencia);
+                    $(`#cantidadMulti${i + 1}`).val(resp[i].cantidad);
+                    $(`#tamanioloteMulti${i + 1}`).val(resp[i].total);
+                    $(`#densidadMulti${i + 1}`).val(resp[i].densidad);
+                    $(`#presentacionMulti${i + 1}`).val(resp[i].presentacion);
+                    lote = lote + resp[i].total
+                    $(`#sumaMulti`).val(lote);
+                };
+            }, 1000);
+
         },
     });
 
