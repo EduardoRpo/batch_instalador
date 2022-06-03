@@ -37,4 +37,31 @@ class ProductsDao
         $this->logger->notice("granel Obtenidos", array('granel' => $granel));
         return $granel;
     }
+
+    public function findAllGranel()
+    {
+        $connection = Connection::getInstance()->getConnection();
+        $stmt = $connection->prepare("SELECT p.referencia, p.nombre_referencia
+                                             FROM producto p
+                                      WHERE referencia LIKE '%G%'
+                                      ORDER BY nombre_referencia ASC");
+        $stmt->execute();
+        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        $granel = $stmt->fetchAll($connection::FETCH_ASSOC);
+        $this->logger->notice("granel Obtenidos", array('granel' => $granel));
+        return $granel;
+    }
+
+    public function findAllGranelByReference($referencia)
+    {
+        $connection = Connection::getInstance()->getConnection();
+        $stmt = $connection->prepare("SELECT p.referencia, p.nombre_referencia, p.base_instructivo 
+                                      FROM producto p 
+                                      WHERE p.referencia = :referencia");
+        $stmt->execute(['referencia' => $referencia]);
+        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        $granel = $stmt->fetchAll($connection::FETCH_ASSOC);
+        $this->logger->notice("granel Obtenidos", array('granel' => $granel));
+        return $granel;
+    }
 }

@@ -12,3 +12,9 @@ $app->get('/productsGranel', function (Request $request, Response $response, $ar
   $response->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
+
+$app->get('/granel', function (Request $request, Response $response, $args) use ($productsDao) {
+  $batch = $productsDao->findAllGranel();
+  $response->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
+});

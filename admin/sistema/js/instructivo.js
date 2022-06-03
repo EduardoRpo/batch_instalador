@@ -18,31 +18,23 @@ $("#link_preparaciones").css("background", "coral");
 //function cargarSelectorModulo() {
 
 $.ajax({
-    method: "POST",
-    url: "php/c_instructivo.php",
-    data: { operacion: "1" },
-
-    success: function(response) {
-        var info = JSON.parse(response);
+    /*  method: "POST",
+     url: "php/c_instructivo.php",
+     data: { operacion: "1" }, */
+    url: '/api/granel',
+    success: function(resp) {
+        //var info = JSON.parse(response);
         let $selectProductos = $("#cmbReferenciaProductos");
 
         $selectProductos.empty();
-        $selectProductos.append(
-            "<option disabled selected>" + "Seleccionar" + "</option>"
-        );
+        $selectProductos.append("<option disabled selected>Seleccionar</option>");
 
-        $.each(info.data, function(i, value) {
-            $selectProductos.append(
-                '<option value ="' +
-                value.referencia +
-                '">' +
-                value.referencia +
-                "</option>"
-            );
+        $.each(resp, function(i, value) {
+            $selectProductos.append(`<option value = '${value.referencia}'>${value.referencia}</option>`);
         });
     },
-    error: function(response) {
-        console.log(response);
+    error: function(resp) {
+        console.log(resp);
     },
 });
 //}
