@@ -18,9 +18,8 @@ const alertConfirm = (data) => {
                 alertify.success('Ok');
             },
             function() {
-                //alertify.error('Cancel');
                 $('.checkboxPedidos').prop('checked', false);
-                //$('.checkboxPedidos').change();
+                //Limpiar inputs y Array
             }
         )
         .set('labels', { ok: 'Si', cancel: 'No' });
