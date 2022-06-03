@@ -1,8 +1,8 @@
 const alertConfirm = (data) => {
-  alertify
-    .confirm(
-      'Samara Cosmetics',
-      `<p>¿Desea programar los lotes?<p><br></p><table class="table table-striped table-bordered dataTable no-footer text-center" aria-describedby="tablaPreBatch_info">
+    alertify
+        .confirm(
+            'Samara Cosmetics',
+            `<p>¿Desea programar los lotes?<p><br></p><table class="table table-striped table-bordered dataTable no-footer text-center" aria-describedby="tablaPreBatch_info">
                 <thead>
                   <tr>
                     <th>Granel</th>
@@ -14,44 +14,44 @@ const alertConfirm = (data) => {
                   ${(row = addRows(data))}
                 </tbody>
             </table>`,
-      function () {
-        alertify.success('Ok');
-      },
-      function () {
-        //alertify.error('Cancel');
-        $('.checkboxPedidos').prop('checked', false);
-        $('.checkboxPedidos').change();
-      }
-    )
-    .set('labels', { ok: 'Si', cancel: 'No' });
+            function() {
+                alertify.success('Ok');
+            },
+            function() {
+                //alertify.error('Cancel');
+                $('.checkboxPedidos').prop('checked', false);
+                //$('.checkboxPedidos').change();
+            }
+        )
+        .set('labels', { ok: 'Si', cancel: 'No' });
 };
 
 addRows = (data) => {
-  granel = data.granel;
-  tamanio = data.tamanio;
-  cantidad = data.cantidades;
+    granel = data.granel;
+    tamanio = data.tamanio;
+    cantidad = data.cantidades;
 
-  row = [];
-  for (i = 0; i < granel.length; i++) {
-    row.push(
-      `<tr>
+    row = [];
+    for (i = 0; i < granel.length; i++) {
+        row.push(
+            `<tr>
           <td>${granel[i]}</td>
           <td>${tamanio[i].toFixed(2)}</td>
           <td>${cantidad[i]}</td>
           ${(symbol = check(tamanio[i]))}
         </tr>`
-    );
-  }
-  return row;
+        );
+    }
+    return row;
 };
 
 check = (tamanio) => {
-  if (tamanio >= 2500) {
-    symbol =
-      '<td style="font-size:22px; font-weight: bold; color:red;">&#x2716</td>';
-  } else
-    symbol =
-      '<td style="font-size:22px; font-weight: bold; color:green;">&#x2714</td>';
+    if (tamanio >= 2500) {
+        symbol =
+            '<td style="font-size:22px; font-weight: bold; color:red;">&#x2716</td>';
+    } else
+        symbol =
+        '<td style="font-size:22px; font-weight: bold; color:green;">&#x2714</td>';
 
-  return symbol;
+    return symbol;
 };
