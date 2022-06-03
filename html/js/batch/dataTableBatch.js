@@ -24,7 +24,9 @@ $(document).ready(function() {
                       final: maxDateFilter,
                   }, */
         },
-
+        order: [
+            [1, 'desc']
+        ],
         columns: [{
                 defaultContent: "<input type='radio' id='express' name='optradio' class='link-select'>",
             },
@@ -245,6 +247,9 @@ $(document).ready(function() {
             url: '/api/batchcerrados',
             dataSrc: '',
         },
+        order: [
+            [0, 'desc']
+        ],
 
         columns: [{
                 title: 'Batch',
@@ -303,6 +308,9 @@ $(document).ready(function() {
             url: '/api/batchInactivos',
             dataSrc: '',
         },
+        order: [
+            [0, 'desc']
+        ],
 
         columns: [{
                 title: 'Batch',
@@ -424,7 +432,7 @@ $(document).ready(function() {
     });
 
     $("#tablaBatchInactivos tbody").on("click", "tr", function() {
-        fila = tablaBatchInactivos.row(this).data();
+        data = tablaBatchInactivos.row(this).data();
     });
 
 

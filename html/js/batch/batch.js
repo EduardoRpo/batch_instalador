@@ -247,10 +247,9 @@ function guardarDatos() {
 
 message = (data) => {
     if (data.success == true) {
+        actualizarTabla();
         cerrarModal();
         alertify.success(data.message);
-        actualizarTabla();
-        return false;
     } else if (data.error == true)
         alertify.error(data.message);
     else if (data.info == true)
@@ -260,6 +259,9 @@ message = (data) => {
 /* Actualizar tabla */
 
 function actualizarTabla() {
-    $("#tablaPreBatch").DataTable().clear();
-    $("#tablaPreBatch").DataTable().ajax.reload();
+    $("#tablaBatch").DataTable().clear();
+    $("#tablaBatch").DataTable().ajax.reload();
+
+    $("#tablaBatchInactivos").DataTable().clear();
+    $("#tablaBatchInactivos").DataTable().ajax.reload();
 }

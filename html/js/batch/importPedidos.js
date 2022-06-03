@@ -62,7 +62,7 @@ savePedidos = (data) => {
         data: { data: data },
         success: function(resp) {
             if (resp.success) {
-                actualizarTabla()
+                actualizarTablaPedidos()
                 $('.cardImportarPedidos').hide(800);
                 $('#filePedidos').val('');
             }
@@ -73,7 +73,7 @@ savePedidos = (data) => {
 
 /* Actualizar tabla */
 
-function actualizarTabla() {
+function actualizarTablaPedidos() {
     $("#tablaPreBatch").DataTable().clear();
     $("#tablaPreBatch").DataTable().ajax.reload();
 }
