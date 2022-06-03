@@ -14,16 +14,6 @@ $(document).on("mouseleave", ".link-editarMulti", function(e) {
 })
 
 
-/* Cargar la data de la fila */
-
-$("#tablaBatch tbody").on("click", "tr", function() {
-    linea = tablaBatch.row(this).data();
-});
-
-/* $("#tablaPreBatch tbody").on("click", "tr", function() {
-    fila = tablaPreBatch.row(this).data();
-}); */
-
 /* Almacenar referencias para los procesos de clonado y multipresentacion */
 
 $(document).on("click", ".link-select", function(e) {

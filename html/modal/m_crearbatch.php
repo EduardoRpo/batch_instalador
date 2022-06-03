@@ -93,7 +93,7 @@
                         </div>
                         <div class="col-md-4 col-2 align-self-center">
                             <label for="recipient-name" class="col-form-label"><b>Fecha de Pesaje (Sugerida)</b></label>
-                            <input type="date" class="form-control" id="fechaprogramacion" name="fechaprogramacion" value="" readonly min="<?php $hoy = date("Y-m-d"); echo $hoy; ?>">
+                            <input type="date" class="form-control" id="fechaProgramacionSugerida" name="fechaProgramacionSugerida" value="" readonly min="<?php $hoy = date("Y-m-d"); echo $hoy; ?>">
                         </div>
 
                     </div>
@@ -110,8 +110,8 @@
                         <label class="labelTanques">Total</label>
                         <label class="labelTanques"></label>
 
-                        <select class="form-control tnq" id="cmbTanque1" onchange="validarTanque(1);"></select>
-                        <input type="number" class="form-control tnq" id="txtCantidad1" onkeyup="CalcularTanque(1)">
+                        <select class="form-control tnq" id="cmbTanque1"></select> <!-- onchange="validarTanque(1);" -->
+                        <input type="number" class="form-control tnq" id="txtCantidad1"> <!-- onkeyup="CalcularTanque(1) -->
                         <input type="number" class="form-control tnq" id="txtTotal1" readonly>
                         <!-- <button class="btn btn-warning" id="btnEliminar1" type="button" onclick="eliminarTanque(1);">X</button> -->
 

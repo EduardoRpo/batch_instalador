@@ -247,7 +247,53 @@ function cargarTanques() {
 }
 /* Calcular el valor de los tanques */
 
-function validarTanque(id) {
+$(document).on("change", "#cmbTanque1", function(e) {
+    $('#txtCantidad1').click();
+
+});
+
+$(document).on("click keyup", "#txtCantidad1", function(e) {
+    let tanque = parseFloat($('#cmbTanque1').val());
+    let tamanioTanque = parseFloat($('#txtCantidad1').val());
+
+    if (tamanioTanque < 0 || tamanioTanque == '') {
+        alertify.set("notifier", "position", "top-right");
+        alertify.error("Ingrese la cantidad de Tanques");
+        return false
+    }
+
+    if (tanque == null || isNaN(tanque)) {
+        alertify.set("notifier", "position", "top-right");
+        alertify.error("Seleccione el tamaño del tanque");
+        return false
+    }
+
+    let cantidadLote = parseFloat($("#tamanototallote").val());
+
+    if (isNaN(cantidadLote)) {
+        $("#tamanototallote").val('')
+        alertify.set("notifier", "position", "top-right");
+        alertify.error("Calcule el tamaño del lote");
+        return false
+    }
+
+    tamanioTotalTanque = tanque * tamanioTanque
+
+    if (tamanioTotalTanque <= cantidadLote) {
+        alertify.set("notifier", "position", "top-right");
+        alertify.error("La configuración de Tanques No supera el Tamaño del lote");
+        $("#sumaTanques").val('');
+        $("#txtTotal1").val('');
+        return false;
+    } else {
+        $("#sumaTanques").val(tamanioTotalTanque);
+        $("#txtTotal1").val(tamanioTotalTanque);
+    }
+});
+
+
+
+/* function validarTanque(id) {
     const cant = $("#txtCantidad" + id).val();
 
     if (cant != "") {
@@ -299,7 +345,7 @@ function CalcularTanque(id) {
     } else {
         $("#sumaTanques").val(sumaTanques);
     }
-}
+} */
 
 function cerrarModal() {
     $("#modalCrearBatch").modal("hide");

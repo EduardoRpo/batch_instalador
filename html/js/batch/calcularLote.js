@@ -1,13 +1,6 @@
 $(document).ready(function() {
     const pedidosProgramar = [];
 
-    /* Cargar la data de la fila */
-
-    $('#tablaPreBatch tbody').on('click', 'tr', function() {
-        fila = tablaPreBatch.row(this).data();
-    });
-
-
     // Seleccionar checkbox
     $(document).on('blur', '.cantProgram', function(e) {
         e.preventDefault();

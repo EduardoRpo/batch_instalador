@@ -221,10 +221,10 @@ include_once("modal/modalPedidos.php");
 
     <?php require_once __DIR__ . '/partials/scriptsJS.php'; ?>
 
+    <script src="js/batch/dataTableBatch.js"></script>
     <script src="js/utils/custom.js"></script>
     <script src="js/batch/multipresentacion.js"></script>
     <script src="js/batch/batch.js"></script>
-    <script src="js/batch/dataTableBatch.js"></script>
     <script src="js/batch/clonar.js"></script>
     <script src="js/batch/crearbatch.js"></script>
     <script src="js/batch/filtradofechas.js"></script>
