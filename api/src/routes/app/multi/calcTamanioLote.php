@@ -16,7 +16,6 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
   $referencia = array();
 
   for ($i = 0; $i < sizeof($dataPedidos); $i++) {
-    //$dataPedidos[$i]['referencia'] = substr($dataPedidos[$i]['referencia'], 6, 9);
     $dataMulti = $multiDao->findProductMultiByRef($dataPedidos[$i]['referencia']);
     $tamanio_lote = $calcTamanioMultiDao->calcularTamanioLote($dataMulti, $dataPedidos[$i]['cantidad']);
     $dataPedidos[$i]['tamanio_lote'] = $tamanio_lote;

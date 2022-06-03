@@ -28,7 +28,7 @@ class PreBatchDao
                 FROM `explosion_materiales_pedidos_registro` exp 
                 INNER JOIN producto p ON p.referencia = exp.id_producto 
                 INNER JOIN propietario pp ON pp.id = p.id_propietario;"; */
-        $sql = "SELECT pp.nombre AS propietario, exp.pedido, exp.fecha_pedido, (SELECT referencia FROM producto 
+        $sql = "SELECT pp.nombre AS propietario, exp.pedido, exp.fecha_pedido, exp.estado, (SELECT referencia FROM producto 
                 WHERE multi = (SELECT multi FROM producto WHERE referencia = exp.id_producto) 
                 AND presentacion_comercial = 1) AS granel, exp.id_producto, p.nombre_referencia, exp.cant_original, exp.cantidad, 
                     DATE_ADD(exp.fecha_pedido, INTERVAL 10 DAY) AS fecha_pesaje, DATE_ADD(exp.fecha_pedido, INTERVAL 11 DAY) AS fecha_preparacion, 
@@ -94,7 +94,7 @@ class PreBatchDao
             $query = $connection->prepare($sql);
             $query->execute([
                 'pedido' => trim($dataPedidos['documento']),
-                'id_producto' => trim("M-".$dataPedidos['producto']),
+                'id_producto' => trim("M-" . $dataPedidos['producto']),
                 'cant_original' => trim($dataPedidos['cant_original']),
                 'cantidad' => trim($dataPedidos['cantidad']),
                 'fecha_pedido' => $fecha_dtco,
