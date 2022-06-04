@@ -46,6 +46,12 @@ $app->get('/batchcerrados', function (Request $request, Response $response, $arg
 $app->post('/saveBatch', function (Request $request, Response $response, $args) use ($batchDao, $ultimoBatchDao, $tanquesDao, $controlFirmasDao, $multiDao) {
   $dataBatch = $request->getParsedBody();
 
+  //Si el data esta vacio
+  if (sizeof($dataBatch) == 0) {
+    session_start();
+    $dataBatch = $_SESSION['dataPedidos'];
+  }
+
   /* Crear el batch */
   $resp = $batchDao->saveBatch($dataBatch);
 

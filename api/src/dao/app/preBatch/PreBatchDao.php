@@ -27,7 +27,7 @@ class PreBatchDao
                     DATE_ADD(exp.fecha_pedido, INTERVAL 15 DAY) AS entrega 
                 FROM `explosion_materiales_pedidos_registro` exp 
                 INNER JOIN producto p ON p.referencia = exp.id_producto 
-                INNER JOIN propietario pp ON pp.id = p.id_propietario;"; */
+                INNER JOIN propietario pp ON pp.id = p.id_propietario;";   */
         $sql = "SELECT pp.nombre AS propietario, exp.pedido, exp.fecha_pedido, exp.estado, exp.cantidad_acumulada, (SELECT referencia FROM producto 
                 WHERE multi = (SELECT multi FROM producto WHERE referencia = exp.id_producto) 
                 AND presentacion_comercial = 1) AS granel, exp.id_producto, p.nombre_referencia, exp.cant_original, exp.cantidad, 

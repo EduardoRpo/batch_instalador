@@ -17,20 +17,6 @@ $(document).ready(function () {
       return false;
     }
 
-    /* Si ya existe una cantidad en esa fila remplazarla
-    if (pedidosProgramar.length > 0) {
-      // Eliminar objeto del array
-      for (i = 0; i < pedidosProgramar.length; i++) {
-        if (
-          referencia == pedidosProgramar[i].ref &&
-          numPedido == pedidosProgramar[i].numPedido &&
-          cantidad != pedidosProgramar[i].cantidad
-        ) {
-          deleteArray(numPedido);
-          arrayPreprogramados(referencia, cantidad, numPedido);
-        }
-      }
-    } */
     arrayPreprogramados(referencia, cantidad, numPedido);
 
     //if (!$(`#${id_checkbox}`).is(':checked')) {
@@ -124,10 +110,10 @@ $(document).ready(function () {
         if (numPedido == pedidosProgramar[i].numPedido)
           pedidosProgramar[i]['fecha_insumo'] = date;
       }
-    } else {
+    } /*else {
       alertify.set('notifier', 'position', 'top-right');
       alertify.error('Ingrese cantidad a programar');
       return false;
-    }
+    }*/
   };
 });
