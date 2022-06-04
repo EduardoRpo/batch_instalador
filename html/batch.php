@@ -147,14 +147,15 @@ include_once("modal/modalPedidos.php");
                       <div class="mt-3 text-center">
                         <button class="toggle-vis btn btn-primary hideTitle" id="0">Propietario</button>
                         <button class="toggle-vis btn btn-primary hideTitle" id="1">Pedido</button>
-                        <button class="toggle-vis btn btn-primary hideTitle" id="2">Fecha_Dcto</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="2">F_Pedidos</button>
                         <button class="toggle-vis btn btn-primary hideTitle" id="3">Granel</button>
                         <button class="toggle-vis btn btn-primary hideTitle" id="4">Referencia</button>
                         <button class="toggle-vis btn btn-primary hideTitle" id="5">Producto</button>
                         <button class="toggle-vis btn btn-primary hideTitle" id="6">Cant_original</button>
-                        <button class="toggle-vis btn btn-primary hideTitle" id="7">Cantidad</button>
-                        <button class="toggle-vis btn btn-primary hideTitle" id="8">Cant_Programar</button>
-                        <button class="toggle-vis btn btn-primary" id="calcLote" style="margin-left:250px">Calcular Lote</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="7">Saldo Ofima</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="8">Acum_Prog</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="9">Cant_Programar</button>
+                        <button class="toggle-vis btn btn-primary" id="calcLote" style="margin-left:200px">Calcular Lote</button>
 
                       </div>
                       <div class="card-block">
@@ -174,21 +175,21 @@ include_once("modal/modalPedidos.php");
                       <div class="card-block">
                         <div class="table-responsive">
                           <table class="table table-striped table-bordered " id="tablaBatchInactivos" name="tablaBatchInactivos">
-                            
+
                           </table>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                
+
                 <div class="tab-pane fade show active mt-3" id="three" role="tabpanel" aria-labelledby="three-tab">
                   <div class="col-md-12 align-self-right">
                     <div class="card">
                       <div class="card-block">
                         <div class="table-responsive">
                           <table class="table table-striped table-bordered " id="tablaBatch" name="tablaBatch">
-                            
+
                           </table>
                         </div>
                       </div>
@@ -203,7 +204,7 @@ include_once("modal/modalPedidos.php");
                       <div class="card-block">
                         <div class="table-responsive">
                           <table class="table table-striped table-bordered " id="tablaBatchCerrados">
-                            
+
                           </table>
                         </div>
                       </div>
@@ -221,10 +222,10 @@ include_once("modal/modalPedidos.php");
 
     <?php require_once __DIR__ . '/partials/scriptsJS.php'; ?>
 
+    <script src="js/batch/dataTableBatch.js"></script>
     <script src="js/utils/custom.js"></script>
     <script src="js/batch/multipresentacion.js"></script>
     <script src="js/batch/batch.js"></script>
-    <script src="js/batch/dataTableBatch.js"></script>
     <script src="js/batch/clonar.js"></script>
     <script src="js/batch/crearbatch.js"></script>
     <script src="js/batch/filtradofechas.js"></script>
@@ -239,6 +240,7 @@ include_once("modal/modalPedidos.php");
     <script src="../html/js/import/file.js"></script>
     <script src="../html/js/global/notificaciones.js"></script>
     <script src="../html/js/batch/calcularLote.js"></script>
+    <script src="../html/js/batch/generalPreprogramacion.js"></script>
 
 </body>
 

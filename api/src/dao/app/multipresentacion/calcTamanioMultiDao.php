@@ -19,7 +19,7 @@ class calcTamanioMultiDao
 
     public function calcularTamanioLote($data, $cantidad)
     {
-        $tamanioLote = (($data['densidad'] * floatval($data['presentacion']) * floatval($cantidad)) * (1 + $data['ajuste']))/1000;
+        $tamanioLote = ((floatval($data['densidad']) * floatval($data['presentacion']) * floatval($cantidad)) * (1 + $data['ajuste']))/1000;
         return $tamanioLote;
     }
 }

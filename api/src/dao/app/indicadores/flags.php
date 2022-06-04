@@ -95,7 +95,7 @@ class MultiDao extends ControlFirmasMultiDao
                 'total' => $multipresentacion['tamaniopresentacion'],
             ]);
 
-            /* Actualiza batch con multipresentacion */
+            /* Actualiza batch y explosion_materiales_pedidos_registro con multipresentacion */
             if ($result) {
                 $sql = "UPDATE batch SET multi = '1' WHERE id_batch= :id_batch";
                 $query = $connection->prepare($sql);

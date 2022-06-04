@@ -1,120 +1,133 @@
-$(document).ready(function() {
-    const pedidosProgramar = [];
+$(document).ready(function () {
+  pedidosProgramar = [];
 
-    /*    $(document).on('click', '#calcLote', function(e) {
-             e.preventDefault();
-             $("input:checkbox:checked").each(
-                 function() {
-                     alert("El checkbox con valor " + this.id + " está seleccionado");
-                 }
-             );
-         });
-      */
+  // Seleccionar checkbox
+  $(document).on('blur', '.cantProgram', function (e) {
+    e.preventDefault();
+    id_input = this.id;
+    id_checkbox = id_input.substr(5, 13);
+    referencia = id_input.substr(-7, 7);
+    cantidad = $(`#${id_input}`).val();
+    numPedido = id_checkbox.slice(0, -8);
 
-    /* Cargar la data de la fila */
+    if (cantidad == 0) {
+      alertify.set('notifier', 'position', 'top-right');
+      alertify.error('La cantidad a programar no puede ser cero (0)');
+      $(`#${id_checkbox}`).prop('checked', false);
+      return false;
+    }
 
-    $('#tablaPreBatch tbody').on('click', 'tr', function() {
-        fila = tablaPreBatch.row(this).data();
-    });
-
-    $(document).on('change', '.checkboxPedidos', function(e) {
-        e.preventDefault();
-        referencia = this.id;
-
-        if ($(this).is(':checked')) {
-            pedidos = {};
-
-            cantidad = $(`#cant-${referencia}`).val();
-            granel = fila.granel;
-
-            if (cantidad == 0) {
-                alertify.set('notifier', 'position', 'top-right');
-                alertify.error('La cantidad a programar no puede ser cero (0)');
-                $(this).prop('checked', false);
-                return false;
-            }
-
-            pedidos.referencia = referencia;
-            pedidos.cantidad = cantidad;
-            pedidos.granel = granel;
-
-            pedidosProgramar.push(pedidos);
-        } else {
-            $(`#cant-${referencia}`).val('');
-
-            //borrar referencia en el array y objeto
+    /* Si ya existe una cantidad en esa fila remplazarla
+    if (pedidosProgramar.length > 0) {
+      // Eliminar objeto del array
+      for (i = 0; i < pedidosProgramar.length; i++) {
+        if (
+          referencia == pedidosProgramar[i].ref &&
+          numPedido == pedidosProgramar[i].numPedido &&
+          cantidad != pedidosProgramar[i].cantidad
+        ) {
+          deleteArray(numPedido);
+          arrayPreprogramados(referencia, cantidad, numPedido);
         }
+      }
+    } */
+    arrayPreprogramados(referencia, cantidad, numPedido);
+
+    //if (!$(`#${id_checkbox}`).is(':checked')) {
+    $(`#${id_checkbox}`).prop('checked', true);
+    for (i = 0; i < pedidosProgramar.length; i++) {
+      if (pedidosProgramar[i].fecha_insumo == undefined)
+        fechaInsumo(
+          `date-${id_checkbox}`,
+          id_checkbox,
+          numPedido,
+          pedidosProgramar
+        );
+    }
+    //}
+  });
+
+  //Eliminar registros en el array
+
+  $(document).on('change', '.checkboxPedidos', function (e) {
+    e.preventDefault();
+    id_checkbox = this.id;
+    numPedido = id_checkbox.slice(0, -8);
+
+    if (pedidosProgramar.length > 0) {
+      $(`#cant-${id_checkbox}`).val('');
+      $(`#date-${id_checkbox}`).val('');
+      deleteArray(numPedido);
+    } else $(`#${id_checkbox}`).prop('checked', false);
+  });
+
+  arrayPreprogramados = (referencia, cantidad, numPedido) => {
+    /* validar que el numero de pedido y referencia no esten en el array e insertar 
+          de los contrario actualizar la cantidad */
+
+    for (i = 0; i < pedidosProgramar.length; i++) {
+      if (
+        (referencia == pedidosProgramar[i].referencia &&
+          numPedido == pedidosProgramar[i].numPedido &&
+          cantidad != pedidosProgramar[i].cantidad) ||
+        cantidad == pedidosProgramar[i].cantidad
+      )
+        deleteArray(numPedido);
+    }
+
+    pedidos = {};
+    granel = fila.granel;
+
+    pedidos.referencia = referencia;
+    pedidos.cantidad = cantidad;
+    pedidos.granel = granel;
+    pedidos.numPedido = numPedido;
+
+    pedidosProgramar.push(pedidos);
+  };
+
+  $(document).on('click', '#calcLote', function (e) {
+    e.preventDefault();
+    $.ajax({
+      type: 'POST',
+      url: '/api/calcTamanioLote',
+      data: { data: pedidosProgramar },
+      success: function (resp) {
+        // Ventana alert confirm
+        alertConfirm(resp);
+      },
     });
+  });
 
+  deleteArray = (numPedido) => {
+    for (i = 0; i < pedidosProgramar.length; i++) {
+      if (pedidosProgramar[i].numPedido == numPedido) {
+        pedidosProgramar.splice(i, 1);
+      }
+    }
+  };
 
-    /* $(document).on('blur', '.form-control-updated', function(e) {
-        id_checkbox = this.id; //M-21516
-        id_checkbox = id_checkbox.substr(5, 9)
-        $("#id_checkbox").prop("checked", true);
-        $('.checkboxPedidos').change();
-    }) */
+  // Fecha inicio
+  $(document).on('blur', '.dateInsumos', function (e) {
+    e.preventDefault();
+    id_date = this.id;
+    id_checkbox = id_date.substr(5, 13);
+    numPedido = id_date.slice(5, -8);
 
+    fechaInsumo(id_date, id_checkbox, numPedido, pedidosProgramar);
+  });
 
-    $(document).on('click', '#calcLote', function(e) {
-        $.ajax({
-            type: 'POST',
-            url: '/api/calcTamanioLote',
-            data: { data: pedidosProgramar },
-            success: function(resp) {
-                resp = Object.entries(resp);
-
-                // Ventana
-                alertify.confirm(
-                    'Samara Cosmetics',
-                    `<p>¿Desea programar los lotes?<p><br></p><table class="table table-striped table-bordered dataTable no-footer text-center" aria-describedby="tablaPreBatch_info">
-                      <thead>
-                        <tr>
-                          <th>Granel</th>
-                          <th>Tamaño (Kg)</th>
-                          <th>Cantidad (Und)</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        ${(row = addRows(resp))}
-                      </tbody>
-                  </table>`,
-                    function() {
-                        alertify.success('Ok');
-                    },
-                    function() {
-                        alertify.error('Cancel');
-                    }
-                ).set('labels', { ok: 'Si', cancel: 'No' });
-            },
-        });
-    });
-
-    addRows = (data) => {
-        granel = [];
-        tamanio = [];
-        for (i = 0; i < data.length; i++) {
-            granel.push(data[i][0]);
-            tamanio.push(data[i][1]);
-        }
-
-        row = [];
-        for (i = 0; i < data.length; i++) {
-            row.push(
-                `<tr><td>${granel[i]}</td><td>${tamanio[i]
-                }</td><td style="font-size:22px; font-weight: bold">${(symbol = check(
-                    tamanio[i]
-                ))}</td></tr>`
-            );
-        }
-
-        return row;
-    };
-
-    check = (tamanio) => {
-        if (tamanio >= 2500) {
-            symbol = '&#x2716';
-        } else symbol = '&#x2714';
-
-        return symbol;
-    };
+  fechaInsumo = (id_date, id_checkbox, numPedido, pedidosProgramar) => {
+    if ($(`#${id_checkbox}`).is(':checked')) {
+      date = $(`#${id_date}`).val();
+      for (i = 0; i < pedidosProgramar.length; i++) {
+        if (numPedido == pedidosProgramar[i].numPedido)
+          pedidosProgramar[i]['fecha_insumo'] = date;
+      }
+    } else {
+      alertify.set('notifier', 'position', 'top-right');
+      alertify.error('Ingrese cantidad a programar');
+      return false;
+    }
+  };
 });

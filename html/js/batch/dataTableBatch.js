@@ -1,113 +1,114 @@
 $(document).ready(function() {
-
     /* function crearTablaBatch(
-            columna_busqueda = "",
-            minDateFilter = "",
-            maxDateFilter = ""
-        ) {
-         */
-    tablaBatch = $("#tablaBatch").DataTable({
+                columna_busqueda = "",
+                minDateFilter = "",
+                maxDateFilter = ""
+            ) {
+             */
+    tablaBatch = $('#tablaBatch').DataTable({
         pageLength: 50,
         responsive: true,
         scrollCollapse: true,
-        language: { url: "../../../admin/sistema/admin_componentes/es-ar.json" },
+        language: { url: '../../../admin/sistema/admin_componentes/es-ar.json' },
         oSearch: { bSmart: false },
 
         ajax: {
             //method: "POST",
-            url: "/api/batch",
-            dataSrc: "",
+            url: '/api/batch',
+            dataSrc: '',
             /* data: {
-                operacion: "1",
-                proceso: "1",
-                busqueda: columna_busqueda,
-                inicio: minDateFilter,
-                final: maxDateFilter,
-            }, */
+                            operacion: "1",
+                            proceso: "1",
+                            busqueda: columna_busqueda,
+                            inicio: minDateFilter,
+                            final: maxDateFilter,
+                        }, */
         },
-
+        order: [
+            [1, 'desc']
+        ],
         columns: [{
                 defaultContent: "<input type='radio' id='express' name='optradio' class='link-select'>",
             },
             {
                 title: 'Batch',
-                data: "id_batch"
+                data: 'id_batch',
             },
             {
                 title: 'No Orden',
-                data: "numero_orden",
-                className: "uniqueClassName"
+                data: 'numero_orden',
+                className: 'uniqueClassName',
             },
             {
                 title: 'Referencia',
-                data: "referencia",
-                className: "uniqueClassName"
+                data: 'referencia',
+                className: 'uniqueClassName',
             },
             {
                 title: 'Producto',
-                data: "nombre_referencia"
+                data: 'nombre_referencia',
             },
             {
                 title: 'No Lote',
-                data: "numero_lote"
+                data: 'numero_lote',
             },
             {
                 title: 'Tamaño Lote',
-                data: "tamano_lote",
-                className: "uniqueClassName",
-                render: $.fn.dataTable.render.number(".", ",", 0, ""),
+                data: 'tamano_lote',
+                className: 'uniqueClassName',
+                render: $.fn.dataTable.render.number('.', ',', 0, ''),
             },
             {
                 title: 'Propietario',
-                data: "nombre"
+                data: 'nombre',
             },
             {
                 title: 'Fecha Creación',
-                data: "fecha_creacion",
-                className: "uniqueClassName"
+                data: 'fecha_creacion',
+                className: 'uniqueClassName',
             },
             {
                 title: 'Fecha Programación',
-                data: "fecha_programacion",
-                className: "uniqueClassName"
+                data: 'fecha_programacion',
+                className: 'uniqueClassName',
             },
             {
                 title: 'Estado',
-                data: "estado",
-                className: "uniqueClassName",
+                data: 'estado',
+                className: 'uniqueClassName',
                 render: (data, type, row) => {
-                    "use strict";
+                    'use strict';
                     return data == 1 ?
-                        "Sin Formula y/o Instructivo" :
+                        'Sin Formula y/o Instructivo' :
                         data == 2 ?
-                        "Inactivo" :
+                        'Inactivo' :
                         data == 3 ?
-                        "Pesaje" :
+                        'Pesaje' :
                         data == 3.5 ?
-                        "Preparación" :
+                        'Preparación' :
                         data == 4 ?
-                        "Preparación" :
+                        'Preparación' :
                         data == 4.5 ?
-                        "Aprobación" :
+                        'Aprobación' :
                         data == 5 ?
-                        "Aprobación" :
+                        'Aprobación' :
                         data == 5.5 ?
-                        "Envasado/Acondicionamiento" :
+                        'Envasado/Acondicionamiento' :
                         data == 6 ?
-                        "Envasado/Acondicionamiento" :
+                        'Envasado/Acondicionamiento' :
                         data == 6.5 ?
-                        "Microbiologia/Fisicoquimico" :
+                        'Microbiologia/Fisicoquimico' :
                         data == 7 ?
-                        "Microbiologia/Fisicoquimico" :
+                        'Microbiologia/Fisicoquimico' :
                         data == 7.5 ?
-                        "Microbiologia/Fisicoquimico" :
+                        'Microbiologia/Fisicoquimico' :
                         data == 8 ?
-                        "Microbiologia/Fisicoquimico" :
+                        'Microbiologia/Fisicoquimico' :
                         data == 8.5 ?
-                        "Microbiologia/Fisicoquimico" :
+                        'Microbiologia/Fisicoquimico' :
                         data == 10 ?
-                        "Liberacion Lote" :
-                        "Cerrado";
+                        'Liberacion Lote' :
+                        'Cerrado';
                 },
             },
             {
@@ -131,7 +132,6 @@ $(document).ready(function() {
     });
     //}
 
-
     tablaPreBatch = $('#tablaPreBatch').DataTable({
         destroy: true,
         pageLength: 50,
@@ -149,22 +149,22 @@ $(document).ready(function() {
             {
                 title: 'Pedido',
                 data: 'pedido',
-                className: "text-center",
+                className: 'text-center',
             },
             {
-                title: 'Fecha_Dcto',
+                title: 'F_Pedido',
                 data: 'fecha_pedido',
-                className: "text-center",
+                className: 'text-center',
             },
             {
                 title: 'Granel',
                 data: 'granel',
-                className: "text-center",
+                className: 'text-center',
             },
             {
                 title: 'Referencia',
                 data: 'id_producto',
-                className: "text-center",
+                className: 'text-center',
             },
             {
                 title: 'Producto',
@@ -173,229 +173,235 @@ $(document).ready(function() {
             {
                 title: 'Cant_Original',
                 data: 'cant_original',
-                className: "text-center",
+                className: 'text-center',
                 render: $.fn.dataTable.render.number('.', ',', 0, ' '),
             },
             {
-                title: 'Cantidad',
+                title: 'Saldo Ofima',
                 data: 'cantidad',
-                className: "text-center",
+                className: 'text-center',
+                render: $.fn.dataTable.render.number('.', ',', 0, ' '),
+            },
+            {
+                title: 'Acum Prog',
+                data: 'cantidad_acumulada',
+                className: 'text-center',
                 render: $.fn.dataTable.render.number('.', ',', 0, ' '),
             },
             {
                 title: 'Cant_Programar',
-                data: 'id_producto',
+                data: null,
                 render: function(data) {
                     return `
-                    <input type="text" class="form-control-updated text-center" id="cant-${data}" />`;
+                    <input type="text" class="cantProgram form-control-updated text-center" id="cant-${data.pedido}-${data.id_producto}" />`;
                 },
             },
             {
                 title: 'Recep_Insumos',
-                data: 'id_producto',
+                data: null,
                 render: function(data) {
                     return `
-                    <input type="date" class="form-control-updated text-center" id="date-${data}" />`;
+                    <input type="date" class="dateInsumos form-control-updated text-center" id="date-${data.pedido}-${data.id_producto}" />`;
+                },
+            },
+            {
+                title: 'Acciones',
+                data: null,
+                className: 'uniqueClassName',
+                render: function(data) {
+                    return `
+                  <div class="form-check"><input class="form-check-input checkboxPedidos" type="checkbox" id="${data.pedido}-${data.id_producto}"></div>`;
                 },
             },
             {
                 title: 'Fecha Pesaje',
                 data: 'fecha_pesaje',
-                className: "text-center",
+                className: 'text-center',
             },
             {
                 title: 'Fecha Preparacion',
                 data: 'fecha_preparacion',
-                className: "text-center",
+                className: 'text-center',
             },
             {
                 title: 'Recepcion Insumos',
                 data: 'recepcion_insumos',
-                className: "text-center",
+                className: 'text-center',
             },
             {
                 title: 'Fecha Envasado',
                 data: 'envasado',
-                className: "text-center",
+                className: 'text-center',
             },
             {
                 title: 'Fecha Entrega',
                 data: 'entrega',
-                className: "text-center",
+                className: 'text-center',
             },
-            {
-                title: 'Acciones',
-                data: 'id_producto',
-                className: 'uniqueClassName',
-                render: function(data) {
-                    return `
-                    <div class="form-check"><input class="form-check-input checkboxPedidos" type="checkbox" id=${data}></div>`;
-                },
-            },
+
         ],
+        rowCallback: function(row, data, index) {
+            if (data['estado'] == 1) $(row).css('color', '#138c24');
+        },
     });
 
-
-
-
-
-
-
-    $("#tablaBatchCerrados").DataTable({
+    $('#tablaBatchCerrados').DataTable({
         pageLength: 50,
         responsive: true,
         scrollCollapse: true,
-        language: { url: "../../../admin/sistema/admin_componentes/es-ar.json" },
+        language: { url: '../../../admin/sistema/admin_componentes/es-ar.json' },
         oSearch: { bSmart: false },
         bAutoWidth: false,
 
         ajax: {
-            url: "/api/batchcerrados",
-            dataSrc: "",
+            url: '/api/batchcerrados',
+            dataSrc: '',
         },
+        order: [
+            [0, 'desc']
+        ],
 
         columns: [{
                 title: 'Batch',
-                data: "id_batch",
-                className: "uniqueClassName"
+                data: 'id_batch',
+                className: 'uniqueClassName',
             },
             {
                 title: 'No Orden',
-                data: "numero_orden",
-                className: "uniqueClassName"
+                data: 'numero_orden',
+                className: 'uniqueClassName',
             },
             {
                 title: 'Referencia',
-                data: "referencia",
-                className: "uniqueClassName"
+                data: 'referencia',
+                className: 'uniqueClassName',
             },
             {
                 title: 'Producto',
-                data: "nombre_referencia"
+                data: 'nombre_referencia',
             },
             {
                 title: 'No Lote',
-                data: "numero_lote"
+                data: 'numero_lote',
             },
             {
                 title: 'Tamaño Lote',
-                data: "tamano_lote",
-                className: "uniqueClassName",
-                render: $.fn.dataTable.render.number(".", ",", 0, ""),
+                data: 'tamano_lote',
+                className: 'uniqueClassName',
+                render: $.fn.dataTable.render.number('.', ',', 0, ''),
             },
             {
                 title: 'Propietario',
-                data: "nombre"
+                data: 'nombre',
             },
             {
                 title: 'Fecha Creación',
-                data: "fecha_creacion",
-                className: "uniqueClassName"
+                data: 'fecha_creacion',
+                className: 'uniqueClassName',
             },
             {
                 title: 'Fecha Programación',
-                data: "fecha_programacion",
-                className: "uniqueClassName"
+                data: 'fecha_programacion',
+                className: 'uniqueClassName',
             },
-
-
         ],
     });
 
-
-
-    tablaBatchInactivos = $("#tablaBatchInactivos").DataTable({
+    tablaBatchInactivos = $('#tablaBatchInactivos').DataTable({
         pageLength: 50,
         responsive: true,
         scrollCollapse: true,
-        language: { url: "../../../admin/sistema/admin_componentes/es-ar.json" },
+        language: { url: '../../../admin/sistema/admin_componentes/es-ar.json' },
         oSearch: { bSmart: false },
 
         ajax: {
-            url: "/api/batchInactivos",
-            dataSrc: "",
+            url: '/api/batchInactivos',
+            dataSrc: '',
         },
+        order: [
+            [0, 'desc']
+        ],
 
         columns: [{
                 title: 'Batch',
-                data: "id_batch",
-                className: "text-center",
+                data: 'id_batch',
+                className: 'text-center',
             },
             {
                 title: 'Orden',
-                data: "numero_orden",
-                className: "uniqueClassName"
+                data: 'numero_orden',
+                className: 'uniqueClassName',
             },
             {
                 title: 'Referencia',
-                data: "referencia",
-                className: "uniqueClassName"
+                data: 'referencia',
+                className: 'uniqueClassName',
             },
             {
                 title: 'Producto',
-                data: "nombre_referencia"
+                data: 'nombre_referencia',
             },
             {
                 title: 'Numero Lote',
-                data: "numero_lote"
+                data: 'numero_lote',
             },
             {
                 title: 'Tamaño Lote',
-                data: "tamano_lote",
-                className: "uniqueClassName",
-                render: $.fn.dataTable.render.number(".", ",", 0, ""),
+                data: 'tamano_lote',
+                className: 'uniqueClassName',
+                render: $.fn.dataTable.render.number('.', ',', 0, ''),
             },
             {
                 title: 'Propietario',
-                data: "nombre"
+                data: 'nombre',
             },
             {
                 title: 'Fecha Creación',
-                data: "fecha_creacion",
-                className: "uniqueClassName"
+                data: 'fecha_creacion',
+                className: 'uniqueClassName',
             },
             {
                 title: 'Fecha Programación',
-                data: "fecha_programacion",
-                className: "uniqueClassName"
+                data: 'fecha_programacion',
+                className: 'uniqueClassName',
             },
             {
                 title: 'Estado',
-                data: "estado",
-                className: "uniqueClassName",
+                data: 'estado',
+                className: 'uniqueClassName',
                 render: (data, type, row) => {
-                    "use strict";
+                    'use strict';
                     return data == 1 ?
-                        "Sin Formula y/o Instructivo" :
+                        'Sin Formula y/o Instructivo' :
                         data == 2 ?
-                        "Inactivo" :
+                        'Inactivo' :
                         data == 3 ?
-                        "Pesaje" :
+                        'Pesaje' :
                         data == 3.5 ?
-                        "Preparación" :
+                        'Preparación' :
                         data == 4 ?
-                        "Preparación" :
+                        'Preparación' :
                         data == 4.5 ?
-                        "Aprobación" :
+                        'Aprobación' :
                         data == 5 ?
-                        "Aprobación" :
+                        'Aprobación' :
                         data == 5.5 ?
-                        "Envasado/Acondicionamiento" :
+                        'Envasado/Acondicionamiento' :
                         data == 6 ?
-                        "Envasado/Acondicionamiento" :
+                        'Envasado/Acondicionamiento' :
                         data == 6.5 ?
-                        "Microbiologia/Fisicoquimico" :
+                        'Microbiologia/Fisicoquimico' :
                         data == 7 ?
-                        "Microbiologia/Fisicoquimico" :
+                        'Microbiologia/Fisicoquimico' :
                         data == 7.5 ?
-                        "Microbiologia/Fisicoquimico" :
+                        'Microbiologia/Fisicoquimico' :
                         data == 8 ?
-                        "Microbiologia/Fisicoquimico" :
+                        'Microbiologia/Fisicoquimico' :
                         data == 8.5 ?
-                        "Microbiologia/Fisicoquimico" :
+                        'Microbiologia/Fisicoquimico' :
                         data == 10 ?
-                        "Liberacion Lote" :
-                        "Multimodulo";
+                        'Liberacion Lote' :
+                        'Multimodulo';
                 },
             },
             {
@@ -419,13 +425,23 @@ $(document).ready(function() {
         ],
     });
 
-
-
-
     $(document).on('click', '.toggle-vis', function(e) {
         e.preventDefault();
         column = tablaPreBatch.column(this.id);
         column.visible(!column.visible());
     });
 
+    /* Cargar la data de la fila de acuerdo con la datatable*/
+
+    $('#tablaBatch tbody').on('click', 'tr', function() {
+        data = tablaBatch.row(this).data();
+    });
+
+    $('#tablaPreBatch tbody').on('click', 'tr', function() {
+        fila = tablaPreBatch.row(this).data();
+    });
+
+    $('#tablaBatchInactivos tbody').on('click', 'tr', function() {
+        data = tablaBatchInactivos.row(this).data();
+    });
 });

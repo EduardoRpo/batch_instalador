@@ -12,6 +12,7 @@ $(document).ready(function() {
     $("#cardBatchCerrados").hide();
 });
 
+
 $("#batch-list a").on("click", function(e) {
     e.preventDefault();
     let c = $(this).text();
@@ -37,14 +38,14 @@ $(document).on("click", ".link-borrar", function(e) {
         .confirm(
             `¿Está seguro de eliminar el Batch ${id}?`,
             `<label>Motivo de Eliminación: </label>
-      <select style='width: 100%' class="form-control" id="motivoEliminacion">
-        <option value='' disabled selected>Seleccione</option>
-        <option value='1'>Cancelado por el usuario</option>
-        <option value='2'>Falta de Materia Prima o Insumos</option>
-        <option value='3'>Producto descontinuado</option>
-        <option value='4'>Otros</option>
-        <option value='5'>Por prueba preinicio</option>
-      </select>`,
+                <select style='width: 100%' class="form-control" id="motivoEliminacion">
+                    <option value='' disabled selected>Seleccione</option>
+                    <option value='1'>Cancelado por el usuario</option>
+                    <option value='2'>Falta de Materia Prima o Insumos</option>
+                    <option value='3'>Producto descontinuado</option>
+                    <option value='4'>Otros</option>
+                    <option value='5'>Por prueba preinicio</option>
+                </select>`,
             null,
             null
         )
@@ -132,8 +133,8 @@ $(document).on("click", ".link-editar", function(e) {
 
             $("#cmbTanque1").val(data.tanque);
             $("#txtCantidad1").val(data.cantidad);
-            CalcularTanque(1);
 
+            $('#txtCantidad1').click();
             $("#modalCrearBatch").modal("show");
         },
         error: function(response) {
@@ -246,10 +247,9 @@ function guardarDatos() {
 
 message = (data) => {
     if (data.success == true) {
+        actualizarTabla();
         cerrarModal();
         alertify.success(data.message);
-        actualizarTabla();
-        return false;
     } else if (data.error == true)
         alertify.error(data.message);
     else if (data.info == true)
@@ -259,6 +259,9 @@ message = (data) => {
 /* Actualizar tabla */
 
 function actualizarTabla() {
-    $("#tablaPreBatch").DataTable().clear();
-    $("#tablaPreBatch").DataTable().ajax.reload();
+    $("#tablaBatch").DataTable().clear();
+    $("#tablaBatch").DataTable().ajax.reload();
+
+    $("#tablaBatchInactivos").DataTable().clear();
+    $("#tablaBatchInactivos").DataTable().ajax.reload();
 }
