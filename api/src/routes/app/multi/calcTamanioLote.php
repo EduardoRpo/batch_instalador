@@ -16,10 +16,10 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
   $referencia = array();
 
   for ($i = 0; $i < sizeof($dataPedidos); $i++) {
-    //$dataPedidos[$i]['referencia'] = substr($dataPedidos[$i]['referencia'], 6, 9);
     $dataMulti = $multiDao->findProductMultiByRef($dataPedidos[$i]['referencia']);
     $tamanio_lote = $calcTamanioMultiDao->calcularTamanioLote($dataMulti, $dataPedidos[$i]['cantidad']);
     $dataPedidos[$i]['tamanio_lote'] = $tamanio_lote;
+    $dataPedidos[$i]['presentacion_ref'] = $dataMulti['presentacion'];
 
     $granel = $dataPedidos[$i]['granel'];
 
@@ -28,6 +28,8 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
 
     $referencia[$i] = $dataPedidos[$i]['referencia'];
   }
+
+  //Consolidado tamaño Graneles
 
   $sumArrayGranel = array();
   $sumArrayCantidades = array();
@@ -44,6 +46,11 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
     }
   }
 
+  //Eliminar las referencias de los graneles que la suma supera los 2500 kg
+
+  //Almacenar en variables de session la variable $dataPedidos
+
+  
   $sumArrayTotal = array('referencia' => array_values($referencia), 'granel' => array_keys($sumArrayGranel), 'tamanio' => array_values($sumArrayGranel), 'cantidades' => array_values($sumArrayCantidades));
 
   $response->getBody()->write(json_encode($sumArrayTotal, JSON_NUMERIC_CHECK));

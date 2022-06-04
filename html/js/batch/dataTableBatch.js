@@ -1,10 +1,10 @@
 $(document).ready(function() {
     /* function crearTablaBatch(
-              columna_busqueda = "",
-              minDateFilter = "",
-              maxDateFilter = ""
-          ) {
-           */
+                columna_busqueda = "",
+                minDateFilter = "",
+                maxDateFilter = ""
+            ) {
+             */
     tablaBatch = $('#tablaBatch').DataTable({
         pageLength: 50,
         responsive: true,
@@ -17,12 +17,12 @@ $(document).ready(function() {
             url: '/api/batch',
             dataSrc: '',
             /* data: {
-                      operacion: "1",
-                      proceso: "1",
-                      busqueda: columna_busqueda,
-                      inicio: minDateFilter,
-                      final: maxDateFilter,
-                  }, */
+                            operacion: "1",
+                            proceso: "1",
+                            busqueda: columna_busqueda,
+                            inicio: minDateFilter,
+                            final: maxDateFilter,
+                        }, */
         },
         order: [
             [1, 'desc']
@@ -152,7 +152,7 @@ $(document).ready(function() {
                 className: 'text-center',
             },
             {
-                title: 'Fecha_Dcto',
+                title: 'F_Pedido',
                 data: 'fecha_pedido',
                 className: 'text-center',
             },
@@ -177,8 +177,14 @@ $(document).ready(function() {
                 render: $.fn.dataTable.render.number('.', ',', 0, ' '),
             },
             {
-                title: 'Cantidad',
+                title: 'Saldo Ofima',
                 data: 'cantidad',
+                className: 'text-center',
+                render: $.fn.dataTable.render.number('.', ',', 0, ' '),
+            },
+            {
+                title: 'Acum Prog',
+                data: 'cantidad_acumulada',
                 className: 'text-center',
                 render: $.fn.dataTable.render.number('.', ',', 0, ' '),
             },
@@ -196,6 +202,15 @@ $(document).ready(function() {
                 render: function(data) {
                     return `
                     <input type="date" class="dateInsumos form-control-updated text-center" id="date-${data.pedido}-${data.id_producto}" />`;
+                },
+            },
+            {
+                title: 'Acciones',
+                data: null,
+                className: 'uniqueClassName',
+                render: function(data) {
+                    return `
+                  <div class="form-check"><input class="form-check-input checkboxPedidos" type="checkbox" id="${data.pedido}-${data.id_producto}"></div>`;
                 },
             },
             {
@@ -223,16 +238,11 @@ $(document).ready(function() {
                 data: 'entrega',
                 className: 'text-center',
             },
-            {
-                title: 'Acciones',
-                data: null,
-                className: 'uniqueClassName',
-                render: function(data) {
-                    return `
-                    <div class="form-check"><input class="form-check-input checkboxPedidos" type="checkbox" id="${data.pedido}-${data.id_producto}"></div>`;
-                },
-            },
+
         ],
+        rowCallback: function(row, data, index) {
+            if (data['estado'] == 1) $(row).css('color', '#138c24');
+        },
     });
 
     $('#tablaBatchCerrados').DataTable({
@@ -423,7 +433,7 @@ $(document).ready(function() {
 
     /* Cargar la data de la fila de acuerdo con la datatable*/
 
-    $("#tablaBatch tbody").on("click", "tr", function() {
+    $('#tablaBatch tbody').on('click', 'tr', function() {
         data = tablaBatch.row(this).data();
     });
 
@@ -431,9 +441,7 @@ $(document).ready(function() {
         fila = tablaPreBatch.row(this).data();
     });
 
-    $("#tablaBatchInactivos tbody").on("click", "tr", function() {
+    $('#tablaBatchInactivos tbody').on('click', 'tr', function() {
         data = tablaBatchInactivos.row(this).data();
     });
-
-
 });

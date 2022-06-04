@@ -147,14 +147,15 @@ include_once("modal/modalPedidos.php");
                       <div class="mt-3 text-center">
                         <button class="toggle-vis btn btn-primary hideTitle" id="0">Propietario</button>
                         <button class="toggle-vis btn btn-primary hideTitle" id="1">Pedido</button>
-                        <button class="toggle-vis btn btn-primary hideTitle" id="2">Fecha_Dcto</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="2">F_Pedidos</button>
                         <button class="toggle-vis btn btn-primary hideTitle" id="3">Granel</button>
                         <button class="toggle-vis btn btn-primary hideTitle" id="4">Referencia</button>
                         <button class="toggle-vis btn btn-primary hideTitle" id="5">Producto</button>
                         <button class="toggle-vis btn btn-primary hideTitle" id="6">Cant_original</button>
-                        <button class="toggle-vis btn btn-primary hideTitle" id="7">Cantidad</button>
-                        <button class="toggle-vis btn btn-primary hideTitle" id="8">Cant_Programar</button>
-                        <button class="toggle-vis btn btn-primary" id="calcLote" style="margin-left:250px">Calcular Lote</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="7">Saldo Ofima</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="8">Acum_Prog</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="9">Cant_Programar</button>
+                        <button class="toggle-vis btn btn-primary" id="calcLote" style="margin-left:200px">Calcular Lote</button>
 
                       </div>
                       <div class="card-block">

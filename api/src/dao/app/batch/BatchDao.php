@@ -43,7 +43,7 @@ class BatchDao extends estadoInicialDao
         $this->logger->notice("Batch Obtenidos", array('batch' => $batch));
         return $batch;
     }
-    
+
     /**
      * @return array
      */
@@ -122,6 +122,7 @@ class BatchDao extends estadoInicialDao
         $fechaprogramacion      = $dataBatch['programacion'];
         $tamanolotepresentacion = $dataBatch['presentacion'];
         $multi                  = json_decode($dataBatch['multi'], true);
+
         $fechahoy               = date("Y-m-d");
 
         $connection = Connection::getInstance()->getConnection();

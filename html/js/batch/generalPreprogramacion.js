@@ -2,12 +2,14 @@ const alertConfirm = (data) => {
     alertify
         .confirm(
             'Samara Cosmetics',
-            `<p>¿Desea programar los lotes?<p><br></p><table class="table table-striped table-bordered dataTable no-footer text-center" aria-describedby="tablaPreBatch_info">
+            `<p>¿Desea programar los lotes?<p><br></p>
+                <table class="table table-striped table-bordered dataTable no-footer text-center" aria-describedby="tablaPreBatch_info">
                 <thead>
                   <tr>
-                    <th>Granel</th>
-                    <th>Tamaño (Kg)</th>
-                    <th>Cantidad (Und)</th>
+                    <th class="text-center">Granel</th>
+                    <th class="text-center">Descripción</th>
+                    <th class="text-center">Tamaño (Kg)</th>
+                    <th class="text-center">Cantidad (Und)</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -15,14 +17,17 @@ const alertConfirm = (data) => {
                 </tbody>
             </table>`,
             function() {
-                alertify.success('Ok');
+                dataGranel = checkTamanio(data.tamanio, pedidosProgramar);
+                // Buscar lote presentacion
+                findPresentation(dataGranel);
             },
             function() {
                 $('.checkboxPedidos').prop('checked', false);
-                //Limpiar inputs y Array
+                clearInputArray(pedidosProgramar);
             }
         )
-        .set('labels', { ok: 'Si', cancel: 'No' });
+        .set('labels', { ok: 'Si', cancel: 'No' })
+        .set('resizable', true).resizeTo(800, 500);;
 };
 
 addRows = (data) => {
@@ -33,19 +38,27 @@ addRows = (data) => {
     row = [];
     for (i = 0; i < granel.length; i++) {
         row.push(
-            `<tr>
-          <td>${granel[i]}</td>
-          <td>${tamanio[i].toFixed(2)}</td>
-          <td>${cantidad[i]}</td>
-          ${(symbol = check(tamanio[i]))}
-        </tr>`
+            `<tr ${(text = color(tamanio[i]))}>
+                <td>${granel[i]}</td>
+                <td>TRATAMIENTO KERATINA PROGRESIVO - KERAMAGIC ALISADOR (200 ML)</td>
+                <td>${tamanio[i].toFixed(2)}</td>
+                <td>${cantidad[i]}</td>
+                ${(symbol = check(tamanio[i]))}
+                </tr>`
         );
     }
     return row;
 };
 
+color = (tamanio) => {
+    if (tamanio > 2500) text = 'style="color: red"';
+    else text = 'aria-describedby="tablaPreBatch_info"';
+
+    return text;
+};
+
 check = (tamanio) => {
-    if (tamanio >= 2500) {
+    if (tamanio > 2500) {
         symbol =
             '<td style="font-size:22px; font-weight: bold; color:red;">&#x2716</td>';
     } else
@@ -53,4 +66,75 @@ check = (tamanio) => {
         '<td style="font-size:22px; font-weight: bold; color:green;">&#x2714</td>';
 
     return symbol;
+};
+
+// Opcion SI
+checkTamanio = (tamanio, data) => {
+    // Eliminar array si el tamaño es mayor a 2500
+    for (i = 0; i < data.length; i++) {
+        if (tamanio[i] > 2500) {
+            // Limpiar input y checkbox
+            $(`#cant-${data[i].numPedido}-${data[i].referencia}`).val('');
+            $(`#${data[i].numPedido}-${data[i].referencia}`).prop('checked', false);
+            // Eliminar array
+            deleteArray(data[i].numPedido);
+        }
+    }
+    return data;
+};
+
+findPresentation = (dataGranel) => {
+    $.ajax({
+        type: 'POST',
+        url: '/api/productGranel',
+        data: { data: dataGranel },
+        success: function(r) {
+            for (let i in dataGranel) {
+                dataGranel[i]['presentacion'] =
+                    r[`presentacion-${dataGranel[i].granel}`];
+            }
+
+            for (let i in dataGranel) {
+                saveBatch(dataGranel[i]);
+            }
+        },
+    });
+};
+
+saveBatch = (dataGranel) => {
+    /*
+      dataGranel['ref'] = dataGranel['referencia'];
+          id_batch,
+          unidades,
+          lote: lote,
+          presentacion: presentacion_comercial,
+          programacion,
+          tanque,
+          cantidades,
+          multi
+      };*/
+    $.ajax({
+        type: 'POST',
+        url: '/api/saveBatch',
+        data: dataGranel,
+
+        success: function(data) {
+            message(data);
+        },
+    });
+};
+
+// Opcion NO
+clearInputArray = (data) => {
+    // Limpiar inputs
+    for (i = 0; i < data.length; i++) {
+        $(`#cant-${data[i].numPedido}-${data[i].referencia}`).val('');
+        $(`#date-${data[i].numPedido}-${data[i].referencia}`).val('');
+    }
+    // Limpiar Array
+    for (i = data.length; i > 0; i--)
+        data.pop();
+
+    //Ir al backend y borrar la variable de Session $dataPedidos
+
 };

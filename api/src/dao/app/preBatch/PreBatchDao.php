@@ -28,11 +28,11 @@ class PreBatchDao
                 FROM `explosion_materiales_pedidos_registro` exp 
                 INNER JOIN producto p ON p.referencia = exp.id_producto 
                 INNER JOIN propietario pp ON pp.id = p.id_propietario;"; */
-        $sql = "SELECT pp.nombre AS propietario, exp.pedido, exp.fecha_pedido, (SELECT referencia FROM producto 
+        $sql = "SELECT pp.nombre AS propietario, exp.pedido, exp.fecha_pedido, exp.estado, exp.cantidad_acumulada, (SELECT referencia FROM producto 
                 WHERE multi = (SELECT multi FROM producto WHERE referencia = exp.id_producto) 
                 AND presentacion_comercial = 1) AS granel, exp.id_producto, p.nombre_referencia, exp.cant_original, exp.cantidad, 
-                    DATE_ADD(exp.fecha_pedido, INTERVAL 10 DAY) AS fecha_pesaje, DATE_ADD(exp.fecha_pedido, INTERVAL 11 DAY) AS fecha_preparacion, 
-                    DATE_ADD(exp.fecha_pedido, INTERVAL 7 DAY) AS recepcion_insumos, DATE_ADD(exp.fecha_pedido, INTERVAL 14 DAY) AS envasado, 
+                    DATE_ADD(exp.fecha_pedido, INTERVAL 8 DAY) AS fecha_pesaje, DATE_ADD(exp.fecha_pedido, INTERVAL 9 DAY) AS fecha_preparacion, 
+                    DATE_ADD(exp.fecha_pedido, INTERVAL 6 DAY) AS recepcion_insumos, DATE_ADD(exp.fecha_pedido, INTERVAL 13 DAY) AS envasado, 
                     DATE_ADD(exp.fecha_pedido, INTERVAL 15 DAY) AS entrega 
                 FROM `explosion_materiales_pedidos_registro` exp 
                 INNER JOIN producto p ON p.referencia = exp.id_producto 
@@ -71,17 +71,23 @@ class PreBatchDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $sql = "SELECT * FROM explosion_materiales_pedidos_registro WHERE pedido = :pedido";
+        $sql = "SELECT * FROM explosion_materiales_pedidos_registro 
+                WHERE pedido = :pedido AND id_producto = :id_producto";
         $query = $connection->prepare($sql);
-        $query->execute(['pedido' => trim($dataPedidos['documento'])]);
+        $query->execute([
+            'pedido' => trim($dataPedidos['documento']),
+            'id_producto' => trim($dataPedidos['referencia'])
+        ]);
         $rows = $query->rowCount();
 
         if ($rows > 0) {
-            $sql = "UPDATE explosion_materiales_pedidos_registro SET cantidad = :cantidad WHERE pedido = :pedido";
+            $sql = "UPDATE explosion_materiales_pedidos_registro SET cantidad = :cantidad 
+                    WHERE pedido = :pedido AND id_producto = :id_producto";
             $query = $connection->prepare($sql);
             $query->execute([
                 'cantidad' => trim($dataPedidos['cantidad']),
-                'pedido' => trim($dataPedidos['documento'])
+                'pedido' => trim($dataPedidos['documento']),
+                'id_producto' => trim($dataPedidos['referencia'])
             ]);
         } else {
 
@@ -90,11 +96,11 @@ class PreBatchDao
             $fecha_dtco = date_format($date, "Y-m-d");
 
             $sql = "INSERT INTO explosion_materiales_pedidos_registro (pedido, id_producto, cant_original, cantidad, fecha_pedido) 
-                VALUES(:pedido, :id_producto, :cant_original, :cantidad, :fecha_pedido)";
+                    VALUES(:pedido, :id_producto, :cant_original, :cantidad, :fecha_pedido)";
             $query = $connection->prepare($sql);
             $query->execute([
                 'pedido' => trim($dataPedidos['documento']),
-                'id_producto' => trim("M-".$dataPedidos['producto']),
+                'id_producto' => trim("M-" . $dataPedidos['producto']),
                 'cant_original' => trim($dataPedidos['cant_original']),
                 'cantidad' => trim($dataPedidos['cantidad']),
                 'fecha_pedido' => $fecha_dtco,

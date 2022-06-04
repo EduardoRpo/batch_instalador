@@ -38,6 +38,9 @@ $app->post('/addPedidos', function (Request $request, Response $response, $args)
   for ($i = 0; $i < sizeof($dataPedidos); $i++)
     $result = $preBatchDao->savePedidos($dataPedidos[$i]);
 
+  //Al cargar los pedidos validar la tabla vs pedidos y si no encuentra el registro marcar con un flag y no mostar en la vista Preprogramados
+  //Cargar todos registros de la tabla que no tengan flag y validarlos contra el objeto de importacion
+  
   if ($result == null)
     $resp = array('success' => true, 'message' => 'Pedidos Importados correctamente');
   else
