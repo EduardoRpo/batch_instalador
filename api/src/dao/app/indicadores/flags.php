@@ -17,7 +17,7 @@ class MultiDao extends ControlFirmasMultiDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
-    public function findMultiByBatch($id_batch)
+    public function flagPesaje($id_batch)
     {
 
         $connection = Connection::getInstance()->getConnection();
@@ -34,7 +34,7 @@ class MultiDao extends ControlFirmasMultiDao
         return $multi;
     }
 
-    public function findProductMultiByRef($referencia)
+    public function flagEnvasado($referencia)
     {
 
         $connection = Connection::getInstance()->getConnection();
@@ -51,7 +51,7 @@ class MultiDao extends ControlFirmasMultiDao
     }
 
 
-    public function findMultiByRef($referencia)
+    public function flagAcondicionamiento($referencia)
     {
         $connection = Connection::getInstance()->getConnection();
 
@@ -77,7 +77,7 @@ class MultiDao extends ControlFirmasMultiDao
         }
     }
 
-    public function saveMulti($id_batch, $dataBatch)
+    public function flagPreparacion($id_batch, $dataBatch)
     {
         $connection = Connection::getInstance()->getConnection();
 
@@ -107,38 +107,4 @@ class MultiDao extends ControlFirmasMultiDao
         $this->controlFirmasMulti($id_batch);
     }
 
-    public function updateMulti($dataBatch)
-    {
-        $connection = Connection::getInstance()->getConnection();
-
-        /* Cargar Multipresentacion */
-        $multipresentaciones = json_decode($dataBatch['multi'], true);
-
-        /* Buscar Multipresentaciones y actualizar*/
-        foreach ($multipresentaciones as $multipresentacion) {
-            $sql = "SELECT * FROM multipresentacion WHERE id_batch = :id_batch AND referencia = :referencia";
-            $query = $connection->prepare($sql);
-            $query->execute([
-                'referencia' => $multipresentacion['referencia'],
-                'id_batch' => $multipresentacion['id_batch'],
-            ]);
-
-            $rows = $query->rowCount();
-
-            if ($rows > 0) {
-                $sql = "UPDATE multipresentacion SET cantidad = :cantidad, total = :total 
-                        WHERE id_batch = :id_batch AND referencia = :referencia";
-                $query = $connection->prepare($sql);
-                $query->execute([
-                    'referencia' => $multipresentacion['referencia'],
-                    'id_batch' => $multipresentacion['id_batch'],
-                    'cantidad' => $multipresentacion['cantidadunidades'],
-                    'total' => $multipresentacion['tamaniopresentacion'],
-                ]);
-            }
-        }
-
-        /* Actualizar tabla firmas con multipresentacion */
-        //$this->controlFirmasMulti($id_batch);
-    }
 }
