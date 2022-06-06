@@ -21,7 +21,7 @@ switch ($op) {
         break;
 
     case 3: //Listar Instructivo
-        $referencia = $_POST['referencia'];
+        /* $referencia = $_POST['referencia'];
 
         $sql = "SELECT * FROM producto WHERE referencia =:referencia";
         $query = $conn->prepare($sql);
@@ -41,7 +41,7 @@ switch ($op) {
             $result = $query->execute(['producto' => $base]);
         }
         $data = $query->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE); */
         break;
 
     case 4: // Guardar data

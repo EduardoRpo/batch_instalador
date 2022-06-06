@@ -51,7 +51,6 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
   if (sizeof($dataBatch) == 0) {
     session_start();
     $dataBatch = $_SESSION['dataPedidos'];
-    //sizeof($dataBatch) == 1 ? $dataBatch = $dataBatch[0] : $dataBatch;
     $flag_tanques = 0;
   }
 
