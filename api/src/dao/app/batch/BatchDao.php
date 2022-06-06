@@ -98,16 +98,16 @@ class BatchDao extends estadoInicialDao
         $stmt = $connection->prepare("SELECT id_batch, p.referencia, p.nombre_referencia, pc.nombre AS presentacion, m.nombre AS marca, ns.nombre AS notificacion_sanitaria, 
                                              p.unidad_empaque, pp.nombre as propietario, batch.numero_orden, batch.tamano_lote, batch.numero_lote, 
                                              batch.unidad_lote, linea.nombre as linea, linea.densidad, p.densidad_producto, batch.fecha_programacion, 
-                                             batch.estado, p.img 
-                                  FROM producto p 
-                                  INNER JOIN batch ON batch.id_producto = p.referencia 
-                                  INNER JOIN presentacion_comercial pc ON pc.id = p.presentacion_comercial 
-                                  INNER JOIN linea ON linea.id = p.id_linea 
-                                  INNER JOIN propietario pp ON pp.id = p.id_propietario 
-                                  INNER JOIN marca m ON m.id = p.id_marca
-                                  INNER JOIN notificacion_sanitaria ns ON ns.id = p.id_notificacion_sanitaria
-                                  WHERE id_batch = :idBatch");
-
+                                             batch.estado, p.img, IFNULL(exp.fecha_insumo, '0000-00-00') as fecha_insumo
+                                      FROM producto p 
+                                       INNER JOIN batch ON batch.id_producto = p.referencia 
+                                       INNER JOIN presentacion_comercial pc ON pc.id = p.presentacion_comercial 
+                                       INNER JOIN linea ON linea.id = p.id_linea 
+                                       INNER JOIN propietario pp ON pp.id = p.id_propietario 
+                                       INNER JOIN marca m ON m.id = p.id_marca
+                                       INNER JOIN notificacion_sanitaria ns ON ns.id = p.id_notificacion_sanitaria
+                                       LEFT JOIN explosion_materiales_pedidos_registro exp ON exp.id_producto = p.referencia 
+                                      WHERE id_batch = :idBatch");
         $stmt->execute(array('idBatch' => $id));
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         $batch = $stmt->fetch($connection::FETCH_ASSOC);
@@ -158,9 +158,10 @@ class BatchDao extends estadoInicialDao
             'id_producto' => $referencia
         ]);
 
-        /* registrar explosion */
-        /* if ($id < 602) exit();
-            else explosion($connection, $id, $referencia, $tamanototallote); */
+        /* Actualizar explosion_materiales_pedidos_registro */
+        $EMPedidosRegistroDao = new ExplosionMaterialesPedidosRegistroDao();
+        for ($i = 0; $i < sizeof($multi); $i++)
+            $EMPedidosRegistroDao->insertNewEMPedidosRegistro($multi[$i]);
     }
 
     public function updateBatch($dataBatch)

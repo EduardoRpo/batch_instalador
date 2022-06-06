@@ -37,15 +37,13 @@ addRows = (data) => {
 
   row = [];
   for (i = 0; i < granel.length; i++) {
-    row.push(
-      `<tr ${(text = color(tamanio[i]))}>
+    row.push(`<tr ${(text = color(tamanio[i]))}>
                 <td>${granel[i]}</td>
                 <td>TRATAMIENTO KERATINA PROGRESIVO - KERAMAGIC ALISADOR (200 ML)</td>
                 <td>${tamanio[i].toFixed(2)}</td>
                 <td>${cantidad[i]}</td>
                 ${(symbol = check(tamanio[i]))}
-                </tr>`
-    );
+                </tr>`);
   }
   return row;
 };
@@ -75,6 +73,9 @@ saveBatch = () => {
     url: '/api/saveBatch',
     success: function (data) {
       message(data);
+      //Actualizar tabla
+      $('#tablaPreBatch').DataTable().clear();
+      $('#tablaPreBatch').DataTable().ajax.reload();
     },
   });
 };
