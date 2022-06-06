@@ -1,76 +1,61 @@
-/* $.fn.dataTable.ext.search.push(
-    function (settings, data, dataIndex) {
-        var est = parseInt($('#est').val(), 10);
-        var max = parseInt($('#est').val(), 10);
-        var age = parseFloat(data[10]) || 0; // use data for the age column
+$(document).ready(function() {
+    $("#tablaPesajes").DataTable({
+        pageLength: 50,
+        order: [
+            [0, "desc"]
+        ],
 
-        if ((isNaN(est) && isNaN(max)) ||
-            (isNaN(est) && age <= max) ||
-            (est <= age && isNaN(max)) ||
-            (est <= age && age <= max)) {
-            return true;
-        }
-        return false;
-    }
-);
- */
-$(document).ready(function () {
-  $("#tablaPesajes").DataTable({
-    pageLength: 50,
-    order: [[0, "desc"]],
-
-    ajax: {
-      url: "/api/pesajes",
-      dataSrc: "",
-    },
-    language: {
-      url: "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json",
-    },
-
-    columns: [
-      {
-        title: "Batch",
-        data: "id_batch",
-        className: "uniqueClassName",
-      },
-      {
-        title: "Fecha Programación",
-        data: "fecha_programacion",
-        className: "uniqueClassName",
-      },
-      {
-        title: "No Orden",
-        data: "numero_orden",
-        className: "uniqueClassName",
-      },
-      {
-        title: "Referencia",
-        data: "referencia",
-        className: "uniqueClassName",
-      },
-      {
-        title: "No Lote",
-        data: "numero_lote",
-        className: "uniqueClassName",
-      },
-      {
-        title: "Firmas G",
-        data: "cantidad_firmas",
-        className: "uniqueClassName",
-      },
-      {
-        title: "Firmas T",
-        data: "total_firmas",
-        className: "uniqueClassName",
-      },
-      {
-        title: "Ingresar",
-        data: "",
-        className: "uniqueClassName",
-        render: (data, type, row) => {
-          return `<a href="pesajeinfo/${row.id_batch}/${row.referencia}" <i class="large material-icons" data-toggle="tooltip" title="Ingresar" style="color:rgb(0, 154, 68)">format_color_fill</i></a>`;
+        ajax: {
+            url: "/api/pesajes",
+            dataSrc: "",
         },
-      },
-    ],
-  });
+        language: {
+            url: "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json",
+        },
+
+        columns: [{
+                title: "Batch",
+                data: "id_batch",
+                className: "uniqueClassName",
+            },
+            {
+                title: "Fecha Programación",
+                data: "fecha_programacion",
+                className: "uniqueClassName",
+            },
+            {
+                title: "No Orden",
+                data: "numero_orden",
+                className: "uniqueClassName",
+            },
+            {
+                title: "Referencia",
+                data: "referencia",
+                className: "uniqueClassName",
+            },
+            {
+                title: "No Lote",
+                data: "numero_lote",
+                className: "uniqueClassName",
+            },
+            {
+                title: "Firmas G",
+                data: "cantidad_firmas",
+                className: "uniqueClassName",
+            },
+            {
+                title: "Firmas T",
+                data: "total_firmas",
+                className: "uniqueClassName",
+            },
+            {
+                title: "Ingresar",
+                data: "",
+                className: "uniqueClassName",
+                render: (data, type, row) => {
+                    return `<a href="pesajeinfo/${row.id_batch}/${row.referencia}" <i class="large material-icons" data-toggle="tooltip" title="Ingresar" style="color:rgb(0, 154, 68)">format_color_fill</i></a>`;
+                },
+            },
+        ],
+    });
 });

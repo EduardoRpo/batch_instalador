@@ -33,9 +33,9 @@ class MateriaPrimaDao
                                   WHERE f.id_producto = :referencia");
     $stmt->execute(array('referencia' => $idProduct));
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
-    $pesajes = $stmt->fetchAll($connection::FETCH_ASSOC);
-    $this->logger->notice("materia Primas Obtenidas", array('materias Primas' => $pesajes));
-    return $pesajes;
+    $materials = $stmt->fetchAll($connection::FETCH_ASSOC);
+    $this->logger->notice("materia Primas Obtenidas", array('materias Primas' => $materials));
+    return $materials;
   }
 
   public function findByProductInv($idProduct)

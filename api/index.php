@@ -22,7 +22,7 @@ $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
 /* Admin */
 require_once __DIR__ . '/src/routes/admin/productos/productos.php';
-//require_once __DIR__ . '/src/routes/admin/preparacion/Instructivos.php';
+require_once __DIR__ . '/src/routes/admin/productos/instructivos.php';
 require_once __DIR__ . '/src/routes/admin/pdf/certificados.php';
 require_once __DIR__ . '/src/routes/admin/pdf/versiones.php';
 
@@ -54,10 +54,10 @@ require_once __DIR__ . '/src/routes/app/global/materias_primas.php';
 require_once __DIR__ . '/src/routes/app/global/etiquetas.php';
 
 //Pesaje
+require_once __DIR__ . '/src/routes/app/pesaje/cargos.php';
 require_once __DIR__ . '/src/routes/app/pesaje/pesaje.php';
 
 //Preparacion
-require_once __DIR__ . '/src/routes/app/preparacion/preparacion.php';
 
 //envasado
 require_once __DIR__ . '/src/routes/app/envasado/envasado.php';
