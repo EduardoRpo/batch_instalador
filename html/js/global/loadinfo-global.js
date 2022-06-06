@@ -89,7 +89,7 @@ function batch_record() {
         return batch;
     });
 }
-debugger
+
 $.ajax({
     url: `/api/batch/${idBatch}`,
     type: "GET",

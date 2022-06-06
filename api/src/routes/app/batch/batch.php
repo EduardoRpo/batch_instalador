@@ -24,10 +24,13 @@ $app->get('/batch', function (Request $request, Response $data, $args) use ($bat
 
 $app->get('/batch/{id}', function (Request $request, Response $response, $args) use ($batchDao, $tanquesDao) {
   $dataBatch = $batchDao->findBatchById($args["id"]);
-  
+
   if ($dataBatch != false) {
     $tanques = $tanquesDao->findTanquesById($args["id"]);
-    $batch = array_merge($dataBatch, $tanques);
+    if ($tanques != false)
+      $batch = array_merge($dataBatch, $tanques);
+    else
+      $batch = $dataBatch;
   }
 
   $response->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));
