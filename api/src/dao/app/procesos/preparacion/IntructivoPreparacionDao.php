@@ -20,7 +20,7 @@ class IntructivoPreparacionDao
     $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
   }
 
-  public function findByProduct($idProduct)
+  public function findinstructiveByProduct($idProduct)
   {
     $connection = Connection::getInstance()->getConnection();
 
