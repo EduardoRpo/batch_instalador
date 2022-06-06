@@ -17,7 +17,7 @@ class ExplosionMaterialesPedidosRegistroDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
-    public function insertNewEMPedidosRegistro($dataPedido)
+    public function updateEMPedidosRegistro($dataPedido)
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("UPDATE explosion_materiales_pedidos_registro 

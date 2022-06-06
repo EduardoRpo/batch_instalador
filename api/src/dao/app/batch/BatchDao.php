@@ -161,7 +161,7 @@ class BatchDao extends estadoInicialDao
         /* Actualizar explosion_materiales_pedidos_registro */
         $EMPedidosRegistroDao = new ExplosionMaterialesPedidosRegistroDao();
         for ($i = 0; $i < sizeof($multi); $i++)
-            $EMPedidosRegistroDao->insertNewEMPedidosRegistro($multi[$i]);
+            $EMPedidosRegistroDao->updateEMPedidosRegistro($multi[$i]);
     }
 
     public function updateBatch($dataBatch)
