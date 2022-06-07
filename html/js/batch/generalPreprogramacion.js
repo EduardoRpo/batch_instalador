@@ -84,7 +84,7 @@ saveBatch = () => {
   });
 };
 
-saveFecha_insumo = (data) => {
+/*saveFecha_insumo = (data) => {
   //$('#tablaPreBatch').DataTable().clear();
 
   for (i = 0; i < data.length; i++) {
@@ -97,7 +97,7 @@ saveFecha_insumo = (data) => {
       `${data[i].numPedido}-${data[i].referencia}`
     );
   }
-};
+};*/
 
 /*Limpiar inputs que ya se crearon
 $(document).on('click', '.cantProgram', function () {
