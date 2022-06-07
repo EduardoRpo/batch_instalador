@@ -51,12 +51,13 @@ class BatchDao extends estadoInicialDao
     {
         $connection = Connection::getInstance()->getConnection();
         //$stmt = $connection->prepare("SELECT * FROM producto INNER JOIN batch ON batch.id_producto = producto.referencia INNER JOIN linea ON producto.id_linea = linea.id INNER JOIN propietario ON producto.id_propietario = propietario.id WHERE batch.estado = 1 OR batch.estado = 2 AND batch.fecha_programacion = CURRENT_DATE()");
-        $stmt = $connection->prepare("SELECT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, pc.nombre as presentacion_comercial, batch.numero_lote, batch.tamano_lote, propietario.nombre, batch.fecha_creacion, batch.fecha_programacion, batch.estado, batch.multi
+        $stmt = $connection->prepare("SELECT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, pc.nombre as presentacion_comercial, batch.numero_lote, batch.tamano_lote, propietario.nombre, batch.fecha_creacion, batch.fecha_programacion, batch.estado, batch.multi, IFNULL(exp.fecha_insumo, '0000-00-00') AS fecha_insumo
                                       FROM batch 
-                                      INNER JOIN producto ON batch.id_producto = producto.referencia
-                                      INNER JOIN propietario  ON producto.id_propietario = propietario.id
-                                      INNER JOIN presentacion_comercial pc ON producto.presentacion_comercial = pc.id
-                                      WHERE estado BETWEEN 1 AND 2");
+                                       INNER JOIN producto ON batch.id_producto = producto.referencia
+                                       INNER JOIN propietario  ON producto.id_propietario = propietario.id
+                                       INNER JOIN presentacion_comercial pc ON producto.presentacion_comercial = pc.id
+                                       LEFT JOIN explosion_materiales_pedidos_registro exp ON exp.id_producto = producto.referencia
+                                      WHERE batch.estado BETWEEN 1 AND 2;");
         $stmt->execute();
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         $batch = $stmt->fetchAll($connection::FETCH_ASSOC);

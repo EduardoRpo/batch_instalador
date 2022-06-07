@@ -21,12 +21,25 @@ class ExplosionMaterialesPedidosRegistroDao
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("UPDATE explosion_materiales_pedidos_registro 
-                                      SET cantidad_acumulada = :cantidad_acumulada, fecha_insumo = :fecha_insumo, estado = 1 
+                                      SET cantidad_acumulada = cantidad_acumulada + :cantidad_acumulada, fecha_insumo = :fecha_insumo, estado = 1 
                                       WHERE pedido = :pedido");
         $stmt->execute([
             'pedido' => $dataPedido['pedido'],
             'cantidad_acumulada' => $dataPedido['cantidadunidades'],
             'fecha_insumo' => $dataPedido['fecha_insumo']
+        ]);
+
+        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+    }
+
+    public function updateEstado($dataPedido)
+    {
+        $connection = Connection::getInstance()->getConnection();
+        $stmt = $connection->prepare("UPDATE explosion_materiales_pedidos_registro 
+                                      SET estado = 2
+                                      WHERE pedido = :pedido");
+        $stmt->execute([
+            'pedido' => $dataPedido['pedido']
         ]);
 
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));

@@ -20,8 +20,8 @@ const alertConfirm = (data) => {
         saveBatch();
       },
       function () {
-        $('.checkboxPedidos').prop('checked', false);
-        clearInputArray(pedidosProgramar);
+        //clearInputArray(pedidosProgramar);
+        deleteSession();
       }
     )
     .set('labels', { ok: 'Si', cancel: 'No' })
@@ -31,15 +31,18 @@ const alertConfirm = (data) => {
 };
 
 addRows = (data) => {
+  //cantPedidos = data.cantidad_pedidos;
+  //cantReferencias = data.cantidad_referencias;
   granel = data.granel;
   tamanio = data.tamanio;
   cantidad = data.cantidades;
+  producto = data.producto;
 
   row = [];
   for (i = 0; i < granel.length; i++) {
     row.push(`<tr ${(text = color(tamanio[i]))}>
                 <td>${granel[i]}</td>
-                <td>TRATAMIENTO KERATINA PROGRESIVO - KERAMAGIC ALISADOR (200 ML)</td>
+                <td>${producto[i]}</td>
                 <td>${tamanio[i].toFixed(2)}</td>
                 <td>${cantidad[i]}</td>
                 ${(symbol = check(tamanio[i]))}
@@ -73,14 +76,45 @@ saveBatch = () => {
     url: '/api/saveBatch',
     success: function (data) {
       message(data);
-      //Actualizar tabla
-      $('#tablaPreBatch').DataTable().clear();
       $('#tablaPreBatch').DataTable().ajax.reload();
+
+      //saveFecha_insumo(pedidosProgramar);
+      deleteSession();
     },
   });
 };
 
-// Opcion NO
+saveFecha_insumo = (data) => {
+  //$('#tablaPreBatch').DataTable().clear();
+
+  for (i = 0; i < data.length; i++) {
+    $(`#date-${data[i].numPedido}-${data[i].referencia}`).val(
+      data[i].fecha_insumo
+    );
+
+    calcfechaSugeridas(
+      data[i].fecha_insumo,
+      `${data[i].numPedido}-${data[i].referencia}`
+    );
+  }
+};
+
+/*Limpiar inputs que ya se crearon
+$(document).on('click', '.cantProgram', function () {
+  //e.preventDefault();
+  id_input = this.id;
+  id_date = id_input.substr(5, 13);
+  cantidad = $(`#${id_input}`).val();
+
+  if (cantidad > 0 && pedidosProgramar.length > 0) {
+    numPedido = id_checkbox.slice(0, -8);
+    $(`#${id_input}`).val('');
+    $(`#date-${id_date}`).val('');
+    deleteArray(numPedido);
+  }
+});*/
+
+/* Opcion NO
 clearInputArray = (data) => {
   // Limpiar inputs
   for (i = 0; i < data.length; i++) {
@@ -91,8 +125,13 @@ clearInputArray = (data) => {
   for (i = data.length; i > 0; i--) data.pop();
 
   //Ir al backend y borrar la variable de Session $dataPedidos
+  deleteSession();
+}; */
+
+deleteSession = () => {
   $.ajax({
     type: 'GET',
     url: '/api/eliminarLote',
   });
+  $('#tablaPreBatch').DataTable().ajax.reload();
 };

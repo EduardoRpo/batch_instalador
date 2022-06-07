@@ -21,7 +21,7 @@ class PreBatchDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $sql = "SELECT pp.nombre AS propietario, exp.pedido, exp.fecha_pedido, exp.estado, exp.cantidad_acumulada, (SELECT referencia FROM producto 
+        $sql = "SELECT pp.nombre AS propietario, exp.pedido, exp.fecha_pedido, exp.estado, exp.cantidad_acumulada, exp.fecha_insumo, (SELECT referencia FROM producto 
                 WHERE multi = (SELECT multi FROM producto WHERE referencia = exp.id_producto) 
                 AND presentacion_comercial = 1) AS granel, exp.id_producto, p.nombre_referencia, exp.cant_original, exp.cantidad, 
                     DATE_ADD(exp.fecha_pedido, INTERVAL 8 DAY) AS fecha_pesaje, DATE_ADD(exp.fecha_pedido, INTERVAL 9 DAY) AS fecha_preparacion, 
