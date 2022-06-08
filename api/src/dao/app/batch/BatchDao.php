@@ -204,6 +204,13 @@ class BatchDao extends estadoInicialDao
         }
     }
 
+    public function updateBatchPedido($dataBatch)
+    {
+        $connection = Connection::getInstance()->getConnection();
+        $stmt = $connection->prepare("");
+        $stmt->execute([]);
+    }
+
     public function deleteBatch($id_batch)
     {
         $id_batch = $_POST['id'];
