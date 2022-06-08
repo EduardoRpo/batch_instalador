@@ -178,7 +178,7 @@ $(document).on("click", ".link-editarMulti", function(e) {
                     lote = lote + resp[i].total
                     $(`#sumaMulti`).val(lote);
                 };
-            }, 1000);
+            }, 1500);
 
         },
     });
