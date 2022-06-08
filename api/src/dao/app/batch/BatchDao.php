@@ -51,12 +51,13 @@ class BatchDao extends estadoInicialDao
     {
         $connection = Connection::getInstance()->getConnection();
         //$stmt = $connection->prepare("SELECT * FROM producto INNER JOIN batch ON batch.id_producto = producto.referencia INNER JOIN linea ON producto.id_linea = linea.id INNER JOIN propietario ON producto.id_propietario = propietario.id WHERE batch.estado = 1 OR batch.estado = 2 AND batch.fecha_programacion = CURRENT_DATE()");
-        $stmt = $connection->prepare("SELECT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, pc.nombre as presentacion_comercial, batch.numero_lote, batch.tamano_lote, propietario.nombre, batch.fecha_creacion, batch.fecha_programacion, batch.estado, batch.multi
+        $stmt = $connection->prepare("SELECT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, pc.nombre as presentacion_comercial, batch.numero_lote, batch.tamano_lote, propietario.nombre, batch.fecha_creacion, batch.fecha_programacion, batch.estado, batch.multi, IFNULL(exp.fecha_insumo, '0000-00-00') AS fecha_insumo
                                       FROM batch 
-                                      INNER JOIN producto ON batch.id_producto = producto.referencia
-                                      INNER JOIN propietario  ON producto.id_propietario = propietario.id
-                                      INNER JOIN presentacion_comercial pc ON producto.presentacion_comercial = pc.id
-                                      WHERE estado BETWEEN 1 AND 2");
+                                       INNER JOIN producto ON batch.id_producto = producto.referencia
+                                       INNER JOIN propietario  ON producto.id_propietario = propietario.id
+                                       INNER JOIN presentacion_comercial pc ON producto.presentacion_comercial = pc.id
+                                       LEFT JOIN explosion_materiales_pedidos_registro exp ON exp.id_producto = producto.referencia
+                                      WHERE batch.estado BETWEEN 1 AND 2;");
         $stmt->execute();
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         $batch = $stmt->fetchAll($connection::FETCH_ASSOC);
@@ -98,16 +99,16 @@ class BatchDao extends estadoInicialDao
         $stmt = $connection->prepare("SELECT id_batch, p.referencia, p.nombre_referencia, pc.nombre AS presentacion, m.nombre AS marca, ns.nombre AS notificacion_sanitaria, 
                                              p.unidad_empaque, pp.nombre as propietario, batch.numero_orden, batch.tamano_lote, batch.numero_lote, 
                                              batch.unidad_lote, linea.nombre as linea, linea.densidad, p.densidad_producto, batch.fecha_programacion, 
-                                             batch.estado, p.img 
-                                  FROM producto p 
-                                  INNER JOIN batch ON batch.id_producto = p.referencia 
-                                  INNER JOIN presentacion_comercial pc ON pc.id = p.presentacion_comercial 
-                                  INNER JOIN linea ON linea.id = p.id_linea 
-                                  INNER JOIN propietario pp ON pp.id = p.id_propietario 
-                                  INNER JOIN marca m ON m.id = p.id_marca
-                                  INNER JOIN notificacion_sanitaria ns ON ns.id = p.id_notificacion_sanitaria
-                                  WHERE id_batch = :idBatch");
-
+                                             batch.estado, p.img, IFNULL(exp.fecha_insumo, '0000-00-00') as fecha_insumo
+                                      FROM producto p 
+                                       INNER JOIN batch ON batch.id_producto = p.referencia 
+                                       INNER JOIN presentacion_comercial pc ON pc.id = p.presentacion_comercial 
+                                       INNER JOIN linea ON linea.id = p.id_linea 
+                                       INNER JOIN propietario pp ON pp.id = p.id_propietario 
+                                       INNER JOIN marca m ON m.id = p.id_marca
+                                       INNER JOIN notificacion_sanitaria ns ON ns.id = p.id_notificacion_sanitaria
+                                       LEFT JOIN explosion_materiales_pedidos_registro exp ON exp.id_producto = p.referencia 
+                                      WHERE id_batch = :idBatch");
         $stmt->execute(array('idBatch' => $id));
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         $batch = $stmt->fetch($connection::FETCH_ASSOC);
@@ -158,9 +159,10 @@ class BatchDao extends estadoInicialDao
             'id_producto' => $referencia
         ]);
 
-        /* registrar explosion */
-        /* if ($id < 602) exit();
-            else explosion($connection, $id, $referencia, $tamanototallote); */
+        /* Actualizar explosion_materiales_pedidos_registro */
+        $EMPedidosRegistroDao = new ExplosionMaterialesPedidosRegistroDao();
+        for ($i = 0; $i < sizeof($multi); $i++)
+            $EMPedidosRegistroDao->updateEMPedidosRegistro($multi[$i]);
     }
 
     public function updateBatch($dataBatch)

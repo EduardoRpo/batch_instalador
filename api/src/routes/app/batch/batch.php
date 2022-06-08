@@ -24,8 +24,14 @@ $app->get('/batch', function (Request $request, Response $data, $args) use ($bat
 
 $app->get('/batch/{id}', function (Request $request, Response $response, $args) use ($batchDao, $tanquesDao) {
   $dataBatch = $batchDao->findBatchById($args["id"]);
-  $tanques = $tanquesDao->findTanquesById($args["id"]);
-  $batch = array_merge($dataBatch, $tanques);
+
+  if ($dataBatch != false) {
+    $tanques = $tanquesDao->findTanquesById($args["id"]);
+    if ($tanques != false)
+      $batch = array_merge($dataBatch, $tanques);
+    else
+      $batch = $dataBatch;
+  }
 
   $response->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
@@ -45,29 +51,42 @@ $app->get('/batchcerrados', function (Request $request, Response $response, $arg
 
 $app->post('/saveBatch', function (Request $request, Response $response, $args) use ($batchDao, $ultimoBatchDao, $tanquesDao, $controlFirmasDao, $multiDao) {
   $dataBatch = $request->getParsedBody();
+  $flag_tanques = 1;
+
+  //Si el data esta vacio
+  if (sizeof($dataBatch) == 0) {
+    session_start();
+    $dataBatch = $_SESSION['dataPedidos'];
+    $flag_tanques = 0;
+  }
 
   /* Crear el batch */
-  $resp = $batchDao->saveBatch($dataBatch);
+  for ($i = 0; $i < sizeof($dataBatch); $i++) {
 
-  /* Indentifica el ultimo Batch ingresado */
-  if ($resp == null)
-    $id_batch = $ultimoBatchDao->ultimoBatchCreado();
+    $resp = $batchDao->saveBatch($dataBatch[$i]);
 
-  /* Crea los tanques */
-  if ($resp == null)
-    $resp = $tanquesDao->saveTanques($id_batch['id'], $dataBatch);
+    /* Indentifica el ultimo Batch ingresado */
+    if ($resp == null)
+      $id_batch = $ultimoBatchDao->ultimoBatchCreado();
 
-  /* Crea el control de formulas */
-  if ($resp == null)
-    $resp = $controlFirmasDao->saveControlFirmas($id_batch['id']);
+    /* Crea los tanques */
+    if ($resp == null and $flag_tanques == 1)
+      $resp = $tanquesDao->saveTanques($id_batch['id'], $dataBatch[$i]);
 
-  /* Crea la multipresentacion */
-  if ($resp == null)
-    $resp = $multiDao->saveMulti($id_batch['id'], $dataBatch);
+    /* Crea el control de formulas */
+    if ($resp == null)
+      $resp = $controlFirmasDao->saveControlFirmas($id_batch['id']);
+
+    /* Crea la multipresentacion */
+    if ($resp == null)
+      $resp = $multiDao->saveMulti($id_batch['id'], $dataBatch[$i]);
+  }
 
   /* Notificaciones*/
-  if ($resp == null)
+  if ($resp == null and $flag_tanques == 1)
     $resp = array('success' => true, 'message' => 'Nuevo Batch creado correctamente');
+  else if ($resp == null and $flag_tanques == 0)
+    $resp = array('success' => true, 'message' => 'Nuevos Batchs creados correctamente');
   else
     $resp = array('error' => true, 'message' => 'Ocurrio un error mientras creaba el Batch. Intentelo nuevamente');
 

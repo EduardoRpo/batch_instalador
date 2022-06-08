@@ -72,7 +72,7 @@ function habilitarbotones() {
 /* Carga de Cargos  */
 
 $.ajax({
-    url: `../../api/cargos`,
+    url: `/api/cargos`,
     type: 'GET',
 }).done((data, status, xhr) => {
     data.forEach((cargo, indx) => {
@@ -84,10 +84,10 @@ $.ajax({
 /* Formula Materia Prima  */
 
 $(document).ready(function() {
-    batch_record()
+    //batch_record()
     tablePesaje = $('#tablePesaje').dataTable({
         ajax: {
-            url: `../../api/materiasp/${referencia}`,
+            url: `/api/materiasp/${referencia}`,
             dataSrc: '',
         },
         paging: false,

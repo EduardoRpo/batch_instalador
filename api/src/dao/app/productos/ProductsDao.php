@@ -64,19 +64,19 @@ class ProductsDao
         $this->logger->notice("granel Obtenidos", array('granel' => $granel));
         return $granel;
     }
-    
+
     // Buscar tamaño de lote presentacion por el nombre del granel
-    public function findProductGranel($dataGranel)
+    public function findProductGranel($granel)
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("SELECT pc.nombre as presentacion 
                                       FROM producto p 
                                       INNER JOIN presentacion_comercial pc On pc.id = p.presentacion_comercial 
                                       WHERE p.referencia = :referencia");
-        $stmt->execute(['referencia' => $dataGranel['granel']]);
+        $stmt->execute(['referencia' => $granel]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         $presentacion = $stmt->fetch($connection::FETCH_ASSOC);
-        $this->logger->notice("presentacion Obtenido", $presentacion);
-        return $presentacion['presentacion'];
+        $this->logger->notice("presentacion Obtenida", array('presentacion' => $presentacion));
+        return $presentacion;
     }
 }

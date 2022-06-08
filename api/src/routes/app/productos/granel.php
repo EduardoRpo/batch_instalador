@@ -13,7 +13,7 @@ $app->get('/productsGranel', function (Request $request, Response $response, $ar
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-// Buscar Un solo granel
+/* Buscar Un solo granel
 $app->post('/productGranel', function (Request $request, Response $response, $args) use ($productsDao) {
   $dataGranel = $request->getParsedBody();
 
@@ -27,4 +27,4 @@ $app->post('/productGranel', function (Request $request, Response $response, $ar
 
   $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
-});
+}); */

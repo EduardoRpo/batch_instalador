@@ -1,5 +1,6 @@
 var tabla;
 var editar;
+let ref;
 
 /* Mostrar Menu seleccionado */
 
@@ -18,12 +19,9 @@ $("#link_preparaciones").css("background", "coral");
 //function cargarSelectorModulo() {
 
 $.ajax({
-    /*  method: "POST",
-     url: "php/c_instructivo.php",
-     data: { operacion: "1" }, */
     url: '/api/granel',
     success: function(resp) {
-        //var info = JSON.parse(response);
+        ref = resp
         let $selectProductos = $("#cmbReferenciaProductos");
 
         $selectProductos.empty();
@@ -45,27 +43,21 @@ $("#cmbReferenciaProductos").change(function(e) {
     e.preventDefault();
     let referencia = $("select option:selected").val();
 
-    $.ajax({
-        type: "POST",
-        url: "php/c_instructivo.php",
-        data: { operacion: "2", referencia },
+    const resultado = ref.find(refer => refer.referencia === referencia);
+    console.log(resultado)
 
-        success: function(response) {
-            var info = JSON.parse(response);
-            $("#txtnombreProducto").val("");
-            $("#txtnombreProducto").val(info.data[0].nombre_referencia);
+    $("#txtnombreProducto").val("");
+    $("#txtnombreProducto").val(resultado.nombre_referencia);
 
-            if (info.data[0].base_instructivo == 0) {
-                $(".adicionarInstructivo").slideUp();
-                $(".btnadicionarInstructivo").prop("disabled", true);
-                $(".alert_instructivos_base").slideDown();
-            } else {
-                $(".adicionarInstructivo").slideDown();
-                $(".btnadicionarInstructivo").prop("disabled", false);
-                $(".alert_instructivos_base").slideUp();
-            }
-        },
-    });
+    /* if (info.data[0].base_instructivo == 0) {
+        $(".adicionarInstructivo").slideUp();
+        $(".btnadicionarInstructivo").prop("disabled", true);
+        $(".alert_instructivos_base").slideDown();
+    } else {
+        $(".adicionarInstructivo").slideDown();
+        $(".btnadicionarInstructivo").prop("disabled", false);
+        $(".alert_instructivos_base").slideUp();
+    } */
 
     cargarTablaFormulas(referencia);
 });
@@ -81,9 +73,7 @@ function cargarTablaFormulas(referencia) {
         language: { url: "admin_componentes/es-ar.json" },
 
         ajax: {
-            method: "POST",
-            url: "php/c_instructivo.php",
-            data: { operacion: "3", referencia },
+            url: `/api/instructivos/${referencia}`,
             dataSrc: "",
         },
 

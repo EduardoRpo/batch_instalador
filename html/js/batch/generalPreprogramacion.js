@@ -1,8 +1,8 @@
 const alertConfirm = (data) => {
-    alertify
-        .confirm(
-            'Samara Cosmetics',
-            `<p>¿Desea programar los lotes?<p><br></p>
+  alertify
+    .confirm(
+      'Samara Cosmetics',
+      `<p>¿Desea programar los lotes?<p><br></p>
                 <table class="table table-striped table-bordered dataTable no-footer text-center" aria-describedby="tablaPreBatch_info">
                 <thead>
                   <tr>
@@ -16,125 +16,122 @@ const alertConfirm = (data) => {
                   ${(row = addRows(data))}
                 </tbody>
             </table>`,
-            function() {
-                dataGranel = checkTamanio(data.tamanio, pedidosProgramar);
-                // Buscar lote presentacion
-                findPresentation(dataGranel);
-            },
-            function() {
-                $('.checkboxPedidos').prop('checked', false);
-                clearInputArray(pedidosProgramar);
-            }
-        )
-        .set('labels', { ok: 'Si', cancel: 'No' })
-        .set('resizable', true).resizeTo(800, 500);;
+      function () {
+        saveBatch();
+      },
+      function () {
+        //clearInputArray(pedidosProgramar);
+        deleteSession();
+      }
+    )
+    .set('labels', { ok: 'Si', cancel: 'No' })
+    .set({ closableByDimmer: false })
+    .set('resizable', true)
+    .resizeTo(800, 500);
 };
 
 addRows = (data) => {
-    granel = data.granel;
-    tamanio = data.tamanio;
-    cantidad = data.cantidades;
+  //cantPedidos = data.cantidad_pedidos;
+  //cantReferencias = data.cantidad_referencias;
+  granel = data.granel;
+  tamanio = data.tamanio;
+  cantidad = data.cantidades;
+  producto = data.producto;
 
-    row = [];
-    for (i = 0; i < granel.length; i++) {
-        row.push(
-            `<tr ${(text = color(tamanio[i]))}>
+  row = [];
+  for (i = 0; i < granel.length; i++) {
+    row.push(`<tr ${(text = color(tamanio[i]))}>
                 <td>${granel[i]}</td>
-                <td>TRATAMIENTO KERATINA PROGRESIVO - KERAMAGIC ALISADOR (200 ML)</td>
+                <td>${producto[i]}</td>
                 <td>${tamanio[i].toFixed(2)}</td>
                 <td>${cantidad[i]}</td>
                 ${(symbol = check(tamanio[i]))}
-                </tr>`
-        );
-    }
-    return row;
+                </tr>`);
+  }
+  return row;
 };
 
 color = (tamanio) => {
-    if (tamanio > 2500) text = 'style="color: red"';
-    else text = 'aria-describedby="tablaPreBatch_info"';
+  if (tamanio > 2500) text = 'style="color: red"';
+  else text = 'aria-describedby="tablaPreBatch_info"';
 
-    return text;
+  return text;
 };
 
 check = (tamanio) => {
-    if (tamanio > 2500) {
-        symbol =
-            '<td style="font-size:22px; font-weight: bold; color:red;">&#x2716</td>';
-    } else
-        symbol =
-        '<td style="font-size:22px; font-weight: bold; color:green;">&#x2714</td>';
+  if (tamanio > 2500) {
+    symbol =
+      '<td style="font-size:22px; font-weight: bold; color:red;">&#x2716</td>';
+  } else
+    symbol =
+      '<td style="font-size:22px; font-weight: bold; color:green;">&#x2714</td>';
 
-    return symbol;
+  return symbol;
 };
 
-// Opcion SI
-checkTamanio = (tamanio, data) => {
-    // Eliminar array si el tamaño es mayor a 2500
-    for (i = 0; i < data.length; i++) {
-        if (tamanio[i] > 2500) {
-            // Limpiar input y checkbox
-            $(`#cant-${data[i].numPedido}-${data[i].referencia}`).val('');
-            $(`#${data[i].numPedido}-${data[i].referencia}`).prop('checked', false);
-            // Eliminar array
-            deleteArray(data[i].numPedido);
-        }
-    }
-    return data;
+//Opcion SI
+saveBatch = () => {
+  $.ajax({
+    type: 'POST',
+    url: '/api/saveBatch',
+    success: function (data) {
+      message(data);
+      $('#tablaPreBatch').DataTable().ajax.reload();
+
+      //saveFecha_insumo(pedidosProgramar);
+      deleteSession();
+    },
+  });
 };
 
-findPresentation = (dataGranel) => {
-    $.ajax({
-        type: 'POST',
-        url: '/api/productGranel',
-        data: { data: dataGranel },
-        success: function(r) {
-            for (let i in dataGranel) {
-                dataGranel[i]['presentacion'] =
-                    r[`presentacion-${dataGranel[i].granel}`];
-            }
+/*saveFecha_insumo = (data) => {
+  //$('#tablaPreBatch').DataTable().clear();
 
-            for (let i in dataGranel) {
-                saveBatch(dataGranel[i]);
-            }
-        },
-    });
-};
+  for (i = 0; i < data.length; i++) {
+    $(`#date-${data[i].numPedido}-${data[i].referencia}`).val(
+      data[i].fecha_insumo
+    );
 
-saveBatch = (dataGranel) => {
-    /*
-      dataGranel['ref'] = dataGranel['referencia'];
-          id_batch,
-          unidades,
-          lote: lote,
-          presentacion: presentacion_comercial,
-          programacion,
-          tanque,
-          cantidades,
-          multi
-      };*/
-    $.ajax({
-        type: 'POST',
-        url: '/api/saveBatch',
-        data: dataGranel,
+    calcfechaSugeridas(
+      data[i].fecha_insumo,
+      `${data[i].numPedido}-${data[i].referencia}`
+    );
+  }
+};*/
 
-        success: function(data) {
-            message(data);
-        },
-    });
-};
+/*Limpiar inputs que ya se crearon
+$(document).on('click', '.cantProgram', function () {
+  //e.preventDefault();
+  id_input = this.id;
+  id_date = id_input.substr(5, 13);
+  cantidad = $(`#${id_input}`).val();
 
-// Opcion NO
+  if (cantidad > 0 && pedidosProgramar.length > 0) {
+    numPedido = id_checkbox.slice(0, -8);
+    $(`#${id_input}`).val('');
+    $(`#date-${id_date}`).val('');
+    deleteArray(numPedido);
+  }
+});*/
+
+/* Opcion NO
 clearInputArray = (data) => {
-    // Limpiar inputs
-    for (i = 0; i < data.length; i++) {
-        $(`#cant-${data[i].numPedido}-${data[i].referencia}`).val('');
-        $(`#date-${data[i].numPedido}-${data[i].referencia}`).val('');
-    }
-    // Limpiar Array
-    for (i = data.length; i > 0; i--)
-        data.pop();
+  // Limpiar inputs
+  for (i = 0; i < data.length; i++) {
+    $(`#cant-${data[i].numPedido}-${data[i].referencia}`).val('');
+    $(`#date-${data[i].numPedido}-${data[i].referencia}`).val('');
+  }
+  // Limpiar Array
+  for (i = data.length; i > 0; i--) data.pop();
 
-    //Ir al backend y borrar la variable de Session $dataPedidos
+  //Ir al backend y borrar la variable de Session $dataPedidos
+  deleteSession();
+}; */
 
+deleteSession = () => {
+  $.ajax({
+    type: 'GET',
+    url: '/api/eliminarLote',
+  });
+  $('#tablaPreBatch').DataTable().ajax.reload();
 };

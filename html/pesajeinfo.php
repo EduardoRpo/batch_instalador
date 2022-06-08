@@ -285,8 +285,10 @@ include_once('modal/modal_condicionesMedio.php');
   <script src="../../html/js/utils/custom.min.js"></script>
   <script src="../../html/vendor/jquery-confirm/jquery-confirm.min.js"></script>
   <!-- <script src="../../html/js/datatables.js"></script> -->
+
   <script src="../../html/js/global/loadinfo-global.js"></script>
   <script src="../../html/js/pesaje/pesajeinfo.js"></script>
+  <script src="../../html/js/pesaje/tblFormula.js"></script>
   <script src="../../html/js/global/despeje.js"></script>
   <script src="../../html/js/global/tanques.js"></script>
   <script src="../../html/js/global/condiciones_medio.js"></script>
