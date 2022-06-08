@@ -125,7 +125,7 @@ include_once("modal/modalPedidos.php");
             <div class="card-header" style="background: #FCF9F8;">
               <ul class="nav nav-tabs card-header-tabs" id="batch-list" role="tablist">
                 <li class="nav-item">
-                  <a class="nav-link" id="one-tab" data-toggle="tab" href="#one" role="tab" aria-controls="One" aria-selected="false">PreProgramados</a>
+                  <a class="nav-link" id="one-tab" data-toggle="tab" href="#one" role="tab" aria-controls="One" aria-selected="false">Planeación</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" id="two-tab" data-toggle="tab" href="#two" role="tab" aria-controls="Two" aria-selected="false">Inactivos</a>

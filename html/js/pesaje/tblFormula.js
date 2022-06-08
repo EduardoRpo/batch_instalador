@@ -1,4 +1,4 @@
-tablePesaje = $('#tablePesaje').dataTable({
+/* tablePesaje = $('#tablePesaje').dataTable({
     ajax: {
         url: `/api/materiasp/${referencia}`,
         dataSrc: '',
@@ -66,4 +66,4 @@ tablePesaje = $('#tablePesaje').dataTable({
             },
         },
     ],
-})
+}) */
