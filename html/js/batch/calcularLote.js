@@ -32,7 +32,7 @@ $(document).ready(function () {
 
   //Eliminar registros en el array
 
-  $(document).on('change', '.checkboxPedidos', function (e) {
+  /*$(document).on('change', '.checkboxPedidos', function (e) {
     e.preventDefault();
     id_checkbox = this.id;
     numPedido = id_checkbox.slice(0, -8);
@@ -42,7 +42,7 @@ $(document).ready(function () {
       $(`#date-${id_checkbox}`).val('');
       deleteArray(numPedido);
     } else $(`#${id_checkbox}`).prop('checked', false);
-  });
+  });*/
 
   arrayPreprogramados = (referencia, cantidad, numPedido) => {
     /* validar que el numero de pedido y referencia no esten en el array e insertar 
@@ -85,7 +85,7 @@ $(document).ready(function () {
     $.ajax({
       type: 'POST',
       url: '/api/calcTamanioLote',
-      data: { data: pedidosProgramar },
+      data: { data: data },
       success: function (resp) {
         // Ventana alert confirm
         alertConfirm(resp);
@@ -109,9 +109,11 @@ $(document).ready(function () {
     numPedido = id_date.slice(5, -8);
     date = $(`#${id_date}`).val();
 
-    if (date) calcfechaSugeridas(date, id_input);
+    if (date) {
+      calcfechaSugeridas(date, id_input);
 
-    fechaInsumo(id_input, numPedido, pedidosProgramar, date);
+      fechaInsumo(id_input, numPedido, pedidosProgramar, date);
+    }
   });
 
   calcfechaSugeridas = (date, id_input) => {

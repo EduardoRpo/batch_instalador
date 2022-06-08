@@ -68,6 +68,11 @@ $(document).ready(function () {
         className: 'uniqueClassName',
       },
       {
+        title: 'No Semana',
+        data: 'semanas',
+        className: 'uniqueClassName',
+      },
+      {
         title: 'Fecha Programación',
         data: 'fecha_programacion',
         className: 'uniqueClassName',
@@ -146,11 +151,13 @@ $(document).ready(function () {
       {
         title: 'Propietario',
         data: 'propietario',
+        visible: false,
       },
       {
         title: 'Pedido',
         data: 'pedido',
         className: 'text-center',
+        visible: false,
       },
       {
         title: 'F_Pedido',
@@ -175,6 +182,7 @@ $(document).ready(function () {
         title: 'Cant_Original',
         data: 'cant_original',
         className: 'text-center',
+        visible: false,
         render: $.fn.dataTable.render.number('.', ',', 0, ' '),
       },
       {
@@ -202,7 +210,11 @@ $(document).ready(function () {
         data: null,
         render: function (data) {
           return `
-                    <input type="date" class="dateInsumos form-control-updated text-center" id="date-${data.pedido}-${data.id_producto}" value="${data.fecha_insumo}"/>`;
+                    <input type="date" class="dateInsumos form-control-updated text-center" id="date-${
+                      data.pedido
+                    }-${data.id_producto}" value="${
+            data.fecha_insumo
+          }" max="${(date = fechaActual())}"/>`;
         },
       },
       /* {
@@ -363,6 +375,11 @@ $(document).ready(function () {
         className: 'uniqueClassName',
       },
       {
+        title: 'No Semana',
+        data: 'semanas',
+        className: 'uniqueClassName',
+      },
+      {
         title: 'Fecha Programación',
         data: 'fecha_programacion',
         className: 'uniqueClassName',
@@ -453,3 +470,19 @@ var oneJan = new Date(currentdate.getFullYear(), 0, 1);
 var numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
 var result = Math.ceil((currentdate.getDay() + 1 + numberOfDays) / 7);
 console.log(`The week number is S${result}.`);
+
+fechaActual = () => {
+  tiempoTranscurrido = Date.now();
+  date = new Date(tiempoTranscurrido);
+
+  let day = date.getDate();
+  let month = date.getMonth() + 1;
+  let year = date.getFullYear();
+
+  if (month < 10) {
+    if (day < 10) date = `${year}-0${month}-0${day}`;
+    else date = `${year}-0${month}-${day}`;
+  } else date = `${year}-${month}-${day}`;
+
+  return date;
+};

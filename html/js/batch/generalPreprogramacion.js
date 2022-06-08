@@ -1,8 +1,11 @@
-const alertConfirm = (data) => {
-  alertify
-    .confirm(
-      'Samara Cosmetics',
-      `<p>¿Desea programar los lotes?<p><br></p>
+$(document).ready(function () {
+  alertConfirm = (data) => {
+    alertify
+      .confirm(
+        'Samara Cosmetics',
+        `<p>¿Desea programar los lotes?</p><br><p>Cantidad Pedidos: ${
+          data.cantidad_pedidos
+        } - Cantidad Referencias: ${data.cantidad_referencias}</p><p><br></p>
                 <table class="table table-striped table-bordered dataTable no-footer text-center" aria-describedby="tablaPreBatch_info">
                 <thead>
                   <tr>
@@ -16,90 +19,79 @@ const alertConfirm = (data) => {
                   ${(row = addRows(data))}
                 </tbody>
             </table>`,
-      function () {
-        saveBatch();
-      },
-      function () {
-        //clearInputArray(pedidosProgramar);
-        deleteSession();
-      }
-    )
-    .set('labels', { ok: 'Si', cancel: 'No' })
-    .set({ closableByDimmer: false })
-    .set('resizable', true)
-    .resizeTo(800, 500);
-};
+        function () {
+          saveBatch();
+        },
+        function () {
+          clearInputArray();
+        }
+      )
+      .set('labels', { ok: 'Si', cancel: 'No' })
+      .set({ closableByDimmer: false })
+      .set('resizable', true)
+      .resizeTo(800, 500);
+  };
 
-addRows = (data) => {
-  //cantPedidos = data.cantidad_pedidos;
-  //cantReferencias = data.cantidad_referencias;
-  granel = data.granel;
-  tamanio = data.tamanio;
-  cantidad = data.cantidades;
-  producto = data.producto;
+  addRows = (data) => {
+    granel = data.granel;
+    tamanio = data.tamanio;
+    cantidad = data.cantidades;
+    producto = data.producto;
 
-  row = [];
-  for (i = 0; i < granel.length; i++) {
-    row.push(`<tr ${(text = color(tamanio[i]))}>
+    row = [];
+    for (i = 0; i < granel.length; i++) {
+      row.push(`<tr ${(text = color(tamanio[i]))}>
                 <td>${granel[i]}</td>
                 <td>${producto[i]}</td>
                 <td>${tamanio[i].toFixed(2)}</td>
                 <td>${cantidad[i]}</td>
                 ${(symbol = check(tamanio[i]))}
                 </tr>`);
-  }
-  return row;
-};
+    }
+    return row;
+  };
 
-color = (tamanio) => {
-  if (tamanio > 2500) text = 'style="color: red"';
-  else text = 'aria-describedby="tablaPreBatch_info"';
+  color = (tamanio) => {
+    if (tamanio > 2500) text = 'style="color: red"';
+    else text = 'aria-describedby="tablaPreBatch_info"';
 
-  return text;
-};
+    return text;
+  };
 
-check = (tamanio) => {
-  if (tamanio > 2500) {
-    symbol =
-      '<td style="font-size:22px; font-weight: bold; color:red;">&#x2716</td>';
-  } else
-    symbol =
-      '<td style="font-size:22px; font-weight: bold; color:green;">&#x2714</td>';
+  check = (tamanio) => {
+    if (tamanio > 2500) {
+      symbol =
+        '<td style="font-size:22px; font-weight: bold; color:red;">&#x2716</td>';
+    } else
+      symbol =
+        '<td style="font-size:22px; font-weight: bold; color:green;">&#x2714</td>';
 
-  return symbol;
-};
+    return symbol;
+  };
 
-//Opcion SI
-saveBatch = () => {
-  $.ajax({
-    type: 'POST',
-    url: '/api/saveBatch',
-    success: function (data) {
-      message(data);
-      $('#tablaPreBatch').DataTable().ajax.reload();
+  //Opcion SI
+  saveBatch = () => {
+    $.ajax({
+      type: 'POST',
+      url: '/api/saveBatch',
+      success: function (data) {
+        message(data);
+        $('#tablaPreBatch').DataTable().clear();
+        $('#tablaPreBatch').DataTable().ajax.reload();
+        saveFecha_insumo(pedidosProgramar);
 
-      //saveFecha_insumo(pedidosProgramar);
-      deleteSession();
-    },
-  });
-};
+        pedidosProgramar.pop();
+        deleteSession();
+      },
+    });
+  };
 
-/*saveFecha_insumo = (data) => {
-  //$('#tablaPreBatch').DataTable().clear();
-
-  for (i = 0; i < data.length; i++) {
-    $(`#date-${data[i].numPedido}-${data[i].referencia}`).val(
-      data[i].fecha_insumo
-    );
-
-    calcfechaSugeridas(
-      data[i].fecha_insumo,
-      `${data[i].numPedido}-${data[i].referencia}`
-    );
-  }
-};*/
-
-/*Limpiar inputs que ya se crearon
+  saveFecha_insumo = (data) => {
+    for (i = 0; i < data.length; i++) {
+      $(`#date-${data[i].numPedido}-${data[i].referencia}`).blur();
+    }
+  };
+  /*Limpiar inputs que ya se crearon
 $(document).on('click', '.cantProgram', function () {
   //e.preventDefault();
   id_input = this.id;
@@ -114,24 +106,19 @@ $(document).on('click', '.cantProgram', function () {
   }
 });*/
 
-/* Opcion NO
-clearInputArray = (data) => {
-  // Limpiar inputs
-  for (i = 0; i < data.length; i++) {
-    $(`#cant-${data[i].numPedido}-${data[i].referencia}`).val('');
-    $(`#date-${data[i].numPedido}-${data[i].referencia}`).val('');
-  }
-  // Limpiar Array
-  for (i = data.length; i > 0; i--) data.pop();
+  // Opcion NO
+  clearInputArray = () => {
+    $('#tablaPreBatch').DataTable().ajax.reload();
+    //saveFecha_insumo(pedidosProgramar);
+    deleteSession();
+    pedidosProgramar.pop();
+  };
 
   //Ir al backend y borrar la variable de Session $dataPedidos
-  deleteSession();
-}; */
-
-deleteSession = () => {
-  $.ajax({
-    type: 'GET',
-    url: '/api/eliminarLote',
-  });
-  $('#tablaPreBatch').DataTable().ajax.reload();
-};
+  deleteSession = () => {
+    $.ajax({
+      type: 'GET',
+      url: '/api/eliminarLote',
+    });
+  };
+});
