@@ -85,9 +85,7 @@ async function cargarMulti(multi) {
     let $select = $(`#MultiReferencia${index}`);
 
     $select.empty();
-    $select.append(
-        "<option disabled selected>" + "Multipresentación" + "</option>"
-    );
+    $select.append("<option disabled selected>Multipresentación</option>");
 
     $.each(multi, function(i, value) {
         $select.append(
@@ -172,7 +170,7 @@ $(document).on("click", ".link-editarMulti", function(e) {
                 for (let i = 0; i < resp.length; i++) {
                     $(`#MultiReferencia${i + 1}`).val(resp[i].referencia);
                     $(`#cantidadMulti${i + 1}`).val(resp[i].cantidad);
-                    $(`#tamanioloteMulti${i + 1}`).val(resp[i].total);
+                    $(`#tamanioloteMulti${i + 1}`).val((resp[i].total).toFixed(2));
                     $(`#densidadMulti${i + 1}`).val(resp[i].densidad);
                     $(`#presentacionMulti${i + 1}`).val(resp[i].presentacion);
                     lote = lote + resp[i].total

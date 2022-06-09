@@ -6,6 +6,8 @@ use BatchRecord\dao\UltimoBatchCreadoDao;
 use BatchRecord\dao\TanquesDao;
 use BatchRecord\dao\ControlFirmasDao;
 use BatchRecord\dao\MultiDao;
+use BatchRecord\dao\ExplosionMaterialesPedidosRegistroDao;
+
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -15,6 +17,7 @@ $ultimoBatchDao = new UltimoBatchCreadoDao();
 $tanquesDao = new TanquesDao();
 $controlFirmasDao = new ControlFirmasDao();
 $multiDao = new MultiDao();
+$EMPedidosRegistroDao = new ExplosionMaterialesPedidosRegistroDao();
 
 $app->get('/batch', function (Request $request, Response $data, $args) use ($batchDao) {
   $batch = $batchDao->findActive();
@@ -49,7 +52,7 @@ $app->get('/batchcerrados', function (Request $request, Response $response, $arg
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->post('/saveBatch', function (Request $request, Response $response, $args) use ($batchDao, $ultimoBatchDao, $tanquesDao, $controlFirmasDao, $multiDao) {
+$app->post('/saveBatch', function (Request $request, Response $response, $args) use ($batchDao, $ultimoBatchDao, $tanquesDao, $controlFirmasDao, $multiDao, $EMPedidosRegistroDao) {
   $dataBatch = $request->getParsedBody();
   $flag_tanques = 1;
 
@@ -80,6 +83,13 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
     /* Crea la multipresentacion */
     if ($resp == null)
       $resp = $multiDao->saveMulti($id_batch['id'], $dataBatch[$i]);
+
+    /* Actualizar explosion_materiales_pedidos_registro */
+    if ($resp == null) {
+      $multi = json_decode($dataBatch[$i]['multi'], true);
+      for ($j = 0; $j < sizeof($multi); $j++)
+        if ($multi[$j]['pedido']) $EMPedidosRegistroDao->updateEMPedidosRegistro($multi[$j]);
+    }
   }
 
   /* Notificaciones*/

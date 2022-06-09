@@ -53,9 +53,16 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
   }
 
   $newDataPedidos = array();
-  $cantPedidos = array();
-  $cantReferencias = array();
   $count = sizeof($dataPedidos);
+  $cantReferencias = $count;
+
+  // Buscar cantidad de refencias
+  for ($i = 0; $i < $count; $i++) {
+    for ($j = $i; $j < $count; $j++) {
+      $j == $i ? $j = $j + 1 : $j;
+      if ($dataPedidos[$i]['referencia'] == $dataPedidos[$j]['referencia']) $cantReferencias = $cantReferencias - 1;
+    }
+  }
 
   for ($i = 0; $i < $count; $i++) {
     //Buscar lotePresentacion Granel
@@ -70,22 +77,15 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
       'pedido' => $dataPedidos[$i]['numPedido'], 'referencia' => $dataPedidos[$i]['referencia'], 'cantidadunidades' => $dataPedidos[$i]['cantidad_acumulada'],
       'tamaniopresentacion' => $dataPedidos[$i]['tamanio_lote'], 'fecha_insumo' => $dataPedidos[$i]['fecha_insumo']
     );
-    //$cantPedidos[$dataPedidos[$i]['granel']] = sizeof($newDataPedidos[$i]['multi']);
-    //$cantReferencias[$dataPedidos[$i]['granel']] = 1;
 
     //Agregar al multi con la misma referencia
     for ($j = 0; $j < $count; $j++) {
       $j == $i ? $j = $j + 1 : $j;
-      if ($dataPedidos[$j]['granel'] == $newDataPedidos[$i]['ref']) {
+      if ($dataPedidos[$j]['granel'] == $newDataPedidos[$i]['ref'])
         $newDataPedidos[$i]['multi'][$j] = array(
           'pedido' => $dataPedidos[$j]['numPedido'], 'referencia' => $dataPedidos[$j]['referencia'], 'cantidadunidades' => $dataPedidos[$j]['cantidad_acumulada'],
           'tamaniopresentacion' => $dataPedidos[$j]['tamanio_lote'], 'fecha_insumo' => $dataPedidos[$j]['fecha_insumo']
         );
-        /* Revisar cantidad de pedidos y referencias 
-        $cantPedidos[$dataPedidos[$i]['granel']] = sizeof($newDataPedidos[$i]['multi']);
-        $numReferencia = 1;
-        if ($newDataPedidos[$i]['multi'][$j]['referencia'] != $newDataPedidos[$i]['multi'][$j + 1]['referencia']) $cantReferencias[$dataPedidos[$i]['granel']] = $numReferencia + 1; */
-      }
     }
 
     //Eliminar las referencias de los graneles que la suma supera los 2500 kg
@@ -106,18 +106,12 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
   for ($i = 0; $i < $count; $i++) {
     for ($j = 0; $j < $count; $j++) {
       $j == $i ? $j = $j + 1 : $j;
-      if ($newDataPedidos[$i]['ref'] == $dataPedidos[$j]['granel']) {
-        unset($newDataPedidos[$j]);
-        //unset($cantPedidos[$dataPedidos[$i]['numPedido']]);
-        //unset($cantReferencias[$dataPedidos[$i]['referencia']]);
-      }
+      if ($newDataPedidos[$i]['ref'] == $dataPedidos[$j]['granel']) unset($newDataPedidos[$j]);
     }
   }
 
   //Resetear llaves arrays
   $newDataPedidos = array_values($newDataPedidos);
-  /*$cantPedidos = array_values($cantPedidos);
-  $cantReferencias = array_values($cantReferencias);*/
 
   //Almacenar en variables de session la variable $dataPedidos
   session_start();
@@ -125,7 +119,7 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
 
 
   $sumArrayTotal = array(
-    'cantidad_pedidos' => array_values($cantPedidos), 'cantidad_referencias' => array_values($cantReferencias), 'granel' => array_keys($sumArrayGranel),
+    'cantidad_pedidos' => $count, 'cantidad_referencias' => $cantReferencias, 'granel' => array_keys($sumArrayGranel),
     'producto' => $producto, 'tamanio' => array_values($sumArrayGranel), 'cantidades' => array_values($sumArrayCantidades)
   );
 
@@ -137,4 +131,6 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
 $app->get('/eliminarLote', function (Request $request, Response $response, $args) {
   session_start();
   unset($_SESSION['dataPedidos']);
+  $response->getBody()->write(json_encode(JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
 });
