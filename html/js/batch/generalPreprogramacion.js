@@ -71,6 +71,7 @@ $(document).ready(function() {
     //Opcion SI
     saveBatch = () => {
         $.ajax({
+            type: 'POST',
             url: '/api/saveBatch',
             success: function(data) {
                 message(data);
