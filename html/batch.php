@@ -50,31 +50,34 @@ include_once("modal/modalPedidos.php");
         <div class="tituloProceso">
           <h1 class="text-themecolor"><b>Batch Record</b></h1>
         </div>
-        <?php if ($_SESSION['rol'] != 6) {  ?>
-          <div class="botones-group">
-            <div class="dropdown btn-acciones">
-              <button class="btn btn-secondary dropdown-toggle " style="background-color:#fff;color:#FF8D6D; border-color:#FF8D6D;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <!-- <a class="dropdown-item" href="#" onclick="multipresentacion()"><i class="fa fa-superscript"></i> Multipresentación</a> -->
+        <div class="botones-group">
+          <div class="dropdown btn-acciones">
+            <button class="btn btn-secondary dropdown-toggle " style="background-color:#fff;color:#FF8D6D; border-color:#FF8D6D;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <!-- <a class="dropdown-item" href="#" onclick="multipresentacion()"><i class="fa fa-superscript"></i> Multipresentación</a> -->
+              <?php if ($_SESSION['rol'] != 6) {  ?>
                 <a class="dropdown-item" href="#" onclick="clonar()"><i class="fa fa-clone"></i> Clonar</a>
                 <a class="dropdown-item" href="#" onclick="batchEliminados()"><i class="fa fa-eraser"></i> Batch Eliminados</a>
                 <a class="dropdown-item pdf" href="#"><i class="fa fa-download"></i> Imprimir PDF</a>
+              <?php } ?>
+              <?php if ($_SESSION['rol'] == 6 OR $_SESSION['rol'] == 1) {  ?>
                 <a class="dropdown-item" href="#" id="btnCargarExcelPedidos"><i class="fa fa-download"></i> Pedidos</a>
-              </div>
+              <?php } ?>
             </div>
+          </div>
 
-            <!-- ambos botones tienen hidden-sm-down -->
-            <!-- <button type="button" class="btn waves-effect waves-light btn-danger btn-filtrar" style="background-color:#fff;color:#FF8D6D" onclick="filtrarfechas()">
+          <!-- ambos botones tienen hidden-sm-down -->
+          <!-- <button type="button" class="btn waves-effect waves-light btn-danger btn-filtrar" style="background-color:#fff;color:#FF8D6D" onclick="filtrarfechas()">
               Filtrar
             </button> -->
-
+          <?php if ($_SESSION['rol'] != 6) {  ?>
             <button type="button" class="btn waves-effect waves-light btn-danger btn-crearbatch" onclick="mostrarModal();">
               <strong>Crear Batch Record</strong>
             </button>
 
-          </div>
+        </div>
 
-        <?php } ?>
+      <?php } ?>
       </div>
     </div>
 
@@ -124,18 +127,22 @@ include_once("modal/modalPedidos.php");
           <div class="card">
             <div class="card-header" style="background: #FCF9F8;">
               <ul class="nav nav-tabs card-header-tabs" id="batch-list" role="tablist">
-                <li class="nav-item">
-                  <a class="nav-link" id="one-tab" data-toggle="tab" href="#one" role="tab" aria-controls="One" aria-selected="false">Planeación</a>
-                </li>
+                <?php if ($_SESSION['rol'] == 6 OR $_SESSION['rol'] == 1) {  ?>
+                  <li class="nav-item">
+                    <a class="nav-link" id="one-tab" data-toggle="tab" href="#one" role="tab" aria-controls="One" aria-selected="false">Planeación</a>
+                  </li>
+                <?php  } ?>
                 <li class="nav-item">
                   <a class="nav-link" id="two-tab" data-toggle="tab" href="#two" role="tab" aria-controls="Two" aria-selected="false">Inactivos</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link active" id="three-tab" data-toggle="tab" href="#three" role="tab" aria-controls="Three" aria-selected="true">Abiertos</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" id="four-tab" data-toggle="tab" href="#four" role="tab" aria-controls="Four" aria-selected="false">Cerrados</a>
-                </li>
+                <?php if ($_SESSION['rol'] != 6) {  ?>
+                  <li class="nav-item">
+                    <a class="nav-link" id="four-tab" data-toggle="tab" href="#four" role="tab" aria-controls="Four" aria-selected="false">Cerrados</a>
+                  </li>
+                <?php  } ?>
               </ul>
             </div>
 

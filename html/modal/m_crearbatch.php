@@ -123,7 +123,9 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" onclick="guardarDatos();" class="btn btn-primary crearbatch" name="guardarBatch" id="guardarBatch">Crear</button>
+                        <?php if ($_SESSION['rol'] != 6) {  ?>
+                            <button type="button" onclick="guardarDatos();" class="btn btn-primary crearbatch" name="guardarBatch" id="guardarBatch">Crear</button>
+                        <?php  }  ?>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 
                     </div>
