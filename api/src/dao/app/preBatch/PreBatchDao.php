@@ -21,27 +21,29 @@ class PreBatchDao
     {
         $connection = Connection::getInstance()->getConnection();
 
+        // $sql = "SELECT pp.nombre AS propietario, exp.pedido, exp.fecha_pedido, exp.estado, exp.cantidad_acumulada, exp.fecha_insumo, (SELECT referencia FROM producto 
+        //         WHERE multi = (SELECT multi FROM producto WHERE referencia = exp.id_producto) 
+        //         AND presentacion_comercial = 1) AS granel, exp.id_producto, p.nombre_referencia, exp.cant_original, exp.cantidad, 
+        //             DATE_ADD(exp.fecha_pedido, INTERVAL 8 DAY) AS fecha_pesaje, DATE_ADD(exp.fecha_pedido, INTERVAL 9 DAY) AS fecha_preparacion, 
+        //             DATE_ADD(exp.fecha_pedido, INTERVAL 6 DAY) AS recepcion_insumos, DATE_ADD(exp.fecha_pedido, INTERVAL 13 DAY) AS envasado, 
+        //             DATE_ADD(exp.fecha_pedido, INTERVAL 15 DAY) AS entrega 
+        //         FROM `explosion_materiales_pedidos_registro` exp 
+        //         INNER JOIN producto p ON p.referencia = exp.id_producto 
+        //         INNER JOIN propietario pp ON pp.id = p.id_propietario
+        //         WHERE exp.flag_estado = 0;";
+
         $sql = "SELECT pp.nombre AS propietario, exp.pedido, exp.fecha_pedido, exp.estado, exp.cantidad_acumulada, exp.fecha_insumo, (SELECT referencia FROM producto 
                 WHERE multi = (SELECT multi FROM producto WHERE referencia = exp.id_producto) 
                 AND presentacion_comercial = 1) AS granel, exp.id_producto, p.nombre_referencia, exp.cant_original, exp.cantidad, 
-                    DATE_ADD(exp.fecha_pedido, INTERVAL 8 DAY) AS fecha_pesaje, DATE_ADD(exp.fecha_pedido, INTERVAL 9 DAY) AS fecha_preparacion, 
-                    DATE_ADD(exp.fecha_pedido, INTERVAL 6 DAY) AS recepcion_insumos, DATE_ADD(exp.fecha_pedido, INTERVAL 13 DAY) AS envasado, 
-                    DATE_ADD(exp.fecha_pedido, INTERVAL 15 DAY) AS entrega 
+                    IFNULL(DATE_ADD(exp.fecha_insumo, INTERVAL 8 DAY),DATE_ADD(exp.fecha_pedido, INTERVAL 8 DAY)) AS fecha_pesaje, 						
+                    IFNULL(DATE_ADD(exp.fecha_insumo, INTERVAL 9 DAY),DATE_ADD(exp.fecha_pedido, INTERVAL 9 DAY)) AS fecha_preparacion, 
+                    -- IFNULL(DATE_ADD(exp.fecha_insumo, INTERVAL 6 DAY),DATE_ADD(exp.fecha_pedido, INTERVAL 6 DAY)) AS recepcion_insumos,
+               	    IFNULL(DATE_ADD(exp.fecha_insumo, INTERVAL 13 DAY),DATE_ADD(exp.fecha_pedido, INTERVAL 13 DAY)) AS envasado, 
+                    IFNULL(DATE_ADD(exp.fecha_insumo, INTERVAL 15 DAY),DATE_ADD(exp.fecha_pedido, INTERVAL 15 DAY)) AS entrega 
                 FROM `explosion_materiales_pedidos_registro` exp 
-                INNER JOIN producto p ON p.referencia = exp.id_producto 
-                INNER JOIN propietario pp ON pp.id = p.id_propietario
+                    INNER JOIN producto p ON p.referencia = exp.id_producto 
+                    INNER JOIN propietario pp ON pp.id = p.id_propietario
                 WHERE exp.flag_estado = 0;";
-
-        /* $sql = "SELECT pp.nombre AS propietario, exp.pedido, exp.fecha_pedido, exp.estado, exp.cantidad_acumulada, exp.fecha_insumo, (SELECT referencia FROM producto 
-                WHERE multi = (SELECT multi FROM producto WHERE referencia = exp.id_producto) 
-                AND presentacion_comercial = 1) AS granel, exp.id_producto, p.nombre_referencia, exp.cant_original, exp.cantidad, 
-                IFNULL((DATE_ADD(exp.fecha_insumo, INTERVAL 8 DAY) AS fecha_pesaje),0), DATE_ADD(exp.fecha_insumo, INTERVAL 9 DAY) AS fecha_preparacion, 
-                    DATE_ADD(exp.fecha_insumo, INTERVAL 6 DAY) AS recepcion_insumos, DATE_ADD(exp.fecha_insumo, INTERVAL 13 DAY) AS envasado, 
-                    DATE_ADD(exp.fecha_insumo, INTERVAL 15 DAY) AS entrega 
-                FROM `explosion_materiales_pedidos_registro` exp 
-                INNER JOIN producto p ON p.referencia = exp.id_producto 
-                INNER JOIN propietario pp ON pp.id = p.id_propietario
-                WHERE exp.flag_estado = 0;"; */
 
 
 

@@ -15,14 +15,20 @@ $app->post('/validacionDatosPedidos', function (Request $request, Response $resp
 
     $insert = 0;
     $update = 0;
+    //$pedidos=0;
 
     $data = $dataPedidos['data'];
+    $referencia = sizeof($data);
 
     for ($i = 0; $i < sizeof($data); $i++) {
       $result = $preBatchDao->findOrders($data[$i]['documento']);
       $result ? $update = $update + 1 : $insert = $insert + 1;
+      for ($j = $i; $j < sizeof($data); $j++) {
+        $j == $i ? $j = $j + 1 : $j;
+        if ($data[$i]['producto'] == $data[$j]['producto']) $referencia = $referencia - 1;
+      }
     }
-    $dataImportOrders = array('success' => true, 'update' => $update, 'insert' => $insert);
+    $dataImportOrders = array('success' => true, 'update' => $update, 'insert' => $insert, 'pedidos' => sizeof($data), 'referencias' => $referencia);
   } else
     $dataImportOrders = array('error' => true, 'message' => 'El archivo se encuentra vacio. Intente nuevamente');
 
@@ -40,7 +46,7 @@ $app->post('/addPedidos', function (Request $request, Response $response, $args)
 
   //Al cargar los pedidos validar la tabla vs pedidos y si no encuentra el registro marcar con un flag y no mostar en la vista Preprogramados
   //Cargar todos registros de la tabla que no tengan flag y validarlos contra el objeto de importacion
-  
+
   if ($result == null)
     $resp = array('success' => true, 'message' => 'Pedidos Importados correctamente');
   else

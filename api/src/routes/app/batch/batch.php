@@ -19,6 +19,7 @@ $controlFirmasDao = new ControlFirmasDao();
 $multiDao = new MultiDao();
 $EMPedidosRegistroDao = new ExplosionMaterialesPedidosRegistroDao();
 
+
 $app->get('/batch', function (Request $request, Response $data, $args) use ($batchDao) {
   $batch = $batchDao->findActive();
   $data->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));
@@ -84,11 +85,14 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
     if ($resp == null)
       $resp = $multiDao->saveMulti($id_batch['id'], $dataBatch[$i]);
 
-    /* Actualizar explosion_materiales_pedidos_registro */
+    /* Actualizar pedido batch */
     if ($resp == null) {
       $multi = json_decode($dataBatch[$i]['multi'], true);
       for ($j = 0; $j < sizeof($multi); $j++)
-        if ($multi[$j]['pedido']) $EMPedidosRegistroDao->updateEMPedidosRegistro($multi[$j]);
+        if ($multi[$j]['pedido']) {
+          $resp = $batchDao->updateBatchPedido($id_batch['id'], $multi[$j]);
+          $resp = $EMPedidosRegistroDao->updateEMPedidosRegistro($multi[$j]);
+        }
     }
   }
 
