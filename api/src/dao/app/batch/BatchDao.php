@@ -127,6 +127,14 @@ class BatchDao extends estadoInicialDao
         $fechahoy               = date("Y-m-d");
 
         $connection = Connection::getInstance()->getConnection();
+
+        $pedidos = [];
+
+        foreach ($multi as $mult)
+            array_push($pedidos, $mult['pedido']);
+
+        $pedidos = json_encode($pedidos);
+
         $unidadesxlote = 0;
 
         /* sumar total cantidades */
@@ -143,9 +151,10 @@ class BatchDao extends estadoInicialDao
         /* Inserta y crea batch */
 
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("INSERT INTO batch (fecha_creacion, fecha_programacion, fecha_actual, numero_orden, numero_lote, tamano_lote, lote_presentacion, unidad_lote, estado, id_producto) 
-                                      VALUES(:fecha_creacion, :fecha_programacion, :fecha_actual, :numero_orden, :numero_lote, :tamano_lote, :lote_presentacion, :unidad_lote, :estado, :id_producto)");
+        $stmt = $connection->prepare("INSERT INTO batch (pedido, fecha_creacion, fecha_programacion, fecha_actual, numero_orden, numero_lote, tamano_lote, lote_presentacion, unidad_lote, estado, id_producto) 
+                                      VALUES(:pedidos, :fecha_creacion, :fecha_programacion, :fecha_actual, :numero_orden, :numero_lote, :tamano_lote, :lote_presentacion, :unidad_lote, :estado, :id_producto)");
         $stmt->execute([
+            'pedidos' => $pedidos,
             'fecha_creacion' => $fechahoy,
             'fecha_programacion' => $fechaprogramacion,
             'fecha_actual' => $fechahoy,
