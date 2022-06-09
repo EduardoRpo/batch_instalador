@@ -19,7 +19,7 @@
           <p><b>Lote</b></p>
         </div> -->
         <div class="insertarRefMulti mb-3 mt-3">
-          
+
         </div>
       </div>
       <div class="inputcalculoTotal mb-3 mr-5" style="display: flex; justify-content:flex-end">
@@ -29,7 +29,9 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" id="btnCargarKg">Guardar</button>
+        <?php if ($_SESSION['rol'] != 6) {  ?>
+          <button type="button" class="btn btn-primary" id="btnCargarKg">Guardar</button>
+        <?php  }  ?>
       </div>
     </div>
   </div>
