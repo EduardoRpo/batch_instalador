@@ -54,15 +54,6 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
 
   $newDataPedidos = array();
   $count = sizeof($dataPedidos);
-  $cantReferencias = $count;
-
-  // Buscar cantidad de refencias
-  for ($i = 0; $i < $count; $i++) {
-    for ($j = $i; $j < $count; $j++) {
-      $j == $i ? $j = $j + 1 : $j;
-      if ($dataPedidos[$i]['referencia'] == $dataPedidos[$j]['referencia']) $cantReferencias = $cantReferencias - 1;
-    }
-  }
 
   for ($i = 0; $i < $count; $i++) {
     //Buscar lotePresentacion Granel
@@ -118,10 +109,7 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
   $_SESSION['dataPedidos'] = $newDataPedidos;
 
 
-  $sumArrayTotal = array(
-    'cantidad_pedidos' => $count, 'cantidad_referencias' => $cantReferencias, 'granel' => array_keys($sumArrayGranel),
-    'producto' => $producto, 'tamanio' => array_values($sumArrayGranel), 'cantidades' => array_values($sumArrayCantidades)
-  );
+  $sumArrayTotal = array('granel' => array_keys($sumArrayGranel), 'producto' => $producto, 'tamanio' => array_values($sumArrayGranel), 'cantidades' => array_values($sumArrayCantidades));
 
   $response->getBody()->write(json_encode($sumArrayTotal, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');

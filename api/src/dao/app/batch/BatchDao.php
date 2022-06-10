@@ -128,12 +128,12 @@ class BatchDao extends estadoInicialDao
 
         $connection = Connection::getInstance()->getConnection();
 
-        $pedidos = [];
+        // $pedidos = [];
 
-        foreach ($multi as $mult)
-            array_push($pedidos, $mult['pedido']);
+        // foreach ($multi as $mult)
+        //     array_push($pedidos, $mult['pedido']);
 
-        $pedidos = json_encode($pedidos);
+        // $pedidos = json_encode($pedidos, true);
 
         $unidadesxlote = 0;
 
@@ -151,10 +151,10 @@ class BatchDao extends estadoInicialDao
         /* Inserta y crea batch */
 
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("INSERT INTO batch (pedido, fecha_creacion, fecha_programacion, fecha_actual, numero_orden, numero_lote, tamano_lote, lote_presentacion, unidad_lote, estado, id_producto) 
-                                      VALUES(:pedidos, :fecha_creacion, :fecha_programacion, :fecha_actual, :numero_orden, :numero_lote, :tamano_lote, :lote_presentacion, :unidad_lote, :estado, :id_producto)");
+        $stmt = $connection->prepare("INSERT INTO batch (fecha_creacion, fecha_programacion, fecha_actual, numero_orden, numero_lote, tamano_lote, lote_presentacion, unidad_lote, estado, id_producto) 
+                                      VALUES(:fecha_creacion, :fecha_programacion, :fecha_actual, :numero_orden, :numero_lote, :tamano_lote, :lote_presentacion, :unidad_lote, :estado, :id_producto)");
         $stmt->execute([
-            'pedidos' => $pedidos,
+            //'pedidos' => $pedidos,
             'fecha_creacion' => $fechahoy,
             'fecha_programacion' => $fechaprogramacion,
             'fecha_actual' => $fechahoy,
@@ -213,11 +213,14 @@ class BatchDao extends estadoInicialDao
         }
     }
 
-    public function updateBatchPedido($dataBatch)
+    public function updateBatchPedido($id_batch, $dataBatch)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("");
-        $stmt->execute([]);
+        $stmt = $connection->prepare("UPDATE batch SET pedido = :pedido WHERE id_batch = :id_batch");
+        $stmt->execute([
+            'pedido' => $dataBatch['pedido'],
+            'id_batch' => $id_batch
+        ]);
     }
 
     public function deleteBatch($id_batch)
