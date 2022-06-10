@@ -23,6 +23,16 @@ class ProductDao
     $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
   }
 
+  public function findProduct($ref)
+  {
+    $connection = Connection::getInstance()->getConnection();
+    $stmt = $connection->prepare("SELECT * FROM producto WHERE referencia = :referencia");
+    $stmt->execute(['referencia' => $ref]);
+    $products = $stmt->fetch($connection::FETCH_ASSOC);
+    $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+    return $products;
+  }
+
   public function findAll()
   {
     $connection = Connection::getInstance()->getConnection();

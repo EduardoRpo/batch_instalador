@@ -86,7 +86,8 @@ class PreBatchDao
         $query = $connection->prepare($sql);
         $query->execute([
             'pedido' => trim($dataPedidos['documento']),
-            'id_producto' => trim($dataPedidos['referencia'])
+            'id_producto' => trim($dataPedidos['producto'])
+            // 'id_producto' => trim("M-" . $dataPedidos['producto'])
         ]);
         $rows = $query->rowCount();
 
@@ -97,7 +98,7 @@ class PreBatchDao
             $query->execute([
                 'cantidad' => trim($dataPedidos['cantidad']),
                 'pedido' => trim($dataPedidos['documento']),
-                'id_producto' => trim($dataPedidos['referencia'])
+                'id_producto' => trim($dataPedidos['producto'])
             ]);
         } else {
 
@@ -110,7 +111,7 @@ class PreBatchDao
             $query = $connection->prepare($sql);
             $query->execute([
                 'pedido' => trim($dataPedidos['documento']),
-                'id_producto' => trim("M-" . $dataPedidos['producto']),
+                'id_producto' => trim($dataPedidos['producto']),
                 'cant_original' => trim($dataPedidos['cant_original']),
                 'cantidad' => trim($dataPedidos['cantidad']),
                 'fecha_pedido' => $fecha_dtco,
