@@ -180,6 +180,15 @@ function guardarDatos() {
   const unidades = $('#unidadesxlote').val();
   let sumaTanques = $('.sumaTanques').val();
 
+  if (programacion) {
+    if (!tanque) {
+      $('#cmbTanque1').css('border-color', 'red');
+      alertify.set('notifier', 'position', 'top-right');
+      alertify.error('Configure la cantidad de Tanques para el Batch.');
+      return false;
+    }
+  }
+
   if (sumaTanques == '' || sumaTanques == 0) {
     $('#sumaTanques').css('border-color', 'red');
     alertify.set('notifier', 'position', 'top-right');

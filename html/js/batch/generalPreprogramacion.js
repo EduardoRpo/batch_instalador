@@ -59,7 +59,7 @@ $(document).ready(function () {
                 ${(symbol = check(tamanio[i]))}
                 </tr>`);
     }
-    return row;
+    return row.join('');
   };
 
   color = (tamanio) => {

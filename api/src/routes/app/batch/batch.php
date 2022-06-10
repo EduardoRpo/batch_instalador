@@ -108,9 +108,15 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->post('/updateBatch', function (Request $request, Response $response, $args) use ($batchDao) {
+$app->post('/updateBatch', function (Request $request, Response $response, $args) use ($batchDao, $tanquesDao) {
   $dataBatch = $request->getParsedBody();
+
   $resp = $batchDao->updateBatch($dataBatch);
+
+  /* Crea o modifica los tanques */
+  if ($resp == null)
+    $resp = $tanquesDao->saveTanques($dataBatch['id_batch'], $dataBatch);
+
 
   /* Notificaciones*/
   if ($resp == null)

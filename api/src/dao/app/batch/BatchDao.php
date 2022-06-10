@@ -96,19 +96,21 @@ class BatchDao extends estadoInicialDao
     public function findBatchById($id)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("SELECT id_batch, p.referencia, p.nombre_referencia, pc.nombre AS presentacion, m.nombre AS marca, ns.nombre AS notificacion_sanitaria, 
-                                             p.unidad_empaque, pp.nombre as propietario, batch.numero_orden, batch.tamano_lote, batch.numero_lote, 
-                                             batch.unidad_lote, linea.nombre as linea, linea.densidad, p.densidad_producto, batch.fecha_programacion, 
-                                             batch.estado, p.img, IFNULL(exp.fecha_insumo, '0000-00-00') as fecha_insumo
-                                      FROM producto p 
-                                       INNER JOIN batch ON batch.id_producto = p.referencia 
-                                       INNER JOIN presentacion_comercial pc ON pc.id = p.presentacion_comercial 
-                                       INNER JOIN linea ON linea.id = p.id_linea 
-                                       INNER JOIN propietario pp ON pp.id = p.id_propietario 
-                                       INNER JOIN marca m ON m.id = p.id_marca
-                                       INNER JOIN notificacion_sanitaria ns ON ns.id = p.id_notificacion_sanitaria
-                                       LEFT JOIN explosion_materiales_pedidos_registro exp ON exp.id_producto = p.referencia 
-                                      WHERE id_batch = :idBatch");
+        $stmt = $connection->prepare("SELECT b.id_batch, p.referencia, p.nombre_referencia, pc.nombre AS presentacion, m.nombre AS marca, 
+                                            ns.nombre AS notificacion_sanitaria, p.unidad_empaque, pp.nombre as propietario, b.numero_orden, b.tamano_lote, b.numero_lote, 
+                                            b.unidad_lote, l.nombre as linea, l.densidad, p.densidad_producto, b.fecha_programacion, b.estado, p.img, exp.fecha_insumo, 
+                                            IFNULL(bt.tanque,0) AS tanque, IFNULL(bt.cantidad,0) AS cantidad
+                                      FROM batch b
+                                        INNER JOIN producto p ON p.referencia = b.id_producto
+                                        INNER JOIN multipresentacion mul ON mul.id_batch = b.id_batch
+                                        INNER JOIN presentacion_comercial pc ON pc.id = p.presentacion_comercial 
+                                        INNER JOIN linea l ON l.id = p.id_linea 
+                                        INNER JOIN propietario pp ON pp.id = p.id_propietario 
+                                        INNER JOIN marca m ON m.id = p.id_marca
+                                        INNER JOIN notificacion_sanitaria ns ON ns.id = p.id_notificacion_sanitaria
+                                        INNER JOIN explosion_materiales_pedidos_registro exp ON exp.id_producto = mul.referencia
+                                        LEFT JOIN batch_tanques bt ON bt.id_batch = b.id_batch
+                                      WHERE b.id_batch = :idBatch ORDER BY `exp`.`fecha_insumo` DESC LIMIT 1;");
         $stmt->execute(array('idBatch' => $id));
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         $batch = $stmt->fetch($connection::FETCH_ASSOC);
@@ -192,7 +194,7 @@ class BatchDao extends estadoInicialDao
             'id_batch' => $id_batch
         ]);
 
-        /* Actualizar los tanques */
+        /* Actualizar los tanques
         if ($result) {
 
             $tanque    = $dataBatch['tanque'];
@@ -210,7 +212,7 @@ class BatchDao extends estadoInicialDao
                     'id_batch' => $id_batch
                 ]);
             }
-        }
+        } */
     }
 
     public function updateBatchPedido($id_batch, $dataBatch)

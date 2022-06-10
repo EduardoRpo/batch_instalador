@@ -32,13 +32,25 @@ class TanquesDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $sql = "INSERT INTO batch_tanques (tanque, cantidad, id_batch) 
-                VALUES(:tanque, :cantidades, :id)";
-        $query_multi = $connection->prepare($sql);
-        $query_multi->execute([
-            'tanque' => $dataBatch['tanque'],
-            'cantidades' => $dataBatch['cantidades'],
-            'id' => $id_batch
-        ]);
+        $stmt =  $connection->prepare("SELECT * FROM batch_tanques WHERE id_batch = :id_batch");
+        $stmt->execute(['id_batch' => $id_batch]);
+        $result = $stmt->rowCount();
+
+        if ($result > 0) {
+            $stmt =  $connection->prepare("UPDATE batch_tanques SET tanque = :tanque, cantidad = :cantidad WHERE id_batch = :id_batch");
+            $stmt->execute([
+                'tanque' => $dataBatch['tanque'],
+                'cantidad' => $dataBatch['cantidades'],
+                'id_batch' => $id_batch
+            ]);
+        } else {
+            $stmt = $connection->prepare("INSERT INTO batch_tanques(tanque, cantidad, id_batch) 
+                VALUES(:tanque, :cantidad, :id_batch)");
+            $stmt->execute([
+                'tanque' => $dataBatch['tanque'],
+                'cantidad' => $dataBatch['cantidades'],
+                'id_batch' => $id_batch
+            ]);
+        }
     }
 }
