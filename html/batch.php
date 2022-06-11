@@ -60,7 +60,7 @@ include_once("modal/modalPedidos.php");
                 <a class="dropdown-item" href="#" onclick="batchEliminados()"><i class="fa fa-eraser"></i> Batch Eliminados</a>
                 <a class="dropdown-item pdf" href="#"><i class="fa fa-download"></i> Imprimir PDF</a>
               <?php } ?>
-              <?php if ($_SESSION['rol'] == 6 OR $_SESSION['rol'] == 1) {  ?>
+              <?php if ($_SESSION['rol'] == 6 or $_SESSION['rol'] == 1) {  ?>
                 <a class="dropdown-item" href="#" id="btnCargarExcelPedidos"><i class="fa fa-download"></i> Pedidos</a>
               <?php } ?>
             </div>
@@ -87,9 +87,10 @@ include_once("modal/modalPedidos.php");
           <div class="card">
             <div class="card-body p-3">
               <label for="formFile" class="form-label"> Importar Archivo de Pedidos</label>
-              <div style="display: flex; width:50%">
+              <div style="display: flex; width:70%">
                 <input class="form-control" type="file" id="filePedidos" accept=".xls,.xlsx">
                 <button class="btn btn-warning ml-3" id="btnImportarPedidos">Importar Pedidos</button>
+                <button class="btn btn-danger ml-3" id="btnPedidosNoEncontrados">Pedidos No Encontrados</button>
               </div>
             </div>
           </div>
@@ -127,7 +128,7 @@ include_once("modal/modalPedidos.php");
           <div class="card">
             <div class="card-header" style="background: #FCF9F8;">
               <ul class="nav nav-tabs card-header-tabs" id="batch-list" role="tablist">
-                <?php if ($_SESSION['rol'] == 6 OR $_SESSION['rol'] == 1) {  ?>
+                <?php if ($_SESSION['rol'] == 6 or $_SESSION['rol'] == 1) {  ?>
                   <li class="nav-item">
                     <a class="nav-link" id="one-tab" data-toggle="tab" href="#one" role="tab" aria-controls="One" aria-selected="false">Planeación</a>
                   </li>

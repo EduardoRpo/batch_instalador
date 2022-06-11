@@ -92,7 +92,8 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
         if ($multi[$j]['pedido']) {
           $resp = $batchDao->updateBatchPedido($id_batch['id'], $multi[$j]);
           $resp = $EMPedidosRegistroDao->updateEMPedidosRegistro($multi[$j]);
-        }
+        } else
+          $resp = $batchDao->updateBatchPedido($id_batch['id'], $dataBatch[0]);
     }
   }
 
@@ -108,9 +109,15 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->post('/updateBatch', function (Request $request, Response $response, $args) use ($batchDao) {
+$app->post('/updateBatch', function (Request $request, Response $response, $args) use ($batchDao, $tanquesDao) {
   $dataBatch = $request->getParsedBody();
+
   $resp = $batchDao->updateBatch($dataBatch);
+
+  /* Crea o modifica los tanques */
+  if ($resp == null)
+    $resp = $tanquesDao->saveTanques($dataBatch['id_batch'], $dataBatch);
+
 
   /* Notificaciones*/
   if ($resp == null)

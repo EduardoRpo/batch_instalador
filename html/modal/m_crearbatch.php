@@ -3,9 +3,6 @@
         <div class="modal-content">
             <div class="modal-header" style="  background-color: #FF8D6D !important;">
                 <h5 class="modal-title"><span class="tcrearBatch"><b>Crear Batch Record</b></span></h5>
-                <!-- <div>
-                    <input type="text" class="form-control">
-                </div> -->
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -13,6 +10,15 @@
             <div class="modal-body">
                 <form action="" id="formBatch" name="formBatch" method="POST" autocomplete="off">
                     <input id="idbatch" class="displayallinfo" name="idbatch" hidden required>
+
+                    <div class="row page">
+                        <div class="col-md-12 col-2 align-self-center">
+                            <label for="recipient-name" class="col-form-label">Pedido No.</label>
+                            <input id="pedido" type="" class="displayallinfo" name="pedido">
+                        </div>
+
+                    </div>
+                    <hr>
 
                     <div class="row page">
                         <div class="col-md-3 col-2 align-self-center">
