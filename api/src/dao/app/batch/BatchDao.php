@@ -96,7 +96,7 @@ class BatchDao extends estadoInicialDao
     public function findBatchById($id)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("SELECT b.id_batch, p.referencia, p.nombre_referencia, pc.nombre AS presentacion, m.nombre AS marca, 
+        $stmt = $connection->prepare("SELECT b.id_batch, b.pedido, p.referencia, p.nombre_referencia, pc.nombre AS presentacion, m.nombre AS marca, 
                                             ns.nombre AS notificacion_sanitaria, p.unidad_empaque, pp.nombre as propietario, b.numero_orden, b.tamano_lote, b.numero_lote, 
                                             b.unidad_lote, l.nombre as linea, l.densidad, p.densidad_producto, b.fecha_programacion, b.estado, p.img, DATE_ADD(exp.fecha_insumo, INTERVAL 8 DAY) AS fecha_insumo , 
                                             IFNULL(bt.tanque,0) AS tanque, IFNULL(bt.cantidad,0) AS cantidad
@@ -120,6 +120,7 @@ class BatchDao extends estadoInicialDao
 
     public function saveBatch($dataBatch)
     {
+        //$pedido                 = $dataBatch['pedido'];
         $referencia             = $dataBatch['ref'];
         $tamanototallote        = $dataBatch['lote'];
         $fechaprogramacion      = $dataBatch['programacion'];
@@ -129,13 +130,6 @@ class BatchDao extends estadoInicialDao
         $fechahoy               = date("Y-m-d");
 
         $connection = Connection::getInstance()->getConnection();
-
-        // $pedidos = [];
-
-        // foreach ($multi as $mult)
-        //     array_push($pedidos, $mult['pedido']);
-
-        // $pedidos = json_encode($pedidos, true);
 
         $unidadesxlote = 0;
 
@@ -156,7 +150,7 @@ class BatchDao extends estadoInicialDao
         $stmt = $connection->prepare("INSERT INTO batch (fecha_creacion, fecha_programacion, fecha_actual, numero_orden, numero_lote, tamano_lote, lote_presentacion, unidad_lote, estado, id_producto) 
                                       VALUES(:fecha_creacion, :fecha_programacion, :fecha_actual, :numero_orden, :numero_lote, :tamano_lote, :lote_presentacion, :unidad_lote, :estado, :id_producto)");
         $stmt->execute([
-            //'pedidos' => $pedidos,
+            //'pedido' => $pedido,
             'fecha_creacion' => $fechahoy,
             'fecha_programacion' => $fechaprogramacion,
             'fecha_actual' => $fechahoy,

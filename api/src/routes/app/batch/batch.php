@@ -92,7 +92,8 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
         if ($multi[$j]['pedido']) {
           $resp = $batchDao->updateBatchPedido($id_batch['id'], $multi[$j]);
           $resp = $EMPedidosRegistroDao->updateEMPedidosRegistro($multi[$j]);
-        }
+        } else
+          $resp = $batchDao->updateBatchPedido($id_batch['id'], $dataBatch[0]);
     }
   }
 
