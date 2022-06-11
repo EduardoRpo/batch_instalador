@@ -98,7 +98,7 @@ class BatchDao extends estadoInicialDao
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("SELECT b.id_batch, p.referencia, p.nombre_referencia, pc.nombre AS presentacion, m.nombre AS marca, 
                                             ns.nombre AS notificacion_sanitaria, p.unidad_empaque, pp.nombre as propietario, b.numero_orden, b.tamano_lote, b.numero_lote, 
-                                            b.unidad_lote, l.nombre as linea, l.densidad, p.densidad_producto, b.fecha_programacion, b.estado, p.img, exp.fecha_insumo, 
+                                            b.unidad_lote, l.nombre as linea, l.densidad, p.densidad_producto, b.fecha_programacion, b.estado, p.img, DATE_ADD(exp.fecha_insumo, INTERVAL 8 DAY) AS fecha_insumo , 
                                             IFNULL(bt.tanque,0) AS tanque, IFNULL(bt.cantidad,0) AS cantidad
                                       FROM batch b
                                         INNER JOIN producto p ON p.referencia = b.id_producto
