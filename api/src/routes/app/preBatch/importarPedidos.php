@@ -48,8 +48,11 @@ $app->post('/validacionDatosPedidos', function (Request $request, Response $resp
     }
     $dataImportOrders = array('success' => true, 'update' => $update, 'insert' => $insert, 'pedidos' => sizeof($data), 'referencias' => $referencia);
 
-    $nonExistentProducts['pedido'] = array_values($nonExistentProducts['pedido']);
-    $nonExistentProducts['referencia'] = array_values($nonExistentProducts['referencia']);
+    if (isset($nonExistentProducts)) {
+      $nonExistentProducts['pedido'] = array_values($nonExistentProducts['pedido']);
+      $nonExistentProducts['referencia'] = array_values($nonExistentProducts['referencia']);
+    }
+    
     //Guardar campos con productos no existentes
     if ($nonExistentProducts) {
       session_start();
