@@ -6,7 +6,7 @@ require_once('./actualizarEstado.php');
 require_once '../php/servicios/explosion/cierre_explosion_materiales_batch.php';
 
 
-function desinfectanteRealizo($conn)
+function desinfectanteRealizo($conn) // DesinfectanteSeleccionadoDao.php
 {
     $batch = $_POST['idBatch'];
     $modulo = $_POST['modulo'];
@@ -37,7 +37,7 @@ function desinfectanteRealizo($conn)
 }
 
 
-function desinfectanteVerifico($conn)
+function desinfectanteVerifico($conn) // DesinfectanteSeleccionadoDao.php
 {
     $batch = $_POST['idBatch'];
     $modulo = $_POST['modulo'];
@@ -94,7 +94,7 @@ function segundaSeccionRealizo($conn)
     }
 }
 
-function segundaSeccionVerifico($conn)
+function segundaSeccionVerifico($conn) // Firmas2SeccionDao.php
 {
     $batch = $_POST['idBatch'];
     $modulo = $_POST['modulo'];
@@ -135,7 +135,7 @@ function segundaSeccionVerifico($conn)
 }
 
 
-function materialSobranteRealizo($conn)
+function materialSobranteRealizo($conn) // MaterialSobranteDao.php
 {
 
     $batch = $_POST['idBatch'];
@@ -182,7 +182,7 @@ function materialSobranteRealizo($conn)
 }
 
 
-function materialSobranteVerifico($conn)
+function materialSobranteVerifico($conn) // MaterialSobranteDao.php
 {
 
     $modulo = $_POST['modulo'];
@@ -205,7 +205,7 @@ function materialSobranteVerifico($conn)
     }
 }
 
-function conciliacionRendimientoRealizo($conn)
+function conciliacionRendimientoRealizo($conn) // ConciliacionDao.php
 {
 
     $batch =  $_POST['idBatch'];
@@ -286,7 +286,7 @@ function conciliacionRendimientoRealizo($conn)
     }
 }
 
-function analisisMicrobiologiaRealizo($conn)
+function analisisMicrobiologiaRealizo($conn) // AnalisisMicrobiologicoDao.php
 {
     $modulo = $_POST['modulo'];
     $batch = $_POST['idBatch'];
@@ -330,7 +330,7 @@ function analisisMicrobiologiaRealizo($conn)
     registrarFirmas($conn, $batch, $modulo);
 }
 
-function AnalisisMicrobiologiaVerifico($conn)
+function AnalisisMicrobiologiaVerifico($conn) // AnalisisMicrobiologicoDao.php
 {
     $batch = $_POST['idBatch'];
 

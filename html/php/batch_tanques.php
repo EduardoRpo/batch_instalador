@@ -12,11 +12,12 @@ if (!empty($_POST)) {
     /* Almacena los checks creados para tanques y su valor */
     $op = $_POST['operacion'];
 
-    switch ($op) {
+    switch ($op) { // batchTanques.php
         case 1: //Insertar o actualizar tanques y linea
             $batch = $_POST['idBatch'];
             $modulo = $_POST['modulo'];
 
+            //Clase TanquesChksDao.php
             if ($modulo != 9) {
                 $tanques = $_POST['tanques'];
                 $tanquesOk = $_POST['tanquesOk'];
@@ -43,12 +44,12 @@ if (!empty($_POST)) {
 
             /* Actualiza el estado de los modulo pesaje y preparacion  */
             if ($modulo == 2) {
-                registrarLotes($conn);
-                registrarExplosionMaterialesUso($conn);
-                actualizarEstado($batch, $modulo, $conn);
+                registrarLotes($conn); //LoteMaterialesDao.php
+                registrarExplosionMaterialesUso($conn); //ExplosionMaterialesBatchDao.php
+                actualizarEstado($batch, $modulo, $conn); //EstadoDao.php
             }
             if ($modulo == 3) {
-                /* Insertar equipos */
+                /* Insertar equipos EquipoDao.php*/
                 $equipos = $_POST['equipos'];
                 foreach ($equipos as $equipo) {
                     $sql = "INSERT INTO batch_equipos (equipo, batch, modulo) VALUES(:equipo, :batch, :modulo)";
@@ -57,7 +58,7 @@ if (!empty($_POST)) {
                 }
                 /* validar que todos los tanques esten hechos para aprobacion */
                 if ($tanques == $tanquesOk) {
-                    actualizarEstado($batch, $modulo, $conn);
+                    actualizarEstado($batch, $modulo, $conn); //EstadoDao.php
                 }
             }
             if ($result)
@@ -69,11 +70,11 @@ if (!empty($_POST)) {
             /* Almacena el desinfectante del modulo de aprobacion y fisicoquimico */
 
             if ($modulo == 4) {
-                desinfectanteRealizo($conn);
-                segundaSeccionRealizo($conn);
+                desinfectanteRealizo($conn); //DesinfectanteSeleccionadoDao.php llamar función registrarFirmas desde la ruta
+                segundaSeccionRealizo($conn);  // Firmas2SeccionDao.php
             }
 
-            /* Almacena el formulario de control del módulo de preparación */
+            /* Almacena el formulario de control del módulo de preparación ControlEspecificacionesDao.php */
 
             if ($modulo == 3 || $modulo == 4) {
                 $controlProducto = $_POST['controlProducto'];
@@ -105,7 +106,7 @@ if (!empty($_POST)) {
                 else echo '0';
             }
 
-            /* Almacena informacion del control de especificaciones para el modulo de fisicoquimico */
+            /* Almacena informacion del control de especificaciones para el modulo de fisicoquimico  ControlEspecificacionesDao.php */
 
             if ($modulo == 4 && $tanques == $tanquesOk) {
                 $sql = "SELECT * FROM `batch_control_especificaciones` WHERE batch = :batch AND modulo = :modulo;";
@@ -152,12 +153,12 @@ if (!empty($_POST)) {
                 /* Almacenar datos para el modulo de fisicoquimico de acuerdo con la informacion entregada por el modulo de aprobacion */
 
                 $_POST['modulo'] = 9;
-                desinfectanteRealizo($conn);
-                segundaSeccionRealizo($conn);
+                desinfectanteRealizo($conn); // DesinfectanteSeleccionadoDao.php
+                segundaSeccionRealizo($conn); // Firmas2SeccionDao.php
 
                 /* Actualiza estado  modulo fisicoquimico */
                 if ($modulo == 9)
-                    actualizarEstado($batch, $modulo, $conn);
+                    actualizarEstado($batch, $modulo, $conn); // EstadoDao.php
 
                 if ($result) echo '1';
                 else echo '0';
@@ -170,7 +171,7 @@ if (!empty($_POST)) {
             $batch = $_POST['idBatch'];
             $modulo = $_POST['modulo'];
 
-            if ($modulo != 9) {
+            if ($modulo != 9) { // TanquesChksDao.php
                 $sql = "SELECT * FROM batch_tanques_chks WHERE modulo = :modulo AND batch = :batch";
                 $query = $conn->prepare($sql);
                 $result = $query->execute(['modulo' => $modulo, 'batch' => $batch]);
@@ -184,9 +185,9 @@ if (!empty($_POST)) {
             }
             break;
 
-        case 3: //Seleccionar 2da firma
+        case 3: //Seleccionar 2da firma 
 
-            $batch = $_POST['idBatch'];
+            $batch = $_POST['idBatch']; // Firmas2SeccionDao.php
             $modulo = $_POST['modulo'];
 
             $sql = "SELECT * FROM batch_firmas2seccion WHERE modulo = :modulo AND batch = :batch";
@@ -200,8 +201,8 @@ if (!empty($_POST)) {
 
             break;
 
-        case 4: // cargar 2da firma despeje
-            $batch = $_POST['idBatch'];
+        case 4: // cargar 2da firma despeje 
+            $batch = $_POST['idBatch']; // Firmas2SeccionDao.php
             $modulo = $_POST['modulo'];
 
             $sql = "SELECT u.urlfirma as realizo, us.urlfirma as verifico FROM batch_firmas2seccion d 

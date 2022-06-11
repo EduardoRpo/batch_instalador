@@ -3,7 +3,6 @@
 function registrarFirmas($conn, $batch, $modulo)
 {
     /* Buscar si existen firmas registradas */
-
     $sql = "SELECT * FROM batch_control_firmas WHERE batch = :batch AND modulo = :modulo";
     $query = $conn->prepare($sql);
     $query->execute(['batch' => $batch, 'modulo' => $modulo]);
