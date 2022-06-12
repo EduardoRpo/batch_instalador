@@ -27,7 +27,7 @@ class ProductDao
   {
     $connection = Connection::getInstance()->getConnection();
     $stmt = $connection->prepare("SELECT * FROM producto WHERE referencia = :referencia");
-    $stmt->execute(['referencia' =>  trim("M-" . $ref)]);
+    $result = $stmt->execute(['referencia' =>  trim("M-" . $ref)]);
     $products = $stmt->fetch($connection::FETCH_ASSOC);
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     return $products;

@@ -5,6 +5,7 @@
 /*
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request; */
+
 use Slim\Factory\AppFactory;
 
 require __DIR__ . '/vendor/autoload.php';
@@ -41,6 +42,9 @@ require_once __DIR__ . '/src/routes/app/preBatch/importarPedidos.php';
 require_once __DIR__ . '/src/routes/app/batch/batch.php';
 require_once __DIR__ . '/src/routes/app/batch/clonebatch.php';
 require_once __DIR__ . '/src/routes/app/colas/colasTrabajo.php';
+
+//Batch_Tanques
+require_once __DIR__ . '/src/routes/app/batchTanques/batchTanques.php';
 
 //Multipresentacion
 require_once __DIR__ . '/src/routes/app/multi/multi.php';
