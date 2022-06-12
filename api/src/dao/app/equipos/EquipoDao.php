@@ -65,4 +65,18 @@ class EquipoDao
     return $equipos;
   }
 
+  public function insertEquipos($dataBatch)
+  {
+    $connection = Connection::getInstance()->getConnection();
+    $equipos = $dataBatch['equipos'];
+    foreach ($equipos as $equipo) {
+      $sql = "INSERT INTO batch_equipos (equipo, batch, modulo) VALUES(:equipo, :batch, :modulo)";
+      $query = $connection->prepare($sql);
+      $query->execute([
+        'equipo' => $equipo,
+        'batch' => $dataBatch['idBatch'],
+        'modulo' => $dataBatch['modulo']
+      ]);
+    }
+  }
 }
