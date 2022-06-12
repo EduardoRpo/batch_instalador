@@ -8,7 +8,10 @@ $op = $_POST['operacion'];
 
 switch ($op) {
     case 1: //listar referencias Productos
-        $sql = "SELECT p.referencia FROM producto p ORDER BY p.referencia";
+        $sql = "SELECT referencia FROM producto 
+                WHERE referencia LIKE '%Granel%' 
+                ORDER BY referencia,substr(referencia, 1, 7), 
+                CAST(SUBSTR(referencia, 3, LENGTH(referencia))as unsigned);";
         $query = $conn->prepare($sql);
         $query->execute();
         $data = $query->fetchAll(PDO::FETCH_ASSOC);
