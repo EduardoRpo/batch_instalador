@@ -105,8 +105,10 @@ $(document).on('click', '.link-editar', function(e) {
     $.ajax({
         url: `/api/batch/${idBatch}`,
         success: function(data) {
-
-            $('#pedido').val(JSON.parse(data.pedido));
+            if (data.pedido)
+                $('#pedido').val(JSON.parse(data.pedido));
+            else
+                $('#pedido').val('');
 
             $('#idbatch').val(data.id_batch);
             $('#referencia').val(data.referencia);
