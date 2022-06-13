@@ -108,7 +108,7 @@ class BatchDao extends estadoInicialDao
                                         INNER JOIN propietario pp ON pp.id = p.id_propietario 
                                         INNER JOIN marca m ON m.id = p.id_marca
                                         INNER JOIN notificacion_sanitaria ns ON ns.id = p.id_notificacion_sanitaria
-                                        INNER JOIN explosion_materiales_pedidos_registro exp ON exp.id_producto = mul.referencia
+                                        LEFT JOIN explosion_materiales_pedidos_registro exp ON exp.id_producto = mul.referencia
                                         LEFT JOIN batch_tanques bt ON bt.id_batch = b.id_batch
                                       WHERE b.id_batch = :idBatch ORDER BY `exp`.`fecha_insumo` DESC LIMIT 1;");
         $stmt->execute(array('idBatch' => $id));

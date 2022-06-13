@@ -82,7 +82,7 @@ $(document).on('click', '.link-borrar', function(e) {
 $(document).on('click', '.link-editar', function(e) {
     e.preventDefault();
     editar = true;
-    let idBatch = this.id;
+    let id_batch = this.id;
 
     limpiarTanques();
     $('#inpNombreReferencia').show();
@@ -103,7 +103,7 @@ $(document).on('click', '.link-editar', function(e) {
     }
 
     $.ajax({
-        url: `/api/batch/${idBatch}`,
+        url: `/api/batch/${id_batch}`,
         success: function(data) {
             if (data.pedido)
                 $('#pedido').val(JSON.parse(data.pedido));
