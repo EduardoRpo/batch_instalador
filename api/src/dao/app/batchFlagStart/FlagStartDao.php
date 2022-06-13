@@ -16,23 +16,51 @@ class FlagStartDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
-
-    // Insertar Flag_start pesaje
-    public function insertFlagStartPesaje($dataBatch)
+    public function findFlagStart($dataBatchFlag)
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $stmt = $connection->prepare("INSERT INTO batch_flag_start (referencia, modulo, batch) 
-                                      VALUES (:referencia, :modulo, :batch)");
-        $stmt->execute([
-            'referencia' => $dataBatch['referencia'],
-            'modulo' => 2,
-            'batch' => $dataBatch['idBatch']
-        ]);
+        $stmt = $connection->prepare("SELECT * FROM batch_flag_start WHERE batch = :batch");
+        $stmt->execute(['batch' => $dataBatchFlag['idBatch']]);
+        //$flagStart = $stmt->fetch($connection::FETCH_ASSOC);
+        $rows = $stmt->rowCount();
+        return $rows;
     }
 
-    // Actualizar Flag_start pesaje
-    public function updateFlagStartPreparacion($dataBatch)
+    // Guardar Flag_start pesaje
+    public function saveFlagStartPesaje($dataBatchFlag)
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        //Buscar batch en base de datos
+        $rows = $this->findFlagStart($dataBatchFlag);
+
+        if ($rows > 0) {
+            $stmt = $connection->prepare("UPDATE batch_flag_start SET flag_start_preparacion = :flag_start_preparacion
+            WHERE batch = :batch");
+            $stmt->execute([
+                'flag_start_preparacion' => 1,
+                'batch' => $dataBatchFlag['idBatch']
+            ]);
+        } else {
+            //Seleccionar referencia del batch
+            $stmt = $connection->prepare("SELECT * FROM batch WHERE id_batch = :id_batch");
+            $stmt->execute(['id_batch' => $dataBatchFlag['idBatch']]);
+            $dataBatch = $stmt->fetch($connection::FETCH_ASSOC);
+
+
+            $stmt = $connection->prepare("INSERT INTO batch_flag_start (referencia, modulo, batch) 
+                                      VALUES (:referencia, :modulo, :batch)");
+            $stmt->execute([
+                'referencia' => $dataBatch['id_producto'],
+                'modulo' => $dataBatchFlag['modulo'],
+                'batch' => $dataBatchFlag['idBatch']
+            ]);
+        }
+    }
+
+    /* Actualizar Flag_start pesaje
+    public function updateFlagStartPreparacion($dataBatchFlag)
     {
         $connection = Connection::getInstance()->getConnection();
 
@@ -40,7 +68,7 @@ class FlagStartDao
                                       WHERE batch = :batch");
         $stmt->execute([
             'flag_start_preparacion' => 1,
-            'batch' => $dataBatch['idBatch']
+            'batch' => $dataBatchFlag['idBatch']
         ]);
-    }
+    } */
 }

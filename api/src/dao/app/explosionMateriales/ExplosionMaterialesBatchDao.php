@@ -72,12 +72,12 @@ class ExplosionMaterialesBatchDao
                     'batch' => $batch,
                     'id_materia_prima' => $material['referencia']
                 ]);
-            } /* else {
-            $sql = "INSERT INTO batch_explosion_materiales (id_materiaprima, cantidad) 
+            } else {
+                $sql = "INSERT INTO batch_explosion_materiales (id_materiaprima, cantidad) 
                     VALUES(:id_materiaprima, :cantidad)";
-            $query = $conn->prepare($sql);
-            $query->execute(['id_materia_prima' => $material['id_materiaprima'], 'uso' => $cantidad]);
-        } */
+                $query = $connection->prepare($sql);
+                $query->execute(['id_materia_prima' => $material['id_materiaprima'], 'uso' => $cantidad]);
+            }
         }
     }
 }

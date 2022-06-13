@@ -38,21 +38,26 @@ $app->post('/validacionDatosPedidos', function (Request $request, Response $resp
       }
     }
 
-    $referencia = sizeof($data);
-    //Obtener catidad de referencias
-    for ($i = 0; $i < sizeof($data); $i++) {
-      for ($j = $i; $j < sizeof($data); $j++) {
-        $j == $i ? $j = $j + 1 : $j;
-        if ($data[$i]['producto'] == $data[$j]['producto']) $referencia = $referencia - 1;
+    //Obtener cantidad de referencias
+    $key_array = array();
+    $temp_array = array();
+    $i = 0;
+
+    foreach ($data as $val) {
+      if (!in_array($val['producto'], $key_array)) {
+        $key_array[$i] = $val['producto'];
+        $temp_array[$i] = $val;
       }
+      $i++;
     }
-    $dataImportOrders = array('success' => true, 'update' => $update, 'insert' => $insert, 'pedidos' => sizeof($data), 'referencias' => $referencia);
+
+    $dataImportOrders = array('success' => true, 'update' => $update, 'insert' => $insert, 'pedidos' => sizeof($data), 'referencias' => sizeof($temp_array));
 
     if (isset($nonExistentProducts)) {
       $nonExistentProducts['pedido'] = array_values($nonExistentProducts['pedido']);
       $nonExistentProducts['referencia'] = array_values($nonExistentProducts['referencia']);
     }
-    
+
     //Guardar campos con productos no existentes
     if ($nonExistentProducts) {
       session_start();
