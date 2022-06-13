@@ -1,6 +1,7 @@
 <?php
 
 use BatchRecord\dao\TanquesChksDao;
+use BatchRecord\dao\FlagStartDao;
 use BatchRecord\dao\LoteMaterialesDao;
 use BatchRecord\dao\ExplosionMaterialesBatchDao;
 use BatchRecord\dao\EstadoDao;
@@ -14,6 +15,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 $tanquesChksDao = new TanquesChksDao();
+$flagStartDao = new FlagStartDao();
 $loteMaterialesDao = new LoteMaterialesDao();
 $explosionMaterialesBatchDao = new ExplosionMaterialesBatchDao();
 $estadoDao = new EstadoDao();
@@ -25,6 +27,7 @@ $controlEspecificacionesDao = new ControlEspecificacionesDao();
 
 $app->post('/saveBatchTanques', function (Request $request, Response $response, $args) use (
     $tanquesChksDao,
+    $flagStartDao,
     $loteMaterialesDao,
     $explosionMaterialesBatchDao,
     $estadoDao,
@@ -44,25 +47,27 @@ $app->post('/saveBatchTanques', function (Request $request, Response $response, 
     switch ($op) {
         case 1: //Insertar o actualizar tanques y linea
             if ($modulo != 9) {
-                $tanquesChksDao->saveTanquesChks($dataBatch);
+                $resp = $tanquesChksDao->saveTanquesChks($dataBatch);
+                //Insertar flag_start
+                // $resp = $flagStartDao->insertFlagStartPesaje($dataBatch);
             }
             // Actualiza el estado de los modulo pesaje y preparacion
             if ($modulo == 2) {
-                $loteMaterialesDao->registrarLotes($dataBatch);
-                $explosionMaterialesBatchDao->registrarExplosionMaterialesUso($dataBatch);
-                $estadoDao->actualizarEstado($dataBatch);
+                $resp = $loteMaterialesDao->registrarLotes($dataBatch);
+                $resp = $explosionMaterialesBatchDao->registrarExplosionMaterialesUso($dataBatch);
+                $resp = $estadoDao->actualizarEstado($dataBatch);
             }
             if ($modulo == 3) {
                 // Insertar equipos
-                $equipoDao->insertEquipos($dataBatch);
+                $resp = $equipoDao->insertEquipos($dataBatch);
                 // validar que todos los tanques esten hechos para aprobacion
-                if ($tanques == $tanquesOk) $estadoDao->actualizarEstado($dataBatch);
+                if ($tanques == $tanquesOk && $resp == null) $resp = $estadoDao->actualizarEstado($dataBatch);
             }
             // Almacena el desinfectante del modulo de aprobacion y fisicoquimico
             if ($modulo == 4) {
-                $desinfectanteSeleccionadoDao->desinfectanteRealizo($dataBatch);
-                $firmas2SeccionDao->segundaSeccionRealizo($dataBatch);
-                $controlFirmasDao->registrarFirmas($dataBatch);
+                $resp = $desinfectanteSeleccionadoDao->desinfectanteRealizo($dataBatch);
+                $resp = $firmas2SeccionDao->segundaSeccionRealizo($dataBatch);
+                $resp = $controlFirmasDao->registrarFirmas($dataBatch);
             }
             // Almacena el formulario de control del módulo de preparación
             if ($modulo == 3 || $modulo == 4) {
@@ -70,39 +75,33 @@ $app->post('/saveBatchTanques', function (Request $request, Response $response, 
             }
             // Almacena informacion del control de especificaciones para el modulo de fisicoquimico
             if ($modulo == 4 && $tanques == $tanquesOk) {
-                $controlEspecificacionesDao->insertCEspecificacionesByFisicoquimico($dataBatch);
+                $resp = $controlEspecificacionesDao->insertCEspecificacionesByFisicoquimico($dataBatch);
                 // Almacenar datos para el modulo de fisicoquimico de acuerdo con la informacion entregada por el modulo de aprobacion
                 $dataBatch['modulo'] = 9;
-                $desinfectanteSeleccionadoDao->desinfectanteRealizo($dataBatch);
-                $firmas2SeccionDao->segundaSeccionRealizo($dataBatch);
+                $resp = $desinfectanteSeleccionadoDao->desinfectanteRealizo($dataBatch);
+                $resp = $firmas2SeccionDao->segundaSeccionRealizo($dataBatch);
                 // Actualiza estado  modulo fisicoquimico
-                if ($modulo == 9) $estadoDao->actualizarEstado($dataBatch);
+                if ($modulo == 9 && $resp == null) $resp = $estadoDao->actualizarEstado($dataBatch);
             }
             break;
 
         case 2: //Seleccionar toda la informacion de los tanques
             if ($modulo != 9) {
-                $resp = $tanquesChksDao->findAllTanquesChks($dataBatch);
-                if (!$resp) $resp = '1';
-
-                $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
-                return $response->withHeader('Content-Type', 'application/json');
+                $tanques = $tanquesChksDao->findAllTanquesChks($dataBatch);
+                if (!$tanques) $resp = '1';
             }
             break;
 
         case 3: //Seleccionar 2da firma 
-            $resp = $firmas2SeccionDao->findFirmas2seccion($dataBatch);
-            if (!$resp) $resp = '1';
-            $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
-            return $response->withHeader('Content-Type', 'application/json');
-
+            $firmas2Seccion = $firmas2SeccionDao->findFirmas2seccion($dataBatch);
+            if (!$firmas2Seccion) $resp = '1';
             break;
         case 4: // cargar 2da firma despeje
-            $resp = $firmas2SeccionDao->findFirmas2seccionByDespeje($dataBatch);
-            if (!$resp) $resp = '1';
-            $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
-            return $response->withHeader('Content-Type', 'application/json');
-
+            $firmas2Seccion = $firmas2SeccionDao->findFirmas2seccionByDespeje($dataBatch);
+            if (!$firmas2Seccion) $resp = '1';
             break;
     }
+
+    $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
+    return $response->withHeader('Content-Type', 'application/json');
 });

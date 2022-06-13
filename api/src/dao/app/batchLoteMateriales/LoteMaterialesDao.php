@@ -26,6 +26,7 @@ class LoteMaterialesDao
             $sql = "INSERT INTO batch_lote_materiales (ref_material, lote, tanque, batch) VALUES (:ref_material, :lote, :tanque, :batch)";
             $query = $connection->prepare($sql);
             $query->execute(['ref_material' => $lote['referenciaMP'], 'lote' => $lote['lote'], 'tanque' => $lote['tanque'], 'batch' => $lote['batch']]);
+            // $query->execute(['ref_material' => $lotes['referenciaMP'], 'lote' => $lotes['lote'], 'tanque' => $lotes['tanque'], 'batch' => $lotes['batch']]);
         }
     }
 }

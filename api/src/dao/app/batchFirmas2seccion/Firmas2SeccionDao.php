@@ -24,9 +24,6 @@ class Firmas2SeccionDao
         $query = $connection->prepare($sql);
         $result = $query->execute(['modulo' => $dataBatch['modulo'], 'batch' => $dataBatch['idBatch']]);
         if ($result > 0) {
-            // $data = $query->fetch(PDO::FETCH_ASSOC);
-            // $arreglo[] = $data;
-            // echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
             $this->logger->info(__FUNCTION__, array('query' => $query->queryString, 'errors' => $query->errorInfo()));
             $data = $query->fetch($connection::FETCH_ASSOC);
             $this->logger->notice("Firmas obtenidas", array('firmas' => $data));
@@ -66,7 +63,6 @@ class Firmas2SeccionDao
         if ($rows > 0) {
             $data = $this->saveFirmaDespeje($query);
         } else {
-
             $sql = "SELECT u.urlfirma as realizo
                 FROM batch_firmas2seccion d 
                 INNER JOIN usuario u ON u.id = d.realizo
@@ -96,7 +92,6 @@ class Firmas2SeccionDao
             $query->execute(['modulo' => $modulo, 'batch' => $dataBatch['idBatch'], 'ref_multi' => $dataBatch['ref_multi']]);
             $rows = $query->rowCount();
         } else {
-
             $sql = "SELECT * FROM batch_firmas2seccion WHERE modulo = :modulo AND batch = :batch";
             $query = $connection->prepare($sql);
             $query->execute(['modulo' => $modulo, 'batch' => $dataBatch['idBatch']]);
