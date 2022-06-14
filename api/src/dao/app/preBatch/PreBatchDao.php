@@ -21,17 +21,6 @@ class PreBatchDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        // $sql = "SELECT pp.nombre AS propietario, exp.pedido, exp.fecha_pedido, exp.estado, exp.cantidad_acumulada, exp.fecha_insumo, (SELECT referencia FROM producto 
-        //         WHERE multi = (SELECT multi FROM producto WHERE referencia = exp.id_producto) 
-        //         AND presentacion_comercial = 1) AS granel, exp.id_producto, p.nombre_referencia, exp.cant_original, exp.cantidad, 
-        //             DATE_ADD(exp.fecha_pedido, INTERVAL 8 DAY) AS fecha_pesaje, DATE_ADD(exp.fecha_pedido, INTERVAL 9 DAY) AS fecha_preparacion, 
-        //             DATE_ADD(exp.fecha_pedido, INTERVAL 6 DAY) AS recepcion_insumos, DATE_ADD(exp.fecha_pedido, INTERVAL 13 DAY) AS envasado, 
-        //             DATE_ADD(exp.fecha_pedido, INTERVAL 15 DAY) AS entrega 
-        //         FROM `explosion_materiales_pedidos_registro` exp 
-        //         INNER JOIN producto p ON p.referencia = exp.id_producto 
-        //         INNER JOIN propietario pp ON pp.id = p.id_propietario
-        //         WHERE exp.flag_estado = 0;";
-
         $sql = "SELECT pp.nombre AS propietario, exp.pedido, exp.fecha_pedido, exp.estado, exp.cantidad_acumulada, exp.fecha_insumo, (SELECT referencia FROM producto 
                 WHERE multi = (SELECT multi FROM producto WHERE referencia = exp.id_producto) 
                 AND presentacion_comercial = 1) AS granel, exp.id_producto, p.nombre_referencia, exp.cant_original, exp.cantidad, 
@@ -44,8 +33,6 @@ class PreBatchDao
                     INNER JOIN producto p ON p.referencia = exp.id_producto 
                     INNER JOIN propietario pp ON pp.id = p.id_propietario
                 WHERE exp.flag_estado = 0;";
-
-
 
         $query = $connection->prepare($sql);
         $query->execute();
@@ -116,5 +103,19 @@ class PreBatchDao
                 'fecha_pedido' => $fecha_dtco,
             ]);
         }
+    }
+
+    //Validar tabla pedidos y cambiar flag
+    public function changeFlagEstadoByPedido($pedidos)
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        $pedidos = json_encode($pedidos);
+        $data = str_replace('"', '', $pedidos);
+        $data = substr($data, 1, -1);
+
+        $stmt = $connection->prepare("UPDATE explosion_materiales_pedidos_registro SET flag_estado = 1 
+                                      WHERE id IN(SELECT id FROM explosion_materiales_pedidos_registro WHERE pedido NOT IN({$data}))");
+        $stmt->execute();
     }
 }

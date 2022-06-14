@@ -5,7 +5,7 @@ $(document).ready(function () {
   $(document).on('blur', '.cantProgram', function (e) {
     e.preventDefault();
     id_input = this.id;
-    id_checkbox = id_input.substr(5, 13);
+    id_checkbox = id_input.substr(5, id_input.length);
     referencia = id_input.substr(-7, 7);
     cantidad = $(`#${id_input}`).val();
     numPedido = id_checkbox.slice(0, -8);
@@ -105,7 +105,7 @@ $(document).ready(function () {
   $(document).on('blur', '.dateInsumos', function (e) {
     e.preventDefault();
     id_date = this.id;
-    id_input = id_date.substr(5, 13);
+    id_input = id_date.substr(5, id_date.length);
     numPedido = id_date.slice(5, -8);
     date = $(`#${id_date}`).val();
 
