@@ -44,7 +44,6 @@ $("#cmbReferenciaProductos").change(function(e) {
     let referencia = $("select option:selected").val();
 
     const resultado = ref.find(refer => refer.referencia === referencia);
-    console.log(resultado)
 
     $("#txtnombreProducto").val("");
     $("#txtnombreProducto").val(resultado.nombre_referencia);

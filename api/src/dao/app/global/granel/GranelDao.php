@@ -27,7 +27,7 @@
     public function findAll()
     {
       $connection = Connection::getInstance()->getConnection();
-      $stmt = $connection->prepare("SELECT referencia FROM producto 
+      $stmt = $connection->prepare("SELECT referencia, nombre_referencia FROM producto 
                                     WHERE referencia LIKE '%Granel%' 
                                     ORDER BY SUBSTR(referencia, 1, 7), CAST(SUBSTR(referencia, 8, LENGTH(referencia)) AS UNSIGNED)");
       $stmt->execute();
