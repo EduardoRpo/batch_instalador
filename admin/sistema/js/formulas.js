@@ -107,7 +107,9 @@ $('#cmbReferenciaProductos').change(function(e) {
     const resultado = ref.find(refer => refer.referencia === seleccion);
 
     $("#txtnombreProducto").val("");
-    $("#txtnombreProducto").val(resultado.nombre_referencia);
+
+    if (seleccion != 1)
+        $("#txtnombreProducto").val(resultado.nombre_referencia);
 
 
     /* $.ajax({
