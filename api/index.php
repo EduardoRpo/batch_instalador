@@ -72,10 +72,10 @@ require_once __DIR__ . '/src/routes/app/explosionMateriales/explosion_materiales
 require_once __DIR__ . '/src/routes/app/explosionMateriales/pedidos.php';
 
 /* pdf */
-require_once __DIR__ . '/src/routes/app/pdf.php';
+require_once __DIR__ . '/src/routes/app/pdf/pdf.php';
 
 
-require_once __DIR__ . '/src/routes/app/usuarios.php';
+require_once __DIR__ . '/src/routes/app/usuarios/usuarios.php';
 
 
 // Run app

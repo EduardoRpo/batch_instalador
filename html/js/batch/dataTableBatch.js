@@ -256,8 +256,8 @@ $(document).ready(function () {
       },
     ],
     rowCallback: function (row, data, index) {
-      if (data['estado'] == 1) $(row).css('color', '#138c24');
-      if (data['estado'] == 2) $(row).css('color', '#be1323');
+      if (data['estado'] == 1) $(row).css('color', 'green');
+      if (data['estado'] == 2) $(row).css('color', 'red');
     },
   });
 

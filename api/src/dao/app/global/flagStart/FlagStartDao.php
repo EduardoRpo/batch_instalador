@@ -27,33 +27,47 @@ class FlagStartDao
         return $rows;
     }
 
-    // Guardar Flag_start pesaje
-    public function saveFlagStartPesaje($dataBatchFlag)
+    // Insertar flag_start pesaje
+    public function insertFlagStart($dataBatchFlag)
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        $stmt = $connection->prepare("INSERT INTO batch_flag_start (referencia, modulo, batch) 
+                                      VALUES (:referencia, :modulo, :batch)");
+        $stmt->execute([
+            'referencia' => $dataBatchFlag['referencia'],
+            'modulo' => $dataBatchFlag['modulo'],
+            'batch' => $dataBatchFlag['idBatch']
+        ]);
+    }
+
+    // Guardar Flag_start
+    public function saveFlagStart($dataBatchFlag)
     {
         $connection = Connection::getInstance()->getConnection();
 
         //Buscar batch en base de datos
         $rows = $this->findFlagStart($dataBatchFlag);
+        $modulo = $dataBatchFlag['modulo'];
+
+        if ($modulo == 3) $flag = 'flag_start_preparacion';
+        if ($modulo == 5) $flag = 'flag_start_envasado';
+        if ($modulo == 6) $flag = 'flag_start_acondicionamiento';
 
         if ($rows > 0) {
-            $stmt = $connection->prepare("UPDATE batch_flag_start SET flag_start_preparacion = :flag_start_preparacion
+            $stmt = $connection->prepare("UPDATE batch_flag_start SET {$flag} = :flag
             WHERE batch = :batch");
             $stmt->execute([
-                'flag_start_preparacion' => 1,
+                'flag' => $dataBatchFlag['tanques'],
                 'batch' => $dataBatchFlag['idBatch']
             ]);
         } else {
-            //Seleccionar referencia del batch
-            $stmt = $connection->prepare("SELECT * FROM batch WHERE id_batch = :id_batch");
-            $stmt->execute(['id_batch' => $dataBatchFlag['idBatch']]);
-            $dataBatch = $stmt->fetch($connection::FETCH_ASSOC);
-
-
-            $stmt = $connection->prepare("INSERT INTO batch_flag_start (referencia, modulo, batch) 
-                                      VALUES (:referencia, :modulo, :batch)");
+            $stmt = $connection->prepare("INSERT INTO batch_flag_start ({$flag}, referencia, modulo, batch) 
+                                      VALUES (:flag, :referencia, :modulo, :batch)");
             $stmt->execute([
-                'referencia' => $dataBatch['id_producto'],
-                'modulo' => $dataBatchFlag['modulo'],
+                'flag' => $dataBatchFlag['tanques'],
+                'referencia' => $dataBatchFlag['referencia'],
+                'modulo' => $modulo,
                 'batch' => $dataBatchFlag['idBatch']
             ]);
         }

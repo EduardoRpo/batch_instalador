@@ -13,10 +13,6 @@ $productDao = new ProductDao();
 $app->post('/validacionDatosPedidos', function (Request $request, Response $response, $args) use ($preBatchDao, $productDao) {
   $dataPedidos = $request->getParsedBody();
 
-  //Eliminar variable session
-  session_start();
-  unset($_SESSION['nonExistentProducts']);
-
   if (isset($dataPedidos)) {
 
     $insert = 0;
@@ -53,14 +49,15 @@ $app->post('/validacionDatosPedidos', function (Request $request, Response $resp
 
     $dataImportOrders = array('success' => true, 'update' => $update, 'insert' => $insert, 'pedidos' => sizeof($data), 'referencias' => sizeof($temp_array));
 
-    if (isset($nonExistentProducts)) {
-      $nonExistentProducts['pedido'] = array_values($nonExistentProducts['pedido']);
-      $nonExistentProducts['referencia'] = array_values($nonExistentProducts['referencia']);
-    }
+    // Guardar pedidos existentes
+    session_start();
+    $data = array_values($data);
+    $_SESSION['dataImportPedidos'] = $data;
 
     //Guardar campos con productos no existentes
     if ($nonExistentProducts) {
-      session_start();
+      $nonExistentProducts['pedido'] = array_values($nonExistentProducts['pedido']);
+      $nonExistentProducts['referencia'] = array_values($nonExistentProducts['referencia']);
       $_SESSION['nonExistentProducts'] = $nonExistentProducts;
     }
   } else $dataImportOrders = array('error' => true, 'message' => 'El archivo se encuentra vacio. Intente nuevamente');
@@ -74,21 +71,26 @@ $app->get('/sendNonExistentProducts', function (Request $request, Response $resp
   $data = $_SESSION['nonExistentProducts'];
 
   if ($data) $resp = $data;
-  else $resp = array('error' => true, 'message' => 'Todos los pedidos fueron importados correctamente');
+  else $resp = array('error' => true, 'message' => 'Importe un nuevo archivo');
 
   $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
 
 $app->post('/addPedidos', function (Request $request, Response $response, $args) use ($preBatchDao) {
-  $dataPedidos = $request->getParsedBody();
-  $dataPedidos = $dataPedidos['data'];
+  session_start();
+  $dataPedidos = $_SESSION['dataImportPedidos'];
 
-  for ($i = 0; $i < sizeof($dataPedidos); $i++)
+  // $data = array();
+  for ($i = 0; $i < sizeof($dataPedidos); $i++) {
     $result = $preBatchDao->savePedidos($dataPedidos[$i]);
 
+    //Obtener todos los pedidos
+    $data[$i] = $dataPedidos[$i]['documento'];
+  }
   //Al cargar los pedidos validar la tabla vs pedidos y si no encuentra el registro marcar con un flag y no mostar en la vista Preprogramados
   //Cargar todos registros de la tabla que no tengan flag y validarlos contra el objeto de importacion
+  $result = $preBatchDao->changeFlagEstadoByPedido($data);
 
   if ($result == null)
     $resp = array('success' => true, 'message' => 'Pedidos Importados correctamente');
@@ -97,4 +99,12 @@ $app->post('/addPedidos', function (Request $request, Response $response, $args)
 
   $response->getBody()->write(json_encode($resp));
   return $response->withStatus(200)->withHeader('Content-Type', 'application/json');
+});
+
+$app->get('/deletePedidosSession', function (Request $request, Response $response, $args) {
+  //Eliminar variable session
+  session_start();
+  unset($_SESSION['nonExistentProducts'], $_SESSION['dataImportPedidos']);
+  $response->getBody()->write(json_encode(JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
 });

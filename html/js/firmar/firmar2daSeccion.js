@@ -76,14 +76,12 @@ function firmar2daSeccion(firma) {
     data: data,
 
     success: function (response) {
-      let info = JSON.parse(response);
+      //let info = JSON.parse(response);
 
-      if (info >= 1) {
-        if (modulo != 9) {
-          alertify.set('notifier', 'position', 'top-right');
-          alertify.success(`Tanque No. ${tanquesOk} ejecutado con éxito`);
-          $(`#chkcontrolTanques${tanquesOk}`).prop('disabled', true);
-        }
+      if (response.success) {
+        alertify.set('notifier', 'position', 'top-right');
+        alertify.success(response.message);
+        $(`#chkcontrolTanques${tanquesOk}`).prop('disabled', true);
 
         if (modulo == 2) {
           $(tablePesaje).find('tbody tr').removeClass('tr_hover');
@@ -102,7 +100,7 @@ function firmar2daSeccion(firma) {
         if (tanques == tanquesOk) firmarSeccionCierreProceso(firma);
       } else {
         alertify.set('notifier', 'position', 'top-right');
-        alertify.error('Error');
+        alertify.error(response.message);
       }
     },
   });
