@@ -108,7 +108,6 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
   session_start();
   $_SESSION['dataPedidos'] = $newDataPedidos;
 
-
   $sumArrayTotal = array('granel' => array_keys($sumArrayGranel), 'producto' => $producto, 'tamanio' => array_values($sumArrayGranel), 'cantidades' => array_values($sumArrayCantidades));
 
   $response->getBody()->write(json_encode($sumArrayTotal, JSON_NUMERIC_CHECK));
