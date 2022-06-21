@@ -152,7 +152,7 @@ include_once("modal/modalPedidos.php");
                 <div class="tab-pane fade mt-3" id="one" role="tabpanel" aria-labelledby="one-tab">
                   <div class="col-md-12 align-self-right">
                     <div class="card">
-                      <div class="mt-3 text-center" style="display:flex">
+                      <div class="mt-3 text-center">
                         <button class="toggle-vis btn btn-primary hideTitle" id="0">Propietario</button>
                         <button class="toggle-vis btn btn-primary hideTitle" id="1">Pedido</button>
                         <button class="toggle-vis btn btn-primary hideTitle" id="2">F_Pedidos</button>

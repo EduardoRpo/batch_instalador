@@ -1,6 +1,7 @@
 let tabla
 let editar
 let tbl
+let ref
 
 /* Mostrar Menu seleccionado */
 
@@ -86,6 +87,7 @@ const materiaPrima = (tb) => {
 /* cargar Selects */
 
 const cargarSelect = (data, select) => {
+    ref = data
     select.empty()
     select.append(`<option disabled selected>Seleccione</option>`)
     select.append(`<option value='1'>Todos</option>`)
@@ -102,7 +104,15 @@ $('#cmbReferenciaProductos').change(function(e) {
     e.preventDefault()
     let seleccion = $('select option:selected').val()
 
-    $.ajax({
+    const resultado = ref.find(refer => refer.referencia === seleccion);
+
+    $("#txtnombreProducto").val("");
+
+    if (seleccion != 1)
+        $("#txtnombreProducto").val(resultado.nombre_referencia);
+
+
+    /* $.ajax({
         type: 'POST',
         url: 'php/c_formulas.php',
         data: { operacion: '2', referencia: seleccion },
@@ -112,7 +122,7 @@ $('#cmbReferenciaProductos').change(function(e) {
             $('#txtnombreProducto').val('')
             $('#txtnombreProducto').val(info.nombre_referencia)
         },
-    })
+    }) */
 
     if (seleccion == 1) {
         $('#formulas').hide()

@@ -27,7 +27,9 @@
     public function findAll()
     {
       $connection = Connection::getInstance()->getConnection();
-      $stmt = $connection->prepare("SELECT * FROM producto WHERE referencia LIKE '%Granel%' ORDER BY referencia ASC");
+      $stmt = $connection->prepare("SELECT referencia, nombre_referencia FROM producto 
+                                    WHERE referencia LIKE '%Granel%' 
+                                    ORDER BY SUBSTR(referencia, 1, 7), CAST(SUBSTR(referencia, 8, LENGTH(referencia)) AS UNSIGNED)");
       $stmt->execute();
       $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
       $granel = $stmt->fetchAll($connection::FETCH_ASSOC);
