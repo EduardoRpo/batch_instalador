@@ -98,9 +98,9 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
   }
 
   /* Notificaciones*/
-  if ($resp == null and $flag_tanques == 1)
+  if ($resp == null && $flag_tanques == 1)
     $resp = array('success' => true, 'message' => 'Nuevo Batch creado correctamente');
-  else if ($resp == null and $flag_tanques == 0)
+  else if ($resp == null && $flag_tanques == 0)
     $resp = array('success' => true, 'message' => 'Nuevos Batchs creados correctamente');
   else
     $resp = array('error' => true, 'message' => 'Ocurrio un error mientras creaba el Batch. Intentelo nuevamente');

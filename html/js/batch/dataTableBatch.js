@@ -210,11 +210,7 @@ $(document).ready(function () {
         data: null,
         render: function (data) {
           return `
-                <input type="date" class="dateInsumos form-control-updated text-center" id="date-${
-                  data.pedido
-                }-${data.id_producto}" value="${
-            data.fecha_insumo
-          }" max="${(date = fechaActual())}"/>`;
+                <input type="date" class="dateInsumos form-control-updated text-center" id="date-${data.pedido}-${data.id_producto}" value="${data.fecha_insumo}" max="${data.fecha_actual}"/>`;
         },
       },
       /* {
@@ -464,25 +460,3 @@ $(document).ready(function () {
     data = tablaBatchInactivos.row(this).data();
   });
 });
-
-//Recargar las fechas
-
-// setTimeout(function() {
-//     $('.dateInsumos').blur();
-// }, 1500);
-
-fechaActual = () => {
-  tiempoTranscurrido = Date.now();
-  date = new Date(tiempoTranscurrido);
-
-  let day = date.getDate();
-  let month = date.getMonth() + 1;
-  let year = date.getFullYear();
-
-  if (month < 10) {
-    if (day < 10) date = `${year}-0${month}-0${day}`;
-    else date = `${year}-0${month}-${day}`;
-  } else date = `${year}-${month}-${day}`;
-
-  return date;
-};
