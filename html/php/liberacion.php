@@ -50,21 +50,21 @@ if (!empty($_POST)) {
                 $observaciones = $_POST['obs'];
 
                 if ($btn == 'produccion_realizado') {
-                    $produccion = $user[0]['id'];
+                    $produccion = $user['id'];
                     $calidad = 0;
                     $tecnica = 0;
                 }
 
                 if ($btn == 'calidad_verificado') {
                     $produccion = 0;
-                    $calidad = $user[0]['id'];
+                    $calidad = $user['id'];
                     $tecnica = 0;
                 }
 
                 if ($btn == 'tecnica_realizado') {
                     $produccion = 0;
                     $calidad = 0;
-                    $tecnica = $user[0]['id'];
+                    $tecnica = $user['id'];
                 }
 
                 $sql = "INSERT INTO batch_liberacion (aprobacion, observaciones, dir_produccion, dir_calidad, dir_tecnica, batch) 
