@@ -17,20 +17,21 @@ function enviar() {
     }),
     $.ajax({
         type: "POST",
-        url: "../../html/php/firmar.php",
+        //url: "../../html/php/firmar.php",
+        url: "/api/auth",
         data: datos,
 
         success: function(datos) {
-            if (datos == 0) {
-                alertify.set("notifier", "position", "top-right");
-                alertify.error("usuario y/o contraseña no coinciden.");
-                return false;
-            }
 
-            if (datos == 1) {
-                alertify.set("notifier", "position", "top-right");
-                alertify.error("Usuario No autorizado para firmar.");
-                return false;
+            alertify.set("notifier", "position", "top-right");
+
+            if (datos.info == true) {
+                alertify.warning(datos.message)
+                return false
+            }
+            if (datos.error == true) {
+                alertify.error(datos.message)
+                return false
             }
 
             preparar(datos);
@@ -44,14 +45,14 @@ function enviar() {
 /* Si el usuario existe, ejecuta la opción de acuerdo con la seleccion */
 
 function preparar(datos) {
-
-    info = JSON.parse(datos);
+    info = datos;
+    //info = JSON.parse(datos);
     if (btn_id == "firma1") {
         if (modulo === 7) guardar_despacho(info);
         if (modulo === 8) guardar_microbiologia(info);
         if (modulo === 9) firmar2daSeccion(info);
         if (modulo === 10) guardarLiberacion(info);
-        else if (modulo !== 8 && modulo !== 9) guardar_preguntas(info[0].id);
+        else if (modulo !== 8 && modulo !== 9) guardar_preguntas(info.id);
         if (modulo != 7 && modulo != 8) firmar(info);
     }
 
@@ -63,7 +64,7 @@ function preparar(datos) {
         }
         if (modulo === 10) guardarLiberacion(info);
         else if (modulo !== 8 && modulo !== 9) {
-            firmarVerficadoDespeje(info[0].id);
+            firmarVerficadoDespeje(info.id);
             firmar(info);
         }
     }
@@ -85,17 +86,17 @@ function preparar(datos) {
 
     if (btn_id == "firma5") {
         if (modulo != 5 && modulo != 6) {
-            info[0].id;
+            info.id;
             firmar(info);
         } else {
-            registrar_material_sobrante(info[0].id);
+            registrar_material_sobrante(info.id);
             observaciones_incidencias(info);
             firmar(info);
         }
     }
 
     if (btn_id == "firma6") {
-        firmaCalidad(info[0].id);
+        firmaCalidad(info.id);
         firmar(info);
     }
 
@@ -168,14 +169,13 @@ function firmarVerficadoDespeje(idfirma) {
 }
 
 function firmar(firm) {
-    let template =
-        '<img id=":id:" src=":firma:" alt="firma_usuario" height="130">';
+    let template = '<img id=":id:" src=":firma:" alt="firma_usuario" height="130">';
     let parent = $("#" + id).parent();
 
     $("#" + id).remove();
     id = "";
 
-    let firma = template.replace(":firma:", firm[0].urlfirma);
+    let firma = template.replace(":firma:", firm.urlfirma);
     firma = firma.replace(":id:", btn_id);
     parent.append(firma).html;
 }

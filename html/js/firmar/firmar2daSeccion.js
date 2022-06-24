@@ -48,7 +48,7 @@ function firmar2daSeccion(firma) {
             desinfectante,
             obs_desinfectante,
             obs_batch,
-            realizo: firma[0].id,
+            realizo: firma.id,
             controlProducto,
         };
     }
@@ -64,19 +64,19 @@ function firmar2daSeccion(firma) {
             obs_batch,
             modulo,
             idBatch,
-            realizo: firma[0].id,
+            realizo: firma.id,
             controlProducto,
         };
     }
 
     $.ajax({
         type: 'POST',
-        url: '../../html/php/batch_tanques.php',
-        // url: 'api/saveBatchTanques',
+        //url: '../../html/php/batch_tanques.php',
+        url: '../../api/saveBatchTanques',
         data: data,
 
         success: function(response) {
-            let info = JSON.parse(response);
+            //let info = JSON.parse(response);
 
             if (response) {
                 alertify.set('notifier', 'position', 'top-right');
@@ -149,7 +149,7 @@ function firmarSeccionCierreProceso(firma) {
 /* almacenar firma calidad 2da seccion */
 
 function almacenarfirma(info) {
-    idUser = info[0].id;
+    idUser = info.id;
     $.ajax({
         type: 'POST',
         url: '../../html/php/incidencias.php',

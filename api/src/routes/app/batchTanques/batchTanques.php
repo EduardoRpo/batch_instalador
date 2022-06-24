@@ -38,7 +38,7 @@ $app->post('/saveBatchTanques', function (Request $request, Response $response, 
     $desinfectanteDao,
     $firmas2SeccionDao,
     $controlFirmasDao,
-    $controlEspecificacionesDao
+    $controlEspecificacionesDao,
 ) {
     $dataBatch = $request->getParsedBody();
 
@@ -47,14 +47,19 @@ $app->post('/saveBatchTanques', function (Request $request, Response $response, 
     $tanquesOk = $dataBatch['tanquesOk'];
 
 
-    if ($modulo != 9) {
+    if ($modulo != 9)
         $resp = $tanquesChksDao->saveTanquesChks($dataBatch);
-    }
+
     // Actualiza el estado de los modulo pesaje y preparacion
     if ($modulo == 2) {
         $lotesMateriales = $loteMaterialesDao->registrarLotes($dataBatch);
-        if ($lotesMateriales == null) $explosionMateriales = $explosionMaterialesBatchDao->registrarExplosionMaterialesUso($dataBatch);
-        if ($explosionMateriales == null) $estado = $estadoDao->actualizarEstado($dataBatch);
+
+        if ($lotesMateriales == null)
+            $explosionMateriales = $explosionMaterialesBatchDao->registrarExplosionMaterialesUso($dataBatch);
+
+        if ($explosionMateriales == null)
+            $estado = $estadoDao->actualizarEstado($dataBatch);
+
         if ($estado == null) {
             $batch = $batchDao->findBatch($dataBatch);
             $dataBatch['referencia'] = $batch['id_producto'];
@@ -105,7 +110,7 @@ $app->post('/saveBatchTanques', function (Request $request, Response $response, 
     if ($resp == null)
         $resp = array('success' => true, 'message' => "Tanque No. {$tanquesOk} ejecutado con éxito.");
     else
-        $resp = array('error' => true, 'message' => 'Ocurrio un error durante la firma de tanques.');
+        $resp = array('error' => true, 'message' => 'Ocurrio un error durante la ejecución del tanque. intente Nuevamente.');
 
     $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');

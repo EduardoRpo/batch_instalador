@@ -2,7 +2,7 @@
 
 // obtener firma y huella del usuario
 
-if (!empty($_POST)) {
+/* if (!empty($_POST)) {
   require_once('../../conexion.php');
 
   $user = $_POST['user'];
@@ -44,4 +44,4 @@ if (!empty($_POST)) {
 
     echo json_encode($data, JSON_UNESCAPED_UNICODE);
   }
-}
+} */

@@ -47,7 +47,8 @@ class ExplosionMaterialesBatchDao
             $tanques = $dataMateriales['tanques'];
             $cantidad = (($material['porcentaje'] / 100) * $productoTamanio['tamano_lote']) / $tanques;
 
-            $sql = "SELECT * FROM explosion_materiales_batch WHERE batch = :batch AND id_producto = :id_producto AND id_materiaprima = :id_materia_prima";
+            $sql = "SELECT * FROM explosion_materiales_batch 
+                    WHERE batch = :batch AND id_producto = :id_producto AND id_materiaprima = :id_materia_prima";
             $query = $connection->prepare($sql);
             $query->execute([
                 'batch' => $batch,
@@ -64,7 +65,8 @@ class ExplosionMaterialesBatchDao
 
                 /* Actualiza */
 
-                $sql = "UPDATE explosion_materiales_batch SET uso = :uso WHERE batch = :batch AND id_producto = :id_producto AND id_materiaprima = :id_materia_prima";
+                $sql = "UPDATE explosion_materiales_batch SET uso = :uso 
+                        WHERE batch = :batch AND id_producto = :id_producto AND id_materiaprima = :id_materia_prima";
                 $query = $connection->prepare($sql);
                 $query->execute([
                     'uso' => $cantidadUsoNueva,
@@ -72,12 +74,15 @@ class ExplosionMaterialesBatchDao
                     'batch' => $batch,
                     'id_materia_prima' => $material['referencia']
                 ]);
-            } else {
-                $sql = "INSERT INTO batch_explosion_materiales (id_materiaprima, cantidad) 
-                    VALUES(:id_materiaprima, :cantidad)";
+            } /* else {
+                $sql = "INSERT INTO explosion_materiales_batch (id_materiaprima, cantidad) 
+                        VALUES(:id_materiaprima, :cantidad)";
                 $query = $connection->prepare($sql);
-                $query->execute(['id_materia_prima' => $material['id_materiaprima'], 'uso' => $cantidad]);
-            }
+                $query->execute([
+                    'id_materia_prima' => $material['referencia'], 
+                    'uso' => $cantidad
+                ]);
+            } */
         }
     }
 }
