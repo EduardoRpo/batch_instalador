@@ -225,27 +225,14 @@ class BatchDao extends estadoInicialDao
         ]);
     }
 
-    public function deleteBatch($id_batch)
+    public function deleteBatch($id_batch, $motivo)
     {
-        $id_batch = $_POST['id'];
-        $motivo = $_POST['value'];
-
         $connection = Connection::getInstance()->getConnection();
 
-        $stmt = $connection->prepare("UPDATE batch SET estado = 0, fecha_eliminacion = CURDATE() 
-                                      WHERE id_batch = $id_batch");
-        $stmt->execute(array('idBatch' => $id_batch));
+        $stmt = $connection->prepare("UPDATE batch SET estado = 0, fecha_eliminacion = CURDATE() WHERE id_batch = :id_batch");
+        $stmt->execute(['id_batch' => $id_batch]);
 
-        $stmt = $connection->prepare("INSERT INTO batch_eliminados (batch, motivo) 
-                                      VALUES('$id_batch', '$motivo')");
-        $stmt->execute(array('idBatch' => $id_batch));
-
-
-        /* $query_batch_Eliminar = "UPDATE batch SET estado = 0, fecha_eliminacion = CURDATE() WHERE id_batch = $id_batch";
-        $result_eliminar = mysqli_query($connection, $query_batch_Eliminar);
-
-        $query_motivo = "INSERT INTO batch_eliminados (batch, motivo) VALUES('$id_batch', '$motivo')";
-        $result_motivo = mysqli_query($connection, $query_motivo);
-        mysqli_close($connection); */
+        $stmt = $connection->prepare("INSERT INTO batch_eliminados (batch, motivo) VALUES(:id_batch, :motivo)");
+        $stmt->execute(['id_batch' => $id_batch, 'motivo' => $motivo]);
     }
 }

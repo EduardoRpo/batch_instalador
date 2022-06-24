@@ -46,8 +46,6 @@ class ControlEspecificacionesDao
             'modulo' => $dataBatch['modulo'],
             'batch' => $dataBatch['idBatch'],
         ]);
-        if ($result) echo '1';
-        else echo '0';
     }
 
     public function insertCEspecificacionesByFisicoquimico($dataBatch)

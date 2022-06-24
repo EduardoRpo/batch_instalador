@@ -29,7 +29,7 @@ $('.link-editarMulti').css('cursor', 'pointer');
 
 $(document).on('click', '.link-borrar', function(e) {
     e.preventDefault();
-
+    id_batch = this.id
     const texto = $(this).parent().parent().children()[1];
     const id = $(texto).text();
 
@@ -52,6 +52,7 @@ $(document).on('click', '.link-borrar', function(e) {
 
     confirm.set('onok', function(r) {
         let value = $('#motivoEliminacion').val();
+
         if (value == null) {
             alertify.set('notifier', 'position', 'top-right');
             alertify.error(`Seleccione el motivo de <b>Eliminación</b>`);
@@ -59,19 +60,10 @@ $(document).on('click', '.link-borrar', function(e) {
         }
         if (r) {
             $.ajax({
-                method: 'POST',
-                url: 'php/listarBatch.php',
-                data: { operacion: '2', id: id, value },
-
+                url: `/api/deleteBatch/${id_batch}/${value}`,
                 success: function(r) {
-                    alertify.set('notifier', 'position', 'top-right');
-                    alertify.success('Batch Record Eliminado.');
-                    actualizarTabla();
-                },
-                error: function(r) {
-                    alertify.set('notifier', 'position', 'top-right');
-                    alertify.error('Error al Eliminar el Batch Record.');
-                },
+                    message(r)
+                }
             });
         }
     });
@@ -264,12 +256,17 @@ function guardarDatos() {
 /* Mensaje de exito */
 
 message = (data) => {
+    alertify.set('notifier', 'position', 'top-right');
+
     if (data.success == true) {
         actualizarTabla();
         cerrarModal();
         alertify.success(data.message);
-    } else if (data.error == true) alertify.error(data.message);
-    else if (data.info == true) alertify.info(data.message);
+    } else if (data.error == true)
+        alertify.error(data.message);
+    else if (data.info == true)
+        alertify.info(data.message);
+
 };
 
 /* Actualizar tabla */

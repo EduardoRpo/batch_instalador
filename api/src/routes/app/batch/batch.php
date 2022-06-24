@@ -128,3 +128,17 @@ $app->post('/updateBatch', function (Request $request, Response $response, $args
   $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
+
+$app->get('/deleteBatch/{id_batch}/{motivo}', function (Request $request, Response $response, $args) use ($batchDao) {
+
+  $resp = $batchDao->deleteBatch($args['id_batch'], $args['motivo']);
+
+  /* Notificaciones*/
+  if ($resp == null)
+    $resp = array('success' => true, 'message' => 'Batch Record Eliminado correctamente');
+  else
+    $resp = array('error' => true, 'message' => 'Ocurrio un error mientras eliminaba el Batch. Intentelo nuevamente');
+
+  $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
+});

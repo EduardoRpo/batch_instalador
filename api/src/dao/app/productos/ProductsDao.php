@@ -30,7 +30,7 @@ class ProductsDao
                                              INNER JOIN linea l ON p.id_linea=l.id
                                              INNER JOIN presentacion_comercial pc On pc.id = p.presentacion_comercial
                                       WHERE referencia LIKE '%G%'
-                                      ORDER BY nombre_referencia ASC");
+                                      ORDER BY SUBSTR(referencia, 1, 7), CAST(SUBSTR(referencia, 8, LENGTH(referencia)) AS UNSIGNED)");
         $stmt->execute();
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         $granel = $stmt->fetchAll($connection::FETCH_ASSOC);

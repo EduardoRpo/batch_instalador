@@ -47,7 +47,7 @@ function observaciones_incidencias(firma) {
 
 function cargarObsIncidencias(firma) {
     cargarSelectorIncidencias();
-    firma_realizado = firma[0].id;
+    firma_realizado = firma.id;
     infofirma = firma;
     $("#modalObservaciones").modal({
         show: true,

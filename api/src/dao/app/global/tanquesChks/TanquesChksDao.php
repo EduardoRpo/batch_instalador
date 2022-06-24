@@ -22,7 +22,10 @@ class TanquesChksDao
 
         $sql = "SELECT * FROM batch_tanques_chks WHERE modulo = :modulo AND batch = :batch";
         $query = $connection->prepare($sql);
-        $query->execute(['modulo' => $dataTanques['modulo'], 'batch' => $dataTanques['idBatch']]);
+        $query->execute([
+            'modulo' => $dataTanques['modulo'],
+            'batch' => $dataTanques['idBatch']
+        ]);
 
         return $query;
     }
@@ -44,11 +47,20 @@ class TanquesChksDao
         if ($rows > 0) {
             $sql = "UPDATE batch_tanques_chks SET tanquesOk =:tanquesOk WHERE modulo = :modulo AND batch = :batch";
             $query = $connection->prepare($sql);
-            $query->execute(['tanquesOk' => $dataTanques['tanquesOk'], 'modulo' => $dataTanques['modulo'], 'batch' => $dataTanques['idBatch']]);
+            $query->execute([
+                'tanquesOk' => $dataTanques['tanquesOk'],
+                'modulo' => $dataTanques['modulo'],
+                'batch' => $dataTanques['idBatch']
+            ]);
         } else {
             $sql = "INSERT INTO batch_tanques_chks (tanques, tanquesOk, modulo, batch) VALUES(:tanques, :tanquesOk, :modulo, :batch)";
             $query = $connection->prepare($sql);
-            $query->execute(['tanques' => $dataTanques['tanques'], 'tanquesOk' => $dataTanques['tanquesOk'], 'modulo' => $dataTanques['modulo'], 'batch' => $dataTanques['idBatch']]);
+            $query->execute([
+                'tanques' => $dataTanques['tanques'],
+                'tanquesOk' => $dataTanques['tanquesOk'],
+                'modulo' => $dataTanques['modulo'],
+                'batch' => $dataTanques['idBatch']
+            ]);
         }
     }
 

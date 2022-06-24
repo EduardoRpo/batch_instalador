@@ -50,13 +50,13 @@ class FlagStartDao
         $rows = $this->findFlagStart($dataBatchFlag);
         $modulo = $dataBatchFlag['modulo'];
 
-        if ($modulo == 3) $flag = 'flag_start_preparacion';
-        if ($modulo == 5) $flag = 'flag_start_envasado';
-        if ($modulo == 6) $flag = 'flag_start_acondicionamiento';
+        if ($modulo == 2) $flag = 'flag_start_preparacion';
+        if ($modulo == 3) $flag = 'flag_start_envasado';
+        if ($modulo == 5) $flag = 'flag_start_acondicionamiento';
 
         if ($rows > 0) {
             $stmt = $connection->prepare("UPDATE batch_flag_start SET {$flag} = :flag
-            WHERE batch = :batch");
+                                          WHERE batch = :batch");
             $stmt->execute([
                 'flag' => $dataBatchFlag['tanques'],
                 'batch' => $dataBatchFlag['idBatch']

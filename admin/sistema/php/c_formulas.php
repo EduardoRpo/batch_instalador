@@ -8,13 +8,13 @@ $op = $_POST['operacion'];
 
 switch ($op) {
     case 1: //listar referencias Productos
-        $sql = "SELECT referencia, nombre_referencia FROM producto 
+        /* $sql = "SELECT referencia, nombre_referencia FROM producto 
                 WHERE referencia LIKE '%Granel%' 
                 ORDER BY SUBSTR(referencia, 1, 7), CAST(SUBSTR(referencia, 8, LENGTH(referencia)) AS UNSIGNED);";
         $query = $conn->prepare($sql);
         $query->execute();
         $data = $query->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE); */
         break;
 
     case 2: //Obtener nombre producto

@@ -21,12 +21,8 @@ $('#instructivos').click(function(e) {
 /* Cargue select referencias */
 
 $.ajax({
-    method: 'POST',
-    url: 'php/c_formulas.php',
-    data: { operacion: '1' },
-
-    success: function(response) {
-        let info = JSON.parse(response)
+    url: '/api/granel',
+    success: function(info) {
         let $selectProductos = $('#cmbReferenciaProductos')
         cargarSelect(info, $selectProductos)
     },
