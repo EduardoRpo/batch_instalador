@@ -16,7 +16,10 @@ $('.contenedor-menu .menu ul.menu_formulas').show()
 $('#link_bases').css('background', 'coral')
 
 /* Cargue select referencias */
-const selectReferencias = () => {
+
+granelNoFormulas()
+
+/* const selectReferencias = () => {
     $.ajax({
         method: 'POST',
         url: 'php/desarrollo/newformulas.php',
@@ -34,19 +37,19 @@ const selectReferencias = () => {
             console.log(response)
         },
     })
-}
+} */
 
-selectReferencias()
+//selectReferencias()
 
 /* cargar Selects */
 
-const cargarSelect = (data, select) => {
+/* const cargarSelect = (data, select) => {
     select.empty()
     select.append(`<option disabled selected>Seleccione</option>`)
     $.each(data, function(i, value) {
         select.append(`<option value ="${value}">${value}</option>`)
     })
-}
+} */
 
 /* Cargue de Parametros de Control en DataTable */
 
@@ -83,7 +86,7 @@ $(`#tblMateriasPrimas tbody`).on('click', 'tr', function() {
 
 /* Cargar nombre de producto de acuerdo con Seleccion Referencia */
 
-$('#cmbReferenciaProductos').change(function(e) {
+/* $('#cmbReferenciaProductos').change(function(e) {
     e.preventDefault()
     let seleccion = $('select option:selected').val()
 
@@ -98,7 +101,7 @@ $('#cmbReferenciaProductos').change(function(e) {
             $('#txtnombreProducto').val(info.nombre_referencia)
         },
     })
-})
+}) */
 
 /* Cargar Materia prima a guardar con la seleccion de la referencia */
 let sum = 0

@@ -128,6 +128,8 @@
     <script src="../assets/js/plugins/bootstrap-notify.js"></script>
     <script src="../assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script><!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    
+    <script src="js/global/cargarReferencias.js"></script>
     <script src="js/newformulas.js"></script>
     <script src="js/importarProductos.js"></script>
     <script src="js/menu.js"></script>

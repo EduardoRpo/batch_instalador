@@ -38,7 +38,9 @@ $('#instructivos').click(function(e) {
 
 /* Cargue select referencias */
 
-$.ajax({
+referenciasGranel()
+
+/* $.ajax({
     method: 'POST',
     url: 'php/c_formulas.php',
     data: { operacion: '1' },
@@ -51,7 +53,7 @@ $.ajax({
     error: function(response) {
         console.log(response)
     },
-})
+}) */
 
 /* Crear Formulas */
 
@@ -88,7 +90,7 @@ $('#formula_f').change(function(e) {
 
 
 /* const materiaPrima = (r) => { */
-$.ajax({
+/* $.ajax({
         method: 'POST',
         url: 'php/c_formulas.php',
         data: { operacion: '4', tb: 'r' },
@@ -101,12 +103,12 @@ $.ajax({
         error: function(response) {
             console.log(response)
         },
-    })
-    /* } */
+    }) */
+/* } */
 
 /* cargar Selects */
 
-const cargarSelect = (data, select) => {
+/* const cargarSelect = (data, select) => {
     select.empty()
     select.append(`<option disabled selected>Seleccione</option>`)
     $.each(data, function(i, value) {
@@ -114,7 +116,7 @@ const cargarSelect = (data, select) => {
             `<option value ="${value.referencia}">${value.referencia}</option>`,
         )
     })
-}
+} */
 
 /* Cargar nombre de producto de acuerdo con Seleccion Referencia */
 
