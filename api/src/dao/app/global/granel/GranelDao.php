@@ -1,39 +1,69 @@
 <?php
 
 
-  namespace BatchRecord\dao;
+namespace BatchRecord\dao;
 
 
-  use BatchRecord\Constants\Constants;
-  use Monolog\Handler\RotatingFileHandler;
-  use Monolog\Handler\StreamHandler;
-  use Monolog\Logger;
+use BatchRecord\Constants\Constants;
+use Monolog\Handler\RotatingFileHandler;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 
-  /**
-   * Class DesinfectanteDao
-   * @package BatchRecord\dao
-   * @author Teenus <Teenus-SAS>
-   */
-  class GranelDao
+/**
+ * Class DesinfectanteDao
+ * @package BatchRecord\dao
+ * @author Teenus <Teenus-SAS>
+ */
+class GranelDao
+{
+  private $logger;
+
+  public function __construct()
   {
-    private $logger;
+    $this->logger = new Logger(self::class);
+    $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
+  }
 
-    public function __construct()
-    {
-      $this->logger = new Logger(self::class);
-      $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20,Logger::DEBUG));
-    }
-
-    public function findAll()
-    {
-      $connection = Connection::getInstance()->getConnection();
-      $stmt = $connection->prepare("SELECT referencia, nombre_referencia FROM producto 
+  public function findAll()
+  {
+    $connection = Connection::getInstance()->getConnection();
+    $stmt = $connection->prepare("SELECT referencia, nombre_referencia FROM producto 
                                     WHERE referencia LIKE '%Granel%' 
                                     ORDER BY SUBSTR(referencia, 1, 7), CAST(SUBSTR(referencia, 8, LENGTH(referencia)) AS UNSIGNED)");
-      $stmt->execute();
-      $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
-      $granel = $stmt->fetchAll($connection::FETCH_ASSOC);
-      $this->logger->notice("graneles Obtenidos", array('graneles' => $granel));
-      return $granel;
-    }
+    $stmt->execute();
+    $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+    $granel = $stmt->fetchAll($connection::FETCH_ASSOC);
+    $this->logger->notice("graneles Obtenidos", array('graneles' => $granel));
+    return $granel;
   }
+
+  public function findGranelesNoFormula()
+  {
+    $connection = Connection::getInstance()->getConnection();
+
+    /* Graneles */
+
+    $stmt = $connection->prepare("SELECT referencia, nombre_referencia FROM producto 
+                                    WHERE referencia LIKE '%Granel%' 
+                                    ORDER BY SUBSTR(referencia, 1, 7), CAST(SUBSTR(referencia, 8, LENGTH(referencia)) AS UNSIGNED)");
+    $stmt->execute();
+    $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+    $granel = $stmt->fetchAll($connection::FETCH_ASSOC);
+    $this->logger->notice("graneles Obtenidos", array('graneles' => $granel));
+
+    /* Graneles con formula */
+    
+    $stmt = $connection->prepare("SELECT DISTINCT f.id_producto, p.nombre_referencia FROM formula f
+                                  INNER JOIN producto p ON p.referencia = f.id_producto 
+                                  WHERE id_producto LIKE '%Granel%' 
+                                  ORDER BY SUBSTR(id_producto, 1, 7), CAST(SUBSTR(id_producto, 8, LENGTH(id_producto)) AS UNSIGNED)");
+    $stmt->execute();
+    $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+    $granelFormula = $stmt->fetchAll($connection::FETCH_ASSOC);
+    $this->logger->notice("graneles Obtenidos", array('graneles' => $granelFormula));
+
+    $granelNoFormula = array_diff_assoc($granel, $granelFormula);
+    
+    return $granelNoFormula;
+  }
+}

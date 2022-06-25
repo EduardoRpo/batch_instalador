@@ -12,3 +12,9 @@ $app->get('/granel', function (Request $request, Response $response, $args) use 
   $response->getBody()->write(json_encode($granel, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
+
+$app->get('/granelNoFormula', function (Request $request, Response $response, $args) use ($granelDao) {
+  $granel = $granelDao->findGranelesNoFormula();
+  $response->getBody()->write(json_encode($granel, JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
+});
