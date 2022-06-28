@@ -35,7 +35,7 @@ function enviar() {
             }
 
             preparar(datos);
-            sessionStorage.setItem("firm", datos);
+            sessionStorage.setItem("firm", datos.id);
         },
     });
     return false;

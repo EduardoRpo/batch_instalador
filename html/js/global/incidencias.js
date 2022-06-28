@@ -80,13 +80,7 @@ function cargarSelectorIncidencias() {
                 if (i == j) {
                     $.each(info.data, function(i, value) {
                         if (value.id_incidencias == j) {
-                            $select.append(
-                                '<option value ="' +
-                                value.id +
-                                '">' +
-                                value.nombre +
-                                "</option>"
-                            );
+                            $select.append('<option value ="' + value.id + '">' + value.nombre + "</option>");
                         }
                     });
                     j++;
@@ -156,7 +150,7 @@ $("#cerrarIncidencias").click(function(e) {
     $("#modalObservaciones").modal("hide");
     alertify.warning("No reportó Incidencias, ni observaciones");
     realizo = JSON.parse(sessionStorage.getItem("firm"));
-    realizo = realizo[0].id;
+
     $.ajax({
         method: "POST",
         url: "../../html/php/incidencias.php",

@@ -16,6 +16,21 @@ class TanquesChksDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
+    public function findAllTanquesChks($dataTanques)
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        $query = $this->findTanquesChks($dataTanques);
+        $rows = $query->rowCount();
+
+        if ($rows > 0) {
+            $this->logger->info(__FUNCTION__, array('query' => $query->queryString, 'errors' => $query->errorInfo()));
+            $data = $query->fetch($connection::FETCH_ASSOC);
+            $this->logger->notice("Tanques obtenidos", array('tanques' => $data));
+            return $data;
+        }
+    }
+
     public function findTanquesChks($dataTanques)
     {
         $connection = Connection::getInstance()->getConnection();
@@ -61,21 +76,6 @@ class TanquesChksDao
                 'modulo' => $dataTanques['modulo'],
                 'batch' => $dataTanques['idBatch']
             ]);
-        }
-    }
-
-    public function findAllTanquesChks($dataTanques)
-    {
-        $connection = Connection::getInstance()->getConnection();
-
-        $query = $this->findTanquesChks($dataTanques);
-        $rows = $query->rowCount();
-
-        if ($rows > 0) {
-            $this->logger->info(__FUNCTION__, array('query' => $query->queryString, 'errors' => $query->errorInfo()));
-            $data = $query->fetch($connection::FETCH_ASSOC);
-            $this->logger->notice("Tanques obtenidos", array('tanques' => $data));
-            return $data;
         }
     }
 }

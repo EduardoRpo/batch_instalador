@@ -63,7 +63,6 @@ $app->post('/saveBatchTanques', function (Request $request, Response $response, 
         if ($estado == null) {
             $batch = $batchDao->findBatch($dataBatch);
             $dataBatch['referencia'] = $batch['id_producto'];
-            //Insertar flag_start
             $resp = $flagStartDao->insertFlagStart($dataBatch);
         }
     }
@@ -84,8 +83,10 @@ $app->post('/saveBatchTanques', function (Request $request, Response $response, 
     // Almacena el desinfectante del modulo de aprobacion y fisicoquimico
     if ($modulo == 4) {
         $desinfectante = $desinfectanteDao->desinfectanteRealizo($dataBatch);
-        if ($desinfectante == null) $firmas2Seccion = $firmas2SeccionDao->segundaSeccionRealizo($dataBatch);
-        if ($firmas2Seccion == null) $resp = $controlFirmasDao->registrarFirmas($dataBatch);
+        if ($desinfectante == null)
+            $firmas2Seccion = $firmas2SeccionDao->segundaSeccionRealizo($dataBatch);
+        if ($firmas2Seccion == null)
+            $resp = $controlFirmasDao->registrarFirmas($dataBatch);
     }
 
     // Almacena el formulario de control del módulo de preparación
