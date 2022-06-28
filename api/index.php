@@ -27,6 +27,7 @@ require_once __DIR__ . '/src/routes/admin/productos/instructivos.php';
 require_once __DIR__ . '/src/routes/admin/pdf/certificados.php';
 require_once __DIR__ . '/src/routes/admin/pdf/versiones.php';
 
+require_once __DIR__ . '/src/routes/admin/global/selector.php';
 
 /* App */
 

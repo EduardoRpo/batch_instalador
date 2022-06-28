@@ -133,8 +133,8 @@ switch ($op) {
         }
         break;
     case 4: //Cargar selectores
-        $tabla = $_POST['tabla'];
+        /* $tabla = $_POST['tabla'];
         $query = "SELECT * FROM $tabla";
         ejecutarQuerySelect($conn, $query);
-        break;
+        break; */
 }
