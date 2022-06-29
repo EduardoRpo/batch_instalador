@@ -144,7 +144,7 @@ $(document).ready(function() {
     /* Almacenar info */
 
     guardar_microbiologia = (info) => {
-        realizo = info[0].id;
+        realizo = info.id;
         data = JSON.stringify(dataMicro)
         $.ajax({
             type: "POST",
@@ -167,7 +167,7 @@ $(document).ready(function() {
     /* Almacenar firma calidad */
 
     guardar_microbiologia_calidad = (info) => {
-        verifico = info[0].id;
+        verifico = info.id;
         $.ajax({
             type: "POST",
             url: "../../html/php/microbiologia.php",
