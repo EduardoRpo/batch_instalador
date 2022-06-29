@@ -6,17 +6,17 @@ $op = $_POST['operacion'];
 
 switch ($op) {
     case 1: //listar Modulos
-        $sql = "SELECT * FROM modulo";
+       /*  $sql = "SELECT * FROM modulo";
         $query = $conn->prepare($sql);
         $result = $query->execute();
         $data = $query->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE); */
         break;
 
     case 2: //Eliminar
-        $id = $_POST['id'];
+        /* $id = $_POST['id'];
         $sql = "DELETE FROM modulo WHERE id = :id";
-        ejecutarEliminar($conn, $sql, $id);
+        ejecutarEliminar($conn, $sql, $id); */
         break;
 
     case 3: // Guardar datos o actualizar
