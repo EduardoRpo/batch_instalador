@@ -1,4 +1,4 @@
-<?php require_once('php/sesion/sesion.php');?>
+<?php require_once('php/sesion/sesion.php'); ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -68,19 +68,6 @@
               <div class="card-body">
                 <div class="table-responsive">
                   <table id="listarCondiciones" class="table-striped row-borde" style="width:100%">
-                    <thead>
-                      <tr>
-                        <th>id</th>
-                        <th>Módulos</th>
-                        <th>Tiempo Mínimo</th>
-                        <th>Tiempos Máximo</th>
-                        <th></th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
                   </table>
                 </div>
               </div>
@@ -123,7 +110,8 @@
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
   <!-- javascript inicializacion datatables -->
-  <script src="js/condiciones.js"></script>
+  <script src="js/conditions/tblConditions.js"></script>
+  <script src="js/conditions/conditions.js"></script>
   <script src="js/menu.js"></script>
   <script src="js/cargarDatos.js"></script>
 

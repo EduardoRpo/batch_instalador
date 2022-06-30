@@ -7,7 +7,7 @@ use Monolog\Handler\RotatingFileHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 
-class CondicionesMedioDao
+class ConditionsDao
 {
     private $logger;
 
@@ -17,18 +17,20 @@ class CondicionesMedioDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
-    public function findAllModules()
+    public function findAllConditions()
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("SELECT * FROM modulo");
+        $stmt = $connection->prepare("SELECT cm.id, m.modulo, cm.t_min, cm.t_max 
+                                      FROM condicionesmedio_tiempo cm 
+                                      INNER JOIN modulo m ON cm.id_modulo = m.id");
         $stmt->execute();
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
-        $modules = $stmt->fetchAll($connection::FETCH_ASSOC);
-        $this->logger->notice("modules Obtenidos", array('modules' => $modules));
-        return $modules;
+        $conditions = $stmt->fetchAll($connection::FETCH_ASSOC);
+        $this->logger->notice("get conditions", array('conditions' => $conditions));
+        return $conditions;
     }
 
-    public function findModule($dataModule)
+    /* public function findModule($dataModule)
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("SELECT id FROM modulo WHERE modulo = :module");
@@ -61,5 +63,5 @@ class CondicionesMedioDao
         $stmt = $connection->prepare("DELETE FROM modulo WHERE id = :id");
         $stmt->execute(['id' => $id]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
-    }
+    } */
 }

@@ -1,4 +1,4 @@
-<?php require_once('php/sesion/sesion.php');?>
+<?php require_once('php/sesion/sesion.php'); ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -62,11 +62,11 @@
                 </form>
                 <hr>
               </div>
-              
+
               <div class="card-body">
                 <div class="table-responsive">
                   <table id="tblModulos" class="table-striped row-borde" style="width:100%">
-                    
+
                   </table>
                 </div>
               </div>
@@ -111,6 +111,7 @@
   <!-- javascript inicializacion datatables -->
   <script src="js/modules/modules.js"></script>
   <script src="js/modules/tblmodules.js"></script>
+  <script src="js/global/notifications.js"></script>
   <script src="js/menu.js"></script>
   <script src="js/cargarDatos.js"></script>
 

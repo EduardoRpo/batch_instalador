@@ -23,6 +23,7 @@ $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
 /* Admin */
 require_once __DIR__ . '/src/routes/admin/generalParameters/modules.php';
+require_once __DIR__ . '/src/routes/admin/generalParameters/conditions.php';
 
 require_once __DIR__ . '/src/routes/admin/productos/productos.php';
 require_once __DIR__ . '/src/routes/admin/productos/instructivos.php';

@@ -43,7 +43,7 @@ class ModulesDao
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("INSERT INTO modulo (modulo) VALUES(:modulo)");
-        $stmt->execute(['modulo' => $dataModules['module']]);
+        $stmt->execute(['modulo' => strtoupper($dataModules['module'])]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 
@@ -51,7 +51,7 @@ class ModulesDao
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("UPDATE modulo SET modulo = :module WHERE id = :id_module");
-        $stmt->execute(['id_module' => $id_module, 'module' => $dataModules['module']]);
+        $stmt->execute(['id_module' => $id_module, 'module' => strtoupper($dataModules['module'])]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 

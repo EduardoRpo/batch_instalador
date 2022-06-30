@@ -21,7 +21,7 @@ switch ($op) {
 
     case 3: // Guardar datos o actualizar
 
-        if (!empty($_POST)) {
+       /*  if (!empty($_POST)) {
             $editar = $_POST['editar'];
             $proceso = ucfirst(mb_strtolower($_POST['proceso'], "UTF-8"));
 
@@ -51,6 +51,6 @@ switch ($op) {
                     exit();
                 }
             }
-        }
+        } */
         break;
 }
