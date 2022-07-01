@@ -47,11 +47,11 @@ class ModulesDao
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 
-    public function updateModules($id_module, $dataModules)
+    public function updateModules($dataModules)
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("UPDATE modulo SET modulo = :module WHERE id = :id_module");
-        $stmt->execute(['id_module' => $id_module, 'module' => strtoupper($dataModules['module'])]);
+        $stmt->execute(['id_module' => $dataModules['id'], 'module' => strtoupper($dataModules['module'])]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 

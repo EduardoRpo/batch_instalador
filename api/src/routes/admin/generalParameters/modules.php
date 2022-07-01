@@ -27,15 +27,17 @@ $app->post('/saveModules', function (Request $request, Response $response, $args
 
   $dataModules = $request->getParsedBody();
 
-  $id_module = $modulesDao->findModule($dataModules);
+  if ($dataModules['id']) {
+    $modules = $modulesDao->updateModules($dataModules);
 
-  if ($id_module)
-    $modules = $modulesDao->updateModules($id_module, $dataModules);
-  else
+    if ($modules == null)
+      $resp = array('success' => true, 'message' => 'Modulo almacenado correctamente');
+  } else {
     $modules = $modulesDao->saveModules($dataModules);
 
-  if ($modules == null)
-    $resp = array('success' => true, 'message' => 'Modulo almacenado/actualizado correctamente');
+    if ($modules == null)
+      $resp = array('success' => true, 'message' => 'Modulo actualizado correctamente');
+  }
 
   $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');

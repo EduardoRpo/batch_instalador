@@ -1,4 +1,3 @@
-
 /* Mostrar Menu seleccionadp */
 $(".contenedor-menu .menu a").removeAttr("style");
 $("#link_procesos").css("background", "coral");
@@ -32,7 +31,7 @@ $(document).on("click", ".link-borrar", function(e) {
         )
         .set("labels", { ok: "Si", cancel: "No" });
 
-        
+
     confirm.set("onok", function(r) {
         if (r) {
             $.ajax({
@@ -41,7 +40,7 @@ $(document).on("click", ".link-borrar", function(e) {
                 //data: { operacion: 2, id: id },
                 url: `/api/deleteModules/${id}`,
                 success: function(data) {
-                   notificaciones(data);
+                    notificaciones(data);
                 },
             });
         }
@@ -72,15 +71,11 @@ $(document).ready(function() {
         e.preventDefault();
         let id = $("#txtid_Proceso").val();
         let module = $("#txtProceso").val();
-        console.log(module);
-        console.log(id);
 
         $.ajax({
             type: "POST",
-            //url: "php/c_modulos.php",
-            //data: { operacion: 3, id: id, proceso: proceso, editar: editar },
             url: '/api/saveModules',
-            data: { id: id, module: module},
+            data: { id: id, module: module },
             success: function(data) {
                 notificaciones(data);
             },
