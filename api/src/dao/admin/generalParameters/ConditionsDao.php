@@ -30,7 +30,7 @@ class ConditionsDao
         return $conditions;
     }
 
-    /* public function findModule($dataModule)
+     public function findModule($dataModule)
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("SELECT id FROM modulo WHERE modulo = :module");
@@ -41,19 +41,19 @@ class ConditionsDao
         return $module;
     }
 
-    public function saveModules($dataModules)
+    public function saveConditions($dataConditions)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("INSERT INTO modulo (modulo) VALUES(:modulo)");
-        $stmt->execute(['modulo' => $dataModules['module']]);
+        $stmt = $connection->prepare("INSERT INTO condicionesmedio_tiempo (id_modulo, t_min, t_max) VALUES(:id_modulo, :t_min, :t_max)");
+        $stmt->execute(['modulo' => $dataConditions['module']]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 
-    public function updateModules($id_module, $dataModules)
+    public function updateConditions($t_min, $t_max, $id)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("UPDATE modulo SET modulo = :module WHERE id = :id_module");
-        $stmt->execute(['id_module' => $id_module, 'module' => $dataModules['module']]);
+        $stmt = $connection->prepare("UPDATE condicionesmedio_tiempo SET t_min =:t_min, t_max=:t_max WHERE id_modulo = :id");
+        $stmt->execute(['t_min' => $t_min, 't_max' => $t_max, 'id' => $id]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 
@@ -63,5 +63,5 @@ class ConditionsDao
         $stmt = $connection->prepare("DELETE FROM modulo WHERE id = :id");
         $stmt->execute(['id' => $id]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
-    } */
+    } 
 }

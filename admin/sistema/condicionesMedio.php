@@ -58,7 +58,7 @@
                   <label for=""><b>Modulo</b></label>
                   <label for=""><b>Tiempo Mín</b></label>
                   <label for=""><b>Tiempo Máx</b></label>
-                  <select name="moduloCondiciones" id="moduloCondiciones" class="form-control"></select>
+                  <select name="moduloCondiciones" id="moduloCondiciones" class="form-control" default="select"></select>
                   <input type="number" name="t_min" id="t_min" class="form-control centrado" placeholder="Tiempos Mínimos" required>
                   <input type="number" name="t_max" id="t_max" class="form-control centrado" placeholder="Tiempos Máximos" required>
                   <button type="button" class="btn btn-primary" id="btnguardarCondiciones">Guardar</button>

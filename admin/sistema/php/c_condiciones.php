@@ -18,9 +18,7 @@ switch ($op) {
 
     case 3: // Actualizar y Guardar data 
         if (!empty($_POST)) {
-            $editar = $_POST['editar'];
             $id = $_POST['id'];
-
             $t_min = $_POST['t_min'];
             $t_max =  $_POST['t_max'];
 

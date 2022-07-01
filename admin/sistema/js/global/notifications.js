@@ -1,5 +1,5 @@
 //Noficaciones
-$(document).ready(function() {
+
 
     const notificaciones = (data) => {
         alertify.set("notifier", "position", "top-right");
@@ -19,4 +19,3 @@ $(document).ready(function() {
             return false
         }
     }
-});

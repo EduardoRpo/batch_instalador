@@ -73,25 +73,11 @@ $(document).ready(function() {
             type: "POST",
             //url: "php/c_condiciones.php",
             url: '/api/saveConditions',
-            data: { operacion: "3", id: id, modulo: modulo, t_min: t_min, t_max: t_max },
+            data: { id: id, modulo: modulo, t_min: t_min, t_max: t_max },
 
-            success: function(resp) {
-                notifications(resp)
-                    /* if (r == 1) {
-                        alertify.set("notifier", "position", "top-right");
-                        alertify.success("Almacenado con éxito.");
-                        refreshTable();
-                    } else if (r == 2) {
-                        alertify.set("notifier", "position", "top-right");
-                        alertify.error("Módulo ya existe.");
-                    } else if (r == 3) {
-                        alertify.set("notifier", "position", "top-right");
-                        alertify.success("Registros actualizado.");
-                        refreshTable();
-                    } else {
-                        alertify.set("notifier", "position", "top-right");
-                        alertify.error("Error.");
-                    } */
+            success: function(data) {
+                notifications(data)
+  
             }
         });
     });

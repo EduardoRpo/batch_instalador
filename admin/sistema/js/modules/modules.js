@@ -1,4 +1,3 @@
-let editar;
 
 /* Mostrar Menu seleccionadp */
 $(".contenedor-menu .menu a").removeAttr("style");
@@ -22,7 +21,6 @@ $("#adProceso").click(function(e) {
 
 $(document).on("click", ".link-borrar", function(e) {
     e.preventDefault();
-    debugger
     const id = this.id
 
     let confirm = alertify
@@ -34,6 +32,7 @@ $(document).on("click", ".link-borrar", function(e) {
         )
         .set("labels", { ok: "Si", cancel: "No" });
 
+        
     confirm.set("onok", function(r) {
         if (r) {
             $.ajax({
@@ -41,10 +40,8 @@ $(document).on("click", ".link-borrar", function(e) {
                 //url: "php/c_modulos.php",
                 //data: { operacion: 2, id: id },
                 url: `/api/deleteModules/${id}`,
-
                 success: function(data) {
-                    notificaciones(data)
-
+                   notificaciones(data);
                 },
             });
         }
@@ -56,15 +53,16 @@ $(document).on("click", ".link-borrar", function(e) {
 $(document).on("click", ".link-editar", function(e) {
     e.preventDefault();
 
-    let id = $(this).parent().parent().children().first().text();
+    let id = this.id
     let proceso = $(this).parent().parent().children().eq(1).text();
-    editar = 1;
+    //editar = 1;
 
     $("#frmadParametro").slideDown();
     $("#btnguardarModulos").html("Actualizar");
 
     $("#txtid_Proceso").val(id);
     $("#txtProceso").val(proceso);
+
 });
 
 /* Almacenar Registros */
@@ -74,16 +72,17 @@ $(document).ready(function() {
         e.preventDefault();
         let id = $("#txtid_Proceso").val();
         let module = $("#txtProceso").val();
+        console.log(module);
+        console.log(id);
 
         $.ajax({
             type: "POST",
             //url: "php/c_modulos.php",
             //data: { operacion: 3, id: id, proceso: proceso, editar: editar },
             url: '/api/saveModules',
-            data: { module: module },
-
+            data: { id: id, module: module},
             success: function(data) {
-                notificaciones(data)
+                notificaciones(data);
             },
         });
     });

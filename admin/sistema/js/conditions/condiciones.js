@@ -135,7 +135,7 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: "php/c_condiciones.php",
-            data: { operacion: "3", editar: editar,id: modulo, t_min: t_min, t_max: t_max },
+            data: { id: modulo, t_min: t_min, t_max: t_max },
 
             success: function (r) {
                 if (r == 1) {
