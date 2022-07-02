@@ -30,7 +30,7 @@ class ConditionsDao
         return $conditions;
     }
 
-     public function findModule($dataModule)
+    public function findModule($dataModule)
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("SELECT id FROM modulo WHERE modulo = :module");
@@ -44,9 +44,18 @@ class ConditionsDao
     public function saveConditions($dataConditions)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("INSERT INTO condicionesmedio_tiempo (id_modulo, t_min, t_max) VALUES(:id_modulo, :t_min, :t_max)");
-        $stmt->execute(['id_modulo' => $dataConditions['id'], 't_min' => $dataConditions['t_min'], 't_max' => $dataConditions['t_max']]);
-        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        try {
+            $stmt = $connection->prepare("INSERT INTO condicionesmedio_tiempo (id_modulo, t_min, t_max) VALUES(:id_modulo, :t_min, :t_max)");
+            $stmt->execute(['id_modulo' => $dataConditions['modulo'], 't_min' => $dataConditions['t_min'], 't_max' => $dataConditions['t_max']]);
+            $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        } catch (\Exception $e) {
+
+            if ($e->getCode() == 23000)
+                $message = 'Módulo duplicado. Ingrese una nueva módulo';
+
+            $error = array('info' => true, 'message' => $message);
+            return $error;
+        }
     }
 
     public function updateConditions($dataConditions)
@@ -63,5 +72,5 @@ class ConditionsDao
         $stmt = $connection->prepare("DELETE FROM condicionesmedio_tiempo WHERE id = :id");
         $stmt->execute(['id' => $id]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
-    } 
+    }
 }

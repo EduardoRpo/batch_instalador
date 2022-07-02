@@ -71,13 +71,12 @@ $(document).ready(function() {
 
         $.ajax({
             type: "POST",
-            //url: "php/c_condiciones.php",
-            url: '/api/updateConditions',
+            url: '/api/saveConditions',
             data: { id: id, modulo: modulo, t_min: t_min, t_max: t_max },
 
             success: function(data) {
                 notifications(data)
-  
+
             }
         });
     });

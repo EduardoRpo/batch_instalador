@@ -17,35 +17,32 @@ $app->post('/saveConditions', function (Request $request, Response $response, $a
 
   $dataConditions = $request->getParsedBody();
 
-  $Conditions = $conditionsDao->saveConditions($dataConditions);
+  if ($dataConditions['id']) {
+    $resp = $conditionsDao->updateConditions($dataConditions);
 
-    if ($Conditions == null){
+    if ($resp == null)
       $resp = array('success' => true, 'message' => 'Condicion almacenada correctamente');
-  /*if ($dataConditions{'id'}) {
-  }
-  else
-    $Conditions = $conditionsDao->saveConditions($dataConditions);
+  } else {
+    $resp = $conditionsDao->saveConditions($dataConditions);
 
-  if ($Conditions == null)
-    $resp = array('success' => true, 'message' => 'Condiciones del medio almacenado/actualizado correctamente');
+    if ($resp == null)
+      $resp = array('success' => true, 'message' => 'Condiciones del medio actualizado correctamente');
+  }
 
   $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
-  return $response->withHeader('Content-Type', 'application/json');*/
-  }
+  return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->post('/updateConditions', function (Request $request, Response $response, $args) use ($conditionsDao) {
+/* $app->post('/updateConditions', function (Request $request, Response $response, $args) use ($conditionsDao) {
 
   $dataConditions = $request->getParsedBody();
 
   $Conditions = $conditionsDao->updateConditions($dataConditions);
 
-  if($Conditions == null){
-$resp = array('success' => true, 'message' => 'Condicion actualizada correctamente');
-
+  if ($Conditions == null) {
+    $resp = array('success' => true, 'message' => 'Condicion actualizada correctamente');
   }
-
-});
+}); */
 
 $app->get('/deleteConditions/{id}', function (Request $request, Response $response, $args) use ($conditionsDao) {
   $Conditions = $conditionsDao->deleteConditions($args['id']);
@@ -56,5 +53,3 @@ $app->get('/deleteConditions/{id}', function (Request $request, Response $respon
   $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
-
-
