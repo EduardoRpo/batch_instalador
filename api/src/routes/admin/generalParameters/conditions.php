@@ -21,12 +21,12 @@ $app->post('/saveConditions', function (Request $request, Response $response, $a
     $resp = $conditionsDao->updateConditions($dataConditions);
 
     if ($resp == null)
-      $resp = array('success' => true, 'message' => 'Condicion almacenada correctamente');
+      $resp = array('success' => true, 'message' => 'Condicion actualizada correctamente');
   } else {
     $resp = $conditionsDao->saveConditions($dataConditions);
 
     if ($resp == null)
-      $resp = array('success' => true, 'message' => 'Condiciones del medio actualizado correctamente');
+      $resp = array('success' => true, 'message' => 'Condiciones del medio guardada correctamente');
   }
 
   $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));

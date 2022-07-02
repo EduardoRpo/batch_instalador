@@ -73,43 +73,42 @@ $(document).ready(function() {
             type: "POST",
             url: '/api/saveConditions',
             data: { id: id, modulo: modulo, t_min: t_min, t_max: t_max },
-
             success: function(data) {
-                notifications(data)
-
-            }
+                notificaciones(data)
+            },
         });
+        frmadTiempos.reset();
+        $("#frmadTiempos").slideUp();
     });
 
 
     /* Borrar registros */
 
-    $(document).on('click', '.link-borrar', function(e) {
+    $(document).on("click", ".link-borrar", function(e) {
         e.preventDefault();
-
-        let id = this.id;
-        console.log(id);
-        var confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este registro?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
-
-        confirm.set('onok', function(r) {
+        const id = this.id
+    
+        let confirm = alertify
+            .confirm(
+                "Samara Cosmetics",
+                "¿Está seguro de eliminar este registro?",
+                null,
+                null
+            )
+            .set("labels", { ok: "Si", cancel: "No" });
+    
+    
+        confirm.set("onok", function(r) {
             if (r) {
                 $.ajax({
-                    'method': 'POST',
-                    //'url': 'php/c_condiciones.php',
-                    'url': `/api/deleteConditions/${id}`,
-                    'data': { id: id }
+                    url: `/api/deleteConditions/${id}`,
+                    success: function(data) {
+                        notificaciones(data)
+                    },
                 });
-                alertify.set("notifier", "position", "top-right");
-                alertify.success("Registro Eliminado.");
             }
         });
     });
 
-    /* Actualizar tabla */
-
-    function refreshTable() {
-        $('#listarCondiciones').DataTable().clear();
-        $('#listarCondiciones').DataTable().ajax.reload();
-    }
 
 });

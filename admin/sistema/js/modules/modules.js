@@ -35,9 +35,6 @@ $(document).on("click", ".link-borrar", function(e) {
     confirm.set("onok", function(r) {
         if (r) {
             $.ajax({
-                //method: "POST",
-                //url: "php/c_modulos.php",
-                //data: { operacion: 2, id: id },
                 url: `/api/deleteModules/${id}`,
                 success: function(data) {
                     notificaciones(data);

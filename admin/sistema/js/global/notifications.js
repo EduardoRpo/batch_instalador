@@ -19,3 +19,7 @@
             return false
         }
     }
+    function refreshTable() {
+        $('#listarCondiciones').DataTable().clear();
+        $('#listarCondiciones').DataTable().ajax.reload();
+    }

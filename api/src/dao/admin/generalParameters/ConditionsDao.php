@@ -61,8 +61,8 @@ class ConditionsDao
     public function updateConditions($dataConditions)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("UPDATE condicionesmedio_tiempo SET t_min =:t_min, t_max=:t_max WHERE id_modulo = :id");
-        $stmt->execute(['id_modulo' => $dataConditions['id'], 't_min' => $dataConditions['t_min'], 't_max' => $dataConditions['t_max']]);
+        $stmt = $connection->prepare("UPDATE condicionesmedio_tiempo SET t_min =:t_min, t_max=:t_max WHERE id = :id");
+        $stmt->execute(['id' => $dataConditions['id'], 't_min' => $dataConditions['t_min'], 't_max' => $dataConditions['t_max']]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 
