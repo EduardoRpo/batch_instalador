@@ -45,22 +45,22 @@ class ConditionsDao
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("INSERT INTO condicionesmedio_tiempo (id_modulo, t_min, t_max) VALUES(:id_modulo, :t_min, :t_max)");
-        $stmt->execute(['modulo' => $dataConditions['module']]);
+        $stmt->execute(['id_modulo' => $dataConditions['id'], 't_min' => $dataConditions['t_min'], 't_max' => $dataConditions['t_max']]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 
-    public function updateConditions($t_min, $t_max, $id)
+    public function updateConditions($dataConditions)
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("UPDATE condicionesmedio_tiempo SET t_min =:t_min, t_max=:t_max WHERE id_modulo = :id");
-        $stmt->execute(['t_min' => $t_min, 't_max' => $t_max, 'id' => $id]);
+        $stmt->execute(['id_modulo' => $dataConditions['id'], 't_min' => $dataConditions['t_min'], 't_max' => $dataConditions['t_max']]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 
-    public function deleteModules($id)
+    public function deleteConditions($id)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("DELETE FROM modulo WHERE id = :id");
+        $stmt = $connection->prepare("DELETE FROM condicionesmedio_tiempo WHERE id = :id");
         $stmt->execute(['id' => $id]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     } 

@@ -53,7 +53,7 @@
                 <h4 class="card-title">Condiciones del Medio</h4>
                 <p class="category">Tiempos<a href=""></a></p>
                 <hr>
-                <button type="button" class="btn btn-primary" id="adTiempos">Adicionar</button>
+                <button type="button" class="btn btn-primary" id="adTiempos" >Adicionar</button>
                 <form id="frmadTiempos" style="display: none;">
                   <label for=""><b>Modulo</b></label>
                   <label for=""><b>Tiempo Mín</b></label>

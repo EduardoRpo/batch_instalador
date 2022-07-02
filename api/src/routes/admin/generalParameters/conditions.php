@@ -15,13 +15,14 @@ $app->get('/conditions', function (Request $request, Response $response, $args) 
 
 $app->post('/saveConditions', function (Request $request, Response $response, $args) use ($conditionsDao) {
 
-  $dataid = $request->getParsedBody();
-  $dataT_min = $request->getParsedBody();
-  $dataT_max =  $request->getParsedBody();
+  $dataConditions = $request->getParsedBody();
 
-  $Conditions = $conditionsDao->saveConditions($dataT_min, $dataT_max, $dataid);
-  /*if ($id)
-    $Conditions = $conditionsDao->updateConditions($t_min, $t_max, $id);
+  $Conditions = $conditionsDao->saveConditions($dataConditions);
+
+    if ($Conditions == null){
+      $resp = array('success' => true, 'message' => 'Condicion almacenada correctamente');
+  /*if ($dataConditions{'id'}) {
+  }
   else
     $Conditions = $conditionsDao->saveConditions($dataConditions);
 
@@ -30,16 +31,30 @@ $app->post('/saveConditions', function (Request $request, Response $response, $a
 
   $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');*/
+  }
 });
 
-/* $app->get('/deleteConditions/{id}', function (Request $request, Response $response, $args) use ($conditionsDao) {
+$app->post('/updateConditions', function (Request $request, Response $response, $args) use ($conditionsDao) {
+
+  $dataConditions = $request->getParsedBody();
+
+  $Conditions = $conditionsDao->updateConditions($dataConditions);
+
+  if($Conditions == null){
+$resp = array('success' => true, 'message' => 'Condicion actualizada correctamente');
+
+  }
+
+});
+
+$app->get('/deleteConditions/{id}', function (Request $request, Response $response, $args) use ($conditionsDao) {
   $Conditions = $conditionsDao->deleteConditions($args['id']);
 
   if ($Conditions == null)
-    $resp = array('success' => true, 'message' => 'Modulo eliminado correctamente');
+    $resp = array('success' => true, 'message' => 'Condiciones eliminadas correctamente');
 
   $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
 
- */
+

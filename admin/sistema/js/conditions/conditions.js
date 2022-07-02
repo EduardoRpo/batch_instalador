@@ -72,7 +72,7 @@ $(document).ready(function() {
         $.ajax({
             type: "POST",
             //url: "php/c_condiciones.php",
-            url: '/api/saveConditions',
+            url: '/api/updateConditions',
             data: { id: id, modulo: modulo, t_min: t_min, t_max: t_max },
 
             success: function(data) {
@@ -88,17 +88,18 @@ $(document).ready(function() {
     $(document).on('click', '.link-borrar', function(e) {
         e.preventDefault();
 
-        let id = $(this).parent().parent().children().first().text();
+        let id = this.id;
+        console.log(id);
         var confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este registro?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
 
         confirm.set('onok', function(r) {
             if (r) {
                 $.ajax({
                     'method': 'POST',
-                    'url': 'php/c_condiciones.php',
-                    'data': { operacion: "2", id: id }
+                    //'url': 'php/c_condiciones.php',
+                    'url': `/api/deleteConditions/${id}`,
+                    'data': { id: id }
                 });
-                refreshTable();
                 alertify.set("notifier", "position", "top-right");
                 alertify.success("Registro Eliminado.");
             }
