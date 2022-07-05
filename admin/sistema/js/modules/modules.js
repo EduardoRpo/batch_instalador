@@ -8,7 +8,7 @@ $(".contenedor-menu .menu ul.menu_generales").show();
 $("#adProceso").click(function(e) {
     e.preventDefault();
 
-    editar = 0;
+
 
     $("#frmadParametro").slideToggle();
     $("#txtid_Proceso").val("");

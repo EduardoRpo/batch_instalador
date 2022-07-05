@@ -68,11 +68,6 @@
                   <table id="listarDesinfectante" class="table-striped row-borde" style="width:100%">
                     <thead>
                       <tr>
-                        <th>id</th>
-                        <th>Desinfectante</th>
-                        <th>Concentración</th>
-                        <th></th>
-                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -120,7 +115,9 @@
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
   <!-- javascript inicializacion datatables -->
-  <script src="js/desinfectante.js"></script>
+  <script src="js/global/notifications.js"></script>
+  <script src="js/disinfectant/tbldisinfectant.js"></script>
+  <script src="js/disinfectant/disinfectant.js"></script>
   <script src="js/menu.js"></script>
   <script src="js/cargarDatos.js"></script>
 
