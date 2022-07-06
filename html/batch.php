@@ -144,6 +144,9 @@ include_once("modal/modalPedidos.php");
                     <a class="nav-link" id="four-tab" data-toggle="tab" href="#four" role="tab" aria-controls="Four" aria-selected="false">Cerrados</a>
                   </li>
                 <?php  } ?>
+                <div style="display:grid;justify-content:end;font-size:x-large;margin-left:auto">
+                  <div id="numberWeek"></div>
+                </div>
               </ul>
             </div>
 
@@ -249,6 +252,7 @@ include_once("modal/modalPedidos.php");
     <script src="../html/js/global/notificaciones.js"></script>
     <script src="../html/js/batch/calcularLote.js"></script>
     <script src="../html/js/batch/generalPreprogramacion.js"></script>
+    <script src="/html/js/batch/calcWeek.js"></script>
 
 </body>
 
