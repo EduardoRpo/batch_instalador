@@ -117,6 +117,38 @@ $.ajax({
     sessionStorage.setItem("batch", batchInfo);
 });
 
+//Promise
+
+/* const batch = new Promise(function(resolve, reject) {
+    $.ajax({
+        url: `/api/batch/${idBatch}`,
+        type: "GET",
+    }).done((data, status, xhr) => {
+        resolve(data);
+    }).fail(function(jqXHR, textStatus) {
+        reject('there is an error')
+    });
+})
+
+batch.then((data) => {
+    const tamano_lote = formatoCO(data.tamano_lote);
+
+    $("#in_numero_orden").val(data.numero_orden);
+    $("#in_numero_lote").val(data.numero_lote);
+    $("#in_referencia").val(data.referencia);
+    $("#in_nombre_referencia").val(data.nombre_referencia);
+    $("#in_linea").val(data.linea);
+    $("#in_tamano_lote").val(tamano_lote);
+
+    var fecha = new Date(data.fecha_programacion);
+    var dias = 2; // Número de días a agregar
+    fecha.setDate(fecha.getDate() + dias);
+    $("#in_fecha_programacion").val(data.fecha_programacion);
+}).catch((error)=>{
+    console.log(error)
+}) */
+
+
 /* Calcular la fecha del dia  */
 
 function fechaHoy() {
