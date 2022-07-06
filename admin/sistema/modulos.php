@@ -1,4 +1,4 @@
-<?php require_once('php/sesion/sesion.php');?>
+<?php require_once('php/sesion/sesion.php'); ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -56,27 +56,17 @@
                 <button type="button" class="btn btn-primary" id="adProceso">Adicionar Proceso</button>
                 <form id="frmadParametro" style="display: none;">
                   <label for=""><b>Proceso</b></label>
-                  <input type="text" id="txtid_Proceso" readonly hidden>
+                  <input type="text" id="txtid_Proceso" readonly hidden ${id}>
                   <input type="text" name="txtProceso" id="txtProceso" class="form-control" placeholder="Proceso" style="width: 300px;">
                   <button type="button" class="btn btn-primary" id="btnguardarModulos">Guardar</button>
                 </form>
                 <hr>
               </div>
-              
+
               <div class="card-body">
                 <div class="table-responsive">
                   <table id="tblModulos" class="table-striped row-borde" style="width:100%">
-                    <thead>
-                      <tr>
-                        <th>id</th>
-                        <th>Proceso</th>
-                        <th></th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
 
-                    </tbody>
                   </table>
                 </div>
               </div>
@@ -119,7 +109,9 @@
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
   <!-- javascript inicializacion datatables -->
-  <script src="js/modulos.js"></script>
+  <script src="js/global/notifications.js"></script>
+  <script src="js/modules/modules.js"></script>
+  <script src="js/modules/tblmodules.js"></script>
   <script src="js/menu.js"></script>
   <script src="js/cargarDatos.js"></script>
 

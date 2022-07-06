@@ -6,8 +6,8 @@ $op = $_POST['operacion'];
 
 switch ($op) {
     case 1: //listar Condiciones del medio
-        $query = "SELECT cm.id, m.modulo, cm.t_min, cm.t_max FROM condicionesmedio_tiempo cm INNER JOIN modulo m ON cm.id_modulo= m.id";
-        ejecutarQuerySelect($conn, $query);
+       /*  $query = "SELECT cm.id, m.modulo, cm.t_min, cm.t_max FROM condicionesmedio_tiempo cm INNER JOIN modulo m ON cm.id_modulo= m.id";
+        ejecutarQuerySelect($conn, $query); */
         break;
 
     case 2: //Eliminar
@@ -18,9 +18,7 @@ switch ($op) {
 
     case 3: // Actualizar y Guardar data 
         if (!empty($_POST)) {
-            $editar = $_POST['editar'];
             $id = $_POST['id'];
-
             $t_min = $_POST['t_min'];
             $t_max =  $_POST['t_max'];
 
@@ -54,7 +52,7 @@ switch ($op) {
         break;
 
     case 4: // Cargar Selector Procesos
-        $query = "SELECT * FROM modulo";
-        ejecutarQuerySelect($conn, $query);
+        /* $query = "SELECT * FROM modulo";
+        ejecutarQuerySelect($conn, $query); */
         break;
 }

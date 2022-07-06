@@ -1,4 +1,4 @@
-<?php require_once('php/sesion/sesion.php');?>
+<?php require_once('php/sesion/sesion.php'); ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -53,12 +53,12 @@
                 <h4 class="card-title">Condiciones del Medio</h4>
                 <p class="category">Tiempos<a href=""></a></p>
                 <hr>
-                <button type="button" class="btn btn-primary" id="adTiempos">Adicionar</button>
+                <button type="button" class="btn btn-primary" id="adTiempos" >Adicionar</button>
                 <form id="frmadTiempos" style="display: none;">
                   <label for=""><b>Modulo</b></label>
                   <label for=""><b>Tiempo Mín</b></label>
                   <label for=""><b>Tiempo Máx</b></label>
-                  <select name="moduloCondiciones" id="moduloCondiciones" class="form-control"></select>
+                  <select name="moduloCondiciones" id="moduloCondiciones" class="form-control" default="select"></select>
                   <input type="number" name="t_min" id="t_min" class="form-control centrado" placeholder="Tiempos Mínimos" required>
                   <input type="number" name="t_max" id="t_max" class="form-control centrado" placeholder="Tiempos Máximos" required>
                   <button type="button" class="btn btn-primary" id="btnguardarCondiciones">Guardar</button>
@@ -68,19 +68,6 @@
               <div class="card-body">
                 <div class="table-responsive">
                   <table id="listarCondiciones" class="table-striped row-borde" style="width:100%">
-                    <thead>
-                      <tr>
-                        <th>id</th>
-                        <th>Módulos</th>
-                        <th>Tiempo Mínimo</th>
-                        <th>Tiempos Máximo</th>
-                        <th></th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
                   </table>
                 </div>
               </div>
@@ -123,7 +110,9 @@
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
   <!-- javascript inicializacion datatables -->
-  <script src="js/condiciones.js"></script>
+  <script src="js/global/notifications.js"></script>
+  <script src="js/conditions/tblConditions.js"></script>
+  <script src="js/conditions/conditions.js"></script>
   <script src="js/menu.js"></script>
   <script src="js/cargarDatos.js"></script>
 
