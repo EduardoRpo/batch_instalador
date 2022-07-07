@@ -1197,7 +1197,7 @@ const liberacion_lote = () => {
             if (idBatch >= 984)
                 fecha = info[i].fecha_registro
             else
-                fecha = info[i].fecha_nuevo_registro
+                fecha = info.fecha_nuevo_registro
 
             $(".fechaHoraLiberacion").html(
                 `fecha y Hora: <b>${info["fecha_nuevo_registro"]}</b>`
