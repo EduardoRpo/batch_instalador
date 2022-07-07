@@ -15,7 +15,7 @@ $app->get('/equipments', function (Request $request, Response $response, $args) 
 });
 
 $app->get('/findEquipmentsByType', function(Request $request, Response $response, $args) use ($equipmentsDao){
-    $dataEquipment = $request->getParsedBody();
+    //$dataEquipment = $request->getParsedBody();
     $equipments = $equipmentsDao->findEquipmentsByType();
     $response->getBody()->write(json_encode($equipments, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');
@@ -39,12 +39,12 @@ $app->post('/saveEquipment', function (Request $request, Response $response, $ar
     $equipments = $equipmentsDao->updateEquipments($dataEquipment);
 
     if ($equipments == null)
-      $resp = array('success' => true, 'message' => 'Desinfectante almacenado correctamente');
+      $resp = array('success' => true, 'message' => 'Equipo actualizado correctamente');
   } else {
     $equipments = $equipmentsDao->saveEquipments($dataEquipment);
 
     if ($equipments == null)
-      $resp = array('success' => true, 'message' => 'Desinfectante actualizado correctamente');
+      $resp = array('success' => true, 'message' => 'Equipo almacenado correctamente');
   }
 
   $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));

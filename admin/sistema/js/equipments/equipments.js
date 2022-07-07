@@ -1,14 +1,13 @@
 /* Adicionar Equipos */
 
-$('#adEquipos').click(function (e) {
+$('#adEquipos').click(function(e) {
     e.preventDefault();
     $("#frmadParametro").slideToggle();
     $('#btnguardarEquipos').html('Crear');
     $('#txtEquipo').val('');
-    cargarSelectorLinea();
 });
 
-function cargarSelectorLinea() {
+const cargarSelectorLinea = () => {
 
     $.ajax({
         url: '/api/findEquipmentsByType',
@@ -27,16 +26,18 @@ function cargarSelectorLinea() {
     })
 }
 
+cargarSelectorLinea();
+
 /* Borrar registros */
 
-$(document).on('click', '.link-borrar', function (e) {
+$(document).on('click', '.link-borrar', function(e) {
     e.preventDefault();
 
-    let id =  this.id;
+    let id = this.id;
 
     var confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este registro?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
 
-    confirm.set('onok', function (r) {
+    confirm.set('onok', function(r) {
         if (r) {
             $.ajax({
                 'url': `/api/deleteEquipments/${id}`,
@@ -50,11 +51,11 @@ $(document).on('click', '.link-borrar', function (e) {
 
 /* Cargar datos para Actualizar registros */
 
-$(document).on('click', '.link-editar', function (e) {
+$(document).on('click', '.link-editar', function(e) {
     e.preventDefault();
-    let id = $(this).parent().parent().children().eq(2).text();
-    let equipo = $(this).parent().parent().children().eq(2).text();
-    let tipo = $(this).parent().parent().children().eq(3).text();
+    let id = this.id
+    let equipo = $(this).parent().parent().children().eq(1).text();
+    let tipo = $(this).parent().parent().children().eq(2).text();
 
     $('#frmadParametro').slideDown();
     $('#btnguardarEquipos').html('Actualizar');
@@ -67,8 +68,8 @@ $(document).on('click', '.link-editar', function (e) {
 
 /* Almacenar Registros */
 
-$(document).ready(function () {
-    $('#btnguardarEquipos').click(function (e) {
+$(document).ready(function() {
+    $('#btnguardarEquipos').click(function(e) {
         e.preventDefault();
 
         let id = $('#txtid_Equipo').val();
@@ -76,16 +77,17 @@ $(document).ready(function () {
         let tipo = $('#cmbTipo').val();
 
         if (equipo == '' || tipo == null) {
-            alertify.set("notifier", "position", "top-right"); alertify.error("Ingrese todos los datos");
+            alertify.set("notifier", "position", "top-right");
+            alertify.error("Ingrese todos los datos");
             return false();
         }
 
         $.ajax({
             type: "POST",
-            url: "php/saveEquipments",
-            data: { id :id, equipo :equipo, tipo :tipo },
+            url: "/api/saveEquipment",
+            data: { id: id, equipo: equipo, tipo: tipo },
 
-            success: function (data) {
+            success: function(data) {
                 notificaciones(data)
             }
         });
