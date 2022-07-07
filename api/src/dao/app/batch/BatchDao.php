@@ -108,7 +108,7 @@ class BatchDao extends estadoInicialDao
                                             IFNULL(bt.tanque,0) AS tanque, IFNULL(bt.cantidad,0) AS cantidad
                                       FROM batch b
                                         INNER JOIN producto p ON p.referencia = b.id_producto
-                                        INNER JOIN multipresentacion mul ON mul.id_batch = b.id_batch
+                                        LEFT JOIN multipresentacion mul ON mul.id_batch = b.id_batch
                                         INNER JOIN presentacion_comercial pc ON pc.id = p.presentacion_comercial 
                                         INNER JOIN linea l ON l.id = p.id_linea 
                                         INNER JOIN propietario pp ON pp.id = p.id_propietario 
@@ -133,7 +133,10 @@ class BatchDao extends estadoInicialDao
         $tamanolotepresentacion = $dataBatch['presentacion'];
         $multi                  = json_decode($dataBatch['multi'], true);
 
-        $fechahoy               = date("Y-m-d");
+        if ($dataBatch['date'])
+            $fechahoy           = json_decode($dataBatch['date']);
+        else
+            $fechahoy           = date("Y-m-d");
 
         $connection = Connection::getInstance()->getConnection();
 
