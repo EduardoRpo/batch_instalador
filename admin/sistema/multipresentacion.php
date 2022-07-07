@@ -126,7 +126,9 @@
   <script src="../../assets/multiselect/js/jquery.multi-select.js" type="text/javascript"></script>
 
   <!-- javascript inicializacion datatables -->
-  <script src="js/multipresentacion.js"></script>
+  <script src="js/multiP/tblmulti.js"></script>
+  <script src="js/multiP/multi.js"></script>
+  <script src="js/global/notifications.js"></script>
   <script src="js/menu.js"></script>
   <script src="js/cargarDatos.js"></script>
   <!-- <script src="js/cargarDatos.js"></script> -->

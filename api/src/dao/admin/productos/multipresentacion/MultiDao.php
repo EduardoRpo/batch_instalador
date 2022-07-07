@@ -17,49 +17,38 @@ class MultiDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
-    public function findAllEquipments()
+    public function findAllMulti()
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("SELECT * FROM equipos");
+        $stmt = $connection->prepare("SELECT referencia, nombre_referencia, multi FROM producto WHERE multi>0 ORDER BY nombre_referencia ASC");
         $stmt->execute();
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
-        $equipments = $stmt->fetchAll($connection::FETCH_ASSOC);
-        $this->logger->notice("Equipos Obtenidos", array('equipos' => $equipments));
-        return $equipments;
+        $multi = $stmt->fetchAll($connection::FETCH_ASSOC);
+    $this->logger->notice("Equipos Obtenidos", array('multi' => $multi));
+        return $multi;
     }
 
-    public function findEquipmentsByType()
-    {
-        $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("SELECT DISTINCT tipo FROM equipos");
-        $stmt->execute();
-        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
-        $equipments = $stmt->fetchAll($connection::FETCH_ASSOC);
-        $this->logger->notice("Tipos Obtenidos", array('tipo' => $equipments));
-        return $equipments;
-    }
-
-    public function saveEquipments($dataEquipments)
+    public function saveEquipments($dataMulti)
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("INSERT INTO equipos (descripcion, tipo) VALUES (:equipo, :tipo)");
-        $stmt->execute(['equipo' => strtolower($dataEquipments['equipo']), 'tipo' => strtolower($dataEquipments['tipo'])]);
+        $stmt->execute(['equipo' => strtolower($dataMulti['equipo']), 'tipo' => strtolower($dataMulti['tipo'])]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 
-    public function updateEquipments($dataEquipments)
+    public function updateEquipments($dataMulti)
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("UPDATE equipos SET descripcion = :equipo, tipo = :tipo WHERE id = :id");
-        $stmt->execute(['id' => $dataEquipments['id'], 'equipo' => ($dataEquipments['equipo']), 'tipo' => strtolower($dataEquipments['tipo'])]);
+        $stmt->execute(['id' => $dataMulti['id'], 'equipo' => ($dataMulti['equipo']), 'tipo' => strtolower($dataMulti['tipo'])]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 
-    public function deleteEquipments($id)
+    public function deleteMulti($dataMulti)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("DELETE FROM equipos WHERE id = :id");
-        $stmt->execute(['id' => $id]);
+        $stmt = $connection->prepare("UPDATE producto SET multi = 0 WHERE referencia = :valor");
+        $stmt->execute(['valor' => $dataMulti['valor']]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 }
