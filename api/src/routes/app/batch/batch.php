@@ -57,10 +57,18 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
   $dataBatch = $request->getParsedBody();
   $flag_tanques = 1;
 
+  $date = $dataBatch['date'];
+
+  if ($dataBatch['date'])
+    unset($dataBatch['date']);
+
   //Si el data esta vacio
   if (sizeof($dataBatch) == 0) {
     session_start();
     $dataBatch = $_SESSION['dataPedidos'];
+    for ($i = 0; $i < sizeof($dataBatch); $i++)
+      $dataBatch[$i]['date'] = $date;
+
     $flag_tanques = 0;
   }
 
@@ -99,9 +107,9 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
 
   /* Notificaciones*/
   if ($resp == null && $flag_tanques == 1)
-    $resp = array('success' => true, 'message' => 'Nuevo Batch creado correctamente');
+    $resp = array('success' => true, 'message' => 'Batch creado correctamente');
   else if ($resp == null && $flag_tanques == 0)
-    $resp = array('success' => true, 'message' => 'Nuevos Batchs creados correctamente');
+    $resp = array('success' => true, 'message' => sizeof($dataBatch) . ' ' . 'Batchs creados correctamente');
   else
     $resp = array('error' => true, 'message' => 'Ocurrio un error mientras creaba el Batch. Intentelo nuevamente');
 

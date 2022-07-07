@@ -133,7 +133,10 @@ class BatchDao extends estadoInicialDao
         $tamanolotepresentacion = $dataBatch['presentacion'];
         $multi                  = json_decode($dataBatch['multi'], true);
 
-        $fechahoy               = date("Y-m-d");
+        if ($dataBatch['date'])
+            $fechahoy           = json_decode($dataBatch['date']);
+        else
+            $fechahoy           = date("Y-m-d");
 
         $connection = Connection::getInstance()->getConnection();
 

@@ -12,6 +12,10 @@ $(document).ready(function() {
     $('#cardBatchCerrados').hide();
 });
 
+
+// Calcular numero de semana
+
+
 $('#batch-list a').on('click', function(e) {
     e.preventDefault();
     let c = $(this).text();
