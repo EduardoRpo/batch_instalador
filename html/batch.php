@@ -144,7 +144,7 @@ include_once("modal/modalPedidos.php");
                     <a class="nav-link" id="four-tab" data-toggle="tab" href="#four" role="tab" aria-controls="Four" aria-selected="false">Cerrados</a>
                   </li>
                 <?php  } ?>
-                <div style="display:grid;justify-content:end;font-size:x-large;margin-left:auto">
+                <div style="display:grid;justify-content:end;font-size:x-large;margin-left:auto" class="mr-3">
                   <div id="numberWeek"></div>
                 </div>
               </ul>
