@@ -1,22 +1,22 @@
 
-/* Mostrar Menu seleccionadp */
+
+/* Mostrar Menu seleccionado */
 
 $('.contenedor-menu .menu a').removeAttr('style');
-$('#link_desinfectante').css('background', 'coral')
+$('#link_equipos').css('background', 'coral')
 $('.contenedor-menu .menu ul.menu_generales').show();
 
-
-/* Cargue de Parametros de Condiciones del medio */
+/* Cargue de Equipos*/
 
 $(document).ready(function () {
-    $("#listarDesinfectante").DataTable({
+    tabla = $("#listarEquipos").DataTable({
         scrollY: '50vh',
         scrollCollapse: true,
         paging: false,
         language: { url: 'admin_componentes/es-ar.json' },
 
         "ajax": {
-            url: "/api/disinfectant",
+            url: "/api/equipments",
             dataSrc: '',
         },
 
@@ -29,16 +29,14 @@ $(document).ready(function () {
                     return meta.row + 1;
                 }
             },
-            {title: 'Desinfectante',
-                data: "nombre"
+            {
+                title: "descripcion", 
+                data: "descripcion"
             },
-
-            { 
-            title: "Concentracion",
-            data: "concentracion", 
-            className: 'text-center' 
+            {
+            data: "tipo",
+            title: "tipo"
             },
-            
             {
                 title: 'Acciones',
                 data: 'id',
@@ -48,7 +46,7 @@ $(document).ready(function () {
                             <a href='#' <i id=${data} class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>delete</i></a>`
                 },
             },
-         ]
+        ]
     });
 });
 

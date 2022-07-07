@@ -215,7 +215,7 @@ function cargar_despacho() {
 }
 
 function guardar_despacho(info) {
-    realizo = info[0].id;
+    realizo = info.id;
     let unidades = $(`#unidades_recibidas${id_multi}`).val();
     let cajas = $(`#cajas${id_multi}`).val();
     let mov = $(`#mov_inventario${id_multi}`).val();

@@ -121,7 +121,9 @@
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
   <!-- javascript inicializacion datatables -->
-  <script src="js/equipos.js"></script>
+  <script src="js/global/notifications.js"></script>
+  <script src="js/equipments/tblequipments.js"></script>
+  <script src="js/equipments/equipments.js"></script>
   <script src="js/menu.js"></script>
   <script src="js/cargarDatos.js"></script>
 
