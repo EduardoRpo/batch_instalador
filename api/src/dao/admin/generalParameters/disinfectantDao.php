@@ -35,7 +35,7 @@ class disinfectantDao
         $stmt->execute(['id' => $dataDisinfect['id']]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         $disinfectans = $stmt->fetch($connection::FETCH_ASSOC);
-        $this->logger->notice("module Obtenidos", array('id' => $disinfectans));
+        $this->logger->notice("desinfectante Obtenidos", array('id' => $disinfectans));
         return $disinfectans;
     }
 
@@ -50,8 +50,8 @@ class disinfectantDao
     public function updateDisinfect($dataDisinfect)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("UPDATE desinfectante SET nombre = :desinfectante, concentracion=:concentracion WHERE id = :id");
-        $stmt->execute(['id' => $dataDisinfect['id'], 'desinfectante' => strtoupper($dataDisinfect['desinfectante']), 'concentracion' => $dataDisinfect['concentracion'] ]);
+        $stmt = $connection->prepare("UPDATE desinfectante SET concentracion=:concentracion WHERE id = :id");
+        $stmt->execute(['id' => $dataDisinfect['id'], 'concentracion' => $dataDisinfect['concentracion'], 'concentracion' => $dataDisinfect['concentracion'] ]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 

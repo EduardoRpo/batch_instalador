@@ -7,6 +7,8 @@ $('#adDesinfectante').click(function (e) {
     $('#concentracion').val('');
     $('#btnguardarDesinfectante').html('Crear');
     $("#frmadParametro").slideToggle();
+    let desin = document.getElementById("desinfectante")
+    desin.removeAttribute('readonly')
 
 });
 
@@ -26,8 +28,6 @@ $(document).on('click', '.link-borrar', function (e) {
                     notificaciones(data);
                 },
             });
-            refreshTable();
-            alertify.success('Registro Eliminado');
         }
     });
 });
@@ -46,6 +46,8 @@ $(document).on('click', '.link-editar', function (e) {
     $('#id_desinfectante').val(id);
     $('#desinfectante').val(desinfectante);
     $('#concentracion').val(concentracion);
+    const desin = document.getElementById("desinfectante")
+    desin.setAttribute('readonly','true')
 });
 
 
