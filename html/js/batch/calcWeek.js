@@ -1,7 +1,7 @@
 $(document).ready(function() {
-    currentdate = new Date();
-    var oneJan = new Date(currentdate.getFullYear(), 0, 1);
-    var numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
-    var result = Math.ceil((currentdate.getDay() + numberOfDays) / 7);
+    var d = new Date();
+    d.setHours(0, 0, 0, 0);
+    d.setDate(d.getDate() + 4 - (d.getDay() || 7));
+    result = Math.ceil((((d - new Date(d.getFullYear(), 0, 1)) / 8.64e7) + 1) / 7);
     $(`#numberWeek`).html(`Semana No. ${result}`);
 });

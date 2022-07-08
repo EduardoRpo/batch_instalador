@@ -8,8 +8,8 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 $materiaPrimaDao = new MateriaPrimaDao();
 
 $app->get('/materiasp/{idProduct}', function (Request $request, Response $response, $args) use ($materiaPrimaDao) {
-  //$batch = $materiaPrimaDao->findByProduct($args["idProduct"]);
-  $batch = $materiaPrimaDao->findByProductInv($args["idProduct"]);
+  $batch = $materiaPrimaDao->findByProduct($args["idProduct"]);
+  //$batch = $materiaPrimaDao->findByProductInv($args["idProduct"]);
   $response->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
