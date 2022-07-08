@@ -7,7 +7,7 @@ use Monolog\Handler\RotatingFileHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 
-class MultiDao
+class AdminMultiDao
 {
     private $logger;
 
@@ -36,19 +36,19 @@ class MultiDao
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 
-    public function updateEquipments($dataMulti)
-    {
-        $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("UPDATE equipos SET descripcion = :equipo, tipo = :tipo WHERE id = :id");
-        $stmt->execute(['id' => $dataMulti['id'], 'equipo' => ($dataMulti['equipo']), 'tipo' => strtolower($dataMulti['tipo'])]);
-        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
-    }
+    // public function updateEquipments($dataMulti)
+    // {
+    //     $connection = Connection::getInstance()->getConnection();
+    //     $stmt = $connection->prepare("UPDATE equipos SET descripcion = :equipo, tipo = :tipo WHERE id = :id");
+    //     $stmt->execute(['id' => $dataMulti['id'], 'equipo' => ($dataMulti['equipo']), 'tipo' => strtolower($dataMulti['tipo'])]);
+    //     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+    // }
 
-    public function deleteMulti($dataMulti)
+    public function deleteMulti($multi)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("UPDATE producto SET multi = 0 WHERE referencia = :valor");
-        $stmt->execute(['valor' => $dataMulti['valor']]);
+        $stmt = $connection->prepare("UPDATE producto SET multi = $row[0] WHERE referencia = :valor");
+        $stmt->execute(['valor' => $multi]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 }

@@ -5,23 +5,31 @@ $('#adicionarMulti').click(function(e) {
 });
 
 /* Eliminar multipresentacion */
-$(document).on('click', '.link-borrar', function(e) {
-    e.preventDefault();
 
-    const referencia = $(this).parent().parent().children().first().text();
+$(document).ready(function() {
+    $('#btnEliminarMulti').click(function(e) {
+        e.preventDefault();
+        let multi = [];
 
-    $.ajax({
-        type: "POST",
-        url: '/api/deleteMulti',
-        data: {valor:referencia},
+        $("#cmbmulti option").each(function() {
+            multi.push($(this).attr('value'));
+        });
 
-
-        success: function(response) {
-            
+        if (multi.length < 1) {
+            alertify.set("notifier", "position", "top-right");
+            alertify.error("Seleccione al menos dos productos");
+            return false;
         }
+
+        $.ajax({
+            url: `/api/deleteMulti/${multi}`,
+            
+            success: function(data) {
+                notificaciones(data);
+            }
+        });
     });
 });
-
 
 
 /* Cargar productos */
@@ -29,10 +37,7 @@ $(document).on('click', '.link-borrar', function(e) {
 function cargarSelectorProductos() {
 
     $.ajax({
-        method: 'POST',
-        url: 'php/c_multipresentacion.php',
-        data: { operacion: 1 },
-
+        url: '/api/multi',
         success: function(response) {
             var info = JSON.parse(response);
 

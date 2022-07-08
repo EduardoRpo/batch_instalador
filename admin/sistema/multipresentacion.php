@@ -74,11 +74,6 @@
                   <table id="tblMulti" class="table-striped row-borde" style="width:100%">
                     <thead>
                       <tr>
-                        <th>Referencia</th>
-                        <th>Nombre Referencia</th>
-                        <!-- <th>Producto</th>-->
-                        <th>Multipresentación</th> 
-                        <th>Acciones</th>
                       </tr>
                     </thead>
                     <tbody>
