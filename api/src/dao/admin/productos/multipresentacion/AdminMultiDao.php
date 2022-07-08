@@ -7,7 +7,7 @@ use Monolog\Handler\RotatingFileHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 
-class MultiPrecentacionDao
+class AdminMultiDao
 {
     private $logger;
 
@@ -47,7 +47,7 @@ class MultiPrecentacionDao
     public function deleteMulti($multi)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("UPDATE producto SET multi = 0 WHERE referencia = :valor");
+        $stmt = $connection->prepare("UPDATE producto SET multi = $row[0] WHERE referencia = :valor");
         $stmt->execute(['valor' => $multi]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }

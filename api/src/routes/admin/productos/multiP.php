@@ -1,13 +1,13 @@
 <?php
 
-
+use BatchRecord\dao\AdminMultiDao;
 use BatchRecord\dao\MultiPrecentacionDao;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-$multiPDao = new MultiPrecentacionDao();
+$multiPDao = new AdminMultiDao();
 
-$app->get('/multiAdmin', function (Request $request, Response $response, $args) use ($multiPDao) {
+$app->get('/adminMulti', function (Request $request, Response $response, $args) use ($multiPDao) {
   $MultiP = $multiPDao->findAllMulti();
   $response->getBody()->write(json_encode($MultiP, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
