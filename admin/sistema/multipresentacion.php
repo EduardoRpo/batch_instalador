@@ -122,7 +122,7 @@
 
   <!-- javascript inicializacion datatables -->
   <script src="js/multiP/tblmulti.js"></script>
-  <script src="js/multiP/multi.js"></script>
+  <script src="js/multiP/multipresentacion.js"></script>
   <script src="js/global/notifications.js"></script>
   <script src="js/menu.js"></script>
   <script src="js/cargarDatos.js"></script>

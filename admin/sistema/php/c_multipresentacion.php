@@ -14,27 +14,32 @@ if (!empty($_POST)) {
     case 2: //Almacenar multipresentacion
 
       $multi = $_POST['multi'];
-      $sinFormulas = [];
+      //$sinFormulas = [];
 
       /* Crea multipresentacion en productos */
 
-      $sql = "SELECT MAX(multi) + 1 FROM producto";
+     /*  $sql = "SELECT MAX(multi) + 1 FROM producto";
       foreach ($conn->query($sql) as $row) {
         //print($row[0]);
-      }
+      } */
 
       /* Crea la multipresentacion para cada referencia */
 
+    //validar el indicde donde esta el granel
+    //N = obtener el numero del granel
+    //crear variable como $id_multi = 'A-N'
+
+
       foreach ($multi as $valor) {
-        $sql = "UPDATE producto SET multi = $row[0] WHERE referencia = :valor";
+        $sql = "UPDATE producto SET multi = :multi WHERE referencia = :id_multi";
         $query = $conn->prepare($sql);
-        $result = $query->execute(['valor' => $valor]);
+        $result = $query->execute(['id_multi' => $id_multi]);
         ejecutarQuery($result, $conn);
       }
 
       /* Revisar si existe formula para todas la referencias */
 
-      foreach ($multi as $ref) {
+     /*  foreach ($multi as $ref) {
 
         $sql = "SELECT f.id_producto, f.id_materiaprima as referencia, cast(AES_DECRYPT(porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje 
                 FROM formula f WHERE f.id_producto = :id_producto";
@@ -46,11 +51,11 @@ if (!empty($_POST)) {
           $formulas = $query->fetchAll(PDO::FETCH_ASSOC);
         } else
           $sinFormulas[$ref] =  $rows;
-      }
+      } */
 
       /* insertar la formula para las referencias sin formula */
 
-      foreach ($sinFormulas as $sinFormula => $value) {
+      /* foreach ($sinFormulas as $sinFormula => $value) {
         if ($value == 0) {
           foreach ($formulas as $formula) {
             $sql = "INSERT INTO formula (id_producto, id_materiaprima, porcentaje) 
@@ -63,7 +68,7 @@ if (!empty($_POST)) {
             ]);
           }
         }
-      }
+      } */
 
       break;
 
@@ -85,11 +90,11 @@ if (!empty($_POST)) {
 
       $referencia = $_POST['referencia'];
 
-      $sql = "SELECT referencia, nombre_referencia FROM producto WHERE multi = (SELECT multi FROM producto WHERE referencia = :referencia ) AND multi > 0";
+      $sql = "SELECT referencia, nombre_referencia FROM producto WHERE multi = (SELECT multi FROM producto WHERE referencia = :referencia )";
       $query = $conn->prepare($sql);
       $result = $query->execute(['referencia' => $referencia]);
-
-      if ($result) {
+      $data = $query->fetchAll(PDO::FETCH_ASSOC);
+      /* if ($result) {
         while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
           $arreglo["data"][] = $data;
         }
@@ -100,9 +105,9 @@ if (!empty($_POST)) {
         }
       } else {
         echo '2';
-      }
+      } */
 
-      echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
+      echo json_encode($data, JSON_UNESCAPED_UNICODE);
 
       break;
     case 5:
