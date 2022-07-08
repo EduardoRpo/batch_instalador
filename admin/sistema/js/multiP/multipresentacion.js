@@ -242,4 +242,4 @@ $(document).ready(function() {
 function refreshTable() {
     $('#tblMulti').DataTable().clear();
     $('#tblMulti').DataTable().ajax.reload();
-}
+} 

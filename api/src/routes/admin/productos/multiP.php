@@ -1,22 +1,21 @@
 <?php
 
 
-use BatchRecord\dao\MultiDao;
+use BatchRecord\dao\MultiPrecentacionDao;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-$multiPDao = new MultiDao();
+$multiPDao = new MultiPrecentacionDao();
 
-$app->get('/multi', function (Request $request, Response $response, $args) use ($multiPDao) {
+$app->get('/multiAdmin', function (Request $request, Response $response, $args) use ($multiPDao) {
   $MultiP = $multiPDao->findAllMulti();
   $response->getBody()->write(json_encode($MultiP, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->post('/deleteMulti', function (Request $request, Response $response, $args) use ($multiPDao) {
-$dataMulti = $request->getParsedBody();
+$app->get('/deleteMulti/{multi}', function (Request $request, Response $response, $args) use ($multiPDao) {
+  $MultiP = $multiPDao->deleteMulti($args['multi']);
 
-$MultiP = $multiPDao->deleteMulti($dataMulti);
 
   if ($MultiP == null)
     $resp = array('success' => true, 'message' => 'Multipresentacion eliminada correctamente');

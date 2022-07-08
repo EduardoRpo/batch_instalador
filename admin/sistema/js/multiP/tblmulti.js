@@ -19,19 +19,28 @@ $(document).ready(function() {
             dataSrc: ''
         },
 
-        "columns": [
+        "columns": [{
+            title: 'No.',
+            "data": null,
+            className: 'uniqueClassName',
+            "render": function(data, type, full, meta) {
+                return meta.row + 1;
+            }},
             {
                 data: "referencia",
-                title: 'referencia'
+                title: 'Referencia'
             },
             {
                 data: "nombre_referencia",
-                title: 'nombre de referencia'
+                title: 'Nombre de referencia'
             },
-            { data: "multi", className: "centrado" },
+            {
+                title: "Multipresentacion",
+                data: "multi", 
+                className: "centrado" },
             {
                 title: 'Acciones',
-                data: 'id',
+                data: 'multi',
                 className: 'text-center',
                 render: function(data) {
                     return `<a href='#' <i id=${data} class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>`
