@@ -131,7 +131,7 @@ $(document).ready(function() {
         let datosIniciales =
             nombres.length *
             apellidos.length *
-            cargo.length *
+            cargos.length *
             modulo.length *
             user.length;
 
@@ -224,7 +224,7 @@ $(document).on("click", ".link-editar", function(e) {
     $("#nombres").val(nombres);
     $("#apellidos").val(apellidos);
     $("#email").val(email);
-    $("#cargo option:contains(" + cargo + ")").attr("selected", true);
+    $("#cargos option:contains(" + cargo + ")").attr("selected", true);
     $("#modulo option:contains(" + modulo + ")").attr("selected", true);
     $("#rol option:contains(" + rol + ")").attr("selected", true);
     $("#usuario").val(usuario);
