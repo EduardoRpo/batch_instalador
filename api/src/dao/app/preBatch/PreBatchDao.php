@@ -31,7 +31,7 @@ class PreBatchDao
                 FROM `explosion_materiales_pedidos_registro` exp 
                     INNER JOIN producto p ON p.referencia = exp.id_producto 
                     INNER JOIN propietario pp ON pp.id = p.id_propietario
-                WHERE exp.flag_estado = 0;";
+                ;"; //WHERE exp.flag_estado = 1
 
         $query = $connection->prepare($sql);
         $query->execute();
