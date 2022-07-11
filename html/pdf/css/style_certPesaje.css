@@ -94,13 +94,13 @@
 }
 
 .grid-container-product {
-    grid-auto-columns: repeat(8, 1fr);
+    grid-template-columns: 100px 100px repeat(8, 1fr);
     grid-template-rows: repeat(2, 1fr);
 }
 
 .product {
     grid-column-start: 1;
-    grid-column-end: 9;
+    grid-column-end: 11;
     text-align: center;
     background-color: green;
     font-weight: 800;

@@ -17,19 +17,30 @@
                         </div>
 
                         <div class="grid-container-product gl mb-3">
-                            <div class="product">BIOELIXIR CAPILAR (ISABELY) 60ml</div>
-                            <div class="invima"><b>INVIMA:</b></div>
-                            <div class="invima_id">NSOC82727-17CO</div>
+                            <div class="product"></div>
+                            <div><b>FECHA:</b></div>
+                            <div class="fecha_pesaje"></div>
+                            <div><b>INVIMA:</b></div>
+                            <div class="invima_id"></div>
                             <div><b>LINEA:</b></div>
                             <div class="linea"></div>
-                            <div class="N_lote"><b>LOTE:</b></div>
-                            <div class="lote_id">LQ0020421</div>
-                            <div class="N_lote"><b>TAMAÑO LOTE:</b></div>
+                            <div><b>LOTE:</b></div>
+                            <div class="lote_id"></div>
+                            <div><b>TAMAÑO LOTE:</b></div>
                             <div class="tamanioLotePesaje"></div>
                         </div>
 
                         <div class="grid-container-X3 mpcerti gl mb-3"></div>
-
+                        <div style="display: grid;grid-template-columns: 1fr 1fr">
+                            <div class="ml-5 realizo" style="justify-self:center;">
+                                <label><b>Realizó</b></label>
+                                <img id="realizo2" src="" alt="firma_usuario" height="130">
+                            </div>
+                            <div class="calidad" style="justify-self:center;">
+                                <label><b>Verificó</b></label>
+                                <img id="verifico2" src="" alt="firma_usuario" height="130">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
