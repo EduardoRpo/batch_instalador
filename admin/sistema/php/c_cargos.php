@@ -9,7 +9,7 @@ if (!empty($_POST)) {
 
     switch ($op) {
         case 1: //listar Condiciones del medio
-            $query = "SELECT * FROM cargo";
+            $query = "SELECT * FROM cargos";
             ejecutarQuerySelect($conn, $query);
             break;
 
@@ -34,14 +34,14 @@ if (!empty($_POST)) {
                     echo '2';
                     exit();
                 } else {
-                    $sql = "INSERT INTO cargo (cargo) VALUES(:cargo)";
+                    $sql = "INSERT INTO cargos (cargo) VALUES(:cargo)";
                     $query = $conn->prepare($sql);
                     $result = $query->execute(['cargo' => $cargo]);
                     ejecutarQuery($result, $conn);
                 }
             } else {
                 $id = $_POST['id'];
-                $sql = "UPDATE cargo SET cargo = :cargo WHERE id = :id";
+                $sql = "UPDATE cargos SET cargo = :cargo WHERE id = :id";
                 $query = $conn->prepare($sql);
                 $result = $query->execute(['cargo' => $cargo, 'id' => $id]);
 
