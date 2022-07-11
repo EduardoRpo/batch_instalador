@@ -152,10 +152,10 @@ $('#btnBuscarMulti').click(function(e) {
             } else {
                 const info = JSON.parse(response);
                 const $select = $('#cmbmulti');
-                $select.empty();
+                //$select.empty();
 
-                $.each(info.data, function(i, value) {
-                    $select.append('<option value ="' + value.referencia + '">' + value.referencia + ' - ' + value.nombre_referencia + '</option>');
+                $.each(info, function(i, value) {
+                    $select.append(`<option value =${value.referencia}>${value.referencia} - ${value.nombre_referencia} </option>`);
                 });
             }
 
@@ -242,4 +242,4 @@ $(document).ready(function() {
 function refreshTable() {
     $('#tblMulti').DataTable().clear();
     $('#tblMulti').DataTable().ajax.reload();
-} 
+}
