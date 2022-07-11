@@ -199,6 +199,9 @@ function info_General(data) {
     $("#unidadesLote").html(`<b>${info.unidad_lote}</b>`);
     //$(".unidades1").html(`<b>${info.unidad_lote}</b>`);
     $(".fecha").html(`<b>${info.fecha_creacion}</b>`);
+    $(".linea").html(`${info.linea}`);
+    $(".tamanioLotePesaje").html(`${info.tamano_lote}`);
+
 }
 
 parametros_Control = () => {
