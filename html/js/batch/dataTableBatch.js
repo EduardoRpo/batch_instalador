@@ -71,6 +71,9 @@ $(document).ready(function() {
                 title: 'No Semana',
                 data: 'semanas',
                 className: 'uniqueClassName',
+                render: function(data) {
+                    return `S${data}`;
+                },
             },
             {
                 title: 'Fecha Programación',
@@ -212,15 +215,6 @@ $(document).ready(function() {
                 <input type="date" class="dateInsumos form-control-updated text-center" id="date-${data.pedido}-${data.id_producto}" value="${data.fecha_insumo}" max="${data.fecha_actual}"/>`;
                 },
             },
-            /* {
-                            title: 'Acciones',
-                            data: null,
-                            className: 'uniqueClassName',
-                            render: function(data) {
-                                return `
-                              <div class="form-check"><input class="form-check-input checkboxPedidos" type="checkbox" id="${data.pedido}-${data.id_producto}"></div>`;
-                            },
-                        }, */
             {
                 title: 'Fecha Pesaje (8)',
                 data: null,
@@ -375,6 +369,9 @@ $(document).ready(function() {
                 title: 'No Semana',
                 data: 'semanas',
                 className: 'uniqueClassName',
+                render: function(data) {
+                    return `S${data}`;
+                },
             },
             {
                 title: 'Fecha Programación',
