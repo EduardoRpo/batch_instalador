@@ -197,9 +197,14 @@ function info_General(data) {
     $("#tamanolt").html(`<b>${info.tamano_lote}</b>`);
     $("#tamanol").html(`<b>${info.tamano_lote}</b>`);
     $("#unidadesLote").html(`<b>${info.unidad_lote}</b>`);
-    //$(".unidades1").html(`<b>${info.unidad_lote}</b>`);
     $(".fecha").html(`<b>${info.fecha_creacion}</b>`);
     $(".linea").html(`${info.linea}`);
+
+    // certificado Pesaje
+    $(".product").html(`${info.nombre_referencia}`);
+    $(".invima_id").html(`${info.notificacion}`);
+    $(".linea").html(`${info.linea}`);
+    $(".lote_id").html(`${info.numero_lote}`);
     $(".tamanioLotePesaje").html(`${info.tamano_lote}`);
 
 }
@@ -312,6 +317,8 @@ desinfectante = () => {
             let fecha = $("#fecha2").html();
             fecha = fecha.substr(0, 10);
             $(".fecha2").html(fecha);
+            $(".fecha_pesaje").html(fecha);
+
         }
     );
 };
@@ -329,28 +336,27 @@ const firmas = () => {
             for (let i = 0; i < info.length; i++) {
                 if (info[i].realizo != 0) {
                     $(`#f_realizo${info[i].modulo}`).prop("src", info[i].realizo);
-                    $(`#user_realizo${info[i].modulo}`).html(
-                        `Realizó: <b>${info[i].nombre_realizo}</b>`
-                    );
+                    $(`#user_realizo${info[i].modulo}`).html(`Realizó: <b>${info[i].nombre_realizo}</b>`);
+
+                    //firmas certificado pesaje
+                    if (info[i].modulo == 2) {
+                        $(`#realizo${info[i].modulo}`).prop("src", info[i].realizo);
+                        $(`#verifico${info[i].modulo}`).prop("src", info[i].verifico);
+                    }
+
                 } else if (info[i].realizo == 0) {
                     $(`#f_realizo${info[i].modulo}`).prop("hide", true);
                     $(`#blank_rea${info[i].modulo}`).show();
-                    $(`#user_realizo${info[i].modulo}`).html(
-                        `Realizó:<b> Sin firmar</b>`
-                    );
+                    $(`#user_realizo${info[i].modulo}`).html(`Realizó:<b> Sin firmar</b>`);
                 }
 
                 if (info[i].verifico != 0) {
                     $(`#f_verifico${info[i].modulo}`).prop("src", info[i].verifico);
-                    $(`#user_verifico${info[i].modulo}`).html(
-                        `Verificó: <b>${info[i].nombre_verifico}</b>`
-                    );
+                    $(`#user_verifico${info[i].modulo}`).html(`Verificó: <b>${info[i].nombre_verifico}</b>`);
                 } else {
                     $(`#f_verifico${info[i].modulo}`).hide();
                     $(`#blank_ver${info[i].modulo}`).show();
-                    $(`#user_verifico${info[i].modulo}`).html(
-                        `Verificó: <b>Sin firmar</b>`
-                    );
+                    $(`#user_verifico${info[i].modulo}`).html(`Verificó: <b>Sin firmar</b>`);
                 }
             }
             firmas_multi(info);
