@@ -35,7 +35,7 @@
                       <div class="col-md-6 pl-1">
                         <div class="form-group">
                           <label>Cargo</label>
-                          <select class="form-control" name="cargo" id="cargo">
+                          <select class="form-control" name="cargos" id="cargos">
                             <option value="" disabled selected>Selecciona una opción</option>
                           </select>
                         </div>

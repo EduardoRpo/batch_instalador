@@ -64,25 +64,20 @@ $(document).ready(function() {
 
 function cargarselectores(selector) {
     $.ajax({
-        //method: "POST",
-        //url: "php/c_usuarios.php",
-        //data: { tabla: selector, operacion: 4 },
         url: `/api/getDataSelector/${selector}`,
-
-        success: function(response) {
-            const info = JSON.parse(response);
+        success: function(resp) {
             const $select = $(`#${selector}`);
 
             $select.empty();
-            $select.append("<option disabled selected>" + "Seleccionar" + "</option>");
+            $select.append("<option disabled selected>Seleccionar</option>");
 
-            if (selector == "cargo") {
-                $.each(info.data, function(i, value) {
-                    $select.append('<option value ="' + value.id + '">' + value.cargo + "</option>");
+            if (selector == "cargos") {
+                $.each(resp, function(i, value) {
+                    $select.append(`<option value = ${value.id}>${value.cargo}</option>`);
                 });
             } else {
-                $.each(info.data, function(i, value) {
-                    $select.append('<option value ="' + value.id + '">' + value.modulo + "</option>");
+                $.each(resp, function(i, value) {
+                    $select.append(`<option value = ${value.id}>${value.modulo}</option>`);
                 });
             }
         },

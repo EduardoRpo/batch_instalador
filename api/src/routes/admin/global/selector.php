@@ -14,7 +14,7 @@ $app->get('/getDataSelectorModule/{tbl}', function (Request $request, Response $
 });
 
 $app->get('/getDataSelector/{tbl}', function (Request $request, Response $data, $args) use ($dataselectorDao) {
-  $dataSelector = $dataselectorDao->findSelectorPositions($args["id"]);
+  $dataSelector = $dataselectorDao->findSelectorPositions($args["tbl"]);
   $data->getBody()->write(json_encode($dataSelector, JSON_NUMERIC_CHECK));
   return $data->withHeader('Content-Type', 'application/json');
 });
