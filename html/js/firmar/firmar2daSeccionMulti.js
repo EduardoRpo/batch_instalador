@@ -26,7 +26,7 @@ function almacenar_muestras(firma) {
 
                 success: function(response) {
                     if (response === "false") return false;
-                    let realizo = firma[0].id;
+                    let realizo = firma.id;
 
                     //Almacena la firma
                     $.ajax({
