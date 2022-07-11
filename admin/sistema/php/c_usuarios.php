@@ -24,7 +24,7 @@ switch ($op) {
             $nombres = ucfirst(mb_strtolower($_POST['nombres'], "UTF-8"));
             $apellidos = ucfirst(mb_strtolower($_POST['apellidos'], "UTF-8"));
             $email = $_POST['email'];
-            $cargo = $_POST['cargo'];
+            $cargo = $_POST['cargos'];
             $modulo = $_POST['modulo'];
             $rol = $_POST['rol'];
             $usuario = $_POST['usuario'];
