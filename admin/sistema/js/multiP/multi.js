@@ -1,7 +1,6 @@
 $('#adicionarMulti').click(function(e) {
-    e.preventDefault();
     $('#ModalCrearMulti').modal('show');
-
+    cargarSelectorProductos();
 });
 
 /* Eliminar multipresentacion */
@@ -22,29 +21,28 @@ $(document).ready(function() {
         }
 
         $.ajax({
-            url: `/api/deleteMulti/${multi}`,
-            
+            type: "POST",
+            url: "/api/deleteMulti",
+            data: { multi: multi },
+
             success: function(data) {
-                notificaciones(data);
+                notificaciones(data)
             }
         });
     });
 });
-
 
 /* Cargar productos */
 
 function cargarSelectorProductos() {
 
     $.ajax({
-        url: '/api/multi',
+        url: '/api/adminProducts',
         success: function(response) {
-            var info = JSON.parse(response);
 
             let $select = $('#cmbproductos');
-            $select.empty();
 
-            $.each(info.data, function(i, value) {
+            $.each(response, function(i, value) {
                 $select.append('<option value ="' + value.referencia + '">' + value.referencia + ' - ' + value.nombre_referencia + '</option>');
             });
             iniciarselectorbusqueda();
@@ -101,12 +99,13 @@ $("#busquedamulti").click(function() {
 
 $('#btnBuscarMulti').click(function(e) {
     e.preventDefault();
+    
     const busqueda = $('#busquedamulti').val();
 
     $.ajax({
         type: "POST",
-        url: 'php/c_multipresentacion.php',
-        data: { operacion: 4, referencia: busqueda },
+        url: '/api/adminSearch',
+        data: {referencia: busqueda },
 
         success: function(response) {
 
@@ -116,16 +115,14 @@ $('#btnBuscarMulti').click(function(e) {
             } else {
                 const info = JSON.parse(response);
                 const $select = $('#cmbmulti');
-                $select.empty();
 
-                $.each(info.data, function(i, value) {
-                    $select.append('<option value ="' + value.referencia + '">' + value.referencia + ' - ' + value.nombre_referencia + '</option>');
+                $.each(info, function(i, value) {
+                    $select.append(`<option value =${value.referencia}>${value.referencia} - ${value.nombre_referencia} </option>`);
                 });
             }
 
         }
     });
-
 });
 
 /* Crear multipresentacion */
@@ -147,8 +144,8 @@ $(document).ready(function() {
 
         $.ajax({
             type: "POST",
-            url: "php/c_multipresentacion.php",
-            data: { operacion: 2, multi: multi },
+            url: "/api/saveMulti",
+            data: {  multi: multi },
 
             success: function(r) {
                 if (r > 1) {
@@ -165,41 +162,6 @@ $(document).ready(function() {
     });
 });
 
-
-/* Eliminar multipresentacion */
-
-$(document).ready(function() {
-    $('#btnEliminarMulti').click(function(e) {
-        e.preventDefault();
-        let multi = [];
-
-        $("#cmbmulti option").each(function() {
-            multi.push($(this).attr('value'));
-        });
-
-        if (multi.length < 1) {
-            alertify.set("notifier", "position", "top-right");
-            alertify.error("Seleccione al menos dos productos");
-            return false;
-        }
-
-        $.ajax({
-            type: "POST",
-            url: "php/c_multipresentacion.php",
-            data: { operacion: 3, multi: multi },
-
-            success: function(r) {
-                if (r > 1) {
-                    alertify.set("notifier", "position", "top-right");
-                    alertify.success("Multipresentacion eliminada.");
-                } else {
-                    alertify.set("notifier", "position", "top-right");
-                    alertify.error("Error.");
-                }
-            }
-        });
-    });
-});
 
 /* Actualizar tabla */
 

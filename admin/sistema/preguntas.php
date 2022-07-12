@@ -61,9 +61,6 @@
                   <table id="tblPreguntas" class="table-striped row-borde" style="width:100%">
                     <thead>
                       <tr>
-                        <th>No.</th>
-                        <th>Acciones</th>
-                        <th>Pregunta</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -113,7 +110,9 @@
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
   <!-- javascript inicializacion datatables -->
-  <script src="js/preguntas.js"></script>
+  <script src="js/Questions/tblquestions.js"></script>
+  <script src="js/Questions/questions.js"></script>
+  <script src="js/global/notifications.js"></script>
   <script src="js/menu.js"></script>
   <script src="js/cargarDatos.js"></script>
 

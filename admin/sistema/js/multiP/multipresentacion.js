@@ -204,6 +204,7 @@ $(document).ready(function() {
 
 /* Eliminar multipresentacion */
 
+
 $(document).ready(function() {
     $('#btnEliminarMulti').click(function(e) {
         e.preventDefault();
@@ -238,6 +239,7 @@ $(document).ready(function() {
 });
 
 /* Actualizar tabla */
+
 
 function refreshTable() {
     $('#tblMulti').DataTable().clear();

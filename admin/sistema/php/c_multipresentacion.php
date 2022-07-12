@@ -89,7 +89,6 @@ if (!empty($_POST)) {
     case 4: //Buscar Multipresentacion
 
       $referencia = $_POST['referencia'];
-
       $sql = "SELECT referencia, nombre_referencia FROM producto WHERE multi = (SELECT multi FROM producto WHERE referencia = :referencia )";
       $query = $conn->prepare($sql);
       $result = $query->execute(['referencia' => $referencia]);
