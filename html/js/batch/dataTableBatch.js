@@ -421,7 +421,8 @@ $(document).ready(function () {
         data: 'id_batch',
         className: 'uniqueClassName',
         render: function (data) {
-          return `<i class="fa fa-superscript link-editarMulti" id=${data} aria-hidden="true" data-toggle="tooltip" title="Editar Multipresentación" style="color:rgb(59, 131, 189)" aria-hidden="true"></i>`;
+          return `<a href='#' <i class="fa fa-superscript fa-2x link-editarMulti" id=${data} aria-hidden="true" data-toggle="tooltip" title="Editar Multipresentación" style="color:rgb(59, 131, 189)" aria-hidden="true"></i></a>
+                  <a href='#' <i class="fa fa-comment fa-2x link-comentario" id=${data} aria-hidden="true" data-toggle="tooltip" title="Agregar Comentario" style="color:rgb(59, 131, 189)" aria-hidden="true"></i></a>`;
         },
       },
       {
@@ -429,9 +430,8 @@ $(document).ready(function () {
         data: 'id_batch',
         className: 'uniqueClassName',
         render: function (data) {
-          return `
-                    <a href='#' <i class='fa fa-pencil-square-o fa-2x link-editar' id=${data} data-toggle='tooltip' title='Editar Batch Record' style='color:rgb(255, 193, 7);'></i></a>
-                    <a href='#' <i class='fa fa-trash link-borrar fa-2x' id=${data} data-toggle='tooltip' title='Eliminar Batch Record' style='color:rgb(234, 67, 54)'></i></a>`;
+          return `<a href='#' <i class='fa fa-pencil-square-o fa-2x link-editar' id=${data} data-toggle='tooltip' title='Editar Batch Record' style='color:rgb(255, 193, 7);'></i></a>
+                  <a href='#' <i class='fa fa-trash link-borrar fa-2x' id=${data} data-toggle='tooltip' title='Eliminar Batch Record' style='color:rgb(234, 67, 54)'></i></a>`;
         },
       },
     ],
