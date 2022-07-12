@@ -6,7 +6,7 @@ $('.contenedor-menu .menu ul.menu_productos').show();
 
 /* Cargue de Multipresentacion en DataTable */
 
-$(document).ready(function() {
+
     $("#tblMulti").DataTable({
         destroy: true,
         scrollY: '50vh',
@@ -15,9 +15,11 @@ $(document).ready(function() {
         language: { url: 'admin_componentes/es-ar.json' },
 
         "ajax": {
-            url: "/api/multi",
+            url: "/api/adminMulti",
             dataSrc: ''
         },
+
+        //Tabla completamente funcional, verificar si el boton de eliminar en este apartado si apliica o si es solo del otro php
 
         "columns": [{
             title: 'No.',
@@ -25,7 +27,8 @@ $(document).ready(function() {
             className: 'uniqueClassName',
             "render": function(data, type, full, meta) {
                 return meta.row + 1;
-            }},
+            }
+            },
             {
                 data: "referencia",
                 title: 'Referencia'
@@ -38,14 +41,7 @@ $(document).ready(function() {
                 title: "Multipresentacion",
                 data: "multi", 
                 className: "centrado" },
-            {
-                title: 'Acciones',
-                data: 'multi',
-                className: 'text-center',
-                render: function(data) {
-                    return `<a href='#' <i id=${data} class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>`
-                },
-            },]
+            ]
     });
-});
+
 
