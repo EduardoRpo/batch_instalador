@@ -31,7 +31,7 @@ class PreBatchDao
                 FROM `explosion_materiales_pedidos_registro` exp 
                     INNER JOIN producto p ON p.referencia = exp.id_producto 
                     INNER JOIN propietario pp ON pp.id = p.id_propietario
-                WHERE exp.flag_estado = 0;";
+                ;"; //WHERE exp.flag_estado = 0
 
         $query = $connection->prepare($sql);
         $query->execute();
@@ -113,7 +113,8 @@ class PreBatchDao
         $data = str_replace('"', '', $pedidos);
         $data = substr($data, 1, -1);
 
-        $stmt = $connection->prepare("UPDATE explosion_materiales_pedidos_registro SET flag_estado = 1 
+        $stmt = $connection->prepare("UPDATE explosion_materiales_pedidos_registro 
+                                      SET flag_estado = 1 
                                       WHERE id IN(SELECT id FROM explosion_materiales_pedidos_registro WHERE pedido NOT IN({$data}))");
         $stmt->execute();
     }

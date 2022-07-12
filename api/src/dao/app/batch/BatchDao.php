@@ -57,7 +57,7 @@ class BatchDao extends estadoInicialDao
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("SELECT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, pc.nombre as presentacion_comercial, batch.numero_lote,
-                                             batch.tamano_lote, propietario.nombre, batch.fecha_creacion, WEEK(batch.fecha_creacion) AS semanas, batch.fecha_programacion, batch.estado, batch.multi, IFNULL(exp.fecha_insumo, '0000-00-00') AS fecha_insumo
+                                             batch.tamano_lote, propietario.nombre, batch.fecha_creacion, batch.fecha_actual, WEEK(batch.fecha_creacion) AS semanas, batch.fecha_programacion, batch.estado, batch.multi, IFNULL(exp.fecha_insumo, '0000-00-00') AS fecha_insumo
                                         FROM batch 
                                         INNER JOIN producto ON batch.id_producto = producto.referencia
                                         INNER JOIN propietario  ON producto.id_propietario = propietario.id
@@ -134,9 +134,12 @@ class BatchDao extends estadoInicialDao
         $multi                  = json_decode($dataBatch['multi'], true);
 
         if ($dataBatch['date'])
-            $fechahoy           = json_decode($dataBatch['date']);
+            $fecha           = json_decode($dataBatch['date']);
         else
-            $fechahoy           = date("Y-m-d");
+            $fecha           = date("Y-m-d");
+
+        $fechahoy = date("Y-m-d");
+
 
         $connection = Connection::getInstance()->getConnection();
 
@@ -160,12 +163,11 @@ class BatchDao extends estadoInicialDao
                                       VALUES(:fecha_creacion, :fecha_programacion, :fecha_actual, :numero_orden, :numero_lote, :tamano_lote, :lote_presentacion, :unidad_lote, :estado, :id_producto)");
         $stmt->execute([
             //'pedido' => $pedido,
-            'fecha_creacion' => $fechahoy,
+            'fecha_creacion' => $fecha,
             'fecha_programacion' => $fechaprogramacion,
             'fecha_actual' => $fechahoy,
             'numero_orden' => 'OP012020',
             'numero_lote' => ' X0010320',
-            'fecha_creacion' => $fechahoy,
             'tamano_lote' => $tamanototallote,
             'lote_presentacion' => $tamanolotepresentacion,
             'unidad_lote' => $unidadesxlote,

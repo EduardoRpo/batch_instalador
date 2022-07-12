@@ -15,21 +15,24 @@ $app->post('/validacionDatosPedidos', function (Request $request, Response $resp
 
   if (isset($dataPedidos)) {
 
+    $nonProducts = 0;
     $insert = 0;
     $update = 0;
 
+    $dataGlobal = $dataPedidos['data'];
     $data = $dataPedidos['data'];
 
-    $count = sizeof($data);
-    for ($i = 0; $i < $count; $i++) {
+    for ($i = 0; $i < sizeof($dataGlobal); $i++) {
       //Consultar si existe producto en la base de datos
-      $product = $productDao->findProduct($data[$i]['producto']);
+      $product = $productDao->findProduct(trim($dataGlobal[$i]['producto']));
+
       if (!$product) {
-        $nonExistentProducts['pedido'][$i] = $data[$i]['documento'];
-        $nonExistentProducts['referencia'][$i] = $data[$i]['producto'];
+        $nonExistentProducts['pedido'][$i] = trim($dataGlobal[$i]['documento']);
+        $nonExistentProducts['referencia'][$i] = trim($dataGlobal[$i]['producto']);
         unset($data[$i]);
+        $nonProducts = $nonProducts + 1;
       } else {
-        $result = $preBatchDao->findOrders($data[$i]['documento']);
+        $result = $preBatchDao->findOrders($dataGlobal[$i]['documento']);
         $result ? $update = $update + 1 : $insert = $insert + 1;
       }
     }
@@ -47,7 +50,7 @@ $app->post('/validacionDatosPedidos', function (Request $request, Response $resp
       $i++;
     }
 
-    $dataImportOrders = array('success' => true, 'update' => $update, 'insert' => $insert, 'pedidos' => sizeof($data), 'referencias' => sizeof($temp_array));
+    $dataImportOrders = array('success' => true, 'update' => $update, 'insert' => $insert, 'nonProducts' => $nonProducts, 'pedidos' => sizeof($dataPedidos['data']), 'referencias' => sizeof($temp_array));
 
     // Guardar pedidos existentes
     session_start();
