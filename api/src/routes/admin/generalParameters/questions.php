@@ -7,13 +7,13 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 $questionsDao = new QuestionsDao();
 
-$app->get('/questions', function (Request $request, Response $response, $args) use ($modulesDao) {
+/* $app->get('/questions', function (Request $request, Response $response, $args) use ($modulesDao) {
   $Questions = $modulesDao->findAllQuestions();
   $response->getBody()->write(json_encode($Questions, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
-});
+}); */
 
-$app->get('/deleteModules/{id}', function (Request $request, Response $response, $args) use ($modulesDao) {
+/* $app->get('/deleteModules/{id}', function (Request $request, Response $response, $args) use ($modulesDao) {
   $modules = $modulesDao->deleteModules($args['id']);
 
   if ($modules == null)
@@ -41,4 +41,4 @@ $app->post('/saveModules', function (Request $request, Response $response, $args
 
   $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
-});
+}); */
