@@ -15,8 +15,7 @@ function observaciones_incidencias(firma) {
             `¿Durante la fabricación de la orden de producción ${orden} con cantidad total de ${tamano_lote} kg, se presentó alguna incidencia u observación al desarrollar el proceso?`,
             null,
             null
-        )
-        .set("labels", { ok: "Si", cancel: "No" });
+        ).set("labels", { ok: "Si", cancel: "No" });
 
     confirm.set({ transition: "slide" });
 
@@ -31,7 +30,7 @@ function observaciones_incidencias(firma) {
             url: "../../html/php/incidencias.php",
             data: {
                 operacion: 3,
-                firma: firma[0].id,
+                firma: firma.id,
                 modulo: modulo,
                 batch: idBatch,
             },
@@ -72,9 +71,7 @@ function cargarSelectorIncidencias() {
                 let $select = $(`#incidencias${i}`);
                 $select.empty();
 
-                $select.append(
-                    "<option disabled selected>" + "Seleccionar" + "</option>"
-                );
+                $select.append("<option disabled selected>" + "Seleccionar" + "</option>");
                 $select.append("<option>" + " " + "</option>");
 
                 if (i == j) {
