@@ -411,7 +411,7 @@ function registrar_conciliacion(info) {
         modulo,
         idBatch,
         ref_multi,
-        realizo: info[0].id,
+        realizo: info.id,
     };
     alertify
         .confirm(

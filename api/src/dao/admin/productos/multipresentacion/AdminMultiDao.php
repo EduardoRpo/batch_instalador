@@ -28,27 +28,41 @@ class AdminMultiDao
         return $multi;
     }
 
-    public function saveEquipments($dataMulti)
+    public function adminFindAllProducts()
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("INSERT INTO equipos (descripcion, tipo) VALUES (:equipo, :tipo)");
-        $stmt->execute(['equipo' => strtolower($dataMulti['equipo']), 'tipo' => strtolower($dataMulti['tipo'])]);
+        $stmt = $connection->prepare("SELECT referencia, nombre_referencia FROM producto ORDER BY multi ASC");
+        $stmt->execute();
+        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        $produc = $stmt->fetchAll($connection::FETCH_ASSOC);
+    $this->logger->notice("Equipos Obtenidos", array('producto' => $produc));
+        return $produc;
+    }
+
+    public function findMultiByReference($referencia)
+    {
+        $connection = Connection::getInstance()->getConnection();
+        $stmt = $connection->prepare("SELECT referencia, nombre_referencia FROM producto WHERE multi = (SELECT multi FROM producto WHERE referencia = :referencia )");
+        $stmt->execute(['referencia' => $referencia['referencia']]);
+        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        $multi = $stmt->fetchAll($connection::FETCH_ASSOC);
+    $this->logger->notice("Equipos Obtenidos", array('multi' => $multi));
+        return $multi;
+    }
+
+    public function saveMulti($dataMulti)
+    {
+        $connection = Connection::getInstance()->getConnection();
+        $stmt = $connection->prepare("UPDATE producto SET multi = :multi WHERE referencia = :id_multi");
+        $stmt->execute([]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 
-    // public function updateEquipments($dataMulti)
-    // {
-    //     $connection = Connection::getInstance()->getConnection();
-    //     $stmt = $connection->prepare("UPDATE equipos SET descripcion = :equipo, tipo = :tipo WHERE id = :id");
-    //     $stmt->execute(['id' => $dataMulti['id'], 'equipo' => ($dataMulti['equipo']), 'tipo' => strtolower($dataMulti['tipo'])]);
-    //     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
-    // }
-
-    public function deleteMulti($multi)
+    public function deleteMulti($valor)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("UPDATE producto SET multi = $row[0] WHERE referencia = :valor");
-        $stmt->execute(['valor' => $multi]);
+        $stmt = $connection->prepare("UPDATE producto SET multi = 0 WHERE referencia = :valor");
+        $stmt->execute(['valor' => $valor['valor']]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 }
