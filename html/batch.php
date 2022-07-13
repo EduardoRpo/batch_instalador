@@ -252,6 +252,7 @@ include_once("modal/modalPedidos.php");
     <script src="../html/js/global/notificaciones.js"></script>
     <script src="../html/js/batch/calcularLote.js"></script>
     <script src="../html/js/batch/generalPreprogramacion.js"></script>
+    <script src="../html/js/batch/batch_inactivos.js"></script>
     <script src="/html/js/batch/calcWeek.js"></script>
 
 </body>

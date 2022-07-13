@@ -7,38 +7,38 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 $questionsDao = new QuestionsDao();
 
-/* $app->get('/questions', function (Request $request, Response $response, $args) use ($modulesDao) {
-  $Questions = $modulesDao->findAllQuestions();
+$app->post('/questions', function (Request $request, Response $response, $args) use ($questionsDao) {
+  $Questions = $questionsDao->findAllQuestions();
   $response->getBody()->write(json_encode($Questions, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
-}); */
+});
 
-/* $app->get('/deleteModules/{id}', function (Request $request, Response $response, $args) use ($modulesDao) {
-  $modules = $modulesDao->deleteModules($args['id']);
+$app->get('/deleteQuestions/{id}', function (Request $request, Response $response, $args) use ($questionsDao) {
+  $Questions = $questionsDao->deleteQuestions($args['id']);
 
-  if ($modules == null)
-    $resp = array('success' => true, 'message' => 'Modulo eliminado correctamente');
+  if ($Questions == null)
+    $resp = array('success' => true, 'message' => 'Pregunta eliminada correctamente');
 
   $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->post('/saveModules', function (Request $request, Response $response, $args) use ($modulesDao) {
+$app->post('/saveQuestions', function (Request $request, Response $response, $args) use ($questionsDao) {
 
-  $dataModules = $request->getParsedBody();
+  $dataQuestions = $request->getParsedBody();
 
-  if ($dataModules['id']) {
-    $modules = $modulesDao->updateModules($dataModules);
+  if ($dataQuestions['id']) {
+    $questions = $questionsDao->updateQuestions($dataQuestions);
 
-    if ($modules == null)
-      $resp = array('success' => true, 'message' => 'Modulo almacenado correctamente');
+    if ($questions == null)
+      $resp = array('success' => true, 'message' => 'pregunta actualizada correctamente');
   } else {
-    $modules = $modulesDao->saveModules($dataModules);
+    $questions = $questionsDao->saveQuestions($dataQuestions);
 
-    if ($modules == null)
-      $resp = array('success' => true, 'message' => 'Modulo actualizado correctamente');
+    if ($questions == null)
+      $resp = array('success' => true, 'message' => 'pregunta almacenada correctamente');
   }
 
   $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
-}); */
+});

@@ -28,37 +28,27 @@ class QuestionsDao
         return $Questions;
     }
 
-    public function findModule($dataModule)
-    {
-        $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("SELECT id FROM modulo WHERE modulo = :module");
-        $stmt->execute(['module' => $dataModule['module']]);
-        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
-        $module = $stmt->fetch($connection::FETCH_ASSOC);
-        $this->logger->notice("module Obtenidos", array('module' => $module));
-        return $module;
-    }
 
-    public function saveModules($dataModules)
+    public function saveQuestions($dataQuestions)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("INSERT INTO modulo (modulo) VALUES(:modulo)");
-        $stmt->execute(['modulo' => strtoupper($dataModules['module'])]);
+        $stmt = $connection->prepare("INSERT INTO preguntas (pregunta) VALUES(:pregunta)");
+        $stmt->execute(['pregunta' => strtolower($dataQuestions['pregunta'])]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 
-    public function updateModules($dataModules)
+    public function updateQuestions($dataQuestions)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("UPDATE modulo SET modulo = :module WHERE id = :id_module");
-        $stmt->execute(['id_module' => $dataModules['id'], 'module' => strtoupper($dataModules['module'])]);
+        $stmt = $connection->prepare("UPDATE preguntas SET pregunta = :pregunta WHERE id = :id");
+        $stmt->execute(['id' => $dataQuestions['id'], 'pregunta' => strtolower($dataQuestions['pregunta'])]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 
-    public function deleteModules($id)
+    public function deleteQuestions($id)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("DELETE FROM modulo WHERE id = :id");
+        $stmt = $connection->prepare("DELETE FROM preguntas WHERE id = :id");
         $stmt->execute(['id' => $id]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
