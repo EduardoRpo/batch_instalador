@@ -33,4 +33,19 @@ class ObservacionesInactivosDao
         $observaciones = $stmt->fetchAll($connection::FETCH_ASSOC);
         return $observaciones;
     }
+
+    public function insertObservacion($dataBatch)
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        $fechahoy = date("Y-m-d");
+
+        $stmt = $connection->prepare("INSERT INTO observaciones_batch_inactivos (observacion, batch, fecha_registro)
+                                      VALUES (:observacion, :batch, :fecha_registro)");
+        $stmt->execute([
+            'observacion' => $dataBatch['comment'],
+            'batch' => $dataBatch['batch'],
+            'fecha_registro' => $fechahoy
+        ]);
+    }
 }

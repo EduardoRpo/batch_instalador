@@ -89,6 +89,12 @@ $(document).ready(function () {
         '',
         function (evt, value) {
           //alertify.success('You entered: ' + value)
+          if (!value || value == '') {
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.error('Ingrese fecha');
+            return false;
+          }
+
           date = JSON.stringify(value);
           $.ajax({
             type: 'POST',
@@ -96,8 +102,6 @@ $(document).ready(function () {
             data: { date: date },
             success: function (data) {
               message(data);
-              $('#tablaPreBatch').DataTable().clear();
-              $('#tablaPreBatch').DataTable().ajax.reload();
 
               pedidosProgramar.splice(0, pedidosProgramar.length);
               deleteSession();
@@ -108,7 +112,8 @@ $(document).ready(function () {
           deleteSession();
         }
       )
-      .set('type', 'date');
+      .set('type', 'date')
+      .set({ closableByDimmer: false });
   };
 
   // Opcion NO

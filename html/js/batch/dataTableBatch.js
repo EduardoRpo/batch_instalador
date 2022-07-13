@@ -436,13 +436,23 @@ $(document).ready(function () {
       },
     ],
     rowCallback: function (row, data, index) {
-      fecha_tabla = moment(data.fecha_actual);
+      fecha_batch = moment(data.fecha_actual);
       hoy = moment(Date());
 
-      let dias = hoy.diff(fecha_tabla, 'days');
+      let dias = hoy.diff(fecha_batch, 'days');
 
       if (dias > 15) $(row).css('color', 'orange');
       if (dias > 30) $(row).css('color', 'red');
+
+      if (data.fecha_registro) {
+        fecha_observacion = moment(data.fecha_registro);
+        hoy = moment(Date());
+
+        let dias = hoy.diff(fecha_observacion, 'days');
+
+        if (dias > 15) $(row).css('color', 'red');
+        else $(row).css('color', 'orange');
+      }
     },
   });
 
