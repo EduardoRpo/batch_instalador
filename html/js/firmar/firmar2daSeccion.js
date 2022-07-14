@@ -1,6 +1,10 @@
 /* firmar 2da sección  */
 
 function firmar2daSeccion(firma) {
+
+    if (modulo == 5)
+        return
+
     let tanquesOk = 0;
 
     /* validar tanque seleccionados */

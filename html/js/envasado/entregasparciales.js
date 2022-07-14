@@ -29,7 +29,28 @@ $(document).ready(function() {
     })
 
 
-    const unidadesEnvasadas = (data, multi) => {
+    /* Cargar Entregas parciales */
+
+    cargarEntregasParciales = (j, referencia) => {
+
+        $.ajax({
+            type: "post",
+            url: "../../../api/cargarEntregasParciales",
+            data: { batch: idBatch, referencia: referencia },
+            success: function(resp) {
+
+                if (resp.message == 'total') {
+                    $(`#unidadesEnvasadasTotales${j}`).val(resp.unidades);
+                    $(`#unidadesEnvasadas${j}`).val(resp.unidades).prop('disabled', true);
+                    $(`.btnEntregasParciales${j}`).css({ background: "lightgray", border: "gray" }).prop("disabled", true);
+                    $(`.devolucion_realizado${j}`).prop('disabled', false);
+                    flagEntregas = 1
+                }
+            }
+        });
+    }
+
+    unidadesEnvasadas = (data, multi) => {
 
         if (data == "" || data == 0) {
             alertify.set("notifier", "position", "top-right");
@@ -45,7 +66,7 @@ $(document).ready(function() {
 
         alertify.confirm('Entregas Parciales', '¿Entrega Parcial?', function() {
 
-            $.post("../../../api/entregasparciales", data,
+            $.post("/api/entregasparciales", data,
                 function(data, textStatus, jqXHR) {
                     if (data.success == true) {
                         alertify.set("notifier", "position", "top-right");
@@ -63,7 +84,7 @@ $(document).ready(function() {
 
         }, function() {
 
-            $.post("../../../api/entregastotales", data,
+            $.post("/api/entregastotales", data,
                 function(data, textStatus, jqXHR) {
                     if (data.success == true) {
 

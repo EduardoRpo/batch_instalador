@@ -34,22 +34,8 @@ $("#tablaEnvasado").dataTable({
             title: "No Lote",
             data: "numero_lote",
             className: "uniqueClassName",
-            /* render: (data, type, row) => {
-                      'use strict';
-                      return $.number(data, 0, ',', '.');
-                  } */
+
         },
-        /* {
-          title: "Multipresentación",
-          data: "multi",
-          className: "uniqueClassName",
-          render: (data, type, row) => {
-            "use strict";
-            return data == 1
-              ? '<i class="fa fa-superscript link-editarMulti" aria-hidden="true" data-toggle="tooltip" title="Editar Multipresentación" style="color:rgb(59, 131, 189)" aria-hidden="true"></i>'
-              : "";
-          },
-        }, */
         {
             title: "Firmas G",
             data: "cantidad_firmas",
