@@ -116,8 +116,8 @@
 
   <!-- javascript inicializacion datatables -->
   <script src="js/global/notifications.js"></script>
-  <script src="js/disinfectant/tbldisinfectant.js"></script>
-  <script src="js/disinfectant/disinfectant.js"></script>
+  <script src="js/GeneralParameters/disinfectant/tbldisinfectant.js"></script>
+  <script src="js/GeneralParameters/disinfectant/disinfectant.js"></script>
   <script src="js/menu.js"></script>
   <script src="js/cargarDatos.js"></script>
 

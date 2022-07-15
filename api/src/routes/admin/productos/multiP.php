@@ -13,8 +13,8 @@ $app->get('/adminMulti', function (Request $request, Response $response, $args) 
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->post('/deleteMulti', function (Request $request, Response $response, $args) use ($multiPDao) {
-  $dataMulti = $request->getParsedBody();
+
+/*
   foreach($dataMulti as $valor){
   $Multi = $multiPDao->deleteMulti($valor);
   }
@@ -22,8 +22,9 @@ $app->post('/deleteMulti', function (Request $request, Response $response, $args
   if ($Multi)
   $response = array('success' => true, 'message' => 'Multipresentacion eliminada correctamente');
   return $response->withHeader('Content-Type', 'application/json');
-});
 
+);
+*/
 /*
 $app->get('/deleteMulti', function (Request $request, Response $response, $args) use ($multiPDao) {
   $Multi = $multiPDao->deleteMulti($args['multi']);
@@ -37,44 +38,51 @@ $app->get('/deleteMulti', function (Request $request, Response $response, $args)
 
 */
 
-$app->get('/adminProducts', function (Request $request, Response $response, $args) use ($multiPDao){
-  $adminProduc = $multiPDao -> adminFindAllProducts();
+$app->get('/adminProducts', function (Request $request, Response $response, $args) use ($multiPDao) {
+  $adminProduc = $multiPDao->adminFindAllProducts();
   $response->getBody()->write(json_encode($adminProduc, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->post('/adminSearch', function (Request $request, Response $response, $args) use ($multiPDao){
+$app->post('/adminSearch', function (Request $request, Response $response, $args) use ($multiPDao) {
   $dataMulti = $request->getParsedBody();
   $multi = $multiPDao->findMultiByReference($dataMulti);
   $response->getBody()->write(json_encode($multi, JSON_NUMERIC_CHECK));
-  return $response->withHeader('Content-Type','ap');
+  return $response->withHeader('Content-Type', 'ap');
 });
 
 
-/*$app->post('/saveMulti', function (Request $request, Response $response, $args) use ($multiPDao) {
+$app->post('/saveMulti', function (Request $request, Response $response, $args) use ($multiPDao) {
 
   $dataMulti = $request->getParsedBody();
+  $nameGranel = '';
 
-  if ($dataMulti['id']) {
-    $Multi = $multiPDao->updateMulti($dataMulti);
+  $multi = $dataMulti['multi'];
 
-    if ($Multi == null)
-      $resp = array('success' => true, 'message' => 'Modulo almacenado correctamente');
-  } else {
-    $Multi = $multiPDao->saveMulti($dataMulti);
+  for ($i = 0; $i < sizeof($multi); $i++) {
+    $granel = str_split($multi[$i], 7);
 
-    if ($Multi == null)
-      $resp = array('success' => true, 'message' => 'Modulo actualizado correctamente');
+    if ($granel[0] == 'Granel-') {
+      $nameGranel = 'A-' . $granel[1];
+      break;
+    }
   }
+
+  $Multi = $multiPDao->saveMulti($multi, $nameGranel);
+
+  if ($Multi == null)
+    $resp = array('success' => true, 'message' => 'Modulo actualizado correctamente');
 
   $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
-*/
 
-$app->post('/saveMulti', function (Request $request, Response $response, $args) use ($multiPDao){
 
+$app->post('/deleteMulti', function (Request $request, Response $response, $args) use ($multiPDao) {
   $dataMulti = $request->getParsedBody();
-
-  $AN = explode("-", $dataMulti['1']);
+  $NGranel = 0;
+  $WGranel = "Granel-";
+  $matches = array_filter($dataMulti, function ($var) use ($WGranel) {
+    return stristr($var, $WGranel);
+  });
 });

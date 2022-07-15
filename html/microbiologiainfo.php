@@ -397,23 +397,29 @@ include("modal/modal_condicionesMedio.php");
   <script src="../../html/js/utils/waves.js"></script>
   <script src="../../html/js/utils/sidebarmenu.js"></script>
   <script src="../../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
-  <script src="../../html/js/utils/custom.min.js"></script>
+  <script src="/html/js/utils/custom.min.js"></script>
   <script src="../../html/js/utils/datatables.js"></script>
   <script src="../../html/vendor/jquery-confirm/jquery-confirm.min.js"></script>
   <script src="../../assets/plugins/jquery/jquery.number.min.js"></script>
 
-  <script src="../../html/js/microbiologia/microbiologiainfo.js"></script>
-  <script src="../../html/js/global/despeje.js"></script>
-  <script src="../../html/js/firmar/firmar1raSeccion.js"></script>
-  <script src="../../html/js/firmar/firmar2daSeccion.js"></script>
-  <script src="../../html/js/global/propiedadesProducto.js"></script>
-  <script src="../../html/js/global/loadinfo-global.js"></script>
-  <script src="../../html/js/global/tanques.js"></script>
-  <script src="../../html/js/global/equipos.js"></script>
-  <script src="../../html/js/global/incidencias.js"></script>
-  <script src="../../html/js/global/condiciones_medio.js"></script>
+  <script src="/html/js/firmar/firmar1raSeccion.js"></script>
+  <script src="/html/js/firmar/firmar2daSeccion.js"></script>
+
+  <script src="/html/js/global/despeje.js"></script>
+  <script src="/html/js/global/propiedadesProducto.js"></script>
+  <script src="/html/js/global/loadinfo-global.js"></script>
+  <script src="/html/js/global/tanques.js"></script>
+  <script src="/html/js/global/equipos.js"></script>
+  <script src="/html/js/global/incidencias.js"></script>
+  <script src="/html/js/global/condiciones_medio.js"></script>
   <!-- <script src="../../html/js/global/validaciones.js"></script> -->
-  <script src="../../html/js/global/habilitarbtn.js"></script>
+  <script src="/html/js/global/habilitarbtn.js"></script>
+
+  <script src="/html/js/microbiologia/cargarMulti.js"></script>
+  <script src="/html/js/microbiologia/microbiologiainfo.js"></script>
+  <script src="/html/js/microbiologia/cargarBatch.js"></script>
+  <script src="/html/js/microbiologia/deshabilitarRef.js"></script>
+  <script src="/html/js/microbiologia/firmar.js"></script>
 </body>
 
 </html>

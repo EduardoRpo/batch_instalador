@@ -1,29 +1,34 @@
-$('#adicionarMulti').click(function(e) {
-    $('#ModalCrearMulti').modal('show');
-    cargarSelectorProductos();
-});
-
-/* Eliminar multipresentacion */
-
 $(document).ready(function() {
+
+    let refNameMulti
+
+    $('#adicionarMulti').click(function(e) {
+        $('#ModalCrearMulti').modal('show');
+        cargarSelectorProductos();
+    });
+
+
+    /* Eliminar multipresentacion */
+
+    $("#cmbmulti").on('change', function() {
+        refNameMulti = $(this).val();
+    })
+
     $('#btnEliminarMulti').click(function(e) {
         e.preventDefault();
-        let multi = [];
 
-        $("#cmbmulti option").each(function() {
-            multi.push($(this).attr('value'));
-        });
+        let granel = refNameMulti[0].slice(0, -3)
 
-        if (multi.length < 1) {
+        if (granel == 'Granel' || granel == 'Granel-') {
             alertify.set("notifier", "position", "top-right");
-            alertify.error("Seleccione al menos dos productos");
+            alertify.error("No puede eliminar el granel como Multipresentación");
             return false;
         }
 
         $.ajax({
             type: "POST",
             url: "/api/deleteMulti",
-            data: { multi: multi },
+            data: { refMulti: refMulti },
 
             success: function(data) {
                 notificaciones(data)
@@ -99,13 +104,13 @@ $("#busquedamulti").click(function() {
 
 $('#btnBuscarMulti').click(function(e) {
     e.preventDefault();
-    
+
     const busqueda = $('#busquedamulti').val();
 
     $.ajax({
         type: "POST",
         url: '/api/adminSearch',
-        data: {referencia: busqueda },
+        data: { referencia: busqueda },
 
         success: function(response) {
 
@@ -133,7 +138,7 @@ $(document).ready(function() {
         let multi = [];
 
         $("#cmbmulti option").each(function() {
-            multi.push($(this).attr('value'));
+            multi.push($(this).prop('value'));
         });
 
         if (multi.length < 2) {
@@ -145,7 +150,7 @@ $(document).ready(function() {
         $.ajax({
             type: "POST",
             url: "/api/saveMulti",
-            data: {  multi: multi },
+            data: { multi: multi },
 
             success: function(r) {
                 if (r > 1) {
