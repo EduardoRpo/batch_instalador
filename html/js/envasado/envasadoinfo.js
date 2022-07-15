@@ -155,8 +155,8 @@ function busqueda_multi() {
                     $(`#cantidad${j}`).html(formatoCO(cantidad));
                     $(`#total${j}`).html(formatoCO(total));
 
-                    $(`#fila${j}`).attr("hidden", false);
-                    $(`#envasado${j}`).attr("hidden", false);
+                    $(`#fila${j}`).prop("hidden", false);
+                    $(`#envasado${j}`).prop("hidden", false);
                     $(`#envasadoMulti${j}`).html(`ENVASADO PRESENTACIÓN: ${presentacion} REFERENCIA ${referencia}`);
 
                     cargarTablaEnvase(j, referencia, cantidad);

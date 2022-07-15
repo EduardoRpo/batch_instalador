@@ -44,6 +44,7 @@ $(document).ready(function() {
                     $(`#unidadesEnvasadas${j}`).val(resp.unidades).prop('disabled', true);
                     $(`.btnEntregasParciales${j}`).css({ background: "lightgray", border: "gray" }).prop("disabled", true);
                     $(`.devolucion_realizado${j}`).prop('disabled', false);
+                    $(`.envasada${multi}`).val(resp.unidades);
                     flagEntregas = 1
                 }
             }
@@ -113,4 +114,4 @@ $(document).ready(function() {
             cancel: "No, Total",
         });
     }
-});
+})
