@@ -6,7 +6,6 @@ let btn_id;
 /* Valida el usuario si existe en la base de datos */
 
 function enviar() {
-
     $("#m_firmar").modal("hide");
     btn_id = sessionStorage.getItem("idbtn");
 
@@ -72,7 +71,7 @@ function preparar(datos) {
     if (btn_id == "firma3") {
         if (modulo === 5 || modulo === 6)
             almacenar_muestras(info);
-        if (modulo == 10) {
+        else if (modulo == 10) {
             guardarLiberacion(info);
             /* firmar(info); */
         } else
