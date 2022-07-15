@@ -15,6 +15,19 @@ $app->get('/adminMulti', function (Request $request, Response $response, $args) 
 
 $app->post('/deleteMulti', function (Request $request, Response $response, $args) use ($multiPDao) {
   $dataMulti = $request->getParsedBody();
+  $NGranel = 0;
+  $WGranel = "Granel-";
+  $matches = array_filter($dataMulti, function($var) use ($WGranel){return stristr($var, $WGranel); });
+  if($matches)
+  {
+    foreach ($matches as $match){}
+    $splitGranel = str_split($match, 7);
+    $NGranel = 'A-' .$splitGranel[1];
+    $dataMulti = json_encode($NGranel);
+    return $dataMulti;
+  } 
+  }
+  /*
   foreach($dataMulti as $valor){
   $Multi = $multiPDao->deleteMulti($valor);
   }
@@ -22,7 +35,8 @@ $app->post('/deleteMulti', function (Request $request, Response $response, $args
   if ($Multi)
   $response = array('success' => true, 'message' => 'Multipresentacion eliminada correctamente');
   return $response->withHeader('Content-Type', 'application/json');
-});
+*/
+);
 
 /*
 $app->get('/deleteMulti', function (Request $request, Response $response, $args) use ($multiPDao) {

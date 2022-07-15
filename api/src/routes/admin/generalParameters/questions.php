@@ -41,4 +41,8 @@ $app->post('/saveQuestions', function (Request $request, Response $response, $ar
 
   $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
+<<<<<<< HEAD
+}); 
+=======
 });
+>>>>>>> 184cc85a04853a995c777bc0b7b102140294e140

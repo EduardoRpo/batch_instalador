@@ -71,16 +71,9 @@
                   <table id="tblDespeje" class="table-striped row-borde" style="width:100%">
                     <thead>
                       <tr>
-                        <th>Id</th>
-                        <th>Pregunta</th>
-                        <th>Respuesta Correcta</th>
-                        <th>Proceso</th>
-                        <th></th>
-                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
-
                     </tbody>
                   </table>
                 </div>
@@ -126,7 +119,9 @@
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
   <!-- javascript inicializacion datatables -->
-  <script src="js/despejedelinea.js"></script>
+  <script src="js/global/notifications.js"></script>
+  <script src="js/GeneralParameters/lineClarence/tbllineC.js"></script>
+  <script src="js/GeneralParameters/lineClarence/lineClarence.js"></script>
   <script src="js/cargarDatos.js"></script>
 
   <!-- Multiple Seleccion -->
