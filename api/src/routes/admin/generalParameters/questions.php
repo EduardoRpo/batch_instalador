@@ -11,7 +11,7 @@ $app->post('/questions', function (Request $request, Response $response, $args) 
   $Questions = $questionsDao->findAllQuestions();
   $response->getBody()->write(json_encode($Questions, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
-}); 
+});
 
 $app->get('/deleteQuestions/{id}', function (Request $request, Response $response, $args) use ($questionsDao) {
   $Questions = $questionsDao->deleteQuestions($args['id']);
@@ -41,4 +41,8 @@ $app->post('/saveQuestions', function (Request $request, Response $response, $ar
 
   $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
+<<<<<<< HEAD
 }); 
+=======
+});
+>>>>>>> 184cc85a04853a995c777bc0b7b102140294e140

@@ -61,6 +61,9 @@ require_once __DIR__ . '/src/routes/app/batchTanques/batchTanques.php';
 require_once __DIR__ . '/src/routes/app/multi/multi.php';
 require_once __DIR__ . '/src/routes/app/multi/calcTamanioLote.php';
 
+//Observaciones
+require_once __DIR__ . '/src/routes/app/observaciones/observacionesInactivos.php';
+
 //require_once __DIR__ . '/src/routes/cargo.php';
 require_once __DIR__ . '/src/routes/app/global/granel.php';
 require_once __DIR__ . '/src/routes/app/global/preguntas.php';

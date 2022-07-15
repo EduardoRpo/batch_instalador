@@ -1,6 +1,6 @@
 /* Habilitar Botones */
 
-function habilitarbotones() {
+habilitarbotones = () => {
     for (let index = 1; index < 5; index++) {
         $(`.controlpeso_realizado${index}`).prop("disabled", false);
     }

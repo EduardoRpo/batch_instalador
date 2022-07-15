@@ -577,7 +577,7 @@ include('modal/image.php')
                         <label for="">Unidades Envasadas a la fecha</label>
                         <input class="form-control text-center" type="number" name="unidadesEnvasadasTotales2" id="unidadesEnvasadasTotales2" readonly>
                       </div>
-                      
+
                       <div class="col-md-2 mt-3">
                         <div style="margin-top:33px"></div>
                         <button class="btn btn-danger btnEntregasParciales2" id="btnEntregasParciales2">Guardar Entregas Parciales</button>
@@ -1128,33 +1128,39 @@ include('modal/image.php')
           <script src="../../assets/plugins/jquery/jquery.min.js"></script>
           <script src="../../assets/plugins/bootstrap/js/tether.min.js"></script>
           <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-          <script src="../../html/vendor/datatables/datatables.min.js" type="text/javascript"></script>
-          <script src="../../html/js/utils/jquery.slimscroll.js"></script>
-          <script src="../../html/js/utils/waves.js"></script>
-          <script src="../../html/js/utils/sidebarmenu.js"></script>
+          <script src="/html/vendor/datatables/datatables.min.js" type="text/javascript"></script>
+          <script src="/html/js/utils/jquery.slimscroll.js"></script>
+          <script src="/html/js/utils/waves.js"></script>
+          <script src="/html/js/utils/sidebarmenu.js"></script>
           <script src="../../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
-          <script src="../../html/js/utils/custom.min.js"></script>
-          <script src="../../html/vendor/jquery-confirm/jquery-confirm.min.js"></script>
+          <script src="/html/js/utils/custom.min.js"></script>
+          <script src="/html/vendor/jquery-confirm/jquery-confirm.min.js"></script>
           <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+          <script src="/html/js/global/loadinfo-global.js"></script>
+          <script src="/html/js/global/despeje.js"></script>
+          <script src="/html/js/global/tanques.js"></script>
+          <script src="/html/js/global/muestras.js"></script>
+          <script src="/html/js/global/condiciones_medio.js"></script>
+          <script src="/html/js/global/cargarBatchMulti.js"></script>
+          <script src="/html/js/global/incidencias.js"></script>
+          <script src="/html/js/global/equipos.js"></script>
+          <script src="/html/js/global/image.js"></script>
+          <script src="/html/js/global/habilitarbtn.js"></script>
+          <script src="/html/js/global/presentacionReferenciaMulti.js"></script>
           
-          <script src="../../html/js/global/loadinfo-global.js"></script>
-          <script src="../../html/js/global/despeje.js"></script>
-          <script src="../../html/js/global/tanques.js"></script>
-          <script src="../../html/js/global/muestras.js"></script>
-          <script src="../../html/js/global/condiciones_medio.js"></script>
-          <script src="../../html/js/global/cargarBatchMulti.js"></script>
-          <script src="../../html/js/global/incidencias.js"></script>
-          <script src="../../html/js/global/equipos.js"></script>
-          <script src="../../html/js/global/image.js"></script>
-          <script src="../../html/js/global/presentacionReferenciaMulti.js"></script>
-          <script src="../../html/js/global/habilitarbtn.js"></script>
+          <script src="/html/js/firmar/firmar1raSeccion.js"></script>
+          <script src="/html/js/firmar/firmar2daSeccion.js"></script>
+          <script src="/html/js/firmar/firmar2daSeccionMulti.js"></script>
           
-          <script src="../../html/js/firmar/firmar1raSeccion.js"></script>
-          <script src="../../html/js/firmar/firmar2daSeccion.js"></script>
-          <script src="../../html/js/firmar/firmar2daSeccionMulti.js"></script>
-          
-          <script src="../../html/js/envasado/envasadoinfo.js"></script>
-          <script src="../../html/js/envasado/entregasparciales.js"></script>
+          <script src="/html/js/envasado/envasadoinfo.js"></script>
+          <script src="/html/js/envasado/lote.js"></script>
+          <script src="/html/js/envasado/calcPeso.js"></script>
+          <script src="/html/js/envasado/tablaEnvase.js"></script>
+          <script src="/html/js/envasado/materialEnvasado.js"></script>
+          <script src="/html/js/envasado/materialSobrante.js"></script>
+          <script src="/html/js/envasado/entregasParciales.js"></script>
+          <script src="/html/js/envasado/btnEnvasado.js"></script>
 
 </body>
 

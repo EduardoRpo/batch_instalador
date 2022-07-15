@@ -8,7 +8,7 @@ for (let i = 1; i < 5; i++)
 
 /* validar y Cargar informacion almacenada en el batch */
 
-function cargarBatch() {
+cargarBatch = () => {
     $.ajax({
         type: "POST",
         url: "../../html/php/despeje.php",
@@ -35,7 +35,7 @@ function cargarBatch() {
 
 /* Carga desinfectante y observaciones almacenadas en el batch */
 
-function cargarDesinfectante() {
+cargarDesinfectante = () => {
     $.ajax({
         type: "POST",
         url: "../../html/php/despeje.php",
@@ -85,7 +85,7 @@ function cargarDesinfectante() {
 
 /* Cargar firma 2 */
 
-function cargarfirma2() {
+cargarfirma2 = () => {
     if (typeof id_multi == "undefined") return false;
     if (r1 > 1 || r2 > 1 || r3 > 1) return false;
 
@@ -98,7 +98,10 @@ function cargarfirma2() {
 
         success: function(response) {
             let info = JSON.parse(response);
-            if (info == 3) return false;
+            if (info == 3) {
+                $(`.controlpeso_realizado${id_multi}`).prop("disabled", false);
+                return false;
+            }
 
             for (i = 1; i <= info.length; i++) {
                 $(`#validarLote${id_multi}`).val(batch.numero_lote);
@@ -112,7 +115,7 @@ function cargarfirma2() {
     });
 }
 
-function cargardevolucionmaterial() {
+cargardevolucionmaterial = () => {
     $.ajax({
         type: "POST",
         url: "../../html/php/envasado.php",
@@ -182,7 +185,7 @@ function cargardevolucionmaterial() {
 }
 
 /* Cargar conciliacion  */
-function cargar_conciliacion() {
+cargar_conciliacion = () => {
     let operacion = 2;
     $.post(
         "../../html/php/conciliacion_rendimiento.php",
@@ -217,7 +220,7 @@ function cargar_conciliacion() {
 
 /* Registro de Firma */
 
-function firmado(datos, posicion) {
+firmado = (datos, posicion) => {
     if (datos == undefined) return false;
 
     let template =

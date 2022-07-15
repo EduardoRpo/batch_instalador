@@ -64,19 +64,26 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
     $newDataPedidos[$i]['lote'] = $sumArrayGranel[$dataPedidos[$i]['granel']];
     $newDataPedidos[$i]['programacion'] = '';
     $newDataPedidos[$i]['presentacion'] = $presentacion['presentacion'];
-    $newDataPedidos[$i]['multi'][$i] = array(
-      'pedido' => $dataPedidos[$i]['numPedido'], 'referencia' => $dataPedidos[$i]['referencia'], 'cantidadunidades' => $dataPedidos[$i]['cantidad_acumulada'],
-      'tamaniopresentacion' => $dataPedidos[$i]['tamanio_lote'], 'fecha_insumo' => $dataPedidos[$i]['fecha_insumo']
-    );
 
-    //Agregar al multi con la misma referencia
+
+    //Agregar al multi con el mismo granel
     for ($j = 0; $j < $count; $j++) {
       $j == $i ? $j = $j + 1 : $j;
-      if ($dataPedidos[$j]['granel'] == $newDataPedidos[$i]['ref'])
-        $newDataPedidos[$i]['multi'][$j] = array(
+      if ($dataPedidos[$j]['granel'] == $newDataPedidos[$i]['ref']) {
+        // Validar multi con la misma referencia
+        if ($dataPedidos[$i]['referencia'] == $dataPedidos[$j]['referencia']) {
+          $newDataPedidos[$i]['multi'][$j] = array(
+            'pedido' => "{$dataPedidos[$i]['numPedido']} - {$dataPedidos[$j]['numPedido']}", 'referencia' => $dataPedidos[$j]['referencia'], 'cantidadunidades' => ($dataPedidos[$i]['cantidad_acumulada'] + $dataPedidos[$j]['cantidad_acumulada']),
+            'tamaniopresentacion' => ($dataPedidos[$i]['tamanio_lote'] + $dataPedidos[$j]['tamanio_lote']), 'fecha_insumo' => "{$dataPedidos[$j]['fecha_insumo']} - {$dataPedidos[$i]['fecha_insumo']}"
+          );
+        } else $newDataPedidos[$i]['multi'][$j] = array(
           'pedido' => $dataPedidos[$j]['numPedido'], 'referencia' => $dataPedidos[$j]['referencia'], 'cantidadunidades' => $dataPedidos[$j]['cantidad_acumulada'],
           'tamaniopresentacion' => $dataPedidos[$j]['tamanio_lote'], 'fecha_insumo' => $dataPedidos[$j]['fecha_insumo']
         );
+      } else $newDataPedidos[$i]['multi'][$i] = array(
+        'pedido' => $dataPedidos[$i]['numPedido'], 'referencia' => $dataPedidos[$i]['referencia'], 'cantidadunidades' => $dataPedidos[$i]['cantidad_acumulada'],
+        'tamaniopresentacion' => $dataPedidos[$i]['tamanio_lote'], 'fecha_insumo' => $dataPedidos[$i]['fecha_insumo']
+      );
     }
 
     //Eliminar las referencias de los graneles que la suma supera los 2500 kg
@@ -101,11 +108,20 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
     }
   }
 
+  // Almacenar en variable session las multipresentaciones
+  for ($i = 0; $i < sizeof($dataPedidos); $i++) {
+    $multipresentaciones[$i] = array(
+      'pedido' => $dataPedidos[$i]['numPedido'], 'referencia' => $dataPedidos[$i]['referencia'], 'cantidadunidades' => $dataPedidos[$i]['cantidad_acumulada'],
+      'tamaniopresentacion' => $dataPedidos[$i]['tamanio_lote'], 'fecha_insumo' => $dataPedidos[$i]['fecha_insumo']
+    );
+    session_start();
+    $_SESSION['dataMulti'] = $multipresentaciones;
+  }
+
   //Resetear llaves arrays
   $newDataPedidos = array_values($newDataPedidos);
 
   //Almacenar en variables de session la variable $dataPedidos
-  session_start();
   $_SESSION['dataPedidos'] = $newDataPedidos;
 
   $sumArrayTotal = array('granel' => array_keys($sumArrayGranel), 'producto' => $producto, 'tamanio' => array_values($sumArrayGranel), 'cantidades' => array_values($sumArrayCantidades));
