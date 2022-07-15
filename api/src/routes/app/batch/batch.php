@@ -97,6 +97,8 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
     if ($resp == null) {
       $multi = json_decode($dataBatch[$i]['multi'], true);
 
+//Validar proceso porque duplica datos
+
       for ($j = 0; $j < sizeof($multi); $j++)
         if ($multi[$j]['pedido']) {
           $resp = $batchDao->updateBatchPedido($id_batch['id'], $multi[$j]);
