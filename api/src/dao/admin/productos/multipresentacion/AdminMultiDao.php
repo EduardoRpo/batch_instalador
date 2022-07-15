@@ -50,12 +50,14 @@ class AdminMultiDao
         return $multi;
     }
 
-    public function saveMulti($dataMulti)
+    public function saveMulti($dataMulti, $nameGranel)
     {
-        $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("UPDATE producto SET multi = :multi WHERE referencia = :id_multi");
-        $stmt->execute([]);
-        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        foreach($dataMulti as $multi){   
+            $connection = Connection::getInstance()->getConnection();
+            $stmt = $connection->prepare("UPDATE producto SET multi = :multi WHERE referencia = :id_multi");
+            $stmt->execute(['multi'=>$nameGranel, 'id_multi'=>$multi]);
+            $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        }
     }
 
     public function deleteMulti($valor)

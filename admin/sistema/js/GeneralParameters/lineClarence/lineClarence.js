@@ -4,16 +4,14 @@ $('#adicionarParametro').click(function(e) {
     e.preventDefault();
     $("#frmadicionarPreguntaModulo").slideToggle();
     $('#btnguardarProceso').html('Crear');
-    cargarSelectorProceso();
-    cargarSelectorPreguntas();
 });
 
 /* Cargar selector Proceso */
 
-function cargarSelectorProceso() {
+cargarSelectorProceso = () => {
 
     $.ajax({
-        url:'/api/modules',
+        url: '/api/modules',
 
         success: function(data) {
 
@@ -34,19 +32,18 @@ function cargarSelectorProceso() {
 
 /* Cargar selector Preguntas */
 
-function cargarSelectorPreguntas() {
+cargarSelectorPreguntas = () => {
 
     $.ajax({
         url: '/api/questions',
-
         success: function(data) {
             let $select = $('#cmbPregunta');
             $select.empty();
 
-            $select.append('<option disabled selected>' + "Seleccionar" + '</option>');
+            $select.append('<option disabled selected>"Seleccionar"</option>');
 
             $.each(data, function(i, value) {
-                $select.append('<option value ="' + value.id + '">' + value.pregunta + '</option>');
+                $select.append(`<option value =${value.id}>${value.pregunta}</option>`);
             });
         },
         error: function(response) {
@@ -54,6 +51,9 @@ function cargarSelectorPreguntas() {
         }
     })
 }
+
+cargarSelectorProceso();
+cargarSelectorPreguntas();
 
 /* Cargar datos para Actualizar registros */
 
@@ -63,14 +63,12 @@ $(document).on('click', '.link-editar', function(e) {
     let pregunta = $(this).parent().parent().children().eq(1).text();
     let respuesta = $(this).parent().parent().children().eq(2).text();
     let modulo = $(this).parent().parent().children().eq(3).text();
-    console.log (modulo);
-
 
     $("#frmadicionarPreguntaModulo").slideDown();
 
-    $(`#cmbPregunta option:contains(${pregunta})`).attr('selected', true);
-    $(`#cmbRespuesta option:contains(${respuesta})`).attr('selected', true);
-    $(`#cmbProceso option:contains(${modulo})`).attr('selected', true);
+    $(`#cmbPregunta option:contains(${pregunta})`).prop('selected', true);
+    $(`#cmbRespuesta option:contains(${respuesta})`).prop('selected', true);
+    $(`#cmbProceso option:contains(${modulo})`).prop('selected', true);
 
 
 });
@@ -123,7 +121,7 @@ $('#btnguardarDespeje').click(function(e) {
 
 /* Actualizar tabla */
 
-function refreshTable() {
+refreshTable = () => {
     $('#tblDespeje').DataTable().clear();
     $('#tblDespeje').DataTable().ajax.reload();
 }
