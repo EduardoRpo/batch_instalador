@@ -122,8 +122,8 @@
 
   <!-- javascript inicializacion datatables -->
   <script src="js/global/notifications.js"></script>
-  <script src="js/equipments/tblequipments.js"></script>
-  <script src="js/equipments/equipments.js"></script>
+  <script src="js/GeneralParameters/equipments/tblequipments.js"></script>
+  <script src="js/GeneralParameters/equipments/equipments.js"></script>
   <script src="js/menu.js"></script>
   <script src="js/cargarDatos.js"></script>
 

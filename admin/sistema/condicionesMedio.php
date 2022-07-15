@@ -111,8 +111,8 @@
 
   <!-- javascript inicializacion datatables -->
   <script src="js/global/notifications.js"></script>
-  <script src="js/conditions/tblConditions.js"></script>
-  <script src="js/conditions/conditions.js"></script>
+  <script src="js/GeneralParameters/conditions/tblConditions.js"></script>
+  <script src="js/GeneralParameters/conditions/conditions.js"></script>
   <script src="js/menu.js"></script>
   <script src="js/cargarDatos.js"></script>
 

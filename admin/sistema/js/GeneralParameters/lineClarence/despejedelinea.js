@@ -1,4 +1,4 @@
-let editar;
+
 
 /* Mostrar Menu seleccionado */
 $('.contenedor-menu .menu a').removeAttr('style');

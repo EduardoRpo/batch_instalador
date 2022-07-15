@@ -16,7 +16,7 @@ $(document).on('click', '.link-editar', function (e) {
   e.preventDefault();
 
   let id = this.id;
-  let pregunta = $(this).parent().parent().children().eq(2).text();
+  let pregunta = $(this).parent().parent().children().eq(1).text();
 
   $('#frmadicionarPregunta').slideDown();
   $('#btnAlmacenarPregunta').html('Actualizar');
