@@ -133,7 +133,7 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
 //No programar lotes
 $app->get('/eliminarLote', function (Request $request, Response $response, $args) {
   session_start();
-  unset($_SESSION['dataPedidos']);
+  unset($_SESSION['dataPedidos'], $_SESSION['dataMulti']);
   $response->getBody()->write(json_encode(JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });

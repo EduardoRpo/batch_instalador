@@ -54,6 +54,7 @@ $app->get('/batchcerrados', function (Request $request, Response $response, $arg
 });
 
 $app->post('/saveBatch', function (Request $request, Response $response, $args) use ($batchDao, $ultimoBatchDao, $tanquesDao, $controlFirmasDao, $multiDao, $EMPedidosRegistroDao) {
+  session_start();
   $dataBatch = $request->getParsedBody();
   $flag_tanques = 1;
 
@@ -64,7 +65,6 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
 
   //Si el data esta vacio
   if (sizeof($dataBatch) == 0) {
-    session_start();
     $dataBatch = $_SESSION['dataPedidos'];
     for ($i = 0; $i < sizeof($dataBatch); $i++)
       $dataBatch[$i]['date'] = $date;
@@ -100,10 +100,12 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
       for ($j = 0; $j < sizeof($multi); $j++)
         if ($multi[$j]['pedido']) {
           $resp = $batchDao->updateBatchPedido($id_batch['id'], $multi[$j]);
-        } else
+        } else {
           $resp = $batchDao->updateBatchPedido($id_batch['id'], $dataBatch[0]);
+          $_SESSION['dataMulti'] = $multi;
+        }
     }
-    
+
     $resp = $EMPedidosRegistroDao->updateEMPedidosRegistro();
   }
 
