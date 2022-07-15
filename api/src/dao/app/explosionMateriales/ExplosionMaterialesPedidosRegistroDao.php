@@ -16,18 +16,23 @@ class ExplosionMaterialesPedidosRegistroDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
-    public function updateEMPedidosRegistro($dataPedido)
+    public function updateEMPedidosRegistro()
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("UPDATE explosion_materiales_pedidos_registro 
+        session_start();
+        $multipresentaciones = $_SESSION['dataMulti'];
+
+        foreach ($multipresentaciones as $multipresentacion) {
+            $stmt = $connection->prepare("UPDATE explosion_materiales_pedidos_registro 
                                       SET cantidad_acumulada = cantidad_acumulada + :cantidad_acumulada, fecha_insumo = :fecha_insumo, estado = 1 
                                       WHERE pedido = :pedido AND id_producto = :referencia");
-        $stmt->execute([
-            'pedido' => $dataPedido['pedido'],
-            'referencia' => $dataPedido['referencia'],
-            'cantidad_acumulada' => $dataPedido['cantidadunidades'],
-            'fecha_insumo' => $dataPedido['fecha_insumo']
-        ]);
+            $stmt->execute([
+                'pedido' => $multipresentacion['pedido'],
+                'referencia' => $multipresentacion['referencia'],
+                'cantidad_acumulada' => $multipresentacion['cantidadunidades'],
+                'fecha_insumo' => $multipresentacion['fecha_insumo']
+            ]);
+        }
 
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
