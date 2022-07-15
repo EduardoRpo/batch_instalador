@@ -96,13 +96,15 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
     /* Actualizar pedido batch */
     if ($resp == null) {
       $multi = json_decode($dataBatch[$i]['multi'], true);
+
       for ($j = 0; $j < sizeof($multi); $j++)
         if ($multi[$j]['pedido']) {
           $resp = $batchDao->updateBatchPedido($id_batch['id'], $multi[$j]);
-          $resp = $EMPedidosRegistroDao->updateEMPedidosRegistro();
         } else
           $resp = $batchDao->updateBatchPedido($id_batch['id'], $dataBatch[0]);
     }
+    
+    $resp = $EMPedidosRegistroDao->updateEMPedidosRegistro();
   }
 
   /* Notificaciones*/
