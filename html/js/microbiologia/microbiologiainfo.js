@@ -1,14 +1,15 @@
-/* Cargue tabla especificaciones */
-
-let dataMicro = [];
-modulo = 8;
-$("#observacionesLote").slideUp();
-
-$('.m2').hide();
-$('.m3').hide();
-$('.m4').hide();
-
 $(document).ready(function() {
+    /* Cargue tabla especificaciones */
+
+    let dataMicro = [];
+    modulo = 8;
+    $("#observacionesLote").slideUp();
+
+    $('.m2').hide();
+    $('.m3').hide();
+    $('.m4').hide();
+
+
     $(".metodo").html("Siembra Total");
     $(`.microbiologia_verificado`).prop("disabled", true);
 
@@ -21,11 +22,9 @@ $(document).ready(function() {
         e.preventDefault();
         $("#observacionesLote").slideUp();
     });
-});
 
-/* validar si existe multipresentacion */
+    /* validar si existe multipresentacion */
 
-$(document).ready(function() {
 
     cargar = (btn, Nobtn) => {
         let confirm = alertify.confirm('Samara Cosmetics', '¿La información cargada es correcta?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
@@ -172,4 +171,5 @@ $(document).ready(function() {
     };
 
     multi()
+
 });

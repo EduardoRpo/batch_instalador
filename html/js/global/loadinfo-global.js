@@ -41,8 +41,8 @@ $(document).ready(function() {
     setTimeout(() => {
         if (modulo != undefined && modulo != 7 && modulo != 8 && modulo != 9)
             cargarBatch();
-        if (modulo == 8)
-            cargarBatchMicro();
+        /* if (modulo == 8)
+            cargarBatchMicro(); */
     }, 1300);
 });
 
@@ -109,45 +109,11 @@ $.ajax({
     fecha.setDate(fecha.getDate() + dias);
     $("#in_fecha_programacion").val(data.fecha_programacion);
 
-
-
     localStorage.setItem("orden", data.numero_orden);
     localStorage.setItem("tamano_lote", data.tamano_lote);
     batchInfo = JSON.stringify(batch)
     sessionStorage.setItem("batch", batchInfo);
 });
-
-//Promise
-
-/* const batch = new Promise(function(resolve, reject) {
-    $.ajax({
-        url: `/api/batch/${idBatch}`,
-        type: "GET",
-    }).done((data, status, xhr) => {
-        resolve(data);
-    }).fail(function(jqXHR, textStatus) {
-        reject('there is an error')
-    });
-})
-
-batch.then((data) => {
-    const tamano_lote = formatoCO(data.tamano_lote);
-
-    $("#in_numero_orden").val(data.numero_orden);
-    $("#in_numero_lote").val(data.numero_lote);
-    $("#in_referencia").val(data.referencia);
-    $("#in_nombre_referencia").val(data.nombre_referencia);
-    $("#in_linea").val(data.linea);
-    $("#in_tamano_lote").val(tamano_lote);
-
-    var fecha = new Date(data.fecha_programacion);
-    var dias = 2; // Número de días a agregar
-    fecha.setDate(fecha.getDate() + dias);
-    $("#in_fecha_programacion").val(data.fecha_programacion);
-}).catch((error)=>{
-    console.log(error)
-}) */
-
 
 /* Calcular la fecha del dia  */
 
@@ -157,13 +123,7 @@ function fechaHoy() {
     var mes = d.getMonth() + 1;
     var dia = d.getDate();
     var fechaActual =
-        d.getFullYear() +
-        "/" +
-        (mes < 10 ? "0" : "") +
-        mes +
-        "/" +
-        (dia < 10 ? "0" : "") +
-        dia;
+        d.getFullYear() + "/" + (mes < 10 ? "0" : "") + mes + "/" + (dia < 10 ? "0" : "") + dia;
 }
 
 //Validar seleccion en microbiologia y fisicoquimico

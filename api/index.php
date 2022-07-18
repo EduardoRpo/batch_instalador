@@ -89,8 +89,12 @@ require_once __DIR__ . '/src/routes/app/explosionMateriales/pedidos.php';
 /* pdf */
 require_once __DIR__ . '/src/routes/app/pdf/pdf.php';
 
+/* Microbiologia */
+require_once __DIR__ . '/src/routes/app/process/micro/micro.php';
 
+/* Users */
 require_once __DIR__ . '/src/routes/app/usuarios/usuarios.php';
+
 
 
 // Run app

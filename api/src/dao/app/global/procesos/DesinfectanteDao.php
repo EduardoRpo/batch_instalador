@@ -95,4 +95,18 @@ class DesinfectanteDao
       //     registrarFirmas($conn, $batch, $modulo);
     }
   }
+
+
+  public function findDisinfectantByBatchandModule($batch, $module)
+  {
+    $conn = Connection::getInstance()->getConnection();
+    $connection = Connection::getInstance()->getConnection();
+    $stmt = $connection->prepare("SELECT * FROM `batch_desinfectante_seleccionado` 
+                                  WHERE batch = :batch AND modulo = :modulo");
+    $stmt->execute(['batch' => $batch, 'modulo' => $module]);
+    $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+    $disinfectant = $stmt->fetchAll($connection::FETCH_ASSOC);
+    $this->logger->notice("disinfectant got", array('disinfectant' => $disinfectant));
+    return $disinfectant;
+  }
 }

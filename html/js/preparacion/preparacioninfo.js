@@ -104,7 +104,7 @@ $.ajax({
 });
 
 /* Carga instructivo preparación para producto */
-debugger
+
 $.ajax({
         url: `/api/instructivos/${referencia}`,
         type: "GET",
@@ -119,10 +119,10 @@ $.ajax({
 
             $("#pasos_instructivo")
                 .append(`<a href="javascript:void(0)" onclick="procesoTiempo(event)" 
-            class="proceso-instructivo" attr-indx="${indx}" attr-id="${instructivo.id
-          }" id="proceso-instructivo${i}" 
-            attr-tiempo="${instructivo.tiempo}">PASO ${indx + 1}: ${instructivo.pasos
-          } </a>  <br/>`);
+                        class="proceso-instructivo" attr-indx="${indx}" attr-id="${instructivo.id
+                    }" id="proceso-instructivo${i}" 
+                            attr-tiempo="${instructivo.tiempo}">PASO ${indx + 1}: ${instructivo.pasos
+                    } </a>  <br/>`);
             tiempoTotal = tiempoTotal + instructivo.tiempo;
             i++;
         });
@@ -139,7 +139,10 @@ $.ajax({
 function procesoTiempo(event) {
     pasoEjecutado = pasoEjecutado + 1;
     validar = controlTanques();
-    if (validar == 0) return false;
+    if (validar == 0) {
+        pasoEjecutado = 0
+        return false;
+    }
 
     let tiempo = $(event.target).attr("attr-tiempo");
     let id = $(event.target).attr("attr-id");

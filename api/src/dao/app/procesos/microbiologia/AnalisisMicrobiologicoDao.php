@@ -16,6 +16,19 @@ class AnalisisMicrobiologicoDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
+    public function findAllInfoMicroByBatch($batch)
+    {
+        $connection = Connection::getInstance()->getConnection(); 
+        $stmt = $connection->prepare("SELECT * FROM `batch_analisis_microbiologico` 
+                                      WHERE batch = :batch");
+        $stmt->execute(['batch' => $batch]);
+        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        $analisis = $stmt->fetchAll($connection::FETCH_ASSOC);
+
+        $this->logger->notice("dataAnalisi get", array('dataMicro' => $analisis));
+        return $analisis ;
+    }
+
     public function analisisMicrobiologiaRealizo($dataBatch)
     {
         $connection = Connection::getInstance()->getConnection();

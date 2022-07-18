@@ -1,7 +1,7 @@
 $(document).ready(function() {
     /* Registro de Firma */
 
-    function firmado(datos, posicion) {
+    firmado = (datos, posicion) => {
         let template =
             '<img id=":id:" src=":firma:" alt="firma_usuario" height="130">';
         let parent;
