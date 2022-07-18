@@ -24,9 +24,12 @@ $(document).ready(function() {
 
     function cargarselectores(selector) {
         $.ajax({
-            method: "POST",
-            url: "php/c_productos.php",
-            data: { tabla: selector, operacion: 4 },
+            //method: "POST",
+            //url: "php/c_productos.php",
+            //data: { tabla: selector, operacion: 4} 
+            url: `/api/loadSelector/${selector}`,
+            data :{ tabla : selector }
+            ,
 
             success: function(response) {
                 var info = JSON.parse(response);
@@ -53,10 +56,10 @@ $(document).ready(function() {
 
     function cargar_selector_bases() {
         $.ajax({
-            method: "POST",
-            url: "php/c_productos.php",
-            data: { operacion: 5 },
-
+            //method: "POST",
+            //url: "php/c_productos.php",
+            //data: { operacion: 5 },
+            url: "/api/findBase",
             success: function(response) {
                 var info = JSON.parse(response);
 

@@ -2,6 +2,7 @@
 
 
 use BatchRecord\dao\ProductosDao;
+use Psr\Http\Client\RequestExceptionInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
@@ -58,5 +59,17 @@ $app->get('/deleteProduct/{id}', function (Request $request, Response $response,
     $resp = array('error' => true, 'message' => 'No es posible eliminar el producto, existe información asociada a él');
 
   $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
+});
+
+$app->get('/loadSelector/{selector}', function (Request $request, Response $response, $args) use ($productosDao) {
+  $selector = $productosDao->findSelector($args['selector']);
+  return $selector;
+
+});
+
+$app->get('/findBase', function (Request $request, Response $response, $args) use ($productosDao) {
+  $base = $productosDao->findBase();
+  $response->getBody()->write(json_encode($base, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
