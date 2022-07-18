@@ -114,8 +114,8 @@ if (!empty($_POST)) {
 
         case 5: //cargar select base
             $query = "SELECT DISTINCT np.id, np.nombre as producto_base 
-                  FROM instructivos_base ib 
-                  INNER JOIN nombre_producto np ON np.id = ib.producto";
+                FROM instructivos_base ib 
+                INNER JOIN nombre_producto np ON np.id = ib.producto";
             ejecutarQuerySelect($conn, $query);
             break;
         case 6: // Cargar imagenes
