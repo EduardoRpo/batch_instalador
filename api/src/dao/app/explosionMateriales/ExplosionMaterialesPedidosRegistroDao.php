@@ -19,7 +19,6 @@ class ExplosionMaterialesPedidosRegistroDao
     public function updateEMPedidosRegistro()
     {
         $connection = Connection::getInstance()->getConnection();
-        session_start();
         $multipresentaciones = $_SESSION['dataMulti'];
 
         foreach ($multipresentaciones as $multipresentacion) {
