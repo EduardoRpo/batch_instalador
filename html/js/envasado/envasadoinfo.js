@@ -122,7 +122,7 @@ function cargar(btn, idbtn) {
 
 $(document).ready(function() {
     setTimeout(() => {
-        batch_record();
+        /* batch_record(); */
         busqueda_multi();
         deshabilitarbotones();
     }, 1300);

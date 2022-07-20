@@ -24,21 +24,21 @@ class IntructivoPreparacionDao
   {
     $connection = Connection::getInstance()->getConnection();
 
-    $sql = "SELECT * FROM producto WHERE referencia =:referencia";
-    $query = $connection->prepare($sql);
-    $query->execute(['referencia' => $idProduct]);
+    // $sql = "SELECT * FROM producto WHERE referencia =:referencia";
+    // $query = $connection->prepare($sql);
+    // $query->execute(['referencia' => $idProduct]);
 
-    $data = $query->fetch(PDO::FETCH_ASSOC);
-    $tabla = $data["base_instructivo"];
-    $producto = $data["instructivo"];
+    // $data = $query->fetch(PDO::FETCH_ASSOC);
+    // $tabla = $data["base_instructivo"];
+    // $producto = $data["instructivo"];
 
-    if ($tabla == 1) {
+    //if ($tabla == 1) {
       $stmt = $connection->prepare("SELECT * FROM instructivo_preparacion WHERE id_producto = :referencia");
       $stmt->execute(['referencia' => $idProduct]);
-    } else {
-      $stmt = $connection->prepare("SELECT id, pasos, tiempo FROM instructivos_base WHERE producto = :producto");
-      $stmt->execute(['producto' => $producto]);
-    }
+    // } else {
+    //   $stmt = $connection->prepare("SELECT id, pasos, tiempo FROM instructivos_base WHERE producto = :producto");
+    //   $stmt->execute(['producto' => $producto]);
+    // }
 
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $instructivo = $stmt->fetchAll($connection::FETCH_ASSOC);

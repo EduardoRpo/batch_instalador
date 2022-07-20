@@ -14,28 +14,13 @@ function firmar2daSeccion(firma) {
         /* carga data de acuerdo con el modulo */
 
     if (modulo == 2)
-        data = {
-            operacion: 1,
-            tanques,
-            tanquesOk,
-            modulo,
-            lotes,
-            idBatch,
-        };
+        data = { operacion: 1, tanques, tanquesOk, modulo, lotes, idBatch, };
 
     if (modulo == 3) {
         equipos = [];
         equipos.push($('#sel_agitador').val());
         equipos.push($('#sel_marmita').val());
-        data = {
-            operacion: 1,
-            equipos,
-            tanques,
-            tanquesOk,
-            modulo,
-            idBatch,
-            controlProducto,
-        };
+        data = { operacion: 1, equipos, tanques, tanquesOk, modulo, idBatch, controlProducto };
     }
 
     if (modulo == 4) {
@@ -43,44 +28,22 @@ function firmar2daSeccion(firma) {
         const obs_desinfectante = $('#in_observaciones').val();
         desinfectante === undefined ? (desinfectante = '') : desinfectante;
         const obs_batch = $('#observacionesAprobacion').val();
-        data = {
-            operacion: 1,
-            tanques,
-            tanquesOk,
-            modulo,
-            idBatch,
-            desinfectante,
-            obs_desinfectante,
-            obs_batch,
-            realizo: firma.id,
-            controlProducto,
-        };
+        data = { operacion: 1, tanques, tanquesOk, modulo, idBatch, desinfectante, obs_desinfectante, obs_batch, realizo: firma.id, controlProducto };
     }
 
     if (modulo == 9) {
         const desinfectante = $('#sel_producto_desinfeccion').val();
         const obs_desinfectante = $('#in_observaciones').val();
         const obs_batch = $('#observacionesLoteRechazado').val();
-        data = {
-            operacion: 1,
-            desinfectante,
-            obs_desinfectante,
-            obs_batch,
-            modulo,
-            idBatch,
-            realizo: firma.id,
-            controlProducto,
-        };
+        data = { operacion: 1, desinfectante, obs_desinfectante, obs_batch, modulo, idBatch, realizo: firma.id, controlProducto, };
     }
 
     $.ajax({
         type: 'POST',
-        //url: '../../html/php/batch_tanques.php',
-        url: '../../api/saveBatchTanques',
+        url: '/api/saveBatchTanques',
         data: data,
 
         success: function(response) {
-            //let info = JSON.parse(response);
 
             if (response) {
                 alertify.set('notifier', 'position', 'top-right');
@@ -117,36 +80,7 @@ function firmarSeccionCierreProceso(firma) {
         (obs_batch = $('#observacionesLoteRechazado').val()) :
         (obs_batch = '');
 
-    //confirmación de incidencias
-
-    /* var confirm = alertify
-          .confirm(
-              'Incidencias y Observaciones',
-              `¿Durante la fabricación de la orden de producción ${orden} con cantidad total de
-         ${tamano_lote} kg, se presentó alguna incidencia u observación al desarrollar el proceso?`,
-              null,
-              null,
-          )
-          .set('labels', { ok: 'Si', cancel: 'No' })
-
-      confirm.set('onok', function() {*/
     cargarObsIncidencias(firma);
-    /*}) */
-
-    /* confirm.set('oncancel', function() {
-          alertify.success('No reportó Incidencias')
-
-          $.ajax({
-              method: 'POST',
-              url: '../../html/php/incidencias.php',
-              data: { operacion: 3, realizo: firma[0].id, modulo, idBatch },
-
-              success: function(response) {
-                  $('#modalObservaciones').modal('hide')
-                  firmar(firma)
-              },
-          })
-      }) */
     deshabilitarbtn();
 }
 

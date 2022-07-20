@@ -158,7 +158,7 @@ $(document).on('click', '#calcTamanioLote', function(e) {
     var sel = combo.options[combo.selectedIndex].text;
     
     $.ajax({
-        url: `../../api/product/${sel}`,
+        url: `/api/product/${sel}`,
         data: { operacion: "4", id: sel },
     
         success: function(r) {

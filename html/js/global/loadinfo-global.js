@@ -8,6 +8,41 @@ let cantidadpreguntas;
 let completo = 0;
 let text;
 
+/* cargar batch al finalizar la carga de los demas procesos */
+
+dataBatch = async() => {
+    let result
+    try {
+        result = await $.ajax({ url: `/api/batch/${idBatch}` })
+        return result
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+cargarBatch = async() => {
+    const data = await dataBatch()
+    batch = data;
+    const tamano_lote = formatoCO(data.tamano_lote);
+
+    $("#in_numero_orden").val(data.numero_orden);
+    $("#in_numero_lote").val(data.numero_lote);
+    $("#in_referencia").val(data.referencia);
+    $("#in_nombre_referencia").val(data.nombre_referencia);
+    $("#in_linea").val(data.linea);
+    $("#in_tamano_lote").val(tamano_lote);
+
+    var fecha = new Date(data.fecha_programacion);
+    var dias = 2; // Número de días a agregar
+    fecha.setDate(fecha.getDate() + dias);
+    $("#in_fecha_programacion").val(data.fecha_programacion);
+
+    localStorage.setItem("orden", data.numero_orden);
+    localStorage.setItem("tamano_lote", data.tamano_lote);
+    batchInfo = JSON.stringify(batch)
+    sessionStorage.setItem("batch", batchInfo);
+}
+
 $(document).ready(function() {
     Date.prototype.toDateInputValue = function() {
         var local = new Date(this);
@@ -33,93 +68,10 @@ $(document).ready(function() {
             $('.preparacion_verificado').prop('disabled', true);
         }
     }, 500);
-});
 
-/* cargar batch al finalizar la carga de los demas procesos */
-
-$.ajax({
-    url: `/api/batch/${idBatch}`,
-    type: 'GET',
-}).done((data, status, xhr) => {
-    batch = data;
-    const tamano_lote = formatoCO(data.tamano_lote);
-
-    $("#in_numero_orden").val(data.numero_orden);
-    $("#in_numero_lote").val(data.numero_lote);
-    $("#in_referencia").val(data.referencia);
-    $("#in_nombre_referencia").val(data.nombre_referencia);
-    $("#in_linea").val(data.linea);
-    $("#in_tamano_lote").val(tamano_lote);
-
-    var fecha = new Date(data.fecha_programacion);
-    var dias = 2; // Número de días a agregar
-    fecha.setDate(fecha.getDate() + dias);
-    $("#in_fecha_programacion").val(data.fecha_programacion);
-
-    localStorage.setItem("orden", data.numero_orden);
-    localStorage.setItem("tamano_lote", data.tamano_lote);
-    batchInfo = JSON.stringify(batch)
-    sessionStorage.setItem("batch", batchInfo);
-});
-
-$(document).ready(function() {
-    setTimeout(() => {
-        if (modulo != undefined && modulo != 7 && modulo != 8 && modulo != 9)
-            cargarBatch();
-        /* if (modulo == 8)
-            cargarBatchMicro(); */
-    }, 1300);
-
-
-    /* Modulo */
-
-    if (
-        modulo != 4 &&
-        modulo != 7 &&
-        modulo != 8 &&
-        modulo != 9 &&
-        modulo != 10 &&
-        modulo != undefined
-    )
-        carguepreguntas(modulo);
-
-    if (modulo != 7 && modulo != 10 && modulo != undefined) {
-        desinfectantes();
-        //cargar_condicionesMedio();
-        validarTanques(modulo);
-    }
-
-    /* Carga de datos de informacion del batch record seleccionado */
-
-    function batch_record() {
-        $.ajax({
-            url: `/api/batch/${idBatch}`,
-            type: 'GET',
-        }).done((data, status, xhr) => {
-            batch = data;
-            const tamano_lote = formatoCO(data.tamano_lote);
-
-            $("#in_numero_orden").val(data.numero_orden);
-            $("#in_numero_lote").val(data.numero_lote);
-            $("#in_referencia").val(data.referencia);
-            $("#in_nombre_referencia").val(data.nombre_referencia);
-            $("#in_linea").val(data.linea);
-            $("#in_tamano_lote").val(tamano_lote);
-
-            var fecha = new Date(data.fecha_programacion);
-            var dias = 2; // Número de días a agregar
-            fecha.setDate(fecha.getDate() + dias);
-            $("#in_fecha_programacion").val(data.fecha_programacion);
-
-            localStorage.setItem("orden", data.numero_orden);
-            localStorage.setItem("tamano_lote", data.tamano_lote);
-            batchInfo = JSON.stringify(batch)
-            sessionStorage.setItem("batch", batchInfo);
-        });
-    }
     /* Calcular la fecha del dia  */
 
-    function fechaHoy() {
+    fechaHoy = () => {
         var d = new Date();
 
         var mes = d.getMonth() + 1;
@@ -130,7 +82,7 @@ $(document).ready(function() {
 
     //Validar seleccion en microbiologia y fisicoquimico
 
-    let validarSeleccion = () => {
+    validarSeleccion = () => {
         if ($("input[name='rdbtnConfirmacion']:radio").is(':checked')) {} else {
             alertify.set('notifier', 'position', 'top-right');
             alertify.error('Seleccione Rechazado o Aprobado para el Batch Record ');

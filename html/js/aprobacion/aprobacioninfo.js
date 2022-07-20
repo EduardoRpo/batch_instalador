@@ -1,5 +1,11 @@
 modulo = 4;
-batch_record();
+
+loadBatch = async() => {
+    await cargarBatch();
+    cargarTanques()
+}
+
+loadBatch()
 
 //valida que todos los campos esten diligenciados para el proceso y la firma
 
@@ -47,38 +53,3 @@ function cargar(btn, idbtn) {
         $("#m_firmar").modal("show");
     });
 }
-
-/* Cargue control de Tanques */
-
-function cargaTanquesControl(cantidad) {
-    if (cantidad > 10) {
-        cantidad = 10;
-    }
-
-    for (var i = 1; i <= cantidad; i++) {
-        $(".checkbox-aprobacion").append(
-            `<input type="checkbox" id="chkcontrolTanques${i}" onclick="validar_condicionesMedio();" class="chkcontrol" style="height: 30px; width:30px;">`
-        );
-    }
-    tanques = i - 1;
-}
-
-function deshabilitarbtn() {
-    $(".aprobacion_realizado")
-        .css({ background: "lightgray", border: "gray" })
-        .prop("disabled", true);
-    $(".aprobacion_verificado").prop("disabled", false);
-}
-
-promedioDensidad = () => {
-    $.ajax({
-        type: "POST",
-        url: "../../html/php/promedioDensidad.php",
-        data: { batch: idBatch },
-        success: function(response) {
-            data = JSON.parse(response);
-            $("#in_densidad").val(data[0].densidad.toFixed(2));
-        },
-    });
-};
-//promedioDensidad();

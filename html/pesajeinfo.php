@@ -273,7 +273,6 @@ include_once('modal/modal_condicionesMedio.php');
     </div>
   </div>
 
-  
   <script src="../../assets/plugins/jquery/jquery.min.js"></script>
   <script src="../../assets/plugins/bootstrap/js/tether.min.js"></script>
   <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
@@ -286,22 +285,9 @@ include_once('modal/modal_condicionesMedio.php');
   <script src="../../html/vendor/jquery-confirm/jquery-confirm.min.js"></script>
   <!-- <script src="../../html/js/datatables.js"></script> -->
 
-  <script src="../../html/js/global/loadinfo-global.js"></script>
-  <script src="../../html/js/pesaje/pesajeinfo.js"></script>
-  <script src="../../html/js/pesaje/tblFormula.js"></script>
-  <script src="../../html/js/global/despeje.js"></script>
-  <script src="../../html/js/global/tanques.js"></script>
-  <script src="../../html/js/global/condiciones_medio.js"></script>
-  <script src="../../html/js/firmar/firmar1raSeccion.js"></script>
-  <script src="../../html/js/firmar/firmar2daSeccion.js"></script>
-  <script src="../../html/js/global/cargarBatch.js"></script>
-  <script src="../../html/js/global/incidencias.js"></script>
-  <script src="../../html/js/global/etiquetas.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-  <script src="../../html/js/global/descargarPDF.js"></script>
-
   <!-- <script src="../../html/vendor/pdf/jspdf.min.js"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
   <script src="../../html/js/global/descargarPDF.js"></script>
 
   <!-- Buttons -->
@@ -314,8 +300,17 @@ include_once('modal/modal_condicionesMedio.php');
   <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
   <script src="//unpkg.com/xlsx/dist/xlsx.full.min.js" type="text/javascript"></script>
 
+  <?php require_once __DIR__ . '/partials/globalScripts.php' ?>
 
-  <!-- <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.21/b-1.6.2/b-flash-1.6.2/datatables.min.js"></script> -->
+  <script src="/html/js/pesaje/pesajeinfo.js"></script>
+  <script src="/html/js/pesaje/validacionesPesaje.js"></script>
+  <script src="/html/js/pesaje/btnPesaje.js"></script>
+  <script src="/html/js/pesaje/calcTanques.js"></script>
+  <script src="/html/js/pesaje/cargos.js"></script>
+  <script src="/html/js/pesaje/conversion.js"></script>
+  <script src="/html/js/pesaje/tblFormula.js"></script>
+
+
 
 
 </body>

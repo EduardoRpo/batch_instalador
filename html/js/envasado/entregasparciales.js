@@ -34,8 +34,8 @@ $(document).ready(function() {
     cargarEntregasParciales = (j, referencia) => {
 
         $.ajax({
-            type: "post",
-            url: "../../../api/cargarEntregasParciales",
+            type: "POST",
+            url: "/api/cargarEntregasParciales",
             data: { batch: idBatch, referencia: referencia },
             success: function(resp) {
 
