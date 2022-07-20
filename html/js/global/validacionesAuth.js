@@ -12,11 +12,14 @@ $(document).ready(function() {
     //Validacion de control de tanques
 
     verificacionControlTanques = (id) => {
-        if (id == 'pesaje_realizado' || id == "preparacion_realizado") {
+
+        if (id == 'pesaje_realizado' || id == "preparacion_realizado" || id == "aprobacion_realizado") {
             validar = controlTanques()
-            if (validar == 0)
+            if (validar == 0) {
+                alertify.set('notifier', 'position', 'top-right')
+                alertify.error('Seleccione el Tanque.')
                 return false
-            else
+            } else
                 return true
         } else
             return true
@@ -37,7 +40,9 @@ $(document).ready(function() {
     }
 
     verificacionOrdenFirmas = (id) => {
-        if (id !== 'despeje_realizado' && id !== 'pesaje_realizado' && id !== "preparacion_realizado") {
+        array = ['despeje_realizado', 'pesaje_realizado', "preparacion_realizado", "aprobacion_realizado"]
+
+        if (!array.includes(id)) {
             if (id !== 'despeje_verificado') {
                 if ($('#despeje_verificado').is(':disabled') == false) {
                     alertify.set('notifier', 'position', 'top-right')
@@ -55,35 +60,43 @@ $(document).ready(function() {
 
     auth = async() => {
         result = await verificacionControlTanques(id)
+        if (!result) return false
 
         if (result) {
             result = await verificacionDesinfeccion()
-            if (!result)
-                return false
+            if (!result) return false
         }
+
         if (result) {
             result = await verificacionOrdenFirmas(id)
-            if (!result)
-                return false
+            if (!result) return false
         }
+
         if (modulo == 2 && result) {
             result = await verificacionCargaLotes(id)
-            if (!result)
-                return false
+            if (!result) return false
         }
+
         if (modulo == 3 && result) {
             result = await validacionInstructivo(id)
-            if (!result)
-                return false
+            if (!result) return false
         }
-        if (modulo == 3 && result) {
+
+        if (modulo == 3 || modulo == 4 && result) {
             result = await validacionEspecificaciones(id)
-            if (!result)
-                return false
+            if (!result) return false
         }
+
+        /* if (modulo == 4 && result) {
+            result = await validarParametrosControl();
+            if (!result) return false
+        } */
 
         $('#usuario').val('')
         $('#clave').val('')
         $('#m_firmar').modal('show')
     }
+
+
+
 });

@@ -15,13 +15,4 @@ $(document).ready(function() {
             return true
     }
 
-    validacionEspecificaciones = (id) => {
-        if (id == "preparacion_realizado") {
-            validar = cargarResultadosEspecificaciones();
-            if (validar == 0) return false
-            else return true;
-        } else
-            return true
-    }
-
 });

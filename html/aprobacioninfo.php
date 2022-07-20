@@ -353,13 +353,18 @@ include('modal/modal_condicionesMedio.php');
   <script src="/html/js/global/tanques.js"></script>
   <script src="/html/js/global/propiedadesProducto.js"></script>
   <script src="/html/js/global/etiquetas.js"></script>
+  <script src="/html/js/global/validacionesAuth.js"></script>
+  <script src="/html/js/global/auth.js"></script>
+  <script src="/html/js/global/controller.js"></script>
   <script src="/html/js/global/validacionEspecificaciones.js"></script>
+  <script src="/html/js/global/validacionesEspecificaciones.js"></script>
   
   <script src="/html/js/firmar/firmar1raSeccion.js"></script>
   <script src="/html/js/firmar/firmar2daSeccion.js"></script>
   
   <script src="/html/js/aprobacion/cargarBatchAprobacion.js"></script>
   <script src="/html/js/aprobacion/aprobacioninfo.js"></script>
+  <script src="/html/js/aprobacion/validacionesAprobacion.js"></script>
   <script src="/html/js/aprobacion/btnAprobacion.js"></script>
   <script src="/html/js/aprobacion/tanquesAprob.js"></script>
   <script src="/html/js/aprobacion/densidad.js"></script>

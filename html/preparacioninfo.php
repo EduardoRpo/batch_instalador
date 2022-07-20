@@ -466,7 +466,7 @@ include("modal/modal_condicionesMedio.php");
   <script src="/html/js/global/requerimiento_ajuste.js"></script>
   <script src="/html/js/global/controlEspecificaciones.js"></script>
   <script src="/html/js/global/propiedadesProducto.js"></script>
-
+  <script src="/html/js/global/validacionesEspecificaciones.js"></script>
 
   <script src="/html/js/preparacion/instructivo.js"></script>
   <script src="/html/js/preparacion/validacionesPreparacion.js"></script>
