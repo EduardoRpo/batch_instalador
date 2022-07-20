@@ -71,18 +71,20 @@ $app->post('/saveMulti', function (Request $request, Response $response, $args) 
   $Multi = $multiPDao->saveMulti($multi, $nameGranel);
 
   if ($Multi == null)
-    $resp = array('success' => true, 'message' => 'Modulo actualizado correctamente');
+    $resp = array('success' => true, 'message' => 'Multipresentacion creada correctamente');
 
   $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
 
 
-$app->post('/deleteMulti', function (Request $request, Response $response, $args) use ($multiPDao) {
-  $dataMulti = $request->getParsedBody();
-  $NGranel = 0;
-  $WGranel = "Granel-";
-  $matches = array_filter($dataMulti, function ($var) use ($WGranel) {
-    return stristr($var, $WGranel);
+$app->get('/deleteMulti/{Shref}', function (Request $request, Response $response, $args) use ($multiPDao) {
+$Multi = $multiPDao->deleteMulti($args['Shref']);
+
+  if ($Multi == null)
+    $resp = array('success' => true, 'message' => 'Multipresentacion eliminada correctamente');
+
+  $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
   });
-});
+

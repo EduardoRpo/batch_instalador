@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
     let refNameMulti
+    let Shref
 
     $('#adicionarMulti').click(function(e) {
         $('#ModalCrearMulti').modal('show');
@@ -12,29 +13,29 @@ $(document).ready(function() {
 
     $("#cmbmulti").on('change', function() {
         refNameMulti = $(this).val();
+        Shref = $(this).val();
     })
 
     $('#btnEliminarMulti').click(function(e) {
         e.preventDefault();
-
         let granel = refNameMulti[0].slice(0, -3)
 
         if (granel == 'Granel' || granel == 'Granel-') {
             alertify.set("notifier", "position", "top-right");
             alertify.error("No puede eliminar el granel como Multipresentación");
-            return false;
+            return false; 
         }
-
+        else
+        { 
         $.ajax({
-            type: "POST",
-            url: "/api/deleteMulti",
-            data: { refMulti: refMulti },
 
+            url: `/api/deleteMulti/${Shref}`,
             success: function(data) {
                 notificaciones(data)
             }
         });
-    });
+    }
+});
 });
 
 /* Cargar productos */
@@ -74,7 +75,7 @@ $('#busquedaproductos').keyup(function() {
     var optlist = $('#cmbproductos').empty();
     opts.each(function() {
         if (rxp.test(this[1])) {
-            optlist.append($('<option/>').attr('value', this[0]).text(this[1]));
+            optlist.append($('<option/>').prop('value', this[0]).text(this[1]));
         }
     });
 });
@@ -89,8 +90,8 @@ $().ready(function() {
     $('#borrar').click(function() {
         return !$('#cmbmulti option:selected').remove().appendTo('#cmbproductos');
     });
+    //('.quitartodos').click(function() { $('#cmbmulti option').each(function() { $(this).remove().appendTo('#cmbproductos'); }); });
     //$('.pasartodos').click(function() { $('#cmbproductos option').each(function() { $(this).remove().appendTo('#cmbmulti'); }); });
-    //$('.quitartodos').click(function() { $('#cmbmulti option').each(function() { $(this).remove().appendTo('#cmbproductos'); }); });
     //$('.submit').click(function() { $('#cmbmulti option').prop('selected', 'selected'); });
 });
 
@@ -152,16 +153,9 @@ $(document).ready(function() {
             url: "/api/saveMulti",
             data: { multi: multi },
 
-            success: function(r) {
-                if (r > 1) {
-                    alertify.set("notifier", "position", "top-right");
-                    alertify.success("Multipresentación creada satisfactoriamente.");
-                    $('#ModalCrearMulti').modal('hide');
-                    refreshTable();
-                } else {
-                    alertify.set("notifier", "position", "top-right");
-                    alertify.error("Error.");
-                }
+            success: function(data) {
+                notificaciones(data);
+                
             }
         });
     });

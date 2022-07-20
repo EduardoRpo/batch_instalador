@@ -31,11 +31,11 @@ class AdminMultiDao
     public function adminFindAllProducts()
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("SELECT referencia, nombre_referencia FROM producto ORDER BY multi ASC");
+        $stmt = $connection->prepare("SELECT referencia, nombre_referencia FROM producto WHERE referencia LIKE '%M%' OR referencia LIKE '%G%'");
         $stmt->execute();
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         $produc = $stmt->fetchAll($connection::FETCH_ASSOC);
-    $this->logger->notice("Equipos Obtenidos", array('producto' => $produc));
+    $this->logger->notice("Productos Obtenidos", array('producto' => $produc));
         return $produc;
     }
 
@@ -46,7 +46,7 @@ class AdminMultiDao
         $stmt->execute(['referencia' => $referencia['referencia']]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         $multi = $stmt->fetchAll($connection::FETCH_ASSOC);
-    $this->logger->notice("Equipos Obtenidos", array('multi' => $multi));
+    $this->logger->notice("Productos Obtenidos", array('multi' => $multi));
         return $multi;
     }
 
@@ -60,11 +60,11 @@ class AdminMultiDao
         }
     }
 
-    public function deleteMulti($valor)
+    public function deleteMulti($dataMulti)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("UPDATE producto SET multi = 0 WHERE referencia = :valor");
-        $stmt->execute(['valor' => $valor['valor']]);
+        $stmt = $connection->prepare("UPDATE producto SET multi = '' WHERE referencia = :valor");
+        $stmt->execute(['valor' => $dataMulti]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 }

@@ -101,7 +101,7 @@ if (!empty($_POST)) {
             break;
 
         case 4: // Cargar Selectores
-            $tabla = $_POST['tabla'];
+            /*$tabla = $_POST['tabla'];
 
             if ($tabla == 'ph' || $tabla == 'viscosidad' || $tabla == 'densidad_gravedad' || $tabla == 'grado_alcohol') {
                 $query = "SELECT id, CONCAT(limite_inferior, ' - ', limite_superior) as nombre FROM $tabla";
@@ -111,11 +111,11 @@ if (!empty($_POST)) {
 
             ejecutarQuerySelect($conn, $query);
             break;
-
+*/
         case 5: //cargar select base
             $query = "SELECT DISTINCT np.id, np.nombre as producto_base 
-                  FROM instructivos_base ib 
-                  INNER JOIN nombre_producto np ON np.id = ib.producto";
+                FROM instructivos_base ib 
+                INNER JOIN nombre_producto np ON np.id = ib.producto";
             ejecutarQuerySelect($conn, $query);
             break;
         case 6: // Cargar imagenes

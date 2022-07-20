@@ -32,7 +32,7 @@
 
                                         <div class="derecha mt-5">
                                             <button class="btn btn-primary" id="btnCrearMulti">Crear</button>
-                                            <button class="btn btn-primary" id="btnEliminarMulti">Eliminar</button>
+                                            <button class="btn btn-secondary" id="btnEliminarMulti" >Eliminar</button>
                                         </div>
                                     </div>
                                     <hr>
