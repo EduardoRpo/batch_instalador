@@ -31,6 +31,14 @@ $(document).ready(function() {
         });
     }
 
+    loadQuestion = async() => {
+        await carguepreguntas(modulo);
+        await cargarDesinfectantes();
+        cargarBatch();
+    }
+
+    loadQuestion()
+
     /* Carga desinfectante y observaciones almacenadas en el batch */
 
     cargarDesinfectante = () => {
@@ -218,4 +226,4 @@ $(document).ready(function() {
         let firma = template.replace(":firma:", datos);
         parent.append(firma).html;
     }
-});
+})

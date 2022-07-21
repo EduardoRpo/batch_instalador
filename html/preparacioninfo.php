@@ -446,23 +446,33 @@ include("modal/modal_condicionesMedio.php");
   <script src="../../html/js/preparacion/clock.js"></script>
   <script src="../../assets/plugins/jquery/jquery.number.min.js"></script>
 
-  <script src="../../html/js/global/loadinfo-global.js"></script>
-  <script src="../../html/js/global/despeje.js"></script>
-  <script src="../../html/js/global/tanques.js"></script>
-  <script src="../../html/js/global/condiciones_medio.js"></script>
-  <script src="../../html/js/global/cargarBatch.js"></script>
-  <script src="../../html/js/pesaje/pesajeinfo.js"></script>
+  <!-- <script src="/html/js/global/loadinfo-global.js"></script>
+  <script src="/html/js/global/preguntas.js"></script>
+  <script src="/html/js/global/despeje.js"></script>
+  <script src="/html/js/global/tanques.js"></script>
+  <script src="/html/js/global/condiciones_medio.js"></script>
+  <script src="/html/js/global/cargarBatch.js"></script> 
+  <script src="/html/js/global/incidencias.js"></script>
+  <script src="/html/js/global/etiquetas.js"></script>
+  <script src="/html/js/global/auth.js"></script>
+  <script src="/html/js/global/controller.js"></script>-->
+  <!-- <script src="/html/js/pesaje/pesajeinfo.js"></script> 
+  <script src="/html/js/firmar/firmar1raSeccion.js"></script>
+  <script src="/html/js/firmar/firmar2daSeccion.js"></script>-->
 
-  <script src="../../html/js/firmar/firmar1raSeccion.js"></script>
-  <script src="../../html/js/firmar/firmar2daSeccion.js"></script>
-  <script src="../../html/js/global/equipos.js"></script>
-  <script src="../../html/js/global/etiquetas.js"></script>
-  <script src="../../html/js/global/incidencias.js"></script>
-  <script src="../../html/js/global/requerimiento_ajuste.js"></script>
-  <script src="../../html/js/global/controlEspecificaciones.js"></script>
-  <script src="../../html/js/preparacion/preparacioninfo.js"></script>
-  <script src="../../html/js/global/propiedadesProducto.js"></script>
+  <?php require_once __DIR__ . '/partials/globalScripts.php' ?>
 
+  <script src="/html/js/global/equipos.js"></script>
+  <script src="/html/js/global/requerimiento_ajuste.js"></script>
+  <script src="/html/js/global/controlEspecificaciones.js"></script>
+  <script src="/html/js/global/propiedadesProducto.js"></script>
+  <script src="/html/js/global/validacionesEspecificaciones.js"></script>
+
+  <script src="/html/js/preparacion/instructivo.js"></script>
+  <script src="/html/js/preparacion/validacionesPreparacion.js"></script>
+  <script src="/html/js/preparacion/btnPreparacion.js"></script>
+  <script src="/html/js/preparacion/procesoInstructivo.js"></script>
+  <script src="/html/js/preparacion/preparacioninfo.js"></script>
 
 
 </body>
