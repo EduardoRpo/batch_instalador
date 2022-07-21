@@ -233,6 +233,8 @@ include_once("modal/modalPedidos.php");
 
     <?php require_once __DIR__ . '/partials/scriptsJS.php'; ?>
 
+    <script src="/html/js/global/searchData.js"></script>
+
     <script src="/html/js/batch/tables/tableBatchAbiertos.js"></script>
     <script src="/html/js/batch/tables/tableBatchEliminados.js"></script>
     <script src="/html/js/batch/tables/tableBatchInactivos.js"></script>

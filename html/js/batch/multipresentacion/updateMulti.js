@@ -1,35 +1,24 @@
 $(document).ready(function() {
 
+    APISEL = '/api/multiref/'
+    API = '/api/multi/'
+
     //Actualizar Multipresentacion
 
     $(document).on("click", ".link-editarMulti", function(e) {
         editar = true;
         id_batch = this.id
-        cargarMultipresentacion(id_batch)
+        ref = $(this).parent().parent().children().eq(1).text();
+        cargarMultipresentacion()
     });
 
-    adicionarMultipresentaciones = async(id_batch) => {
-        const resp = await busquedaMultiByBatch(id_batch)
-        for (let i = 0; i < resp.length; i++)
-            $("#adicionarMultipresentacion").trigger("click");
-    }
+    cargarMultipresentacion = async() => {
+        await adicionarMultipresentaciones()
+        resp = await buscarDataMulti(`${API}${id_batch}`)
 
-    busquedaMultiByBatch = async(id_batch) => {
-        //let result
-        try {
-            result = await $.ajax({ url: `/api/multi/${id_batch}` })
-            return result
-        } catch (error) {
-            console.error(error)
-        }
-    }
-
-    cargarMultipresentacion = async(id_batch) => {
-        await adicionarMultipresentaciones(id_batch)
-        await cargarSelectMulti(result)
         $("#Modal_Multipresentacion").modal("show");
+        let lote = 0
 
-        resp = result
         for (let i = 0; i < resp.length; i++) {
             $(`#MultiReferencia${i + 1}`).val(resp[i].referencia);
             $(`#cantidadMulti${i + 1}`).val(resp[i].cantidad);
@@ -39,6 +28,18 @@ $(document).ready(function() {
             lote = lote + resp[i].total
             $(`#sumaMulti`).val(lote);
         };
+    }
+
+    adicionarMultipresentaciones = async() => {
+        const resp = await buscarDataMulti(`${API}${ref}`)
+        for (let i = 0; i < resp.length; i++) {
+            $("#adicionarMultipresentacion").trigger("click");
+            cargarSelectMulti(resp)
+        }
+    }
+
+    buscarDataMulti = (urlApi) => {
+        return searchData(urlApi)
     }
 
 });

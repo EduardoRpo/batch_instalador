@@ -1,4 +1,5 @@
 var multi;
+var ref
 let objetos;
 editar = false;
 let ajuste = 0;

@@ -19,7 +19,7 @@ $(document).ready(function() {
             <input type="text" class="form-control" id="presentacionMulti${index}" name="presentacionMulti" placeholder="Presentación" hidden>
             <button class="btn btn-warning btneliminarMulti${index}" onclick="eliminarMulti(${index});" type="button">X</button>`
             );
-            //cargarSelectMulti(multi);
+            cargarSelectMulti(multi);
         }
     }
 
