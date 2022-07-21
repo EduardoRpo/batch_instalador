@@ -62,11 +62,6 @@ $app->get('/deleteProduct/{id}', function (Request $request, Response $response,
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->get('/loadSelector/{selector}', function (Request $request, Response $response, $args) use ($productosDao) {
-  $selector = $productosDao->findSelector($args['selector']);
-  return $selector;
-
-});
 
 $app->get('/findBase', function (Request $request, Response $response, $args) use ($productosDao) {
   $base = $productosDao->findBase();

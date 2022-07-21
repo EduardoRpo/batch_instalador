@@ -1,4 +1,4 @@
-<?php require_once('php/sesion/sesion.php');?>
+<?php require_once('php/sesion/sesion.php'); ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -58,7 +58,7 @@
               </div>
               <div class="card-body">
                 <button class="btn btn-primary mb-5" id="nombre_producto" onclick="parametros(id, 1);">Nombres Productos</button>
-                <button class="btn btn-light mb-5" id="notificacion_sanitaria" onclick="parametros(id, 2)">Notificacion Sanitaria</button>
+                <button class="btn btn-light tblLoad mb-5" id="notificacion_sanitaria">Notificacion Sanitaria</button>
                 <button class="btn btn-primary mb-5" id="linea" onclick="parametros(id, 3)">Linea</button>
                 <button class="btn btn-light mb-5" id="marca" onclick="parametros(id, 4)">Marca</button>
                 <button class="btn btn-primary mb-5" id="propietario" onclick="parametros(id, 5)">Propietario</button>
@@ -75,12 +75,12 @@
               <div class="card-header">
                 <h4 class="card-title">Nombres Productos</h4>
                 <hr>
-                <button type="button" class="btn btn-primary" onclick="adicionar(1);">Adicionar</button>
+                <button type="button" class="btn btn-primary" id="adicionarNombre">Adicionar</button>
                 <form id="frmAdicionar1" class="frmAdicionar1" style="display: none;">
                   <label for=""><b>Nombre Producto</b></label>
-                  <input type="text" name="txt-Id1" id="txt-Id1" class="form-control" hidden>
+                  <input type="text" name="txt-Id1" id="txt-Id1" class="form-control" readonly hidden ${id}>
                   <input type="text" name="input1" id="input1" class="form-control" placeholder="Nombre Producto" style="width: 350px;">
-                  <button type="button" class="btn btn-primary tabla1" id="nombre_producto" onclick="guardarDatosGenerales(id, 1);">Guardar</button>
+                  <button type="button" class="btn btn-primary" id="btnnombreProducto">Guardar</button>
                 </form>
                 <hr>
               </div>
@@ -89,14 +89,13 @@
                   <table id="tbl1" class="table-striped row-borde" style="width:100%">
                     <thead>
                       <tr>
-                        <th>id</th>
-                        <th>Nombre Producto</th>
+                        <th></th>
+                        <th></th>
                         <th></th>
                         <th></th>
                       </tr>
                     </thead>
                     <tbody>
-
                     </tbody>
                   </table>
                 </div>
@@ -113,31 +112,19 @@
                 <h4 class="card-title">Notificaciones Sanitarias</h4>
 
                 <hr>
-                <button type="button" class="btn btn-primary" onclick="adicionar(2);">Adicionar</button>
-                <form id="frmAdicionar2" class="frmAdicionar4" style="display: none;">
+                <button type="button" class="btn btn-primary" >Adicionar</button>
+                <form id="frmAdicionar2" class="frmAdicionar2" style="display: none;">
                   <label for=""><b>Notificacion Sanitaria</b></label>
                   <input type="text" name="txt-Id2" id="txt-Id2" class="form-control" hidden>
                   <input type="text" name="input2" id="input2" class="form-control" placeholder="Notificacion Sanitaria">
                   <input type="date" name="input21" id="input21" class="form-control" placeholder="Fecha de Vencimiento">
-                  <button type="button" class="btn btn-primary tabla2" id="notificacion_sanitaria" onclick="guardarDatosGenerales(id, 2);">Guardar</button>
+                  <button type="button" class="btn btn-primary tabla2" id="notificacion_sanitaria">Guardar</button>
                 </form>
                 <hr>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="tbl2" class="table-striped row-borde" style="width:100%">
-                    <thead>
-                      <tr>
-                        <th>id</th>
-                        <th>Notificación Sanitaria</th>
-                        <th>Fecha Vencimiento</th>
-                        <th></th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
+                  <table id="notificacion_sanitaria" class="table-striped row-borde" style="width:100%">
                   </table>
                 </div>
               </div>
@@ -339,7 +326,12 @@
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
   <!-- javascript inicializacion datatables -->
-  <script src="js/propiedades-generales.js"></script>
+  <!--   -->
+  <!-- <script src="/admin/sistema/js/productos/generals/propiedades-generales.js"></script> -->
+  <script src="js/productos/generals/nameProducts/tblname.js"></script>
+  <script src="js//productos//generals//nameProducts//name.js"></script>
+  <script src="js//global//notifications.js"></scrip>
+
   <script src="js/menu.js"></script>
   <script src="js/importarProductos.js"></script>
 
