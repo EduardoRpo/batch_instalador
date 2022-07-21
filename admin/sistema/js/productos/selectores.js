@@ -22,29 +22,24 @@ $(document).ready(function() {
 
     /* Cargar selectores para adicionar productos */
 
-    function cargarselectores(selector) {
+    cargarselectores = (selector) => {
         $.ajax({
-            //method: "POST",
-            //url: "php/c_productos.php",
-            //data: { tabla: selector, operacion: 4} 
-            url: `/api/loadSelector/${selector}`,
-            data :{ tabla : selector }
-            ,
-
-            success: function(response) {
-                var info = JSON.parse(response);
-
+            url: `/api/getDataSelector/${selector}`,
+            success: function(data) {
                 let $select = $(`#${selector}`);
                 $select.empty();
 
-                $select.append(
-                    "<option disabled selected>" + "Seleccionar" + "</option>"
-                );
-                $.each(info.data, function(i, value) {
-                    $select.append(
-                        `<option value = ${value.id}> ${value.id} - ${value.nombre} </option>`
-                    );
-                });
+                $select.append("<option disabled selected>Seleccionar</option>");
+
+                if (selector == 'densidad_gravedad' || selector == 'grado_alcohol' || selector == 'ph' || selector == 'viscosidad') {
+                    $.each(data, function(i, value) {
+                        $select.append(`<option value = ${value.id}> ${value.id}. ${value.limite_inferior}-${value.limite_superior} </option>`);
+                    });
+                } else {
+                    $.each(data, function(i, value) {
+                        $select.append(`<option value = ${value.id}> ${value.id}. ${value.nombre} </option>`);
+                    });
+                }
             },
             error: function(response) {
                 console.log(response);
@@ -56,23 +51,16 @@ $(document).ready(function() {
 
     function cargar_selector_bases() {
         $.ajax({
-            //method: "POST",
-            //url: "php/c_productos.php",
-            //data: { operacion: 5 },
             url: "/api/findBase",
             success: function(response) {
                 var info = JSON.parse(response);
 
                 let $select = $(`#instructivo`);
                 $select.empty();
-                $select.append(
-                    "<option disabled selected>" + "Seleccionar" + "</option>"
-                );
+                $select.append("<option disabled selected>Seleccionar</option>");
 
                 $.each(info.data, function(i, value) {
-                    $select.append(
-                        '<option value ="' + value.id + '">' + value.producto_base + "</option>"
-                    );
+                    $select.append('<option value ="' + value.id + '">' + value.producto_base + "</option>");
                 });
             },
             error: function(response) {

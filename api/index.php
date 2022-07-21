@@ -22,8 +22,6 @@ $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 // Define app routes
 
 /* Admin */
-require_once __DIR__ . '/src/routes/admin/productos/Generales/nombresProductos.php';
-require_once __DIR__ . '/src/routes/admin/productos/Generales/notifiSanitaria.php';
 require_once __DIR__ . '/src/routes/admin/generalParameters/tanks.php';
 require_once __DIR__ . '/src/routes/admin/generalParameters/lineClearance.php';
 require_once __DIR__ . '/src/routes/admin/generalParameters/questions.php';
@@ -32,6 +30,8 @@ require_once __DIR__ . '/src/routes/admin/generalParameters/conditions.php';
 require_once __DIR__ . '/src/routes/admin/generalParameters/disinfectant.php';
 require_once __DIR__ . '/src/routes/admin/generalParameters/equipments.php';
 
+require_once __DIR__ . '/src/routes/admin/productos/generales/nombresProductos.php';
+require_once __DIR__ . '/src/routes/admin/productos/generales/notifiSanitaria.php';
 
 require_once __DIR__ . '/src/routes/admin/productos/multiP.php';
 require_once __DIR__ . '/src/routes/admin/productos/productos.php';

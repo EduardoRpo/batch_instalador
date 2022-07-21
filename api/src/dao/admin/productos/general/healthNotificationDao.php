@@ -7,7 +7,7 @@ use Monolog\Handler\RotatingFileHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 
-class healtNotificationDao
+class HealthNotificationDao
 {
     private $logger;
 

@@ -57,12 +57,12 @@
                 <p class="category">Samara Cosmetics <a href=""></a></p>
               </div>
               <div class="card-body">
-                <button class="btn btn-primary mb-5" id="nombre_producto" onclick="parametros(id, 1);">Nombres Productos</button>
+                <button class="btn btn-primary mb-5" id="nombre_producto">Nombres Productos</button>
                 <button class="btn btn-light tblLoad mb-5" id="notificacion_sanitaria">Notificacion Sanitaria</button>
-                <button class="btn btn-primary mb-5" id="linea" onclick="parametros(id, 3)">Linea</button>
-                <button class="btn btn-light mb-5" id="marca" onclick="parametros(id, 4)">Marca</button>
-                <button class="btn btn-primary mb-5" id="propietario" onclick="parametros(id, 5)">Propietario</button>
-                <button class="btn btn-light mb-5" id="presentacion_comercial" onclick="parametros(id, 6)">Presentaciones</button>
+                <button class="btn btn-primary mb-5" id="linea">Linea</button>
+                <button class="btn btn-light mb-5" id="marca">Marca</button>
+                <button class="btn btn-primary mb-5" id="propietario">Propietario</button>
+                <button class="btn btn-light mb-5" id="presentacion_comercial">Presentaciones</button>
               </div>
             </div>
           </div>
@@ -86,17 +86,7 @@
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="tbl1" class="table-striped row-borde" style="width:100%">
-                    <thead>
-                      <tr>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
+                  <table id="nombreProductos" class="table-striped row-borde" style="width:100%">
                   </table>
                 </div>
               </div>
@@ -112,7 +102,7 @@
                 <h4 class="card-title">Notificaciones Sanitarias</h4>
 
                 <hr>
-                <button type="button" class="btn btn-primary" >Adicionar</button>
+                <button type="button" class="btn btn-primary">Adicionar</button>
                 <form id="frmAdicionar2" class="frmAdicionar2" style="display: none;">
                   <label for=""><b>Notificacion Sanitaria</b></label>
                   <input type="text" name="txt-Id2" id="txt-Id2" class="form-control" hidden>
@@ -330,7 +320,7 @@
   <!-- <script src="/admin/sistema/js/productos/generals/propiedades-generales.js"></script> -->
   <script src="js/productos/generals/nameProducts/tblname.js"></script>
   <script src="js//productos//generals//nameProducts//name.js"></script>
-  <script src="js//global//notifications.js"></scrip>
+  <script src="js//global//notifications.js"></script>
 
   <script src="js/menu.js"></script>
   <script src="js/importarProductos.js"></script>

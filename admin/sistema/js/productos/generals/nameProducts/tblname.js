@@ -1,4 +1,4 @@
-tblNombreProductos = $('#tbl1').dataTable({
+tblNombreProductos = $('#nombreProductos').dataTable({
     pageLength: 50,
     ajax: {
         url: '/api/nameProducts',

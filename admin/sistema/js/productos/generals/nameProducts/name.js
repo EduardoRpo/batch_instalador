@@ -1,4 +1,5 @@
-/* Mostrar Menu seleccionadp */
+/* Mostrar Menu seleccionado */
+
 $(".contenedor-menu .menu a").removeAttr("style");
 $("#link_procesos").css("background", "coral");
 $(".contenedor-menu .menu ul.menu_generales").show();
@@ -61,23 +62,23 @@ $(document).on("click", ".link-editar1", function(e) {
 
 /* Almacenar Registros */
 
-    $(document).on("click", "#btnnombreProducto", function(e) {
-        e.preventDefault();
-        let id = $("#txt-Id1").val();
-        let nombre = $("#input1").val();
-        $.ajax({
-            type: "POST",
-            url: '/api/saveNameProducts',
-            data: { id: id, nombre: nombre },
-            success: function(data) {
-                notificaciones(data);
-            },
-        });
+$(document).on("click", "#btnnombreProducto", function(e) {
+    e.preventDefault();
+    let id = $("#txt-Id1").val();
+    let nombre = $("#input1").val();
+    $.ajax({
+        type: "POST",
+        url: '/api/saveNameProducts',
+        data: { id: id, nombre: nombre },
+        success: function(data) {
+            notificaciones(data);
+        },
     });
+});
 
 /* Actualizar tabla */
 
-function refreshTable() {
+refreshTable = () => {
     $("#tbl1").DataTable().clear();
     $("#tbl1").DataTable().ajax.reload();
 }

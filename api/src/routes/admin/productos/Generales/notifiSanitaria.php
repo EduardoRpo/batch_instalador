@@ -1,20 +1,19 @@
 <?php
 
-
-use BatchRecord\dao\healtNotificationDao;
+use BatchRecord\dao\HealthNotificationDao;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-$HealthNotifi = new healtNotificationDao();
+$healthNotifi = new HealthNotificationDao();
 
-$app->get('/HealthNotifications', function (Request $request, Response $response, $args) use ($HealthNotifi) {
-    $HealthNotifications = $HealthNotifi->findAllHealthNotifications();
+$app->get('/HealthNotifications', function (Request $request, Response $response, $args) use ($healthNotifi) {
+    $HealthNotifications = $healthNotifi->findAllHealthNotifications();
     $response->getBody()->write(json_encode($HealthNotifications, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->get('/deleteHealthNotifications/{id}', function (Request $request, Response $response, $args) use ($HealthNotifi) {
-    $HealthNotifications = $HealthNotifi->deleteHealthNotifications($args['id']);
+$app->get('/deleteHealthNotifications/{id}', function (Request $request, Response $response, $args) use ($healthNotifi) {
+    $HealthNotifications = $healthNotifi->deleteHealthNotifications($args['id']);
 
     if ($HealthNotifications == null)
         $resp = array('success' => true, 'message' => 'notificacion eliminado correctamente');
@@ -23,17 +22,17 @@ $app->get('/deleteHealthNotifications/{id}', function (Request $request, Respons
     return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->post('/saveHealthNotifications', function (Request $request, Response $response, $args) use ($HealthNotifi) {
+$app->post('/saveHealthNotifications', function (Request $request, Response $response, $args) use ($healthNotifi) {
 
     $dataHealthNotifications = $request->getParsedBody();
 
     if ($dataHealthNotifications['id']) {
-        $HealthNotifications = $HealthNotifi->updateHealthNotifications($dataHealthNotifications);
+        $HealthNotifications = $healthNotifi->updateHealthNotifications($dataHealthNotifications);
 
         if ($HealthNotifications == null)
             $resp = array('success' => true, 'message' => 'notificacion almacenado correctamente');
     } else {
-        $HealthNotifications = $HealthNotifi->saveHealthNotifications($dataHealthNotifications);
+        $HealthNotifications = $healthNotifi->saveHealthNotifications($dataHealthNotifications);
 
         if ($HealthNotifications == null)
             $resp = array('success' => true, 'message' => 'notificacion actualizado correctamente');
