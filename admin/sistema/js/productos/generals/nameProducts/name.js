@@ -3,19 +3,20 @@ $(".contenedor-menu .menu a").removeAttr("style");
 $("#link_procesos").css("background", "coral");
 $(".contenedor-menu .menu ul.menu_generales").show();
 
-/* Adicionar Proceso */
+/* Adicionar Nombre */
 
-$("#adProceso").click(function(e) {
+$("#adicionarNombre").click(function(e) {
     e.preventDefault();
-    $("#frmadParametro").slideToggle();
-    $("#txtid_Proceso").val("");
-    $("#btnguardarModulos").html("Crear");
-    $("#txtProceso").val("");
+
+    $("#frmAdicionar1").slideDown();
+    $("#txt-Id1").val("");
+    $("#nombreproducto").html("Crear");
+    $("#input1").val("");
 });
 
 /* Borrar registros */
 
-$(document).on("click", ".link-borrar", function(e) {
+$(document).on("click", ".link-borrar1", function(e) {
     e.preventDefault();
     const id = this.id
 
@@ -32,7 +33,7 @@ $(document).on("click", ".link-borrar", function(e) {
     confirm.set("onok", function(r) {
         if (r) {
             $.ajax({
-                url: `/api/deleteModules/${id}`,
+                url: `/api/deleteNameProducts/${id}`,
                 success: function(data) {
                     notificaciones(data);
                 },
@@ -43,42 +44,40 @@ $(document).on("click", ".link-borrar", function(e) {
 
 /* Cargar datos para Actualizar registros */
 
-$(document).on("click", ".link-editar", function(e) {
+$(document).on("click", ".link-editar1", function(e) {
     e.preventDefault();
 
     let id = this.id
-    let proceso = $(this).parent().parent().children().eq(1).text();
+    let nombre = $(this).parent().parent().children().eq(1).text();
     //editar = 1;
 
     $("#frmadParametro").slideDown();
     $("#btnguardarModulos").html("Actualizar");
 
-    $("#txtid_Proceso").val(id);
-    $("#txtProceso").val(proceso);
+    $("#txt-Id1").val(id);
+    $("#input1").val(nombre);
 
 });
 
 /* Almacenar Registros */
 
-$(document).ready(function() {
-    $("#btnguardarModulos").click(function(e) {
+    $(document).on("click", "#btnnombreProducto", function(e) {
         e.preventDefault();
-        let id = $("#txtid_Proceso").val();
-        let module = $("#txtProceso").val();
+        let id = $("#txt-Id1").val();
+        let nombre = $("#input1").val();
         $.ajax({
             type: "POST",
-            url: '/api/saveModules',
-            data: { id: id, module: module },
+            url: '/api/saveNameProducts',
+            data: { id: id, nombre: nombre },
             success: function(data) {
                 notificaciones(data);
             },
         });
     });
-});
 
 /* Actualizar tabla */
 
-refreshTable = () => {
-    $("#tblModulos").DataTable().clear();
-    $("#tblModulos").DataTable().ajax.reload();
+function refreshTable() {
+    $("#tbl1").DataTable().clear();
+    $("#tbl1").DataTable().ajax.reload();
 }

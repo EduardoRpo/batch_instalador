@@ -118,16 +118,7 @@ class ProductosDao
     return $producto;
   }
 
-  public function findSelector($tabla)
-  {
-    $connection = Connection::getInstance()->getConnection();
-    if ($tabla == 'ph' || $tabla == 'viscosidad' || $tabla == 'densidad_gravedad' || $tabla == 'grado_alcohol') {
-      $query = "SELECT id, CONCAT(limite_inferior, ' - ', limite_superior) as nombre FROM $tabla";
-  } else {
-      $query = "SELECT * FROM $tabla";
-  }
-    return ejecutarQuerySelect($connection, $query);
-  }
+ 
 
   public function findBase()
   {
@@ -140,7 +131,5 @@ class ProductosDao
     $base = $stmt->fetchAll($connection::FETCH_ASSOC);
     $this->logger->notice("bases recuperadas", array('bases' => $base));
     return $base;
-    //return ejecutarQuerySelect($connection, $query);
-
   }
 }
