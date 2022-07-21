@@ -2,7 +2,7 @@
 
 /* Cargar select con modulos */
 
-modulos = () => {
+/* modulos = () => {
     $.ajax({
         type: "POST",
         url: "../../../admin/sistema/php/c_modulos.php",
@@ -17,7 +17,7 @@ modulos = () => {
             });
         },
     });
-};
+}; */
 
 /* Mostrar contraseña */
 
@@ -50,4 +50,4 @@ $(document).ready(function() {
         }, 60000);
     }
 });
-modulos();
+//modulos();

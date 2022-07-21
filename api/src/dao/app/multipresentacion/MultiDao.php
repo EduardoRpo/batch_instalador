@@ -22,7 +22,7 @@ class MultiDao extends ControlFirmasMultiDao
 
         $connection = Connection::getInstance()->getConnection();
 
-        $sql = "SELECT p.referencia, multi.id_batch, multi.cantidad, multi.total, linea.densidad, pc.nombre as presentacion 
+        $sql = "SELECT p.referencia, p.nombre_referencia AS nombre, multi.id_batch, multi.cantidad, multi.total, linea.densidad, pc.nombre as presentacion 
                 FROM producto p
                 INNER JOIN multipresentacion multi ON p.referencia = multi.referencia 
                 INNER JOIN linea ON p.id_linea = linea.id 
@@ -69,7 +69,7 @@ class MultiDao extends ControlFirmasMultiDao
             $sql = "SELECT p.referencia, p.nombre_referencia as nombre, m.nombre as marca, ns.nombre as notificacion, pp.nombre as propietario, np.nombre as producto, pc.nombre as presentacion, l.nombre as linea, l.densidad 
                     FROM producto p INNER JOIN marca m INNER JOIN notificacion_sanitaria ns INNER JOIN propietario pp INNER JOIN nombre_producto np INNER JOIN linea l INNER JOIN presentacion_comercial pc
                     ON p.id_marca = m.id AND p.id_notificacion_sanitaria = ns.id AND p.id_propietario=pp.id AND p.id_nombre_producto= np.id AND p.id_linea=l.id AND pc.id = p.presentacion_comercial
-                    WHERE multi = :multi";
+                    WHERE multi = :multi AND referencia LIKE '%M%'";
             $query = $connection->prepare($sql);
             $query->execute(['multi' => $multi]);
             $multi = $query->fetchAll($connection::FETCH_ASSOC);

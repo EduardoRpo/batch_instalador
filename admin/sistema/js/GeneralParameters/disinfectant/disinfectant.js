@@ -1,6 +1,6 @@
 /* Ocultar */
 
-$('#adDesinfectante').click(function (e) {
+$('#adDesinfectante').click(function(e) {
     e.preventDefault();
     $('#id_desinfectante').val('');
     $('#desinfectante').val('');
@@ -14,13 +14,13 @@ $('#adDesinfectante').click(function (e) {
 
 /* Borrar registros */
 
-$(document).on('click', '.link-borrar', function (e) {
+$(document).on('click', '.link-borrar', function(e) {
     e.preventDefault();
 
     let id = this.id;
     var confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este registro?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
 
-    confirm.set('onok', function (r) {
+    confirm.set('onok', function(r) {
         if (r) {
             $.ajax({
                 'url': `/api/deleteDisinfectant/${id}`,
@@ -34,10 +34,10 @@ $(document).on('click', '.link-borrar', function (e) {
 
 /* Cargar datos para Actualizar registros */
 
-$(document).on('click', '.link-editar', function (e) {
+$(document).on('click', '.link-editar', function(e) {
     e.preventDefault();
 
-    let id =this.id;
+    let id = this.id;
     let desinfectante = $(this).parent().parent().children().eq(1).text();
     let concentracion = $(this).parent().parent().children().eq(2).text();
 
@@ -47,14 +47,14 @@ $(document).on('click', '.link-editar', function (e) {
     $('#desinfectante').val(desinfectante);
     $('#concentracion').val(concentracion);
     const desin = document.getElementById("desinfectante")
-    desin.setAttribute('readonly','true')
+    desin.setAttribute('readonly', 'true')
 });
 
 
 /* Almacenar Registros */
 
-$(document).ready(function () {
-    $('#btnguardarDesinfectante').click(function (e) {
+$(document).ready(function() {
+    $('#btnguardarDesinfectante').click(function(e) {
         e.preventDefault();
 
         let id = $('#id_desinfectante').val();
@@ -62,7 +62,8 @@ $(document).ready(function () {
         let concentracion = $('#concentracion').val();
 
         if (desinfectante == '' || concentracion == '') {
-            alertify.set("notifier", "position", "top-right"); alertify.error("ingrese todos los datos");
+            alertify.set("notifier", "position", "top-right");
+            alertify.error("ingrese todos los datos");
             return false();
         }
 
@@ -71,9 +72,9 @@ $(document).ready(function () {
             url: "/api/saveDisinfectant",
             data: { id: id, desinfectante: desinfectante, concentracion: concentracion },
 
-            success: function (data) {
+            success: function(data) {
                 notificaciones(data);
-                
+
             }
         });
     });
@@ -82,7 +83,7 @@ $(document).ready(function () {
 
 /* Actualizar tabla */
 
-function refreshTable() {
+refreshTable = () => {
     $('#listarDesinfectante').DataTable().clear();
     $('#listarDesinfectante').DataTable().ajax.reload();
 }

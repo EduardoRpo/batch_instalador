@@ -5,7 +5,7 @@ let products
 
 /* Mostrar Modal y Ocultar select referencias */
 
-function mostrarModal() {
+mostrarModal = () => {
     $("#referencia").css("display", "none");
     $("#cmbNoReferencia").css("display", "block");
     $("#modalCrearBatch").find("input,textarea,select").val("");
@@ -18,7 +18,7 @@ function mostrarModal() {
     $('#pedido').prop('disabled', false);
 
     data = "";
-    batch_record();
+    //batch_record();
     //cargarReferencias();
     cargarNombresReferencias();
     cargarTanques();
@@ -27,7 +27,7 @@ function mostrarModal() {
 
 /* Eliminar los tanques generados */
 
-function limpiarTanques() {
+limpiarTanques = () => {
     $("#sumaTanques").val(" ");
 
     for (i = 1; i < 6; i++) {
@@ -63,33 +63,7 @@ function limpiarTanques() {
     });
 } */
 
-/* Llenar el selector de nombres referencias al crear Batch */
 
-function cargarNombresReferencias() {
-    $.ajax({
-        url: "/api/productsGranel",
-
-        success: function(resp) {
-            products = resp
-            let $selectRef = $("#cmbNoReferencia");
-            $("#cmbNoReferencia").empty();
-
-            let $selectName = $("#nombrereferencia");
-            $("#nombrereferencia").empty();
-
-            $selectRef.append(`<option disabled selected>referencia</option>`);
-            $selectName.append(`<option disabled selected>nombre_referencia</option>`);
-
-            $.each(products, function(i, value) {
-                $selectRef.append(`<option value="${value.referencia}">${value.referencia}</option>`);
-                $selectName.append(`<option value="${value.referencia}">${value.nombre_referencia}</option>`);
-            });
-
-            $("#modalCrearBatch").modal("show");
-            addtnq = 1;
-        },
-    });
-}
 
 /* Llenar campos de producto de acuerdo con la referencia del producto */
 
@@ -107,15 +81,13 @@ $(document).ready(function() {
     });
 });
 
-function recargarDatos() {
+recargarDatos = () => {
 
     ref = $('#nombrereferencia').val();
-    //ref == null ? ref = $('#cmbNoReferencia').val() : ref
 
     for (let i = 0; i < products.length; i++) {
         if (products[i].referencia == ref) {
             $("#idbatch").val(products[i].referencia);
-            //$("#nombrereferencia").val(products[i].nombre);
             $("#marca").val(products[i].marca);
             $("#notificacionSanitaria").val(products[i].notificacion_sanitaria);
             $("#propietario").val(products[i].propietario);
@@ -132,7 +104,7 @@ function recargarDatos() {
 $(document).on('click', '#calcTamanioLote', function(e) {
     e.preventDefault();
     ref = $('#cmbNoReferencia').val();
-    multipresentacion(ref)
+    validarMulti(ref)
 });
 
 /* Adicionar referencia para crear multipresentacion en un batch*/
@@ -219,33 +191,7 @@ $("#cmbNoReferencia").change(function() {
     $("#fechaprogramacion").val("");
 });
 
-/* Cargar tanques */
 
-function cargarTanques() {
-    $.ajax({
-        type: "POST",
-        url: "php/listarBatch.php",
-        data: { operacion: "9" },
-        success: function(r) {
-            var info = JSON.parse(r);
-
-            for (i = 1; i < 6; i++) {
-                let $select = $("#cmbTanque" + i);
-                $select.empty();
-
-                $("#txtCantidad" + i).val(0);
-                $("#txtTotal" + i).val(0);
-
-                $select.append("<option disabled selected>" + "Tanque" + "</option>");
-                $.each(info, function(i, value) {
-                    $select.append(
-                        '<option value ="' + value.capacidad + '">' + value.capacidad + "</option>"
-                    );
-                });
-            }
-        },
-    });
-}
 /* Calcular el valor de los tanques */
 
 $(document).on("change", "#cmbTanque1", function(e) {
@@ -348,7 +294,7 @@ function CalcularTanque(id) {
     }
 } */
 
-function cerrarModal() {
+cerrarModal = () => {
     $("#modalCrearBatch").modal("hide");
     $("#Modal_Multipresentacion").modal("hide");
 }

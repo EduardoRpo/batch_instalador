@@ -1,6 +1,6 @@
 /* Adicionar Tanques */
 
-$('#adTanques').click(function (e) {
+$('#adTanques').click(function(e) {
     e.preventDefault();
     $("#frmadParametro").slideToggle();
     $('#txtid_tanques').val('');
@@ -10,34 +10,33 @@ $('#adTanques').click(function (e) {
 
 /* Borrar registros */
 
-$(document).on('click', '.link-borrar', function (e) {
+$(document).on('click', '.link-borrar', function(e) {
     e.preventDefault();
 
     let id = this.id;
     let confirm = alertify.confirm('Samara Cosmetics', '¿Está seguro de eliminar este registro?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
 
-    confirm.set('onok', function (r) {
+    confirm.set('onok', function(r) {
         if (r) {
             $.ajax({
                 'url': `/api/deletetanks/${id}`,
                 success: function(data) {
                     notificaciones(data);
+                }
+            });
         }
-    }
-);
-}
-    
+
     });
 });
 
 /* Cargar datos para Actualizar registros */
 
-$(document).on('click', '.link-editar', function (e) {
+$(document).on('click', '.link-editar', function(e) {
     e.preventDefault();
-    
+
     let id = this.id;
     let capacidad = $(this).parent().parent().children().eq(1).text();
-    
+
     $('#btnguardarTanques').html('Actualizar');
     $('#frmadParametro').slideDown();
     $('#txtid_tanques').val(id).hide;
@@ -47,8 +46,8 @@ $(document).on('click', '.link-editar', function (e) {
 
 /* Almacenar Registros */
 
-$(document).ready(function () {
-    $('#btnguardarTanques').click(function (e) {
+$(document).ready(function() {
+    $('#btnguardarTanques').click(function(e) {
         e.preventDefault();
 
         let id = $('#txtid_tanques').val();
@@ -59,7 +58,7 @@ $(document).ready(function () {
             url: "/api/savetanks",
             data: { id: id, capacidad: capacidad },
 
-            success: function (data) {
+            success: function(data) {
                 notificaciones(data)
             }
         });
@@ -70,7 +69,7 @@ $(document).ready(function () {
 
 /* Actualizar tabla */
 
-function refreshTable() {
+refreshTable = () => {
     $('#listarTanques').DataTable().clear();
     $('#listarTanques').DataTable().ajax.reload();
 }

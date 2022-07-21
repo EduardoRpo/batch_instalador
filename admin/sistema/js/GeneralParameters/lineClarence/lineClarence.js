@@ -18,10 +18,10 @@ cargarSelectorProceso = () => {
             let $select = $('#cmbProceso');
             $select.empty();
 
-            $select.append('<option disabled selected>' + "Seleccionar" + '</option>');
+            $select.append('<option disabled selected>Seleccionar</option>');
 
             $.each(data, function(i, value) {
-                $select.append('<option value ="' + value.id + '">' + value.modulo + '</option>');
+                $select.append(`<option value =${value.id}>${value.modulo}</option>`);
             });
         },
         error: function(response) {

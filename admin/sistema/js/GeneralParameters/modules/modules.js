@@ -7,9 +7,6 @@ $(".contenedor-menu .menu ul.menu_generales").show();
 
 $("#adProceso").click(function(e) {
     e.preventDefault();
-
-
-
     $("#frmadParametro").slideToggle();
     $("#txtid_Proceso").val("");
     $("#btnguardarModulos").html("Crear");
@@ -82,7 +79,7 @@ $(document).ready(function() {
 
 /* Actualizar tabla */
 
-function refreshTable() {
+refreshTable = () => {
     $("#tblModulos").DataTable().clear();
     $("#tblModulos").DataTable().ajax.reload();
 }
