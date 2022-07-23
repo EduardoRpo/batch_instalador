@@ -1,17 +1,15 @@
 // $("#1").slideUp();
-$("#2").slideUp();
-$("#3").slideUp();
-$("#4").slideUp();
-$("#5").slideUp();
-$("#6").slideUp();
+$(".cardGenerales").hide();
+$("#card_nombre_producto").show();
 
-$(document).ready(function () {
-  $(document).on("click", ".controller", function (e) {
-    id = this.id;   
-    $(`.cardGenerales`).toggle();
-    $(`#card_${id}`).slideDown();
-    
-  });
+$(document).ready(function() {
+
+    $(document).on("click", ".controller", function(e) {
+        id = this.id;
+        $(`.cardGenerales`).hide();
+        $(`#card_${id}`).show();
+
+    });
 });
 
 // $(document).ready(function () {
