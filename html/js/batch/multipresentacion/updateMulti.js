@@ -8,34 +8,38 @@ $(document).ready(function() {
     $(document).on("click", ".link-editarMulti", function(e) {
         editar = true;
         id_batch = this.id
-        ref = $(this).parent().parent().children().eq(1).text();
-        cargarMultipresentacion()
+        ref = $(this).parent().parent().children().eq(3).text();
+        multipresentacion()
     });
 
-    cargarMultipresentacion = async() => {
-        await adicionarMultipresentaciones()
-        resp = await buscarDataMulti(`${API}${id_batch}`)
+
+    multipresentacion = async() => {
+        multi = await buscarDataMulti(`${APISEL}${ref}`)
+        dataMulti = await buscarDataMulti(`${API}${id_batch}`)
+        await adicionarMultipresentaciones(dataMulti.length)
+        cargarMultipresentacion(dataMulti)
+    }
+
+
+    cargarMultipresentacion = async(dataMulti) => {
 
         $("#Modal_Multipresentacion").modal("show");
         let lote = 0
 
-        for (let i = 0; i < resp.length; i++) {
-            $(`#MultiReferencia${i + 1}`).val(resp[i].referencia);
-            $(`#cantidadMulti${i + 1}`).val(resp[i].cantidad);
-            $(`#tamanioloteMulti${i + 1}`).val((resp[i].total).toFixed(2));
-            $(`#densidadMulti${i + 1}`).val(resp[i].densidad);
-            $(`#presentacionMulti${i + 1}`).val(resp[i].presentacion);
-            lote = lote + resp[i].total
+        for (let i = 0; i < dataMulti.length; i++) {
+            $(`#MultiReferencia${i + 1}`).val(dataMulti[i].referencia);
+            $(`#cantidadMulti${i + 1}`).val(dataMulti[i].cantidad);
+            $(`#tamanioloteMulti${i + 1}`).val((dataMulti[i].total).toFixed(2));
+            $(`#densidadMulti${i + 1}`).val(dataMulti[i].densidad);
+            $(`#presentacionMulti${i + 1}`).val(dataMulti[i].presentacion);
+            lote = lote + dataMulti[i].total
             $(`#sumaMulti`).val(lote);
         };
     }
 
-    adicionarMultipresentaciones = async() => {
-        const resp = await buscarDataMulti(`${API}${ref}`)
-        for (let i = 0; i < resp.length; i++) {
+    adicionarMultipresentaciones = (length) => {
+        for (let i = 0; i < length; i++)
             $("#adicionarMultipresentacion").trigger("click");
-            cargarSelectMulti(resp)
-        }
     }
 
     buscarDataMulti = (urlApi) => {

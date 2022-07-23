@@ -13,7 +13,9 @@ $(document).ready(function() {
 
     verificacionControlTanques = (id) => {
 
-        if (id == 'pesaje_realizado' || id == "preparacion_realizado" || id == "aprobacion_realizado") {
+        array = ['pesaje_realizado', "preparacion_realizado", "aprobacion_realizado"]
+
+        if (array.includes(id)) {
             validar = controlTanques()
             if (validar == 0) {
                 alertify.set('notifier', 'position', 'top-right')
@@ -40,6 +42,7 @@ $(document).ready(function() {
     }
 
     verificacionOrdenFirmas = (id) => {
+
         array = ['despeje_realizado', 'pesaje_realizado', "preparacion_realizado", "aprobacion_realizado"]
 
         if (!array.includes(id)) {
@@ -59,15 +62,19 @@ $(document).ready(function() {
     /* Carga el modal para la autenticacion */
 
     auth = async() => {
-        result = await verificacionControlTanques(id)
-        if (!result) return false
+
+        if (modulo == 2 || modulo == 3 || modulo == 4) {
+            result = await verificacionControlTanques(id)
+            if (!result) return false
+        } else
+            result = true
 
         if (result) {
             result = await verificacionDesinfeccion()
             if (!result) return false
         }
 
-        if (result) {
+        if (modulo == 2 || modulo == 3 || modulo == 4 && result) {
             result = await verificacionOrdenFirmas(id)
             if (!result) return false
         }
@@ -87,16 +94,14 @@ $(document).ready(function() {
             if (!result) return false
         }
 
-        /* if (modulo == 4 && result) {
-            result = await validarParametrosControl();
+        if (modulo == 5 && result) {
+            result = await validarMultiEnvasado(id)
             if (!result) return false
-        } */
+        }
 
         $('#usuario').val('')
         $('#clave').val('')
         $('#m_firmar').modal('show')
     }
-
-
 
 });

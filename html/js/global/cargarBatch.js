@@ -1,5 +1,12 @@
 $(document).ready(function() {
 
+    loadBatch = async() => {
+        await carguepreguntas(modulo);
+        await cargarDesinfectantes();
+        cargarBatch();
+    }
+
+    loadBatch()
 
     /* validar y Cargar informacion almacenada en el batch */
 
@@ -30,14 +37,6 @@ $(document).ready(function() {
             },
         });
     }
-
-    loadQuestion = async() => {
-        await carguepreguntas(modulo);
-        await cargarDesinfectantes();
-        cargarBatch();
-    }
-
-    loadQuestion()
 
     /* Carga desinfectante y observaciones almacenadas en el batch */
 

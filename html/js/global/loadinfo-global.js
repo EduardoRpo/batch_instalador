@@ -20,7 +20,7 @@ dataBatch = async() => {
     }
 }
 
-cargarBatch = async() => {
+cargarInfoBatch = async() => {
     const data = await dataBatch()
     batch = data;
     const tamano_lote = formatoCO(data.tamano_lote);

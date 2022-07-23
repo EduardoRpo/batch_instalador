@@ -38,6 +38,8 @@ $(document).ready(function() {
         $('#tamanototallote').val(totalTamaniolote.toFixed(2));
         $('#unidadesxlote').val(totalCantidades);
 
+        guardar_Multi(multi)
+
     });
 
     guardar_Multi = (ref) => {
@@ -52,7 +54,7 @@ $(document).ready(function() {
                     alertify.set("notifier", "position", "top-right");
                     alertify.success("Multipresentación registrada con éxito.");
                     cerrarModal();
-                    debugger
+
                     const ajuste = $("#ajuste").val();
                     $('#tamanototallote').val(totalKg * (1 + ajuste));
                     //actualizarTabla();

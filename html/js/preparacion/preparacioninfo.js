@@ -9,7 +9,7 @@ let pasoEjecutado = 0;
 modulo = 3;
 
 loadBatch = async() => {
-    await cargarBatch();
+    await cargarInfoBatch();
     cargarTanques()
 }
 

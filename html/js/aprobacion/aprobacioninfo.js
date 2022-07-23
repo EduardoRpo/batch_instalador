@@ -1,7 +1,7 @@
 modulo = 4;
 
 loadBatch = async() => {
-    await cargarBatch();
+    await cargarInfoBatch();
     cargarTanques()
 }
 

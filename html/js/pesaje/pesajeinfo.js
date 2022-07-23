@@ -3,7 +3,7 @@ let lotes = []
 modulo = 2
 
 loadBatch = async() => {
-    await cargarBatch();
+    await cargarInfoBatch();
     cargarTanques()
 }
 

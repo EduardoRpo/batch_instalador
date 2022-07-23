@@ -1138,9 +1138,10 @@ include('modal/image.php')
           <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
           <script src="/html/js/global/loadinfo-global.js"></script>
+          <script src="/html/js/global/searchData.js"></script>
+          <script src="/html/js/global/preguntas.js"></script>
           <script src="/html/js/global/despeje.js"></script>
           <script src="/html/js/global/tanques.js"></script>
-          <script src="/html/js/global/muestras.js"></script>
           <script src="/html/js/global/condiciones_medio.js"></script>
           <script src="/html/js/global/cargarBatchMulti.js"></script>
           <script src="/html/js/global/incidencias.js"></script>
@@ -1149,16 +1150,21 @@ include('modal/image.php')
           <script src="/html/js/global/habilitarbtn.js"></script>
           <script src="/html/js/global/presentacionReferenciaMulti.js"></script>
           
+          <script src="/html/js/global/validacionesAuth.js"></script>
+          <script src="/html/js/global/auth.js"></script>
+          <script src="/html/js/global/controller.js"></script>
+
           <script src="/html/js/firmar/firmar1raSeccion.js"></script>
           <script src="/html/js/firmar/firmar2daSeccion.js"></script>
           <script src="/html/js/firmar/firmar2daSeccionMulti.js"></script>
-          
+
           <script src="/html/js/envasado/envasadoinfo.js"></script>
+          <script src="/html/js/envasado/validacionesEnvasado.js"></script>
+          <script src="/html/js/envasado/multi.js"></script>
           <script src="/html/js/envasado/lote.js"></script>
           <script src="/html/js/envasado/calcPeso.js"></script>
-          <script src="/html/js/envasado/tablaEnvase.js"></script>
-          <script src="/html/js/envasado/materialEnvasado.js"></script>
-          <script src="/html/js/envasado/materialSobrante.js"></script>
+          <script src="/html/js/envasado/muestras.js"></script>
+          <script src="/html/js/envasado/materialEnvase.js"></script>
           <script src="/html/js/envasado/entregasParciales.js"></script>
           <script src="/html/js/envasado/btnEnvasado.js"></script>
 
