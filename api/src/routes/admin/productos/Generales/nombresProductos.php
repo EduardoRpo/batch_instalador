@@ -31,12 +31,12 @@ $app->post('/saveNameProducts', function (Request $request, Response $response, 
         $NameProducts = $NameProductsDao->updateNameProducts($dataNameProducts);
 
         if ($NameProducts == null)
-            $resp = array('success' => true, 'message' => 'producto almacenado correctamente');
+            $resp = array('success' => true, 'message' => 'producto actualizado correctamente');
     } else {
         $NameProducts = $NameProductsDao->saveNameProducts($dataNameProducts);
 
         if ($NameProducts == null)
-            $resp = array('success' => true, 'message' => 'producto actualizado correctamente');
+            $resp = array('success' => true, 'message' => 'producto almacenado correctamente');
     }
 
     $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));

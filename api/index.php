@@ -32,6 +32,10 @@ require_once __DIR__ . '/src/routes/admin/generalParameters/equipments.php';
 
 require_once __DIR__ . '/src/routes/admin/productos/generales/nombresProductos.php';
 require_once __DIR__ . '/src/routes/admin/productos/generales/notifiSanitaria.php';
+require_once __DIR__ . '/src/routes/admin/productos/Generales/linea.php';
+require_once __DIR__ . '/src/routes/admin/productos/Generales/marca.php';
+require_once __DIR__ . '/src/routes/admin/productos/Generales/propietario.php';
+require_once __DIR__ . '/src/routes/admin/productos/Generales/presentaciones.php';
 
 require_once __DIR__ . '/src/routes/admin/productos/multiP.php';
 require_once __DIR__ . '/src/routes/admin/productos/productos.php';

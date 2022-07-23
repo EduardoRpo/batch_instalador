@@ -80,7 +80,7 @@ $(document).ready(function() {
             alertify.error("Ingrese todos los datos");
             return false();
         }
-
+        console.log(id);
         $.ajax({
             type: "POST",
             url: "/api/saveEquipment",

@@ -1,8 +1,4 @@
-/* Mostrar Menu seleccionado */
 
-$(".contenedor-menu .menu a").removeAttr("style");
-$("#link_procesos").css("background", "coral");
-$(".contenedor-menu .menu ul.menu_generales").show();
 
 /* Adicionar Nombre */
 
@@ -11,7 +7,7 @@ $("#adicionarNombre").click(function(e) {
 
     $("#frmAdicionar1").slideDown();
     $("#txt-Id1").val("");
-    $("#nombreproducto").html("Crear");
+    $("#btnnotificacion_sanitaria").html("Crear");
     $("#input1").val("");
 });
 
@@ -52,9 +48,8 @@ $(document).on("click", ".link-editar1", function(e) {
     let nombre = $(this).parent().parent().children().eq(1).text();
     //editar = 1;
 
-    $("#frmadParametro").slideDown();
+    $("#frmAdicionar1").slideDown();
     $("#btnguardarModulos").html("Actualizar");
-
     $("#txt-Id1").val(id);
     $("#input1").val(nombre);
 
@@ -66,6 +61,7 @@ $(document).on("click", "#btnnombreProducto", function(e) {
     e.preventDefault();
     let id = $("#txt-Id1").val();
     let nombre = $("#input1").val();
+    console.log(id);
     $.ajax({
         type: "POST",
         url: '/api/saveNameProducts',
@@ -79,6 +75,6 @@ $(document).on("click", "#btnnombreProducto", function(e) {
 /* Actualizar tabla */
 
 refreshTable = () => {
-    $("#tbl1").DataTable().clear();
-    $("#tbl1").DataTable().ajax.reload();
+    $("#nombreProductos").DataTable().clear();
+    $("#nombreProductos").DataTable().ajax.reload();
 }

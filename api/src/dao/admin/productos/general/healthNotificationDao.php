@@ -31,23 +31,23 @@ class HealthNotificationDao
     public function saveHealthNotifications($dataNotifi)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("INSERT INTO nombre_producto VALUES(:nombre)");
-        $stmt->execute(['nombre' => $dataNotifi['nombre']]);
+        $stmt = $connection->prepare("INSERT INTO notificacion_sanitaria (nombre , vencimiento) VALUES(:Nombre , :vencimiento)");
+        $stmt->execute(['Nombre' => $dataNotifi['nombre'], 'vencimiento' => $dataNotifi['vencimiento']]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 
     public function updateHealthNotifications($dataNotifi)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("UPDATE nombre_producto SET nombre = :nombre WHERE id = :id");
-        $stmt->execute(['id' => $dataNotifi['id'], 'nombre' => strtoupper($dataNotifi['nombre'])]);
+        $stmt = $connection->prepare("UPDATE notificacion_sanitaria SET nombre = :Nombre, vencimiento = :vencimiento WHERE id = :id");
+        $stmt->execute(['id' => $dataNotifi['id'], 'nombre' => strtoupper($dataNotifi['Nombre']), 'vencimiento' => $dataNotifi['vencimiento']]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 
     public function deleteHealthNotifications($id)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("DELETE FROM nombre_producto WHERE id = :id");
+        $stmt = $connection->prepare("DELETE FROM notificacion_sanitaria WHERE id = :id");
         $stmt->execute(['id' => $id]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
