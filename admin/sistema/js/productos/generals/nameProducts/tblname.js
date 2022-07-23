@@ -1,4 +1,9 @@
-tblNombreProductos = $('#nombreProductos').dataTable({
+$(".contenedor-menu .menu a").removeAttr("style");
+$("#link_generales").css("background", "coral");
+$(".contenedor-menu .menu ul.menu_productos").show();
+
+
+tblNombreProductos = $('#tblnombreProductos').dataTable({
     pageLength: 50,
     ajax: {
         url: '/api/nameProducts',
@@ -31,3 +36,4 @@ tblNombreProductos = $('#nombreProductos').dataTable({
         },
     ],
 })
+

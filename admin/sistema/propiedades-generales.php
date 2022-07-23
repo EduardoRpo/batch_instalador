@@ -57,12 +57,12 @@
                 <p class="category">Samara Cosmetics <a href=""></a></p>
               </div>
               <div class="card-body">
-                <button class="btn btn-primary mb-5" id="nombre_producto">Nombres Productos</button>
-                <button class="btn btn-light tblLoad mb-5" id="notificacion_sanitaria">Notificacion Sanitaria</button>
-                <button class="btn btn-primary mb-5" id="linea">Linea</button>
-                <button class="btn btn-light mb-5" id="marca">Marca</button>
-                <button class="btn btn-primary mb-5" id="propietario">Propietario</button>
-                <button class="btn btn-light mb-5" id="presentacion_comercial">Presentaciones</button>
+                <button class="btn btn-primary mb-5 controller" id="nombre_producto">Nombres Productos</button>
+                <button class="btn btn-light tblLoad mb-5 controller" id="notificacion_sanitaria">Notificacion Sanitaria</button>
+                <button class="btn btn-primary mb-5 controller" id="linea">Linea</button>
+                <button class="btn btn-light mb-5 controller" id="marca">Marca</button>
+                <button class="btn btn-primary mb-5 controller" id="propietario">Propietario</button>
+                <button class="btn btn-light mb-5 controller" id="presentacion_comercial">Presentaciones</button>
               </div>
             </div>
           </div>
@@ -71,7 +71,7 @@
 
         <div class="row">
           <div class="col-md-8">
-            <div class="card" id="1">
+            <div class="card cardGenerales" id="card_nombre_producto">
               <div class="card-header">
                 <h4 class="card-title">Nombres Productos</h4>
                 <hr>
@@ -86,7 +86,7 @@
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="nombreProductos" class="table-striped row-borde" style="width:100%">
+                  <table id="tblnombreProductos" class="table-striped row-borde" style="width:100%">
                   </table>
                 </div>
               </div>
@@ -97,24 +97,23 @@
             </div>
           </div>
           <div class="col-md-8">
-            <div class="card" id="2">
+            <div class="card cardGenerales" id="card_notificacion_sanitaria">
               <div class="card-header">
                 <h4 class="card-title">Notificaciones Sanitarias</h4>
-
                 <hr>
-                <button type="button" class="btn btn-primary">Adicionar</button>
+                <button type="button" class="btn btn-primary adicionarNotificacion" id="adicionarNotificacion">Adicionar</button>
                 <form id="frmAdicionar2" class="frmAdicionar2" style="display: none;">
                   <label for=""><b>Notificacion Sanitaria</b></label>
-                  <input type="text" name="txt-Id2" id="txt-Id2" class="form-control" hidden>
-                  <input type="text" name="input2" id="input2" class="form-control" placeholder="Notificacion Sanitaria">
-                  <input type="date" name="input21" id="input21" class="form-control" placeholder="Fecha de Vencimiento">
-                  <button type="button" class="btn btn-primary tabla2" id="notificacion_sanitaria">Guardar</button>
+                  <input type="text" name="NotificacionInput1" id="NotificacionInput1" class="form-control" hidden>
+                  <input type="text" name="NotificacionInput2" id="NotificacionInput2" class="form-control" placeholder="Notificacion Sanitaria">
+                  <input type="date" name="NotificacionInput3" id="NotificacionInput3" class="form-control" placeholder="Fecha de Vencimiento">
+                  <button type="button" class="btn btn-primary btnnotificacion_sanitaria" id="btnnotificacion_sanitaria">Guardar</button>
                 </form>
                 <hr>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="notificacion_sanitaria" class="table-striped row-borde" style="width:100%">
+                  <table id="notificacionSanitariatbl" class="table-striped row-borde notificacionSanitariatbl" style="width:100%">
                   </table>
                 </div>
               </div>
@@ -128,30 +127,24 @@
 
         <div class="row">
           <div class="col-md-8">
-            <div class="card" id="3">
+            <div class="card cardGenerales" id="card_linea">
               <div class="card-header">
                 <h4 class="card-title">Lineas</h4>
-
                 <hr>
-                <button type="button" class="btn btn-primary" onclick="adicionar(3);">Adicionar</button>
-                <form id="frmAdicionar3" class="frmAdicionar" style="display: none;">
-                  <input type="text" name="txt-Id3" id="txt-Id3" class="form-control" hidden>
-                  <input type="text" name="input3" id="input3" class="form-control" placeholder="Linea">
-                  <input type="number" name="input31" id="input31" class="form-control" placeholder="Densidad">
-                  <button type="button" class="btn btn-primary tabla3" id="linea" onclick="guardarDatosGenerales(id, 3);">Guardar</button>
+                <button type="button" class="btn btn-primary btnAdicionarlinea" id="btnAdicionarlinea" >Adicionar</button>
+                <form id="frmAdicionarLinea" class="frmAdicionarLinea" style="display: none;">
+                  <input type="text" name="lineaInput1" id="lineaInput1" class="form-control" hidden>
+                  <input type="text" name="lineaInput2" id="lineaInput2" class="form-control" placeholder="Linea">
+                  <input type="number" name="lineaInput3" id="lineaInput3" class="form-control" placeholder="Densidad">
+                  <button type="button" class="btn btn-primary Guardarlinea" id="Guardarlinea">Guardar</button>
                 </form>
                 <hr>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="tbl3" class="table-striped row-borde" style="width:100%">
+                  <table id="tblLinea" class="table-striped row-borde tblLinea" style="width:100%">
                     <thead>
                       <tr>
-                        <th>id</th>
-                        <th>Linea</th>
-                        <th>Densidad</th>
-                        <th></th>
-                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -167,33 +160,27 @@
             </div>
           </div>
           <div class="col-md-8">
-            <div class="card" id="4">
+            <div class="card cardGenerales" id="card_marca">
               <div class="card-header">
                 <h4 class="card-title">Marcas</h4>
-
                 <hr>
-                <button type="button" class="btn btn-primary" onclick="adicionar(4);">Adicionar</button>
-                <form id="frmAdicionar4" class="frmAdicionar" style="display: none;">
+                <button type="button" class="btn btn-primary" id="btnAdicionarMarca">Adicionar</button>
+                <form id="frmAdicionarMarcas" class="frmAdicionarMarcas" style="display: none;">
                   <label for=""><b>Marca</b></label>
                   <input type="text" name="txt-Id4" id="txt-Id4" class="form-control" hidden>
-                  <input type="text" name="input4" id="input4" class="form-control" placeholder="Marca" style="width: 350px;">
-                  <button type="button" class="btn btn-primary tabla4" id="marca" onclick="guardarDatosGenerales(id, 4);">Guardar</button>
+                  <input type="text" name="NombreMarca" id="NombreMarca" class="form-control" placeholder="Marca" style="width: 350px;">
+                  <button type="button" class="btn btn-primary Guardarmarca" id="Guardarmarca">Guardar</button>
                 </form>
                 <hr>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="tbl4" class="table-striped row-borde" style="width:100%">
+                  <table id="tblmarca" class="table-striped row-borde" style="width:100%">
                     <thead>
                       <tr>
-                        <th>id</th>
-                        <th>Marca</th>
-                        <th></th>
-                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
-
                     </tbody>
                   </table>
                 </div>
@@ -208,33 +195,26 @@
 
         <div class="row">
           <div class="col-md-8">
-            <div class="card" id="5">
+            <div class="card cardGenerales" id="card_propietario">
               <div class="card-header">
                 <h4 class="card-title">Propietarios</h4>
 
                 <hr>
-                <button type="button" class="btn btn-primary" onclick="adicionar(5);">Adicionar</button>
-                <form id="frmAdicionar5" class="frmAdicionar" style="display: none;">
+                <button type="button" class="btn btn-primary" id="AdicionarPropietario">Adicionar</button>
+                <form id="frmAdicionarPropietario" class="frmAdicionarPropietario" style="display: none;">
                   <label for=""><b>Propietario</b></label>
                   <input type="text" name="txt-Id5" id="txt-Id5" class="form-control" hidden>
                   <input type="text" name="input5" id="input5" class="form-control" placeholder="Propietario" style="width: 400px;">
-                  <button type="button" class="btn btn-primary tabla5" id="propietario" onclick="guardarDatosGenerales(id, 5);">Guardar</button>
+                  <button type="button" class="btn btn-primary GuardarPropietario" id="GuardarPropietario">Guardar</button>
                 </form>
                 <hr>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="tbl5" class="table-striped row-borde" style="width:100%">
+                  <table id="tblPropietario" class="table-striped row-borde" style="width:100%">
                     <thead>
-                      <tr>
-                        <th>id</th>
-                        <th>Propietario</th>
-                        <th></th>
-                        <th></th>
-                      </tr>
                     </thead>
                     <tbody>
-
                     </tbody>
                   </table>
                 </div>
@@ -246,30 +226,24 @@
             </div>
           </div>
           <div class="col-md-6">
-            <div class="card" id="6">
+            <div class="card cardGenerales" id="card_presentacion_comercial">
               <div class="card-header">
                 <h4 class="card-title">Presentaciones</h4>
 
                 <hr>
-                <button type="button" class="btn btn-primary" onclick="adicionar(6);">Adicionar</button>
-                <form id="frmAdicionar6" class="frmAdicionar" style="display: none;">
+                <button type="button" class="btn btn-primary" id="btnAdicionarPresentacion">Adicionar</button>
+                <form id="frmAdicionarPresentacion" class="frmAdicionarPresentacion" style="display: none;">
                   <label for=""><b>Presentación</b></label>
                   <input type="text" name="txt-Id6" id="txt-Id6" class="form-control" hidden>
                   <input type="number" name="input6" id="input6" class="form-control" placeholder="Presentacion">
-                  <button type="button" class="btn btn-primary tabla6" id="presentacion_comercial" onclick="guardarDatosGenerales(id, 6);">Guardar</button>
+                  <button type="button" class="btn btn-primary tabla6" id="GuardarPresentacion">Guardar</button>
                 </form>
                 <hr>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="tbl6" class="table-striped row-borde" style="width:100%">
+                  <table id="tblPresentacion" class="table-striped row-borde" style="width:100%">
                     <thead>
-                      <tr>
-                        <th>id</th>
-                        <th>Presentación</th>
-                        <th></th>
-                        <th></th>
-                      </tr>
                     </thead>
                     <tbody>
 
@@ -318,8 +292,19 @@
   <!-- javascript inicializacion datatables -->
   <!--   -->
   <!-- <script src="/admin/sistema/js/productos/generals/propiedades-generales.js"></script> -->
+  <script src="js//productos//generals///controllers.js"></script>
   <script src="js/productos/generals/nameProducts/tblname.js"></script>
   <script src="js//productos//generals//nameProducts//name.js"></script>
+  <script src="js//productos//generals//healthNotification//tblhealthNotification.js"></script>
+  <script src="js//productos///generals///healthNotification//healthNotification.js"></script>
+  <script src="js//productos//generals//line//tblline.js"></script>
+  <script src="js//productos//generals//line//line.js"></script>
+  <script src="js//productos//generals//brand//tblbrand.js"></script>
+  <script src="js//productos//generals//brand//brand.js"></script>
+  <script src="js//productos//generals///owner//tblowner.js"></script>
+  <script src="js//productos//generals//owner//owner.js"></script>
+  <script src="js//productos//generals//presentation//tblpresentation.js"></script>
+  <script src="js//productos//generals//presentation//presentation.js"></script>
   <script src="js//global//notifications.js"></script>
 
   <script src="js/menu.js"></script>

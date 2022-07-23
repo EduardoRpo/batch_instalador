@@ -31,8 +31,8 @@ class NameProductsDao
     public function saveNameProducts($dataProducts)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("INSERT INTO nombre_producto VALUES(:nombre)");
-        $stmt->execute(['nombre' => $dataProducts['nombre']]);
+        $stmt = $connection->prepare("INSERT INTO nombre_producto (nombre)VALUES(:nombre)");
+        $stmt->execute(['nombre' => strtoupper($dataProducts['nombre'])]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 

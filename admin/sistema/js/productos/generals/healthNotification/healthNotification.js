@@ -1,11 +1,8 @@
-/* Mostrar Menu seleccionadp */
-$(".contenedor-menu .menu a").removeAttr("style");
-$("#link_procesos").css("background", "coral");
-$(".contenedor-menu .menu ul.menu_generales").show();
+
 
 /* Adicionar Nombre */
 
-$("#adicionarNombre").click(function(e) {
+$("#adicionarNotificacion").click(function(e) {
     e.preventDefault();
 
     $("#frmAdicionar2").slideDown();
@@ -17,7 +14,7 @@ $("#adicionarNombre").click(function(e) {
 
 /* Borrar registros */
 
-$(document).on("click", ".link-borrar1", function(e) {
+$(document).on("click", ".link-borrar2", function(e) {
     e.preventDefault();
     const id = this.id
 
@@ -34,7 +31,7 @@ $(document).on("click", ".link-borrar1", function(e) {
     confirm.set("onok", function(r) {
         if (r) {
             $.ajax({
-                url: `/api/deleteNameProducts/${id}`,
+                url: `/api/deleteHealthNotifications/${id}`,
                 success: function(data) {
                     notificaciones(data);
                 },
@@ -45,31 +42,34 @@ $(document).on("click", ".link-borrar1", function(e) {
 
 /* Cargar datos para Actualizar registros */
 
-$(document).on("click", ".link-editar1", function(e) {
+$(document).on("click", ".link-editar2", function(e) {
     e.preventDefault();
 
     let id = this.id
     let nombre = $(this).parent().parent().children().eq(1).text();
+    let vencimiento = $(this).parent().parent().children().eq(2).text();
     //editar = 1;
 
-    $("#frmadParametro").slideDown();
+    $("#frmAdicionar2").slideDown();
     $("#btnguardarModulos").html("Actualizar");
 
-    $("#txt-Id1").val(id);
-    $("#input1").val(nombre);
+    $("#txt-Id2").val(id);
+    $("#input2").val(nombre);
+    $("#input21").val(vencimiento);
 
 });
 
 /* Almacenar Registros */
 
-    $(document).on("click", "#btnnombreProducto", function(e) {
+    $(document).on("click", "#btnnotificacion_sanitaria", function(e) {
         e.preventDefault();
-        let id = $("#txt-Id1").val();
-        let nombre = $("#input1").val();
+        let id = $("#NotificacionInput1").val();
+        let nombre = $("#NotificacionInput2").val();
+        let vencimiento = $("#NotificacionInput3").val();
         $.ajax({
             type: "POST",
-            url: '/api/saveNameProducts',
-            data: { id: id, nombre: nombre },
+            url: '/api/saveHealthNotifications',
+            data: { id: id, nombre: nombre, vencimiento : vencimiento },
             success: function(data) {
                 notificaciones(data);
             },
@@ -79,6 +79,6 @@ $(document).on("click", ".link-editar1", function(e) {
 /* Actualizar tabla */
 
 function refreshTable() {
-    $("#tbl1").DataTable().clear();
-    $("#tbl1").DataTable().ajax.reload();
+    $(".notificacionSanitariatbl").DataTable().clear();
+    $(".notificacionSanitariatbl").DataTable().ajax.reload();
 }

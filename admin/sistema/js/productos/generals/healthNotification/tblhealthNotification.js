@@ -1,4 +1,4 @@
-("#tbl2").DataTable({
+tblNotificacionSanitaria = $(".notificacionSanitariatbl").dataTable({
     destroy: true,
     scrollY: "50vh",
     scrollCollapse: true,
@@ -6,7 +6,7 @@
     language: { url: "admin_componentes/es-ar.json" },
 
     ajax: {
-        url: "/api/HealthNotifications",
+        url: '/api/HealthNotifications',
         dataSrc: ''
 
     },
@@ -29,8 +29,8 @@
             data: 'id',
             className: 'uniqueClassName',
             render: function(data) {
-                return `<a href='#' <i id=${data} class='large material-icons link-editar' style='color:rgb(255, 165, 0)'>edit</i></a>
-                        <a href='#' <i id=${data} class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>delete</i></a>`
+                return `<a href='#' <i id=${data} class='large material-icons link-editar2' style='color:rgb(255, 165, 0)'>edit</i></a>
+                        <a href='#' <i id=${data} class='large material-icons link-borrar2' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>delete</i></a>`
             },
         },
     ],
