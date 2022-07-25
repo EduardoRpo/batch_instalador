@@ -1,7 +1,6 @@
 $(document).ready(function() {
 
     searchData = async(urlApi) => {
-        //let result
         try {
             result = await $.ajax({ url: urlApi })
             return result
@@ -10,4 +9,17 @@ $(document).ready(function() {
         }
     }
 
-});
+    sendDataPOST = async(urlApi, params) => {
+        try {
+            result = await $.ajax({
+                url: urlApi,
+                type: 'POST',
+                data: params
+            })
+            return result
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+})

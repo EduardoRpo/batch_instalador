@@ -7,19 +7,19 @@ $(document).ready(function() {
     cargarTablaEnvase = async(batchMulti) => {
         for (let i = 0; i < batchMulti.length; i++) {
             InsumosMulti = await buscarDataMulti(`${ApiEnvase}${batchMulti[i]['referencia']}`)
-            empaqueEnvasado = Math.round(cantidad / InsumosMulti.unidad_empaque);
+            empaqueEnvasado = Math.round(cantidad / InsumosMulti[0].unidad_empaque);
             unidades = formatoCO(cantidad);
 
             // Carga datos material referencia 
 
-            $(`.envase${i + 1}`).html(InsumosMulti[i].id_envase);
-            $(`.descripcion_envase${i + 1}`).html(InsumosMulti[i].envase);
+            $(`.envase${i + 1}`).html(InsumosMulti[0].id_envase);
+            $(`.descripcion_envase${i + 1}`).html(InsumosMulti[0].envase);
 
-            $(`.tapa${i + 1}`).html(InsumosMulti[i].id_tapa);
-            $(`.descripcion_tapa${i + 1}`).html(InsumosMulti[i].tapa);
+            $(`.tapa${i + 1}`).html(InsumosMulti[0].id_tapa);
+            $(`.descripcion_tapa${i + 1}`).html(InsumosMulti[0].tapa);
 
-            $(`.etiqueta${i + 1}`).html(InsumosMulti[i].id_etiqueta);
-            $(`.descripcion_etiqueta${i + 1}`).html(InsumosMulti[i].etiqueta);
+            $(`.etiqueta${i + 1}`).html(InsumosMulti[0].id_etiqueta);
+            $(`.descripcion_etiqueta${i + 1}`).html(InsumosMulti[0].etiqueta);
 
             $(`.unidades${i + 1}`).html(unidades);
             $(`.unidades${i + 1}e`).html(empaqueEnvasado);

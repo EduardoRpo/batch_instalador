@@ -13,17 +13,26 @@ if (!empty($_POST)) {
       $muestras = $_POST['muestras'];
 
       // Guardar el numero de muestras de envasado
+      $sql = "SELECT * FROM batch_muestras 
+              WHERE referencia = :referencia AND batch = :batch AND modulo = :modulo";
+      $query = $conn->prepare($sql);
+      $query->execute(['referencia' => $ref_multi, 'batch' => $batch, 'modulo' => $modulo]);
+      $rows = $query->rowCount();
 
-      if (count($muestras) > 0) {
-        for ($i = 0; $i < count($muestras); ++$i) {
-          $sql = "INSERT INTO batch_muestras (muestra, modulo, batch, referencia) VALUES (:muestras, :modulo, :batch, :referencia)";
-          $query = $conn->prepare($sql);
-          $result = $query->execute(['muestras' => $muestras[$i], 'modulo' => $modulo, 'batch' => $batch, 'referencia' => $ref_multi]);
+      if ($rows == 0) {
+        if (count($muestras) > 0) {
+          for ($i = 0; $i < count($muestras); ++$i) {
+            $sql = "INSERT INTO batch_muestras (muestra, modulo, batch, referencia) VALUES (:muestras, :modulo, :batch, :referencia)";
+            $query = $conn->prepare($sql);
+            $result = $query->execute(['muestras' => $muestras[$i], 'modulo' => $modulo, 'batch' => $batch, 'referencia' => $ref_multi]);
+          }
         }
-      }
 
-      if ($result) echo "1";
-      else echo "0";
+        if ($result) echo true;
+        else echo false;
+      } else
+        echo true;
+
 
       break;
 
@@ -36,7 +45,7 @@ if (!empty($_POST)) {
       $result = $query->execute(['modulo' => $modulo, 'batch' => $batch, 'ref_multi' => $ref_multi]);
       $data = $query->fetchAll(PDO::FETCH_ASSOC);
 
-      if (empty($data)) echo '3';
+      if (empty($data)) echo false;
       else echo json_encode($data, JSON_UNESCAPED_UNICODE);
 
       break;

@@ -1,7 +1,9 @@
 $(document).ready(function() {
+
     cargar = (btn, idbtn) => {
 
         let confirm = alertify.confirm('Samara Cosmetics', '¿La información cargada es correcta?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
+
         confirm.set('onok', function(r) {
             sessionStorage.setItem('idbtn', idbtn)
             id = btn.id
@@ -94,8 +96,13 @@ $(document).ready(function() {
             if (!result) return false
         }
 
-        if (modulo == 5 && result) {
-            result = await validarMultiEnvasado(id)
+        if (modulo == 5 && result && id == `controlpeso_realizado${id_multi}`) {
+            result = await validarControlPeso(id)
+            if (!result) return false
+        }
+
+        if (modulo == 5 && result && id == `devolucion_realizado${id_multi}`) {
+            result = await validarDevolucionMaterialEnvasado(id)
             if (!result) return false
         }
 

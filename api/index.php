@@ -86,6 +86,7 @@ require_once __DIR__ . '/src/routes/app/pesaje/pesaje.php';
 
 //envasado
 require_once __DIR__ . '/src/routes/app/envasado/envasado.php';
+require_once __DIR__ . '/src/routes/app/envasado/entregasParciales.php';
 require_once __DIR__ . '/src/routes/app/envasado/equipos.php';
 
 //Explosion de Materiales

@@ -1191,6 +1191,7 @@ include('modal/image.php')
         <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
         
         <script src="/html/js/global/loadinfo-global.js"></script>
+        <script src="/html/js/global/preguntas.js"></script>
         <script src="/html/js/global/despeje.js"></script>
         <script src="/html/js/firmar/firmar1raSeccion.js"></script>
         <script src="/html/js/firmar/firmar2daSeccionMulti.js"></script>
@@ -1206,7 +1207,8 @@ include('modal/image.php')
         <script src="/html/js/global/habilitarbtn.js"></script>
         
         <script src="/html/js/acondicionamiento/acondicionamientoinfo.js"></script>
-        <script src="/html/js/acondicionamiento/btnAcondicionamiento.js"></script>
+        <script src="/html/js/acondicionamiento/multi.js"></script>
+        <script src="/html/js/acondicionamiento/deshabilitarBotones.js"></script>
         <script src="/html/js/acondicionamiento/conciliacion.js"></script>
         <script src="/html/js/acondicionamiento/imprimirEtiquetas.js"></script>
         <script src="/html/js/acondicionamiento/materiales.js"></script>

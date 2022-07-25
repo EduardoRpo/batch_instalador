@@ -47,7 +47,8 @@ $(document).ready(function() {
             alertify.set("notifier", "position", "top-right");
             alertify.error("Ingrese todas las muestras");
             return false;
-        }
+        } else
+            return true
     }
 
     validarDevolucionMaterial = () => {
@@ -94,18 +95,22 @@ $(document).ready(function() {
         }
     }
 
-    validarMultiEnvasado = async(id) => {
+    validarControlPeso = async(id) => {
         if (typeof id_multi !== "undefined") {
             result = await validarEquiposSeleccionados(id)
             if (result) {
                 CrearEquiposEnvasado()
                 result = await validarLote()
                 if (result) {
-                    obtenerMuestras()
+                    return result = obtenerMuestras()
                 } else return false
             } else
                 return false
+        }
+    }
 
+    validarDevolucionMaterialEnvasado = async(id) => {
+        if (typeof id_multi !== "undefined") {
             result = await validarDevolucionMaterial()
             if (result != 'no_validar') {
                 if (result) {
@@ -115,7 +120,6 @@ $(document).ready(function() {
                     return false
             } else
                 return true
-
         }
     }
 });

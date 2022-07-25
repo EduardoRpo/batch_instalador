@@ -8,14 +8,6 @@ $(document).ready(function() {
     for (let i = 1; i < 5; i++)
         $(`btnEntregasParciales${i}`).css("disabled", true);
 
-    loadBatch = async() => {
-        await carguepreguntas(modulo);
-        await cargarDesinfectantes();
-        cargarBatchMulti();
-    }
-
-    loadBatch()
-
     /* validar y Cargar informacion almacenada en el batch */
 
     cargarBatchMulti = () => {
@@ -109,7 +101,7 @@ $(document).ready(function() {
             success: function(response) {
                 let info = JSON.parse(response);
                 if (info == 3) {
-                    $(`.controlpeso_realizado${id_multi}`).prop("disabled", false);
+                    //$(`.controlpeso_realizado${id_multi}`).prop("disabled", false);
                     return false;
                 }
 

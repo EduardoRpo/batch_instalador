@@ -49,7 +49,7 @@ $(document).ready(function() {
 
         tanques = info[0].cantidad
         sessionStorage.setItem('tanques', info[0].cantidad)
-        await tblTanquesInfo(info)
+        tblTanquesInfo(info)
         await checksTanques(info)
         modulo == 2 ? tblPesaje() : modulo
     }
