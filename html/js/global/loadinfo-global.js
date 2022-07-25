@@ -103,6 +103,7 @@ $(document).ready(function() {
     };
 
 });
+
 /* formato de numeros miles y decimales */
 
 const formatoCO = (number) => {

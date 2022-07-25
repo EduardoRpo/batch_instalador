@@ -32,7 +32,6 @@ $(document).ready(function() {
 
         if (btn_id == "firma4") almacenarfirma(info);
 
-
         if (btn_id == "firma5") {
             if (modulo != 5 && modulo != 6) {
                 info.id;

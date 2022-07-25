@@ -2,11 +2,11 @@ $(document).ready(function() {
 
     /* Cargar el numero de muestras de acuerdo con las unidades a producir*/
 
-    calcularMuestras = (j, unidades) => {
+    /* calcularMuestras = (j, unidades) => {
         if (unidades <= 2000) $(`#muestras${j}`).val(20);
         else if (unidades >= 2001 && unidades < 4001) $(`#muestras${j}`).val(40);
         else $(`#muestras${j}`).val(60);
-    }
+    } */
 
     /* Cargar el numero de muestras */
 
@@ -109,23 +109,5 @@ $(document).ready(function() {
 
         $(`#promedio${id_multi}`).val(promedio);
         validar_condicionesMedio();
-    }
-
-    ajaxMuestrasRecolectadas = async(muestras) => {
-        data = { operacion, idBatch, muestras, modulo, ref_multi }
-        return result = await sendDataPOST("../../html/php/muestras.php", data)
-    }
-
-
-    muestrasRecolectadas = async(muestras) => {
-        response = await ajaxMuestrasRecolectadas(muestras)
-        if (!response) {
-            alertify.set("notifier", "position", "top-right");
-            alertify.error("Error al almacenar las muestras, valide nuevamente");
-            return false;
-        } else
-            return true
-
-
     }
 });
