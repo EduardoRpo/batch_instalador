@@ -37,6 +37,27 @@ require_once __DIR__ . '/src/routes/admin/productos/Generales/marca.php';
 require_once __DIR__ . '/src/routes/admin/productos/Generales/propietario.php';
 require_once __DIR__ . '/src/routes/admin/productos/Generales/presentaciones.php';
 
+require_once __DIR__ . '/src/routes/admin/productos/propiedadesFisicoquimicas/Apariencia.php';
+require_once __DIR__ . '/src/routes/admin/productos/propiedadesFisicoquimicas/Color.php';
+require_once __DIR__ . '/src/routes/admin/productos/propiedadesFisicoquimicas/Olor.php';
+require_once __DIR__ . '/src/routes/admin/productos/propiedadesFisicoquimicas/Densidad.php';
+require_once __DIR__ . '/src/routes/admin/productos/propiedadesFisicoquimicas/GradoAlcohol.php';
+require_once __DIR__ . '/src/routes/admin/productos/propiedadesFisicoquimicas/ph.php';
+require_once __DIR__ . '/src/routes/admin/productos/propiedadesFisicoquimicas/untuosidad.php';
+require_once __DIR__ . '/src/routes/admin/productos/propiedadesFisicoquimicas/Viscosidad.php';
+require_once __DIR__ . '/src/routes/admin/productos/propiedadesFisicoquimicas/PoderEspumoso.php';
+
+require_once __DIR__ . '/src/routes/admin/productos/PropiedadesMicrobiologicas/recuento.php';
+require_once __DIR__ . '/src/routes/admin/productos/PropiedadesMicrobiologicas/pseudomona.php';
+require_once __DIR__ . '/src/routes/admin/productos/PropiedadesMicrobiologicas/escherichia.php';
+require_once __DIR__ . '/src/routes/admin/productos/PropiedadesMicrobiologicas/staphylococcus.php';
+
+require_once __DIR__ . '/src/routes/admin/productos/Packaging/tapa.php';
+require_once __DIR__ . '/src/routes/admin/productos/Packaging/envases.php';
+require_once __DIR__ . '/src/routes/admin/productos/Packaging/etiqueta.php';
+require_once __DIR__ . '/src/routes/admin/productos/Packaging/caja.php';
+require_once __DIR__ . '/src/routes/admin/productos/Packaging/otros.php';
+
 require_once __DIR__ . '/src/routes/admin/productos/multiP.php';
 require_once __DIR__ . '/src/routes/admin/productos/productos.php';
 require_once __DIR__ . '/src/routes/admin/productos/instructivos.php';

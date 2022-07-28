@@ -57,10 +57,10 @@
                 <p class="category">Samara Cosmetics <a href=""></a></p>
               </div>
               <div class="card-body">
-                <button class="btn btn-primary mb-5" id="recuento_mesofilos" onclick="parametros(id, 1);">Recuento Mesofilos</button>
-                <button class="btn btn-light mb-5" id="pseudomona" onclick="parametros(id, 2)">Pseudomona</button>
-                <button class="btn btn-primary mb-5" id="escherichia" onclick="parametros(id, 3)">Escherichia</button>
-                <button class="btn btn-light mb-5" id="staphylococcus" onclick="parametros(id, 7)">Staphylococcus</button>
+                <button class="btn btn-primary mb-5 controller" id="recuento_mesofilos" >Recuento Mesofilos</button>
+                <button class="btn btn-light mb-5 controller" id="pseudomona">Pseudomona</button>
+                <button class="btn btn-primary mb-5 controller" id="escherichia" >Escherichia</button>
+                <button class="btn btn-light mb-5 controller" id="staphylococcus" >Staphylococcus</button>
               </div>
             </div>
           </div>
@@ -69,32 +69,23 @@
 
         <div class="row">
           <div class="col-md-8">
-            <div class="card" id="1">
+            <div class="card cardMicro" id="card_recuento_mesofilos">
               <div class="card-header">
                 <h4 class="card-title">Recuento Mesofilos</h4>
                 <hr>
-                <button type="button" class="btn btn-primary" onclick="adicionar(1);">Adicionar</button>
+                <button type="button" class="btn btn-primary" id="AdicionarRecuento">Adicionar</button>
                 <form id="frmAdicionar1" class="frmAdicionar" style="display: none;">
                   <label for=""><b>Recuento Mesofilos</b></label>
                   <input type="text" name="txt-Id1" id="txt-Id1" class="form-control" hidden>
                   <input type="text" name="input1" id="input1" class="form-control" placeholder="Recuento Mesofilos" style="width: 350px;">
-                  <button type="button" class="btn btn-primary tabla1" id="recuento_mesofilos" onclick="guardarDatosGenerales(id, 1);">Guardar</button>
+                  <button type="button" class="btn btn-primary tabla1" id="GuardarRecuento">Guardar</button>
                 </form>
                 <hr>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="tbl1" class="table-striped row-borde" style="width:100%">
-                    <thead>
-                      <tr>
-                        <th>id</th>
-                        <th>Recuento Mesofilos</th>
-                        <th></th>
-                        <th></th>
-                      </tr>
-                    </thead>
+                  <table id="tblRecuento" class="table-striped row-borde" style="width:100%">
                     <tbody>
-
                     </tbody>
                   </table>
                 </div>
@@ -106,33 +97,24 @@
             </div>
           </div>
           <div class="col-md-6">
-            <div class="card" id="2">
+            <div class="card cardMicro" id="card_pseudomona">
               <div class="card-header">
                 <h4 class="card-title">Pseudomona</h4>
 
                 <hr>
-                <button type="button" class="btn btn-primary" onclick="adicionar(2);">Adicionar</button>
+                <button type="button" class="btn btn-primary" id="AdicionarPseudomona">Adicionar</button>
                 <form id="frmAdicionar2" class="frmAdicionar" style="display: none;">
                   <label for=""><b>Pseudomona</b></label>
                   <input type="text" name="txt-Id2" id="txt-Id2" class="form-control" hidden>
                   <input type="text" name="input2" id="input2" class="form-control" placeholder="Pseudomona">
-                  <button type="button" class="btn btn-primary tabla2" id="pseudomona" onclick="guardarDatosGenerales(id, 2);">Guardar</button>
+                  <button type="button" class="btn btn-primary tabla2" id="GuardarPseudomona">Guardar</button>
                 </form>
                 <hr>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="tbl2" class="table-striped row-borde" style="width:100%">
-                    <thead>
-                      <tr>
-                        <th>id</th>
-                        <th>Pseudomona</th>
-                        <th></th>
-                        <th></th>
-                      </tr>
-                    </thead>
+                  <table id="tblPseudomona" class="table-striped row-borde" style="width:100%">
                     <tbody>
-
                     </tbody>
                   </table>
                 </div>
@@ -147,30 +129,24 @@
 
         <div class="row">
           <div class="col-md-6">
-            <div class="card" id="3">
+            <div class="card cardMicro" id="card_escherichia">
               <div class="card-header">
                 <h4 class="card-title">Escherichia</h4>
 
                 <hr>
-                <button type="button" class="btn btn-primary" onclick="adicionar(3);">Adicionar</button>
+                <button type="button" class="btn btn-primary" id="AdicionarEscherichia">Adicionar</button>
                 <form id="frmAdicionar3" class="frmAdicionar" style="display: none;">
                   <label for=""><b>Escherichia</b></label>
                   <input type="text" name="txt-Id3" id="txt-Id3" class="form-control" hidden>
                   <input type="text" name="input3" id="input3" class="form-control" placeholder="Escherichia">
-                  <button type="button" class="btn btn-primary tabla3" id="escherichia" onclick="guardarDatosGenerales(id, 3);">Guardar</button>
+                  <button type="button" class="btn btn-primary tabla3" id="GuardarEscherichia">Guardar</button>
                 </form>
                 <hr>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="tbl3" class="table-striped row-borde" style="width:100%">
+                  <table id="tblEscherichia" class="table-striped row-borde" style="width:100%">
                     <thead>
-                      <tr>
-                        <th>id</th>
-                        <th>Escherichia</th>
-                        <th></th>
-                        <th></th>
-                      </tr>
                     </thead>
                     <tbody>
 
@@ -185,33 +161,24 @@
             </div>
           </div>
           <div class="col-md-7">
-            <div class="card" id="7">
+            <div class="card cardMicro" id="card_staphylococcus">
               <div class="card-header">
                 <h4 class="card-title">Staphylococcus</h4>
 
                 <hr>
-                <button type="button" class="btn btn-primary" onclick="adicionar(7);">Adicionar</button>
+                <button type="button" class="btn btn-primary" id="AdicionarStaphylococcus">Adicionar</button>
                 <form id="frmAdicionar7" class="frmAdicionar" style="display: none;">
                   <label for=""><b>Staphylococcus</b></label>
                   <input type="text" name="txt-Id7" id="txt-Id7" class="form-control" hidden>
                   <input type="text" name="input7" id="input7" class="form-control" placeholder="Staphylococcus" style="width: 350px;">
-                  <button type="button" class="btn btn-primary tabla4" id="staphylococcus" onclick="guardarDatosGenerales(id, 7);">Guardar</button>
+                  <button type="button" class="btn btn-primary tabla4" id="GuardarStaphylococcus">Guardar</button>
                 </form>
                 <hr>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="tbl7" class="table-striped row-borde" style="width:100%">
-                    <thead>
-                      <tr>
-                        <th>id</th>
-                        <th>Staphylococcus</th>
-                        <th></th>
-                        <th></th>
-                      </tr>
-                    </thead>
+                  <table id="tblStaphylococcus" class="table-striped row-borde" style="width:100%">
                     <tbody>
-
                     </tbody>
                   </table>
                 </div>
@@ -257,7 +224,17 @@
   <!-- javascript inicializacion datatables -->
 
   <script src="js/menu.js"></script>
-  <script src="js/propiedades-generales.js"></script>
+  <script src="js//global//notifications.js"></script>
+  <script src="js//productos//microbiologicalProperties//controller.js"></script>
+  <!-- <script src="js//productos//generals//propiedades-generales.js"></script> -->
+  <script src="js//productos//microbiologicalProperties//recount//tblrecount.js"></script>
+  <script src="js//productos//microbiologicalProperties//recount//recount.js"></script>
+  <script src="js//productos//microbiologicalProperties//Pseudomona//tblpseudomona.js"></script>
+  <script src="js//productos//microbiologicalProperties//Pseudomona//pseudomona.js"></script>
+  <script src="js//productos//microbiologicalProperties//Escherichia//tblEscherichia.js"></script>
+  <script src="js//productos//microbiologicalProperties//Escherichia//Escherichia.js"></script>
+  <script src="js//productos//microbiologicalProperties//Staphylococcus//tblstaphylococcus.js"></script>
+  <script src="js//productos//microbiologicalProperties//Staphylococcus//staphylococcus.js"></script>
   <script src="js/selectlinkPM.js"></script>
   <script src="js/importarProductos.js"></script>
 
