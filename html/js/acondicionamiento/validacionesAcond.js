@@ -58,6 +58,22 @@ $(document).ready(function() {
         }
     } */
 
+    validarDataConciliacion = () => {
+        let unidades = $(`#txtUnidadesProducidas${id_multi}`).val();
+        let retencion = $(`#txtMuestrasRetencion${id_multi}`).val();
+        let mov = $(`#txtNoMovimiento${id_multi}`).val();
+        let cajas = $(`#txtTotal-Cajas${id_multi}`).val();
+
+        let value = unidades * retencion
+
+        if (!value || !mov || !cajas) {
+            alertify.set("notifier", "position", "top-right");
+            alertify.error("Ingrese los valores a conciliar.");
+            return false;
+        } else
+            return true
+    }
+
 
 
 

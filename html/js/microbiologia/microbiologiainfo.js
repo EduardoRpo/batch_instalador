@@ -23,6 +23,18 @@ $(document).ready(function() {
         $("#observacionesLote").slideUp();
     });
 
+
+    loadBatch = async() => {
+        await cargarInfoBatch();
+        result = await cargarDesinfectantes();
+        //await busqueda_multi();
+        //await deshabilitarbotones();
+        cargarBatchMicro()
+    }
+
+    loadBatch()
+
+
     /* validar si existe multipresentacion */
 
 

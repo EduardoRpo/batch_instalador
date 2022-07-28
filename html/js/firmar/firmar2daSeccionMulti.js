@@ -15,7 +15,7 @@ $(document).ready(function() {
                 alertify.set("notifier", "position", "top-right");
                 alertify.success("Firmado satisfactoriamente");
                 habilitarbtn(btn_id);
-                firmar(firma);
+                firmar(user);
             },
         });
     }

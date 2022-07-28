@@ -27,6 +27,7 @@ $(document).ready(function() {
             // Carga valores sin referencia mp
 
             if (InsumosMulti[i].id_envase == 50000) {
+                $(`.unidades${i + 1}`).html(0);
                 $(`#envaseEnvasada${j}`).val(0).prop("disabled", true);
                 $(`#envaseAverias${j}`).val(0).prop("disabled", true);
                 $(`#envaseSobrante${j}`).val(0).prop("disabled", true);
@@ -34,6 +35,7 @@ $(document).ready(function() {
             }
 
             if (InsumosMulti[i].id_tapa == 50000) {
+                $(`.unidades${i + 1}`).html(0);
                 $(`#tapaEnvasada${j}`).val(0).prop("disabled", true);
                 $(`#tapaAverias${j}`).val(0).prop("disabled", true);
                 $(`#tapaSobrante${j}`).val(0).prop("disabled", true);
@@ -41,6 +43,7 @@ $(document).ready(function() {
             }
 
             if (InsumosMulti[i].id_etiqueta == 50000) {
+                $(`.unidades${i + 1}`).html(0);
                 $(`#etiquetaEnvasada${j}`).val(0).prop("disabled", true);
                 $(`#etiquetaAverias${j}`).val(0).prop("disabled", true);
                 $(`#etiquetaSobrante${j}`).val(0).prop("disabled", true);

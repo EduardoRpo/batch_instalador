@@ -99,7 +99,7 @@ $(document).ready(function() {
 
         sessionStorage.setItem(presentacion + ref_multi + modulo, JSON.stringify(muestras));
         i = muestras.length;
-        sessionStorage.setItem("totalmuestras", JSON.stringify(i));
+        sessionStorage.setItem(`totalmuestras${id_multi}`, JSON.stringify(i));
 
         $("#m_muestras").modal("hide");
 

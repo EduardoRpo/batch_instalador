@@ -77,6 +77,11 @@ $(document).ready(function() {
                 eq2 = $(`#sel_etiquetadora${id_multi}`).val();
                 eq3 = $(`#sel_tunel${id_multi}`).val();
                 eq = eq1 * eq2 * eq3
+            } else if (modulo == 8) {
+                eq1 = $(`#sel_incubadora`).val();
+                eq2 = $(`#sel_autoclave`).val();
+                eq3 = $(`#sel_cabina`).val();
+                eq = eq1 * eq2 * eq3
             }
 
             if (!eq) {
@@ -93,7 +98,10 @@ $(document).ready(function() {
     obtenerMuestras = () => {
         if (id == `controlpeso_realizado${id_multi}`) {
             i = sessionStorage.getItem(`totalmuestras${id_multi}`);
-            cantidad_muestras = $(`#muestras${id_multi}`).val() * 5;
+
+            modulo == 5 ?
+                cantidad_muestras = $(`#muestras${id_multi}`).val() :
+                cantidad_muestras = $(`#muestras${id_multi}`).val() * 5;
 
             if (i != cantidad_muestras) {
                 alertify.set("notifier", "position", "top-right");
@@ -156,7 +164,7 @@ $(document).ready(function() {
             if (!result) return false
         }
 
-        if (modulo == 5 || modulo == 6 && result && id == `controlpeso_realizado${id_multi}`) {
+        if (modulo == 5 && result && id == `controlpeso_realizado${id_multi}` || modulo == 6 && result && id == `controlpeso_realizado${id_multi}`) {
             result = await validarControlPeso(id)
             if (!result) return false
         }
@@ -171,10 +179,31 @@ $(document).ready(function() {
             if (!result) return false
         }
 
+        if (modulo == 6 && result && id == `conciliacion_realizado${id_multi}`) {
+            result = await validarDataConciliacion()
+            if (!result) return false
+        }
 
-        $('#usuario').val('')
-        $('#clave').val('')
-        $('#m_firmar').modal('show')
+        if (modulo == 6 && result && id == `conciliacion_realizado${id_multi}`) {
+            result = await validarTipoEntrega()
+            if (!result) return false
+        }
+
+        if (modulo == 7 && result) {
+            result = await validarData()
+            if (!result) return false
+        }
+
+        if (modulo == 8 && result) {
+            result = await validarData()
+            if (!result) return false
+        }
+
+        if (result) {
+            $('#usuario').val('')
+            $('#clave').val('')
+            $('#m_firmar').modal('show')
+        }
     }
 
 });

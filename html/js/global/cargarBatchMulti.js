@@ -108,7 +108,7 @@ $(document).ready(function() {
                 for (i = 1; i <= info.length; i++) {
                     $(`#validarLote${id_multi}`).val(batch.numero_lote);
                     cargarEquipos();
-                    promedio();
+                    if (modulo == 5) promedio();
                     firmado(info[0].realizo, 3);
                     firmado(info[0].verifico, 4);
                 }

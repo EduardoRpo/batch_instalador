@@ -10,7 +10,7 @@ $(document).ready(function() {
             if (modulo === 8) guardar_microbiologia(info);
             if (modulo === 9) firmar2daSeccion(info);
             if (modulo === 10) guardarLiberacion(info);
-            else if (modulo !== 8 && modulo !== 9) guardar_preguntas(info.id);
+            else if (modulo !== 7 && modulo !== 8 && modulo !== 9) guardar_preguntas(info.id);
             if (modulo != 7 && modulo != 8) firmar(info);
         }
 
