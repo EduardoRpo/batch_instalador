@@ -23,8 +23,8 @@ class ExplosionMaterialesPedidosRegistroDao
 
         foreach ($multipresentaciones as $multipresentacion) {
             $stmt = $connection->prepare("UPDATE explosion_materiales_pedidos_registro 
-                                      SET cantidad_acumulada = cantidad_acumulada + :cantidad_acumulada, fecha_insumo = :fecha_insumo, estado = 1 
-                                      WHERE pedido = :pedido AND id_producto = :referencia");
+                                          SET cantidad_acumulada = cantidad_acumulada + :cantidad_acumulada, fecha_insumo = :fecha_insumo, estado = 1 
+                                          WHERE pedido = :pedido AND id_producto = :referencia");
             $stmt->execute([
                 'pedido' => $multipresentacion['pedido'],
                 'referencia' => $multipresentacion['referencia'],
