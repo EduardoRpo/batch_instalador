@@ -1,13 +1,12 @@
 
-
 /* Adicionar Nombre */
 
-$("#adicionarNombre").click(function(e) {
+$("#btnAdicionarApariencia").click(function(e) {
     e.preventDefault();
 
     $("#frmAdicionar1").slideDown();
+    $("#GuardarApariencia").html("Crear");
     $("#txt-Id1").val("");
-    $("#btnnotificacion_sanitaria").html("Crear");
     $("#input1").val("");
 });
 
@@ -30,7 +29,7 @@ $(document).on("click", ".link-borrar1", function(e) {
     confirm.set("onok", function(r) {
         if (r) {
             $.ajax({
-                url: `/api/deleteNameProducts/${id}`,
+                url: `/api/deleteAppearance/${id}`,
                 success: function(data) {
                     notificaciones(data);
                 },
@@ -46,35 +45,32 @@ $(document).on("click", ".link-editar1", function(e) {
 
     let id = this.id
     let nombre = $(this).parent().parent().children().eq(1).text();
-    //editar = 1;
-
     $("#frmAdicionar1").slideDown();
-    $("#btnguardarModulos").html("Actualizar");
+    $("#GuardarPropietario").html("Actualizar");
+
     $("#txt-Id1").val(id);
     $("#input1").val(nombre);
-
 });
 
 /* Almacenar Registros */
 
-$(document).on("click", "#btnnombreProducto", function(e) {
-    e.preventDefault();
-    let id = $("#txt-Id1").val();
-    let nombre = $("#input1").val();
-    console.log(id);
-    $.ajax({
-        type: "POST",
-        url: '/api/saveNameProducts',
-        data: { id: id, nombre: nombre },
-        success: function(data) {
-            notificaciones(data);
-        },
+    $(document).on("click", "#GuardarApariencia", function(e) {
+        e.preventDefault();
+        let id = $('#txt-Id1').val();
+        let nombre = $("#input1").val();
+        $.ajax({
+            type: "POST",
+            url: '/api/saveAppearance',
+            data: { id: id, nombre: nombre },
+            success: function(data) {
+                notificaciones(data);
+            },
+        });
     });
-});
 
 /* Actualizar tabla */
 
-refreshTable = () => {
-    $("#tblnombreProductos").DataTable().clear();
-    $("#tblnombreProductos").DataTable().ajax.reload();
+function refreshTable() {
+    $("#tblApariencia").DataTable().clear();
+    $("#tblApariencia").DataTable().ajax.reload();
 }
