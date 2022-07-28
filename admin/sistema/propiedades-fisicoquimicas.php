@@ -57,15 +57,15 @@
                 <p class="category">Samara Cosmetics <a href=""></a></p>
               </div>
               <div class="card-body">
-                <button class="btn btn-primary mb-5" id="apariencia" onclick="parametros(id, 1);">Apariencia</button>
-                <button class="btn btn-light mb-5" id="color" onclick="parametros(id, 2)">Color</button>
-                <button class="btn btn-primary mb-5" id="olor" onclick="parametros(id, 3)">Olor</button>
-                <button class="btn btn-light mb-5" id="densidad_gravedad" onclick="parametros(id, 4)">Densidad</button>
-                <button class="btn btn-primary mb-5" id="grado_alcohol" onclick="parametros(id, 5)">Grado de Alcohol</button>
-                <button class="btn btn-light mb-5" id="ph" onclick="parametros(id, 6)">PH</button>
-                <button class="btn btn-primary mb-5" id="untuosidad" onclick="parametros(id, 7)">Untuosidad</button>
-                <button class="btn btn-light mb-5" id="viscosidad" onclick="parametros(id, 8)">Viscosidad</button>
-                <button class="btn btn-primary mb-5" id="poder_espumoso" onclick="parametros(id, 9)">Poder Espumoso</button>
+                <button class="btn btn-primary mb-5 controller" id="apariencia">Apariencia</button>
+                <button class="btn btn-light mb-5 controller" id="color">Color</button>
+                <button class="btn btn-primary mb-5 controller" id="olor">Olor</button>
+                <button class="btn btn-light mb-5 controller" id="densidad_gravedad">Densidad</button>
+                <button class="btn btn-primary mb-5 controller" id="grado_alcohol">Grado de Alcohol</button>
+                <button class="btn btn-light mb-5 controller" id="ph">PH</button>
+                <button class="btn btn-primary mb-5 controller" id="untuosidad">Untuosidad</button>
+                <button class="btn btn-light mb-5 controller" id="viscosidad">Viscosidad</button>
+                <button class="btn btn-primary mb-5 controller" id="poder_espumoso">Poder Espumoso</button>
               </div>
             </div>
           </div>
@@ -74,32 +74,23 @@
 
         <div class="row">
           <div class="col-md-12">
-            <div class="card" id="1">
+            <div class="card cardPropiedades" id="card_apariencia">
               <div class="card-header">
                 <h4 class="card-title">Apariencia</h4>
                 <hr>
-                <button type="button" class="btn btn-primary" onclick="adicionar(1);">Adicionar</button>
+                <button type="button" class="btn btn-primary" id="btnAdicionarApariencia">Adicionar</button>
                 <form id="frmAdicionar1" class="frmAdicionar" style="display: none;">
                   <label for=""><b>Apariencia</b></label>
                   <input type="text" name="txt-Id1" id="txt-Id1" class="form-control" hidden>
                   <input type="text" name="input1" id="input1" class="form-control" placeholder="Apariencia" style="width: 700px;">
-                  <button type="button" class="btn btn-primary tabla1" id="apariencia" onclick="guardarDatosGenerales(id, 1);">Guardar</button>
+                  <button type="button" class="btn btn-primary tabla1" id="GuardarApariencia">Guardar</button>
                 </form>
                 <hr>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="tbl1" class="table-striped row-borde" style="width:100%">
-                    <thead>
-                      <tr>
-                        <th>id</th>
-                        <th>Apariencia</th>
-                        <th></th>
-                        <th></th>
-                      </tr>
-                    </thead>
+                  <table id="tblApariencia" class="table-striped row-borde" style="width:100%">
                     <tbody>
-
                     </tbody>
                   </table>
                 </div>
@@ -111,33 +102,24 @@
             </div>
           </div>
           <div class="col-md-10">
-            <div class="card" id="2">
+            <div class="card cardPropiedades" id="card_color">
               <div class="card-header">
                 <h4 class="card-title">Color</h4>
 
                 <hr>
-                <button type="button" class="btn btn-primary" onclick="adicionar(2);">Adicionar</button>
+                <button type="button" class="btn btn-primary" id="AdicionarColor">Adicionar</button>
                 <form id="frmAdicionar2" class="frmAdicionar" style="display: none;">
                   <label for=""><b>Color</b></label>
                   <input type="text" name="txt-Id2" id="txt-Id2" class="form-control" hidden>
                   <input type="text" name="input2" id="input2" class="form-control" placeholder="Color" style="width: 550px;">
-                  <button type="button" class="btn btn-primary tabla2" id="color" onclick="guardarDatosGenerales(id, 2);">Guardar</button>
+                  <button type="button" class="btn btn-primary tabla2" id="GuardarColor">Guardar</button>
                 </form>
                 <hr>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="tbl2" class="table-striped row-borde" style="width:100%">
-                    <thead>
-                      <tr>
-                        <th>id</th>
-                        <th>Color</th>
-                        <th></th>
-                        <th></th>
-                      </tr>
-                    </thead>
+                  <table id="tblColor" class="table-striped row-borde" style="width:100%">
                     <tbody>
-
                     </tbody>
                   </table>
                 </div>
@@ -152,33 +134,24 @@
 
         <div class="row">
           <div class="col-md-10">
-            <div class="card" id="3">
+            <div class="card cardPropiedades" id="card_olor">
               <div class="card-header">
                 <h4 class="card-title">Olor</h4>
 
                 <hr>
-                <button type="button" class="btn btn-primary" onclick="adicionar(3);">Adicionar</button>
+                <button type="button" class="btn btn-primary" id="AdicionarOlor">Adicionar</button>
                 <form id="frmAdicionar3" class="frmAdicionar" style="display: none;">
                   <label for=""><b>Olor</b></label>
                   <input type="text" name="txt-Id3" id="txt-Id3" class="form-control" hidden>
                   <input type="text" name="input3" id="input3" class="form-control" placeholder="Olor" style="width:550px;">
-                  <button type="button" class="btn btn-primary tabla3" id="olor" onclick="guardarDatosGenerales(id, 3);">Guardar</button>
+                  <button type="button" class="btn btn-primary tabla3" id="GuardarOlor">Guardar</button>
                 </form>
                 <hr>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="tbl3" class="table-striped row-borde" style="width:100%">
-                    <thead>
-                      <tr>
-                        <th>id</th>
-                        <th>Olor</th>
-                        <th></th>
-                        <th></th>
-                      </tr>
-                    </thead>
+                  <table id="tblOlor" class="table-striped row-borde" style="width:100%">
                     <tbody>
-
                     </tbody>
                   </table>
                 </div>
@@ -190,34 +163,25 @@
             </div>
           </div>
           <div class="col-md-10">
-            <div class="card" id="4">
+            <div class="card cardPropiedades" id="card_densidad_gravedad">
               <div class="card-header">
                 <h4 class="card-title">Densidad</h4>
 
                 <hr>
-                <button type="button" class="btn btn-primary" onclick="adicionar(4);">Adicionar</button>
+                <button type="button" class="btn btn-primary" id="AdicionarDensidad">Adicionar</button>
                 <form id="frmAdicionar4" class="frmAdicionarMinMax" style="display: none;">
                   <label for=""><b>Densidad</b></label>
                   <input type="text" name="txt-Id4" id="txt-Id4" class="form-control" hidden>
                   <input type="number" name="min4" id="min4" class="form-control centrado" placeholder="Mínimo">
                   <input type="number" name="max4" id="max4" class="form-control centrado" placeholder="Máximo">
-                  <button type="button" class="btn btn-primary tabla4" id="densidad_gravedad" onclick="guardarDatosGeneralesMinMax(id, 4);">Guardar</button>
+                  <button type="button" class="btn btn-primary tabla4" id="GuardarDensidad">Guardar</button>
                 </form>
                 <hr>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="tbl4" class="table-striped row-borde" style="width:100%">
-                    <thead>
-                      <tr>
-                        <th>id</th>
-                        <th>Densidad</th>
-                        <th></th>
-                        <th></th>
-                      </tr>
-                    </thead>
+                  <table id="tblDensidad" class="table-striped row-borde" style="width:100%">
                     <tbody>
-
                     </tbody>
                   </table>
                 </div>
@@ -233,35 +197,26 @@
 
         <div class="row">
           <div class="col-md-8">
-            <div class="card" id="5">
+            <div class="card cardPropiedades" id="card_grado_alcohol">
               <div class="card-header">
                 <h4 class="card-title">Grado de Alcohol</h4>
 
                 <hr>
-                <button type="button" class="btn btn-primary" onclick="adicionar(5);">Adicionar</button>
+                <button type="button" class="btn btn-primary" id="AdicionarAlcohol">Adicionar</button>
                 <form id="frmAdicionar5" class="frmAdicionarMinMax" style="display: none;">
                   <label for=""><b>Grado de Alcohol</b></label>
                   <input type="text" name="txt-Id5" id="txt-Id5" class="form-control" hidden>
                   <input type="number" name="min5" id="min5" class="form-control centrado" placeholder="Mínimo">
                   <input type="number" name="max5" id="max5" class="form-control centrado" placeholder="Máximo">
-                  <button type="button" class="btn btn-primary tabla5" id="grado_alcohol" onclick="guardarDatosGeneralesMinMax(id, 5);">Guardar</button>
+                  <button type="button" class="btn btn-primary tabla5" id="GuardarAlcohol">Guardar</button>
                 </form>
                 <hr>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="tbl5" class="table-striped row-borde" style="width:100%">
-                    <thead>
-                      <tr>
-                        <th>id</th>
-                        <th>Grado de Alcohol</th>
-                        <th></th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
+                  <table id="tblAlcohol" class="table-striped row-borde" style="width:100%">
+                  <tbody>
+                  </tbody>
                   </table>
                 </div>
               </div>
@@ -273,34 +228,25 @@
             </div>
           </div>
           <div class="col-md-6">
-            <div class="card" id="6">
+            <div class="card cardPropiedades" id="card_ph">
               <div class="card-header">
                 <h4 class="card-title">PH</h4>
 
                 <hr>
-                <button type="button" class="btn btn-primary" onclick="adicionar(6);">Adicionar</button>
+                <button type="button" class="btn btn-primary" id="AdicionarPH">Adicionar</button>
                 <form id="frmAdicionar6" class="frmAdicionarMinMax" style="display: none;">
                   <label for=""><b>PH</b></label>
                   <input type="text" name="txt-Id6" id="txt-Id6" class="form-control" hidden>
                   <input type="number" name="min6" id="min6" class="form-control centrado" placeholder="Mínimo">
                   <input type="number" name="max6" id="max6" class="form-control centrado" placeholder="Máximo">
-                  <button type="button" class="btn btn-primary tabla6" id="PH" onclick="guardarDatosGeneralesMinMax(id, 6);">Guardar</button>
+                  <button type="button" class="btn btn-primary tabla6" id="GuardarPH">Guardar</button>
                 </form>
                 <hr>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="tbl6" class="table-striped row-borde" style="width:100%">
-                    <thead>
-                      <tr>
-                        <th>id</th>
-                        <th>PH</th>
-                        <th></th>
-                        <th></th>
-                      </tr>
-                    </thead>
+                  <table id="tblPH" class="table-striped row-borde" style="width:100%">
                     <tbody>
-
                     </tbody>
                   </table>
                 </div>
@@ -315,33 +261,24 @@
         </div>
         <div class="row">
           <div class="col-md-8">
-            <div class="card" id="7">
+            <div class="card cardPropiedades" id="card_untuosidad">
               <div class="card-header">
                 <h4 class="card-title">Untuosidad</h4>
 
                 <hr>
-                <button type="button" class="btn btn-primary" onclick="adicionar(7);">Adicionar</button>
+                <button type="button" class="btn btn-primary" id="Adicionaruntuosidad">Adicionar</button>
                 <form id="frmAdicionar7" class="frmAdicionar" style="display: none;">
                   <label for=""><b>Untuosidad</b></label>
                   <input type="text" name="txt-Id7" id="txt-Id7" class="form-control" hidden>
                   <input type="text" name="input7" id="input7" class="form-control" placeholder="Untuosidad" style="width: 400px;">
-                  <button type="button" class="btn btn-primary tabla7" id="untuosidad" onclick="guardarDatosGenerales(id, 7);">Guardar</button>
+                  <button type="button" class="btn btn-primary tabla7" id="GuardarUntuosidad">Guardar</button>
                 </form>
                 <hr>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="tbl7" class="table-striped row-borde" style="width:100%">
-                    <thead>
-                      <tr>
-                        <th>id</th>
-                        <th>Untuosidad</th>
-                        <th></th>
-                        <th></th>
-                      </tr>
-                    </thead>
+                  <table id="tblUntuosidad" class="table-striped row-borde" style="width:100%">
                     <tbody>
-
                     </tbody>
                   </table>
                 </div>
@@ -354,33 +291,24 @@
             </div>
           </div>
           <div class="col-md-6">
-            <div class="card" id="8">
+            <div class="card cardPropiedades" id="card_viscosidad">
               <div class="card-header">
                 <h4 class="card-title">Viscosidad</h4>
                 <hr>
-                <button type="button" class="btn btn-primary" onclick="adicionar(8);">Adicionar</button>
+                <button type="button" class="btn btn-primary" id="AdicionarViscosidad">Adicionar</button>
                 <form id="frmAdicionar8" class="frmAdicionarMinMax" style="display: none;">
                   <label for=""><b>Viscosidad</b></label>
                   <input type="text" name="txt-Id8" id="txt-Id8" class="form-control" hidden>
                   <input type="number" name="min8" id="min8" class="form-control centrado" placeholder="Mínimo">
                   <input type="number" name="max8" id="max8" class="form-control centrado" placeholder="Máximo">
-                  <button type="button" class="btn btn-primary tabla8" id="viscosidad" onclick="guardarDatosGeneralesMinMax(id, 8);">Guardar</button>
+                  <button type="button" class="btn btn-primary tabla8" id="GuardarViscosidad">Guardar</button>
                 </form>
                 <hr>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="tbl8" class="table-striped row-borde" style="width:100%">
-                    <thead>
-                      <tr>
-                        <th>id</th>
-                        <th>Viscosidad</th>
-                        <th></th>
-                        <th></th>
-                      </tr>
-                    </thead>
+                  <table id="tblViscosidad" class="table-striped row-borde" style="width:100%">
                     <tbody>
-
                     </tbody>
                   </table>
                 </div>
@@ -395,31 +323,23 @@
         </div>
         <div class="row">
           <div class="col-md-6">
-            <div class="card" id="9">
+            <div class="card cardPropiedades" id="card_poder_espumoso">
               <div class="card-header">
                 <h4 class="card-title">Poder Espumoso</h4>
 
                 <hr>
-                <button type="button" class="btn btn-primary" onclick="adicionar(9);">Adicionar</button>
+                <button type="button" class="btn btn-primary" id="AdicionarEspuma">Adicionar</button>
                 <form id="frmAdicionar9" class="frmAdicionar" style="display: none;">
                   <label for=""><b>Poder Espumoso</b></label>
                   <input type="text" name="txt-Id9" id="txt-Id9" class="form-control" hidden>
                   <input type="text" name="input9" id="input9" class="form-control" placeholder="Poder Espumoso" style="width: 250px;">
-                  <button type="button" class="btn btn-primary tabla9" id="poder_espumoso" onclick="guardarDatosGenerales(id, 9);">Guardar</button>
+                  <button type="button" class="btn btn-primary tabla9" id="GuardarEspuma" >Guardar</button>
                 </form>
                 <hr>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="tbl9" class="table-striped row-borde" style="width:100%">
-                    <thead>
-                      <tr>
-                        <th>id</th>
-                        <th>Poder Espumoso</th>
-                        <th></th>
-                        <th></th>
-                      </tr>
-                    </thead>
+                  <table id="tblEspuma" class="table-striped row-borde" style="width:100%">
                     <tbody>
 
                     </tbody>
@@ -467,7 +387,28 @@
 
   <!-- javascript inicializacion datatables -->
   <script src="js/menu.js"></script>
-  <script src="js/propiedades-generales.js"></script>
+  <script src="js/global//notifications.js"></script>
+  <script src="js/productos//physicochemicalProperties//controller.js"></script>
+  <script src="js/productos//physicochemicalProperties//DataVerification.js"></script>
+  <script src="js//productos//physicochemicalProperties//Appearance//tblAppearance.js"></script>
+  <script src="js//productos//physicochemicalProperties//Appearance//Appearance.js"></script>
+  <script src="js//productos//physicochemicalProperties//Color//tblColor.js"></script>
+  <script src="js//productos//physicochemicalProperties//Color//Color.js"></script>
+  <script src="js//productos//physicochemicalProperties//Smell//tblSmell.js"></script>
+  <script src="js//productos//physicochemicalProperties//Smell//Smell.js"></script>
+  <script src="js//productos//physicochemicalProperties//Density//tblDensity.js"></script>
+  <script src="js//productos//physicochemicalProperties//Density//Density.js"></script>
+  <script src="js//productos//physicochemicalProperties//alcoholContent//tblAlcoholContent.js"></script>
+  <script src="js//productos//physicochemicalProperties//alcoholContent//AlcoholContent.js"></script>
+  <script src="js//productos//physicochemicalProperties//ph//tblPh.js"></script>
+  <script src="js//productos//physicochemicalProperties//ph//Ph.js"></script>
+  <script src="js//productos//physicochemicalProperties//unctuousness//tblunctuousness.js"></script>
+  <script src="js//productos//physicochemicalProperties//unctuousness//unctuousness.js"></script>
+  <script src="js//productos//physicochemicalProperties//Viscosity//tblViscosity.js"></script>
+  <script src="js//productos//physicochemicalProperties//Viscosity//Viscosity.js"></script>
+  <script src="js//productos//physicochemicalProperties///SparklingPower//tblSparklingPower.js"></script>
+  <script src="js//productos//physicochemicalProperties//SparklingPower//SparklingPower.js"></script>
+  <!-- <script src="js/productos//generals//propiedades-generales.js"></script> -->
   <script src="js/selectlink.js"></script>
   <script src="js/importarProductos.js"></script>
 
