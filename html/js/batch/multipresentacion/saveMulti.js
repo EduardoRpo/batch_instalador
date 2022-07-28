@@ -30,6 +30,7 @@ $(document).ready(function() {
 
         multi = JSON.stringify(ref)
         sessionStorage.setItem('multi', multi)
+
         $('#Modal_Multipresentacion').modal('hide');
 
         totalKg = $('#sumaMulti').val();
@@ -41,6 +42,7 @@ $(document).ready(function() {
         guardar_Multi(multi)
 
     });
+
 
     guardar_Multi = (ref) => {
 
