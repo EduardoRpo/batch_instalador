@@ -1,7 +1,13 @@
+var eq1
+var eq2
+var eq3
+
 $(document).ready(function() {
+
     cargar = (btn, idbtn) => {
 
         let confirm = alertify.confirm('Samara Cosmetics', '¿La información cargada es correcta?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
+
         confirm.set('onok', function(r) {
             sessionStorage.setItem('idbtn', idbtn)
             id = btn.id
@@ -59,6 +65,70 @@ $(document).ready(function() {
             return true
     }
 
+    validarEquiposSeleccionados = (id) => {
+        if (id == `controlpeso_realizado${id_multi}`) {
+
+            if (modulo == 5) {
+                eq1 = $(`#sel_envasadora${id_multi}`).val();
+                eq2 = $(`#sel_loteadora${id_multi}`).val();
+                eq = eq1 * eq2
+            } else if (modulo == 6) {
+                eq1 = $(`#sel_banda${id_multi}`).val();
+                eq2 = $(`#sel_etiquetadora${id_multi}`).val();
+                eq3 = $(`#sel_tunel${id_multi}`).val();
+                eq = eq1 * eq2 * eq3
+            } else if (modulo == 8) {
+                eq1 = $(`#sel_incubadora`).val();
+                eq2 = $(`#sel_autoclave`).val();
+                eq3 = $(`#sel_cabina`).val();
+                eq = eq1 * eq2 * eq3
+            }
+
+            if (!eq) {
+                alertify.set("notifier", "position", "top-right");
+                alertify.error("Seleccione los equipos a usar.");
+                return false;
+            } else
+                return true
+
+        } else
+            return false
+    }
+
+    obtenerMuestras = () => {
+        if (id == `controlpeso_realizado${id_multi}`) {
+            i = sessionStorage.getItem(`totalmuestras${id_multi}`);
+
+            modulo == 5 ?
+                cantidad_muestras = $(`#muestras${id_multi}`).val() :
+                cantidad_muestras = $(`#muestras${id_multi}`).val() * 5;
+
+            if (i != cantidad_muestras) {
+                alertify.set("notifier", "position", "top-right");
+                alertify.error("Ingrese todas las muestras");
+                return false;
+            } else
+                return true
+        }
+    }
+
+    validarControlPeso = async(id) => {
+        if (typeof id_multi !== "undefined") {
+            result = await validarEquiposSeleccionados(id)
+            if (result) {
+                crearEquipos()
+                if (modulo == 5)
+                    result = await validarLote()
+                else
+                    result = true
+                if (result) {
+                    return result = obtenerMuestras()
+                } else return false
+            } else
+                return false
+        }
+    }
+
     /* Carga el modal para la autenticacion */
 
     auth = async() => {
@@ -94,14 +164,46 @@ $(document).ready(function() {
             if (!result) return false
         }
 
-        if (modulo == 5 && result) {
-            result = await validarMultiEnvasado(id)
+        if (modulo == 5 && result && id == `controlpeso_realizado${id_multi}` || modulo == 6 && result && id == `controlpeso_realizado${id_multi}`) {
+            result = await validarControlPeso(id)
             if (!result) return false
         }
 
-        $('#usuario').val('')
-        $('#clave').val('')
-        $('#m_firmar').modal('show')
+        if (modulo == 5 && result && id == `devolucion_realizado${id_multi}`) {
+            result = await validarDevolucionMaterialEnvasado(id)
+            if (!result) return false
+        }
+
+        if (modulo == 6 && result && id == `devolucion_realizado${id_multi}`) {
+            result = await validarDevolucionMaterialAcondicionamiento(id)
+            if (!result) return false
+        }
+
+        if (modulo == 6 && result && id == `conciliacion_realizado${id_multi}`) {
+            result = await validarDataConciliacion()
+            if (!result) return false
+        }
+
+        if (modulo == 6 && result && id == `conciliacion_realizado${id_multi}`) {
+            result = await validarTipoEntrega()
+            if (!result) return false
+        }
+
+        if (modulo == 7 && result) {
+            result = await validarData()
+            if (!result) return false
+        }
+
+        if (modulo == 8 && result) {
+            result = await validarData()
+            if (!result) return false
+        }
+
+        if (result) {
+            $('#usuario').val('')
+            $('#clave').val('')
+            $('#m_firmar').modal('show')
+        }
     }
 
 });

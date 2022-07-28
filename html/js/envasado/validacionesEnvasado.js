@@ -1,27 +1,7 @@
 $(document).ready(function() {
-    let eq1
-    let eq2
 
-    validarEquiposSeleccionados = (id) => {
-        if (id == `controlpeso_realizado${id_multi}`) {
 
-            /* Validar equipos */
-
-            eq1 = $(`#sel_envasadora${id_multi}`).val();
-            eq2 = $(`#sel_loteadora${id_multi}`).val();
-
-            if (eq1 === null || eq2 === null) {
-                alertify.set("notifier", "position", "top-right");
-                alertify.error("Seleccione los equipos a usar.");
-                return false;
-            } else
-                return true
-
-        } else
-            return false
-    }
-
-    CrearEquiposEnvasado = () => {
+    crearEquipos = () => {
         equipos = [];
         const eq3 = {};
         eq3.equipo = eq1;
@@ -39,7 +19,7 @@ $(document).ready(function() {
     }
 
 
-    obtenerMuestras = () => {
+    /* obtenerMuestras = () => {
         i = sessionStorage.getItem("totalmuestras");
         cantidad_muestras = $(`#muestras${id_multi}`).val();
 
@@ -47,8 +27,9 @@ $(document).ready(function() {
             alertify.set("notifier", "position", "top-right");
             alertify.error("Ingrese todas las muestras");
             return false;
-        }
-    }
+        } else
+            return true
+    } */
 
     validarDevolucionMaterial = () => {
         if (id == `devolucion_realizado${id_multi}`) {
@@ -94,18 +75,8 @@ $(document).ready(function() {
         }
     }
 
-    validarMultiEnvasado = async(id) => {
+    validarDevolucionMaterialEnvasado = async(id) => {
         if (typeof id_multi !== "undefined") {
-            result = await validarEquiposSeleccionados(id)
-            if (result) {
-                CrearEquiposEnvasado()
-                result = await validarLote()
-                if (result) {
-                    obtenerMuestras()
-                } else return false
-            } else
-                return false
-
             result = await validarDevolucionMaterial()
             if (result != 'no_validar') {
                 if (result) {
@@ -115,7 +86,6 @@ $(document).ready(function() {
                     return false
             } else
                 return true
-
         }
     }
 });

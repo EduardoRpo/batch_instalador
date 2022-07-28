@@ -2,15 +2,15 @@ $(document).ready(function() {
 
     /* Cargar el numero de muestras de acuerdo con las unidades a producir*/
 
-    calcularMuestras = (j, unidades) => {
+    /* calcularMuestras = (j, unidades) => {
         if (unidades <= 2000) $(`#muestras${j}`).val(20);
         else if (unidades >= 2001 && unidades < 4001) $(`#muestras${j}`).val(40);
         else $(`#muestras${j}`).val(60);
-    }
+    } */
 
     /* Cargar el numero de muestras */
 
-    muestrasEnvase = () => {
+    muestrasEnvase = async() => {
         //$("#m_muestras").modal("show");
         let muestras = $(`#muestras${id_multi}`).val();
         let recoveredData = sessionStorage.getItem(presentacion + ref_multi + modulo);
@@ -31,30 +31,33 @@ $(document).ready(function() {
                 j++;
             }
         } else {
-            $.ajax({
-                type: "POST",
-                url: "../../html/php/muestras.php",
-                data: { operacion: 2, idBatch, modulo, ref_multi },
-
-                success: function(response) {
-                    if (response == 3) return false;
-
-                    let promedio = 0;
-                    let info = JSON.parse(response);
-                    j = 1;
-
-                    for (let i = 0; i < info.length; i++) {
-                        $(`#txtMuestra${j}`).val(info[i].muestra);
-                        promedio = promedio + info[i].muestra;
-                        j++;
-                    }
-                    promedio = promedio / $(`#muestras${id_multi}`).val();
-                    $(`#promedio${id_multi}`).val(promedio);
-                },
-            });
-            validar_condicionesMedio();
+            result = await consultarMuestras();
+            if (result != false)
+                await cargarMuestras(result);
         }
     }
+
+    consultarMuestras = async() => {
+        data = { operacion: 2, idBatch, modulo, ref_multi }
+        return result = await sendDataPOST('../../html/php/muestras.php', data)
+    }
+
+    cargarMuestras = () => {
+        if (response == 3) return false;
+
+        let promedio = 0;
+        let info = JSON.parse(response);
+        j = 1;
+
+        for (let i = 0; i < info.length; i++) {
+            $(`#txtMuestra${j}`).val(info[i].muestra);
+            promedio = promedio + info[i].muestra;
+            j++;
+        }
+        promedio = promedio / $(`#muestras${id_multi}`).val();
+        $(`#promedio${id_multi}`).val(promedio);
+    }
+
 
     /* Cargar promedio muestras */
 
@@ -84,7 +87,7 @@ $(document).ready(function() {
         /* cargar el array con las muestras */
 
         for (i = 1; i <= cantidad_muestras; i++) {
-            muestra = parseInt($(`#txtMuestra${i}`).val());
+            let muestra = parseInt($(`#txtMuestra${i}`).val());
             if (muestra == "" || isNaN(muestra)) break;
             else {
                 muestras.push(muestra);
@@ -94,12 +97,9 @@ $(document).ready(function() {
 
         /* almacena las muestras */
 
-        sessionStorage.setItem(
-            presentacion + ref_multi + modulo,
-            JSON.stringify(muestras)
-        );
+        sessionStorage.setItem(presentacion + ref_multi + modulo, JSON.stringify(muestras));
         i = muestras.length;
-        sessionStorage.setItem("totalmuestras", JSON.stringify(i));
+        sessionStorage.setItem(`totalmuestras${id_multi}`, JSON.stringify(i));
 
         $("#m_muestras").modal("hide");
 
@@ -108,5 +108,6 @@ $(document).ready(function() {
         promedio = formatoCO(promedio.toFixed(2));
 
         $(`#promedio${id_multi}`).val(promedio);
+        validar_condicionesMedio();
     }
 });

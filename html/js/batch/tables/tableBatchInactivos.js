@@ -32,6 +32,15 @@ $(document).ready(function() {
                 className: 'uniqueClassName',
             },
             {
+                data: 'id_batch',
+                className: 'uniqueClassName',
+                render: function(data) {
+                    return `
+                        <a href='#' <i class="fa fa-file-text fa-1x link-comentario" id=${data} aria-hidden="true" data-toggle="tooltip" title="adicionar observaciones" style="color:rgb(59, 131, 189)" aria-hidden="true"></i></a>
+                        `;
+                },
+            },
+            {
                 title: 'Producto',
                 data: 'nombre_referencia',
             },
@@ -115,13 +124,11 @@ $(document).ready(function() {
                 },
             },
             {
-                title: 'Acciones',
                 data: 'id_batch',
                 className: 'uniqueClassName',
                 render: function(data) {
                     return `
-                        <a href='#' <i class="fa fa-file-text fa-2x link-comentario" id=${data} aria-hidden="true" data-toggle="tooltip" title="adicionar observaciones" style="color:rgb(59, 131, 189)" aria-hidden="true"></i></a>
-                        <a href='#' <i class="fa fa-superscript fa-2x link-editarMulti" id=${data} aria-hidden="true" data-toggle="tooltip" title="Editar Multipresentación" style="color:rgb(59, 131, 189)" aria-hidden="true"></i></a>`;
+                        <a href='#' <i class="fa fa-superscript fa-1x link-editarMulti" id=${data} aria-hidden="true" data-toggle="tooltip" title="Editar Multipresentación" style="color:rgb(59, 131, 189)" aria-hidden="true"></i></a>`;
                 },
             },
             {

@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    /* Cargar el numero de muestras de acuerdo con las unidades a producir*/
+    // Cargar el numero de muestras de acuerdo con las unidades a producir
 
     calcularMuestras = (j, unidades) => {
         if (unidades <= 2000) $(`#muestras${j}`).val(20);
@@ -8,7 +8,27 @@ $(document).ready(function() {
         else $(`#muestras${j}`).val(60);
     }
 
-    /* Cargar el numero de muestras */
+
+    ajaxMuestrasRecolectadas = async(muestras) => {
+        data = { operacion, idBatch, muestras, modulo, ref_multi }
+        return result = await sendDataPOST("../../html/php/muestras.php", data)
+    }
+
+    muestrasRecolectadas = async(muestras) => {
+        response = await ajaxMuestrasRecolectadas(muestras)
+        if (!response) {
+            alertify.set("notifier", "position", "top-right");
+            alertify.error("Error al almacenar las muestras, valide nuevamente");
+            return false;
+        } else
+            return true
+
+
+    }
+
+
+    /*
+    //Cargar el numero de muestras
 
     muestrasEnvase = () => {
         //$("#m_muestras").modal("show");
@@ -16,12 +36,12 @@ $(document).ready(function() {
         let recoveredData = sessionStorage.getItem(presentacion + ref_multi + modulo);
         let j = 1;
 
-        /* Elimina los campos para muestras */
+        //Elimina los campos para muestras
         for (let i = 1; i <= 60; i++) {
             $(`#txtMuestra${i}`).remove();
         }
 
-        /* Crea los campos para muestras para la referencia */
+        //Crea los campos para muestras para la referencia
         for (let j = 1; j <= muestras; j++) {
             $(".txtMuestras").append(
                 `<input type='number' min='1' class='form-control' id='txtMuestra${j}' placeholder='${j}' style='text-align:center; color:#67757c;'>`
@@ -60,7 +80,7 @@ $(document).ready(function() {
         }
     }
 
-    /* Cargar promedio muestras */
+    // Cargar promedio muestras 
 
     promedio = () => {
         $.ajax({
@@ -85,7 +105,7 @@ $(document).ready(function() {
         if (recoveredData !== "")
             sessionStorage.removeItem(presentacion + ref_multi + modulo);
 
-        /* cargar el array con las muestras */
+        // cargar el array con las muestras 
 
         for (i = 1; i <= cantidad_muestras; i++) {
             muestra = parseInt($(`#txtMuestra${i}`).val());
@@ -96,7 +116,7 @@ $(document).ready(function() {
             }
         }
 
-        /* almacena las muestras */
+        // almacena las muestras
 
         sessionStorage.setItem(
             presentacion + ref_multi + modulo,
@@ -112,7 +132,7 @@ $(document).ready(function() {
         promedio = formatoCO(promedio.toFixed(2));
 
         $(`#promedio${id_multi}`).val(promedio);
-    }
+    } */
 
     /* Crear selects de muestras en la ventana de muestras acondicionamiento */
 

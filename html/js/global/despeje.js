@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    /* Desinfectantes */
+    /* cargar Desinfectantes */
 
     desinfectantes = async() => {
         let result
@@ -21,6 +21,34 @@ $(document).ready(function() {
         });
     }
 
+    //Consulta desinfectates almacenados
+
+    /* desinfectanteAlmacenado = async () => {
+        data = { operacion: 2, modulo, idBatch }
+        return result = await sendDataPOST("../../html/php/despeje.php", data)
+    }
+
+    cargarDesinfectanteAlmacenado = async () => {
+        info = await desinfectanteAlmacenado()
+        if (info) {
+            desinfectante = info.desinfectante;
+            observacion = info.observaciones;
+            firma = info.urlfirma;
+
+            $("#sel_producto_desinfeccion").val(desinfectante);
+            $("#in_observaciones").val(observacion);
+
+            // firma 
+            firmado(firma, 1);
+
+            // habilitar botones para siguiente seccion
+            for (i = 1; i < 5; i++)
+                $(`.controlpeso_realizado${i}`).prop("disabled", false);
+            return true
+
+        } else
+            return false
+    } */
 
     //Validacion campos de preguntas diligenciados
 

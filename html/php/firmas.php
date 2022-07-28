@@ -111,7 +111,7 @@ function segundaSeccionVerifico($conn) // Firmas2SeccionDao.php
             $ref_multi = $_POST['ref_multi'];
             $sql = "UPDATE batch_firmas2seccion SET verifico = :verifico WHERE modulo = :modulo AND batch = :batch AND ref_multi = :ref_multi";
             $query = $conn->prepare($sql);
-            $query->execute(['verifico' => $verifico[0]['id'], 'modulo' => $modulo, 'batch' => $batch, 'ref_multi' => $ref_multi,]);
+            $query->execute(['verifico' => $verifico['id'], 'modulo' => $modulo, 'batch' => $batch, 'ref_multi' => $ref_multi,]);
         } else {
             $ref_multi = 0;
             $sql = "UPDATE batch_firmas2seccion SET verifico = :verifico WHERE modulo = :modulo AND batch = :batch";

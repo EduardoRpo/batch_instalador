@@ -1142,6 +1142,7 @@ include('modal/image.php')
           <script src="/html/js/global/preguntas.js"></script>
           <script src="/html/js/global/despeje.js"></script>
           <script src="/html/js/global/tanques.js"></script>
+          <script src="/html/js/global/muestras.js"></script>
           <script src="/html/js/global/condiciones_medio.js"></script>
           <script src="/html/js/global/cargarBatchMulti.js"></script>
           <script src="/html/js/global/incidencias.js"></script>
@@ -1153,6 +1154,7 @@ include('modal/image.php')
           <script src="/html/js/global/validacionesAuth.js"></script>
           <script src="/html/js/global/auth.js"></script>
           <script src="/html/js/global/controller.js"></script>
+          <script src="/html/js/global/controlProceso.js"></script>
 
           <script src="/html/js/firmar/firmar1raSeccion.js"></script>
           <script src="/html/js/firmar/firmar2daSeccion.js"></script>

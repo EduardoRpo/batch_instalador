@@ -1181,7 +1181,7 @@ include('modal/image.php')
         <script src="../../assets/plugins/jquery/jquery.min.js"></script>
         <script src="../../assets/plugins/bootstrap/js/tether.min.js"></script>
         <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-        <script src="../../html/vendor/datatables/datatables.min.js" type="text/javascript" ></script>
+        <script src="../../html/vendor/datatables/datatables.min.js" type="text/javascript"></script>
         <script src="../../html/js/utils/jquery.slimscroll.js"></script>
         <script src="../../html/js/utils/waves.js"></script>
         <script src="../../html/js/utils/sidebarmenu.js"></script>
@@ -1189,9 +1189,12 @@ include('modal/image.php')
         <script src="../../html/js/utils/custom.min.js"></script>
         <script src="../../html/vendor/jquery-confirm/jquery-confirm.min.js"></script>
         <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-        
+
         <script src="/html/js/global/loadinfo-global.js"></script>
+        <script src="/html/js/global/preguntas.js"></script>
         <script src="/html/js/global/despeje.js"></script>
+        <script src="/html/js/global/auth.js"></script>
+        <script src="/html/js/global/controller.js"></script>
         <script src="/html/js/firmar/firmar1raSeccion.js"></script>
         <script src="/html/js/firmar/firmar2daSeccionMulti.js"></script>
         <script src="/html/js/global/incidencias.js"></script>
@@ -1204,13 +1207,19 @@ include('modal/image.php')
         <script src="/html/js/global/image.js"></script>
         <script src="/html/js/global/presentacionReferenciaMulti.js"></script>
         <script src="/html/js/global/habilitarbtn.js"></script>
-        
+        <script src="/html/js/global/validacionesAuth.js"></script>
+        <script src="/html/js/global/controlProceso.js"></script>
+        <script src="/html/js/global/searchData.js"></script>
+
         <script src="/html/js/acondicionamiento/acondicionamientoinfo.js"></script>
-        <script src="/html/js/acondicionamiento/btnAcondicionamiento.js"></script>
+        <script src="/html/js/acondicionamiento/multi.js"></script>
+        <script src="/html/js/acondicionamiento/deshabilitarBotones.js"></script>
+        <script src="/html/js/acondicionamiento/muestras.js"></script>
         <script src="/html/js/acondicionamiento/conciliacion.js"></script>
         <script src="/html/js/acondicionamiento/imprimirEtiquetas.js"></script>
         <script src="/html/js/acondicionamiento/materiales.js"></script>
-            
+        <script src="/html/js/acondicionamiento/validacionesAcond.js"></script>
+
 </body>
 
 </html>

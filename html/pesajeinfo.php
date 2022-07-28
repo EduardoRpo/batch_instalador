@@ -115,21 +115,21 @@ include_once('modal/modal_condicionesMedio.php');
                     <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:70%; height: 30px;">
                       <thead>
                         <tr>
-                          <th class="centrado">Tanque</th>
-                          <th class="centrado">Cantidad</th>
-                          <th class="centrado">Total</th>
+                          <th class="centrado">Tamaño Tanque (Kg)</th>
+                          <th class="centrado">Cantidad Tanques</th>
+                          <!-- <th class="centrado">Total</th> -->
                         </tr>
                       </thead>
                       <tbody>
                         <tr id="fila1">
                           <td id="tanque1" class="centrado"></td>
                           <td id="cantidad1" class="centrado"></td>
-                          <td id="total1" class="centrado"></td>
+                          <!-- <td id="total1" class="centrado"></td> -->
                         </tr>
                         <tr id="fila2">
                           <td id="tanque2" class="centrado"></td>
                           <td id="cantidad2" class="centrado"></td>
-                          <td id="total2" class="centrado"></td>
+                          <!-- <td id="total2" class="centrado"></td> -->
                         </tr>
                       </tbody>
                     </table>
