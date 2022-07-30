@@ -58,6 +58,8 @@ require_once __DIR__ . '/src/routes/admin/productos/Packaging/etiqueta.php';
 require_once __DIR__ . '/src/routes/admin/productos/Packaging/caja.php';
 require_once __DIR__ . '/src/routes/admin/productos/Packaging/otros.php';
 
+require_once __DIR__ . '/src/routes/admin/productos/RawMaterial/materiaPrima.php';
+
 require_once __DIR__ . '/src/routes/admin/productos/multiP.php';
 require_once __DIR__ . '/src/routes/admin/productos/productos.php';
 require_once __DIR__ . '/src/routes/admin/productos/instructivos.php';

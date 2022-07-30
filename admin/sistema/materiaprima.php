@@ -83,17 +83,7 @@
           <div class="card-body">
             <div class="table-responsive">
               <table id="tblMateriaPrima" class="table-striped row-borde" style="width:100%">
-                <thead>
-                  <tr>
-                    <th>No.</th>
-                    <th>Acciones</th>
-                    <th>Referencia</th>
-                    <th>Materia Prima</th>
-                    <th>Alias</th>
-                  </tr>
-                </thead>
                 <tbody>
-
                 </tbody>
               </table>
             </div>
@@ -104,15 +94,6 @@
           <div class="card-body">
             <div class="table-responsive">
               <table id="tblMateriaPrimaf" class="table-striped row-borde" style="width:100%">
-                <thead>
-                  <tr>
-                    <th>No.</th>
-                    <th>Acciones</th>
-                    <th>Referencia</th>
-                    <th>Materia Prima</th>
-                    <th>Alias</th>
-                  </tr>
-                </thead>
                 <tbody>
 
                 </tbody>
@@ -167,8 +148,12 @@
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
   <!-- javascript inicializacion datatables -->
-  <script src="js/materiaprima.js"></script>
+  <!-- <script src="js/materiaprima.js"></script> -->
   <script src="js/menu.js"></script>
+  <script src="js//global//notifications.js"></script>
+  <script src="js//productos//rawMaterial//tblRawMaterial.js"></script>
+  <script src="js//productos//rawMaterial//tblRawMaterialF.js"></script>
+  <script src="js//productos//rawMaterial//rawMaterial.js"></script>
   <script src="js/cargarDatos.js"></script>
 
 </body>
