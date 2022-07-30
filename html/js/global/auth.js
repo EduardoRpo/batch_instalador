@@ -2,7 +2,14 @@ let btn_id;
 
 $(document).ready(function() {
 
-    /* Valida el usuario si existe en la base de datos */
+    // Modal autenticar usuario
+
+    ingresarUsuario = () => {
+            $('#usuario').val('')
+            $('#clave').val('')
+            $('#m_firmar').modal('show')
+        }
+        /* Valida el usuario si existe en la base de datos */
 
     $(document).on('click', '.btnSignUser', function(e) {
         e.preventDefault();

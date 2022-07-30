@@ -57,13 +57,6 @@ $(document).ready(function() {
             }).set("labels", { ok: "Si, Parcial", cancel: "No, Total" });
     }
 
-    ingresarUsuario = () => {
-        $('#usuario').val('')
-        $('#clave').val('')
-        $('#m_firmar').modal('show')
-    }
-
-
     registrar_conciliacion = (info) => {
         let operacion = 1;
         let unidades = $(`#txtUnidadesProducidas${id_multi}`).val();

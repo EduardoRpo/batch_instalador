@@ -49,7 +49,7 @@ $(document).ready(function() {
 
     verificacionOrdenFirmas = (id) => {
 
-        array = ['despeje_realizado', 'pesaje_realizado', "preparacion_realizado", "aprobacion_realizado"]
+        array = ['despeje_realizado', 'pesaje_realizado', "preparacion_realizado", "aprobacion_realizado", "aprobacion_verificado"]
 
         if (!array.includes(id)) {
             if (id !== 'despeje_verificado') {
@@ -163,6 +163,12 @@ $(document).ready(function() {
             result = await validacionEspecificaciones(id)
             if (!result) return false
         }
+
+        if (modulo == 4 && result && id == `aprobacion_verificado`) {
+            result = await validarCierreProcesos2y3()
+            if (!result) return false
+        }
+
 
         if (modulo == 5 && result && id == `controlpeso_realizado${id_multi}` || modulo == 6 && result && id == `controlpeso_realizado${id_multi}`) {
             result = await validarControlPeso(id)

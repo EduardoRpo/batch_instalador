@@ -61,11 +61,14 @@
                   </select>
                   <input type="text" class="form-control ml-3" id="txtnombreProducto">
                 </div>
+
                 <hr>
-                <div class="alert alert-info" role="alert">
+                <div class="alert alert-warning alertFormula" role="alert">
                   La formula <b>no cumple</b> con el <b>100%</b>
                 </div>
+
                 <hr>
+
                 <button type="button" class="btn btn-primary" id="adicionarFormula">Adicionar</button>
 
                 <form id="frmadFormulas" style="display: none;">

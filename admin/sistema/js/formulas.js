@@ -2,6 +2,8 @@ let tabla
 let editar
 let tbl
 let ref
+$('.alertFormula').hide()
+
 
 /* Mostrar Menu seleccionado */
 
@@ -14,7 +16,7 @@ $('.contenedor-menu .menu ul.menu_formulas').show()
 /* $('#instructivos').click(function(e) {
     e.preventDefault();
     $(".contenedor-menu .menu ul.menu_instructivos").toogle();
-
+    
 }) */
 ;
 
@@ -372,6 +374,9 @@ function cargarTablaFormulas(referencia) {
                 }, 0)
             total = total.toFixed(2)
             $('#totalPorcentajeFormulas').val(`Total ${total}%`)
+            if (total != 100) $('.alertFormula').show()
+            else $('.alertFormula').hide()
+
         },
     })
 }
