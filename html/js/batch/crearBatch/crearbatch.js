@@ -3,6 +3,9 @@ let total = 0;
 let addtnq = 1;
 let products
 
+// Cargar cmb Tanques para creacion batch
+cargarTanques();
+
 /* Mostrar Modal y Ocultar select referencias */
 
 mostrarModal = () => {
@@ -18,11 +21,7 @@ mostrarModal = () => {
     $('#pedido').prop('disabled', false);
 
     data = "";
-    //batch_record();
-    //cargarReferencias();
     cargarNombresReferencias();
-    cargarTanques();
-    /* OcultarTanques(); */
 }
 
 /* Eliminar los tanques generados */

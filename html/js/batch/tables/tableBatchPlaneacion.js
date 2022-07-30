@@ -108,4 +108,10 @@ $(document).ready(function() {
             if (data['estado'] == 2) $(row).css('color', 'red');
         },
     });
+
+    $(document).on('click', '.toggle-vis', function(e) {
+        e.preventDefault();
+        column = tablaPreBatch.column(this.id);
+        column.visible(!column.visible());
+    });
 });
