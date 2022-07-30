@@ -11,11 +11,12 @@ $('.contenedor-menu .menu ul.menu_productos').show()
 
 $('.contenedor-menu .menu ul.menu_formulas').show()
 
-$('#instructivos').click(function(e) {
+/* $('#instructivos').click(function(e) {
     e.preventDefault();
     $(".contenedor-menu .menu ul.menu_instructivos").toogle();
 
-});
+}) */
+;
 
 
 /* Cargue select referencias */

@@ -1,3 +1,9 @@
+/* Mostrar Menu seleccionadp */
+
+$('.contenedor-menu .menu a').removeAttr('style');
+$('#link_condiciones_medio').css('background', 'coral')
+$('.contenedor-menu .menu ul.menu_generales').show();
+
 //Cargar select modulo
 $(document).ready(function() {
     let id;
@@ -87,7 +93,7 @@ $(document).ready(function() {
     $(document).on("click", ".link-borrar", function(e) {
         e.preventDefault();
         const id = this.id
-    
+
         let confirm = alertify
             .confirm(
                 "Samara Cosmetics",
@@ -96,8 +102,8 @@ $(document).ready(function() {
                 null
             )
             .set("labels", { ok: "Si", cancel: "No" });
-    
-    
+
+
         confirm.set("onok", function(r) {
             if (r) {
                 $.ajax({

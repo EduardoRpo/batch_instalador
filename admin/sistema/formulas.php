@@ -62,6 +62,10 @@
                   <input type="text" class="form-control ml-3" id="txtnombreProducto">
                 </div>
                 <hr>
+                <div class="alert alert-info" role="alert">
+                  La formula <b>no cumple</b> con el <b>100%</b>
+                </div>
+                <hr>
                 <button type="button" class="btn btn-primary" id="adicionarFormula">Adicionar</button>
 
                 <form id="frmadFormulas" style="display: none;">
@@ -97,7 +101,7 @@
                 <div class="table-responsive">
                   <label for="">Formulas</label>
                   <table id="tblFormulas" class="table-striped row-borde" style="width:100%">
-                    
+
                   </table>
                   <div style="display: flex;justify-content: flex-end;">
                     <input type="text" id="totalPorcentajeFormulas" style="border: none;margin-right:100px;text-align:center" disabled>
@@ -121,7 +125,7 @@
                   <table id="tblFormulastodas" class="table-striped row-borde" style="width:100%">
                     <label for="">Formulas</label>
                     <thead>
-                      
+
                       </tr>
                     </thead>
                     <tbody>
@@ -186,7 +190,7 @@
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-  
+
   <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
