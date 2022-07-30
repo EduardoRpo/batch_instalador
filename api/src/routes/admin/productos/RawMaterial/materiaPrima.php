@@ -9,54 +9,47 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 $MateriaPrimaDao = new RawMaterialDao();
 $MateriaFantasmaDao = new RawMaterialFDao();
 
-$app->post('/SaveRawMaterial', function(Request $request, Response $response, $args) use($MateriaFantasmaDao, $MateriaPrimaDao){
+$app->post('/SaveRawMaterial', function (Request $request, Response $response, $args) use ($MateriaFantasmaDao, $MateriaPrimaDao) {
 
     $dataMaterial = $request->getParsedBody();
-    if($dataMaterial['controller'] == 1){
-        if($dataMaterial['id'])
-        {
+    if ($dataMaterial['controller'] == 1) {
+        if ($dataMaterial['id']) {
             $materiaPrima = $MateriaPrimaDao->updateRawMaterial($dataMaterial);
 
-            if($materiaPrima == null){
+            if ($materiaPrima == null) {
                 $resp = array('success' => true, 'message' => 'Materia Prima Actualizada Correctamente');
             }
-        }else
-        {
+        } else {
             $materiaPrima = $MateriaPrimaDao->saveRawMaterial($dataMaterial);
-            if($materiaPrima = null)
-            {
+            if ($materiaPrima = null) {
                 $resp = array('success' => true, 'message' => 'Materia Prima Almacenada Correctamente');
             }
         }
-    }else
-    {
-        if($dataMaterial['id'])
-        {
+    } else {
+        if ($dataMaterial['id']) {
             $materiaFantasma = $MateriaFantasmaDao->updateRawMaterialF($dataMaterial);
-            if($materiaFantasma == null){
+            if ($materiaFantasma == null) {
                 $resp = array('success' => true, 'message' => 'Materia Prima fantasma Actualizada Correctamente');
             }
-        }else
-        {
+        } else {
             $materiaFantasma = $MateriaFantasmaDao->saveRawMaterialF($dataMaterial);
-            if($materiaFantasma == null){
+            if ($materiaFantasma == null) {
                 $resp = array('success' => true, 'message' => 'Materia Prima Fantasma Almacenada Correctamente');
             }
         }
-        
     }
     $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->get('/RawMaterial', function (Request $request, Response $response, $args) use ($MateriaPrimaDao){
+$app->get('/RawMaterial', function (Request $request, Response $response, $args) use ($MateriaPrimaDao) {
 
     $materiaPrima = $MateriaPrimaDao->findAllRawMaterial();
     $response->getBody()->write(json_encode($materiaPrima, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->get('/RawMaterialF', function (Request $request, Response $response, $args) use ($MateriaFantasmaDao){
+$app->get('/RawMaterialF', function (Request $request, Response $response, $args) use ($MateriaFantasmaDao) {
 
     $materiaFantasma = $MateriaFantasmaDao->findAllRawMaterialF();
     $response->getBody()->write(json_encode($materiaFantasma, JSON_NUMERIC_CHECK));

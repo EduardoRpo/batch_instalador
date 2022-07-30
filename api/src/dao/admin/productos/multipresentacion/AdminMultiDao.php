@@ -20,11 +20,14 @@ class AdminMultiDao
     public function findAllMulti()
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("SELECT referencia, nombre_referencia, multi FROM producto WHERE multi>0 ORDER BY nombre_referencia ASC");
+        $stmt = $connection->prepare("SELECT referencia, nombre_referencia, multi 
+                                      FROM producto 
+                                      WHERE referencia LIKE '%M%' OR referencia LIKE '%Granel%'  
+                                      ORDER BY `producto`.`multi` ASC;");
         $stmt->execute();
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         $multi = $stmt->fetchAll($connection::FETCH_ASSOC);
-    $this->logger->notice("Equipos Obtenidos", array('multi' => $multi));
+        $this->logger->notice("Equipos Obtenidos", array('multi' => $multi));
         return $multi;
     }
 
@@ -35,7 +38,7 @@ class AdminMultiDao
         $stmt->execute();
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         $produc = $stmt->fetchAll($connection::FETCH_ASSOC);
-    $this->logger->notice("Productos Obtenidos", array('producto' => $produc));
+        $this->logger->notice("Productos Obtenidos", array('producto' => $produc));
         return $produc;
     }
 
@@ -46,16 +49,16 @@ class AdminMultiDao
         $stmt->execute(['referencia' => $referencia['referencia']]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         $multi = $stmt->fetchAll($connection::FETCH_ASSOC);
-    $this->logger->notice("Productos Obtenidos", array('multi' => $multi));
+        $this->logger->notice("Productos Obtenidos", array('multi' => $multi));
         return $multi;
     }
 
     public function saveMulti($dataMulti, $nameGranel)
     {
-        foreach($dataMulti as $multi){   
+        foreach ($dataMulti as $multi) {
             $connection = Connection::getInstance()->getConnection();
             $stmt = $connection->prepare("UPDATE producto SET multi = :multi WHERE referencia = :id_multi");
-            $stmt->execute(['multi'=>$nameGranel, 'id_multi'=>$multi]);
+            $stmt->execute(['multi' => $nameGranel, 'id_multi' => $multi]);
             $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         }
     }

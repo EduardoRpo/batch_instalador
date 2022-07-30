@@ -61,24 +61,6 @@ $('#formula_f').change(function(e) {
     materiaPrima('f')
 })
 
-/* Cargar Materia Prima */
-
-const materiaPrima = (tb) => {
-    $.ajax({
-        method: 'POST',
-        url: 'php/c_formulas.php',
-        data: { operacion: '4', tb: tb },
-
-        success: function(response) {
-            var info = JSON.parse(response)
-            let $selectReferencia = $('#cmbreferencia')
-            cargarSelect(info, $selectReferencia)
-        },
-        error: function(response) {
-            console.log(response)
-        },
-    })
-}
 
 /* cargar Selects */
 
