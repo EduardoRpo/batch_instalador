@@ -6,9 +6,9 @@ $(document).ready(function () {
     e.preventDefault();
     id_input = this.id;
     id_checkbox = id_input.substr(5, id_input.length);
-    referencia = id_input.substr(-7, 7);
+    referencia = fila.id_producto;
+    numPedido = fila.pedido;
     cantidad = $(`#${id_input}`).val();
-    numPedido = id_checkbox.slice(0, -8);
     date = $(`#date-${id_checkbox}`).val();
 
     if (cantidad == 0) {
@@ -20,7 +20,7 @@ $(document).ready(function () {
 
     arrayPreprogramados(referencia, cantidad, numPedido);
     if (date) {
-      fechaInsumo(id_checkbox, numPedido, pedidosProgramar, date);
+      fechaInsumo(id_checkbox, numPedido, referencia, pedidosProgramar, date);
     } else {
       alertify.set('notifier', 'position', 'top-right');
       alertify.error('Ingrese fecha de insumo');
@@ -106,12 +106,13 @@ $(document).ready(function () {
     e.preventDefault();
     id_date = this.id;
     id_input = id_date.substr(5, id_date.length);
-    numPedido = id_date.slice(5, -8);
+    referencia = fila.id_producto;
+    numPedido = fila.pedido;
     date = $(`#${id_date}`).val();
 
     if (date) {
       calcfechaSugeridas(date, id_input);
-      fechaInsumo(id_input, numPedido, pedidosProgramar, date);
+      fechaInsumo(id_input, numPedido, referencia, pedidosProgramar, date);
     }
   });
 
@@ -158,11 +159,20 @@ $(document).ready(function () {
     );
   };
 
-  fechaInsumo = (id_checkbox, numPedido, pedidosProgramar, date) => {
+  fechaInsumo = (
+    id_checkbox,
+    numPedido,
+    referencia,
+    pedidosProgramar,
+    date
+  ) => {
     cant = $(`#cant-${id_checkbox}`).val();
     if (cant > 0) {
       for (i = 0; i < pedidosProgramar.length; i++) {
-        if (numPedido == pedidosProgramar[i].numPedido)
+        if (
+          numPedido == pedidosProgramar[i].numPedido &&
+          referencia == pedidosProgramar[i].referencia
+        )
           pedidosProgramar[i]['fecha_insumo'] = date;
       }
       $(`#${id_checkbox}`).prop('checked', true);

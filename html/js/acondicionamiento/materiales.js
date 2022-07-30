@@ -3,7 +3,7 @@ $(document).ready(function() {
 
     cargarTablaEnvase = (j, referencia, cantidad) => {
         $.ajax({
-            url: "../../html/php/envase.php",
+            url: "/html/php/envase.php",
             type: "POST",
             data: { referencia },
         }).done((data, status, xhr) => {
