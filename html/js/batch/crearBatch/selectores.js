@@ -55,4 +55,17 @@ $(document).ready(function() {
         });
     }
 
+
+    /* Eliminar los tanques generados */
+
+    limpiarTanques = () => {
+        $("#sumaTanques").val(" ");
+
+        for (i = 1; i < 6; i++) {
+            $("#cmbTanque" + i).val("Tanque");
+            $("#txtCantidad" + i).val("");
+            $("#txtTotal" + i).val("");
+        }
+    }
+
 });

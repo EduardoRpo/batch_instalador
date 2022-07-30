@@ -15,6 +15,13 @@ $(document).ready(function() {
         ],
 
         columns: [{
+                title: 'No.',
+                "data": null,
+                className: 'text-center',
+                "render": function(data, type, full, meta) {
+                    return meta.row + 1;
+                }
+            }, {
                 title: 'Batch',
                 data: 'id_batch',
                 className: 'text-center',
@@ -126,7 +133,7 @@ $(document).ready(function() {
                 className: 'uniqueClassName',
                 render: function(data) {
                     return `
-                        <a href='#' <i class="fa fa-superscript fa-1x link-editarMulti" id=${data} aria-hidden="true" data-toggle="tooltip" title="Editar Multipresentación" style="color:rgb(59, 131, 189)" aria-hidden="true"></i></a>`;
+                        <i class="fa fa-superscript fa-1x link-editarMulti" id=${data} aria-hidden="true" data-toggle="tooltip" title="Editar Multipresentación" style="color:rgb(59, 131, 189)" aria-hidden="true"></i>`;
                 },
             },
             {

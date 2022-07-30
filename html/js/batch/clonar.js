@@ -17,7 +17,6 @@ $(document).ready(function() {
     $("#tablaBatch tbody").on("click", "tr", function() {
         //data = tabla.row(this).data();
         data = tablaBatch.row(this).data();
-        console.log(data)
     });
 
     $("#form_clonar").submit(function(event) {
@@ -33,7 +32,7 @@ $(document).ready(function() {
             } else {
                 $.ajax({
                     type: "POST",
-                    url: "php/crearbatch/clonar.php",
+                    url: "/html/php/crearbatch/clonar.php",
                     data: { id: data.id_batch, referencia: data.referencia, clonarCantidad },
 
                     success: function(r) {

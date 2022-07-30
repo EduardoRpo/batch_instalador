@@ -93,11 +93,13 @@ $(document).ready(function() {
         editar = true;
         let id_batch = this.id;
 
-        limpiarTanques();
+        //limpiarTanques();
         $('#inpNombreReferencia').show();
         $('#nombrereferencia').hide();
         $('#calcTamanioLote').hide();
         $('#pedido').prop('disabled', true);
+
+        cargarTanques();
 
         if (data.estado > 2) {
             f1 = new Date();

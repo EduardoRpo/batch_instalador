@@ -9,6 +9,10 @@ $(document).ready(function() {
         editar = true;
         id_batch = this.id
         ref = $(this).parent().parent().children().eq(3).text();
+
+        if (ref == '')
+            ref = $(this).parent().parent().children().eq(2).text();
+
         multipresentacion()
     });
 
