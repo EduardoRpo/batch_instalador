@@ -42,7 +42,7 @@ if (!empty($_POST)) {
                     $sql = "UPDATE batch_liberacion SET dir_tecnica = :realizo WHERE batch = :batch";
 
                 $query = $conn->prepare($sql);
-                $query->execute(['batch' => $batch, 'realizo' => $user[0]['id']]);
+                $query->execute(['batch' => $batch, 'realizo' => $user['id']]);
             } else {
                 $user = $_POST['info'];
                 $btn = $_POST['id'];

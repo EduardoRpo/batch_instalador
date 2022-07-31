@@ -1,7 +1,7 @@
 //Cargar Batch
 $(document).ready(function() {
 
-    const cargarBatchMicro = () => {
+    cargarBatchMicro = () => {
         $.ajax({
             url: `/api/micro/${idBatch}/${modulo}`,
             success: function(result) {
@@ -19,18 +19,18 @@ $(document).ready(function() {
     };
 
 
-    const desinfectante = (data) => {
+    desinfectante = (data) => {
         $("#sel_producto_desinfeccion").val(data[0].desinfectante);
         $("#desinfectante_obs").val(data[0].observaciones);
     }
 
-    const equipos = (data) => {
+    equipos = (data) => {
         $(".sel_incubadora").val(data[1]["id"]);
         $(".sel_autoclave").val(data[2]["id"]);
         $(".sel_cabina").val(data[3]["id"]);
     }
 
-    const analisisMicro = (data) => {
+    analisisMicro = (data) => {
         cont = 4
         acum = 0
         acum1 = 0
@@ -62,7 +62,7 @@ $(document).ready(function() {
         }
     }
 
-    const aprobacion = (data) => {
+    aprobacion = (data) => {
         observaciones = data[4]["observaciones"];
         if (observaciones != "") {
             $("#observacionesLote").slideDown();
@@ -73,7 +73,7 @@ $(document).ready(function() {
         }
     }
 
-    const firmas = (data) => {
+    firmas = (data) => {
         firm = [];
 
         for (let i = 1; i < 5; i++) {
@@ -91,6 +91,4 @@ $(document).ready(function() {
             }
         }
     }
-
-    cargarBatchMicro()
 });

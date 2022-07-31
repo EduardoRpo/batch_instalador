@@ -1,8 +1,11 @@
 $(document).ready(function() {
 
     loadBatch = async() => {
-        await carguepreguntas(modulo);
+        if (modulo != 9)
+            await carguepreguntas(modulo);
         await cargarDesinfectantes();
+        if (modulo == 9)
+            cargarFisicoquimico();
         cargarBatch();
     }
 

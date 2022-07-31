@@ -113,6 +113,8 @@ $(document).ready(function() {
                     firmado(info[0].verifico, 4);
                 }
                 cargardevolucionmaterial();
+                if (modulo == 6)
+                    cargar_conciliacion()
             },
         });
     }
@@ -184,17 +186,17 @@ $(document).ready(function() {
                 }
                 if (modulo === 6) {
                     rendimiento_producto();
-                    cargar_conciliacion();
+                    //cargar_conciliacion();
                 }
             },
         });
     }
 
     /* Cargar conciliacion  */
+
     cargar_conciliacion = () => {
         let operacion = 2;
-        $.post(
-            "../../html/php/conciliacion_rendimiento.php",
+        $.post("../../html/php/conciliacion_rendimiento.php",
             (data = { operacion, idBatch, ref_multi, modulo }),
             function(data, textStatus, jqXHR) {
                 if (textStatus == "success") {
@@ -291,8 +293,5 @@ $(document).ready(function() {
         let firma = template.replace(":firma:", datos);
         parent.append(firma).html;
     }
-
-
-
 
 });
