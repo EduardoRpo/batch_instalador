@@ -64,27 +64,29 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
     $newDataPedidos[$i]['lote'] = $sumArrayGranel[$dataPedidos[$i]['granel']];
     $newDataPedidos[$i]['programacion'] = '';
     $newDataPedidos[$i]['presentacion'] = $presentacion['presentacion'];
+    $newDataPedidos[$i]['multi'][$i] = array(
+      'pedido' => $dataPedidos[$i]['numPedido'], 'referencia' => $dataPedidos[$i]['referencia'], 'cantidadunidades' => $dataPedidos[$i]['cantidad_acumulada'],
+      'tamaniopresentacion' => $dataPedidos[$i]['tamanio_lote'], 'fecha_insumo' => $dataPedidos[$i]['fecha_insumo']
+    );
 
-
-    //Agregar al multi con el mismo granel
-    for ($j = 0; $j < $count; $j++) {
-      $j == $i ? $j = $j + 1 : $j;
-      if ($dataPedidos[$j]['granel'] == $newDataPedidos[$i]['ref']) {
-        // Validar multi con la misma referencia
-        if ($dataPedidos[$i]['referencia'] == $dataPedidos[$j]['referencia']) {
-          $newDataPedidos[$i]['multi'][$j] = array(
-            'pedido' => "{$dataPedidos[$i]['numPedido']} - {$dataPedidos[$j]['numPedido']}", 'referencia' => $dataPedidos[$j]['referencia'], 'cantidadunidades' => ($dataPedidos[$i]['cantidad_acumulada'] + $dataPedidos[$j]['cantidad_acumulada']),
-            'tamaniopresentacion' => ($dataPedidos[$i]['tamanio_lote'] + $dataPedidos[$j]['tamanio_lote']), 'fecha_insumo' => "{$dataPedidos[$j]['fecha_insumo']} - {$dataPedidos[$i]['fecha_insumo']}"
-          );
-        } else $newDataPedidos[$i]['multi'][$j] = array(
-          'pedido' => $dataPedidos[$j]['numPedido'], 'referencia' => $dataPedidos[$j]['referencia'], 'cantidadunidades' => $dataPedidos[$j]['cantidad_acumulada'],
-          'tamaniopresentacion' => $dataPedidos[$j]['tamanio_lote'], 'fecha_insumo' => $dataPedidos[$j]['fecha_insumo']
-        );
-      } else $newDataPedidos[$i]['multi'][$i] = array(
-        'pedido' => $dataPedidos[$i]['numPedido'], 'referencia' => $dataPedidos[$i]['referencia'], 'cantidadunidades' => $dataPedidos[$i]['cantidad_acumulada'],
-        'tamaniopresentacion' => $dataPedidos[$i]['tamanio_lote'], 'fecha_insumo' => $dataPedidos[$i]['fecha_insumo']
-      );
-    }
+    // for ($j = 0; $j < $count; $j++) {
+    //   $j == $i ? $j = $j + 1 : $j;
+    //   if ($dataPedidos[$j]['granel'] == $newDataPedidos[$i]['ref']) {
+    //     // Validar multi con la misma referencia
+    //     if ($dataPedidos[$i]['referencia'] == $dataPedidos[$j]['referencia']) {
+    //       $newDataPedidos[$i]['multi'][$j] = array(
+    //         'pedido' => "{$dataPedidos[$i]['numPedido']} - {$dataPedidos[$j]['numPedido']}", 'referencia' => $dataPedidos[$j]['referencia'], 'cantidadunidades' => ($dataPedidos[$i]['cantidad_acumulada'] + $dataPedidos[$j]['cantidad_acumulada']),
+    //         'tamaniopresentacion' => ($dataPedidos[$i]['tamanio_lote'] + $dataPedidos[$j]['tamanio_lote']), 'fecha_insumo' => "{$dataPedidos[$j]['fecha_insumo']} - {$dataPedidos[$i]['fecha_insumo']}"
+    //       );
+    //     } else $newDataPedidos[$i]['multi'][$j] = array(
+    //       'pedido' => $dataPedidos[$j]['numPedido'], 'referencia' => $dataPedidos[$j]['referencia'], 'cantidadunidades' => $dataPedidos[$j]['cantidad_acumulada'],
+    //       'tamaniopresentacion' => $dataPedidos[$j]['tamanio_lote'], 'fecha_insumo' => $dataPedidos[$j]['fecha_insumo']
+    //     );
+    //   } else $newDataPedidos[$i]['multi'][$i] = array(
+    //     'pedido' => $dataPedidos[$i]['numPedido'], 'referencia' => $dataPedidos[$i]['referencia'], 'cantidadunidades' => $dataPedidos[$i]['cantidad_acumulada'],
+    //     'tamaniopresentacion' => $dataPedidos[$i]['tamanio_lote'], 'fecha_insumo' => $dataPedidos[$i]['fecha_insumo']
+    //   );
+    //}
 
     //Eliminar las referencias de los graneles que la suma supera los 2500 kg
     if ($sumArrayGranel[$dataPedidos[$i]['granel']] > 2500) {
@@ -95,8 +97,8 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
       unset($newDataPedidos[$i]);
     } else {
       //Resetear llaves multi y convertirlo a objeto
-      $newDataPedidos[$i]['multi'] = array_values($newDataPedidos[$i]['multi']);
-      $newDataPedidos[$i]['multi'] = json_encode($newDataPedidos[$i]['multi']);
+      // $newDataPedidos[$i]['multi'] = array_values($newDataPedidos[$i]['multi']);
+      // $newDataPedidos[$i]['multi'] = json_encode($newDataPedidos[$i]['multi']);
     }
   }
 
