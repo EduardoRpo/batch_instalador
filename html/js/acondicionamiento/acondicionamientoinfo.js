@@ -1,7 +1,7 @@
 /* variables globales */
 
 modulo = 6;
-let id_multi = 1;
+//let id_multi = 1;
 let flag = 0;
 let equipos = [];
 

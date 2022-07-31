@@ -165,6 +165,10 @@ $(document).ready(function() {
 
                     firmado(info.data[0].realizo, 5);
                     firmado(info.data[0].verifico, 6);
+
+                    if (info.data[0].verifico)
+                        $(`.multiLinea${id_multi}`).css('background', '#009a44');
+
                 } else {
                     $(`#utilizada_empaque${id_multi}`).val(info.data[0].envasada);
                     $(`#averias_empaque${id_multi}`).val(info.data[0].averias);
@@ -287,4 +291,8 @@ $(document).ready(function() {
         let firma = template.replace(":firma:", datos);
         parent.append(firma).html;
     }
+
+
+
+
 });

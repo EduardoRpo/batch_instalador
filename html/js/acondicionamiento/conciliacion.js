@@ -93,6 +93,10 @@ $(document).ready(function() {
                         $(`#parcialesUnidadesProducidas${id_multi}`).val(suma);
                         $(`#txtMuestrasRetencion${id_multi}`).prop("readonly", true);
                         $(`#txtUnidadesProducidas${id_multi}`).val("");
+
+                        $(`.devolucion_realizado${id_multi}`).prop("disabled", false)
+                        $(`.conciliacion_realizado${id_multi}`).prop("disabled", true)
+
                         conciliacionRendimiento();
                     }
                 })

@@ -1,6 +1,7 @@
 var eq1
 var eq2
 var eq3
+var id_multi
 
 $(document).ready(function() {
 
@@ -168,7 +169,6 @@ $(document).ready(function() {
             result = await validarCierreProcesos2y3()
             if (!result) return false
         }
-
 
         if (modulo == 5 && result && id == `controlpeso_realizado${id_multi}` || modulo == 6 && result && id == `controlpeso_realizado${id_multi}`) {
             result = await validarControlPeso(id)

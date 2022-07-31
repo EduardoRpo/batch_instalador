@@ -211,7 +211,7 @@ include('modal/image.php')
           </div>
 
           <div class="card" id="envasado1">
-            <div class="card-header" id="headingThree">
+            <div class="card-header multiLinea1" id="headingThree">
               <h5 class="mb-0">
                 <button class="btn btn-link collapsed ref_multi1" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
                   <b id="envasadoMulti1" class="img_ref">ENVASADO</b>
@@ -438,7 +438,7 @@ include('modal/image.php')
           </div>
 
           <div class="card" id="envasado2">
-            <div class="card-header" id="headingThree">
+            <div class="card-header multiLinea2" id="headingThree">
               <h5 class="mb-0">
                 <button class="btn btn-link collapsed img_ref ref_multi2" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
                   <b id="envasadoMulti2" class="img_ref">ENVASADO</b>
@@ -670,7 +670,7 @@ include('modal/image.php')
           </div>
 
           <div class="card" id="envasado3">
-            <div class="card-header" id="headingFive">
+            <div class="card-header multiLinea3" id="headingFive">
               <h5 class="mb-0">
                 <button id="ref_multi1" class="btn btn-link collapsed img_ref ref_multi3" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
                   <b id="envasadoMulti3" class="img_ref">ENVASADO</b>
@@ -898,7 +898,7 @@ include('modal/image.php')
           </div>
 
           <div class="card" id="envasado4">
-            <div class="card-header" id="headingSix">
+            <div class="card-header multiLinea1" id="headingSix">
               <h5 class="mb-0">
                 <button id="ref_multi4" class="btn btn-link collapsed img_ref ref_multi4" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
                   <b id="envasadoMulti4" class="img_ref">ENVASADO</b>

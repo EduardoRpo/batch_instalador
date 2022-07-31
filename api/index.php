@@ -100,6 +100,7 @@ require_once __DIR__ . '/src/routes/app/global/desinfectante.php';
 require_once __DIR__ . '/src/routes/app/global/materias_primas.php';
 require_once __DIR__ . '/src/routes/app/global/etiquetas.php';
 require_once __DIR__ . '/src/routes/app/global/autenticacion.php';
+require_once __DIR__ . '/src/routes/app/global/validacionesCierre.php';
 
 //Pesaje
 require_once __DIR__ . '/src/routes/app/pesaje/cargos.php';

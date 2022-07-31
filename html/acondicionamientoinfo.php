@@ -205,7 +205,7 @@ include('modal/image.php')
           </div>
 
           <div class="card" id="acondicionamiento1">
-            <div class="card-header" id="headingThree">
+            <div class="card-header" id="headingThree multiLinea1">
               <h5 class="mb-0">
                 <button class="btn btn-link collapsed ref_multi1" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
                   <b id="acondicionamientoMulti1" class="img_ref">ACONDICIONAMIENTO</b>
@@ -346,6 +346,12 @@ include('modal/image.php')
                       </div>
                     </div>
                   </div>
+
+                  <div>
+                    <button type="button" class="btn waves-effect waves-light btn-danger entregaParcial" id="entregaParcial1" style="width: 180px; height: 38px;">Entrega Parcial</button>
+                  </div>
+
+
                   <div class="row" style="margin: 1%">
                     <div class="col-md-4 align-self-center">
                       <label for="recipient-name" class="col-form-label">Realizado Por</label>
@@ -591,6 +597,11 @@ include('modal/image.php')
                       </div>
                     </div>
                   </div>
+
+                  <div>
+                    <button type="button" class="btn waves-effect waves-light btn-danger entregaParcial" id="entregaParcial2" style="width: 180px; height: 38px;">Entrega Parcial</button>
+                  </div>
+
                   <div class="row" style="margin: 1%">
                     <div class="col-md-4 align-self-center">
                       <label for="recipient-name" class="col-form-label">Realizado Por</label>
@@ -664,13 +675,11 @@ include('modal/image.php')
                       <input type="number" class="form-control centrado" id="txtNoMovimiento2" min="1">
                     </div>
 
-
                     <div class="conciliacionrendimiento__group">
                       <label for="recipient-name" class="col-form-label">Responsable Movimiento Ofimatica:</label>
                       <input type="text" class="form-control centrado" id="txtReponsable2" value="Director de Producción (CRC)" readonly>
                     </div>
                   </div>
-
 
                   <div class="row" style="margin: 1%">
                     <div class="col-md-4 align-self-center">
@@ -833,6 +842,11 @@ include('modal/image.php')
                       </div>
                     </div>
                   </div>
+
+                  <div>
+                    <button type="button" class="btn waves-effect waves-light btn-danger entregaParcial" id="entregaParcial3" style="width: 180px; height: 38px;">Entrega Parcial</button>
+                  </div>
+
                   <div class="row" style="margin: 1%">
                     <div class="col-md-4 align-self-center">
                       <label for="recipient-name" class="col-form-label">Realizado Por</label>
@@ -1077,6 +1091,11 @@ include('modal/image.php')
                       </div>
                     </div>
                   </div>
+
+                  <div>
+                    <button type="button" class="btn waves-effect waves-light btn-danger entregaParcial" id="entregaParcial4" style="width: 180px; height: 38px;">Entrega Parcial</button>
+                  </div>
+
                   <div class="row" style="margin: 1%">
                     <div class="col-md-4 align-self-center">
                       <label for="recipient-name" class="col-form-label">Realizado Por</label>
@@ -1219,6 +1238,7 @@ include('modal/image.php')
         <script src="/html/js/acondicionamiento/imprimirEtiquetas.js"></script>
         <script src="/html/js/acondicionamiento/materiales.js"></script>
         <script src="/html/js/acondicionamiento/validacionesAcond.js"></script>
+        <script src="/html/js/acondicionamiento/entregaParcial.js"></script>
 
 </body>
 
