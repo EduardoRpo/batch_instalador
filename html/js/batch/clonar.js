@@ -19,6 +19,11 @@ $(document).ready(function() {
         data = tablaBatch.row(this).data();
     });
 
+    $("#tablaBatchInactivos tbody").on("click", "tr", function() {
+        //data = tabla.row(this).data();
+        data = tablaBatchInactivos.row(this).data();
+    });
+
     $("#form_clonar").submit(function(event) {
         event.preventDefault();
         if ($("input[name='optradio']:radio").is(":checked")) {

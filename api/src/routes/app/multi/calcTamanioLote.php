@@ -20,115 +20,86 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
 
   $referencia = array();
 
-  for ($i = 0; $i < sizeof($dataPedidos); $i++) {
-    $dataMulti = $multiDao->findProductMultiByRef($dataPedidos[$i]['referencia']);
-    $tamanio_lote = $calcTamanioMultiDao->calcularTamanioLote($dataMulti, $dataPedidos[$i]['cantidad_acumulada']);
-    $dataPedidos[$i]['tamanio_lote'] = $tamanio_lote;
-    $dataPedidos[$i]['presentacion_ref'] = $dataMulti['presentacion'];
+  // Almacena las cantidades registradas por pedido y referencia individualmente
+  session_start();
+  $_SESSION['dataPedidos'] = $dataPedidos;
 
-    $granel = $dataPedidos[$i]['granel'];
+  // Consolidar referencias
 
-    $loteGranel[$i][$granel] = $tamanio_lote;
-    $loteCantidades[$i][$granel] = $dataPedidos[$i]['cantidad_acumulada'];
+  $dataPedidosReferencias = array();
 
-    $producto[$i] = $dataPedidos[$i]['producto'];
-    $referencia[$i] = $dataPedidos[$i]['referencia'];
-  }
-
-  //Consolidado tamaño Graneles
-
-  $sumArrayGranel = array();
-  $sumArrayCantidades = array();
-
-  foreach ($loteGranel as $k => $subArray) {
-    foreach ($subArray as $id => $value) {
-      $sumArrayGranel[$id] += $value;
-    }
-  }
-
-  foreach ($loteCantidades as $k => $subArray) {
-    foreach ($subArray as $id => $value) {
-      $sumArrayCantidades[$id] += $value;
-    }
-  }
-
-  $newDataPedidos = array();
-  $count = sizeof($dataPedidos);
-
-  for ($i = 0; $i < $count; $i++) {
-    //Buscar lotePresentacion Granel
-    $presentacion = $productsDao->findProductGranel($dataPedidos[$i]['granel']);
-
-    //Definir nombre llaves
-    $newDataPedidos[$i]['ref'] = $dataPedidos[$i]['granel'];
-    $newDataPedidos[$i]['lote'] = $sumArrayGranel[$dataPedidos[$i]['granel']];
-    $newDataPedidos[$i]['programacion'] = '';
-    $newDataPedidos[$i]['presentacion'] = $presentacion['presentacion'];
-    $newDataPedidos[$i]['multi'][$i] = array(
-      'pedido' => $dataPedidos[$i]['numPedido'], 'referencia' => $dataPedidos[$i]['referencia'], 'cantidadunidades' => $dataPedidos[$i]['cantidad_acumulada'],
-      'tamaniopresentacion' => $dataPedidos[$i]['tamanio_lote'], 'fecha_insumo' => $dataPedidos[$i]['fecha_insumo']
-    );
-
-    // for ($j = 0; $j < $count; $j++) {
-    //   $j == $i ? $j = $j + 1 : $j;
-    //   if ($dataPedidos[$j]['granel'] == $newDataPedidos[$i]['ref']) {
-    //     // Validar multi con la misma referencia
-    //     if ($dataPedidos[$i]['referencia'] == $dataPedidos[$j]['referencia']) {
-    //       $newDataPedidos[$i]['multi'][$j] = array(
-    //         'pedido' => "{$dataPedidos[$i]['numPedido']} - {$dataPedidos[$j]['numPedido']}", 'referencia' => $dataPedidos[$j]['referencia'], 'cantidadunidades' => ($dataPedidos[$i]['cantidad_acumulada'] + $dataPedidos[$j]['cantidad_acumulada']),
-    //         'tamaniopresentacion' => ($dataPedidos[$i]['tamanio_lote'] + $dataPedidos[$j]['tamanio_lote']), 'fecha_insumo' => "{$dataPedidos[$j]['fecha_insumo']} - {$dataPedidos[$i]['fecha_insumo']}"
-    //       );
-    //     } else $newDataPedidos[$i]['multi'][$j] = array(
-    //       'pedido' => $dataPedidos[$j]['numPedido'], 'referencia' => $dataPedidos[$j]['referencia'], 'cantidadunidades' => $dataPedidos[$j]['cantidad_acumulada'],
-    //       'tamaniopresentacion' => $dataPedidos[$j]['tamanio_lote'], 'fecha_insumo' => $dataPedidos[$j]['fecha_insumo']
-    //     );
-    //   } else $newDataPedidos[$i]['multi'][$i] = array(
-    //     'pedido' => $dataPedidos[$i]['numPedido'], 'referencia' => $dataPedidos[$i]['referencia'], 'cantidadunidades' => $dataPedidos[$i]['cantidad_acumulada'],
-    //     'tamaniopresentacion' => $dataPedidos[$i]['tamanio_lote'], 'fecha_insumo' => $dataPedidos[$i]['fecha_insumo']
-    //   );
-    //}
-
-    //Eliminar las referencias de los graneles que la suma supera los 2500 kg
-    if ($sumArrayGranel[$dataPedidos[$i]['granel']] > 2500) {
-      //Cambiar estado a 2
-      for ($j = 0; $j < sizeof($newDataPedidos[$i]['multi']); $j++) {
-        $EMPRegistroDao->updateEstado($newDataPedidos[$i]['multi'][$j]);
+  foreach ($dataPedidos as $t) {
+    $repeat = false;
+    for ($i = 0; $i < count($dataPedidosReferencias); $i++) {
+      if ($dataPedidosReferencias[$i]['referencia'] == $t['referencia']) {
+        $dataPedidosReferencias[$i]['cantidad_acumulada'] += $t['cantidad_acumulada'];
+        $repeat = true;
+        break;
       }
-      unset($newDataPedidos[$i]);
-    } else {
-      //Resetear llaves multi y convertirlo a objeto
-      // $newDataPedidos[$i]['multi'] = array_values($newDataPedidos[$i]['multi']);
-      // $newDataPedidos[$i]['multi'] = json_encode($newDataPedidos[$i]['multi']);
     }
+    if ($repeat == false)
+      $dataPedidosReferencias[] = array(
+        'granel' => $t['granel'],
+        'referencia' => $t['referencia'],
+        'producto' => $t['producto'],
+        'cantidad_acumulada' => $t['cantidad_acumulada']
+      );
   }
 
-  //Eliminar referencias duplicadas
-  for ($i = 0; $i < $count; $i++) {
-    for ($j = 0; $j < $count; $j++) {
-      $j == $i ? $j = $j + 1 : $j;
-      if ($newDataPedidos[$i]['ref'] == $dataPedidos[$j]['granel']) unset($newDataPedidos[$j]);
+  // Calcular el tamaño del lote
+
+  for ($i = 0; $i < sizeof($dataPedidosReferencias); $i++) {
+    $dataMulti = $multiDao->findProductMultiByRef($dataPedidosReferencias[$i]['referencia']);
+    $tamanio_lote = $calcTamanioMultiDao->calcularTamanioLote($dataMulti, $dataPedidosReferencias[$i]['cantidad_acumulada']);
+    $dataPedidosReferencias[$i]['tamanio_lote'] = $tamanio_lote;
+  }
+
+  // Consolidar los graneles
+
+  $dataPedidosGranel = array();
+
+  foreach ($dataPedidosReferencias as $t) {
+    $repeat = false;
+    for ($i = 0; $i < count($dataPedidosGranel); $i++) {
+      if ($dataPedidosGranel[$i]['granel'] == $t['granel']) {
+        $dataPedidosGranel[$i]['cantidad_acumulada'] += $t['cantidad_acumulada'];
+        $dataPedidosGranel[$i]['tamanio_lote'] += $t['tamanio_lote'];
+        $repeat = true;
+        break;
+      }
     }
+    if ($repeat == false)
+      $dataPedidosGranel[] = array(
+        'granel' => $t['granel'],
+        'producto' => $t['producto'],
+        'cantidad_acumulada' => $t['cantidad_acumulada'],
+        'tamanio_lote' => $t['tamanio_lote']
+      );
   }
 
-  // Almacenar en variable session las multipresentaciones
-  for ($i = 0; $i < sizeof($dataPedidos); $i++) {
-    $multipresentaciones[$i] = array(
-      'pedido' => $dataPedidos[$i]['numPedido'], 'referencia' => $dataPedidos[$i]['referencia'], 'cantidadunidades' => $dataPedidos[$i]['cantidad_acumulada'],
-      'tamaniopresentacion' => $dataPedidos[$i]['tamanio_lote'], 'fecha_insumo' => $dataPedidos[$i]['fecha_insumo']
-    );
-    session_start();
-    $_SESSION['dataMulti'] = $multipresentaciones;
-  }
+  //Eliminar las referencias de los graneles que la suma supera los 2500 kg
 
-  //Resetear llaves arrays
-  $newDataPedidos = array_values($newDataPedidos);
+  /*  for ($i = 0; $i < $dataPedidosGranel; $i++) {
+    if ($dataPedidosGranel[$i]['tamanio_lote'] > 2500) {
+      $EMPRegistroDao->updateEstado($dataPedidosGranel[$i]); //Modifica estado a 2
+    } else
+      unset($dataPedidosGranel[$i]);
+  } */
+
+  //Adiciona la multipresentacion al Granel
+
+  for ($i = 0; $i < sizeof($dataPedidosGranel); $i++)
+    for ($j = 0; $j < sizeof($dataPedidosReferencias); $j++)
+      if ($dataPedidosGranel[$i]['granel'] == $dataPedidosReferencias[$j]['granel'])
+        $dataPedidosGranel[$i]['multi'][$j] = $dataPedidosReferencias[$j];
+
 
   //Almacenar en variables de session la variable $dataPedidos
-  $_SESSION['dataPedidos'] = $newDataPedidos;
+  $_SESSION['dataGranel'] = $dataPedidosGranel;
 
-  $sumArrayTotal = array('granel' => array_keys($sumArrayGranel), 'producto' => $producto, 'tamanio' => array_values($sumArrayGranel), 'cantidades' => array_values($sumArrayCantidades));
+  //$array = array('granel' => array_keys($sumArrayGranel), 'producto' => $producto, 'tamanio' => array_values($sumArrayGranel), 'cantidades' => array_values($sumArrayCantidades));
 
-  $response->getBody()->write(json_encode($sumArrayTotal, JSON_NUMERIC_CHECK));
+  $response->getBody()->write(json_encode($dataPedidosGranel, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
 
