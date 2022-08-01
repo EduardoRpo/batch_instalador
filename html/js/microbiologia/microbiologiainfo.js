@@ -27,9 +27,9 @@ $(document).ready(function() {
     loadBatch = async() => {
         await cargarInfoBatch();
         result = await cargarDesinfectantes();
-        //await busqueda_multi();
-        //await deshabilitarbotones();
+        cargarTanques()
         cargarBatchMicro()
+            //cargarBatchMicro()
     }
 
     loadBatch()

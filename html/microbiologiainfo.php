@@ -412,12 +412,15 @@ include("modal/modal_condicionesMedio.php");
   <script defer src="/html/js/global/equipos.js"></script>
   <script defer src="/html/js/global/incidencias.js"></script>
   <script defer src="/html/js/global/condiciones_medio.js"></script>
-  <!-- <script src="../../html/js/global/validaciones.js"></script> -->
   <script defer src="/html/js/global/habilitarbtn.js"></script>
 
+  <script src="/html/js/global/validacionesAuth.js"></script>
+  <script src="/html/js/global/auth.js"></script>
+  <script src="/html/js/global/controller.js"></script>
+
+  <script defer src="/html/js/microbiologia/cargarBatch.js"></script>
   <script defer src="/html/js/microbiologia/cargarMulti.js"></script>
   <script defer src="/html/js/microbiologia/microbiologiainfo.js"></script>
-  <script defer src="/html/js/microbiologia/cargarBatch.js"></script>
   <script defer src="/html/js/microbiologia/deshabilitarRef.js"></script>
   <script defer src="/html/js/microbiologia/firmar.js"></script>
 </body>

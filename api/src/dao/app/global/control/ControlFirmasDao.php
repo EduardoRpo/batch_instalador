@@ -85,9 +85,16 @@ class ControlFirmasDao
                 $cantidad = 1;
 
             $sql = "UPDATE batch_control_firmas SET cantidad_firmas = :cantidad 
-                WHERE batch = :batch AND modulo = :modulo";
+                    WHERE batch = :batch AND modulo = :modulo";
             $query = $connection->prepare($sql);
             $query->execute(['cantidad' => $cantidad, 'batch' => $dataBatch['idBatch'], 'modulo' => $dataBatch['modulo']]);
+
+            if ($dataBatch['modulo'] == 4) {
+                $sql = "UPDATE batch_control_firmas SET cantidad_firmas = :cantidad 
+                        WHERE batch = :batch AND modulo = :modulo";
+                $query = $connection->prepare($sql);
+                $query->execute(['cantidad' => $cantidad, 'batch' => $dataBatch['idBatch'], 'modulo' => 9]);
+            }
         }
     }
 }

@@ -2,6 +2,8 @@ let tabla
 let editar
 let tbl
 let ref
+$('.alertFormula').hide()
+
 
 /* Mostrar Menu seleccionado */
 
@@ -11,11 +13,12 @@ $('.contenedor-menu .menu ul.menu_productos').show()
 
 $('.contenedor-menu .menu ul.menu_formulas').show()
 
-$('#instructivos').click(function(e) {
+/* $('#instructivos').click(function(e) {
     e.preventDefault();
     $(".contenedor-menu .menu ul.menu_instructivos").toogle();
-
-});
+    
+}) */
+;
 
 
 /* Cargue select referencias */
@@ -61,24 +64,6 @@ $('#formula_f').change(function(e) {
     materiaPrima('f')
 })
 
-/* Cargar Materia Prima */
-
-const materiaPrima = (tb) => {
-    $.ajax({
-        method: 'POST',
-        url: 'php/c_formulas.php',
-        data: { operacion: '4', tb: tb },
-
-        success: function(response) {
-            var info = JSON.parse(response)
-            let $selectReferencia = $('#cmbreferencia')
-            cargarSelect(info, $selectReferencia)
-        },
-        error: function(response) {
-            console.log(response)
-        },
-    })
-}
 
 /* cargar Selects */
 
@@ -389,6 +374,9 @@ function cargarTablaFormulas(referencia) {
                 }, 0)
             total = total.toFixed(2)
             $('#totalPorcentajeFormulas').val(`Total ${total}%`)
+            if (total != 100) $('.alertFormula').show()
+            else $('.alertFormula').hide()
+
         },
     })
 }

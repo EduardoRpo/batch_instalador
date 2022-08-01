@@ -1,9 +1,15 @@
 modulo = 10;
 let radio;
+
+loadBatch = async() => {
+    await cargarInfoBatch();
+    cargarTanques()
+}
+
+loadBatch()
+
 $(document).ready(function() {
-    const cargarLiberacion = () => {
-        $.post("url", data, function(data, textStatus, jqXHR) {}, "dataType");
-    };
+
 
     cargar = (btn, idbtn) => {
         sessionStorage.setItem("idbtn", idbtn);
@@ -20,85 +26,86 @@ $(document).ready(function() {
         $("#clave").val("");
         $("#m_firmar").modal("show");
     };
-});
 
-const guardarLiberacion = (info) => {
-    let obs = $("#observacioneslote").val();
-    $.post("../../html/php/liberacion.php", { radio, id, info, obs, idBatch, op: 1 },
-        function(data, textStatus, jqXHR) {
+    guardarLiberacion = (info) => {
+        let obs = $("#observacioneslote").val();
+        $.post("../../html/php/liberacion.php", { radio, id, info, obs, idBatch, op: 1 },
+            function(data, textStatus, jqXHR) {
 
-            if (data == 1) {
+                if (data == 1) {
+                    alertify.set("notifier", "position", "top-right");
+                    alertify.error("Faltan firmas en Despachos para cerrar el lote");
+                    return false
+                }
+
                 alertify.set("notifier", "position", "top-right");
-                alertify.error("Faltan firmas en Despachos para cerrar el lote");
-                return false
-            }
+                alertify.success("Firmado exitosamente");
 
-            alertify.set("notifier", "position", "top-right");
-            alertify.success("Firmado exitosamente");
+                if (id == 'calidad_verificado' || id == 'tecnica_realizado')
+                    firmar(info)
 
-            if (id == 'calidad_verificado' || id == 'tecnica_realizado')
+                id = sessionStorage.getItem("idbtn");
+
+                if (id == "firma1")
+                    $(".produccion_realizado").css({ background: "lightgray", border: "gray" }).prop("disabled", true);
+                else if (id == "firma2")
+                    $(".calidad_verificado").css({ background: "lightgray", border: "gray" }).prop("disabled", true);
+                else
+                    $(".tecnica_realizado").css({ background: "lightgray", border: "gray" }).prop("disabled", true);
                 firmar(info)
+            }
+        );
+    };
 
-            id = sessionStorage.getItem("idbtn");
+    cargarBatch = () => {
+        $.post(
+            "../../html/php/liberacion.php", { idBatch, op: 2 },
+            function(data, textStatus, jqXHR) {
+                info = JSON.parse(data);
+                if (info == false) return false;
+                $("#observacioneslote").val(info.observaciones);
+                if (info.aprobacion == 0) $("#radioLiberacionNo").prop("checked", true);
+                else $("#radioLiberacionSi").prop("checked", true);
+                if (info.produccion != null) firmado(info.produccion, 1);
+                if (info.calidad != null) firmado(info.calidad, 2);
+                if (info.tecnica != null) firmado(info.tecnica, 3);
+            }
+        );
+    };
 
-            if (id == "firma1")
-                $(".produccion_realizado").css({ background: "lightgray", border: "gray" }).prop("disabled", true);
-            else if (id == "firma2")
-                $(".calidad_verificado").css({ background: "lightgray", border: "gray" }).prop("disabled", true);
-            else
-                $(".tecnica_realizado").css({ background: "lightgray", border: "gray" }).prop("disabled", true);
-            firmar(info)
+    firmado = (datos, posicion) => {
+        let template =
+            '<img id=":id:" src=":firma:" alt="firma_usuario" height="130">';
+        let parent;
+
+        btn_id = $("#idbtn").val();
+
+        if (posicion == 1) {
+            parent = $("#produccion_realizado").parent();
+            $("#produccion_realizado").remove();
+            $(".produccion_realizado")
+                .css({ background: "lightgray", border: "gray" })
+                .prop("disabled", true);
         }
-    );
-};
 
-const cargarBatch = () => {
-    $.post(
-        "../../html/php/liberacion.php", { idBatch, op: 2 },
-        function(data, textStatus, jqXHR) {
-            info = JSON.parse(data);
-            if (info == false) return false;
-            $("#observacioneslote").val(info.observaciones);
-            if (info.aprobacion == 0) $("#radioLiberacionNo").prop("checked", true);
-            else $("#radioLiberacionSi").prop("checked", true);
-            if (info.produccion != null) firmado(info.produccion, 1);
-            if (info.calidad != null) firmado(info.calidad, 2);
-            if (info.tecnica != null) firmado(info.tecnica, 3);
+        if (posicion == 2) {
+            parent = $("#calidad_verificado").parent();
+            $("#calidad_verificado").remove();
+            $(".calidad_verificado")
+                .css({ background: "lightgray", border: "gray" })
+                .prop("disabled", true);
         }
-    );
-};
 
-const firmado = (datos, posicion) => {
-    let template =
-        '<img id=":id:" src=":firma:" alt="firma_usuario" height="130">';
-    let parent;
+        if (posicion == 3) {
+            parent = $("#tecnica_realizado").parent();
+            $("#tecnica_realizado").remove();
+            $(".tecnica_realizado")
+                .css({ background: "lightgray", border: "gray" })
+                .prop("disabled", true);
+        }
 
-    btn_id = $("#idbtn").val();
-
-    if (posicion == 1) {
-        parent = $("#produccion_realizado").parent();
-        $("#produccion_realizado").remove();
-        $(".produccion_realizado")
-            .css({ background: "lightgray", border: "gray" })
-            .prop("disabled", true);
-    }
-
-    if (posicion == 2) {
-        parent = $("#calidad_verificado").parent();
-        $("#calidad_verificado").remove();
-        $(".calidad_verificado")
-            .css({ background: "lightgray", border: "gray" })
-            .prop("disabled", true);
-    }
-
-    if (posicion == 3) {
-        parent = $("#tecnica_realizado").parent();
-        $("#tecnica_realizado").remove();
-        $(".tecnica_realizado")
-            .css({ background: "lightgray", border: "gray" })
-            .prop("disabled", true);
-    }
-
-    let firma = template.replace(":firma:", datos);
-    parent.append(firma).html;
-};
+        let firma = template.replace(":firma:", datos);
+        parent.append(firma).html;
+    };
+    cargarBatch()
+});

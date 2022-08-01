@@ -21,33 +21,36 @@ $(document).ready(function() {
             $(`.etiqueta${i + 1}`).html(InsumosMulti[0].id_etiqueta);
             $(`.descripcion_etiqueta${i + 1}`).html(InsumosMulti[0].etiqueta);
 
-            $(`.unidades${i + 1}`).html(unidades);
+            $(`.unidadesEnvase${i + 1}`).html(unidades);
+            $(`.unidadesTapa${i + 1}`).html(unidades);
+            $(`.unidadesEtiqueta${i + 1}`).html(unidades);
+
             $(`.unidades${i + 1}e`).html(empaqueEnvasado);
 
             // Carga valores sin referencia mp
 
             if (InsumosMulti[i].id_envase == 50000) {
-                $(`.unidades${i + 1}`).html(0);
-                $(`#envaseEnvasada${j}`).val(0).prop("disabled", true);
-                $(`#envaseAverias${j}`).val(0).prop("disabled", true);
-                $(`#envaseSobrante${j}`).val(0).prop("disabled", true);
-                $(`#envaseDevolucion${j}`).html(0);
+                $(`.unidadesEnvase${i + 1}`).html(0);
+                $(`#envaseEnvasada${i}`).val(0).prop("disabled", true);
+                $(`#envaseAverias${i}`).val(0).prop("disabled", true);
+                $(`#envaseSobrante${i}`).val(0).prop("disabled", true);
+                $(`#envaseDevolucion${i}`).html(0);
             }
 
             if (InsumosMulti[i].id_tapa == 50000) {
-                $(`.unidades${i + 1}`).html(0);
-                $(`#tapaEnvasada${j}`).val(0).prop("disabled", true);
-                $(`#tapaAverias${j}`).val(0).prop("disabled", true);
-                $(`#tapaSobrante${j}`).val(0).prop("disabled", true);
-                $(`#tapaDevolucion${j}`).html(0);
+                $(`.unidadesTapa${i + 1}`).html(0);
+                $(`#tapaEnvasada${i}`).val(0).prop("disabled", true);
+                $(`#tapaAverias${i}`).val(0).prop("disabled", true);
+                $(`#tapaSobrante${i}`).val(0).prop("disabled", true);
+                $(`#tapaDevolucion${i}`).html(0);
             }
 
             if (InsumosMulti[i].id_etiqueta == 50000) {
-                $(`.unidades${i + 1}`).html(0);
-                $(`#etiquetaEnvasada${j}`).val(0).prop("disabled", true);
-                $(`#etiquetaAverias${j}`).val(0).prop("disabled", true);
-                $(`#etiquetaSobrante${j}`).val(0).prop("disabled", true);
-                $(`#etiquetaDevolucion${j}`).html(0);
+                $(`.unidadesEtiqueta${i + 1}`).html(0);
+                $(`#etiquetaEnvasada${i}`).val(0).prop("disabled", true);
+                $(`#etiquetaAverias${i}`).val(0).prop("disabled", true);
+                $(`#etiquetaSobrante${i}`).val(0).prop("disabled", true);
+                $(`#etiquetaDevolucion${i}`).html(0);
             }
         }
 

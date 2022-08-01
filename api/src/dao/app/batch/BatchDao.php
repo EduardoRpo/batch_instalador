@@ -137,11 +137,16 @@ class BatchDao extends estadoInicialDao
     public function saveBatch($dataBatch)
     {
         //$pedido                 = $dataBatch['pedido'];
-        $referencia             = $dataBatch['ref'];
-        $tamanototallote        = $dataBatch['lote'];
+
+        $dataBatch['ref'] == null ? $referencia = $dataBatch['granel'] : $referencia = $dataBatch['ref'];
+        $dataBatch['lote'] == null ? $tamanototallote = $dataBatch['tamanio_lote'] : $tamanototallote = $dataBatch['lote'];
+        $dataBatch['presentacion'] == null ? $tamanolotepresentacion = 1 : $tamanolotepresentacion = $dataBatch['presentacion'];
+
         $fechaprogramacion      = $dataBatch['programacion'];
-        $tamanolotepresentacion = $dataBatch['presentacion'];
-        $multi                  = json_decode($dataBatch['multi'], true);
+        // $referencia             = $dataBatch['ref'];
+        // $tamanototallote        = $dataBatch['lote'];
+        // $tamanolotepresentacion = $dataBatch['presentacion'];
+        $multi                  = $dataBatch['multi'];
 
         if ($dataBatch['date'])
             $fecha           = json_decode($dataBatch['date']);
@@ -149,17 +154,16 @@ class BatchDao extends estadoInicialDao
             $fecha           = date("Y-m-d");
 
         $fechahoy = date("Y-m-d");
-
-
-        $connection = Connection::getInstance()->getConnection();
-
         $unidadesxlote = 0;
 
         /* sumar total cantidades */
+        if ($multi[0]['cantidadunidades'] != null) {
+            for ($i = 0; $i < sizeof($multi); $i++)
+                $unidadesxlote = $unidadesxlote + $multi[$i]['cantidadunidades'];
+        } else
+            $unidadesxlote = $dataBatch['cantidad_acumulada'];
 
-        for ($i = 0; $i < sizeof($multi); $i++)
-            $unidadesxlote = $unidadesxlote + $multi[$i]['cantidadunidades'];
-
+        $connection = Connection::getInstance()->getConnection();
         /* Modifica estado inicial */
 
         $result = $this->estadoInicial($referencia, $fechaprogramacion);

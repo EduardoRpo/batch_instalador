@@ -83,7 +83,7 @@ $(document).ready(function() {
 
                 if (info[j].movimiento)
                     $(`#mov_inventario_acond${id_multi}`).val(info[j].movimiento);
-                else $(`#mov_inventario_acond${id_multi}`).val(movimiento);
+                else $(`#mov_inventario_acond${id_multi}`).val(mov);
 
                 $(`#muestras_retencion_acond${id_multi}`).val(retencion);
                 $(`#parciales${id_multi}`).val(unidadestotales);

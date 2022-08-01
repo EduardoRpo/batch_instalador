@@ -99,9 +99,7 @@ function almacenarfirma(info) {
                     (modulos = 'pesaje y/o preparacion') :
                     (modulos = 'envasado y/o acondicionamiento');
                 alertify.set('notifier', 'position', 'top-right');
-                alertify.error(
-                    `No es posible cerrar este proceso para el Batch ${idBatch}. Los módulos de ${modulos} aún no se encuentran completamente firmados`
-                );
+                alertify.error(`No es posible cerrar este proceso para el Batch ${idBatch}. Los módulos de ${modulos} aún no se encuentran completamente firmados`);
                 return false;
             }
 

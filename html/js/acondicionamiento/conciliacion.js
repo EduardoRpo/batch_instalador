@@ -57,13 +57,6 @@ $(document).ready(function() {
             }).set("labels", { ok: "Si, Parcial", cancel: "No, Total" });
     }
 
-    ingresarUsuario = () => {
-        $('#usuario').val('')
-        $('#clave').val('')
-        $('#m_firmar').modal('show')
-    }
-
-
     registrar_conciliacion = (info) => {
         let operacion = 1;
         let unidades = $(`#txtUnidadesProducidas${id_multi}`).val();
@@ -100,6 +93,10 @@ $(document).ready(function() {
                         $(`#parcialesUnidadesProducidas${id_multi}`).val(suma);
                         $(`#txtMuestrasRetencion${id_multi}`).prop("readonly", true);
                         $(`#txtUnidadesProducidas${id_multi}`).val("");
+
+                        $(`.devolucion_realizado${id_multi}`).prop("disabled", false)
+                        $(`.conciliacion_realizado${id_multi}`).prop("disabled", true)
+
                         conciliacionRendimiento();
                     }
                 })

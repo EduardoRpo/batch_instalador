@@ -1,3 +1,10 @@
+/* Mostrar Menu seleccionadp */
+
+$('.contenedor-menu .menu a').removeAttr('style');
+$('#link_desinfectante').css('background', 'coral')
+$('.contenedor-menu .menu ul.menu_generales').show();
+
+
 /* Ocultar */
 
 $('#adDesinfectante').click(function(e) {

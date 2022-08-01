@@ -44,19 +44,19 @@ $(document).ready(function() {
     };
 
     addRows = (data) => {
-        granel = data.granel;
+        /* granel = data.granel;
         producto = data.producto;
         tamanio = data.tamanio;
-        cantidad = data.cantidades;
+        cantidad = data.cantidades; */
 
         row = [];
-        for (i = 0; i < granel.length; i++) {
-            row.push(`<tr ${(text = color(tamanio[i]))}>
-                <td>${granel[i]}</td>
-                <td>${producto[i]}</td>
-                <td>${tamanio[i].toFixed(2)}</td>
-                <td>${cantidad[i]}</td>
-                ${(symbol = check(tamanio[i]))}
+        for (i = 0; i < data.length; i++) {
+            row.push(`<tr ${(text = color(data[i].tamanio_lote))}>
+                <td>${data[i].granel}</td>
+                <td>${data[i].producto}</td>
+                <td>${(data[i].tamanio_lote).toFixed(2)}</td>
+                <td>${data[i].cantidad_acumulada}</td>
+                ${(symbol = check(data[i].tamanio_lote))}
                 </tr>`);
         }
         return row.join('');

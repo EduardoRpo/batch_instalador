@@ -65,7 +65,9 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
 
   //Si el data esta vacio
   if (sizeof($dataBatch) == 0) {
-    $dataBatch = $_SESSION['dataPedidos'];
+    $dataBatch = $_SESSION['dataGranel'];
+    $dataPedidos = $_SESSION['dataPedidos'];
+
     for ($i = 0; $i < sizeof($dataBatch); $i++)
       $dataBatch[$i]['date'] = $date;
 
@@ -94,19 +96,19 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
       $resp = $multiDao->saveMulti($id_batch['id'], $dataBatch[$i]);
 
     /* Actualizar pedido batch */
-    if ($resp == null) {
-      $multi = json_decode($dataBatch[$i]['multi'], true);
+    /* if ($resp == null) {
+      $multi = json_decode($dataBatch[$i]['multi'], true); */
 
-//Validar proceso porque duplica datos
+      //Almacena los pedidos en los batch creados
 
-      for ($j = 0; $j < sizeof($multi); $j++)
+      /* for ($j = 0; $j < sizeof($multi); $j++)
         if ($multi[$j]['pedido']) {
           $resp = $batchDao->updateBatchPedido($id_batch['id'], $multi[$j]);
         } else {
           $resp = $batchDao->updateBatchPedido($id_batch['id'], $dataBatch[0]);
           $_SESSION['dataMulti'] = $multi;
-        }
-    }
+        } 
+    }*/
 
     $resp = $EMPedidosRegistroDao->updateEMPedidosRegistro();
   }

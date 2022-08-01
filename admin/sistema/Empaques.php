@@ -54,8 +54,8 @@
                 <p class="category">Propiedades<a href=""></a></p>
               </div>
               <div class="card-body">
-                <button class="btn btn-primary mb-5 controller" id="tapa">Tapas</button>
                 <button class="btn btn-light mb-5 controller" id="envase">Envases</button>
+                <button class="btn btn-primary mb-5 controller" id="tapa">Tapas</button>
                 <button class="btn btn-primary mb-5 controller" id="etiqueta">Etiquetas</button>
                 <button class="btn btn-light mb-5 controller" id="empaque">Cajas</button>
                 <button class="btn btn-primary mb-5 controller" id="otros">Otros</button>
@@ -65,40 +65,6 @@
         </div>
 
         <div class="row">
-          <div class="col-md-12">
-            <div class="cardPackaging" id="card_tapa">
-              <div class="card-header">
-                <h4 class="card-title">Tapas</h4>
-                <hr>
-                <button type="button" class="btn btn-primary" id="AdicionarTapa">Adicionar</button>
-                <form id="frmAdicionar1" class="frmAdicionar2" style="display: none;">
-                  <label for=""><b>Código</b></label>
-                  <label for=""><b>Descripción de Tapa</b></label>
-
-                  <input type="text" name="txt-Id1" id="txt-Id1" class="form-control" hidden>
-                  <input type="text" name="codigo1" id="codigo1" class="form-control" placeholder="Codigo" style="text-align: center;">
-                  <input type="text" name="input1" id="input1" class="form-control" placeholder="Descripcion Tapa">
-
-                  <button type="button" class="btn btn-primary btnguardar" id="GuardarTapa">Guardar</button>
-                </form>
-                <hr>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table id="tblTapa" class="table-striped row-borde" style="width:100%">
-                    <thead>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <form id="formDataExcel1" enctype="multipart/form-data">
-                <input type="file" name="datosExcel1" id="datosExcel1" class="form-control datosExcel mb-3 ml-3" style="width: 500px; display:inline-flex">
-                <button type="button" id="btnCargarExcel1" class="btn btn-primary btnCargarExcel ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel1.value, 'tapa',1);" disabled="disabled">Cargar Datos</button>
-              </form>
-            </div>
-          </div>
           <div class="col-md-12">
             <div class="cardPackaging" id="card_envase">
               <div class="card-header">
@@ -120,17 +86,46 @@
               <div class="card-body">
                 <div class="table-responsive">
                   <table id="tblEnvases" class="table-striped row-borde" style="width:100%">
-                  <td><strong> Codigo </strong></td>
-                  <td><strong>Envases</strong></td>
-                  <td><strong>Acciones</strong></td>
-                  <tbody>
-                  </tbody>
+                    <tbody>
+                    </tbody>
                   </table>
                 </div>
               </div>
               <form action="" id="formDataExcel2" enctype="multipart/form-data">
                 <input type="file" name="datosExcel2" id="datosExcel2" class="form-control datosExcel mb-3 ml-3" style="width: 500px; display:inline-flex">
                 <button type="button" id="btnCargarExcel2" class="btn btn-primary btnCargarExcel ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel2.value, 'envase', 2);" disabled="disabled">Cargar Datos</button>
+              </form>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="cardPackaging" id="card_tapa">
+              <div class="card-header">
+                <h4 class="card-title">Tapas</h4>
+                <hr>
+                <button type="button" class="btn btn-primary" id="AdicionarTapa">Adicionar</button>
+                <form id="frmAdicionar1" class="frmAdicionar2" style="display: none;">
+                  <label for=""><b>Código</b></label>
+                  <label for=""><b>Descripción de Tapa</b></label>
+
+                  <input type="text" name="txt-Id1" id="txt-Id1" class="form-control" hidden>
+                  <input type="text" name="codigo1" id="codigo1" class="form-control" placeholder="Codigo" style="text-align: center;">
+                  <input type="text" name="input1" id="input1" class="form-control" placeholder="Descripcion Tapa">
+
+                  <button type="button" class="btn btn-primary btnguardar" id="GuardarTapa">Guardar</button>
+                </form>
+                <hr>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table id="tblTapa" class="table-striped row-borde" style="width:100%">
+                    <tbody>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <form id="formDataExcel1" enctype="multipart/form-data">
+                <input type="file" name="datosExcel1" id="datosExcel1" class="form-control datosExcel mb-3 ml-3" style="width: 500px; display:inline-flex">
+                <button type="button" id="btnCargarExcel1" class="btn btn-primary btnCargarExcel ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel1.value, 'tapa',1);" disabled="disabled">Cargar Datos</button>
               </form>
             </div>
           </div>
@@ -241,11 +236,11 @@
                 </div>
               </div>
               <form action="" id="formDataExcel5" enctype="multipart/form-data">
-              <input type="file" name="datosExcel5" id="datosExcel5" class="form-control datosExcel mb-3 ml-3" style="width: 500px; display:inline-flex">
-              <button type="button" id="btnCargarExcel5" class="btn btn-primary btnCargarExcel ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel5.value, 'otros', 5);" disabled="disabled">Cargar Datos</button>
-            </form>
+                <input type="file" name="datosExcel5" id="datosExcel5" class="form-control datosExcel mb-3 ml-3" style="width: 500px; display:inline-flex">
+                <button type="button" id="btnCargarExcel5" class="btn btn-primary btnCargarExcel ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel5.value, 'otros', 5);" disabled="disabled">Cargar Datos</button>
+              </form>
             </div>
-            
+
           </div>
 
         </div>

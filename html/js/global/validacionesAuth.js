@@ -1,6 +1,7 @@
 var eq1
 var eq2
 var eq3
+var id_multi
 
 $(document).ready(function() {
 
@@ -49,7 +50,7 @@ $(document).ready(function() {
 
     verificacionOrdenFirmas = (id) => {
 
-        array = ['despeje_realizado', 'pesaje_realizado', "preparacion_realizado", "aprobacion_realizado"]
+        array = ['despeje_realizado', 'pesaje_realizado', "preparacion_realizado", "aprobacion_realizado", "aprobacion_verificado"]
 
         if (!array.includes(id)) {
             if (id !== 'despeje_verificado') {
@@ -161,6 +162,11 @@ $(document).ready(function() {
 
         if (modulo == 3 || modulo == 4 && result) {
             result = await validacionEspecificaciones(id)
+            if (!result) return false
+        }
+
+        if (modulo == 4 && result && id == `aprobacion_verificado`) {
+            result = await validarCierreProcesos2y3()
             if (!result) return false
         }
 
