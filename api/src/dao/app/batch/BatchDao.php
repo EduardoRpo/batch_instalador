@@ -239,7 +239,7 @@ class BatchDao extends estadoInicialDao
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("UPDATE batch SET pedido = :pedido WHERE id_batch = :id_batch");
         $stmt->execute([
-            'pedido' => $dataBatch['pedido'],
+            'pedido' => $dataBatch['numPedido'],
             'id_batch' => $id_batch
         ]);
     }
