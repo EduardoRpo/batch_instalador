@@ -25,7 +25,7 @@ tblCaja = $('#tblCaja').DataTable({
             className: 'uniqueClassName',
             render: function(data) {
                 return `<a href='#' <i id=${data} class='large material-icons link-editar4' style='color:rgb(255, 165, 0)'>edit</i></a>
-                        <a href='#' <i id=${data} class='large material-icons link-borrar4' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>delete</i></a>`
+                        <a href='#' <i id=${data} class='large material-icons link-borrar4' data-toggle='tooltip'  title='Eliminar' style='color:rgb(255, 0, 0)'>delete</i></a>`
             },
         
         },
