@@ -29,9 +29,9 @@ function desinfectanteRealizo($conn) // DesinfectanteSeleccionadoDao.php
         $sql = "INSERT INTO batch_desinfectante_seleccionado (desinfectante, observaciones, modulo, batch, realizo, verifico) 
                 VALUES(:desinfectante, :observaciones, :modulo, :batch, :realizo, :verifico)";
         $query = $conn->prepare($sql);
-        $query->execute(['desinfectante' => $desinfectante, 'observaciones' => $obs_desinfectante, 'modulo' => $modulo, 'batch' => $batch, 'realizo' => $realizo, 'verifico' => $verifico]);
+        $result = $query->execute(['desinfectante' => $desinfectante, 'observaciones' => $obs_desinfectante, 'modulo' => $modulo, 'batch' => $batch, 'realizo' => $realizo, 'verifico' => $verifico]);
 
-        if ($modulo != 4 && $modulo != 8 && $modulo != 9)
+        if ($modulo != 4 && $modulo != 8 && $modulo != 9 && $result)
             registrarFirmas($conn, $batch, $modulo);
     }
 }
@@ -51,8 +51,9 @@ function desinfectanteVerifico($conn) // DesinfectanteSeleccionadoDao.php
         $verifico = $_POST['verifico'];
         $sql = "UPDATE batch_desinfectante_seleccionado SET verifico = :verifico WHERE batch = :batch AND modulo = :modulo";
         $query = $conn->prepare($sql);
-        $query->execute(['modulo' => $modulo, 'batch' => $batch, 'verifico' => $verifico]);
-        if ($modulo != 4 && $modulo != 8 && $modulo != 9)
+        $result = $query->execute(['modulo' => $modulo, 'batch' => $batch, 'verifico' => $verifico]);
+
+        if ($modulo != 4 && $modulo != 8 && $modulo != 9 && $result)
             registrarFirmas($conn, $batch, $modulo);
     }
 }
@@ -89,8 +90,10 @@ function segundaSeccionRealizo($conn)
         $sql = "INSERT INTO batch_firmas2seccion (observaciones, ref_multi, modulo, batch, realizo, verifico) 
                 VALUES (:observaciones, :ref_multi, :modulo, :batch, :realizo, :verifico)";
         $query = $conn->prepare($sql);
-        $query->execute(['observaciones' => $observaciones, 'ref_multi' => $ref_multi, 'realizo' => $realizo, 'verifico' => $verifico, 'modulo' => $modulo, 'batch' => $batch]);
-        registrarFirmas($conn, $batch, $modulo);
+        $result = $query->execute(['observaciones' => $observaciones, 'ref_multi' => $ref_multi, 'realizo' => $realizo, 'verifico' => $verifico, 'modulo' => $modulo, 'batch' => $batch]);
+
+        if ($result)
+            registrarFirmas($conn, $batch, $modulo);
     }
 }
 
@@ -111,16 +114,19 @@ function segundaSeccionVerifico($conn) // Firmas2SeccionDao.php
             $ref_multi = $_POST['ref_multi'];
             $sql = "UPDATE batch_firmas2seccion SET verifico = :verifico WHERE modulo = :modulo AND batch = :batch AND ref_multi = :ref_multi";
             $query = $conn->prepare($sql);
-            $query->execute(['verifico' => $verifico['id'], 'modulo' => $modulo, 'batch' => $batch, 'ref_multi' => $ref_multi,]);
+            $result = $query->execute(['verifico' => $verifico['id'], 'modulo' => $modulo, 'batch' => $batch, 'ref_multi' => $ref_multi,]);
         } else {
             $ref_multi = 0;
             $sql = "UPDATE batch_firmas2seccion SET verifico = :verifico WHERE modulo = :modulo AND batch = :batch";
             $query = $conn->prepare($sql);
-            $query->execute(['verifico' => $verifico, 'modulo' => $modulo, 'batch' => $batch]);
+            $result = $query->execute(['verifico' => $verifico, 'modulo' => $modulo, 'batch' => $batch]);
         }
 
-        registrarFirmas($conn, $batch, $modulo);
-        if ($modulo == 2 || $modulo == 3 || $modulo == 4) cerrarEstado($batch, $modulo, $conn);
+        if ($result)
+            registrarFirmas($conn, $batch, $modulo);
+
+        if ($modulo == 2 || $modulo == 3 || $modulo == 4)
+            cerrarEstado($batch, $modulo, $conn);
 
         /* Elimina los registros en explosion de materiales */
         /* if ($modulo == 2) {
@@ -165,7 +171,7 @@ function materialSobranteRealizo($conn) // MaterialSobranteDao.php
             $sql = "INSERT INTO batch_material_sobrante (ref_material, envasada, averias, sobrante, ref_producto, batch, modulo, realizo, verifico) 
                 VALUES(:referencia, :envasada, :averias, :sobrante, :producto, :batch, :modulo, :realizo, :verifico)";
             $query = $conn->prepare($sql);
-            $query->execute([
+            $result = $query->execute([
                 'referencia' => $valor['referencia'],
                 'envasada' => $valor['envasada'],
                 'averias' => $valor['averias'],
@@ -177,7 +183,9 @@ function materialSobranteRealizo($conn) // MaterialSobranteDao.php
                 'verifico' => $verifico
             ]);
         }
-        registrarFirmas($conn, $batch, $modulo);
+
+        if ($result)
+            registrarFirmas($conn, $batch, $modulo);
     }
 }
 
@@ -199,8 +207,11 @@ function materialSobranteVerifico($conn) // MaterialSobranteDao.php
 
         $sql = "UPDATE batch_material_sobrante SET verifico = :verifico WHERE batch = :batch AND modulo = :modulo AND ref_producto = :ref_multi";
         $query = $conn->prepare($sql);
-        $query->execute(['modulo' => $modulo, 'batch' => $batch, 'ref_multi' => $ref_multi, 'verifico' => $verifico,]);
-        registrarFirmas($conn, $batch, $modulo);
+        $result = $query->execute(['modulo' => $modulo, 'batch' => $batch, 'ref_multi' => $ref_multi, 'verifico' => $verifico,]);
+
+        if ($result)
+            registrarFirmas($conn, $batch, $modulo);
+
         CerrarBatch($conn, $batch);
     }
 }
@@ -271,7 +282,7 @@ function conciliacionRendimientoRealizo($conn) // ConciliacionDao.php
                 SET unidades_producidas = :unidades, muestras_retencion = :retencion, mov_inventario = :movimiento, cajas = :cajas, 
                     batch = :batch, modulo = :modulo, ref_multi = :referencia, entrego = :realizo";
         $query = $conn->prepare($sql);
-        $query->execute([
+        $result = $query->execute([
             'unidades' => $unidades,
             'retencion' => $retencion,
             'movimiento' => $movimiento,
@@ -281,7 +292,10 @@ function conciliacionRendimientoRealizo($conn) // ConciliacionDao.php
             'referencia' => $referencia,
             'realizo' => $realizo,
         ]);
-        registrarFirmas($conn, $batch, $modulo);
+
+        if ($result)
+            registrarFirmas($conn, $batch, $modulo);
+
         CerrarBatch($conn, $batch);
     }
 }
@@ -318,7 +332,7 @@ function analisisMicrobiologiaRealizo($conn) // AnalisisMicrobiologicoDao.php
 
     $sql = "SELECT * FROM `multipresentacion` WHERE id_batch = :batch";
     $query = $conn->prepare($sql);
-    $query->execute(['batch' => $batch]);
+    $result = $query->execute(['batch' => $batch]);
     $cantMulti = $query->rowCount();
 
     /* Validacion referencia sin multipresentacion */
@@ -327,7 +341,8 @@ function analisisMicrobiologiaRealizo($conn) // AnalisisMicrobiologicoDao.php
     if ($cantMicro == $cantMulti)
         echo '1';
 
-    registrarFirmas($conn, $batch, $modulo);
+    if ($result)
+        registrarFirmas($conn, $batch, $modulo);
 }
 
 function AnalisisMicrobiologiaVerifico($conn) // AnalisisMicrobiologicoDao.php
@@ -345,8 +360,11 @@ function AnalisisMicrobiologiaVerifico($conn) // AnalisisMicrobiologicoDao.php
 
         $sql = "UPDATE `batch_analisis_microbiologico` SET verifico = :verifico WHERE batch = :batch";
         $query = $conn->prepare($sql);
-        $query->execute(['verifico' => $verifico, 'batch' => $batch]);
-        registrarFirmas($conn, $batch, $modulo);
+        $result = $query->execute(['verifico' => $verifico, 'batch' => $batch]);
+
+        if ($result)
+            registrarFirmas($conn, $batch, $modulo);
+
         CerrarBatch($conn, $batch);
     }
 }
