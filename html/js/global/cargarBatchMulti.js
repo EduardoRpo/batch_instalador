@@ -85,11 +85,16 @@ $(document).ready(function() {
         });
     }
 
+
+
+
     /* Cargar firma 2 */
 
     cargarfirma2 = () => {
         if (typeof id_multi == "undefined") return false;
-        if (r1 > 1 || r2 > 1 || r3 > 1) return false;
+        if (r1 > 1) return false;
+        if (r2 > 1) return false;
+        if (r3 > 1) return false;
 
         ref_multi = $(`.ref${id_multi}`).val();
 
@@ -293,6 +298,14 @@ $(document).ready(function() {
 
         let firma = template.replace(":firma:", datos);
         parent.append(firma).html;
+    }
+
+    validarMultiCompleta = () => {
+
+        for (let i = 0; i < 4; i++) {
+            id_multi = i + 1
+            cargarfirma2()
+        }
     }
 
 });

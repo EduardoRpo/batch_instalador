@@ -12,6 +12,7 @@ loadBatch = async() => {
     await busqueda_multi();
     await deshabilitarbotones();
     cargarBatchMulti()
+        //validarMultiCompleta()
 }
 
 loadBatch()
