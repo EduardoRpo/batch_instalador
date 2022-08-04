@@ -41,6 +41,11 @@ $(document).ready(function() {
 
                 if (resp.message == 'total') {
                     $(`#unidadesEnvasadasTotales${j}`).val(resp.unidades);
+
+                    $(`#envaseEnvasada${j}`).val(resp.unidades);
+                    $(`#tapaEnvasada${j}`).html(resp.unidades);
+                    $(`#etiquetaEnvasada${j}`).html(resp.unidades);
+
                     $(`#unidadesEnvasadas${j}`).val(resp.unidades).prop('disabled', true);
                     $(`.btnEntregasParciales${j}`).css({ background: "lightgray", border: "gray" }).prop("disabled", true);
                     $(`.devolucion_realizado${j}`).prop('disabled', false);
@@ -105,7 +110,10 @@ $(document).ready(function() {
 
             $(`#unidadesEnvasadasTotales${multi}`).val(data.value);
             $(`#envaseEnvasada${multi}`).val(data.value);
-            $(`.envasada${multi}`).html(data.value);
+            $(`#tapaEnvasada${multi}`).html(data.value);
+            $(`#etiquetaEnvasada${multi}`).html(data.value);
+
+            //$(`.envasada${multi}`).html(data.value);
 
             /* habilitar boton de firma */
 
