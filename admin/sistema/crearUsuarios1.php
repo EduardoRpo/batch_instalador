@@ -61,29 +61,12 @@
                           <input type="email" name="email" id="email" class="form-control" placeholder="Email">
                         </div>
                       </div> 
-
-                      <?php 
-                        $query_modulo = mysqli_query($conn, "SELECT * FROM modulo");
-                        $result_modulo = mysqli_num_rows($query_modulo);
-                      ?>
-
                       <div class="col-md-6 pl-1">
                         <div class="form-group">
                         <label>Cargo</label>
-                        <?php 
-                          $query_cargo = mysqli_query($conn, "SELECT * FROM cargo");
-                          $result_cargo = mysqli_num_rows($query_cargo);
-                        ?>
-                        <select class="form-control" name="cargo" id="cargo">
-                        <?php 
-                          if($result_cargo > 0){
-                            while($cargo = mysqli_fetch_array($query_cargo)){
-                        ?>            
-                            <option value="<?php echo $cargo['id'] ?>"> <?php echo $cargo['cargo'] ?> </option>        
-                        <?php            
-                                }
-                            }
-                        ?>       
+                      <!--Codigo php de selector-->      
+                        <select name="Cargo-Txt" id="Cargo-Txt">
+                        
                         </select> 
                         </div>
                       </div>
@@ -105,7 +88,7 @@
                       <div class="form-group">
                         <label>Módulo de Acceso</label>
                         <?php 
-                          $query_modulo = mysqli_query($conn, "SELECT * FROM modulo");
+                          $query_modulo = mysqli_query($connection, "SELECT * FROM modulo");
                           $result_modulo = mysqli_num_rows($query_modulo);
                         ?>
                 
@@ -159,7 +142,8 @@
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script><!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
   <!-- <script src="../assets/demo/demo.js"></script> -->
-  <script src="js/funciones.js"></script>
+  <!-- <script src="js/funciones.js"></script> -->
+  <script src="js//users//users//usuarios.js"></script>
 </body>
 
 </html>

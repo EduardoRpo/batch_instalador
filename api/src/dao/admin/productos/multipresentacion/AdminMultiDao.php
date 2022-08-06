@@ -70,4 +70,5 @@ class AdminMultiDao
         $stmt->execute(['valor' => $dataMulti]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
+
 }

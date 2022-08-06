@@ -3,7 +3,7 @@ $(document).ready(function() {
 
     materiaPrima = (tb) => {
         $.ajax({
-            url: `api/rawMaterials/${tb}`,
+            url: `/api/rawMaterials/${tb}`,
 
             success: function(info) {
                 let $selectReferencia = $('#cmbreferencia')

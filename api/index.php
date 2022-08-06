@@ -59,6 +59,10 @@ require_once __DIR__ . '/src/routes/admin/productos/Packaging/caja.php';
 require_once __DIR__ . '/src/routes/admin/productos/Packaging/otros.php';
 
 require_once __DIR__ . '/src/routes/admin/productos/RawMaterial/materiaPrima.php';
+require_once __DIR__ . '/src/routes/admin/productos/formulas/formulas.php';
+
+require_once __DIR__ . '/src/routes/admin/productos/usuarios/usuarios.php';
+require_once __DIR__ . '/src/routes/admin/productos/usuarios/cargos.php';
 
 require_once __DIR__ . '/src/routes/admin/productos/multiP.php';
 require_once __DIR__ . '/src/routes/admin/productos/productos.php';

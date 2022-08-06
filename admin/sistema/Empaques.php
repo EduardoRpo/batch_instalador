@@ -153,8 +153,11 @@
               <div class="card-body">
                 <div class="table-responsive">
                   <table id="tblEtiqueta" class="table-striped row-borde" style="width:100%">
-                    <tbody>
-                    </tbody>
+                  <td><strong>Codigo</strong></td>
+                  <td><strong>Etiquetas</strong></td>
+                  <td><strong>Acciones</strong></td>
+                  <tbody>
+                  </tbody>
                   </table>
                 </div>
               </div>
@@ -185,8 +188,11 @@
               <div class="card-body">
                 <div class="table-responsive">
                   <table id="tblCaja" class="table-striped row-borde" style="width:100%">
-                    <tbody>
-                    </tbody>
+                  <td><strong> Codigo </strong></td>
+                  <td><strong>Cajas</strong></td>
+                  <td><strong>Acciones</strong></td>  
+                  <tbody>
+                  </tbody>
                   </table>
                 </div>
               </div>
@@ -221,10 +227,10 @@
               <div class="card-body">
                 <div class="table-responsive">
                   <table id="tblOtros" class="table-striped row-borde" style="width:100%">
-                    <thead>
-                    </thead>
-                    <tbody>
-
+                  <td><strong> Codigo </strong></td>
+                  <td><strong>Otros</strong></td>
+                  <td><strong>Acciones</strong></td>
+                  <tbody>
                     </tbody>
                   </table>
                 </div>
