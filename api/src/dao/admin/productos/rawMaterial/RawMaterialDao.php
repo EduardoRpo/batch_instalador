@@ -28,6 +28,17 @@ class RawMaterialDao
         return $rawMaterial;
     }
 
+    public function findRawMaterial($dataSearchRaw)
+    {
+        $connection = Connection::getInstance()->getConnection();
+        $stmt = $connection->prepare("SELECT * FROM materia_prima WHERE referencia = :referencia");
+        $stmt->execute(['referencia' => $dataSearchRaw['referencia']]);
+        $this->logger->info(__FUNCTION__, array('query'=> $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        $rawMaterialSearch = $stmt->fetch($connection::FETCH_ASSOC);
+        $this->logger->notice("Materia prima obtenida", array('Materia prima' => $rawMaterialSearch));
+        return $rawMaterialSearch;
+    }
+
     public function saveRawMaterial($datarawMaterial)
     {
         $connection = Connection::getInstance()->getConnection();

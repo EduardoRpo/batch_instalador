@@ -2,8 +2,6 @@ let tabla
 let editar
 let tbl
 let ref
-$('.alertFormula').hide()
-
 
 /* Mostrar Menu seleccionado */
 
@@ -322,14 +320,14 @@ function cargarTablaTodasFormulas(referencia) {
 }
 
 /* Cargue de Parametros de Control en DataTable */
-
+/*
 function cargarTablaFormulas(referencia) {
     tabla = $('#tblFormulas').DataTable({
         destroy: true,
         scrollY: '50vh',
         scrollCollapse: true,
         paging: false,
-        /* dom: 'Bfrtip',
+        dom: 'Bfrtip',
         buttons: [
           {
             extend: 'excel',
@@ -338,7 +336,7 @@ function cargarTablaFormulas(referencia) {
               columns: [0, 3],
             },
           },
-        ], */
+        ], 
         language: { url: 'admin_componentes/es-ar.json' },
 
         ajax: {
@@ -382,7 +380,7 @@ function cargarTablaFormulas(referencia) {
 }
 
 /* Cargue de Parametros de Control en DataTable */
-
+/*
 function cargar_formulas_f(referencia) {
     tabla = $('#tbl_formulas_f').DataTable({
         destroy: true,
@@ -425,6 +423,7 @@ function cargar_formulas_f(referencia) {
         },
     })
 }
+*/
 
 /* Actualizar tabla */
 

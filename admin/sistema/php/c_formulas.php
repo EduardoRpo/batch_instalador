@@ -86,33 +86,16 @@ switch ($op) {
                 $rows = $query->rowCount();
 
                 if ($rows > 0) {
-                   /*  $ref_multi = findmulti($conn, $id_producto);
-                    if ($ref_multi == null) { */
                         $sql = "UPDATE $tbl SET porcentaje = AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
                         $query = $conn->prepare($sql);
                         $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto, 'porcentaje' => $porcentaje]);
                         echo '3';
-                    /* } else {
-                        for ($i = 0; $i < sizeof($ref_multi); $i++) {
-                            $sql = "UPDATE $tbl SET porcentaje = AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
-                            $query = $conn->prepare($sql);
-                            $result = $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $ref_multi[$i]['referencia'], 'porcentaje' => $porcentaje]);
-                        }
-                        echo '3';
-                    } */
                 } else {
-                    /* $ref_multi = findmulti($conn, $id_producto);
-                    if ($ref_multi == null) { */
+
                         $sql = "INSERT INTO $tbl (id_producto, id_materiaprima, porcentaje) VALUES (:id_producto, :id_materiaprima, AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') )";
                         $query = $conn->prepare($sql);
                         $result = $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto, 'porcentaje' => $porcentaje]);
-                    /* } else {
-                        for ($i = 0; $i < sizeof($ref_multi); $i++) {
-                            $sql = "INSERT INTO $tbl (id_producto, id_materiaprima, porcentaje) VALUES (:id_producto, :id_materiaprima, AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') )";
-                            $query = $conn->prepare($sql);
-                            $result = $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $ref_multi[$i]['referencia'], 'porcentaje' => $porcentaje]);
-                        }
-                    } */
+
                     /* Valida si existen batch sin formula y actualiza */
                     if ($tbl == 'materia_prima') {
                         $result = estadoInicial($conn, $id_producto, $fechaprogramacion = "");

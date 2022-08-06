@@ -55,14 +55,8 @@ $app->get('/RawMaterialF', function (Request $request, Response $response, $args
     $response->getBody()->write(json_encode($materiaFantasma, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');
 });
-/*
-$app->get('/Lid', function (Request $request, Response $response, $args) use ($lidDao) {
-    $Lid = $lidDao->findAllLid();
-    $response->getBody()->write(json_encode($Lid, JSON_NUMERIC_CHECK));
-    return $response->withHeader('Content-Type', 'application/json');
-});
 
-\*/
+
 $app->get('/deleteRawMaterial/{id}', function (Request $request, Response $response, $args) use ($MateriaPrimaDao) {
     $materiaPrima = $MateriaPrimaDao->deleteRawMaterial($args['id']);
 
@@ -81,27 +75,33 @@ $app->get('/deleteRawMaterialF/{id}', function (Request $request, Response $resp
 
     $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');
+    
 });
-/* 
-
-$app->post('/saveLid', function (Request $request, Response $response, $args) use ($lidDao) {
-
-    $dataLid = $request->getParsedBody();
-
-    if ($dataLid['operacion']) {
-        $Lid = $lidDao->updateLid($dataLid);
-
-        if ($Lid == null)
-            $resp = array('success' => true, 'message' => 'Tapas actualizada correctamente');
-    } else {
-        $Lid = $lidDao->saveLid($dataLid);
-
-        if ($Lid == null)
-            $resp = array('success' => true, 'message' => 'Tapas almacenada correctamente');
+$app->get('/rawMaterials/{tb}', function (Request $request, Response $response, $args) use ($MateriaFantasmaDao, $MateriaPrimaDao) {
+    $tb = $args['tb'];
+    if($tb == 'r')
+    {
+        $materiaPrima = $MateriaPrimaDao->findAllRawMaterial();
+        $response->getBody()->write(json_encode($materiaPrima, JSON_NUMERIC_CHECK));
+        return $response->withHeader('Content-Type', 'application/json');
+    }else
+    {
+        $materiaFantasma = $MateriaFantasmaDao->findAllRawMaterialF();
+        $response->getBody()->write(json_encode($materiaFantasma, JSON_NUMERIC_CHECK));
+        return $response->withHeader('Content-Type', 'application/json');
     }
-
-    $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
-    return $response->withHeader('Content-Type', 'application/json');
 });
 
-*/
+$app->post('/SearchRawMaterial', function (Request $request, Response $response, $args) use ($MateriaFantasmaDao, $MateriaPrimaDao){
+    $dataMaterial = $request->getParsedBody();
+    if($dataMaterial['tabla'] == 'r' ){
+        $materiaPrima = $MateriaPrimaDao->findRawMaterial($dataMaterial);
+        $response->getbody()->write(json_encode($materiaPrima, JSON_NUMERIC_CHECK));
+        return $response->withHeader('Content-Type', 'application/json');
+    }else
+    {
+        $materiaPrima = $MateriaFantasmaDao->findRawMaterialF($dataMaterial);
+        $response->getBody()->write(json_encode($materiaPrima, JSON_NUMERIC_CHECK));
+        return $response->withHeader('Content-Type', 'application/json');
+    }
+});
