@@ -45,34 +45,50 @@ $(document).ready(function() {
             return 'no_validar'
     }
 
-    validarIdMulti = () => {
+    /*  validarIdMulti = () => {
 
-        //validar en que multipresentacion se encuentra
+         //validar en que multipresentacion se encuentra
 
-        id_multi == 1 ?
-            ((start = 1), (end = 4)) :
-            id_multi == 2 ?
-            ((start = 4), (end = 7)) :
-            id_multi == 3 ?
-            ((start = 7), (end = 10)) :
-            ((start = 10), (end = 12));
+         id_multi == 1 ?
+             ((start = 1), (end = 4)) :
+             id_multi == 2 ?
+             ((start = 4), (end = 7)) :
+             id_multi == 3 ?
+             ((start = 7), (end = 10)) :
+             ((start = 10), (end = 12));
 
-    }
+     } */
 
     validarData = () => {
         //validar que los datos de toda la tabla se encuentran completos
 
-        for (let i = start; i < end; i++) {
-            let averias = $(`.averias${i}`).val();
-            let sobrante = $(`.sobrante${i}`).val();
+        let envaseAverias = $(`.envaseAverias${id_multi}`).val();
+        let tapaAverias = $(`.tapaAverias${id_multi}`).val();
+        let etiquetaAverias = $(`.etiquetaAverias${id_multi}`).val();
 
-            if (averias == "" || sobrante == "" || averias == undefined || sobrante == undefined) {
-                alertify.set("notifier", "position", "top-right");
-                alertify.error("Ingrese todos los datos");
-                return false;
-            } else
-                return true
-        }
+        let envaseSobrante = $(`.envaseSobrante${id_multi}`).val();
+        let tapaSobrante = $(`.tapaSobrante${id_multi}`).val();
+        let etiquetaSobrante = $(`.etiquetaSobrante${id_multi}`).val();
+
+
+        if (envaseAverias == "" ||
+            tapaAverias == "" ||
+            etiquetaAverias == "" ||
+            envaseAverias == undefined ||
+            tapaAverias == undefined ||
+            etiquetaAverias == undefined ||
+            envaseSobrante == "" ||
+            tapaSobrante == "" ||
+            etiquetaSobrante == "" ||
+            envaseSobrante == undefined ||
+            tapaSobrante == undefined ||
+            etiquetaSobrante == undefined) {
+            alertify.set("notifier", "position", "top-right");
+            alertify.error("Ingrese todos los datos");
+            return false;
+        } else
+            return true
+
     }
 
     validarDevolucionMaterialEnvasado = async(id) => {
@@ -80,7 +96,7 @@ $(document).ready(function() {
             result = await validarDevolucionMaterial()
             if (result != 'no_validar') {
                 if (result) {
-                    validarIdMulti()
+                    //validarIdMulti()
                     return result = validarData()
                 } else
                     return false

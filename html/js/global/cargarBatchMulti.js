@@ -110,6 +110,7 @@ $(document).ready(function() {
                     cargarEquipos();
                     if (modulo == 5) promedio();
                     firmado(info[0].realizo, 3);
+                    $(`.btnEntregasParciales${id_multi}`).prop("disabled", false);
                     firmado(info[0].verifico, 4);
                 }
                 cargardevolucionmaterial();

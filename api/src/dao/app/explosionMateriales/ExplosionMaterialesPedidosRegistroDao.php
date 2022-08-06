@@ -36,14 +36,29 @@ class ExplosionMaterialesPedidosRegistroDao
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 
-    public function updateEstado($dataPedido)
+    public function checkPedidos($dataPedido)
+    {
+        $pedido = $dataPedido['numPedido'];
+        //Condicional si tiene mas de un pedido
+        if (strpos($pedido, '-')) {
+            $pedido = explode(" - ", $pedido);
+            foreach ($pedido as $p) {
+                $this->updateEstado($dataPedido, $p);
+            }
+        } else {
+            $this->updateEstado($dataPedido, $pedido);
+        }
+    }
+
+    public function updateEstado($dataPedido, $pedido)
     {
         $connection = Connection::getInstance()->getConnection();
+
         $stmt = $connection->prepare("UPDATE explosion_materiales_pedidos_registro 
                                       SET estado = 2
                                       WHERE pedido = :pedido AND id_producto = :referencia");
         $stmt->execute([
-            'pedido' => $dataPedido['pedido'],
+            'pedido' => $pedido,
             'referencia' => $dataPedido['referencia']
         ]);
 

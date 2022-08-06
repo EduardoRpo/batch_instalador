@@ -72,7 +72,7 @@ if (!empty($_POST)) {
                     SET unidades_producidas = :unidades, cajas = :cajas, mov_inventario = :movimiento, observaciones = :observaciones,
                     batch = :batch, modulo = :modulo, ref_multi = :referencia, entrego = :entrego";
             $query = $conn->prepare($sql);
-            $query->execute([
+            $result = $query->execute([
                 'unidades' => $unidades,
                 'cajas' => $cajas,
                 'movimiento' => $movimiento,
@@ -82,6 +82,8 @@ if (!empty($_POST)) {
                 'referencia' => $referencia,
                 'entrego' => $entrego,
             ]);
+
+        
 
             registrarFirmas($conn, $batch, $modulo);
             break;

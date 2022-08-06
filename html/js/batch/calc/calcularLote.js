@@ -87,6 +87,11 @@ $(document).ready(function () {
       url: '/api/calcTamanioLote',
       data: { data: data },
       success: function (resp) {
+        //Validar que se puedan guardar pedidos
+        if (resp.error) {
+          alertify.set('notifier', 'position', 'top-right');
+          alertify.error(resp.message);
+        }
         // Ventana alert confirm
         alertConfirm(resp);
       },

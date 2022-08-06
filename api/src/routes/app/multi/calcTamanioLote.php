@@ -32,7 +32,9 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
     $repeat = false;
     for ($i = 0; $i < count($dataPedidosReferencias); $i++) {
       if ($dataPedidosReferencias[$i]['referencia'] == $t['referencia']) {
+        $dataPedidosReferencias[$i]['numPedido'] = "{$dataPedidosReferencias[$i]['numPedido']} - {$t['numPedido']}";
         $dataPedidosReferencias[$i]['cantidad_acumulada'] += $t['cantidad_acumulada'];
+        $dataPedidosReferencias[$i]['fecha_insumo'] = "{$dataPedidosReferencias[$i]['fecha_insumo']} - {$t['fecha_insumo']}";
         $repeat = true;
         break;
       }
@@ -40,9 +42,11 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
     if ($repeat == false)
       $dataPedidosReferencias[] = array(
         'granel' => $t['granel'],
+        'numPedido' => $t['numPedido'],
         'referencia' => $t['referencia'],
         'producto' => $t['producto'],
-        'cantidad_acumulada' => $t['cantidad_acumulada']
+        'cantidad_acumulada' => $t['cantidad_acumulada'],
+        'fecha_insumo' => $t['fecha_insumo']
       );
   }
 
@@ -52,6 +56,16 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
     $dataMulti = $multiDao->findProductMultiByRef($dataPedidosReferencias[$i]['referencia']);
     $tamanio_lote = $calcTamanioMultiDao->calcularTamanioLote($dataMulti, $dataPedidosReferencias[$i]['cantidad_acumulada']);
     $dataPedidosReferencias[$i]['tamanio_lote'] = $tamanio_lote;
+  }
+
+  // Eliminar granel donde tamanio_lote sea mayor a 2500
+  for ($i = 0; $i < sizeof($dataPedidosReferencias); $i++) {
+    if ($dataPedidosReferencias[$i]['tamanio_lote'] > 2500) {
+      $EMPRegistroDao->checkPedidos($dataPedidosReferencias[$i]); // Cambiar estado a 2
+      // Capturar data de lotes programados, para mostrar en la ventana de calculo
+      $dataPedidosLotes[$i] = $dataPedidosReferencias[$i];
+      unset($dataPedidosReferencias[$i]);
+    }
   }
 
   // Consolidar los graneles
@@ -77,29 +91,29 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
       );
   }
 
-  //Eliminar las referencias de los graneles que la suma supera los 2500 kg
-
-  /*  for ($i = 0; $i < $dataPedidosGranel; $i++) {
-    if ($dataPedidosGranel[$i]['tamanio_lote'] > 2500) {
-      $EMPRegistroDao->updateEstado($dataPedidosGranel[$i]); //Modifica estado a 2
-    } else
-      unset($dataPedidosGranel[$i]);
-  } */
-
-  //Adiciona la multipresentacion al Granel
-
-  for ($i = 0; $i < sizeof($dataPedidosGranel); $i++)
+  for ($i = 0; $i < sizeof($dataPedidosGranel); $i++) {
     for ($j = 0; $j < sizeof($dataPedidosReferencias); $j++)
       if ($dataPedidosGranel[$i]['granel'] == $dataPedidosReferencias[$j]['granel'])
+        //Adiciona la multipresentacion al Granel
         $dataPedidosGranel[$i]['multi'][$j] = $dataPedidosReferencias[$j];
+    // Restablecer llaves de variable $dataPedidosGranel
+    $dataPedidosGranel[$i]['multi'] = array_values($dataPedidosGranel[$i]['multi']);
+  }
 
+  if (!isset($dataPedidosLotes))
+    $dataPedidosLotes = $dataPedidosGranel;
 
-  //Almacenar en variables de session la variable $dataPedidos
+  //Almacenar en variables de session la variable $dataPedidosGranel
   $_SESSION['dataGranel'] = $dataPedidosGranel;
+
+  if (sizeof($dataPedidosGranel) == 0) {
+    $resp = array('error' => true, 'message' => 'Los tamaños de lotes calculados exceden los 2500, intente nuevamente');
+    $dataPedidosLotes = array_merge($dataPedidosLotes, $resp);
+  }
 
   //$array = array('granel' => array_keys($sumArrayGranel), 'producto' => $producto, 'tamanio' => array_values($sumArrayGranel), 'cantidades' => array_values($sumArrayCantidades));
 
-  $response->getBody()->write(json_encode($dataPedidosGranel, JSON_NUMERIC_CHECK));
+  $response->getBody()->write(json_encode($dataPedidosLotes, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
 
