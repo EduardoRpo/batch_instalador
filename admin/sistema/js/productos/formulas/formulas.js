@@ -11,6 +11,8 @@ $('.contenedor-menu .menu ul.menu_productos').show()
 
 $('.contenedor-menu .menu ul.menu_formulas').show()
 
+$('.alertFormula').hide();
+
 $('#instructivos').click(function(e) {
     e.preventDefault();
     $(".contenedor-menu .menu ul.menu_instructivos").toogle();
@@ -124,7 +126,7 @@ $('#cmbreferencia').change(function(e) {
     $.ajax({
         type: 'POST',
         url: '/api/SearchRawMaterial',
-        data: { referencia:referencia, tabla:tbl },
+        data: { referencia: referencia, tabla: tbl },
 
         success: function(info) {
             $('#txtMateria-Prima').val(info['nombre']);
@@ -193,7 +195,7 @@ function guardarFormulaMateriaPrima() {
             refreshTable()
         },
     })
-    
+
 }
 
 /* Cargar datos para Actualizar registros */
@@ -240,19 +242,19 @@ $(document).on('click', '.link-borrar', function(e) {
             null,
         )
         .set('labels', { ok: 'Si', cancel: 'No' })
-        confirm.set("onok", function(r) {
-            if (r) {
-                $.ajax({
-                    type: 'POST',
-                    url: '/api/deleteformulas',
-                    data: {ref_materiaprima: ref_materiaprima,ref_producto:ref_producto,tbl:tbl },
-                    success: function(data) {
-                        notificaciones(data);
-                    },
-                });
-            }
-        });
-        });
+    confirm.set("onok", function(r) {
+        if (r) {
+            $.ajax({
+                type: 'POST',
+                url: '/api/deleteformulas',
+                data: { ref_materiaprima: ref_materiaprima, ref_producto: ref_producto, tbl: tbl },
+                success: function(data) {
+                    notificaciones(data);
+                },
+            });
+        }
+    });
+});
 
 
 
