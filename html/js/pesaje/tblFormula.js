@@ -58,6 +58,19 @@ $(document).ready(function() {
                     },
                 },
             ],
+
+            /* "footerCallback": function(row, data, start, end, display) {
+                total = this.api()
+                    .column(3) //numero de columna a sumar
+                    //.column(1, {page: 'current'})//para sumar solo la pagina actual
+                    .data()
+                    .reduce(function(a, b) {
+                        return parseInt(a) + parseInt(b);
+                    }, 0);
+
+                $(this.api().column(1).footer()).html(total);
+
+            } */
         })
 
 
