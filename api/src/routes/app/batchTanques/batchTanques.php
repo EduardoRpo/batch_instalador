@@ -85,7 +85,8 @@ $app->post('/saveBatchTanques', function (Request $request, Response $response, 
         $desinfectante = $desinfectanteDao->desinfectanteRealizo($dataBatch);
         if ($desinfectante == null)
             $firmas2Seccion = $firmas2SeccionDao->segundaSeccionRealizo($dataBatch);
-        if ($firmas2Seccion == null)
+        /* registrar cantidad firmas solo al finalizar los tanques */
+        if ($firmas2Seccion == null && $dataBatch['tanques'] == $dataBatch['tanquesOk'])
             $resp = $controlFirmasDao->registrarFirmas($dataBatch);
     }
 
