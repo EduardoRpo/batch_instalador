@@ -55,8 +55,8 @@ $(document).ready(function() {
             .confirm(
                 `¿Está seguro de eliminar el Batch ${id}?`,
                 `<label>Motivo de Eliminación: </label>
-            <select style='width: 100%' class="form-control" id="motivoEliminacion">
-            <option value='' disabled selected>Seleccione</option>
+                    <select style='width: 100%' class="form-control" id="motivoEliminacion">
+                    <option value='' disabled selected>Seleccione</option>
                     <option value='1'>Cancelado por el usuario</option>
                     <option value='2'>Falta de Materia Prima o Insumos</option>
                     <option value='3'>Producto descontinuado</option>
@@ -132,7 +132,7 @@ $(document).ready(function() {
                 $('#ajuste').val(data.ajuste);
 
                 $('#unidadesxlote').val(data.unidad_lote);
-                $('#tamanototallote').val(data.tamano_lote);
+                $('#tamanototallote').val(Math.ceil(data.tamano_lote));
                 $('#fechaprogramacion').val(data.fecha_programacion);
                 $('#fechaProgramacionSugerida').val(data.fecha_insumo);
 

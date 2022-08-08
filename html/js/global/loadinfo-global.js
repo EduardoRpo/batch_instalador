@@ -23,7 +23,7 @@ dataBatch = async() => {
 cargarInfoBatch = async() => {
     const data = await dataBatch()
     batch = data;
-    const tamano_lote = formatoCO(data.tamano_lote);
+    const tamano_lote = formatoCO(Math.ceil(data.tamano_lote));
 
     $("#in_numero_orden").val(data.numero_orden);
     $("#in_numero_lote").val(data.numero_lote);

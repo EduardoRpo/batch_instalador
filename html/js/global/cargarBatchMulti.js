@@ -85,39 +85,47 @@ $(document).ready(function() {
         });
     }
 
+
+
+
     /* Cargar firma 2 */
 
     cargarfirma2 = () => {
         if (typeof id_multi == "undefined") return false;
-        if (r1 > 1 || r2 > 1 || r3 > 1) return false;
+        if (r1 > 1) return false;
+        if (r2 > 1) return false;
+        if (r3 > 1) return false;
 
         ref_multi = $(`.ref${id_multi}`).val();
 
-        $.ajax({
-            type: "POST",
-            url: "../../html/php/envasado.php",
-            data: { operacion: 3, modulo, idBatch, ref_multi },
+        if (ref_multi) {
 
-            success: function(response) {
-                let info = JSON.parse(response);
-                if (info == 3) {
-                    //$(`.controlpeso_realizado${id_multi}`).prop("disabled", false);
-                    return false;
-                }
+            $.ajax({
+                type: "POST",
+                url: "../../html/php/envasado.php",
+                data: { operacion: 3, modulo, idBatch, ref_multi },
 
-                for (i = 1; i <= info.length; i++) {
-                    $(`#validarLote${id_multi}`).val(batch.numero_lote);
-                    cargarEquipos();
-                    if (modulo == 5) promedio();
-                    firmado(info[0].realizo, 3);
-                    $(`.btnEntregasParciales${id_multi}`).prop("disabled", false);
-                    firmado(info[0].verifico, 4);
-                }
-                cargardevolucionmaterial();
-                if (modulo == 6)
-                    cargar_conciliacion()
-            },
-        });
+                success: function(response) {
+                    let info = JSON.parse(response);
+                    if (info == 3) {
+                        //$(`.controlpeso_realizado${id_multi}`).prop("disabled", false);
+                        return false;
+                    }
+
+                    for (i = 1; i <= info.length; i++) {
+                        $(`#validarLote${id_multi}`).val(batch.numero_lote);
+                        cargarEquipos();
+                        if (modulo == 5) promedio();
+                        firmado(info[0].realizo, 3);
+                        $(`.btnEntregasParciales${id_multi}`).prop("disabled", false);
+                        firmado(info[0].verifico, 4);
+                    }
+                    cargardevolucionmaterial();
+                    if (modulo == 6)
+                        cargar_conciliacion()
+                },
+            });
+        }
     }
 
     cargardevolucionmaterial = () => {
@@ -293,6 +301,14 @@ $(document).ready(function() {
 
         let firma = template.replace(":firma:", datos);
         parent.append(firma).html;
+    }
+
+    validarMultiCompleta = async() => {
+
+        for (let i = 0; i < 4; i++) {
+            id_multi = i + 1
+            await cargarfirma2()
+        }
     }
 
 });

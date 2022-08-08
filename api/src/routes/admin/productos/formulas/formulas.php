@@ -27,8 +27,8 @@ $app->get('/formulaInvimatbl/{idProducto}', function (Request $request, Response
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->post('/SearchFormulaAll', function (Request $request, Response $response, $args) use ($formulasDao){
-/*
+$app->post('/SearchFormulaAll', function (Request $request, Response $response, $args) use ($formulasDao) {
+  /*
   $dataFormula = $request->getParsedBody();
   $formula = $formulasDao->findFormulaByCase3($dataFormula);
   $response->getbody()->write(json_encode($formula, JSON_NUMERIC_CHECK));
@@ -50,18 +50,15 @@ $app->get('/updateformulas', function (Request $request, Response $response, $ar
 
 $app->post('/deleteformulas', function (Request $request, Response $response, $args) use ($formulasDao, $formulasInvimasDao) {
   $dataFormula =  $request->getParsedBody();
-  if($dataFormula['tbl'] == 'r'){
+  if ($dataFormula['tbl'] == 'r') {
     $ref_multi =  $formulasDao->FindMultiByFormula($dataFormula);
 
-    if($ref_multi == null)
-    {
+    if ($ref_multi == null) {
       $formula = $formulasDao->deleteFormula($dataFormula);
-    }else
-    {
+    } else {
       $formula = $formulasDao->deleteFormulaMulti($dataFormula, $ref_multi);
     }
-  }else
-  {
+  } else {
     $notif_sanitaria = $formulasInvimasDao->SearchIdNotifiSanitaria($dataFormula);
     $formula = $formulasInvimasDao->deleteFormula($dataFormula, $notif_sanitaria);
   }
@@ -71,46 +68,34 @@ $app->post('/deleteformulas', function (Request $request, Response $response, $a
 });
 
 $app->post('/SaveFormula', function (Request $request, Response $response, $args) use ($formulasDao, $formulasInvimasDao) {
-$dataFormula = $request->getParsedBody();
-//$dataFormula['tbl'] == 'r' ? $dataFormula['tbl'] = 'formula' : $dataFormula['tbl'] = 'formula_f';
-if($dataFormula['tbl'] == 'r'){
-  $rows = $formulasDao->countRowFormula($dataFormula);
-  if($rows>0)
-  {
-    $formula = $formulasDao->updateFormula($dataFormula);
-      if($formula == null){
+  $dataFormula = $request->getParsedBody();
+  //$dataFormula['tbl'] == 'r' ? $dataFormula['tbl'] = 'formula' : $dataFormula['tbl'] = 'formula_f';
+  if ($dataFormula['tbl'] == 'r') {
+    $rows = $formulasDao->countRowFormula($dataFormula);
+    if ($rows > 0) {
+      $formula = $formulasDao->updateFormula($dataFormula);
+      if ($formula == null)
         $resp = array('success' => true, 'message' => 'Formula Actualizada Correctamente');
-      }
-  }else
-  {
-    $formula = $formulasDao->saveFormula($dataFormula);
-      if($formula == null)
-      {
+    } else {
+      $formula = $formulasDao->saveFormula($dataFormula);
+      if ($formula == null)
         $resp = array('success' => true, 'message' => 'Formula Almacenada Correctamente');
-      }
-  }
-
-}else
-{
-  $notif_sanitaria = $formulasInvimasDao->SearchIdNotifiSanitaria($dataFormula);
-  $rows = $formulasInvimasDao->countRowFormulainvima($dataFormula,$notif_sanitaria);
-  if($rows > 0)
-  {
-    $formula = $formulasInvimasDao->updateFormula($dataFormula, $notif_sanitaria);
-    if($formula == null)
-    {
-      $resp = array('success' => true, 'message' => 'Formula Actualizada Correctamente');
     }
-  }else
-  {
-    $formula = $formulasInvimasDao->saveFormula($dataFormula, $notif_sanitaria);
-    if($formula = null)
-    {
-      $resp = array('success' => true, 'message' => 'Formula Almacenada Correctamente');
+  } else {
+    $notif_sanitaria = $formulasInvimasDao->SearchIdNotifiSanitaria($dataFormula);
+    $rows = $formulasInvimasDao->countRowFormulainvima($dataFormula, $notif_sanitaria);
+
+    if ($rows > 0) {
+      $formula = $formulasInvimasDao->updateFormula($dataFormula, $notif_sanitaria);
+
+      if ($formula == null)
+        $resp = array('success' => true, 'message' => 'Formula Actualizada Correctamente');
+    } else {
+      $formula = $formulasInvimasDao->saveFormula($dataFormula, $notif_sanitaria);
+      if ($formula = null)
+        $resp = array('success' => true, 'message' => 'Formula Almacenada Correctamente');
     }
   }
-}
-$response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
-return $response->withHeader('Content-Type', 'application/json');
-}); 
-
+  $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
+});
