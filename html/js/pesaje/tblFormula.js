@@ -59,18 +59,36 @@ $(document).ready(function() {
                 },
             ],
 
-            /* "footerCallback": function(row, data, start, end, display) {
-                total = this.api()
-                    .column(3) //numero de columna a sumar
-                    //.column(1, {page: 'current'})//para sumar solo la pagina actual
+            "footerCallback": function(row, data, start, end, display) {
+                var api = this.api(),
+                    data;
+
+                // converting to interger to find total
+                var intVal = function(i) {
+                    return typeof i === 'string' ?
+                        i.replace(/[\$,]/g, '') * 1 :
+                        typeof i === 'number' ?
+                        i : 0;
+                };
+                // computing column Total of the complete result 
+                var peso = api
+                    .column(3)
                     .data()
                     .reduce(function(a, b) {
-                        return parseInt(a) + parseInt(b);
+                        return intVal(a) + intVal(b);
                     }, 0);
 
-                $(this.api().column(1).footer()).html(total);
+                var pesoTanque = api
+                    .column(4)
+                    .data()
+                    .reduce(function(a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
 
-            } */
+                $(api.column(0).footer()).html('<b>Total</b>');
+                $(api.column(3).footer()).html(`<b style="text-decoration: underline;">${peso.toLocaleString("en-US")}</b>`);
+                $(api.column(4).footer()).html(`<b style="text-decoration: underline;">${pesoTanque.toLocaleString("en-US")}</b>`);
+            }
         })
 
 
@@ -91,7 +109,8 @@ $(document).ready(function() {
             alertify
                 .prompt(
                     'Samara Cosmetics - Trazabilidad Lotes MP',
-                    `Ingrese el Número del lote para la MP ${linea.firstChild.innerText}<br><p style="font-size:13px;color:coral">Si cuenta con más de un lote separelos con un doble asterisco (**)<p>`,
+                    `
+                                                Ingrese el Número del lote para la MP $ { linea.firstChild.innerText } < br > < p style = "font-size:13px;color:coral" > Si cuenta con más de un lote separelos con un doble asterisco( ** ) < p > `,
                     '',
                     function(evt, value) { numeroLote(value) },
                     function() { alertify.error('Ingrese el número del lote de la materia prima') },

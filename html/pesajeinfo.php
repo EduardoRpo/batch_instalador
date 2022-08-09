@@ -242,6 +242,14 @@ include_once('modal/modal_condicionesMedio.php');
                 <form>
                   <div class="table-responsive">
                     <table class="table" id="tablePesaje" style="width: 100%;">
+                      <tfoot>
+                        <tr>
+                          <th colspan="2" style="text-align:center"></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                        </tr>
+                      </tfoot>
                     </table>
                   </div>
                 </form>

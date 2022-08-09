@@ -213,7 +213,7 @@ switch ($op) {
 
         break;
     case 9: //Listar Formula fantasma
-        $referencia = $_POST['referencia'];
+        /* $referencia = $_POST['referencia'];
 
         $sql = "SELECT id_notificacion_sanitaria as id FROM producto WHERE referencia = :referencia";
         $query = $conn->prepare($sql);
@@ -226,7 +226,7 @@ switch ($op) {
         $query = $conn->prepare($sql);
         $query->execute(['notificacion' => $notif_sanitaria['id']]);
         $data = $query->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        echo json_encode($data, JSON_UNESCAPED_UNICODE); */
 
         break;
 }

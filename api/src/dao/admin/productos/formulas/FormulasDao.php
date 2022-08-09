@@ -29,8 +29,20 @@ class FormulasDao
         $this->logger->notice("formulas Obtenidas", array('formulas' => $formulas));
         return $formulas;
     }
+    
+    public function findFormulaByRefMaterial($dataFormula, $tbl)
+    {
+        $connection = Connection::getInstance()->getConnection();
+        $stmt = $connection->prepare("SELECT * FROM $tbl 
+                                      WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto");
+        $stmt->execute(['id_materiaprima' => $dataFormula['ref_materiaprima'], 'id_producto' => $dataFormula['ref_producto']]);
+        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        $formulas = $stmt->fetchAll($connection::FETCH_ASSOC);
+        $this->logger->notice("formulas Obtenidas", array('formulas' => $formulas));
+        return $formulas;
+    }
 
-    public function findFormulaByCase3($referencia)
+    /* public function findFormulaByCase3($referencia)
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare(" SELECT f.id_producto, f.id_materiaprima as referencia, m.alias as alias, m.nombre, cast(AES_DECRYPT(porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje 
@@ -41,7 +53,8 @@ class FormulasDao
         $formulas = $stmt->fetchAll($connection::FETCH_ASSOC);
         $this->logger->notice("formulas Obtenidas", array('formulas' => $formulas));
         return $formulas;
-    }
+    } */
+
     public function saveFormula($dataFormula)
     {
         $connection = Connection::getInstance()->getConnection();
@@ -66,35 +79,36 @@ class FormulasDao
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 
-    public function deleteFormulaMulti($dataFormula, $ref_multi)
+   /*  public function deleteFormulaMulti($dataFormula, $ref_multi)
     {
         $connection = Connection::getInstance()->getConnection();
-        for($i = 0; $i < sizeof($ref_multi); $i++){
-        $stmt = $connection->prepare("DELETE FROM formula WHERE id_producto = :ref_producto AND id_materiaprima = :ref_materiaprima");
-        $stmt->execute(['ref_producto' => $ref_multi[$i]['referencia'], 'ref_materiaprima' => $dataFormula[$ref_multi]]);
-        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
-    }}
-    public function countRowFormula($dataFormula)
+        for ($i = 0; $i < sizeof($ref_multi); $i++) {
+            $stmt = $connection->prepare("DELETE FROM formula WHERE id_producto = :ref_producto AND id_materiaprima = :ref_materiaprima");
+            $stmt->execute(['ref_producto' => $ref_multi[$i]['referencia'], 'ref_materiaprima' => $dataFormula[$ref_multi]]);
+            $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        }
+    } */
+
+   /*  public function countRowFormula($dataFormula)
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("SELECT * FROM formula WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto");
         $stmt->execute(['id_materiaprima' => $dataFormula['ref_materiaprima'], 'id_producto' => $dataFormula['ref_producto']]);
         $rows = $stmt->rowCount();
         return $rows;
-    }
+    } */
 
-    public function FindMultiByFormula($referencia){
+   /*  public function FindMultiByFormula($referencia)
+    {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("SELECT multi FROM producto WHERE referencia = :referencia");
         $stmt->execute(['referencia' => $referencia]);
         $multi = $stmt->fetch($connection::FETCH_ASSOC);
-        if($multi['multi'] != 0)
-        {
+        if ($multi['multi'] != 0) {
             $stmt = $connection->prepare("SELECT referencia FROM producto WHERE multi = :multi");
-            $stmt -> execute(['multi' => $multi['multi']]);
+            $stmt->execute(['multi' => $multi['multi']]);
             $ref_multi = $stmt->fetchAll($connection::FETCH_ASSOC);
             return $ref_multi;
         }
-    }
-
+    } */
 }
