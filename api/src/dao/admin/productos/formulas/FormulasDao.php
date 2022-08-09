@@ -42,18 +42,7 @@ class FormulasDao
         return $formulas;
     }
 
-    /* public function findFormulaByCase3($referencia)
-    {
-        $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare(" SELECT f.id_producto, f.id_materiaprima as referencia, m.alias as alias, m.nombre, cast(AES_DECRYPT(porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje 
-                                        FROM formula f INNER JOIN materia_prima m ON f.id_materiaprima=m.referencia 
-                                        WHERE f.id_producto = :referencia");
-        $stmt->execute(['referencia' => $referencia]);
-        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
-        $formulas = $stmt->fetchAll($connection::FETCH_ASSOC);
-        $this->logger->notice("formulas Obtenidas", array('formulas' => $formulas));
-        return $formulas;
-    } */
+
 
     public function saveFormula($dataFormula)
     {
@@ -79,7 +68,7 @@ class FormulasDao
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 
-   /*  public function deleteFormulaMulti($dataFormula, $ref_multi)
+   /*  public function deleteFormula($dataFormula, $ref_multi)
     {
         $connection = Connection::getInstance()->getConnection();
         for ($i = 0; $i < sizeof($ref_multi); $i++) {
