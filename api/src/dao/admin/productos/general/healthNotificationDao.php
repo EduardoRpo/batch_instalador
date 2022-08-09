@@ -51,4 +51,13 @@ class HealthNotificationDao
         $stmt->execute(['id' => $id]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
+
+    public function SearchIdNotifiSanitaria($dataNotification)
+    {
+        $connection = Connection::getInstance()->getConnection();
+        $stmt = $connection->prepare("SELECT id_notificacion_sanitaria as id FROM producto WHERE referencia = :referencia");
+        $stmt->execute(['referencia' => $dataNotification['ref_producto']]);
+        $referencia_notifiSanitaria = $stmt->fetch($connection::FETCH_ASSOC);
+        return $referencia_notifiSanitaria;
+    } 
 }

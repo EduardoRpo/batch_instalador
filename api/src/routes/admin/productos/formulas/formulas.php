@@ -3,14 +3,20 @@
 
 use BatchRecord\dao\FormulasDao;
 use BatchRecord\dao\FormulasInvimaDao;
-use BatchRecord\dao\healthNotificationDao;
+use BatchRecord\dao\HealthNotificationDao;
+use BatchRecord\dao\AdminMultiDao;
+use BatchRecord\dao\EstadoInicialDao;
+use BatchRecord\dao\ActualizarBatchDao;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 $formulasDao = new FormulasDao();
-$formulasInvimasDao = new  FormulasInvimaDao();
-$healthNotificationDao = new  healthNotificationDao();
+$formulasInvimasDao = new FormulasInvimaDao();
+$healthNotificationDao = new HealthNotificationDao();
+$adminMultiDao = new AdminMultiDao();
+$estadoInicialDao = new EstadoInicialDao();
+$actualizarBatchDao = new ActualizarBatchDao();
 
 $app->get('/formula/{idProducto}', function (Request $request, Response $response, $args) use ($formulasDao) {
   $formula = $formulasDao->findFormulaByReference($args["idProducto"]);
@@ -19,7 +25,7 @@ $app->get('/formula/{idProducto}', function (Request $request, Response $respons
 });
 
 $app->get('/formulatbl/{idProducto}', function (Request $request, Response $response, $args) use ($formulasDao) {
-  $formula = $formulasDao->findFormulaByCase3($args["idProducto"]);
+  $formula = $formulasDao->findFormulaByReference($args["idProducto"]);
   $response->getBody()->write(json_encode($formula, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
@@ -51,26 +57,33 @@ $app->get('/formulaInvimatbl/{idProducto}', function (Request $request, Response
   return $response->withHeader('Content-Type', 'application/json');
 }); */
 
-$app->post('/deleteformulas', function (Request $request, Response $response, $args) use ($formulasDao, $formulasInvimasDao) {
+$app->post('/deleteformulas', function (Request $request, Response $response, $args) use ($formulasDao, $formulasInvimasDao,$healthNotificationDao, $adminMultiDao ) {
   $dataFormula =  $request->getParsedBody();
   if ($dataFormula['tbl'] == 'r') {
-    $ref_multi =  $formulasDao->FindMultiByFormula($dataFormula);
+    $ref_multi =  $adminMultiDao->findMultiByReference($dataFormula);
 
     if ($ref_multi == null) {
       $formula = $formulasDao->deleteFormula($dataFormula);
+      $formula == null
+        
+        ? $resp = array('success' => true, 'message' => 'Formula Eliminada Correctamente')
+        : $resp = array('error' => true, 'message' => 'Ocurrio un error mientras guardaba. Intente nuevamente');
     } else {
-      $formula = $formulasDao->deleteFormulaMulti($dataFormula, $ref_multi);
+      $formula = $formulasDao->deleteFormula($dataFormula, $ref_multi);
+      $formula == null
+
+        ? $resp = array('success' => true, 'message' => 'Formula Eliminada Correctamente')
+        : $resp = array('error' => true, 'message' => 'Ocurrio un error mientras guardaba. Intente nuevamente');
     }
   } else {
-    $notif_sanitaria = $formulasInvimasDao->SearchIdNotifiSanitaria($dataFormula);
+    $notif_sanitaria = $healthNotificationDao->SearchIdNotifiSanitaria($dataFormula);
     $formula = $formulasInvimasDao->deleteFormula($dataFormula, $notif_sanitaria);
   }
-  $resp = array('success' => true, 'message' => 'Formula eliminada Correctamente');
   $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->post('/SaveFormula', function (Request $request, Response $response, $args) use ($formulasDao, $formulasInvimasDao) {
+$app->post('/SaveFormula', function (Request $request, Response $response, $args) use ($formulasDao, $formulasInvimasDao, $healthNotificationDao, $estadoInicialDao, $actualizarBatchDao) {
   $dataFormula = $request->getParsedBody();
   //$dataFormula['tbl'] == 'r' ? $dataFormula['tbl'] = 'formula' : $dataFormula['tbl'] = 'formula_f';
 
@@ -80,18 +93,23 @@ $app->post('/SaveFormula', function (Request $request, Response $response, $args
   if ($tbl == 'formula') {
     if ($rows > 0) {
       $formula = $formulasDao->updateFormula($dataFormula, $tbl);
+
+
       $formula == null
         ? $resp = array('success' => true, 'message' => 'Formula Actualizada Correctamente')
         : $resp = array('error' => true, 'message' => 'Ocurrio un error mientras guardaba. Intente nuevamente');
     } else {
       $formula = $formulasDao->saveFormula($dataFormula, $tbl);
+      
+
       $formula == null
         ? $resp = array('success' => true, 'message' => 'Formula Almacenada Correctamente')
         : $resp = array('error' => true, 'message' => 'Ocurrio un error mientras guardaba. Intente nuevamente');
+
     }
   } else {
 
-    $notif_sanitaria = $formulasInvimasDao->SearchIdNotifiSanitaria($dataFormula);
+    $notif_sanitaria = $healthNotificationDao->SearchIdNotifiSanitaria($dataFormula);
     //$rows = $formulasInvimasDao->countRowFormulainvima($dataFormula, $notif_sanitaria);
 
     if ($rows > 0) {
@@ -102,8 +120,10 @@ $app->post('/SaveFormula', function (Request $request, Response $response, $args
         : $resp = array('error' => true, 'message' => 'Formula Actualizada Correctamente');
     } else {
       $formula = $formulasInvimasDao->saveFormula($dataFormula, $notif_sanitaria);
-      if ($formula = null)
-        $resp = array('success' => true, 'message' => 'Formula Almacenada Correctamente');
+      
+      $formula == null
+        ? $resp = array('success' => true, 'message' => 'Formula Almacenada Correctamente')
+        : $resp = array('error' => true, 'message' => 'Ocurrio un error mientras guardaba. Intente nuevamente');
     }
   }
 
