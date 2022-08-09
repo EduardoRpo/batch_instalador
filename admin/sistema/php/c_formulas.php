@@ -100,10 +100,10 @@ switch ($op) {
                     if ($tbl == 'materia_prima') {
                         $result = estadoInicial($conn, $id_producto, $fechaprogramacion = "");
 
-                        $sql = "SELECT estado FROM batch WHERE id_producto = :id_producto";
-                        $query = $conn->prepare($sql);
-                        $result = $query->execute(['id_producto' => $id_producto]);
-                        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+                        // $sql = "SELECT estado FROM batch WHERE id_producto = :id_producto";
+                        // $query = $conn->prepare($sql);
+                        // $result = $query->execute(['id_producto' => $id_producto]);
+                        // $data = $query->fetchAll(PDO::FETCH_ASSOC);
 
                         for ($i = 0; $i < sizeof($data); $i++)
                             if ($estado > 0 && $estado < 3)

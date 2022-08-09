@@ -17,11 +17,12 @@ class FormulasDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
+
     public function findFormulaByReference($referencia)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("SELECT f.id, mp.referencia, mp.alias, cast(AES_DECRYPT(porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje 
-                                      FROM formula_f INNER JOIN materia_prima mp ON f.id_materiaprima = mp.referencia 
+        $stmt = $connection->prepare("SELECT f.id, mp.referencia, mp.nombre, mp.alias, cast(AES_DECRYPT(porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje 
+                                      FROM formula f INNER JOIN materia_prima mp ON f.id_materiaprima = mp.referencia 
                                       WHERE f.id_producto = :referencia");
         $stmt->execute(['referencia' => $referencia]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
@@ -29,7 +30,7 @@ class FormulasDao
         $this->logger->notice("formulas Obtenidas", array('formulas' => $formulas));
         return $formulas;
     }
-    
+
     public function findFormulaByRefMaterial($dataFormula, $tbl)
     {
         $connection = Connection::getInstance()->getConnection();
@@ -68,7 +69,7 @@ class FormulasDao
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 
-   /*  public function deleteFormula($dataFormula, $ref_multi)
+    /*  public function deleteFormula($dataFormula, $ref_multi)
     {
         $connection = Connection::getInstance()->getConnection();
         for ($i = 0; $i < sizeof($ref_multi); $i++) {
@@ -78,7 +79,7 @@ class FormulasDao
         }
     } */
 
-   /*  public function countRowFormula($dataFormula)
+    /*  public function countRowFormula($dataFormula)
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("SELECT * FROM formula WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto");
@@ -87,7 +88,7 @@ class FormulasDao
         return $rows;
     } */
 
-   /*  public function FindMultiByFormula($referencia)
+    /*  public function FindMultiByFormula($referencia)
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("SELECT multi FROM producto WHERE referencia = :referencia");

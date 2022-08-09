@@ -18,8 +18,6 @@ class BatchDao extends estadoInicialDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
-
-
     public function findBatch($batch)
     {
         $connection = Connection::getInstance()->getConnection();
@@ -27,6 +25,15 @@ class BatchDao extends estadoInicialDao
         $stmt->execute(['id_batch' => $batch['idBatch']]);
         $dataBatch = $stmt->fetch($connection::FETCH_ASSOC);
         return $dataBatch;
+    }
+    
+    public function findEstadoBatch($ref_producto)
+    {
+        $connection = Connection::getInstance()->getConnection();
+        $stmt = $connection->prepare("SELECT estado FROM batch WHERE id_producto = :id_producto");
+        $stmt->execute(['id_producto' => $ref_producto]);
+        $estadoBatch = $stmt->fetchAll($connection::FETCH_ASSOC);
+        return $estadoBatch;
     }
 
     /**
@@ -232,6 +239,15 @@ class BatchDao extends estadoInicialDao
                 ]);
             }
         } */
+    }
+
+    public function updateEstadoBatch($databatch)
+    {
+        $connection = Connection::getInstance()->getConection();
+        $stmt = $connection->prepare("UPDATE batch SET estado = :estado WHERE id_producto = :referencia");
+        $result = $stmt->execute(['estado' => $databatch["estado"], 'referencia' => $databatch['ref_producto']]);
+        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        return $result;
     }
 
     public function updateBatchPedido($id_batch, $dataBatch)

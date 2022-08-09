@@ -6,7 +6,7 @@ use BatchRecord\dao\FormulasInvimaDao;
 use BatchRecord\dao\HealthNotificationDao;
 use BatchRecord\dao\AdminMultiDao;
 use BatchRecord\dao\EstadoInicialDao;
-use BatchRecord\dao\ActualizarBatchDao;
+use BatchRecord\dao\BatchDao;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -16,7 +16,7 @@ $formulasInvimasDao = new FormulasInvimaDao();
 $healthNotificationDao = new HealthNotificationDao();
 $adminMultiDao = new AdminMultiDao();
 $estadoInicialDao = new EstadoInicialDao();
-$actualizarBatchDao = new ActualizarBatchDao();
+$batchDao = new BatchDao();
 
 $app->get('/formula/{idProducto}', function (Request $request, Response $response, $args) use ($formulasDao) {
   $formula = $formulasDao->findFormulaByReference($args["idProducto"]);
@@ -57,7 +57,7 @@ $app->get('/formulaInvimatbl/{idProducto}', function (Request $request, Response
   return $response->withHeader('Content-Type', 'application/json');
 }); */
 
-$app->post('/deleteformulas', function (Request $request, Response $response, $args) use ($formulasDao, $formulasInvimasDao,$healthNotificationDao, $adminMultiDao ) {
+$app->post('/deleteformulas', function (Request $request, Response $response, $args) use ($formulasDao, $formulasInvimasDao, $healthNotificationDao, $adminMultiDao) {
   $dataFormula =  $request->getParsedBody();
   if ($dataFormula['tbl'] == 'r') {
     $ref_multi =  $adminMultiDao->findMultiByReference($dataFormula);
@@ -65,7 +65,7 @@ $app->post('/deleteformulas', function (Request $request, Response $response, $a
     if ($ref_multi == null) {
       $formula = $formulasDao->deleteFormula($dataFormula);
       $formula == null
-        
+
         ? $resp = array('success' => true, 'message' => 'Formula Eliminada Correctamente')
         : $resp = array('error' => true, 'message' => 'Ocurrio un error mientras guardaba. Intente nuevamente');
     } else {
@@ -83,7 +83,7 @@ $app->post('/deleteformulas', function (Request $request, Response $response, $a
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->post('/SaveFormula', function (Request $request, Response $response, $args) use ($formulasDao, $formulasInvimasDao, $healthNotificationDao, $estadoInicialDao, $actualizarBatchDao) {
+$app->post('/SaveFormula', function (Request $request, Response $response, $args) use ($formulasDao, $formulasInvimasDao, $healthNotificationDao, $estadoInicialDao, $batchDao) {
   $dataFormula = $request->getParsedBody();
   //$dataFormula['tbl'] == 'r' ? $dataFormula['tbl'] = 'formula' : $dataFormula['tbl'] = 'formula_f';
 
@@ -94,18 +94,23 @@ $app->post('/SaveFormula', function (Request $request, Response $response, $args
     if ($rows > 0) {
       $formula = $formulasDao->updateFormula($dataFormula, $tbl);
 
-
       $formula == null
         ? $resp = array('success' => true, 'message' => 'Formula Actualizada Correctamente')
         : $resp = array('error' => true, 'message' => 'Ocurrio un error mientras guardaba. Intente nuevamente');
     } else {
-      $formula = $formulasDao->saveFormula($dataFormula, $tbl);
-      
+      $result = $formulasDao->saveFormula($dataFormula, $tbl);
+      if ($result == null) {
+        $estadoBatch = $estadoInicialDao->estadoInicial($dataFormula['ref_producto'], $fechaprogramacion = "");
+        $dataBatchEstado = $batchDao->findEstadoBatch($dataFormula['ref_producto']);
 
-      $formula == null
+        for ($i = 0; $i < sizeof($dataBatchEstado); $i++)
+          if ($dataBatchEstado['estado'] > 0 && $$dataBatchEstado['estado'] < 3)
+            $result = $batchDao->updateEstadoBatch($estadoBatch);
+      }
+
+      $result == null
         ? $resp = array('success' => true, 'message' => 'Formula Almacenada Correctamente')
         : $resp = array('error' => true, 'message' => 'Ocurrio un error mientras guardaba. Intente nuevamente');
-
     }
   } else {
 
@@ -120,7 +125,7 @@ $app->post('/SaveFormula', function (Request $request, Response $response, $args
         : $resp = array('error' => true, 'message' => 'Formula Actualizada Correctamente');
     } else {
       $formula = $formulasInvimasDao->saveFormula($dataFormula, $notif_sanitaria);
-      
+
       $formula == null
         ? $resp = array('success' => true, 'message' => 'Formula Almacenada Correctamente')
         : $resp = array('error' => true, 'message' => 'Ocurrio un error mientras guardaba. Intente nuevamente');

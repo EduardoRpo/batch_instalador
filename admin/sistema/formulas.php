@@ -210,8 +210,10 @@
   <script src="/admin/sistema/js/global/rawMaterials.js"></script>
   
   <script src="/admin/sistema/js/productos/formulas/formulas.js"></script>
-  <script src="/admin/sistema/js/productos/formulas/tblformulas.js"></script>
   <script src="/admin/sistema/js/productos/formulas/validarReferencia.js"></script>
+  <script src="/admin/sistema/js/productos/formulas/tblFormulas.js"></script>
+  <script src="/admin/sistema/js/productos/formulas/tblAllFormulas.js"></script>
+  <script src="/admin/sistema/js/productos/formulas/tblFormulasInvima.js"></script>
   
   <script src="/admin/sistema/js/importarProductos.js"></script>
   <script src="/admin/sistema/js/menu.js"></script>

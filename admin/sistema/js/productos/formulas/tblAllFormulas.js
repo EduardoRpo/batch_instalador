@@ -1,13 +1,23 @@
 $(document).ready(function() {
 
-    /* Cargue de Parametros de Control en DataTable */
-
-    cargarTablaFormulas = (referencia) => {
-        tabla = $('#tblFormulas').DataTable({
+    cargarTablaTodasFormulas = (referencia) => {
+        tabla = $('#tblFormulastodas').DataTable({
             destroy: true,
             scrollY: '50vh',
             scrollCollapse: true,
             paging: false,
+            oLanguage: { sProcessing: "<div id='loader'></div>" },
+            dom: 'Bfrtip',
+            order: [
+                [0, 'asc']
+            ],
+            buttons: [{
+                extend: 'excel',
+                className: 'btn btn-primary',
+                exportOptions: {
+                    columns: [0, 1, 2, 4],
+                },
+            }, ],
             language: { url: 'admin_componentes/es-ar.json' },
 
             ajax: {
@@ -16,7 +26,8 @@ $(document).ready(function() {
             },
 
             columns: [
-                { title: 'Referencia', data: 'referencia' },
+                { title: 'Producto', data: 'id_producto' },
+                { title: 'Referencia MP', data: 'referencia' },
                 { title: 'Materia prima', data: 'nombre' },
                 { title: 'Alias', data: 'alias' },
                 {
@@ -31,19 +42,6 @@ $(document).ready(function() {
                 },
             ],
             columnDefs: [{ width: '10%', targets: 0 }],
-
-            footerCallback: function(row, data, start, end, display) {
-                total = this.api()
-                    .column(3)
-                    .data()
-                    .reduce(function(a, b) {
-                        return parseFloat(a) + parseFloat(b)
-                    }, 0)
-                total = total.toFixed(2)
-                $('#totalPorcentajeFormulas').val(`Total ${total}%`)
-            },
         })
     }
-
-
 });
