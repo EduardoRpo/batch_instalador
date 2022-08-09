@@ -86,20 +86,28 @@ switch ($op) {
                 $rows = $query->rowCount();
 
                 if ($rows > 0) {
-                        $sql = "UPDATE $tbl SET porcentaje = AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
-                        $query = $conn->prepare($sql);
-                        $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto, 'porcentaje' => $porcentaje]);
-                        echo '3';
+                    $sql = "UPDATE $tbl SET porcentaje = AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto";
+                    $query = $conn->prepare($sql);
+                    $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto, 'porcentaje' => $porcentaje]);
+                    echo '3';
                 } else {
 
-                        $sql = "INSERT INTO $tbl (id_producto, id_materiaprima, porcentaje) VALUES (:id_producto, :id_materiaprima, AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') )";
-                        $query = $conn->prepare($sql);
-                        $result = $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto, 'porcentaje' => $porcentaje]);
-
+                    $sql = "INSERT INTO $tbl (id_producto, id_materiaprima, porcentaje) VALUES (:id_producto, :id_materiaprima, AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') )";
+                    $query = $conn->prepare($sql);
+                    $result = $query->execute(['id_materiaprima' => $id_materiaprima, 'id_producto' => $id_producto, 'porcentaje' => $porcentaje]);
+                    $data = $query->fetchAll(PDO::FETCH_ASSOC);
                     /* Valida si existen batch sin formula y actualiza */
                     if ($tbl == 'materia_prima') {
                         $result = estadoInicial($conn, $id_producto, $fechaprogramacion = "");
-                        $result = ActualizarBatch($conn, $result, $id_producto);
+
+                        $sql = "SELECT estado FROM batch WHERE id_producto = :id_producto";
+                        $query = $conn->prepare($sql);
+                        $result = $query->execute(['id_producto' => $id_producto]);
+                        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+
+                        for ($i = 0; $i < sizeof($data); $i++)
+                            if ($estado > 0 && $estado < 3)
+                                $result = ActualizarBatch($conn, $result, $id_producto);
                     }
                     if ($result) echo '1';
                 }
