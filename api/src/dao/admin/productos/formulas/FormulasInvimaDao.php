@@ -64,21 +64,14 @@ class FormulasInvimaDao
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 
-    /* public function SearchIdNotifiSanitaria($dataFormulaInvima)
-    {
-        $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("SELECT id_notificacion_sanitaria as id FROM producto WHERE referencia = :referencia");
-        $stmt->execute(['referencia' => $dataFormulaInvima['ref_producto']]);
-        $referencia_notifiSanitaria = $stmt->fetch($connection::FETCH_ASSOC);
-        return $referencia_notifiSanitaria;
-    } */
 
-   /*  public function countRowFormulaInvima($dataFormula, $notif_sanitaria)
+
+    public function countRowFormulaInvima($ref_materia, $notif_sanitaria)
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("SELECT * FROM formula_f WHERE id_materiaprima = :id_materiaprima AND notif_sanitaria = :notif_sanitaria");
-        $stmt->execute(['id_materiaprima' => $dataFormula['ref_materiaprima'], 'notif_sanitaria' => $notif_sanitaria['id']]);
+        $stmt->execute(['id_materiaprima' => $ref_materia, 'notif_sanitaria' => $notif_sanitaria['id']]);
         $rows = $stmt->rowCount();
         return $rows;
-    } */
+    } 
 }
