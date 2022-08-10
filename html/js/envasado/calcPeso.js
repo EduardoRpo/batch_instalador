@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     /* Calcular peso minimo, maximo y promedio */
 
     identificarDensidad = (batch) => {

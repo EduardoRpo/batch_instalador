@@ -7,8 +7,8 @@ $(document).ready(function() {
     cargarTablaEnvase = async(batchMulti) => {
         for (let i = 0; i < batchMulti.length; i++) {
             InsumosMulti = await buscarDataMulti(`${ApiEnvase}${batchMulti[i]['referencia']}`)
-            empaqueEnvasado = Math.round(cantidad / InsumosMulti[0].unidad_empaque);
-            unidades = formatoCO(cantidad);
+            empaqueEnvasado = Math.round(batchMulti[i]['cantidad'] / InsumosMulti[0].unidad_empaque);
+            unidades = formatoCO(batchMulti[i]['cantidad']);
 
             // Carga datos material referencia 
 
