@@ -34,7 +34,7 @@ class FormulasDao
     public function findFormulaByRefMaterial($dataFormula, $tbl)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("SELECT * FROM $tbl 
+        $stmt = $connection->prepare("SELECT * FROM $tbl
                                       WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto");
         $stmt->execute(['id_materiaprima' => $dataFormula['ref_materiaprima'], 'id_producto' => $dataFormula['ref_producto']]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));

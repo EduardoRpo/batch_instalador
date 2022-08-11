@@ -88,10 +88,11 @@ $app->post('/SaveFormula', function (Request $request, Response $response, $args
   //$dataFormula['tbl'] == 'r' ? $dataFormula['tbl'] = 'formula' : $dataFormula['tbl'] = 'formula_f';
 
   $dataFormula['tbl'] == 'r' ? $tbl = 'formula' : $tbl = 'formula_f';
-  $rows = $formulasDao->findFormulaByRefMaterial($dataFormula, $tbl);
+  
 
   if ($tbl == 'formula') {
-    if ($rows > 0) {
+    $rows = $formulasDao->findFormulaByRefMaterial($dataFormula, $tbl);
+    if ($rows != null) {
       $formula = $formulasDao->updateFormula($dataFormula, $tbl);
 
       $formula == null
@@ -115,7 +116,7 @@ $app->post('/SaveFormula', function (Request $request, Response $response, $args
   } else {
 
     $notif_sanitaria = $healthNotificationDao->SearchIdNotifiSanitaria($dataFormula);
-    //$rows = $formulasInvimasDao->countRowFormulainvima($dataFormula, $notif_sanitaria);
+    $rows = $formulasInvimasDao->countRowFormulainvima($dataFormula['ref_producto'], $notif_sanitaria);
 
     if ($rows > 0) {
       $formula = $formulasInvimasDao->updateFormula($dataFormula, $notif_sanitaria);
