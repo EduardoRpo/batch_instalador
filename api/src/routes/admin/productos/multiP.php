@@ -13,31 +13,6 @@ $app->get('/adminMulti', function (Request $request, Response $response, $args) 
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-
-/*
-  foreach($dataMulti as $valor){
-  $Multi = $multiPDao->deleteMulti($valor);
-  }
-  
-  if ($Multi)
-  $response = array('success' => true, 'message' => 'Multipresentacion eliminada correctamente');
-  return $response->withHeader('Content-Type', 'application/json');
-
-);
-*/
-/*
-$app->get('/deleteMulti', function (Request $request, Response $response, $args) use ($multiPDao) {
-  $Multi = $multiPDao->deleteMulti($args['multi']);
-
-  if ($Multi == null)
-    $resp = array('success' => true, 'message' => 'Multipresentacion eliminada correctamente');
-
-  $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
-  return $response->withHeader('Content-Type', 'application/json');
-});
-
-*/
-
 $app->get('/adminProducts', function (Request $request, Response $response, $args) use ($multiPDao) {
   $adminProduc = $multiPDao->adminFindAllProducts();
   $response->getBody()->write(json_encode($adminProduc, JSON_NUMERIC_CHECK));

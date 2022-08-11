@@ -118,8 +118,8 @@
 
   <!-- javascript inicializacion datatables -->
   <!-- <script src="js/cargos.js"></script> -->
-  <script src="js//users//charge//tblcharge.js"></script>
-  <script src="js//users//charge//charge.js"></script>
+  <script src="js//users//position//tblposition.js"></script>
+  <script src="js//users//position//position.js"></script>
   <script src="js//global//notifications.js"></script>
   <script src="js/menu.js"></script>
 

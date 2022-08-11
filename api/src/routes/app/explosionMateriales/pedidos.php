@@ -22,7 +22,6 @@ $app->get('/pedidos/{idPedido}', function (Request $request, Response $response,
 });
 
 $app->post('/pedidos/nuevos', function (Request $request, Response $response, $args)  use ($pedidosDao) {
-    /* $data = file_get_contents('../pedidos.txt'); */
     $data = file_get_contents('../html/pedidos/pedidos.xls');
     $array = $pedidosDao->save($data);
     $response->getBody()->write(json_encode($array));

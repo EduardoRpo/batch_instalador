@@ -7,7 +7,7 @@ use Monolog\Handler\RotatingFileHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 
-class ChargueDao
+class PositionDao
 {
     private $logger;
 
@@ -17,34 +17,34 @@ class ChargueDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
-    public function findAllChargue()
+    public function findAllPosition()
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("SELECT * FROM cargos");
         $stmt->execute();
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
-        $Chargue = $stmt->fetchAll($connection::FETCH_ASSOC);
-        $this->logger->notice("tanques Obtenidos", array('tanques' => $Chargue));
-        return $Chargue;
+        $Position = $stmt->fetchAll($connection::FETCH_ASSOC);
+        $this->logger->notice("tanques Obtenidos", array('tanques' => $Position));
+        return $Position;
     }
 
-    public function saveChargue($dataChargue)
+    public function savePosition($dataPosition)
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("INSERT INTO cargos (cargo) VALUES(:cargo)");
-        $stmt->execute(['cargo' => $dataChargue['cargo']]);
+        $stmt->execute(['cargo' => $dataPosition['cargo']]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 
-    public function updateChargue($dataChargue)
+    public function updatePosition($dataPosition)
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("UPDATE cargos SET cargo = :cargo WHERE id = :id");
-        $stmt->execute(['cargo' => $dataChargue['cargo'], 'id' => $dataChargue['id']]);
+        $stmt->execute(['cargo' => $dataPosition['cargo'], 'id' => $dataPosition['id']]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 
-    public function deleteChargue($id)
+    public function deletePosition($id)
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("DELETE FROM cargos WHERE id = :id");

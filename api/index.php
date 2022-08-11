@@ -61,9 +61,6 @@ require_once __DIR__ . '/src/routes/admin/productos/Packaging/otros.php';
 require_once __DIR__ . '/src/routes/admin/productos/RawMaterial/materiaPrima.php';
 require_once __DIR__ . '/src/routes/admin/productos/formulas/formulas.php';
 
-require_once __DIR__ . '/src/routes/admin/productos/usuarios/usuarios.php';
-require_once __DIR__ . '/src/routes/admin/productos/usuarios/cargos.php';
-
 require_once __DIR__ . '/src/routes/admin/productos/multiP.php';
 require_once __DIR__ . '/src/routes/admin/productos/productos.php';
 require_once __DIR__ . '/src/routes/admin/productos/instructivos.php';
@@ -71,6 +68,9 @@ require_once __DIR__ . '/src/routes/admin/pdf/certificados.php';
 require_once __DIR__ . '/src/routes/admin/pdf/versiones.php';
 
 require_once __DIR__ . '/src/routes/admin/global/selector.php';
+
+require_once __DIR__ . '/src/routes/admin/usuarios/usuarios.php';
+require_once __DIR__ . '/src/routes/admin/usuarios/cargos.php';
 
 /* App */
 

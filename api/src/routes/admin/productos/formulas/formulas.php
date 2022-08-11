@@ -36,27 +36,6 @@ $app->get('/formulaInvimatbl/{idProducto}', function (Request $request, Response
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-// $app->post('/SearchFormulaAll', function (Request $request, Response $response, $args) use ($formulasDao) {
-
-//   $dataFormula = $request->getParsedBody();
-//   $formula = $formulasDao->findFormulaByCase3($dataFormula);
-//   $response->getbody()->write(json_encode($formula, JSON_NUMERIC_CHECK));
-//   return $response->withHeader('Content-Type', 'application/json');
-
-// });
-
-// $app->get('/saveformulas', function (Request $request, Response $response, $args) use ($formulasDao) {
-//   $formula = $formulasDao->findFormulaByReference($args["idProducto"]);
-//   $response->getBody()->write(json_encode($formula, JSON_NUMERIC_CHECK));
-//   return $response->withHeader('Content-Type', 'application/json');
-// });
-
-/* $app->get('/updateformulas', function (Request $request, Response $response, $args) use ($formulasDao) {
-  $formula = $formulasDao->findFormulaByReference($args["idProducto"]);
-  $response->getBody()->write(json_encode($formula, JSON_NUMERIC_CHECK));
-  return $response->withHeader('Content-Type', 'application/json');
-}); */
-
 $app->post('/deleteformulas', function (Request $request, Response $response, $args) use ($formulasDao, $formulasInvimasDao, $healthNotificationDao, $adminMultiDao) {
   $dataFormula =  $request->getParsedBody();
   if ($dataFormula['tbl'] == 'r') {
@@ -85,10 +64,8 @@ $app->post('/deleteformulas', function (Request $request, Response $response, $a
 
 $app->post('/SaveFormula', function (Request $request, Response $response, $args) use ($formulasDao, $formulasInvimasDao, $healthNotificationDao, $estadoInicialDao, $batchDao) {
   $dataFormula = $request->getParsedBody();
-  //$dataFormula['tbl'] == 'r' ? $dataFormula['tbl'] = 'formula' : $dataFormula['tbl'] = 'formula_f';
 
   $dataFormula['tbl'] == 'r' ? $tbl = 'formula' : $tbl = 'formula_f';
-  
 
   if ($tbl == 'formula') {
     $rows = $formulasDao->findFormulaByRefMaterial($dataFormula, $tbl);

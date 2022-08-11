@@ -33,17 +33,6 @@ $app->post('/saveConditions', function (Request $request, Response $response, $a
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-/* $app->post('/updateConditions', function (Request $request, Response $response, $args) use ($conditionsDao) {
-
-  $dataConditions = $request->getParsedBody();
-
-  $Conditions = $conditionsDao->updateConditions($dataConditions);
-
-  if ($Conditions == null) {
-    $resp = array('success' => true, 'message' => 'Condicion actualizada correctamente');
-  }
-}); */
-
 $app->get('/deleteConditions/{id}', function (Request $request, Response $response, $args) use ($conditionsDao) {
   $Conditions = $conditionsDao->deleteConditions($args['id']);
 

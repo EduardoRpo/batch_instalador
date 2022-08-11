@@ -29,7 +29,7 @@ class UsersDao
         $this->logger->notice("users Obtenidos", array('users' => $users));
         return $users;
     }
-/*
+    /*
     public function findUser($dataUser)
     {
         $connection = Connection::getInstance()->getConnection();
@@ -45,33 +45,36 @@ class UsersDao
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("INSERT INTO usuario (nombre, apellido, email, user, clave, urlfirma, rol, id_modulo, id_cargo, estado)");
-        $stmt->execute([ 				
-        'nombre' => $datausers['nombres'],
-        'apellido' => $datausers['apellidos'],
-        'email' => $datausers['email'],
-        'user' => $datausers['usuario'],
-        'clave' => md5($datausers['clave']),
-        'urlfirma' => $datausers['destino'],
-        'rol' => $datausers['rol'],
-        'id_modulo' => $datausers['modulo'],
-        'id_cargo' => $datausers['cargo'],
-        'estado' => '1']);
-        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        $stmt->execute([
+            'nombre' => $datausers['nombres'],
+            'apellido' => $datausers['apellidos'],
+            'email' => $datausers['email'],
+            'user' => $datausers['usuario'],
+            'clave' => md5($datausers['clave']),
+            'urlfirma' => $datausers['destino'],
+            'rol' => $datausers['rol'],
+            'id_modulo' => $datausers['modulo'],
+            'id_cargo' => $datausers['cargo'],
+            'estado' => '1'
+        ]);
+    
+    $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 
     public function updateUser($datausers)
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("UPDATE modulo SET modulo = :module WHERE id = :id_module");
-        $stmt->execute([ 
-		'nombre' => $datausers['nombres'],
-        'apellido' => $datausers['apellidos'],
-        'email' => $datausers['email'],
-        'user' => $datausers['usuario'],
-        'rol' => $datausers['rol'],
-        'modulo' => $datausers['modulo'],
-        'cargo' => $datausers['cargo'],
-        'id' => $datausers['id']]);
+        $stmt->execute([
+            'nombre' => $datausers['nombres'],
+            'apellido' => $datausers['apellidos'],
+            'email' => $datausers['email'],
+            'user' => $datausers['usuario'],
+            'rol' => $datausers['rol'],
+            'modulo' => $datausers['modulo'],
+            'cargo' => $datausers['cargo'],
+            'id' => $datausers['id']
+        ]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 
