@@ -106,6 +106,7 @@ include_once('./modal/m_crearUsuarios.php');
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
   <!-- <script src="js/usuarios.js"></script> -->
   <script src="js//global//notifications.js"></script>
+  <script src="js//productos//selectores.js"></script>
   <script src="js//users//users//usuarios.js"></script>
   <script src="js//users//users//tblusuarios.js"></script>
   <script src="js/menu.js"></script>

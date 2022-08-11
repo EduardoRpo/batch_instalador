@@ -128,7 +128,7 @@ require_once __DIR__ . '/src/routes/app/pdf/pdf.php';
 require_once __DIR__ . '/src/routes/app/process/micro/micro.php';
 
 /* Users */
-require_once __DIR__ . '/src/routes/app/usuarios/usuarios.php';
+//require_once __DIR__ . '/src/routes/app/usuarios/usuarios.php';
 
 
 

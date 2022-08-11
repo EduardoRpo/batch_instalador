@@ -1,43 +1,16 @@
-
-//cargar selects Cargo y Modulos
-
-cargarselectores = (selector) => {
-    $.ajax({
-        url: `/api/getDataSelector/${selector}`,
-        success: function(resp) {
-            const $select = $(`#${selector}`);
-
-            $select.empty();
-            $select.append("<option disabled selected>Seleccionar</option>");
-
-            if (selector == "cargos") {
-                $.each(resp, function(i, value) {
-                    $select.append(`<option value = ${value.id}>${value.cargo}</option>`);
-                });
-            } else {
-                $.each(resp, function(i, value) {
-                    $select.append(`<option value = ${value.id}>${value.modulo}</option>`);
-                });
-            }
-        },
-        error: function(response) {
-            console.log(response);
-        },
-    });
-}
-
-
-    $("#Cargo-txt").click( function () {
-    selector = 'cargos';
-    cargarselectores(selector)
-    });
-
-
-//Crear usuarios
-$("#btnCrearUsuarios").click(function() {
-    $("#ModalCrearUsuarios").modal("show");
-    $("#btnguardarUsuarios").html("Crear");
-    $("#nombres").val("");
+let editar;
+let id;
+   
+$(document).ready(function () {
+    
+    
+    cargarselectores('cargos')
+    cargarselectores('usuarios_rols')
+    //Crear usuarios
+    $("#btnCrearUsuarios").click(function() {
+        $("#ModalCrearUsuarios").modal("show");
+        $("#btnguardarUsuarios").html("Crear");
+        $("#nombres").val("");
     $("#apellidos").val("");
     $("#email").val("");
     $("#cargo").val("");
@@ -46,9 +19,9 @@ $("#btnCrearUsuarios").click(function() {
     $("#clave").val("");
 });
 
-$("#rol").change(function(e) {
+$("#usuarios_rols").change(function(e) {
     e.preventDefault();
-    let rol = $("#rol").val();
+    let rol = $("#usuarios_rols").val();
     if (rol == 1 || rol == 2 || rol == 5)
         $("#firma_y_modulo").css("display", "none");
     else $("#firma_y_modulo").css("display", "flex");
@@ -67,7 +40,7 @@ $(document).ready(function() {
         let modulo = $("#modulo").val();
         let user = $("#usuario").val();
         let clave = $("#clave").val();
-        let rol = $("#rol").val();
+        let rol = $("#usuarios_rols").val();
 
         if (rol == 1 || rol == 2 || rol == 5) {
             modulo = "1";
@@ -155,7 +128,7 @@ $(document).on("click", ".link-editar", function(e) {
     $("#email").val(email);
     $("#cargos option:contains(" + cargo + ")").attr("selected", true);
     $("#modulo option:contains(" + modulo + ")").attr("selected", true);
-    $("#rol option:contains(" + rol + ")").attr("selected", true);
+    $("#usuarios_rols option:contains(" + rol + ")").attr("selected", true);
     $("#usuario").val(usuario);
     $(`#firma`).val('');
 
@@ -167,8 +140,8 @@ $(document).on("click", ".link-editar", function(e) {
         (id_rol = 3) :
         (id_rol = 4);
 
-    $("#rol").val(id_rol);
-    $("#rol").change();
+    $("#usuarios_rols").val(id_rol);
+    $("#usuarios_rols").change();
 });
 
 /* evento click para borrar registros */
@@ -235,3 +208,4 @@ $(".custom-file-input").on("change", function(event) {
 });
 
 $(".custom-file-label::after").val("Buscar");
+});

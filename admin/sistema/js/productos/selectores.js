@@ -33,9 +33,22 @@ $(document).ready(function() {
 
                 if (selector == 'densidad_gravedad' || selector == 'grado_alcohol' || selector == 'ph' || selector == 'viscosidad') {
                     $.each(data, function(i, value) {
-                        $select.append(`<option value = ${value.id}> ${value.id}. ${value.limite_inferior}-${value.limite_superior} </option>`);
+                        $select.append(`<option value = ${value.isd}> ${value.id}. ${value.limite_inferior}-${value.limite_superior} </option>`);
                     });
-                } else {
+                }else if(selector == 'modulo'){
+                    $.each(data, function(i, value) {
+                        $select.append(`<option value = ${value.id}> ${value.id}. ${value.modulo} </option>`);
+                    });
+                }else if(selector == 'cargos'){
+                    $.each(data, function(i, value) {
+                        $select.append(`<option value = ${value.id}> ${value.id}. ${value.cargo} </option>`);
+                    });
+                }else if(selector == 'usuarios_rols'){
+                    $.each(data, function(i, value) {
+                        $select.append(`<option value = ${value.usuario_id}> ${value.usuario_id}. ${value.rol} </option>`);
+                    });
+                }
+                else {
                     $.each(data, function(i, value) {
                         $select.append(`<option value = ${value.id}> ${value.id}. ${value.nombre} </option>`);
                     });
@@ -53,13 +66,11 @@ $(document).ready(function() {
         $.ajax({
             url: "/api/findBase",
             success: function(response) {
-                var info = JSON.parse(response);
-
                 let $select = $(`#instructivo`);
                 $select.empty();
                 $select.append("<option disabled selected>Seleccionar</option>");
 
-                $.each(info.data, function(i, value) {
+                $.each(response.data, function(i, value) {
                     $select.append('<option value ="' + value.id + '">' + value.producto_base + "</option>");
                 });
             },

@@ -58,14 +58,8 @@
                       <div class="col-md-4 pl-1">
                         <div class="form-group">
                           <label>Rol</label>
-                          <select class="form-control" name="rol" id="rol">
+                          <select class="form-control" name="usuarios_rols" id="usuarios_rols">
                             <option value="" disabled selected>Selecciona una opción</option>
-                            <option value="1">Superusuario</option>
-                            <option value="2">Administrador</option>
-                            <option value="3">Usuario</option>
-                            <option value="4">Usuario QC</option>
-                            <option value="5">Desarrollo</option>
-                            <option value="6">Consulta Batch</option>
                           </select>
                         </div>
                       </div>

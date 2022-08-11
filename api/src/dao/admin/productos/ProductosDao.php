@@ -121,7 +121,7 @@ class ProductosDao
 
   public function findBase()
   {
-    $connection = Connection::getInstance()->getConection();
+    $connection = Connection::getInstance()->getConnection();
     $stmt = $connection->prepare("SELECT DISTINCT np.id, np.nombre as producto_base 
     FROM instructivos_base ib 
     INNER JOIN nombre_producto np ON np.id = ib.producto");
