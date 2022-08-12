@@ -176,7 +176,7 @@ let id = 0;
         confirm.set("onok", function(r) {
             if (r) {
                 $.ajax({
-                    url: `/api/delete/${id}`,
+                    url: `/api/deleteUsers/${id}`,
                 });
                 refreshTable();
                 alertify.success("Registro Eliminado");

@@ -41,7 +41,7 @@ class UsersDao
         return $usuario;
     }
 */
-    public function saveUsers($datausers)
+    public function saveUsers($datausers, $ruta)
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("INSERT INTO usuario (nombre, apellido, email, user, clave, urlfirma, rol, id_modulo, id_cargo, estado) VALUES(:nombre, :apellido, :email, :user, :clave, :urlfirma, :rol, :id_modulo, :id_cargo, :estado)");
@@ -51,7 +51,7 @@ class UsersDao
             'email' => $datausers['email'],
             'user' => $datausers['usuario'],
             'clave' => md5($datausers['clave']),
-            'urlfirma' => 'proots',
+            'urlfirma' => $ruta,
             'rol' => $datausers['usuarios_rols'],
             'id_modulo' => $datausers['modulo'],
             'id_cargo' => $datausers['cargos'],
@@ -86,11 +86,12 @@ class UsersDao
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 
-    public function UpLoadSing($dataUser)
+    public function UpLoadSing()
     {
         $nombre_temp = $_FILES['firma']['tmp_name'];
         $nombre = $_FILES['firma']['name'];
         $destino = '../../../admin/assets/img/firmas/' . $nombre;
         move_uploaded_file($nombre_temp, $destino);
+        return $destino;
     }
 }
