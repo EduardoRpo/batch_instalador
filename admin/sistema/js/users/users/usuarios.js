@@ -1,8 +1,8 @@
-let editar;
-let id;
+
 
 $(document).ready(function() {
-
+let editar;
+let id = 0;
     cargarselectores('cargos')
     cargarselectores('usuarios_rols')
 
@@ -28,33 +28,30 @@ $(document).ready(function() {
         else $("#firma_y_modulo").css("display", "flex");
     });
 
-    //Almacenar los usuarios
-
     $(document).ready(function() {
         $("#btnguardarUsuarios").click(function(e) {
-            debugger
             e.preventDefault();
-
+    
             let nombres = $("#nombres").val();
             let apellidos = $("#apellidos").val();
             let email = $("#email").val();
-            let cargo = $("#cargos").val();
+            let cargo = $("#cargo").val();
             let modulo = $("#modulo").val();
             let user = $("#usuario").val();
             let clave = $("#clave").val();
-            let rol = $("#usuarios_rols").val();
-
+            let rol = $("#rol").val();
+    
             if (rol == 1 || rol == 2 || rol == 5) {
                 modulo = "1";
             }
-
+    
             let datosIniciales =
                 nombres.length *
                 apellidos.length *
-                cargo.length *
+                cargos.length *
                 modulo.length *
                 user.length;
-
+    
             if (editar == 1) {
                 if (datosIniciales === 0) {
                     alertify.set("notifier", "position", "top-right");
@@ -68,11 +65,11 @@ $(document).ready(function() {
                     return false;
                 }
             }
-
+    
             if (rol != 1 && rol != 2 && editar != 1 && rol != 5) {
                 const archivo = $("#firma").val();
                 let extensiones = archivo.substring(archivo.lastIndexOf("."));
-
+    
                 if (
                     extensiones != ".jpg" &&
                     extensiones != ".png" &&
@@ -85,33 +82,44 @@ $(document).ready(function() {
                     return false;
                 }
             }
-
-            dataUser = $('#frmagregarUsuarios').serialize();
-            //const usuario = new FormData($("#frmagregarUsuarios")[0]);
-            //usuario.set("operacion", 3);
-            //usuario.set("editar", editar);
-            //usuario.set("id", id);
-
-            if (rol == 1 || rol == 2 || rol == 5) {
-                //usuario.set("modulo", "1");
-                dataUser = `${dataUser}&modulo=1`
-            }
-
+    
+            const usuario = new FormData($("#frmagregarUsuarios")[0]);
+            usuario.set("operacion", 3);
+            usuario.set("editar", editar);
+            usuario.set("id", id);
+    
+            if (rol == 1 || rol == 2 || rol == 5) usuario.set("modulo", "1");
+    
             $.ajax({
                 type: "POST",
                 url: "/api/saveUsers",
-                data: dataUser,
-                // processData: false,
-                // contentType: false,
-
-                success: function(data) {
-                    notificaciones(data)
+                data: usuario,
+                processData: false,
+                contentType: false,
+    
+                success: function(r) {
+                    if (r == 1) {
+                        alertify.set("notifier", "position", "top-right");
+                        alertify.success("Almacenado con éxito.");
+                        $("#ModalCrearUsuarios").modal("hide");
+                        refreshTable();
+                    } else if (r == 2) {
+                        alertify.set("notifier", "position", "top-right");
+                        alertify.error("El usuario ya existe.");
+                    } else if (r == 3) {
+                        alertify.set("notifier", "position", "top-right");
+                        alertify.success("Usuario actualizado.");
+                        $("#ModalCrearUsuarios").modal("hide");
+                        refreshTable();
+                    } else {
+                        alertify.set("notifier", "position", "top-right");
+                        alertify.error("Error.");
+                    }
                 },
             });
             return false;
         });
     });
-
     /* evento click para actualizar registros */
 
     $(document).on("click", ".link-editar", function(e) {
@@ -126,7 +134,7 @@ $(document).ready(function() {
         let modulo = $(this).parent().parent().children().eq(6).text();
         let usuario = $(this).parent().parent().children().eq(7).text();
         let rol = $(this).parent().parent().children().eq(8).text();
-
+    
         $("#ModalCrearUsuarios").modal("show");
         $("#btnguardarUsuarios").html("Actualizar");
         $("#nombres").val(nombres);
@@ -197,7 +205,7 @@ $(document).ready(function() {
 
     /* Actualizar tabla */
 
-    function refreshTable() {
+    refreshTable = () => {
         $("#listaUsuarios").DataTable().clear();
         $("#listaUsuarios").DataTable().ajax.reload();
         $("#firma").val("");

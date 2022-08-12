@@ -44,17 +44,17 @@ class UsersDao
     public function saveUsers($datausers)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("INSERT INTO usuario (nombre, apellido, email, user, clave, urlfirma, rol, id_modulo, id_cargo, estado)");
+        $stmt = $connection->prepare("INSERT INTO usuario (nombre, apellido, email, user, clave, urlfirma, rol, id_modulo, id_cargo, estado) VALUES(:nombre, :apellido, :email, :user, :clave, :urlfirma, :rol, :id_modulo, :id_cargo, :estado)");
         $stmt->execute([
             'nombre' => $datausers['nombres'],
             'apellido' => $datausers['apellidos'],
             'email' => $datausers['email'],
             'user' => $datausers['usuario'],
             'clave' => md5($datausers['clave']),
-            'urlfirma' => $datausers['destino'],
-            'rol' => $datausers['rol'],
+            'urlfirma' => 'proots',
+            'rol' => $datausers['usuarios_rols'],
             'id_modulo' => $datausers['modulo'],
-            'id_cargo' => $datausers['cargo'],
+            'id_cargo' => $datausers['cargos'],
             'estado' => '1'
         ]);
     
@@ -64,15 +64,15 @@ class UsersDao
     public function updateUser($datausers)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("UPDATE modulo SET modulo = :module WHERE id = :id_module");
+        $stmt = $connection->prepare("UPDATE usuario SET nombre =:nombre, apellido =:apellido, email =:email, user =:user, rol =:rol, id_modulo =:modulo, id_cargo =:cargo WHERE id = :id");
         $stmt->execute([
             'nombre' => $datausers['nombres'],
             'apellido' => $datausers['apellidos'],
             'email' => $datausers['email'],
             'user' => $datausers['usuario'],
-            'rol' => $datausers['rol'],
+            'rol' => $datausers['usuarios_rols'],
             'modulo' => $datausers['modulo'],
-            'cargo' => $datausers['cargo'],
+            'cargo' => $datausers['cargos'],
             'id' => $datausers['id']
         ]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));

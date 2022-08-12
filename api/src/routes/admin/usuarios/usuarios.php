@@ -25,8 +25,7 @@ $app->get('/deleteUsers/{id}', function (Request $request, Response $response, $
 
 $app->post('/saveUsers', function (Request $request, Response $response, $args) use ($userDao) {
 
-    $dataUsers = $request->getParsedBody();
-    //$files = $request->getUploadedFiles();
+    $dataUsers =($request->getParsedBody());
 
     if ($dataUsers['id']) {
         $Users = $userDao->updateUser($dataUsers);
@@ -39,7 +38,7 @@ $app->post('/saveUsers', function (Request $request, Response $response, $args) 
         if ($Users == null)
             $resp = array('success' => true, 'message' => 'Ususario almacenado correctamente');
     }    
-    $resp = 'Hola';
+
 
     $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');

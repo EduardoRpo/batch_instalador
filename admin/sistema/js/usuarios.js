@@ -175,7 +175,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: "POST",
-            url: "php/c_usuarios.php",
+            url: "/api/saveUsers",
             data: usuario,
             processData: false,
             contentType: false,
