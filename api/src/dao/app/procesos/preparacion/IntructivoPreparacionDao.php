@@ -8,7 +8,6 @@ use BatchRecord\Constants\Constants;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
-use PDO;
 
 class IntructivoPreparacionDao
 {
@@ -44,5 +43,29 @@ class IntructivoPreparacionDao
     $instructivo = $stmt->fetchAll($connection::FETCH_ASSOC);
     $this->logger->notice("instructivo Obtenidas", array('instructivos' => $instructivo));
     return $instructivo;
+  }
+
+  public function updateInstructive($dataInstrictive)
+  {
+    $connection = Connection::getInstance()->getConnection();
+    $stmt = $connection->prepare("UPDATE instructivo_preparacion SET pasos = :instruccion, tiempo = :tiempo WHERE id = :id AND id_producto = CAST(:referencia AS INT)");
+    $stmt->execute(['instruccion'=>$dataInstrictive['actividad'], 'tiempo' => $dataInstrictive['tiempo'], 'id'=>$dataInstrictive['id'],'referencia'=> intval($dataInstrictive['referencia'])]);
+    $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+  }
+
+  public function saveInstructive($dataInstrictive)
+  {
+    $connection = Connection::getInstance()->getConnection();
+    $stmt = $connection->prepare("INSERT INTO instructivo_preparacion (pasos, tiempo, id_producto) VALUES (:proceso, :tiempo, :referencia )");
+    $stmt->execute(['proceso'=>$dataInstrictive['actividad'], 'tiempo' => $dataInstrictive['tiempo'],'referencia'=> $dataInstrictive['referencia']]);
+    $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+  }
+
+  public function deleteInstructive($dataInstructive)
+  {
+    $connection = Connection::getInstance()->getConnection();
+    $stmt = $connection->prepare("DELETE FROM instructivo_preparacion WHERE pasos = :id AND id_producto = CAST(:referencia AS INT)");
+    $stmt->execute(['id'=>$dataInstructive['id'], 'referencia' => $dataInstructive['referenfia']]);
+    $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'error' => $stmt->errorInfo()));
   }
 }
