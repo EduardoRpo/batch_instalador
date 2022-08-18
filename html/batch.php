@@ -270,8 +270,11 @@ include_once("modal/modalPedidos.php");
     <script src="/html/js/global/loadinfo-global.js"></script>
     <script src="/html/js/global/notificaciones.js"></script>
 
-    <script src="../html/js/import/import.js"></script>
-    <script src="../html/js/import/file.js"></script>
+    <!-- <script src="/html/js/import/import.js"></script>
+    <script src="/html/js/import/file.js"></script> -->
+    <!-- <script src="/html/js/export/export.js"></script> -->
+    <!-- <script src="/html/js/export/file.js"></script>
+    <script src="/html/js/export/dataBatch.js"></script> -->
 
 
 </body>

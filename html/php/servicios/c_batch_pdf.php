@@ -13,7 +13,7 @@ if (!empty($_POST)) {
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
             break;
 
-        case 2:
+        case 2: // data Batch
             $id = $_POST['idBatch'];
             $sql = "SELECT p.referencia, UPPER(p.nombre_referencia) AS nombre_referencia, m.nombre as marca, pp.nombre as propietario, 
                            pc.nombre as presentacion, linea.nombre as linea, ns.nombre as notificacion, b.numero_orden, b.numero_lote, b.fecha_creacion, b.tamano_lote, 
@@ -31,7 +31,7 @@ if (!empty($_POST)) {
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
             break;
 
-        case 3:
+        case 3: // preguntas
 
             $id = $_POST['idBatch'];
             $sql = "SELECT p.pregunta, bsp.solucion, bsp.id_modulo 
@@ -45,7 +45,7 @@ if (!empty($_POST)) {
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
             break;
 
-        case 4:
+        case 4: // desinfectante
 
             $sql = "SELECT descripcion, modulo FROM area_desinfeccion ORDER BY modulo";
             $query = $conn->prepare($sql);
@@ -80,7 +80,7 @@ if (!empty($_POST)) {
 
             break;
 
-        case 6:
+        case 6: // Condiciones del medio
 
             $id = $_POST['idBatch'];
             $sql = "SELECT fecha, temperatura, humedad, id_modulo as modulo FROM batch_condicionesmedio WHERE id_batch = :id";
@@ -117,7 +117,7 @@ if (!empty($_POST)) {
 
             break;
 
-        case 10:
+        case 10: // control especificaciones
 
             $id = $_POST['idBatch'];
 
@@ -132,7 +132,7 @@ if (!empty($_POST)) {
 
             break;
 
-        case 11:
+        case 11: //Control Especificaciones
 
             $id = $_POST['idBatch'];
 

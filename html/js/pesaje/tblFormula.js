@@ -1,13 +1,17 @@
 $(document).ready(function() {
 
     let linea
-        /* Formula Materia Prima  */
+    pesoTotalGr = 0
+    pesoTotalKg = 0
+
+    /* Formula Materia Prima  */
+
     tblPesaje = () => {
 
         tablePesaje = $('#tablePesaje').dataTable({
             destroy: true,
             ajax: {
-                url: `/api/materiasp/${referencia}`,
+                url: `/api/pesajeDispensacion/${referencia}/${batch.tamano_lote}`,
                 dataSrc: '',
             },
             paging: false,
@@ -32,32 +36,31 @@ $(document).ready(function() {
                 {
                     title: 'Peso (<a href="javascript:cambioConversion();" class="conversion_weight">g</a>)',
                     className: 'conversion_weight_column',
-                    data: 'porcentaje',
+                    data: 'pesoTotal',
                     className: 'uniqueClassName',
-
                     render: (data, type, row) => {
                         tanques = sessionStorage.getItem('tanques')
                         $('#Notanques').val(tanques).prop('disabled', true)
-
+                        debugger
                         if (flagWeight)
-                            return ((data / 100) * batch.tamano_lote).toFixed(2).replace('.', ',')
+                            return (data).toLocaleString("de-DE", { maximumFractionDigits: 2 })
                         else
-                            return ((data / 100) * batch.tamano_lote * 1000).toFixed(2).replace('.', ',')
-
+                            return (data * 1000).toLocaleString("de-DE", { maximumFractionDigits: 2 })
                     },
                 },
                 {
                     title: '<input type="text" class="form-control" id="Notanques" style="width:52px; text-align:center">',
-                    data: 'porcentaje',
+                    data: 'pesoTotal',
                     className: 'uniqueClassName',
                     render: (data, type, row) => {
                         if (flagWeight)
-                            return (((data / 100) * batch.tamano_lote) / tanques).toFixed(2).replace('.', ',')
+                            return (data / tanques).toLocaleString("de-DE", { maximumFractionDigits: 2 })
                         else
-                            return (((data / 100) * batch.tamano_lote * 1000) / tanques).toFixed(2).replace('.', ',')
+                            return ((data * 1000) / tanques).toLocaleString("de-DE", { maximumFractionDigits: 2 })
                     },
                 },
             ],
+
 
             "footerCallback": function(row, data, start, end, display) {
                 var api = this.api(),
@@ -86,8 +89,8 @@ $(document).ready(function() {
                     }, 0);
 
                 $(api.column(0).footer()).html('<b>Total</b>');
-                $(api.column(3).footer()).html(`<b style="text-decoration: underline;">${peso.toLocaleString("en-US")}</b>`);
-                $(api.column(4).footer()).html(`<b style="text-decoration: underline;">${pesoTanque.toLocaleString("en-US")}</b>`);
+                $(api.column(3).footer()).html(`<b>${peso.toLocaleString("de-DE", { maximumFractionDigits: 0 })}</b>`);
+                $(api.column(4).footer()).html(`<b>${pesoTanque.toLocaleString("de-DE", { maximumFractionDigits: 0 })}</b>`);
             }
         })
 

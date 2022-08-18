@@ -224,10 +224,10 @@ include_once('modal/modal_condicionesMedio.php');
                   <label for="cargo-3" class="col-form-label"><b>Verificación del estado de Identificación y Aprobación Materias primas</b></label>
                   <label for="cargo-4" class="col-form-label"><b>Toma de materia prima de la esclusa</b></label>
 
-                  <input type="text" class="form-control text-center" id="cargo-1" readonly>
-                  <input type="text" class="form-control text-center" id="cargo-2" readonly>
-                  <input type="text" class="form-control text-center" id="cargo-3" readonly>
-                  <input type="text" class="form-control text-center" id="cargo-4" readonly>
+                  <input type="text" class="form-control text-center" id="" readonly value="Director Técnico">
+                  <input type="text" class="form-control text-center" id="" readonly value="Operario Bodega MP">
+                  <input type="text" class="form-control text-center" id="" readonly value="Analista Calidad">
+                  <input type="text" class="form-control text-center" id="" readonly value="Operario Pesaje">
                 </div>
               </div>
 
@@ -307,6 +307,7 @@ include_once('modal/modal_condicionesMedio.php');
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
   <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
   <script src="//unpkg.com/xlsx/dist/xlsx.full.min.js" type="text/javascript"></script>
+  <script src="//cdn.datatables.net/plug-ins/1.12.1/api/sum().js"></script>
 
   <?php require_once __DIR__ . '/partials/globalScripts.php' ?>
 
