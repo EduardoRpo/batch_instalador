@@ -125,6 +125,7 @@ require_once __DIR__ . '/src/routes/app/explosionMateriales/pedidos.php';
 
 /* pdf */
 require_once __DIR__ . '/src/routes/app/pdf/pdf.php';
+require_once __DIR__ . '/src/routes/app/pdf/exportDataBatch.php';
 
 /* Microbiologia */
 require_once __DIR__ . '/src/routes/app/process/micro/micro.php';

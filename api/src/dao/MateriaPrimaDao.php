@@ -37,7 +37,7 @@ class MateriaPrimaDao
     $this->logger->notice("materia Primas Obtenidas", array('materias Primas' => $materials));
     return $materials;
   }
-
+  
   public function findByProductInv($idProduct)
   {
     $connection = Connection::getInstance()->getConnection();
