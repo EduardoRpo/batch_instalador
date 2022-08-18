@@ -37,11 +37,10 @@ $(document).ready(function() {
                     title: 'Peso (<a href="javascript:cambioConversion();" class="conversion_weight">g</a>)',
                     className: 'conversion_weight_column',
                     data: 'pesoTotal',
-                    className: 'uniqueClassName',
+                    className: 'text-right',
                     render: (data, type, row) => {
                         tanques = sessionStorage.getItem('tanques')
                         $('#Notanques').val(tanques).prop('disabled', true)
-                        debugger
                         if (flagWeight)
                             return (data).toLocaleString("de-DE", { maximumFractionDigits: 2 })
                         else
@@ -51,7 +50,7 @@ $(document).ready(function() {
                 {
                     title: '<input type="text" class="form-control" id="Notanques" style="width:52px; text-align:center">',
                     data: 'pesoTotal',
-                    className: 'uniqueClassName',
+                    className: 'text-right',
                     render: (data, type, row) => {
                         if (flagWeight)
                             return (data / tanques).toLocaleString("de-DE", { maximumFractionDigits: 2 })
@@ -112,8 +111,7 @@ $(document).ready(function() {
             alertify
                 .prompt(
                     'Samara Cosmetics - Trazabilidad Lotes MP',
-                    `
-                                                Ingrese el Número del lote para la MP $ { linea.firstChild.innerText } < br > < p style = "font-size:13px;color:coral" > Si cuenta con más de un lote separelos con un doble asterisco( ** ) < p > `,
+                    `Ingrese el Número del lote para la MP $ { linea.firstChild.innerText } < br > < p style = "font-size:13px;color:coral" > Si cuenta con más de un lote separelos con un doble asterisco( ** ) < p > `,
                     '',
                     function(evt, value) { numeroLote(value) },
                     function() { alertify.error('Ingrese el número del lote de la materia prima') },

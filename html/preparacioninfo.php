@@ -331,19 +331,19 @@ include("modal/modal_condicionesMedio.php");
                               <tr>
                                 <td>PH</td>
                                 <td id="espec_ph"></td>
-                                <td><input type="number" id="in_ph" class="selectpicker form-control ph especificacionInput">
+                                <td><input type="number" id="in_ph" class="selectpicker form-control ph especificacionInput" onblur="validar_ph();">
                                 </td>
                               </tr>
                               <tr>
                                 <td>Viscosidad CPS</td>
                                 <td id="espec_viscidad"></td>
-                                <td><input type="number" class="selectpicker form-control especificacionInput" id="in_viscocidad">
+                                <td><input type="number" class="selectpicker form-control especificacionInput" id="in_viscocidad" onblur="validar_viscosidad();">
                                 </td>
                               </tr>
                               <tr>
                                 <td>Densidad</td>
                                 <td id="espec_densidad"></td>
-                                <td><input class="selectpicker form-control especificacionInput" type="number" id="in_densidad">
+                                <td><input class="selectpicker form-control especificacionInput" type="number" id="in_densidad" onblur="validar_densidad();" >
                                 </td>
                               </tr>
                               <tr>

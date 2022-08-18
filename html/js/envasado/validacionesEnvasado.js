@@ -1,6 +1,5 @@
 $(document).ready(function() {
 
-
     crearEquipos = () => {
         equipos = [];
         const eq3 = {};
@@ -18,19 +17,6 @@ $(document).ready(function() {
         equipos.push(eq4);
     }
 
-
-    /* obtenerMuestras = () => {
-        i = sessionStorage.getItem("totalmuestras");
-        cantidad_muestras = $(`#muestras${id_multi}`).val();
-
-        if (i != cantidad_muestras) {
-            alertify.set("notifier", "position", "top-right");
-            alertify.error("Ingrese todas las muestras");
-            return false;
-        } else
-            return true
-    } */
-
     validarDevolucionMaterial = () => {
         if (id == `devolucion_realizado${id_multi}`) {
             let cantidadEnvasada = $(`.txtEnvasada${id_multi}`).val();
@@ -44,20 +30,6 @@ $(document).ready(function() {
         } else
             return 'no_validar'
     }
-
-    /*  validarIdMulti = () => {
-
-         //validar en que multipresentacion se encuentra
-
-         id_multi == 1 ?
-             ((start = 1), (end = 4)) :
-             id_multi == 2 ?
-             ((start = 4), (end = 7)) :
-             id_multi == 3 ?
-             ((start = 7), (end = 10)) :
-             ((start = 10), (end = 12));
-
-     } */
 
     validarData = () => {
         //validar que los datos de toda la tabla se encuentran completos

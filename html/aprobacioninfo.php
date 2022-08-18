@@ -233,13 +233,13 @@ include('modal/modal_condicionesMedio.php');
                             <tr>
                               <td>PH</td>
                               <td id="espec_ph"></td>
-                              <td><input type="number" id="in_ph" class="selectpicker form-control ph especificacionInput" onkeyup="validar_ph();">
+                              <td><input type="number" id="in_ph" class="selectpicker form-control ph especificacionInput" onblur="validar_ph();">
                               </td>
                             </tr>
                             <tr>
                               <td>Viscocidad CPS </td>
                               <td id="espec_viscidad"></td>
-                              <td><input type="number" class="selectpicker form-control especificacionInput" id="in_viscocidad" onkeyup="validar_viscosidad();">
+                              <td><input type="number" class="selectpicker form-control especificacionInput" id="in_viscocidad" onblur="validar_viscosidad();">
                               </td>
                             </tr>
                             <tr>
@@ -247,7 +247,7 @@ include('modal/modal_condicionesMedio.php');
                                 <!-- <input type="text" class="form-control" style="width: 60px;" readonly> -->
                               </td>
                               <td id="espec_densidad"></td>
-                              <td><input class="selectpicker form-control" type="number" id="in_densidad" onkeyup="validar_densidad();"></td>
+                              <td><input class="selectpicker form-control" type="number" id="in_densidad" onblur="validar_densidad();"></td>
                             </tr>
                             <tr>
                               <td>Untuosidad</td>
