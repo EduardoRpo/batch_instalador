@@ -215,10 +215,12 @@ include("modal/modal_condicionesMedio.php");
   <script src="/html/js/global/validacionesAuth.js"></script>
   <script src="/html/js/global/auth.js"></script>
   <script src="/html/js/global/controller.js"></script>
+  <script src="/html/js/global/notificaciones.js"></script>
   
   <script src="/html/js/firmar/firmar1raSeccion.js"></script>
   
   <script src="/html/js/liberacionlote/liberacionloteinfo.js"></script>
+  <script src="/html/js/liberacionlote/validaciones.js"></script>
   
 
 

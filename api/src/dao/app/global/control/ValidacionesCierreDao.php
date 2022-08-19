@@ -37,4 +37,18 @@ class ValidacionesCierreDao
         }
         return $result;
     }
+
+    public function findControlFirmasByModule($batch, $module)
+    {
+        $connection = Connection::getInstance()->getConnection();
+        $sql = "SELECT IF(cantidad_firmas=total_firmas, 'Yes', 'No') AS result 
+                FROM batch_control_firmas 
+                WHERE batch = :batch AND modulo = :modulo;";
+        $stmt = $connection->prepare($sql);
+        $stmt->execute(['batch' => $batch, 'modulo' => $module]);
+        $this->logger->info(__FUNCTION__, array('stmt' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        $resp = $stmt->fetch($connection::FETCH_ASSOC);
+        $this->logger->notice("Respuesta Obtenida", array('Respuesta' => $resp));
+        return $resp;
+    }
 }

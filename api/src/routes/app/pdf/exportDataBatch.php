@@ -47,8 +47,8 @@ $app->get('/exportDataBatch/{idBatch}/{ref}', function (Request $request, Respon
     $hojaDatosBatch = specificationControl($hojaDatosBatch, $batchDao, $args['idBatch']);
     $hojaDatosBatch = equipment($hojaDatosBatch, $equiposDao, $args['idBatch']);
     $hojaDatosBatch = multi($hojaDatosBatch, $batchDao, $args['idBatch']);
-    $hojaDatosBatch = envase($hojaDatosBatch, $batchDao, $args['ref']);
-    $hojaDatosBatch = envaseSobrante($hojaDatosBatch, $batchDao, $args['idBatch']);
+    //$hojaDatosBatch = envase($hojaDatosBatch, $batchDao, $args['ref']);
+    //$hojaDatosBatch = envaseSobrante($hojaDatosBatch, $batchDao, $args['idBatch']);
 
     # Crear documento
     $writer = new Xlsx($documento);

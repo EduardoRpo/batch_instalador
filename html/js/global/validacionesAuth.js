@@ -205,6 +205,13 @@ $(document).ready(function() {
             if (!result) return false
         }
 
+        if (modulo == 10 && result) {
+            result = await validacionesCheckLiberacion()
+            if (result)
+                result = await validarDataDespachos()
+            if (!result) return false
+        }
+
         if (result) {
             $('#usuario').val('')
             $('#clave').val('')
