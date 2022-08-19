@@ -13,7 +13,7 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" id="dropdownMenuenlace">
             <?php
-            if ($_SESSION['nombre'] == 'undefined') {
+            if (empty($_SESSION['nombre'])) {
               header('Location:/index.php');
               exit();
             } else
