@@ -1,20 +1,20 @@
 <?php
 
-function desifectant($hojaDatosBatch, $batchDao, $batch)
+function desifectant($documento, $batchDao, $batch)
 {
-    /* $hojaDatosDesinfectante = $documento->createSheet();
-    $hojaDatosDesinfectante->setTitle("Desinfectante"); 
-    $encabezado = ["Desinfectante", "Concentracion", "modulo", "fecha_registro"];
-    $hojaDatosDesinfectante->fromArray($encabezado, null, 'A1');*/
+    $hojaDatosBatch = $documento->createSheet();
+    $hojaDatosBatch->setTitle("Desinfectante"); 
+    $encabezado = ["Desinfectante", "Concentracion", "modulo", "realizo", "verifico", "fecha_registro"];
+    $hojaDatosBatch->fromArray($encabezado, null, 'A1');
 
     /* $hojaDatosBatch = $documento->createSheet();
-    $hojaDatosBatch->setTitle("Desinfectante");  */
+    $hojaDatosBatch->setTitle("Desinfectante");  
     $encabezado = ["Desinfectante", "Concentracion", "modulo", "realizo", "verifico", "fecha_registro"];
-    $hojaDatosBatch->fromArray($encabezado, null, 'A4');
+    $hojaDatosBatch->fromArray($encabezado, null, 'A4');*/
 
     $desinfect = $batchDao->findDesinfectByIdBatch($batch);
 
-    $row = 5;
+    $row = 2;
 
     for ($i = 0; $i < sizeof($desinfect); $i++) {
         $desinfectante = $desinfect[$i]['desinfectante'];

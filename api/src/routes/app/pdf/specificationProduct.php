@@ -1,7 +1,11 @@
 <?php
 
-function specificationProduct($hojaDatosBatch, $productDao, $ref)
+function specificationProduct($documento, $productDao, $ref)
 {
+
+    $hojaDatosBatch = $documento->createSheet();
+    $hojaDatosBatch->setTitle("EspecificacionesProducto");
+
     $encabezado = [
         "Referencia", "Nombre Referencia",
         "Color", "Olor",
@@ -13,10 +17,10 @@ function specificationProduct($hojaDatosBatch, $productDao, $ref)
         "Staphylococcus",
     ];
 
-    $hojaDatosBatch->fromArray($encabezado, null, 'A22');
+    $hojaDatosBatch->fromArray($encabezado, null, 'A1');
     $product = $productDao->findDetailsByProduct($ref);
 
-    $row = 23;
+    $row = 2;
 
     $reference = $product['referencia'];
     $name_reference = $product['nombre_referencia'];

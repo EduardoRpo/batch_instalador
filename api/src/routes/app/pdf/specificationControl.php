@@ -1,15 +1,16 @@
 <?php
 
-function specificationControl($hojaDatosBatch, $batchDao, $batch)
+function specificationControl($documento, $batchDao, $batch)
 {
     //Control de Especificaciones
-
+    $hojaDatosBatch = $documento->createSheet();
+    $hojaDatosBatch->setTitle("ControlEspecificaciones");
     $encabezado = ["Color", "Olor", "Apariencia", "PH", "Viscosidad", "Densidad", "Untuosidad", "Espumoso", "Alcohol", "Aguja", "RPM", "Modulo"];
-    $hojaDatosBatch->fromArray($encabezado, null, 'A30');
+    $hojaDatosBatch->fromArray($encabezado, null, 'A1');
 
     $specificationsControl = $batchDao->findSpecificationsControl($batch);
 
-    $row = 31;
+    $row = 2;
 
     for ($i = 0; $i < sizeof($specificationsControl); $i++) {
         $color = $specificationsControl[$i]['color'];

@@ -1,13 +1,16 @@
 <?php
 
-function envase($hojaDatosBatch, $batchDao, $reference)
+function envase($documento, $batchDao, $reference)
 {
+    $hojaDatosBatch = $documento->createSheet();
+    $hojaDatosBatch->setTitle("EnvaseEntregado");
+
     $encabezado = ["id_envase", "Envase", "id_tapa", "Tapa", "id_etiqueta", "Etiqueta", "id_empaque", "Empaque", "id_otros", "Otros"];
-    $hojaDatosBatch->fromArray($encabezado, null, 'A47');
+    $hojaDatosBatch->fromArray($encabezado, null, 'A1');
 
     $batch = $batchDao->findEnvase($reference);
 
-    $row = 48;
+    $row = 2;
 
     for ($i = 0; $i < sizeof($batch); $i++) {
         $id_envase = $batch[$i]['id_envase'];

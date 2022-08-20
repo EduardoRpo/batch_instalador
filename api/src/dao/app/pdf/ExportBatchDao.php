@@ -65,7 +65,7 @@ class ExportBatchDao
         $this->logger->notice("desinfect Obtenidos", array('desinfect' => $desinfect));
         return $desinfect;
     }
-    
+
     public function findTemperatureByIdBatch($idBatch)
     {
         $connection = Connection::getInstance()->getConnection();
@@ -77,7 +77,7 @@ class ExportBatchDao
         $this->logger->notice("temperature Obtenidos", array('temperature' => $temperature));
         return $temperature;
     }
-    
+
     public function findSpecificationsControl($idBatch)
     {
         $connection = Connection::getInstance()->getConnection();
@@ -89,7 +89,7 @@ class ExportBatchDao
         $this->logger->notice("specificationsControl Obtenidos", array('specificationsControl' => $specificationsControl));
         return $specificationsControl;
     }
-    
+
     public function findMulti($idBatch)
     {
         $connection = Connection::getInstance()->getConnection();
@@ -104,18 +104,8 @@ class ExportBatchDao
         $this->logger->notice("multi Obtenidos", array('multi' => $multi));
         return $multi;
     }
-    
-    public function findMuestras($idBatch)
-    {
-        $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("SELECT * FROM batch_muestras WHERE batch = :batch");
-        $stmt->execute(['batch' => $idBatch]);
-        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
-        $muestras = $stmt->fetchAll($connection::FETCH_ASSOC);
-        $this->logger->notice("muestras Obtenidos", array('muestras' => $muestras));
-        return $muestras;
-    }
-    
+
+
     public function findEnvase($reference)
     {
         $connection = Connection::getInstance()->getConnection();
@@ -133,14 +123,17 @@ class ExportBatchDao
         $this->logger->notice("envases Obtenidos", array('envases' => $envases));
         return $envases;
     }
-    
+
     public function findEnvaseSobrante($batch)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("SELECT bms.id, bms.ref_material, bms.envasada, bms.averias, bms.sobrante, bms.ref_producto, bms.batch, bms.modulo, u.urlfirma as realizo 
-                                      FROM batch_material_sobrante bms 
+        $stmt = $connection->prepare("SELECT bms.id, bms.ref_material, ev.nombre as envase, et.nombre as tapa, t.nombre as etiqueta,  bms.envasada, bms.averias, bms.sobrante, bms.ref_producto, bms.batch, bms.modulo, u.urlfirma as realizo 
+                                      FROM batch_material_sobrante bms
+                                      LEFT JOIN envase ev ON ev.id = bms.ref_material
+                                      LEFT JOIN tapa t ON t.id = bms.ref_material
+                                      LEFT JOIN etiqueta et ON et.id = bms.ref_material
                                       INNER JOIN usuario u ON u.id = bms.realizo
-                                      WHERE batch = :batch");
+                                      WHERE batch = :batch ORDER BY modulo;");
         $stmt->execute(['batch' => $batch]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         $envaseSobrante = $stmt->fetchAll($connection::FETCH_ASSOC);
@@ -148,4 +141,19 @@ class ExportBatchDao
         return $envaseSobrante;
     }
 
+    public function findMuestras($idBatch, $modulo)
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        if ($modulo == 5)
+            $stmt = $connection->prepare("SELECT * FROM batch_muestras WHERE batch = :batch");
+        else
+            $stmt = $connection->prepare("SELECT * FROM batch_muestras_acondicionamiento WHERE batch = :batch");
+
+        $stmt->execute(['batch' => $idBatch]);
+        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        $muestras = $stmt->fetchAll($connection::FETCH_ASSOC);
+        $this->logger->notice("muestras Obtenidos", array('muestras' => $muestras));
+        return $muestras;
+    }
 }

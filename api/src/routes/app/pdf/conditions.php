@@ -1,15 +1,16 @@
 <?php
 
-function conditions($hojaDatosBatch, $batchDao, $batch)
+function conditions($documento, $batchDao, $batch)
 {
     //Condiciones del Medio
-
+    $hojaDatosBatch = $documento->createSheet();
+    $hojaDatosBatch->setTitle("CondicionesMedio"); 
     $encabezado = ["Fecha", "Temperatura", "Humedad", "modulo"];
-    $hojaDatosBatch->fromArray($encabezado, null, 'A13');
+    $hojaDatosBatch->fromArray($encabezado, null, 'A1');
 
     $conditionsEnvironment = $batchDao->findTemperatureByIdBatch($batch);
 
-    $row = 14;
+    $row = 2;
 
     for ($i = 0; $i < sizeof($conditionsEnvironment); $i++) {
         $date = $conditionsEnvironment[$i]['fecha'];

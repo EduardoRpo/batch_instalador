@@ -1,15 +1,16 @@
 <?php
 
-function equipment($hojaDatosBatch, $equiposDao, $batch)
+function equipment($documento, $equiposDao, $batch)
 {
     //Equipos
-
+    $hojaDatosBatch = $documento->createSheet();
+    $hojaDatosBatch->setTitle("Equipos");
     $encabezado = ["Equipo", "Modulo"];
-    $hojaDatosBatch->fromArray($encabezado, null, 'A37');
+    $hojaDatosBatch->fromArray($encabezado, null, 'A1');
 
     $equipos = $equiposDao->findByBatch($batch);
 
-    $row = 38;
+    $row = 2;
 
     for ($i = 0; $i < sizeof($equipos); $i++) {
         $description = $equipos[$i]['descripcion'];
