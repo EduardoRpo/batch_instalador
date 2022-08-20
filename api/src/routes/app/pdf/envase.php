@@ -3,7 +3,7 @@
 function envase($documento, $batchDao, $reference)
 {
     $hojaDatosBatch = $documento->createSheet();
-    $hojaDatosBatch->setTitle("EnvaseEntregado");
+    $hojaDatosBatch->setTitle("Insumos Entregados");
 
     $encabezado = ["id_envase", "Envase", "id_tapa", "Tapa", "id_etiqueta", "Etiqueta", "id_empaque", "Empaque", "id_otros", "Otros"];
     $hojaDatosBatch->fromArray($encabezado, null, 'A1');
