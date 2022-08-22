@@ -7,8 +7,7 @@ use BatchRecord\dao\TanquesDao;
 use BatchRecord\dao\ControlFirmasDao;
 use BatchRecord\dao\MultiDao;
 use BatchRecord\dao\ExplosionMaterialesPedidosRegistroDao;
-
-
+use BatchRecord\dao\ObservacionesInactivosDao;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
@@ -18,6 +17,7 @@ $tanquesDao = new TanquesDao();
 $controlFirmasDao = new ControlFirmasDao();
 $multiDao = new MultiDao();
 $EMPedidosRegistroDao = new ExplosionMaterialesPedidosRegistroDao();
+$observacionesDao = new ObservacionesInactivosDao();
 
 
 $app->get('/batch', function (Request $request, Response $data, $args) use ($batchDao) {
@@ -53,7 +53,7 @@ $app->get('/batchcerrados', function (Request $request, Response $response, $arg
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->post('/saveBatch', function (Request $request, Response $response, $args) use ($batchDao, $ultimoBatchDao, $tanquesDao, $controlFirmasDao, $multiDao, $EMPedidosRegistroDao) {
+$app->post('/saveBatch', function (Request $request, Response $response, $args) use ($batchDao, $ultimoBatchDao, $tanquesDao, $controlFirmasDao, $multiDao, $EMPedidosRegistroDao, $observacionesDao) {
   session_start();
   $dataBatch = $request->getParsedBody();
   $flag_tanques = 1;
@@ -111,6 +111,10 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
     }
 
     $resp = $EMPedidosRegistroDao->updateEMPedidosRegistro();
+
+    // Insertar data observaciones
+    if ($resp == null)
+      $resp = $observacionesDao->insertObservacion($id_batch['id']);
   }
 
   /* Notificaciones*/
