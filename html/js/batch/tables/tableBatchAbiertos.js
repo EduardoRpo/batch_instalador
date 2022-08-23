@@ -30,15 +30,15 @@ $(document).ready(function () {
         data: 'referencia',
         className: 'uniqueClassName',
       },
-      // {
-      //   data: 'id_batch',
-      //   className: 'uniqueClassName',
-      //   render: function (data) {
-      //     return `
-      //                           <a href='#' <i class="fa fa-file-text fa-1x link-comentario" id=${data} aria-hidden="true" data-toggle="tooltip" title="adicionar observaciones" style="color:rgb(59, 131, 189)" aria-hidden="true"></i></a>
-      //                           `;
-      //   },
-      // },
+      {
+        data: 'id_batch',
+        className: 'uniqueClassName',
+        render: function (data) {
+          return `
+              <a href='#' <i class="fa fa-file-text fa-1x link-comentario" id=${data} aria-hidden="true" data-toggle="tooltip" title="adicionar observaciones" style="color:rgb(59, 131, 189)" aria-hidden="true"></i></a>
+                 `;
+        },
+      },
       {
         title: 'Producto',
         data: 'nombre_referencia',

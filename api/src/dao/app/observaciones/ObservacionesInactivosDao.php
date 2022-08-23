@@ -24,24 +24,31 @@ class ObservacionesInactivosDao
                                       FROM batch b 
                                       INNER JOIN observaciones_batch_inactivos obi ON obi.batch = b.id_batch 
                                       INNER JOIN producto p ON p.referencia = obi.referencia
-                                      INNER JOIN explosion_materiales_pedidos_registro exp ON exp.id_producto = p.referencia");
+                                      INNER JOIN explosion_materiales_pedidos_registro exp ON exp.id_producto = p.referencia
+                                      ");
         $stmt->execute();
         $observaciones = $stmt->fetchAll($connection::FETCH_ASSOC);
         return $observaciones;
     }
 
-    public function insertObservacion($id_batch)
+    public function saveObservacion($dataPedido)
     {
         $connection = Connection::getInstance()->getConnection();
-        $dataPedidos = $_SESSION['dataPedidos'];
 
-        foreach ($dataPedidos as $dataPedido) {
-            $stmt = $connection->prepare("INSERT INTO observaciones_batch_inactivos (pedido, batch, referencia)
-                                      VALUES (:pedido, :batch, :referencia)");
+        $stmt = $connection->prepare("SELECT * FROM observaciones_batch_inactivos 
+                                      WHERE pedido = :pedido AND referencia = :referencia");
+        $stmt->execute([
+            'pedido' => trim($dataPedido['documento']),
+            'referencia' => trim("M-" . $dataPedido['producto'])
+        ]);
+        $rows = $stmt->rowCount();
+
+        if ($rows == 0) {
+            $stmt = $connection->prepare("INSERT INTO observaciones_batch_inactivos (pedido, referencia)
+                                      VALUES (:pedido, :referencia)");
             $stmt->execute([
-                'pedido' => $dataPedido['numPedido'],
-                'batch' => $id_batch,
-                'referencia' => $dataPedido['referencia']
+                'pedido' => trim($dataPedido['documento']),
+                'referencia' => trim("M-" . $dataPedido['producto'])
             ]);
         }
     }
@@ -52,9 +59,11 @@ class ObservacionesInactivosDao
 
         $fechahoy = date("Y-m-d");
 
-        $stmt = $connection->prepare("UPDATE observaciones_batch_inactivos SET observacion = :observacion, fecha_registro = :fecha_registro
-                                      WHERE batch = :batch");
+        $stmt = $connection->prepare("UPDATE observaciones_batch_inactivos SET observacion = :observacion, fecha_registro = :fecha_registro, batch = :batch 
+                                      WHERE pedido = :pedido AND referencia = :referencia");
         $stmt->execute([
+            'pedido' => $dataBatch['documento'],
+            'referencia' => $dataBatch['producto'],
             'batch' => $dataBatch['batch'],
             'observacion' => $dataBatch['comment'],
             'fecha_registro' => $fechahoy

@@ -36,15 +36,15 @@ $(document).ready(function () {
         data: 'id_producto',
         className: 'text-center',
       },
-      // {
-      //   data: 'id_batch',
-      //   className: 'uniqueClassName',
-      //   render: function (data) {
-      //     return `
-      //                           <a href='#' <i class="fa fa-file-text fa-1x link-comentario" id=${data} aria-hidden="true" data-toggle="tooltip" title="adicionar observaciones" style="color:rgb(59, 131, 189)" aria-hidden="true"></i></a>
-      //                           `;
-      //   },
-      // },
+      {
+        data: 'id_batch',
+        className: 'uniqueClassName',
+        render: function (data) {
+          return `
+              <a href='#' <i class="fa fa-file-text fa-1x link-comentario" id=${data} aria-hidden="true" data-toggle="tooltip" title="adicionar observaciones" style="color:rgb(59, 131, 189)" aria-hidden="true"></i></a>
+                 `;
+        },
+      },
       {
         title: 'Producto',
         data: 'nombre_referencia',
@@ -73,7 +73,7 @@ $(document).ready(function () {
         data: null,
         render: function (data) {
           return `
-                    <input type="text" class="cantProgram form-control-updated text-center" id="cant-${data.pedido}-${data.id_producto}" />`;
+              <input type="text" class="cantProgram form-control-updated text-center" id="cant-${data.pedido}-${data.id_producto}" />`;
         },
       },
       {
@@ -81,7 +81,7 @@ $(document).ready(function () {
         data: null,
         render: function (data) {
           return `
-                <input type="date" class="dateInsumos form-control-updated text-center" id="date-${data.pedido}-${data.id_producto}" value="${data.fecha_insumo}" max="${data.fecha_actual}"/>`;
+              <input type="date" class="dateInsumos form-control-updated text-center" id="date-${data.pedido}-${data.id_producto}" value="${data.fecha_insumo}" max="${data.fecha_actual}"/>`;
         },
       },
       {

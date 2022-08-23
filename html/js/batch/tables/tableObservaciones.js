@@ -18,7 +18,7 @@ $(document).ready(function () {
           return meta.row + 1;
         },
       },
-      {
+      /* {
         title: 'Batch',
         data: 'id_batch',
         className: 'uniqueClassName',
@@ -37,15 +37,15 @@ $(document).ready(function () {
         title: 'Producto',
         data: 'nombre_referencia',
         className: 'uniqueClassName',
+      },*/
+      {
+        title: 'Fecha Registro',
+        data: 'fecha_registro',
+        className: 'uniqueClassName',
       },
       {
         title: 'Observacion',
         data: 'observacion',
-        className: 'uniqueClassName',
-      },
-      {
-        title: 'Fecha Registro',
-        data: 'fecha_registro',
         className: 'uniqueClassName',
       },
     ],

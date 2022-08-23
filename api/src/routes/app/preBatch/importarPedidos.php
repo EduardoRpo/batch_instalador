@@ -1,6 +1,6 @@
 <?php
 
-
+use BatchRecord\dao\ObservacionesInactivosDao;
 use BatchRecord\dao\PreBatchDao;
 use BatchRecord\Dao\ProductDao;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -8,6 +8,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 $preBatchDao = new PreBatchDao();
 $productDao = new ProductDao();
+$observacionesDao = new ObservacionesInactivosDao();
 
 
 $app->post('/validacionDatosPedidos', function (Request $request, Response $response, $args) use ($preBatchDao, $productDao) {
@@ -80,13 +81,16 @@ $app->get('/sendNonExistentProducts', function (Request $request, Response $resp
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->post('/addPedidos', function (Request $request, Response $response, $args) use ($preBatchDao) {
+$app->post('/addPedidos', function (Request $request, Response $response, $args) use ($preBatchDao, $observacionesDao) {
   session_start();
   $dataPedidos = $_SESSION['dataImportPedidos'];
 
   // $data = array();
   for ($i = 0; $i < sizeof($dataPedidos); $i++) {
     $result = $preBatchDao->savePedidos($dataPedidos[$i]);
+
+    if ($result == null)
+      $observacionesDao->saveObservacion($dataPedidos[$i]);
 
     //Obtener todos los pedidos
     $data[$i] = $dataPedidos[$i]['documento'];
