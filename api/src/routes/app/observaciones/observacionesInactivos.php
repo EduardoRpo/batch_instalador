@@ -8,15 +8,20 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 $inactivosDao = new ObservacionesInactivosDao();
 
-$app->get('/observacionesInactivos', function (Request $request, Response $response, $args) use ($inactivosDao) {
-    $inactivos = $inactivosDao->findAllObservaciones();
+$app->post('/observacionesInactivos', function (Request $request, Response $response, $args) use ($inactivosDao) {
+    $dataBatch = $request->getParsedBody();
+    $inactivos = $inactivosDao->findObservaciones($dataBatch);
+
+    if (!$inactivos)
+        $inactivos = array('empty' => true);
+
     $response->getBody()->write(json_encode($inactivos, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');
 });
 
 $app->post('/addObservacion', function (Request $request, Response $response, $args) use ($inactivosDao) {
     $dataBatch = $request->getParsedBody();
-    $inactivos = $inactivosDao->updateObservacion($dataBatch);
+    $inactivos = $inactivosDao->insertObservacion($dataBatch);
 
     if ($inactivos == null)
         $resp = array('success' => true, 'message' => 'Observación creada correctamente');

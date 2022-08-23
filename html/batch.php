@@ -137,10 +137,7 @@ include_once("modal/modalPedidos.php");
                   <a class="nav-link" id="two-tab" data-toggle="tab" href="#two" role="tab" aria-controls="Two" aria-selected="false">Inactivos</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="three-tab" data-toggle="tab" href="#three" role="tab" aria-controls="Three" aria-selected="false">Observaciones</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link active" id="four-tab" data-toggle="tab" href="#four" role="tab" aria-controls="Four" aria-selected="true">Abiertos</a>
+                  <a class="nav-link active" id="three-tab" data-toggle="tab" href="#three" role="tab" aria-controls="Three" aria-selected="true">Abiertos</a>
                 </li>
                 <?php if ($_SESSION['rol'] != 6) {  ?>
                   <li class="nav-item">
@@ -197,22 +194,7 @@ include_once("modal/modalPedidos.php");
                   </div>
                 </div>
 
-                <div class="tab-pane fade mt-3" id="three" role="tabpanel" aria-labelledby="three-tab">
-                  <div class="col-md-12 align-self-right">
-                    <div class="card">
-                      <div class="card-block">
-                        <div class="table-responsive">
-                          <table class="table table-striped table-bordered " id="tablaObservaciones" name="tablaObservaciones" style="width: 100%;">
-
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-
-                <div class="tab-pane fade show active mt-3" id="four" role="tabpanel" aria-labelledby="four-tab">
+                <div class="tab-pane fade show active mt-3" id="three" role="tabpanel" aria-labelledby="three-tab">
                   <div class="col-md-12 align-self-right">
                     <div class="card">
                       <div class="card-block">
@@ -226,7 +208,7 @@ include_once("modal/modalPedidos.php");
                   </div>
                 </div>
 
-                <div class="tab-pane fade mt-3" id="five" role="tabpanel" aria-labelledby="five-tab">
+                <div class="tab-pane fade mt-3" id="four" role="tabpanel" aria-labelledby="four-tab">
                   <div class="col-md-12 align-self-right">
                     <div class="card">
                       <div class="card-block">
@@ -255,7 +237,6 @@ include_once("modal/modalPedidos.php");
     <script src="/html/js/batch/tables/tableBatchAbiertos.js"></script>
     <script src="/html/js/batch/tables/tableBatchEliminados.js"></script>
     <script src="/html/js/batch/tables/tableBatchInactivos.js"></script>
-    <script src="/html/js/batch/tables/tableObservaciones.js"></script>
     <script src="/html/js/batch/tables/tableBatchPlaneacion.js"></script>
     <script src="/html/js/batch/tables/batcheliminados.js"></script>
 
