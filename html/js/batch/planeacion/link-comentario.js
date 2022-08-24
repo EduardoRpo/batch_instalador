@@ -3,13 +3,34 @@ $(document).ready(function () {
     e.preventDefault();
     $('#comment').val('');
 
-    observations = loadObservations();
+    /* Mostrar fila de pedidos */
+    column = tablaPreBatch.column(1);
+    column.visible(!column.visible());
 
+    let col1 = $(this).parent().parent().children().eq(0).text();
+    let col2 = $(this).parent().parent().children().eq(1).text();
+    let col4 = $(this).parent().parent().children().eq(3).text();
+
+    if (col4.includes('M-'))
+      data = {
+        pedido: col1,
+        ref: col4,
+      };
+    else data = { batch: col2 };
+    ejecucionObservaciones(data);
+  });
+
+  ejecucionObservaciones = async (data) => {
+    observations = await loadObservations(data);
+    loadAlertify(observations, data);
+  };
+
+  loadAlertify = (observations, data) => {
     alertify
       .confirm(
         'Samara Cosmetics',
-        `<textarea id="comment" name="comment" class="form-control" placeholder="Observaciones..." minlength="20" maxlength="250" rows="3"></textarea>
-        ${observations}`,
+        `<textarea id="comment" name="comment" class="form-control" placeholder="Observacion..." minlength="20" maxlength="250" rows="3"></textarea>
+        <br>${observations.table}`,
         function () {
           comment = $('#comment').val();
           if (!comment || comment == '') {
@@ -17,7 +38,7 @@ $(document).ready(function () {
             alertify.error('Ingrese comentario');
             return false;
           }
-          saveComment(comment);
+          saveComment(data, comment);
         },
         function () {
           alertify.error('Cancel');
@@ -26,47 +47,48 @@ $(document).ready(function () {
       .set('labels', { ok: 'Agregar', cancel: 'Cancelar' })
       .set({ closableByDimmer: false })
       .set('resizable', true)
-      .resizeTo(500, 300);
-  });
+      .resizeTo(500, observations.size);
+  };
 
   /* Cargar observaciones */
-  loadObservations = () => {
-    dataBatch = sessionStorage.getItem('dataBatch');
-    dataBatch = JSON.parse(dataBatch);
-    if (dataBatch.pedido)
-      data = {
-        pedido: dataBatch.pedido,
-        ref: dataBatch.id_producto,
+  loadObservations = async (data) => {
+    response = await sendDataPOST(data);
+
+    if (response.empty) {
+      observations = { table: '', size: 300 };
+      return observations;
+    } else {
+      observations = {
+        table: `
+        <p>Observaciones:</p><br>
+        <table class="table table-striped table-bordered dataTable no-footer text-center" aria-describedby="tablaPreBatch_info">
+            <thead>
+              <tr>
+                <th class="text-center">Fecha Registro</th>
+                <th class="text-center">Observación</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${(row = addRows(response))}
+            </tbody>
+        </table>`,
+        size: 400,
       };
+      return observations;
+    }
+  };
 
-    if (dataBatch.id_batch) data = { batch: dataBatch.id_batch };
-
-    $.ajax({
-      type: 'POST',
-      url: '/api/observacionesInactivos',
-      data: data,
-      success: function (r) {
-        if (data.empty) {
-          observations = '';
-          return observations;
-        } else {
-          observations = `
-            <p>Observaciones:</p><br>
-            <table class="table table-striped table-bordered dataTable no-footer text-center" aria-describedby="tablaPreBatch_info">
-                <thead>
-                  <tr>
-                    <th class="text-center">Fecha Registro</th>
-                    <th class="text-center">Observación</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  ${(row = addRows(r))}
-                </tbody>
-            </table>`;
-          return observations;
-        }
-      },
-    });
+  sendDataPOST = async (params) => {
+    try {
+      result = await $.ajax({
+        url: '/api/observacionesInactivos',
+        type: 'POST',
+        data: params,
+      });
+      return result;
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   addRows = (data) => {
@@ -81,18 +103,8 @@ $(document).ready(function () {
   };
 
   /* Guardar observacion */
-  saveComment = (comment) => {
-    dataBatch = sessionStorage.getItem('dataBatch');
-    dataBatch = JSON.parse(dataBatch);
-    if (dataBatch.pedido)
-      data = {
-        pedido: dataBatch.pedido,
-        ref: dataBatch.id_producto,
-        comment: comment,
-      };
-
-    if (dataBatch.id_batch)
-      data = { batch: dataBatch.id_batch, comment: comment };
+  saveComment = (data, comment) => {
+    data['comment'] = comment;
 
     $.ajax({
       type: 'POST',

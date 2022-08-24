@@ -30,20 +30,14 @@ $('.link-editarMulti').css('cursor', 'pointer');
 
 $(document).on('click', '#tablaBatch tbody tr', function () {
   data = tablaBatch.row(this).data();
-  sessionStorage.removeItem('dataBatch');
-  sessionStorage.setItem('dataBatch', JSON.stringify(data));
 });
 
 $(document).on('click', '#tablaPreBatch tbody tr', function () {
   fila = tablaPreBatch.row(this).data();
-  sessionStorage.removeItem('dataBatch');
-  sessionStorage.setItem('dataBatch', JSON.stringify(fila));
 });
 
 $(document).on('click', '#tablaBatchInactivos tbody tr', function () {
   data = tablaBatchInactivos.row(this).data();
-  sessionStorage.removeItem('dataBatch');
-  sessionStorage.setItem('dataBatch', JSON.stringify(data));
 });
 
 $(document).ready(function () {
