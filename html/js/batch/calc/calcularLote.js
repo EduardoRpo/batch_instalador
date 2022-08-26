@@ -30,20 +30,6 @@ $(document).ready(function () {
     $(`#${id_checkbox}`).prop('checked', true);
   });
 
-  //Eliminar registros en el array
-
-  /*$(document).on('change', '.checkboxPedidos', function (e) {
-      e.preventDefault();
-      id_checkbox = this.id;
-      numPedido = id_checkbox.slice(0, -8);
-
-      if (pedidosProgramar.length > 0) {
-        $(`#cant-${id_checkbox}`).val('');
-        $(`#date-${id_checkbox}`).val('');
-        deleteArray(numPedido);
-      } else $(`#${id_checkbox}`).prop('checked', false);
-    });*/
-
   arrayPreprogramados = (referencia, cantidad, numPedido) => {
     /* validar que el numero de pedido y referencia no esten en el array e insertar 
               de los contrario actualizar la cantidad */

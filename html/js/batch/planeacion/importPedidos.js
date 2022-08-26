@@ -41,7 +41,6 @@ checkImport = (data) => {
         $('#filePedidos').val('');
         return false;
       }
-
       alertify
         .confirm(
           'Importar Pedidos',
@@ -55,7 +54,11 @@ checkImport = (data) => {
                          <div class="w-100"></div>
                          <div class="col">Sin producto: ${resp.nonProducts}</div>
                        </div><br><br>
-                         Desea continuar?`,
+                       <div class="row">
+                        <div class="col">Fecha importe: ${resp.fecha_importe}</div>
+                        <div class="col-lg-5">Desea continuar?</div>
+                       </div>
+                         `,
           function () {
             savePedidos();
             deletePedidosSession();
