@@ -26,7 +26,7 @@ class BatchDao extends estadoInicialDao
         $dataBatch = $stmt->fetch($connection::FETCH_ASSOC);
         return $dataBatch;
     }
-    
+
     public function findEstadoBatch($ref_producto)
     {
         $connection = Connection::getInstance()->getConnection();
@@ -153,7 +153,7 @@ class BatchDao extends estadoInicialDao
         // $referencia             = $dataBatch['ref'];
         // $tamanototallote        = $dataBatch['lote'];
         // $tamanolotepresentacion = $dataBatch['presentacion'];
-        $multi                  = $dataBatch['multi'];
+        $multi                  = json_decode($dataBatch['multi'], true);
 
         if ($dataBatch['date'])
             $fecha           = json_decode($dataBatch['date']);

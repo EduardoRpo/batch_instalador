@@ -96,7 +96,8 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
 
     /* Actualizar pedido batch */
     if ($resp == null) {
-      $multi = $dataBatch[$i]['multi'];
+      //$multi = $dataBatch[$i]['multi'];
+      $multi = json_decode($dataBatch[$i]['multi'], true);
 
       //Almacena los pedidos en los batch creados
       for ($j = 0; $j < sizeof($multi); $j++) {

@@ -82,11 +82,13 @@ class MultiDao extends ControlFirmasMultiDao
         $connection = Connection::getInstance()->getConnection();
 
 
-        $multipresentaciones = $dataBatch['multi'];
+        $multipresentaciones = json_decode($dataBatch['multi'], true);
 
         for ($i = 0; $i < sizeof($multipresentaciones); $i++) {
-            $multipresentaciones[$i]['cantidadunidades'] = $multipresentaciones[$i]['cantidad_acumulada'];
-            $multipresentaciones[$i]['tamaniopresentacion'] = $multipresentaciones[$i]['tamanio_lote'];
+            if (!empty($multipresentaciones[$i]['cantidad_acumulada'])) {
+                $multipresentaciones[$i]['cantidadunidades'] = $multipresentaciones[$i]['cantidad_acumulada'];
+                $multipresentaciones[$i]['tamaniopresentacion'] = $multipresentaciones[$i]['tamanio_lote'];
+            }
         }
 
         /* Almacena multipresentacion */
