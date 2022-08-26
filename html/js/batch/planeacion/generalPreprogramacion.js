@@ -1,17 +1,4 @@
 $(document).ready(function () {
-  /*checkBatch = (data) => {
-        $.ajax({
-          url: '/api/checkBatch',
-          success: function (resp) {
-            //resp = Object.entries(resp);
-            insertar = resp.insertar;
-            actualizar = resp.actualizar;
-
-            alertConfirm(data);
-          },
-        });
-      };*/
-
   alertConfirm = (data) => {
     alertify
       .confirm(

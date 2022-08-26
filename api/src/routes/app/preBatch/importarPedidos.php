@@ -49,7 +49,10 @@ $app->post('/validacionDatosPedidos', function (Request $request, Response $resp
       $i++;
     }
 
-    $dataImportOrders = array('success' => true, 'update' => $update, 'insert' => $insert, 'nonProducts' => $nonProducts, 'pedidos' => sizeof($dataPedidos['data']), 'referencias' => sizeof($temp_array));
+    date_default_timezone_set('America/Bogota');
+    $fecha_hora = date('Y-m-d h:i a');
+
+    $dataImportOrders = array('success' => true, 'fecha_importe' => $fecha_hora, 'update' => $update, 'insert' => $insert, 'nonProducts' => $nonProducts, 'pedidos' => sizeof($dataPedidos['data']), 'referencias' => sizeof($temp_array));
 
     // Guardar pedidos existentes
     session_start();

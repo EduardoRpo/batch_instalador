@@ -69,7 +69,7 @@ $(document).ready(function () {
               </tr>
             </thead>
             <tbody>
-              ${(row = addRows(response))}
+              ${(row = loadTable(response))}
             </tbody>
         </table>`,
         size: 400,
@@ -91,7 +91,7 @@ $(document).ready(function () {
     }
   };
 
-  addRows = (data) => {
+  loadTable = (data) => {
     row = [];
     for (i = 0; i < data.length; i++) {
       row.push(`<tr>
