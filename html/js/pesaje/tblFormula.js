@@ -88,8 +88,8 @@ $(document).ready(function() {
                     }, 0);
 
                 $(api.column(0).footer()).html('<b>Total</b>');
-                $(api.column(3).footer()).html(`<b>${peso.toLocaleString("de-DE", { maximumFractionDigits: 0 })}</b>`);
-                $(api.column(4).footer()).html(`<b>${pesoTanque.toLocaleString("de-DE", { maximumFractionDigits: 0 })}</b>`);
+                $(api.column(3).footer()).html(`<b>${peso.toLocaleString("de-DE", { maximumFractionDigits: 0 })} Kg </b>`);
+                $(api.column(4).footer()).html(`<b>${(pesoTanque/tanques).toLocaleString("de-DE", { maximumFractionDigits: 0 })} Kg</b>`);
             }
         })
 
