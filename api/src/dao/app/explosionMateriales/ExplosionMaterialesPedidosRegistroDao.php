@@ -16,10 +16,25 @@ class ExplosionMaterialesPedidosRegistroDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
+    public function resetEstado()
+    {
+        $connection = Connection::getInstance()->getConnection();
+        session_start();
+        $fecha = $_SESSION['fecha'];
+        if (!$fecha) $fecha = date('Y-m-d');
+
+        $stmt = $connection->prepare("UPDATE explosion_materiales_pedidos_registro SET estado = 0
+                                      WHERE estado >= 1 AND :fecha < CURRENT_DATE()");
+        $stmt->execute([
+            'fecha' => $fecha
+        ]);
+    }
+
     public function updateEMPedidosRegistro()
     {
         $connection = Connection::getInstance()->getConnection();
         $dataPedidos = $_SESSION['dataPedidos'];
+        $_SESSION['fecha'] = date('Y-m-d');
 
         foreach ($dataPedidos as $dataPedido) {
             $stmt = $connection->prepare("UPDATE explosion_materiales_pedidos_registro 
@@ -39,6 +54,7 @@ class ExplosionMaterialesPedidosRegistroDao
     public function checkPedidos($dataPedido)
     {
         $pedido = $dataPedido['numPedido'];
+        $_SESSION['fecha'] = date('Y-m-d');
         //Condicional si tiene mas de un pedido
         if (strpos($pedido, '-')) {
             $pedido = explode(" - ", $pedido);

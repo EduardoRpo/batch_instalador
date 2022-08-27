@@ -7,7 +7,7 @@ use BatchRecord\dao\TanquesDao;
 use BatchRecord\dao\ControlFirmasDao;
 use BatchRecord\dao\MultiDao;
 use BatchRecord\dao\ExplosionMaterialesPedidosRegistroDao;
-
+use BatchRecord\dao\ObservacionesInactivosDao;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
@@ -17,6 +17,7 @@ $tanquesDao = new TanquesDao();
 $controlFirmasDao = new ControlFirmasDao();
 $multiDao = new MultiDao();
 $EMPedidosRegistroDao = new ExplosionMaterialesPedidosRegistroDao();
+$observacionesDao = new ObservacionesInactivosDao();
 
 
 $app->get('/batch', function (Request $request, Response $data, $args) use ($batchDao) {
@@ -52,7 +53,7 @@ $app->get('/batchcerrados', function (Request $request, Response $response, $arg
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->post('/saveBatch', function (Request $request, Response $response, $args) use ($batchDao, $ultimoBatchDao, $tanquesDao, $controlFirmasDao, $multiDao, $EMPedidosRegistroDao) {
+$app->post('/saveBatch', function (Request $request, Response $response, $args) use ($batchDao, $ultimoBatchDao, $tanquesDao, $controlFirmasDao, $multiDao, $EMPedidosRegistroDao, $observacionesDao) {
   session_start();
   $dataBatch = $request->getParsedBody();
   $flag_tanques = 1;
@@ -77,7 +78,6 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
   for ($i = 0; $i < sizeof($dataBatch); $i++) {
 
     //validar si el multi es de planeacion o es creado manualmente
-
     $array = is_array($dataBatch[$i]['multi']);
 
     if ($array) // planeacion
@@ -109,9 +109,13 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
 
       //Almacena los pedidos en los batch creados
       for ($j = 0; $j < sizeof($multi); $j++) {
-        if ($multi[$j]['numPedido'])
+        if ($multi[$j]['numPedido']) {
           $resp = $batchDao->updateBatchPedido($id_batch['id'], $multi[$j]);
-        else {
+          // Agregar batch a observacion de planeacion
+          $observaciones = $observacionesDao->findObservaciones($multi[$j]);
+          if ($observaciones)
+            $resp = $observacionesDao->updateObservacion($id_batch['id'], $multi[$j]);
+        } else {
           $resp = $batchDao->updateBatchPedido($id_batch['id'], $dataBatch[0]);
           $_SESSION['dataPedidos'] = $multi;
         }
