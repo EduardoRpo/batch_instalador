@@ -79,7 +79,8 @@ function cargarTablaFormulas(referencia) {
         columns: [{
                 data: "id",
                 render: function(data) {
-                    return `<a href='#' id=${data} <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>`
+                    return `<a href='#' id=${data} <i class='large material-icons link-editar' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a> 
+                            <a href='#' id=${data} <i class='large material-icons link-borrar' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>`
                 }
             },
 

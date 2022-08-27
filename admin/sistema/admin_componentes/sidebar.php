@@ -35,7 +35,7 @@
 
                     <li id="instructivos"><a href=""><i class="fa fa-chevron-down"></i><span>Instructivos</span></a></li>
                     <ul class="menu_instructivos">
-                        <li><a href="bases.php" id="link_bases"><i class="fa fa-list-alt"></i><span>Bases </span></a></li>
+                        <!-- <li><a href="bases.php" id="link_bases"><i class="fa fa-list-alt"></i><span>Bases </span></a></li> -->
                         <li><a href="instructivo.php" id="link_preparaciones"><i class="fa fa-bars"></i><span>Instructivo </span></a></li>
                     </ul>
 

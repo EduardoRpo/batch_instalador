@@ -42,7 +42,7 @@ function guardarInstructivo() {
     $.ajax({
         type: "POST",
         url: "/api/saveInstructivos",
-        data: {editar, referencia, id, actividad, tiempo },
+        data: { editar, referencia, id, actividad, tiempo },
 
         success: function(data) {
             notificaciones(data)
@@ -55,7 +55,7 @@ function guardarInstructivo() {
 $(document).on("click", ".link-borrar", function(e) {
     e.preventDefault();
 
-    let id = $(this).parent().parent().children().eq(2).text();
+    let id = this.id
     let referencia = $("#cmbReferenciaProductos").val();
 
     let confirm = alertify
@@ -71,7 +71,7 @@ $(document).on("click", ".link-borrar", function(e) {
             $.ajax({
                 method: "POST",
                 url: "/api/deleteInstructivos",
-                data: {id, referencia },
+                data: { id, referencia },
             });
             refreshTable();
             alertify.set("notifier", "position", "top-right");
@@ -82,7 +82,7 @@ $(document).on("click", ".link-borrar", function(e) {
 
 /* Actualizar tabla */
 
-function refreshTable(tabla) {
+refreshTable = () => {
     $("#tblInstructivo").DataTable().clear();
     $("#tblInstructivo").DataTable().ajax.reload();
     $("#txtActividad").val("");

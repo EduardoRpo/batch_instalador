@@ -76,7 +76,17 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
   /* Crear el batch */
   for ($i = 0; $i < sizeof($dataBatch); $i++) {
 
-    $resp = $batchDao->saveBatch($dataBatch[$i]);
+    //validar si el multi es de planeacion o es creado manualmente
+
+    $array = is_array($dataBatch[$i]['multi']);
+
+    if ($array) // planeacion
+      $multi = $dataBatch[$i]['multi'];
+    else // batch manual
+      $multi = json_decode($dataBatch[$i]['multi'], true);
+
+    //Guarda Batch
+    $resp = $batchDao->saveBatch($dataBatch[$i], $multi);
 
     /* Indentifica el ultimo Batch ingresado */
     if ($resp == null)
@@ -92,12 +102,10 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
 
     /* Crea la multipresentacion */
     if ($resp == null)
-      $resp = $multiDao->saveMulti($id_batch['id'], $dataBatch[$i]);
+      $resp = $multiDao->saveMulti($id_batch['id'], $dataBatch[$i], $multi);
 
     /* Actualizar pedido batch */
     if ($resp == null) {
-      //$multi = $dataBatch[$i]['multi'];
-      $multi = json_decode($dataBatch[$i]['multi'], true);
 
       //Almacena los pedidos en los batch creados
       for ($j = 0; $j < sizeof($multi); $j++) {

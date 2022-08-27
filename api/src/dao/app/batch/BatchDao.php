@@ -141,7 +141,7 @@ class BatchDao extends estadoInicialDao
         return $batch;
     }
 
-    public function saveBatch($dataBatch)
+    public function saveBatch($dataBatch, $multi)
     {
         //$pedido                 = $dataBatch['pedido'];
 
@@ -153,7 +153,6 @@ class BatchDao extends estadoInicialDao
         // $referencia             = $dataBatch['ref'];
         // $tamanototallote        = $dataBatch['lote'];
         // $tamanolotepresentacion = $dataBatch['presentacion'];
-        $multi                  = json_decode($dataBatch['multi'], true);
 
         if ($dataBatch['date'])
             $fecha           = json_decode($dataBatch['date']);
@@ -244,7 +243,8 @@ class BatchDao extends estadoInicialDao
     public function updateEstadoBatch($databatch)
     {
         $connection = Connection::getInstance()->getConection();
-        $stmt = $connection->prepare("UPDATE batch SET estado = :estado WHERE id_producto = :referencia");
+        $stmt = $connection->prepare("UPDATE batch SET estado = :estado 
+                                      WHERE id_producto = :referencia");
         $result = $stmt->execute(['estado' => $databatch["estado"], 'referencia' => $databatch['ref_producto']]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         return $result;

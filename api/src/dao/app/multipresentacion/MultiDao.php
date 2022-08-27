@@ -77,12 +77,9 @@ class MultiDao extends ControlFirmasMultiDao
         }
     }
 
-    public function saveMulti($id_batch, $dataBatch)
+    public function saveMulti($id_batch, $dataBatch, $multipresentaciones)
     {
         $connection = Connection::getInstance()->getConnection();
-
-
-        $multipresentaciones = json_decode($dataBatch['multi'], true);
 
         for ($i = 0; $i < sizeof($multipresentaciones); $i++) {
             if (!empty($multipresentaciones[$i]['cantidad_acumulada'])) {
