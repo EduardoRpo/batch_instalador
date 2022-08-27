@@ -61,15 +61,22 @@
                   </select>
                   <input type="text" class="form-control ml-3" id="txtnombreProducto">
                 </div>
+
                 <hr>
+                <div class="alert alert-warning alertFormula" role="alert">
+                  La formula <b>no cumple</b> con el <b>100%</b>
+                </div>
+
+                <hr>
+
                 <button type="button" class="btn btn-primary" id="adicionarFormula">Adicionar</button>
 
                 <form id="frmadFormulas" style="display: none;">
                   <div class="formula ml-5">
                     <label class="mr-3"> <b>Seleccionar: </b> </label>
-                    <input type="radio" id="formula_r" name="formula" value="1">
+                    <input type="radio" class="radioFormula" id="formula_r" name="formula" value="1">
                     <label for="formula_r" class="mr-3">Formula</label>
-                    <input type="radio" id="formula_f" name="formula" value="0">
+                    <input type="radio" class="radioFormula" id="formula_f" name="formula" value="0">
                     <label for="formula_f" class="mr-3">Formula Invima</label>
                   </div>
 
@@ -97,7 +104,7 @@
                 <div class="table-responsive">
                   <label for="">Formulas</label>
                   <table id="tblFormulas" class="table-striped row-borde" style="width:100%">
-                    
+
                   </table>
                   <div style="display: flex;justify-content: flex-end;">
                     <input type="text" id="totalPorcentajeFormulas" style="border: none;margin-right:100px;text-align:center" disabled>
@@ -121,7 +128,7 @@
                   <table id="tblFormulastodas" class="table-striped row-borde" style="width:100%">
                     <label for="">Formulas</label>
                     <thead>
-                      
+
                       </tr>
                     </thead>
                     <tbody>
@@ -186,6 +193,8 @@
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
   <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+  <script src="../assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script>
   
   <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
@@ -194,15 +203,20 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
   <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
   <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
-
-
-
-  <script src="../assets/js/plugins/bootstrap-notify.js"></script>
-  <script src="../assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script>
-  <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-  <script src="js/formulas.js"></script>
-  <script src="js/importarProductos.js"></script>
-  <script src="js/menu.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+  
+  <script src="/admin/sistema/js/global/cargarReferencias.js"></script>
+  <script src="/admin/sistema/js/global/notifications.js"></script>
+  <script src="/admin/sistema/js/global/rawMaterials.js"></script>
+  
+  <script src="/admin/sistema/js/productos/formulas/formulas.js"></script>
+  <script src="/admin/sistema/js/productos/formulas/validarReferencia.js"></script>
+  <script src="/admin/sistema/js/productos/formulas/tblFormulas.js"></script>
+  <script src="/admin/sistema/js/productos/formulas/tblAllFormulas.js"></script>
+  <script src="/admin/sistema/js/productos/formulas/tblFormulasInvima.js"></script>
+  
+  <script src="/admin/sistema/js/importarProductos.js"></script>
+  <script src="/admin/sistema/js/menu.js"></script>
 
 </body>
 

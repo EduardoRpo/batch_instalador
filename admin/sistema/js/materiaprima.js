@@ -62,6 +62,53 @@ $("#btnadicionarMateriaPrima").click(function (e) {
 
 /* Borrar registros */
 
+$(document).on("click", ".link-borrar-mp", function (e){
+  let id = this.id;
+  let confirm = alertify
+  .confirm(
+      "Samara Cosmetics",
+      "¿Está seguro de eliminar este registro?",
+      null,
+      null
+  )
+  .set("labels", { ok: "Si", cancel: "No" });
+
+confirm.set("onok", function(r) {
+  if (r) {
+      $.ajax({
+          url: `/api/deleteRawMateria/${id}`,
+          success: function(data) {
+              notificaciones(data);
+          },
+      });
+  }
+});
+})
+
+$(document).on("click", ".link-borrar-mpf", function(e){
+  let id = this.id;
+  let confirm = alertify
+  .confirm(
+      "Samara Cosmetics",
+      "¿Está seguro de eliminar este registro?",
+      null,
+      null
+  )
+  .set("labels", { ok: "Si", cancel: "No" });
+
+
+confirm.set("onok", function(r) {
+  if (r) {
+      $.ajax({
+          url: `/api/deleteRawMaterialP/${id}`,
+          success: function(data) {
+              notificaciones(data);
+          },
+      });
+  }
+});
+})
+/*
 $(document).on("click", ".link-borrar-mp", function (e) {
   e.preventDefault();
   tbl = 1;
@@ -97,7 +144,7 @@ const eliminarRegistro = (id, tbl) => {
     }
   });
 };
-
+*/
 /* Cargar datos para Actualizar registros */
 
 $(document).on("click", ".link-editar-mp", function (e) {
@@ -123,7 +170,7 @@ const editarmp = (rb, referencia, materiaprima, alias) => {
   else $("#mpf").prop("checked", true);
   $("#txtCodigo").prop("disabled", true);
   $("#frmAdicionarMateriaPrima").slideDown();
-  $("#txtId").val(referencia);
+  $("#txtId").val(rb);
   $("#txtCodigo").val(referencia);
   $("#txtMP").val(materiaprima);
   $("#txtAlias").val(alias);
@@ -154,25 +201,11 @@ $("#btnguardarMateriaPrima").click(function (e) {
 
   $.ajax({
     type: "POST",
-    url: "php/c_materiaprima.php",
-    data: { operacion: 3, ref, materiaprima, alias, tbmateriaPrima },
+    url: "/api/save",
+    data: { referencia:ref, materiaprima:materiaprima, alias:alias, controller:rb },
 
-    success: function (r) {
-      if (r == 1) {
-        alertify.set("notifier", "position", "top-right");
-        alertify.success("Almacenado con éxito.");
-        refreshTable();
-      } else if (r == 2) {
-        alertify.set("notifier", "position", "top-right");
-        alertify.error("El número de referencia ya existe.");
-      } else if (r == 3) {
-        alertify.set("notifier", "position", "top-right");
-        alertify.success("Registro actualizado.");
-        refreshTable();
-      } else {
-        alertify.set("notifier", "position", "top-right");
-        alertify.error("Error.");
-      }
+    success: function (data) {
+      notificaciones(data);
     },
   });
 });
@@ -189,42 +222,3 @@ function refreshTable() {
   $("#txtAlias").val("");
 }
 
-/* Materia Prima_f */
-tablampf = $("#tblMateriaPrimaf").DataTable({
-  destroy: true,
-  scrollY: "50vh",
-  scrollCollapse: true,
-  paging: false,
-  language: { url: "admin_componentes/es-ar.json" },
-
-  ajax: {
-    method: "POST",
-    url: "php/c_materiaprima.php",
-    data: { operacion: "4" },
-  },
-
-  columns: [
-    { data: "referencia", className: "centrado" },
-    {
-      defaultContent:
-        "<a href='#' <i class='large material-icons link-editar-mpf' data-toggle='tooltip' title='Actualizar' style='color:rgb(255, 165, 0)'>edit</i></a> <a href='#' <i class='large material-icons link-borrar-mpf' data-toggle='tooltip' title='Eliminar' style='color:rgb(255, 0, 0)'>clear</i></a>",
-      className: "centrado",
-    },
-    { data: "referencia", className: "centrado" },
-    { data: "nombre" },
-    { data: "alias" },
-  ],
-});
-
-/* Enumera los registros en la tabla */
-
-tablampf
-  .on("order.dt search.dt", function () {
-    tablampf
-      .column(0, { search: "applied", order: "applied" })
-      .nodes()
-      .each(function (cell, i) {
-        cell.innerHTML = i + 1;
-      });
-  })
-  .draw();

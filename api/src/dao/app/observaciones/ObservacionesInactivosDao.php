@@ -16,20 +16,26 @@ class ObservacionesInactivosDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
-    public function findObservacionByBacth($dataBatch)
+    public function findObservaciones($dataBatch)
     {
         $connection = Connection::getInstance()->getconnection();
 
-        $stmt = $connection->prepare("SELECT exp.pedido, b.id_batch, p.referencia, p.nombre_referencia, obi.observacion, obi.fecha_registro 
-                                      FROM batch b 
-                                      INNER JOIN observaciones_batch_inactivos obi ON obi.batch = b.id_batch 
-                                      INNER JOIN producto p ON b.id_producto = p.referencia 
-                                      INNER JOIN explosion_materiales_pedidos_registro exp ON exp.id_producto = p.referencia 
-                                    WHERE b.id_batch = :id_batch AND exp.pedido = :pedido;");
-        $stmt->execute([
-            'id_batch' => $dataBatch['batch'],
-            'pedido' => $dataBatch['numPedido']
-        ]);
+        if ($dataBatch['pedido']) {
+            $condition = "WHERE pedido = :pedido AND referencia = :referencia";
+            $execute = [
+                'pedido' => $dataBatch['pedido'],
+                'referencia' => $dataBatch['ref']
+            ];
+        } else {
+            $condition = "WHERE batch = :batch";
+            $execute = [
+                'batch' => $dataBatch['batch']
+            ];
+        }
+
+        $stmt = $connection->prepare("SELECT * FROM observaciones_batch_inactivos
+                                      {$condition}");
+        $stmt->execute($execute);
         $observaciones = $stmt->fetchAll($connection::FETCH_ASSOC);
         return $observaciones;
     }
@@ -38,14 +44,28 @@ class ObservacionesInactivosDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $fechahoy = date("Y-m-d");
+        $fecha_hoy = date('Y-m-d');
 
-        $stmt = $connection->prepare("INSERT INTO observaciones_batch_inactivos (observacion, batch, fecha_registro)
-                                      VALUES (:observacion, :batch, :fecha_registro)");
-        $stmt->execute([
-            'observacion' => $dataBatch['comment'],
-            'batch' => $dataBatch['batch'],
-            'fecha_registro' => $fechahoy
-        ]);
+        if ($dataBatch['pedido']) {
+            $sql = "INSERT INTO observaciones_batch_inactivos (observacion, pedido, referencia, fecha_registro)
+            VALUES (:observacion, :pedido, :referencia, :fecha_registro)";
+            $execute = [
+                'observacion' => $dataBatch['comment'],
+                'pedido' => $dataBatch['pedido'],
+                'referencia' => $dataBatch['ref'],
+                'fecha_registro' => $fecha_hoy
+            ];
+        } else {
+            $sql = "INSERT INTO observaciones_batch_inactivos (observacion, batch, fecha_registro)
+            VALUES (:observacion, :batch, :fecha_registro)";
+            $execute = [
+                'observacion' => $dataBatch['comment'],
+                'batch' => $dataBatch['batch'],
+                'fecha_registro' => $fecha_hoy
+            ];
+        }
+
+        $stmt = $connection->prepare($sql);
+        $stmt->execute($execute);
     }
 }

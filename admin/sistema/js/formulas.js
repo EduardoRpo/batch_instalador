@@ -11,11 +11,12 @@ $('.contenedor-menu .menu ul.menu_productos').show()
 
 $('.contenedor-menu .menu ul.menu_formulas').show()
 
-$('#instructivos').click(function(e) {
+/* $('#instructivos').click(function(e) {
     e.preventDefault();
     $(".contenedor-menu .menu ul.menu_instructivos").toogle();
-
-});
+    
+}) */
+;
 
 
 /* Cargue select referencias */
@@ -61,24 +62,6 @@ $('#formula_f').change(function(e) {
     materiaPrima('f')
 })
 
-/* Cargar Materia Prima */
-
-const materiaPrima = (tb) => {
-    $.ajax({
-        method: 'POST',
-        url: 'php/c_formulas.php',
-        data: { operacion: '4', tb: tb },
-
-        success: function(response) {
-            var info = JSON.parse(response)
-            let $selectReferencia = $('#cmbreferencia')
-            cargarSelect(info, $selectReferencia)
-        },
-        error: function(response) {
-            console.log(response)
-        },
-    })
-}
 
 /* cargar Selects */
 
@@ -337,14 +320,14 @@ function cargarTablaTodasFormulas(referencia) {
 }
 
 /* Cargue de Parametros de Control en DataTable */
-
+/*
 function cargarTablaFormulas(referencia) {
     tabla = $('#tblFormulas').DataTable({
         destroy: true,
         scrollY: '50vh',
         scrollCollapse: true,
         paging: false,
-        /* dom: 'Bfrtip',
+        dom: 'Bfrtip',
         buttons: [
           {
             extend: 'excel',
@@ -353,7 +336,7 @@ function cargarTablaFormulas(referencia) {
               columns: [0, 3],
             },
           },
-        ], */
+        ], 
         language: { url: 'admin_componentes/es-ar.json' },
 
         ajax: {
@@ -389,12 +372,15 @@ function cargarTablaFormulas(referencia) {
                 }, 0)
             total = total.toFixed(2)
             $('#totalPorcentajeFormulas').val(`Total ${total}%`)
+            if (total != 100) $('.alertFormula').show()
+            else $('.alertFormula').hide()
+
         },
     })
 }
 
 /* Cargue de Parametros de Control en DataTable */
-
+/*
 function cargar_formulas_f(referencia) {
     tabla = $('#tbl_formulas_f').DataTable({
         destroy: true,
@@ -437,6 +423,7 @@ function cargar_formulas_f(referencia) {
         },
     })
 }
+*/
 
 /* Actualizar tabla */
 

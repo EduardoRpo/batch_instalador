@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function() {
     const measure = $('select#measure')
     const ammount = $('input#tiempo_instructivo')
     const timer = $('#timer')
@@ -13,8 +13,10 @@ $(document).ready(function () {
     var interval = null;
     var clockType = undefined;
 
-    $('button#start-countdown').on('click', function () {
+    let countClock = 0
 
+    $('button#start-countdown').on('click', function() {
+        countClock = countClock + 1
         const validar = validarEquipos();
         if (validar == 0)
             return false
@@ -22,26 +24,25 @@ $(document).ready(function () {
         if ($(ammount).val() != '' && $(ammount).val() > 0 && $(measure).val() != 0) {
             clockType = 'countdown'
             startClock()
-        }
-        else if ($(ammount).val() == '') {
-            alertify.set("notifier", "position", "top-right"); alertify.error("Seleccione el primer 'PASO' a Ejecutar.");
-        }
-        else if ($(measure).val() == 0) {
+        } else if ($(ammount).val() == '') {
+            alertify.set("notifier", "position", "top-right");
+            alertify.error("Seleccione el primer 'PASO' a Ejecutar.");
+        } else if ($(measure).val() == 0) {
             alert('Select the Unit')
         }
     })
 
 
 
-    $('button#stop-timer').on('click', function () {
+    $('button#stop-timer').on('click', function() {
         pauseClock()
     })
 
-    $('button#reset-timer').on('click', function () {
+    $('button#reset-timer').on('click', function() {
         restartClock()
     })
 
-    $('button#resume-timer').on('click', function () {
+    $('button#resume-timer').on('click', function() {
         $('button#resume-timer').fadeOut(100)
         $('button#reset-timer').fadeOut(100)
         switch (clockType) {
@@ -77,14 +78,12 @@ $(document).ready(function () {
                     minutes = min;
                     let sec = ($(ammount).val() - (hou * 3600)) - (min * 60)
                     seconds = sec
-                }
-                else if ($(ammount).val() > 59) {
+                } else if ($(ammount).val() > 59) {
                     let min = Math.floor($(ammount).val() / 60)
                     minutes = min
                     let sec = $(ammount).val() - (min * 60)
                     seconds = sec
-                }
-                else {
+                } else {
                     seconds = $(ammount).val()
                 }
                 break
@@ -94,8 +93,7 @@ $(document).ready(function () {
                     hours = hou
                     let min = $(ammount).val() - (hou * 60)
                     minutes = min
-                }
-                else {
+                } else {
                     minutes = $(ammount).val()
                 }
                 break
@@ -113,7 +111,7 @@ $(document).ready(function () {
         refreshClock()
 
         $('.input-wrapper').slideUp(350)
-        setTimeout(function () {
+        setTimeout(function() {
             $('#timer').fadeIn(350)
             $('#stop-timer').fadeIn(350)
 
@@ -150,7 +148,7 @@ $(document).ready(function () {
         $('#stop-timer').fadeOut(100)
         $('button#resume-timer').fadeOut(100)
         $('button#reset-timer').fadeOut(100)
-        setTimeout(function () {
+        setTimeout(function() {
             $('.input-wrapper').slideDown(350)
         }, 350)
     }
@@ -185,14 +183,12 @@ $(document).ready(function () {
                 if (seconds > 0) {
                     seconds--
                     refreshClock()
-                }
-                else if (seconds == 0) {
+                } else if (seconds == 0) {
                     minutes--
                     seconds = 59
                     refreshClock()
                 }
-            }
-            else {
+            } else {
                 restartClock()
             }
 
@@ -214,7 +210,8 @@ $(document).ready(function () {
 
         if (hours == 0 && minutes == 0 && seconds == 0 && hasStarted == true) {
             hasEnded = true
-            alertify.set("notifier", "position", "top-right"); alertify.success("Tiempo Finalizado.");
+            alertify.set("notifier", "position", "top-right");
+            alertify.success("Tiempo Finalizado.");
             queeProcess++;
             refreshInstructivo();
             mostrarInstructivo();
@@ -223,6 +220,6 @@ $(document).ready(function () {
 
     function clear(intervalID) {
         clearInterval(intervalID)
-        //console.log('cleared the interval called ' + intervalID)
+            //console.log('cleared the interval called ' + intervalID)
     }
 })

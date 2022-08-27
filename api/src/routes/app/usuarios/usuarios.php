@@ -43,3 +43,4 @@ $app->post('/user', function (Request $request, Response $response, $args) use (
     $response->getBody()->write(json_encode($user, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');
   });
+  

@@ -11,8 +11,6 @@ use Monolog\Logger;
 
 class ProductosDao
 {
-
-
   private $logger;
 
   public function __construct()
@@ -24,7 +22,8 @@ class ProductosDao
   public function findAllProducts()
   {
     $connection = Connection::getInstance()->getConnection();
-    $stmt = $connection->prepare("SELECT * FROM producto");
+    $stmt = $connection->prepare("SELECT * FROM producto 
+                                  WHERE referencia LIKE '%Granel%' OR referencia LIKE '%M%'");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $productos = $stmt->fetchAll($connection::FETCH_ASSOC);
@@ -116,5 +115,20 @@ class ProductosDao
     $producto = $stmt->fetchAll($connection::FETCH_ASSOC);
     $this->logger->notice("producto eliminado", array('producto' => $producto));
     return $producto;
+  }
+
+
+
+  public function findBase()
+  {
+    $connection = Connection::getInstance()->getConnection();
+    $stmt = $connection->prepare("SELECT DISTINCT np.id, np.nombre as producto_base 
+    FROM instructivos_base ib 
+    INNER JOIN nombre_producto np ON np.id = ib.producto");
+    $stmt->execute();
+    $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+    $base = $stmt->fetchAll($connection::FETCH_ASSOC);
+    $this->logger->notice("bases recuperadas", array('bases' => $base));
+    return $base;
   }
 }

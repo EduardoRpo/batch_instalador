@@ -110,8 +110,8 @@
 
   <!-- javascript inicializacion datatables -->
   <script src="js/global/notifications.js"></script>
-  <script src="js/modules/modules.js"></script>
-  <script src="js/modules/tblmodules.js"></script>
+  <script src="js/GeneralParameters/modules/modules.js"></script>
+  <script src="js/GeneralParameters/modules/tblmodules.js"></script>
   <script src="js/menu.js"></script>
   <script src="js/cargarDatos.js"></script>
 

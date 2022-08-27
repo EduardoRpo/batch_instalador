@@ -141,7 +141,7 @@ include_once("modal/modalPedidos.php");
                 </li>
                 <?php if ($_SESSION['rol'] != 6) {  ?>
                   <li class="nav-item">
-                    <a class="nav-link" id="four-tab" data-toggle="tab" href="#four" role="tab" aria-controls="Four" aria-selected="false">Cerrados</a>
+                    <a class="nav-link" id="five-tab" data-toggle="tab" href="#five" role="tab" aria-controls="Five" aria-selected="false">Cerrados</a>
                   </li>
                 <?php  } ?>
                 <div style="display:grid;justify-content:end;font-size:x-large;margin-left:auto" class="mr-3">
@@ -199,7 +199,7 @@ include_once("modal/modalPedidos.php");
                     <div class="card">
                       <div class="card-block">
                         <div class="table-responsive">
-                          <table class="table table-striped table-bordered " id="tablaBatch" name="tablaBatch">
+                          <table class="table table-striped table-bordered " id="tablaBatch">
 
                           </table>
                         </div>
@@ -208,13 +208,12 @@ include_once("modal/modalPedidos.php");
                   </div>
                 </div>
 
-
                 <div class="tab-pane fade mt-3" id="four" role="tabpanel" aria-labelledby="four-tab">
                   <div class="col-md-12 align-self-right">
                     <div class="card">
                       <div class="card-block">
                         <div class="table-responsive">
-                          <table class="table table-striped table-bordered " id="tablaBatchCerrados">
+                          <table class="table table-striped table-bordered " id="tablaBatchCerrados" name="tablaBatchCerrados">
 
                           </table>
                         </div>
@@ -233,27 +232,49 @@ include_once("modal/modalPedidos.php");
 
     <?php require_once __DIR__ . '/partials/scriptsJS.php'; ?>
 
-    <script src="js/batch/dataTableBatch.js"></script>
-    <script src="js/utils/custom.js"></script>
-    <script src="js/batch/multipresentacion.js"></script>
-    <script src="js/batch/batch.js"></script>
-    <script src="js/batch/clonar.js"></script>
-    <script src="js/batch/crearbatch.js"></script>
-    <script src="js/batch/filtradofechas.js"></script>
-    <script src="js/calendario/calendar.js"></script>
-    <script src="js/global/loadinfo-global.js"></script>
-    <script src="js/batch/batcheliminados.js"></script>
-    <script src="../html/js/batch/cargarbatchpdf.js"></script>
-    <script src="../html/js/batch/pedidos.js"></script>
+    <script src="/html/js/global/searchData.js"></script>
 
-    <script src="../html/js/import/import.js"></script>
-    <script src="../html/js/batch/importPedidos.js"></script>
-    <script src="../html/js/import/file.js"></script>
-    <script src="../html/js/global/notificaciones.js"></script>
-    <script src="../html/js/batch/calcularLote.js"></script>
-    <script src="../html/js/batch/generalPreprogramacion.js"></script>
-    <script src="../html/js/batch/batch_inactivos.js"></script>
-    <script src="/html/js/batch/calcWeek.js"></script>
+    <script src="/html/js/batch/tables/tableBatchAbiertos.js"></script>
+    <script src="/html/js/batch/tables/tableBatchEliminados.js"></script>
+    <script src="/html/js/batch/tables/tableBatchInactivos.js"></script>
+    <script src="/html/js/batch/tables/tableBatchPlaneacion.js"></script>
+    <script src="/html/js/batch/tables/batcheliminados.js"></script>
+
+    <script src="/html/js/batch/calc/calcularLote.js"></script>
+    <script src="/html/js/batch/calc/calcWeek.js"></script>
+
+    <script src="/html/js/batch/planeacion/generalPreprogramacion.js"></script>
+    <script src="/html/js/batch/planeacion/importPedidos.js"></script>
+    <script src="/html/js/batch/planeacion/pedidos.js"></script>
+    <script src="/html/js/batch/planeacion/link-comentario.js"></script>
+
+    <script src="/html/js/batch/multipresentacion/multipresentacion.js"></script>
+    <script src="/html/js/batch/multipresentacion/addMulti.js"></script>
+    <script src="/html/js/batch/multipresentacion/deleteMulti.js"></script>
+    <script src="/html/js/batch/multipresentacion/saveMulti.js"></script>
+    <script src="/html/js/batch/multipresentacion/updateMulti.js"></script>
+    <script src="/html/js/batch/multipresentacion/multiCalc.js"></script>
+
+    <script src="/html/js/batch/crearBatch/batch.js"></script>
+    <script src="/html/js/batch/crearBatch/crearbatch.js"></script>
+    <script src="/html/js/batch/crearBatch/selectores.js"></script>
+
+    <script src="/html/js/batch/filtradofechas.js"></script>
+    <script src="/html/js/batch/clonar.js"></script>
+    <script src="/html/js/batch/cargarbatchpdf.js"></script>
+
+    <script src="js/utils/custom.js"></script>
+    <script src="js/calendario/calendar.js"></script>
+
+    <script src="/html/js/global/loadinfo-global.js"></script>
+    <script src="/html/js/global/notificaciones.js"></script>
+
+    <script src="/admin/sistema/js/import/import.js"></script>
+    <script src="/admin/sistema/js/import/file.js"></script>
+    <!-- <script src="/html/js/export/export.js"></script> -->
+    <!-- <script src="/html/js/export/file.js"></script>
+    <script src="/html/js/export/dataBatch.js"></script> -->
+
 
 </body>
 

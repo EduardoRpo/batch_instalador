@@ -87,14 +87,6 @@
               <div class="card-body">
                 <div class="table-responsive">
                   <table id="tabla_bases_instructivo" class="table-striped row-borde" style="width:100%">
-                    <thead>
-                      <tr>
-                        <th></th>
-                        <th>Id</th>
-                        <th>Actividad</th>
-                        <th>Tiempo (min)</th>
-                      </tr>
-                    </thead>
                     <tbody>
 
                     </tbody>
@@ -125,7 +117,9 @@
   <script src="../assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script><!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
   <!-- <script src="../assets/demo/demo.js"></script> -->
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-  <script src="js/bases.js"></script>
+  <script src="js//productos//Instructives//Base//bases.js"></script>
+  <script src="js//global//notifications.js"></script>
+  <script src="js/productos//Instructives//Base//TblBase.js"></script>
   <script src="js/menu.js"></script>
   <script src="js/cargarDatos.js"></script>
 

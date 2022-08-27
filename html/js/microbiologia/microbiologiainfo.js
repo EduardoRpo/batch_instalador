@@ -1,14 +1,15 @@
-/* Cargue tabla especificaciones */
-
-let dataMicro = [];
-modulo = 8;
-$("#observacionesLote").slideUp();
-
-$('.m2').hide();
-$('.m3').hide();
-$('.m4').hide();
-
 $(document).ready(function() {
+    /* Cargue tabla especificaciones */
+
+    let dataMicro = [];
+    modulo = 8;
+    $("#observacionesLote").slideUp();
+
+    $('.m2').hide();
+    $('.m3').hide();
+    $('.m4').hide();
+
+
     $(".metodo").html("Siembra Total");
     $(`.microbiologia_verificado`).prop("disabled", true);
 
@@ -21,27 +22,20 @@ $(document).ready(function() {
         e.preventDefault();
         $("#observacionesLote").slideUp();
     });
-});
 
-/* validar si existe multipresentacion */
 
-$(document).ready(function() {
-    const multi = () => {
-
-        $.get(`/api/multi/${idBatch}`,
-            function(data, textStatus, jqXHR) {
-                if (data == 0)
-                    return false
-                else {
-                    for (let i = 0; i < data.length; i++) {
-                        $(`.m${i + 1}`).show();
-                        $(`#ref${i + 1}`).html(`Ref: ${data[i]['referencia']} / Presentación: ${data[i]['presentacion_comercial']}`);
-                    }
-                }
-                cantMulti = data
-            },
-        );
+    loadBatch = async() => {
+        await cargarInfoBatch();
+        result = await cargarDesinfectantes();
+        cargarTanques()
+        cargarBatchMicro()
+            //cargarBatchMicro()
     }
+
+    loadBatch()
+
+
+    /* validar si existe multipresentacion */
 
 
     cargar = (btn, Nobtn) => {
@@ -188,127 +182,6 @@ $(document).ready(function() {
         });
     };
 
-    //Cargar Batch
-
-    cargarBatchMicro = () => {
-        $.ajax({
-            type: "POST",
-            url: "../../html/php/microbiologia.php",
-            data: { op: 1, idBatch, modulo },
-            success: function(r) {
-                if (r == "") return false;
-                data = JSON.parse(r);
-                firm = [];
-                $("#sel_producto_desinfeccion").val(data[0].desinfectante);
-                $("#desinfectante_obs").val(data[0].observaciones);
-
-                $(".sel_incubadora").val(data[1]["id"]);
-                $(".sel_autoclave").val(data[2]["id"]);
-                $(".sel_cabina").val(data[3]["id"]);
-
-                cont = 4
-                acum = 0
-                acum1 = 0
-
-                for (let i = 1; i < 5; i++) {
-                    ref = $(`.m${i}`).html();
-                    if (ref) {
-                        cont = cont + 1
-                        acum = acum + 1
-                    }
-                }
-
-                for (let i = 4; i < cont; i++) {
-                    for (let j = 1; j < 5; j++) {
-                        referencia = $(`.m${j}`).html();
-                        let indice = referencia.indexOf("/");
-                        referencia = referencia.substring(5, indice).trim()
-
-                        if (data[i]['referencia'] == referencia) {
-                            $(`.inputMesofilos${j}`).val(data[i]["mesofilos"]).prop('disabled', true);
-                            $(`#pseudomona${j}`).val(data[i]["pseudomona"]).prop('disabled', true)
-                            $(`#escherichia${j}`).val(data[i]["escherichia"]).prop('disabled', true);
-                            $(`#staphylococcus${j}`).val(data[i]["staphylococcus"]).prop('disabled', true);
-                            $(`#fechaSiembra${j}`).val(data[i]["fecha_siembra"]).prop('disabled', true);
-                            $(`#fechaResultados${j}`).val(data[i]["fecha_resultados"]).prop('disabled', true);
-                        }
-
-                    }
-                }
-
-                observaciones = data[4]["observaciones"];
-                if (observaciones != "") {
-                    $("#observacionesLote").slideDown();
-                    $("#observacionesLoteRechazado").val(data[4]["observaciones"]);
-                    $("#btnRechazado").prop("checked", true);
-                } else {
-                    $("#btnAceptado").prop("checked", true);
-                }
-
-                for (let i = 1; i < 5; i++) {
-                    let isDisabled = $(`.inputMesofilos${i}`).prop('disabled');
-                    if (isDisabled == true)
-                        acum1 = acum1 + 1
-                }
-
-
-                if (acum == acum1) {
-                    idfirma = data.length - 2
-                    firm.push(data[idfirma]);
-                    firmado(firm, 1);
-                    if (data[data.length - 1] != "false") {
-                        firm.push(data[data.length - 1]);
-                        firmado(firm, 2);
-                    }
-                }
-            },
-        });
-    };
-
-    //cargarBatchMicro();
-
-
-    /* Registro de Firma */
-
-    function firmado(datos, posicion) {
-        let template =
-            '<img id=":id:" src=":firma:" alt="firma_usuario" height="130">';
-        let parent;
-
-        btn_id = $("#idbtn").val();
-
-        if (posicion == 1) {
-            parent = $("#microbiologia_realizado").parent();
-            $("#microbiologia_realizado").remove();
-            $("#microbiologia_realizado")
-                .css({ background: "lightgray", border: "gray" })
-                .prop("disabled", true);
-            $(".microbiologia_verificado").prop("disabled", false);
-        } else {
-            parent = $("#microbiologia_verificado").parent();
-            $("#microbiologia_verificado").remove();
-            $("#microbiologia_verificado")
-                .css({ background: "lightgray", border: "gray" })
-                .prop("disabled", true);
-        }
-
-        let firma = template.replace(":firma:", datos[0].urlfirma);
-        parent.append(firma).html;
-    }
-
     multi()
+
 });
-
-
-const bloquearReferenciasGuardar = (data) => {
-
-    for (let i = 2; i < data.length; i++) {
-        let multi = data[i].multi
-        $(`.inputMesofilos${multi}`).prop('disabled', true);
-        $(`#pseudomona${multi}`).prop('disabled', true)
-        $(`#escherichia${multi}`).prop('disabled', true);
-        $(`#staphylococcus${multi}`).prop('disabled', true);
-        $(`#fechaSiembra${multi}`).prop('disabled', true);
-        $(`#fechaResultados${multi}`).prop('disabled', true);
-    }
-}

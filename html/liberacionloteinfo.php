@@ -145,9 +145,9 @@ include("modal/modal_condicionesMedio.php");
                   <label for="liberacion" style="justify-self: end;">No</label>
                   <label for="liberacion">Si</label>
                   <input type="radio" id="radioLiberacionNo" name="liberacion" value="0" style="justify-self: end;">
-                  <input type="radio" id="radioLiberacionSi" name="liberacion" value="1">
+                  <input type="radio" id="radioLiberacionSi" name="liberacion" value="1" style="justify-self:start;">
                 </div>
-                <div class="m-5">
+                <div class=" m-5">
                   <label for="">Observaciones</label>
                   <input type="text" id="observacioneslote" class="form-control" />
                 </div>
@@ -210,11 +210,21 @@ include("modal/modal_condicionesMedio.php");
   <script src="../../html/vendor/jquery-confirm/jquery-confirm.min.js"></script>
   <script src="../../assets/plugins/jquery/jquery.number.min.js"></script>
 
-  <script src="../../html/js/global/loadinfo-global.js"></script>
-  <script src="../../html/js/liberacionlote/liberacionloteinfo.js"></script>
-  <script src="../../html/js/firmar/firmar1raSeccion.js"></script>
-  <script src="../../html/js/global/tanques.js"></script>
+  <script src="/html/js/global/loadinfo-global.js"></script>
+  <script src="/html/js/global/tanques.js"></script>
+  <script src="/html/js/global/validacionesAuth.js"></script>
+  <script src="/html/js/global/auth.js"></script>
+  <script src="/html/js/global/controller.js"></script>
+  <script src="/html/js/global/notificaciones.js"></script>
   
+  <script src="/html/js/firmar/firmar1raSeccion.js"></script>
+  
+  <script src="/html/js/liberacionlote/liberacionloteinfo.js"></script>
+  <script src="/html/js/liberacionlote/validaciones.js"></script>
+  
+
+
+
 </body>
 
 </html>

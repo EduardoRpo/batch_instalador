@@ -19,32 +19,46 @@ class ExplosionMaterialesPedidosRegistroDao
     public function updateEMPedidosRegistro()
     {
         $connection = Connection::getInstance()->getConnection();
-        session_start();
-        $multipresentaciones = $_SESSION['dataMulti'];
+        $dataPedidos = $_SESSION['dataPedidos'];
 
-        foreach ($multipresentaciones as $multipresentacion) {
+        foreach ($dataPedidos as $dataPedido) {
             $stmt = $connection->prepare("UPDATE explosion_materiales_pedidos_registro 
-                                      SET cantidad_acumulada = cantidad_acumulada + :cantidad_acumulada, fecha_insumo = :fecha_insumo, estado = 1 
-                                      WHERE pedido = :pedido AND id_producto = :referencia");
+                                          SET cantidad_acumulada = cantidad_acumulada + :cantidad_acumulada, fecha_insumo = :fecha_insumo, estado = 1 
+                                          WHERE pedido = :pedido AND id_producto = :referencia");
             $stmt->execute([
-                'pedido' => $multipresentacion['pedido'],
-                'referencia' => $multipresentacion['referencia'],
-                'cantidad_acumulada' => $multipresentacion['cantidadunidades'],
-                'fecha_insumo' => $multipresentacion['fecha_insumo']
+                'pedido' => $dataPedido['numPedido'],
+                'referencia' => $dataPedido['referencia'],
+                'cantidad_acumulada' => $dataPedido['cantidad_acumulada'],
+                'fecha_insumo' => $dataPedido['fecha_insumo']
             ]);
         }
 
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 
-    public function updateEstado($dataPedido)
+    public function checkPedidos($dataPedido)
+    {
+        $pedido = $dataPedido['numPedido'];
+        //Condicional si tiene mas de un pedido
+        if (strpos($pedido, '-')) {
+            $pedido = explode(" - ", $pedido);
+            foreach ($pedido as $p) {
+                $this->updateEstado($dataPedido, $p);
+            }
+        } else {
+            $this->updateEstado($dataPedido, $pedido);
+        }
+    }
+
+    public function updateEstado($dataPedido, $pedido)
     {
         $connection = Connection::getInstance()->getConnection();
+
         $stmt = $connection->prepare("UPDATE explosion_materiales_pedidos_registro 
                                       SET estado = 2
                                       WHERE pedido = :pedido AND id_producto = :referencia");
         $stmt->execute([
-            'pedido' => $dataPedido['pedido'],
+            'pedido' => $pedido,
             'referencia' => $dataPedido['referencia']
         ]);
 

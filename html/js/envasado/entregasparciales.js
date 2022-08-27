@@ -34,13 +34,18 @@ $(document).ready(function() {
     cargarEntregasParciales = (j, referencia) => {
 
         $.ajax({
-            type: "post",
-            url: "../../../api/cargarEntregasParciales",
+            type: "POST",
+            url: "/api/cargarEntregasParciales",
             data: { batch: idBatch, referencia: referencia },
             success: function(resp) {
 
                 if (resp.message == 'total') {
                     $(`#unidadesEnvasadasTotales${j}`).val(resp.unidades);
+
+                    $(`#envaseEnvasada${j}`).val(resp.unidades);
+                    $(`#tapaEnvasada${j}`).html(resp.unidades);
+                    $(`#etiquetaEnvasada${j}`).html(resp.unidades);
+
                     $(`#unidadesEnvasadas${j}`).val(resp.unidades).prop('disabled', true);
                     $(`.btnEntregasParciales${j}`).css({ background: "lightgray", border: "gray" }).prop("disabled", true);
                     $(`.devolucion_realizado${j}`).prop('disabled', false);
@@ -65,53 +70,57 @@ $(document).ready(function() {
 
         data = { unidadesEnv, idBatch, modulo, referencia }
 
-        alertify.confirm('Entregas Parciales', '¿Entrega Parcial?', function() {
+        alertify.confirm('Entregas Parciales', '¿Entrega Parcial?',
+            function() {
+                $.post("/api/entregasparciales", data,
+                    function(data, textStatus, jqXHR) { entregasParciales(data) },
+                );
 
-            $.post("/api/entregasparciales", data,
-                function(data, textStatus, jqXHR) {
-                    if (data.success == true) {
-                        alertify.set("notifier", "position", "top-right");
-                        alertify.success(data.message);
-                        $(`#unidadesEnvasadasTotales${multi}`).val(data.value);
-                        $(`#unidadesEnvasadas${multi}`).val('');
-
-                    } else if (data.success == error) {
-                        alertify.set("notifier", "position", "top-right");
-                        alertify.error(data.message);
-                    }
-                },
-
-            );
-
-        }, function() {
-
-            $.post("/api/entregastotales", data,
-                function(data, textStatus, jqXHR) {
-                    if (data.success == true) {
-
-                        alertify.set("notifier", "position", "top-right");
-                        alertify.success(data.message);
-                        $(`#unidadesEnvasadas${multi}`).prop('disabled', true);
-                        $(`.unidadesEnvasadasTotales${multi}`).prop('disabled', true);
-                        $(`.btnEntregasParciales${multi}`).prop('disabled', true);
-                        $(`.devolucion_realizado${multi}`).prop('disabled', false);
-
-                        $(`#unidadesEnvasadasTotales${multi}`).val(data.value);
-                        $(`#envaseEnvasada${multi}`).val(data.value);
-                        $(`.envasada${multi}`).html(data.value);
-
-                        /* habilitar boton de firma */
-                    } else if (data.success == error) {
-                        alertify.set("notifier", "position", "top-right");
-                        alertify.error(data.message);
-                    }
-                },
-            );
-
-
-        }).set("labels", {
-            ok: "Si, Parcial",
-            cancel: "No, Total",
-        });
+            },
+            function() {
+                $.post("/api/entregastotales", data,
+                    function(data, textStatus, jqXHR) { entregasTotales(data) },
+                );
+            }).set("labels", { ok: "Si, Parcial", cancel: "No, Total", });
     }
+
+    entregasParciales = (data) => {
+        if (data.success == true) {
+            alertify.set("notifier", "position", "top-right");
+            alertify.success(data.message);
+            $(`#unidadesEnvasadasTotales${multi}`).val(data.value);
+            $(`#unidadesEnvasadas${multi}`).val('');
+
+        } else if (data.success == error) {
+            alertify.set("notifier", "position", "top-right");
+            alertify.error(data.message);
+        }
+    }
+
+    entregasTotales = (data) => {
+        if (data.success == true) {
+
+            alertify.set("notifier", "position", "top-right");
+            alertify.success(data.message);
+
+            $(`#unidadesEnvasadas${multi}`).prop('disabled', true);
+            $(`.unidadesEnvasadasTotales${multi}`).prop('disabled', true);
+            $(`.btnEntregasParciales${multi}`).prop('disabled', true);
+            $(`.devolucion_realizado${multi}`).prop('disabled', false);
+
+            $(`#unidadesEnvasadasTotales${multi}`).val(data.value);
+            $(`#envaseEnvasada${multi}`).val(data.value);
+            $(`#tapaEnvasada${multi}`).html(data.value);
+            $(`#etiquetaEnvasada${multi}`).html(data.value);
+
+            //$(`.envasada${multi}`).html(data.value);
+
+            /* habilitar boton de firma */
+
+        } else if (data.success == error) {
+            alertify.set("notifier", "position", "top-right");
+            alertify.error(data.message);
+        }
+    }
+
 })

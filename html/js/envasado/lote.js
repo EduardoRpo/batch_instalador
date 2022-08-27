@@ -7,8 +7,9 @@ function validarLote() {
         alertify.set("notifier", "position", "top-right");
         alertify.error("Ingrese el número del lote");
         $("#validarLote").val("").css("border-color", "red");
-        return 0;
-    }
+        return false;
+    } else
+        return true;
 }
 
 function revisarLote() {

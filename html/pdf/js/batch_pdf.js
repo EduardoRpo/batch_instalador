@@ -326,9 +326,7 @@ desinfectante = () => {
 const firmas = () => {
     let data = { operacion: 17, idBatch };
 
-    $.post(
-        "../../html/php/servicios/c_batch_pdf.php",
-        data,
+    $.post("../../html/php/servicios/c_batch_pdf.php", data,
         function(data, textStatus, jqXHR) {
             if (data == "false") return false;
 

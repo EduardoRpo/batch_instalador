@@ -108,21 +108,21 @@ include("modal/modal_condicionesMedio.php");
                     <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:80%; height: 30px;">
                       <thead>
                         <tr>
-                          <th class="centrado">Tanque</th>
-                          <th class="centrado">Cantidad</th>
-                          <th class="centrado">Total</th>
+                          <th class="centrado">Tamaño Tanque (Kg)</th>
+                          <th class="centrado">Cantidad Tanques</th>
+                          <!-- <th class="centrado">Total</th> -->
                         </tr>
                       </thead>
                       <tbody>
                         <tr id="fila1">
                           <td class="centrado" id="tanque1"></td>
                           <td class="centrado" id="cantidad1"></td>
-                          <td class="centrado" id="total1"></td>
+                          <!-- <td class="centrado" id="total1"></td> -->
                         </tr>
                         <tr id="fila2">
                           <td class="centrado" id="tanque2"></td>
                           <td class="centrado" id="cantidad2"></td>
-                          <td class="centrado" id="total2"></td>
+                          <!-- <td class="centrado" id="total2"></td> -->
                         </tr>
                       </tbody>
                     </table>
@@ -331,19 +331,19 @@ include("modal/modal_condicionesMedio.php");
                               <tr>
                                 <td>PH</td>
                                 <td id="espec_ph"></td>
-                                <td><input type="number" id="in_ph" class="selectpicker form-control ph especificacionInput">
+                                <td><input type="number" id="in_ph" class="selectpicker form-control ph especificacionInput" onblur="validar_ph();">
                                 </td>
                               </tr>
                               <tr>
                                 <td>Viscosidad CPS</td>
                                 <td id="espec_viscidad"></td>
-                                <td><input type="number" class="selectpicker form-control especificacionInput" id="in_viscocidad">
+                                <td><input type="number" class="selectpicker form-control especificacionInput" id="in_viscocidad" onblur="validar_viscosidad();">
                                 </td>
                               </tr>
                               <tr>
                                 <td>Densidad</td>
                                 <td id="espec_densidad"></td>
-                                <td><input class="selectpicker form-control especificacionInput" type="number" id="in_densidad">
+                                <td><input class="selectpicker form-control especificacionInput" type="number" id="in_densidad" onblur="validar_densidad();" >
                                 </td>
                               </tr>
                               <tr>
@@ -446,23 +446,34 @@ include("modal/modal_condicionesMedio.php");
   <script src="../../html/js/preparacion/clock.js"></script>
   <script src="../../assets/plugins/jquery/jquery.number.min.js"></script>
 
-  <script src="../../html/js/global/loadinfo-global.js"></script>
-  <script src="../../html/js/global/despeje.js"></script>
-  <script src="../../html/js/global/tanques.js"></script>
-  <script src="../../html/js/global/condiciones_medio.js"></script>
-  <script src="../../html/js/global/cargarBatch.js"></script>
-  <script src="../../html/js/pesaje/pesajeinfo.js"></script>
+  <!-- <script src="/html/js/global/loadinfo-global.js"></script>
+  <script src="/html/js/global/preguntas.js"></script>
+  <script src="/html/js/global/despeje.js"></script>
+  <script src="/html/js/global/tanques.js"></script>
+  <script src="/html/js/global/condiciones_medio.js"></script>
+  <script src="/html/js/global/cargarBatch.js"></script> 
+  <script src="/html/js/global/incidencias.js"></script>
+  <script src="/html/js/global/etiquetas.js"></script>
+  <script src="/html/js/global/auth.js"></script>
+  <script src="/html/js/global/controller.js"></script>-->
+  <!-- <script src="/html/js/pesaje/pesajeinfo.js"></script> 
+  <script src="/html/js/firmar/firmar1raSeccion.js"></script>
+  <script src="/html/js/firmar/firmar2daSeccion.js"></script>-->
 
-  <script src="../../html/js/firmar/firmar1raSeccion.js"></script>
-  <script src="../../html/js/firmar/firmar2daSeccion.js"></script>
-  <script src="../../html/js/global/equipos.js"></script>
-  <script src="../../html/js/global/etiquetas.js"></script>
-  <script src="../../html/js/global/incidencias.js"></script>
-  <script src="../../html/js/global/requerimiento_ajuste.js"></script>
-  <script src="../../html/js/global/controlEspecificaciones.js"></script>
-  <script src="../../html/js/preparacion/preparacioninfo.js"></script>
-  <script src="../../html/js/global/propiedadesProducto.js"></script>
+  <?php require_once __DIR__ . '/partials/globalScripts.php' ?>
 
+  <script src="/html/js/global/equipos.js"></script>
+  <script src="/html/js/global/requerimiento_ajuste.js"></script>
+  <script src="/html/js/global/controlEspecificaciones.js"></script>
+  <script src="/html/js/global/propiedadesProducto.js"></script>
+  <script src="/html/js/global/validacionesEspecificaciones.js"></script>
+  <script src="/html/js/global/validacionEspecificaciones.js"></script>
+
+  <script src="/html/js/preparacion/instructivo.js"></script>
+  <script src="/html/js/preparacion/validacionesPreparacion.js"></script>
+  <script src="/html/js/preparacion/btnPreparacion.js"></script>
+  <script src="/html/js/preparacion/procesoInstructivo.js"></script>
+  <script src="/html/js/preparacion/preparacioninfo.js"></script>
 
 
 </body>

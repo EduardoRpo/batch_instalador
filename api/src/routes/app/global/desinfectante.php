@@ -12,3 +12,9 @@ $app->get('/desinfectantes', function (Request $request, Response $response, $ar
   $response->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
+
+$app->get('/desinfectantes/{batch}/{module}', function (Request $request, Response $response, $args) use ($desinfectanteDao) {
+  $batch = $desinfectanteDao->findDisinfectantByBatchandModule($args['batch'], $args['module']);
+  $response->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
+});

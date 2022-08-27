@@ -10828,7 +10828,11 @@ div.displayallinfo {
     text-align: center;
 }
 
-.not-active {
+.text-right {
+    text-align: right;
+}
+
+text .not-active {
     cursor: not-allowed;
     pointer-events: none;
 }

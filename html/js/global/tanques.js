@@ -2,9 +2,10 @@ var cantidad = 0
 var tanques = 0
 var tanque = 0
 
-/* tabla de observaciones en la pestaña de informacion del producto */
-
 $(document).ready(function() {
+    /* tabla de observaciones en la pestaña de informacion del producto */
+
+
     $('#txtobservacionesTanques').DataTable({
         scrollY: '120px',
         scrollCollapse: true,
@@ -19,103 +20,106 @@ $(document).ready(function() {
     })
 
     $('.dataTables_length').addClass('bs-select')
-})
 
-/* Carga de tanques para mostrar en los proceso de pesaje, preparacion y aprobacion */
 
-function validarTanques(modulo) {
-    if (modulo == 2 || modulo == 3 || modulo == 4) {
-        let cantidad = 0
-    }
-}
+    /* Carga de tanques para mostrar en los proceso de pesaje, preparacion y aprobacion */
 
-/* Cargar Tanques de acuerdo al batch */
 
-cargarTanques()
-
-function cargarTanques() {
-    $.ajax({
-        method: 'POST',
-        url: '../../html/php/tanques.php',
-        data: { idBatch },
-
-        success: function(data) {
-            if (data == '' || modulo == 5 || modulo == 6) {
-                return false
-            }
-            /* cargar tabla de tanques en info */
-            var info = JSON.parse(data)
-
-            $(`#tanque1`).html(formatoCO(info[0].tanque))
-            $(`#cantidad1`).html(info[0].cantidad)
-            $(`#total1`).html(formatoCO(info[0].tanque * info[0].cantidad))
-
-            /* iniciar proceso para colocar checks de tanques */
-            cantidad = parseInt(info[0].cantidad)
-
-            if (modulo == '2' || modulo == '3') controlProceso(cantidad)
-            else if (modulo == '4') cargaTanquesControl(cantidad)
-        },
-        error: function(r) {
-            alertify.set('notifier', 'position', 'top-right')
-            alertify.error('Error al Cargar los tanques.')
-        },
-    })
-}
-
-/* Mostrar los checkbox de acuerdo con la cantidad de tanques */
-
-function controlProceso(cantidad) {
-    if (cantidad > 10) {
-        cantidad = 10
-    }
-
-    for (var i = 1; i <= cantidad; i++) {
-        $('.chk-control').append(
-            `<input type="checkbox" id="chkcontrolTanques${i}" class="chkcontrol" style="height: 30px; width:30px;" onclick="validar_condicionesMedio();">`,
-        )
-    }
-
-    tanques = i - 1
-}
-
-/* Control de Tanques seleccionados */
-
-function controlTanques() {
-    let count = 0
-    for (let i = 1; i <= tanques; i++) {
-        if ($(`#chkcontrolTanques${i}`).is(':checked')) {
-            let isDisabled = $(`#chkcontrolTanques${i}`).prop('disabled')
-            if (!isDisabled) count++
+    cantidadTanques = async() => {
+        let result
+        try {
+            result = await $.ajax({
+                url: `/html/php/tanques.php`,
+                type: 'POST',
+                data: { idBatch: idBatch }
+            })
+            return result
+        } catch (error) {
+            console.error(error)
         }
     }
 
-    if (count > 1) {
-        alertify.set('notifier', 'position', 'top-right')
-        alertify.error(`Chequee un solo tanque`)
-        count = 0
-        return false
+    cargarTanques = async() => {
+        const data = await cantidadTanques()
+        if (data == '' || modulo == 5 || modulo == 6) {
+            return false
+        }
+        /* cargar tabla de tanques en info */
+        let info = JSON.parse(data)
+
+        tanques = info[0].cantidad
+        sessionStorage.setItem('tanques', info[0].cantidad)
+        tblTanquesInfo(info)
+        await checksTanques(info)
+        modulo == 2 ? tblPesaje() : modulo
     }
 
-    for (let i = 1; i <= tanques; i++) {
-        /* Valida los tanques que ya han sido aprobados */
-        if ($(`#chkcontrolTanques${i}`).is(':disabled')) {
-            for (let j = 1; j <= tanques; j++) {
-                if ($(`#chkcontrolTanques${j}`).is(':disabled')) {
-                    i++
+    tblTanquesInfo = (info) => {
+        $(`#tanque1`).html(formatoCO(info[0].tanque))
+        $(`#cantidad1`).html(info[0].cantidad)
+        $(`#total1`).html(formatoCO(info[0].tanque * info[0].cantidad))
+    }
+
+    checksTanques = (info) => {
+        /* iniciar proceso para colocar checks de tanques */
+        cantidad = parseInt(info[0].cantidad)
+
+        if (modulo == '2' || modulo == '3')
+            controlProceso(cantidad)
+        else if (modulo == '4')
+            cargaTanquesControl(cantidad)
+    }
+
+    /* Mostrar los checkbox de acuerdo con la cantidad de tanques */
+
+    controlProceso = (cantidad) => {
+
+        if (cantidad > 10)
+            cantidad = 10
+
+        for (i = 0; i < cantidad; i++)
+            $('.chk-control').append(`<input type="checkbox" id="chkcontrolTanques${i + 1}" class="chkcontrol" style="height: 30px; width:30px;" onclick="validar_condicionesMedio();">`)
+
+    }
+
+    /* Control de Tanques seleccionados */
+
+    controlTanques = () => {
+        let count = 0
+        for (let i = 0; i < tanques; i++) {
+            if ($(`#chkcontrolTanques${i + 1}`).is(':checked')) {
+                let isDisabled = $(`#chkcontrolTanques${i + 1}`).prop('disabled')
+                if (!isDisabled) count++
+            }
+        }
+
+        if (count > 1) {
+            alertify.set('notifier', 'position', 'top-right')
+            alertify.error(`Chequee un solo tanque`)
+            count = 0
+            return false
+        }
+
+        for (let i = 0; i < tanques; i++) {
+            /* Valida los tanques que ya han sido aprobados */
+            if ($(`#chkcontrolTanques${i + 1}`).is(':disabled')) {
+                for (let j = 0; j < tanques; j++) {
+                    if ($(`#chkcontrolTanques${j + 1}`).is(':disabled')) {
+                        i++
+                    }
                 }
             }
-        }
-        /* Continua el proceso si el tanque va a ser ejecutado */
-        if ($(`#chkcontrolTanques${i}`).is(':checked')) {
-            tanque = i
-            break
-        } else {
-            if (count != 0) {
-                alertify.set('notifier', 'position', 'top-right')
-                alertify.error(`Chequee el Tanque No. ${i}`)
+
+            /* Continua el proceso si el tanque va a ser ejecutado */
+            if ($(`#chkcontrolTanques${i + 1}`).is(':checked')) {
+                return tanque = i + 1
+            } else {
+                if (count != 0) {
+                    alertify.set('notifier', 'position', 'top-right')
+                    alertify.error(`Chequee el Tanque No. ${i}`)
+                }
+                return 0
             }
-            return 0
         }
     }
-}
+});

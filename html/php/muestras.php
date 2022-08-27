@@ -7,23 +7,31 @@ if (!empty($_POST)) {
   $batch = $_POST['idBatch'];
 
   switch ($op) {
-    case 1:
+    case 1: // Guardar el numero de muestras de envasado
       $modulo = $_POST['modulo'];
       $ref_multi = $_POST['ref_multi'];
       $muestras = $_POST['muestras'];
 
-      // Guardar el numero de muestras de envasado
+      $sql = "SELECT * FROM batch_muestras 
+              WHERE referencia = :referencia AND batch = :batch AND modulo = :modulo";
+      $query = $conn->prepare($sql);
+      $query->execute(['referencia' => $ref_multi, 'batch' => $batch, 'modulo' => $modulo]);
+      $rows = $query->rowCount();
 
-      if (count($muestras) > 0) {
-        for ($i = 0; $i < count($muestras); ++$i) {
-          $sql = "INSERT INTO batch_muestras (muestra, modulo, batch, referencia) VALUES (:muestras, :modulo, :batch, :referencia)";
-          $query = $conn->prepare($sql);
-          $result = $query->execute(['muestras' => $muestras[$i], 'modulo' => $modulo, 'batch' => $batch, 'referencia' => $ref_multi]);
+      if ($rows == 0) {
+        if (count($muestras) > 0) {
+          for ($i = 0; $i < count($muestras); ++$i) {
+            $sql = "INSERT INTO batch_muestras (muestra, modulo, batch, referencia) VALUES (:muestras, :modulo, :batch, :referencia)";
+            $query = $conn->prepare($sql);
+            $result = $query->execute(['muestras' => $muestras[$i], 'modulo' => $modulo, 'batch' => $batch, 'referencia' => $ref_multi]);
+          }
         }
-      }
 
-      if ($result) echo "1";
-      else echo "0";
+        if ($result) echo true;
+        else echo false;
+      } else
+        echo true;
+
 
       break;
 
@@ -36,7 +44,7 @@ if (!empty($_POST)) {
       $result = $query->execute(['modulo' => $modulo, 'batch' => $batch, 'ref_multi' => $ref_multi]);
       $data = $query->fetchAll(PDO::FETCH_ASSOC);
 
-      if (empty($data)) echo '3';
+      if (empty($data)) echo false;
       else echo json_encode($data, JSON_UNESCAPED_UNICODE);
 
       break;
@@ -47,41 +55,49 @@ if (!empty($_POST)) {
       $muestras = $_POST['muestras'];
       $cantidad_muestras = count($muestras) / 5;
 
-      // Guardar el numero de muestras de acondicionamiento
-      $ae = 0;
-      $at = 1;
-      $ce = 2;
-      $pp = 3;
-      $rc = 4;
+      $sql = "SELECT * FROM batch_muestras_acondicionamiento 
+              WHERE referencia = :referencia AND batch = :batch AND modulo = :modulo";
+      $query = $conn->prepare($sql);
+      $query->execute(['referencia' => $ref_multi, 'batch' => $batch, 'modulo' => $modulo]);
+      $rows = $query->rowCount();
 
-      if (count($muestras) > 0) {
-        for ($i = 1; $i <= $cantidad_muestras; ++$i) {
-          $sql = "INSERT INTO batch_muestras_acondicionamiento 
-          (apariencia_etiquetas, apariencia_termoencogible, cumplimiento_empaque,	
-          posicion_producto, rotulo_caja,	batch,	modulo,	referencia)
-          VALUES (:apariencia_etiquetas, :apariencia_termoencogible	,:cumplimiento_empaque,	
-          :posicion_producto, :rotulo_caja,	:batch,	:modulo,	:referencia)";
-          $query = $conn->prepare($sql);
-          $result = $query->execute([
-            'apariencia_etiquetas' => $muestras[$ae],
-            'apariencia_termoencogible' => $muestras[$at],
-            'cumplimiento_empaque' => $muestras[$ce],
-            'posicion_producto' => $muestras[$pp],
-            'rotulo_caja' => $muestras[$rc],
-            'modulo' => $modulo,
-            'batch' => $batch,
-            'referencia' => $ref_multi,
-          ]);
-          $ae += 5;
-          $at += 5;
-          $ce += 5;
-          $pp += 5;
-          $rc += 5;
+      if ($rows == 0) {
+        // Guardar el numero de muestras de acondicionamiento
+        $ae = 0;
+        $at = 1;
+        $ce = 2;
+        $pp = 3;
+        $rc = 4;
+
+        if (count($muestras) > 0) {
+          for ($i = 1; $i <= $cantidad_muestras; ++$i) {
+            $sql = "INSERT INTO batch_muestras_acondicionamiento 
+                              (apariencia_etiquetas, apariencia_termoencogible, cumplimiento_empaque,	
+                              posicion_producto, rotulo_caja,	batch,	modulo,	referencia)
+                  VALUES (:apariencia_etiquetas, :apariencia_termoencogible	,:cumplimiento_empaque,	
+                          :posicion_producto, :rotulo_caja,	:batch,	:modulo,	:referencia)";
+            $query = $conn->prepare($sql);
+            $result = $query->execute([
+              'apariencia_etiquetas' => $muestras[$ae],
+              'apariencia_termoencogible' => $muestras[$at],
+              'cumplimiento_empaque' => $muestras[$ce],
+              'posicion_producto' => $muestras[$pp],
+              'rotulo_caja' => $muestras[$rc],
+              'modulo' => $modulo,
+              'batch' => $batch,
+              'referencia' => $ref_multi,
+            ]);
+            $ae += 5;
+            $at += 5;
+            $ce += 5;
+            $pp += 5;
+            $rc += 5;
+          }
         }
-      }
 
-      if ($result) echo "1";
-      else echo "0";
+        if ($result) echo true;
+        else echo false;
+      } else echo true;
 
       break;
 

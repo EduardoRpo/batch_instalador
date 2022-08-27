@@ -19,7 +19,7 @@ class DataSelectorDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
-    public function findSelectorModules($tbl)
+    public function findData($tbl)
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("SELECT * FROM $tbl");
@@ -30,7 +30,7 @@ class DataSelectorDao
         return $selectorData;
     }
     
-    public function findSelectorPositions($tbl)
+    /* public function findSelectorModules($tbl)
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("SELECT * FROM $tbl");
@@ -39,5 +39,16 @@ class DataSelectorDao
         $selectorData = $stmt->fetchAll($connection::FETCH_ASSOC);
         $this->logger->notice("Data Selector", array('selector' => $selectorData));
         return $selectorData;
-    }
+    } */
+    
+   /*  public function findSelectorPositions($tbl)
+    {
+        $connection = Connection::getInstance()->getConnection();
+        $stmt = $connection->prepare("SELECT * FROM $tbl");
+        $stmt->execute();
+        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        $selectorData = $stmt->fetchAll($connection::FETCH_ASSOC);
+        $this->logger->notice("Data Selector", array('selector' => $selectorData));
+        return $selectorData;
+    } */
 }

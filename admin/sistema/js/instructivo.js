@@ -146,8 +146,8 @@ function guardarInstructivo() {
 
     $.ajax({
         type: "POST",
-        url: "php/c_instructivo.php",
-        data: { operacion: 4, editar, referencia, id, actividad, tiempo },
+        url: "/api/saveInstructivos",
+        data: {editar, referencia, id, actividad, tiempo },
 
         success: function(r) {
             if (r == 1) {

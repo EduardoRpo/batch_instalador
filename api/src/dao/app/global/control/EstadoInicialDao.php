@@ -36,11 +36,11 @@ class EstadoInicialDao
 
 
         /* si el instructivo no existe valida que exista el instructivo en Bases*/
-        if ($resultPreparacionInstructivos == 0) {
+       /*  if ($resultPreparacionInstructivos == 0) {
             $stmt = $connection->prepare("SELECT instructivo FROM producto WHERE referencia = :referencia");
             $stmt->execute(['referencia' => $referencia]);
             $resultPreparacionInstructivos = $stmt->rowCount();
-        }
+        } */
 
         /* consolida resultados */
         $result = $resultFormula * $resultPreparacionInstructivos;

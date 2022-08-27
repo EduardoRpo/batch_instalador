@@ -131,7 +131,10 @@
   <script src="../assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script><!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
   <!-- <script src="../assets/demo/demo.js"></script> -->
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-  <script src="js/instructivo.js"></script>
+  <!-- <script src="js/instructivo.js"></script> -->
+  <script src="js/productos//Instructives//Instructives//tblinstructive.js"></script>
+  <script src="js/productos//Instructives//Instructives//instructive.js"></script>
+  <script src="js//global//notifications.js"></script>
   <script src="js/menu.js"></script>
   <script src="js/cargarDatos.js"></script>
   <script src="js/menu_instructivos.js"></script>

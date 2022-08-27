@@ -22,11 +22,46 @@ $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 // Define app routes
 
 /* Admin */
+require_once __DIR__ . '/src/routes/admin/generalParameters/tanks.php';
+require_once __DIR__ . '/src/routes/admin/generalParameters/lineClearance.php';
 require_once __DIR__ . '/src/routes/admin/generalParameters/questions.php';
 require_once __DIR__ . '/src/routes/admin/generalParameters/modules.php';
 require_once __DIR__ . '/src/routes/admin/generalParameters/conditions.php';
 require_once __DIR__ . '/src/routes/admin/generalParameters/disinfectant.php';
 require_once __DIR__ . '/src/routes/admin/generalParameters/equipments.php';
+
+require_once __DIR__ . '/src/routes/admin/productos/generales/nombresProductos.php';
+require_once __DIR__ . '/src/routes/admin/productos/generales/notifiSanitaria.php';
+require_once __DIR__ . '/src/routes/admin/productos/Generales/linea.php';
+require_once __DIR__ . '/src/routes/admin/productos/Generales/marca.php';
+require_once __DIR__ . '/src/routes/admin/productos/Generales/propietario.php';
+require_once __DIR__ . '/src/routes/admin/productos/Generales/presentaciones.php';
+
+require_once __DIR__ . '/src/routes/admin/productos/propiedadesFisicoquimicas/Apariencia.php';
+require_once __DIR__ . '/src/routes/admin/productos/propiedadesFisicoquimicas/Color.php';
+require_once __DIR__ . '/src/routes/admin/productos/propiedadesFisicoquimicas/Olor.php';
+require_once __DIR__ . '/src/routes/admin/productos/propiedadesFisicoquimicas/Densidad.php';
+require_once __DIR__ . '/src/routes/admin/productos/propiedadesFisicoquimicas/GradoAlcohol.php';
+require_once __DIR__ . '/src/routes/admin/productos/propiedadesFisicoquimicas/ph.php';
+require_once __DIR__ . '/src/routes/admin/productos/propiedadesFisicoquimicas/untuosidad.php';
+require_once __DIR__ . '/src/routes/admin/productos/propiedadesFisicoquimicas/Viscosidad.php';
+require_once __DIR__ . '/src/routes/admin/productos/propiedadesFisicoquimicas/PoderEspumoso.php';
+
+require_once __DIR__ . '/src/routes/admin/productos/PropiedadesMicrobiologicas/recuento.php';
+require_once __DIR__ . '/src/routes/admin/productos/PropiedadesMicrobiologicas/pseudomona.php';
+require_once __DIR__ . '/src/routes/admin/productos/PropiedadesMicrobiologicas/escherichia.php';
+require_once __DIR__ . '/src/routes/admin/productos/PropiedadesMicrobiologicas/staphylococcus.php';
+
+require_once __DIR__ . '/src/routes/admin/productos/Packaging/tapa.php';
+require_once __DIR__ . '/src/routes/admin/productos/Packaging/envases.php';
+require_once __DIR__ . '/src/routes/admin/productos/Packaging/etiqueta.php';
+require_once __DIR__ . '/src/routes/admin/productos/Packaging/caja.php';
+require_once __DIR__ . '/src/routes/admin/productos/Packaging/otros.php';
+
+require_once __DIR__ . '/src/routes/admin/productos/RawMaterial/materiaPrima.php';
+require_once __DIR__ . '/src/routes/admin/productos/formulas/formulas.php';
+
+require_once __DIR__ . '/src/routes/admin/productos/instructive/baseInstructive.php';
 
 require_once __DIR__ . '/src/routes/admin/productos/multiP.php';
 require_once __DIR__ . '/src/routes/admin/productos/productos.php';
@@ -35,6 +70,9 @@ require_once __DIR__ . '/src/routes/admin/pdf/certificados.php';
 require_once __DIR__ . '/src/routes/admin/pdf/versiones.php';
 
 require_once __DIR__ . '/src/routes/admin/global/selector.php';
+
+require_once __DIR__ . '/src/routes/admin/usuarios/usuarios.php';
+require_once __DIR__ . '/src/routes/admin/usuarios/cargos.php';
 
 /* App */
 
@@ -68,6 +106,7 @@ require_once __DIR__ . '/src/routes/app/global/desinfectante.php';
 require_once __DIR__ . '/src/routes/app/global/materias_primas.php';
 require_once __DIR__ . '/src/routes/app/global/etiquetas.php';
 require_once __DIR__ . '/src/routes/app/global/autenticacion.php';
+require_once __DIR__ . '/src/routes/app/global/validacionesCierre.php';
 
 //Pesaje
 require_once __DIR__ . '/src/routes/app/pesaje/cargos.php';
@@ -77,6 +116,7 @@ require_once __DIR__ . '/src/routes/app/pesaje/pesaje.php';
 
 //envasado
 require_once __DIR__ . '/src/routes/app/envasado/envasado.php';
+require_once __DIR__ . '/src/routes/app/envasado/entregasParciales.php';
 require_once __DIR__ . '/src/routes/app/envasado/equipos.php';
 
 //Explosion de Materiales
@@ -85,9 +125,14 @@ require_once __DIR__ . '/src/routes/app/explosionMateriales/pedidos.php';
 
 /* pdf */
 require_once __DIR__ . '/src/routes/app/pdf/pdf.php';
+require_once __DIR__ . '/src/routes/app/pdf/exportDataBatch.php';
 
+/* Microbiologia */
+require_once __DIR__ . '/src/routes/app/process/micro/micro.php';
 
-require_once __DIR__ . '/src/routes/app/usuarios/usuarios.php';
+/* Users */
+//require_once __DIR__ . '/src/routes/app/usuarios/usuarios.php';
+
 
 
 // Run app

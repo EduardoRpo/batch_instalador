@@ -101,21 +101,21 @@ include('modal/modal_condicionesMedio.php');
                     <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:80%; height: 30px;">
                       <thead>
                         <tr>
-                          <th class="centrado">Tanque</th>
-                          <th class="centrado">Cantidad</th>
-                          <th class="centrado">Total</th>
+                          <th class="centrado">Tamaño Tanque (Kg)</th>
+                          <th class="centrado">Cantidad Tanques</th>
+                          <!-- <th class="centrado">Total</th> -->
                         </tr>
                       </thead>
                       <tbody>
                         <tr id="fila1">
                           <td class="centrado" id="tanque1"></td>
                           <td class="centrado" id="cantidad1"></td>
-                          <td class="centrado" id="total1"></td>
+                          <!-- <td class="centrado" id="total1"></td> -->
                         </tr>
                         <tr id="fila2">
                           <td class="centrado" id="tanque2"></td>
                           <td class="centrado" id="cantidad2"></td>
-                          <td class="centrado" id="total2"></td>
+                          <!-- <td class="centrado" id="total2"></td> -->
                         </tr>
                       </tbody>
                     </table>
@@ -233,13 +233,13 @@ include('modal/modal_condicionesMedio.php');
                             <tr>
                               <td>PH</td>
                               <td id="espec_ph"></td>
-                              <td><input type="number" id="in_ph" class="selectpicker form-control ph especificacionInput" onkeyup="validar_ph();">
+                              <td><input type="number" id="in_ph" class="selectpicker form-control ph especificacionInput" onblur="validar_ph();">
                               </td>
                             </tr>
                             <tr>
                               <td>Viscocidad CPS </td>
                               <td id="espec_viscidad"></td>
-                              <td><input type="number" class="selectpicker form-control especificacionInput" id="in_viscocidad" onkeyup="validar_viscosidad();">
+                              <td><input type="number" class="selectpicker form-control especificacionInput" id="in_viscocidad" onblur="validar_viscosidad();">
                               </td>
                             </tr>
                             <tr>
@@ -247,7 +247,7 @@ include('modal/modal_condicionesMedio.php');
                                 <!-- <input type="text" class="form-control" style="width: 60px;" readonly> -->
                               </td>
                               <td id="espec_densidad"></td>
-                              <td><input class="selectpicker form-control" type="number" id="in_densidad" onkeyup="validar_densidad();"></td>
+                              <td><input class="selectpicker form-control" type="number" id="in_densidad" onblur="validar_densidad();"></td>
                             </tr>
                             <tr>
                               <td>Untuosidad</td>
@@ -343,20 +343,31 @@ include('modal/modal_condicionesMedio.php');
   <script src="../../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
   <script src="../../html/js/utils/custom.min.js"></script>
-  <script src="../../html/js/global/loadinfo-global.js"></script>
-  <script src="../../html/js/global/despeje.js"></script>
-  <script src="../../html/js/aprobacion/aprobacioninfo.js"></script>
-  <script src="../../html/js/firmar/firmar1raSeccion.js"></script>
-  <script src="../../html/js/firmar/firmar2daSeccion.js"></script>
-  <script src="../../html/js/global/incidencias.js"></script>
-  <script src="../../html/js/global/requerimiento_ajuste.js"></script>
-  <script src="../../html/js/global/condiciones_medio.js"></script>
-  <script src="../../html/js/global/cargarBatchAprobacion.js"></script>
-  <script src="../../html/js/global/controlEspecificaciones.js"></script>
-  <script src="../../html/js/global/tanques.js"></script>
-  <script src="../../html/js/global/propiedadesProducto.js"></script>
-  <script src="../../html/js/global/etiquetas.js"></script>
-  <script src="../../html/js/global/validacionEspecificaciones.js"></script>
+  
+  <script src="/html/js/global/despeje.js"></script>
+  <script src="/html/js/global/loadinfo-global.js"></script>
+  <script src="/html/js/global/incidencias.js"></script>
+  <script src="/html/js/global/requerimiento_ajuste.js"></script>
+  <script src="/html/js/global/condiciones_medio.js"></script>
+  <script src="/html/js/global/controlEspecificaciones.js"></script>
+  <script src="/html/js/global/tanques.js"></script>
+  <script src="/html/js/global/propiedadesProducto.js"></script>
+  <script src="/html/js/global/etiquetas.js"></script>
+  <script src="/html/js/global/validacionesAuth.js"></script>
+  <script src="/html/js/global/auth.js"></script>
+  <script src="/html/js/global/controller.js"></script>
+  <script src="/html/js/global/validacionEspecificaciones.js"></script>
+  <script src="/html/js/global/validacionesEspecificaciones.js"></script>
+  
+  <script src="/html/js/firmar/firmar1raSeccion.js"></script>
+  <script src="/html/js/firmar/firmar2daSeccion.js"></script>
+  
+  <script src="/html/js/aprobacion/cargarBatchAprobacion.js"></script>
+  <script src="/html/js/aprobacion/aprobacioninfo.js"></script>
+  <script src="/html/js/aprobacion/validacionesAprobacion.js"></script>
+  <script src="/html/js/aprobacion/btnAprobacion.js"></script>
+  <script src="/html/js/aprobacion/tanquesAprob.js"></script>
+  <script src="/html/js/aprobacion/densidad.js"></script>
 
 </body>
 

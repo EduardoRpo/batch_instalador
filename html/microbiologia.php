@@ -75,11 +75,12 @@ sesiones(8);
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/js/all.min.js"></script>
   <script src="html/js/utils/sidebarmenu.js"></script>
   <script src="assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
-  <script src="html/js/utils/global.js"></script>
-  <script src="html/js/utils/custom.min.js"></script>
-  <script src="html/js/utils/datatables.js"></script>
-  <script src="html/js/microbiologia/microbiologia.js"></script>
-  <script src="../../html/js/global/incidencias.js"></script>
+  <script src="/html/js/utils/global.js"></script>
+  <script src="/html/js/utils/custom.min.js"></script>
+  <script src="/html/js/utils/datatables.js"></script>
+    
+  <script src="/html/js/microbiologia/microbiologia.js"></script>
+  <script src="/html/js/global/incidencias.js"></script>
 
 </body>
 

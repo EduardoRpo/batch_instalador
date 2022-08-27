@@ -31,12 +31,12 @@ $app->post('/saveModules', function (Request $request, Response $response, $args
     $modules = $modulesDao->updateModules($dataModules);
 
     if ($modules == null)
-      $resp = array('success' => true, 'message' => 'Modulo almacenado correctamente');
+      $resp = array('success' => true, 'message' => 'Modulo actualizado correctamente');
   } else {
     $modules = $modulesDao->saveModules($dataModules);
 
     if ($modules == null)
-      $resp = array('success' => true, 'message' => 'Modulo actualizado correctamente');
+      $resp = array('success' => true, 'message' => 'Modulo almacenado correctamente');
   }
 
   $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));

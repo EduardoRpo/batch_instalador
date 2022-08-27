@@ -8,7 +8,7 @@ $op = $_POST['operacion'];
 
 switch ($op) {
     case 1: //listar referencias Productos
-       /*  $query = "SELECT p.referencia FROM producto p";
+        /*  $query = "SELECT p.referencia FROM producto p";
         ejecutarQuerySelect($conn, $query); */
         break;
 
@@ -67,9 +67,10 @@ switch ($op) {
                 $sql = "INSERT INTO instructivo_preparacion (pasos, tiempo, id_producto) VALUES (:proceso, :tiempo, :referencia )";
                 $query = $conn->prepare($sql);
                 $result = $query->execute(['proceso' => $actividad, 'tiempo' => $tiempo, 'referencia' => $referencia]);
-                if ($rows == 0) {
+                if ($result) {
                     $result = estadoInicial1($conn, $referencia, $fechaprogramacion = "");
-                    $result = ActualizarBatch($conn, $result, $referencia);
+                    if ($result['estado'] < 3)
+                        $result = ActualizarBatch($conn, $result, $referencia);
                 }
             }
             if ($result) echo '1';

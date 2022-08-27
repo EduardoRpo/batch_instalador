@@ -211,7 +211,7 @@ include('modal/image.php')
           </div>
 
           <div class="card" id="envasado1">
-            <div class="card-header" id="headingThree">
+            <div class="card-header multiLinea1" id="headingThree">
               <h5 class="mb-0">
                 <button class="btn btn-link collapsed ref_multi1" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
                   <b id="envasadoMulti1" class="img_ref">ENVASADO</b>
@@ -240,19 +240,19 @@ include('modal/image.php')
                             </thead>
                             <tbody>
                               <tr>
-                                <td id="envase1" class="centrado envase1"></td>
-                                <td id="descripcion_envase1" class="descripcion_envase1"></td>
-                                <td id="unidades2" class="centrado unidades1"></td>
+                                <td id="envaseReferencia1" class="centrado envaseReferencia1"></td>
+                                <td id="envaseDescripcion1" class="envaseDescripcion1"></td>
+                                <td id="envaseUnidades1" class="centrado envaseUnidades1"></td>
                               </tr>
                               <tr>
-                                <td id="tapa1" class="centrado tapa1"></td>
-                                <td id="descripcion_tapa1" class="descripcion_tapa1"></td>
-                                <td id="unidades1" class="centrado unidades1"></td>
+                                <td id="tapaReferencia1" class="centrado tapaReferencia1"></td>
+                                <td id="tapaDescripcion1" class="tapaDescripcion1"></td>
+                                <td id="tapaUnidades1" class="centrado tapaUnidades1"></td>
                               </tr>
                               <tr>
-                                <td id="etiqueta1" class="centrado etiqueta1"></td>
-                                <td id="descripcion_etiqueta1" class="descripcion_etiqueta1"></td>
-                                <td id="unidades3" class="centrado unidades1"></td>
+                                <td id="etiquetaReferencia1" class="centrado etiquetaReferencia1"></td>
+                                <td id="etiquetaDescripcion1" class="etiquetaDescripcion1"></td>
+                                <td id="etiquetaUnidades1" class="centrado etiquetaUnidades1"></td>
                               </tr>
                             </tbody>
                           </table>
@@ -377,30 +377,30 @@ include('modal/image.php')
                                 </thead>
                                 <tbody>
                                   <tr>
-                                    <td id="envase1" class="envase1 refEmpaque1 centrado"></td>
-                                    <td id="descripcion_envase1" class="descripcion_envase1" style="vertical-align: middle;"></td>
-                                    <td id="unidades5" class="centrado unidades1 centrado"></td>
-                                    <td><input type="number" id="envaseEnvasada1" min="1" class="form-control centrado envasada1" style="width: 110px;" onkeyup="devolucionMaterialEnvasada(this.value);"></td>
-                                    <td><input type="number" id="envaseAverias1" min="1" class="form-control centrado averias1" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td><input type="number" id="envaseSobrante1" min="1" class="form-control centrado sobrante1" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td id="envaseReferencia1" class="envaseReferencia1 centrado"></td>
+                                    <td id="envaseDescripcion1" class="envaseDescripcion1" style="vertical-align: middle;"></td>
+                                    <td id="envaseUnidades1" class="centrado centrado envaseUnidades1"></td>
+                                    <td><input type="number" id="envaseEnvasada1" min="1" class="form-control centrado envaseEnvasada1" style="width: 110px;" onkeyup="devolucionMaterialEnvasada(this.value);"></td>
+                                    <td><input type="number" id="envaseAverias1" min="1" class="form-control centrado envaseAverias1 averias1" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td><input type="number" id="envaseSobrante1" min="1" class="form-control centrado envaseSobrante1 sobrante1" style="width: 110px;" onkeyup="recalcular_valores();"></td>
                                     <td id="envaseDevolucion1" class="centrado"></td>
                                   </tr>
                                   <tr>
-                                    <td id="tapa1" class="tapa1 refEmpaque2 centrado"></td>
-                                    <td id="descripcion_tapa1" class="descripcion_tapa1" style="vertical-align: middle;"></td>
-                                    <td id="unidades6" class="centrado unidades1 centrado"></td>
-                                    <td id="tapaEnvasada1" class="centrado envasada1"></td>
-                                    <td><input type="number" id="tapaAverias1" min="1" class="form-control centrado averias2" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td><input type="number" id="tapaSobrante1" min="1" class="form-control centrado sobrante2" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td id="tapaReferencia1" class="tapaReferencia1 centrado"></td>
+                                    <td id="tapaDescripcion1" class="tapaDescripcion1" style="vertical-align: middle;"></td>
+                                    <td id="tapaUnidades1" class="centrado centrado tapaUnidades1"></td>
+                                    <td id="tapaEnvasada1" class="centrado tapaEnvasada1"></td>
+                                    <td><input type="number" id="tapaAverias1" min="1" class="form-control centrado tapaAverias1 averias1" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td><input type="number" id="tapaSobrante1" min="1" class="form-control centrado tapaSobrante1 sobrante1" style="width: 110px;" onkeyup="recalcular_valores();"></td>
                                     <td id="tapaDevolucion1" class="centrado"></td>
                                   </tr>
                                   <tr>
-                                    <td id="etiqueta1" class="etiqueta1 refEmpaque3 centrado"></td>
-                                    <td id="descripcion_etiqueta1" class="descripcion_etiqueta1" style="vertical-align: middle;"></td>
-                                    <td id="unidades7" class="centrado unidades1"></td>
-                                    <td id="etiquetaEnvasada1" class="centrado envasada1"></td>
-                                    <td><input type="number" id="etiquetaAverias1" min="1" class="form-control centrado averias3" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td><input type="number" id="etiquetaSobrante1" min="1" class="form-control centrado sobrante3" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td id="etiquetaReferencia1" class="etiquetaReferencia1 centrado"></td>
+                                    <td id="etiquetaDescripcion1" class="etiquetaDescripcion1" style="vertical-align: middle;"></td>
+                                    <td id="etiquetaUnidades1" class="centrado etiquetaUnidades1"></td>
+                                    <td id="etiquetaEnvasada1" class="centrado etiquetaEnvasada1"></td>
+                                    <td><input type="number" id="etiquetaAverias1" min="1" class="form-control centrado etiquetaAverias1 averias1" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td><input type="number" id="etiquetaSobrante1" min="1" class="form-control centrado etiquetaSobrante1 sobrante1" style="width: 110px;" onkeyup="recalcular_valores();"></td>
                                     <td id="etiquetaDevolucion1" class="centrado"></td>
                                   </tr>
 
@@ -438,7 +438,7 @@ include('modal/image.php')
           </div>
 
           <div class="card" id="envasado2">
-            <div class="card-header" id="headingThree">
+            <div class="card-header multiLinea2" id="headingThree">
               <h5 class="mb-0">
                 <button class="btn btn-link collapsed img_ref ref_multi2" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
                   <b id="envasadoMulti2" class="img_ref">ENVASADO</b>
@@ -467,19 +467,19 @@ include('modal/image.php')
                             </thead>
                             <tbody>
                               <tr>
-                                <td id="envase2" class="centrado envase2"></td>
-                                <td id="descripcion_envase2" class="descripcion_envase2"></td>
-                                <td id="unidades2" class="centrado unidades2"></td>
+                                <td id="envaseReferencia2" class="centrado envaseReferencia2"></td>
+                                <td id="envaseDescripcion2" class="envaseDescripcion2"></td>
+                                <td id="envaseUnidades2" class="centrado envaseUnidades2"></td>
                               </tr>
                               <tr>
-                                <td id="tapa2" class="centrado tapa2"></td>
-                                <td id="descripcion_tapa2" class="descripcion_tapa2"></td>
-                                <td id="unidades1" class="centrado unidades2"></td>
+                                <td id="tapaReferencia2" class="centrado tapaReferencia2"></td>
+                                <td id="tapaDescripcion2" class="tapaDescripcion2"></td>
+                                <td id="tapaUnidades2" class="centrado tapaUnidades2"></td>
                               </tr>
                               <tr>
-                                <td id="etiqueta2" class="centrado etiqueta2"></td>
-                                <td id="descripcion_etiqueta2" class="descripcion_etiqueta2"></td>
-                                <td id="unidades3" class="centrado unidades2"></td>
+                                <td id="etiquetaReferencia2" class="centrado etiquetaReferencia2"></td>
+                                <td id="etiquetaDescripcion2" class="etiquetaDescripcion2"></td>
+                                <td id="etiquetaUnidades2" class="centrado etiquetaUnidades2"></td>
                               </tr>
                           </table>
                           </form>
@@ -609,30 +609,30 @@ include('modal/image.php')
                                 </thead>
                                 <tbody>
                                   <tr>
-                                    <td id="envase2" class="envase2 refEmpaque4 centrado"></td>
-                                    <td id="descripcion_envase2" class="descripcion_envase2" style="vertical-align: middle;"></td>
-                                    <td id="unidades5" class="centrado unidades2"></td>
-                                    <td><input type="number" id="envaseEnvasada2" min="1" class="form-control centrado envasada4" style="width: 110px;" onkeyup="devolucionMaterialEnvasada(this.value);"></td>
-                                    <td><input type="number" id="envaseAverias2" min="1" class="form-control centrado averias4" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td><input type="number" id="envaseSobrante2" min="1" class="form-control centrado sobrante4" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td id="envaseReferencia2" class="envaseReferencia2 centrado"></td>
+                                    <td id="envaseDescripcion2" class="envaseDescripcion2" style="vertical-align: middle;"></td>
+                                    <td id="envaseUnidades2" class="centrado envaseUnidades2"></td>
+                                    <td><input type="number" id="envaseEnvasada2" min="1" class="form-control centrado envaseEnvasada2" style="width: 110px;" onkeyup="devolucionMaterialEnvasada(this.value);"></td>
+                                    <td><input type="number" id="envaseAverias2" min="1" class="form-control centrado envaseAverias2 averias2" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td><input type="number" id="envaseSobrante2" min="1" class="form-control centrado envaseSobrante2 sobrante2" style="width: 110px;" onkeyup="recalcular_valores();"></td>
                                     <td id="envaseDevolucion2" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
                                   </tr>
                                   <tr>
-                                    <td id="tapa2" class="tapa2 refEmpaque5 centrado"></td>
-                                    <td id="descripcion_tapa2" class="descripcion_tapa2" style="vertical-align: middle;"></td>
-                                    <td id="unidades6" class="centrado unidades2"></td>
-                                    <td id="tapaEnvasada2" class="centrado envasada2"></td>
-                                    <td><input type="number" id="tapaAverias2" min="1" class="form-control centrado averias5" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td><input type="number" id="tapaSobrante2" min="1" class="form-control centrado sobrante5" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td id="tapaReferencia2" class="tapaReferencia2 centrado"></td>
+                                    <td id="tapaDescripcion2" class="tapaDescripcion2" style="vertical-align: middle;"></td>
+                                    <td id="tapaUnidades2" class="centrado tapaUnidades2"></td>
+                                    <td id="tapaEnvasada2" class="centrado tapaEnvasada2"></td>
+                                    <td><input type="number" id="tapaAverias2" min="1" class="form-control centrado tapaAverias2 averias2" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td><input type="number" id="tapaSobrante2" min="1" class="form-control centrado tapaSobrante2 sobrante2" style="width: 110px;" onkeyup="recalcular_valores();"></td>
                                     <td id="tapaDevolucion2" class="centrado"></td><!-- <input type="number" id="totalDevolucion1" class="form-control centrado" readonly> -->
                                   </tr>
                                   <tr>
-                                    <td id="etiqueta2" class="etiqueta2 refEmpaque6 centrado"></td>
-                                    <td id="descripcion_etiqueta2" class="descripcion_etiqueta2" style="vertical-align: middle;"></td>
-                                    <td id="unidades7" class="centrado unidades2"></td>
-                                    <td id="etiquetaEnvasada2" class="centrado envasada2"></td>
-                                    <td><input type="number" id="etiquetaAverias2" min="1" class="form-control centrado averias6" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td><input type="number" id="etiquetaSobrante2" min="1" class="form-control centrado sobrante6" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td id="etiquetaReferencia2" class="etiquetaReferencia2 centrado"></td>
+                                    <td id="etiquetaDescripcion2" class="etiquetaDescripcion2" style="vertical-align: middle;"></td>
+                                    <td id="etiquetaUnidades2" class="centrado etiquetaUnidades2"></td>
+                                    <td id="etiquetaEnvasada2" class="centrado etiquetaEnvasada2"></td>
+                                    <td><input type="number" id="etiquetaAverias2" min="1" class="form-control centrado etiquetaAverias2 averias2" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td><input type="number" id="etiquetaSobrante2" min="1" class="form-control centrado etiquetaSobrante2 sobrante2" style="width: 110px;" onkeyup="recalcular_valores();"></td>
                                     <td id="etiquetaDevolucion2" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
                                   </tr>
 
@@ -670,7 +670,7 @@ include('modal/image.php')
           </div>
 
           <div class="card" id="envasado3">
-            <div class="card-header" id="headingFive">
+            <div class="card-header multiLinea3" id="headingFive">
               <h5 class="mb-0">
                 <button id="ref_multi1" class="btn btn-link collapsed img_ref ref_multi3" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
                   <b id="envasadoMulti3" class="img_ref">ENVASADO</b>
@@ -699,19 +699,19 @@ include('modal/image.php')
                             </thead>
                             <tbody>
                               <tr>
-                                <td id="envase3" class="centrado envase3"></td>
-                                <td id="descripcion_envase3" class="descripcion_envase3"></td>
-                                <td id="unidades2" class="centrado unidades3"></td>
+                                <td id="envaseReferencia3" class="centrado envaseReferencia3"></td>
+                                <td id="envaseDescripcion3" class="envaseDescripcion3"></td>
+                                <td id="envaseUnidades3" class="centrado envaseUnidades3"></td>
                               </tr>
                               <tr>
-                                <td id="tapa3" class="centrado tapa3"></td>
-                                <td id="descripcion_tapa1" class="descripcion_tapa3"></td>
-                                <td id="unidades1" class="centrado unidades3"></td>
+                                <td id="tapaReferencia3" class="centrado tapaReferencia3"></td>
+                                <td id="tapaDescripcion3" class="tapaDescripcion3"></td>
+                                <td id="tapaUnidades3" class="centrado unidades3 unidadesTapa3"></td>
                               </tr>
                               <tr>
-                                <td id="etiqueta3" class="centrado etiqueta3"></td>
-                                <td id="descripcion_etiqueta3" class="descripcion_etiqueta3"></td>
-                                <td id="unidades3" class="centrado unidades3"></td>
+                                <td id="etiquetaReferencia3" class="centrado etiquetaReferencia3"></td>
+                                <td id="etiquetaDescripcion3" class="etiquetaDescripcion3"></td>
+                                <td id="etiquetaUnidades3" class="centrado etiquetaUnidades3"></td>
                               </tr>
                           </table>
                           </form>
@@ -838,30 +838,30 @@ include('modal/image.php')
                                 </thead>
                                 <tbody>
                                   <tr>
-                                    <td id="envase3" class="envase3 refEmpaque7 centrado"></td>
-                                    <td id="descripcion_envase3" class="descripcion_envase3" style="vertical-align: middle;"></td>
-                                    <td id="unidades5" class="centrado unidades3"></td>
-                                    <td><input type="number" id="envaseEnvasada3" min="1" class="form-control centrado envasada7" style="width: 110px;" onkeyup="devolucionMaterialEnvasada(this.value);"></td>
-                                    <td><input type="number" id="envaseAverias3" min="1" class="form-control centrado averias7" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td><input type="number" id="envaseSobrante3" min="1" class="form-control centrado sobrante7" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td id="envaseReferencia3" class="envaseReferencia3 centrado"></td>
+                                    <td id="envaseDescripcion3" class="envaseDescripcion3" style="vertical-align: middle;"></td>
+                                    <td id="envaseUnidades3" class="centrado envaseUnidades3"></td>
+                                    <td><input type="number" id="envaseEnvasada3" min="1" class="form-control centrado envaseEnvasada3" style="width: 110px;" onkeyup="devolucionMaterialEnvasada(this.value);"></td>
+                                    <td><input type="number" id="envaseAverias3" min="1" class="form-control centrado envaseAverias3 averias3" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td><input type="number" id="envaseSobrante3" min="1" class="form-control centrado envaseSobrante3 sobrante3" style="width: 110px;" onkeyup="recalcular_valores();"></td>
                                     <td id="envaseDevolucion3" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
                                   </tr>
                                   <tr>
-                                    <td id="tapa3" class="tapa3 refEmpaque8 centrado"></td>
-                                    <td id="descripcion_tapa3" class="descripcion_tapa3" style="vertical-align: middle;"></td>
-                                    <td id="unidades6" class="centrado unidades3"></td>
+                                    <td id="tapaReferencia3" class="tapaReferencia3 centrado"></td>
+                                    <td id="tapaDescripcion3" class="tapaDescripcion3" style="vertical-align: middle;"></td>
+                                    <td id="tapaUnidades3" class="centrado tapaUnidades3"></td>
                                     <td id="tapaEnvasada3" class="centrado envasada3"></td>
-                                    <td><input type="number" id="tapaAverias3" min="1" class="form-control centrado averias8" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td><input type="number" id="tapaSobrante3" min="1" class="form-control centrado sobrante8" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td><input type="number" id="tapaAverias3" min="1" class="form-control centrado tapaAverias3 averias3" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td><input type="number" id="tapaSobrante3" min="1" class="form-control centrado tapaSobrante3 sobrante3" style="width: 110px;" onkeyup="recalcular_valores();"></td>
                                     <td id="tapaDevolucion3" class="centrado"></td><!-- <input type="number" id="totalDevolucion1" class="form-control centrado" readonly> -->
                                   </tr>
                                   <tr>
-                                    <td id="etiqueta3" class="etiqueta3 refEmpaque9 centrado"></td>
-                                    <td id="descripcion_etiqueta3" class="descripcion_etiqueta3" style="vertical-align: middle;"></td>
-                                    <td id="unidades7" class="centrado unidades3"></td>
-                                    <td id="etiquetaEnvasada3" class="centrado envasada3"></td>
-                                    <td><input type="number" id="etiquetaAverias3" min="1" class="form-control centrado averias9" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td><input type="number" id="etiquetaSobrante3" min="1" class="form-control centrado sobrante9" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td id="etiquetaReferencia3" class="etiquetaReferencia3 centrado"></td>
+                                    <td id="etiquetaDescripcion3" class="etiquetaDescripcion3" style="vertical-align: middle;"></td>
+                                    <td id="etiquetaUnidades3" class="centrado etiquetaUnidades3"></td>
+                                    <td id="etiquetaEnvasada3" class="centrado etiquetaEnvasada3"></td>
+                                    <td><input type="number" id="etiquetaAverias3" min="1" class="form-control centrado etiquetaAverias3 averias3" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td><input type="number" id="etiquetaSobrante3" min="1" class="form-control centrado etiquetaSobrante3 sobrante3" style="width: 110px;" onkeyup="recalcular_valores();"></td>
                                     <td id="etiquetaDevolucion3" class="centrado"></td><!-- <input type="number" id="totalDevolucion2" class="form-control centrado" readonly> -->
                                   </tr>
                               </table>
@@ -898,7 +898,7 @@ include('modal/image.php')
           </div>
 
           <div class="card" id="envasado4">
-            <div class="card-header" id="headingSix">
+            <div class="card-header multiLinea1" id="headingSix">
               <h5 class="mb-0">
                 <button id="ref_multi4" class="btn btn-link collapsed img_ref ref_multi4" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
                   <b id="envasadoMulti4" class="img_ref">ENVASADO</b>
@@ -927,19 +927,19 @@ include('modal/image.php')
                             </thead>
                             <tbody>
                               <tr>
-                                <td id="envase4" class="centrado envase4"></td>
-                                <td id="descripcion_envase4" class="descripcion_envase4"></td>
-                                <td id="unidades2" class="centrado unidades4"></td>
+                                <td id="envaseReferencia4" class="centrado envaseReferencia4"></td>
+                                <td id="envaseDescripcion4" class="envaseDescripcion4"></td>
+                                <td id="envaseUnidades4" class="centrado envaseUnidades4"></td>
                               </tr>
                               <tr>
-                                <td id="tapa4" class="centrado tapa4"></td>
-                                <td id="descripcion_tapa1" class="descripcion_tapa4"></td>
-                                <td id="unidades1" class="centrado unidades4"></td>
+                                <td id="tapaReferencia4" class="centrado tapaReferencia4"></td>
+                                <td id="tapaDescripcion4" class="tapaDescripcion4"></td>
+                                <td id="tapaUnidades4" class="centrado tapaUnidades4"></td>
                               </tr>
                               <tr>
-                                <td id="etiqueta4" class="centrado etiqueta4"></td>
-                                <td id="descripcion_etiqueta4" class="descripcion_etiqueta4"></td>
-                                <td id="unidades3" class="centrado unidades4"></td>
+                                <td id="etiquetaReferencia4" class="centrado etiquetaReferencia4"></td>
+                                <td id="etiquetaDescripcion4" class="etiquetaDescripcion4"></td>
+                                <td id="etiquetaUnidades4" class="centrado etiquetaUnidades4"></td>
                               </tr>
                           </table>
                           </form>
@@ -1065,30 +1065,30 @@ include('modal/image.php')
                                 </thead>
                                 <tbody>
                                   <tr>
-                                    <td id="envase4" class="envase4 refEmpaque10 centrado"></td>
-                                    <td id="descripcion_envase4" class="descripcion_envase3" style="vertical-align: middle;"></td>
-                                    <td id="unidades5" class="centrado unidades3"></td>
-                                    <td><input type="number" id="envaseEnvasada4" min="1" class="form-control centrado envasada10" style="width: 110px;" onkeyup="devolucionMaterialEnvasada(this.value);"></td>
-                                    <td><input type="number" id="envaseAverias4" min="1" class="form-control centrado averias10" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td><input type="number" id="envaseSobrante4" min="1" class="form-control centrado sobrante10" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td id="envaseReferencia4" class="envaseReferencia4 centrado"></td>
+                                    <td id="envaseDescripcion4" class="envaseDescripcion4" style="vertical-align: middle;"></td>
+                                    <td id="envaseUnidades4" class="centrado envaseUnidades4"></td>
+                                    <td><input type="number" id="envaseEnvasada4" min="1" class="form-control centrado envaseEnvasada4" style="width: 110px;" onkeyup="devolucionMaterialEnvasada(this.value);"></td>
+                                    <td><input type="number" id="envaseAverias4" min="1" class="form-control centrado envaseAverias4 averias4" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td><input type="number" id="envaseSobrante4" min="1" class="form-control centrado envaseSobrante4 sobrante4" style="width: 110px;" onkeyup="recalcular_valores();"></td>
                                     <td id="envaseDevolucion4" class="centrado"></td>
                                   </tr>
                                   <tr>
-                                    <td id="tapa4" class="tapa4 refEmpaque11 centrado"></td>
-                                    <td id="descripcion_tapa4" class="descripcion_tapa4" style="vertical-align: middle;"></td>
-                                    <td id="unidades6" class="centrado unidades4"></td>
-                                    <td id="tapaEnvasada4" class="centrado envasada4"></td>
-                                    <td><input type="number" id="tapaAverias4" min="1" class="form-control centrado averias11" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td><input type="number" id="tapaSobrante4" min="1" class="form-control centrado sobrante11" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td id="tapaReferencia4" class="tapaReferencia4 centrado"></td>
+                                    <td id="tapaDescripcion4" class="tapaDescripcion4" style="vertical-align: middle;"></td>
+                                    <td id="tapaUnidades" class="centrado tapaUnidades"></td>
+                                    <td id="tapaEnvasada4" class="centrado tapaEnvasada4"></td>
+                                    <td><input type="number" id="tapaAverias4" min="1" class="form-control centrado tapaAverias4 averias4" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td><input type="number" id="tapaSobrante4" min="1" class="form-control centrado tapaSobrante4 sobrante4" style="width: 110px;" onkeyup="recalcular_valores();"></td>
                                     <td id="tapaDevolucion4" class="centrado"></td>
                                   </tr>
                                   <tr>
-                                    <td id="etiqueta4" class="etiqueta4 refEmpaque12 centrado"></td>
-                                    <td id="descripcion_etiqueta4" class="descripcion_etiqueta4" style="vertical-align: middle;"></td>
-                                    <td id="unidades7" class="centrado unidades4"></td>
-                                    <td id="etiquetaEnvasada4" class="centrado envasada4"></td>
-                                    <td><input type="number" id="etiquetaAverias4" min="1" class="form-control centrado averias12" style="width: 110px;" onkeyup="recalcular_valores();"></td>
-                                    <td><input type="number" id="etiquetaSobrante4" min="1" class="form-control centrado sobrante12" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td id="etiquetaReferencia4" class="etiquetaReferencia4 centrado"></td>
+                                    <td id="etiquetaDescripcion4" class="etiquetaDescripcion4" style="vertical-align: middle;"></td>
+                                    <td id="eqtiquetaUnidades4" class="centrado eqtiquetaUnidades4"></td>
+                                    <td id="etiquetaEnvasada4" class="centrado etiquetaEnvasada4"></td>
+                                    <td><input type="number" id="etiquetaAverias4" min="1" class="form-control centrado etiquetaAverias4 averias4" style="width: 110px;" onkeyup="recalcular_valores();"></td>
+                                    <td><input type="number" id="etiquetaSobrante4" min="1" class="form-control centrado etiquetaSobrante4 sobrante4" style="width: 110px;" onkeyup="recalcular_valores();"></td>
                                     <td id="etiquetaDevolucion4" class="centrado"></td>
                                   </tr>
                               </table>
@@ -1138,6 +1138,8 @@ include('modal/image.php')
           <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
           <script src="/html/js/global/loadinfo-global.js"></script>
+          <script src="/html/js/global/searchData.js"></script>
+          <script src="/html/js/global/preguntas.js"></script>
           <script src="/html/js/global/despeje.js"></script>
           <script src="/html/js/global/tanques.js"></script>
           <script src="/html/js/global/muestras.js"></script>
@@ -1148,17 +1150,23 @@ include('modal/image.php')
           <script src="/html/js/global/image.js"></script>
           <script src="/html/js/global/habilitarbtn.js"></script>
           <script src="/html/js/global/presentacionReferenciaMulti.js"></script>
-          
+
+          <script src="/html/js/global/validacionesAuth.js"></script>
+          <script src="/html/js/global/auth.js"></script>
+          <script src="/html/js/global/controller.js"></script>
+          <script src="/html/js/global/controlProceso.js"></script>
+
           <script src="/html/js/firmar/firmar1raSeccion.js"></script>
           <script src="/html/js/firmar/firmar2daSeccion.js"></script>
           <script src="/html/js/firmar/firmar2daSeccionMulti.js"></script>
-          
+
           <script src="/html/js/envasado/envasadoinfo.js"></script>
+          <script src="/html/js/envasado/validacionesEnvasado.js"></script>
+          <script src="/html/js/envasado/multi.js"></script>
           <script src="/html/js/envasado/lote.js"></script>
           <script src="/html/js/envasado/calcPeso.js"></script>
-          <script src="/html/js/envasado/tablaEnvase.js"></script>
-          <script src="/html/js/envasado/materialEnvasado.js"></script>
-          <script src="/html/js/envasado/materialSobrante.js"></script>
+          <script src="/html/js/envasado/muestras.js"></script>
+          <script src="/html/js/envasado/materialEnvase.js"></script>
           <script src="/html/js/envasado/entregasParciales.js"></script>
           <script src="/html/js/envasado/btnEnvasado.js"></script>
 

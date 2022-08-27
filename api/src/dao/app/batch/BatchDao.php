@@ -18,8 +18,6 @@ class BatchDao extends estadoInicialDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
-
-
     public function findBatch($batch)
     {
         $connection = Connection::getInstance()->getConnection();
@@ -27,6 +25,15 @@ class BatchDao extends estadoInicialDao
         $stmt->execute(['id_batch' => $batch['idBatch']]);
         $dataBatch = $stmt->fetch($connection::FETCH_ASSOC);
         return $dataBatch;
+    }
+
+    public function findEstadoBatch($ref_producto)
+    {
+        $connection = Connection::getInstance()->getConnection();
+        $stmt = $connection->prepare("SELECT estado FROM batch WHERE id_producto = :id_producto");
+        $stmt->execute(['id_producto' => $ref_producto]);
+        $estadoBatch = $stmt->fetchAll($connection::FETCH_ASSOC);
+        return $estadoBatch;
     }
 
     /**
@@ -134,14 +141,18 @@ class BatchDao extends estadoInicialDao
         return $batch;
     }
 
-    public function saveBatch($dataBatch)
+    public function saveBatch($dataBatch, $multi)
     {
         //$pedido                 = $dataBatch['pedido'];
-        $referencia             = $dataBatch['ref'];
-        $tamanototallote        = $dataBatch['lote'];
+
+        $dataBatch['ref'] == null ? $referencia = $dataBatch['granel'] : $referencia = $dataBatch['ref'];
+        $dataBatch['lote'] == null ? $tamanototallote = $dataBatch['tamanio_lote'] : $tamanototallote = $dataBatch['lote'];
+        $dataBatch['presentacion'] == null ? $tamanolotepresentacion = 1 : $tamanolotepresentacion = $dataBatch['presentacion'];
+
         $fechaprogramacion      = $dataBatch['programacion'];
-        $tamanolotepresentacion = $dataBatch['presentacion'];
-        $multi                  = json_decode($dataBatch['multi'], true);
+        // $referencia             = $dataBatch['ref'];
+        // $tamanototallote        = $dataBatch['lote'];
+        // $tamanolotepresentacion = $dataBatch['presentacion'];
 
         if ($dataBatch['date'])
             $fecha           = json_decode($dataBatch['date']);
@@ -149,17 +160,16 @@ class BatchDao extends estadoInicialDao
             $fecha           = date("Y-m-d");
 
         $fechahoy = date("Y-m-d");
-
-
-        $connection = Connection::getInstance()->getConnection();
-
         $unidadesxlote = 0;
 
         /* sumar total cantidades */
+        if ($multi[0]['cantidadunidades'] != null) {
+            for ($i = 0; $i < sizeof($multi); $i++)
+                $unidadesxlote = $unidadesxlote + $multi[$i]['cantidadunidades'];
+        } else
+            $unidadesxlote = $dataBatch['cantidad_acumulada'];
 
-        for ($i = 0; $i < sizeof($multi); $i++)
-            $unidadesxlote = $unidadesxlote + $multi[$i]['cantidadunidades'];
-
+        $connection = Connection::getInstance()->getConnection();
         /* Modifica estado inicial */
 
         $result = $this->estadoInicial($referencia, $fechaprogramacion);
@@ -230,12 +240,22 @@ class BatchDao extends estadoInicialDao
         } */
     }
 
+    public function updateEstadoBatch($databatch)
+    {
+        $connection = Connection::getInstance()->getConection();
+        $stmt = $connection->prepare("UPDATE batch SET estado = :estado 
+                                      WHERE id_producto = :referencia");
+        $result = $stmt->execute(['estado' => $databatch["estado"], 'referencia' => $databatch['ref_producto']]);
+        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        return $result;
+    }
+
     public function updateBatchPedido($id_batch, $dataBatch)
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("UPDATE batch SET pedido = :pedido WHERE id_batch = :id_batch");
         $stmt->execute([
-            'pedido' => $dataBatch['pedido'],
+            'pedido' => $dataBatch['numPedido'],
             'id_batch' => $id_batch
         ]);
     }

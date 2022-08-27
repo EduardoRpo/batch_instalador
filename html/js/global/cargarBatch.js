@@ -1,5 +1,15 @@
 $(document).ready(function() {
 
+    loadBatch = async() => {
+        if (modulo != 9)
+            await carguepreguntas(modulo);
+        await cargarDesinfectantes();
+        if (modulo == 9)
+            cargarFisicoquimico();
+        cargarBatch();
+    }
+
+    loadBatch()
 
     /* validar y Cargar informacion almacenada en el batch */
 
@@ -218,4 +228,4 @@ $(document).ready(function() {
         let firma = template.replace(":firma:", datos);
         parent.append(firma).html;
     }
-});
+})

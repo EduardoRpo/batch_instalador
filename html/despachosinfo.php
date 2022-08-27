@@ -642,22 +642,37 @@ include('modal/image.php')
 
           <!-- Datatables -->
           <script type="text/javascript" src="../../html/vendor/datatables/datatables.min.js"></script>
+
+          <!-- Plugins -->
           <script src="../../html/js/utils/jquery.slimscroll.js"></script>
           <script src="../../html/js/utils/waves.js"></script>
           <script src="../../html/js/utils/sidebarmenu.js"></script>
           <script src="../../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
-
-          <!--Custom JavaScript -->
           <script src="../../html/js/utils/custom.min.js"></script>
           <script src="../../html/vendor/jquery-confirm/jquery-confirm.min.js"></script>
-          <script src="../../html/js/global/loadinfo-global.js"></script>
-          <script src="../../html/js/despachos/despachosinfo.js"></script>
-          <script src="../../html/js/firmar/firmar1raSeccion.js"></script>
-          <script src="../../html/js/despachos/cargarBatch_despachos.js"></script>
-          <script src="../../html/js/global/tanques.js"></script>
-          <script src="../../html/js/global/image.js"></script>
-          <script src="../../html/js/global/presentacionReferenciaMulti.js"></script>
+
+          <!-- Notifications -->
           <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+          <!--Custom JavaScript -->
+          <script src="/html/js/global/loadinfo-global.js"></script>
+          <script src="/html/js/global/tanques.js"></script>
+          <script src="/html/js/global/image.js"></script>
+          <script src="/html/js/global/presentacionReferenciaMulti.js"></script>
+          
+          <script src="/html/js/global/validacionesAuth.js"></script>
+          <script src="/html/js/global/auth.js"></script>
+          <script src="/html/js/global/controller.js"></script>
+
+          <script src="/html/js/firmar/firmar1raSeccion.js"></script>
+
+          <script src="/html/js/despachos/despachosinfo.js"></script>
+          <script src="/html/js/despachos/cargarBatch_despachos.js"></script>
+          <script src="/html/js/despachos/ocultar.js"></script>
+          <script src="/html/js/despachos/facMuestras.js"></script>
+          <script src="/html/js/despachos/multi.js"></script>
+          <script src="/html/js/despachos/guardarDespachos.js"></script>
+          <script src="/html/js/despachos/validarData.js"></script>
 
 </body>
 

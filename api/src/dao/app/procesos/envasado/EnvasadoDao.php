@@ -21,6 +21,27 @@ class EnvasadoDao
     $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
   }
 
+  public function findAllEnvase($ref)
+  {
+    $connection = Connection::getInstance()->getConnection();
+    $stmt = $connection->prepare("SELECT env.id as id_envase, env.nombre as envase, tap.id as id_tapa, tap.nombre as tapa, 
+                                          eti.id as id_etiqueta, eti.nombre as etiqueta, emp.id as id_empaque, emp.nombre as empaque, 
+                                          otr.id as id_otros, otr.nombre as otros, p.unidad_empaque 
+                                  FROM producto p 
+                                  INNER JOIN envase env ON p.id_envase = env.id 
+                                  INNER JOIN tapa tap ON p.id_tapa = tap.id 
+                                  INNER JOIN etiqueta eti ON p.id_etiqueta = eti.id 
+                                  INNER JOIN empaque emp ON p.id_empaque = emp.id 
+                                  INNER JOIN otros otr ON p.id_otros = otr.id 
+                                  WHERE p.referencia = :ref;");
+    $stmt->execute(['ref' => $ref]);
+    $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+    $insumos = $stmt->fetchAll($connection::FETCH_ASSOC);
+    $this->logger->notice("insumos Obtenidos", array('insumos' => $insumos));
+    return $insumos;
+  }
+
+
   public function findAllEntregasParciales($data)
   {
     /* Busca parciales */

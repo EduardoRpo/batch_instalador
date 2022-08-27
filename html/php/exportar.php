@@ -102,8 +102,12 @@ if (!empty($_POST)) {
             $etiquetas[] = $acondicionamiento['usuario'];
             $etiquetas[] = $acondicionamiento['numero_lote'];
             $etiquetas[] = $acondicionamiento['numero_orden'];
-            $cajas = ceil($acondicionamiento['unidad_lote'] / $acondicionamiento['unidad_empaque']);
 
+            if ($acondicionamiento['unidad_empaque'])
+                $cajas = ceil($acondicionamiento['unidad_lote'] / $acondicionamiento['unidad_empaque']);
+            else
+                $cajas = 1;
+                
             $spreadsheet = new Spreadsheet();
             $sheet = $spreadsheet->getActiveSheet();
             $sheet->setCellValue('A1', 'Referencia');

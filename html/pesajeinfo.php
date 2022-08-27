@@ -115,21 +115,21 @@ include_once('modal/modal_condicionesMedio.php');
                     <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:70%; height: 30px;">
                       <thead>
                         <tr>
-                          <th class="centrado">Tanque</th>
-                          <th class="centrado">Cantidad</th>
-                          <th class="centrado">Total</th>
+                          <th class="centrado">Tamaño Tanque (Kg)</th>
+                          <th class="centrado">Cantidad Tanques</th>
+                          <!-- <th class="centrado">Total</th> -->
                         </tr>
                       </thead>
                       <tbody>
                         <tr id="fila1">
                           <td id="tanque1" class="centrado"></td>
                           <td id="cantidad1" class="centrado"></td>
-                          <td id="total1" class="centrado"></td>
+                          <!-- <td id="total1" class="centrado"></td> -->
                         </tr>
                         <tr id="fila2">
                           <td id="tanque2" class="centrado"></td>
                           <td id="cantidad2" class="centrado"></td>
-                          <td id="total2" class="centrado"></td>
+                          <!-- <td id="total2" class="centrado"></td> -->
                         </tr>
                       </tbody>
                     </table>
@@ -224,10 +224,10 @@ include_once('modal/modal_condicionesMedio.php');
                   <label for="cargo-3" class="col-form-label"><b>Verificación del estado de Identificación y Aprobación Materias primas</b></label>
                   <label for="cargo-4" class="col-form-label"><b>Toma de materia prima de la esclusa</b></label>
 
-                  <input type="text" class="form-control text-center" id="cargo-1" readonly>
-                  <input type="text" class="form-control text-center" id="cargo-2" readonly>
-                  <input type="text" class="form-control text-center" id="cargo-3" readonly>
-                  <input type="text" class="form-control text-center" id="cargo-4" readonly>
+                  <input type="text" class="form-control text-center" id="" readonly value="Director Técnico">
+                  <input type="text" class="form-control text-center" id="" readonly value="Operario Bodega MP">
+                  <input type="text" class="form-control text-center" id="" readonly value="Analista Calidad">
+                  <input type="text" class="form-control text-center" id="" readonly value="Operario Pesaje">
                 </div>
               </div>
 
@@ -242,6 +242,14 @@ include_once('modal/modal_condicionesMedio.php');
                 <form>
                   <div class="table-responsive">
                     <table class="table" id="tablePesaje" style="width: 100%;">
+                      <tfoot>
+                        <tr>
+                          <th colspan="2" style="text-align:center"></th>
+                          <th></th>
+                          <th></th>
+                          <th></th>
+                        </tr>
+                      </tfoot>
                     </table>
                   </div>
                 </form>
@@ -273,7 +281,6 @@ include_once('modal/modal_condicionesMedio.php');
     </div>
   </div>
 
-  
   <script src="../../assets/plugins/jquery/jquery.min.js"></script>
   <script src="../../assets/plugins/bootstrap/js/tether.min.js"></script>
   <script src="../../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
@@ -286,22 +293,9 @@ include_once('modal/modal_condicionesMedio.php');
   <script src="../../html/vendor/jquery-confirm/jquery-confirm.min.js"></script>
   <!-- <script src="../../html/js/datatables.js"></script> -->
 
-  <script src="../../html/js/global/loadinfo-global.js"></script>
-  <script src="../../html/js/pesaje/pesajeinfo.js"></script>
-  <script src="../../html/js/pesaje/tblFormula.js"></script>
-  <script src="../../html/js/global/despeje.js"></script>
-  <script src="../../html/js/global/tanques.js"></script>
-  <script src="../../html/js/global/condiciones_medio.js"></script>
-  <script src="../../html/js/firmar/firmar1raSeccion.js"></script>
-  <script src="../../html/js/firmar/firmar2daSeccion.js"></script>
-  <script src="../../html/js/global/cargarBatch.js"></script>
-  <script src="../../html/js/global/incidencias.js"></script>
-  <script src="../../html/js/global/etiquetas.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-  <script src="../../html/js/global/descargarPDF.js"></script>
-
   <!-- <script src="../../html/vendor/pdf/jspdf.min.js"></script> -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
   <script src="../../html/js/global/descargarPDF.js"></script>
 
   <!-- Buttons -->
@@ -313,9 +307,19 @@ include_once('modal/modal_condicionesMedio.php');
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
   <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
   <script src="//unpkg.com/xlsx/dist/xlsx.full.min.js" type="text/javascript"></script>
+  <script src="//cdn.datatables.net/plug-ins/1.12.1/api/sum().js"></script>
+
+  <?php require_once __DIR__ . '/partials/globalScripts.php' ?>
+
+  <script src="/html/js/pesaje/pesajeinfo.js"></script>
+  <script src="/html/js/pesaje/validacionesPesaje.js"></script>
+  <script src="/html/js/pesaje/btnPesaje.js"></script>
+  <script src="/html/js/pesaje/calcTanques.js"></script>
+  <script src="/html/js/pesaje/cargos.js"></script>
+  <script src="/html/js/pesaje/conversion.js"></script>
+  <script src="/html/js/pesaje/tblFormula.js"></script>
 
 
-  <!-- <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.21/b-1.6.2/b-flash-1.6.2/datatables.min.js"></script> -->
 
 
 </body>

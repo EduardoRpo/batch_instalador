@@ -6,6 +6,14 @@ $("#btnAprobado").prop("checked", false); */
 $("#observacionesLote").slideUp();
 $(".fisicoquimica_verificado").prop("disabled", true);
 
+loadBatch = async() => {
+    await cargarInfoBatch();
+    cargarTanques()
+    cargarControlProceso();
+}
+
+loadBatch()
+
 $(document).ready(function() {
     $(".metodo").html("Siembra Total");
     $(`.microbiologia_verificado`).prop("disabled", true);
@@ -68,9 +76,7 @@ $(document).ready(function() {
     };
 
     deshabilitarbtn = () => {
-        $(`.fisicoquimica_realizado`)
-            .css({ background: "lightgray", border: "gray" })
-            .prop("disabled", true);
+        $(`.fisicoquimica_realizado`).css({ background: "lightgray", border: "gray" }).prop("disabled", true);
         $(`.fisicoquimica_verificado`).prop("disabled", false);
     };
 
@@ -89,11 +95,9 @@ $(document).ready(function() {
             success: function(data) {
                 let info = JSON.parse(data);
 
-                setTimeout(() => {
-                    $("#sel_producto_desinfeccion").val(info.desinfectante);
-                }, 1000);
-
+                $("#sel_producto_desinfeccion").val(info.desinfectante);
                 $("#in_observaciones").val(info.observaciones);
+
                 if (info.obsBatch != "" && info.obsBatch != undefined) {
                     $("#btnRechazado").prop("checked", true);
                     $("#btnRechazado").change();
@@ -134,9 +138,6 @@ $(document).ready(function() {
         ); */
     };
 
-    /* Carga formulario */
 
-    cargarControlProceso();
-    cargarFisicoquimico();
 
 });

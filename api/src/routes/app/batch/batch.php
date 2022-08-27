@@ -8,7 +8,6 @@ use BatchRecord\dao\ControlFirmasDao;
 use BatchRecord\dao\MultiDao;
 use BatchRecord\dao\ExplosionMaterialesPedidosRegistroDao;
 
-
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
@@ -54,6 +53,7 @@ $app->get('/batchcerrados', function (Request $request, Response $response, $arg
 });
 
 $app->post('/saveBatch', function (Request $request, Response $response, $args) use ($batchDao, $ultimoBatchDao, $tanquesDao, $controlFirmasDao, $multiDao, $EMPedidosRegistroDao) {
+  session_start();
   $dataBatch = $request->getParsedBody();
   $flag_tanques = 1;
 
@@ -64,8 +64,9 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
 
   //Si el data esta vacio
   if (sizeof($dataBatch) == 0) {
-    session_start();
-    $dataBatch = $_SESSION['dataPedidos'];
+    $dataBatch = $_SESSION['dataGranel'];
+    // $dataPedidos = $_SESSION['dataPedidos'];
+
     for ($i = 0; $i < sizeof($dataBatch); $i++)
       $dataBatch[$i]['date'] = $date;
 
@@ -75,7 +76,17 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
   /* Crear el batch */
   for ($i = 0; $i < sizeof($dataBatch); $i++) {
 
-    $resp = $batchDao->saveBatch($dataBatch[$i]);
+    //validar si el multi es de planeacion o es creado manualmente
+
+    $array = is_array($dataBatch[$i]['multi']);
+
+    if ($array) // planeacion
+      $multi = $dataBatch[$i]['multi'];
+    else // batch manual
+      $multi = json_decode($dataBatch[$i]['multi'], true);
+
+    //Guarda Batch
+    $resp = $batchDao->saveBatch($dataBatch[$i], $multi);
 
     /* Indentifica el ultimo Batch ingresado */
     if ($resp == null)
@@ -91,19 +102,22 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
 
     /* Crea la multipresentacion */
     if ($resp == null)
-      $resp = $multiDao->saveMulti($id_batch['id'], $dataBatch[$i]);
+      $resp = $multiDao->saveMulti($id_batch['id'], $dataBatch[$i], $multi);
 
     /* Actualizar pedido batch */
     if ($resp == null) {
-      $multi = json_decode($dataBatch[$i]['multi'], true);
 
-      for ($j = 0; $j < sizeof($multi); $j++)
-        if ($multi[$j]['pedido']) {
+      //Almacena los pedidos en los batch creados
+      for ($j = 0; $j < sizeof($multi); $j++) {
+        if ($multi[$j]['numPedido'])
           $resp = $batchDao->updateBatchPedido($id_batch['id'], $multi[$j]);
-        } else
+        else {
           $resp = $batchDao->updateBatchPedido($id_batch['id'], $dataBatch[0]);
+          $_SESSION['dataPedidos'] = $multi;
+        }
+      }
     }
-    
+
     $resp = $EMPedidosRegistroDao->updateEMPedidosRegistro();
   }
 

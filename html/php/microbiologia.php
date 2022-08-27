@@ -12,7 +12,7 @@ if (!empty($_POST)) {
         case '1': //Consulta
             $modulo = $_POST['modulo'];
 
-            $sql = "SELECT equipos.id, equipos.descripcion FROM equipos INNER JOIN batch_equipos ON batch_equipos.equipo = equipos.id
+            /* $sql = "SELECT equipos.id, equipos.descripcion FROM equipos INNER JOIN batch_equipos ON batch_equipos.equipo = equipos.id
                     WHERE batch_equipos.batch = :batch AND modulo = :modulo";
             $query = $conn->prepare($sql);
             $query->execute(['batch' => $batch, 'modulo' => $modulo]);
@@ -49,7 +49,7 @@ if (!empty($_POST)) {
 
                 $result = array_merge($desinfectante, $equipos, $analisis, $usuarioRealizo, $usuarioVerifico);
                 echo json_encode($result, JSON_UNESCAPED_UNICODE);
-            }
+            } */
 
             break;
 

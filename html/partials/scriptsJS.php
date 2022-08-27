@@ -17,3 +17,5 @@
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 <script src="//cdn.datatables.net/plug-ins/1.10.21/api/fnGetTds.js"></script>
 <script src="https://unpkg.com/xlsx@latest/dist/xlsx.full.min.js"></script>
+<script lang="javascript" src="/assets/plugins/xlsx/FileSaver.min.js"></script>
+

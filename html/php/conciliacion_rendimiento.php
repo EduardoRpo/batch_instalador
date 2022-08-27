@@ -14,9 +14,6 @@ if (!empty($_POST)) {
 
     switch ($op) {
         case 1: //almacenar conciliacion
-            $modulo = $_POST['modulo'];
-            $modulo == 6 ? $retencion =  $_POST['retencion'] : $retencion = 0;
-
             /* validar si envasado esta completo */
             $sql = "SELECT * FROM batch_material_sobrante WHERE batch = :batch AND ref_producto = :referencia AND modulo = :modulo";
             $query = $conn->prepare($sql);
@@ -24,6 +21,9 @@ if (!empty($_POST)) {
             $data = $query->fetch(PDO::FETCH_ASSOC);
 
             if ($data) {
+                $modulo = $_POST['modulo'];
+                $modulo == 6 ? $retencion =  $_POST['retencion'] : $retencion = 0;
+
                 conciliacionRendimientoRealizo($conn);
                 almacenar_muestras_retencion($conn, $retencion, $referencia, $batch);
                 cerrarEstado($batch, $modulo, $conn);
@@ -72,7 +72,7 @@ if (!empty($_POST)) {
                     SET unidades_producidas = :unidades, cajas = :cajas, mov_inventario = :movimiento, observaciones = :observaciones,
                     batch = :batch, modulo = :modulo, ref_multi = :referencia, entrego = :entrego";
             $query = $conn->prepare($sql);
-            $query->execute([
+            $result = $query->execute([
                 'unidades' => $unidades,
                 'cajas' => $cajas,
                 'movimiento' => $movimiento,
@@ -82,6 +82,8 @@ if (!empty($_POST)) {
                 'referencia' => $referencia,
                 'entrego' => $entrego,
             ]);
+
+        
 
             registrarFirmas($conn, $batch, $modulo);
             break;
@@ -104,12 +106,47 @@ if (!empty($_POST)) {
             $sql = "SELECT c.ref_multi, c.unidades_producidas, c.muestras_retencion, c.mov_inventario, c.cajas, u.urlfirma, 
                            CONCAT(u.nombre, ' ', u.apellido) as nombre, modulo, c.fecha_nuevo_registro 
                     FROM batch_conciliacion_rendimiento c INNER JOIN usuario u ON u.id = c.entrego 
-                    WHERE batch = :batch ORDER BY `c`.`ref_multi` DESC;
-            ";
+                    WHERE batch = :batch ORDER BY `c`.`ref_multi` DESC;";
             $query = $conn->prepare($sql);
             $query->execute(['batch' => $batch]);
             $data = $query->fetchAll(PDO::FETCH_ASSOC);
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
+
+            break;
+
+        case 6: //validar cierre total parciales
+            $sql = "SELECT * FROM batch_material_sobrante WHERE batch = :batch AND ref_producto = :referencia AND modulo = :modulo";
+            $query = $conn->prepare($sql);
+            $query->execute(['batch' => $batch, 'referencia' => $referencia, 'modulo' => 5]);
+            $data = $query->fetch(PDO::FETCH_ASSOC);
+
+            if ($data) echo true;
+            else echo false;
+
+            break;
+        case 7: // validar firmas de calidad para cierre de batch acondicionamiento
+
+            $sql = "SELECT verifico FROM batch_desinfectante_seleccionado WHERE batch = :batch AND modulo = :modulo";
+            $query = $conn->prepare($sql);
+            $query->execute(['batch' => $batch, 'modulo' => 6]);
+            $data = $query->fetch(PDO::FETCH_ASSOC);
+
+            if ($data) {
+                $sql = "SELECT verifico FROM batch_firmas2seccion WHERE batch = :batch AND ref_multi = :referencia AND modulo = :modulo";
+                $query = $conn->prepare($sql);
+                $query->execute(['batch' => $batch, 'referencia' => $referencia, 'modulo' => 6]);
+                $data = $query->fetch(PDO::FETCH_ASSOC);
+
+                if ($data) {
+                    $sql = "SELECT verifico FROM batch_material_sobrante WHERE batch = :batch AND ref_producto = :referencia AND modulo = :modulo";
+                    $query = $conn->prepare($sql);
+                    $query->execute(['batch' => $batch, 'referencia' => $referencia, 'modulo' => 6]);
+                    $data = $query->fetch(PDO::FETCH_ASSOC);
+                    echo true;
+                } else
+                    echo false;
+            } else
+                echo false;
 
             break;
     }
