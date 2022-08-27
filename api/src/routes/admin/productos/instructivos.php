@@ -24,13 +24,13 @@ $app->post('/saveInstructivos', function (Request $request, Response $response, 
       $resp = array('success' => true, 'message' => 'Instructivo actualizado correctamente');
   } else {
 
-    $instructivo = $instructivoPreparacionDao->findinstructiveByProduct($dataInstructive);
+   /*  $instructivo = $instructivoPreparacionDao->findinstructiveByProduct($dataInstructive);
 
     if (sizeof($instructivo) == 0) {
       $dataBatch['estado'] = 2;
       $dataBatch['ref_producto'] = $dataInstructive['referencia'];
       $batchDao->updateEstadoBatch($dataBatch);
-    }
+    } */
 
     $instructivo = $instructivoPreparacionDao->saveInstructive($dataInstructive);
 
