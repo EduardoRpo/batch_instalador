@@ -151,7 +151,7 @@ $(document).ready(function () {
       fecha_batch = moment(data.fecha_actual);
       hoy = moment(Date());
 
-      let dias = hoy.diff(fecha_batch, 'days');
+      dias = hoy.diff(fecha_batch, 'days');
 
       if (dias > 15) $(row).css('color', 'orange');
       if (dias > 30) $(row).css('color', 'red');
@@ -160,10 +160,9 @@ $(document).ready(function () {
         fecha_observacion = moment(data.fecha_registro);
         hoy = moment(Date());
 
-        let dias = hoy.diff(fecha_observacion, 'days');
+        dias = hoy.diff(fecha_observacion, 'days');
 
         if (dias > 15) $(row).css('color', 'red');
-        else $(row).css('color', 'orange');
       }
     },
   });

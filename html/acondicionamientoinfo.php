@@ -1026,7 +1026,7 @@ include('modal/image.php')
                   </div>
 
                   <div class="col-md-1 align-self-center" style="margin-top: 1%">
-                    <button type="button" class="btn waves-effect waves-light" style="background: seagreen;color:white" onclick=" reimprimirEtiquetas();">Reimprimir Etiquetas</button>
+                    <button type="button" class="btn waves-effect waves-light" style="background: seagreen;color:white" onclick="reimprimirEtiquetas();">Reimprimir Etiquetas</button>
                   </div>
 
                 </div>

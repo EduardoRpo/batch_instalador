@@ -26,7 +26,8 @@ class ObservacionesInactivosDao
                 'pedido' => $dataBatch['pedido'],
                 'referencia' => $dataBatch['ref']
             ];
-        } else {
+        }
+        if ($dataBatch['batch']) {
             $condition = "WHERE batch = :batch";
             $execute = [
                 'batch' => $dataBatch['batch']
@@ -67,5 +68,18 @@ class ObservacionesInactivosDao
 
         $stmt = $connection->prepare($sql);
         $stmt->execute($execute);
+    }
+
+    public function updateObservacion($id_batch, $dataBatch)
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        $stmt = $connection->prepare("UPDATE observaciones_batch_inactivos SET batch = :batch
+                                      WHERE pedido = :pedido AND referencia = :referencia");
+        $stmt->execute([
+            'batch' => $id_batch,
+            'pedido' => $dataBatch['numPedido'],
+            'referencia' => $dataBatch['referencia']
+        ]);
     }
 }
