@@ -2,15 +2,16 @@
 
 use BatchRecord\dao\ExplosionMaterialesPedidosRegistroDao;
 use BatchRecord\dao\PreBatchDao;
+
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-$preBatchDao = new PreBatchDao();
 $EMPedidosRegistroDao = new ExplosionMaterialesPedidosRegistroDao();
+$preBatchDao = new PreBatchDao();
 
-$app->get('/preBatch', function (Request $request, Response $response, $args) use ($preBatchDao, $EMPedidosRegistroDao) {
-  $preBatch = $preBatchDao->findAllPreBatch();
+$app->get('/preBatch', function (Request $request, Response $response, $args) use ($EMPedidosRegistroDao, $preBatchDao) {
   $EMPedidosRegistroDao->resetEstado();
+  $preBatch = $preBatchDao->findAllPreBatch();
   $response->getBody()->write(json_encode($preBatch, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
