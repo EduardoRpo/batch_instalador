@@ -28,9 +28,11 @@ $("#btnimprimirEtiquetas").click(function(e) {
 
 const imprimirEtiquetasFull = (marmita) => {
     const ref = batch.referencia;
+
     $.ajax({
         url: `/api/materiasp/${ref}`,
         success: function(materiaPrima) {
+            debugger
             $.ajax({
                 url: `/api/user/${modulo}/${idBatch}`,
                 success: function(usuario) {
@@ -94,6 +96,7 @@ const imprimirEtiquetasAprobacion = (usuario) => {
 
 const imprimirEtiquetasAcondicionamiento = (usuario) => {
     operacion = 4;
+
     let batch = sessionStorage.batch
     batch = JSON.parse(batch)
     batch.usuario = usuario.nombres;
