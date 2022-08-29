@@ -31,11 +31,6 @@ $(document).ready(function () {
   };
 
   addRows = (data) => {
-    /* granel = data.granel;
-        producto = data.producto;
-        tamanio = data.tamanio;
-        cantidad = data.cantidades; */
-
     row = [];
     for (i = 0; i < data.length; i++) {
       row.push(`<tr ${(text = color(data[i].tamanio_lote))}>
@@ -75,7 +70,6 @@ $(document).ready(function () {
         'Ingrese la fecha de planeación',
         '',
         function (evt, value) {
-          //alertify.success('You entered: ' + value)
           if (!value || value == '') {
             alertify.set('notifier', 'position', 'top-right');
             alertify.error('Ingrese fecha');
@@ -106,7 +100,6 @@ $(document).ready(function () {
   // Opcion NO
   clearInputArray = () => {
     $('#tablaPreBatch').DataTable().ajax.reload();
-    //saveFecha_insumo(pedidosProgramar);
     deleteSession();
     pedidosProgramar.splice(0, pedidosProgramar.length);
   };

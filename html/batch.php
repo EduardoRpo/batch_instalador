@@ -141,7 +141,7 @@ include_once("modal/modalPedidos.php");
                 </li>
                 <?php if ($_SESSION['rol'] != 6) {  ?>
                   <li class="nav-item">
-                    <a class="nav-link" id="five-tab" data-toggle="tab" href="#five" role="tab" aria-controls="Five" aria-selected="false">Cerrados</a>
+                    <a class="nav-link" id="four-tab" data-toggle="tab" href="#four" role="tab" aria-controls="Four" aria-selected="false">Cerrados</a>
                   </li>
                 <?php  } ?>
                 <div style="display:grid;justify-content:end;font-size:x-large;margin-left:auto" class="mr-3">
