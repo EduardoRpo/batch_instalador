@@ -32,7 +32,7 @@ class PreBatchDao
                 FROM `explosion_materiales_pedidos_registro` exp 
                     INNER JOIN producto p ON p.referencia = exp.id_producto 
                     INNER JOIN propietario pp ON pp.id = p.id_propietario;
-                ;"; //WHERE exp.flag_estado = 0
+                "; //WHERE exp.flag_estado = 0
 
         $query = $connection->prepare($sql);
         $query->execute();
@@ -93,14 +93,14 @@ class PreBatchDao
             $fecha_dtco = date_format($date, "Y-m-d");
 
             $sql = "INSERT INTO explosion_materiales_pedidos_registro (pedido, id_producto, cant_original, cantidad, fecha_pedido) 
-                    VALUES(:pedido, :id_producto, :cant_original, :cantidad, :fecha_pedido)";
+                    VALUES(:pedido, :id_producto, :cant_original, :cantidad, :fecha_pedido, :fecha_actual)";
             $query = $connection->prepare($sql);
             $query->execute([
                 'pedido' => trim($dataPedidos['documento']),
                 'id_producto' =>  trim("M-" . $dataPedidos['producto']),
                 'cant_original' => trim($dataPedidos['cant_original']),
                 'cantidad' => trim($dataPedidos['cantidad']),
-                'fecha_pedido' => $fecha_dtco,
+                'fecha_pedido' => $fecha_dtco
             ]);
         }
     }

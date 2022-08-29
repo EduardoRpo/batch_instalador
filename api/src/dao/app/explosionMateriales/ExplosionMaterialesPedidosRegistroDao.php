@@ -19,32 +19,28 @@ class ExplosionMaterialesPedidosRegistroDao
     public function resetEstado()
     {
         $connection = Connection::getInstance()->getConnection();
-        session_start();
-        $fecha = $_SESSION['fecha'];
-        if (!$fecha) $fecha = date('Y-m-d');
 
         $stmt = $connection->prepare("UPDATE explosion_materiales_pedidos_registro SET estado = 0
-                                      WHERE estado >= 1 AND :fecha < CURRENT_DATE()");
-        $stmt->execute([
-            'fecha' => $fecha
-        ]);
+                                      WHERE estado >= 1 AND fecha_actual < CURRENT_DATE()");
+        $stmt->execute();
     }
 
     public function updateEMPedidosRegistro()
     {
         $connection = Connection::getInstance()->getConnection();
         $dataPedidos = $_SESSION['dataPedidos'];
-        $_SESSION['fecha'] = date('Y-m-d');
+        $fecha_actual = date("Y-m-d");
 
         foreach ($dataPedidos as $dataPedido) {
             $stmt = $connection->prepare("UPDATE explosion_materiales_pedidos_registro 
-                                          SET cantidad_acumulada = cantidad_acumulada + :cantidad_acumulada, fecha_insumo = :fecha_insumo, estado = 1 
+                                          SET cantidad_acumulada = cantidad_acumulada + :cantidad_acumulada, fecha_insumo = :fecha_insumo, fecha_actual = :fecha_actual, estado = 1 
                                           WHERE pedido = :pedido AND id_producto = :referencia");
             $stmt->execute([
                 'pedido' => $dataPedido['numPedido'],
                 'referencia' => $dataPedido['referencia'],
                 'cantidad_acumulada' => $dataPedido['cantidad_acumulada'],
-                'fecha_insumo' => $dataPedido['fecha_insumo']
+                'fecha_insumo' => $dataPedido['fecha_insumo'],
+                'fecha_actual' => $fecha_actual
             ]);
         }
 
@@ -54,7 +50,6 @@ class ExplosionMaterialesPedidosRegistroDao
     public function checkPedidos($dataPedido)
     {
         $pedido = $dataPedido['numPedido'];
-        $_SESSION['fecha'] = date('Y-m-d');
         //Condicional si tiene mas de un pedido
         if (strpos($pedido, '-')) {
             $pedido = explode(" - ", $pedido);
@@ -70,10 +65,13 @@ class ExplosionMaterialesPedidosRegistroDao
     {
         $connection = Connection::getInstance()->getConnection();
 
+        $fecha_actual = date("Y-m-d");
+
         $stmt = $connection->prepare("UPDATE explosion_materiales_pedidos_registro 
-                                      SET estado = 2
+                                      SET estado = 2, fecha_actual = :fecha_actual
                                       WHERE pedido = :pedido AND id_producto = :referencia");
         $stmt->execute([
+            'fecha_actual' => $fecha_actual,
             'pedido' => $pedido,
             'referencia' => $dataPedido['referencia']
         ]);
