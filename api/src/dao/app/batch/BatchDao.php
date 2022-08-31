@@ -64,6 +64,7 @@ class BatchDao extends estadoInicialDao
     {
         $connection = Connection::getInstance()->getConnection();
         /* Se agrego la tabla `observaciones_batch_inactivos`*/
+
         $stmt = $connection->prepare("SELECT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, pc.nombre as presentacion_comercial, batch.numero_lote, batch.tamano_lote, propietario.nombre, batch.fecha_creacion, 
                                              batch.fecha_actual, WEEK(batch.fecha_creacion) AS semanas, batch.fecha_programacion, batch.estado, batch.multi, IFNULL(exp.fecha_insumo, '0000-00-00') AS fecha_insumo
                                       FROM batch 
@@ -74,6 +75,7 @@ class BatchDao extends estadoInicialDao
                                       
                                       WHERE batch.estado BETWEEN 1 AND 2;");
         /* $stmt = $connection->prepare("SELECT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, pc.nombre as presentacion_comercial, batch.numero_lote, batch.tamano_lote, propietario.nombre, batch.fecha_creacion, 
+        $stmt = $connection->prepare("SELECT DISTINCT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, pc.nombre as presentacion_comercial, batch.numero_lote, batch.tamano_lote, propietario.nombre, batch.fecha_creacion, 
                                              batch.fecha_actual, WEEK(batch.fecha_creacion) AS semanas, batch.fecha_programacion, batch.estado, batch.multi, IFNULL(exp.fecha_insumo, '0000-00-00') AS fecha_insumo, obi.fecha_registro
                                       FROM batch 
                                       INNER JOIN producto ON batch.id_producto = producto.referencia
