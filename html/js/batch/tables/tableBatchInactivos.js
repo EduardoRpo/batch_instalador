@@ -37,13 +37,12 @@ $(document).ready(function () {
         className: 'uniqueClassName',
       },
       {
-        data: null,
+        data: 'id_batch',
         className: 'uniqueClassName',
         render: function (data) {
           return `
-              <i>${data.cant_observations}</i><br>
-              <a href='#' <i class="fa fa-file-text fa-1x link-comentario" id=${data.id_batch} aria-hidden="true" data-toggle="tooltip" title="adicionar observaciones" style="color:rgb(59, 131, 189)" aria-hidden="true"></i></a>
-              `;
+              <a href='#' <i class="fa fa-file-text fa-1x link-comentario" id=${data} aria-hidden="true" data-toggle="tooltip" title="adicionar observaciones" style="color:rgb(59, 131, 189)" aria-hidden="true"></i></a>
+                 `;
         },
       },
       {
@@ -157,14 +156,14 @@ $(document).ready(function () {
       if (dias > 15) $(row).css('color', 'orange');
       if (dias > 30) $(row).css('color', 'red');
 
-      if (data.fecha_registro) {
-        fecha_observacion = moment(data.fecha_registro);
-        hoy = moment(Date());
+      /* if (data.fecha_registro) {
+                fecha_observacion = moment(data.fecha_registro);
+                hoy = moment(Date());
 
-        dias = hoy.diff(fecha_observacion, 'days');
+                dias = hoy.diff(fecha_observacion, 'days');
 
-        if (dias > 15) $(row).css('color', 'red');
-      }
+                if (dias > 15) $(row).css('color', 'red');
+            } */
     },
   });
 });
