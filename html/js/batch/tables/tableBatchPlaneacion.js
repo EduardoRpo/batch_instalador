@@ -37,12 +37,13 @@ $(document).ready(function () {
         className: 'text-center',
       },
       {
-        data: 'id_batch',
+        data: null,
         className: 'uniqueClassName',
         render: function (data) {
           return `
-              <a href='#' <i class="fa fa-file-text fa-1x link-comentario" id=${data} aria-hidden="true" data-toggle="tooltip" title="adicionar observaciones" style="color:rgb(59, 131, 189)" aria-hidden="true"></i></a>
-                 `;
+            <i>${data.cant_observations}</i><br>
+            <a href='#' <i class="fa fa-file-text fa-1x link-comentario" id=${data.id_batch} aria-hidden="true" data-toggle="tooltip" title="adicionar observaciones" style="color:rgb(59, 131, 189)" aria-hidden="true"></i></a>
+          `;
         },
       },
       {
