@@ -31,14 +31,15 @@ class GranelDao
 
     $connection = Connection::getInstance()->getConnection();
 
-    $stmt = $connection->prepare("SELECT referencia, nombre_referencia, IF(:rol=1, 1, null) AS superUsuario
+    $stmt = $connection->prepare("SELECT referencia, nombre_referencia
                                     FROM producto 
                                     WHERE referencia LIKE '%Granel%' 
                                     ORDER BY SUBSTR(referencia, 1, 7), CAST(SUBSTR(referencia, 8, LENGTH(referencia)) AS UNSIGNED)");
-    $stmt->execute(['rol' => $rol]);
+    $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $granel = $stmt->fetchAll($connection::FETCH_ASSOC);
     $this->logger->notice("graneles Obtenidos", array('graneles' => $granel));
+    $granel['superUsuario'] = $rol;
     return $granel;
   }
 
@@ -47,8 +48,8 @@ class GranelDao
     $connection = Connection::getInstance()->getConnection();
 
     /* Graneles */
-
-    $stmt = $connection->prepare("SELECT referencia, nombre_referencia FROM producto 
+    $stmt = $connection->prepare("SELECT referencia, nombre_referencia, 0 as superUsuario
+                                    FROM producto 
                                     WHERE referencia LIKE '%Granel%' 
                                     ORDER BY SUBSTR(referencia, 1, 7), CAST(SUBSTR(referencia, 8, LENGTH(referencia)) AS UNSIGNED)");
     $stmt->execute();
@@ -68,6 +69,7 @@ class GranelDao
     $this->logger->notice("graneles Obtenidos", array('graneles' => $granelFormula));
 
     $granelNoFormula = array_diff_assoc($granel, $granelFormula);
+    $granelNoFormula['superUsuario'] = 0;
 
     return $granelNoFormula;
   }

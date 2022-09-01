@@ -6,7 +6,6 @@
     <div class="sidebar-wrapper contenedor-menu" id="sidebar-wrapper">
         <div class="sidebar-wrapper contenedor-menu" id="sidebar-wrapper">
             <ul class="nav menu">
-
                 <li id="formulas"><a href=""><i class="fa fa-chevron-down"></i><span>Formulas</span></a></li>
                 <ul class="menu_formulas">
                     <li><a href="newformulas.php" id="link_bases"><i class="fa fa-list-alt"></i><span>Crear </span></a></li>
