@@ -1,7 +1,7 @@
 $(document).ready(function () {
   /* Cargue de Parametros de Control en DataTable */
 
-  cargarTablaFormulas = (url) => {
+  cargarTablaFormulas = (reference) => {
     tabla = $('#tblFormulas').DataTable({
       destroy: true,
       scrollY: '50vh',
@@ -10,7 +10,7 @@ $(document).ready(function () {
       language: { url: 'admin_componentes/es-ar.json' },
 
       ajax: {
-        url: url,
+        url: `/api/formula/${reference}`,
         dataSrc: '',
       },
 

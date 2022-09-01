@@ -17,20 +17,6 @@ class FormulasInvimaDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
-    public function findAllFormulaInvima()
-    {
-        $connection = Connection::getInstance()->getConnection();
-
-        $sql = "SELECT f.id_materiaprima as referencia, m.nombre as nombre, m.alias as alias, cast(AES_DECRYPT(f.porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje 
-                FROM formula_f f INNER JOIN materia_prima_f m ON f.id_materiaprima = m.referencia ";
-        $stmt = $connection->prepare($sql);
-        $stmt->execute();
-        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
-        $formulasInvima = $stmt->fetchAll($connection::FETCH_ASSOC);
-        $this->logger->notice("formulasInvima Obtenidas", array('formulasInvima' => $formulasInvima));
-        return $formulasInvima;
-    }
-
     public function findAllFormulaInvimaByReferencia($referencia)
     {
         $connection = Connection::getInstance()->getConnection();

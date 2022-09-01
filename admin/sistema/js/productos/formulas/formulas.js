@@ -84,15 +84,20 @@ $(document).ready(function () {
 
   $('#cmbReferenciaProductos').change(function (e) {
     e.preventDefault();
-    let ref = $('select option:selected').val();
+    let seleccion = $('select option:selected').val();
 
-    if (ref.includes('Granel')) {
-      cargarTablaFormulas(`/api/formulatbl/${ref}`);
-      cargar_formulas_f(`/api/formulaInvimatbl/${ref}`);
+    if (seleccion == 1) {
+      $('#formulas').hide();
+      $('#formghost').hide();
+      $('#allformulas').show();
+      cargarTablaTodasFormulas();
     } else {
-      cargarTablaFormulas('/api/allFormulas');
-      cargar_formulas_f('/api/allFormulaInvimatbl');
+      $('#formulas').show();
+      $('#formghost').show();
+      $('#allformulas').hide();
+      cargarTablaFormulas(seleccion);
     }
+    if (seleccion != 1) cargar_formulas_f(seleccion);
 
     //const resultado = ref.find(refer => refer.referencia === seleccion);
 

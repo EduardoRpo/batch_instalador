@@ -195,7 +195,7 @@
   <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
   <script src="../assets/js/plugins/bootstrap-notify.js"></script>
   <script src="../assets/js/now-ui-dashboard.min.js?v=1.5.0" type="text/javascript"></script>
-  
+
   <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
@@ -204,17 +204,17 @@
   <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
   <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-  
+
   <script src="/admin/sistema/js/global/cargarReferencias.js"></script>
   <script src="/admin/sistema/js/global/notifications.js"></script>
   <script src="/admin/sistema/js/global/rawMaterials.js"></script>
-  
+
   <script src="/admin/sistema/js/productos/formulas/formulas.js"></script>
   <script src="/admin/sistema/js/productos/formulas/validarReferencia.js"></script>
   <script src="/admin/sistema/js/productos/formulas/tblFormulas.js"></script>
   <script src="/admin/sistema/js/productos/formulas/tblAllFormulas.js"></script>
   <script src="/admin/sistema/js/productos/formulas/tblFormulasInvima.js"></script>
-  
+
   <script src="/admin/sistema/js/importarProductos.js"></script>
   <script src="/admin/sistema/js/menu.js"></script>
 

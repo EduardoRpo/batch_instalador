@@ -18,28 +18,14 @@ $adminMultiDao = new AdminMultiDao();
 $estadoInicialDao = new EstadoInicialDao();
 $batchDao = new BatchDao();
 
-// Obtener todas las formulas
-$app->get('/allFormulas', function (Request $request, Response $response, $args) use ($formulasDao) {
-  $formulas = $formulasDao->findAllFormulas();
-  $response->getBody()->write(json_encode($formulas, JSON_NUMERIC_CHECK));
-  return $response->withHeader('Content-Type', 'application/json');
-});
-
 $app->get('/formula/{idProducto}', function (Request $request, Response $response, $args) use ($formulasDao) {
   $formula = $formulasDao->findFormulaByReference($args["idProducto"]);
   $response->getBody()->write(json_encode($formula, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->get('/formulatbl/{idProducto}', function (Request $request, Response $response, $args) use ($formulasDao) {
-  $formula = $formulasDao->findFormulaByReference($args["idProducto"]);
-  $response->getBody()->write(json_encode($formula, JSON_NUMERIC_CHECK));
-  return $response->withHeader('Content-Type', 'application/json');
-});
-
-// Obtener todas las formulas invima
-$app->get('/allFormulaInvimatbl', function (Request $request, Response $response, $args) use ($formulasInvimasDao) {
-  $formula = $formulasInvimasDao->findAllFormulaInvima();
+$app->get('/formulatbl', function (Request $request, Response $response, $args) use ($formulasDao) {
+  $formula = $formulasDao->findAllFormulas();
   $response->getBody()->write(json_encode($formula, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });

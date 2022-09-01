@@ -34,7 +34,10 @@ const granelNoFormulas = () => {
 const cargarSelect = (data, select) => {
   select.empty();
   select.append(`<option disabled selected>Seleccione</option>`);
-  select.append(`<option>Todos</option>`);
+
+  if (data[0].superUsuario == 1)
+    select.append(`<option value="1">Todos</option>`);
+
   $.each(data, function (i, value) {
     select.append(
       `<option value ="${value.referencia}">${value.referencia}</option>`
