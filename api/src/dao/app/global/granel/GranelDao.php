@@ -26,11 +26,16 @@ class GranelDao
 
   public function findAll()
   {
+    session_start();
+    $rol = $_SESSION['rol'];
+
     $connection = Connection::getInstance()->getConnection();
-    $stmt = $connection->prepare("SELECT referencia, nombre_referencia FROM producto 
+
+    $stmt = $connection->prepare("SELECT referencia, nombre_referencia, IF(:rol=1, 1, null) AS superUsuario
+                                    FROM producto 
                                     WHERE referencia LIKE '%Granel%' 
                                     ORDER BY SUBSTR(referencia, 1, 7), CAST(SUBSTR(referencia, 8, LENGTH(referencia)) AS UNSIGNED)");
-    $stmt->execute();
+    $stmt->execute(['rol' => $rol]);
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $granel = $stmt->fetchAll($connection::FETCH_ASSOC);
     $this->logger->notice("graneles Obtenidos", array('graneles' => $granel));
@@ -52,7 +57,7 @@ class GranelDao
     $this->logger->notice("graneles Obtenidos", array('graneles' => $granel));
 
     /* Graneles con formula */
-    
+
     $stmt = $connection->prepare("SELECT DISTINCT f.id_producto, p.nombre_referencia FROM formula f
                                   INNER JOIN producto p ON p.referencia = f.id_producto 
                                   WHERE id_producto LIKE '%Granel%' 
@@ -63,7 +68,7 @@ class GranelDao
     $this->logger->notice("graneles Obtenidos", array('graneles' => $granelFormula));
 
     $granelNoFormula = array_diff_assoc($granel, $granelFormula);
-    
+
     return $granelNoFormula;
   }
 }

@@ -17,9 +17,8 @@ class FormulasInvimaDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
-    public function findAllFormulaInvima($referencia)
+    public function findAllFormulaInvimaByReferencia($referencia)
     {
-
         $connection = Connection::getInstance()->getConnection();
 
         $sql = "SELECT id_notificacion_sanitaria as id FROM producto WHERE referencia = :referencia";
@@ -34,7 +33,7 @@ class FormulasInvimaDao
         $stmt = $connection->prepare($sql);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         $stmt->execute(['notificacion' => $notif_sanitaria['id']]);
-        
+
         $formulasInvima = $stmt->fetchAll($connection::FETCH_ASSOC);
         $this->logger->notice("formulasInvima Obtenidas", array('formulasInvima' => $formulasInvima));
         return $formulasInvima;
@@ -73,5 +72,5 @@ class FormulasInvimaDao
         $stmt->execute(['id_materiaprima' => $ref_materia, 'notif_sanitaria' => $notif_sanitaria['id']]);
         $rows = $stmt->rowCount();
         return $rows;
-    } 
+    }
 }

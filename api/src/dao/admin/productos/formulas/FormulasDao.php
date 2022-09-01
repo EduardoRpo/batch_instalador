@@ -17,6 +17,19 @@ class FormulasDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
+    public function findAllFormulas()
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        $stmt = $connection->prepare("SELECT f.id, mp.referencia, mp.nombre, mp.alias, cast(AES_DECRYPT(porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje 
+                                      FROM formula f INNER JOIN materia_prima mp ON f.id_materiaprima = mp.referencia 
+                                      WHERE f.id_producto LIKE 'Granel-%';");
+        $stmt->execute();
+        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        $formulas = $stmt->fetchAll($connection::FETCH_ASSOC);
+        $this->logger->notice("formulas Obtenidas", array('formulas' => $formulas));
+        return $formulas;
+    }
 
     public function findFormulaByReference($referencia)
     {

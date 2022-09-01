@@ -156,14 +156,14 @@ $(document).ready(function () {
       if (dias > 15) $(row).css('color', 'orange');
       if (dias > 30) $(row).css('color', 'red');
 
-      if (data.fecha_registro) {
-        fecha_observacion = moment(data.fecha_registro);
-        hoy = moment(Date());
+      /* if (data.fecha_registro) {
+                fecha_observacion = moment(data.fecha_registro);
+                hoy = moment(Date());
 
-        dias = hoy.diff(fecha_observacion, 'days');
+                dias = hoy.diff(fecha_observacion, 'days');
 
-        if (dias > 15) $(row).css('color', 'red');
-      }
+                if (dias > 15) $(row).css('color', 'red');
+            } */
     },
   });
 });

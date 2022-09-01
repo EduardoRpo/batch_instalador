@@ -21,18 +21,20 @@ class PreBatchDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $sql = "SELECT pp.nombre AS propietario, exp.pedido, exp.fecha_pedido, exp.estado, exp.cantidad_acumulada, exp.fecha_insumo, CURRENT_DATE AS fecha_actual, (SELECT referencia FROM producto 
+        $sql = "SELECT DISTINCT pp.nombre AS propietario, exp.pedido, exp.fecha_pedido, exp.estado, exp.cantidad_acumulada, exp.fecha_insumo, CURRENT_DATE AS fecha_actual, (SELECT referencia FROM producto 
                 WHERE multi = (SELECT multi FROM producto WHERE referencia = exp.id_producto) 
                 -- AND presentacion_comercial = 1 
                 LIMIT 1) AS granel, exp.id_producto, p.nombre_referencia, exp.cant_original, exp.cantidad, 
                     IFNULL(DATE_ADD(exp.fecha_insumo, INTERVAL 8 DAY),DATE_ADD(exp.fecha_pedido, INTERVAL 8 DAY)) AS fecha_pesaje, 						
                     IFNULL(DATE_ADD(exp.fecha_insumo, INTERVAL 9 DAY),DATE_ADD(exp.fecha_pedido, INTERVAL 9 DAY)) AS fecha_preparacion,
                     IFNULL(DATE_ADD(exp.fecha_insumo, INTERVAL 13 DAY),DATE_ADD(exp.fecha_pedido, INTERVAL 13 DAY)) AS envasado, 
-                    IFNULL(DATE_ADD(exp.fecha_insumo, INTERVAL 15 DAY),DATE_ADD(exp.fecha_pedido, INTERVAL 15 DAY)) AS entrega 
+                    IFNULL(DATE_ADD(exp.fecha_insumo, INTERVAL 15 DAY),DATE_ADD(exp.fecha_pedido, INTERVAL 15 DAY)) AS entrega , 
+                    (SELECT COUNT(*) FROM observaciones_batch_inactivos WHERE pedido = exp.pedido AND referencia = exp.id_producto) AS cant_observations
                 FROM `explosion_materiales_pedidos_registro` exp 
                     INNER JOIN producto p ON p.referencia = exp.id_producto 
-                    INNER JOIN propietario pp ON pp.id = p.id_propietario;
-                ;"; //WHERE exp.flag_estado = 0
+                    INNER JOIN propietario pp ON pp.id = p.id_propietario
+                    LEFT JOIN observaciones_batch_inactivos obi ON obi.pedido = exp.pedido AND obi.referencia = exp.id_producto
+        "; //WHERE exp.flag_estado = 0
 
         $query = $connection->prepare($sql);
         $query->execute();
@@ -93,14 +95,14 @@ class PreBatchDao
             $fecha_dtco = date_format($date, "Y-m-d");
 
             $sql = "INSERT INTO explosion_materiales_pedidos_registro (pedido, id_producto, cant_original, cantidad, fecha_pedido) 
-                    VALUES(:pedido, :id_producto, :cant_original, :cantidad, :fecha_pedido)";
+                    VALUES(:pedido, :id_producto, :cant_original, :cantidad, :fecha_pedido, :fecha_actual)";
             $query = $connection->prepare($sql);
             $query->execute([
                 'pedido' => trim($dataPedidos['documento']),
                 'id_producto' =>  trim("M-" . $dataPedidos['producto']),
                 'cant_original' => trim($dataPedidos['cant_original']),
                 'cantidad' => trim($dataPedidos['cantidad']),
-                'fecha_pedido' => $fecha_dtco,
+                'fecha_pedido' => $fecha_dtco
             ]);
         }
     }

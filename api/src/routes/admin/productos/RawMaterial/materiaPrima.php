@@ -21,7 +21,7 @@ $app->post('/SaveRawMaterial', function (Request $request, Response $response, $
             }
         } else {
             $materiaPrima = $MateriaPrimaDao->saveRawMaterial($dataMaterial);
-            if ($materiaPrima = null) {
+            if ($materiaPrima == null) {
                 $resp = array('success' => true, 'message' => 'Materia Prima Almacenada Correctamente');
             }
         }
@@ -75,31 +75,27 @@ $app->get('/deleteRawMaterialF/{id}', function (Request $request, Response $resp
 
     $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');
-    
 });
 $app->get('/rawMaterials/{tb}', function (Request $request, Response $response, $args) use ($MateriaFantasmaDao, $MateriaPrimaDao) {
     $tb = $args['tb'];
-    if($tb == 'r')
-    {
+    if ($tb == 'r') {
         $materiaPrima = $MateriaPrimaDao->findAllRawMaterial();
         $response->getBody()->write(json_encode($materiaPrima, JSON_NUMERIC_CHECK));
         return $response->withHeader('Content-Type', 'application/json');
-    }else
-    {
+    } else {
         $materiaFantasma = $MateriaFantasmaDao->findAllRawMaterialF();
         $response->getBody()->write(json_encode($materiaFantasma, JSON_NUMERIC_CHECK));
         return $response->withHeader('Content-Type', 'application/json');
     }
 });
 
-$app->post('/SearchRawMaterial', function (Request $request, Response $response, $args) use ($MateriaFantasmaDao, $MateriaPrimaDao){
+$app->post('/SearchRawMaterial', function (Request $request, Response $response, $args) use ($MateriaFantasmaDao, $MateriaPrimaDao) {
     $dataMaterial = $request->getParsedBody();
-    if($dataMaterial['tabla'] == 'r' ){
+    if ($dataMaterial['tabla'] == 'r') {
         $materiaPrima = $MateriaPrimaDao->findRawMaterial($dataMaterial);
         $response->getbody()->write(json_encode($materiaPrima, JSON_NUMERIC_CHECK));
         return $response->withHeader('Content-Type', 'application/json');
-    }else
-    {
+    } else {
         $materiaPrima = $MateriaFantasmaDao->findRawMaterialF($dataMaterial);
         $response->getBody()->write(json_encode($materiaPrima, JSON_NUMERIC_CHECK));
         return $response->withHeader('Content-Type', 'application/json');

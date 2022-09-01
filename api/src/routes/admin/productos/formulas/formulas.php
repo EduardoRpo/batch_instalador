@@ -24,14 +24,14 @@ $app->get('/formula/{idProducto}', function (Request $request, Response $respons
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->get('/formulatbl/{idProducto}', function (Request $request, Response $response, $args) use ($formulasDao) {
-  $formula = $formulasDao->findFormulaByReference($args["idProducto"]);
+$app->get('/formulatbl', function (Request $request, Response $response, $args) use ($formulasDao) {
+  $formula = $formulasDao->findAllFormulas();
   $response->getBody()->write(json_encode($formula, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
 
 $app->get('/formulaInvimatbl/{idProducto}', function (Request $request, Response $response, $args) use ($formulasInvimasDao) {
-  $formula = $formulasInvimasDao->findAllFormulaInvima($args["idProducto"]);
+  $formula = $formulasInvimasDao->findAllFormulaInvimaByReferencia($args["idProducto"]);
   $response->getBody()->write(json_encode($formula, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
