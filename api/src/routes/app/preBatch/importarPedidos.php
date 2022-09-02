@@ -31,39 +31,49 @@ $app->post('/validacionDatosPedidos', function (Request $request, Response $resp
         unset($data[$i]);
         $nonProducts = $nonProducts + 1;
       } else {
+        // Validar formato de fecha
+        $fecha = date_create($dataGlobal[$i]['fecha_dcto']);
+        if ($fecha == false) {
+          $i = $i + 1;
+          $dataImportOrders = array('error' => true, 'message' => "Error al capturar fecha de pedido. Por favor ingrese la fecha con el orden: (AÑO - MES - DIA) fila: $i");
+          break;
+        }
+
         $result = $preBatchDao->findOrders($dataGlobal[$i]['documento']);
         $result ? $update = $update + 1 : $insert = $insert + 1;
       }
     }
 
-    //Obtener cantidad de referencias
-    $key_array = array();
-    $temp_array = array();
-    $i = 0;
+    if (!isset($dataImportOrders)) {
+      //Obtener cantidad de referencias
+      $key_array = array();
+      $temp_array = array();
+      $i = 0;
 
-    foreach ($data as $val) {
-      if (!in_array($val['producto'], $key_array)) {
-        $key_array[$i] = $val['producto'];
-        $temp_array[$i] = $val;
+      foreach ($data as $val) {
+        if (!in_array($val['producto'], $key_array)) {
+          $key_array[$i] = $val['producto'];
+          $temp_array[$i] = $val;
+        }
+        $i++;
       }
-      $i++;
-    }
 
-    date_default_timezone_set('America/Bogota');
-    $fecha_hora = date('Y-m-d h:i a');
+      date_default_timezone_set('America/Bogota');
+      $fecha_hora = date('Y-m-d h:i a');
 
-    $dataImportOrders = array('success' => true, 'fecha_importe' => $fecha_hora, 'update' => $update, 'insert' => $insert, 'nonProducts' => $nonProducts, 'pedidos' => sizeof($dataPedidos['data']), 'referencias' => sizeof($temp_array));
+      $dataImportOrders = array('success' => true, 'fecha_importe' => $fecha_hora, 'update' => $update, 'insert' => $insert, 'nonProducts' => $nonProducts, 'pedidos' => sizeof($dataPedidos['data']), 'referencias' => sizeof($temp_array));
 
-    // Guardar pedidos existentes
-    session_start();
-    $data = array_values($data);
-    $_SESSION['dataImportPedidos'] = $data;
+      // Guardar pedidos existentes
+      session_start();
+      $data = array_values($data);
+      $_SESSION['dataImportPedidos'] = $data;
 
-    //Guardar campos con productos no existentes
-    if ($nonExistentProducts) {
-      $nonExistentProducts['pedido'] = array_values($nonExistentProducts['pedido']);
-      $nonExistentProducts['referencia'] = array_values($nonExistentProducts['referencia']);
-      $_SESSION['nonExistentProducts'] = $nonExistentProducts;
+      //Guardar campos con productos no existentes
+      if ($nonExistentProducts) {
+        $nonExistentProducts['pedido'] = array_values($nonExistentProducts['pedido']);
+        $nonExistentProducts['referencia'] = array_values($nonExistentProducts['referencia']);
+        $_SESSION['nonExistentProducts'] = $nonExistentProducts;
+      }
     }
   } else $dataImportOrders = array('error' => true, 'message' => 'El archivo se encuentra vacio. Intente nuevamente');
 
