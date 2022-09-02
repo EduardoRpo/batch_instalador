@@ -21,7 +21,7 @@ class FormulasDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $stmt = $connection->prepare("SELECT f.id, mp.referencia, mp.nombre, mp.alias, cast(AES_DECRYPT(porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje 
+        $stmt = $connection->prepare("SELECT f.id_producto, mp.referencia, mp.nombre, mp.alias, cast(AES_DECRYPT(porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje 
                                       FROM formula f INNER JOIN materia_prima mp ON f.id_materiaprima = mp.referencia 
                                       WHERE f.id_producto LIKE 'Granel-%';");
         $stmt->execute();

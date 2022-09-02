@@ -33,11 +33,11 @@
                         <li><a href="formulas.php" id="link_formulas"><i class="fas fa-vote-yea"></i><span>Formulas</span></a></li>
                     <?php  } ?>
 
-                    <li id="instructivos"><a href=""><i class="fa fa-chevron-down"></i><span>Instructivos</span></a></li>
-                    <ul class="menu_instructivos">
+                    <!-- <li id="instructivos"><a href=""><i class="fa fa-chevron-down"></i><span>Instructivos</span></a></li> -->
+                    <!-- <ul class="menu_instructivos"> -->
                         <!-- <li><a href="bases.php" id="link_bases"><i class="fa fa-list-alt"></i><span>Bases </span></a></li> -->
                         <li><a href="instructivo.php" id="link_preparaciones"><i class="fa fa-bars"></i><span>Instructivo </span></a></li>
-                    </ul>
+                    <!-- </ul> -->
 
                     <li><a href="multipresentacion.php" id="link_multipresentacion"><i class="fas fa-superscript"></i><span>Multipresentación</span></a></li>
                 </ul>

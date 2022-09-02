@@ -35,12 +35,14 @@ const cargarSelect = (data, select) => {
   select.empty();
   select.append(`<option disabled selected>Seleccione</option>`);
 
-  if (data.superUsuario == 1) select.append(`<option value="1">Todos</option>`);
+  if (data[0].superUsuario == 1)
+    select.append(`<option value="1">Todos</option>`);
 
   $.each(data, function (i, value) {
-    select.append(
-      `<option value ="${value.referencia}">${value.referencia}</option>`
-    );
+    if (value.referencia)
+      select.append(
+        `<option value ="${value.referencia}">${value.referencia}</option>`
+      );
   });
 };
 
