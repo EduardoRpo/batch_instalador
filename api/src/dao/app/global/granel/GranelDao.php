@@ -39,7 +39,7 @@ class GranelDao
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $granel = $stmt->fetchAll($connection::FETCH_ASSOC);
     $this->logger->notice("graneles Obtenidos", array('graneles' => $granel));
-    $granel['superUsuario'] = $rol;
+    $granel[0]['superUsuario'] = $rol;
     return $granel;
   }
 
@@ -69,7 +69,8 @@ class GranelDao
     $this->logger->notice("graneles Obtenidos", array('graneles' => $granelFormula));
 
     $granelNoFormula = array_diff_assoc($granel, $granelFormula);
-    $granelNoFormula['superUsuario'] = 0;
+    $granelNoFormula = array_values($granelNoFormula);
+    $granelNoFormula[0]['superUsuario'] = 0;
 
     return $granelNoFormula;
   }
