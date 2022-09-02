@@ -48,7 +48,7 @@ class EstadoInicialDao
         /* Asigna el estado de acuerdo con el resultado */
         if ($result === 0) {
             $estado = '1';  //Sin formula
-            $fechaprogramacion = '';
+            $fechaprogramacion = null;
         }
 
         if ($result > 0 && $fechaprogramacion == '')
