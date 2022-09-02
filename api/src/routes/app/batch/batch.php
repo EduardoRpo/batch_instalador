@@ -88,7 +88,7 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
     //Guarda Batch
     $resp = $batchDao->saveBatch($dataBatch[$i], $multi);
 
-    /* Indentifica el ultimo Batch ingresado */
+    /* Identifica el ultimo Batch ingresado */
     if ($resp == null)
       $id_batch = $ultimoBatchDao->ultimoBatchCreado();
 
