@@ -22,20 +22,32 @@ $app->post('/validacionDatosPedidos', function (Request $request, Response $resp
     $data = $dataPedidos['data'];
 
     for ($i = 0; $i < sizeof($dataGlobal); $i++) {
+
+      $dataConvertPedidos = $preBatchDao->convertData($dataGlobal[$i]);
+
       //Consultar si existe producto en la base de datos
-      $product = $productDao->findProduct(trim($dataGlobal[$i]['producto']));
+      $product = $productDao->findProduct(trim($dataConvertPedidos['producto']));
 
       if (!$product) {
-        $nonExistentProducts['pedido'][$i] = trim($dataGlobal[$i]['documento']);
-        $nonExistentProducts['referencia'][$i] = trim($dataGlobal[$i]['producto']);
+        $nonExistentProducts['pedido'][$i] = trim($dataConvertPedidos['documento']);
+        $nonExistentProducts['referencia'][$i] = trim($dataConvertPedidos['producto']);
         unset($data[$i]);
         $nonProducts = $nonProducts + 1;
       } else {
-        $result = $preBatchDao->findOrders($dataGlobal[$i]['documento']);
+        // Validar formato de fecha
+        /* $fecha = date_create($dataConvertPedidos[$i]['fecha_dcto']);
+        if ($fecha == false) {
+          $i = $i + 1;
+          $dataImportOrders = array('error' => true, 'message' => "Error al capturar fecha de pedido. Por favor ingrese la fecha con el orden: (AÑO - MES - DIA) fila: $i");
+          break;
+        } */
+
+        $result = $preBatchDao->findOrders($dataConvertPedidos['documento']);
         $result ? $update = $update + 1 : $insert = $insert + 1;
       }
     }
 
+    //if (!isset($dataImportOrders)) {
     //Obtener cantidad de referencias
     $key_array = array();
     $temp_array = array();
@@ -65,6 +77,7 @@ $app->post('/validacionDatosPedidos', function (Request $request, Response $resp
       $nonExistentProducts['referencia'] = array_values($nonExistentProducts['referencia']);
       $_SESSION['nonExistentProducts'] = $nonExistentProducts;
     }
+    //}
   } else $dataImportOrders = array('error' => true, 'message' => 'El archivo se encuentra vacio. Intente nuevamente');
 
   $response->getBody()->write(json_encode($dataImportOrders, JSON_NUMERIC_CHECK));

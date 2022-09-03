@@ -60,8 +60,7 @@ checkImport = (data) => {
                        </div>
                          `,
           function () {
-            savePedidos();
-            deletePedidosSession();
+            fetchindata();
           },
           function () {
             $('#filePedidos').val('');
@@ -74,19 +73,42 @@ checkImport = (data) => {
 };
 
 //Opcion SI
-savePedidos = () => {
-  $.ajax({
-    type: 'POST',
-    url: '/api/addPedidos',
-    success: function (resp) {
-      if (resp.success) {
-        actualizarTablaPedidos();
-        $('.cardImportarPedidos').hide(800);
-        $('#filePedidos').val('');
-      }
-      notificaciones(resp);
-    },
-  });
+fetchindata = async () => {
+  response = await savePedidos();
+  if (response.success) {
+    actualizarTablaPedidos();
+    $('.cardImportarPedidos').hide(800);
+    $('#filePedidos').val('');
+  }
+  notificaciones(response);
+  deletePedidosSession();
+};
+
+// savePedidos = async () => {
+//   $.ajax({
+//     type: 'POST',
+//     url: '',
+//     success: function (resp) {
+//       if (resp.success) {
+//         actualizarTablaPedidos();
+//         $('.cardImportarPedidos').hide(800);
+//         $('#filePedidos').val('');
+//       }
+//       notificaciones(resp);
+//     },
+//   });
+// };
+
+savePedidos = async () => {
+  try {
+    result = await $.ajax({
+      url: '/api/addPedidos',
+      type: 'POST',
+    });
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 //Opcion NO
