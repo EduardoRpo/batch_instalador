@@ -78,12 +78,13 @@ $app->post('/SaveFormula', function (Request $request, Response $response, $args
     } else {
       $result = $formulasDao->saveFormula($dataFormula, $tbl);
       if ($result == null) {
-        $estadoBatch = $estadoInicialDao->estadoInicial($dataFormula['ref_producto'], $fechaprogramacion = "");
-        $dataBatchEstado = $batchDao->findEstadoBatch($dataFormula['ref_producto']);
+        $batchs = $batchDao->findBatchByRef($dataFormula['referencia']);
 
-        for ($i = 0; $i < sizeof($dataBatchEstado); $i++)
-          if ($dataBatchEstado['estado'] > 0 && $$dataBatchEstado['estado'] < 3)
-            $result = $batchDao->updateEstadoBatch($estadoBatch);
+        for ($i = 0; $i < sizeof($batchs); $i++)
+          if ($batchs[$i]['estado'] == 1) {
+            $estado = $estadoInicialDao->estadoInicial($dataFormula['referencia'], '');
+            $batchDao->updateEstadoBatch($batchs[$i]['id_batch'], $batchs[$i]['id_producto'], $estado[0]);
+          }
       }
 
       $result == null

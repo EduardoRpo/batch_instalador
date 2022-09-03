@@ -62,10 +62,10 @@ require_once __DIR__ . '/src/routes/admin/productos/RawMaterial/materiaPrima.php
 require_once __DIR__ . '/src/routes/admin/productos/formulas/formulas.php';
 
 require_once __DIR__ . '/src/routes/admin/productos/instructive/baseInstructive.php';
+require_once __DIR__ . '/src/routes/admin/productos/instructive/instructivos.php';
 
 require_once __DIR__ . '/src/routes/admin/productos/multiP.php';
 require_once __DIR__ . '/src/routes/admin/productos/productos.php';
-require_once __DIR__ . '/src/routes/admin/productos/instructivos.php';
 require_once __DIR__ . '/src/routes/admin/pdf/certificados.php';
 require_once __DIR__ . '/src/routes/admin/pdf/versiones.php';
 
