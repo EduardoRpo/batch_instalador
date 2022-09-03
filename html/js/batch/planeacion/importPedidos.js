@@ -54,10 +54,7 @@ checkImport = (data) => {
                          <div class="w-100"></div>
                          <div class="col">Sin producto: ${resp.nonProducts}</div>
                        </div><br><br>
-                       <div class="row">
-                        <div class="col">Fecha importe: ${resp.fecha_importe}</div>
-                        <div class="col-lg-5">Desea continuar?</div>
-                       </div>
+                        <p>Desea continuar?</p>
                          `,
           function () {
             fetchindata();
@@ -77,11 +74,16 @@ fetchindata = async () => {
   response = await savePedidos();
   if (response.success) {
     actualizarTablaPedidos();
-    $('.cardImportarPedidos').hide(800);
+    //$('.cardImportarPedidos').hide(800);
     $('#filePedidos').val('');
   }
   notificaciones(response);
-  deletePedidosSession();
+  fecha = new Date();
+
+  $('.fechaImporte').html(
+    `<p>Fecha y Hora de importe: ${fecha.toLocaleString('es-CO')}</p>`
+  );
+  //deletePedidosSession();
 };
 
 // savePedidos = async () => {
@@ -150,6 +152,8 @@ $('#btnPedidosNoEncontrados').click(function (e) {
       );
     },
   });
+  $('.cardImportarPedidos').hide(800);
+  $('#filePedidos').val('');
 });
 
 addRow = (data) => {

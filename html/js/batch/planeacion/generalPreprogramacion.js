@@ -72,7 +72,7 @@ $(document).ready(function () {
         function (evt, value) {
           if (!value || value == '') {
             alertify.set('notifier', 'position', 'top-right');
-            alertify.error('Ingrese fecha');
+            alertify.error('Ingrese fecha de planeación');
             return false;
           }
 

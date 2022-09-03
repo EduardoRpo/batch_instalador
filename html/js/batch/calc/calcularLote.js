@@ -93,7 +93,7 @@ $(document).ready(function () {
   };
 
   // Fecha inicio
-  $(document).on('blur', '.dateInsumos', function (e) {
+  $(document).on('change', '.dateInsumos', function (e) {
     e.preventDefault();
     id_date = this.id;
     id_input = id_date.substr(5, id_date.length);

@@ -87,10 +87,13 @@ include_once("modal/modalPedidos.php");
           <div class="card">
             <div class="card-body p-3">
               <label for="formFile" class="form-label"> Importar Archivo de Pedidos</label>
-              <div style="display: flex; width:70%">
-                <input class="form-control" type="file" id="filePedidos" accept=".xls,.xlsx">
-                <button class="btn btn-warning ml-3" id="btnImportarPedidos">Importar Pedidos</button>
-                <button class="btn btn-danger ml-3" id="btnPedidosNoEncontrados">Pedidos No Encontrados</button>
+              <div class="row">
+                <div class="col" style="display: flex; width:70%">
+                  <input class="form-control" type="file" id="filePedidos" accept=".xls,.xlsx">
+                  <button class="btn btn-warning ml-3" id="btnImportarPedidos">Importar Pedidos</button>
+                  <button class="btn btn-danger ml-3" id="btnPedidosNoEncontrados">Pedidos No Encontrados</button>
+                </div>
+                <div class="col-lg-4 fechaImporte"></div>
               </div>
             </div>
           </div>

@@ -1,19 +1,17 @@
-$(document).ready(function() {
+$(document).ready(function () {
+  let selectedFile;
 
-    let selectedFile;
+  $('.cardImportarPedidos').hide();
 
-    $('.cardImportarPedidos').hide();
-
-    $('#btnCargarExcelPedidos').click(function(e) {
-        $('.cardImportarPedidos').toggle(800);
-    })
+  $('#btnCargarExcelPedidos').click(function (e) {
+    $('.cardImportarPedidos').toggle(800);
+  });
 });
 
-$('#filePedidos').change(function(e) {
-    e.preventDefault();
-    selectedFile = e.target.files[0];
+$('#filePedidos').change(function (e) {
+  e.preventDefault();
+  selectedFile = e.target.files[0];
 });
-
 
 /* $('#btnCargarExcelPedidos').click(function (e) {
 e.preventDefault()

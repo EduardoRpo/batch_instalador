@@ -61,10 +61,7 @@ $app->post('/validacionDatosPedidos', function (Request $request, Response $resp
       $i++;
     }
 
-    date_default_timezone_set('America/Bogota');
-    $fecha_hora = date('Y-m-d h:i a');
-
-    $dataImportOrders = array('success' => true, 'fecha_importe' => $fecha_hora, 'update' => $update, 'insert' => $insert, 'nonProducts' => $nonProducts, 'pedidos' => sizeof($dataPedidos['data']), 'referencias' => sizeof($temp_array));
+    $dataImportOrders = array('success' => true, 'update' => $update, 'insert' => $insert, 'nonProducts' => $nonProducts, 'pedidos' => sizeof($dataPedidos['data']), 'referencias' => sizeof($temp_array));
 
     // Guardar pedidos existentes
     session_start();
@@ -88,8 +85,10 @@ $app->get('/sendNonExistentProducts', function (Request $request, Response $resp
   session_start();
   $data = $_SESSION['nonExistentProducts'];
 
-  if ($data) $resp = $data;
-  else $resp = array('error' => true, 'message' => 'Importe un nuevo archivo');
+  if ($data) {
+    $resp = $data;
+    unset($_SESSION['nonExistentProducts']);
+  } else $resp = array('error' => true, 'message' => 'Importe un nuevo archivo');
 
   $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
@@ -122,7 +121,7 @@ $app->post('/addPedidos', function (Request $request, Response $response, $args)
 $app->get('/deletePedidosSession', function (Request $request, Response $response, $args) {
   //Eliminar variable session
   session_start();
-  unset($_SESSION['nonExistentProducts'], $_SESSION['dataImportPedidos']);
+  unset($_SESSION['dataImportPedidos']);
   $response->getBody()->write(json_encode(JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
