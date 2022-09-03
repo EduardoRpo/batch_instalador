@@ -77,13 +77,14 @@ $app->post('/SaveFormula', function (Request $request, Response $response, $args
         : $resp = array('error' => true, 'message' => 'Ocurrio un error mientras guardaba. Intente nuevamente');
     } else {
       $result = $formulasDao->saveFormula($dataFormula, $tbl);
+      
       if ($result == null) {
-        $batchs = $batchDao->findBatchByRef($dataFormula['referencia']);
+        $batchs = $batchDao->findBatchByRef($dataFormula['ref_producto']);
 
         for ($i = 0; $i < sizeof($batchs); $i++)
           if ($batchs[$i]['estado'] == 1) {
-            $estado = $estadoInicialDao->estadoInicial($dataFormula['referencia'], '');
-            $batchDao->updateEstadoBatch($batchs[$i]['id_batch'], $batchs[$i]['id_producto'], $estado[0]);
+            $estado = $estadoInicialDao->estadoInicial($dataFormula['ref_producto'], '');
+            $batchDao->updateEstadoBatch($batchs[$i]['id_batch'], $estado[0]);
           }
       }
 
