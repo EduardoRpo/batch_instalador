@@ -122,4 +122,16 @@ class PreBatchDao
                                       WHERE id IN(SELECT id FROM explosion_materiales_pedidos_registro WHERE pedido NOT IN({$data}))");
         $stmt->execute();
     }
+
+    public function convertData($dataPedidos)
+    {
+        $data = array();
+        $data['cliente'] = str_replace(',', '', $dataPedidos['cliente']);
+        $data['documento'] = str_replace(',', '', $dataPedidos['documento']);
+        $data['producto'] = str_replace(',', '', $dataPedidos['producto']);
+        $data['cant_original'] = str_replace(',', '', $dataPedidos['cant_original']);
+        $data['cantidad'] = str_replace(',', '', $dataPedidos['cantidad']);
+
+        return $data;
+    }
 }
