@@ -75,7 +75,7 @@ checkImport = (data) => {
 //Opcion SI
 fetchindata = async () => {
   response = await savePedidos();
-  if (resp.success) {
+  if (response.success) {
     actualizarTablaPedidos();
     $('.cardImportarPedidos').hide(800);
     $('#filePedidos').val('');

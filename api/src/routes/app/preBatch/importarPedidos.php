@@ -32,12 +32,12 @@ $app->post('/validacionDatosPedidos', function (Request $request, Response $resp
         $nonProducts = $nonProducts + 1;
       } else {
         // Validar formato de fecha
-        $fecha = date_create($dataGlobal[$i]['fecha_dcto']);
+        /* $fecha = date_create($dataGlobal[$i]['fecha_dcto']);
         if ($fecha == false) {
           $i = $i + 1;
           $dataImportOrders = array('error' => true, 'message' => "Error al capturar fecha de pedido. Por favor ingrese la fecha con el orden: (AÑO - MES - DIA) fila: $i");
           break;
-        }
+        } */
 
         $result = $preBatchDao->findOrders($dataGlobal[$i]['documento']);
         $result ? $update = $update + 1 : $insert = $insert + 1;
