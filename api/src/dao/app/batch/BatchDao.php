@@ -247,7 +247,7 @@ class BatchDao extends estadoInicialDao
     {
         $connection = Connection::getInstance()->getConection();
         $stmt = $connection->prepare("UPDATE batch SET estado = :estado 
-                                      WHERE id_producto = :referencia");
+                                      WHERE id_producto = :referencia AND estado > 0 AND estado < 3");
         $result = $stmt->execute(['estado' => $databatch["estado"], 'referencia' => $databatch['ref_producto']]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         return $result;
