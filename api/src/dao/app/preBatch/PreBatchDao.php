@@ -93,9 +93,10 @@ class PreBatchDao
             $date = date_create($dataPedidos['fecha_dcto']);
             date_time_set($date, 13, 24);
             $fecha_dtco = date_format($date, "Y-m-d");
+            // $fecha_dtco = date_format($dataPedidos['fecha_dcto'], 'Y-m-d');
 
             $sql = "INSERT INTO explosion_materiales_pedidos_registro (pedido, id_producto, cant_original, cantidad, fecha_pedido) 
-                    VALUES(:pedido, :id_producto, :cant_original, :cantidad, :fecha_pedido, :fecha_actual)";
+                    VALUES(:pedido, :id_producto, :cant_original, :cantidad, :fecha_pedido)";
             $query = $connection->prepare($sql);
             $query->execute([
                 'pedido' => trim($dataPedidos['documento']),
@@ -120,5 +121,17 @@ class PreBatchDao
                                       SET flag_estado = 1 
                                       WHERE id IN(SELECT id FROM explosion_materiales_pedidos_registro WHERE pedido NOT IN({$data}))");
         $stmt->execute();
+    }
+
+    public function convertData($dataPedidos)
+    {
+        $data = array();
+        $data['cliente'] = str_replace(',', '', $dataPedidos['cliente']);
+        $data['documento'] = str_replace(',', '', $dataPedidos['documento']);
+        $data['producto'] = str_replace(',', '', $dataPedidos['producto']);
+        $data['cant_original'] = str_replace(',', '', $dataPedidos['cant_original']);
+        $data['cantidad'] = str_replace(',', '', $dataPedidos['cantidad']);
+
+        return $data;
     }
 }

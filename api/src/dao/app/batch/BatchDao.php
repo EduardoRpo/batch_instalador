@@ -27,6 +27,16 @@ class BatchDao extends estadoInicialDao
         return $dataBatch;
     }
 
+    public function findBatchByRef($reference)
+    {
+        $connection = Connection::getInstance()->getConnection();
+        $stmt = $connection->prepare("SELECT * FROM `batch` 
+                                      WHERE id_producto = :granel;");
+        $stmt->execute(['granel' => $reference]);
+        $dataBatch = $stmt->fetchAll($connection::FETCH_ASSOC);
+        return $dataBatch;
+    }
+
     public function findEstadoBatch($ref_producto)
     {
         $connection = Connection::getInstance()->getConnection();
@@ -243,12 +253,11 @@ class BatchDao extends estadoInicialDao
         } */
     }
 
-    public function updateEstadoBatch($databatch)
+    public function updateEstadoBatch($batch, $estado)
     {
-        $connection = Connection::getInstance()->getConection();
-        $stmt = $connection->prepare("UPDATE batch SET estado = :estado 
-                                      WHERE id_producto = :referencia");
-        $result = $stmt->execute(['estado' => $databatch["estado"], 'referencia' => $databatch['ref_producto']]);
+        $connection = Connection::getInstance()->getConnection();
+        $stmt = $connection->prepare("UPDATE batch SET estado = :estado WHERE id_batch = :batch");
+        $result = $stmt->execute(['batch' => $batch, 'estado' => $estado]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         return $result;
     }

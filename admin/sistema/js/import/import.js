@@ -6,10 +6,16 @@ $(document).ready(function () {
 
       fileReader.onload = (event) => {
         let data = event.target.result;
-        let workbook = XLSX.read(data, { type: 'binary' });
+        let workbook = XLSX.read(data, {
+          type: 'binary',
+        });
         workbook.SheetNames.forEach((sheet) => {
           rowObject = XLSX.utils.sheet_to_row_object_array(
-            workbook.Sheets[sheet]
+            workbook.Sheets[sheet],
+            {
+              raw: false,
+              dateNF: 'dd-mm-yyyy',
+            }
           );
         });
         resolve(rowObject);

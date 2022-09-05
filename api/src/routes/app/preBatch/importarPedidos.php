@@ -22,20 +22,32 @@ $app->post('/validacionDatosPedidos', function (Request $request, Response $resp
     $data = $dataPedidos['data'];
 
     for ($i = 0; $i < sizeof($dataGlobal); $i++) {
+
+      $dataConvertPedidos = $preBatchDao->convertData($dataGlobal[$i]);
+
       //Consultar si existe producto en la base de datos
-      $product = $productDao->findProduct(trim($dataGlobal[$i]['producto']));
+      $product = $productDao->findProduct(trim($dataConvertPedidos['producto']));
 
       if (!$product) {
-        $nonExistentProducts['pedido'][$i] = trim($dataGlobal[$i]['documento']);
-        $nonExistentProducts['referencia'][$i] = trim($dataGlobal[$i]['producto']);
+        $nonExistentProducts['pedido'][$i] = trim($dataConvertPedidos['documento']);
+        $nonExistentProducts['referencia'][$i] = trim($dataConvertPedidos['producto']);
         unset($data[$i]);
         $nonProducts = $nonProducts + 1;
       } else {
-        $result = $preBatchDao->findOrders($dataGlobal[$i]['documento']);
+        // Validar formato de fecha
+        /* $fecha = date_create($dataConvertPedidos[$i]['fecha_dcto']);
+        if ($fecha == false) {
+          $i = $i + 1;
+          $dataImportOrders = array('error' => true, 'message' => "Error al capturar fecha de pedido. Por favor ingrese la fecha con el orden: (AÑO - MES - DIA) fila: $i");
+          break;
+        } */
+
+        $result = $preBatchDao->findOrders($dataConvertPedidos['documento']);
         $result ? $update = $update + 1 : $insert = $insert + 1;
       }
     }
 
+    //if (!isset($dataImportOrders)) {
     //Obtener cantidad de referencias
     $key_array = array();
     $temp_array = array();
@@ -49,10 +61,7 @@ $app->post('/validacionDatosPedidos', function (Request $request, Response $resp
       $i++;
     }
 
-    date_default_timezone_set('America/Bogota');
-    $fecha_hora = date('Y-m-d h:i a');
-
-    $dataImportOrders = array('success' => true, 'fecha_importe' => $fecha_hora, 'update' => $update, 'insert' => $insert, 'nonProducts' => $nonProducts, 'pedidos' => sizeof($dataPedidos['data']), 'referencias' => sizeof($temp_array));
+    $dataImportOrders = array('success' => true, 'update' => $update, 'insert' => $insert, 'nonProducts' => $nonProducts, 'pedidos' => sizeof($dataPedidos['data']), 'referencias' => sizeof($temp_array));
 
     // Guardar pedidos existentes
     session_start();
@@ -65,6 +74,7 @@ $app->post('/validacionDatosPedidos', function (Request $request, Response $resp
       $nonExistentProducts['referencia'] = array_values($nonExistentProducts['referencia']);
       $_SESSION['nonExistentProducts'] = $nonExistentProducts;
     }
+    //}
   } else $dataImportOrders = array('error' => true, 'message' => 'El archivo se encuentra vacio. Intente nuevamente');
 
   $response->getBody()->write(json_encode($dataImportOrders, JSON_NUMERIC_CHECK));
@@ -75,8 +85,10 @@ $app->get('/sendNonExistentProducts', function (Request $request, Response $resp
   session_start();
   $data = $_SESSION['nonExistentProducts'];
 
-  if ($data) $resp = $data;
-  else $resp = array('error' => true, 'message' => 'Importe un nuevo archivo');
+  if ($data) {
+    $resp = $data;
+    unset($_SESSION['nonExistentProducts']);
+  } else $resp = array('error' => true, 'message' => 'Importe un nuevo archivo');
 
   $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
@@ -109,7 +121,7 @@ $app->post('/addPedidos', function (Request $request, Response $response, $args)
 $app->get('/deletePedidosSession', function (Request $request, Response $response, $args) {
   //Eliminar variable session
   session_start();
-  unset($_SESSION['nonExistentProducts'], $_SESSION['dataImportPedidos']);
+  unset($_SESSION['dataImportPedidos']);
   $response->getBody()->write(json_encode(JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
