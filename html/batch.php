@@ -93,7 +93,11 @@ include_once("modal/modalPedidos.php");
                   <button class="btn btn-warning ml-3" id="btnImportarPedidos">Importar Pedidos</button>
                   <button class="btn btn-danger ml-3" id="btnPedidosNoEncontrados">Pedidos No Encontrados</button>
                 </div>
-                <div class="col-lg-4 fechaImporte"></div>
+                <div class="col-lg-4 fechaImporte">
+                  <?php if (isset($_SESSION['fecha_importe'])) { ?>
+                    <p>Fecha y Hora de importación: <?php echo $_SESSION['fecha_importe'] ?>, <?php echo $_SESSION['hora_importe'] ?> </p>
+                  <?php } ?>
+                </div>
               </div>
             </div>
           </div>

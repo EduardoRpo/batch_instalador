@@ -99,6 +99,7 @@ $(document).ready(function () {
 
   // Opcion NO
   clearInputArray = () => {
+    // clearVariables();
     $('#tablaPreBatch').DataTable().ajax.reload();
     deleteSession();
     pedidosProgramar.splice(0, pedidosProgramar.length);

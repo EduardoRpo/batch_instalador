@@ -1,50 +1,51 @@
-$('#btnImportarPedidos').click(function(e) {
-    e.preventDefault();
-    file = $('#filePedidos').val();
+$('#btnImportarPedidos').click(function (e) {
+  e.preventDefault();
+  file = $('#filePedidos').val();
 
-    if (!file) {
-        alertify.set('notifier', 'position', 'top-right');
-        alertify.error('Seleccione un archivo');
-        return false;
-    }
+  if (!file) {
+    alertify.set('notifier', 'position', 'top-right');
+    alertify.error('Seleccione un archivo');
+    return false;
+  }
 
-    importFile(selectedFile)
-        .then((data) => {
-            let OrderToImport = data.map((item) => {
-                return {
-                    cliente: item.Cliente,
-                    nombre_cliente: item.Nombre_Cliente,
-                    documento: item.Documento,
-                    fecha_dcto: item.Fecha_Dcto,
-                    producto: item.Producto,
-                    nombre_producto: item.Nombre_Producto,
-                    cant_original: item.Cant_Original,
-                    cantidad: item.Cantidad,
-                };
-            });
-            checkImport(OrderToImport);
-        })
-        .catch(() => {
-            console.log('Ocurrio un error. Intente Nuevamente');
-        });
+  importFile(selectedFile)
+    .then((data) => {
+      let OrderToImport = data.map((item) => {
+        return {
+          cliente: item.Cliente.trim(),
+          nombre_cliente: item.Nombre_Cliente.trim(),
+          documento: item.Documento.trim(),
+          fecha_dcto: item.Fecha_Dcto,
+          producto: item.Producto.trim(),
+          nombre_producto: item.Nombre_Producto_Mvto.trim(),
+          // nombre_producto: item.Nombre_Producto.trim(),
+          cant_original: item.Cant_Original,
+          cantidad: item.Cantidad,
+        };
+      });
+      checkImport(OrderToImport);
+    })
+    .catch(() => {
+      console.log('Ocurrio un error. Intente Nuevamente');
+    });
 });
 
 /* Validar datos */
 checkImport = (data) => {
-    $.ajax({
-        type: 'POST',
-        url: '/api/validacionDatosPedidos',
-        data: { data: data },
-        success: function(resp) {
-            if (resp.error == true) {
-                alertify.error(resp.message);
-                $('#filePedidos').val('');
-                return false;
-            }
-            alertify
-                .confirm(
-                    'Importar Pedidos',
-                    `Se han encontrado los siguientes registros:<br><br>
+  $.ajax({
+    type: 'POST',
+    url: '/api/validacionDatosPedidos',
+    data: { data: data },
+    success: function (resp) {
+      if (resp.error == true) {
+        alertify.error(resp.message);
+        $('#filePedidos').val('');
+        return false;
+      }
+      alertify
+        .confirm(
+          'Importar Pedidos',
+          `Se han encontrado los siguientes registros:<br><br>
                       <div class="row">
                          <div class="col">Datos a insertar: ${resp.insert}</div>
                          <div class="col">Cantidad filas: ${resp.pedidos}</div>
@@ -56,123 +57,117 @@ checkImport = (data) => {
                        </div><br><br>
                         <p>Desea continuar?</p>
                          `,
-                    function() {
-                        fetchindata();
-                    },
-                    function() {
-                        $('#filePedidos').val('');
-                        deletePedidosSession();
-                    }
-                )
-                .set('labels', { ok: 'Si', cancel: 'No' });
-        },
-    });
+          function () {
+            yesOption();
+          },
+          function () {
+            $('#filePedidos').val('');
+            deletePedidosSession();
+          }
+        )
+        .set('labels', { ok: 'Si', cancel: 'No' });
+    },
+  });
 };
 
 //Opcion SI
-fetchindata = async() => {
-    response = await savePedidos();
-    if (response.success) {
-        actualizarTablaPedidos();
-        //$('.cardImportarPedidos').hide(800);
-        $('#filePedidos').val('');
-    }
-    notificaciones(response);
-    fecha = new Date();
+yesOption = async () => {
+  response = await savePedidos();
+  if (response.success) {
+    actualizarTablaPedidos();
+    $('#filePedidos').val('');
 
     $('.fechaImporte').html(
-        `<p>Fecha y Hora último importe: ${fecha.toLocaleString('es-CO')}</p>`
+      `<p>Fecha y Hora de importación: ${response.fecha_hora_importe.fecha_importe}, ${response.fecha_hora_importe.hora_importe}</p>`
     );
-    //deletePedidosSession();
+  }
+  notificaciones(response);
+
+  //deletePedidosSession();
 };
 
-// savePedidos = async () => {
-//   $.ajax({
-//     type: 'POST',
-//     url: '',
-//     success: function (resp) {
-//       if (resp.success) {
-//         actualizarTablaPedidos();
-//         $('.cardImportarPedidos').hide(800);
-//         $('#filePedidos').val('');
-//       }
-//       notificaciones(resp);
-//     },
-//   });
-// };
-
-savePedidos = async() => {
-    try {
-        result = await $.ajax({
-            url: '/api/addPedidos',
-            type: 'POST',
-        });
-        return result;
-    } catch (error) {
-        console.error(error);
-    }
+savePedidos = async () => {
+  try {
+    result = await $.ajax({
+      url: '/api/addPedidos',
+      type: 'POST',
+    });
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 //Opcion NO
 deletePedidosSession = () => {
-    $.ajax({
-        type: 'GET',
-        url: '/api/deletePedidosSession',
-    });
+  $.ajax({
+    type: 'GET',
+    url: '/api/deletePedidosSession',
+  });
 };
 
-$('#btnPedidosNoEncontrados').click(function(e) {
-    e.preventDefault();
-
-    $.ajax({
-        type: 'GET',
-        url: '/api/sendNonExistentProducts',
-        success: function(resp) {
-            if (resp.error) {
-                alertify.set('notifier', 'position', 'top-right');
-                alertify.error(resp.message);
-                return false;
-            }
-
-            alertify.alert(
-                'Pedidos No Encontrados',
-                `<p>No se han importado los siguientes pedidos:</p><br>
-                  <table class="table table-striped table-bordered dataTable no-footer text-center">
-                    <thead>
-                      <tr>
-                        <th class="text-center">Pedido</th>
-                        <th class="text-center">Referencia</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      ${(row = addRow(resp))}
-                    </tbody>
-                  </table>
-        `
-            );
-        },
-    });
-    $('.cardImportarPedidos').hide(800);
-    $('#filePedidos').val('');
+$('#btnPedidosNoEncontrados').click(function (e) {
+  e.preventDefault();
+  fetchindata();
 });
 
-addRow = (data) => {
-    pedido = data.pedido;
-    referencia = data.referencia;
+fetchindata = async () => {
+  response = await findNonExistentProducts();
 
-    row = [];
-    for (i = 0; i < pedido.length; i++) {
-        row.push(`<tr>
+  if (response.error) {
+    alertify.set('notifier', 'position', 'top-right');
+    alertify.error(response.message);
+    return false;
+  }
+
+  alertify.alert(
+    'Pedidos No Encontrados',
+    `<p>No se han importado los siguientes pedidos:</p><br>
+        <table class="table table-striped table-bordered dataTable no-footer text-center">
+          <thead>
+            <tr>
+              <th class="text-center">Pedido</th>
+              <th class="text-center">Referencia</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${(row = addRow(response))}
+          </tbody>
+        </table>
+    `
+  );
+  $('.cardImportarPedidos').hide(800);
+  $('#filePedidos').val('');
+};
+
+findNonExistentProducts = async () => {
+  try {
+    result = await $.ajax({
+      url: '/api/sendNonExistentProducts',
+    });
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+addRow = (data) => {
+  pedido = data.pedido;
+  referencia = data.referencia;
+
+  row = [];
+  for (i = 0; i < pedido.length; i++) {
+    row.push(`<tr>
               <td>${pedido[i]}</td>
               <td>${referencia[i]}</td>
               </tr>`);
-    }
-    return row.join('');
+  }
+  return row.join('');
 };
 
 /* Actualizar tabla */
 
 function actualizarTablaPedidos() {
-    $('#tablaPreBatch').DataTable().clear();
-    $('#tablaPreBatch').DataTable().ajax.reload();
+  $('#tablaPreBatch').DataTable().clear();
+  $('#tablaPreBatch').DataTable().ajax.reload();
 }

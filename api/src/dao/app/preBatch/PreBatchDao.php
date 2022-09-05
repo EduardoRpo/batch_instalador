@@ -66,6 +66,19 @@ class PreBatchDao
         return $result;
     }
 
+    public function findImportOrders()
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        $sql = "SELECT IF(importado = '0000-00-00 00:00:00', null, DATE_FORMAT(importado, '%d/%m/%Y')) AS fecha_importe, 
+                       IF(importado = '0000-00-00 00:00:00', null, TIME_FORMAT(importado, '%h:%i %p')) AS hora_importe
+                FROM explosion_materiales_pedidos_registro ORDER BY `explosion_materiales_pedidos_registro`.`importado` DESC";
+        $query = $connection->prepare($sql);
+        $query->execute();
+        $result = $query->fetch($connection::FETCH_ASSOC);
+        return $result;
+    }
+
     public function savePedidos($dataPedidos)
     {
         $connection = Connection::getInstance()->getConnection();
@@ -89,7 +102,6 @@ class PreBatchDao
                 'id_producto' =>  trim("M-" . $dataPedidos['producto'])
             ]);
         } else {
-
             $date = date_create($dataPedidos['fecha_dcto']);
             date_time_set($date, 13, 24);
             $fecha_dtco = date_format($date, "Y-m-d");
