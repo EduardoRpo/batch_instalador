@@ -109,6 +109,7 @@ const imprimirEtiquetasAprobacion = (usuario) => {
 
 const imprimirEtiquetasAcondicionamiento = (usuario) => {
     operacion = 4;
+    id_multi = sessionStorage.getItem('id_multi')
     id_multi = id_multi - 1
     debugger
     arrayData = [];
@@ -119,12 +120,12 @@ const imprimirEtiquetasAcondicionamiento = (usuario) => {
     acondicionamiento.referencia = batchMulti[id_multi].referencia;
     acondicionamiento.nombre_referencia = batchMulti[id_multi].nombre_referencia;
     acondicionamiento.presentacion = batchMulti[id_multi].presentacion;
+    acondicionamiento.cantidad = batchMulti[id_multi].cantidad;
     acondicionamiento.unidad_empaque = batchMulti[id_multi].unidad_empaque;
     acondicionamiento.propietario = batch.propietario
     acondicionamiento.user = usuario.nombres;
     acondicionamiento.numero_lote = $("#in_numero_lote").val();
     acondicionamiento.numero_orden = batch.numero_orden;
-    acondicionamiento.unidad_lote = batch.unidad_lote
     arrayData.push(acondicionamiento);
 
     exportarEtiquetas(operacion, arrayData);

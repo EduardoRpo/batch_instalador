@@ -104,7 +104,7 @@ if (!empty($_POST)) {
             $etiquetas[] = $acondicionamiento['numero_orden'];
 
             if ($acondicionamiento['unidad_empaque'])
-                $cajas = ceil($acondicionamiento['unidad_lote'] / $acondicionamiento['unidad_empaque']);
+                $cajas = ceil($acondicionamiento['cantidad'] / $acondicionamiento['unidad_empaque']);
             else
                 $cajas = 1;
                 
