@@ -18,6 +18,7 @@ $('#btnImportarPedidos').click(function (e) {
           fecha_dcto: item.Fecha_Dcto,
           producto: item.Producto.trim(),
           nombre_producto: item.Nombre_Producto_Mvto.trim(),
+          // nombre_producto: item.Nombre_Producto.trim(),
           cant_original: item.Cant_Original,
           cantidad: item.Cantidad,
         };
