@@ -1,7 +1,6 @@
 $(document).ready(function () {
   pedidosProgramar = [];
   let date;
-  let cantidad;
 
   // Seleccionar checkbox
   $(document).on('blur', '.cantProgram', function (e) {
@@ -60,10 +59,10 @@ $(document).ready(function () {
 
   $(document).on('click', '#calcLote', function (e) {
     e.preventDefault();
-    if (date && cantidad) calcLote(pedidosProgramar);
+    if (date) calcLote(pedidosProgramar);
     else {
       alertify.set('notifier', 'position', 'top-right');
-      alertify.error('Ingrese los campos');
+      alertify.error('Ingrese fecha de insumo');
       // $(`#${id_checkbox}`).prop('checked', false);
       return false;
     }
@@ -170,8 +169,8 @@ $(document).ready(function () {
     }
   };
 
-  clearVariables = () => {
+  /* clearVariables = () => {
     date = null;
     cantidad = 0;
-  };
+  }; */
 });
