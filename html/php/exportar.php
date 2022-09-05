@@ -93,18 +93,18 @@ if (!empty($_POST)) {
 
         case '4': //Impresion acondicionamiento
             $acondicionamiento = $_POST['array'];
-
+            $acondicionamiento = $acondicionamiento[0];
             $etiquetas[] = $acondicionamiento['referencia'];
             $etiquetas[] = $acondicionamiento['nombre_referencia'];
             $etiquetas[] = $acondicionamiento['presentacion'];
             $etiquetas[] = $acondicionamiento['unidad_empaque'];
             $etiquetas[] = $acondicionamiento['propietario'];
-            $etiquetas[] = $acondicionamiento['usuario'];
+            $etiquetas[] = $acondicionamiento['user'];
             $etiquetas[] = $acondicionamiento['numero_lote'];
             $etiquetas[] = $acondicionamiento['numero_orden'];
 
             if ($acondicionamiento['unidad_empaque'])
-                $cajas = ceil($acondicionamiento['unidad_lote'] / $acondicionamiento['unidad_empaque']);
+                $cajas = ceil($acondicionamiento['cantidad'] / $acondicionamiento['unidad_empaque']);
             else
                 $cajas = 1;
                 

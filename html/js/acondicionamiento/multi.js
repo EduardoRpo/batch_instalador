@@ -43,6 +43,7 @@ $(document).ready(function() {
                         j++;
                     }
                 } else {
+                    debugger
                     batch == undefined ? location.reload() : batch;
                     $(`#tanque${j}`).html(formatoCO(batch.presentacion));
                     $(`#cantidad${j}`).html(formatoCO(batch.unidad_lote));

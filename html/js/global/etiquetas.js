@@ -32,7 +32,7 @@ const imprimirEtiquetasFull = (marmita) => {
     $.ajax({
         url: `/api/materiasp/${ref}`,
         success: function(materiaPrima) {
-            debugger
+
             $.ajax({
                 url: `/api/user/${modulo}/${idBatch}`,
                 success: function(usuario) {
@@ -67,11 +67,24 @@ const imprimirEtiquetasPesaje = (materiaPrima, usuario) => {
 };
 
 const imprimirEtiquetasPreparacion = (marmita, usuario) => {
+    debugger
     operacion = 2;
-    let preparacion = batch;
-    preparacion.tanque = marmita;
-    preparacion.usuario = usuario.nombres;
-    exportarEtiquetas(operacion, preparacion);
+    arrayData = [];
+    //let preparacion = batch;
+    numero_tanques = parseInt($("#cantidad1").html());
+
+    for (let i = 1; i <= numero_tanques; i++) {
+        preparacion = {};
+        preparacion.referencia = batch.referencia;
+        preparacion.producto = batch.nombre_referencia;
+        preparacion.capacidad = batch.capacidad;
+        preparacion.numero_lote = batch.lote;
+        preparacion.numero_orden = batch.numero_orden;
+        preparacion.tanque = marmita;
+        preparacion.usuario = usuario.nombres;
+        arrayData.push(preparacion);
+    }
+    exportarEtiquetas(operacion, arrayData);
 };
 
 const imprimirEtiquetasAprobacion = (usuario) => {
@@ -96,11 +109,26 @@ const imprimirEtiquetasAprobacion = (usuario) => {
 
 const imprimirEtiquetasAcondicionamiento = (usuario) => {
     operacion = 4;
-
+    id_multi = sessionStorage.getItem('id_multi')
+    id_multi = id_multi - 1
+    debugger
+    arrayData = [];
     let batch = sessionStorage.batch
     batch = JSON.parse(batch)
-    batch.usuario = usuario.nombres;
-    exportarEtiquetas(operacion, batch);
+
+    acondicionamiento = {};
+    acondicionamiento.referencia = batchMulti[id_multi].referencia;
+    acondicionamiento.nombre_referencia = batchMulti[id_multi].nombre_referencia;
+    acondicionamiento.presentacion = batchMulti[id_multi].presentacion;
+    acondicionamiento.cantidad = batchMulti[id_multi].cantidad;
+    acondicionamiento.unidad_empaque = batchMulti[id_multi].unidad_empaque;
+    acondicionamiento.propietario = batch.propietario
+    acondicionamiento.user = usuario.nombres;
+    acondicionamiento.numero_lote = $("#in_numero_lote").val();
+    acondicionamiento.numero_orden = batch.numero_orden;
+    arrayData.push(acondicionamiento);
+
+    exportarEtiquetas(operacion, arrayData);
 };
 
 const imprimirEtiquetasRetencion = () => {

@@ -89,7 +89,7 @@ $(document).ready(function() {
 
                 $(api.column(0).footer()).html('<b>Total</b>');
                 $(api.column(3).footer()).html(`<b>${peso.toLocaleString("de-DE", { maximumFractionDigits: 0 })} Kg </b>`);
-                $(api.column(4).footer()).html(`<b>${(pesoTanque/tanques).toLocaleString("de-DE", { maximumFractionDigits: 0 })} Kg</b>`);
+                $(api.column(4).footer()).html(`<b>${(pesoTanque / tanques).toLocaleString("de-DE", { maximumFractionDigits: 0 })} Kg</b>`);
             }
         })
 
@@ -111,7 +111,7 @@ $(document).ready(function() {
             alertify
                 .prompt(
                     'Samara Cosmetics - Trazabilidad Lotes MP',
-                    `Ingrese el Número del lote para la MP $ { linea.firstChild.innerText } < br > < p style = "font-size:13px;color:coral" > Si cuenta con más de un lote separelos con un doble asterisco( ** ) < p > `,
+                    `Ingrese el Número del lote para la MP ${linea.firstChild.innerText} <br><p style="font-size:13px;color:coral">Si cuenta con más de un lote separelos con un doble asterisco (**) </p>`,
                     '',
                     function(evt, value) { numeroLote(value) },
                     function() { alertify.error('Ingrese el número del lote de la materia prima') },
