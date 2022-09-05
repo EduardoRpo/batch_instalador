@@ -13,6 +13,7 @@ $(document).ready(function() {
         e.preventDefault();
         ref_multi = $(`.ref1`).val();
         id_multi = 1;
+        sessionStorage.setItem('id_multi', id_multi)
         r1++;
         if (modulo == 5) identificarDensidad(batch);
         presentacion_multi();
@@ -22,6 +23,7 @@ $(document).ready(function() {
         e.preventDefault();
         ref_multi = $(`.ref2`).val();
         id_multi = 2;
+        sessionStorage.setItem('id_multi', id_multi)
         r2++;
         if (modulo == 5) identificarDensidad(batch);
         presentacion_multi();
@@ -31,6 +33,7 @@ $(document).ready(function() {
         e.preventDefault();
         ref_multi = $(`.ref3`).val();
         id_multi = 3;
+        sessionStorage.setItem('id_multi', id_multi)
         r3++;
         if (modulo == 5) identificarDensidad(batch);
         presentacion_multi();
@@ -40,6 +43,7 @@ $(document).ready(function() {
         e.preventDefault();
         ref_multi = $(`.ref4`).val();
         id_multi = 4;
+        sessionStorage.setItem('id_multi', id_multi)
         r4++;
         if (modulo == 5) identificarDensidad(batch);
         presentacion_multi();
