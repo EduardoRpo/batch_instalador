@@ -7,11 +7,11 @@ $(document).ready(function () {
   $(document).on('blur', '.cantProgram', function (e) {
     e.preventDefault();
     id_input = this.id;
-    id_checkbox = id_input.substr(5, id_input.length);
+    // id_checkbox = id_input.substr(5, id_input.length);
     referencia = fila.id_producto;
     numPedido = fila.pedido;
     cantidad = $(`#${id_input}`).val();
-    date = $(`#date-${id_checkbox}`).val();
+    date = $(`#date-${numPedido}-${referencia}`).val();
 
     if (cantidad == 0) {
       alertify.set('notifier', 'position', 'top-right');
@@ -22,7 +22,7 @@ $(document).ready(function () {
 
     arrayPreprogramados(referencia, cantidad, numPedido);
     if (date) {
-      fechaInsumo(id_checkbox, numPedido, referencia, pedidosProgramar, date);
+      fechaInsumo(numPedido, referencia, pedidosProgramar, date);
     } else {
       alertify.set('notifier', 'position', 'top-right');
       alertify.error('Ingrese fecha de insumo');
@@ -152,14 +152,8 @@ $(document).ready(function () {
     );
   };
 
-  fechaInsumo = (
-    id_checkbox,
-    numPedido,
-    referencia,
-    pedidosProgramar,
-    date
-  ) => {
-    cantidad = $(`#cant-${id_checkbox}`).val();
+  fechaInsumo = (numPedido, referencia, pedidosProgramar, date) => {
+    cantidad = $(`#cant-${numPedido}-${referencia}`).val();
     if (cantidad > 0) {
       for (i = 0; i < pedidosProgramar.length; i++) {
         if (
