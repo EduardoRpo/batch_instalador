@@ -12,12 +12,12 @@ $('#btnImportarPedidos').click(function (e) {
     .then((data) => {
       let OrderToImport = data.map((item) => {
         return {
-          cliente: item.Cliente,
-          nombre_cliente: item.Nombre_Cliente,
-          documento: item.Documento,
+          cliente: item.Cliente.trim(),
+          nombre_cliente: item.Nombre_Cliente.trim(),
+          documento: item.Documento.trim(),
           fecha_dcto: item.Fecha_Dcto,
-          producto: item.Producto,
-          nombre_producto: item.Nombre_Producto,
+          producto: item.Producto.trim(),
+          nombre_producto: item.Nombre_Producto.trim(),
           cant_original: item.Cant_Original,
           cantidad: item.Cantidad,
         };
