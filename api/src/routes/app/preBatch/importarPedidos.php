@@ -19,18 +19,27 @@ $app->post('/validacionDatosPedidos', function (Request $request, Response $resp
     $update = 0;
 
     $dataGlobal = $dataPedidos['data'];
-    $data = $dataPedidos['data'];
+
+    // Convertir campos
+    for ($i = 0; $i < sizeof($dataGlobal); $i++) {
+      $dataConvertPedidos = $preBatchDao->convertData($dataGlobal[$i]);
+
+      $dataGlobal[$i]['cliente'] = $dataConvertPedidos['cliente'];
+      $dataGlobal[$i]['documento'] = $dataConvertPedidos['documento'];
+      $dataGlobal[$i]['producto'] = $dataConvertPedidos['producto'];
+      $dataGlobal[$i]['cant_original'] = $dataConvertPedidos['cant_original'];
+      $dataGlobal[$i]['cantidad'] = $dataConvertPedidos['cantidad'];
+    }
+    $data = $dataGlobal;
 
     for ($i = 0; $i < sizeof($dataGlobal); $i++) {
 
-      $dataConvertPedidos = $preBatchDao->convertData($dataGlobal[$i]);
-
       //Consultar si existe producto en la base de datos
-      $product = $productDao->findProduct(trim($dataConvertPedidos['producto']));
+      $product = $productDao->findProduct(trim($dataGlobal[$i]['producto']));
 
       if (!$product) {
-        $nonExistentProducts['pedido'][$i] = trim($dataConvertPedidos['documento']);
-        $nonExistentProducts['referencia'][$i] = trim($dataConvertPedidos['producto']);
+        $nonExistentProducts['pedido'][$i] = trim($dataGlobal[$i]['documento']);
+        $nonExistentProducts['referencia'][$i] = trim($dataGlobal[$i]['producto']);
         unset($data[$i]);
         $nonProducts = $nonProducts + 1;
       } else {
@@ -42,7 +51,7 @@ $app->post('/validacionDatosPedidos', function (Request $request, Response $resp
           break;
         } */
 
-        $result = $preBatchDao->findOrders($dataConvertPedidos['documento']);
+        $result = $preBatchDao->findOrders($dataGlobal[$i]['documento']);
         $result ? $update = $update + 1 : $insert = $insert + 1;
       }
     }
@@ -105,13 +114,21 @@ $app->post('/addPedidos', function (Request $request, Response $response, $args)
     //Obtener todos los pedidos
     $data[$i] = $dataPedidos[$i]['documento'];
   }
+
   //Al cargar los pedidos validar la tabla vs pedidos y si no encuentra el registro marcar con un flag y no mostar en la vista Preprogramados
   //Cargar todos registros de la tabla que no tengan flag y validarlos contra el objeto de importacion
   $result = $preBatchDao->changeFlagEstadoByPedido($data);
 
-  if ($result == null)
-    $resp = array('success' => true, 'message' => 'Pedidos Importados correctamente');
-  else
+  if ($result == null) {
+    date_default_timezone_set('America/Bogota');
+
+    $importOrders['fecha_importe'] = date("d/m/Y");
+    $importOrders['hora_importe'] = date("h:i a");
+    $_SESSION['fecha_importe'] = $importOrders['fecha_importe'];
+    $_SESSION['hora_importe'] = $importOrders['hora_importe'];
+
+    $resp = array('success' => true, 'message' => 'Pedidos Importados correctamente', 'fecha_hora_importe' => $importOrders);
+  } else
     $resp = array('error' => true, 'message' => 'Ocurrio un error mientras importaba la información. Intente nuevamente');
 
   $response->getBody()->write(json_encode($resp));

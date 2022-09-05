@@ -47,6 +47,20 @@ if (!empty($_SESSION['active'])) {
                         $modulo = $data['modulo'];
                         $rol = $data['rol'];
 
+                        /* Obtener fecha de ultimo importe */
+                        $sql = "SELECT IF(importado = '0000-00-00 00:00:00', null, DATE_FORMAT(importado, '%d/%m/%Y')) AS fecha_importe, 
+                                       IF(importado = '0000-00-00 00:00:00', null, TIME_FORMAT(importado, '%h:%i %p')) AS hora_importe
+                                FROM explosion_materiales_pedidos_registro ORDER BY `explosion_materiales_pedidos_registro`.`importado` DESC";
+                        $query = $conn->prepare($sql);
+                        $query->execute();
+                        $importOrders = $query->fetch($conn::FETCH_ASSOC);
+
+                        if ($importOrders['fecha_importe'] != null) {
+                            $_SESSION['fecha_importe'] = $importOrders['fecha_importe'];
+                            $_SESSION['hora_importe'] = $importOrders['hora_importe'];
+                        }
+
+
                         if ($rol === 1 || $rol == 2) {
                             header('location: admin/sistema/index.php');
                             exit();

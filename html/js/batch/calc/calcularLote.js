@@ -1,5 +1,7 @@
 $(document).ready(function () {
   pedidosProgramar = [];
+  let date;
+  let cantidad;
 
   // Seleccionar checkbox
   $(document).on('blur', '.cantProgram', function (e) {
@@ -14,7 +16,7 @@ $(document).ready(function () {
     if (cantidad == 0) {
       alertify.set('notifier', 'position', 'top-right');
       alertify.error('La cantidad a programar no puede ser cero (0)');
-      $(`#${id_checkbox}`).prop('checked', false);
+      // $(`#${id_checkbox}`).prop('checked', false);
       return false;
     }
 
@@ -24,10 +26,10 @@ $(document).ready(function () {
     } else {
       alertify.set('notifier', 'position', 'top-right');
       alertify.error('Ingrese fecha de insumo');
-      $(`#${id_checkbox}`).prop('checked', false);
+      // $(`#${id_checkbox}`).prop('checked', false);
       return false;
     }
-    $(`#${id_checkbox}`).prop('checked', true);
+    // $(`#${id_checkbox}`).prop('checked', true);
   });
 
   arrayPreprogramados = (referencia, cantidad, numPedido) => {
@@ -58,11 +60,11 @@ $(document).ready(function () {
 
   $(document).on('click', '#calcLote', function (e) {
     e.preventDefault();
-    if (date) calcLote(pedidosProgramar);
+    if (date && cantidad) calcLote(pedidosProgramar);
     else {
       alertify.set('notifier', 'position', 'top-right');
-      alertify.error('Ingrese fecha de insumo');
-      $(`#${id_checkbox}`).prop('checked', false);
+      alertify.error('Ingrese los campos');
+      // $(`#${id_checkbox}`).prop('checked', false);
       return false;
     }
   });
@@ -157,8 +159,8 @@ $(document).ready(function () {
     pedidosProgramar,
     date
   ) => {
-    cant = $(`#cant-${id_checkbox}`).val();
-    if (cant > 0) {
+    cantidad = $(`#cant-${id_checkbox}`).val();
+    if (cantidad > 0) {
       for (i = 0; i < pedidosProgramar.length; i++) {
         if (
           numPedido == pedidosProgramar[i].numPedido &&
@@ -166,11 +168,16 @@ $(document).ready(function () {
         )
           pedidosProgramar[i]['fecha_insumo'] = date;
       }
-      $(`#${id_checkbox}`).prop('checked', true);
+      // $(`#${id_checkbox}`).prop('checked', true);
     } else {
       alertify.set('notifier', 'position', 'top-right');
       alertify.error('Ingrese cantidad a programar');
       return false;
     }
+  };
+
+  clearVariables = () => {
+    date = null;
+    cantidad = 0;
   };
 });
