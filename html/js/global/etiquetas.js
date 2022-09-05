@@ -71,19 +71,19 @@ const imprimirEtiquetasPreparacion = (marmita, usuario) => {
     operacion = 2;
     arrayData = [];
     //let preparacion = batch;
-    numero_tanques = parseInt($("#cantidad1").html());
+    //numero_tanques = parseInt($("#cantidad1").html());
 
-    for (let i = 1; i <= numero_tanques; i++) {
-        preparacion = {};
-        preparacion.referencia = batch.referencia;
-        preparacion.producto = batch.nombre_referencia;
-        preparacion.capacidad = batch.capacidad;
-        preparacion.numero_lote = batch.lote;
-        preparacion.numero_orden = batch.numero_orden;
-        preparacion.tanque = marmita;
-        preparacion.usuario = usuario.nombres;
-        arrayData.push(preparacion);
-    }
+    preparacion = {};
+    preparacion.referencia = batch.referencia;
+    preparacion.producto = batch.nombre_referencia;
+    preparacion.capacidad = batch.tamano_lote;
+    preparacion.numero_lote = batch.numero_lote;
+    preparacion.numero_orden = batch.numero_orden;
+    preparacion.tanque = marmita;
+    preparacion.numero_tanques = batch.cantidad;
+    preparacion.usuario = usuario.nombres;
+    arrayData.push(preparacion);
+
     exportarEtiquetas(operacion, arrayData);
 };
 
