@@ -1,24 +1,5 @@
 /* Login */
 
-/* Cargar select con modulos */
-
-/* modulos = () => {
-    $.ajax({
-        type: "POST",
-        url: "../../../admin/sistema/php/c_modulos.php",
-        data: { operacion: 1 },
-
-        success: function(resp) {
-            data = JSON.parse(resp);
-            data.forEach((equipo) => {
-                $("#modulos").append(
-                    `<option value="${equipo.id}">${equipo.modulo}</option>`
-                );
-            });
-        },
-    });
-}; */
-
 /* Mostrar contraseña */
 
 function mostrarPassword() {
@@ -50,4 +31,3 @@ $(document).ready(function() {
         }, 60000);
     }
 });
-//modulos();
