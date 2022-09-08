@@ -1,10 +1,8 @@
-
-
 $(document).ready(function() {
-let editar;
-let id = 0;
+    let editar;
+    let id = 0;
     cargarselectores('cargos')
-    cargarselectores('usuarios_rols')
+        //cargarselectores('usuarios_rols')
 
     //Crear usuarios
 
@@ -31,7 +29,7 @@ let id = 0;
     $(document).ready(function() {
         $("#btnguardarUsuarios").click(function(e) {
             e.preventDefault();
-    
+
             let nombres = $("#nombres").val();
             let apellidos = $("#apellidos").val();
             let email = $("#email").val();
@@ -40,18 +38,18 @@ let id = 0;
             let user = $("#usuario").val();
             let clave = $("#clave").val();
             let rol = $("#rol").val();
-    
+
             if (rol == 1 || rol == 2 || rol == 5) {
                 modulo = "1";
             }
-    
+
             let datosIniciales =
                 nombres.length *
                 apellidos.length *
                 cargos.length *
                 modulo.length *
                 user.length;
-    
+
             if (editar == 1) {
                 if (datosIniciales === 0) {
                     alertify.set("notifier", "position", "top-right");
@@ -65,11 +63,11 @@ let id = 0;
                     return false;
                 }
             }
-    
+
             if (rol != 1 && rol != 2 && editar != 1 && rol != 5) {
                 const archivo = $("#firma").val();
                 let extensiones = archivo.substring(archivo.lastIndexOf("."));
-    
+
                 if (
                     extensiones != ".jpg" &&
                     extensiones != ".png" &&
@@ -82,21 +80,21 @@ let id = 0;
                     return false;
                 }
             }
-    
+
             const usuario = new FormData($("#frmagregarUsuarios")[0]);
             usuario.set("operacion", 3);
             usuario.set("editar", editar);
             usuario.set("id", id);
-    
+
             if (rol == 1 || rol == 2 || rol == 5) usuario.set("modulo", "1");
-    
+
             $.ajax({
                 type: "POST",
                 url: "/api/saveUsers",
                 data: usuario,
                 processData: false,
                 contentType: false,
-    
+
                 success: function(r) {
                     if (r == 1) {
                         alertify.set("notifier", "position", "top-right");
@@ -134,7 +132,7 @@ let id = 0;
         let modulo = $(this).parent().parent().children().eq(6).text();
         let usuario = $(this).parent().parent().children().eq(7).text();
         let rol = $(this).parent().parent().children().eq(8).text();
-    
+
         $("#ModalCrearUsuarios").modal("show");
         $("#btnguardarUsuarios").html("Actualizar");
         $("#nombres").val(nombres);
