@@ -1,4 +1,4 @@
-tblTapa = $('#tblEnvases').DataTable({
+tblEnvases = $('#tblEnvases').DataTable({
     destroy: true,
     scrollY: "50vh",
     scrollCollapse: true,
@@ -6,18 +6,17 @@ tblTapa = $('#tblEnvases').DataTable({
     language: { url: "admin_componentes/es-ar.json" },
 
     ajax: {
-        url: "/api/Containers",
+        url: "/api/containers",
         dataSrc: ''
     },
 
-    columns: [
-        {
-            data: "id",
-            title: "Codigo"
+    columns: [{
+            title: "Codigo",
+            data: "id"
         },
-        { 
-            data: "nombre",
-            title: "Envases"
+        {
+            title: "Envase",
+            data: "nombre"
         },
         {
             title: 'Acciones',
@@ -27,7 +26,7 @@ tblTapa = $('#tblEnvases').DataTable({
                 return `<a href='#' <i id=${data} class='large material-icons link-editar2' style='color:rgb(255, 165, 0)'>edit</i></a>
                         <a href='#' <i id=${data} class='large material-icons link-borrar2' data-toggle='tooltip'  title='Eliminar' style='color:rgb(255, 0, 0)'>delete</i></a>`
             },
-        
+
         },
     ],
 });

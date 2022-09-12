@@ -1,5 +1,3 @@
-
-
 /* Adicionar Nombre */
 
 $("#AdicionarTapa").click(function(e) {
@@ -46,39 +44,38 @@ $(document).on("click", ".link-borrar1", function(e) {
 $(document).on("click", ".link-editar1", function(e) {
     e.preventDefault();
 
-    let id = $(this).parent().parent().children().eq(0).text();
+    let ref = $(this).parent().parent().children().eq(0).text();
     let nombre = $(this).parent().parent().children().eq(1).text();
-    let operacion = 1;
+
     $("#frmAdicionar1").slideDown();
     $("#GuardarTapa").html("Actualizar");
 
-    $("#codigo1").val(id);
+    $("#codigo1").val(ref);
     $("#input1").val(nombre);
-    $("#txt-Id1").val(operacion)
 });
 
 /* Almacenar Registros */
 
-    $(document).on("click", "#GuardarTapa", function(e) {
-        e.preventDefault();
-        let id = $('#codigo1').val();
-        let nombre = $("#input1").val();
-        let operacion = $("#txt-Id1").val();
-        
-        console.log(operacion);
-        $.ajax({
-            type: "POST",
-            url: '/api/saveLid',
-            data: { id: id, nombre: nombre, operacion, operacion },
-            success: function(data) {
-                notificaciones(data);
-            },
-        });
+$(document).on("click", "#GuardarTapa", function(e) {
+    e.preventDefault();
+    let ref = $('#codigo1').val();
+    let nombre = $("#input1").val();
+
+    $.ajax({
+        type: "POST",
+        url: '/api/saveLid',
+        data: { ref: ref, nombre: nombre },
+        success: function(data) {
+            $("#frmAdicionar1").slideUp();
+            refreshTableLid()
+            notificaciones(data);
+        },
     });
+});
 
 /* Actualizar tabla */
 
-function refreshTable() {
+refreshTableLid = () => {
     $("#tblTapa").DataTable().clear();
     $("#tblTapa").DataTable().ajax.reload();
 }

@@ -106,11 +106,6 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
   //Almacenar en variables de session la variable $dataPedidosGranel
   $_SESSION['dataGranel'] = $dataPedidosGranel;
 
-  if (sizeof($dataPedidosGranel) == 0) {
-    $resp = array('error' => true, 'message' => 'Los tamaños de lotes calculados exceden los 2500, intente nuevamente');
-    $dataPedidosLotes = array_merge($dataPedidosLotes, $resp);
-  }
-
   //$array = array('granel' => array_keys($sumArrayGranel), 'producto' => $producto, 'tamanio' => array_values($sumArrayGranel), 'cantidades' => array_values($sumArrayCantidades));
 
   $response->getBody()->write(json_encode($dataPedidosLotes, JSON_NUMERIC_CHECK));

@@ -28,11 +28,22 @@ class labelDao
         return $label;
     }
 
+    public function findLabelByRef($ref)
+    {
+        $connection = Connection::getInstance()->getConnection();
+        $stmt = $connection->prepare("SELECT * FROM etiqueta WHERE id=:ref");
+        $stmt->execute(['ref' => $ref]);
+        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        $label = $stmt->fetchAll($connection::FETCH_ASSOC);
+        $this->logger->notice("etiqueta Obtenida", array('etiqueta' => $label));
+        return $label;
+    }
+
     public function saveLabel($dataLabel)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("INSERT INTO etiqueta (nombre , id) VALUES(:nombre, :id)");
-        $stmt->execute(['nombre' => $dataLabel['nombre'], 'id' => $dataLabel['id']]);
+        $stmt = $connection->prepare("INSERT INTO etiqueta (id, nombre) VALUES(:ref, :nombre)");
+        $stmt->execute(['ref' => $dataLabel['ref'], 'nombre' => $dataLabel['nombre']]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 
@@ -40,7 +51,7 @@ class labelDao
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("UPDATE etiqueta SET nombre = :nombre WHERE id = :id");
-        $stmt->execute(['nombre' =>$dataLabel['nombre'], 'id' => $dataLabel['id']]);
+        $stmt->execute(['nombre' => $dataLabel['nombre'], 'id' => $dataLabel['id']]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 

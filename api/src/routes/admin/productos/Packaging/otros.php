@@ -7,7 +7,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 $othersDao = new othersDao();
 
-$app->get('/Others', function (Request $request, Response $response, $args) use ($othersDao) {
+$app->get('/others', function (Request $request, Response $response, $args) use ($othersDao) {
     $Others = $othersDao->findAllOthers();
     $response->getBody()->write(json_encode($Others, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');
@@ -28,19 +28,22 @@ $app->post('/saveOthers', function (Request $request, Response $response, $args)
 
     $dataOthers = $request->getParsedBody();
 
-    if ($dataOthers['operacion']) {
-        $Others = $othersDao->updateOthers($dataOthers);
+    if ($dataOthers['ref']) {
+        $data = $othersDao->findOthersByRef($dataOthers['ref']);
 
-        if ($Others == null)
-            $resp = array('success' => true, 'message' => 'Otro actualizado correctamente');
-    } else {
-        $Others = $othersDao->saveOthers($dataOthers);
+        if ($data) {
+            $others = $othersDao->updateOthers($dataOthers);
+            if ($others == null)
+                $resp = array('success' => true, 'message' => 'Otro actualizado correctamente');
+        } else {
+            $others = $othersDao->saveOthers($dataOthers);
 
-        if ($Others == null)
-            $resp = array('success' => true, 'message' => 'Otro almacenado correctamente');
-    }
+            if ($others == null)
+                $resp = array('success' => true, 'message' => 'Otro almacenado correctamente');
+        }
+    } else
+        $resp = array('error' => true, 'message' => 'Ingrese todos los datos e Intentelo nuevamente');
 
     $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');
 });
-    

@@ -28,19 +28,30 @@ class lidDao
         return $lid;
     }
 
+    public function findLidByRef($ref)
+    {
+        $connection = Connection::getInstance()->getConnection();
+        $stmt = $connection->prepare("SELECT * FROM tapa WHERE id = :ref");
+        $stmt->execute(['ref' => $ref]);
+        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        $lid = $stmt->fetchAll($connection::FETCH_ASSOC);
+        $this->logger->notice("tapa Obtenida", array('tapa' => $lid));
+        return $lid;
+    }
+
     public function saveLid($datalid)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("INSERT INTO tapa (nombre , id) VALUES(:nombre, :id)");
-        $stmt->execute(['nombre' => $datalid['nombre'], 'id' => $datalid['id']]);
+        $stmt = $connection->prepare("INSERT INTO tapa (id, nombre) VALUES(:ref, :nombre)");
+        $stmt->execute(['ref' => $datalid['ref'], 'nombre' => $datalid['nombre']]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 
     public function updateLid($datalid)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("UPDATE tapa SET nombre = :nombre WHERE id = :id");
-        $stmt->execute(['nombre' =>$datalid['nombre'], 'id' => $datalid['id']]);
+        $stmt = $connection->prepare("UPDATE tapa SET nombre = :nombre WHERE id = :ref");
+        $stmt->execute(['ref' => $datalid['ref'], 'nombre' => $datalid['nombre']]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 

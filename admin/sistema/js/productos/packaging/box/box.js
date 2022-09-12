@@ -1,5 +1,3 @@
-
-
 /* Adicionar Nombre */
 
 $("#AdicionarCaja").click(function(e) {
@@ -46,39 +44,39 @@ $(document).on("click", ".link-borrar4", function(e) {
 $(document).on("click", ".link-editar4", function(e) {
     e.preventDefault();
 
-    let id = $(this).parent().parent().children().eq(0).text();
+    let ref = $(this).parent().parent().children().eq(0).text();
     let nombre = $(this).parent().parent().children().eq(1).text();
-    let operacion = 1;
+
     $("#frmAdicionar4").slideDown();
     $("#GuardarCaja").html("Actualizar");
 
-    $("#codigo4").val(id);
+    $("#codigo4").val(ref);
     $("#input4").val(nombre);
-    $("#txt-Id4").val(operacion)
+
 });
 
 /* Almacenar Registros */
 
-    $(document).on("click", "#GuardarCaja", function(e) {
-        e.preventDefault();
-        let id = $('#codigo4').val();
-        let nombre = $("#input4").val();
-        let operacion = $("#txt-Id4").val();
-        
-        console.log(operacion);
-        $.ajax({
-            type: "POST",
-            url: '/api/saveBox',
-            data: { id: id, nombre: nombre, operacion, operacion },
-            success: function(data) {
-                notificaciones(data);
-            },
-        });
+$(document).on("click", "#GuardarCaja", function(e) {
+    e.preventDefault();
+    let ref = $('#codigo4').val();
+    let nombre = $("#input4").val();
+
+    $.ajax({
+        type: "POST",
+        url: '/api/saveBox',
+        data: { ref: ref, nombre: nombre },
+        success: function(data) {
+            $("#frmAdicionar4").slideUp();
+            refreshTableBox();
+            notificaciones(data);
+        },
     });
+});
 
 /* Actualizar tabla */
 
-function refreshTable() {
+refreshTableBox = () => {
     $("#tblCaja").DataTable().clear();
     $("#tblCaja").DataTable().ajax.reload();
 }

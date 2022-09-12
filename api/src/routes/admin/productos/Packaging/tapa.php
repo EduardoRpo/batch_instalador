@@ -7,7 +7,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 $lidDao = new lidDao();
 
-$app->get('/Lid', function (Request $request, Response $response, $args) use ($lidDao) {
+$app->get('/lids', function (Request $request, Response $response, $args) use ($lidDao) {
     $Lid = $lidDao->findAllLid();
     $response->getBody()->write(json_encode($Lid, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');
@@ -28,19 +28,21 @@ $app->post('/saveLid', function (Request $request, Response $response, $args) us
 
     $dataLid = $request->getParsedBody();
 
-    if ($dataLid['operacion']) {
-        $Lid = $lidDao->updateLid($dataLid);
+    if ($dataLid['ref']) {
+        $data = $lidDao->findLidByRef($dataLid['ref']);
 
-        if ($Lid == null)
-            $resp = array('success' => true, 'message' => 'Tapas actualizada correctamente');
-    } else {
-        $Lid = $lidDao->saveLid($dataLid);
-
-        if ($Lid == null)
-            $resp = array('success' => true, 'message' => 'Tapas almacenada correctamente');
-    }
+        if ($data) {
+            $Lid = $lidDao->updateLid($dataLid);
+            if ($Lid == null)
+                $resp = array('success' => true, 'message' => 'Tapa actualizada correctamente');
+        } else {
+            $Lid = $lidDao->saveLid($dataLid);
+            if ($Lid == null)
+                $resp = array('success' => true, 'message' => 'Tapa almacenada correctamente');
+        }
+    } else
+        $resp = array('error' => true, 'message' => 'Ingrese todos los datos e Intentelo nuevamente');
 
     $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');
 });
-    

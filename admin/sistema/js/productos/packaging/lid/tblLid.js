@@ -6,18 +6,17 @@ tblTapa = $('#tblTapa').DataTable({
     language: { url: "admin_componentes/es-ar.json" },
 
     ajax: {
-        url: "/api/Lid",
+        url: "/api/lids",
         dataSrc: ''
     },
 
-    columns: [
-        {
-            data: "id",
-            title: "Codigo"
+    columns: [{
+            title: "Codigo",
+            data: "id"
         },
-        { 
-            data: "nombre",
-            title: "Tapas"
+        {
+            title: "Tapas",
+            data: "nombre"
         },
         {
             title: 'Acciones',
@@ -27,7 +26,7 @@ tblTapa = $('#tblTapa').DataTable({
                 return `<a href='#' <i id=${data} class='large material-icons link-editar1' style='color:rgb(255, 165, 0)'>edit</i></a>
                         <a href='#' <i id=${data} class='large material-icons link-borrar1' data-toggle='tooltip'  title='Eliminar' style='color:rgb(255, 0, 0)'>delete</i></a>`
             },
-        
+
         },
     ],
 });

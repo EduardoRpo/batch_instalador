@@ -6,16 +6,15 @@ tblCaja = $('#tblCaja').DataTable({
     language: { url: "admin_componentes/es-ar.json" },
 
     ajax: {
-        url: "/api/Box",
+        url: "/api/boxes",
         dataSrc: ''
     },
 
-    columns: [
-        {
+    columns: [{
             data: "id",
             title: "Codigo"
         },
-        { 
+        {
             data: "nombre",
             title: "Cajas"
         },
@@ -27,7 +26,7 @@ tblCaja = $('#tblCaja').DataTable({
                 return `<a href='#' <i id=${data} class='large material-icons link-editar4' style='color:rgb(255, 165, 0)'>edit</i></a>
                         <a href='#' <i id=${data} class='large material-icons link-borrar4' data-toggle='tooltip'  title='Eliminar' style='color:rgb(255, 0, 0)'>delete</i></a>`
             },
-        
+
         },
     ],
 });
