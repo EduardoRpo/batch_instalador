@@ -1,5 +1,3 @@
-
-
 /* Adicionar Nombre */
 
 $("#AdicionarTapa").click(function(e) {
@@ -59,26 +57,26 @@ $(document).on("click", ".link-editar1", function(e) {
 
 /* Almacenar Registros */
 
-    $(document).on("click", "#GuardarTapa", function(e) {
-        e.preventDefault();
-        let id = $('#codigo1').val();
-        let nombre = $("#input1").val();
-        let operacion = $("#txt-Id1").val();
-        
-        console.log(operacion);
-        $.ajax({
-            type: "POST",
-            url: '/api/saveLid',
-            data: { id: id, nombre: nombre, operacion, operacion },
-            success: function(data) {
-                notificaciones(data);
-            },
-        });
+$(document).on("click", "#GuardarTapa", function(e) {
+    e.preventDefault();
+    let id = $('#codigo1').val();
+    let nombre = $("#input1").val();
+    let operacion = $("#txt-Id1").val();
+
+    console.log(operacion);
+    $.ajax({
+        type: "POST",
+        url: '/api/saveLid',
+        data: { id: id, nombre: nombre, operacion, operacion },
+        success: function(data) {
+            notificaciones(data);
+        },
     });
+});
 
 /* Actualizar tabla */
 
-function refreshTable() {
+refreshTable = () => {
     $("#tblTapa").DataTable().clear();
     $("#tblTapa").DataTable().ajax.reload();
 }

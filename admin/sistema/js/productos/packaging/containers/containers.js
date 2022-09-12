@@ -1,5 +1,3 @@
-
-
 /* Adicionar Nombre */
 
 $("#AdicionarEnvases").click(function(e) {
@@ -59,22 +57,21 @@ $(document).on("click", ".link-editar2", function(e) {
 
 /* Almacenar Registros */
 
-    $(document).on("click", "#GuardarEnvases", function(e) {
-        e.preventDefault();
-        let id = $('#codigo2').val();
-        let nombre = $("#input2").val();
-        let operacion = $("#txt-Id2").val();
-        
-        console.log(operacion);
-        $.ajax({
-            type: "POST",
-            url: '/api/saveContainers',
-            data: { id: id, nombre: nombre, operacion, operacion },
-            success: function(data) {
-                notificaciones(data);
-            },
-        });
+$(document).on("click", "#GuardarEnvases", function(e) {
+    e.preventDefault();
+    let ref = $('#codigo2').val();
+    let nombre = $("#input2").val();
+    //let operacion = $("#txt-Id2").val();
+
+    $.ajax({
+        type: "POST",
+        url: '/api/saveContainers',
+        data: { id: id, ref: ref, nombre: nombre },
+        success: function(data) {
+            notificaciones(data);
+        },
     });
+});
 
 /* Actualizar tabla */
 

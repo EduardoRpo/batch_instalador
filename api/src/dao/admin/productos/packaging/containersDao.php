@@ -17,6 +17,16 @@ class containersDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
+    public function findContainersByRef($ref)
+    {
+        $connection = Connection::getInstance()->getConnection();
+        $stmt = $connection->prepare("SELECT * FROM envase WHERE id = :ref");
+        $stmt->execute(['ref' => $ref]);
+        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        $containers = $stmt->fetchAll($connection::FETCH_ASSOC);
+        $this->logger->notice("envases Obtenidos", array('envases' => $containers));
+        return $containers;
+    }
     public function findAllContainers()
     {
         $connection = Connection::getInstance()->getConnection();
@@ -40,7 +50,7 @@ class containersDao
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("UPDATE envase SET nombre = :nombre WHERE id = :id");
-        $stmt->execute(['nombre' =>$dataContainer['nombre'], 'id' => $dataContainer['id']]);
+        $stmt->execute(['nombre' => $dataContainer['nombre'], 'id' => $dataContainer['id']]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 

@@ -27,20 +27,23 @@ $app->get('/deleteContainers/{id}', function (Request $request, Response $respon
 $app->post('/saveContainers', function (Request $request, Response $response, $args) use ($containersDao) {
 
     $dataContainers = $request->getParsedBody();
+    $data = $containersDao->findContainersByRef($dataContainers['ref']);
 
-    if ($dataContainers['operacion']) {
-        $Containers = $containersDao->updateContainers($dataContainers);
-
-        if ($Containers == null)
+    if ($data) {
+        $data = $containersDao->updateContainers($dataContainers);
+        if ($data == null)
             $resp = array('success' => true, 'message' => 'Envase actualizado correctamente');
+        else
+            $resp = array('error' => true, 'message' => 'Ocurrio un error. Intentelo nuevamente');
     } else {
-        $Containers = $containersDao->saveContainers($dataContainers);
-
-        if ($Containers == null)
+        $data = $containersDao->saveContainers($dataContainers);
+        if ($data == null)
             $resp = array('success' => true, 'message' => 'Envase almacenado correctamente');
+        else
+            $resp = array('error' => true, 'message' => 'Ocurrio un error. Intentelo nuevamente');
     }
 
+ 
     $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');
 });
-    
