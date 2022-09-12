@@ -1,4 +1,4 @@
-tblTapa = $('#tblEnvases').DataTable({
+tblEnvases = $('#tblEnvases').DataTable({
     destroy: true,
     scrollY: "50vh",
     scrollCollapse: true,
@@ -6,7 +6,7 @@ tblTapa = $('#tblEnvases').DataTable({
     language: { url: "admin_componentes/es-ar.json" },
 
     ajax: {
-        url: "/api/Containers",
+        url: "/api/containers",
         dataSrc: ''
     },
 

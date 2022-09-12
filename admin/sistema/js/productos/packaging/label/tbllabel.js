@@ -6,7 +6,7 @@ tblEtiqueta = $('#tblEtiqueta').DataTable({
     language: { url: "admin_componentes/es-ar.json" },
 
     ajax: {
-        url: "/api/Label",
+        url: "/api/labels",
         dataSrc: ''
     },
 

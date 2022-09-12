@@ -41,8 +41,8 @@ class containersDao
     public function saveContainers($dataContainer)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("INSERT INTO envase (nombre , id) VALUES(:nombre, :id)");
-        $stmt->execute(['nombre' => $dataContainer['nombre'], 'id' => $dataContainer['id']]);
+        $stmt = $connection->prepare("INSERT INTO envase (id, nombre) VALUES(:ref, :nombre)");
+        $stmt->execute(['ref' => $dataContainer['ref'], 'nombre' => $dataContainer['nombre']]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 

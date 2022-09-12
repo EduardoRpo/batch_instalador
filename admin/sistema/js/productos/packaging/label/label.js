@@ -1,5 +1,3 @@
-
-
 /* Adicionar Nombre */
 
 $("#AdicionarEtiqueta").click(function(e) {
@@ -46,39 +44,38 @@ $(document).on("click", ".link-borrar3", function(e) {
 $(document).on("click", ".link-editar3", function(e) {
     e.preventDefault();
 
-    let id = $(this).parent().parent().children().eq(0).text();
+    let ref = $(this).parent().parent().children().eq(0).text();
     let nombre = $(this).parent().parent().children().eq(1).text();
-    let operacion = 1;
+
     $("#frmAdicionar3").slideDown();
     $("#GuardarEtiqueta").html("Actualizar");
 
-    $("#codigo3").val(id);
+    $("#codigo3").val(ref);
     $("#input3").val(nombre);
-    $("#txt-Id3").val(operacion)
 });
 
 /* Almacenar Registros */
 
-    $(document).on("click", "#GuardarEtiqueta", function(e) {
-        e.preventDefault();
-        let id = $('#codigo3').val();
-        let nombre = $("#input3").val();
-        let operacion = $("#txt-Id3").val();
-        
-        console.log(operacion);
-        $.ajax({
-            type: "POST",
-            url: '/api/saveLabel',
-            data: { id: id, nombre: nombre, operacion, operacion },
-            success: function(data) {
-                notificaciones(data);
-            },
-        });
+$(document).on("click", "#GuardarEtiqueta", function(e) {
+    e.preventDefault();
+    let ref = $('#codigo3').val();
+    let nombre = $("#input3").val();
+
+    $.ajax({
+        type: "POST",
+        url: '/api/saveLabel',
+        data: { ref: ref, nombre: nombre },
+        success: function(data) {
+            $("#frmAdicionar3").slideUp();
+            refreshTableLabel();
+            notificaciones(data);
+        },
     });
+});
 
 /* Actualizar tabla */
 
-function refreshTable() {
+refreshTableLabel = () => {
     $("#tblEtiqueta").DataTable().clear();
     $("#tblEtiqueta").DataTable().ajax.reload();
 }

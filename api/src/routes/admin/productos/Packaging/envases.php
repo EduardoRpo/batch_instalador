@@ -7,7 +7,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 $containersDao = new containersDao();
 
-$app->get('/Containers', function (Request $request, Response $response, $args) use ($containersDao) {
+$app->get('/containers', function (Request $request, Response $response, $args) use ($containersDao) {
     $Containers = $containersDao->findAllContainers();
     $response->getBody()->write(json_encode($Containers, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');
@@ -27,23 +27,26 @@ $app->get('/deleteContainers/{id}', function (Request $request, Response $respon
 $app->post('/saveContainers', function (Request $request, Response $response, $args) use ($containersDao) {
 
     $dataContainers = $request->getParsedBody();
-    $data = $containersDao->findContainersByRef($dataContainers['ref']);
 
-    if ($data) {
-        $data = $containersDao->updateContainers($dataContainers);
-        if ($data == null)
-            $resp = array('success' => true, 'message' => 'Envase actualizado correctamente');
-        else
-            $resp = array('error' => true, 'message' => 'Ocurrio un error. Intentelo nuevamente');
-    } else {
-        $data = $containersDao->saveContainers($dataContainers);
-        if ($data == null)
-            $resp = array('success' => true, 'message' => 'Envase almacenado correctamente');
-        else
-            $resp = array('error' => true, 'message' => 'Ocurrio un error. Intentelo nuevamente');
-    }
+    if ($dataContainers['ref']) {
+        $data = $containersDao->findContainersByRef($dataContainers['ref']);
 
- 
+        if ($data) {
+            $data = $containersDao->updateContainers($dataContainers);
+            if ($data == null)
+                $resp = array('success' => true, 'message' => 'Envase actualizado correctamente');
+            else
+                $resp = array('error' => true, 'message' => 'Ocurrio un error. Intentelo nuevamente');
+        } else {
+            $data = $containersDao->saveContainers($dataContainers);
+            if ($data == null)
+                $resp = array('success' => true, 'message' => 'Envase almacenado correctamente');
+            else
+                $resp = array('error' => true, 'message' => 'Ocurrio un error. Intentelo nuevamente');
+        }
+    } else
+        $resp = array('error' => true, 'message' => 'Ingrese todos los datos e Intentelo nuevamente');
+
     $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');
 });

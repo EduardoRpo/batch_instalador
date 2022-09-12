@@ -6,7 +6,7 @@ tblTapa = $('#tblTapa').DataTable({
     language: { url: "admin_componentes/es-ar.json" },
 
     ajax: {
-        url: "/api/Lid",
+        url: "/api/lids",
         dataSrc: ''
     },
 

@@ -1,5 +1,3 @@
-
-
 /* Adicionar Nombre */
 
 $("#AdicionarOtros").click(function(e) {
@@ -46,39 +44,39 @@ $(document).on("click", ".link-borrar5", function(e) {
 $(document).on("click", ".link-editar5", function(e) {
     e.preventDefault();
 
-    let id = $(this).parent().parent().children().eq(0).text();
+    let ref = $(this).parent().parent().children().eq(0).text();
     let nombre = $(this).parent().parent().children().eq(1).text();
-    let operacion = 1;
+
     $("#frmAdicionar5").slideDown();
     $("#GuardarOtros").html("Actualizar");
 
-    $("#codigo5").val(id);
+    $("#codigo5").val(ref);
     $("#input5").val(nombre);
-    $("#txt-Id5").val(operacion)
+
 });
 
 /* Almacenar Registros */
 
-    $(document).on("click", "#GuardarOtros", function(e) {
-        e.preventDefault();
-        let id = $('#codigo5').val();
-        let nombre = $("#input5").val();
-        let operacion = $("#txt-Id5").val();
-        
-        console.log(operacion);
-        $.ajax({
-            type: "POST",
-            url: '/api/saveOthers',
-            data: { id: id, nombre: nombre, operacion, operacion },
-            success: function(data) {
-                notificaciones(data);
-            },
-        });
+$(document).on("click", "#GuardarOtros", function(e) {
+    e.preventDefault();
+    let ref = $('#codigo5').val();
+    let nombre = $("#input5").val();
+
+    $.ajax({
+        type: "POST",
+        url: '/api/saveOthers',
+        data: { ref: ref, nombre: nombre },
+        success: function(data) {
+            $("#frmAdicionar5").slideUp();
+            refreshTableOthers();
+            notificaciones(data);
+        },
     });
+});
 
 /* Actualizar tabla */
 
-function refreshTable() {
+refreshTableOthers = () => {
     $("#tblOtros").DataTable().clear();
     $("#tblOtros").DataTable().ajax.reload();
 }

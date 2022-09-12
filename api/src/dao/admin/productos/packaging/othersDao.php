@@ -28,19 +28,30 @@ class othersDao
         return $others;
     }
 
+    public function findOthersByRef($dataOthers)
+    {
+        $connection = Connection::getInstance()->getConnection();
+        $stmt = $connection->prepare("SELECT * FROM otros WHERE id = :ref");
+        $stmt->execute(['ref' => $dataOthers['ref']]);
+        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        $others = $stmt->fetchAll($connection::FETCH_ASSOC);
+        $this->logger->notice("otro Obtenido", array('otros' => $others));
+        return $others;
+    }
+
     public function saveOthers($dataOthers)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("INSERT INTO otros (nombre , id) VALUES(:nombre, :id)");
-        $stmt->execute(['nombre' => $dataOthers['nombre'], 'id' => $dataOthers['id']]);
+        $stmt = $connection->prepare("INSERT INTO otros (nombre , id) VALUES(:ref, :nombre)");
+        $stmt->execute(['ref' => $dataOthers['ref'], 'nombre' => $dataOthers['nombre']]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 
     public function updateOthers($dataOthers)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("UPDATE otros SET nombre = :nombre WHERE id = :id");
-        $stmt->execute(['nombre' =>$dataOthers['nombre'], 'id' => $dataOthers['id']]);
+        $stmt = $connection->prepare("UPDATE otros SET nombre = :nombre WHERE id = :ref");
+        $stmt->execute(['ref' => $dataOthers['ref'], 'nombre' => $dataOthers['nombre']]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 

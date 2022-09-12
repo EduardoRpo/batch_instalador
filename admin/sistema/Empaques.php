@@ -54,9 +54,9 @@
               <div class="card-body">
                 <button class="btn btn-light mb-5 controller" id="card_envase">Envases</button>
                 <button class="btn btn-primary mb-5 controller" id="card_tapa">Tapas</button>
-                <button class="btn btn-primary mb-5 controller" id="card_etiqueta">Etiquetas</button>
-                <button class="btn btn-light mb-5 controller" id="card_empaque">Cajas</button>
-                <button class="btn btn-primary mb-5 controller" id="card_otros">Otros</button>
+                <button class="btn btn-light mb-5 controller" id="card_etiqueta">Etiquetas</button>
+                <button class="btn btn-primary mb-5 controller" id="card_empaque">Cajas</button>
+                <button class="btn btn-light mb-5 controller" id="card_otros">Otros</button>
               </div>
             </div>
           </div>
@@ -83,7 +83,7 @@
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="tblEnvases" class="table-striped row-borde" style="width:100%">
+                  <table id="tblEnvases" class="table-striped row-borde">
                     <tbody>
                     </tbody>
                   </table>
@@ -116,7 +116,7 @@
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="tblTapa" class="table-striped row-borde" style="width:100%">
+                  <table id="tblTapa" class="table-striped row-borde">
                     <tbody>
                     </tbody>
                   </table>
@@ -151,7 +151,7 @@
               </div>
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="tblEtiqueta" class="table-striped row-borde" style="width:100%">
+                  <table id="tblEtiqueta" class="table-striped row-borde">
                     <td><strong>Codigo</strong></td>
                     <td><strong>Etiquetas</strong></td>
                     <td><strong>Acciones</strong></td>
@@ -188,7 +188,7 @@
 
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="tblCaja" class="table-striped row-borde" style="width:100%">
+                  <table id="tblCaja" class="table-striped row-borde">
                     <td><strong>Codigo</strong></td>
                     <td><strong>Cajas</strong></td>
                     <td><strong>Acciones</strong></td>
@@ -227,7 +227,7 @@
 
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="tblOtros" class="table-striped row-borde" style="width:100%">
+                  <table id="tblOtros" class="table-striped row-borde">
                     <td><strong>Código</strong></td>
                     <td><strong>Otros</strong></td>
                     <td><strong>Acciones</strong></td>
@@ -236,7 +236,7 @@
                   </table>
                 </div>
               </div>
-              <form action="" id="formDataExcel5" enctype="multipart/form-data">
+              <form id="formDataExcel5" enctype="multipart/form-data">
                 <input type="file" name="datosExcel5" id="datosExcel5" class="form-control datosExcel mb-3 ml-3" style="width: 500px; display:inline-flex">
                 <button type="button" id="btnCargarExcel5" class="btn btn-primary btnCargarExcel ml-3" onclick="comprobarExtension(this.form, this.form.datosExcel5.value, 'otros', 5);" disabled="disabled">Cargar Datos</button>
               </form>
@@ -276,16 +276,19 @@
   <!-- <script src="js/empaques.js"></script> -->
   <script src="js/global//notifications.js"></script>
   <script src="js/productos/packaging/controller.js"></script>
-  <script src="js/productos/packaging/lid/tblLid.js"></script>
-  <script src="js/productos/packaging/lid/lid.js"></script>
+
   <script src="js/productos/packaging/containers/tblcontainers.js"></script>
-  <script src="js/productos/packaging/containers/containers.js"></script>
+  <script src="js/productos/packaging/lid/tblLid.js"></script>
   <script src="js/productos/packaging/label/tbllabel.js"></script>
-  <script src="js/productos/packaging/label/label.js"></script>
   <script src="js/productos/packaging/box/tblbox.js"></script>
-  <script src="js/productos/packaging/box/box.js"></script>
   <script src="js/productos/packaging/others/tblOthers.js"></script>
+  
+  <script src="js/productos/packaging/containers/containers.js"></script>
+  <script src="js/productos/packaging/lid/lid.js"></script>
+  <script src="js/productos/packaging/label/label.js"></script>
+  <script src="js/productos/packaging/box/box.js"></script>
   <script src="js/productos/packaging/others/others.js"></script>
+  
   <script src="js/menu.js"></script>
   <script src="js/ImportarProductos.js"></script>
 

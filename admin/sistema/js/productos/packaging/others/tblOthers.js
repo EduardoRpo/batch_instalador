@@ -10,7 +10,7 @@ $(document).ready(function() {
         language: { url: "admin_componentes/es-ar.json" },
 
         ajax: {
-            url: "/api/Others",
+            url: "/api/others",
             dataSrc: ''
 
         },

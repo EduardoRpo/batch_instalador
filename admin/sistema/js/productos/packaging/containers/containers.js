@@ -33,6 +33,7 @@ $(document).on("click", ".link-borrar2", function(e) {
                 url: `/api/deleteContainers/${id}`,
                 success: function(data) {
                     notificaciones(data);
+                    refreshTable();
                 },
             });
         }
@@ -44,15 +45,14 @@ $(document).on("click", ".link-borrar2", function(e) {
 $(document).on("click", ".link-editar2", function(e) {
     e.preventDefault();
 
-    let id = $(this).parent().parent().children().eq(0).text();
+    let ref = $(this).parent().parent().children().eq(0).text();
     let nombre = $(this).parent().parent().children().eq(1).text();
-    let operacion = 1;
+
     $("#frmAdicionar2").slideDown();
     $("#GuardarEnvases").html("Actualizar");
 
-    $("#codigo2").val(id);
+    $("#codigo2").val(ref);
     $("#input2").val(nombre);
-    $("#txt-Id2").val(operacion)
 });
 
 /* Almacenar Registros */
@@ -61,13 +61,14 @@ $(document).on("click", "#GuardarEnvases", function(e) {
     e.preventDefault();
     let ref = $('#codigo2').val();
     let nombre = $("#input2").val();
-    //let operacion = $("#txt-Id2").val();
 
     $.ajax({
         type: "POST",
         url: '/api/saveContainers',
-        data: { id: id, ref: ref, nombre: nombre },
+        data: { ref: ref, nombre: nombre },
         success: function(data) {
+            $("#frmAdicionar2").slideUp();
+            refreshTableContainer();
             notificaciones(data);
         },
     });
@@ -75,7 +76,7 @@ $(document).on("click", "#GuardarEnvases", function(e) {
 
 /* Actualizar tabla */
 
-function refreshTable() {
+refreshTableContainer = () => {
     $("#tblEnvases").DataTable().clear();
     $("#tblEnvases").DataTable().ajax.reload();
 }
