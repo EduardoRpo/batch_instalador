@@ -104,8 +104,8 @@ $(document).ready(function() {
                     $("#observacionesLoteRechazado").val(info.obsBatch);
                 } else $("#btnAceptado").prop("checked", true);
 
-                firmado(info.realizo, 1);
-                if (info.verifico != 0) firmado(info.verifico, 2);
+                firmado(info.f_realizo, 1);
+                if (info.f_verifico != undefined) firmado(info.f_verifico, 2);
             }
         });
 
