@@ -13,7 +13,7 @@ if (!empty($_POST)) {
     
     if ($desinfectante > 0) {
 
-        $sql = "SELECT bf.observaciones as obsBatch, u.urlfirma as realizo, us.urlfirma as verifico FROM batch_firmas2seccion bf 
+        $sql = "SELECT bf.observaciones as obsBatch, u.urlfirma as f_realizo, us.urlfirma as f_verifico FROM batch_firmas2seccion bf 
                 INNER JOIN usuario u ON u.id = bf.realizo INNER JOIN usuario us ON us.id = bf.verifico 
                 WHERE modulo = :modulo AND batch = :batch";
         $query = $conn->prepare($sql);
@@ -21,7 +21,7 @@ if (!empty($_POST)) {
         $result = $query->rowCount();
         
         if ($result == 0) {
-            $sql = "SELECT bf.observaciones as obsBatch,u.urlfirma as realizo FROM batch_firmas2seccion bf 
+            $sql = "SELECT bf.observaciones as obsBatch,u.urlfirma as f_realizo FROM batch_firmas2seccion bf 
                     INNER JOIN usuario u ON u.id = bf.realizo WHERE modulo = :modulo AND batch = :batch";
             $query = $conn->prepare($sql);
             $query->execute(['modulo' => $modulo, 'batch' => $batch]);
