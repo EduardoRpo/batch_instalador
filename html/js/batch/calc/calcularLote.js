@@ -6,9 +6,8 @@ $(document).ready(function () {
   // Seleccionar checkbox
   $(document).on('blur', '.cantProgram', function (e) {
     e.preventDefault();
-    id_input = this.id;
-    // id_checkbox = id_input.substr(5, id_input.length);
-    referencia = fila.id_producto;
+    id_input = this.id.trim();
+    referencia = fila.id_producto.trim();
     numPedido = fila.pedido;
     cantidad = $(`#${id_input}`).val();
     date = $(`#date-${numPedido}-${referencia}`).val();
@@ -16,7 +15,6 @@ $(document).ready(function () {
     if (cantidad == 0) {
       alertify.set('notifier', 'position', 'top-right');
       alertify.error('La cantidad a programar no puede ser cero (0)');
-      // $(`#${id_checkbox}`).prop('checked', false);
       return false;
     }
 
@@ -26,10 +24,8 @@ $(document).ready(function () {
     } else {
       alertify.set('notifier', 'position', 'top-right');
       alertify.error('Ingrese fecha de insumo');
-      // $(`#${id_checkbox}`).prop('checked', false);
       return false;
     }
-    // $(`#${id_checkbox}`).prop('checked', true);
   });
 
   arrayPreprogramados = (referencia, cantidad, numPedido) => {
@@ -98,15 +94,15 @@ $(document).ready(function () {
   // Fecha inicio
   $(document).on('change', '.dateInsumos', function (e) {
     e.preventDefault();
-    id_date = this.id;
+    id_date = this.id.trim();
     id_input = id_date.substr(5, id_date.length);
-    referencia = fila.id_producto;
+    referencia = fila.id_producto.trim();
     numPedido = fila.pedido;
     date = $(`#${id_date}`).val();
 
     if (date) {
       calcfechaSugeridas(date, id_input);
-      fechaInsumo(id_input, numPedido, referencia, pedidosProgramar, date);
+      fechaInsumo(numPedido, referencia, pedidosProgramar, date);
     }
   });
 
