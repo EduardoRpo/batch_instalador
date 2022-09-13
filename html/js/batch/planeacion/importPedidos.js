@@ -15,12 +15,12 @@ $('#btnImportarPedidos').click(function (e) {
           cliente: item.Cliente.trim(),
           nombre_cliente: item.Nombre_Cliente.trim(),
           documento: item.Documento.trim(),
-          fecha_dcto: item.Fecha_Dcto,
+          fecha_dcto: item.Fecha_Dcto.trim(),
           producto: item.Producto.trim(),
           nombre_producto: item.Nombre_Producto_Mvto.trim(),
           // nombre_producto: item.Nombre_Producto.trim(),
-          cant_original: item.Cant_Original,
-          cantidad: item.Cantidad,
+          cant_original: item.Cant_Original.trim(),
+          cantidad: item.Cantidad.trim(),
         };
       });
       checkImport(OrderToImport);
