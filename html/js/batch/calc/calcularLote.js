@@ -102,7 +102,7 @@ $(document).ready(function () {
 
     if (date) {
       calcfechaSugeridas(date, id_input);
-      fechaInsumo(id_input, numPedido, referencia, pedidosProgramar, date);
+      fechaInsumo(numPedido, referencia, pedidosProgramar, date);
     }
   });
 
