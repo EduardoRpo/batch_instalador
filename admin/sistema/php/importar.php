@@ -122,12 +122,15 @@ if (!empty($_POST)) {
 		case '9': // insertar en la BD instructivo
 
 			foreach ($dataList as $data) {
-				$data[0] = preg_replace("[\n|\r|\n\r]", "", $data[0]);
-				$data[1] = preg_replace("[\n|\r|\n\r]", "", $data[1]);
-				$data[2] = preg_replace("[\n|\r|\n\r]", "", $data[2]);
+				$cant = sizeof($data);
+				if ($cant > 1) {
+					$paso = trim($data[0]);
+					$tiempo = trim($data[1]);
+					$ref = trim($data[2]);
 
-				$conn->query("INSERT INTO instructivo_preparacion (pasos, tiempo, id_producto) 
-								  VALUES ('{$data[0]}', '{$data[1]}', '{$data[2]}')");
+					$conn->query("INSERT INTO instructivo_preparacion (pasos, tiempo, id_producto) 
+					VALUES ('{$paso}', '{$tiempo}', '{$ref}')");
+				}
 			}
 			break;
 		case '10': // importar multipresentacion
