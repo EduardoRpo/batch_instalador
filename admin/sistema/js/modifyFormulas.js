@@ -89,8 +89,8 @@ $('#formula_f').change(function(e) {
 
 
 
-/* const materiaPrima = (r) => { */
-/* $.ajax({
+const materiaPrima = (r) => {
+    $.ajax({
         method: 'POST',
         url: 'php/c_formulas.php',
         data: { operacion: '4', tb: 'r' },
@@ -103,9 +103,10 @@ $('#formula_f').change(function(e) {
         error: function(response) {
             console.log(response)
         },
-    }) */
-/* } */
+    })
+}
 
+materiaPrima('r');
 /* cargar Selects */
 
 /* const cargarSelect = (data, select) => {
