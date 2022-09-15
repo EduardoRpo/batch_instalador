@@ -2,60 +2,60 @@
 let refs;
 
 const referenciasGranel = () => {
-  $.ajax({
-    url: '/api/granel',
-    success: function (info) {
-      let $selectProductos = $('#cmbReferenciaProductos');
-      refs = info;
-      cargarSelect(info, $selectProductos);
-    },
-    error: function (response) {
-      console.log(response);
-    },
-  });
+    $.ajax({
+        url: '/api/granel',
+        success: function(info) {
+            let $selectProductos = $('#cmbReferenciaProductos');
+            refs = info;
+            cargarSelect(info, $selectProductos);
+        },
+        error: function(response) {
+            console.log(response);
+        },
+    });
 };
 
 const granelNoFormulas = () => {
-  $.ajax({
-    url: '/api/granelNoFormula',
-    success: function (info) {
-      let $selectProductos = $('#cmbReferenciaProductos');
-      refs = Object.values(info);
-      cargarSelect(info, $selectProductos);
-    },
-    error: function (response) {
-      console.log(response);
-    },
-  });
+    $.ajax({
+        url: '/api/granelNoFormula',
+        success: function(info) {
+            let $selectProductos = $('#cmbReferenciaProductos');
+            refs = Object.values(info);
+            cargarSelect(info, $selectProductos);
+        },
+        error: function(response) {
+            console.log(response);
+        },
+    });
 };
 
 /* Cargue select referencias */
 
 const cargarSelect = (data, select) => {
-  select.empty();
-  select.append(`<option disabled selected>Seleccione</option>`);
+    select.empty();
+    select.append(`<option disabled selected>Seleccione</option>`);
 
-  if (data[0].superUsuario == 1)
-    select.append(`<option value="1">Todos</option>`);
+    if (data[0].superUsuario == 1)
+        select.append(`<option value="1">Todos</option>`);
 
-  $.each(data, function (i, value) {
-    if (value.referencia)
-      select.append(
-        `<option value ="${value.referencia}">${value.referencia}</option>`
-      );
-  });
+    $.each(data, function(i, value) {
+        if (value.referencia)
+            select.append(
+                `<option value ="${value.referencia}">${value.referencia}</option>`
+            );
+    });
 };
 
 /* Seleccionar referencia cargar Nombre */
 
-$('#cmbReferenciaProductos').change(function (e) {
-  e.preventDefault();
-  let referencia = $('select option:selected').val();
+$('#cmbReferenciaProductos').change(function(e) {
+    e.preventDefault();
+    let referencia = $('select option:selected').val();
 
-  if (referencia.includes('Granel')) {
-    const resultado = refs.find((refer) => refer.referencia === referencia);
+    if (referencia.includes('Granel')) {
+        const resultado = refs.find((refer) => refer.referencia === referencia);
 
-    $('#txtnombreProducto').val('');
-    $('#txtnombreProducto').val(resultado.nombre_referencia);
-  }
+        $('#txtnombreProducto').val('');
+        $('#txtnombreProducto').val(resultado.nombre_referencia);
+    }
 });
