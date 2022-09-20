@@ -32,12 +32,12 @@ $app->post('/saveUsers', function (Request $request, Response $response, $args) 
         $Users = $userDao->updateUser($dataUsers);
 
         if ($Users == null)
-            $resp = array('success' => true, 'message' => 'Ususario actualizado correctamente');
+            $resp = array('success' => true, 'message' => 'Usuario actualizado correctamente');
     } else {
         $Users = $userDao->saveUsers($dataUsers, $ruta);
 
         if ($Users == null)
-            $resp = array('success' => true, 'message' => 'Ususario almacenado correctamente');
+            $resp = array('success' => true, 'message' => 'Usuario almacenado correctamente');
     }    
 
 

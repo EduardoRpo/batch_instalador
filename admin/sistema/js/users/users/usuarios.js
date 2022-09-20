@@ -12,7 +12,8 @@ $(document).ready(function() {
         $("#nombres").val("");
         $("#apellidos").val("");
         $("#email").val("");
-        $("#cargo").val("");
+        $("#cargos option:contains(Seleccionar)").prop('selected', true);
+        $("#usuarios_rols option:contains(Seleccionar)").prop('selected', true);
         $("#modulo").val("");
         $("#usuario").val("");
         $("#clave").val("");
@@ -33,11 +34,11 @@ $(document).ready(function() {
             let nombres = $("#nombres").val();
             let apellidos = $("#apellidos").val();
             let email = $("#email").val();
-            let cargo = $("#cargo").val();
+            let cargos = $("#cargos").val();
             let modulo = $("#modulo").val();
             let user = $("#usuario").val();
             let clave = $("#clave").val();
-            let rol = $("#rol").val();
+            let rol = $("#usuarios_rols").val();
 
             if (rol == 1 || rol == 2 || rol == 5) {
                 modulo = "1";
@@ -96,28 +97,23 @@ $(document).ready(function() {
                 contentType: false,
 
                 success: function(r) {
-                    if (r == 1) {
-                        alertify.set("notifier", "position", "top-right");
-                        alertify.success("Almacenado con éxito.");
+                    alertify.set("notifier", "position", "top-right");
+
+                    if (r.success == true) {
+                        alertify.success(r.message);
                         $("#ModalCrearUsuarios").modal("hide");
                         refreshTable();
-                    } else if (r == 2) {
-                        alertify.set("notifier", "position", "top-right");
-                        alertify.error("El usuario ya existe.");
-                    } else if (r == 3) {
-                        alertify.set("notifier", "position", "top-right");
-                        alertify.success("Usuario actualizado.");
-                        $("#ModalCrearUsuarios").modal("hide");
-                        refreshTable();
-                    } else {
-                        alertify.set("notifier", "position", "top-right");
-                        alertify.error("Error.");
-                    }
+                    } else if (r.error)
+                        alertify.error(r.message);
+                    else
+                        alertify.error("Ocurrio un Error mientras guardaba. Intente nuevamente");
+
                 },
             });
             return false;
         });
     });
+
     /* evento click para actualizar registros */
 
     $(document).on("click", ".link-editar", function(e) {
