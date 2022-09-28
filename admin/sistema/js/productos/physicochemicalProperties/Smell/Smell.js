@@ -1,4 +1,3 @@
-
 /* Adicionar Nombre */
 
 $("#AdicionarOlor").click(function(e) {
@@ -54,23 +53,24 @@ $(document).on("click", ".link-editar3", function(e) {
 
 /* Almacenar Registros */
 
-    $(document).on("click", "#GuardarOlor", function(e) {
-        e.preventDefault();
-        let id = $('#txt-Id3').val();
-        let nombre = $("#input3").val();
-        $.ajax({
-            type: "POST",
-            url: '/api/saveSmell',
-            data: { id: id, nombre: nombre },
-            success: function(data) {
-                notificaciones(data);
-            },
-        });
+$(document).on("click", "#GuardarOlor", function(e) {
+    e.preventDefault();
+    let id = $('#txt-Id3').val();
+    let nombre = $("#input3").val();
+    $.ajax({
+        type: "POST",
+        url: '/api/saveSmell',
+        data: { id: id, nombre: nombre },
+        success: function(data) {
+            refreshTableSmell()
+            notificaciones(data);
+        },
     });
+});
 
 /* Actualizar tabla */
 
-function refreshTable () {
+function refreshTableSmell() {
     $("#tblOlor").DataTable().clear();
     $("#tblOlor").DataTable().ajax.reload();
 }

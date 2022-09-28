@@ -1,4 +1,3 @@
-
 /* Adicionar Nombre */
 
 $("#AdicionarColor").click(function(e) {
@@ -53,23 +52,24 @@ $(document).on("click", ".link-editar2", function(e) {
 
 /* Almacenar Registros */
 
-    $(document).on("click", "#GuardarColor", function(e) {
-        e.preventDefault();
-        let id = $('#txt-Id2').val();
-        let nombre = $("#input2").val();
-        $.ajax({
-            type: "POST",
-            url: '/api/saveColor',
-            data: { id: id, nombre: nombre },
-            success: function(data) {
-                notificaciones(data);
-            },
-        });
+$(document).on("click", "#GuardarColor", function(e) {
+    e.preventDefault();
+    let id = $('#txt-Id2').val();
+    let nombre = $("#input2").val();
+    $.ajax({
+        type: "POST",
+        url: '/api/saveColor',
+        data: { id: id, nombre: nombre },
+        success: function(data) {
+            refreshTableColor()
+            notificaciones(data);
+        },
     });
+});
 
 /* Actualizar tabla */
 
-function refreshTable() {
+refreshTableColor = () => {
     $("#tblColor").DataTable().clear();
     $("#tblColor").DataTable().ajax.reload();
 }

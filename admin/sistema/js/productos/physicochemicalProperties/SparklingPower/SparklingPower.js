@@ -1,4 +1,3 @@
-
 /* Adicionar Nombre */
 
 $("#AdicionarEspuma").click(function(e) {
@@ -54,23 +53,24 @@ $(document).on("click", ".link-editar9", function(e) {
 
 /* Almacenar Registros */
 
-    $(document).on("click", "#GuardarEspuma", function(e) {
-        e.preventDefault();
-        let id = $('#txt-Id9').val();
-        let nombre = $("#input9").val();
-        $.ajax({
-            type: "POST",
-            url: '/api/saveSparkPower',
-            data: { id: id, nombre: nombre },
-            success: function(data) {
-                notificaciones(data);
-            },
-        });
+$(document).on("click", "#GuardarEspuma", function(e) {
+    e.preventDefault();
+    let id = $('#txt-Id9').val();
+    let nombre = $("#input9").val();
+    $.ajax({
+        type: "POST",
+        url: '/api/saveSparkPower',
+        data: { id: id, nombre: nombre },
+        success: function(data) {
+            refreshTableSparkPower()
+            notificaciones(data);
+        },
     });
+});
 
 /* Actualizar tabla */
 
-function refreshTable () {
+refreshTableSparkPower = () => {
     $("#tblEspuma").DataTable().clear();
     $("#tblEspuma").DataTable().ajax.reload();
 }

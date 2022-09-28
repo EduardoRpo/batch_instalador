@@ -392,20 +392,28 @@
   <script src="js/productos//physicochemicalProperties//DataVerification.js"></script>
   <script src="js//productos//physicochemicalProperties//Appearance//tblAppearance.js"></script>
   <script src="js//productos//physicochemicalProperties//Appearance//Appearance.js"></script>
+  
   <script src="js//productos//physicochemicalProperties//Color//tblColor.js"></script>
   <script src="js//productos//physicochemicalProperties//Color//Color.js"></script>
+  
   <script src="js//productos//physicochemicalProperties//Smell//tblSmell.js"></script>
   <script src="js//productos//physicochemicalProperties//Smell//Smell.js"></script>
+  
   <script src="js//productos//physicochemicalProperties//Density//tblDensity.js"></script>
   <script src="js//productos//physicochemicalProperties//Density//Density.js"></script>
+  
   <script src="js//productos//physicochemicalProperties//alcoholContent//tblAlcoholContent.js"></script>
   <script src="js//productos//physicochemicalProperties//alcoholContent//AlcoholContent.js"></script>
+  
   <script src="js//productos//physicochemicalProperties//ph//tblPh.js"></script>
   <script src="js//productos//physicochemicalProperties//ph//Ph.js"></script>
+  
   <script src="js//productos//physicochemicalProperties//unctuousness//tblunctuousness.js"></script>
   <script src="js//productos//physicochemicalProperties//unctuousness//unctuousness.js"></script>
+  
   <script src="js//productos//physicochemicalProperties//Viscosity//tblViscosity.js"></script>
   <script src="js//productos//physicochemicalProperties//Viscosity//Viscosity.js"></script>
+  
   <script src="js//productos//physicochemicalProperties///SparklingPower//tblSparklingPower.js"></script>
   <script src="js//productos//physicochemicalProperties//SparklingPower//SparklingPower.js"></script>
   <!-- <script src="js/productos//generals//propiedades-generales.js"></script> -->

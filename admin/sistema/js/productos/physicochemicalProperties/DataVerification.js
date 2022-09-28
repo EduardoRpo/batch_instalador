@@ -3,7 +3,7 @@
 const dataVerification = (min, max) => {
 
     let NotificacionData;
-    if (min > max || min == max) {
+    if (parseInt(min) > parseInt(max)) {
         NotificacionData = { error: true, message: 'El valor mínimo no puede ser mayor o igual al valor máximo' };
         return 1;
     } else if (isNaN(min) || isNaN(max)) {

@@ -1,4 +1,3 @@
-
 /* Adicionar Nombre */
 
 $("#AdicionarDensidad").click(function(e) {
@@ -56,33 +55,34 @@ $(document).on("click", ".link-editar4", function(e) {
 
 /* Almacenar Registros */
 
-    $(document).on("click", "#GuardarDensidad", function(e) {
-        e.preventDefault();
-        let id = $('#txt-Id4').val();
-        let Vmin = $("#min4").val();
-        let Vmax = $("#max4").val();
-        let dataRespose = dataVerification(Vmin, Vmax);
-        if(dataRespose == 1){
-            alertify.set("notifier", "position", "top-right");
-            alertify.error("El valor mínimo no puede ser mayor o igual que el valor máximo");
-        }
-        else if(dataRespose == 2 ){
-            alertify.set("notifier", "position", "top-right");
-            alertify.error("ingrese todos los datos");
-        }else{$.ajax({
+$(document).on("click", "#GuardarDensidad", function(e) {
+    e.preventDefault();
+    let id = $('#txt-Id4').val();
+    let Vmin = $("#min4").val();
+    let Vmax = $("#max4").val();
+    let dataRespose = dataVerification(Vmin, Vmax);
+    if (dataRespose == 1) {
+        alertify.set("notifier", "position", "top-right");
+        alertify.error("El valor mínimo no puede ser mayor o igual que el valor máximo");
+    } else if (dataRespose == 2) {
+        alertify.set("notifier", "position", "top-right");
+        alertify.error("ingrese todos los datos");
+    } else {
+        $.ajax({
             type: "POST",
             url: '/api/saveDensity',
-            data: { id: id, Vmin:Vmin, Vmax:Vmax },
+            data: { id: id, Vmin: Vmin, Vmax: Vmax },
             success: function(data) {
+                refreshTableDensity()
                 notificaciones(data);
             },
-        });}
-    });
+        });
+    }
+});
 
 /* Actualizar tabla */
 
-function refreshTable() {
+function refreshTableDensity() {
     $("#tblDensidad").DataTable().clear();
     $("#tblDensidad").DataTable().ajax.reload();
 }
-

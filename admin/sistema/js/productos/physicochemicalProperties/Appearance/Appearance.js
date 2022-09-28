@@ -1,4 +1,3 @@
-
 /* Adicionar Nombre */
 
 $("#btnAdicionarApariencia").click(function(e) {
@@ -54,23 +53,24 @@ $(document).on("click", ".link-editar1", function(e) {
 
 /* Almacenar Registros */
 
-    $(document).on("click", "#GuardarApariencia", function(e) {
-        e.preventDefault();
-        let id = $('#txt-Id1').val();
-        let nombre = $("#input1").val();
-        $.ajax({
-            type: "POST",
-            url: '/api/saveAppearance',
-            data: { id: id, nombre: nombre },
-            success: function(data) {
-                notificaciones(data);
-            },
-        });
+$(document).on("click", "#GuardarApariencia", function(e) {
+    e.preventDefault();
+    let id = $('#txt-Id1').val();
+    let nombre = $("#input1").val();
+    $.ajax({
+        type: "POST",
+        url: '/api/saveAppearance',
+        data: { id: id, nombre: nombre },
+        success: function(data) {
+            refreshTableAppearance()
+            notificaciones(data);
+        },
     });
+});
 
 /* Actualizar tabla */
 
-function refreshTable() {
+function refreshTableAppearance() {
     $("#tblApariencia").DataTable().clear();
     $("#tblApariencia").DataTable().ajax.reload();
 }

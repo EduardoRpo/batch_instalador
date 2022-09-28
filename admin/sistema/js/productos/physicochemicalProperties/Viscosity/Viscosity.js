@@ -1,4 +1,3 @@
-
 /* Adicionar Nombre */
 
 $("#AdicionarViscosidad").click(function(e) {
@@ -56,32 +55,35 @@ $(document).on("click", ".link-editar8", function(e) {
 
 /* Almacenar Registros */
 
-    $(document).on("click", "#GuardarViscosidad", function(e) {
-        e.preventDefault();
-        let id = $('#txt-Id8').val();
-        let Vmin = $("#min8").val();
-        let Vmax = $("#max8").val();
-        let dataRespose = dataVerification(Vmin, Vmax);
-        if(dataRespose == 1){
-            alertify.set("notifier", "position", "top-right");
-            alertify.error("El valor mínimo no puede ser mayor o igual que el valor máximo");
-        }
-        else if(dataRespose == 2 ){
-            alertify.set("notifier", "position", "top-right");
-            alertify.error("ingrese todos los datos");
-        }else{$.ajax({
+$(document).on("click", "#GuardarViscosidad", function(e) {
+    e.preventDefault();
+    let id = $('#txt-Id8').val();
+    let Vmin = $("#min8").val();
+    let Vmax = $("#max8").val();
+    let dataRespose = dataVerification(Vmin, Vmax);
+
+    if (dataRespose == 1) {
+        alertify.set("notifier", "position", "top-right");
+        alertify.error("El valor mínimo no puede ser mayor o igual que el valor máximo");
+    } else if (dataRespose == 2) {
+        alertify.set("notifier", "position", "top-right");
+        alertify.error("ingrese todos los datos");
+    } else {
+        $.ajax({
             type: "POST",
             url: '/api/saveViscosity',
-            data: { id: id, Vmin:Vmin, Vmax:Vmax },
+            data: { id: id, Vmin: Vmin, Vmax: Vmax },
             success: function(data) {
+                refreshTableViscosity()
                 notificaciones(data);
             },
-        });}
-    });
+        });
+    }
+});
 
 /* Actualizar tabla */
 
-function refreshTable() {
+refreshTableViscosity = () => {
     $("#tblViscosidad").DataTable().clear();
     $("#tblViscosidad").DataTable().ajax.reload();
 }
