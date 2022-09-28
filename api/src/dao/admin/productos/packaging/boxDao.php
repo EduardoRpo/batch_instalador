@@ -28,11 +28,11 @@ class boxDao
         return $box;
     }
 
-    public function findBoxByRef($dataBox)
+    public function findBoxByRef($ref)
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("SELECT * FROM empaque WHERE id = :ref");
-        $stmt->execute(['ref' => $dataBox['ref']]);
+        $stmt->execute(['ref' => $ref]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         $box = $stmt->fetchAll($connection::FETCH_ASSOC);
         $this->logger->notice("empaque Obtenido", array('empaque' => $box));

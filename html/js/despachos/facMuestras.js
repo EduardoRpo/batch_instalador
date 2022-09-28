@@ -2,7 +2,8 @@ $(document).ready(function() {
     /* Cargar facturacion de muestras */
 
     fact_muestras = (referencia, i) => {
-        $.post("/html/php/servicios/despachos/fact_muestras.php", { referencia },
+        /* $.post("/html/php/servicios/despachos/fact_muestras.php", { referencia }, */
+        $.post(`/api/muestrasDespachos/${referencia}`,
             function(data, textStatus, jqXHR) {
                 data = JSON.parse(data);
                 muestras = $(`#muestras_retencion_acond${i}`).val();

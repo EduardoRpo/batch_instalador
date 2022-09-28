@@ -28,11 +28,11 @@ class othersDao
         return $others;
     }
 
-    public function findOthersByRef($dataOthers)
+    public function findOthersByRef($ref)
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("SELECT * FROM otros WHERE id = :ref");
-        $stmt->execute(['ref' => $dataOthers['ref']]);
+        $stmt->execute(['ref' => $ref]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         $others = $stmt->fetchAll($connection::FETCH_ASSOC);
         $this->logger->notice("otro Obtenido", array('otros' => $others));
@@ -42,7 +42,7 @@ class othersDao
     public function saveOthers($dataOthers)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("INSERT INTO otros (nombre , id) VALUES(:ref, :nombre)");
+        $stmt = $connection->prepare("INSERT INTO otros (id, nombre) VALUES(:ref, :nombre)");
         $stmt->execute(['ref' => $dataOthers['ref'], 'nombre' => $dataOthers['nombre']]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }

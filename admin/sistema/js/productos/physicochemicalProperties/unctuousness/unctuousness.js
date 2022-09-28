@@ -1,4 +1,3 @@
-
 /* Adicionar Nombre */
 
 $("#Adicionaruntuosidad").click(function(e) {
@@ -54,23 +53,24 @@ $(document).on("click", ".link-editar7", function(e) {
 
 /* Almacenar Registros */
 
-    $(document).on("click", "#GuardarUntuosidad", function(e) {
-        e.preventDefault();
-        let id = $('#txt-Id7').val();
-        let nombre = $("#input7").val();
-        $.ajax({
-            type: "POST",
-            url: '/api/saveUnctuousness',
-            data: { id: id, nombre: nombre },
-            success: function(data) {
-                notificaciones(data);
-            },
-        });
+$(document).on("click", "#GuardarUntuosidad", function(e) {
+    e.preventDefault();
+    let id = $('#txt-Id7').val();
+    let nombre = $("#input7").val();
+    $.ajax({
+        type: "POST",
+        url: '/api/saveUnctuousness',
+        data: { id: id, nombre: nombre },
+        success: function(data) {
+            refreshTableUnctuousness()
+            notificaciones(data);
+        },
     });
+});
 
 /* Actualizar tabla */
 
-function refreshTable() {
+function refreshTableUnctuousness() {
     $("#tblUntuosidad").DataTable().clear();
     $("#tblUntuosidad").DataTable().ajax.reload();
 }

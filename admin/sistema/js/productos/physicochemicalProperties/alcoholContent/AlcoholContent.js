@@ -1,4 +1,3 @@
-
 /* Adicionar Nombre */
 
 $("#AdicionarAlcohol").click(function(e) {
@@ -56,32 +55,34 @@ $(document).on("click", ".link-editar5", function(e) {
 
 /* Almacenar Registros */
 
-    $(document).on("click", "#GuardarAlcohol", function(e) {
-        e.preventDefault();
-        let id = $('#txt-Id5').val();
-        let Vmin = $("#min5").val();
-        let Vmax = $("#max5").val();
-        let dataRespose = dataVerification(Vmin, Vmax);
-        if(dataRespose == 1){
-            alertify.set("notifier", "position", "top-right");
-            alertify.error("El valor mínimo no puede ser mayor o igual que el valor máximo");
-        }
-        else if(dataRespose == 2 ){
-            alertify.set("notifier", "position", "top-right");
-            alertify.error("ingrese todos los datos");
-        }else{$.ajax({
+$(document).on("click", "#GuardarAlcohol", function(e) {
+    e.preventDefault();
+    let id = $('#txt-Id5').val();
+    let Vmin = $("#min5").val();
+    let Vmax = $("#max5").val();
+    let dataRespose = dataVerification(Vmin, Vmax);
+    if (dataRespose == 1) {
+        alertify.set("notifier", "position", "top-right");
+        alertify.error("El valor mínimo no puede ser mayor o igual que el valor máximo");
+    } else if (dataRespose == 2) {
+        alertify.set("notifier", "position", "top-right");
+        alertify.error("ingrese todos los datos");
+    } else {
+        $.ajax({
             type: "POST",
             url: '/api/saveAlcoholContent',
-            data: { id: id, Vmin:Vmin, Vmax:Vmax },
+            data: { id: id, Vmin: Vmin, Vmax: Vmax },
             success: function(data) {
+                refreshTableAlcoholContent()
                 notificaciones(data);
             },
-        });}
-    });
+        });
+    }
+});
 
 /* Actualizar tabla */
 
-function refreshTable() {
+function refreshTableAlcoholContent() {
     $("#tblAlcohol").DataTable().clear();
     $("#tblAlcohol").DataTable().ajax.reload();
 }
