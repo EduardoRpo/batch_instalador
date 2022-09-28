@@ -168,11 +168,12 @@ include_once("modal/modalPedidos.php");
                         <button class="toggle-vis btn btn-primary hideTitle" id="2">F_Pedidos</button>
                         <button class="toggle-vis btn btn-primary hideTitle" id="3">Granel</button>
                         <button class="toggle-vis btn btn-primary hideTitle" id="4">Referencia</button>
-                        <button class="toggle-vis btn btn-primary hideTitle" id="5">Producto</button>
-                        <button class="toggle-vis btn btn-primary hideTitle" id="6">Cant_original</button>
-                        <button class="toggle-vis btn btn-primary hideTitle" id="7">Saldo Ofima</button>
-                        <button class="toggle-vis btn btn-primary hideTitle" id="8">Acum_Prog</button>
-                        <button class="toggle-vis btn btn-primary hideTitle" id="9">Cant_Programar</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="5">Observaciones</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="6">Producto</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="7">Cant_original</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="8">Saldo Ofima</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="9">Acum_Prog</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="10">Cant_Programar</button>
                         <button class="toggle-vis btn btn-primary" id="calcLote">Calcular Lote</button>
 
                       </div>
