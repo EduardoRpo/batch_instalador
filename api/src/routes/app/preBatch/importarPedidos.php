@@ -109,15 +109,38 @@ $app->post('/addPedidos', function (Request $request, Response $response, $args)
 
   // $data = array();
   for ($i = 0; $i < sizeof($dataPedidos); $i++) {
-    $result = $preBatchDao->savePedidos($dataPedidos[$i]);
+    $preBatchDao->savePedidos($dataPedidos[$i]);
 
     //Obtener todos los pedidos
-    $data[$i] = $dataPedidos[$i]['documento'];
+    $data[$i] = $dataPedidos[$i]['documento'] . 'M-' . $dataPedidos[$i]['producto'];
   }
 
-  //Al cargar los pedidos validar la tabla vs pedidos y si no encuentra el registro marcar con un flag y no mostar en la vista Preprogramados
-  //Cargar todos registros de la tabla que no tengan flag y validarlos contra el objeto de importacion
-  $result = $preBatchDao->changeFlagEstadoByPedido($data);
+  $result = $preBatchDao->findAllOrders();
+
+  $arrayBD = [];
+  for ($i = 0; $i < sizeof($result); $i++) {
+    array_push($arrayBD, $result[$i]['concate']);
+  }
+
+  $tam_arrayBD = sizeof($arrayBD);
+  $tam_result = sizeof($data);
+
+  if ($tam_arrayBD > $tam_result)
+    $array_diff = array_diff($arrayBD, $data);
+  else
+    $array_diff = array_diff($data, $arrayBD);
+
+  //reindezar array
+  $array_diff = array_values($array_diff);
+
+  if ($array_diff)
+    for ($i = 0; $i < sizeof($array_diff); $i++) {
+      $referencia = stristr($array_diff[$i], 'M');
+      $posicion =  strrpos($array_diff[$i], "M");
+      $documento = substr($array_diff[$i], 0, $posicion);
+      $result = $preBatchDao->changeFlagEstadoByPedido($documento, $referencia);
+    }
+
 
   if ($result == null) {
     date_default_timezone_set('America/Bogota');
@@ -142,3 +165,22 @@ $app->get('/deletePedidosSession', function (Request $request, Response $respons
   $response->getBody()->write(json_encode(JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
+
+function multi_array_diff($arr1, $arr2)
+{
+  $arrDiff = array();
+  foreach ($arr1 as $key => $val) {
+    if (isset($arr2[$key])) {
+      if (is_array($val)) {
+        $arrDiff[$key] = multi_array_diff($val, $arr2[$key]);
+      } else {
+        if (in_array($val, $arr2) != 1) {
+          $arrDiff[$key] = $val;
+        }
+      }
+    } else {
+      $arrDiff[$key] = $val;
+    }
+  }
+  return $arrDiff;
+}

@@ -10,7 +10,7 @@ $EMPedidosRegistroDao = new ExplosionMaterialesPedidosRegistroDao();
 $preBatchDao = new PreBatchDao();
 
 $app->get('/preBatch', function (Request $request, Response $response, $args) use ($EMPedidosRegistroDao, $preBatchDao) {
-  $EMPedidosRegistroDao->resetEstado();
+  $EMPedidosRegistroDao->resetEstadoColorProgramacion();
   $preBatch = $preBatchDao->findAllPreBatch();
   $response->getBody()->write(json_encode($preBatch, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');

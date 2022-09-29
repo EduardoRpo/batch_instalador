@@ -17,6 +17,16 @@ class PreBatchDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
+    public function findAllOrders()
+    {
+        $connection = Connection::getInstance()->getConnection();
+        $sql = "SELECT CONCAT(pedido, id_producto) AS concate FROM `explosion_materiales_pedidos_registro`;";
+        $query = $connection->prepare($sql);
+        $query->execute();
+        $preBatch = $query->fetchAll($connection::FETCH_ASSOC);
+        return $preBatch;
+    }
+
     public function findAllPreBatch()
     {
         $connection = Connection::getInstance()->getConnection();
@@ -34,6 +44,8 @@ class PreBatchDao
                     INNER JOIN producto p ON p.referencia = exp.id_producto 
                     INNER JOIN propietario pp ON pp.id = p.id_propietario
                     LEFT JOIN observaciones_batch_inactivos obi ON obi.pedido = exp.pedido AND obi.referencia = exp.id_producto
+                    WHERE flag_estado = 1
+                    ORDER BY estado DESC;
         "; //WHERE exp.flag_estado = 0
 
         $query = $connection->prepare($sql);
@@ -121,18 +133,14 @@ class PreBatchDao
     }
 
     //Validar tabla pedidos y cambiar flag
-    public function changeFlagEstadoByPedido($pedidos)
+    public function changeFlagEstadoByPedido($pedido, $producto)
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $pedidos = json_encode($pedidos);
-        $data = str_replace('"', '', $pedidos);
-        $data = substr($data, 1, -1);
-
         $stmt = $connection->prepare("UPDATE explosion_materiales_pedidos_registro 
-                                      SET flag_estado = 1 
-                                      WHERE id IN(SELECT id FROM explosion_materiales_pedidos_registro WHERE pedido NOT IN({$data}))");
-        $stmt->execute();
+                                      SET flag_estado = 0 
+                                      WHERE pedido = :pedido AND id_producto = :id_producto");
+        $stmt->execute(['pedido' => $pedido, 'id_producto' => $producto]);
     }
 
     public function convertData($dataPedidos)
