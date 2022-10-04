@@ -116,7 +116,7 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
           if ($observaciones)
             $resp = $observacionesDao->updateObservacion($id_batch['id'], $multi[$j]);
         } else {
-          $resp = $batchDao->updateBatchPedido($id_batch['id'], $dataBatch[0]);
+          //$resp = $batchDao->updateBatchPedido($id_batch['id'], $dataBatch[0]);
           $_SESSION['dataPedidos'] = $multi;
         }
       }

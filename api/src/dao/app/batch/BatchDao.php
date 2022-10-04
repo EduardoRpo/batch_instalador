@@ -156,7 +156,10 @@ class BatchDao extends estadoInicialDao
 
     public function saveBatch($dataBatch, $multi)
     {
-        //$pedido                 = $dataBatch['pedido'];
+        if (!empty($dataBatch['pedido']))
+            $pedido = $dataBatch['pedido'];
+        else
+            $pedido = 1;
 
         $dataBatch['ref'] == null ? $referencia = $dataBatch['granel'] : $referencia = $dataBatch['ref'];
         $dataBatch['lote'] == null ? $tamanototallote = $dataBatch['tamanio_lote'] : $tamanototallote = $dataBatch['lote'];
@@ -192,10 +195,10 @@ class BatchDao extends estadoInicialDao
         /* Inserta y crea batch */
 
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("INSERT INTO batch (fecha_creacion, fecha_programacion, fecha_actual, numero_orden, numero_lote, tamano_lote, lote_presentacion, unidad_lote, estado, id_producto) 
-                                      VALUES(:fecha_creacion, :fecha_programacion, :fecha_actual, :numero_orden, :numero_lote, :tamano_lote, :lote_presentacion, :unidad_lote, :estado, :id_producto)");
+        $stmt = $connection->prepare("INSERT INTO batch (pedido, fecha_creacion, fecha_programacion, fecha_actual, numero_orden, numero_lote, tamano_lote, lote_presentacion, unidad_lote, estado, id_producto) 
+                                      VALUES(:pedido, :fecha_creacion, :fecha_programacion, :fecha_actual, :numero_orden, :numero_lote, :tamano_lote, :lote_presentacion, :unidad_lote, :estado, :id_producto)");
         $stmt->execute([
-            //'pedido' => $pedido,
+            'pedido' => $pedido,
             'fecha_creacion' => $fecha,
             'fecha_programacion' => $fechaprogramacion,
             'fecha_actual' => $fechahoy,
