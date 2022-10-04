@@ -11,7 +11,7 @@ loadBatch()
 $(document).ready(function() {
 
 
-    /* cargar = (btn, idbtn) => {
+    cargar = (btn, idbtn) => {
         sessionStorage.setItem("idbtn", idbtn);
         id = btn.id;
 
@@ -25,7 +25,7 @@ $(document).ready(function() {
         $("#usuario").val("");
         $("#clave").val("");
         $("#m_firmar").modal("show");
-    }; */
+    };
 
     guardarLiberacion = (info) => {
         let obs = $("#observacioneslote").val();
