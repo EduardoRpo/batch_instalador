@@ -32,11 +32,11 @@ $(document).ready(function() {
         $.post("../../html/php/liberacion.php", { radio, id, info, obs, idBatch, op: 1 },
             function(data, textStatus, jqXHR) {
 
-                if (data == 1) {
+                /* if (data == 1) {
                     alertify.set("notifier", "position", "top-right");
                     alertify.error("Faltan firmas en Despachos para cerrar el lote");
                     return false
-                }
+                } */
 
                 alertify.set("notifier", "position", "top-right");
                 alertify.success("Firmado exitosamente");

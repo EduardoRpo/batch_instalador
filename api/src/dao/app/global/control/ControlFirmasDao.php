@@ -45,10 +45,10 @@ class ControlFirmasDao
         $query = $connection->prepare($sql);
         $query->execute(['id_batch' => $id_batch]);
 
-        $sql = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) 
+        /* $sql = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) 
                          VALUES('7' , :id_batch, '0', '1')";
         $query = $connection->prepare($sql);
-        $query->execute(['id_batch' => $id_batch]);
+        $query->execute(['id_batch' => $id_batch]); */
 
         $sql = "INSERT INTO batch_control_firmas (modulo, batch, cantidad_firmas, total_firmas) 
                          VALUES('8' , :id_batch, '0', '2')";
