@@ -1,0 +1,99 @@
+<?php
+require_once('./html/sesiones/sesion.php');
+include('modal/modal_cambiarContrasena.php');
+sesiones(5);
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Batch Record">
+    <meta name="author" content="Teenus SAS">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
+    <title>Programación Envasado | Samara Cosmetics</title>
+
+
+    <link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="html/css/style.css" rel="stylesheet">
+    <link href="html/css/colors/blue.css" id="theme" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="html/vendor/datatables/datatables.min.css">
+    <link rel="stylesheet" type="text/css" href="html/vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css">
+
+    <!-- Alertify -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+
+</head>
+
+<body class="fix-header fix-sidebar card-no-border">
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
+        </svg>
+    </div>
+
+    <div id="main-wrapper">
+
+        <!-- HEADER -->
+        <?php include('partials/header.php'); ?>
+        <!-- FIN HEADER -->
+
+        <div class="contenedorPrincipal row">
+            <div class="tituloProceso col">
+                <h1 class="text-themecolor"><b>Programación Envasado</b></h1>
+            </div>
+            <div class="col-2 mt-4">
+                <select name="numSemana" id="numSemana" class="form-control text-center">
+                </select>
+            </div>
+            <div class="col-2">
+                <button type="button" id="btnProgramar" class="btn waves-effect waves-light btn-danger" style="width: 120px; margin-top:25px">
+                    <strong>Programar</strong>
+                </button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 align-self-center">
+                <div class="card">
+                    <div class="card-block">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered" id="tablaEnvasado" style="width: 100%;">
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    </div>
+
+    <script src="../assets/plugins/jquery/jquery.min.js"></script>
+    <script src="../assets/plugins/bootstrap/js/tether.min.js"></script>
+    <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="html/vendor/datatables/datatables.min.js"></script>
+    <script src="html/js/utils/jquery.slimscroll.js"></script>
+    <script src="html/js/utils/waves.js"></script>
+    <script src="html/js/utils/sidebarmenu.js"></script>
+    <script src="../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="html/js/utils/custom.min.js"></script>
+    <script src="html/js/utils/datatables.js"></script>
+    <script src="../assets/plugins/jquery/jquery.number.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+
+    <script src="html/js/programacion_envasado/tblProgramacionEnvasado.js"></script>
+    <script src="html/js/programacion_envasado/programacionEnvasado.js"></script>
+
+</body>
+
+</html>

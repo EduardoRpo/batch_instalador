@@ -14,7 +14,7 @@
           <a class="navbar-brand" href="/../pesaje" target="_blank">Pesaje</a>
           <a class="navbar-brand" href="/../preparacion" target="_blank">Preparación</a>
           <a class="navbar-brand" href="/../aprobacion" target="_blank">Aprobación</a>
-          <!-- <a class="navbar-brand" href="/../envasado" target="_blank">Programacion Envasado</a> -->
+          <a class="navbar-brand" href="/../programacion-envasado" target="_blank">Programacion Envasado</a>
           <a class="navbar-brand" href="/../envasado" target="_blank">Envasado</a>
           <a class="navbar-brand" href="/../acondicionamiento" target="_blank">Acondicionamiento</a>
           <!-- <a class="navbar-brand" href="/../despachos" target="_blank">Despachos</a> -->
@@ -26,7 +26,7 @@
         <?php if ($_SESSION['rol'] == 2) { ?>
           <a class="navbar-brand" href="/html/batch.php" target="_blank" target="_blank">Batch Record</a>
           <a class="navbar-brand" href="/../aprobacion" target="_blank">Aprobación</a>
-          <!-- <a class="navbar-brand" href="/../envasado" target="_blank">Programacion Envasado</a> -->
+          <!-- <a class="navbar-brand" href="/../programacion-envasado" target="_blank">Programacion Envasado</a> -->
           <a class="navbar-brand" href="/../envasado" target="_blank">Envasado</a>
           <a class="navbar-brand" href="/../acondicionamiento" target="_blank">Acondicionamiento</a>
           <!-- <a class="navbar-brand" href="/../despachos" target="_blank">Despachos</a> -->

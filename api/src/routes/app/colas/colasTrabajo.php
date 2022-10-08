@@ -31,6 +31,12 @@ $app->get('/envasado', function (Request $request, Response $response, $args) us
     return $response->withHeader('Content-Type', 'application/json');
 });
 
+$app->get('/programacionEnvasado', function (Request $request, Response $response, $args) use ($batchLineaDao) {
+    $envasado = $batchLineaDao->findBatchProgramacionEnvasado();
+    $response->getBody()->write(json_encode($envasado, JSON_NUMERIC_CHECK));
+    return $response->withHeader('Content-Type', 'application/json');
+});
+
 $app->get('/acondicionamiento', function (Request $request, Response $response, $args) use ($batchLineaDao) {
     $acondicionamiento = $batchLineaDao->findBatchAcondicionamiento();
     $response->getBody()->write(json_encode($acondicionamiento, JSON_NUMERIC_CHECK));

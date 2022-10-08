@@ -119,6 +119,9 @@ require_once __DIR__ . '/src/routes/app/envasado/envasado.php';
 require_once __DIR__ . '/src/routes/app/envasado/entregasParciales.php';
 require_once __DIR__ . '/src/routes/app/envasado/equipos.php';
 
+//programacion envasado
+require_once __DIR__ . '/src/routes/app/programacion_envasado/programacion_envasado.php';
+
 //Explosion de Materiales
 require_once __DIR__ . '/src/routes/app/explosionMateriales/explosion_materiales.php';
 require_once __DIR__ . '/src/routes/app/explosionMateriales/pedidos.php';
