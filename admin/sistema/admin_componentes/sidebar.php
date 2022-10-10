@@ -35,8 +35,8 @@
 
                     <!-- <li id="instructivos"><a href=""><i class="fa fa-chevron-down"></i><span>Instructivos</span></a></li> -->
                     <!-- <ul class="menu_instructivos"> -->
-                        <!-- <li><a href="bases.php" id="link_bases"><i class="fa fa-list-alt"></i><span>Bases </span></a></li> -->
-                        <li><a href="instructivo.php" id="link_preparaciones"><i class="fa fa-bars"></i><span>Instructivo </span></a></li>
+                    <!-- <li><a href="bases.php" id="link_bases"><i class="fa fa-list-alt"></i><span>Bases </span></a></li> -->
+                    <li><a href="instructivo.php" id="link_preparaciones"><i class="fa fa-bars"></i><span>Instructivo </span></a></li>
                     <!-- </ul> -->
 
                     <li><a href="multipresentacion.php" id="link_multipresentacion"><i class="fas fa-superscript"></i><span>Multipresentación</span></a></li>
@@ -56,7 +56,7 @@
                         <li><a href="cargos.php" id="link_cargos"><i class="fas fa-sitemap"></i><span>Cargos</span></a></li>
                     </ul>
                 <?php  } ?>
-                
+
                 <li id="horarios"><a href=""><i class="fa fa-chevron-down"></i><span>Bath Record Automático</span></a></li>
                 <ul class="menu_horarios">
                     <li><a href="horarios.php" id="link_menu_horarios"><i class="fa fa-clock-o" aria-hidden="true"></i><span>Horarios</span></a></li>
@@ -69,11 +69,12 @@
                     <li><a href="pdf.php" id="link_menu_pdf"><i class="fas fa-sort-alpha-up"></i><span>Textos</span></a></li>
                     <li><a href="certificado.php" id="link_menu_certificado"><i class="far fa-newspaper"></i><span>Certificado</span></a></li>
                 </ul>
-                
+
                 <li id="auditoria"><a href=""><i class="fa fa-chevron-down"></i><span>Auditoria</span></a></li>
                 <ul class="menu_auditoria">
                     <li><a href="controlCondicionesMedio.php" id="link_menu_pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i><span>Condiciones del Medio</span></a></li>
                     <li><a href="controlFirmas.php" id="link_menu_pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i><span>Control de firmas</span></a></li>
+                    <li><a href="capacidadEnvasado.php" id="link_menu_pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i><span>Capacidad de envasado</span></a></li>
                 </ul>
 
 

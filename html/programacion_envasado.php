@@ -47,12 +47,16 @@ sesiones(5);
             <div class="tituloProceso col">
                 <h1 class="text-themecolor"><b>Programación Envasado</b></h1>
             </div>
-            <div class="col-2 mt-4">
+            <div class="col-2">
+                <label for="numSemana">Semana No</label>
                 <select name="numSemana" id="numSemana" class="form-control text-center">
                 </select>
             </div>
+            <div class="col-xs-2 ml-4 mr-4">
+                <label style="margin-top:36px" id="fechaSemana"></label>
+            </div>
             <div class="col-2">
-                <button type="button" id="btnProgramar" class="btn waves-effect waves-light btn-danger" style="width: 120px; margin-top:25px">
+                <button type="button" id="btnProgramar" class="btn waves-effect waves-light btn-danger" style="width: 120px; margin-top:33px">
                     <strong>Programar</strong>
                 </button>
             </div>

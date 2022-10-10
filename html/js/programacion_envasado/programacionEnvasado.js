@@ -3,15 +3,30 @@ $(document).ready(function () {
   let date = new Date();
 
   /* Numero de semanas */
+  // Calcular numero de semana actual
+  Date.prototype.getWeekNumber = function () {
+    var d = new Date(+this);
+    d.setHours(0, 0, 0, 0);
+    d.setDate(d.getDate() + 4 - (d.getDay() || 7));
+
+    return Math.ceil(((d - new Date(d.getFullYear(), 0, 1)) / 8.64e7 + 1) / 7);
+  };
+
   //Cargar total semanas
   loadNumSemanas = () => {
+    // Calcular numero de semana actual
+    semanaActual = new Date().getWeekNumber();
+
     select = $('#numSemana');
 
     select.empty();
     select.append(`<option disabled selected>Numero Semana</option>`);
 
     for (i = 1; i <= 52; i++) {
-      select.append(`<option value ="${i}">${i}</option>`);
+      if (i >= semanaActual) {
+        options = $('#numSemana option').length;
+        if (options <= 12) select.append(`<option value ="${i}">${i}</option>`);
+      }
     }
   };
   loadNumSemanas();
@@ -33,6 +48,17 @@ $(document).ready(function () {
 
     fecha_minima = setFecha(primer);
     fecha_maxima = setFecha(ultimo);
+
+    mesPrimer = primer.toLocaleString(undefined, { month: 'long' });
+    mesUltimo = ultimo.toLocaleString(undefined, { month: 'long' });
+
+    $('#fechaSemana').html(
+      `${primer.getDate()} ${
+        mesPrimer.charAt(0).toUpperCase() + mesPrimer.slice(1)
+      } - ${ultimo.getDate()} ${
+        mesUltimo.charAt(0).toUpperCase() + mesUltimo.slice(1)
+      }`
+    );
 
     $('.fechaProgramar').attr('min', fecha_minima);
     $('.fechaProgramar').attr('max', fecha_maxima);
