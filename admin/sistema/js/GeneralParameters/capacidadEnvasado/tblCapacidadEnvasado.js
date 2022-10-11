@@ -41,8 +41,8 @@ $(document).ready(function () {
         },
       },
       {
-        title: 'Envasado',
-        data: 'envase',
+        title: 'Linea',
+        data: 'nombre',
       },
       {
         title: 'Turno 1',

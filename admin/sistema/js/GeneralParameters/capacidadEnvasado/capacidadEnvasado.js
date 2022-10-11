@@ -14,7 +14,7 @@ $(document).ready(function () {
     t_2 = $(this).parent().parent().children().eq(3).text();
     t_3 = $(this).parent().parent().children().eq(4).text();
 
-    $('#envasado').val(env);
+    $('#linea').val(env);
     $('#turno1').val(t_1);
     $('#turno2').val(t_2);
     $('#turno3').val(t_3);

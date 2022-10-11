@@ -56,7 +56,7 @@
                                         <div class="row">
                                             <div class="col">
                                                 <label class="form-label">Envasado</label>
-                                                <input type="text" class="form-control text-center" name="envasado" id="envasado" disabled style="font-weight: bold;">
+                                                <input type="text" class="form-control text-center" name="linea" id="linea" disabled style="font-weight: bold;">
                                             </div>
                                             <div class="col">
                                                 <label class="form-label">Turno 1</label>

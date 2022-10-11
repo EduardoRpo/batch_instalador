@@ -28,6 +28,23 @@ sesiones(5);
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
 
+    <style>
+        .payment-of-tax table tr th {
+            text-align: center;
+            vertical-align: middle;
+            border: 1px solid #f2f2f2;
+            ;
+
+        }
+
+        .payment-of-tax table tr td {
+            text-align: center;
+            vertical-align: middle;
+            border: 1px solid #f2f2f2;
+            ;
+
+        }
+    </style>
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">
@@ -66,6 +83,44 @@ sesiones(5);
             <div class="col-md-12 align-self-center">
                 <div class="card">
                     <div class="card-block">
+                        <div class="payment-of-tax">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadEnvasado" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th rowspan="2">Semana</th>
+                                            <th colspan="3">Liquidos</th>
+                                            <th rowspan="2">Total Kg</th>
+                                            <th colspan="3">Solidos</th>
+                                            <th rowspan="2">Total Kg</th>
+                                            <th colspan="3">Semisolidos</th>
+                                            <th rowspan="2">Total Kg</th>
+                                        </tr>
+                                        <tr>
+                                            <th>Turno 1</th>
+                                            <th>Turno 2</th>
+                                            <th>Turno 3</th>
+                                            <th>Turno 1</th>
+                                            <th>Turno 2</th>
+                                            <th>Turno 3</th>
+                                            <th>Turno 1</th>
+                                            <th>Turno 2</th>
+                                            <th>Turno 3</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tblCalcCapacidadEnvasadoBody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 align-self-center">
+                <div class="card">
+                    <div class="card-block">
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered" id="tablaEnvasado" style="width: 100%;">
 
@@ -75,10 +130,6 @@ sesiones(5);
                 </div>
             </div>
         </div>
-    </div>
-    </div>
-    </div>
-
     </div>
 
     <script src="../assets/plugins/jquery/jquery.min.js"></script>
