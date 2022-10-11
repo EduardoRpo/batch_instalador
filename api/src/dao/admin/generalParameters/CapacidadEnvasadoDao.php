@@ -16,7 +16,7 @@ class CapacidadEnvasadoDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
-    public function findCapacidadEnvasado()
+    public function findAllCapacidadEnvasado()
     {
         $connection = Connection::getInstance()->getConnection();
 
@@ -27,6 +27,23 @@ class CapacidadEnvasadoDao
 
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         $envasado = $stmt->fetchAll($connection::FETCH_ASSOC);
+        return $envasado;
+    }
+
+    public function findCapacidadEnvasado($dataEnvasado)
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        $stmt = $connection->prepare("SELECT ce.id_envasado, l.nombre, ce.turno_1, ce.turno_2, ce.turno_3
+                                      FROM capacidad_envasado ce
+                                      INNER JOIN linea l ON l.id = ce.id_linea
+                                      WHERE ce.id_envasado = :id_envasado");
+        $stmt->execute([
+            'id_envasado' => $dataEnvasado['idEnvasado']
+        ]);
+
+        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        $envasado = $stmt->fetch($connection::FETCH_ASSOC);
         return $envasado;
     }
 

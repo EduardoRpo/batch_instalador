@@ -8,7 +8,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 $app->get('/capacidadEnvasado', function (Request $request, Response $response, $args) use ($capacidadEnvasadoDao) {
-    $envasado = $capacidadEnvasadoDao->findCapacidadEnvasado();
+    $envasado = $capacidadEnvasadoDao->findAllCapacidadEnvasado();
     $response->getBody()->write(json_encode($envasado, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');
 });

@@ -41,8 +41,6 @@ class ProgramacionEnvasadoDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-
-
         $stmt = $connection->prepare("SELECT se.semana, IF(se.plan_liquido_1 <= ce.turno_1, se.plan_liquido_1, ce.turno_1) AS turno_1, IF((se.plan_liquido_1 - ce.turno_1) < 0, 0, se.plan_liquido_1 - ce.turno_1) AS turno_2
                                       FROM sum_capacidad_envasado se
                                        INNER JOIN capacidad_envasado ce
@@ -56,6 +54,8 @@ class ProgramacionEnvasadoDao
 
         // Actualizar
     }
+
+
 
     /* Programacion envasado */
     public function updateFechaEnvasado($dataEnvasado)
