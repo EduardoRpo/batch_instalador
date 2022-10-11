@@ -78,7 +78,7 @@ class BatchLineaDao
                                   INNER JOIN batch_control_firmas bcf ON batch.id_batch = bcf.batch 
                                   WHERE batch.estado > 5 AND batch.id_batch AND bcf.modulo = 5 
                                   AND batch.id_batch NOT IN(SELECT batch FROM `batch_control_firmas` WHERE modulo = 5 AND cantidad_firmas = total_firmas) 
-                                  AND batch.programacion_envasado < NOW() OR batch.programacion_envasado = NOW() OR batch.programacion_envasado = DATE_ADD(NOW(), INTERVAL 1 DAY) ORDER BY `batch`.`fecha_programacion` DESC;");
+                                  AND batch.programacion_envasado < DATE_ADD(NOW(), INTERVAL 1 DAY) ORDER BY `batch`.`fecha_programacion` DESC;");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $envasado = $stmt->fetchAll($connection::FETCH_ASSOC);
@@ -111,7 +111,7 @@ class BatchLineaDao
                                   INNER JOIN producto ON producto.referencia = batch.id_producto 
                                   INNER JOIN batch_control_firmas bcf ON batch.id_batch = bcf.batch 
                                   WHERE bcf.modulo = 6 AND batch.id_batch NOT IN(SELECT batch FROM `batch_control_firmas` WHERE modulo = 6 AND cantidad_firmas = total_firmas) 
-                                  AND batch.estado > 5 AND batch.id_batch 
+                                  AND batch.estado > 5 AND batch.id_batch AND batch.programacion_envasado < DATE_ADD(NOW(), INTERVAL 1 DAY) ORDER BY `batch`.`fecha_programacion` DESC; 
                                   ORDER BY `batch`.`id_batch` DESC;");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
