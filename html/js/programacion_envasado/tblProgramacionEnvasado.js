@@ -117,6 +117,18 @@ $(document).ready(function() {
                 className: 'uniqueClassName',
             },
             {
+                title: 'Unidades',
+                data: 'unidad_lote',
+                className: 'uniqueClassName',
+                render: $.fn.dataTable.render.number('.', ',', 0, ''),
+            },
+            {
+                title: 'Tamaño Lote(Kg)',
+                data: 'tamano_lote',
+                className: 'uniqueClassName',
+                render: $.fn.dataTable.render.number('.', ',', 0, ''),
+            },
+            {
                 title: 'Programacion',
                 data: null,
                 className: 'uniqueClassName',
