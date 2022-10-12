@@ -18,6 +18,7 @@ $(document).ready(function () {
   };
   fetchindata();
 
+<<<<<<< HEAD
   loadtblCalcCapacidadEnvasado = (data) => {
     for (i = 1; i <= 52; i++) {
       $('.tblCalcCapacidadEnvasadoBody').append(`
@@ -46,6 +47,40 @@ $(document).ready(function () {
       },
     });
   };
+=======
+    loadtblCalcCapacidadEnvasado = () => {
+        for (i = 1; i <= 52; i++) {
+            $('.tblCalcCapacidadEnvasadoBody').append(`
+                <tr>
+                    <td>${i}</td>
+                    <td>10 %</td>
+                    <td>0 %</td>
+                    <td>0 %</td>
+                    <td>0</td>
+                    <td>0 %</td>
+                    <td>0 %</td>
+                    <td>0 %</td>
+                    <td>0</td>
+                    <td>0 %</td>
+                    <td>0 %</td>
+                    <td>0 %</td>
+                    <td>0</td>
+                </tr>
+                `);
+        }
+
+        $('#tblCalcCapacidadEnvasado').dataTable({
+            scrollY: '130px',
+            scrollCollapse: true,
+            paging: false,
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json',
+            },
+        });
+    };
+
+    loadtblCalcCapacidadEnvasado();
+>>>>>>> 94382d7eb4f8aa4828431051b8acd66093998447
 
   /* tabla envasado */
   $('#tablaEnvasado').dataTable({

@@ -62,7 +62,51 @@ sesiones(5);
 
         <div class="contenedorPrincipal row">
             <div class="tituloProceso col">
-                <h1 class="text-themecolor"><b>Programación Envasado</b></h1>
+                <h1 class="text-themecolor"><b>Capacidad Envasado</b></h1>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-9 align-self-center">
+                <div class="card">
+                    <div class="card-block">
+                        <div class="payment-of-tax">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadEnvasado" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th rowspan="2">S</th>
+                                            <th colspan="3">LQ</th>
+                                            <th rowspan="2">Total Kg</th>
+                                            <th colspan="3">SL</th>
+                                            <th rowspan="2">Total Kg</th>
+                                            <th colspan="3">SM</th>
+                                            <th rowspan="2">Total Kg</th>
+                                        </tr>
+                                        <tr>
+                                            <th>T1</th>
+                                            <th>T2</th>
+                                            <th>T3</th>
+                                            <th>T1</th>
+                                            <th>T2</th>
+                                            <th>T3</th>
+                                            <th>T1</th>
+                                            <th>T2</th>
+                                            <th>T3</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tblCalcCapacidadEnvasadoBody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="contenedorPrincipal row">
+            <div class="tituloProceso col">
+                <h1 class="text-themecolor"><b>Programación Envasado y Acondicionamiento</b></h1>
             </div>
             <div class="col-2">
                 <label for="numSemana">Semana No</label>
@@ -76,44 +120,6 @@ sesiones(5);
                 <button type="button" id="btnProgramar" class="btn waves-effect waves-light btn-danger" style="width: 120px; margin-top:33px">
                     <strong>Programar</strong>
                 </button>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12 align-self-center">
-                <div class="card">
-                    <div class="card-block">
-                        <div class="payment-of-tax">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadEnvasado" style="width: 100%;">
-                                    <thead>
-                                        <tr>
-                                            <th rowspan="2">Semana</th>
-                                            <th colspan="3">Liquidos</th>
-                                            <th rowspan="2">Total Kg</th>
-                                            <th colspan="3">Solidos</th>
-                                            <th rowspan="2">Total Kg</th>
-                                            <th colspan="3">Semisolidos</th>
-                                            <th rowspan="2">Total Kg</th>
-                                        </tr>
-                                        <tr>
-                                            <th>Turno 1</th>
-                                            <th>Turno 2</th>
-                                            <th>Turno 3</th>
-                                            <th>Turno 1</th>
-                                            <th>Turno 2</th>
-                                            <th>Turno 3</th>
-                                            <th>Turno 1</th>
-                                            <th>Turno 2</th>
-                                            <th>Turno 3</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="tblCalcCapacidadEnvasadoBody"></tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 

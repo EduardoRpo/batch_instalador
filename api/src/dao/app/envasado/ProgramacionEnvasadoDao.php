@@ -45,9 +45,7 @@ class ProgramacionEnvasadoDao
                                       INNER JOIN capacidad_envasado ce
                                       INNER JOIN linea l ON l.id = ce.id_linea
                                       WHERE se.semana = :semana;");
-        $stmt->execute([,
-            'semana' => $dataEnvasado['semana']
-        ]);
+        $stmt->execute(['semana' => $dataEnvasado['semana']]);
         $envasado = $stmt->fetch($connection::FETCH_ASSOC);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
 
