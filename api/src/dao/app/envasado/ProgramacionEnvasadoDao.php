@@ -95,18 +95,18 @@ class ProgramacionEnvasadoDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $stmt = $connection->prepare("SELECT DISTINCT se.semana, (SELECT (se.plan_liquido_1 / turno_1)*100 FROM capacidad_envasado WHERE id_envasado = 1) AS plan_liquido_1,
-                                        (SELECT (se.plan_liquido_2 / turno_2)*100 FROM capacidad_envasado WHERE id_envasado = 1) AS plan_liquido_2,
-                                        (SELECT (se.plan_liquido_3 / turno_3)*100 FROM capacidad_envasado WHERE id_envasado = 1) AS plan_liquido_3,
-                                        (SELECT (se.plan_semi_solido_1 / turno_1)*100 FROM capacidad_envasado WHERE id_envasado = 2) AS plan_semi_solido_1,
-                                        (SELECT (se.plan_semi_solido_2 / turno_2)*100 FROM capacidad_envasado WHERE id_envasado = 2) AS plan_semi_solido_2,
-                                        (SELECT (se.plan_semi_solido_3 / turno_3)*100 FROM capacidad_envasado WHERE id_envasado = 2) AS plan_semi_solido_3,
-                                        (SELECT (se.plan_solido_1 / turno_1)*100 FROM capacidad_envasado WHERE id_envasado = 3) AS plan_solido_1,
-                                        (SELECT (se.plan_solido_2 / turno_2)*100 FROM capacidad_envasado WHERE id_envasado = 3) AS plan_solido_2,
-                                        (SELECT (se.plan_solido_3 / turno_3)*100 FROM capacidad_envasado WHERE id_envasado = 3) AS plan_solido_3
+        $stmt = $connection->prepare("SELECT DISTINCT se.semana, (SELECT CAST((se.plan_liquido_1 / turno_1)*100 AS UNSIGNED) FROM capacidad_envasado WHERE id_envasado = 1) AS plan_liquido_1,
+                                            (SELECT CAST((se.plan_liquido_2 / turno_2)*100 AS UNSIGNED) FROM capacidad_envasado WHERE id_envasado = 1) AS plan_liquido_2,
+                                            (SELECT CAST((se.plan_liquido_3 / turno_3)*100 AS UNSIGNED) FROM capacidad_envasado WHERE id_envasado = 1) AS plan_liquido_3, se.total_liquido,
+                                            (SELECT CAST((se.plan_semi_solido_1 / turno_1)*100 AS UNSIGNED) FROM capacidad_envasado WHERE id_envasado = 2) AS plan_semi_solido_1,
+                                            (SELECT CAST((se.plan_semi_solido_2 / turno_2)*100 AS UNSIGNED) FROM capacidad_envasado WHERE id_envasado = 2) AS plan_semi_solido_2,
+                                            (SELECT CAST((se.plan_semi_solido_3 / turno_3)*100 AS UNSIGNED) FROM capacidad_envasado WHERE id_envasado = 2) AS plan_semi_solido_3, se.total_semi_solido,
+                                            (SELECT CAST((se.plan_solido_1 / turno_1)*100 AS UNSIGNED) FROM capacidad_envasado WHERE id_envasado = 3) AS plan_solido_1,
+                                            (SELECT CAST((se.plan_solido_2 / turno_2)*100 AS UNSIGNED) FROM capacidad_envasado WHERE id_envasado = 3) AS plan_solido_2,
+                                            (SELECT CAST((se.plan_solido_3 / turno_3)*100 AS UNSIGNED) FROM capacidad_envasado WHERE id_envasado = 3) AS plan_solido_3, se.total_solido
                                       FROM sum_capacidad_envasado se
-                                      INNER JOIN capacidad_envasado ce
-                                      INNER JOIN linea l ON l.id = ce.id_linea");
+                                        INNER JOIN capacidad_envasado ce
+                                        INNER JOIN linea l ON l.id = ce.id_linea;");
         $stmt->execute();
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
 

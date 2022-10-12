@@ -7,6 +7,12 @@ $prgEnvasadoDao = new ProgramacionEnvasadoDao();
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
+$app->get('/averageCapacidadEnvasado', function (Request $request, Response $response, $args) use ($prgEnvasadoDao) {
+    $envasado = $prgEnvasadoDao->findAverageCapacidadEnvasado();
+    $response->getBody()->write(json_encode($envasado, JSON_NUMERIC_CHECK));
+    return $response->withHeader('Content-Type', 'application/json');
+});
+
 $app->post('/addFechaEnvasado', function (Request $request, Response $response, $args) use ($prgEnvasadoDao) {
     $dataEnvasado = $request->getParsedBody();
 
