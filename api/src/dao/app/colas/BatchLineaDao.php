@@ -94,8 +94,9 @@ class BatchLineaDao
                                   FROM batch
                                   INNER JOIN producto p ON p.referencia = batch.id_producto
                                   INNER JOIN batch_control_firmas bcf ON batch.id_batch = bcf.batch
-                                  WHERE batch.estado > 5 AND batch.id_batch AND bcf.modulo = 5 AND batch.id_batch NOT IN(SELECT batch FROM `batch_control_firmas` 
-                                  WHERE modulo = 5 AND cantidad_firmas = total_firmas) ORDER BY id_batch DESC;");
+                                  WHERE batch.estado > 5.5 AND batch.estado < 7 AND batch.id_batch AND bcf.modulo = 5 
+                                  AND batch.id_batch NOT IN(SELECT batch FROM `batch_control_firmas` WHERE modulo = 5 AND cantidad_firmas = total_firmas) 
+                                  ORDER BY id_batch DESC;");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $envasado = $stmt->fetchAll($connection::FETCH_ASSOC);
@@ -107,13 +108,13 @@ class BatchLineaDao
   {
     $connection = Connection::getInstance()->getConnection();
 
-    $stmt = $connection->prepare("SELECT batch.id_batch, date_add(batch.fecha_programacion, interval 3 day) AS fecha_programacion, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, producto.nombre_referencia, batch.numero_lote, batch.estado, batch.multi, bcf.cantidad_firmas, bcf.total_firmas 
+    $stmt = $connection->prepare("SELECT batch.id_batch, batch.programacion_envasado, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, producto.nombre_referencia, batch.numero_lote, batch.estado, batch.multi, bcf.cantidad_firmas, bcf.total_firmas 
                                   FROM batch 
                                   INNER JOIN producto ON producto.referencia = batch.id_producto 
                                   INNER JOIN batch_control_firmas bcf ON batch.id_batch = bcf.batch 
                                   WHERE bcf.modulo = 6 AND batch.id_batch NOT IN(SELECT batch FROM `batch_control_firmas` WHERE modulo = 6 AND cantidad_firmas = total_firmas) 
-                                  AND batch.estado > 5 AND batch.id_batch AND batch.programacion_envasado < DATE_ADD(NOW(), INTERVAL 1 DAY) ORDER BY `batch`.`fecha_programacion` DESC; 
-                                  ORDER BY `batch`.`id_batch` DESC;");
+                                  AND batch.estado > 5.5 AND batch.estado < 7 AND batch.id_batch AND batch.programacion_envasado < DATE_ADD(NOW(), INTERVAL 1 DAY) 
+                                  ORDER BY `batch`.`fecha_programacion` DESC");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $acondicionamiento = $stmt->fetchAll($connection::FETCH_ASSOC);

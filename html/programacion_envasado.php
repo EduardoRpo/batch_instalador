@@ -106,7 +106,7 @@ sesiones(5);
         </div>
         <div class="contenedorPrincipal row">
             <div class="tituloProceso col">
-                <h1 class="text-themecolor"><b>Programación Envasado</b></h1>
+                <h1 class="text-themecolor"><b>Programación Envasado y Acondicionamiento</b></h1>
             </div>
             <div class="col-2">
                 <label for="numSemana">Semana No</label>

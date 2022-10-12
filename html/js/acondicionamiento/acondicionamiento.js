@@ -17,7 +17,7 @@ $("#preparacionTable").dataTable({
         },
         {
             title: "Fecha Programación",
-            data: "fecha_programacion",
+            data: "programacion_envasado",
             className: "uniqueClassName",
         },
         {
