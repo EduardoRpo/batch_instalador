@@ -20,7 +20,7 @@ class CapacidadEnvasadoDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $stmt = $connection->prepare("SELECT ce.id_envasado, l.nombre, ce.turno_1, ce.turno_2, ce.turno_3
+        $stmt = $connection->prepare("SELECT ce.id_capacidad_envasado, l.nombre, ce.turno_1, ce.turno_2, ce.turno_3
                                       FROM capacidad_envasado ce
                                       INNER JOIN linea l ON l.id = ce.id_linea");
         $stmt->execute();

@@ -50,7 +50,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Capacidad Envasado</h4>
+                                <h4 class="card-title">Capacidad Envasado x Semana</h4>
                                 <div class="cardSaveEnvasado">
                                     <form id="formSaveEnvasado" enctype="multipart/form-data">
                                         <div class="row">
@@ -153,8 +153,8 @@
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
     <!-- javascript inicializacion datatables -->
-    <script src="/admin/sistema/js/GeneralParameters/capacidadEnvasado/tblCapacidadEnvasado.js"></script>
-    <script src="/admin/sistema/js/GeneralParameters/capacidadEnvasado/capacidadEnvasado.js"></script>
+    <script src="/admin/sistema/js/auditory/capacidadEnvasado/tblCapacidadEnvasado.js"></script>
+    <script src="/admin/sistema/js/auditory/capacidadEnvasado/capacidadEnvasado.js"></script>
 
 </body>
 

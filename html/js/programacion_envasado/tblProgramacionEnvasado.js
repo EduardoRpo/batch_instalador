@@ -50,26 +50,28 @@ $(document).ready(function() {
     loadtblCalcCapacidadEnvasado = () => {
         for (i = 1; i <= 52; i++) {
             $('.tblCalcCapacidadEnvasadoBody').append(`
-      <tr>
-        <td>${i}</td>
-        <td>10 %</td>
-        <td>0 %</td>
-        <td>0 %</td>
-        <td>0</td>
-        <td>0 %</td>
-        <td>0 %</td>
-        <td>0 %</td>
-        <td>0</td>
-        <td>0 %</td>
-        <td>0 %</td>
-        <td>0 %</td>
-        <td>0</td>
-      </tr>
-      `);
+                <tr>
+                    <td>${i}</td>
+                    <td>10 %</td>
+                    <td>0 %</td>
+                    <td>0 %</td>
+                    <td>0</td>
+                    <td>0 %</td>
+                    <td>0 %</td>
+                    <td>0 %</td>
+                    <td>0</td>
+                    <td>0 %</td>
+                    <td>0 %</td>
+                    <td>0 %</td>
+                    <td>0</td>
+                </tr>
+                `);
         }
 
         $('#tblCalcCapacidadEnvasado').dataTable({
-            pageLength: 3,
+            scrollY: '130px',
+            scrollCollapse: true,
+            paging: false,
             language: {
                 url: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json',
             },
