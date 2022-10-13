@@ -21,6 +21,7 @@ sesiones(5);
     <link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="html/css/style.css" rel="stylesheet">
     <link href="html/css/colors/blue.css" id="theme" rel="stylesheet">
+    <link rel="stylesheet" href="/html/css/custom.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" type="text/css" href="html/vendor/datatables/datatables.min.css">
     <link rel="stylesheet" type="text/css" href="html/vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css">

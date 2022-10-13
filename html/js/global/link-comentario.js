@@ -64,7 +64,7 @@ $(document).ready(function () {
 
   /* Cargar observaciones */
   loadObservations = async (data) => {
-    response = await sendDataPOST(data);
+    response = await sendComentarioPOST(data);
 
     if (response.empty) {
       observations = { table: '', size: 300 };
@@ -90,7 +90,7 @@ $(document).ready(function () {
     }
   };
 
-  sendDataPOST = async (params) => {
+  sendComentarioPOST = async (params) => {
     try {
       result = await $.ajax({
         url: urlObs,

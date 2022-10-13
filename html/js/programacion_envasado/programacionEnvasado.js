@@ -165,4 +165,8 @@ $(document).ready(function () {
   }
 
   setTimeout(selectChange, 4000);
+
+  $(document).on('click', '.link-editarMulti', function (e) {
+    idBatch = this.id;
+  });
 });

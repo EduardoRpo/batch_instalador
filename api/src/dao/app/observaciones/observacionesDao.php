@@ -35,7 +35,7 @@ class ObservacionesDao
 
         $fecha_hoy = date('Y-m-d');
 
-        $stmt = $connection->prepare("INSERT INTO observaciones (observaciones, id_batch, id_modulo, fecha_registro)
+        $stmt = $connection->prepare("INSERT INTO observaciones (observacion, id_batch, id_modulo, fecha_registro)
                                       VALUES (:observacion, :batch, :modulo, :fecha_registro)");
         $stmt->execute([
             'observacion' => $dataBatch['comment'],
