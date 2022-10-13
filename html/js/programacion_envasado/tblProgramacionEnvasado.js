@@ -1,86 +1,41 @@
 $(document).ready(function () {
   /* tabla calculo de capacidad envasado */
+  api = '/api/averageCapacidadEnvasado';
 
-  getData = async () => {
-    try {
-      result = await $.ajax({
-        url: '/api/averageCapacidadEnvasado',
-      });
-      return result;
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  fetchindata = async () => {
-    resp = await getData();
+  getDataCapacidadEnvasado = async () => {
+    resp = await searchData(api);
     loadtblCalcCapacidadEnvasado(resp);
   };
-  fetchindata();
 
-<<<<<<< HEAD
+  getDataCapacidadEnvasado();
+
   loadtblCalcCapacidadEnvasado = (data) => {
-    for (i = 1; i <= 52; i++) {
+    for (i = 0; i < data.length; i++) {
       $('.tblCalcCapacidadEnvasadoBody').append(`
-      <tr>
-        <td>${data[i].semana}</td>
-        <td>${data[i].plan_liquido_1} %</td>
-        <td>${data[i].plan_liquido_2} %</td>
-        <td>${data[i].plan_liquido_3} %</td>
-        <td>${data[i].total_liquido}</td>
-        <td>${data[i].plan_solido_1} %</td>
-        <td>${data[i].plan_solido_2} %</td>
-        <td>${data[i].plan_solido_3} %</td>
-        <td>${data[i].total_solido}</td>
-        <td>${data[i].plan_semi_solido_1} %</td>
-        <td>${data[i].plan_semi_solido_2} %</td>
-        <td>${data[i].plan_semi_solido_3} %</td>
-        <td>${data[i].total_semi_solido}</td>
-      </tr>
+            <tr>
+                <td>${data[i].semana}</td>
+                <td>${data[i].plan_liquido_1} %</td>
+                <td>${data[i].plan_liquido_2} %</td>
+                <td>${data[i].plan_liquido_3} %</td>
+                <td>${data[i].total_liquido.toLocaleString()}</td>
+                <td>${data[i].plan_solido_1} %</td>
+                <td>${data[i].plan_solido_2} %</td>
+                <td>${data[i].plan_solido_3} %</td>
+                <td>${data[i].total_solido.toLocaleString()}</td>
+                <td>${data[i].plan_semi_solido_1} %</td>
+                <td>${data[i].plan_semi_solido_2} %</td>
+                <td>${data[i].plan_semi_solido_3} %</td>
+                <td>${data[i].total_semi_solido.toLocaleString()}</td>
+            </tr>
       `);
     }
 
     $('#tblCalcCapacidadEnvasado').dataTable({
-      pageLength: 3,
       language: {
         url: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json',
       },
     });
   };
-=======
-    loadtblCalcCapacidadEnvasado = () => {
-        for (i = 1; i <= 52; i++) {
-            $('.tblCalcCapacidadEnvasadoBody').append(`
-                <tr>
-                    <td>${i}</td>
-                    <td>10 %</td>
-                    <td>0 %</td>
-                    <td>0 %</td>
-                    <td>0</td>
-                    <td>0 %</td>
-                    <td>0 %</td>
-                    <td>0 %</td>
-                    <td>0</td>
-                    <td>0 %</td>
-                    <td>0 %</td>
-                    <td>0 %</td>
-                    <td>0</td>
-                </tr>
-                `);
-        }
-
-        $('#tblCalcCapacidadEnvasado').dataTable({
-            scrollY: '130px',
-            scrollCollapse: true,
-            paging: false,
-            language: {
-                url: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json',
-            },
-        });
-    };
-
-    loadtblCalcCapacidadEnvasado();
->>>>>>> 94382d7eb4f8aa4828431051b8acd66093998447
 
   /* tabla envasado */
   $('#tablaEnvasado').dataTable({
@@ -140,14 +95,29 @@ $(document).ready(function () {
             ? (fechaProgramar = '')
             : (fecha = data.programacion_envasado);
           return `
-        <input type="date" class="fechaProgramar form-control-updated text-center" id="${data.id_batch}" value="${data.programacion_envasado}" />`;
+          <input type="date" class="fechaProgramar form-control-updated text-center" id="${data.id_batch}" value="${data.programacion_envasado}" />`;
         },
       },
-      // {
-      //   title: 'Firmas T',
-      //   data: 'total_firmas',
-      //   className: 'uniqueClassName',
-      // },
+      {
+        data: null,
+        className: 'uniqueClassName',
+        render: function (data) {
+          return `
+            <i class="badge badge-danger badge-pill notify-icon-badge ml-3">${data.cant_observations}</i><br>
+            <a href='#' <i class="fa fa-file-text fa-1x link-comentario" id="${data.id_batch}-${data.modulo}" aria-hidden="true" data-toggle="tooltip" title="adicionar observaciones" style="color:rgb(59, 131, 189)" aria-hidden="true"></i></a>
+          `;
+        },
+      },
+      {
+        title: 'Acciones',
+        data: 'id_batch',
+        className: 'uniqueClassName',
+        render: function (data) {
+          return `
+                <i class="fa fa-superscript link-editarMulti" id="${data}" aria-hidden="true" data-toggle="tooltip" title="Editar Multipresentación" style="color:rgb(59, 131, 189)" aria-hidden="true"></i>`;
+        },
+      },
+
       // {
       //   title: 'Ingresar',
       //   className: 'uniqueClassName',

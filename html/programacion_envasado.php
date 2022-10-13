@@ -1,6 +1,7 @@
 <?php
 require_once('./html/sesiones/sesion.php');
 include('modal/modal_cambiarContrasena.php');
+include_once("modal/modal_multipresentacion.php");
 sesiones(5);
 ?>
 
@@ -151,9 +152,17 @@ sesiones(5);
     <script src="../assets/plugins/jquery/jquery.number.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
-
+    <script src="/html/js/global/searchData.js"></script>
     <script src="html/js/programacion_envasado/tblProgramacionEnvasado.js"></script>
     <script src="html/js/programacion_envasado/programacionEnvasado.js"></script>
+    <script src="/html/js/global/link-comentario.js"></script>
+
+    <script src="/html/js/batch/multipresentacion/multipresentacion.js"></script>
+    <script src="/html/js/batch/multipresentacion/addMulti.js"></script>
+    <script src="/html/js/batch/multipresentacion/deleteMulti.js"></script>
+    <script src="/html/js/batch/multipresentacion/saveMulti.js"></script>
+    <script src="/html/js/batch/multipresentacion/updateMulti.js"></script>
+    <script src="/html/js/batch/multipresentacion/multiCalc.js"></script>
 
 </body>
 

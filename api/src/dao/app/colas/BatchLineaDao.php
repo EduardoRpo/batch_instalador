@@ -89,11 +89,13 @@ class BatchLineaDao
   public function findBatchProgramacionEnvasado()
   {
     $connection = Connection::getInstance()->getConnection();
-    $stmt = $connection->prepare("SELECT batch.id_batch, date_add(batch.fecha_programacion, interval 3 day) AS fecha_programacion, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, 
-                                         batch.numero_lote, batch.unidad_lote, batch.tamano_lote, batch.estado, batch.multi, bcf.cantidad_firmas, bcf.total_firmas, batch.programacion_envasado
+    $stmt = $connection->prepare("SELECT DISTINCT batch.id_batch, date_add(batch.fecha_programacion, interval 3 day) AS fecha_programacion, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, 
+                                      batch.numero_lote, batch.unidad_lote, batch.tamano_lote, batch.estado, batch.multi, bcf.cantidad_firmas, bcf.total_firmas, batch.programacion_envasado, 
+                                      (SELECT COUNT(*) FROM observaciones WHERE id_batch = batch.id_batch) AS cant_observations, bcf.modulo
                                   FROM batch
                                   INNER JOIN producto p ON p.referencia = batch.id_producto
                                   INNER JOIN batch_control_firmas bcf ON batch.id_batch = bcf.batch
+                                  LEFT JOIN observaciones o ON o.id_batch = batch.id_batch 
                                   WHERE batch.estado > 5.5 AND batch.estado < 7 AND batch.id_batch AND bcf.modulo = 5 
                                   AND batch.id_batch NOT IN(SELECT batch FROM `batch_control_firmas` WHERE modulo = 5 AND cantidad_firmas = total_firmas) 
                                   ORDER BY id_batch DESC;");

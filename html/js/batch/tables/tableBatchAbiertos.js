@@ -1,4 +1,7 @@
 $(document).ready(function () {
+  urlObs = '/api/observacionesInactivos';
+  urlPostObs = '/api/addObservacionInactivos';
+
   tablaBatch = $('#tablaBatch').DataTable({
     pageLength: 50,
     responsive: true,

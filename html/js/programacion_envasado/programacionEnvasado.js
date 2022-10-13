@@ -1,6 +1,9 @@
 $(document).ready(function () {
   dataEnvasado = [];
   let date = new Date();
+  apiPost = '/api/addFechaEnvasado';
+  urlObs = '/api/observaciones';
+  urlPostObs = '/api/addObservacion';
 
   /* Numero de semanas */
   // Calcular numero de semana actual
@@ -20,7 +23,7 @@ $(document).ready(function () {
     select = $('#numSemana');
 
     select.empty();
-    select.append(`<option disabled selected>Numero Semana</option>`);
+    select.append(`<option disabled>Numero Semana</option>`);
 
     for (i = 1; i <= 52; i++) {
       if (i >= semanaActual) {
@@ -32,6 +35,7 @@ $(document).ready(function () {
   loadNumSemanas();
 
   // Cargar tabla envasados por numero de semana
+
   $('#numSemana').change(function (e) {
     e.preventDefault();
     semana = $('#numSemana').val();
@@ -80,10 +84,18 @@ $(document).ready(function () {
     e.preventDefault();
     id = this.id;
     fecha = $(`#${id}`).val();
-    arrayEnvasado(id, fecha);
+    if (fecha == '' || !fecha) {
+      alertify.set('notifier', 'position', 'top-right');
+      alertify.error('Ingrese la fecha para programar el envasado');
+      return false;
+    } else {
+      no_lote = $(this).parent().parent().children().eq(4).text();
+      tamano_lote = $(this).parent().parent().children().eq(6).text();
+      arrayEnvasado(id, fecha, no_lote, tamano_lote);
+    }
   });
 
-  arrayEnvasado = (id_batch, fecha) => {
+  arrayEnvasado = (id_batch, fecha, no_lote, tamano_lote) => {
     for (i = 0; i < dataEnvasado.length; i++) {
       if (id_batch == dataEnvasado[i].idBatch) deleteArray(id_batch);
     }
@@ -92,6 +104,9 @@ $(document).ready(function () {
 
     envasado.idBatch = id_batch;
     envasado.fechaEnvasado = fecha;
+    envasado.no_lote = no_lote;
+    envasado.tamano_lote = tamano_lote;
+    envasado.semana = semana;
 
     dataEnvasado.push(envasado);
   };
@@ -111,16 +126,14 @@ $(document).ready(function () {
       alertify.error('Ingrese la fecha para programar el envasado');
       return false;
     } else {
-      $.ajax({
-        type: 'POST',
-        url: '/api/addFechaEnvasado',
-        data: { data: dataEnvasado },
-        success: function (resp) {
-          message(resp);
-        },
-      });
+      saveFechaEnvasado({ data: dataEnvasado });
     }
   });
+
+  saveFechaEnvasado = async (data) => {
+    resp = await sendDataPOST(apiPost, data);
+    message(resp);
+  };
 
   /* Mensaje de exito */
   message = (data) => {
@@ -135,8 +148,21 @@ $(document).ready(function () {
 
   /* Actualizar tabla */
 
-  actualizarTabla = () => {
+  actualizarTabla = async () => {
     $('#tablaEnvasado').DataTable().clear();
     $('#tablaEnvasado').DataTable().ajax.reload();
+
+    if ($.fn.dataTable.isDataTable('#tblCalcCapacidadEnvasado')) {
+      $('#tblCalcCapacidadEnvasado').DataTable().destroy();
+    }
+    $('.tblCalcCapacidadEnvasadoBody').empty();
+    await getDataCapacidadEnvasado();
   };
+
+  $(`#numSemana option[value="${semanaActual}"]`).prop('selected', true);
+  function selectChange() {
+    $('#numSemana').trigger('change');
+  }
+
+  setTimeout(selectChange, 4000);
 });
