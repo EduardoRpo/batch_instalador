@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="row">
+        <div class="row adicionarMulti">
           <input class="btn btn-primary ml-3" id="adicionarMultipresentacion" type="button" value="Adicionar" style="width: 150px;">
           <!-- <label class="labelcenter ml-3 mr-3">Tamaño Total Lote (Kg)</label>
           <input type="text" id="loteTotal" class="form-control" style="width: 100px;" readonly> -->
@@ -30,7 +30,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         <?php if ($_SESSION['rol'] != 6) {  ?>
-          <button type="button" class="btn btn-primary" id="btnCargarKg">Guardar</button>
+          <button type="button" class="btn btn-primary footSaveMulti" id="btnCargarKg">Guardar</button>
         <?php  }  ?>
       </div>
     </div>

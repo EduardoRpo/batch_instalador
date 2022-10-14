@@ -20,7 +20,7 @@ class ProgramacionEnvasadoDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $stmt = $connection->prepare("SELECT * FROM sum_capacidad_envasado");
+        $stmt = $connection->prepare("SELECT * FROM capacidad_envasado_sum");
         $stmt->execute();
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
 
@@ -32,25 +32,33 @@ class ProgramacionEnvasadoDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $stmt = $connection->prepare("SELECT DISTINCT se.semana, (SELECT IF(se.plan_liquido_1 <= turno_1, se.plan_liquido_1, turno_1) FROM capacidad_envasado WHERE id_capacidad_envasado = 1) AS plan_liquido_1, 
-                                            (SELECT IF(IF(se.plan_liquido_1 <= turno_1, 0, se.plan_liquido_1 - turno_1) + IF(se.plan_liquido_2 <= turno_2, se.plan_liquido_2, turno_2) > turno_2, turno_2, IF(se.plan_liquido_1 <= turno_1, 0, se.plan_liquido_1 - turno_1) + IF(se.plan_liquido_2 <= turno_2, se.plan_liquido_2, turno_2)) FROM capacidad_envasado WHERE id_capacidad_envasado = 1) AS plan_liquido_2,
-                                            (SELECT IF(se.plan_liquido_1 <= turno_1, 0, se.plan_liquido_1 - turno_1) + IF(se.plan_liquido_2 <= turno_2, 0, se.plan_liquido_2 - turno_2) + se.plan_liquido_3 FROM capacidad_envasado WHERE id_capacidad_envasado = 1) AS plan_liquido_3,
-                                            (SELECT IF(se.plan_semi_solido_1 <= turno_1, se.plan_semi_solido_1, turno_1) FROM capacidad_envasado WHERE id_capacidad_envasado = 2) AS plan_semi_solido_1, 
-                                            (SELECT IF(IF(se.plan_semi_solido_1 <= turno_1, 0, se.plan_semi_solido_1 - turno_1) + IF(se.plan_semi_solido_2 <= turno_2, se.plan_semi_solido_2, turno_2) > turno_2, turno_2, IF(se.plan_semi_solido_1 <= turno_1, 0, se.plan_semi_solido_1 - turno_1) + IF(se.plan_semi_solido_2 <= turno_2, se.plan_semi_solido_2, turno_2)) FROM capacidad_envasado WHERE id_capacidad_envasado = 2) AS plan_semi_solido_2,
-                                            (SELECT IF(se.plan_semi_solido_1 <= turno_1, 0, se.plan_semi_solido_1 - turno_1) + IF(se.plan_semi_solido_2 <= turno_2, 0, se.plan_semi_solido_2 - turno_2) + se.plan_semi_solido_3 FROM capacidad_envasado WHERE id_capacidad_envasado = 2) AS plan_semi_solido_3,
-                                            (SELECT IF(se.plan_solido_1 <= turno_1, se.plan_solido_1, turno_1) FROM capacidad_envasado WHERE id_capacidad_envasado = 3) AS plan_solido_1, 
-                                            (SELECT IF(IF(se.plan_solido_1 <= turno_1, 0, se.plan_solido_1 - turno_1) + IF(se.plan_solido_2 <= turno_2, se.plan_solido_2, turno_2) > turno_2, turno_2, IF(se.plan_solido_1 <= turno_1, 0, se.plan_solido_1 - turno_1) + IF(se.plan_solido_2 <= turno_2, se.plan_solido_2, turno_2)) FROM capacidad_envasado WHERE id_capacidad_envasado = 3) AS plan_solido_2,
-                                            (SELECT IF(se.plan_solido_1 <= turno_1, 0, se.plan_solido_1 - turno_1) + IF(se.plan_solido_2 <= turno_2, 0, se.plan_solido_2 - turno_2) + se.plan_solido_3 FROM capacidad_envasado WHERE id_capacidad_envasado = 3) AS plan_solido_3 
-                                      FROM sum_capacidad_envasado se
-                                        INNER JOIN capacidad_envasado ce
-                                        INNER JOIN linea l ON l.id = ce.id_linea
-                                      WHERE se.semana = :semana;");
+        $stmt = $connection->prepare(
+            "SELECT DISTINCT se.semana, 
+                (SELECT IF(se.plan_liquido_1 <= turno_1, se.plan_liquido_1, turno_1) 
+                FROM capacidad_envasado 
+                WHERE id_capacidad_envasado = 1) AS plan_liquido_1, 
+                    
+                (SELECT IF(IF(se.plan_liquido_1 <= turno_1, 0, se.plan_liquido_1 - turno_1) + IF(se.plan_liquido_2 <= turno_2, se.plan_liquido_2, turno_2) > turno_2, turno_2, IF(se.plan_liquido_1 <= turno_1, 0, se.plan_liquido_1 - turno_1) + IF(se.plan_liquido_2 <= turno_2, se.plan_liquido_2, turno_2)) 
+                FROM capacidad_envasado 
+                WHERE id_capacidad_envasado = 1) AS plan_liquido_2,
+                    
+                    (SELECT IF(se.plan_liquido_1 <= turno_1, 0, se.plan_liquido_1 - turno_1) + IF(se.plan_liquido_2 <= turno_2, 0, se.plan_liquido_2 - turno_2) + se.plan_liquido_3 FROM capacidad_envasado WHERE id_capacidad_envasado = 1) AS plan_liquido_3,
+                    (SELECT IF(se.plan_semi_solido_1 <= turno_1, se.plan_semi_solido_1, turno_1) FROM capacidad_envasado WHERE id_capacidad_envasado = 2) AS plan_semi_solido_1, 
+                    (SELECT IF(IF(se.plan_semi_solido_1 <= turno_1, 0, se.plan_semi_solido_1 - turno_1) + IF(se.plan_semi_solido_2 <= turno_2, se.plan_semi_solido_2, turno_2) > turno_2, turno_2, IF(se.plan_semi_solido_1 <= turno_1, 0, se.plan_semi_solido_1 - turno_1) + IF(se.plan_semi_solido_2 <= turno_2, se.plan_semi_solido_2, turno_2)) FROM capacidad_envasado WHERE id_capacidad_envasado = 2) AS plan_semi_solido_2,
+                    (SELECT IF(se.plan_semi_solido_1 <= turno_1, 0, se.plan_semi_solido_1 - turno_1) + IF(se.plan_semi_solido_2 <= turno_2, 0, se.plan_semi_solido_2 - turno_2) + se.plan_semi_solido_3 FROM capacidad_envasado WHERE id_capacidad_envasado = 2) AS plan_semi_solido_3,
+                    (SELECT IF(se.plan_solido_1 <= turno_1, se.plan_solido_1, turno_1) FROM capacidad_envasado WHERE id_capacidad_envasado = 3) AS plan_solido_1, 
+                    (SELECT IF(IF(se.plan_solido_1 <= turno_1, 0, se.plan_solido_1 - turno_1) + IF(se.plan_solido_2 <= turno_2, se.plan_solido_2, turno_2) > turno_2, turno_2, IF(se.plan_solido_1 <= turno_1, 0, se.plan_solido_1 - turno_1) + IF(se.plan_solido_2 <= turno_2, se.plan_solido_2, turno_2)) FROM capacidad_envasado WHERE id_capacidad_envasado = 3) AS plan_solido_2,
+                    (SELECT IF(se.plan_solido_1 <= turno_1, 0, se.plan_solido_1 - turno_1) + IF(se.plan_solido_2 <= turno_2, 0, se.plan_solido_2 - turno_2) + se.plan_solido_3 FROM capacidad_envasado WHERE id_capacidad_envasado = 3) AS plan_solido_3 
+                FROM capacidad_envasado_sum se
+                INNER JOIN capacidad_envasado ce
+                INNER JOIN linea l ON l.id = ce.id_linea
+                WHERE se.semana = :semana;");
         $stmt->execute(['semana' => $dataEnvasado['semana']]);
         $envasado = $stmt->fetch($connection::FETCH_ASSOC);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
 
         // Actualizar
-        $stmt = $connection->prepare("UPDATE sum_capacidad_envasado SET plan_liquido_1 = :plan_liquido_1, plan_liquido_2 = :plan_liquido_2, plan_liquido_3 = :plan_liquido_3, plan_semi_solido_1 = :plan_semi_solido_1,
+        $stmt = $connection->prepare("UPDATE capacidad_envasado_sum SET plan_liquido_1 = :plan_liquido_1, plan_liquido_2 = :plan_liquido_2, plan_liquido_3 = :plan_liquido_3, plan_semi_solido_1 = :plan_semi_solido_1,
                                                         plan_semi_solido_2 = :plan_semi_solido_2, plan_semi_solido_3 = :plan_semi_solido_3, plan_solido_1 = :plan_solido_1, plan_solido_2 = :plan_solido_2, plan_solido_3 = :plan_solido_3
                                       WHERE semana = :semana");
         $stmt->execute([
@@ -80,7 +88,7 @@ class ProgramacionEnvasadoDao
 
         $tamanoLote = str_replace('.', '', $dataEnvasado['tamano_lote']);
 
-        $stmt = $connection->prepare("UPDATE sum_capacidad_envasado SET {$col} = ${col}+ :col
+        $stmt = $connection->prepare("UPDATE capacidad_envasado_sum SET {$col} = ${col}+ :col
                                       WHERE semana = :semana");
         $stmt->execute([
             'col' => $tamanoLote,
@@ -91,7 +99,7 @@ class ProgramacionEnvasadoDao
     public function calcTotalCapacidades()
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("UPDATE sum_capacidad_envasado SET total_liquido = (plan_liquido_1 + plan_liquido_2 + plan_liquido_3), total_semi_solido = (plan_semi_solido_1 + plan_semi_solido_2 + plan_semi_solido_3),
+        $stmt = $connection->prepare("UPDATE capacidad_envasado_sum SET total_liquido = (plan_liquido_1 + plan_liquido_2 + plan_liquido_3), total_semi_solido = (plan_semi_solido_1 + plan_semi_solido_2 + plan_semi_solido_3),
                                                                      total_solido = (plan_solido_1 + plan_solido_2 + plan_solido_3);");
         $stmt->execute();
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
@@ -123,10 +131,10 @@ class ProgramacionEnvasadoDao
                                             (SELECT CAST((se.plan_solido_1 / turno_1)*100 AS UNSIGNED) FROM capacidad_envasado WHERE id_capacidad_envasado = 3) AS plan_solido_1,
                                             (SELECT CAST((se.plan_solido_2 / turno_2)*100 AS UNSIGNED) FROM capacidad_envasado WHERE id_capacidad_envasado = 3) AS plan_solido_2,
                                             (SELECT CAST((se.plan_solido_3 / turno_3)*100 AS UNSIGNED) FROM capacidad_envasado WHERE id_capacidad_envasado = 3) AS plan_solido_3, se.total_solido
-                                      FROM sum_capacidad_envasado se
+                                      FROM capacidad_envasado_sum se
                                         INNER JOIN capacidad_envasado ce
                                         INNER JOIN linea l ON l.id = ce.id_linea
-                                      WHERE se.semana >= WEEKOFYEAR(NOW()) LIMIT 9;");
+                                      WHERE se.semana >= WEEKOFYEAR(NOW());");
         $stmt->execute();
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
 

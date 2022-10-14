@@ -22,11 +22,12 @@ $app->post('/addFechaEnvasado', function (Request $request, Response $response, 
     for ($i = 0; $i < sizeof($envasado); $i++) {
         $programaEnvasado = $prgEnvasadoDao->updateFechaEnvasado($envasado[$i]);
 
-        $capacidadEnvasado = $prgEnvasadoDao->updateCapacidadEnvasado($envasado[$i]);
-
-        if ($capacidadEnvasado == null)
-            $resolution = $prgEnvasadoDao->calcSumCapacidadesEnvasado($envasado[$i]);
+        if ($programaEnvasado == null)
+            $capacidadEnvasado = $prgEnvasadoDao->updateCapacidadEnvasado($envasado[$i]);
     }
+    //if ($capacidadEnvasado == null)
+    $resolution = $prgEnvasadoDao->calcSumCapacidadesEnvasado($envasado[$i]);
+
     if ($programaEnvasado == null && $resolution == null)
         $resp = array('success' => true, 'message' => 'Envasado programado correctamente');
     else
