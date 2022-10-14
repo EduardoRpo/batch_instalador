@@ -1,24 +1,5 @@
 $(document).ready(function() {
-    /*$.ajax({
-      url: '/api/capacidadEnvasado',
-      success: function (resp) {
-        loadTblEnvasado(resp);
-      },
-    });
-
-    loadTblEnvasado = (data) => {
-      // $('#LQturno1').html(data[0]['turno_1']);
-      // $('#LQturno2').html(data[0]['turno_2']);
-      // $('#LQturno3').html(data[0]['turno_3']);
-      // $('#Sturno1').html(data[1]['turno_1']);
-      // $('#Sturno2').html(data[1]['turno_2']);
-      // $('#Sturno3').html(data[1]['turno_3']);
-      // $('#SMturno1').html(data[2]['turno_1']);
-      // $('#SMturno2').html(data[2]['turno_2']);
-      // $('#SMturno3').html(data[2]['turno_3']);
-
-      // document.getElementById('delete').setAttribute('id', data);
-    }*/
+    
 
     tblCapacidadEnvasado = $('#tblCapacidadEnvasado').DataTable({
         scrollY: '50vh',
@@ -58,6 +39,12 @@ $(document).ready(function() {
             {
                 title: 'Turno 3',
                 data: 'turno_3',
+                className: 'text-center',
+                render: $.fn.dataTable.render.number('.', ',', 0, ''),
+            },
+            {
+                title: 'Capacidad Total',
+                data: 'total_capacidad',
                 className: 'text-center',
                 render: $.fn.dataTable.render.number('.', ',', 0, ''),
             },
