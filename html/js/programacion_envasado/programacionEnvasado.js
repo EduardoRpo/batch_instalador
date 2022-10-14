@@ -51,6 +51,9 @@ $(document).ready(function () {
 
     // obtenemos el lunes y domingo de la semana especificada
     primer = new Date(date.getFullYear(), 0, (semana - 1) * 7 + 3 + correccion);
+
+    primer < date ? (primer = date) : primer;
+
     ultimo = new Date(date.getFullYear(), 0, (semana - 1) * 7 + 9 + correccion);
 
     fecha_minima = setFecha(primer);
@@ -78,7 +81,12 @@ $(document).ready(function () {
 
     day = `${date.getDate()}`.padStart(2, 0);
 
-    stringDate = [year, month, day].join('-');
+    hour = date.toLocaleTimeString('de-DE', {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+
+    stringDate = `${[year, month, day].join('-')} ${hour}`;
 
     return stringDate;
   };
@@ -87,14 +95,15 @@ $(document).ready(function () {
     e.preventDefault();
     id = this.id;
     fecha = $(`#${id}`).val();
+    id_batch = id.slice(5, id.length);
     if (fecha == '' || !fecha) {
       alertify.set('notifier', 'position', 'top-right');
       alertify.error('Ingrese la fecha para programar el envasado');
       return false;
     } else {
-      no_lote = $(this).parent().parent().children().eq(4).text();
-      tamano_lote = $(this).parent().parent().children().eq(6).text();
-      arrayEnvasado(id, fecha, no_lote, tamano_lote);
+      no_lote = $(this).parent().parent().children().eq(5).text();
+      tamano_lote = $(this).parent().parent().children().eq(7).text();
+      arrayEnvasado(id_batch, fecha, no_lote, tamano_lote);
     }
   });
 
@@ -163,13 +172,9 @@ $(document).ready(function () {
   };
 
   $(`#numSemana option[value="${semanaActual}"]`).prop('selected', true);
-  function selectChange() {
+  selectChange = () => {
     $('#numSemana').trigger('change');
-  }
+  };
 
   setTimeout(selectChange, 4000);
-
-  $(document).on('click', '.link-editarMulti', function (e) {
-    idBatch = this.id;
-  });
 });
