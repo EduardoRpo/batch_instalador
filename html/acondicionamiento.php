@@ -83,6 +83,8 @@ sesiones(6);
   <script src="html/js/utils/custom.min.js"></script>
   <script src="html/js/utils/datatables.js"></script>
   <script src="../assets/plugins/jquery/jquery.number.min.js"></script>
+  <script type="text/javascript" src="https://momentjs.com/downloads/moment-with-locales.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.15/dataRender/datetime.js"></script>
   <script src="html/js/acondicionamiento/acondicionamiento.js"></script>
 
 </body>

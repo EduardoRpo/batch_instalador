@@ -68,6 +68,8 @@ sesiones(5);
   <script src="../assets/plugins/bootstrap/js/tether.min.js"></script>
   <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="html/vendor/datatables/datatables.min.js"></script>
+  <script type="text/javascript" src="https://momentjs.com/downloads/moment-with-locales.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/plug-ins/1.10.15/dataRender/datetime.js"></script>
   <!-- slimscrollbar scrollbar JavaScript -->
   <script src="html/js/utils/jquery.slimscroll.js"></script>
   <!--Wave Effects -->
