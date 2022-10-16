@@ -5,6 +5,7 @@ if (!empty($_POST)) {
     require_once('../../admin/sistema/php/crud.php');
     require_once('./controlFirmas.php');
     require_once('./firmas.php');
+    require_once('./aprobadoOk.php');
 
     $op = $_POST['operacion'];
 
@@ -100,6 +101,7 @@ if (!empty($_POST)) {
                                 actualizarEstado($batch, $modulo, $conn);
                             desinfectanteVerifico($conn);
                             segundaSeccionVerifico($conn);
+                            updateBatchAprobado($batch, $conn);
                             $result = 1;
                             echo $result;
                         }

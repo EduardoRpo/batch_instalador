@@ -11,6 +11,7 @@ use BatchRecord\dao\DesinfectanteDao;
 use BatchRecord\dao\Firmas2SeccionDao;
 use BatchRecord\dao\ControlFirmasDao;
 use BatchRecord\dao\ControlEspecificacionesDao;
+use BatchRecord\dao\batchAprobadoDao;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -26,6 +27,7 @@ $desinfectanteDao = new DesinfectanteDao();
 $firmas2SeccionDao = new Firmas2SeccionDao();
 $controlFirmasDao = new ControlFirmasDao();
 $controlEspecificacionesDao = new ControlEspecificacionesDao();
+$batchAprobadoDao = new BatchAprobadoDao();
 
 $app->post('/saveBatchTanques', function (Request $request, Response $response, $args) use (
     $tanquesChksDao,
@@ -39,6 +41,7 @@ $app->post('/saveBatchTanques', function (Request $request, Response $response, 
     $firmas2SeccionDao,
     $controlFirmasDao,
     $controlEspecificacionesDao,
+    $batchAprobadoDao,
 ) {
     $dataBatch = $request->getParsedBody();
 
@@ -83,8 +86,9 @@ $app->post('/saveBatchTanques', function (Request $request, Response $response, 
     // Almacena el desinfectante del modulo de aprobacion y fisicoquimico
     if ($modulo == 4) {
         $desinfectante = $desinfectanteDao->desinfectanteRealizo($dataBatch);
-        if ($desinfectante == null)
+        if ($desinfectante == null) {
             $firmas2Seccion = $firmas2SeccionDao->segundaSeccionRealizo($dataBatch);
+        }
         /* registrar cantidad firmas solo al finalizar los tanques */
         if ($firmas2Seccion == null && $dataBatch['tanques'] == $dataBatch['tanquesOk'])
             $resp = $controlFirmasDao->registrarFirmas($dataBatch);
