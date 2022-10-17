@@ -254,7 +254,7 @@ include_once("modal/modalPedidos.php");
     <script src="/html/js/batch/planeacion/generalPreprogramacion.js"></script>
     <script src="/html/js/batch/planeacion/importPedidos.js"></script>
     <script src="/html/js/batch/planeacion/pedidos.js"></script>
-    <script src="/html/js/batch/planeacion/link-comentario.js"></script>
+    <script src="/html/js/global/link-comentario.js"></script>
 
     <script src="/html/js/batch/multipresentacion/multipresentacion.js"></script>
     <script src="/html/js/batch/multipresentacion/addMulti.js"></script>

@@ -39,6 +39,9 @@ $router->add('/aprobacioninfo/:idBatch/:referencia', function ($idBatch, $refere
 $router->add('/envasado', function () {
   return Router::getRenderedHTML('html/envasado.php');
 });
+$router->add('/programacion-envasado', function () {
+  return Router::getRenderedHTML('html/programacion_envasado.php');
+});
 $router->add('/envasadoinfo/:idBatch/:referencia', function ($idBatch, $referencia) {
   return Router::getRenderedHTML('html/envasadoinfo.php');
 });

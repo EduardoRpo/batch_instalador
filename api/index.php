@@ -29,6 +29,7 @@ require_once __DIR__ . '/src/routes/admin/generalParameters/modules.php';
 require_once __DIR__ . '/src/routes/admin/generalParameters/conditions.php';
 require_once __DIR__ . '/src/routes/admin/generalParameters/disinfectant.php';
 require_once __DIR__ . '/src/routes/admin/generalParameters/equipments.php';
+require_once __DIR__ . '/src/routes/admin/auditory/capacidadEnvasado.php';
 
 require_once __DIR__ . '/src/routes/admin/productos/generales/nombresProductos.php';
 require_once __DIR__ . '/src/routes/admin/productos/generales/notifiSanitaria.php';
@@ -97,7 +98,7 @@ require_once __DIR__ . '/src/routes/app/multi/multi.php';
 require_once __DIR__ . '/src/routes/app/multi/calcTamanioLote.php';
 
 //Observaciones
-require_once __DIR__ . '/src/routes/app/observaciones/observacionesInactivos.php';
+require_once __DIR__ . '/src/routes/app/observaciones/observaciones.php';
 
 //require_once __DIR__ . '/src/routes/cargo.php';
 require_once __DIR__ . '/src/routes/app/global/granel.php';
@@ -118,6 +119,9 @@ require_once __DIR__ . '/src/routes/app/pesaje/pesaje.php';
 require_once __DIR__ . '/src/routes/app/envasado/envasado.php';
 require_once __DIR__ . '/src/routes/app/envasado/entregasParciales.php';
 require_once __DIR__ . '/src/routes/app/envasado/equipos.php';
+
+//programacion envasado
+require_once __DIR__ . '/src/routes/app/programacion_envasado/programacion_envasado.php';
 
 //Explosion de Materiales
 require_once __DIR__ . '/src/routes/app/explosionMateriales/explosion_materiales.php';

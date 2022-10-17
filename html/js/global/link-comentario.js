@@ -4,22 +4,32 @@ $(document).ready(function () {
     $('#comment').val('');
 
     let col1 = $(this).parent().parent().children().eq(0).text();
-    if (col1.includes('-')) {
-      /* Mostrar fila de pedidos */
-      column = tablaPreBatch.column(1);
-      column.visible(!column.visible());
-      col1 = $(this).parent().parent().children().eq(0).text();
-    }
 
-    let col2 = $(this).parent().parent().children().eq(1).text();
-    let col4 = $(this).parent().parent().children().eq(3).text();
-
-    if (col4.includes('M-'))
+    if (!col1.includes('-') && col1) {
+      id = this.id;
+      modulo = id.slice(-1, id.length);
       data = {
-        pedido: col1,
-        ref: col4,
+        batch: col1,
+        modulo: modulo,
       };
-    else data = { batch: col2 };
+    } else {
+      if (col1.includes('-')) {
+        /* Mostrar fila de pedidos */
+        column = tablaPreBatch.column(1);
+        column.visible(!column.visible());
+        col1 = $(this).parent().parent().children().eq(0).text();
+      }
+
+      let col2 = $(this).parent().parent().children().eq(1).text();
+      let col4 = $(this).parent().parent().children().eq(3).text();
+
+      if (col4.includes('M-'))
+        data = {
+          pedido: col1,
+          ref: col4,
+        };
+      else data = { batch: col2 };
+    }
     ejecucionObservaciones(data);
   });
 
@@ -54,7 +64,7 @@ $(document).ready(function () {
 
   /* Cargar observaciones */
   loadObservations = async (data) => {
-    response = await sendDataPOST(data);
+    response = await sendComentarioPOST(data);
 
     if (response.empty) {
       observations = { table: '', size: 300 };
@@ -80,10 +90,10 @@ $(document).ready(function () {
     }
   };
 
-  sendDataPOST = async (params) => {
+  sendComentarioPOST = async (params) => {
     try {
       result = await $.ajax({
-        url: '/api/observacionesInactivos',
+        url: urlObs,
         type: 'POST',
         data: params,
       });
@@ -110,7 +120,7 @@ $(document).ready(function () {
 
     $.ajax({
       type: 'POST',
-      url: '/api/addObservacion',
+      url: urlPostObs,
       data: data,
       success: function (resp) {
         message(resp);
