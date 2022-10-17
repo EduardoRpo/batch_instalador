@@ -9,7 +9,7 @@
         </button>
       </div>
       <div>
-        <?php if ($_SESSION['rol'] != 5 && $_SESSION['rol'] != 2) { ?>
+        <?php if ($_SESSION['rol'] != 3 && $_SESSION['rol'] != 4 && $_SESSION['rol'] != 5) { ?>
           <a class="navbar-brand" href="/html/batch.php" target="_blank" target="_blank">Batch Record</a>
           <a class="navbar-brand" href="/../pesaje" target="_blank">Pesaje</a>
           <a class="navbar-brand" href="/../preparacion" target="_blank">Preparación</a>
