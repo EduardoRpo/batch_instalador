@@ -6,7 +6,7 @@ $(document).ready(function () {
     select = $('#numSemana');
 
     select.empty();
-    select.append(`<option disabled>Seleccionar</option>`);
+    select.append(`<option value="0" disabled>Seleccionar</option>`);
 
     for (i = 1; i <= 52; i++) {
       select.append(`<option value ="${i}">${i}</option>`);
