@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  let data = {};
   $(document).on('click', '.link-comentario', function (e) {
     e.preventDefault();
     $('#comment').val('');
@@ -39,6 +40,9 @@ $(document).ready(function () {
   };
 
   loadAlertify = (observations, data) => {
+    $('#m_observaciones').modal('show');
+    $('#tBody').html(observations.table);
+    /*
     alertify
       .confirm(
         'Gestión Pedido Pendientes',
@@ -59,7 +63,7 @@ $(document).ready(function () {
       .set('labels', { ok: 'Agregar', cancel: 'Cancelar' })
       .set({ closableByDimmer: false })
       .set('resizable', true)
-      .resizeTo(500, observations.size);
+      .resizeTo(500, observations.size);*/
   };
 
   /* Cargar observaciones */
@@ -71,7 +75,8 @@ $(document).ready(function () {
       return observations;
     } else {
       observations = {
-        table: `
+        table: (row = loadTable(response)),
+        /*table: `
         <p class="mt-3">Historial Seguimiento</p><br>
         <table class="table table-striped table-bordered dataTable no-footer text-center" aria-describedby="tablaPreBatch_info">
             <thead>
@@ -84,7 +89,7 @@ $(document).ready(function () {
               ${(row = loadTable(response))}
             </tbody>
         </table>`,
-        size: 400,
+        size: 400,*/
       };
       return observations;
     }
@@ -115,6 +120,17 @@ $(document).ready(function () {
   };
 
   /* Guardar observacion */
+  $('#saveObs').click(function (e) {
+    e.preventDefault();
+    comment = $('#comment').val();
+    if (!comment || comment == '') {
+      alertify.set('notifier', 'position', 'top-right');
+      alertify.error('Ingrese comentario');
+      return false;
+    }
+    saveComment(data, comment);
+  });
+
   saveComment = (data, comment) => {
     data['comment'] = comment;
 

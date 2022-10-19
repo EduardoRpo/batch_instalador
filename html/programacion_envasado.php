@@ -2,6 +2,7 @@
 require_once('./html/sesiones/sesion.php');
 include('modal/modal_cambiarContrasena.php');
 include_once("modal/modal_multipresentacion.php");
+include_once("modal/m_observaciones.php");
 sesiones(5);
 ?>
 

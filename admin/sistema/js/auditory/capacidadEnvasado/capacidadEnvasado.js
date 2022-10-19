@@ -1,79 +1,99 @@
-$(document).ready(function() {
-    sessionStorage.removeItem('id_envasado');
-    /* Ocultar card  */
-    $('.cardSaveEnvasado').hide();
+$(document).ready(function () {
+  sessionStorage.removeItem('id_capacidad_envasado');
 
-    /* Mostrar card capacidad envasado */
-    $(document).on('click', '.updateEnv', function() {
-        id = this.id;
+  /* Cargar numero de semanas */
+  loadNumSemanas = () => {
+    select = $('#numSemana');
 
-        sessionStorage.setItem('id_envasado', id);
+    select.empty();
+    select.append(`<option disabled>Seleccionar</option>`);
 
-        env = $(this).parent().parent().children().eq(1).text();
-        t_1 = $(this).parent().parent().children().eq(2).text();
-        t_2 = $(this).parent().parent().children().eq(3).text();
-        t_3 = $(this).parent().parent().children().eq(4).text();
+    for (i = 1; i <= 52; i++) {
+      select.append(`<option value ="${i}">${i}</option>`);
+    }
+  };
+  loadNumSemanas();
 
-        t_1 = t_1.replace('.', '');
-        t_2 = t_2.replace('.', '');
-        t_3 = t_3.replace('.', '');
+  /* Ocultar card  */
+  $('.cardSaveEnvasado').hide();
 
-        $('#linea').val(env);
-        $('#turno1').val(t_1);
-        $('#turno2').val(t_2);
-        $('#turno3').val(t_3);
+  /* Mostrar card capacidad envasado */
+  $(document).on('click', '.updateEnv', function () {
+    id = this.id;
 
-        $('.cardSaveEnvasado').show(800);
+    sessionStorage.setItem('id_capacidad_envasado', id);
 
-        $('html, body').animate({
-                scrollTop: 0,
-            },
-            1000
-        );
-    });
+    semana = $(this).parent().parent().children().eq(1).text();
+    env = $(this).parent().parent().children().eq(2).text();
+    t_1 = $(this).parent().parent().children().eq(3).text();
+    t_2 = $(this).parent().parent().children().eq(4).text();
+    t_3 = $(this).parent().parent().children().eq(5).text();
 
-    /* Guardar envasado */
-    $('#saveEnvasado').click(function(e) {
-        e.preventDefault();
+    t_1 = t_1.replace('.', '');
+    t_2 = t_2.replace('.', '');
+    t_3 = t_3.replace('.', '');
 
-        t_1 = $('#turno1').val();
-        t_2 = $('#turno2').val();
-        t_3 = $('#turno3').val();
+    $(`#numSemana option[value="${semana}"]`).prop('selected', true);
+    $('#linea').val(env);
+    $('#turno1').val(t_1);
+    $('#turno2').val(t_2);
+    $('#turno3').val(t_3);
 
-        data = t_1 * t_2 * t_3;
+    $('.cardSaveEnvasado').show(800);
 
-        if (!data || data == 0) {
-            alertify.set('notifier', 'position', 'top-right');
-            alertify.error('ingrese todos los datos');
-            return false;
-        }
+    $('html, body').animate(
+      {
+        scrollTop: 0,
+      },
+      1000
+    );
+  });
 
-        envasado = $('#formSaveEnvasado').serialize();
-        id_envasado = sessionStorage.getItem('id_envasado');
-        envasado = `${envasado}&idEnvasado=${id_envasado}`;
+  /* Guardar envasado */
+  $('#saveEnvasado').click(function (e) {
+    e.preventDefault();
 
-        $.post('/api/updateCapacidadEnvasado', envasado,
-            function(data, textStatus, jqXHR) {
-                message(data);
-            }
-        );
-    });
+    semana = $('#numSemana').val();
+    t_1 = $('#turno1').val();
+    t_2 = $('#turno2').val();
+    t_3 = $('#turno3').val();
 
-    /* Mensaje de exito */
-    message = (data) => {
-        alertify.set('notifier', 'position', 'top-right');
+    data = semana * t_1 * t_2 * t_3;
 
-        if (data.success == true) {
-            actualizarTabla();
-            $('.cardSaveEnvasado').hide(800);
-            alertify.success(data.message);
-        } else if (data.error == true) alertify.error(data.message);
-        else if (data.info == true) alertify.info(data.message);
-    };
+    if (!data || data == 0) {
+      alertify.set('notifier', 'position', 'top-right');
+      alertify.error('ingrese todos los datos');
+      return false;
+    }
 
-    /* Actualizar tabla */
-    actualizarTabla = () => {
-        $('#tblCapacidadEnvasado').DataTable().clear();
-        $('#tblCapacidadEnvasado').DataTable().ajax.reload();
-    };
+    envasado = $('#formSaveEnvasado').serialize();
+    id_capacidad_envasado = sessionStorage.getItem('id_capacidad_envasado');
+    envasado = `${envasado}&idEnvasado=${id_capacidad_envasado}`;
+
+    $.post(
+      '/api/updateCapacidadEnvasado',
+      envasado,
+      function (data, textStatus, jqXHR) {
+        message(data);
+      }
+    );
+  });
+
+  /* Mensaje de exito */
+  message = (data) => {
+    alertify.set('notifier', 'position', 'top-right');
+
+    if (data.success == true) {
+      actualizarTabla();
+      $('.cardSaveEnvasado').hide(800);
+      alertify.success(data.message);
+    } else if (data.error == true) alertify.error(data.message);
+    else if (data.info == true) alertify.info(data.message);
+  };
+
+  /* Actualizar tabla */
+  actualizarTabla = () => {
+    $('#tblCapacidadEnvasado').DataTable().clear();
+    $('#tblCapacidadEnvasado').DataTable().ajax.reload();
+  };
 });

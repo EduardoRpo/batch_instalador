@@ -52,7 +52,7 @@ $(document).ready(function () {
     // obtenemos el lunes y domingo de la semana especificada
     primer = new Date(date.getFullYear(), 0, (semana - 1) * 7 + 3 + correccion);
 
-    primer < date ? (primer = date) : primer;
+    primer <= date ? primer.setDate(date.getDate() + 1) : primer;
 
     ultimo = new Date(date.getFullYear(), 0, (semana - 1) * 7 + 9 + correccion);
 
@@ -153,6 +153,7 @@ $(document).ready(function () {
 
     if (data.success == true) {
       actualizarTabla();
+      $('#m_observaciones').modal('hide');
       alertify.success(data.message);
     } else if (data.error == true) alertify.error(data.message);
     else if (data.info == true) alertify.info(data.message);
