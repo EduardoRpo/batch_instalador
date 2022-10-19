@@ -108,9 +108,9 @@ $(document).ready(function () {
   });
 
   arrayEnvasado = (id_batch, fecha, no_lote, tamano_lote) => {
-    for (i = 0; i < dataEnvasado.length; i++) {
-      if (id_batch == dataEnvasado[i].idBatch) deleteArray(id_batch);
-    }
+    /* for (i = 0; i < dataEnvasado.length; i++) {
+          if (id_batch == dataEnvasado[i].idBatch) deleteArray(id_batch);
+        } */
 
     envasado = {};
 
@@ -123,13 +123,13 @@ $(document).ready(function () {
     dataEnvasado.push(envasado);
   };
 
-  deleteArray = (id_batch) => {
-    for (i = 0; i < dataEnvasado.length; i++) {
-      if (dataEnvasado[i].idBatch == id_batch) {
-        dataEnvasado.splice(i, 1);
-      }
-    }
-  };
+  /*  deleteArray = (id_batch) => {
+         for (i = 0; i < dataEnvasado.length; i++) {
+             if (dataEnvasado[i].idBatch == id_batch) {
+                 dataEnvasado.splice(i, 1);
+             }
+         }
+     }; */
 
   $(document).on('click', '#btnProgramar', function (e) {
     e.preventDefault();
@@ -155,6 +155,7 @@ $(document).ready(function () {
       actualizarTabla();
       $('#m_observaciones').modal('hide');
       alertify.success(data.message);
+      dataEnvasado = [];
     } else if (data.error == true) alertify.error(data.message);
     else if (data.info == true) alertify.info(data.message);
   };
