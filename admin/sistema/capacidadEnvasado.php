@@ -55,6 +55,11 @@
                                     <form id="formSaveEnvasado" enctype="multipart/form-data">
                                         <div class="row">
                                             <div class="col">
+                                                <label class="form-label">Semana</label>
+                                                <!-- <input type="number" class="form-control text-center" name="semana" id="semana" min="1" max="52"> -->
+                                                <select class="form-control text-center" name="semana" id="numSemana"></select>
+                                            </div>
+                                            <div class="col">
                                                 <label class="form-label">Envasado</label>
                                                 <input type="text" class="form-control text-center" name="linea" id="linea" disabled style="font-weight: bold;">
                                             </div>
