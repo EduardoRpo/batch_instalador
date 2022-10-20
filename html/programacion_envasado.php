@@ -155,6 +155,7 @@ sesiones(5);
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
     <script src="/html/js/global/searchData.js"></script>
+    <script src="/admin/sistema/js/global/numSemanas.js"></script>
     <script src="html/js/programacion_envasado/tblProgramacionEnvasado.js"></script>
     <script src="html/js/programacion_envasado/programacionEnvasado.js"></script>
     <script src="/html/js/global/link-comentario.js"></script>

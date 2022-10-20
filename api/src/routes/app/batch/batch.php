@@ -6,7 +6,7 @@ use BatchRecord\dao\UltimoBatchCreadoDao;
 use BatchRecord\dao\TanquesDao;
 use BatchRecord\dao\ControlFirmasDao;
 use BatchRecord\dao\MultiDao;
-use BatchRecord\dao\ExplosionMaterialesPedidosRegistroDao;
+use BatchRecord\dao\PlanPedidosDao;
 use BatchRecord\dao\ObservacionesInactivosDao;
 
 use Psr\Http\Message\ResponseInterface as Response;
@@ -17,7 +17,7 @@ $ultimoBatchDao = new UltimoBatchCreadoDao();
 $tanquesDao = new TanquesDao();
 $controlFirmasDao = new ControlFirmasDao();
 $multiDao = new MultiDao();
-$EMPedidosRegistroDao = new ExplosionMaterialesPedidosRegistroDao();
+$EMPedidosRegistroDao = new PlanPedidosDao();
 $observacionesDao = new ObservacionesInactivosDao();
 
 

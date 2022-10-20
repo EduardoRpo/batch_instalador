@@ -50,14 +50,22 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Capacidad Envasado x Semana</h4>
+                                <div class="row">
+                                    <div class="col">
+                                        <h4 class="card-title">Capacidad Envasado x Semana</h4>
+                                    </div>
+                                    <div class="col-2">
+                                        <label for="numSemana">Semana No</label>
+                                        <select name="numSemana" id="numSemana" class="form-control text-center">
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="cardSaveEnvasado">
                                     <form id="formSaveEnvasado" enctype="multipart/form-data">
                                         <div class="row">
                                             <div class="col">
                                                 <label class="form-label">Semana</label>
-                                                <!-- <input type="number" class="form-control text-center" name="semana" id="semana" min="1" max="52"> -->
-                                                <select class="form-control text-center" name="semana" id="numSemana"></select>
+                                                <input type="number" class="form-control text-center" name="semana" id="semana" min="1" max="52">
                                             </div>
                                             <div class="col">
                                                 <label class="form-label">Envasado</label>
@@ -84,42 +92,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table id="tblCapacidadEnvasado" class="table-striped row-borde" style="width: 100%;">
-                                        <!-- <thead>
-                                            <tr>
-                                                <th colspan="3">Liquidos</th>
-                                                <th colspan="3">Solidos</th>
-                                                <th colspan="3">Semisolidos</th>
-                                            </tr>
-                                            <tr>
-                                                <th>Turno 1</th>
-                                                <th>Turno 2</th>
-                                                <th>Turno 3</th>
-                                                <th>Turno 1</th>
-                                                <th>Turno 2</th>
-                                                <th>Turno 3</th>
-                                                <th>Turno 1</th>
-                                                <th>Turno 2</th>
-                                                <th>Turno 3</th>
-                                                <th>Acciones</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td id="LQturno1"></td>
-                                                <td id="LQturno2"></td>
-                                                <td id="LQturno3"></td>
-                                                <td id="Sturno1"></td>
-                                                <td id="Sturno2"></td>
-                                                <td id="Sturno3"></td>
-                                                <td id="SMturno1"></td>
-                                                <td id="SMturno2"></td>
-                                                <td id="SMturno3"></td>
-                                                <td>
-                                                    <a href='#' <i id="delete" class='large material-icons link-editar' style='color:rgb(255, 165, 0)'>edit</i></a>
-                                                </td>
-                                            </tr>
-                                        </tbody> -->
+                                    <table id="tblCapacidadEnvasado" class="table-striped row-borde">
                                     </table>
                                 </div>
                             </div>
@@ -159,6 +132,7 @@
 
     <!-- javascript inicializacion datatables -->
     <script src="/admin/sistema/js/auditory/capacidadEnvasado/tblCapacidadEnvasado.js"></script>
+    <script src="/admin/sistema/js/global/numSemanas.js"></script>
     <script src="/admin/sistema/js/auditory/capacidadEnvasado/capacidadEnvasado.js"></script>
 
 </body>

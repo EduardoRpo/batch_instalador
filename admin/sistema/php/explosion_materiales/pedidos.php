@@ -39,7 +39,7 @@ if (!empty($_POST)) {
 
 			/* Busca si el pedido ya fue registrado */
 
-			$query = "SELECT * FROM explosion_materiales_pedidos_registro 
+			$query = "SELECT * FROM pedidos 
 			WHERE pedido = :pedido AND id_producto = :id_producto";
 			$query = $conn->prepare($query);
 			$query->execute(['pedido' => trim($pedido['Documento']), 'id_producto' => trim($pedido['Producto'])]);
@@ -48,7 +48,7 @@ if (!empty($_POST)) {
 			/* si existe el pedido, carga la materia prima de acuerdo con la referencia del pedido */
 
 			if ($rows > 0) {
-				$query = "UPDATE explosion_materiales_pedidos_registro SET unidades = :unidades 
+				$query = "UPDATE pedidos SET unidades = :unidades 
 				WHERE pedido = :pedido AND id_producto = :id_producto";
 				$query = $conn->prepare($query);
 				$query->execute([
@@ -57,7 +57,7 @@ if (!empty($_POST)) {
 					'id_producto' => trim($pedido['Producto'])
 				]);
 			} else {
-				$query = "INSERT INTO explosion_materiales_pedidos_registro (pedido, id_producto, unidades, fecha_pedido) 
+				$query = "INSERT INTO pedidos (pedido, id_producto, unidades, fecha_pedido) 
 						VALUES(:pedido, :id_producto, :unidades, :fecha_pedido)";
 				$query = $conn->prepare($query);
 				$query->execute([

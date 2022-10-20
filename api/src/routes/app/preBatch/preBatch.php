@@ -1,12 +1,12 @@
 <?php
 
-use BatchRecord\dao\ExplosionMaterialesPedidosRegistroDao;
+use BatchRecord\dao\PlanPedidosDao;
 use BatchRecord\dao\PreBatchDao;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-$EMPedidosRegistroDao = new ExplosionMaterialesPedidosRegistroDao();
+$EMPedidosRegistroDao = new PlanPedidosDao();
 $preBatchDao = new PreBatchDao();
 
 $app->get('/preBatch', function (Request $request, Response $response, $args) use ($EMPedidosRegistroDao, $preBatchDao) {

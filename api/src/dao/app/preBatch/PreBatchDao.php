@@ -20,7 +20,7 @@ class PreBatchDao
     public function findAllOrders()
     {
         $connection = Connection::getInstance()->getConnection();
-        $sql = "SELECT CONCAT(pedido, id_producto) AS concate FROM `explosion_materiales_pedidos_registro`;";
+        $sql = "SELECT CONCAT(pedido, id_producto) AS concate FROM `plan_pedidos`;";
         $query = $connection->prepare($sql);
         $query->execute();
         $preBatch = $query->fetchAll($connection::FETCH_ASSOC);
@@ -40,7 +40,7 @@ class PreBatchDao
                     IFNULL(DATE_ADD(exp.fecha_insumo, INTERVAL 13 DAY),DATE_ADD(exp.fecha_pedido, INTERVAL 13 DAY)) AS envasado, 
                     IFNULL(DATE_ADD(exp.fecha_insumo, INTERVAL 15 DAY),DATE_ADD(exp.fecha_pedido, INTERVAL 15 DAY)) AS entrega , 
                     (SELECT COUNT(*) FROM observaciones_batch_inactivos WHERE pedido = exp.pedido AND referencia = exp.id_producto) AS cant_observations
-                FROM `explosion_materiales_pedidos_registro` exp 
+                FROM `plan_pedidos` exp 
                     INNER JOIN producto p ON p.referencia = exp.id_producto 
                     INNER JOIN propietario pp ON pp.id = p.id_propietario
                     LEFT JOIN observaciones_batch_inactivos obi ON obi.pedido = exp.pedido AND obi.referencia = exp.id_producto
@@ -71,7 +71,7 @@ class PreBatchDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $sql = "SELECT * FROM explosion_materiales_pedidos_registro WHERE pedido = :pedido;";
+        $sql = "SELECT * FROM plan_pedidos WHERE pedido = :pedido;";
         $query = $connection->prepare($sql);
         $query->execute(['pedido' => $order]);
         $result = $query->fetch($connection::FETCH_ASSOC);
@@ -84,7 +84,7 @@ class PreBatchDao
 
         $sql = "SELECT IF(importado = '0000-00-00 00:00:00', null, DATE_FORMAT(importado, '%d/%m/%Y')) AS fecha_importe, 
                        IF(importado = '0000-00-00 00:00:00', null, TIME_FORMAT(importado, '%h:%i %p')) AS hora_importe
-                FROM explosion_materiales_pedidos_registro ORDER BY `explosion_materiales_pedidos_registro`.`importado` DESC";
+                FROM plan_pedidos ORDER BY `plan_pedidos`.`importado` DESC";
         $query = $connection->prepare($sql);
         $query->execute();
         $result = $query->fetch($connection::FETCH_ASSOC);
@@ -95,7 +95,7 @@ class PreBatchDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $sql = "SELECT * FROM explosion_materiales_pedidos_registro 
+        $sql = "SELECT * FROM plan_pedidos 
                 WHERE pedido = :pedido AND id_producto = :id_producto";
         $query = $connection->prepare($sql);
         $query->execute([
@@ -105,7 +105,7 @@ class PreBatchDao
         $rows = $query->rowCount();
 
         if ($rows > 0) {
-            $sql = "UPDATE explosion_materiales_pedidos_registro SET cantidad = :cantidad 
+            $sql = "UPDATE plan_pedidos SET cantidad = :cantidad 
                     WHERE pedido = :pedido AND id_producto = :id_producto";
             $query = $connection->prepare($sql);
             $query->execute([
@@ -119,7 +119,7 @@ class PreBatchDao
             $fecha_dtco = date_format($date, "Y-m-d");
             // $fecha_dtco = date_format($dataPedidos['fecha_dcto'], 'Y-m-d');
 
-            $sql = "INSERT INTO explosion_materiales_pedidos_registro (pedido, id_producto, cant_original, cantidad, fecha_pedido) 
+            $sql = "INSERT INTO plan_pedidos (pedido, id_producto, cant_original, cantidad, fecha_pedido) 
                     VALUES(:pedido, :id_producto, :cant_original, :cantidad, :fecha_pedido)";
             $query = $connection->prepare($sql);
             $query->execute([
@@ -137,7 +137,7 @@ class PreBatchDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $stmt = $connection->prepare("UPDATE explosion_materiales_pedidos_registro 
+        $stmt = $connection->prepare("UPDATE plan_pedidos 
                                       SET flag_estado = 0 
                                       WHERE pedido = :pedido AND id_producto = :id_producto");
         $stmt->execute(['pedido' => $pedido, 'id_producto' => $producto]);

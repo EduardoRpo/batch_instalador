@@ -6,7 +6,7 @@ use BatchRecord\Constants\Constants;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger;
 
-class ExplosionMaterialesPedidosRegistroDao
+class PlanPedidosDao
 {
     private $logger;
 
@@ -20,7 +20,7 @@ class ExplosionMaterialesPedidosRegistroDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $stmt = $connection->prepare("UPDATE explosion_materiales_pedidos_registro SET estado = 0
+        $stmt = $connection->prepare("UPDATE plan_pedidos SET estado = 0
                                       WHERE estado >= 1 AND fecha_actual < CURRENT_DATE()");
         $stmt->execute();
     }
@@ -32,7 +32,7 @@ class ExplosionMaterialesPedidosRegistroDao
         $fecha_actual = date("Y-m-d");
 
         foreach ($dataPedidos as $dataPedido) {
-            $stmt = $connection->prepare("UPDATE explosion_materiales_pedidos_registro 
+            $stmt = $connection->prepare("UPDATE plan_pedidos 
                                           SET cantidad_acumulada = cantidad_acumulada + :cantidad_acumulada, fecha_insumo = :fecha_insumo, fecha_actual = :fecha_actual, estado = 1 
                                           WHERE pedido = :pedido AND id_producto = :referencia");
             $stmt->execute([
@@ -67,7 +67,7 @@ class ExplosionMaterialesPedidosRegistroDao
 
         $fecha_actual = date("Y-m-d");
 
-        $stmt = $connection->prepare("UPDATE explosion_materiales_pedidos_registro 
+        $stmt = $connection->prepare("UPDATE plan_pedidos 
                                       SET estado = 2, fecha_actual = :fecha_actual
                                       WHERE pedido = :pedido AND id_producto = :referencia");
         $stmt->execute([

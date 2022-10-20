@@ -143,14 +143,17 @@ include_once("modal/m_observaciones.php");
                   </li>
                 <?php  } ?>
                 <li class="nav-item">
-                  <a class="nav-link" id="two-tab" data-toggle="tab" href="#two" role="tab" aria-controls="Two" aria-selected="false">Inactivos</a>
+                  <a class="nav-link" id="two-tab" data-toggle="tab" href="#two" role="tab" aria-controls="Two" aria-selected="false">Pre Planeación</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link active" id="three-tab" data-toggle="tab" href="#three" role="tab" aria-controls="Three" aria-selected="true">Abiertos</a>
+                  <a class="nav-link" id="three-tab" data-toggle="tab" href="#three" role="tab" aria-controls="Three" aria-selected="false">Inactivos</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" id="four-tab" data-toggle="tab" href="#four" role="tab" aria-controls="Four" aria-selected="true">Abiertos</a>
                 </li>
                 <?php if ($_SESSION['rol'] != 6) {  ?>
                   <li class="nav-item">
-                    <a class="nav-link" id="four-tab" data-toggle="tab" href="#four" role="tab" aria-controls="Four" aria-selected="false">Cerrados</a>
+                    <a class="nav-link" id="five-tab" data-toggle="tab" href="#five" role="tab" aria-controls="Five" aria-selected="false">Cerrados</a>
                   </li>
                 <?php  } ?>
                 <div style="display:grid;justify-content:end;font-size:x-large;margin-left:auto" class="mr-3">
@@ -195,6 +198,20 @@ include_once("modal/m_observaciones.php");
                     <div class="card">
                       <div class="card-block">
                         <div class="table-responsive">
+                          <table class="table table-striped table-bordered " id="tablaPrePlaneacion" name="tablaPrePlaneacion">
+
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tab-pane fade mt-3" id="three" role="tabpanel" aria-labelledby="three-tab">
+                  <div class="col-md-12 align-self-right">
+                    <div class="card">
+                      <div class="card-block">
+                        <div class="table-responsive">
                           <table class="table table-striped table-bordered " id="tablaBatchInactivos" name="tablaBatchInactivos">
 
                           </table>
@@ -204,7 +221,7 @@ include_once("modal/m_observaciones.php");
                   </div>
                 </div>
 
-                <div class="tab-pane fade show active mt-3" id="three" role="tabpanel" aria-labelledby="three-tab">
+                <div class="tab-pane fade show active mt-3" id="four" role="tabpanel" aria-labelledby="four-tab">
                   <div class="col-md-12 align-self-right">
                     <div class="card">
                       <div class="card-block">
@@ -218,7 +235,7 @@ include_once("modal/m_observaciones.php");
                   </div>
                 </div>
 
-                <div class="tab-pane fade mt-3" id="four" role="tabpanel" aria-labelledby="four-tab">
+                <div class="tab-pane fade mt-3" id="five" role="tabpanel" aria-labelledby="five-tab">
                   <div class="col-md-12 align-self-right">
                     <div class="card">
                       <div class="card-block">
@@ -248,6 +265,7 @@ include_once("modal/m_observaciones.php");
     <script src="/html/js/batch/tables/tableBatchEliminados.js"></script>
     <script src="/html/js/batch/tables/tableBatchInactivos.js"></script>
     <script src="/html/js/batch/tables/tableBatchPlaneacion.js"></script>
+    <!-- <script src="/html/js/batch/tables/tableBatchPrePlaneacion.js"></script> -->
     <script src="/html/js/batch/tables/batcheliminados.js"></script>
 
     <script src="/html/js/batch/calc/calcularLote.js"></script>

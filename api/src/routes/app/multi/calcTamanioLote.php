@@ -4,7 +4,7 @@ error_reporting(0);
 use BatchRecord\dao\MultiDao;
 use BatchRecord\dao\calcTamanioMultiDao;
 use BatchRecord\dao\ProductsDao;
-use BatchRecord\dao\ExplosionMaterialesPedidosRegistroDao;
+use BatchRecord\dao\PlanPedidosDao;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -12,7 +12,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 $multiDao = new MultiDao();
 $calcTamanioMultiDao = new calcTamanioMultiDao();
 $productsDao = new ProductsDao();
-$EMPRegistroDao = new ExplosionMaterialesPedidosRegistroDao();
+$EMPRegistroDao = new PlanPedidosDao();
 
 $app->post('/calcTamanioLote', function (Request $request, Response $response, $args) use ($multiDao, $calcTamanioMultiDao, $productsDao, $EMPRegistroDao) {
   $dataPedidos = $request->getParsedBody();
