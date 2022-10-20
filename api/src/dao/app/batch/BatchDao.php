@@ -77,21 +77,21 @@ class BatchDao extends estadoInicialDao
         $connection = Connection::getInstance()->getConnection();
         /* Se agrego la tabla `observaciones_batch_inactivos`*/
         /* $stmt = $connection->prepare("SELECT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, pc.nombre as presentacion_comercial, batch.numero_lote, batch.tamano_lote, propietario.nombre, batch.fecha_creacion, 
-                                             batch.fecha_actual, WEEK(batch.fecha_creacion) AS semanas, batch.fecha_programacion, batch.estado, batch.multi, IFNULL(exp.fecha_insumo, '0000-00-00') AS fecha_insumo
+                                             batch.fecha_actual, WEEK(batch.fecha_creacion) AS semanas, batch.fecha_programacion, batch.estado, batch.multi, IFNULL(plan_pedidos.fecha_insumo, '0000-00-00') AS fecha_insumo
                                       FROM batch 
                                       INNER JOIN producto ON batch.id_producto = producto.referencia
                                       INNER JOIN propietario  ON producto.id_propietario = propietario.id
                                       INNER JOIN presentacion_comercial pc ON producto.presentacion_comercial = pc.id
-                                      LEFT JOIN plan_pedidos exp ON exp.id_producto = producto.referencia
+                                      LEFT JOIN plan_pedidos exp ON plan_pedidos.id_producto = producto.referencia
                                       WHERE batch.estado BETWEEN 1 AND 2;");*/
         $stmt = $connection->prepare("SELECT DISTINCT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, pc.nombre as presentacion_comercial, batch.numero_lote, batch.tamano_lote, propietario.nombre, batch.fecha_creacion, 
-                                             batch.fecha_actual, WEEK(batch.fecha_creacion) AS semanas, batch.fecha_programacion, batch.estado, batch.multi, IFNULL(exp.fecha_insumo, '0000-00-00') AS fecha_insumo, obi.fecha_registro,
+                                             batch.fecha_actual, WEEK(batch.fecha_creacion) AS semanas, batch.fecha_programacion, batch.estado, batch.multi, IFNULL(plan_pedidos.fecha_insumo, '0000-00-00') AS fecha_insumo, obi.fecha_registro,
                                              (SELECT COUNT(*) FROM observaciones_batch_inactivos WHERE batch = batch.id_batch) AS cant_observations
                                       FROM batch 
                                       INNER JOIN producto ON batch.id_producto = producto.referencia
                                       INNER JOIN propietario  ON producto.id_propietario = propietario.id
                                       INNER JOIN presentacion_comercial pc ON producto.presentacion_comercial = pc.id
-                                      LEFT JOIN plan_pedidos exp ON exp.id_producto = producto.referencia
+                                      LEFT JOIN plan_pedidos ON plan_pedidos.id_producto = producto.referencia
                                       LEFT JOIN observaciones_batch_inactivos obi ON obi.batch = batch.id_batch
                                       WHERE batch.estado BETWEEN 1 AND 2 ORDER BY `batch`.`id_batch` DESC");
         $stmt->execute();
@@ -134,7 +134,7 @@ class BatchDao extends estadoInicialDao
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("SELECT b.id_batch, b.pedido, p.referencia, p.nombre_referencia, pc.nombre AS presentacion, m.nombre AS marca, 
                                             ns.nombre AS notificacion_sanitaria, p.unidad_empaque, pp.nombre as propietario, b.numero_orden, b.tamano_lote, b.numero_lote, 
-                                            b.unidad_lote, l.nombre as linea, l.densidad, p.densidad_producto, b.fecha_programacion, b.estado, p.img, DATE_ADD(exp.fecha_insumo, INTERVAL 8 DAY) AS fecha_insumo , 
+                                            b.unidad_lote, l.nombre as linea, l.densidad, p.densidad_producto, b.fecha_programacion, b.estado, p.img, DATE_ADD(plan_pedidos.fecha_insumo, INTERVAL 8 DAY) AS fecha_insumo , 
                                             IFNULL(bt.tanque,0) AS tanque, IFNULL(bt.cantidad,0) AS cantidad
                                       FROM batch b
                                         INNER JOIN producto p ON p.referencia = b.id_producto
@@ -144,7 +144,7 @@ class BatchDao extends estadoInicialDao
                                         INNER JOIN propietario pp ON pp.id = p.id_propietario 
                                         INNER JOIN marca m ON m.id = p.id_marca
                                         INNER JOIN notificacion_sanitaria ns ON ns.id = p.id_notificacion_sanitaria
-                                        LEFT JOIN plan_pedidos exp ON exp.id_producto = mul.referencia
+                                        LEFT JOIN plan_pedidos exp ON plan_pedidos.id_producto = mul.referencia
                                         LEFT JOIN batch_tanques bt ON bt.id_batch = b.id_batch
                                       WHERE b.id_batch = :idBatch ORDER BY `exp`.`fecha_insumo` DESC LIMIT 1;");
         $stmt->execute(array('idBatch' => $id));

@@ -265,7 +265,7 @@ include_once("modal/m_observaciones.php");
     <script src="/html/js/batch/tables/tableBatchEliminados.js"></script>
     <script src="/html/js/batch/tables/tableBatchInactivos.js"></script>
     <script src="/html/js/batch/tables/tableBatchPlaneacion.js"></script>
-    <!-- <script src="/html/js/batch/tables/tableBatchPrePlaneacion.js"></script> -->
+    <script src="/html/js/batch/tables/tableBatchPrePlaneacion.js"></script>
     <script src="/html/js/batch/tables/batcheliminados.js"></script>
 
     <script src="/html/js/batch/calc/calcularLote.js"></script>

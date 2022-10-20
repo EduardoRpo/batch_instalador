@@ -87,7 +87,7 @@ sesiones(5);
                                             <th colspan="3">SM</th>
                                             <th rowspan="2">Total Kg</th>
                                         </tr>
-                                        <tr>
+                                        <tr style="width:10%;">
                                             <th>T1</th>
                                             <th>T2</th>
                                             <th>T3</th>
