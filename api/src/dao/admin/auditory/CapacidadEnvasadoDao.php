@@ -20,7 +20,7 @@ class CapacidadEnvasadoDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $stmt = $connection->prepare("SELECT ce.id_capacidad_envasado, l.nombre, ce.turno_1, ce.turno_2, ce.turno_3, (ce.turno_1 + ce.turno_2 + ce.turno_3) AS total_capacidad
+        $stmt = $connection->prepare("SELECT ce.id_capacidad_envasado, ce.semana, l.nombre, ce.turno_1, ce.turno_2, ce.turno_3, (ce.turno_1 + ce.turno_2 + ce.turno_3) AS total_capacidad
                                       FROM capacidad_envasado ce
                                       INNER JOIN linea l ON l.id = ce.id_linea");
         $stmt->execute();
@@ -34,12 +34,12 @@ class CapacidadEnvasadoDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $stmt = $connection->prepare("SELECT ce.id_envasado, l.nombre, ce.turno_1, ce.turno_2, ce.turno_3
+        $stmt = $connection->prepare("SELECT ce.id_capacidad_envasado, ce.semana, l.nombre, ce.turno_1, ce.turno_2, ce.turno_3
                                       FROM capacidad_envasado ce
                                       INNER JOIN linea l ON l.id = ce.id_linea
-                                      WHERE ce.id_envasado = :id_envasado");
+                                      WHERE ce.id_capacidad_envasado = :id_capacidad_envasado");
         $stmt->execute([
-            'id_envasado' => $dataEnvasado['idEnvasado']
+            'id_capacidad_envasado' => $dataEnvasado['idEnvasado']
         ]);
 
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
@@ -51,10 +51,11 @@ class CapacidadEnvasadoDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $stmt = $connection->prepare("UPDATE capacidad_envasado SET turno_1 = :turno_1, turno_2 = :turno_2, turno_3 = :turno_3
-                                      WHERE id_capacidad_envasado = :id_envasado");
+        $stmt = $connection->prepare("UPDATE capacidad_envasado SET semana = :semana, turno_1 = :turno_1, turno_2 = :turno_2, turno_3 = :turno_3
+                                      WHERE id_capacidad_envasado = :id_capacidad_envasado");
         $stmt->execute([
-            'id_envasado' => $dataEnvasado['idEnvasado'],
+            'id_capacidad_envasado' => $dataEnvasado['idEnvasado'],
+            'semana' => $dataEnvasado['semana'],
             'turno_1' => $dataEnvasado['turno1'],
             'turno_2' => $dataEnvasado['turno2'],
             'turno_3' => $dataEnvasado['turno3']

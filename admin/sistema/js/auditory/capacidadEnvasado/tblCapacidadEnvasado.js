@@ -20,6 +20,11 @@ $(document).ready(function () {
         },
       },
       {
+        title: 'Semana',
+        data: 'semana',
+        className: 'text-center',
+      },
+      {
         title: 'Linea',
         data: 'nombre',
       },

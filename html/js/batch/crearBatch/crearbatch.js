@@ -1,34 +1,31 @@
 let tnq = 1;
 let total = 0;
 let addtnq = 1;
-let products
+let products;
 
-$(document).ready(function() {
+$(document).ready(function () {
+  /* Mostrar Modal y Ocultar select referencias */
 
-    /* Mostrar Modal y Ocultar select referencias */
+  mostrarModal = () => {
+    $('#referencia').css('display', 'none');
+    $('#cmbNoReferencia').css('display', 'block');
+    $('#modalCrearBatch').find('input,textarea,select').val('');
+    $('#guardarBatch').html('Crear');
+    $('.tcrearBatch').html('Crear Batch Record');
 
-    mostrarModal = () => {
-        $("#referencia").css("display", "none");
-        $("#cmbNoReferencia").css("display", "block");
-        $("#modalCrearBatch").find("input,textarea,select").val("");
-        $("#guardarBatch").html("Crear");
-        $(".tcrearBatch").html("Crear Batch Record");
+    $('#inpNombreReferencia').hide();
+    $('#nombrereferencia').show();
+    $('#calcTamanioLote').show();
+    $('#pedido').prop('disabled', false);
 
-        $('#inpNombreReferencia').hide();
-        $('#nombrereferencia').show();
-        $('#calcTamanioLote').show();
-        $('#pedido').prop('disabled', false);
+    data = '';
+    cargarNombresReferencias();
+    cargarTanques();
+  };
 
-        data = "";
-        cargarNombresReferencias();
-        cargarTanques();
-    }
+  /* Llenar el selector de referencias al crear Batch */
 
-
-
-    /* Llenar el selector de referencias al crear Batch */
-
-    /* function cargarReferencias() {
+  /* function cargarReferencias() {
         $.ajax({
             type: "POST",
             url: "php/listarBatch.php",
@@ -52,53 +49,49 @@ $(document).ready(function() {
         });
     } */
 
+  /* Llenar campos de producto de acuerdo con la referencia del producto */
 
-
-    /* Llenar campos de producto de acuerdo con la referencia del producto */
-
-    $(document).ready(function() {
-        $("#cmbNoReferencia").change(function() {
-            nameRef = this.value
-            $('#nombrereferencia').val(nameRef);
-            recargarDatos();
-        });
-
-        $("#nombrereferencia").change(function() {
-            ref = this.value
-            $('#cmbNoReferencia').val(ref);
-            recargarDatos();
-        });
+  $(document).ready(function () {
+    $('#cmbNoReferencia').change(function () {
+      nameRef = this.value;
+      $('#nombrereferencia').val(nameRef);
+      recargarDatos();
     });
 
-    recargarDatos = () => {
+    $('#nombrereferencia').change(function () {
+      ref = this.value;
+      $('#cmbNoReferencia').val(ref);
+      recargarDatos();
+    });
+  });
 
-        ref = $('#nombrereferencia').val();
+  recargarDatos = () => {
+    ref = $('#nombrereferencia').val();
 
-        for (let i = 0; i < products.length; i++) {
-            if (products[i].referencia == ref) {
-                $("#idbatch").val(products[i].referencia);
-                $("#marca").val(products[i].marca);
-                $("#notificacionSanitaria").val(products[i].notificacion_sanitaria);
-                $("#propietario").val(products[i].propietario);
-                $("#producto").val(products[i].producto);
-                $("#presentacioncomercial").val(products[i].presentacion_comercial);
-                $("#linea").val(products[i].linea);
-                $("#densidad_producto").val(products[i].densidad_producto);
-                $("#ajuste").val(products[i].ajuste);
-            }
-        }
-
+    for (let i = 0; i < products.length; i++) {
+      if (products[i].referencia == ref) {
+        $('#idbatch').val(products[i].referencia);
+        $('#marca').val(products[i].marca);
+        $('#notificacionSanitaria').val(products[i].notificacion_sanitaria);
+        $('#propietario').val(products[i].propietario);
+        $('#producto').val(products[i].producto);
+        $('#presentacioncomercial').val(products[i].presentacion_comercial);
+        $('#linea').val(products[i].linea);
+        $('#densidad_producto').val(products[i].densidad_producto);
+        $('#ajuste').val(products[i].ajuste);
+      }
     }
+  };
 
-    $(document).on('click', '#calcTamanioLote', function(e) {
-        e.preventDefault();
-        ref = $('#cmbNoReferencia').val();
-        validarMulti(ref)
-    });
+  $(document).on('click', '#calcTamanioLote', function (e) {
+    e.preventDefault();
+    ref = $('#cmbNoReferencia').val();
+    validarMulti(ref);
+  });
 
-    /* Adicionar referencia para crear multipresentacion en un batch*/
+  /* Adicionar referencia para crear multipresentacion en un batch*/
 
-    /* $("#adicionarCantidades").on("click", function() {
+  /* $("#adicionarCantidades").on("click", function() {
         debugger
         objetos = $(".multi").length;
         !objetos ? (index = 1) : index++;
@@ -114,7 +107,7 @@ $(document).ready(function() {
         }
     }); */
 
-    /* function recargarDatos() {
+  /* function recargarDatos() {
         var combo = document.getElementById("cmbNoReferencia");
         var sel = combo.options[combo.selectedIndex].text;
         
@@ -140,9 +133,9 @@ $(document).ready(function() {
         });
     } */
 
-    /* calcular Tamaño del Lote */
+  /* calcular Tamaño del Lote */
 
-    /* function CalculoTamanolote(valor) {
+  /* function CalculoTamanolote(valor) {
         var total = 0;
         unidades = parseInt(valor);
         densidad_producto = $("#densidad_producto").val();
@@ -172,64 +165,62 @@ $(document).ready(function() {
         $("#tamanototallote").val(total1);
     } */
 
-    /* Limpiar datos al cambiar referencia en el modal de crear Batch */
+  /* Limpiar datos al cambiar referencia en el modal de crear Batch */
 
-    $("#cmbNoReferencia").change(function() {
-        $("#tamanototallote").val("");
-        $("#unidadesxlote").val("");
-        $("#fechaprogramacion").val("");
-    });
+  $('#cmbNoReferencia').change(function () {
+    $('#tamanototallote').val('');
+    $('#unidadesxlote').val('');
+    $('#fechaprogramacion').val('');
+  });
 
+  /* Calcular el valor de los tanques */
 
-    /* Calcular el valor de los tanques */
+  $(document).on('change', '#cmbTanque1', function (e) {
+    $('#txtCantidad1').click();
+  });
 
-    $(document).on("change", "#cmbTanque1", function(e) {
-        $('#txtCantidad1').click();
+  $(document).on('click keyup', '#txtCantidad1', function (e) {
+    let tanque = parseFloat($('#cmbTanque1').val());
+    let tamanioTanque = parseFloat($('#txtCantidad1').val());
 
-    });
+    if (tamanioTanque < 0 || tamanioTanque == '') {
+      alertify.set('notifier', 'position', 'top-right');
+      alertify.error('Ingrese la cantidad de Tanques');
+      return false;
+    }
 
-    $(document).on("click keyup", "#txtCantidad1", function(e) {
-        let tanque = parseFloat($('#cmbTanque1').val());
-        let tamanioTanque = parseFloat($('#txtCantidad1').val());
+    if (tanque == null || isNaN(tanque)) {
+      alertify.set('notifier', 'position', 'top-right');
+      alertify.error('Seleccione el tamaño del tanque');
+      return false;
+    }
 
-        if (tamanioTanque < 0 || tamanioTanque == '') {
-            alertify.set("notifier", "position", "top-right");
-            alertify.error("Ingrese la cantidad de Tanques");
-            return false
-        }
+    let cantidadLote = parseFloat($('#tamanototallote').val());
 
-        if (tanque == null || isNaN(tanque)) {
-            alertify.set("notifier", "position", "top-right");
-            alertify.error("Seleccione el tamaño del tanque");
-            return false
-        }
+    if (isNaN(cantidadLote)) {
+      $('#tamanototallote').val('');
+      alertify.set('notifier', 'position', 'top-right');
+      alertify.error('Calcule el tamaño del lote');
+      return false;
+    }
 
-        let cantidadLote = parseFloat($("#tamanototallote").val());
+    tamanioTotalTanque = tanque * tamanioTanque;
 
-        if (isNaN(cantidadLote)) {
-            $("#tamanototallote").val('')
-            alertify.set("notifier", "position", "top-right");
-            alertify.error("Calcule el tamaño del lote");
-            return false
-        }
+    if (tamanioTotalTanque <= cantidadLote) {
+      alertify.set('notifier', 'position', 'top-right');
+      alertify.error(
+        'La configuración de Tanques No supera el Tamaño del lote'
+      );
+      $('#sumaTanques').val('');
+      $('#txtTotal1').val('');
+      return false;
+    } else {
+      $('#sumaTanques').val(tamanioTotalTanque);
+      $('#txtTotal1').val(tamanioTotalTanque);
+    }
+  });
 
-        tamanioTotalTanque = tanque * tamanioTanque
-
-        if (tamanioTotalTanque <= cantidadLote) {
-            alertify.set("notifier", "position", "top-right");
-            alertify.error("La configuración de Tanques No supera el Tamaño del lote");
-            $("#sumaTanques").val('');
-            $("#txtTotal1").val('');
-            return false;
-        } else {
-            $("#sumaTanques").val(tamanioTotalTanque);
-            $("#txtTotal1").val(tamanioTotalTanque);
-        }
-    });
-
-
-
-    /* function validarTanque(id) {
+  /* function validarTanque(id) {
         const cant = $("#txtCantidad" + id).val();
         
         if (cant != "") {
@@ -283,8 +274,9 @@ $(document).ready(function() {
         }
     } */
 
-    cerrarModal = () => {
-        $("#modalCrearBatch").modal("hide");
-        $("#Modal_Multipresentacion").modal("hide");
-    }
+  cerrarModal = () => {
+    $('#modalCrearBatch').modal('hide');
+    $('#Modal_Multipresentacion').modal('hide');
+    $('#m_observaciones').modal('hide');
+  };
 });

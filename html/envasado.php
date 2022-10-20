@@ -1,6 +1,8 @@
 <?php
 require_once('./html/sesiones/sesion.php');
 include('modal/modal_cambiarContrasena.php');
+include_once("modal/modal_multipresentacion.php");
+include_once("modal/m_observaciones.php");
 sesiones(5);
 ?>
 
@@ -19,10 +21,32 @@ sesiones(5);
   <link href="../assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="html/css/style.css" rel="stylesheet">
   <link href="html/css/colors/blue.css" id="theme" rel="stylesheet">
+  <link rel="stylesheet" href="/html/css/custom.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" type="text/css" href="html/vendor/datatables/datatables.min.css">
   <link rel="stylesheet" type="text/css" href="html/vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css">
 
+  <!-- Alertify -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css" />
+
+  <style>
+    .payment-of-tax table tr th {
+      text-align: center;
+      vertical-align: middle;
+      border: 1px solid #f2f2f2;
+      ;
+
+    }
+
+    .payment-of-tax table tr td {
+      text-align: center;
+      vertical-align: middle;
+      border: 1px solid #f2f2f2;
+      ;
+
+    }
+  </style>
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">
@@ -82,7 +106,15 @@ sesiones(5);
   <script src="html/js/utils/custom.min.js"></script>
   <script src="html/js/utils/datatables.js"></script>
   <script src="../assets/plugins/jquery/jquery.number.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+
+  <script src="/html/js/global/searchData.js"></script>
   <script src="html/js/envasado/envasado.js"></script>
+  <script src="/html/js/global/link-comentario.js"></script>
+
+  <script src="/html/js/batch/multipresentacion/updateMulti.js"></script>
+  <script src="/html/js/batch/multipresentacion/addMulti.js"></script>
+  <script src="/html/js/batch/multipresentacion/deleteMulti.js"></script>
 
 </body>
 

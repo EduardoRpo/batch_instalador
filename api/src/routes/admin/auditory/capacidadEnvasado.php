@@ -16,7 +16,10 @@ $app->get('/capacidadEnvasado', function (Request $request, Response $response, 
 $app->post('/updateCapacidadEnvasado', function (Request $request, Response $response, $args) use ($capacidadEnvasadoDao) {
     $dataEnvasado = $request->getParsedBody();
 
-    if (empty($dataEnvasado['idEnvasado']) || empty($dataEnvasado['turno1']) || empty($dataEnvasado['turno2']) || empty($dataEnvasado['turno3']))
+    if (
+        empty($dataEnvasado['idEnvasado']) || empty($dataEnvasado['semana']) || empty($dataEnvasado['turno1']) ||
+        empty($dataEnvasado['turno2']) || empty($dataEnvasado['turno3'])
+    )
         $resp = array('error' => true, 'message' => 'Ingrese todos los campos');
     else {
         $envasado = $capacidadEnvasadoDao->updateCapacidadEnvasado($dataEnvasado);

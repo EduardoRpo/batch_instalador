@@ -93,7 +93,8 @@ class BatchLineaDao
   public function findBatchEnvasado()
   {
     $connection = Connection::getInstance()->getConnection();
-    $stmt = $connection->prepare("SELECT batch.id_batch, date_add(batch.fecha_programacion, interval 3 day) AS fecha_programacion, batch.numero_orden, batch.numero_orden, p.referencia, p.nombre_referencia, p.nombre_referencia, batch.numero_lote, batch.unidad_lote, batch.estado, batch.multi, bcf.cantidad_firmas, bcf.total_firmas, batch.programacion_envasado 
+    $stmt = $connection->prepare("SELECT batch.id_batch, date_add(batch.fecha_programacion, interval 3 day) AS fecha_programacion, batch.numero_orden, batch.numero_orden, p.referencia, p.nombre_referencia, batch.numero_lote, batch.estado, batch.multi, bcf.cantidad_firmas, bcf.total_firmas, batch.programacion_envasado,
+                                         (SELECT COUNT(id) FROM observaciones WHERE id_batch = batch.id_batch) AS cant_observations
                                   FROM batch 
                                     INNER JOIN producto p ON p.referencia = batch.id_producto 
                                     INNER JOIN batch_control_firmas bcf ON batch.id_batch = bcf.batch 
@@ -111,7 +112,8 @@ class BatchLineaDao
   {
     $connection = Connection::getInstance()->getConnection();
 
-    $stmt = $connection->prepare("SELECT batch.id_batch, batch.programacion_envasado, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, producto.nombre_referencia, batch.numero_lote, batch.unidad_lote, batch.estado, batch.multi, bcf.cantidad_firmas, bcf.total_firmas 
+    $stmt = $connection->prepare("SELECT batch.id_batch, batch.programacion_envasado, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, producto.nombre_referencia, batch.numero_lote, batch.estado, batch.multi, bcf.cantidad_firmas, bcf.total_firmas, 
+                                          (SELECT COUNT(id) FROM observaciones WHERE id_batch = batch.id_batch) AS cant_observations
                                   FROM batch 
                                   INNER JOIN producto ON producto.referencia = batch.id_producto 
                                   INNER JOIN batch_control_firmas bcf ON batch.id_batch = bcf.batch 
