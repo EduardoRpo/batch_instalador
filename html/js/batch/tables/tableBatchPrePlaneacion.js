@@ -1,9 +1,9 @@
 $(document).ready(function () {
-  tableBatchPrePlaneacion = $('#tableBatchPrePlaneacion').DataTable({
+  tableBatchPrePlaneacion = $('#tablaPrePlaneacion').DataTable({
     destroy: true,
     pageLength: 50,
     ajax: {
-      //   url: `/api/preBatch`,
+      url: '/api/prePlaneados',
       dataSrc: '',
     },
     language: {
@@ -11,19 +11,19 @@ $(document).ready(function () {
     },
     columns: [
       {
+        width: '350px',
         title: 'Propietario',
         data: 'propietario',
-        // visible: false,
+        visible: false,
       },
       {
         title: 'Pedido',
         data: 'pedido',
         className: 'text-center',
-        // visible: false,
       },
       {
-        title: 'F_Pedido',
-        data: 'fecha_pedido',
+        title: 'F_Programacion',
+        data: 'fecha_programacion',
         className: 'text-center',
       },
       {
@@ -36,83 +36,55 @@ $(document).ready(function () {
         data: 'id_producto',
         className: 'text-center',
       },
+      // {
+      //   data: null,
+      //   className: 'uniqueClassName',
+      //   render: function (data) {
+      //     return `
+      //     <i class="badge badge-danger badge-pill notify-icon-badge ml-3">${data.cant_observations}</i><br>
+      //     <a href='#' <i class="fa fa-file-text fa-1x link-comentario" id=${data.id_batch} aria-hidden="true" data-toggle="tooltip" title="adicionar observaciones" style="color:rgb(59, 131, 189)" aria-hidden="true"></i></a>
+      //     `;
+      //   },
+      // },
       {
-        data: null,
-        className: 'uniqueClassName',
-        render: function (data) {
-          return `
-            <i class="badge badge-danger badge-pill notify-icon-badge ml-3">${data.cant_observations}</i><br>
-            <a href='#' <i class="fa fa-file-text fa-1x link-comentario" id=${data.id_batch} aria-hidden="true" data-toggle="tooltip" title="adicionar observaciones" style="color:rgb(59, 131, 189)" aria-hidden="true"></i></a>
-          `;
-        },
-      },
-      {
+        width: '350px',
         title: 'Producto',
         data: 'nombre_referencia',
+        className: 'uniqueClassName',
       },
-      //   {
-      //     title: 'Cant_Original',
-      //     data: 'cant_original',
-      //     className: 'text-center',
-      //     visible: false,
-      //     render: $.fn.dataTable.render.number('.', ',', 0, ' '),
-      //   },
-      //   {
-      //     title: 'Saldo Ofima',
-      //     data: 'cantidad',
-      //     className: 'text-center',
-      //     render: $.fn.dataTable.render.number('.', ',', 0, ' '),
-      //   },
-      //   {
-      //     title: 'Acum Prog',
-      //     data: 'cantidad_acumulada',
-      //     className: 'text-center',
-      //     render: $.fn.dataTable.render.number('.', ',', 0, ' '),
-      //   },
       {
-        title: 'Cant_Programar',
-        data: null,
-        render: function (data) {
-          return `
-              <input type="text" class="cantProgram form-control-updated text-center" id="cant-${data.pedido}-${data.id_producto}" />`;
-        },
+        title: 'Unidad Lote',
+        data: 'unidad_lote',
+        className: 'text-center',
       },
-      //   {
-      //     title: 'Recep_Insumos (1)',
-      //     data: null,
-      //     render: function (data) {
-      //       return `
-      //           <input type="date" class="dateInsumos form-control-updated text-center" id="date-${data.pedido}-${data.id_producto}" value="${data.fecha_insumo}" max="${data.fecha_actual}"/>`;
-      //     },
-      //   },
-      //   {
-      //     title: 'Fecha Pesaje (8)',
-      //     data: null,
-      //     render: function (data) {
-      //       return ` <p class ="text-center" id = "pesaje-${data.pedido}-${data.id_producto}">${data.fecha_pesaje}</p>`;
-      //     },
-      //   },
-      //   {
-      //     title: 'Fecha Preparacion (9)',
-      //     data: null,
-      //     render: function (data) {
-      //       return ` <p class ="text-center" id = "preparacion-${data.pedido}-${data.id_producto}">${data.fecha_preparacion}</p>`;
-      //     },
-      //   },
-      //   {
-      //     title: 'Fecha Envasado (12)',
-      //     data: null,
-      //     render: function (data) {
-      //       return ` <p class ="text-center" id = "envasado-${data.pedido}-${data.id_producto}">${data.envasado}</p>`;
-      //     },
-      //   },
-      //   {
-      //     title: 'Fecha Entrega (15)',
-      //     data: null,
-      //     render: function (data) {
-      //       return ` <p class ="text-center" id = "entrega-${data.pedido}-${data.id_producto}">${data.entrega}</p>`;
-      //     },
-      //   },
+      {
+        title: 'Simulación',
+        data: 'sim',
+        className: 'text-center',
+      },
     ],
+    rowGroup: {
+      dataSrc: 'propietario',
+      startRender: function (rows, group) {
+        return $('<tr/>').append(
+          '<th class="text-center" colspan="7" style="font-weight: bold;">' +
+            group +
+            '</th>'
+        );
+      },
+      className: 'odd',
+    },
+  });
+
+  $(document).on('click', '.toggle-vis-pre', function (e) {
+    e.preventDefault();
+    column = tableBatchPrePlaneacion.column(this.id);
+    column.visible(!column.visible());
+  });
+
+  /* Cargar tipo de simulación */
+  $('#tipoSimulacion').change(function (e) {
+    e.preventDefault();
+    tableBatchPrePlaneacion.column(7).search(this.value).draw();
   });
 });

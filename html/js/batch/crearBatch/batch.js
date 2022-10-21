@@ -36,6 +36,10 @@ $(document).on('click', '#tablaPreBatch tbody tr', function () {
   fila = tablaPreBatch.row(this).data();
 });
 
+$(document).on('click', '#tablaPrePlaneacion tbody tr', function () {
+  fila = tableBatchPrePlaneacion.row(this).data();
+});
+
 $(document).on('click', '#tablaBatchInactivos tbody tr', function () {
   data = tablaBatchInactivos.row(this).data();
 });
@@ -296,5 +300,8 @@ $(document).ready(function () {
 
     $('#tablaPreBatch').DataTable().clear();
     $('#tablaPreBatch').DataTable().ajax.reload();
+
+    $('#tablaPrePlaneacion').DataTable().clear();
+    $('#tablaPrePlaneacion').DataTable().ajax.reload();
   };
 });

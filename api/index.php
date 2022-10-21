@@ -126,6 +126,7 @@ require_once __DIR__ . '/src/routes/app/programacion_envasado/programacion_envas
 //Explosion de Materiales
 require_once __DIR__ . '/src/routes/app/explosionMateriales/explosion_materiales.php';
 require_once __DIR__ . '/src/routes/app/explosionMateriales/pedidos.php';
+require_once __DIR__ . '/src/routes/app/explosionMateriales/planPrePlaneados.php';
 
 /* pdf */
 require_once __DIR__ . '/src/routes/app/pdf/pdf.php';

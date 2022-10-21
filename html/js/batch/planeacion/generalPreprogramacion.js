@@ -1,5 +1,7 @@
 $(document).ready(function () {
   alertConfirm = (data) => {
+    countPrePlaneados = data.countPrePlaneados;
+
     alertify
       .confirm(
         'Samara Cosmetics',
@@ -14,7 +16,7 @@ $(document).ready(function () {
                   </tr>
                 </thead>
                 <tbody>
-                  ${(row = addRows(data))}
+                  ${(row = addRows(data.pedidosLotes))}
                 </tbody>
             </table><br>`,
         function () {
@@ -76,18 +78,16 @@ $(document).ready(function () {
             return false;
           }
 
-          date = JSON.stringify(value);
-          $.ajax({
-            type: 'POST',
-            url: '/api/saveBatch',
-            data: { date: date },
-            success: function (data) {
-              message(data);
+          dataPrePlaneados = {};
 
-              pedidosProgramar.splice(0, pedidosProgramar.length);
-              deleteSession();
-            },
-          });
+          dataPrePlaneados.date = value;
+
+          if (countPrePlaneados == 0) {
+            dataPrePlaneados.simulacion = 1;
+            savePrePlaneados(dataPrePlaneados);
+          } else {
+            alertSimulacion();
+          }
         },
         function () {
           deleteSession();
@@ -95,6 +95,52 @@ $(document).ready(function () {
       )
       .set('type', 'date')
       .set({ closableByDimmer: false });
+  };
+
+  // Seleccionar tipo de simulación
+  alertSimulacion = () => {
+    alertify
+      .confirm(
+        'Samara Cosmetics',
+        `<p>Seleccione tipo de simulación:</p><p><br></p>
+        <select id="simulacion" class="form-control">
+          <option selected disabled>Seleccionar</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+        </select>`,
+        function () {
+          val = $('#simulacion').val();
+          if (val == 0) {
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.error('Seleccione tipo de simulación');
+            return false;
+          }
+
+          dataPrePlaneados.simulacion = val;
+          savePrePlaneados(dataPrePlaneados);
+        },
+        function () {
+          deleteSession();
+        }
+      )
+      .set('labels', { ok: 'Guardar', cancel: 'Cancelar' })
+      .set({ closableByDimmer: false })
+      .set('resizable', true);
+    // .resizeTo(800, 500);
+  };
+
+  savePrePlaneados = (data) => {
+    $.ajax({
+      type: 'POST',
+      url: '/api/addPrePlaneados',
+      data: data,
+      success: function (data) {
+        message(data);
+
+        pedidosProgramar.splice(0, pedidosProgramar.length);
+        deleteSession();
+      },
+    });
   };
 
   // Opcion NO

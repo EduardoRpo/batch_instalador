@@ -7,6 +7,7 @@ $(document).ready(function () {
   /* Cargar numero de semana seleccionada */
   $('#numSemana').change(function (e) {
     e.preventDefault();
+    $('.cardSaveEnvasado').hide(800);
 
     tblCapacidadEnvasado.column(0).search(this.value).draw();
   });
@@ -17,7 +18,6 @@ $(document).ready(function () {
 
     sessionStorage.setItem('id_capacidad_envasado', id);
 
-    semana = $(this).parent().parent().children().eq(0).text();
     env = $(this).parent().parent().children().eq(1).text();
     t_1 = $(this).parent().parent().children().eq(2).text();
     t_2 = $(this).parent().parent().children().eq(3).text();
@@ -27,8 +27,6 @@ $(document).ready(function () {
     t_2 = t_2.replace('.', '');
     t_3 = t_3.replace('.', '');
 
-    // $(`#semana option[value="${semana}"]`).prop('selected', true);
-    $('#semana').val(semana);
     $('#linea').val(env);
     $('#turno1').val(t_1);
     $('#turno2').val(t_2);
@@ -48,22 +46,15 @@ $(document).ready(function () {
   $('#saveEnvasado').click(function (e) {
     e.preventDefault();
 
-    semana = $('#semana').val();
     t_1 = $('#turno1').val();
     t_2 = $('#turno2').val();
     t_3 = $('#turno3').val();
 
-    data = semana * t_1 * t_2 * t_3;
+    data = t_1 * t_2 * t_3;
 
     if (!data || data == 0) {
       alertify.set('notifier', 'position', 'top-right');
       alertify.error('ingrese todos los datos');
-      return false;
-    }
-
-    if (semana > 52 || semana < 0) {
-      alertify.set('notifier', 'position', 'top-right');
-      alertify.error('ingrese un numero de semana valido');
       return false;
     }
 

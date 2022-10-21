@@ -5,16 +5,17 @@ use BatchRecord\dao\MultiDao;
 use BatchRecord\dao\calcTamanioMultiDao;
 use BatchRecord\dao\ProductsDao;
 use BatchRecord\dao\PlanPedidosDao;
-
+use BatchRecord\dao\PlanPrePlaneadosDao;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 $multiDao = new MultiDao();
 $calcTamanioMultiDao = new calcTamanioMultiDao();
 $productsDao = new ProductsDao();
-$EMPRegistroDao = new PlanPedidosDao();
+$planPedidosDao = new PlanPedidosDao();
+$planPrePlaneadosDao = new PlanPrePlaneadosDao();
 
-$app->post('/calcTamanioLote', function (Request $request, Response $response, $args) use ($multiDao, $calcTamanioMultiDao, $productsDao, $EMPRegistroDao) {
+$app->post('/calcTamanioLote', function (Request $request, Response $response, $args) use ($multiDao, $calcTamanioMultiDao, $productsDao, $planPedidosDao, $planPrePlaneadosDao) {
   $dataPedidos = $request->getParsedBody();
   $dataPedidos = $dataPedidos['data'];
 
@@ -61,7 +62,7 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
   // Eliminar granel donde tamanio_lote sea mayor a 2500
   for ($i = 0; $i < sizeof($dataPedidosReferencias); $i++) {
     if ($dataPedidosReferencias[$i]['tamanio_lote'] > 2500) {
-      $EMPRegistroDao->checkPedidos($dataPedidosReferencias[$i]); // Cambiar estado a 2
+      $planPedidosDao->checkPedidos($dataPedidosReferencias[$i]); // Cambiar estado a 2
       // Capturar data de lotes programados, para mostrar en la ventana de calculo
       $dataPedidosLotes[$i] = $dataPedidosReferencias[$i];
       unset($dataPedidosReferencias[$i]);
@@ -106,9 +107,12 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
   //Almacenar en variables de session la variable $dataPedidosGranel
   $_SESSION['dataGranel'] = $dataPedidosGranel;
 
-  //$array = array('granel' => array_keys($sumArrayGranel), 'producto' => $producto, 'tamanio' => array_values($sumArrayGranel), 'cantidades' => array_values($sumArrayCantidades));
+  $countPrePlaneados = $planPrePlaneadosDao->findCountPrePlaneados();
 
-  $response->getBody()->write(json_encode($dataPedidosLotes, JSON_NUMERIC_CHECK));
+  $data['pedidosLotes'] = $dataPedidosLotes;
+  $data['countPrePlaneados'] = $countPrePlaneados['count'];
+
+  $response->getBody()->write(json_encode($data, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
 

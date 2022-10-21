@@ -34,6 +34,7 @@ include_once("modal/m_observaciones.php");
   <?php include('./partials/scripts.php'); ?>
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">
@@ -139,14 +140,14 @@ include_once("modal/m_observaciones.php");
               <ul class="nav nav-tabs card-header-tabs" id="batch-list" role="tablist">
                 <?php if ($_SESSION['rol'] == 6 or $_SESSION['rol'] == 1) {  ?>
                   <li class="nav-item">
-                    <a class="nav-link" id="one-tab" data-toggle="tab" href="#one" role="tab" aria-controls="One" aria-selected="false">Planeación</a>
+                    <a class="nav-link" id="one-tab" data-toggle="tab" href="#one" role="tab" aria-controls="One" aria-selected="false">Pedidos</a>
                   </li>
                 <?php  } ?>
                 <li class="nav-item">
                   <a class="nav-link" id="two-tab" data-toggle="tab" href="#two" role="tab" aria-controls="Two" aria-selected="false">Pre Planeación</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="three-tab" data-toggle="tab" href="#three" role="tab" aria-controls="Three" aria-selected="false">Inactivos</a>
+                  <a class="nav-link" id="three-tab" data-toggle="tab" href="#three" role="tab" aria-controls="Three" aria-selected="false">Planeación</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link active" id="four-tab" data-toggle="tab" href="#four" role="tab" aria-controls="Four" aria-selected="true">Abiertos</a>
@@ -180,7 +181,6 @@ include_once("modal/m_observaciones.php");
                         <button class="toggle-vis btn btn-primary hideTitle" id="9">Acum_Prog</button>
                         <button class="toggle-vis btn btn-primary hideTitle" id="10">Cant_Programar</button>
                         <button class="toggle-vis btn btn-primary" id="calcLote">Calcular Lote</button>
-
                       </div>
                       <div class="card-block">
                         <div class="table-responsive">
@@ -196,9 +196,25 @@ include_once("modal/m_observaciones.php");
                 <div class="tab-pane fade mt-3" id="two" role="tabpanel" aria-labelledby="two-tab">
                   <div class="col-md-12 align-self-right">
                     <div class="card">
+                      <div class="row justify-content-end mt-2">
+                        <div class="col-2">
+                          <label for="tipoSimulacion">Tipo Simulación</label>
+                          <select name="tipoSimulacion" id="tipoSimulacion" class="form-control text-center">
+                            <option selected disabled>Seleccionar</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                          </select>
+                        </div>
+                        <div class="col-2">
+                          <button type="button" id="btnPlanear" class="btn waves-effect waves-light btn-danger" style="width: 120px; margin-top:33px;">
+                            <strong>Planear</strong>
+                          </button>
+                        </div>
+                      </div>
+
                       <div class="card-block">
                         <div class="table-responsive">
-                          <table class="table table-striped table-bordered " id="tablaPrePlaneacion" name="tablaPrePlaneacion">
+                          <table class="table table-striped table-bordered " id="tablaPrePlaneacion" name="tablaPrePlaneacion" style="width: 100%">
 
                           </table>
                         </div>
