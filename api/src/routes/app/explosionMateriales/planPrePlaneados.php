@@ -37,3 +37,60 @@ $app->post('/addPrePlaneados', function (Request $request, Response $response, $
     $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');
 });
+
+$app->post('/updatePlaneados', function (Request $request, Response $response, $args) use ($planPrePlaneadosDao) {
+    $dataPedidos = $request->getParsedBody();
+    $dataPedidos = $dataPedidos['data'];
+
+    for ($i = 0; $i < sizeof($dataPedidos); $i++) {
+        $prePlaneados = $planPrePlaneadosDao->updatePlaneado($dataPedidos[$i]);
+    }
+
+    if ($prePlaneados == null)
+        $resp = array('success' => true, 'message' => 'Pedidos planeados correctamente');
+    else
+        $resp = array('error' => true, 'message' => 'Ocurrio un error mientras planeaba la información. Intente nuevamente');
+
+    $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
+    return $response->withHeader('Content-Type', 'application/json');
+});
+
+$app->post('/updateUnidadLote', function (Request $request, Response $response, $args) use ($planPrePlaneadosDao) {
+    $dataPedidos = $request->getParsedBody();
+
+    $prePlaneados = $planPrePlaneadosDao->updateUnidadLote($dataPedidos);
+
+    if ($prePlaneados == null)
+        $resp = array('success' => true, 'message' => 'Pedido modificado correctamente');
+    else
+        $resp = array('error' => true, 'message' => 'Ocurrio un error mientras modificaba la información. Intente nuevamente');
+
+    $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
+    return $response->withHeader('Content-Type', 'application/json');
+});
+
+$app->get('/clearPrePlaneados/{simulacion}', function (Request $request, Response $response, $args) use ($planPrePlaneadosDao) {
+    $prePlaneados = $planPrePlaneadosDao->clearPlanPrePlaneados($args['simulacion']);
+
+    if ($prePlaneados == null)
+        $resp = array('success' => true, 'message' => 'Pedidos pre planeados limpiados correctamente');
+
+    else
+        $resp = array('error' => true, 'message' => 'Ocurrio un error mientras limpiaba la información. Intente nuevamente');
+
+    $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
+    return $response->withHeader('Content-Type', 'application/json');
+});
+
+$app->get('/deletePrePlaneacion/{id}', function (Request $request, Response $response, $args) use ($planPrePlaneadosDao) {
+    $prePlaneados = $planPrePlaneadosDao->clearPlanPrePlaneados($args['id']);
+
+    if ($prePlaneados == null)
+        $resp = array('success' => true, 'message' => 'Pedido eliminado correctamente');
+
+    else
+        $resp = array('error' => true, 'message' => 'Ocurrio un error mientras eliminaba la información. Intente nuevamente');
+
+    $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
+    return $response->withHeader('Content-Type', 'application/json');
+});

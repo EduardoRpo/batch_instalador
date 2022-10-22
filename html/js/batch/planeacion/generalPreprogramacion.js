@@ -110,7 +110,7 @@ $(document).ready(function () {
         </select>`,
         function () {
           val = $('#simulacion').val();
-          if (val == 0) {
+          if (!val || val == '') {
             alertify.set('notifier', 'position', 'top-right');
             alertify.error('Seleccione tipo de simulación');
             return false;

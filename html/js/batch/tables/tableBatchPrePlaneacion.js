@@ -11,6 +11,16 @@ $(document).ready(function () {
     },
     columns: [
       {
+        title: '',
+        data: null,
+        className: 'text-center',
+        render: function (data) {
+          data.planeado == 1 ? (str = 'checked') : (str = '');
+
+          return `<input type='checkbox' id=${data.id} class='link-select' ${str}>`;
+        },
+      },
+      {
         width: '350px',
         title: 'Propietario',
         data: 'propietario',
@@ -58,16 +68,41 @@ $(document).ready(function () {
         className: 'text-center',
       },
       {
+        title: 'N° Semana',
+        data: 'semana',
+        className: 'text-center',
+      },
+      {
         title: 'Simulación',
         data: 'sim',
         className: 'text-center',
+        visible: false,
+      },
+      {
+        title: 'Estado',
+        data: 'estado',
+        className: 'text-center',
+      },
+      {
+        data: 'id',
+        className: 'uniqueClassName',
+        render: function (data) {
+          return `<a href='#' <i class='fa fa-pencil-square-o fa-2x link-editar-pre' id=${data} data-toggle='tooltip' title='Editar Pre Planeado' style='color:rgb(255, 193, 7)'></i></a>`;
+        },
+      },
+      {
+        data: 'id',
+        className: 'uniqueClassName',
+        render: function (data) {
+          return `<a href='#' <i class='fa fa-trash link-borrar-pre fa-2x' id=${data} data-toggle='tooltip' title='Eliminar Pre Planeado' style='color:rgb(234, 67, 54)'></i></a>`;
+        },
       },
     ],
     rowGroup: {
       dataSrc: 'propietario',
       startRender: function (rows, group) {
         return $('<tr/>').append(
-          '<th class="text-center" colspan="7" style="font-weight: bold;">' +
+          '<th class="text-center" colspan="11" style="font-weight: bold;">' +
             group +
             '</th>'
         );
@@ -76,15 +111,9 @@ $(document).ready(function () {
     },
   });
 
-  $(document).on('click', '.toggle-vis-pre', function (e) {
-    e.preventDefault();
-    column = tableBatchPrePlaneacion.column(this.id);
-    column.visible(!column.visible());
-  });
-
   /* Cargar tipo de simulación */
   $('#tipoSimulacion').change(function (e) {
     e.preventDefault();
-    tableBatchPrePlaneacion.column(7).search(this.value).draw();
+    tableBatchPrePlaneacion.column(9).search(this.value).draw();
   });
 });

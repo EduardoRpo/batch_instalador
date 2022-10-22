@@ -196,23 +196,55 @@ include_once("modal/m_observaciones.php");
                 <div class="tab-pane fade mt-3" id="two" role="tabpanel" aria-labelledby="two-tab">
                   <div class="col-md-12 align-self-right">
                     <div class="card">
-                      <div class="row justify-content-end mt-2">
+                      <div class="row justify-content-end mt-2 cardPlanning">
                         <div class="col-2">
                           <label for="tipoSimulacion">Tipo Simulación</label>
                           <select name="tipoSimulacion" id="tipoSimulacion" class="form-control text-center">
-                            <option selected disabled>Seleccionar</option>
+                            <option selected="" disabled="">Seleccionar</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                           </select>
                         </div>
-                        <div class="col-2">
+                        <div class="col-xs-2 mr-3">
                           <button type="button" id="btnPlanear" class="btn waves-effect waves-light btn-danger" style="width: 120px; margin-top:33px;">
                             <strong>Planear</strong>
                           </button>
                         </div>
+                        <div class="col-xs-2">
+                          <button type="button" id="btnLimpiar" class="btn waves-effect waves-light btn-warning" style="width: 120px; margin-top:33px; margin-right: 35px">
+                            <strong>Limpiar</strong>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="cardUpdatePrePlaneado mt-2 ml-4">
+                        <form id="formUpdatePrePlaneado" enctype="multipart/form-data">
+                          <div class="row">
+                            <div class="col-2">
+                              <label class="form-label">Pedido</label>
+                              <input type="text" class="form-control text-center" id="num_pedido" style="font-weight: bold;" disabled>
+                            </div>
+                            <div class="col">
+                              <label class="form-label">Granel</label>
+                              <input type="text" class="form-control text-center" id="name_granel" style="font-weight: bold;" disabled>
+                            </div>
+                            <div class="col-2">
+                              <label class="form-label">Referencia</label>
+                              <input type="text" class="form-control text-center" id="ref_product" style="font-weight: bold;" disabled>
+                            </div>
+                            <div class="col-2">
+                              <label class="form-label">Unidad Lote</label>
+                              <input type="number" class="form-control text-center" id="unity">
+                            </div>
+                            <div class="col">
+                              <button type="button" class="btn waves-effect waves-light btn-danger" id="savePrePlaneado" style="margin-top:33px">
+                                <strong>Guardar</strong>
+                              </button>
+                            </div>
+                          </div>
+                        </form>
                       </div>
 
-                      <div class="card-block">
+                      <div class=" card-block">
                         <div class="table-responsive">
                           <table class="table table-striped table-bordered " id="tablaPrePlaneacion" name="tablaPrePlaneacion" style="width: 100%">
 
@@ -290,6 +322,7 @@ include_once("modal/m_observaciones.php");
     <script src="/html/js/batch/planeacion/generalPreprogramacion.js"></script>
     <script src="/html/js/batch/planeacion/importPedidos.js"></script>
     <script src="/html/js/batch/planeacion/pedidos.js"></script>
+    <script src="/html/js/batch/prePlaneacion/prePlaneacion.js"></script>
     <script src="/html/js/global/link-comentario.js"></script>
 
     <script src="/html/js/batch/multipresentacion/multipresentacion.js"></script>

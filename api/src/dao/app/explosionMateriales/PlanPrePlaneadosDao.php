@@ -6,7 +6,7 @@ use BatchRecord\Constants\Constants;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger;
 
-class PlanPrePlaneadosDao
+class PlanPrePlaneadosDao extends estadoInicialDao
 {
     private $logger;
 
@@ -20,12 +20,11 @@ class PlanPrePlaneadosDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $sql = "SELECT pp.nombre AS propietario, pre_plan.pedido, pre_plan.unidad_lote, pre_plan.fecha_programacion, CURRENT_DATE AS fecha_actual, (SELECT referencia FROM producto WHERE multi = (SELECT multi FROM producto WHERE referencia = pre_plan.id_producto) LIMIT 1) AS granel,
-                       pre_plan.id_producto, p.nombre_referencia, (SELECT COUNT(*) FROM observaciones_batch_inactivos WHERE pedido = pre_plan.pedido AND referencia = pre_plan.id_producto) AS cant_observations, pre_plan.sim
+        $sql = "SELECT pre_plan.id, pp.nombre AS propietario, pre_plan.pedido, pre_plan.unidad_lote, pre_plan.fecha_programacion, CURRENT_DATE AS fecha_actual, (SELECT referencia FROM producto WHERE multi = (SELECT multi FROM producto WHERE referencia = pre_plan.id_producto) LIMIT 1) AS granel,
+                        pre_plan.id_producto, p.nombre_referencia, pre_plan.sim, WEEK(pre_plan.fecha_programacion) AS semana, IF(pre_plan.estado = 0, 'Sin Formula y/o Instructivos', 'Inactivo') AS estado, pre_plan.planeado
                 FROM plan_preplaneados pre_plan 
                     INNER JOIN producto p ON p.referencia = pre_plan.id_producto 
-                    INNER JOIN propietario pp ON pp.id = p.id_propietario
-                    LEFT JOIN observaciones_batch_inactivos obi ON obi.pedido = pre_plan.pedido AND obi.referencia = pre_plan.id_producto";
+                    INNER JOIN propietario pp ON pp.id = p.id_propietario";
 
         $query = $connection->prepare($sql);
         $query->execute();
@@ -48,10 +47,21 @@ class PlanPrePlaneadosDao
         $connection = Connection::getInstance()->getConnection();
 
         try {
+            /* Validar cantidad de formulas y instructivos */
+            $formulas = $this->findCountFormula($dataPedidos['granel']);
+            $instructivos = $this->findCountInstructivo($dataPedidos['granel']);
+
+            $result = $formulas * $instructivos;
+
+            if ($result == 0)
+                $estado = 0;
+            else
+                $estado = 1;
+
 
             for ($i = 0; $i < sizeof($multi); $i++) {
-                $stmt = $connection->prepare("INSERT INTO plan_preplaneados (pedido, fecha_programacion, tamano_lote, unidad_lote, id_producto, sim)
-                                          VALUES (:pedido, :fecha_programacion, :tamano_lote, :unidad_lote, :id_producto, :sim)");
+                $stmt = $connection->prepare("INSERT INTO plan_preplaneados (pedido, fecha_programacion, tamano_lote, unidad_lote, id_producto, estado, sim)
+                                          VALUES (:pedido, :fecha_programacion, :tamano_lote, :unidad_lote, :id_producto, :estado, :sim)");
 
                 $stmt->execute([
                     'pedido' => $multi[$i]['numPedido'],
@@ -59,6 +69,7 @@ class PlanPrePlaneadosDao
                     'tamano_lote' => $multi[$i]['tamanio_lote'],
                     'unidad_lote' => $multi[$i]['cantidad_acumulada'],
                     'id_producto' => $multi[$i]['referencia'],
+                    'estado' => $estado,
                     'sim' => $dataPedidos['simulacion']
                 ]);
             }
@@ -67,5 +78,43 @@ class PlanPrePlaneadosDao
             $error = array('info' => true, 'mesage' => $message);
             return $error;
         }
+    }
+
+    public function updatePlaneado($dataPedidos)
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        $stmt = $connection->prepare("UPDATE plan_preplaneados SET planeado = :planeado WHERE id = :id");
+        $stmt->execute([
+            'id' => $dataPedidos['id'],
+            'planeado' => 1
+        ]);
+    }
+
+    public function updateUnidadLote($dataPedidos)
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        $stmt = $connection->prepare("UPDATE plan_preplaneados SET unidad_lote = :unidad_lote WHERE id = :id");
+        $stmt->execute([
+            'id' => $dataPedidos['id'],
+            'unidad_lote' => $dataPedidos['unidad']
+        ]);
+    }
+
+    public function clearPlanPrePlaneados($simulacion)
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        $stmt = $connection->prepare("DELETE FROM plan_preplaneados WHERE sim = :simulacion  AND planeado = 0");
+        $stmt->execute(['simulacion' => $simulacion]);
+    }
+
+    public function deletePlaneado($id)
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        $stmt = $connection->prepare("DELETE FROM plan_preplaneados WHERE id = :id");
+        $stmt->execute(['id' => $id]);
     }
 }
