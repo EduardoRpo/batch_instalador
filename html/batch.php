@@ -144,13 +144,13 @@ include_once("modal/m_observaciones.php");
                   </li>
                 <?php  } ?>
                 <li class="nav-item">
-                  <a class="nav-link" id="two-tab" data-toggle="tab" href="#two" role="tab" aria-controls="Two" aria-selected="false">Pre Planeación</a>
+                  <a class="nav-link" id="two-tab" data-toggle="tab" href="#two" role="tab" aria-controls="Two" aria-selected="false">Pre-Planeados</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="three-tab" data-toggle="tab" href="#three" role="tab" aria-controls="Three" aria-selected="false">Planeación</a>
+                  <a class="nav-link" id="three-tab" data-toggle="tab" href="#three" role="tab" aria-controls="Three" aria-selected="false">Planeados</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link active" id="four-tab" data-toggle="tab" href="#four" role="tab" aria-controls="Four" aria-selected="true">Abiertos</a>
+                  <a class="nav-link active" id="four-tab" data-toggle="tab" href="#four" role="tab" aria-controls="Four" aria-selected="true">Programados</a>
                 </li>
                 <?php if ($_SESSION['rol'] != 6) {  ?>
                   <li class="nav-item">
@@ -198,7 +198,7 @@ include_once("modal/m_observaciones.php");
                     <div class="card">
                       <div class="row justify-content-end mt-2 cardPlanning">
                         <div class="col-2">
-                          <label for="tipoSimulacion">Tipo Simulación</label>
+                          <label for="tipoSimulacion">Simulación</label>
                           <select name="tipoSimulacion" id="tipoSimulacion" class="form-control text-center">
                             <option selected="" disabled="">Seleccionar</option>
                             <option value="1">1</option>
