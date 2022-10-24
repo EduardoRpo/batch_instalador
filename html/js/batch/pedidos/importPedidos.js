@@ -168,6 +168,6 @@ addRow = (data) => {
 /* Actualizar tabla */
 
 function actualizarTablaPedidos() {
-  $('#tablaPreBatch').DataTable().clear();
-  $('#tablaPreBatch').DataTable().ajax.reload();
+  $('#tablaPedidos').DataTable().clear();
+  $('#tablaPedidos').DataTable().ajax.reload();
 }

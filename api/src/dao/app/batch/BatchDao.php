@@ -75,16 +75,8 @@ class BatchDao extends estadoInicialDao
     public function findInactive()
     {
         $connection = Connection::getInstance()->getConnection();
-        /* Se agrego la tabla `observaciones_batch_inactivos`*/
-        /* $stmt = $connection->prepare("SELECT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, pc.nombre as presentacion_comercial, batch.numero_lote, batch.tamano_lote, propietario.nombre, batch.fecha_creacion, 
-                                             batch.fecha_actual, WEEK(batch.fecha_creacion) AS semanas, batch.fecha_programacion, batch.estado, batch.multi, IFNULL(plan_pedidos.fecha_insumo, '0000-00-00') AS fecha_insumo
-                                      FROM batch 
-                                      INNER JOIN producto ON batch.id_producto = producto.referencia
-                                      INNER JOIN propietario  ON producto.id_propietario = propietario.id
-                                      INNER JOIN presentacion_comercial pc ON producto.presentacion_comercial = pc.id
-                                      LEFT JOIN plan_pedidos exp ON plan_pedidos.id_producto = producto.referencia
-                                      WHERE batch.estado BETWEEN 1 AND 2;");*/
-        $stmt = $connection->prepare("SELECT DISTINCT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, pc.nombre as presentacion_comercial, batch.numero_lote, batch.tamano_lote, propietario.nombre, batch.fecha_creacion, 
+
+        /* $stmt = $connection->prepare("SELECT DISTINCT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, pc.nombre as presentacion_comercial, batch.numero_lote, batch.tamano_lote, propietario.nombre, batch.fecha_creacion, 
                                              batch.fecha_actual, WEEK(batch.fecha_creacion) AS semanas, batch.fecha_programacion, batch.estado, batch.multi, IFNULL(plan_pedidos.fecha_insumo, '0000-00-00') AS fecha_insumo, obi.fecha_registro,
                                              (SELECT COUNT(*) FROM observaciones_batch_inactivos WHERE batch = batch.id_batch) AS cant_observations
                                       FROM batch 
@@ -93,7 +85,14 @@ class BatchDao extends estadoInicialDao
                                       INNER JOIN presentacion_comercial pc ON producto.presentacion_comercial = pc.id
                                       LEFT JOIN plan_pedidos ON plan_pedidos.id_producto = producto.referencia
                                       LEFT JOIN observaciones_batch_inactivos obi ON obi.batch = batch.id_batch
-                                      WHERE batch.estado BETWEEN 1 AND 2 ORDER BY `batch`.`id_batch` DESC");
+                                      WHERE batch.estado BETWEEN 1 AND 2 ORDER BY `batch`.`id_batch` DESC");*/
+        $stmt = $connection->prepare("SELECT pre_plan.id, pp.nombre AS propietario, pre_plan.pedido, pre_plan.unidad_lote, pre_plan.fecha_programacion, pre_plan.tamano_lote, CURRENT_DATE AS fecha_actual, 
+                                             (SELECT referencia FROM producto WHERE multi = (SELECT multi FROM producto WHERE referencia = pre_plan.id_producto) LIMIT 1) AS granel, pre_plan.id_producto, 
+                                             p.nombre_referencia, pre_plan.sim, CONCAT('S', WEEK(pre_plan.fecha_programacion)) AS semana, IF(pre_plan.estado = 0, 'Sin Formula y/o Instructivos', 'Inactivo') AS estado, pre_plan.planeado 
+                                      FROM plan_preplaneados pre_plan 
+                                        INNER JOIN producto p ON p.referencia = pre_plan.id_producto 
+                                        INNER JOIN propietario pp ON pp.id = p.id_propietario 
+                                      WHERE pre_plan.planeado = 1");
         $stmt->execute();
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         $batch = $stmt->fetchAll($connection::FETCH_ASSOC);
@@ -133,19 +132,19 @@ class BatchDao extends estadoInicialDao
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("SELECT b.id_batch, b.pedido, p.referencia, p.nombre_referencia, pc.nombre AS presentacion, m.nombre AS marca, 
-                                            ns.nombre AS notificacion_sanitaria, p.unidad_empaque, pp.nombre as propietario, b.numero_orden, b.tamano_lote, b.numero_lote, 
-                                            b.unidad_lote, l.nombre as linea, l.densidad, p.densidad_producto, b.fecha_programacion, b.estado, p.img, DATE_ADD(plan_pedidos.fecha_insumo, INTERVAL 8 DAY) AS fecha_insumo , 
-                                            IFNULL(bt.tanque,0) AS tanque, IFNULL(bt.cantidad,0) AS cantidad
+                                             ns.nombre AS notificacion_sanitaria, p.unidad_empaque, pp.nombre as propietario, b.numero_orden, b.tamano_lote, b.numero_lote, 
+                                             b.unidad_lote, l.nombre as linea, l.densidad, p.densidad_producto, b.fecha_programacion, b.estado, p.img, DATE_ADD(exp.fecha_insumo, INTERVAL 8 DAY) AS fecha_insumo , 
+                                             IFNULL(bt.tanque,0) AS tanque, IFNULL(bt.cantidad,0) AS cantidad
                                       FROM batch b
-                                        INNER JOIN producto p ON p.referencia = b.id_producto
-                                        LEFT JOIN multipresentacion mul ON mul.id_batch = b.id_batch
-                                        INNER JOIN presentacion_comercial pc ON pc.id = p.presentacion_comercial 
-                                        INNER JOIN linea l ON l.id = p.id_linea 
-                                        INNER JOIN propietario pp ON pp.id = p.id_propietario 
-                                        INNER JOIN marca m ON m.id = p.id_marca
-                                        INNER JOIN notificacion_sanitaria ns ON ns.id = p.id_notificacion_sanitaria
-                                        LEFT JOIN plan_pedidos exp ON plan_pedidos.id_producto = mul.referencia
-                                        LEFT JOIN batch_tanques bt ON bt.id_batch = b.id_batch
+                                            INNER JOIN producto p ON p.referencia = b.id_producto
+                                            LEFT JOIN multipresentacion mul ON mul.id_batch = b.id_batch
+                                            INNER JOIN presentacion_comercial pc ON pc.id = p.presentacion_comercial 
+                                            INNER JOIN linea l ON l.id = p.id_linea 
+                                            INNER JOIN propietario pp ON pp.id = p.id_propietario 
+                                            INNER JOIN marca m ON m.id = p.id_marca
+                                            INNER JOIN notificacion_sanitaria ns ON ns.id = p.id_notificacion_sanitaria
+                                            LEFT JOIN plan_pedidos exp ON exp.id_producto = mul.referencia
+                                            LEFT JOIN batch_tanques bt ON bt.id_batch = b.id_batch
                                       WHERE b.id_batch = :idBatch ORDER BY `exp`.`fecha_insumo` DESC LIMIT 1;");
         $stmt->execute(array('idBatch' => $id));
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));

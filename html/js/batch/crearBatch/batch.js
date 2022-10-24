@@ -32,12 +32,12 @@ $(document).on('click', '#tablaBatch tbody tr', function () {
   data = tablaBatch.row(this).data();
 });
 
-$(document).on('click', '#tablaPreBatch tbody tr', function () {
-  fila = tablaPreBatch.row(this).data();
+$(document).on('click', '#tablaPedidos tbody tr', function () {
+  fila = tablaPedidos.row(this).data();
 });
 
-$(document).on('click', '#tablaBatchInactivos tbody tr', function () {
-  data = tablaBatchInactivos.row(this).data();
+$(document).on('click', '#tablaBatchPlaneados tbody tr', function () {
+  data = tablaBatchPlaneados.row(this).data();
 });
 
 $(document).ready(function () {
@@ -101,53 +101,55 @@ $(document).ready(function () {
 
     cargarTanques();
 
-    if (data.estado > 2) {
-      f1 = new Date();
-      f2 = new Date(data.fecha_programacion);
-      f1.setHours(0, 0, 0, 0);
-      f2.setHours(0, 0, 0, 0);
-      if (f1.getTime() == f2.getTime()) {
-        alertify.set('notifier', 'position', 'top-right');
-        alertify.error('Batch Record en proceso. No es posible actualizarlo.');
-        return false;
-      }
-    }
-
     $.ajax({
       url: `/api/batch/${id_batch}`,
       success: function (data) {
-        if (data.pedido) $('#pedido').val(data.pedido);
-        else $('#pedido').val('');
+        if (data.estado > 2) {
+          f1 = new Date();
+          f2 = new Date(data.fecha_programacion);
+          f1.setHours(0, 0, 0, 0);
+          f2.setHours(0, 0, 0, 0);
+          if (f1.getTime() == f2.getTime()) {
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.error(
+              'Batch Record en proceso. No es posible actualizarlo.'
+            );
+            return false;
+          }
+        } else {
+          if (data.pedido) $('#pedido').val(data.pedido);
+          else $('#pedido').val('');
 
-        $('#idbatch').val(data.id_batch);
-        $('#referencia').val(data.referencia);
-        $('#inpNombreReferencia').val(data.nombre_referencia);
-        $('#marca').val(data.marca);
-        $('#propietario').val(data.propietario);
-        $('#producto').val(data.nombre_referencia);
-        $('#presentacioncomercial').val(data.presentacion);
-        $('#linea').val(data.linea);
-        $('#notificacionSanitaria').val(data.notificacion_sanitaria);
-        $('#densidad_producto').val(data.densidad_producto);
-        $('#ajuste').val(data.ajuste);
+          $('#idbatch').val(data.id_batch);
+          $('#referencia').val(data.referencia);
+          $('#inpNombreReferencia').val(data.nombre_referencia);
+          $('#marca').val(data.marca);
+          $('#propietario').val(data.propietario);
+          $('#producto').val(data.nombre_referencia);
+          $('#presentacioncomercial').val(data.presentacion);
+          $('#linea').val(data.linea);
+          $('#notificacionSanitaria').val(data.notificacion_sanitaria);
+          $('#densidad_producto').val(data.densidad_producto);
+          $('#ajuste').val(data.ajuste);
 
-        $('#unidadesxlote').val(data.unidad_lote);
-        $('#tamanototallote').val(Math.ceil(data.tamano_lote));
-        $('#fechaprogramacion').val(data.fecha_programacion);
-        $('#fechaProgramacionSugerida').val(data.fecha_insumo);
+          $('#unidadesxlote').val(data.unidad_lote);
+          $('#tamanototallote').val(Math.ceil(data.tamano_lote));
+          $('#fechaprogramacion').val(data.fecha_programacion);
+          $('#fechaProgramacionSugerida').val(data.fecha_insumo);
 
-        $('#cmbNoReferencia').css('display', 'none');
-        $('#nombrereferencia').css('display', 'none');
+          $('#cmbNoReferencia').css('display', 'none');
+          $('#nombrereferencia').css('display', 'none');
 
-        $('#referencia').css('display', 'block');
-        $('#guardarBatch').html('Actualizar');
-        $('.tcrearBatch').html('Actualizar Batch Record');
+          $('#referencia').css('display', 'block');
+          $('#guardarBatch').html('Actualizar');
+          $('.tcrearBatch').html('Actualizar Batch Record');
 
-        $('#cmbTanque1').val(data.tanque);
-        $('#txtCantidad1').val(data.cantidad);
+          $('#cmbTanque1').val(data.tanque);
+          $('#txtCantidad1').val(data.cantidad);
 
-        $('#txtCantidad1').click();
-        $('#modalCrearBatch').modal('show');
+          $('#txtCantidad1').click();
+          $('#modalCrearBatch').modal('show');
+        }
       },
       error: function (response) {
         console.log(response);
@@ -291,11 +293,11 @@ $(document).ready(function () {
     $('#tablaBatch').DataTable().clear();
     $('#tablaBatch').DataTable().ajax.reload();
 
-    $('#tablaBatchInactivos').DataTable().clear();
-    $('#tablaBatchInactivos').DataTable().ajax.reload();
+    $('#tablaBatchPlaneados').DataTable().clear();
+    $('#tablaBatchPlaneados').DataTable().ajax.reload();
 
-    $('#tablaPreBatch').DataTable().clear();
-    $('#tablaPreBatch').DataTable().ajax.reload();
+    $('#tablaPedidos').DataTable().clear();
+    $('#tablaPedidos').DataTable().ajax.reload();
 
     $('#tablaPrePlaneacion').DataTable().clear();
     $('#tablaPrePlaneacion').DataTable().ajax.reload();

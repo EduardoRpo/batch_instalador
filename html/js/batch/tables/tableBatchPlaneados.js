@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  tablaBatchInactivos = $('#tablaBatchInactivos').DataTable({
+  tablaBatchPlaneados = $('#tablaBatchPlaneados').DataTable({
     pageLength: 50,
     responsive: true,
     scrollCollapse: true,
@@ -11,6 +11,81 @@ $(document).ready(function () {
       dataSrc: '',
     },
     // order: [[1, 'desc']],
+    columns: [
+      {
+        title: 'N° Semana',
+        data: 'semana',
+        className: 'text-center',
+      },
+      {
+        width: '350px',
+        title: 'Propietario',
+        data: 'propietario',
+        visible: false,
+      },
+      {
+        title: 'Pedido',
+        data: 'pedido',
+        className: 'text-center',
+      },
+      {
+        title: 'Granel',
+        data: 'granel',
+        className: 'text-center',
+      },
+      {
+        title: 'Referencia',
+        data: 'id_producto',
+        className: 'text-center',
+      },
+      {
+        width: '350px',
+        title: 'Producto',
+        data: 'nombre_referencia',
+        className: 'uniqueClassName',
+      },
+      {
+        title: 'Tamaño Lote',
+        data: 'tamano_lote',
+        className: 'text-center',
+      },
+      {
+        title: 'Unidad Lote',
+        data: 'unidad_lote',
+        className: 'text-center',
+      },
+
+      {
+        title: 'Simulación',
+        data: 'sim',
+        className: 'text-center',
+        visible: false,
+      },
+      {
+        title: 'Estado',
+        data: 'estado',
+        className: 'text-center',
+      },
+      {
+        data: 'id',
+        className: 'uniqueClassName',
+        render: function (data) {
+          return `<a href='#' <i class='fa fa-trash link-borrar-pre fa-2x' id=${data} data-toggle='tooltip' title='Eliminar Pre Planeado' style='color:rgb(234, 67, 54)'></i></a>`;
+        },
+      },
+    ],
+    rowGroup: {
+      dataSrc: 'propietario',
+      startRender: function (rows, group) {
+        return $('<tr/>').append(
+          '<th class="text-center" colspan="11" style="font-weight: bold;">' +
+            group +
+            '</th>'
+        );
+      },
+      className: 'odd',
+    },
+    /*
     columns: [
       {
         title: 'No.',
@@ -156,14 +231,14 @@ $(document).ready(function () {
       if (dias > 15) $(row).css('color', 'orange');
       if (dias > 30) $(row).css('color', 'red');
 
-      /* if (data.fecha_registro) {
-                fecha_observacion = moment(data.fecha_registro);
-                hoy = moment(Date());
+      if (data.fecha_registro) {
+        fecha_observacion = moment(data.fecha_registro);
+        hoy = moment(Date());
 
-                dias = hoy.diff(fecha_observacion, 'days');
+        dias = hoy.diff(fecha_observacion, 'days');
 
-                if (dias > 15) $(row).css('color', 'red');
-            } */
-    },
+        if (dias > 15) $(row).css('color', 'red');
+      }
+    },*/
   });
 });

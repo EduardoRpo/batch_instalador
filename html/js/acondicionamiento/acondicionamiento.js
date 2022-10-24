@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  urlObs = '/api/observaciones';
+  // urlObs = '/api/observaciones';
 
   $('.adicionarMulti').hide();
   $('.footSaveMulti').hide();

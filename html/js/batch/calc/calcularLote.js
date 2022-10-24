@@ -13,6 +13,7 @@ $(document).ready(function () {
     date = $(`#date-${numPedido}-${referencia}`).val();
 
     if (cantidad == 0) {
+      deleteArray(numPedido);
       alertify.set('notifier', 'position', 'top-right');
       alertify.error('La cantidad a programar no puede ser cero (0)');
       return false;
@@ -56,7 +57,8 @@ $(document).ready(function () {
 
   $(document).on('click', '#calcLote', function (e) {
     e.preventDefault();
-    if (date && cantidad) calcLote(pedidosProgramar);
+    if (date && cantidad && pedidosProgramar.length > 0)
+      calcLote(pedidosProgramar);
     else {
       alertify.set('notifier', 'position', 'top-right');
       alertify.error(

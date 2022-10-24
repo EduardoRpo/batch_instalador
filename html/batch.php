@@ -184,7 +184,7 @@ include_once("modal/m_observaciones.php");
                       </div>
                       <div class="card-block">
                         <div class="table-responsive">
-                          <table class="table table-striped table-bordered " id="tablaPreBatch" name="tablaPreBatch">
+                          <table class="table table-striped table-bordered" id="tablaPedidos" name="tablaPedidos">
 
                           </table>
                         </div>
@@ -258,9 +258,16 @@ include_once("modal/m_observaciones.php");
                 <div class="tab-pane fade mt-3" id="three" role="tabpanel" aria-labelledby="three-tab">
                   <div class="col-md-12 align-self-right">
                     <div class="card">
+                      <div class="row justify-content-end mt-3">
+                        <div class="col-2">
+                          <button type="button" id="btnProgramar" class="btn waves-effect waves-light btn-danger" style="width: 120px;">
+                            <strong>Programar</strong>
+                          </button>
+                        </div>
+                      </div>
                       <div class="card-block">
                         <div class="table-responsive">
-                          <table class="table table-striped table-bordered " id="tablaBatchInactivos" name="tablaBatchInactivos">
+                          <table class="table table-striped table-bordered " id="tablaBatchPlaneados" name="tablaBatchPlaneados" style="width: 100%;">
 
                           </table>
                         </div>
@@ -309,19 +316,20 @@ include_once("modal/m_observaciones.php");
 
     <script src="/html/js/global/searchData.js"></script>
 
-    <script src="/html/js/batch/tables/tableBatchAbiertos.js"></script>
+    <script src="/html/js/batch/tables/tableBatchProgramados.js"></script>
     <script src="/html/js/batch/tables/tableBatchEliminados.js"></script>
-    <script src="/html/js/batch/tables/tableBatchInactivos.js"></script>
-    <script src="/html/js/batch/tables/tableBatchPlaneacion.js"></script>
+    <script src="/html/js/batch/tables/tableBatchPlaneados.js"></script>
+    <script src="/html/js/batch/tables/tableBatchPedidos.js"></script>
     <script src="/html/js/batch/tables/tableBatchPrePlaneacion.js"></script>
     <script src="/html/js/batch/tables/batcheliminados.js"></script>
 
     <script src="/html/js/batch/calc/calcularLote.js"></script>
     <script src="/html/js/batch/calc/calcWeek.js"></script>
 
-    <script src="/html/js/batch/planeacion/generalPreprogramacion.js"></script>
-    <script src="/html/js/batch/planeacion/importPedidos.js"></script>
-    <script src="/html/js/batch/planeacion/pedidos.js"></script>
+    <script src="/html/js/batch/pedidos/generalPedidos.js"></script>
+    <script src="/html/js/batch/pedidos/importPedidos.js"></script>
+    <script src="/html/js/batch/pedidos/pedidos.js"></script>
+    <script src="/html/js/batch/planeacion/planeacion.js"></script>
     <script src="/html/js/batch/prePlaneacion/prePlaneacion.js"></script>
     <script src="/html/js/global/link-comentario.js"></script>
 

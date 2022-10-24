@@ -117,7 +117,7 @@ $(document).ready(function () {
         render: function (data) {
           return `
                       <i class="badge badge-danger badge-pill notify-icon-badge ml-3">${data.cant_observations}</i><br>
-                      <a href='#' <i class="fa fa-file-text fa-1x link-comentario" id="${data.id_batch}-${data.modulo}" aria-hidden="true" data-toggle="tooltip" title="adicionar observaciones" style="color:rgb(59, 131, 189)" aria-hidden="true"></i></a>
+                      <a href='#' <i class="fa fa-file-text fa-1x link-comentario" id="${data.id_batch}" aria-hidden="true" data-toggle="tooltip" title="adicionar observaciones" style="color:rgb(59, 131, 189)" aria-hidden="true"></i></a>
                     `;
         },
       },

@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  tablaPreBatch = $('#tablaPreBatch').DataTable({
+  tablaPedidos = $('#tablaPedidos').DataTable({
     destroy: true,
     pageLength: 50,
     ajax: {
@@ -85,6 +85,12 @@ $(document).ready(function () {
               <input type="date" class="dateInsumos form-control-updated text-center" id="date-${data.pedido}-${data.id_producto}" value="${data.fecha_insumo}" max="${data.fecha_actual}"/>`;
         },
       },
+
+      {
+        title: 'Tipo simulación',
+        data: 'simulacion',
+        className: 'text-center',
+      },
       {
         title: 'Fecha Pesaje (8)',
         data: null,
@@ -122,7 +128,7 @@ $(document).ready(function () {
 
   $(document).on('click', '.toggle-vis', function (e) {
     e.preventDefault();
-    column = tablaPreBatch.column(this.id);
+    column = tablaPedidos.column(this.id);
     column.visible(!column.visible());
   });
 });

@@ -1,8 +1,11 @@
 <?php
 
+use BatchRecord\dao\PlanPedidosDao;
 use BatchRecord\dao\PlanPrePlaneadosDao;
 
 $planPrePlaneadosDao = new PlanPrePlaneadosDao();
+$planPedidosDao = new PlanPedidosDao();
+
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -14,7 +17,7 @@ $app->get('/prePlaneados', function (Request $request, Response $response, $args
     return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->post('/addPrePlaneados', function (Request $request, Response $response, $args) use ($planPrePlaneadosDao) {
+$app->post('/addPrePlaneados', function (Request $request, Response $response, $args) use ($planPrePlaneadosDao, $planPedidosDao) {
     session_start();
     $dataPedidos = $request->getParsedBody();
     $date = $dataPedidos['date'];
@@ -26,8 +29,10 @@ $app->post('/addPrePlaneados', function (Request $request, Response $response, $
         $dataPedidos[$i]['programacion'] = $date;
         $dataPedidos[$i]['simulacion'] = $sim;
         // Guardar pedidos a pre planeado
-        $prePlaneados = $planPrePlaneadosDao->insertPrePlaneados($dataPedidos[$i], $dataPedidos[$i]['multi']);
+        $prePlaneados = $planPrePlaneadosDao->insertPrePlaneados($dataPedidos[$i]);
     }
+    // $planPedidos = $planPedidosDao->updateEMPedidosRegistro();
+
 
     if ($prePlaneados == null)
         $resp = array('success' => true, 'message' => 'Pedidos pre planeados correctamente');
@@ -83,7 +88,7 @@ $app->get('/clearPrePlaneados/{simulacion}', function (Request $request, Respons
 });
 
 $app->get('/deletePrePlaneacion/{id}', function (Request $request, Response $response, $args) use ($planPrePlaneadosDao) {
-    $prePlaneados = $planPrePlaneadosDao->clearPlanPrePlaneados($args['id']);
+    $prePlaneados = $planPrePlaneadosDao->deletePlaneado($args['id']);
 
     if ($prePlaneados == null)
         $resp = array('success' => true, 'message' => 'Pedido eliminado correctamente');

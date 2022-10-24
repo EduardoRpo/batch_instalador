@@ -70,7 +70,7 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
   }
 
   // Consolidar los graneles
-
+  /*
   $dataPedidosGranel = array();
 
   foreach ($dataPedidosReferencias as $t) {
@@ -99,13 +99,13 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
         $dataPedidosGranel[$i]['multi'][$j] = $dataPedidosReferencias[$j];
     // Restablecer llaves de variable $dataPedidosGranel
     $dataPedidosGranel[$i]['multi'] = array_values($dataPedidosGranel[$i]['multi']);
-  }
+  }*/
 
   if (!isset($dataPedidosLotes))
-    $dataPedidosLotes = $dataPedidosGranel;
+    $dataPedidosLotes = $dataPedidosReferencias;
 
   //Almacenar en variables de session la variable $dataPedidosGranel
-  $_SESSION['dataGranel'] = $dataPedidosGranel;
+  $_SESSION['dataGranel'] = $dataPedidosReferencias;
 
   $countPrePlaneados = $planPrePlaneadosDao->findCountPrePlaneados();
 

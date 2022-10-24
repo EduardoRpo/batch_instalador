@@ -2,8 +2,6 @@ $(document).ready(function () {
   dataEnvasado = [];
   let date = new Date();
   apiPost = '/api/addFechaEnvasado';
-  urlObs = '/api/observaciones';
-  urlPostObs = '/api/addObservacion';
 
   $('.adicionarMulti').hide();
   $('.footSaveMulti').hide();

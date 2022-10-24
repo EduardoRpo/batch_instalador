@@ -20,11 +20,12 @@ class PlanPrePlaneadosDao extends estadoInicialDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $sql = "SELECT pre_plan.id, pp.nombre AS propietario, pre_plan.pedido, pre_plan.unidad_lote, pre_plan.fecha_programacion, CURRENT_DATE AS fecha_actual, (SELECT referencia FROM producto WHERE multi = (SELECT multi FROM producto WHERE referencia = pre_plan.id_producto) LIMIT 1) AS granel,
-                        pre_plan.id_producto, p.nombre_referencia, pre_plan.sim, WEEK(pre_plan.fecha_programacion) AS semana, IF(pre_plan.estado = 0, 'Sin Formula y/o Instructivos', 'Inactivo') AS estado, pre_plan.planeado
+        $sql = "SELECT pre_plan.id, pp.nombre AS propietario, pre_plan.pedido, pre_plan.unidad_lote, pre_plan.fecha_programacion, pre_plan.tamano_lote, CURRENT_DATE AS fecha_actual, (SELECT referencia FROM producto WHERE multi = (SELECT multi FROM producto WHERE referencia = pre_plan.id_producto) LIMIT 1) AS granel,
+                        pre_plan.id_producto, p.nombre_referencia, pre_plan.sim, CONCAT('S', WEEK(pre_plan.fecha_programacion)) AS semana, IF(pre_plan.estado = 0, 'Sin Formula y/o Instructivos', 'Inactivo') AS estado, pre_plan.planeado
                 FROM plan_preplaneados pre_plan 
                     INNER JOIN producto p ON p.referencia = pre_plan.id_producto 
-                    INNER JOIN propietario pp ON pp.id = p.id_propietario";
+                    INNER JOIN propietario pp ON pp.id = p.id_propietario
+                    WHERE pre_plan.planeado = 0";
 
         $query = $connection->prepare($sql);
         $query->execute();
@@ -42,7 +43,7 @@ class PlanPrePlaneadosDao extends estadoInicialDao
         return $countPrePlaneados;
     }
 
-    public function insertPrePlaneados($dataPedidos, $multi)
+    public function insertPrePlaneados($dataPedidos)
     {
         $connection = Connection::getInstance()->getConnection();
 
@@ -59,20 +60,18 @@ class PlanPrePlaneadosDao extends estadoInicialDao
                 $estado = 1;
 
 
-            for ($i = 0; $i < sizeof($multi); $i++) {
-                $stmt = $connection->prepare("INSERT INTO plan_preplaneados (pedido, fecha_programacion, tamano_lote, unidad_lote, id_producto, estado, sim)
+            $stmt = $connection->prepare("INSERT INTO plan_preplaneados (pedido, fecha_programacion, tamano_lote, unidad_lote, id_producto, estado, sim)
                                           VALUES (:pedido, :fecha_programacion, :tamano_lote, :unidad_lote, :id_producto, :estado, :sim)");
 
-                $stmt->execute([
-                    'pedido' => $multi[$i]['numPedido'],
-                    'fecha_programacion' => $dataPedidos['programacion'],
-                    'tamano_lote' => $multi[$i]['tamanio_lote'],
-                    'unidad_lote' => $multi[$i]['cantidad_acumulada'],
-                    'id_producto' => $multi[$i]['referencia'],
-                    'estado' => $estado,
-                    'sim' => $dataPedidos['simulacion']
-                ]);
-            }
+            $stmt->execute([
+                'pedido' => $dataPedidos['numPedido'],
+                'fecha_programacion' => $dataPedidos['programacion'],
+                'tamano_lote' => $dataPedidos['tamanio_lote'],
+                'unidad_lote' => $dataPedidos['cantidad_acumulada'],
+                'id_producto' => $dataPedidos['referencia'],
+                'estado' => $estado,
+                'sim' => $dataPedidos['simulacion']
+            ]);
         } catch (\Exception $e) {
             $message = $e->getMessage();
             $error = array('info' => true, 'mesage' => $message);
@@ -106,7 +105,7 @@ class PlanPrePlaneadosDao extends estadoInicialDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $stmt = $connection->prepare("DELETE FROM plan_preplaneados WHERE sim = :simulacion  AND planeado = 0");
+        $stmt = $connection->prepare("DELETE FROM plan_preplaneados WHERE sim = :simulacion AND planeado = 0");
         $stmt->execute(['simulacion' => $simulacion]);
     }
 
