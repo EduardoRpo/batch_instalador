@@ -107,6 +107,7 @@ sesiones(5);
                 </div>
             </div>
         </div>
+        
         <div class="contenedorPrincipal row">
             <div class="tituloProceso col">
                 <h1 class="text-themecolor"><b>Programación Envasado y Acondicionamiento</b></h1>

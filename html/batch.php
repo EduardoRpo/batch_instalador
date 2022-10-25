@@ -195,6 +195,38 @@ include_once("modal/m_observaciones.php");
 
                 <div class="tab-pane fade mt-3" id="two" role="tabpanel" aria-labelledby="two-tab">
                   <div class="col-md-12 align-self-right">
+                    <div class="row ml-1">
+                      <div class="col-md-9 align-self-center">
+                        <div class="card">
+                          <div class="card-block">
+                            <div class="payment-of-tax">
+                              <div class="table-responsive">
+                                <label for="">Capacidad Pre-planeada</label>
+                                <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadEnvasado" style="width: 100%;">
+                                  <thead>
+                                    <tr>
+                                      <th>S</th>
+                                      <th>Total Liquidos(Kg)</th>
+                                      <th>Total Solidos(Kg)</th>
+                                      <th>Total Semi-Solidos(Kg)</th>
+                                    </tr>
+
+                                  </thead>
+                                  <tbody class="tblCalcCapacidadEnvasadoBody">
+                                    <tr>
+                                      <td>42</td>
+                                      <td>100%</td>
+                                      <td>100%</td>
+                                      <td>100%</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     <div class="card">
                       <div class="row justify-content-end mt-2 cardPlanning">
                         <div class="col-2">
@@ -257,6 +289,39 @@ include_once("modal/m_observaciones.php");
 
                 <div class="tab-pane fade mt-3" id="three" role="tabpanel" aria-labelledby="three-tab">
                   <div class="col-md-12 align-self-right">
+                    <div class="row ml-1">
+                      <div class="col-md-9 align-self-center">
+                        <div class="card">
+                          <div class="card-block">
+                            <div class="payment-of-tax">
+                              <div class="table-responsive">
+                                <label for="">Capacidad Planeada </label>
+                                <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadEnvasado" style="width: 100%;">
+                                  <thead>
+                                    <tr>
+                                      <th>S</th>
+                                      <th>Total Liquidos(Kg)</th>
+                                      <th>Total Solidos(Kg)</th>
+                                      <th>Total Semi-Solidos(Kg)</th>
+                                    </tr>
+
+                                  </thead>
+                                  <tbody class="tblCalcCapacidadEnvasadoBody">
+                                    <tr>
+                                      <td>42</td>
+                                      <td>100%</td>
+                                      <td>100%</td>
+                                      <td>100%</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                     <div class="card">
                       <div class="row justify-content-end mt-3">
                         <div class="col-2">
@@ -278,6 +343,37 @@ include_once("modal/m_observaciones.php");
 
                 <div class="tab-pane fade show active mt-3" id="four" role="tabpanel" aria-labelledby="four-tab">
                   <div class="col-md-12 align-self-right">
+                    <div class="row ml-1">
+                      <div class="col-md-9 align-self-center">
+                        <div class="card">
+                          <div class="card-block">
+                            <div class="payment-of-tax">
+                              <div class="table-responsive">
+                                <label for="">Capacidad Programada </label>
+                                <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadEnvasado" style="width: 100%;">
+                                  <thead>
+                                    <tr>
+                                      <th>S</th>
+                                      <th>Total Liquidos(Kg)</th>
+                                      <th>Total Solidos(Kg)</th>
+                                      <th>Total Semi-Solidos(Kg)</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody class="tblCalcCapacidadEnvasadoBody">
+                                    <tr>
+                                      <td>42</td>
+                                      <td>100%</td>
+                                      <td>100%</td>
+                                      <td>100%</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     <div class="card">
                       <div class="card-block">
                         <div class="table-responsive">
