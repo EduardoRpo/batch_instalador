@@ -31,7 +31,7 @@ class PreBatchDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $sql = "SELECT DISTINCT pp.nombre AS propietario, exp.pedido, exp.fecha_pedido, exp.estado, exp.cantidad_acumulada, exp.fecha_insumo, CURRENT_DATE AS fecha_actual, (SELECT referencia FROM producto 
+        $sql = "SELECT DISTINCT ROW_NUMBER() OVER (ORDER BY pp.nombre) AS num, pp.nombre AS propietario, exp.pedido, exp.fecha_pedido, exp.estado, exp.cantidad_acumulada, exp.fecha_insumo, CURRENT_DATE AS fecha_actual, (SELECT referencia FROM producto 
                     WHERE multi = (SELECT multi FROM producto WHERE referencia = exp.id_producto)
                     LIMIT 1) AS granel, exp.id_producto, p.nombre_referencia, exp.cant_original, exp.cantidad, 
                         IFNULL(DATE_ADD(exp.fecha_insumo, INTERVAL 8 DAY),DATE_ADD(exp.fecha_pedido, INTERVAL 8 DAY)) AS fecha_pesaje, 						

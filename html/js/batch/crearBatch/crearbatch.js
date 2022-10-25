@@ -175,13 +175,15 @@ $(document).ready(function () {
 
   /* Calcular el valor de los tanques */
 
-  $(document).on('change', '#cmbTanque1', function (e) {
-    $('#txtCantidad1').click();
+  $(document).on('change', '.select-tanque', function (e) {
+    idTanque = this.id;
+    $('.txtCantidad').click();
   });
 
-  $(document).on('click keyup', '#txtCantidad1', function (e) {
-    let tanque = parseFloat($('#cmbTanque1').val());
-    let tamanioTanque = parseFloat($('#txtCantidad1').val());
+  $(document).on('click keyup', '.txtCantidad', function (e) {
+    idCant = this.id;
+    let tanque = parseFloat($(`#${idTanque}`).val());
+    let tamanioTanque = parseFloat($(`#${idCant}`).val());
 
     if (tamanioTanque < 0 || tamanioTanque == '') {
       alertify.set('notifier', 'position', 'top-right');

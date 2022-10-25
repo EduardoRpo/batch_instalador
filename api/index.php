@@ -88,6 +88,7 @@ require_once __DIR__ . '/src/routes/app/preBatch/importarPedidos.php';
 //require_once __DIR__ . '/src/routes/batch.php';
 require_once __DIR__ . '/src/routes/app/batch/batch.php';
 require_once __DIR__ . '/src/routes/app/batch/clonebatch.php';
+require_once __DIR__ . '/src/routes/app/batch/planeacion.php';
 require_once __DIR__ . '/src/routes/app/colas/colasTrabajo.php';
 
 //Batch_Tanques

@@ -10,15 +10,12 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 $app->post('/programPlan', function (Request $request, Response $response, $args) use ($planeacionDao) {
     session_start();
     $dataPedidos = $request->getParsedBody();
+    $dataPedidos = $dataPedidos['data'];
 
     $dataPedidosGranel = $planeacionDao->setDataPedidos($dataPedidos);
 
-    $_SESSION['dataPedidos'] = $dataPedidosGranel;
-});
+    $_SESSION['dataGranel'] = $dataPedidosGranel;
 
-$app->get('/destroyPedidos', function (Request $request, Response $response, $args) {
-    session_start();
-    unset($_SESSION['dataPedidos']);
-    $response->getBody()->write(json_encode(JSON_NUMERIC_CHECK));
+    $response->getBody()->write(json_encode($dataPedidosGranel, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');
 });

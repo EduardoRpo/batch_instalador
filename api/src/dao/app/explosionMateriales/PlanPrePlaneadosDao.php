@@ -20,12 +20,14 @@ class PlanPrePlaneadosDao extends estadoInicialDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $sql = "SELECT pre_plan.id, pp.nombre AS propietario, pre_plan.pedido, pre_plan.unidad_lote, pre_plan.fecha_programacion, pre_plan.tamano_lote, CURRENT_DATE AS fecha_actual, (SELECT referencia FROM producto WHERE multi = (SELECT multi FROM producto WHERE referencia = pre_plan.id_producto) LIMIT 1) AS granel,
+        $sql = "SELECT pre_plan.id, pp.nombre AS propietario, pre_plan.pedido, pre_plan.unidad_lote, pre_plan.fecha_programacion, pre_plan.tamano_lote, l.densidad, l.ajuste, pc.nombre as presentacion, CURRENT_DATE AS fecha_actual, (SELECT referencia FROM producto WHERE multi = (SELECT multi FROM producto WHERE referencia = pre_plan.id_producto) LIMIT 1) AS granel,
                         pre_plan.id_producto, p.nombre_referencia, pre_plan.sim, CONCAT('S', WEEK(pre_plan.fecha_programacion)) AS semana, IF(pre_plan.estado = 0, 'Sin Formula y/o Instructivos', 'Inactivo') AS estado, pre_plan.planeado
                 FROM plan_preplaneados pre_plan 
                     INNER JOIN producto p ON p.referencia = pre_plan.id_producto 
                     INNER JOIN propietario pp ON pp.id = p.id_propietario
-                    WHERE pre_plan.planeado = 0";
+                    INNER JOIN linea l ON p.id_linea = l.id 
+                    INNER JOIN presentacion_comercial pc ON p.presentacion_comercial = pc.id 
+                    WHERE pre_plan.planeado = 0 ORDER BY `propietario` ASC";
 
         $query = $connection->prepare($sql);
         $query->execute();
@@ -48,6 +50,7 @@ class PlanPrePlaneadosDao extends estadoInicialDao
         $connection = Connection::getInstance()->getConnection();
 
         try {
+
             /* Validar cantidad de formulas y instructivos */
             $formulas = $this->findCountFormula($dataPedidos['granel']);
             $instructivos = $this->findCountInstructivo($dataPedidos['granel']);
@@ -59,9 +62,9 @@ class PlanPrePlaneadosDao extends estadoInicialDao
             else
                 $estado = 1;
 
+            $stmt = $connection->prepare("INSERT INTO plan_preplaneados (pedido, fecha_programacion, tamano_lote, unidad_lote, id_producto, estado, fecha_insumo, sim)
+                                          VALUES (:pedido, :fecha_programacion, :tamano_lote, :unidad_lote, :id_producto, :estado, :fecha_insumo, :sim)");
 
-            $stmt = $connection->prepare("INSERT INTO plan_preplaneados (pedido, fecha_programacion, tamano_lote, unidad_lote, id_producto, estado, sim)
-                                          VALUES (:pedido, :fecha_programacion, :tamano_lote, :unidad_lote, :id_producto, :estado, :sim)");
 
             $stmt->execute([
                 'pedido' => $dataPedidos['numPedido'],
@@ -69,6 +72,7 @@ class PlanPrePlaneadosDao extends estadoInicialDao
                 'tamano_lote' => $dataPedidos['tamanio_lote'],
                 'unidad_lote' => $dataPedidos['cantidad_acumulada'],
                 'id_producto' => $dataPedidos['referencia'],
+                'fecha_insumo' => $dataPedidos['fecha_insumo'],
                 'estado' => $estado,
                 'sim' => $dataPedidos['simulacion']
             ]);
@@ -90,13 +94,15 @@ class PlanPrePlaneadosDao extends estadoInicialDao
         ]);
     }
 
-    public function updateUnidadLote($dataPedidos)
+    public function updateUnidadLote($dataPedidos, $tamano_lote)
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $stmt = $connection->prepare("UPDATE plan_preplaneados SET unidad_lote = :unidad_lote WHERE id = :id");
+        $stmt = $connection->prepare("UPDATE plan_preplaneados SET unidad_lote = :unidad_lote, tamano_lote = :tamano_lote
+                                      WHERE id = :id");
         $stmt->execute([
             'id' => $dataPedidos['id'],
+            'tamano_lote' => $tamano_lote,
             'unidad_lote' => $dataPedidos['unidad']
         ]);
     }

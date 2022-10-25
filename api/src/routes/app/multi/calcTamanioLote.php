@@ -26,7 +26,7 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
   $_SESSION['dataPedidos'] = $dataPedidos;
 
   // Consolidar referencias
-
+  /*
   $dataPedidosReferencias = array();
 
   foreach ($dataPedidos as $t) {
@@ -51,26 +51,18 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
       );
   }
 
-  // Calcular el tamaño del lote
-
-  for ($i = 0; $i < sizeof($dataPedidosReferencias); $i++) {
-    $dataMulti = $multiDao->findProductMultiByRef($dataPedidosReferencias[$i]['referencia']);
-    $tamanio_lote = $calcTamanioMultiDao->calcularTamanioLote($dataMulti, $dataPedidosReferencias[$i]['cantidad_acumulada']);
-    $dataPedidosReferencias[$i]['tamanio_lote'] = $tamanio_lote;
-  }
-
   // Eliminar granel donde tamanio_lote sea mayor a 2500
-  for ($i = 0; $i < sizeof($dataPedidosReferencias); $i++) {
-    if ($dataPedidosReferencias[$i]['tamanio_lote'] > 2500) {
-      $planPedidosDao->checkPedidos($dataPedidosReferencias[$i]); // Cambiar estado a 2
+  for ($i = 0; $i < sizeof($dataPedidos); $i++) {
+    if ($dataPedidos[$i]['tamanio_lote'] > 2500) {
+      $planPedidosDao->checkPedidos($dataPedidos[$i]); // Cambiar estado a 2
       // Capturar data de lotes programados, para mostrar en la ventana de calculo
-      $dataPedidosLotes[$i] = $dataPedidosReferencias[$i];
-      unset($dataPedidosReferencias[$i]);
+      $dataPedidosLotes[$i] = $dataPedidos[$i];
+      unset($dataPedidos[$i]);
     }
   }
 
   // Consolidar los graneles
-  /*
+  
   $dataPedidosGranel = array();
 
   foreach ($dataPedidosReferencias as $t) {
@@ -99,13 +91,24 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
         $dataPedidosGranel[$i]['multi'][$j] = $dataPedidosReferencias[$j];
     // Restablecer llaves de variable $dataPedidosGranel
     $dataPedidosGranel[$i]['multi'] = array_values($dataPedidosGranel[$i]['multi']);
-  }*/
+  }
 
   if (!isset($dataPedidosLotes))
-    $dataPedidosLotes = $dataPedidosReferencias;
+    $dataPedidosLotes = $dataPedidos;
+  */
+
+  // Calcular el tamaño del lote
+
+  for ($i = 0; $i < sizeof($dataPedidos); $i++) {
+    $dataMulti = $multiDao->findProductMultiByRef($dataPedidos[$i]['referencia']);
+    $tamanio_lote = $calcTamanioMultiDao->calcularTamanioLote($dataMulti, $dataPedidos[$i]['cantidad_acumulada']);
+    $dataPedidos[$i]['tamanio_lote'] = $tamanio_lote;
+  }
+
+  $dataPedidosLotes = $planPedidosDao->checkTamanioLote($dataPedidos);
 
   //Almacenar en variables de session la variable $dataPedidosGranel
-  $_SESSION['dataGranel'] = $dataPedidosReferencias;
+  $_SESSION['dataGranel'] = $dataPedidosLotes;
 
   $countPrePlaneados = $planPrePlaneadosDao->findCountPrePlaneados();
 
@@ -119,7 +122,7 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
 //No programar lotes
 $app->get('/eliminarLote', function (Request $request, Response $response, $args) {
   session_start();
-  unset($_SESSION['dataPedidos'], $_SESSION['dataMulti']);
+  unset($_SESSION['dataPedidos'], $_SESSION['dataGranel']);
   $response->getBody()->write(json_encode(JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });

@@ -169,17 +169,17 @@ include_once("modal/m_observaciones.php");
                   <div class="col-md-12 align-self-right">
                     <div class="card">
                       <div class="mt-3 text-center">
-                        <button class="toggle-vis btn btn-primary hideTitle" id="0">Propietario</button>
-                        <button class="toggle-vis btn btn-primary hideTitle" id="1">Pedido</button>
-                        <button class="toggle-vis btn btn-primary hideTitle" id="2">F_Pedidos</button>
-                        <button class="toggle-vis btn btn-primary hideTitle" id="3">Granel</button>
-                        <button class="toggle-vis btn btn-primary hideTitle" id="4">Referencia</button>
-                        <button class="toggle-vis btn btn-primary hideTitle" id="5">Observaciones</button>
-                        <button class="toggle-vis btn btn-primary hideTitle" id="6">Producto</button>
-                        <button class="toggle-vis btn btn-primary hideTitle" id="7">Cant_original</button>
-                        <button class="toggle-vis btn btn-primary hideTitle" id="8">Saldo Ofima</button>
-                        <button class="toggle-vis btn btn-primary hideTitle" id="9">Acum_Prog</button>
-                        <button class="toggle-vis btn btn-primary hideTitle" id="10">Cant_Programar</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="1">Propietario</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="2">Pedido</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="3">F_Pedidos</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="4">Granel</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="5">Referencia</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="6">Observaciones</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="7">Producto</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="8">Cant_original</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="9">Saldo Ofima</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="10">Acum_Prog</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="11">Cant_Programar</button>
                         <button class="toggle-vis btn btn-primary" id="calcLote">Calcular Lote</button>
                       </div>
                       <div class="card-block">

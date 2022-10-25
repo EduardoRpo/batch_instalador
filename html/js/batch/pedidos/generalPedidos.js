@@ -20,7 +20,7 @@ $(document).ready(function () {
                 </tbody>
             </table><br>`,
         function () {
-          saveBatch();
+          saveFechaPlaneacion();
         },
         function () {
           clearInputArray();
@@ -65,7 +65,7 @@ $(document).ready(function () {
   };
 
   //Opcion SI
-  saveBatch = () => {
+  saveFechaPlaneacion = () => {
     alertify
       .prompt(
         'Planeación',
@@ -147,8 +147,10 @@ $(document).ready(function () {
   clearInputArray = () => {
     clearVariables();
     $('#tablaPedidos').DataTable().ajax.reload();
+    $('#tablaBatchPlaneados').DataTable().ajax.reload();
     deleteSession();
     pedidosProgramar.splice(0, pedidosProgramar.length);
+    dataPlaneacion = [];
   };
 
   //Ir al backend y borrar la variable de Session $dataPedidos

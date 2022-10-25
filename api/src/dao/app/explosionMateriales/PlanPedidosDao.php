@@ -16,6 +16,24 @@ class PlanPedidosDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
+    public function checkTamanioLote($dataPedidos)
+    {
+        // Eliminar granel donde tamanio_lote sea mayor a 2500
+        for ($i = 0; $i < sizeof($dataPedidos); $i++) {
+            if ($dataPedidos[$i]['tamanio_lote'] > 2500) {
+                $this->checkPedidos($dataPedidos[$i]); // Cambiar estado a 2
+                // Capturar data de lotes programados, para mostrar en la ventana de calculo
+                $dataPedidosLotes[$i] = $dataPedidos[$i];
+                unset($dataPedidos[$i]);
+            }
+        }
+
+        if (!isset($dataPedidosLotes))
+            $dataPedidosLotes = $dataPedidos;
+
+        return $dataPedidosLotes;
+    }
+
     public function resetEstadoColorProgramacion()
     {
         $connection = Connection::getInstance()->getConnection();

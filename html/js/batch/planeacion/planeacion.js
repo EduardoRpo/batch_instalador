@@ -1,31 +1,148 @@
 $(document).ready(function () {
-  let dataPlaneacion = {};
+  let dataPlaneacion = [];
+
+  $(document).on('click', '.link-select', function () {
+    id = this.id;
+
+    if ($(`#${id}`).is(':checked')) {
+      dataPlan = tablaBatchPlaneados.row($(this).parents('tr')).data();
+
+      planeacion = {
+        id: id,
+        granel: dataPlan.granel,
+        producto: dataPlan.nombre_referencia,
+        referencia: dataPlan.id_producto,
+        fecha_insumo: dataPlan.fecha_insumo,
+        numPedido: dataPlan.pedido,
+        cantidad_acumulada: dataPlan.unidad_lote,
+        tamanio_lote: dataPlan.tamano_lote,
+      };
+
+      dataPlaneacion.push(planeacion);
+    } else {
+      for (i = 0; i < dataPlaneacion.length; i++) {
+        if (dataPlaneacion[i].id == id) {
+          dataPlaneacion.splice(i, 1);
+        }
+      }
+    }
+  });
 
   $('#btnProgramar').click(function (e) {
     e.preventDefault();
 
-    data = tableBatchPrePlaneacion.rows().data();
+    if (dataPlaneacion.length == 0) {
+      alertify.set('notifier', 'position', 'top-right');
+      alertify.error('Seleccione pedido para planear');
+      return false;
+    }
 
-    data.forEach((t) => {
-      repeat = false;
-      for (i = 0; i < dataPlaneacion.length; i++) {
-        if (dataPlaneacion[i].granel == $t.granel) {
-          dataPlaneacion[
-            i
-          ].numPedido = `${dataPlaneacion[i].pedido} - ${t.pedido}`;
-          dataPlaneacion[i].cantidad_acumulada += t.unidad_lote;
-          dataPlaneacion[
-            i
-          ].fecha_insumo = `${dataPlaneacion[$i].fecha_insumo} - ${t.fecha_insumo}`;
-          $repeat = true;
-          break;
-        }
-      }
-
-      if (repeat == false)
-        dataPlaneacion = {
-          granel: t.granel,
-        };
+    $.ajax({
+      type: 'POST',
+      url: '/api/programPlan',
+      data: { data: dataPlaneacion },
+      success: function (resp) {
+        alertifyProgramar(resp);
+      },
     });
   });
+
+  alertifyProgramar = (data) => {
+    alertify
+      .confirm(
+        'Samara Cosmetics',
+        `<p>¿Desea programar los pedidos?</p><p><br></p>
+                <table class="table table-striped dataTable text-center" aria-describedby="tablaPedidos_info">
+                <thead>
+                  <tr>
+                    <th class="text-center">Granel</th>
+                    <th class="text-center">Descripción</th>
+                    <th class="text-center">Tamaño (Kg)</th>
+                    <th class="text-center">Cantidad (Und)</th>
+                    <th class="text-center" style="width: 131px">Tanques</th>
+                    <th class="text-center">Cantidad (Tanques)</th>
+                    <th class="text-center">Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${(row = addRowsPedidos(data))} 
+                </tbody> 
+            </table><br>`,
+        function () {
+          saveFechaProgramacion();
+        },
+        function () {
+          clearInputArray();
+        }
+      )
+      .set('labels', { ok: 'Si', cancel: 'No' })
+      .set({ closableByDimmer: false })
+      .set('resizable', true)
+      .resizeTo(800, 548);
+
+    cargarTanques();
+  };
+
+  addRowsPedidos = (data) => {
+    row = [];
+    for (i = 0; i < data.length; i++) {
+      row.push(`<tr ${(text = color(data[i].tamanio_lote))}>
+                <td>${data[i].granel}</td>
+                <td>${data[i].producto}</td>
+                <td>${data[i].tamanio_lote.toFixed(2)}</td>
+                <td>${data[i].cantidad_acumulada}</td>
+                <td>
+                  <select class="form-control-updated select-tanque" id="cmbTanque-${i}"></select>
+                </td>
+                <td>
+                  <input type="number" class="form-control-updated text-center" id="cantTanques-${i}">
+                </td>
+                <td>
+                  <input type="number" class="form-control-updated text-center" id="totalTanques-${i}" disabled>
+                </td>
+                ${(symbol = check(data[i].tamanio_lote))}
+                </tr>`);
+    }
+    return row.join('');
+  };
+
+  saveFechaProgramacion = () => {
+    alertify
+      .prompt(
+        'Programación',
+        'Ingrese la fecha de programación',
+        '',
+        function (evt, value) {
+          if (!value || value == '') {
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.error('Ingrese fecha de programación');
+            return false;
+          }
+
+          dataPrePlaneados = {};
+          dataPrePlaneados.date = value;
+
+          savePlaneados(dataPrePlaneados);
+        },
+        function () {
+          deleteSession();
+        }
+      )
+      .set('type', 'date')
+      .set({ closableByDimmer: false });
+  };
+
+  savePlaneados = (data) => {
+    $.ajax({
+      type: 'POST',
+      url: '/api/saveBatch',
+      data: data,
+      success: function (data) {
+        message(data);
+
+        dataPlaneacion = [];
+        deleteSession();
+      },
+    });
+  };
 });

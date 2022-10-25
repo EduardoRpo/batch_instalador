@@ -7,6 +7,7 @@ $(document).ready(function () {
   $(document).on('blur', '.cantProgram', function (e) {
     e.preventDefault();
     id_input = this.id.trim();
+    num = fila.num;
     referencia = fila.id_producto.trim();
     numPedido = fila.pedido;
     cantidad = $(`#${id_input}`).val();
@@ -19,7 +20,7 @@ $(document).ready(function () {
       return false;
     }
 
-    arrayPreprogramados(referencia, cantidad, numPedido);
+    arrayPreprogramados(num, referencia, cantidad, numPedido);
     if (date) {
       fechaInsumo(numPedido, referencia, pedidosProgramar, date);
     } else {
@@ -29,23 +30,18 @@ $(document).ready(function () {
     }
   });
 
-  arrayPreprogramados = (referencia, cantidad, numPedido) => {
+  arrayPreprogramados = (num, referencia, cantidad, numPedido) => {
     /* validar que el numero de pedido y referencia no esten en el array e insertar 
               de los contrario actualizar la cantidad */
 
     for (i = 0; i < pedidosProgramar.length; i++) {
-      if (
-        (referencia == pedidosProgramar[i].referencia &&
-          numPedido == pedidosProgramar[i].numPedido &&
-          cantidad != pedidosProgramar[i].cantidad) ||
-        cantidad == pedidosProgramar[i].cantidad
-      )
-        deleteArray(numPedido);
+      if (num == pedidosProgramar[i].num) deleteArray(num);
     }
 
     pedidos = {};
     granel = fila.granel;
 
+    pedido.num = fila.num;
     pedidos.numPedido = numPedido;
     pedidos.referencia = referencia;
     pedidos.producto = fila.nombre_referencia;
@@ -85,9 +81,9 @@ $(document).ready(function () {
     });
   };
 
-  deleteArray = (numPedido) => {
+  deleteArray = (num) => {
     for (i = 0; i < pedidosProgramar.length; i++) {
-      if (pedidosProgramar[i].numPedido == numPedido) {
+      if (pedidosProgramar[i].num == num) {
         pedidosProgramar.splice(i, 1);
       }
     }

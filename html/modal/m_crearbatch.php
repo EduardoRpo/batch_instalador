@@ -117,9 +117,9 @@
                         <label class="labelTanques">Total</label>
                         <label class="labelTanques"></label>
 
-                        <select class="form-control tnq" id="cmbTanque1"></select> <!-- onchange="validarTanque(1);" -->
-                        <input type="number" class="form-control tnq" id="txtCantidad1"> <!-- onkeyup="CalcularTanque(1) -->
-                        <input type="number" class="form-control tnq" id="txtTotal1" readonly>
+                        <select class="form-control select-tanque" id="cmbTanque1"></select> <!-- onchange="validarTanque(1);" -->
+                        <input type="number" class="form-control txtCantidad" id="txtCantidad1"> <!-- onkeyup="CalcularTanque(1) -->
+                        <input type="number" class="form-control txtTotal" id="txtTotal1" readonly>
                         <!-- <button class="btn btn-warning" id="btnEliminar1" type="button" onclick="eliminarTanque(1);">X</button> -->
 
                         <label for="" class="labelTotalTanques">Total</label>

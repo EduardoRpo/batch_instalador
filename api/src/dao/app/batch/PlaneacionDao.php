@@ -6,7 +6,7 @@ use BatchRecord\Constants\Constants;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger;
 
-class PlaneacionDao
+class PlaneacionDao extends PlanPedidosDao
 
 {
     private $logger;
@@ -19,9 +19,39 @@ class PlaneacionDao
 
     public function setDataPedidos($dataPedidos)
     {
-        $dataPedidosGranel = array();
+        // Consolidar referencias
+        $dataPedidosReferencias = array();
 
         foreach ($dataPedidos as $t) {
+            $repeat = false;
+            for ($i = 0; $i < count($dataPedidosReferencias); $i++) {
+                if ($dataPedidosReferencias[$i]['referencia'] == $t['referencia']) {
+                    $dataPedidosReferencias[$i]['id'] = "{$dataPedidosReferencias[$i]['id']} - {$t['id']}";
+                    $dataPedidosReferencias[$i]['numPedido'] = "{$dataPedidosReferencias[$i]['numPedido']} - {$t['numPedido']}";
+                    $dataPedidosReferencias[$i]['tamanio_lote'] += $t['tamanio_lote'];
+                    $dataPedidosReferencias[$i]['cantidad_acumulada'] += $t['cantidad_acumulada'];
+                    $dataPedidosReferencias[$i]['fecha_insumo'] = "{$dataPedidosReferencias[$i]['fecha_insumo']} - {$t['fecha_insumo']}";
+                    $repeat = true;
+                    break;
+                }
+            }
+            if ($repeat == false)
+                $dataPedidosReferencias[] = array(
+                    'id' => $t['id'],
+                    'granel' => $t['granel'],
+                    'numPedido' => $t['numPedido'],
+                    'referencia' => $t['referencia'],
+                    'producto' => $t['producto'],
+                    'tamanio_lote' => $t['tamanio_lote'],
+                    'cantidad_acumulada' => $t['cantidad_acumulada'],
+                    'fecha_insumo' => $t['fecha_insumo']
+                );
+        }
+
+        // Consolidad graneles
+        $dataPedidosGranel = array();
+
+        foreach ($dataPedidosReferencias as $t) {
             $repeat = false;
             for ($i = 0; $i < count($dataPedidosGranel); $i++) {
                 if ($dataPedidosGranel[$i]['granel'] == $t['granel']) {
@@ -41,14 +71,16 @@ class PlaneacionDao
         }
 
         for ($i = 0; $i < sizeof($dataPedidosGranel); $i++) {
-            for ($j = 0; $j < sizeof($dataPedidos); $j++)
-                if ($dataPedidosGranel[$i]['granel'] == $dataPedidos[$j]['granel'])
+            for ($j = 0; $j < sizeof($dataPedidosReferencias); $j++)
+                if ($dataPedidosGranel[$i]['granel'] == $dataPedidosReferencias[$j]['granel'])
                     //Adiciona la multipresentacion al Granel
-                    $dataPedidosGranel[$i]['multi'][$j] = $dataPedidos[$j];
+                    $dataPedidosGranel[$i]['multi'][$j] = $dataPedidosReferencias[$j];
             // Restablecer llaves de variable $dataPedidosGranel
             $dataPedidosGranel[$i]['multi'] = array_values($dataPedidosGranel[$i]['multi']);
         }
 
-        return $dataPedidosGranel;
+        $dataPedidosLotes = $this->checkTamanioLote($dataPedidosGranel);
+
+        return $dataPedidosLotes;
     }
 }

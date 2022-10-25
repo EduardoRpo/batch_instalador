@@ -116,40 +116,39 @@ $(document).ready(function () {
             );
             return false;
           }
-        } else {
-          if (data.pedido) $('#pedido').val(data.pedido);
-          else $('#pedido').val('');
-
-          $('#idbatch').val(data.id_batch);
-          $('#referencia').val(data.referencia);
-          $('#inpNombreReferencia').val(data.nombre_referencia);
-          $('#marca').val(data.marca);
-          $('#propietario').val(data.propietario);
-          $('#producto').val(data.nombre_referencia);
-          $('#presentacioncomercial').val(data.presentacion);
-          $('#linea').val(data.linea);
-          $('#notificacionSanitaria').val(data.notificacion_sanitaria);
-          $('#densidad_producto').val(data.densidad_producto);
-          $('#ajuste').val(data.ajuste);
-
-          $('#unidadesxlote').val(data.unidad_lote);
-          $('#tamanototallote').val(Math.ceil(data.tamano_lote));
-          $('#fechaprogramacion').val(data.fecha_programacion);
-          $('#fechaProgramacionSugerida').val(data.fecha_insumo);
-
-          $('#cmbNoReferencia').css('display', 'none');
-          $('#nombrereferencia').css('display', 'none');
-
-          $('#referencia').css('display', 'block');
-          $('#guardarBatch').html('Actualizar');
-          $('.tcrearBatch').html('Actualizar Batch Record');
-
-          $('#cmbTanque1').val(data.tanque);
-          $('#txtCantidad1').val(data.cantidad);
-
-          $('#txtCantidad1').click();
-          $('#modalCrearBatch').modal('show');
         }
+        if (data.pedido) $('#pedido').val(data.pedido);
+        else $('#pedido').val('');
+
+        $('#idbatch').val(data.id_batch);
+        $('#referencia').val(data.referencia);
+        $('#inpNombreReferencia').val(data.nombre_referencia);
+        $('#marca').val(data.marca);
+        $('#propietario').val(data.propietario);
+        $('#producto').val(data.nombre_referencia);
+        $('#presentacioncomercial').val(data.presentacion);
+        $('#linea').val(data.linea);
+        $('#notificacionSanitaria').val(data.notificacion_sanitaria);
+        $('#densidad_producto').val(data.densidad_producto);
+        $('#ajuste').val(data.ajuste);
+
+        $('#unidadesxlote').val(data.unidad_lote);
+        $('#tamanototallote').val(Math.ceil(data.tamano_lote));
+        $('#fechaprogramacion').val(data.fecha_programacion);
+        $('#fechaProgramacionSugerida').val(data.fecha_insumo);
+
+        $('#cmbNoReferencia').css('display', 'none');
+        $('#nombrereferencia').css('display', 'none');
+
+        $('#referencia').css('display', 'block');
+        $('#guardarBatch').html('Actualizar');
+        $('.tcrearBatch').html('Actualizar Batch Record');
+
+        $('#cmbTanque1').val(data.tanque);
+        $('#txtCantidad1').val(data.cantidad);
+
+        $('#txtCantidad1').click();
+        $('#modalCrearBatch').modal('show');
       },
       error: function (response) {
         console.log(response);

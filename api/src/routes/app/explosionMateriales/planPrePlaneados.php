@@ -1,10 +1,12 @@
 <?php
 
+use BatchRecord\dao\calcTamanioMultiDao;
 use BatchRecord\dao\PlanPedidosDao;
 use BatchRecord\dao\PlanPrePlaneadosDao;
 
 $planPrePlaneadosDao = new PlanPrePlaneadosDao();
 $planPedidosDao = new PlanPedidosDao();
+$calcTamanioMultiDao = new calcTamanioMultiDao();
 
 
 use Psr\Http\Message\ResponseInterface as Response;
@@ -31,7 +33,6 @@ $app->post('/addPrePlaneados', function (Request $request, Response $response, $
         // Guardar pedidos a pre planeado
         $prePlaneados = $planPrePlaneadosDao->insertPrePlaneados($dataPedidos[$i]);
     }
-    // $planPedidos = $planPedidosDao->updateEMPedidosRegistro();
 
 
     if ($prePlaneados == null)
@@ -60,10 +61,13 @@ $app->post('/updatePlaneados', function (Request $request, Response $response, $
     return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->post('/updateUnidadLote', function (Request $request, Response $response, $args) use ($planPrePlaneadosDao) {
+$app->post('/updateUnidadLote', function (Request $request, Response $response, $args) use ($planPrePlaneadosDao, $calcTamanioMultiDao) {
     $dataPedidos = $request->getParsedBody();
 
-    $prePlaneados = $planPrePlaneadosDao->updateUnidadLote($dataPedidos);
+    /* Recalcular tamanio lote */
+    $tamano_lote = $calcTamanioMultiDao->calcularTamanioLote($dataPedidos, $dataPedidos['unidad']);
+
+    $prePlaneados = $planPrePlaneadosDao->updateUnidadLote($dataPedidos, $tamano_lote);
 
     if ($prePlaneados == null)
         $resp = array('success' => true, 'message' => 'Pedido modificado correctamente');
