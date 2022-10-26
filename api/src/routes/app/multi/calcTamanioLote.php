@@ -18,13 +18,9 @@ $planPrePlaneadosDao = new PlanPrePlaneadosDao();
 $app->post('/calcTamanioLote', function (Request $request, Response $response, $args) use ($multiDao, $calcTamanioMultiDao, $productsDao, $planPedidosDao, $planPrePlaneadosDao) {
   $dataPedidos = $request->getParsedBody();
   $dataPedidos = $dataPedidos['data'];
-
-  $referencia = array();
+  session_start();
 
   // Almacena las cantidades registradas por pedido y referencia individualmente
-  session_start();
-  $_SESSION['dataPedidos'] = $dataPedidos;
-
   // Consolidar referencias
   /*
   $dataPedidosReferencias = array();

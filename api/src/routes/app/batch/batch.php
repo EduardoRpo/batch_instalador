@@ -8,7 +8,7 @@ use BatchRecord\dao\ControlFirmasDao;
 use BatchRecord\dao\MultiDao;
 use BatchRecord\dao\PlanPedidosDao;
 use BatchRecord\dao\ObservacionesInactivosDao;
-
+use BatchRecord\dao\PlanPrePlaneadosDao;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
@@ -18,6 +18,7 @@ $tanquesDao = new TanquesDao();
 $controlFirmasDao = new ControlFirmasDao();
 $multiDao = new MultiDao();
 $EMPedidosRegistroDao = new PlanPedidosDao();
+$planPrePlaneadosDao = new PlanPrePlaneadosDao();
 $observacionesDao = new ObservacionesInactivosDao();
 
 
@@ -54,25 +55,23 @@ $app->get('/batchcerrados', function (Request $request, Response $response, $arg
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->post('/saveBatch', function (Request $request, Response $response, $args) use ($batchDao, $ultimoBatchDao, $tanquesDao, $controlFirmasDao, $multiDao, $EMPedidosRegistroDao, $observacionesDao) {
+$app->post('/saveBatch', function (Request $request, Response $response, $args) use ($batchDao, $ultimoBatchDao, $tanquesDao, $controlFirmasDao, $multiDao, $EMPedidosRegistroDao, $observacionesDao, $planPrePlaneadosDao) {
   session_start();
   $dataBatch = $request->getParsedBody();
-  $flag_tanques = 1;
+  // $flag_tanques = 1;
 
-  $date = $dataBatch['date'];
 
-  if ($dataBatch['date'])
-    unset($dataBatch['date']);
-
-  //Si el data esta vacio
-  if (sizeof($dataBatch) == 0) {
+  if ($dataBatch['data']) {
+    $pedidos = $dataBatch['data'];
     $dataBatch = $_SESSION['dataGranel'];
-    // $dataPedidos = $_SESSION['dataPedidos'];
 
-    for ($i = 0; $i < sizeof($dataBatch); $i++)
-      $dataBatch[$i]['date'] = $date;
-
-    $flag_tanques = 0;
+    for ($i = 0; $i < sizeof($dataBatch); $i++) {
+      if ($dataBatch[$i]['granel'] == $pedidos[$i]['granel']) {
+        $dataBatch[$i]['date'] = $pedidos[sizeof($pedidos) - 1]['date'];
+        $dataBatch[$i]['tanque'] = $pedidos[$i]['tanque'];
+        $dataBatch[$i]['cantidades'] = $pedidos[$i]['cantidades'];
+      }
+    }
   }
 
   /* Crear el batch */
@@ -94,7 +93,7 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
       $id_batch = $ultimoBatchDao->ultimoBatchCreado();
 
     /* Crea los tanques */
-    if ($resp == null and $flag_tanques == 1)
+    if ($resp == null)
       $resp = $tanquesDao->saveTanques($id_batch['id'], $dataBatch[$i]);
 
     /* Crea el control de formulas */
@@ -116,6 +115,9 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
           $observaciones = $observacionesDao->findObservaciones($multi[$j]);
           if ($observaciones)
             $resp = $observacionesDao->updateObservacion($id_batch['id'], $multi[$j]);
+
+          // Eliminar campos de preplaneados
+          $resp = $planPrePlaneadosDao->deletePlaneado($multi[$i]['id']);
         } else {
           //$resp = $batchDao->updateBatchPedido($id_batch['id'], $dataBatch[0]);
           $_SESSION['dataPedidos'] = $multi;
@@ -126,9 +128,9 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
   $resp = $EMPedidosRegistroDao->updateEMPedidosRegistro();
 
   /* Notificaciones*/
-  if ($resp == null && $flag_tanques == 1)
+  if ($resp == null && $dataBatch[0]['ref'])
     $resp = array('success' => true, 'message' => 'Batch creado correctamente');
-  else if ($resp == null && $flag_tanques == 0)
+  else if ($resp == null)
     $resp = array('success' => true, 'message' => sizeof($dataBatch) . ' ' . 'Batchs creados correctamente');
   else
     $resp = array('error' => true, 'message' => 'Ocurrio un error mientras creaba el Batch. Intentelo nuevamente');

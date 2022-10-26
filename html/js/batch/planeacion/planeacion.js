@@ -1,5 +1,7 @@
 $(document).ready(function () {
   let dataPlaneacion = [];
+  dataTanquesPlaneacion = [];
+  idTanque = 0;
 
   $(document).on('click', '.link-select', function () {
     id = this.id;
@@ -48,6 +50,7 @@ $(document).ready(function () {
   });
 
   alertifyProgramar = (data) => {
+    count = data.length;
     alertify
       .confirm(
         'Samara Cosmetics',
@@ -66,7 +69,20 @@ $(document).ready(function () {
                 </thead>
                 <tbody>
                   ${(row = addRowsPedidos(data))} 
-                </tbody> 
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                      <input type="number" class="text-center form-control-updated" id="sumaAllTanques" disabled>
+                    </td>
+                  </tr>
+                </tfoot>
             </table><br>`,
         function () {
           saveFechaProgramacion();
@@ -78,7 +94,7 @@ $(document).ready(function () {
       .set('labels', { ok: 'Si', cancel: 'No' })
       .set({ closableByDimmer: false })
       .set('resizable', true)
-      .resizeTo(800, 548);
+      .resizeTo(1200, 548);
 
     cargarTanques();
   };
@@ -87,18 +103,20 @@ $(document).ready(function () {
     row = [];
     for (i = 0; i < data.length; i++) {
       row.push(`<tr ${(text = color(data[i].tamanio_lote))}>
-                <td>${data[i].granel}</td>
+                <td id="granel-${i}">${data[i].granel}</td>
                 <td>${data[i].producto}</td>
-                <td>${data[i].tamanio_lote.toFixed(2)}</td>
+                <td id="tamanioLote-${i}">${data[i].tamanio_lote.toFixed(
+        2
+      )}</td>
                 <td>${data[i].cantidad_acumulada}</td>
                 <td>
                   <select class="form-control-updated select-tanque" id="cmbTanque-${i}"></select>
                 </td>
                 <td>
-                  <input type="number" class="form-control-updated text-center" id="cantTanques-${i}">
+                  <input type="number" class="form-control-updated text-center txtCantidad" id="cantTanque-${i}">
                 </td>
                 <td>
-                  <input type="number" class="form-control-updated text-center" id="totalTanques-${i}" disabled>
+                  <input type="number" class="form-control-updated text-center" id="totalTanque-${i}" disabled>
                 </td>
                 ${(symbol = check(data[i].tamanio_lote))}
                 </tr>`);
@@ -119,10 +137,16 @@ $(document).ready(function () {
             return false;
           }
 
-          dataPrePlaneados = {};
-          dataPrePlaneados.date = value;
+          unique = Object.values(
+            dataTanquesPlaneacion.reduce((a, c) => {
+              a[c.granel] = c;
+              return a;
+            }, {})
+          );
 
-          savePlaneados(dataPrePlaneados);
+          unique.push({ date: value });
+
+          savePlaneados(unique);
         },
         function () {
           deleteSession();
@@ -136,7 +160,7 @@ $(document).ready(function () {
     $.ajax({
       type: 'POST',
       url: '/api/saveBatch',
-      data: data,
+      data: { data: data },
       success: function (data) {
         message(data);
 

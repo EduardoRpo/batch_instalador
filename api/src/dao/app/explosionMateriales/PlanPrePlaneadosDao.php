@@ -119,7 +119,15 @@ class PlanPrePlaneadosDao extends estadoInicialDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $stmt = $connection->prepare("DELETE FROM plan_preplaneados WHERE id = :id");
-        $stmt->execute(['id' => $id]);
+        if (strpos($id, '-')) {
+            $id = explode(" - ", $id);
+            foreach ($id as $p) {
+                $stmt = $connection->prepare("DELETE FROM plan_preplaneados WHERE id = :id");
+                $stmt->execute(['id' => $p]);
+            }
+        } else {
+            $stmt = $connection->prepare("DELETE FROM plan_preplaneados WHERE id = :id");
+            $stmt->execute(['id' => $id]);
+        }
     }
 }

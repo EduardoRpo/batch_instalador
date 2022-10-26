@@ -177,15 +177,25 @@ $(document).ready(function () {
 
   $(document).on('change', '.select-tanque', function (e) {
     idTanque = this.id;
-    $('.txtCantidad').click();
+    if (idTanque.includes('-')) {
+      i = idTanque.slice(-1, idTanque.length);
+      idCant = `cantTanque-${i}`;
+    } else idCant = 'txtCantidad1';
+
+    $(`#${idCant}`).click();
   });
 
   $(document).on('click keyup', '.txtCantidad', function (e) {
+    let sumaTanques = 0;
     idCant = this.id;
-    let tanque = parseFloat($(`#${idTanque}`).val());
+    if (idCant.includes('-')) i = idCant.slice(-1, idCant.length);
+
+    if (idCant.includes('-')) tanque = parseFloat($(`#cmbTanque-${i}`).val());
+    else tanque = parseFloat($(`#${idTanque}`).val());
+
     let tamanioTanque = parseFloat($(`#${idCant}`).val());
 
-    if (tamanioTanque < 0 || tamanioTanque == '') {
+    if (tamanioTanque < 0 || tamanioTanque == '' || isNaN(tamanioTanque)) {
       alertify.set('notifier', 'position', 'top-right');
       alertify.error('Ingrese la cantidad de Tanques');
       return false;
@@ -198,6 +208,9 @@ $(document).ready(function () {
     }
 
     let cantidadLote = parseFloat($('#tamanototallote').val());
+    if (isNaN(cantidadLote) && idCant.includes('-')) {
+      cantidadLote = parseFloat($(`#tamanioLote-${i}`).html());
+    }
 
     if (isNaN(cantidadLote)) {
       $('#tamanototallote').val('');
@@ -213,12 +226,40 @@ $(document).ready(function () {
       alertify.error(
         'La configuración de Tanques No supera el Tamaño del lote'
       );
-      $('#sumaTanques').val('');
-      $('#txtTotal1').val('');
+
+      if (idCant.includes('-')) {
+        $('#sumaAllTanques').val('');
+        $(`#totalTanque-${i}`).val('');
+      } else {
+        $('#sumaTanques').val('');
+        $('#txtTotal1').val('');
+      }
       return false;
     } else {
-      $('#sumaTanques').val(tamanioTotalTanque);
-      $('#txtTotal1').val(tamanioTotalTanque);
+      if (idCant.includes('-')) {
+        $(`#totalTanque-${i}`).val(tamanioTotalTanque);
+
+        for (let j = 0; j < count; j++) {
+          totalTanques = $(`#totalTanque-${j}`).val();
+          !totalTanques ? (totalTanques = 0) : totalTanques;
+
+          sumaTanques = parseFloat(sumaTanques) + parseFloat(totalTanques);
+        }
+        $('#sumaAllTanques').val(sumaTanques);
+
+        /* Capturar datos */
+        granel = $(`#granel-${i}`).html();
+
+        dataTanques = {
+          granel: granel,
+          tanque: tanque,
+          cantidades: tamanioTanque,
+        };
+        dataTanquesPlaneacion.push(dataTanques);
+      } else {
+        $('#sumaTanques').val(tamanioTotalTanque);
+        $('#txtTotal1').val(tamanioTotalTanque);
+      }
     }
   });
 

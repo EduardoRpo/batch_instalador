@@ -64,7 +64,6 @@ $(document).ready(function () {
         className: 'text-center',
         render: $.fn.dataTable.render.number('.', ',', 0, ''),
       },
-
       {
         title: 'Simulación',
         data: 'sim',
@@ -72,13 +71,18 @@ $(document).ready(function () {
         visible: false,
       },
       {
+        title: 'F. Insumo',
+        data: 'fecha_insumo',
+        className: 'text-center',
+      },
+      {
         title: 'F.Sugerida Pesaje',
-        data: 'sim',
+        data: 'fecha_pesaje',
         className: 'text-center',
       },
       {
         title: 'F.Sugerida Envasado',
-        data: 'sim',
+        data: 'fecha_envasado',
         className: 'text-center',
       },
       {
@@ -98,7 +102,7 @@ $(document).ready(function () {
       dataSrc: 'propietario',
       startRender: function (rows, group) {
         return $('<tr/>').append(
-          '<th class="text-center" colspan="12" style="font-weight: bold;">' +
+          '<th class="text-center" colspan="13" style="font-weight: bold;">' +
             group +
             '</th>'
         );

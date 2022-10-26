@@ -12,6 +12,8 @@ $app->post('/programPlan', function (Request $request, Response $response, $args
     $dataPedidos = $request->getParsedBody();
     $dataPedidos = $dataPedidos['data'];
 
+    $_SESSION['dataPedidos'] = $dataPedidos;
+
     $dataPedidosGranel = $planeacionDao->setDataPedidos($dataPedidos);
 
     $_SESSION['dataGranel'] = $dataPedidosGranel;
