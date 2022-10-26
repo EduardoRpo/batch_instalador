@@ -75,10 +75,10 @@ $(document).ready(function() {
                         data == 5 ?
                         'Aprobación' :
                         data == 5.5 ?
-                        'Envasado' :
+                        'Env/Acond' :
                         data == 6 ?
-                        'Envasado' :
-                        'Envasado';
+                        'Envasado/Acond' :
+                        'Envasado/Acond';
                 },
             },
             {
