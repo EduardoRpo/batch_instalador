@@ -53,15 +53,15 @@ class BatchDao extends estadoInicialDao
     {
         $connection = Connection::getInstance()->getConnection();
         //$stmt = $connection->prepare("SELECT * FROM producto INNER JOIN batch ON batch.id_producto = producto.referencia INNER JOIN linea ON producto.id_linea = linea.id INNER JOIN propietario ON producto.id_propietario = propietario.id WHERE batch.estado = 1 OR batch.estado = 2 AND batch.fecha_programacion = CURRENT_DATE()");
-        $stmt = $connection->prepare("SELECT DISTINCT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, pc.nombre as presentacion_comercial, batch.numero_lote, batch.tamano_lote, propietario.nombre, batch.fecha_creacion, WEEK(batch.fecha_creacion) AS semanas, 
-                                            batch.fecha_programacion, batch.estado, batch.multi, (SELECT COUNT(*) FROM observaciones_batch_inactivos WHERE batch = batch.id_batch) AS cant_observations
-                                      FROM batch 
-                                      INNER JOIN producto ON batch.id_producto = producto.referencia
-                                      INNER JOIN propietario  ON producto.id_propietario = propietario.id
-                                      INNER JOIN presentacion_comercial pc ON producto.presentacion_comercial = pc.id
-                                      LEFT JOIN observaciones_batch_inactivos obi ON obi.batch = batch.id_batch
-                                      WHERE estado > 2 AND batch.id_batch 
-                                      NOT IN (SELECT batch FROM `batch_liberacion` WHERE dir_produccion > 0 AND dir_calidad > 0 and dir_tecnica > 0);");
+        $stmt = $connection->prepare("SELECT DISTINCT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, pc.nombre as presentacion_comercial, batch.numero_lote, batch.tamano_lote, propietario.nombre, batch.fecha_creacion, WEEK(batch.fecha_creacion) AS semana_creacion, WEEK(batch.fecha_programacion) AS semana_programacion, 
+                                                batch.fecha_programacion, batch.estado, batch.multi, (SELECT COUNT(*) FROM observaciones_batch_inactivos WHERE batch = batch.id_batch) AS cant_observations
+                                        FROM batch 
+                                        INNER JOIN producto ON batch.id_producto = producto.referencia
+                                        INNER JOIN propietario  ON producto.id_propietario = propietario.id
+                                        INNER JOIN presentacion_comercial pc ON producto.presentacion_comercial = pc.id
+                                        LEFT JOIN observaciones_batch_inactivos obi ON obi.batch = batch.id_batch
+                                        WHERE estado > 2 AND batch.id_batch 
+                                        NOT IN (SELECT batch FROM `batch_liberacion` WHERE dir_produccion > 0 AND dir_calidad > 0 and dir_tecnica > 0)");
         $stmt->execute();
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         $batch = $stmt->fetchAll($connection::FETCH_ASSOC);
@@ -170,11 +170,11 @@ class BatchDao extends estadoInicialDao
         // $referencia             = $dataBatch['ref'];
         // $tamanototallote        = $dataBatch['lote'];
         // $tamanolotepresentacion = $dataBatch['presentacion'];
-        /*
-        if ($dataBatch['date'])
-            $fecha           = $dataBatch['date'];
+
+        if ($dataBatch['fecha_planeacion'])
+            $fecha           = $dataBatch['fecha_planeacion'];
         else
-        $fecha           = date("Y-m-d");*/
+            $fecha           = date("Y-m-d");
 
         $fechahoy = date("Y-m-d");
         $unidadesxlote = 0;
@@ -200,7 +200,7 @@ class BatchDao extends estadoInicialDao
                                       VALUES(:pedido, :fecha_creacion, :fecha_programacion, :fecha_actual, :numero_orden, :numero_lote, :tamano_lote, :lote_presentacion, :unidad_lote, :estado, :id_producto)");
         $stmt->execute([
             'pedido' => $pedido,
-            'fecha_creacion' => $fechahoy,
+            'fecha_creacion' => $fecha,
             'fecha_programacion' => $fechaprogramacion,
             'fecha_actual' => $fechahoy,
             'numero_orden' => 'OP012020',

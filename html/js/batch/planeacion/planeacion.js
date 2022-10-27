@@ -14,6 +14,7 @@ $(document).ready(function () {
         granel: dataPlan.granel,
         producto: dataPlan.nombre_referencia,
         referencia: dataPlan.id_producto,
+        fecha_planeacion: dataPlan.fecha_programacion,
         fecha_insumo: dataPlan.fecha_insumo,
         numPedido: dataPlan.pedido,
         cantidad_acumulada: dataPlan.unidad_lote,

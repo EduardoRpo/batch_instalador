@@ -66,7 +66,8 @@ class PlaneacionDao extends PlanPedidosDao
                     'granel' => $t['granel'],
                     'producto' => $t['producto'],
                     'cantidad_acumulada' => $t['cantidad_acumulada'],
-                    'tamanio_lote' => $t['tamanio_lote']
+                    'tamanio_lote' => $t['tamanio_lote'],
+                    'fecha_planeacion' => $t['fecha_programacion']
                 );
         }
 
