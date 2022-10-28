@@ -204,6 +204,7 @@ $(document).ready(function () {
     if (tanque == null || isNaN(tanque)) {
       alertify.set('notifier', 'position', 'top-right');
       alertify.error('Seleccione el tamaño del tanque');
+      if (idCant.includes('-')) $(`#cantTanque-${i}`).val('');
       return false;
     }
 
@@ -230,6 +231,7 @@ $(document).ready(function () {
       if (idCant.includes('-')) {
         $('#sumaAllTanques').val('');
         $(`#totalTanque-${i}`).val('');
+        $(`#cantTanque-${i}`).val('');
       } else {
         $('#sumaTanques').val('');
         $('#txtTotal1').val('');

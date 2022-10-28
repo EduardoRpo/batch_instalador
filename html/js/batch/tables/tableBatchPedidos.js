@@ -87,8 +87,12 @@ $(document).ready(function () {
         title: 'Recep_Insumos (1)',
         data: null,
         render: function (data) {
+          !data.fecha_insumo
+            ? (fecha_insumo = '')
+            : (fecha_insumo = data.fecha_insumo);
+
           return `
-              <input type="date" class="dateInsumos form-control-updated text-center" id="date-${data.pedido}-${data.id_producto}" value="${data.fecha_insumo}" max="${data.fecha_actual}"/>`;
+              <input type="date" class="dateInsumos form-control-updated text-center" id="date-${data.pedido}-${data.id_producto}" value="${fecha_insumo}" max="${data.fecha_actual}"/>`;
         },
       },
 

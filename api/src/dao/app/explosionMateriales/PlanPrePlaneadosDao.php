@@ -119,7 +119,7 @@ class PlanPrePlaneadosDao extends estadoInicialDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        if (strpos($id, '-')) {
+        if (str_contains($id, '-')) {
             $id = explode(" - ", $id);
             foreach ($id as $p) {
                 $stmt = $connection->prepare("DELETE FROM plan_preplaneados WHERE id = :id");

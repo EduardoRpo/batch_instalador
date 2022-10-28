@@ -117,7 +117,7 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
             $resp = $observacionesDao->updateObservacion($id_batch['id'], $multi[$j]);
 
           // Eliminar campos de preplaneados
-          $resp = $planPrePlaneadosDao->deletePlaneado($multi[$j], 2);
+          $resp = $planPrePlaneadosDao->deletePlaneado($multi[$j]['id'], 2);
         } else {
           //$resp = $batchDao->updateBatchPedido($id_batch['id'], $dataBatch[0]);
           $_SESSION['dataPedidos'] = $multi;

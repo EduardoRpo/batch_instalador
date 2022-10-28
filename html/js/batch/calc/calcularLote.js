@@ -39,13 +39,12 @@ $(document).ready(function () {
     }
 
     pedidos = {};
-    granel = fila.granel;
 
-    pedido.num = fila.num;
+    pedidos.num = num;
     pedidos.numPedido = numPedido;
     pedidos.referencia = referencia;
     pedidos.producto = fila.nombre_referencia;
-    pedidos.granel = granel;
+    pedidos.granel = fila.granel;
     pedidos.cantidad_acumulada = cantidad;
 
     pedidosProgramar.push(pedidos);

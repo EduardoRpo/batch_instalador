@@ -9,19 +9,28 @@ $(document).ready(function () {
     if ($(`#${id}`).is(':checked')) {
       dataPlan = tablaBatchPlaneados.row($(this).parents('tr')).data();
 
-      planeacion = {
-        id: id,
-        granel: dataPlan.granel,
-        producto: dataPlan.nombre_referencia,
-        referencia: dataPlan.id_producto,
-        fecha_planeacion: dataPlan.fecha_programacion,
-        fecha_insumo: dataPlan.fecha_insumo,
-        numPedido: dataPlan.pedido,
-        cantidad_acumulada: dataPlan.unidad_lote,
-        tamanio_lote: dataPlan.tamano_lote,
-      };
+      estado = dataPlan.estado;
 
-      dataPlaneacion.push(planeacion);
+      if (estado == 'Inactivo') {
+        planeacion = {
+          id: id,
+          granel: dataPlan.granel,
+          producto: dataPlan.nombre_referencia,
+          referencia: dataPlan.id_producto,
+          fecha_planeacion: dataPlan.fecha_programacion,
+          fecha_insumo: dataPlan.fecha_insumo,
+          numPedido: dataPlan.pedido,
+          cantidad_acumulada: dataPlan.unidad_lote,
+          tamanio_lote: dataPlan.tamano_lote,
+        };
+
+        dataPlaneacion.push(planeacion);
+      } else {
+        alertify.set('notifier', 'position', 'top-right');
+        alertify.error('No es posible programar este pedido');
+        $(`#${id}`).prop('checked', false);
+        return false;
+      }
     } else {
       for (i = 0; i < dataPlaneacion.length; i++) {
         if (dataPlaneacion[i].id == id) {
@@ -39,6 +48,9 @@ $(document).ready(function () {
       alertify.error('Seleccione pedido para planear');
       return false;
     }
+
+    $('#formCreateTanques').trigger('reset');
+    $('#formCreateTanques').css('border-color', '');
 
     $.ajax({
       type: 'POST',
@@ -69,7 +81,9 @@ $(document).ready(function () {
                   </tr>
                 </thead>
                 <tbody>
-                  ${(row = addRowsPedidos(data))} 
+                  <form id="formCreateTanques">
+                    ${(row = addRowsPedidos(data))} 
+                  </form>
                 </tbody>
                 <tfoot>
                   <tr>
@@ -86,9 +100,28 @@ $(document).ready(function () {
                 </tfoot>
             </table><br>`,
         function () {
-          saveFechaProgramacion();
+          cant = document.getElementsByClassName('txtCantidad');
+
+          save = true;
+
+          for (i = 1; i < cant.length; i++) {
+            cantidad = cant[i].value;
+
+            if (!cantidad || cantidad == null) {
+              alertify.set('notifier', 'position', 'top-right');
+              alertify.error('Ingrese fecha de programación');
+              $(`#${cant[i].id}`).css('border-color', 'red');
+              save = false;
+              return false;
+            }
+          }
+          if (save == true) saveFechaProgramacion();
         },
         function () {
+          dataPlaneacion = [];
+          unique = [];
+          dataTanquesPlaneacion = [];
+
           clearInputArray();
         }
       )
@@ -150,6 +183,9 @@ $(document).ready(function () {
           savePlaneados(unique);
         },
         function () {
+          unique = [];
+          dataTanquesPlaneacion = [];
+
           deleteSession();
         }
       )
@@ -164,8 +200,9 @@ $(document).ready(function () {
       data: { data: data },
       success: function (data) {
         message(data);
-
+        unique = [];
         dataPlaneacion = [];
+        dataTanquesPlaneacion = [];
         deleteSession();
       },
     });

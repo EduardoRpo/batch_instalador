@@ -43,6 +43,7 @@ class PlaneacionDao extends PlanPedidosDao
                     'referencia' => $t['referencia'],
                     'producto' => $t['producto'],
                     'tamanio_lote' => $t['tamanio_lote'],
+                    'fecha_planeacion' => $t['fecha_planeacion'],
                     'cantidad_acumulada' => $t['cantidad_acumulada'],
                     'fecha_insumo' => $t['fecha_insumo']
                 );
@@ -67,7 +68,7 @@ class PlaneacionDao extends PlanPedidosDao
                     'producto' => $t['producto'],
                     'cantidad_acumulada' => $t['cantidad_acumulada'],
                     'tamanio_lote' => $t['tamanio_lote'],
-                    'fecha_planeacion' => $t['fecha_programacion']
+                    'fecha_planeacion' => $t['fecha_planeacion']
                 );
         }
 
