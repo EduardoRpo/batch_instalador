@@ -229,6 +229,10 @@ include_once("modal/m_observaciones.php");
                     </div>
                     <div class="card">
                       <div class="row justify-content-end mt-2 cardPlanning">
+                        <div class="col-2 text-center">
+                          <label>Total:</label>
+                          <input type="text" id="totalVentaPre" class="form-control text-center" style="font-weight: bold;" disabled>
+                        </div>
                         <div class="col-2">
                           <label for="tipoSimulacion">Simulación</label>
                           <select name="tipoSimulacion" id="tipoSimulacion" class="form-control text-center">
@@ -324,8 +328,12 @@ include_once("modal/m_observaciones.php");
 
                     <div class="card">
                       <div class="row justify-content-end mt-3">
+                        <div class="col-2 text-center">
+                          <label>Total:</label>
+                          <input type="text" id="totalVentaPlan" class="form-control text-center" style="font-weight: bold;" disabled>
+                        </div>
                         <div class="col-2">
-                          <button type="button" id="btnProgramar" class="btn waves-effect waves-light btn-danger" style="width: 120px;">
+                          <button type="button" id="btnProgramar" class="btn waves-effect waves-light btn-danger" style="width: 120px; margin-top: 33px">
                             <strong>Programar</strong>
                           </button>
                         </div>

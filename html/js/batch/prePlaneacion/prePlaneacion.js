@@ -40,6 +40,7 @@ $(document).ready(function () {
       `/api/clearPrePlaneados/${simulacion}`,
       function (data, textStatus, jqXHR) {
         message(data);
+        $('#tipoSimulacion').change();
       }
     );
   };
@@ -73,6 +74,8 @@ $(document).ready(function () {
         success: function (resp) {
           dataPrePlaneacion = [];
           message(resp);
+          setTimeout(loadTotalVentasPlan(), 7000);
+          $('#tipoSimulacion').change();
         },
       });
     }
@@ -133,6 +136,7 @@ $(document).ready(function () {
         $('.cardPlanning').show(800);
         $('#formUpdatePrePlaneado').trigger('reset');
         message(data);
+        $('#tipoSimulacion').change();
       }
     );
   });
@@ -150,6 +154,7 @@ $(document).ready(function () {
             `/api/deletePrePlaneacion/${id}`,
             function (data, textStatus, jqXHR) {
               message(data);
+              $('#tipoSimulacion').change();
             }
           );
         },

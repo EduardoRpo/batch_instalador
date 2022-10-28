@@ -29,6 +29,7 @@ $app->post('/validacionDatosPedidos', function (Request $request, Response $resp
       $dataGlobal[$i]['producto'] = $dataConvertPedidos['producto'];
       $dataGlobal[$i]['cant_original'] = $dataConvertPedidos['cant_original'];
       $dataGlobal[$i]['cantidad'] = $dataConvertPedidos['cantidad'];
+      $dataGlobal[$i]['valor_pedido'] = $dataConvertPedidos['valor_pedido'];
     }
     $data = $dataGlobal;
 

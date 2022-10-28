@@ -33,7 +33,7 @@ class PreBatchDao
 
         $sql = "SELECT DISTINCT ROW_NUMBER() OVER (ORDER BY pp.nombre) AS num, pp.nombre AS propietario, exp.pedido, exp.fecha_pedido, exp.estado, exp.cantidad_acumulada, exp.fecha_insumo, CURRENT_DATE AS fecha_actual, (SELECT referencia FROM producto 
                     WHERE multi = (SELECT multi FROM producto WHERE referencia = exp.id_producto)
-                    LIMIT 1) AS granel, exp.id_producto, p.nombre_referencia, exp.cant_original, exp.cantidad, 
+                    LIMIT 1) AS granel, exp.id_producto, p.nombre_referencia, exp.cant_original, exp.cantidad, exp.valor_pedido, 
                         IFNULL(DATE_ADD(exp.fecha_insumo, INTERVAL 8 DAY),DATE_ADD(exp.fecha_pedido, INTERVAL 8 DAY)) AS fecha_pesaje, 						
                         IFNULL(DATE_ADD(exp.fecha_insumo, INTERVAL 9 DAY),DATE_ADD(exp.fecha_pedido, INTERVAL 9 DAY)) AS fecha_preparacion,
                         IFNULL(DATE_ADD(exp.fecha_insumo, INTERVAL 13 DAY),DATE_ADD(exp.fecha_pedido, INTERVAL 13 DAY)) AS envasado, 
@@ -104,11 +104,12 @@ class PreBatchDao
         $rows = $query->rowCount();
 
         if ($rows > 0) {
-            $sql = "UPDATE plan_pedidos SET cantidad = :cantidad 
+            $sql = "UPDATE plan_pedidos SET cantidad = :cantidad, valor_pedido = :valor_pedido 
                     WHERE pedido = :pedido AND id_producto = :id_producto";
             $query = $connection->prepare($sql);
             $query->execute([
                 'cantidad' => trim($dataPedidos['cantidad']),
+                'valor_pedido' => trim($dataPedidos['valor_pedido']),
                 'pedido' => trim($dataPedidos['documento']),
                 'id_producto' =>  trim("M-" . $dataPedidos['producto'])
             ]);
@@ -118,14 +119,15 @@ class PreBatchDao
             $fecha_dtco = date_format($date, "Y-m-d");
             // $fecha_dtco = date_format($dataPedidos['fecha_dcto'], 'Y-m-d');
 
-            $sql = "INSERT INTO plan_pedidos (pedido, id_producto, cant_original, cantidad, fecha_pedido) 
-                    VALUES(:pedido, :id_producto, :cant_original, :cantidad, :fecha_pedido)";
+            $sql = "INSERT INTO plan_pedidos (pedido, id_producto, cant_original, cantidad, valor_pedido, fecha_pedido) 
+                    VALUES(:pedido, :id_producto, :cant_original, :cantidad, :valor_pedido, :fecha_pedido)";
             $query = $connection->prepare($sql);
             $query->execute([
                 'pedido' => trim($dataPedidos['documento']),
                 'id_producto' =>  trim("M-" . $dataPedidos['producto']),
                 'cant_original' => trim($dataPedidos['cant_original']),
                 'cantidad' => trim($dataPedidos['cantidad']),
+                'valor_pedido' => trim($dataPedidos['valor_pedido']),
                 'fecha_pedido' => $fecha_dtco
             ]);
         }
@@ -150,6 +152,7 @@ class PreBatchDao
         $data['producto'] = str_replace(',', '', $dataPedidos['producto']);
         $data['cant_original'] = str_replace(',', '', $dataPedidos['cant_original']);
         $data['cantidad'] = str_replace(',', '', $dataPedidos['cantidad']);
+        $data['valor_pedido'] = str_replace(',', '', $dataPedidos['valor_pedido']);
 
         return $data;
     }

@@ -86,7 +86,7 @@ class BatchDao extends estadoInicialDao
                                       LEFT JOIN plan_pedidos ON plan_pedidos.id_producto = producto.referencia
                                       LEFT JOIN observaciones_batch_inactivos obi ON obi.batch = batch.id_batch
                                       WHERE batch.estado BETWEEN 1 AND 2 ORDER BY `batch`.`id_batch` DESC");*/
-        $stmt = $connection->prepare("SELECT pre_plan.id, pp.nombre AS propietario, pre_plan.pedido, pre_plan.unidad_lote, pre_plan.fecha_programacion, pre_plan.tamano_lote, CURRENT_DATE AS fecha_actual, 
+        $stmt = $connection->prepare("SELECT pre_plan.id, pp.nombre AS propietario, pre_plan.pedido, pre_plan.unidad_lote, pre_plan.valor_pedido, pre_plan.fecha_programacion, pre_plan.tamano_lote, CURRENT_DATE AS fecha_actual, 
                                             (SELECT referencia FROM producto WHERE multi = (SELECT multi FROM producto WHERE referencia = pre_plan.id_producto) LIMIT 1) AS granel, pre_plan.id_producto, pre_plan.fecha_insumo,
                                             DATE_ADD(pre_plan.fecha_insumo, INTERVAL 8 DAY) AS fecha_pesaje, DATE_ADD(pre_plan.fecha_insumo, INTERVAL 13 DAY) AS fecha_envasado, p.nombre_referencia, pre_plan.sim, 
                                             CONCAT('S', WEEK(pre_plan.fecha_programacion)) AS semana, IF(pre_plan.estado = 0, 'Sin Formula y/o Instructivos', 'Inactivo') AS estado, pre_plan.planeado 

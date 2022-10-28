@@ -21,6 +21,7 @@ $('#btnImportarPedidos').click(function (e) {
           // nombre_producto: item.Nombre_Producto.trim(),
           cant_original: item.Cant_Original.trim(),
           cantidad: item.Cantidad.trim(),
+          valor_pedido: item.Vlr_Venta.trim(),
         };
       });
       checkImport(OrderToImport);

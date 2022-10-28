@@ -46,6 +46,7 @@ $(document).ready(function () {
     pedidos.producto = fila.nombre_referencia;
     pedidos.granel = fila.granel;
     pedidos.cantidad_acumulada = cantidad;
+    pedidos.valor_pedido = fila.valor_pedido;
 
     pedidosProgramar.push(pedidos);
   };
