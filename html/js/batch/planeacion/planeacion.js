@@ -1,19 +1,20 @@
 $(document).ready(function () {
   let dataPlaneacion = [];
-  dataTanquesPlaneacion = [];
+  let dataTanquesPlaneacion = [];
   idTanque = 0;
 
   $(document).on('click', '.link-select', function () {
     id = this.id;
 
     if ($(`#${id}`).is(':checked')) {
-      dataPlan = tablaBatchPlaneados.row($(this).parents('tr')).data();
+      let dataPlan = tablaBatchPlaneados.row($(this).parents('tr')).data();
 
-      estado = dataPlan.estado;
+      let estado = dataPlan.estado;
 
+      let idPlan = id.slice(8, id.length);
       if (estado == 'Inactivo') {
         planeacion = {
-          id: id,
+          id: idPlan,
           granel: dataPlan.granel,
           producto: dataPlan.nombre_referencia,
           referencia: dataPlan.id_producto,

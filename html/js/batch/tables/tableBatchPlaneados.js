@@ -14,10 +14,10 @@ $(document).ready(function () {
     columns: [
       {
         title: '',
-        data: null,
+        data: 'id',
         className: 'text-center',
         render: function (data) {
-          return `<input type='checkbox' id=${data.id} class='link-select'>`;
+          return `<input type='checkbox' id="planChk-${data}" class='link-select'>`;
         },
       },
       {
