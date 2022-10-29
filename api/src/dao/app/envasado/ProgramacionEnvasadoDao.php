@@ -76,7 +76,7 @@ class ProgramacionEnvasadoDao
                                               (SELECT IF(IF(se.total_solido - turno_1 < 0, 0, se.total_solido - turno_1) > turno_2, 100, CAST((se.total_solido - turno_1) / turno_2 * 100 AS UNSIGNED)) FROM capacidad_envasado WHERE id_linea = 3 AND semana = se.semana) AS plan_solido_2, 
                                               (SELECT CAST(IF(se.total_solido - turno_1 - turno_2 < 0, 0, se.total_solido - turno_1 - turno_2) / turno_3 * 100 AS UNSIGNED) FROM capacidad_envasado WHERE id_linea = 3 AND semana = se.semana) AS plan_solido_3, se.total_solido
                                       FROM capacidad_envasado_sum se
-                                      WHERE se.semana >= WEEKOFYEAR(NOW());");
+                                      WHERE se.semana >= WEEKOFYEAR(NOW())");
         $stmt->execute();
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
 

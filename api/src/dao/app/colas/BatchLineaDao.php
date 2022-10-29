@@ -79,10 +79,8 @@ class BatchLineaDao
                                   FROM batch
                                   INNER JOIN producto p ON p.referencia = batch.id_producto
                                   INNER JOIN batch_control_firmas bcf ON batch.id_batch = bcf.batch
-                                  WHERE batch.estado > 2 AND batch.estado < 7 
-                                  AND batch.id_batch AND bcf.modulo = 5 AND batch.id_batch NOT IN(SELECT batch FROM `batch_control_firmas` WHERE modulo = 5 AND cantidad_firmas = total_firmas) 
-                                  AND batch.id_batch AND bcf.modulo = 6 AND batch.id_batch NOT IN(SELECT batch FROM `batch_control_firmas` WHERE modulo = 6 AND cantidad_firmas = total_firmas) 
-                                  ORDER BY id_batch DESC;");
+                                  WHERE batch.estado > 2 AND batch.estado < 7 AND batch.id_batch AND bcf.modulo IN(5,6) AND batch.id_batch NOT IN(SELECT batch FROM `batch_control_firmas` WHERE modulo = 5 AND cantidad_firmas = total_firmas) AND batch.id_batch AND batch.id_batch NOT IN(SELECT batch FROM `batch_control_firmas` WHERE modulo = 6 AND cantidad_firmas = total_firmas) 
+                                  ORDER BY id_batch DESC");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $envasado = $stmt->fetchAll($connection::FETCH_ASSOC);
