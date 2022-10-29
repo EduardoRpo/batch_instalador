@@ -76,7 +76,7 @@ $(document).ready(function () {
         data: 'id',
         className: 'uniqueClassName',
         render: function (data) {
-          return `<a href='#' <i class='fa fa-pencil-square-o fa-2x link-editar-pre' id=${data} data-toggle='tooltip' title='Editar Pre Planeado' style='color:rgb(255, 193, 7)'></i></a>`;
+          return `<a href='#' <i class='fa fa-pencil-square-o fa-2x link-editar-pre' id="edit-${data}" data-toggle='tooltip' title='Editar Pre Planeado' style='color:rgb(255, 193, 7)'></i></a>`;
         },
       },
       {
@@ -84,7 +84,7 @@ $(document).ready(function () {
         data: 'id',
         className: 'uniqueClassName',
         render: function (data) {
-          return `<a href='#' <i class='fa fa-trash link-borrar-pre fa-2x' id=${data} data-toggle='tooltip' title='Eliminar Pre Planeado' style='color:rgb(234, 67, 54)'></i></a>`;
+          return `<a href='#' <i class='fa fa-trash link-borrar-pre fa-2x' id="borrar-${data}" data-toggle='tooltip' title='Eliminar Pre Planeado' style='color:rgb(234, 67, 54)'></i></a>`;
         },
       },
     ],

@@ -84,7 +84,10 @@ $(document).ready(function () {
   /* Modificar pedido */
   $(document).on('click', '.link-editar-pre', function () {
     id = this.id;
-    sessionStorage.setItem('id', id);
+
+    let idPlan = id.slice(5, id.length);
+
+    sessionStorage.setItem('id', idPlan);
     $('.cardPlanning').toggle(800);
 
     data = tableBatchPrePlaneacion.row($(this).parents('tr')).data();
@@ -118,7 +121,7 @@ $(document).ready(function () {
       return false;
     }
 
-    id = sessionStorage.getItem('id');
+    let id = sessionStorage.getItem('id');
 
     prePlaneacion = {
       id: id,
@@ -144,6 +147,7 @@ $(document).ready(function () {
   /* Eliminar pedido */
   $(document).on('click', '.link-borrar-pre', function () {
     id = this.id;
+    let idPlan = id.slice(7, id.length);
 
     alertify
       .confirm(
@@ -151,7 +155,7 @@ $(document).ready(function () {
         '<p>¿ Estas seguro de eliminar este pedido ?</p><br>',
         function () {
           $.get(
-            `/api/deletePrePlaneacion/${id}`,
+            `/api/deletePrePlaneacion/${idPlan}`,
             function (data, textStatus, jqXHR) {
               message(data);
               setTimeout(selectChange, 5000);

@@ -1,6 +1,6 @@
 $(document).ready(function () {
   let dataPlaneacion = [];
-  let dataTanquesPlaneacion = [];
+  dataTanquesPlaneacion = [];
   idTanque = 0;
 
   $(document).on('click', '.link-select', function () {
