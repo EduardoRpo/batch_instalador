@@ -94,7 +94,7 @@ include_once("modal/m_observaciones.php");
                 <div class="col" style="display: flex; width:70%">
                   <input class="form-control" type="file" id="filePedidos" accept=".xls,.xlsx">
                   <button class="btn btn-warning ml-3" id="btnImportarPedidos">Importar Pedidos</button>
-                  <button class="btn btn-danger ml-3" id="btnPedidosNoEncontrados">Pedidos No Encontrados</button>
+                  <button class="btn btn-danger ml-3" id="btnPedidosNoEncontrados">Referencias aun no creadas</button>
                 </div>
                 <div class="col-lg-4 fechaImporte">
                   <?php if (isset($_SESSION['fecha_importe'])) { ?>
@@ -234,7 +234,7 @@ include_once("modal/m_observaciones.php");
                           <input type="text" id="totalVentaPre" class="form-control text-center" style="font-weight: bold;" disabled>
                         </div>
                         <div class="col-2">
-                          <label for="tipoSimulacion">Simulación</label>
+                          <label for="tipoSimulacion">Escenario</label>
                           <select name="tipoSimulacion" id="tipoSimulacion" class="form-control text-center">
                             <option selected="" disabled="">Seleccionar</option>
                             <option value="1">1</option>
