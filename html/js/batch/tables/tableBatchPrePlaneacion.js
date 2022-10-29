@@ -102,7 +102,11 @@ $(document).ready(function () {
   });
 
   /* Cargar tipo de simulación */
-  loadDataPrePlaneacion = (val) => {
+
+  $('#tipoSimulacion').change(function (e) {
+    e.preventDefault();
+
+    val = this.value;
     let totalVenta = 0;
 
     tableBatchPrePlaneacion.column(9).search(val).draw();
@@ -119,12 +123,5 @@ $(document).ready(function () {
     }
 
     $('#totalVentaPre').val(`$ ${totalVenta.toLocaleString('es-CO')}`);
-  };
-
-  $('#tipoSimulacion').change(function (e) {
-    e.preventDefault();
-
-    val = this.value;
-    setTimeout(loadDataPrePlaneacion(val), 7000);
   });
 });

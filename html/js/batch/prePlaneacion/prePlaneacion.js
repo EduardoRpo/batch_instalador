@@ -40,7 +40,7 @@ $(document).ready(function () {
       `/api/clearPrePlaneados/${simulacion}`,
       function (data, textStatus, jqXHR) {
         message(data);
-        $('#tipoSimulacion').change();
+        setTimeout(selectChange, 5000);
       }
     );
   };
@@ -74,8 +74,8 @@ $(document).ready(function () {
         success: function (resp) {
           dataPrePlaneacion = [];
           message(resp);
-          setTimeout(loadTotalVentasPlan(), 7000);
-          $('#tipoSimulacion').change();
+          setTimeout(loadTotalVentasPlan, 7000);
+          setTimeout(selectChange, 5000);
         },
       });
     }
@@ -99,12 +99,12 @@ $(document).ready(function () {
     presentacion = data.presentacion;
 
     $('.cardUpdatePrePlaneado').toggle(800);
-    $('html, body').animate(
-      {
-        scrollTop: 0,
-      },
-      500
-    );
+    // $('html, body').animate(
+    //   {
+    //     scrollTop: 0,
+    //   },
+    //   500
+    // );
   });
 
   $('#savePrePlaneado').click(function (e) {
@@ -136,7 +136,7 @@ $(document).ready(function () {
         $('.cardPlanning').show(800);
         $('#formUpdatePrePlaneado').trigger('reset');
         message(data);
-        $('#tipoSimulacion').change();
+        setTimeout(selectChange, 5000);
       }
     );
   });
@@ -154,7 +154,7 @@ $(document).ready(function () {
             `/api/deletePrePlaneacion/${id}`,
             function (data, textStatus, jqXHR) {
               message(data);
-              $('#tipoSimulacion').change();
+              setTimeout(selectChange, 5000);
             }
           );
         },
@@ -165,4 +165,8 @@ $(document).ready(function () {
       .set('labels', { ok: 'Eliminar', cancel: 'Cancelar' })
       .set({ closableByDimmer: false });
   });
+
+  selectChange = () => {
+    $('#tipoSimulacion').trigger('change');
+  };
 });

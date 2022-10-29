@@ -1,15 +1,19 @@
 <?php
 
+use BatchRecord\dao\PedidosSinReferenciaDao;
 use BatchRecord\dao\PreBatchDao;
 use BatchRecord\Dao\ProductDao;
+
+
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 $preBatchDao = new PreBatchDao();
 $productDao = new ProductDao();
+$pedidosSinReferenciaDao = new PedidosSinReferenciaDao();
 
 
-$app->post('/validacionDatosPedidos', function (Request $request, Response $response, $args) use ($preBatchDao, $productDao) {
+$app->post('/validacionDatosPedidos', function (Request $request, Response $response, $args) use ($preBatchDao, $productDao, $pedidosSinReferenciaDao) {
   $dataPedidos = $request->getParsedBody();
 
   if (isset($dataPedidos)) {
@@ -39,18 +43,16 @@ $app->post('/validacionDatosPedidos', function (Request $request, Response $resp
       $product = $productDao->findProduct(trim($dataGlobal[$i]['producto']));
 
       if (!$product) {
-        $nonExistentProducts['pedido'][$i] = trim($dataGlobal[$i]['documento']);
-        $nonExistentProducts['referencia'][$i] = trim($dataGlobal[$i]['producto']);
+        $nonExistentProducts[$i] = $dataGlobal[$i];
         unset($data[$i]);
         $nonProducts = $nonProducts + 1;
       } else {
-        // Validar formato de fecha
-        /* $fecha = date_create($dataConvertPedidos[$i]['fecha_dcto']);
-        if ($fecha == false) {
-          $i = $i + 1;
-          $dataImportOrders = array('error' => true, 'message' => "Error al capturar fecha de pedido. Por favor ingrese la fecha con el orden: (AÑO - MES - DIA) fila: $i");
-          break;
-        } */
+        // Consultar si el producto esta ingresado en la tabla `plan_pedidos_sin_referencia`
+        $pedidosSinReferencia = $pedidosSinReferenciaDao->findPedidoSinReferencia($dataGlobal[$i]);
+
+        // Eliminar registro de la tabla `plan_pedidos_sin_referencia`
+        if ($pedidosSinReferencia)
+          $pedidosSinReferenciaDao->deletePedidosSinReferencia($dataGlobal[$i]);
 
         $result = $preBatchDao->findOrders($dataGlobal[$i]['documento']);
         $result ? $update = $update + 1 : $insert = $insert + 1;
@@ -80,8 +82,7 @@ $app->post('/validacionDatosPedidos', function (Request $request, Response $resp
 
     //Guardar campos con productos no existentes
     if ($nonExistentProducts) {
-      $nonExistentProducts['pedido'] = array_values($nonExistentProducts['pedido']);
-      $nonExistentProducts['referencia'] = array_values($nonExistentProducts['referencia']);
+      $nonExistentProducts = array_values($nonExistentProducts);
       $_SESSION['nonExistentProducts'] = $nonExistentProducts;
     }
     //}
@@ -104,9 +105,20 @@ $app->get('/sendNonExistentProducts', function (Request $request, Response $resp
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->post('/addPedidos', function (Request $request, Response $response, $args) use ($preBatchDao) {
+$app->post('/addPedidos', function (Request $request, Response $response, $args) use ($preBatchDao, $pedidosSinReferenciaDao) {
   session_start();
   $dataPedidos = $_SESSION['dataImportPedidos'];
+
+
+  // Almacenar pedidos sin referencia
+  $dataPedidosSinRef = $_SESSION['nonExistentProducts'];
+
+  !isset($dataPedidosSinRef) ? $count = 0 : $count = sizeof($dataPedidosSinRef);
+
+  for ($i = 0; $i < $count; $i++) {
+    $pedidosSinReferenciaDao->savePedidosSinReferencia($dataPedidosSinRef[$i]);
+  }
+
 
   // $data = array();
   for ($i = 0; $i < sizeof($dataPedidos); $i++) {
@@ -141,6 +153,8 @@ $app->post('/addPedidos', function (Request $request, Response $response, $args)
       $documento = substr($array_diff[$i], 0, $posicion);
       $result = $preBatchDao->changeFlagEstadoByPedido($documento, $referencia);
     }
+  else if (sizeof($array_diff) == 0)
+    $result = null;
 
 
   if ($result == null) {

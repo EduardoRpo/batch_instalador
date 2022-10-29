@@ -204,6 +204,7 @@ $(document).ready(function () {
         dataPlaneacion = [];
         dataTanquesPlaneacion = [];
         deleteSession();
+        setTimeout(loadTotalVentasPlan, 7000);
       },
     });
   };

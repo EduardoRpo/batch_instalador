@@ -18,7 +18,6 @@ $('#btnImportarPedidos').click(function (e) {
           fecha_dcto: item.Fecha_Dcto.trim(),
           producto: item.Producto.trim(),
           nombre_producto: item.Nombre_Producto_Mvto.trim(),
-          // nombre_producto: item.Nombre_Producto.trim(),
           cant_original: item.Cant_Original.trim(),
           cantidad: item.Cantidad.trim(),
           valor_pedido: item.Vlr_Venta.trim(),
@@ -153,14 +152,11 @@ findNonExistentProducts = async () => {
 };
 
 addRow = (data) => {
-  pedido = data.pedido;
-  referencia = data.referencia;
-
   row = [];
-  for (i = 0; i < pedido.length; i++) {
+  for (i = 0; i < data.length; i++) {
     row.push(`<tr>
-              <td>${pedido[i]}</td>
-              <td>${referencia[i]}</td>
+              <td>${data[i]['documento']}</td>
+              <td>${data[i]['producto']}</td>
               </tr>`);
   }
   return row.join('');

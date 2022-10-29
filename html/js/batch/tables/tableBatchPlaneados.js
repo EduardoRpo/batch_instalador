@@ -118,16 +118,16 @@ $(document).ready(function () {
   });
 
   loadTotalVentasPlan = () => {
-    let totalVenta = 0;
+    let totalVentaPlan = 0;
     dataBPlaneacion = tablaBatchPlaneados.rows().data().toArray();
 
     for (i = 0; i < dataBPlaneacion.length; i++) {
-      totalVenta =
-        totalVenta +
+      totalVentaPlan =
+        totalVentaPlan +
         dataBPlaneacion[i]['unidad_lote'] * dataBPlaneacion[i]['valor_pedido'];
     }
 
-    $('#totalVentaPlan').val(`$ ${totalVenta.toLocaleString('es-CO')}`);
+    $('#totalVentaPlan').val(`$ ${totalVentaPlan.toLocaleString('es-CO')}`);
   };
   setTimeout(loadTotalVentasPlan, 7000);
 });
