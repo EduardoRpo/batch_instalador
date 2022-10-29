@@ -93,8 +93,8 @@ class BatchLineaDao
   public function findBatchEnvasado()
   {
     $connection = Connection::getInstance()->getConnection();
-    $stmt = $connection->prepare("SELECT batch.id_batch, date_add(batch.fecha_programacion, interval 3 day) AS fecha_programacion, batch.numero_orden, batch.numero_orden, p.referencia, p.nombre_referencia, batch.numero_lote, batch.estado, batch.multi, bcf.cantidad_firmas, bcf.total_firmas, batch.programacion_envasado,
-                                      (SELECT COUNT(id) FROM observaciones_batch_inactivos WHERE batch = batch.id_batch) AS cant_observations
+    $stmt = $connection->prepare("SELECT batch.id_batch, date_add(batch.fecha_programacion, interval 3 day) AS fecha_programacion, batch.numero_orden, batch.numero_orden, p.referencia, p.nombre_referencia, batch.numero_lote, batch.unidad_lote, batch.estado, batch.multi, bcf.cantidad_firmas, bcf.total_firmas, batch.programacion_envasado,
+                                         (SELECT COUNT(id) FROM observaciones WHERE id_batch = batch.id_batch) AS cant_observations
                                   FROM batch 
                                   INNER JOIN producto p ON p.referencia = batch.id_producto 
                                   INNER JOIN batch_control_firmas bcf ON batch.id_batch = bcf.batch 
@@ -112,13 +112,13 @@ class BatchLineaDao
   {
     $connection = Connection::getInstance()->getConnection();
 
-    $stmt = $connection->prepare("SELECT batch.id_batch, batch.programacion_envasado, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, producto.nombre_referencia, batch.numero_lote, batch.estado, batch.multi, bcf.cantidad_firmas, bcf.total_firmas, 
-                                      (SELECT COUNT(id) FROM observaciones_batch_inactivos WHERE batch = batch.id_batch) AS cant_observations
+    $stmt = $connection->prepare("SELECT batch.id_batch, batch.programacion_envasado, batch.numero_orden, batch.numero_orden, batch.id_producto as referencia, producto.nombre_referencia, batch.numero_lote, batch.unidad_lote, batch.estado, batch.multi, bcf.cantidad_firmas, bcf.total_firmas, 
+                                          (SELECT COUNT(id) FROM observaciones WHERE id_batch = batch.id_batch) AS cant_observations
                                   FROM batch 
                                   INNER JOIN producto ON producto.referencia = batch.id_producto 
                                   INNER JOIN batch_control_firmas bcf ON batch.id_batch = bcf.batch 
                                   WHERE bcf.modulo = 6 AND batch.ok_aprobado = 1 AND batch.id_batch NOT IN(SELECT batch FROM `batch_control_firmas` WHERE modulo = 6 AND cantidad_firmas = total_firmas) 
-                                  AND batch.estado > 5.5 AND batch.estado < 7 AND batch.id_batch AND batch.programacion_envasado < DATE_ADD(NOW(), INTERVAL 1 DAY) 
+                                  AND batch.estado > 5.5 AND batch.estado < 8 AND batch.id_batch AND batch.programacion_envasado < DATE_ADD(NOW(), INTERVAL 1 DAY) 
                                   ORDER BY `batch`.`fecha_programacion` DESC");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
