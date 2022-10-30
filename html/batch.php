@@ -230,7 +230,7 @@ include_once("modal/m_observaciones.php");
                     <div class="card">
                       <div class="row justify-content-end mt-2 cardPlanning">
                         <div class="col-2 text-center">
-                          <label>Total:</label>
+                          <label>Valorización Estimada:</label>
                           <input type="text" id="totalVentaPre" class="form-control text-center" style="font-weight: bold;" disabled>
                         </div>
                         <div class="col-2">
@@ -329,7 +329,7 @@ include_once("modal/m_observaciones.php");
                     <div class="card">
                       <div class="row justify-content-end mt-3">
                         <div class="col-2 text-center">
-                          <label>Total:</label>
+                          <label>Valorización Estimada:</label>
                           <input type="text" id="totalVentaPlan" class="form-control text-center" style="font-weight: bold;" disabled>
                         </div>
                         <div class="col-2">

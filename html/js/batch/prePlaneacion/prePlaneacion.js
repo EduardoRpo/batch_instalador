@@ -9,9 +9,8 @@ $(document).ready(function() {
 
         alertify
             .confirm(
-                'Samara Cosmetics',
-                `<p>Eliminar Escenario</p><p><br></p>
-                    <select id="simulacion" class="form-control">
+                'Eliminar Escenario',
+                `<select id="simulacion" class="form-control">
                       <option selected disabled>Seleccionar</option>
                       <option value="1">Escenario 1</option>
                       <option value="2">Escenario 2</option>
@@ -20,7 +19,7 @@ $(document).ready(function() {
                     val = $('#simulacion').val();
                     if (!val || val == '') {
                         alertify.set('notifier', 'position', 'top-right');
-                        alertify.error('Seleccione el Escenario');
+                        alertify.error('Seleccione un Escenario');
                         return false;
                     }
 
