@@ -45,7 +45,7 @@ class PlaneacionDao extends PlanPedidosDao
                     'tamanio_lote' => $t['tamanio_lote'],
                     'fecha_planeacion' => $t['fecha_planeacion'],
                     'cantidad_acumulada' => $t['cantidad_acumulada'],
-                    'fecha_insumo' => $t['fecha_insumo']
+                    'fecha_insumo' => $t['fecha_insumo'],
                 );
         }
 

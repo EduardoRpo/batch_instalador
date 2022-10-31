@@ -184,10 +184,11 @@ $(document).ready(function () {
           savePlaneados(unique);
         },
         function () {
+          dataPlaneacion = [];
           unique = [];
           dataTanquesPlaneacion = [];
 
-          deleteSession();
+          clearInputArray();
         }
       )
       .set('type', 'date')

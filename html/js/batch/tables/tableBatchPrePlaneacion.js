@@ -106,7 +106,10 @@ $(document).ready(function () {
   $('#tipoSimulacion').change(function (e) {
     e.preventDefault();
 
-    val = this.value;
+    let val = this.value;
+
+    val != 1 && val != 2 ? (val = 1) : val;
+
     let totalVenta = 0;
 
     tableBatchPrePlaneacion.column(9).search(val).draw();

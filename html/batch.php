@@ -157,8 +157,7 @@ include_once("modal/m_observaciones.php");
                     <a class="nav-link" id="five-tab" data-toggle="tab" href="#five" role="tab" aria-controls="Five" aria-selected="false">Cerrados</a>
                   </li>
                 <?php  } ?>
-                <div style="display:grid;justify-content:end;font-size:x-large;margin-left:auto" class="mr-3">
-                  <div id="numberWeek"></div>
+                <div style="display:grid;justify-content:end;margin-left:auto" class="row numberWeek mr-3">
                 </div>
               </ul>
             </div>
