@@ -4,14 +4,14 @@ $(document).ready(function () {
   idTanque = 0;
 
   $(document).on('click', '.link-select', function () {
-    id = this.id;
+    let id = this.id;
+    let idPlan = id.slice(8, id.length);
 
     if ($(`#${id}`).is(':checked')) {
       let dataPlan = tablaBatchPlaneados.row($(this).parents('tr')).data();
 
       let estado = dataPlan.estado;
 
-      let idPlan = id.slice(8, id.length);
       if (estado == 'Inactivo') {
         planeacion = {
           id: idPlan,
@@ -34,7 +34,7 @@ $(document).ready(function () {
       }
     } else {
       for (i = 0; i < dataPlaneacion.length; i++) {
-        if (dataPlaneacion[i].id == id) {
+        if (dataPlaneacion[i].id == idPlan) {
           dataPlaneacion.splice(i, 1);
         }
       }
@@ -106,14 +106,16 @@ $(document).ready(function () {
           save = true;
 
           for (i = 1; i < cant.length; i++) {
-            cantidad = cant[i].value;
+            if (cant[i].disabled == false) {
+              cantidad = cant[i].value;
 
-            if (!cantidad || cantidad == null) {
-              alertify.set('notifier', 'position', 'top-right');
-              alertify.error('Ingrese fecha de programación');
-              $(`#${cant[i].id}`).css('border-color', 'red');
-              save = false;
-              return false;
+              if (!cantidad || cantidad == null) {
+                alertify.set('notifier', 'position', 'top-right');
+                alertify.error('Ingrese fecha de programación');
+                $(`#${cant[i].id}`).css('border-color', 'red');
+                save = false;
+                return false;
+              }
             }
           }
           if (save == true) saveFechaProgramacion();
@@ -137,6 +139,8 @@ $(document).ready(function () {
   addRowsPedidos = (data) => {
     row = [];
     for (i = 0; i < data.length; i++) {
+      data[i].tamanio_lote > 2500 ? (dis = 'disabled') : (dis = '');
+
       row.push(`<tr ${(text = color(data[i].tamanio_lote))}>
                 <td id="granel-${i}">${data[i].granel}</td>
                 <td>${data[i].producto}</td>
@@ -145,10 +149,10 @@ $(document).ready(function () {
       )}</td>
                 <td>${data[i].cantidad_acumulada}</td>
                 <td>
-                  <select class="form-control-updated select-tanque" id="cmbTanque-${i}"></select>
+                  <select class="form-control-updated select-tanque" id="cmbTanque-${i}" ${dis}></select>
                 </td>
                 <td>
-                  <input type="number" class="form-control-updated text-center txtCantidad" id="cantTanque-${i}">
+                  <input type="number" class="form-control-updated text-center txtCantidad" id="cantTanque-${i}" ${dis}>
                 </td>
                 <td>
                   <input type="number" class="form-control-updated text-center" id="totalTanque-${i}" disabled>

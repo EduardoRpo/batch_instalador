@@ -108,7 +108,7 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
 
   $countPrePlaneados = $planPrePlaneadosDao->findCountPrePlaneados();
 
-  $data['pedidosLotes'] = $dataPedidosLotes;
+  $data['pedidosLotes'] = $dataPedidos;
   $data['countPrePlaneados'] = $countPrePlaneados['count'];
 
   $response->getBody()->write(json_encode($data, JSON_NUMERIC_CHECK));

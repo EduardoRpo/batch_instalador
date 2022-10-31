@@ -93,7 +93,7 @@ class BatchDao extends estadoInicialDao
                                       FROM plan_preplaneados pre_plan 
                                         INNER JOIN producto p ON p.referencia = pre_plan.id_producto 
                                         INNER JOIN propietario pp ON pp.id = p.id_propietario 
-                                      WHERE pre_plan.planeado = 1 -- AND WEEK(pre_plan.fecha_programacion) >= WEEK(NOW())
+                                      WHERE pre_plan.planeado = 1 AND WEEK(pre_plan.fecha_programacion) >= WEEK(NOW())
                                       ORDER BY `propietario` ASC;");
         $stmt->execute();
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));

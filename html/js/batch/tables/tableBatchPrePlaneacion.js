@@ -104,7 +104,7 @@ $(document).ready(function () {
 
     let totalVentaPre = 0;
 
-    tableBatchPrePlaneacion.column(9).search(val).draw();
+    tableBatchPrePlaneacion.column(8).search(val).draw();
 
     dataBPreplaneacion = tableBatchPrePlaneacion.rows().data().toArray();
 

@@ -23,15 +23,16 @@ class PlanPedidosDao
             if ($dataPedidos[$i]['tamanio_lote'] > 2500) {
                 $this->checkPedidos($dataPedidos[$i]); // Cambiar estado a 2
                 // Capturar data de lotes programados, para mostrar en la ventana de calculo
-                $dataPedidosLotes[$i] = $dataPedidos[$i];
+                // $dataPedidosLotes[$i] = $dataPedidos[$i];
                 unset($dataPedidos[$i]);
             }
         }
 
-        if (!isset($dataPedidosLotes))
-            $dataPedidosLotes = $dataPedidos;
+        $dataPedidos = array_values($dataPedidos);
+        /*  if (!isset($dataPedidosLotes))
+            $dataPedidosLotes = $dataPedidos;*/
 
-        return $dataPedidosLotes;
+        return $dataPedidos;
     }
 
     public function resetEstadoColorProgramacion()
@@ -67,15 +68,17 @@ class PlanPedidosDao
 
     public function checkPedidos($dataPedido)
     {
-        $pedido = $dataPedido['numPedido'];
-        //Condicional si tiene mas de un pedido
-        if (strpos($pedido, '-')) {
-            $pedido = explode(" - ", $pedido);
-            foreach ($pedido as $p) {
-                $this->updateEstado($dataPedido, $p);
+        if (isset($dataPedido['numpedido'])) {
+            $pedido = $dataPedido['numPedido'];
+            //Condicional si tiene mas de un pedido
+            if (strpos($pedido, '-')) {
+                $pedido = explode(" - ", $pedido);
+                foreach ($pedido as $p) {
+                    $this->updateEstado($dataPedido, $p);
+                }
+            } else {
+                $this->updateEstado($dataPedido, $pedido);
             }
-        } else {
-            $this->updateEstado($dataPedido, $pedido);
         }
     }
 
