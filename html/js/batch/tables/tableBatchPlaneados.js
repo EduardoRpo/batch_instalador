@@ -65,12 +65,6 @@ $(document).ready(function () {
         render: $.fn.dataTable.render.number('.', ',', 0, ''),
       },
       {
-        title: 'Valor de venta',
-        data: 'valor_pedido',
-        className: 'text-center',
-        render: $.fn.dataTable.render.number('.', ',', 0, '$ '),
-      },
-      {
         title: 'Simulación',
         data: 'sim',
         className: 'text-center',
@@ -108,7 +102,7 @@ $(document).ready(function () {
       dataSrc: 'propietario',
       startRender: function (rows, group) {
         return $('<tr/>').append(
-          '<th class="text-center" colspan="14" style="font-weight: bold;">' +
+          '<th class="text-center" colspan="13" style="font-weight: bold;">' +
             group +
             '</th>'
         );
@@ -117,9 +111,12 @@ $(document).ready(function () {
     },
   });
 
-  loadTotalVentasPlan = () => {
+  loadTotalVentas = () => {
     let totalVentaPlan = 0;
-    dataBPlaneacion = tablaBatchPlaneados.rows().data().toArray();
+    let totalVentaPre = 0;
+
+    let dataBPlaneacion = tablaBatchPlaneados.rows().data().toArray();
+    let dataBPreplaneacion = tableBatchPrePlaneacion.rows().data().toArray();
 
     for (i = 0; i < dataBPlaneacion.length; i++) {
       totalVentaPlan =
@@ -127,7 +124,15 @@ $(document).ready(function () {
         dataBPlaneacion[i]['unidad_lote'] * dataBPlaneacion[i]['valor_pedido'];
     }
 
+    for (i = 0; i < dataBPreplaneacion.length; i++) {
+      totalVentaPre =
+        totalVentaPre +
+        dataBPreplaneacion[i]['unidad_lote'] *
+          dataBPreplaneacion[i]['valor_pedido'];
+    }
+
+    $('#totalVentaPre').val(`$ ${totalVentaPre.toLocaleString('es-CO')}`);
     $('#totalVentaPlan').val(`$ ${totalVentaPlan.toLocaleString('es-CO')}`);
   };
-  setTimeout(loadTotalVentasPlan, 7000);
+  setTimeout(loadTotalVentas, 7000);
 });

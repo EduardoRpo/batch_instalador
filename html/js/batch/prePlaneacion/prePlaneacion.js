@@ -39,7 +39,7 @@ $(document).ready(function () {
       `/api/clearPrePlaneados/${simulacion}`,
       function (data, textStatus, jqXHR) {
         message(data);
-        setTimeout(selectChange, 5000);
+        setTimeout(loadTotalVentas, 7000);
       }
     );
   };
@@ -73,8 +73,7 @@ $(document).ready(function () {
         success: function (resp) {
           dataPrePlaneacion = [];
           message(resp);
-          setTimeout(loadTotalVentasPlan, 7000);
-          setTimeout(selectChange, 5000);
+          setTimeout(loadTotalVentas, 7000);
         },
       });
     }
@@ -138,7 +137,7 @@ $(document).ready(function () {
         $('.cardPlanning').show(800);
         $('#formUpdatePrePlaneado').trigger('reset');
         message(data);
-        setTimeout(selectChange, 5000);
+        setTimeout(loadTotalVentas, 7000);
       }
     );
   });
@@ -157,7 +156,7 @@ $(document).ready(function () {
             `/api/deletePrePlaneacion/${idPlan}`,
             function (data, textStatus, jqXHR) {
               message(data);
-              setTimeout(selectChange, 5000);
+              setTimeout(loadTotalVentas, 7000);
             }
           );
         },
@@ -168,8 +167,4 @@ $(document).ready(function () {
       .set('labels', { ok: 'Eliminar', cancel: 'Cancelar' })
       .set({ closableByDimmer: false });
   });
-
-  selectChange = () => {
-    $('#tipoSimulacion').trigger('change');
-  };
 });

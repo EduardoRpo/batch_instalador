@@ -55,12 +55,6 @@ $(document).ready(function () {
         render: $.fn.dataTable.render.number('.', ',', 0, ''),
       },
       {
-        title: 'Valor de venta',
-        data: 'valor_pedido',
-        className: 'text-center',
-        render: $.fn.dataTable.render.number('.', ',', 0, '$ '),
-      },
-      {
         title: 'Simulación',
         data: 'sim',
         className: 'text-center',
@@ -92,7 +86,7 @@ $(document).ready(function () {
       dataSrc: 'propietario',
       startRender: function (rows, group) {
         return $('<tr/>').append(
-          '<th class="text-center" colspan="12" style="font-weight: bold;">' +
+          '<th class="text-center" colspan="11" style="font-weight: bold;">' +
             group +
             '</th>'
         );
@@ -108,9 +102,7 @@ $(document).ready(function () {
 
     let val = this.value;
 
-    val != 1 && val != 2 ? (val = 1) : val;
-
-    let totalVenta = 0;
+    let totalVentaPre = 0;
 
     tableBatchPrePlaneacion.column(9).search(val).draw();
 
@@ -118,13 +110,13 @@ $(document).ready(function () {
 
     for (i = 0; i < dataBPreplaneacion.length; i++) {
       if (dataBPreplaneacion[i]['sim'] == val) {
-        totalVenta =
-          totalVenta +
+        totalVentaPre =
+          totalVentaPre +
           dataBPreplaneacion[i]['unidad_lote'] *
             dataBPreplaneacion[i]['valor_pedido'];
       }
     }
 
-    $('#totalVentaPre').val(`$ ${totalVenta.toLocaleString('es-CO')}`);
+    $('#totalVentaPre').val(`$ ${totalVentaPre.toLocaleString('es-CO')}`);
   });
 });
