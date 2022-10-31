@@ -73,7 +73,7 @@ class BatchLineaDao
   public function findBatchProgramacionEnvasado()
   {
     $connection = Connection::getInstance()->getConnection();
-    $stmt = $connection->prepare("SELECT batch.id_batch, date_add(batch.fecha_programacion, interval 3 day) AS fecha_programacion, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, 
+    $stmt = $connection->prepare("SELECT DISTINCT batch.id_batch, date_add(batch.fecha_programacion, interval 3 day) AS fecha_programacion, batch.numero_orden, batch.id_producto as referencia, p.nombre_referencia, 
                                       batch.numero_lote, batch.unidad_lote, batch.tamano_lote, batch.estado, batch.multi, bcf.cantidad_firmas, bcf.total_firmas, batch.programacion_envasado, 
                                       (SELECT COUNT(*) FROM observaciones_batch_inactivos WHERE batch = batch.id_batch) AS cant_observations, batch.ok_aprobado
                                   FROM batch
