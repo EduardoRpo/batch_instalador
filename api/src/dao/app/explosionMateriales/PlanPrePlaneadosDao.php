@@ -46,22 +46,29 @@ class PlanPrePlaneadosDao extends estadoInicialDao
         return $countPrePlaneados;
     }
 
+    /* Validar cantidad de formulas y instructivos */
+    public function checkFormulasAndInstructivos($granel)
+    {
+        $formulas = $this->findCountFormula($granel);
+        $instructivos = $this->findCountInstructivo($granel);
+
+        $result = $formulas * $instructivos;
+
+        if ($result == 0)
+            $estado = 0;
+        else
+            $estado = 1;
+
+        return $estado;
+    }
+
     public function insertPrePlaneados($dataPedidos)
     {
         $connection = Connection::getInstance()->getConnection();
 
         try {
 
-            /* Validar cantidad de formulas y instructivos */
-            $formulas = $this->findCountFormula($dataPedidos['granel']);
-            $instructivos = $this->findCountInstructivo($dataPedidos['granel']);
-
-            $result = $formulas * $instructivos;
-
-            if ($result == 0)
-                $estado = 0;
-            else
-                $estado = 1;
+            $estado = $this->checkFormulasAndInstructivos($dataPedidos['granel']);
 
             $stmt = $connection->prepare("INSERT INTO plan_preplaneados (pedido, fecha_programacion, tamano_lote, unidad_lote, valor_pedido, id_producto, estado, fecha_insumo, sim)
                                           VALUES (:pedido, :fecha_programacion, :tamano_lote, :unidad_lote, :valor_pedido, :id_producto, :estado, :fecha_insumo, :sim)");
@@ -83,6 +90,17 @@ class PlanPrePlaneadosDao extends estadoInicialDao
             $error = array('info' => true, 'mesage' => $message);
             return $error;
         }
+    }
+
+    public function updateEstadoPreplaneado($id_producto, $estado)
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        $stmt = $connection->prepare("UPDATE plan_preplaneados SET estado = :estado WHERE id_producto = :id_producto");
+        $stmt->execute([
+            'id_producto' => $id_producto,
+            'estado' => $estado
+        ]);
     }
 
     public function updatePlaneado($dataPedidos)

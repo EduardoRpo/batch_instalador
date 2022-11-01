@@ -240,6 +240,9 @@ include_once("modal/m_observaciones.php");
                             <option value="2">2</option>
                           </select>
                         </div>
+                        <div class="col-2">
+                          <label style="margin-top:37px" id="fechaTipoEscenario"></label>
+                        </div>
                         <div class="col-xs-2 mr-3">
                           <button type="button" id="btnPlanear" class="btn waves-effect waves-light btn-danger" style="width: 120px; margin-top:33px;">
                             <strong>Planear</strong>

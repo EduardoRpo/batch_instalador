@@ -20,7 +20,24 @@ $(document).ready(function () {
                 </tbody>
             </table><br>`,
         function () {
-          saveFechaPlaneacion();
+          let symbol = document.getElementsByClassName('symbolPedidos');
+          save = true;
+
+          for (i = 0; i < symbol.length; i++) {
+            if (symbol[i].id == 'correct') {
+              break;
+            }
+            if (symbol[i].id == 'incorrect') {
+              save = false;
+            }
+          }
+
+          if (save == true) saveFechaPlaneacion();
+          else {
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.error('No es posible preplanear los pedidos');
+            return false;
+          }
         },
         function () {
           clearInputArray();
@@ -56,16 +73,26 @@ $(document).ready(function () {
   check = (tamanio) => {
     if (tamanio > 2500) {
       symbol =
-        '<td style="font-size:22px; font-weight: bold; color:red;">&#x2716</td>';
+        '<td class="symbolPedidos" id="incorrect" style="font-size:22px; font-weight: bold; color:red;">&#x2716</td>';
     } else
       symbol =
-        '<td style="font-size:22px; font-weight: bold; color:green;">&#x2714</td>';
+        '<td class="symbolPedidos" id="correct" style="font-size:22px; font-weight: bold; color:green;">&#x2714</td>';
 
     return symbol;
   };
 
   //Opcion SI
   saveFechaPlaneacion = () => {
+    let date = new Date();
+
+    let year = date.getFullYear();
+
+    let month = `${date.getMonth() + 1}`.padStart(2, 0);
+
+    let day = `${date.getDate()}`.padStart(2, 0);
+
+    let stringDate = `${[year, month, day].join('-')}`;
+
     alertify
       .prompt(
         'Planeación',
@@ -75,6 +102,12 @@ $(document).ready(function () {
           if (!value || value == '') {
             alertify.set('notifier', 'position', 'top-right');
             alertify.error('Ingrese fecha de planeación');
+            return false;
+          }
+
+          if (value < stringDate) {
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.error('Ingrese una fecha apartir del dia de hoy');
             return false;
           }
 
@@ -94,6 +127,7 @@ $(document).ready(function () {
         }
       )
       .set('type', 'date')
+      .setting({ min: stringDate })
       .set({ closableByDimmer: false });
   };
 

@@ -100,6 +100,10 @@ $(document).ready(function () {
   $('#tipoSimulacion').change(function (e) {
     e.preventDefault();
 
+    // semana;
+    // mesPrimer;
+    // mesUltimo;
+
     let val = this.value;
 
     let totalVentaPre = 0;

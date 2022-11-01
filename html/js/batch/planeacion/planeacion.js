@@ -101,7 +101,8 @@ $(document).ready(function () {
                 </tfoot>
             </table><br>`,
         function () {
-          cant = document.getElementsByClassName('txtCantidad');
+          let cant = document.getElementsByClassName('txtCantidad');
+          let symbol = document.getElementsByClassName('symbolPedidos');
 
           save = true;
 
@@ -118,7 +119,23 @@ $(document).ready(function () {
               }
             }
           }
+
+          if (save == true)
+            for (i = 0; i < symbol.length; i++) {
+              if (symbol[i].id == 'correct') {
+                break;
+              }
+              if (symbol[i].id == 'incorrect') {
+                save = false;
+              }
+            }
+
           if (save == true) saveFechaProgramacion();
+          else {
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.error('No es posible programar los pedidos');
+            return false;
+          }
         },
         function () {
           dataPlaneacion = [];
@@ -164,6 +181,16 @@ $(document).ready(function () {
   };
 
   saveFechaProgramacion = () => {
+    let date = new Date();
+
+    let year = date.getFullYear();
+
+    let month = `${date.getMonth() + 1}`.padStart(2, 0);
+
+    let day = `${date.getDate()}`.padStart(2, 0);
+
+    let stringDate = `${[year, month, day].join('-')}`;
+
     alertify
       .prompt(
         'Programación',
@@ -173,6 +200,12 @@ $(document).ready(function () {
           if (!value || value == '') {
             alertify.set('notifier', 'position', 'top-right');
             alertify.error('Ingrese fecha de programación');
+            return false;
+          }
+
+          if (value < stringDate) {
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.error('Ingrese una fecha apartir del dia de hoy');
             return false;
           }
 

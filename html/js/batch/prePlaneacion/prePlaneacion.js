@@ -66,6 +66,12 @@ $(document).ready(function () {
         if (data[i].sim == sim) dataPrePlaneacion.push({ id: data[i].id });
       }
 
+      if (dataPrePlaneacion.length == 0) {
+        alertify.set('notifier', 'position', 'top-right');
+        alertify.error('No hay pedidos a planear');
+        return false;
+      }
+
       $.ajax({
         type: 'POST',
         url: '/api/updatePlaneados',
