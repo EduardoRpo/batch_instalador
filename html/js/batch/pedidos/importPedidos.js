@@ -53,7 +53,7 @@ checkImport = (data) => {
                          <div class="col">Datos a actualizar: ${resp.update}</div>
                          <div class="col">Cantidad referencias: ${resp.referencias}</div>
                          <div class="w-100"></div>
-                         <div class="col">Sin producto: ${resp.nonProducts}</div>
+                         <div class="col">Sin referencias no creadas: ${resp.nonProducts}</div>
                        </div><br><br>
                         <p>Desea continuar?</p>
                          `,
