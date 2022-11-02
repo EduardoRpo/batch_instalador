@@ -201,23 +201,18 @@ include_once("modal/m_observaciones.php");
                             <div class="payment-of-tax">
                               <div class="table-responsive">
                                 <label for="">Capacidad Pre-planeada</label>
-                                <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadEnvasado" style="width: 100%;">
+                                <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadPrePlaneado" style="width: 100%;">
                                   <thead>
                                     <tr>
-                                      <th>S</th>
+                                      <th>Semana</th>
                                       <th>Total Liquidos(Kg)</th>
                                       <th>Total Solidos(Kg)</th>
                                       <th>Total Semi-Solidos(Kg)</th>
                                     </tr>
 
                                   </thead>
-                                  <tbody class="tblCalcCapacidadEnvasadoBody">
-                                    <tr>
-                                      <td>42</td>
-                                      <td>100%</td>
-                                      <td>100%</td>
-                                      <td>100%</td>
-                                    </tr>
+                                  <tbody class="tblCalcCapacidadPrePlaneadoBody">
+
                                   </tbody>
                                 </table>
                               </div>
@@ -240,9 +235,7 @@ include_once("modal/m_observaciones.php");
                             <option value="2">2</option>
                           </select>
                         </div>
-                        <div class="col-2">
-                          <label style="margin-top:37px" id="fechaTipoEscenario"></label>
-                        </div>
+                        <div class="fechaTipoEscenario"></div>
                         <div class="col-xs-2 mr-3">
                           <button type="button" id="btnPlanear" class="btn waves-effect waves-light btn-danger" style="width: 120px; margin-top:33px;">
                             <strong>Planear</strong>
@@ -302,7 +295,7 @@ include_once("modal/m_observaciones.php");
                             <div class="payment-of-tax">
                               <div class="table-responsive">
                                 <label for="">Capacidad Planeada </label>
-                                <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadEnvasado" style="width: 100%;">
+                                <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadPlaneada" style="width: 100%;">
                                   <thead>
                                     <tr>
                                       <th>S</th>
@@ -312,13 +305,7 @@ include_once("modal/m_observaciones.php");
                                     </tr>
 
                                   </thead>
-                                  <tbody class="tblCalcCapacidadEnvasadoBody">
-                                    <tr>
-                                      <td>42</td>
-                                      <td>100%</td>
-                                      <td>100%</td>
-                                      <td>100%</td>
-                                    </tr>
+                                  <tbody class="tblCalcCapacidadPlaneadaBody">
                                   </tbody>
                                 </table>
                               </div>
@@ -360,7 +347,7 @@ include_once("modal/m_observaciones.php");
                             <div class="payment-of-tax">
                               <div class="table-responsive">
                                 <label for="">Capacidad Programada </label>
-                                <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadEnvasado" style="width: 100%;">
+                                <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadProgramada" style="width: 100%;">
                                   <thead>
                                     <tr>
                                       <th>S</th>
@@ -369,13 +356,7 @@ include_once("modal/m_observaciones.php");
                                       <th>Total Semi-Solidos(Kg)</th>
                                     </tr>
                                   </thead>
-                                  <tbody class="tblCalcCapacidadEnvasadoBody">
-                                    <tr>
-                                      <td>42</td>
-                                      <td>100%</td>
-                                      <td>100%</td>
-                                      <td>100%</td>
-                                    </tr>
+                                  <tbody class="tblCalcCapacidadProgramadaBody">
                                   </tbody>
                                 </table>
                               </div>
@@ -421,6 +402,7 @@ include_once("modal/m_observaciones.php");
     <?php require_once __DIR__ . '/partials/scriptsJS.php'; ?>
 
     <script src="/html/js/global/searchData.js"></script>
+    <script src="/html/js/batch/calc/calcWeek.js"></script>
 
     <script src="/html/js/batch/tables/tableBatchProgramados.js"></script>
     <script src="/html/js/batch/tables/tableBatchEliminados.js"></script>
@@ -430,7 +412,6 @@ include_once("modal/m_observaciones.php");
     <script src="/html/js/batch/tables/batcheliminados.js"></script>
 
     <script src="/html/js/batch/calc/calcularLote.js"></script>
-    <script src="/html/js/batch/calc/calcWeek.js"></script>
 
     <script src="/html/js/batch/pedidos/generalPedidos.js"></script>
     <script src="/html/js/batch/pedidos/importPedidos.js"></script>

@@ -1,4 +1,29 @@
 $(document).ready(function () {
+  loadTblCapacidadPlaneada = () => {
+    semana = sessionStorage.getItem('semana');
+
+    for (i = 0; i < 12; i++) {
+      $('.tblCalcCapacidadPlaneadaBody').append(`
+          <tr>
+            <td>${parseInt(semana) + i}</td>
+            <td>0</td> 
+            <td>0</td>
+            <td>0</td>
+          </tr>
+        `);
+    }
+
+    $('#tblCalcCapacidadPlaneada').dataTable({
+      scrollY: '130px',
+      scrollCollapse: true,
+      paging: false,
+      language: {
+        url: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json',
+      },
+    });
+  };
+  loadTblCapacidadPlaneada();
+
   tablaBatchPlaneados = $('#tablaBatchPlaneados').DataTable({
     pageLength: 50,
     responsive: true,
@@ -24,6 +49,9 @@ $(document).ready(function () {
         title: 'N° Semana',
         data: 'semana',
         className: 'text-center',
+        render: function (data) {
+          return `S ${data}`;
+        },
       },
       {
         width: '350px',

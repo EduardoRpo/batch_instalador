@@ -1,4 +1,6 @@
 $(document).ready(function () {
+  sessionStorage.removeItem('semana');
+
   function getDateWeek() {
     let date = new Date();
     date.setHours(0, 0, 0, 0);
@@ -6,6 +8,7 @@ $(document).ready(function () {
     semana = Math.ceil(
       ((date - new Date(date.getFullYear(), 0, 1)) / 8.64e7 + 1) / 7
     );
+    sessionStorage.setItem('semana', semana);
 
     let primerdia = new Date(date.getFullYear(), 0, 1);
 

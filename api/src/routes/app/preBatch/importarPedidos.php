@@ -4,7 +4,6 @@ use BatchRecord\dao\PedidosSinReferenciaDao;
 use BatchRecord\dao\PreBatchDao;
 use BatchRecord\Dao\ProductDao;
 
-
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
@@ -89,19 +88,6 @@ $app->post('/validacionDatosPedidos', function (Request $request, Response $resp
   } else $dataImportOrders = array('error' => true, 'message' => 'El archivo se encuentra vacio. Intente nuevamente');
 
   $response->getBody()->write(json_encode($dataImportOrders, JSON_NUMERIC_CHECK));
-  return $response->withHeader('Content-Type', 'application/json');
-});
-
-$app->get('/sendNonExistentProducts', function (Request $request, Response $response, $args) {
-  session_start();
-  $data = $_SESSION['nonExistentProducts'];
-
-  if ($data) {
-    $resp = $data;
-    unset($_SESSION['nonExistentProducts']);
-  } else $resp = array('error' => true, 'message' => 'Importe un nuevo archivo');
-
-  $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
 

@@ -20,15 +20,15 @@ class PlanPrePlaneadosDao extends estadoInicialDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $sql = "SELECT pre_plan.id, pp.nombre AS propietario, pre_plan.pedido, pre_plan.unidad_lote, pre_plan.valor_pedido, pre_plan.fecha_programacion, pre_plan.tamano_lote, l.densidad, l.ajuste, pc.nombre as presentacion, CURRENT_DATE AS fecha_actual, (SELECT referencia FROM producto WHERE multi = (SELECT multi FROM producto WHERE referencia = pre_plan.id_producto) LIMIT 1) AS granel,
-                        pre_plan.id_producto, p.nombre_referencia, pre_plan.sim, CONCAT('S', WEEK(pre_plan.fecha_programacion)) AS semana, IF(pre_plan.estado = 0, 'Sin Formula y/o Instructivos', 'Inactivo') AS estado, pre_plan.planeado
+        $sql = "SELECT pre_plan.id, pp.nombre AS propietario, pre_plan.pedido, pre_plan.unidad_lote, pre_plan.valor_pedido, pre_plan.fecha_programacion, pre_plan.tamano_lote, l.id AS id_linea, l.densidad, l.ajuste, pc.nombre as presentacion, CURRENT_DATE AS fecha_actual, (SELECT referencia FROM producto WHERE multi = (SELECT multi FROM producto WHERE referencia = pre_plan.id_producto) LIMIT 1) AS granel,
+                        pre_plan.id_producto, p.nombre_referencia, pre_plan.sim, WEEK(pre_plan.fecha_programacion) AS semana, IF(pre_plan.estado = 0, 'Sin Formula y/o Instructivos', 'Inactivo') AS estado, pre_plan.planeado
                 FROM plan_preplaneados pre_plan 
                     INNER JOIN producto p ON p.referencia = pre_plan.id_producto 
                     INNER JOIN propietario pp ON pp.id = p.id_propietario
                     INNER JOIN linea l ON p.id_linea = l.id 
                     INNER JOIN presentacion_comercial pc ON p.presentacion_comercial = pc.id 
                     WHERE pre_plan.planeado = 0 AND WEEK(pre_plan.fecha_programacion) >= WEEK(NOW())
-                    ORDER BY `propietario` ASC";
+                    ORDER BY `semana` ASC";
 
         $query = $connection->prepare($sql);
         $query->execute();

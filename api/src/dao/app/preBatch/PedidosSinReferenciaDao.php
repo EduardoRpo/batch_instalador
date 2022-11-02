@@ -16,6 +16,17 @@ class PedidosSinReferenciaDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
+    public function findAllPedidoSinReferencia()
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        $query = $connection->prepare("SELECT pedido AS documento, id_producto AS producto FROM plan_pedidos_sin_referencia");
+        $query->execute();
+
+        $pedidosSinReferencia = $query->fetchAll($connection::FETCH_ASSOC);
+        return $pedidosSinReferencia;
+    }
+
     public function findPedidoSinReferencia($dataPedidos)
     {
         $connection = Connection::getInstance()->getConnection();
@@ -28,8 +39,8 @@ class PedidosSinReferenciaDao
             'id_producto' => trim("M-" . $dataPedidos['producto'])
         ]);
 
-        $pedidosSinReferencia = $query->fetch($connection::FETCH_ASSOC);
-        return $pedidosSinReferencia;
+        $pedidoSinReferencia = $query->fetch($connection::FETCH_ASSOC);
+        return $pedidoSinReferencia;
     }
 
     public function savePedidosSinReferencia($dataPedidos)

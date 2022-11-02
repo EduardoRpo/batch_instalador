@@ -68,7 +68,7 @@ $(document).ready(function () {
 
       if (dataPrePlaneacion.length == 0) {
         alertify.set('notifier', 'position', 'top-right');
-        alertify.error('No hay pedidos a planear');
+        alertify.error('Escenario vacio. cargue escenario para programar');
         return false;
       }
 
