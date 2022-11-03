@@ -209,7 +209,6 @@ include_once("modal/m_observaciones.php");
                                       <th>Total Solidos(Kg)</th>
                                       <th>Total Semi-Solidos(Kg)</th>
                                     </tr>
-
                                   </thead>
                                   <tbody class="tblCalcCapacidadPrePlaneadoBody">
 
