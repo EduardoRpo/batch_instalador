@@ -174,6 +174,12 @@ $(document).ready(function () {
         pedidosProgramar.splice(0, pedidosProgramar.length);
         deleteSession();
         setTimeout(loadTotalVentas, 7000);
+        api = '/api/prePlaneados';
+        if ($.fn.dataTable.isDataTable('#tblCalcCapacidadPrePlaneado')) {
+          $('#tblCalcCapacidadPrePlaneado').DataTable().destroy();
+        }
+        $('.tblCalcCapacidadPrePlaneadoBody').empty();
+        getDataPrePlaneacion();
       },
     });
   };

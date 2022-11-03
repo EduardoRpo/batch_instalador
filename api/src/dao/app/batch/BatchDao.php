@@ -54,14 +54,14 @@ class BatchDao extends estadoInicialDao
         $connection = Connection::getInstance()->getConnection();
         //$stmt = $connection->prepare("SELECT * FROM producto INNER JOIN batch ON batch.id_producto = producto.referencia INNER JOIN linea ON producto.id_linea = linea.id INNER JOIN propietario ON producto.id_propietario = propietario.id WHERE batch.estado = 1 OR batch.estado = 2 AND batch.fecha_programacion = CURRENT_DATE()");
         $stmt = $connection->prepare("SELECT DISTINCT batch.id_batch, batch.numero_orden, producto.referencia, producto.nombre_referencia, pc.nombre as presentacion_comercial, batch.numero_lote, batch.tamano_lote, propietario.nombre, batch.fecha_creacion, WEEK(batch.fecha_creacion) AS semana_creacion, WEEK(batch.fecha_programacion) AS semana_programacion, 
-                                                batch.fecha_programacion, batch.estado, batch.multi, (SELECT COUNT(*) FROM observaciones_batch_inactivos WHERE batch = batch.id_batch) AS cant_observations
+                                                batch.fecha_programacion, batch.estado, batch.multi, (SELECT COUNT(*) FROM observaciones_batch_inactivos WHERE batch = batch.id_batch) AS cant_observations, producto.id_linea
                                         FROM batch 
                                         INNER JOIN producto ON batch.id_producto = producto.referencia
                                         INNER JOIN propietario  ON producto.id_propietario = propietario.id
                                         INNER JOIN presentacion_comercial pc ON producto.presentacion_comercial = pc.id
                                         LEFT JOIN observaciones_batch_inactivos obi ON obi.batch = batch.id_batch
                                         WHERE estado > 2 AND batch.id_batch 
-                                        NOT IN (SELECT batch FROM `batch_liberacion` WHERE dir_produccion > 0 AND dir_calidad > 0 and dir_tecnica > 0)");
+                                        NOT IN (SELECT batch FROM `batch_liberacion` WHERE dir_produccion > 0 AND dir_calidad > 0 and dir_tecnica > 0) ORDER BY `semana_programacion` ASC");
         $stmt->execute();
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         $batch = $stmt->fetchAll($connection::FETCH_ASSOC);
@@ -95,7 +95,7 @@ class BatchDao extends estadoInicialDao
                                             INNER JOIN linea l ON p.id_linea = l.id 
                                             INNER JOIN propietario pp ON pp.id = p.id_propietario 
                                         WHERE pre_plan.planeado = 1
-                                        ORDER BY `semana` ASC;");
+                                        ORDER BY `semana`, `propietario` ASC;");
         $stmt->execute();
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         $batch = $stmt->fetchAll($connection::FETCH_ASSOC);

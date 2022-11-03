@@ -201,7 +201,7 @@ include_once("modal/m_observaciones.php");
                             <div class="payment-of-tax">
                               <div class="table-responsive">
                                 <label for="">Capacidad Pre-planeada</label>
-                                <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadPrePlaneado" style="width: 100%;">
+                                <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadPrePlaneado">
                                   <thead>
                                     <tr>
                                       <th>Semana</th>
@@ -295,7 +295,7 @@ include_once("modal/m_observaciones.php");
                             <div class="payment-of-tax">
                               <div class="table-responsive">
                                 <label for="">Capacidad Planeada </label>
-                                <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadPlaneada" style="width: 100%;">
+                                <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadPlaneada">
                                   <thead>
                                     <tr>
                                       <th>S</th>
@@ -347,7 +347,7 @@ include_once("modal/m_observaciones.php");
                             <div class="payment-of-tax">
                               <div class="table-responsive">
                                 <label for="">Capacidad Programada </label>
-                                <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadProgramada" style="width: 100%;">
+                                <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadProgramada">
                                   <thead>
                                     <tr>
                                       <th>S</th>

@@ -229,8 +229,6 @@ $(document).ready(function () {
       );
 
       if (idCant.includes('-')) {
-        $('#sumaAllTanques').val('');
-        $(`#totalTanque-${i}`).val('');
         $(`#cantTanque-${i}`).val('');
       } else {
         $('#sumaTanques').val('');
@@ -239,16 +237,6 @@ $(document).ready(function () {
       return false;
     } else {
       if (idCant.includes('-')) {
-        $(`#totalTanque-${i}`).val(tamanioTotalTanque);
-
-        for (let j = 0; j < count; j++) {
-          totalTanques = $(`#totalTanque-${j}`).val();
-          !totalTanques ? (totalTanques = 0) : totalTanques;
-
-          sumaTanques = parseFloat(sumaTanques) + parseFloat(totalTanques);
-        }
-        $('#sumaAllTanques').val(sumaTanques);
-
         /* Capturar datos */
         granel = $(`#granel-${i}`).html();
 

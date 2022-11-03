@@ -65,6 +65,9 @@ $(document).ready(function () {
 
   alertifyProgramar = (data) => {
     count = data.length;
+
+    totalCantAndLote = sumCantAndLote(data);
+
     alertify
       .confirm(
         'Samara Cosmetics',
@@ -74,11 +77,10 @@ $(document).ready(function () {
                   <tr>
                     <th class="text-center">Granel</th>
                     <th class="text-center">Descripción</th>
-                    <th class="text-center">Tamaño (Kg)</th>
                     <th class="text-center">Cantidad (Und)</th>
+                    <th class="text-center">Tamaño (Kg)</th>
                     <th class="text-center" style="width: 131px">Tanques</th>
                     <th class="text-center">Cantidad (Tanques)</th>
-                    <th class="text-center">Total</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -87,16 +89,17 @@ $(document).ready(function () {
                   </form>
                 </tbody>
                 <tfoot>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                      <input type="number" class="text-center form-control-updated" id="sumaAllTanques" disabled>
-                    </td>
+                  <tr >
+                    <th></th>
+                    <th></th>
+                    <th class="text-center">${
+                      totalCantAndLote.totalCantidades
+                    }</th>
+                    <th class="text-center">${totalCantAndLote.totalLotes.toFixed(
+                      2
+                    )}</th>
+                    <th></th>
+                    <th></th>
                   </tr>
                 </tfoot>
             </table><br>`,
@@ -153,6 +156,22 @@ $(document).ready(function () {
     cargarTanques();
   };
 
+  sumCantAndLote = (data) => {
+    totalCantidades = 0;
+    totalLotes = 0;
+    for (i = 0; i < data.length; i++) {
+      totalCantidades += data[i].cantidad_acumulada;
+      totalLotes += data[i].tamanio_lote;
+    }
+
+    totalCantAndLote = {
+      totalCantidades: totalCantidades,
+      totalLotes: totalLotes,
+    };
+
+    return totalCantAndLote;
+  };
+
   addRowsPedidos = (data) => {
     row = [];
     for (i = 0; i < data.length; i++) {
@@ -161,18 +180,15 @@ $(document).ready(function () {
       row.push(`<tr ${(text = color(data[i].tamanio_lote))}>
                 <td id="granel-${i}">${data[i].granel}</td>
                 <td>${data[i].producto}</td>
+                <td>${data[i].cantidad_acumulada}</td>
                 <td id="tamanioLote-${i}">${data[i].tamanio_lote.toFixed(
         2
       )}</td>
-                <td>${data[i].cantidad_acumulada}</td>
                 <td>
                   <select class="form-control-updated select-tanque" id="cmbTanque-${i}" ${dis}></select>
                 </td>
                 <td>
                   <input type="number" class="form-control-updated text-center txtCantidad" id="cantTanque-${i}" ${dis}>
-                </td>
-                <td>
-                  <input type="number" class="form-control-updated text-center" id="totalTanque-${i}" disabled>
                 </td>
                 ${(symbol = check(data[i].tamanio_lote))}
                 </tr>`);
@@ -244,6 +260,14 @@ $(document).ready(function () {
         dataTanquesPlaneacion = [];
         deleteSession();
         setTimeout(loadTotalVentas, 7000);
+        if ($.fn.dataTable.isDataTable('#tblCalcCapacidadPlaneada')) {
+          $('#tblCalcCapacidadPlaneada').DataTable().destroy();
+        }
+        $('.tblCalcCapacidadPlaneadaBody').empty();
+        api = '/api/batchInactivos';
+        getDataPlaneacion();
+        api = '/api/batch';
+        getDataProgramados();
       },
     });
   };

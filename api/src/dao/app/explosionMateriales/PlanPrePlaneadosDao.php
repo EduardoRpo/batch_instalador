@@ -28,7 +28,7 @@ class PlanPrePlaneadosDao extends estadoInicialDao
                     INNER JOIN linea l ON p.id_linea = l.id 
                     INNER JOIN presentacion_comercial pc ON p.presentacion_comercial = pc.id 
                     WHERE pre_plan.planeado = 0 AND WEEK(pre_plan.fecha_programacion) >= WEEK(NOW())
-                    ORDER BY `semana` ASC";
+                    ORDER BY `semana`, `propietario` ASC";
 
         $query = $connection->prepare($sql);
         $query->execute();

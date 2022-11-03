@@ -1,14 +1,29 @@
 $(document).ready(function () {
-  loadTblCapacidadProgramados = () => {
+  /* Capacidad programados */
+  api = '/api/batch';
+
+  getDataProgramados = async () => {
+    resp = await searchData(api);
+    loadTblCapacidadProgramados(resp);
+  };
+
+  getDataProgramados();
+
+  loadTblCapacidadProgramados = (data) => {
     semana = sessionStorage.getItem('semana');
+
+    capacidadProgramada = calcTamanioLoteBySemanaProgramados(
+      data,
+      parseInt(semana)
+    );
 
     for (i = 0; i < 12; i++) {
       $('.tblCalcCapacidadProgramadaBody').append(`
           <tr>
-            <td>${parseInt(semana) + i}</td>
-            <td>0</td> 
-            <td>0</td>
-            <td>0</td>
+          <td>${capacidadProgramada[i].semana}</td>
+          <td>${capacidadProgramada[i].tamanioLoteLQ.toFixed(2)}</td> 
+          <td>${capacidadProgramada[i].tamanioLoteSL.toFixed(2)}</td>
+          <td>${capacidadProgramada[i].tamanioLoteSM.toFixed(2)}</td>
           </tr>
         `);
     }
@@ -23,7 +38,40 @@ $(document).ready(function () {
     });
   };
 
-  loadTblCapacidadProgramados();
+  calcTamanioLoteBySemanaProgramados = (data, semana) => {
+    let capacidad = [];
+
+    for (i = 0; i < 12; i++) {
+      capacidad.push({
+        semana: semana + i,
+        tamanioLoteLQ: 0,
+        tamanioLoteSM: 0,
+        tamanioLoteSL: 0,
+      });
+    }
+
+    for (i = 0; i < data.length; i++) {
+      for (j = 0; j < capacidad.length; j++) {
+        if (capacidad[j].semana == data[i].semana_programacion)
+          if (
+            data[i].estado == 3 ||
+            data[i].estado == 3.5 ||
+            data[i].estado == 4
+          ) {
+            capacidad[j].linea = data[i].id_linea;
+
+            if (capacidad[j].linea == 1)
+              capacidad[j].tamanioLoteLQ += data[i].tamano_lote;
+            else if (capacidad[j].linea == 2)
+              capacidad[j].tamanioLoteSM += data[i].tamano_lote;
+            else if (capacidad[j].linea == 3)
+              capacidad[j].tamanioLoteSL += data[i].tamano_lote;
+          }
+      }
+    }
+
+    return capacidad;
+  };
 
   tablaBatch = $('#tablaBatch').DataTable({
     pageLength: 50,

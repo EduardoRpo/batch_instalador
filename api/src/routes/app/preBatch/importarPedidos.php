@@ -58,7 +58,6 @@ $app->post('/validacionDatosPedidos', function (Request $request, Response $resp
       }
     }
 
-    //if (!isset($dataImportOrders)) {
     //Obtener cantidad de referencias
     $key_array = array();
     $temp_array = array();
@@ -84,7 +83,6 @@ $app->post('/validacionDatosPedidos', function (Request $request, Response $resp
       $nonExistentProducts = array_values($nonExistentProducts);
       $_SESSION['nonExistentProducts'] = $nonExistentProducts;
     }
-    //}
   } else $dataImportOrders = array('error' => true, 'message' => 'El archivo se encuentra vacio. Intente nuevamente');
 
   $response->getBody()->write(json_encode($dataImportOrders, JSON_NUMERIC_CHECK));
@@ -95,16 +93,15 @@ $app->post('/addPedidos', function (Request $request, Response $response, $args)
   session_start();
   $dataPedidos = $_SESSION['dataImportPedidos'];
 
-
   // Almacenar pedidos sin referencia
   $dataPedidosSinRef = $_SESSION['nonExistentProducts'];
 
   !isset($dataPedidosSinRef) ? $count = 0 : $count = sizeof($dataPedidosSinRef);
 
   for ($i = 0; $i < $count; $i++) {
-    $pedidosSinReferenciaDao->savePedidosSinReferencia($dataPedidosSinRef[$i]);
+    if (!empty($dataPedidosSinRef[$i]['documento']) || !empty($dataPedidosSinRef[$i]['producto']))
+      $pedidosSinReferenciaDao->savePedidosSinReferencia($dataPedidosSinRef[$i]);
   }
-
 
   // $data = array();
   for ($i = 0; $i < sizeof($dataPedidos); $i++) {
@@ -141,7 +138,6 @@ $app->post('/addPedidos', function (Request $request, Response $response, $args)
     }
   else if (sizeof($array_diff) == 0)
     $result = null;
-
 
   if ($result == null) {
     date_default_timezone_set('America/Bogota');
