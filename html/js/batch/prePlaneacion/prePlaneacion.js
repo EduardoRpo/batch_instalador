@@ -9,18 +9,17 @@ $(document).ready(function () {
 
     alertify
       .confirm(
-        'Samara Cosmetics',
-        `<p>Eliminar simulación</p><p><br></p>
-                    <select id="simulacion" class="form-control">
+        'Eliminar Escenario',
+        `<select id="simulacion" class="form-control">
                       <option selected disabled>Seleccionar</option>
-                      <option value="1">Simulación 1</option>
-                      <option value="2">Simulación 2</option>
+                      <option value="1">Escenario 1</option>
+                      <option value="2">Escenario 2</option>
                     </select>`,
         function () {
           val = $('#simulacion').val();
           if (!val || val == '') {
             alertify.set('notifier', 'position', 'top-right');
-            alertify.error('Seleccione la simulación');
+            alertify.error('Seleccione un Escenario');
             return false;
           }
 
@@ -39,8 +38,7 @@ $(document).ready(function () {
     $.get(
       `/api/clearPrePlaneados/${simulacion}`,
       function (data, textStatus, jqXHR) {
-        message(data);
-        $('#tipoSimulacion').change();
+        generalReloadData(data);
       }
     );
   };
@@ -48,18 +46,18 @@ $(document).ready(function () {
   /* Planear pedido */
   $('#btnPlanear').click(function (e) {
     e.preventDefault();
-    data = tableBatchPrePlaneacion.rows().data();
-    sim = $('#tipoSimulacion').val();
+    let data = tableBatchPrePlaneacion.rows().data();
+    let sim = $('#tipoSimulacion').val();
 
     if (!sim) {
       alertify.set('notifier', 'position', 'top-right');
-      alertify.error('Seleccione la simulación para planear');
+      alertify.error('Seleccione el Escenario para planear');
       return false;
     }
 
     if (data.length == 0) {
       alertify.set('notifier', 'position', 'top-right');
-      alertify.error('No hay pedidos a planear');
+      alertify.error('No hay pedidos para planear');
       return false;
     } else {
       /* Cargar datos */
@@ -67,15 +65,18 @@ $(document).ready(function () {
         if (data[i].sim == sim) dataPrePlaneacion.push({ id: data[i].id });
       }
 
+      if (dataPrePlaneacion.length == 0) {
+        alertify.set('notifier', 'position', 'top-right');
+        alertify.error('Escenario vacio. Cargue escenario para planear');
+        return false;
+      }
+
       $.ajax({
         type: 'POST',
         url: '/api/updatePlaneados',
         data: { data: dataPrePlaneacion },
         success: function (resp) {
-          dataPrePlaneacion = [];
-          message(resp);
-          setTimeout(loadTotalVentasPlan(), 7000);
-          $('#tipoSimulacion').change();
+          generalReloadData(resp);
         },
       });
     }
@@ -84,7 +85,10 @@ $(document).ready(function () {
   /* Modificar pedido */
   $(document).on('click', '.link-editar-pre', function () {
     id = this.id;
-    sessionStorage.setItem('id', id);
+
+    let idPlan = id.slice(5, id.length);
+
+    sessionStorage.setItem('id', idPlan);
     $('.cardPlanning').toggle(800);
 
     data = tableBatchPrePlaneacion.row($(this).parents('tr')).data();
@@ -99,12 +103,12 @@ $(document).ready(function () {
     presentacion = data.presentacion;
 
     $('.cardUpdatePrePlaneado').toggle(800);
-    $('html, body').animate(
-      {
-        scrollTop: 0,
-      },
-      500
-    );
+    // $('html, body').animate(
+    //   {
+    //     scrollTop: 0,
+    //   },
+    //   500
+    // );
   });
 
   $('#savePrePlaneado').click(function (e) {
@@ -114,11 +118,11 @@ $(document).ready(function () {
 
     if (!unidad || unidad <= 0) {
       alertify.set('notifier', 'position', 'top-right');
-      alertify.error('Ingrese unidad de lote valida');
+      alertify.error('Ingrese una unidad de lote valida');
       return false;
     }
 
-    id = sessionStorage.getItem('id');
+    let id = sessionStorage.getItem('id');
 
     prePlaneacion = {
       id: id,
@@ -133,10 +137,7 @@ $(document).ready(function () {
       prePlaneacion,
       function (data, textStatus, jqXHR) {
         $('.cardUpdatePrePlaneado').hide(800);
-        $('.cardPlanning').show(800);
-        $('#formUpdatePrePlaneado').trigger('reset');
-        message(data);
-        $('#tipoSimulacion').change();
+        generalReloadData(data);
       }
     );
   });
@@ -144,17 +145,17 @@ $(document).ready(function () {
   /* Eliminar pedido */
   $(document).on('click', '.link-borrar-pre', function () {
     id = this.id;
+    let idPlan = id.slice(7, id.length);
 
     alertify
       .confirm(
         'Samara Cosmetic',
-        '<p>¿ Estas seguro de eliminar este pedido ?</p><br>',
+        '<p>¿ Esta seguro de eliminar este registro ?</p><br>',
         function () {
           $.get(
-            `/api/deletePrePlaneacion/${id}`,
+            `/api/deletePrePlaneacion/${idPlan}`,
             function (data, textStatus, jqXHR) {
-              message(data);
-              $('#tipoSimulacion').change();
+              generalReloadData(data);
             }
           );
         },
@@ -165,4 +166,21 @@ $(document).ready(function () {
       .set('labels', { ok: 'Eliminar', cancel: 'Cancelar' })
       .set({ closableByDimmer: false });
   });
+
+  generalReloadData = async (data) => {
+    message(data);
+    setTimeout(loadTotalVentas, 7000);
+    if ($.fn.dataTable.isDataTable('#tblCalcCapacidadPrePlaneado')) {
+      $('#tblCalcCapacidadPrePlaneado').DataTable().destroy();
+    }
+    $('.tblCalcCapacidadPrePlaneadoBody').empty();
+    if ($.fn.dataTable.isDataTable('#tblCalcCapacidadPlaneada')) {
+      $('#tblCalcCapacidadPlaneada').DataTable().destroy();
+    }
+    $('.tblCalcCapacidadPlaneadaBody').empty();
+    api = '/api/prePlaneados';
+    await getDataPrePlaneacion();
+    api = '/api/batchInactivos';
+    await getDataPlaneacion();
+  };
 });

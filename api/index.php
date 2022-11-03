@@ -83,6 +83,7 @@ require_once __DIR__ . '/src/routes/app/productos/productos.php';
 //prebatch
 require_once __DIR__ . '/src/routes/app/preBatch/preBatch.php';
 require_once __DIR__ . '/src/routes/app/preBatch/importarPedidos.php';
+require_once __DIR__ . '/src/routes/app/preBatch/pedidosSinReferencia.php';
 
 //Batch
 //require_once __DIR__ . '/src/routes/batch.php';

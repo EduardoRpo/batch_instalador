@@ -4,16 +4,17 @@ $(document).ready(function () {
   idTanque = 0;
 
   $(document).on('click', '.link-select', function () {
-    id = this.id;
+    let id = this.id;
+    let idPlan = id.slice(8, id.length);
 
     if ($(`#${id}`).is(':checked')) {
-      dataPlan = tablaBatchPlaneados.row($(this).parents('tr')).data();
+      let dataPlan = tablaBatchPlaneados.row($(this).parents('tr')).data();
 
-      estado = dataPlan.estado;
+      let estado = dataPlan.estado;
 
       if (estado == 'Inactivo') {
         planeacion = {
-          id: id,
+          id: idPlan,
           granel: dataPlan.granel,
           producto: dataPlan.nombre_referencia,
           referencia: dataPlan.id_producto,
@@ -33,7 +34,7 @@ $(document).ready(function () {
       }
     } else {
       for (i = 0; i < dataPlaneacion.length; i++) {
-        if (dataPlaneacion[i].id == id) {
+        if (dataPlaneacion[i].id == idPlan) {
           dataPlaneacion.splice(i, 1);
         }
       }
@@ -64,6 +65,9 @@ $(document).ready(function () {
 
   alertifyProgramar = (data) => {
     count = data.length;
+
+    totalCantAndLote = sumCantAndLote(data);
+
     alertify
       .confirm(
         'Samara Cosmetics',
@@ -73,11 +77,10 @@ $(document).ready(function () {
                   <tr>
                     <th class="text-center">Granel</th>
                     <th class="text-center">Descripción</th>
-                    <th class="text-center">Tamaño (Kg)</th>
                     <th class="text-center">Cantidad (Und)</th>
+                    <th class="text-center">Tamaño (Kg)</th>
                     <th class="text-center" style="width: 131px">Tanques</th>
                     <th class="text-center">Cantidad (Tanques)</th>
-                    <th class="text-center">Total</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -86,36 +89,56 @@ $(document).ready(function () {
                   </form>
                 </tbody>
                 <tfoot>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                      <input type="number" class="text-center form-control-updated" id="sumaAllTanques" disabled>
-                    </td>
+                  <tr >
+                    <th></th>
+                    <th></th>
+                    <th class="text-center">${
+                      totalCantAndLote.totalCantidades
+                    }</th>
+                    <th class="text-center">${totalCantAndLote.totalLotes.toFixed(
+                      2
+                    )}</th>
+                    <th></th>
+                    <th></th>
                   </tr>
                 </tfoot>
             </table><br>`,
         function () {
-          cant = document.getElementsByClassName('txtCantidad');
+          let cant = document.getElementsByClassName('txtCantidad');
+          let symbol = document.getElementsByClassName('symbolPedidos');
 
           save = true;
 
           for (i = 1; i < cant.length; i++) {
-            cantidad = cant[i].value;
+            if (cant[i].disabled == false) {
+              cantidad = cant[i].value;
 
-            if (!cantidad || cantidad == null) {
-              alertify.set('notifier', 'position', 'top-right');
-              alertify.error('Ingrese fecha de programación');
-              $(`#${cant[i].id}`).css('border-color', 'red');
-              save = false;
-              return false;
+              if (!cantidad || cantidad == null) {
+                alertify.set('notifier', 'position', 'top-right');
+                alertify.error('Ingrese fecha de programación');
+                $(`#${cant[i].id}`).css('border-color', 'red');
+                save = false;
+                return false;
+              }
             }
           }
+
+          if (save == true)
+            for (i = 0; i < symbol.length; i++) {
+              if (symbol[i].id == 'correct') {
+                break;
+              }
+              if (symbol[i].id == 'incorrect') {
+                save = false;
+              }
+            }
+
           if (save == true) saveFechaProgramacion();
+          else {
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.error('No es posible programar los pedidos');
+            return false;
+          }
         },
         function () {
           dataPlaneacion = [];
@@ -133,24 +156,39 @@ $(document).ready(function () {
     cargarTanques();
   };
 
+  sumCantAndLote = (data) => {
+    totalCantidades = 0;
+    totalLotes = 0;
+    for (i = 0; i < data.length; i++) {
+      totalCantidades += data[i].cantidad_acumulada;
+      totalLotes += data[i].tamanio_lote;
+    }
+
+    totalCantAndLote = {
+      totalCantidades: totalCantidades,
+      totalLotes: totalLotes,
+    };
+
+    return totalCantAndLote;
+  };
+
   addRowsPedidos = (data) => {
     row = [];
     for (i = 0; i < data.length; i++) {
+      data[i].tamanio_lote > 2500 ? (dis = 'disabled') : (dis = '');
+
       row.push(`<tr ${(text = color(data[i].tamanio_lote))}>
                 <td id="granel-${i}">${data[i].granel}</td>
                 <td>${data[i].producto}</td>
+                <td>${data[i].cantidad_acumulada}</td>
                 <td id="tamanioLote-${i}">${data[i].tamanio_lote.toFixed(
         2
       )}</td>
-                <td>${data[i].cantidad_acumulada}</td>
                 <td>
-                  <select class="form-control-updated select-tanque" id="cmbTanque-${i}"></select>
+                  <select class="form-control-updated select-tanque" id="cmbTanque-${i}" ${dis}></select>
                 </td>
                 <td>
-                  <input type="number" class="form-control-updated text-center txtCantidad" id="cantTanque-${i}">
-                </td>
-                <td>
-                  <input type="number" class="form-control-updated text-center" id="totalTanque-${i}" disabled>
+                  <input type="number" class="form-control-updated text-center txtCantidad" id="cantTanque-${i}" ${dis}>
                 </td>
                 ${(symbol = check(data[i].tamanio_lote))}
                 </tr>`);
@@ -159,6 +197,16 @@ $(document).ready(function () {
   };
 
   saveFechaProgramacion = () => {
+    let date = new Date();
+
+    let year = date.getFullYear();
+
+    let month = `${date.getMonth() + 1}`.padStart(2, 0);
+
+    let day = `${date.getDate()}`.padStart(2, 0);
+
+    let stringDate = `${[year, month, day].join('-')}`;
+
     alertify
       .prompt(
         'Programación',
@@ -168,6 +216,12 @@ $(document).ready(function () {
           if (!value || value == '') {
             alertify.set('notifier', 'position', 'top-right');
             alertify.error('Ingrese fecha de programación');
+            return false;
+          }
+
+          if (value < stringDate) {
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.error('Ingrese una fecha apartir del dia de hoy');
             return false;
           }
 
@@ -183,10 +237,11 @@ $(document).ready(function () {
           savePlaneados(unique);
         },
         function () {
+          dataPlaneacion = [];
           unique = [];
           dataTanquesPlaneacion = [];
 
-          deleteSession();
+          clearInputArray();
         }
       )
       .set('type', 'date')
@@ -204,6 +259,15 @@ $(document).ready(function () {
         dataPlaneacion = [];
         dataTanquesPlaneacion = [];
         deleteSession();
+        setTimeout(loadTotalVentas, 7000);
+        if ($.fn.dataTable.isDataTable('#tblCalcCapacidadPlaneada')) {
+          $('#tblCalcCapacidadPlaneada').DataTable().destroy();
+        }
+        $('.tblCalcCapacidadPlaneadaBody').empty();
+        api = '/api/batchInactivos';
+        getDataPlaneacion();
+        api = '/api/batch';
+        getDataProgramados();
       },
     });
   };

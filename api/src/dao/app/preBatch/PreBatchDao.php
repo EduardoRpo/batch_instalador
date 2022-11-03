@@ -38,7 +38,7 @@ class PreBatchDao
                         IFNULL(DATE_ADD(exp.fecha_insumo, INTERVAL 9 DAY),DATE_ADD(exp.fecha_pedido, INTERVAL 9 DAY)) AS fecha_preparacion,
                         IFNULL(DATE_ADD(exp.fecha_insumo, INTERVAL 13 DAY),DATE_ADD(exp.fecha_pedido, INTERVAL 13 DAY)) AS envasado, 
                         IFNULL(DATE_ADD(exp.fecha_insumo, INTERVAL 15 DAY),DATE_ADD(exp.fecha_pedido, INTERVAL 15 DAY)) AS entrega , 
-                        (SELECT COUNT(*) FROM observaciones_batch_inactivos WHERE pedido = exp.pedido AND referencia = exp.id_producto) AS cant_observations, (SELECT GROUP_CONCAT(sim SEPARATOR ', ') FROM `plan_preplaneados` WHERE pedido = exp.pedido AND id_producto = exp.id_producto) AS simulacion
+                        (SELECT COUNT(*) FROM observaciones_batch_inactivos WHERE pedido = exp.pedido AND referencia = exp.id_producto) AS cant_observations, (SELECT GROUP_CONCAT(sim SEPARATOR ', ') FROM `plan_preplaneados` WHERE pedido = exp.pedido AND id_producto = exp.id_producto AND planeado = 0) AS simulacion
                     FROM `plan_pedidos` exp 
                         INNER JOIN producto p ON p.referencia = exp.id_producto 
                         INNER JOIN propietario pp ON pp.id = p.id_propietario

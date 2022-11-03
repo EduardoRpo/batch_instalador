@@ -7,7 +7,8 @@ use BatchRecord\dao\HealthNotificationDao;
 use BatchRecord\dao\AdminMultiDao;
 use BatchRecord\dao\EstadoInicialDao;
 use BatchRecord\dao\BatchDao;
-
+use BatchRecord\dao\PlanPrePlaneadosDao;
+use BatchRecord\dao\ProductsDao;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
@@ -17,6 +18,8 @@ $healthNotificationDao = new HealthNotificationDao();
 $adminMultiDao = new AdminMultiDao();
 $estadoInicialDao = new EstadoInicialDao();
 $batchDao = new BatchDao();
+$productsDao = new ProductsDao();
+$prePlaneadosDao = new PlanPrePlaneadosDao();
 
 $app->get('/formula/{idProducto}', function (Request $request, Response $response, $args) use ($formulasDao) {
   $formula = $formulasDao->findFormulaByReference($args["idProducto"]);
@@ -62,7 +65,7 @@ $app->post('/deleteformulas', function (Request $request, Response $response, $a
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->post('/SaveFormula', function (Request $request, Response $response, $args) use ($formulasDao, $formulasInvimasDao, $healthNotificationDao, $estadoInicialDao, $batchDao) {
+$app->post('/SaveFormula', function (Request $request, Response $response, $args) use ($formulasDao, $formulasInvimasDao, $healthNotificationDao, $estadoInicialDao, $batchDao, $productsDao, $prePlaneadosDao) {
   $dataFormula = $request->getParsedBody();
 
   $dataFormula['tbl'] == 'r' ? $tbl = 'formula' : $tbl = 'formula_f';
@@ -77,15 +80,24 @@ $app->post('/SaveFormula', function (Request $request, Response $response, $args
         : $resp = array('error' => true, 'message' => 'Ocurrio un error mientras guardaba. Intente nuevamente');
     } else {
       $result = $formulasDao->saveFormula($dataFormula, $tbl);
-      
+
       if ($result == null) {
         $batchs = $batchDao->findBatchByRef($dataFormula['ref_producto']);
 
-        for ($i = 0; $i < sizeof($batchs); $i++)
+        for ($i = 0; $i < sizeof($batchs); $i++) {
           if ($batchs[$i]['estado'] == 1) {
             $estado = $estadoInicialDao->estadoInicial($dataFormula['ref_producto'], '');
             $batchDao->updateEstadoBatch($batchs[$i]['id_batch'], $estado[0]);
           }
+        }
+
+        $estado = $prePlaneadosDao->checkFormulasAndInstructivos($dataFormula['ref_producto']);
+
+        $referencias = $productsDao->findReferenceByGranel($dataFormula['ref_producto']);
+
+        for ($i = 0; $i < sizeof($referencias); $i++) {
+          $prePlaneadosDao->updateEstadoPreplaneado($referencias[$i]['referencia'], $estado);
+        }
       }
 
       $result == null

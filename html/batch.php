@@ -94,7 +94,7 @@ include_once("modal/m_observaciones.php");
                 <div class="col" style="display: flex; width:70%">
                   <input class="form-control" type="file" id="filePedidos" accept=".xls,.xlsx">
                   <button class="btn btn-warning ml-3" id="btnImportarPedidos">Importar Pedidos</button>
-                  <button class="btn btn-danger ml-3" id="btnPedidosNoEncontrados">Pedidos No Encontrados</button>
+                  <button class="btn btn-danger ml-3" id="btnPedidosNoEncontrados">Referencias aun no creadas</button>
                 </div>
                 <div class="col-lg-4 fechaImporte">
                   <?php if (isset($_SESSION['fecha_importe'])) { ?>
@@ -157,8 +157,7 @@ include_once("modal/m_observaciones.php");
                     <a class="nav-link" id="five-tab" data-toggle="tab" href="#five" role="tab" aria-controls="Five" aria-selected="false">Cerrados</a>
                   </li>
                 <?php  } ?>
-                <div style="display:grid;justify-content:end;font-size:x-large;margin-left:auto" class="mr-3">
-                  <div id="numberWeek"></div>
+                <div style="display:grid;justify-content:end;margin-left:auto" class="row numberWeek mr-3">
                 </div>
               </ul>
             </div>
@@ -202,23 +201,17 @@ include_once("modal/m_observaciones.php");
                             <div class="payment-of-tax">
                               <div class="table-responsive">
                                 <label for="">Capacidad Pre-planeada</label>
-                                <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadEnvasado" style="width: 100%;">
+                                <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadPrePlaneado">
                                   <thead>
                                     <tr>
-                                      <th>S</th>
+                                      <th>Semana</th>
                                       <th>Total Liquidos(Kg)</th>
                                       <th>Total Solidos(Kg)</th>
                                       <th>Total Semi-Solidos(Kg)</th>
                                     </tr>
-
                                   </thead>
-                                  <tbody class="tblCalcCapacidadEnvasadoBody">
-                                    <tr>
-                                      <td>42</td>
-                                      <td>100%</td>
-                                      <td>100%</td>
-                                      <td>100%</td>
-                                    </tr>
+                                  <tbody class="tblCalcCapacidadPrePlaneadoBody">
+
                                   </tbody>
                                 </table>
                               </div>
@@ -230,17 +223,18 @@ include_once("modal/m_observaciones.php");
                     <div class="card">
                       <div class="row justify-content-end mt-2 cardPlanning">
                         <div class="col-2 text-center">
-                          <label>Total:</label>
+                          <label>Valorización Estimada:</label>
                           <input type="text" id="totalVentaPre" class="form-control text-center" style="font-weight: bold;" disabled>
                         </div>
                         <div class="col-2">
-                          <label for="tipoSimulacion">Simulación</label>
+                          <label for="tipoSimulacion">Escenario</label>
                           <select name="tipoSimulacion" id="tipoSimulacion" class="form-control text-center">
                             <option selected="" disabled="">Seleccionar</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                           </select>
                         </div>
+                        <div class="fechaTipoEscenario"></div>
                         <div class="col-xs-2 mr-3">
                           <button type="button" id="btnPlanear" class="btn waves-effect waves-light btn-danger" style="width: 120px; margin-top:33px;">
                             <strong>Planear</strong>
@@ -300,7 +294,7 @@ include_once("modal/m_observaciones.php");
                             <div class="payment-of-tax">
                               <div class="table-responsive">
                                 <label for="">Capacidad Planeada </label>
-                                <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadEnvasado" style="width: 100%;">
+                                <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadPlaneada">
                                   <thead>
                                     <tr>
                                       <th>S</th>
@@ -310,13 +304,7 @@ include_once("modal/m_observaciones.php");
                                     </tr>
 
                                   </thead>
-                                  <tbody class="tblCalcCapacidadEnvasadoBody">
-                                    <tr>
-                                      <td>42</td>
-                                      <td>100%</td>
-                                      <td>100%</td>
-                                      <td>100%</td>
-                                    </tr>
+                                  <tbody class="tblCalcCapacidadPlaneadaBody">
                                   </tbody>
                                 </table>
                               </div>
@@ -329,7 +317,7 @@ include_once("modal/m_observaciones.php");
                     <div class="card">
                       <div class="row justify-content-end mt-3">
                         <div class="col-2 text-center">
-                          <label>Total:</label>
+                          <label>Valorización Estimada:</label>
                           <input type="text" id="totalVentaPlan" class="form-control text-center" style="font-weight: bold;" disabled>
                         </div>
                         <div class="col-2">
@@ -358,7 +346,7 @@ include_once("modal/m_observaciones.php");
                             <div class="payment-of-tax">
                               <div class="table-responsive">
                                 <label for="">Capacidad Programada </label>
-                                <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadEnvasado" style="width: 100%;">
+                                <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadProgramada">
                                   <thead>
                                     <tr>
                                       <th>S</th>
@@ -367,13 +355,7 @@ include_once("modal/m_observaciones.php");
                                       <th>Total Semi-Solidos(Kg)</th>
                                     </tr>
                                   </thead>
-                                  <tbody class="tblCalcCapacidadEnvasadoBody">
-                                    <tr>
-                                      <td>42</td>
-                                      <td>100%</td>
-                                      <td>100%</td>
-                                      <td>100%</td>
-                                    </tr>
+                                  <tbody class="tblCalcCapacidadProgramadaBody">
                                   </tbody>
                                 </table>
                               </div>
@@ -419,6 +401,7 @@ include_once("modal/m_observaciones.php");
     <?php require_once __DIR__ . '/partials/scriptsJS.php'; ?>
 
     <script src="/html/js/global/searchData.js"></script>
+    <script src="/html/js/batch/calc/calcWeek.js"></script>
 
     <script src="/html/js/batch/tables/tableBatchProgramados.js"></script>
     <script src="/html/js/batch/tables/tableBatchEliminados.js"></script>
@@ -428,7 +411,6 @@ include_once("modal/m_observaciones.php");
     <script src="/html/js/batch/tables/batcheliminados.js"></script>
 
     <script src="/html/js/batch/calc/calcularLote.js"></script>
-    <script src="/html/js/batch/calc/calcWeek.js"></script>
 
     <script src="/html/js/batch/pedidos/generalPedidos.js"></script>
     <script src="/html/js/batch/pedidos/importPedidos.js"></script>

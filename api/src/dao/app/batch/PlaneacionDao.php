@@ -6,7 +6,7 @@ use BatchRecord\Constants\Constants;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger;
 
-class PlaneacionDao extends PlanPedidosDao
+class PlaneacionDao
 
 {
     private $logger;
@@ -45,7 +45,7 @@ class PlaneacionDao extends PlanPedidosDao
                     'tamanio_lote' => $t['tamanio_lote'],
                     'fecha_planeacion' => $t['fecha_planeacion'],
                     'cantidad_acumulada' => $t['cantidad_acumulada'],
-                    'fecha_insumo' => $t['fecha_insumo']
+                    'fecha_insumo' => $t['fecha_insumo'],
                 );
         }
 
@@ -81,8 +81,6 @@ class PlaneacionDao extends PlanPedidosDao
             $dataPedidosGranel[$i]['multi'] = array_values($dataPedidosGranel[$i]['multi']);
         }
 
-        $dataPedidosLotes = $this->checkTamanioLote($dataPedidosGranel);
-
-        return $dataPedidosLotes;
+        return $dataPedidosGranel;
     }
 }

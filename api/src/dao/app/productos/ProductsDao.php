@@ -79,4 +79,14 @@ class ProductsDao
         $this->logger->notice("presentacion Obtenida", array('presentacion' => $presentacion));
         return $presentacion;
     }
+
+    public function findReferenceByGranel($granel)
+    {
+        $connection = Connection::getInstance()->getConnection();
+        $stmt = $connection->prepare("SELECT referencia FROM producto WHERE multi = (SELECT multi FROM producto WHERE referencia = :granel) AND referencia LIKE 'M-%'");
+        $stmt->execute(['granel' => $granel]);
+        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        $refenecias = $stmt->fetchAll($connection::FETCH_ASSOC);
+        return $refenecias;
+    }
 }
