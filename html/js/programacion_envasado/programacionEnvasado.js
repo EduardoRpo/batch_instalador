@@ -22,7 +22,10 @@ $(document).ready(function () {
     // obtenemos el lunes y domingo de la semana especificada
     primer = new Date(date.getFullYear(), 0, (semana - 1) * 7 + 3 + correccion);
 
-    primer <= date ? primer.setDate(date.getDate() + 1) : primer;
+    if (primer <= date) {
+      primer.setDate(date.getDate() + 1);
+      primer.setMonth(date.getMonth());
+    }
 
     ultimo = new Date(date.getFullYear(), 0, (semana - 1) * 7 + 9 + correccion);
 

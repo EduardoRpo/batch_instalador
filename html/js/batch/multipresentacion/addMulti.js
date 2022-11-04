@@ -9,11 +9,11 @@ $(document).ready(function () {
 
   /* Crear objetos multi */
   createMulti = (index) => {
-    $('.insertarRefMulti').empty();
+    $('#insertarRefMulti').empty();
 
     if (btnDeleteMulti == true)
       btnOuter = `<button class="btn btn-warning btneliminarMulti${index}" onclick="eliminarMulti(${index});" type="button">X</button>`;
-
+    else btnOuter = '';
     if (index < 5) {
       let rowMulti = document.getElementById('insertarRefMulti');
       rowMulti.insertAdjacentHTML(
