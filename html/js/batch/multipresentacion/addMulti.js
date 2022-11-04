@@ -11,6 +11,10 @@ $(document).ready(function () {
   createMulti = (index) => {
     $('.insertarRefMulti').empty();
 
+    btnDeleteMulti == true
+      ? (btnOuter = `<button class="btn btn-warning btneliminarMulti${index}" onclick="eliminarMulti(${index});" type="button">X</button>`)
+      : (btnOuter = '');
+
     if (index < 5) {
       $('.insertarRefMulti').append(
         `<select class="form-control multi" name="MultiReferencia" id="MultiReferencia${index}" onchange="cargarReferenciaM(${index});"></select>
@@ -18,7 +22,7 @@ $(document).ready(function () {
             <input type="text" class="form-control text-center" id="tamanioloteMulti${index}" name="tamanioloteMulti" readonly placeholder="Lote">
             <input type="text" class="form-control" id="densidadMulti${index}" name="densidadMulti" placeholder="Densidad" hidden>
             <input type="text" class="form-control" id="presentacionMulti${index}" name="presentacionMulti" placeholder="Presentación" hidden>
-            <button class="btn btn-warning btneliminarMulti${index}" onclick="eliminarMulti(${index});" type="button">X</button>`
+            ${btnOuter}`
       );
       cargarSelectMulti(multi);
     }

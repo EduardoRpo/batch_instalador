@@ -2,6 +2,7 @@ $(document).ready(function () {
   dataEnvasado = [];
   let date = new Date();
   apiPost = '/api/addFechaEnvasado';
+  btnDeleteMulti = false;
 
   $('.adicionarMulti').hide();
   $('.footSaveMulti').hide();
