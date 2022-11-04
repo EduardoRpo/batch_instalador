@@ -78,8 +78,8 @@ $(document).ready(function() {
                         data == 5.5 ?
                         'Env/Acond' :
                         data == 6 ?
-                        'Envasado/Acond' :
-                        'Envasado/Acond';
+                        'Env/Acond' :
+                        'Env/Acond';
                 },
             },
             {
