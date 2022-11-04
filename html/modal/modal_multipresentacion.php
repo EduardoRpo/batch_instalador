@@ -18,9 +18,18 @@
           <p><b>Unidades</b></p>
           <p><b>Lote</b></p>
         </div> -->
-        <div class="insertarRefMulti mb-3 mt-3">
-
-        </div>
+        <table class="table table-borderless text-center">
+          <thead>
+            <tr>
+              <th scope="col">Multipresentacion</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Tamaño</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="insertarRefMulti">
+          </tbody>
+        </table>
       </div>
       <div class="inputcalculoTotal mb-3 mr-5" style="display: flex; justify-content:flex-end">
         <label class="labelcenter ml-3 mr-3" style="padding-right: 10px;">Total (Kg)</label>

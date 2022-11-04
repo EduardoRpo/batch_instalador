@@ -11,19 +11,31 @@ $(document).ready(function () {
   createMulti = (index) => {
     $('.insertarRefMulti').empty();
 
-    btnDeleteMulti == true
-      ? (btnOuter = `<button class="btn btn-warning btneliminarMulti${index}" onclick="eliminarMulti(${index});" type="button">X</button>`)
-      : (btnOuter = '');
+    if (btnDeleteMulti == true)
+      btnOuter = `<button class="btn btn-warning btneliminarMulti${index}" onclick="eliminarMulti(${index});" type="button">X</button>`;
 
     if (index < 5) {
-      $('.insertarRefMulti').append(
-        `<select class="form-control multi" name="MultiReferencia" id="MultiReferencia${index}" onchange="cargarReferenciaM(${index});"></select>
+      let rowMulti = document.getElementById('insertarRefMulti');
+      rowMulti.insertAdjacentHTML(
+        'beforeend',
+        `
+        <tr>
+          <td>
+            <select class="form-control multi" name="MultiReferencia" id="MultiReferencia${index}" onchange="cargarReferenciaM(${index});"></select>
+          </td>
+          <td>
             <input type="text" class="form-control text-center" id="cantidadMulti${index}" name="cantidadMulti" onkeyup="CalculoloteMulti(${index});">
+          </td>
+          <td>
             <input type="text" class="form-control text-center" id="tamanioloteMulti${index}" name="tamanioloteMulti" readonly placeholder="Lote">
-            <input type="text" class="form-control" id="densidadMulti${index}" name="densidadMulti" placeholder="Densidad" hidden>
-            <input type="text" class="form-control" id="presentacionMulti${index}" name="presentacionMulti" placeholder="Presentación" hidden>
-            ${btnOuter}`
+          </td>
+          <td>
+            ${btnOuter}
+          </td>
+        </tr>
+       `
       );
+
       cargarSelectMulti(multi);
     }
   };
