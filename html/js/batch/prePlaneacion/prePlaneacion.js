@@ -180,7 +180,7 @@ $(document).ready(function () {
     $('.tblCalcCapacidadPlaneadaBody').empty();
     api = '/api/prePlaneados';
     await getDataPrePlaneacion();
-    api = '/api/batchInactivos';
+    api = '/api/batchPlaneados';
     await getDataPlaneacion();
   };
 });

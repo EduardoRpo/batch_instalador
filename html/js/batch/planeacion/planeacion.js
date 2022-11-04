@@ -264,7 +264,7 @@ $(document).ready(function () {
           $('#tblCalcCapacidadPlaneada').DataTable().destroy();
         }
         $('.tblCalcCapacidadPlaneadaBody').empty();
-        api = '/api/batchInactivos';
+        api = '/api/batchPlaneados';
         getDataPlaneacion();
         api = '/api/batch';
         getDataProgramados();

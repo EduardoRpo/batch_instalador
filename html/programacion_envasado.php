@@ -107,7 +107,7 @@ sesiones(5);
                 </div>
             </div>
         </div>
-        
+
         <div class="contenedorPrincipal row">
             <div class="tituloProceso col">
                 <h1 class="text-themecolor"><b>Programación Envasado y Acondicionamiento</b></h1>
@@ -161,12 +161,12 @@ sesiones(5);
     <script src="html/js/programacion_envasado/programacionEnvasado.js"></script>
     <script src="/html/js/global/link-comentario.js"></script>
 
-    <script src="/html/js/batch/multipresentacion/updateMulti.js"></script>
-    <!-- <script src="/html/js/batch/multipresentacion/multipresentacion.js"></script> -->
+    <script src="/html/js/batch/multipresentacion/multipresentacion.js"></script>
     <script src="/html/js/batch/multipresentacion/addMulti.js"></script>
     <script src="/html/js/batch/multipresentacion/deleteMulti.js"></script>
-    <!-- <script src="/html/js/batch/multipresentacion/saveMulti.js"></script> -->
-    <!-- <script src="/html/js/batch/multipresentacion/multiCalc.js"></script> -->
+    <script src="/html/js/batch/multipresentacion/saveMulti.js"></script>
+    <script src="/html/js/batch/multipresentacion/updateMulti.js"></script>
+    <script src="/html/js/batch/multipresentacion/multiCalc.js"></script>
 
 </body>
 

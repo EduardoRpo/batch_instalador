@@ -112,9 +112,12 @@ sesiones(5);
   <script src="html/js/envasado/envasado.js"></script>
   <script src="/html/js/global/link-comentario.js"></script>
 
-  <script src="/html/js/batch/multipresentacion/updateMulti.js"></script>
+  <script src="/html/js/batch/multipresentacion/multipresentacion.js"></script>
   <script src="/html/js/batch/multipresentacion/addMulti.js"></script>
   <script src="/html/js/batch/multipresentacion/deleteMulti.js"></script>
+  <script src="/html/js/batch/multipresentacion/saveMulti.js"></script>
+  <script src="/html/js/batch/multipresentacion/updateMulti.js"></script>
+  <script src="/html/js/batch/multipresentacion/multiCalc.js"></script>
 
 </body>
 
