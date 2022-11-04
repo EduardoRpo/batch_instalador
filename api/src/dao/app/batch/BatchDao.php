@@ -95,7 +95,7 @@ class BatchDao extends estadoInicialDao
                                             INNER JOIN linea l ON p.id_linea = l.id 
                                             INNER JOIN propietario pp ON pp.id = p.id_propietario 
                                         WHERE pre_plan.planeado = 1
-                                        ORDER BY `semana`, `propietario` ASC;");
+                                        ORDER BY `propietario`, `semana` ASC;");
         $stmt->execute();
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         $batch = $stmt->fetchAll($connection::FETCH_ASSOC);

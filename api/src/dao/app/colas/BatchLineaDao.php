@@ -73,15 +73,16 @@ class BatchLineaDao
   public function findBatchProgramacionEnvasado()
   {
     $connection = Connection::getInstance()->getConnection();
-    $stmt = $connection->prepare("SELECT DISTINCT batch.id_batch, date_add(batch.fecha_programacion, interval 3 day) AS fecha_programacion, DATE_ADD(batch.fecha_programacion, INTERVAL 3 DAY) AS fecha_envasado, batch.numero_orden, 
+    $stmt = $connection->prepare("SELECT DISTINCT batch.id_batch, pp.nombre as propietario, date_add(batch.fecha_programacion, interval 3 day) AS fecha_programacion, DATE_ADD(batch.fecha_programacion, INTERVAL 3 DAY) AS fecha_envasado, batch.numero_orden, 
                                       batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote, batch.unidad_lote, batch.tamano_lote, batch.estado, batch.multi, bcf.cantidad_firmas, bcf.total_firmas, batch.programacion_envasado, 
                                       (SELECT COUNT(*) FROM observaciones_batch_inactivos WHERE batch = batch.id_batch) AS cant_observations, batch.ok_aprobado
                                   FROM batch
                                   INNER JOIN producto p ON p.referencia = batch.id_producto
+                                  INNER JOIN propietario pp ON pp.id = p.id_propietario
                                   INNER JOIN batch_control_firmas bcf ON batch.id_batch = bcf.batch
                                   WHERE batch.estado > 2 AND batch.estado < 8 
                                   AND batch.id_batch AND bcf.modulo = 6 AND batch.id_batch NOT IN(SELECT batch FROM `batch_control_firmas` WHERE modulo = 6 AND cantidad_firmas = total_firmas) 
-                                  ORDER BY id_batch DESC");
+                                  ORDER BY `propietario`, batch.id_batch ASC;");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $envasado = $stmt->fetchAll($connection::FETCH_ASSOC);
