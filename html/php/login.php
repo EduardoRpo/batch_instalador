@@ -50,7 +50,7 @@ if (!empty($_SESSION['active'])) {
                         /* Obtener fecha de ultimo importe */
                         $sql = "SELECT IF(importado = '0000-00-00 00:00:00', null, DATE_FORMAT(importado, '%d/%m/%Y')) AS fecha_importe, 
                                        IF(importado = '0000-00-00 00:00:00', null, TIME_FORMAT(importado, '%h:%i %p')) AS hora_importe
-                                FROM explosion_materiales_pedidos_registro ORDER BY `explosion_materiales_pedidos_registro`.`importado` DESC";
+                                FROM plan_pedidos ORDER BY `plan_pedidos`.`importado` DESC";
                         $query = $conn->prepare($sql);
                         $query->execute();
                         $importOrders = $query->fetch($conn::FETCH_ASSOC);

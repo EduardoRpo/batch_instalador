@@ -1,8 +1,9 @@
 $(document).ready(function () {
   tblCapacidadEnvasado = $('#tblCapacidadEnvasado').DataTable({
+    pageLength: 3,
     scrollY: '50vh',
     scrollCollapse: true,
-    paging: false,
+    // paging: false,
     language: { url: 'admin_componentes/es-ar.json' },
 
     ajax: {
@@ -11,14 +12,14 @@ $(document).ready(function () {
     },
 
     columns: [
-      {
-        title: 'No.',
-        data: null,
-        className: 'text-center',
-        render: function (data, type, full, meta) {
-          return meta.row + 1;
-        },
-      },
+      // {
+      //   title: 'No.',
+      //   data: null,
+      //   className: 'text-center',
+      //   render: function (data, type, full, meta) {
+      //     return meta.row + 1;
+      //   },
+      // },
       {
         title: 'Semana',
         data: 'semana',

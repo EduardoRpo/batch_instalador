@@ -8,15 +8,13 @@ $(document).ready(function () {
 
     if (!col1.includes('-') && col1) {
       id = this.id;
-      modulo = id.slice(-1, id.length);
       data = {
         batch: col1,
-        modulo: modulo,
       };
     } else {
       if (col1.includes('-')) {
         /* Mostrar fila de pedidos */
-        column = tablaPreBatch.column(1);
+        column = tablaPedidos.column(1);
         column.visible(!column.visible());
         col1 = $(this).parent().parent().children().eq(0).text();
       }
@@ -78,7 +76,7 @@ $(document).ready(function () {
         table: (row = loadTable(response)),
         /*table: `
         <p class="mt-3">Historial Seguimiento</p><br>
-        <table class="table table-striped table-bordered dataTable no-footer text-center" aria-describedby="tablaPreBatch_info">
+        <table class="table table-striped table-bordered dataTable no-footer text-center" aria-describedby="tablaPedidos_info">
             <thead>
               <tr>
                 <th class="text-center">Fecha Registro</th>
@@ -98,7 +96,7 @@ $(document).ready(function () {
   sendComentarioPOST = async (params) => {
     try {
       result = await $.ajax({
-        url: urlObs,
+        url: '/api/observacionesInactivos',
         type: 'POST',
         data: params,
       });
@@ -136,7 +134,7 @@ $(document).ready(function () {
 
     $.ajax({
       type: 'POST',
-      url: urlPostObs,
+      url: '/api/addObservacionInactivos',
       data: data,
       success: function (resp) {
         message(resp);

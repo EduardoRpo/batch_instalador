@@ -83,11 +83,13 @@ require_once __DIR__ . '/src/routes/app/productos/productos.php';
 //prebatch
 require_once __DIR__ . '/src/routes/app/preBatch/preBatch.php';
 require_once __DIR__ . '/src/routes/app/preBatch/importarPedidos.php';
+require_once __DIR__ . '/src/routes/app/preBatch/pedidosSinReferencia.php';
 
 //Batch
 //require_once __DIR__ . '/src/routes/batch.php';
 require_once __DIR__ . '/src/routes/app/batch/batch.php';
 require_once __DIR__ . '/src/routes/app/batch/clonebatch.php';
+require_once __DIR__ . '/src/routes/app/batch/planeacion.php';
 require_once __DIR__ . '/src/routes/app/colas/colasTrabajo.php';
 
 //Batch_Tanques
@@ -126,6 +128,7 @@ require_once __DIR__ . '/src/routes/app/programacion_envasado/programacion_envas
 //Explosion de Materiales
 require_once __DIR__ . '/src/routes/app/explosionMateriales/explosion_materiales.php';
 require_once __DIR__ . '/src/routes/app/explosionMateriales/pedidos.php';
+require_once __DIR__ . '/src/routes/app/explosionMateriales/planPrePlaneados.php';
 
 /* pdf */
 require_once __DIR__ . '/src/routes/app/pdf/pdf.php';

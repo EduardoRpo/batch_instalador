@@ -51,11 +51,10 @@ class CapacidadEnvasadoDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $stmt = $connection->prepare("UPDATE capacidad_envasado SET semana = :semana, turno_1 = :turno_1, turno_2 = :turno_2, turno_3 = :turno_3
+        $stmt = $connection->prepare("UPDATE capacidad_envasado SET turno_1 = :turno_1, turno_2 = :turno_2, turno_3 = :turno_3
                                       WHERE id_capacidad_envasado = :id_capacidad_envasado");
         $stmt->execute([
             'id_capacidad_envasado' => $dataEnvasado['idEnvasado'],
-            'semana' => $dataEnvasado['semana'],
             'turno_1' => $dataEnvasado['turno1'],
             'turno_2' => $dataEnvasado['turno2'],
             'turno_3' => $dataEnvasado['turno3']

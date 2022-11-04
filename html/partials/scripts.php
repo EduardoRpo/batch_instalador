@@ -13,6 +13,7 @@
 
 <!-- Datatables -->
 <link rel="stylesheet" type="text/css" href="vendor/datatables/DataTables-1.10.20/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href=" https://cdn.datatables.net/rowgroup/1.2.0/css/rowGroup.dataTables.min.css">
 
 <!-- Alertify -->
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />

@@ -14,17 +14,17 @@ $(document).ready(function() {
             $('.tblCalcCapacidadEnvasadoBody').append(`
             <tr>
                 <td>${data[i].semana}</td>
-                <td>${data[i].plan_liquido_1} %</td>
-                <td>${data[i].plan_liquido_2} %</td>
-                <td>${data[i].plan_liquido_3} %</td>
+                <td style="width:10%;">${data[i].plan_liquido_1} %</td>
+                <td style="width:10%;">${data[i].plan_liquido_2} %</td>
+                <td style="width:10%;">${data[i].plan_liquido_3} %</td>
                 <td>${data[i].total_liquido.toLocaleString()}</td>
-                <td>${data[i].plan_solido_1} %</td>
-                <td>${data[i].plan_solido_2} %</td>
-                <td>${data[i].plan_solido_3} %</td>
+                <td style="width:10%;">${data[i].plan_solido_1} %</td>
+                <td style="width:10%;">${data[i].plan_solido_2} %</td>
+                <td style="width:10%;">${data[i].plan_solido_3} %</td>
                 <td>${data[i].total_solido.toLocaleString()}</td>
-                <td>${data[i].plan_semi_solido_1} %</td>
-                <td>${data[i].plan_semi_solido_2} %</td>
-                <td>${data[i].plan_semi_solido_3} %</td>
+                <td style="width:10%;">${data[i].plan_semi_solido_1} %</td>
+                <td style="width:10%;">${data[i].plan_semi_solido_2} %</td>
+                <td style="width:10%;">${data[i].plan_semi_solido_3} %</td>
                 <td>${data[i].total_semi_solido.toLocaleString()}</td>
             </tr>
       `);
@@ -41,6 +41,7 @@ $(document).ready(function() {
     };
 
     /* tabla envasado */
+
     $('#tablaEnvasado').dataTable({
         pageLength: 50,
         order: [
@@ -59,15 +60,43 @@ $(document).ready(function() {
                 className: 'uniqueClassName',
             },
             {
-                title: 'No de Orden',
-                data: 'numero_orden',
+                title: 'Estado',
+                data: 'estado',
                 className: 'uniqueClassName',
+                render: (data, type, row) => {
+                    'use strict';
+                    return data == 3 ?
+                        'Pesaje' :
+                        data == 3.5 ?
+                        'Preparación' :
+                        data == 4 ?
+                        'Preparación' :
+                        data == 4.5 ?
+                        'Aprobación' :
+                        data == 5 ?
+                        'Aprobación' :
+                        data == 5.5 ?
+                        'Env/Acond' :
+                        data == 6 ?
+                        'Envasado/Acond' :
+                        'Envasado/Acond';
+                },
             },
             {
-                title: 'Nombre Producto',
-                data: 'referencia',
+                title: 'Fecha Estimada Envasado',
+                data: 'fecha_envasado',
                 className: 'uniqueClassName',
             },
+            /* {
+                    title: 'No de Orden',
+                    data: 'numero_orden',
+                    className: 'uniqueClassName',
+                  }, */
+            /*  {
+                 title: 'Cliente',
+                 data: 'propietario',
+                 className: 'uniqueClassName',
+             }, */
             {
                 title: 'Descripción',
                 data: 'nombre_referencia',
@@ -107,6 +136,7 @@ $(document).ready(function() {
                     !data.programacion_envasado ?
                         (fecha = '') :
                         (fecha = data.programacion_envasado);
+
                     return `
                       <input type="datetime-local" class="fechaProgramar form-control-updated text-center" id="date-${data.id_batch}" value="${fecha}" />`;
                 },
@@ -118,7 +148,7 @@ $(document).ready(function() {
                 render: function(data) {
                     return `
                       <i class="badge badge-danger badge-pill notify-icon-badge ml-3">${data.cant_observations}</i><br>
-                      <a href='#' <i class="fa fa-file-text fa-1x link-comentario" id="${data.id_batch}-${data.modulo}" aria-hidden="true" data-toggle="tooltip" title="adicionar observaciones" style="color:rgb(59, 131, 189)" aria-hidden="true"></i></a>
+                      <a href='#' <i class="fa fa-file-text fa-1x link-comentario" id="${data.id_batch}" aria-hidden="true" data-toggle="tooltip" title="adicionar observaciones" style="color:rgb(59, 131, 189)" aria-hidden="true"></i></a>
                     `;
                 },
             },
@@ -129,13 +159,21 @@ $(document).ready(function() {
                 render: function(data) {
                     if (data)
                         return `<i class='fa fa-check fa-2x' style='color:green'></i>`;
-                    else
-                        return `<i class='fa fa-close fa-2x' style='color:red'></i>`;
+                    else return `<i class='fa fa-close fa-2x' style='color:red'></i>`;
                 },
             },
-
-
         ],
+        rowGroup: {
+            dataSrc: 'propietario',
+            startRender: function(rows, group) {
+                return $('<tr/>').append(
+                    '<th class="text-center" colspan="11" style="font-weight: bold;">' +
+                    group +
+                    '</th>'
+                );
+            },
+            className: 'odd',
+        },
     });
 
     $(document).on('click', '.table-responsive, .page-link', function() {

@@ -7,18 +7,20 @@ $(document).ready(function () {
   $(document).on('blur', '.cantProgram', function (e) {
     e.preventDefault();
     id_input = this.id.trim();
+    num = fila.num;
     referencia = fila.id_producto.trim();
     numPedido = fila.pedido;
     cantidad = $(`#${id_input}`).val();
     date = $(`#date-${numPedido}-${referencia}`).val();
 
     if (cantidad == 0) {
+      deleteArray(numPedido);
       alertify.set('notifier', 'position', 'top-right');
       alertify.error('La cantidad a programar no puede ser cero (0)');
       return false;
     }
 
-    arrayPreprogramados(referencia, cantidad, numPedido);
+    arrayPreprogramados(num, referencia, cantidad, numPedido);
     if (date) {
       fechaInsumo(numPedido, referencia, pedidosProgramar, date);
     } else {
@@ -28,35 +30,31 @@ $(document).ready(function () {
     }
   });
 
-  arrayPreprogramados = (referencia, cantidad, numPedido) => {
+  arrayPreprogramados = (num, referencia, cantidad, numPedido) => {
     /* validar que el numero de pedido y referencia no esten en el array e insertar 
               de los contrario actualizar la cantidad */
 
     for (i = 0; i < pedidosProgramar.length; i++) {
-      if (
-        (referencia == pedidosProgramar[i].referencia &&
-          numPedido == pedidosProgramar[i].numPedido &&
-          cantidad != pedidosProgramar[i].cantidad) ||
-        cantidad == pedidosProgramar[i].cantidad
-      )
-        deleteArray(numPedido);
+      if (num == pedidosProgramar[i].num) deleteArray(num);
     }
 
     pedidos = {};
-    granel = fila.granel;
 
+    pedidos.num = num;
     pedidos.numPedido = numPedido;
     pedidos.referencia = referencia;
     pedidos.producto = fila.nombre_referencia;
-    pedidos.granel = granel;
+    pedidos.granel = fila.granel;
     pedidos.cantidad_acumulada = cantidad;
+    pedidos.valor_pedido = fila.valor_pedido;
 
     pedidosProgramar.push(pedidos);
   };
 
   $(document).on('click', '#calcLote', function (e) {
     e.preventDefault();
-    if (date && cantidad) calcLote(pedidosProgramar);
+    if (date && cantidad && pedidosProgramar.length > 0)
+      calcLote(pedidosProgramar);
     else {
       alertify.set('notifier', 'position', 'top-right');
       alertify.error(
@@ -83,9 +81,9 @@ $(document).ready(function () {
     });
   };
 
-  deleteArray = (numPedido) => {
+  deleteArray = (num) => {
     for (i = 0; i < pedidosProgramar.length; i++) {
-      if (pedidosProgramar[i].numPedido == numPedido) {
+      if (pedidosProgramar[i].num == num) {
         pedidosProgramar.splice(i, 1);
       }
     }

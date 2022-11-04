@@ -87,7 +87,7 @@ sesiones(5);
                                             <th colspan="3">SM</th>
                                             <th rowspan="2">Total Kg</th>
                                         </tr>
-                                        <tr>
+                                        <tr style="width:10%;">
                                             <th>T1</th>
                                             <th>T2</th>
                                             <th>T3</th>
@@ -107,6 +107,7 @@ sesiones(5);
                 </div>
             </div>
         </div>
+        
         <div class="contenedorPrincipal row">
             <div class="tituloProceso col">
                 <h1 class="text-themecolor"><b>Programación Envasado y Acondicionamiento</b></h1>
@@ -155,6 +156,7 @@ sesiones(5);
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
     <script src="/html/js/global/searchData.js"></script>
+    <script src="/admin/sistema/js/global/numSemanas.js"></script>
     <script src="html/js/programacion_envasado/tblProgramacionEnvasado.js"></script>
     <script src="html/js/programacion_envasado/programacionEnvasado.js"></script>
     <script src="/html/js/global/link-comentario.js"></script>

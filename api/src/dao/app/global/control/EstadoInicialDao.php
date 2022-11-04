@@ -17,26 +17,50 @@ class EstadoInicialDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
-    public function estadoInicial($referencia, $fechaprogramacion)
+    public function findCountFormula($referencia)
     {
         $connection = Connection::getInstance()->getConnection();
 
-        /* validar que exista la formula*/
-
-        $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("SELECT * FROM formula WHERE id_producto = :referencia");
         $stmt->execute(['referencia' => $referencia]);
         $resultFormula = $stmt->rowCount();
 
-        /* validar que exista el instructivo */
+        return $resultFormula;
+    }
+
+    public function findCountInstructivo($referencia)
+    {
+        $connection = Connection::getInstance()->getConnection();
 
         $stmt = $connection->prepare("SELECT * FROM instructivo_preparacion WHERE id_producto = :referencia");
         $stmt->execute(['referencia' => $referencia]);
         $resultPreparacionInstructivos = $stmt->rowCount();
 
+        return $resultPreparacionInstructivos;
+    }
+
+    public function estadoInicial($referencia, $fechaprogramacion)
+    {
+        // $connection = Connection::getInstance()->getConnection();
+
+        /* validar que exista la formula
+
+        $connection = Connection::getInstance()->getConnection();
+        $stmt = $connection->prepare("SELECT * FROM formula WHERE id_producto = :referencia");
+        $stmt->execute(['referencia' => $referencia]);
+        $resultFormula = $stmt->rowCount(); */
+        $resultFormula = $this->findCountFormula($referencia);
+
+        /* validar que exista el instructivo 
+
+        $stmt = $connection->prepare("SELECT * FROM instructivo_preparacion WHERE id_producto = :referencia");
+        $stmt->execute(['referencia' => $referencia]);
+        $resultPreparacionInstructivos = $stmt->rowCount(); */
+        $resultPreparacionInstructivos = $this->findCountInstructivo($referencia);
+
 
         /* si el instructivo no existe valida que exista el instructivo en Bases*/
-       /*  if ($resultPreparacionInstructivos == 0) {
+        /*  if ($resultPreparacionInstructivos == 0) {
             $stmt = $connection->prepare("SELECT instructivo FROM producto WHERE referencia = :referencia");
             $stmt->execute(['referencia' => $referencia]);
             $resultPreparacionInstructivos = $stmt->rowCount();

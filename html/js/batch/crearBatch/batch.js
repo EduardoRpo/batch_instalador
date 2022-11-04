@@ -32,12 +32,12 @@ $(document).on('click', '#tablaBatch tbody tr', function () {
   data = tablaBatch.row(this).data();
 });
 
-$(document).on('click', '#tablaPreBatch tbody tr', function () {
-  fila = tablaPreBatch.row(this).data();
+$(document).on('click', '#tablaPedidos tbody tr', function () {
+  fila = tablaPedidos.row(this).data();
 });
 
-$(document).on('click', '#tablaBatchInactivos tbody tr', function () {
-  data = tablaBatchInactivos.row(this).data();
+$(document).on('click', '#tablaBatchPlaneados tbody tr', function () {
+  data = tablaBatchPlaneados.row(this).data();
 });
 
 $(document).ready(function () {
@@ -101,21 +101,22 @@ $(document).ready(function () {
 
     cargarTanques();
 
-    if (data.estado > 2) {
-      f1 = new Date();
-      f2 = new Date(data.fecha_programacion);
-      f1.setHours(0, 0, 0, 0);
-      f2.setHours(0, 0, 0, 0);
-      if (f1.getTime() == f2.getTime()) {
-        alertify.set('notifier', 'position', 'top-right');
-        alertify.error('Batch Record en proceso. No es posible actualizarlo.');
-        return false;
-      }
-    }
-
     $.ajax({
       url: `/api/batch/${id_batch}`,
       success: function (data) {
+        if (data.estado > 2) {
+          f1 = new Date();
+          f2 = new Date(data.fecha_programacion);
+          f1.setHours(0, 0, 0, 0);
+          f2.setHours(0, 0, 0, 0);
+          if (f1.getTime() == f2.getTime()) {
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.error(
+              'Batch Record en proceso. No es posible actualizarlo.'
+            );
+            return false;
+          }
+        }
         if (data.pedido) $('#pedido').val(data.pedido);
         else $('#pedido').val('');
 
@@ -291,10 +292,13 @@ $(document).ready(function () {
     $('#tablaBatch').DataTable().clear();
     $('#tablaBatch').DataTable().ajax.reload();
 
-    $('#tablaBatchInactivos').DataTable().clear();
-    $('#tablaBatchInactivos').DataTable().ajax.reload();
+    $('#tablaBatchPlaneados').DataTable().clear();
+    $('#tablaBatchPlaneados').DataTable().ajax.reload();
 
-    $('#tablaPreBatch').DataTable().clear();
-    $('#tablaPreBatch').DataTable().ajax.reload();
+    $('#tablaPedidos').DataTable().clear();
+    $('#tablaPedidos').DataTable().ajax.reload();
+
+    $('#tablaPrePlaneacion').DataTable().clear();
+    $('#tablaPrePlaneacion').DataTable().ajax.reload();
   };
 });

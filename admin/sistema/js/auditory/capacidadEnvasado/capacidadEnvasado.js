@@ -1,21 +1,16 @@
 $(document).ready(function () {
   sessionStorage.removeItem('id_capacidad_envasado');
 
-  /* Cargar numero de semanas */
-  loadNumSemanas = () => {
-    select = $('#numSemana');
-
-    select.empty();
-    select.append(`<option value="0" disabled>Seleccionar</option>`);
-
-    for (i = 1; i <= 52; i++) {
-      select.append(`<option value ="${i}">${i}</option>`);
-    }
-  };
-  loadNumSemanas();
-
   /* Ocultar card  */
   $('.cardSaveEnvasado').hide();
+
+  /* Cargar numero de semana seleccionada */
+  $('#numSemana').change(function (e) {
+    e.preventDefault();
+    $('.cardSaveEnvasado').hide(800);
+
+    tblCapacidadEnvasado.column(0).search(this.value).draw();
+  });
 
   /* Mostrar card capacidad envasado */
   $(document).on('click', '.updateEnv', function () {
@@ -23,17 +18,15 @@ $(document).ready(function () {
 
     sessionStorage.setItem('id_capacidad_envasado', id);
 
-    semana = $(this).parent().parent().children().eq(1).text();
-    env = $(this).parent().parent().children().eq(2).text();
-    t_1 = $(this).parent().parent().children().eq(3).text();
-    t_2 = $(this).parent().parent().children().eq(4).text();
-    t_3 = $(this).parent().parent().children().eq(5).text();
+    env = $(this).parent().parent().children().eq(1).text();
+    t_1 = $(this).parent().parent().children().eq(2).text();
+    t_2 = $(this).parent().parent().children().eq(3).text();
+    t_3 = $(this).parent().parent().children().eq(4).text();
 
     t_1 = t_1.replace('.', '');
     t_2 = t_2.replace('.', '');
     t_3 = t_3.replace('.', '');
 
-    $(`#numSemana option[value="${semana}"]`).prop('selected', true);
     $('#linea').val(env);
     $('#turno1').val(t_1);
     $('#turno2').val(t_2);
@@ -53,12 +46,11 @@ $(document).ready(function () {
   $('#saveEnvasado').click(function (e) {
     e.preventDefault();
 
-    semana = $('#numSemana').val();
     t_1 = $('#turno1').val();
     t_2 = $('#turno2').val();
     t_3 = $('#turno3').val();
 
-    data = semana * t_1 * t_2 * t_3;
+    data = t_1 * t_2 * t_3;
 
     if (!data || data == 0) {
       alertify.set('notifier', 'position', 'top-right');
