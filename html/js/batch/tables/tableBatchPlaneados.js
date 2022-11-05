@@ -139,14 +139,11 @@ $(document).ready(function () {
     ],
     rowGroup: {
       dataSrc: function (row) {
-        return row.propietario + '- ' + row.pedido;
+        return `<th class="text-center" colspan="7" style="font-weight: bold;"> ${row.propietario} </th>
+        <th class="text-center" colspan="6" style="font-weight: bold;"> ${row.pedido} </th>`;
       },
       startRender: function (rows, group) {
-        return $('<tr/>').append(
-          '<th class="text-center" colspan="13" style="font-weight: bold;">' +
-            group +
-            '</th>'
-        );
+        return $('<tr/>').append(group);
       },
       className: 'odd',
     },

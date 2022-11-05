@@ -146,6 +146,7 @@ sesiones(5);
     <script src="../assets/plugins/bootstrap/js/tether.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="html/vendor/datatables/datatables.min.js"></script>
+    <script src="https://cdn.datatables.net/rowgroup/1.2.0/js/dataTables.rowGroup.min.js"></script>
     <script src="html/js/utils/jquery.slimscroll.js"></script>
     <script src="html/js/utils/waves.js"></script>
     <script src="html/js/utils/sidebarmenu.js"></script>

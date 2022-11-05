@@ -92,16 +92,18 @@ $(document).ready(function () {
         data: 'fecha_envasado',
         className: 'uniqueClassName',
       },
-      /* {
-                    title: 'No de Orden',
-                    data: 'numero_orden',
-                    className: 'uniqueClassName',
-                  }, */
-      /*  {
-                 title: 'Cliente',
-                 data: 'propietario',
-                 className: 'uniqueClassName',
-             }, */
+      {
+        title: 'Fecha programacion',
+        data: 'programacion_envasado',
+        className: 'uniqueClassName',
+        visible: false,
+      },
+      {
+        title: 'Propietario',
+        data: 'propietario',
+        className: 'uniqueClassName',
+        visible: false,
+      },
       {
         title: 'Descripción',
         data: 'nombre_referencia',
@@ -169,13 +171,16 @@ $(document).ready(function () {
       },
     ],
     rowGroup: {
-      dataSrc: 'propietario',
+      dataSrc: function (row) {
+        !row.programacion_envasado
+          ? (programacion_envasado = '0000-00-00 00:00:00')
+          : (programacion_envasado = row.programacion_envasado);
+
+        return `<th class="text-center" colspan="6" style="font-weight: bold;"> ${row.propietario} </th>
+        <th class="text-center" colspan="6" style="font-weight: bold;"> ${programacion_envasado} </th>`;
+      },
       startRender: function (rows, group) {
-        return $('<tr/>').append(
-          '<th class="text-center" colspan="11" style="font-weight: bold;">' +
-            group +
-            '</th>'
-        );
+        return $('<tr/>').append(group);
       },
       className: 'odd',
     },
