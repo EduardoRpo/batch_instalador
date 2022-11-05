@@ -138,7 +138,9 @@ $(document).ready(function () {
       },
     ],
     rowGroup: {
-      dataSrc: 'propietario',
+      dataSrc: function (row) {
+        return row.propietario + '- ' + row.pedido;
+      },
       startRender: function (rows, group) {
         return $('<tr/>').append(
           '<th class="text-center" colspan="13" style="font-weight: bold;">' +
