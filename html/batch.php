@@ -168,8 +168,8 @@ include_once("modal/m_observaciones.php");
                   <div class="col-md-12 align-self-right">
                     <div class="card">
                       <div class="mt-3 text-center">
-                        <button class="toggle-vis btn btn-primary hideTitle" id="1">Propietario</button>
-                        <button class="toggle-vis btn btn-primary hideTitle" id="2">Pedido</button>
+                        <!-- <button class="toggle-vis btn btn-primary hideTitle" id="1">Propietario</button>
+                        <button class="toggle-vis btn btn-primary hideTitle" id="2">Pedido</button> -->
                         <button class="toggle-vis btn btn-primary hideTitle" id="3">F_Pedidos</button>
                         <button class="toggle-vis btn btn-primary hideTitle" id="4">Granel</button>
                         <button class="toggle-vis btn btn-primary hideTitle" id="5">Referencia</button>

@@ -154,8 +154,7 @@ $(document).ready(function () {
     ],
     rowGroup: {
       dataSrc: function (row) {
-        return `<th class="text-center" colspan="6" style="font-weight: bold;"> ${row.propietario} </th>
-        <th class="text-center" colspan="5" style="font-weight: bold;"> ${row.pedido} </th>`;
+        return `<th class="text-center" colspan="11" style="font-weight: bold;"> ${row.propietario} </th>`;
       },
       startRender: function (rows, group) {
         return $('<tr/>').append(group);

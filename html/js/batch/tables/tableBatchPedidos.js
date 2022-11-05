@@ -134,6 +134,16 @@ $(document).ready(function () {
         },
       },
     ],
+    rowGroup: {
+      dataSrc: function (row) {
+        return `<th class="text-center" colspan="7" style="font-weight: bold;"> ${row.propietario} </th>
+        <th class="text-center" colspan="6" style="font-weight: bold;"> ${row.pedido} </th>`;
+      },
+      startRender: function (rows, group) {
+        return $('<tr/>').append(group);
+      },
+      className: 'odd',
+    },
     rowCallback: function (row, data, index) {
       if (data['estado'] == 1) $(row).css('color', 'green');
       if (data['estado'] == 2) $(row).css('color', 'red');
