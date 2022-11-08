@@ -184,7 +184,6 @@ include_once("modal/m_observaciones.php");
                       <div class="card-block">
                         <div class="table-responsive">
                           <table class="table table-striped table-bordered" id="tablaPedidos" name="tablaPedidos">
-
                           </table>
                         </div>
                       </div>
@@ -201,7 +200,7 @@ include_once("modal/m_observaciones.php");
                             <div class="payment-of-tax">
                               <div class="table-responsive">
                                 <label for="">Capacidad Pre-planeada</label>
-                                <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadPrePlaneado">
+                                <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadPrePlaneado" style="width: 100%;">
                                   <thead>
                                     <tr>
                                       <th>Semana</th>
@@ -210,8 +209,7 @@ include_once("modal/m_observaciones.php");
                                       <th>Total Semi-Solidos(Kg)</th>
                                     </tr>
                                   </thead>
-                                  <tbody class="tblCalcCapacidadPrePlaneadoBody">
-
+                                  <tbody id="tblCalcCapacidadPrePlaneadoBody">
                                   </tbody>
                                 </table>
                               </div>
@@ -277,7 +275,6 @@ include_once("modal/m_observaciones.php");
                       <div class=" card-block">
                         <div class="table-responsive">
                           <table class="table table-striped table-bordered " id="tablaPrePlaneacion" name="tablaPrePlaneacion" style="width: 100%">
-
                           </table>
                         </div>
                       </div>
@@ -294,17 +291,16 @@ include_once("modal/m_observaciones.php");
                             <div class="payment-of-tax">
                               <div class="table-responsive">
                                 <label for="">Capacidad Planeada </label>
-                                <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadPlaneada">
+                                <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadPlaneada" style="width: 100%;">
                                   <thead>
                                     <tr>
-                                      <th>S</th>
+                                      <th>Semana</th>
                                       <th>Total Liquidos(Kg)</th>
                                       <th>Total Solidos(Kg)</th>
                                       <th>Total Semi-Solidos(Kg)</th>
                                     </tr>
-
                                   </thead>
-                                  <tbody class="tblCalcCapacidadPlaneadaBody">
+                                  <tbody id="tblCalcCapacidadPlaneadaBody">
                                   </tbody>
                                 </table>
                               </div>
@@ -328,8 +324,7 @@ include_once("modal/m_observaciones.php");
                       </div>
                       <div class="card-block">
                         <div class="table-responsive">
-                          <table class="table table-striped table-bordered " id="tablaBatchPlaneados" name="tablaBatchPlaneados" style="width: 100%;">
-
+                          <table class="table table-striped table-bordered" id="tablaBatchPlaneados" name="tablaBatchPlaneados" style="width: 100%;">
                           </table>
                         </div>
                       </div>
@@ -346,16 +341,16 @@ include_once("modal/m_observaciones.php");
                             <div class="payment-of-tax">
                               <div class="table-responsive">
                                 <label for="">Capacidad Programada </label>
-                                <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadProgramada">
+                                <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadProgramada" style="width: 100%">
                                   <thead>
                                     <tr>
-                                      <th>S</th>
+                                      <th>Semana</th>
                                       <th>Total Liquidos(Kg)</th>
                                       <th>Total Solidos(Kg)</th>
                                       <th>Total Semi-Solidos(Kg)</th>
                                     </tr>
                                   </thead>
-                                  <tbody class="tblCalcCapacidadProgramadaBody">
+                                  <tbody id="tblCalcCapacidadProgramadaBody">
                                   </tbody>
                                 </table>
                               </div>

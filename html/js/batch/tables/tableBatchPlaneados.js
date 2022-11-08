@@ -13,15 +13,20 @@ $(document).ready(function () {
     semana = sessionStorage.getItem('semana');
     capacidadPlaneada = calcTamanioLoteBySemana(data, parseInt(semana));
 
+    let rowPlaneados = document.getElementById('tblCalcCapacidadPlaneadaBody');
+
     for (i = 0; i < 12; i++) {
-      $('.tblCalcCapacidadPlaneadaBody').append(`
-                <tr>
-                    <td>${capacidadPlaneada[i].semana}</td>
-                    <td>${capacidadPlaneada[i].tamanioLoteLQ.toFixed(2)}</td> 
-                    <td>${capacidadPlaneada[i].tamanioLoteSL.toFixed(2)}</td>
-                    <td>${capacidadPlaneada[i].tamanioLoteSM.toFixed(2)}</td>
-                </tr>
-            `);
+      rowPlaneados.insertAdjacentHTML(
+        'beforeend',
+        `
+          <tr>
+            <td>${capacidadPlaneada[i].semana}</td>
+            <td>${capacidadPlaneada[i].tamanioLoteLQ.toFixed(2)}</td> 
+            <td>${capacidadPlaneada[i].tamanioLoteSL.toFixed(2)}</td>
+            <td>${capacidadPlaneada[i].tamanioLoteSM.toFixed(2)}</td>
+          </tr>
+        `
+      );
     }
 
     $('#tblCalcCapacidadPlaneada').dataTable({
@@ -46,7 +51,7 @@ $(document).ready(function () {
       url: '/api/batchPlaneados',
       dataSrc: '',
     },
-    // order: [[1, 'desc']],
+    order: [[3, 'desc']],
     columns: [
       {
         title: '',

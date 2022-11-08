@@ -10,8 +10,8 @@ $(document).ready(function () {
       url: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json',
     },
     order: [
-      [1, 'asc'],
-      [2, 'asc'],
+      [1, 'desc'],
+      [2, 'desc'],
     ],
     columns: [
       {
@@ -29,7 +29,6 @@ $(document).ready(function () {
         title: 'Pedido',
         data: 'pedido',
         className: 'text-center',
-        visible: false,
       },
       {
         title: 'F_Pedido',
@@ -136,8 +135,8 @@ $(document).ready(function () {
     ],
     rowGroup: {
       dataSrc: function (row) {
-        return `<th class="text-center" colspan="7" style="font-weight: bold;"> ${row.propietario} </th>
-        <th class="text-center" colspan="6" style="font-weight: bold;"> ${row.pedido} </th>`;
+        return `<th class="text-center" colspan="13" style="font-weight: bold;"> ${row.propietario} </th>`;
+        // <th class="text-center" colspan="6" style="font-weight: bold;"> ${row.pedido} </th>;
       },
       startRender: function (rows, group) {
         return $('<tr/>').append(group);

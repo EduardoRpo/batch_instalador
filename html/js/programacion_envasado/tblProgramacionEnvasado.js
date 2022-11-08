@@ -10,24 +10,31 @@ $(document).ready(function () {
   getDataCapacidadEnvasado();
 
   loadtblCalcCapacidadEnvasado = (data) => {
+    let rowCapacidadEnvasado = document.getElementById(
+      'tblCalcCapacidadEnvasadoBody'
+    );
+
     for (i = 0; i < data.length; i++) {
-      $('.tblCalcCapacidadEnvasadoBody').append(`
-            <tr>
-                <td>${data[i].semana}</td>
-                <td style="width:10%;">${data[i].plan_liquido_1} %</td>
-                <td style="width:10%;">${data[i].plan_liquido_2} %</td>
-                <td style="width:10%;">${data[i].plan_liquido_3} %</td>
-                <td>${data[i].total_liquido.toLocaleString()}</td>
-                <td style="width:10%;">${data[i].plan_solido_1} %</td>
-                <td style="width:10%;">${data[i].plan_solido_2} %</td>
-                <td style="width:10%;">${data[i].plan_solido_3} %</td>
-                <td>${data[i].total_solido.toLocaleString()}</td>
-                <td style="width:10%;">${data[i].plan_semi_solido_1} %</td>
-                <td style="width:10%;">${data[i].plan_semi_solido_2} %</td>
-                <td style="width:10%;">${data[i].plan_semi_solido_3} %</td>
-                <td>${data[i].total_semi_solido.toLocaleString()}</td>
-            </tr>
-      `);
+      rowCapacidadEnvasado.insertAdjacentHTML(
+        'beforeend',
+        `
+        <tr>
+          <td>${data[i].semana}</td>
+          <td style="width:10%;">${data[i].plan_liquido_1} %</td>
+          <td style="width:10%;">${data[i].plan_liquido_2} %</td>
+          <td style="width:10%;">${data[i].plan_liquido_3} %</td>
+          <td>${data[i].total_liquido.toLocaleString()}</td>
+          <td style="width:10%;">${data[i].plan_solido_1} %</td>
+          <td style="width:10%;">${data[i].plan_solido_2} %</td>
+          <td style="width:10%;">${data[i].plan_solido_3} %</td>
+          <td>${data[i].total_solido.toLocaleString()}</td>
+          <td style="width:10%;">${data[i].plan_semi_solido_1} %</td>
+          <td style="width:10%;">${data[i].plan_semi_solido_2} %</td>
+          <td style="width:10%;">${data[i].plan_semi_solido_3} %</td>
+          <td>${data[i].total_semi_solido.toLocaleString()}</td>
+        </tr>
+      `
+      );
     }
 
     $('#tblCalcCapacidadEnvasado').dataTable({
@@ -44,7 +51,10 @@ $(document).ready(function () {
 
   $('#tablaEnvasado').dataTable({
     pageLength: 50,
-    order: [[1, 'desc']],
+    order: [
+      [0, 'desc'],
+      [10, 'desc'],
+    ],
     ajax: {
       url: '/api/programacionEnvasado',
       dataSrc: '',
@@ -91,12 +101,6 @@ $(document).ready(function () {
         title: 'Fecha Estimada Envasado',
         data: 'fecha_envasado',
         className: 'uniqueClassName',
-      },
-      {
-        title: 'Fecha programacion',
-        data: 'programacion_envasado',
-        className: 'uniqueClassName',
-        visible: false,
       },
       {
         title: 'Propietario',
@@ -172,12 +176,8 @@ $(document).ready(function () {
     ],
     rowGroup: {
       dataSrc: function (row) {
-        !row.programacion_envasado
-          ? (programacion_envasado = '0000-00-00 00:00:00')
-          : (programacion_envasado = row.programacion_envasado);
-
-        return `<th class="text-center" colspan="6" style="font-weight: bold;"> ${row.propietario} </th>
-        <th class="text-center" colspan="6" style="font-weight: bold;"> ${programacion_envasado} </th>`;
+        return `<th class="text-center" colspan="13" style="font-weight: bold;"> ${row.propietario} </th> `;
+        //<th class="text-center" colspan="6" style="font-weight: bold;"> ${programacion_envasado} </th>
       },
       startRender: function (rows, group) {
         return $('<tr/>').append(group);

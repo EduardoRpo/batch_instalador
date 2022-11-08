@@ -13,15 +13,22 @@ $(document).ready(function () {
     semana = sessionStorage.getItem('semana');
     capacidadPrePlaneada = calcTamanioLoteBySemana(data, parseInt(semana));
 
+    let rowPrePlaneados = document.getElementById(
+      'tblCalcCapacidadPrePlaneadoBody'
+    );
+
     for (i = 0; i < 12; i++) {
-      $('.tblCalcCapacidadPrePlaneadoBody').append(`
-          <tr class="rows" id="row-${i}">
-            <td>${capacidadPrePlaneada[i].semana}</td>
-            <td>${capacidadPrePlaneada[i].tamanioLoteLQ.toFixed(2)}</td> 
-            <td>${capacidadPrePlaneada[i].tamanioLoteSL.toFixed(2)}</td>
-            <td>${capacidadPrePlaneada[i].tamanioLoteSM.toFixed(2)}</td>
-          </tr>
-        `);
+      rowPrePlaneados.insertAdjacentHTML(
+        'beforeend',
+        `
+        <tr class="rows" id="row-${i}">
+          <td>${capacidadPrePlaneada[i].semana}</td>
+          <td>${capacidadPrePlaneada[i].tamanioLoteLQ.toFixed(2)}</td> 
+          <td>${capacidadPrePlaneada[i].tamanioLoteSL.toFixed(2)}</td>
+          <td>${capacidadPrePlaneada[i].tamanioLoteSM.toFixed(2)}</td>
+        </tr>
+        `
+      );
     }
 
     tblCalcCapacidadPrePlaneado = $('#tblCalcCapacidadPrePlaneado').DataTable({
@@ -75,6 +82,7 @@ $(document).ready(function () {
     language: {
       url: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json',
     },
+    order: [2, 'desc'],
     columns: [
       {
         title: 'N° Semana',
@@ -94,7 +102,6 @@ $(document).ready(function () {
         title: 'Pedido',
         data: 'pedido',
         className: 'text-center',
-        visible: false,
       },
       {
         title: 'Granel',

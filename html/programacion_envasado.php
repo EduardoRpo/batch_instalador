@@ -99,7 +99,7 @@ sesiones(5);
                                             <th>T3</th>
                                         </tr>
                                     </thead>
-                                    <tbody class="tblCalcCapacidadEnvasadoBody"></tbody>
+                                    <tbody id="tblCalcCapacidadEnvasadoBody"></tbody>
                                 </table>
                             </div>
                         </div>

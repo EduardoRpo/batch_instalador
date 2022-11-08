@@ -18,15 +18,22 @@ $(document).ready(function () {
       parseInt(semana)
     );
 
+    let rowProgramados = document.getElementById(
+      'tblCalcCapacidadProgramadaBody'
+    );
+
     for (i = 0; i < 12; i++) {
-      $('.tblCalcCapacidadProgramadaBody').append(`
-          <tr>
+      rowProgramados.insertAdjacentHTML(
+        'beforeend',
+        `
+        <tr>
           <td>${capacidadProgramada[i].semana}</td>
           <td>${capacidadProgramada[i].tamanioLoteLQ.toFixed(2)}</td> 
           <td>${capacidadProgramada[i].tamanioLoteSL.toFixed(2)}</td>
           <td>${capacidadProgramada[i].tamanioLoteSM.toFixed(2)}</td>
-          </tr>
-        `);
+        </tr>
+        `
+      );
     }
 
     $('#tblCalcCapacidadProgramada').dataTable({
