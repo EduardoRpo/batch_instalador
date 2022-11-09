@@ -60,7 +60,7 @@ require_once('php/sesion/sesion.php');
                 <div class="" style="display: flex;">
 
                   <div class="table-responsive">
-                    <table id="tb_firmas" class="table-bordered">
+                    <table class="table-bordered">
                       <thead>
                         <label for="" class="mr-3">Buscar</label>
                         <input type="search" id="buscarFirmas" class="form-control mb-3">
@@ -77,9 +77,9 @@ require_once('php/sesion/sesion.php');
                           <th class="col-sm-3 centrado">Liberacion Lote</th>
                         </tr>
                       </thead>
-                      <!-- <tbody>
+                      <tbody id="tb_firmas">
 
-                      </tbody> -->
+                      </tbody>
                     </table>
                   </div>
                 </div>

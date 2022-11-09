@@ -51,7 +51,7 @@ $(document).ready(function () {
       url: '/api/batchPlaneados',
       dataSrc: '',
     },
-    order: [[3, 'desc']],
+    order: [[2, 'asc']],
     columns: [
       {
         title: '',

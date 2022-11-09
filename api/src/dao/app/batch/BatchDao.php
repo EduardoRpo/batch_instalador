@@ -22,7 +22,7 @@ class BatchDao extends estadoInicialDao
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("SELECT * FROM batch WHERE id_batch = :id_batch");
-        $stmt->execute(['id_batch' => $batch['idBatch']]);
+        $stmt->execute(['id_batch' => $batch]);
         $dataBatch = $stmt->fetch($connection::FETCH_ASSOC);
         return $dataBatch;
     }
