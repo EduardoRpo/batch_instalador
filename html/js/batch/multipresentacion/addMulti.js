@@ -12,7 +12,10 @@ $(document).ready(function () {
     $('#insertarRefMulti').empty();
 
     if (btnDeleteMulti == true)
-      btnOuter = `<button class="btn btn-warning btneliminarMulti${index}" onclick="eliminarMulti(${index});" type="button">X</button>`;
+      btnOuter = `<button class="btn btn-warning btneliminarMulti${index}" onclick="eliminarMulti(${index});" type="button">X</button>
+      <input type="text" class="form-control text-center" id="densidadMulti${index}" value="${multi[0].densidad}" hidden>
+      <input type="text" class="form-control text-center" id="presentacionMulti${index}" value="${multi[0].presentacion}" hidden>
+      `;
     else btnOuter = '';
     if (index < 5) {
       let rowMulti = document.getElementById('insertarRefMulti');

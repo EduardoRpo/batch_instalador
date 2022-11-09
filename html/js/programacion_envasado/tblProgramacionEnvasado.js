@@ -37,7 +37,7 @@ $(document).ready(function () {
       );
     }
 
-    $('#tblCalcCapacidadEnvasado').dataTable({
+    $('#tblCalcCapacidadEnvasado').DataTable({
       scrollY: '130px',
       scrollCollapse: true,
       paging: false,
@@ -49,10 +49,10 @@ $(document).ready(function () {
 
   /* tabla envasado */
 
-  $('#tablaEnvasado').dataTable({
+  tablaEnvasado = $('#tablaEnvasado').DataTable({
     destroy: true,
     pageLength: 100,
-    order: [[4, 'asc']],
+    order: [[4]],
     ajax: {
       url: '/api/programacionEnvasado',
       dataSrc: '',
@@ -138,6 +138,12 @@ $(document).ready(function () {
         render: $.fn.dataTable.render.number('.', ',', 0, ''),
       },
       {
+        title: 'fecha Programacion',
+        data: 'programacion_envasado',
+        className: 'uniqueClassName',
+        visible: false,
+      },
+      {
         title: 'Programacion',
         data: null,
         className: 'uniqueClassName',
@@ -185,5 +191,10 @@ $(document).ready(function () {
 
   $(document).on('click', '.table-responsive, .page-link', function () {
     selectChange();
+  });
+
+  $(document).on('blur', '#fechaBusqueda', function () {
+    fecha = this.value;
+    tablaEnvasado.column(10).search(fecha).draw();
   });
 });

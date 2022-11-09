@@ -126,7 +126,7 @@ sesiones(5);
             </div>
             <div class="col-2">
                 <label>Fecha</label>
-                <input type="date" class="form-control text-center">
+                <input type="date" class="form-control text-center" id="fechaBusqueda">
             </div>
         </div>
 
@@ -148,7 +148,7 @@ sesiones(5);
     <script src="../assets/plugins/jquery/jquery.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/tether.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="html/vendor/datatables/datatables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/rowgroup/1.2.0/js/dataTables.rowGroup.min.js"></script>
     <script src="html/js/utils/jquery.slimscroll.js"></script>
     <script src="html/js/utils/waves.js"></script>

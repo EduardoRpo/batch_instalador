@@ -1,10 +1,10 @@
 <?php
 
+use BatchRecord\dao\AuditoriaControlFirmasDao;
 use BatchRecord\dao\BatchDao;
-use BatchRecord\dao\ControlFirmasDao;
 
 $batchDao = new BatchDao();
-$controlFirmasDao = new ControlFirmasDao();
+$controlFirmasDao = new AuditoriaControlFirmasDao();
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;

@@ -64,14 +64,14 @@ $app->post('/saveBatchTanques', function (Request $request, Response $response, 
             $estado = $estadoDao->actualizarEstado($dataBatch);
 
         if ($estado == null) {
-            $batch = $batchDao->findBatch($dataBatch['idBatch']);
+            $batch = $batchDao->findBatch($dataBatch);
             $dataBatch['referencia'] = $batch['id_producto'];
             $resp = $flagStartDao->insertFlagStart($dataBatch);
         }
     }
     //Insertar flags correspondientes
     if ($modulo == 3 || $modulo == 5 || $modulo == 6) {
-        $batch = $batchDao->findBatch($dataBatch['idBatch']);
+        $batch = $batchDao->findBatch($dataBatch);
         $dataBatch['referencia'] = $batch['id_producto'];
         //Guardar flag_start
         $resp = $flagStartDao->saveFlagStart($dataBatch);

@@ -6,7 +6,7 @@ use BatchRecord\Constants\Constants;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger;
 
-class ControlFirmasDao
+class AuditoriaControlFirmasDao
 {
     private $logger;
 
