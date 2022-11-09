@@ -82,7 +82,7 @@ class BatchLineaDao
                                   INNER JOIN batch_control_firmas bcf ON batch.id_batch = bcf.batch
                                   WHERE batch.estado > 2 AND batch.estado < 8 
                                   AND batch.id_batch AND bcf.modulo = 5 AND batch.id_batch NOT IN(SELECT batch FROM `batch_control_firmas` WHERE modulo = 5 AND cantidad_firmas = total_firmas) 
-                                  ORDER BY `propietario`, batch.id_batch ASC LIMIT 100");
+                                  ORDER BY `propietario`, batch.id_batch ASC");
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     $envasado = $stmt->fetchAll($connection::FETCH_ASSOC);
