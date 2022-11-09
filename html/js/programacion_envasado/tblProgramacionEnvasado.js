@@ -50,11 +50,12 @@ $(document).ready(function() {
     /* tabla envasado */
 
     $('#tablaEnvasado').dataTable({
+        destroy: true,
         pageLength: 100,
-        order: [
+        /* order: [
             [0, 'asc'],
             [10, 'asc'],
-        ],
+        ], */
         ajax: {
             url: '/api/programacionEnvasado',
             dataSrc: '',
