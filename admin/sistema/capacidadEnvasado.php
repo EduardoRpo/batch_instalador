@@ -125,8 +125,10 @@
 
     <!-- Alertify -->
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <script src="https://kit.fontawesome.com/d35ea76538.js" crossorigin="anonymous"></script>
 
     <!-- javascript inicializacion datatables -->
+    <script src="js/menu.js"></script>
     <script src="/admin/sistema/js/auditory/capacidadEnvasado/tblCapacidadEnvasado.js"></script>
     <script src="/admin/sistema/js/global/numSemanas.js"></script>
     <script src="/admin/sistema/js/auditory/capacidadEnvasado/capacidadEnvasado.js"></script>

@@ -108,31 +108,39 @@ sesiones(5);
             </div>
         </div>
 
-        <div class="contenedorPrincipal row mb-4">
-            <div class="tituloProceso col-4">
+        <div class="contenedorPrincipal row">
+            <div class="tituloProceso col">
                 <h1 class="text-themecolor"><b>Programación Envasado y Acondicionamiento</b></h1>
             </div>
             <div class="col-2">
                 <label for="numSemana">Semana No</label>
-                <select name="numSemana" id="numSemana" class="form-control text-center"></select>
+                <select name="numSemana" id="numSemana" class="form-control text-center">
+                </select>
             </div>
             <div class="col-xs-2 ml-4 mr-4">
-                <label style="margin-top:36px" id="fechaSemana">10 Noviembre - 13 Noviembre</label>
+                <label style="margin-top:36px" id="fechaSemana"></label>
             </div>
-            <div class="col-xs-2">
+            <div class="col-2">
                 <button type="button" id="btnProgramar" class="btn waves-effect waves-light btn-danger" style="width: 120px; margin-top:33px">
                     <strong>Programar</strong>
                 </button>
-            </div>
-            <div class="col-2">
-                <label>Fecha</label>
-                <input type="date" class="form-control text-center" id="fechaBusqueda">
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-12 align-self-center">
                 <div class="card">
+                    <div class="row justify-content-end mt-2">
+                        <div class="col-2">
+                            <label>Fecha</label>
+                            <input type="date" class="form-control text-center" id="fechaBusqueda">
+                        </div>
+                        <div class="col-xs-2">
+                            <button type="button" id="btnLimpiar" class="btn waves-effect waves-light btn-warning" style="width: 120px; margin-top:33px; margin-right: 35px">
+                                <strong>Limpiar</strong>
+                            </button>
+                        </div>
+                    </div>
                     <div class="card-block">
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered" id="tablaEnvasado" style="width: 100%;">
@@ -148,7 +156,7 @@ sesiones(5);
     <script src="../assets/plugins/jquery/jquery.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/tether.min.js"></script>
     <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="html/vendor/datatables/datatables.min.js"></script>
     <script src="https://cdn.datatables.net/rowgroup/1.2.0/js/dataTables.rowGroup.min.js"></script>
     <script src="html/js/utils/jquery.slimscroll.js"></script>
     <script src="html/js/utils/waves.js"></script>

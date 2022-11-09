@@ -197,4 +197,16 @@ $(document).ready(function () {
     fecha = this.value;
     tablaEnvasado.column(10).search(fecha).draw();
   });
+  $('#btnLimpiar').click(function (e) {
+    e.preventDefault();
+
+    $('#fechaBusqueda').val('');
+
+    tablaEnvasado
+      .columns()
+      .search('')
+      .columns('.sold_out')
+      .search('YES')
+      .draw();
+  });
 });
