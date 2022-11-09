@@ -33,7 +33,7 @@ class PreBatchDao
 
         $sql = "SELECT DISTINCT ROW_NUMBER() OVER (ORDER BY pp.nombre) AS num, pp.nombre AS propietario, exp.pedido, exp.fecha_pedido, exp.estado, exp.cantidad_acumulada, exp.fecha_insumo, CURRENT_DATE AS fecha_actual, (SELECT referencia FROM producto 
                     WHERE multi = (SELECT multi FROM producto WHERE referencia = exp.id_producto)
-                    LIMIT 1) AS granel, exp.id_producto, p.nombre_referencia, exp.cant_original, exp.cantidad, exp.valor_pedido, 
+                    ORDER BY propietario ASC LIMIT 1) AS granel, exp.id_producto, p.nombre_referencia, exp.cant_original, exp.cantidad, exp.valor_pedido, 
                         IFNULL(DATE_ADD(exp.fecha_insumo, INTERVAL 8 DAY),DATE_ADD(exp.fecha_pedido, INTERVAL 8 DAY)) AS fecha_pesaje, 						
                         IFNULL(DATE_ADD(exp.fecha_insumo, INTERVAL 9 DAY),DATE_ADD(exp.fecha_pedido, INTERVAL 9 DAY)) AS fecha_preparacion,
                         IFNULL(DATE_ADD(exp.fecha_insumo, INTERVAL 13 DAY),DATE_ADD(exp.fecha_pedido, INTERVAL 13 DAY)) AS envasado, 
@@ -43,8 +43,7 @@ class PreBatchDao
                         INNER JOIN producto p ON p.referencia = exp.id_producto 
                         INNER JOIN propietario pp ON pp.id = p.id_propietario
                         LEFT JOIN observaciones_batch_inactivos obi ON obi.pedido = exp.pedido AND obi.referencia = exp.id_producto
-                        WHERE flag_estado = 1
-                        ORDER BY estado DESC;
+                        WHERE flag_estado = 1;
         "; //WHERE exp.flag_estado = 0
 
         $query = $connection->prepare($sql);
