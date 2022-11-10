@@ -30,7 +30,7 @@ require_once __DIR__ . '/src/routes/admin/generalParameters/conditions.php';
 require_once __DIR__ . '/src/routes/admin/generalParameters/disinfectant.php';
 require_once __DIR__ . '/src/routes/admin/generalParameters/equipments.php';
 require_once __DIR__ . '/src/routes/admin/auditory/capacidadEnvasado.php';
-// require_once __DIR__ . '/src/routes/admin/auditory/controlFirmas.php';
+require_once __DIR__ . '/src/routes/admin/auditory/capacidadFirmas.php';
 
 require_once __DIR__ . '/src/routes/admin/productos/generales/nombresProductos.php';
 require_once __DIR__ . '/src/routes/admin/productos/generales/notifiSanitaria.php';

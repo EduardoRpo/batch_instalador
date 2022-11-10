@@ -9,8 +9,6 @@ $(document).ready(function () {
 
   /* Crear objetos multi */
   createMulti = (index) => {
-    $('#insertarRefMulti').empty();
-
     if (btnDeleteMulti == true)
       btnOuter = `<button class="btn btn-warning btneliminarMulti${index}" onclick="eliminarMulti(${index});" type="button">X</button>
       <input type="text" class="form-control text-center" id="densidadMulti${index}" value="${multi[0].densidad}" hidden>

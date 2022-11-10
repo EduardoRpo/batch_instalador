@@ -7,24 +7,26 @@ let equipos = [];
 
 //Carga el proceso despues de cargar la data  del Batch
 
-loadBatch = async() => {
-    await cargarInfoBatch();
+loadBatch = async () => {
+  let resp = await cargarInfoBatch();
+  if (resp == null) {
     result = await carguepreguntas(modulo);
     result = await cargarDesinfectantes();
     await busqueda_multi();
     await deshabilitarBotones();
-    cargarBatchMulti()
-}
+    cargarBatchMulti();
+  }
+};
 
-loadBatch()
+loadBatch();
 
 /* Ocultar Acondicionamiento */
 
 ocultar_acondicionamiento = () => {
-    for (let i = 2; i < 6; i++) {
-        $(`#acondicionamiento${i}`).attr("hidden", true);
-    }
-}
+  for (let i = 2; i < 6; i++) {
+    $(`#acondicionamiento${i}`).attr('hidden', true);
+  }
+};
 
 // cargar = (btn, idbtn) => {
 //     let confirm = alertify.confirm('Samara Cosmetics', '¿La información cargada es correcta?', null, null).set('labels', { ok: 'Si', cancel: 'No' });
@@ -42,7 +44,7 @@ ocultar_acondicionamiento = () => {
 //     return false;
 // }
 
-// Valida el proceso para la segunda seccion 
+// Valida el proceso para la segunda seccion
 // if (id != "despeje_realizado" && id != "despeje_verificado") {
 //     let banda = $(`#sel_banda${id_multi}`).val();
 //     let etiquetadora = $(`#sel_etiquetadora${id_multi}`).val();
