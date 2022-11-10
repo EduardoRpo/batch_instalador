@@ -194,10 +194,12 @@ $(document).ready(function() {
         selectChange();
     });
 
-    $(document).on('blur', '#fechaBusqueda', function() {
-        fecha = this.value;
+    $(document).on('click', '#btnSearch', function() {
+        //fecha = this.value;
+        fecha = $('#fechaBusqueda').val();
         tablaEnvasado.column(10).search(fecha).draw();
     });
+
     $('#btnLimpiar').click(function(e) {
         e.preventDefault();
 

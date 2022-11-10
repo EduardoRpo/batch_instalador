@@ -63,7 +63,7 @@ sesiones(5);
         <?php include('partials/header.php'); ?>
         <!-- FIN HEADER -->
 
-        <div class="contenedorPrincipal row">
+        <div class="contenedorPrincipalTitle row mt-3 mb-2">
             <div class="tituloProceso col">
                 <h1 class="text-themecolor"><b>Capacidad Envasado</b></h1>
             </div>
@@ -108,11 +108,11 @@ sesiones(5);
             </div>
         </div>
 
-        <div class="contenedorPrincipal row">
+        <div class="contenedorPrincipalTitle row mb-2">
             <div class="tituloProceso col">
                 <h1 class="text-themecolor"><b>Programación Envasado y Acondicionamiento</b></h1>
             </div>
-            <div class="col-2">
+            <!-- <div class="col-2">
                 <label for="numSemana">Semana No</label>
                 <select name="numSemana" id="numSemana" class="form-control text-center">
                 </select>
@@ -124,13 +124,46 @@ sesiones(5);
                 <button type="button" id="btnProgramar" class="btn waves-effect waves-light btn-danger" style="width: 120px; margin-top:33px">
                     <strong>Programar</strong>
                 </button>
+            </div> -->
+        </div>
+        <div class="card">
+            <div class="contenedorPrincipal row">
+                <div>
+                    <label for="numSemana">Semana No</label>
+                    <select name="numSemana" id="numSemana" class="form-control text-center">
+                    </select>
+                </div>
+                <div>
+                    <label style="margin-top:36px" id="fechaSemana"></label>
+                </div>
+                <div>
+                    <button type="button" id="btnProgramar" class="btn waves-effect waves-light btn-danger" style="width: 120px; margin-top:33px">
+                        <strong>Programar</strong>
+                    </button>
+                </div>
+
+                <!-- <div>
+                    <label>Filtrar por fecha</label>
+                    <input type="date" class="form-control text-center" id="fechaBusqueda">
+                </div>
+                <div>
+                    <button type="button" id="btnSearch" class="btn waves-effect waves-light btn-danger" style="width: 120px; margin-top:33px;">
+                        <strong>Buscar</strong>
+                    </button>
+                </div>
+                <div>
+                    <button type="button" id="btnLimpiar" class="btn waves-effect waves-light btn-warning" style="width: 120px; margin-top:33px;">
+                        <strong>Limpiar Filtro</strong>
+                    </button>
+                </div> -->
             </div>
+
         </div>
 
         <div class="row">
             <div class="col-md-12 align-self-center">
                 <div class="card">
-                    <div class="row justify-content-end mt-2">
+                    <!-- <div class="row justify-content-end mt-2">
                         <div class="col-2">
                             <label>Fecha</label>
                             <input type="date" class="form-control text-center" id="fechaBusqueda">
@@ -140,7 +173,7 @@ sesiones(5);
                                 <strong>Limpiar</strong>
                             </button>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="card-block">
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered" id="tablaEnvasado" style="width: 100%;">

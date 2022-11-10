@@ -1,36 +1,36 @@
-$(document).ready(function () {
-  // Calcular numero de semana actual
-  Date.prototype.getWeekNumber = function () {
-    var d = new Date(+this);
-    d.setHours(0, 0, 0, 0);
-    d.setDate(d.getDate() + 4 - (d.getDay() || 7));
-
-    return Math.ceil(((d - new Date(d.getFullYear(), 0, 1)) / 8.64e7 + 1) / 7);
-  };
-
-  // Cargar numero de semanas
-  loadsemanas = () => {
+$(document).ready(function() {
     // Calcular numero de semana actual
-    semanaActual = new Date().getWeekNumber();
+    Date.prototype.getWeekNumber = function() {
+        var d = new Date(+this);
+        d.setHours(0, 0, 0, 0);
+        d.setDate(d.getDate() + 4 - (d.getDay() || 7));
 
-    select = $('#numSemana');
+        return Math.ceil(((d - new Date(d.getFullYear(), 0, 1)) / 8.64e7 + 1) / 7);
+    };
 
-    select.empty();
-    select.append(`<option disabled>Numero Semana</option>`);
+    // Cargar numero de semanas
+    loadsemanas = () => {
+        // Calcular numero de semana actual
+        semanaActual = new Date().getWeekNumber();
 
-    for (i = 1; i <= 52; i++) {
-      if (i >= semanaActual) {
-        options = $('#numSemana option').length;
-        if (options <= 12) select.append(`<option value ="${i}">${i}</option>`);
-      }
-    }
-  };
-  loadsemanas();
+        select = $('#numSemana');
 
-  $(`#numSemana option[value="${semanaActual}"]`).prop('selected', true);
-  selectChange = () => {
-    $('#numSemana').trigger('change');
-  };
+        select.empty();
+        //select.append(`<option disabled>Numero Semana</option>`);
 
-  setTimeout(selectChange, 4000);
+        for (i = 1; i <= 52; i++) {
+            if (i >= semanaActual) {
+                options = $('#numSemana option').length;
+                if (options <= 12) select.append(`<option value ="${i}">${i}</option>`);
+            }
+        }
+    };
+    loadsemanas();
+
+    $(`#numSemana option[value="${semanaActual}"]`).prop('selected', true);
+    selectChange = () => {
+        $('#numSemana').trigger('change');
+    };
+
+    setTimeout(selectChange, 4000);
 });
