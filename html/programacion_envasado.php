@@ -142,7 +142,7 @@ sesiones(5);
                     </button>
                 </div>
 
-                <!-- <div>
+                <div>
                     <label>Filtrar por fecha</label>
                     <input type="date" class="form-control text-center" id="fechaBusqueda">
                 </div>
@@ -155,7 +155,7 @@ sesiones(5);
                     <button type="button" id="btnLimpiar" class="btn waves-effect waves-light btn-warning" style="width: 120px; margin-top:33px;">
                         <strong>Limpiar Filtro</strong>
                     </button>
-                </div> -->
+                </div>
             </div>
 
         </div>
