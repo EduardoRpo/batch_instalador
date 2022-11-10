@@ -7,6 +7,7 @@ $(document).ready(function () {
   $(document).on('click', '.link-editarMulti', function (e) {
     editar = true;
     id_batch = this.id;
+    $('#insertarRefMulti').empty();
 
     ref = $(this).parent().parent().children().eq(3).text();
 
