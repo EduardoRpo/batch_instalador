@@ -66,6 +66,7 @@ include_once("modal/m_observaciones.php");
               <?php if ($_SESSION['rol'] == 6 or $_SESSION['rol'] == 1) {  ?>
                 <a class="dropdown-item" href="#" id="btnCargarExcelPedidos"><i class="fa fa-download"></i> Pedidos</a>
               <?php } ?>
+              <a class="dropdown-item" href="#" id="btnLimpiarFirmas"><i class="fa fa-refresh"></i> Limpiar Firmas</a>
             </div>
           </div>
 
@@ -405,6 +406,7 @@ include_once("modal/m_observaciones.php");
     <script src="/html/js/batch/tables/tableBatchPrePlaneacion.js"></script>
     <script src="/html/js/batch/tables/batcheliminados.js"></script>
 
+    <script src="/html/js/batch/limpiarFirmas.js"></script>
     <script src="/html/js/batch/calc/calcularLote.js"></script>
 
     <script src="/html/js/batch/pedidos/generalPedidos.js"></script>

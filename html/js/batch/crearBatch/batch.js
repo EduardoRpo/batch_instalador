@@ -283,7 +283,7 @@ $(document).ready(function () {
       cerrarModal();
       alertify.success(data.message);
     } else if (data.error == true) alertify.error(data.message);
-    else if (data.info == true) alertify.info(data.message);
+    else if (data.info == true) alertify.notify(data.message);
   };
 
   /* Actualizar tabla */
