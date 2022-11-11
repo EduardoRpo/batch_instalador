@@ -16,6 +16,72 @@ class ValidacionFirmasDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
+    public function findDesinfectanteByBatch($batch)
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        $stmt = $connection->prepare("SELECT realizo, verifico, batch, modulo FROM batch_desinfectante_seleccionado WHERE batch = :batch");
+        $stmt->execute(['batch' => $batch]);
+        $firmas_despeje = $stmt->fetchAll($connection::FETCH_ASSOC);
+
+        return $firmas_despeje;
+    }
+
+    public function findFirmas2SeccionByBatch($batch)
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        $stmt = $connection->prepare("SELECT COUNT(realizo) AS realizo, COUNT(verifico) AS verifico, batch, modulo FROM batch_firmas2seccion WHERE batch = :batch GROUP BY modulo");
+        $stmt->execute(['batch' => $batch]);
+        $firmas_proceso = $stmt->fetchAll($connection::FETCH_ASSOC);
+
+        return $firmas_proceso;
+    }
+
+    public function findAnalisisMicrobiologicoByBatch($batch)
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        $stmt = $connection->prepare("SELECT realizo, verifico, batch, modulo FROM batch_analisis_microbiologico WHERE batch = :batch");
+        $stmt->execute(['batch' => $batch]);
+        $firmas_microbiologico = $stmt->fetchAll($connection::FETCH_ASSOC);
+
+        return $firmas_microbiologico;
+    }
+
+    public function findConciliacionRendimientoByBatch($batch)
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        $stmt = $connection->prepare("SELECT entrego, batch, modulo FROM batch_conciliacion_rendimiento WHERE batch = :batch");
+        $stmt->execute(['batch' => $batch]);
+        $firmas_conciliacion = $stmt->fetchAll($connection::FETCH_ASSOC);
+
+        return $firmas_conciliacion;
+    }
+
+    public function findMaterialSobranteByBatch($batch)
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        $stmt = $connection->prepare("SELECT realizo, verifico, batch, modulo FROM batch_material_sobrante WHERE batch = :batch GROUP by ref_producto, modulo");
+        $stmt->execute(['batch' => $batch]);
+        $firmas_material = $stmt->fetchAll($connection::FETCH_ASSOC);
+
+        return $firmas_material;
+    }
+
+    public function findLiberacionByBatch($batch)
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        $stmt = $connection->prepare("SELECT * FROM batch_liberacion WHERE batch = :batch");
+        $stmt->execute(['batch' => $batch]);
+        $firmas_liberacion = $stmt->fetch($connection::FETCH_ASSOC);
+
+        return $firmas_liberacion;
+    }
+
     public function findAllBatchByDate()
     {
         $connection = Connection::getInstance()->getConnection();
@@ -28,21 +94,19 @@ class ValidacionFirmasDao
         return $batchs;
     }
 
-    public function updateControlFirmas($id_batch)
+    public function validarFirmasGestionadas($batch, $firmas)
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $stmt = $connection->prepare("SELECT * FROM batch_control_firmas WHERE batch = :batch ORDER BY modulo");
-        $stmt->execute(['batch' => $id_batch]);
+        foreach ($firmas as $key => $value) {
 
-        $controlFirmas = $stmt->fetchAll($connection::FETCH_ASSOC);
+            $stmt = $connection->prepare("SELECT * FROM batch_control_firmas WHERE modulo= :modulo AND batch = :batch");
+            $stmt->execute(['batch' => $batch, 'modulo' => $key]);
+            $controlFirmas = $stmt->fetch($connection::FETCH_ASSOC);
 
-        foreach ($controlFirmas as $k) {
-
-            if ($k['cantidad_firmas'] != $k['total_firmas']) {
-                $sql = "UPDATE batch_control_firmas SET cantidad_firmas = 0 WHERE batch = :batch AND modulo = :modulo";
-                $query = $connection->prepare($sql);
-                $query->execute(['batch' => $id_batch, 'modulo' => $k['modulo']]);
+            if ($controlFirmas['cantidad_firmas'] != $controlFirmas['total_firmas']) {
+                $stmt = $connection->prepare("UPDATE batch_control_firmas SET cantidad_firmas = :firmas WHERE modulo = :modulo and batch = :batch");
+                $stmt->execute(['batch' => $batch, 'modulo' => $key, 'firmas' => $value]);
             }
         }
     }

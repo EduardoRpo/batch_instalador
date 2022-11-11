@@ -118,11 +118,11 @@ if ($batchs > 0) {
             $modulo = 5;
             /*$indice = array_key_exists($modulo, $firmas);
 
-    if ($indice && $cantidad == 6) */
+            if ($indice && $cantidad == 6) */
             $firmas[$modulo] = $firmas[$modulo] + $cantidad;
             /* else
-    $firmas[$modulo] = $firmas[$modulo] + 2;
-        $firmas[$modulo] =  1; */
+            $firmas[$modulo] = $firmas[$modulo] + 2;
+            $firmas[$modulo] =  1; */
             $cantidad = 0;
 
 
@@ -137,10 +137,10 @@ if ($batchs > 0) {
             $modulo = 6;
             /*$indice = array_key_exists($modulo, $firmas);
     
-    if ($indice && $cantidad == 4)
-    $firmas[$modulo] = $firmas[$modulo] + 2;
-    else
-    $firmas[$modulo] =  1; */
+            if ($indice && $cantidad == 4)
+            $firmas[$modulo] = $firmas[$modulo] + 2;
+            else
+            $firmas[$modulo] =  1; */
             $firmas[$modulo] = $firmas[$modulo] + $cantidad;
             $cantidad = 0;
         }
