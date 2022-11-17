@@ -173,11 +173,11 @@ $(document).ready(function () {
     if ($.fn.dataTable.isDataTable('#tblCalcCapacidadPrePlaneado')) {
       $('#tblCalcCapacidadPrePlaneado').DataTable().destroy();
     }
-    $('.tblCalcCapacidadPrePlaneadoBody').empty();
+    $('#tblCalcCapacidadPrePlaneadoBody').empty();
     if ($.fn.dataTable.isDataTable('#tblCalcCapacidadPlaneada')) {
       $('#tblCalcCapacidadPlaneada').DataTable().destroy();
     }
-    $('.tblCalcCapacidadPlaneadaBody').empty();
+    $('#tblCalcCapacidadPlaneadaBody').empty();
     api = '/api/prePlaneados';
     await getDataPrePlaneacion();
     api = '/api/batchPlaneados';

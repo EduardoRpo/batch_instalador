@@ -178,7 +178,7 @@ $(document).ready(function () {
         if ($.fn.dataTable.isDataTable('#tblCalcCapacidadPrePlaneado')) {
           $('#tblCalcCapacidadPrePlaneado').DataTable().destroy();
         }
-        $('.tblCalcCapacidadPrePlaneadoBody').empty();
+        $('#tblCalcCapacidadPrePlaneadoBody').empty();
         getDataPrePlaneacion();
       },
     });
