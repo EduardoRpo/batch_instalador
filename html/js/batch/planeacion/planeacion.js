@@ -263,7 +263,11 @@ $(document).ready(function () {
         if ($.fn.dataTable.isDataTable('#tblCalcCapacidadPlaneada')) {
           $('#tblCalcCapacidadPlaneada').DataTable().destroy();
         }
-        $('.tblCalcCapacidadPlaneadaBody').empty();
+        $('#tblCalcCapacidadPlaneadaBody').empty();
+        if ($.fn.dataTable.isDataTable('#tblCalcCapacidadProgramada')) {
+          $('#tblCalcCapacidadProgramada').DataTable().destroy();
+        }
+        $('#tblCalcCapacidadProgramadaBody').empty();
         api = '/api/batchPlaneados';
         getDataPlaneacion();
         api = '/api/batch';
