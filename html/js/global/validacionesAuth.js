@@ -21,10 +21,17 @@ $(document).ready(function() {
     verificacionControlTanques = (id) => {
 
         array = ['pesaje_realizado', "preparacion_realizado", "aprobacion_realizado"]
+        let validarEspec = 0
 
         if (array.includes(id)) {
             validar = controlTanques()
-            if (validar == 0) {
+
+            if (validar == 0 && array.includes('preparacion_realizado')) {
+                validarEspec = controlDataEspecificaciones();
+                sessionStorage.setItem('validarEspec', validarEspec);
+            }
+
+            if (validar == 0 && validarEspec == 0) {
                 alertify.set('notifier', 'position', 'top-right')
                 alertify.error('Seleccione el Tanque.')
                 return false

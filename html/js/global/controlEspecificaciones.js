@@ -68,4 +68,12 @@ $(document).ready(function() {
             },
         });
     }
+
+    controlDataEspecificaciones = () => {
+        let color = $('.color').val();
+        let espumoso = $('.espumoso').val();
+        let data = color * espumoso;
+        return data;
+    }
+
 });
