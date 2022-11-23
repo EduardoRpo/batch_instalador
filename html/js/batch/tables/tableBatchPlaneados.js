@@ -20,10 +20,23 @@ $(document).ready(function () {
         'beforeend',
         `
           <tr>
-            <td>${capacidadPlaneada[i].semana}</td>
-            <td>${capacidadPlaneada[i].tamanioLoteLQ.toFixed(2)}</td> 
-            <td>${capacidadPlaneada[i].tamanioLoteSL.toFixed(2)}</td>
-            <td>${capacidadPlaneada[i].tamanioLoteSM.toFixed(2)}</td>
+            <td class="text-center">${capacidadPlaneada[i].semana}</td>
+            <td class="text-center">${capacidadPlaneada[
+              i
+            ].tamanioLoteLQ.toFixed(2)}</td> 
+            <td class="text-center">${capacidadPlaneada[
+              i
+            ].tamanioLoteSL.toFixed(2)}</td>
+            <td class="text-center">${capacidadPlaneada[
+              i
+            ].tamanioLoteSM.toFixed(2)}</td>
+            <td class="text-center">
+            ${
+              parseInt(capacidadPlaneada[i].tamanioLoteLQ) +
+              parseInt(capacidadPlaneada[i].tamanioLoteSL) +
+              parseInt(capacidadPlaneada[i].tamanioLoteSM)
+            }
+            </td>
           </tr>
         `
       );
