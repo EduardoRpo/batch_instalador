@@ -52,14 +52,8 @@ class PlanPrePlaneadosDao extends estadoInicialDao
     {
         $formulas = $this->findCountFormula($granel);
         $instructivos = $this->findCountInstructivo($granel);
-
         $result = $formulas * $instructivos;
-
-        if ($result == 0)
-            $estado = 0;
-        else
-            $estado = 1;
-
+        $result == 0 ? $estado = 0 : $estado = 1;
         return $estado;
     }
 
