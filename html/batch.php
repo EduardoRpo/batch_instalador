@@ -210,6 +210,7 @@ include_once("modal/m_observaciones.php");
                                       <th>Total Liquidos(Kg)</th>
                                       <th>Total Solidos(Kg)</th>
                                       <th>Total Semi-Solidos(Kg)</th>
+                                      <th>Total (Kg)</th>
                                     </tr>
                                   </thead>
                                   <tbody id="tblCalcCapacidadPrePlaneadoBody">
@@ -301,6 +302,7 @@ include_once("modal/m_observaciones.php");
                                       <th>Total Liquidos(Kg)</th>
                                       <th>Total Solidos(Kg)</th>
                                       <th>Total Semi-Solidos(Kg)</th>
+                                      <th>Total (Kg)</th>
                                     </tr>
                                   </thead>
                                   <tbody id="tblCalcCapacidadPlaneadaBody">
@@ -351,6 +353,7 @@ include_once("modal/m_observaciones.php");
                                       <th>Total Liquidos(Kg)</th>
                                       <th>Total Solidos(Kg)</th>
                                       <th>Total Semi-Solidos(Kg)</th>
+                                      <th>Total (Kg)</th>
                                     </tr>
                                   </thead>
                                   <tbody id="tblCalcCapacidadProgramadaBody">
