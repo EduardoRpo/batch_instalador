@@ -11,7 +11,7 @@ $(document).ready(function () {
 
   loadTblCapacidadPlaneada = (data) => {
     semana = sessionStorage.getItem('semana');
-    capacidadPlaneada = calcTamanioLoteBySemana(data, parseInt(semana));
+    let capacidadPlaneada = calcTamanioLoteBySemana(data, parseInt(semana));
 
     let rowPlaneados = document.getElementById('tblCalcCapacidadPlaneadaBody');
 
@@ -31,11 +31,11 @@ $(document).ready(function () {
               i
             ].tamanioLoteSM.toFixed(2)}</td>
             <td class="text-center">
-            ${
-              parseInt(capacidadPlaneada[i].tamanioLoteLQ) +
-              parseInt(capacidadPlaneada[i].tamanioLoteSL) +
-              parseInt(capacidadPlaneada[i].tamanioLoteSM)
-            }
+            ${(
+              capacidadPlaneada[i].tamanioLoteLQ +
+              capacidadPlaneada[i].tamanioLoteSL +
+              capacidadPlaneada[i].tamanioLoteSM
+            ).toFixed(2)}
             </td>
           </tr>
         `
@@ -51,19 +51,29 @@ $(document).ready(function () {
         url: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json',
       },
     });
+
+    setTimeout(alignTHeader, 4000);
   };
+
+  function alignTHeader() {
+    let tables = document.getElementsByClassName('dataTables_scrollHeadInner');
+
+    for (i = 0; i <= 2; i++) {
+      let attr = tables[i].firstElementChild;
+      attr.style.width = '892px';
+    }
+  }
 
   tablaBatchPlaneados = $('#tablaBatchPlaneados').DataTable({
     pageLength: 50,
     responsive: true,
     scrollCollapse: true,
-    language: { url: '../../../admin/sistema/admin_componentes/es-ar.json' },
+    language: {
+      url: '../../../admin/sistema/admin_componentes/es-ar.json',
+    },
     oSearch: { bSmart: false },
 
-    ajax: {
-      url: '/api/batchPlaneados',
-      dataSrc: '',
-    },
+    ajax: { url: '/api/batchPlaneados', dataSrc: '' },
     order: [[2, 'asc']],
     columns: [
       {

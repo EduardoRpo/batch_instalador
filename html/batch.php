@@ -47,41 +47,28 @@ include_once("modal/m_observaciones.php");
     </div>
     <div id="main-wrapper">
       <?php include('./partials/header.php'); ?>
-
-      <div class="contenedorPrincipal">
-
-        <div class="tituloProceso">
+      <div class="mt-4 row">
+        <div class="col-9">
           <h1 class="text-themecolor"><b>Batch Record</b></h1>
         </div>
-        <div class="botones-group">
+        <div class="col-xs-2">
           <div class="dropdown btn-acciones">
             <button class="btn btn-secondary dropdown-toggle " style="background-color:#fff;color:#FF8D6D; border-color:#FF8D6D;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <!-- <a class="dropdown-item" href="#" onclick="multipresentacion()"><i class="fa fa-superscript"></i> Multipresentación</a> -->
-              <?php if ($_SESSION['rol'] != 6) {  ?>
-                <a class="dropdown-item" href="#" onclick="clonar()"><i class="fa fa-clone"></i> Clonar</a>
-                <a class="dropdown-item" href="#" onclick="batchEliminados()"><i class="fa fa-eraser"></i> Batch Eliminados</a>
-                <a class="dropdown-item pdf" href="#"><i class="fa fa-download"></i> Imprimir PDF</a>
-              <?php } ?>
-              <?php if ($_SESSION['rol'] == 6 or $_SESSION['rol'] == 1) {  ?>
-                <a class="dropdown-item" href="#" id="btnCargarExcelPedidos"><i class="fa fa-download"></i> Pedidos</a>
-              <?php } ?>
+              <a class="dropdown-item" href="#" onclick="clonar()"><i class="fa fa-clone"></i> Clonar</a>
+              <a class="dropdown-item" href="#" onclick="batchEliminados()"><i class="fa fa-eraser"></i> Batch Eliminados</a>
+              <a class="dropdown-item pdf" href="#"><i class="fa fa-download"></i> Imprimir PDF</a>
+              <a class="dropdown-item" href="#" id="btnCargarExcelPedidos"><i class="fa fa-download"></i> Pedidos</a>
               <a class="dropdown-item" href="#" id="btnLimpiarFirmas"><i class="fa fa-refresh"></i> Limpiar Firmas</a>
             </div>
           </div>
-
-          <!-- ambos botones tienen hidden-sm-down -->
-          <!-- <button type="button" class="btn waves-effect waves-light btn-danger btn-filtrar" style="background-color:#fff;color:#FF8D6D" onclick="filtrarfechas()">
-              Filtrar
-            </button> -->
-          <?php if ($_SESSION['rol'] != 6) {  ?>
-            <button type="button" class="btn waves-effect waves-light btn-danger btn-crearbatch" onclick="mostrarModal();">
-              <strong>Crear Batch Record</strong>
-            </button>
-
         </div>
-
-      <?php } ?>
+        <div class="col">
+          <button type="button" class="btn waves-effect waves-light btn-danger btn-crearbatch" onclick="mostrarModal();">
+            <strong>Crear Batch Record</strong>
+          </button>
+        </div>
       </div>
     </div>
 

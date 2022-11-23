@@ -20,11 +20,18 @@ $app->post('/programPlan', function (Request $request, Response $response, $args
     $dataPedidos = $request->getParsedBody();
     $dataPedidos = $dataPedidos['data'];
 
-    $_SESSION['dataPedidos'] = $dataPedidos;
-
     $dataPedidosGranel = $planeacionDao->setDataPedidos($dataPedidos);
 
     $dataPedidosLotes = $planPedidosDao->checkTamanioLote($dataPedidosGranel);
+
+    /* Guardar dataPedidos */
+    for ($i = 0; $i < sizeof($dataPedidosLotes); $i++) {
+        foreach ($dataPedidosLotes[$i]['multi'] as $array) {
+            $dataSPedidos[$i] = $array;
+        }
+    }
+
+    $_SESSION['dataPedidos'] = $dataSPedidos;
 
     $_SESSION['dataGranel'] = $dataPedidosLotes;
 

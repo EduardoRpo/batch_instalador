@@ -11,7 +11,7 @@ $(document).ready(function () {
 
   loadTblCapacidadPrePlaneada = (data) => {
     semana = sessionStorage.getItem('semana');
-    capacidadPrePlaneada = calcTamanioLoteBySemana(data, parseInt(semana));
+    let capacidadPrePlaneada = calcTamanioLoteBySemana(data, parseInt(semana));
 
     let rowPrePlaneados = document.getElementById(
       'tblCalcCapacidadPrePlaneadoBody'
@@ -22,16 +22,29 @@ $(document).ready(function () {
         'beforeend',
         `
         <tr class="rows" id="row-${i}">
-          <td>${capacidadPrePlaneada[i].semana}</td>
-          <td>${capacidadPrePlaneada[i].tamanioLoteLQ.toFixed(2)}</td> 
-          <td>${capacidadPrePlaneada[i].tamanioLoteSL.toFixed(2)}</td>
-          <td>${capacidadPrePlaneada[i].tamanioLoteSM.toFixed(2)}</td>
+          <td class="text-center">${capacidadPrePlaneada[i].semana}</td>
+          <td class="text-center">${capacidadPrePlaneada[
+            i
+          ].tamanioLoteLQ.toFixed(2)}</td> 
+          <td class="text-center">${capacidadPrePlaneada[
+            i
+          ].tamanioLoteSL.toFixed(2)}</td>
+          <td class="text-center">${capacidadPrePlaneada[
+            i
+          ].tamanioLoteSM.toFixed(2)}</td>
+          <td class="text-center">
+            ${(
+              capacidadPrePlaneada[i].tamanioLoteLQ +
+              capacidadPrePlaneada[i].tamanioLoteSL +
+              capacidadPrePlaneada[i].tamanioLoteSM
+            ).toFixed(2)}
+            </td>
         </tr>
         `
       );
     }
 
-    tblCalcCapacidadPrePlaneado = $('#tblCalcCapacidadPrePlaneado').DataTable({
+    $('#tblCalcCapacidadPrePlaneado').DataTable({
       scrollY: '130px',
       scrollCollapse: true,
       searching: false,

@@ -13,7 +13,7 @@ $(document).ready(function () {
   loadTblCapacidadProgramados = (data) => {
     semana = sessionStorage.getItem('semana');
 
-    capacidadProgramada = calcTamanioLoteBySemanaProgramados(
+    let capacidadProgramada = calcTamanioLoteBySemanaProgramados(
       data,
       parseInt(semana)
     );
@@ -27,10 +27,23 @@ $(document).ready(function () {
         'beforeend',
         `
         <tr>
-          <td>${capacidadProgramada[i].semana}</td>
-          <td>${capacidadProgramada[i].tamanioLoteLQ.toFixed(2)}</td> 
-          <td>${capacidadProgramada[i].tamanioLoteSL.toFixed(2)}</td>
-          <td>${capacidadProgramada[i].tamanioLoteSM.toFixed(2)}</td>
+          <td class="text-center">${capacidadProgramada[i].semana}</td>
+          <td class="text-center">${capacidadProgramada[
+            i
+          ].tamanioLoteLQ.toFixed(2)}</td> 
+          <td class="text-center">${capacidadProgramada[
+            i
+          ].tamanioLoteSL.toFixed(2)}</td>
+          <td class="text-center">${capacidadProgramada[
+            i
+          ].tamanioLoteSM.toFixed(2)}</td>
+          <td class="text-center">
+            ${(
+              capacidadProgramada[i].tamanioLoteLQ +
+              capacidadProgramada[i].tamanioLoteSL +
+              capacidadProgramada[i].tamanioLoteSM
+            ).toFixed(2)}
+            </td>
         </tr>
         `
       );
