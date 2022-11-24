@@ -48,8 +48,8 @@ include_once("modal/m_observaciones.php");
     <div id="main-wrapper">
       <?php include('./partials/header.php'); ?>
 
-      <div class="contenedorPrincipalBatch">
-        <div class="tituloProceso">
+      <div class="row mt-4">
+        <div class="tituloProceso col-9">
           <h1 class="text-themecolor"><b>Batch Record</b></h1>
         </div>
         <div class="col-xs-2">
@@ -69,6 +69,8 @@ include_once("modal/m_observaciones.php");
           <!-- <button type="button" class="btn waves-effect waves-light btn-danger btn-filtrar" style="background-color:#fff;color:#FF8D6D" onclick="filtrarfechas()">
               Filtrar
             </button> -->
+        </div>
+        <div class="col">
           <?php if ($_SESSION['rol'] != 6) {  ?>
             <button type="button" class="btn waves-effect waves-light btn-danger btn-crearbatch" onclick="mostrarModal();">
               <strong>Crear Batch Record</strong>

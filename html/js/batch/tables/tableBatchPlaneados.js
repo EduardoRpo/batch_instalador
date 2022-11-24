@@ -51,18 +51,7 @@ $(document).ready(function () {
         url: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json',
       },
     });
-
-    setTimeout(alignTHeader, 4000);
   };
-
-  function alignTHeader() {
-    let tables = document.getElementsByClassName('dataTables_scrollHeadInner');
-
-    for (i = 0; i <= 2; i++) {
-      let attr = tables[i].firstElementChild;
-      attr.style.width = '892px';
-    }
-  }
 
   tablaBatchPlaneados = $('#tablaBatchPlaneados').DataTable({
     pageLength: 50,
