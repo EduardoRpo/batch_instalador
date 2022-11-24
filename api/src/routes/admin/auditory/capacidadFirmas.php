@@ -17,7 +17,7 @@ $app->get('/validacionFirmas', function (Request $request, Response $response, $
     // if (sizeof($batch) >= 1 && $batch['estado'] != 0) {
     // for ($i = 0; $i < sizeof($batch); $i++) {
     /* Validacion firmas gestionadas */
-    $firmas = [];
+    //$firmas = [];
 
     //$fecha_hoy = date("Y-m-d");
     $mDate = new DateTime('now', new DateTimeZone('America/Bogota'));
