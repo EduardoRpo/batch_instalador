@@ -19,17 +19,18 @@ class ValidacionFirmasDao extends ControlFirmasMultiDao
     public function findDesinfectanteByDate($fecha_hoy)
     {
         $connection = Connection::getInstance()->getConnection();
-
-        $stmt = $connection->prepare("SELECT batch FROM batch_desinfectante_seleccionado 
-                                      WHERE fecha_registro LIKE '$fecha_hoy%' GROUP BY batch");
+        $sql = "SELECT batch FROM batch_desinfectante_seleccionado 
+                WHERE fecha_registro LIKE '%$fecha_hoy%' GROUP BY batch";
+        $stmt = $connection->prepare($sql);
         $stmt->execute();
         $batchsDS = $stmt->fetchAll($connection::FETCH_ASSOC);
 
-
-        foreach ($batchsDS as $arr) {
-            $stmt = $connection->prepare("SELECT realizo, verifico, batch, modulo FROM batch_desinfectante_seleccionado 
-                                      WHERE batch = :batch");
-            $stmt->execute(['fecha' => $arr['bacth']]);
+        for ($i = 0; $i < sizeof($batchsDS); $i++) {
+            $sql = "SELECT realizo, verifico, batch, modulo 
+                    FROM batch_desinfectante_seleccionado 
+                    WHERE batch = :batch";
+            $stmt = $connection->prepare($sql);
+            $stmt->execute(['batch' => $batchsDS[$i]['batch']]);
             $firmas_despeje = $stmt->fetchAll($connection::FETCH_ASSOC);
 
             foreach ($firmas_despeje as $value) {
@@ -37,51 +38,52 @@ class ValidacionFirmasDao extends ControlFirmasMultiDao
                 $fmodulo = $value['modulo'];
 
                 if ($fmodulo != 9 && $fmodulo != 8) {
-                    if ($value['realizo'] > 0)
-                        $cantidad += 1;
-                    if ($value['verifico'] > 0)
-                        $cantidad += 1;
+                    $value['realizo'] > 0 ? $cantidad = 1 : $cantidad;
+                    $value['verifico'] > 0 ? $cantidad = $cantidad + 1 : $cantidad;
                 }
-                $firmas[$value['modulo']] = $cantidad;
+
+                $batchsDS[$i]['modulo'] = $fmodulo;
+                $batchsDS[$i]['cantidad'] = $cantidad;
             }
         }
 
-        return $firmas;
+        $this->validarFirmasGestionadas($batchsDS, 1);
     }
 
-    public function findFirmas2SeccionByDate($fecha_hoy, $firmas)
+    public function findFirmas2SeccionByDate($fecha_hoy)
     {
         $connection = Connection::getInstance()->getConnection();
-
-        $stmt = $connection->prepare("SELECT batch FROM batch_firmas2seccion WHERE fecha_registro LIKE '$fecha_hoy%' GROUP BY batch");
+        $sql = "SELECT batch FROM batch_firmas2seccion 
+                WHERE fecha_registro LIKE '$fecha_hoy%' GROUP BY batch";
+        $stmt = $connection->prepare($sql);
         $stmt->execute();
-        $bacthsF2S = $stmt->fetchAll($connection::FETCH_ASSOC);
+        $batchsF2S = $stmt->fetchAll($connection::FETCH_ASSOC);
 
-        foreach ($bacthsF2S as $arr) {
-            $stmt = $connection->prepare("SELECT COUNT(realizo) AS realizo, COUNT(verifico) AS verifico, batch, modulo FROM batch_firmas2seccion WHERE batch = :batch GROUP BY modulo");
-            $stmt->execute(['batch' => $arr['bacth']]);
+        for ($i = 0; $i < sizeof($batchsF2S); $i++) {
+            $sql = "SELECT realizo, verifico, batch, modulo 
+                    FROM batch_firmas2seccion WHERE batch = :batch GROUP BY modulo";
+            $stmt = $connection->prepare($sql);
+            $stmt->execute(['batch' => $batchsF2S[$i]['batch']]);
             $firmas_proceso = $stmt->fetchAll($connection::FETCH_ASSOC);
 
-
-            foreach ($firmas_proceso as $value) {
+            for ($i = 0; $i < sizeof($firmas_proceso); $i++) {
                 $cantidad = 0;
 
-                if ($value['modulo'] != 4 && $value['modulo'] != 8)
-                    $cantidad = $value['realizo'] + $value['verifico'];
-                $modulo = $value['modulo'];
-                $indice = array_key_exists($modulo, $firmas);
+                if ($firmas_proceso[$i]['modulo'] != 4 && $firmas_proceso[$i]['modulo'] != 8) {
+                    $firmas_proceso[$i]['realizo'] > 0 ? $cantidad = 1 : $cantidad = 0;
+                    $firmas_proceso[$i]['verifico'] > 0 ? $cantidad = $cantidad + 1 : $cantidad;
+                }
 
-                if ($indice)
-                    $firmas[$value['modulo']] = $firmas[$modulo] + $cantidad;
-                else
-                    $firmas[$modulo] = $cantidad;
+                $modulo = $firmas_proceso[$i]['modulo'];
+                $batchsF2S[$i]['modulo'] = $modulo;
+                $batchsF2S[$i]['cantidad'] = $cantidad;
             }
         }
 
-        return $firmas;
+        $this->validarFirmasGestionadas($batchsF2S, 2);
     }
 
-    public function findAnalisisMicrobiologicoByDate($fecha_hoy, $firmas)
+    public function findAnalisisMicrobiologicoByDate($fecha_hoy)
     {
         $connection = Connection::getInstance()->getConnection();
 
@@ -103,7 +105,7 @@ class ValidacionFirmasDao extends ControlFirmasMultiDao
                     $cantidad += 1;
 
                 $modulo = $value['modulo'];
-                $indice = array_key_exists($modulo, $firmas);
+                $indice = array_key_exists($modulo);
 
                 if ($indice)
                     $firmas[$value['modulo']] = $firmas[$modulo] + $cantidad;
@@ -225,28 +227,40 @@ class ValidacionFirmasDao extends ControlFirmasMultiDao
                 else
                     $firmas[$modulo] =  $cantidad;
             }
-
-            // Validar firmas gestionadas
-            $this->validarFirmasGestionadas($arr['batch'], $firmas);
-
-            // Validar firmas totales
-            $this->controlFirmasMulti($arr['batch']);
         }
+        // Validar firmas gestionadas
+        $this->validarFirmasGestionadas($arr['batch'], $firmas);
+
+        // Validar firmas totales
+        $this->controlFirmasMulti($arr['batch']);
     }
 
-    public function validarFirmasGestionadas($batch, $firmas)
+    public function validarFirmasGestionadas($batchs, $seccion)
     {
         $connection = Connection::getInstance()->getConnection();
 
-        foreach ($firmas as $key => $value) {
+        foreach ($batchs as $batch) {
 
-            $stmt = $connection->prepare("SELECT * FROM batch_control_firmas WHERE modulo= :modulo AND batch = :batch");
-            $stmt->execute(['batch' => $batch, 'modulo' => $key]);
+            $sql = "SELECT * FROM batch_control_firmas 
+                    WHERE modulo= :modulo AND batch = :batch";
+            $stmt = $connection->prepare($sql);
+            $stmt->execute(['batch' => $batch['batch'], 'modulo' => $batch['modulo']]);
             $controlFirmas = $stmt->fetch($connection::FETCH_ASSOC);
 
-            if ($controlFirmas['cantidad_firmas'] != $controlFirmas['total_firmas']) {
-                $stmt = $connection->prepare("UPDATE batch_control_firmas SET cantidad_firmas = :firmas WHERE modulo = :modulo and batch = :batch");
-                $stmt->execute(['batch' => $batch, 'modulo' => $key, 'firmas' => $value]);
+            if ($controlFirmas['cantidad_firmas'] != $batch['cantidad']) {
+
+                $seccion == 2
+                    ? $cantidad = $controlFirmas['cantidad_firmas'] + $batch['cantidad']
+                    : $cantidad = $batch['cantidad'];
+
+                $sql = "UPDATE batch_control_firmas SET cantidad_firmas = :firmas 
+                        WHERE modulo = :modulo and batch = :batch";
+                $stmt = $connection->prepare($sql);
+                $stmt->execute([
+                    'batch' => $batch['batch'],
+                    'modulo' => $batch['modulo'],
+                    'firmas' => $cantidad
+                ]);
             }
         }
     }

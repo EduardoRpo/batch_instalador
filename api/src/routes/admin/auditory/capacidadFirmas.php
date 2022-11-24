@@ -19,35 +19,27 @@ $app->get('/validacionFirmas', function (Request $request, Response $response, $
     /* Validacion firmas gestionadas */
     $firmas = [];
 
-    $fecha_hoy = date("Y-m-d");
+    //$fecha_hoy = date("Y-m-d");
+    $mDate = new DateTime('now', new DateTimeZone('America/Bogota'));
+    $fecha_hoy = $mDate->format("Y") . '-' . $mDate->format("m") . '-' . $mDate->format("d");
 
-    // Consultar desinfectante
-    $firmas = $controlFirmasDao->findDesinfectanteByDate($fecha_hoy);
+    // Consultar firmas y cantidad y actualizar en la tbl de control
+    $resp = $controlFirmasDao->findDesinfectanteByDate($fecha_hoy);
+    $resp = $controlFirmasDao->findFirmas2SeccionByDate($fecha_hoy);
+    $resp = $controlFirmasDao->findConciliacionRendimientoByDate($fecha_hoy);
+    $resp = $controlFirmasDao->findMaterialSobranteByDate($fecha_hoy);
+    $resp = $controlFirmasDao->findAnalisisMicrobiologicoByDate($fecha_hoy);
+    $resp = $controlFirmasDao->findLiberacionByDate($fecha_hoy);
 
-    // Consultar firmas2Seccion
-    $firmas = $controlFirmasDao->findFirmas2SeccionByDate($fecha_hoy, $firmas);
+    //Actualizar firmas gestionadas    
 
-    // Consultar Analisis Microbiologico
-    $firmas = $controlFirmasDao->findAnalisisMicrobiologicoByDate($fecha_hoy, $firmas);
-
-    // Consultar Conciliacion Rendimiento
-    $firmas = $controlFirmasDao->findConciliacionRendimientoByDate($fecha_hoy, $firmas);
-
-    // Consultar Material Sobrante
-    $firmas = $controlFirmasDao->findMaterialSobranteByDate($fecha_hoy, $firmas);
-
-    // Consultar Liberacion
-    $resolution = $controlFirmasDao->findLiberacionByDate($fecha_hoy, $firmas);
-
-
-
-    // $firmasGestionadas = $controlFirmasDao->validarFirmasGestionadas($batch[$i]['id_batch'], $firmas);
+    //$firmasGestionadas = $controlFirmasDao->validarFirmasGestionadas($batch[$i]['id_batch'], $firmas);
 
     //Validacion firmas totales
-    // $firmasTotales = $controlFirmasMultiDao->controlFirmasMulti($batch[$i]['id_batch']);
+    //$firmasTotales = $controlFirmasMultiDao->controlFirmasMulti($batch[$i]['id_batch']);
     // }
 
-    if ($resolution == null)
+    if ($resp == null)
         $resp = array('success' => true, 'message' => 'Validación de firmas del dia se ejecuto correctamente');
     else
         $resp = array('error' => true, 'message' => 'Ocurrio un error mientras se validaba la información. Intente nuevamente');
