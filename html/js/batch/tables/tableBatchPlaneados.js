@@ -15,7 +15,7 @@ $(document).ready(function () {
 
     let rowPlaneados = document.getElementById('tblCalcCapacidadPlaneadaBody');
 
-    for (i = 0; i < 12; i++) {
+    for (i = 0; i < capacidadPlaneada.length; i++) {
       rowPlaneados.insertAdjacentHTML(
         'beforeend',
         `

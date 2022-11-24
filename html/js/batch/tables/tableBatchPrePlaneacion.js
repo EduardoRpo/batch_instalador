@@ -17,7 +17,7 @@ $(document).ready(function () {
       'tblCalcCapacidadPrePlaneadoBody'
     );
 
-    for (i = 0; i < 12; i++) {
+    for (i = 0; i < capacidadPrePlaneada.length; i++) {
       rowPrePlaneados.insertAdjacentHTML(
         'beforeend',
         `
@@ -59,12 +59,14 @@ $(document).ready(function () {
     let capacidad = [];
 
     for (i = 0; i < 12; i++) {
-      capacidad.push({
-        semana: semana + i,
-        tamanioLoteLQ: 0,
-        tamanioLoteSM: 0,
-        tamanioLoteSL: 0,
-      });
+      if (semana + i <= 52)
+        capacidad.push({
+          semana: semana + i,
+          tamanioLoteLQ: 0,
+          tamanioLoteSM: 0,
+          tamanioLoteSL: 0,
+        });
+      else break;
     }
 
     for (i = 0; i < data.length; i++) {
