@@ -200,6 +200,7 @@ include_once("modal/m_observaciones.php");
                               <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadPrePlaneado" style="width: 100%;">
                                 <thead>
                                   <tr>
+                                    <th style="display: none">No</th>
                                     <th>Semana</th>
                                     <th>Total Liquidos(Kg)</th>
                                     <th>Total Solidos(Kg)</th>
@@ -292,6 +293,7 @@ include_once("modal/m_observaciones.php");
                               <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadPlaneada" style="width: 100%;">
                                 <thead>
                                   <tr>
+                                    <th style="display: none">No</th>
                                     <th>Semana</th>
                                     <th>Total Liquidos(Kg)</th>
                                     <th>Total Solidos(Kg)</th>
@@ -343,6 +345,7 @@ include_once("modal/m_observaciones.php");
                               <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadProgramada" style="width: 100%">
                                 <thead>
                                   <tr>
+                                    <th style="display: none">No</th>
                                     <th>Semana</th>
                                     <th>Total Liquidos(Kg)</th>
                                     <th>Total Solidos(Kg)</th>

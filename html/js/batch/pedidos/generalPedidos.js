@@ -180,6 +180,7 @@ $(document).ready(function () {
         }
         $('#tblCalcCapacidadPrePlaneadoBody').empty();
         getDataPrePlaneacion();
+        setTimeout(alignTHeader, 2000);
       },
     });
   };

@@ -71,7 +71,7 @@ sesiones(5);
         </div>
 
         <div class="row">
-            <div class="col-md-9 align-self-center">
+            <div class="col-md-10 align-self-center">
                 <div class="card">
                     <div class="card-block">
                         <div class="payment-of-tax">
@@ -79,6 +79,7 @@ sesiones(5);
                                 <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadEnvasado" style="width: 100%;">
                                     <thead>
                                         <tr>
+                                            <th rowspan="2" style="display: none">No</th>
                                             <th rowspan="2">S</th>
                                             <th colspan="3">LQ</th>
                                             <th rowspan="2">Total Kg</th>
@@ -87,7 +88,7 @@ sesiones(5);
                                             <th colspan="3">SM</th>
                                             <th rowspan="2">Total Kg</th>
                                         </tr>
-                                        <tr style="width:10%;">
+                                        <tr style="width:10%">
                                             <th>T1</th>
                                             <th>T2</th>
                                             <th>T3</th>

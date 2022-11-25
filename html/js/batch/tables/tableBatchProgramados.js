@@ -27,22 +27,35 @@ $(document).ready(function () {
         'beforeend',
         `
         <tr>
+          <td style="display: none">${i + 1}</td>
           <td class="text-center">${capacidadProgramada[i].semana}</td>
           <td class="text-center">${capacidadProgramada[
             i
-          ].tamanioLoteLQ.toFixed(2)}</td> 
+          ].tamanioLoteLQ.toLocaleString(undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}</td> 
           <td class="text-center">${capacidadProgramada[
             i
-          ].tamanioLoteSL.toFixed(2)}</td>
+          ].tamanioLoteSL.toLocaleString(undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}</td>
           <td class="text-center">${capacidadProgramada[
             i
-          ].tamanioLoteSM.toFixed(2)}</td>
+          ].tamanioLoteSM.toLocaleString(undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}</td>
           <td class="text-center">
             ${(
               capacidadProgramada[i].tamanioLoteLQ +
               capacidadProgramada[i].tamanioLoteSL +
               capacidadProgramada[i].tamanioLoteSM
-            ).toFixed(2)}
+            ).toLocaleString(undefined, {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
             </td>
         </tr>
         `
@@ -61,14 +74,14 @@ $(document).ready(function () {
     setTimeout(alignTHeader, 5000);
   };
 
-  function alignTHeader() {
+  alignTHeader = () => {
     let tables = document.getElementsByClassName('dataTables_scrollHeadInner');
 
     for (i = 0; i <= 2; i++) {
       let attr = tables[i].firstElementChild;
       attr.style.width = '892px';
     }
-  }
+  };
 
   calcTamanioLoteBySemanaProgramados = (data, semana) => {
     let capacidad = [];
@@ -77,6 +90,17 @@ $(document).ready(function () {
       if (semana + i <= 52)
         capacidad.push({
           semana: semana + i,
+          tamanioLoteLQ: 0,
+          tamanioLoteSM: 0,
+          tamanioLoteSL: 0,
+        });
+      else break;
+    }
+
+    for (i = 1; i < 12; i++) {
+      if (capacidad.length < 12)
+        capacidad.push({
+          semana: i,
           tamanioLoteLQ: 0,
           tamanioLoteSM: 0,
           tamanioLoteSL: 0,

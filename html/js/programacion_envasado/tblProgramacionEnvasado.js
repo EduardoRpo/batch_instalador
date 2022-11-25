@@ -19,6 +19,7 @@ $(document).ready(function () {
         'beforeend',
         `
         <tr>
+          <td style="display: none">${i + 1}</td>
           <td>${data[i].semana}</td>
           <td style="width:10%;">${data[i].plan_liquido_1} %</td>
           <td style="width:10%;">${data[i].plan_liquido_2} %</td>
@@ -41,6 +42,7 @@ $(document).ready(function () {
       scrollY: '130px',
       scrollCollapse: true,
       paging: false,
+      searching: false,
       language: {
         url: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json',
       },

@@ -182,5 +182,7 @@ $(document).ready(function () {
     await getDataPrePlaneacion();
     api = '/api/batchPlaneados';
     await getDataPlaneacion();
+
+    setTimeout(alignTHeader, 2000);
   };
 });

@@ -20,7 +20,11 @@ $(document).ready(function () {
     correccion = 6 - primerdia.getDay();
 
     // obtenemos el lunes y domingo de la semana especificada
-    primer = new Date(date.getFullYear(), 0, (semana - 1) * 7 + 3 + correccion);
+    semana < semanaActual
+      ? (year = date.getFullYear() + 1)
+      : (year = date.getFullYear());
+
+    primer = new Date(year, 0, (semana - 1) * 7 + 3 + correccion);
 
     if (primer <= date) {
       primer.setDate(date.getDate() + 1);

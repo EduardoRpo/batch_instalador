@@ -20,22 +20,35 @@ $(document).ready(function () {
         'beforeend',
         `
           <tr>
+            <td style="display: none">${i + 1}</td>
             <td class="text-center">${capacidadPlaneada[i].semana}</td>
             <td class="text-center">${capacidadPlaneada[
               i
-            ].tamanioLoteLQ.toFixed(2)}</td> 
+            ].tamanioLoteLQ.toLocaleString(undefined, {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}</td> 
             <td class="text-center">${capacidadPlaneada[
               i
-            ].tamanioLoteSL.toFixed(2)}</td>
+            ].tamanioLoteSL.toLocaleString(undefined, {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}</td>
             <td class="text-center">${capacidadPlaneada[
               i
-            ].tamanioLoteSM.toFixed(2)}</td>
+            ].tamanioLoteSM.toLocaleString(undefined, {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}</td>
             <td class="text-center">
             ${(
               capacidadPlaneada[i].tamanioLoteLQ +
               capacidadPlaneada[i].tamanioLoteSL +
               capacidadPlaneada[i].tamanioLoteSM
-            ).toFixed(2)}
+            ).toLocaleString(undefined, {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
             </td>
           </tr>
         `

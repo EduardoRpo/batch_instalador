@@ -22,22 +22,35 @@ $(document).ready(function () {
         'beforeend',
         `
         <tr class="rows" id="row-${i}">
+          <td style="display: none">${i + 1}</td>
           <td class="text-center">${capacidadPrePlaneada[i].semana}</td>
           <td class="text-center">${capacidadPrePlaneada[
             i
-          ].tamanioLoteLQ.toFixed(2)}</td> 
+          ].tamanioLoteLQ.toLocaleString(undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}</td> 
           <td class="text-center">${capacidadPrePlaneada[
             i
-          ].tamanioLoteSL.toFixed(2)}</td>
+          ].tamanioLoteSL.toLocaleString(undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}</td>
           <td class="text-center">${capacidadPrePlaneada[
             i
-          ].tamanioLoteSM.toFixed(2)}</td>
+          ].tamanioLoteSM.toLocaleString(undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}</td>
           <td class="text-center">
             ${(
               capacidadPrePlaneada[i].tamanioLoteLQ +
               capacidadPrePlaneada[i].tamanioLoteSL +
               capacidadPrePlaneada[i].tamanioLoteSM
-            ).toFixed(2)}
+            ).toLocaleString(undefined, {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
             </td>
         </tr>
         `
@@ -62,6 +75,17 @@ $(document).ready(function () {
       if (semana + i <= 52)
         capacidad.push({
           semana: semana + i,
+          tamanioLoteLQ: 0,
+          tamanioLoteSM: 0,
+          tamanioLoteSL: 0,
+        });
+      else break;
+    }
+
+    for (i = 1; i < 12; i++) {
+      if (capacidad.length < 12)
+        capacidad.push({
+          semana: i,
           tamanioLoteLQ: 0,
           tamanioLoteSM: 0,
           tamanioLoteSL: 0,
@@ -224,12 +248,12 @@ $(document).ready(function () {
     `);
     $('.rows').css('display', '');
 
-    dataCPreplaneacion = tblCalcCapacidadPrePlaneado.rows().data().toArray();
-    for (i = 0; i < dataCPreplaneacion.length; i++) {
-      if (dataCPreplaneacion[i][0] != semana) {
-        $(`#row-${i}`).css('display', 'none');
-      }
-    }
+    // dataCPreplaneacion = tblCalcCapacidadPrePlaneado.rows().data().toArray();
+    // for (i = 0; i < dataCPreplaneacion.length; i++) {
+    //   if (dataCPreplaneacion[i][0] != semana) {
+    //     $(`#row-${i}`).css('display', 'none');
+    //   }
+    // }
   });
 
   /* Calcular primera y ultima fecha de la semana */
