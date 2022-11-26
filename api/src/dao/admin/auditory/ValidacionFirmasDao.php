@@ -39,6 +39,7 @@ class ValidacionFirmasDao extends ControlFirmasMultiDao
             $batchsDS[$i]['cantidad'] = $cantidad;
 
             // Validar firmas totales
+            $this->controlCantidadFirmas($batchsDS[$i]['batch']);
             $this->controlFirmasMulti($batchsDS[$i]['batch']);
         }
 

@@ -61,7 +61,9 @@ include_once("modal/m_observaciones.php");
               <a class="dropdown-item" href="#" onclick="batchEliminados()"><i class="fa fa-eraser"></i> Batch Eliminados</a>
               <a class="dropdown-item pdf" href="#"><i class="fa fa-download"></i> Imprimir PDF</a>
               <a class="dropdown-item" href="#" id="btnCargarExcelPedidos"><i class="fa fa-download"></i> Pedidos</a>
-              <a class="dropdown-item" href="#" id="btnLimpiarFirmas"><i class="fa fa-refresh"></i> Limpiar Firmas</a>
+              <?php if ($_SESSION['rol'] == 1) {  ?>
+                <a class="dropdown-item" href="#" id="btnLimpiarFirmas"><i class="fa fa-refresh"></i> Limpiar Firmas</a>
+              <?php } ?>
             </div>
           </div>
 

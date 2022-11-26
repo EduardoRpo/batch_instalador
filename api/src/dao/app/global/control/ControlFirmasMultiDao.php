@@ -17,6 +17,28 @@ class ControlFirmasMultiDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
+    public function controlCantidadFirmas($batch)
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        for ($i = 2; $i < 11; $i++) {
+            if ($i == 2 || $i == 3) $total_firmas = 4;
+            if ($i == 4 || $i == 9) $total_firmas = 2;
+            if ($i == 10) $total_firmas = 3;
+
+            if ($i > 4 && $i < 9) {
+                $sql = "UPDATE batch_control_firmas SET total_firmas = :total_firmas 
+                        WHERE batch = :batch AND modulo = :modulo";
+                $query = $connection->prepare($sql);
+                $query->execute([
+                    'total_firmas' => $total_firmas,
+                    'batch' => $batch,
+                    'modulo' => $i
+                ]);
+            }
+        }
+    }
+
     public function controlFirmasMulti($batch)
     {
         $connection = Connection::getInstance()->getConnection();
