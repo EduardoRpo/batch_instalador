@@ -10,8 +10,8 @@ $(document).ready(function () {
       url: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json',
     },
     order: [
-      [1, 'asc'],
-      [2, 'asc'],
+      // [1, 'asc'],
+      // [2, 'asc'],
     ],
     columns: [
       {
@@ -127,9 +127,9 @@ $(document).ready(function () {
     },
   });
 
-  $(document).on('click', '.toggle-vis', function (e) {
-    e.preventDefault();
-    column = tablaPedidos.column(this.id);
-    column.visible(!column.visible());
-  });
+  // $(document).on('click', '.toggle-vis', function (e) {
+  //   e.preventDefault();
+  //   let column = tablaPedidos.column(this.id);
+  //   column.visible(!column.visible());
+  // });
 });

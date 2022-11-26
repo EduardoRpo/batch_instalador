@@ -44,26 +44,42 @@ class PlanPedidosDao
         $stmt->execute();
     }
 
-    public function updateEMPedidosRegistro()
+    public function updateEMPedidosRegistro($dataPedido, $pedido)
     {
         $connection = Connection::getInstance()->getConnection();
-        $dataPedidos = $_SESSION['dataPedidos'];
         $fecha_actual = date("Y-m-d");
 
-        foreach ($dataPedidos as $dataPedido) {
-            $stmt = $connection->prepare("UPDATE plan_pedidos 
+
+        $stmt = $connection->prepare("UPDATE plan_pedidos 
                                           SET cantidad_acumulada = cantidad_acumulada + :cantidad_acumulada, fecha_insumo = :fecha_insumo, fecha_actual = :fecha_actual, estado = 1 
                                           WHERE pedido = :pedido AND id_producto = :referencia");
-            $stmt->execute([
-                'pedido' => $dataPedido['numPedido'],
-                'referencia' => $dataPedido['referencia'],
-                'cantidad_acumulada' => $dataPedido['cantidad_acumulada'],
-                'fecha_insumo' => $dataPedido['fecha_insumo'],
-                'fecha_actual' => $fecha_actual
-            ]);
-        }
+        $stmt->execute([
+            'pedido' => $pedido,
+            'referencia' => $dataPedido['referencia'],
+            'cantidad_acumulada' => $dataPedido['cantidad_acumulada'],
+            'fecha_insumo' => $dataPedido['fecha_insumo'],
+            'fecha_actual' => $fecha_actual
+        ]);
 
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+    }
+
+    public function checkEMPedidosRegistro()
+    {
+        $dataPedidos = $_SESSION['dataPedidos'];
+
+        foreach ($dataPedidos as $dataPedido) {
+            $pedido = $dataPedido['numPedido'];
+            //Condicional si tiene mas de un pedido
+            if (strpos($pedido, '-')) {
+                $pedido = explode(" - ", $pedido);
+                foreach ($pedido as $p) {
+                    $this->updateEMPedidosRegistro($dataPedido, $p);
+                }
+            } else {
+                $this->updateEMPedidosRegistro($dataPedido, $pedido);
+            }
+        }
     }
 
     public function checkPedidos($dataPedido)

@@ -169,20 +169,24 @@ $(document).ready(function () {
       url: '/api/addPrePlaneados',
       data: data,
       success: function (data) {
-        message(data);
-
-        pedidosProgramar.splice(0, pedidosProgramar.length);
-        deleteSession();
-        setTimeout(loadTotalVentas, 7000);
-        api = '/api/prePlaneados';
-        if ($.fn.dataTable.isDataTable('#tblCalcCapacidadPrePlaneado')) {
-          $('#tblCalcCapacidadPrePlaneado').DataTable().destroy();
-        }
-        $('#tblCalcCapacidadPrePlaneadoBody').empty();
-        getDataPrePlaneacion();
-        setTimeout(alignTHeader, 2000);
+        generalPedidos(data);
       },
     });
+  };
+
+  generalPedidos = async (data) => {
+    await message(data);
+
+    pedidosProgramar.splice(0, pedidosProgramar.length);
+    await deleteSession();
+    setTimeout(loadTotalVentas, 7000);
+    api = '/api/prePlaneados';
+    if ($.fn.dataTable.isDataTable('#tblCalcCapacidadPrePlaneado')) {
+      $('#tblCalcCapacidadPrePlaneado').DataTable().destroy();
+    }
+    $('#tblCalcCapacidadPrePlaneadoBody').empty();
+    await getDataPrePlaneacion();
+    setTimeout(alignTHeader, 2000);
   };
 
   // Opcion NO

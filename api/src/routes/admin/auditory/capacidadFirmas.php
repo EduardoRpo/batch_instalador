@@ -1,23 +1,34 @@
 <?php
 
-use BatchRecord\dao\ValidacionFirmasDao;
+use BatchRecord\dao\BatchDao;
+use BatchRecord\dao\validacionFirmasDao;
+use BatchRecord\dao\ControlFirmasMultiDao;
 
-$controlFirmasDao = new ValidacionFirmasDao();
+$validacionFirmasDao = new ValidacionFirmasDao();
+$batchDao = new BatchDao();
+$controlFirmasMultiDao = new ControlFirmasMultiDao();
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-$app->get('/validacionFirmas', function (Request $request, Response $response, $args) use ($controlFirmasDao) {
-    $mDate = new DateTime('now', new DateTimeZone('America/Bogota'));
-    $fecha_hoy = $mDate->format("Y") . '-' . $mDate->format("m") . '-' . $mDate->format("d");
+$app->post('/validacionFirmas', function (Request $request, Response $response, $args) use ($batchDao, $validacionFirmasDao, $controlFirmasMultiDao) {
+    $dataBatch = $request->getParsedBody();
+    // Consultar batchs
+    $batchs = $batchDao->findBatchByMinAndMax($dataBatch);
 
-    // Consultar firmas y cantidad y actualizar en la tbl de control
-    $resp = $controlFirmasDao->findDesinfectanteByDate($fecha_hoy);
-    $resp = $controlFirmasDao->findFirmas2SeccionByDate($fecha_hoy);
-    $resp = $controlFirmasDao->findConciliacionRendimientoByDate($fecha_hoy);
-    $resp = $controlFirmasDao->findMaterialSobranteByDate($fecha_hoy);
-    $resp = $controlFirmasDao->findAnalisisMicrobiologicoByDate($fecha_hoy);
-    $resp = $controlFirmasDao->findLiberacionByDate($fecha_hoy);
+    for ($i = 0; $i < sizeof($batchs); $i++) {
+        // Consultar firmas y cantidad y actualizar en la tbl de control
+        $resp = $validacionFirmasDao->findDesinfectanteByDate($batchs[$i]['id_batch']);
+        $resp = $validacionFirmasDao->findFirmas2SeccionByDate($batchs[$i]['id_batch']);
+        $resp = $validacionFirmasDao->findConciliacionRendimientoByDate($batchs[$i]['id_batch']);
+        $resp = $validacionFirmasDao->findMaterialSobranteByDate($batchs[$i]['id_batch']);
+        $resp = $validacionFirmasDao->findAnalisisMicrobiologicoByDate($batchs[$i]['id_batch']);
+        $resp = $validacionFirmasDao->findLiberacionByDate($batchs[$i]['id_batch']);
+
+        // Validar firmas totales
+        $resp = $controlFirmasMultiDao->controlFirmasMulti($batchs[$i]['id_batch']);
+        $resp = $controlFirmasMultiDao->controlCantidadFirmas($batchs[$i]['id_batch']);
+    }
 
     if ($resp == null)
         $resp = array('success' => true, 'message' => 'Validación de firmas del dia se ejecuto correctamente');

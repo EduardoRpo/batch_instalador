@@ -125,7 +125,7 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
       }
     }
   }
-  $resp = $EMPedidosRegistroDao->updateEMPedidosRegistro();
+  $resp = $EMPedidosRegistroDao->checkEMPedidosRegistro();
 
   /* Notificaciones*/
   if ($resp == null && $dataBatch[0]['ref'])

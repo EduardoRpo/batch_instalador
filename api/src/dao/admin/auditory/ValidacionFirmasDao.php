@@ -5,9 +5,8 @@ namespace BatchRecord\dao;
 use BatchRecord\Constants\Constants;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger;
-use Sabberworm\CSS\Value\Size;
 
-class ValidacionFirmasDao extends ControlFirmasMultiDao
+class ValidacionFirmasDao
 {
     private $logger;
 
@@ -17,13 +16,12 @@ class ValidacionFirmasDao extends ControlFirmasMultiDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
-    public function findDesinfectanteByDate($fecha_hoy)
+    public function findDesinfectanteByDate($batch)
     {
         $connection = Connection::getInstance()->getConnection();
-        $sql = "SELECT * FROM batch_desinfectante_seleccionado 
-                WHERE fecha_registro LIKE '%$fecha_hoy%'";
+        $sql = "SELECT * FROM batch_desinfectante_seleccionado WHERE batch = :batch";
         $stmt = $connection->prepare($sql);
-        $stmt->execute();
+        $stmt->execute(['batch' => $batch]);
         $batchsDS = $stmt->fetchAll($connection::FETCH_ASSOC);
 
         for ($i = 0; $i < sizeof($batchsDS); $i++) {
@@ -37,22 +35,18 @@ class ValidacionFirmasDao extends ControlFirmasMultiDao
 
             $batchsDS[$i]['modulo'] = $fmodulo;
             $batchsDS[$i]['cantidad'] = $cantidad;
-
-            // Validar firmas totales
-            $this->controlCantidadFirmas($batchsDS[$i]['batch']);
-            $this->controlFirmasMulti($batchsDS[$i]['batch']);
         }
 
         $this->validarFirmasGestionadas($batchsDS, 1);
+        return 1;
     }
 
-    public function findFirmas2SeccionByDate($fecha_hoy)
+    public function findFirmas2SeccionByDate($batch)
     {
         $connection = Connection::getInstance()->getConnection();
-        $sql = "SELECT * FROM batch_firmas2seccion 
-                WHERE fecha_registro LIKE '$fecha_hoy%'";
+        $sql = "SELECT * FROM batch_firmas2seccion WHERE batch = :batch";
         $stmt = $connection->prepare($sql);
-        $stmt->execute();
+        $stmt->execute(['batch' => $batch]);
         $batchsF2S = $stmt->fetchAll($connection::FETCH_ASSOC);
 
         for ($i = 0; $i < sizeof($batchsF2S); $i++) {
@@ -66,20 +60,17 @@ class ValidacionFirmasDao extends ControlFirmasMultiDao
             $modulo = $batchsF2S[$i]['modulo'];
             $batchsF2S[$i]['modulo'] = $modulo;
             $batchsF2S[$i]['cantidad'] = $cantidad;
-
-            // Validar firmas totales
-            $this->controlFirmasMulti($batchsF2S[$i]['batch']);
         }
 
         $this->validarFirmasGestionadas($batchsF2S, 2);
     }
 
-    public function findAnalisisMicrobiologicoByDate($fecha_hoy)
+    public function findAnalisisMicrobiologicoByDate($batch)
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $stmt = $connection->prepare("SELECT * FROM batch_analisis_microbiologico WHERE fecha_registro LIKE '$fecha_hoy%'");
-        $stmt->execute();
+        $stmt = $connection->prepare("SELECT * FROM batch_analisis_microbiologico WHERE batch = :batch");
+        $stmt->execute(['batch' => $batch]);
         $batchsAM = $stmt->fetchAll($connection::FETCH_ASSOC);
 
         for ($i = 0; $i < sizeof($batchsAM); $i++) {
@@ -89,20 +80,17 @@ class ValidacionFirmasDao extends ControlFirmasMultiDao
                 $cantidad += 1;
 
             $batchsAM[$i]['cantidad'] = $cantidad;
-
-            // Validar firmas totales
-            $this->controlFirmasMulti($batchsAM[$i]['batch']);
         }
 
         $this->validarFirmasGestionadas($batchsAM, 1);
     }
 
-    public function findConciliacionRendimientoByDate($fecha_hoy)
+    public function findConciliacionRendimientoByDate($batch)
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $stmt = $connection->prepare("SELECT * FROM batch_conciliacion_rendimiento WHERE fecha_registro LIKE '$fecha_hoy%'");
-        $stmt->execute();
+        $stmt = $connection->prepare("SELECT * FROM batch_conciliacion_rendimiento WHERE batch = :batch");
+        $stmt->execute(['batch' => $batch]);
         $batchsCR = $stmt->fetchAll($connection::FETCH_ASSOC);
 
         for ($i = 0; $i < sizeof($batchsCR); $i++) {
@@ -112,20 +100,17 @@ class ValidacionFirmasDao extends ControlFirmasMultiDao
                 $cantidad += 1;
 
             $batchsCR[$i]['cantidad'] = $cantidad;
-
-            // Validar firmas totales
-            $this->controlFirmasMulti($batchsCR[$i]['batch']);
         }
 
         $this->validarFirmasGestionadas($batchsCR, 1);
     }
 
-    public function findMaterialSobranteByDate($fecha_hoy)
+    public function findMaterialSobranteByDate($batch)
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $stmt = $connection->prepare("SELECT * FROM batch_material_sobrante WHERE fecha_registro LIKE '$fecha_hoy%'");
-        $stmt->execute();
+        $stmt = $connection->prepare("SELECT * FROM batch_material_sobrante WHERE batch = :batch");
+        $stmt->execute(['batch' => $batch]);
         $batchMS = $stmt->fetchAll($connection::FETCH_ASSOC);
 
         for ($i = 0; $i < sizeof($batchMS); $i++) {
@@ -137,19 +122,17 @@ class ValidacionFirmasDao extends ControlFirmasMultiDao
 
                 $batchMS[$i]['cantidad'] = $cantidad;
             }
-            // Validar firmas totales
-            $this->controlFirmasMulti($batchMS[$i]['batch']);
         }
 
         $this->validarFirmasGestionadas($batchMS, 1);
     }
 
-    public function findLiberacionByDate($fecha_hoy)
+    public function findLiberacionByDate($batch)
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $stmt = $connection->prepare("SELECT * FROM batch_liberacion WHERE fecha_registro LIKE '$fecha_hoy%'");
-        $stmt->execute();
+        $stmt = $connection->prepare("SELECT * FROM batch_liberacion WHERE batch = :batch");
+        $stmt->execute(['batch' => $batch]);
         $batchL = $stmt->fetchAll($connection::FETCH_ASSOC);
 
         for ($i = 0; $i < sizeof($batchL); $i++) {
@@ -159,9 +142,6 @@ class ValidacionFirmasDao extends ControlFirmasMultiDao
                 $cantidad = $cantidad + 1;
 
             $batchL[$i]['cantidad'] = $cantidad;
-
-            // Validar firmas totales
-            $this->controlFirmasMulti($batchL[$i]['batch']);
         }
         // Validar firmas gestionadas
         $this->validarFirmasGestionadas($batchL, 1);
