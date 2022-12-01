@@ -10,8 +10,8 @@ $(document).ready(function () {
       url: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json',
     },
     order: [
-      // [1, 'asc'],
-      // [2, 'asc'],
+      [1, 'asc'],
+      [2, 'asc'],
     ],
     columns: [
       {

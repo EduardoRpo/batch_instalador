@@ -53,7 +53,7 @@ $app->post('/validacionDatosPedidos', function (Request $request, Response $resp
         if ($pedidosSinReferencia)
           $pedidosSinReferenciaDao->deletePedidosSinReferencia($dataGlobal[$i]);
 
-        $result = $preBatchDao->findOrders($dataGlobal[$i]['documento']);
+        $result = $preBatchDao->findOrders($dataGlobal[$i]);
         $result ? $update = $update + 1 : $insert = $insert + 1;
       }
     }

@@ -32,8 +32,7 @@ class PreBatchDao
         $connection = Connection::getInstance()->getConnection();
 
         $sql = "SELECT DISTINCT ROW_NUMBER() OVER (ORDER BY pp.nombre) AS num, pp.nombre AS propietario, exp.pedido, exp.fecha_pedido, exp.estado, exp.cantidad_acumulada, exp.fecha_insumo, CURRENT_DATE AS fecha_actual, (SELECT referencia FROM producto 
-                    WHERE multi = (SELECT multi FROM producto WHERE referencia = exp.id_producto)
-                    ORDER BY propietario ASC LIMIT 1) AS granel, exp.id_producto, p.nombre_referencia, exp.cant_original, exp.cantidad, exp.valor_pedido, 
+                        WHERE multi = (SELECT multi FROM producto WHERE referencia = exp.id_producto) LIMIT 1) AS granel, exp.id_producto, p.nombre_referencia, exp.cant_original, exp.cantidad, exp.valor_pedido, 
                         IFNULL(DATE_ADD(exp.fecha_insumo, INTERVAL 8 DAY),DATE_ADD(exp.fecha_pedido, INTERVAL 8 DAY)) AS fecha_pesaje, 						
                         IFNULL(DATE_ADD(exp.fecha_insumo, INTERVAL 9 DAY),DATE_ADD(exp.fecha_pedido, INTERVAL 9 DAY)) AS fecha_preparacion,
                         IFNULL(DATE_ADD(exp.fecha_insumo, INTERVAL 13 DAY),DATE_ADD(exp.fecha_pedido, INTERVAL 13 DAY)) AS envasado, 
@@ -65,13 +64,16 @@ class PreBatchDao
         return $granel;
     }
 
-    public function findOrders($order)
+    public function findOrders($dataPedidos)
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $sql = "SELECT * FROM plan_pedidos WHERE pedido = :pedido;";
+        $sql = "SELECT * FROM plan_pedidos WHERE pedido = :pedido AND id_producto = :id_producto";
         $query = $connection->prepare($sql);
-        $query->execute(['pedido' => $order]);
+        $query->execute([
+            'pedido' => trim($dataPedidos['documento']),
+            'id_producto' => trim("M-" . $dataPedidos['producto'])
+        ]);
         $result = $query->fetch($connection::FETCH_ASSOC);
         return $result;
     }
