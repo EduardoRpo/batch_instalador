@@ -5,16 +5,14 @@ $(document).ready(function () {
 
     alertify
       .confirm(
-        'Samara Cosmetics',
-        `<p>Ingrese batchs a limpiar:</p>
-        <br>
-        <div class="row">
+        'Comprobar Firmas',
+        `<div class="row">
           <div class="col">
-            <label>Batch minimo:</label>
+            <label>Batch Inicial:</label>
             <input type="number" id="minBatch" class="form-control text-center">
           </div>
           <div class="col">
-            <label>Batch maximo:</label>
+            <label>Batch Final:</label>
             <input type="number" id="maxBatch" class="form-control text-center">
           </div>
          </div>`,
@@ -30,7 +28,7 @@ $(document).ready(function () {
           if (minBatch > maxBatch) {
             alertify.set('notifier', 'position', 'top-right');
             alertify.error(
-              'El batch minimo no puede ser mayor al batch maximo'
+              'El Batch Inicial no puede ser mayor al Batch Final'
             );
             return false;
           }
@@ -47,9 +45,9 @@ $(document).ready(function () {
             },
           });
         },
-        function () {}
+        function () { }
       )
-      .set('labels', { ok: 'Guardar', cancel: 'Cancelar' })
+      .set('labels', { ok: 'Ejecutar', cancel: 'Cancelar' })
       .set({ closableByDimmer: false })
       .resizeTo(300, 300);
   });
