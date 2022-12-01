@@ -157,7 +157,7 @@ class ValidacionFirmasDao
                     WHERE modulo= :modulo AND batch = :batch";
             $stmt = $connection->prepare($sql);
             $stmt->execute(['batch' => $batch['batch'], 'modulo' => $batch['modulo']]);
-            $controlFirmas = $stmt->fetch($connection::FETCH_ASSOC);
+             $controlFirmas = $stmt->fetch($connection::FETCH_ASSOC);
 
             //if ($controlFirmas['cantidad_firmas'] != $batch['cantidad']) {
 
