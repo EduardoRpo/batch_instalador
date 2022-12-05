@@ -127,9 +127,12 @@ $(document).ready(function () {
     },
   });
 
-  // $(document).on('click', '.toggle-vis', function (e) {
-  //   e.preventDefault();
-  //   let column = tablaPedidos.column(this.id);
-  //   column.visible(!column.visible());
-  // });
+  $(document).on('click', '.toggle-vis', function (e) {
+    e.preventDefault();
+    let column = tablaPedidos.column(this.id);
+    column.visible(!column.visible());
+
+    $('#tablaPedidos').DataTable().clear();
+    $('#tablaPedidos').DataTable().ajax.reload();
+  });
 });
