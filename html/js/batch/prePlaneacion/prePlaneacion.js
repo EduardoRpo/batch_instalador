@@ -183,6 +183,6 @@ $(document).ready(function () {
     api = '/api/batchPlaneados';
     await getDataPlaneacion();
 
-    setTimeout(alignTHeader, 2000);
+    alignTHeader;
   };
 });
