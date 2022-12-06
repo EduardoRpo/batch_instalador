@@ -26,8 +26,8 @@ $app->post('/validacionFirmas', function (Request $request, Response $response, 
         $resp = $validacionFirmasDao->findLiberacionByDate($batchs[$i]['id_batch']);
 
         // Validar firmas totales
-        $resp = $controlFirmasMultiDao->controlFirmasMulti($batchs[$i]['id_batch']);
         $resp = $controlFirmasMultiDao->controlCantidadFirmas($batchs[$i]['id_batch']);
+        $resp = $controlFirmasMultiDao->controlFirmasMulti($batchs[$i]['id_batch']);
     }
 
     if ($resp == null)

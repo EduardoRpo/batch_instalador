@@ -51,7 +51,7 @@ class ControlFirmasMultiDao
             if ($i == 5) $rows_multi == 0 ? $total_firmas = 6 : $total_firmas = ($rows_multi * 4) + 2;
             if ($i == 6) $rows_multi == 0 ? $total_firmas = 7 : $total_firmas = ($rows_multi * 5) + 2;
             if ($i == 7) $rows_multi == 0 ? $total_firmas = 1 : $total_firmas = $rows_multi;
-            if ($i == 8) $rows_multi == 0 ? $total_firmas = 2 : $total_firmas = ($rows_multi * 2);
+            if ($i == 8) $rows_multi == 0 ? $total_firmas = 2 : $total_firmas = 2;
 
             $sql = "UPDATE batch_control_firmas SET total_firmas = :total_firmas WHERE batch = :batch AND modulo = :modulo";
             $query = $connection->prepare($sql);

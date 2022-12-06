@@ -154,7 +154,7 @@ include("modal/modal_condicionesMedio.php");
 
                 <div class="firmasLiberacion" style="display: flex;">
                   <div class="align-self-end">
-                    <label for="produccion_realizado" class="col-form-label">Dirección Producción</label>
+                    <label for="produccion_realizado" class="col-form-label">Dir Operaciones / Planeador</label>
                     <input type="text" class="form-control" id="produccion_realizado" readonly>
                   </div>
 
@@ -216,12 +216,12 @@ include("modal/modal_condicionesMedio.php");
   <script src="/html/js/global/auth.js"></script>
   <script src="/html/js/global/controller.js"></script>
   <script src="/html/js/global/notificaciones.js"></script>
-  
+
   <script src="/html/js/firmar/firmar1raSeccion.js"></script>
-  
+
   <script src="/html/js/liberacionlote/liberacionloteinfo.js"></script>
   <script src="/html/js/liberacionlote/validaciones.js"></script>
-  
+
 
 
 

@@ -28,7 +28,7 @@ class ValidacionFirmasDao
             $cantidad = 0;
             $fmodulo = $batchsDS[$i]['modulo'];
 
-            if ($fmodulo != 9 && $fmodulo != 8) {
+            if ($fmodulo != 4 && $fmodulo != 9 && $fmodulo != 8) {
                 $batchsDS[$i]['realizo'] > 0 ? $cantidad = 1 : $cantidad;
                 $batchsDS[$i]['verifico'] > 0 ? $cantidad = $cantidad + 1 : $cantidad;
             }
@@ -52,7 +52,7 @@ class ValidacionFirmasDao
         for ($i = 0; $i < sizeof($batchsF2S); $i++) {
             $cantidad = 0;
 
-            if ($batchsF2S[$i]['modulo'] != 4 && $batchsF2S[$i]['modulo'] != 8) {
+            if ($batchsF2S[$i]['modulo'] != 8) {
                 $batchsF2S[$i]['realizo'] > 0 ? $cantidad = 1 : $cantidad = 0;
                 $batchsF2S[$i]['verifico'] > 0 ? $cantidad = $cantidad + 1 : $cantidad;
             }
@@ -65,31 +65,12 @@ class ValidacionFirmasDao
         $this->validarFirmasGestionadas($batchsF2S, 2);
     }
 
-    public function findAnalisisMicrobiologicoByDate($batch)
-    {
-        $connection = Connection::getInstance()->getConnection();
-
-        $stmt = $connection->prepare("SELECT * FROM batch_analisis_microbiologico WHERE batch = :batch");
-        $stmt->execute(['batch' => $batch]);
-        $batchsAM = $stmt->fetchAll($connection::FETCH_ASSOC);
-
-        for ($i = 0; $i < sizeof($batchsAM); $i++) {
-            $cantidad = 0;
-
-            if ($batchsAM[$i]['realizo'] > 0 || $batchsAM[$i]['verifico'] > 0)
-                $cantidad += 1;
-
-            $batchsAM[$i]['cantidad'] = $cantidad;
-        }
-
-        $this->validarFirmasGestionadas($batchsAM, 1);
-    }
-
     public function findConciliacionRendimientoByDate($batch)
     {
         $connection = Connection::getInstance()->getConnection();
-
-        $stmt = $connection->prepare("SELECT * FROM batch_conciliacion_rendimiento WHERE batch = :batch");
+        $sql = "SELECT * FROM batch_conciliacion_rendimiento 
+                WHERE batch = :batch AND modulo = 6";
+        $stmt = $connection->prepare($sql);
         $stmt->execute(['batch' => $batch]);
         $batchsCR = $stmt->fetchAll($connection::FETCH_ASSOC);
 
@@ -102,14 +83,16 @@ class ValidacionFirmasDao
             $batchsCR[$i]['cantidad'] = $cantidad;
         }
 
-        $this->validarFirmasGestionadas($batchsCR, 1);
+        $this->validarFirmasGestionadas($batchsCR, 2);
     }
 
     public function findMaterialSobranteByDate($batch)
     {
         $connection = Connection::getInstance()->getConnection();
-
-        $stmt = $connection->prepare("SELECT * FROM batch_material_sobrante WHERE batch = :batch");
+        $sql = "SELECT DISTINCT ref_producto, modulo, batch, realizo, verifico 
+                FROM `batch_material_sobrante` 
+                WHERE batch = :batch";
+        $stmt = $connection->prepare($sql);
         $stmt->execute(['batch' => $batch]);
         $batchMS = $stmt->fetchAll($connection::FETCH_ASSOC);
 
@@ -117,14 +100,32 @@ class ValidacionFirmasDao
             $cantidad = 0;
 
             if ($batchMS[$i]['modulo'] == 5 || $batchMS[$i]['modulo'] == 6) {
-                if ($batchMS[$i]['realizo'] > 0 || $batchMS[$i]['verifico'] > 0)
-                    $cantidad += 1;
+                $batchMS[$i]['realizo'] > 0 ? $cantidad = 1 : $cantidad = 0;
+                $batchMS[$i]['verifico'] > 0 ? $cantidad = $cantidad + 1 : $cantidad;
 
                 $batchMS[$i]['cantidad'] = $cantidad;
             }
         }
 
-        $this->validarFirmasGestionadas($batchMS, 1);
+        $this->validarFirmasGestionadas($batchMS, 2);
+    }
+
+    public function findAnalisisMicrobiologicoByDate($batch)
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        $stmt = $connection->prepare("SELECT * FROM batch_analisis_microbiologico WHERE batch = :batch");
+        $stmt->execute(['batch' => $batch]);
+        $batchsAM = $stmt->fetchAll($connection::FETCH_ASSOC);
+
+        for ($i = 0; $i < sizeof($batchsAM); $i++) {
+            $cantidad = 0;
+            $batchsAM[$i]['realizo'] > 0 ? $cantidad = 1 : $cantidad = 0;
+            $batchsAM[$i]['verifico'] > 0 ? $cantidad = $cantidad + 1 : $cantidad;
+            $batchsAM[$i]['cantidad'] = $cantidad;
+        }
+
+        $this->validarFirmasGestionadas($batchsAM, 1);
     }
 
     public function findLiberacionByDate($batch)
@@ -138,12 +139,14 @@ class ValidacionFirmasDao
         for ($i = 0; $i < sizeof($batchL); $i++) {
             $cantidad = 0;
 
-            if ($batchL[$i]['dir_produccion'] > 0 || $batchL[$i]['dir_calidad'] > 0 || $batchL[$i]['dir_tecnica'] > 0)
-                $cantidad = $cantidad + 1;
+            $batchL[$i]['dir_produccion'] > 0 ? $cantidad = 1 : $cantidad = 0;
+            $batchL[$i]['dir_calidad'] > 0 ? $cantidad = $cantidad + 1 : $cantidad;
+            $batchL[$i]['dir_tecnica'] > 0 ? $cantidad = $cantidad + 1 : $cantidad;
 
             $batchL[$i]['cantidad'] = $cantidad;
         }
         // Validar firmas gestionadas
+        $batchL[0]['modulo'] = 10;
         $this->validarFirmasGestionadas($batchL, 1);
     }
 
@@ -157,7 +160,7 @@ class ValidacionFirmasDao
                     WHERE modulo= :modulo AND batch = :batch";
             $stmt = $connection->prepare($sql);
             $stmt->execute(['batch' => $batch['batch'], 'modulo' => $batch['modulo']]);
-             $controlFirmas = $stmt->fetch($connection::FETCH_ASSOC);
+            $controlFirmas = $stmt->fetch($connection::FETCH_ASSOC);
 
             //if ($controlFirmas['cantidad_firmas'] != $batch['cantidad']) {
 
