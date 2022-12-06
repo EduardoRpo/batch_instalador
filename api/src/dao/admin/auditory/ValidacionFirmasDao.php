@@ -16,10 +16,10 @@ class ValidacionFirmasDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
-    public function findDesinfectanteByDate($batch)
+    public function findDesinfectanteByDate($batch, $fecha_hoy)
     {
         $connection = Connection::getInstance()->getConnection();
-        $sql = "SELECT * FROM batch_desinfectante_seleccionado WHERE batch = :batch";
+        $sql = "SELECT * FROM batch_desinfectante_seleccionado WHERE batch = :batch AND fecha_registro LIKE '%:$fecha_hoy%'";
         $stmt = $connection->prepare($sql);
         $stmt->execute(['batch' => $batch]);
         $batchsDS = $stmt->fetchAll($connection::FETCH_ASSOC);
@@ -41,10 +41,10 @@ class ValidacionFirmasDao
         return 1;
     }
 
-    public function findFirmas2SeccionByDate($batch)
+    public function findFirmas2SeccionByDate($batch, $fecha_hoy)
     {
         $connection = Connection::getInstance()->getConnection();
-        $sql = "SELECT * FROM batch_firmas2seccion WHERE batch = :batch";
+        $sql = "SELECT * FROM batch_firmas2seccion WHERE batch = :batch AND fecha_registro LIKE '%:$fecha_hoy%'";
         $stmt = $connection->prepare($sql);
         $stmt->execute(['batch' => $batch]);
         $batchsF2S = $stmt->fetchAll($connection::FETCH_ASSOC);
@@ -65,11 +65,11 @@ class ValidacionFirmasDao
         $this->validarFirmasGestionadas($batchsF2S, 2);
     }
 
-    public function findConciliacionRendimientoByDate($batch)
+    public function findConciliacionRendimientoByDate($batch, $fecha_hoy)
     {
         $connection = Connection::getInstance()->getConnection();
         $sql = "SELECT * FROM batch_conciliacion_rendimiento 
-                WHERE batch = :batch AND modulo = 6";
+                WHERE batch = :batch AND modulo = 6 AND fecha_registro LIKE '%:$fecha_hoy%'";
         $stmt = $connection->prepare($sql);
         $stmt->execute(['batch' => $batch]);
         $batchsCR = $stmt->fetchAll($connection::FETCH_ASSOC);
@@ -86,12 +86,12 @@ class ValidacionFirmasDao
         $this->validarFirmasGestionadas($batchsCR, 2);
     }
 
-    public function findMaterialSobranteByDate($batch)
+    public function findMaterialSobranteByDate($batch, $fecha_hoy)
     {
         $connection = Connection::getInstance()->getConnection();
         $sql = "SELECT DISTINCT ref_producto, modulo, batch, realizo, verifico 
-                FROM `batch_material_sobrante` 
-                WHERE batch = :batch";
+                FROM batch_material_sobrante 
+                WHERE batch = :batch AND fecha_registro LIKE '%:$fecha_hoy%'";
         $stmt = $connection->prepare($sql);
         $stmt->execute(['batch' => $batch]);
         $batchMS = $stmt->fetchAll($connection::FETCH_ASSOC);
@@ -110,11 +110,11 @@ class ValidacionFirmasDao
         $this->validarFirmasGestionadas($batchMS, 2);
     }
 
-    public function findAnalisisMicrobiologicoByDate($batch)
+    public function findAnalisisMicrobiologicoByDate($batch, $fecha_hoy)
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $stmt = $connection->prepare("SELECT * FROM batch_analisis_microbiologico WHERE batch = :batch");
+        $stmt = $connection->prepare("SELECT * FROM batch_analisis_microbiologico WHERE batch = :batch AND fecha_registro LIKE '%:$fecha_hoy%'");
         $stmt->execute(['batch' => $batch]);
         $batchsAM = $stmt->fetchAll($connection::FETCH_ASSOC);
 
@@ -128,11 +128,11 @@ class ValidacionFirmasDao
         $this->validarFirmasGestionadas($batchsAM, 1);
     }
 
-    public function findLiberacionByDate($batch)
+    public function findLiberacionByDate($batch, $fecha_hoy)
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $stmt = $connection->prepare("SELECT * FROM batch_liberacion WHERE batch = :batch");
+        $stmt = $connection->prepare("SELECT * FROM batch_liberacion WHERE batch = :batch AND fecha_registro LIKE '%:$fecha_hoy%'");
         $stmt->execute(['batch' => $batch]);
         $batchL = $stmt->fetchAll($connection::FETCH_ASSOC);
 

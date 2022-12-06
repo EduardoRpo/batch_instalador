@@ -3,6 +3,7 @@ $(document).ready(function () {
     e.preventDefault();
     let data = {};
 
+    /* Mientras mas sea la diferencia de los batchs, mas tarda en ejecutarse */
     alertify
       .confirm(
         'Comprobar Firmas',
@@ -45,7 +46,7 @@ $(document).ready(function () {
             },
           });
         },
-        function () { }
+        function () {}
       )
       .set('labels', { ok: 'Ejecutar', cancel: 'Cancelar' })
       .set({ closableByDimmer: false })

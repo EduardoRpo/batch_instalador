@@ -50,10 +50,10 @@ class BatchDao extends estadoInicialDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $stmt = $connection->prepare("SELECT * FROM batch WHERE id_batch BETWEEN :min AND :max");
+        $stmt = $connection->prepare("SELECT * FROM batch WHERE id_batch BETWEEN :minBacth AND :maxBacth");
         $stmt->execute([
-            'min' => $dataBatch['minBatch'],
-            'max' => $dataBatch['maxBatch']
+            'minBacth' => $dataBatch['minBatch'],
+            'maxBacth' => $dataBatch['maxBatch']
         ]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
 

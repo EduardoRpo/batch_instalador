@@ -16,14 +16,16 @@ $app->post('/validacionFirmas', function (Request $request, Response $response, 
     // Consultar batchs
     $batchs = $batchDao->findBatchByMinAndMax($dataBatch);
 
+    $fecha_hoy = date('Y-m-d');
+
     for ($i = 0; $i < sizeof($batchs); $i++) {
         // Consultar firmas y cantidad y actualizar en la tbl de control
-        $resp = $validacionFirmasDao->findDesinfectanteByDate($batchs[$i]['id_batch']);
-        $resp = $validacionFirmasDao->findFirmas2SeccionByDate($batchs[$i]['id_batch']);
-        $resp = $validacionFirmasDao->findConciliacionRendimientoByDate($batchs[$i]['id_batch']);
-        $resp = $validacionFirmasDao->findMaterialSobranteByDate($batchs[$i]['id_batch']);
-        $resp = $validacionFirmasDao->findAnalisisMicrobiologicoByDate($batchs[$i]['id_batch']);
-        $resp = $validacionFirmasDao->findLiberacionByDate($batchs[$i]['id_batch']);
+        $resp = $validacionFirmasDao->findDesinfectanteByDate($batchs[$i]['id_batch'], $fecha_hoy);
+        $resp = $validacionFirmasDao->findFirmas2SeccionByDate($batchs[$i]['id_batch'], $fecha_hoy);
+        $resp = $validacionFirmasDao->findConciliacionRendimientoByDate($batchs[$i]['id_batch'], $fecha_hoy);
+        $resp = $validacionFirmasDao->findMaterialSobranteByDate($batchs[$i]['id_batch'], $fecha_hoy);
+        $resp = $validacionFirmasDao->findAnalisisMicrobiologicoByDate($batchs[$i]['id_batch'], $fecha_hoy);
+        $resp = $validacionFirmasDao->findLiberacionByDate($batchs[$i]['id_batch'], $fecha_hoy);
 
         // Validar firmas totales
         $resp = $controlFirmasMultiDao->controlCantidadFirmas($batchs[$i]['id_batch']);
