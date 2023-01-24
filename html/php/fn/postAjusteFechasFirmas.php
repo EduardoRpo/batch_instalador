@@ -125,7 +125,22 @@ $diasFeriados = [
     '2022-10-02',
     '2022-10-09',
     '2022-10-16',
-    '2022-10-17',
+    '2022-10-23',
+    '2022-10-30',
+    '2022-11-06',
+    '2022-11-13',
+    '2022-11-14',
+    '2022-11-20',
+    '2022-11-27',
+    '2022-12-04',
+    '2022-12-08',
+    '2022-12-11',
+    '2022-12-18',
+    '2022-12-24',
+    '2022-12-25',
+    '2022-12-26',
+    '2022-12-30',
+    '2022-12-31',
 ];
 
 $array_fechas = [];
@@ -139,7 +154,7 @@ foreach ($diasFeriados as $diasFeriado) {
 for ($i = 0; $i < sizeof($batch); $i++) {
     for ($j = 0; $j < sizeof($fechas_registro); $j++) {
 
-        if ($batch[$i]['id_batch'] >= 1633) {
+        if ($batch[$i]['id_batch'] >= 1970) {
             if ($batch[$i]['id_batch'] == $fechas_registro[$j]['batch']) {
 
                 $date_pesaje = "";
@@ -157,7 +172,7 @@ for ($i = 0; $i < sizeof($batch); $i++) {
                     $fecha_inicio = $fechas_registro[$j]['fecha_registro'];
                     $fecha_inicio = substr($fecha_inicio, 0, 10);
 
-                    echo 'Fecha Inicio: ' . $fecha_inicio . "<br><br>";
+                    //echo 'Fecha Inicio: ' . $fecha_inicio . "<br><br>";
 
                     $pes_date = strtotime($fecha_inicio . "+ 0 days");
 
@@ -169,7 +184,7 @@ for ($i = 0; $i < sizeof($batch); $i++) {
 
                     date_timestamp_set($date, $pes_date);
 
-                    echo 'Pesaje: ' . date_format($date, "Y-m-d") . "<br><br>";
+                    //echo 'Pesaje: ' . date_format($date, "Y-m-d") . "<br><br>";
                     $date_pesaje = date_format($date, "Y-m-d");
 
                     InsertarFechaDesinfectante($conn, $batchProceso, $date_pesaje, 2);
@@ -185,7 +200,7 @@ for ($i = 0; $i < sizeof($batch); $i++) {
                             $prep_date = $new_date;
 
                     date_timestamp_set($date, $prep_date);
-                    echo 'Preparacion: ' . date_format($date, "Y-m-d") . "<br><br>";
+                    //echo 'Preparacion: ' . date_format($date, "Y-m-d") . "<br><br>";
                     $date_preparacion = date_format($date, "Y-m-d");
 
                     InsertarFechaDesinfectante($conn, $batchProceso, $date_preparacion, 3);
@@ -201,7 +216,7 @@ for ($i = 0; $i < sizeof($batch); $i++) {
                             $aprob_date = $new_date;
 
                     date_timestamp_set($date, $aprob_date);
-                    echo 'Aprobacion: ' . date_format($date, "Y-m-d") . "<br><br>";
+                    //echo 'Aprobacion: ' . date_format($date, "Y-m-d") . "<br><br>";
                     $date_aprobacion = date_format($date, "Y-m-d");
 
                     InsertarFechaDesinfectante($conn, $batchProceso, $date_aprobacion, 4);
@@ -218,10 +233,10 @@ for ($i = 0; $i < sizeof($batch); $i++) {
 
 
                     date_timestamp_set($date, $envas_date);
-                    echo 'Envasado: ' . date_format($date, "Y-m-d") . "<br><br>";
+                    //echo 'Envasado: ' . date_format($date, "Y-m-d") . "<br><br>";
                     $date_envasado = date_format($date, "Y-m-d");
 
-                    echo 'Acondicionamiento: ' . date_format($date, "Y-m-d") . "<br><br>";
+                    //echo 'Acondicionamiento: ' . date_format($date, "Y-m-d") . "<br><br>";
                     InsertarFechaDesinfectante($conn, $batchProceso, $date_envasado, 5);
                     InsertarFecha($conn, $batchProceso, $date_envasado, 5);
                     InsertarFechaMaterialSobrante($conn, $batchProceso, $date_envasado, 5);
@@ -242,10 +257,10 @@ for ($i = 0; $i < sizeof($batch); $i++) {
                             $micro_date = $new_date;
 
                     date_timestamp_set($date, $micro_date);
-                    echo 'Microbiologia: ' . date_format($date, "Y-m-d") . "<br><br>";
+                    //echo 'Microbiologia: ' . date_format($date, "Y-m-d") . "<br><br>";
                     $date_microbiologia = date_format($date, "Y-m-d");
-                    echo 'Fisicoquimico: ' . date_format($date, "Y-m-d") . "<br><br>";
-                    echo 'Despachos: ' . date_format($date, "Y-m-d") . "<br><br>";
+                    //echo 'Fisicoquimico: ' . date_format($date, "Y-m-d") . "<br><br>";
+                    //echo 'Despachos: ' . date_format($date, "Y-m-d") . "<br><br>";
 
                     InsertarFechaRendimiento($conn, $batchProceso, $date_envasado, 7);
 
@@ -265,7 +280,7 @@ for ($i = 0; $i < sizeof($batch); $i++) {
                             $lib_date = $new_date;
 
                     date_timestamp_set($date, $lib_date);
-                    echo 'Liberacion: ' . date_format($date, "Y-m-d") . "<br><br>";
+                    //echo 'Liberacion: ' . date_format($date, "Y-m-d") . "<br><br>";
                     $date_liberacion = date_format($date, "Y-m-d");
 
                     InsertarFechaLiberacion($conn, $batchProceso, $date_liberacion, 10);
