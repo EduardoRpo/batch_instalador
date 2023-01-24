@@ -17,21 +17,23 @@ $(document).ready(function () {
     primerdia = new Date(date.getFullYear(), 0, 1);
 
     // obtenemos la corrección necesaria
-    correccion = 6 - primerdia.getDay();
+    // correccion = 6 - primerdia.getDay();
 
     // obtenemos el lunes y domingo de la semana especificada
     semana < semanaActual
       ? (year = date.getFullYear() + 1)
       : (year = date.getFullYear());
 
-    primer = new Date(year, 0, (semana - 1) * 7 + 3 + correccion);
+    // primer = new Date(year, 0, (semana - 1) * 7 + 3 + correccion);
+    primer = new Date(year, 0, (semana - 1) * 7 + 2);
 
     if (primer <= date) {
       primer.setDate(date.getDate() + 1);
       primer.setMonth(date.getMonth());
     }
 
-    ultimo = new Date(date.getFullYear(), 0, (semana - 1) * 7 + 9 + correccion);
+    ultimo = new Date(year, 0, (semana - 1) * 7 + 8);
+    // ultimo = new Date(date.getFullYear(), 0, (semana - 1) * 7 + 9 + correccion);
 
     fecha_minima = setFecha(primer);
     fecha_maxima = setFecha(ultimo);
