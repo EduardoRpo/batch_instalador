@@ -39,7 +39,7 @@ class MultiDao extends ControlFirmasMultiDao
 
         $connection = Connection::getInstance()->getConnection();
 
-        $sql = "SELECT p.referencia, linea.densidad, linea.ajuste, pc.nombre as presentacion 
+        $sql = "SELECT p.referencia, p.densidad_producto as densidad, linea.ajuste, pc.nombre as presentacion 
                 FROM producto p 
                 INNER JOIN linea ON p.id_linea = linea.id 
                 INNER JOIN presentacion_comercial pc ON p.presentacion_comercial = pc.id 
