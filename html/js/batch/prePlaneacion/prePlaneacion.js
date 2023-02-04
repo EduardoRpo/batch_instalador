@@ -89,7 +89,12 @@ $(document).ready(function () {
     let idPlan = id.slice(5, id.length);
 
     sessionStorage.setItem('id', idPlan);
-    $('.cardPlanning').toggle(800);
+
+    let cardPlanning = $('.cardPlanning').css('display');
+
+    cardPlanning == 'flex'
+      ? $('.cardPlanning').hide(800)
+      : $('.cardPlanning').show(800);
 
     data = tableBatchPrePlaneacion.row($(this).parents('tr')).data();
 
@@ -103,12 +108,6 @@ $(document).ready(function () {
     presentacion = data.presentacion;
 
     $('.cardUpdatePrePlaneado').toggle(800);
-    // $('html, body').animate(
-    //   {
-    //     scrollTop: 0,
-    //   },
-    //   500
-    // );
   });
 
   $('#savePrePlaneado').click(function (e) {
@@ -137,6 +136,7 @@ $(document).ready(function () {
       prePlaneacion,
       function (data, textStatus, jqXHR) {
         $('.cardUpdatePrePlaneado').hide(800);
+        $('.cardPlanning').show(800);
         generalReloadData(data);
       }
     );
