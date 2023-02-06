@@ -278,7 +278,7 @@ include('modal/image.php')
                     </div>
 
                     <div class="col-md-12 align-self-center" style="padding-left: 0px;padding-right: 0px;">
-                      <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Especificaciones Técnicas</h3>
+                      <h3 for="recipient-name" class="col-form-label densidadAprobada" style="text-align: center; background-color: #C0C0C0">Especificaciones Técnicas - Densidad Aprobada 0.86</h3>
                     </div>
 
                     <div class="especificaciones_tecnicas">
@@ -508,7 +508,7 @@ include('modal/image.php')
                     <hr>
 
                     <div class="col-md-12 align-self-center" style="padding-left: 0px;padding-right: 0px;">
-                      <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Especificaciones Técnicas</h3>
+                      <h3 for="recipient-name" class="col-form-label densidadAprobada" style="text-align: center; background-color: #C0C0C0">Especificaciones Técnicas</h3>
                     </div>
                     <div class="especificaciones_tecnicas">
 
@@ -738,7 +738,7 @@ include('modal/image.php')
                     <hr>
 
                     <div class="col-md-12 align-self-center" style="padding-left: 0px;padding-right:0px">
-                      <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Especificaciones Técnicas</h3>
+                      <h3 for="recipient-name" class="col-form-label densidadAprobada" style="text-align: center; background-color: #C0C0C0">Especificaciones Técnicas</h3>
                     </div>
                     <div class="especificaciones_tecnicas">
 
@@ -966,7 +966,7 @@ include('modal/image.php')
                     <hr>
 
                     <div class="col-md-12 align-self-center" style="padding-left: 0px;padding-right:0px">
-                      <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Especificaciones Técnicas</h3>
+                      <h3 for="recipient-name" class="col-form-label densidadAprobada" style="text-align: center; background-color: #C0C0C0">Especificaciones Técnicas</h3>
                     </div>
                     <div class="especificaciones_tecnicas">
 

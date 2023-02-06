@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
     /* Calcular peso minimo, maximo y promedio */
 
@@ -9,7 +9,7 @@ $(document).ready(function() {
             url: "../../html/php/controlProceso.php",
             data: { modulo: 4, idBatch },
 
-            success: function(response) {
+            success: function (response) {
                 if (response == 0) return false;
                 else {
                     let espec = JSON.parse(response);
@@ -17,6 +17,7 @@ $(document).ready(function() {
                         densidadAprobada = densidadAprobada + espec[i].densidad;
                     }
                     densidadAprobada = densidadAprobada / espec.length;
+                    $('.densidadAprobada').html(`Especificaciones Técnicas - Densidad Aprobada ${densidadAprobada}`);
                     calcularPeso(densidadAprobada);
                 }
             },
@@ -26,11 +27,13 @@ $(document).ready(function() {
     calcularPeso = (densidadAprobada) => {
         let peso_min = batch.presentacion * densidadAprobada;
         let peso_max = peso_min * (1 + 0.01);
-        let prom = (parseInt(peso_min) + peso_max) / 2;
+        let prom = (parseFloat(peso_min) + peso_max) / 2;
+        let pdensidadAprob = peso_max / densidadAprobada;
+        let promml = prom / densidadAprobada
 
-        $(`.minimo`).val(peso_min.toFixed(2));
-        $(`.maximo`).val(peso_max.toFixed(2));
-        $(`.medio`).val(prom.toFixed(2));
+        $(`.minimo`).val(`${peso_min.toFixed(2)} gr - (${(peso_min / densidadAprobada).toFixed(2)} ml)`);
+        $(`.medio`).val(`${prom.toFixed(2)} gr - (${promml.toFixed(2)} ml)`);
+        $(`.maximo`).val(`${peso_max.toFixed(2)} gr - (${pdensidadAprob.toFixed(2)} ml)`);
     }
 
 });

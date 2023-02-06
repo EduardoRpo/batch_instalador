@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
     /* Cargar el numero de muestras de acuerdo con las unidades a producir*/
 
@@ -10,7 +10,7 @@ $(document).ready(function() {
 
     /* Cargar el numero de muestras */
 
-    muestrasEnvase = async() => {
+    muestrasEnvase = async () => {
         //$("#m_muestras").modal("show");
         let muestras = $(`#muestras${id_multi}`).val();
         let recoveredData = sessionStorage.getItem(presentacion + ref_multi + modulo);
@@ -37,7 +37,7 @@ $(document).ready(function() {
         }
     }
 
-    consultarMuestras = async() => {
+    consultarMuestras = async () => {
         data = { operacion: 2, idBatch, modulo, ref_multi }
         return result = await sendDataPOST('../../html/php/muestras.php', data)
     }
@@ -55,7 +55,7 @@ $(document).ready(function() {
             j++;
         }
         promedio = promedio / $(`#muestras${id_multi}`).val();
-        $(`#promedio${id_multi}`).val(promedio);
+        $(`#promedio${id_multi}`).val(`${promedio}`);
     }
 
 
@@ -67,10 +67,10 @@ $(document).ready(function() {
             url: "../../html/php/muestras.php",
             data: { operacion: 5, idBatch, modulo, ref_multi },
 
-            success: function(response) {
+            success: function (response) {
                 if (!response) return false;
                 data = JSON.parse(response);
-                $(`#promedio${id_multi}`).val(data[0].promedio);
+                $(`#promedio${id_multi}`).val(`${data[0].promedio}`);
             },
         });
     };
