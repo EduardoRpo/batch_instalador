@@ -12,7 +12,7 @@ $(document).ready(function () {
 
     for (i = 1; i <= sel.length; i++) {
       propiedad = sel[j];
-      cargarselectores(propiedad);
+      if (propiedad != 'usuarios_rols') cargarselectores(propiedad);
       j++;
     }
     /* cargar bases */
@@ -53,12 +53,12 @@ $(document).ready(function () {
               `<option value = ${value.id}> ${value.id}. ${value.cargo} </option>`
             );
           });
-        } else if (selector == 'usuarios_rols') {
-          $.each(data, function (i, value) {
-            $select.append(
-              `<option value = ${value.usuario_id}> ${value.usuario_id}. ${value.rol} </option>`
-            );
-          });
+          // } else if (selector == 'usuarios_rols') {
+          //   $.each(data, function (i, value) {
+          //     $select.append(
+          //       `<option value = ${value.usuario_id}> ${value.usuario_id}. ${value.rol} </option>`
+          //     );
+          //   });
         } else {
           $.each(data, function (i, value) {
             $select.append(
