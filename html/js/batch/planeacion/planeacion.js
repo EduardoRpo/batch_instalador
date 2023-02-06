@@ -13,6 +13,10 @@ $(document).ready(function () {
       let estado = dataPlan.estado;
 
       if (estado == 'Inactivo') {
+        /* Calculo tamaño lote - ajuste */
+        let totalTamanioLote =
+          dataPlan.tamano_lote - dataPlan.tamano_lote * dataPlan.ajuste;
+
         planeacion = {
           id: idPlan,
           granel: dataPlan.granel,
@@ -22,8 +26,7 @@ $(document).ready(function () {
           fecha_insumo: dataPlan.fecha_insumo,
           numPedido: dataPlan.pedido,
           cantidad_acumulada: dataPlan.unidad_lote,
-          tamanio_lote: dataPlan.tamano_lote,
-          ajuste: dataPlan.ajuste,
+          tamanio_lote: totalTamanioLote,
         };
 
         dataPlaneacion.push(planeacion);

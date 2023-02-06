@@ -24,8 +24,7 @@ $app->get('/deleteUsers/{id}', function (Request $request, Response $response, $
 });
 
 $app->post('/saveUsers', function (Request $request, Response $response, $args) use ($userDao) {
-
-    $dataUsers =($request->getParsedBody());
+    $dataUsers = $request->getParsedBody();
     $ruta = $userDao->UpLoadSing();
 
     if ($dataUsers['id']) {
@@ -38,19 +37,19 @@ $app->post('/saveUsers', function (Request $request, Response $response, $args) 
 
         if ($Users == null)
             $resp = array('success' => true, 'message' => 'Usuario almacenado correctamente');
-    }    
+    }
 
 
     $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->get('/deleteUsers', function (Request $request, Response $response, $args)use($userDao){
+$app->get('/deleteUsers', function (Request $request, Response $response, $args) use ($userDao) {
     $user = $userDao->deleteUsers($args['id']);
 
-if ($user == null)
-    $resp = array('success' => true, 'message' => 'Usuario eliminado correctamente');
+    if ($user == null)
+        $resp = array('success' => true, 'message' => 'Usuario eliminado correctamente');
 
-$response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
-return $response->withHeader('Content-Type', 'application/json');
+    $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
+    return $response->withHeader('Content-Type', 'application/json');
 });

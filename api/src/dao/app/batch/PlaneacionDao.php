@@ -49,7 +49,7 @@ class PlaneacionDao
                 if ($dataPedidosReferencias[$i]['referencia'] == $t['referencia']) {
                     $dataPedidosReferencias[$i]['id'] = "{$dataPedidosReferencias[$i]['id']} - {$t['id']}";
                     $dataPedidosReferencias[$i]['numPedido'] = "{$dataPedidosReferencias[$i]['numPedido']} - {$t['numPedido']}";
-                    $dataPedidosReferencias[$i]['tamanio_lote'] += $t['tamanio_lote'] - $t['ajuste'];
+                    $dataPedidosReferencias[$i]['tamanio_lote'] += $t['tamanio_lote'];
                     $dataPedidosReferencias[$i]['cantidad_acumulada'] += $t['cantidad_acumulada'];
                     $dataPedidosReferencias[$i]['fecha_insumo'] = "{$dataPedidosReferencias[$i]['fecha_insumo']} - {$t['fecha_insumo']}";
                     $repeat = true;
@@ -63,7 +63,7 @@ class PlaneacionDao
                     'numPedido' => $t['numPedido'],
                     'referencia' => $t['referencia'],
                     'producto' => $t['producto'],
-                    'tamanio_lote' => $t['tamanio_lote'] - $t['ajuste'],
+                    'tamanio_lote' => $t['tamanio_lote'],
                     'fecha_planeacion' => $t['fecha_planeacion'],
                     'cantidad_acumulada' => $t['cantidad_acumulada'],
                     'fecha_insumo' => $t['fecha_insumo'],
