@@ -23,6 +23,7 @@ $(document).ready(function () {
           numPedido: dataPlan.pedido,
           cantidad_acumulada: dataPlan.unidad_lote,
           tamanio_lote: dataPlan.tamano_lote,
+          ajuste: dataPlan.ajuste,
         };
 
         dataPlaneacion.push(planeacion);

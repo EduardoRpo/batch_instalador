@@ -24,7 +24,7 @@ class PlaneacionDao
         $stmt = $connection->prepare("SELECT pre_plan.id, pp.nombre AS propietario, pre_plan.pedido, pre_plan.unidad_lote, pre_plan.valor_pedido, pre_plan.fecha_programacion, pre_plan.tamano_lote, CURRENT_DATE AS fecha_actual, 
                                                 (SELECT referencia FROM producto WHERE multi = (SELECT multi FROM producto WHERE referencia = pre_plan.id_producto) LIMIT 1) AS granel, pre_plan.id_producto, pre_plan.fecha_insumo,
                                                 DATE_ADD(pre_plan.fecha_insumo, INTERVAL 8 DAY) AS fecha_pesaje, DATE_ADD(pre_plan.fecha_insumo, INTERVAL 13 DAY) AS fecha_envasado, p.nombre_referencia, pre_plan.sim, 
-                                                WEEK(pre_plan.fecha_programacion) AS semana, IF(pre_plan.estado = 0, 'Sin Formula y/o Instructivos', 'Inactivo') AS estado, pre_plan.planeado, l.id AS id_linea
+                                                WEEK(pre_plan.fecha_programacion) AS semana, IF(pre_plan.estado = 0, 'Sin Formula y/o Instructivos', 'Inactivo') AS estado, pre_plan.planeado, l.id AS id_linea, l.ajuste
                                         FROM plan_preplaneados pre_plan 
                                             INNER JOIN producto p ON p.referencia = pre_plan.id_producto
                                             INNER JOIN linea l ON p.id_linea = l.id 
@@ -49,7 +49,7 @@ class PlaneacionDao
                 if ($dataPedidosReferencias[$i]['referencia'] == $t['referencia']) {
                     $dataPedidosReferencias[$i]['id'] = "{$dataPedidosReferencias[$i]['id']} - {$t['id']}";
                     $dataPedidosReferencias[$i]['numPedido'] = "{$dataPedidosReferencias[$i]['numPedido']} - {$t['numPedido']}";
-                    $dataPedidosReferencias[$i]['tamanio_lote'] += $t['tamanio_lote'];
+                    $dataPedidosReferencias[$i]['tamanio_lote'] += $t['tamanio_lote'] - $t['ajuste'];
                     $dataPedidosReferencias[$i]['cantidad_acumulada'] += $t['cantidad_acumulada'];
                     $dataPedidosReferencias[$i]['fecha_insumo'] = "{$dataPedidosReferencias[$i]['fecha_insumo']} - {$t['fecha_insumo']}";
                     $repeat = true;
@@ -63,7 +63,7 @@ class PlaneacionDao
                     'numPedido' => $t['numPedido'],
                     'referencia' => $t['referencia'],
                     'producto' => $t['producto'],
-                    'tamanio_lote' => $t['tamanio_lote'],
+                    'tamanio_lote' => $t['tamanio_lote'] - $t['ajuste'],
                     'fecha_planeacion' => $t['fecha_planeacion'],
                     'cantidad_acumulada' => $t['cantidad_acumulada'],
                     'fecha_insumo' => $t['fecha_insumo'],
