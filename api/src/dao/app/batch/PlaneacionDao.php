@@ -64,6 +64,7 @@ class PlaneacionDao
                     'referencia' => $t['referencia'],
                     'producto' => $t['producto'],
                     'tamanio_lote' => $t['tamanio_lote'],
+                    'ajuste' => $t['ajuste'],
                     'fecha_planeacion' => $t['fecha_planeacion'],
                     'cantidad_acumulada' => $t['cantidad_acumulada'],
                     'fecha_insumo' => $t['fecha_insumo'],

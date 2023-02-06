@@ -84,7 +84,7 @@ class MultiDao extends ControlFirmasMultiDao
         for ($i = 0; $i < sizeof($multipresentaciones); $i++) {
             if (!empty($multipresentaciones[$i]['cantidad_acumulada'])) {
                 $multipresentaciones[$i]['cantidadunidades'] = $multipresentaciones[$i]['cantidad_acumulada'];
-                $multipresentaciones[$i]['tamaniopresentacion'] = $multipresentaciones[$i]['tamanio_lote'];
+                $multipresentaciones[$i]['tamaniopresentacion'] = $multipresentaciones[$i]['tamanio_lote'] - ($multipresentaciones[$i]['tamanio_lote'] * $multipresentaciones[$i]['ajuste']);
             }
         }
 
