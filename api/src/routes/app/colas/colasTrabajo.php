@@ -7,6 +7,12 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 $batchLineaDao = new BatchLineaDao();
 
+$app->get('/batchEliminados', function (Request $request, Response $response, $args) use ($batchLineaDao) {
+    $batchEliminados = $batchLineaDao->findBatchEliminados();
+    $response->getBody()->write(json_encode($batchEliminados, JSON_NUMERIC_CHECK));
+    return $response->withHeader('Content-Type', 'application/json');
+});
+
 $app->get('/pesajes', function (Request $request, Response $response, $args) use ($batchLineaDao) {
     $pesajes = $batchLineaDao->findBatchPesajes();
     $response->getBody()->write(json_encode($pesajes, JSON_NUMERIC_CHECK));

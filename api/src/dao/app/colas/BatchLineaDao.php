@@ -24,6 +24,23 @@ class BatchLineaDao
     $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
   }
 
+  public function findBatchEliminados()
+  {
+    $connection = Connection::getInstance()->getConnection();
+    $sql = "SELECT * FROM batch 
+            LEFT JOIN batch_eliminados be ON batch.id_batch = be.batch 
+            WHERE estado = 0 ORDER BY `batch`.`id_batch` DESC";
+    $stmt = $connection->prepare($sql);
+    $stmt->execute();
+    $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+    $batchEliminados = $stmt->fetchAll($connection::FETCH_ASSOC);
+    $this->logger->notice("Batch Eliminados", array('Batch Eliminados' => $batchEliminados));
+
+    return $batchEliminados;
+  }
+
+
+
   public function findBatchPesajes()
   {
     $connection = Connection::getInstance()->getConnection();

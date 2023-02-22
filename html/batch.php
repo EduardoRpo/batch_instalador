@@ -404,7 +404,7 @@ include_once("modal/m_observaciones.php");
   <script src="/html/js/batch/calc/calcWeek.js"></script>
 
   <script src="/html/js/batch/tables/tableBatchProgramados.js"></script>
-  <script src="/html/js/batch/tables/tableBatchEliminados.js"></script>
+  <script src="/html/js/batch/tables/tableBatchCerrados.js"></script>
   <script src="/html/js/batch/tables/tableBatchPlaneados.js"></script>
   <script src="/html/js/batch/tables/tableBatchPedidos.js"></script>
   <script src="/html/js/batch/tables/tableBatchPrePlaneacion.js"></script>

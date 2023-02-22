@@ -10,16 +10,13 @@ function batchEliminados() {
 
 function cargartablaEliminados() {
   $("#tablabatchEliminados").DataTable({
-    //scrollY: '100vh',
     responsive: true,
     scrollCollapse: true,
-    //paging: false,
     language: { url: "/admin/sistema/admin_componentes/es-ar.json" },
 
     ajax: {
-      method: "POST",
-      url: "php/c_batcheliminados.php",
-      data: { operacion: "1" },
+      url: "/api/batchEliminados",
+      dataSrc: '',
     },
 
     columns: [
