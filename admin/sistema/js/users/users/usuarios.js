@@ -78,7 +78,6 @@ $(document).ready(function () {
           return false;
         }
       }
-
       //   const usuario = new FormData($('#frmagregarUsuarios')[0]);
       //   usuario.set('operacion', 3);
       //   usuario.set('editar', editar);
@@ -86,8 +85,12 @@ $(document).ready(function () {
 
       //   if (rol == 1 || rol == 2 || rol == 5) usuario.set('modulo', '1');
 
-      let usuario = $('#frmagregarUsuarios').serialize();
-      usuario += `&operacion=3&editar=${editar}&id=${id}`;
+      let usuario = new FormData(frmagregarUsuarios);
+      usuario.append('operacion', 3);
+      usuario.append('editar', editar);
+      usuario.append('id', id);
+      usuario.append('firma', $('#firma')[0].files[0]);
+      // usuario += `&operacion=3&editar=${editar}&id=${id}`;
 
       if (rol == 1 || rol == 2 || rol == 5) usuario += '&modulo=1';
 
@@ -95,8 +98,9 @@ $(document).ready(function () {
         type: 'POST',
         url: '/api/saveUsers',
         data: usuario,
-        // processData: false,
-        // contentType: false,
+        contentType: false,
+        cache: false,
+        processData: false,
 
         success: function (r) {
           alertify.set('notifier', 'position', 'top-right');
