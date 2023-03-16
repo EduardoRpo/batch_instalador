@@ -162,21 +162,20 @@ class ValidacionFirmasDao
             $stmt->execute(['batch' => $batch['batch'], 'modulo' => $batch['modulo']]);
             $controlFirmas = $stmt->fetch($connection::FETCH_ASSOC);
 
-            //if ($controlFirmas['cantidad_firmas'] != $batch['cantidad']) {
-
             $seccion == 2
                 ? $cantidad = $controlFirmas['cantidad_firmas'] + $batch['cantidad']
                 : $cantidad = $batch['cantidad'];
 
-            $sql = "UPDATE batch_control_firmas SET cantidad_firmas = :firmas 
+            if ($cantidad <= $controlFirmas['total_firmas']) {
+                $sql = "UPDATE batch_control_firmas SET cantidad_firmas = :firmas 
                         WHERE modulo = :modulo and batch = :batch";
-            $stmt = $connection->prepare($sql);
-            $stmt->execute([
-                'batch' => $batch['batch'],
-                'modulo' => $batch['modulo'],
-                'firmas' => $cantidad
-            ]);
-            //}
+                $stmt = $connection->prepare($sql);
+                $stmt->execute([
+                    'batch' => $batch['batch'],
+                    'modulo' => $batch['modulo'],
+                    'firmas' => $cantidad
+                ]);
+            }
         }
     }
 }

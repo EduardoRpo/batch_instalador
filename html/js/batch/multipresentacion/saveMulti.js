@@ -17,16 +17,14 @@ $(document).ready(function () {
 
       multi.referencia = $(`#MultiReferencia${j}`).val();
       multi.cantidadunidades = $(`#cantidadMulti${j}`).val();
-      multi.tamaniopresentacion = $(`#tamanioloteMulti${j}`).val();
+      multi.cantidad_acumulada = $(`#cantidadMulti${j}`).val();
+      multi.tamanio_lote = $(`#tamanioloteMulti${j}`).val();
+      multi.ajuste = $('#ajuste').val();
 
       totalCantidades =
         totalCantidades + parseInt($(`#cantidadMulti${j}`).val());
 
-      if (
-        multi.referencia ||
-        multi.cantidadunidades ||
-        multi.tamaniopresentacion
-      )
+      if (multi.referencia || multi.cantidad_acumulada || multi.tamanio_lote)
         ref.push(multi);
       j++;
     }

@@ -3,6 +3,7 @@ if (!empty($_POST)) {
     require_once('../../../../conexion.php');
 
     $batch = $_POST['batch'];
+    $array = [];
 
     $sql = "SELECT modulo, batch, observaciones FROM batch_analisis_microbiologico WHERE batch = :batch";
     $query = $conn->prepare($sql);
