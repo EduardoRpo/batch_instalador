@@ -287,20 +287,26 @@ class BatchDao extends estadoInicialDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $stmt = $connection->prepare("UPDATE batch SET estado = 0, fecha_eliminacion = CURDATE() WHERE id_batch = :id_batch");
-        $stmt->execute(['id_batch' => $id_batch]);
+        try {
+            $stmt = $connection->prepare("UPDATE batch SET estado = 0, fecha_eliminacion = CURDATE() WHERE id_batch = :id_batch");
+            $stmt->execute(['id_batch' => $id_batch]);
 
-        $stmt = $connection->prepare("SELECT * FROM batch_eliminados WHERE id_batch = :id_batch");
-        $stmt->execute(['id_batch' => $id_batch]);
+            $stmt = $connection->prepare("SELECT * FROM batch_eliminados WHERE batch = :batch");
+            $stmt->execute(['batch' => $id_batch]);
 
-        $row = $stmt->rowCount();
+            $row = $stmt->rowCount();
 
-        if ($row > 0) {
-            $stmt = $connection->prepare("INSERT INTO batch_eliminados (batch, motivo) VALUES(:id_batch, :motivo)");
-            $stmt->execute(['id_batch' => $id_batch, 'motivo' => $motivo]);
-        } else {
-            $stmt = $connection->prepare("UPDATE batch_eliminados SET motivo = :motivo WHERE batch = :id_batch");
-            $stmt->execute(['id_batch' => $id_batch, 'motivo' => $motivo]);
+            if ($row > 0) {
+                $stmt = $connection->prepare("INSERT INTO batch_eliminados (batch, motivo) VALUES(:batch, :motivo)");
+                $stmt->execute(['batch' => $id_batch, 'motivo' => $motivo]);
+            } else {
+                $stmt = $connection->prepare("UPDATE batch_eliminados SET motivo = :motivo WHERE batch = :batch");
+                $stmt->execute(['batch' => $id_batch, 'motivo' => $motivo]);
+            }
+        } catch (\Exception $e) {
+            $message = $e->getMessage();
+            $error = array('info' => true, 'message', $message);
+            return $error;
         }
     }
 }

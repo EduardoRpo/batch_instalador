@@ -3,6 +3,9 @@ $(document).ready(function () {
     e.preventDefault();
     let data = {};
 
+    $('#minBatch').val('');
+    $('#maxBatch').val('');
+
     /* Mientras mas sea la diferencia de los batchs, mas tarda en ejecutarse */
     alertify
       .confirm(

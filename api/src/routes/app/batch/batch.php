@@ -148,7 +148,6 @@ $app->post('/updateBatch', function (Request $request, Response $response, $args
   if ($resp == null)
     $resp = $tanquesDao->saveTanques($dataBatch['id_batch'], $dataBatch);
 
-
   /* Notificaciones*/
   if ($resp == null)
     $resp = array('success' => true, 'message' => 'Batch actualizado correctamente');
@@ -166,6 +165,8 @@ $app->get('/deleteBatch/{id_batch}/{motivo}', function (Request $request, Respon
   /* Notificaciones*/
   if ($resp == null)
     $resp = array('success' => true, 'message' => 'Batch Record Eliminado correctamente');
+  else if (isset($resp['info']))
+    $resp = array('info' => true, 'message' => $resp['message']);
   else
     $resp = array('error' => true, 'message' => 'Ocurrio un error mientras eliminaba el Batch. Intentelo nuevamente');
 
