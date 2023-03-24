@@ -24,14 +24,6 @@ class ValidacionFirmasDao
         $stmt->execute(['batch' => $batch]);
         $batchsDS = $stmt->fetchAll($connection::FETCH_ASSOC);
 
-        if (sizeof($batchsDS) == 0) {
-            for ($i = 2; $i <= 9; $i++) {
-                if ($i != 7 && $i != 8) {
-                    $batchsDS = array_merge($batchsDS, array(array('modulo' => $i, 'batch' => $batch, 'cantidad' => 0)));
-                }
-            }
-        }
-
         for ($i = 0; $i < sizeof($batchsDS); $i++) {
             $cantidad = 0;
             $fmodulo = $batchsDS[$i]['modulo'];
@@ -55,14 +47,6 @@ class ValidacionFirmasDao
         $stmt = $connection->prepare($sql);
         $stmt->execute(['batch' => $batch]);
         $batchsF2S = $stmt->fetchAll($connection::FETCH_ASSOC);
-
-        if (sizeof($batchsF2S) == 0) {
-            for ($i = 2; $i <= 9; $i++) {
-                if ($i != 7 && $i != 8) {
-                    $batchsF2S = array_merge($batchsF2S, array(array('modulo' => $i, 'batch' => $batch, 'cantidad' => 0)));
-                }
-            }
-        }
 
         for ($i = 0; $i < sizeof($batchsF2S); $i++) {
             $cantidad = 0;

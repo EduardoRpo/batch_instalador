@@ -26,16 +26,16 @@ class ControlFirmasMultiDao
             if ($i == 4 || $i == 9) $total_firmas = 2;
             if ($i == 10) $total_firmas = 3;
 
-            if ($i > 4 && $i < 9) {
-                $sql = "UPDATE batch_control_firmas SET total_firmas = :total_firmas 
+            // if ($i > 4 && $i < 9) {
+            $sql = "UPDATE batch_control_firmas SET total_firmas = :total_firmas 
                         WHERE batch = :batch AND modulo = :modulo";
-                $query = $connection->prepare($sql);
-                $query->execute([
-                    'total_firmas' => $total_firmas,
-                    'batch' => $batch,
-                    'modulo' => $i
-                ]);
-            }
+            $query = $connection->prepare($sql);
+            $query->execute([
+                'total_firmas' => $total_firmas,
+                'batch' => $batch,
+                'modulo' => $i
+            ]);
+            // }
         }
     }
 
