@@ -24,6 +24,14 @@ class ValidacionFirmasDao
         $stmt->execute(['batch' => $batch]);
         $batchsDS = $stmt->fetchAll($connection::FETCH_ASSOC);
 
+        if (sizeof($batchsDS) == 0) {
+            for ($i = 2; $i <= 9; $i++) {
+                if ($i != 7 && $i != 8) {
+                    $batchsDS = array_merge($batchsDS, array(array('modulo' => $i, 'batch' => $batch, 'cantidad' => 0)));
+                }
+            }
+        }
+
         for ($i = 0; $i < sizeof($batchsDS); $i++) {
             $cantidad = 0;
             $fmodulo = $batchsDS[$i]['modulo'];
@@ -38,7 +46,6 @@ class ValidacionFirmasDao
         }
 
         $this->validarFirmasGestionadas($batchsDS, 1);
-        return 1;
     }
 
     public function findFirmas2SeccionByDate($batch, $fecha_hoy)
@@ -48,6 +55,14 @@ class ValidacionFirmasDao
         $stmt = $connection->prepare($sql);
         $stmt->execute(['batch' => $batch]);
         $batchsF2S = $stmt->fetchAll($connection::FETCH_ASSOC);
+
+        if (sizeof($batchsF2S) == 0) {
+            for ($i = 2; $i <= 9; $i++) {
+                if ($i != 7 && $i != 8) {
+                    $batchsF2S = array_merge($batchsF2S, array(array('modulo' => $i, 'batch' => $batch, 'cantidad' => 0)));
+                }
+            }
+        }
 
         for ($i = 0; $i < sizeof($batchsF2S); $i++) {
             $cantidad = 0;
@@ -74,6 +89,12 @@ class ValidacionFirmasDao
         $stmt->execute(['batch' => $batch]);
         $batchsCR = $stmt->fetchAll($connection::FETCH_ASSOC);
 
+        if (sizeof($batchsCR) == 0) {
+            $batchsCR[0]['cantidad'] = 0;
+            $batchsCR[0]['batch'] = $batch;
+            $batchsCR[0]['modulo'] = 6;
+        }
+
         for ($i = 0; $i < sizeof($batchsCR); $i++) {
             $cantidad = 0;
 
@@ -95,6 +116,15 @@ class ValidacionFirmasDao
         $stmt = $connection->prepare($sql);
         $stmt->execute(['batch' => $batch]);
         $batchMS = $stmt->fetchAll($connection::FETCH_ASSOC);
+
+        if (sizeof($batchMS) == 0) {
+            $batchMS[0]['cantidad'] = 0;
+            $batchMS[0]['batch'] = $batch;
+            $batchMS[0]['modulo'] = 5;
+            $batchMS[1]['cantidad'] = 0;
+            $batchMS[1]['batch'] = $batch;
+            $batchMS[1]['modulo'] = 6;
+        }
 
         for ($i = 0; $i < sizeof($batchMS); $i++) {
             $cantidad = 0;
@@ -118,6 +148,12 @@ class ValidacionFirmasDao
         $stmt->execute(['batch' => $batch]);
         $batchsAM = $stmt->fetchAll($connection::FETCH_ASSOC);
 
+        if (sizeof($batchsAM) == 0) {
+            $batchsAM[0]['cantidad'] = 0;
+            $batchsAM[0]['batch'] = $batch;
+            $batchsAM[0]['modulo'] = 8;
+        }
+
         for ($i = 0; $i < sizeof($batchsAM); $i++) {
             $cantidad = 0;
             $batchsAM[$i]['realizo'] > 0 ? $cantidad = 1 : $cantidad = 0;
@@ -135,6 +171,11 @@ class ValidacionFirmasDao
         $stmt = $connection->prepare("SELECT * FROM batch_liberacion WHERE batch = :batch AND fecha_registro LIKE '%:$fecha_hoy%'");
         $stmt->execute(['batch' => $batch]);
         $batchL = $stmt->fetchAll($connection::FETCH_ASSOC);
+
+        if (sizeof($batchL) == 0) {
+            $batchL[0]['cantidad'] = 0;
+            $batchL[0]['batch'] = $batch;
+        }
 
         for ($i = 0; $i < sizeof($batchL); $i++) {
             $cantidad = 0;
