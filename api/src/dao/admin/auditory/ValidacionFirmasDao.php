@@ -19,7 +19,7 @@ class ValidacionFirmasDao
     public function findDesinfectanteByDate($batch, $fecha_hoy)
     {
         $connection = Connection::getInstance()->getConnection();
-        $sql = "SELECT * FROM batch_desinfectante_seleccionado WHERE batch = :batch AND fecha_registro LIKE '%:$fecha_hoy%'";
+        $sql = "SELECT * FROM batch_desinfectante_seleccionado WHERE batch = :batch -- AND fecha_registro LIKE '%$fecha_hoy%'";
         $stmt = $connection->prepare($sql);
         $stmt->execute(['batch' => $batch]);
         $batchsDS = $stmt->fetchAll($connection::FETCH_ASSOC);
@@ -51,7 +51,7 @@ class ValidacionFirmasDao
     public function findFirmas2SeccionByDate($batch, $fecha_hoy)
     {
         $connection = Connection::getInstance()->getConnection();
-        $sql = "SELECT * FROM batch_firmas2seccion WHERE batch = :batch AND fecha_registro LIKE '%:$fecha_hoy%'";
+        $sql = "SELECT * FROM batch_firmas2seccion WHERE batch = :batch -- AND fecha_registro LIKE '%$fecha_hoy%'";
         $stmt = $connection->prepare($sql);
         $stmt->execute(['batch' => $batch]);
         $batchsF2S = $stmt->fetchAll($connection::FETCH_ASSOC);
@@ -84,7 +84,7 @@ class ValidacionFirmasDao
     {
         $connection = Connection::getInstance()->getConnection();
         $sql = "SELECT * FROM batch_conciliacion_rendimiento 
-                WHERE batch = :batch AND modulo = 6 AND fecha_registro LIKE '%:$fecha_hoy%'";
+                WHERE batch = :batch AND modulo = 6 -- AND fecha_registro LIKE '%$fecha_hoy%'";
         $stmt = $connection->prepare($sql);
         $stmt->execute(['batch' => $batch]);
         $batchsCR = $stmt->fetchAll($connection::FETCH_ASSOC);
@@ -112,7 +112,7 @@ class ValidacionFirmasDao
         $connection = Connection::getInstance()->getConnection();
         $sql = "SELECT DISTINCT ref_producto, modulo, batch, realizo, verifico 
                 FROM batch_material_sobrante 
-                WHERE batch = :batch AND fecha_registro LIKE '%:$fecha_hoy%'";
+                WHERE batch = :batch -- AND fecha_registro LIKE '%$fecha_hoy%'";
         $stmt = $connection->prepare($sql);
         $stmt->execute(['batch' => $batch]);
         $batchMS = $stmt->fetchAll($connection::FETCH_ASSOC);
@@ -144,7 +144,7 @@ class ValidacionFirmasDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $stmt = $connection->prepare("SELECT * FROM batch_analisis_microbiologico WHERE batch = :batch AND fecha_registro LIKE '%:$fecha_hoy%'");
+        $stmt = $connection->prepare("SELECT * FROM batch_analisis_microbiologico WHERE batch = :batch -- AND fecha_registro LIKE '%$fecha_hoy%'");
         $stmt->execute(['batch' => $batch]);
         $batchsAM = $stmt->fetchAll($connection::FETCH_ASSOC);
 
@@ -168,7 +168,7 @@ class ValidacionFirmasDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $stmt = $connection->prepare("SELECT * FROM batch_liberacion WHERE batch = :batch AND fecha_registro LIKE '%:$fecha_hoy%'");
+        $stmt = $connection->prepare("SELECT * FROM batch_liberacion WHERE batch = :batch -- AND fecha_registro LIKE '%$fecha_hoy%'");
         $stmt->execute(['batch' => $batch]);
         $batchL = $stmt->fetchAll($connection::FETCH_ASSOC);
 

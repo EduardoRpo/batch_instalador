@@ -12,6 +12,7 @@ include_once("modal/modal_cambiarContrasena.php");
 include_once("modal/m_batch_pdf.php");
 include_once("modal/modalPedidos.php");
 include_once("modal/m_observaciones.php");
+// include_once("modal/m_limpiar_firmas.php");
 
 
 ?>
