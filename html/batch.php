@@ -12,7 +12,7 @@ include_once("modal/modal_cambiarContrasena.php");
 include_once("modal/m_batch_pdf.php");
 include_once("modal/modalPedidos.php");
 include_once("modal/m_observaciones.php");
-// include_once("modal/m_limpiar_firmas.php");
+include_once("modal/m_limpiar_firmas.php");
 
 
 ?>
@@ -35,7 +35,28 @@ include_once("modal/m_observaciones.php");
   <?php include('./partials/scripts.php'); ?>
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <style>
+    .spinner {
+      width: 36px;
+      height: 36px;
+      margin: auto;
+      border: 5px solid rgba(0, 0, 0, 0.3);
+      border-radius: 50%;
+      border-left-color: #7d47ff;
 
+      animation: spin 1s ease infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">

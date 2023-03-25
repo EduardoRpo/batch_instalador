@@ -10,22 +10,21 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="row page">
-                            <div class="col-md-12 col-2 align-self-center">
+                        <div class="row page cardInputsFirmas">
+                            <div class="col-sm-6">
                                 <label>Batch Inicial:</label>
                                 <input type="number" id="minBatch" class="form-control text-center">
                             </div>
-                        </div>
-                        <div class="row page">
-                            <div class="col-md-12 col-2 align-self-center">
+                            <div class="col-sm-6">
                                 <label>Batch Final:</label>
                                 <input type="number" id="maxBatch" class="form-control text-center">
                             </div>
                         </div>
+                        <div class="spinner"></div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary btnSignUser">Aceptar</button>
+                        <button type="button" class="btn btn-secondary" id="btnCloseModalControlFirmas">Cancelar</button>
+                        <button type="button" class="btn btn-primary" id="btnSendControlFirmas">Aceptar</button>
                 </form>
             </div>
         </div>

@@ -11,8 +11,8 @@ $batchs = $query->fetchAll(PDO::FETCH_ASSOC);
 if ($batchs > 0) {
 
     for ($j = 0; $j < sizeof($batchs); $j++) {
-        $batch = $batchs[$j]['id_batch'];
-        //$batch = 113;
+        // $batch = $batchs[$j]['id_batch'];
+        $batch = 2565;
         $firmas = [];
 
         $sql = "SELECT realizo, verifico, batch, modulo FROM batch_desinfectante_seleccionado WHERE batch = :batch";
@@ -39,14 +39,14 @@ if ($batchs > 0) {
         $firmas_proceso = $query->fetchAll(PDO::FETCH_ASSOC);
 
         for ($i = 0; $i < sizeof($firmas_proceso); $i++) {
-            if ($firmas_proceso[$i]['modulo'] != 4 && $firmas_proceso[$i]['modulo'] != 8) {
+            if ($firmas_proceso[$i]['modulo'] != 4 && $firmas_proceso[$i]['modulo'] != 5 && $firmas_proceso[$i]['modulo'] != 8) {
 
                 $cantidad = $firmas_proceso[$i]['realizo'] + $firmas_proceso[$i]['verifico'];
 
-                /* if ($firmas_proceso[$i]['realizo'] > 0)
-            $cantidad = $cantidad + 1;
-        if ($firmas_proceso[$i]['verifico'] > 0)
-            $cantidad = $cantidad + 1; */
+                // if ($firmas_proceso[$i]['realizo'] > 0)
+                //     $cantidad = $cantidad + 1;
+                // if ($firmas_proceso[$i]['verifico'] > 0)
+                //     $cantidad = $cantidad + 1;
             }
             $modulo = $firmas_proceso[$i]['modulo'];
             $indice = array_key_exists($modulo, $firmas);
@@ -118,11 +118,11 @@ if ($batchs > 0) {
             $modulo = 5;
             /*$indice = array_key_exists($modulo, $firmas);
 
-            if ($indice && $cantidad == 6) */
+                if ($indice && $cantidad == 6) */
             $firmas[$modulo] = $firmas[$modulo] + $cantidad;
             /* else
-            $firmas[$modulo] = $firmas[$modulo] + 2;
-            $firmas[$modulo] =  1; */
+                $firmas[$modulo] = $firmas[$modulo] + 2;
+                $firmas[$modulo] =  1; */
             $cantidad = 0;
 
 
