@@ -26,7 +26,7 @@ if (!empty($_POST)) {
             $ref_multi = $_POST['ref_multi'];
 
             $sql = "SELECT bf2.observaciones as linea, bf2.modulo, bf2.batch, u.urlfirma as realizo, us.urlfirma as verifico 
-                    FROM batch_firmas2seccion bf2 INNER JOIN usuario u ON u.id = bf2.realizo INNER JOIN usuario us ON us.id = bf2.verifico
+                    FROM batch_firmas2seccion bf2 LEFT JOIN usuario u ON u.id = bf2.realizo LEFT JOIN usuario us ON us.id = bf2.verifico
                     WHERE modulo = :modulo AND batch = :batch AND ref_multi = :ref_multi";
             $query = $conn->prepare($sql);
             $result = $query->execute(['modulo' => $modulo, 'batch' => $batch, 'ref_multi' => $ref_multi]);
@@ -34,7 +34,7 @@ if (!empty($_POST)) {
 
             if (empty($data)) {
                 $sql = "SELECT bf2.observaciones as linea, bf2.modulo, bf2.batch, u.urlfirma as realizo 
-                    FROM batch_firmas2seccion bf2 INNER JOIN usuario u ON u.id = bf2.realizo
+                    FROM batch_firmas2seccion bf2 LEFT JOIN usuario u ON u.id = bf2.realizo
                     WHERE modulo = :modulo AND batch = :batch AND ref_multi = :ref_multi";
                 $query = $conn->prepare($sql);
                 $result = $query->execute(['modulo' => $modulo, 'batch' => $batch, 'ref_multi' => $ref_multi]);
@@ -56,8 +56,8 @@ if (!empty($_POST)) {
 
             $sql = "SELECT bms.id, bms.ref_material, bms.envasada, bms.averias, bms.sobrante, bms.ref_producto, bms.batch, bms.modulo, u.urlfirma as realizo, us.urlfirma as verifico 
                     FROM batch_material_sobrante bms 
-                    INNER JOIN usuario u ON u.id = bms.realizo
-                    INNER JOIN usuario us ON us.id = bms.verifico 
+                    LEFT JOIN usuario u ON u.id = bms.realizo
+                    LEFT JOIN usuario us ON us.id = bms.verifico 
                     WHERE modulo = :modulo AND batch = :batch AND ref_producto = :ref_multi";
 
             $query = $conn->prepare($sql);
@@ -69,7 +69,7 @@ if (!empty($_POST)) {
             if (empty($arreglo)) {
                 $sql = "SELECT bms.id, bms.ref_material, bms.envasada, bms.averias, bms.sobrante, bms.ref_producto, bms.batch, bms.modulo, u.urlfirma as realizo 
                     FROM batch_material_sobrante bms 
-                    INNER JOIN usuario u ON u.id = bms.realizo
+                    LEFT JOIN usuario u ON u.id = bms.realizo
                     WHERE modulo = :modulo AND batch = :batch AND ref_producto = :ref_multi";
 
                 $query = $conn->prepare($sql);
@@ -118,7 +118,7 @@ if (!empty($_POST)) {
 
             $sql = "SELECT bms.id, bms.ref_material, bms.envasada, bms.averias, bms.sobrante, bms.ref_producto, bms.batch, bms.modulo, u.urlfirma as realizo 
                     FROM batch_material_sobrante bms 
-                    INNER JOIN usuario u ON u.id = bms.realizo
+                    LEFT JOIN usuario u ON u.id = bms.realizo
                     WHERE batch = :batch";
             $query = $conn->prepare($sql);
             $result = $query->execute(['batch' => $batch]);
@@ -129,7 +129,7 @@ if (!empty($_POST)) {
         case 8: // Obtener material sobrante y firmas
 
             $sql = "SELECT bms.id, bms.ref_material, bms.envasada, bms.averias, bms.sobrante, bms.ref_producto, bms.batch, bms.modulo, u.urlfirma as realizo 
-                        FROM batch_material_sobrante bms INNER JOIN usuario u ON u.id = bms.realizo
+                        FROM batch_material_sobrante bms LEFT JOIN usuario u ON u.id = bms.realizo
                         WHERE batch = :batch";
             $query = $conn->prepare($sql);
             $result = $query->execute(['batch' => $batch]);
