@@ -195,11 +195,15 @@ class ValidacionFirmasDao
             for ($i = 0; $i < sizeof($batchL); $i++) {
                 $cantidad = 0;
 
-                if ($batchL['dir_produccion'] > 0 || $batchL['dir_calidad'] > 0 || $batchL['dir_tecnica'] > 0)
-                    $cantidad += 1;
+                if ($batchL[$i]['dir_produccion'] > 0 || $batchL[$i]['dir_calidad'] > 0 || $batchL[$i]['dir_tecnica'] > 0) {
+                    $batchL[$i]['dir_produccion'] > 0 ? $cantidad = 1 : $cantidad;
+                    $batchL[$i]['dir_calidad'] > 0 ? $cantidad  += 1 : $cantidad;
+                    $batchL[$i]['dir_tecnica'] > 0 ? $cantidad += 1 : $cantidad;
+                }
+
 
                 $modulo = 10;
-                $firmas[$batchL[$i]['modulo']] = $firmas[$modulo] + $cantidad;
+                $firmas[$modulo] = $firmas[$modulo] + $cantidad;
             }
 
             return $firmas;
