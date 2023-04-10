@@ -167,8 +167,10 @@ class ValidacionFirmasDao
             for ($i = 0; $i < sizeof($batchsAM); $i++) {
                 $cantidad = 0;
 
-                if ($batchsAM[$i]['realizo'] > 0 || $batchsAM[$i]['verifico'] > 0)
-                    $cantidad = $cantidad + 1;
+                if ($batchsAM[$i]['realizo'] > 0 || $batchsAM[$i]['verifico'] > 0) {
+                    $batchsAM[$i]['realizo'] > 0 ? $cantidad = 1 : $cantidad;
+                    $batchsAM[$i]['verifico'] > 0 ? $cantidad  += 1 : $cantidad;
+                }
 
                 $modulo = $batchsAM[$i]['modulo'];
                 $firmas[$batchsAM[$i]['modulo']] = $firmas[$modulo] + $cantidad;

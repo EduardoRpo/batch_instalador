@@ -19,6 +19,10 @@ class calcTamanioMultiDao
 
     public function calcularTamanioLote($data, $cantidad)
     {
+        /* densidad es la tabla producto */
+        //rendimiento
+        //$rendimiento = 100 - $rendimiento_producto;
+        //$tamanioLote = (((floatval($data['densidad_producto']) * floatval($data['presentacion']) * floatval($cantidad)) * (1 + $rendimiento)) * (1 + $data['ajuste'])) / 1000;
         $tamanioLote = ((floatval($data['densidad']) * floatval($data['presentacion']) * floatval($cantidad)) * (1 + $data['ajuste'])) / 1000;
         return $tamanioLote;
     }
