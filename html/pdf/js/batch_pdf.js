@@ -230,12 +230,10 @@ parametros_Control = () => {
                     <tr>
                         <th scope="row" class="centrado">${j}</th>
                         <td>${info[i].pregunta}</td>
-                        <td class="centrado">${
-                          info[i].solucion == 1 ? 'X' : ''
-                        }</td>
-                        <td class="centrado">${
-                          info[i].solucion == 0 ? 'X' : ''
-                        }</td>
+                        <td class="centrado">${info[i].solucion == 1 ? 'X' : ''
+          }</td>
+                        <td class="centrado">${info[i].solucion == 0 ? 'X' : ''
+          }</td>
                     </tr>`);
       }
     }
@@ -299,7 +297,7 @@ desinfectante = () => {
 
         /* fecha nuevo registro cambia a fecha registro a partir del 1034 */
         debugger;
-        if (idBatch >= 2501) fechaRegistro = info[i].fecha_registro;
+        if (idBatch >= 2599) fechaRegistro = info[i].fecha_registro;
         else fechaRegistro = info[i].fecha_nuevo_registro;
 
         $(`.desinfectante${info[i].modulo}`).html(info[i].desinfectante);
@@ -379,8 +377,8 @@ const firmas_multi = (info) => {
     for (let i = 0; i < multi.length; i++)
       for (let j = 0; j < info.length; j++)
         if (multi[i]['referencia'] == info[j]['ref_multi']) {
-          /* batch 2501 incluido en adelante tomar fecha registro  */
-          if (idBatch >= 2501) fechaRegistro = info[j].fecha_registro;
+          /* batch 2599 incluido en adelante tomar fecha registro  */
+          if (idBatch >= 2599) fechaRegistro = info[j].fecha_registro;
           else fechaRegistro = info[j].fecha_nuevo_registro;
 
           $(`#multi_fecha${i + 1}`).html(fechaRegistro);
@@ -522,22 +520,22 @@ function control_proceso() {
         info[i].color == 1
           ? 'Cumple'
           : info[i].color == 2
-          ? 'No Cumple'
-          : 'No aplica'
+            ? 'No Cumple'
+            : 'No aplica'
       );
       $(`.olor${info[i].modulo}`).html(
         info[i].olor == 1
           ? 'Cumple'
           : info[i].color == 2
-          ? 'No Cumple'
-          : 'No aplica'
+            ? 'No Cumple'
+            : 'No aplica'
       );
       $(`.apariencia${info[i].modulo}`).html(
         info[i].apariencia == 1
           ? 'Cumple'
           : info[i].color == 2
-          ? 'No Cumple'
-          : 'No aplica'
+            ? 'No Cumple'
+            : 'No aplica'
       );
       $(`.ph${info[i].modulo}`).html(info[i].ph);
       $(`.viscosidad${info[i].modulo}`).html(info[i].viscosidad);
@@ -546,22 +544,22 @@ function control_proceso() {
         info[i].untuosidad == 1
           ? 'Cumple'
           : info[0].color == 2
-          ? 'No Cumple'
-          : 'No aplica'
+            ? 'No Cumple'
+            : 'No aplica'
       );
       $(`.espumoso${info[i].modulo}`).html(
         info[i].espumoso == 1
           ? 'Cumple'
           : info[i].color == 2
-          ? 'No Cumple'
-          : 'No aplica'
+            ? 'No Cumple'
+            : 'No aplica'
       );
       $(`.alcohol${info[i].modulo}`).html(
         info[i].alcohol == 1
           ? 'Cumple'
           : info[i].color == 2
-          ? 'No Cumple'
-          : 'No aplica'
+            ? 'No Cumple'
+            : 'No aplica'
       );
     }
   });
@@ -1048,7 +1046,7 @@ conciliacion = (multi) => {
 
         for (let i = 0; i < info.length; i++) {
           if (info[i].modulo == 6) {
-            if (idBatch >= 2501) fecha = info[i].fecha_registro;
+            if (idBatch >= 2599) fecha = info[i].fecha_registro;
             else fecha = info[i].fecha_nuevo_registro;
 
             $(`#f_realizoConciliacion${j + 1}`).prop('src', info[i].urlfirma);
@@ -1074,7 +1072,7 @@ const despachos = () => {
     success: function (response) {
       info = JSON.parse(response);
       if (info.length > 0) {
-        if (idBatch >= 2501) fecha = info[i].fecha_registro;
+        if (idBatch >= 2599) fecha = info[i].fecha_registro;
         else fecha = info[i].fecha_nuevo_registro;
         $('#fecha7').html(info[0].fecha_nuevo_registro);
         for (let i = 0; i < info.length; i++) {
@@ -1127,20 +1125,20 @@ analisisMicrobiologico = () => {
       data[0].pseudomona == 1
         ? (result1 = 'Ausencia')
         : (data[0].pseudomona = 2
-            ? (result1 = 'Presencia')
-            : (result1 = 'No Aplica'));
+          ? (result1 = 'Presencia')
+          : (result1 = 'No Aplica'));
 
       data[0].escherichia == 1
         ? (result2 = 'Ausencia')
         : (data[0].escherichia = 2
-            ? (result2 = 'Presencia')
-            : (result2 = 'No Aplica'));
+          ? (result2 = 'Presencia')
+          : (result2 = 'No Aplica'));
 
       data[0].staphylococcus == 1
         ? (result3 = 'Ausencia')
         : (data[0].staphylococcus = 2
-            ? (result3 = 'Presencia')
-            : (result3 = 'No Aplica'));
+          ? (result3 = 'Presencia')
+          : (result3 = 'No Aplica'));
 
       $('#mesofilos').html(data[0].mesofilos);
       $('#pseudomona').html(result1);
@@ -1194,7 +1192,7 @@ const liberacion_lote = () => {
       let calidad = info['dirCa'];
       let tecnica = info['dirTec'];
 
-      if (idBatch >= 2501) fecha = info[i].fecha_registro;
+      if (idBatch >= 2599) fecha = info[i].fecha_registro;
       else fecha = info.fecha_nuevo_registro;
 
       $('.fechaHoraLiberacion').html(
