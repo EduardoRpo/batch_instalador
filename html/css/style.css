@@ -10878,6 +10878,14 @@ para mejorar el responsive enseguida*/
     justify-content: center;
 }
 
+.contenedorEnvasado {
+    margin: 1rem 0 0.7rem;
+    display: grid;
+    grid-template-columns: 150px 150px 150px 1fr;
+    grid-gap: 1em;
+    justify-content: center;
+}
+
 .contenedorPrincipalBatch {
     margin: 1rem 0 0.7rem;
     display: grid;

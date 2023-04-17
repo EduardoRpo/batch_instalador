@@ -7,6 +7,7 @@
         "http-interop/http-factory-guzzle": "^1.0",
         "laminas/laminas-diactoros": "^2.2",
         "symfony/dotenv": "^5.0",
-        "monolog/monolog": "^2.0"
+        "monolog/monolog": "^2.0",
+        "phpoffice/phpspreadsheet": "^1.28"
     }
 }

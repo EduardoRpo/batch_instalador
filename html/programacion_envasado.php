@@ -158,23 +158,29 @@ sesiones(5);
                     </button>
                 </div>
             </div>
+        </div>
 
+        <div class="card">
+            <div class="contenedorEnvasado row" style="margin-left:95px ;">
+                <div>
+                    <label>Fecha Inicial</label>
+                    <input type="date" class="form-control text-center" id="fechaInicial">
+                </div>
+                <div>
+                    <label>Fecha Final</label>
+                    <input type="date" class="form-control text-center" id="fechaFinal">
+                </div>
+                <div>
+                    <button type="button" id="btnBatchEnvasado" class="btn waves-effect waves-light btn-info" style="width: 120px; margin-top:33px;">
+                        <strong>Exportar</strong>
+                    </button>
+                </div>
+            </div>
         </div>
 
         <div class="row">
             <div class="col-md-12 align-self-center">
                 <div class="card">
-                    <!-- <div class="row justify-content-end mt-2">
-                        <div class="col-2">
-                            <label>Fecha</label>
-                            <input type="date" class="form-control text-center" id="fechaBusqueda">
-                        </div>
-                        <div class="col-xs-2">
-                            <button type="button" id="btnLimpiar" class="btn waves-effect waves-light btn-warning" style="width: 120px; margin-top:33px; margin-right: 35px">
-                                <strong>Limpiar</strong>
-                            </button>
-                        </div>
-                    </div> -->
                     <div class="card-block">
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered" id="tablaEnvasado" style="width: 100%;">
@@ -213,6 +219,7 @@ sesiones(5);
     <script src="/html/js/batch/multipresentacion/saveMulti.js"></script>
     <script src="/html/js/batch/multipresentacion/updateMulti.js"></script>
     <script src="/html/js/batch/multipresentacion/multiCalc.js"></script>
+    <script src="/html/js/programacion_envasado/gestionEnvasado.js"></script>
 
 </body>
 

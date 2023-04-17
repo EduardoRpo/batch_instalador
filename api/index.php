@@ -124,6 +124,7 @@ require_once __DIR__ . '/src/routes/app/envasado/entregasParciales.php';
 require_once __DIR__ . '/src/routes/app/envasado/equipos.php';
 
 //programacion envasado
+require_once __DIR__ . '/src/routes/app/programacion_envasado/gestionEnvasado.php';
 require_once __DIR__ . '/src/routes/app/programacion_envasado/programacion_envasado.php';
 
 //Explosion de Materiales

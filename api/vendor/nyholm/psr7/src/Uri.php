@@ -14,14 +14,18 @@ use Psr\Http\Message\UriInterface;
  * @author Matthew Weier O'Phinney
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  * @author Martijn van der Ven <martijn@vanderven.se>
+ *
+ * @final This class should never be extended. See https://github.com/Nyholm/psr7/blob/master/doc/final.md
  */
-final class Uri implements UriInterface
+class Uri implements UriInterface
 {
     private const SCHEMES = ['http' => 80, 'https' => 443];
 
     private const CHAR_UNRESERVED = 'a-zA-Z0-9_\-\.~';
 
     private const CHAR_SUB_DELIMS = '!\$&\'\(\)\*\+,;=';
+
+    private const CHAR_GEN_DELIMS = ':\/\?#\[\]@';
 
     /** @var string Uri scheme. */
     private $scheme = '';
@@ -48,13 +52,13 @@ final class Uri implements UriInterface
     {
         if ('' !== $uri) {
             if (false === $parts = \parse_url($uri)) {
-                throw new \InvalidArgumentException("Unable to parse URI: $uri");
+                throw new \InvalidArgumentException(\sprintf('Unable to parse URI: "%s"', $uri));
             }
 
             // Apply parse_url parts to a URI.
-            $this->scheme = isset($parts['scheme']) ? \strtolower($parts['scheme']) : '';
+            $this->scheme = isset($parts['scheme']) ? \strtr($parts['scheme'], 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') : '';
             $this->userInfo = $parts['user'] ?? '';
-            $this->host = isset($parts['host']) ? \strtolower($parts['host']) : '';
+            $this->host = isset($parts['host']) ? \strtr($parts['host'], 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') : '';
             $this->port = isset($parts['port']) ? $this->filterPort($parts['port']) : null;
             $this->path = isset($parts['path']) ? $this->filterPath($parts['path']) : '';
             $this->query = isset($parts['query']) ? $this->filterQueryAndFragment($parts['query']) : '';
@@ -110,7 +114,20 @@ final class Uri implements UriInterface
 
     public function getPath(): string
     {
-        return $this->path;
+        $path = $this->path;
+
+        if ('' !== $path && '/' !== $path[0]) {
+            if ('' !== $this->host) {
+                // If the path is rootless and an authority is present, the path MUST be prefixed by "/"
+                $path = '/' . $path;
+            }
+        } elseif (isset($path[1]) && '/' === $path[1]) {
+            // If the path is starting with more than one "/", the
+            // starting slashes MUST be reduced to one.
+            $path = '/' . \ltrim($path, '/');
+        }
+
+        return $path;
     }
 
     public function getQuery(): string
@@ -129,7 +146,7 @@ final class Uri implements UriInterface
             throw new \InvalidArgumentException('Scheme must be a string');
         }
 
-        if ($this->scheme === $scheme = \strtolower($scheme)) {
+        if ($this->scheme === $scheme = \strtr($scheme, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')) {
             return $this;
         }
 
@@ -142,9 +159,17 @@ final class Uri implements UriInterface
 
     public function withUserInfo($user, $password = null): self
     {
-        $info = $user;
+        if (!\is_string($user)) {
+            throw new \InvalidArgumentException('User must be a string');
+        }
+
+        $info = \preg_replace_callback('/[' . self::CHAR_GEN_DELIMS . self::CHAR_SUB_DELIMS . ']++/', [__CLASS__, 'rawurlencodeMatchZero'], $user);
         if (null !== $password && '' !== $password) {
-            $info .= ':' . $password;
+            if (!\is_string($password)) {
+                throw new \InvalidArgumentException('Password must be a string');
+            }
+
+            $info .= ':' . \preg_replace_callback('/[' . self::CHAR_GEN_DELIMS . self::CHAR_SUB_DELIMS . ']++/', [__CLASS__, 'rawurlencodeMatchZero'], $password);
         }
 
         if ($this->userInfo === $info) {
@@ -163,7 +188,7 @@ final class Uri implements UriInterface
             throw new \InvalidArgumentException('Host must be a string');
         }
 
-        if ($this->host === $host = \strtolower($host)) {
+        if ($this->host === $host = \strtr($host, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')) {
             return $this;
         }
 
