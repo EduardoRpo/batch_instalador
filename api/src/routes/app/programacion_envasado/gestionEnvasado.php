@@ -15,18 +15,23 @@ $app->post('/gestionEnvasado', function (Request $request, Response $response, $
     $dates = $request->getParsedBody();
 
     $date1 = $dates['fechaInicial'] . ' 00:00:00';
-    $date2 = $dates['fechaFinal'] . ' 00:00:00';
+
+    if ($dates['fechaInicial'] == $dates['fechaFinal'])
+        $date2 = $dates['fechaFinal'] . ' 23:59:00';
+    else
+        $date2 = $dates['fechaFinal'] . ' 00:00:00';
+
 
     $dataBatch = $batchEnvasadoDao->findBatchEnvasadoxDate($date1, $date2);
 
     if ($dataBatch) {
         for ($i = 0; $i < sizeof($dataBatch); $i++) {
             $dataEnvasado = $envasadoDao->findAllEnvase($dataBatch[$i]['referencia_comercial']);
-            $array[$i] = array_merge($dataBatch[$i], $dataEnvasado[0]);
+            $arrayBD[$i] = array_merge($dataBatch[$i], $dataEnvasado[0]);
         }
 
-        //$resp = $exportExcelDao->readExcel();
-        $resp = $exportExcelDao->exportExcel($array);
+        $dataExcel = $exportExcelDao->readExcel();
+        $resp = $exportExcelDao->exportExcel($dataExcel, $arrayBD);
     } else
         $resp = 1;
 
