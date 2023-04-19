@@ -50,8 +50,10 @@ class exportarExcelDao
             $newArray[$j]['cantidad'] = $data_array[$i][6];
             $newArray[$j]['id_etiqueta'] = $data_array[$i][7];
             $newArray[$j]['cantidad'] = $data_array[$i][8];
-            $newArray[$j]['id_otros'] = $data_array[$i][9];
+            $newArray[$j]['id_empaque'] = $data_array[$i][9];
             $newArray[$j]['cantidad'] = $data_array[$i][10];
+            $newArray[$j]['id_otros'] = $data_array[$i][11];
+            $newArray[$j]['cantidad'] = $data_array[$i][12];
             $j++;
         }
 
@@ -72,25 +74,29 @@ class exportarExcelDao
         $sheet->setCellValue('G1', 'Cantidad');
         $sheet->setCellValue('H1', 'Etiqueta');
         $sheet->setCellValue('I1', 'Cantidad');
-        $sheet->setCellValue('J1', 'Otros');
+        $sheet->setCellValue('J1', 'Empaque');
         $sheet->setCellValue('K1', 'Cantidad');
+        $sheet->setCellValue('L1', 'Otros');
+        $sheet->setCellValue('M1', 'Cantidad');
 
         $fila = 2;
-
-        for ($i = 0; $i < sizeof($dataExcel); $i++) {
-            $sheet->setCellValue('A' . $fila, $dataExcel[$i]['programacion_envasado']);
-            $sheet->setCellValue('B' . $fila, $dataExcel[$i]['id_batch']);
-            $sheet->setCellValue('C' . $fila, $dataExcel[$i]['referencia_comercial']);
-            $sheet->setCellValue('D' . $fila, $dataExcel[$i]['id_envase']);
-            $sheet->setCellValue('E' . $fila, $dataExcel[$i]['cantidad']);
-            $sheet->setCellValue('F' . $fila, $dataExcel[$i]['id_tapa']);
-            $sheet->setCellValue('G' . $fila, $dataExcel[$i]['cantidad']);
-            $sheet->setCellValue('H' . $fila, $dataExcel[$i]['id_etiqueta']);
-            $sheet->setCellValue('I' . $fila, $dataExcel[$i]['cantidad']);
-            $sheet->setCellValue('J' . $fila, $dataExcel[$i]['id_otros']);
-            $sheet->setCellValue('K' . $fila, $dataExcel[$i]['cantidad']);
-            $fila++;
-        }
+        if ($dataExcel)
+            for ($i = 0; $i < sizeof($dataExcel); $i++) {
+                $sheet->setCellValue('A' . $fila, $dataExcel[$i]['programacion_envasado']);
+                $sheet->setCellValue('B' . $fila, $dataExcel[$i]['id_batch']);
+                $sheet->setCellValue('C' . $fila, $dataExcel[$i]['referencia_comercial']);
+                $sheet->setCellValue('D' . $fila, $dataExcel[$i]['id_envase']);
+                $sheet->setCellValue('E' . $fila, $dataExcel[$i]['cantidad']);
+                $sheet->setCellValue('F' . $fila, $dataExcel[$i]['id_tapa']);
+                $sheet->setCellValue('G' . $fila, $dataExcel[$i]['cantidad']);
+                $sheet->setCellValue('H' . $fila, $dataExcel[$i]['id_etiqueta']);
+                $sheet->setCellValue('I' . $fila, $dataExcel[$i]['cantidad']);
+                $sheet->setCellValue('J' . $fila, $dataExcel[$i]['id_empaque']);
+                $sheet->setCellValue('K' . $fila, $dataExcel[$i]['cantidad']);
+                $sheet->setCellValue('L' . $fila, $dataExcel[$i]['id_otros']);
+                $sheet->setCellValue('M' . $fila, $dataExcel[$i]['cantidad']);
+                $fila++;
+            }
 
         for ($i = 0; $i < sizeof($arrayBD); $i++) {
             $sheet->setCellValue('A' . $fila, $arrayBD[$i]['programacion_envasado']);
@@ -102,8 +108,10 @@ class exportarExcelDao
             $sheet->setCellValue('G' . $fila, $arrayBD[$i]['cantidad']);
             $sheet->setCellValue('H' . $fila, $arrayBD[$i]['id_etiqueta']);
             $sheet->setCellValue('I' . $fila, $arrayBD[$i]['cantidad']);
-            $sheet->setCellValue('J' . $fila, $arrayBD[$i]['id_otros']);
+            $sheet->setCellValue('J' . $fila, $arrayBD[$i]['id_empaque']);
             $sheet->setCellValue('K' . $fila, $arrayBD[$i]['cantidad']);
+            $sheet->setCellValue('L' . $fila, $arrayBD[$i]['id_otros']);
+            $sheet->setCellValue('M' . $fila, $arrayBD[$i]['cantidad']);
             $fila++;
         }
 
