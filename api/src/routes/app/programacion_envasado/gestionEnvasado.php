@@ -15,12 +15,7 @@ $app->post('/gestionEnvasado', function (Request $request, Response $response, $
     $dates = $request->getParsedBody();
 
     $date1 = $dates['fechaInicial'] . ' 00:00:00';
-
-    if ($dates['fechaInicial'] == $dates['fechaFinal'])
-        $date2 = $dates['fechaFinal'] . ' 23:59:00';
-    else
-        $date2 = $dates['fechaFinal'] . ' 00:00:00';
-
+    $date2 = $dates['fechaFinal'] . ' 23:59:00';
 
     $dataBatch = $batchEnvasadoDao->findBatchEnvasadoxDate($date1, $date2);
 
