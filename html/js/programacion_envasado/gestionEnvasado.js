@@ -1,9 +1,7 @@
 
-$('#btnBatchEnvasado').prop('disabled', true);
-
-//Restriccion fechas
-
-$(document).on('blur', '#fechaFinal', function (e) {
+//Consulta batch Envasado por fecha
+$('.cssload-loader').hide();
+$(document).on('click', '#btnBatchEnvasado', function (e) {
     e.preventDefault();
 
     fechaInicial = $(`#fechaInicial`).val();
@@ -11,26 +9,22 @@ $(document).on('blur', '#fechaFinal', function (e) {
 
     if (fechaInicial > fechaFinal) {
         alertify.set("notifier", "position", "top-right");
-        alertify.success("La fecha Inicial debe ser mayor a la fecha Final");
+        alertify.error("La fecha Inicial debe ser mayor a la fecha Final");
         return false;
-    } else
-        $('#btnBatchEnvasado').prop('disabled', false);
-});
-
-
-//Consulta batch Envasado por fecha
-
-$(document).on('click', '#btnBatchEnvasado', function (e) {
-    e.preventDefault();
-
-    fechaInicial = $(`#fechaInicial`).val();
-    fechaFinal = $(`#fechaFinal`).val();
+    }
 
     $.ajax({
         type: "POST",
         url: "api/gestionEnvasado",
         data: { fechaInicial, fechaFinal },
-
+        beforeSend: function () {
+            $('.cssload-loader').show();
+            $('#btnBatchEnvasado').hide();
+        },
+        complete: function () {
+            $('.cssload-loader').hide();
+            $('#btnBatchEnvasado').show();
+        },
         success: function (r) {
             if (r.error) {
                 alertify.set("notifier", "position", "top-right");

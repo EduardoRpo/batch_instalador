@@ -48,6 +48,147 @@ sesiones(5);
 
         }
     </style>
+    <style>
+        .cssload-loader {
+            width: 244px;
+            height: 49px;
+            line-height: 49px;
+            text-align: center;
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -o-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            font-family: helvetica, arial, sans-serif;
+            text-transform: uppercase;
+            font-weight: 900;
+            font-size: 18px;
+            color: rgb(206, 66, 51);
+            letter-spacing: 0.2em;
+        }
+
+        .cssload-loader::before,
+        .cssload-loader::after {
+            content: "";
+            display: block;
+            width: 15px;
+            height: 15px;
+            background: rgb(206, 66, 51);
+            position: absolute;
+            animation: cssload-load 0.81s infinite alternate ease-in-out;
+            -o-animation: cssload-load 0.81s infinite alternate ease-in-out;
+            -ms-animation: cssload-load 0.81s infinite alternate ease-in-out;
+            -webkit-animation: cssload-load 0.81s infinite alternate ease-in-out;
+            -moz-animation: cssload-load 0.81s infinite alternate ease-in-out;
+        }
+
+        .cssload-loader::before {
+            top: 0;
+        }
+
+        .cssload-loader::after {
+            bottom: 0;
+        }
+
+
+
+        @keyframes cssload-load {
+            0% {
+                left: 0;
+                height: 29px;
+                width: 15px;
+            }
+
+            50% {
+                height: 8px;
+                width: 39px;
+            }
+
+            100% {
+                left: 229px;
+                height: 29px;
+                width: 15px;
+            }
+        }
+
+        @-o-keyframes cssload-load {
+            0% {
+                left: 0;
+                height: 29px;
+                width: 15px;
+            }
+
+            50% {
+                height: 8px;
+                width: 39px;
+            }
+
+            100% {
+                left: 229px;
+                height: 29px;
+                width: 15px;
+            }
+        }
+
+        @-ms-keyframes cssload-load {
+            0% {
+                left: 0;
+                height: 29px;
+                width: 15px;
+            }
+
+            50% {
+                height: 8px;
+                width: 39px;
+            }
+
+            100% {
+                left: 229px;
+                height: 29px;
+                width: 15px;
+            }
+        }
+
+        @-webkit-keyframes cssload-load {
+            0% {
+                left: 0;
+                height: 29px;
+                width: 15px;
+            }
+
+            50% {
+                height: 8px;
+                width: 39px;
+            }
+
+            100% {
+                left: 229px;
+                height: 29px;
+                width: 15px;
+            }
+        }
+
+        @-moz-keyframes cssload-load {
+            0% {
+                left: 0;
+                height: 29px;
+                width: 15px;
+            }
+
+            50% {
+                height: 8px;
+                width: 39px;
+            }
+
+            100% {
+                left: 229px;
+                height: 29px;
+                width: 15px;
+            }
+        }
+    </style>
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">
@@ -171,10 +312,11 @@ sesiones(5);
                     <input type="date" class="form-control text-center" id="fechaFinal">
                 </div>
                 <div>
-                    <button type="button" id="btnBatchEnvasado" class="btn waves-effect waves-light btn-info" style="width: 120px; margin-top:33px;">
+                    <button type="button" id="btnBatchEnvasado" class="btn btn-info" style="width: 120px; margin-top:33px;">
                         <strong>Exportar</strong>
                     </button>
                 </div>
+                <div class="cssload-loader" style="margin-top: 30px;">Exportando...</div>
             </div>
         </div>
 
@@ -206,6 +348,8 @@ sesiones(5);
     <script src="html/js/utils/datatables.js"></script>
     <script src="../assets/plugins/jquery/jquery.number.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="/html/js/global/searchData.js"></script>
     <script src="/admin/sistema/js/global/numSemanas.js"></script>
