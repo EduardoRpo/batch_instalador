@@ -11,13 +11,17 @@
                     </div>
                     <div class="modal-body">
                         <div class="row page cardInputsFirmas">
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <label>Batch Inicial:</label>
                                 <input type="number" id="minBatch" class="form-control text-center">
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <label>Batch Final:</label>
                                 <input type="number" id="maxBatch" class="form-control text-center">
+                            </div>
+                            <div class="col-sm-4">
+                                <label>Estado Actual</label>
+                                <input type="number" id="currentState" class="form-control text-center" disabled>
                             </div>
                         </div>
                         <div class="spinner"></div>

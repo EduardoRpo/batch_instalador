@@ -2,6 +2,7 @@ $(document).ready(function () {
   $('#btnLimpiarFirmas').click(function (e) {
     e.preventDefault();
 
+    $('#currentState').val('');
     $('#minBatch').val('');
     $('#maxBatch').val('');
 
@@ -56,4 +57,22 @@ $(document).ready(function () {
 
     setTimeout(alignTHeader, 5000);
   };
+
+  $('#maxBatch').keyup(function (e) {
+    minBatch = $('#minBatch').val();
+    maxBatch = $('#maxBatch').val();
+
+    if (minBatch == maxBatch) {
+      $.get(`/api/batch/${minBatch}`, function (data, textStatus, jqXHR) {
+        $('#currentState').val(data.estado);
+
+      });
+    }
+
+
+
+  })
+
+
+
 });

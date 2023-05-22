@@ -17,6 +17,17 @@ class ControlFirmasMultiDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
+    public function findAllFirmasByBatch($batch)
+    {
+        $connection = Connection::getInstance()->getConnection();
+        $sql = "SELECT * FROM batch_control_firmas WHERE batch = :batch";
+        $query = $connection->prepare($sql);
+        $query->execute(['batch' => $batch]);
+        $data = $query->fetchAll($connection::FETCH_ASSOC);
+        return $data;
+    }
+
+
     public function controlCantidadFirmas($batch)
     {
         $connection = Connection::getInstance()->getConnection();

@@ -69,7 +69,8 @@ function segundaSeccionRealizo($conn)
 
     if ($modulo == 5 || $modulo == 6) {
         $ref_multi = $_POST['ref_multi'];
-        $sql = "SELECT * FROM batch_firmas2seccion WHERE modulo = :modulo AND batch = :batch AND ref_multi = :ref_multi";
+        $sql = "SELECT * FROM batch_firmas2seccion 
+                WHERE modulo = :modulo AND batch = :batch AND ref_multi = :ref_multi";
         $query = $conn->prepare($sql);
         $query->execute(['modulo' => $modulo, 'batch' => $batch, 'ref_multi' => $ref_multi]);
         $rows = $query->rowCount();

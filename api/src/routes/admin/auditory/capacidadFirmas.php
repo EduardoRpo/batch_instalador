@@ -32,6 +32,26 @@ $app->post('/validacionFirmas', function (Request $request, Response $response, 
         // Validar firmas totales
         $resp = $controlFirmasMultiDao->controlCantidadFirmas($batchs[$i]['id_batch']);
         $resp = $controlFirmasMultiDao->controlFirmasMulti($batchs[$i]['id_batch']);
+
+        //Cambio de estado
+        if ($batchs[0]['estado'] == 10) {
+            $firmasBatch = $controlFirmasMultiDao->findAllFirmasByBatch($batchs[$i]['id_batch']);
+            for ($i = 0; $i < sizeof($firmasBatch); $i++) {
+                if ($firmasBatch[$i]['cantidad_firmas'] != $firmasBatch[$i]['total_firmas']) {
+                    if ($firmasBatch[$i]['modulo'] == 5) {
+                        $estado = 6;
+                        break;
+                    } else if ($firmasBatch[$i]['modulo'] == 6) {
+                        $estado = 6.5;
+                        break;
+                    } else if ($firmasBatch[$i]['modulo'] == 8) {
+                        $estado = 8;
+                        break;
+                    } else $estado = 9;
+                }
+            }
+            $batchDao->updateEstadoBatch($batchs[0]['id_batch'], $estado);
+        }
     }
 
     if ($resp == null)

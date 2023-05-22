@@ -54,7 +54,8 @@ class ValidacionFirmasDao
     {
         try {
             $connection = Connection::getInstance()->getConnection();
-            $sql = "SELECT COUNT(realizo) AS realizo, COUNT(verifico) AS verifico, batch, modulo FROM batch_firmas2seccion WHERE batch = :batch GROUP BY modulo";
+            //$sql = "SELECT COUNT(realizo) AS realizo, COUNT(verifico) AS verifico, batch, modulo FROM batch_firmas2seccion WHERE batch = :batch GROUP BY modulo";
+            $sql = "SELECT realizo, verifico, batch, modulo FROM batch_firmas2seccion WHERE batch = :batch GROUP BY modulo";
             $stmt = $connection->prepare($sql);
             $stmt->execute(['batch' => $batch]);
             $batchsF2S = $stmt->fetchAll($connection::FETCH_ASSOC);
@@ -64,8 +65,11 @@ class ValidacionFirmasDao
                 $cantidad = 0;
 
                 if ($batchsF2S[$i]['modulo'] != 4 && $batchsF2S[$i]['modulo'] != 8) {
+                    ($batchsF2S[$i]['realizo'] > 0) ? $countR = 1 : $countR = 0;
+                    ($batchsF2S[$i]['verifico'] > 0) ? $countV = 1 : $countV = 0;
 
-                    $cantidad = $batchsF2S[$i]['realizo'] + $batchsF2S[$i]['verifico'];
+                    //$cantidad = $batchsF2S[$i]['realizo'] + $batchsF2S[$i]['verifico'];
+                    $cantidad = $countV + $countR;
                 }
 
                 $modulo = $batchsF2S[$i]['modulo'];
