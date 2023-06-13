@@ -33,50 +33,52 @@
         <a href='#'> <i class='fa fa-times-circle fa-2x link-cerrar flotante position' data-toggle='tooltip' title='Cerrar ventana' style='color:red;'></i></a>
     </div>
 
-    <!-- Head -->
-    <?php include_once __DIR__ . '/modules/head.php'; ?>
+    <div id="invoice">
+        <!-- Head -->
+        <?php include_once __DIR__ . '/modules/head.php'; ?>
 
-    <!-- pesaje -->
-    <h1 class="SaltoDePagina"></h1>
-    <?php include_once __DIR__ . '/modules/pesaje.php'; ?>
+        <!-- pesaje -->
+        <h1 class="SaltoDePagina"></h1>
+        <?php include_once __DIR__ . '/modules/pesaje.php'; ?>
 
-    <!-- Preparacion -->
-    <h1 class="SaltoDePagina"></h1>
-    <?php include_once __DIR__ . '/modules/preparacion.php'; ?>
+        <!-- Preparacion -->
+        <h1 class="SaltoDePagina"></h1>
+        <?php include_once __DIR__ . '/modules/preparacion.php'; ?>
 
-    <!-- Aprobación -->
-    <h1 class="SaltoDePagina"></h1>
-    <?php include_once __DIR__ . '/modules/aprobacion.php'; ?>
+        <!-- Aprobación -->
+        <h1 class="SaltoDePagina"></h1>
+        <?php include_once __DIR__ . '/modules/aprobacion.php'; ?>
 
-    <!-- Envasado -->
-    <h1 class="SaltoDePagina"> </h1>
-    <?php include_once __DIR__ . '/modules/envasado.php'; ?>
+        <!-- Envasado -->
+        <h1 class="SaltoDePagina"> </h1>
+        <?php include_once __DIR__ . '/modules/envasado.php'; ?>
 
-    <!-- Acondicionamiento -->
-    <h1 class="SaltoDePagina"> </h1>
-    <?php include_once __DIR__ . '/modules/acondicionamiento.php'; ?>
+        <!-- Acondicionamiento -->
+        <h1 class="SaltoDePagina"> </h1>
+        <?php include_once __DIR__ . '/modules/acondicionamiento.php'; ?>
 
-    <!-- inicio despachos -->
-    <h1 class="SaltoDePagina"> </h1>
-    <?php include_once __DIR__ . '/modules/despachos.php'; ?>
+        <!-- inicio despachos -->
+        <h1 class="SaltoDePagina"> </h1>
+        <?php include_once __DIR__ . '/modules/despachos.php'; ?>
 
-    <!-- Inicio Microbiologia -->
-    <h1 class="SaltoDePagina"> </h1>
-    <?php include_once __DIR__ . '/modules/microbiologia.php'; ?>
+        <!-- Inicio Microbiologia -->
+        <h1 class="SaltoDePagina"> </h1>
+        <?php include_once __DIR__ . '/modules/microbiologia.php'; ?>
 
-    <!-- Inicio Fisicoquimico -->
-    <h1 class="SaltoDePagina"> </h1>
-    <?php include_once __DIR__ . '/modules/fisicoquimico.php'; ?>
+        <!-- Inicio Fisicoquimico -->
+        <h1 class="SaltoDePagina"> </h1>
+        <?php include_once __DIR__ . '/modules/fisicoquimico.php'; ?>
 
-    <!-- inicio liberacion Lote -->
-    <h1 class="SaltoDePagina"> </h1>
-    <?php include_once __DIR__ . '/modules/liberacionLote.php'; ?>
+        <!-- inicio liberacion Lote -->
+        <h1 class="SaltoDePagina"> </h1>
+        <?php include_once __DIR__ . '/modules/liberacionLote.php'; ?>
 
-    <h1 class="SaltoDePagina"> </h1>
-    <?php include_once __DIR__ . '/modules/etiquetasPesaje.php'; ?>
+        <h1 class="SaltoDePagina"> </h1>
+        <?php include_once __DIR__ . '/modules/etiquetasPesaje.php'; ?>
 
-    <h1 class="SaltoDePagina"> </h1>
-    <?php include_once __DIR__ . '/modules/certificadoPesaje.php'; ?>
+        <h1 class="SaltoDePagina"> </h1>
+        <?php include_once __DIR__ . '/modules/certificadoPesaje.php'; ?>
+    </div>
 
     <script src="../../assets/plugins/jquery/jquery.min.js"></script>
     <script src="../../assets/plugins/bootstrap/js/tether.min.js"></script>
@@ -89,6 +91,7 @@
     <script src="https://use.fontawesome.com/15242848ba.js"></script>
     <script src="../../html/pdf/js/batch_pdf.js"></script>
     <script src="../../html/js/global/etiquetas.js"></script>
+    <script src="/html/pdf/js/download_pdf.js"></script>
     <!-- <script src="../../html/pdf/js/printThis.js"></script> -->
 
 </body>
