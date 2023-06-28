@@ -17,14 +17,14 @@
 
 </head>
 
-<body id="pdf">
+<body id="invoice">
 
-    <div class="mb-3" style="display: flex;justify-content:space-between">
-        <a><span><img src="../../assets/images/logo/logo-samara.png" style="width: 80%;" class="light-logo" alt="Samara Cosmetics" /></span></a>
-        <div>
-            <span id="codigo"></span>
-            <span id="version"></span>
-            <span id="fecha"></span>
+    <div class="card-body mb-3" style="display: flex;justify-content:space-between">
+        <a class="card-body"><span class="card-body"><img src="../../assets/images/logo/logo-samara.png" style="width: 80%;" class="light-logo" alt="Samara Cosmetics" /></span></a>
+        <div class="card-body">
+            <span class="card-body" id="codigo"></span>
+            <span class="card-body" id="version"></span>
+            <span class="card-body" id="fecha"></span>
         </div>
     </div>
 
@@ -33,50 +33,72 @@
         <a href='#'> <i class='fa fa-times-circle fa-2x link-cerrar flotante position' data-toggle='tooltip' title='Cerrar ventana' style='color:red;'></i></a>
     </div>
 
-    <div id="invoice">
-        <!-- Head -->
+    <!-- Head -->
+    <div class="datauristring">
         <?php include_once __DIR__ . '/modules/head.php'; ?>
+    </div>
 
-        <!-- pesaje -->
-        <h1 class="SaltoDePagina"></h1>
+    <!-- pesaje -->
+    <h1 class="SaltoDePagina"></h1>
+    <div class="datauristring">
         <?php include_once __DIR__ . '/modules/pesaje.php'; ?>
+    </div>
 
-        <!-- Preparacion -->
-        <h1 class="SaltoDePagina"></h1>
+    <!-- Preparacion -->
+    <h1 class="SaltoDePagina"></h1>
+    <div class="datauristring">
         <?php include_once __DIR__ . '/modules/preparacion.php'; ?>
+    </div>
 
-        <!-- Aprobación -->
-        <h1 class="SaltoDePagina"></h1>
+    <!-- Aprobación -->
+    <h1 class="SaltoDePagina"></h1>
+    <div class="datauristring">
         <?php include_once __DIR__ . '/modules/aprobacion.php'; ?>
+    </div>
 
-        <!-- Envasado -->
-        <h1 class="SaltoDePagina"> </h1>
+    <!-- Envasado -->
+    <h1 class="SaltoDePagina"> </h1>
+    <div class="datauristring">
         <?php include_once __DIR__ . '/modules/envasado.php'; ?>
+    </div>
 
-        <!-- Acondicionamiento -->
-        <h1 class="SaltoDePagina"> </h1>
+    <!-- Acondicionamiento -->
+    <h1 class="SaltoDePagina"> </h1>
+    <div class="datauristring">
         <?php include_once __DIR__ . '/modules/acondicionamiento.php'; ?>
+    </div>
 
-        <!-- inicio despachos -->
-        <h1 class="SaltoDePagina"> </h1>
+    <!-- inicio despachos -->
+    <h1 class="SaltoDePagina"> </h1>
+    <div class="datauristring">
         <?php include_once __DIR__ . '/modules/despachos.php'; ?>
+    </div>
 
-        <!-- Inicio Microbiologia -->
-        <h1 class="SaltoDePagina"> </h1>
+    <!-- Inicio Microbiologia -->
+    <h1 class="SaltoDePagina"> </h1>
+    <div class="datauristring">
         <?php include_once __DIR__ . '/modules/microbiologia.php'; ?>
+    </div>
 
-        <!-- Inicio Fisicoquimico -->
-        <h1 class="SaltoDePagina"> </h1>
+    <!-- Inicio Fisicoquimico -->
+    <h1 class="SaltoDePagina"> </h1>
+    <div class="datauristring">
         <?php include_once __DIR__ . '/modules/fisicoquimico.php'; ?>
+    </div>
 
-        <!-- inicio liberacion Lote -->
-        <h1 class="SaltoDePagina"> </h1>
+    <!-- inicio liberacion Lote -->
+    <h1 class="SaltoDePagina"> </h1>
+    <div class="datauristring">
         <?php include_once __DIR__ . '/modules/liberacionLote.php'; ?>
+    </div>
 
-        <h1 class="SaltoDePagina"> </h1>
+    <h1 class="SaltoDePagina"> </h1>
+    <div class="datauristring">
         <?php include_once __DIR__ . '/modules/etiquetasPesaje.php'; ?>
+    </div>
 
-        <h1 class="SaltoDePagina"> </h1>
+    <h1 class="SaltoDePagina"> </h1>
+    <div class="datauristring">
         <?php include_once __DIR__ . '/modules/certificadoPesaje.php'; ?>
     </div>
 
@@ -89,9 +111,16 @@
     <script src="../../html/js/utils/sidebarmenu.js"></script>
     <script src="../../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <script src="https://use.fontawesome.com/15242848ba.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.5/pdfmake.min.js"></script>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js"></script> -->
+
     <script src="../../html/pdf/js/batch_pdf.js"></script>
     <script src="../../html/js/global/etiquetas.js"></script>
     <script src="/html/pdf/js/download_pdf.js"></script>
+    <script src="/html/js/global/searchData.js"></script>
     <!-- <script src="../../html/pdf/js/printThis.js"></script> -->
 
 </body>

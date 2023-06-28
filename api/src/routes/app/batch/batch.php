@@ -173,3 +173,17 @@ $app->get('/deleteBatch/{id_batch}/{motivo}', function (Request $request, Respon
   $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
+
+$app->post('/savePdf', function (Request $request, Response $response, $args) use ($batchDao) {
+  $pdf = $batchDao->loadImagePdf();
+
+  if ($pdf == null)
+    $resp = array('success' => true, 'message' => 'Documento pdf descargado correctamente');
+  else if (isset($pdf['info']))
+    $resp = array('info' => true, 'message' => $pdf['message']);
+  else
+    $resp = array('error' => true, 'message' => 'Ocurrio un error mientras descargaba el Batch. Intentelo nuevamente');
+
+  $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
+});

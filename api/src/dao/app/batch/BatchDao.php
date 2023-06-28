@@ -309,4 +309,47 @@ class BatchDao extends estadoInicialDao
             return $error;
         }
     }
+
+    public function loadImagePdf()
+    {
+        try {
+            $targetDir = dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/html/pdf/batch/';
+            $allowTypes = array('pdf');
+
+            $image_name = str_replace(' ', '', $_FILES['pdf']['name']);
+            $tmp_name   = $_FILES['pdf']['tmp_name'];
+            $size       = $_FILES['pdf']['size'];
+            $type       = $_FILES['pdf']['type'];
+            $error      = $_FILES['pdf']['error'];
+
+            /* Verifica si directorio esta creado y lo crea */
+            if (!is_dir($targetDir))
+                mkdir($targetDir, 0777, true);
+
+            $targetDir = '/html/pdf/batch/';
+            $targetFilePath = $targetDir . '/' . $image_name;
+
+            $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+
+            if (in_array($fileType, $allowTypes)) {
+                $targetDir = dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/html/pdf/batch/';
+                $targetFilePath1 = $targetDir . '/' . $image_name;
+
+                // Verificar si el archivo de destino ya existe
+                if (file_exists($targetFilePath1)) {
+                    // Eliminar el archivo de destino existente
+                    unlink($targetFilePath1);
+                }
+
+                move_uploaded_file($tmp_name, $targetFilePath1);
+
+                // return $targetFilePath;
+            }
+        } catch (\Exception $e) {
+            $message = $e->getMessage();
+
+            $error = array('info' => true, 'message' => $message);
+            return $error;
+        }
+    }
 }

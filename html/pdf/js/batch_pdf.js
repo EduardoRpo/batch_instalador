@@ -298,7 +298,6 @@ desinfectante = () => {
         $(`#blank_ver${info[i].modulo}`).hide();
 
         /* fecha nuevo registro cambia a fecha registro a partir del 1034 */
-        debugger;
         if (idBatch >= 2599) fechaRegistro = info[i].fecha_registro;
         else fechaRegistro = info[i].fecha_nuevo_registro;
 
@@ -1183,6 +1182,8 @@ const liberacion_lote = () => {
     '../../html/php/servicios/c_batch_pdf.php',
     { idBatch, operacion: 16 },
     function (data, textStatus, jqXHR) {
+      // downloadPdfBatch();
+
       if (data == 'false') {
         $(`#f_realizoPRO`).hide();
         $(`#f_realizoCA`).hide();
