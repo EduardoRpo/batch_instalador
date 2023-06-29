@@ -34,73 +34,49 @@
     </div>
 
     <!-- Head -->
-    <div class="datauristring">
-        <?php include_once __DIR__ . '/modules/head.php'; ?>
-    </div>
+    <?php include_once __DIR__ . '/modules/head.php'; ?>
 
     <!-- pesaje -->
     <h1 class="SaltoDePagina"></h1>
-    <div class="datauristring">
-        <?php include_once __DIR__ . '/modules/pesaje.php'; ?>
-    </div>
+    <?php include_once __DIR__ . '/modules/pesaje.php'; ?>
 
     <!-- Preparacion -->
     <h1 class="SaltoDePagina"></h1>
-    <div class="datauristring">
-        <?php include_once __DIR__ . '/modules/preparacion.php'; ?>
-    </div>
+    <?php include_once __DIR__ . '/modules/preparacion.php'; ?>
 
     <!-- Aprobación -->
     <h1 class="SaltoDePagina"></h1>
-    <div class="datauristring">
-        <?php include_once __DIR__ . '/modules/aprobacion.php'; ?>
-    </div>
+    <?php include_once __DIR__ . '/modules/aprobacion.php'; ?>
 
     <!-- Envasado -->
     <h1 class="SaltoDePagina"> </h1>
-    <div class="datauristring">
-        <?php include_once __DIR__ . '/modules/envasado.php'; ?>
-    </div>
+    <?php include_once __DIR__ . '/modules/envasado.php'; ?>
 
     <!-- Acondicionamiento -->
     <h1 class="SaltoDePagina"> </h1>
-    <div class="datauristring">
-        <?php include_once __DIR__ . '/modules/acondicionamiento.php'; ?>
-    </div>
+    <?php include_once __DIR__ . '/modules/acondicionamiento.php'; ?>
 
     <!-- inicio despachos -->
     <h1 class="SaltoDePagina"> </h1>
-    <div class="datauristring">
-        <?php include_once __DIR__ . '/modules/despachos.php'; ?>
-    </div>
+    <?php include_once __DIR__ . '/modules/despachos.php'; ?>
 
     <!-- Inicio Microbiologia -->
     <h1 class="SaltoDePagina"> </h1>
-    <div class="datauristring">
-        <?php include_once __DIR__ . '/modules/microbiologia.php'; ?>
-    </div>
+    <?php include_once __DIR__ . '/modules/microbiologia.php'; ?>
 
     <!-- Inicio Fisicoquimico -->
     <h1 class="SaltoDePagina"> </h1>
-    <div class="datauristring">
-        <?php include_once __DIR__ . '/modules/fisicoquimico.php'; ?>
-    </div>
+    <?php include_once __DIR__ . '/modules/fisicoquimico.php'; ?>
 
     <!-- inicio liberacion Lote -->
     <h1 class="SaltoDePagina"> </h1>
-    <div class="datauristring">
-        <?php include_once __DIR__ . '/modules/liberacionLote.php'; ?>
-    </div>
+    <?php include_once __DIR__ . '/modules/liberacionLote.php'; ?>
 
     <h1 class="SaltoDePagina"> </h1>
-    <div class="datauristring">
-        <?php include_once __DIR__ . '/modules/etiquetasPesaje.php'; ?>
-    </div>
+    <?php include_once __DIR__ . '/modules/etiquetasPesaje.php'; ?>
 
     <h1 class="SaltoDePagina"> </h1>
-    <div class="datauristring">
-        <?php include_once __DIR__ . '/modules/certificadoPesaje.php'; ?>
-    </div>
+    <?php include_once __DIR__ . '/modules/certificadoPesaje.php'; ?>
 
     <script src="../../assets/plugins/jquery/jquery.min.js"></script>
     <script src="../../assets/plugins/bootstrap/js/tether.min.js"></script>
