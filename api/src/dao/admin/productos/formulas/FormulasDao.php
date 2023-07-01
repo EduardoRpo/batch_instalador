@@ -59,16 +59,16 @@ class FormulasDao
     public function saveFormula($dataFormula)
     {
         $connection = Connection::getInstance()->getConnection();
-        
+
         $datos = $dataFormula['array'];
-        
+
         foreach ($datos as $dato) {
             $sql = "INSERT INTO formula (id_producto, id_materiaprima, porcentaje) 
                 VALUES (:id_producto, :id_materiaprima, AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') )";
             $stmt = $connection->prepare($sql);
             $stmt->execute([
                 'id_materiaprima' => $dato['0'],
-                'id_producto' => $dato['1'],
+                'id_producto' => $dataFormula['ref_producto'],
                 'porcentaje' => $dato['2']
             ]);
             $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
@@ -90,16 +90,6 @@ class FormulasDao
         $stmt->execute(['ref_producto' => $dataFormula['ref_producto'], 'ref_materiaprima' => $dataFormula['ref_materiaprima']]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
-
-    /*  public function deleteFormula($dataFormula, $ref_multi)
-    {
-        $connection = Connection::getInstance()->getConnection();
-        for ($i = 0; $i < sizeof($ref_multi); $i++) {
-            $stmt = $connection->prepare("DELETE FROM formula WHERE id_producto = :ref_producto AND id_materiaprima = :ref_materiaprima");
-            $stmt->execute(['ref_producto' => $ref_multi[$i]['referencia'], 'ref_materiaprima' => $dataFormula[$ref_multi]]);
-            $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
-        }
-    } */
 
     /*  public function countRowFormula($dataFormula)
     {

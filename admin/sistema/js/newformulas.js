@@ -203,7 +203,7 @@ $('#tblFormula tbody').on('click', '.link-borrar', function(e) {
 limpiarDatatable = (rows) => {
     const t = $('#tblFormula').DataTable()
     for (let i = 0; i <= rows; i++) t.row().remove().draw()
-    selectReferencias()
+    // selectReferencias()
     $('#txtnombreProducto').val('')
 }
 

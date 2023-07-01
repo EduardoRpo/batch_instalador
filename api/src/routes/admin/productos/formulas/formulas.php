@@ -41,17 +41,36 @@ $app->get('/formulaInvimatbl/{idProducto}', function (Request $request, Response
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->post('/newFormula', function (Request $request, Response $response, $args) use ($formulasDao) {
+$app->post('/newFormula', function (Request $request, Response $response, $args) use (
+  $formulasDao,
+  $batchDao,
+  $prePlaneadosDao,
+  $productsDao,
+  $estadoInicialDao
+) {
   $dataFormula =  $request->getParsedBody();
   $resp = $formulasDao->saveFormula($dataFormula);
+
+  $batchs = $batchDao->findBatchByRef($dataFormula['ref_producto']);
+
+  for ($i = 0; $i < sizeof($batchs); $i++) {
+    if ($batchs[$i]['estado'] == 1) {
+      $estado = $estadoInicialDao->estadoInicial($dataFormula['ref_producto'], '');
+      $batchDao->updateEstadoBatch($batchs[$i]['id_batch'], $estado[0]);
+    }
+  }
+
+  $estado = $prePlaneadosDao->checkFormulasAndInstructivos($dataFormula['ref_producto']);
+
+  $referencias = $productsDao->findReferenceByGranel($dataFormula['ref_producto']);
+
+  for ($i = 0; $i < sizeof($referencias); $i++) {
+    $prePlaneadosDao->updateEstadoPreplaneado($referencias[$i]['referencia'], $estado);
+  }
 
   $resp == null
     ? $resp = array('success' => true, 'message' => 'Formula Creada Correctamente')
     : $resp = array('error' => true, 'message' => 'Ocurrio un error mientras guardaba. Intente nuevamente');
-    
-  //$resp == null
-    //$formulasDao->batchEstado($dataFormula);
-
 
   $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
@@ -91,14 +110,14 @@ $app->post('/SaveFormula', function (Request $request, Response $response, $args
   if ($tbl == 'formula') {
     $rows = $formulasDao->findFormulaByRefMaterial($dataFormula, $tbl);
     if ($rows != null) {
-      $auditoriaFormulasDao->auditFormula($rows, `UPDATE`);
+      // $auditoriaFormulasDao->auditFormula($rows, `UPDATE`);
       $formula = $formulasDao->updateFormula($dataFormula, $tbl);
 
       $formula == null
         ? $resp = array('success' => true, 'message' => 'Formula Actualizada Correctamente')
         : $resp = array('error' => true, 'message' => 'Ocurrio un error mientras guardaba. Intente nuevamente');
     } else {
-      $auditoriaFormulasDao->auditFormula($rows, `INSERT`);
+      // $auditoriaFormulasDao->auditFormula($rows, `INSERT`);
       $result = $formulasDao->saveFormula($dataFormula, $tbl);
 
       if ($result == null) {
