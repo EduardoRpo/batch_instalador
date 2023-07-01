@@ -9,11 +9,14 @@ use BatchRecord\dao\EstadoInicialDao;
 use BatchRecord\dao\BatchDao;
 use BatchRecord\dao\PlanPrePlaneadosDao;
 use BatchRecord\dao\ProductsDao;
+use BatchRecord\dao\AuditoriaFormulasDao;
+
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 $formulasDao = new FormulasDao();
 $formulasInvimasDao = new FormulasInvimaDao();
+$auditoriaFormulasDao = new AuditoriaFormulasDao();
 $healthNotificationDao = new HealthNotificationDao();
 $adminMultiDao = new AdminMultiDao();
 $estadoInicialDao = new EstadoInicialDao();
@@ -65,7 +68,7 @@ $app->post('/deleteformulas', function (Request $request, Response $response, $a
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->post('/SaveFormula', function (Request $request, Response $response, $args) use ($formulasDao, $formulasInvimasDao, $healthNotificationDao, $estadoInicialDao, $batchDao, $productsDao, $prePlaneadosDao) {
+$app->post('/SaveFormula', function (Request $request, Response $response, $args) use ($formulasDao, $formulasInvimasDao, $healthNotificationDao, $estadoInicialDao, $batchDao, $productsDao, $prePlaneadosDao, $auditoriaFormulasDao) {
   $dataFormula = $request->getParsedBody();
 
   $dataFormula['tbl'] == 'r' ? $tbl = 'formula' : $tbl = 'formula_f';
@@ -73,12 +76,14 @@ $app->post('/SaveFormula', function (Request $request, Response $response, $args
   if ($tbl == 'formula') {
     $rows = $formulasDao->findFormulaByRefMaterial($dataFormula, $tbl);
     if ($rows != null) {
+      $auditoriaFormulasDao->auditFormula($rows, `UPDATE`);
       $formula = $formulasDao->updateFormula($dataFormula, $tbl);
 
       $formula == null
         ? $resp = array('success' => true, 'message' => 'Formula Actualizada Correctamente')
         : $resp = array('error' => true, 'message' => 'Ocurrio un error mientras guardaba. Intente nuevamente');
     } else {
+      $auditoriaFormulasDao->auditFormula($rows, `INSERT`);
       $result = $formulasDao->saveFormula($dataFormula, $tbl);
 
       if ($result == null) {
