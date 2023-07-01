@@ -1,6 +1,5 @@
 <?php
 
-
 use BatchRecord\dao\FormulasDao;
 use BatchRecord\dao\FormulasInvimaDao;
 use BatchRecord\dao\HealthNotificationDao;
@@ -16,13 +15,13 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 $formulasDao = new FormulasDao();
 $formulasInvimasDao = new FormulasInvimaDao();
-$auditoriaFormulasDao = new AuditoriaFormulasDao();
 $healthNotificationDao = new HealthNotificationDao();
 $adminMultiDao = new AdminMultiDao();
 $estadoInicialDao = new EstadoInicialDao();
 $batchDao = new BatchDao();
 $productsDao = new ProductsDao();
 $prePlaneadosDao = new PlanPrePlaneadosDao();
+$auditoriaFormulasDao = new AuditoriaFormulasDao();
 
 $app->get('/formula/{idProducto}', function (Request $request, Response $response, $args) use ($formulasDao) {
   $formula = $formulasDao->findFormulaByReference($args["idProducto"]);
@@ -39,6 +38,22 @@ $app->get('/formulatbl', function (Request $request, Response $response, $args) 
 $app->get('/formulaInvimatbl/{idProducto}', function (Request $request, Response $response, $args) use ($formulasInvimasDao) {
   $formula = $formulasInvimasDao->findAllFormulaInvimaByReferencia($args["idProducto"]);
   $response->getBody()->write(json_encode($formula, JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
+});
+
+$app->post('/newFormula', function (Request $request, Response $response, $args) use ($formulasDao) {
+  $dataFormula =  $request->getParsedBody();
+  $resp = $formulasDao->saveFormula($dataFormula);
+
+  $resp == null
+    ? $resp = array('success' => true, 'message' => 'Formula Creada Correctamente')
+    : $resp = array('error' => true, 'message' => 'Ocurrio un error mientras guardaba. Intente nuevamente');
+    
+  //$resp == null
+    //$formulasDao->batchEstado($dataFormula);
+
+
+  $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
 

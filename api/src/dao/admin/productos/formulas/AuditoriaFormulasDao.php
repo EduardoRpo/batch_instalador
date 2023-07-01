@@ -42,12 +42,12 @@ class AuditoriaFormulasDao
 
 
 
-    public function countRowFormulaInvima($ref_materia, $notif_sanitaria)
+    /* public function countRowFormulaInvima($ref_materia, $notif_sanitaria)
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("SELECT * FROM formula_f WHERE id_materiaprima = :id_materiaprima AND notif_sanitaria = :notif_sanitaria");
         $stmt->execute(['id_materiaprima' => $ref_materia, 'notif_sanitaria' => $notif_sanitaria['id']]);
         $rows = $stmt->rowCount();
         return $rows;
-    }
+    } */
 }

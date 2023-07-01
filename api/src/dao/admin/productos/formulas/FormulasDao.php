@@ -56,14 +56,23 @@ class FormulasDao
         return $formulas;
     }
 
-
-
     public function saveFormula($dataFormula)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("INSERT INTO formula (id_producto, id_materiaprima, porcentaje) VALUES (:id_producto, :id_materiaprima, AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') )");
-        $stmt->execute(['id_materiaprima' => $dataFormula['ref_materiaprima'], 'id_producto' => $dataFormula['ref_producto'], 'porcentaje' => $dataFormula['porcentaje']]);
-        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        
+        $datos = $dataFormula['array'];
+        
+        foreach ($datos as $dato) {
+            $sql = "INSERT INTO formula (id_producto, id_materiaprima, porcentaje) 
+                VALUES (:id_producto, :id_materiaprima, AES_ENCRYPT(:porcentaje,'Wf[Ht^}2YL=D^DPD') )";
+            $stmt = $connection->prepare($sql);
+            $stmt->execute([
+                'id_materiaprima' => $dato['0'],
+                'id_producto' => $dato['1'],
+                'porcentaje' => $dato['2']
+            ]);
+            $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        }
     }
 
     public function updateFormula($dataFormula)

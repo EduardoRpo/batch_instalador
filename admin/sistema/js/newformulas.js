@@ -142,7 +142,7 @@ const cargartblMateriaprima = () => {
 
 $('#guardarFormula').click(function(e) {
     e.preventDefault()
-    let operacion = 3
+    //let operacion = 3
     let ref_producto = $('#cmbReferenciaProductos').val()
     const t = $('#tblFormula').DataTable()
     var data = t.rows().data()
@@ -167,16 +167,18 @@ $('#guardarFormula').click(function(e) {
 
     $.ajax({
         type: 'POST',
-        url: 'php/desarrollo/newformulas.php',
-        data: { operacion, ref_producto, array },
+        //url: 'php/desarrollo/newformulas.php',
+        url: '/api/newFormula',
+        //data: { operacion, ref_producto, array },
+        data: { ref_producto, array },
 
         success: function(r) {
-            if (r == 1) {
+            if (r.success == true) {
                 alertify.set('notifier', 'position', 'top-right')
-                alertify.success('Almacenada con éxito.')
+                alertify.success(r.message)
             } else {
                 alertify.set('notifier', 'position', 'top-right')
-                alertify.error('No almacenado. Valide nuevamente.')
+                alertify.error(r.message)
             }
             limpiarDatatable(data.length)
         },
