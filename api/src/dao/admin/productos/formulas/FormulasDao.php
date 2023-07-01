@@ -56,6 +56,17 @@ class FormulasDao
         return $formulas;
     }
 
+    public function findLastInsertedFormula()
+    {
+        $connection = Connection::getInstance()->getConnection();
+        $stmt = $connection->prepare("SELECT MAX(id + 1) AS id FROM formula");
+        $stmt->execute();
+        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        $formula = $stmt->fetch($connection::FETCH_ASSOC);
+        $this->logger->notice("formula Obtenidas", array('formula' => $formula));
+        return $formula;
+    }
+
     public function saveFormula($dataFormula)
     {
         $connection = Connection::getInstance()->getConnection();

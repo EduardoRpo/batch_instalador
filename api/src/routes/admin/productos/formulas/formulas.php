@@ -110,14 +110,17 @@ $app->post('/SaveFormula', function (Request $request, Response $response, $args
   if ($tbl == 'formula') {
     $rows = $formulasDao->findFormulaByRefMaterial($dataFormula, $tbl);
     if ($rows != null) {
-      // $auditoriaFormulasDao->auditFormula($rows, `UPDATE`);
+      $auditoriaFormulasDao->auditFormula($dataFormula, $rows, 'UPDATE');
       $formula = $formulasDao->updateFormula($dataFormula, $tbl);
 
       $formula == null
         ? $resp = array('success' => true, 'message' => 'Formula Actualizada Correctamente')
         : $resp = array('error' => true, 'message' => 'Ocurrio un error mientras guardaba. Intente nuevamente');
     } else {
-      // $auditoriaFormulasDao->auditFormula($rows, `INSERT`);
+      $lastId = $formulasDao->findLastInsertedFormula();
+      $dataFormula['id'] = $lastId['id'];
+
+      $auditoriaFormulasDao->auditFormula($dataFormula, '',  'INSERT');
       $result = $formulasDao->saveFormula($dataFormula, $tbl);
 
       if ($result == null) {

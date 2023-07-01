@@ -75,6 +75,9 @@
                     <li><a href="controlCondicionesMedio.php" id="link_menu_pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i><span>Condiciones del Medio</span></a></li>
                     <li><a href="controlFirmas.php" id="link_menu_pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i><span>Control de firmas</span></a></li>
                     <li><a href="capacidadEnvasado.php" id="link_menu_pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i><span>Capacidad de envasado</span></a></li>
+                    <?php if ($_SESSION['rol'] == 1) { ?>
+                        <li><a href="formulas_audit.php" id="link_menu_pdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i><span>Auditoria de formulas</span></a></li>
+                    <?php } ?>
                 </ul>
 
 
