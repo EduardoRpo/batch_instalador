@@ -141,7 +141,7 @@ class BatchDao extends estadoInicialDao
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("SELECT b.id_batch, b.pedido, p.referencia, p.nombre_referencia, pc.nombre AS presentacion, m.nombre AS marca, 
                                              ns.nombre AS notificacion_sanitaria, p.unidad_empaque, pp.nombre as propietario, b.numero_orden, b.tamano_lote, b.numero_lote, 
-                                             b.unidad_lote, l.nombre as linea, l.densidad, p.densidad_producto, b.fecha_programacion, b.estado, p.img, DATE_ADD(exp.fecha_insumo, INTERVAL 8 DAY) AS fecha_insumo , 
+                                             b.unidad_lote, l.nombre as linea, l.densidad, p.densidad_producto, b.fecha_programacion, b.fecha_creacion, b.estado, p.img, DATE_ADD(exp.fecha_insumo, INTERVAL 8 DAY) AS fecha_insumo, 
                                              IFNULL(bt.tanque,0) AS tanque, IFNULL(bt.cantidad,0) AS cantidad
                                       FROM batch b
                                             INNER JOIN producto p ON p.referencia = b.id_producto
@@ -306,6 +306,49 @@ class BatchDao extends estadoInicialDao
         } catch (\Exception $e) {
             $message = $e->getMessage();
             $error = array('info' => true, 'message', $message);
+            return $error;
+        }
+    }
+
+    public function loadImagePdf()
+    {
+        try {
+            $targetDir = dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/html/pdf/batch/';
+            $allowTypes = array('pdf');
+
+            $image_name = str_replace(' ', '', $_FILES['pdf']['name']);
+            $tmp_name   = $_FILES['pdf']['tmp_name'];
+            $size       = $_FILES['pdf']['size'];
+            $type       = $_FILES['pdf']['type'];
+            $error      = $_FILES['pdf']['error'];
+
+            /* Verifica si directorio esta creado y lo crea */
+            if (!is_dir($targetDir))
+                mkdir($targetDir, 0777, true);
+
+            $targetDir = '/html/pdf/batch/';
+            $targetFilePath = $targetDir . '/' . $image_name;
+
+            $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+
+            if (in_array($fileType, $allowTypes)) {
+                $targetDir = dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/html/pdf/batch/';
+                $targetFilePath1 = $targetDir . '/' . $image_name;
+
+                // Verificar si el archivo de destino ya existe
+                if (file_exists($targetFilePath1)) {
+                    // Eliminar el archivo de destino existente
+                    unlink($targetFilePath1);
+                }
+
+                move_uploaded_file($tmp_name, $targetFilePath1);
+
+                // return $targetFilePath;
+            }
+        } catch (\Exception $e) {
+            $message = $e->getMessage();
+
+            $error = array('info' => true, 'message' => $message);
             return $error;
         }
     }

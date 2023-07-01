@@ -230,10 +230,12 @@ parametros_Control = () => {
                     <tr>
                         <th scope="row" class="centrado">${j}</th>
                         <td>${info[i].pregunta}</td>
-                        <td class="centrado">${info[i].solucion == 1 ? 'X' : ''
-          }</td>
-                        <td class="centrado">${info[i].solucion == 0 ? 'X' : ''
-          }</td>
+                        <td class="centrado">${
+                          info[i].solucion == 1 ? 'X' : ''
+                        }</td>
+                        <td class="centrado">${
+                          info[i].solucion == 0 ? 'X' : ''
+                        }</td>
                     </tr>`);
       }
     }
@@ -296,7 +298,6 @@ desinfectante = () => {
         $(`#blank_ver${info[i].modulo}`).hide();
 
         /* fecha nuevo registro cambia a fecha registro a partir del 1034 */
-        debugger;
         if (idBatch >= 2599) fechaRegistro = info[i].fecha_registro;
         else fechaRegistro = info[i].fecha_nuevo_registro;
 
@@ -520,22 +521,22 @@ function control_proceso() {
         info[i].color == 1
           ? 'Cumple'
           : info[i].color == 2
-            ? 'No Cumple'
-            : 'No aplica'
+          ? 'No Cumple'
+          : 'No aplica'
       );
       $(`.olor${info[i].modulo}`).html(
         info[i].olor == 1
           ? 'Cumple'
           : info[i].color == 2
-            ? 'No Cumple'
-            : 'No aplica'
+          ? 'No Cumple'
+          : 'No aplica'
       );
       $(`.apariencia${info[i].modulo}`).html(
         info[i].apariencia == 1
           ? 'Cumple'
           : info[i].color == 2
-            ? 'No Cumple'
-            : 'No aplica'
+          ? 'No Cumple'
+          : 'No aplica'
       );
       $(`.ph${info[i].modulo}`).html(info[i].ph);
       $(`.viscosidad${info[i].modulo}`).html(info[i].viscosidad);
@@ -544,22 +545,22 @@ function control_proceso() {
         info[i].untuosidad == 1
           ? 'Cumple'
           : info[0].color == 2
-            ? 'No Cumple'
-            : 'No aplica'
+          ? 'No Cumple'
+          : 'No aplica'
       );
       $(`.espumoso${info[i].modulo}`).html(
         info[i].espumoso == 1
           ? 'Cumple'
           : info[i].color == 2
-            ? 'No Cumple'
-            : 'No aplica'
+          ? 'No Cumple'
+          : 'No aplica'
       );
       $(`.alcohol${info[i].modulo}`).html(
         info[i].alcohol == 1
           ? 'Cumple'
           : info[i].color == 2
-            ? 'No Cumple'
-            : 'No aplica'
+          ? 'No Cumple'
+          : 'No aplica'
       );
     }
   });
@@ -1125,20 +1126,20 @@ analisisMicrobiologico = () => {
       data[0].pseudomona == 1
         ? (result1 = 'Ausencia')
         : (data[0].pseudomona = 2
-          ? (result1 = 'Presencia')
-          : (result1 = 'No Aplica'));
+            ? (result1 = 'Presencia')
+            : (result1 = 'No Aplica'));
 
       data[0].escherichia == 1
         ? (result2 = 'Ausencia')
         : (data[0].escherichia = 2
-          ? (result2 = 'Presencia')
-          : (result2 = 'No Aplica'));
+            ? (result2 = 'Presencia')
+            : (result2 = 'No Aplica'));
 
       data[0].staphylococcus == 1
         ? (result3 = 'Ausencia')
         : (data[0].staphylococcus = 2
-          ? (result3 = 'Presencia')
-          : (result3 = 'No Aplica'));
+            ? (result3 = 'Presencia')
+            : (result3 = 'No Aplica'));
 
       $('#mesofilos').html(data[0].mesofilos);
       $('#pseudomona').html(result1);
@@ -1181,12 +1182,15 @@ const liberacion_lote = () => {
     '../../html/php/servicios/c_batch_pdf.php',
     { idBatch, operacion: 16 },
     function (data, textStatus, jqXHR) {
+      // downloadPdfBatch();
+
       if (data == 'false') {
         $(`#f_realizoPRO`).hide();
         $(`#f_realizoCA`).hide();
         $(`#f_realizoTEC`).hide();
         return false;
       }
+
       info = JSON.parse(data);
       let produccion = info['dirProd'];
       let calidad = info['dirCa'];
@@ -1237,6 +1241,8 @@ const liberacion_lote = () => {
       $(`#f_verificoMicro`).hide();
       $(`#blank_ver`).show();
       $(`#user_verificoMicro`).html('Verificó: <b>Sin firmar</b>');
+
+      downloadPdfBatch();
     }
   );
 };

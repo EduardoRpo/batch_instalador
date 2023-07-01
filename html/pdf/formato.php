@@ -17,14 +17,14 @@
 
 </head>
 
-<body id="pdf">
+<body id="invoice">
 
-    <div class="mb-3" style="display: flex;justify-content:space-between">
-        <a><span><img src="../../assets/images/logo/logo-samara.png" style="width: 80%;" class="light-logo" alt="Samara Cosmetics" /></span></a>
-        <div>
-            <span id="codigo"></span>
-            <span id="version"></span>
-            <span id="fecha"></span>
+    <div class="card-body mb-3" style="display: flex;justify-content:space-between">
+        <a class="card-body"><span class="card-body"><img src="../../assets/images/logo/logo-samara.png" style="width: 80%;" class="light-logo" alt="Samara Cosmetics" /></span></a>
+        <div class="card-body">
+            <span class="card-body" id="codigo"></span>
+            <span class="card-body" id="version"></span>
+            <span class="card-body" id="fecha"></span>
         </div>
     </div>
 
@@ -87,8 +87,16 @@
     <script src="../../html/js/utils/sidebarmenu.js"></script>
     <script src="../../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <script src="https://use.fontawesome.com/15242848ba.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.5/pdfmake.min.js"></script>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js"></script> -->
+
     <script src="../../html/pdf/js/batch_pdf.js"></script>
     <script src="../../html/js/global/etiquetas.js"></script>
+    <script src="/html/pdf/js/download_pdf.js"></script>
+    <script src="/html/js/global/searchData.js"></script>
     <!-- <script src="../../html/pdf/js/printThis.js"></script> -->
 
 </body>
