@@ -51,7 +51,7 @@ $(document).ready(function () {
   });
 
   fetchFirmas = async (data) => {
-    let resp = await sendDataPOST('/api/validacionFirmas', data);
+    let resp = await sendDataPOST('/api/validacionFirmas', data, 1);
     $('#m_firmar').modal('hide');
     await message(resp);
 
@@ -65,14 +65,7 @@ $(document).ready(function () {
     if (minBatch == maxBatch) {
       $.get(`/api/batch/${minBatch}`, function (data, textStatus, jqXHR) {
         $('#currentState').val(data.estado);
-
       });
     }
-
-
-
-  })
-
-
-
+  });
 });

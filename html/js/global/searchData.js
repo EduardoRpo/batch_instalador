@@ -8,16 +8,23 @@ $(document).ready(function () {
     }
   };
 
-  sendDataPOST = async (urlApi, params) => {
+  sendDataPOST = async (urlApi, params, op) => {
     try {
-      result = await $.ajax({
-        url: urlApi,
-        type: 'POST',
-        data: params,
-        contentType: false,
-        cache: false,
-        processData: false,
-      });
+      if (op == 2)
+        result = await $.ajax({
+          url: urlApi,
+          type: 'POST',
+          data: params,
+          contentType: false,
+          cache: false,
+          processData: false,
+        });
+      else
+        result = await $.ajax({
+          url: urlApi,
+          type: 'POST',
+          data: params,
+        });
       return result;
     } catch (error) {
       console.error(error);

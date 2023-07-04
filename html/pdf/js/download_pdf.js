@@ -35,7 +35,7 @@ $(document).ready(function () {
 
       form.append('pdf', blob, `${numero_orden}_${data.fecha_creacion}.pdf`);
 
-      let resp = await sendDataPOST('/api/savePdf', form);
+      let resp = await sendDataPOST('/api/savePdf', form, 2);
       html2pdf().from(copy_invoice).set(opt).toPdf().get('pdf').save();
     } catch (error) {
       console.log(error);

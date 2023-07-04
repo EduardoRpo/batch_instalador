@@ -125,7 +125,7 @@ $(document).ready(function () {
   });
 
   saveFechaEnvasado = async (data) => {
-    resp = await sendDataPOST(apiPost, data);
+    resp = await sendDataPOST(apiPost, data, 1);
     message(resp);
   };
 

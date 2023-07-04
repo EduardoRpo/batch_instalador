@@ -1,31 +1,30 @@
-$(document).ready(function() {
+$(document).ready(function () {
+  /* cargar Desinfectantes */
 
-    /* cargar Desinfectantes */
-
-    desinfectantes = async() => {
-        let result
-        try {
-            result = await $.ajax({ url: `/api/desinfectantes` })
-            return result
-        } catch (error) {
-            console.error(error)
-        }
+  desinfectantes = async () => {
+    let result;
+    try {
+      result = await $.ajax({ url: `/api/desinfectantes` });
+      return result;
+    } catch (error) {
+      console.error(error);
     }
+  };
 
-    cargarDesinfectantes = async() => {
-        const data = await desinfectantes()
-        data.forEach((desinfectante) => {
-            $("#sel_producto_desinfeccion").append(
-                `<option value="${desinfectante.id}">${desinfectante.nombre}</option>`
-            );
-        });
-    }
+  cargarDesinfectantes = async () => {
+    const data = await desinfectantes();
+    data.forEach((desinfectante) => {
+      $('#sel_producto_desinfeccion').append(
+        `<option value="${desinfectante.id}">${desinfectante.nombre}</option>`
+      );
+    });
+  };
 
-    //Consulta desinfectates almacenados
+  //Consulta desinfectates almacenados
 
-    /* desinfectanteAlmacenado = async () => {
+  /* desinfectanteAlmacenado = async () => {
         data = { operacion: 2, modulo, idBatch }
-        return result = await sendDataPOST("../../html/php/despeje.php", data)
+        return result = await sendDataPOST("../../html/php/despeje.php", data, 1)
     }
 
     cargarDesinfectanteAlmacenado = async () => {
@@ -50,53 +49,53 @@ $(document).ready(function() {
             return false
     } */
 
-    //Validacion campos de preguntas diligenciados
+  //Validacion campos de preguntas diligenciados
 
-    $(".in_desinfeccion").click(function(event) {
-        //$('.in_desinfeccion').click((event) => {
-        event.preventDefault();
+  $('.in_desinfeccion').click(function (event) {
+    //$('.in_desinfeccion').click((event) => {
+    event.preventDefault();
 
-        let flag = false;
-        $(".questions").each((indx, question) => {
-            if (flag) {
-                return;
-            }
-            let name = $(question).attr("name");
-            if (!$(`input[name='${name}']:radio`).is(":checked")) {
-                flag = true;
+    let flag = false;
+    $('.questions').each((indx, question) => {
+      if (flag) {
+        return;
+      }
+      let name = $(question).attr('name');
+      if (!$(`input[name='${name}']:radio`).is(':checked')) {
+        flag = true;
 
-                $.alert({
-                    theme: "white",
-                    icon: "fa fa-warning",
-                    title: "Samara Cosmetics",
-                    content: "Complete todas las preguntas",
-                    confirmButtonClass: "btn-info",
-                });
-            }
+        $.alert({
+          theme: 'white',
+          icon: 'fa fa-warning',
+          title: 'Samara Cosmetics',
+          content: 'Complete todas las preguntas',
+          confirmButtonClass: 'btn-info',
         });
+      }
     });
+  });
 
-    validarParametrosControl = () => {
-        let flag = false;
-        $(".questions").each((indx, question) => {
-            if (flag) {
-                return;
-            }
-            let name = $(question).attr("name");
-            if (!$(`input[name='${name}']:radio`).is(":checked")) {
-                flag = true;
+  validarParametrosControl = () => {
+    let flag = false;
+    $('.questions').each((indx, question) => {
+      if (flag) {
+        return;
+      }
+      let name = $(question).attr('name');
+      if (!$(`input[name='${name}']:radio`).is(':checked')) {
+        flag = true;
 
-                $.alert({
-                    theme: "white",
-                    icon: "fa fa-warning",
-                    title: "Samara Cosmetics",
-                    content: "Complete todas las preguntas",
-                    confirmButtonClass: "btn-info",
-                });
-                completo = 0;
-                return false;
-            }
-            completo = 1;
+        $.alert({
+          theme: 'white',
+          icon: 'fa fa-warning',
+          title: 'Samara Cosmetics',
+          content: 'Complete todas las preguntas',
+          confirmButtonClass: 'btn-info',
         });
-    }
+        completo = 0;
+        return false;
+      }
+      completo = 1;
+    });
+  };
 });

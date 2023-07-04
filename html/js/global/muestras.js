@@ -1,33 +1,31 @@
-$(document).ready(function() {
+$(document).ready(function () {
+  // Cargar el numero de muestras de acuerdo con las unidades a producir
 
-    // Cargar el numero de muestras de acuerdo con las unidades a producir
+  calcularMuestras = (j, unidades) => {
+    if (unidades <= 2000) $(`#muestras${j}`).val(20);
+    else if (unidades >= 2001 && unidades < 4001) $(`#muestras${j}`).val(40);
+    else $(`#muestras${j}`).val(60);
+  };
 
-    calcularMuestras = (j, unidades) => {
-        if (unidades <= 2000) $(`#muestras${j}`).val(20);
-        else if (unidades >= 2001 && unidades < 4001) $(`#muestras${j}`).val(40);
-        else $(`#muestras${j}`).val(60);
-    }
+  ajaxMuestrasRecolectadas = async (muestras) => {
+    data = { operacion, idBatch, muestras, modulo, ref_multi };
+    return (result = await sendDataPOST(
+      '../../html/php/muestras.php',
+      data,
+      1
+    ));
+  };
 
+  muestrasRecolectadas = async (muestras) => {
+    response = await ajaxMuestrasRecolectadas(muestras);
+    if (!response) {
+      alertify.set('notifier', 'position', 'top-right');
+      alertify.error('Error al almacenar las muestras, valide nuevamente');
+      return false;
+    } else return true;
+  };
 
-    ajaxMuestrasRecolectadas = async(muestras) => {
-        data = { operacion, idBatch, muestras, modulo, ref_multi }
-        return result = await sendDataPOST("../../html/php/muestras.php", data)
-    }
-
-    muestrasRecolectadas = async(muestras) => {
-        response = await ajaxMuestrasRecolectadas(muestras)
-        if (!response) {
-            alertify.set("notifier", "position", "top-right");
-            alertify.error("Error al almacenar las muestras, valide nuevamente");
-            return false;
-        } else
-            return true
-
-
-    }
-
-
-    /*
+  /*
     //Cargar el numero de muestras
 
     muestrasEnvase = () => {
@@ -134,19 +132,21 @@ $(document).ready(function() {
         $(`#promedio${id_multi}`).val(promedio);
     } */
 
-    /* Crear selects de muestras en la ventana de muestras acondicionamiento */
+  /* Crear selects de muestras en la ventana de muestras acondicionamiento */
 
-    muestras_acondicionamiento = () => {
-        muestras = $(`#muestras${id_multi}`).val();
-        let recoveredData = sessionStorage.getItem(presentacion + ref_multi + modulo);
-        j = 1;
+  muestras_acondicionamiento = () => {
+    muestras = $(`#muestras${id_multi}`).val();
+    let recoveredData = sessionStorage.getItem(
+      presentacion + ref_multi + modulo
+    );
+    j = 1;
 
-        /* Elimina los campos para muestras */
-        for (let i = 1; i <= 60; i++) $(`#fila${i}`).closest("tr").remove();
+    /* Elimina los campos para muestras */
+    for (let i = 1; i <= 60; i++) $(`#fila${i}`).closest('tr').remove();
 
-        /* crea tabla para registrar muestras */
-        for (let j = 1; j <= muestras; j++) {
-            $("#table_muestras_acondicionamiento").append(`
+    /* crea tabla para registrar muestras */
+    for (let j = 1; j <= muestras; j++) {
+      $('#table_muestras_acondicionamiento').append(`
       <tbody>    
       <tr id="fila${j}">
       <td>${j}</td>
@@ -193,116 +193,122 @@ $(document).ready(function() {
                     </td>
                 </tr>
             </tbody>`);
-        }
-
-        /* Recuperar muestras si existen*/
-        j = 0;
-        if (recoveredData !== null) {
-            let data = JSON.parse(recoveredData);
-            for (let i = 1; i <= data.length; i++) {
-                $(`#apariencia_etiquetas${i}`).val(data[j]);
-                j++;
-                $(`#apariencia_termoencogible${i}`).val(data[j]);
-                j++;
-                $(`#cumplimiento_empaque${i}`).val(data[j]);
-                j++;
-                $(`#posicion_producto${i}`).val(data[j]);
-                j++;
-                $(`#rotulo_caja${i}`).val(data[j]);
-                j++;
-            }
-        } else {
-            $.ajax({
-                type: "POST",
-                url: "../../html/php/muestras.php",
-                data: { operacion: 4, idBatch, modulo, ref_multi },
-
-                success: function(response) {
-                    if (response == 3) return false;
-
-                    let info = JSON.parse(response);
-                    i = 1;
-
-                    for (let j = 0; j < info.data.length; j++) {
-                        $(`#apariencia_etiquetas${i}`).val(info.data[j].apariencia_etiquetas);
-                        $(`#apariencia_termoencogible${i}`).val(
-                            info.data[j].apariencia_termoencogible
-                        );
-                        $(`#cumplimiento_empaque${i}`).val(info.data[j].cumplimiento_empaque);
-                        $(`#posicion_producto${i}`).val(info.data[j].posicion_producto);
-                        $(`#rotulo_caja${i}`).val(info.data[j].rotulo_caja);
-                        i++;
-                    }
-                },
-            });
-        }
     }
 
-    $("#guardar_muestras_acondicionamiento").click(function(e) {
-        e.preventDefault();
-        muestras_acon = $(`#muestras${id_multi}`).val();
+    /* Recuperar muestras si existen*/
+    j = 0;
+    if (recoveredData !== null) {
+      let data = JSON.parse(recoveredData);
+      for (let i = 1; i <= data.length; i++) {
+        $(`#apariencia_etiquetas${i}`).val(data[j]);
+        j++;
+        $(`#apariencia_termoencogible${i}`).val(data[j]);
+        j++;
+        $(`#cumplimiento_empaque${i}`).val(data[j]);
+        j++;
+        $(`#posicion_producto${i}`).val(data[j]);
+        j++;
+        $(`#rotulo_caja${i}`).val(data[j]);
+        j++;
+      }
+    } else {
+      $.ajax({
+        type: 'POST',
+        url: '../../html/php/muestras.php',
+        data: { operacion: 4, idBatch, modulo, ref_multi },
 
-        let cantidad_muestras = $(`#muestras${id_multi}`).val();
-        let muestras = [];
-        let recoveredData = sessionStorage.getItem(presentacion + ref_multi + modulo);
+        success: function (response) {
+          if (response == 3) return false;
 
-        if (recoveredData !== "") {
-            sessionStorage.removeItem(presentacion + ref_multi + modulo);
-        }
+          let info = JSON.parse(response);
+          i = 1;
 
-        /* cargar el array con las muestras */
+          for (let j = 0; j < info.data.length; j++) {
+            $(`#apariencia_etiquetas${i}`).val(
+              info.data[j].apariencia_etiquetas
+            );
+            $(`#apariencia_termoencogible${i}`).val(
+              info.data[j].apariencia_termoencogible
+            );
+            $(`#cumplimiento_empaque${i}`).val(
+              info.data[j].cumplimiento_empaque
+            );
+            $(`#posicion_producto${i}`).val(info.data[j].posicion_producto);
+            $(`#rotulo_caja${i}`).val(info.data[j].rotulo_caja);
+            i++;
+          }
+        },
+      });
+    }
+  };
 
-        for (i = 1; i <= muestras_acon; i++) {
-            //muestra = parseInt($(`#txtMuestra${i}`).val());
-            let ae = $(`#apariencia_etiquetas${i}`).val();
-            let at = $(`#apariencia_termoencogible${i}`).val();
-            let ce = $(`#cumplimiento_empaque${i}`).val();
-            let pp = $(`#posicion_producto${i}`).val();
-            let rc = $(`#rotulo_caja${i}`).val();
+  $('#guardar_muestras_acondicionamiento').click(function (e) {
+    e.preventDefault();
+    muestras_acon = $(`#muestras${id_multi}`).val();
 
-            if (ae !== null) muestras.push(ae);
-            else break;
+    let cantidad_muestras = $(`#muestras${id_multi}`).val();
+    let muestras = [];
+    let recoveredData = sessionStorage.getItem(
+      presentacion + ref_multi + modulo
+    );
 
-            if (at !== null) muestras.push(at);
-            else break;
-
-            if (ce !== null) muestras.push(ce);
-            else break;
-
-            if (pp !== null) muestras.push(pp);
-            else break;
-
-            if (rc !== null) muestras.push(rc);
-            else break;
-        }
-
-        /* almacena las muestras */
-
-        sessionStorage.setItem(
-            presentacion + ref_multi + modulo,
-            JSON.stringify(muestras)
-        );
-        i = muestras.length;
-        sessionStorage.setItem(`totalmuestras${id_multi}`, JSON.stringify(i));
-
-        $("#m_muestras_acond").modal("hide");
-        validar_condicionesMedio();
-    });
-
-    /* Genera cumple para todas las opciones en acondicionamiento */
-
-    cumple_muestras = (obj) => {
-        id = obj.id;
-        $(`#apariencia_etiquetas${id}`).val(1);
-        $(`#apariencia_termoencogible${id}`).val(3);
-        $(`#cumplimiento_empaque${id}`).val(1);
-        $(`#posicion_producto${id}`).val(1);
-        $(`#rotulo_caja${id}`).val(1);
+    if (recoveredData !== '') {
+      sessionStorage.removeItem(presentacion + ref_multi + modulo);
     }
 
-    $("#aplicaTermoencogible").click(function(e) {
-        e.preventDefault();
-        for (let i = 1; i <= muestras; i++) $(`#apariencia_termoencogible${i}`).val(1);
-    });
+    /* cargar el array con las muestras */
 
+    for (i = 1; i <= muestras_acon; i++) {
+      //muestra = parseInt($(`#txtMuestra${i}`).val());
+      let ae = $(`#apariencia_etiquetas${i}`).val();
+      let at = $(`#apariencia_termoencogible${i}`).val();
+      let ce = $(`#cumplimiento_empaque${i}`).val();
+      let pp = $(`#posicion_producto${i}`).val();
+      let rc = $(`#rotulo_caja${i}`).val();
+
+      if (ae !== null) muestras.push(ae);
+      else break;
+
+      if (at !== null) muestras.push(at);
+      else break;
+
+      if (ce !== null) muestras.push(ce);
+      else break;
+
+      if (pp !== null) muestras.push(pp);
+      else break;
+
+      if (rc !== null) muestras.push(rc);
+      else break;
+    }
+
+    /* almacena las muestras */
+
+    sessionStorage.setItem(
+      presentacion + ref_multi + modulo,
+      JSON.stringify(muestras)
+    );
+    i = muestras.length;
+    sessionStorage.setItem(`totalmuestras${id_multi}`, JSON.stringify(i));
+
+    $('#m_muestras_acond').modal('hide');
+    validar_condicionesMedio();
+  });
+
+  /* Genera cumple para todas las opciones en acondicionamiento */
+
+  cumple_muestras = (obj) => {
+    id = obj.id;
+    $(`#apariencia_etiquetas${id}`).val(1);
+    $(`#apariencia_termoencogible${id}`).val(3);
+    $(`#cumplimiento_empaque${id}`).val(1);
+    $(`#posicion_producto${id}`).val(1);
+    $(`#rotulo_caja${id}`).val(1);
+  };
+
+  $('#aplicaTermoencogible').click(function (e) {
+    e.preventDefault();
+    for (let i = 1; i <= muestras; i++)
+      $(`#apariencia_termoencogible${i}`).val(1);
+  });
 });
