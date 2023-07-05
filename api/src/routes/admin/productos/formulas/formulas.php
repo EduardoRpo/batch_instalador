@@ -117,11 +117,19 @@ $app->post('/SaveFormula', function (Request $request, Response $response, $args
         ? $resp = array('success' => true, 'message' => 'Formula Actualizada Correctamente')
         : $resp = array('error' => true, 'message' => 'Ocurrio un error mientras guardaba. Intente nuevamente');
     } else {
-      $lastId = $formulasDao->findLastInsertedFormula();
-      $dataFormula['id'] = $lastId['id'];
+      $data['array'][0]['0'] = $dataFormula['ref_materiaprima'];
+      $data['array'][0]['2'] = $dataFormula['porcentaje'];
 
-      $auditoriaFormulasDao->auditFormula($dataFormula, '',  'INSERT');
-      $result = $formulasDao->saveFormula($dataFormula, $tbl);
+      $data['ref_producto'] = $dataFormula['ref_producto'];
+
+      $result = $formulasDao->saveFormula($data, $tbl);
+
+      if ($result == null) {
+        $lastId = $formulasDao->findLastInsertedFormula();
+        $dataFormula['id'] = $lastId['id'];
+
+        $auditoriaFormulasDao->auditFormula($dataFormula, '',  'INSERT');
+      }
 
       if ($result == null) {
         $batchs = $batchDao->findBatchByRef($dataFormula['ref_producto']);

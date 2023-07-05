@@ -59,7 +59,7 @@ class FormulasDao
     public function findLastInsertedFormula()
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("SELECT MAX(id + 1) AS id FROM formula");
+        $stmt = $connection->prepare("SELECT MAX(id) AS id FROM formula");
         $stmt->execute();
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         $formula = $stmt->fetch($connection::FETCH_ASSOC);
