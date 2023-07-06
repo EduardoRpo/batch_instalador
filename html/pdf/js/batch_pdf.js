@@ -205,13 +205,10 @@ function info_General(data) {
   $('.linea').html(`${info.linea}`);
   $('.lote_id').html(`${info.numero_lote}`);
   $('.tamanioLotePesaje').html(`${info.tamano_lote}`);
-
-  return 1;
 }
 
 parametros_Control = () => {
   let data = { operacion: 3, idBatch };
-  status_pdf = 0;
 
   $.post(
     '../../html/php/servicios/c_batch_pdf.php',
@@ -241,11 +238,8 @@ parametros_Control = () => {
                         }</td>
                     </tr>`);
       }
-      status_pdf = 1;
     }
   );
-
-  return status_pdf;
 };
 
 lote_anterior = () => {
@@ -258,8 +252,6 @@ lote_anterior = () => {
 
   lote = linea.concat('0', serie, fecha);
   area_desinfeccion(lote);
-
-  return 1;
 };
 
 area_desinfeccion = (lote) => {
@@ -335,7 +327,6 @@ desinfectante = () => {
 
 const firmas = () => {
   let data = { operacion: 17, idBatch };
-  status_pdf = 0;
 
   $.post(
     '../../html/php/servicios/c_batch_pdf.php',
@@ -378,11 +369,8 @@ const firmas = () => {
         }
       }
       firmas_multi(info);
-      status_pdf = 1;
     }
   );
-
-  return status_pdf;
 };
 
 const firmas_multi = (info) => {
@@ -422,7 +410,6 @@ const firmas_multi = (info) => {
 
 function condiciones_medio() {
   let data = { operacion: 6, idBatch };
-  status_pdf = 0;
   $.post(
     '../../html/php/servicios/c_batch_pdf.php',
     data,
@@ -435,15 +422,11 @@ function condiciones_medio() {
         $(`.temperatura${info[i].modulo}`).html(info[i].temperatura + ' °C');
         $(`.humedad${info[i].modulo}`).html(info[i].humedad + ' %');
       }
-      status_pdf = 1;
     }
   );
-  return status_pdf;
 }
 
 function equipos() {
-  status_pdf = 0;
-
   $.get(`/api/equipos/${idBatch}`, function (data, textStatus, jqXHR) {
     if (data.length == 0) return false;
     for (i = 0; i < data.length; i++) {
@@ -488,14 +471,10 @@ function equipos() {
         continue;
       }
     }
-    status_pdf = 1;
   });
-
-  return status_pdf;
 }
 
 function especificaciones_producto() {
-  status_pdf = 0;
   $.ajax({
     url: `/api/productsDetails/${referencia}`,
     type: 'GET',
@@ -531,15 +510,10 @@ function especificaciones_producto() {
     $('#espec2').html(data.pseudomona);
     $('#espec3').html(data.escherichia);
     $('#espec4').html(data.staphylococcus);
-    status_pdf = 1;
   });
-
-  return status_pdf;
 }
 
 function control_proceso() {
-  status_pdf = 0;
-
   $.get(`/api/controlproceso/${idBatch}`, function (info, textStatus, jqXHR) {
     if (info == 'false') return false;
     //info = data;
@@ -590,14 +564,10 @@ function control_proceso() {
           : 'No aplica'
       );
     }
-    status_pdf = 1;
   });
-
-  return status_pdf;
 }
 
 ajustes = () => {
-  status_pdf = 0;
   $.ajax({
     url: '../../html/php/ajustes.php',
     type: 'POST',
@@ -614,10 +584,7 @@ ajustes = () => {
       $(`#materiaPrimaAjustes${info[i].modulo}`).val(info[i].materia_prima);
       $(`#procedimientoAjustes${info[i].modulo}`).val(info[i].procedimiento);
     }
-    status_pdf = 1;
   });
-
-  return status_pdf;
 };
 
 /* Calcular peso minimo, maximo y promedio */
@@ -1100,8 +1067,6 @@ conciliacion = (multi) => {
 };
 
 const despachos = () => {
-  status_pdf = 0;
-
   $.ajax({
     type: 'POST',
     url: '../../html/php/servicios/c_batch_pdf.php',
@@ -1118,15 +1083,12 @@ const despachos = () => {
           );
           $(`#f_entrego`).prop('src', info[i].urlfirma);
         }
-        status_pdf = 1;
       } else {
         $(`#f_entrego`).hide();
         $(`#user_entrego`).html(`Verificó: <b>Sin firmar</b>`);
       }
     },
   });
-
-  return status_pdf;
 };
 
 observacionesAprobacion = () => {
@@ -1143,8 +1105,6 @@ observacionesAprobacion = () => {
 };
 
 analisisMicrobiologico = () => {
-  status_pdf = 0;
-
   $.ajax({
     type: 'POST',
     url: '../../html/php/servicios/c_batch_pdf.php',
@@ -1214,17 +1174,11 @@ analisisMicrobiologico = () => {
       $('.chkAprobado').prop('checked', true);
       /* if (data[0].observaciones == "") $(".chkAprobado").prop("checked", true);
                       else $(".chkAprobado").prop("checked", true); */
-
-      status_pdf = 1;
     },
   });
-
-  return status_pdf;
 };
 
 const liberacion_lote = () => {
-  status_pdf = 0;
-
   $.post(
     '../../html/php/servicios/c_batch_pdf.php',
     { idBatch, operacion: 16 },
@@ -1287,11 +1241,11 @@ const liberacion_lote = () => {
       $(`#blank_ver`).show();
       $(`#user_verificoMicro`).html('Verificó: <b>Sin firmar</b>');
 
-      status_pdf = 1;
+      if (produccion != null && calidad != null && tecnica != null) {
+        downloadPdfBatch();
+      }
     }
   );
-
-  return status_pdf;
 };
 
 $(document).ready(function () {
@@ -1329,22 +1283,20 @@ $(document).ready(function () {
   });
 
   informacion_producto().then((data) => {
-    let status = 1;
-    status *= info_General(data);
-    status *= parametros_Control();
-    status *= lote_anterior(data);
-    status *= condiciones_medio();
-    status *= firmas();
-    status *= equipos();
-    status *= especificaciones_producto();
-    status *= control_proceso();
-    status *= ajustes();
-    status *= despachos();
-    status *= analisisMicrobiologico();
-    status *= liberacion_lote();
+    info_General(data);
+    parametros_Control();
+    lote_anterior(data);
+    condiciones_medio();
+    firmas();
+    equipos();
+    especificaciones_producto();
+    control_proceso();
+    ajustes();
+    despachos();
+    analisisMicrobiologico();
+    liberacion_lote();
     ImprimirEtiquetasInvima();
     cargarObservaciones();
     cargar_version_PDF(data);
-    if (status == 1) downloadPdfBatch();
   });
 });

@@ -20,7 +20,7 @@ class AuditoriaFormulasDao
     public function findAllFormulas()
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("SELECT * FROM formulas_audit");
+        $stmt = $connection->prepare("SELECT * FROM formulas_audit ORDER BY action_time ASC");
         $stmt->execute();
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         $formulas = $stmt->fetchAll($connection::FETCH_ASSOC);
