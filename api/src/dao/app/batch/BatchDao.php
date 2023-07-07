@@ -4,7 +4,6 @@ namespace BatchRecord\dao;
 
 use BatchRecord\Constants\Constants;
 use Monolog\Handler\RotatingFileHandler;
-use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 
 class BatchDao extends estadoInicialDao

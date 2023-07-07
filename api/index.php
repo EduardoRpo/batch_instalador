@@ -134,6 +134,9 @@ require_once __DIR__ . '/src/routes/app/explosionMateriales/explosion_materiales
 require_once __DIR__ . '/src/routes/app/explosionMateriales/pedidos.php';
 require_once __DIR__ . '/src/routes/app/explosionMateriales/planPrePlaneados.php';
 
+// Libreacion
+require_once __DIR__ . '/src/routes/app/liberacion/liberacion.php';
+
 /* pdf */
 require_once __DIR__ . '/src/routes/app/pdf/pdf.php';
 require_once __DIR__ . '/src/routes/app/pdf/exportDataBatch.php';

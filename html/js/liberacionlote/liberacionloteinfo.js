@@ -29,24 +29,25 @@ $(document).ready(function () {
 
   guardarLiberacion = (info) => {
     let obs = $('#observacioneslote').val();
-    $.post(
-      '../../html/php/liberacion.php',
-      { radio, id, info, obs, idBatch, op: 1 },
-      function (data, textStatus, jqXHR) {
-        /* if (data == 1) {
-                    alertify.set("notifier", "position", "top-right");
-                    alertify.error("Faltan firmas en Despachos para cerrar el lote");
-                    return false
-                } */
+    let data = [];
+    data.push({ radio: radio, id: id, info: info, obs: obs, idBatch: idBatch });
+
+    $.ajax({
+      type: 'POST',
+      url: '/api/liberacion',
+      data: { data },
+      success: function (response) {
+        // if (data == 1) {
+        //   alertify.set('notifier', 'position', 'top-right');
+        //   alertify.error('Faltan firmas en Despachos para cerrar el lote');
+        //   return false;
+        // }
 
         alertify.set('notifier', 'position', 'top-right');
         alertify.success('Firmado exitosamente');
-
         if (id == 'calidad_verificado' || id == 'tecnica_realizado')
           firmar(info);
-
         id = sessionStorage.getItem('idbtn');
-
         if (id == 'firma1')
           $('.produccion_realizado')
             .css({ background: 'lightgray', border: 'gray' })
@@ -60,8 +61,17 @@ $(document).ready(function () {
             .css({ background: 'lightgray', border: 'gray' })
             .prop('disabled', true);
         firmar(info);
-      }
-    );
+      },
+    });
+
+    // $.post(
+    //   // '../../html/php/liberacion.php',
+    //   '/api/liberacion',
+    //   data,
+    //   function (data, textStatus, jqXHR) {
+    //
+    //   }
+    // );
   };
 
   cargarBatch = () => {
