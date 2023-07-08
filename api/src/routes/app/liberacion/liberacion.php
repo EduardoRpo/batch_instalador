@@ -21,11 +21,21 @@ $app->post('/liberacion', function (Request $request, Response $response, $args)
     if ($btn == 'tecnica_realizado') {
         $firmas = $liberacionDao->findFirmasControlRealizado($batch, 7);
 
-        if ($firmas['cantidad_firmas'] != $firmas['total_firmas']) $result = 1;
+        $data = [];
+
+        if (!is_array($firmas)) {
+            $data['cantidad_firmas'] = 0;
+            $data['total_firmas'] = 0;
+        } else
+            $data = $firmas;
+
+        if ($data['cantidad_firmas'] != $data['total_firmas']) $result = 1;
     }
 
     if ($result == null) {
         $result = $liberacionDao->liberacionLote($dataBatch);
+
+        $dataBatch['modulo'] = 10;
         $controlFirmasDao->registrarFirmas($dataBatch);
     }
 

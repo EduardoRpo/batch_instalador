@@ -24,7 +24,7 @@ class LiberacionDao
         $stmt = $connection->prepare("SELECT * FROM batch_control_firmas WHERE batch = :batch AND modulo = :modulo");
 
         $stmt->execute(['batch' => $batch, 'modulo' => $modulo]);
-        $firmas = $stmt->fetchAll($connection::FETCH_ASSOC);
+        $firmas = $stmt->fetch($connection::FETCH_ASSOC);
         return $firmas;
     }
 
@@ -34,7 +34,7 @@ class LiberacionDao
 
         try {
             $stmt = $connection->prepare("SELECT * FROM batch_liberacion WHERE batch = :batch");
-            $stmt->execute(['batch' => $dataBatch['batch']]);
+            $stmt->execute(['batch' => $dataBatch['idBatch']]);
 
             $result = $stmt->rowCount();
 
@@ -52,7 +52,7 @@ class LiberacionDao
                     $sql = "UPDATE batch_liberacion SET dir_tecnica = :realizo WHERE batch = :batch";
 
                 $stmt = $connection->prepare($sql);
-                $stmt->execute(['batch' => $dataBatch['batch'], 'realizo' => $user['id']]);
+                $stmt->execute(['batch' => $dataBatch['idBatch'], 'realizo' => $user['id']]);
             } else {
                 $user = $dataBatch['info'];
                 $btn = $dataBatch['id'];
@@ -87,7 +87,7 @@ class LiberacionDao
                     'produccion' => $produccion,
                     'calidad' => $calidad,
                     'tecnica' => $tecnica,
-                    'batch' => $dataBatch['batch'],
+                    'batch' => $dataBatch['idBatch'],
                 ]);
             }
         } catch (\Exception $e) {

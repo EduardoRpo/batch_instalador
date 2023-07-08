@@ -15,7 +15,6 @@ $('#buscar_batch').click(function (e) {
   $.get(`/api/batch/${idBatch}`, function (data, textStatus, jqXHR) {
     if ((textStatus = 'success')) {
       if (data) {
-        sessionStorage.removeItem('dataBatchPdf');
         localStorage.removeItem('dataBatchPdf');
         localStorage.setItem('dataBatchPdf', JSON.stringify(data));
 

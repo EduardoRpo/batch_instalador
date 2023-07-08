@@ -343,7 +343,7 @@ include("modal/modal_condicionesMedio.php");
                               <tr>
                                 <td>Densidad</td>
                                 <td id="espec_densidad"></td>
-                                <td><input class="selectpicker form-control especificacionInput" type="number" id="in_densidad" onblur="validar_densidad();" >
+                                <td><input class="selectpicker form-control especificacionInput" type="number" id="in_densidad" onblur="validar_densidad();">
                                 </td>
                               </tr>
                               <tr>
@@ -468,7 +468,6 @@ include("modal/modal_condicionesMedio.php");
   <script src="/html/js/global/propiedadesProducto.js"></script>
   <script src="/html/js/global/validacionesEspecificaciones.js"></script>
   <script src="/html/js/global/validacionEspecificaciones.js"></script>
-
   <script src="/html/js/preparacion/instructivo.js"></script>
   <script src="/html/js/preparacion/validacionesPreparacion.js"></script>
   <script src="/html/js/preparacion/btnPreparacion.js"></script>

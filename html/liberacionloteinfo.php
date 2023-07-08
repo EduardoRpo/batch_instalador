@@ -210,6 +210,7 @@ include("modal/modal_condicionesMedio.php");
   <script src="../../html/vendor/jquery-confirm/jquery-confirm.min.js"></script>
   <script src="../../assets/plugins/jquery/jquery.number.min.js"></script>
 
+  <script src="/html/js/global/searchData.js"></script>
   <script src="/html/js/global/loadinfo-global.js"></script>
   <script src="/html/js/global/tanques.js"></script>
   <script src="/html/js/global/validacionesAuth.js"></script>
@@ -221,9 +222,6 @@ include("modal/modal_condicionesMedio.php");
 
   <script src="/html/js/liberacionlote/liberacionloteinfo.js"></script>
   <script src="/html/js/liberacionlote/validaciones.js"></script>
-
-
-
 
 </body>
 

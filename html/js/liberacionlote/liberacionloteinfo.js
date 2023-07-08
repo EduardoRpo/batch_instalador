@@ -36,17 +36,17 @@ $(document).ready(function () {
       type: 'POST',
       url: '/api/liberacion',
       data: { data },
-      success: function (response) {
-        // if (data == 1) {
-        //   alertify.set('notifier', 'position', 'top-right');
-        //   alertify.error('Faltan firmas en Despachos para cerrar el lote');
-        //   return false;
-        // }
+      success: async function (response) {
+        if (response == 1) {
+          alertify.set('notifier', 'position', 'top-right');
+          alertify.error('Faltan firmas en Despachos para cerrar el lote');
+          return false;
+        }
 
         alertify.set('notifier', 'position', 'top-right');
         alertify.success('Firmado exitosamente');
         if (id == 'calidad_verificado' || id == 'tecnica_realizado')
-          firmar(info);
+          await firmar(info);
         id = sessionStorage.getItem('idbtn');
         if (id == 'firma1')
           $('.produccion_realizado')
@@ -60,18 +60,21 @@ $(document).ready(function () {
           $('.tecnica_realizado')
             .css({ background: 'lightgray', border: 'gray' })
             .prop('disabled', true);
-        firmar(info);
+        await firmar(info);
+
+        let data = await searchData(`/api/batch/${idBatch}`);
+        localStorage.removeItem('dataBatchPdf');
+        localStorage.setItem('dataBatchPdf', JSON.stringify(data));
+
+        let urlActual = window.location.href;
+
+        if (urlActual.includes('https'))
+          urlActual = `https://batchrecord/pdf/${idBatch}/${data.referencia}`;
+        else urlActual = `http://batchrecord/pdf/${idBatch}/${data.referencia}`;
+
+        window.open(urlActual, '_blank');
       },
     });
-
-    // $.post(
-    //   // '../../html/php/liberacion.php',
-    //   '/api/liberacion',
-    //   data,
-    //   function (data, textStatus, jqXHR) {
-    //
-    //   }
-    // );
   };
 
   cargarBatch = () => {
