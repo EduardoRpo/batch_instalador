@@ -181,6 +181,7 @@ $('#guardarFormula').click(function(e) {
                 alertify.error(r.message)
             }
             limpiarDatatable(data.length)
+            granelNoFormulas()
         },
     })
 })

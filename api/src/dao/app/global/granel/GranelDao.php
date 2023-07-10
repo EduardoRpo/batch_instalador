@@ -47,7 +47,7 @@ class GranelDao
   {
     $connection = Connection::getInstance()->getConnection();
 
-    /* Graneles */
+    /* Graneles 
     $stmt = $connection->prepare("SELECT referencia, nombre_referencia, 0 as superUsuario
                                     FROM producto 
                                     WHERE referencia LIKE '%Granel%' 
@@ -57,7 +57,7 @@ class GranelDao
     $granel = $stmt->fetchAll($connection::FETCH_ASSOC);
     $this->logger->notice("graneles Obtenidos", array('graneles' => $granel));
 
-    /* Graneles con formula */
+    // Graneles con formula 
 
     $stmt = $connection->prepare("SELECT DISTINCT f.id_producto, p.nombre_referencia FROM formula f
                                   INNER JOIN producto p ON p.referencia = f.id_producto 
@@ -70,7 +70,16 @@ class GranelDao
 
     $granelNoFormula = array_diff_assoc($granel, $granelFormula);
     $granelNoFormula = array_values($granelNoFormula);
-    $granelNoFormula[0]['superUsuario'] = 0;
+    $granelNoFormula[0]['superUsuario'] = 0; */
+
+    $stmt = $connection->prepare("SELECT referencia, nombre_referencia, 0 as superUsuario
+                                  FROM producto 
+                                  WHERE referencia LIKE '%Granel%' AND referencia NOT IN (SELECT DISTINCT f.id_producto FROM formula f INNER JOIN producto p ON p.referencia = f.id_producto 
+                                                                                          WHERE id_producto LIKE '%Granel%' ORDER BY SUBSTR(id_producto, 1, 7), CAST(SUBSTR(id_producto, 8, LENGTH(id_producto)) AS UNSIGNED))
+                                  ORDER BY SUBSTR(referencia, 1, 7), CAST(SUBSTR(referencia, 8, LENGTH(referencia)) AS UNSIGNED)");
+    $stmt->execute();  
+    $granelNoFormula = $stmt->fetchAll($connection::FETCH_ASSOC);
+    $this->logger->notice("graneles Obtenidos", array('graneles' => $granelNoFormula));
 
     return $granelNoFormula;
   }
