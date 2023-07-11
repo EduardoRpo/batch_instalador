@@ -1,4 +1,4 @@
-<?php require_once('php/sesion/sesion.php');?>
+<?php require_once('php/sesion/sesion.php'); ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -10,17 +10,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>Samara Cosmetics | Dashboard</title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-  
+
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  
+
   <!-- CSS Files -->
   <!-- <link href="../assets/css/bootstrap.min.css" rel="stylesheet" /> -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link href="../assets/css/now-ui-dashboard.css?v=1.5.0" rel="stylesheet" />
   <link href="../sistema/css/estilos.css" rel="stylesheet" />
-  
+
   <!-- Icons -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 </head>
@@ -28,7 +28,7 @@
 <body class="">
   <div class="wrapper ">
 
-  <?php include('./admin_componentes/sidebar.php'); ?>
+    <?php include('./admin_componentes/sidebar.php'); ?>
 
     <div class="main-panel" id="main-panel">
       <!-- Navbar -->
@@ -322,11 +322,12 @@
   <!-- <script src="../assets/demo/demo.js"></script> -->
   <script src="js/menu.js"></script>
   <script>
-   /*  $(document).ready(function() {
-      // Javascript method's body can be found in assets/js/demos.js
-      demo.initDashboardPageCharts();
-
-    }); */
+    $(document).ready(function() {
+      localStorage.removeItem('dataBatchPdf');
+      localStorage.removeItem('orden');
+      localStorage.removeItem('tamano_lote');
+      localStorage.removeItem('opLiberacion');
+    });
   </script>
 </body>
 

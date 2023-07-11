@@ -1240,10 +1240,6 @@ const liberacion_lote = () => {
       $(`#f_verificoMicro`).hide();
       $(`#blank_ver`).show();
       $(`#user_verificoMicro`).html('Verificó: <b>Sin firmar</b>');
-
-      if (produccion != null && calidad != null && tecnica != null) {
-        downloadPdfBatch();
-      }
     }
   );
 };

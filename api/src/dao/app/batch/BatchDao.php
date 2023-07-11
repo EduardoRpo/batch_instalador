@@ -312,7 +312,7 @@ class BatchDao extends estadoInicialDao
     public function loadImagePdf()
     {
         try {
-            $targetDir = dirname(dirname(dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))))) . '/exportBatch/label/pdf/';
+            $targetDir = dirname(dirname(dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))))) . '/exportBatch/pdf/';
             $allowTypes = array('pdf');
 
             $image_name = str_replace(' ', '', $_FILES['pdf']['name']);
@@ -331,7 +331,7 @@ class BatchDao extends estadoInicialDao
             $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
 
             if (in_array($fileType, $allowTypes)) {
-                $targetDir = dirname(dirname(dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))))) . '/exportBatch/label/pdf/';
+                $targetDir = dirname(dirname(dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))))) . '/exportBatch/pdf/';
                 $targetFilePath1 = $targetDir . '/' . $image_name;
 
                 // Verificar si el archivo de destino ya existe

@@ -38,45 +38,57 @@
 
     <!-- pesaje -->
     <h1 class="SaltoDePagina"></h1>
+    <h1 class="pdfPageBreak"></h1>
     <?php include_once __DIR__ . '/modules/pesaje.php'; ?>
+    <h1 class="pdfPageBreak"></h1>
 
     <!-- Preparacion -->
     <h1 class="SaltoDePagina"></h1>
     <?php include_once __DIR__ . '/modules/preparacion.php'; ?>
+    <h1 class="pdfPageBreak"></h1>
 
     <!-- Aprobación -->
     <h1 class="SaltoDePagina"></h1>
     <?php include_once __DIR__ . '/modules/aprobacion.php'; ?>
+    <h1 class="pdfPageBreak"></h1>
 
     <!-- Envasado -->
     <h1 class="SaltoDePagina"> </h1>
     <?php include_once __DIR__ . '/modules/envasado.php'; ?>
+    <h1 class="pdfPageBreak"> </h1>
 
     <!-- Acondicionamiento -->
     <h1 class="SaltoDePagina"> </h1>
     <?php include_once __DIR__ . '/modules/acondicionamiento.php'; ?>
+    <h1 class="pdfPageBreak"> </h1>
 
     <!-- inicio despachos -->
     <h1 class="SaltoDePagina"> </h1>
     <?php include_once __DIR__ . '/modules/despachos.php'; ?>
+    <h1 class="pdfPageBreak"> </h1>
 
     <!-- Inicio Microbiologia -->
     <h1 class="SaltoDePagina"> </h1>
     <?php include_once __DIR__ . '/modules/microbiologia.php'; ?>
+    <h1 class="pdfPageBreak"> </h1>
 
     <!-- Inicio Fisicoquimico -->
     <h1 class="SaltoDePagina"> </h1>
     <?php include_once __DIR__ . '/modules/fisicoquimico.php'; ?>
+    <h1 class="pdfPageBreak"> </h1>
 
     <!-- inicio liberacion Lote -->
     <h1 class="SaltoDePagina"> </h1>
     <?php include_once __DIR__ . '/modules/liberacionLote.php'; ?>
+    <h1 class="pdfPageBreak"> </h1>
 
     <h1 class="SaltoDePagina"> </h1>
     <?php include_once __DIR__ . '/modules/etiquetasPesaje.php'; ?>
+    <h1 class="pdfPageBreak"> </h1>
 
     <h1 class="SaltoDePagina"> </h1>
     <?php include_once __DIR__ . '/modules/certificadoPesaje.php'; ?>
+    <h1 class="pdfPageBreak"> </h1>
 
     <script src="../../assets/plugins/jquery/jquery.min.js"></script>
     <script src="../../assets/plugins/bootstrap/js/tether.min.js"></script>
@@ -97,7 +109,6 @@
     <script src="../../html/js/global/etiquetas.js"></script>
     <script src="/html/pdf/js/download_pdf.js"></script>
     <script src="/html/js/global/searchData.js"></script>
-    <!-- <script src="../../html/pdf/js/printThis.js"></script> -->
 
 </body>
 

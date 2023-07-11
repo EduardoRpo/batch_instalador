@@ -63,8 +63,8 @@ $(document).ready(function () {
         await firmar(info);
 
         let data = await searchData(`/api/batch/${idBatch}`);
-        localStorage.removeItem('dataBatchPdf');
         localStorage.setItem('dataBatchPdf', JSON.stringify(data));
+        localStorage.setItem('opLiberacion', 1);
 
         let urlActual = window.location.href;
 
