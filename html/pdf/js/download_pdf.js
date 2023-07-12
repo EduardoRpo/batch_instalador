@@ -35,10 +35,10 @@ $(document).ready(function () {
         form.append('pdf', blob, `${numero_orden}_${data.fecha_creacion}.pdf`); 
           
         let resp = await sendDataPOST('/api/savePdf', form, 2);
-
-        let op = localStorage.getItem('opLiberacion');
-        if(op) window.close();
       }).save();
+      
+      let op = localStorage.getItem('opLiberacion');
+      if(op) window.close();
     } catch (error) {
       console.log(error);
     }
