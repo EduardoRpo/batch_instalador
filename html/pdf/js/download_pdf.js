@@ -1,5 +1,6 @@
 $(document).ready(function () {
   downloadPdfBatch = async () => {
+    debugger
     try {
       let copy_invoice = invoice.cloneNode(true);
 
@@ -36,9 +37,12 @@ $(document).ready(function () {
           
         let resp = await sendDataPOST('/api/savePdf', form, 2);
       }).save();
+
+      setTimeout(() => {
+        let op = localStorage.getItem('opLiberacion');
+        if(op) window.close();
+      }, 4000);
       
-      let op = localStorage.getItem('opLiberacion');
-      if(op) window.close();
     } catch (error) {
       console.log(error);
     }

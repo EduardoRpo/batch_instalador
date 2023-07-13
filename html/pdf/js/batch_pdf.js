@@ -1294,6 +1294,7 @@ $(document).ready(function () {
     ImprimirEtiquetasInvima();
     cargarObservaciones();
     cargar_version_PDF(data);
+    
     downloadPdfBatch();
   });
 });
