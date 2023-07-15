@@ -1295,6 +1295,6 @@ $(document).ready(function () {
     cargarObservaciones();
     cargar_version_PDF(data);
     
-    downloadPdfBatch();
+    // downloadPdfBatch();
   });
 });

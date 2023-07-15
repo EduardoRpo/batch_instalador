@@ -37,58 +37,58 @@
     <?php include_once __DIR__ . '/modules/head.php'; ?>
 
     <!-- pesaje -->
-    <h1 class="SaltoDePagina"></h1>
-    <h1 class="pdfPageBreak"></h1>
+    <h1 class="SaltoDePagina" data-html2pdf-orientation="portrait"></h1>
+    <!-- <h1 class="pdf-page"></h1> -->
     <?php include_once __DIR__ . '/modules/pesaje.php'; ?>
-    <h1 class="pdfPageBreak"></h1>
+    <h1 class="pdf-page"></h1>
 
     <!-- Preparacion -->
-    <h1 class="SaltoDePagina"></h1>
+    <h1 class="SaltoDePagina" data-html2pdf-orientation="portrait"></h1>
     <?php include_once __DIR__ . '/modules/preparacion.php'; ?>
-    <h1 class="pdfPageBreak"></h1>
+    <h1 class="pdf-page"></h1>
 
     <!-- Aprobación -->
-    <h1 class="SaltoDePagina"></h1>
+    <h1 class="SaltoDePagina" data-html2pdf-orientation="portrait"></h1>
     <?php include_once __DIR__ . '/modules/aprobacion.php'; ?>
-    <h1 class="pdfPageBreak"></h1>
+    <h1 class="pdf-page"></h1>
 
     <!-- Envasado -->
-    <h1 class="SaltoDePagina"> </h1>
+    <h1 class="SaltoDePagina" data-html2pdf-orientation="portrait"> </h1>
     <?php include_once __DIR__ . '/modules/envasado.php'; ?>
-    <h1 class="pdfPageBreak"> </h1>
+    <h1 class="pdf-page"> </h1>
 
     <!-- Acondicionamiento -->
-    <h1 class="SaltoDePagina"> </h1>
+    <h1 class="SaltoDePagina" data-html2pdf-orientation="portrait"> </h1>
     <?php include_once __DIR__ . '/modules/acondicionamiento.php'; ?>
-    <h1 class="pdfPageBreak"> </h1>
+    <h1 class="pdf-page"> </h1>
 
     <!-- inicio despachos -->
-    <h1 class="SaltoDePagina"> </h1>
+    <h1 class="SaltoDePagina" data-html2pdf-orientation="portrait"> </h1>
     <?php include_once __DIR__ . '/modules/despachos.php'; ?>
-    <h1 class="pdfPageBreak"> </h1>
+    <h1 class="pdf-page"> </h1>
 
     <!-- Inicio Microbiologia -->
-    <h1 class="SaltoDePagina"> </h1>
+    <h1 class="SaltoDePagina" data-html2pdf-orientation="portrait"> </h1>
     <?php include_once __DIR__ . '/modules/microbiologia.php'; ?>
-    <h1 class="pdfPageBreak"> </h1>
+    <h1 class="pdf-page"> </h1>
 
     <!-- Inicio Fisicoquimico -->
-    <h1 class="SaltoDePagina"> </h1>
+    <h1 class="SaltoDePagina" data-html2pdf-orientation="portrait"> </h1>
     <?php include_once __DIR__ . '/modules/fisicoquimico.php'; ?>
-    <h1 class="pdfPageBreak"> </h1>
+    <h1 class="pdf-page"> </h1>
 
     <!-- inicio liberacion Lote -->
-    <h1 class="SaltoDePagina"> </h1>
+    <h1 class="SaltoDePagina" data-html2pdf-orientation="portrait"> </h1>
     <?php include_once __DIR__ . '/modules/liberacionLote.php'; ?>
-    <h1 class="pdfPageBreak"> </h1>
+    <h1 class="pdf-page"> </h1>
 
-    <h1 class="SaltoDePagina"> </h1>
+    <h1 class="SaltoDePagina" data-html2pdf-orientation="portrait"> </h1>
     <?php include_once __DIR__ . '/modules/etiquetasPesaje.php'; ?>
-    <h1 class="pdfPageBreak"> </h1>
+    <h1 class="pdf-page"> </h1>
 
-    <h1 class="SaltoDePagina"> </h1>
+    <h1 class="SaltoDePagina" data-html2pdf-orientation="portrait"> </h1>
     <?php include_once __DIR__ . '/modules/certificadoPesaje.php'; ?>
-    <h1 class="pdfPageBreak"> </h1>
+    <h1 class="pdf-page"> </h1>
 
     <script src="../../assets/plugins/jquery/jquery.min.js"></script>
     <script src="../../assets/plugins/bootstrap/js/tether.min.js"></script>
@@ -99,11 +99,10 @@
     <script src="../../html/js/utils/sidebarmenu.js"></script>
     <script src="../../assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
     <script src="https://use.fontawesome.com/15242848ba.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.5/pdfmake.min.js"></script>
-
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.5/pdfmake.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script> -->
 
     <script src="../../html/pdf/js/batch_pdf.js"></script>
     <script src="../../html/js/global/etiquetas.js"></script>

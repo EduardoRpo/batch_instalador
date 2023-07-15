@@ -12,6 +12,7 @@ use BatchRecord\dao\PlanPrePlaneadosDao;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+// use Dompdf\Dompdf;
 
 $batchDao = new BatchDao();
 $ultimoBatchDao = new UltimoBatchCreadoDao();
@@ -21,7 +22,7 @@ $multiDao = new MultiDao();
 $EMPedidosRegistroDao = new PlanPedidosDao();
 $planPrePlaneadosDao = new PlanPrePlaneadosDao();
 $observacionesDao = new ObservacionesInactivosDao();
-
+// $dompdf = new Dompdf();
 
 $app->get('/batch', function (Request $request, Response $data, $args) use ($batchDao) {
   $batch = $batchDao->findActive();
@@ -175,16 +176,39 @@ $app->get('/deleteBatch/{id_batch}/{motivo}', function (Request $request, Respon
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->post('/savePdf', function (Request $request, Response $response, $args) use ($batchDao) {
-  $pdf = $batchDao->loadImagePdf();
+// $app->post('/savePdf', function (Request $request, Response $response, $args) use ($batchDao) {
+//   $pdf = $batchDao->loadImagePdf();
 
-  if ($pdf == null)
-    $resp = array('success' => true, 'message' => 'Documento pdf descargado correctamente');
-  else if (isset($pdf['info']))
-    $resp = array('info' => true, 'message' => $pdf['message']);
-  else
-    $resp = array('error' => true, 'message' => 'Ocurrio un error mientras descargaba el Batch. Intentelo nuevamente');
+//   if ($pdf == null)
+//     $resp = array('success' => true, 'message' => 'Documento pdf descargado correctamente');
+//   else if (isset($pdf['info']))
+//     $resp = array('info' => true, 'message' => $pdf['message']);
+//   else
+//     $resp = array('error' => true, 'message' => 'Ocurrio un error mientras descargaba el Batch. Intentelo nuevamente');
 
-  $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
-  return $response->withHeader('Content-Type', 'application/json');
-});
+//   $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
+//   return $response->withHeader('Content-Type', 'application/json');
+// });
+// $app->post('/generate-pdf', function (Request $request, Response $response, $args) use ($dompdf) {
+//   // Obtén los datos del formulario
+//   $data = $request->getParsedBody();
+
+//   // Construye el HTML con los datos recibidos
+//   $html = $data['html'];
+
+//   // Carga el HTML en Dompdf
+//   $dompdf->loadHtml($html);
+
+//   // Renderiza el PDF
+//   $dompdf->render();
+
+//   // Genera el archivo PDF
+//   $output = $dompdf->output();
+
+//   // Establece las cabeceras para descargar el PDF
+//   $response = $response->withHeader('Content-Type', 'application/pdf');
+//   $response = $response->withHeader('Content-Disposition', 'attachment;filename="documento.pdf"');
+//   $response->getBody()->write($output);
+
+//   return $response;
+// });

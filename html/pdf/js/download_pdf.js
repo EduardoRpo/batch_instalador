@@ -1,8 +1,8 @@
 $(document).ready(function () {
   downloadPdfBatch = async () => {
-    debugger
+    
     try {
-      let copy_invoice = invoice.cloneNode(true);
+      /*let copy_invoice = invoice.cloneNode(true);
 
       copy_invoice.style.width = '1279px';
       let elementos = copy_invoice.getElementsByClassName('noImprimir');
@@ -36,12 +36,13 @@ $(document).ready(function () {
         form.append('pdf', blob, `${numero_orden}_${data.fecha_creacion}.pdf`); 
           
         let resp = await sendDataPOST('/api/savePdf', form, 2);
-      }).save();
-
-      setTimeout(() => {
-        let op = localStorage.getItem('opLiberacion');
-        if(op) window.close();
-      }, 4000);
+      }).save(); */
+      debugger
+      let form = new FormData();
+      const html = document.getElementById('invoice').outerHTML;
+      // console.log(html)
+      form.append('html',html);
+      let resp = await sendDataPOST('/api/generate-pdf',form,2);
       
     } catch (error) {
       console.log(error);
