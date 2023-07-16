@@ -50,12 +50,14 @@ class ValidacionFirmasDao
         }
     }
 
-    public function findFirmas2SeccionByDate($batch, $firmas)
+    public function findFirmas2SeccionByDate($batch, $firmas, $multi)
     {
         try {
             $connection = Connection::getInstance()->getConnection();
-            //$sql = "SELECT COUNT(realizo) AS realizo, COUNT(verifico) AS verifico, batch, modulo FROM batch_firmas2seccion WHERE batch = :batch GROUP BY modulo";
-            $sql = "SELECT realizo, verifico, batch, modulo FROM batch_firmas2seccion WHERE batch = :batch GROUP BY modulo";
+            $sql = "SELECT realizo, verifico, batch, modulo 
+                    FROM batch_firmas2seccion 
+                    WHERE batch = :batch 
+                    ORDER BY `batch_firmas2seccion`.`modulo` ASC";
             $stmt = $connection->prepare($sql);
             $stmt->execute(['batch' => $batch]);
             $batchsF2S = $stmt->fetchAll($connection::FETCH_ASSOC);
@@ -70,7 +72,14 @@ class ValidacionFirmasDao
 
                     //$cantidad = $batchsF2S[$i]['realizo'] + $batchsF2S[$i]['verifico'];
                     $cantidad = $countV + $countR;
+                    $modulo = $batchsF2S[$i]['modulo'];
+
+                    if ($multi > 1) {
+                        if ($modulo == 2) $cantidad = $cantidad - 1;
+                        if ($modulo == 3) $cantidad = $cantidad - 1;
+                    }
                 }
+
 
                 $modulo = $batchsF2S[$i]['modulo'];
                 $firmas[$batchsF2S[$i]['modulo']] = $firmas[$modulo] + $cantidad;
@@ -168,7 +177,7 @@ class ValidacionFirmasDao
             $batchsAM = $stmt->fetchAll($connection::FETCH_ASSOC);
 
 
-            for ($i = 0; $i < sizeof($batchsAM); $i++) {
+            for ($i = 0; $i < 1; $i++) {
                 $cantidad = 0;
 
                 if ($batchsAM[$i]['realizo'] > 0 || $batchsAM[$i]['verifico'] > 0) {

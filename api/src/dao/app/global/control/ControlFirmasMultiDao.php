@@ -28,6 +28,19 @@ class ControlFirmasMultiDao
     }
 
 
+    public function findTotalFirmasByBatch($batch)
+    {
+        $connection = Connection::getInstance()->getConnection();
+        $sql = "SELECT SUM(cantidad_firmas) AS cantidad_firmas, SUM(total_firmas) AS total_firmas 
+                FROM batch_control_firmas 
+                WHERE batch = :batch;";
+        $query = $connection->prepare($sql);
+        $query->execute(['batch' => $batch]);
+        $data = $query->fetchAll($connection::FETCH_ASSOC);
+        return $data;
+    }
+
+
     public function controlCantidadFirmas($batch)
     {
         $connection = Connection::getInstance()->getConnection();
