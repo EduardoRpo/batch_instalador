@@ -50,12 +50,15 @@ class PedidosSinReferenciaDao
         $pedidosSinReferencia = $this->findPedidoSinReferencia($dataPedidos);
 
         if ($pedidosSinReferencia) {
-            $sql = "UPDATE plan_pedidos_sin_referencia SET cantidad = :cantidad, valor_pedido = :valor_pedido 
+            $fecha_actual = date('Y-m-d');
+
+            $sql = "UPDATE plan_pedidos_sin_referencia SET cantidad = :cantidad, valor_pedido = :valor_pedido, fecha_actual = :fecha_actual
                     WHERE pedido = :pedido AND id_producto = :id_producto";
             $query = $connection->prepare($sql);
             $query->execute([
                 'cantidad' => trim($dataPedidos['cantidad']),
                 'valor_pedido' => trim($dataPedidos['valor_pedido']),
+                'fecha_actual' => $fecha_actual,
                 'pedido' => trim($dataPedidos['documento']),
                 'id_producto' =>  trim("M-" . $dataPedidos['producto'])
             ]);

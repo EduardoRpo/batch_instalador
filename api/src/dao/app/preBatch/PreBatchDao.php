@@ -105,12 +105,16 @@ class PreBatchDao
         $rows = $query->rowCount();
 
         if ($rows > 0) {
-            $sql = "UPDATE plan_pedidos SET cantidad = :cantidad, valor_pedido = :valor_pedido 
+            $fecha_actual = date('Y-m-d H:i:s');
+
+            $sql = "UPDATE plan_pedidos SET cantidad = :cantidad, valor_pedido = :valor_pedido, importado = :importado, flag_estado = :flag_estado
                     WHERE pedido = :pedido AND id_producto = :id_producto";
             $query = $connection->prepare($sql);
             $query->execute([
                 'cantidad' => trim($dataPedidos['cantidad']),
                 'valor_pedido' => trim($dataPedidos['valor_pedido']),
+                'importado' => $fecha_actual,
+                'flag_estado' => 1,
                 'pedido' => trim($dataPedidos['documento']),
                 'id_producto' =>  trim("M-" . $dataPedidos['producto'])
             ]);
