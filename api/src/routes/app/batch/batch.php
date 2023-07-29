@@ -12,7 +12,7 @@ use BatchRecord\dao\PlanPrePlaneadosDao;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-// use Dompdf\Dompdf;
+use Dompdf\Dompdf;
 
 $batchDao = new BatchDao();
 $ultimoBatchDao = new UltimoBatchCreadoDao();
@@ -22,7 +22,7 @@ $multiDao = new MultiDao();
 $EMPedidosRegistroDao = new PlanPedidosDao();
 $planPrePlaneadosDao = new PlanPrePlaneadosDao();
 $observacionesDao = new ObservacionesInactivosDao();
-// $dompdf = new Dompdf();
+$dompdf = new Dompdf();
 
 $app->get('/batch', function (Request $request, Response $data, $args) use ($batchDao) {
   $batch = $batchDao->findActive();
@@ -189,26 +189,27 @@ $app->get('/deleteBatch/{id_batch}/{motivo}', function (Request $request, Respon
 //   $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
 //   return $response->withHeader('Content-Type', 'application/json');
 // });
-// $app->post('/generate-pdf', function (Request $request, Response $response, $args) use ($dompdf) {
-//   // Obtén los datos del formulario
-//   $data = $request->getParsedBody();
 
-//   // Construye el HTML con los datos recibidos
-//   $html = $data['html'];
+$app->post('/generate-pdf', function (Request $request, Response $response, $args) use ($dompdf) {
+  // Obtén los datos del formulario
+  $data = $request->getParsedBody();
 
-//   // Carga el HTML en Dompdf
-//   $dompdf->loadHtml($html);
+  // Construye el HTML con los datos recibidos
+  $html = $data['html'];
 
-//   // Renderiza el PDF
-//   $dompdf->render();
+  // Carga el HTML en Dompdf
+  $dompdf->loadHtml($html);
 
-//   // Genera el archivo PDF
-//   $output = $dompdf->output();
+  // Renderiza el PDF
+  $dompdf->render();
 
-//   // Establece las cabeceras para descargar el PDF
-//   $response = $response->withHeader('Content-Type', 'application/pdf');
-//   $response = $response->withHeader('Content-Disposition', 'attachment;filename="documento.pdf"');
-//   $response->getBody()->write($output);
+  // Genera el archivo PDF
+  $output = $dompdf->output();
 
-//   return $response;
-// });
+  // Establece las cabeceras para descargar el PDF
+  $response = $response->withHeader('Content-Type', 'application/pdf');
+  $response = $response->withHeader('Content-Disposition', 'attachment;filename="documento.pdf"');
+  $response->getBody()->write($output);
+
+  return $response;
+});

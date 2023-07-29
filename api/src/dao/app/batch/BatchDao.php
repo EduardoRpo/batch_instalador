@@ -48,8 +48,10 @@ class BatchDao extends estadoInicialDao
     public function findBatchByMinAndMax($dataBatch)
     {
         $connection = Connection::getInstance()->getConnection();
-
-        $stmt = $connection->prepare("SELECT * FROM batch WHERE id_batch BETWEEN :minBacth AND :maxBacth");
+        $sql = "SELECT * FROM batch 
+                WHERE id_batch 
+                BETWEEN :minBacth AND :maxBacth";
+        $stmt = $connection->prepare($sql);
         $stmt->execute([
             'minBacth' => $dataBatch['minBatch'],
             'maxBacth' => $dataBatch['maxBatch']
@@ -266,7 +268,10 @@ class BatchDao extends estadoInicialDao
     public function updateEstadoBatch($batch, $estado)
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("UPDATE batch SET estado = :estado WHERE id_batch = :batch");
+        $sql = "UPDATE batch 
+                SET estado = :estado 
+                WHERE id_batch = :batch";
+        $stmt = $connection->prepare($sql);
         $result = $stmt->execute(['batch' => $batch, 'estado' => $estado]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         return $result;
