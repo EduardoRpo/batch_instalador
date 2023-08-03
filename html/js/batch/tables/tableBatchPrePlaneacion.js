@@ -162,7 +162,7 @@ $(document).ready(function () {
         title: 'Tamaño Lote (Kg)',
         data: 'tamano_lote',
         className: 'text-center',
-        render: $.fn.dataTable.render.number('.', ',', 1, ''),
+        render: $.fn.dataTable.render.number('.', ',', 2, ''),
       },
       {
         title: 'Cantidad (Und)',
