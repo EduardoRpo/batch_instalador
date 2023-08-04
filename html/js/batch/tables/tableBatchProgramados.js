@@ -174,7 +174,7 @@ $(document).ready(function () {
         title: 'Tamaño Lote',
         data: 'tamano_lote',
         className: 'uniqueClassName',
-        render: $.fn.dataTable.render.number('.', ',', 0, ''),
+        render: $.fn.dataTable.render.number('.', ',', 2, ''),
       },
       /* {
                       title: 'Propietario',
