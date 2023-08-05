@@ -202,14 +202,13 @@ $app->post('/generate-pdf', function (Request $request, Response $response, $arg
 
   // Renderiza el PDF
   $dompdf->render();
-
   // Genera el archivo PDF
   $output = $dompdf->output();
 
   // Establece las cabeceras para descargar el PDF
   $response = $response->withHeader('Content-Type', 'application/pdf');
-  $response = $response->withHeader('Content-Disposition', 'attachment;filename="documento.pdf"');
+  $response = $response->withHeader('Content-Disposition', 'attachment; filename="batch.pdf"');
   $response->getBody()->write($output);
 
-  return $response;
+  // return $response;
 });

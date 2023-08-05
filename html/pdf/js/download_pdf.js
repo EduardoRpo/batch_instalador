@@ -13,8 +13,7 @@ $(document).ready(function () {
 
       copy_invoice = insertBreaks(copy_invoice);
 
-      let data = JSON.parse(localStorage.getItem('dataBatchPdf'));
-      let numero_orden = data.numero_orden.replace('/', '-');
+      
 
       let opt = {
         margin: [10, 30, 30, 30],
@@ -37,13 +36,63 @@ $(document).ready(function () {
           
         let resp = await sendDataPOST('/api/savePdf', form, 2);
       }).save(); */
-      debugger
-      let form = new FormData();
-      const html = document.getElementById('invoice').outerHTML;
-      // console.log(html)
-      form.append('html',html);
-      let resp = await sendDataPOST('/api/generate-pdf',form,2);
+      // let data = JSON.parse(localStorage.getItem('dataBatchPdf'));
+      // let numero_orden = data.numero_orden.replace('/', '-');
+      /*
+            let form = new FormData();
+            const html = document.getElementById('invoice').outerHTML;
+            // console.log(html)
+            form.append('html', html);
+            let resp = await sendDataPOST('/api/generate-pdf', form, 2);
+            
+            let url = URL.createObjectURL(resp);
+        
+            let a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            // a.download = `${numero_orden}_${data.fecha_creacion}.pdf`;
+            a.download = `documento.pdf`;
+            document.body.appendChild(a);
+        
+            // Simula el clic en el enlace para iniciar la descarga
+            a.click();
+        
+            // Limpia la URL creada después de la descarga
+            URL.revokeObjectURL(url); */
       
+      let form = new FormData();
+      const html = document.getElementById('invoice').outerHTML; 
+      form.append('html', html);
+
+      fetch('/api/generate-pdf', {
+        method: 'POST', // O el método que estés utilizando
+        data: form,
+        contentType: false,
+        cache: false,
+        processData: false,
+      })
+        .then(response => response.blob())
+        .then(blob => {
+          // Crea una URL local para el blob del PDF
+          const url = URL.createObjectURL(blob);
+  
+          // Crea un enlace oculto para descargar el archivo
+          const a = document.createElement('a');
+          a.style.display = 'none';
+          a.href = url;
+          a.download = 'nombre_del_archivo.pdf'; // Nombre del archivo que se descargará
+          document.body.appendChild(a);
+  
+          // Simula el clic en el enlace para iniciar la descarga
+          a.click();
+  
+          // Limpia la URL creada después de la descarga
+          URL.revokeObjectURL(url);
+        })
+        .catch(error => {
+          // Manejo de errores si la solicitud falla
+          console.error('Error al obtener el PDF:', error);
+        });
     } catch (error) {
       console.log(error);
     }
