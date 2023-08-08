@@ -18,6 +18,9 @@ $(document).ready(function () {
           contentType: false,
           cache: false,
           processData: false,
+          xhrFields: {
+            responseType: 'blob'
+          },
         });
       else
         result = await $.ajax({

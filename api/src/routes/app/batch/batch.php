@@ -13,6 +13,14 @@ use BatchRecord\dao\PlanPrePlaneadosDao;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Dompdf\Dompdf;
+use Dompdf\Options;
+
+$options = new Options();
+$options->set('isHtml5ParserEnabled', true);
+$options->set('isRemoteEnabled', true);
+$options->set('isPhpEnabled', true);
+
+$dompdf = new Dompdf($options);
 
 $batchDao = new BatchDao();
 $ultimoBatchDao = new UltimoBatchCreadoDao();
@@ -22,7 +30,6 @@ $multiDao = new MultiDao();
 $EMPedidosRegistroDao = new PlanPedidosDao();
 $planPrePlaneadosDao = new PlanPrePlaneadosDao();
 $observacionesDao = new ObservacionesInactivosDao();
-$dompdf = new Dompdf();
 
 $app->get('/batch', function (Request $request, Response $data, $args) use ($batchDao) {
   $batch = $batchDao->findActive();
@@ -190,7 +197,7 @@ $app->get('/deleteBatch/{id_batch}/{motivo}', function (Request $request, Respon
 //   return $response->withHeader('Content-Type', 'application/json');
 // });
 
-$app->post('/generate-pdf', function (Request $request, Response $response, $args) use ($dompdf) {
+$app->post('/generate-pdf', function (Request $request, Response $response, $args) use ($dompdf, $batchDao) {
   // Obtén los datos del formulario
   $data = $request->getParsedBody();
 
@@ -199,16 +206,23 @@ $app->post('/generate-pdf', function (Request $request, Response $response, $arg
 
   // Carga el HTML en Dompdf
   $dompdf->loadHtml($html);
-
+  $paperSize = 'a4';
+  $paperOrientation = 'portrait';
+  $dompdf->setPaper($paperSize, $paperOrientation);
   // Renderiza el PDF
   $dompdf->render();
   // Genera el archivo PDF
   $output = $dompdf->output();
 
+  $tempPdfPath = '/ruta/temporal/pdf/temp.pdf';
+
+  file_put_contents($tempPdfPath, $output);
+
+  $batchDao->loadImagePdf($tempPdfPath, $data['numero_orden']);
+
   // Establece las cabeceras para descargar el PDF
   $response = $response->withHeader('Content-Type', 'application/pdf');
   $response = $response->withHeader('Content-Disposition', 'attachment; filename="batch.pdf"');
   $response->getBody()->write($output);
-
-  // return $response;
+  return $response;
 });
