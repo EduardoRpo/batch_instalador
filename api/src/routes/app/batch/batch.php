@@ -13,14 +13,8 @@ use BatchRecord\dao\PlanPrePlaneadosDao;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Dompdf\Dompdf;
-use Dompdf\Options;
 
-$options = new Options();
-$options->set('isHtml5ParserEnabled', true);
-$options->set('isRemoteEnabled', true);
-$options->set('isPhpEnabled', true);
-
-$dompdf = new Dompdf($options);
+$dompdf = new Dompdf();
 
 $batchDao = new BatchDao();
 $ultimoBatchDao = new UltimoBatchCreadoDao();
@@ -204,21 +198,23 @@ $app->post('/generate-pdf', function (Request $request, Response $response, $arg
   // Construye el HTML con los datos recibidos
   $html = $data['html'];
 
+
+
   // Carga el HTML en Dompdf
   $dompdf->loadHtml($html);
-  $paperSize = 'a4';
-  $paperOrientation = 'portrait';
-  $dompdf->setPaper($paperSize, $paperOrientation);
+  $customPaper = array(0, 0, 612.00, 792.00);
+  $dompdf->set_paper($customPaper);
+
   // Renderiza el PDF
   $dompdf->render();
   // Genera el archivo PDF
   $output = $dompdf->output();
 
-  $tempPdfPath = '/ruta/temporal/pdf/temp.pdf';
+  // $tempPdfPath = '/ruta/temporal/pdf/temp.pdf';
 
-  file_put_contents($tempPdfPath, $output);
+  // file_put_contents($tempPdfPath, $output);
 
-  $batchDao->loadImagePdf($tempPdfPath, $data['numero_orden']);
+  // $batchDao->loadImagePdf($output, $data['pdf']);
 
   // Establece las cabeceras para descargar el PDF
   $response = $response->withHeader('Content-Type', 'application/pdf');

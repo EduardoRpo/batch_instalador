@@ -314,7 +314,7 @@ class BatchDao extends estadoInicialDao
         }
     }
 
-    public function loadImagePdf($tempPdfPath, $nombrePdf)
+    public function loadImagePdf($pdfContent, $nombrePdf)
     {
         try {
             $targetDir = dirname(dirname(dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))))) . '/exportBatch/pdf/';
@@ -337,8 +337,8 @@ class BatchDao extends estadoInicialDao
                     unlink($targetFilePath);
                 }
 
-                // Mover el archivo temporal al destino final
-                rename($tempPdfPath, $targetFilePath);
+                // Mover el contenido del PDF al destino final
+                file_put_contents($targetFilePath, $pdfContent);
 
                 // Realizar otras operaciones si es necesario
 
