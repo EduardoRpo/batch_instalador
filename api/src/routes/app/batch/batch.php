@@ -13,8 +13,12 @@ use BatchRecord\dao\PlanPrePlaneadosDao;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Dompdf\Dompdf;
+use Dompdf\Options;
 
-$dompdf = new Dompdf();
+$options = new Options();
+$options->set('isRemoteEnabled', TRUE);
+
+$dompdf = new Dompdf($options);
 
 $batchDao = new BatchDao();
 $ultimoBatchDao = new UltimoBatchCreadoDao();
@@ -177,19 +181,19 @@ $app->get('/deleteBatch/{id_batch}/{motivo}', function (Request $request, Respon
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-// $app->post('/savePdf', function (Request $request, Response $response, $args) use ($batchDao) {
-//   $pdf = $batchDao->loadImagePdf();
+$app->post('/savePdf', function (Request $request, Response $response, $args) use ($batchDao) {
+  $pdf = $batchDao->loadImagePdf();
 
-//   if ($pdf == null)
-//     $resp = array('success' => true, 'message' => 'Documento pdf descargado correctamente');
-//   else if (isset($pdf['info']))
-//     $resp = array('info' => true, 'message' => $pdf['message']);
-//   else
-//     $resp = array('error' => true, 'message' => 'Ocurrio un error mientras descargaba el Batch. Intentelo nuevamente');
+  if ($pdf == null)
+    $resp = array('success' => true, 'message' => 'Documento pdf descargado correctamente');
+  else if (isset($pdf['info']))
+    $resp = array('info' => true, 'message' => $pdf['message']);
+  else
+    $resp = array('error' => true, 'message' => 'Ocurrio un error mientras descargaba el Batch. Intentelo nuevamente');
 
-//   $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
-//   return $response->withHeader('Content-Type', 'application/json');
-// });
+  $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
+});
 
 $app->post('/generate-pdf', function (Request $request, Response $response, $args) use ($dompdf, $batchDao) {
   // Obtén los datos del formulario
@@ -197,8 +201,6 @@ $app->post('/generate-pdf', function (Request $request, Response $response, $arg
 
   // Construye el HTML con los datos recibidos
   $html = $data['html'];
-
-
 
   // Carga el HTML en Dompdf
   $dompdf->loadHtml($html);
@@ -209,12 +211,6 @@ $app->post('/generate-pdf', function (Request $request, Response $response, $arg
   $dompdf->render();
   // Genera el archivo PDF
   $output = $dompdf->output();
-
-  // $tempPdfPath = '/ruta/temporal/pdf/temp.pdf';
-
-  // file_put_contents($tempPdfPath, $output);
-
-  // $batchDao->loadImagePdf($output, $data['pdf']);
 
   // Establece las cabeceras para descargar el PDF
   $response = $response->withHeader('Content-Type', 'application/pdf');

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>pdf | Batch Record</title>
 
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/icon/favicon.png">
+    <link class="img" rel="icon" type="image/png" sizes="16x16" href="/assets/images/icon/favicon.png">
     <title>Samara Cosmetics</title>
     <style>
         html {
@@ -11647,7 +11647,7 @@
 <body>
 
     <div class="card-body mb-3" style="display: flex;justify-content:space-between">
-        <a class="card-body"><span class="card-body"><img src="/assets/images/logo/logo-samara.png" style="width: 80%;" class="light-logo" alt="Samara Cosmetics" /></span></a>
+        <a class="card-body"><span class="card-body"><img src="/assets/images/logo/logo-samara.png" style="width: 80%;" class="light-logo img" alt="Samara Cosmetics" /></span></a>
         <div class="card-body">
             <span class="card-body" id="codigo"></span>
             <span class="card-body" id="version"></span>

@@ -1,8 +1,8 @@
 $(document).ready(function () {
   downloadPdfBatch = async () => {
     
-    try { 
-      let data = JSON.parse(localStorage.getItem('dataBatchPdf')); 
+    try {
+      let data = JSON.parse(localStorage.getItem('dataBatchPdf'));
       let copy_invoice = invoice.cloneNode(true);
 
       let elementos = copy_invoice.getElementsByClassName('noImprimir');
@@ -14,6 +14,21 @@ $(document).ready(function () {
       elementos = copy_invoice.getElementsByTagName('body');
       elementos[0].style.width = '720px';
       elementos[0].style.margin = '-10px';
+ 
+      // let imagenes = copy_invoice.getElementsByClassName('img');
+      
+      // let href = imagenes[0].href.replace('http://batchrecord', '').replace('https://batchrecord', '');
+      // imagenes[0].setAttribute('href', `../../../../..${href}`);
+      
+      // // let src = imagenes[1].src.replace('http://batchrecord', '').replace('https://batchrecord', '');
+      // // imagenes[1].setAttribute('src', `../../../../..${src}`); 
+      
+      // imagenes = copy_invoice.getElementsByTagName('img');
+      
+      // for (let i = 0; i < imagenes.length; i++) {
+      //   let src = imagenes[i].src.replace('http://batchrecord', '').replace('https://batchrecord', '');
+      //   imagenes[i].setAttribute('src', `../../../../..${src}`); 
+      // }
 
       let form = new FormData();
       let html = copy_invoice.outerHTML;
@@ -21,18 +36,34 @@ $(document).ready(function () {
       form.append('html', html);
       form.append('pdf', `${data.numero_lote}-${data.fecha_creacion}.pdf`);
 
-      let resp = await sendDataPOST('/api/generate-pdf', form, 2);
-            
+      let resp = await $.ajax({
+        url: '/api/generate-pdf',
+        type: 'POST',
+        data: form,
+        contentType: false,
+        cache: false,
+        processData: false,
+        xhrFields: {
+          responseType: 'blob'
+        },
+      });
+      
       let url = URL.createObjectURL(new Blob([resp], { type: 'application/pdf' }));
     
       const a = document.createElement('a');
       a.style.display = 'none';
       a.href = url;
-      a.download = `${data.numero_lote}-${data.fecha_creacion}.pdf`; 
+      a.download = `${data.numero_lote}-${data.fecha_creacion}.pdf`;
       document.body.appendChild(a);
     
-      a.click();     
+      a.click();
       
+      form = new FormData();
+      // let pdfBlob = new Blob([resp], { type: 'application/pdf' });
+      form.append('pdf', resp, `${data.numero_lote}-${data.fecha_creacion}.pdf`);
+      resp = await sendDataPOST('/api/savePdf', form, 2);
+
+      window.close();
     } catch (error) {
       console.log(error);
     }
