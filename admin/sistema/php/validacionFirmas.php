@@ -23,7 +23,7 @@ if (!empty($_POST)) {
         /* Valida que el batch no haya sido eliminado */
 
         if ($batch_estado['estado'] != 0) {
-            $sql = "SELECT * FROM batch_control_firmas WHERE batch = :batch ORDER BY modulo";
+            $sql = "SELECT * FROM batch_control_firmas WHERE batch = :batch AND id != 0 ORDER BY modulo";
             $query = $conn->prepare($sql);
             $query->execute(['batch' => $batch]);
         } else

@@ -16,9 +16,7 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 
 $options = new Options();
-$options->set('isHtml5ParserEnabled', true);
-$options->set('isRemoteEnabled', true);
-$options->set('isPhpEnabled', true);
+$options->set('isRemoteEnabled', TRUE);
 
 $dompdf = new Dompdf($options);
 
@@ -183,19 +181,19 @@ $app->get('/deleteBatch/{id_batch}/{motivo}', function (Request $request, Respon
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-// $app->post('/savePdf', function (Request $request, Response $response, $args) use ($batchDao) {
-//   $pdf = $batchDao->loadImagePdf();
+$app->post('/savePdf', function (Request $request, Response $response, $args) use ($batchDao) {
+  $pdf = $batchDao->loadImagePdf();
 
-//   if ($pdf == null)
-//     $resp = array('success' => true, 'message' => 'Documento pdf descargado correctamente');
-//   else if (isset($pdf['info']))
-//     $resp = array('info' => true, 'message' => $pdf['message']);
-//   else
-//     $resp = array('error' => true, 'message' => 'Ocurrio un error mientras descargaba el Batch. Intentelo nuevamente');
+  if ($pdf == null)
+    $resp = array('success' => true, 'message' => 'Documento pdf descargado correctamente');
+  else if (isset($pdf['info']))
+    $resp = array('info' => true, 'message' => $pdf['message']);
+  else
+    $resp = array('error' => true, 'message' => 'Ocurrio un error mientras descargaba el Batch. Intentelo nuevamente');
 
-//   $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
-//   return $response->withHeader('Content-Type', 'application/json');
-// });
+  $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
+});
 
 $app->post('/generate-pdf', function (Request $request, Response $response, $args) use ($dompdf, $batchDao) {
   // Obtén los datos del formulario
@@ -206,19 +204,13 @@ $app->post('/generate-pdf', function (Request $request, Response $response, $arg
 
   // Carga el HTML en Dompdf
   $dompdf->loadHtml($html);
-  $paperSize = 'a4';
-  $paperOrientation = 'portrait';
-  $dompdf->setPaper($paperSize, $paperOrientation);
+  $customPaper = array(0, 0, 612.00, 792.00);
+  $dompdf->set_paper($customPaper);
+
   // Renderiza el PDF
   $dompdf->render();
   // Genera el archivo PDF
   $output = $dompdf->output();
-
-  $tempPdfPath = '/ruta/temporal/pdf/temp.pdf';
-
-  file_put_contents($tempPdfPath, $output);
-
-  $batchDao->loadImagePdf($tempPdfPath, $data['numero_orden']);
 
   // Establece las cabeceras para descargar el PDF
   $response = $response->withHeader('Content-Type', 'application/pdf');

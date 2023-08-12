@@ -1278,23 +1278,54 @@ $(document).ready(function () {
     }
   });
 
-  informacion_producto().then((data) => {
-    info_General(data);
-    parametros_Control();
-    lote_anterior(data);
-    condiciones_medio();
-    firmas();
-    equipos();
-    especificaciones_producto();
-    control_proceso();
-    ajustes();
-    despachos();
-    analisisMicrobiologico();
-    liberacion_lote();
-    ImprimirEtiquetasInvima();
-    cargarObservaciones();
-    cargar_version_PDF(data);
+  // informacion_producto().then((data) => {
+  //   info_General(data);
+  //   parametros_Control();
+  //   lote_anterior(data);
+  //   condiciones_medio();
+  //   firmas();
+  //   equipos();
+  //   especificaciones_producto();
+  //   control_proceso();
+  //   ajustes();
+  //   despachos();
+  //   analisisMicrobiologico();
+  //   liberacion_lote();
+  //   ImprimirEtiquetasInvima();
+  //   cargarObservaciones();
+  //   cargar_version_PDF(data);
+     
+  //   downloadPdfBatch();
+  // });
+  async function procesarInformacion() {
+    try {
+      const data = await informacion_producto();
+      info_General(data);
+      parametros_Control();
+      lote_anterior(data);
+      condiciones_medio();
+      firmas();
+      equipos();
+      especificaciones_producto();
+      control_proceso();
+      ajustes();
+      despachos();
+      analisisMicrobiologico();
+      liberacion_lote();
+      ImprimirEtiquetasInvima();
+      cargarObservaciones();
+      cargar_version_PDF(data);
     
-    downloadPdfBatch();
-  });
+      let op = localStorage.getItem('opLiberacion');
+      if (op) {
+        await new Promise(resolve => setTimeout(resolve, 2000));
+    
+        downloadPdfBatch();
+      }
+    } catch (error) {
+      console.error('Error al procesar la información:', error);
+    }
+  }
+
+  procesarInformacion();
 });
