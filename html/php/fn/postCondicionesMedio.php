@@ -8,7 +8,7 @@ $query = $conn->prepare($sql);
 $query->execute();
 $condicionesMedio = $query->fetchAll(PDO::FETCH_ASSOC);
 $modulos = array(2, 3, 4, 5, 6, 8, 9);
-$batch = 1500;
+$batch = 1200;
 $array = [];
 
 for ($i = 0; $i < sizeof($condicionesMedio); $i++) {
