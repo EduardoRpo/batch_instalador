@@ -42,3 +42,9 @@ $app->post('/liberacion', function (Request $request, Response $response, $args)
     $response->getBody()->write(json_encode($result, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');
 });
+
+$app->get('/countFirmasLiberacion/{batch}', function (Request $request, Response $response, $args) use ($liberacionDao,) {
+    $liberacion = $liberacionDao->findFirmasControlRealizado($args['batch'], 10);
+    $response->getBody()->write(json_encode($liberacion, JSON_NUMERIC_CHECK));
+    return $response->withHeader('Content-Type', 'application/json');
+});

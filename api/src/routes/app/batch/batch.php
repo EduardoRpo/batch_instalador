@@ -204,7 +204,7 @@ $app->post('/generate-pdf', function (Request $request, Response $response, $arg
 
   // Carga el HTML en Dompdf
   $dompdf->loadHtml($html);
-  $customPaper = array(0, 0, 612.00, 792.00);
+  $customPaper = array(0, 0, 800.00, 900.00);
   $dompdf->set_paper($customPaper);
 
   // Renderiza el PDF

@@ -228,7 +228,7 @@ parametros_Control = () => {
 
         $(`#despeje_linea${info[i].id_modulo}`).append(`
                     <tr>
-                        <th scope="row" class="centrado">${j}</th>
+                        <td scope="row" class="centrado">${j}</td>
                         <td>${info[i].pregunta}</td>
                         <td class="centrado">${
                           info[i].solucion == 1 ? 'X' : ''
@@ -956,12 +956,12 @@ muestras_acondicionamiento = (multi) => {
 
             $(`#muestrasAcondicionamiento${j + 1}`).append(
               `<tr>
-                        <th class="centrado">${c}</th>
-                        <th class="centrado">${data[i].apariencia_etiquetas}</th>
-                        <th class="centrado">${data[i].apariencia_termoencogible}</th>
-                        <th class="centrado">${data[i].cumplimiento_empaque}</th>
-                        <th class="centrado">${data[i].posicion_producto}</th>
-                        <th class="centrado">${data[i].rotulo_caja}</th>
+                        <td class="centrado">${c}</td>
+                        <td class="centrado">${data[i].apariencia_etiquetas}</td>
+                        <td class="centrado">${data[i].apariencia_termoencogible}</td>
+                        <td class="centrado">${data[i].cumplimiento_empaque}</td>
+                        <td class="centrado">${data[i].posicion_producto}</td>
+                        <td class="centrado">${data[i].rotulo_caja}</td>
                       </tr>`
             );
             c = c + 1;

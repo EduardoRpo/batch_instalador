@@ -4,7 +4,7 @@
     <div class="card-header centrado"><b>2. DESPEJE DE LINEA DE LOS PROCESOS Y VERIFICACIONES INICIALES</b></div>
     <div class="card-body">
         <div class="group-despeje-pesaje p-3">
-            <table class="table table-striped" id="despeje_linea2">
+            <table class="table table-striped">
                 <thead class="head">
                     <tr>
                         <th scope="col" class="centrado">#</th>
@@ -13,7 +13,7 @@
                         <th scope="col" class="centrado">No</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="despeje_linea2">
                 </tbody>
             </table>
         </div>

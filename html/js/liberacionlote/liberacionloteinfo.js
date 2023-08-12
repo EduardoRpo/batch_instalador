@@ -62,17 +62,21 @@ $(document).ready(function () {
             .prop('disabled', true);
         await firmar(info);
 
-        let data = await searchData(`/api/batch/${idBatch}`);
-        localStorage.setItem('dataBatchPdf', JSON.stringify(data));
-        localStorage.setItem('opLiberacion', 1);
+        let data = await searchData(`/api/countFirmasLiberacion/${idBatch}`);
 
-        let urlActual = window.location.href;
+        if (data.cantidad_firmas == data.total_firmas) {
+          data = await searchData(`/api/batch/${idBatch}`);
+          localStorage.setItem('dataBatchPdf', JSON.stringify(data));
+          localStorage.setItem('opLiberacion', 1);
 
-        if (urlActual.includes('https'))
-          urlActual = `https://batchrecord/pdf/${idBatch}/${data.referencia}`;
-        else urlActual = `http://batchrecord/pdf/${idBatch}/${data.referencia}`;
+          let urlActual = window.location.href;
 
-        window.open(urlActual, '_blank');
+          if (urlActual.includes('https'))
+            urlActual = `https://batchrecord/pdf/${idBatch}/${data.referencia}`;
+          else urlActual = `http://batchrecord/pdf/${idBatch}/${data.referencia}`;
+
+          window.open(urlActual, '_blank');
+        }
       },
     });
   };
