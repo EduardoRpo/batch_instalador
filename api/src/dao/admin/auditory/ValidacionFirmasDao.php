@@ -176,17 +176,19 @@ class ValidacionFirmasDao
             $stmt->execute(['batch' => $batch]);
             $batchsAM = $stmt->fetchAll($connection::FETCH_ASSOC);
 
+            if (sizeof($batchsAM) > 0) {
 
-            for ($i = 0; $i < 1; $i++) {
-                $cantidad = 0;
+                for ($i = 0; $i < 1; $i++) {
+                    $cantidad = 0;
 
-                if ($batchsAM[$i]['realizo'] > 0 || $batchsAM[$i]['verifico'] > 0) {
-                    $batchsAM[$i]['realizo'] > 0 ? $cantidad = 1 : $cantidad;
-                    $batchsAM[$i]['verifico'] > 0 ? $cantidad  += 1 : $cantidad;
+                    if ($batchsAM[$i]['realizo'] > 0 || $batchsAM[$i]['verifico'] > 0) {
+                        $batchsAM[$i]['realizo'] > 0 ? $cantidad = 1 : $cantidad;
+                        $batchsAM[$i]['verifico'] > 0 ? $cantidad  += 1 : $cantidad;
+                    }
+
+                    $modulo = $batchsAM[$i]['modulo'];
+                    $firmas[$batchsAM[$i]['modulo']] = $firmas[$modulo] + $cantidad;
                 }
-
-                $modulo = $batchsAM[$i]['modulo'];
-                $firmas[$batchsAM[$i]['modulo']] = $firmas[$modulo] + $cantidad;
             }
 
             return $firmas;
@@ -206,19 +208,21 @@ class ValidacionFirmasDao
             $stmt->execute(['batch' => $batch]);
             $batchL = $stmt->fetchAll($connection::FETCH_ASSOC);
 
+            if (sizeof($batchL) > 0) {
 
-            for ($i = 0; $i < sizeof($batchL); $i++) {
-                $cantidad = 0;
+                for ($i = 0; $i < sizeof($batchL); $i++) {
+                    $cantidad = 0;
 
-                if ($batchL[$i]['dir_produccion'] > 0 || $batchL[$i]['dir_calidad'] > 0 || $batchL[$i]['dir_tecnica'] > 0) {
-                    $batchL[$i]['dir_produccion'] > 0 ? $cantidad = 1 : $cantidad;
-                    $batchL[$i]['dir_calidad'] > 0 ? $cantidad  += 1 : $cantidad;
-                    $batchL[$i]['dir_tecnica'] > 0 ? $cantidad += 1 : $cantidad;
+                    if ($batchL[$i]['dir_produccion'] > 0 || $batchL[$i]['dir_calidad'] > 0 || $batchL[$i]['dir_tecnica'] > 0) {
+                        $batchL[$i]['dir_produccion'] > 0 ? $cantidad = 1 : $cantidad;
+                        $batchL[$i]['dir_calidad'] > 0 ? $cantidad  += 1 : $cantidad;
+                        $batchL[$i]['dir_tecnica'] > 0 ? $cantidad += 1 : $cantidad;
+                    }
+
+
+                    $modulo = 10;
+                    $firmas[$modulo] = $firmas[$modulo] + $cantidad;
                 }
-
-
-                $modulo = 10;
-                $firmas[$modulo] = $firmas[$modulo] + $cantidad;
             }
 
             return $firmas;

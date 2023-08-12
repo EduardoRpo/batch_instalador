@@ -6,7 +6,7 @@ require_once('./actualizarEstado.php');
 require_once '../php/servicios/explosion/cierre_explosion_materiales_batch.php';
 
 
-function desinfectanteRealizo($conn) // DesinfectanteSeleccionadoDao.php
+function desinfectanteRealizo($conn) // DesinfectanteDao.php
 {
     $batch = $_POST['idBatch'];
     $modulo = $_POST['modulo'];
@@ -37,7 +37,7 @@ function desinfectanteRealizo($conn) // DesinfectanteSeleccionadoDao.php
 }
 
 
-function desinfectanteVerifico($conn) // DesinfectanteSeleccionadoDao.php
+function desinfectanteVerifico($conn) // DesinfectanteDao.php
 {
     $batch = $_POST['idBatch'];
     $modulo = $_POST['modulo'];
