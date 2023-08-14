@@ -423,6 +423,8 @@ include("modal/modal_condicionesMedio.php");
   <script defer src="/html/js/microbiologia/microbiologiainfo.js"></script>
   <script defer src="/html/js/microbiologia/deshabilitarRef.js"></script>
   <script defer src="/html/js/microbiologia/firmar.js"></script>
+  <script src="/html/js/global/searchData.js"></script>
+
 </body>
 
 </html>

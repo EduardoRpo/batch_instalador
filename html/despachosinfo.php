@@ -659,7 +659,7 @@ include('modal/image.php')
           <script src="/html/js/global/tanques.js"></script>
           <script src="/html/js/global/image.js"></script>
           <script src="/html/js/global/presentacionReferenciaMulti.js"></script>
-          
+
           <script src="/html/js/global/validacionesAuth.js"></script>
           <script src="/html/js/global/auth.js"></script>
           <script src="/html/js/global/controller.js"></script>
@@ -673,6 +673,7 @@ include('modal/image.php')
           <script src="/html/js/despachos/multi.js"></script>
           <script src="/html/js/despachos/guardarDespachos.js"></script>
           <script src="/html/js/despachos/validarData.js"></script>
+          <script src="/html/js/global/searchData.js"></script>
 
 </body>
 

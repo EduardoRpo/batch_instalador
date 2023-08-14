@@ -11,5 +11,3 @@ $app->get('/envase/{ref}', function (Request $request, Response $response, $args
     $response->getBody()->write(json_encode($insumos, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');
 });
-
-// $app->post('/firmarE')

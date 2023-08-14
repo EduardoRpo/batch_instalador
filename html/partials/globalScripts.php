@@ -13,3 +13,4 @@
 
 <script src="/html/js/firmar/firmar1raSeccion.js"></script>
 <script src="/html/js/firmar/firmar2daSeccion.js"></script>
+<script src="/html/js/global/searchData.js"></script>

@@ -354,18 +354,20 @@ include("modal/modal_condicionesMedio.php");
   <script src="/html/js/global/controlEspecificaciones.js"></script>
   <script src="/html/js/global/cargarBatch.js"></script>
   <script src="/html/js/global/condiciones_medio.js"></script>
-  
+
   <script src="/html/js/global/validacionesAuth.js"></script>
   <script src="/html/js/global/auth.js"></script>
   <script src="/html/js/global/controller.js"></script>
 
 
 
-  
+
   <script src="/html/js/firmar/firmar1raSeccion.js"></script>
   <script src="/html/js/firmar/firmar2daSeccion.js"></script>
-  
+
   <script src="/html/js/fisicoquimica/fisicoquimicainfo.js"></script>
+  <script src="/html/js/global/searchData.js"></script>
+
 </body>
 
 </html>

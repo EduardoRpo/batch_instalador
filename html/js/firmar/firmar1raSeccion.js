@@ -6,20 +6,34 @@ $(document).ready(function() {
 
     /* firma verificado despeje */
 
-    firmarVerficadoDespeje = (idfirma) => {
-        $.ajax({
-            type: "POST",
-            url: "../../html/php/despeje.php",
-            data: { operacion: 5, verifico: idfirma, modulo, idBatch },
+    firmarVerficadoDespeje = async(idfirma) => { 
+        // $.ajax({
+        //     type: "POST",
+        //     url: "../../html/php/despeje.php",
+        //     data: { operacion: 5, verifico: idfirma, modulo, idBatch },
 
-            success: function(response) {
-                alertify.set("notifier", "position", "top-right");
-                alertify.success("Firmado satisfactoriamente");
-                $(".despeje_verificado")
-                    .css({ background: "lightgray", border: "gray" })
-                    .prop("disabled", true);
-            },
-        });
+        //     success: function (response) {
+        //         alertify.set('notifier', 'position', 'top-right');
+
+                
+        //         alertify.set("notifier", "position", "top-right");
+        //         alertify.success("Firmado satisfactoriamente");
+        //     },
+        // });
+        
+        let data = new FormData();
+        data.append('idBatch', idBatch);
+        data.append('modulo', modulo);
+
+        let resp = await sendDataPost('/api/despeje', data, 2);
+
+        if (resp.success == true) {
+            alertify.success(resp.message);
+            $(".despeje_verificado")
+                .css({ background: "lightgray", border: "gray" })
+                .prop("disabled", true);
+        } else if (resp.error == true) alertify.error(resp.message);
+        else if (resp.info == true) alertify.notify(resp.message);
     }
 
     firmar = (firm) => {

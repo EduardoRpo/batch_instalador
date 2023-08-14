@@ -473,6 +473,7 @@ include("modal/modal_condicionesMedio.php");
   <script src="/html/js/preparacion/btnPreparacion.js"></script>
   <script src="/html/js/preparacion/procesoInstructivo.js"></script>
   <script src="/html/js/preparacion/preparacioninfo.js"></script>
+  <script src="/html/js/global/searchData.js"></script>
 
 
 </body>
