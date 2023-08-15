@@ -1,7 +1,7 @@
 $(document).ready(function() {
     /* Crear selects de muestras en la ventana de muestras acondicionamiento */
 
-    muestras_acondicionamiento = () => {
+    muestras_acondicionamiento = async () => {
         muestras = $(`#muestras${id_multi}`).val();
         let recoveredData = sessionStorage.getItem(presentacion + ref_multi + modulo);
         j = 1;
@@ -77,29 +77,48 @@ $(document).ready(function() {
                 j++;
             }
         } else {
-            $.ajax({
-                type: "POST",
-                url: "../../html/php/muestras.php",
-                data: { operacion: 4, idBatch, modulo, ref_multi },
+            // $.ajax({
+            //     type: "POST",
+            //     url: "../../html/php/muestras.php",
+            //     data: { operacion: 4, idBatch, modulo, ref_multi },
 
-                success: function(response) {
-                    if (response == 3) return false;
+            //     success: function(response) {
+            //         if (response == 3) return false;
 
-                    let info = JSON.parse(response);
-                    i = 1;
+            //         let info = JSON.parse(response);
+            //         i = 1;
 
-                    for (let j = 0; j < info.data.length; j++) {
-                        $(`#apariencia_etiquetas${i}`).val(info.data[j].apariencia_etiquetas);
-                        $(`#apariencia_termoencogible${i}`).val(
-                            info.data[j].apariencia_termoencogible
-                        );
-                        $(`#cumplimiento_empaque${i}`).val(info.data[j].cumplimiento_empaque);
-                        $(`#posicion_producto${i}`).val(info.data[j].posicion_producto);
-                        $(`#rotulo_caja${i}`).val(info.data[j].rotulo_caja);
-                        i++;
-                    }
-                },
-            });
+            //         for (let j = 0; j < info.data.length; j++) {
+            //             $(`#apariencia_etiquetas${i}`).val(info.data[j].apariencia_etiquetas);
+            //             $(`#apariencia_termoencogible${i}`).val(
+            //                 info.data[j].apariencia_termoencogible
+            //             );
+            //             $(`#cumplimiento_empaque${i}`).val(info.data[j].cumplimiento_empaque);
+            //             $(`#posicion_producto${i}`).val(info.data[j].posicion_producto);
+            //             $(`#rotulo_caja${i}`).val(info.data[j].rotulo_caja);
+            //             i++;
+            //         }
+            //     },
+            // });
+
+            let data = new FormData();
+            data.append('idBatch', idBatch);
+            data.append('modulo', modulo);
+            data.append('ref_multi', ref_multi);
+
+            let resp = await sendDataPost('/api/muestras-acondicionamiento', data, 2);
+            i = 1;
+
+            for (let j = 0; j < resp.length; j++) {
+                $(`#apariencia_etiquetas${i}`).val(resp[j].apariencia_etiquetas);
+                $(`#apariencia_termoencogible${i}`).val(
+                    resp[j].apariencia_termoencogible
+                );
+                $(`#cumplimiento_empaque${i}`).val(resp[j].cumplimiento_empaque);
+                $(`#posicion_producto${i}`).val(resp[j].posicion_producto);
+                $(`#rotulo_caja${i}`).val(resp[j].rotulo_caja);
+                i++;
+            }
         }
     }
 

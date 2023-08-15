@@ -9,7 +9,7 @@ use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use PDO;
 
-class MuestrasDao
+class MuestrasDao1
 {
 
   private $logger;
@@ -138,10 +138,10 @@ class MuestrasDao
     //Envia email
   }
 
-  public function save($data)
+  public function save($dataBatch)
   {
     //$connection = Connection::getInstance()->getConnection();
-    $pedidos = json_decode($data, true);
+    $pedidos = json_decode($dataBatch, true);
 
     foreach ($pedidos as $pedido) {
       // valida si el pedido si existe 

@@ -639,51 +639,89 @@ function calcularPeso(densidadAprobada) {
 
 /* Obtener muestras envasado */
 
-const muestras_envasado = () => {
-  $.ajax({
-    type: 'POST',
-    url: '../../html/php/muestras.php',
-    data: { operacion: 6, idBatch },
+const muestras_envasado = async () => {
+  // $.ajax({
+  //   type: 'POST',
+  //   url: '../../html/php/muestras.php',
+  //   data: { operacion: 6, idBatch },
 
-    success: function (response) {
-      if (response == 3) return false;
-      let promedio = 0;
-      let cont = 0;
-      let sum = 0;
-      let info = JSON.parse(response);
+  //   success: function (response) {
+  //     if (response == 3) return false;
+  //     let promedio = 0;
+  //     let cont = 0;
+  //     let sum = 0;
+  //     let info = JSON.parse(response);
 
-      if (multi.length != 0) {
-        for (let i = 0; i < multi.length; i++) {
-          sum = 0;
-          promedio = 0;
-          cont = 0;
-          for (let j = 0; j < info.length; j++) {
-            if (multi[i]['referencia'] == info[j]['referencia']) {
-              cont = cont + 1;
-              $(`#muestrasEnvasado${i + 1}`).append(
-                `<td class="centrado">${info[j]['muestra']}</td>`
-              );
-              sum = sum + info[j]['muestra'];
-              promedio = (sum / cont).toFixed(2);
-              $(`#promedioMuestras${i + 1}`).val(promedio);
-              $(`#cantidadMuestras${i + 1}`).val(cont);
-            }
-          }
-        }
-      } else {
-        for (let j = 0; j < info.length; j++) {
+  //     if (multi.length != 0) {
+  //       for (let i = 0; i < multi.length; i++) {
+  //         sum = 0;
+  //         promedio = 0;
+  //         cont = 0;
+  //         for (let j = 0; j < info.length; j++) {
+  //           if (multi[i]['referencia'] == info[j]['referencia']) {
+  //             cont = cont + 1;
+  //             $(`#muestrasEnvasado${i + 1}`).append(
+  //               `<td class="centrado">${info[j]['muestra']}</td>`
+  //             );
+  //             sum = sum + info[j]['muestra'];
+  //             promedio = (sum / cont).toFixed(2);
+  //             $(`#promedioMuestras${i + 1}`).val(promedio);
+  //             $(`#cantidadMuestras${i + 1}`).val(cont);
+  //           }
+  //         }
+  //       }
+  //     } else {
+  //       for (let j = 0; j < info.length; j++) {
+  //         cont = cont + 1;
+  //         $(`#muestrasEnvasado1`).append(
+  //           `<td class="centrado">${info[j]['muestra']}</td>`
+  //         );
+  //         sum = sum + info[j]['muestra'];
+  //         promedio = (sum / cont).toFixed(2);
+  //       }
+  //       $(`#promedioMuestras1`).val(promedio);
+  //       $(`#cantidadMuestras1`).val(cont);
+  //     }
+  //   },
+  // });
+
+  let resp = await searchData(`/api/muestras/${idBatch}`);
+
+  if (resp == false) return false;
+  let promedio = 0;
+  let cont = 0;
+  let sum = 0;
+
+  if (multi.length != 0) {
+    for (let i = 0; i < multi.length; i++) {
+      sum = 0;
+      promedio = 0;
+      cont = 0;
+      for (let j = 0; j < resp.length; j++) {
+        if (multi[i]['referencia'] == resp[j]['referencia']) {
           cont = cont + 1;
-          $(`#muestrasEnvasado1`).append(
-            `<td class="centrado">${info[j]['muestra']}</td>`
+          $(`#muestrasEnvasado${i + 1}`).append(
+            `<td class="centrado">${resp[j]['muestra']}</td>`
           );
-          sum = sum + info[j]['muestra'];
+          sum = sum + resp[j]['muestra'];
           promedio = (sum / cont).toFixed(2);
+          $(`#promedioMuestras${i + 1}`).val(promedio);
+          $(`#cantidadMuestras${i + 1}`).val(cont);
         }
-        $(`#promedioMuestras1`).val(promedio);
-        $(`#cantidadMuestras1`).val(cont);
       }
-    },
-  });
+    }
+  } else {
+    for (let j = 0; j < resp.length; j++) {
+      cont = cont + 1;
+      $(`#muestrasEnvasado1`).append(
+        `<td class="centrado">${resp[j]['muestra']}</td>`
+      );
+      sum = sum + resp[j]['muestra'];
+      promedio = (sum / cont).toFixed(2);
+    }
+    $(`#promedioMuestras1`).val(promedio);
+    $(`#cantidadMuestras1`).val(cont);
+  }
 };
 
 function entrega_material_envase(multi) {
@@ -899,77 +937,141 @@ material_envase_sobrante = () => {
 
 /* Funcion para traer datos de multi en conciliacion rendimiento */
 
-muestras_acondicionamiento = (multi) => {
-  $.ajax({
-    type: 'POST',
-    url: '../../html/php/muestras.php',
-    data: { operacion: 7, idBatch },
-    success: function (response) {
-      data = JSON.parse(response);
+muestras_acondicionamiento = async (multi) => {
+  // $.ajax({
+  //   type: 'POST',
+  //   url: '../../html/php/muestras.php',
+  //   data: { operacion: 7, idBatch },
+  //   success: function (response) {
+  //     data = JSON.parse(response);
 
-      /* referencia simple */
-      if (multi == undefined) {
-        multi = [];
-        obj = {};
-        obj.referencia = data[0].referencia;
-        multi.push(obj);
-      }
+  //     /* referencia simple */
+  //     if (multi == undefined) {
+  //       multi = [];
+  //       obj = {};
+  //       obj.referencia = data[0].referencia;
+  //       multi.push(obj);
+  //     }
 
-      for (let j = 0; j < multi.length; j++) {
-        let c = 1;
-        for (let i = 0; i < data.length; i++) {
-          if (multi[j].referencia == data[i].referencia) {
-            data.map(function (dato) {
-              if (dato.apariencia_etiquetas == 1)
-                dato.apariencia_etiquetas = 'Cumple';
-              if (dato.apariencia_etiquetas == 2)
-                dato.apariencia_etiquetas = 'No Cumple';
-              if (dato.apariencia_etiquetas == 3)
-                dato.apariencia_etiquetas = 'No aplica';
+  //     for (let j = 0; j < multi.length; j++) {
+  //       let c = 1;
+  //       for (let i = 0; i < data.length; i++) {
+  //         if (multi[j].referencia == data[i].referencia) {
+  //           data.map(function (dato) {
+  //             if (dato.apariencia_etiquetas == 1)
+  //               dato.apariencia_etiquetas = 'Cumple';
+  //             if (dato.apariencia_etiquetas == 2)
+  //               dato.apariencia_etiquetas = 'No Cumple';
+  //             if (dato.apariencia_etiquetas == 3)
+  //               dato.apariencia_etiquetas = 'No aplica';
 
-              if (dato.apariencia_termoencogible == 1)
-                dato.apariencia_termoencogible = 'Cumple';
-              if (dato.apariencia_termoencogible == 2)
-                dato.apariencia_termoencogible = 'No Cumple';
-              if (dato.apariencia_termoencogible == 3)
-                dato.apariencia_termoencogible = 'No Aplica';
+  //             if (dato.apariencia_termoencogible == 1)
+  //               dato.apariencia_termoencogible = 'Cumple';
+  //             if (dato.apariencia_termoencogible == 2)
+  //               dato.apariencia_termoencogible = 'No Cumple';
+  //             if (dato.apariencia_termoencogible == 3)
+  //               dato.apariencia_termoencogible = 'No Aplica';
 
-              if (dato.cumplimiento_empaque == 1)
-                dato.cumplimiento_empaque = 'Cumple';
-              if (dato.cumplimiento_empaque == 2)
-                dato.cumplimiento_empaque = 'No Cumple';
-              if (dato.cumplimiento_empaque == 3)
-                dato.cumplimiento_empaque = 'No Aplica';
+  //             if (dato.cumplimiento_empaque == 1)
+  //               dato.cumplimiento_empaque = 'Cumple';
+  //             if (dato.cumplimiento_empaque == 2)
+  //               dato.cumplimiento_empaque = 'No Cumple';
+  //             if (dato.cumplimiento_empaque == 3)
+  //               dato.cumplimiento_empaque = 'No Aplica';
 
-              if (dato.posicion_producto == 1)
-                dato.posicion_producto = 'Cumple';
-              if (dato.posicion_producto == 2)
-                dato.posicion_producto = 'No Cumple';
-              if (dato.posicion_producto == 3)
-                dato.posicion_producto = 'No Aplica';
+  //             if (dato.posicion_producto == 1)
+  //               dato.posicion_producto = 'Cumple';
+  //             if (dato.posicion_producto == 2)
+  //               dato.posicion_producto = 'No Cumple';
+  //             if (dato.posicion_producto == 3)
+  //               dato.posicion_producto = 'No Aplica';
 
-              if (dato.rotulo_caja == 1) dato.rotulo_caja = 'Cumple';
-              if (dato.rotulo_caja == 2) dato.rotulo_caja = 'No Cumple';
-              if (dato.rotulo_caja == 3) dato.rotulo_caja = 'No Aplica';
-              return dato;
-            });
+  //             if (dato.rotulo_caja == 1) dato.rotulo_caja = 'Cumple';
+  //             if (dato.rotulo_caja == 2) dato.rotulo_caja = 'No Cumple';
+  //             if (dato.rotulo_caja == 3) dato.rotulo_caja = 'No Aplica';
+  //             return dato;
+  //           });
 
-            $(`#muestrasAcondicionamiento${j + 1}`).append(
-              `<tr>
+  //           $(`#muestrasAcondicionamiento${j + 1}`).append(
+  //             `<tr>
+  //                       <td class="centrado">${c}</td>
+  //                       <td class="centrado">${data[i].apariencia_etiquetas}</td>
+  //                       <td class="centrado">${data[i].apariencia_termoencogible}</td>
+  //                       <td class="centrado">${data[i].cumplimiento_empaque}</td>
+  //                       <td class="centrado">${data[i].posicion_producto}</td>
+  //                       <td class="centrado">${data[i].rotulo_caja}</td>
+  //                     </tr>`
+  //           );
+  //           c = c + 1;
+  //         }
+  //       }
+  //     }
+  //   },
+  // });
+  
+  let resp = await searchData(`/api/muestras-acondicionamiento/${idBatch}`);
+
+  /* referencia simple */
+  if (multi == undefined) {
+    multi = [];
+    obj = {};
+    obj.referencia = resp[0].referencia;
+    multi.push(obj);
+  }
+
+  for (let j = 0; j < multi.length; j++) {
+    let c = 1;
+    for (let i = 0; i < resp.length; i++) {
+      if (multi[j].referencia == resp[i].referencia) {
+        resp.map(function (dato) {
+          if (dato.apariencia_etiquetas == 1)
+            dato.apariencia_etiquetas = 'Cumple';
+          if (dato.apariencia_etiquetas == 2)
+            dato.apariencia_etiquetas = 'No Cumple';
+          if (dato.apariencia_etiquetas == 3)
+            dato.apariencia_etiquetas = 'No aplica';
+
+          if (dato.apariencia_termoencogible == 1)
+            dato.apariencia_termoencogible = 'Cumple';
+          if (dato.apariencia_termoencogible == 2)
+            dato.apariencia_termoencogible = 'No Cumple';
+          if (dato.apariencia_termoencogible == 3)
+            dato.apariencia_termoencogible = 'No Aplica';
+
+          if (dato.cumplimiento_empaque == 1)
+            dato.cumplimiento_empaque = 'Cumple';
+          if (dato.cumplimiento_empaque == 2)
+            dato.cumplimiento_empaque = 'No Cumple';
+          if (dato.cumplimiento_empaque == 3)
+            dato.cumplimiento_empaque = 'No Aplica';
+
+          if (dato.posicion_producto == 1)
+            dato.posicion_producto = 'Cumple';
+          if (dato.posicion_producto == 2)
+            dato.posicion_producto = 'No Cumple';
+          if (dato.posicion_producto == 3)
+            dato.posicion_producto = 'No Aplica';
+
+          if (dato.rotulo_caja == 1) dato.rotulo_caja = 'Cumple';
+          if (dato.rotulo_caja == 2) dato.rotulo_caja = 'No Cumple';
+          if (dato.rotulo_caja == 3) dato.rotulo_caja = 'No Aplica';
+          return dato;
+        });
+
+        $(`#muestrasAcondicionamiento${j + 1}`).append(
+          `<tr>
                         <td class="centrado">${c}</td>
-                        <td class="centrado">${data[i].apariencia_etiquetas}</td>
-                        <td class="centrado">${data[i].apariencia_termoencogible}</td>
-                        <td class="centrado">${data[i].cumplimiento_empaque}</td>
-                        <td class="centrado">${data[i].posicion_producto}</td>
-                        <td class="centrado">${data[i].rotulo_caja}</td>
+                        <td class="centrado">${resp[i].apariencia_etiquetas}</td>
+                        <td class="centrado">${resp[i].apariencia_termoencogible}</td>
+                        <td class="centrado">${resp[i].cumplimiento_empaque}</td>
+                        <td class="centrado">${resp[i].posicion_producto}</td>
+                        <td class="centrado">${resp[i].rotulo_caja}</td>
                       </tr>`
-            );
-            c = c + 1;
-          }
-        }
+        );
+        c = c + 1;
       }
-    },
-  });
+    }
+  }
 };
 
 entrega_material_acondicionamiento = (multi) => {

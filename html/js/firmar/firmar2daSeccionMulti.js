@@ -22,21 +22,35 @@ $(document).ready(function() {
 
     /* almacenar firma calidad 2da seccion */
 
-    almacenarfirma = (verifico) => {
+    almacenarfirma = async (verifico) => {
+        let data = new FormData();
+        data.append('idBatch', idBatch);
+        data.append('verifico', verifico);
+        data.append('modulo', modulo);
+        data.append('refref_multi', ref_multi);
 
-        $.ajax({
-            type: "POST",
-            url: "../../html/php/envasado.php",
-            data: { operacion: 2, verifico, modulo, idBatch, ref_multi },
+        let resp = await sendDataPost('/api/calidad2seccion', data, 2);
 
-            success: function(response) {
-                alertify.set("notifier", "position", "top-right");
-                alertify.success("Firmado satisfactoriamente");
-                $(`.controlpeso_verificado${id_multi}`).css({ background: "lightgray", border: "gray" }).prop("disabled", true);
-                firmar(info);
-            },
-        });
-    }
+        alertify.set("notifier", "position", "top-right");
+        if (resp.success == true) {
+            alertify.success(resp.message);
+            $(`.controlpeso_verificado${id_multi}`).css({ background: "lightgray", border: "gray" }).prop("disabled", true);
+            firmar(info);
+        } else if (resp.error == true) alertify.error(resp.message);
+        else if (resp.info == true) alertify.notify(resp.message);
+        // $.ajax({
+        //     type: "POST",
+        //     url: "../../html/php/envasado.php",
+        //     data: { operacion: 2, verifico, modulo, idBatch, ref_multi },
+
+        //     success: function(response) {
+        //         alertify.set("notifier", "position", "top-right");
+        //         alertify.success("Firmado satisfactoriamente");
+        //         $(`.controlpeso_verificado${id_multi}`).css({ background: "lightgray", border: "gray" }).prop("disabled", true);
+        //         firmar(info);
+        //     },
+        // });
+    };
 
     firmaCalidad = (verifico) => {
         $.ajax({

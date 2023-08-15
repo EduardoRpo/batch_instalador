@@ -33,19 +33,25 @@ $(document).ready(function () {
         j++;
       }
     } else {
-      result = await consultarMuestras();
+      // result = await consultarMuestras();
+      let data = new FormData();
+      data.append('idBatch', idBatch);
+      data.append('modulo', modulo);
+      data.append('ref_multi', ref_multi);
+
+      let result = await sendDataPost('/api/muestras', data, 2);
       if (result != false) await cargarMuestras(result);
     }
   };
 
-  consultarMuestras = async () => {
-    data = { operacion: 2, idBatch, modulo, ref_multi };
-    return (result = await sendDataPOST(
-      '../../html/php/muestras.php',
-      data,
-      1
-    ));
-  };
+  // consultarMuestras = async () => {
+  //   data = { operacion: 2, idBatch, modulo, ref_multi };
+  //   return (result = await sendDataPOST(
+  //     '../../html/php/muestras.php',
+  //     data,
+  //     1
+  //   ));
+  // };
 
   cargarMuestras = () => {
     if (response == 3) return false;
@@ -65,19 +71,30 @@ $(document).ready(function () {
 
   /* Cargar promedio muestras */
 
-  promedio = () => {
-    $.ajax({
-      type: 'POST',
-      url: '../../html/php/muestras.php',
-      data: { operacion: 5, idBatch, modulo, ref_multi },
+  promedio = async () => {
+    let data = new FormData();
+    data.append('idBatch', idBatch);
+    data.append('modulo', modulo);
+    data.append('ref_multi', ref_multi);
 
-      success: function (response) {
-        if (!response) return false;
-        data = JSON.parse(response);
-        $(`#promedio${id_multi}`).val(`${data[0].promedio}`);
-      },
-    });
-  };
+    let resp = await sendDataPost('/api/promedio-muestras', data, 2);
+
+    if (resp != false) {
+      data = JSON.parse(response);
+      $(`#promedio${id_multi}`).val(`${data.promedio}`);
+    }
+    // $.ajax({
+    //   type: 'POST',
+    //   url: '../../html/php/muestras.php',
+    //   data: { operacion: 5, idBatch, modulo, ref_multi },
+
+    //   success: function (response) {
+    //     if (!response) return false;
+    //     data = JSON.parse(response);
+    //     $(`#promedio${id_multi}`).val(`${data[0].promedio}`);
+    //   },
+    // });
+  }
 
   guardarMuestras = () => {
     let cantidad_muestras = $(`#muestras${id_multi}`).val();

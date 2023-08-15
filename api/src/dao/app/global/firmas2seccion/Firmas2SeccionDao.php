@@ -22,13 +22,13 @@ class Firmas2SeccionDao
 
         $sql = "SELECT * FROM batch_firmas2seccion WHERE modulo = :modulo AND batch = :batch";
         $query = $connection->prepare($sql);
-        $result = $query->execute(['modulo' => $dataBatch['modulo'], 'batch' => $dataBatch['idBatch']]);
-        if ($result > 0) {
-            $this->logger->info(__FUNCTION__, array('query' => $query->queryString, 'errors' => $query->errorInfo()));
-            $data = $query->fetch($connection::FETCH_ASSOC);
-            $this->logger->notice("Firmas obtenidas", array('firmas' => $data));
-            return $data;
-        }
+        $query->execute(['modulo' => $dataBatch['modulo'], 'batch' => $dataBatch['idBatch']]);
+        // if ($result > 0) {
+        $this->logger->info(__FUNCTION__, array('query' => $query->queryString, 'errors' => $query->errorInfo()));
+        $data = $query->fetch($connection::FETCH_ASSOC);
+        $this->logger->notice("Firmas obtenidas", array('firmas' => $data));
+        return $data;
+        // }
     }
 
     public function saveFirmaDespeje($query)
@@ -121,44 +121,45 @@ class Firmas2SeccionDao
 
     public function segundaSeccionVerifico($dataBatch)
     {
-        $connection = Connection::getInstance()->getConnection();
+        try {
+            $connection = Connection::getInstance()->getConnection();
 
-        // $batch = $_POST['idBatch'];
-        $modulo = $dataBatch['modulo'];
+            // $batch = $_POST['idBatch'];
+            $modulo = $dataBatch['modulo'];
 
-        $sql = "SELECT * FROM batch_firmas2seccion WHERE modulo = :modulo AND batch = :batch";
-        $query = $connection->prepare($sql);
-        $query->execute(['modulo' => $modulo, 'batch' => $dataBatch['idBatch']]);
-        $rows = $query->rowCount();
+            $sql = "SELECT * FROM batch_firmas2seccion WHERE modulo = :modulo AND batch = :batch";
+            $query = $connection->prepare($sql);
+            $query->execute(['modulo' => $modulo, 'batch' => $dataBatch['idBatch']]);
+            $rows = $query->rowCount();
 
-        if ($rows > 0) {
-            $verifico = $dataBatch['verifico'];
+            if ($rows > 0) {
+                $verifico = $dataBatch['verifico'];
 
-            if ($modulo == 5 || $modulo == 6) {
-                $ref_multi = $dataBatch['ref_multi'];
-                $sql = "UPDATE batch_firmas2seccion SET verifico = :verifico WHERE modulo = :modulo AND batch = :batch AND ref_multi = :ref_multi";
-                $query = $connection->prepare($sql);
-                $query->execute([
-                    'verifico' => $verifico[0]['id'],
-                    'modulo' => $modulo, 'batch' => $dataBatch['idBatch'],
-                    'ref_multi' => $ref_multi
-                ]);
-            } else {
-                $ref_multi = 0;
-                $sql = "UPDATE batch_firmas2seccion SET verifico = :verifico WHERE modulo = :modulo AND batch = :batch";
-                $query = $connection->prepare($sql);
-                $query->execute([
-                    'verifico' => $verifico,
-                    'modulo' => $modulo,
-                    'batch' => $dataBatch['idBatch']
-                ]);
-            }
+                if ($modulo == 5 || $modulo == 6) {
+                    $ref_multi = $dataBatch['ref_multi'];
+                    $sql = "UPDATE batch_firmas2seccion SET verifico = :verifico WHERE modulo = :modulo AND batch = :batch AND ref_multi = :ref_multi";
+                    $query = $connection->prepare($sql);
+                    $query->execute([
+                        'verifico' => $verifico[0]['id'],
+                        'modulo' => $modulo, 'batch' => $dataBatch['idBatch'],
+                        'ref_multi' => $ref_multi
+                    ]);
+                } else {
+                    $ref_multi = 0;
+                    $sql = "UPDATE batch_firmas2seccion SET verifico = :verifico WHERE modulo = :modulo AND batch = :batch";
+                    $query = $connection->prepare($sql);
+                    $query->execute([
+                        'verifico' => $verifico,
+                        'modulo' => $modulo,
+                        'batch' => $dataBatch['idBatch']
+                    ]);
+                }
 
-            // registrarFirmas($conn, $batch, $modulo);
-            // if ($modulo == 2 || $modulo == 3 || $modulo == 4) // cerrarEstado($batch, $modulo, $conn);
+                // registrarFirmas($conn, $batch, $modulo);
+                // if ($modulo == 2 || $modulo == 3 || $modulo == 4) // cerrarEstado($batch, $modulo, $conn);
 
-            /* Elimina los registros en explosion de materiales */
-            /* if ($modulo == 2) {
+                /* Elimina los registros en explosion de materiales */
+                /* if ($modulo == 2) {
             $sql = "SELECT id_producto FROM batch WHERE id_batch = :id_batch";
             $query = $conn->prepare($sql);
             $query->execute(['id_batch' => $batch]);
@@ -166,6 +167,11 @@ class Firmas2SeccionDao
             cierreExplosionMaterialesBatch($conn, $batch, $referencia['id_producto']);
         } 
             CerrarBatch($conn, $batch);*/
+            }
+        } catch (\Exception $e) {
+            $message = $e->getMessage();
+            $error = array('info' => true, 'message' => $message);
+            return $error;
         }
     }
 }
