@@ -16,6 +16,115 @@ class ConciliacionDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
+    public function findAllConciliacion($dataBatch)
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        $sql = "SELECT * FROM batch_conciliacion_parciales WHERE modulo = :modulo AND batch = :batch AND ref_multi = :ref_multi";
+        $query = $connection->prepare($sql);
+        $query->execute([
+            'modulo' => $dataBatch['modulo'],
+            'batch' => $dataBatch['idBatch'],
+            'ref_multi' => $dataBatch['ref_multi']
+        ]);
+        $this->logger->info(__FUNCTION__, array('query' => $query->queryString, 'errors' => $query->errorInfo()));
+        $data = $query->fetchAll($connection::FETCH_ASSOC);
+        $this->logger->notice("Firmas obtenidas", array('firmas' => $data));
+        return $data;
+    }
+
+    public function findAllConciliacionByBatchAndRef($ref_multi, $id_batch)
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        $sql = "SELECT * FROM batch_conciliacion_parciales WHERE batch = :batch AND ref_multi = :ref_multi";
+        $query = $connection->prepare($sql);
+        $query->execute([
+            'ref_multi' => $ref_multi,
+            'batch' => $id_batch
+        ]);
+        $this->logger->info(__FUNCTION__, array('query' => $query->queryString, 'errors' => $query->errorInfo()));
+        $data = $query->fetchAll($connection::FETCH_ASSOC);
+        $this->logger->notice("Firmas obtenidas", array('firmas' => $data));
+        return $data;
+    }
+
+    public function almacenar_muestras_retencion($dataBatch)
+    {
+        $connection = Connection::getInstance()->getConnection();
+        try {
+            $stmt = $connection->prepare("SELECT * FROM batch_muestras_retencion WHERE batch = :batch AND referencia = :referencia");
+            $stmt->execute(['referencia' => $dataBatch['referencia'], 'batch' => $dataBatch['idBatch']]);
+            $rows = $stmt->rowCount();
+
+            if (!$rows) {
+                $sql = "SELECT MAX(muestra) as consecutivo FROM  batch_muestras_retencion";
+                $query = $connection->prepare($sql);
+                $query->execute();
+                $data = $stmt->fetch($connection::FETCH_ASSOC);
+
+                if ($data['consecutivo'] == null)
+                    $muestra = 1;
+                else
+                    $muestra = $data['consecutivo'] + 1;
+
+                for ($i = 1; $i < $dataBatch['retencion']; $i++) {
+                    $sql = "INSERT INTO batch_muestras_retencion SET referencia = :referencia, muestra = :muestra,  batch = :batch";
+                    $query = $connection->prepare($sql);
+                    $query->execute(['referencia' => $dataBatch['referencia'], 'muestra' => $muestra, 'batch' => $dataBatch['idBatch']]);
+                    $muestra = $muestra + 1;
+                }
+            }
+        } catch (\Exception $e) {
+            $message = $e->getMessage();
+            $error = array('info' => true, 'message' => $message);
+            return $error;
+        }
+    }
+
+    public function insertConciliacionParciales($dataBatch, $conciliacion)
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        try {
+            if ($dataBatch['modulo'] == 6) {
+                if ($conciliacion) $retencion = 0;
+                else return 1;
+
+                $sql = "INSERT INTO batch_conciliacion_parciales (unidades, retencion, cajas, movimiento, modulo, batch, ref_multi, realizo) 
+                        VALUES(:unidades, :retencion, :cajas, :movimiento, :modulo, :batch, :ref_multi, :realizo)";
+                $query = $connection->prepare($sql);
+                $query->execute([
+                    'unidades' => $dataBatch['unidades'],
+                    'retencion' => $retencion,
+                    'cajas' => $dataBatch['cajas'],
+                    'movimiento' => $dataBatch['mov'],
+                    'modulo' => $dataBatch['modulo'],
+                    'batch' => $dataBatch['idBatch'],
+                    'ref_multi' => $dataBatch['ref_multi'],
+                    'realizo' => $dataBatch['realizo']
+                ]);
+            } else {
+                $sql = "INSERT INTO batch_conciliacion_parciales (unidades, cajas, movimiento, modulo, batch, ref_multi, realizo) 
+                        VALUES(:unidades, :cajas, :movimiento, :modulo, :batch, :ref_multi, :realizo)";
+                $query = $connection->prepare($sql);
+                $query->execute([
+                    'unidades' => $dataBatch['unidades'],
+                    'cajas' => $dataBatch['cajas'],
+                    'movimiento' => $dataBatch['mov'],
+                    'modulo' => $dataBatch['modulo'],
+                    'batch' => $dataBatch['batch'],
+                    'ref_multi' => $dataBatch['ref_multi'],
+                    'realizo' => $dataBatch['realizo']
+                ]);
+            }
+        } catch (\Exception $e) {
+            $message = $e->getMessage();
+            $error = array('info' => true, 'message' => $message);
+            return $error;
+        }
+    }
+
     public function conciliacionRendimientoRealizo($dataBatch)
     {
         $connection = Connection::getInstance()->getConnection();

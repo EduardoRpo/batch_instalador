@@ -16,6 +16,47 @@ class Firmas2SeccionDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
+    public function findFirmas2seccionRealizoVerifico($dataBatch)
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        $sql = "SELECT bf2.observaciones as linea, bf2.modulo, bf2.batch, u.urlfirma as realizo, us.urlfirma as verifico 
+                FROM batch_firmas2seccion bf2 
+                    LEFT JOIN usuario u ON u.id = bf2.realizo 
+                    LEFT JOIN usuario us ON us.id = bf2.verifico
+                WHERE modulo = :modulo AND batch = :batch AND ref_multi = :ref_multi";
+        $query = $connection->prepare($sql);
+        $query->execute([
+            'modulo' => $dataBatch['modulo'],
+            'batch' => $dataBatch['idBatch'],
+            'ref_multi' => $dataBatch['ref_multi']
+        ]);
+        $this->logger->info(__FUNCTION__, array('query' => $query->queryString, 'errors' => $query->errorInfo()));
+        $data = $query->fetchAll($connection::FETCH_ASSOC);
+        $this->logger->notice("Firmas obtenidas", array('firmas' => $data));
+        return $data;
+    }
+
+    public function findFirmas2seccionRealizo($dataBatch)
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        $sql = "SELECT bf2.observaciones as linea, bf2.modulo, bf2.batch, u.urlfirma as realizo 
+                FROM batch_firmas2seccion bf2 
+                    LEFT JOIN usuario u ON u.id = bf2.realizo
+                WHERE modulo = :modulo AND batch = :batch AND ref_multi = :ref_multi";
+        $query = $connection->prepare($sql);
+        $query->execute([
+            'modulo' => $dataBatch['modulo'],
+            'batch' => $dataBatch['idBatch'],
+            'ref_multi' => $dataBatch['ref_multi']
+        ]);
+        $this->logger->info(__FUNCTION__, array('query' => $query->queryString, 'errors' => $query->errorInfo()));
+        $data = $query->fetchAll($connection::FETCH_ASSOC);
+        $this->logger->notice("Firmas obtenidas", array('firmas' => $data));
+        return $data;
+    }
+
     public function findFirmas2seccion($dataBatch)
     {
         $connection = Connection::getInstance()->getConnection();

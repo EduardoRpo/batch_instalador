@@ -6,7 +6,7 @@ $(document).ready(function() {
 
     /* firma verificado despeje */
 
-    firmarVerficadoDespeje = async(idfirma) => { 
+    firmarVerficadoDespeje = async (idfirma) => {
         // $.ajax({
         //     type: "POST",
         //     url: "../../html/php/despeje.php",
@@ -24,14 +24,13 @@ $(document).ready(function() {
         let data = new FormData();
         data.append('idBatch', idBatch);
         data.append('modulo', modulo);
-
+        data.append('idfirma', idfirma);
+        
         let resp = await sendDataPost('/api/despeje', data, 2);
-
+        
+        alertify.set("notifier", "position", "top-right");
         if (resp.success == true) {
             alertify.success(resp.message);
-            $(".despeje_verificado")
-                .css({ background: "lightgray", border: "gray" })
-                .prop("disabled", true);
         } else if (resp.error == true) alertify.error(resp.message);
         else if (resp.info == true) alertify.notify(resp.message);
     }

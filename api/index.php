@@ -115,6 +115,7 @@ require_once __DIR__ . '/src/routes/app/global/firmas.php';
 require_once __DIR__ . '/src/routes/app/global/autenticacion.php';
 require_once __DIR__ . '/src/routes/app/global/validacionesCierre.php';
 require_once __DIR__ . '/src/routes/app/global/muestras.php';
+require_once __DIR__ . '/src/routes/app/global/conciliacion.php';
 
 //Pesaje
 require_once __DIR__ . '/src/routes/app/pesaje/cargos.php';

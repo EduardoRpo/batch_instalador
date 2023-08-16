@@ -57,53 +57,87 @@ $(document).ready(function() {
             }).set("labels", { ok: "Si, Parcial", cancel: "No, Total" });
     }
 
-    registrar_conciliacion = (info) => {
+    registrar_conciliacion = async (info) => {
         let operacion = 1;
         let unidades = $(`#txtUnidadesProducidas${id_multi}`).val();
         let retencion = $(`#txtMuestrasRetencion${id_multi}`).val();
         let mov = $(`#txtNoMovimiento${id_multi}`).val();
         let cajas = $(`#txtTotal-Cajas${id_multi}`).val();
-        data = {
-            operacion,
-            unidades,
-            retencion,
-            cajas,
-            mov,
-            modulo,
-            idBatch,
-            ref_multi,
-            realizo: info.id,
-        };
+        
 
         if (entregaParcial == true) {
-            $.post("../../../html/php/servicios/parciales.php", data,
-                function(data, textStatus, jqXHR) {
-                    data = JSON.parse(data);
-                    if (textStatus == "success") {
-                        if (data.length == 1) imprimirEtiquetasRetencion();
+            let data = new FormData();
+            data.append('operacion', operacion);
+            data.append('unidades', unidades);
+            data.append('retencion', retencion);
+            data.append('cajas', cajas);
+            data.append('mov', mov);
+            data.append('modulo', modulo);
+            data.append('idBatch', idBatch);
+            data.append('ref_multi', ref_multi);
+            data.append('realizo', info.id);
+        
+            let resp = await sendDataPost('/api/saveConciliacion', data, 2);
+        
+            alertify.set("notifier", "position", "top-right");
+            if (resp.success == true) {
+                alertify.success(resp.message);
+                if (resp.length == 1) imprimirEtiquetasRetencion();
+                let suma = 0;
+                resp.data.forEach((element) => {
+                    suma = suma + element.unidades;
+                });
 
-                        alertify.set("notifier", "position", "top-right");
-                        alertify.success("Conciliación parcial registrada satisfactoriamente");
-                        let suma = 0;
-                        data.forEach((element) => {
-                            suma = suma + element.unidades;
-                        });
+                alertify.alert("Entrega Parcial", `Total Unidades Entregadas: <b>${suma}</b>`);
+                $(`#parcialesUnidadesProducidas${id_multi}`).val(suma);
+                $(`#txtMuestrasRetencion${id_multi}`).prop("readonly", true);
+                $(`#txtUnidadesProducidas${id_multi}`).val("");
 
-                        alertify.alert("Entrega Parcial", `Total Unidades Entregadas: <b>${suma}</b>`);
-                        $(`#parcialesUnidadesProducidas${id_multi}`).val(suma);
-                        $(`#txtMuestrasRetencion${id_multi}`).prop("readonly", true);
-                        $(`#txtUnidadesProducidas${id_multi}`).val("");
+                $(`.devolucion_realizado${id_multi}`).prop("disabled", false)
+                $(`.conciliacion_realizado${id_multi}`).prop("disabled", true)
 
-                        $(`.devolucion_realizado${id_multi}`).prop("disabled", false)
-                        $(`.conciliacion_realizado${id_multi}`).prop("disabled", true)
+                conciliacionRendimiento();
+            } else if (resp.error == true) alertify.error(resp.message);
+            else if (resp.info == true) alertify.notify(resp.message);
+            // $.post("../../../html/php/servicios/parciales.php", data,
+            //     function(data, textStatus, jqXHR) {
+            //         data = JSON.parse(data);
+            //         if (textStatus == "success") {
+            //             if (data.length == 1) imprimirEtiquetasRetencion();
 
-                        conciliacionRendimiento();
-                    }
-                })
+            //             alertify.set("notifier", "position", "top-right");
+            //             alertify.success("Conciliación parcial registrada satisfactoriamente");
+            //             let suma = 0;
+            //             data.forEach((element) => {
+            //                 suma = suma + element.unidades;
+            //             });
+
+            //             alertify.alert("Entrega Parcial", `Total Unidades Entregadas: <b>${suma}</b>`);
+            //             $(`#parcialesUnidadesProducidas${id_multi}`).val(suma);
+            //             $(`#txtMuestrasRetencion${id_multi}`).prop("readonly", true);
+            //             $(`#txtUnidadesProducidas${id_multi}`).val("");
+
+            //             $(`.devolucion_realizado${id_multi}`).prop("disabled", false)
+            //             $(`.conciliacion_realizado${id_multi}`).prop("disabled", true)
+
+            //             conciliacionRendimiento();
+            //         }
+            //     })
         } else if (entregaTotal == true) {
+            data = {
+                operacion,
+                unidades,
+                retencion,
+                cajas,
+                mov,
+                modulo,
+                idBatch,
+                ref_multi,
+                realizo: info.id,
+            };
             data.entrega_final = 1;
             $.post("../../html/php/conciliacion_rendimiento.php", data,
-                function(data, textStatus, jqXHR) {
+                function (data, textStatus, jqXHR) {
                     if (data == 'false') {
                         alertify.set("notifier", "position", "top-right");
                         alertify.error("No se puede hacer el cierre total. Para finalizar la entrega debe completar el módulo de envasado");
@@ -134,7 +168,7 @@ $(document).ready(function() {
 
         }
 
-    }
+    };
 
     let unidad = $("txtUnidadesProducidas").val();
 

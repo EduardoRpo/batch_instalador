@@ -16,6 +16,63 @@ class MaterialSobranteDao
         $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
     }
 
+    public function findMaterialSobranteRealizoVerifico($dataBatch)
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        $stmt = $connection->prepare("SELECT bms.id, bms.ref_material, bms.envasada, bms.averias, bms.sobrante, bms.ref_producto, bms.batch, bms.modulo, u.urlfirma as realizo, us.urlfirma as verifico 
+                                      FROM batch_material_sobrante bms 
+                                        LEFT JOIN usuario u ON u.id = bms.realizo
+                                        LEFT JOIN usuario us ON us.id = bms.verifico 
+                                      WHERE modulo = :modulo AND batch = :batch AND ref_producto = :ref_multi");
+        $stmt->execute([
+            'modulo' => $dataBatch['modulo'],
+            'batch' => $dataBatch['idBatch'],
+            'ref_multi' => $dataBatch['ref_multi']
+        ]);
+
+        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        $data = $stmt->fetchAll($connection::FETCH_ASSOC);
+        $this->logger->notice("Firmas obtenidas", array('firmas' => $data));
+        return $data;
+    }
+
+    public function findMaterialSobranteRealizoByBatch($id_batch)
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        $stmt = $connection->prepare("SELECT bms.id, bms.ref_material, bms.envasada, bms.averias, bms.sobrante, bms.ref_producto, bms.batch, bms.modulo, u.urlfirma as realizo 
+                                      FROM batch_material_sobrante bms 
+                                        LEFT JOIN usuario u ON u.id = bms.realizo
+                                      WHERE batch = :batch");
+        $stmt->execute(['batch' => $id_batch]);
+
+        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        $data = $stmt->fetchAll($connection::FETCH_ASSOC);
+        $this->logger->notice("Firmas obtenidas", array('firmas' => $data));
+        return $data;
+    }
+
+    public function findMaterialSobranteRealizo($dataBatch)
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        $stmt = $connection->prepare("SELECT bms.id, bms.ref_material, bms.envasada, bms.averias, bms.sobrante, bms.ref_producto, bms.batch, bms.modulo, u.urlfirma as realizo 
+                                      FROM batch_material_sobrante bms 
+                                        LEFT JOIN usuario u ON u.id = bms.realizo
+                                      WHERE modulo = :modulo AND batch = :batch AND ref_producto = :ref_multi");
+        $stmt->execute([
+            'modulo' => $dataBatch['modulo'],
+            'batch' => $dataBatch['idBatch'],
+            'ref_multi' => $dataBatch['ref_multi']
+        ]);
+
+        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        $data = $stmt->fetchAll($connection::FETCH_ASSOC);
+        $this->logger->notice("Firmas obtenidas", array('firmas' => $data));
+        return $data;
+    }
+
     public function materialSobranteRealizo($dataBatch)
     {
         $connection = Connection::getInstance()->getConnection();
@@ -65,30 +122,37 @@ class MaterialSobranteDao
 
     public function materialSobranteVerifico($dataBatch)
     {
-        $connection = Connection::getInstance()->getConnection();
 
-        // $modulo = $_POST['modulo'];
-        // $batch = $_POST['idBatch'];
+        try {
+            $connection = Connection::getInstance()->getConnection();
 
-        $sql = "SELECT * FROM batch_material_sobrante WHERE modulo = :modulo AND batch = :batch";
-        $query = $connection->prepare($sql);
-        $query->execute(['modulo' => $dataBatch['modulo'], 'batch' => $dataBatch['idBatch']]);
-        $rows = $query->rowCount();
+            // $modulo = $_POST['modulo'];
+            // $batch = $_POST['idBatch'];
 
-        if ($rows > 0) {
-            // $ref_multi = $_POST['ref_multi'];
-            // $verifico = $_POST['verifico'];
-
-            $sql = "UPDATE batch_material_sobrante SET verifico = :verifico WHERE batch = :batch AND modulo = :modulo AND ref_producto = :ref_multi";
+            $sql = "SELECT * FROM batch_material_sobrante WHERE modulo = :modulo AND batch = :batch";
             $query = $connection->prepare($sql);
-            $query->execute([
-                'modulo' => $dataBatch['modulo'],
-                'batch' => $dataBatch['idBatch'],
-                'ref_multi' => $dataBatch['ref_multi'],
-                'verifico' => $dataBatch['verifico'],
-            ]);
-            // registrarFirmas($conn, $batch, $modulo);
-            // CerrarBatch($conn, $batch);
+            $query->execute(['modulo' => $dataBatch['modulo'], 'batch' => $dataBatch['idBatch']]);
+            $rows = $query->rowCount();
+
+            if ($rows > 0) {
+                // $ref_multi = $_POST['ref_multi'];
+                // $verifico = $_POST['verifico'];
+
+                $sql = "UPDATE batch_material_sobrante SET verifico = :verifico WHERE batch = :batch AND modulo = :modulo AND ref_producto = :ref_multi";
+                $query = $connection->prepare($sql);
+                $query->execute([
+                    'modulo' => $dataBatch['modulo'],
+                    'batch' => $dataBatch['idBatch'],
+                    'ref_multi' => $dataBatch['ref_multi'],
+                    'verifico' => $dataBatch['verifico'],
+                ]);
+                // registrarFirmas($conn, $batch, $modulo);
+                // CerrarBatch($conn, $batch);
+            }
+        } catch (\Exception $e) {
+            $message = $e->getMessage();
+            $error = array('info' => true, 'message' => $message);
+            return $error;
         }
     }
 }
