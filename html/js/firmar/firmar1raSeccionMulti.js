@@ -134,7 +134,7 @@ firmarVerficadoDespeje = async (idfirma) => {
   data.append('idBatch', idBatch);
   data.append('modulo', modulo);
 
-  let resp = await sendDataPost('/api/despeje', data, 2);
+  let resp = await sendDataPOST('/api/despeje', data, 2);
   if (resp.success == true) {
     alertify.success(resp.message);
     $(".despeje_verificado").prop("disabled", true);

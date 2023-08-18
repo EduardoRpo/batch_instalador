@@ -244,7 +244,7 @@ $(document).ready(function () {
       data.append('modulo', modulo);
       data.append('ref_multi', ref_multi);
 
-      let resp = await sendDataPost('/api/muestras-acondicionamiento', data, 2);
+      let resp = await sendDataPOST('/api/muestras-acondicionamiento', data, 2);
       i = 1;
 
       for (let j = 0; j < resp.length; j++) {

@@ -77,7 +77,7 @@ $(document).ready(function() {
             data.append('ref_multi', ref_multi);
             data.append('realizo', info.id);
         
-            let resp = await sendDataPost('/api/saveConciliacion', data, 2);
+            let resp = await sendDataPOST('/api/saveConciliacion', data, 2);
         
             alertify.set("notifier", "position", "top-right");
             if (resp.success == true) {

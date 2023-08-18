@@ -25,7 +25,7 @@ $(document).ready(function () {
         data.append('realizo', realizo);
         data.append('ref_multi', ref_multi);
 
-        let resp = await sendDataPost('/api/saveRealizo2seccion', data, 2);
+        let resp = await sendDataPOST('/api/saveRealizo2seccion', data, 2);
         alertify.set("notifier", "position", "top-right");
 
         if (resp.success == true) {
@@ -45,7 +45,7 @@ $(document).ready(function () {
         data.append('modulo', modulo);
         data.append('refref_multi', ref_multi);
 
-        let resp = await sendDataPost('/api/calidad2seccion', data, 2);
+        let resp = await sendDataPOST('/api/calidad2seccion', data, 2);
 
         alertify.set("notifier", "position", "top-right");
         if (resp.success == true) {
@@ -93,7 +93,7 @@ $(document).ready(function () {
         data.append('verifico', verifico);
         data.append('ref_multi', ref_multi);
         
-        let resp = await sendDataPost('/api/calidad1seccion', data, 2);
+        let resp = await sendDataPOST('/api/calidad1seccion', data, 2);
         
         alertify.set("notifier", "position", "top-right");
         if (resp.success == true) {

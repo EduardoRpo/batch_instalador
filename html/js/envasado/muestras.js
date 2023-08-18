@@ -39,7 +39,7 @@ $(document).ready(function () {
       data.append('modulo', modulo);
       data.append('ref_multi', ref_multi);
 
-      let result = await sendDataPost('/api/muestras', data, 2);
+      let result = await sendDataPOST('/api/muestras', data, 2);
       if (result != false) await cargarMuestras(result);
     }
   };
@@ -77,7 +77,7 @@ $(document).ready(function () {
     data.append('modulo', modulo);
     data.append('ref_multi', ref_multi);
 
-    let resp = await sendDataPost('/api/promedio-muestras', data, 2);
+    let resp = await sendDataPOST('/api/promedio-muestras', data, 2);
 
     if (resp != false) {
       data = JSON.parse(response);

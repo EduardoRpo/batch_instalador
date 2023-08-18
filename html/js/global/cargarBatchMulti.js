@@ -103,7 +103,7 @@ $(document).ready(function () {
       data.append('modulo', modulo);
       data.append('ref_multi', ref_multi);
         
-      let info = await sendDataPost('/api/loadRealizoVerifico2seccion', data, 2);
+      let info = await sendDataPOST('/api/loadRealizoVerifico2seccion', data, 2);
       if (info == false) {
         //$(`.controlpeso_realizado${id_multi}`).prop("disabled", false);
         return false;
@@ -153,7 +153,7 @@ $(document).ready(function () {
     data.append('modulo', modulo);
     data.append('ref_multi', ref_multi);
         
-    let info = await sendDataPost('/api/loadRealizoVerificoMaterialSobrante', data, 2);
+    let info = await sendDataPOST('/api/loadRealizoVerificoMaterialSobrante', data, 2);
 
     j = 0;
 

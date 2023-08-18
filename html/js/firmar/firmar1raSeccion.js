@@ -26,7 +26,7 @@ $(document).ready(function() {
         data.append('modulo', modulo);
         data.append('idfirma', idfirma);
         
-        let resp = await sendDataPost('/api/despeje', data, 2);
+        let resp = await sendDataPOST('/api/despeje', data, 2);
         
         alertify.set("notifier", "position", "top-right");
         if (resp.success == true) {

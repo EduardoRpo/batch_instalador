@@ -8,7 +8,7 @@ $(document).ready(function () {
         data.append('modulo', modulo);
         data.append('muestras', muestras);
         data.append('ref_multi', ref_multi);
-        let result = await sendDataPost('/api/muestras-envasado', data, 2);
+        let result = await sendDataPOST('/api/muestras-envasado', data, 2);
 
         alertify.set('notifier', 'position', 'top-right');
         if (result.success) {
