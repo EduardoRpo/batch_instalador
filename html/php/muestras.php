@@ -1,5 +1,5 @@
 <?php
-  /*
+
 if (!empty($_POST)) {
 
   require_once('../../conexion.php');
@@ -7,7 +7,7 @@ if (!empty($_POST)) {
   $op = $_POST['operacion'];
   $batch = $_POST['idBatch'];
   switch ($op) {
-      case 1: // Guardar el numero de muestras de envasado
+    case 1: // Guardar el numero de muestras de envasado
       $modulo = $_POST['modulo'];
       $ref_multi = $_POST['ref_multi'];
       $muestras = $_POST['muestras'];
@@ -144,7 +144,5 @@ if (!empty($_POST)) {
       $data = $query->fetchAll(PDO::FETCH_ASSOC);
       echo json_encode($data, JSON_UNESCAPED_UNICODE);
       break;
-  } 
-  
+  }
 }
-*/

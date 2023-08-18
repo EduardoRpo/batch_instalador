@@ -1,7 +1,7 @@
 $(document).ready(function () {
     almacenarControlProceso = async (user) => {
         modulo == 6 ? (operacion = 3) : (operacion = 1);
-        let muestras = JSON.parse(sessionStorage.getItem(presentacion + ref_multi + modulo));
+        let muestras = sessionStorage.getItem(presentacion + ref_multi + modulo);
         // result = await muestrasRecolectadas(muestras);
         let data = new FormData();
         data.append('idBatch', idBatch);
@@ -12,11 +12,11 @@ $(document).ready(function () {
 
         alertify.set('notifier', 'position', 'top-right');
         if (result.success) {
-            result = await almacenarEquipos()
+            await almacenarEquipos()
             firmaControlProcesoEnvasado(user);
 
-            alertify.success(resp.message);
-        } else if (resp.error == true) alertify.error(resp.message);
-        else if (resp.info == true) alertify.notify(resp.message);
+            // alertify.success(result.message);
+        } else if (result.error == true) alertify.error(result.message);
+        else if (result.info == true) alertify.notify(result.message);
     }
 });

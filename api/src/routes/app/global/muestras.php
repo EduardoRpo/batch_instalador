@@ -33,7 +33,6 @@ $app->post('/promedio-muestras', function (Request $request, Response $response,
     return $response->withHeader('Content-Type', 'application/json');
 });
 
-
 $app->post('/muestras-acondicionamiento', function (Request $request, Response $response, $args) use ($muestrasDao) {
     $dataBatch = $request->getParsedBody();
     $acondicionamiento = $muestrasDao->findAllAcondicionamientoByBatchAndModulo($dataBatch);
@@ -48,8 +47,8 @@ $app->post('/muestras-envasado', function (Request $request, Response $response,
 
     $result = null;
 
-    if (sizeof($rows) > 0) {
-        $muestras = $dataBatch['muestras'];
+    if (sizeof($rows) == 0) {
+        $muestras = json_decode($dataBatch['muestras'], true);
 
         for ($i = 0; $i < sizeof($muestras); $i++) {
             $result = $muestrasDao->insertMuestrasByBatch($dataBatch, $muestras[$i]);
