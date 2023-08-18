@@ -14,8 +14,9 @@ $(document).ready(function() {
 
         //     success: function (response) {
         //         alertify.set('notifier', 'position', 'top-right');
-
-                
+        //     $(".despeje_verificado")
+        //         .css({ background: "lightgray", border: "gray" })
+        //         .prop("disabled", true); 
         //         alertify.set("notifier", "position", "top-right");
         //         alertify.success("Firmado satisfactoriamente");
         //     },
@@ -23,13 +24,16 @@ $(document).ready(function() {
         
         let data = new FormData();
         data.append('idBatch', idBatch);
-        data.append('modulo', modulo);
-        data.append('idfirma', idfirma);
+        data.append('modulo', modulo); 
+        data.append('verifico', idfirma);
         
         let resp = await sendDataPOST('/api/despeje', data, 2);
         
         alertify.set("notifier", "position", "top-right");
         if (resp.success == true) {
+            $(".despeje_verificado")
+                .css({ background: "lightgray", border: "gray" })
+                .prop("disabled", true);
             alertify.success(resp.message);
         } else if (resp.error == true) alertify.error(resp.message);
         else if (resp.info == true) alertify.notify(resp.message);

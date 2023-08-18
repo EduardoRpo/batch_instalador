@@ -133,6 +133,7 @@ firmarVerficadoDespeje = async (idfirma) => {
   let data = new FormData();
   data.append('idBatch', idBatch);
   data.append('modulo', modulo);
+  data.append('verifico', idfirma);
 
   let resp = await sendDataPOST('/api/despeje', data, 2);
   if (resp.success == true) {
