@@ -307,12 +307,16 @@ desinfectante = () => {
         );
         $(`#fecha${info[i].modulo}`).html(fechaRegistro);
 
-        if (info[i].modulo == 6)
-          $('#fsiembra').val(info[i].fechaRegistro).css('text-align', 'center');
-        if (info[i].modulo == 8)
+        if (info[i].modulo == 6) {
+          $('#fsiembra').css('text-align', 'center');
+          document.getElementById(`fsiembra`).setAttribute('value', info[i].fechaRegistro);
+        }
+        if (info[i].modulo == 8) {
+          document.getElementById(`fresultados`).setAttribute('value', info[i].fechaRegistro);
+          
           $('#fresultados')
-            .val(info[i].fechaRegistro)
             .css('text-align', 'center');
+        }
 
         $(`.fecha_medio${info[i].modulo}`).html(info[i].fechaRegistro);
       }
@@ -431,43 +435,43 @@ function equipos() {
     if (data.length == 0) return false;
     for (i = 0; i < data.length; i++) {
       if (data[i].tipo === 'agitador') {
-        $('#agitador').val(data[i].descripcion);
+        document.getElementById(`agitador`).setAttribute('value', data[i].descripcion);
         continue;
       }
       if (data[i].tipo === 'marmita') {
-        $('#marmita').val(data[i].descripcion);
+        document.getElementById(`marmita`).setAttribute('value', data[i].descripcion);
         continue;
       }
       if (data[i].tipo === 'envasadora') {
-        $('.envasadora').val(data[i].descripcion);
+        document.getElementsByClassName(`envasadora`)[0].setAttribute('value', data[i].descripcion);
         continue;
       }
       if (data[i].tipo === 'loteadora') {
-        $('.loteadora').val(data[i].descripcion);
+        document.getElementsByClassName(`loteadora`)[0].setAttribute('value', data[i].descripcion);
         continue;
       }
       if (data[i].tipo === 'banda') {
-        $('#banda').val(data[i].descripcion);
+        document.getElementById(`banda`).setAttribute('value', data[i].descripcion);
         continue;
       }
       if (data[i].tipo === 'etiquetadora') {
-        $('#etiquetadora').val(data[i].descripcion);
+        document.getElementById(`etiquetadora`).setAttribute('value', data[i].descripcion);
         continue;
       }
       if (data[i].tipo === 'tunel') {
-        $('#tunel').val(data[i].descripcion);
+        document.getElementById(`tunel`).setAttribute('value', data[i].descripcion);
         continue;
       }
       if (data[i].tipo === 'incubadora') {
-        $('#incubadora').val(data[i].descripcion);
+        document.getElementById(`incubadora`).setAttribute('value', data[i].descripcion);
         continue;
       }
       if (data[i].tipo === 'autoclave') {
-        $('#autoclave').val(data[i].descripcion);
+        document.getElementById(`autoclave`).setAttribute('value', data[i].descripcion);
         continue;
       }
       if (data[i].tipo === 'cabina') {
-        $('#cabina').val(data[i].descripcion);
+        document.getElementById(`cabina`).setAttribute('value', data[i].descripcion);
         continue;
       }
     }
@@ -574,15 +578,16 @@ ajustes = () => {
     data: { batch: idBatch },
   }).done((data, status, xhr) => {
     info = JSON.parse(data);
-    $(`#No3`).val('X');
-    $(`#No4`).val('X');
-    $(`#No9`).val('X');
+    document.getElementById(`No3`).setAttribute('value', 'X');
+    document.getElementById(`No4`).setAttribute('value', 'X');
+    document.getElementById(`No9`).setAttribute('value', 'X');
+
 
     for (i = 0; i < info.length; i++) {
-      $(`#Si${info[i].modulo}`).val('X');
-      $(`#No${info[i].modulo}`).val('');
-      $(`#materiaPrimaAjustes${info[i].modulo}`).val(info[i].materia_prima);
-      $(`#procedimientoAjustes${info[i].modulo}`).val(info[i].procedimiento);
+      document.getElementById(`Si${info[i].modulo}`).setAttribute('value', 'X');
+      document.getElementById(`No${info[i].modulo}`).setAttribute('value', '');
+      document.getElementById(`materiaPrimaAjustes${info[i].modulo}`).setAttribute('value', info[i].materia_prima);
+      document.getElementById(`procedimientoAjustes${info[i].modulo}`).setAttribute('value', info[i].procedimiento);
     }
   });
 };
@@ -619,10 +624,10 @@ function calcularPeso(densidadAprobada) {
       let peso_min = presentacion * densidadAprobada;
       let peso_max = peso_min * (1 + 0.03);
       let prom = (parseInt(peso_min) + peso_max) / 2;
-
-      $(`.minimo${i + 1}`).val(peso_min.toFixed(2));
-      $(`.maximo${i + 1}`).val(peso_max.toFixed(2));
-      $(`.medio${i + 1}`).val(prom.toFixed(2));
+ 
+      document.getElementsByClassName(`minimo${i + 1}`)[0].setAttribute('value', peso_min.toFixed(2));
+      document.getElementsByClassName(`maximo${i + 1}`)[0].setAttribute('value', peso_max.toFixed(2));
+      document.getElementsByClassName(`medio${i + 1}`)[0].setAttribute('value', prom.toFixed(2));
     }
   } else {
     presentacion = parseInt($('#presentacion').text());
@@ -631,9 +636,9 @@ function calcularPeso(densidadAprobada) {
     let peso_max = peso_min * (1 + 0.03);
     let prom = (parseInt(peso_min) + peso_max) / 2;
 
-    $(`.minimo1`).val(peso_min.toFixed(2));
-    $(`.maximo1`).val(peso_max.toFixed(2));
-    $(`.medio1`).val(prom.toFixed(2));
+    document.getElementsByClassName('minimo1')[0].setAttribute('value', peso_min.toFixed(2));
+    document.getElementsByClassName('maximo1')[0].setAttribute('value', peso_max.toFixed(2));
+    document.getElementsByClassName('medio1')[0].setAttribute('value', prom.toFixed(2));
   }
 }
 
@@ -704,9 +709,9 @@ const muestras_envasado = async () => {
             `<td class="centrado">${resp[j]['muestra']}</td>`
           );
           sum = sum + resp[j]['muestra'];
-          promedio = (sum / cont).toFixed(2);
-          $(`#promedioMuestras${i + 1}`).val(promedio);
-          $(`#cantidadMuestras${i + 1}`).val(cont);
+          promedio = (sum / cont).toFixed(2); 
+          document.getElementById(`promedioMuestras${i + 1}`).setAttribute('value', promedio);
+          document.getElementById(`cantidadMuestras${i + 1}`).setAttribute('value', cont);
         }
       }
     }
@@ -718,9 +723,9 @@ const muestras_envasado = async () => {
       );
       sum = sum + resp[j]['muestra'];
       promedio = (sum / cont).toFixed(2);
-    }
-    $(`#promedioMuestras1`).val(promedio);
-    $(`#cantidadMuestras1`).val(cont);
+    } 
+    document.getElementById('promedioMuestras1').setAttribute('value', promedio);
+    document.getElementById('cantidadMuestras1').setAttribute('value', cont);
   }
 };
 
@@ -890,10 +895,8 @@ material_envase_sobrante = async () => {
     for (i = 0; i < multi.length; i++) {
       utilizada = $(`#utilizada_empaque${i + 1}`).html();
       programada = multi[i].cantidad;
-      rendimiento = (utilizada / programada) * 100;
-      $(`#conciliacionRendimiento${i + 1}`).val(
-        `${rendimiento.toFixed(2)}%`
-      );
+      rendimiento = (utilizada / programada) * 100; 
+      document.getElementById(`conciliacionRendimiento${i + 1}`).setAttribute('value', `${rendimiento.toFixed(2)}%`);
     }
   } else {
     for (let i = 0; i < info.length; i++) {
@@ -923,7 +926,8 @@ material_envase_sobrante = async () => {
       unidadesEmpaque = $('#unidadesEmpaque1').html();
       utilizadaEmpaque = $('#utilizada_empaque1').html();
       rendimiento = (unidadesEmpaque / utilizadaEmpaque) * 100;
-      $('#conciliacionRendimiento1').val(`${rendimiento.toFixed(2)}%`);
+      // $('#conciliacionRendimiento1').val(`${rendimiento.toFixed(2)}%`);
+      document.getElementById('conciliacionRendimiento1').setAttribute('value', `${rendimiento.toFixed(2)}%`);
     }
   }
   // $.ajax({
@@ -1265,7 +1269,8 @@ conciliacion = (multi) => {
 
       for (let j = 0; j < multi.length; j++) {
         let rendimiento = ((utilizada / cantidad_lote) * 100).toFixed(2) + '%';
-        $(`#conciliacionRendimiento${j + 1}`).val(rendimiento);
+        document.getElementById(`conciliacionRendimiento${j + 1}`).setAttribute('value', rendimiento);
+        // $(`#conciliacionRendimiento${j + 1}`).val(rendimiento);
 
         for (let i = 0; i < info.length; i++) {
           if (info[i].modulo == 6) {
@@ -1539,7 +1544,7 @@ $(document).ready(function () {
     
       let op = localStorage.getItem('opLiberacion');
       if (op) {
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        await new Promise(resolve => setTimeout(resolve, 5000));
     
         downloadPdfBatch();
       }

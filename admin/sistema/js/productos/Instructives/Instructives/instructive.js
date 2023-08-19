@@ -45,7 +45,8 @@ function guardarInstructivo() {
         data: { editar, referencia, id, actividad, tiempo },
 
         success: function(data) {
-            notificaciones(data)
+            notificaciones(data);
+            refreshTable();
         },
     });
 }

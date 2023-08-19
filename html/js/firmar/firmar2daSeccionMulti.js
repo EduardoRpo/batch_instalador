@@ -31,6 +31,8 @@ $(document).ready(function () {
         if (resp.success == true) {
             alertify.success(resp.message);
             habilitarbtn(btn_id);
+            $(`.controlpeso_realizado1${id_multi}`).css({ background: "lightgray", border: "gray" }).prop("disabled", true);
+            firmar(user);
 
         } else if (resp.error == true) alertify.error(resp.message);
         else if (resp.info == true) alertify.notify(resp.message);
