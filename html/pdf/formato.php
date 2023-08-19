@@ -500,7 +500,7 @@
         }
 
         label {
-            /* display: inline-block; */
+            display: inline-block;
             margin-bottom: .5rem
         }
 
@@ -10764,7 +10764,7 @@
         }
 
         .firmas {
-            /* display: grid; */
+            display: grid;
             grid-template-columns: 1fr 1fr;
             margin-top: 10px;
             margin-left: 30px;
@@ -10772,7 +10772,7 @@
         }
 
         .firmasRendimiento {
-            /* display: grid; */
+            display: grid;
             grid-template-columns: 1fr;
             margin-top: 10px;
             margin-left: 30px;
@@ -10821,7 +10821,7 @@
         }
 
         .enlinea {
-            /* display: flex; */
+            display: flex;
             justify-content: center;
         }
 
