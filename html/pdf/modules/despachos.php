@@ -17,7 +17,7 @@
     <div id="obs7" class="ml-5 mt-3 mb-3"></div>
     <div class="subtitle"><label for=""></label></div>
 
-    <div class="enlinea">
+    <!-- <div class="enlinea">
         <label class="mr-3" style="justify-self: end;">Fecha</label>
         <label id="fecha7" style="font-weight:bold; justify-self: baseline"></label>
     </div>
@@ -25,5 +25,22 @@
     <div class="col1 mt-5" id="firmas7">
         <img id="f_entrego" src="" alt="firma_usuario" height="130">
         <label id="user_entrego"></label>
-    </div>
+    </div> -->
+    <table class="mt-3" id="firmas2">
+        <tbody>
+            <tr>
+                <td style="width:40px"></td>
+                <td class="text-right" style="width: 600px; padding-right:10px">Fecha</td>
+                <td id="fecha7" style="font-weight:bold; justify-self: baseline; width: 50%;"></td>
+            </tr>
+            <tr>
+                <td class="text-center" style="height: 100px" colspan="3">
+                    <img id="f_entrego" src="" alt="firma_usuario">
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center" id="user_entrego" colspan="3"></td>
+            </tr>
+        </tbody>
+    </table>
 </div>

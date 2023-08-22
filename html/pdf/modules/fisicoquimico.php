@@ -149,21 +149,48 @@
         </div>
     </div>
 
-    <div class="enlinea">
+    <!-- <div class="enlinea">
         <label class="mr-3 fechaHora" style="justify-self: end;">Fecha</label>
         <label id="fecha9" style="font-weight:bold; justify-self: baseline"></label>
-    </div>
+    </div> -->
+    <table class="mt-3">
+        <tbody>
+            <tr>
+                <td style="width:40px"></td>
+                <td class="text-right" style="width: 600px; padding-right:10px">Fecha</td>
+                <td id="fecha9" style="font-weight:bold; justify-self: baseline; width: 50%;">22/05/2020</td>
+            </tr>
+        </tbody>
+    </table>
 
     <div class="subtitle"><label for="">Observaciones</label></div>
     <div id="obs9" class="ml-5 mt-3 mb-3"></div>
     <div class="subtitle"><label for=""></label></div>
 
-    <div class="firmas" id="firmas5">
+    <table class="mt-3" id="firmas5">
+        <tbody>
+            <tr>
+                <td style="width:40px"></td>
+                <td class="text-center" style="height: 130px">
+                    <img id="f_realizo9" src="" alt="firma_usuario">
+                </td>
+                <td class="text-center" style="height: 130px">
+                    <img id="f_verifico9" src="" alt="firma_usuario">
+                </td>
+            </tr>
+            <tr>
+                <td style="width:40px"></td>
+                <td class="text-center" id="user_realizo9"></td>
+                <td class="text-center" id="user_verifico9"></td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- <div class="firmas" id="firmas5">
         <div id="blank_rea9"></div>
         <img id="f_realizo9" src="" alt="firma_usuario" height="130">
         <div id="blank_ver9"></div>
         <img id="f_verifico9" src="" alt="firma_usuario" height="130">
         <label id="user_realizo9"></label>
         <label id="user_verifico9"></label>
-    </div>
+    </div> -->
 </div>

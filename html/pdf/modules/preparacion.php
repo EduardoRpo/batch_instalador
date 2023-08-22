@@ -112,14 +112,37 @@
                 </tbody>
             </table>
 
-            <div class="firmas" id="firmas2">
+            <!-- <div class="firmas" id="firmas2">
                 <label class="mr-3" style="justify-self: end;">Fecha</label>
                 <label id="fecha2" class="fecha2" style="font-weight:bold; justify-self: baseline"></label>
                 <label id="user_realizo2">Realizado por:</label>
                 <label id="user_verifico2">Verificado por:</label>
                 <img id="f_realizo7" src="../../../admin/assets/img/firmas/ARELIS CUBIDES.jpg" alt="firma_usuario" height="130">
                 <img id="f_realizo7" src="../../../admin/assets/img/firmas/LUISA VILLA.jpg" alt="firma_usuario" height="130">
-            </div>
+            </div> -->
+            <table class="mt-3" id="firmas2">
+                <tbody>
+                    <tr>
+                        <td style="width:40px"></td>
+                        <td class="text-right" style="width: 600px; padding-right:10px">Fecha</td>
+                        <td id="fecha2" class="fecha2" style="font-weight:bold; justify-self: baseline; width: 50%;"></td>
+                    </tr>
+                    <tr>
+                        <td style="width:40px"></td>
+                        <td class="text-center" id="user_realizo2">Realizado por: </td>
+                        <td class="text-center" id="user_verifico2">Verificado por: </td>
+                    </tr>
+                    <tr>
+                        <td style="width:40px"></td>
+                        <td class="text-center" style="height: 130px">
+                            <img id="f_realizo7" src="../../../admin/assets/img/firmas/ARELIS CUBIDES.jpg" alt="firma_usuario">
+                        </td>
+                        <td class="text-center" style="height: 130px">
+                            <img id="f_verifico7" src="../../../admin/assets/img/firmas/LUISA VILLA.jpg" alt="firma_usuario">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
         <div class="subtitle"><label for="">Condiciones del Medio</label></div>
@@ -273,7 +296,7 @@
     <div id="obs3" class="ml-5 mt-3 mb-3"></div>
     <div class="subtitle"><label for=""></label></div>
 
-    <div class="firmas" id="firmas3">
+    <!-- <div class="firmas" id="firmas3">
         <label class="mr-3" style="justify-self: end;">Fecha</label>
         <label id="fecha3" style="font-weight:bold; justify-self: baseline"></label>
 
@@ -284,5 +307,28 @@
 
         <label id="user_realizo3"></label>
         <label id="user_verifico3"></label>
-    </div>
+    </div> -->
+    <table class="mt-3" id="firmas3">
+        <tbody>
+            <tr>
+                <td style="width:40px"></td>
+                <td class="text-right" style="width: 600px; padding-right:10px">Fecha</td>
+                <td id="fecha3" style="font-weight:bold; justify-self: baseline; width: 50%;"></td>
+            </tr>
+            <tr>
+                <td style="width:40px"></td>
+                <td class="text-center" style="height: 130px">
+                    <img id="f_realizo3" src="" alt="firma_usuario">
+                </td>
+                <td class="text-center" style="height: 130px">
+                    <img id="f_verifico3" src="" alt="firma_usuario">
+                </td>
+            </tr>
+            <tr>
+                <td style="width:40px"></td>
+                <td class="text-center" id="user_realizo3"></td>
+                <td class="text-center" id="user_verifico3"></td>
+            </tr>
+        </tbody>
+    </table>
 </div>

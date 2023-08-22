@@ -162,7 +162,7 @@
         <div id="obs4" class="ml-5 mt-3 mb-3"></div>
 
         <div class="subtitle"><label for="">Cierre</label></div>
-        <div class="firmas" id="firmas4">
+        <!-- <div class="firmas" id="firmas4">
             <label class="mr-3" style="justify-self: end;">Fecha</label>
             <label id="fecha4" style="font-weight:bold; justify-self: baseline"></label>
 
@@ -173,6 +173,29 @@
 
             <label id="user_realizo4"></label>
             <label id="user_verifico4"></label>
-        </div>
+        </div> -->
+        <table class="mt-3" id="firmas4">
+            <tbody>
+                <tr>
+                    <td style="width:40px"></td>
+                    <td class="text-right" style="width: 600px; padding-right:10px">Fecha</td>
+                    <td id="fecha4" style="font-weight:bold; justify-self: baseline; width: 50%;"></td>
+                </tr>
+                <tr>
+                    <td style="width:40px"></td>
+                    <td class="text-center" style="height: 130px">
+                        <img id="f_realizo4" src="" alt="firma_usuario">
+                    </td>
+                    <td class="text-center" style="height: 130px">
+                        <img id="f_verifico4" src="" alt="firma_usuario">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:40px"></td>
+                    <td class="text-center" id="user_realizo4"></td>
+                    <td class="text-center" id="user_verifico4"></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

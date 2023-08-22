@@ -191,7 +191,7 @@
             <div id="obsEnvasMulti1" class="ml-5 mt-3 mb-3"></div>
 
             <div class="subtitle"><label for="">Cierre</label></div>
-            <div class="firmas" id="firmas5">
+            <!-- <div class="firmas" id="firmas5">
                 <label class="mr-3" style="justify-self: end;">Fecha</label>
                 <label id="fecha5" style="font-weight:bold; justify-self: baseline"></label>
 
@@ -202,7 +202,30 @@
 
                 <label id="user_realizo5"></label>
                 <label id="user_verifico5"></label>
-            </div>
+            </div> -->
+            <table class="mt-3" id="firmas5">
+                <tbody>
+                    <tr>
+                        <td style="width:40px"></td>
+                        <td class="text-right" style="width: 600px; padding-right:10px">Fecha</td>
+                        <td id="fecha5" style="font-weight:bold; justify-self: baseline; width: 50%;"></td>
+                    </tr>
+                    <tr>
+                        <td style="width:40px"></td>
+                        <td class="text-center" style="height: 130px">
+                            <img id="f_realizo5" src="" alt="firma_usuario">
+                        </td>
+                        <td class="text-center" style="height: 130px">
+                            <img id="f_verifico5" src="" alt="firma_usuario">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:40px"></td>
+                        <td class="text-center" id="user_realizo5"></td>
+                        <td class="text-center" id="user_verifico5"></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <div id="multi-envasado2">
             <div class="subtitleProcess"><label for="" id="titulo_envasado2"> <b>ENVASADO</b></label></div>
@@ -343,7 +366,7 @@
             <div id="obsEnvasMulti2" class="ml-5 mt-3 mb-3"></div>
 
             <div class="subtitle"><label for="">Cierre</label></div>
-            <div class="firmas" id="firmas2">
+            <!-- <div class="firmas" id="firmas2">
                 <label class="mr-3" style="justify-self: end;">Fecha</label>
                 <label id="multi_fecha2" style="font-weight:bold; justify-self: baseline"></label>
 
@@ -354,7 +377,30 @@
 
                 <label id="multi_user_realizo2"></label>
                 <label id="multi_user_verifico2"></label>
-            </div>
+            </div> -->
+            <table class="mt-3" id="firmas2">
+                <tbody>
+                    <tr>
+                        <td style="width:40px"></td>
+                        <td class="text-right" style="width: 600px; padding-right:10px">Fecha</td>
+                        <td id="multi_fecha2" style="font-weight:bold; justify-self: baseline; width: 50%;"></td>
+                    </tr>
+                    <tr>
+                        <td style="width:40px"></td>
+                        <td class="text-center" style="height: 130px">
+                            <img id="multi_f_realizo2" src="" alt="firma_usuario">
+                        </td>
+                        <td class="text-center" style="height: 130px">
+                            <img id="multi_f_verifico2" src="" alt="firma_usuario">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:40px"></td>
+                        <td class="text-center" id="multi_user_realizo2"></td>
+                        <td class="text-center" id="multi_user_verifico2"></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <div id="multi-envasado3">
             <div class="subtitleProcess"><label for="" id="titulo_envasado3"> <b>ENVASADO</b></label></div>
@@ -495,7 +541,7 @@
             <div id="obsEnvasMulti1" class="ml-5 mt-3 mb-3"></div>
 
             <div class="subtitle"><label for="">Cierre</label></div>
-            <div class="firmas" id="firmas3">
+            <!-- <div class="firmas" id="firmas3">
                 <label class="mr-3" style="justify-self: end;">Fecha</label>
                 <label id="multi_fecha3" style="font-weight:bold; justify-self: baseline"></label>
 
@@ -506,7 +552,30 @@
 
                 <label id="multi_user_realizo3">Sin Firmar</label>
                 <label id="multi_user_verifico3">Sin Firmar</label>
-            </div>
+            </div> -->
+            <table class="mt-3" id="firmas3">
+                <tbody>
+                    <tr>
+                        <td style="width:40px"></td>
+                        <td class="text-right" style="width: 600px; padding-right:10px">Fecha</td>
+                        <td id="multi_fecha" style="font-weight:bold; justify-self: baseline; width: 50%;"></td>
+                    </tr>
+                    <tr>
+                        <td style="width:40px"></td>
+                        <td class="text-center" style="height: 130px">
+                            <img id="multi_f_realizo3" src="" alt="firma_usuario">
+                        </td>
+                        <td class="text-center" style="height: 130px">
+                            <img id="multi_f_verifico3" src="" alt="firma_usuario">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:40px"></td>
+                        <td class="text-center" id="multi_user_realizo3"></td>
+                        <td class="text-center" id="multi_user_verifico3"></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <div id="multi-envasado4">
             <div class="subtitleProcess"><label for="" id="titulo_envasado4"> <b>ENVASADO</b></label></div>
@@ -649,7 +718,7 @@
 
             <div class="subtitle"><label for="">Cierre</label></div>
 
-            <div class="firmas" id="firmas3">
+            <!-- <div class="firmas" id="firmas3">
                 <label class="mr-3" style="justify-self: end;">Fecha</label>
                 <label id="multi_fecha4" style="font-weight:bold; justify-self: baseline"></label>
 
@@ -660,7 +729,30 @@
 
                 <label id="multi_user_realizo4">Sin Firmar</label>
                 <label id="multi_user_verifico4">Sin Firmar</label>
-            </div>
+            </div> -->
+            <table class="mt-3" id="firmas3">
+                <tbody>
+                    <tr>
+                        <td style="width:40px"></td>
+                        <td class="text-right" style="width: 600px; padding-right:10px">Fecha</td>
+                        <td id="multi_fecha4" style="font-weight:bold; justify-self: baseline; width: 50%;"></td>
+                    </tr>
+                    <tr>
+                        <td style="width:40px"></td>
+                        <td class="text-center" style="height: 130px">
+                            <img id="multi_f_realizo4" src="" alt="firma_usuario">
+                        </td>
+                        <td class="text-center" style="height: 130px">
+                            <img id="multi_f_verifico4" src="" alt="firma_usuario">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:40px"></td>
+                        <td class="text-center" id="multi_user_realizo4"></td>
+                        <td class="text-center" id="multi_user_verifico4"></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

@@ -144,15 +144,17 @@ const cargarMultipresentacion = (data) => {
       $(`#multi-acondicionamiento${i + 1}`).show();
       $(`#infoMulti`).show();
       $(`#InfoMultipresentacion`).append(`
-                    <label>Referencia:</label>
-                    <label><b>${data[i].referencia}</b></label>
-                    <label>Presentación:</label>
-                    <label><b>${data[i].presentacion_comercial}</b></label>
-                    <label>Lote total(kg):</label>
-                    <label><b>${data[i].total}</b></label>
-                    <label>Cantidad:</label>
-                    <label><b>${data[i].cantidad}</b></label>
-                    `);
+        <tr>
+          <td style="width:40px"></td>
+          <td style="width:10%">Referencia:</td>
+          <td style="width:10%"><b>${data[i].referencia}</b></td>
+          <td style="width:10%">Presentación:</td>
+          <td style="width:10%"><b>${data[i].presentacion_comercial}</b></td>
+          <td style="width:10%">Lote total(kg):</td>
+          <td style="width:10%"><b>${data[i].total}</b></td>
+          <td style="width:10%">Cantidad:</td>
+          <td><b>${data[i].cantidad}</b></td>
+        </tr>`);
     }
 
     j = 1;
@@ -366,7 +368,7 @@ const firmas = () => {
           );
         } else {
           $(`#f_verifico${info[i].modulo}`).hide();
-          $(`#blank_ver${info[i].modulo}`).show();
+          $(`#blank_ver${info[i].modulo}`).show(); 
           $(`#user_verifico${info[i].modulo}`).html(
             `Verificó: <b>Sin firmar</b>`
           );
@@ -895,7 +897,7 @@ material_envase_sobrante = async () => {
     for (i = 0; i < multi.length; i++) {
       utilizada = $(`#utilizada_empaque${i + 1}`).html();
       programada = multi[i].cantidad;
-      rendimiento = (utilizada / programada) * 100; 
+      rendimiento = (utilizada / programada) * 100;  
       document.getElementById(`conciliacionRendimiento${i + 1}`).setAttribute('value', `${rendimiento.toFixed(2)}%`);
     }
   } else {
@@ -1277,7 +1279,7 @@ conciliacion = (multi) => {
             if (idBatch >= 2599) fecha = info[i].fecha_registro;
             else fecha = info[i].fecha_nuevo_registro;
 
-            $(`#f_realizoConciliacion${j + 1}`).prop('src', info[i].urlfirma);
+            $(`#f_realizoConciliacion${j + 1}`).prop('src', info[i].urlfirma); 
             $(`#user_realizoConciliacion${j + 1}`).html(
               `Realizó: <b>${info[i].nombre}</b>`
             );
@@ -1479,9 +1481,7 @@ $(document).ready(function () {
       cargarMultipresentacion(multi);
       informacion_producto().then(() => {
         entrega_material_envase(multi);
-      });
-      //material_envase_sobrante(multi).then(() => { conciliacion(multi) });
-      //material_envase_sobrante(multi)
+      }); 
       identificarDensidad(multi);
       muestras_envasado(multi);
       informacion_producto().then(() => {
@@ -1492,8 +1492,7 @@ $(document).ready(function () {
     } else {
       informacion_producto().then(() => {
         entrega_material_envase();
-      });
-      //material_envase_sobrante();
+      }); 
       identificarDensidad();
       informacion_producto().then(() => {
         entrega_material_acondicionamiento();
@@ -1504,25 +1503,6 @@ $(document).ready(function () {
     }
   });
 
-  // informacion_producto().then((data) => {
-  //   info_General(data);
-  //   parametros_Control();
-  //   lote_anterior(data);
-  //   condiciones_medio();
-  //   firmas();
-  //   equipos();
-  //   especificaciones_producto();
-  //   control_proceso();
-  //   ajustes();
-  //   despachos();
-  //   analisisMicrobiologico();
-  //   liberacion_lote();
-  //   ImprimirEtiquetasInvima();
-  //   cargarObservaciones();
-  //   cargar_version_PDF(data);
-     
-  //   downloadPdfBatch();
-  // });
   async function procesarInformacion() {
     try {
       const data = await informacion_producto();

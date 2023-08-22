@@ -127,16 +127,43 @@
         </div>
     </div>
 
-    <div class="enlinea">
+    <!-- <div class="enlinea">
         <label class="mr-3" style="justify-self: end;">Fecha</label>
-        <label id="fecha8" style="font-weight:bold; justify-self: baseline">22/05/2020</label>
-    </div>
+        <label id="fecha8" style="font-weight:bold; justify-self: baseline"></label>
+    </div> -->
+    <table class="mt-3">
+        <tbody>
+            <tr>
+                <td style="width:40px"></td>
+                <td class="text-right" style="width: 600px; padding-right:10px">Fecha</td>
+                <td id="fecha8" style="font-weight:bold; justify-self: baseline; width: 50%;">22/05/2020</td>
+            </tr>
+        </tbody>
+    </table>
 
     <div class="subtitle"><label for="">Observaciones</label></div>
     <div id="obs8" class="ml-5 mt-3 mb-3"></div>
     <div class="subtitle"><label for=""></label></div>
 
-    <div class="firmas" id="firmas5">
+    <table class="mt-3">
+        <tbody>
+            <tr>
+                <td style="width:40px"></td>
+                <td class="text-center" style="height: 130px">
+                    <img id="f_realizoMicro" src="" alt="firma_usuario">
+                </td>
+                <td class="text-center" style="height: 130px">
+                    <img id="f_verificoMicro1" src="" alt="firma_usuario">
+                </td>
+            </tr>
+            <tr>
+                <td style="width:40px"></td>
+                <td class="text-center" id="user_realizoMicro"></td>
+                <td class="text-center" id="user_verificoMicro1"></td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- <div class="firmas" id="firmas5">
         <div id="blank_rea8"></div>
         <img id="f_realizoMicro" src="" alt="firma_usuario" height="130">
         <div id="blank_ver8"></div>
@@ -144,5 +171,5 @@
 
         <label id="user_realizoMicro"></label>
         <label id="user_verificoMicro1"></label>
-    </div>
+    </div> -->
 </div>
