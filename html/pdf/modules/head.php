@@ -91,10 +91,10 @@
         </tbody>
     </table>
     <hr style="width: 95%;">
-    <table id="infoMulti">
+    <table id="infoMulti" style="width:100%">
         <thead class="mb-3">
             <tr>
-                <th style="width:40px"></th>
+                <th style="width:3%"></th>
                 <th>Multipresentación</th>
             </tr>
         </thead>

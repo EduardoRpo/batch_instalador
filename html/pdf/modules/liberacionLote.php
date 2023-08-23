@@ -34,38 +34,38 @@
             <label for="">Director de Calidad</label>
             <label for="">Director Técnico</label>
         </div> -->
-        <table class="mt-3">
+        <table class="mt-3" style="width:100%">
             <tbody>
                 <tr>
-                    <td style="width:40px"></td>
-                    <td class="text-right" style="width: 600px; padding-right:10px">Fecha</td>
+                    <td style="width:5%"></td>
+                    <td class="text-right" style="width: 45%; padding-right:10px">Fecha</td>
                     <td id="fecha10" style="font-weight:bold; justify-self: baseline; width: 50%;">22/05/2020</td>
                 </tr>
             </tbody>
         </table>
-        <table class="mt-3" id="firmas5">
+        <table class="mt-3" id="firmas5" style="width:100%">
             <tbody>
                 <tr>
-                    <td class="text-center" style="height: 130px; width: 35%">
+                    <td class="text-center" style="height: 130px; width: 33.33%">
                         <img id="f_realizoPRO" src="" alt="firma_usuario">
                     </td>
-                    <td class="text-center" style="height: 130px; width: 35%">
+                    <td class="text-center" style="height: 130px; width: 33.33%">
                         <img id="f_realizoCA" src="" alt="firma_usuario">
                     </td>
-                    <td class="text-center" style="height: 130px; width: 35%">
+                    <td class="text-center" style="height: 130px; width: 33.33%">
                         <img id="f_realizoTEC" src="" alt="firma_usuario">
                     </td>
                 </tr>
                 <tr>
-                    <td style="width:40px"></td>
-                    <td class="text-center" style="width: 35%" id="dirNameProd"></td>
-                    <td class="text-center" style="width: 35%" id="dirNameCa"></td>
-                    <td class="text-center" style="width: 35%" id="dirNameTec"></td>
+                    <!-- <td style="width:40px"></td> -->
+                    <td class="text-center" style="width: 33.33%" id="dirNameProd"></td>
+                    <td class="text-center" style="width: 33.33%" id="dirNameCa"></td>
+                    <td class="text-center" style="width: 33.33%" id="dirNameTec"></td>
                 </tr>
                 <tr>
-                    <td class="text-center" style="width: 35%">Director de Producción</td>
-                    <td class="text-center" style="width: 35%">Director de Calidad</td>
-                    <td class="text-center" style="width: 35%">Director Técnico</td>
+                    <td class="text-center" style="width: 33.33%">Director de Producción</td>
+                    <td class="text-center" style="width: 33.33%">Director de Calidad</td>
+                    <td class="text-center" style="width: 33.33%">Director Técnico</td>
                 </tr>
             </tbody>
         </table>

@@ -120,11 +120,11 @@
                 <img id="f_realizo7" src="../../../admin/assets/img/firmas/ARELIS CUBIDES.jpg" alt="firma_usuario" height="130">
                 <img id="f_realizo7" src="../../../admin/assets/img/firmas/LUISA VILLA.jpg" alt="firma_usuario" height="130">
             </div> -->
-            <table class="mt-3" id="firmas2">
+            <table class="mt-3" id="firmas2" style="width:100%">
                 <tbody>
                     <tr>
-                        <td style="width:40px"></td>
-                        <td class="text-right" style="width: 600px; padding-right:10px">Fecha</td>
+                        <td style="width:5%"></td>
+                        <td class="text-right" style="width: 45%; padding-right:10px">Fecha</td>
                         <td id="fecha2" class="fecha2" style="font-weight:bold; justify-self: baseline; width: 50%;"></td>
                     </tr>
                     <tr>
@@ -308,11 +308,11 @@
         <label id="user_realizo3"></label>
         <label id="user_verifico3"></label>
     </div> -->
-    <table class="mt-3" id="firmas3">
+    <table class="mt-3" id="firmas3" style="width:100%">
         <tbody>
             <tr>
-                <td style="width:40px"></td>
-                <td class="text-right" style="width: 600px; padding-right:10px">Fecha</td>
+                <td style="width:5%"></td>
+                <td class="text-right" style="width: 45%; padding-right:10px">Fecha</td>
                 <td id="fecha3" style="font-weight:bold; justify-self: baseline; width: 50%;"></td>
             </tr>
             <tr>

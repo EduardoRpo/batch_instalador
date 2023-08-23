@@ -131,21 +131,21 @@
         <label class="mr-3" style="justify-self: end;">Fecha</label>
         <label id="fecha8" style="font-weight:bold; justify-self: baseline"></label>
     </div> -->
-    <table class="mt-3">
+
+    <table class="mt-3" style="width:100%">
         <tbody>
             <tr>
-                <td style="width:40px"></td>
-                <td class="text-right" style="width: 600px; padding-right:10px">Fecha</td>
-                <td id="fecha8" style="font-weight:bold; justify-self: baseline; width: 50%;">22/05/2020</td>
+                <td style="width:5%"></td>
+                <td class="text-right" style="width: 45%; padding-right:10px">Fecha</td>
+                <td id="fecha8" style="font-weight:bold; justify-self: baseline; width: 50%;"></td>
             </tr>
         </tbody>
     </table>
-
     <div class="subtitle"><label for="">Observaciones</label></div>
     <div id="obs8" class="ml-5 mt-3 mb-3"></div>
     <div class="subtitle"><label for=""></label></div>
 
-    <table class="mt-3">
+    <table class="mt-3" style="width:100%">
         <tbody>
             <tr>
                 <td style="width:40px"></td>

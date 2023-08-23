@@ -119,29 +119,29 @@
             <label id="user_realizo6"></label>
             <label id="user_verifico6"></label>
         </div> -->
-        <table class="mb-4">
+        <table class="mb-4" style="width:100%">
             <tbody>
                 <tr>
-                    <td style="width:60px"></td>
-                    <td style="width:227px">Producto:</td>
-                    <td style="width:400px" class="ref" style="font-weight: bold;"></td>
-                    <td style="width:320px">Lote:</td>
+                    <td style="width:5%"></td>
+                    <td style="width:20%">Producto:</td>
+                    <td style="width:25%" class="ref" style="font-weight: bold;"></td>
+                    <td style="width:25%">Lote:</td>
                     <td class="lote"></td>
                 </tr>
                 <tr>
-                    <td style="width:60px"></td>
-                    <td style="width:227px">Fecha:</td>
-                    <td style="width:400px" class="fecha"></td>
-                    <td style="width:320px">Orden:</td>
+                    <td style="width:5%"></td>
+                    <td style="width: 20%">Fecha:</td>
+                    <td style="width:25%" class="fecha"></td>
+                    <td style="width:25%">Orden:</td>
                     <td class="orden"></td>
                 </tr>
             </tbody>
         </table>
-        <table class="mt-3" id="firmas5">
+        <table class="mt-3" id="firmas5" style="width:100%">
             <tbody>
                 <tr>
-                    <td style="width:40px"></td>
-                    <td class="text-right" style="width: 600px; padding-right:10px">Fecha</td>
+                    <td style="width:5%"></td>
+                    <td class="text-right" style="width: 45%; padding-right:10px">Fecha</td>
                     <td id="fecha6" style="font-weight:bold; justify-self: baseline; width: 50%;"></td>
                 </tr>
                 <tr>
@@ -160,7 +160,6 @@
                 </tr>
             </tbody>
         </table>
-
 
         <div id="multi-acondicionamiento1">
             <div class="subtitleProcess" id="subtitle_acond1"><label for="" id="titulo_acondicionamiento1"> <b>ACONDICIONAMIENTO</b></label></div>
@@ -262,18 +261,18 @@
                 <label id="user_realizoConciliacion1"></label>
             </div> -->
 
-            <table class="mt-3" id="firmas6">
+            <table class="mt-3" id="firmas6" style="width:100%">
                 <tbody>
                     <tr>
-                        <td style="width:40px"></td>
-                        <td class="text-right" style="width: 600px; padding-right:10px">Conciliacion rendimiento</td>
+                        <td style="width:5%"></td>
+                        <td class="text-right" style="width: 45%; padding-right:10px">Conciliacion rendimiento</td>
                         <td style="width: 50%;">
                             <input type="text" class="form-control" id="conciliacionRendimiento1" style="width: 30%;justify-self: baseline" readonly>
                         </td>
                     </tr>
                     <tr>
-                        <td style="width:40px"></td>
-                        <td class="text-right" style="width: 600px; padding-right:10px">Fecha</td>
+                        <td style="width:5%"></td>
+                        <td class="text-right" style="width: 45%; padding-right:10px">Fecha</td>
                         <td id="fecha6Conciliacion1" style="font-weight:bold; justify-self: baseline; width: 50%;"></td>
                     </tr>
                     <tr>
@@ -386,18 +385,18 @@
                 <img id="f_realizoConciliacion2" src="" alt="firma_usuario" height="130">
                 <label id="user_realizoConciliacion2"></label>
             </div> -->
-            <table class="mt-3" id="firmas6">
+            <table class="mt-3" id="firmas6" style="width:100%">
                 <tbody>
                     <tr>
-                        <td style="width:40px"></td>
-                        <td class="text-right" style="width: 600px; padding-right:10px">Conciliacion rendimiento</td>
+                        <td style="width:5%"></td>
+                        <td class="text-right" style="width: 45%; padding-right:10px">Conciliacion rendimiento</td>
                         <td style="width: 50%;">
                             <input type="text" class="form-control" id="conciliacionRendimiento2" style="width: 30%;justify-self: baseline" readonly>
                         </td>
                     </tr>
                     <tr>
-                        <td style="width:40px"></td>
-                        <td class="text-right" style="width: 600px; padding-right:10px">Fecha</td>
+                        <td style="width:5%"></td>
+                        <td class="text-right" style="width: 45%; padding-right:10px">Fecha</td>
                         <td id="fecha6Conciliacion2" style="font-weight:bold; justify-self: baseline; width: 50%;"></td>
                     </tr>
                     <tr>
@@ -512,18 +511,19 @@
                 <img id="f_realizoConciliacion3" src="" alt="firma_usuario" height="130">
                 <label id="user_realizoConciliacion3"></label>
             </div> -->
-            <table class="mt-3" id="firmas6">
+
+            <table class="mt-3" id="firmas6" style="width:100%">
                 <tbody>
                     <tr>
-                        <td style="width:40px"></td>
-                        <td class="text-right" style="width: 600px; padding-right:10px">Conciliacion rendimiento</td>
+                        <td style="width:5%"></td>
+                        <td class="text-right" style="width: 45%; padding-right:10px">Conciliacion rendimiento</td>
                         <td style="width: 50%;">
                             <input type="text" class="form-control" id="conciliacionRendimiento3" style="width: 30%;justify-self: baseline" readonly>
                         </td>
                     </tr>
                     <tr>
-                        <td style="width:40px"></td>
-                        <td class="text-right" style="width: 600px; padding-right:10px">Fecha</td>
+                        <td style="width:5%"></td>
+                        <td class="text-right" style="width: 45%; padding-right:10px">Fecha</td>
                         <td id="fecha6Conciliacion3" style="font-weight:bold; justify-self: baseline; width: 50%;"></td>
                     </tr>
                     <tr>
@@ -636,18 +636,18 @@
                 <img id="f_realizoConciliacion4" src="" alt="firma_usuario" height="130">
                 <label id="user_realizoConciliacion4"></label>
             </div> -->
-            <table class="mt-3" id="firmas6">
+            <table class="mt-3" id="firmas6" style="width:100%">
                 <tbody>
                     <tr>
-                        <td style="width:40px"></td>
-                        <td class="text-right" style="width: 600px; padding-right:10px">Conciliacion rendimiento</td>
+                        <td style="width:5%"></td>
+                        <td class="text-right" style="width: 45%; padding-right:10px">Conciliacion rendimiento</td>
                         <td style="width: 50%;">
                             <input type="text" class="form-control" id="conciliacionRendimiento4" style="width: 30%;justify-self: baseline" readonly>
                         </td>
                     </tr>
                     <tr>
-                        <td style="width:40px"></td>
-                        <td class="text-right" style="width: 600px; padding-right:10px">Fecha</td>
+                        <td style="width:5%"></td>
+                        <td class="text-right" style="width: 45%; padding-right:10px">Fecha</td>
                         <td id="fecha6Conciliacion4" style="font-weight:bold; justify-self: baseline; width: 50%;"></td>
                     </tr>
                     <tr>

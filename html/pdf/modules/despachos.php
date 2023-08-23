@@ -26,11 +26,11 @@
         <img id="f_entrego" src="" alt="firma_usuario" height="130">
         <label id="user_entrego"></label>
     </div> -->
-    <table class="mt-3" id="firmas2">
+    <table class="mt-3" id="firmas2" style="width:100%">
         <tbody>
             <tr>
-                <td style="width:40px"></td>
-                <td class="text-right" style="width: 600px; padding-right:10px">Fecha</td>
+                <td style="width:5%"></td>
+                <td class="text-right" style="width: 45%; padding-right:10px">Fecha</td>
                 <td id="fecha7" style="font-weight:bold; justify-self: baseline; width: 50%;"></td>
             </tr>
             <tr>

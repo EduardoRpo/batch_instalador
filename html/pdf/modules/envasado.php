@@ -203,11 +203,11 @@
                 <label id="user_realizo5"></label>
                 <label id="user_verifico5"></label>
             </div> -->
-            <table class="mt-3" id="firmas5">
+            <table class="mt-3" id="firmas5" style="width:100%">
                 <tbody>
                     <tr>
-                        <td style="width:40px"></td>
-                        <td class="text-right" style="width: 600px; padding-right:10px">Fecha</td>
+                        <td style="width:5%"></td>
+                        <td class="text-right" style="width: 45%; padding-right:10px">Fecha</td>
                         <td id="fecha5" style="font-weight:bold; justify-self: baseline; width: 50%;"></td>
                     </tr>
                     <tr>
@@ -378,11 +378,11 @@
                 <label id="multi_user_realizo2"></label>
                 <label id="multi_user_verifico2"></label>
             </div> -->
-            <table class="mt-3" id="firmas2">
+            <table class="mt-3" id="firmas2" style="width:100%">
                 <tbody>
                     <tr>
-                        <td style="width:40px"></td>
-                        <td class="text-right" style="width: 600px; padding-right:10px">Fecha</td>
+                        <td style="width:5%"></td>
+                        <td class="text-right" style="width: 45%; padding-right:10px">Fecha</td>
                         <td id="multi_fecha2" style="font-weight:bold; justify-self: baseline; width: 50%;"></td>
                     </tr>
                     <tr>
@@ -553,11 +553,11 @@
                 <label id="multi_user_realizo3">Sin Firmar</label>
                 <label id="multi_user_verifico3">Sin Firmar</label>
             </div> -->
-            <table class="mt-3" id="firmas3">
+            <table class="mt-3" id="firmas3" style="width:100%">
                 <tbody>
                     <tr>
-                        <td style="width:40px"></td>
-                        <td class="text-right" style="width: 600px; padding-right:10px">Fecha</td>
+                        <td style="width:5%"></td>
+                        <td class="text-right" style="width: 45%; padding-right:10px">Fecha</td>
                         <td id="multi_fecha" style="font-weight:bold; justify-self: baseline; width: 50%;"></td>
                     </tr>
                     <tr>
@@ -730,11 +730,11 @@
                 <label id="multi_user_realizo4">Sin Firmar</label>
                 <label id="multi_user_verifico4">Sin Firmar</label>
             </div> -->
-            <table class="mt-3" id="firmas3">
+            <table class="mt-3" id="firmas3" style="width:100%">
                 <tbody>
                     <tr>
-                        <td style="width:40px"></td>
-                        <td class="text-right" style="width: 600px; padding-right:10px">Fecha</td>
+                        <td style="width:5%"></td>
+                        <td class="text-right" style="width: 45%; padding-right:10px">Fecha</td>
                         <td id="multi_fecha4" style="font-weight:bold; justify-self: baseline; width: 50%;"></td>
                     </tr>
                     <tr>

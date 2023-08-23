@@ -145,14 +145,14 @@ const cargarMultipresentacion = (data) => {
       $(`#infoMulti`).show();
       $(`#InfoMultipresentacion`).append(`
         <tr>
-          <td style="width:40px"></td>
-          <td style="width:10%">Referencia:</td>
-          <td style="width:10%"><b>${data[i].referencia}</b></td>
-          <td style="width:10%">Presentación:</td>
-          <td style="width:10%"><b>${data[i].presentacion_comercial}</b></td>
-          <td style="width:10%">Lote total(kg):</td>
-          <td style="width:10%"><b>${data[i].total}</b></td>
-          <td style="width:10%">Cantidad:</td>
+          <td style="width:3%"></td>
+          <td style="width:9.5%">Referencia:</td>
+          <td style="width:12.5%"><b>${data[i].referencia}</b></td>
+          <td style="width:12.5%">Presentación:</td>
+          <td style="width:12.5%"><b>${data[i].presentacion_comercial}</b></td>
+          <td style="width:12.5%">Lote total(kg):</td>
+          <td style="width:12.5%"><b>${data[i].total}</b></td>
+          <td style="width:12.5%">Cantidad:</td>
           <td><b>${data[i].cantidad}</b></td>
         </tr>`);
     }
