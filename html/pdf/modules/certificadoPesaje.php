@@ -89,5 +89,28 @@
 
         <hr>
 
+        <table class="mb-3" style="width: 1277px;">
+            <tbody class="mpcerti">
+
+            </tbody>
+        </table>
+
+        <hr>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td style="width:40px"></td>
+                    <td class="text-center" style="width:50% ;height: 130px">
+                        <b>Realizó</b>
+                        <img id="realizo2" src="" alt="firma_usuario">
+                    </td>
+                    <td class="text-center" style="width:50% ;height: 130px">
+                        <b>Verificó</b>
+                        <img id="verifico2" src="" alt="firma_usuario">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

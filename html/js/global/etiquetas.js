@@ -199,24 +199,62 @@ const ImprimirEtiquetasInvima = () => {
 const etiquetasInvima = (response) => {
   for (i = 0; i < response.length - 2; i++) {
     $('.etiquetasV').append(
-      `<div class="etiquetaUnica rounded-3">
-                <div class="etiquetasVirtuales">
-                    <p><b>OP: </b>${infoBatch.numero_orden}</p>
-                    <p id="peso"><b>PESO: </b>${(
-                      ((response[i]['porcentaje'] / 100) * tamanioLote) /
-                      cantidad
-                    ).toFixed(2)}Kg</p>
-                    <p><b>REFERENCIA:</b> ${response[i]['referencia']}</p>
-                    <p><b>NOMBRE MP:</b> ${response[i]['alias']}</p>
-                    <p><b>FECHA: </b> ${fecha}</p>
-                    ${
-                      !verifico || verifico == ''
-                        ? `<p><b>VoBo QC: </b><img src="${verifico}" style="width:60%"></p>`
-                        : ''
-                    } 
-                </div>
-            </div>`
+      `<table class="etiquetaUnica rounded-3" style="width:1255px;">
+          <tr>
+            <td style="width: 50%;">
+              <b>OP: </b>${infoBatch.numero_orden}
+            </td>
+            <td style="width: 50%;" id="peso">
+              <b>PESO: </b>
+              ${(
+        ((response[i]['porcentaje'] / 100) * tamanioLote) /
+        cantidad
+      ).toFixed(2)}Kg
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <b>REFERENCIA:</b> ${response[i]['referencia']}
+            </td>
+          </tr>
+          <tr>
+            <td style="width:50%">
+              <b>NOMBRE MP:</b> ${response[i]['alias']}
+            </td>
+            <td style="width:50%">
+              <b>FECHA: </b> ${fecha}
+            </td>
+          </tr>
+          ${!verifico || verifico == ''
+        ? `<tr>
+            <td>
+              <b>VoBo QC: </b>
+              <img src="${verifico}" style="width:60%">
+            </td>
+          </tr>`
+        : ''
+      } 
+        </table>`
     );
+    // $('.etiquetasV').append(
+    //   `<div class="etiquetaUnica rounded-3">
+    //             <div class="etiquetasVirtuales">
+    //                 <p><b>OP: </b>${infoBatch.numero_orden}</p>
+    //                 <p id="peso"><b>PESO: </b>${(
+    //                   ((response[i]['porcentaje'] / 100) * tamanioLote) /
+    //                   cantidad
+    //                 ).toFixed(2)}Kg</p>
+    //                 <p><b>REFERENCIA:</b> ${response[i]['referencia']}</p>
+    //                 <p><b>NOMBRE MP:</b> ${response[i]['alias']}</p>
+    //                 <p><b>FECHA: </b> ${fecha}</p>
+    //                 ${
+    //                   !verifico || verifico == ''
+    //                     ? `<p><b>VoBo QC: </b><img src="${verifico}" style="width:60%"></p>`
+    //                     : ''
+    //                 } 
+    //             </div>
+    //         </div>`
+    // );
   }
 };
 
@@ -225,20 +263,31 @@ const certificadoPesaje = (response) => {
   let tamanio = 0;
 
   $('.mpcerti').append(
-    ` <div class="cltitle">MATERIA PRIMA</div>
-              <div class="cltitle">%(p/p) FORMULA</div>
-              <div class="cltitle">CANTIDAD PESADA</div>`
+    `<tr>
+        <td class="cltitle" style="width:40px"></td>
+        <td class="cltitle">
+          MATERIA PRIMA
+        </td>
+        <td class="cltitle">
+          %(p/p) FORMULA
+        </td>
+        <td class="cltitle">
+          CANTIDAD PESADA
+        </td>
+      </tr>`
   );
 
   for (i = 0; i < response.length - 2; i++) {
     $('.mpcerti').append(
-      `<div class="fr">${response[i]['alias']}</div>
-            <div class="fr">${response[i]['porcentaje']}%</div>
-            <div class="fr">${(
-              ((response[i]['porcentaje'] / 100) * tamanioLote) /
-              cantidad
-            ).toFixed(2)} Kg</div>
-            `
+      `<tr>
+        <td class="fr" colspan="2" style="padding-left: 40px;">${response[i]['alias']}</td>
+        <td class="fr">${response[i]['porcentaje']}%</td>
+        <td class="fr">
+          ${(
+                ((response[i]['porcentaje'] / 100) * tamanioLote) /
+                cantidad ).toFixed(2)} Kg
+            </td>
+      </tr>`
     );
 
     percent = percent + response[i]['porcentaje'];
@@ -247,8 +296,38 @@ const certificadoPesaje = (response) => {
   }
 
   $('.mpcerti').append(
-    ` <div class="center-text"><b>TOTAL</b></div>
-          <div class="center-text"><b>${percent.toFixed(2)}</b></div>
-          <div><b>${tamanio.toFixed(2)}</b></div>`
+    `<tr>
+      <td class="text-right" colspan="2"><b>TOTAL</b></td>
+      <td class="text-center"><b>${percent.toFixed(2)}</b></td>
+      <td class="text-center"><b>${tamanio.toFixed(2)}</b></td>
+    </tr>`
   );
+
+  // $('.mpcerti').append(
+  //   ` <div class="cltitle">MATERIA PRIMA</div>
+  //             <div class="cltitle">%(p/p) FORMULA</div>
+  //             <div class="cltitle">CANTIDAD PESADA</div>`
+  // );
+
+  // for (i = 0; i < response.length - 2; i++) {
+  //   $('.mpcerti').append(
+  //     `<div class="fr">${response[i]['alias']}</div>
+  //           <div class="fr">${response[i]['porcentaje']}%</div>
+  //           <div class="fr">${(
+  //             ((response[i]['porcentaje'] / 100) * tamanioLote) /
+  //             cantidad
+  //           ).toFixed(2)} Kg</div>
+  //           `
+  //   );
+
+  //   percent = percent + response[i]['porcentaje'];
+  //   tamanio =
+  //     tamanio + ((response[i]['porcentaje'] / 100) * tamanioLote) / cantidad;
+  // }
+
+  // $('.mpcerti').append(
+  //   ` <div class="center-text"><b>TOTAL</b></div>
+  //         <div class="center-text"><b>${percent.toFixed(2)}</b></div>
+  //         <div><b>${tamanio.toFixed(2)}</b></div>`
+  // );
 };
