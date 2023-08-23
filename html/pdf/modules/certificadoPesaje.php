@@ -89,7 +89,7 @@
 
         <hr>
 
-        <table class="mb-3" style="width: 1277px;">
+        <table class="mb-3" style="width: 100%;">
             <tbody class="mpcerti">
 
             </tbody>

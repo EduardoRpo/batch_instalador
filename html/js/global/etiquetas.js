@@ -199,7 +199,7 @@ const ImprimirEtiquetasInvima = () => {
 const etiquetasInvima = (response) => {
   for (i = 0; i < response.length - 2; i++) {
     $('.etiquetasV').append(
-      `<table class="etiquetaUnica rounded-3" style="width:1255px;">
+      `<table class="etiquetaUnica rounded-3" style="width:100%;">
           <tr>
             <td style="width: 50%;">
               <b>OP: </b>${infoBatch.numero_orden}
