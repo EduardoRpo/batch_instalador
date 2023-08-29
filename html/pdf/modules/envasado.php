@@ -85,12 +85,32 @@
             </div>
 
             <div class="subtitle"><label for="">Equipos</label></div>
-            <div class="envasadora">
+            <table style="width: 100%;">
+                <tbody>
+                    <tr style="height: 80px">
+                        <td style="width: 1%;"></td>
+                        <td style="width: 25%; padding-left:7px">Identificacion Envasadora</td>
+                        <td style="width: 71.5%;">
+                            <input type="text" class="form-control" id="envasadora1">
+                        </td>
+                        <td style="width: 1.5%;"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 1%;"></td>
+                        <td style="width: 25%; padding-left:7px">Identificacion Loteadora</td>
+                        <td style="width: 71.5%;">
+                            <input type="text" class="form-control" id="loteadora1">
+                        </td>
+                        <td style="width: 1.5%;"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- <div class="envasadora">
                 <label for="">Identificacion Envasadora</label>
                 <input type="text" class="form-control envasadora" id="envasadora1">
                 <label for="">Identificacion Loteadora</label>
                 <input type="text" class="form-control loteadora" id="loteadora1">
-            </div>
+            </div> -->
 
             <div class="subtitle"><label for="">Condiciones del Medio</label></div>
             <div class="table-responsive p-3">
@@ -120,25 +140,49 @@
             <div class="subtitle"><label for="">Procedimiento de Envasado</label></div>
             <div class="alertas" id="alert_pesaje"></div>
             <div class="subtitle"><label for="">Especificaciones Tecnicas</label></div>
-            <div class="espec_tecnicas">
+            <table class="text-center" style="width: 100%;">
+                <tbody>
+                    <tr style="height: 80px">
+                        <td style="width: 4.5%;"></td>
+                        <td style="width: 10%">Mínimo</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado minimo1">
+                        </td>
+                        <td style="width: 10%">Medio</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado medio1">
+                        </td>
+                        <td style="width: 10%">Máximo</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado maximo1">
+                        </td>
+                        <td style="width: 1.5%;"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- <div class="espec_tecnicas">
                 <label for="" class="centrado">Mínimo</label>
                 <input type="text" class="form-control centrado minimo1">
                 <label for="" class="centrado">Medio</label>
                 <input type="text" class="form-control centrado medio1">
                 <label for="" class="centrado">Máximo</label>
                 <input type="text" class="form-control centrado maximo1">
-            </div>
+            </div> -->
 
             <div class="subtitle"><label for="">Control de peso en el Proceso</label></div>
             <div class="subtitle" style="background:lightgrey;"><label for="">Muestras</label></div>
             <div class="p-3">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped muestrasEnvasado" id="muestrasEnvasado1"></table>
+                    <table class="table table-bordered table-striped" style="width: 100%;">
+                        <tbody id="tblMuestrasEnvasadoBody1">
+
+                        </tbody>
+                    </table>
                 </div>
 
                 <div>
                     <label>Promedio</label>
-                    <input type="text" class="form-control centrado" id="promedioMuestras1" style="width: 10%; display:inline">
+                    <input type=" text" class="form-control centrado" id="promedioMuestras1" style="width: 10%; display:inline">
                     <label class="ml-3">Cantidad de Muestras</label>
                     <input type="text" class="form-control centrado" id="cantidadMuestras1" style="width: 10%; display:inline">
                 </div>
@@ -260,12 +304,32 @@
             </div>
 
             <div class="subtitle"><label for="">Equipos</label></div>
-            <div class="envasadora">
+            <table style="width: 100%;">
+                <tbody>
+                    <tr style="height: 80px">
+                        <td style="width: 1%;"></td>
+                        <td style="width: 25%; padding-left:7px">Identificacion Envasadora</td>
+                        <td style="width: 71.5%;">
+                            <input type="text" class="form-control" id="envasadora2">
+                        </td>
+                        <td style="width: 1.5%;"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 1%;"></td>
+                        <td style="width: 25%; padding-left:7px">Identificacion Loteadora</td>
+                        <td style="width: 71.5%;">
+                            <input type="text" class="form-control" id="loteadora2">
+                        </td>
+                        <td style="width: 1.5%;"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- <div class="envasadora">
                 <label for="">Identificacion Envasadora</label>
                 <input type="text" class="form-control envasadora" id="envasadora2">
                 <label for="">Identificacion Loteadora</label>
                 <input type="text" class="form-control loteadora" id="loteadora2">
-            </div>
+            </div> -->
 
             <div class="subtitle"><label for="">Condiciones del Medio</label></div>
             <div class="table-responsive p-3">
@@ -295,20 +359,44 @@
             <div class="subtitle"><label for="">Procedimiento de Envasado</label></div>
             <div class="alertas" id="alert_pesaje"></div>
             <div class="subtitle"><label for="">Especificaciones Tecnicas</label></div>
-            <div class="espec_tecnicas">
+            <table class="text-center" style="width: 100%;">
+                <tbody>
+                    <tr style="height: 80px">
+                        <td style="width: 4.5%;"></td>
+                        <td style="width: 10%">Mínimo</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado minimo2">
+                        </td>
+                        <td style="width: 10%">Medio</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado medio2">
+                        </td>
+                        <td style="width: 10%">Máximo</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado maximo2">
+                        </td>
+                        <td style="width: 1.5%;"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- <div class="espec_tecnicas">
                 <label for="" class="centrado">Mínimo</label>
                 <input type="text" class="form-control centrado minimo2">
                 <label for="" class="centrado">Medio</label>
                 <input type="text" class="form-control centrado medio2">
                 <label for="" class="centrado">Máximo</label>
                 <input type="text" class="form-control centrado maximo2">
-            </div>
+            </div> -->
 
             <div class="subtitle"><label for="">Control de peso en el Proceso</label></div>
             <div class="subtitle" style="background:lightgrey;"><label for="">Muestras</label></div>
             <div class="p-3">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped muestrasEnvasado" id="muestrasEnvasado2"></table>
+                    <table class="table table-bordered table-striped" style="width: 100%;">
+                        <tbody id="tblMuestrasEnvasadoBody2">
+
+                        </tbody>
+                    </table>
                 </div>
 
                 <div>
@@ -435,12 +523,32 @@
             </div>
 
             <div class="subtitle"><label for="">Equipos</label></div>
-            <div class="envasadora">
+            <table style="width: 100%;">
+                <tbody>
+                    <tr style="height: 80px">
+                        <td style="width: 1%;"></td>
+                        <td style="width: 25%; padding-left:7px">Identificacion Envasadora</td>
+                        <td style="width: 71.5%;">
+                            <input type="text" class="form-control" id="envasadora3">
+                        </td>
+                        <td style="width: 1.5%;"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 1%;"></td>
+                        <td style="width: 25%; padding-left:7px">Identificacion Loteadora</td>
+                        <td style="width: 71.5%;">
+                            <input type="text" class="form-control" id="loteadora3">
+                        </td>
+                        <td style="width: 1.5%;"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- <div class="envasadora">
                 <label for="">Identificacion Envasadora</label>
                 <input type="text" class="form-control envasadora" id="envasadora3">
                 <label for="">Identificacion Loteadora</label>
                 <input type="text" class="form-control loteadora" id="loteadora3">
-            </div>
+            </div> -->
 
             <div class="subtitle"><label for="">Condiciones del Medio</label></div>
             <div class="table-responsive p-3">
@@ -470,20 +578,44 @@
             <div class="subtitle"><label for="">Procedimiento de Envasado</label></div>
             <div class="alertas" id="alert_pesaje"></div>
             <div class="subtitle"><label for="">Especificaciones Tecnicas</label></div>
-            <div class="espec_tecnicas">
+            <table class="text-center" style="width: 100%;">
+                <tbody>
+                    <tr style="height: 80px">
+                        <td style="width: 4.5%;"></td>
+                        <td style="width: 10%">Mínimo</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado minimo3">
+                        </td>
+                        <td style="width: 10%">Medio</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado medio3">
+                        </td>
+                        <td style="width: 10%">Máximo</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado maximo3">
+                        </td>
+                        <td style="width: 1.5%;"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- <div class="espec_tecnicas">
                 <label for="" class="centrado">Mínimo</label>
                 <input type="text" class="form-control centrado minimo3">
                 <label for="" class="centrado">Medio</label>
                 <input type="text" class="form-control centrado medio3">
                 <label for="" class="centrado">Máximo</label>
                 <input type="text" class="form-control centrado maximo3">
-            </div>
+            </div> -->
 
             <div class="subtitle"><label for="">Control de peso en el Proceso</label></div>
             <div class="subtitle" style="background:lightgrey;"><label for="">Muestras</label></div>
             <div class="p-3">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped muestrasEnvasado" id="muestrasEnvasado3"></table>
+                    <table class="table table-bordered table-striped" style="width: 100%;">
+                        <tbody id="tblMuestrasEnvasadoBody3">
+
+                        </tbody>
+                    </table>
                 </div>
 
                 <div>
@@ -610,12 +742,32 @@
             </div>
 
             <div class="subtitle"><label for="">Equipos</label></div>
-            <div class="envasadora">
+            <table style="width: 100%;">
+                <tbody>
+                    <tr style="height: 80px">
+                        <td style="width: 1%;"></td>
+                        <td style="width: 25%; padding-left:7px">Identificacion Envasadora</td>
+                        <td style="width: 71.5%;">
+                            <input type="text" class="form-control" id="envasadora4">
+                        </td>
+                        <td style="width: 1.5%;"></td>
+                    </tr>
+                    <tr>
+                        <td style="width: 1%;"></td>
+                        <td style="width: 25%; padding-left:7px">Identificacion Loteadora</td>
+                        <td style="width: 71.5%;">
+                            <input type="text" class="form-control" id="loteadora4">
+                        </td>
+                        <td style="width: 1.5%;"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- <div class="envasadora">
                 <label for="">Identificacion Envasadora</label>
                 <input type="text" class="form-control envasadora" id="envasadora4">
                 <label for="">Identificacion Loteadora</label>
                 <input type="text" class="form-control loteadora" id="loteadora4">
-            </div>
+            </div> -->
 
             <div class="subtitle"><label for="">Condiciones del Medio</label></div>
             <div class="table-responsive p-3">
@@ -645,20 +797,42 @@
             <div class="subtitle"><label for="">Procedimiento de Envasado</label></div>
             <div class="alertas" id="alert_pesaje"></div>
             <div class="subtitle"><label for="">Especificaciones Tecnicas</label></div>
-            <div class="espec_tecnicas">
+            <table class="text-center" style="width: 100%;">
+                <tbody>
+                    <tr style="height: 80px">
+                        <td style="width: 4.5%;"></td>
+                        <td style="width: 10%">Mínimo</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado minimo4">
+                        </td>
+                        <td style="width: 10%">Medio</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado medio4">
+                        </td>
+                        <td style="width: 10%">Máximo</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado maximo4">
+                        </td>
+                        <td style="width: 1.5%;"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- <div class="espec_tecnicas">
                 <label for="" class="centrado">Mínimo</label>
                 <input type="text" class="form-control centrado minimo4">
                 <label for="" class="centrado">Medio</label>
                 <input type="text" class="form-control centrado medio4">
                 <label for="" class="centrado">Máximo</label>
                 <input type="text" class="form-control centrado maximo4">
-            </div>
+            </div> -->
 
             <div class="subtitle"><label for="">Control de peso en el Proceso</label></div>
             <div class="subtitle" style="background:lightgrey;"><label for="">Muestras</label></div>
             <div class="p-3">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped muestrasEnvasado" id="muestrasEnvasado4"></table>
+                    <table class="table text-center table-bordered table-striped" style="width: 100%;">
+                        <tbody id="tblMuestrasEnvasadoBody4"></tbody>
+                    </table>
                 </div>
 
                 <div>

@@ -37,6 +37,11 @@ $(document).ready(function () {
   /* validar si existe multipresentacion */
 
   cargar = (btn, Nobtn) => {
+    let status;
+    if (Nobtn == 'firma2') {
+      status = true;
+    }
+    
     let confirm = alertify
       .confirm(
         'Samara Cosmetics',
@@ -62,13 +67,13 @@ $(document).ready(function () {
 
         if (desinfectante == 'Seleccione') {
           alertify.set('notifier', 'position', 'top-right');
-          alertify.error('Seleccione el producto para desinfección');
+          alertify.error('Seleccione el producto para desinfección'); 
           return false;
         }
 
         if (equipos === 0) {
           alertify.set('notifier', 'position', 'top-right');
-          alertify.error('Seleccione los Equipos');
+          alertify.error('Seleccione los Equipos'); 
           return false;
         }
 
@@ -124,7 +129,7 @@ $(document).ready(function () {
             alertify.error(
               'Seleccione e Ingrese los datos del análisis Microbiológico'
             );
-            dataMicro = [];
+            dataMicro = []; 
             return false;
           }
 
@@ -145,14 +150,17 @@ $(document).ready(function () {
               return false;
             }
           }
+
+          status = true
         }
       }
 
       /* Carga el modal para la autenticacion */
-
-      $('#usuario').val('');
-      $('#clave').val('');
-      $('#m_firmar').modal('show');
+      if (status) {
+        $('#usuario').val('');
+        $('#clave').val('');
+        $('#m_firmar').modal('show');
+      }
     });
   };
 

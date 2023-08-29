@@ -699,17 +699,20 @@ const muestras_envasado = async () => {
   let cont = 0;
   let sum = 0;
 
-  if (multi.length != 0) {
+  if (multi.length != 0) { 
     for (let i = 0; i < multi.length; i++) {
       sum = 0;
       promedio = 0;
       cont = 0;
       for (let j = 0; j < resp.length; j++) {
         if (multi[i]['referencia'] == resp[j]['referencia']) {
+          if (cont % 10 === 0) {
+            $(`#tblMuestrasEnvasadoBody${i + 1}`).append('<tr></tr>');
+          }
+
+          $(`#tblMuestrasEnvasadoBody${i + 1} tr:last-child`).append(`<td>${resp[j]['muestra']}</td>`);
+
           cont = cont + 1;
-          $(`#muestrasEnvasado${i + 1}`).append(
-            `<td class="centrado">${resp[j]['muestra']}</td>`
-          );
           sum = sum + resp[j]['muestra'];
           promedio = (sum / cont).toFixed(2); 
           document.getElementById(`promedioMuestras${i + 1}`).setAttribute('value', promedio);
@@ -719,10 +722,12 @@ const muestras_envasado = async () => {
     }
   } else {
     for (let j = 0; j < resp.length; j++) {
+      if (cont % 10 === 0) {
+        $(`#tblMuestrasEnvasadoBody1`).append('<tr></tr>');
+      }
+      $(`#tblMuestrasEnvasadoBody1 tr:last-child`).append(`<td>${resp[j]['muestra']}</td>`);
+
       cont = cont + 1;
-      $(`#muestrasEnvasado1`).append(
-        `<td class="centrado">${resp[j]['muestra']}</td>`
-      );
       sum = sum + resp[j]['muestra'];
       promedio = (sum / cont).toFixed(2);
     } 

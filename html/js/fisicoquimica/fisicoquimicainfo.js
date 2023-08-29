@@ -33,6 +33,11 @@ $(document).ready(function () {
   /* Validar que todos los campos este llenos */
 
   cargar = (btn, idbtn) => {
+    let status;
+     if (idbtn == 'firma2') {
+      status = true;
+    }
+
     sessionStorage.setItem('idbtn', idbtn);
     id = btn.id;
 
@@ -44,6 +49,7 @@ $(document).ready(function () {
     if (desinfectante == 'Seleccione') {
       alertify.set('notifier', 'position', 'top-right');
       alertify.error('Ingrese el producto de desinfección.');
+      status = false;
       return false;
     }
 
@@ -51,6 +57,7 @@ $(document).ready(function () {
       if (inputs[i].value == '') {
         alertify.set('notifier', 'position', 'top-right');
         alertify.error('Complete todos los campos.');
+        status = false;
         return false;
       }
     }
@@ -59,6 +66,7 @@ $(document).ready(function () {
       if (selects[i].value == 0) {
         alertify.set('notifier', 'position', 'top-right');
         alertify.error('Seleccione todos los campos.');
+        status = false;
         return false;
       }
     }
@@ -69,7 +77,7 @@ $(document).ready(function () {
     if (validar == 0) return false;
 
     let continuar = validarSeleccion();
-    if (continuar != 0) {
+    if (continuar != 0 && status == true) {
       $('#usuario').val('');
       $('#clave').val('');
       $('#m_firmar').modal('show');

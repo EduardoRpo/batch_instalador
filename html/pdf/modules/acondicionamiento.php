@@ -58,14 +58,42 @@
             </div>
         </div>
         <div class="subtitle"><label for="">Equipos</label></div>
-        <div class="equipos">
+        <table style="width: 100%;">
+            <tbody>
+                <tr style="height: 80px">
+                    <td style="width: 1%;"></td>
+                    <td style="width: 25%; padding-left:7px">Banda Transportadora</td>
+                    <td style="width: 71.5%;">
+                        <input type="text" class="form-control" id="banda">
+                    </td>
+                    <td style="width: 1.5%;"></td>
+                </tr>
+                <tr>
+                    <td style="width: 1%;"></td>
+                    <td style="width: 25%; padding-left:7px">Etiqueadora</td>
+                    <td style="width: 71.5%;">
+                        <input type="text" class="form-control" id="etiquetadora">
+                    </td>
+                    <td style="width: 1.5%;"></td>
+                </tr>
+                <tr style="height: 80px">
+                    <td style="width: 1%;"></td>
+                    <td style="width: 25%; padding-left:7px">Tunel</td>
+                    <td style="width: 71.5%;">
+                        <input type="text" class="form-control" id="tunel">
+                    </td>
+                    <td style="width: 1.5%;"></td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- <div class="equipos">
             <label for="">Banda Transportadora</label>
             <input type="text" class="form-control" id="banda">
             <label for="">Etiqueadora</label>
             <input type="text" class="form-control" id="etiquetadora">
             <label for="">Tunel</label>
             <input type="text" class="form-control" id="tunel">
-        </div>
+        </div> -->
 
         <div class="subtitle"><label for="">Condiciones del Medio</label></div>
         <div class="table-responsive p-3">

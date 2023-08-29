@@ -2803,12 +2803,12 @@
             border: 0
         }
 
-        .table-responsive {
-            /* display: block; */
+        /* .table-responsive {
+            display: block;
             width: 100%;
             overflow-x: auto;
             -ms-overflow-style: -ms-autohiding-scrollbar
-        }
+        } */
 
         .table-responsive.table-bordered {
             border: 0
