@@ -25,7 +25,7 @@ $(document).ready(function() {
 
         /* Calcula el lote de la presentacion de acuerdo con la seleccion */
 
-        let lotePresentacion = parseInt((densidad * cantidad * presentacion) / 1000);
+        let lotePresentacion = (parseFloat(densidad) * parseFloat(cantidad) * parseFloat(presentacion)) / 1000;
         $(`#tamanioloteMulti${id}`).val(lotePresentacion);
 
         /* Suma todos los lotes */

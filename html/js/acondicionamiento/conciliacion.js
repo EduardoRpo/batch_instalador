@@ -19,7 +19,7 @@ $(document).ready(function() {
         total = total.replace(".", ""); */
 
         let rendimiento = (presentacion * cantidad * densidad) / 1000;
-        rendimiento = ((rendimiento / total) * 100).toFixed(2) + "%";
+        rendimiento = ((rendimiento / parseFloat(total)) * 100).toFixed(2) + "%";
         $(`#rendimientoProducto${id_multi}`).val(rendimiento);
     }
 
