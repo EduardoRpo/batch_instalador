@@ -174,14 +174,15 @@ class Firmas2SeccionDao
             $rows = $query->rowCount();
 
             if ($rows > 0) {
-                $verifico = $dataBatch['verifico'];
+                // $verifico = $dataBatch['verifico'];
+                $verifico = json_decode($dataBatch['verifico']);
 
                 if ($modulo == 5 || $modulo == 6) {
                     $ref_multi = $dataBatch['ref_multi'];
                     $sql = "UPDATE batch_firmas2seccion SET verifico = :verifico WHERE modulo = :modulo AND batch = :batch AND ref_multi = :ref_multi";
                     $query = $connection->prepare($sql);
                     $query->execute([
-                        'verifico' => $verifico[0]['id'],
+                        'verifico' => $verifico->id,
                         'modulo' => $modulo, 'batch' => $dataBatch['idBatch'],
                         'ref_multi' => $ref_multi
                     ]);

@@ -142,7 +142,42 @@
         </div>
 
         <div class="subtitle"><label for="">Ajustes</label></div>
-        <div class="ajustes">
+        <table style="width: 100%;">
+            <tbody>
+                <tr style="height: 80px">
+                    <td class="text-right" style="width: 40%; padding-right:10px">Si</td>
+                    <td style="font-weight:bold; justify-self: baseline; width: 5%;">
+                        <input type="text" class="form-control centrado" id="Si4">
+                    </td>
+                    <td class="text-right" style="width: 7%; padding-right:10px">No</td>
+                    <td style="font-weight:bold; justify-self: baseline; width: 5%;">
+                        <input type="text" class="form-control centrado" id="No4">
+                    </td>
+                    <td style="width:43%"></td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <tbody>
+                <tr style="height: 80px">
+                    <td style="width: 1%;"></td>
+                    <td style="width: 25%; padding-left:7px">Materia(s) primas para adicionar</td>
+                    <td style="width: 71.5%;">
+                        <input type="textarea" class="form-control" id="materiaPrimaAjustes4">
+                    </td>
+                    <td style="width: 1.5%;"></td>
+                </tr>
+                <tr>
+                    <td style="width: 1%;"></td>
+                    <td style="width: 25%; padding-left:7px">Procedimiento de Ajuste</td>
+                    <td style="width: 71.5%;">
+                        <input type="textarea" class="form-control" id="procedimientoAjustes4">
+                    </td>
+                    <td style="width: 1.5%;"></td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- <div class="ajustes">
             <div class="resp">
                 <label for="">Si</label>
                 <input type="text" class="form-control centrado" id="Si4">
@@ -156,7 +191,7 @@
                 <input type="textarea" class="form-control" id="procedimientoAjustes4">
             </div>
 
-        </div>
+        </div> -->
 
         <div class="subtitle"><label for="">Observaciones</label></div>
         <div id="obs4" class="ml-5 mt-3 mb-3"></div>

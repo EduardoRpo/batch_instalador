@@ -123,7 +123,42 @@
     </div>
 
     <div class="subtitle"><label for="">Ajustes</label></div>
-    <div class="ajustes">
+    <table style="width: 100%;">
+        <tbody>
+            <tr style="height: 80px">
+                <td class="text-right" style="width: 40%; padding-right:10px">Si</td>
+                <td style="font-weight:bold; justify-self: baseline; width: 5%;">
+                    <input type="text" class="form-control centrado" id="Si9">
+                </td>
+                <td class="text-right" style="width: 7%; padding-right:10px">No</td>
+                <td style="font-weight:bold; justify-self: baseline; width: 5%;">
+                    <input type="text" class="form-control centrado" id="No9">
+                </td>
+                <td style="width:43%"></td>
+            </tr>
+        </tbody>
+    </table>
+    <table style="width: 100%;">
+        <tbody>
+            <tr style="height: 80px">
+                <td style="width: 1%;"></td>
+                <td style="width: 25%; padding-left:7px">Materia(s) primas para adicionar</td>
+                <td style="width: 71.5%;">
+                    <input type="textarea" class="form-control" id="materiaPrimaAjustes9">
+                </td>
+                <td style="width: 1.5%;"></td>
+            </tr>
+            <tr>
+                <td style="width: 1%;"></td>
+                <td style="width: 25%; padding-left:7px">Procedimiento de Ajuste</td>
+                <td style="width: 71.5%;">
+                    <input type="textarea" class="form-control" id="procedimientoAjustes9">
+                </td>
+                <td style="width: 1.5%;"></td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- <div class="ajustes">
         <div class="resp">
             <label for="">Si</label>
             <input type="text" class="form-control centrado" id="Si9">
@@ -136,17 +171,33 @@
             <label for="">Procedimiento de Ajuste</label>
             <input type="textarea" class="form-control" id="procedimientoAjustes9">
         </div>
-    </div>
+    </div> -->
 
     <div class="subtitle">Resultado</div>
 
     <div class="marco m-5">
-        <div class="col2sm m-3">
+        <table class="text-center" style="width: 100%;">
+            <tbody>
+                <tr>
+                    <td style="width: 50%">Aprobado</td>
+                    <td style="width: 50%">Fecha Resultados</td>
+                </tr>
+                <tr>
+                    <td style="width: 50%;">
+                        <input class="chkAprobado" type="checkbox" name="chkAprobado" id="chkAprobado">
+                    </td>
+                    <td style="width: 50%;">
+                        <input class="chkRechazado" type="checkbox" name="chkRechazado" id="chkRechazado">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- <div class="col2sm m-3">
             <label for="">Aprobado</label>
             <label for="">Rechazado</label>
             <input class="chkAprobado" type="checkbox" name="chkAprobado" id="chkAprobado">
             <input class="chkRechazado" type="checkbox" name="chkRechazado" id="chkRechazado">
-        </div>
+        </div> -->
     </div>
 
     <!-- <div class="enlinea">

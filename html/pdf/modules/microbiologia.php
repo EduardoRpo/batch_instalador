@@ -33,14 +33,42 @@
     </div>
 
     <div class="subtitle"><label>Equipos</label></div>
-    <div class="col2">
+    <table style="width: 100%;">
+        <tbody>
+            <tr style="height: 80px">
+                <td style="width: 1%;"></td>
+                <td style="width: 25%; padding-left:7px">Identificación Incubadora</td>
+                <td style="width: 71.5%;">
+                    <input type="text" class="form-control" id="incubadora">
+                </td>
+                <td style="width: 1.5%;"></td>
+            </tr>
+            <tr>
+                <td style="width: 1%;"></td>
+                <td style="width: 25%; padding-left:7px">Identificación del Autoclave</td>
+                <td style="width: 71.5%;">
+                    <input type="text" class="form-control" id="autoclave">
+                </td>
+                <td style="width: 1.5%;"></td>
+            </tr>
+            <tr style="height: 80px">
+                <td style="width: 1%;"></td>
+                <td style="width: 25%; padding-left:7px">Identificación de la cabina de Flujo de Laminar</td>
+                <td style="width: 71.5%;">
+                    <input type="text" class="form-control" id="cabina">
+                </td>
+                <td style="width: 1.5%;"></td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- <div class="col2">
         <label for="">Identificación Incubadora</label>
         <input type="text" class="form-control" id="incubadora">
         <label for="">Identificación del Autoclave</label>
         <input type="text" class="form-control" id="autoclave">
         <label for="">Identificación de la cabina de Flujo de Laminar</label>
         <input type="text" class="form-control" id="cabina">
-    </div>
+    </div> -->
     <div class="subtitle">
         <label for="">3.3 Condiciones del Medio</label>
     </div>
@@ -111,21 +139,56 @@
         </table>
     </div>
 
-    <div class="col4">
+    <table style="width: 100%;">
+        <tbody>
+            <tr style="height: 80px">
+                <td style="width: 2.5%;"></td>
+                <td style="width: 10%">Fecha Siembra</td>
+                <td style="width: 11.33%;">
+                    <input type="text" class="form-control" id="fsiembra">
+                </td>
+                <td style="width: 5%"></td>
+                <td style="width: 10%">Fecha Resultados</td>
+                <td style="width: 11.33%;">
+                    <input type="text" class="form-control" id="fresultados">
+                </td>
+                <td style="width: 1.5%;"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- <div class="col4">
         <label for="">Fecha Siembra</label>
         <input type="text" class="form-control" id="fsiembra">
         <label for="">Fecha Resultados</label>
         <input type="text" class="form-control" id="fresultados">
-    </div>
+    </div> -->
 
     <div class="marco m-5">
-        <div class="col2sm m-3">
+        <table class="text-center" style="width: 100%;">
+            <tbody>
+                <tr>
+                    <td style="width: 50%">Aprobado</td>
+                    <td style="width: 50%">Fecha Resultados</td>
+                </tr>
+                <tr>
+                    <td style="width: 50%;">
+                        <input class="chkAprobado" type="checkbox" name="chkAprobado" id="chkAprobado">
+                    </td>
+                    <td style="width: 50%;">
+                        <input class="chkRechazado" type="checkbox" name="chkRechazado" id="chkRechazado">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- <div class="col2sm m-3">
             <label for="">Aprobado</label>
             <label for="">Rechazado</label>
             <input class="chkAprobado" type="checkbox" name="chkAprobado" id="chkAprobado">
             <input class="chkRechazado" type="checkbox" name="chkRechazado" id="chkRechazado">
-        </div>
+        </div> -->
     </div>
+
 
     <!-- <div class="enlinea">
         <label class="mr-3" style="justify-self: end;">Fecha</label>

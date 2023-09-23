@@ -43,7 +43,7 @@ $(document).ready(function () {
     almacenarfirma = async (verifico) => {
         let data = new FormData();
         data.append('idBatch', idBatch);
-        data.append('verifico', verifico);
+        data.append('verifico', JSON.stringify(verifico));
         data.append('modulo', modulo);
         data.append('refref_multi', ref_multi);
 
