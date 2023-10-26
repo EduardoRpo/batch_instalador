@@ -299,8 +299,8 @@ desinfectante = () => {
         $(`#blank_rea${info[i].modulo}`).hide();
         $(`#blank_ver${info[i].modulo}`).hide();
 
-        /* fecha nuevo registro cambia a fecha registro a partir del 1034 */
-        if (idBatch >= 2599) fechaRegistro = info[i].fecha_registro;
+        /* fecha nuevo registro cambia a fecha registro a partir del 3200 */
+        if (idBatch >= 3200) fechaRegistro = info[i].fecha_registro;
         else fechaRegistro = info[i].fecha_nuevo_registro;
 
         $(`.desinfectante${info[i].modulo}`).html(info[i].desinfectante);
