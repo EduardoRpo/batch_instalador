@@ -157,7 +157,7 @@ $(document).ready(function () {
 
     j = 0;
 
-    if (info == false) return false;
+    if (info == false || !info) return false;
 
     //validar en que multipresentacion se encuentra
     if (modulo == 5) {

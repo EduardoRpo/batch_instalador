@@ -45,7 +45,7 @@ $(document).ready(function () {
         data.append('idBatch', idBatch);
         data.append('verifico', JSON.stringify(verifico));
         data.append('modulo', modulo);
-        data.append('refref_multi', ref_multi);
+        data.append('ref_multi', ref_multi);
 
         let resp = await sendDataPOST('/api/calidad2seccion', data, 2);
 

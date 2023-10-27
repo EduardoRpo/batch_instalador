@@ -131,6 +131,7 @@ fetchindata = async() => {
         `<table class="table table-striped table-bordered dataTable no-footer text-center">
           <thead>
             <tr>
+              <th class="text-center">No</th>
               <th class="text-center">Pedido</th>
               <th class="text-center">Referencia</th>
             </tr>
@@ -160,6 +161,7 @@ addRow = (data) => {
     row = [];
     for (i = 0; i < data.length; i++) {
         row.push(`<tr>
+              <td>${i + 1}</td>
               <td>${data[i]['documento']}</td>
               <td>${data[i]['producto']}</td>
               </tr>`);

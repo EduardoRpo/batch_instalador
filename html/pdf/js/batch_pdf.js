@@ -1527,12 +1527,12 @@ $(document).ready(function () {
       cargarObservaciones();
       cargar_version_PDF(data);
     
-      let op = localStorage.getItem('opLiberacion');
-      if (op) {
-        await new Promise(resolve => setTimeout(resolve, 5000));
+      // let op = localStorage.getItem('opLiberacion');
+      // if (op) {
+      //   await new Promise(resolve => setTimeout(resolve, 5000));
     
-        downloadPdfBatch();
-      }
+        // downloadPdfBatch();
+      // }
     } catch (error) {
       console.error('Error al procesar la información:', error);
     }
