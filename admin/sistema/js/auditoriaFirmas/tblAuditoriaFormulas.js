@@ -29,8 +29,16 @@ $(document).ready(function () {
       },
       {
         title: 'Usuario',
-        data: 'action_user',
+        data: null,
         className: 'text-center',
+        render: function (data) { 
+          return `${data.nombre} ${data.apellido}`
+         }
+      },
+      {
+        title: 'Email',
+        data: 'email',
+        className: 'text-center', 
       },
       {
         title: 'Formula',

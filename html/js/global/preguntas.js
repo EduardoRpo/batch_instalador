@@ -80,13 +80,15 @@ $(document).ready(function () {
         realizo: idfirma,
       },
       success: function (response) {
-        if (response > 0) {
-          $('.despeje_realizado')
-            .css({ background: 'lightgray', border: 'gray' })
-            .prop('disabled', true);
-          $('.despeje_verificado').prop('disabled', false);
-          habilitarbotones();
-        }
+        // if (response > 0) {
+        alertify.set("notifier", "position", "top-right");
+        alertify.success("Firmado satisfactoriamente");
+        $('.despeje_realizado')
+          .css({ background: 'lightgray', border: 'gray' })
+          .prop('disabled', true);
+        $('.despeje_verificado').prop('disabled', false);
+        habilitarbotones();
+        // }
       },
     });
   };

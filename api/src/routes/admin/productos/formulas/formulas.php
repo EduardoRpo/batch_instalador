@@ -46,10 +46,13 @@ $app->post('/newFormula', function (Request $request, Response $response, $args)
   $batchDao,
   $prePlaneadosDao,
   $productsDao,
-  $estadoInicialDao
+  $estadoInicialDao,
+  $auditoriaFormulasDao
 ) {
   $dataFormula =  $request->getParsedBody();
   $resp = $formulasDao->saveFormula($dataFormula);
+
+  $auditoriaFormulasDao->auditFormula($dataFormula, '', 'UPDATE');
 
   $batchs = $batchDao->findBatchByRef($dataFormula['ref_producto']);
 
@@ -76,8 +79,19 @@ $app->post('/newFormula', function (Request $request, Response $response, $args)
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->post('/deleteformulas', function (Request $request, Response $response, $args) use ($formulasDao, $formulasInvimasDao, $healthNotificationDao, $adminMultiDao) {
+$app->post('/deleteformulas', function (Request $request, Response $response, $args) use (
+  $formulasDao,
+  $formulasInvimasDao,
+  $healthNotificationDao,
+  $adminMultiDao,
+  $auditoriaFormulasDao
+) {
   $dataFormula =  $request->getParsedBody();
+
+  $dataFormula['tbl'] == 'r' ? $tbl = 'formula' : $tbl = 'formula_f';
+  $rows = $formulasDao->findFormulaByRefMaterial($dataFormula, $tbl);
+  $auditoriaFormulasDao->auditFormula($dataFormula, $rows, 'DELETE');
+
   if ($dataFormula['tbl'] == 'r') {
     $ref_multi =  $adminMultiDao->findMultiByReference($dataFormula);
 
@@ -102,7 +116,16 @@ $app->post('/deleteformulas', function (Request $request, Response $response, $a
   return $response->withHeader('Content-Type', 'application/json');
 });
 
-$app->post('/SaveFormula', function (Request $request, Response $response, $args) use ($formulasDao, $formulasInvimasDao, $healthNotificationDao, $estadoInicialDao, $batchDao, $productsDao, $prePlaneadosDao, $auditoriaFormulasDao) {
+$app->post('/SaveFormula', function (Request $request, Response $response, $args) use (
+  $formulasDao,
+  $formulasInvimasDao,
+  $healthNotificationDao,
+  $estadoInicialDao,
+  $batchDao,
+  $productsDao,
+  $prePlaneadosDao,
+  $auditoriaFormulasDao
+) {
   $dataFormula = $request->getParsedBody();
 
   $dataFormula['tbl'] == 'r' ? $tbl = 'formula' : $tbl = 'formula_f';
@@ -160,6 +183,7 @@ $app->post('/SaveFormula', function (Request $request, Response $response, $args
     $rows = $formulasInvimasDao->countRowFormulainvima($dataFormula['ref_producto'], $notif_sanitaria);
 
     if ($rows > 0) {
+      $auditoriaFormulasDao->auditFormula($dataFormula, '',  'UPDATE');
       $formula = $formulasInvimasDao->updateFormula($dataFormula, $notif_sanitaria);
 
       $formula == null
