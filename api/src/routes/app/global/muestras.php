@@ -14,7 +14,7 @@ $app->get('/muestras/{id_batch}', function (Request $request, Response $response
 });
 
 $app->get('/muestras-acondicionamiento/{id_batch}', function (Request $request, Response $response, $args) use ($muestrasDao) {
-    $acondicionamiento = $muestrasDao->findAllAcondicionamientoByBatchAndModulo($args['id_batch']);
+    $acondicionamiento = $muestrasDao->findAllAcondicionamientoByBatch($args['id_batch']);
     $response->getBody()->write(json_encode($acondicionamiento, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');
 });

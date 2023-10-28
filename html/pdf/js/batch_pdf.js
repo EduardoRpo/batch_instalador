@@ -445,11 +445,11 @@ function equipos() {
         continue;
       }
       if (data[i].tipo === 'envasadora') {
-        document.getElementsByClassName(`envasadora`)[0].setAttribute('value', data[i].descripcion);
+        document.getElementById(`envasadora1`).setAttribute('value', data[i].descripcion);
         continue;
       }
       if (data[i].tipo === 'loteadora') {
-        document.getElementsByClassName(`loteadora`)[0].setAttribute('value', data[i].descripcion);
+        document.getElementById(`loteadora1`).setAttribute('value', data[i].descripcion);
         continue;
       }
       if (data[i].tipo === 'banda') {
@@ -1527,12 +1527,12 @@ $(document).ready(function () {
       cargarObservaciones();
       cargar_version_PDF(data);
     
-      // let op = localStorage.getItem('opLiberacion');
-      // if (op) {
-      //   await new Promise(resolve => setTimeout(resolve, 5000));
+      let op = localStorage.getItem('opLiberacion');
+      if (op) {
+        await new Promise(resolve => setTimeout(resolve, 5000));
     
-        // downloadPdfBatch();
-      // }
+        downloadPdfBatch();
+      }
     } catch (error) {
       console.error('Error al procesar la información:', error);
     }

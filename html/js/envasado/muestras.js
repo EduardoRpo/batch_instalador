@@ -79,9 +79,8 @@ $(document).ready(function () {
 
     let resp = await sendDataPOST('/api/promedio-muestras', data, 2);
 
-    if (resp != false) {
-      data = JSON.parse(response);
-      $(`#promedio${id_multi}`).val(`${data.promedio}`);
+    if (resp != false) { 
+      $(`#promedio${id_multi}`).val(`${resp.promedio}`);
     }
     // $.ajax({
     //   type: 'POST',
