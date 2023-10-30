@@ -79,21 +79,9 @@ $(document).ready(function () {
 
     let resp = await sendDataPOST('/api/promedio-muestras', data, 2);
 
-    if (resp != false) {
-      data = JSON.parse(response);
-      $(`#promedio${id_multi}`).val(`${data.promedio}`);
-    }
-    // $.ajax({
-    //   type: 'POST',
-    //   url: '../../html/php/muestras.php',
-    //   data: { operacion: 5, idBatch, modulo, ref_multi },
-
-    //   success: function (response) {
-    //     if (!response) return false;
-    //     data = JSON.parse(response);
-    //     $(`#promedio${id_multi}`).val(`${data[0].promedio}`);
-    //   },
-    // });
+    if (resp != false) { 
+      $(`#promedio${id_multi}`).val(`${resp.promedio}`);
+    } 
   }
 
   guardarMuestras = () => {

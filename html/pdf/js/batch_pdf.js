@@ -445,11 +445,11 @@ function equipos() {
         continue;
       }
       if (data[i].tipo === 'envasadora') {
-        document.getElementsByClassName(`envasadora`)[0].setAttribute('value', data[i].descripcion);
+        document.getElementById(`envasadora1`).setAttribute('value', data[i].descripcion);
         continue;
       }
       if (data[i].tipo === 'loteadora') {
-        document.getElementsByClassName(`loteadora`)[0].setAttribute('value', data[i].descripcion);
+        document.getElementById(`loteadora1`).setAttribute('value', data[i].descripcion);
         continue;
       }
       if (data[i].tipo === 'banda') {

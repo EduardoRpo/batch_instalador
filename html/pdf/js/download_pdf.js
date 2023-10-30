@@ -14,22 +14,7 @@ $(document).ready(function () {
       elementos = copy_invoice.getElementsByTagName('body');
       elementos[0].style.width = '1000px';
       elementos[0].style.margin = '-10px';
-      elementos[0].style.fontSize = 'small';
- 
-      // let imagenes = copy_invoice.getElementsByClassName('img');
-      
-      // let href = imagenes[0].href.replace('http://batchrecord', '').replace('https://batchrecord', '');
-      // imagenes[0].setAttribute('href', `../../../../..${href}`);
-      
-      // // let src = imagenes[1].src.replace('http://batchrecord', '').replace('https://batchrecord', '');
-      // // imagenes[1].setAttribute('src', `../../../../..${src}`); 
-      
-      // imagenes = copy_invoice.getElementsByTagName('img');
-      
-      // for (let i = 0; i < imagenes.length; i++) {
-      //   let src = imagenes[i].src.replace('http://batchrecord', '').replace('https://batchrecord', '');
-      //   imagenes[i].setAttribute('src', `../../../../..${src}`); 
-      // }
+      elementos[0].style.fontSize = 'small'; 
 
       let form = new FormData();
       let html = copy_invoice.outerHTML;
@@ -59,8 +44,7 @@ $(document).ready(function () {
     
       a.click();
       
-      form = new FormData();
-      // let pdfBlob = new Blob([resp], { type: 'application/pdf' });
+      form = new FormData(); 
       form.append('pdf', resp, `${data.numero_lote}-${data.id_batch}.pdf`);
       resp = await sendDataPOST('/api/savePdf', form, 2);
 

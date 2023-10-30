@@ -20,7 +20,10 @@ class AuditoriaFormulasDao
     public function findAllFormulas()
     {
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("SELECT * FROM formulas_audit ORDER BY action_time ASC");
+        $stmt = $connection->prepare("SELECT fa.id_formulas_audit, fa.action, fa.action_time, fa.action_user, fa.formula_id, fa.old_formula_data, fa.new_formula_data, u.nombre, u.apellido, u.email
+                                      FROM formulas_audit fa
+                                      INNER JOIN usuario u ON u.id = fa.action_user
+                                      ORDER BY fa.action_time ASC");
         $stmt->execute();
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         $formulas = $stmt->fetchAll($connection::FETCH_ASSOC);
@@ -31,29 +34,46 @@ class AuditoriaFormulasDao
     public function AuditFormula($dataFormula, $row, $action)
     {
         $connection = Connection::getInstance()->getConnection();
+        session_start();
+        $id_user = $_SESSION['idUser'];
 
         $new_formula_data = 'id_product: ' . $dataFormula['ref_producto'] . ', id_materiaprima: ' . $dataFormula['ref_materiaprima'];
 
         if ($action == 'INSERT') {
             $sql = "INSERT INTO formulas_audit (`action`, action_time, action_user, formula_id, new_formula_data)
-                VALUES (:action, NOW(), USER(), :formula_id, :new_formula_data)";
+                VALUES (:action, NOW(), :action_user, :formula_id, :new_formula_data)";
             $stmt = $connection->prepare($sql);
             $stmt->execute([
                 'action' => $action,
                 'formula_id' => $dataFormula['id'],
                 'new_formula_data' => $new_formula_data,
+                'action_user' => $id_user
             ]);
         } else if ($action == 'UPDATE') {
             $old_formula_data = 'id_product: ' . $row[0]['id_producto'] . ', id_materiaprima: ' . $row[0]['id_materiaprima'];
 
             $sql = "INSERT INTO formulas_audit (`action`, action_time, action_user, formula_id, old_formula_data, new_formula_data)
-                VALUES (:action, NOW(), USER(), :formula_id, :old_formula_data, :new_formula_data)";
+                VALUES (:action, NOW(), :action_user, :formula_id, :old_formula_data, :new_formula_data)";
             $stmt = $connection->prepare($sql);
             $stmt->execute([
                 'action' => $action,
                 'formula_id' => $row[0]['id'],
                 'old_formula_data' => 'id_product: ' . $old_formula_data,
                 'new_formula_data' => 'id_product: ' . $new_formula_data,
+                'action_user' => $id_user
+            ]);
+        } else if ($action == 'DELETE') {
+            $old_formula_data = 'id_product: ' . $row[0]['id_producto'] . ', id_materiaprima: ' . $row[0]['id_materiaprima'];
+
+            $sql = "INSERT INTO formulas_audit (`action`, action_time, action_user, formula_id, old_formula_data)
+                VALUES (:action, NOW(), :action_user, :formula_id, :old_formula_data)";
+            $stmt = $connection->prepare($sql);
+            $stmt->execute([
+                'action' => $action,
+                'formula_id' => $row[0]['id'],
+                'old_formula_data' => 'id_product: ' . $old_formula_data,
+                'new_formula_data' => 'id_product: ' . $new_formula_data,
+                'action_user' => $id_user
             ]);
         }
 
