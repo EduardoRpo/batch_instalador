@@ -34,12 +34,7 @@ $(document).ready(function () {
         render: function (data) { 
           return `${data.nombre} ${data.apellido}`
          }
-      },
-      {
-        title: 'Email',
-        data: 'email',
-        className: 'text-center', 
-      },
+      }, 
       {
         title: 'Formula',
         data: 'formula_id',
