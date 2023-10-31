@@ -103,22 +103,33 @@ $(document).ready(function () {
       data.append('modulo', modulo);
       data.append('ref_multi', ref_multi);
         
-      let info = await sendDataPOST('/api/loadRealizoVerifico2seccion', data, 2);
-      if (info == false) {
-        //$(`.controlpeso_realizado${id_multi}`).prop("disabled", false);
-        return false;
-      }
+      // let info = await sendDataPOST('/api/loadRealizoVerifico2seccion', data, 2); 
+      $.ajax({
+        type: "POST",
+        url: "/api/loadRealizoVerifico2seccion",
+        data: data,
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (info) {
+          if (info == false || info == 3) {
+            //   $(`.controlpeso_realizado${id_multi}`).prop("disabled", false);
+            return false;
+          }
 
-      for (i = 1; i <= info.length; i++) {
-        $(`#validarLote${id_multi}`).val(batch.numero_lote);
-        cargarEquipos();
-        if (modulo == 5) promedio();
-        firmado(info[0].realizo, 3);
-        $(`.btnEntregasParciales${id_multi}`).prop('disabled', false);
-        firmado(info[0].verifico, 4);
-      }
-      cargardevolucionmaterial();
-      if (modulo == 6) cargar_conciliacion();
+          for (i = 1; i <= info.length; i++) {
+            $(`#validarLote${id_multi}`).val(batch.numero_lote);
+            cargarEquipos();
+            if (modulo == 5) promedio();
+            firmado(info[0].realizo, 3);
+            $(`.btnEntregasParciales${id_multi}`).prop('disabled', false);
+            firmado(info[0].verifico, 4);
+          }
+          cargardevolucionmaterial();
+          if (modulo == 6) cargar_conciliacion();
+        }
+      });
+      
         
       // $.ajax({
       //   type: 'POST',
@@ -127,6 +138,7 @@ $(document).ready(function () {
 
       //   success: function (response) {
       //     let info = JSON.parse(response);
+      //     // console.log(info);
       //     if (info == 3) {
       //       //$(`.controlpeso_realizado${id_multi}`).prop("disabled", false);
       //       return false;

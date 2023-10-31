@@ -4,53 +4,59 @@ $(document).ready(function() {
 
     // Carga tabla de envase del producto
 
-    cargarTablaEnvase = async(batchMulti) => {
+    cargarTablaEnvase = async (batchMulti) => {
         for (let i = 0; i < batchMulti.length; i++) {
-            InsumosMulti = await buscarDataMulti(`${ApiEnvase}${batchMulti[i]['referencia']}`)
-            empaqueEnvasado = Math.round(batchMulti[i]['cantidad'] / InsumosMulti[0].unidad_empaque);
-            unidades = formatoCO(batchMulti[i]['cantidad']);
+            InsumosMulti = await buscarDataMulti(`${ApiEnvase}${batchMulti[i]['referencia']}`);
 
-            // Carga datos material referencia 
+            if (InsumosMulti.length > 1) {
+                empaqueEnvasado = Math.round(batchMulti[i]['cantidad'] / InsumosMulti[0].unidad_empaque);
 
-            $(`.envaseReferencia${i + 1}`).html(InsumosMulti[0].id_envase);
-            $(`.envaseDescripcion${i + 1}`).html(InsumosMulti[0].envase);
+                !isFinite(empaqueEnvasado) ? empaqueEnvasado = 0 : empaqueEnvasado;
 
-            $(`.tapaReferencia${i + 1}`).html(InsumosMulti[0].id_tapa);
-            $(`.tapaDescripcion${i + 1}`).html(InsumosMulti[0].tapa);
+                unidades = formatoCO(batchMulti[i]['cantidad']);
 
-            $(`.etiquetaReferencia${i + 1}`).html(InsumosMulti[0].id_etiqueta);
-            $(`.etiquetaDescripcion${i + 1}`).html(InsumosMulti[0].etiqueta);
+                // Carga datos material referencia 
 
-            $(`.envaseUnidades${i + 1}`).html(unidades);
-            $(`.tapaUnidades${i + 1}`).html(unidades);
-            $(`.etiquetaUnidades${i + 1}`).html(unidades);
+                $(`.envaseReferencia${i + 1}`).html(InsumosMulti[0].id_envase);
+                $(`.envaseDescripcion${i + 1}`).html(InsumosMulti[0].envase);
 
-            //$(`.unidades${i + 1}e`).html(empaqueEnvasado);
+                $(`.tapaReferencia${i + 1}`).html(InsumosMulti[0].id_tapa);
+                $(`.tapaDescripcion${i + 1}`).html(InsumosMulti[0].tapa);
 
-            // Carga valores sin referencia mp
+                $(`.etiquetaReferencia${i + 1}`).html(InsumosMulti[0].id_etiqueta);
+                $(`.etiquetaDescripcion${i + 1}`).html(InsumosMulti[0].etiqueta);
 
-            if (InsumosMulti[i].id_envase == 50000) {
-                $(`.envaseUnidades${i + 1}`).html(0);
-                $(`#envaseEnvasada${i}`).val(0).prop("disabled", true);
-                $(`#envaseAverias${i}`).val(0).prop("disabled", true);
-                $(`#envaseSobrante${i}`).val(0).prop("disabled", true);
-                $(`#envaseDevolucion${i}`).html(0);
-            }
+                $(`.envaseUnidades${i + 1}`).html(unidades);
+                $(`.tapaUnidades${i + 1}`).html(unidades);
+                $(`.etiquetaUnidades${i + 1}`).html(unidades);
 
-            if (InsumosMulti[i].id_tapa == 50000) {
-                $(`.tapaUnidades${i + 1}`).html(0);
-                $(`#tapaEnvasada${i}`).val(0).prop("disabled", true);
-                $(`#tapaAverias${i}`).val(0).prop("disabled", true);
-                $(`#tapaSobrante${i}`).val(0).prop("disabled", true);
-                $(`#tapaDevolucion${i}`).html(0);
-            }
+                //$(`.unidades${i + 1}e`).html(empaqueEnvasado);
 
-            if (InsumosMulti[i].id_etiqueta == 50000) {
-                $(`.etiquetaUnidades${i + 1}`).html(0);
-                $(`#etiquetaEnvasada${i}`).val(0).prop("disabled", true);
-                $(`#etiquetaAverias${i}`).val(0).prop("disabled", true);
-                $(`#etiquetaSobrante${i}`).val(0).prop("disabled", true);
-                $(`#etiquetaDevolucion${i}`).html(0);
+                // Carga valores sin referencia mp
+
+                if (InsumosMulti[0].id_envase == 50000) {
+                    $(`.envaseUnidades${i + 1}`).html(0);
+                    $(`#envaseEnvasada${i}`).val(0).prop("disabled", true);
+                    $(`#envaseAverias${i}`).val(0).prop("disabled", true);
+                    $(`#envaseSobrante${i}`).val(0).prop("disabled", true);
+                    $(`#envaseDevolucion${i}`).html(0);
+                }
+
+                if (InsumosMulti[0].id_tapa == 50000) {
+                    $(`.tapaUnidades${i + 1}`).html(0);
+                    $(`#tapaEnvasada${i}`).val(0).prop("disabled", true);
+                    $(`#tapaAverias${i}`).val(0).prop("disabled", true);
+                    $(`#tapaSobrante${i}`).val(0).prop("disabled", true);
+                    $(`#tapaDevolucion${i}`).html(0);
+                }
+
+                if (InsumosMulti[0].id_etiqueta == 50000) {
+                    $(`.etiquetaUnidades${i + 1}`).html(0);
+                    $(`#etiquetaEnvasada${i}`).val(0).prop("disabled", true);
+                    $(`#etiquetaAverias${i}`).val(0).prop("disabled", true);
+                    $(`#etiquetaSobrante${i}`).val(0).prop("disabled", true);
+                    $(`#etiquetaDevolucion${i}`).html(0);
+                }
             }
         }
 
