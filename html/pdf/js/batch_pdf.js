@@ -311,16 +311,16 @@ desinfectante = () => {
 
         if (info[i].modulo == 6) {
           $('#fsiembra').css('text-align', 'center');
-          document.getElementById(`fsiembra`).setAttribute('value', info[i].fechaRegistro);
+          document.getElementById(`fsiembra`).setAttribute('value', info[i].fecha_registro);
         }
         if (info[i].modulo == 8) {
-          document.getElementById(`fresultados`).setAttribute('value', info[i].fechaRegistro);
+          document.getElementById(`fresultados`).setAttribute('value', info[i].fecha_registro);
           
           $('#fresultados')
             .css('text-align', 'center');
         }
 
-        $(`.fecha_medio${info[i].modulo}`).html(info[i].fechaRegistro);
+        $(`.fecha_medio${info[i].modulo}`).html(info[i].fecha_registro);
       }
 
       let fecha = $('#fecha2').html();
@@ -834,7 +834,9 @@ material_envase_sobrante = async () => {
       for (let j = 0; j < info.length; j++) {
         if (multi[i].referencia == info[j]['ref_producto']) {
           if (info[j]['modulo'] == 5) {
-            if (envase == info[j]['ref_material']) {
+           let ref_material = info[j]['ref_material'].toString().trim();
+
+            if (envase.trim() == ref_material) {
               if (info[j]['ref_material'] == 50000) {
                 $(`#usadaEnvase${i + 1}`).html('0');
                 $(`#averiasEnvase${i + 1}`).html('0');
@@ -845,7 +847,7 @@ material_envase_sobrante = async () => {
                 $(`#sobranteEnvase${i + 1}`).html(info[j].sobrante);
               }
             }
-            if (tapa == info[j]['ref_material']) {
+            if (tapa.trim() == ref_material) {
               if (info[j]['ref_material'] == 50000) {
                 $(`#usadaTapa${i + 1}`).html('0');
                 $(`#averiasTapa${i + 1}`).html('0');
@@ -856,7 +858,7 @@ material_envase_sobrante = async () => {
                 $(`#sobranteTapa${i + 1}`).html(info[j + 1].sobrante);
               }
             }
-            if (etiqueta == info[j]['ref_material']) {
+            if (etiqueta.trim() == ref_material) {
               if (info[j]['ref_material'] == 50000) {
                 $(`#usadaEtiqueta${i + 1}`).html('0');
                 $(`#averiasEtiqueta${i + 1}`).html('0');
@@ -867,8 +869,7 @@ material_envase_sobrante = async () => {
                 $(`#sobranteEtiqueta${i + 1}`).html(info[j + 2].sobrante);
               }
             }
-          } else if (info[j]['modulo'] == 6) {
-            /* if (empaque == info[j]["ref_material"]) { */
+          } else if (info[j]['modulo'] == 6) { 
             if (empaque == 50000) {
               $(`#utilizada_empaque${i + 1}`).html('0');
               $(`#averias_empaque${i + 1}`).html('0');
@@ -1428,7 +1429,7 @@ const liberacion_lote = () => {
       let calidad = info['dirCa'];
       let tecnica = info['dirTec'];
 
-      if (idBatch >= 2599) fecha = info[i].fecha_registro;
+      if (idBatch >= 2599) fecha = info.fecha_registro;
       else fecha = info.fecha_nuevo_registro;
 
       $('.fechaHoraLiberacion').html(
