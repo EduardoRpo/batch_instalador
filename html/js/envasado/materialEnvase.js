@@ -8,7 +8,7 @@ $(document).ready(function() {
         for (let i = 0; i < batchMulti.length; i++) {
             InsumosMulti = await buscarDataMulti(`${ApiEnvase}${batchMulti[i]['referencia']}`);
 
-            if (InsumosMulti.length > 1) {
+            if (InsumosMulti.length > 0) {
                 empaqueEnvasado = Math.round(batchMulti[i]['cantidad'] / InsumosMulti[0].unidad_empaque);
 
                 !isFinite(empaqueEnvasado) ? empaqueEnvasado = 0 : empaqueEnvasado;
