@@ -906,7 +906,7 @@ include('modal/image.php')
                 </button>
               </h5>
             </div>
-            <div id="collapseSix" class="collapse show" aria-labelledby="headingSix" data-parent="#accordion">
+            <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
               <div class="card-body">
                 <div class="row" style="margin: 0%">
                   <div class="col-md-12 mb-3 align-self-center">
