@@ -54,7 +54,7 @@ $(document).ready(function () {
   tablaEnvasado = $('#tablaEnvasado').DataTable({
     destroy: true,
     pageLength: 100,
-    order: [[4, 'asc']],
+    order: [[5, 'asc']],
     ajax: {
       url: '/api/programacionEnvasado',
       dataSrc: '',
@@ -96,6 +96,11 @@ $(document).ready(function () {
         data: 'referencia',
         className: 'uniqueClassName',
         // visible: false,
+      },
+      {
+        title: 'Pedido',
+        data: 'pedido',
+        className: 'uniqueClassName', 
       },
       {
         title: 'Fecha Estimada Envasado',
@@ -188,7 +193,7 @@ $(document).ready(function () {
     },
     rowGroup: {
       dataSrc: function (row) {
-        return `<th class="text-center" colspan="13" style="font-weight: bold;"> ${row.propietario} </th> `;
+        return `<th class="text-center" colspan="14" style="font-weight: bold;"> ${row.propietario} </th> `;
       },
       startRender: function (rows, group) {
         return $('<tr/>').append(group);
