@@ -28,11 +28,11 @@ class EnvasadoDao
                                           eti.id as id_etiqueta, eti.nombre as etiqueta, emp.id as id_empaque, emp.nombre as empaque, 
                                           otr.id as id_otros, otr.nombre as otros, p.unidad_empaque 
                                   FROM producto p 
-                                  INNER JOIN envase env ON p.id_envase = env.id 
-                                  INNER JOIN tapa tap ON p.id_tapa = tap.id 
-                                  INNER JOIN etiqueta eti ON p.id_etiqueta = eti.id 
-                                  INNER JOIN empaque emp ON p.id_empaque = emp.id 
-                                  INNER JOIN otros otr ON p.id_otros = otr.id 
+                                  LEFT JOIN envase env ON p.id_envase = env.id 
+                                  LEFT JOIN tapa tap ON p.id_tapa = tap.id 
+                                  LEFT JOIN etiqueta eti ON p.id_etiqueta = eti.id 
+                                  LEFT JOIN empaque emp ON p.id_empaque = emp.id 
+                                  LEFT JOIN otros otr ON p.id_otros = otr.id 
                                   WHERE p.referencia = :ref;");
     $stmt->execute(['ref' => $ref]);
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
