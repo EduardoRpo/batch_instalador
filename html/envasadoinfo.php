@@ -707,6 +707,7 @@ include('modal/image.php')
                                 <td id="tapaReferencia3" class="centrado tapaReferencia3"></td>
                                 <td id="tapaDescripcion3" class="tapaDescripcion3"></td>
                                 <td id="tapaUnidades3" class="centrado unidades3 tapaUnidades3"></td>
+                                <td id="tapaUnidades3" class="centrado unidades3 tapaUnidades3"></td>
                               </tr>
                               <tr>
                                 <td id="etiquetaReferencia3" class="centrado etiquetaReferencia3"></td>
@@ -1076,7 +1077,7 @@ include('modal/image.php')
                                   <tr>
                                     <td id="tapaReferencia4" class="tapaReferencia4 centrado"></td>
                                     <td id="tapaDescripcion4" class="tapaDescripcion4" style="vertical-align: middle;"></td>
-                                    <td id="tapaUnidades" class="centrado tapaUnidades"></td>
+                                    <td id="tapaUnidades4" class="centrado tapaUnidades4"></td>
                                     <td id="tapaEnvasada4" class="centrado tapaEnvasada4"></td>
                                     <td><input type="number" id="tapaAverias4" min="1" class="form-control centrado tapaAverias4 averias4" style="width: 110px;" onkeyup="recalcular_valores();"></td>
                                     <td><input type="number" id="tapaSobrante4" min="1" class="form-control centrado tapaSobrante4 sobrante4" style="width: 110px;" onkeyup="recalcular_valores();"></td>
