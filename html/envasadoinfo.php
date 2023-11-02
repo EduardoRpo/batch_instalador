@@ -438,7 +438,7 @@ include('modal/image.php')
           </div>
 
           <div class="card" id="envasado2">
-            <div class="card-header multiLinea2" id="headingThree">
+            <div class="card-header multiLinea2" id="headingFour">
               <h5 class="mb-0">
                 <button class="btn btn-link collapsed img_ref ref_multi2" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
                   <b id="envasadoMulti2" class="img_ref">ENVASADO</b>
@@ -678,7 +678,7 @@ include('modal/image.php')
                 </button>
               </h5>
             </div>
-            <div id="collapseFive" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
               <div class="card-body">
                 <div class="row" style="margin: 1%">
                   <div class="col-md-12 mb-3 align-self-center">
@@ -898,7 +898,7 @@ include('modal/image.php')
           </div>
 
           <div class="card" id="envasado4">
-            <div class="card-header multiLinea1" id="headingSix">
+            <div class="card-header multiLinea4" id="headingSix">
               <h5 class="mb-0">
                 <button id="ref_multi4" class="btn btn-link collapsed img_ref ref_multi4" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
                   <b id="envasadoMulti4" class="img_ref">ENVASADO</b>
@@ -906,7 +906,7 @@ include('modal/image.php')
                 </button>
               </h5>
             </div>
-            <div id="collapseSix" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+            <div id="collapseSix" class="collapse show" aria-labelledby="headingSix" data-parent="#accordion">
               <div class="card-body">
                 <div class="row" style="margin: 0%">
                   <div class="col-md-12 mb-3 align-self-center">
@@ -1101,7 +1101,7 @@ include('modal/image.php')
                     <div class="row" style="margin: 1%">
 
                       <div class="col-md-4 align-self-center">
-                        <label for="devolucion_realizado" class="col-form-label">Realizado Por:</label>
+                        <label for="devolucion_realizado4" class="col-form-label">Realizado Por:</label>
                         <input type="text" class="form-control" id="devolucion_realizado4" readonly>
                       </div>
 
@@ -1110,7 +1110,7 @@ include('modal/image.php')
                       </div>
 
                       <div class="col-md-4 align-self-center">
-                        <label for="devolucion_verificado" class="col-form-label">Verificado Por:</label>
+                        <label for="devolucion_verificado4" class="col-form-label">Verificado Por:</label>
                         <input type="text" class="form-control" id="devolucion_verificado4" readonly>
                       </div>
 

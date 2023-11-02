@@ -113,7 +113,7 @@ $(document).ready(function () {
         processData: false,
         success: function (info) {
           if (info == false || info == 3) {
-            //   $(`.controlpeso_realizado${id_multi}`).prop("disabled", false);
+              $(`.controlpeso_realizado${id_multi}`).prop("disabled", false);
             return false;
           }
 
@@ -160,77 +160,80 @@ $(document).ready(function () {
   };
 
   cargardevolucionmaterial = async () => {
-    let data = new FormData();
-    data.append('idBatch', idBatch);
-    data.append('modulo', modulo);
-    data.append('ref_multi', ref_multi);
+    if (ref_multi) {
+
+      let data = new FormData();
+      data.append('idBatch', idBatch);
+      data.append('modulo', modulo);
+      data.append('ref_multi', ref_multi);
         
-    let info = await sendDataPOST('/api/loadRealizoVerificoMaterialSobrante', data, 2);
+      let info = await sendDataPOST('/api/loadRealizoVerificoMaterialSobrante', data, 2);
 
-    j = 0;
+      j = 0;
 
-    if (info == false || !info) return false;
+      if (info == false || !info) return false;
 
-    //validar en que multipresentacion se encuentra
-    if (modulo == 5) {
-      $(`#envaseEnvasada${id_multi}`).val(info.data[0].envasada);
-      $(`#envaseAverias${id_multi}`).val(info.data[0].averias);
-      $(`#envaseSobrante${id_multi}`).val(info.data[0].sobrante);
-      $(`.envasada${id_multi}`).html(info.data[0].envasada);
+      //validar en que multipresentacion se encuentra
+      if (modulo == 5) {
+        $(`#envaseEnvasada${id_multi}`).val(info.data[0].envasada);
+        $(`#envaseAverias${id_multi}`).val(info.data[0].averias);
+        $(`#envaseSobrante${id_multi}`).val(info.data[0].sobrante);
+        $(`.envasada${id_multi}`).html(info.data[0].envasada);
 
-      $(`#envaseDevolucion${id_multi}`).html(
-        parseInt($(`#envaseEnvasada${id_multi}`).val()) +
-        parseInt($(`#envaseAverias${id_multi}`).val()) +
-        parseInt($(`#envaseSobrante${id_multi}`).val())
-      );
-
-      if (info.data[1] == undefined || !info.data[1]) return false;
-      else {
-        $(`#tapaEnvasada${id_multi}`).val(info.data[1].envasada);
-        $(`#tapaAverias${id_multi}`).val(info.data[1].averias);
-        $(`#tapaSobrante${id_multi}`).val(info.data[1].sobrante);
-
-        $(`#tapaDevolucion${id_multi}`).html(
-          parseInt($(`#tapaEnvasada${id_multi}`).val()) +
-          parseInt($(`#tapaAverias${id_multi}`).val()) +
-          parseInt($(`#tapaSobrante${id_multi}`).val())
+        $(`#envaseDevolucion${id_multi}`).html(
+          parseInt($(`#envaseEnvasada${id_multi}`).val()) +
+          parseInt($(`#envaseAverias${id_multi}`).val()) +
+          parseInt($(`#envaseSobrante${id_multi}`).val())
         );
+
+        if (info.data[1] == undefined || !info.data[1]) return false;
+        else {
+          $(`#tapaEnvasada${id_multi}`).val(info.data[1].envasada);
+          $(`#tapaAverias${id_multi}`).val(info.data[1].averias);
+          $(`#tapaSobrante${id_multi}`).val(info.data[1].sobrante);
+
+          $(`#tapaDevolucion${id_multi}`).html(
+            parseInt($(`#tapaEnvasada${id_multi}`).val()) +
+            parseInt($(`#tapaAverias${id_multi}`).val()) +
+            parseInt($(`#tapaSobrante${id_multi}`).val())
+          );
+        }
+
+        if (info.data[2] == undefined || !info.data[2]) return false;
+        else {
+          $(`#etiquetaEnvasada${id_multi}`).val(info.data[2].envasada);
+          $(`#etiquetaAverias${id_multi}`).val(info.data[2].averias);
+          $(`#etiquetaSobrante${id_multi}`).val(info.data[2].sobrante);
+
+          $(`#etiquetaDevolucion${id_multi}`).html(
+            parseInt($(`#etiquetaEnvasada${id_multi}`).val()) +
+            parseInt($(`#etiquetaAverias${id_multi}`).val()) +
+            parseInt($(`#etiquetaSobrante${id_multi}`).val())
+          );
+        }
+
+        firmado(info.data[0].realizo, 5);
+        firmado(info.data[0].verifico, 6);
+
+        if (info.data[0].verifico)
+          $(`.multiLinea${id_multi}`).css('background', '#009a44');
+      } else {
+        $(`#utilizada_empaque${id_multi}`).val(info.data[0].envasada);
+        $(`#averias_empaque${id_multi}`).val(info.data[0].averias);
+        $(`#sobrante_empaque${id_multi}`).val(info.data[0].sobrante);
+        //recalcular_valores();
+        $(`#utilizada_otros${id_multi}`).val(info.data[1].envasada);
+        $(`#averias_otros${id_multi}`).val(info.data[1].averias);
+        $(`#sobrante_otros${id_multi}`).val(info.data[1].sobrante);
+        recalcular_valores();
+
+        firmado(info.data[0].realizo, 5);
+        firmado(info.data[0].verifico, 6);
       }
-
-      if (info.data[2] == undefined || !info.data[2]) return false;
-      else {
-        $(`#etiquetaEnvasada${id_multi}`).val(info.data[2].envasada);
-        $(`#etiquetaAverias${id_multi}`).val(info.data[2].averias);
-        $(`#etiquetaSobrante${id_multi}`).val(info.data[2].sobrante);
-
-        $(`#etiquetaDevolucion${id_multi}`).html(
-          parseInt($(`#etiquetaEnvasada${id_multi}`).val()) +
-          parseInt($(`#etiquetaAverias${id_multi}`).val()) +
-          parseInt($(`#etiquetaSobrante${id_multi}`).val())
-        );
+      if (modulo === 6) {
+        rendimiento_producto();
+        //cargar_conciliacion();
       }
-
-      firmado(info.data[0].realizo, 5);
-      firmado(info.data[0].verifico, 6);
-
-      if (info.data[0].verifico)
-        $(`.multiLinea${id_multi}`).css('background', '#009a44');
-    } else {
-      $(`#utilizada_empaque${id_multi}`).val(info.data[0].envasada);
-      $(`#averias_empaque${id_multi}`).val(info.data[0].averias);
-      $(`#sobrante_empaque${id_multi}`).val(info.data[0].sobrante);
-      //recalcular_valores();
-      $(`#utilizada_otros${id_multi}`).val(info.data[1].envasada);
-      $(`#averias_otros${id_multi}`).val(info.data[1].averias);
-      $(`#sobrante_otros${id_multi}`).val(info.data[1].sobrante);
-      recalcular_valores();
-
-      firmado(info.data[0].realizo, 5);
-      firmado(info.data[0].verifico, 6);
-    }
-    if (modulo === 6) {
-      rendimiento_producto();
-      //cargar_conciliacion();
     }
         
     // $.ajax({
@@ -429,7 +432,7 @@ $(document).ready(function () {
   };
 
   validarMultiCompleta = async () => {
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 5; i++) {
       id_multi = i + 1;
       await cargarfirma2();
     }
