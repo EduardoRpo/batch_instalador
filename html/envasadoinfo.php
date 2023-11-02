@@ -707,7 +707,6 @@ include('modal/image.php')
                                 <td id="tapaReferencia3" class="centrado tapaReferencia3"></td>
                                 <td id="tapaDescripcion3" class="tapaDescripcion3"></td>
                                 <td id="tapaUnidades3" class="centrado unidades3 tapaUnidades3"></td>
-                                <td id="tapaUnidades3" class="centrado unidades3 tapaUnidades3"></td>
                               </tr>
                               <tr>
                                 <td id="etiquetaReferencia3" class="centrado etiquetaReferencia3"></td>
