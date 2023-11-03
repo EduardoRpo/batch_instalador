@@ -69,13 +69,24 @@ $(document).ready(function () {
           localStorage.setItem('dataBatchPdf', JSON.stringify(data));
           localStorage.setItem('opLiberacion', 1);
 
+          // let urlActual = window.location.href;
+
+          // if (urlActual.includes('https'))
+          //   urlActual = `https://batchrecord/pdf/${idBatch}/${data.referencia}`;
+          // else urlActual = `http://batchrecord/pdf/${idBatch}/${data.referencia}`;
+
+          // window.open(urlActual, '_blank');
           let urlActual = window.location.href;
+ 
+          let urlPrincipal = urlActual.match(/https?:\/\/[^/]+/);
 
-          if (urlActual.includes('https'))
-            urlActual = `https://batchrecord/pdf/${idBatch}/${data.referencia}`;
-          else urlActual = `http://batchrecord/pdf/${idBatch}/${data.referencia}`;
-
-          window.open(urlActual, '_blank');
+          if (urlPrincipal) { 
+            let urlCompleta = `${urlPrincipal[0]}/pdf/${idBatch}/${data.referencia}`;
+  
+            window.open(urlCompleta, '_blank');
+          } else {
+            console.log("No se pudo extraer la parte principal de la URL.");
+          }
         }
       },
     });

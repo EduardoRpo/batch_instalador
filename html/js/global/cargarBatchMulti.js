@@ -103,33 +103,32 @@ $(document).ready(function () {
       data.append('modulo', modulo);
       data.append('ref_multi', ref_multi);
         
-      // let info = await sendDataPOST('/api/loadRealizoVerifico2seccion', data, 2); 
-      $.ajax({
-        type: "POST",
-        url: "/api/loadRealizoVerifico2seccion",
-        data: data,
-        contentType: false,
-        cache: false,
-        processData: false,
-        success: function (info) {
-          if (info == false || info == 3) {
-              $(`.controlpeso_realizado${id_multi}`).prop("disabled", false);
-            return false;
-          }
+      let info = await sendDataPOST('/api/loadRealizoVerifico2seccion', data, 2);
+      // $.ajax({
+      //   type: "POST",
+      //   url: "/api/loadRealizoVerifico2seccion",
+      //   data: data,
+      //   contentType: false,
+      //   cache: false,
+      //   processData: false,
+      //   success: function (info) {
+      if (info == false || info == 3) {
+        $(`.controlpeso_realizado${id_multi}`).prop("disabled", false);
+        return false;
+      }
 
-          for (i = 1; i <= info.length; i++) {
-            $(`#validarLote${id_multi}`).val(batch.numero_lote);
-            cargarEquipos();
-            if (modulo == 5) promedio();
-            firmado(info[0].realizo, 3);
-            $(`.btnEntregasParciales${id_multi}`).prop('disabled', false);
-            firmado(info[0].verifico, 4);
-          }
-          cargardevolucionmaterial();
-          if (modulo == 6) cargar_conciliacion();
-        }
-      });
-      
+      for (i = 1; i <= info.length; i++) {
+        $(`#validarLote${id_multi}`).val(batch.numero_lote);
+        cargarEquipos();
+        if (modulo == 5) promedio();
+        await firmado(info[0].realizo, 3);
+        $(`.btnEntregasParciales${id_multi}`).prop('disabled', false);
+        await firmado(info[0].verifico, 4);
+      }
+      await cargardevolucionmaterial();
+      if (modulo == 6) await cargar_conciliacion();
+      // }
+      // });
         
       // $.ajax({
       //   type: 'POST',
@@ -358,83 +357,107 @@ $(document).ready(function () {
     let parent;
 
     btn_id = $('#idbtn').val();
+    let statusInput = false;
 
     if (posicion == 1) {
       parent = $('#despeje_realizado').parent();
-      $('#despeje_realizado').remove();
-      $('#despeje_realizado')
-        .css({ background: 'lightgray', border: 'gray' })
-        .prop('disabled', true);
-      $('.despeje_verificado').prop('disabled', false);
-      $('#controlpeso_realizado1').prop('disabled', false);
+      if (parent[0].lastElementChild.tagName == 'INPUT') {
+        statusInput = true;
+        $('#despeje_realizado').remove();
+        $('#despeje_realizado')
+          .css({ background: 'lightgray', border: 'gray' })
+          .prop('disabled', true);
+        $('.despeje_verificado').prop('disabled', false);
+        $('#controlpeso_realizado1').prop('disabled', false);
+      }
     }
 
     if (posicion == 2) {
       parent = $('#despeje_verificado').parent();
-      $('#despeje_verificado').remove();
-      $('.despeje_verificado')
-        .css({ background: 'lightgray', border: 'gray' })
-        .prop('disabled', true);
+      if (parent[0].lastElementChild.tagName == 'INPUT') {
+        statusInput = true;
+        $('#despeje_verificado').remove();
+        $('.despeje_verificado')
+          .css({ background: 'lightgray', border: 'gray' })
+          .prop('disabled', true);
+      }
     }
 
     if (posicion == 3) {
       parent = $(`#controlpeso_realizado${id_multi}`).parent();
-      $(`#controlpeso_realizado${id_multi}`).remove();
-      $(`.controlpeso_realizado${id_multi}`)
-        .css({ background: 'lightgray', border: 'gray' })
-        .prop('disabled', true);
-      $(`.controlpeso_verificado${id_multi}`).prop('disabled', false);
-      $(`.devolucion_realizado${id_multi}`).prop('disabled', false);
+      if (parent[0].lastElementChild.tagName == 'INPUT') {
+        statusInput = true;
+        $(`#controlpeso_realizado${id_multi}`).remove();
+        $(`.controlpeso_realizado${id_multi}`)
+          .css({ background: 'lightgray', border: 'gray' })
+          .prop('disabled', true);
+        $(`.controlpeso_verificado${id_multi}`).prop('disabled', false);
+        $(`.devolucion_realizado${id_multi}`).prop('disabled', false);
 
-      if (modulo == 5 && flagEntregas == 0)
-        $(`.btnEntregasParciales${id_multi}`).prop('disabled', false);
+        if (modulo == 5 && flagEntregas == 0)
+          $(`.btnEntregasParciales${id_multi}`).prop('disabled', false);
+      }
     }
 
     if (posicion == 4) {
       parent = $(`#controlpeso_verificado${id_multi}`).parent();
-      $(`#controlpeso_verificado${id_multi}`).remove();
-      $(`.controlpeso_verificado${id_multi}`)
-        .css({ background: 'lightgray', border: 'gray' })
-        .prop('disabled', true);
+      if (parent[0].lastElementChild.tagName == 'INPUT') {
+        statusInput = true;
+        $(`#controlpeso_verificado${id_multi}`).remove();
+        $(`.controlpeso_verificado${id_multi}`)
+          .css({ background: 'lightgray', border: 'gray' })
+          .prop('disabled', true);
+      }
     }
 
     if (posicion == 5) {
       parent = $(`#devolucion_realizado${id_multi}`).parent();
-      $(`#devolucion_realizado${id_multi}`).remove();
-      $(`.devolucion_realizado${id_multi}`)
-        .css({ background: 'lightgray', border: 'gray' })
-        .prop('disabled', true);
-      $(`.btnEntregasParciales${id_multi}`)
-        .css({ background: 'lightgray', border: 'gray' })
-        .prop('disabled', true);
-      $(`.devolucion_verificado${id_multi}`).prop('disabled', false);
-      $(`.conciliacion_realizado${id_multi}`).prop('disabled', false);
+      if (parent[0].lastElementChild.tagName == 'INPUT') {
+        statusInput = true;
+        $(`#devolucion_realizado${id_multi}`).remove();
+        $(`.devolucion_realizado${id_multi}`)
+          .css({ background: 'lightgray', border: 'gray' })
+          .prop('disabled', true);
+        $(`.btnEntregasParciales${id_multi}`)
+          .css({ background: 'lightgray', border: 'gray' })
+          .prop('disabled', true);
+        $(`.devolucion_verificado${id_multi}`).prop('disabled', false);
+        $(`.conciliacion_realizado${id_multi}`).prop('disabled', false);
+      }
     }
 
     if (posicion == 6) {
       parent = $(`#devolucion_verificado${id_multi}`).parent();
-      $(`#devolucion_verificado${id_multi}`).remove();
-      $(`.devolucion_verificado${id_multi}`)
-        .css({ background: 'lightgray', border: 'gray' })
-        .prop('disabled', true);
+      if (parent[0].lastElementChild.tagName == 'INPUT') {
+        statusInput = true;
+        $(`#devolucion_verificado${id_multi}`).remove();
+        $(`.devolucion_verificado${id_multi}`)
+          .css({ background: 'lightgray', border: 'gray' })
+          .prop('disabled', true);
+      }
     }
 
     if (posicion == 7) {
       parent = $(`#conciliacion_realizado${id_multi}`).parent();
-      $(`#conciliacion_realizado${id_multi}`).remove();
-      $(`.conciliacion_realizado${id_multi}`)
-        .css({ background: 'lightgray', border: 'gray' })
-        .prop('disabled', true);
+      if (parent[0].lastElementChild.tagName == 'INPUT') {
+        statusInput = true;
+        $(`#conciliacion_realizado${id_multi}`).remove();
+        $(`.conciliacion_realizado${id_multi}`)
+          .css({ background: 'lightgray', border: 'gray' })
+          .prop('disabled', true);
+      }
     }
 
-    let firma = template.replace(':firma:', datos);
-    parent.append(firma).html;
+    if (statusInput == true) {
+      let firma = template.replace(':firma:', datos);
+      parent.append(firma).html;
+    }
   };
 
   validarMultiCompleta = async () => {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 4; i++) {
       id_multi = i + 1;
-      await cargarfirma2();
+      cargarfirma2();
     }
   };
 });
