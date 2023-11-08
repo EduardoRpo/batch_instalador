@@ -103,11 +103,11 @@
                     <td style="width:40px"></td>
                     <td class="text-center" style="width:50% ;height: 130px">
                         <b>Realizó</b>
-                        <img id="realizo2" src="" alt="firma_usuario">
+                        <img id="realizo2" src="" alt="firma_usuario" style="height:100px">
                     </td>
                     <td class="text-center" style="width:50% ;height: 130px">
                         <b>Verificó</b>
-                        <img id="verifico2" src="" alt="firma_usuario">
+                        <img id="verifico2" src="" alt="firma_usuario" style="height:100px">
                     </td>
                 </tr>
             </tbody>

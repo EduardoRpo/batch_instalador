@@ -257,10 +257,10 @@
                     <tr>
                         <td style="width:40px"></td>
                         <td class="text-center" style="height: 130px">
-                            <img id="f_realizo5" src="" alt="firma_usuario">
+                            <img id="f_realizo5" src="" alt="firma_usuario" style="height:100px">
                         </td>
                         <td class="text-center" style="height: 130px">
-                            <img id="f_verifico5" src="" alt="firma_usuario">
+                            <img id="f_verifico5" src="" alt="firma_usuario" style="height:100px">
                         </td>
                     </tr>
                     <tr>
@@ -476,10 +476,10 @@
                     <tr>
                         <td style="width:40px"></td>
                         <td class="text-center" style="height: 130px">
-                            <img id="multi_f_realizo2" src="" alt="firma_usuario">
+                            <img id="multi_f_realizo2" src="" alt="firma_usuario" style="height:100px">
                         </td>
                         <td class="text-center" style="height: 130px">
-                            <img id="multi_f_verifico2" src="" alt="firma_usuario">
+                            <img id="multi_f_verifico2" src="" alt="firma_usuario" style="height:100px">
                         </td>
                     </tr>
                     <tr>
@@ -695,10 +695,10 @@
                     <tr>
                         <td style="width:40px"></td>
                         <td class="text-center" style="height: 130px">
-                            <img id="multi_f_realizo3" src="" alt="firma_usuario">
+                            <img id="multi_f_realizo3" src="" alt="firma_usuario" style="height:100px">
                         </td>
                         <td class="text-center" style="height: 130px">
-                            <img id="multi_f_verifico3" src="" alt="firma_usuario">
+                            <img id="multi_f_verifico3" src="" alt="firma_usuario" style="height:100px">
                         </td>
                     </tr>
                     <tr>
@@ -914,10 +914,10 @@
                     <tr>
                         <td style="width:40px"></td>
                         <td class="text-center" style="height: 130px">
-                            <img id="multi_f_realizo4" src="" alt="firma_usuario">
+                            <img id="multi_f_realizo4" src="" alt="firma_usuario" style="height:100px">
                         </td>
                         <td class="text-center" style="height: 130px">
-                            <img id="multi_f_verifico4" src="" alt="firma_usuario">
+                            <img id="multi_f_verifico4" src="" alt="firma_usuario" style="height:100px">
                         </td>
                     </tr>
                     <tr>

@@ -47,13 +47,13 @@
             <tbody>
                 <tr>
                     <td class="text-center" style="height: 130px; width: 33.33%">
-                        <img id="f_realizoPRO" src="" alt="firma_usuario">
+                        <img id="f_realizoPRO" src="" alt="firma_usuario" style="height:100px">
                     </td>
                     <td class="text-center" style="height: 130px; width: 33.33%">
-                        <img id="f_realizoCA" src="" alt="firma_usuario">
+                        <img id="f_realizoCA" src="" alt="firma_usuario" style="height:100px">
                     </td>
                     <td class="text-center" style="height: 130px; width: 33.33%">
-                        <img id="f_realizoTEC" src="" alt="firma_usuario">
+                        <img id="f_realizoTEC" src="" alt="firma_usuario" style="height:100px">
                     </td>
                 </tr>
                 <tr>

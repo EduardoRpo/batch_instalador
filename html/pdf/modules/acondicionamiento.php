@@ -175,10 +175,10 @@
                 <tr>
                     <td style="width:40px"></td>
                     <td class="text-center" style="height: 100px">
-                        <img id="f_realizo6" src="" alt="firma_usuario">
+                        <img id="f_realizo6" src="" alt="firma_usuario" style="height:100px">
                     </td>
                     <td class="text-center" style="height: 100px">
-                        <img id="f_verifico6" src="" alt="firma_usuario">
+                        <img id="f_verifico6" src="" alt="firma_usuario" style="height:100px">
                     </td>
                 </tr>
                 <tr>
@@ -305,7 +305,7 @@
                     </tr>
                     <tr>
                         <td class="text-center" style="height: 100px" colspan="3">
-                            <img id="f_realizoConciliacion1" src="" alt="firma_usuario">
+                            <img id="f_realizoConciliacion1" src="" alt="firma_usuario" style="height:100px">
                         </td>
                     </tr>
                     <tr>
@@ -429,7 +429,7 @@
                     </tr>
                     <tr>
                         <td class="text-center" style="height: 100px" colspan="3">
-                            <img id="f_realizoConciliacion2" src="" alt="firma_usuario">
+                            <img id="f_realizoConciliacion2" src="" alt="firma_usuario" style="height:100px">
                         </td>
                     </tr>
                     <tr>
@@ -556,7 +556,7 @@
                     </tr>
                     <tr>
                         <td class="text-center" style="height: 100px" colspan="3">
-                            <img id="f_realizoConciliacion3" src="" alt="firma_usuario">
+                            <img id="f_realizoConciliacion3" src="" alt="firma_usuario" style="height:100px">
                         </td>
                     </tr>
                     <tr>
@@ -680,7 +680,7 @@
                     </tr>
                     <tr>
                         <td class="text-center" style="height: 100px" colspan="3">
-                            <img id="f_realizoConciliacion4" src="" alt="firma_usuario">
+                            <img id="f_realizoConciliacion4" src="" alt="firma_usuario" style="height:100px">
                         </td>
                     </tr>
                     <tr>

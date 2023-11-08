@@ -213,10 +213,10 @@
             <tr>
                 <td style="width:40px"></td>
                 <td class="text-center" style="height: 130px">
-                    <img id="f_realizoMicro" src="" alt="firma_usuario">
+                    <img id="f_realizoMicro" src="" alt="firma_usuario" style="height:100px">
                 </td>
                 <td class="text-center" style="height: 130px">
-                    <img id="f_verificoMicro1" src="" alt="firma_usuario">
+                    <img id="f_verificoMicro1" src="" alt="firma_usuario" style="height:100px">
                 </td>
             </tr>
             <tr>

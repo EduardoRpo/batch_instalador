@@ -158,10 +158,10 @@
                     <tr>
                         <td style="width:40px"></td>
                         <td class="text-center" style="height: 130px">
-                            <img id="f_realizo7" src="../../../admin/assets/img/firmas/ARELIS CUBIDES.jpg" alt="firma_usuario">
+                            <img id="f_realizo7" src="../../../admin/assets/img/firmas/ARELIS CUBIDES.jpg" alt="firma_usuario" style="height:100px">
                         </td>
                         <td class="text-center" style="height: 130px">
-                            <img id="f_verifico7" src="../../../admin/assets/img/firmas/LUISA VILLA.jpg" alt="firma_usuario">
+                            <img id="f_verifico7" src="../../../admin/assets/img/firmas/LUISA VILLA.jpg" alt="firma_usuario" style="height:100px">
                         </td>
                     </tr>
                 </tbody>
@@ -376,10 +376,10 @@
             <tr>
                 <td style="width:40px"></td>
                 <td class="text-center" style="height: 130px">
-                    <img id="f_realizo3" src="" alt="firma_usuario">
+                    <img id="f_realizo3" src="" alt="firma_usuario" style="height:100px">
                 </td>
                 <td class="text-center" style="height: 130px">
-                    <img id="f_verifico3" src="" alt="firma_usuario">
+                    <img id="f_verifico3" src="" alt="firma_usuario" style="height:100px">
                 </td>
             </tr>
             <tr>
