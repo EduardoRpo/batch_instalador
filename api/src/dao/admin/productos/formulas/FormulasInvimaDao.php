@@ -59,7 +59,7 @@ class FormulasInvimaDao
     {
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("DELETE FROM formula_f WHERE notif_sanitaria = :notif_sanitaria AND id_materiaprima = :ref_materiaprima");
-        $stmt->execute(['notif_sanitaria' => $notif_sanitaria['id'], 'id_materiaprima' => $dataFormula['ref_materiaprima']]);
+        $stmt->execute(['notif_sanitaria' => $notif_sanitaria['id'], 'ref_materiaprima' => $dataFormula['ref_materiaprima']]);
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
     }
 

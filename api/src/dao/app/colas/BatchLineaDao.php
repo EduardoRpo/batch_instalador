@@ -108,6 +108,26 @@ class BatchLineaDao
     return $envasado;
   }
 
+  public function findBatchProgramacionEnvasadoByFecha($fecha)
+  {
+    $connection = Connection::getInstance()->getConnection();
+    $stmt = $connection->prepare("SELECT DISTINCT batch.id_batch, batch.pedido, pp.nombre AS propietario, date_add(batch.fecha_programacion, interval 3 day) AS fecha_programacion, DATE_ADD(batch.fecha_programacion, INTERVAL 3 DAY) AS fecha_envasado, batch.numero_orden, 
+                                      batch.id_producto as referencia, p.nombre_referencia, batch.numero_lote, batch.unidad_lote, batch.tamano_lote, batch.estado, batch.multi, bcf.cantidad_firmas, bcf.total_firmas, batch.programacion_envasado, 
+                                      (SELECT COUNT(*) FROM observaciones_batch_inactivos WHERE batch = batch.id_batch) AS cant_observations, batch.ok_aprobado
+                                  FROM batch
+                                  INNER JOIN producto p ON p.referencia = batch.id_producto
+                                  INNER JOIN propietario pp ON pp.id = p.id_propietario
+                                  INNER JOIN batch_control_firmas bcf ON batch.id_batch = bcf.batch
+                                  WHERE batch.estado > 2 AND batch.estado < 8 
+                                  AND batch.id_batch AND bcf.modulo = 5 AND batch.id_batch NOT IN(SELECT batch FROM `batch_control_firmas` WHERE modulo = 5 AND cantidad_firmas = total_firmas) 
+                                  AND batch.programacion_envasado LIKE '$fecha%'");
+    $stmt->execute();
+    $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+    $envasado = $stmt->fetchAll($connection::FETCH_ASSOC);
+    $this->logger->notice("Envasado Obtenidos", array('envasado' => $envasado));
+    return $envasado;
+  }
+
   public function findBatchEnvasado()
   {
     $connection = Connection::getInstance()->getConnection();

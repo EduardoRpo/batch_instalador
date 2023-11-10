@@ -277,6 +277,11 @@ $(document).ready(function () {
           },
           success: function (data) {
             notificaciones(data);
+            $('#cmbreferencia').val('');
+            $('#txtMateria-Prima').val('');
+            $('#alias').val('');
+            $('#porcentaje').val('');
+            refreshTable();
           },
         });
       }

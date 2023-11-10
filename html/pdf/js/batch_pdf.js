@@ -1308,8 +1308,8 @@ const despachos = () => {
     success: function (response) {
       info = JSON.parse(response);
       if (info.length > 0) {
-        if (idBatch >= 2599) info[i].fecha_registro ? fecha = info[i].fecha_registro : fecha = '';
-        else fecha = info[i].fecha_nuevo_registro;
+        if (idBatch >= 2599) info[0].fecha_registro ? fecha = info[0].fecha_registro : fecha = '';
+        else fecha = info[0].fecha_nuevo_registro;
         $('#fecha7').html(info[0].fecha_nuevo_registro);
         for (let i = 0; i < info.length; i++) {
           $(`#user_entrego`).html(
@@ -1429,7 +1429,7 @@ const liberacion_lote = () => {
       let calidad = info['dirCa'];
       let tecnica = info['dirTec'];
 
-      if (idBatch >= 2599) info[i].fecha_registro ? fecha = info[i].fecha_registro : fecha = '';
+      if (idBatch >= 2599) info.fecha_registro ? fecha = info.fecha_registro : fecha = '';
       else fecha = info.fecha_nuevo_registro;
 
       $('.fechaHoraLiberacion').html(
