@@ -40,7 +40,7 @@ class AuditoriaFormulasDao
         if ($dataFormula['tbl'] == 'r')
             $new_formula_data = 'id_product: ' . $dataFormula['ref_producto'] . ', id_materiaprima: ' . $dataFormula['ref_materiaprima'];
         else
-            $new_formula_data = 'id_materiaprima: ' . $dataFormula['ref_materiaprima'];
+            $old_formula_data = 'id_product: ' . $dataFormula['ref_producto'] . ', id_materiaprima: ' . $row[0]['id_materiaprima'];
 
         if ($action == 'INSERT') {
             $sql = "INSERT INTO formulas_audit (`action`, action_time, action_user, formula_id, new_formula_data)
@@ -56,7 +56,7 @@ class AuditoriaFormulasDao
             if ($dataFormula['tbl'] == 'r')
                 $old_formula_data = 'id_product: ' . $row[0]['id_producto'] . ', id_materiaprima: ' . $row[0]['id_materiaprima'];
             else
-                $old_formula_data = 'id_materiaprima: ' . $row[0]['id_materiaprima'];
+                $old_formula_data = 'id_product: ' . $dataFormula['ref_producto'] . ', id_materiaprima: ' . $row[0]['id_materiaprima'];
 
             $sql = "INSERT INTO formulas_audit (`action`, action_time, action_user, formula_id, old_formula_data, new_formula_data)
                 VALUES (:action, NOW(), :action_user, :formula_id, :old_formula_data, :new_formula_data)";
@@ -72,7 +72,7 @@ class AuditoriaFormulasDao
             if ($dataFormula['tbl'] == 'r')
                 $old_formula_data = 'id_product: ' . $row[0]['id_producto'] . ', id_materiaprima: ' . $row[0]['id_materiaprima'];
             else
-                $old_formula_data = 'id_materiaprima: ' . $row[0]['id_materiaprima'];
+                $old_formula_data = 'id_product: ' . $dataFormula['ref_producto'] . ', id_materiaprima: ' . $row[0]['id_materiaprima'];
 
             $sql = "INSERT INTO formulas_audit (`action`, action_time, action_user, formula_id, old_formula_data)
                 VALUES (:action, NOW(), :action_user, :formula_id, :old_formula_data)";
