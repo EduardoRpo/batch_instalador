@@ -36,7 +36,7 @@ class exportarExcelDao
 
             // O lanzar un error, dependiendo de tus requisitos
             // die("El archivo 'gestionEnvase.xlsx' no existe.");
-            return array('message' => 'El archivo gestionEnvase.xlsx no existe.');
+            return array('message' => 'El archivo gestionEnvase.xlsx no existe en la ruta C:/label.');
         }
 
         /* Lee el archivo y extrae datos */
