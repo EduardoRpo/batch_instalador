@@ -111,6 +111,11 @@ $app->post('/deleteformulas', function (Request $request, Response $response, $a
   } else {
     $notif_sanitaria = $healthNotificationDao->SearchIdNotifiSanitaria($dataFormula);
     $formula = $formulasInvimasDao->deleteFormula($dataFormula, $notif_sanitaria);
+
+    $formula == null
+
+      ? $resp = array('success' => true, 'message' => 'Formula Eliminada Correctamente')
+      : $resp = array('error' => true, 'message' => 'Ocurrio un error mientras guardaba. Intente nuevamente');
   }
   $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
@@ -179,11 +184,12 @@ $app->post('/SaveFormula', function (Request $request, Response $response, $args
     }
   } else {
 
+    $rows = $formulasDao->findFormulaByRefMaterial($dataFormula, $tbl);
     $notif_sanitaria = $healthNotificationDao->SearchIdNotifiSanitaria($dataFormula);
-    $rows = $formulasInvimasDao->countRowFormulainvima($dataFormula['ref_producto'], $notif_sanitaria);
+    // $rows = $formulasInvimasDao->countRowFormulainvima($dataFormula['ref_materiaprima'], $notif_sanitaria);
 
-    if ($rows > 0) {
-      $auditoriaFormulasDao->auditFormula($dataFormula, '',  'UPDATE');
+    if ($rows != null) {
+      $auditoriaFormulasDao->auditFormula($dataFormula, $rows,  'UPDATE');
       $formula = $formulasInvimasDao->updateFormula($dataFormula, $notif_sanitaria);
 
       $formula == null

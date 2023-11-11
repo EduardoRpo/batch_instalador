@@ -214,36 +214,62 @@ function guardarFormulaMateriaPrima() {
 
     $.ajax({
         type: 'POST',
-        url: 'php/c_formulas.php',
+        url: '/api/SaveFormula',
         data: {
-            operacion,
             ref_producto,
             ref_materiaprima,
             porcentaje,
             tbl,
-            editar,
         },
-
-        success: function(r) {
-            if (r == 1) {
+        success: function (data) {
+            if (data.success) {
                 alertify.set('notifier', 'position', 'top-right')
-                alertify.success('Formula Almacenada correctamente.')
-            } else if (r == 3) {
-                alertify.set('notifier', 'position', 'top-right')
-                alertify.success('Formula actualizada correctamente.')
+                alertify.success(data.message)
                 refreshTable()
-            } else {
+            }
+            else {
                 alertify.set('notifier', 'position', 'top-right')
-                alertify.error('Error.')
+                alertify.error(data.message)
             }
             $('#frmadFormulas').toggle();
             $('#cmbreferencia').val('')
             $('#txtMateria-Prima').val('')
             $('#alias').val('')
             $('#porcentaje').val('')
-            refreshTable()
         },
-    })
+    });
+    // $.ajax({
+    //     type: 'POST',
+    //     url: 'php/c_formulas.php',
+    //     data: {
+    //         operacion,
+    //         ref_producto,
+    //         ref_materiaprima,
+    //         porcentaje,
+    //         tbl,
+    //         editar,
+    //     },
+
+    //     success: function(r) {
+    //         if (r == 1) {
+    //             alertify.set('notifier', 'position', 'top-right')
+    //             alertify.success('Formula Almacenada correctamente.')
+    //         } else if (r == 3) {
+    //             alertify.set('notifier', 'position', 'top-right')
+    //             alertify.success('Formula actualizada correctamente.')
+    //             refreshTable()
+    //         } else {
+    //             alertify.set('notifier', 'position', 'top-right')
+    //             alertify.error('Error.')
+    //         }
+    //         $('#frmadFormulas').toggle();
+    //         $('#cmbreferencia').val('')
+    //         $('#txtMateria-Prima').val('')
+    //         $('#alias').val('')
+    //         $('#porcentaje').val('')
+    //         refreshTable()
+    //     },
+    // })
 }
 
 /* Cargar datos para Actualizar registros */

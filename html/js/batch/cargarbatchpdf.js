@@ -50,6 +50,7 @@ $('[data-toggle="popover"]').popover();
 $(document).on('click', '.downloadExcelBatch', function () {
   id = this.id;
   ref = $('#ref').html();
+  localStorage.removeItem('dataBatchPdf');
   $.get(
     `/api/exportDataBatch/${id}/${ref}`,
     function (data, textStatus, jqXHR) {

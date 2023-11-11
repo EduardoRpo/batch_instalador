@@ -145,8 +145,7 @@ $(document).ready(function () {
   /* Actualizar tabla */
 
   actualizarTabla = async () => {
-    $('#tablaEnvasado').DataTable().clear();
-    $('#tablaEnvasado').DataTable().ajax.reload();
+    await loadTblEnvasado(null); 
 
     if ($.fn.dataTable.isDataTable('#tblCalcCapacidadEnvasado')) {
       $('#tblCalcCapacidadEnvasado').DataTable().destroy();

@@ -385,7 +385,7 @@ const firmas_multi = (info) => {
       for (let j = 0; j < info.length; j++)
         if (multi[i]['referencia'] == info[j]['ref_multi']) {
           /* batch 2599 incluido en adelante tomar fecha registro  */
-          if (idBatch >= 2599) fechaRegistro = info[j].fecha_registro;
+          if (idBatch >= 2599) info[i].fecha_registro ? fechaRegistro = info[i].fecha_registro : fechaRegistro = '';
           else fechaRegistro = info[j].fecha_nuevo_registro;
 
           $(`#multi_fecha${i + 1}`).html(fechaRegistro);
@@ -1282,7 +1282,7 @@ conciliacion = (multi) => {
 
         for (let i = 0; i < info.length; i++) {
           if (info[i].modulo == 6) {
-            if (idBatch >= 2599) fecha = info[i].fecha_registro;
+            if (idBatch >= 2599) info[i].fecha_registro ? fecha = info[i].fecha_registro : fecha = '';
             else fecha = info[i].fecha_nuevo_registro;
 
             $(`#f_realizoConciliacion${j + 1}`).prop('src', info[i].urlfirma); 
@@ -1308,8 +1308,8 @@ const despachos = () => {
     success: function (response) {
       info = JSON.parse(response);
       if (info.length > 0) {
-        if (idBatch >= 2599) fecha = info[i].fecha_registro;
-        else fecha = info[i].fecha_nuevo_registro;
+        if (idBatch >= 2599) info[0].fecha_registro ? fecha = info[0].fecha_registro : fecha = '';
+        else fecha = info[0].fecha_nuevo_registro;
         $('#fecha7').html(info[0].fecha_nuevo_registro);
         for (let i = 0; i < info.length; i++) {
           $(`#user_entrego`).html(
@@ -1429,7 +1429,7 @@ const liberacion_lote = () => {
       let calidad = info['dirCa'];
       let tecnica = info['dirTec'];
 
-      if (idBatch >= 2599) fecha = info.fecha_registro;
+      if (idBatch >= 2599) info.fecha_registro ? fecha = info.fecha_registro : fecha = '';
       else fecha = info.fecha_nuevo_registro;
 
       $('.fechaHoraLiberacion').html(
