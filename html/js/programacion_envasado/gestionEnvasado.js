@@ -29,8 +29,10 @@ $(document).on('click', '#btnBatchEnvasado', function (e) {
             if (r.error) {
                 alertify.set("notifier", "position", "top-right");
                 alertify.error(r.message);
-            }
-            else {
+            } else if (r.info) {
+                alertify.set("notifier", "position", "top-right");
+                alertify.notify(r.message);
+            } else {
                 alertify.set("notifier", "position", "top-right");
                 alertify.success(r.message);
             }

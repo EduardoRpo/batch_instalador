@@ -23,10 +23,21 @@ class exportarExcelDao
 
     public function readExcel()
     {
-
         $fileLabels = 'C:/label';
-        if (!file_exists($fileLabels))
+        if (!file_exists($fileLabels)) {
             mkdir($fileLabels, 0777, true);
+        }
+
+        $inputFileName = "C:/label/gestionEnvase.xlsx";
+
+        if (!file_exists($inputFileName)) {
+            // Si no existe, puedes crear un archivo vacío aquí si es necesario
+            // file_put_contents($inputFileName, '');
+
+            // O lanzar un error, dependiendo de tus requisitos
+            // die("El archivo 'gestionEnvase.xlsx' no existe.");
+            return array('message' => 'El archivo gestionEnvase.xlsx no existe.');
+        }
 
         /* Lee el archivo y extrae datos */
         $inputFileName = "C:\\label\gestionEnvase.xlsx";

@@ -89,6 +89,11 @@ $app->post('/deleteformulas', function (Request $request, Response $response, $a
   $dataFormula =  $request->getParsedBody();
 
   $dataFormula['tbl'] == 'r' ? $tbl = 'formula' : $tbl = 'formula_f';
+  if ($tbl == 'formula_f') {
+    $notif_sanitaria = $healthNotificationDao->SearchIdNotifiSanitaria($dataFormula);
+    $dataFormula['notif_sanitaria'] = $notif_sanitaria['id'];
+  }
+
   $rows = $formulasDao->findFormulaByRefMaterial($dataFormula, $tbl);
   $auditoriaFormulasDao->auditFormula($dataFormula, $rows, 'DELETE');
 
@@ -184,9 +189,9 @@ $app->post('/SaveFormula', function (Request $request, Response $response, $args
     }
   } else {
 
-    $rows = $formulasDao->findFormulaByRefMaterial($dataFormula, $tbl);
     $notif_sanitaria = $healthNotificationDao->SearchIdNotifiSanitaria($dataFormula);
-    // $rows = $formulasInvimasDao->countRowFormulainvima($dataFormula['ref_materiaprima'], $notif_sanitaria);
+    $dataFormula['notif_sanitaria'] = $notif_sanitaria['id'];
+    $rows = $formulasDao->findFormulaByRefMaterial($dataFormula, $tbl);
 
     if ($rows != null) {
       $auditoriaFormulasDao->auditFormula($dataFormula, $rows,  'UPDATE');

@@ -53,9 +53,12 @@ class FormulasDao
                                       WHERE id_materiaprima = :id_materiaprima AND id_producto = :id_producto");
             $stmt->execute(['id_materiaprima' => $dataFormula['ref_materiaprima'], 'id_producto' => $dataFormula['ref_producto']]);
         } else {
-            $stmt = $connection->prepare("SELECT * FROM formula_f
-                                      WHERE id_materiaprima = :id_materiaprima");
-            $stmt->execute(['id_materiaprima' => $dataFormula['ref_materiaprima']]);
+            $stmt = $connection->prepare("SELECT * FROM formula_f 
+                                      WHERE id_materiaprima = :id_materiaprima AND notif_sanitaria = :notif_sanitaria");
+            $stmt->execute([
+                'id_materiaprima' => $dataFormula['ref_materiaprima'],
+                'notif_sanitaria' => $dataFormula['notif_sanitaria']
+            ]);
         }
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         $formulas = $stmt->fetchAll($connection::FETCH_ASSOC);

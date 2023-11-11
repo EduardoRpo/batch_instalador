@@ -26,7 +26,8 @@ $app->post('/gestionEnvasado', function (Request $request, Response $response, $
         }
 
         $dataExcel = $exportExcelDao->readExcel();
-        $resp = $exportExcelDao->exportExcel($dataExcel, $arrayBD);
+        if (!isset($dataExcel['message']))
+            $resp = $exportExcelDao->exportExcel($dataExcel, $arrayBD);
     } else
         $resp = 1;
 
@@ -34,6 +35,8 @@ $app->post('/gestionEnvasado', function (Request $request, Response $response, $
         $resp = array('info' => true, 'message' => 'La consulta no tiene datos');
     else if ($resp > 1)
         $resp = array('success' => true, 'message' => 'El archivo de Excel se ejecutó correctamente');
+    else if (isset($dataExcel['message']))
+        $resp = array('info' => true, 'message' => $dataExcel['message']);
     else
         $resp = array('error' => true, 'message' => 'Ocurrio un error mientras ejecutaba el archivo de Excel. Intentelo nuevamente');
 
