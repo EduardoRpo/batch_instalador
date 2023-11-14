@@ -235,9 +235,10 @@ if (!empty($_POST)) {
         case 17: //busqueda_firmas
             $batch = $_POST['idBatch'];
 
-            $sql = "SELECT bf.modulo, bf.batch, bf.ref_multi, u.urlfirma as realizo, CONCAt(u.nombre, ' ', u.apellido) as nombre_realizo, us.urlfirma as verifico, CONCAt(us.nombre , ' ' , us.apellido) as nombre_verifico, bf.fecha_registro 
+            $sql = "SELECT bf.modulo, bf.batch, bf.ref_multi, IFNULL(u.urlfirma, 0) as realizo, IFNULL(CONCAt(u.nombre, ' ', u.apellido), '') as nombre_realizo, IFNULL(us.urlfirma, 0) as verifico, IFNULL(CONCAt(us.nombre , ' ' , us.apellido), '') as nombre_verifico, bf.fecha_registro 
                     FROM batch_firmas2seccion bf 
-                    INNER JOIN usuario u ON u.id = bf.realizo INNER JOIN usuario us ON us.id = bf.verifico 
+                    LEFT JOIN usuario u ON u.id = bf.realizo 
+                    LEFT JOIN usuario us ON us.id = bf.verifico 
                     WHERE bf.batch = :batch";
             $query = $conn->prepare($sql);
             $query->execute(['batch' => $batch]);
