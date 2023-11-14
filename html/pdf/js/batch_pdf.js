@@ -853,9 +853,12 @@ material_envase_sobrante = async () => {
                 $(`#averiasTapa${i + 1}`).html('0');
                 $(`#sobranteTapa${i + 1}`).html('0');
               } else {
-                $(`#usadaTapa${i + 1}`).html(info[j + 1].envasada);
-                $(`#averiasTapa${i + 1}`).html(info[j + 1].averias);
-                $(`#sobranteTapa${i + 1}`).html(info[j + 1].sobrante);
+                // $(`#usadaTapa${i + 1}`).html(info[j + 1].envasada);
+                // $(`#averiasTapa${i + 1}`).html(info[j + 1].averias);
+                // $(`#sobranteTapa${i + 1}`).html(info[j + 1].sobrante);
+                $(`#usadaTapa${i + 1}`).html(info[j].envasada);
+                $(`#averiasTapa${i + 1}`).html(info[j].averias);
+                $(`#sobranteTapa${i + 1}`).html(info[j].sobrante);
               }
             }
             if (etiqueta.trim() == ref_material) {
@@ -864,9 +867,12 @@ material_envase_sobrante = async () => {
                 $(`#averiasEtiqueta${i + 1}`).html('0');
                 $(`#sobranteEtiqueta${i + 1}`).html('0');
               } else {
-                $(`#usadaEtiqueta${i + 1}`).html(info[j + 2].envasada);
-                $(`#averiasEtiqueta${i + 1}`).html(info[j + 2].averias);
-                $(`#sobranteEtiqueta${i + 1}`).html(info[j + 2].sobrante);
+                // $(`#usadaEtiqueta${i + 1}`).html(info[j + 2].envasada);
+                // $(`#averiasEtiqueta${i + 1}`).html(info[j + 2].averias);
+                // $(`#sobranteEtiqueta${i + 1}`).html(info[j + 2].sobrante);
+                $(`#usadaEtiqueta${i + 1}`).html(info[j].envasada);
+                $(`#averiasEtiqueta${i + 1}`).html(info[j].averias);
+                $(`#sobranteEtiqueta${i + 1}`).html(info[j].sobrante);
               }
             }
           } else if (info[j]['modulo'] == 6) { 
