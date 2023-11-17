@@ -23,7 +23,7 @@ class MuestrasDao
   public function findAllByIdBatch($id_batch)
   {
     $connection = Connection::getInstance()->getConnection();
-    $stmt = $connection->prepare("SELECT * FROM batch_muestras WHERE batch = :batch");
+    $stmt = $connection->prepare("SELECT * FROM batch_muestras WHERE batch = :batch AND modulo = 5");
     $stmt->execute(['batch' => $id_batch]);
 
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));

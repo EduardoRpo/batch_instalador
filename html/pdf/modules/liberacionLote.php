@@ -39,7 +39,7 @@
                 <tr>
                     <td style="width:5%"></td>
                     <td class="text-right fechaHoraLiberacion" style="width: 45%; padding-right:10px">Fecha</td>
-                    <td id="fecha10" style="font-weight:bold; justify-self: baseline; width: 50%;"></td>
+                    <td id="fecha10" style="font-weight:bold; justify-self: baseline; width: 30%;"></td>
                 </tr>
             </tbody>
         </table>

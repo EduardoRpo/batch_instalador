@@ -157,19 +157,19 @@ const cargarMultipresentacion = (data) => {
         </tr>`);
     }
 
-    j = 1;
+    // j = 1;
     for (let i = 0; i < multi.length; i++) {
-      $(`#titulo_envasado${j}`).html(
+      $(`#titulo_envasado${i+1}`).html(
         `<b>ENVASADO <br>REFERENCIA: ${multi[i].referencia}</b>`
       );
-      j++;
+      // j++;
     }
-    j = 1;
+    // j = 1;
     for (let i = 0; i < multi.length; i++) {
-      $(`#titulo_acondicionamiento${j}`).html(
+      $(`#titulo_acondicionamiento${i+1}`).html(
         `<b>ACONDICIONAMIENTO <br>REFERENCIA: ${multi[i].referencia}</b>`
       );
-      j++;
+      // j++;
     }
   }
 };
@@ -445,12 +445,20 @@ function equipos() {
         continue;
       }
       if (data[i].tipo === 'envasadora') {
-        document.getElementById(`envasadora1`).setAttribute('value', data[i].descripcion);
-        continue;
+        for (let j = 0; j < multi.length; j++) {
+          if (multi[j].referencia == data[i].referencia) {
+            document.getElementById(`envasadora${j + 1}`).setAttribute('value', data[i].descripcion);
+            break;
+          } 
+        } 
       }
       if (data[i].tipo === 'loteadora') {
-        document.getElementById(`loteadora1`).setAttribute('value', data[i].descripcion);
-        continue;
+        for (let j = 0; j < multi.length; j++) {
+          if (multi[j].referencia == data[i].referencia) {
+            document.getElementById(`loteadora${j + 1}`).setAttribute('value', data[i].descripcion);
+            break;
+          } 
+        }  
       }
       if (data[i].tipo === 'banda') {
         document.getElementById(`banda`).setAttribute('value', data[i].descripcion);
@@ -1439,7 +1447,7 @@ const liberacion_lote = () => {
       else fecha = info.fecha_nuevo_registro;
 
       $('.fechaHoraLiberacion').html(
-        `fecha y Hora: <b>${info['fecha_nuevo_registro']}</b>`
+        `fecha y Hora: <b>${fecha}</b>`
       );
 
       info['aprobacion'] == 0
@@ -1534,12 +1542,12 @@ $(document).ready(function () {
       cargarObservaciones();
       cargar_version_PDF(data);
     
-      // let op = localStorage.getItem('opLiberacion');
-      // if (op) {
+      let op = localStorage.getItem('opLiberacion');
+      if (op) {
         await new Promise(resolve => setTimeout(resolve, 5000));
     
         downloadPdfBatch();
-      // }
+      }
     } catch (error) {
       console.error('Error al procesar la información:', error);
     }
