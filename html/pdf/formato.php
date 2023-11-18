@@ -10901,12 +10901,12 @@
             grid-gap: 1em;
         }
 
-        .etiquetasV {
+        /* .etiquetasV {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             padding: 10px;
             grid-gap: 1em;
-        }
+        } */
 
         .etiquetaUnica {
             padding: 10px;

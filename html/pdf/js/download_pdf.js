@@ -30,8 +30,8 @@ $(document).ready(function () {
       // console.log(html);
 
       form.append('html', html);
-      // form.append('pdf', `${data.numero_lote}-${data.id_batch}.pdf`);
-      form.append('pdf', `archivo.pdf`);
+      form.append('pdf', `${data.numero_lote}-${data.id_batch}.pdf`);
+      // form.append('pdf', `archivo.pdf`);
 
       let resp = await $.ajax({
         url: '/api/generate-pdf',

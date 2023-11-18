@@ -198,13 +198,16 @@ const ImprimirEtiquetasInvima = () => {
 
 const etiquetasInvima = (response) => {
   for (i = 0; i < response.length - 2; i++) {
+    let cond = i + 1 ;
+
     $('.etiquetasV').append(
-      `<table class="etiquetaUnica rounded-3" style="width:100%;">
+      `<div style="width: 31%; float: left; margin: 5px;">
+      <table class="etiquetaUnica rounded-3" style="width:100%;">
           <tr>
             <td style="width: 50%;">
               <b>OP: </b>${infoBatch.numero_orden}
             </td>
-            <td style="width: 50%;" id="peso">
+            <td style="width: 50%; font-size: 25px;">
               <b>PESO: </b>
               ${(
         ((response[i]['porcentaje'] / 100) * tamanioLote) /
@@ -234,7 +237,9 @@ const etiquetasInvima = (response) => {
           </tr>`
         : ''
       } 
-        </table>`
+        </table>
+        </div>
+        ${cond % 3 === 0 ? '<div style="clear: both;"></div>' : ''}`
     );
     // $('.etiquetasV').append(
     //   `<div class="etiquetaUnica rounded-3">
