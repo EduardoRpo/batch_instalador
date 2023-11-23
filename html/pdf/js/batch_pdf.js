@@ -414,7 +414,7 @@ const firmas_multi = (info) => {
   }
 };
 
-function condiciones_medio() {
+const condiciones_medio = () => {
   let data = { operacion: 6, idBatch };
   $.post(
     '../../html/php/servicios/c_batch_pdf.php',
@@ -432,7 +432,7 @@ function condiciones_medio() {
   );
 }
 
-function equipos() {
+const equipos = () => {
   $.get(`/api/equipos/${idBatch}`, function (data, textStatus, jqXHR) {
     if (data.length == 0) return false;
     for (i = 0; i < data.length; i++) {
@@ -488,7 +488,7 @@ function equipos() {
   });
 }
 
-function especificaciones_producto() {
+const especificaciones_producto = () => {
   $.ajax({
     url: `/api/productsDetails/${referencia}`,
     type: 'GET',
@@ -527,7 +527,7 @@ function especificaciones_producto() {
   });
 }
 
-function control_proceso() {
+const control_proceso = () => {
   $.get(`/api/controlproceso/${idBatch}`, function (info, textStatus, jqXHR) {
     if (info == 'false') return false;
     //info = data;
