@@ -922,6 +922,13 @@ material_envase_sobrante = async () => {
       }
     }
 
+    let sobrante = document.getElementsByClassName('data');
+    
+    for (let i = 0; i < sobrante.length; i++) {
+      if (!sobrante[i].innerHTML || sobrante[i].innerHTML == '')
+        sobrante[i].innerHTML = '0'; 
+    }
+
     for (i = 0; i < multi.length; i++) {
       utilizada = $(`#utilizada_empaque${i + 1}`).html();
       programada = multi[i].cantidad;
