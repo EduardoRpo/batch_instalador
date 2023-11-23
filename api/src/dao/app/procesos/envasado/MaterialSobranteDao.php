@@ -44,7 +44,8 @@ class MaterialSobranteDao
         $stmt = $connection->prepare("SELECT bms.id, bms.ref_material, bms.envasada, bms.averias, bms.sobrante, bms.ref_producto, bms.batch, bms.modulo, u.urlfirma as realizo 
                                       FROM batch_material_sobrante bms 
                                         LEFT JOIN usuario u ON u.id = bms.realizo
-                                      WHERE batch = :batch");
+                                      WHERE batch = :batch
+                                      ORDER BY `bms`.`ref_producto` DESC");
         $stmt->execute(['batch' => $id_batch]);
 
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
