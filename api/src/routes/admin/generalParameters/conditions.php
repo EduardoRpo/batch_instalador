@@ -13,6 +13,12 @@ $app->get('/conditions', function (Request $request, Response $response, $args) 
   return $response->withHeader('Content-Type', 'application/json');
 });
 
+$app->get('/conditions/{id_batch}', function (Request $request, Response $response, $args) use ($conditionsDao) {
+  $Conditions = $conditionsDao->findAllConditionsByBatch($args['id_batch']);
+  $response->getBody()->write(json_encode($Conditions, JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
+});
+
 $app->post('/saveConditions', function (Request $request, Response $response, $args) use ($conditionsDao) {
 
   $dataConditions = $request->getParsedBody();

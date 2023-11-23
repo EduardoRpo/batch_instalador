@@ -41,6 +41,17 @@ class ConditionsDao
         return $module;
     }
 
+    public function findAllConditionsByBatch($id_batch)
+    {
+        $connection = Connection::getInstance()->getConnection();
+        $stmt = $connection->prepare("SELECT fecha, temperatura, humedad, id_modulo as modulo FROM batch_condicionesmedio WHERE id_batch = :batch");
+        $stmt->execute(['batch' => $id_batch]);
+        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        $conditions = $stmt->fetchAll($connection::FETCH_ASSOC);
+        $this->logger->notice("get conditions", array('conditions' => $conditions));
+        return $conditions;
+    }
+
     public function saveConditions($dataConditions)
     {
         $connection = Connection::getInstance()->getConnection();
