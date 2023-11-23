@@ -456,7 +456,7 @@ function equipos() {
         for (let j = 0; j < multi.length; j++) {
           if (multi[j].referencia == data[i].referencia) {
             document.getElementById(`loteadora${j + 1}`).setAttribute('value', data[i].descripcion);
-            // break;
+            break;
           } 
         }  
       }

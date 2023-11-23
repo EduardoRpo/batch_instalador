@@ -468,7 +468,14 @@ include_once("modal/m_limpiar_firmas.php");
   <!-- <script src="/html/js/export/export.js"></script> -->
   <!-- <script src="/html/js/export/file.js"></script>
     <script src="/html/js/export/dataBatch.js"></script> -->
-
+  <script>
+    $(document).ready(function() {
+      localStorage.removeItem('dataBatchPdf');
+      localStorage.removeItem('orden');
+      localStorage.removeItem('tamano_lote');
+      localStorage.removeItem('opLiberacion');
+    });
+  </script>
 
 </body>
 

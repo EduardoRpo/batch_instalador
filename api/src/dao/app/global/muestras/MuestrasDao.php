@@ -49,7 +49,7 @@ class MuestrasDao
   public function findAllAcondicionamientoByBatch($id_batch)
   {
     $connection = Connection::getInstance()->getConnection();
-    $stmt = $connection->prepare("SELECT * FROM batch_muestras_acondicionamiento WHERE batch = :batch");
+    $stmt = $connection->prepare("SELECT * FROM batch_muestras_acondicionamiento WHERE batch = :batch ORDER BY `batch_muestras_acondicionamiento`.`referencia` DESC");
     $stmt->execute(['batch' => $id_batch]);
 
     $acondicionamiento = $stmt->fetchAll($connection::FETCH_ASSOC);

@@ -254,7 +254,7 @@ if (!empty($_POST)) {
                     FROM multipresentacion m 
                     INNER JOIN producto p ON p.referencia = m.referencia 
                     INNER JOIN presentacion_comercial pc ON pc.id = p.presentacion_comercial 
-                    WHERE id_batch = :batch ORDER BY `m`.`referencia` ASC";
+                    WHERE id_batch = :batch ORDER BY `m`.`referencia` DESC";
             $query = $conn->prepare($sql);
             $query->execute(['batch' => $batch]);
             $data = $query->fetchAll(PDO::FETCH_ASSOC);

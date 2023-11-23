@@ -56,7 +56,7 @@ class EquipoDao
     $stmt = $connection->prepare("SELECT *
                                   FROM batch_equipos beq 
                                   INNER JOIN equipos ON equipos.id = beq.equipo
-                                  WHERE batch = :batch");
+                                  WHERE batch = :batch ORDER BY `referencia` DESC");
     $stmt->bindValue(':batch', $batch, PDO::PARAM_INT);
     $stmt->execute();
     $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
