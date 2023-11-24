@@ -162,9 +162,9 @@ include("modal/modal_condicionesMedio.php");
                   <label for="recipient-name" class="col-form-label envasadora">Identificación Incubadora</label>
                   <label for="recipient-name" class="col-form-label loteadora">Identificación Autoclave</label>
                   <label for="recipient-name" class="col-form-label loteadora">Identificación Cabina de Flujo Laminar</label>
-                  <select class="selectpicker form-control sel_equipos sel_incubadora" id="sel_incubadora"></select>
-                  <select class="selectpicker form-control sel_equipos sel_autoclave" id="sel_autoclave"></select>
-                  <select class="selectpicker form-control sel_equipos sel_cabina" id="sel_cabina"></select>
+                  <select class="selectpicker form-control sel_equipos sel_incubadora" id="sel_incubadora" onchange="validar_condicionesMedio();"></select>
+                  <select class="selectpicker form-control sel_equipos sel_autoclave" id="sel_autoclave" onchange="validar_condicionesMedio();"></select>
+                  <select class="selectpicker form-control sel_equipos sel_cabina" id="sel_cabina" onchange="validar_condicionesMedio();"></select>
                 </div>
 
                 <div class="parametrosControl">
