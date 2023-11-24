@@ -2,6 +2,12 @@ $(document).ready(function () {
     almacenarControlProceso = async (user) => {
         modulo == 6 ? (operacion = 3) : (operacion = 1);
         let muestras = sessionStorage.getItem(presentacion + ref_multi + modulo);
+        
+        if (!muestras) {
+            toastr.error('Error al guardar las muestras');
+            return false;
+        }
+
         // result = await muestrasRecolectadas(muestras);
         let data = new FormData();
         data.append('idBatch', idBatch);

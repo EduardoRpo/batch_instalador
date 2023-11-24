@@ -414,22 +414,30 @@ const firmas_multi = (info) => {
   }
 };
 
-const condiciones_medio = () => {
-  let data = { operacion: 6, idBatch };
-  $.post(
-    '../../html/php/servicios/c_batch_pdf.php',
-    data,
-    function (data, textStatus, jqXHR) {
-      if (data == 'false') return false;
-      let info = JSON.parse(data);
+async function condiciones_medio() {
+  // let data = { operacion: 6, idBatch };
+  // $.post(
+  //   '../../html/php/servicios/c_batch_pdf.php',
+  //   data,
+  //   function (data, textStatus, jqXHR) {
+  //     if (data == 'false') return false;
+  //     let info = JSON.parse(data);
 
-      for (let i = 0; i < info.length; i++) {
-        $(`.fecha_medio${info[i].modulo}`).html(info[i].fecha);
-        $(`.temperatura${info[i].modulo}`).html(info[i].temperatura + ' °C');
-        $(`.humedad${info[i].modulo}`).html(info[i].humedad + ' %');
-      }
-    }
-  );
+  //     for (let i = 0; i < info.length; i++) {
+  //       $(`.fecha_medio${info[i].modulo}`).html(info[i].fecha);
+  //       $(`.temperatura${info[i].modulo}`).html(info[i].temperatura + ' °C');
+  //       $(`.humedad${info[i].modulo}`).html(info[i].humedad + ' %');
+  //     }
+  //   }
+  // );
+  let info = await searchData(`/api/conditions/${idBatch}`);
+  //if (info == 'false') return false;
+
+  for (let i = 0; i < info.length; i++) {
+    $(`.fecha_medio${info[i].modulo}`).html(info[i].fecha);
+    $(`.temperatura${info[i].modulo}`).html(info[i].temperatura + ' °C');
+    $(`.humedad${info[i].modulo}`).html(info[i].humedad + ' %');
+  }
 }
 
 const equipos = () => {
