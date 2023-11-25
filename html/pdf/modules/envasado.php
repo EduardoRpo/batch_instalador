@@ -571,7 +571,7 @@
                         <td class="centrado">18 - 25 °C</td>
                         <td class="centrado bold temperatura5" id="temperatura5"></td>
                         <td class="centrado">30 - 75 %</td>
-                        <td class="centrado bold fecha_medio5" id="humedad5"></td>
+                        <td class="centrado bold humedad5" id="humedad5"></td>
                     </tbody>
                 </table>
             </div>
@@ -790,7 +790,7 @@
                         <td class="centrado">18 - 25 °C</td>
                         <td class="centrado bold temperatura5" id="temperatura5"></td>
                         <td class="centrado">30 - 75 %</td>
-                        <td class="centrado bold fecha_medio5" id="humedad5"></td>
+                        <td class="centrado bold humedad5" id="humedad5"></td>
                     </tbody>
                 </table>
             </div>
