@@ -35,6 +35,12 @@ $app->get('/formulatbl', function (Request $request, Response $response, $args) 
   return $response->withHeader('Content-Type', 'application/json');
 });
 
+$app->get('/formulatblf', function (Request $request, Response $response, $args) use ($formulasDao) {
+  $formula = $formulasDao->findAllFormulasf();
+  $response->getBody()->write(json_encode($formula, JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
+});
+
 $app->get('/formulaInvimatbl/{idProducto}', function (Request $request, Response $response, $args) use ($formulasInvimasDao) {
   $formula = $formulasInvimasDao->findAllFormulaInvimaByReferencia($args["idProducto"]);
   $response->getBody()->write(json_encode($formula, JSON_NUMERIC_CHECK));

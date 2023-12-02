@@ -90,11 +90,14 @@ $(document).ready(function () {
       $('#formulas').hide();
       $('#formghost').hide();
       $('#allformulas').show();
+      $('#allformulasf').show();
       cargarTablaTodasFormulas();
+      cargarTablaTodasFormulasF();
     } else {
       $('#formulas').show();
       $('#formghost').show();
       $('#allformulas').hide();
+      $('#allformulasf').hide();
       cargarTablaFormulas(seleccion);
     }
     if (seleccion != 1) cargar_formulas_f(seleccion);

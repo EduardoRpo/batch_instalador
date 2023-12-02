@@ -120,6 +120,7 @@
           </div>
         </div>
 
+
         <div class="row" id="allformulas">
           <div class="col-md-12">
             <div class="card" id="cardformula_r">
@@ -140,11 +141,24 @@
                   </div>
                 </div>
               </div>
-              <!-- <form id="formDataExcel1" enctype="multipart/form-data">
-                <input type="file" name="datosExcel1" id="datosExcel1" class="form-control datosExcel mb-3 ml-3" style="width: 600px; display:inline-flex">
-                <button type="button" id="btnCargarExcel1" class="btn btn-primary ml-3 btnCargarExcel" onclick="comprobarExtension(this.form, this.form.datosExcel1.value, 'formula',1);" disabled="disabled">Cargar Datos</button>
-                <div id="spinner" class="spinner-border text-danger" style="display: none;"></div>
-              </form> -->
+            </div>
+          </div>
+        </div>
+
+        <div class="row" id="allformulasf">
+          <div class="col-md-12">
+            <div class="card" id="cardformula_r">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table id="tblFormulastodasf" class="table-striped row-borde" style="width:100%">
+                    <label for="">Formulas</label>
+
+                  </table>
+                  <div style="display: flex;justify-content: flex-end;">
+                    <input type="text" id="totalPorcentajeFormulas" style="border: none;margin-right:100px;text-align:center" disabled>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

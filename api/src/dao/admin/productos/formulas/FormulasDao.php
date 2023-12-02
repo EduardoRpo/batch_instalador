@@ -31,6 +31,22 @@ class FormulasDao
         return $formulas;
     }
 
+    public function findAllFormulasf()
+    {
+        $connection = Connection::getInstance()->getConnection();
+
+        $stmt = $connection->prepare("SELECT ns.id, ns.nombre, mp.referencia, mp.nombre AS MP, mp.alias, cast(AES_DECRYPT(ff.porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje 
+                                      FROM formula_f ff 
+                                      RIGHT JOIN materia_prima_f mp ON ff.id_materiaprima = mp.referencia 
+                                      RIGHT JOIN notificacion_sanitaria ns ON ns.id = ff.notif_sanitaria 
+                                      RIGHT JOIN producto p ON p.id_notificacion_sanitaria = ff.notif_sanitaria;");
+        $stmt->execute();
+        $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
+        $formulas = $stmt->fetchAll($connection::FETCH_ASSOC);
+        $this->logger->notice("formulas Obtenidas", array('formulas' => $formulas));
+        return $formulas;
+    }
+
     public function findFormulaByReference($referencia)
     {
         $connection = Connection::getInstance()->getConnection();
