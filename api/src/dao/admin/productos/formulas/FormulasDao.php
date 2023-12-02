@@ -35,11 +35,10 @@ class FormulasDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $stmt = $connection->prepare("SELECT ns.id, ns.nombre, mp.referencia, mp.nombre AS MP, mp.alias, cast(AES_DECRYPT(ff.porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje 
-                                      FROM formula_f ff 
-                                      RIGHT JOIN materia_prima_f mp ON ff.id_materiaprima = mp.referencia 
-                                      RIGHT JOIN notificacion_sanitaria ns ON ns.id = ff.notif_sanitaria 
-                                      RIGHT JOIN producto p ON p.id_notificacion_sanitaria = ff.notif_sanitaria;");
+        $stmt = $connection->prepare("SELECT ns.nombre AS notificacion, ff.notif_sanitaria, mpf.referencia, mpf.nombre AS MP, mpf.alias ,cast(AES_DECRYPT(ff.porcentaje, 'Wf[Ht^}2YL=D^DPD') as char)porcentaje
+                                      FROM formula_f ff
+                                      INNER JOIN materia_prima_f mpf ON mpf.referencia = ff.id_materiaprima
+                                      INNER JOIN notificacion_sanitaria ns ON ns.id = ff.notif_sanitaria;");
         $stmt->execute();
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         $formulas = $stmt->fetchAll($connection::FETCH_ASSOC);

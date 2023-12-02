@@ -71,8 +71,8 @@ $(document).ready(function () {
       },
 
       columns: [
-        { title: "ID NS", data: "id" },
-        { title: "Notificacion Sanitaria", data: "nombre" },
+        { title: "Notificacion Sanitaria", data: "notificacion" },
+        { title: "Id Notificacion", data: "notif_sanitaria" },
         { title: "Materia prima", data: "MP" },
         { title: "Alias", data: "alias" },
         {
