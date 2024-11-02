@@ -1,4 +1,4 @@
-$('#btnImportarPedidos').click(function(e) {
+$('#btnImportarPedidos').click(function (e) {
     e.preventDefault();
     file = $('#filePedidos').val();
 
@@ -11,21 +11,37 @@ $('#btnImportarPedidos').click(function(e) {
     importFile(selectedFile)
         .then((data) => {
             let OrderToImport = data.map((item) => {
-                if (item.Cliente.trim() !== 'Cliente')
+                let cleanItem = Object.fromEntries(
+                    Object.entries(item).map(([key, value]) => [
+                        key.trim(),
+                        value ? value.trim() : "",
+                    ])
+                );
+
+
+                if (cleanItem.Cliente.trim() !== 'Cliente')
                     return {
-                        cliente: item.Cliente.trim(),
-                        nombre_cliente: item.Nombre_Cliente.trim(),
-                        documento: item.Documento.trim(),
-                        fecha_dcto: item.Fecha_Dcto.trim(),
-                        producto: item.Producto.trim(),
-                        nombre_producto: item.Nombre_Producto_Mvto.trim(),
-                        cant_original: item.Cant_Original.trim(),
-                        cantidad: item.Cantidad.trim(),
-                        valor_pedido: item.Vlr_Venta.trim(),
+                        cliente: cleanItem.Cliente ? cleanItem.Cliente.trim() : "",
+                        nombre_cliente: cleanItem.Nombre_Cliente
+                            ? cleanItem.Nombre_Cliente.trim()
+                            : "",
+                        documento: cleanItem.Documento ? cleanItem.Documento.trim() : "",
+                        fecha_dcto: cleanItem.Fecha_Dcto ? cleanItem.Fecha_Dcto.trim() : "",
+                        producto: cleanItem.Producto ? cleanItem.Producto.trim() : "",
+                        nombre_producto: cleanItem.Nombre_Producto_Mvto
+                            ? cleanItem.Nombre_Producto_Mvto.trim()
+                            : "",
+                        cant_original: cleanItem.Cant_Original
+                            ? parseInt(cleanItem.Cant_Original.trim(), 10)
+                            : 0, // Convertir a número
+                        cantidad: cleanItem.Cantidad ? parseInt(cleanItem.Cantidad.trim(), 10) : 0, // Convertir a número
+                        valor_pedido: cleanItem.Vlr_Venta
+                            ? parseFloat(cleanItem.Vlr_Venta.trim())
+                            : 0.0, // Convertir a número
                     };
             });
 
-            OrderToImport = OrderToImport.filter(function(item) {
+            OrderToImport = OrderToImport.filter(function (item) {
                 return item !== undefined;
             });
 
@@ -42,7 +58,7 @@ checkImport = (data) => {
         type: 'POST',
         url: '/api/validacionDatosPedidos',
         data: { data: data },
-        success: function(resp) {
+        success: function (resp) {
             if (resp.error == true) {
                 alertify.error(resp.message);
                 $('#filePedidos').val('');
@@ -63,10 +79,10 @@ checkImport = (data) => {
                        </div><br><br>
                         <p>Desea continuar?</p>
                          `,
-                    function() {
+                    function () {
                         yesOption();
                     },
-                    function() {
+                    function () {
                         $('#filePedidos').val('');
                         deletePedidosSession();
                     }
@@ -77,7 +93,7 @@ checkImport = (data) => {
 };
 
 //Opcion SI
-yesOption = async() => {
+yesOption = async () => {
     response = await savePedidos();
     if (response.success) {
         actualizarTablaPedidos();
@@ -92,7 +108,7 @@ yesOption = async() => {
     //deletePedidosSession();
 };
 
-savePedidos = async() => {
+savePedidos = async () => {
     try {
         result = await $.ajax({
             url: '/api/addPedidos',
@@ -112,12 +128,12 @@ deletePedidosSession = () => {
     });
 };
 
-$('#btnPedidosNoEncontrados').click(function(e) {
+$('#btnPedidosNoEncontrados').click(function (e) {
     e.preventDefault();
     fetchindata();
 });
 
-fetchindata = async() => {
+fetchindata = async () => {
     response = await findNonExistentProducts();
 
     if (response.error) {
@@ -146,7 +162,7 @@ fetchindata = async() => {
     $('#filePedidos').val('');
 };
 
-findNonExistentProducts = async() => {
+findNonExistentProducts = async () => {
     try {
         result = await $.ajax({
             url: '/api/sendNonExistentProducts',
