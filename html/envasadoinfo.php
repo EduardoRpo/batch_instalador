@@ -1,13 +1,13 @@
 <?php
 session_start();
 $_SESSION["timeout"] = time();
-include('modal/modal_firma.php');
-include('modal/modal_cambiarContrasena.php');
-include('modal/modal_observaciones.php');
-include('modal/m_firma.php');
-include('modal/m_muestras.php');
-include('modal/modal_condicionesMedio.php');
-include('modal/image.php')
+include 'modal/modal_firma.php';
+include 'modal/modal_cambiarContrasena.php';
+include 'modal/modal_observaciones.php';
+include 'modal/m_firma.php';
+include 'modal/m_muestras.php';
+include 'modal/modal_condicionesMedio.php';
+include 'modal/image.php'
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +54,7 @@ include('modal/image.php')
   <div id="main-wrapper">
 
     <!-- HEADER -->
-    <?php include('partials/header.php'); ?>
+    <?php include 'partials/header.php';?>
     <!-- FIN HEADER -->
 
     <div class="container-fluid">
@@ -299,40 +299,123 @@ include('modal/image.php')
                     </div>
 
                     <div class="row" style="margin: 0%">
-                      <div class="col-md-12 align-self-center mb-3" style="padding-left: 0px;padding-right: 0px;">
-                        <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Control de Peso en Proceso</h3>
-                      </div>
-                      <div class="col-md-2 align-self-center" style="margin-top: 1%">
-                        <label for="recipient-name" class="col-form-label">No. Muestras</label>
-                      </div>
-                      <div class="col-md-2 align-self-center" style="margin-top: 1%">
-                        <input type="text" class="form-control" id="muestras1" style="text-align: center;" readonly>
-                      </div>
-                      <div class="col-md-1 align-self-center" style="margin-top: 1%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;" onclick="muestrasEnvase();" data-toggle="modal" data-target="#m_muestras">Iniciar</button> <!--   -->
-                      </div>
-                      <div class="col-md-1 align-self-center" style="margin-top: 1%">
-                        <label for="recipient-name" class="col-form-label">Promedio</label>
-                      </div>
-                      <div class="col-md-3 align-self-center" style="margin-top: 1%">
-                        <input type="text" class="form-control" id="promedio1" style="text-align:center;" disabled>
-                      </div>
-                      <div class="col-md-4 align-self-center">
-                        <label for="controlpeso_realizado" class="col-form-label">Realizado Por</label>
-                        <input type="text" class="form-control" id="controlpeso_realizado1" readonly>
-                      </div>
-                      <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_realizado1" id="controlpeso_realizado1" onclick="cargar(this, 'firma3')" style="width: 100%; height: 38px;">Firmar</button>
-                      </div>
+  <div class="col-md-12 align-self-center mb-3" style="padding-left: 0px; padding-right: 0px;">
+    <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Control de Peso en Proceso</h3>
+  </div>
+  <!-- Nueva fila tipo card -->
+  <div class="col-md-12 align-self-center mb-3" style="padding-left: 0px; padding-right: 0px;">
+    <div class="card" style="margin-top: 1%;">
+      <div class="card-header">
+        <h5 class="mb-0" style="text-align: center; background-color: #C0C0C0">Control de Tara en Proceso</h5>
+      </div>
+      <div class="card-body">
 
-                      <div class="col-md-4 align-self-center">
-                        <label for="controlpeso_verificado" class="col-form-label">Verificado Por</label>
-                        <input type="text" class="form-control" id="controlpeso_verificado1" readonly>
-                      </div>
-                      <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
-                        <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_verificado1" id="controlpeso_verificado1" onclick="cargar(this, 'firma4')" style="width: 100%; height: 38px;">Firmar</button>
-                      </div>
-                    </div>
+      <div class="row mb-5" style="margin-top: 1%; margin-left: 1%;">
+      <div class="col-md-2 align-self-center" style="margin-top: 1%">
+      <button type="button" class="btn waves-effect waves-light btn-danger"
+        style="width: 100%; height: 38px;"
+        onclick="abrirModal();"
+        data-toggle="modal"
+        data-target="#m_muestrasTara">
+    Ingreso Tara
+</button>
+
+<!--Modal tara-->
+<div class="modal fade" id="m_muestrasTara" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Ingreso de Tara</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <div id="horaInicio" style="font-weight: bold; margin-bottom: 10px;"></div>
+                <!-- Tabla para mostrar las entradas de Tara -->
+                <table id="pesosTable">
+    <thead>
+        <tr>
+            <th>Tara</th>
+            <!--
+            <th>Lote</th>
+            <th>Referencia</th>
+            <th>Batch</th>
+            <th>Acciones</th>-->
+        </tr>
+    </thead>
+
+
+<tbody>
+        <!-- Las filas se agregarán aquí dinámicamente -->
+    </tbody>
+</table>
+                <button type="button" class="btn btn-primary" onclick="agregarFila()">Agregar Tara</button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="guardarMuestrasTara()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+  </div>
+      <div class="col-md-3">
+    <label for="taraW" class="col-form-label text-center">Peso Tara (Max)</label>
+    <input type="text" class="form-control" id="taraWeiMax" style="text-align: center; margin-left: 5px;" readonly>
+  </div>
+  <div class="col-md-3">
+    <label for="taramin" class="col-form-label text-center">Peso Minimo a Envasar</label>
+    <input type="text" class="form-control" id="taramin" style="text-align: center;" readonly>
+  </div>
+  <div class="col-md-3">
+    <label for="taramax" class="col-form-label text-center">Peso Maximo a Envasar</label>
+    <input type="text" class="form-control" id="taramax" style="text-align: center;" readonly>
+  </div>
+
+</div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2 align-self-center" style="margin-top: 1%">
+    <label for="recipient-name" class="col-form-label">No. Muestras</label>
+  </div>
+  <div class="col-md-2 align-self-center" style="margin-top: 1%">
+    <input type="text" class="form-control" id="muestras1" style="text-align: center;" readonly>
+  </div>
+  <div class="col-md-1 align-self-center" style="margin-top: 1%">
+    <button type="button" class="btn waves-effect waves-light btn-danger" style="width: 100%; height: 38px;" onclick="muestrasEnvase();" data-toggle="modal" data-target="#m_muestras">Iniciar</button>
+  </div>
+  <div class="col-md-1 align-self-center" style="margin-top: 1%">
+    <label for="recipient-name" class="col-form-label">Promedio</label>
+  </div>
+  <div class="col-md-3 align-self-center" style="margin-top: 1%">
+    <input type="text" class="form-control" id="promedio1" style="text-align:center;" disabled>
+  </div>
+
+
+
+  <div class="col-md-4 align-self-center">
+    <label for="controlpeso_realizado" class="col-form-label">Realizado Por</label>
+    <input type="text" class="form-control" id="controlpeso_realizado1" readonly>
+  </div>
+  <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
+    <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_realizado1" id="controlpeso_realizado1" onclick="cargar(this, 'firma3')" style="width: 100%; height: 38px;">Firmar</button>
+  </div>
+
+  <div class="col-md-4 align-self-center">
+    <label for="controlpeso_verificado" class="col-form-label">Verificado Por</label>
+    <input type="text" class="form-control" id="controlpeso_verificado1" readonly>
+  </div>
+  <div class="col-md-2 align-self-center" style="margin-top: 2.8%">
+    <button type="button" class="btn waves-effect waves-light btn-danger controlpeso_verificado1" id="controlpeso_verificado1" onclick="cargar(this, 'firma4')" style="width: 100%; height: 38px;">Firmar</button>
+  </div>
+</div>
+
 
                     <div class="row" style="margin: 0%">
                       <div class="col-md-12 align-self-center mt-3" style="padding-left: 0px;padding-right: 0px;">
@@ -1159,7 +1242,7 @@ include('modal/image.php')
           <script src="/html/js/firmar/firmar1raSeccion.js"></script>
           <script src="/html/js/firmar/firmar2daSeccion.js"></script>
           <script src="/html/js/firmar/firmar2daSeccionMulti.js"></script>
-
+          <script src="/html/js/envasado/tara.js"></script>
           <script src="/html/js/envasado/envasadoinfo.js"></script>
           <script src="/html/js/envasado/validacionesEnvasado.js"></script>
           <script src="/html/js/envasado/multi.js"></script>
