@@ -350,7 +350,7 @@ include 'modal/image.php'
         <!-- Las filas se agregarán aquí dinámicamente -->
     </tbody>
 </table>
-                <button type="button" class="btn btn-primary" onclick="agregarFila()">Agregar Tara</button>
+                <!--<button type="button" class="btn btn-primary" onclick="agregarFila()">Agregar Tara</button>-->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

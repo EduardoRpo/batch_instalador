@@ -19,8 +19,8 @@
                         <tbody>
                             <!-- Las filas se agregarán aquí dinámicamente -->
                         </tbody>
-                    </table>
-                    <button type="button" class="btn btn-secondary" id='idAddFilaTara'>Agregar fila</button>
+                    </table><!-- 
+                    <button type="button" class="btn btn-secondary" id='idAddFilaTara'>Agregar fila</button>-->
                 </div>
             </div>
             <div class="modal-footer">
