@@ -1,25 +1,39 @@
 function abrirModal() {
     console.log('Ingresando a modal de tara');
+    
+    // Obtener los valores de los campos
     const url = window.location.href;
     const batch = url.split('/')[4]; 
-    const referencia = document.getElementById('in_referencia').value;
-    const lote = document.getElementById('in_numero_lote').value; 
-    const muestras1 = parseInt(document.getElementById('muestras1').value); 
-    const cantidadCampos = Math.floor(muestras1 / 2);
+    
+    const referenciaElement = document.getElementById('in_referencia');
+    const loteElement = document.getElementById('in_numero_lote');
+    const muestras1Element = document.getElementById('muestras1');
+    
+    if (!referenciaElement || !loteElement || !muestras1Element) {
+        console.error("Faltan elementos esenciales para abrir el modal.");
+        return;
+    }
 
-    console.log(`Valor de muestras1: ${muestras1}`);
-    console.log(`Cantidad de campos (muestras1 / 2): ${cantidadCampos}`);
+    const referencia = referenciaElement.value;
+    const lote = loteElement.value;
+    const muestras1 = parseInt(muestras1Element.value);
 
-    const horaInicio = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    if (isNaN(muestras1)) {
+        console.error("El valor de 'muestras1' no es un número válido.");
+        return;
+    }
 
+    const cantidadCampos = Math.floor(muestras1 / 2); // Calcular cantidad de campos
+
+    // Limpiar las filas anteriores de la tabla de pesos
     document.querySelector('#pesosTable tbody').innerHTML = '';
 
-    document.getElementById('horaInicio').textContent = `Hora de inicio: ${horaInicio}`;
-
+    // Crear las filas de la tabla de pesos según la cantidad de campos
     for (let i = 0; i < cantidadCampos; i++) {
         const row = document.createElement('tr');
         row.innerHTML = `
             <td><input type="number" class="form-control tara" placeholder="Tara ${i + 1}" required></td>
+            <td><input type="number" class="form-control densidad_final" placeholder="Densidad Final ${i + 1}" readonly></td> <!-- Solo lectura -->
             <td style="display:none;"><input type="text" class="form-control lote" value="${lote}" readonly required></td>
             <td style="display:none;"><input type="text" class="form-control referencia" value="${referencia}" readonly required></td>
             <td style="display:none;"><input type="text" class="form-control batch" value="${batch}" readonly required></td>
@@ -27,34 +41,68 @@ function abrirModal() {
         document.querySelector('#pesosTable tbody').appendChild(row);
     }
 
-    console.log(`Total de campos creados en el modal: ${cantidadCampos}`); 
+    // Agregar un event listener para el campo de Densidad Final global
+    const densidadFinalInput = document.getElementById('densidadFinalInput');
+    densidadFinalInput.addEventListener('input', function() {
+        const densidadFinalValue = densidadFinalInput.value;
+        const densidadFinalFields = document.querySelectorAll('.densidad_final');
+        
+        // Actualizar todos los campos de densidad_final con el valor ingresado
+        densidadFinalFields.forEach(function(field) {
+            field.value = densidadFinalValue;
+        });
+    });
 
-   
-    if (!$('#m_muestrasTara').hasClass('show')) {
-        $('#m_muestrasTara').modal('show');
+    // Abrir el modal
+    const modalElement = $('#m_muestrasTara');
+    if (modalElement && !modalElement.hasClass('show')) {
+        modalElement.modal('show');
+    } else {
+        console.error("El modal 'm_muestrasTara' no existe o ya está visible.");
     }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-   
-    document.getElementById('idAddFilaTara').addEventListener('click', function() {
-        console.log('Función agregarFila ejecutada');
-        agregarFila();
-    });
 
-    document.getElementById('idSaveTara').addEventListener('click', function() {
-        console.log('Función guardarMuestrasTara ejecutada');
-        guardarMuestrasTara();
-    });
+document.addEventListener('DOMContentLoaded', function() {
+    const addFilaButton = document.getElementById('idAddFilaTara');
+    if (addFilaButton) {
+        addFilaButton.addEventListener('click', function() {
+            console.log('Función agregarFila ejecutada');
+            agregarFila();
+        });
+    } else {
+        console.error("El botón 'idAddFilaTara' no existe.");
+    }
+
+    const saveTaraButton = document.getElementById('idSaveTara');
+    if (saveTaraButton) {
+        saveTaraButton.addEventListener('click', function() {
+            console.log('Función guardarMuestrasTara ejecutada');
+            guardarMuestrasTara();
+        });
+    } else {
+        console.error("El botón 'idSaveTara' no existe.");
+    }
 });
 
 
 function agregarFila() {
     console.log('Función agregarFila ejecutada');
+
     const url = window.location.href;
     const batch = url.split('/')[4]; 
-    const referencia = document.getElementById('in_referencia').value;
-    const lote = document.getElementById('in_numero_lote').value;
+    
+    // Validar que los elementos necesarios existan
+    const referenciaElement = document.getElementById('in_referencia');
+    const loteElement = document.getElementById('in_numero_lote');
+
+    if (!referenciaElement || !loteElement) {
+        console.error("Faltan los elementos 'in_referencia' o 'in_numero_lote'. No se puede agregar fila.");
+        return;
+    }
+
+    const referencia = referenciaElement.value;
+    const lote = loteElement.value;
 
     const newRow = document.createElement('tr');
     newRow.innerHTML = `
@@ -66,39 +114,41 @@ function agregarFila() {
     document.querySelector('#pesosTable tbody').appendChild(newRow);
 }
 
-
 function validarCamposTara() {
+    console.log("Iniciando validación de campos Tara...");
     const rows = document.querySelectorAll('#pesosTable tbody tr');
     for (let row of rows) {
         const taraValue = row.querySelector('.tara').value;
         if (!taraValue) {
+            console.warn('Campo Tara vacío. Se requiere que todos los campos sean completados.');
             alert('Todos los campos de Tara son obligatorios. Por favor, complete cada uno.');
-            return false; 
+            return false;
         }
     }
+    console.log("Todos los campos Tara están completos.");
     return true; 
 }
 
-
 function guardarMuestrasTara() {
-    
+    console.log("Iniciando la función 'guardarMuestrasTara'");
+
     if (!validarCamposTara()) {
+        console.log("Validación de campos Tara fallida.");
         return; 
     }
 
-    console.log('Función guardarMuestrasTara ejecutada');
     const rows = document.querySelectorAll('#pesosTable tbody tr');
     const data = [];
-    let maxTara = Number.NEGATIVE_INFINITY; 
+    let maxTara = Number.NEGATIVE_INFINITY;
 
     rows.forEach(row => {
-        const tara = parseFloat(row.querySelector('.tara').value); 
+        const tara = parseFloat(row.querySelector('.tara').value);
         const lote = row.querySelector('.lote').value;
         const referencia = row.querySelector('.referencia').value;
         const batch = row.querySelector('.batch').value;
+        const densidadFinal = parseFloat(row.querySelector('.densidad_final').value); // Obtener el valor de Densidad Final
 
-        if (!isNaN(tara)) { 
-            
+        if (!isNaN(tara) && !isNaN(densidadFinal)) { // Validar que tanto Tara como Densidad Final sean números válidos
             maxTara = Math.max(maxTara, tara);
 
             const horaInicio = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -109,16 +159,19 @@ function guardarMuestrasTara() {
                 lote: lote,
                 referencia: referencia,
                 batch: batch,
+                densidadFinal: densidadFinal, // Incluir Densidad Final en los datos
                 horaInicio: horaInicio, 
                 horaFinal: horaFinal     
             };
-            
-            console.log('Datos de la fila:', rowData); 
+
+            console.log('Datos de la fila:', rowData);
             data.push(rowData);
+        } else {
+            console.warn(`Tara o Densidad Final no válida en la fila.`);
         }
     });
 
-    console.log('Datos a enviar al servidor:', data); 
+    console.log('Datos a enviar al servidor:', data);
 
     if (maxTara !== Number.NEGATIVE_INFINITY) { 
         document.getElementById('taraWeiMax').value = maxTara; 
@@ -126,40 +179,7 @@ function guardarMuestrasTara() {
         document.getElementById('taraWeiMax').value = ''; 
     }
 
-    const minimo1Text = document.getElementById('minimo1').value;
-    const regexMinimo1 = /^([\d.]+)\s*(.*\s*-\s*\(.*\))$/; 
-    const matchMinimo1 = minimo1Text.match(regexMinimo1); 
-
-    let nuevoMinimo = '';
-    if (matchMinimo1) {
-        const valorMinimo = parseFloat(matchMinimo1[1]); 
-        const restoMinimo = matchMinimo1[2]; 
-
-        const sumaTaras = maxTara + valorMinimo;
-
-        nuevoMinimo = `${sumaTaras.toFixed(2)} ${restoMinimo}`;
-    }
-
-    document.getElementById('taramin').value = nuevoMinimo;
-
-    const maximo1Text = document.getElementById('maximo1').value; 
-    const regexMaximo1 = /^([\d.]+)\s*(.*\s*-\s*\(.*\))$/; 
-    const matchMaximo1 = maximo1Text.match(regexMaximo1);
-
-    let nuevoMaximo = '';
-    if (matchMaximo1) {
-        const valorMaximo = parseFloat(matchMaximo1[1]); 
-        const restoMaximo = matchMaximo1[2]; 
-
-        const sumaMaxTaras = maxTara + valorMaximo;
-
-        nuevoMaximo = `${sumaMaxTaras.toFixed(2)} ${restoMaximo}`;
-    }
-
-    
-    document.getElementById('taramax').value = nuevoMaximo;
-
-    
+    // Enviar los datos al servidor
     console.log('Iniciando solicitud fetch a guardar_muestras_tara.php');
     fetch('http://10.1.200.30:4433/html/guardar_muestras_tara.php', { 
         method: 'POST',
@@ -168,10 +188,7 @@ function guardarMuestrasTara() {
         },
         body: JSON.stringify(data)
     })
-    .then(response => {
-        console.log('Estado de la respuesta:', response.status); 
-        return response.json();
-    })
+    .then(response => response.json())
     .then(result => {
         console.log('Respuesta del servidor:', result); 
         if (result.success) {

@@ -1,5 +1,5 @@
-<div class="modal fade" id="m_muestrasTara" role="dialog" tabindex="-1">
-    <div class="modal-dialog modal-lg">
+<div class="modal fade" id="m_muestrasTara" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header" style="background-color: #FF8D6D !important;">
                 <h5 class="modal-title"><b>Muestras - Peso Producto</b></h5>
@@ -8,24 +8,29 @@
                 </button>
             </div>
             <div class="modal-body">
-                <label class="lblMuestras"><b>PESO ENVASE</b></label>
-                <div class="txtMuestras">
-                    <table id="pesosTable" class="table">
-                        <thead>
-                            <tr>
-                                <th>Tara</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Las filas se agregarán aquí dinámicamente -->
-                        </tbody>
-                    </table><!-- 
-                    <button type="button" class="btn btn-secondary" id='idAddFilaTara'>Agregar fila</button>-->
-                </div>
-            </div>
+    <!-- Campo para ingresar la Densidad Final global -->
+    <label class="lblMuestras"><b>Densidad Final</b></label>
+    <div class="txtMuestras">
+        <input type="number" class="form-control" id="densidadFinalInput" placeholder="Ingrese la Densidad Final" required>
+    </div>
+
+    <!-- Tabla donde se mostrarán los valores de Tara y Densidad Final -->
+    <table id="pesosTable" class="table">
+        <thead>
+            <tr>
+                <th>Tara Jesus</th>
+                <th>Densidad Final</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Las filas se agregarán aquí dinámicamente -->
+        </tbody>
+    </table>
+</div>
+
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-primary" id='idSaveTara'>Guardar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="guardarMuestrasTara()">Guardar</button>
             </div>
         </div>
     </div>

@@ -312,13 +312,15 @@ include 'modal/image.php'
 
       <div class="row mb-5" style="margin-top: 1%; margin-left: 1%;">
       <div class="col-md-2 align-self-center" style="margin-top: 1%">
-      <button type="button" class="btn waves-effect waves-light btn-danger"
+          <button type="button" class="btn waves-effect waves-light btn-danger"
         style="width: 100%; height: 38px;"
         onclick="abrirModal();"
         data-toggle="modal"
         data-target="#m_muestrasTara">
-    Ingreso Tara
-</button>
+        Ingreso Tara
+    </button>
+
+
 
 <!--Modal tara-->
 <div class="modal fade" id="m_muestrasTara" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -331,26 +333,36 @@ include 'modal/image.php'
                 </button>
             </div>
             <div class="modal-body">
-            <div id="horaInicio" style="font-weight: bold; margin-bottom: 10px;"></div>
-                <!-- Tabla para mostrar las entradas de Tara -->
-                <table id="pesosTable">
-    <thead>
-        <tr>
-            <th>Tara</th>
-            <!--
-            <th>Lote</th>
-            <th>Referencia</th>
-            <th>Batch</th>
-            <th>Acciones</th>-->
-        </tr>
-    </thead>
+                <div id="horaInicio" style="font-weight: bold; margin-bottom: 10px;"></div>
 
+                <!-- Tabla para el campo de Densidad Final -->
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-center" colspan="2"><b>Densidad Final</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="2" class="text-center">
+                                <input type="number" class="form-control" id="densidadFinalInput" placeholder="Ingrese la Densidad Final" step="0.0001" required>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
-<tbody>
-        <!-- Las filas se agregarán aquí dinámicamente -->
-    </tbody>
-</table>
-                <!--<button type="button" class="btn btn-primary" onclick="agregarFila()">Agregar Tara</button>-->
+                <!-- Tabla para mostrar las entradas de Tara y Densidad Final -->
+                <table id="pesosTable" class="table">
+                    <thead>
+                        <tr>
+                            <th>Tara</th>
+                            <th>Densidad Final</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Las filas se agregarán aquí dinámicamente -->
+                    </tbody>
+                </table>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -359,6 +371,9 @@ include 'modal/image.php'
         </div>
     </div>
 </div>
+
+
+
   </div>
       <div class="col-md-3">
     <label for="taraW" class="col-form-label text-center">Peso Tara (Max)</label>

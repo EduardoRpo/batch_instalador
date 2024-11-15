@@ -28,8 +28,8 @@ $data = json_decode(file_get_contents('php://input'), true);
 error_log("Datos recibidos: " . print_r($data, true));
 
 if (!empty($data)) {
-    // Preparar la declaración
-    $stmt = $conn->prepare("INSERT INTO plan_muestras_tara (tara, lote, referencia, batch, hora_inicio, hora_final) VALUES (?, ?, ?, ?, ?, ?)");
+    // Preparar la declaración para incluir 'densidad_final'
+    $stmt = $conn->prepare("INSERT INTO plan_muestras_tara (tara, lote, referencia, batch, hora_inicio, hora_final, densidad_final) VALUES (?, ?, ?, ?, ?, ?, ?)");
     
     if ($stmt === false) {
         error_log("Error al preparar la declaración: " . $conn->error);
@@ -45,17 +45,19 @@ if (!empty($data)) {
         $batch = $row['batch'];
         $hora_inicio = $row['horaInicio'];
         $hora_final = $row['horaFinal'];
+        $densidad_final = $row['densidadFinal']; // Obtener densidad_final
 
         // Validar los datos antes de la inserción
-        if (!is_numeric($tara) || empty($lote) || empty($referencia) || empty($batch) || empty($hora_inicio) || empty($hora_final)) {
+        if (!is_numeric($tara) || empty($lote) || empty($referencia) || empty($batch) || empty($hora_inicio) || empty($hora_final) || !is_numeric($densidad_final)) {
             error_log("Datos inválidos: " . print_r($row, true));
             continue; // O puedes decidir salir del bucle
         }
 
         // Imprimir los valores de cada iteración para depuración
-        error_log("Insertando fila: Tara: $tara, Lote: $lote, Referencia: $referencia, Batch: $batch, Hora Inicio: $hora_inicio, Hora Final: $hora_final");
+        error_log("Insertando fila: Tara: $tara, Lote: $lote, Referencia: $referencia, Batch: $batch, Hora Inicio: $hora_inicio, Hora Final: $hora_final, Densidad Final: $densidad_final");
 
-        $stmt->bind_param("dsssss", $tara, $lote, $referencia, $batch, $hora_inicio, $hora_final);
+        // Vincular los parámetros a la consulta SQL
+        $stmt->bind_param("dsssssd", $tara, $lote, $referencia, $batch, $hora_inicio, $hora_final, $densidad_final);
 
         if (!$stmt->execute()) {
             error_log("Error al ejecutar la declaración: " . $stmt->error);
