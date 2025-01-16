@@ -352,7 +352,7 @@
 
     <div class="subtitle"><label for="">Observaciones</label></div>
     <div id="obs3" class="ml-5 mt-3 mb-3"></div>
-    <div class="subtitle"><label for=""></label></div>
+    <!--<div class="subtitle"><label for=""></label></div> -->
 
     <!-- <div class="firmas" id="firmas3">
         <label class="mr-3" style="justify-self: end;">Fecha</label>
@@ -366,6 +366,14 @@
         <label id="user_realizo3"></label>
         <label id="user_verifico3"></label>
     </div> -->
+    <div class="subtitle"><label for="">Anexos</label></div>
+    <div id="obs3" class="ml-5 mt-3 mb-3">
+        <ul>
+            <li>Anexo 4: Instructivo de Preparación</li>
+            
+        </ul>
+    </div>
+    <div class="subtitle"><label for=""></label></div>
     <table class="mt-3" id="firmas3" style="width:100%">
         <tbody>
             <tr>

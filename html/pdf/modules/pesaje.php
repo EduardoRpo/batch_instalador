@@ -154,6 +154,17 @@
             <label id="user_realizo2"></label>
             <label id="user_verifico2"></label>
         </div> -->
+        <div class="subtitle"><label for="">Anexos</label>
+            
+        </div>
+        <div id="obs2" class="ml-5 mt-3 mb-3">
+        <ul>
+            <li>Anexo 1: Orden de Pesaje</li>
+            <li>Anexo 2: Instructivo de Pesaje</li>
+            <li>Anexo 3: Relación Lostes Materias Primas Utilizadas</li>
+        </ul>
+        </div>
+        <div class="subtitle"><label for=""></label></div>
         <table class="mt-3" style="width:100%">
             <tbody>
                 <tr>

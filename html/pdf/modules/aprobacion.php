@@ -196,6 +196,14 @@
         <div class="subtitle"><label for="">Observaciones</label></div>
         <div id="obs4" class="ml-5 mt-3 mb-3"></div>
 
+        <div class="subtitle"><label for="">Anexos</label></div>
+        <div id="obs4" class="ml-5 mt-3 mb-3">
+            <ul>
+                <li>Anexo 5: Instructivo Toma de Muestra</li>
+                
+            </ul>
+        </div>
+
         <div class="subtitle"><label for="">Cierre</label></div>
         <!-- <div class="firmas" id="firmas4">
             <label class="mr-3" style="justify-self: end;">Fecha</label>
