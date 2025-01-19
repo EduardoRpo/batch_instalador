@@ -1,4 +1,4 @@
-<div class="subtitleProcess"><label for=""> <b>APROBACIÓN</b></label></div>
+<div class="subtitleProcess"><label for=""> <b>APROBACIÓN DEL GRANEL</b></label></div>
 <div class="card mt-3">
     <div class="card-header centrado"><b>5. APROBACIÓN CONTROL CALIDAD FISICOQUÍMICO PARA ENVASADO</b></div>
     <div class="alertas" id="alert_pesaje"></div>

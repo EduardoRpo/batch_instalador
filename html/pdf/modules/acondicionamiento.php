@@ -120,7 +120,13 @@
                 </tbody>
             </table>
         </div>
-
+        <div class="subtitle"><label for="">Anexos</label></div>
+            <div id="obs3" class="ml-5 mt-3 mb-3">
+                <ul>
+                    <li>Anexo 6: Instructivo de Envasado y Acondicionamiento</li>
+                    
+                </ul>
+        </div>
         <div class="subtitle"><label for="">Control de Proceso</label></div>
         <div class="alertas" id="alert_pesaje">
             <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">

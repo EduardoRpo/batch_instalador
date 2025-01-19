@@ -42,7 +42,7 @@
                 <td style="width:40px"></td>
                 <td style="width:227px">Referencia:</td>
                 <td style="width:227px" class="bold ref"></td>
-                <td style="width:320px">Nombre Referencia:</td>
+                <td style="width:320px">Nombre Producto:</td>
                 <td id="nref"></td>
             </tr>
             <tr>
@@ -78,15 +78,15 @@
                 <td style="width:40px"></td>
                 <td style="width:227px">Fecha:</td>
                 <td style="width:227px" class="fecha"></td>
-                <td style="width:320px">Tamaño del Lote por presentación (kg):</td>
+                <td style="width:320px">Tamaño del lote total (kg):</td>
                 <td id="tamanol"></td>
             </tr>
             <tr>
                 <td style="width:40px"></td>
-                <td style="width:227px">Tamaño del lote total (kg):</td>
+                <!--<td style="width:227px">Tamaño del lote total (kg):</td>
                 <td style="width:227px" id="tamanolt"></td>
                 <td style="width:320px">Unidades por Lote solicitadas:</td>
-                <td id="unidadesLote"></td>
+                <td id="unidadesLote"></td> -->
             </tr>
         </tbody>
     </table>
@@ -95,7 +95,7 @@
         <thead class="mb-3">
             <tr>
                 <th style="width:3%"></th>
-                <th>Multipresentación</th>
+                <th style="white-space: nowrap;">Presentación Comercial para Envasado</th>
             </tr>
         </thead>
         <tbody id="InfoMultipresentacion">
@@ -108,7 +108,7 @@
                 <td style="width:40px"></td>
                 <td style="width:227px">Autorizado por:</td>
                 <td id="autorizado">
-                    <b>Jefe Producción / Director Técnico</b>
+                    <b>Area Producción / Tecnica</b>
                 </td>
                 <td></td>
             </tr>

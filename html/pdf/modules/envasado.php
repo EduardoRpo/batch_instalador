@@ -45,6 +45,14 @@
                 </tbody>
             </table>
         </div>
+
+        <div class="subtitle"><label for="">Anexos</label></div>
+            <div id="obsEnvasMulti1" class="ml-5 mt-3 mb-3">
+                <ul>
+                    <li>Anexo 6: Instructivo de Envasado y Acondicionamiento</li>
+                    
+                </ul>
+            </div>
         <div id="multi-envasado1">
             <div class="subtitleProcess" id="subtitle_envasado1"><label for="" id="titulo_envasado1"> <b></b></label></div>
             <div class="subtitle"><label for="">6.2 Entrega Material de Empaque</label></div>
@@ -111,7 +119,6 @@
                 <label for="">Identificacion Loteadora</label>
                 <input type="text" class="form-control loteadora" id="loteadora1">
             </div> -->
-
             <div class="subtitle"><label for="">Condiciones del Medio</label></div>
             <div class="table-responsive p-3">
                 <table class="table table-striped table-bordered">
@@ -904,7 +911,7 @@
                 <label id="multi_user_realizo4">Sin Firmar</label>
                 <label id="multi_user_verifico4">Sin Firmar</label>
             </div> -->
-            <table class="mt-3" id="firmas3" style="width:100%">
+            <table class="mt-3" id="firmas4" style="width:100%">
                 <tbody>
                     <tr>
                         <td style="width:5%"></td>
