@@ -215,8 +215,8 @@ include 'modal/image.php'
               <h5 class="mb-0">
                 <button class="btn btn-link collapsed ref_multi1" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" style="width: 100%">
                   <b id="envasadoMulti1" class="img_ref">ENVASADO</b>
-                  <input type="text" class="ref1" id="ref1" hidden>
-                </button>
+                  <input type="text" class="ref1" id="ref1" hidden >
+                </button> 
               </h5>
             </div>
             <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
@@ -297,28 +297,33 @@ include 'modal/image.php'
                         <input type="text" class="form-control centrado maximo" id="maximo1" readonly>
                       </div>
                     </div>
-
+                    
                     <div class="row" style="margin: 0%">
   <div class="col-md-12 align-self-center mb-3" style="padding-left: 0px; padding-right: 0px;">
-    <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Control de Peso en Proceso</h3>
+    <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Control de Tara</h3>
   </div>
+
+  <!--Boton obtener data tara-->
+  <button type="button" class="btn btn-primary"  onclick="obtenerValoresTara()" >Resultado Tara</button>
   <!-- Nueva fila tipo card -->
   <div class="col-md-12 align-self-center mb-3" style="padding-left: 0px; padding-right: 0px;">
     <div class="card" style="margin-top: 1%;">
       <div class="card-header">
-        <h5 class="mb-0" style="text-align: center; background-color: #C0C0C0">Control de Tara en Proceso</h5>
+      <p style='color: #ffff;'>*Se utiliza el peso del envase (minimo) para calcular los gramos min/max a envasar</p>
       </div>
       <div class="card-body">
 
       <div class="row mb-5" style="margin-top: 1%; margin-left: 1%;">
       <div class="col-md-2 align-self-center" style="margin-top: 1%">
           <button type="button" class="btn waves-effect waves-light btn-danger"
-        style="width: 100%; height: 38px;"
+        style="width: 50%; height: 38px;"
         onclick="abrirModal();"
-        data-toggle="modal"
+        data-toggle="modal" id="btnAbrirModal" data-shared-value=""
         data-target="#m_muestrasTara">
         Ingreso Tara
     </button>
+
+    <button onclick="TestJesus()" style="display:none;">Mostrar Valor</button>
 
 
 
@@ -375,19 +380,28 @@ include 'modal/image.php'
 
 
   </div>
-      <div class="col-md-3">
-    <label for="taraW" class="col-form-label text-center">Peso Tara (Max)</label>
-    <input type="text" class="form-control" id="taraWeiMax" style="text-align: center; margin-left: 5px;" readonly>
+  <div class="col-md-2">
+    <label for="taraW" class="col-form-label text-center">Densidad Aprobada Final</label>
+    <input type="text" class="form-control" id="densidadAproF" style="text-align: center; margin-left: 1px; font-weight: bold;" readonly>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-2">
+    <label for="taraW" class="col-form-label text-center">Peso Envase (Min)</label>
+    <input type="text" class="form-control" id="taraWeiMin" style="text-align: center; margin-left: 2px; font-weight: bold;" readonly>
+  </div>
+      <div class="col-md-2">
+    <label for="taraW" class="col-form-label text-center">Peso Envase (Max)</label>
+    <input type="text" class="form-control" id="taraWeiMax" style="text-align: center; margin-left: 2px; font-weight: bold;" readonly>
+  </div>
+  <div class="col-md-2">
     <label for="taramin" class="col-form-label text-center">Peso Minimo a Envasar</label>
-    <input type="text" class="form-control" id="taramin" style="text-align: center;" readonly>
+    <input type="text" class="form-control" id="taramin" style="text-align: center; color:#067e0b; font-weight: bold;" readonly>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-2">
     <label for="taramax" class="col-form-label text-center">Peso Maximo a Envasar</label>
-    <input type="text" class="form-control" id="taramax" style="text-align: center;" readonly>
+    <input type="text" class="form-control" id="taramax" style="text-align: center; color:#df0909; font-weight: bold;" readonly>
   </div>
 
+  
 </div>
 
 
@@ -395,6 +409,10 @@ include 'modal/image.php'
 
       </div>
     </div>
+  </div>
+
+  <div class="col-md-12 align-self-center mb-3" style="padding-left: 0px;padding-right: 0px;">
+      <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Control de Peso en Proceso</h3>
   </div>
   <div class="col-md-2 align-self-center" style="margin-top: 1%">
     <label for="recipient-name" class="col-form-label">No. Muestras</label>
@@ -627,10 +645,126 @@ include 'modal/image.php'
 
                     </div>
 
+              
+
+
                     <div class="row" style="margin: 0%">
-                      <div class="col-md-12 align-self-center mb-3" style="padding-left: 0px;padding-right: 0px;">
-                        <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Control de Peso en Proceso</h3>
-                      </div>
+
+                    <!--Segunda tara-->
+                    <div class="col-md-12 align-self-center mb-3" style="padding-left: 0px; padding-right: 0px;">
+    <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Control de Tara</h3>
+  </div>
+
+  <!--Boton obtener data tara-->
+  <button type="button" class="btn btn-primary"  onclick="obtenerValoresTara2()" >Resultado Tara</button>
+  <!-- Nueva fila tipo card -->
+  <div class="col-md-12 align-self-center mb-3" style="padding-left: 0px; padding-right: 0px;">
+    <div class="card" style="margin-top: 1%;">
+      <div class="card-header">
+      <p style='color: #ffff;'>*Se utiliza el peso del envase (minimo) para calcular los gramos min/max a envasar</p>
+      </div>
+      <div class="card-body">
+
+      <div class="row mb-5" style="margin-top: 1%; margin-left: 1%;">
+      <div class="col-md-2 align-self-center" style="margin-top: 1%">
+          <button type="button" class="btn waves-effect waves-light btn-danger"
+        style="width: 50%; height: 38px;"
+        onclick="abrirModal2();"
+        data-toggle="modal" id="btnAbrirModal2" data-shared-value=""
+        data-target="#m_muestrasTara2">
+        Ingreso Tara
+    </button>
+
+    <button onclick="TestJesus2()" style="display:none;">Mostrar Valor</button>
+
+
+
+<!--Modal tara-->
+<div class="modal fade" id="m_muestrasTara2" tabindex="-1" role="dialog" aria-labelledby="modalLabel2" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel2">Ingreso de Tara</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="horaInicio" style="font-weight: bold; margin-bottom: 10px;"></div>
+
+                <!-- Tabla para el campo de Densidad Final -->
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-center" colspan="2"><b>Densidad Final</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="2" class="text-center">
+                                <input type="number" class="form-control" id="densidadFinalInput2" placeholder="Ingrese la Densidad Final" step="0.0001" required>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Tabla para mostrar las entradas de Tara y Densidad Final -->
+                <table id="pesosTable2" class="table">
+                    <thead>
+                        <tr>
+                            <th>Tara</th>
+                            <th>Densidad Final</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Las filas se agregarán aquí dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="guardarMuestrasTara2()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+  </div>
+  <div class="col-md-2">
+    <label for="taraW" class="col-form-label text-center">Densidad Aprobada Final</label>
+    <input type="text" class="form-control" id="densidadAproF2" style="text-align: center; margin-left: 1px; font-weight: bold;" readonly>
+  </div>
+  <div class="col-md-2">
+    <label for="taraW" class="col-form-label text-center">Peso Envase (Min)</label>
+    <input type="text" class="form-control" id="taraWeiMin2" style="text-align: center; margin-left: 2px; font-weight: bold;" readonly>
+  </div>
+      <div class="col-md-2">
+    <label for="taraW" class="col-form-label text-center">Peso Envase (Max)</label>
+    <input type="text" class="form-control" id="taraWeiMax2" style="text-align: center; margin-left: 2px; font-weight: bold;" readonly>
+  </div>
+  <div class="col-md-2">
+    <label for="taramin2" class="col-form-label text-center">Peso Minimo a Envasar</label>
+    <input type="text" class="form-control" id="taramin2" style="text-align: center; color:#067e0b; font-weight: bold;" readonly>
+  </div>
+  <div class="col-md-2">
+    <label for="taramax2" class="col-form-label text-center">Peso Maximo a Envasar</label>
+    <input type="text" class="form-control" id="taramax2" style="text-align: center; color:#df0909; font-weight: bold;" readonly>
+  </div>
+
+  
+</div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+                    <!---->
+
                       <div class="col-md-2 align-self-center" style="margin-top: 1%">
                         <label for="recipient-name" class="col-form-label">No. Muestras</label>
                       </div>
@@ -858,6 +992,120 @@ include 'modal/image.php'
                     </div>
 
                     <div class="row" style="margin: 1%">
+
+                    <!--tercera tara-->
+                                <div class="col-md-12 align-self-center mb-3" style="padding-left: 0px; padding-right: 0px;">
+    <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Control de Tara</h3>
+  </div>
+
+  <!--Boton obtener data tara-->
+  <button type="button" class="btn btn-primary"  onclick="obtenerValoresTara3()" >Resultado Tara</button>
+  <!-- Nueva fila tipo card -->
+  <div class="col-md-12 align-self-center mb-3" style="padding-left: 0px; padding-right: 0px;">
+    <div class="card" style="margin-top: 1%;">
+      <div class="card-header">
+      <p style='color: #ffff;'>*Se utiliza el peso del envase (minimo) para calcular los gramos min/max a envasar</p>
+      </div>
+      <div class="card-body">
+
+      <div class="row mb-5" style="margin-top: 1%; margin-left: 1%;">
+      <div class="col-md-2 align-self-center" style="margin-top: 1%">
+          <button type="button" class="btn waves-effect waves-light btn-danger"
+        style="width: 50%; height: 38px;"
+        onclick="abrirModal3();"
+        data-toggle="modal" id="btnAbrirModal3" data-shared-value=""
+        data-target="#m_muestrasTara3">
+        Ingreso Tara
+    </button>
+
+    <button onclick="TestJesus3()" style="display:none;">Mostrar Valor</button>
+
+
+
+<!--Modal tara-->
+<div class="modal fade" id="m_muestrasTara3" tabindex="-1" role="dialog" aria-labelledby="modalLabel3" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel3">Ingreso de Tara</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="horaInicio" style="font-weight: bold; margin-bottom: 10px;"></div>
+
+                <!-- Tabla para el campo de Densidad Final -->
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-center" colspan="2"><b>Densidad Final</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="2" class="text-center">
+                                <input type="number" class="form-control" id="densidadFinalInput3" placeholder="Ingrese la Densidad Final" step="0.0001" required>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Tabla para mostrar las entradas de Tara y Densidad Final -->
+                <table id="pesosTable3" class="table">
+                    <thead>
+                        <tr>
+                            <th>Tara</th>
+                            <th>Densidad Final</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Las filas se agregarán aquí dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="guardarMuestrasTara3()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+  </div>
+  <div class="col-md-2">
+    <label for="taraW" class="col-form-label text-center">Densidad Aprobada Final</label>
+    <input type="text" class="form-control" id="densidadAproF3" style="text-align: center; margin-left: 1px; font-weight: bold;" readonly>
+  </div>
+  <div class="col-md-2">
+    <label for="taraW" class="col-form-label text-center">Peso Envase (Min)</label>
+    <input type="text" class="form-control" id="taraWeiMin3" style="text-align: center; margin-left: 2px; font-weight: bold;" readonly>
+  </div>
+      <div class="col-md-2">
+    <label for="taraW" class="col-form-label text-center">Peso Envase (Max)</label>
+    <input type="text" class="form-control" id="taraWeiMax3" style="text-align: center; margin-left: 2px; font-weight: bold;" readonly>
+  </div>
+  <div class="col-md-2">
+    <label for="taramin3" class="col-form-label text-center">Peso Minimo a Envasar</label>
+    <input type="text" class="form-control" id="taramin3" style="text-align: center; color:#067e0b; font-weight: bold;" readonly>
+  </div>
+  <div class="col-md-2">
+    <label for="taramax3" class="col-form-label text-center">Peso Maximo a Envasar</label>
+    <input type="text" class="form-control" id="taramax3" style="text-align: center; color:#df0909; font-weight: bold;" readonly>
+  </div>
+
+  
+</div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+                    <!---->
                       <div class="col-md-12 align-self-center mb-3" style="padding-left: 0px;padding-right:0px">
                         <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Control de Peso en Proceso</h3>
                       </div>
@@ -1086,6 +1334,119 @@ include 'modal/image.php'
                     </div>
 
                     <div class="row" style="margin: 0%">
+                    <!--cuarta tara-->
+                    <div class="col-md-12 align-self-center mb-3" style="padding-left: 0px; padding-right: 0px;">
+    <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Control de Tara</h3>
+  </div>
+
+  <!--Boton obtener data tara-->
+  <button type="button" class="btn btn-primary"  onclick="obtenerValoresTara4()" >Resultado Tara</button>
+  <!-- Nueva fila tipo card -->
+  <div class="col-md-12 align-self-center mb-3" style="padding-left: 0px; padding-right: 0px;">
+    <div class="card" style="margin-top: 1%;">
+      <div class="card-header">
+      <p style='color: #ffff;'>*Se utiliza el peso del envase (minimo) para calcular los gramos min/max a envasar</p>
+      </div>
+      <div class="card-body">
+
+      <div class="row mb-5" style="margin-top: 1%; margin-left: 1%;">
+      <div class="col-md-2 align-self-center" style="margin-top: 1%">
+          <button type="button" class="btn waves-effect waves-light btn-danger"
+        style="width: 50%; height: 38px;"
+        onclick="abrirModal4();"
+        data-toggle="modal" id="btnAbrirModal4" data-shared-value=""
+        data-target="#m_muestrasTara4">
+        Ingreso Tara
+    </button>
+
+    <button onclick="TestJesus4()" style="display:none;">Mostrar Valor</button>
+
+
+
+<!--Modal tara-->
+<div class="modal fade" id="m_muestrasTara4" tabindex="-1" role="dialog" aria-labelledby="modalLabel4" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel4">Ingreso de Tara</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="horaInicio" style="font-weight: bold; margin-bottom: 10px;"></div>
+
+                <!-- Tabla para el campo de Densidad Final -->
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-center" colspan="2"><b>Densidad Final</b></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="2" class="text-center">
+                                <input type="number" class="form-control" id="densidadFinalInput4" placeholder="Ingrese la Densidad Final" step="0.0001" required>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Tabla para mostrar las entradas de Tara y Densidad Final -->
+                <table id="pesosTable4" class="table">
+                    <thead>
+                        <tr>
+                            <th>Tara</th>
+                            <th>Densidad Final</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Las filas se agregarán aquí dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="guardarMuestrasTara4()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+  </div>
+  <div class="col-md-2">
+    <label for="taraW" class="col-form-label text-center">Densidad Aprobada Final</label>
+    <input type="text" class="form-control" id="densidadAproF4" style="text-align: center; margin-left: 1px; font-weight: bold;" readonly>
+  </div>
+  <div class="col-md-2">
+    <label for="taraW" class="col-form-label text-center">Peso Envase (Min)</label>
+    <input type="text" class="form-control" id="taraWeiMin4" style="text-align: center; margin-left: 2px; font-weight: bold;" readonly>
+  </div>
+      <div class="col-md-2">
+    <label for="taraW" class="col-form-label text-center">Peso Envase (Max)</label>
+    <input type="text" class="form-control" id="taraWeiMax4" style="text-align: center; margin-left: 2px; font-weight: bold;" readonly>
+  </div>
+  <div class="col-md-2">
+    <label for="taramin4" class="col-form-label text-center">Peso Minimo a Envasar</label>
+    <input type="text" class="form-control" id="taramin4" style="text-align: center; color:#067e0b; font-weight: bold;" readonly>
+  </div>
+  <div class="col-md-2">
+    <label for="taramax4" class="col-form-label text-center">Peso Maximo a Envasar</label>
+    <input type="text" class="form-control" id="taramax4" style="text-align: center; color:#df0909; font-weight: bold;" readonly>
+  </div>
+
+  
+</div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+                    <!---->
                       <div class="col-md-12 align-self-center mb-3" style="padding-left: 0px;padding-right:0px">
                         <h3 for="recipient-name" class="col-form-label" style="text-align: center; background-color: #C0C0C0">Control de Peso en Proceso</h3>
                       </div>
@@ -1258,6 +1619,7 @@ include 'modal/image.php'
           <script src="/html/js/firmar/firmar2daSeccion.js"></script>
           <script src="/html/js/firmar/firmar2daSeccionMulti.js"></script>
           <script src="/html/js/envasado/tara.js"></script>
+          <script src="/html/js/envasado/taraQuery.js"></script>
           <script src="/html/js/envasado/envasadoinfo.js"></script>
           <script src="/html/js/envasado/validacionesEnvasado.js"></script>
           <script src="/html/js/envasado/multi.js"></script>
