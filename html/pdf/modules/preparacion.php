@@ -1,4 +1,4 @@
-<div class="subtitleProcess"><label for=""> <b>PREPARACIÓN</b></label></div>
+<div class="subtitleProcess"><label for=""> <b>PREPARACIÓN DEL GRANEL</b></label></div>
 
 <div class="card mt-3">
     <div class="card-header centrado"><b>DESPEJE DE LINEA DE LOS PROCESOS Y VERIFICACIONES INICIALES</b></div>
@@ -80,7 +80,7 @@
             <input type="text" class="form-control" id="marmita">
         </div> -->
 
-        <div class="subtitle"><label for="">4.2 Liberación de Agua Desionizada por parte de Calidad</label></div>
+        <div class="subtitle"><label for="">4.2 Liberación de Agua Desionizada por parte de Calidad para el dìa  </label></div> <!--colocar fecha de la firma del modulo preparacion--> 
         <div class="table-responsive p-3">
             <table class="table table-bordered table-striped">
                 <thead class="head">
@@ -152,17 +152,17 @@
                     </tr>
                     <tr>
                         <td style="width:40px"></td>
-                        <td class="text-center" id="user_realizo2">Realizado por: </td>
-                        <td class="text-center" id="user_verifico2">Verificado por: </td>
+                        <td class="text-center" id="user_realizo2">Aprobó Liberación: </td>
+                       <!-- <td class="text-center" id="user_verifico2">Verificado por: </td>-->
                     </tr>
                     <tr>
                         <td style="width:40px"></td>
                         <td class="text-center" style="height: 130px">
                             <img id="f_realizo7" src="../../../admin/assets/img/firmas/VERO_JARAMILLO.jpg" alt="firma_usuario" style="height:100px">
                         </td>
-                        <td class="text-center" style="height: 130px">
-                            <img id="f_verifico7" src="../../../admin/assets/img/firmas/LUISA VILLA.jpg" alt="firma_usuario" style="height:100px">
-                        </td>
+                       <!-- <td class="text-center" style="height: 130px">
+                          <img id="f_verifico7" src="../../../admin/assets/img/firmas/LUISA VILLA.jpg" alt="firma_usuario" style="height:100px">
+                        </td>-->
                     </tr>
                 </tbody>
             </table>
@@ -341,7 +341,7 @@
         </div> -->
 
     </div>
-    <div class="subtitle"><label for="">Almacenamiento Granel</label></div>
+    <div class="subtitle"><label for="">Almacenamiento Granel Preparado</label></div>
     <div class="alertas" id="alert_pesaje">
         <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
             <label id="title10"></label>
