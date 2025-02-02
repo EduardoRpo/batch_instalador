@@ -40,7 +40,7 @@
         <tbody>
             <tr>
                 <td style="width:40px"></td>
-                <td style="width:227px">Referencia:</td>
+                <td style="width:227px">Granel:</td>
                 <td style="width:227px" class="bold ref"></td>
                 <td style="width:320px">Nombre Producto:</td>
                 <td id="nref"></td>
@@ -56,8 +56,8 @@
                 <td style="width:40px"></td>
                 <td style="width:227px">Notificación Sanitaria:</td>
                 <td style="width:227px" id="notificacion"></td>
-                <td style="width:320px">Presentación Comercial:</td>
-                <td id="presentacion"></td>
+               <!-- <td style="width:320px">Presentación Comercial:</td>
+                <td id="presentacion"></td>-->
             </tr>
         </tbody>
     </table>
