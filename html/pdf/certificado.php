@@ -174,8 +174,8 @@
         </div>
     </div>
     <div class="gl mb-3" id="cert_f">
-        <div class="mt-3"><img src="../../admin/assets/img/firmas/ANA KARINA HERNANDEZ.jpg" alt="" style="width:20%"></div>
-        <div><b>Ana Karina Hernandez Botero</b></div>
+        <div class="mt-3"><img src="../../admin/assets/img/firmas/LUISA VILLA.jpg" alt="" style="width:20%"></div>
+        <div><b>Luisa Fernanda Villa</b></div>
         <div> <b>Directora Calidad</b></div>
     </div>
 
