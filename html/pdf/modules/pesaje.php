@@ -1,4 +1,4 @@
-<div class="subtitleProcess"><label for=""> <b>PESAJE</b></label></div>
+<div class="subtitleProcess"><label for=""> <b>PESAJE DE MATERIAS PRIMAS</b></label></div>
 
 <div class="card mt-3">
     <div class="card-header centrado"><b>2. DESPEJE DE LINEA DE LOS PROCESOS Y VERIFICACIONES INICIALES</b></div>
@@ -45,7 +45,7 @@
                 </thead>
                 <tbody>
                     <td class="centrado fecha"></td>
-                    <td class="centrado">Director de Producción</td>
+                    <td class="centrado">Investigación & Desarrollo</td>
                     <td class="centrado">Operario de Pesaje</td>
                     <td class="centrado">Auxiliar de Calidad</td>
                     <td class="centrado">Operario Producción</td>
@@ -128,7 +128,7 @@
 
         </div>
         <div class="subtitle">
-            <label for="">3.5 Devolucion de Materias primas por producto terminado</label>
+            <label for="">3.5 Devolucion de Materias Primas post Proceso de Pesaje</label>
         </div>
         <div class="alertas" id="alert_pesaje">
             <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
