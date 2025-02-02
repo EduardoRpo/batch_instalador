@@ -46,12 +46,24 @@
             </table>
         </div>
 
-        <div class="subtitle"><label for="">Anexos</label></div>
+        <div class="subtitle"><label for="">Control de Tara - Envase en Proceso</label></div>
             <div id="obsEnvasMulti1" class="ml-5 mt-3 mb-3">
-                <ul>
-                    <li>Anexo 6: Instructivo de Envasado y Acondicionamiento</li>
+            <!-- <ul>
+                    <li>Anexo 6: Peso Tara Envase</li>
                     
                 </ul>
+                -JERP-->
+            <div class="table-responsive">
+                        <table class="table table-bordered table-striped" style="width: 100%;">
+                            <tbody id="tblMuestrasTarasFinales">
+
+                            </tbody>
+                        </table>
+            </div> 
+
+            <div id="contenedorTablas"></div>
+
+            <input type="button" value="Cargar Tara" onclick="cargarTara()" style="margin-top: 20px; padding: 10px 15px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">
             </div>
         <div id="multi-envasado1">
             <div class="subtitleProcess" id="subtitle_envasado1"><label for="" id="titulo_envasado1"> <b></b></label></div>
@@ -146,7 +158,14 @@
             </div>
             <div class="subtitle"><label for="">Procedimiento de Envasado</label></div>
             <div class="alertas" id="alert_pesaje"></div>
-            <div class="subtitle"><label for="">Especificaciones Tecnicas</label></div>
+            <div class="subtitle"><label for="">Control de Peso en Proceso</label></div>
+            <div class="table-responsive" id="table_envasado1"></div>
+            <div class="subtitle" style="background:lightgrey;"><label for="">Muestras Peso Tara (Envase)</label></div> 
+            
+
+            
+
+
             <table class="text-center" style="width: 100%;">
                 <tbody>
                     <tr style="height: 80px">
@@ -365,6 +384,8 @@
             </div>
             <div class="subtitle"><label for="">Procedimiento de Envasado</label></div>
             <div class="alertas" id="alert_pesaje"></div>
+            <div class="table-responsive" id="table_envasado2"></div>
+            
             <div class="subtitle"><label for="">Especificaciones Tecnicas</label></div>
             <table class="text-center" style="width: 100%;">
                 <tbody>
@@ -584,6 +605,8 @@
             </div>
             <div class="subtitle"><label for="">Procedimiento de Envasado</label></div>
             <div class="alertas" id="alert_pesaje"></div>
+            <div class="table-responsive" id="table_envasado3"></div>
+            
             <div class="subtitle"><label for="">Especificaciones Tecnicas</label></div>
             <table class="text-center" style="width: 100%;">
                 <tbody>
@@ -677,7 +700,7 @@
             </div>
 
             <div class="subtitle"><label for="">Observaciones</label></div>
-            <div id="obsEnvasMulti1" class="ml-5 mt-3 mb-3"></div>
+            <div id="obsEnvasMulti3" class="ml-5 mt-3 mb-3"></div>
 
             <div class="subtitle"><label for="">Cierre</label></div>
             <!-- <div class="firmas" id="firmas3">
@@ -803,6 +826,8 @@
             </div>
             <div class="subtitle"><label for="">Procedimiento de Envasado</label></div>
             <div class="alertas" id="alert_pesaje"></div>
+            <div class="table-responsive" id="table_envasado4"></div>
+            
             <div class="subtitle"><label for="">Especificaciones Tecnicas</label></div>
             <table class="text-center" style="width: 100%;">
                 <tbody>
@@ -894,7 +919,7 @@
             </div>
 
             <div class="subtitle"><label for="">Observaciones</label></div>
-            <div id="obsEnvasMulti1" class="ml-5 mt-3 mb-3"></div>
+            <div id="obsEnvasMulti4" class="ml-5 mt-3 mb-3"></div>
             <div class="subtitle"><label for=""></label></div>
 
             <div class="subtitle"><label for="">Cierre</label></div>
@@ -937,3 +962,9 @@
         </div>
     </div>
 </div>
+
+<script src="../../html/pdf/js/registrosTara.js"></script>
+<!--<script src="../js/registrosTara.js"></script> 
+<script src="../../html/pdf/js/registrosTara.js"></script>
+<script src="../../html/pdf/js/batch_pdf.js"></script>
+<script src="../../html/pdf/js/registrosTarav2.js"></script>-->
