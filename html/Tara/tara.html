@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingreso Tara y Densidad</title>
+    <!-- Bootstrap for Modal and Styling -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJ6HhFf7f3pJ5D4Zt2T66d72jUnJ7aI18O44oUhtK5QMTGpG56a5bI5a87H9" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container mt-4">
+    <!-- Enlace para abrir el modal -->
+    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taraModal">Ingresar Tara y Densidad</a>
+
+    <!-- Modal -->
+    <div class="modal fade" id="taraModal" tabindex="-1" aria-labelledby="taraModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="taraModalLabel">Ingreso de Tara y Densidad</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Campo para ingresar densidad final (solo una vez) -->
+                    <div class="mb-3">
+                        <label for="densidadFinal" class="form-label">Densidad Final:</label>
+                        <input type="number" class="form-control" id="densidadFinal" placeholder="Ingrese la densidad final" step="0.0001" required>
+                    </div>
+                    
+                    <!-- Campo para ingresar número de campos de tara -->
+                    <div class="mb-3">
+                        <label for="numeroCampos" class="form-label">Número de campos de Tara:</label>
+                        <input type="number" class="form-control" id="numeroCampos" placeholder="Ingrese el número de campos" required>
+                    </div>
+
+                    <!-- Tabla para mostrar los campos de tara -->
+                    <table class="table" id="taraTable">
+                        <thead>
+                            <tr>
+                                <th>Tara</th>
+                                <th>Densidad Final</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Las filas se agregarán dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" onclick="agregarCampos()">Agregar Campos</button>
+                    <button type="button" class="btn btn-success" onclick="guardarDatos()">Guardar Datos</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap and JQuery for Modal behavior -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybGz5ZYbK03U1uXvs4fWnD0kR98I1l6I0/Vo7f6p7pV9mFi0z" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0bWfJh49fkmK1n3sll1qFwMl7VtdhfU6x6B9e9y/JDglB8yR" crossorigin="anonymous"></script>
+
+<script>
+    // Función para agregar los campos de Tara dinámicamente
+    function agregarCampos() {
+        let numeroCampos = document.getElementById('numeroCampos').value;
+        let densidadFinal = document.getElementById('densidadFinal').value;
+
+        if (!numeroCampos || !densidadFinal) {
+            alert("Por favor, ingrese tanto el número de campos como la densidad final.");
+            return;
+        }
+
+        let tbody = document.getElementById('taraTable').getElementsByTagName('tbody')[0];
+        tbody.innerHTML = "";  // Limpiar la tabla antes de agregar nuevas filas
+
+        for (let i = 0; i < numeroCampos; i++) {
+            let row = tbody.insertRow();
+            let cell1 = row.insertCell(0);
+            let cell2 = row.insertCell(1);
+            
+            cell1.innerHTML = `<input type="number" class="form-control" placeholder="Tara ${i + 1}" required>`;
+            cell2.innerHTML = `<input type="text" class="form-control" value="${densidadFinal}" readonly required>`;
+        }
+    }
+
+    // Función para guardar los datos
+    function guardarDatos() {
+        let rows = document.querySelectorAll('#taraTable tbody tr');
+        let data = [];
+        rows.forEach(row => {
+            let tara = row.querySelector('input[type="number"]').value;
+            let densidadFinal = row.querySelector('input[type="text"]').value;
+            if (tara && densidadFinal) {
+                data.push({ tara: tara, densidad_final: densidadFinal });
+            }
+        });
+
+        // Realizamos la solicitud AJAX para guardar los datos en el servidor
+        fetch('/guardar_muestras', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ data: data })
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                alert("Datos guardados correctamente");
+                document.getElementById('taraModal').modal('hide'); // Cerrar modal
+            } else {
+                alert("Hubo un error al guardar los datos");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("Error en la solicitud");
+        });
+    }
+</script>
+</body>
+</html>
