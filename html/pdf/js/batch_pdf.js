@@ -133,7 +133,7 @@ async function informacion_producto() {
   });
   return result;
 }
-
+let referenciasGuardadas = [];
 const cargarMultipresentacion = (data) => {
   if (data == 0) {
     $(`#subtitle_envasado1`).hide();
@@ -148,19 +148,24 @@ const cargarMultipresentacion = (data) => {
           <td style="width:3%"></td>
           <td style="width:9.5%">Referencia:</td>
           <td style="width:12.5%"><b>${data[i].referencia}</b></td>
-          <td style="width:12.5%">Presentación:</td>
+          <td style="width:12.5%">Presentación (ml ó gr):</td>
           <td style="width:12.5%"><b>${data[i].presentacion_comercial}</b></td>
-          <td style="width:12.5%">Lote total(kg):</td>
+          <td style="width:12.5%">Cantidad a envasar(kg):</td>
           <td style="width:12.5%"><b>${data[i].total}</b></td>
-          <td style="width:12.5%">Cantidad:</td>
+          <td style="width:12.5%">Cantidad (Und):</td>
           <td><b>${data[i].cantidad}</b></td>
         </tr>`);
     }
-
+    
     // j = 1;
     for (let i = 0; i < multi.length; i++) {
+      const referencia = multi[i].referencia;
+
+      // Almacenar la referencia en el array
+      referenciasGuardadas.push(referencia);
+      //console.log('array de referencias:',referenciasGuardadas)
       $(`#titulo_envasado${i+1}`).html(
-        `<b>ENVASADO <br>REFERENCIA: ${multi[i].referencia}</b>`
+        `<b>ENVASADO <br>REFERENCIA: ${referencia}</b>`
       );
       // j++;
     }
@@ -173,7 +178,8 @@ const cargarMultipresentacion = (data) => {
     }
   }
 };
-
+localStorage.setItem('referenciasGuardadas', JSON.stringify(referenciasGuardadas));
+console.log('Datos guardados en localStorage:', referenciasGuardadas);
 function info_General(data) {
   if (data == 'false') return false;
   let info = JSON.parse(data);
