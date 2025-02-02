@@ -1,5 +1,5 @@
 <div class="card mt-5 mb-5">
-    <div class="card-header centrado"><b>CERTIFICADO PESAJE</b></div>
+    <div class="card-header centrado"><b>Anexo I - ORDEN DE PESAJE</b></div>
     <div class="card-body">
 
         <!-- <div id="contenedorCertificadoPesaje" class="contenedorCertificadoPesaje">
@@ -52,13 +52,13 @@
                     <td class="text-center" style="width: 25%;height: 100px">
                         <img src="../../assets/images/logo/logo-samara.png" alt="logo_samara" id="logo">
                     </td>
-                    <td class="text-center title2" style="width: 50%;">
-                        ORDEN DE PESAJE
+                    <!---<td class="text-center title2" style="width: 100%;">
+                        Anexo I - ORDEN DE PESAJE
                     </td>
                     <td class="text-center" style="width: 25%;">
                         <span id="codigo">Codigo</span>
                         <span id="version">Versión</span>
-                        <span id="fecha">Fecha</span>
+                        <span id="fecha">Fecha</span>-->
                     </td>
                 </tr>
             </tbody>
