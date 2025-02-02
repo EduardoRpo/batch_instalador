@@ -75,7 +75,8 @@
                     <tr>
                         <td class="centrado">Parametros</td>
                         <td class="centrado">Especificacion</td>
-                        <td class="centrado">Resultado</td>
+                        <td class="centrado">Fisicoquimico Granel Preparado</td>
+                        <td class="centrado">Fisicoquimico Prod Terminado</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -83,10 +84,12 @@
                         <td class="centrado">Color</td>
                         <td class="centrado espec_color"></td>
                         <td class="centrado color4"></td>
+                        <td class="centrado color4"></td>
                     </tr>
                     <tr>
                         <td class="centrado">Olor</td>
                         <td class="centrado espec_olor"></td>
+                        <td class="centrado olor4"></td>
                         <td class="centrado olor4"></td>
 
                     </tr>
@@ -94,11 +97,13 @@
                         <td class="centrado">Apariencia</td>
                         <td class="centrado espec_apariencia"></td>
                         <td class="centrado apariencia4"></td>
+                        <td class="centrado apariencia4"></td>
 
                     </tr>
                     <tr>
                         <td class="centrado">PH</td>
                         <td class="centrado espec_ph"></td>
+                        <td class="centrado ph4"></td>
                         <td class="centrado ph4"></td>
 
                     </tr>
@@ -106,26 +111,31 @@
                         <td class="centrado">Viscosidad (cps)</td>
                         <td class="centrado espec_viscosidad"></td>
                         <td class="centrado viscosidad4"></td>
+                        <td class="centrado viscosidad4"></td>
 
                     </tr>
                     <tr>
                         <td class="centrado">Densidad o gravedad específica (g/ml)</td>
                         <td class="centrado espec_densidad"></td>
                         <td class="centrado densidad4"></td>
+                        <td class="centrado densidad4"></td><!--colocar densidad final de la tara-->
                     </tr>
                     <tr>
                         <td class="centrado">Untuosidad</td>
                         <td class="centrado espec_untuosidad"></td>
+                        <td class="centrado untuosidad4"></td>
                         <td class="centrado untuosidad4"></td>
                     </tr>
                     <tr>
                         <td class="centrado">Poder Espumoso</td>
                         <td class="centrado espec_poder_espumoso"></td>
                         <td class="centrado espumoso4"></td>
+                        <td class="centrado espumoso4"></td>
                     </tr>
                     <tr>
                         <td class="centrado">Grado de Alcohol</td>
                         <td class="centrado espec_grado_alcohol"></td>
+                        <td class="centrado alcohol4"></td>
                         <td class="centrado alcohol4"></td>
                     </tr>
                 </tbody>
@@ -199,7 +209,7 @@
         <div class="subtitle"><label for="">Anexos</label></div>
         <div id="obs4" class="ml-5 mt-3 mb-3">
             <ul>
-                <li>Anexo 5: Instructivo Toma de Muestra</li>
+                <li>Anexo 5: Instructivo Para Toma de Muestra</li>
                 
             </ul>
         </div>
