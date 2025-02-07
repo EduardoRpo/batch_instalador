@@ -1,7 +1,6 @@
 function cargarTara() {
     console.log('archivo tara cargado');
     
-    // Obtener los parámetros de la URL
     const urlParams = window.location.pathname.split('/');
     
     const batch = urlParams[2];  
@@ -91,7 +90,7 @@ function cargarTara() {
                 const tbody = document.createElement('tbody');
                 table.appendChild(tbody);
                 tableContainer.appendChild(table);
-                contenedorTablas.appendChild(tableContainer); // Agregar la tabla al contenedor
+                contenedorTablas.appendChild(tableContainer); 
 
                 // Obtener las taras de esta referencia
                 const taras = groupedData[referencia];
@@ -99,7 +98,7 @@ function cargarTara() {
                 // Contador de columnas
                 let row;
                 taras.forEach((tara, index) => {
-                    // Crear una nueva fila cada vez que hay 10 valores
+                
                     if (index % 10 === 0) {
                         row = document.createElement('tr');
                         tbody.appendChild(row);
