@@ -138,8 +138,41 @@
                         <td class="centrado alcohol4"></td>
                         <td class="centrado alcohol4"></td>
                     </tr>
+                    <tr>
+                        <td class="centrado">Realizado por Area de Calidad</td>
+                        <td >Fecha Aprobaciòn</td>
+                        <td id="fecha4" style="font-weight:bold;"></td>
+                        <td id="fecha_conciliacion" style="font-weight:bold;"></td>
+                    </tr>
                 </tbody>
             </table>
+
+            <!--inicio tabla firma-->
+            <table class="mt-3" id="firmas4" style="width:100%">
+            <tbody>
+                <tr>
+                    <td style="width:5%"></td>
+                    <td class="text-right" style="width: 45%; padding-right:10px"></td>
+                    <td id="fecha4" style="font-weight:bold; justify-self: baseline; width: 50%;"></td>
+                </tr>
+                <tr>
+                    <td style="width:40px"></td>
+                    <!--<td class="text-center" style="height: 130px">
+                        <img id="f_realizo4" src="" alt="firma_usuario" style="height:100px">
+                    </td>
+                    <td class="text-center" style="height: 130px">
+                        <img id="f_verifico4" src="" alt="firma_usuario" style="height:100px">
+                    </td>-->
+                </tr>
+                </tr>
+                <tr>
+                    <td style="width:40px"></td>
+                    <!--<td class="text-center" id="user_realizo4"></td>
+                    <td class="text-center" id="user_verifico4"></td>-->
+                </tr>
+            </tbody>
+        </table>
+            <!--fin tabla firma-->
         </div>
         <div class="alertas" id="alert_pesaje">
             <div class="alert alert-secondary alert-dismissible fade show m-3" role="alert">
@@ -231,7 +264,7 @@
             <tbody>
                 <tr>
                     <td style="width:5%"></td>
-                    <td class="text-right" style="width: 45%; padding-right:10px">Fecha</td>
+                    <!-- <td class="text-right" style="width: 45%; padding-right:10px">Fecha</td>-->
                     <td id="fecha4" style="font-weight:bold; justify-self: baseline; width: 50%;"></td>
                 </tr>
                 <tr>
@@ -252,3 +285,59 @@
         </table>
     </div>
 </div>
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+    function getBatchFromUrl() {
+        const url = window.location.href;
+        const parts = url.split('/');
+        return parts[parts.length - 2];
+    }
+
+    // Función para sumar un día a una fecha
+    function addOneDay(dateString) {
+        const date = new Date(dateString);
+        date.setDate(date.getDate() + 1);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const seconds = String(date.getSeconds()).padStart(2, '0');
+        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    }
+
+    const batch = getBatchFromUrl();
+    console.log('Batch:', batch); 
+
+    const endpoint = 'http://10.1.200.30:2376/obtener_fecha_rendimiento';
+
+    
+    fetch(endpoint, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            batch: batch
+        })
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.success) {
+            console.log('Fecha de registro:', result.fecha_registro); 
+            const newDate = addOneDay(result.fecha_registro); 
+            document.getElementById('fecha_conciliacion').innerText = newDate;
+        } else {
+            console.log('Error:', result.message); 
+            document.getElementById('resultado').innerText = `Error: ${result.message}`;
+        }
+    })
+    .catch(error => {
+        console.error('Error en la solicitud:', error);
+        document.getElementById('resultado').innerText = 'Error en la solicitud';
+    });
+});
+
+  </script>
