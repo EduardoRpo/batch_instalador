@@ -135,3 +135,6 @@ function cargarTara() {
         alert('Error al obtener los datos.');
     });
 }
+window.onload = function() {
+    cargarTara();
+};

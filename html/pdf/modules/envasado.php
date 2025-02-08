@@ -63,8 +63,9 @@
 
             <div id="contenedorTablas"></div>
 
-            <input type="button" value="Cargar Tara" onclick="cargarTara()" style="margin-top: 20px; padding: 10px 15px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">
+            <input type="button" value="Cargar Tara" onclick="cargarTara()" style="margin-top: 20px; padding: 10px 15px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; display:none;"> <!--Boton para cargar automaticamente informacion de tara registradas-->
             </div>
+            <div class="subtitle"><label for=""></label></div>
         <div id="multi-envasado1">
             <div class="subtitleProcess" id="subtitle_envasado1"><label for="" id="titulo_envasado1"> <b></b></label></div>
             <div class="subtitle"><label for="">6.2 Entrega Material de Empaque</label></div>
