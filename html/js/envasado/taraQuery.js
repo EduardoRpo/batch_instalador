@@ -1,4 +1,4 @@
-console.log('Archivo Obtener tara');
+console.log('Archivo Obtener tara Query');
 
 function obtenerValoresTara() {
     const referencia = document.getElementById('ref1').value;;//document.getElementById('in_referencia').value;
