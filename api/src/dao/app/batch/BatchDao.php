@@ -154,7 +154,7 @@ class BatchDao extends estadoInicialDao
                                             INNER JOIN notificacion_sanitaria ns ON ns.id = p.id_notificacion_sanitaria
                                             LEFT JOIN plan_pedidos exp ON exp.id_producto = mul.referencia
                                             LEFT JOIN batch_tanques bt ON bt.id_batch = b.id_batch
-                                      WHERE b.id_batch = :idBatch ORDER BY `exp`.`fecha_insumo` DESC LIMIT 1;");
+                                      WHERE b.id_batch = :idBatch and b.fecha_creacion BETWEEN DATE_SUB(CURDATE(), INTERVAL 745 DAY) AND CURDATE() ORDER BY `exp`.`fecha_insumo` DESC LIMIT 1;");
         $stmt->execute(array('idBatch' => $id));
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         $batch = $stmt->fetch($connection::FETCH_ASSOC);
