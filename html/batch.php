@@ -69,7 +69,6 @@ include_once("modal/m_limpiar_firmas.php");
     </div>
     <div id="main-wrapper">
       <?php include('./partials/header.php'); ?>
-
       <div class="row mt-4">
         <div class="tituloProceso col-9">
           <h1 class="text-themecolor"><b>Batch Record</b></h1>
@@ -79,6 +78,12 @@ include_once("modal/m_limpiar_firmas.php");
             <button class="btn btn-secondary dropdown-toggle " style="background-color:#fff;color:#FF8D6D; border-color:#FF8D6D;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <!-- <a class="dropdown-item" href="#" onclick="multipresentacion()"><i class="fa fa-superscript"></i> Multipresentación</a> -->
+              
+              <a class="dropdown-item" href="http://10.1.200.30:3291/" >
+                  <i class="fa-solid fa-brush"></i> Reprogramar BR
+              </a>
+
+
               <a class="dropdown-item" href="#" onclick="clonar()"><i class="fa fa-clone"></i> Clonar</a>
               <a class="dropdown-item" href="#" onclick="batchEliminados()"><i class="fa fa-eraser"></i> Batch Eliminados</a>
               <a class="dropdown-item pdf" href="#"><i class="fa fa-download"></i> Imprimir PDF</a>
@@ -356,7 +361,7 @@ include_once("modal/m_limpiar_firmas.php");
                   </div>
                 </div>
               </div>
-
+                
               <div class="tab-pane fade show active mt-3" id="four" role="tabpanel" aria-labelledby="four-tab">
                 <div class="col-md-12 align-self-right">
                   <div class="row ml-1">
@@ -364,6 +369,7 @@ include_once("modal/m_limpiar_firmas.php");
                       <div class="card">
                         <div class="card-block">
                           <div class="payment-of-tax">
+                            <!--
                             <div class="table-responsive">
                               <label for="">Capacidad Programada </label>
                               <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadProgramada" style="width: 100%">
@@ -380,7 +386,7 @@ include_once("modal/m_limpiar_firmas.php");
                                 <tbody id="tblCalcCapacidadProgramadaBody">
                                 </tbody>
                               </table>
-                            </div>
+                            </div> -->
                           </div>
                         </div>
                       </div>
@@ -396,7 +402,7 @@ include_once("modal/m_limpiar_firmas.php");
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> 
 
               <div class="tab-pane fade mt-3" id="five" role="tabpanel" aria-labelledby="five-tab">
                 <div class="col-md-12 align-self-right">
@@ -468,6 +474,7 @@ include_once("modal/m_limpiar_firmas.php");
   <!-- <script src="/html/js/export/export.js"></script> -->
   <!-- <script src="/html/js/export/file.js"></script>
     <script src="/html/js/export/dataBatch.js"></script> -->
+  <script src="/html/js/batch/modalReprogramados.js"></script> <!--JERP-->
   <script>
     $(document).ready(function() {
       localStorage.removeItem('dataBatchPdf');
