@@ -311,7 +311,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const batch = getBatchFromUrl();
     console.log('Batch:', batch); 
 
-    const endpoint = 'http://10.1.200.30:2376/obtener_fecha_rendimiento';
+    const endpoint = 'http://10.1.200.30:3322/obtener_fecha_rendimiento';
 
     
     fetch(endpoint, {
