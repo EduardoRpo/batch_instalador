@@ -47,25 +47,27 @@
             <tbody>
                 <tr>
                     <td class="text-center" style="height: 130px; width: 33.33%">
-                        <img id="f_realizoPRO" src="" alt="firma_usuario" style="height:100px">
+                        <!--<img id="f_realizoPRO" src="" alt="firma_usuario" style="height:100px">-->
                     </td>
                     <td class="text-center" style="height: 130px; width: 33.33%">
-                        <img id="f_realizoCA" src="" alt="firma_usuario" style="height:100px">
-                    </td>
-                    <td class="text-center" style="height: 130px; width: 33.33%">
+                        <!--<img id="f_realizoCA" src="" alt="firma_usuario" style="height:100px">-->
                         <img id="f_realizoTEC" src="" alt="firma_usuario" style="height:100px">
+                    </td>
+                    <td class="text-center" style="height: 130px; width: 33.33%">
+                        <!--<img id="f_realizoTEC" src="" alt="firma_usuario" style="height:100px">-->
                     </td>
                 </tr>
                 <tr>
                     <!-- <td style="width:40px"></td> -->
-                    <td class="text-center" style="width: 33.33%" id="dirNameProd"></td>
-                    <td class="text-center" style="width: 33.33%" id="dirNameCa"></td>
+                    <td class="text-center" style="width: 33.33%" id=""></td>
+                    <!--<td class="text-center" style="width: 33.33%" id="dirNameCa"></td> dirNameProd-->
                     <td class="text-center" style="width: 33.33%" id="dirNameTec"></td>
+                    <td class="text-center" style="width: 33.33%" id=""></td>
                 </tr>
                 <tr>
-                    <td class="text-center" style="width: 33.33%">Director de Producción</td>
-                    <td class="text-center" style="width: 33.33%">Director de Calidad</td>
-                    <td class="text-center" style="width: 33.33%">Director Técnico</td>
+                    <td class="text-center" style="width: 33.33%"></td>
+                    <td class="text-center" style="width: 33.33%">Dirección Tecnica</td>
+                    <td class="text-center" style="width: 33.33%"></td>
                 </tr>
             </tbody>
         </table>
