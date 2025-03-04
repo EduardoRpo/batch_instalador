@@ -62,7 +62,13 @@
             </div> 
 
             <div id="contenedorTablas"></div>
-
+            <div>
+                    <label>Promedio</label>
+                    <input type=" text" class="form-control centrado" id="" style="width: 10%; display:inline">
+                    <label class="ml-3">Cantidad de Muestras</label>
+                    <input type="text" class="form-control centrado" id="" style="width: 10%; display:inline">
+                </div>
+                
             <input type="button" value="Cargar Tara" onclick="cargarTara()" style="margin-top: 20px; padding: 10px 15px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; display:none;"> <!--Boton para cargar automaticamente informacion de tara registradas-->
             </div>
             <div class="subtitle"><label for=""></label></div>
@@ -161,7 +167,7 @@
             <div class="alertas" id="alert_pesaje"></div>
             <div class="subtitle"><label for="">Control de Peso en Proceso</label></div>
             <div class="table-responsive" id="table_envasado1"></div>
-            <div class="subtitle" style="background:lightgrey;"><label for="">Muestras Peso Tara (Envase)</label></div> 
+            <div class="subtitle" style=""><label for="">Datos Peso Envase (gr)</label></div> 
             
 
             
@@ -171,22 +177,71 @@
                 <tbody>
                     <tr style="height: 80px">
                         <td style="width: 4.5%;"></td>
-                        <td style="width: 10%">Mínimo</td>
+                        <td style="width: 10%">Peso Mínimo Envase</td>
                         <td style="width: 21.33%;">
-                            <input type="text" class="form-control centrado minimo1">
+                            <input type="text" class="form-control centrado minimo_peso" id='peso_minimo_tara'>
                         </td>
-                        <td style="width: 10%">Medio</td>
+                        <!--<td style="width: 10%">Medio</td>
                         <td style="width: 21.33%;">
                             <input type="text" class="form-control centrado medio1">
-                        </td>
-                        <td style="width: 10%">Máximo</td>
+                        </td>-->
+                        <td style="width: 10%">Peso Máximo Envase</td>
                         <td style="width: 21.33%;">
-                            <input type="text" class="form-control centrado maximo1">
+                            <input type="text" class="form-control centrado maximo_peso" id='peso_maximo_tara'>
                         </td>
                         <td style="width: 1.5%;"></td>
                     </tr>
                 </tbody>
             </table>
+            <div class="subtitle"><label for="">Peso Producto a Envasar (gr)</label></div>
+
+            <!--Inicio-->
+            <table class="text-center" style="width: 100%;">
+                <tbody>
+                    <tr style="height: 80px">
+                        <td style="width: 4.5%;"></td>
+                        <td style="width: 10%">Mínimo</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado minimo1" id='producto_minimo'> <!---->
+                        </td>
+                        <td style="width: 10%">Medio</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado medio1" id='producto_medio'> <!---->
+                        </td>
+                        <td style="width: 10%">Máximo</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado maximo1" id='producto_maximo'> <!---->
+                        </td>
+                        <td style="width: 1.5%;"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!--fin-->
+
+            <div class="subtitle"><label for="">Peso Producto a Envasar + Peso Envase (gr)</label></div>
+
+            <!--Inicio2-->
+            <table class="text-center" style="width: 100%;">
+                <tbody>
+                    <tr style="height: 80px">
+                        <td style="width: 4.5%;"></td>
+                        <td style="width: 10%">Mínimo</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado minimo1" id='envase_min_tara'>
+                        </td>
+                        <td style="width: 10%">Medio</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado medio1" id='envase_med_tara'>
+                        </td>
+                        <td style="width: 10%">Máximo</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado maximo1" id='envase_max_tara'>
+                        </td>
+                        <td style="width: 1.5%;"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!--fin2-->
             <!-- <div class="espec_tecnicas">
                 <label for="" class="centrado">Mínimo</label>
                 <input type="text" class="form-control centrado minimo1">
@@ -197,7 +252,7 @@
             </div> -->
 
             <div class="subtitle"><label for="">Control de peso en el Proceso</label></div>
-            <div class="subtitle" style="background:lightgrey;"><label for="">Muestras</label></div>
+            <div class="subtitle" style="background:lightgrey;"><label for="">Muestras (Peso Producto + Peso Envase (gr))</label></div>
             <div class="p-3">
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped" style="width: 100%;">
@@ -298,6 +353,7 @@
                 </tbody>
             </table>
         </div>
+
         <div id="multi-envasado2">
             <div class="subtitleProcess"><label for="" id="titulo_envasado2"> <b>ENVASADO</b></label></div>
             <div class="subtitle"><label for="">6.2 Entrega Material de Empaque</label></div>
@@ -385,24 +441,77 @@
             </div>
             <div class="subtitle"><label for="">Procedimiento de Envasado</label></div>
             <div class="alertas" id="alert_pesaje"></div>
-            <div class="table-responsive" id="table_envasado2"></div>
+            <div class="subtitle"><label for="">Control de Peso en Proceso</label></div>
+            <div class="table-responsive" id="table_envasado1"></div>
+            <div class="subtitle" style=""><label for="">Datos Peso Envase (gr)</label></div> 
             
-            <div class="subtitle"><label for="">Especificaciones Tecnicas</label></div>
+
+            
+
+
+            <table class="text-center" style="width: 100%;">
+                <tbody>
+                    <tr style="height: 80px">
+                        <td style="width: 4.5%;"></td>
+                        <td style="width: 10%">Peso Mínimo Envase</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado minimo_peso" id='peso_minimo_tara2'>
+                        </td>
+                        <!--<td style="width: 10%">Medio</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado medio1">
+                        </td>-->
+                        <td style="width: 10%">Peso Máximo Envase</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado maximo_peso" id='peso_maximo_tara2'>
+                        </td>
+                        <td style="width: 1.5%;"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="subtitle"><label for="">Peso Producto a Envasar (gr)</label></div>
+
+            <!--Inicio-->
             <table class="text-center" style="width: 100%;">
                 <tbody>
                     <tr style="height: 80px">
                         <td style="width: 4.5%;"></td>
                         <td style="width: 10%">Mínimo</td>
                         <td style="width: 21.33%;">
-                            <input type="text" class="form-control centrado minimo2">
+                            <input type="text" class="form-control centrado minimo1" id='producto_minimo2'> <!---->
                         </td>
                         <td style="width: 10%">Medio</td>
                         <td style="width: 21.33%;">
-                            <input type="text" class="form-control centrado medio2">
+                            <input type="text" class="form-control centrado medio1" id='producto_medio2'><!-- -->
                         </td>
                         <td style="width: 10%">Máximo</td>
                         <td style="width: 21.33%;">
-                            <input type="text" class="form-control centrado maximo2">
+                            <input type="text" class="form-control centrado maximo1" id='producto_maximo2'><!---->
+                        </td>
+                        <td style="width: 1.5%;"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!--fin-->
+
+            <div class="subtitle"><label for="">Peso Producto a Envasar + Peso Envase (gr)</label></div>
+
+            <!--Inicio2-->
+            <table class="text-center" style="width: 100%;">
+                <tbody>
+                    <tr style="height: 80px">
+                        <td style="width: 4.5%;"></td>
+                        <td style="width: 10%">Mínimo</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado minimo1" id='envase_min_tara2'>
+                        </td>
+                        <td style="width: 10%">Medio</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado medio1" id='envase_med_tara2'>
+                        </td>
+                        <td style="width: 10%">Máximo</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado maximo1" id='envase_max_tara2'>
                         </td>
                         <td style="width: 1.5%;"></td>
                     </tr>
@@ -418,7 +527,7 @@
             </div> -->
 
             <div class="subtitle"><label for="">Control de peso en el Proceso</label></div>
-            <div class="subtitle" style="background:lightgrey;"><label for="">Muestras</label></div>
+            <div class="subtitle" style="background:lightgrey;"><label for="">Muestras (Peso Producto + Peso Envase (gr))</label></div>
             <div class="p-3">
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped" style="width: 100%;">
@@ -606,24 +715,77 @@
             </div>
             <div class="subtitle"><label for="">Procedimiento de Envasado</label></div>
             <div class="alertas" id="alert_pesaje"></div>
-            <div class="table-responsive" id="table_envasado3"></div>
+            <div class="subtitle"><label for="">Control de Peso en Proceso</label></div>
+            <div class="table-responsive" id="table_envasado1"></div>
+            <div class="subtitle" style=""><label for="">Datos Peso Envase (gr)</label></div> 
             
-            <div class="subtitle"><label for="">Especificaciones Tecnicas</label></div>
+
+            
+
+
+            <table class="text-center" style="width: 100%;">
+                <tbody>
+                    <tr style="height: 80px">
+                        <td style="width: 4.5%;"></td>
+                        <td style="width: 10%">Peso Mínimo Envase</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado minimo_peso" id='peso_minimo_tara3'>
+                        </td>
+                        <!--<td style="width: 10%">Medio</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado medio1">
+                        </td>-->
+                        <td style="width: 10%">Peso Máximo Envase</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado maximo_peso" id='peso_maximo_tara3'>
+                        </td>
+                        <td style="width: 1.5%;"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="subtitle"><label for="">Peso Producto a Envasar (gr)</label></div>
+
+            <!--Inicio-->
             <table class="text-center" style="width: 100%;">
                 <tbody>
                     <tr style="height: 80px">
                         <td style="width: 4.5%;"></td>
                         <td style="width: 10%">Mínimo</td>
                         <td style="width: 21.33%;">
-                            <input type="text" class="form-control centrado minimo3">
+                            <input type="text" class="form-control centrado minimo1" id='producto_minimo3'> <!---->
                         </td>
                         <td style="width: 10%">Medio</td>
                         <td style="width: 21.33%;">
-                            <input type="text" class="form-control centrado medio3">
+                            <input type="text" class="form-control centrado medio1" id='producto_medio3'><!---->
                         </td>
                         <td style="width: 10%">Máximo</td>
                         <td style="width: 21.33%;">
-                            <input type="text" class="form-control centrado maximo3">
+                            <input type="text" class="form-control centrado maximo1" id='producto_maximo3'><!---->
+                        </td>
+                        <td style="width: 1.5%;"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!--fin-->
+
+            <div class="subtitle"><label for="">Peso Producto a Envasar + Peso Envase (gr)</label></div>
+
+            <!--Inicio2-->
+            <table class="text-center" style="width: 100%;">
+                <tbody>
+                    <tr style="height: 80px">
+                        <td style="width: 4.5%;"></td>
+                        <td style="width: 10%">Mínimo</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado minimo1" id='envase_min_tara3'>
+                        </td>
+                        <td style="width: 10%">Medio</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado medio1" id='envase_med_tara3'>
+                        </td>
+                        <td style="width: 10%">Máximo</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado maximo1" id='envase_max_tara3'>
                         </td>
                         <td style="width: 1.5%;"></td>
                     </tr>
@@ -639,7 +801,7 @@
             </div> -->
 
             <div class="subtitle"><label for="">Control de peso en el Proceso</label></div>
-            <div class="subtitle" style="background:lightgrey;"><label for="">Muestras</label></div>
+            <div class="subtitle" style="background:lightgrey;"><label for="">Muestras (Peso Producto + Peso Envase (gr))</label></div>
             <div class="p-3">
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped" style="width: 100%;">
@@ -827,24 +989,77 @@
             </div>
             <div class="subtitle"><label for="">Procedimiento de Envasado</label></div>
             <div class="alertas" id="alert_pesaje"></div>
-            <div class="table-responsive" id="table_envasado4"></div>
+            <div class="subtitle"><label for="">Control de Peso en Proceso</label></div>
+            <div class="table-responsive" id="table_envasado1"></div>
+            <div class="subtitle" style=""><label for="">Datos Peso Envase (gr)</label></div> 
             
-            <div class="subtitle"><label for="">Especificaciones Tecnicas</label></div>
+
+            
+
+
+            <table class="text-center" style="width: 100%;">
+                <tbody>
+                    <tr style="height: 80px">
+                        <td style="width: 4.5%;"></td>
+                        <td style="width: 10%">Peso Mínimo Envase</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado minimo_peso" id='peso_minimo_tara4'>
+                        </td>
+                        <!--<td style="width: 10%">Medio</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado medio1">
+                        </td>-->
+                        <td style="width: 10%">Peso Máximo Envase</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado maximo_peso" id='peso_maximo_tara4'>
+                        </td>
+                        <td style="width: 1.5%;"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="subtitle"><label for="">Peso Producto a Envasar (gr)</label></div>
+
+            <!--Inicio-->
             <table class="text-center" style="width: 100%;">
                 <tbody>
                     <tr style="height: 80px">
                         <td style="width: 4.5%;"></td>
                         <td style="width: 10%">Mínimo</td>
                         <td style="width: 21.33%;">
-                            <input type="text" class="form-control centrado minimo4">
+                            <input type="text" class="form-control centrado minimo1" id='producto_minimo4'> <!---->
                         </td>
                         <td style="width: 10%">Medio</td>
                         <td style="width: 21.33%;">
-                            <input type="text" class="form-control centrado medio4">
+                            <input type="text" class="form-control centrado medio1" id='producto_medio4'><!---->
                         </td>
                         <td style="width: 10%">Máximo</td>
                         <td style="width: 21.33%;">
-                            <input type="text" class="form-control centrado maximo4">
+                            <input type="text" class="form-control centrado maximo1" id='producto_maximo4'><!---->
+                        </td>
+                        <td style="width: 1.5%;"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <!--fin-->
+
+            <div class="subtitle"><label for="">Peso Producto a Envasar + Peso Envase (gr)</label></div>
+
+            <!--Inicio2-->
+            <table class="text-center" style="width: 100%;">
+                <tbody>
+                    <tr style="height: 80px">
+                        <td style="width: 4.5%;"></td>
+                        <td style="width: 10%">Mínimo</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado minimo1" id='envase_min_tara4'>
+                        </td>
+                        <td style="width: 10%">Medio</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado medio1" id='envase_med_tara4'>
+                        </td>
+                        <td style="width: 10%">Máximo</td>
+                        <td style="width: 21.33%;">
+                            <input type="text" class="form-control centrado maximo1" id='envase_max_tara4'>
                         </td>
                         <td style="width: 1.5%;"></td>
                     </tr>
@@ -860,7 +1075,7 @@
             </div> -->
 
             <div class="subtitle"><label for="">Control de peso en el Proceso</label></div>
-            <div class="subtitle" style="background:lightgrey;"><label for="">Muestras</label></div>
+            <div class="subtitle" style="background:lightgrey;"><label for="">Muestras (Peso Producto + Peso Envase (gr))</label></div>
             <div class="p-3">
                 <div class="table-responsive">
                     <table class="table text-center table-bordered table-striped" style="width: 100%;">
@@ -961,6 +1176,19 @@
                 </tbody>
             </table>
         </div>
+        <div class="subtitle"><label>Conciliación de Rendimiento Granel</label></div>
+                <table class="mt-3 mb-3" id="" style="width:100%">
+                <tbody>
+                    <tr>
+                        <td style="width:5%"></td>
+                        <td class="text-right" style="width: 45%; padding-right:10px">Conciliacion rendimiento</td>
+                        <td style="width: 50%;">
+                            <input type="text" class="form-control" id="conciliacionRendimiento60" style="width: 30%;justify-self: baseline" readonly>
+                        </td>
+                    </tr>
+                    
+                </tbody>
+            </table>
     </div>
 </div>
 
