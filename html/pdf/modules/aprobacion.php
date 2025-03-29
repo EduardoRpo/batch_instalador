@@ -115,10 +115,10 @@
 
                     </tr>
                     <tr>
-                        <td class="centrado">Densidad o gravedad específica (g/ml)</td>
+                        <td class="centrado">Densidad o gravedad específica (g/ml) JR</td>
                         <td class="centrado espec_densidad"></td>
                         <td class="centrado densidad4"></td>
-                        <td class="centrado densidad4"></td><!--colocar densidad final de la tara-->
+                        <td class="centrado densidad_tara"></td><!--colocar densidad final de la tara-->
                     </tr>
                     <tr>
                         <td class="centrado">Untuosidad</td>
@@ -242,7 +242,7 @@
         <div class="subtitle"><label for="">Anexos</label></div>
         <div id="obs4" class="ml-5 mt-3 mb-3">
             <ul>
-                <li>Anexo 5: Instructivo Para Toma de Muestra</li>
+                
                 
             </ul>
         </div>
@@ -289,10 +289,76 @@
 <script>
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Función para obtener el batch desde la URL
     function getBatchFromUrl() {
         const url = window.location.href;
         const parts = url.split('/');
         return parts[parts.length - 2];
+    }
+
+    // Función para realizar la solicitud al endpoint obtener_fecha_rendimiento
+    function fetchFechaRendimiento(batch) {
+        const endpoint = 'http://10.1.200.30:3322/obtener_fecha_rendimiento';
+
+        fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                batch: batch
+            })
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                console.log('Fecha de registro:', result.fecha_registro);
+                const newDate = addOneDay(result.fecha_registro);
+                document.getElementById('fecha_conciliacion').innerText = newDate;
+            } else {
+                console.log('Error:', result.message);
+                document.getElementById('resultado').innerText = `Error: ${result.message}`;
+            }
+        })
+        .catch(error => {
+            console.error('Error en la solicitud:', error);
+            document.getElementById('resultado').innerText = 'Error en la solicitud';
+        });
+    }
+
+    // Función para realizar la solicitud al endpoint densidad_final
+    function fetchDensidadFinal(batch) {
+        const endpoint = 'http://10.1.200.30:3322/densidad_final';
+
+        fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                batch: batch
+            })
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                const densidadFinal = result.data[0].densidad_final;
+                console.log('Densidad final obtenida:', densidadFinal);
+
+                // Establecer el valor en el elemento con clase "densidad_tara"
+                const densidadTaraElement = document.querySelector('.densidad_tara');
+                if (densidadTaraElement) {
+                    densidadTaraElement.innerText = densidadFinal;
+                } else {
+                    console.error('No se encontró el elemento con la clase "densidad_tara"');
+                }
+            } else {
+                console.log('Error:', result.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error en la solicitud:', error);
+        });
     }
 
     // Función para sumar un día a una fecha
@@ -308,36 +374,14 @@ document.addEventListener('DOMContentLoaded', function() {
         return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
     }
 
+    // Obtener el batch
     const batch = getBatchFromUrl();
-    console.log('Batch:', batch); 
+    console.log('Batch:', batch);
 
-    const endpoint = 'http://10.1.200.30:3322/obtener_fecha_rendimiento';
-
-    
-    fetch(endpoint, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            batch: batch
-        })
-    })
-    .then(response => response.json())
-    .then(result => {
-        if (result.success) {
-            console.log('Fecha de registro:', result.fecha_registro); 
-            const newDate = addOneDay(result.fecha_registro); 
-            document.getElementById('fecha_conciliacion').innerText = newDate;
-        } else {
-            console.log('Error:', result.message); 
-            document.getElementById('resultado').innerText = `Error: ${result.message}`;
-        }
-    })
-    .catch(error => {
-        console.error('Error en la solicitud:', error);
-        document.getElementById('resultado').innerText = 'Error en la solicitud';
-    });
+    // Ejecutar ambas solicitudes
+    fetchFechaRendimiento(batch);
+    fetchDensidadFinal(batch);
 });
+
 
   </script>
