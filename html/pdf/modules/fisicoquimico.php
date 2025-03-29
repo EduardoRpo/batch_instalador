@@ -1,4 +1,4 @@
-<div class="subtitleProcess"><label for=""> <b>FISICOQUIMICO</b></label></div>
+<!--<div class="subtitleProcess"><label for=""> <b>FISICOQUIMICO</b></label></div>
 <div class="card mt-3">
     <div class="subtitle"><label for="">Toma de Muestra</label></div>
     <div class="alertas" id="alert_pesaje">
@@ -158,20 +158,7 @@
             </tr>
         </tbody>
     </table>
-    <!-- <div class="ajustes">
-        <div class="resp">
-            <label for="">Si</label>
-            <input type="text" class="form-control centrado" id="Si9">
-            <label for="">No</label>
-            <input type="text" class="form-control centrado" id="No9">
-        </div>
-        <div class="obs mb-5">
-            <label for="">Materia(s) primas para adicionar </label>
-            <input type="textarea" class="form-control" id="materiaPrimaAjustes9">
-            <label for="">Procedimiento de Ajuste</label>
-            <input type="textarea" class="form-control" id="procedimientoAjustes9">
-        </div>
-    </div> -->
+
 
     <div class="subtitle">Resultado</div>
 
@@ -192,18 +179,10 @@
                 </tr>
             </tbody>
         </table>
-        <!-- <div class="col2sm m-3">
-            <label for="">Aprobado</label>
-            <label for="">Rechazado</label>
-            <input class="chkAprobado" type="checkbox" name="chkAprobado" id="chkAprobado">
-            <input class="chkRechazado" type="checkbox" name="chkRechazado" id="chkRechazado">
-        </div> -->
+       
     </div>
 
-    <!-- <div class="enlinea">
-        <label class="mr-3 fechaHora" style="justify-self: end;">Fecha</label>
-        <label id="fecha9" style="font-weight:bold; justify-self: baseline"></label>
-    </div> -->
+   
     <table class="mt-3" style="width:100%">
         <tbody>
             <tr>
@@ -236,12 +215,6 @@
             </tr>
         </tbody>
     </table>
-    <!-- <div class="firmas" id="firmas5">
-        <div id="blank_rea9"></div>
-        <img id="f_realizo9" src="" alt="firma_usuario" height="130">
-        <div id="blank_ver9"></div>
-        <img id="f_verifico9" src="" alt="firma_usuario" height="130">
-        <label id="user_realizo9"></label>
-        <label id="user_verifico9"></label>
-    </div> -->
+   
 </div>
+-->
