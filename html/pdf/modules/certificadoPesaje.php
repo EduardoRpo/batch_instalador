@@ -113,4 +113,79 @@
             </tbody>
         </table>
     </div>
+
+    <!---->
+    <div class="card-header centrado"><b>Anexo II  - INSTRUCTIVO DE PREPARACION</b></div>
+    <div class="card-body">
+    <div style="max-height: 400px; ">
+        <table id="contenedorCertificadoPesaje2"
+               style="width: 100%; border-collapse: collapse; " 
+               border="1">
+            <thead style="background-color: #FF7F50; color: white;">
+                <tr>
+                    <th style="padding: 10px;">Pasos</th>
+                    <th style="padding: 10px;">Procedimiento</th>
+                    <th style="padding: 10px;">Tiempo (min)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Las filas se llenarán dinámicamente desde el backend -->
+            </tbody>
+        </table>
+    </div>
 </div>
+
+
+<script>
+   document.addEventListener('DOMContentLoaded', function() {
+       // Función para obtener los valores dinámicos de la URL
+       function getDynamicValuesFromUrl() {
+           const url = window.location.href;
+           const parts = url.split('/'); 
+           const num_batch = parts[parts.length - 2];  // Obtener el penúltimo valor de la URL
+           const id_producto = parts[parts.length - 1]; // Obtener el último valor de la URL
+
+           return { num_batch, id_producto };
+       }
+
+       // Función para obtener los datos del backend
+       async function getPDFData() {
+           const { num_batch, id_producto } = getDynamicValuesFromUrl();
+           console.log(`Fetching data from: http://10.1.200.30:6800/pdf/${num_batch}/${id_producto}`);
+
+           const url = `http://10.1.200.30:6800/pdf/${num_batch}/${id_producto}`; // URL del backend
+
+           try {
+               const response = await fetch(url);
+               if (!response.ok) {
+                   throw new Error('Error al obtener los datos');
+               }
+
+               const data = await response.json(); // Parsear los datos JSON recibidos
+               console.log('Datos recibidos:', data);
+
+               // Procesar los datos y llenar la tabla
+               const tbody = document.querySelector("#contenedorCertificadoPesaje2 tbody");
+               tbody.innerHTML = ''; // Limpiar la tabla
+
+               data.forEach((row, index) => {
+                   const tr = document.createElement("tr");
+                   tr.innerHTML = `
+                       <td>${index + 1}</td>
+                       <td>${row.pasos}</td>
+                       <td>${row.tiempo}</td>
+                   `;
+                   tbody.appendChild(tr);
+               });
+
+           } catch (error) {
+               console.error('Error en la solicitud:', error);
+               alert('No se pudieron cargar los datos del servidor');
+           }
+       }
+
+       // Llamar a la función cuando la página cargue
+       getPDFData();
+   });
+</script>
+
