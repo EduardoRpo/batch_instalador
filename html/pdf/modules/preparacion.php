@@ -369,7 +369,7 @@
     <div class="subtitle"><label for="">Anexos</label></div>
     <div id="obs3" class="ml-5 mt-3 mb-3">
         <ul>
-            <li>Anexo 4: Instructivo de Preparación</li>
+            <li>Anexo 2: Instructivo de Preparación</li>
             
         </ul>
     </div>
