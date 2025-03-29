@@ -545,7 +545,6 @@
                 <img id="f_realizoConciliacion3" src="" alt="firma_usuario" height="130">
                 <label id="user_realizoConciliacion3"></label>
             </div> -->
-
             <table class="mt-3" id="firmas6" style="width:100%">
                 <tbody>
                     <tr>
@@ -676,7 +675,7 @@
                         <td style="width:5%"></td>
                         <td class="text-right" style="width: 45%; padding-right:10px">Conciliacion rendimiento</td>
                         <td style="width: 50%;">
-                            <input type="text" class="form-control" id="conciliacionRendimiento4" style="width: 30%;justify-self: baseline" readonly>
+                            <input type="text" class="form-control" id="conciliacionRendimientoaAcond" style="width: 30%;justify-self: baseline" readonly>
                         </td>
                     </tr>
                     <tr>
