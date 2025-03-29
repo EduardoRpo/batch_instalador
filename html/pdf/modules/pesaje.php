@@ -160,8 +160,7 @@
         <div id="obs2" class="ml-5 mt-3 mb-3">
         <ul>
             <li>Anexo 1: Orden de Pesaje</li>
-            <li>Anexo 2: Instructivo de Pesaje</li>
-            <li>Anexo 3: Relación Lostes Materias Primas Utilizadas</li>
+           
         </ul>
         </div>
         <div class="subtitle"><label for=""></label></div>
