@@ -1,3 +1,17 @@
+<div class="card-header centrado"><b>ETIQUETAS PROCESO PESAJE</b></div>
+    <div class="card-body">
+
+        <div id="contenedorEtiquetasR" class="contenedorEtiquetasR">
+            <div class="card">
+                <div class="card-body">
+                    <div class="etiquetasR">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <div class="card mt-5 mb-5">
 <div class="card-header centrado"><b>Anexo I - ORDEN DE PESAJE</b></div>
 <div class="card-body mb-5">
@@ -31,19 +45,7 @@
     </div>
 </div>
 
-    <div class="card-header centrado"><b>ETIQUETAS PROCESO PESAJE</b></div>
-    <div class="card-body">
-
-        <div id="contenedorEtiquetasR" class="contenedorEtiquetasR">
-            <div class="card">
-                <div class="card-body">
-                    <div class="etiquetasR">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     
 
     <div class="card-header centrado"><b>ETIQUETAS PROCESO PESAJE</b></div>
@@ -124,8 +126,90 @@
                 alert('No se pudieron cargar los datos del servidor');
             }
         }
+        
+
+        async function getEtiquetasData() {
+            const { num_batch, id_producto } = getDynamicValuesFromUrl();
+            console.log(`Fetching data from: http://10.1.200.30:6745/pdf/${num_batch}/${id_producto}`);
+
+            const url = `http://10.1.200.30:6745/pdf/${num_batch}/${id_producto}`; // URL del backend (actualizada)
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error('Error al obtener los datos');
+                }
+
+                const data = await response.json(); // Parsear los datos JSON recibidos
+                console.log('Datos recibidos:', data);
+
+                // Asegurarnos de que el contenedor de etiquetas existe en el DOM
+                const contenedorEtiquetas = document.querySelector(".etiquetasR");
+                if (!contenedorEtiquetas) {
+                    console.error('El contenedor .etiquetasR no se encuentra en el DOM');
+                    return;
+                }
+
+                // Limpiar el contenedor antes de agregar nuevas etiquetas
+                contenedorEtiquetas.innerHTML = '';
+
+                // Establecer un contenedor flex para asegurar una correcta disposición
+                contenedorEtiquetas.style.display = 'flex';
+                contenedorEtiquetas.style.flexWrap = 'wrap'; // Asegura que las etiquetas se ajusten
+
+                // Crear etiquetas con los datos recibidos
+                data.forEach((etiqueta) => {
+                    const divEtiqueta = document.createElement("div");
+                    divEtiqueta.style.width = "31%";
+                    divEtiqueta.style.margin = "5px";
+
+                    // Convertir porcentaje a número y asegurarnos de que sea un número válido
+                    const porcentaje = parseFloat(etiqueta.porcentaje) || 0;
+
+                    divEtiqueta.innerHTML = `
+                        <table class="etiquetaUnica rounded-3" style="width:100%;">
+                            <tr>
+                                <td style="width: 50%;">
+                                    <b>REFERENCIA: </b>${etiqueta.referencia}
+                                </td>
+                                <td style="width: 50%; font-size: 25px;">
+                                    <b>PESO: </b>${porcentaje.toFixed(2)}Kg
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <b>ALIAS:</b> ${etiqueta.alias}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <b>ORDEN: </b>${etiqueta.numero_orden}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <b>LOTE: </b>${etiqueta.numero_lote}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <b>FECHA: </b>${etiqueta.fecha_programacion}
+                                </td>
+                            </tr>
+                        </table>
+                    `;
+                    contenedorEtiquetas.appendChild(divEtiqueta);
+                });
+
+            } catch (error) {
+                console.error('Error en la solicitud:', error);
+                alert('No se pudieron cargar las etiquetas del servidor');
+            }
+        }
+
 
         // Llamar a la función cuando la página cargue
         getOrdenPesajeData();
+        getEtiquetasData();
     });
 </script>
