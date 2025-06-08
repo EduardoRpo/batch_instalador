@@ -1309,12 +1309,12 @@
             }
         } else {
             console.log('No se encontraron datos para el batch especificado.');
-            alert('No se encontraron datos para el batch especificado.');
+            //alert('No se encontraron datos para el batch especificado.');
         }
     })
     .catch(error => {
         console.error('Hubo un problema con la solicitud:', error);
-        alert('Error al obtener los datos.');
+        //alert('Error al obtener los datos.');
     });
 }
 
@@ -1332,7 +1332,7 @@ async  function cargarTaraPeso() {
 
     if (!batch) {
         console.error('No se ha extraído un valor válido para batch');
-        alert('No se ha extraído un valor válido para batch');
+        //alert('No se ha extraído un valor válido para batch');
         return;
     }
 
@@ -1361,7 +1361,7 @@ async  function cargarTaraPeso() {
     .then(data => {
         if (typeof data === 'string') {
             console.log('Contenido HTML recibido:', data);
-            alert('Hubo un error en la respuesta del servidor.');
+            //alert('Hubo un error en la respuesta del servidor.');
             return;
         }
 
@@ -1473,17 +1473,17 @@ async  function cargarTaraPeso() {
                 }
 
             } else {
-                alert('No se encontraron datos para este batch.');
+                //alert('No se encontraron datos para este batch.');
                 console.log('No se encontraron datos para este batch.');
             }
         } else {
             console.log('No se encontraron datos para el batch especificado.');
-            alert('No se encontraron datos para el batch especificado.');
+            //alert('No se encontraron datos para el batch especificado.');
         }
     })
     .catch(error => {
         console.error('Hubo un problema con la solicitud:', error);
-        alert('Error al obtener los datos.');
+        //alert('Error al obtener los datos.');
     });
 }
 
@@ -1528,7 +1528,7 @@ async  function cargarTaraPresentacion() {
     .then(data => {
         if (typeof data === 'string') {
             console.log('Contenido HTML recibido:', data);
-            alert('Hubo un error en la respuesta del servidor.');
+            //alert('Hubo un error en la respuesta del servidor.');
             return;
         }
 
@@ -1584,16 +1584,16 @@ async  function cargarTaraPresentacion() {
                 // Mostramos los resultados
                 console.log('Resultados de Peso Mínimo por Presentación:', presentacion);
             } else {
-                alert('No se encontraron datos para este batch.');
+                //alert('No se encontraron datos para este batch.');
             }
         } else {
             console.log('No se encontraron datos para el batch especificado.');
-            alert('No se encontraron datos para el batch especificado.');
+            //alert('No se encontraron datos para el batch especificado.');
         }
     })
     .catch(error => {
         console.error('Hubo un problema con la solicitud:', error);
-        alert('Error al obtener los datos.');
+        //alert('Error al obtener los datos.');
     });
 }
 
@@ -1613,7 +1613,7 @@ async function cargarConciliacionRendi() {
 
     if (!batch) {
         console.error('No se ha extraído un valor válido para batch');
-        alert('No se ha extraído un valor válido para batch');
+        //alert('No se ha extraído un valor válido para batch');
         return;
     }
 
@@ -1644,7 +1644,7 @@ async function cargarConciliacionRendi() {
 
         if (typeof data === 'string') {
             console.log('Contenido HTML recibido:', data);
-            alert('Hubo un error en la respuesta del servidor.');
+            //alert('Hubo un error en la respuesta del servidor.');
             return;
         }
 
@@ -1670,12 +1670,12 @@ async function cargarConciliacionRendi() {
             }
         } else {
             console.log('No se encontraron datos para el batch especificado.');
-            alert('No se encontraron datos para el batch especificado.');
+            //alert('No se encontraron datos para el batch especificado.');
         }
     })
     .catch(error => {
         console.error('Hubo un problema con la solicitud:', error);
-        alert('Error al obtener los datos.');
+        //alert('Error al obtener los datos.');
     });
 }
 
@@ -1723,7 +1723,7 @@ async function cargarConciliacionRendiAcond() {
 
         if (typeof data === 'string') {
             console.log('Contenido HTML recibido:', data);
-            alert('Hubo un error en la respuesta del servidor.');
+            //alert('Hubo un error en la respuesta del servidor.');
             return;
         }
 
@@ -1755,9 +1755,76 @@ async function cargarConciliacionRendiAcond() {
     })
     .catch(error => {
         console.error('Hubo un problema con la solicitud:', error);
-        alert('Error al obtener los datos.');
+        //alert('Error al obtener los datos.');
     });
 }
+
+
+async function consultarBatchDesdeURL() {
+    const path = window.location.pathname;
+    const match = path.match(/\/pdf\/(\d+)\//);  // Captura el número de batch
+
+    if (match) {
+        const batch = match[1];
+        console.log("Batch detectado:", batch);
+
+        fetch(`http://10.1.200.30:1001/pdf/${batch}/cualquier-nombre`)
+            .then(response => response.json())
+            .then(data => {
+                const tablas = {
+                    1: document.getElementById("tblMuestrasEnvasadoBody1"),
+                    2: document.getElementById("tblMuestrasEnvasadoBody2"),
+                    3: document.getElementById("tblMuestrasEnvasadoBody3"),
+                    4: document.getElementById("tblMuestrasEnvasadoBody4")
+                };
+
+                const tablasData = data.tablas;
+
+                for (let i = 1; i <= 4; i++) {
+                    const tabla = tablas[i];
+                    tabla.innerHTML = ""; // Limpia antes de insertar nuevas filas
+
+                    const tablaKey = `tabla${i}`;
+                    const tablaContenido = tablasData[tablaKey];
+
+                    if (tablaContenido && Array.isArray(tablaContenido.muestras)) {
+                        const muestras = tablaContenido.muestras;
+                        const maxCols = 10;
+
+                        // Cargar muestras en formato de tabla de hasta 10 columnas por fila
+                        for (let j = 0; j < muestras.length; j += maxCols) {
+                            const tr = document.createElement("tr");
+                            const fila = muestras.slice(j, j + maxCols);
+
+                            fila.forEach(valor => {
+                                const td = document.createElement("td");
+                                td.textContent = valor;
+                                tr.appendChild(td);
+                            });
+
+                            tabla.appendChild(tr);
+                        }
+
+                        // ✅ Mostrar promedio y cantidad en los inputs correspondientes
+                        const promedioInput = document.getElementById(`promedioMuestras${i}`);
+                        const cantidadInput = document.getElementById(`cantidadMuestras${i}`);
+
+                        if (promedioInput && cantidadInput) {
+                            promedioInput.value = tablaContenido.promedio;
+                            cantidadInput.value = tablaContenido.cantidad;
+                        }
+                    }
+                }
+            })
+            .catch(error => {
+                console.error("Error al obtener los datos:", error);
+            });
+    }
+}
+
+
+
+//window.onload = consultarBatchDesdeURL;
 
 
 
@@ -1768,6 +1835,7 @@ window.onload = async function() {
     await cargarTaraPeso();
     await cargarConciliacionRendi();
     await cargarConciliacionRendiAcond();
+    await consultarBatchDesdeURL();
 };
 </script>
 <!--<script src="../js/registrosTara.js"></script> 

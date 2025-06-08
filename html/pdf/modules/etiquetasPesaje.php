@@ -147,7 +147,7 @@
 
             } catch (error) {
                 console.error('Error en la solicitud:', error);
-                alert('No se pudieron cargar los datos del servidor');
+                //alert('No se pudieron cargar los datos del servidor');
             }
         }
         
@@ -227,7 +227,7 @@
 
             } catch (error) {
                 console.error('Error en la solicitud:', error);
-                alert('No se pudieron cargar las etiquetas del servidor');
+                //alert('No se pudieron cargar las etiquetas del servidor');
             }
         }
 
