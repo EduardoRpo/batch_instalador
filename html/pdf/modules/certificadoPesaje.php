@@ -134,6 +134,23 @@
         </table>
     </div>
 </div>
+<div style="margin-top: 30px; text-align: center;">
+    <form id="formImprimir" method="post" target="_blank">
+        <button type="submit" style="
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        ">
+            Imprimir PDF
+        </button>
+    </form>
+</div>
 
 
 <script>
@@ -180,9 +197,20 @@
 
            } catch (error) {
                console.error('Error en la solicitud:', error);
-               alert('No se pudieron cargar los datos del servidor');
+               //alert('No se pudieron cargar los datos del servidor');
            }
        }
+
+       // Agregar esto dentro de DOMContentLoaded
+        const { num_batch, id_producto } = getDynamicValuesFromUrl();
+
+        // Construir URL del backend que genera el PDF
+        const urlPDF = `http://10.1.200.30:1122/generar_pdf/${num_batch}/${id_producto}`;
+
+        // Asignar dinámicamente al formulario
+        const form = document.getElementById("formImprimir");
+        form.action = urlPDF;
+
 
        // Llamar a la función cuando la página cargue
        getPDFData();
