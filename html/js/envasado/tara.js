@@ -366,7 +366,7 @@ function guardarMuestrasTara2() {
     })
     .catch(error => {
         console.error('Error al enviar los datos:', error);
-        alert('Error al enviar los datos al servidor.');
+        //alert('Error al enviar los datos al servidor.');
     });
 }
 
@@ -531,7 +531,7 @@ function guardarMuestrasTara3() {
     })
     .catch(error => {
         console.error('Error al enviar los datos:', error);
-        alert('Error al enviar los datos al servidor.');
+        //alert('Error al enviar los datos al servidor.');
     });
 }
 
@@ -696,7 +696,7 @@ function guardarMuestrasTara4() {
     })
     .catch(error => {
         console.error('Error al enviar los datos:', error);
-        alert('Error al enviar los datos al servidor.');
+        //alert('Error al enviar los datos al servidor.');
     });
 }
 
