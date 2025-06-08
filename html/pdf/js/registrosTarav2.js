@@ -51,7 +51,7 @@ function cargarTara() {
     .then(data => {
         if (typeof data === 'string') {
             console.log('Contenido HTML recibido:', data);
-            alert('Hubo un error en la respuesta del servidor.');
+            //alert('Hubo un error en la respuesta del servidor.');
             return;
         }
 
@@ -119,11 +119,11 @@ function cargarTara() {
             }
         } else {
             console.log('No se encontraron datos para el batch especificado.');
-            alert('No se encontraron datos para el batch especificado.');
+            //alert('No se encontraron datos para el batch especificado.');
         }
     })
     .catch(error => {
         console.error('Hubo un problema con la solicitud:', error);
-        alert('Error al obtener los datos.');
+        //alert('Error al obtener los datos.');
     });
 }
