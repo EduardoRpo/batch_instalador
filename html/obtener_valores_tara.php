@@ -1,10 +1,11 @@
 <?php 
 // Configuración de la base de datos
+require_once __DIR__ . '/../env.php';
 $db_config = [
-    'host' => '10.1.200.30',
-    'user' => 'root',
-    'password' => '',
-    'database' => 'batch_record'
+    'host' => $servername,
+    'user' => $username,
+    'password' => $password,
+    'database' => $database
 ];
 
 // Crear conexión

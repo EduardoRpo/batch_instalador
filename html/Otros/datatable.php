@@ -1,5 +1,6 @@
 <?php 
-$connect = mysqli_connect("localhost", "root", "", "teenuste_batchrecord");
+require_once __DIR__ . '/../../env.php';
+$connect = mysqli_connect($servername, $username, $password, $database);
 $query = "SELECT * FROM batch ORDER BY id_batch ASC";
 $result = mysqli_query($connect, $query);
 ?>

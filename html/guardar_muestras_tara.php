@@ -4,11 +4,12 @@ ini_set('log_errors', 'On');
 ini_set('error_log', __DIR__ . '/error_log.log');
 
 // Configuración de la base de datos
+require_once __DIR__ . '/../env.php';
 $db_config = [
-    'host' => '10.1.200.30',
-    'user' => 'root',
-    'password' => '',
-    'database' => 'batch_record'
+    'host' => $servername,
+    'user' => $username,
+    'password' => $password,
+    'database' => $database
 ];
 
 // Crear conexión

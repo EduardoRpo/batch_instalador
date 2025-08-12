@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  # Servicio de la aplicación PHP
+  app:
+    build: .
+    container_name: batch_record_app
+    ports:
+      - "8580:8580"
+    volumes:
+      - ./:/var/www/html
+      - ./logs:/var/www/html/logs
+    environment:
+      - APP_ENV=production
+      - DB_HOST=mysql
+      - DB_NAME=batch_record
+      - DB_USER=root
+      - DB_PASSWORD=
+    depends_on:
+      - mysql
+    networks:
+      - batch_record_network
+    restart: unless-stopped
+
+  # Servicio de MySQL
+  mysql:
+    image: mysql:8.0
+    container_name: batch_record_mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_DATABASE=batch_record
+      - MYSQL_USER=batch_user
+      - MYSQL_PASSWORD=
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./db:/docker-entrypoint-initdb.d
+    networks:
+      - batch_record_network
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password
+
+  # Servicio de phpMyAdmin (opcional, para administración)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: batch_record_phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      - PMA_HOST=mysql
+      - PMA_PORT=3306
+      - PMA_USER=root
+      - PMA_PASSWORD=
+    depends_on:
+      - mysql
+    networks:
+      - batch_record_network
+    restart: unless-stopped
+
+volumes:
+  mysql_data:
+
+networks:
+  batch_record_network:
+    driver: bridge 
