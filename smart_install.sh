@@ -254,7 +254,7 @@ if check_port_usage $DEFAULT_PORT; then
     
     # Verificar si hay contenedores usando el puerto
     if command_exists docker; then
-        local container_using_port=$(docker ps --format "table {{.Names}}\t{{.Ports}}" | grep ":$DEFAULT_PORT->" | awk '{print $1}')
+        container_using_port=$(docker ps --format "table {{.Names}}\t{{.Ports}}" | grep ":$DEFAULT_PORT->" | awk '{print $1}')
         if [ -n "$container_using_port" ]; then
             print_warning "Contenedor usando el puerto: $container_using_port"
             echo ""
