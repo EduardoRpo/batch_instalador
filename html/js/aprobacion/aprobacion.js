@@ -2,8 +2,9 @@ $("#aprobacionTable").dataTable({
   pageLength: 50,
   order: [[1, "desc"]],
   ajax: {
-    url: "/api/aprobacion",
-    dataSrc: "",
+    url: "php/aprobacion_fetch.php",
+    type: "POST",
+    dataSrc: "data",
   },
   language: {
     url: "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json",
@@ -11,51 +12,51 @@ $("#aprobacionTable").dataTable({
   columns: [
     {
       title: "Batch",
-      data: "id_batch",
+      data: 0,
       className: "uniqueClassName",
     },
     {
       title: "Fecha Programación",
-      data: "fecha_programacion",
+      data: 1,
       className: "uniqueClassName",
     },
     {
       title: "No de Orden",
-      data: "numero_orden",
+      data: 2,
       className: "uniqueClassName",
     },
     {
       title: "Referencia",
-      data: "referencia",
+      data: 3,
       className: "uniqueClassName",
     },
     {
       title: "Nombre Referencia",
-      data: "nombre_referencia",
+      data: 4,
       className: "uniqueClassName",
     },
     {
       title: "No Lote",
-      data: "numero_lote",
+      data: 5,
       className: "uniqueClassName",
     },
     {
       title: "Firmas G",
-      data: "cantidad_firmas",
+      data: 6,
       className: "uniqueClassName",
     },
     {
       title: "Firmas T",
-      data: "total_firmas",
+      data: 7,
       className: "uniqueClassName",
     },
     {
       title: "Ingresar",
       className: "uniqueClassName",
-      data: "",
+      data: 0,
       render: (data, type, row) => {
         "use strict";
-        return `<a href="aprobacioninfo/${row.id_batch}/${row.referencia}"><i class="large material-icons" data-toggle="tooltip" title="Ingresar" style="color:rgb(0, 154, 68)">check_circle</i></a>`;
+        return `<a href="aprobacioninfo/${row[0]}/${row[3]}"><i class="large material-icons" data-toggle="tooltip" title="Ingresar" style="color:rgb(0, 154, 68)">check_circle</i></a>`;
       },
     },
   ],
