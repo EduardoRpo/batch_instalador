@@ -70,6 +70,9 @@ class AutoloaderSourceCode
 
             static::$fileIterator = new RecursiveIteratorIterator($directory, RecursiveIteratorIterator::LEAVES_ONLY);
 
+        } else {
+            // Reiniciar el iterador para permitir nuevas búsquedas en llamadas sucesivas
+            static::$fileIterator->rewind();
         }
 
         $filename = $className . static::$fileExt;
