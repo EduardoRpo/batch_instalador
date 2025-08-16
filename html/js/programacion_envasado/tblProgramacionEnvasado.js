@@ -52,10 +52,7 @@ $(document).ready(function () {
   /* tabla envasado */
 
   loadTblEnvasado = async (fecha) => {
-    let url = '/api/programacionEnvasado';
-
-    if (fecha) 
-      url = `/api/programacionEnvasado/${fecha}`;
+    let url = '/html/php/programacion_envasado_fetch.php';
 
     tablaEnvasado = $('#tablaEnvasado').DataTable({
       destroy: true,
@@ -63,7 +60,13 @@ $(document).ready(function () {
       order: [[5, 'asc']],
       ajax: {
         url: url,
-        dataSrc: '',
+        type: 'POST',
+        data: function(d) {
+          if (fecha) {
+            d.fecha = fecha;
+          }
+        },
+        dataSrc: 'data',
       },
       language: {
         url: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json',
@@ -71,12 +74,12 @@ $(document).ready(function () {
       columns: [
         {
           title: 'Batch',
-          data: 'id_batch',
+          data: 0,
           className: 'uniqueClassName',
         },
         {
           title: 'Estado',
-          data: 'estado',
+          data: 1,
           className: 'uniqueClassName',
           render: (data, type, row) => {
             'use strict';
@@ -99,34 +102,34 @@ $(document).ready(function () {
         },
         {
           title: 'Granel',
-          data: 'referencia',
+          data: 2,
           className: 'uniqueClassName',
           // visible: false,
         },
         {
           title: 'Pedido',
-          data: 'pedido',
+          data: 3,
           className: 'uniqueClassName',
         },
         {
           title: 'Fecha Estimada Envasado',
-          data: 'fecha_envasado',
+          data: 4,
           className: 'uniqueClassName',
         },
         {
           title: 'Propietario',
-          data: 'propietario',
+          data: 5,
           className: 'uniqueClassName',
           visible: false,
         },
         {
           title: 'Descripción',
-          data: 'nombre_referencia',
+          data: 6,
           className: 'uniqueClassName',
         },
         {
           title: 'Ref',
-          data: 'id_batch',
+          data: 0,
           className: 'uniqueClassName',
           render: function (data) {
             return `
@@ -135,79 +138,24 @@ $(document).ready(function () {
         },
         {
           title: 'No Lote',
-          data: 'numero_lote',
+          data: 7,
           className: 'uniqueClassName',
         },
         {
           title: 'Unidades',
-          data: 'unidad_lote',
+          data: 8,
           className: 'uniqueClassName',
           render: $.fn.dataTable.render.number('.', ',', 0, ''),
         },
         {
           title: 'Tamaño Lote(Kg)',
-          data: 'tamano_lote',
+          data: 9,
           className: 'uniqueClassName',
           render: $.fn.dataTable.render.number('.', ',', 0, ''),
         },
-        {
-          title: 'fecha Programacion',
-          data: 'programacion_envasado',
-          className: 'uniqueClassName',
-          visible: false,
-        },
-        {
-          title: 'Programacion',
-          data: null,
-          className: 'uniqueClassName',
-          render: function (data) {
-            !data.programacion_envasado
-              ? (fecha = '')
-              : (fecha = data.programacion_envasado);
-
-            return `
-                      <input type="datetime-local" class="fechaProgramar form-control-updated text-center" id="date-${data.id_batch}" value="${fecha}" />`;
-          },
-        },
-        {
-          title: 'Obs',
-          data: null,
-          className: 'uniqueClassName',
-          render: function (data) {
-            return `
-                      <i class="badge badge-danger badge-pill notify-icon-badge ml-3">${data.cant_observations}</i><br>
-                      <a href='#' <i class="fa fa-file-text fa-1x link-comentario" id="${data.id_batch}" aria-hidden="true" data-toggle="tooltip" title="adicionar observaciones" style="color:rgb(59, 131, 189)" aria-hidden="true"></i></a>
-                    `;
-          },
-        },
-        {
-          title: 'Aprob',
-          data: 'ok_aprobado',
-          className: 'uniqueClassName',
-          render: function (data) {
-            if (data)
-              return `<i class='fa fa-check fa-2x' style='color:green'></i>`;
-            else return `<i class='fa fa-close fa-2x' style='color:red'></i>`;
-          },
-        },
       ],
-      rowCallback: function (row, data, index) {
-        if (data['programacion_envasado'] && data['ok_aprobado'])
-          $(row).css('color', 'green');
-        else if (data['programacion_envasado'] && !data['ok_aprobado'])
-          $(row).css('color', 'orange');
-      },
-      rowGroup: {
-        dataSrc: function (row) {
-          return `<th class="text-center" colspan="14" style="font-weight: bold;"> ${row.propietario} </th> `;
-        },
-        startRender: function (rows, group) {
-          return $('<tr/>').append(group);
-        },
-        className: 'odd',
-      },
     });
-  }
+  };
 
   loadTblEnvasado(null);
 
