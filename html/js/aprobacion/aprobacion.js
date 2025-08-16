@@ -2,7 +2,7 @@ $("#aprobacionTable").dataTable({
   pageLength: 50,
   order: [[1, "desc"]],
   ajax: {
-    url: "php/aprobacion_fetch.php",
+    url: "/html/php/aprobacion_fetch.php",
     type: "POST",
     dataSrc: "data",
   },
