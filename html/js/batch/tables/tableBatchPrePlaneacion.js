@@ -115,8 +115,9 @@ $(document).ready(function () {
     destroy: true,
     pageLength: 50,
     ajax: {
-      url: `/api/prePlaneados`,
-      dataSrc: '',
+      url: `/html/php/batch_preplaneacion_fetch.php`,
+      type: 'POST',
+      dataSrc: 'data',
     },
     language: {
       url: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json',

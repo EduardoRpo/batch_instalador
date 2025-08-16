@@ -3,8 +3,9 @@ $(document).ready(function () {
     destroy: true,
     pageLength: 100,
     ajax: {
-      url: `/api/preBatch`,
-      dataSrc: '',
+      url: `/html/php/batch_pedidos_fetch.php`,
+      type: 'POST',
+      dataSrc: 'data',
     },
     language: {
       url: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json',

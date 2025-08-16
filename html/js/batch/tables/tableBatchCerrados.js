@@ -9,8 +9,9 @@ $(document).ready(function() {
         bAutoWidth: false,
 
         ajax: {
-            url: '/api/batchcerrados',
-            dataSrc: '',
+            url: '/html/php/batch_cerrados_fetch.php',
+            type: 'POST',
+            dataSrc: 'data',
         },
         order: [
             [0, 'desc']
@@ -18,45 +19,52 @@ $(document).ready(function() {
 
         columns: [{
                 title: 'Batch',
-                data: 'id_batch',
-                className: 'uniqueClassName',
-            },
-            {
-                title: 'No Orden',
-                data: 'numero_orden',
+                data: 0,
                 className: 'uniqueClassName',
             },
             {
                 title: 'Referencia',
-                data: 'referencia',
+                data: 1,
                 className: 'uniqueClassName',
             },
             {
                 title: 'Producto',
-                data: 'nombre_referencia',
+                data: 2,
             },
             {
                 title: 'No Lote',
-                data: 'numero_lote',
+                data: 3,
             },
             {
                 title: 'Tamaño Lote',
-                data: 'tamano_lote',
+                data: 4,
                 className: 'uniqueClassName',
                 render: $.fn.dataTable.render.number('.', ',', 2, ''),
             },
             {
-                title: 'Propietario',
-                data: 'nombre',
+                title: 'Sem Plan',
+                data: 5,
+                className: 'uniqueClassName',
+                render: function (data) {
+                    return `S${data}`;
+                },
             },
             {
-                title: 'Fecha Planeación',
-                data: 'fecha_creacion',
+                title: 'Sem Prog',
+                data: 6,
                 className: 'uniqueClassName',
+                render: function (data) {
+                    return `S${data}`;
+                },
             },
             {
                 title: 'Fecha Programación',
-                data: 'fecha_programacion',
+                data: 7,
+                className: 'uniqueClassName',
+            },
+            {
+                title: 'Estado',
+                data: 8,
                 className: 'uniqueClassName',
             },
         ],

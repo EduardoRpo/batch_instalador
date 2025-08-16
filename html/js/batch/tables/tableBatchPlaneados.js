@@ -75,7 +75,11 @@ $(document).ready(function () {
     },
     oSearch: { bSmart: false },
 
-    ajax: { url: '/api/batchPlaneados', dataSrc: '' },
+    ajax: { 
+      url: '/html/php/batch_planeados_fetch.php', 
+      type: 'POST',
+      dataSrc: 'data' 
+    },
     order: [[2, 'asc']],
     columns: [
       {
