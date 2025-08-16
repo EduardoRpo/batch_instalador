@@ -3,8 +3,8 @@ $(document).ready(function () {
 
   cargarNombresReferencias = () => {
     $.ajax({
-      url: '/api/productsGranel',
-
+      url: '/html/php/products_granel.php',
+      type: 'GET',
       success: function (resp) {
         products = resp;
         let $selectRef = $('#cmbNoReferencia');
@@ -30,6 +30,10 @@ $(document).ready(function () {
         $('#modalCrearBatch').modal('show');
         addtnq = 1;
       },
+      error: function(xhr, status, error) {
+        console.error('Error cargando productos:', error);
+        alert('Error cargando productos. Revisa la consola para más detalles.');
+      }
     });
   };
 

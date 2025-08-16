@@ -21,6 +21,9 @@ $(document).ready(function () {
     data = '';
     cargarNombresReferencias();
     cargarTanques();
+    
+    // Mostrar el modal
+    $('#modalCrearBatch').modal('show');
   };
 
   /* Llenar el selector de referencias al crear Batch */
