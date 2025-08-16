@@ -15,7 +15,6 @@ try {
     // Consulta básica con columnas que sabemos que existen
     $sql = "SELECT referencia, nombre_referencia 
             FROM producto 
-            WHERE tipo = 'Granel' 
             ORDER BY nombre_referencia";
     
     $stmt = $conn->prepare($sql);
