@@ -19,7 +19,7 @@ function initializeBatchTables() {
             language: { url: '../../../admin/sistema/admin_componentes/es-ar.json' },
             oSearch: { bSmart: false },
             ajax: {
-                url: '/html/php/batch_fetch_safe.php',
+                url: '/html/php/batch_fetch_minimal.php',
                 type: 'POST',
                 dataSrc: 'data',
             },
@@ -48,18 +48,8 @@ function initializeBatchTables() {
                     render: $.fn.dataTable.render.number('.', ',', 2, ''),
                 },
                 {
-                    title: 'Fecha Creación',
-                    data: 5,
-                    className: 'uniqueClassName',
-                },
-                {
-                    title: 'Fecha Programación',
-                    data: 6,
-                    className: 'uniqueClassName',
-                },
-                {
                     title: 'Estado',
-                    data: 7,
+                    data: 5,
                     className: 'uniqueClassName',
                     render: (data, type, row) => {
                         'use strict';
@@ -112,24 +102,23 @@ function initializeBatchTables() {
             oSearch: { bSmart: false },
             bAutoWidth: false,
             ajax: {
-                url: '/html/php/batch_cerrados_fetch_safe.php',
+                url: '/html/php/batch_fetch_minimal.php',
                 type: 'POST',
+                data: function(d) {
+                    d.estado_min = 8; // Solo cerrados
+                },
                 dataSrc: 'data',
             },
             order: [[0, 'desc']],
             columns: [{
                     title: 'Batch',
-                    data: 0,
-                    className: 'uniqueClassName',
-                },
-                {
-                    title: 'Referencia',
                     data: 1,
                     className: 'uniqueClassName',
                 },
                 {
-                    title: 'Producto',
+                    title: 'Referencia',
                     data: 2,
+                    className: 'uniqueClassName',
                 },
                 {
                     title: 'No Lote',
@@ -142,29 +131,8 @@ function initializeBatchTables() {
                     render: $.fn.dataTable.render.number('.', ',', 2, ''),
                 },
                 {
-                    title: 'Sem Plan',
-                    data: 5,
-                    className: 'uniqueClassName',
-                    render: function (data) {
-                        return `S${data}`;
-                    },
-                },
-                {
-                    title: 'Sem Prog',
-                    data: 6,
-                    className: 'uniqueClassName',
-                    render: function (data) {
-                        return `S${data}`;
-                    },
-                },
-                {
-                    title: 'Fecha Programación',
-                    data: 7,
-                    className: 'uniqueClassName',
-                },
-                {
                     title: 'Estado',
-                    data: 8,
+                    data: 5,
                     className: 'uniqueClassName',
                 },
             ],
@@ -177,8 +145,11 @@ function initializeBatchTables() {
             destroy: true,
             pageLength: 100,
             ajax: {
-                url: `/html/php/batch_pedidos_fetch.php`,
+                url: `/html/php/batch_fetch_minimal.php`,
                 type: 'POST',
+                data: function(d) {
+                    d.estado_min = 1; // Solo pedidos
+                },
                 dataSrc: 'data',
             },
             language: {
@@ -190,58 +161,30 @@ function initializeBatchTables() {
             ],
             columns: [
                 {
-                    title: 'No.',
-                    data: 0,
-                    className: 'text-center',
-                    visible: false,
-                },
-                {
-                    title: 'Propietario',
+                    title: 'Batch',
                     data: 1,
-                    visible: false,
-                },
-                {
-                    title: 'Pedido',
-                    data: 2,
-                    className: 'text-center',
-                },
-                {
-                    title: 'F_Pedido',
-                    data: 3,
-                    className: 'text-center',
-                },
-                {
-                    title: 'Granel',
-                    data: 4,
                     className: 'text-center',
                 },
                 {
                     title: 'Referencia',
+                    data: 2,
+                    className: 'text-center',
+                },
+                {
+                    title: 'No Lote',
+                    data: 3,
+                    className: 'text-center',
+                },
+                {
+                    title: 'Tamaño Lote',
+                    data: 4,
+                    className: 'text-center',
+                    render: $.fn.dataTable.render.number('.', ',', 2, ''),
+                },
+                {
+                    title: 'Estado',
                     data: 5,
                     className: 'text-center',
-                },
-                {
-                    title: 'Producto',
-                    data: 6,
-                },
-                {
-                    title: 'Cant_Original',
-                    data: 7,
-                    className: 'text-center',
-                    visible: false,
-                    render: $.fn.dataTable.render.number('.', ',', 0, ' '),
-                },
-                {
-                    title: 'Saldo Ofima',
-                    data: 8,
-                    className: 'text-center',
-                    render: $.fn.dataTable.render.number('.', ',', 0, ' '),
-                },
-                {
-                    title: 'Acum Prog',
-                    data: 9,
-                    className: 'text-center',
-                    render: $.fn.dataTable.render.number('.', ',', 0, ' '),
                 },
             ],
         });
@@ -258,11 +201,14 @@ function initializeBatchTables() {
             },
             oSearch: { bSmart: false },
             ajax: { 
-                url: '/html/php/batch_planeados_fetch.php', 
+                url: '/html/php/batch_fetch_minimal.php', 
                 type: 'POST',
+                data: function(d) {
+                    d.estado_min = 2; // Solo planeados
+                },
                 dataSrc: 'data' 
             },
-            order: [[2, 'asc']],
+            order: [[1, 'asc']],
             columns: [
                 {
                     title: '',
@@ -273,55 +219,29 @@ function initializeBatchTables() {
                     },
                 },
                 {
-                    title: 'N° Semana',
+                    title: 'Batch',
                     data: 1,
-                    className: 'text-center',
-                    render: function (data) {
-                        return `S${data}`;
-                    },
-                },
-                {
-                    width: '350px',
-                    title: 'Propietario',
-                    data: 2,
-                    visible: false,
-                },
-                {
-                    title: 'Pedido',
-                    data: 3,
-                    className: 'text-center',
-                },
-                {
-                    title: 'Granel',
-                    data: 4,
                     className: 'text-center',
                 },
                 {
                     title: 'Referencia',
-                    data: 5,
+                    data: 2,
                     className: 'text-center',
                 },
                 {
-                    width: '350px',
-                    title: 'Producto',
-                    data: 6,
-                    className: 'uniqueClassName',
+                    title: 'No Lote',
+                    data: 3,
+                    className: 'text-center',
                 },
                 {
                     title: 'Tamaño Lote (Kg)',
-                    data: 7,
+                    data: 4,
                     className: 'text-center',
                     render: $.fn.dataTable.render.number('.', ',', 2, ''),
                 },
                 {
-                    title: 'Cantidad (Und)',
-                    data: 8,
-                    className: 'text-center',
-                    render: $.fn.dataTable.render.number('.', ',', 0, ''),
-                },
-                {
                     title: 'Estado',
-                    data: 9,
+                    data: 5,
                     className: 'text-center',
                 },
             ],
@@ -334,8 +254,11 @@ function initializeBatchTables() {
             destroy: true,
             pageLength: 50,
             ajax: {
-                url: `/html/php/batch_preplaneacion_fetch.php`,
+                url: `/html/php/batch_fetch_minimal.php`,
                 type: 'POST',
+                data: function(d) {
+                    d.estado_min = 0; // Solo pre-planeados
+                },
                 dataSrc: 'data',
             },
             language: {
@@ -344,55 +267,29 @@ function initializeBatchTables() {
             order: [1, 'asc'],
             columns: [
                 {
-                    title: 'N° Semana',
-                    data: 0,
-                    className: 'text-center',
-                    render: function (data) {
-                        return `S${data}`;
-                    },
-                },
-                {
-                    width: '350px',
-                    title: 'Propietario',
+                    title: 'Batch',
                     data: 1,
-                    visible: false,
-                },
-                {
-                    title: 'Pedido',
-                    data: 2,
-                    className: 'text-center',
-                },
-                {
-                    title: 'Granel',
-                    data: 3,
                     className: 'text-center',
                 },
                 {
                     title: 'Referencia',
-                    data: 4,
+                    data: 2,
                     className: 'text-center',
                 },
                 {
-                    width: '500px',
-                    title: 'Producto',
-                    data: 5,
-                    className: 'uniqueClassName',
+                    title: 'No Lote',
+                    data: 3,
+                    className: 'text-center',
                 },
                 {
                     title: 'Tamaño Lote (Kg)',
-                    data: 6,
+                    data: 4,
                     className: 'text-center',
                     render: $.fn.dataTable.render.number('.', ',', 2, ''),
                 },
                 {
-                    title: 'Cantidad (Und)',
-                    data: 7,
-                    className: 'text-center',
-                    render: $.fn.dataTable.render.number('.', ',', 0, ''),
-                },
-                {
                     title: 'Estado',
-                    data: 8,
+                    data: 5,
                     className: 'text-center',
                 },
             ],
