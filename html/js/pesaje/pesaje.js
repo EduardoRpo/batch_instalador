@@ -6,8 +6,9 @@ $(document).ready(function() {
         ],
 
         ajax: {
-            url: "/api/pesajes",
-            dataSrc: "",
+            url: "/html/php/pesajes_fetch.php",
+            type: "POST",
+            dataSrc: "data",
         },
         language: {
             url: "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json",
@@ -15,45 +16,45 @@ $(document).ready(function() {
 
         columns: [{
                 title: "Batch",
-                data: "id_batch",
+                data: 0,
                 className: "uniqueClassName",
             },
             {
                 title: "Fecha Programación",
-                data: "fecha_programacion",
+                data: 1,
                 className: "uniqueClassName",
             },
             {
                 title: "No Orden",
-                data: "numero_orden",
+                data: 2,
                 className: "uniqueClassName",
             },
             {
                 title: "Referencia",
-                data: "referencia",
+                data: 3,
                 className: "uniqueClassName",
             },
             {
                 title: "No Lote",
-                data: "numero_lote",
+                data: 4,
                 className: "uniqueClassName",
             },
             {
                 title: "Firmas G",
-                data: "cantidad_firmas",
+                data: 5,
                 className: "uniqueClassName",
             },
             {
                 title: "Firmas T",
-                data: "total_firmas",
+                data: 6,
                 className: "uniqueClassName",
             },
             {
                 title: "Ingresar",
-                data: "",
+                data: 0,
                 className: "uniqueClassName",
                 render: (data, type, row) => {
-                    return `<a href="pesajeinfo/${row.id_batch}/${row.referencia}" <i class="large material-icons" data-toggle="tooltip" title="Ingresar" style="color:rgb(0, 154, 68)">format_color_fill</i></a>`;
+                    return `<a href="pesajeinfo/${row[0]}/${row[3]}" <i class="large material-icons" data-toggle="tooltip" title="Ingresar" style="color:rgb(0, 154, 68)">format_color_fill</i></a>`;
                 },
             },
         ],
