@@ -12,8 +12,9 @@ $(document).ready(function () {
     pageLength: 50,
     order: [[1, 'desc']],
     ajax: {
-      url: '/api/acondicionamiento',
-      dataSrc: '',
+      url: '/html/php/acondicionamiento_fetch.php',
+      type: 'POST',
+      dataSrc: 'data',
     },
     language: {
       url: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json',
@@ -21,13 +22,13 @@ $(document).ready(function () {
     columns: [
       {
         title: 'Batch',
-        data: 'id_batch',
+        data: 0,
         className: 'uniqueClassName',
       },
       {
         width: '20%',
         title: 'Fecha Programación',
-        data: 'programacion_envasado',
+        data: 1,
         className: 'uniqueClassName',
         render: function (data) {
           date = new Date(data);
@@ -44,25 +45,20 @@ $(document).ready(function () {
           return stringDate;
         },
       },
-      /* {
-                title: 'No de Orden',
-                data: 'numero_orden',
-                className: 'uniqueClassName',
-            }, */
       {
         title: 'Referencia',
-        data: 'referencia',
+        data: 2,
         className: 'uniqueClassName',
       },
       {
         width: '400px',
         title: 'Nombre Referencia',
-        data: 'nombre_referencia',
+        data: 3,
         className: 'uniqueClassName',
       },
       {
         title: 'Ref',
-        data: 'id_batch',
+        data: 0,
         className: 'uniqueClassName',
         render: function (data) {
           return `
@@ -71,33 +67,33 @@ $(document).ready(function () {
       },
       {
         title: 'Unidades',
-        data: 'unidad_lote',
+        data: 5,
         className: 'uniqueClassName',
         render: $.fn.dataTable.render.number('.', ',', 0, ''),
       },
       {
         title: 'No Lote',
-        data: 'numero_lote',
+        data: 4,
         className: 'uniqueClassName',
       },
       {
         title: 'Firmas G',
-        data: 'cantidad_firmas',
+        data: 6,
         className: 'uniqueClassName',
       },
       {
         title: 'Firmas T',
-        data: 'total_firmas',
+        data: 7,
         className: 'uniqueClassName',
       },
       {
         title: 'Obs',
         data: null,
         className: 'uniqueClassName',
-        render: function (data) {
+        render: function (data, type, row) {
           return `
-                    <i class="badge badge-danger badge-pill notify-icon-badge ml-3">${data.cant_observations}</i><br>
-                    <a href='#' <i class="fa fa-file-text fa-1x link-comentario" id="${data.id_batch}-${data.modulo}" aria-hidden="true" data-toggle="tooltip" title="adicionar observaciones" style="color:rgb(59, 131, 189)" aria-hidden="true"></i></a>
+                    <i class="badge badge-danger badge-pill notify-icon-badge ml-3">0</i><br>
+                    <a href='#' <i class="fa fa-file-text fa-1x link-comentario" id="${row[0]}-7" aria-hidden="true" data-toggle="tooltip" title="adicionar observaciones" style="color:rgb(59, 131, 189)" aria-hidden="true"></i></a>
                   `;
         },
       },
@@ -107,7 +103,7 @@ $(document).ready(function () {
         data: '',
         render: (data, type, row) => {
           'use strict';
-          return `<a href="acondicionamientoinfo/${row.id_batch}/${row.referencia}"><i class="large material-icons" data-toggle="tooltip" title="Ingresar" style="color:rgb(0, 154, 68)">exit_to_app</i></a>`;
+          return `<a href="acondicionamientoinfo/${row[0]}/${row[2]}"><i class="large material-icons" data-toggle="tooltip" title="Ingresar" style="color:rgb(0, 154, 68)">touch_app</i></a>`;
         },
       },
     ],
