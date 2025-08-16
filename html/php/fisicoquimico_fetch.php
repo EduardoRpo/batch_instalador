@@ -17,24 +17,23 @@ try {
     $order_column = isset($_POST['order'][0]['column']) ? intval($_POST['order'][0]['column']) : 0;
     $order_dir = isset($_POST['order'][0]['dir']) ? $_POST['order'][0]['dir'] : 'ASC';
     
-    // Mapear columnas para envasado
-    $columns = ['id_batch', 'fecha_programacion', 'referencia', 'nombre_referencia', 'numero_lote', 'unidad_lote', 'cantidad_firmas', 'total_firmas'];
+    // Mapear columnas para fisicoquímico
+    $columns = ['id_batch', 'fecha_programacion', 'numero_orden', 'referencia', 'numero_lote', 'cantidad_firmas', 'total_firmas'];
     $order_by = $columns[$order_column] ?? 'id_batch';
     
-    // Construir consulta base para envasado
-    $sql = "SELECT batch.id_batch, batch.fecha_programacion, batch.id_producto as referencia,
-                   p.nombre_referencia, batch.numero_lote, batch.unidad_lote, 
-                   bcf.cantidad_firmas, bcf.total_firmas
+    // Construir consulta base para fisicoquímico
+    $sql = "SELECT batch.id_batch, batch.fecha_programacion, batch.numero_orden, batch.id_producto as referencia,
+                   batch.numero_lote, bcf.cantidad_firmas, bcf.total_firmas
             FROM batch
             INNER JOIN producto p ON p.referencia = batch.id_producto
             INNER JOIN batch_control_firmas bcf ON bcf.batch = batch.id_batch
-            WHERE (batch.estado >= 5.5) AND bcf.cantidad_firmas in (0, 1) AND bcf.modulo = 6";
+            WHERE (batch.estado >= 6.5) AND bcf.cantidad_firmas in (0, 1) AND bcf.modulo = 9";
     
     $count_sql = "SELECT COUNT(*) as total
                   FROM batch
                   INNER JOIN producto p ON p.referencia = batch.id_producto
                   INNER JOIN batch_control_firmas bcf ON bcf.batch = batch.id_batch
-                  WHERE (batch.estado >= 5.5) AND bcf.cantidad_firmas in (0, 1) AND bcf.modulo = 6";
+                  WHERE (batch.estado >= 6.5) AND bcf.cantidad_firmas in (0, 1) AND bcf.modulo = 9";
     
     // Agregar búsqueda si existe
     $where_conditions = [];
@@ -72,10 +71,9 @@ try {
         $formatted_data[] = [
             $row['id_batch'],
             $row['fecha_programacion'],
+            $row['numero_orden'],
             $row['referencia'],
-            $row['nombre_referencia'],
             $row['numero_lote'],
-            $row['unidad_lote'],
             $row['cantidad_firmas'],
             $row['total_firmas']
         ];

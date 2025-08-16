@@ -139,8 +139,9 @@ $(document).ready(function () {
     oSearch: { bSmart: false },
 
     ajax: {
-      url: '/api/batch',
-      dataSrc: '',
+      url: '/html/php/batch_fetch.php',
+      type: 'POST',
+      dataSrc: 'data',
     },
     order: [[1, 'desc']],
     columns: [
@@ -150,7 +151,7 @@ $(document).ready(function () {
       },
       {
         title: 'Batch',
-        data: 'id_batch',
+        data: 1,
       },
       /* {
                     title: 'No Orden',
@@ -159,20 +160,20 @@ $(document).ready(function () {
                   }, */
       {
         title: 'Referencia',
-        data: 'referencia',
+        data: 2,
         className: 'uniqueClassName',
       },
       {
         title: 'Producto',
-        data: 'nombre_referencia',
+        data: 3,
       },
       {
         title: 'No Lote',
-        data: 'numero_lote',
+        data: 4,
       },
       {
         title: 'Tamaño Lote',
-        data: 'tamano_lote',
+        data: 5,
         className: 'uniqueClassName',
         render: $.fn.dataTable.render.number('.', ',', 2, ''),
       },
@@ -187,7 +188,7 @@ $(document).ready(function () {
                   }, */
       {
         title: 'Sem Plan',
-        data: 'semana_creacion',
+        data: 6,
         className: 'uniqueClassName',
         render: function (data) {
           return `S${data}`;
@@ -195,7 +196,7 @@ $(document).ready(function () {
       },
       {
         title: 'Sem Prog',
-        data: 'semana_programacion',
+        data: 7,
         className: 'uniqueClassName',
         render: function (data) {
           return `S${data}`;
@@ -203,12 +204,12 @@ $(document).ready(function () {
       },
       {
         title: 'Fecha Programación',
-        data: 'fecha_programacion',
+        data: 8,
         className: 'uniqueClassName',
       },
       {
         title: 'Estado',
-        data: 'estado',
+        data: 9,
         className: 'uniqueClassName',
         render: (data, type, row) => {
           'use strict';
