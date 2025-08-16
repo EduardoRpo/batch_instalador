@@ -19,7 +19,7 @@ function initializeBatchTables() {
             language: { url: '../../../admin/sistema/admin_componentes/es-ar.json' },
             oSearch: { bSmart: false },
             ajax: {
-                url: '/html/php/batch_fetch.php',
+                url: '/html/php/batch_fetch_safe.php',
                 type: 'POST',
                 dataSrc: 'data',
             },
@@ -38,43 +38,28 @@ function initializeBatchTables() {
                     className: 'uniqueClassName',
                 },
                 {
-                    title: 'Producto',
+                    title: 'No Lote',
                     data: 3,
                 },
                 {
-                    title: 'No Lote',
-                    data: 4,
-                },
-                {
                     title: 'Tamaño Lote',
-                    data: 5,
+                    data: 4,
                     className: 'uniqueClassName',
                     render: $.fn.dataTable.render.number('.', ',', 2, ''),
                 },
                 {
-                    title: 'Sem Plan',
-                    data: 6,
+                    title: 'Fecha Creación',
+                    data: 5,
                     className: 'uniqueClassName',
-                    render: function (data) {
-                        return `S${data}`;
-                    },
-                },
-                {
-                    title: 'Sem Prog',
-                    data: 7,
-                    className: 'uniqueClassName',
-                    render: function (data) {
-                        return `S${data}`;
-                    },
                 },
                 {
                     title: 'Fecha Programación',
-                    data: 8,
+                    data: 6,
                     className: 'uniqueClassName',
                 },
                 {
                     title: 'Estado',
-                    data: 9,
+                    data: 7,
                     className: 'uniqueClassName',
                     render: (data, type, row) => {
                         'use strict';
@@ -127,7 +112,7 @@ function initializeBatchTables() {
             oSearch: { bSmart: false },
             bAutoWidth: false,
             ajax: {
-                url: '/html/php/batch_cerrados_fetch.php',
+                url: '/html/php/batch_cerrados_fetch_safe.php',
                 type: 'POST',
                 dataSrc: 'data',
             },
