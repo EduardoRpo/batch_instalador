@@ -431,11 +431,16 @@ include_once("modal/m_limpiar_firmas.php");
   <script src="/html/js/global/searchData.js"></script>
   <script src="/html/js/batch/calc/calcWeek.js"></script>
 
-  <script src="/html/js/batch/tables/tableBatchProgramados.js"></script>
-  <script src="/html/js/batch/tables/tableBatchCerrados.js"></script>
-  <script src="/html/js/batch/tables/tableBatchPlaneados.js"></script>
-  <script src="/html/js/batch/tables/tableBatchPedidos.js"></script>
-  <script src="/html/js/batch/tables/tableBatchPrePlaneacion.js"></script>
+  <!-- Script unificado para todas las tablas de Batch Record -->
+  <script src="/html/js/batch/batch_init.js"></script>
+  
+  <!-- Scripts individuales comentados para evitar conflictos -->
+  <!-- <script src="/html/js/batch/tables/tableBatchProgramados.js"></script> -->
+  <!-- <script src="/html/js/batch/tables/tableBatchCerrados.js"></script> -->
+  <!-- <script src="/html/js/batch/tables/tableBatchPlaneados.js"></script> -->
+  <!-- <script src="/html/js/batch/tables/tableBatchPedidos.js"></script> -->
+  <!-- <script src="/html/js/batch/tables/tableBatchPrePlaneacion.js"></script> -->
+  
   <script src="/html/js/batch/tables/batcheliminados.js"></script>
 
   <script src="/html/js/batch/limpiarFirmas.js"></script>
