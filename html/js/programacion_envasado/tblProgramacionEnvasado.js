@@ -52,7 +52,7 @@ $(document).ready(function () {
   /* tabla envasado */
 
   loadTblEnvasado = async (fecha) => {
-    let url = '/html/php/programacion_envasado_fetch_safe.php';
+    let url = '/html/php/programacion_envasado_fetch_debug.php';
 
     tablaEnvasado = $('#tablaEnvasado').DataTable({
       destroy: true,
