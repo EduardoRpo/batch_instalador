@@ -145,45 +145,71 @@ function initializeBatchTables() {
             destroy: true,
             pageLength: 100,
             ajax: {
-                url: `/html/php/batch_fetch_minimal.php`,
+                url: `/html/php/pedidos_fetch.php`,
                 type: 'POST',
-                data: function(d) {
-                    d.estado_min = 1; // Solo pedidos
-                },
                 dataSrc: 'data',
             },
             language: {
                 url: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json',
             },
             order: [
+                [0, 'asc'],
                 [1, 'asc'],
-                [2, 'asc'],
             ],
             columns: [
                 {
-                    title: 'Batch',
+                    title: 'Pedido',
+                    data: 0,
+                    className: 'text-center',
+                },
+                {
+                    title: 'F_Pedido',
                     data: 1,
                     className: 'text-center',
                 },
                 {
-                    title: 'Referencia',
+                    title: 'Granel',
                     data: 2,
                     className: 'text-center',
                 },
                 {
-                    title: 'No Lote',
+                    title: 'Referencia',
                     data: 3,
                     className: 'text-center',
                 },
                 {
-                    title: 'Tamaño Lote',
+                    title: 'Producto',
                     data: 4,
                     className: 'text-center',
-                    render: $.fn.dataTable.render.number('.', ',', 2, ''),
                 },
                 {
-                    title: 'Estado',
+                    title: 'Saldo Ofima',
                     data: 5,
+                    className: 'text-center',
+                },
+                {
+                    title: 'Acum Prog',
+                    data: 6,
+                    className: 'text-center',
+                },
+                {
+                    title: 'Cant_Programar',
+                    data: 7,
+                    className: 'text-center',
+                },
+                {
+                    title: 'Recep_Insumos día(1)',
+                    data: 8,
+                    className: 'text-center',
+                },
+                {
+                    title: 'Escenario',
+                    data: 9,
+                    className: 'text-center',
+                },
+                {
+                    title: 'Fecha Entrega día (15)',
+                    data: 10,
                     className: 'text-center',
                 },
             ],
