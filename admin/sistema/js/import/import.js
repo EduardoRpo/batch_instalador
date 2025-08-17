@@ -1,3 +1,13 @@
+// Cargar librería XLSX si no está disponible
+if (typeof XLSX === 'undefined') {
+  var script = document.createElement('script');
+  script.src = '/assets/plugins/xlsx/xlsx.full.min.js';
+  script.onload = function() {
+    console.log('XLSX library loaded successfully');
+  };
+  document.head.appendChild(script);
+}
+
 $(document).ready(function () {
   importFile = (selectedFile) =>
     new Promise((resolve, reject) => {
