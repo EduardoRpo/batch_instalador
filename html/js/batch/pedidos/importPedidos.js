@@ -11,25 +11,33 @@ $('#btnImportarPedidos').click(function (e) {
     importFile(selectedFile)
         .then((data) => {
             let OrderToImport = data.map((item) => {
-                // Normalizar las claves del Excel (convertir a minúsculas)
-                let normalizedItem = {};
-                Object.keys(item).forEach(key => {
-                    let normalizedKey = key.toLowerCase().trim();
-                    normalizedItem[normalizedKey] = item[key] ? item[key].toString().trim() : "";
-                });
+                let cleanItem = Object.fromEntries(
+                    Object.entries(item).map(([key, value]) => [
+                        key.trim(),
+                        value ? value.toString().trim() : "",
+                    ])
+                );
 
-                // Verificar que no sea la fila de encabezados
-                if (normalizedItem.cliente && normalizedItem.cliente.toLowerCase() !== 'cliente') {
+                // Verificar que no sea la fila de encabezados y que tenga datos válidos
+                if (cleanItem.Cliente && cleanItem.Cliente.trim() !== 'Cliente' && cleanItem.Cliente.trim() !== 'cliente') {
                     return {
-                        cliente: normalizedItem.cliente || "",
-                        nombre_cliente: normalizedItem.nombre_cliente || "",
-                        documento: normalizedItem.documento || "",
-                        fecha_dcto: normalizedItem.fecha_dcto || "",
-                        producto: normalizedItem.producto || "",
-                        nombre_producto: normalizedItem.nombre_producto_mvto || "",
-                        cant_original: normalizedItem.cant_original ? parseInt(normalizedItem.cant_original, 10) : 0,
-                        cantidad: normalizedItem.cantidad ? parseInt(normalizedItem.cantidad, 10) : 0,
-                        valor_pedido: normalizedItem.vlr_venta ? parseFloat(normalizedItem.vlr_venta) : 0.0,
+                        cliente: cleanItem.Cliente ? cleanItem.Cliente.trim() : "",
+                        nombre_cliente: cleanItem.Nombre_Cliente
+                            ? cleanItem.Nombre_Cliente.trim()
+                            : "",
+                        documento: cleanItem.Documento ? cleanItem.Documento.trim() : "",
+                        fecha_dcto: cleanItem.Fecha_Dcto ? cleanItem.Fecha_Dcto.trim() : "",
+                        producto: cleanItem.Producto ? cleanItem.Producto.trim() : "",
+                        nombre_producto: cleanItem.Nombre_Producto_Mvto
+                            ? cleanItem.Nombre_Producto_Mvto.trim()
+                            : "",
+                        cant_original: cleanItem.Cant_Original
+                            ? parseInt(cleanItem.Cant_Original.trim(), 10)
+                            : 0,
+                        cantidad: cleanItem.Cantidad ? parseInt(cleanItem.Cantidad.trim(), 10) : 0,
+                        valor_pedido: cleanItem.Vlr_Venta
+                            ? parseFloat(cleanItem.Vlr_Venta.trim())
+                            : 0.0,
                     };
                 }
             });
