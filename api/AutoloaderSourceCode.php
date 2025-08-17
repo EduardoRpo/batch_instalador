@@ -119,6 +119,23 @@ class AutoloaderSourceCode
 
 AutoloaderSourceCode::setFileExt('.php');
 spl_autoload_register(function ($className) {
+    // Convertir namespace a ruta de archivo
+    $filePath = str_replace('\\', '/', $className) . '.php';
+    
+    // Buscar en el directorio src
+    $possiblePaths = [
+        __DIR__ . '/src/' . $filePath,
+        __DIR__ . '/' . $filePath
+    ];
+    
+    foreach ($possiblePaths as $path) {
+        if (file_exists($path)) {
+            include_once $path;
+            return;
+        }
+    }
+    
+    // Fallback al método original
     $names = explode("\\" , $className);
     $className = $names[count($names)-1];
     AutoloaderSourceCode::loader($className);
