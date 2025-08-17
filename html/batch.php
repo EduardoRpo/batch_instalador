@@ -486,6 +486,17 @@ include_once("modal/m_limpiar_firmas.php");
       localStorage.removeItem('orden');
       localStorage.removeItem('tamano_lote');
       localStorage.removeItem('opLiberacion');
+      
+      // Limpiar caché del navegador para archivos JavaScript
+      if (typeof window.performance !== 'undefined' && window.performance.navigation.type === window.performance.navigation.TYPE_RELOAD) {
+        // Forzar recarga de archivos JavaScript
+        $('script[src*="xlsx"]').each(function() {
+          var src = $(this).attr('src');
+          if (src) {
+            $(this).attr('src', src + '?v=' + new Date().getTime());
+          }
+        });
+      }
     });
   </script>
 
