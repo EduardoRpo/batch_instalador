@@ -14,33 +14,30 @@ try {
     $order_column = isset($_POST['order'][0]['column']) ? intval($_POST['order'][0]['column']) : 0;
     $order_dir = isset($_POST['order'][0]['dir']) ? $_POST['order'][0]['dir'] : 'ASC';
     
-    // Consulta específica para pedidos usando plan_pedidos y producto
-    $sql = "SELECT 
-                pp.pedido,
-                pp.fecha_pedido as f_pedido,
-                pp.id_producto as granel,
-                pp.id_producto as referencia,
-                p.nombre_referencia as producto,
-                pp.cant_original as saldo_ofima,
-                pp.cantidad_acumulada as acum_prog,
-                pp.cantidad as cant_programar,
-                pp.fecha_insumo as recep_insumos_dia1,
-                'Escenario 1' as escenario,
-                DATE_ADD(pp.fecha_pedido, INTERVAL 15 DAY) as fecha_entrega_dia15
-            FROM plan_pedidos pp
-            LEFT JOIN producto p ON p.referencia = pp.id_producto
-            WHERE pp.flag_estado = 1";
+    // Mapear columnas para batch pedidos (igual que el original)
+    $columns = ['id_batch', 'referencia', 'nombre_referencia', 'numero_lote', 'tamano_lote', 'semana_creacion', 'semana_programacion', 'fecha_programacion', 'estado'];
+    $order_by = $columns[$order_column] ?? 'id_batch';
+    
+    // Construir consulta base para batch pedidos (estado 1 = Sin Formula) - igual que el original
+    $sql = "SELECT batch.id_batch, batch.id_producto as referencia, 
+                   p.nombre_referencia, batch.numero_lote, batch.tamano_lote,
+                   batch.semana_creacion, batch.semana_programacion, 
+                   batch.fecha_programacion, batch.estado
+            FROM batch 
+            INNER JOIN producto p ON p.referencia = batch.id_producto
+            WHERE batch.estado = 1";
     
     $count_sql = "SELECT COUNT(*) as total 
-                  FROM plan_pedidos pp 
-                  WHERE pp.flag_estado = 1";
+                  FROM batch 
+                  INNER JOIN producto p ON p.referencia = batch.id_producto
+                  WHERE batch.estado = 1";
     
     // Agregar búsqueda si existe
     $where_conditions = [];
     $params = [];
     
     if (!empty($search)) {
-        $where_conditions[] = "(pp.pedido LIKE :search OR pp.id_producto LIKE :search OR p.nombre_referencia LIKE :search)";
+        $where_conditions[] = "(batch.id_producto LIKE :search OR p.nombre_referencia LIKE :search OR batch.numero_orden LIKE :search)";
         $params[':search'] = "%$search%";
     }
     
@@ -50,7 +47,7 @@ try {
     }
     
     // Agregar ordenamiento
-    $sql .= " ORDER BY pp.pedido $order_dir";
+    $sql .= " ORDER BY $order_by $order_dir";
     
     // Agregar paginación
     $sql .= " LIMIT $start, $length";
@@ -65,21 +62,19 @@ try {
     $stmt->execute($params);
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-    // Formatear datos para DataTables
+    // Formatear datos para DataTables (igual que el original)
     $formatted_data = [];
     foreach ($data as $row) {
         $formatted_data[] = [
-            $row['pedido'],
-            $row['f_pedido'],
-            $row['granel'],
+            $row['id_batch'],
             $row['referencia'],
-            $row['producto'] ?? $row['referencia'], // Usar referencia si no hay nombre
-            $row['saldo_ofima'],
-            $row['acum_prog'],
-            $row['cant_programar'],
-            $row['recep_insumos_dia1'] ?? '',
-            $row['escenario'],
-            $row['fecha_entrega_dia15']
+            $row['nombre_referencia'],
+            $row['numero_lote'],
+            $row['tamano_lote'],
+            $row['semana_creacion'],
+            $row['semana_programacion'],
+            $row['fecha_programacion'],
+            $row['estado']
         ];
     }
     

@@ -158,58 +158,48 @@ function initializeBatchTables() {
             ],
             columns: [
                 {
-                    title: 'Pedido',
+                    title: 'Batch',
                     data: 0,
                     className: 'text-center',
                 },
                 {
-                    title: 'F_Pedido',
+                    title: 'Referencia',
                     data: 1,
                     className: 'text-center',
                 },
                 {
-                    title: 'Granel',
+                    title: 'Nombre Referencia',
                     data: 2,
                     className: 'text-center',
                 },
                 {
-                    title: 'Referencia',
+                    title: 'No Lote',
                     data: 3,
                     className: 'text-center',
                 },
                 {
-                    title: 'Producto',
+                    title: 'Tamaño Lote',
                     data: 4,
                     className: 'text-center',
                 },
                 {
-                    title: 'Saldo Ofima',
+                    title: 'Semana Creación',
                     data: 5,
                     className: 'text-center',
                 },
                 {
-                    title: 'Acum Prog',
+                    title: 'Semana Programación',
                     data: 6,
                     className: 'text-center',
                 },
                 {
-                    title: 'Cant_Programar',
+                    title: 'Fecha Programación',
                     data: 7,
                     className: 'text-center',
                 },
                 {
-                    title: 'Recep_Insumos día(1)',
+                    title: 'Estado',
                     data: 8,
-                    className: 'text-center',
-                },
-                {
-                    title: 'Escenario',
-                    data: 9,
-                    className: 'text-center',
-                },
-                {
-                    title: 'Fecha Entrega día (15)',
-                    data: 10,
                     className: 'text-center',
                 },
             ],
