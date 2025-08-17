@@ -152,12 +152,14 @@ class PreBatchDao
     public function convertData($dataPedidos)
     {
         $data = array();
-        $data['cliente'] = str_replace(',', '', $dataPedidos['cliente']);
-        $data['documento'] = str_replace(',', '', $dataPedidos['documento']);
-        $data['producto'] = str_replace(',', '', $dataPedidos['producto']);
-        $data['cant_original'] = str_replace(',', '', $dataPedidos['cant_original']);
-        $data['cantidad'] = str_replace(',', '', $dataPedidos['cantidad']);
-        $data['valor_pedido'] = str_replace(',', '', $dataPedidos['valor_pedido']);
+        
+        // Verificar que las claves existan antes de acceder a ellas
+        $data['cliente'] = isset($dataPedidos['cliente']) ? str_replace(',', '', $dataPedidos['cliente']) : '';
+        $data['documento'] = isset($dataPedidos['documento']) ? str_replace(',', '', $dataPedidos['documento']) : '';
+        $data['producto'] = isset($dataPedidos['producto']) ? str_replace(',', '', $dataPedidos['producto']) : '';
+        $data['cant_original'] = isset($dataPedidos['cant_original']) ? str_replace(',', '', $dataPedidos['cant_original']) : '0';
+        $data['cantidad'] = isset($dataPedidos['cantidad']) ? str_replace(',', '', $dataPedidos['cantidad']) : '0';
+        $data['valor_pedido'] = isset($dataPedidos['valor_pedido']) ? str_replace(',', '', $dataPedidos['valor_pedido']) : '0';
 
         return $data;
     }

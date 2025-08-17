@@ -476,7 +476,7 @@ include_once("modal/m_limpiar_firmas.php");
 
   <script src="/admin/sistema/js/import/import.js"></script>
   <script src="/admin/sistema/js/import/file.js"></script>
-  <!-- <script src="/html/js/export/export.js"></script> -->
+  <script src="/html/js/export/export.js"></script>
   <!-- <script src="/html/js/export/file.js"></script>
     <script src="/html/js/export/dataBatch.js"></script> -->
   <script src="/html/js/batch/modalReprogramados.js"></script> <!--JERP-->

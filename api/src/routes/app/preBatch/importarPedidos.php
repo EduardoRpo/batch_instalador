@@ -15,46 +15,66 @@ $pedidosSinReferenciaDao = new PedidosSinReferenciaDao();
 $app->post('/validacionDatosPedidos', function (Request $request, Response $response, $args) use ($preBatchDao, $productDao, $pedidosSinReferenciaDao) {
   $dataPedidos = $request->getParsedBody();
 
-  if (isset($dataPedidos)) {
+  if (isset($dataPedidos) && isset($dataPedidos['data']) && is_array($dataPedidos['data'])) {
 
     $nonProducts = 0;
     $insert = 0;
     $update = 0;
+    $nonExistentProducts = [];
 
     $dataGlobal = $dataPedidos['data'];
 
     // Convertir campos
     for ($i = 0; $i < sizeof($dataGlobal); $i++) {
-      $dataConvertPedidos = $preBatchDao->convertData($dataGlobal[$i]);
+      try {
+        $dataConvertPedidos = $preBatchDao->convertData($dataGlobal[$i]);
 
-      $dataGlobal[$i]['cliente'] = $dataConvertPedidos['cliente'];
-      $dataGlobal[$i]['documento'] = $dataConvertPedidos['documento'];
-      $dataGlobal[$i]['producto'] = $dataConvertPedidos['producto'];
-      $dataGlobal[$i]['cant_original'] = $dataConvertPedidos['cant_original'];
-      $dataGlobal[$i]['cantidad'] = $dataConvertPedidos['cantidad'];
-      $dataGlobal[$i]['valor_pedido'] = $dataConvertPedidos['valor_pedido'];
+        $dataGlobal[$i]['cliente'] = $dataConvertPedidos['cliente'];
+        $dataGlobal[$i]['documento'] = $dataConvertPedidos['documento'];
+        $dataGlobal[$i]['producto'] = $dataConvertPedidos['producto'];
+        $dataGlobal[$i]['cant_original'] = $dataConvertPedidos['cant_original'];
+        $dataGlobal[$i]['cantidad'] = $dataConvertPedidos['cantidad'];
+        $dataGlobal[$i]['valor_pedido'] = $dataConvertPedidos['valor_pedido'];
+      } catch (Exception $e) {
+        // Si hay error en la conversión, saltar este registro
+        continue;
+      }
     }
     $data = $dataGlobal;
 
     for ($i = 0; $i < sizeof($dataGlobal); $i++) {
+      try {
+        // Verificar que el producto existe
+        if (empty($dataGlobal[$i]['producto'])) {
+          $nonExistentProducts[$i] = $dataGlobal[$i];
+          unset($data[$i]);
+          $nonProducts = $nonProducts + 1;
+          continue;
+        }
 
-      //Consultar si existe producto en la base de datos
-      $product = $productDao->findProduct(trim($dataGlobal[$i]['producto']));
+        //Consultar si existe producto en la base de datos
+        $product = $productDao->findProduct(trim($dataGlobal[$i]['producto']));
 
-      if (!$product) {
+        if (!$product) {
+          $nonExistentProducts[$i] = $dataGlobal[$i];
+          unset($data[$i]);
+          $nonProducts = $nonProducts + 1;
+        } else {
+          // Consultar si el producto esta ingresado en la tabla `plan_pedidos_sin_referencia`
+          $pedidosSinReferencia = $pedidosSinReferenciaDao->findPedidoSinReferencia($dataGlobal[$i]);
+
+          // Eliminar registro de la tabla `plan_pedidos_sin_referencia`
+          if ($pedidosSinReferencia)
+            $pedidosSinReferenciaDao->deletePedidosSinReferencia($dataGlobal[$i]);
+
+          $result = $preBatchDao->findOrders($dataGlobal[$i]);
+          $result ? $update = $update + 1 : $insert = $insert + 1;
+        }
+      } catch (Exception $e) {
+        // Si hay error, contar como producto no existente
         $nonExistentProducts[$i] = $dataGlobal[$i];
         unset($data[$i]);
         $nonProducts = $nonProducts + 1;
-      } else {
-        // Consultar si el producto esta ingresado en la tabla `plan_pedidos_sin_referencia`
-        $pedidosSinReferencia = $pedidosSinReferenciaDao->findPedidoSinReferencia($dataGlobal[$i]);
-
-        // Eliminar registro de la tabla `plan_pedidos_sin_referencia`
-        if ($pedidosSinReferencia)
-          $pedidosSinReferenciaDao->deletePedidosSinReferencia($dataGlobal[$i]);
-
-        $result = $preBatchDao->findOrders($dataGlobal[$i]);
-        $result ? $update = $update + 1 : $insert = $insert + 1;
       }
     }
 
@@ -71,7 +91,14 @@ $app->post('/validacionDatosPedidos', function (Request $request, Response $resp
       $i++;
     }
 
-    $dataImportOrders = array('success' => true, 'update' => $update, 'insert' => $insert, 'nonProducts' => $nonProducts, 'pedidos' => sizeof($dataPedidos['data']), 'referencias' => sizeof($temp_array));
+    $dataImportOrders = array(
+      'success' => true, 
+      'update' => $update, 
+      'insert' => $insert, 
+      'nonProducts' => $nonProducts, 
+      'pedidos' => sizeof($dataPedidos['data']), 
+      'referencias' => sizeof($temp_array)
+    );
 
     // Guardar pedidos existentes
     session_start();
@@ -83,7 +110,9 @@ $app->post('/validacionDatosPedidos', function (Request $request, Response $resp
       $nonExistentProducts = array_values($nonExistentProducts);
       $_SESSION['nonExistentProducts'] = $nonExistentProducts;
     }
-  } else $dataImportOrders = array('error' => true, 'message' => 'El archivo se encuentra vacio. Intente nuevamente');
+  } else {
+    $dataImportOrders = array('error' => true, 'message' => 'El archivo se encuentra vacio o en formato incorrecto. Intente nuevamente');
+  }
 
   $response->getBody()->write(json_encode($dataImportOrders, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
