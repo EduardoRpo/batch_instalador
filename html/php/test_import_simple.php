@@ -2,29 +2,43 @@
 require_once __DIR__ . '/../../env.php';
 header('Content-Type: application/json');
 
-// Simular datos de prueba que deberían venir del Excel
+// Simular datos de prueba con ambos formatos (mayúsculas y minúsculas)
 $testData = [
+    // Formato con mayúsculas (como el archivo del usuario)
     [
-        'Cliente' => 'CLIENTE001',
-        'Nombre_Cliente' => 'Cliente de Prueba 1',
-        'Documento' => 'DOC001',
-        'Fecha_Dcto' => '2025-01-15',
-        'Producto' => '20002',
-        'Nombre_Producto_Mvto' => 'BODY SPLASH PAVI 165 ML',
-        'Cant_Original' => '100',
-        'Cantidad' => '50',
-        'Vlr_Venta' => '150000'
+        'Nombre_Cliente' => 'GRUPO EMPRESARIAL DEZHMA S.A.S',
+        'Cliente' => 'GRUPO EMPRESARIAL DEZHMA S.A.S',
+        'T_Dcto' => 'P1',
+        'Documento' => '7268',
+        'Fecha_Dcto' => '8/11/2025',
+        'Producto' => '22799',
+        'Nombre_Producto_Mvto' => 'ESPUMA LIMPIADORA Y DESMAQUILLANTE - (220 ML) - DEZHMA',
+        'Bodega' => 'B_PTERMINADO',
+        'Cant_Original' => '1500',
+        'Cant_Entregada' => '0',
+        'Cantidad' => '1500',
+        'Vlr_Venta' => '9037',
+        'Total_Bruto' => '13555500',
+        'Total_Neto' => '15792157.5',
+        'Vendedor' => '013'
     ],
+    // Formato con minúsculas (formato original)
     [
-        'Cliente' => 'CLIENTE002',
-        'Nombre_Cliente' => 'Cliente de Prueba 2',
-        'Documento' => 'DOC002',
-        'Fecha_Dcto' => '2025-01-16',
-        'Producto' => '20004',
-        'Nombre_Producto_Mvto' => 'JABON LIQUIDO - MAWIE (500 ML)',
-        'Cant_Original' => '200',
-        'Cantidad' => '100',
-        'Vlr_Venta' => '250000'
+        'nombre_cliente' => 'ASUBELL S.A.S',
+        'cliente' => 'ASUBELL S.A.S',
+        't_dcto' => 'P1',
+        'documento' => '7269',
+        'fecha_dcto' => '8/11/2025',
+        'producto' => '20676',
+        'nombre_producto_mvto' => 'SHAMPOO  MANGO UVA KARICIA   X 30',
+        'bodega' => 'B_PTERMINADO',
+        'cant_original' => '3333',
+        'cant_entregada' => '0',
+        'cantidad' => '3333',
+        'vlr_venta' => '515',
+        'total_bruto' => '1716495',
+        'total_neto' => '1999716.675',
+        'vendedor' => '013'
     ]
 ];
 
@@ -43,15 +57,34 @@ try {
     function convertData($dataPedidos) {
         $data = array();
         
-        // Verificar que las claves existan antes de acceder a ellas
-        $data['cliente'] = isset($dataPedidos['Cliente']) ? str_replace(',', '', $dataPedidos['Cliente']) : '';
-        $data['documento'] = isset($dataPedidos['Documento']) ? str_replace(',', '', $dataPedidos['Documento']) : '';
-        $data['producto'] = isset($dataPedidos['Producto']) ? str_replace(',', '', $dataPedidos['Producto']) : '';
-        $data['cant_original'] = isset($dataPedidos['Cant_Original']) ? str_replace(',', '', $dataPedidos['Cant_Original']) : '0';
-        $data['cantidad'] = isset($dataPedidos['Cantidad']) ? str_replace(',', '', $dataPedidos['Cantidad']) : '0';
-        $data['valor_pedido'] = isset($dataPedidos['Vlr_Venta']) ? str_replace(',', '', $dataPedidos['Vlr_Venta']) : '0';
+        // Normalizar las claves a minúsculas para búsqueda consistente
+        $normalizedData = array();
+        foreach ($dataPedidos as $key => $value) {
+            $normalizedKey = strtolower(trim($key));
+            $normalizedData[$normalizedKey] = $value;
+        }
+        
+        // Mapear las columnas con búsqueda flexible
+        $data['cliente'] = getValue($normalizedData, ['cliente'], '');
+        $data['documento'] = getValue($normalizedData, ['documento'], '');
+        $data['producto'] = getValue($normalizedData, ['producto'], '');
+        $data['cant_original'] = getValue($normalizedData, ['cant_original'], '0');
+        $data['cantidad'] = getValue($normalizedData, ['cantidad'], '0');
+        $data['valor_pedido'] = getValue($normalizedData, ['valor_pedido', 'vlr_venta'], '0');
 
         return $data;
+    }
+    
+    /**
+     * Obtiene el valor de un array usando múltiples claves posibles
+     */
+    function getValue($array, $possibleKeys, $default = '') {
+        foreach ($possibleKeys as $key) {
+            if (isset($array[$key])) {
+                return str_replace(',', '', $array[$key]);
+            }
+        }
+        return $default;
     }
 
     // Convertir campos

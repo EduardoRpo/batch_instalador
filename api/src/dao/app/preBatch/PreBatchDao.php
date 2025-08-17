@@ -153,14 +153,34 @@ class PreBatchDao
     {
         $data = array();
         
-        // Verificar que las claves existan antes de acceder a ellas
-        $data['cliente'] = isset($dataPedidos['cliente']) ? str_replace(',', '', $dataPedidos['cliente']) : '';
-        $data['documento'] = isset($dataPedidos['documento']) ? str_replace(',', '', $dataPedidos['documento']) : '';
-        $data['producto'] = isset($dataPedidos['producto']) ? str_replace(',', '', $dataPedidos['producto']) : '';
-        $data['cant_original'] = isset($dataPedidos['cant_original']) ? str_replace(',', '', $dataPedidos['cant_original']) : '0';
-        $data['cantidad'] = isset($dataPedidos['cantidad']) ? str_replace(',', '', $dataPedidos['cantidad']) : '0';
-        $data['valor_pedido'] = isset($dataPedidos['valor_pedido']) ? str_replace(',', '', $dataPedidos['valor_pedido']) : '0';
+        // Normalizar las claves a minúsculas para búsqueda consistente
+        $normalizedData = array();
+        foreach ($dataPedidos as $key => $value) {
+            $normalizedKey = strtolower(trim($key));
+            $normalizedData[$normalizedKey] = $value;
+        }
+        
+        // Mapear las columnas con búsqueda flexible
+        $data['cliente'] = $this->getValue($normalizedData, ['cliente'], '');
+        $data['documento'] = $this->getValue($normalizedData, ['documento'], '');
+        $data['producto'] = $this->getValue($normalizedData, ['producto'], '');
+        $data['cant_original'] = $this->getValue($normalizedData, ['cant_original', 'cant_original'], '0');
+        $data['cantidad'] = $this->getValue($normalizedData, ['cantidad'], '0');
+        $data['valor_pedido'] = $this->getValue($normalizedData, ['valor_pedido', 'vlr_venta'], '0');
 
         return $data;
+    }
+    
+    /**
+     * Obtiene el valor de un array usando múltiples claves posibles
+     */
+    private function getValue($array, $possibleKeys, $default = '')
+    {
+        foreach ($possibleKeys as $key) {
+            if (isset($array[$key])) {
+                return str_replace(',', '', $array[$key]);
+            }
+        }
+        return $default;
     }
 }
