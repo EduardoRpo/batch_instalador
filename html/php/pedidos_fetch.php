@@ -14,30 +14,33 @@ try {
     $order_column = isset($_POST['order'][0]['column']) ? intval($_POST['order'][0]['column']) : 0;
     $order_dir = isset($_POST['order'][0]['dir']) ? $_POST['order'][0]['dir'] : 'ASC';
     
-    // Consulta específica para pedidos
+    // Consulta específica para pedidos usando plan_pedidos y producto
     $sql = "SELECT 
-                p.numero_orden as pedido,
-                p.fecha_pedido as f_pedido,
-                p.referencia as granel,
-                p.referencia,
-                p.producto,
-                p.saldo_ofima,
-                p.acum_prog,
-                p.cant_programar,
-                p.recep_insumos_dia1,
-                p.escenario,
-                p.fecha_entrega_dia15
-            FROM pedidos p
-            WHERE p.estado = 'activo'";
+                pp.pedido,
+                pp.fecha_pedido as f_pedido,
+                pp.id_producto as granel,
+                pp.id_producto as referencia,
+                p.nombre_referencia as producto,
+                pp.cant_original as saldo_ofima,
+                pp.cantidad_acumulada as acum_prog,
+                pp.cantidad as cant_programar,
+                pp.fecha_insumo as recep_insumos_dia1,
+                'Escenario 1' as escenario,
+                DATE_ADD(pp.fecha_pedido, INTERVAL 15 DAY) as fecha_entrega_dia15
+            FROM plan_pedidos pp
+            LEFT JOIN producto p ON p.referencia = pp.id_producto
+            WHERE pp.flag_estado = 1";
     
-    $count_sql = "SELECT COUNT(*) as total FROM pedidos p WHERE p.estado = 'activo'";
+    $count_sql = "SELECT COUNT(*) as total 
+                  FROM plan_pedidos pp 
+                  WHERE pp.flag_estado = 1";
     
     // Agregar búsqueda si existe
     $where_conditions = [];
     $params = [];
     
     if (!empty($search)) {
-        $where_conditions[] = "(p.numero_orden LIKE :search OR p.referencia LIKE :search OR p.producto LIKE :search)";
+        $where_conditions[] = "(pp.pedido LIKE :search OR pp.id_producto LIKE :search OR p.nombre_referencia LIKE :search)";
         $params[':search'] = "%$search%";
     }
     
@@ -47,7 +50,7 @@ try {
     }
     
     // Agregar ordenamiento
-    $sql .= " ORDER BY p.numero_orden $order_dir";
+    $sql .= " ORDER BY pp.pedido $order_dir";
     
     // Agregar paginación
     $sql .= " LIMIT $start, $length";
@@ -70,11 +73,11 @@ try {
             $row['f_pedido'],
             $row['granel'],
             $row['referencia'],
-            $row['producto'],
+            $row['producto'] ?? $row['referencia'], // Usar referencia si no hay nombre
             $row['saldo_ofima'],
             $row['acum_prog'],
             $row['cant_programar'],
-            $row['recep_insumos_dia1'],
+            $row['recep_insumos_dia1'] ?? '',
             $row['escenario'],
             $row['fecha_entrega_dia15']
         ];
