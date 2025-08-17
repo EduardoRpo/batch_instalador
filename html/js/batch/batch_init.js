@@ -183,23 +183,18 @@ function initializeBatchTables() {
                     className: 'text-center',
                 },
                 {
-                    title: 'Semana Creación',
+                    title: 'Fecha Creación',
                     data: 5,
                     className: 'text-center',
                 },
                 {
-                    title: 'Semana Programación',
+                    title: 'Fecha Programación',
                     data: 6,
                     className: 'text-center',
                 },
                 {
-                    title: 'Fecha Programación',
-                    data: 7,
-                    className: 'text-center',
-                },
-                {
                     title: 'Estado',
-                    data: 8,
+                    data: 7,
                     className: 'text-center',
                 },
             ],

@@ -14,14 +14,14 @@ try {
     $order_column = isset($_POST['order'][0]['column']) ? intval($_POST['order'][0]['column']) : 0;
     $order_dir = isset($_POST['order'][0]['dir']) ? $_POST['order'][0]['dir'] : 'ASC';
     
-    // Mapear columnas para batch pedidos (igual que el original)
-    $columns = ['id_batch', 'referencia', 'nombre_referencia', 'numero_lote', 'tamano_lote', 'semana_creacion', 'semana_programacion', 'fecha_programacion', 'estado'];
+    // Mapear columnas para batch pedidos (usando columnas existentes)
+    $columns = ['id_batch', 'referencia', 'nombre_referencia', 'numero_lote', 'tamano_lote', 'fecha_creacion', 'fecha_programacion', 'fecha_programacion', 'estado'];
     $order_by = $columns[$order_column] ?? 'id_batch';
     
-    // Construir consulta base para batch pedidos (estado 1 = Sin Formula) - igual que el original
+    // Construir consulta base para batch pedidos (estado 1 = Sin Formula) - usando solo columnas existentes
     $sql = "SELECT batch.id_batch, batch.id_producto as referencia, 
                    p.nombre_referencia, batch.numero_lote, batch.tamano_lote,
-                   batch.semana_creacion, batch.semana_programacion, 
+                   batch.fecha_creacion, batch.fecha_programacion, 
                    batch.fecha_programacion, batch.estado
             FROM batch 
             INNER JOIN producto p ON p.referencia = batch.id_producto
@@ -71,8 +71,8 @@ try {
             $row['nombre_referencia'],
             $row['numero_lote'],
             $row['tamano_lote'],
-            $row['semana_creacion'],
-            $row['semana_programacion'],
+            $row['fecha_creacion'],
+            $row['fecha_programacion'],
             $row['fecha_programacion'],
             $row['estado']
         ];
