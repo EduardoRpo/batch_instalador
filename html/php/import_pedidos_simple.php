@@ -81,9 +81,9 @@ try {
             $fecha_pedido = date_format($date, "Y-m-d");
             
             $stmt = $conn->prepare("INSERT INTO plan_pedidos 
-                (pedido, id_producto, cant_original, cantidad, cantidad_acumulada, valor_pedido, fecha_pedido) 
-                VALUES (?, ?, ?, ?, ?, ?, ?)");
-            $stmt->execute([$documento, "M-" . $producto, $cant_original, $cantidad, $cantidad, $valor_pedido, $fecha_pedido]);
+                (pedido, id_producto, cant_original, cantidad, cantidad_acumulada, valor_pedido, fecha_pedido, estado) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->execute([$documento, "M-" . $producto, $cant_original, $cantidad, $cantidad, $valor_pedido, $fecha_pedido, 1]);
             $insert++;
         }
     }
