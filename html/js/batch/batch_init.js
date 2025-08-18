@@ -241,11 +241,11 @@ function initializeBatchTables() {
                             <input type="date" class="dateInsumos form-control-updated text-center" id="date-${data.pedido}-${data.id_producto}" value="${fecha_insumo}" max="${data.fecha_actual}"/>`;
                     },
                 },
-                {
-                    title: 'Escenario',
-                    data: 'simulacion',
-                    className: 'text-center',
-                },
+                // {
+                //     title: 'Escenario',
+                //     data: 'simulacion',
+                //     className: 'text-center',
+                // },
                 {
                     title: 'Fecha Entrega día (15)',
                     data: null,
