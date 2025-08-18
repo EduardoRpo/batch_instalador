@@ -55,41 +55,77 @@ $('#btnImportarPedidos').click(function (e) {
 
 /* Validar datos */
 checkImport = (data) => {
+    console.log('=== DIAGNÓSTICO IMPORTACIÓN ===');
+    console.log('Datos a enviar:', data);
+    console.log('URL del endpoint:', '/html/php/import_pedidos_simple.php');
+    
     $.ajax({
         type: 'POST',
-        url: '/api/validacionDatosPedidos',
-        data: { data: data },
+        url: '/html/php/import_pedidos_simple.php',
+        data: JSON.stringify({ data: data }),
+        contentType: 'application/json',
         success: function (resp) {
+            console.log('=== RESPUESTA EXITOSA ===');
+            console.log('Respuesta completa:', resp);
+            console.log('Tipo de respuesta:', typeof resp);
+            console.log('resp.insert:', resp.insert);
+            console.log('resp.update:', resp.update);
+            console.log('resp.nonProducts:', resp.nonProducts);
+            console.log('resp.pedidos:', resp.pedidos);
+            console.log('resp.referencias:', resp.referencias);
+            
             if (resp.error == true) {
+                console.log('Error en respuesta:', resp.message);
                 alertify.error(resp.message);
                 $('#filePedidos').val('');
                 return false;
             }
+            
+            // Verificar que todos los valores existan
+            const insert = resp.insert || 0;
+            const update = resp.update || 0;
+            const nonProducts = resp.nonProducts || 0;
+            const pedidos = resp.pedidos || 0;
+            const referencias = resp.referencias || 0;
+            
+            console.log('Valores procesados:', { insert, update, nonProducts, pedidos, referencias });
+            
             alertify
                 .confirm(
                     'Importar Pedidos',
                     `Se han encontrado los siguientes registros:<br><br>
                       <div class="row">
-                         <div class="col">Datos a insertar: ${resp.insert}</div>
-                         <div class="col">Cantidad filas: ${resp.pedidos}</div>
+                         <div class="col">Datos a insertar: ${insert}</div>
+                         <div class="col">Cantidad filas: ${pedidos}</div>
                          <div class="w-100"></div>
-                         <div class="col">Datos a actualizar: ${resp.update}</div>
-                         <div class="col">Cantidad referencias: ${resp.referencias}</div>
+                         <div class="col">Datos a actualizar: ${update}</div>
+                         <div class="col">Cantidad referencias: ${referencias}</div>
                          <div class="w-100"></div>
-                         <div class="col">Referencias no creadas: ${resp.nonProducts}</div>
+                         <div class="col">Referencias no creadas: ${nonProducts}</div>
                        </div><br><br>
                         <p>Desea continuar?</p>
                          `,
                     function () {
+                        console.log('Usuario confirmó la importación');
                         yesOption();
                     },
                     function () {
+                        console.log('Usuario canceló la importación');
                         $('#filePedidos').val('');
                         deletePedidosSession();
                     }
                 )
                 .set('labels', { ok: 'Si', cancel: 'No' });
         },
+        error: function(xhr, status, error) {
+            console.log('=== ERROR EN AJAX ===');
+            console.log('Status:', status);
+            console.log('Error:', error);
+            console.log('Response Text:', xhr.responseText);
+            console.log('Status Code:', xhr.status);
+            alertify.error('Error al procesar los datos: ' + error);
+            $('#filePedidos').val('');
+        }
     });
 };
 
