@@ -67,11 +67,12 @@ try {
             $fecha_actual = date('Y-m-d H:i:s');
             $stmt = $conn->prepare("UPDATE plan_pedidos SET 
                 cantidad = ?, 
+                cantidad_acumulada = ?,
                 valor_pedido = ?, 
                 importado = ?, 
                 flag_estado = 1 
                 WHERE pedido = ? AND id_producto = ?");
-            $stmt->execute([$cantidad, $valor_pedido, $fecha_actual, $documento, "M-" . $producto]);
+            $stmt->execute([$cantidad, $cantidad, $valor_pedido, $fecha_actual, $documento, "M-" . $producto]);
             $update++;
         } else {
             // Insertar nuevo pedido (igual que el código original)
@@ -80,9 +81,9 @@ try {
             $fecha_pedido = date_format($date, "Y-m-d");
             
             $stmt = $conn->prepare("INSERT INTO plan_pedidos 
-                (pedido, id_producto, cant_original, cantidad, valor_pedido, fecha_pedido) 
-                VALUES (?, ?, ?, ?, ?, ?)");
-            $stmt->execute([$documento, "M-" . $producto, $cant_original, $cantidad, $valor_pedido, $fecha_pedido]);
+                (pedido, id_producto, cant_original, cantidad, cantidad_acumulada, valor_pedido, fecha_pedido) 
+                VALUES (?, ?, ?, ?, ?, ?, ?)");
+            $stmt->execute([$documento, "M-" . $producto, $cant_original, $cantidad, $cantidad, $valor_pedido, $fecha_pedido]);
             $insert++;
         }
     }
