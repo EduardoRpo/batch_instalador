@@ -144,6 +144,7 @@ function initializeBatchTables() {
         tablaPedidos = $('#tablaPedidos').DataTable({
             destroy: true,
             pageLength: 100,
+            lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todos"]],
             ajax: {
                 url: `/html/php/pedidos_fetch.php`,
                 type: 'POST',
@@ -375,4 +376,4 @@ function initializeBatchTables() {
             ],
         });
     }
-} 
+}
