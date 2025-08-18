@@ -25,7 +25,7 @@ try {
     
     // Procesar cada pedido
     foreach ($pedidos as $pedido) {
-        // Normalizar datos
+        // Normalizar datos (igual que el código original)
         $cliente = trim($pedido['Cliente'] ?? $pedido['cliente'] ?? '');
         $documento = trim($pedido['Documento'] ?? $pedido['documento'] ?? '');
         $producto = trim($pedido['Producto'] ?? $pedido['producto'] ?? '');
@@ -57,24 +57,28 @@ try {
             $referencias[] = $producto;
         }
         
-        // Verificar si el pedido ya existe
+        // Verificar si el pedido ya existe (igual que el código original)
         $stmt = $conn->prepare("SELECT * FROM plan_pedidos WHERE pedido = ? AND id_producto = ?");
         $stmt->execute([$documento, "M-" . $producto]);
         $pedido_existe = $stmt->fetch();
         
         if ($pedido_existe) {
-            // Actualizar pedido existente
+            // Actualizar pedido existente (igual que el código original)
+            $fecha_actual = date('Y-m-d H:i:s');
             $stmt = $conn->prepare("UPDATE plan_pedidos SET 
                 cantidad = ?, 
                 valor_pedido = ?, 
-                importado = NOW(), 
+                importado = ?, 
                 flag_estado = 1 
                 WHERE pedido = ? AND id_producto = ?");
-            $stmt->execute([$cantidad, $valor_pedido, $documento, "M-" . $producto]);
+            $stmt->execute([$cantidad, $valor_pedido, $fecha_actual, $documento, "M-" . $producto]);
             $update++;
         } else {
-            // Insertar nuevo pedido
-            $fecha_pedido = date('Y-m-d', strtotime($fecha_dcto));
+            // Insertar nuevo pedido (igual que el código original)
+            $date = date_create($fecha_dcto);
+            date_time_set($date, 13, 24);
+            $fecha_pedido = date_format($date, "Y-m-d");
+            
             $stmt = $conn->prepare("INSERT INTO plan_pedidos 
                 (pedido, id_producto, cant_original, cantidad, valor_pedido, fecha_pedido) 
                 VALUES (?, ?, ?, ?, ?, ?)");
