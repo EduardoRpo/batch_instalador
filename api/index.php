@@ -160,8 +160,8 @@ require_once __DIR__ . '/src/routes/app/usuarios/usuarios.php';
 $app->post('/api/calcLoteDirecto', function (Request $request, Response $response) {
     try {
         // Configuración directa de base de datos
-        $host = '10.1.200.16';
-        $port = '8083';
+        $host = '172.17.0.1';
+        $port = '3307';
         $dbname = 'batch_record';
         $username = 'root';
         $password = 'S@m4r@_2025!';
