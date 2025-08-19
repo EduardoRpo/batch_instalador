@@ -445,6 +445,34 @@ Causa: Problemas de CORS al cargar archivos de idioma de DataTables
    - POST /api/test
 ```
 
+**3.6.7 Solución definitiva - Ruta directa en index.php:**
+```
+✅ Problema identificado: Rutas en archivos separados no se registran correctamente
+✅ Solución encontrada: Agregar ruta directamente en index.php
+✅ Archivo actualizado: BatchRecord/api/index.php
+✅ Nueva ruta: /api/calcLoteDirecto
+✅ Características:
+   - Conexión directa PDO sin dependencias
+   - Configuración hardcodeada
+   - Lógica simplificada
+   - Manejo de errores robusto
+✅ JavaScript actualizado: Usar /api/calcLoteDirecto
+```
+
+**3.6.8 Corrección del puerto de base de datos:**
+```
+✅ Problema identificado: Puerto incorrecto en la configuración (3307 en lugar de 8083)
+✅ Solución encontrada: Corregir puerto en index.php
+✅ Archivo actualizado: BatchRecord/api/index.php
+✅ Puerto corregido: 8083
+✅ Configuración final:
+   - Host: 10.1.200.16
+   - Puerto: 8083
+   - Usuario: root
+   - Contraseña: S@m4r@_2025!
+   - Base de datos: batch_record
+```
+
 #### **🎯 ESTADO ACTUAL:**
 - ✅ **API funcional:** Todas las clases y métodos están correctamente implementados
 - ✅ **Base de datos:** Configuración corregida para usar 10.1.200.16:3307
