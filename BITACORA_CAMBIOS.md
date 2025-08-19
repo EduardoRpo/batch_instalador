@@ -256,23 +256,33 @@ use BatchRecord\dao\ProductsDao;
 use BatchRecord\dao\PlanPedidosDao;
 use BatchRecord\dao\PlanPrePlaneadosDao;
 
-// DESPUÉS (SOLUCIÓN FINAL):
-// Incluir directamente la clase MultiDao que necesitamos
-require_once __DIR__ . '/../../../dao/app/multipresentacion/MultiDao.php';
-
-use BatchRecord\dao\calcTamanioMultiDao;
-use BatchRecord\dao\ProductsDao;
-use BatchRecord\dao\PlanPedidosDao;
-use BatchRecord\dao\PlanPrePlaneadosDao;
-
-// Usar un alias para evitar conflictos con la otra clase MultiDao
-class MultiDaoApp extends \BatchRecord\dao\MultiDao {}
+// DESPUÉS (SOLUCIÓN FINAL DEFINITIVA):
+// Crear una clase que implemente el método que necesitamos
+class MultiDaoApp {
+    private $logger;
+    
+    public function __construct() {
+        $this->logger = new \Monolog\Logger(self::class);
+        $this->logger->pushHandler(new \Monolog\Handler\RotatingFileHandler(\BatchRecord\Constants\Constants::LOGS_PATH . 'querys.log', 20, \Monolog\Logger::DEBUG));
+    }
+    
+    public function findProductMultiByRef($referencia) {
+        $connection = \BatchRecord\dao\Connection::getInstance()->getConnection();
+        
+        $sql = "SELECT p.referencia, p.densidad_producto as densidad, linea.ajuste, pc.nombre as presentacion 
+                FROM producto p 
+                INNER JOIN linea ON p.id_linea = linea.id 
+                INNER JOIN presentacion_comercial pc ON p.presentacion_comercial = pc.id 
+                WHERE p.referencia = :referencia;";
+        $query = $connection->prepare($sql);
+        $query->execute(['referencia' => $referencia]);
+        $dataProduct = $query->fetch($connection::FETCH_ASSOC);
+        return $dataProduct;
+    }
+}
 ```
 
-**Nota:** Se resolvió el conflicto de clases MultiDao usando:
-- `require_once` para incluir directamente el archivo correcto
-- Clase `MultiDaoApp` que extiende de la clase correcta
-- Evita conflictos con la otra clase MultiDao en el mismo namespace
+**Nota:** Se resolvió el conflicto de clases MultiDao creando una clase local que implementa directamente el método `findProductMultiByRef()` que necesitamos, evitando completamente el conflicto de nombres.
 
 **3.3 Habilitar reporte de errores:**
 ```php

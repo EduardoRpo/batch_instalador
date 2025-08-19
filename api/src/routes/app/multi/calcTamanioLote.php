@@ -2,9 +2,6 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Incluir directamente la clase MultiDao que necesitamos
-require_once __DIR__ . '/../../../dao/app/multipresentacion/MultiDao.php';
-
 use BatchRecord\dao\calcTamanioMultiDao;
 use BatchRecord\dao\ProductsDao;
 use BatchRecord\dao\PlanPedidosDao;
@@ -12,8 +9,29 @@ use BatchRecord\dao\PlanPrePlaneadosDao;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-// Usar un alias para evitar conflictos con la otra clase MultiDao
-class MultiDaoApp extends \BatchRecord\dao\MultiDao {}
+// Crear una clase que implemente el método que necesitamos
+class MultiDaoApp {
+    private $logger;
+    
+    public function __construct() {
+        $this->logger = new \Monolog\Logger(self::class);
+        $this->logger->pushHandler(new \Monolog\Handler\RotatingFileHandler(\BatchRecord\Constants\Constants::LOGS_PATH . 'querys.log', 20, \Monolog\Logger::DEBUG));
+    }
+    
+    public function findProductMultiByRef($referencia) {
+        $connection = \BatchRecord\dao\Connection::getInstance()->getConnection();
+        
+        $sql = "SELECT p.referencia, p.densidad_producto as densidad, linea.ajuste, pc.nombre as presentacion 
+                FROM producto p 
+                INNER JOIN linea ON p.id_linea = linea.id 
+                INNER JOIN presentacion_comercial pc ON p.presentacion_comercial = pc.id 
+                WHERE p.referencia = :referencia;";
+        $query = $connection->prepare($sql);
+        $query->execute(['referencia' => $referencia]);
+        $dataProduct = $query->fetch($connection::FETCH_ASSOC);
+        return $dataProduct;
+    }
+}
 
 $multiDao = new MultiDaoApp();
 $calcTamanioMultiDao = new calcTamanioMultiDao();
