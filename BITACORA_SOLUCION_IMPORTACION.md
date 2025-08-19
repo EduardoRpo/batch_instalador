@@ -329,3 +329,16 @@ docker compose restart app
 3. **SI ÉXITO:** Muestra mensaje verde y refresca página después de 2 segundos
 4. **SI ERROR:** Muestra mensaje rojo y limpia el campo de archivo
 5. En ambos casos, limpia el campo de archivo 
+
+### 20. DEBUG CON CONSOLE.LOG
+**Fecha:** 17/08/2025 - 2:45 AM
+**Problema:** Funcionalidad de confirmación sigue sin funcionar
+**Archivo:** `html/js/batch/pedidos/importPedidos.js`
+**Solución:** Agregar console.log detallado para debug
+**Cambios:**
+- Función `yesOption()`: 15 console.log para rastrear cada paso
+- Función `savePedidos()`: 6 console.log para rastrear AJAX
+- Logs incluyen: inicio, llamadas, respuestas, errores, finalización
+**Resultado:** 🔄 **EN PROCESO DE DEBUG**
+**Objetivo:** Identificar exactamente dónde falla el proceso
+**Próximo paso:** Probar importación y revisar logs en consola del navegador 

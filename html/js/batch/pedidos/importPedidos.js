@@ -131,13 +131,21 @@ checkImport = (data) => {
 
 //Opcion SI
 yesOption = async () => {
+    console.log('=== DEBUG: INICIANDO yesOption ===');
     try {
+        console.log('=== DEBUG: LLAMANDO savePedidos ===');
         response = await savePedidos();
+        console.log('=== DEBUG: RESPUESTA DE savePedidos ===');
+        console.log('Response completo:', response);
+        console.log('Response.success:', response?.success);
+        console.log('Response type:', typeof response);
         
         // Limpiar el campo de archivo
+        console.log('=== DEBUG: LIMPIANDO CAMPO DE ARCHIVO ===');
         $('#filePedidos').val('');
         
         if (response && response.success) {
+            console.log('=== DEBUG: ÉXITO - PROCESANDO RESPUESTA EXITOSA ===');
             actualizarTablaPedidos();
             
             $('.fechaImporte').html(
@@ -145,21 +153,27 @@ yesOption = async () => {
             );
             
             // Mostrar mensaje de confirmación exitosa
+            console.log('=== DEBUG: MOSTRANDO MENSAJE DE ÉXITO ===');
             alertify.set('notifier', 'position', 'top-right');
             alertify.success('¡Archivo importado exitosamente!');
             
             // Refrescar la página después de 2 segundos para que el usuario vea el mensaje
+            console.log('=== DEBUG: PROGRAMANDO REFRESH DE PÁGINA ===');
             setTimeout(() => {
+                console.log('=== DEBUG: EJECUTANDO REFRESH DE PÁGINA ===');
                 location.reload();
             }, 2000);
         } else {
+            console.log('=== DEBUG: ERROR - PROCESANDO RESPUESTA FALLIDA ===');
             // Mostrar mensaje de error
             alertify.set('notifier', 'position', 'top-right');
             alertify.error('Error al importar el archivo. Intente nuevamente.');
         }
         
+        console.log('=== DEBUG: LLAMANDO notificaciones ===');
         notificaciones(response);
     } catch (error) {
+        console.log('=== DEBUG: EXCEPCIÓN CAPTURADA ===');
         console.error('Error en yesOption:', error);
         
         // Mostrar mensaje de error
@@ -170,18 +184,28 @@ yesOption = async () => {
         $('#filePedidos').val('');
     }
 
+    console.log('=== DEBUG: FINALIZANDO yesOption ===');
     //deletePedidosSession();
 };
 
 savePedidos = async () => {
+    console.log('=== DEBUG: INICIANDO savePedidos ===');
     try {
+        console.log('=== DEBUG: HACIENDO AJAX A /api/addPedidos ===');
         result = await $.ajax({
             url: '/api/addPedidos',
             type: 'POST',
         });
+        console.log('=== DEBUG: RESPUESTA AJAX EXITOSA ===');
+        console.log('Result completo:', result);
+        console.log('Result type:', typeof result);
         return result;
     } catch (error) {
-        console.error(error);
+        console.log('=== DEBUG: ERROR EN AJAX ===');
+        console.error('Error en savePedidos:', error);
+        console.log('Error type:', typeof error);
+        console.log('Error message:', error.message);
+        return null;
     }
 };
 
