@@ -24,8 +24,15 @@ $app->post('/addPrePlaneados', function (Request $request, Response $response, $
     $dataPedidos = $request->getParsedBody();
     $date = $dataPedidos['date'];
     $sim = $dataPedidos['simulacion'];
+    
+    // Validar que dataGranel existe en la sesión
+    if (!isset($_SESSION['dataGranel']) || empty($_SESSION['dataGranel'])) {
+        $resp = array('error' => true, 'message' => 'No hay datos de granel en la sesión');
+        $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
+        return $response->withHeader('Content-Type', 'application/json');
+    }
+    
     $dataPedidos = $_SESSION['dataGranel'];
-
 
     for ($i = 0; $i < sizeof($dataPedidos); $i++) {
         $dataPedidos[$i]['programacion'] = $date;
@@ -33,7 +40,6 @@ $app->post('/addPrePlaneados', function (Request $request, Response $response, $
         // Guardar pedidos a pre planeado
         $prePlaneados = $planPrePlaneadosDao->insertPrePlaneados($dataPedidos[$i]);
     }
-
 
     if ($prePlaneados == null)
         $resp = array('success' => true, 'message' => 'Pedidos pre planeados correctamente');
