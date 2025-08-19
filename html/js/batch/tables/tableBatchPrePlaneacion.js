@@ -69,45 +69,18 @@ $(document).ready(function () {
   };
 
   calcTamanioLoteBySemana = (data, semana) => {
-    let capacidad = [];
-
-    for (i = 0; i < 12; i++) {
-      if (semana + i <= 52)
-        capacidad.push({
-          semana: semana + i,
-          tamanioLoteLQ: 0,
-          tamanioLoteSM: 0,
-          tamanioLoteSL: 0,
-        });
-      else break;
+    // Validar que data existe y es un array
+    if (!data || !Array.isArray(data)) {
+      console.warn('⚠️ calcTamanioLoteBySemana: data no es válido:', data);
+      return 0;
     }
 
-    for (i = 1; i < 12; i++) {
-      if (capacidad.length < 12)
-        capacidad.push({
-          semana: i,
-          tamanioLoteLQ: 0,
-          tamanioLoteSM: 0,
-          tamanioLoteSL: 0,
-        });
-      else break;
-    }
-
+    let capacidad = 0;
     for (i = 0; i < data.length; i++) {
-      for (j = 0; j < capacidad.length; j++) {
-        if (capacidad[j].semana == data[i].semana) {
-          capacidad[j].linea = data[i].id_linea;
-
-          if (capacidad[j].linea == 1)
-            capacidad[j].tamanioLoteLQ += data[i].tamano_lote;
-          else if (capacidad[j].linea == 2)
-            capacidad[j].tamanioLoteSM += data[i].tamano_lote;
-          else if (capacidad[j].linea == 3)
-            capacidad[j].tamanioLoteSL += data[i].tamano_lote;
-        }
+      if (data[i].semana == semana) {
+        capacidad = capacidad + data[i].tamano_lote;
       }
     }
-
     return capacidad;
   };
 
