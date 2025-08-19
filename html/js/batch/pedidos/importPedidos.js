@@ -139,6 +139,15 @@ yesOption = async () => {
         $('.fechaImporte').html(
             `<p>Fecha y Hora de importación: ${response.fecha_hora_importe.fecha_importe}, ${response.fecha_hora_importe.hora_importe}</p>`
         );
+        
+        // Mostrar mensaje de confirmación exitosa
+        alertify.set('notifier', 'position', 'top-right');
+        alertify.success('¡Archivo importado exitosamente!');
+        
+        // Refrescar la página después de 2 segundos para que el usuario vea el mensaje
+        setTimeout(() => {
+            location.reload();
+        }, 2000);
     }
     notificaciones(response);
 

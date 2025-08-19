@@ -293,4 +293,20 @@ docker compose restart app
 - ✅ `html/php/pedidos_fetch.php` - Línea 11: 10 → 100
 - ✅ `html/php/batch_pedidos_fetch.php` - Línea 14: 10 → 100
 **Resultado:** ✅ **SOLUCIÓN COMPLETA PARA PEDIDOS**
-**Nota:** Solo se corrigieron archivos específicos de pedidos, otros módulos se validarán en su momento 
+**Nota:** Solo se corrigieron archivos específicos de pedidos, otros módulos se validarán en su momento
+
+### 18. MENSAJE DE CONFIRMACIÓN Y REFRESH DE PÁGINA
+**Fecha:** 17/08/2025 - 2:35 AM
+**Problema:** Usuario necesita confirmación visual después de importar archivo de pedidos
+**Archivo:** `html/js/batch/pedidos/importPedidos.js`
+**Solución:** Agregar mensaje de confirmación y refresh automático de página
+**Cambios en función `yesOption()`:**
+- Línea 143: `alertify.success('¡Archivo importado exitosamente!');`
+- Líneas 145-147: `setTimeout(() => { location.reload(); }, 2000);`
+**Resultado:** ✅ **FUNCIONALIDAD AGREGADA**
+**Comportamiento:** 
+1. Usuario sube archivo de pedidos
+2. Se procesa la importación
+3. Se muestra mensaje verde "¡Archivo importado exitosamente!"
+4. Después de 2 segundos, la página se refresca automáticamente
+5. El usuario ve los datos actualizados en la tabla 
