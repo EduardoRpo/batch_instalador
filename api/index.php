@@ -237,10 +237,14 @@ $app->post('/calc-lote-directo', function (Request $request, Response $response)
                 [
                     'pedido' => 'TEST-001',
                     'referencia' => $referencia,
+                    'granel' => $referencia,
+                    'producto' => $presentacion . ' ML - ' . $referencia,
                     'tamanio_lote' => round($tamanioLote, 2),
+                    'cantidad_acumulada' => 500,
                     'estado' => 'calculado'
                 ]
-            ]
+            ],
+            'countPrePlaneados' => 0
         ];
         
         $response->getBody()->write(json_encode($resultado));

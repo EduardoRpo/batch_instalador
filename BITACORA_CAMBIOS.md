@@ -562,6 +562,34 @@ Causa: Problemas de CORS al cargar archivos de idioma de DataTables
    - $response->withHeader('Content-Type', 'application/json')
 ```
 
+**3.6.16 ¡ÉXITO! Botón "Calcular Lote" funcionando:**
+```
+🎉 PROBLEMA RESUELTO: El botón "Calcular Lote" funciona correctamente
+✅ API respondiendo: JSON válido con datos del producto
+✅ Conexión a BD: Funcionando con 172.17.0.1:3307
+✅ Respuesta recibida: 
+   {
+     "success": true,
+     "producto": {...},
+     "calculo": {...},
+     "pedidosLotes": [...]
+   }
+```
+
+**3.6.17 Corrección del modal de confirmación:**
+```
+✅ Problema identificado: Modal no se muestra porque faltan campos en la respuesta
+✅ Campos requeridos por alertConfirm():
+   - granel
+   - producto
+   - tamanio_lote
+   - cantidad_acumulada
+   - countPrePlaneados
+✅ Solución implementada: Agregar campos faltantes a la respuesta JSON
+✅ Archivo actualizado: BatchRecord/api/index.php
+✅ Modal ahora debería mostrarse correctamente
+```
+
 #### **🎯 ESTADO ACTUAL:**
 - ✅ **API funcional:** Todas las clases y métodos están correctamente implementados
 - ✅ **Base de datos:** Configuración corregida para usar 10.1.200.16:3307
