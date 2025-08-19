@@ -292,6 +292,15 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 ```
 
+**3.4 Incluir clase Constants faltante (index.php):**
+```php
+// AGREGADO:
+// Incluir la clase Constants
+require_once __DIR__ . '/src/constants/Constants.php';
+```
+
+**Nota:** La clase `Constants` es necesaria para la clase `Connection` que se usa en `MultiDaoApp`.
+
 #### **🎯 RESULTADO:**
 - ✅ Se eliminó el error 404 del archivo faltante
 - ✅ Se corrigieron las rutas de importación de clases DAO

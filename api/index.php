@@ -11,6 +11,9 @@ use Slim\Factory\AppFactory;
 require __DIR__ . '/vendor/autoload.php';
 include_once __DIR__ . '/AutoloaderSourceCode.php';
 
+// Incluir la clase Constants
+require_once __DIR__ . '/src/constants/Constants.php';
+
 $app = AppFactory::create();
 $app->setBasePath('/api');
 
