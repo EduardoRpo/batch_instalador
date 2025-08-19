@@ -131,25 +131,44 @@ checkImport = (data) => {
 
 //Opcion SI
 yesOption = async () => {
-    response = await savePedidos();
-    if (response.success) {
-        actualizarTablaPedidos();
+    try {
+        response = await savePedidos();
+        
+        // Limpiar el campo de archivo
         $('#filePedidos').val('');
-
-        $('.fechaImporte').html(
-            `<p>Fecha y Hora de importación: ${response.fecha_hora_importe.fecha_importe}, ${response.fecha_hora_importe.hora_importe}</p>`
-        );
         
-        // Mostrar mensaje de confirmación exitosa
+        if (response && response.success) {
+            actualizarTablaPedidos();
+            
+            $('.fechaImporte').html(
+                `<p>Fecha y Hora de importación: ${response.fecha_hora_importe.fecha_importe}, ${response.fecha_hora_importe.hora_importe}</p>`
+            );
+            
+            // Mostrar mensaje de confirmación exitosa
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.success('¡Archivo importado exitosamente!');
+            
+            // Refrescar la página después de 2 segundos para que el usuario vea el mensaje
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
+        } else {
+            // Mostrar mensaje de error
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.error('Error al importar el archivo. Intente nuevamente.');
+        }
+        
+        notificaciones(response);
+    } catch (error) {
+        console.error('Error en yesOption:', error);
+        
+        // Mostrar mensaje de error
         alertify.set('notifier', 'position', 'top-right');
-        alertify.success('¡Archivo importado exitosamente!');
+        alertify.error('Error al procesar la importación. Intente nuevamente.');
         
-        // Refrescar la página después de 2 segundos para que el usuario vea el mensaje
-        setTimeout(() => {
-            location.reload();
-        }, 2000);
+        // Limpiar el campo de archivo
+        $('#filePedidos').val('');
     }
-    notificaciones(response);
 
     //deletePedidosSession();
 };

@@ -309,4 +309,23 @@ docker compose restart app
 2. Se procesa la importación
 3. Se muestra mensaje verde "¡Archivo importado exitosamente!"
 4. Después de 2 segundos, la página se refresca automáticamente
-5. El usuario ve los datos actualizados en la tabla 
+5. El usuario ve los datos actualizados en la tabla
+
+### 19. CORRECCIÓN MANEJO DE ERRORES EN IMPORTACIÓN
+**Fecha:** 17/08/2025 - 2:40 AM
+**Problema:** Mensaje de confirmación no se mostraba después de dar clic en "SI"
+**Archivo:** `html/js/batch/pedidos/importPedidos.js`
+**Solución:** Agregar manejo de errores y confirmación independiente del resultado
+**Cambios en función `yesOption()`:**
+- Agregado `try-catch` para manejar errores
+- Mensaje de éxito: "¡Archivo importado exitosamente!"
+- Mensaje de error: "Error al importar el archivo. Intente nuevamente."
+- Limpieza del campo de archivo en ambos casos
+- Refresh de página solo en caso de éxito
+**Resultado:** ✅ **FUNCIONALIDAD CORREGIDA**
+**Comportamiento actualizado:**
+1. Usuario da clic en "SI" en modal de confirmación
+2. Sistema procesa la importación
+3. **SI ÉXITO:** Muestra mensaje verde y refresca página después de 2 segundos
+4. **SI ERROR:** Muestra mensaje rojo y limpia el campo de archivo
+5. En ambos casos, limpia el campo de archivo 
