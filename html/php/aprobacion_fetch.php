@@ -12,7 +12,7 @@ try {
     // Obtener parámetros de DataTables
     $draw = isset($_POST['draw']) ? intval($_POST['draw']) : 1;
     $start = isset($_POST['start']) ? intval($_POST['start']) : 0;
-    $length = isset($_POST['length']) ? intval($_POST['length']) : 10;
+    $length = isset($_POST['length']) ? intval($_POST['length']) : 100;
     $search = isset($_POST['search']['value']) ? $_POST['search']['value'] : '';
     $order_column = isset($_POST['order'][0]['column']) ? intval($_POST['order'][0]['column']) : 0;
     $order_dir = isset($_POST['order'][0]['dir']) ? $_POST['order'][0]['dir'] : 'ASC';
