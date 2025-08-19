@@ -157,7 +157,7 @@ require_once __DIR__ . '/src/routes/app/process/despachos/despachos.php';
 require_once __DIR__ . '/src/routes/app/usuarios/usuarios.php';
 
 // Ruta de prueba simple
-$app->get('/api/test', function (Request $request, Response $response) {
+$app->get('/api/test-slim', function (Request $request, Response $response) {
     return $response->withJson([
         'success' => true,
         'message' => 'API funcionando correctamente',
@@ -166,7 +166,7 @@ $app->get('/api/test', function (Request $request, Response $response) {
 });
 
 // Ruta directa para cálculo de lote simplificado
-$app->post('/api/calcLoteDirecto', function (Request $request, Response $response) {
+$app->post('/api/calc-lote-directo', function (Request $request, Response $response) {
     try {
         // Configuración directa de base de datos
         $host = '172.17.0.1';

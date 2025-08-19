@@ -515,6 +515,19 @@ Causa: Problemas de CORS al cargar archivos de idioma de DataTables
 ✅ Ruta de prueba agregada: GET /api/test
 ```
 
+**3.6.12 Solución de conflicto con directorios físicos:**
+```
+✅ Problema identificado: Apache sirve directorio físico /api/test/ en lugar de pasar a Slim
+✅ Causa: Existe un directorio físico que Apache sirve directamente
+✅ Solución implementada: Cambiar rutas para evitar conflictos
+✅ Archivos actualizados:
+   - BatchRecord/api/index.php
+   - BatchRecord/html/js/batch/calc/calcularLote.js
+✅ Nuevas rutas:
+   - GET /api/test-slim (prueba)
+   - POST /api/calc-lote-directo (cálculo de lote)
+```
+
 #### **🎯 ESTADO ACTUAL:**
 - ✅ **API funcional:** Todas las clases y métodos están correctamente implementados
 - ✅ **Base de datos:** Configuración corregida para usar 10.1.200.16:3307
