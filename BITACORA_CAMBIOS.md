@@ -473,6 +473,20 @@ Causa: Problemas de CORS al cargar archivos de idioma de DataTables
    - Base de datos: batch_record
 ```
 
+**3.6.9 Investigación de configuración actual:**
+```
+🔍 Problema identificado: Necesidad de verificar cómo se conecta actualmente el sistema
+🔍 Investigación realizada:
+   - Archivo analizado: BatchRecord/html/php/pedidos_fetch.php
+   - Método de conexión: require_once __DIR__ . '/../../env.php'
+   - Configuración: Usa variables de entorno o valores por defecto
+   - Archivo env.php: Usa getenv() para variables de entorno
+   - Desarrollo: 127.0.0.1 (sin puerto especificado)
+   - Producción: mysql (nombre del servicio Docker)
+✅ Archivo creado: BatchRecord/test_config.php
+✅ Propósito: Verificar configuración actual y probar conexión
+```
+
 #### **🎯 ESTADO ACTUAL:**
 - ✅ **API funcional:** Todas las clases y métodos están correctamente implementados
 - ✅ **Base de datos:** Configuración corregida para usar 10.1.200.16:3307
