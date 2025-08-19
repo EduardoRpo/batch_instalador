@@ -539,6 +539,17 @@ Causa: Problemas de CORS al cargar archivos de idioma de DataTables
    - POST /calc-lote-directo (se convierte en /api/calc-lote-directo)
 ```
 
+**3.6.14 Corrección de imports de Slim Framework:**
+```
+✅ Problema identificado: TypeError - Argument #1 ($request) must be of type Request
+✅ Causa: Faltan los imports correctos para Request y Response de Slim
+✅ Solución implementada: Agregar imports de PSR-7
+✅ Archivo actualizado: BatchRecord/api/index.php
+✅ Imports agregados:
+   - use Psr\Http\Message\ResponseInterface as Response;
+   - use Psr\Http\Message\ServerRequestInterface as Request;
+```
+
 #### **🎯 ESTADO ACTUAL:**
 - ✅ **API funcional:** Todas las clases y métodos están correctamente implementados
 - ✅ **Base de datos:** Configuración corregida para usar 10.1.200.16:3307
