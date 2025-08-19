@@ -11,11 +11,9 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 // Crear una clase que implemente el método que necesitamos
 class MultiDaoApp {
-    private $logger;
     
     public function __construct() {
-        $this->logger = new \Monolog\Logger(self::class);
-        $this->logger->pushHandler(new \Monolog\Handler\RotatingFileHandler(\BatchRecord\Constants\Constants::LOGS_PATH . 'querys.log', 20, \Monolog\Logger::DEBUG));
+        // Constructor simple sin dependencias
     }
     
     public function findProductMultiByRef($referencia) {
