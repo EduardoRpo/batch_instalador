@@ -1,92 +1,105 @@
-$(document).ready(function () {
-  alertConfirm = (data) => {
-    // Validar que data y data.pedidosLotes existan
-    if (!data || !data.pedidosLotes || !Array.isArray(data.pedidosLotes)) {
-      alertify.set('notifier', 'position', 'top-right');
-      alertify.error('Error: No se recibieron datos válidos del cálculo de lote');
-      return;
-    }
+// Función global para mostrar el modal de confirmación
+alertConfirm = (data) => {
+  console.log('🚀 alertConfirm ejecutándose con datos:', data);
+  
+  // Validar que data y data.pedidosLotes existan
+  if (!data || !data.pedidosLotes || !Array.isArray(data.pedidosLotes)) {
+    console.error('❌ Error: Datos inválidos recibidos:', data);
+    alertify.set('notifier', 'position', 'top-right');
+    alertify.error('Error: No se recibieron datos válidos del cálculo de lote');
+    return;
+  }
 
-    countPrePlaneados = data.countPrePlaneados;
+  console.log('✅ Datos válidos, mostrando modal...');
+  countPrePlaneados = data.countPrePlaneados;
 
-    alertify
-      .confirm(
-        'Samara Cosmetics',
-        `<p>¿Desea preplanear los siguientes pedidos?</p><br>
-            <table class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th class="text-center">Granel</th>
-                    <th class="text-center">Producto</th>
-                    <th class="text-center">Tamaño Lote (Kg)</th>
-                    <th class="text-center">Cantidad (Und)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  ${(row = addRows(data.pedidosLotes))}
-                </tbody>
-            </table><br>`,
-        function () {
-          let symbol = document.getElementsByClassName('symbolPedidos');
-          save = true;
+  alertify
+    .confirm(
+      'Samara Cosmetics',
+      `<p>¿Desea preplanear los siguientes pedidos?</p><br>
+          <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th class="text-center">Granel</th>
+                  <th class="text-center">Producto</th>
+                  <th class="text-center">Tamaño Lote (Kg)</th>
+                  <th class="text-center">Cantidad (Und)</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${(row = addRows(data.pedidosLotes))}
+              </tbody>
+          </table><br>`,
+      function () {
+        console.log('✅ Usuario confirmó el modal');
+        let symbol = document.getElementsByClassName('symbolPedidos');
+        save = true;
 
-          for (i = 0; i < symbol.length; i++) {
-            if (symbol[i].id == 'correct') {
-              break;
-            }
-            if (symbol[i].id == 'incorrect') {
-              save = false;
-            }
+        for (i = 0; i < symbol.length; i++) {
+          if (symbol[i].id == 'correct') {
+            break;
           }
-
-          if (save == true) saveFechaPlaneacion();
-          else {
-            alertify.set('notifier', 'position', 'top-right');
-            alertify.error('No es posible preplanear los pedidos');
-            return false;
+          if (symbol[i].id == 'incorrect') {
+            save = false;
           }
-        },
-        function () {
-          clearInputArray();
         }
-      )
-      .set('labels', { ok: 'Si', cancel: 'No' })
-      .set({ closableByDimmer: false })
-      .set('resizable', true)
-      .resizeTo(800, 500);
-  };
 
-  addRows = (data) => {
-    row = [];
-    for (i = 0; i < data.length; i++) {
-      row.push(`<tr ${(text = color(data[i].tamanio_lote))}>
-                <td>${data[i].granel}</td>
-                <td>${data[i].producto}</td>
-                <td>${data[i].tamanio_lote.toFixed(2)}</td>
-                <td>${data[i].cantidad_acumulada}</td>
-                ${(symbol = check(data[i].tamanio_lote))}
-                </tr>`);
-    }
-    return row.join('');
-  };
+        if (save == true) saveFechaPlaneacion();
+        else {
+          alertify.set('notifier', 'position', 'top-right');
+          alertify.error('No es posible preplanear los pedidos');
+          return false;
+        }
+      },
+      function () {
+        console.log('❌ Usuario canceló el modal');
+        clearInputArray();
+      }
+    )
+    .set('labels', { ok: 'Si', cancel: 'No' })
+    .set({ closableByDimmer: false })
+    .set('resizable', true)
+    .resizeTo(800, 500);
+    
+  console.log('🎯 Modal configurado y mostrado');
+};
 
-  color = (tamanio) => {
-    if (tamanio > 2500) text = 'style="color: red"';
-    else text = 'aria-describedby="tablaPedidos_info"';
+// Función para agregar filas a la tabla
+addRows = (data) => {
+  row = [];
+  for (i = 0; i < data.length; i++) {
+    row.push(`<tr ${(text = color(data[i].tamanio_lote))}>
+              <td>${data[i].granel}</td>
+              <td>${data[i].producto}</td>
+              <td>${data[i].tamanio_lote.toFixed(2)}</td>
+              <td>${data[i].cantidad_acumulada}</td>
+              ${(symbol = check(data[i].tamanio_lote))}
+              </tr>`);
+  }
+  return row.join('');
+};
 
-    return text;
-  };
+// Función para determinar el color de la fila
+color = (tamanio) => {
+  if (tamanio > 2500) text = 'style="color: red"';
+  else text = 'aria-describedby="tablaPedidos_info"';
 
-  check = (tamanio) => {
-    if (tamanio > 2500) {
-      symbol =
-        '<td class="symbolPedidos" id="incorrect" style="font-size:22px; font-weight: bold; color:red;">&#x2716</td>';
-    } else
-      symbol =
-        '<td class="symbolPedidos" id="correct" style="font-size:22px; font-weight: bold; color:green;">&#x2714</td>';
+  return text;
+};
 
-    return symbol;
-  };
+// Función para mostrar el símbolo de verificación
+check = (tamanio) => {
+  if (tamanio > 2500) {
+    symbol =
+      '<td class="symbolPedidos" id="incorrect" style="font-size:22px; font-weight: bold; color:red;">&#x2716</td>';
+  } else
+    symbol =
+      '<td class="symbolPedidos" id="correct" style="font-size:22px; font-weight: bold; color:green;">&#x2714</td>';
+
+  return symbol;
+};
+
+$(document).ready(function () {
 
   //Opcion SI
   saveFechaPlaneacion = () => {
