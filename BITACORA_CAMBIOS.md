@@ -301,6 +301,20 @@ require_once __DIR__ . '/src/constants/Constants.php';
 
 **Nota:** La clase `Constants` es necesaria para la clase `Connection` que se usa en `MultiDaoApp`.
 
+**3.5 Simplificar clase Connection (Connection.php):**
+```php
+// ANTES:
+use BatchRecord\Constants\Constants;
+use Monolog\Handler\RotatingFileHandler;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
+
+// DESPUÉS:
+// Eliminadas las dependencias de logging para evitar problemas de permisos
+```
+
+**Nota:** Se eliminó el logging de la clase Connection para evitar errores de permisos al crear directorios de logs.
+
 #### **🎯 RESULTADO:**
 - ✅ Se eliminó el error 404 del archivo faltante
 - ✅ Se corrigieron las rutas de importación de clases DAO

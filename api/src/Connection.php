@@ -2,10 +2,6 @@
 
 namespace BatchRecord\Dao;
 
-use BatchRecord\Constants\Constants;
-use Monolog\Handler\RotatingFileHandler;
-use Monolog\Handler\StreamHandler;
-use Monolog\Logger;
 use PDO;
 use PDOException;
 use Symfony\Component\Dotenv\Dotenv;
@@ -19,15 +15,12 @@ class Connection
 {
     protected $dbh;
     private static $_instance;
-    private $logger;
 
     /**
      * Connection constructor.
      */
     public function __construct()
     {
-        $this->logger = new Logger(self::class);
-        $this->logger->pushHandler(new RotatingFileHandler(Constants::LOGS_PATH . 'querys.log', 20, Logger::DEBUG));
         $dotenv = new Dotenv();
         $dotenv->load(__DIR__ . '/../environment.env');
         try {
@@ -37,9 +30,9 @@ class Connection
             $dsn = "mysql:host=$host;port=$dbport;dbname=$dbname;charset=utf8";
             $this->dbh = new PDO($dsn, $_ENV["DB_USER"], $_ENV["DB_PASS"]);
             $this->dbh->exec('SET NAMES utf8');
-            $this->logger->info("Connection SuccesFully DB", array("pdo" => $this->dbh));
         } catch (PDOException $e) {
-            $this->logger->error($e->getMessage());
+            // Error de conexión sin logging
+            throw new PDOException("Error de conexión a la base de datos: " . $e->getMessage());
         }
     }
 
