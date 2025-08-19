@@ -12,14 +12,14 @@ use BatchRecord\dao\PlanPrePlaneadosDao;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Dompdf\Dompdf;
-use Dompdf\Options;
+// use Dompdf\Dompdf;
+// use Dompdf\Options;
 
-$options = new Options();
-$options->set('isHtml5ParserEnabled', true);
-$options->set('isRemoteEnabled', TRUE);
+// $options = new Options();
+// $options->set('isHtml5ParserEnabled', true);
+// $options->set('isRemoteEnabled', TRUE);
 
-$dompdf = new Dompdf($options);
+// $dompdf = new Dompdf($options);
 
 $batchDao = new BatchDao();
 $ultimoBatchDao = new UltimoBatchCreadoDao();

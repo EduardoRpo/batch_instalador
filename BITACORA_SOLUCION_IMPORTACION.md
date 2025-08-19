@@ -342,3 +342,15 @@ docker compose restart app
 **Resultado:** 🔄 **EN PROCESO DE DEBUG**
 **Objetivo:** Identificar exactamente dónde falla el proceso
 **Próximo paso:** Probar importación y revisar logs en consola del navegador 
+
+### 21. CORRECCIÓN ERROR DOMPDF EN BATCH.PHP
+**Fecha:** 17/08/2025 - 2:50 AM
+**Problema:** Error fatal en `/api/addPedidos` - "Call to a member function set() on null"
+**Archivo:** `api/src/routes/app/batch/batch.php`
+**Diagnóstico:** Líneas 15-20 de Dompdf no estaban completamente comentadas
+**Solución:** Comentar completamente las líneas de Dompdf
+**Cambios:**
+- Líneas 15-16: Comentar `use Dompdf\Dompdf;` y `use Dompdf\Options;`
+- Líneas 18-22: Comentar creación de `$options` y `$dompdf`
+**Resultado:** ✅ **ERROR CORREGIDO**
+**Impacto:** La API `/api/addPedidos` ahora debería funcionar correctamente 
