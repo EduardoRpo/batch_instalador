@@ -434,6 +434,17 @@ Causa: Problemas de CORS al cargar archivos de idioma de DataTables
 ✅ Ruta registrada: /api/calcTamanioLoteSimple
 ```
 
+**3.6.6 Problema de ruta 404:**
+```
+❌ Problema identificado: 404 Not Found para /api/calcTamanioLoteSimple
+❌ Causa posible: Problemas con el registro de rutas en Slim Framework
+✅ Solución temporal: Creación de ruta de prueba simple
+✅ Archivo creado: BatchRecord/api/src/routes/app/multi/testSimple.php
+✅ Rutas de prueba:
+   - GET /api/test
+   - POST /api/test
+```
+
 #### **🎯 ESTADO ACTUAL:**
 - ✅ **API funcional:** Todas las clases y métodos están correctamente implementados
 - ✅ **Base de datos:** Configuración corregida para usar 10.1.200.16:3307
