@@ -407,6 +407,19 @@ Causa: Problemas de CORS al cargar archivos de idioma de DataTables
    - PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true
 ```
 
+**3.6.4 Corrección de constantes PDO no definidas:**
+```
+✅ Problema identificado: Undefined constant PDO::MYSQL_ATTR_READ_TIMEOUT
+✅ Solución encontrada: Simplificadas configuraciones usando solo constantes estándar
+✅ Archivo actualizado: BatchRecord/api/src/Connection.php
+✅ Configuraciones simplificadas:
+   - PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+   - PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+   - PDO::ATTR_EMULATE_PREPARES => false
+   - PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
+   - PDO::ATTR_PERSISTENT => false
+```
+
 #### **🎯 ESTADO ACTUAL:**
 - ✅ **API funcional:** Todas las clases y métodos están correctamente implementados
 - ✅ **Base de datos:** Configuración corregida para usar 10.1.200.16:3307
