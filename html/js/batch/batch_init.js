@@ -278,7 +278,8 @@ function initializeBatchTables() {
         });
     }
 
-    // Tabla de Batch Planeados
+    // Tabla de Batch Planeados - COMENTADO para evitar conflicto con tableBatchPlaneados.js
+    /*
     if ($('#tablaBatchPlaneados').length) {
         tablaBatchPlaneados = $('#tablaBatchPlaneados').DataTable({
             pageLength: 50,
@@ -335,6 +336,7 @@ function initializeBatchTables() {
             ],
         });
     }
+    */
 
     // Tabla de Pre-Planeación
     if ($('#tablaPrePlaneacion').length) {
