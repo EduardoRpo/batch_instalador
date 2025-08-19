@@ -2,13 +2,18 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-use BatchRecord\dao\app\multipresentacion\MultiDao as MultiDaoApp;
+// Incluir directamente la clase MultiDao que necesitamos
+require_once __DIR__ . '/../../../dao/app/multipresentacion/MultiDao.php';
+
 use BatchRecord\dao\calcTamanioMultiDao;
 use BatchRecord\dao\ProductsDao;
 use BatchRecord\dao\PlanPedidosDao;
 use BatchRecord\dao\PlanPrePlaneadosDao;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+
+// Usar un alias para evitar conflictos con la otra clase MultiDao
+class MultiDaoApp extends \BatchRecord\dao\MultiDao {}
 
 $multiDao = new MultiDaoApp();
 $calcTamanioMultiDao = new calcTamanioMultiDao();

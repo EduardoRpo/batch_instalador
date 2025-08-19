@@ -256,17 +256,23 @@ use BatchRecord\dao\ProductsDao;
 use BatchRecord\dao\PlanPedidosDao;
 use BatchRecord\dao\PlanPrePlaneadosDao;
 
-// DESPUÉS (CORRECCIÓN FINAL):
-use BatchRecord\dao\app\multipresentacion\MultiDao as MultiDaoApp;
+// DESPUÉS (SOLUCIÓN FINAL):
+// Incluir directamente la clase MultiDao que necesitamos
+require_once __DIR__ . '/../../../dao/app/multipresentacion/MultiDao.php';
+
 use BatchRecord\dao\calcTamanioMultiDao;
 use BatchRecord\dao\ProductsDao;
 use BatchRecord\dao\PlanPedidosDao;
 use BatchRecord\dao\PlanPrePlaneadosDao;
+
+// Usar un alias para evitar conflictos con la otra clase MultiDao
+class MultiDaoApp extends \BatchRecord\dao\MultiDao {}
 ```
 
-**Nota:** Se usó un alias para distinguir entre las dos clases MultiDao existentes:
-- `MultiDao` en `/api/src/dao/MultiDao.php` (sin método findProductMultiByRef)
-- `MultiDaoApp` en `/api/src/dao/app/multipresentacion/MultiDao.php` (con método findProductMultiByRef)
+**Nota:** Se resolvió el conflicto de clases MultiDao usando:
+- `require_once` para incluir directamente el archivo correcto
+- Clase `MultiDaoApp` que extiende de la clase correcta
+- Evita conflictos con la otra clase MultiDao en el mismo namespace
 
 **3.3 Habilitar reporte de errores:**
 ```php
