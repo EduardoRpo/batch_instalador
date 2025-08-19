@@ -195,18 +195,50 @@ $(document).ready(function () {
   };
 
   generalPedidos = async (data) => {
+    console.log('🚀 generalPedidos ejecutándose con datos:', data);
+    
     await message(data);
+    console.log('✅ message() completado');
 
     pedidosProgramar.splice(0, pedidosProgramar.length);
+    console.log('✅ pedidosProgramar limpiado');
+    
     await deleteSession();
-    setTimeout(loadTotalVentas, 7000);
+    console.log('✅ deleteSession() completado');
+    
+    console.log('🔍 Verificando si loadTotalVentas está definida:', typeof loadTotalVentas);
+    console.log('🔍 loadTotalVentas:', loadTotalVentas);
+    
+    if (typeof loadTotalVentas === 'function') {
+      console.log('✅ loadTotalVentas es una función, programando ejecución...');
+      setTimeout(loadTotalVentas, 7000);
+    } else {
+      console.error('❌ loadTotalVentas NO está definida como función');
+      console.log('🔍 Intentando definir loadTotalVentas como función vacía...');
+      loadTotalVentas = () => {
+        console.log('⚠️ loadTotalVentas ejecutada como función temporal');
+      };
+      setTimeout(loadTotalVentas, 7000);
+    }
+    
     api = '/api/prePlaneados';
+    console.log('✅ api configurado:', api);
+    
     if ($.fn.dataTable.isDataTable('#tblCalcCapacidadPrePlaneado')) {
       $('#tblCalcCapacidadPrePlaneado').DataTable().destroy();
+      console.log('✅ DataTable destruido');
     }
+    
     $('#tblCalcCapacidadPrePlaneadoBody').empty();
+    console.log('✅ tbody limpiado');
+    
     await getDataPrePlaneacion();
+    console.log('✅ getDataPrePlaneacion() completado');
+    
     setTimeout(alignTHeader, 2000);
+    console.log('✅ alignTHeader programado');
+    
+    console.log('🎯 generalPedidos completado exitosamente');
   };
 
   // Opcion NO

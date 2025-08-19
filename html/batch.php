@@ -439,7 +439,7 @@ include_once("modal/m_limpiar_firmas.php");
   <!-- Scripts individuales comentados para evitar conflictos -->
   <!-- <script src="/html/js/batch/tables/tableBatchProgramados.js"></script> -->
   <!-- <script src="/html/js/batch/tables/tableBatchCerrados.js"></script> -->
-  <!-- <script src="/html/js/batch/tables/tableBatchPlaneados.js"></script> -->
+  <script src="/html/js/batch/tables/tableBatchPlaneados.js"></script>
   <!-- <script src="/html/js/batch/tables/tableBatchPedidos.js"></script> -->
   <!-- <script src="/html/js/batch/tables/tableBatchPrePlaneacion.js"></script> -->
   
