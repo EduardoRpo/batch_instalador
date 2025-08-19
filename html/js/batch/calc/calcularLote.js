@@ -66,12 +66,13 @@ $(document).ready(function () {
 
   calcLote = (data) => {
     $.ajax({
+      url: '/api/calcTamanioLoteSimple',
       type: 'POST',
-      url: '/api/calcTamanioLote',
-      data: { data: data },
+      data: JSON.stringify(data),
+      contentType: 'application/json',
       success: function (resp) {
         // Debug: ver qué está devolviendo la API
-        console.log('Respuesta de la API calcTamanioLote:', resp);
+        console.log('Respuesta de la API calcTamanioLoteSimple:', resp);
         
         //Validar que se puedan guardar pedidos
         if (resp.error) {

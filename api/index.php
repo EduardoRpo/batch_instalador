@@ -104,6 +104,7 @@ require_once __DIR__ . '/src/routes/app/batchTanques/batchTanques.php';
 //Multipresentacion
 require_once __DIR__ . '/src/routes/app/multi/multi.php';
 require_once __DIR__ . '/src/routes/app/multi/calcTamanioLote.php';
+require_once __DIR__ . '/src/routes/app/multi/calcTamanioLoteSimple.php';
 
 //Observaciones
 require_once __DIR__ . '/src/routes/app/observaciones/observaciones.php';
