@@ -1,17 +1,24 @@
 $(document).ready(function () {
   alertConfirm = (data) => {
+    // Validar que data y data.pedidosLotes existan
+    if (!data || !data.pedidosLotes || !Array.isArray(data.pedidosLotes)) {
+      alertify.set('notifier', 'position', 'top-right');
+      alertify.error('Error: No se recibieron datos válidos del cálculo de lote');
+      return;
+    }
+
     countPrePlaneados = data.countPrePlaneados;
 
     alertify
       .confirm(
         'Samara Cosmetics',
-        `<p>¿Desea programar los lotes?</p><p><br></p>
-                <table class="table table-striped table-bordered dataTable no-footer text-center" aria-describedby="tablaPedidos_info">
+        `<p>¿Desea preplanear los siguientes pedidos?</p><br>
+            <table class="table table-bordered table-striped">
                 <thead>
                   <tr>
                     <th class="text-center">Granel</th>
-                    <th class="text-center">Descripción</th>
-                    <th class="text-center">Tamaño (Kg)</th>
+                    <th class="text-center">Producto</th>
+                    <th class="text-center">Tamaño Lote (Kg)</th>
                     <th class="text-center">Cantidad (Und)</th>
                   </tr>
                 </thead>

@@ -70,6 +70,9 @@ $(document).ready(function () {
       url: '/api/calcTamanioLote',
       data: { data: data },
       success: function (resp) {
+        // Debug: ver qué está devolviendo la API
+        console.log('Respuesta de la API calcTamanioLote:', resp);
+        
         //Validar que se puedan guardar pedidos
         if (resp.error) {
           alertify.set('notifier', 'position', 'top-right');

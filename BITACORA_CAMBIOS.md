@@ -280,6 +280,41 @@ ini_set('display_errors', 1);
 - ✅ Se habilitó el reporte de errores para debugging
 - ✅ El botón "Calcular Lote" debería funcionar correctamente
 
+#### **🔧 CORRECCIÓN ADICIONAL - ERROR EN generalPedidos.js:**
+
+**3.4 Error TypeError en generalPedidos.js (línea 54):**
+```javascript
+// ANTES:
+alertConfirm = (data) => {
+  countPrePlaneados = data.countPrePlaneados;
+  // ... código sin validación
+
+// DESPUÉS:
+alertConfirm = (data) => {
+  // Validar que data y data.pedidosLotes existan
+  if (!data || !data.pedidosLotes || !Array.isArray(data.pedidosLotes)) {
+    alertify.set('notifier', 'position', 'top-right');
+    alertify.error('Error: No se recibieron datos válidos del cálculo de lote');
+    return;
+  }
+  // ... resto del código
+```
+
+**3.5 Agregar debugging en calcularLote.js:**
+```javascript
+success: function (resp) {
+  // Debug: ver qué está devolviendo la API
+  console.log('Respuesta de la API calcTamanioLote:', resp);
+  // ... resto del código
+}
+```
+
+#### **🎯 RESULTADO FINAL:**
+- ✅ Se eliminó el error TypeError en generalPedidos.js
+- ✅ Se agregó validación robusta para datos undefined
+- ✅ Se agregó debugging para identificar problemas futuros
+- ✅ El botón "Calcular Lote" ahora debería funcionar completamente
+
 ---
 
 **📋 FINALIZADO:** Todos los cambios han sido implementados y documentados correctamente. 
