@@ -506,6 +506,15 @@ Causa: Problemas de CORS al cargar archivos de idioma de DataTables
    - Base de datos: batch_record
 ```
 
+**3.6.11 Problema persistente de ruta 404:**
+```
+❌ Problema identificado: 404 Not Found persistente para /api/calcLoteDirecto
+❌ Causa posible: Error en el archivo index.php que impide el registro de rutas
+✅ Solución temporal: Agregar ruta de prueba simple para diagnóstico
+✅ Archivo actualizado: BatchRecord/api/index.php
+✅ Ruta de prueba agregada: GET /api/test
+```
+
 #### **🎯 ESTADO ACTUAL:**
 - ✅ **API funcional:** Todas las clases y métodos están correctamente implementados
 - ✅ **Base de datos:** Configuración corregida para usar 10.1.200.16:3307
