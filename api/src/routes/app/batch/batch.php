@@ -207,26 +207,29 @@ $app->post('/savePdf', function (Request $request, Response $response, $args) us
   return $response->withHeader('Content-Type', 'application/json');
 });
 
+/*
 $app->post('/generate-pdf', function (Request $request, Response $response, $args) use ($dompdf, $batchDao) {
-  // Obtén los datos del formulario
   $data = $request->getParsedBody();
+  $batchId = $data['batch_id'];
 
-  // Construye el HTML con los datos recibidos
-  $html = $data['html'];
+  // Obtener datos del batch
+  $batchData = $batchDao->findBatchById($batchId);
+
+  // Generar HTML para el PDF
+  $html = '<html><body><h1>Batch Report</h1><p>Batch ID: ' . $batchId . '</p></body></html>';
 
   // Carga el HTML en Dompdf
   $dompdf->loadHtml($html);
-  $customPaper = array(0, 0, 800.00, 900.00);
+
+  $customPaper = array(0, 0, 612, 792);
   $dompdf->set_paper($customPaper);
 
   // Renderiza el PDF
   $dompdf->render();
-  // Genera el archivo PDF
+
   $output = $dompdf->output();
 
-  // Establece las cabeceras para descargar el PDF
-  $response = $response->withHeader('Content-Type', 'application/pdf');
-  $response = $response->withHeader('Content-Disposition', 'attachment; filename="batch.pdf"');
   $response->getBody()->write($output);
-  return $response;
+  return $response->withHeader('Content-Type', 'application/pdf');
 });
+*/
