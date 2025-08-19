@@ -31,9 +31,20 @@ $planPrePlaneadosDao = new PlanPrePlaneadosDao();
 $observacionesDao = new ObservacionesInactivosDao();
 
 $app->get('/batch', function (Request $request, Response $data, $args) use ($batchDao) {
-  $batch = $batchDao->findActive();
-  $data->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));
-  return $data->withHeader('Content-Type', 'application/json');
+  try {
+    $batch = $batchDao->findActive();
+    $data->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));
+    return $data->withHeader('Content-Type', 'application/json');
+  } catch (Exception $e) {
+    // En caso de error, devolver array vacío
+    $errorResponse = [
+      'error' => true,
+      'message' => 'Error al obtener datos de batch: ' . $e->getMessage(),
+      'data' => []
+    ];
+    $data->getBody()->write(json_encode($errorResponse, JSON_NUMERIC_CHECK));
+    return $data->withHeader('Content-Type', 'application/json')->withStatus(500);
+  }
 });
 
 $app->get('/batch/{id}', function (Request $request, Response $response, $args) use ($batchDao, $tanquesDao) {

@@ -123,12 +123,14 @@ $(document).ready(function () {
           return `S${data}`;
         },
       },
+      /*
       {
         width: '350px',
         title: 'Propietario',
         data: 'propietario',
         visible: false,
       },
+      */
       {
         title: 'Pedido',
         data: 'pedido',

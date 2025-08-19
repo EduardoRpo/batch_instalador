@@ -131,11 +131,13 @@ $(document).ready(function () {
     return capacidad;
   };
 
-  tablaBatch = $('#tablaBatch').DataTable({
+  tablaBatchProgramados = $('#tablaBatchProgramados').DataTable({
     pageLength: 50,
     responsive: true,
     scrollCollapse: true,
-    language: { url: '../../../admin/sistema/admin_componentes/es-ar.json' },
+    language: {
+      url: '../../../admin/sistema/admin_componentes/es-ar.json',
+    },
     oSearch: { bSmart: false },
 
     ajax: {

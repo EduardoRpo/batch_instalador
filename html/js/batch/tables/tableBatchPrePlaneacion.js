@@ -120,7 +120,7 @@ $(document).ready(function () {
       dataSrc: 'data',
     },
     language: {
-      url: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json',
+      url: '../../../admin/sistema/admin_componentes/es-ar.json',
     },
     order: [1, 'asc'],
     columns: [
