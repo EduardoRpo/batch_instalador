@@ -18,14 +18,13 @@ try {
     $order_dir = isset($_POST['order'][0]['dir']) ? $_POST['order'][0]['dir'] : 'ASC';
     
     // Mapear columnas para batch planeados
-    $columns = ['id_batch', 'referencia', 'nombre_referencia', 'numero_lote', 'tamano_lote', 'semana_creacion', 'semana_programacion', 'fecha_programacion', 'estado'];
+    $columns = ['id_batch', 'referencia', 'nombre_referencia', 'numero_lote', 'tamano_lote', 'estado'];
     $order_by = $columns[$order_column] ?? 'id_batch';
     
     // Construir consulta base para batch planeados (estado 2 = Inactivo)
     $sql = "SELECT batch.id_batch, batch.id_producto as referencia, 
                    p.nombre_referencia, batch.numero_lote, batch.tamano_lote,
-                   batch.semana_creacion, batch.semana_programacion, 
-                   batch.fecha_programacion, batch.estado
+                   batch.estado
             FROM batch 
             INNER JOIN producto p ON p.referencia = batch.id_producto
             WHERE batch.estado = 2";
@@ -74,9 +73,6 @@ try {
             $row['nombre_referencia'],
             $row['numero_lote'],
             $row['tamano_lote'],
-            $row['semana_creacion'],
-            $row['semana_programacion'],
-            $row['fecha_programacion'],
             $row['estado']
         ];
     }
