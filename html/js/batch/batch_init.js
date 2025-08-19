@@ -174,11 +174,11 @@ function initializeBatchTables() {
                     data: 'pedido',
                     className: 'text-center',
                 },
-                //{
-                //    title: 'F_Pedido',
-                //    data: 'fecha_pedido',
-                //    className: 'text-center',
-                //},
+                {
+                    title: 'F_Pedido',
+                    data: 'fecha_pedido',
+                    className: 'text-center',
+                },
                 {
                     title: 'Granel',
                     data: 'granel',
