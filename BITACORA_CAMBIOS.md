@@ -256,15 +256,15 @@ use BatchRecord\dao\ProductsDao;
 use BatchRecord\dao\PlanPedidosDao;
 use BatchRecord\dao\PlanPrePlaneadosDao;
 
-// DESPUÉS:
+// DESPUÉS (CORRECCIÓN FINAL):
 use BatchRecord\dao\MultiDao;
-use BatchRecord\dao\app\multipresentacion\calcTamanioMultiDao;
+use BatchRecord\dao\calcTamanioMultiDao;
 use BatchRecord\dao\ProductsDao;
 use BatchRecord\dao\PlanPedidosDao;
 use BatchRecord\dao\PlanPrePlaneadosDao;
 ```
 
-**Nota:** Las clases DAO están en el namespace `BatchRecord\dao`, no en subdirectorios específicos.
+**Nota:** Todas las clases DAO están en el namespace `BatchRecord\dao`, independientemente de su ubicación física en subdirectorios.
 
 **3.3 Habilitar reporte de errores:**
 ```php
