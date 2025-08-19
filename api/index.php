@@ -19,7 +19,8 @@ require_once __DIR__ . '/src/constants/Constants.php';
 $app = AppFactory::create();
 $app->setBasePath('/api');
 
-// Add Routing Middleware
+// Add JSON middleware
+$app->addBodyParsingMiddleware();
 $app->addRoutingMiddleware();
 $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
@@ -160,11 +161,14 @@ require_once __DIR__ . '/src/routes/app/usuarios/usuarios.php';
 
 // Ruta de prueba simple
 $app->get('/test-slim', function (Request $request, Response $response) {
-    return $response->withJson([
+    $data = [
         'success' => true,
         'message' => 'API funcionando correctamente',
         'timestamp' => date('Y-m-d H:i:s')
-    ]);
+    ];
+    
+    $response->getBody()->write(json_encode($data));
+    return $response->withHeader('Content-Type', 'application/json');
 });
 
 // Ruta directa para cálculo de lote simplificado
@@ -201,11 +205,13 @@ $app->post('/calc-lote-directo', function (Request $request, Response $response)
         $productData = $stmt->fetch();
         
         if (!$productData) {
-            return $response->withJson([
+            $errorData = [
                 'success' => false,
                 'message' => 'Producto no encontrado',
                 'referencia' => $referencia
-            ], 404);
+            ];
+            $response->getBody()->write(json_encode($errorData));
+            return $response->withHeader('Content-Type', 'application/json')->withStatus(404);
         }
         
         // Cálculo básico
@@ -237,20 +243,25 @@ $app->post('/calc-lote-directo', function (Request $request, Response $response)
             ]
         ];
         
-        return $response->withJson($resultado);
+        $response->getBody()->write(json_encode($resultado));
+        return $response->withHeader('Content-Type', 'application/json');
         
     } catch (PDOException $e) {
-        return $response->withJson([
+        $errorData = [
             'success' => false,
             'message' => 'Error de base de datos: ' . $e->getMessage(),
             'error_code' => $e->getCode()
-        ], 500);
+        ];
+        $response->getBody()->write(json_encode($errorData));
+        return $response->withHeader('Content-Type', 'application/json')->withStatus(500);
         
     } catch (Exception $e) {
-        return $response->withJson([
+        $errorData = [
             'success' => false,
             'message' => 'Error general: ' . $e->getMessage()
-        ], 500);
+        ];
+        $response->getBody()->write(json_encode($errorData));
+        return $response->withHeader('Content-Type', 'application/json')->withStatus(500);
     }
 });
 

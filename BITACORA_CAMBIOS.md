@@ -550,6 +550,18 @@ Causa: Problemas de CORS al cargar archivos de idioma de DataTables
    - use Psr\Http\Message\ServerRequestInterface as Request;
 ```
 
+**3.6.15 Corrección de método withJson en Slim 4:**
+```
+✅ Problema identificado: Call to undefined method Nyholm\Psr7\Response::withJson()
+✅ Causa: Slim 4 no tiene el método withJson(), usa PSR-7 estándar
+✅ Solución implementada: Usar getBody()->write() y withHeader()
+✅ Archivo actualizado: BatchRecord/api/index.php
+✅ Middleware agregado: $app->addBodyParsingMiddleware()
+✅ Respuestas corregidas:
+   - $response->getBody()->write(json_encode($data))
+   - $response->withHeader('Content-Type', 'application/json')
+```
+
 #### **🎯 ESTADO ACTUAL:**
 - ✅ **API funcional:** Todas las clases y métodos están correctamente implementados
 - ✅ **Base de datos:** Configuración corregida para usar 10.1.200.16:3307
