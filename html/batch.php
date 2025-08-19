@@ -481,7 +481,7 @@ include_once("modal/m_limpiar_firmas.php");
   <script src="/html/js/export/export.js"></script>
   <!-- <script src="/html/js/export/file.js"></script>
     <script src="/html/js/export/dataBatch.js"></script> -->
-  <script src="/html/js/batch/modalReprogramados.js"></script> <!--JERP-->
+  <!-- <script src="/html/js/batch/modalReprogramados.js"></script> <!--JERP--> -->
   <script>
     $(document).ready(function() {
       localStorage.removeItem('dataBatchPdf');

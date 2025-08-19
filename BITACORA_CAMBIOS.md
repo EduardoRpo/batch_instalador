@@ -226,4 +226,60 @@ DATE_FORMAT(pp.fecha_actual, '%Y-%m-%d') as fecha_actual,
 
 ---
 
+## 🚨 CORRECCIÓN DE ERRORES - BOTÓN "CALCULAR LOTE"
+
+### **Fecha:** [Fecha Actual]
+### **Problema:** El botón "Calcular Lote" no funcionaba debido a errores en la consola
+
+#### **🔍 ERRORES IDENTIFICADOS:**
+
+1. **Error 404:** `modalReprogramados.js` no se encontraba
+2. **Error 500:** API `/api/calcTamanioLote` fallaba por problemas de importación de clases
+
+#### **🔧 SOLUCIONES IMPLEMENTADAS:**
+
+**3.1 Comentar archivo faltante (línea 483 en batch.php):**
+```html
+<!-- ANTES: -->
+<script src="/html/js/batch/modalReprogramados.js"></script> <!--JERP-->
+
+<!-- DESPUÉS: -->
+<!-- <script src="/html/js/batch/modalReprogramados.js"></script> <!--JERP--> -->
+```
+
+**3.2 Corregir importaciones en API (calcTamanioLote.php):**
+```php
+// ANTES:
+use BatchRecord\dao\MultiDao;
+use BatchRecord\dao\calcTamanioMultiDao;
+use BatchRecord\dao\ProductsDao;
+use BatchRecord\dao\PlanPedidosDao;
+use BatchRecord\dao\PlanPrePlaneadosDao;
+
+// DESPUÉS:
+use BatchRecord\dao\app\multipresentacion\MultiDao;
+use BatchRecord\dao\app\multipresentacion\calcTamanioMultiDao;
+use BatchRecord\dao\app\productos\ProductsDao;
+use BatchRecord\dao\app\explosionMateriales\PlanPedidosDao;
+use BatchRecord\dao\app\explosionMateriales\PlanPrePlaneadosDao;
+```
+
+**3.3 Habilitar reporte de errores:**
+```php
+// ANTES:
+error_reporting(0);
+
+// DESPUÉS:
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+```
+
+#### **🎯 RESULTADO:**
+- ✅ Se eliminó el error 404 del archivo faltante
+- ✅ Se corrigieron las rutas de importación de clases DAO
+- ✅ Se habilitó el reporte de errores para debugging
+- ✅ El botón "Calcular Lote" debería funcionar correctamente
+
+---
+
 **📋 FINALIZADO:** Todos los cambios han sido implementados y documentados correctamente. 
