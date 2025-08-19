@@ -528,6 +528,17 @@ Causa: Problemas de CORS al cargar archivos de idioma de DataTables
    - POST /api/calc-lote-directo (cálculo de lote)
 ```
 
+**3.6.13 Corrección del base path de Slim:**
+```
+✅ Problema identificado: Rutas con /api duplicado debido a $app->setBasePath('/api')
+✅ Causa: Slim ya tiene /api como base path, no se debe duplicar en las rutas
+✅ Solución implementada: Remover /api de las rutas directas
+✅ Archivo actualizado: BatchRecord/api/index.php
+✅ Rutas corregidas:
+   - GET /test-slim (se convierte en /api/test-slim)
+   - POST /calc-lote-directo (se convierte en /api/calc-lote-directo)
+```
+
 #### **🎯 ESTADO ACTUAL:**
 - ✅ **API funcional:** Todas las clases y métodos están correctamente implementados
 - ✅ **Base de datos:** Configuración corregida para usar 10.1.200.16:3307
