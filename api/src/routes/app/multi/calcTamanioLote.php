@@ -2,11 +2,11 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-use BatchRecord\dao\app\multipresentacion\MultiDao;
+use BatchRecord\dao\MultiDao;
 use BatchRecord\dao\app\multipresentacion\calcTamanioMultiDao;
-use BatchRecord\dao\app\productos\ProductsDao;
-use BatchRecord\dao\app\explosionMateriales\PlanPedidosDao;
-use BatchRecord\dao\app\explosionMateriales\PlanPrePlaneadosDao;
+use BatchRecord\dao\ProductsDao;
+use BatchRecord\dao\PlanPedidosDao;
+use BatchRecord\dao\PlanPrePlaneadosDao;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
