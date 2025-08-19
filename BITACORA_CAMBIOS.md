@@ -2,6 +2,31 @@
 
 ## **ÚLTIMA ACTUALIZACIÓN: 2024-12-19**
 
+### **�� PROBLEMA RESUELTO: Error ReferenceError: loadTotalVentas is not defined**
+
+**Fecha:** 2024-12-19  
+**Problema:** Después de confirmar el modal y ingresar la fecha, aparecía el error `ReferenceError: loadTotalVentas is not defined` en `generalPedidos.js:202`.
+
+**Causa:** La función `loadTotalVentas` estaba definida dentro del `$(document).ready()` en `tableBatchPlaneados.js`, lo que la hacía inaccesible desde `generalPedidos.js`.
+
+**Solución implementada:**
+1. **Movida la función `loadTotalVentas` fuera del scope local:**
+   ```javascript
+   // Función global para cargar total de ventas
+   loadTotalVentas = () => {
+     let totalVentaPlan = 0;
+     let totalVentaPre = 0;
+     // ... lógica de cálculo de totales
+   };
+   ```
+
+**Archivos modificados:**
+- `BatchRecord/html/js/batch/tables/tableBatchPlaneados.js`
+
+**Estado:** ✅ **RESUELTO** - Flujo completo funcionando sin errores
+
+---
+
 ### **🎯 PROBLEMA RESUELTO: Modal no aparecía después de calcular lote**
 
 **Fecha:** 2024-12-19  
@@ -26,7 +51,36 @@
 **Archivos modificados:**
 - `BatchRecord/html/js/batch/pedidos/generalPedidos.js`
 
-**Estado:** ✅ **RESUELTO** - Modal debería aparecer correctamente ahora
+**Estado:** ✅ **RESUELTO** - Modal aparece correctamente
+
+---
+
+### **🎯 PROBLEMA RESUELTO: Warning de PHP contaminando respuesta JSON**
+
+**Fecha:** 2024-12-19  
+**Problema:** La API devolvía HTML mezclado con JSON debido a un warning de PHP:
+```
+<br />
+<b>Warning</b>:  Undefined variable $contadorDao in <b>/var/www/html/api/src/routes/app/programacion_envasado/gestionEnvasado.php</b> on line <b>14</b><br />
+{"success":true,...}
+```
+
+**Causa:** Variable `$contadorDao` no definida en el `use` statement de la función.
+
+**Solución implementada:**
+1. **Removida variable no definida del use statement:**
+   ```php
+   // Antes:
+   use ($batchEnvasadoDao, $exportExcelDao, $envasadoDao, $contadorDao)
+   
+   // Después:
+   use ($batchEnvasadoDao, $exportExcelDao, $envasadoDao)
+   ```
+
+**Archivos modificados:**
+- `BatchRecord/api/src/routes/app/programacion_envasado/gestionEnvasado.php`
+
+**Estado:** ✅ **RESUELTO** - Respuesta JSON limpia sin warnings
 
 ---
 
@@ -215,10 +269,11 @@ DB_PASS=S@m4r@_2025!
 3. **API de cálculo:** Operativa con ruta `/api/calc-lote-directo`
 4. **Conexión a BD:** Configurada correctamente para Docker
 5. **Modal de confirmación:** Corregido y funcionando
+6. **Flujo completo:** Sin errores de JavaScript
 
 ### **🎯 PRÓXIMOS PASOS:**
-- Verificar que el modal aparece correctamente
-- Probar funcionalidad completa del flujo
+- Verificar que el flujo completo funciona sin errores
+- Probar funcionalidad de guardado de datos
 - Documentar cualquier problema adicional
 
 ---

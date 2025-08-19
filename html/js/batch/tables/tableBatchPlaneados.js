@@ -1,3 +1,28 @@
+// Función global para cargar total de ventas
+loadTotalVentas = () => {
+  let totalVentaPlan = 0;
+  let totalVentaPre = 0;
+
+  let dataBPlaneacion = tablaBatchPlaneados.rows().data().toArray();
+  let dataBPreplaneacion = tableBatchPrePlaneacion.rows().data().toArray();
+
+  for (i = 0; i < dataBPlaneacion.length; i++) {
+    totalVentaPlan =
+      totalVentaPlan +
+      dataBPlaneacion[i]['unidad_lote'] * dataBPlaneacion[i]['valor_pedido'];
+  }
+
+  for (i = 0; i < dataBPreplaneacion.length; i++) {
+    totalVentaPre =
+      totalVentaPre +
+      dataBPreplaneacion[i]['unidad_lote'] *
+        dataBPreplaneacion[i]['valor_pedido'];
+  }
+
+  $('#totalVentaPre').val(`$ ${totalVentaPre.toLocaleString('es-CO')}`);
+  $('#totalVentaPlan').val(`$ ${totalVentaPlan.toLocaleString('es-CO')}`);
+};
+
 $(document).ready(function () {
   /* Capacidad Planeada */
   api = '/api/batchPlaneados';
@@ -182,28 +207,5 @@ $(document).ready(function () {
     },
   });
 
-  loadTotalVentas = () => {
-    let totalVentaPlan = 0;
-    let totalVentaPre = 0;
-
-    let dataBPlaneacion = tablaBatchPlaneados.rows().data().toArray();
-    let dataBPreplaneacion = tableBatchPrePlaneacion.rows().data().toArray();
-
-    for (i = 0; i < dataBPlaneacion.length; i++) {
-      totalVentaPlan =
-        totalVentaPlan +
-        dataBPlaneacion[i]['unidad_lote'] * dataBPlaneacion[i]['valor_pedido'];
-    }
-
-    for (i = 0; i < dataBPreplaneacion.length; i++) {
-      totalVentaPre =
-        totalVentaPre +
-        dataBPreplaneacion[i]['unidad_lote'] *
-          dataBPreplaneacion[i]['valor_pedido'];
-    }
-
-    $('#totalVentaPre').val(`$ ${totalVentaPre.toLocaleString('es-CO')}`);
-    $('#totalVentaPlan').val(`$ ${totalVentaPlan.toLocaleString('es-CO')}`);
-  };
   setTimeout(loadTotalVentas, 11000);
 });
