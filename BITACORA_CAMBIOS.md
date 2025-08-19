@@ -257,14 +257,16 @@ use BatchRecord\dao\PlanPedidosDao;
 use BatchRecord\dao\PlanPrePlaneadosDao;
 
 // DESPUÉS (CORRECCIÓN FINAL):
-use BatchRecord\dao\MultiDao;
+use BatchRecord\dao\app\multipresentacion\MultiDao as MultiDaoApp;
 use BatchRecord\dao\calcTamanioMultiDao;
 use BatchRecord\dao\ProductsDao;
 use BatchRecord\dao\PlanPedidosDao;
 use BatchRecord\dao\PlanPrePlaneadosDao;
 ```
 
-**Nota:** Todas las clases DAO están en el namespace `BatchRecord\dao`, independientemente de su ubicación física en subdirectorios.
+**Nota:** Se usó un alias para distinguir entre las dos clases MultiDao existentes:
+- `MultiDao` en `/api/src/dao/MultiDao.php` (sin método findProductMultiByRef)
+- `MultiDaoApp` en `/api/src/dao/app/multipresentacion/MultiDao.php` (con método findProductMultiByRef)
 
 **3.3 Habilitar reporte de errores:**
 ```php
