@@ -183,7 +183,10 @@ include_once("modal/m_limpiar_firmas.php");
                   <a class="nav-link" id="five-tab" data-toggle="tab" href="#five" role="tab" aria-controls="Five" aria-selected="false">Cerrados</a>
                 </li>
               <?php  } ?>
-              <div style="display:grid;justify-content:end;margin-left:auto" class="row numberWeek mr-3">
+              <!-- <div style="display:grid;justify-content:end;margin-left:auto" class="row numberWeek mr-3">
+              </div> -->
+              <div style="display:grid;justify-content:end;margin-left:auto" class="row mr-3">
+                <button class="toggle-vis btn btn-primary" id="calcLote">Calcular Lote</button>
               </div>
             </ul>
           </div>
@@ -205,7 +208,6 @@ include_once("modal/m_limpiar_firmas.php");
                       <button class="toggle-vis btn btn-primary hideTitle" id="9">Saldo Ofima</button>
                       <button class="toggle-vis btn btn-primary hideTitle" id="10">Acum_Prog</button>
                       <button class="toggle-vis btn btn-primary hideTitle" id="11">Cant_Programar</button>
-                      <button class="toggle-vis btn btn-primary" id="calcLote">Calcular Lote</button>
                     </div>
                     <div class="card-block">
                       <div class="table-responsive">
