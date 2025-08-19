@@ -394,6 +394,19 @@ Causa: Problemas de CORS al cargar archivos de idioma de DataTables
 ✅ Contraseña agregada: DB_PASS="S@m4r@_2025!"
 ```
 
+**3.6.3 Corrección de error "MySQL server has gone away":**
+```
+✅ Problema identificado: SQLSTATE[HY000] [2006] MySQL server has gone away
+✅ Solución encontrada: Agregadas configuraciones de timeout y reconexión en PDO
+✅ Archivo actualizado: BatchRecord/api/src/Connection.php
+✅ Configuraciones agregadas:
+   - PDO::MYSQL_ATTR_READ_TIMEOUT => 60
+   - PDO::MYSQL_ATTR_WRITE_TIMEOUT => 60
+   - PDO::MYSQL_ATTR_CONNECT_TIMEOUT => 10
+   - PDO::ATTR_PERSISTENT => false
+   - PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true
+```
+
 #### **🎯 ESTADO ACTUAL:**
 - ✅ **API funcional:** Todas las clases y métodos están correctamente implementados
 - ✅ **Base de datos:** Configuración corregida para usar 10.1.200.16:3307
