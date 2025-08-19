@@ -11,7 +11,7 @@ $exportExcelDao = new exportarExcelDao();
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-$app->post('/gestionEnvasado', function (Request $request, Response $response, $args) use ($batchEnvasadoDao, $exportExcelDao, $envasadoDao, $contadorDao) {
+$app->post('/gestionEnvasado', function (Request $request, Response $response, $args) use ($batchEnvasadoDao, $exportExcelDao, $envasadoDao) {
     $dates = $request->getParsedBody();
 
     $date1 = $dates['fechaInicial'] . ' 00:00:00';
