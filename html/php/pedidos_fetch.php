@@ -27,7 +27,7 @@ try {
                 pp.cantidad as saldo_ofima,
                 pp.cantidad_acumulada,
                 pp.fecha_insumo,
-                pp.fecha_actual,
+                DATE_FORMAT(pp.fecha_actual, '%Y-%m-%d') as fecha_actual,
                 'Escenario 1' as simulacion,
                 DATE_FORMAT(DATE_ADD(pp.fecha_pedido, INTERVAL 15 DAY), '%Y-%m-%d') as entrega,
                 0 as cant_observations,

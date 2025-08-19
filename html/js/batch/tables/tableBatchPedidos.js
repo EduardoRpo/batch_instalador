@@ -95,8 +95,15 @@ $(document).ready(function () {
             ? (fecha_insumo = '')
             : (fecha_insumo = data.fecha_insumo);
 
+          // Obtener la fecha actual en formato YYYY-MM-DD para el atributo max
+          const fechaActual = new Date().toISOString().split('T')[0];
+          
           return `
-              <input type="date" class="dateInsumos form-control-updated text-center" id="date-${data.pedido}-${data.id_producto}" value="${fecha_insumo}" max="${data.fecha_actual}"/>`;
+              <input type="date" class="dateInsumos form-control-updated text-center" 
+                     id="date-${data.pedido}-${data.id_producto}" 
+                     value="${fecha_insumo}" 
+                     max="${fechaActual}"
+                     onchange="validarFechaInsumos(this)"/>`;
         },
       },
 
@@ -137,3 +144,21 @@ $(document).ready(function () {
     $('#tablaPedidos').DataTable().ajax.reload();
   });
 });
+
+// Función para validar que la fecha de insumos no sea futura
+function validarFechaInsumos(input) {
+  const fechaSeleccionada = new Date(input.value);
+  const fechaActual = new Date();
+  
+  // Resetear la fecha actual a medianoche para comparación
+  fechaActual.setHours(0, 0, 0, 0);
+  
+  if (fechaSeleccionada > fechaActual) {
+    alert('⚠️ Error: No se puede seleccionar una fecha futura para la recepción de insumos.\n\nLa fecha de recepción de insumos solo puede ser la fecha actual o una fecha pasada.');
+    input.value = ''; // Limpiar el campo
+    input.focus(); // Enfocar el campo para que el usuario pueda seleccionar una fecha válida
+    return false;
+  }
+  
+  return true;
+}
