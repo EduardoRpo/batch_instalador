@@ -158,9 +158,12 @@ $(document).ready(function () {
 
           dataPrePlaneados.date = value;
 
-          if (countPrePlaneados == 0) {
+          // Evitar mostrar modal de simulación cuando se viene del cálculo de lote
+          if (countPrePlaneados == 0 || window.fromCalcLote) {
             dataPrePlaneados.simulacion = 1;
             savePrePlaneados(dataPrePlaneados);
+            // Resetear la bandera después de usarla
+            window.fromCalcLote = false;
           } else {
             alertSimulacion();
           }

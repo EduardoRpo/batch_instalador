@@ -77,6 +77,9 @@ $(document).ready(function () {
     console.log('🔍 Referencias en data:', data.map(item => item.referencia || item.granel));
     console.log('🔍 Datos completos:', JSON.stringify(data, null, 2));
     
+    // Establecer bandera para evitar modal de simulación
+    window.fromCalcLote = true;
+    
     $.ajax({
       url: '/api/calc-lote-directo',
       type: 'POST',

@@ -94,6 +94,45 @@
 
 ---
 
+### **🎯 PROBLEMA RESUELTO: Modal "Cargar Pedido en simulacion" aparece innecesariamente**
+
+**Fecha:** 2024-12-19  
+**Problema:** Después de calcular lote, confirmar fecha de planeación y hacer clic en OK, aparecía el modal "Cargar Pedido en simulacion" que no debería mostrarse.
+
+**Causa:** En `generalPedidos.js` línea 164, cuando `countPrePlaneados > 0`, se llamaba automáticamente a `alertSimulacion()` sin distinguir si el flujo venía del cálculo de lote.
+
+**Solución implementada:**
+1. **Agregada bandera global para identificar flujo desde cálculo de lote:**
+   ```javascript
+   // En calcularLote.js
+   calcLote = (data) => {
+     // Establecer bandera para evitar modal de simulación
+     window.fromCalcLote = true;
+     // ... resto de la función
+   };
+   ```
+
+2. **Modificada lógica en generalPedidos.js para evitar modal de simulación:**
+   ```javascript
+   // Evitar mostrar modal de simulación cuando se viene del cálculo de lote
+   if (countPrePlaneados == 0 || window.fromCalcLote) {
+     dataPrePlaneados.simulacion = 1;
+     savePrePlaneados(dataPrePlaneados);
+     // Resetear la bandera después de usarla
+     window.fromCalcLote = false;
+   } else {
+     alertSimulacion();
+   }
+   ```
+
+**Archivos modificados:**
+- `BatchRecord/html/js/batch/calc/calcularLote.js`
+- `BatchRecord/html/js/batch/pedidos/generalPedidos.js`
+
+**Estado:** ✅ **RESUELTO** - Modal de simulación no aparece cuando se viene del flujo de cálculo de lote
+
+---
+
 ### **🔧 PROBLEMA RESUELTO: Error ReferenceError: loadTotalVentas is not defined**
 
 **Fecha:** 2024-12-19  
