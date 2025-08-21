@@ -96,8 +96,11 @@ $(document).ready(function () {
       },
       error: function (xhr, status, error) {
         console.error('❌ Error en AJAX:', {xhr, status, error});
+        console.error('❌ Status:', xhr.status);
+        console.error('❌ StatusText:', xhr.statusText);
+        console.error('❌ ResponseText:', xhr.responseText);
         alertify.set('notifier', 'position', 'top-right');
-        alertify.error('Error al calcular lote: ' + error);
+        alertify.error('Error al calcular lote: ' + error + ' (Status: ' + xhr.status + ')');
       }
     });
   };

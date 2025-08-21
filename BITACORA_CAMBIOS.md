@@ -2,7 +2,80 @@
 
 ## **ÚLTIMA ACTUALIZACIÓN: 2024-12-19**
 
-### **�� PROBLEMA RESUELTO: Error ReferenceError: loadTotalVentas is not defined**
+### **🔧 PROBLEMA RESUELTO: Error de sintaxis en API PHP y mejoras CORS**
+
+**Fecha:** 2024-12-19  
+**Problema:** Error jQuery AJAX causado por `console.log` statements de JavaScript en código PHP de la API y problemas de CORS.
+
+**Causa:** 
+1. En el archivo `BatchRecord/api/index.php`, líneas 207-208 y 258, había declaraciones `console.log()` que son sintaxis de JavaScript, no PHP.
+2. Problemas de parsing JSON en el middleware de Slim.
+3. Falta de headers CORS para permitir requests desde el frontend.
+
+**Solución implementada:**
+1. **Reemplazados console.log con error_log:**
+   ```php
+   // Antes:
+   console.log('🔍 Datos recibidos en API:', $data);
+   console.log('🔍 Número de pedidos:', count($data));
+   console.log('✅ Respuesta de API:', $resultado);
+   
+   // Después:
+   error_log('🔍 Datos recibidos en API: ' . json_encode($data));
+   error_log('🔍 Número de pedidos: ' . count($data));
+   error_log('✅ Respuesta de API: ' . json_encode($resultado));
+   ```
+
+2. **Mejorado el parsing de JSON:**
+   ```php
+   // Antes:
+   $data = $request->getParsedBody();
+   
+   // Después:
+   $rawBody = $request->getBody()->getContents();
+   $data = json_decode($rawBody, true);
+   ```
+
+3. **Agregados headers CORS:**
+   ```php
+   return $response
+       ->withHeader('Content-Type', 'application/json')
+       ->withHeader('Access-Control-Allow-Origin', '*')
+       ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+       ->withHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+   ```
+
+4. **Agregada ruta OPTIONS para preflight requests:**
+   ```php
+   $app->options('/calc-lote-directo', function (Request $request, Response $response) {
+       return $response
+           ->withHeader('Access-Control-Allow-Origin', '*')
+           ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+           ->withHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+   });
+   ```
+
+5. **Mejorado el manejo de errores en JavaScript:**
+   ```javascript
+   error: function (xhr, status, error) {
+     console.error('❌ Error en AJAX:', {xhr, status, error});
+     console.error('❌ Status:', xhr.status);
+     console.error('❌ StatusText:', xhr.statusText);
+     console.error('❌ ResponseText:', xhr.responseText);
+     alertify.set('notifier', 'position', 'top-right');
+     alertify.error('Error al calcular lote: ' + error + ' (Status: ' + xhr.status + ')');
+   }
+   ```
+
+**Archivos modificados:**
+- `BatchRecord/api/index.php`
+- `BatchRecord/html/js/batch/calc/calcularLote.js`
+
+**Estado:** ✅ **RESUELTO** - API funcionando correctamente con CORS habilitado
+
+---
+
+### **🔧 PROBLEMA RESUELTO: Error ReferenceError: loadTotalVentas is not defined**
 
 **Fecha:** 2024-12-19  
 **Problema:** Después de confirmar el modal y ingresar la fecha, aparecía el error `ReferenceError: loadTotalVentas is not defined` en `generalPedidos.js:202`.

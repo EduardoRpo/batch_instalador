@@ -171,6 +171,14 @@ $app->get('/test-slim', function (Request $request, Response $response) {
     return $response->withHeader('Content-Type', 'application/json');
 });
 
+// Ruta OPTIONS para CORS preflight
+$app->options('/calc-lote-directo', function (Request $request, Response $response) {
+    return $response
+        ->withHeader('Access-Control-Allow-Origin', '*')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+        ->withHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+});
+
 // Ruta directa para cálculo de lote simplificado
 $app->post('/calc-lote-directo', function (Request $request, Response $response) {
     try {
@@ -190,21 +198,29 @@ $app->post('/calc-lote-directo', function (Request $request, Response $response)
         ]);
         
         // Obtener datos del request
-        $data = $request->getParsedBody();
+        $rawBody = $request->getBody()->getContents();
+        $data = json_decode($rawBody, true);
         
         // Validar que data sea un array
         if (!is_array($data)) {
             $errorData = [
                 'success' => false,
                 'message' => 'Datos inválidos: se esperaba un array de pedidos',
-                'received' => $data
+                'received' => $data,
+                'raw_body' => $rawBody
             ];
             $response->getBody()->write(json_encode($errorData));
-            return $response->withHeader('Content-Type', 'application/json')->withStatus(400);
+            return $response
+                ->withHeader('Content-Type', 'application/json')
+                ->withHeader('Access-Control-Allow-Origin', '*')
+                ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+                ->withHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+                ->withStatus(400);
         }
         
-        console.log('🔍 Datos recibidos en API:', $data);
-        console.log('🔍 Número de pedidos:', count($data));
+        error_log('🔍 Raw body recibido: ' . $rawBody);
+        error_log('🔍 Datos decodificados: ' . json_encode($data));
+        error_log('🔍 Número de pedidos: ' . count($data));
         
         $pedidosLotes = [];
         $totalCountPrePlaneados = 0;
@@ -263,10 +279,14 @@ $app->post('/calc-lote-directo', function (Request $request, Response $response)
             'countPrePlaneados' => $totalCountPrePlaneados
         ];
         
-        console.log('✅ Respuesta de API:', $resultado);
+        error_log('✅ Respuesta de API: ' . json_encode($resultado));
         
         $response->getBody()->write(json_encode($resultado));
-        return $response->withHeader('Content-Type', 'application/json');
+        return $response
+            ->withHeader('Content-Type', 'application/json')
+            ->withHeader('Access-Control-Allow-Origin', '*')
+            ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+            ->withHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
         
     } catch (PDOException $e) {
         $errorData = [
@@ -275,7 +295,12 @@ $app->post('/calc-lote-directo', function (Request $request, Response $response)
             'error_code' => $e->getCode()
         ];
         $response->getBody()->write(json_encode($errorData));
-        return $response->withHeader('Content-Type', 'application/json')->withStatus(500);
+        return $response
+            ->withHeader('Content-Type', 'application/json')
+            ->withHeader('Access-Control-Allow-Origin', '*')
+            ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+            ->withHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+            ->withStatus(500);
         
     } catch (Exception $e) {
         $errorData = [
@@ -283,7 +308,12 @@ $app->post('/calc-lote-directo', function (Request $request, Response $response)
             'message' => 'Error general: ' . $e->getMessage()
         ];
         $response->getBody()->write(json_encode($errorData));
-        return $response->withHeader('Content-Type', 'application/json')->withStatus(500);
+        return $response
+            ->withHeader('Content-Type', 'application/json')
+            ->withHeader('Access-Control-Allow-Origin', '*')
+            ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+            ->withHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+            ->withStatus(500);
     }
 });
 
