@@ -11,6 +11,7 @@
 1. En el archivo `BatchRecord/api/index.php`, líneas 207-208 y 258, había declaraciones `console.log()` que son sintaxis de JavaScript, no PHP.
 2. Problemas de parsing JSON en el middleware de Slim.
 3. Falta de headers CORS para permitir requests desde el frontend.
+4. **NUEVO:** jQuery no estaba enviando correctamente el JSON con `contentType: 'application/json'`.
 
 **Solución implementada:**
 1. **Reemplazados console.log con error_log:**
@@ -26,14 +27,20 @@
    error_log('✅ Respuesta de API: ' . json_encode($resultado));
    ```
 
-2. **Mejorado el parsing de JSON:**
+2. **Mejorado el parsing de JSON con fallback:**
    ```php
-   // Antes:
-   $data = $request->getParsedBody();
-   
-   // Después:
+   // Obtener datos del request
    $rawBody = $request->getBody()->getContents();
-   $data = json_decode($rawBody, true);
+   error_log('🔍 Raw body recibido: ' . $rawBody);
+   
+   // Si el raw body está vacío, intentar con getParsedBody
+   if (empty($rawBody)) {
+       $data = $request->getParsedBody();
+       error_log('🔍 Usando getParsedBody: ' . json_encode($data));
+   } else {
+       $data = json_decode($rawBody, true);
+       error_log('🔍 Usando json_decode: ' . json_encode($data));
+   }
    ```
 
 3. **Agregados headers CORS:**
@@ -67,11 +74,23 @@
    }
    ```
 
+6. **Agregado processData: false en jQuery AJAX:**
+   ```javascript
+   $.ajax({
+     url: '/api/calc-lote-directo',
+     type: 'POST',
+     data: JSON.stringify(data),
+     contentType: 'application/json',
+     processData: false,  // ← Agregado para evitar que jQuery procese el JSON
+     // ... resto de la configuración
+   });
+   ```
+
 **Archivos modificados:**
 - `BatchRecord/api/index.php`
 - `BatchRecord/html/js/batch/calc/calcularLote.js`
 
-**Estado:** ✅ **RESUELTO** - API funcionando correctamente con CORS habilitado
+**Estado:** ✅ **RESUELTO** - API funcionando correctamente con CORS habilitado y parsing JSON mejorado
 
 ---
 

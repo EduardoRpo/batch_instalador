@@ -82,6 +82,7 @@ $(document).ready(function () {
       type: 'POST',
       data: JSON.stringify(data),
       contentType: 'application/json',
+      processData: false,
       success: function (resp) {
         console.log('✅ Respuesta de la API calc-lote-directo:', resp);
         console.log('🔍 Referencias en respuesta:', resp.pedidosLotes?.map(item => item.referencia || item.granel));

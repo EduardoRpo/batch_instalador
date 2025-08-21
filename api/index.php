@@ -199,7 +199,16 @@ $app->post('/calc-lote-directo', function (Request $request, Response $response)
         
         // Obtener datos del request
         $rawBody = $request->getBody()->getContents();
-        $data = json_decode($rawBody, true);
+        error_log('🔍 Raw body recibido: ' . $rawBody);
+        
+        // Si el raw body está vacío, intentar con getParsedBody
+        if (empty($rawBody)) {
+            $data = $request->getParsedBody();
+            error_log('🔍 Usando getParsedBody: ' . json_encode($data));
+        } else {
+            $data = json_decode($rawBody, true);
+            error_log('🔍 Usando json_decode: ' . json_encode($data));
+        }
         
         // Validar que data sea un array
         if (!is_array($data)) {
@@ -207,7 +216,8 @@ $app->post('/calc-lote-directo', function (Request $request, Response $response)
                 'success' => false,
                 'message' => 'Datos inválidos: se esperaba un array de pedidos',
                 'received' => $data,
-                'raw_body' => $rawBody
+                'raw_body' => $rawBody,
+                'parsed_body' => $request->getParsedBody()
             ];
             $response->getBody()->write(json_encode($errorData));
             return $response
