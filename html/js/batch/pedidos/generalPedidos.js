@@ -1,17 +1,40 @@
 // Función global para mostrar el modal de confirmación
 alertConfirm = (data) => {
   console.log('🚀 alertConfirm ejecutándose con datos:', data);
+  console.log('🔍 Tipo de data:', typeof data);
+  console.log('🔍 data es null/undefined:', data === null || data === undefined);
+  console.log('🔍 data.pedidosLotes existe:', data && data.pedidosLotes);
+  console.log('🔍 data.pedidosLotes es array:', Array.isArray(data && data.pedidosLotes));
   
   // Validar que data y data.pedidosLotes existan
-  if (!data || !data.pedidosLotes || !Array.isArray(data.pedidosLotes)) {
-    console.error('❌ Error: Datos inválidos recibidos:', data);
+  if (!data) {
+    console.error('❌ Error: data es null o undefined');
     alertify.set('notifier', 'position', 'top-right');
-    alertify.error('Error: No se recibieron datos válidos del cálculo de lote');
+    alertify.error('Error: No se recibieron datos del cálculo de lote');
+    return;
+  }
+  
+  if (!data.pedidosLotes) {
+    console.error('❌ Error: data.pedidosLotes no existe');
+    console.log('🔍 Propiedades disponibles en data:', Object.keys(data));
+    alertify.set('notifier', 'position', 'top-right');
+    alertify.error('Error: No se encontraron pedidos en la respuesta');
+    return;
+  }
+  
+  if (!Array.isArray(data.pedidosLotes)) {
+    console.error('❌ Error: data.pedidosLotes no es un array');
+    console.log('🔍 Tipo de data.pedidosLotes:', typeof data.pedidosLotes);
+    alertify.set('notifier', 'position', 'top-right');
+    alertify.error('Error: Formato de datos incorrecto');
     return;
   }
 
   console.log('✅ Datos válidos, mostrando modal...');
-  countPrePlaneados = data.countPrePlaneados;
+  console.log('🔍 Número de pedidos:', data.pedidosLotes.length);
+  console.log('🔍 Primer pedido:', data.pedidosLotes[0]);
+  
+  countPrePlaneados = data.countPrePlaneados || 0;
 
   alertify
     .confirm(

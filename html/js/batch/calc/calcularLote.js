@@ -53,9 +53,17 @@ $(document).ready(function () {
 
   $(document).on('click', '#calcLote', function (e) {
     e.preventDefault();
-    if (date && cantidad && pedidosProgramar.length > 0)
+    console.log('🚀 Botón Calcular Lote clickeado');
+    console.log('🔍 date:', date);
+    console.log('🔍 cantidad:', cantidad);
+    console.log('🔍 pedidosProgramar.length:', pedidosProgramar.length);
+    console.log('🔍 pedidosProgramar:', pedidosProgramar);
+    
+    if (date && cantidad && pedidosProgramar.length > 0) {
+      console.log('✅ Validaciones pasadas, llamando a calcLote...');
       calcLote(pedidosProgramar);
-    else {
+    } else {
+      console.log('❌ Validaciones fallaron');
       alertify.set('notifier', 'position', 'top-right');
       alertify.error(
         'Ingrese la cantidad a programar y fecha de recepción de insumos'
@@ -65,16 +73,20 @@ $(document).ready(function () {
   });
 
   calcLote = (data) => {
+    console.log('🚀 calcLote ejecutándose con datos:', data);
+    console.log('🔍 Referencias en data:', data.map(item => item.referencia || item.granel));
+    console.log('🔍 Datos completos:', JSON.stringify(data, null, 2));
+    
     $.ajax({
       url: '/api/calc-lote-directo',
       type: 'POST',
       data: JSON.stringify(data),
       contentType: 'application/json',
       success: function (resp) {
+        console.log('✅ Respuesta de la API calc-lote-directo:', resp);
+        console.log('🔍 Referencias en respuesta:', resp.pedidosLotes?.map(item => item.referencia || item.granel));
         // Debug: ver qué está devolviendo la API
-        console.log('Respuesta de la API calc-lote-directo:', resp);
-        
-        //Validar que se puedan guardar pedidos
+        // Validar que se puedan guardar pedidos
         if (resp.error) {
           alertify.set('notifier', 'position', 'top-right');
           alertify.error(resp.message);
@@ -82,6 +94,11 @@ $(document).ready(function () {
         // Ventana alert confirm
         alertConfirm(resp);
       },
+      error: function (xhr, status, error) {
+        console.error('❌ Error en AJAX:', {xhr, status, error});
+        alertify.set('notifier', 'position', 'top-right');
+        alertify.error('Error al calcular lote: ' + error);
+      }
     });
   };
 

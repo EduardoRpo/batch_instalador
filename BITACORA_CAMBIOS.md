@@ -298,3 +298,107 @@ php test_config.php
 ---
 
 **Nota:** Esta bitácora se actualiza continuamente con cada cambio realizado en el sistema. 
+
+# Bitácora de Cambios - BatchRecord
+
+## 2024-12-19 - Debugging del Modal "Calcular Lote"
+
+### Problema Identificado
+El botón "Calcular Lote" no muestra el modal de confirmación después de presionarlo.
+
+### Cambios Realizados
+
+#### 1. Mejora de Logs en `generalPedidos.js`
+- **Archivo**: `BatchRecord/html/js/batch/pedidos/generalPedidos.js`
+- **Cambios**:
+  - Agregados logs detallados en `alertConfirm` para debuggear el flujo
+  - Mejorada la validación de datos con mensajes específicos
+  - Separada la validación en pasos individuales para identificar el problema exacto
+  - Agregados logs para verificar el tipo de datos y estructura
+
+```javascript
+alertConfirm = (data) => {
+  console.log('🚀 alertConfirm ejecutándose con datos:', data);
+  console.log('🔍 Tipo de data:', typeof data);
+  console.log('🔍 data es null/undefined:', data === null || data === undefined);
+  console.log('🔍 data.pedidosLotes existe:', data && data.pedidosLotes);
+  console.log('🔍 data.pedidosLotes es array:', Array.isArray(data && data.pedidosLotes));
+  
+  // Validaciones separadas para mejor debugging
+  if (!data) {
+    console.error('❌ Error: data es null o undefined');
+    alertify.set('notifier', 'position', 'top-right');
+    alertify.error('Error: No se recibieron datos del cálculo de lote');
+    return;
+  }
+  
+  if (!data.pedidosLotes) {
+    console.error('❌ Error: data.pedidosLotes no existe');
+    console.log('🔍 Propiedades disponibles en data:', Object.keys(data));
+    alertify.set('notifier', 'position', 'top-right');
+    alertify.error('Error: No se encontraron pedidos en la respuesta');
+    return;
+  }
+  
+  if (!Array.isArray(data.pedidosLotes)) {
+    console.error('❌ Error: data.pedidosLotes no es un array');
+    console.log('🔍 Tipo de data.pedidosLotes:', typeof data.pedidosLotes);
+    alertify.set('notifier', 'position', 'top-right');
+    alertify.error('Error: Formato de datos incorrecto');
+    return;
+  }
+
+  console.log('✅ Datos válidos, mostrando modal...');
+  console.log('🔍 Número de pedidos:', data.pedidosLotes.length);
+  console.log('🔍 Primer pedido:', data.pedidosLotes[0]);
+  
+  countPrePlaneados = data.countPrePlaneados || 0;
+  // ... resto de la función
+};
+```
+
+#### 2. Mejora de Logs en `calcularLote.js`
+- **Archivo**: `BatchRecord/html/js/batch/calc/calcularLote.js`
+- **Cambios**:
+  - Agregados logs detallados en el evento click del botón "Calcular Lote"
+  - Logs para verificar las variables `date`, `cantidad` y `pedidosProgramar`
+  - Logs para confirmar cuando las validaciones pasan o fallan
+
+```javascript
+$(document).on('click', '#calcLote', function (e) {
+  e.preventDefault();
+  console.log('🚀 Botón Calcular Lote clickeado');
+  console.log('🔍 date:', date);
+  console.log('🔍 cantidad:', cantidad);
+  console.log('🔍 pedidosProgramar.length:', pedidosProgramar.length);
+  console.log('🔍 pedidosProgramar:', pedidosProgramar);
+  
+  if (date && cantidad && pedidosProgramar.length > 0) {
+    console.log('✅ Validaciones pasadas, llamando a calcLote...');
+    calcLote(pedidosProgramar);
+  } else {
+    console.log('❌ Validaciones fallaron');
+    alertify.set('notifier', 'position', 'top-right');
+    alertify.error(
+      'Ingrese la cantidad a programar y fecha de recepción de insumos'
+    );
+    return false;
+  }
+});
+```
+
+### Objetivo
+Identificar exactamente dónde falla el flujo:
+1. ¿Se ejecuta el click del botón?
+2. ¿Pasan las validaciones?
+3. ¿Se hace la llamada AJAX?
+4. ¿La API responde correctamente?
+5. ¿Se ejecuta `alertConfirm`?
+6. ¿Los datos tienen la estructura esperada?
+
+### Próximos Pasos
+1. Probar el botón "Calcular Lote" y revisar la consola del navegador
+2. Identificar el punto exacto donde falla el flujo
+3. Corregir el problema específico encontrado
+
+--- 

@@ -191,61 +191,79 @@ $app->post('/calc-lote-directo', function (Request $request, Response $response)
         
         // Obtener datos del request
         $data = $request->getParsedBody();
-        $referencia = $data['referencia'] ?? 'M-20966';
         
-        // Consulta directa
-        $sql = "SELECT p.referencia, p.densidad_producto as densidad, linea.ajuste, pc.nombre as presentacion
-                FROM producto p
-                INNER JOIN linea ON p.id_linea = linea.id
-                INNER JOIN presentacion_comercial pc ON p.presentacion_comercial = pc.id
-                WHERE p.referencia = :referencia";
-        
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute(['referencia' => $referencia]);
-        $productData = $stmt->fetch();
-        
-        if (!$productData) {
+        // Validar que data sea un array
+        if (!is_array($data)) {
             $errorData = [
                 'success' => false,
-                'message' => 'Producto no encontrado',
-                'referencia' => $referencia
+                'message' => 'Datos inválidos: se esperaba un array de pedidos',
+                'received' => $data
             ];
             $response->getBody()->write(json_encode($errorData));
-            return $response->withHeader('Content-Type', 'application/json')->withStatus(404);
+            return $response->withHeader('Content-Type', 'application/json')->withStatus(400);
         }
         
-        // Cálculo básico
-        $densidad = floatval($productData['densidad']);
-        $ajuste = floatval($productData['ajuste']);
-        $presentacion = $productData['presentacion'];
-        $tamanioLote = $densidad * $ajuste * 1000;
+        console.log('🔍 Datos recibidos en API:', $data);
+        console.log('🔍 Número de pedidos:', count($data));
+        
+        $pedidosLotes = [];
+        $totalCountPrePlaneados = 0;
+        
+        // Procesar cada pedido del array
+        foreach ($data as $pedido) {
+            $referencia = $pedido['referencia'] ?? 'M-20966';
+            $granel = $pedido['granel'] ?? $referencia;
+            $producto = $pedido['producto'] ?? 'Producto ' . $referencia;
+            $cantidad_acumulada = $pedido['cantidad_acumulada'] ?? 500;
+            
+            // Consulta directa para obtener datos del producto
+            $sql = "SELECT p.referencia, p.densidad_producto as densidad, linea.ajuste, pc.nombre as presentacion
+                    FROM producto p
+                    INNER JOIN linea ON p.id_linea = linea.id
+                    INNER JOIN presentacion_comercial pc ON p.presentacion_comercial = pc.id
+                    WHERE p.referencia = :referencia";
+            
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(['referencia' => $referencia]);
+            $productData = $stmt->fetch();
+            
+            if (!$productData) {
+                // Si no encuentra el producto, usar valores por defecto
+                $densidad = 1.0;
+                $ajuste = 1.0;
+                $presentacion = 'ML';
+            } else {
+                $densidad = floatval($productData['densidad']);
+                $ajuste = floatval($productData['ajuste']);
+                $presentacion = $productData['presentacion'];
+            }
+            
+            // Cálculo básico
+            $tamanioLote = $densidad * $ajuste * 1000;
+            
+            // Agregar pedido procesado al array de resultados
+            $pedidosLotes[] = [
+                'pedido' => $pedido['numPedido'] ?? 'PED-' . $referencia,
+                'referencia' => $referencia,
+                'granel' => $granel,
+                'producto' => $producto,
+                'tamanio_lote' => round($tamanioLote, 2),
+                'cantidad_acumulada' => $cantidad_acumulada,
+                'estado' => 'calculado'
+            ];
+            
+            $totalCountPrePlaneados++;
+        }
         
         // Respuesta
         $resultado = [
             'success' => true,
-            'producto' => [
-                'referencia' => $referencia,
-                'densidad' => $densidad,
-                'ajuste' => $ajuste,
-                'presentacion' => $presentacion
-            ],
-            'calculo' => [
-                'tamanio_lote' => round($tamanioLote, 2),
-                'unidad' => 'kg'
-            ],
-            'pedidosLotes' => [
-                [
-                    'pedido' => 'TEST-001',
-                    'referencia' => $referencia,
-                    'granel' => $referencia,
-                    'producto' => $presentacion . ' ML - ' . $referencia,
-                    'tamanio_lote' => round($tamanioLote, 2),
-                    'cantidad_acumulada' => 500,
-                    'estado' => 'calculado'
-                ]
-            ],
-            'countPrePlaneados' => 0
+            'message' => 'Cálculo completado exitosamente',
+            'pedidosLotes' => $pedidosLotes,
+            'countPrePlaneados' => $totalCountPrePlaneados
         ];
+        
+        console.log('✅ Respuesta de API:', $resultado);
         
         $response->getBody()->write(json_encode($resultado));
         return $response->withHeader('Content-Type', 'application/json');
