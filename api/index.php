@@ -387,12 +387,36 @@ $app->post('/save-preplaneados', function (Request $request, Response $response)
         
         $insertados = 0;
         foreach ($pedidosLotes as $pedido) {
+            // Obtener valor_pedido de la tabla plan_pedidos
+            $valor_pedido = 0;
+            try {
+                $stmtValor = $pdo->prepare("
+                    SELECT valor_pedido 
+                    FROM plan_pedidos 
+                    WHERE pedido = ? AND id_producto = ? 
+                    LIMIT 1
+                ");
+                $stmtValor->execute([
+                    $pedido['pedido'] ?? 'PED-' . ($pedido['referencia'] ?? 'UNKNOWN'),
+                    $pedido['referencia'] ?? ''
+                ]);
+                $resultado = $stmtValor->fetch(PDO::FETCH_ASSOC);
+                if ($resultado) {
+                    $valor_pedido = $resultado['valor_pedido'];
+                    error_log('✅ save-preplaneados - Valor pedido encontrado: ' . $valor_pedido . ' para pedido: ' . $pedido['pedido']);
+                } else {
+                    error_log('⚠️ save-preplaneados - No se encontró valor_pedido para pedido: ' . $pedido['pedido'] . ' y producto: ' . $pedido['referencia']);
+                }
+            } catch (Exception $e) {
+                error_log('❌ save-preplaneados - Error al obtener valor_pedido: ' . $e->getMessage());
+            }
+            
             $params = [
                 $pedido['pedido'] ?? 'PED-' . ($pedido['referencia'] ?? 'UNKNOWN'),
                 $date,
                 $pedido['tamanio_lote'] ?? 0,
                 $pedido['cantidad_acumulada'] ?? 0,
-                0, // valor_pedido por defecto
+                $valor_pedido, // valor_pedido obtenido de plan_pedidos
                 $pedido['referencia'] ?? '',
                 1, // estado = 1 (activo)
                 $pedido['fecha_insumo'] ?? date('Y-m-d'),

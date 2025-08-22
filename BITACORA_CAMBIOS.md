@@ -437,6 +437,41 @@
 
 ---
 
+### **🔧 PROBLEMA RESUELTO: Obtener valor_pedido desde tabla plan_pedidos**
+
+**Fecha:** 2024-12-19  
+**Problema:** El campo `valor_pedido` en `plan_preplaneados` debe obtenerse de la tabla `plan_pedidos` basado en la relación entre `pedido` e `id_producto`.
+
+**Causa:** La inserción estaba usando un valor por defecto (0) para `valor_pedido` en lugar de obtener el valor real de la tabla `plan_pedidos`.
+
+**Solución implementada:**
+1. **Consulta a plan_pedidos antes de la inserción:**
+   ```php
+   $stmtValor = $pdo->prepare("
+       SELECT valor_pedido 
+       FROM plan_pedidos 
+       WHERE pedido = ? AND id_producto = ? 
+       LIMIT 1
+   ");
+   ```
+
+2. **Mapeo correcto de datos:**
+   ```php
+   $valor_pedido = $resultado['valor_pedido']; // Valor real de plan_pedidos
+   ```
+
+3. **Logs detallados para debugging:**
+   ```php
+   error_log('✅ save-preplaneados - Valor pedido encontrado: ' . $valor_pedido . ' para pedido: ' . $pedido['pedido']);
+   ```
+
+**Archivos modificados:**
+- `BatchRecord/api/index.php` - Consulta a plan_pedidos agregada
+
+**Estado:** ✅ **RESUELTO** - valor_pedido se obtiene correctamente de plan_pedidos
+
+---
+
 ### **🎯 PROBLEMA RESUELTO: Modal "Cargar Pedido en simulacion" aparece innecesariamente**
 
 **Fecha:** 2024-12-19  
