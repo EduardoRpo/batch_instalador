@@ -267,14 +267,16 @@ $app->post('/calc-lote-directo', function (Request $request, Response $response)
             // Cálculo básico
             $tamanioLote = $densidad * $ajuste * 1000;
             
-            // Agregar pedido procesado al array de resultados
+            // Agregar pedido procesado al array de resultados con estructura correcta para el DAO
             $pedidosLotes[] = [
-                'pedido' => $pedido['numPedido'] ?? 'PED-' . $referencia,
+                'numPedido' => $pedido['numPedido'] ?? 'PED-' . $referencia,
                 'referencia' => $referencia,
                 'granel' => $granel,
                 'producto' => $producto,
                 'tamanio_lote' => round($tamanioLote, 2),
                 'cantidad_acumulada' => $cantidad_acumulada,
+                'valor_pedido' => $pedido['valor_pedido'] ?? 0,
+                'fecha_insumo' => $pedido['fecha_insumo'] ?? date('Y-m-d'),
                 'estado' => 'calculado'
             ];
             
@@ -286,11 +288,24 @@ $app->post('/calc-lote-directo', function (Request $request, Response $response)
         $_SESSION['dataGranel'] = $pedidosLotes;
         error_log('✅ Datos guardados en sesión: ' . json_encode($_SESSION['dataGranel']));
         
+        // Crear respuesta para el frontend (mantener estructura original)
+        $pedidosLotesResponse = [];
+        foreach ($pedidosLotes as $pedido) {
+            $pedidosLotesResponse[] = [
+                'pedido' => $pedido['numPedido'],
+                'referencia' => $pedido['referencia'],
+                'granel' => $pedido['granel'],
+                'producto' => $pedido['producto'],
+                'tamanio_lote' => $pedido['tamanio_lote'],
+                'cantidad_acumulada' => $pedido['cantidad_acumulada']
+            ];
+        }
+        
         // Respuesta
         $resultado = [
             'success' => true,
             'message' => 'Cálculo completado exitosamente',
-            'pedidosLotes' => $pedidosLotes,
+            'pedidosLotes' => $pedidosLotesResponse,
             'countPrePlaneados' => $totalCountPrePlaneados
         ];
         

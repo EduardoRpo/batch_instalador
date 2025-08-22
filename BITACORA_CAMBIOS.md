@@ -117,6 +117,53 @@
 
 ---
 
+### **🔧 PROBLEMA RESUELTO: Warnings de campos undefined en PlanPrePlaneadosDao**
+
+**Fecha:** 2024-12-19  
+**Problema:** Después del fix anterior, aparecían warnings de campos undefined: "numPedido", "valor_pedido", "fecha_insumo" en PlanPrePlaneadosDao.php.
+
+**Causa:** La estructura de datos guardada en la sesión no coincidía con lo que espera el DAO. Los campos tenían nombres diferentes.
+
+**Solución implementada:**
+1. **Corregida estructura de datos para el DAO:**
+   ```php
+   // Agregar pedido procesado al array de resultados con estructura correcta para el DAO
+   $pedidosLotes[] = [
+       'numPedido' => $pedido['numPedido'] ?? 'PED-' . $referencia,
+       'referencia' => $referencia,
+       'granel' => $granel,
+       'producto' => $producto,
+       'tamanio_lote' => round($tamanioLote, 2),
+       'cantidad_acumulada' => $cantidad_acumulada,
+       'valor_pedido' => $pedido['valor_pedido'] ?? 0,
+       'fecha_insumo' => $pedido['fecha_insumo'] ?? date('Y-m-d'),
+       'estado' => 'calculado'
+   ];
+   ```
+
+2. **Mantenida compatibilidad con frontend:**
+   ```php
+   // Crear respuesta para el frontend (mantener estructura original)
+   $pedidosLotesResponse = [];
+   foreach ($pedidosLotes as $pedido) {
+       $pedidosLotesResponse[] = [
+           'pedido' => $pedido['numPedido'],
+           'referencia' => $pedido['referencia'],
+           'granel' => $pedido['granel'],
+           'producto' => $pedido['producto'],
+           'tamanio_lote' => $pedido['tamanio_lote'],
+           'cantidad_acumulada' => $pedido['cantidad_acumulada']
+       ];
+   }
+   ```
+
+**Archivos modificados:**
+- `BatchRecord/api/index.php`
+
+**Estado:** ✅ **RESUELTO** - Los datos se insertan correctamente sin warnings
+
+---
+
 ### **🎯 PROBLEMA RESUELTO: Modal "Cargar Pedido en simulacion" aparece innecesariamente**
 
 **Fecha:** 2024-12-19  
