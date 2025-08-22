@@ -25,9 +25,16 @@ $app->post('/addPrePlaneados', function (Request $request, Response $response, $
     $date = $dataPedidos['date'];
     $sim = $dataPedidos['simulacion'];
     
+    error_log('🔍 addPrePlaneados - dataPedidos recibido: ' . json_encode($dataPedidos));
+    error_log('🔍 addPrePlaneados - date: ' . $date);
+    error_log('🔍 addPrePlaneados - sim: ' . $sim);
+    error_log('🔍 addPrePlaneados - session dataGranel existe: ' . (isset($_SESSION['dataGranel']) ? 'SÍ' : 'NO'));
+    error_log('🔍 addPrePlaneados - session dataGranel: ' . json_encode($_SESSION['dataGranel'] ?? 'NO EXISTE'));
+    
     // Validar que dataGranel existe en la sesión
     if (!isset($_SESSION['dataGranel']) || empty($_SESSION['dataGranel'])) {
         $resp = array('error' => true, 'message' => 'No hay datos de granel en la sesión');
+        error_log('❌ addPrePlaneados - Error: No hay datos de granel en la sesión');
         $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
         return $response->withHeader('Content-Type', 'application/json');
     }
@@ -39,19 +46,30 @@ $app->post('/addPrePlaneados', function (Request $request, Response $response, $
         $dataPedidos[$i]['simulacion'] = $sim;
         
         // Log para debugging
-        error_log('🔍 Insertando pedido: ' . json_encode($dataPedidos[$i]));
+        error_log('🔍 Insertando pedido ' . $i . ': ' . json_encode($dataPedidos[$i]));
         
         // Guardar pedidos a pre planeado
         $prePlaneados = $planPrePlaneadosDao->insertPrePlaneados($dataPedidos[$i]);
         
         // Log del resultado
-        error_log('🔍 Resultado de inserción: ' . json_encode($prePlaneados));
+        error_log('🔍 Resultado de inserción ' . $i . ': ' . json_encode($prePlaneados));
+        
+        // Si hay error, salir del bucle
+        if ($prePlaneados !== null) {
+            error_log('❌ Error en inserción ' . $i . ': ' . json_encode($prePlaneados));
+            break;
+        }
     }
 
-    if ($prePlaneados == null)
+    error_log('🔍 addPrePlaneados - Resultado final prePlaneados: ' . json_encode($prePlaneados));
+    
+    if ($prePlaneados == null) {
         $resp = array('success' => true, 'message' => 'Pedidos pre planeados correctamente');
-    else
+        error_log('✅ addPrePlaneados - Respuesta de éxito: ' . json_encode($resp));
+    } else {
         $resp = array('error' => true, 'message' => 'Ocurrio un error mientras ingresaba la información. Intente nuevamente');
+        error_log('❌ addPrePlaneados - Respuesta de error: ' . json_encode($resp));
+    }
 
     $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');

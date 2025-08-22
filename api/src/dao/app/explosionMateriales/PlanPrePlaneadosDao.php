@@ -62,14 +62,16 @@ class PlanPrePlaneadosDao extends estadoInicialDao
         $connection = Connection::getInstance()->getConnection();
 
         try {
+            error_log('🔍 DAO insertPrePlaneados - Datos recibidos: ' . json_encode($dataPedidos));
 
             $estado = $this->checkFormulasAndInstructivos($dataPedidos['granel']);
+            error_log('🔍 DAO insertPrePlaneados - Estado calculado: ' . $estado);
 
             $stmt = $connection->prepare("INSERT INTO plan_preplaneados (pedido, fecha_programacion, tamano_lote, unidad_lote, valor_pedido, id_producto, estado, fecha_insumo, sim)
                                           VALUES (:pedido, :fecha_programacion, :tamano_lote, :unidad_lote, :valor_pedido, :id_producto, :estado, :fecha_insumo, :sim)");
 
 
-            $stmt->execute([
+            $params = [
                 'pedido' => $dataPedidos['numPedido'],
                 'fecha_programacion' => $dataPedidos['programacion'],
                 'tamano_lote' => $dataPedidos['tamanio_lote'],
@@ -79,13 +81,21 @@ class PlanPrePlaneadosDao extends estadoInicialDao
                 'fecha_insumo' => $dataPedidos['fecha_insumo'],
                 'estado' => $estado,
                 'sim' => $dataPedidos['simulacion']
-            ]);
+            ];
+            
+            error_log('🔍 DAO insertPrePlaneados - Parámetros para execute: ' . json_encode($params));
+            
+            $stmt->execute($params);
+            
+            error_log('✅ DAO insertPrePlaneados - Inserción exitosa');
             
             // Retornar null si la inserción fue exitosa
             return null;
         } catch (\Exception $e) {
             $message = $e->getMessage();
             $error = array('info' => true, 'mesage' => $message);
+            error_log('❌ DAO insertPrePlaneados - Error: ' . $message);
+            error_log('❌ DAO insertPrePlaneados - Stack trace: ' . $e->getTraceAsString());
             return $error;
         }
     }
