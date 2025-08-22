@@ -241,7 +241,7 @@ $(document).ready(function () {
     
     $.ajax({
       type: 'POST',
-      url: '/api/addPrePlaneados',
+      url: '/api/save-preplaneados',
       data: data,
       success: function (response) {
         console.log('✅ savePrePlaneados - Respuesta exitosa:', response);

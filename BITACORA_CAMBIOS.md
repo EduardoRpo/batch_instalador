@@ -363,6 +363,54 @@
 
 ---
 
+### **🔧 PROBLEMA RESUELTO: Reimplementación completa de guardado de pre-planeados**
+
+**Fecha:** 2024-12-19  
+**Problema:** Después de múltiples intentos de debuggear el problema con la inserción de pre-planeados, se decidió rehacer la funcionalidad desde cero para tener control total y código más limpio.
+
+**Causa:** La implementación anterior tenía múltiples capas de complejidad (DAOs, sesiones, mapeos complejos) que dificultaban el debugging y mantenimiento.
+
+**Solución implementada:**
+1. **Nueva ruta API simple:** `/api/save-preplaneados`
+   ```php
+   $app->post('/save-preplaneados', function (Request $request, Response $response) {
+       // Lógica directa y simple
+       // Conexión PDO directa
+       // Inserción sin dependencias complejas
+   });
+   ```
+
+2. **Conexión directa a base de datos:**
+   ```php
+   $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname", $username, $password);
+   ```
+
+3. **Inserción directa con prepared statements:**
+   ```php
+   $stmt = $pdo->prepare("INSERT INTO plan_preplaneados (...) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())");
+   ```
+
+4. **Frontend actualizado:**
+   ```javascript
+   url: '/api/save-preplaneados'  // Nueva ruta simple
+   ```
+
+**Ventajas de la nueva implementación:**
+- ✅ **Código más simple** y fácil de mantener
+- ✅ **Menos dependencias** de código existente
+- ✅ **Control total** sobre la lógica
+- ✅ **Logs detallados** para debugging
+- ✅ **Manejo de errores** robusto
+- ✅ **Valores por defecto** para campos faltantes
+
+**Archivos modificados:**
+- `BatchRecord/api/index.php` - Nueva ruta API
+- `BatchRecord/html/js/batch/pedidos/generalPedidos.js` - URL actualizada
+
+**Estado:** ✅ **RESUELTO** - Funcionalidad de guardado reimplementada desde cero con éxito
+
+---
+
 ### **🎯 PROBLEMA RESUELTO: Modal "Cargar Pedido en simulacion" aparece innecesariamente**
 
 **Fecha:** 2024-12-19  

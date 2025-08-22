@@ -347,5 +347,80 @@ $app->post('/calc-lote-directo', function (Request $request, Response $response)
     }
 });
 
+// Nueva ruta simple para guardar pre-planeados
+$app->post('/save-preplaneados', function (Request $request, Response $response) {
+    try {
+        // Obtener datos del request
+        $data = $request->getParsedBody();
+        error_log('🔍 save-preplaneados - Datos recibidos: ' . json_encode($data));
+        
+        // Validar datos requeridos
+        if (!isset($data['date']) || !isset($data['pedidosLotes']) || !isset($data['simulacion'])) {
+            $resp = ['error' => true, 'message' => 'Datos incompletos'];
+            error_log('❌ save-preplaneados - Datos incompletos');
+            $response->getBody()->write(json_encode($resp));
+            return $response->withHeader('Content-Type', 'application/json');
+        }
+        
+        // Conectar a la base de datos
+        $host = '172.17.0.1';
+        $port = '3307';
+        $dbname = 'batch_record';
+        $username = 'root';
+        $password = 'S@m4r@_2025!';
+        
+        $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname", $username, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        $date = $data['date'];
+        $simulacion = $data['simulacion'];
+        $pedidosLotes = $data['pedidosLotes'];
+        
+        error_log('🔍 save-preplaneados - Procesando ' . count($pedidosLotes) . ' pedidos');
+        
+        // Insertar cada pedido
+        $stmt = $pdo->prepare("
+            INSERT INTO plan_preplaneados 
+            (pedido, fecha_programacion, tamano_lote, unidad_lote, valor_pedido, id_producto, estado, fecha_insumo, sim, fecha_registro) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
+        ");
+        
+        $insertados = 0;
+        foreach ($pedidosLotes as $pedido) {
+            $params = [
+                $pedido['pedido'] ?? 'PED-' . ($pedido['referencia'] ?? 'UNKNOWN'),
+                $date,
+                $pedido['tamanio_lote'] ?? 0,
+                $pedido['cantidad_acumulada'] ?? 0,
+                0, // valor_pedido por defecto
+                $pedido['referencia'] ?? '',
+                1, // estado por defecto
+                $pedido['fecha_insumo'] ?? date('Y-m-d'),
+                $simulacion
+            ];
+            
+            $stmt->execute($params);
+            $insertados++;
+            error_log('✅ save-preplaneados - Pedido insertado: ' . json_encode($pedido));
+        }
+        
+        $resp = [
+            'success' => true, 
+            'message' => "Se insertaron $insertados pedidos correctamente",
+            'insertados' => $insertados
+        ];
+        
+        error_log('✅ save-preplaneados - Proceso completado: ' . json_encode($resp));
+        $response->getBody()->write(json_encode($resp));
+        return $response->withHeader('Content-Type', 'application/json');
+        
+    } catch (Exception $e) {
+        error_log('❌ save-preplaneados - Error: ' . $e->getMessage());
+        $resp = ['error' => true, 'message' => 'Error al guardar: ' . $e->getMessage()];
+        $response->getBody()->write(json_encode($resp));
+        return $response->withHeader('Content-Type', 'application/json');
+    }
+});
+
 // Run app
 $app->run();
