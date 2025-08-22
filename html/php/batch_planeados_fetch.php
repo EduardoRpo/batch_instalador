@@ -25,17 +25,33 @@ try {
     $order_by = $columns[$order_column] ?? 'id';
     
     // Construir consulta base para plan_preplaneados (planeado = 1)
-    $sql = "SELECT pp.id, pp.pedido, pp.id_producto as referencia, pp.tamano_lote, pp.unidad_lote,
-                   pp.fecha_programacion, pp.estado, pp.fecha_insumo, pp.sim,
-                   pp.id_producto as granel, pp.id_producto as nombre_referencia,
-                   DATE_ADD(pp.fecha_insumo, INTERVAL 1 DAY) as fecha_pesaje,
-                   DATE_ADD(pp.fecha_insumo, INTERVAL 2 DAY) as fecha_envasado,
-                   WEEK(pp.fecha_programacion) as semana
-            FROM plan_preplaneados pp
-            WHERE pp.planeado = 1";
+    $sql = "SELECT 
+                pp.id, 
+                pp.pedido, 
+                pp.id_producto as referencia, 
+                pp.tamano_lote, 
+                pp.unidad_lote, 
+                pp.fecha_programacion, 
+                pp.estado, 
+                pp.fecha_insumo, 
+                pp.sim, 
+                pp.id_producto as granel, 
+                pp.id_producto as nombre_referencia, 
+                DATE_ADD(pp.fecha_insumo, INTERVAL 1 DAY) as fecha_pesaje, 
+                DATE_ADD(pp.fecha_insumo, INTERVAL 2 DAY) as fecha_envasado, 
+                WEEK(pp.fecha_programacion) as semana, 
+                pr.nombre_referencia as nombre_ref_producto, 
+                REPLACE(pr.multi, 'A-', 'Granel-') as granel_product
+            FROM 
+                plan_preplaneados pp 
+            INNER JOIN 
+                producto pr ON pp.id_producto = pr.referencia 
+            WHERE 
+                pp.planeado = 1";
     
     $count_sql = "SELECT COUNT(*) as total 
-                  FROM plan_preplaneados pp
+                  FROM plan_preplaneados pp 
+                  INNER JOIN producto pr ON pp.id_producto = pr.referencia
                   WHERE pp.planeado = 1";
     
     // Agregar búsqueda si existe
@@ -43,7 +59,7 @@ try {
     $params = [];
     
     if (!empty($search)) {
-        $where_conditions[] = "(pp.pedido LIKE :search OR pp.id_producto LIKE :search)";
+        $where_conditions[] = "(pp.pedido LIKE :search OR pp.id_producto LIKE :search OR pr.nombre_referencia LIKE :search OR pr.multi LIKE :search)";
         $params[':search'] = "%$search%";
     }
     
@@ -79,9 +95,9 @@ try {
             'id' => $row['id'],
             'semana' => $row['semana'],
             'pedido' => $row['pedido'],
-            'granel' => $row['granel'],
+            'granel' => $row['granel_product'] ?? $row['granel'], // Usar granel_product si existe, sino granel
             'referencia' => $row['referencia'],
-            'nombre_referencia' => $row['nombre_referencia'],
+            'nombre_referencia' => $row['nombre_ref_producto'] ?? $row['nombre_referencia'], // Usar nombre_ref_producto si existe, sino nombre_referencia
             'tamano_lote' => $row['tamano_lote'],
             'unidad_lote' => $row['unidad_lote'],
             'sim' => $row['sim'],

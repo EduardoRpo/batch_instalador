@@ -593,6 +593,70 @@
 
 ---
 
+### **🔧 PROBLEMA RESUELTO: Consulta mejorada con JOIN a tabla producto**
+
+**Fecha:** 2024-12-19  
+**Problema:** La tabla de Planeados necesitaba mostrar información correcta de granel y producto desde la tabla `producto`.
+
+**Solución implementada:**
+1. **Consulta SQL mejorada con JOIN:**
+   ```sql
+   SELECT 
+       pp.id, 
+       pp.pedido, 
+       pp.id_producto as referencia, 
+       pp.tamano_lote, 
+       pp.unidad_lote, 
+       pp.fecha_programacion, 
+       pp.estado, 
+       pp.fecha_insumo, 
+       pp.sim, 
+       pp.id_producto as granel, 
+       pp.id_producto as nombre_referencia, 
+       DATE_ADD(pp.fecha_insumo, INTERVAL 1 DAY) as fecha_pesaje, 
+       DATE_ADD(pp.fecha_insumo, INTERVAL 2 DAY) as fecha_envasado, 
+       WEEK(pp.fecha_programacion) as semana, 
+       pr.nombre_referencia as nombre_ref_producto, 
+       REPLACE(pr.multi, 'A-', 'Granel-') as granel_product
+   FROM 
+       plan_preplaneados pp 
+   INNER JOIN 
+       producto pr ON pp.id_producto = pr.referencia 
+   WHERE 
+       pp.planeado = 1
+   ```
+
+2. **Mapeo de datos corregido:**
+   ```php
+   'granel' => $row['granel_product'] ?? $row['granel'], // Usar granel_product si existe
+   'nombre_referencia' => $row['nombre_ref_producto'] ?? $row['nombre_referencia'], // Usar nombre_ref_producto
+   ```
+
+3. **Columna "N°" agregada:**
+   ```javascript
+   {
+     title: 'N°',
+     data: null,
+     className: 'text-center',
+     render: function (data, type, row, meta) {
+       return meta.row + 1;
+     },
+   }
+   ```
+
+4. **Búsqueda mejorada:**
+   ```php
+   $where_conditions[] = "(pp.pedido LIKE :search OR pp.id_producto LIKE :search OR pr.nombre_referencia LIKE :search OR pr.multi LIKE :search)";
+   ```
+
+**Archivos modificados:**
+- `BatchRecord/html/php/batch_planeados_fetch.php` - Consulta SQL y mapeo de datos
+- `BatchRecord/html/js/batch/tables/tableBatchPlaneados.js` - Configuración de columnas
+
+**Estado:** ✅ **RESUELTO** - Tabla muestra información correcta de granel y producto
+
+---
+
 ### **🎯 PROBLEMA RESUELTO: Modal "Cargar Pedido en simulacion" aparece innecesariamente**
 
 **Fecha:** 2024-12-19  

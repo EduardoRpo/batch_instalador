@@ -124,7 +124,7 @@ $(document).ready(function () {
         return data;
       }
     },
-    order: [[2, 'asc']],
+    order: [[3, 'asc']],
     columns: [
       {
         title: '',
@@ -132,6 +132,14 @@ $(document).ready(function () {
         className: 'text-center',
         render: function (data) {
           return `<input type='checkbox' id="planChk-${data}" class='link-select'>`;
+        },
+      },
+      {
+        title: 'N°',
+        data: null,
+        className: 'text-center',
+        render: function (data, type, row, meta) {
+          return meta.row + 1;
         },
       },
       {
@@ -162,7 +170,7 @@ $(document).ready(function () {
       },
       {
         title: 'Referencia',
-        data: 'id_producto',
+        data: 'referencia',
         className: 'text-center',
       },
       {
