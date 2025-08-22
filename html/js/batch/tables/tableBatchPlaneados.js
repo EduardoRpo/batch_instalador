@@ -28,15 +28,30 @@ $(document).ready(function () {
   api = '/html/php/batch_planeados_fetch.php';
 
   getDataPlaneacion = async () => {
-    resp = await searchData(api);
-    loadTblCapacidadPlaneada(resp);
+    console.log('🚀 getDataPlaneacion - Iniciando obtención de datos');
+    try {
+      resp = await searchData(api);
+      console.log('✅ getDataPlaneacion - Datos obtenidos:', resp);
+      console.log('🔍 getDataPlaneacion - Tipo de resultado:', typeof resp);
+      console.log('🔍 getDataPlaneacion - Es array:', Array.isArray(resp));
+      if (resp && resp.data) {
+        console.log('🔍 getDataPlaneacion - Número de registros:', resp.data.length);
+        console.log('🔍 getDataPlaneacion - Primer registro:', resp.data[0]);
+      }
+      loadTblCapacidadPlaneada(resp);
+    } catch (error) {
+      console.error('❌ getDataPlaneacion - Error:', error);
+    }
   };
 
   getDataPlaneacion();
 
   loadTblCapacidadPlaneada = (data) => {
+    console.log('🚀 loadTblCapacidadPlaneada - Iniciando con datos:', data);
     semana = sessionStorage.getItem('semana');
+    console.log('🔍 loadTblCapacidadPlaneada - Semana de sessionStorage:', semana);
     let capacidadPlaneada = calcTamanioLoteBySemana(data, parseInt(semana));
+    console.log('🔍 loadTblCapacidadPlaneada - Capacidad calculada:', capacidadPlaneada);
 
     let rowPlaneados = document.getElementById('tblCalcCapacidadPlaneadaBody');
 
@@ -103,7 +118,11 @@ $(document).ready(function () {
     ajax: { 
       url: '/html/php/batch_planeados_fetch.php', 
       type: 'POST',
-      dataSrc: 'data' 
+      dataSrc: 'data',
+      dataFilter: function(data) {
+        console.log('🔍 tableBatchPlaneados - Datos recibidos del servidor:', data);
+        return data;
+      }
     },
     order: [[2, 'asc']],
     columns: [
@@ -210,4 +229,6 @@ $(document).ready(function () {
   });
 
   setTimeout(loadTotalVentas, 11000);
+  
+  console.log('🔍 tableBatchPlaneados - Tabla inicializada completamente');
 });

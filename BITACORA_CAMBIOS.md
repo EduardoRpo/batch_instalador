@@ -505,6 +505,94 @@
 
 ---
 
+### **🔧 PROBLEMA RESUELTO: Formato de datos incorrecto en tabla Planeados**
+
+**Fecha:** 2024-12-19  
+**Problema:** La tabla de Planeados obtenía datos correctamente pero no los mostraba porque el formato de respuesta no coincidía con lo que esperaba DataTables.
+
+**Causa:** El archivo fetch enviaba un array de arrays, pero DataTables esperaba un array de objetos con nombres de columnas específicos.
+
+**Solución implementada:**
+1. **Agregadas columnas faltantes en la consulta:**
+   ```php
+   SELECT pp.id, pp.pedido, pp.id_producto as referencia, pp.tamano_lote, pp.unidad_lote,
+          pp.fecha_programacion, pp.estado, pp.fecha_insumo, pp.sim,
+          pp.id_producto as granel, pp.id_producto as nombre_referencia,
+          DATE_ADD(pp.fecha_insumo, INTERVAL 1 DAY) as fecha_pesaje,
+          DATE_ADD(pp.fecha_insumo, INTERVAL 2 DAY) as fecha_envasado,
+          WEEK(pp.fecha_programacion) as semana
+   ```
+
+2. **Cambiado formato de respuesta a objetos:**
+   ```php
+   $formatted_data[] = [
+       'id' => $row['id'],
+       'semana' => $row['semana'],
+       'pedido' => $row['pedido'],
+       'granel' => $row['granel'],
+       // ... resto de campos
+   ];
+   ```
+
+**Archivos modificados:**
+- `BatchRecord/html/php/batch_planeados_fetch.php` - Formato de datos corregido
+
+**Estado:** ✅ **RESUELTO** - Tabla Planeados muestra datos correctamente
+
+---
+
+### **🔧 PROBLEMA RESUELTO: Logs de debugging agregados para tabla Planeados**
+
+**Fecha:** 2024-12-19  
+**Problema:** Necesitamos logs detallados para debuggear el flujo completo de la tabla Planeados desde el navegador.
+
+**Solución implementada:**
+1. **Logs en PHP (batch_planeados_fetch.php):**
+   ```php
+   error_log('🔍 batch_planeados_fetch.php - Iniciando consulta');
+   error_log('🔍 batch_planeados_fetch.php - Datos obtenidos: ' . count($data) . ' registros');
+   error_log('🔍 batch_planeados_fetch.php - SQL ejecutado: ' . $sql);
+   error_log('🔍 batch_planeados_fetch.php - Respuesta preparada: ' . json_encode($response));
+   ```
+
+2. **Logs en JavaScript (tableBatchPlaneados.js):**
+   ```javascript
+   // En getDataPlaneacion
+   console.log('🚀 getDataPlaneacion - Iniciando obtención de datos');
+   console.log('✅ getDataPlaneacion - Datos obtenidos:', resp);
+   console.log('🔍 getDataPlaneacion - Tipo de resultado:', typeof resp);
+   console.log('🔍 getDataPlaneacion - Es array:', Array.isArray(resp));
+   
+   // En loadTblCapacidadPlaneada
+   console.log('🚀 loadTblCapacidadPlaneada - Iniciando con datos:', data);
+   console.log('🔍 loadTblCapacidadPlaneada - Semana de sessionStorage:', semana);
+   console.log('🔍 loadTblCapacidadPlaneada - Capacidad calculada:', capacidadPlaneada);
+   
+   // En DataTable ajax
+   dataFilter: function(data) {
+     console.log('🔍 tableBatchPlaneados - Datos recibidos del servidor:', data);
+     return data;
+   }
+   ```
+
+3. **Logs en calcTamanioLoteBySemana:**
+   ```javascript
+   console.log('🚀 calcTamanioLoteBySemana - Iniciando con data:', data, 'semana:', semana);
+   console.log('🔍 calcTamanioLoteBySemana - Data es válido, procesando', data.length, 'registros');
+   console.log('🔍 calcTamanioLoteBySemana - Registro', i, ':', data[i]);
+   console.log('✅ calcTamanioLoteBySemana - Coincidencia encontrada para semana', semana, 'tamaño:', data[i].tamano_lote);
+   console.log('🔍 calcTamanioLoteBySemana - Capacidad total calculada:', capacidad);
+   ```
+
+**Archivos modificados:**
+- `BatchRecord/html/php/batch_planeados_fetch.php` - Logs de PHP
+- `BatchRecord/html/js/batch/tables/tableBatchPlaneados.js` - Logs de JavaScript
+- `BatchRecord/html/js/batch/tables/tableBatchPrePlaneacion.js` - Logs en calcTamanioLoteBySemana
+
+**Estado:** ✅ **RESUELTO** - Logs detallados agregados para debugging completo
+
+---
+
 ### **🎯 PROBLEMA RESUELTO: Modal "Cargar Pedido en simulacion" aparece innecesariamente**
 
 **Fecha:** 2024-12-19  

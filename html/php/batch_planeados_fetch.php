@@ -4,6 +4,9 @@ require_once __DIR__ . '/../../env.php';
 // Configurar headers para JSON
 header('Content-Type: application/json');
 
+// Log para debugging
+error_log('🔍 batch_planeados_fetch.php - Iniciando consulta');
+
 try {
     // Conectar a la base de datos usando PDO
     $conn = new PDO("mysql:dbname=$database;host=$servername", $username, $password);
@@ -22,8 +25,12 @@ try {
     $order_by = $columns[$order_column] ?? 'id';
     
     // Construir consulta base para plan_preplaneados (planeado = 1)
-    $sql = "SELECT pp.id, pp.pedido, pp.id_producto, pp.tamano_lote, pp.unidad_lote,
-                   pp.fecha_programacion, pp.estado, pp.fecha_insumo, pp.sim
+    $sql = "SELECT pp.id, pp.pedido, pp.id_producto as referencia, pp.tamano_lote, pp.unidad_lote,
+                   pp.fecha_programacion, pp.estado, pp.fecha_insumo, pp.sim,
+                   pp.id_producto as granel, pp.id_producto as nombre_referencia,
+                   DATE_ADD(pp.fecha_insumo, INTERVAL 1 DAY) as fecha_pesaje,
+                   DATE_ADD(pp.fecha_insumo, INTERVAL 2 DAY) as fecha_envasado,
+                   WEEK(pp.fecha_programacion) as semana
             FROM plan_preplaneados pp
             WHERE pp.planeado = 1";
     
@@ -61,17 +68,27 @@ try {
     $stmt->execute($params);
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-    // Formatear datos para DataTables
+    // Log para debugging
+    error_log('🔍 batch_planeados_fetch.php - Datos obtenidos: ' . count($data) . ' registros');
+    error_log('🔍 batch_planeados_fetch.php - SQL ejecutado: ' . $sql);
+    
+    // Formatear datos para DataTables como objetos
     $formatted_data = [];
     foreach ($data as $row) {
         $formatted_data[] = [
-            $row['id'],
-            $row['pedido'],
-            $row['id_producto'],
-            $row['tamano_lote'],
-            $row['unidad_lote'],
-            $row['fecha_programacion'],
-            $row['estado']
+            'id' => $row['id'],
+            'semana' => $row['semana'],
+            'pedido' => $row['pedido'],
+            'granel' => $row['granel'],
+            'referencia' => $row['referencia'],
+            'nombre_referencia' => $row['nombre_referencia'],
+            'tamano_lote' => $row['tamano_lote'],
+            'unidad_lote' => $row['unidad_lote'],
+            'sim' => $row['sim'],
+            'fecha_insumo' => $row['fecha_insumo'],
+            'fecha_pesaje' => $row['fecha_pesaje'],
+            'fecha_envasado' => $row['fecha_envasado'],
+            'estado' => $row['estado']
         ];
     }
     
@@ -82,6 +99,9 @@ try {
         'recordsFiltered' => $total_records,
         'data' => $formatted_data
     ];
+    
+    // Log para debugging
+    error_log('🔍 batch_planeados_fetch.php - Respuesta preparada: ' . json_encode($response));
     
     echo json_encode($response);
     

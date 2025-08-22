@@ -69,18 +69,28 @@ $(document).ready(function () {
   };
 
   calcTamanioLoteBySemana = (data, semana) => {
+    console.log('🚀 calcTamanioLoteBySemana - Iniciando con data:', data, 'semana:', semana);
+    
     // Validar que data existe y es un array
     if (!data || !Array.isArray(data)) {
       console.warn('⚠️ calcTamanioLoteBySemana: data no es válido:', data);
+      console.log('🔍 calcTamanioLoteBySemana - Tipo de data:', typeof data);
+      console.log('🔍 calcTamanioLoteBySemana - Es array:', Array.isArray(data));
       return 0;
     }
 
+    console.log('🔍 calcTamanioLoteBySemana - Data es válido, procesando', data.length, 'registros');
+    
     let capacidad = 0;
     for (i = 0; i < data.length; i++) {
+      console.log('🔍 calcTamanioLoteBySemana - Registro', i, ':', data[i]);
       if (data[i].semana == semana) {
+        console.log('✅ calcTamanioLoteBySemana - Coincidencia encontrada para semana', semana, 'tamaño:', data[i].tamano_lote);
         capacidad = capacidad + data[i].tamano_lote;
       }
     }
+    
+    console.log('🔍 calcTamanioLoteBySemana - Capacidad total calculada:', capacidad);
     return capacidad;
   };
 
