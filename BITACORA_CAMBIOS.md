@@ -702,6 +702,38 @@
 
 ---
 
+### **🔧 PROBLEMA RESUELTO: Columna Cliente removida para evitar redundancia**
+
+**Fecha:** 2024-12-19  
+**Problema:** La columna "Cliente" era redundante ya que el nombre del cliente ya aparece en el encabezado en negrita (rowGroup).
+
+**Solución implementada:**
+1. **Columna Cliente removida:**
+   ```javascript
+   // Removida la columna:
+   // {
+   //   title: 'Cliente',
+   //   data: 'propietario',
+   //   className: 'text-center',
+   // }
+   ```
+
+2. **rowGroup corregido:**
+   ```javascript
+   rowGroup: {
+     dataSrc: function (row) {
+       return `<th class="text-center" colspan="13" style="font-weight: bold;"> ${row.propietario || 'Sin Cliente'} </th>`;
+     }
+   }
+   ```
+
+**Archivos modificados:**
+- `BatchRecord/html/js/batch/tables/tableBatchPlaneados.js` - Columna Cliente removida y colspan corregido
+
+**Estado:** ✅ **RESUELTO** - Cliente solo aparece en encabezado, sin redundancia
+
+---
+
 ### **🎯 PROBLEMA RESUELTO: Modal "Cargar Pedido en simulacion" aparece innecesariamente**
 
 **Fecha:** 2024-12-19  

@@ -180,11 +180,6 @@ $(document).ready(function () {
         className: 'uniqueClassName',
       },
       {
-        title: 'Cliente',
-        data: 'propietario',
-        className: 'text-center',
-      },
-      {
         title: 'Tamaño Lote (Kg)',
         data: 'tamano_lote',
         className: 'text-center',
@@ -232,7 +227,7 @@ $(document).ready(function () {
     ],
     rowGroup: {
       dataSrc: function (row) {
-        return `<th class="text-center" colspan="14" style="font-weight: bold;"> ${row.propietario || 'Sin Cliente'} </th>`;
+        return `<th class="text-center" colspan="13" style="font-weight: bold;"> ${row.propietario || 'Sin Cliente'} </th>`;
       },
       startRender: function (rows, group) {
         return $('<tr/>').append(group);
