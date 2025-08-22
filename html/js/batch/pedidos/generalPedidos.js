@@ -158,14 +158,19 @@ $(document).ready(function () {
 
           dataPrePlaneados.date = value;
 
-          // Evitar mostrar modal de simulación cuando se viene del cálculo de lote
-          if (countPrePlaneados == 0 || window.fromCalcLote) {
+          if (countPrePlaneados == 0) {
             dataPrePlaneados.simulacion = 1;
             savePrePlaneados(dataPrePlaneados);
-            // Resetear la bandera después de usarla
-            window.fromCalcLote = false;
           } else {
-            alertSimulacion();
+            // Solo mostrar modal de simulación si NO viene del cálculo de lote
+            if (!window.fromCalcLote) {
+              alertSimulacion();
+            } else {
+              dataPrePlaneados.simulacion = 1;
+              savePrePlaneados(dataPrePlaneados);
+              // Resetear la bandera después de usarla
+              window.fromCalcLote = false;
+            }
           }
         },
         function () {

@@ -114,14 +114,19 @@
 
 2. **Modificada lógica en generalPedidos.js para evitar modal de simulación:**
    ```javascript
-   // Evitar mostrar modal de simulación cuando se viene del cálculo de lote
-   if (countPrePlaneados == 0 || window.fromCalcLote) {
+   if (countPrePlaneados == 0) {
      dataPrePlaneados.simulacion = 1;
      savePrePlaneados(dataPrePlaneados);
-     // Resetear la bandera después de usarla
-     window.fromCalcLote = false;
    } else {
-     alertSimulacion();
+     // Solo mostrar modal de simulación si NO viene del cálculo de lote
+     if (!window.fromCalcLote) {
+       alertSimulacion();
+     } else {
+       dataPrePlaneados.simulacion = 1;
+       savePrePlaneados(dataPrePlaneados);
+       // Resetear la bandera después de usarla
+       window.fromCalcLote = false;
+     }
    }
    ```
 
@@ -130,6 +135,8 @@
 - `BatchRecord/html/js/batch/pedidos/generalPedidos.js`
 
 **Estado:** ✅ **RESUELTO** - Modal de simulación no aparece cuando se viene del flujo de cálculo de lote
+
+**Nota:** La tabla correcta es `plan_preplaneados`, no `pre_planeados` como se mencionó anteriormente.
 
 ---
 
