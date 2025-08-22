@@ -61,10 +61,14 @@ $app->post('/addPrePlaneados', function (Request $request, Response $response, $
         if ($prePlaneados !== null) {
             error_log('❌ Error en inserción ' . $i . ': ' . json_encode($prePlaneados));
             break;
+        } else {
+            error_log('✅ Inserción ' . $i . ' exitosa (prePlaneados es null)');
         }
     }
 
     error_log('🔍 addPrePlaneados - Resultado final prePlaneados: ' . json_encode($prePlaneados));
+    error_log('🔍 addPrePlaneados - Tipo de prePlaneados: ' . gettype($prePlaneados));
+    error_log('🔍 addPrePlaneados - prePlaneados === null: ' . ($prePlaneados === null ? 'true' : 'false'));
     
     if ($prePlaneados == null) {
         $resp = array('success' => true, 'message' => 'Pedidos pre planeados correctamente');
