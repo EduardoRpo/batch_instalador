@@ -35,6 +35,9 @@ alertConfirm = (data) => {
   console.log('🔍 Primer pedido:', data.pedidosLotes[0]);
   
   countPrePlaneados = data.countPrePlaneados || 0;
+  
+  // Guardar los datos de pedidos globalmente para usarlos después
+  window.pedidosData = data.pedidosLotes;
 
   alertify
     .confirm(
@@ -157,6 +160,13 @@ $(document).ready(function () {
           dataPrePlaneados = {};
 
           dataPrePlaneados.date = value;
+          // Incluir los datos de pedidos guardados globalmente
+          if (window.pedidosData) {
+            dataPrePlaneados.pedidosLotes = window.pedidosData;
+            console.log('🔍 dataPrePlaneados - Agregados datos de pedidos:', window.pedidosData);
+          } else {
+            console.error('❌ Error: No hay datos de pedidos disponibles');
+          }
 
           if (countPrePlaneados == 0) {
             dataPrePlaneados.simulacion = 1;
@@ -202,6 +212,13 @@ $(document).ready(function () {
           }
 
           dataPrePlaneados.simulacion = val;
+          // Incluir los datos de pedidos guardados globalmente
+          if (window.pedidosData) {
+            dataPrePlaneados.pedidosLotes = window.pedidosData;
+            console.log('🔍 alertSimulacion - Agregados datos de pedidos:', window.pedidosData);
+          } else {
+            console.error('❌ Error: No hay datos de pedidos disponibles');
+          }
           savePrePlaneados(dataPrePlaneados);
         },
         function () {
@@ -216,6 +233,11 @@ $(document).ready(function () {
 
   savePrePlaneados = (data) => {
     console.log('🚀 savePrePlaneados ejecutándose con datos:', data);
+    console.log('🔍 savePrePlaneados - Tipo de data:', typeof data);
+    console.log('🔍 savePrePlaneados - data.date:', data.date);
+    console.log('🔍 savePrePlaneados - data.simulacion:', data.simulacion);
+    console.log('🔍 savePrePlaneados - data.pedidosLotes:', data.pedidosLotes);
+    console.log('🔍 savePrePlaneados - data.countPrePlaneados:', data.countPrePlaneados);
     
     $.ajax({
       type: 'POST',

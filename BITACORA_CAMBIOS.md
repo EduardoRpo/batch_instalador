@@ -250,6 +250,42 @@
 
 ---
 
+### **🔧 PROBLEMA RESUELTO: Datos de pedidos no se envían a la API**
+
+**Fecha:** 2024-12-19  
+**Problema:** La función `savePrePlaneados` solo enviaba `{date: '2025-08-23', simulacion: 1}` pero no incluía los datos de los pedidos calculados.
+
+**Causa:** En `generalPedidos.js`, la variable `dataPrePlaneados` se construía como un objeto vacío `{}` y solo se le agregaban `date` y `simulacion`, pero no se incluían los datos de `pedidosLotes` que estaban disponibles en el scope de `alertConfirm`.
+
+**Solución implementada:**
+1. **Guardar datos de pedidos globalmente:**
+   ```javascript
+   // En alertConfirm
+   window.pedidosData = data.pedidosLotes;
+   ```
+
+2. **Incluir datos de pedidos en dataPrePlaneados:**
+   ```javascript
+   // En la función de confirmación de fecha
+   if (window.pedidosData) {
+     dataPrePlaneados.pedidosLotes = window.pedidosData;
+     console.log('🔍 dataPrePlaneados - Agregados datos de pedidos:', window.pedidosData);
+   }
+   ```
+
+3. **Agregar logs de debugging:**
+   ```javascript
+   console.log('🔍 savePrePlaneados - data.pedidosLotes:', data.pedidosLotes);
+   console.log('🔍 savePrePlaneados - data.countPrePlaneados:', data.countPrePlaneados);
+   ```
+
+**Archivos modificados:**
+- `BatchRecord/html/js/batch/pedidos/generalPedidos.js`
+
+**Estado:** ✅ **RESUELTO** - Los datos de pedidos se envían correctamente a la API
+
+---
+
 ### **🎯 PROBLEMA RESUELTO: Modal "Cargar Pedido en simulacion" aparece innecesariamente**
 
 **Fecha:** 2024-12-19  
