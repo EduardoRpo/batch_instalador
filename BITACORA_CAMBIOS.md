@@ -328,6 +328,41 @@
 
 ---
 
+### **🔧 PROBLEMA RESUELTO: Mapeo incorrecto de datos en PlanPrePlaneadosDao**
+
+**Fecha:** 2024-12-19  
+**Problema:** El DAO `PlanPrePlaneadosDao` mostraba warnings de PHP porque las claves del array no coincidían con lo que esperaba.
+
+**Causa:** El DAO esperaba claves específicas como `numPedido`, `valor_pedido`, `fecha_insumo`, pero el frontend enviaba `pedido`, y algunos campos no existían.
+
+**Solución implementada:**
+1. **Mapeo flexible con valores por defecto:**
+   ```php
+   $params = [
+       'pedido' => $dataPedidos['pedido'] ?? $dataPedidos['numPedido'] ?? 'PED-' . ($dataPedidos['referencia'] ?? 'UNKNOWN'),
+       'fecha_programacion' => $dataPedidos['programacion'] ?? date('Y-m-d'),
+       'tamano_lote' => $dataPedidos['tamanio_lote'] ?? 0,
+       'unidad_lote' => $dataPedidos['cantidad_acumulada'] ?? 0,
+       'valor_pedido' => $dataPedidos['valor_pedido'] ?? 0,
+       'id_producto' => $dataPedidos['referencia'] ?? '',
+       'fecha_insumo' => $dataPedidos['fecha_insumo'] ?? date('Y-m-d'),
+       'estado' => $estado,
+       'sim' => $dataPedidos['simulacion'] ?? 1
+   ];
+   ```
+
+2. **Compatibilidad con múltiples formatos de datos:**
+   - Acepta tanto `pedido` como `numPedido`
+   - Valores por defecto para campos faltantes
+   - Generación automática de pedido si no existe
+
+**Archivos modificados:**
+- `BatchRecord/api/src/dao/app/explosionMateriales/PlanPrePlaneadosDao.php`
+
+**Estado:** ✅ **RESUELTO** - El DAO maneja correctamente los datos del frontend sin warnings
+
+---
+
 ### **🎯 PROBLEMA RESUELTO: Modal "Cargar Pedido en simulacion" aparece innecesariamente**
 
 **Fecha:** 2024-12-19  

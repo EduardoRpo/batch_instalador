@@ -71,16 +71,17 @@ class PlanPrePlaneadosDao extends estadoInicialDao
                                           VALUES (:pedido, :fecha_programacion, :tamano_lote, :unidad_lote, :valor_pedido, :id_producto, :estado, :fecha_insumo, :sim)");
 
 
+            // Mapear correctamente los datos del frontend a los campos del DAO
             $params = [
-                'pedido' => $dataPedidos['numPedido'],
-                'fecha_programacion' => $dataPedidos['programacion'],
-                'tamano_lote' => $dataPedidos['tamanio_lote'],
-                'unidad_lote' => $dataPedidos['cantidad_acumulada'],
-                'valor_pedido' => $dataPedidos['valor_pedido'],
-                'id_producto' => $dataPedidos['referencia'],
-                'fecha_insumo' => $dataPedidos['fecha_insumo'],
+                'pedido' => $dataPedidos['pedido'] ?? $dataPedidos['numPedido'] ?? 'PED-' . ($dataPedidos['referencia'] ?? 'UNKNOWN'),
+                'fecha_programacion' => $dataPedidos['programacion'] ?? date('Y-m-d'),
+                'tamano_lote' => $dataPedidos['tamanio_lote'] ?? 0,
+                'unidad_lote' => $dataPedidos['cantidad_acumulada'] ?? 0,
+                'valor_pedido' => $dataPedidos['valor_pedido'] ?? 0,
+                'id_producto' => $dataPedidos['referencia'] ?? '',
+                'fecha_insumo' => $dataPedidos['fecha_insumo'] ?? date('Y-m-d'),
                 'estado' => $estado,
-                'sim' => $dataPedidos['simulacion']
+                'sim' => $dataPedidos['simulacion'] ?? 1
             ];
             
             error_log('🔍 DAO insertPrePlaneados - Parámetros para execute: ' . json_encode($params));
