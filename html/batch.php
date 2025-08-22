@@ -169,9 +169,9 @@ include_once("modal/m_limpiar_firmas.php");
                   <a class="nav-link" id="one-tab" data-toggle="tab" href="#one" role="tab" aria-controls="One" aria-selected="false">Pedidos</a>
                 </li>
               <?php  } ?>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a class="nav-link" id="two-tab" data-toggle="tab" href="#two" role="tab" aria-controls="Two" aria-selected="false">Pre-Planeados</a>
-              </li>
+              </li> -->
               <li class="nav-item">
                 <a class="nav-link" id="three-tab" data-toggle="tab" href="#three" role="tab" aria-controls="Three" aria-selected="false">Planeados</a>
               </li>
@@ -219,7 +219,7 @@ include_once("modal/m_limpiar_firmas.php");
                 </div>
               </div>
 
-              <div class="tab-pane fade mt-3" id="two" role="tabpanel" aria-labelledby="two-tab">
+              <!-- <div class="tab-pane fade mt-3" id="two" role="tabpanel" aria-labelledby="two-tab">
                 <div class="col-md-12 align-self-right">
                   <div class="row ml-1">
                     <div class="col-md-9 align-self-center">
@@ -310,7 +310,7 @@ include_once("modal/m_limpiar_firmas.php");
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
 
               <div class="tab-pane fade mt-3" id="three" role="tabpanel" aria-labelledby="three-tab">
                 <div class="col-md-12 align-self-right">

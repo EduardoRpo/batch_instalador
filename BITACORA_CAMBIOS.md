@@ -771,6 +771,33 @@
 
 ---
 
+### **🔧 PROBLEMA RESUELTO: Pestaña Pre-Planeados comentada**
+
+**Fecha:** 2024-12-19  
+**Problema:** La pestaña "Pre-Planeados" no es necesaria y ocupa espacio en la navegación.
+
+**Solución implementada:**
+1. **Pestaña de navegación comentada:**
+   ```html
+   <!-- <li class="nav-item">
+     <a class="nav-link" id="two-tab" data-toggle="tab" href="#two" role="tab" aria-controls="Two" aria-selected="false">Pre-Planeados</a>
+   </li> -->
+   ```
+
+2. **Contenido de la pestaña comentado:**
+   ```html
+   <!-- <div class="tab-pane fade mt-3" id="two" role="tabpanel" aria-labelledby="two-tab">
+     <!-- Todo el contenido de Pre-Planeados comentado -->
+   </div> -->
+   ```
+
+**Archivos modificados:**
+- `BatchRecord/html/batch.php` - Pestaña Pre-Planeados comentada
+
+**Estado:** ✅ **RESUELTO** - Solo aparecen las pestañas: Pedidos, Planeados, Programados y Cerrados
+
+---
+
 ### **🎯 PROBLEMA RESUELTO: Modal "Cargar Pedido en simulacion" aparece innecesariamente**
 
 **Fecha:** 2024-12-19  
