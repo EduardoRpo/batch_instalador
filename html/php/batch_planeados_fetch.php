@@ -41,17 +41,21 @@ try {
                 DATE_ADD(pp.fecha_insumo, INTERVAL 2 DAY) as fecha_envasado, 
                 WEEK(pp.fecha_programacion) as semana, 
                 pr.nombre_referencia as nombre_ref_producto, 
-                REPLACE(pr.multi, 'A-', 'Granel-') as granel_product
+                REPLACE(pr.multi, 'A-', 'Granel-') as granel_product,
+                prop.nombre as propietario
             FROM 
                 plan_preplaneados pp 
             INNER JOIN 
                 producto pr ON pp.id_producto = pr.referencia 
+            INNER JOIN 
+                propietario prop ON pr.id_propietario = prop.id
             WHERE 
                 pp.planeado = 1";
     
     $count_sql = "SELECT COUNT(*) as total 
                   FROM plan_preplaneados pp 
                   INNER JOIN producto pr ON pp.id_producto = pr.referencia
+                  INNER JOIN propietario prop ON pr.id_propietario = prop.id
                   WHERE pp.planeado = 1";
     
     // Agregar búsqueda si existe
@@ -59,7 +63,7 @@ try {
     $params = [];
     
     if (!empty($search)) {
-        $where_conditions[] = "(pp.pedido LIKE :search OR pp.id_producto LIKE :search OR pr.nombre_referencia LIKE :search OR pr.multi LIKE :search)";
+        $where_conditions[] = "(pp.pedido LIKE :search OR pp.id_producto LIKE :search OR pr.nombre_referencia LIKE :search OR pr.multi LIKE :search OR prop.nombre LIKE :search)";
         $params[':search'] = "%$search%";
     }
     
@@ -104,7 +108,8 @@ try {
             'fecha_insumo' => $row['fecha_insumo'],
             'fecha_pesaje' => $row['fecha_pesaje'],
             'fecha_envasado' => $row['fecha_envasado'],
-            'estado' => $row['estado']
+            'estado' => $row['estado'],
+            'propietario' => $row['propietario'] ?? ''
         ];
     }
     

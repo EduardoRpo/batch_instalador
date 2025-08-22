@@ -657,6 +657,51 @@
 
 ---
 
+### **🔧 PROBLEMA RESUELTO: Columna Cliente agregada y rowGroup corregido**
+
+**Fecha:** 2024-12-19  
+**Problema:** La tabla mostraba "undefined" en el encabezado porque el rowGroup intentaba mostrar `row.propietario` que no existía en los datos.
+
+**Solución implementada:**
+1. **Consulta SQL mejorada con JOIN a propietario:**
+   ```sql
+   INNER JOIN propietario prop ON pr.id_propietario = prop.id
+   SELECT 
+       // ... campos existentes ...
+       prop.nombre as propietario
+   ```
+
+2. **Columna Cliente agregada:**
+   ```javascript
+   {
+     title: 'Cliente',
+     data: 'propietario',
+     className: 'text-center',
+   }
+   ```
+
+3. **rowGroup corregido:**
+   ```javascript
+   rowGroup: {
+     dataSrc: function (row) {
+       return `<th class="text-center" colspan="14" style="font-weight: bold;"> ${row.propietario || 'Sin Cliente'} </th>`;
+     }
+   }
+   ```
+
+4. **Búsqueda mejorada:**
+   ```php
+   $where_conditions[] = "(pp.pedido LIKE :search OR pp.id_producto LIKE :search OR pr.nombre_referencia LIKE :search OR pr.multi LIKE :search OR prop.nombre LIKE :search)";
+   ```
+
+**Archivos modificados:**
+- `BatchRecord/html/php/batch_planeados_fetch.php` - JOIN con propietario y mapeo de datos
+- `BatchRecord/html/js/batch/tables/tableBatchPlaneados.js` - Columna Cliente y rowGroup corregido
+
+**Estado:** ✅ **RESUELTO** - Tabla muestra cliente correctamente y sin "undefined"
+
+---
+
 ### **🎯 PROBLEMA RESUELTO: Modal "Cargar Pedido en simulacion" aparece innecesariamente**
 
 **Fecha:** 2024-12-19  
