@@ -1,10 +1,14 @@
 $(document).ready(function () {
   searchData = async (urlApi) => {
     try {
+      console.log('🔍 searchData - Llamando a:', urlApi);
       result = await $.ajax({ url: urlApi });
+      console.log('✅ searchData - Respuesta exitosa:', result);
       return result;
     } catch (error) {
-      console.error(error);
+      console.error('❌ searchData - Error:', error);
+      console.error('❌ searchData - URL que falló:', urlApi);
+      return undefined;
     }
   };
 

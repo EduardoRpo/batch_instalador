@@ -210,6 +210,46 @@
 
 ---
 
+### **🔧 PROBLEMA RESUELTO: Logs de debugging en consola web**
+
+**Fecha:** 2024-12-19  
+**Problema:** Los logs del servidor no estaban funcionando correctamente, dificultando el debugging del problema de inserción.
+
+**Causa:** Configuración de logs del servidor no estaba mostrando los `error_log` de PHP.
+
+**Solución implementada:**
+1. **Agregados logs detallados en JavaScript:**
+   ```javascript
+   // En savePrePlaneados
+   console.log('🚀 savePrePlaneados ejecutándose con datos:', data);
+   
+   // En generalPedidos
+   console.log('🔍 generalPedidos - Tipo de data:', typeof data);
+   console.log('🔍 generalPedidos - data.error:', data.error);
+   console.log('🔍 generalPedidos - data.message:', data.message);
+   
+   // En searchData
+   console.log('🔍 searchData - Llamando a:', urlApi);
+   console.log('✅ searchData - Respuesta exitosa:', result);
+   ```
+
+2. **Mejorado manejo de errores AJAX:**
+   ```javascript
+   error: function (xhr, status, error) {
+     console.error('❌ savePrePlaneados - Error AJAX:', {xhr, status, error});
+     console.error('❌ savePrePlaneados - Status:', xhr.status);
+     console.error('❌ savePrePlaneados - ResponseText:', xhr.responseText);
+   }
+   ```
+
+**Archivos modificados:**
+- `BatchRecord/html/js/batch/pedidos/generalPedidos.js`
+- `BatchRecord/html/js/global/searchData.js`
+
+**Estado:** ✅ **RESUELTO** - Logs detallados en consola web para debugging
+
+---
+
 ### **🎯 PROBLEMA RESUELTO: Modal "Cargar Pedido en simulacion" aparece innecesariamente**
 
 **Fecha:** 2024-12-19  

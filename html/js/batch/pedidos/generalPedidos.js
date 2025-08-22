@@ -215,18 +215,31 @@ $(document).ready(function () {
   };
 
   savePrePlaneados = (data) => {
+    console.log('🚀 savePrePlaneados ejecutándose con datos:', data);
+    
     $.ajax({
       type: 'POST',
       url: '/api/addPrePlaneados',
       data: data,
-      success: function (data) {
-        generalPedidos(data);
+      success: function (response) {
+        console.log('✅ savePrePlaneados - Respuesta exitosa:', response);
+        generalPedidos(response);
       },
+      error: function (xhr, status, error) {
+        console.error('❌ savePrePlaneados - Error AJAX:', {xhr, status, error});
+        console.error('❌ savePrePlaneados - Status:', xhr.status);
+        console.error('❌ savePrePlaneados - ResponseText:', xhr.responseText);
+        alertify.set('notifier', 'position', 'top-right');
+        alertify.error('Error al guardar pedidos: ' + error);
+      }
     });
   };
 
   generalPedidos = async (data) => {
     console.log('🚀 generalPedidos ejecutándose con datos:', data);
+    console.log('🔍 generalPedidos - Tipo de data:', typeof data);
+    console.log('🔍 generalPedidos - data.error:', data.error);
+    console.log('🔍 generalPedidos - data.message:', data.message);
     
     await message(data);
     console.log('✅ message() completado');
