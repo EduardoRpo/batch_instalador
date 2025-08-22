@@ -472,6 +472,39 @@
 
 ---
 
+### **🔧 PROBLEMA RESUELTO: Pestaña Planeados no carga datos**
+
+**Fecha:** 2024-12-19  
+**Problema:** La pestaña "Planeados" mostraba "Ningún dato disponible" y valores "undefined" porque estaba consultando la tabla `batch` en lugar de `plan_preplaneados`.
+
+**Causa:** El archivo `batch_planeados_fetch.php` estaba configurado para consultar la tabla `batch` con `estado = 2`, pero los datos del cálculo de lote se guardan en `plan_preplaneados`.
+
+**Solución implementada:**
+1. **Modificada consulta para usar plan_preplaneados:**
+   ```php
+   // Antes: FROM batch WHERE batch.estado = 2
+   // Después: FROM plan_preplaneados pp WHERE pp.planeado = 1
+   ```
+
+2. **Actualizadas columnas y mapeo:**
+   ```php
+   $columns = ['id', 'pedido', 'id_producto', 'tamano_lote', 'unidad_lote', 'fecha_programacion', 'estado'];
+   ```
+
+3. **Corregida URL en frontend:**
+   ```javascript
+   // Antes: api = '/api/batchPlaneados'
+   // Después: api = '/html/php/batch_planeados_fetch.php'
+   ```
+
+**Archivos modificados:**
+- `BatchRecord/html/php/batch_planeados_fetch.php` - Consulta actualizada
+- `BatchRecord/html/js/batch/tables/tableBatchPlaneados.js` - URL corregida
+
+**Estado:** ✅ **RESUELTO** - Pestaña Planeados carga datos correctamente desde plan_preplaneados
+
+---
+
 ### **🎯 PROBLEMA RESUELTO: Modal "Cargar Pedido en simulacion" aparece innecesariamente**
 
 **Fecha:** 2024-12-19  

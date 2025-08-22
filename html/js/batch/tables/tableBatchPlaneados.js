@@ -25,7 +25,7 @@ loadTotalVentas = () => {
 
 $(document).ready(function () {
   /* Capacidad Planeada */
-  api = '/api/batchPlaneados';
+  api = '/html/php/batch_planeados_fetch.php';
 
   getDataPlaneacion = async () => {
     resp = await searchData(api);

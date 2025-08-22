@@ -17,29 +17,26 @@ try {
     $order_column = isset($_POST['order'][0]['column']) ? intval($_POST['order'][0]['column']) : 0;
     $order_dir = isset($_POST['order'][0]['dir']) ? $_POST['order'][0]['dir'] : 'ASC';
     
-    // Mapear columnas para batch planeados
-    $columns = ['id_batch', 'referencia', 'nombre_referencia', 'numero_lote', 'tamano_lote', 'estado'];
-    $order_by = $columns[$order_column] ?? 'id_batch';
+    // Mapear columnas para plan_preplaneados
+    $columns = ['id', 'pedido', 'id_producto', 'tamano_lote', 'unidad_lote', 'fecha_programacion', 'estado'];
+    $order_by = $columns[$order_column] ?? 'id';
     
-    // Construir consulta base para batch planeados (estado 2 = Inactivo)
-    $sql = "SELECT batch.id_batch, batch.id_producto as referencia, 
-                   p.nombre_referencia, batch.numero_lote, batch.tamano_lote,
-                   batch.estado
-            FROM batch 
-            INNER JOIN producto p ON p.referencia = batch.id_producto
-            WHERE batch.estado = 2";
+    // Construir consulta base para plan_preplaneados (planeado = 1)
+    $sql = "SELECT pp.id, pp.pedido, pp.id_producto, pp.tamano_lote, pp.unidad_lote,
+                   pp.fecha_programacion, pp.estado, pp.fecha_insumo, pp.sim
+            FROM plan_preplaneados pp
+            WHERE pp.planeado = 1";
     
     $count_sql = "SELECT COUNT(*) as total 
-                  FROM batch 
-                  INNER JOIN producto p ON p.referencia = batch.id_producto
-                  WHERE batch.estado = 2";
+                  FROM plan_preplaneados pp
+                  WHERE pp.planeado = 1";
     
     // Agregar búsqueda si existe
     $where_conditions = [];
     $params = [];
     
     if (!empty($search)) {
-        $where_conditions[] = "(batch.id_producto LIKE :search OR p.nombre_referencia LIKE :search OR batch.numero_orden LIKE :search)";
+        $where_conditions[] = "(pp.pedido LIKE :search OR pp.id_producto LIKE :search)";
         $params[':search'] = "%$search%";
     }
     
@@ -68,11 +65,12 @@ try {
     $formatted_data = [];
     foreach ($data as $row) {
         $formatted_data[] = [
-            $row['id_batch'],
-            $row['referencia'],
-            $row['nombre_referencia'],
-            $row['numero_lote'],
+            $row['id'],
+            $row['pedido'],
+            $row['id_producto'],
             $row['tamano_lote'],
+            $row['unidad_lote'],
+            $row['fecha_programacion'],
             $row['estado']
         ];
     }
