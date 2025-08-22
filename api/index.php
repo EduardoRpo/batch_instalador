@@ -381,8 +381,8 @@ $app->post('/save-preplaneados', function (Request $request, Response $response)
         // Insertar cada pedido
         $stmt = $pdo->prepare("
             INSERT INTO plan_preplaneados 
-            (pedido, fecha_programacion, tamano_lote, unidad_lote, valor_pedido, id_producto, estado, fecha_insumo, sim, fecha_registro) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
+            (pedido, fecha_programacion, tamano_lote, unidad_lote, valor_pedido, id_producto, estado, fecha_insumo, sim, planeado, fecha_registro) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1, NOW())
         ");
         
         $insertados = 0;
@@ -394,7 +394,7 @@ $app->post('/save-preplaneados', function (Request $request, Response $response)
                 $pedido['cantidad_acumulada'] ?? 0,
                 0, // valor_pedido por defecto
                 $pedido['referencia'] ?? '',
-                1, // estado por defecto
+                1, // estado = 1 (activo)
                 $pedido['fecha_insumo'] ?? date('Y-m-d'),
                 $simulacion
             ];

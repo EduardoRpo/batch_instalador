@@ -411,6 +411,32 @@
 
 ---
 
+### **🔧 PROBLEMA RESUELTO: Campo 'planeado' faltante en INSERT**
+
+**Fecha:** 2024-12-19  
+**Problema:** La nueva ruta `/api/save-preplaneados` fallaba porque el campo `planeado` no tenía un valor por defecto en la base de datos.
+
+**Causa:** El INSERT no incluía el campo `planeado` que es requerido por la tabla `plan_preplaneados`.
+
+**Solución implementada:**
+1. **Agregado campo planeado al INSERT:**
+   ```php
+   INSERT INTO plan_preplaneados 
+   (pedido, fecha_programacion, tamano_lote, unidad_lote, valor_pedido, id_producto, estado, fecha_insumo, sim, planeado, fecha_registro) 
+   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0, NOW())
+   ```
+
+2. **Valores por defecto corregidos:**
+   - `planeado = 1` (planeado)
+   - `estado = 1` (activo)
+
+**Archivos modificados:**
+- `BatchRecord/api/index.php` - INSERT corregido con valores apropiados
+
+**Estado:** ✅ **RESUELTO** - Inserción completa con valores correctos para planeado y estado
+
+---
+
 ### **🎯 PROBLEMA RESUELTO: Modal "Cargar Pedido en simulacion" aparece innecesariamente**
 
 **Fecha:** 2024-12-19  
