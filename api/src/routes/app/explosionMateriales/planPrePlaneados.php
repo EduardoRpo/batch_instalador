@@ -37,8 +37,15 @@ $app->post('/addPrePlaneados', function (Request $request, Response $response, $
     for ($i = 0; $i < sizeof($dataPedidos); $i++) {
         $dataPedidos[$i]['programacion'] = $date;
         $dataPedidos[$i]['simulacion'] = $sim;
+        
+        // Log para debugging
+        error_log('🔍 Insertando pedido: ' . json_encode($dataPedidos[$i]));
+        
         // Guardar pedidos a pre planeado
         $prePlaneados = $planPrePlaneadosDao->insertPrePlaneados($dataPedidos[$i]);
+        
+        // Log del resultado
+        error_log('🔍 Resultado de inserción: ' . json_encode($prePlaneados));
     }
 
     if ($prePlaneados == null)

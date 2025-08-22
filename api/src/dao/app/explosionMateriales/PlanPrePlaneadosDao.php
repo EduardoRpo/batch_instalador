@@ -80,6 +80,9 @@ class PlanPrePlaneadosDao extends estadoInicialDao
                 'estado' => $estado,
                 'sim' => $dataPedidos['simulacion']
             ]);
+            
+            // Retornar null si la inserción fue exitosa
+            return null;
         } catch (\Exception $e) {
             $message = $e->getMessage();
             $error = array('info' => true, 'mesage' => $message);

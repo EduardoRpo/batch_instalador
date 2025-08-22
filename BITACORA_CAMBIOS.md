@@ -164,6 +164,52 @@
 
 ---
 
+### **🔧 PROBLEMA RESUELTO: Error en lógica de inserción del DAO**
+
+**Fecha:** 2024-12-19  
+**Problema:** El método `insertPrePlaneados` no devolvía `null` cuando la inserción era exitosa, causando que siempre se mostrara el mensaje de error.
+
+**Causa:** El DAO no tenía un `return null` explícito después de una inserción exitosa, por lo que la lógica de validación siempre consideraba que había un error.
+
+**Solución implementada:**
+1. **Agregado return null explícito en el DAO:**
+   ```php
+   $stmt->execute([
+       'pedido' => $dataPedidos['numPedido'],
+       'fecha_programacion' => $dataPedidos['programacion'],
+       'tamano_lote' => $dataPedidos['tamanio_lote'],
+       'unidad_lote' => $dataPedidos['cantidad_acumulada'],
+       'valor_pedido' => $dataPedidos['valor_pedido'],
+       'id_producto' => $dataPedidos['referencia'],
+       'fecha_insumo' => $dataPedidos['fecha_insumo'],
+       'estado' => $estado,
+       'sim' => $dataPedidos['simulacion']
+   ]);
+   
+   // Retornar null si la inserción fue exitosa
+   return null;
+   ```
+
+2. **Agregados logs de debugging:**
+   ```php
+   // Log para debugging
+   error_log('🔍 Insertando pedido: ' . json_encode($dataPedidos[$i]));
+   
+   // Guardar pedidos a pre planeado
+   $prePlaneados = $planPrePlaneadosDao->insertPrePlaneados($dataPedidos[$i]);
+   
+   // Log del resultado
+   error_log('🔍 Resultado de inserción: ' . json_encode($prePlaneados));
+   ```
+
+**Archivos modificados:**
+- `BatchRecord/api/src/dao/app/explosionMateriales/PlanPrePlaneadosDao.php`
+- `BatchRecord/api/src/routes/app/explosionMateriales/planPrePlaneados.php`
+
+**Estado:** ✅ **RESUELTO** - La inserción funciona correctamente y devuelve el mensaje de éxito
+
+---
+
 ### **🎯 PROBLEMA RESUELTO: Modal "Cargar Pedido en simulacion" aparece innecesariamente**
 
 **Fecha:** 2024-12-19  

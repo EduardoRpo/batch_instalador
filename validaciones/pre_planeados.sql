@@ -80,7 +80,7 @@ FROM plan_preplaneados
 WHERE fecha_registro = CURDATE()
 ORDER BY id DESC;
 
--- Ver registros con sim = 1 (que es lo que debería guardarse)
+-- Ver registros con sim = 1 (que es lo que debería guardarse)  docker restart batch_record_apps
 SELECT 
     id,
     pedido,
