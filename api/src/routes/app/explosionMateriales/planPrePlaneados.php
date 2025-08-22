@@ -28,28 +28,31 @@ $app->post('/addPrePlaneados', function (Request $request, Response $response, $
     error_log('🔍 addPrePlaneados - dataPedidos recibido: ' . json_encode($dataPedidos));
     error_log('🔍 addPrePlaneados - date: ' . $date);
     error_log('🔍 addPrePlaneados - sim: ' . $sim);
+    error_log('🔍 addPrePlaneados - pedidosLotes recibido: ' . json_encode($dataPedidos['pedidosLotes'] ?? 'NO EXISTE'));
     error_log('🔍 addPrePlaneados - session dataGranel existe: ' . (isset($_SESSION['dataGranel']) ? 'SÍ' : 'NO'));
     error_log('🔍 addPrePlaneados - session dataGranel: ' . json_encode($_SESSION['dataGranel'] ?? 'NO EXISTE'));
     
-    // Validar que dataGranel existe en la sesión
-    if (!isset($_SESSION['dataGranel']) || empty($_SESSION['dataGranel'])) {
-        $resp = array('error' => true, 'message' => 'No hay datos de granel en la sesión');
-        error_log('❌ addPrePlaneados - Error: No hay datos de granel en la sesión');
+    // Validar que pedidosLotes existe en la request
+    if (!isset($dataPedidos['pedidosLotes']) || empty($dataPedidos['pedidosLotes'])) {
+        $resp = array('error' => true, 'message' => 'No hay datos de pedidos en la request');
+        error_log('❌ addPrePlaneados - Error: No hay datos de pedidos en la request');
         $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
         return $response->withHeader('Content-Type', 'application/json');
     }
     
-    $dataPedidos = $_SESSION['dataGranel'];
-
-    for ($i = 0; $i < sizeof($dataPedidos); $i++) {
-        $dataPedidos[$i]['programacion'] = $date;
-        $dataPedidos[$i]['simulacion'] = $sim;
+        // Usar los datos que vienen directamente en la request
+    $pedidosLotes = $dataPedidos['pedidosLotes'];
+    
+    for ($i = 0; $i < sizeof($pedidosLotes); $i++) {
+        $pedido = $pedidosLotes[$i];
+        $pedido['programacion'] = $date;
+        $pedido['simulacion'] = $sim;
         
         // Log para debugging
-        error_log('🔍 Insertando pedido ' . $i . ': ' . json_encode($dataPedidos[$i]));
+        error_log('🔍 Insertando pedido ' . $i . ': ' . json_encode($pedido));
         
         // Guardar pedidos a pre planeado
-        $prePlaneados = $planPrePlaneadosDao->insertPrePlaneados($dataPedidos[$i]);
+        $prePlaneados = $planPrePlaneadosDao->insertPrePlaneados($pedido);
         
         // Log del resultado
         error_log('🔍 Resultado de inserción ' . $i . ': ' . json_encode($prePlaneados));

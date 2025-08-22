@@ -286,6 +286,48 @@
 
 ---
 
+### **🔧 PROBLEMA RESUELTO: API no procesa datos de pedidos enviados desde frontend**
+
+**Fecha:** 2024-12-19  
+**Problema:** Aunque los datos de pedidos se enviaban correctamente desde el frontend, la API `/api/addPrePlaneados` seguía devolviendo error porque no procesaba los datos recibidos.
+
+**Causa:** La API estaba intentando usar `$_SESSION['dataGranel']` en lugar de procesar los datos que venían directamente en la request (`$dataPedidos['pedidosLotes']`).
+
+**Solución implementada:**
+1. **Modificada validación para usar datos de la request:**
+   ```php
+   // Antes: Validar sesión
+   if (!isset($_SESSION['dataGranel']) || empty($_SESSION['dataGranel'])) {
+   
+   // Después: Validar request
+   if (!isset($dataPedidos['pedidosLotes']) || empty($dataPedidos['pedidosLotes'])) {
+   ```
+
+2. **Modificado bucle para procesar datos de la request:**
+   ```php
+   // Usar los datos que vienen directamente en la request
+   $pedidosLotes = $dataPedidos['pedidosLotes'];
+   
+   for ($i = 0; $i < sizeof($pedidosLotes); $i++) {
+       $pedido = $pedidosLotes[$i];
+       $pedido['programacion'] = $date;
+       $pedido['simulacion'] = $sim;
+       // ... procesar cada pedido
+   }
+   ```
+
+3. **Agregados logs adicionales:**
+   ```php
+   error_log('🔍 addPrePlaneados - pedidosLotes recibido: ' . json_encode($dataPedidos['pedidosLotes'] ?? 'NO EXISTE'));
+   ```
+
+**Archivos modificados:**
+- `BatchRecord/api/src/routes/app/explosionMateriales/planPrePlaneados.php`
+
+**Estado:** ✅ **RESUELTO** - La API procesa correctamente los datos de pedidos enviados desde el frontend
+
+---
+
 ### **🎯 PROBLEMA RESUELTO: Modal "Cargar Pedido en simulacion" aparece innecesariamente**
 
 **Fecha:** 2024-12-19  
