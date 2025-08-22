@@ -281,6 +281,11 @@ $app->post('/calc-lote-directo', function (Request $request, Response $response)
             $totalCountPrePlaneados++;
         }
         
+        // Guardar datos en la sesión para que estén disponibles en addPrePlaneados
+        session_start();
+        $_SESSION['dataGranel'] = $pedidosLotes;
+        error_log('✅ Datos guardados en sesión: ' . json_encode($_SESSION['dataGranel']));
+        
         // Respuesta
         $resultado = [
             'success' => true,

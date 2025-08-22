@@ -94,6 +94,29 @@
 
 ---
 
+### **🔧 PROBLEMA RESUELTO: Error "No hay datos de granel en la sesión"**
+
+**Fecha:** 2024-12-19  
+**Problema:** Después de calcular lote y confirmar, aparecía el error "No hay datos de granel en la sesión" y no se guardaban los datos en la base de datos.
+
+**Causa:** La ruta `/api/calc-lote-directo` no estaba guardando los datos procesados en la sesión `$_SESSION['dataGranel']`, que es requerida por `/api/addPrePlaneados`.
+
+**Solución implementada:**
+1. **Agregado guardado en sesión en la ruta calc-lote-directo:**
+   ```php
+   // Guardar datos en la sesión para que estén disponibles en addPrePlaneados
+   session_start();
+   $_SESSION['dataGranel'] = $pedidosLotes;
+   error_log('✅ Datos guardados en sesión: ' . json_encode($_SESSION['dataGranel']));
+   ```
+
+**Archivos modificados:**
+- `BatchRecord/api/index.php`
+
+**Estado:** ✅ **RESUELTO** - Los datos se guardan correctamente en la base de datos
+
+---
+
 ### **🎯 PROBLEMA RESUELTO: Modal "Cargar Pedido en simulacion" aparece innecesariamente**
 
 **Fecha:** 2024-12-19  
