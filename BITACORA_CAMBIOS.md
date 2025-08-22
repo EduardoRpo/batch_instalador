@@ -734,6 +734,43 @@
 
 ---
 
+### **🔧 PROBLEMA RESUELTO: Tabla Capacidad Planeada y Valorización Estimada comentadas**
+
+**Fecha:** 2024-12-19  
+**Problema:** La tabla de "Capacidad Planeada" y el label de "Valorización Estimada" con su input no son necesarios y ocupan espacio en la interfaz.
+
+**Solución implementada:**
+1. **Tabla Capacidad Planeada comentada:**
+   ```html
+   <!-- <div class="card">
+     <div class="card-block">
+       <div class="payment-of-tax">
+         <div class="table-responsive">
+           <label for="">Capacidad Planeada </label>
+           <table class="table table-bordered table-striped table-hover" id="tblCalcCapacidadPlaneada" style="width: 100%;">
+             <!-- ... contenido de la tabla ... -->
+           </table>
+         </div>
+       </div>
+     </div>
+   </div> -->
+   ```
+
+2. **Label e input de Valorización Estimada comentados:**
+   ```html
+   <!-- <div class="col-2 text-center">
+     <label>Valorización Estimada:</label>
+     <input type="text" id="totalVentaPlan" class="form-control text-center" style="font-weight: bold;" disabled>
+   </div> -->
+   ```
+
+**Archivos modificados:**
+- `BatchRecord/html/batch.php` - Tabla y valorización comentadas
+
+**Estado:** ✅ **RESUELTO** - Interfaz más limpia sin elementos innecesarios
+
+---
+
 ### **🎯 PROBLEMA RESUELTO: Modal "Cargar Pedido en simulacion" aparece innecesariamente**
 
 **Fecha:** 2024-12-19  

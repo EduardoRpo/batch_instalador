@@ -316,7 +316,7 @@ include_once("modal/m_limpiar_firmas.php");
                 <div class="col-md-12 align-self-right">
                   <div class="row ml-1">
                     <div class="col-md-9 align-self-center">
-                      <div class="card">
+                      <!-- <div class="card">
                         <div class="card-block">
                           <div class="payment-of-tax">
                             <div class="table-responsive">
@@ -338,16 +338,16 @@ include_once("modal/m_limpiar_firmas.php");
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
 
                   <div class="card">
                     <div class="row justify-content-end mt-3">
-                      <div class="col-2 text-center">
+                      <!-- <div class="col-2 text-center">
                         <label>Valorización Estimada:</label>
                         <input type="text" id="totalVentaPlan" class="form-control text-center" style="font-weight: bold;" disabled>
-                      </div>
+                      </div> -->
                       <div class="col-2">
                         <button type="button" id="btnProgramar" class="btn waves-effect waves-light btn-danger" style="width: 120px; margin-top: 33px">
                           <strong>Programar</strong>
