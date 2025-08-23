@@ -216,6 +216,15 @@ $(document).ready(function () {
         title: 'Estado',
         data: 'estado',
         className: 'text-center',
+        render: function (data) {
+          if (data == 0) {
+            return 'Falta Formula e Instructivo';
+          } else if (data == 1) {
+            return 'Inactivo';
+          } else {
+            return data; // Para cualquier otro valor, mostrar el valor original
+          }
+        },
       },
       {
         data: 'id',

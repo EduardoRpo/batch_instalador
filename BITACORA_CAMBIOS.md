@@ -798,6 +798,42 @@
 
 ---
 
+### **🔧 PROBLEMA RESUELTO: Columna Estado con texto descriptivo**
+
+**Fecha:** 2024-12-19  
+**Problema:** La columna "Estado" mostraba números (0, 1) en lugar de texto descriptivo.
+
+**Solución implementada:**
+1. **Función render agregada a la columna Estado:**
+   ```javascript
+   {
+     title: 'Estado',
+     data: 'estado',
+     className: 'text-center',
+     render: function (data) {
+       if (data == 0) {
+         return 'Falta Formula e Instructivo';
+       } else if (data == 1) {
+         return 'Inactivo';
+       } else {
+         return data; // Para cualquier otro valor, mostrar el valor original
+       }
+     },
+   }
+   ```
+
+**Mapeo de estados:**
+- `estado = 0` → "Falta Formula e Instructivo"
+- `estado = 1` → "Inactivo"
+- Otros valores → Se muestran tal como están
+
+**Archivos modificados:**
+- `BatchRecord/html/js/batch/tables/tableBatchPlaneados.js` - Columna Estado con texto descriptivo
+
+**Estado:** ✅ **RESUELTO** - Columna Estado muestra texto descriptivo en lugar de números
+
+---
+
 ### **🎯 PROBLEMA RESUELTO: Modal "Cargar Pedido en simulacion" aparece innecesariamente**
 
 **Fecha:** 2024-12-19  
