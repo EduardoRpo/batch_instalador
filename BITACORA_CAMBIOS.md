@@ -1027,6 +1027,48 @@
 
 ---
 
+### **🔧 PROBLEMA RESUELTO: Corrección de lógica de validación por granel**
+
+**Fecha:** 2024-12-19  
+**Problema:** La validación de estado estaba buscando fórmulas e instructivos por `referencia` (M-21407) en lugar de buscar por `granel` (Granel-15).
+
+**Causa:** Las tablas `formula` e `instructivo_preparacion` almacenan los documentos asociados al `granel` (campo `multi` de la tabla `producto`), no a la `referencia`.
+
+**Solución implementada:**
+1. **Lógica corregida en EstadoValidator:**
+   ```php
+   // Primero obtener el granel correspondiente a la referencia
+   $stmtGranel = $this->pdo->prepare("
+       SELECT multi as granel 
+       FROM producto 
+       WHERE referencia = :referencia
+   ");
+   
+   // Luego buscar fórmulas e instructivos por granel
+   $stmtFormula = $this->pdo->prepare("
+       SELECT COUNT(*) as count 
+       FROM formula 
+       WHERE id_producto = :granel
+   ");
+   ```
+
+2. **Flujo corregido:**
+   ```
+   Referencia (M-21407) → Buscar en producto.multi → Granel (Granel-15) → Buscar en formula/instructivo_preparacion
+   ```
+
+3. **Archivo de verificación actualizado:**
+   - Ahora muestra el granel encontrado
+   - Busca documentos por granel en lugar de referencia
+
+**Archivos modificados:**
+- `BatchRecord/api/src/utils/EstadoValidator.php` - Lógica corregida para buscar por granel
+- `BatchRecord/verificar_documentos.php` - Verificación actualizada
+
+**Estado:** ✅ **RESUELTO** - Validación ahora busca correctamente por granel
+
+---
+
 ### **🎯 PROBLEMA RESUELTO: Modal "Cargar Pedido en simulacion" aparece innecesariamente**
 
 **Fecha:** 2024-12-19  

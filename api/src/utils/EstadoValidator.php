@@ -24,35 +24,52 @@ class EstadoValidator
             // Debug: Verificar si la referencia existe
             error_log("🔍 EstadoValidator - Iniciando validación para referencia: $referencia");
             
-            // Contar fórmulas
+            // Primero obtener el granel correspondiente a la referencia
+            $stmtGranel = $this->pdo->prepare("
+                SELECT multi as granel 
+                FROM producto 
+                WHERE referencia = :referencia
+            ");
+            $stmtGranel->execute(['referencia' => $referencia]);
+            $productoData = $stmtGranel->fetch(PDO::FETCH_ASSOC);
+            
+            if (!$productoData) {
+                error_log("❌ EstadoValidator - No se encontró producto para referencia: $referencia");
+                return 0;
+            }
+            
+            $granel = $productoData['granel'];
+            error_log("🔍 EstadoValidator - Granel encontrado para $referencia: $granel");
+            
+            // Contar fórmulas por granel
             $stmtFormula = $this->pdo->prepare("
                 SELECT COUNT(*) as count 
                 FROM formula 
-                WHERE id_producto = :referencia
+                WHERE id_producto = :granel
             ");
-            $stmtFormula->execute(['referencia' => $referencia]);
+            $stmtFormula->execute(['granel' => $granel]);
             $formulas = $stmtFormula->fetch(PDO::FETCH_ASSOC)['count'];
             
             // Debug: Verificar fórmulas encontradas
-            error_log("🔍 EstadoValidator - Fórmulas encontradas para $referencia: $formulas");
+            error_log("🔍 EstadoValidator - Fórmulas encontradas para granel $granel: $formulas");
             
-            // Contar instructivos
+            // Contar instructivos por granel
             $stmtInstructivo = $this->pdo->prepare("
                 SELECT COUNT(*) as count 
                 FROM instructivo_preparacion 
-                WHERE id_producto = :referencia
+                WHERE id_producto = :granel
             ");
-            $stmtInstructivo->execute(['referencia' => $referencia]);
+            $stmtInstructivo->execute(['granel' => $granel]);
             $instructivos = $stmtInstructivo->fetch(PDO::FETCH_ASSOC)['count'];
             
             // Debug: Verificar instructivos encontrados
-            error_log("🔍 EstadoValidator - Instructivos encontrados para $referencia: $instructivos");
+            error_log("🔍 EstadoValidator - Instructivos encontrados para granel $granel: $instructivos");
             
             // Calcular resultado
             $result = $formulas * $instructivos;
             $estado = ($result == 0) ? 0 : 1;
             
-            error_log("🔍 EstadoValidator - Producto: $referencia, Fórmulas: $formulas, Instructivos: $instructivos, Resultado: $result, Estado: $estado");
+            error_log("🔍 EstadoValidator - Producto: $referencia, Granel: $granel, Fórmulas: $formulas, Instructivos: $instructivos, Resultado: $result, Estado: $estado");
             
             return $estado;
             
