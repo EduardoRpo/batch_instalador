@@ -261,24 +261,35 @@ $(document).ready(function () {
         },
       },
       {
+        title: 'Acciones',
         data: 'id',
-        className: 'uniqueClassName',
+        className: 'text-center',
         render: function (data, type, row) {
-          return `
-            <div class="d-flex align-items-center justify-content-center">
-              <i class='fa fa-pencil link-editar-pre fa-2x mr-2' 
-                 id="edit-${data}" 
-                 data-toggle='tooltip' 
-                 title='Editar Pre Planeado' 
-                 style='color:rgb(33, 150, 243); cursor: pointer;'
-                 onclick="editarPrePlaneado(${data}, '${row.referencia}', '${row.tamano_lote}', '${row.unidad_lote}')"></i>
-              <i class='fa fa-trash link-borrar-pre fa-2x' 
-                 id="delete-${data}" 
-                 data-toggle='tooltip' 
-                 title='Eliminar Pre Planeado' 
-                 style='color:rgb(234, 67, 54); cursor: pointer;'></i>
+          console.log('🔍 Render Acciones - Datos:', { data, row });
+          console.log('🔍 Render Acciones - Valores:', { 
+            id: data, 
+            referencia: row.referencia, 
+            tamano_lote: row.tamano_lote, 
+            unidad_lote: row.unidad_lote 
+          });
+          
+          // Crear HTML más simple para debuggear
+          const html = `
+            <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+              <button type="button" class="btn btn-sm btn-primary" 
+                      onclick="editarPrePlaneado(${data}, '${row.referencia}', '${row.tamano_lote}', '${row.unidad_lote}')"
+                      title="Editar Pre Planeado">
+                <i class="fa fa-pencil"></i> Editar
+              </button>
+              <button type="button" class="btn btn-sm btn-danger" 
+                      title="Eliminar Pre Planeado">
+                <i class="fa fa-trash"></i>
+              </button>
             </div>
           `;
+          
+          console.log('🔍 Render Acciones - HTML generado:', html);
+          return html;
         },
       },
     ],
@@ -348,7 +359,13 @@ function updateEstadoProducto(referencia) {
 
 // Función para editar un pre-planeado
 function editarPrePlaneado(id, referencia, tamanoLote, cantidad) {
-  console.log('🚀 editarPrePlaneado - Editando registro:', { id, referencia, tamanoLote, cantidad });
+  console.log('🚀 editarPrePlaneado - Función llamada con:', { id, referencia, tamanoLote, cantidad });
+  console.log('🔍 editarPrePlaneado - Tipos de datos:', { 
+    id: typeof id, 
+    referencia: typeof referencia, 
+    tamanoLote: typeof tamanoLote, 
+    cantidad: typeof cantidad 
+  });
   
   // Crear modal de edición
   const modalHtml = `

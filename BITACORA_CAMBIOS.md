@@ -1139,6 +1139,42 @@
 
 ---
 
+### **🔧 PROBLEMA RESUELTO: Botón de editar no visible en tabla Planeados**
+
+**Fecha:** 2024-12-19  
+**Problema:** El botón de editar (lápiz) no se mostraba en la tabla de Planeados.
+
+**Causa:** Problema con la renderización del HTML en la columna de acciones, posiblemente debido a conflictos de CSS o estructura de datos.
+
+**Solución implementada:**
+1. **Simplificado el render de la columna de acciones:**
+   ```javascript
+   // Cambiado de iconos a botones más simples
+   <button type="button" class="btn btn-sm btn-primary" 
+           onclick="editarPrePlaneado(${data}, '${row.referencia}', '${row.tamano_lote}', '${row.unidad_lote}')"
+           title="Editar Pre Planeado">
+     <i class="fa fa-pencil"></i> Editar
+   </button>
+   ```
+
+2. **Agregados logs detallados para debugging:**
+   ```javascript
+   console.log('🔍 Render Acciones - Datos:', { data, row });
+   console.log('🔍 Render Acciones - HTML generado:', html);
+   ```
+
+3. **Mejorada la estructura HTML:**
+   - Uso de `display: flex` con `gap` para espaciado
+   - Botones Bootstrap en lugar de iconos simples
+   - Estructura más robusta y visible
+
+**Archivos modificados:**
+- `BatchRecord/html/js/batch/tables/tableBatchPlaneados.js` - Render de columna de acciones simplificado
+
+**Estado:** ✅ **RESUELTO** - Botón de editar ahora visible y funcional
+
+---
+
 ### **🎯 PROBLEMA RESUELTO: Modal "Cargar Pedido en simulacion" aparece innecesariamente**
 
 **Fecha:** 2024-12-19  
