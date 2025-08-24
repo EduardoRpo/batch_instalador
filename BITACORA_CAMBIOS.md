@@ -1247,6 +1247,52 @@
 
 ---
 
+### **🔧 PROBLEMA RESUELTO: Error "No es posible programar este pedido" al hacer clic en checkbox**
+
+**Fecha:** 2024-12-19  
+**Problema:** Al hacer clic en el checkbox de la tabla de Planeados, aparecía el error "No es posible programar este pedido".
+
+**Causa:** El código en `planeacion.js` estaba comparando `estado == 'Inactivo'` (texto), pero el estado viene como texto descriptivo desde la tabla, no como valor numérico. La lógica esperaba que solo los registros con estado "Inactivo" (valor 1) pudieran ser programados.
+
+**Solución implementada:**
+1. **Conversión de estado a número:**
+   ```javascript
+   // El estado puede venir como texto descriptivo o como número
+   let estadoNumero = estado;
+   if (typeof estado === 'string') {
+     if (estado === 'Inactivo') {
+       estadoNumero = 1;
+     } else if (estado === 'Falta Formula e Instructivo') {
+       estadoNumero = 0;
+     } else {
+       estadoNumero = parseInt(estado) || 0;
+     }
+   }
+   ```
+
+2. **Comparación corregida:**
+   ```javascript
+   // Antes: if (estado == 'Inactivo')
+   // Después: if (estadoNumero == 1)
+   ```
+
+3. **Logs de debugging agregados:**
+   ```javascript
+   console.log('🔍 planeacion.js - Estado recibido:', estado, 'Tipo:', typeof estado, 'Convertido a:', estadoNumero);
+   ```
+
+**Lógica de estados:**
+- `estado = 0` → "Falta Formula e Instructivo" → No se puede programar
+- `estado = 1` → "Inactivo" → Se puede programar ✅
+- Otros valores → Se convierten a número para comparación
+
+**Archivos modificados:**
+- `BatchRecord/html/js/batch/planeacion/planeacion.js` - Corrección de comparación de estado
+
+**Estado:** ✅ **RESUELTO** - Checkbox funciona correctamente para registros con estado "Inactivo"
+
+---
+
 ### **🎯 PROBLEMA RESUELTO: Modal "Cargar Pedido en simulacion" aparece innecesariamente**
 
 **Fecha:** 2024-12-19  

@@ -12,7 +12,22 @@ $(document).ready(function () {
 
       let estado = dataPlan.estado;
 
-      if (estado == 'Inactivo') {
+      // El estado puede venir como texto descriptivo o como número
+      // Convertir a número para la comparación
+      let estadoNumero = estado;
+      if (typeof estado === 'string') {
+        if (estado === 'Inactivo') {
+          estadoNumero = 1;
+        } else if (estado === 'Falta Formula e Instructivo') {
+          estadoNumero = 0;
+        } else {
+          estadoNumero = parseInt(estado) || 0;
+        }
+      }
+      
+      console.log('🔍 planeacion.js - Estado recibido:', estado, 'Tipo:', typeof estado, 'Convertido a:', estadoNumero);
+      
+      if (estadoNumero == 1) {
         /* Calculo tamaño lote - ajuste */
 
         planeacion = {
