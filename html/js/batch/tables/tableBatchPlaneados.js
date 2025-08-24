@@ -273,18 +273,20 @@ $(document).ready(function () {
             unidad_lote: row.unidad_lote 
           });
           
-          // Crear HTML más simple para debuggear
+          // Crear HTML con iconos como antes
           const html = `
-            <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-              <button type="button" class="btn btn-sm btn-primary" 
-                      onclick="editarPrePlaneado(${data}, '${row.referencia}', '${row.tamano_lote}', '${row.unidad_lote}')"
-                      title="Editar Pre Planeado">
-                <i class="fa fa-pencil"></i> Editar
-              </button>
-              <button type="button" class="btn btn-sm btn-danger" 
-                      title="Eliminar Pre Planeado">
-                <i class="fa fa-trash"></i>
-              </button>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+              <i class='fa fa-pencil fa-2x' 
+                 id="edit-${data}" 
+                 data-toggle='tooltip' 
+                 title='Editar Pre Planeado' 
+                 style='color:rgb(33, 150, 243); cursor: pointer;'
+                 onclick="editarPrePlaneado(${data}, '${row.referencia}', '${row.tamano_lote}', '${row.unidad_lote}')"></i>
+              <i class='fa fa-trash fa-2x' 
+                 id="delete-${data}" 
+                 data-toggle='tooltip' 
+                 title='Eliminar Pre Planeado' 
+                 style='color:rgb(234, 67, 54); cursor: pointer;'></i>
             </div>
           `;
           

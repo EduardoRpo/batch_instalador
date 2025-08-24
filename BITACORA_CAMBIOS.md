@@ -1175,6 +1175,42 @@
 
 ---
 
+### **🔧 PROBLEMA RESUELTO: Estilo de botones de acciones corregido**
+
+**Fecha:** 2024-12-19  
+**Problema:** Los botones de acciones se mostraban como botones Bootstrap en lugar de iconos como se prefería.
+
+**Causa:** Cambio anterior a botones Bootstrap para solucionar visibilidad, pero el usuario prefería el estilo original con iconos.
+
+**Solución implementada:**
+1. **Restaurado el estilo de iconos:**
+   ```javascript
+   // Lápiz azul para editar
+   <i class='fa fa-pencil fa-2x' 
+      style='color:rgb(33, 150, 243); cursor: pointer;'
+      onclick="editarPrePlaneado(...)"></i>
+   
+   // Papelera roja para eliminar
+   <i class='fa fa-trash fa-2x' 
+      style='color:rgb(234, 67, 54); cursor: pointer;'></i>
+   ```
+
+2. **Mejorado el espaciado:**
+   - Uso de `gap: 8px` para separación consistente
+   - `display: flex` para alineación perfecta
+
+3. **Mantenida la funcionalidad:**
+   - Tooltips informativos
+   - Logs de debugging
+   - Modal de edición funcional
+
+**Archivos modificados:**
+- `BatchRecord/html/js/batch/tables/tableBatchPlaneados.js` - Restaurado estilo de iconos
+
+**Estado:** ✅ **RESUELTO** - Iconos de editar (lápiz azul) y eliminar (papelera roja) visibles y funcionales
+
+---
+
 ### **🎯 PROBLEMA RESUELTO: Modal "Cargar Pedido en simulacion" aparece innecesariamente**
 
 **Fecha:** 2024-12-19  
