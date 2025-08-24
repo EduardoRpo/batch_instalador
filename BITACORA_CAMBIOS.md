@@ -1211,6 +1211,42 @@
 
 ---
 
+### **🔧 PROBLEMA RESUELTO: Lápiz de editar no visible - Cambiado a emoji**
+
+**Fecha:** 2024-12-19  
+**Problema:** El icono de lápiz de Font Awesome no se mostraba visualmente, aunque la funcionalidad funcionaba.
+
+**Causa:** Posible problema con la carga de Font Awesome o conflicto de CSS que impedía mostrar el icono del lápiz.
+
+**Solución implementada:**
+1. **Cambiado a emoji de lápiz:**
+   ```javascript
+   // Antes: <i class='fa fa-pencil fa-2x'></i>
+   // Después: <span>✏️</span>
+   ```
+
+2. **Mantenido el estilo azul:**
+   ```javascript
+   style='color:rgb(33, 150, 243); cursor: pointer; font-size: 18px; font-weight: bold;'
+   ```
+
+3. **Papelera roja sin cambios:**
+   - Se mantiene el icono de Font Awesome para eliminar
+   - Color rojo original preservado
+
+**Ventajas del emoji:**
+- ✅ **Siempre visible** - No depende de Font Awesome
+- ✅ **Compatibilidad universal** - Funciona en todos los navegadores
+- ✅ **Tamaño consistente** - 18px con peso bold
+- ✅ **Color azul** - Mantiene la identidad visual
+
+**Archivos modificados:**
+- `BatchRecord/html/js/batch/tables/tableBatchPlaneados.js` - Lápiz cambiado a emoji
+
+**Estado:** ✅ **RESUELTO** - Lápiz de editar (✏️) ahora visible y funcional
+
+---
+
 ### **🎯 PROBLEMA RESUELTO: Modal "Cargar Pedido en simulacion" aparece innecesariamente**
 
 **Fecha:** 2024-12-19  

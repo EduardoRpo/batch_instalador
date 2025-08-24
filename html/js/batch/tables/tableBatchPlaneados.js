@@ -276,12 +276,13 @@ $(document).ready(function () {
           // Crear HTML con iconos como antes
           const html = `
             <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
-              <i class='fa fa-pencil fa-2x' 
-                 id="edit-${data}" 
-                 data-toggle='tooltip' 
-                 title='Editar Pre Planeado' 
-                 style='color:rgb(33, 150, 243); cursor: pointer;'
-                 onclick="editarPrePlaneado(${data}, '${row.referencia}', '${row.tamano_lote}', '${row.unidad_lote}')"></i>
+              <span style='color:rgb(33, 150, 243); cursor: pointer; font-size: 18px; margin-right: 8px; font-weight: bold;'
+                    id="edit-${data}" 
+                    data-toggle='tooltip' 
+                    title='Editar Pre Planeado' 
+                    onclick="editarPrePlaneado(${data}, '${row.referencia}', '${row.tamano_lote}', '${row.unidad_lote}')">
+                ✏️
+              </span>
               <i class='fa fa-trash fa-2x' 
                  id="delete-${data}" 
                  data-toggle='tooltip' 
