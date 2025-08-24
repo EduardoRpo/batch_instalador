@@ -41,25 +41,29 @@ class EstadoValidator
             $granel = $productoData['granel'];
             error_log("🔍 EstadoValidator - Granel encontrado para $referencia: $granel");
             
-            // Contar fórmulas por granel
+            // Transformar A- a Granel- para buscar en las tablas
+            $granelBusqueda = str_replace('A-', 'Granel-', $granel);
+            error_log("🔍 EstadoValidator - Granel transformado para búsqueda: $granelBusqueda");
+            
+            // Contar fórmulas por granel (transformado)
             $stmtFormula = $this->pdo->prepare("
                 SELECT COUNT(*) as count 
                 FROM formula 
                 WHERE id_producto = :granel
             ");
-            $stmtFormula->execute(['granel' => $granel]);
+            $stmtFormula->execute(['granel' => $granelBusqueda]);
             $formulas = $stmtFormula->fetch(PDO::FETCH_ASSOC)['count'];
             
             // Debug: Verificar fórmulas encontradas
-            error_log("🔍 EstadoValidator - Fórmulas encontradas para granel $granel: $formulas");
+            error_log("🔍 EstadoValidator - Fórmulas encontradas para granel $granelBusqueda: $formulas");
             
-            // Contar instructivos por granel
+            // Contar instructivos por granel (transformado)
             $stmtInstructivo = $this->pdo->prepare("
                 SELECT COUNT(*) as count 
                 FROM instructivo_preparacion 
                 WHERE id_producto = :granel
             ");
-            $stmtInstructivo->execute(['granel' => $granel]);
+            $stmtInstructivo->execute(['granel' => $granelBusqueda]);
             $instructivos = $stmtInstructivo->fetch(PDO::FETCH_ASSOC)['count'];
             
             // Debug: Verificar instructivos encontrados
@@ -69,7 +73,7 @@ class EstadoValidator
             $result = $formulas * $instructivos;
             $estado = ($result == 0) ? 0 : 1;
             
-            error_log("🔍 EstadoValidator - Producto: $referencia, Granel: $granel, Fórmulas: $formulas, Instructivos: $instructivos, Resultado: $result, Estado: $estado");
+            error_log("🔍 EstadoValidator - Producto: $referencia, Granel original: $granel, Granel búsqueda: $granelBusqueda, Fórmulas: $formulas, Instructivos: $instructivos, Resultado: $result, Estado: $estado");
             
             return $estado;
             

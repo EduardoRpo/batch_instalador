@@ -29,30 +29,34 @@ try {
     if ($productoData) {
         $granel = $productoData['granel'];
         echo "Granel encontrado para $referencia: <strong>$granel</strong><br>";
+        
+        // Transformar A- a Granel- para buscar en las tablas
+        $granelBusqueda = str_replace('A-', 'Granel-', $granel);
+        echo "Granel transformado para búsqueda: <strong>$granelBusqueda</strong><br>";
     } else {
         echo "No se encontró producto para referencia: $referencia<br>";
         exit;
     }
     
-    // Verificar fórmulas por granel
-    echo "<h3>Fórmulas (buscando por granel '$granel'):</h3>";
+    // Verificar fórmulas por granel (transformado)
+    echo "<h3>Fórmulas (buscando por granel '$granelBusqueda'):</h3>";
     $stmtFormula = $pdo->prepare("
         SELECT COUNT(*) as count 
         FROM formula 
         WHERE id_producto = :granel
     ");
-    $stmtFormula->execute(['granel' => $granel]);
+    $stmtFormula->execute(['granel' => $granelBusqueda]);
     $formulas = $stmtFormula->fetch(PDO::FETCH_ASSOC)['count'];
     echo "Fórmulas encontradas: $formulas<br>";
     
-    // Verificar instructivos por granel
-    echo "<h3>Instructivos (buscando por granel '$granel'):</h3>";
+    // Verificar instructivos por granel (transformado)
+    echo "<h3>Instructivos (buscando por granel '$granelBusqueda'):</h3>";
     $stmtInstructivo = $pdo->prepare("
         SELECT COUNT(*) as count 
         FROM instructivo_preparacion 
         WHERE id_producto = :granel
     ");
-    $stmtInstructivo->execute(['granel' => $granel]);
+    $stmtInstructivo->execute(['granel' => $granelBusqueda]);
     $instructivos = $stmtInstructivo->fetch(PDO::FETCH_ASSOC)['count'];
     echo "Instructivos encontrados: $instructivos<br>";
     

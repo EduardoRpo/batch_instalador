@@ -1069,6 +1069,37 @@
 
 ---
 
+### **🔧 PROBLEMA RESUELTO: Transformación A- a Granel- en validación**
+
+**Fecha:** 2024-12-19  
+**Problema:** La validación no encontraba documentos porque buscaba por `A-15` pero los documentos están guardados como `Granel-15`.
+
+**Causa:** En la tabla `producto` el campo `multi` contiene `A-15`, pero en las tablas `formula` e `instructivo_preparacion` los documentos están guardados como `Granel-15` (transformados).
+
+**Solución implementada:**
+1. **Transformación agregada en EstadoValidator:**
+   ```php
+   // Transformar A- a Granel- para buscar en las tablas
+   $granelBusqueda = str_replace('A-', 'Granel-', $granel);
+   ```
+
+2. **Flujo corregido:**
+   ```
+   Referencia (M-21407) → producto.multi (A-15) → Transformar (Granel-15) → Buscar en formula/instructivo_preparacion
+   ```
+
+3. **Archivo de verificación actualizado:**
+   - Ahora muestra tanto el granel original como el transformado
+   - Busca documentos con el formato correcto
+
+**Archivos modificados:**
+- `BatchRecord/api/src/utils/EstadoValidator.php` - Transformación A- a Granel-
+- `BatchRecord/verificar_documentos.php` - Verificación con transformación
+
+**Estado:** ✅ **RESUELTO** - Validación ahora busca con el formato correcto
+
+---
+
 ### **🎯 PROBLEMA RESUELTO: Modal "Cargar Pedido en simulacion" aparece innecesariamente**
 
 **Fecha:** 2024-12-19  
