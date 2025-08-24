@@ -1358,6 +1358,68 @@
 
 ---
 
+### **🔧 PROBLEMA RESUELTO: Datos recibidos como string en lugar de array en programación**
+
+**Fecha:** 2024-12-19  
+**Problema:** La función `addRowsPedidos` estaba recibiendo un string JSON en lugar de un array de objetos, causando que procesara caracteres individuales (800+ caracteres) en lugar de registros.
+
+**Causa:** La API `/api/programPlan` estaba devolviendo datos como string JSON en lugar de objeto JavaScript, y el código no estaba manejando esta conversión.
+
+**Solución implementada:**
+1. **Validación y parsing en alertifyProgramar:**
+   ```javascript
+   // Si data es un string, intentar parsearlo
+   if (typeof data === 'string') {
+     try {
+       data = JSON.parse(data);
+       console.log('🔍 alertifyProgramar - Datos parseados desde string:', data);
+     } catch (e) {
+       console.error('❌ alertifyProgramar - Error parseando JSON:', e);
+       alertify.error('Error en los datos recibidos');
+       return;
+     }
+   }
+   ```
+
+2. **Validación y parsing en addRowsPedidos:**
+   ```javascript
+   // Si data es un string, intentar parsearlo como JSON
+   if (typeof data === 'string') {
+     try {
+       data = JSON.parse(data);
+       console.log('🔍 addRowsPedidos - Datos parseados desde string:', data);
+     } catch (e) {
+       console.error('❌ addRowsPedidos - Error parseando JSON:', e);
+       return '';
+     }
+   }
+   ```
+
+3. **Validación y parsing en sumCantAndLote:**
+   ```javascript
+   // Validar que data sea un array
+   if (!Array.isArray(data)) {
+     console.error('❌ sumCantAndLote - data no es un array:', data);
+     return {
+       totalCantidades: 0,
+       totalLotes: 0,
+     };
+   }
+   ```
+
+4. **Logs de debugging agregados:**
+   - Tipo de datos recibidos
+   - Validación de arrays
+   - Proceso de parsing
+   - Totales calculados
+
+**Archivos modificados:**
+- `BatchRecord/html/js/batch/planeacion/planeacion.js` - Validación y parsing de datos en múltiples funciones
+
+**Estado:** ✅ **RESUELTO** - Datos se procesan correctamente como array de objetos
+
+---
+
 ### **🎯 PROBLEMA RESUELTO: Modal "Cargar Pedido en simulacion" aparece innecesariamente**
 
 **Fecha:** 2024-12-19  

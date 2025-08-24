@@ -82,7 +82,31 @@ $(document).ready(function () {
   });
 
   alertifyProgramar = (data) => {
+    console.log('🔍 alertifyProgramar - Datos recibidos:', data);
+    console.log('🔍 alertifyProgramar - Tipo de datos:', typeof data);
+    console.log('🔍 alertifyProgramar - Es array:', Array.isArray(data));
+    
+    // Si data es un string, intentar parsearlo
+    if (typeof data === 'string') {
+      try {
+        data = JSON.parse(data);
+        console.log('🔍 alertifyProgramar - Datos parseados desde string:', data);
+      } catch (e) {
+        console.error('❌ alertifyProgramar - Error parseando JSON:', e);
+        alertify.error('Error en los datos recibidos');
+        return;
+      }
+    }
+    
+    // Validar que data sea un array
+    if (!Array.isArray(data)) {
+      console.error('❌ alertifyProgramar - data no es un array:', data);
+      alertify.error('Formato de datos incorrecto');
+      return;
+    }
+    
     count = data.length;
+    console.log('🔍 alertifyProgramar - Número de registros:', count);
 
     totalCantAndLote = sumCantAndLote(data);
 
@@ -175,12 +199,28 @@ $(document).ready(function () {
   };
 
   sumCantAndLote = (data) => {
+    console.log('🔍 sumCantAndLote - Datos recibidos:', data);
+    console.log('🔍 sumCantAndLote - Tipo de datos:', typeof data);
+    console.log('🔍 sumCantAndLote - Es array:', Array.isArray(data));
+    
+    // Validar que data sea un array
+    if (!Array.isArray(data)) {
+      console.error('❌ sumCantAndLote - data no es un array:', data);
+      return {
+        totalCantidades: 0,
+        totalLotes: 0,
+      };
+    }
+    
     totalCantidades = 0;
     totalLotes = 0;
     for (i = 0; i < data.length; i++) {
-      totalCantidades += data[i].cantidad_acumulada;
-      totalLotes += data[i].tamanio_lote;
+      console.log('🔍 sumCantAndLote - Registro', i, ':', data[i]);
+      totalCantidades += (data[i].cantidad_acumulada || 0);
+      totalLotes += (data[i].tamanio_lote || 0);
     }
+
+    console.log('🔍 sumCantAndLote - Totales calculados:', { totalCantidades, totalLotes });
 
     totalCantAndLote = {
       totalCantidades: totalCantidades,
@@ -192,6 +232,26 @@ $(document).ready(function () {
 
   addRowsPedidos = (data) => {
     console.log('🔍 addRowsPedidos - Datos recibidos:', data);
+    console.log('🔍 addRowsPedidos - Tipo de datos:', typeof data);
+    console.log('🔍 addRowsPedidos - Es array:', Array.isArray(data));
+    
+    // Si data es un string, intentar parsearlo como JSON
+    if (typeof data === 'string') {
+      try {
+        data = JSON.parse(data);
+        console.log('🔍 addRowsPedidos - Datos parseados desde string:', data);
+      } catch (e) {
+        console.error('❌ addRowsPedidos - Error parseando JSON:', e);
+        return '';
+      }
+    }
+    
+    // Validar que data sea un array
+    if (!Array.isArray(data)) {
+      console.error('❌ addRowsPedidos - data no es un array:', data);
+      return '';
+    }
+    
     console.log('🔍 addRowsPedidos - Número de registros:', data.length);
     
     row = [];
