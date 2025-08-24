@@ -216,14 +216,26 @@ $(document).ready(function () {
         title: 'Estado',
         data: 'estado',
         className: 'text-center',
-        render: function (data) {
+        render: function (data, type, row) {
+          let estadoText = '';
           if (data == 0) {
-            return 'Falta Formula e Instructivo';
+            estadoText = 'Falta Formula e Instructivo';
           } else if (data == 1) {
-            return 'Inactivo';
+            estadoText = 'Inactivo';
           } else {
-            return data; // Para cualquier otro valor, mostrar el valor original
+            estadoText = data; // Para cualquier otro valor, mostrar el valor original
           }
+          
+          return `
+            <div class="d-flex align-items-center justify-content-center">
+              <span class="mr-2">${estadoText}</span>
+              <button type="button" class="btn btn-sm btn-outline-primary" 
+                      onclick="updateEstadoProducto('${row.referencia}')" 
+                      title="Actualizar estado">
+                <i class="fa fa-refresh"></i>
+              </button>
+            </div>
+          `;
         },
       },
       {
@@ -249,3 +261,37 @@ $(document).ready(function () {
   
   console.log('🔍 tableBatchPlaneados - Tabla inicializada completamente');
 });
+
+// Función para actualizar el estado de un producto
+function updateEstadoProducto(referencia) {
+  console.log('🚀 updateEstadoProducto - Actualizando estado para:', referencia);
+  
+  // Mostrar indicador de carga
+  alertify.set('notifier', 'position', 'top-right');
+  alertify.message('Actualizando estado...');
+  
+  $.ajax({
+    url: '/api/update-estado-producto',
+    type: 'POST',
+    data: JSON.stringify({ referencia: referencia }),
+    contentType: 'application/json',
+    success: function(resp) {
+      console.log('✅ updateEstadoProducto - Respuesta:', resp);
+      
+      if (resp.success) {
+        alertify.success('Estado actualizado correctamente');
+        
+        // Recargar la tabla para mostrar el nuevo estado
+        $('#tablaBatchPlaneados').DataTable().ajax.reload();
+        
+        console.log('✅ updateEstadoProducto - Tabla recargada');
+      } else {
+        alertify.error('Error: ' + (resp.message || 'Error desconocido'));
+      }
+    },
+    error: function(xhr, status, error) {
+      console.error('❌ updateEstadoProducto - Error AJAX:', {xhr, status, error});
+      alertify.error('Error al actualizar estado: ' + error);
+    }
+  });
+}

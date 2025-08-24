@@ -45,13 +45,32 @@ $app->post('/saveInstructivos', function (Request $request, Response $response, 
           $batchDao->updateEstadoBatch($batchs[$i]['id_batch'], $estado[0]);
         }
 
-      $estado = $prePlaneadosDao->checkFormulasAndInstructivos($dataInstructive['referencia']);
-
+      // Usar la nueva clase EstadoValidator
+      require_once __DIR__ . '/../../../../utils/EstadoValidator.php';
+      
+      // Configuración de base de datos
+      $host = '172.17.0.1';
+      $port = '3307';
+      $dbname = 'batch_record';
+      $username = 'root';
+      $password = 'S@m4r@_2025!';
+      
+      $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname", $username, $password);
+      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      
+      $estadoValidator = new \BatchRecord\utils\EstadoValidator($pdo);
+      
+      // Validar estado del producto principal
+      $estado = $estadoValidator->checkFormulasAndInstructivos($dataInstructive['referencia']);
+      
+      // Obtener referencias relacionadas y actualizar sus estados
       $referencias = $productsDao->findReferenceByGranel($dataInstructive['referencia']);
-
+      
       for ($i = 0; $i < sizeof($referencias); $i++) {
-        $prePlaneadosDao->updateEstadoPreplaneado($referencias[$i]['referencia'], $estado);
+        $estadoValidator->updateEstadoPreplaneados($referencias[$i]['referencia'], $estado);
       }
+      
+      error_log('✅ Instructivo creado/actualizado - Estado actualizado para producto: ' . $dataInstructive['referencia'] . ' = ' . $estado);
     } else
       $instructivo = $instructivoPreparacionDao->saveInstructive($dataInstructive);
 

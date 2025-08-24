@@ -288,6 +288,21 @@ $app->post('/calc-lote-directo', function (Request $request, Response $response)
         $_SESSION['dataGranel'] = $pedidosLotes;
         error_log('✅ Datos guardados en sesión: ' . json_encode($_SESSION['dataGranel']));
         
+        // Validar y actualizar estados de los productos
+        require_once __DIR__ . '/src/utils/EstadoValidator.php';
+        $estadoValidator = new \BatchRecord\utils\EstadoValidator($pdo);
+        
+        // Obtener referencias únicas de productos
+        $referencias = array_unique(array_map(function($pedido) {
+            return $pedido['referencia'];
+        }, $pedidosLotes));
+        
+        error_log('🔍 Validando estados para referencias: ' . json_encode($referencias));
+        
+        // Validar y actualizar estados
+        $estadosValidados = $estadoValidator->validateMultipleProducts($referencias);
+        error_log('✅ Estados validados: ' . json_encode($estadosValidados));
+        
         // Crear respuesta para el frontend (mantener estructura original)
         $pedidosLotesResponse = [];
         foreach ($pedidosLotes as $pedido) {
@@ -306,7 +321,8 @@ $app->post('/calc-lote-directo', function (Request $request, Response $response)
             'success' => true,
             'message' => 'Cálculo completado exitosamente',
             'pedidosLotes' => $pedidosLotesResponse,
-            'countPrePlaneados' => $totalCountPrePlaneados
+            'countPrePlaneados' => $totalCountPrePlaneados,
+            'estadosValidados' => $estadosValidados
         ];
         
         error_log('✅ Respuesta de API: ' . json_encode($resultado));
@@ -344,6 +360,67 @@ $app->post('/calc-lote-directo', function (Request $request, Response $response)
             ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
             ->withHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
             ->withStatus(500);
+    }
+});
+
+// Ruta para actualizar estado de un producto específico
+$app->post('/update-estado-producto', function (Request $request, Response $response) {
+    try {
+        // Obtener datos del request
+        $data = $request->getParsedBody();
+        error_log('🔍 update-estado-producto - Datos recibidos: ' . json_encode($data));
+        
+        // Validar datos requeridos
+        if (!isset($data['referencia'])) {
+            $resp = ['error' => true, 'message' => 'Referencia del producto es requerida'];
+            error_log('❌ update-estado-producto - Referencia faltante');
+            $response->getBody()->write(json_encode($resp));
+            return $response->withHeader('Content-Type', 'application/json');
+        }
+        
+        // Conectar a la base de datos
+        $host = '172.17.0.1';
+        $port = '3307';
+        $dbname = 'batch_record';
+        $username = 'root';
+        $password = 'S@m4r@_2025!';
+        
+        $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname", $username, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        // Usar la nueva clase EstadoValidator
+        require_once __DIR__ . '/src/utils/EstadoValidator.php';
+        $estadoValidator = new \BatchRecord\utils\EstadoValidator($pdo);
+        
+        $referencia = $data['referencia'];
+        
+        // Validar y actualizar estado
+        $estado = $estadoValidator->checkFormulasAndInstructivos($referencia);
+        $estadoValidator->updateEstadoPreplaneados($referencia, $estado);
+        
+        $descripcion = ($estado == 0) ? 'Falta Formula e Instructivo' : 'Inactivo';
+        
+        $resp = [
+            'success' => true,
+            'message' => 'Estado actualizado correctamente',
+            'referencia' => $referencia,
+            'estado' => $estado,
+            'descripcion' => $descripcion
+        ];
+        
+        error_log('✅ update-estado-producto - Estado actualizado para ' . $referencia . ': ' . $estado);
+        
+        $response->getBody()->write(json_encode($resp));
+        return $response->withHeader('Content-Type', 'application/json');
+        
+    } catch (Exception $e) {
+        $resp = [
+            'error' => true, 
+            'message' => 'Error actualizando estado: ' . $e->getMessage()
+        ];
+        error_log('❌ update-estado-producto - Error: ' . $e->getMessage());
+        $response->getBody()->write(json_encode($resp));
+        return $response->withHeader('Content-Type', 'application/json');
     }
 });
 
@@ -411,6 +488,11 @@ $app->post('/save-preplaneados', function (Request $request, Response $response)
                 error_log('❌ save-preplaneados - Error al obtener valor_pedido: ' . $e->getMessage());
             }
             
+            // Validar estado del producto
+            $estadoValidator = new \BatchRecord\utils\EstadoValidator($pdo);
+            $estado = $estadoValidator->checkFormulasAndInstructivos($pedido['referencia'] ?? '');
+            error_log('✅ save-preplaneados - Estado calculado para ' . $pedido['referencia'] . ': ' . $estado);
+            
             $params = [
                 $pedido['pedido'] ?? 'PED-' . ($pedido['referencia'] ?? 'UNKNOWN'),
                 $date,
@@ -418,7 +500,7 @@ $app->post('/save-preplaneados', function (Request $request, Response $response)
                 $pedido['cantidad_acumulada'] ?? 0,
                 $valor_pedido, // valor_pedido obtenido de plan_pedidos
                 $pedido['referencia'] ?? '',
-                1, // estado = 1 (activo)
+                $estado, // estado calculado basado en fórmulas e instructivos
                 $pedido['fecha_insumo'] ?? date('Y-m-d'),
                 $simulacion
             ];

@@ -834,6 +834,111 @@
 
 ---
 
+### **🔧 PROBLEMA RESUELTO: Validación automática de estado en cálculo de lote**
+
+**Fecha:** 2024-12-19  
+**Problema:** Al quitar el módulo de pre-planeado, se perdió la funcionalidad de validar automáticamente el estado de fórmulas e instructivos. El campo `estado` se insertaba con valor fijo (1) sin validar.
+
+**Solución implementada:**
+1. **Nueva clase EstadoValidator:**
+   ```php
+   class EstadoValidator {
+       public function checkFormulasAndInstructivos($referencia)
+       public function updateEstadoPreplaneados($referencia, $estado)
+       public function validateMultipleProducts($productos)
+   }
+   ```
+
+2. **Integración en cálculo de lote:**
+   ```php
+   // En /api/calc-lote-directo
+   $estadoValidator = new \BatchRecord\utils\EstadoValidator($pdo);
+   $estadosValidados = $estadoValidator->validateMultipleProducts($referencias);
+   ```
+
+3. **Corrección en guardado:**
+   ```php
+   // En /api/save-preplaneados
+   $estado = $estadoValidator->checkFormulasAndInstructivos($pedido['referencia']);
+   // En lugar de estado = 1 (fijo)
+   ```
+
+4. **Lógica de validación:**
+   ```php
+   $formulas = COUNT(formula WHERE id_producto = $referencia);
+   $instructivos = COUNT(instructivo_preparacion WHERE id_producto = $referencia);
+   $result = $formulas * $instructivos;
+   $estado = ($result == 0) ? 0 : 1;
+   ```
+
+**Archivos modificados:**
+- `BatchRecord/api/src/utils/EstadoValidator.php` - Nueva clase para validación
+- `BatchRecord/api/index.php` - Integración en cálculo y guardado
+
+**Estado:** ✅ **RESUELTO** - Estado se valida automáticamente al calcular lote
+
+---
+
+### **🔧 PROBLEMA RESUELTO: Actualización automática de estado al crear/editar fórmulas e instructivos**
+
+**Fecha:** 2024-12-19  
+**Problema:** Cuando el usuario subía una fórmula o instructivo después de calcular el lote, el estado no se actualizaba automáticamente en la tabla de planeados.
+
+**Solución implementada:**
+1. **Actualización de rutas de fórmulas:**
+   ```php
+   // En /api/newFormula
+   $estadoValidator = new \BatchRecord\utils\EstadoValidator($pdo);
+   $estado = $estadoValidator->checkFormulasAndInstructivos($dataFormula['ref_producto']);
+   $estadoValidator->updateEstadoPreplaneados($referencias[$i]['referencia'], $estado);
+   ```
+
+2. **Actualización de rutas de instructivos:**
+   ```php
+   // En /api/saveInstructivos
+   $estadoValidator = new \BatchRecord\utils\EstadoValidator($pdo);
+   $estado = $estadoValidator->checkFormulasAndInstructivos($dataInstructive['referencia']);
+   $estadoValidator->updateEstadoPreplaneados($referencias[$i]['referencia'], $estado);
+   ```
+
+3. **Nueva ruta para actualización manual:**
+   ```php
+   // /api/update-estado-producto
+   $estado = $estadoValidator->checkFormulasAndInstructivos($referencia);
+   $estadoValidator->updateEstadoPreplaneados($referencia, $estado);
+   ```
+
+4. **Botón de actualización en tabla:**
+   ```javascript
+   // En la columna Estado de tableBatchPlaneados.js
+   <button onclick="updateEstadoProducto('${row.referencia}')" title="Actualizar estado">
+     <i class="fa fa-refresh"></i>
+   </button>
+   ```
+
+**Flujo completo de actualización:**
+```
+1. USUARIO CREA/EDITA FÓRMULA O INSTRUCTIVO
+   ↓
+2. SE VALIDA AUTOMÁTICAMENTE EL ESTADO
+   ↓
+3. SE ACTUALIZA EN plan_preplaneados
+   ↓
+4. LA TABLA DE PLANEADOS MUESTRA EL NUEVO ESTADO
+   ↓
+5. USUARIO PUEDE ACTUALIZAR MANUALMENTE CON BOTÓN
+```
+
+**Archivos modificados:**
+- `BatchRecord/api/src/routes/admin/productos/formulas/formulas.php` - Integración EstadoValidator
+- `BatchRecord/api/src/routes/admin/productos/instructive/instructivos.php` - Integración EstadoValidator
+- `BatchRecord/api/index.php` - Nueva ruta update-estado-producto
+- `BatchRecord/html/js/batch/tables/tableBatchPlaneados.js` - Botón de actualización
+
+**Estado:** ✅ **RESUELTO** - Estado se actualiza automáticamente al crear/editar fórmulas e instructivos
+
+---
+
 ### **🎯 PROBLEMA RESUELTO: Modal "Cargar Pedido en simulacion" aparece innecesariamente**
 
 **Fecha:** 2024-12-19  
