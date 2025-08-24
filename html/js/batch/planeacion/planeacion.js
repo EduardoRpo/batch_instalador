@@ -89,10 +89,21 @@ $(document).ready(function () {
     // Si data es un string, intentar parsearlo
     if (typeof data === 'string') {
       try {
-        data = JSON.parse(data);
+        // Si hay HTML mezclado con JSON, extraer solo el JSON
+        if (data.includes('<br />') || data.includes('<b>Warning</b>')) {
+          console.log('🔍 alertifyProgramar - Detectado HTML mezclado con JSON');
+          // Buscar el JSON válido después del último </b>
+          const jsonStart = data.lastIndexOf('</b>') + 4;
+          const jsonPart = data.substring(jsonStart).trim();
+          console.log('🔍 alertifyProgramar - JSON extraído:', jsonPart);
+          data = JSON.parse(jsonPart);
+        } else {
+          data = JSON.parse(data);
+        }
         console.log('🔍 alertifyProgramar - Datos parseados desde string:', data);
       } catch (e) {
         console.error('❌ alertifyProgramar - Error parseando JSON:', e);
+        console.error('❌ alertifyProgramar - Datos problemáticos:', data);
         alertify.error('Error en los datos recibidos');
         return;
       }

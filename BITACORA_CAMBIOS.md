@@ -1420,6 +1420,59 @@
 
 ---
 
+### **🔧 PROBLEMA RESUELTO: Warnings de PHP contaminando respuesta JSON de programación**
+
+**Fecha:** 2024-12-19  
+**Problema:** La API `/api/programPlan` devolvía HTML con warnings de PHP mezclado con JSON, causando que el parsing fallara:
+```
+<br />
+<b>Warning</b>: Undefined array key "referencia" in PlaneacionDao.php on line 64
+[{"granel":"Granel-37",...}]
+```
+
+**Causa:** En `PlaneacionDao.php` se accedía a claves de array que podían no existir (`referencia`, `ajuste`, `fecha_planeacion`) sin validación.
+
+**Solución implementada:**
+1. **Validación de claves en PlaneacionDao.php:**
+   ```php
+   // Antes:
+   'referencia' => $t['referencia'],
+   'ajuste' => $t['ajuste'],
+   'fecha_planeacion' => $t['fecha_planeacion'],
+   
+   // Después:
+   'referencia' => $t['referencia'] ?? null,
+   'ajuste' => $t['ajuste'] ?? null,
+   'fecha_planeacion' => $t['fecha_planeacion'] ?? null,
+   ```
+
+2. **Validación en comparaciones:**
+   ```php
+   // Antes:
+   if ($dataPedidosReferencias[$i]['referencia'] == $t['referencia'])
+   
+   // Después:
+   if (($dataPedidosReferencias[$i]['referencia'] ?? null) == ($t['referencia'] ?? null))
+   ```
+
+3. **Extracción de JSON del HTML mezclado:**
+   ```javascript
+   // Si hay HTML mezclado con JSON, extraer solo el JSON
+   if (data.includes('<br />') || data.includes('<b>Warning</b>')) {
+     const jsonStart = data.lastIndexOf('</b>') + 4;
+     const jsonPart = data.substring(jsonStart).trim();
+     data = JSON.parse(jsonPart);
+   }
+   ```
+
+**Archivos modificados:**
+- `BatchRecord/api/src/dao/app/batch/PlaneacionDao.php` - Validación de claves de array
+- `BatchRecord/html/js/batch/planeacion/planeacion.js` - Extracción de JSON del HTML
+
+**Estado:** ✅ **RESUELTO** - JSON limpio sin warnings de PHP
+
+---
+
 ### **🎯 PROBLEMA RESUELTO: Modal "Cargar Pedido en simulacion" aparece innecesariamente**
 
 **Fecha:** 2024-12-19  

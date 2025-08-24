@@ -46,11 +46,11 @@ class PlaneacionDao
         foreach ($dataPedidos as $t) {
             $repeat = false;
             for ($i = 0; $i < count($dataPedidosReferencias); $i++) {
-                if ($dataPedidosReferencias[$i]['referencia'] == $t['referencia']) {
+                if (($dataPedidosReferencias[$i]['referencia'] ?? null) == ($t['referencia'] ?? null)) {
                     $dataPedidosReferencias[$i]['id'] = "{$dataPedidosReferencias[$i]['id']} - {$t['id']}";
                     $dataPedidosReferencias[$i]['numPedido'] = "{$dataPedidosReferencias[$i]['numPedido']} - {$t['numPedido']}";
-                    $dataPedidosReferencias[$i]['tamanio_lote'] += $t['tamanio_lote'];
-                    $dataPedidosReferencias[$i]['cantidad_acumulada'] += $t['cantidad_acumulada'];
+                    $dataPedidosReferencias[$i]['tamanio_lote'] += ($t['tamanio_lote'] ?? 0);
+                    $dataPedidosReferencias[$i]['cantidad_acumulada'] += ($t['cantidad_acumulada'] ?? 0);
                     $dataPedidosReferencias[$i]['fecha_insumo'] = "{$dataPedidosReferencias[$i]['fecha_insumo']} - {$t['fecha_insumo']}";
                     $repeat = true;
                     break;
@@ -58,16 +58,16 @@ class PlaneacionDao
             }
             if ($repeat == false)
                 $dataPedidosReferencias[] = array(
-                    'id' => $t['id'],
-                    'granel' => $t['granel'],
-                    'numPedido' => $t['numPedido'],
-                    'referencia' => $t['referencia'],
-                    'producto' => $t['producto'],
-                    'tamanio_lote' => $t['tamanio_lote'],
-                    'ajuste' => $t['ajuste'],
-                    'fecha_planeacion' => $t['fecha_planeacion'],
-                    'cantidad_acumulada' => $t['cantidad_acumulada'],
-                    'fecha_insumo' => $t['fecha_insumo'],
+                    'id' => $t['id'] ?? null,
+                    'granel' => $t['granel'] ?? null,
+                    'numPedido' => $t['numPedido'] ?? null,
+                    'referencia' => $t['referencia'] ?? null,
+                    'producto' => $t['producto'] ?? null,
+                    'tamanio_lote' => $t['tamanio_lote'] ?? 0,
+                    'ajuste' => $t['ajuste'] ?? null,
+                    'fecha_planeacion' => $t['fecha_planeacion'] ?? null,
+                    'cantidad_acumulada' => $t['cantidad_acumulada'] ?? 0,
+                    'fecha_insumo' => $t['fecha_insumo'] ?? null,
                 );
         }
 
