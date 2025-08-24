@@ -939,6 +939,94 @@
 
 ---
 
+### **🔧 PROBLEMA IDENTIFICADO: Debugging de validación de estado**
+
+**Fecha:** 2024-12-19  
+**Problema:** Un registro que tiene tanto fórmula como instructivo muestra "Falta Formula e Instructivo" en lugar de "Inactivo".
+
+**Solución implementada:**
+1. **Logs detallados agregados:**
+   ```php
+   error_log("🔍 EstadoValidator - Iniciando validación para referencia: $referencia");
+   error_log("🔍 EstadoValidator - Fórmulas encontradas para $referencia: $formulas");
+   error_log("🔍 EstadoValidator - Instructivos encontrados para $referencia: $instructivos");
+   error_log("🔍 EstadoValidator - Producto: $referencia, Fórmulas: $formulas, Instructivos: $instructivos, Resultado: $result, Estado: $estado");
+   ```
+
+2. **Función de debugging agregada:**
+   ```php
+   public function debugTablas($referencia)
+   {
+       // Verifica estructura de tablas formula e instructivo_preparacion
+       // Muestra datos reales encontrados para la referencia
+       // Verifica nombres de campos en las tablas
+   }
+   ```
+
+3. **Debugging integrado en actualización manual:**
+   ```php
+   // En /api/update-estado-producto
+   $estadoValidator->debugTablas($referencia);
+   ```
+
+**Objetivo:** Identificar si el problema está en:
+- Nombres incorrectos de tablas
+- Nombres incorrectos de campos
+- Datos no encontrados por referencia incorrecta
+- Lógica de cálculo
+
+**Archivos modificados:**
+- `BatchRecord/api/src/utils/EstadoValidator.php` - Logs detallados y función debug
+- `BatchRecord/api/index.php` - Integración de debugging
+
+**Estado:** 🔍 **EN INVESTIGACIÓN** - Agregados logs para identificar el problema
+
+---
+
+### **🔧 PROBLEMA IDENTIFICADO: Debugging frontend agregado**
+
+**Fecha:** 2024-12-19  
+**Problema:** Necesitamos debugging en el frontend para identificar el problema de validación de estado.
+
+**Solución implementada:**
+1. **Logs en función updateEstadoProducto:**
+   ```javascript
+   console.log('🔍 updateEstadoProducto - Tipo de referencia:', typeof referencia);
+   console.log('🔍 updateEstadoProducto - Referencia exacta:', JSON.stringify(referencia));
+   console.log('🔍 updateEstadoProducto - Datos a enviar:', JSON.stringify(dataToSend));
+   console.log('✅ updateEstadoProducto - Respuesta completa:', resp);
+   console.log('🔍 updateEstadoProducto - resp.estado:', resp.estado);
+   console.log('🔍 updateEstadoProducto - resp.descripcion:', resp.descripcion);
+   ```
+
+2. **Logs en render de columna Estado:**
+   ```javascript
+   console.log('🔍 Render Estado - Datos recibidos:', { data, type, row });
+   console.log('🔍 Render Estado - row.referencia:', row.referencia);
+   console.log('🔍 Render Estado - row.estado:', row.estado);
+   console.log('🔍 Render Estado - Texto generado:', estadoText);
+   ```
+
+3. **Logs en dataFilter de tabla:**
+   ```javascript
+   console.log('🔍 tableBatchPlaneados - Datos recibidos del servidor:', data);
+   console.log('🔍 tableBatchPlaneados - Datos parseados:', parsedData);
+   console.log('🔍 tableBatchPlaneados - Estado del primer registro:', parsedData.data[0].estado);
+   ```
+
+**Objetivo:** Verificar en consola del navegador:
+- Qué datos llegan del servidor
+- Qué valores tienen estado y referencia
+- Qué respuesta devuelve la API de actualización
+- Si hay errores en el proceso
+
+**Archivos modificados:**
+- `BatchRecord/html/js/batch/tables/tableBatchPlaneados.js` - Logs detallados en frontend
+
+**Estado:** 🔍 **EN INVESTIGACIÓN** - Debugging frontend agregado
+
+---
+
 ### **🎯 PROBLEMA RESUELTO: Modal "Cargar Pedido en simulacion" aparece innecesariamente**
 
 **Fecha:** 2024-12-19  

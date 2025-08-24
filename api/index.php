@@ -394,6 +394,9 @@ $app->post('/update-estado-producto', function (Request $request, Response $resp
         
         $referencia = $data['referencia'];
         
+        // Debug: Verificar estructura de tablas
+        $estadoValidator->debugTablas($referencia);
+        
         // Validar y actualizar estado
         $estado = $estadoValidator->checkFormulasAndInstructivos($referencia);
         $estadoValidator->updateEstadoPreplaneados($referencia, $estado);

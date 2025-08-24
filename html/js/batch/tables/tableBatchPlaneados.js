@@ -121,6 +121,22 @@ $(document).ready(function () {
       dataSrc: 'data',
       dataFilter: function(data) {
         console.log('🔍 tableBatchPlaneados - Datos recibidos del servidor:', data);
+        console.log('🔍 tableBatchPlaneados - Tipo de datos:', typeof data);
+        
+        try {
+          const parsedData = JSON.parse(data);
+          console.log('🔍 tableBatchPlaneados - Datos parseados:', parsedData);
+          console.log('🔍 tableBatchPlaneados - Número de registros:', parsedData.data ? parsedData.data.length : 'No data array');
+          
+          if (parsedData.data && parsedData.data.length > 0) {
+            console.log('🔍 tableBatchPlaneados - Primer registro:', parsedData.data[0]);
+            console.log('🔍 tableBatchPlaneados - Estado del primer registro:', parsedData.data[0].estado);
+            console.log('🔍 tableBatchPlaneados - Referencia del primer registro:', parsedData.data[0].referencia);
+          }
+        } catch (e) {
+          console.error('❌ tableBatchPlaneados - Error parseando datos:', e);
+        }
+        
         return data;
       }
     },
@@ -217,6 +233,10 @@ $(document).ready(function () {
         data: 'estado',
         className: 'text-center',
         render: function (data, type, row) {
+          console.log('🔍 Render Estado - Datos recibidos:', { data, type, row });
+          console.log('🔍 Render Estado - row.referencia:', row.referencia);
+          console.log('🔍 Render Estado - row.estado:', row.estado);
+          
           let estadoText = '';
           if (data == 0) {
             estadoText = 'Falta Formula e Instructivo';
@@ -225,6 +245,8 @@ $(document).ready(function () {
           } else {
             estadoText = data; // Para cualquier otro valor, mostrar el valor original
           }
+          
+          console.log('🔍 Render Estado - Texto generado:', estadoText);
           
           return `
             <div class="d-flex align-items-center justify-content-center">
@@ -265,32 +287,46 @@ $(document).ready(function () {
 // Función para actualizar el estado de un producto
 function updateEstadoProducto(referencia) {
   console.log('🚀 updateEstadoProducto - Actualizando estado para:', referencia);
+  console.log('🔍 updateEstadoProducto - Tipo de referencia:', typeof referencia);
+  console.log('🔍 updateEstadoProducto - Referencia exacta:', JSON.stringify(referencia));
   
   // Mostrar indicador de carga
   alertify.set('notifier', 'position', 'top-right');
   alertify.message('Actualizando estado...');
   
+  const dataToSend = { referencia: referencia };
+  console.log('🔍 updateEstadoProducto - Datos a enviar:', JSON.stringify(dataToSend));
+  
   $.ajax({
     url: '/api/update-estado-producto',
     type: 'POST',
-    data: JSON.stringify({ referencia: referencia }),
+    data: JSON.stringify(dataToSend),
     contentType: 'application/json',
     success: function(resp) {
-      console.log('✅ updateEstadoProducto - Respuesta:', resp);
+      console.log('✅ updateEstadoProducto - Respuesta completa:', resp);
+      console.log('🔍 updateEstadoProducto - Tipo de respuesta:', typeof resp);
+      console.log('🔍 updateEstadoProducto - resp.success:', resp.success);
+      console.log('🔍 updateEstadoProducto - resp.estado:', resp.estado);
+      console.log('🔍 updateEstadoProducto - resp.descripcion:', resp.descripcion);
       
       if (resp.success) {
         alertify.success('Estado actualizado correctamente');
+        console.log('✅ updateEstadoProducto - Estado actualizado a:', resp.estado, '(', resp.descripcion, ')');
         
         // Recargar la tabla para mostrar el nuevo estado
         $('#tablaBatchPlaneados').DataTable().ajax.reload();
         
         console.log('✅ updateEstadoProducto - Tabla recargada');
       } else {
+        console.error('❌ updateEstadoProducto - Error en respuesta:', resp.message);
         alertify.error('Error: ' + (resp.message || 'Error desconocido'));
       }
     },
     error: function(xhr, status, error) {
       console.error('❌ updateEstadoProducto - Error AJAX:', {xhr, status, error});
+      console.error('❌ updateEstadoProducto - Status:', xhr.status);
+      console.error('❌ updateEstadoProducto - StatusText:', xhr.statusText);
+      console.error('❌ updateEstadoProducto - ResponseText:', xhr.responseText);
       alertify.error('Error al actualizar estado: ' + error);
     }
   });

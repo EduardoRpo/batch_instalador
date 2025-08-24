@@ -21,6 +21,9 @@ class EstadoValidator
     public function checkFormulasAndInstructivos($referencia)
     {
         try {
+            // Debug: Verificar si la referencia existe
+            error_log("🔍 EstadoValidator - Iniciando validación para referencia: $referencia");
+            
             // Contar fórmulas
             $stmtFormula = $this->pdo->prepare("
                 SELECT COUNT(*) as count 
@@ -29,6 +32,9 @@ class EstadoValidator
             ");
             $stmtFormula->execute(['referencia' => $referencia]);
             $formulas = $stmtFormula->fetch(PDO::FETCH_ASSOC)['count'];
+            
+            // Debug: Verificar fórmulas encontradas
+            error_log("🔍 EstadoValidator - Fórmulas encontradas para $referencia: $formulas");
             
             // Contar instructivos
             $stmtInstructivo = $this->pdo->prepare("
@@ -39,11 +45,14 @@ class EstadoValidator
             $stmtInstructivo->execute(['referencia' => $referencia]);
             $instructivos = $stmtInstructivo->fetch(PDO::FETCH_ASSOC)['count'];
             
+            // Debug: Verificar instructivos encontrados
+            error_log("🔍 EstadoValidator - Instructivos encontrados para $referencia: $instructivos");
+            
             // Calcular resultado
             $result = $formulas * $instructivos;
             $estado = ($result == 0) ? 0 : 1;
             
-            error_log("🔍 EstadoValidator - Producto: $referencia, Fórmulas: $formulas, Instructivos: $instructivos, Estado: $estado");
+            error_log("🔍 EstadoValidator - Producto: $referencia, Fórmulas: $formulas, Instructivos: $instructivos, Resultado: $result, Estado: $estado");
             
             return $estado;
             
@@ -99,5 +108,47 @@ class EstadoValidator
         }
         
         return $resultados;
+    }
+    
+    /**
+     * Función de debugging para verificar la estructura de las tablas
+     * @param string $referencia Referencia del producto a verificar
+     */
+    public function debugTablas($referencia)
+    {
+        try {
+            error_log("🔍 EstadoValidator - DEBUG: Verificando estructura para $referencia");
+            
+            // Verificar tabla formula
+            $stmtFormula = $this->pdo->prepare("
+                SELECT * FROM formula WHERE id_producto = :referencia LIMIT 1
+            ");
+            $stmtFormula->execute(['referencia' => $referencia]);
+            $formulaData = $stmtFormula->fetch(PDO::FETCH_ASSOC);
+            error_log("🔍 EstadoValidator - DEBUG: Datos de fórmula: " . json_encode($formulaData));
+            
+            // Verificar tabla instructivo_preparacion
+            $stmtInstructivo = $this->pdo->prepare("
+                SELECT * FROM instructivo_preparacion WHERE id_producto = :referencia LIMIT 1
+            ");
+            $stmtInstructivo->execute(['referencia' => $referencia]);
+            $instructivoData = $stmtInstructivo->fetch(PDO::FETCH_ASSOC);
+            error_log("🔍 EstadoValidator - DEBUG: Datos de instructivo: " . json_encode($instructivoData));
+            
+            // Verificar estructura de tabla formula
+            $stmtStructure = $this->pdo->prepare("DESCRIBE formula");
+            $stmtStructure->execute();
+            $formulaStructure = $stmtStructure->fetchAll(PDO::FETCH_ASSOC);
+            error_log("🔍 EstadoValidator - DEBUG: Estructura tabla formula: " . json_encode($formulaStructure));
+            
+            // Verificar estructura de tabla instructivo_preparacion
+            $stmtStructure2 = $this->pdo->prepare("DESCRIBE instructivo_preparacion");
+            $stmtStructure2->execute();
+            $instructivoStructure = $stmtStructure2->fetchAll(PDO::FETCH_ASSOC);
+            error_log("🔍 EstadoValidator - DEBUG: Estructura tabla instructivo_preparacion: " . json_encode($instructivoStructure));
+            
+        } catch (Exception $e) {
+            error_log("❌ EstadoValidator - DEBUG Error: " . $e->getMessage());
+        }
     }
 } 
