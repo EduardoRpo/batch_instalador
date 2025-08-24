@@ -1293,6 +1293,71 @@
 
 ---
 
+### **🔧 PROBLEMA RESUELTO: Error "Cannot read properties of undefined (reading 'toFixed')" en programación**
+
+**Fecha:** 2024-12-19  
+**Problema:** Al hacer clic en "Programar" después de seleccionar un checkbox, aparecía el error "Cannot read properties of undefined (reading 'toFixed')" en la función `addRowsPedidos`.
+
+**Causa:** 
+1. El campo `tamanio_lote` podía ser `undefined` o `null` en los datos recibidos
+2. Las funciones `color` y `check` no estaban definidas en el archivo `planeacion.js`
+
+**Solución implementada:**
+1. **Validación de tamanio_lote:**
+   ```javascript
+   // Antes: data[i].tamanio_lote.toFixed(2)
+   // Después: (data[i].tamanio_lote || 0).toFixed(2)
+   ```
+
+2. **Funciones color y check agregadas:**
+   ```javascript
+   // Función para determinar el color de la fila
+   color = (tamanioLote) => {
+     if (!tamanioLote || tamanioLote === undefined || tamanioLote === null) {
+       return '';
+     }
+     if (tamanioLote > 2500) {
+       return 'style="background-color: #ffebee;"'; // Rojo claro
+     } else if (tamanioLote > 2000) {
+       return 'style="background-color: #fff3e0;"'; // Naranja claro
+     } else {
+       return ''; // Sin color
+     }
+   };
+
+   // Función para mostrar símbolos de verificación
+   check = (tamanioLote) => {
+     if (!tamanioLote || tamanioLote === undefined || tamanioLote === null) {
+       return '';
+     }
+     if (tamanioLote > 2500) {
+       return '<td class="text-center"><i class="fa fa-times-circle text-danger" id="incorrect"></i></td>';
+     } else if (tamanioLote > 2000) {
+       return '<td class="text-center"><i class="fa fa-exclamation-triangle text-warning" id="warning"></i></td>';
+     } else {
+       return '<td class="text-center"><i class="fa fa-check-circle text-success" id="correct"></i></td>';
+     }
+   };
+   ```
+
+3. **Logs de debugging agregados:**
+   ```javascript
+   console.log('🔍 addRowsPedidos - Datos recibidos:', data);
+   console.log('🔍 addRowsPedidos - tamanio_lote:', data[i].tamanio_lote, 'Tipo:', typeof data[i].tamanio_lote);
+   ```
+
+**Lógica de colores y símbolos:**
+- **tamanio_lote > 2500:** Fondo rojo claro + ícono X rojo (incorrecto)
+- **tamanio_lote > 2000:** Fondo naranja claro + ícono advertencia (warning)
+- **tamanio_lote ≤ 2000:** Sin color + ícono check verde (correcto)
+
+**Archivos modificados:**
+- `BatchRecord/html/js/batch/planeacion/planeacion.js` - Validación de tamanio_lote y funciones color/check agregadas
+
+**Estado:** ✅ **RESUELTO** - Programación funciona correctamente sin errores de JavaScript
+
+---
+
 ### **🎯 PROBLEMA RESUELTO: Modal "Cargar Pedido en simulacion" aparece innecesariamente**
 
 **Fecha:** 2024-12-19  

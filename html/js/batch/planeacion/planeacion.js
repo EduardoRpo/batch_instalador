@@ -191,15 +191,21 @@ $(document).ready(function () {
   };
 
   addRowsPedidos = (data) => {
+    console.log('🔍 addRowsPedidos - Datos recibidos:', data);
+    console.log('🔍 addRowsPedidos - Número de registros:', data.length);
+    
     row = [];
     for (i = 0; i < data.length; i++) {
+      console.log('🔍 addRowsPedidos - Registro', i, ':', data[i]);
+      console.log('🔍 addRowsPedidos - tamanio_lote:', data[i].tamanio_lote, 'Tipo:', typeof data[i].tamanio_lote);
+      
       data[i].tamanio_lote > 2500 ? (dis = 'disabled') : (dis = '');
 
       row.push(`<tr ${(text = color(data[i].tamanio_lote))}>
                 <td id="granel-${i}">${data[i].granel}</td>
                 <td>${data[i].producto}</td>
                 <td>${data[i].cantidad_acumulada}</td>
-                <td id="tamanioLote-${i}">${data[i].tamanio_lote.toFixed(
+                <td id="tamanioLote-${i}">${(data[i].tamanio_lote || 0).toFixed(
         2
       )}</td>
                 <td>
@@ -264,6 +270,36 @@ $(document).ready(function () {
       )
       .set('type', 'date')
       .set({ closableByDimmer: false });
+  };
+
+  // Función para determinar el color de la fila basado en el tamaño del lote
+  color = (tamanioLote) => {
+    if (!tamanioLote || tamanioLote === undefined || tamanioLote === null) {
+      return '';
+    }
+    
+    if (tamanioLote > 2500) {
+      return 'style="background-color: #ffebee;"'; // Rojo claro
+    } else if (tamanioLote > 2000) {
+      return 'style="background-color: #fff3e0;"'; // Naranja claro
+    } else {
+      return ''; // Sin color
+    }
+  };
+
+  // Función para mostrar símbolos de verificación basado en el tamaño del lote
+  check = (tamanioLote) => {
+    if (!tamanioLote || tamanioLote === undefined || tamanioLote === null) {
+      return '';
+    }
+    
+    if (tamanioLote > 2500) {
+      return '<td class="text-center"><i class="fa fa-times-circle text-danger" id="incorrect"></i></td>';
+    } else if (tamanioLote > 2000) {
+      return '<td class="text-center"><i class="fa fa-exclamation-triangle text-warning" id="warning"></i></td>';
+    } else {
+      return '<td class="text-center"><i class="fa fa-check-circle text-success" id="correct"></i></td>';
+    }
   };
 
   savePlaneados = (data) => {
