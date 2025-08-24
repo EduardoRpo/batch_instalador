@@ -531,5 +531,80 @@ $app->post('/save-preplaneados', function (Request $request, Response $response)
     }
 });
 
+// Ruta para actualizar pre-planeado
+$app->post('/update-preplaneado', function (Request $request, Response $response) {
+    try {
+        // Obtener datos del request
+        $data = $request->getParsedBody();
+        error_log('🔍 update-preplaneado - Datos recibidos: ' . json_encode($data));
+        
+        // Validar datos requeridos
+        if (!isset($data['id']) || !isset($data['tamano_lote']) || !isset($data['cantidad'])) {
+            $resp = ['error' => true, 'message' => 'Datos incompletos: id, tamano_lote y cantidad son requeridos'];
+            error_log('❌ update-preplaneado - Datos incompletos');
+            $response->getBody()->write(json_encode($resp));
+            return $response->withHeader('Content-Type', 'application/json');
+        }
+        
+        // Conectar a la base de datos
+        $host = '172.17.0.1';
+        $port = '3307';
+        $dbname = 'batch_record';
+        $username = 'root';
+        $password = 'S@m4r@_2025!';
+        
+        $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname", $username, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        $id = $data['id'];
+        $tamanoLote = floatval($data['tamano_lote']);
+        $cantidad = intval($data['cantidad']);
+        
+        error_log('🔍 update-preplaneado - Actualizando registro ID: ' . $id . ' con tamano_lote: ' . $tamanoLote . ' y cantidad: ' . $cantidad);
+        
+        // Actualizar el registro
+        $stmt = $pdo->prepare("
+            UPDATE plan_preplaneados 
+            SET tamano_lote = :tamano_lote, unidad_lote = :unidad_lote 
+            WHERE id = :id
+        ");
+        
+        $stmt->execute([
+            'tamano_lote' => $tamanoLote,
+            'unidad_lote' => $cantidad,
+            'id' => $id
+        ]);
+        
+        $affectedRows = $stmt->rowCount();
+        
+        if ($affectedRows > 0) {
+            $resp = [
+                'success' => true,
+                'message' => 'Pre-planeado actualizado correctamente',
+                'affected_rows' => $affectedRows
+            ];
+            error_log('✅ update-preplaneado - Registro actualizado exitosamente');
+        } else {
+            $resp = [
+                'error' => true,
+                'message' => 'No se encontró el registro a actualizar'
+            ];
+            error_log('⚠️ update-preplaneado - No se encontró registro con ID: ' . $id);
+        }
+        
+        $response->getBody()->write(json_encode($resp));
+        return $response->withHeader('Content-Type', 'application/json');
+        
+    } catch (Exception $e) {
+        $resp = [
+            'error' => true, 
+            'message' => 'Error actualizando pre-planeado: ' . $e->getMessage()
+        ];
+        error_log('❌ update-preplaneado - Error: ' . $e->getMessage());
+        $response->getBody()->write(json_encode($resp));
+        return $response->withHeader('Content-Type', 'application/json');
+    }
+});
+
 // Run app
 $app->run();

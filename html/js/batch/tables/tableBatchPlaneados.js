@@ -263,8 +263,22 @@ $(document).ready(function () {
       {
         data: 'id',
         className: 'uniqueClassName',
-        render: function (data) {
-          return `<a href='#' <i class='fa fa-trash link-borrar-pre fa-2x' id="delete-${data}" data-toggle='tooltip' title='Eliminar Pre Planeado' style='color:rgb(234, 67, 54)'></i></a>`;
+        render: function (data, type, row) {
+          return `
+            <div class="d-flex align-items-center justify-content-center">
+              <i class='fa fa-pencil link-editar-pre fa-2x mr-2' 
+                 id="edit-${data}" 
+                 data-toggle='tooltip' 
+                 title='Editar Pre Planeado' 
+                 style='color:rgb(33, 150, 243); cursor: pointer;'
+                 onclick="editarPrePlaneado(${data}, '${row.referencia}', '${row.tamano_lote}', '${row.unidad_lote}')"></i>
+              <i class='fa fa-trash link-borrar-pre fa-2x' 
+                 id="delete-${data}" 
+                 data-toggle='tooltip' 
+                 title='Eliminar Pre Planeado' 
+                 style='color:rgb(234, 67, 54); cursor: pointer;'></i>
+            </div>
+          `;
         },
       },
     ],
@@ -328,6 +342,122 @@ function updateEstadoProducto(referencia) {
       console.error('❌ updateEstadoProducto - StatusText:', xhr.statusText);
       console.error('❌ updateEstadoProducto - ResponseText:', xhr.responseText);
       alertify.error('Error al actualizar estado: ' + error);
+    }
+  });
+}
+
+// Función para editar un pre-planeado
+function editarPrePlaneado(id, referencia, tamanoLote, cantidad) {
+  console.log('🚀 editarPrePlaneado - Editando registro:', { id, referencia, tamanoLote, cantidad });
+  
+  // Crear modal de edición
+  const modalHtml = `
+    <div class="modal fade" id="modalEditarPrePlaneado" tabindex="-1" role="dialog" aria-labelledby="modalEditarPrePlaneadoLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalEditarPrePlaneadoLabel">Editar Pre-Planeado</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="formEditarPrePlaneado">
+              <input type="hidden" id="editId" value="${id}">
+              <input type="hidden" id="editReferencia" value="${referencia}">
+              
+              <div class="form-group">
+                <label for="editTamanoLote">Tamaño Lote (Kg):</label>
+                <input type="number" class="form-control" id="editTamanoLote" value="${tamanoLote}" step="0.01" min="0" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="editCantidad">Cantidad (Und):</label>
+                <input type="number" class="form-control" id="editCantidad" value="${cantidad}" step="1" min="0" required>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" onclick="guardarEdicionPrePlaneado()">Guardar Cambios</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  // Remover modal anterior si existe
+  $('#modalEditarPrePlaneado').remove();
+  
+  // Agregar modal al body
+  $('body').append(modalHtml);
+  
+  // Mostrar modal
+  $('#modalEditarPrePlaneado').modal('show');
+}
+
+// Función para guardar la edición
+function guardarEdicionPrePlaneado() {
+  const id = $('#editId').val();
+  const referencia = $('#editReferencia').val();
+  const tamanoLote = $('#editTamanoLote').val();
+  const cantidad = $('#editCantidad').val();
+  
+  console.log('🚀 guardarEdicionPrePlaneado - Guardando cambios:', { id, referencia, tamanoLote, cantidad });
+  
+  // Validaciones
+  if (!tamanoLote || tamanoLote <= 0) {
+    alertify.error('El tamaño del lote debe ser mayor a 0');
+    return;
+  }
+  
+  if (!cantidad || cantidad <= 0) {
+    alertify.error('La cantidad debe ser mayor a 0');
+    return;
+  }
+  
+  // Mostrar indicador de carga
+  alertify.set('notifier', 'position', 'top-right');
+  alertify.message('Guardando cambios...');
+  
+  const dataToSend = {
+    id: id,
+    referencia: referencia,
+    tamano_lote: parseFloat(tamanoLote),
+    cantidad: parseInt(cantidad)
+  };
+  
+  console.log('🔍 guardarEdicionPrePlaneado - Datos a enviar:', JSON.stringify(dataToSend));
+  
+  $.ajax({
+    url: '/api/update-preplaneado',
+    type: 'POST',
+    data: JSON.stringify(dataToSend),
+    contentType: 'application/json',
+    success: function(resp) {
+      console.log('✅ guardarEdicionPrePlaneado - Respuesta completa:', resp);
+      
+      if (resp.success) {
+        alertify.success('Pre-planeado actualizado correctamente');
+        
+        // Cerrar modal
+        $('#modalEditarPrePlaneado').modal('hide');
+        
+        // Recargar la tabla
+        $('#tablaBatchPlaneados').DataTable().ajax.reload();
+        
+        console.log('✅ guardarEdicionPrePlaneado - Cambios guardados exitosamente');
+      } else {
+        console.error('❌ guardarEdicionPrePlaneado - Error en respuesta:', resp.message);
+        alertify.error('Error: ' + (resp.message || 'Error desconocido'));
+      }
+    },
+    error: function(xhr, status, error) {
+      console.error('❌ guardarEdicionPrePlaneado - Error AJAX:', {xhr, status, error});
+      console.error('❌ guardarEdicionPrePlaneado - Status:', xhr.status);
+      console.error('❌ guardarEdicionPrePlaneado - StatusText:', xhr.statusText);
+      console.error('❌ guardarEdicionPrePlaneado - ResponseText:', xhr.responseText);
+      alertify.error('Error al guardar cambios: ' + error);
     }
   });
 }

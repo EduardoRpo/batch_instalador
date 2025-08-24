@@ -1100,6 +1100,45 @@
 
 ---
 
+### **🔧 PROBLEMA RESUELTO: Funcionalidad de edición de pre-planeados**
+
+**Fecha:** 2024-12-19  
+**Problema:** Se requiere agregar funcionalidad para editar solo el "Tamaño Lote" y "Cantidad" de los registros en la tabla de Planeados.
+
+**Solución implementada:**
+1. **Botón de editar agregado:**
+   ```javascript
+   <i class='fa fa-pencil link-editar-pre fa-2x mr-2' 
+      onclick="editarPrePlaneado(${data}, '${row.referencia}', '${row.tamano_lote}', '${row.unidad_lote}')"></i>
+   ```
+
+2. **Modal de edición:**
+   - Campos editables: Tamaño Lote (Kg) y Cantidad (Und)
+   - Validaciones: valores mayores a 0
+   - Botones: Cancelar y Guardar Cambios
+
+3. **API de actualización:**
+   ```php
+   // Ruta: /api/update-preplaneado
+   UPDATE plan_preplaneados 
+   SET tamano_lote = :tamano_lote, unidad_lote = :unidad_lote 
+   WHERE id = :id
+   ```
+
+4. **Funcionalidades:**
+   - Modal dinámico que se crea y destruye
+   - Validaciones en frontend y backend
+   - Recarga automática de la tabla después de guardar
+   - Logs detallados para debugging
+
+**Archivos modificados:**
+- `BatchRecord/html/js/batch/tables/tableBatchPlaneados.js` - Botón de editar y funciones JavaScript
+- `BatchRecord/api/index.php` - Nueva ruta API para actualización
+
+**Estado:** ✅ **RESUELTO** - Funcionalidad de edición implementada
+
+---
+
 ### **🎯 PROBLEMA RESUELTO: Modal "Cargar Pedido en simulacion" aparece innecesariamente**
 
 **Fecha:** 2024-12-19  
