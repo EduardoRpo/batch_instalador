@@ -15,8 +15,8 @@ $arrOptions = array(
 // Crear conexion
 
 try{
-  $conn = new PDO("mysql:dbname=$database;host=localhost", "$username", "$password", $arrOptions);
-  $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  $conn = new PDO("mysql:dbname=$database;host=$servername;port=3307", "$username", "$password", $arrOptions);
+    $conn -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }catch(Exception $e){
   echo $e->getMessage();
 }
