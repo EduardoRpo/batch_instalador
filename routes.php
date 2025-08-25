@@ -10,9 +10,9 @@ $router->add('/', function () {
   return file_get_contents('index.php');
 });
 
-/* $router->add('/batch', function () {
+$router->add('/batch', function () {
     return Router::getRenderedHTML('html/batch.php');
-  }); */
+  });
 
 $router->add('/pesaje', function () {
   return Router::getRenderedHTML('html/pesaje.php');
