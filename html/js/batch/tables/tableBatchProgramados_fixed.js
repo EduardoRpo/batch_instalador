@@ -273,32 +273,32 @@ $(document).ready(function () {
     // Limpiar el contenido anterior del modal
     $('#insertarRefMulti').empty();
     
-    // Crear un elemento de multipresentación por defecto
+    // Crear un elemento de multipresentación con la estructura correcta (tabla)
     var htmlMulti = `
-      <div class="row mb-2">
-        <div class="col-md-6">
+      <tr>
+        <td>
           <select class="form-control" id="MultiReferencia1">
             <option value="">Seleccione una referencia</option>
             <option value="${referencia}" selected>${referencia}</option>
           </select>
-        </div>
-        <div class="col-md-2">
-          <input type="number" class="form-control" id="cantidadMulti1" placeholder="Cantidad" value="1000">
-        </div>
-        <div class="col-md-2">
+        </td>
+        <td>
+          <input type="number" class="form-control" id="cantidadMulti1" placeholder="Cantidad" value="2000" onchange="calcularTamanioLoteMulti()">
+        </td>
+        <td>
           <input type="number" class="form-control" id="tamanioloteMulti1" placeholder="Tamaño" readonly>
-        </div>
-        <div class="col-md-1">
+        </td>
+        <td>
           <button type="button" class="btn btn-danger btn-sm" onclick="eliminarMultipresentacion(this)">
             <i class="fa fa-times"></i>
           </button>
-        </div>
-      </div>
+        </td>
+      </tr>
     `;
     
     $('#insertarRefMulti').html(htmlMulti);
     
-    // Calcular el tamaño del lote
+    // Calcular el tamaño del lote inicial
     calcularTamanioLoteMulti();
     
     console.log('Datos de multipresentación cargados');
@@ -309,11 +309,20 @@ $(document).ready(function () {
     var total = 0;
     $('[id^="cantidadMulti"]').each(function() {
       var cantidad = parseFloat($(this).val()) || 0;
-      total += cantidad;
+      var index = $(this).attr('id').replace('cantidadMulti', '');
+      
+      // Calcular el tamaño basado en la cantidad (simulación de cálculo)
+      // En un caso real, esto vendría de la base de datos o fórmula específica
+      var tamanio = cantidad * 0.06237; // Factor de conversión aproximado
+      
+      // Actualizar el campo de tamaño
+      $('#tamanioloteMulti' + index).val(tamanio.toFixed(2));
+      
+      total += tamanio;
     });
     
     $('#sumaMulti').val(total.toFixed(2));
-    console.log('Total calculado:', total);
+    console.log('Total calculado:', total.toFixed(2));
   }
   
   $('#tablaBatch tbody').on('click', '.link-comentario', function (e) {
