@@ -219,10 +219,50 @@ $(document).ready(function () {
     // Aquí iría la lógica para editar
   });
   
-  $('#tablaBatch tbody').on('click', '.link-editarMulti', function () {
-    var id = $(this).attr('id');
-    console.log('Editar multipresentación:', id);
-    // Aquí iría la lógica para editar multipresentación
+  console.log('Registrando evento para .link-editarMulti...');
+  $('#tablaBatch tbody').on('click', '.link-editarMulti', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    console.log('=== INICIO CLICK MULTI ===');
+    
+    var id_batch = $(this).attr('id');
+    console.log('ID del batch capturado:', id_batch);
+    console.log('Tipo de ID:', typeof id_batch);
+    
+    // Guardar el ID del batch en una variable global
+    window.currentBatchId = id_batch;
+    console.log('ID guardado en window.currentBatchId:', window.currentBatchId);
+    
+    // Obtener la referencia del batch desde la fila actual
+    var row = tablaBatch.row($(this).closest('tr'));
+    console.log('Fila obtenida:', row);
+    
+    var rowData = row.data();
+    console.log('Datos completos de la fila:', rowData);
+    console.log('Número de columnas en la fila:', rowData.length);
+    
+    var referencia = rowData[2]; // La referencia está en la posición 2 del array
+    console.log('Referencia extraída (posición 2):', referencia);
+    console.log('Tipo de referencia:', typeof referencia);
+    
+    // Verificar si el modal existe
+    var modalExists = $('#Modal_Multipresentacion').length > 0;
+    console.log('Modal existe en DOM:', modalExists);
+    
+    if (modalExists) {
+      console.log('Intentando abrir modal...');
+      $('#Modal_Multipresentacion').modal('show');
+      console.log('Modal abierto correctamente');
+    } else {
+      console.error('ERROR: Modal Modal_Multipresentacion no encontrado en el DOM');
+    }
+    
+    console.log('=== FIN CLICK MULTI ===');
+    
+    // Aquí puedes agregar la lógica para cargar los datos de multipresentación
+    // Por ahora, solo mostraremos el modal
+    alert('Modal de multipresentación abierto para batch: ' + id_batch + ' con referencia: ' + referencia);
   });
   
   $('#tablaBatch tbody').on('click', '.link-comentario', function (e) {
