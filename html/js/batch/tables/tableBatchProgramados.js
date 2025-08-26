@@ -2,7 +2,7 @@ $(document).ready(function () {
   btnDeleteMulti = true;
   
   // Configuración de DataTables para tabla de batch programados
-  tablaBatchProgramados = $('#tablaBatchProgramados').DataTable({
+  tablaBatchProgramados = $('#tablaBatch').DataTable({
     pageLength: 50,
     responsive: true,
     scrollCollapse: true,
