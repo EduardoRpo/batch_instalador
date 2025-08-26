@@ -232,6 +232,9 @@ $(document).ready(function () {
     var id_batch = $(this).attr('id');
     console.log('Cargando observaciones para batch:', id_batch);
     
+    // Guardar el ID del batch en una variable global para usarlo al guardar
+    window.currentBatchId = id_batch;
+    
     // Mostrar el modal
     $('#m_observaciones').modal('show');
     
@@ -278,6 +281,90 @@ $(document).ready(function () {
             <td colspan="2" class="text-center text-danger">Error al cargar las observaciones</td>
           </tr>
         `);
+      }
+    });
+  });
+  
+  // Evento para guardar observaciones
+  $('#saveObs').on('click', function() {
+    var observacion = $('#comment').val().trim();
+    var id_batch = window.currentBatchId;
+    
+    if (!observacion) {
+      alert('Por favor ingrese una observación');
+      return;
+    }
+    
+    if (observacion.length < 20) {
+      alert('La observación debe tener al menos 20 caracteres');
+      return;
+    }
+    
+    if (!id_batch) {
+      alert('Error: No se ha seleccionado un batch');
+      return;
+    }
+    
+    // Deshabilitar el botón para evitar doble envío
+    $('#saveObs').prop('disabled', true).text('Guardando...');
+    
+    // Enviar la observación al servidor
+    $.ajax({
+      url: '/html/php/save_observacion.php',
+      type: 'POST',
+      data: {
+        id_batch: id_batch,
+        observacion: observacion
+      },
+      dataType: 'json',
+      success: function(response) {
+        if (response.success) {
+          // Mostrar mensaje de éxito
+          alert('Observación guardada correctamente');
+          
+          // Limpiar el campo de texto
+          $('#comment').val('');
+          
+          // Recargar las observaciones para mostrar la nueva
+          $.ajax({
+            url: '/html/php/get_observaciones.php',
+            type: 'POST',
+            data: { id_batch: id_batch },
+            dataType: 'json',
+            success: function(response) {
+              if (response.success && response.data.length > 0) {
+                var tbody = $('#tBody');
+                tbody.empty();
+                
+                response.data.forEach(function(obs) {
+                  var row = `
+                    <tr>
+                      <td>${obs.fecha_registro}</td>
+                      <td>${obs.observacion}</td>
+                    </tr>
+                  `;
+                  tbody.append(row);
+                });
+              }
+            }
+          });
+          
+          // Actualizar el contador en la tabla principal
+          if (tablaBatch) {
+            tablaBatch.ajax.reload();
+          }
+          
+        } else {
+          alert('Error: ' + response.error);
+        }
+      },
+      error: function(xhr, status, error) {
+        console.error('Error al guardar observación:', error);
+        alert('Error al guardar la observación. Intente nuevamente.');
+      },
+      complete: function() {
+        // Rehabilitar el botón
+        $('#saveObs').prop('disabled', false).text('Agregar');
       }
     });
   });
