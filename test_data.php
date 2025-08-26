@@ -33,7 +33,9 @@ try {
     echo "=== PRUEBA DE CONSULTA SIMPLE ===\n";
     $sql = "SELECT batch.id_batch, batch.id_producto as referencia, 
                    p.nombre_referencia, batch.numero_lote, batch.tamano_lote,
-                   batch.estado
+                   WEEK(batch.fecha_creacion) as semana_creacion, 
+                   WEEK(batch.fecha_programacion) as semana_programacion, 
+                   batch.fecha_programacion, batch.estado
             FROM batch 
             INNER JOIN producto p ON p.referencia = batch.id_producto
             WHERE batch.estado >= 2
@@ -60,8 +62,38 @@ try {
                  ", Producto: " . $row['nombre_referencia'] . 
                  ", No Lote: " . $row['numero_lote'] . 
                  ", Tamaño: " . $row['tamano_lote'] . 
+                 ", Sem Plan: " . $row['semana_creacion'] . 
+                 ", Sem Prog: " . $row['semana_programacion'] . 
+                 ", Fecha: " . $row['fecha_programacion'] . 
                  ", Estado: " . $row['estado'] . "\n";
         }
+        
+        echo "\n=== SIMULACIÓN DE FORMATO PARA DATATABLES ===\n";
+        $formatted_data = [];
+        foreach ($data as $row) {
+            $formatted_data[] = [
+                '', // Radio button placeholder
+                $row['id_batch'],
+                $row['referencia'],
+                $row['nombre_referencia'],
+                $row['numero_lote'],
+                $row['tamano_lote'],
+                $row['semana_creacion'],
+                $row['semana_programacion'],
+                $row['fecha_programacion'],
+                $row['estado'],
+                [
+                    'id_batch' => $row['id_batch'],
+                    'cant_observations' => 0
+                ],
+                $row['id_batch'], // Multi
+                $row['id_batch'], // Modificar
+                $row['id_batch']  // Eliminar
+            ];
+        }
+        
+        echo "Formato de datos para DataTables:\n";
+        echo json_encode($formatted_data, JSON_PRETTY_PRINT);
     } else {
         echo "No se encontraron datos con estado >= 2\n";
     }

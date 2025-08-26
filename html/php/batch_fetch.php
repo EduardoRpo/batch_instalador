@@ -24,7 +24,8 @@ try {
     // Construir consulta base para batch
     $sql = "SELECT batch.id_batch, batch.id_producto as referencia, 
                    p.nombre_referencia, batch.numero_lote, batch.tamano_lote,
-                   batch.semana_creacion, batch.semana_programacion, 
+                   WEEK(batch.fecha_creacion) as semana_creacion, 
+                   WEEK(batch.fecha_programacion) as semana_programacion, 
                    batch.fecha_programacion, batch.estado
             FROM batch 
             INNER JOIN producto p ON p.referencia = batch.id_producto
