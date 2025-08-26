@@ -18,25 +18,13 @@ try {
         throw new Exception('La observación debe tener al menos 20 caracteres');
     }
     
-    // Obtener información del batch para la tabla observaciones_batch_inactivos
-    $sql_batch = "SELECT id_producto, numero_lote FROM batch WHERE id_batch = :id_batch";
-    $stmt_batch = $conn->prepare($sql_batch);
-    $stmt_batch->bindParam(':id_batch', $id_batch, PDO::PARAM_INT);
-    $stmt_batch->execute();
-    $batch_info = $stmt_batch->fetch(PDO::FETCH_ASSOC);
-    
-    if (!$batch_info) {
-        throw new Exception('Batch no encontrado');
-    }
-    
-    // Insertar la nueva observación
-    $sql = "INSERT INTO observaciones_batch_inactivos (observacion, batch, referencia, fecha_registro) 
-            VALUES (:observacion, :batch, :referencia, CURDATE())";
+    // Insertar la nueva observación con solo los campos requeridos
+    $sql = "INSERT INTO observaciones_batch_inactivos (observacion, batch, fecha_registro) 
+            VALUES (:observacion, :batch, CURDATE())";
     
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':observacion', $observacion, PDO::PARAM_STR);
     $stmt->bindParam(':batch', $id_batch, PDO::PARAM_INT);
-    $stmt->bindParam(':referencia', $batch_info['id_producto'], PDO::PARAM_STR);
     
     if ($stmt->execute()) {
         // Respuesta exitosa
