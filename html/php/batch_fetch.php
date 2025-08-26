@@ -79,7 +79,7 @@ try {
             $row['semana_creacion'],
             $row['semana_programacion'],
             $row['fecha_programacion'],
-            $row['estado'],
+            intval($row['estado']), // Convertir estado a número
             [
                 'id_batch' => $row['id_batch'],
                 'cant_observations' => 0 // Valor por defecto, se puede calcular después
