@@ -78,7 +78,14 @@ try {
             $row['semana_creacion'],
             $row['semana_programacion'],
             $row['fecha_programacion'],
-            $row['estado']
+            $row['estado'],
+            [
+                'id_batch' => $row['id_batch'],
+                'cant_observations' => 0 // Valor por defecto, se puede calcular después
+            ],
+            $row['id_batch'],
+            $row['id_batch'],
+            $row['id_batch']
         ];
     }
     
