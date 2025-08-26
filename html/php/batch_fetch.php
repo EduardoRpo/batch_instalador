@@ -1,70 +1,55 @@
 <?php
-require_once __DIR__ . '/../../env.php';
+require_once __DIR__ . '/../../conexion.php';
 
 // Configurar headers para JSON
 header('Content-Type: application/json');
 
 try {
-    // Conectar a la base de datos usando PDO
-    $conn = new PDO("mysql:dbname=$database;host=$servername", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
     // Obtener parámetros de DataTables
-    $draw = isset($_POST['draw']) ? intval($_POST['draw']) : 1;
-    $start = isset($_POST['start']) ? intval($_POST['start']) : 0;
-    $length = isset($_POST['length']) ? intval($_POST['length']) : 10;
-    $search = isset($_POST['search']['value']) ? $_POST['search']['value'] : '';
-    $order_column = isset($_POST['order'][0]['column']) ? intval($_POST['order'][0]['column']) : 0;
-    $order_dir = isset($_POST['order'][0]['dir']) ? $_POST['order'][0]['dir'] : 'ASC';
+    $draw = $_POST['draw'] ?? 1;
+    $start = $_POST['start'] ?? 0;
+    $length = $_POST['length'] ?? 10;
+    $search = $_POST['search']['value'] ?? '';
     
-    // Mapear columnas para batch
-    $columns = ['id_batch', 'referencia', 'nombre_referencia', 'numero_lote', 'tamano_lote', 'semana_creacion', 'semana_programacion', 'fecha_programacion', 'estado'];
-    $order_by = $columns[$order_column] ?? 'id_batch';
-    
-    // Construir consulta base para batch
+    // Consulta principal con conteo de observaciones
     $sql = "SELECT batch.id_batch, batch.id_producto as referencia, 
                    p.nombre_referencia, batch.numero_lote, batch.tamano_lote,
                    WEEK(batch.fecha_creacion) as semana_creacion, 
                    WEEK(batch.fecha_programacion) as semana_programacion, 
-                   batch.fecha_programacion, batch.estado
+                   batch.fecha_programacion, batch.estado,
+                   COALESCE(obs_count.cant_observations, 0) as cant_observations
             FROM batch 
             INNER JOIN producto p ON p.referencia = batch.id_producto
+            LEFT JOIN (
+                SELECT batch, COUNT(*) as cant_observations 
+                FROM observaciones_batch_inactivos 
+                GROUP BY batch
+            ) obs_count ON obs_count.batch = batch.id_batch
             WHERE batch.estado >= 2";
     
-    $count_sql = "SELECT COUNT(*) as total 
-                  FROM batch 
-                  INNER JOIN producto p ON p.referencia = batch.id_producto
-                  WHERE batch.estado >= 2";
+    // Agregar búsqueda si se proporciona
+    if (!empty($search)) {
+        $sql .= " AND (batch.numero_lote LIKE :search OR p.nombre_referencia LIKE :search OR batch.id_producto LIKE :search)";
+    }
     
-    // Agregar búsqueda si existe
-    $where_conditions = [];
-    $params = [];
+    $sql .= " ORDER BY batch.id_batch DESC";
+    
+    // Preparar y ejecutar la consulta
+    $stmt = $conn->prepare($sql);
     
     if (!empty($search)) {
-        $where_conditions[] = "(batch.id_producto LIKE :search OR p.nombre_referencia LIKE :search OR batch.numero_orden LIKE :search)";
-        $params[':search'] = "%$search%";
+        $searchParam = "%$search%";
+        $stmt->bindParam(':search', $searchParam, PDO::PARAM_STR);
     }
     
-    if (!empty($where_conditions)) {
-        $sql .= " AND " . implode(' AND ', $where_conditions);
-        $count_sql .= " AND " . implode(' AND ', $where_conditions);
-    }
-    
-    // Agregar ordenamiento
-    $sql .= " ORDER BY $order_by $order_dir";
-    
-    // Agregar paginación
-    $sql .= " LIMIT $start, $length";
-    
-    // Ejecutar consulta de conteo total
-    $stmt = $conn->prepare($count_sql);
-    $stmt->execute($params);
-    $total_records = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
-    
-    // Ejecutar consulta principal
-    $stmt = $conn->prepare($sql);
-    $stmt->execute($params);
+    $stmt->execute();
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    // Contar total de registros
+    $total_records = count($data);
+    
+    // Aplicar paginación
+    $data = array_slice($data, $start, $length);
     
     // Formatear datos para DataTables
     $formatted_data = [];
@@ -82,23 +67,23 @@ try {
             intval($row['estado']), // Convertir estado a número
             [
                 'id_batch' => $row['id_batch'],
-                'cant_observations' => 0 // Valor por defecto, se puede calcular después
+                'cant_observations' => intval($row['cant_observations'])
             ],
-            $row['id_batch'],
-            $row['id_batch'],
-            $row['id_batch']
+            $row['id_batch'], // Multi
+            $row['id_batch'], // Modificar
+            $row['id_batch']  // Eliminar
         ];
     }
     
-    // Respuesta para DataTables
+    // Preparar respuesta
     $response = [
-        'draw' => $draw,
+        'draw' => intval($draw),
         'recordsTotal' => $total_records,
         'recordsFiltered' => $total_records,
         'data' => $formatted_data
     ];
     
-    // Log de depuración
+    // Log para debugging
     error_log("=== DEBUG BATCH_FETCH.PHP ===");
     error_log("Total records: " . $total_records);
     error_log("Formatted data count: " . count($formatted_data));
@@ -119,7 +104,6 @@ try {
         'data' => [],
         'error' => 'Error de base de datos: ' . $e->getMessage()
     ];
-    
     echo json_encode($response);
 }
 ?> 
