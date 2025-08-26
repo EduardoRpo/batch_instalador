@@ -18,31 +18,47 @@ try {
     }
     echo "\n";
     
-    // Verificar si existe una tabla de observaciones
-    $stmt = $conn->prepare("SHOW TABLES LIKE '%observ%'");
+    // Verificar todas las tablas disponibles
+    $stmt = $conn->prepare("SHOW TABLES");
     $stmt->execute();
-    $observacion_tables = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $all_tables = $stmt->fetchAll(PDO::FETCH_COLUMN);
     
-    echo "Tablas relacionadas con observaciones:\n";
-    foreach ($observacion_tables as $table) {
-        echo "- " . $table[0] . "\n";
+    echo "Todas las tablas en la base de datos:\n";
+    foreach ($all_tables as $table) {
+        echo "- $table\n";
     }
     echo "\n";
     
-    // Si existe una tabla de observaciones, verificar su estructura
+    // Buscar tablas que contengan 'observ' en el nombre
+    $observacion_tables = array_filter($all_tables, function($table) {
+        return stripos($table, 'observ') !== false || 
+               stripos($table, 'coment') !== false || 
+               stripos($table, 'seguim') !== false;
+    });
+    
+    echo "Tablas relacionadas con observaciones/comentarios/seguimiento:\n";
     if (count($observacion_tables) > 0) {
         foreach ($observacion_tables as $table) {
-            $table_name = $table[0];
-            echo "Estructura de tabla '$table_name':\n";
-            $stmt = $conn->prepare("DESCRIBE $table_name");
-            $stmt->execute();
-            $obs_columns = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            foreach ($obs_columns as $column) {
-                echo "- " . $column['Field'] . " (" . $column['Type'] . ")\n";
+            echo "- $table\n";
+            
+            // Verificar estructura de cada tabla relacionada
+            try {
+                $stmt = $conn->prepare("DESCRIBE `$table`");
+                $stmt->execute();
+                $obs_columns = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                echo "  Estructura:\n";
+                foreach ($obs_columns as $column) {
+                    echo "    - " . $column['Field'] . " (" . $column['Type'] . ")\n";
+                }
+                echo "\n";
+            } catch (Exception $e) {
+                echo "  Error al describir tabla: " . $e->getMessage() . "\n";
             }
-            echo "\n";
         }
+    } else {
+        echo "No se encontraron tablas relacionadas con observaciones.\n";
     }
+    echo "\n";
     
     // Intentar una consulta más simple primero
     echo "=== PRUEBA DE CONSULTA SIMPLE ===\n";
