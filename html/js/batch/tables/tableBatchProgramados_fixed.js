@@ -33,6 +33,7 @@ $(document).ready(function () {
     },
     
     columns: [
+      /*
       {
         // Columna de selección (radio button)
         title: '',
@@ -42,6 +43,7 @@ $(document).ready(function () {
         width: '30px',
         defaultContent: '<input type="radio" name="optradio" class="link-select">'
       },
+      */
       {
         // Columna Batch
         title: 'Batch',
@@ -75,6 +77,7 @@ $(document).ready(function () {
         width: '100px',
         render: $.fn.dataTable.render.number('.', ',', 2, '')
       },
+      /*
       {
         // Columna Sem Plan
         title: 'Sem Plan',
@@ -95,6 +98,7 @@ $(document).ready(function () {
           return data ? `S${data}` : '';
         }
       },
+      */
       {
         // Columna Fecha Programación
         title: 'Fecha Programación',
