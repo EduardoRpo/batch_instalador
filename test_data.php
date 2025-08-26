@@ -18,16 +18,31 @@ try {
     }
     echo "\n";
     
-    // Verificar qué columnas existen en la tabla producto
-    $stmt = $conn->prepare("DESCRIBE producto");
+    // Verificar si existe una tabla de observaciones
+    $stmt = $conn->prepare("SHOW TABLES LIKE '%observ%'");
     $stmt->execute();
-    $producto_columns = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $observacion_tables = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-    echo "Columnas en tabla 'producto':\n";
-    foreach ($producto_columns as $column) {
-        echo "- " . $column['Field'] . " (" . $column['Type'] . ")\n";
+    echo "Tablas relacionadas con observaciones:\n";
+    foreach ($observacion_tables as $table) {
+        echo "- " . $table[0] . "\n";
     }
     echo "\n";
+    
+    // Si existe una tabla de observaciones, verificar su estructura
+    if (count($observacion_tables) > 0) {
+        foreach ($observacion_tables as $table) {
+            $table_name = $table[0];
+            echo "Estructura de tabla '$table_name':\n";
+            $stmt = $conn->prepare("DESCRIBE $table_name");
+            $stmt->execute();
+            $obs_columns = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($obs_columns as $column) {
+                echo "- " . $column['Field'] . " (" . $column['Type'] . ")\n";
+            }
+            echo "\n";
+        }
+    }
     
     // Intentar una consulta más simple primero
     echo "=== PRUEBA DE CONSULTA SIMPLE ===\n";

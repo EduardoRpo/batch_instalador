@@ -145,10 +145,19 @@ $(document).ready(function () {
         orderable: false,
         searchable: false,
         render: function (data) {
-          return `
-            <i class="badge badge-danger badge-pill notify-icon-badge ml-3">${data.cant_observations || 0}</i><br>
-            <a href='#'><i class="fa fa-file-text fa-1x link-comentario" id="${data.id_batch}" aria-hidden="true" data-toggle="tooltip" title="adicionar observaciones" style="color:rgb(59, 131, 189)"></i></a>
-          `;
+          // Verificar si data existe y tiene las propiedades necesarias
+          if (data && typeof data === 'object') {
+            return `
+              <i class="badge badge-danger badge-pill notify-icon-badge ml-3">${data.cant_observations || 0}</i><br>
+              <a href='#'><i class="fa fa-file-text fa-1x link-comentario" id="${data.id_batch || ''}" aria-hidden="true" data-toggle="tooltip" title="adicionar observaciones" style="color:rgb(59, 131, 189)"></i></a>
+            `;
+          } else {
+            // Si data no es un objeto válido, mostrar valores por defecto
+            return `
+              <i class="badge badge-danger badge-pill notify-icon-badge ml-3">0</i><br>
+              <a href='#'><i class="fa fa-file-text fa-1x link-comentario" id="" aria-hidden="true" data-toggle="tooltip" title="adicionar observaciones" style="color:rgb(59, 131, 189)"></i></a>
+            `;
+          }
         }
       },
       {
