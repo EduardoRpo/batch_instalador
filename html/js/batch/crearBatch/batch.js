@@ -29,15 +29,30 @@ $('.link-editarMulti').css('cursor', 'pointer');
 /* Cargar la data de la fila de acuerdo con la datatable */
 
 $(document).on('click', '#tablaBatch tbody tr', function () {
-  data = tablaBatch.row(this).data();
+  // Verificar si la tabla está inicializada como DataTable
+  if ($.fn.DataTable.isDataTable('#tablaBatch')) {
+    data = $('#tablaBatch').DataTable().row(this).data();
+  } else {
+    console.warn('tablaBatch no está inicializada como DataTable');
+  }
 });
 
 $(document).on('click', '#tablaPedidos tbody tr', function () {
-  fila = tablaPedidos.row(this).data();
+  // Verificar si la tabla está inicializada como DataTable
+  if ($.fn.DataTable.isDataTable('#tablaPedidos')) {
+    fila = $('#tablaPedidos').DataTable().row(this).data();
+  } else {
+    console.warn('tablaPedidos no está inicializada como DataTable');
+  }
 });
 
 $(document).on('click', '#tablaBatchPlaneados tbody tr', function () {
-  data = tablaBatchPlaneados.row(this).data();
+  // Verificar si la tabla está inicializada como DataTable
+  if ($.fn.DataTable.isDataTable('#tablaBatchPlaneados')) {
+    data = $('#tablaBatchPlaneados').DataTable().row(this).data();
+  } else {
+    console.warn('tablaBatchPlaneados no está inicializada como DataTable');
+  }
 });
 
 $(document).ready(function () {

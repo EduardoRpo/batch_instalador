@@ -14,13 +14,21 @@ $(document).ready(function () {
   };
 
   $('#tablaBatch tbody').on('click', 'tr', function () {
-    //data = tabla.row(this).data();
-    data = tablaBatch.row(this).data();
+    // Verificar si la tabla está inicializada como DataTable
+    if ($.fn.DataTable.isDataTable('#tablaBatch')) {
+      data = $('#tablaBatch').DataTable().row(this).data();
+    } else {
+      console.warn('tablaBatch no está inicializada como DataTable');
+    }
   });
 
   $('#tablaBatchPlaneados tbody').on('click', 'tr', function () {
-    //data = tabla.row(this).data();
-    data = tablaBatchPlaneados.row(this).data();
+    // Verificar si la tabla está inicializada como DataTable
+    if ($.fn.DataTable.isDataTable('#tablaBatchPlaneados')) {
+      data = $('#tablaBatchPlaneados').DataTable().row(this).data();
+    } else {
+      console.warn('tablaBatchPlaneados no está inicializada como DataTable');
+    }
   });
 
   $('#form_clonar').submit(function (event) {

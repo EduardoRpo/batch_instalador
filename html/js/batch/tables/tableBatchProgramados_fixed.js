@@ -1,14 +1,15 @@
 $(document).ready(function () {
-  console.log('=== INICIALIZANDO TABLA PROGRAMADOS ===');
-  
-  // Verificar si la tabla ya está inicializada y destruirla
+  btnDeleteMulti = true;
+
+  // Verificar si la tabla ya está inicializada
   if ($.fn.DataTable.isDataTable('#tablaBatch')) {
-    console.log('Destruyendo tabla existente...');
+    console.log('Tabla tablaBatch ya está inicializada, destruyendo...');
     $('#tablaBatch').DataTable().destroy();
   }
   
-  // Configuración completa de DataTables para tabla de batch programados
-  tablaBatchProgramados = $('#tablaBatch').DataTable({
+  // Configuración de DataTables para tabla de batch programados
+  // Definir tablaBatch como variable global para que otros archivos puedan acceder
+  tablaBatch = $('#tablaBatch').DataTable({
     pageLength: 50,
     responsive: true,
     scrollCollapse: true,
