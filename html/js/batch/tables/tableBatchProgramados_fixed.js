@@ -254,16 +254,67 @@ $(document).ready(function () {
       console.log('Intentando abrir modal...');
       $('#Modal_Multipresentacion').modal('show');
       console.log('Modal abierto correctamente');
+      
+      // Cargar datos de multipresentación para este batch
+      cargarMultipresentacionBatch(id_batch, referencia);
     } else {
       console.error('ERROR: Modal Modal_Multipresentacion no encontrado en el DOM');
     }
     
     console.log('=== FIN CLICK MULTI ===');
-    
-    // Aquí puedes agregar la lógica para cargar los datos de multipresentación
-    // Por ahora, solo mostraremos el modal
-    alert('Modal de multipresentación abierto para batch: ' + id_batch + ' con referencia: ' + referencia);
   });
+  
+  // Función para cargar datos de multipresentación
+  function cargarMultipresentacionBatch(id_batch, referencia) {
+    console.log('=== CARGANDO MULTIPRESENTACIÓN ===');
+    console.log('Batch ID:', id_batch);
+    console.log('Referencia:', referencia);
+    
+    // Limpiar el contenido anterior del modal
+    $('#insertarRefMulti').empty();
+    
+    // Crear un elemento de multipresentación por defecto
+    var htmlMulti = `
+      <div class="row mb-2">
+        <div class="col-md-6">
+          <select class="form-control" id="MultiReferencia1">
+            <option value="">Seleccione una referencia</option>
+            <option value="${referencia}" selected>${referencia}</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <input type="number" class="form-control" id="cantidadMulti1" placeholder="Cantidad" value="1000">
+        </div>
+        <div class="col-md-2">
+          <input type="number" class="form-control" id="tamanioloteMulti1" placeholder="Tamaño" readonly>
+        </div>
+        <div class="col-md-1">
+          <button type="button" class="btn btn-danger btn-sm" onclick="eliminarMultipresentacion(this)">
+            <i class="fa fa-times"></i>
+          </button>
+        </div>
+      </div>
+    `;
+    
+    $('#insertarRefMulti').html(htmlMulti);
+    
+    // Calcular el tamaño del lote
+    calcularTamanioLoteMulti();
+    
+    console.log('Datos de multipresentación cargados');
+  }
+  
+  // Función para calcular el tamaño del lote
+  function calcularTamanioLoteMulti() {
+    var total = 0;
+    $('[id^="cantidadMulti"]').each(function() {
+      var cantidad = parseFloat($(this).val()) || 0;
+      total += cantidad;
+    });
+    
+    $('#sumaMulti').val(total.toFixed(2));
+    console.log('Total calculado:', total);
+  }
   
   $('#tablaBatch tbody').on('click', '.link-comentario', function (e) {
     e.preventDefault();
