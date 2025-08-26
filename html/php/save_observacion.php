@@ -18,9 +18,9 @@ try {
         throw new Exception('La observación debe tener al menos 20 caracteres');
     }
     
-    // Insertar la nueva observación con solo los campos requeridos
-    $sql = "INSERT INTO observaciones_batch_inactivos (observacion, batch, pedido, fecha_registro) 
-            VALUES (:observacion, :batch, '0', CURDATE())";
+    // Insertar la nueva observación con todos los campos requeridos
+    $sql = "INSERT INTO observaciones_batch_inactivos (observacion, batch, pedido, referencia, fecha_registro) 
+            VALUES (:observacion, :batch, '0', '', CURDATE())";
     
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':observacion', $observacion, PDO::PARAM_STR);
