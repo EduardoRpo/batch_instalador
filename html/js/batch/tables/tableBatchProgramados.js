@@ -122,7 +122,16 @@ $(document).ready(function () {
     ajax: {
       url: '/html/php/batch_fetch.php',
       type: 'POST',
-      dataSrc: 'data',
+      dataSrc: function(json) {
+        console.log('=== DEBUG DATATABLES ===');
+        console.log('JSON recibido:', json);
+        console.log('Data count:', json.data ? json.data.length : 'No data');
+        if (json.data && json.data.length > 0) {
+          console.log('First row:', json.data[0]);
+          console.log('First row columns:', json.data[0].length);
+        }
+        return json.data || [];
+      }
     },
     order: [[1, 'desc']],
     columns: [
@@ -133,6 +142,10 @@ $(document).ready(function () {
       {
         title: 'Batch',
         data: 1,
+        render: function(data, type, row) {
+          console.log('Columna Batch - data:', data, 'row:', row);
+          return data;
+        }
       },
       /* {
                     title: 'No Orden',
@@ -143,14 +156,26 @@ $(document).ready(function () {
         title: 'Referencia',
         data: 2,
         className: 'uniqueClassName',
+        render: function(data, type, row) {
+          console.log('Columna Referencia - data:', data, 'row:', row);
+          return data;
+        }
       },
       {
         title: 'Producto',
         data: 3,
+        render: function(data, type, row) {
+          console.log('Columna Producto - data:', data, 'row:', row);
+          return data;
+        }
       },
       {
         title: 'No Lote',
         data: 4,
+        render: function(data, type, row) {
+          console.log('Columna No Lote - data:', data, 'row:', row);
+          return data;
+        }
       },
       {
         title: 'Tamaño Lote',

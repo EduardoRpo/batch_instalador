@@ -98,6 +98,16 @@ try {
         'data' => $formatted_data
     ];
     
+    // Log de depuración
+    error_log("=== DEBUG BATCH_FETCH.PHP ===");
+    error_log("Total records: " . $total_records);
+    error_log("Formatted data count: " . count($formatted_data));
+    if (count($formatted_data) > 0) {
+        error_log("First row columns: " . count($formatted_data[0]));
+        error_log("First row data: " . json_encode($formatted_data[0]));
+    }
+    error_log("Response: " . json_encode($response));
+    
     echo json_encode($response);
     
 } catch (PDOException $e) {
