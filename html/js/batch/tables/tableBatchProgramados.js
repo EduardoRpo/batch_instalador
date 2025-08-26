@@ -21,7 +21,7 @@ $(document).ready(function () {
       url: '/html/php/batch_fetch.php',
       type: 'POST',
       dataSrc: function(json) {
-        console.log('=== DEBUG DATATABLES ===');
+        console.log('=== DEBUG DATATABLES PROGRAMADOS ===');
         console.log('JSON recibido:', json);
         console.log('Data count:', json.data ? json.data.length : 'No data');
         if (json.data && json.data.length > 0) {
