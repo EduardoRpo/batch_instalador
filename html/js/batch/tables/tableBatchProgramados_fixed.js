@@ -225,10 +225,61 @@ $(document).ready(function () {
     // Aquí iría la lógica para editar multipresentación
   });
   
-  $('#tablaBatch tbody').on('click', '.link-comentario', function () {
-    var id = $(this).attr('id');
-    console.log('Agregar observaciones:', id);
-    // Aquí iría la lógica para agregar observaciones
+  $('#tablaBatch tbody').on('click', '.link-comentario', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    var id_batch = $(this).attr('id');
+    console.log('Cargando observaciones para batch:', id_batch);
+    
+    // Mostrar el modal
+    $('#m_observaciones').modal('show');
+    
+    // Limpiar el contenido anterior
+    $('#comment').val('');
+    $('#tBody').empty();
+    
+    // Cargar las observaciones específicas del batch
+    $.ajax({
+      url: '/html/php/get_observaciones.php',
+      type: 'POST',
+      data: { id_batch: id_batch },
+      dataType: 'json',
+      success: function(response) {
+        console.log('Observaciones cargadas:', response);
+        
+        if (response.success && response.data.length > 0) {
+          // Llenar la tabla con las observaciones
+          var tbody = $('#tBody');
+          tbody.empty();
+          
+          response.data.forEach(function(obs) {
+            var row = `
+              <tr>
+                <td>${obs.fecha_registro}</td>
+                <td>${obs.observacion}</td>
+              </tr>
+            `;
+            tbody.append(row);
+          });
+        } else {
+          // Mostrar mensaje si no hay observaciones
+          $('#tBody').html(`
+            <tr>
+              <td colspan="2" class="text-center">No hay observaciones registradas para este batch</td>
+            </tr>
+          `);
+        }
+      },
+      error: function(xhr, status, error) {
+        console.error('Error al cargar observaciones:', error);
+        $('#tBody').html(`
+          <tr>
+            <td colspan="2" class="text-center text-danger">Error al cargar las observaciones</td>
+          </tr>
+        `);
+      }
+    });
   });
   
   console.log('=== TABLA PROGRAMADOS CONFIGURADA ===');
