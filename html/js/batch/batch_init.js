@@ -10,7 +10,9 @@ $(document).ready(function() {
 });
 
 function initializeBatchTables() {
-    // Tabla principal de Batch (Programados)
+    // Tabla principal de Batch (Programados) - COMENTADA para evitar conflictos
+    // La tabla se inicializa en tableBatchProgramados_fixed.js
+    /*
     if ($('#tablaBatch').length) {
         tablaBatch = $('#tablaBatch').DataTable({
             pageLength: 50,
@@ -91,6 +93,7 @@ function initializeBatchTables() {
             ],
         });
     }
+    */
 
     // Tabla de Batch Cerrados
     if ($('#tablaBatchCerrados').length) {
