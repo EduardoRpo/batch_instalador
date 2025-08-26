@@ -1,6 +1,12 @@
 $(document).ready(function () {
   btnDeleteMulti = true;
   
+  // Verificar si la tabla ya está inicializada
+  if ($.fn.DataTable.isDataTable('#tablaBatch')) {
+    console.log('Tabla tablaBatch ya está inicializada, destruyendo...');
+    $('#tablaBatch').DataTable().destroy();
+  }
+  
   // Configuración de DataTables para tabla de batch programados
   tablaBatchProgramados = $('#tablaBatch').DataTable({
     pageLength: 50,
