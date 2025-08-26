@@ -19,8 +19,8 @@ try {
     }
     
     // Insertar la nueva observación con solo los campos requeridos
-    $sql = "INSERT INTO observaciones_batch_inactivos (observacion, batch, fecha_registro) 
-            VALUES (:observacion, :batch, CURDATE())";
+    $sql = "INSERT INTO observaciones_batch_inactivos (observacion, batch, pedido, fecha_registro) 
+            VALUES (:observacion, :batch, '0', CURDATE())";
     
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':observacion', $observacion, PDO::PARAM_STR);
