@@ -253,7 +253,8 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
       error_log('🔍 saveBatchFromPlaneacion - Datos preparados para BatchDao: ' . json_encode($batchData));
       
       // Crear el batch usando el DAO
-      $resp = $batchDao->saveBatch($batchData, []);
+      $multi = [['cantidadunidades' => null]]; // Estructura esperada por el DAO
+      $resp = $batchDao->saveBatch($batchData, $multi);
       
       if ($resp === null) {
         // Obtener el ID del batch creado
