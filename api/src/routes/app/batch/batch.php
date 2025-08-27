@@ -163,9 +163,10 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
   
   // Log para debugging
   error_log('🔍 saveBatchFromPlaneacion - Iniciando');
+  error_log('🔍 saveBatchFromPlaneacion - Raw POST data: ' . file_get_contents('php://input'));
   
   $dataBatch = $request->getParsedBody();
-  error_log('🔍 saveBatchFromPlaneacion - Datos recibidos: ' . json_encode($dataBatch));
+  error_log('🔍 saveBatchFromPlaneacion - Datos recibidos (parsed): ' . json_encode($dataBatch));
   
   if (!isset($dataBatch['data']) || empty($dataBatch['data'])) {
     $resp = array('error' => true, 'message' => 'No hay datos para procesar');
@@ -175,6 +176,7 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
   }
   
   $pedidos = $dataBatch['data'];
+  error_log('🔍 saveBatchFromPlaneacion - Array de pedidos extraído: ' . json_encode($pedidos));
   $fechaProgramacion = null;
   
   // Extraer la fecha de programación del último elemento
@@ -193,6 +195,7 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
   
   for ($i = 0; $i < sizeof($pedidos); $i++) {
     $pedido = $pedidos[$i];
+    error_log('🔍 saveBatchFromPlaneacion - Procesando elemento ' . $i . ': ' . json_encode($pedido));
     
     // Saltar elementos que solo contienen fecha
     if (isset($pedido['date']) && count($pedido) == 1) {
@@ -201,47 +204,81 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
     }
     
     // Verificar que tenga los campos necesarios
-    if (!isset($pedido['granel']) || !isset($pedido['producto']) || !isset($pedido['tamanio_lote'])) {
-      $errores[] = 'Datos incompletos en pedido ' . $i . ': ' . json_encode($pedido);
-      error_log('❌ saveBatchFromPlaneacion - Datos incompletos en pedido ' . $i . ': ' . json_encode($pedido));
+    if (!isset($pedido['granel'])) {
+      $errores[] = 'Campo granel no encontrado en pedido ' . $i . ': ' . json_encode($pedido);
+      error_log('❌ saveBatchFromPlaneacion - Campo granel no encontrado en pedido ' . $i . ': ' . json_encode($pedido));
       continue;
     }
     
-    // Preparar datos del batch
-    $batchData = [
-      'id_producto' => $pedido['granel'],
-      'numero_lote' => generarNumeroLote($pedido['granel']),
-      'tamano_lote' => $pedido['tamanio_lote'],
-      'fecha_creacion' => date('Y-m-d'),
-      'fecha_programacion' => $fechaProgramacion,
-      'estado' => 2, // Estado inicial para programados
-      'ref' => $pedido['granel']
-    ];
-    
-    error_log('🔍 saveBatchFromPlaneacion - Creando batch: ' . json_encode($batchData));
-    
-    // Crear el batch
-    $resp = $batchDao->saveBatch($batchData, []);
-    
-    if ($resp === null) {
-      // Obtener el ID del batch creado
-      $id_batch = $ultimoBatchDao->ultimoBatchCreado();
+    // Obtener información del producto desde la base de datos
+    try {
+      $conn = new PDO("mysql:dbname=batch_record;host=mariadb_pro", "root", "S@m4r@_2025!");
+      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       
-      if ($id_batch) {
-        // Crear control de firmas
-        $resp = $controlFirmasDao->saveControlFirmas($id_batch['id']);
+      // Buscar el producto por referencia
+      $sql = "SELECT referencia, nombre_referencia FROM producto WHERE referencia = :granel";
+      $stmt = $conn->prepare($sql);
+      $stmt->bindParam(':granel', $pedido['granel'], PDO::PARAM_STR);
+      $stmt->execute();
+      $producto = $stmt->fetch(PDO::FETCH_ASSOC);
+      
+      if (!$producto) {
+        $errores[] = 'Producto no encontrado para granel: ' . $pedido['granel'];
+        error_log('❌ saveBatchFromPlaneacion - Producto no encontrado para granel: ' . $pedido['granel']);
+        continue;
+      }
+      
+      // Calcular el tamaño del lote basado en tanque y cantidades
+      $tanque = isset($pedido['tanque']) ? floatval($pedido['tanque']) : 0;
+      $cantidades = isset($pedido['cantidades']) ? intval($pedido['cantidades']) : 1;
+      $tamanio_lote = $tanque * $cantidades;
+      
+      error_log('🔍 saveBatchFromPlaneacion - Producto encontrado: ' . json_encode($producto));
+      error_log('🔍 saveBatchFromPlaneacion - Tamaño de lote calculado: ' . $tamanio_lote . ' (tanque: ' . $tanque . ' * cantidades: ' . $cantidades . ')');
+      
+      // Preparar datos del batch
+      $batchData = [
+        'id_producto' => $pedido['granel'],
+        'numero_lote' => generarNumeroLote($pedido['granel']),
+        'tamano_lote' => $tamanio_lote,
+        'fecha_creacion' => date('Y-m-d'),
+        'fecha_programacion' => $fechaProgramacion,
+        'estado' => 2, // Estado inicial para programados
+        'ref' => $pedido['granel']
+      ];
+      
+      error_log('🔍 saveBatchFromPlaneacion - Creando batch: ' . json_encode($batchData));
+      
+      // Crear el batch
+      $resp = $batchDao->saveBatch($batchData, []);
+      
+      if ($resp === null) {
+        // Obtener el ID del batch creado
+        $id_batch = $ultimoBatchDao->ultimoBatchCreado();
         
-        if ($resp === null) {
-          $batchesCreados++;
-          error_log('✅ saveBatchFromPlaneacion - Batch creado exitosamente: ' . $id_batch['id']);
+        if ($id_batch) {
+          // Crear control de firmas
+          $resp = $controlFirmasDao->saveControlFirmas($id_batch['id']);
+          
+          if ($resp === null) {
+            $batchesCreados++;
+            error_log('✅ saveBatchFromPlaneacion - Batch creado exitosamente: ' . $id_batch['id']);
+          } else {
+            $errores[] = 'Error al crear control de firmas para batch ' . $id_batch['id'];
+            error_log('❌ saveBatchFromPlaneacion - Error al crear control de firmas para batch ' . $id_batch['id'] . ': ' . json_encode($resp));
+          }
         } else {
-          $errores[] = 'Error al crear control de firmas para batch ' . $id_batch['id'];
+          $errores[] = 'Error al obtener ID del batch creado';
+          error_log('❌ saveBatchFromPlaneacion - Error al obtener ID del batch creado');
         }
       } else {
-        $errores[] = 'Error al obtener ID del batch creado';
+        $errores[] = 'Error al crear batch: ' . json_encode($resp);
+        error_log('❌ saveBatchFromPlaneacion - Error al crear batch: ' . json_encode($resp));
       }
-    } else {
-      $errores[] = 'Error al crear batch: ' . $resp;
+      
+    } catch (PDOException $e) {
+      $errores[] = 'Error de base de datos: ' . $e->getMessage();
+      error_log('❌ saveBatchFromPlaneacion - Error de base de datos: ' . $e->getMessage());
     }
   }
   
