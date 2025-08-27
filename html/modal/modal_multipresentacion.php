@@ -21,9 +21,9 @@
         <table class="table table-borderless text-center">
           <thead>
             <tr>
-              <th scope="col">Multipresentacion</th>
-              <th scope="col">Cantidad</th>
-              <th scope="col">Tamaño</th>
+              <th scope="col">Referencia</th>
+              <th scope="col">Unidades</th>
+              <th scope="col">Peso</th>
               <th></th>
             </tr>
           </thead>
