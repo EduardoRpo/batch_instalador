@@ -402,22 +402,24 @@ $(document).ready(function () {
   // Función para calcular el tamaño del lote
   function calcularTamanioLoteMulti() {
     var total = 0;
+    console.log('=== CALCULANDO TOTAL MULTIPRESENTACIÓN ===');
+    
     $('[id^="cantidadMulti"]').each(function() {
       var cantidad = parseFloat($(this).val()) || 0;
       var index = $(this).attr('id').replace('cantidadMulti', '');
       
-      // Calcular el tamaño basado en la cantidad (factor más realista)
-      // Para que 150 unidades = 4.46 kg (como en la primera imagen)
-      var tamanio = cantidad * 0.0297; // 150 * 0.0297 = 4.455 ≈ 4.46
+      // Obtener el valor de tamanio (que ahora es el total de la BD)
+      var tamanioInput = $('#tamanioloteMulti' + index);
+      var tamanio = parseFloat(tamanioInput.val()) || 0;
       
-      // Actualizar el campo de tamaño
-      $('#tamanioloteMulti' + index).val(tamanio.toFixed(2));
+      console.log('Fila ' + index + ': Cantidad=' + cantidad + ', Tamaño=' + tamanio);
       
+      // Sumar el tamaño al total
       total += tamanio;
     });
     
-    $('#sumaMulti').val(total.toFixed(3)); // 3 decimales como en la primera imagen
     console.log('Total calculado:', total.toFixed(3));
+    $('#sumaMulti').val(total.toFixed(3)); // 3 decimales como en la primera imagen
   }
   
   $('#tablaBatch tbody').on('click', '.link-comentario', function (e) {
