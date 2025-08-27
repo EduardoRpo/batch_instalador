@@ -242,9 +242,10 @@ $(document).ready(function () {
     console.log('Datos completos de la fila:', rowData);
     console.log('Número de columnas en la fila:', rowData.length);
     
-    var referencia = rowData[2]; // La referencia está en la posición 2 del array
-    console.log('Referencia extraída (posición 2):', referencia);
-    console.log('Tipo de referencia:', typeof referencia);
+    var codigoReferencia = rowData[2]; // El código de referencia está en la posición 2
+    var nombreProducto = rowData[3]; // El nombre del producto está en la posición 3
+    console.log('Código de referencia:', codigoReferencia);
+    console.log('Nombre del producto:', nombreProducto);
     
     // Verificar si el modal existe
     var modalExists = $('#Modal_Multipresentacion').length > 0;
@@ -256,7 +257,7 @@ $(document).ready(function () {
       console.log('Modal abierto correctamente');
       
       // Cargar datos de multipresentación para este batch
-      cargarMultipresentacionBatch(id_batch, referencia);
+      cargarMultipresentacionBatch(id_batch, codigoReferencia, nombreProducto);
     } else {
       console.error('ERROR: Modal Modal_Multipresentacion no encontrado en el DOM');
     }
@@ -265,10 +266,11 @@ $(document).ready(function () {
   });
   
   // Función para cargar datos de multipresentación
-  function cargarMultipresentacionBatch(id_batch, referencia) {
+  function cargarMultipresentacionBatch(id_batch, codigoReferencia, nombreProducto) {
     console.log('=== CARGANDO MULTIPRESENTACIÓN ===');
     console.log('Batch ID:', id_batch);
-    console.log('Referencia:', referencia);
+    console.log('Código de referencia:', codigoReferencia);
+    console.log('Nombre del producto:', nombreProducto);
     
     // Limpiar el contenido anterior del modal
     $('#insertarRefMulti').empty();
@@ -279,7 +281,7 @@ $(document).ready(function () {
         <td>
           <select class="form-control" id="MultiReferencia1">
             <option value="">Seleccione una referencia</option>
-            <option value="${referencia}" selected>${referencia}</option>
+            <option value="${codigoReferencia}" selected>${nombreProducto}</option>
           </select>
         </td>
         <td>
