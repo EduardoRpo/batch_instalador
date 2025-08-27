@@ -60,16 +60,14 @@ try {
     error_log("Total registros antes de paginación: " . $total_records);
     error_log("Parámetros de paginación - Start: $start, Length: $length");
     
-    // Aplicar paginación
-    $data = array_slice($data, $start, $length);
-    
-    error_log("Registros después de paginación (start: $start, length: $length): " . count($data));
-    
-    // Verificar si la paginación está funcionando correctamente
+    // Verificar si se quieren todos los registros
     if ($length == -1) {
         error_log("Length es -1, mostrando todos los registros");
-        $data = $stmt->fetchAll(PDO::FETCH_ASSOC); // Recargar todos los datos
-        error_log("Registros totales cargados: " . count($data));
+        // No aplicar paginación, usar todos los datos
+    } else {
+        // Aplicar paginación solo si length no es -1
+        $data = array_slice($data, $start, $length);
+        error_log("Registros después de paginación (start: $start, length: $length): " . count($data));
     }
     
     // Formatear datos para DataTables
