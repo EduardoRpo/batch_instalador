@@ -393,10 +393,13 @@ $(document).ready(function () {
           $('#tblCalcCapacidadProgramada').DataTable().destroy();
         }
         $('#tblCalcCapacidadProgramadaBody').empty();
-        api = '/api/batchPlaneados';
+        api = '/html/php/batch_planeados_fetch.php';
         getDataPlaneacion();
-        api = '/api/batch';
-        getDataProgramados();
+        api = '/html/php/batch_fetch.php';
+        // Recargar la tabla de batch programados
+        if ($.fn.DataTable.isDataTable('#tablaBatch')) {
+          tablaBatch.ajax.reload();
+        }
       },
     });
   };
