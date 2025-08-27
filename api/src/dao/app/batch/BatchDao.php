@@ -204,8 +204,8 @@ class BatchDao extends estadoInicialDao
         /* Inserta y crea batch */
 
         $connection = Connection::getInstance()->getConnection();
-        $stmt = $connection->prepare("INSERT INTO batch (pedido, fecha_creacion, fecha_programacion, fecha_actual, numero_orden, numero_lote, tamano_lote, lote_presentacion, unidad_lote, estado, id_producto) 
-                                      VALUES(:pedido, :fecha_creacion, :fecha_programacion, :fecha_actual, :numero_orden, :numero_lote, :tamano_lote, :lote_presentacion, :unidad_lote, :estado, :id_producto)");
+        $stmt = $connection->prepare("INSERT INTO batch (pedido, fecha_creacion, fecha_programacion, fecha_actual, numero_orden, numero_lote, tamano_lote, lote_presentacion, unidad_lote, estado, id_producto, multi) 
+                                      VALUES(:pedido, :fecha_creacion, :fecha_programacion, :fecha_actual, :numero_orden, :numero_lote, :tamano_lote, :lote_presentacion, :unidad_lote, :estado, :id_producto, :multi)");
         $stmt->execute([
             'pedido' => $pedido,
             'fecha_creacion' => $fecha,
@@ -217,7 +217,8 @@ class BatchDao extends estadoInicialDao
             'lote_presentacion' => $tamanolotepresentacion,
             'unidad_lote' => $unidadesxlote,
             'estado' => $estado,
-            'id_producto' => $referencia
+            'id_producto' => $referencia,
+            'multi' => 0
         ]);
     }
 
