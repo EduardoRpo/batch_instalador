@@ -269,13 +269,14 @@ $(document).ready(function () {
   function cargarMultipresentacionBatch(id_batch, codigoReferencia, nombreProducto) {
     console.log('=== CARGANDO MULTIPRESENTACIÓN ===');
     console.log('Batch ID:', id_batch);
-    console.log('Código de referencia:', codigoReferencia);
-    console.log('Nombre del producto:', nombreProducto);
+    console.log('Código de referencia del batch:', codigoReferencia);
+    console.log('Nombre del producto del batch:', nombreProducto);
     
     // Limpiar el contenido anterior del modal
     $('#insertarRefMulti').empty();
     
     // Cargar datos reales de multipresentación desde la base de datos
+    // Solo usar el id_batch, no los datos del batch
     $.ajax({
       url: '/html/php/get_multipresentacion.php',
       type: 'POST',
@@ -285,7 +286,7 @@ $(document).ready(function () {
         console.log('Datos de multipresentación recibidos:', response);
         
         if (response.success && response.data.length > 0) {
-          // Cargar datos reales
+          // Cargar datos reales de multipresentacion
           response.data.forEach(function(multi, index) {
             var htmlMulti = `
               <tr>
@@ -315,14 +316,14 @@ $(document).ready(function () {
           calcularTamanioLoteMulti();
           
         } else {
-          // Si no hay datos, crear uno por defecto con referencia completa
-          var referenciaCompleta = nombreProducto + ' - ' + codigoReferencia;
+          // Si no hay datos en multipresentacion, crear uno por defecto
+          console.log('No hay datos en multipresentacion para este batch, creando por defecto');
           var htmlMulti = `
             <tr>
               <td>
                 <select class="form-control" id="MultiReferencia1">
                   <option value="">Seleccione una referencia</option>
-                  <option value="${codigoReferencia}" selected>${referenciaCompleta}</option>
+                  <option value="${codigoReferencia}" selected>${nombreProducto}</option>
                 </select>
               </td>
               <td>
@@ -349,14 +350,13 @@ $(document).ready(function () {
       error: function(xhr, status, error) {
         console.error('Error al cargar multipresentación:', error);
         
-        // En caso de error, crear uno por defecto con referencia completa
-        var referenciaCompleta = nombreProducto + ' - ' + codigoReferencia;
+        // En caso de error, crear uno por defecto
         var htmlMulti = `
           <tr>
             <td>
               <select class="form-control" id="MultiReferencia1">
                 <option value="">Seleccione una referencia</option>
-                <option value="${codigoReferencia}" selected>${referenciaCompleta}</option>
+                <option value="${codigoReferencia}" selected>${nombreProducto}</option>
               </select>
             </td>
             <td>
