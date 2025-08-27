@@ -21,9 +21,9 @@
         <table class="table table-borderless text-center">
           <thead>
             <tr>
-              <th scope="col">Referencia</th>
+              <th scope="col">Presentación</th>
               <th scope="col">Unidades</th>
-              <th scope="col">Peso</th>
+              <th scope="col">Kg Granel</th>
               <th></th>
             </tr>
           </thead>
