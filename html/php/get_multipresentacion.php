@@ -20,7 +20,7 @@ try {
     // Consulta corregida usando mul.total en lugar de mul.tamanio
     $sql = "SELECT mul.id, mul.referencia, mul.cantidad, mul.total,
                    prod.nombre_referencia,
-                   CONCAT(prod.nombre_referencia, ' - ', mul.referencia) as referencia_completa
+                   CONCAT(mul.referencia, ' - ', prod.nombre_referencia) as referencia_completa
             FROM multipresentacion mul 
             INNER JOIN producto prod ON mul.referencia = prod.referencia 
             WHERE mul.id_batch = :id_batch 
