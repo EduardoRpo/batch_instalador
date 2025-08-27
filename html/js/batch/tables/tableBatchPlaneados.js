@@ -50,7 +50,15 @@ $(document).ready(function () {
     console.log('🚀 loadTblCapacidadPlaneada - Iniciando con datos:', data);
     semana = sessionStorage.getItem('semana');
     console.log('🔍 loadTblCapacidadPlaneada - Semana de sessionStorage:', semana);
-    let capacidadPlaneada = calcTamanioLoteBySemana(data, parseInt(semana));
+    
+    // Extraer solo el array de datos si se recibe un objeto de respuesta
+    let datosParaCalcular = data;
+    if (data && typeof data === 'object' && data.data && Array.isArray(data.data)) {
+      datosParaCalcular = data.data;
+      console.log('🔍 loadTblCapacidadPlaneada - Extrayendo data.data, registros:', datosParaCalcular.length);
+    }
+    
+    let capacidadPlaneada = calcTamanioLoteBySemana(datosParaCalcular, parseInt(semana));
     console.log('🔍 loadTblCapacidadPlaneada - Capacidad calculada:', capacidadPlaneada);
 
     let rowPlaneados = document.getElementById('tblCalcCapacidadPlaneadaBody');
