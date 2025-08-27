@@ -236,20 +236,23 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
       error_log('🔍 saveBatchFromPlaneacion - Producto encontrado: ' . json_encode($producto));
       error_log('🔍 saveBatchFromPlaneacion - Tamaño de lote calculado: ' . $tamanio_lote . ' (tanque: ' . $tanque . ' * cantidades: ' . $cantidades . ')');
       
-      // Preparar datos del batch
+      // Preparar datos del batch en el formato que espera el BatchDao
       $batchData = [
-        'id_producto' => $pedido['granel'],
-        'numero_lote' => generarNumeroLote($pedido['granel']),
-        'tamano_lote' => $tamanio_lote,
-        'fecha_creacion' => date('Y-m-d'),
-        'fecha_programacion' => $fechaProgramacion,
-        'estado' => 2, // Estado inicial para programados
-        'ref' => $pedido['granel']
+        'granel' => $pedido['granel'],
+        'ref' => $pedido['granel'],
+        'tamanio_lote' => $tamanio_lote,
+        'lote' => $tamanio_lote,
+        'presentacion' => 1,
+        'programacion' => $fechaProgramacion,
+        'date' => $fechaProgramacion,
+        'fecha_planeacion' => date('Y-m-d'),
+        'cantidad_acumulada' => $tamanio_lote,
+        'pedido' => 1
       ];
       
-      error_log('🔍 saveBatchFromPlaneacion - Creando batch: ' . json_encode($batchData));
+      error_log('🔍 saveBatchFromPlaneacion - Datos preparados para BatchDao: ' . json_encode($batchData));
       
-      // Crear el batch
+      // Crear el batch usando el DAO
       $resp = $batchDao->saveBatch($batchData, []);
       
       if ($resp === null) {
