@@ -21,6 +21,9 @@ $(document).ready(function () {
     order: [[1, 'desc']], // Ordenar por Batch descendente
     processing: true,
     serverSide: false, // Cambiar a true si quieres procesamiento del lado del servidor
+    info: true, // Mostrar información de paginación
+    paging: true, // Habilitar paginación
+    pagingType: 'full_numbers', // Tipo de paginación completa
 
     ajax: {
       url: '/html/php/batch_fetch.php',
@@ -233,10 +236,26 @@ $(document).ready(function () {
       }
     ],
     
-    // Eventos de la tabla
-    initComplete: function () {
+    // Callback cuando la tabla se inicializa completamente
+    initComplete: function(settings, json) {
       console.log('=== TABLA PROGRAMADOS INICIALIZADA ===');
-      console.log('Total filas cargadas:', this.api().rows().count());
+      console.log('Settings:', settings);
+      console.log('JSON response:', json);
+      console.log('Total filas cargadas:', this.api().data().count());
+      console.log('Configuración de paginación:');
+      console.log('- pageLength:', settings.oInit.pageLength);
+      console.log('- lengthMenu:', settings.oInit.lengthMenu);
+      console.log('- paging:', settings.oInit.paging);
+      console.log('- info:', settings.oInit.info);
+      
+      // Verificar que la información de paginación se muestre correctamente
+      var info = this.api().page.info();
+      console.log('Información de página actual:');
+      console.log('- Página actual:', info.page);
+      console.log('- Registros por página:', info.length);
+      console.log('- Total de registros:', info.recordsTotal);
+      console.log('- Registros mostrados:', info.recordsDisplay);
+      console.log('- Páginas totales:', info.pages);
     }
   });
   
