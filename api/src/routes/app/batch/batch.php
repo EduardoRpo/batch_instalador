@@ -191,11 +191,19 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
   $batchesCreados = 0;
   $errores = [];
   
-  for ($i = 0; $i < sizeof($pedidos) - 1; $i++) { // -1 para excluir el elemento con la fecha
+  for ($i = 0; $i < sizeof($pedidos); $i++) {
     $pedido = $pedidos[$i];
     
+    // Saltar elementos que solo contienen fecha
+    if (isset($pedido['date']) && count($pedido) == 1) {
+      error_log('🔍 saveBatchFromPlaneacion - Saltando elemento con fecha: ' . json_encode($pedido));
+      continue;
+    }
+    
+    // Verificar que tenga los campos necesarios
     if (!isset($pedido['granel']) || !isset($pedido['producto']) || !isset($pedido['tamanio_lote'])) {
-      $errores[] = 'Datos incompletos en pedido ' . $i;
+      $errores[] = 'Datos incompletos en pedido ' . $i . ': ' . json_encode($pedido);
+      error_log('❌ saveBatchFromPlaneacion - Datos incompletos en pedido ' . $i . ': ' . json_encode($pedido));
       continue;
     }
     
