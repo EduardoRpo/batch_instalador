@@ -18,7 +18,27 @@ try {
     error_log("Length: " . $length);
     error_log("Search: " . $search);
     
-    // Consulta principal con conteo de observaciones
+    // Consulta para contar total de registros (sin paginación)
+    $count_sql = "SELECT COUNT(*) as total
+                  FROM batch 
+                  INNER JOIN producto p ON p.referencia = batch.id_producto
+                  WHERE batch.estado >= 2";
+    
+    if (!empty($search)) {
+        $count_sql .= " AND (batch.numero_lote LIKE :search OR p.nombre_referencia LIKE :search OR batch.id_producto LIKE :search)";
+    }
+    
+    $count_stmt = $conn->prepare($count_sql);
+    if (!empty($search)) {
+        $searchParam = "%$search%";
+        $count_stmt->bindParam(':search', $searchParam, PDO::PARAM_STR);
+    }
+    $count_stmt->execute();
+    $total_records = $count_stmt->fetch(PDO::FETCH_ASSOC)['total'];
+    
+    error_log("Total registros en BD: " . $total_records);
+    
+    // Consulta principal con paginación
     $sql = "SELECT batch.id_batch, batch.id_producto as referencia, 
                    p.nombre_referencia, batch.numero_lote, batch.tamano_lote,
                    WEEK(batch.fecha_creacion) as semana_creacion, 
@@ -41,6 +61,11 @@ try {
     
     $sql .= " ORDER BY batch.id_batch DESC";
     
+    // Agregar LIMIT para paginación
+    if ($length > 0) {
+        $sql .= " LIMIT :start, :length";
+    }
+    
     error_log("SQL Query: " . $sql);
     
     // Preparar y ejecutar la consulta
@@ -51,24 +76,15 @@ try {
         $stmt->bindParam(':search', $searchParam, PDO::PARAM_STR);
     }
     
+    if ($length > 0) {
+        $stmt->bindParam(':start', $start, PDO::PARAM_INT);
+        $stmt->bindParam(':length', $length, PDO::PARAM_INT);
+    }
+    
     $stmt->execute();
     $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-    // Contar total de registros
-    $total_records = count($data);
-    
-    error_log("Total registros antes de paginación: " . $total_records);
-    error_log("Parámetros de paginación - Start: $start, Length: $length");
-    
-    // Verificar si se quieren todos los registros
-    if ($length == -1) {
-        error_log("Length es -1, mostrando todos los registros");
-        // No aplicar paginación, usar todos los datos
-    } else {
-        // Aplicar paginación solo si length no es -1
-        $data = array_slice($data, $start, $length);
-        error_log("Registros después de paginación (start: $start, length: $length): " . count($data));
-    }
+    error_log("Registros obtenidos después de LIMIT: " . count($data));
     
     // Formatear datos para DataTables
     $formatted_data = [];
@@ -109,7 +125,6 @@ try {
     error_log("Response recordsTotal: " . $response['recordsTotal']);
     error_log("Response recordsFiltered: " . $response['recordsFiltered']);
     error_log("Response data count: " . count($response['data']));
-    error_log("Response completa: " . json_encode($response));
     
     echo json_encode($response);
     

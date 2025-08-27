@@ -20,7 +20,7 @@ $(document).ready(function () {
     oSearch: { bSmart: false },
     order: [[1, 'desc']], // Ordenar por Batch descendente
     processing: true,
-    serverSide: false, // Cambiar a true si quieres procesamiento del lado del servidor
+    serverSide: true, // Cambiar a true para procesamiento del lado del servidor
     info: true, // Mostrar información de paginación
     paging: true, // Habilitar paginación
     pagingType: 'full_numbers', // Tipo de paginación completa
