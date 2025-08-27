@@ -277,17 +277,29 @@ $(document).ready(function () {
     
     // Cargar datos reales de multipresentación desde la base de datos
     // Solo usar el id_batch, no los datos del batch
+    console.log('Haciendo AJAX a /html/php/get_multipresentacion.php con id_batch:', id_batch);
+    
     $.ajax({
       url: '/html/php/get_multipresentacion.php',
       type: 'POST',
       data: { id_batch: id_batch },
       dataType: 'json',
       success: function(response) {
-        console.log('Datos de multipresentación recibidos:', response);
+        console.log('=== RESPUESTA AJAX MULTIPRESENTACIÓN ===');
+        console.log('Respuesta completa:', response);
+        console.log('Success:', response.success);
+        console.log('Data length:', response.data ? response.data.length : 'No data');
         
         if (response.success && response.data.length > 0) {
+          console.log('Hay datos de multipresentacion, cargando...');
           // Cargar datos reales de multipresentacion
           response.data.forEach(function(multi, index) {
+            console.log('Procesando multipresentacion', index + 1, ':', multi);
+            console.log('Referencia:', multi.referencia);
+            console.log('Referencia completa:', multi.referencia_completa);
+            console.log('Cantidad:', multi.cantidad);
+            console.log('Tamaño:', multi.tamanio);
+            
             var htmlMulti = `
               <tr>
                 <td>
@@ -309,6 +321,7 @@ $(document).ready(function () {
                 </td>
               </tr>
             `;
+            console.log('HTML generado:', htmlMulti);
             $('#insertarRefMulti').append(htmlMulti);
           });
           
@@ -316,8 +329,8 @@ $(document).ready(function () {
           calcularTamanioLoteMulti();
           
         } else {
-          // Si no hay datos en multipresentacion, crear uno por defecto
           console.log('No hay datos en multipresentacion para este batch, creando por defecto');
+          console.log('Usando datos del batch como fallback');
           var htmlMulti = `
             <tr>
               <td>
@@ -339,6 +352,7 @@ $(document).ready(function () {
               </td>
             </tr>
           `;
+          console.log('HTML por defecto generado:', htmlMulti);
           $('#insertarRefMulti').html(htmlMulti);
           
           // Calcular el tamaño del lote inicial
@@ -348,9 +362,14 @@ $(document).ready(function () {
         console.log('Datos de multipresentación cargados');
       },
       error: function(xhr, status, error) {
-        console.error('Error al cargar multipresentación:', error);
+        console.error('=== ERROR AJAX MULTIPRESENTACIÓN ===');
+        console.error('Status:', status);
+        console.error('Error:', error);
+        console.error('Response Text:', xhr.responseText);
+        console.error('Status Code:', xhr.status);
         
         // En caso de error, crear uno por defecto
+        console.log('Creando datos por defecto debido al error');
         var htmlMulti = `
           <tr>
             <td>

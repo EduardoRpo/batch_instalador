@@ -4,9 +4,14 @@ require_once __DIR__ . '/../../conexion.php';
 // Configurar headers para JSON
 header('Content-Type: application/json');
 
+// Log para debugging
+error_log("=== GET_MULTIPRESENTACION.PHP INICIADO ===");
+
 try {
     // Obtener el ID del batch desde la petición
     $id_batch = $_POST['id_batch'] ?? $_GET['id_batch'] ?? null;
+    
+    error_log("ID de batch recibido: " . $id_batch);
     
     if (!$id_batch) {
         throw new Exception('ID de batch no proporcionado');
@@ -21,15 +26,21 @@ try {
             WHERE mul.id_batch = :id_batch 
             ORDER BY mul.id ASC";
     
+    error_log("SQL Query: " . $sql);
+    error_log("Parámetro id_batch: " . $id_batch);
+    
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':id_batch', $id_batch, PDO::PARAM_INT);
     $stmt->execute();
     
     $multipresentaciones = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
+    error_log("Registros encontrados: " . count($multipresentaciones));
+    
     // Formatear datos para el modal
     $formatted_data = [];
     foreach ($multipresentaciones as $multi) {
+        error_log("Procesando registro: " . json_encode($multi));
         $formatted_data[] = [
             'id' => $multi['id'],
             'referencia' => $multi['referencia'],
@@ -48,9 +59,11 @@ try {
         'total' => count($formatted_data)
     ];
     
+    error_log("Respuesta final: " . json_encode($response));
     echo json_encode($response);
     
 } catch (Exception $e) {
+    error_log("ERROR en get_multipresentacion.php: " . $e->getMessage());
     // Respuesta de error
     $response = [
         'success' => false,
