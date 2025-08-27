@@ -11,6 +11,7 @@ $(document).ready(function () {
   // Definir tablaBatch como variable global para que otros archivos puedan acceder
   tablaBatch = $('#tablaBatch').DataTable({
     pageLength: 50,
+    lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todos"]],
     responsive: true,
     scrollCollapse: true,
     language: {
@@ -18,10 +19,20 @@ $(document).ready(function () {
     },
     oSearch: { bSmart: false },
     order: [[1, 'desc']], // Ordenar por Batch descendente
+    processing: true,
+    serverSide: false, // Cambiar a true si quieres procesamiento del lado del servidor
 
     ajax: {
       url: '/html/php/batch_fetch.php',
       type: 'POST',
+      data: function(d) {
+        console.log('=== PARÁMETROS ENVIADOS A BATCH_FETCH.PHP ===');
+        console.log('Start:', d.start);
+        console.log('Length:', d.length);
+        console.log('Draw:', d.draw);
+        console.log('Search:', d.search);
+        return d;
+      },
       dataSrc: function(json) {
         console.log('=== DATOS RECIBIDOS PROGRAMADOS ===');
         console.log('Total registros:', json.recordsTotal);

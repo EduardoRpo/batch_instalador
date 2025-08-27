@@ -7,9 +7,16 @@ header('Content-Type: application/json');
 try {
     // Obtener parámetros de DataTables
     $draw = $_POST['draw'] ?? 1;
-    $start = $_POST['start'] ?? 0;
-    $length = $_POST['length'] ?? 10;
+    $start = intval($_POST['start'] ?? 0);
+    $length = intval($_POST['length'] ?? 10);
     $search = $_POST['search']['value'] ?? '';
+    
+    // Log para debugging
+    error_log("=== BATCH_FETCH.PHP PARÁMETROS ===");
+    error_log("Draw: " . $draw);
+    error_log("Start: " . $start);
+    error_log("Length: " . $length);
+    error_log("Search: " . $search);
     
     // Consulta principal con conteo de observaciones
     $sql = "SELECT batch.id_batch, batch.id_producto as referencia, 
@@ -34,6 +41,8 @@ try {
     
     $sql .= " ORDER BY batch.id_batch DESC";
     
+    error_log("SQL Query: " . $sql);
+    
     // Preparar y ejecutar la consulta
     $stmt = $conn->prepare($sql);
     
@@ -48,8 +57,12 @@ try {
     // Contar total de registros
     $total_records = count($data);
     
+    error_log("Total registros antes de paginación: " . $total_records);
+    
     // Aplicar paginación
     $data = array_slice($data, $start, $length);
+    
+    error_log("Registros después de paginación (start: $start, length: $length): " . count($data));
     
     // Formatear datos para DataTables
     $formatted_data = [];
@@ -87,15 +100,12 @@ try {
     error_log("=== DEBUG BATCH_FETCH.PHP ===");
     error_log("Total records: " . $total_records);
     error_log("Formatted data count: " . count($formatted_data));
-    if (count($formatted_data) > 0) {
-        error_log("First row columns: " . count($formatted_data[0]));
-        error_log("First row data: " . json_encode($formatted_data[0]));
-    }
     error_log("Response: " . json_encode($response));
     
     echo json_encode($response);
     
 } catch (PDOException $e) {
+    error_log("ERROR en batch_fetch.php: " . $e->getMessage());
     // En caso de error, devolver respuesta de error
     $response = [
         'draw' => $draw ?? 1,
