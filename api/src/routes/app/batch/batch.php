@@ -158,6 +158,120 @@ $app->post('/saveBatch', function (Request $request, Response $response, $args) 
   return $response->withHeader('Content-Type', 'application/json');
 });
 
+$app->post('/saveBatchFromPlaneacion', function (Request $request, Response $response, $args) use ($batchDao, $ultimoBatchDao, $tanquesDao, $controlFirmasDao, $multiDao, $EMPedidosRegistroDao, $observacionesDao, $planPrePlaneadosDao) {
+  session_start();
+  
+  // Log para debugging
+  error_log('🔍 saveBatchFromPlaneacion - Iniciando');
+  
+  $dataBatch = $request->getParsedBody();
+  error_log('🔍 saveBatchFromPlaneacion - Datos recibidos: ' . json_encode($dataBatch));
+  
+  if (!isset($dataBatch['data']) || empty($dataBatch['data'])) {
+    $resp = array('error' => true, 'message' => 'No hay datos para procesar');
+    error_log('❌ saveBatchFromPlaneacion - Error: No hay datos');
+    $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
+    return $response->withHeader('Content-Type', 'application/json');
+  }
+  
+  $pedidos = $dataBatch['data'];
+  $fechaProgramacion = null;
+  
+  // Extraer la fecha de programación del último elemento
+  foreach ($pedidos as $pedido) {
+    if (isset($pedido['date'])) {
+      $fechaProgramacion = $pedido['date'];
+      break;
+    }
+  }
+  
+  error_log('🔍 saveBatchFromPlaneacion - Fecha de programación: ' . $fechaProgramacion);
+  
+  // Procesar cada pedido y crear el batch
+  $batchesCreados = 0;
+  $errores = [];
+  
+  for ($i = 0; $i < sizeof($pedidos) - 1; $i++) { // -1 para excluir el elemento con la fecha
+    $pedido = $pedidos[$i];
+    
+    if (!isset($pedido['granel']) || !isset($pedido['producto']) || !isset($pedido['tamanio_lote'])) {
+      $errores[] = 'Datos incompletos en pedido ' . $i;
+      continue;
+    }
+    
+    // Preparar datos del batch
+    $batchData = [
+      'id_producto' => $pedido['granel'],
+      'numero_lote' => generarNumeroLote($pedido['granel']),
+      'tamano_lote' => $pedido['tamanio_lote'],
+      'fecha_creacion' => date('Y-m-d'),
+      'fecha_programacion' => $fechaProgramacion,
+      'estado' => 2, // Estado inicial para programados
+      'ref' => $pedido['granel']
+    ];
+    
+    error_log('🔍 saveBatchFromPlaneacion - Creando batch: ' . json_encode($batchData));
+    
+    // Crear el batch
+    $resp = $batchDao->saveBatch($batchData, []);
+    
+    if ($resp === null) {
+      // Obtener el ID del batch creado
+      $id_batch = $ultimoBatchDao->ultimoBatchCreado();
+      
+      if ($id_batch) {
+        // Crear control de firmas
+        $resp = $controlFirmasDao->saveControlFirmas($id_batch['id']);
+        
+        if ($resp === null) {
+          $batchesCreados++;
+          error_log('✅ saveBatchFromPlaneacion - Batch creado exitosamente: ' . $id_batch['id']);
+        } else {
+          $errores[] = 'Error al crear control de firmas para batch ' . $id_batch['id'];
+        }
+      } else {
+        $errores[] = 'Error al obtener ID del batch creado';
+      }
+    } else {
+      $errores[] = 'Error al crear batch: ' . $resp;
+    }
+  }
+  
+  // Preparar respuesta
+  if (empty($errores) && $batchesCreados > 0) {
+    $resp = array('success' => true, 'message' => $batchesCreados . ' batch(s) creado(s) correctamente');
+    error_log('✅ saveBatchFromPlaneacion - Respuesta de éxito: ' . json_encode($resp));
+  } else {
+    $resp = array('error' => true, 'message' => 'Errores al crear batches: ' . implode(', ', $errores));
+    error_log('❌ saveBatchFromPlaneacion - Respuesta de error: ' . json_encode($resp));
+  }
+  
+  $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
+  return $response->withHeader('Content-Type', 'application/json');
+});
+
+// Función auxiliar para generar número de lote
+function generarNumeroLote($granel) {
+  $prefijo = '';
+  if (strpos($granel, 'Granel-') === 0) {
+    $numero = substr($granel, 7);
+    if (is_numeric($numero)) {
+      if ($numero < 100) {
+        $prefijo = 'LQ';
+      } elseif ($numero < 500) {
+        $prefijo = 'SM';
+      } else {
+        $prefijo = 'VT';
+      }
+    }
+  }
+  
+  $fecha = date('dmy');
+  $sufijo = str_pad(rand(1, 999), 3, '0', STR_PAD_LEFT);
+  
+  return $prefijo . $fecha . $sufijo;
+}
+
 $app->post('/updateBatch', function (Request $request, Response $response, $args) use ($batchDao, $tanquesDao) {
   $dataBatch = $request->getParsedBody();
 

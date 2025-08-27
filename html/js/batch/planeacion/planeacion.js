@@ -376,7 +376,7 @@ $(document).ready(function () {
   savePlaneados = (data) => {
     $.ajax({
       type: 'POST',
-      url: '/api/saveBatch',
+      url: '/api/saveBatchFromPlaneacion',
       data: { data: data },
       success: function (data) {
         message(data);
