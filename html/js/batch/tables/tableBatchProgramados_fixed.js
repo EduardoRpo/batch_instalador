@@ -24,6 +24,8 @@ $(document).ready(function () {
     info: true, // Mostrar información de paginación
     paging: true, // Habilitar paginación
     pagingType: 'full_numbers', // Tipo de paginación completa
+    deferRender: false, // No diferir el renderizado
+    destroy: true, // Permitir reinicialización
 
     ajax: {
       url: '/html/php/batch_fetch.php',
@@ -35,6 +37,18 @@ $(document).ready(function () {
         console.log('Draw:', d.draw);
         console.log('Search:', d.search);
         console.log('Parámetros completos:', d);
+        
+        // Verificar si length está siendo sobrescrito
+        console.log('=== VERIFICACIÓN DE LENGTH ===');
+        console.log('Length original:', d.length);
+        console.log('pageLength configurado:', tablaBatch ? tablaBatch.page.len() : 'No disponible');
+        
+        // Forzar el length si es necesario
+        if (d.length === 10 && tablaBatch) {
+          console.log('Forzando length a pageLength configurado');
+          d.length = tablaBatch.page.len();
+        }
+        
         return d;
       },
       dataSrc: function(json) {
