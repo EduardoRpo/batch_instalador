@@ -292,7 +292,7 @@ $(document).ready(function () {
                 <td>
                   <select class="form-control" id="MultiReferencia${index + 1}">
                     <option value="">Seleccione una referencia</option>
-                    <option value="${multi.referencia}" selected>${multi.referencia}</option>
+                    <option value="${multi.referencia}" selected>${multi.referencia_completa}</option>
                   </select>
                 </td>
                 <td>
@@ -315,13 +315,14 @@ $(document).ready(function () {
           calcularTamanioLoteMulti();
           
         } else {
-          // Si no hay datos, crear uno por defecto
+          // Si no hay datos, crear uno por defecto con referencia completa
+          var referenciaCompleta = nombreProducto + ' - ' + codigoReferencia;
           var htmlMulti = `
             <tr>
               <td>
                 <select class="form-control" id="MultiReferencia1">
                   <option value="">Seleccione una referencia</option>
-                  <option value="${codigoReferencia}" selected>${nombreProducto}</option>
+                  <option value="${codigoReferencia}" selected>${referenciaCompleta}</option>
                 </select>
               </td>
               <td>
@@ -348,13 +349,14 @@ $(document).ready(function () {
       error: function(xhr, status, error) {
         console.error('Error al cargar multipresentación:', error);
         
-        // En caso de error, crear uno por defecto
+        // En caso de error, crear uno por defecto con referencia completa
+        var referenciaCompleta = nombreProducto + ' - ' + codigoReferencia;
         var htmlMulti = `
           <tr>
             <td>
               <select class="form-control" id="MultiReferencia1">
                 <option value="">Seleccione una referencia</option>
-                <option value="${codigoReferencia}" selected>${nombreProducto}</option>
+                <option value="${codigoReferencia}" selected>${referenciaCompleta}</option>
               </select>
             </td>
             <td>

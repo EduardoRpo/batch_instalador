@@ -12,11 +12,14 @@ try {
         throw new Exception('ID de batch no proporcionado');
     }
     
-    // Consulta para obtener multipresentaciones del batch
-    $sql = "SELECT id, referencia, cantidad, tamanio, total 
-            FROM multipresentacion 
-            WHERE id_batch = :id_batch 
-            ORDER BY id ASC";
+    // Consulta para obtener multipresentaciones del batch con INNER JOIN a producto
+    $sql = "SELECT mul.id, mul.referencia, mul.cantidad, mul.tamanio, mul.total,
+                   prod.nombre_referencia,
+                   CONCAT(prod.nombre_referencia, ' - ', mul.referencia) as referencia_completa
+            FROM multipresentacion mul 
+            INNER JOIN producto prod ON mul.referencia = prod.referencia 
+            WHERE mul.id_batch = :id_batch 
+            ORDER BY mul.id ASC";
     
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':id_batch', $id_batch, PDO::PARAM_INT);
@@ -30,6 +33,8 @@ try {
         $formatted_data[] = [
             'id' => $multi['id'],
             'referencia' => $multi['referencia'],
+            'nombre_referencia' => $multi['nombre_referencia'],
+            'referencia_completa' => $multi['referencia_completa'],
             'cantidad' => intval($multi['cantidad']),
             'tamanio' => floatval($multi['tamanio']),
             'total' => floatval($multi['total'])
