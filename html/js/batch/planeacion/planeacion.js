@@ -374,12 +374,16 @@ $(document).ready(function () {
   };
 
   savePlaneados = (data) => {
+    console.log('🚀 savePlaneados - Iniciando con datos:', data);
+    console.log('🔍 savePlaneados - URL del endpoint: /api/saveBatchFromPlaneacion');
+    
     $.ajax({
       type: 'POST',
       url: '/api/saveBatchFromPlaneacion',
       data: { data: data },
-      success: function (data) {
-        message(data);
+      success: function (response) {
+        console.log('✅ savePlaneados - Respuesta exitosa:', response);
+        message(response);
         unique = [];
         dataPlaneacion = [];
         dataTanquesPlaneacion = [];
@@ -401,6 +405,15 @@ $(document).ready(function () {
           tablaBatch.ajax.reload();
         }
       },
+      error: function(xhr, status, error) {
+        console.error('❌ savePlaneados - Error en AJAX:', error);
+        console.error('❌ savePlaneados - Status:', status);
+        console.error('❌ savePlaneados - Response Text:', xhr.responseText);
+        console.error('❌ savePlaneados - Status Code:', xhr.status);
+        
+        // Mostrar mensaje de error al usuario
+        alertify.error('Error al crear el batch: ' + error);
+      }
     });
   };
 });
