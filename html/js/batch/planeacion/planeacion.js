@@ -376,6 +376,10 @@ $(document).ready(function () {
   savePlaneados = (data) => {
     console.log('🚀 savePlaneados - Iniciando con datos:', data);
     console.log('🔍 savePlaneados - URL del endpoint: /api/saveBatchFromPlaneacion');
+    console.log('🔍 savePlaneados - Estructura detallada de datos:');
+    data.forEach((item, index) => {
+      console.log(`  Elemento ${index}:`, JSON.stringify(item, null, 2));
+    });
     
     $.ajax({
       type: 'POST',
