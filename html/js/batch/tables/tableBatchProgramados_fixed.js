@@ -275,35 +275,107 @@ $(document).ready(function () {
     // Limpiar el contenido anterior del modal
     $('#insertarRefMulti').empty();
     
-    // Crear un elemento de multipresentación con la estructura correcta (tabla)
-    var htmlMulti = `
-      <tr>
-        <td>
-          <select class="form-control" id="MultiReferencia1">
-            <option value="">Seleccione una referencia</option>
-            <option value="${codigoReferencia}" selected>${nombreProducto}</option>
-          </select>
-        </td>
-        <td>
-          <input type="number" class="form-control" id="cantidadMulti1" placeholder="Cantidad" value="2000" onchange="calcularTamanioLoteMulti()">
-        </td>
-        <td>
-          <input type="number" class="form-control" id="tamanioloteMulti1" placeholder="Tamaño" readonly>
-        </td>
-        <td>
-          <button type="button" class="btn btn-danger btn-sm" onclick="eliminarMultipresentacion(this)">
-            <i class="fa fa-times"></i>
-          </button>
-        </td>
-      </tr>
-    `;
-    
-    $('#insertarRefMulti').html(htmlMulti);
-    
-    // Calcular el tamaño del lote inicial
-    calcularTamanioLoteMulti();
-    
-    console.log('Datos de multipresentación cargados');
+    // Cargar datos reales de multipresentación desde la base de datos
+    $.ajax({
+      url: '/html/php/get_multipresentacion.php',
+      type: 'POST',
+      data: { id_batch: id_batch },
+      dataType: 'json',
+      success: function(response) {
+        console.log('Datos de multipresentación recibidos:', response);
+        
+        if (response.success && response.data.length > 0) {
+          // Cargar datos reales
+          response.data.forEach(function(multi, index) {
+            var htmlMulti = `
+              <tr>
+                <td>
+                  <select class="form-control" id="MultiReferencia${index + 1}">
+                    <option value="">Seleccione una referencia</option>
+                    <option value="${multi.referencia}" selected>${multi.referencia}</option>
+                  </select>
+                </td>
+                <td>
+                  <input type="number" class="form-control" id="cantidadMulti${index + 1}" placeholder="Cantidad" value="${multi.cantidad}" onchange="calcularTamanioLoteMulti()">
+                </td>
+                <td>
+                  <input type="number" class="form-control" id="tamanioloteMulti${index + 1}" placeholder="Tamaño" value="${multi.tamanio}" readonly>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-danger btn-sm" onclick="eliminarMultipresentacion(this)">
+                    <i class="fa fa-times"></i>
+                  </button>
+                </td>
+              </tr>
+            `;
+            $('#insertarRefMulti').append(htmlMulti);
+          });
+          
+          // Calcular el total
+          calcularTamanioLoteMulti();
+          
+        } else {
+          // Si no hay datos, crear uno por defecto
+          var htmlMulti = `
+            <tr>
+              <td>
+                <select class="form-control" id="MultiReferencia1">
+                  <option value="">Seleccione una referencia</option>
+                  <option value="${codigoReferencia}" selected>${nombreProducto}</option>
+                </select>
+              </td>
+              <td>
+                <input type="number" class="form-control" id="cantidadMulti1" placeholder="Cantidad" value="150" onchange="calcularTamanioLoteMulti()">
+              </td>
+              <td>
+                <input type="number" class="form-control" id="tamanioloteMulti1" placeholder="Tamaño" readonly>
+              </td>
+              <td>
+                <button type="button" class="btn btn-danger btn-sm" onclick="eliminarMultipresentacion(this)">
+                  <i class="fa fa-times"></i>
+                </button>
+              </td>
+            </tr>
+          `;
+          $('#insertarRefMulti').html(htmlMulti);
+          
+          // Calcular el tamaño del lote inicial
+          calcularTamanioLoteMulti();
+        }
+        
+        console.log('Datos de multipresentación cargados');
+      },
+      error: function(xhr, status, error) {
+        console.error('Error al cargar multipresentación:', error);
+        
+        // En caso de error, crear uno por defecto
+        var htmlMulti = `
+          <tr>
+            <td>
+              <select class="form-control" id="MultiReferencia1">
+                <option value="">Seleccione una referencia</option>
+                <option value="${codigoReferencia}" selected>${nombreProducto}</option>
+              </select>
+            </td>
+            <td>
+              <input type="number" class="form-control" id="cantidadMulti1" placeholder="Cantidad" value="150" onchange="calcularTamanioLoteMulti()">
+            </td>
+            <td>
+              <input type="number" class="form-control" id="tamanioloteMulti1" placeholder="Tamaño" readonly>
+            </td>
+            <td>
+              <button type="button" class="btn btn-danger btn-sm" onclick="eliminarMultipresentacion(this)">
+                <i class="fa fa-times"></i>
+              </button>
+            </td>
+          </tr>
+        `;
+        $('#insertarRefMulti').html(htmlMulti);
+        
+        // Calcular el tamaño del lote inicial
+        calcularTamanioLoteMulti();
+      }
+    });
   }
   
   // Función para calcular el tamaño del lote
@@ -313,9 +385,9 @@ $(document).ready(function () {
       var cantidad = parseFloat($(this).val()) || 0;
       var index = $(this).attr('id').replace('cantidadMulti', '');
       
-      // Calcular el tamaño basado en la cantidad (simulación de cálculo)
-      // En un caso real, esto vendría de la base de datos o fórmula específica
-      var tamanio = cantidad * 0.06237; // Factor de conversión aproximado
+      // Calcular el tamaño basado en la cantidad (factor más realista)
+      // Para que 150 unidades = 4.46 kg (como en la primera imagen)
+      var tamanio = cantidad * 0.0297; // 150 * 0.0297 = 4.455 ≈ 4.46
       
       // Actualizar el campo de tamaño
       $('#tamanioloteMulti' + index).val(tamanio.toFixed(2));
@@ -323,8 +395,8 @@ $(document).ready(function () {
       total += tamanio;
     });
     
-    $('#sumaMulti').val(total.toFixed(2));
-    console.log('Total calculado:', total.toFixed(2));
+    $('#sumaMulti').val(total.toFixed(3)); // 3 decimales como en la primera imagen
+    console.log('Total calculado:', total.toFixed(3));
   }
   
   $('#tablaBatch tbody').on('click', '.link-comentario', function (e) {
