@@ -58,11 +58,19 @@ try {
     $total_records = count($data);
     
     error_log("Total registros antes de paginación: " . $total_records);
+    error_log("Parámetros de paginación - Start: $start, Length: $length");
     
     // Aplicar paginación
     $data = array_slice($data, $start, $length);
     
     error_log("Registros después de paginación (start: $start, length: $length): " . count($data));
+    
+    // Verificar si la paginación está funcionando correctamente
+    if ($length == -1) {
+        error_log("Length es -1, mostrando todos los registros");
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC); // Recargar todos los datos
+        error_log("Registros totales cargados: " . count($data));
+    }
     
     // Formatear datos para DataTables
     $formatted_data = [];
@@ -100,7 +108,10 @@ try {
     error_log("=== DEBUG BATCH_FETCH.PHP ===");
     error_log("Total records: " . $total_records);
     error_log("Formatted data count: " . count($formatted_data));
-    error_log("Response: " . json_encode($response));
+    error_log("Response recordsTotal: " . $response['recordsTotal']);
+    error_log("Response recordsFiltered: " . $response['recordsFiltered']);
+    error_log("Response data count: " . count($response['data']));
+    error_log("Response completa: " . json_encode($response));
     
     echo json_encode($response);
     

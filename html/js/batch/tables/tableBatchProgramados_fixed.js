@@ -31,16 +31,38 @@ $(document).ready(function () {
         console.log('Length:', d.length);
         console.log('Draw:', d.draw);
         console.log('Search:', d.search);
+        console.log('Parámetros completos:', d);
         return d;
       },
       dataSrc: function(json) {
         console.log('=== DATOS RECIBIDOS PROGRAMADOS ===');
-        console.log('Total registros:', json.recordsTotal);
-        console.log('Datos recibidos:', json.data ? json.data.length : 0);
+        console.log('Respuesta completa:', json);
+        console.log('RecordsTotal:', json.recordsTotal);
+        console.log('RecordsFiltered:', json.recordsFiltered);
+        console.log('Draw:', json.draw);
+        console.log('Data length:', json.data ? json.data.length : 0);
+        console.log('Total registros en BD:', json.recordsTotal);
+        console.log('Registros filtrados:', json.recordsFiltered);
+        
         if (json.data && json.data.length > 0) {
           console.log('Primera fila:', json.data[0]);
+          console.log('Última fila:', json.data[json.data.length - 1]);
         }
+        
+        // Verificar si hay error
+        if (json.error) {
+          console.error('ERROR en respuesta:', json.error);
+        }
+        
         return json.data || [];
+      },
+      error: function(xhr, status, error) {
+        console.error('=== ERROR AJAX BATCH_FETCH ===');
+        console.error('Status:', status);
+        console.error('Error:', error);
+        console.error('Response Text:', xhr.responseText);
+        console.error('Status Code:', xhr.status);
+        console.error('XHR Object:', xhr);
       }
     },
     
