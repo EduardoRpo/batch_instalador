@@ -206,7 +206,8 @@ class BatchDao extends estadoInicialDao
         $connection = Connection::getInstance()->getConnection();
         $stmt = $connection->prepare("INSERT INTO batch (pedido, fecha_creacion, fecha_programacion, fecha_actual, numero_orden, numero_lote, tamano_lote, lote_presentacion, unidad_lote, estado, id_producto, multi) 
                                       VALUES(:pedido, :fecha_creacion, :fecha_programacion, :fecha_actual, :numero_orden, :numero_lote, :tamano_lote, :lote_presentacion, :unidad_lote, :estado, :id_producto, :multi)");
-        $stmt->execute([
+        
+        $params = [
             'pedido' => $pedido,
             'fecha_creacion' => $fecha,
             'fecha_programacion' => $fechaprogramacion,
@@ -219,7 +220,11 @@ class BatchDao extends estadoInicialDao
             'estado' => $estado,
             'id_producto' => $referencia,
             'multi' => 0
-        ]);
+        ];
+        
+        error_log('🔍 BatchDao - Valores que se van a insertar: ' . json_encode($params));
+        
+        $stmt->execute($params);
     }
 
     public function updateBatch($dataBatch)
