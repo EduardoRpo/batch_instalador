@@ -40,24 +40,26 @@ class PlaneacionDao
 
     public function setDataPedidos($dataPedidos)
     {
-        // Consolidar referencias
-        $dataPedidosReferencias = array();
+        // Consolidar por referencia Y granel (mantener separados productos con referencias diferentes)
+        $dataPedidosGranel = array();
 
         foreach ($dataPedidos as $t) {
             $repeat = false;
-            for ($i = 0; $i < count($dataPedidosReferencias); $i++) {
-                if (($dataPedidosReferencias[$i]['referencia'] ?? null) == ($t['referencia'] ?? null)) {
-                    $dataPedidosReferencias[$i]['id'] = "{$dataPedidosReferencias[$i]['id']} - {$t['id']}";
-                    $dataPedidosReferencias[$i]['numPedido'] = "{$dataPedidosReferencias[$i]['numPedido']} - {$t['numPedido']}";
-                    $dataPedidosReferencias[$i]['tamanio_lote'] += ($t['tamanio_lote'] ?? 0);
-                    $dataPedidosReferencias[$i]['cantidad_acumulada'] += ($t['cantidad_acumulada'] ?? 0);
-                    $dataPedidosReferencias[$i]['fecha_insumo'] = "{$dataPedidosReferencias[$i]['fecha_insumo']} - {$t['fecha_insumo']}";
+            for ($i = 0; $i < count($dataPedidosGranel); $i++) {
+                // Solo unificar si tienen la MISMA referencia Y el MISMO granel
+                if (($dataPedidosGranel[$i]['referencia'] ?? null) == ($t['referencia'] ?? null) && 
+                    ($dataPedidosGranel[$i]['granel'] ?? null) == ($t['granel'] ?? null)) {
+                    $dataPedidosGranel[$i]['id'] = "{$dataPedidosGranel[$i]['id']} - {$t['id']}";
+                    $dataPedidosGranel[$i]['numPedido'] = "{$dataPedidosGranel[$i]['numPedido']} - {$t['numPedido']}";
+                    $dataPedidosGranel[$i]['tamanio_lote'] += ($t['tamanio_lote'] ?? 0);
+                    $dataPedidosGranel[$i]['cantidad_acumulada'] += ($t['cantidad_acumulada'] ?? 0);
+                    $dataPedidosGranel[$i]['fecha_insumo'] = "{$dataPedidosGranel[$i]['fecha_insumo']} - {$t['fecha_insumo']}";
                     $repeat = true;
                     break;
                 }
             }
             if ($repeat == false)
-                $dataPedidosReferencias[] = array(
+                $dataPedidosGranel[] = array(
                     'id' => $t['id'] ?? null,
                     'granel' => $t['granel'] ?? null,
                     'numPedido' => $t['numPedido'] ?? null,
@@ -71,36 +73,22 @@ class PlaneacionDao
                 );
         }
 
-        // Consolidad graneles
-        $dataPedidosGranel = array();
-
-        foreach ($dataPedidosReferencias as $t) {
-            $repeat = false;
-            for ($i = 0; $i < count($dataPedidosGranel); $i++) {
-                if ($dataPedidosGranel[$i]['granel'] == $t['granel']) {
-                    $dataPedidosGranel[$i]['cantidad_acumulada'] += $t['cantidad_acumulada'];
-                    $dataPedidosGranel[$i]['tamanio_lote'] += $t['tamanio_lote'];
-                    $repeat = true;
-                    break;
-                }
-            }
-            if ($repeat == false)
-                $dataPedidosGranel[] = array(
-                    'granel' => $t['granel'],
-                    'producto' => $t['producto'],
-                    'cantidad_acumulada' => $t['cantidad_acumulada'],
-                    'tamanio_lote' => $t['tamanio_lote'],
-                    'fecha_planeacion' => $t['fecha_planeacion']
-                );
-        }
-
         for ($i = 0; $i < sizeof($dataPedidosGranel); $i++) {
-            for ($j = 0; $j < sizeof($dataPedidosReferencias); $j++)
-                if ($dataPedidosGranel[$i]['granel'] == $dataPedidosReferencias[$j]['granel'])
-                    //Adiciona la multipresentacion al Granel
-                    $dataPedidosGranel[$i]['multi'][$j] = $dataPedidosReferencias[$j];
-            // Restablecer llaves de variable $dataPedidosGranel
-            $dataPedidosGranel[$i]['multi'] = array_values($dataPedidosGranel[$i]['multi']);
+            // Buscar la multipresentación para este granel y referencia específica
+            $connection = Connection::getInstance()->getConnection();
+            $stmt = $connection->prepare("SELECT mul.referencia, mul.cantidad, mul.total, p.nombre_referencia 
+                                        FROM multipresentacion mul 
+                                        INNER JOIN producto p ON mul.referencia = p.referencia 
+                                        WHERE mul.id_batch = :id_batch AND mul.referencia = :referencia");
+            $stmt->execute([
+                'id_batch' => $dataPedidosGranel[$i]['id'],
+                'referencia' => $dataPedidosGranel[$i]['referencia']
+            ]);
+            $multipresentacion = $stmt->fetchAll($connection::FETCH_ASSOC);
+            
+            if (!empty($multipresentacion)) {
+                $dataPedidosGranel[$i]['multipresentacion'] = $multipresentacion;
+            }
         }
 
         return $dataPedidosGranel;
