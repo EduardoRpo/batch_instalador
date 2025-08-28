@@ -228,13 +228,12 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
         continue;
       }
       
-      // Calcular el tamaño del lote basado en tanque y cantidades
-      $tanque = isset($pedido['tanque']) ? floatval($pedido['tanque']) : 0;
-      $cantidades = isset($pedido['cantidades']) ? intval($pedido['cantidades']) : 1;
-      $tamanio_lote = $tanque * $cantidades;
+      // Usar directamente los valores del modal
+      $cantidad = isset($pedido['cantidades']) ? intval($pedido['cantidades']) : 0;
+      $tamanio_lote = isset($pedido['tanque']) ? floatval($pedido['tanque']) : 0;
       
       error_log('🔍 saveBatchFromPlaneacion - Producto encontrado: ' . json_encode($producto));
-      error_log('🔍 saveBatchFromPlaneacion - Tamaño de lote calculado: ' . $tamanio_lote . ' (tanque: ' . $tanque . ' * cantidades: ' . $cantidades . ')');
+      error_log('🔍 saveBatchFromPlaneacion - Valores del modal - Cantidad: ' . $cantidad . ', Tamaño: ' . $tamanio_lote);
       
       // Preparar datos del batch en el formato que espera el BatchDao
       $batchData = [
@@ -246,7 +245,7 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
         'programacion' => $fechaProgramacion,
         'date' => $fechaProgramacion,
         'fecha_planeacion' => date('Y-m-d'),
-        'cantidad_acumulada' => $tamanio_lote,
+        'cantidad_acumulada' => $cantidad,
         'pedido' => 1
       ];
       
