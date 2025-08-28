@@ -266,8 +266,31 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
           $resp = $controlFirmasDao->saveControlFirmas($id_batch['id']);
           
           if ($resp === null) {
-            $batchesCreados++;
-            error_log('✅ saveBatchFromPlaneacion - Batch creado exitosamente: ' . $id_batch['id']);
+            // Crear registros en batch_tanques
+            $tanque = isset($pedido['tanque']) ? intval($pedido['tanque']) : 0;
+            $cantidad_tanques = isset($pedido['cantidades']) ? intval($pedido['cantidades']) : 1;
+            
+            error_log('🔍 saveBatchFromPlaneacion - Creando registros en batch_tanques para batch ' . $id_batch['id']);
+            error_log('🔍 saveBatchFromPlaneacion - Tanque: ' . $tanque . ', Cantidad: ' . $cantidad_tanques);
+            
+            try {
+              // Crear múltiples registros según la cantidad de tanques
+              for ($j = 0; $j < $cantidad_tanques; $j++) {
+                $stmt = $connection->prepare("INSERT INTO batch_tanques(tanque, cantidad, id_batch) VALUES(:tanque, :cantidad, :id_batch)");
+                $stmt->execute([
+                  'tanque' => $tanque,
+                  'cantidad' => 1, // Cada registro individual tiene cantidad 1
+                  'id_batch' => $id_batch['id']
+                ]);
+                error_log('✅ saveBatchFromPlaneacion - Registro de tanque creado: tanque=' . $tanque . ', id_batch=' . $id_batch['id']);
+              }
+              
+              $batchesCreados++;
+              error_log('✅ saveBatchFromPlaneacion - Batch y tanques creados exitosamente: ' . $id_batch['id']);
+            } catch (PDOException $e) {
+              $errores[] = 'Error al crear registros de tanques para batch ' . $id_batch['id'] . ': ' . $e->getMessage();
+              error_log('❌ saveBatchFromPlaneacion - Error al crear registros de tanques: ' . $e->getMessage());
+            }
           } else {
             $errores[] = 'Error al crear control de firmas para batch ' . $id_batch['id'];
             error_log('❌ saveBatchFromPlaneacion - Error al crear control de firmas para batch ' . $id_batch['id'] . ': ' . json_encode($resp));
