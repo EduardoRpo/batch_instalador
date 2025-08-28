@@ -276,12 +276,13 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
             try {
               // Crear múltiples registros según la cantidad de tanques
               for ($j = 0; $j < $cantidad_tanques; $j++) {
-                $stmt = $connection->prepare("INSERT INTO batch_tanques(tanque, cantidad, id_batch) VALUES(:tanque, :cantidad, :id_batch)");
-                $stmt->execute([
+                // Usar el TanquesDao para crear los registros
+                $tanqueData = [
                   'tanque' => $tanque,
-                  'cantidad' => 1, // Cada registro individual tiene cantidad 1
+                  'cantidades' => 1, // Cada registro individual tiene cantidad 1
                   'id_batch' => $id_batch['id']
-                ]);
+                ];
+                $tanquesDao->saveTanques($id_batch['id'], $tanqueData);
                 error_log('✅ saveBatchFromPlaneacion - Registro de tanque creado: tanque=' . $tanque . ', id_batch=' . $id_batch['id']);
               }
               
