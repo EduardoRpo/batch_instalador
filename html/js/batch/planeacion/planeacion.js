@@ -276,7 +276,8 @@ $(document).ready(function () {
                 data-cantidad="${data[i].cantidad_acumulada}" 
                 data-tamanio="${data[i].tamanio_lote}" 
                 data-granel="${data[i].granel}" 
-                data-producto="${data[i].producto}">
+                data-producto="${data[i].producto}"
+                data-pedido="${data[i].numPedido || data[i].pedido || ''}">
                 <td id="granel-${i}">${data[i].granel}</td>
                 <td>${data[i].producto}</td>
                 <td>${data[i].cantidad_acumulada}</td>

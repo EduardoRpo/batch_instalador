@@ -231,9 +231,10 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
       // Usar directamente los valores del modal
       $cantidad = isset($pedido['cantidad_acumulada']) ? intval($pedido['cantidad_acumulada']) : 0;
       $tamanio_lote = isset($pedido['tamanio_lote']) ? floatval($pedido['tamanio_lote']) : 0;
+      $pedido_valor = isset($pedido['pedido']) ? $pedido['pedido'] : '1';
       
       error_log('🔍 saveBatchFromPlaneacion - Producto encontrado: ' . json_encode($producto));
-      error_log('🔍 saveBatchFromPlaneacion - Valores del modal - Cantidad: ' . $cantidad . ', Tamaño: ' . $tamanio_lote);
+      error_log('🔍 saveBatchFromPlaneacion - Valores del modal - Cantidad: ' . $cantidad . ', Tamaño: ' . $tamanio_lote . ', Pedido: ' . $pedido_valor);
       error_log('🔍 saveBatchFromPlaneacion - Datos completos del pedido: ' . json_encode($pedido));
       
       // Preparar datos del batch en el formato que espera el BatchDao
@@ -247,7 +248,7 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
         'date' => $fechaProgramacion,
         'fecha_planeacion' => date('Y-m-d'),
         'cantidad_acumulada' => $cantidad,
-        'pedido' => 1
+        'pedido' => $pedido_valor
       ];
       
       error_log('🔍 saveBatchFromPlaneacion - Datos preparados para BatchDao: ' . json_encode($batchData));

@@ -243,27 +243,31 @@ $(document).ready(function () {
         /* Capturar datos */
         granel = $(`#granel-${i}`).html();
         
-        // Obtener los valores originales del modal desde los atributos data
-        let row = $(`#granel-${i}`).closest('tr');
-        let cantidadAcumulada = parseFloat(row.attr('data-cantidad')) || 0;
-        let tamanioLote = parseFloat(row.attr('data-tamanio')) || 0;
+                        // Obtener los valores originales del modal desde los atributos data
+                let row = $(`#granel-${i}`).closest('tr');
+                let cantidadAcumulada = parseFloat(row.attr('data-cantidad')) || 0;
+                let tamanioLote = parseFloat(row.attr('data-tamanio')) || 0;
+                let pedido = row.attr('data-pedido') || '';
         
-        console.log('🔍 crearbatch.js - Debugging valores del modal:');
-        console.log('  - i:', i);
-        console.log('  - granel:', granel);
-        console.log('  - row encontrada:', row.length > 0);
-        console.log('  - data-cantidad raw:', row.attr('data-cantidad'));
-        console.log('  - data-tamanio raw:', row.attr('data-tamanio'));
-        console.log('  - cantidadAcumulada parsed:', cantidadAcumulada);
-        console.log('  - tamanioLote parsed:', tamanioLote);
+                        console.log('🔍 crearbatch.js - Debugging valores del modal:');
+                console.log('  - i:', i);
+                console.log('  - granel:', granel);
+                console.log('  - row encontrada:', row.length > 0);
+                console.log('  - data-cantidad raw:', row.attr('data-cantidad'));
+                console.log('  - data-tamanio raw:', row.attr('data-tamanio'));
+                console.log('  - data-pedido raw:', row.attr('data-pedido'));
+                console.log('  - cantidadAcumulada parsed:', cantidadAcumulada);
+                console.log('  - tamanioLote parsed:', tamanioLote);
+                console.log('  - pedido parsed:', pedido);
 
-        dataTanques = {
-          granel: granel,
-          tanque: tanque,
-          cantidades: tamanioTanque,
-          cantidad_acumulada: cantidadAcumulada,
-          tamanio_lote: tamanioLote
-        };
+                        dataTanques = {
+                  granel: granel,
+                  tanque: tanque,
+                  cantidades: tamanioTanque,
+                  cantidad_acumulada: cantidadAcumulada,
+                  tamanio_lote: tamanioLote,
+                  pedido: pedido
+                };
         
         console.log('🔍 crearbatch.js - dataTanques creado:', dataTanques);
         dataTanquesPlaneacion.push(dataTanques);
