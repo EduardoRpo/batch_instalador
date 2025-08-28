@@ -242,11 +242,17 @@ $(document).ready(function () {
       if (idCant.includes('-')) {
         /* Capturar datos */
         granel = $(`#granel-${i}`).html();
+        
+        // Obtener los valores originales del modal
+        let cantidadAcumulada = parseFloat($(`#granel-${i}`).closest('tr').find('td:eq(2)').text()) || 0;
+        let tamanioLote = parseFloat($(`#granel-${i}`).closest('tr').find('td:eq(3)').text()) || 0;
 
         dataTanques = {
           granel: granel,
           tanque: tanque,
           cantidades: tamanioTanque,
+          cantidad_acumulada: cantidadAcumulada,
+          tamanio_lote: tamanioLote
         };
         dataTanquesPlaneacion.push(dataTanques);
       } else {

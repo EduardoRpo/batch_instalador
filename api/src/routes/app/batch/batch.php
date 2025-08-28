@@ -229,8 +229,8 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
       }
       
       // Usar directamente los valores del modal
-      $cantidad = isset($pedido['cantidades']) ? intval($pedido['cantidades']) : 0;
-      $tamanio_lote = isset($pedido['tanque']) ? floatval($pedido['tanque']) : 0;
+      $cantidad = isset($pedido['cantidad_acumulada']) ? intval($pedido['cantidad_acumulada']) : 0;
+      $tamanio_lote = isset($pedido['tamanio_lote']) ? floatval($pedido['tamanio_lote']) : 0;
       
       error_log('🔍 saveBatchFromPlaneacion - Producto encontrado: ' . json_encode($producto));
       error_log('🔍 saveBatchFromPlaneacion - Valores del modal - Cantidad: ' . $cantidad . ', Tamaño: ' . $tamanio_lote);
