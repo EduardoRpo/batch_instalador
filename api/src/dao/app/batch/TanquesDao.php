@@ -53,4 +53,26 @@ class TanquesDao
             ]);
         }
     }
+
+    public function saveMultipleTanques($id_batch, $tanque, $cantidad_tanques)
+    {
+        $connection = Connection::getInstance()->getConnection();
+        
+        try {
+            // Crear múltiples registros según la cantidad de tanques
+            for ($j = 0; $j < $cantidad_tanques; $j++) {
+                $stmt = $connection->prepare("INSERT INTO batch_tanques(tanque, cantidad, id_batch) 
+                    VALUES(:tanque, :cantidad, :id_batch)");
+                $stmt->execute([
+                    'tanque' => $tanque,
+                    'cantidad' => 1, // Cada registro individual tiene cantidad 1
+                    'id_batch' => $id_batch
+                ]);
+            }
+            return null; // Éxito
+        } catch (Exception $e) {
+            $this->logger->error('Error al crear múltiples tanques: ' . $e->getMessage());
+            return $e->getMessage();
+        }
+    }
 }

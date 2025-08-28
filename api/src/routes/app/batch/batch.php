@@ -270,20 +270,23 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
             $tanque = isset($pedido['tanque']) ? intval($pedido['tanque']) : 0;
             $cantidad_tanques = isset($pedido['cantidades']) ? intval($pedido['cantidades']) : 1;
             
+            error_log('🔍 saveBatchFromPlaneacion - Valores recibidos del frontend:');
+            error_log('  - pedido completo: ' . json_encode($pedido));
+            error_log('  - tanque extraído: ' . $tanque);
+            error_log('  - cantidades extraído: ' . $cantidad_tanques);
+            
             error_log('🔍 saveBatchFromPlaneacion - Creando registros en batch_tanques para batch ' . $id_batch['id']);
             error_log('🔍 saveBatchFromPlaneacion - Tanque: ' . $tanque . ', Cantidad: ' . $cantidad_tanques);
             
             try {
-              // Crear múltiples registros según la cantidad de tanques
-              for ($j = 0; $j < $cantidad_tanques; $j++) {
-                // Usar el TanquesDao para crear los registros
-                $tanqueData = [
-                  'tanque' => $tanque,
-                  'cantidades' => 1, // Cada registro individual tiene cantidad 1
-                  'id_batch' => $id_batch['id']
-                ];
-                $tanquesDao->saveTanques($id_batch['id'], $tanqueData);
-                error_log('✅ saveBatchFromPlaneacion - Registro de tanque creado: tanque=' . $tanque . ', id_batch=' . $id_batch['id']);
+              // Crear múltiples registros según la cantidad de tanques usando la nueva función
+              $resp_tanques = $tanquesDao->saveMultipleTanques($id_batch['id'], $tanque, $cantidad_tanques);
+              
+              if ($resp_tanques === null) {
+                error_log('✅ saveBatchFromPlaneacion - ' . $cantidad_tanques . ' registros de tanque creados exitosamente: tanque=' . $tanque . ', id_batch=' . $id_batch['id']);
+              } else {
+                $errores[] = 'Error al crear registros de tanques: ' . $resp_tanques;
+                error_log('❌ saveBatchFromPlaneacion - Error al crear registros de tanques: ' . $resp_tanques);
               }
               
               $batchesCreados++;

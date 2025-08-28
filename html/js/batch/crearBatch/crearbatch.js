@@ -269,7 +269,13 @@ $(document).ready(function () {
                   pedido: pedido
                 };
         
-        console.log('🔍 crearbatch.js - dataTanques creado:', dataTanques);
+                        console.log('🔍 crearbatch.js - dataTanques creado:', dataTanques);
+                console.log('🔍 crearbatch.js - Valores que se enviarán al backend:');
+                console.log('  - tanque:', dataTanques.tanque);
+                console.log('  - cantidades:', dataTanques.cantidades);
+                console.log('  - cantidad_acumulada:', dataTanques.cantidad_acumulada);
+                console.log('  - tamanio_lote:', dataTanques.tamanio_lote);
+                console.log('  - pedido:', dataTanques.pedido);
         dataTanquesPlaneacion.push(dataTanques);
       } else {
         $('#sumaTanques').val(tamanioTotalTanque);
