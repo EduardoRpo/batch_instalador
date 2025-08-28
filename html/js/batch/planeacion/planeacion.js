@@ -272,7 +272,11 @@ $(document).ready(function () {
       
       data[i].tamanio_lote > 2500 ? (dis = 'disabled') : (dis = '');
 
-      row.push(`<tr ${(text = color(data[i].tamanio_lote))}>
+      row.push(`<tr ${(text = color(data[i].tamanio_lote))} 
+                data-cantidad="${data[i].cantidad_acumulada}" 
+                data-tamanio="${data[i].tamanio_lote}" 
+                data-granel="${data[i].granel}" 
+                data-producto="${data[i].producto}">
                 <td id="granel-${i}">${data[i].granel}</td>
                 <td>${data[i].producto}</td>
                 <td>${data[i].cantidad_acumulada}</td>

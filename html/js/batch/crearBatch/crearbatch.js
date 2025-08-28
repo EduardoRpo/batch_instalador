@@ -243,9 +243,10 @@ $(document).ready(function () {
         /* Capturar datos */
         granel = $(`#granel-${i}`).html();
         
-        // Obtener los valores originales del modal
-        let cantidadAcumulada = parseFloat($(`#granel-${i}`).closest('tr').find('td:eq(2)').text()) || 0;
-        let tamanioLote = parseFloat($(`#granel-${i}`).closest('tr').find('td:eq(3)').text()) || 0;
+        // Obtener los valores originales del modal desde los atributos data
+        let row = $(`#granel-${i}`).closest('tr');
+        let cantidadAcumulada = parseFloat(row.attr('data-cantidad')) || 0;
+        let tamanioLote = parseFloat(row.attr('data-tamanio')) || 0;
 
         dataTanques = {
           granel: granel,
