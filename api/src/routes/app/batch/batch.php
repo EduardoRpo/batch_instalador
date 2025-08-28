@@ -234,6 +234,7 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
       
       error_log('🔍 saveBatchFromPlaneacion - Producto encontrado: ' . json_encode($producto));
       error_log('🔍 saveBatchFromPlaneacion - Valores del modal - Cantidad: ' . $cantidad . ', Tamaño: ' . $tamanio_lote);
+      error_log('🔍 saveBatchFromPlaneacion - Datos completos del pedido: ' . json_encode($pedido));
       
       // Preparar datos del batch en el formato que espera el BatchDao
       $batchData = [
