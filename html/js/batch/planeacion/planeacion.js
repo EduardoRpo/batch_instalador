@@ -310,7 +310,7 @@ $(document).ready(function () {
     alertify
       .prompt(
         'Programación',
-        'Ingrese la fecha de programación',
+        'Ingrese la Fecha de Programación Pesaje',
         '',
         function (evt, value) {
           if (!value || value == '') {
