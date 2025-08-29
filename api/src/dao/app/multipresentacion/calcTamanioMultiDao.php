@@ -19,11 +19,24 @@ class calcTamanioMultiDao
 
     public function calcularTamanioLote($data, $cantidad)
     {
+        error_log("🔍 calcTamanioMultiDao - Datos recibidos: " . json_encode($data));
+        error_log("🔍 calcTamanioMultiDao - Cantidad: $cantidad");
+        
         /* densidad es la tabla producto */
         //rendimiento
         //$rendimiento = 100 - $rendimiento_producto;
         //$tamanioLote = (((floatval($data['densidad_producto']) * floatval($data['presentacion']) * floatval($cantidad)) * (1 + $rendimiento)) * (1 + $data['ajuste'])) / 1000;
-        $tamanioLote = ((floatval($data['densidad']) * floatval($data['presentacion']) * floatval($cantidad)) * (1 + $data['ajuste'])) / 1000;
+        
+        $densidad = floatval($data['densidad']);
+        $presentacion = floatval($data['presentacion']);
+        $ajuste = floatval($data['ajuste']);
+        
+        error_log("🔍 calcTamanioMultiDao - Valores: densidad=$densidad, presentacion=$presentacion, ajuste=$ajuste");
+        
+        $tamanioLote = (($densidad * $presentacion * $cantidad) * (1 + $ajuste)) / 1000;
+        
+        error_log("🔍 calcTamanioMultiDao - Cálculo: (($densidad * $presentacion * $cantidad) * (1 + $ajuste)) / 1000 = $tamanioLote");
+        
         return $tamanioLote;
     }
 }

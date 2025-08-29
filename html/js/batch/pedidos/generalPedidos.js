@@ -92,8 +92,18 @@ alertConfirm = (data) => {
 
 // Función para agregar filas a la tabla
 addRows = (data) => {
+  console.log('🔍 addRows - Datos recibidos:', data);
+  console.log('🔍 addRows - Número de registros:', data.length);
+  
   row = [];
   for (i = 0; i < data.length; i++) {
+    console.log(`🔍 addRows - Registro ${i}:`, {
+      granel: data[i].granel,
+      producto: data[i].producto,
+      tamanio_lote: data[i].tamanio_lote,
+      cantidad: data[i].cantidad_acumulada
+    });
+    
     row.push(`<tr ${(text = color(data[i].tamanio_lote))}>
               <td>${data[i].granel}</td>
               <td>${data[i].producto}</td>

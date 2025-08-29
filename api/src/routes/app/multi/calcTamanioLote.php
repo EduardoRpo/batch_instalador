@@ -118,8 +118,14 @@ $app->post('/calcTamanioLote', function (Request $request, Response $response, $
   // Calcular el tamaño del lote
 
   for ($i = 0; $i < sizeof($dataPedidos); $i++) {
+    error_log("🔍 calcTamanioLote - Procesando pedido $i: " . json_encode($dataPedidos[$i]));
+    
     $dataMulti = $multiDao->findProductMultiByRef($dataPedidos[$i]['referencia']);
+    error_log("🔍 calcTamanioLote - Datos del producto para referencia {$dataPedidos[$i]['referencia']}: " . json_encode($dataMulti));
+    
     $tamanio_lote = $calcTamanioMultiDao->calcularTamanioLote($dataMulti, $dataPedidos[$i]['cantidad_acumulada']);
+    error_log("🔍 calcTamanioLote - Tamaño lote calculado: $tamanio_lote");
+    
     $dataPedidos[$i]['tamanio_lote'] = $tamanio_lote;
   }
 

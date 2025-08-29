@@ -77,8 +77,20 @@ $(document).ready(function () {
     console.log('🔍 Referencias en data:', data.map(item => item.referencia || item.granel));
     console.log('🔍 Datos completos:', JSON.stringify(data, null, 2));
     
+    // Log detallado de cada pedido
+    data.forEach((pedido, index) => {
+      console.log(`🔍 Pedido ${index}:`, {
+        referencia: pedido.referencia,
+        granel: pedido.granel,
+        cantidad_acumulada: pedido.cantidad_acumulada,
+        producto: pedido.producto
+      });
+    });
+    
     // Establecer bandera para evitar modal de simulación
     window.fromCalcLote = true;
+    
+    console.log('📤 Enviando datos a /api/calc-lote-directo...');
     
     $.ajax({
       url: '/api/calc-lote-directo',
@@ -89,6 +101,15 @@ $(document).ready(function () {
       success: function (resp) {
         console.log('✅ Respuesta de la API calc-lote-directo:', resp);
         console.log('🔍 Referencias en respuesta:', resp.pedidosLotes?.map(item => item.referencia || item.granel));
+        
+        // Log detallado de la respuesta
+        if (resp.pedidosLotes && Array.isArray(resp.pedidosLotes)) {
+          console.log('🔍 Tamaños de lote calculados:');
+          resp.pedidosLotes.forEach((pedido, index) => {
+            console.log(`  - ${pedido.referencia || pedido.granel}: ${pedido.tamanio_lote} kg`);
+          });
+        }
+        
         // Debug: ver qué está devolviendo la API
         // Validar que se puedan guardar pedidos
         if (resp.error) {
