@@ -164,23 +164,19 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
   // Log para debugging
   error_log('🔍 saveBatchFromPlaneacion - Iniciando');
   error_log('🔍 saveBatchFromPlaneacion - Raw POST data: ' . file_get_contents('php://input'));
-  echo "<script>console.log('🔍 Backend - saveBatchFromPlaneacion iniciando...');</script>";
   
   $dataBatch = $request->getParsedBody();
   error_log('🔍 saveBatchFromPlaneacion - Datos recibidos (parsed): ' . json_encode($dataBatch));
-  echo "<script>console.log('🔍 Backend - Datos recibidos:', " . json_encode($dataBatch) . ");</script>";
   
   if (!isset($dataBatch['data']) || empty($dataBatch['data'])) {
     $resp = array('error' => true, 'message' => 'No hay datos para procesar');
     error_log('❌ saveBatchFromPlaneacion - Error: No hay datos');
-    echo "<script>console.error('❌ Backend - No hay datos para procesar');</script>";
     $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
     return $response->withHeader('Content-Type', 'application/json');
   }
   
   $pedidos = $dataBatch['data'];
   error_log('🔍 saveBatchFromPlaneacion - Array de pedidos extraído: ' . json_encode($pedidos));
-  echo "<script>console.log('🔍 Backend - Array de pedidos:', " . json_encode($pedidos) . ");</script>";
   $fechaProgramacion = null;
   
   // Extraer la fecha de programación del último elemento
@@ -192,13 +188,12 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
   }
   
   error_log('🔍 saveBatchFromPlaneacion - Fecha de programación: ' . $fechaProgramacion);
-  echo "<script>console.log('🔍 Backend - Fecha de programación:', '$fechaProgramacion');</script>";
   
   // Procesar cada pedido y crear el batch
   $batchesCreados = 0;
   $errores = [];
   
-  echo "<script>console.log('🔍 Backend - Iniciando procesamiento de ' . sizeof($pedidos) . ' pedidos...');</script>";
+  error_log('🔍 saveBatchFromPlaneacion - Iniciando procesamiento de ' . sizeof($pedidos) . ' pedidos');
   
   for ($i = 0; $i < sizeof($pedidos); $i++) {
     $pedido = $pedidos[$i];
@@ -291,13 +286,9 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
               
               if ($resp_tanques === null) {
                 error_log("✅ saveBatchFromPlaneacion - " . $cantidad_tanques . " registros de tanque creados exitosamente: tanque=$tanque, id_batch=" . $id_batch['id']);
-                // Log para consola del navegador
-                echo "<script>console.log('✅ Backend - Tanques creados: tanque=$tanque, cantidad=$cantidad_tanques, id_batch=" . $id_batch['id'] . "');</script>";
               } else {
                 $errores[] = 'Error al crear registros de tanques: ' . $resp_tanques;
                 error_log('❌ saveBatchFromPlaneacion - Error al crear registros de tanques: ' . $resp_tanques);
-                // Log para consola del navegador
-                echo "<script>console.error('❌ Backend - Error al crear tanques: " . $resp_tanques . "');</script>";
               }
               
               $batchesCreados++;
@@ -305,8 +296,6 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
             } catch (PDOException $e) {
               $errores[] = 'Error al crear registros de tanques para batch ' . $id_batch['id'] . ': ' . $e->getMessage();
               error_log('❌ saveBatchFromPlaneacion - Error al crear registros de tanques: ' . $e->getMessage());
-              // Log para consola del navegador
-              echo "<script>console.error('❌ Backend - Error PDO: " . $e->getMessage() . "');</script>";
             }
           } else {
             $errores[] = 'Error al crear control de firmas para batch ' . $id_batch['id'];
@@ -329,7 +318,6 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
   
   // Preparar respuesta
   if (empty($errores) && $batchesCreados > 0) {
-    echo "<script>console.log('🔍 Backend - Iniciando UPDATE de plan_preplaneados...');</script>";
     error_log("🔍 saveBatchFromPlaneacion - Iniciando UPDATE de plan_preplaneados");
     
     // Actualizar el campo planeado = 0 para los registros procesados
@@ -337,30 +325,37 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
       $conn = new PDO("mysql:dbname=batch_record;host=mariadb_pro", "root", "S@m4r@_2025!");
       $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       
-      echo "<script>console.log('🔍 Backend - Conexión a BD establecida');</script>";
-      
       // Actualizar registros por id_producto y pedido
       $registrosActualizados = 0;
-      echo "<script>console.log('🔍 Backend - Procesando " . sizeof($pedidos) . " pedidos para UPDATE...');</script>";
+      error_log("🔍 saveBatchFromPlaneacion - Procesando " . sizeof($pedidos) . " pedidos para UPDATE");
       
       foreach ($pedidos as $pedido) {
         if (isset($pedido['granel']) && isset($pedido['pedido']) && !isset($pedido['date'])) {
           $granel = $pedido['granel'];
           $pedido_num = $pedido['pedido'];
           
-          echo "<script>console.log('🔍 Backend - Procesando pedido: granel=$granel, pedido=$pedido_num');</script>";
+          error_log("🔍 saveBatchFromPlaneacion - Procesando pedido: granel=$granel, pedido=$pedido_num");
+          error_log("🔍 saveBatchFromPlaneacion - Datos completos del pedido: " . json_encode($pedido));
           
-          // Buscar la referencia del producto por granel
-          $sql_producto = "SELECT referencia FROM producto WHERE granel = :granel LIMIT 1";
-          $stmt_producto = $conn->prepare($sql_producto);
-          $stmt_producto->execute(['granel' => $granel]);
-          $producto = $stmt_producto->fetch(PDO::FETCH_ASSOC);
+          // Intentar obtener la referencia directamente de los datos del pedido
+          $referencia = null;
+          if (isset($pedido['referencia']) && !empty($pedido['referencia'])) {
+            $referencia = $pedido['referencia'];
+            error_log("🔍 saveBatchFromPlaneacion - Referencia obtenida de datos del pedido: $referencia");
+          } else {
+            // Si no está en los datos, buscar en la tabla producto
+            $sql_producto = "SELECT referencia FROM producto WHERE referencia LIKE :granel LIMIT 1";
+            $stmt_producto = $conn->prepare($sql_producto);
+            $stmt_producto->execute(['granel' => '%' . $granel . '%']);
+            $producto = $stmt_producto->fetch(PDO::FETCH_ASSOC);
+            
+            if ($producto) {
+              $referencia = $producto['referencia'];
+              error_log("🔍 saveBatchFromPlaneacion - Referencia encontrada en BD: $referencia para granel: $granel");
+            }
+          }
           
-          if ($producto) {
-            $referencia = $producto['referencia'];
-            
-            echo "<script>console.log('🔍 Backend - Referencia encontrada: $referencia para granel: $granel');</script>";
-            
+          if ($referencia) {
             // Actualizar plan_preplaneados por id_producto y pedido
             $sql_update = "UPDATE plan_preplaneados SET planeado = 0 WHERE id_producto = :referencia AND pedido = :pedido";
             $stmt_update = $conn->prepare($sql_update);
@@ -373,25 +368,33 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
             $registrosActualizados += $filas_afectadas;
             
             error_log("🔍 saveBatchFromPlaneacion - Actualizando: referencia=$referencia, pedido=$pedido_num, filas_afectadas=$filas_afectadas");
-            echo "<script>console.log('🔍 Backend - Actualizando: referencia=$referencia, pedido=$pedido_num, filas_afectadas=$filas_afectadas');</script>";
           } else {
-            error_log("⚠️ saveBatchFromPlaneacion - No se encontró producto para granel: $granel");
-            echo "<script>console.warn('⚠️ Backend - No se encontró producto para granel: $granel');</script>";
+            error_log("⚠️ saveBatchFromPlaneacion - No se pudo obtener referencia para granel: $granel");
+            
+            // Intentar buscar directamente por el granel como referencia
+            $sql_update_direct = "UPDATE plan_preplaneados SET planeado = 0 WHERE id_producto = :granel AND pedido = :pedido";
+            $stmt_update_direct = $conn->prepare($sql_update_direct);
+            $stmt_update_direct->execute([
+              'granel' => $granel,
+              'pedido' => $pedido_num
+            ]);
+            
+            $filas_afectadas_direct = $stmt_update_direct->rowCount();
+            $registrosActualizados += $filas_afectadas_direct;
+            
+            error_log("🔍 saveBatchFromPlaneacion - Intento directo: granel=$granel, pedido=$pedido_num, filas_afectadas=$filas_afectadas_direct");
           }
         } else {
-          echo "<script>console.log('🔍 Backend - Saltando elemento (no es pedido válido):', " . json_encode($pedido) . ");</script>";
+          error_log("🔍 saveBatchFromPlaneacion - Saltando elemento (no es pedido válido): " . json_encode($pedido));
         }
       }
       
       error_log("✅ saveBatchFromPlaneacion - Total de registros actualizados: $registrosActualizados");
-      echo "<script>console.log('✅ Backend - Total de registros actualizados: $registrosActualizados');</script>";
       
     } catch (PDOException $e) {
       error_log("❌ saveBatchFromPlaneacion - Error al actualizar plan_preplaneados: " . $e->getMessage());
-      echo "<script>console.error('❌ Backend - Error al actualizar plan_preplaneados: " . $e->getMessage() . "');</script>";
     }
     
-    echo "<script>console.log('🔍 Backend - Preparando respuesta final...');</script>";
     $resp = array(
       'success' => true, 
       'message' => $batchesCreados . ' batch(s) creado(s) correctamente',
@@ -399,14 +402,11 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
       'registrosActualizados' => $registrosActualizados ?? 0
     );
     error_log('✅ saveBatchFromPlaneacion - Respuesta de éxito: ' . json_encode($resp));
-    echo "<script>console.log('✅ Backend - Respuesta final:', " . json_encode($resp) . ");</script>";
   } else {
-    echo "<script>console.error('❌ Backend - Errores encontrados:', " . json_encode($errores) . ");</script>";
     $resp = array('error' => true, 'message' => 'Errores al crear batches: ' . implode(', ', $errores));
     error_log('❌ saveBatchFromPlaneacion - Respuesta de error: ' . json_encode($resp));
   }
   
-  echo "<script>console.log('🔍 Backend - Enviando respuesta al frontend...');</script>";
   $response->getBody()->write(json_encode($resp, JSON_NUMERIC_CHECK));
   return $response->withHeader('Content-Type', 'application/json');
 });
