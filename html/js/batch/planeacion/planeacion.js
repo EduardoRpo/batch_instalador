@@ -386,12 +386,19 @@ $(document).ready(function () {
       console.log(`  Elemento ${index}:`, JSON.stringify(item, null, 2));
     });
     
+    console.log('📤 savePlaneados - Enviando datos al backend...');
+    
     $.ajax({
       type: 'POST',
       url: '/api/saveBatchFromPlaneacion',
       data: { data: data },
       success: function (response) {
-        console.log('✅ savePlaneados - Respuesta exitosa:', response);
+        console.log('✅ savePlaneados - Respuesta exitosa recibida:', response);
+        console.log('🔍 savePlaneados - Tipo de respuesta:', typeof response);
+        console.log('🔍 savePlaneados - Respuesta.success:', response.success);
+        console.log('🔍 savePlaneados - Respuesta.message:', response.message);
+        console.log('🔍 savePlaneados - Respuesta.batchesCreados:', response.batchesCreados);
+        console.log('🔍 savePlaneados - Respuesta.registrosActualizados:', response.registrosActualizados);
         
         // Mostrar mensaje de confirmación con el número de batches creados
         if (response.success) {
@@ -402,41 +409,50 @@ $(document).ready(function () {
               mensaje += ` - ${response.registrosActualizados} registro(s) actualizado(s)`;
             }
           }
+          console.log('📢 savePlaneados - Mostrando mensaje de éxito:', mensaje);
           alertify.success(mensaje);
         } else {
+          console.log('❌ savePlaneados - Mostrando mensaje de error:', response.message);
           alertify.error(response.message || 'Error al crear batches');
         }
         
+        console.log('🧹 savePlaneados - Limpiando datos de sesión...');
         // Limpiar datos de sesión
         unique = [];
         dataPlaneacion = [];
         dataTanquesPlaneacion = [];
         deleteSession();
         
+        console.log('🔄 savePlaneados - Iniciando actualización de vistas...');
         // Recargar las tablas después de un breve delay
         setTimeout(function() {
+          console.log('📊 savePlaneados - Recargando tabla de planeación...');
           // Recargar tabla de planeación
           if ($.fn.dataTable.isDataTable('#tblCalcCapacidadPlaneada')) {
             $('#tblCalcCapacidadPlaneada').DataTable().destroy();
           }
           $('#tblCalcCapacidadPlaneadaBody').empty();
           
+          console.log('📊 savePlaneados - Recargando tabla de programados...');
           // Recargar tabla de programados
           if ($.fn.dataTable.isDataTable('#tblCalcCapacidadProgramada')) {
             $('#tblCalcCapacidadProgramada').DataTable().destroy();
           }
           $('#tblCalcCapacidadProgramadaBody').empty();
           
+          console.log('📊 savePlaneados - Recargando datos de planeación...');
           // Recargar datos de planeación
           api = '/html/php/batch_planeados_fetch.php';
           getDataPlaneacion();
           
+          console.log('📊 savePlaneados - Recargando tabla de batch programados...');
           // Recargar tabla de batch programados
           api = '/html/php/batch_fetch.php';
           if ($.fn.DataTable.isDataTable('#tablaBatch')) {
             tablaBatch.ajax.reload();
           }
           
+          console.log('📊 savePlaneados - Recargando total de ventas...');
           // Recargar total de ventas
           loadTotalVentas();
           
@@ -448,6 +464,7 @@ $(document).ready(function () {
         console.error('❌ savePlaneados - Status:', status);
         console.error('❌ savePlaneados - Response Text:', xhr.responseText);
         console.error('❌ savePlaneados - Status Code:', xhr.status);
+        console.error('❌ savePlaneados - XHR Object:', xhr);
         
         // Mostrar mensaje de error al usuario
         alertify.error('Error al crear el batch: ' + error);
