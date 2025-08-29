@@ -59,6 +59,9 @@ class TanquesDao
         $connection = Connection::getInstance()->getConnection();
         
         try {
+            // Log para consola del navegador
+            echo "<script>console.log('🔍 TanquesDao - Iniciando saveMultipleTanques: id_batch=$id_batch, tanque=$tanque, cantidad_tanques=$cantidad_tanques');</script>";
+            
             // Crear un solo registro con la cantidad total de tanques
             $stmt = $connection->prepare("INSERT INTO batch_tanques(tanque, cantidad, id_batch) 
                 VALUES(:tanque, :cantidad, :id_batch)");
@@ -68,15 +71,20 @@ class TanquesDao
                 'id_batch' => $id_batch
             ]);
             
-            $this->logger->info('Registro de tanque creado exitosamente', [
-                'id_batch' => $id_batch,
-                'tanque' => $tanque,
-                'cantidad' => $cantidad_tanques
-            ]);
+            // Log para debugging en frontend
+            error_log("✅ TanquesDao - Registro creado exitosamente: tanque=$tanque, cantidad=$cantidad_tanques, id_batch=$id_batch");
+            
+            // Log para consola del navegador
+            echo "<script>console.log('✅ TanquesDao - Registro creado exitosamente: tanque=$tanque, cantidad=$cantidad_tanques, id_batch=$id_batch');</script>";
             
             return null; // Éxito
         } catch (Exception $e) {
-            $this->logger->error('Error al crear registro de tanque: ' . $e->getMessage());
+            // Log del error para debugging
+            error_log("❌ TanquesDao - Error al crear registro: " . $e->getMessage());
+            
+            // Log para consola del navegador
+            echo "<script>console.error('❌ TanquesDao - Error al crear registro: " . $e->getMessage() . "');</script>";
+            
             return $e->getMessage();
         }
     }

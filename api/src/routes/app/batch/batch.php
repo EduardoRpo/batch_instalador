@@ -283,10 +283,14 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
               $resp_tanques = $tanquesDao->saveMultipleTanques($id_batch['id'], $tanque, $cantidad_tanques);
               
               if ($resp_tanques === null) {
-                error_log('✅ saveBatchFromPlaneacion - ' . $cantidad_tanques . ' registros de tanque creados exitosamente: tanque=' . $tanque . ', id_batch=' . $id_batch['id']);
+                error_log("✅ saveBatchFromPlaneacion - " . $cantidad_tanques . " registros de tanque creados exitosamente: tanque=$tanque, id_batch=" . $id_batch['id']);
+                // Log para consola del navegador
+                echo "<script>console.log('✅ Backend - Tanques creados: tanque=$tanque, cantidad=$cantidad_tanques, id_batch=" . $id_batch['id'] . "');</script>";
               } else {
                 $errores[] = 'Error al crear registros de tanques: ' . $resp_tanques;
                 error_log('❌ saveBatchFromPlaneacion - Error al crear registros de tanques: ' . $resp_tanques);
+                // Log para consola del navegador
+                echo "<script>console.error('❌ Backend - Error al crear tanques: " . $resp_tanques . "');</script>";
               }
               
               $batchesCreados++;
@@ -294,6 +298,8 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
             } catch (PDOException $e) {
               $errores[] = 'Error al crear registros de tanques para batch ' . $id_batch['id'] . ': ' . $e->getMessage();
               error_log('❌ saveBatchFromPlaneacion - Error al crear registros de tanques: ' . $e->getMessage());
+              // Log para consola del navegador
+              echo "<script>console.error('❌ Backend - Error PDO: " . $e->getMessage() . "');</script>";
             }
           } else {
             $errores[] = 'Error al crear control de firmas para batch ' . $id_batch['id'];
