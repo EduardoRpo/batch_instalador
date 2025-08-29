@@ -59,19 +59,24 @@ class TanquesDao
         $connection = Connection::getInstance()->getConnection();
         
         try {
-            // Crear múltiples registros según la cantidad de tanques
-            for ($j = 0; $j < $cantidad_tanques; $j++) {
-                $stmt = $connection->prepare("INSERT INTO batch_tanques(tanque, cantidad, id_batch) 
-                    VALUES(:tanque, :cantidad, :id_batch)");
-                $stmt->execute([
-                    'tanque' => $tanque,
-                    'cantidad' => 1, // Cada registro individual tiene cantidad 1
-                    'id_batch' => $id_batch
-                ]);
-            }
+            // Crear un solo registro con la cantidad total de tanques
+            $stmt = $connection->prepare("INSERT INTO batch_tanques(tanque, cantidad, id_batch) 
+                VALUES(:tanque, :cantidad, :id_batch)");
+            $stmt->execute([
+                'tanque' => $tanque,
+                'cantidad' => $cantidad_tanques, // Usar la cantidad total en lugar de 1
+                'id_batch' => $id_batch
+            ]);
+            
+            $this->logger->info('Registro de tanque creado exitosamente', [
+                'id_batch' => $id_batch,
+                'tanque' => $tanque,
+                'cantidad' => $cantidad_tanques
+            ]);
+            
             return null; // Éxito
         } catch (Exception $e) {
-            $this->logger->error('Error al crear múltiples tanques: ' . $e->getMessage());
+            $this->logger->error('Error al crear registro de tanque: ' . $e->getMessage());
             return $e->getMessage();
         }
     }
