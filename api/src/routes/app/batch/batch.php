@@ -320,7 +320,10 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
   if (empty($errores) && $batchesCreados > 0) {
     error_log("🔍 saveBatchFromPlaneacion - Iniciando UPDATE de plan_preplaneados");
     
-    // Actualizar el campo planeado = 0 para los registros procesados
+    // Log temporal para debugging
+    $log_file = '/tmp/batch_update_debug.log';
+    file_put_contents($log_file, date('Y-m-d H:i:s') . " - Iniciando UPDATE\n", FILE_APPEND);
+    
     try {
       $conn = new PDO("mysql:dbname=batch_record;host=mariadb_pro", "root", "S@m4r@_2025!");
       $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -353,6 +356,7 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
             
             if ($granel_data) {
               error_log("🔍 saveBatchFromPlaneacion - Granel encontrado en BD: " . json_encode($granel_data));
+              file_put_contents($log_file, date('Y-m-d H:i:s') . " - Granel encontrado: " . json_encode($granel_data) . "\n", FILE_APPEND);
               
               // Buscar la referencia usando el campo multi
               $sql_producto = "SELECT referencia FROM producto WHERE multi = :multi AND referencia LIKE 'M-%' LIMIT 1";
@@ -363,11 +367,14 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
               if ($producto) {
                 $referencia = $producto['referencia'];
                 error_log("🔍 saveBatchFromPlaneacion - Referencia encontrada en BD: $referencia para granel: $granel (multi: " . $granel_data['multi'] . ")");
+                file_put_contents($log_file, date('Y-m-d H:i:s') . " - Referencia encontrada: $referencia\n", FILE_APPEND);
               } else {
                 error_log("❌ saveBatchFromPlaneacion - No se encontró referencia M-% para multi: " . $granel_data['multi']);
+                file_put_contents($log_file, date('Y-m-d H:i:s') . " - No se encontró referencia para multi: " . $granel_data['multi'] . "\n", FILE_APPEND);
               }
             } else {
               error_log("❌ saveBatchFromPlaneacion - No se encontró granel en BD: $granel");
+              file_put_contents($log_file, date('Y-m-d H:i:s') . " - No se encontró granel: $granel\n", FILE_APPEND);
             }
           }
           
@@ -381,6 +388,7 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
             ]);
             $registros_existentes = $stmt_check_before->fetchAll(PDO::FETCH_ASSOC);
             error_log("🔍 saveBatchFromPlaneacion - Registros existentes en plan_preplaneados: " . json_encode($registros_existentes));
+            file_put_contents($log_file, date('Y-m-d H:i:s') . " - Registros existentes: " . json_encode($registros_existentes) . "\n", FILE_APPEND);
             
             // Actualizar plan_preplaneados por id_producto y pedido
             $sql_update = "UPDATE plan_preplaneados SET planeado = 0 WHERE id_producto = :referencia AND pedido = :pedido";
@@ -394,6 +402,7 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
             $registrosActualizados += $filas_afectadas;
             
             error_log("🔍 saveBatchFromPlaneacion - UPDATE ejecutado: referencia=$referencia, pedido=$pedido_num, filas_afectadas=$filas_afectadas");
+            file_put_contents($log_file, date('Y-m-d H:i:s') . " - UPDATE ejecutado: referencia=$referencia, pedido=$pedido_num, filas_afectadas=$filas_afectadas\n", FILE_APPEND);
             
             // Verificar si el registro existe
             $sql_check = "SELECT COUNT(*) as count FROM plan_preplaneados WHERE id_producto = :referencia AND pedido = :pedido";
