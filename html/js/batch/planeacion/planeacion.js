@@ -461,12 +461,6 @@ $(document).ready(function () {
           loadTotalVentas();
           
           console.log('✅ savePlaneados - Vistas actualizadas correctamente');
-          
-          // Forzar refresco completo de la página después de 2 segundos
-          setTimeout(function() {
-            console.log('🔄 savePlaneados - Forzando refresco completo de la página...');
-            window.location.reload();
-          }, 2000);
         }, 1000);
       },
       error: function(xhr, status, error) {
