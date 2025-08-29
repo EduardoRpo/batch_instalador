@@ -191,6 +191,15 @@ include_once("modal/m_limpiar_firmas.php");
           <div class="card-body" id="cardPreBatch">
             <div class="tab-content">
               <div class="tab-pane fade show active mt-3" id="one" role="tabpanel" aria-labelledby="one-tab">
+                <!-- Botón Planear Lote antes de la tabla -->
+                <div class="row mb-3">
+                  <div class="col-md-12 text-right">
+                    <button class="btn btn-primary btn-lg" id="calcLote" style="font-size: 16px; padding: 10px 20px;">
+                      <i class="fa fa-calculator"></i> Planear Lote
+                    </button>
+                  </div>
+                </div>
+                
                 <div class="col-md-12 align-self-right">
                   <div class="card">
                     <div class="mt-3 text-center">
@@ -212,14 +221,6 @@ include_once("modal/m_limpiar_firmas.php");
                         </table>
                       </div>
                     </div>
-                  </div>
-                </div>
-                <!-- Botón Planear Lote solo en la pestaña Pedidos -->
-                <div class="row mt-3">
-                  <div class="col-md-12 text-right">
-                    <button class="btn btn-primary btn-lg" id="calcLote" style="font-size: 16px; padding: 10px 20px;">
-                      <i class="fa fa-calculator"></i> Planear Lote
-                    </button>
                   </div>
                 </div>
               </div>
