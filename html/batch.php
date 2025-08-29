@@ -166,7 +166,7 @@ include_once("modal/m_limpiar_firmas.php");
             <ul class="nav nav-tabs card-header-tabs" id="batch-list" role="tablist">
               <?php if ($_SESSION['rol'] == 6 or $_SESSION['rol'] == 1) {  ?>
                 <li class="nav-item">
-                  <a class="nav-link" id="one-tab" data-toggle="tab" href="#one" role="tab" aria-controls="One" aria-selected="false">Pedidos</a>
+                  <a class="nav-link active" id="one-tab" data-toggle="tab" href="#one" role="tab" aria-controls="One" aria-selected="true">Pedidos</a>
                 </li>
               <?php  } ?>
               <!-- <li class="nav-item">
@@ -176,7 +176,7 @@ include_once("modal/m_limpiar_firmas.php");
                 <a class="nav-link" id="three-tab" data-toggle="tab" href="#three" role="tab" aria-controls="Three" aria-selected="false">Planeados</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" id="four-tab" data-toggle="tab" href="#four" role="tab" aria-controls="Four" aria-selected="true">Programados</a>
+                <a class="nav-link" id="four-tab" data-toggle="tab" href="#four" role="tab" aria-controls="Four" aria-selected="false">Programados</a>
               </li>
               <?php if ($_SESSION['rol'] != 6) {  ?>
                 <li class="nav-item">
@@ -190,7 +190,7 @@ include_once("modal/m_limpiar_firmas.php");
 
           <div class="card-body" id="cardPreBatch">
             <div class="tab-content">
-              <div class="tab-pane fade mt-3" id="one" role="tabpanel" aria-labelledby="one-tab">
+              <div class="tab-pane fade show active mt-3" id="one" role="tabpanel" aria-labelledby="one-tab">
                 <div class="col-md-12 align-self-right">
                   <div class="card">
                     <div class="mt-3 text-center">
@@ -215,9 +215,11 @@ include_once("modal/m_limpiar_firmas.php");
                   </div>
                 </div>
                 <!-- Botón Planear Lote solo en la pestaña Pedidos -->
-                <div class="row justify-content-end mt-3">
+                <div class="row mt-3">
                   <div class="col-md-12 text-right">
-                    <button class="btn btn-primary" id="calcLote">Planear Lote</button>
+                    <button class="btn btn-primary btn-lg" id="calcLote" style="font-size: 16px; padding: 10px 20px;">
+                      <i class="fa fa-calculator"></i> Planear Lote
+                    </button>
                   </div>
                 </div>
               </div>
