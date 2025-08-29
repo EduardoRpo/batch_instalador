@@ -185,9 +185,6 @@ include_once("modal/m_limpiar_firmas.php");
               <?php  } ?>
               <!-- <div style="display:grid;justify-content:end;margin-left:auto" class="row numberWeek mr-3">
               </div> -->
-              <div style="display:grid;justify-content:end;margin-left:auto" class="row mr-3">
-                <button class="toggle-vis btn btn-primary" id="calcLote">Calcular Lote</button>
-              </div>
             </ul>
           </div>
 
@@ -215,6 +212,12 @@ include_once("modal/m_limpiar_firmas.php");
                         </table>
                       </div>
                     </div>
+                  </div>
+                </div>
+                <!-- Botón Planear Lote solo en la pestaña Pedidos -->
+                <div class="row justify-content-end mt-3">
+                  <div class="col-md-12 text-right">
+                    <button class="btn btn-primary" id="calcLote">Planear Lote</button>
                   </div>
                 </div>
               </div>
