@@ -322,7 +322,61 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
   
   // Preparar respuesta
   if (empty($errores) && $batchesCreados > 0) {
-    $resp = array('success' => true, 'message' => $batchesCreados . ' batch(s) creado(s) correctamente');
+    // Actualizar el campo planeado = 0 para los registros procesados
+    try {
+      $conn = new PDO("mysql:dbname=batch_record;host=mariadb_pro", "root", "S@m4r@_2025!");
+      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      
+      // Actualizar registros por id_producto y pedido
+      $registrosActualizados = 0;
+      foreach ($pedidos as $pedido) {
+        if (isset($pedido['granel']) && isset($pedido['pedido']) && !isset($pedido['date'])) {
+          $granel = $pedido['granel'];
+          $pedido_num = $pedido['pedido'];
+          
+          // Buscar la referencia del producto por granel
+          $sql_producto = "SELECT referencia FROM producto WHERE granel = :granel LIMIT 1";
+          $stmt_producto = $conn->prepare($sql_producto);
+          $stmt_producto->execute(['granel' => $granel]);
+          $producto = $stmt_producto->fetch(PDO::FETCH_ASSOC);
+          
+          if ($producto) {
+            $referencia = $producto['referencia'];
+            
+            // Actualizar plan_preplaneados por id_producto y pedido
+            $sql_update = "UPDATE plan_preplaneados SET planeado = 0 WHERE id_producto = :referencia AND pedido = :pedido";
+            $stmt_update = $conn->prepare($sql_update);
+            $stmt_update->execute([
+              'referencia' => $referencia,
+              'pedido' => $pedido_num
+            ]);
+            
+            $filas_afectadas = $stmt_update->rowCount();
+            $registrosActualizados += $filas_afectadas;
+            
+            error_log("🔍 saveBatchFromPlaneacion - Actualizando: referencia=$referencia, pedido=$pedido_num, filas_afectadas=$filas_afectadas");
+            echo "<script>console.log('🔍 Backend - Actualizando: referencia=$referencia, pedido=$pedido_num, filas_afectadas=$filas_afectadas');</script>";
+          } else {
+            error_log("⚠️ saveBatchFromPlaneacion - No se encontró producto para granel: $granel");
+            echo "<script>console.warn('⚠️ Backend - No se encontró producto para granel: $granel');</script>";
+          }
+        }
+      }
+      
+      error_log("✅ saveBatchFromPlaneacion - Total de registros actualizados: $registrosActualizados");
+      echo "<script>console.log('✅ Backend - Total de registros actualizados: $registrosActualizados');</script>";
+      
+    } catch (PDOException $e) {
+      error_log("❌ saveBatchFromPlaneacion - Error al actualizar plan_preplaneados: " . $e->getMessage());
+      echo "<script>console.error('❌ Backend - Error al actualizar plan_preplaneados: " . $e->getMessage() . "');</script>";
+    }
+    
+    $resp = array(
+      'success' => true, 
+      'message' => $batchesCreados . ' batch(s) creado(s) correctamente',
+      'batchesCreados' => $batchesCreados,
+      'registrosActualizados' => $registrosActualizados ?? 0
+    );
     error_log('✅ saveBatchFromPlaneacion - Respuesta de éxito: ' . json_encode($resp));
   } else {
     $resp = array('error' => true, 'message' => 'Errores al crear batches: ' . implode(', ', $errores));

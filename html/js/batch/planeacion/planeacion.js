@@ -392,27 +392,56 @@ $(document).ready(function () {
       data: { data: data },
       success: function (response) {
         console.log('✅ savePlaneados - Respuesta exitosa:', response);
-        message(response);
+        
+        // Mostrar mensaje de confirmación con el número de batches creados
+        if (response.success) {
+          let mensaje = response.message;
+          if (response.batchesCreados) {
+            mensaje = `${response.batchesCreados} batch(s) creado(s) correctamente`;
+            if (response.registrosActualizados) {
+              mensaje += ` - ${response.registrosActualizados} registro(s) actualizado(s)`;
+            }
+          }
+          alertify.success(mensaje);
+        } else {
+          alertify.error(response.message || 'Error al crear batches');
+        }
+        
+        // Limpiar datos de sesión
         unique = [];
         dataPlaneacion = [];
         dataTanquesPlaneacion = [];
         deleteSession();
-        setTimeout(loadTotalVentas, 7000);
-        if ($.fn.dataTable.isDataTable('#tblCalcCapacidadPlaneada')) {
-          $('#tblCalcCapacidadPlaneada').DataTable().destroy();
-        }
-        $('#tblCalcCapacidadPlaneadaBody').empty();
-        if ($.fn.dataTable.isDataTable('#tblCalcCapacidadProgramada')) {
-          $('#tblCalcCapacidadProgramada').DataTable().destroy();
-        }
-        $('#tblCalcCapacidadProgramadaBody').empty();
-        api = '/html/php/batch_planeados_fetch.php';
-        getDataPlaneacion();
-        api = '/html/php/batch_fetch.php';
-        // Recargar la tabla de batch programados
-        if ($.fn.DataTable.isDataTable('#tablaBatch')) {
-          tablaBatch.ajax.reload();
-        }
+        
+        // Recargar las tablas después de un breve delay
+        setTimeout(function() {
+          // Recargar tabla de planeación
+          if ($.fn.dataTable.isDataTable('#tblCalcCapacidadPlaneada')) {
+            $('#tblCalcCapacidadPlaneada').DataTable().destroy();
+          }
+          $('#tblCalcCapacidadPlaneadaBody').empty();
+          
+          // Recargar tabla de programados
+          if ($.fn.dataTable.isDataTable('#tblCalcCapacidadProgramada')) {
+            $('#tblCalcCapacidadProgramada').DataTable().destroy();
+          }
+          $('#tblCalcCapacidadProgramadaBody').empty();
+          
+          // Recargar datos de planeación
+          api = '/html/php/batch_planeados_fetch.php';
+          getDataPlaneacion();
+          
+          // Recargar tabla de batch programados
+          api = '/html/php/batch_fetch.php';
+          if ($.fn.DataTable.isDataTable('#tablaBatch')) {
+            tablaBatch.ajax.reload();
+          }
+          
+          // Recargar total de ventas
+          loadTotalVentas();
+          
+          console.log('✅ savePlaneados - Vistas actualizadas correctamente');
+        }, 1000);
       },
       error: function(xhr, status, error) {
         console.error('❌ savePlaneados - Error en AJAX:', error);
