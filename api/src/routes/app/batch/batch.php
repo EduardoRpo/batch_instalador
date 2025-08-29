@@ -358,19 +358,49 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
               error_log("🔍 saveBatchFromPlaneacion - Granel encontrado en BD: " . json_encode($granel_data));
               file_put_contents($log_file, date('Y-m-d H:i:s') . " - Granel encontrado: " . json_encode($granel_data) . "\n", FILE_APPEND);
               
-              // Buscar la referencia usando el campo multi
-              $sql_producto = "SELECT referencia FROM producto WHERE multi = :multi AND referencia LIKE 'M-%' LIMIT 1";
+              // Buscar TODAS las referencias usando el campo multi
+              $sql_producto = "SELECT referencia FROM producto WHERE multi = :multi AND referencia LIKE 'M-%' ORDER BY referencia";
               $stmt_producto = $conn->prepare($sql_producto);
               $stmt_producto->execute(['multi' => $granel_data['multi']]);
-              $producto = $stmt_producto->fetch(PDO::FETCH_ASSOC);
+              $productos = $stmt_producto->fetchAll(PDO::FETCH_ASSOC);
               
-              if ($producto) {
-                $referencia = $producto['referencia'];
-                error_log("🔍 saveBatchFromPlaneacion - Referencia encontrada en BD: $referencia para granel: $granel (multi: " . $granel_data['multi'] . ")");
-                file_put_contents($log_file, date('Y-m-d H:i:s') . " - Referencia encontrada: $referencia\n", FILE_APPEND);
+              error_log("🔍 saveBatchFromPlaneacion - Todas las referencias encontradas para multi " . $granel_data['multi'] . ": " . json_encode($productos));
+              file_put_contents($log_file, date('Y-m-d H:i:s') . " - Todas las referencias: " . json_encode($productos) . "\n", FILE_APPEND);
+              
+              if ($productos) {
+                // Intentar con cada referencia hasta encontrar el registro
+                foreach ($productos as $producto) {
+                  $referencia = $producto['referencia'];
+                  error_log("🔍 saveBatchFromPlaneacion - Probando referencia: $referencia");
+                  file_put_contents($log_file, date('Y-m-d H:i:s') . " - Probando referencia: $referencia\n", FILE_APPEND);
+                  
+                  // Verificar si existe un registro con esta referencia y pedido
+                  $sql_check_ref = "SELECT COUNT(*) as count FROM plan_preplaneados WHERE id_producto = :referencia AND pedido = :pedido";
+                  $stmt_check_ref = $conn->prepare($sql_check_ref);
+                  $stmt_check_ref->execute([
+                    'referencia' => $referencia,
+                    'pedido' => $pedido_num
+                  ]);
+                  $check_ref_result = $stmt_check_ref->fetch(PDO::FETCH_ASSOC);
+                  
+                  if ($check_ref_result['count'] > 0) {
+                    error_log("🔍 saveBatchFromPlaneacion - ¡Encontrado! Registro con referencia=$referencia y pedido=$pedido_num");
+                    file_put_contents($log_file, date('Y-m-d H:i:s') . " - ¡Encontrado! Registro con referencia=$referencia y pedido=$pedido_num\n", FILE_APPEND);
+                    break; // Usar esta referencia
+                  } else {
+                    error_log("🔍 saveBatchFromPlaneacion - No hay registro con referencia=$referencia y pedido=$pedido_num");
+                    file_put_contents($log_file, date('Y-m-d H:i:s') . " - No hay registro con referencia=$referencia y pedido=$pedido_num\n", FILE_APPEND);
+                    $referencia = null; // Continuar con la siguiente
+                  }
+                }
+                
+                if (!$referencia) {
+                  error_log("❌ saveBatchFromPlaneacion - No se encontró ninguna referencia válida para granel: $granel");
+                  file_put_contents($log_file, date('Y-m-d H:i:s') . " - No se encontró ninguna referencia válida\n", FILE_APPEND);
+                }
               } else {
                 error_log("❌ saveBatchFromPlaneacion - No se encontró referencia M-% para multi: " . $granel_data['multi']);
-                file_put_contents($log_file, date('Y-m-d H:i:s') . " - No se encontró referencia para multi: " . $granel_data['multi'] . "\n", FILE_APPEND);
+                file_put_contents($log_file, date('Y-m-d H:i:s') . " - No se encontró referencia M-% para multi: " . $granel_data['multi'] . "\n", FILE_APPEND);
               }
             } else {
               error_log("❌ saveBatchFromPlaneacion - No se encontró granel en BD: $granel");
