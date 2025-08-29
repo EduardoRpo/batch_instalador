@@ -344,21 +344,44 @@ $app->post('/saveBatchFromPlaneacion', function (Request $request, Response $res
             error_log("🔍 saveBatchFromPlaneacion - Referencia obtenida de datos del pedido: $referencia");
           } else {
             error_log("⚠️ saveBatchFromPlaneacion - Referencia no está en datos del pedido, buscando en BD...");
-            // Buscar la referencia usando el granel y el campo multi
-            $sql_producto = "SELECT referencia FROM producto WHERE multi = (SELECT multi FROM producto WHERE referencia = :granel) AND referencia LIKE 'M-%' LIMIT 1";
-            $stmt_producto = $conn->prepare($sql_producto);
-            $stmt_producto->execute(['granel' => $granel]);
-            $producto = $stmt_producto->fetch(PDO::FETCH_ASSOC);
             
-            if ($producto) {
-              $referencia = $producto['referencia'];
-              error_log("🔍 saveBatchFromPlaneacion - Referencia encontrada en BD: $referencia para granel: $granel");
+            // Primero verificar si el granel existe en la tabla producto
+            $sql_check_granel = "SELECT referencia, multi FROM producto WHERE referencia = :granel";
+            $stmt_check_granel = $conn->prepare($sql_check_granel);
+            $stmt_check_granel->execute(['granel' => $granel]);
+            $granel_data = $stmt_check_granel->fetch(PDO::FETCH_ASSOC);
+            
+            if ($granel_data) {
+              error_log("🔍 saveBatchFromPlaneacion - Granel encontrado en BD: " . json_encode($granel_data));
+              
+              // Buscar la referencia usando el campo multi
+              $sql_producto = "SELECT referencia FROM producto WHERE multi = :multi AND referencia LIKE 'M-%' LIMIT 1";
+              $stmt_producto = $conn->prepare($sql_producto);
+              $stmt_producto->execute(['multi' => $granel_data['multi']]);
+              $producto = $stmt_producto->fetch(PDO::FETCH_ASSOC);
+              
+              if ($producto) {
+                $referencia = $producto['referencia'];
+                error_log("🔍 saveBatchFromPlaneacion - Referencia encontrada en BD: $referencia para granel: $granel (multi: " . $granel_data['multi'] . ")");
+              } else {
+                error_log("❌ saveBatchFromPlaneacion - No se encontró referencia M-% para multi: " . $granel_data['multi']);
+              }
             } else {
-              error_log("❌ saveBatchFromPlaneacion - No se encontró referencia en BD para granel: $granel");
+              error_log("❌ saveBatchFromPlaneacion - No se encontró granel en BD: $granel");
             }
           }
           
           if ($referencia) {
+            // Verificar qué registros existen en plan_preplaneados antes del UPDATE
+            $sql_check_before = "SELECT id, id_producto, pedido, planeado FROM plan_preplaneados WHERE id_producto = :referencia OR id_producto = :granel";
+            $stmt_check_before = $conn->prepare($sql_check_before);
+            $stmt_check_before->execute([
+              'referencia' => $referencia,
+              'granel' => $granel
+            ]);
+            $registros_existentes = $stmt_check_before->fetchAll(PDO::FETCH_ASSOC);
+            error_log("🔍 saveBatchFromPlaneacion - Registros existentes en plan_preplaneados: " . json_encode($registros_existentes));
+            
             // Actualizar plan_preplaneados por id_producto y pedido
             $sql_update = "UPDATE plan_preplaneados SET planeado = 0 WHERE id_producto = :referencia AND pedido = :pedido";
             $stmt_update = $conn->prepare($sql_update);
