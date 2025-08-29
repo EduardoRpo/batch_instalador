@@ -102,11 +102,20 @@ $(document).ready(function () {
         console.log('✅ Respuesta de la API calc-lote-directo:', resp);
         console.log('🔍 Referencias en respuesta:', resp.pedidosLotes?.map(item => item.referencia || item.granel));
         
+        // Log temporal para debugging completo
+        console.log('🔍 RESPUESTA COMPLETA DE LA API:', JSON.stringify(resp, null, 2));
+        
         // Log detallado de la respuesta
         if (resp.pedidosLotes && Array.isArray(resp.pedidosLotes)) {
           console.log('🔍 Tamaños de lote calculados:');
           resp.pedidosLotes.forEach((pedido, index) => {
             console.log(`  - ${pedido.referencia || pedido.granel}: ${pedido.tamanio_lote} kg`);
+            console.log(`    Datos del pedido:`, {
+              densidad: pedido.densidad,
+              presentacion: pedido.presentacion,
+              ajuste: pedido.ajuste,
+              cantidad: pedido.cantidad_acumulada
+            });
           });
         }
         

@@ -264,8 +264,11 @@ $app->post('/calc-lote-directo', function (Request $request, Response $response)
                 $presentacion = $productData['presentacion'];
             }
             
-            // Cálculo básico
-            $tamanioLote = $densidad * $ajuste * 1000;
+            // Cálculo básico - CORREGIDO para usar cantidad y presentación
+            $presentacion_valor = floatval(str_replace(['ML', 'G'], '', $presentacion));
+            $tamanioLote = (($densidad * $presentacion_valor * $cantidad_acumulada) * (1 + $ajuste)) / 1000;
+            
+            error_log("🔍 calc-lote-directo - Cálculo para $referencia: densidad=$densidad, presentacion=$presentacion_valor, cantidad=$cantidad_acumulada, ajuste=$ajuste, resultado=$tamanioLote");
             
             // Agregar pedido procesado al array de resultados con estructura correcta para el DAO
             $pedidosLotes[] = [
