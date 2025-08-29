@@ -411,6 +411,10 @@ $(document).ready(function () {
           }
           console.log('📢 savePlaneados - Mostrando mensaje de éxito:', mensaje);
           alertify.success(mensaje);
+          
+          // Desmarcar todos los checkboxes inmediatamente
+          console.log('🔲 savePlaneados - Desmarcando todos los checkboxes...');
+          $('input[type="checkbox"]').prop('checked', false);
         } else {
           console.log('❌ savePlaneados - Mostrando mensaje de error:', response.message);
           alertify.error(response.message || 'Error al crear batches');
@@ -457,6 +461,12 @@ $(document).ready(function () {
           loadTotalVentas();
           
           console.log('✅ savePlaneados - Vistas actualizadas correctamente');
+          
+          // Forzar refresco completo de la página después de 2 segundos
+          setTimeout(function() {
+            console.log('🔄 savePlaneados - Forzando refresco completo de la página...');
+            window.location.reload();
+          }, 2000);
         }, 1000);
       },
       error: function(xhr, status, error) {
