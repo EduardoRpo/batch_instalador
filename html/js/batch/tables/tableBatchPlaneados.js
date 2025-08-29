@@ -27,6 +27,25 @@ $(document).ready(function () {
   /* Capacidad Planeada */
   api = '/html/php/batch_planeados_fetch.php';
 
+  // Función para limpiar y reinicializar la tabla de planeados
+  function initializePlaneadosTable() {
+    console.log('🔄 Inicializando tabla de Planeados...');
+    
+    // Limpiar contenido previo
+    $('#tblCalcCapacidadPlaneadaBody').empty();
+    
+    // Obtener datos frescos
+    getDataPlaneacion();
+  }
+
+  // Escuchar cuando se active la pestaña de Planeados
+  $('a[href="#three"]').on('shown.bs.tab', function (e) {
+    console.log('🔄 Pestaña Planeados activada, reinicializando...');
+    setTimeout(() => {
+      initializePlaneadosTable();
+    }, 100);
+  });
+
   getDataPlaneacion = async () => {
     console.log('🚀 getDataPlaneacion - Iniciando obtención de datos');
     try {

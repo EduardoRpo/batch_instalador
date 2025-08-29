@@ -7,7 +7,46 @@ $(document).ready(function() {
 
     // Inicializar todas las tablas de Batch Record
     initializeBatchTables();
+    
+    // Manejar el cambio de pestañas para evitar conflictos
+    handleTabSwitching();
 });
+
+// Función para manejar el cambio de pestañas
+function handleTabSwitching() {
+    // Escuchar cambios en las pestañas
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        const targetTab = $(e.target).attr('href');
+        console.log('🔍 Cambio de pestaña a:', targetTab);
+        
+        // Limpiar contenido de otras pestañas si es necesario
+        if (targetTab === '#three') { // Pestaña Planeados
+            console.log('🔄 Inicializando pestaña Planeados...');
+            // Asegurar que solo se muestre el contenido de Planeados
+            $('#three').find('.table-responsive').show();
+            $('#four').find('.table-responsive').hide();
+        } else if (targetTab === '#four') { // Pestaña Programados
+            console.log('🔄 Inicializando pestaña Programados...');
+            // Asegurar que solo se muestre el contenido de Programados
+            $('#three').find('.table-responsive').hide();
+            $('#four').find('.table-responsive').show();
+        }
+    });
+    
+    // Inicializar la pestaña activa por defecto
+    const activeTab = $('.nav-link.active').attr('href');
+    if (activeTab) {
+        console.log('🔍 Pestaña activa por defecto:', activeTab);
+        if (activeTab === '#one') { // Pestaña Pedidos
+            $('#three').find('.table-responsive').hide();
+            $('#four').find('.table-responsive').hide();
+        } else if (activeTab === '#three') { // Pestaña Planeados
+            $('#four').find('.table-responsive').hide();
+        } else if (activeTab === '#four') { // Pestaña Programados
+            $('#three').find('.table-responsive').hide();
+        }
+    }
+}
 
 function initializeBatchTables() {
     // Tabla principal de Batch (Programados) - COMENTADA para evitar conflictos
