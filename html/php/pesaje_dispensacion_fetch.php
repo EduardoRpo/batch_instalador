@@ -1,4 +1,14 @@
 <?php
+/**
+ * Archivo fetch.php para reemplazar /api/pesajeDispensacion
+ * Obtiene datos de materia prima para pesaje y dispensación
+ * Creado para resolver error de DataTables en tablePesaje
+ * 
+ * @author Sistema
+ * @version 1.0
+ * @date 2025-01-01
+ */
+
 require_once __DIR__ . '/../../conexion.php';
 
 // Configurar headers para JSON

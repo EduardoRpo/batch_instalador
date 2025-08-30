@@ -11,7 +11,7 @@ $(document).ready(function() {
         tablePesaje = $('#tablePesaje').dataTable({
             destroy: true,
             ajax: {
-                url: `/html/php/pesaje_dispensacion_fetch.php?referencia=${referencia}&tamano_lote=${batch.tamano_lote}`,
+                url: `/html/php/pesaje_dispensacion_fetch.php?referencia=${referencia}&tamano_lote=${batch.tamano_lote}&v=${Date.now()}`,
                 dataSrc: '',
             },
             paging: false,
