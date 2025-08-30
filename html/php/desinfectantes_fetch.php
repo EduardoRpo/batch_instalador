@@ -7,10 +7,76 @@ header('Content-Type: application/json');
 try {
     error_log("🔍 desinfectantes_fetch.php - Iniciando consulta de desinfectantes");
     
+    // Verificar qué tablas relacionadas con desinfectantes existen
+    $check_tables = "SHOW TABLES LIKE '%desinfect%'";
+    $stmt_check = $conn->prepare($check_tables);
+    $stmt_check->execute();
+    $tables = $stmt_check->fetchAll(PDO::FETCH_ASSOC);
+    
+    error_log("🔍 desinfectantes_fetch.php - Tablas encontradas: " . json_encode($tables));
+    
+    // Buscar la tabla correcta
+    $table_name = null;
+    foreach ($tables as $table) {
+        $table_name = array_values($table)[0];
+        break;
+    }
+    
+    if (!$table_name) {
+        // Si no encuentra tabla, buscar en otras tablas que puedan contener desinfectantes
+        $check_other_tables = "SHOW TABLES LIKE '%producto%'";
+        $stmt_other = $conn->prepare($check_other_tables);
+        $stmt_other->execute();
+        $other_tables = $stmt_other->fetchAll(PDO::FETCH_ASSOC);
+        
+        error_log("🔍 desinfectantes_fetch.php - Otras tablas encontradas: " . json_encode($other_tables));
+        
+        // Intentar con tabla productos si existe
+        foreach ($other_tables as $table) {
+            $table_name = array_values($table)[0];
+            if (strpos(strtolower($table_name), 'producto') !== false) {
+                break;
+            }
+        }
+    }
+    
+    if (!$table_name) {
+        error_log("❌ desinfectantes_fetch.php - No se encontró tabla para desinfectantes");
+        http_response_code(404);
+        echo json_encode(['error' => 'Tabla de desinfectantes no encontrada']);
+        exit;
+    }
+    
+    error_log("🔍 desinfectantes_fetch.php - Usando tabla: $table_name");
+    
+    // Verificar la estructura de la tabla
+    $check_columns = "DESCRIBE $table_name";
+    $stmt_columns = $conn->prepare($check_columns);
+    $stmt_columns->execute();
+    $columns = $stmt_columns->fetchAll(PDO::FETCH_ASSOC);
+    
+    error_log("🔍 desinfectantes_fetch.php - Estructura de tabla $table_name: " . json_encode($columns));
+    
+    // Buscar columnas de id y nombre
+    $id_column = 'id';
+    $nombre_column = 'nombre';
+    
+    foreach ($columns as $column) {
+        $field = strtolower($column['Field']);
+        if ($field === 'id' || $field === 'id_desinfectante') {
+            $id_column = $column['Field'];
+        }
+        if ($field === 'nombre' || $field === 'descripcion' || $field === 'producto') {
+            $nombre_column = $column['Field'];
+        }
+    }
+    
+    error_log("🔍 desinfectantes_fetch.php - Usando columnas: id=$id_column, nombre=$nombre_column");
+    
     // Consulta para obtener desinfectantes
-    $sql = "SELECT id, nombre 
-            FROM productos_desinfeccion 
-            ORDER BY id ASC";
+    $sql = "SELECT $id_column as id, $nombre_column as nombre 
+            FROM $table_name 
+            ORDER BY $id_column ASC";
     
     $stmt = $conn->prepare($sql);
     $stmt->execute();
@@ -18,16 +84,6 @@ try {
     
     error_log("🔍 desinfectantes_fetch.php - Desinfectantes encontrados: " . count($desinfectantes));
     error_log("🔍 desinfectantes_fetch.php - Datos: " . json_encode($desinfectantes));
-    
-    // Si no encuentra datos, usar valores por defecto
-    if (empty($desinfectantes)) {
-        error_log("🔍 desinfectantes_fetch.php - No se encontraron desinfectantes, usando valores por defecto");
-        $desinfectantes = [
-            ['id' => 1, 'nombre' => 'Alcohol 70%'],
-            ['id' => 2, 'nombre' => 'Hipoclorito de Sodio'],
-            ['id' => 3, 'nombre' => 'Agua Destilada']
-        ];
-    }
     
     echo json_encode($desinfectantes, JSON_NUMERIC_CHECK);
     
