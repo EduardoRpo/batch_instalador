@@ -4,20 +4,36 @@ $(document).ready(function () {
   desinfectantes = async () => {
     let result;
     try {
-      result = await $.ajax({ url: `/api/desinfectantes` });
+      console.log('🔍 desinfectantes - Iniciando carga de desinfectantes');
+      console.log('🔍 desinfectantes - URL que se va a llamar:', `/html/php/desinfectantes_fetch.php`);
+      
+      result = await $.ajax({ url: `/html/php/desinfectantes_fetch.php` });
+      console.log('✅ desinfectantes - Respuesta exitosa:', result);
       return result;
     } catch (error) {
-      console.error(error);
+      console.error('❌ desinfectantes - Error en la petición:', error);
+      console.error('❌ desinfectantes - Status:', error.status);
+      console.error('❌ desinfectantes - Response:', error.responseText);
     }
   };
 
   cargarDesinfectantes = async () => {
+    console.log('🔍 cargarDesinfectantes - Iniciando carga de desinfectantes');
     const data = await desinfectantes();
+    console.log('🔍 cargarDesinfectantes - Datos recibidos:', data);
+    
+    if (!data || !Array.isArray(data)) {
+      console.error('❌ cargarDesinfectantes - No se recibieron datos válidos:', data);
+      return;
+    }
+    
     data.forEach((desinfectante) => {
+      console.log('🔍 cargarDesinfectantes - Procesando desinfectante:', desinfectante);
       $('#sel_producto_desinfeccion').append(
         `<option value="${desinfectante.id}">${desinfectante.nombre}</option>`
       );
     });
+    console.log('✅ cargarDesinfectantes - Desinfectantes cargados exitosamente');
   };
 
   //Consulta desinfectates almacenados

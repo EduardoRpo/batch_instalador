@@ -17,10 +17,10 @@ try {
     error_log("🔍 questions_fetch.php - Buscando preguntas para módulo: $modulo");
     
     // Consulta para obtener preguntas del módulo
-    $sql = "SELECT id_pregunta, pregunta, modulo 
+    $sql = "SELECT id, pregunta, modulo 
             FROM preguntas 
             WHERE modulo = :modulo 
-            ORDER BY id_pregunta ASC";
+            ORDER BY id ASC";
     
     $stmt = $conn->prepare($sql);
     $stmt->execute(['modulo' => $modulo]);

@@ -8,9 +8,9 @@ try {
     error_log("🔍 cargos_fetch.php - Iniciando consulta de cargos");
     
     // Consulta para obtener cargos
-    $sql = "SELECT id_cargo, cargo 
+    $sql = "SELECT id, cargo 
             FROM cargos 
-            ORDER BY id_cargo ASC";
+            ORDER BY id ASC";
     
     $stmt = $conn->prepare($sql);
     $stmt->execute();
