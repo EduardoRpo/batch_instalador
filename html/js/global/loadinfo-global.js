@@ -13,23 +13,34 @@ let text;
 dataBatch = async () => {
   let result;
   try {
+    console.log('🔍 dataBatch - Iniciando búsqueda de batch con ID:', idBatch);
+    console.log('🔍 dataBatch - URL que se va a llamar:', `/html/php/batch_info_fetch.php?id=${idBatch}`);
+    
     result = await $.ajax({ url: `/html/php/batch_info_fetch.php?id=${idBatch}` });
+    console.log('✅ dataBatch - Respuesta exitosa:', result);
     return result;
   } catch (error) {
-    console.error(error);
+    console.error('❌ dataBatch - Error en la petición:', error);
+    console.error('❌ dataBatch - Status:', error.status);
+    console.error('❌ dataBatch - Response:', error.responseText);
   }
 };
 
 cargarInfoBatch = async () => {
+  console.log('🔍 cargarInfoBatch - Iniciando carga de información del batch');
   const data = await dataBatch();
+  console.log('🔍 cargarInfoBatch - Datos recibidos de dataBatch:', data);
 
   if (!data || data == null) {
+    console.error('❌ cargarInfoBatch - No se encontraron datos para el batch');
     alertify.set('notifier', 'position', 'top-right');
     alertify.error(`No existe el batch en la Base de datos (${idBatch})`);
     return 1;
   } else {
+    console.log('✅ cargarInfoBatch - Datos encontrados, procesando...');
     batch = data;
     const tamano_lote = formatoCO(Math.ceil(data.tamano_lote));
+    console.log('🔍 cargarInfoBatch - Tamaño lote formateado:', tamano_lote);
 
     $('#in_numero_orden').val(data.numero_orden);
     $('#in_numero_lote').val(data.numero_lote);
@@ -47,6 +58,8 @@ cargarInfoBatch = async () => {
     localStorage.setItem('tamano_lote', data.tamano_lote);
     batchInfo = JSON.stringify(batch);
     sessionStorage.setItem('batch', batchInfo);
+    
+    console.log('✅ cargarInfoBatch - Información del batch cargada exitosamente');
   }
 };
 

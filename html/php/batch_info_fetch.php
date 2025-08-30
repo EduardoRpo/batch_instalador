@@ -1,4 +1,5 @@
 <?php
+// Archivo creado para resolver errores 500 en pesaje - Reemplaza API /api/batch/{id}
 require_once __DIR__ . '/../../conexion.php';
 
 // Configurar headers para JSON

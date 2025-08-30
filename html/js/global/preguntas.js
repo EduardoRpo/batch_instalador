@@ -4,20 +4,36 @@ $(document).ready(function () {
   preguntas = async (modulo) => {
     let result;
     try {
-      result = await $.ajax({ url: `/api/questions/${modulo}` });
+      console.log('🔍 preguntas - Buscando preguntas para módulo:', modulo);
+      console.log('🔍 preguntas - URL que se va a llamar:', `/html/php/questions_fetch.php?modulo=${modulo}`);
+      
+      result = await $.ajax({ url: `/html/php/questions_fetch.php?modulo=${modulo}` });
+      console.log('✅ preguntas - Respuesta exitosa:', result);
       return result;
     } catch (error) {
-      console.error(error);
+      console.error('❌ preguntas - Error en la petición:', error);
+      console.error('❌ preguntas - Status:', error.status);
+      console.error('❌ preguntas - Response:', error.responseText);
     }
   };
 
   carguepreguntas = async () => {
+    console.log('🔍 carguepreguntas - Iniciando carga de preguntas');
     const data = await preguntas(modulo);
+    console.log('🔍 carguepreguntas - Datos recibidos:', data);
+    
+    if (!data || !Array.isArray(data)) {
+      console.error('❌ carguepreguntas - No se recibieron datos válidos:', data);
+      return;
+    }
+    
     cantidadpreguntas = data.length;
+    console.log('🔍 carguepreguntas - Cantidad de preguntas:', cantidadpreguntas);
 
     $('#preguntas-div').html('');
 
     data.forEach((question, indx) => {
+      console.log(`🔍 carguepreguntas - Procesando pregunta ${indx + 1}:`, question);
       $('#preguntas-div').append(`
                 <a for="recipient-name" class="col-form-label" id="${question.id_pregunta}">${question.pregunta}</a>
                 <label class="checkbox"> 
@@ -25,6 +41,7 @@ $(document).ready(function () {
                 <label class="checkbox"> 
                 <input type="radio" name="question-${question.id_pregunta}" id="${question.id_pregunta}" value="0"/></label>`);
     });
+    console.log('✅ carguepreguntas - Preguntas cargadas exitosamente');
     //cargarPreguntasAlmacenadas(data)
   };
 
