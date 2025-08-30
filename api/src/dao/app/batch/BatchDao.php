@@ -140,6 +140,8 @@ class BatchDao extends estadoInicialDao
     public function findBatchById($id)
     {
         $connection = Connection::getInstance()->getConnection();
+        
+        // Primero intentar con la consulta original (con filtro de fecha)
         $stmt = $connection->prepare("SELECT b.id_batch, b.pedido, p.referencia, p.nombre_referencia, pc.nombre AS presentacion, m.nombre AS marca, 
                                              ns.nombre AS notificacion_sanitaria, p.unidad_empaque, pp.nombre as propietario, b.numero_orden, b.tamano_lote, b.numero_lote, 
                                              b.unidad_lote, l.nombre as linea, l.densidad, p.densidad_producto, b.fecha_programacion, b.fecha_creacion, b.estado, p.img, DATE_ADD(exp.fecha_insumo, INTERVAL 8 DAY) AS fecha_insumo, 
@@ -158,6 +160,34 @@ class BatchDao extends estadoInicialDao
         $stmt->execute(array('idBatch' => $id));
         $this->logger->info(__FUNCTION__, array('query' => $stmt->queryString, 'errors' => $stmt->errorInfo()));
         $batch = $stmt->fetch($connection::FETCH_ASSOC);
+        
+        error_log("🔍 BatchDao - findBatchById con filtro de fecha para ID $id: " . json_encode($batch));
+        
+        // Si no encuentra nada, intentar sin el filtro de fecha
+        if (!$batch) {
+            error_log("🔍 BatchDao - No se encontró batch con filtro de fecha, intentando sin filtro...");
+            
+            $stmt2 = $connection->prepare("SELECT b.id_batch, b.pedido, p.referencia, p.nombre_referencia, pc.nombre AS presentacion, m.nombre AS marca, 
+                                                 ns.nombre AS notificacion_sanitaria, p.unidad_empaque, pp.nombre as propietario, b.numero_orden, b.tamano_lote, b.numero_lote, 
+                                                 b.unidad_lote, l.nombre as linea, l.densidad, p.densidad_producto, b.fecha_programacion, b.fecha_creacion, b.estado, p.img, DATE_ADD(exp.fecha_insumo, INTERVAL 8 DAY) AS fecha_insumo, 
+                                                 IFNULL(bt.tanque,0) AS tanque, IFNULL(bt.cantidad,0) AS cantidad
+                                          FROM batch b
+                                                INNER JOIN producto p ON p.referencia = b.id_producto
+                                                LEFT JOIN multipresentacion mul ON mul.id_batch = b.id_batch
+                                                INNER JOIN presentacion_comercial pc ON pc.id = p.presentacion_comercial 
+                                                INNER JOIN linea l ON l.id = p.id_linea 
+                                                INNER JOIN propietario pp ON pp.id = p.id_propietario 
+                                                INNER JOIN marca m ON m.id = p.id_marca
+                                                INNER JOIN notificacion_sanitaria ns ON ns.id = p.id_notificacion_sanitaria
+                                                LEFT JOIN plan_pedidos exp ON exp.id_producto = mul.referencia
+                                                LEFT JOIN batch_tanques bt ON bt.id_batch = b.id_batch
+                                          WHERE b.id_batch = :idBatch ORDER BY `exp`.`fecha_insumo` DESC LIMIT 1;");
+            $stmt2->execute(array('idBatch' => $id));
+            $batch = $stmt2->fetch($connection::FETCH_ASSOC);
+            
+            error_log("🔍 BatchDao - findBatchById sin filtro de fecha para ID $id: " . json_encode($batch));
+        }
+        
         $this->logger->notice("batch consultado", array('batch' => $batch));
         return $batch;
     }

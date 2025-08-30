@@ -13,7 +13,7 @@ let text;
 dataBatch = async () => {
   let result;
   try {
-    result = await $.ajax({ url: `/api/batch/${idBatch}` });
+    result = await $.ajax({ url: `/html/php/batch_info_fetch.php?id=${idBatch}` });
     return result;
   } catch (error) {
     console.error(error);

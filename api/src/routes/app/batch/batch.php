@@ -48,14 +48,25 @@ $app->get('/batch', function (Request $request, Response $data, $args) use ($bat
 });
 
 $app->get('/batch/{id}', function (Request $request, Response $response, $args) use ($batchDao, $tanquesDao) {
-  $dataBatch = $batchDao->findBatchById($args["id"]);
+  $idBatch = $args["id"];
+  error_log("🔍 API /batch/{id} - Buscando batch con ID: $idBatch");
+  
+  $dataBatch = $batchDao->findBatchById($idBatch);
+  error_log("🔍 API /batch/{id} - Resultado de findBatchById: " . json_encode($dataBatch));
 
   if ($dataBatch != false) {
-    $tanques = $tanquesDao->findTanquesById($args["id"]);
+    $tanques = $tanquesDao->findTanquesById($idBatch);
+    error_log("🔍 API /batch/{id} - Tanques encontrados: " . json_encode($tanques));
+    
     if ($tanques != false)
       $batch = array_merge($dataBatch, $tanques);
     else
       $batch = $dataBatch;
+      
+    error_log("🔍 API /batch/{id} - Batch final: " . json_encode($batch));
+  } else {
+    error_log("❌ API /batch/{id} - No se encontró batch con ID: $idBatch");
+    $batch = null;
   }
 
   $response->getBody()->write(json_encode($batch, JSON_NUMERIC_CHECK));
