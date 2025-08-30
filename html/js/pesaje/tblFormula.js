@@ -1,3 +1,14 @@
+/**
+ * Archivo tblFormula.js - Configuración de DataTable para pesaje
+ * Cambiado URL de API a fetch.php para resolver errores de DataTables
+ * Agregado parámetro de versión para evitar cache del navegador
+ * Creado para resolver error 'DataTables warning: table id=tablePesaje - Ajax error'
+ * 
+ * @author Sistema
+ * @version 1.0
+ * @date 2025-01-01
+ */
+
 $(document).ready(function() {
 
     let linea

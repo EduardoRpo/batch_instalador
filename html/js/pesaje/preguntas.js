@@ -1,3 +1,13 @@
+/**
+ * Archivo preguntas.js - Manejo de preguntas para módulos
+ * Agregado parámetro de versión para evitar cache del navegador
+ * Creado para resolver errores 404 en questions_fetch.php
+ * 
+ * @author Sistema
+ * @version 1.0
+ * @date 2025-01-01
+ */
+
 const preguntas = async (modulo) => {
     console.log('🔍 preguntas - Buscando preguntas para módulo:', modulo);
     console.log('🔍 preguntas - URL que se va a llamar:', `/html/php/questions_fetch.php?modulo=${modulo}&v=${Date.now()}`);

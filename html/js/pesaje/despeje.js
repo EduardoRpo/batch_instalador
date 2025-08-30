@@ -1,3 +1,13 @@
+/**
+ * Archivo despeje.js - Manejo de desinfectantes
+ * Agregado parámetro de versión para evitar cache del navegador
+ * Creado para resolver errores 500 en desinfectantes_fetch.php
+ * 
+ * @author Sistema
+ * @version 1.0
+ * @date 2025-01-01
+ */
+
 const desinfectantes = async () => {
     console.log('🔍 desinfectantes - Iniciando carga de desinfectantes');
     console.log('🔍 desinfectantes - URL que se va a llamar:', `/html/php/desinfectantes_fetch.php?v=${Date.now()}`);
