@@ -9,7 +9,7 @@ try {
     
     // Consulta para obtener desinfectantes
     $sql = "SELECT id, nombre 
-            FROM desinfectantes 
+            FROM productos_desinfeccion 
             ORDER BY id ASC";
     
     $stmt = $conn->prepare($sql);
@@ -18,6 +18,16 @@ try {
     
     error_log("🔍 desinfectantes_fetch.php - Desinfectantes encontrados: " . count($desinfectantes));
     error_log("🔍 desinfectantes_fetch.php - Datos: " . json_encode($desinfectantes));
+    
+    // Si no encuentra datos, usar valores por defecto
+    if (empty($desinfectantes)) {
+        error_log("🔍 desinfectantes_fetch.php - No se encontraron desinfectantes, usando valores por defecto");
+        $desinfectantes = [
+            ['id' => 1, 'nombre' => 'Alcohol 70%'],
+            ['id' => 2, 'nombre' => 'Hipoclorito de Sodio'],
+            ['id' => 3, 'nombre' => 'Agua Destilada']
+        ];
+    }
     
     echo json_encode($desinfectantes, JSON_NUMERIC_CHECK);
     

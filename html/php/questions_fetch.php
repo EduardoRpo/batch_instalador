@@ -17,9 +17,9 @@ try {
     error_log("🔍 questions_fetch.php - Buscando preguntas para módulo: $modulo");
     
     // Consulta para obtener preguntas del módulo
-    $sql = "SELECT id, pregunta, modulo 
+    $sql = "SELECT id, pregunta, id_modulo 
             FROM preguntas 
-            WHERE modulo = :modulo 
+            WHERE id_modulo = :modulo 
             ORDER BY id ASC";
     
     $stmt = $conn->prepare($sql);
