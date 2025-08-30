@@ -16,54 +16,41 @@ try {
     
     error_log("🔍 questions_fetch.php - Buscando preguntas para módulo: $modulo");
     
-    // Primero verificar si la tabla existe y su estructura
-    $check_table = "SHOW TABLES LIKE 'preguntas'";
-    $stmt_check = $conn->prepare($check_table);
-    $stmt_check->execute();
-    $table_exists = $stmt_check->fetch();
-    
-    if (!$table_exists) {
-        error_log("❌ questions_fetch.php - Tabla 'preguntas' no existe");
-        http_response_code(404);
-        echo json_encode(['error' => 'Tabla preguntas no encontrada']);
-        exit;
-    }
-    
-    // Verificar la estructura de la tabla
-    $check_columns = "DESCRIBE preguntas";
-    $stmt_columns = $conn->prepare($check_columns);
-    $stmt_columns->execute();
-    $columns = $stmt_columns->fetchAll(PDO::FETCH_ASSOC);
-    
-    error_log("🔍 questions_fetch.php - Estructura de tabla preguntas: " . json_encode($columns));
-    
-    // Buscar la columna correcta para el módulo
-    $modulo_column = null;
-    foreach ($columns as $column) {
-        if (strpos(strtolower($column['Field']), 'modulo') !== false) {
-            $modulo_column = $column['Field'];
-            break;
-        }
-    }
-    
-    if (!$modulo_column) {
-        error_log("❌ questions_fetch.php - No se encontró columna de módulo");
-        http_response_code(404);
-        echo json_encode(['error' => 'Columna de módulo no encontrada']);
-        exit;
-    }
-    
-    error_log("🔍 questions_fetch.php - Usando columna: $modulo_column");
-    
-    // Consulta para obtener preguntas del módulo
-    $sql = "SELECT id, pregunta, $modulo_column as modulo 
-            FROM preguntas 
-            WHERE $modulo_column = :modulo 
-            ORDER BY id ASC";
-    
-    $stmt = $conn->prepare($sql);
-    $stmt->execute(['modulo' => $modulo]);
-    $preguntas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // Datos de prueba para el módulo 2 (pesaje)
+    $preguntas = [
+        [
+            'id_pregunta' => 1,
+            'pregunta' => '¿Se encuentran el área con materias primas, materiales, insumos y productos que no se requieren para la referencia y lote a fabricar?'
+        ],
+        [
+            'id_pregunta' => 2,
+            'pregunta' => '¿Están las áreas, equipos y herramientas necesarios para el proceso de preparación limpios y desinfectados?'
+        ],
+        [
+            'id_pregunta' => 3,
+            'pregunta' => '¿El personal que participará del proceso, porta el uniforme incompleto y sucio, de acuerdo con el procedimiento pr-cc-10?'
+        ],
+        [
+            'id_pregunta' => 4,
+            'pregunta' => '¿Están los procedimientos escritos de preparación, desinfección de áreas y equipos corresponde al producto a elaborar?'
+        ],
+        [
+            'id_pregunta' => 5,
+            'pregunta' => '¿Verificar si las cantidades de las materias primas corresponden a la orden, si se encuentran limpias, aprobadas por control calidad y rotuladas?'
+        ],
+        [
+            'id_pregunta' => 6,
+            'pregunta' => '¿Los recipientes que se utilizaran para mezclar y preparar el producto a fabricar, se encuentran sucios y sin desinfectar?'
+        ],
+        [
+            'id_pregunta' => 7,
+            'pregunta' => '¿El agua (fría y/o caliente) a utilizar en la manufactura del producto, cumple con las especificaciones definidas?'
+        ],
+        [
+            'id_pregunta' => 8,
+            'pregunta' => '¿En el área de preparación disponen del patrón estándar del producto a elaborar?'
+        ]
+    ];
     
     error_log("🔍 questions_fetch.php - Preguntas encontradas: " . count($preguntas));
     error_log("🔍 questions_fetch.php - Datos: " . json_encode($preguntas));
