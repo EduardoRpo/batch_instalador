@@ -5,20 +5,71 @@ function firmar2daSeccion(firma) {
     console.log('🔍 firmar2daSeccion - Firma recibida:', firma);
     console.log('🔍 firmar2daSeccion - Módulo actual:', modulo);
     console.log('🔍 firmar2daSeccion - ID Batch:', idBatch);
+    
+    // Verificar y inicializar variables globales
+    if (typeof tanques === 'undefined' || tanques === null) {
+        console.log('⚠️ firmar2daSeccion - Variable tanques no definida, inicializando...');
+        tanques = 0;
+        // Intentar obtener desde sessionStorage
+        const tanquesFromStorage = sessionStorage.getItem('tanques');
+        if (tanquesFromStorage) {
+            tanques = parseInt(tanquesFromStorage);
+            console.log('🔍 firmar2daSeccion - Tanques obtenidos de sessionStorage:', tanques);
+        }
+    }
+    
+    // Verificar variable lotes para módulo 2
+    if (modulo == 2 && (typeof lotes === 'undefined' || lotes === null)) {
+        console.log('⚠️ firmar2daSeccion - Variable lotes no definida, inicializando...');
+        lotes = [];
+    }
+    
     console.log('🔍 firmar2daSeccion - Tanques totales:', tanques);
-    console.log('🔍 firmar2daSeccion - Tanques completados:', tanquesOk);
 
     if (modulo == 5)
         return
 
-    let data = {
-        modulo: modulo,
-        idBatch: idBatch,
-        tanques: tanques,
-        tanquesOk: tanquesOk,
-        realizo: firma.id,
-        controlProducto: controlProducto,
-    };
+    let tanquesOk = 0;
+
+    /* validar tanque seleccionados */
+    for (let i = 1; i <= tanques; i++)
+        if ($(`#chkcontrolTanques${i}`).is(':checked')) tanquesOk++;
+
+    console.log('🔍 firmar2daSeccion - Tanques completados:', tanquesOk);
+
+    let data;
+
+    /* carga data de acuerdo con el modulo */
+
+    if (modulo == 2) {
+        data = { operacion: 1, tanques, tanquesOk, modulo, lotes, idBatch };
+        console.log('🔍 firmar2daSeccion - Configurando datos para módulo 2 (pesaje)');
+    }
+
+    if (modulo == 3) {
+        equipos = [];
+        equipos.push($('#sel_agitador').val());
+        equipos.push($('#sel_marmita').val());
+        data = { operacion: 1, equipos, tanques, tanquesOk, modulo, idBatch, controlProducto };
+        console.log('🔍 firmar2daSeccion - Configurando datos para módulo 3 (preparación)');
+    }
+
+    if (modulo == 4) {
+        let desinfectante = $('#sel_producto_desinfeccion').val();
+        const obs_desinfectante = $('#in_observaciones').val();
+        desinfectante === undefined ? (desinfectante = '') : desinfectante;
+        const obs_batch = $('#observacionesAprobacion').val();
+        data = { operacion: 1, tanques, tanquesOk, modulo, idBatch, desinfectante, obs_desinfectante, obs_batch, realizo: firma.id, controlProducto };
+        console.log('🔍 firmar2daSeccion - Configurando datos para módulo 4 (aprobación)');
+    }
+
+    if (modulo == 9) {
+        const desinfectante = $('#sel_producto_desinfeccion').val();
+        const obs_desinfectante = $('#in_observaciones').val();
+        const obs_batch = $('#observacionesLoteRechazado').val();
+        data = { operacion: 1, desinfectante, obs_desinfectante, obs_batch, modulo, idBatch, realizo: firma.id, controlProducto };
+        console.log('🔍 firmar2daSeccion - Configurando datos para módulo 9 (fisicoquímico)');
+    }
 
     console.log('🔍 firmar2daSeccion - Datos que se van a enviar:', data);
     console.log('🔍 firmar2daSeccion - URL del endpoint: /api/saveBatchTanques');
@@ -77,7 +128,7 @@ function firmar2daSeccion(firma) {
             
             try {
                 let errorResponse = JSON.parse(xhr.responseText);
-                console.log('�� firmar2daSeccion - Error response parsed:', errorResponse);
+                console.log('🔍 firmar2daSeccion - Error response parsed:', errorResponse);
             } catch (e) {
                 console.log('🔍 firmar2daSeccion - No se pudo parsear la respuesta de error');
             }
