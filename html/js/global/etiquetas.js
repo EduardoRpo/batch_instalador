@@ -31,7 +31,7 @@ const imprimirEtiquetasFull = (marmita) => {
   const ref = batch.referencia;
 
   $.ajax({
-    url: `/api/materiasp/${ref}`,
+    url: `/html/php/materiasp_fetch.php?idProduct=${ref}&v=${Date.now()}`,
     success: function (materiaPrima) {
       $.ajax({
         url: `/api/user/${modulo}/${idBatch}`,
