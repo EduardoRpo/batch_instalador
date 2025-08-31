@@ -1,49 +1,41 @@
 /* firmar 2da sección  */
 
 function firmar2daSeccion(firma) {
+    console.log('🔍 firmar2daSeccion - Iniciando función');
+    console.log('🔍 firmar2daSeccion - Firma recibida:', firma);
+    console.log('🔍 firmar2daSeccion - Módulo actual:', modulo);
+    console.log('🔍 firmar2daSeccion - ID Batch:', idBatch);
+    console.log('🔍 firmar2daSeccion - Tanques totales:', tanques);
+    console.log('🔍 firmar2daSeccion - Tanques completados:', tanquesOk);
 
     if (modulo == 5)
         return
 
-    let tanquesOk = 0;
+    let data = {
+        modulo: modulo,
+        idBatch: idBatch,
+        tanques: tanques,
+        tanquesOk: tanquesOk,
+        realizo: firma.id,
+        controlProducto: controlProducto,
+    };
 
-    /* validar tanque seleccionados */
-    for (let i = 1; i <= tanques; i++)
-        if ($(`#chkcontrolTanques${i}`).is(':checked')) tanquesOk++;
-
-        /* carga data de acuerdo con el modulo */
-
-    if (modulo == 2)
-        data = { operacion: 1, tanques, tanquesOk, modulo, lotes, idBatch, };
-
-    if (modulo == 3) {
-        equipos = [];
-        equipos.push($('#sel_agitador').val());
-        equipos.push($('#sel_marmita').val());
-        data = { operacion: 1, equipos, tanques, tanquesOk, modulo, idBatch, controlProducto };
-    }
-
-    if (modulo == 4) {
-        let desinfectante = $('#sel_producto_desinfeccion').val();
-        const obs_desinfectante = $('#in_observaciones').val();
-        desinfectante === undefined ? (desinfectante = '') : desinfectante;
-        const obs_batch = $('#observacionesAprobacion').val();
-        data = { operacion: 1, tanques, tanquesOk, modulo, idBatch, desinfectante, obs_desinfectante, obs_batch, realizo: firma.id, controlProducto };
-    }
-
-    if (modulo == 9) {
-        const desinfectante = $('#sel_producto_desinfeccion').val();
-        const obs_desinfectante = $('#in_observaciones').val();
-        const obs_batch = $('#observacionesLoteRechazado').val();
-        data = { operacion: 1, desinfectante, obs_desinfectante, obs_batch, modulo, idBatch, realizo: firma.id, controlProducto, };
-    }
+    console.log('🔍 firmar2daSeccion - Datos que se van a enviar:', data);
+    console.log('🔍 firmar2daSeccion - URL del endpoint: /api/saveBatchTanques');
+    console.log('📤 firmar2daSeccion - Enviando datos al backend...');
 
     $.ajax({
         type: 'POST',
         url: '/api/saveBatchTanques',
         data: data,
-
+        beforeSend: function() {
+            console.log('⏳ firmar2daSeccion - Iniciando petición AJAX');
+        },
         success: function(response) {
+            console.log('✅ firmar2daSeccion - Respuesta recibida:', response);
+            console.log('🔍 firmar2daSeccion - Tipo de respuesta:', typeof response);
+            console.log('🔍 firmar2daSeccion - Respuesta.success:', response.success);
+            console.log('🔍 firmar2daSeccion - Respuesta.message:', response.message);
 
             if (response) {
                 alertify.set('notifier', 'position', 'top-right');
@@ -51,6 +43,7 @@ function firmar2daSeccion(firma) {
                 $(`#chkcontrolTanques${tanquesOk}`).prop('disabled', true);
 
                 if (modulo == 2) {
+                    console.log('🔍 firmar2daSeccion - Procesando módulo 2 (pesaje)');
                     $(tablePesaje).find('tbody tr').removeClass('tr_hover');
                     $(tablePesaje).find('tbody tr').removeClass('not-active');
                     $(tablePesaje).find('tbody .valor').html(' ');
@@ -59,17 +52,39 @@ function firmar2daSeccion(firma) {
                 }
 
                 if (modulo == 3 || modulo == 4) {
+                    console.log('🔍 firmar2daSeccion - Procesando módulo 3 o 4');
                     $(`.especificacion`).val('0');
                     $(`.especificacionInput`).val('');
                 }
 
                 if (modulo == 3) reiniciarInstructivo();
-                if (tanques == tanquesOk) firmarSeccionCierreProceso(firma);
+                if (tanques == tanquesOk) {
+                    console.log('🔍 firmar2daSeccion - Todos los tanques completados, ejecutando firmarSeccionCierreProceso');
+                    firmarSeccionCierreProceso(firma);
+                }
             } else {
+                console.log('❌ firmar2daSeccion - Respuesta vacía o nula');
                 alertify.set('notifier', 'position', 'top-right');
                 alertify.error(response.message);
             }
         },
+        error: function(xhr, status, error) {
+            console.log('❌ firmar2daSeccion - Error en petición AJAX');
+            console.log('🔍 firmar2daSeccion - Status:', status);
+            console.log('🔍 firmar2daSeccion - Error:', error);
+            console.log('🔍 firmar2daSeccion - XHR status:', xhr.status);
+            console.log('🔍 firmar2daSeccion - XHR responseText:', xhr.responseText);
+            
+            try {
+                let errorResponse = JSON.parse(xhr.responseText);
+                console.log('�� firmar2daSeccion - Error response parsed:', errorResponse);
+            } catch (e) {
+                console.log('🔍 firmar2daSeccion - No se pudo parsear la respuesta de error');
+            }
+            
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.error('Error al procesar la firma. Revisa la consola para más detalles.');
+        }
     });
 }
 
