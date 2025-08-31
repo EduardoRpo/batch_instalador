@@ -42,7 +42,7 @@ function firmar2daSeccion(firma) {
     /* carga data de acuerdo con el modulo */
 
     if (modulo == 2) {
-        data = { operacion: 1, tanques, tanquesOk, modulo, lotes, idBatch };
+        data = { operacion: 1, tanques, tanquesOk, modulo, lotes, idBatch, linea: 1 };
         console.log('🔍 firmar2daSeccion - Configurando datos para módulo 2 (pesaje)');
     }
 
@@ -50,7 +50,7 @@ function firmar2daSeccion(firma) {
         equipos = [];
         equipos.push($('#sel_agitador').val());
         equipos.push($('#sel_marmita').val());
-        data = { operacion: 1, equipos, tanques, tanquesOk, modulo, idBatch, controlProducto };
+        data = { operacion: 1, equipos, tanques, tanquesOk, modulo, idBatch, controlProducto, linea: 1 };
         console.log('🔍 firmar2daSeccion - Configurando datos para módulo 3 (preparación)');
     }
 
@@ -59,7 +59,7 @@ function firmar2daSeccion(firma) {
         const obs_desinfectante = $('#in_observaciones').val();
         desinfectante === undefined ? (desinfectante = '') : desinfectante;
         const obs_batch = $('#observacionesAprobacion').val();
-        data = { operacion: 1, tanques, tanquesOk, modulo, idBatch, desinfectante, obs_desinfectante, obs_batch, realizo: firma.id, controlProducto };
+        data = { operacion: 1, tanques, tanquesOk, modulo, idBatch, desinfectante, obs_desinfectante, obs_batch, realizo: firma.id, controlProducto, linea: 1 };
         console.log('🔍 firmar2daSeccion - Configurando datos para módulo 4 (aprobación)');
     }
 
@@ -67,7 +67,7 @@ function firmar2daSeccion(firma) {
         const desinfectante = $('#sel_producto_desinfeccion').val();
         const obs_desinfectante = $('#in_observaciones').val();
         const obs_batch = $('#observacionesLoteRechazado').val();
-        data = { operacion: 1, desinfectante, obs_desinfectante, obs_batch, modulo, idBatch, realizo: firma.id, controlProducto };
+        data = { operacion: 1, desinfectante, obs_desinfectante, obs_batch, modulo, idBatch, realizo: firma.id, controlProducto, linea: 1 };
         console.log('🔍 firmar2daSeccion - Configurando datos para módulo 9 (fisicoquímico)');
     }
 

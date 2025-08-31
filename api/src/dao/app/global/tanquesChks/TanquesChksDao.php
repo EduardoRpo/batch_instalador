@@ -81,9 +81,10 @@ class TanquesChksDao
                 }
             } else {
                 error_log('🔍 TanquesChksDao::saveTanquesChks - Insertando nuevo registro');
-                $sql = "INSERT INTO batch_tanques_chks (tanques, tanquesOk, modulo, batch) VALUES(:tanques, :tanquesOk, :modulo, :batch)";
+                $sql = "INSERT INTO batch_tanques_chks (linea, tanques, tanquesOk, modulo, batch) VALUES(:linea, :tanques, :tanquesOk, :modulo, :batch)";
                 $query = $connection->prepare($sql);
                 $result = $query->execute([
+                    'linea' => $dataTanques['linea'] ?? 1, // Valor por defecto si no se proporciona
                     'tanques' => $dataTanques['tanques'],
                     'tanquesOk' => $dataTanques['tanquesOk'],
                     'modulo' => $dataTanques['modulo'],

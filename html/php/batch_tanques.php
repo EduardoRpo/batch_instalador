@@ -36,9 +36,9 @@ if (!empty($_POST)) {
                     $query = $conn->prepare($sql);
                     $result = $query->execute(['tanquesOk' => $tanquesOk, 'modulo' => $modulo, 'batch' => $batch]);
                 } else {
-                    $sql = "INSERT INTO batch_tanques_chks (tanques, tanquesOk, modulo, batch) VALUES(:tanques, :tanquesOk, :modulo, :batch)";
+                    $sql = "INSERT INTO batch_tanques_chks (linea, tanques, tanquesOk, modulo, batch) VALUES(:linea, :tanques, :tanquesOk, :modulo, :batch)";
                     $query = $conn->prepare($sql);
-                    $result = $query->execute(['tanques' => $tanques, 'tanquesOk' => $tanquesOk, 'modulo' => $modulo, 'batch' => $batch]);
+                    $result = $query->execute(['linea' => 1, 'tanques' => $tanques, 'tanquesOk' => $tanquesOk, 'modulo' => $modulo, 'batch' => $batch]);
                 }
             }
 
