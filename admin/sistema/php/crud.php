@@ -67,14 +67,12 @@ function ejecutarQuerySelect($conn, $query)
     $result = $conn->query($query);
 
     //Almacena la data en array
+    $arreglo = array("data" => array());
     while ($data = $result->fetch(PDO::FETCH_ASSOC)) {
         $arreglo["data"][] = $data;
     }
-    if (empty($arreglo)) {
-        echo '3';
-        exit();
-    }
-
+    
+    // Siempre devolver JSON válido, incluso si no hay datos
     echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
 }
 
@@ -82,14 +80,12 @@ function ejecutarQuerySelect($conn, $query)
 function ejecutarSelect($conn, $query)
 {
     //Almacena la data en array
+    $arreglo = array("data" => array());
     while ($data = $query->fetch(PDO::FETCH_ASSOC)) {
         $arreglo["data"][] = $data;
     }
-    if (empty($arreglo)) {
-        echo '3';
-        exit();
-    }
-
+    
+    // Siempre devolver JSON válido, incluso si no hay datos
     echo json_encode($arreglo, JSON_UNESCAPED_UNICODE);
 }
 
@@ -98,12 +94,12 @@ function ejecutarSelect1($query)
     //Almacena la data en array
     $data = $query->fetch(PDO::FETCH_ASSOC);
 
+    // Siempre devolver JSON válido, incluso si no hay datos
     if (empty($data)) {
-        echo '3';
-        exit();
+        echo json_encode(array(), JSON_UNESCAPED_UNICODE);
+    } else {
+        echo json_encode($data, JSON_UNESCAPED_UNICODE);
     }
-
-    echo json_encode($data, JSON_UNESCAPED_UNICODE);
 }
 
 function transaccion($conn, $query1, $query2)
