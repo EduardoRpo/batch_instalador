@@ -38,9 +38,17 @@ if (!empty($_POST)) {
             $query = $conn->prepare($sql);
             $query->execute(['batch' => $batch, 'modulo' => $modulo]);
             $rows = $query->rowCount();
-            if ($rows > 0)
+            
+            if ($rows > 0) {
                 ejecutarSelect1($query);
-
+            } else {
+                // Devolver JSON vacío pero válido cuando no hay datos
+                echo json_encode([
+                    'desinfectante' => '',
+                    'observaciones' => '',
+                    'urlfirma' => ''
+                ]);
+            }
             break;
 
         case 3: // cargar 2da firma despeje
@@ -56,6 +64,11 @@ if (!empty($_POST)) {
 
             if ($rows > 0) {
                 ejecutarSelect1($query);
+            } else {
+                // Devolver JSON vacío pero válido cuando no hay datos
+                echo json_encode([
+                    'urlfirma' => ''
+                ]);
             }
             break;
         case 4: //Almacenar datos y firma 1ra seccion

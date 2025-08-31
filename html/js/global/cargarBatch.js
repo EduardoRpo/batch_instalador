@@ -44,49 +44,78 @@ $(document).ready(function() {
     /* Carga desinfectante y observaciones almacenadas en el batch */
 
     cargarDesinfectante = () => {
+        console.log('🔍 cargarDesinfectante - Iniciando carga de desinfectante');
+        console.log('🔍 cargarDesinfectante - Módulo:', modulo, 'ID Batch:', idBatch);
+        
         $.ajax({
             type: "POST",
             url: "../../html/php/despeje.php",
             data: { operacion: 2, modulo, idBatch },
 
             success: function(response) {
+                console.log('🔍 cargarDesinfectante - Respuesta recibida:', response);
+                console.log('🔍 cargarDesinfectante - Tipo de respuesta:', typeof response);
+                
                 /* Carga observaciones, desinfectante y firma */
+                try {
+                    let info = JSON.parse(response);
+                    console.log('🔍 cargarDesinfectante - JSON parseado exitosamente:', info);
+                    
+                    desinfectante = info.desinfectante;
+                    observacion = info.observaciones;
+                    firma = info.urlfirma;
 
-                let info = JSON.parse(response);
-                desinfectante = info.desinfectante;
-                observacion = info.observaciones;
-                firma = info.urlfirma;
+                    $("#sel_producto_desinfeccion").val(desinfectante);
+                    $("#in_observaciones").val(observacion);
+                    firmado(firma, 1);
 
-                $("#sel_producto_desinfeccion").val(desinfectante);
-                $("#in_observaciones").val(observacion);
-                firmado(firma, 1);
+                    $.ajax({
+                        type: "POST",
+                        url: "../../html/php/despeje.php",
+                        data: { operacion: 3, modulo, idBatch },
 
-                $.ajax({
-                    type: "POST",
-                    url: "../../html/php/despeje.php",
-                    data: { operacion: 3, modulo, idBatch },
+                        success: function(response) {
+                            console.log('🔍 cargarDesinfectante - Respuesta segunda firma:', response);
+                            
+                            if (response == "") {
+                                console.log('🔍 cargarDesinfectante - No hay segunda firma');
+                                if (modulo == 3) {
+                                    cargarEquipos();
+                                    cargarControlProceso();
+                                }
 
-                    success: function(response) {
-                        if (response == "") {
-                            if (modulo == 3) {
-                                cargarEquipos();
-                                cargarControlProceso();
+                                cargarfirma2daSeccion();
+                                return false;
+                            }
+
+                            /* Carga segunda firma */
+                            try {
+                                let info = JSON.parse(response);
+                                console.log('🔍 cargarDesinfectante - Segunda firma parseada:', info);
+                                firma = info.urlfirma;
+                                firmado(firma, 2);
+                            } catch (e) {
+                                console.log('❌ cargarDesinfectante - Error parseando segunda firma:', e);
                             }
 
                             cargarfirma2daSeccion();
-                            return false;
+                        },
+                        error: function(xhr, status, error) {
+                            console.log('❌ cargarDesinfectante - Error en segunda firma:', error);
+                            console.log('🔍 cargarDesinfectante - XHR status:', xhr.status);
+                            console.log('🔍 cargarDesinfectante - XHR responseText:', xhr.responseText);
                         }
-
-                        /* Carga segunda firma */
-
-                        let info = JSON.parse(response);
-                        firma = info.urlfirma;
-                        firmado(firma, 2);
-
-                        cargarfirma2daSeccion();
-                    },
-                });
+                    });
+                } catch (e) {
+                    console.log('❌ cargarDesinfectante - Error parseando JSON:', e);
+                    console.log('🔍 cargarDesinfectante - Respuesta que causó el error:', response);
+                }
             },
+            error: function(xhr, status, error) {
+                console.log('❌ cargarDesinfectante - Error en petición AJAX:', error);
+                console.log('🔍 cargarDesinfectante - XHR status:', xhr.status);
+                console.log('🔍 cargarDesinfectante - XHR responseText:', xhr.responseText);
+            }
         });
     }
 
