@@ -32,9 +32,12 @@ class FlagStartDao
     {
         $connection = Connection::getInstance()->getConnection();
 
-        $stmt = $connection->prepare("INSERT INTO batch_flag_start (referencia, modulo, batch) 
-                                      VALUES (:referencia, :modulo, :batch)");
+        $stmt = $connection->prepare("INSERT INTO batch_flag_start (flag_start_preparacion, flag_start_envasado, flag_start_acondicionamiento, referencia, modulo, batch) 
+                                      VALUES (:flag_start_preparacion, :flag_start_envasado, :flag_start_acondicionamiento, :referencia, :modulo, :batch)");
         $stmt->execute([
+            'flag_start_preparacion' => 0,
+            'flag_start_envasado' => 0,
+            'flag_start_acondicionamiento' => 0,
             'referencia' => $dataBatchFlag['referencia'],
             'modulo' => $dataBatchFlag['modulo'],
             'batch' => $dataBatchFlag['idBatch']
