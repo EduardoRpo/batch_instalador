@@ -34,7 +34,7 @@ const imprimirEtiquetasFull = (marmita) => {
     url: `/html/php/materiasp_fetch.php?idProduct=${ref}&v=${Date.now()}`,
     success: function (materiaPrima) {
       $.ajax({
-        url: `/api/user/${modulo}/${idBatch}`,
+        url: `/html/php/user_fetch.php?modulo=${modulo}&batch=${idBatch}&v=${Date.now()}`,
         success: function (usuario) {
           modulo == 2
             ? imprimirEtiquetasPesaje(materiaPrima, usuario)
@@ -178,7 +178,7 @@ $('#btnImprimirTodaslasEtiquetas').click(function (e) {
 
 const ImprimirEtiquetasInvima = () => {
   $.ajax({
-    url: `/api/etiquetasvirtualesinv/${referencia}/${idBatch}`,
+    url: `/html/php/etiquetasvirtuales_fetch.php?idProduct=${referencia}&batch=${idBatch}&v=${Date.now()}`,
     success: function (response) {
       if (!flagE) flagE = 1;
       else return false;
