@@ -103,12 +103,12 @@ if (!empty($_POST)) {
                             segundaSeccionVerifico($conn);
                             updateBatchAprobado($batch, $conn);
                             $result = 1;
-                            echo $result;
                         }
                 }
             }
 
-            echo $result;
+            // Siempre devolver JSON válido
+            echo json_encode(['success' => true, 'result' => $result]);
             break;
     }
 }

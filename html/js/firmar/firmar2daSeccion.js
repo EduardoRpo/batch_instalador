@@ -160,15 +160,33 @@ function almacenarfirma(info) {
         data: { operacion: 4, modulo: modulo, idBatch, verifico: idUser },
 
         success: function(response) {
-            if (response == 0) {
+            try {
+                // Intentar parsear como JSON
+                let responseData = typeof response === 'string' ? JSON.parse(response) : response;
+                
+                if (responseData.result == 0) {
+                    modulo == 4 ?
+                        (modulos = 'pesaje y/o preparacion') :
+                        (modulos = 'envasado y/o acondicionamiento');
 
-                modulo == 4 ?
-                    (modulos = 'pesaje y/o preparacion') :
-                    (modulos = 'envasado y/o acondicionamiento');
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error(`No es posible cerrar este proceso para el Batch ${idBatch}. Los módulos de ${modulos} aún no se encuentran completamente firmados`);
+                    return false;
+                }
+            } catch (e) {
+                console.log('❌ almacenarfirma - Error parseando respuesta:', e);
+                console.log('🔍 almacenarfirma - Respuesta recibida:', response);
+                
+                // Si no es JSON válido, tratar como respuesta simple
+                if (response == 0) {
+                    modulo == 4 ?
+                        (modulos = 'pesaje y/o preparacion') :
+                        (modulos = 'envasado y/o acondicionamiento');
 
-                alertify.set('notifier', 'position', 'top-right');
-                alertify.error(`No es posible cerrar este proceso para el Batch ${idBatch}. Los módulos de ${modulos} aún no se encuentran completamente firmados`);
-                return false;
+                    alertify.set('notifier', 'position', 'top-right');
+                    alertify.error(`No es posible cerrar este proceso para el Batch ${idBatch}. Los módulos de ${modulos} aún no se encuentran completamente firmados`);
+                    return false;
+                }
             }
 
             if (modulo == 2)
