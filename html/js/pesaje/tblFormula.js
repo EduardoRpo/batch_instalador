@@ -140,8 +140,7 @@ $(document).ready(function() {
                                     <input type="text" class="form-control" id="numeroLote" placeholder="Número de lote">
                                 </div>
                                 <div class="form-group">
-                                    <label for="cantidadPesada"><strong>Cantidad pesada para ${mpAlias}</strong></label>
-                                    <p style="font-size:13px;color:blue">Peso calculado: ${pesoCalculado} - Ingrese la cantidad real pesada</p>
+                                    <label for="cantidadPesada"><strong>Ingrese la cantidad pesada para ${mp}</strong></label>
                                     <input type="number" class="form-control" id="cantidadPesada" placeholder="Cantidad pesada" step="0.001" min="0">
                                 </div>
                             </div>
