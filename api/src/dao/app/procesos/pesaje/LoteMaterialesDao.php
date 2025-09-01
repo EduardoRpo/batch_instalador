@@ -23,16 +23,16 @@ class LoteMaterialesDao
         $lotes = $dataLote['lotes'];
 
         foreach ($lotes as $lote) {
-            $sql = "INSERT INTO batch_lote_materiales (ref_material, lote, tanque, batch) 
-                    VALUES (:ref_material, :lote, :tanque, :batch)";
+            $sql = "INSERT INTO batch_lote_materiales (ref_material, lote, cantidad_pesada, tanque, batch) 
+                    VALUES (:ref_material, :lote, :cantidad_pesada, :tanque, :batch)";
             $query = $connection->prepare($sql);
             $query->execute([
                 'ref_material' => $lote['referenciaMP'],
                 'lote' => $lote['lote'],
+                'cantidad_pesada' => $lote['cantidad_pesada'] ?? null,
                 'tanque' => $lote['tanque'],
                 'batch' => $lote['batch']
             ]);
-            // $query->execute(['ref_material' => $lotes['referenciaMP'], 'lote' => $lotes['lote'], 'tanque' => $lotes['tanque'], 'batch' => $lotes['batch']]);
         }
     }
 }
