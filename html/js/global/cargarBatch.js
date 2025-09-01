@@ -69,6 +69,9 @@ $(document).ready(function() {
                     $("#in_observaciones").val(observacion);
                     firmado(firma, 1);
 
+                    // Habilitar botón de pesaje inmediatamente después de cargar desinfectante
+                    $(".pesaje_realizado").prop("disabled", false);
+
                     $.ajax({
                         type: "POST",
                         url: "../../html/php/despeje.php",

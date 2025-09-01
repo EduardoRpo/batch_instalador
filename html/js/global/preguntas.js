@@ -82,7 +82,7 @@ $(document).ready(function () {
     let obj = JSON.parse(json);
 
     desinfectante = $('#sel_producto_desinfeccion').val();
-    obs_desinfectante = $('#in_observaciones').val();
+    obs_desinfectante = $('#in_observaciones').val() || ''; // Asegurar que sea string vacío si está vacío
 
     $.ajax({
       type: 'POST',
@@ -104,6 +104,11 @@ $(document).ready(function () {
           .css({ background: 'lightgray', border: 'gray' })
           .prop('disabled', true);
         $('.despeje_verificado').prop('disabled', false);
+        
+        // Habilitar inmediatamente el botón de pesaje sin importar las observaciones
+        $('.pesaje_realizado').prop('disabled', false);
+        
+        // También habilitar otros botones si es necesario
         habilitarbotones();
         // }
       },
