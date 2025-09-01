@@ -3,8 +3,8 @@ let flag = 0;
 
 loadBatch = async () => {
   let resp = await cargarInfoBatch();
-  if (resp == null) {
-    await busqueda_multi();
+  if (resp != null) {
+    cargarTanques();
   }
 };
 
