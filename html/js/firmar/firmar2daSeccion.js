@@ -56,7 +56,7 @@ function firmar2daSeccion(firma) {
 
     if (modulo == 4) {
         let desinfectante = $('#sel_producto_desinfeccion').val();
-        const obs_desinfectante = $('#in_observaciones').val();
+        const obs_desinfectante = $('#in_observaciones').val() || ''; // Asegurar que sea string vacío si está vacío
         desinfectante === undefined ? (desinfectante = '') : desinfectante;
         const obs_batch = $('#observacionesAprobacion').val();
         data = { operacion: 1, tanques, tanquesOk, modulo, idBatch, desinfectante, obs_desinfectante, obs_batch, realizo: firma.id, controlProducto, linea: 1 };
@@ -65,7 +65,7 @@ function firmar2daSeccion(firma) {
 
     if (modulo == 9) {
         const desinfectante = $('#sel_producto_desinfeccion').val();
-        const obs_desinfectante = $('#in_observaciones').val();
+        const obs_desinfectante = $('#in_observaciones').val() || ''; // Asegurar que sea string vacío si está vacío
         const obs_batch = $('#observacionesLoteRechazado').val();
         data = { operacion: 1, desinfectante, obs_desinfectante, obs_batch, modulo, idBatch, realizo: firma.id, controlProducto, linea: 1 };
         console.log('🔍 firmar2daSeccion - Configurando datos para módulo 9 (fisicoquímico)');

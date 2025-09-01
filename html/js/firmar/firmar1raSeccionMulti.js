@@ -90,7 +90,7 @@ function guardar_preguntas(idfirma) {
   let obj = JSON.parse(json);
 
   desinfectante = $("#sel_producto_desinfeccion").val();
-  observaciones = $("#in_observaciones").val();
+  observaciones = $("#in_observaciones").val() || ''; // Asegurar que sea string vacío si está vacío
 
   $.ajax({
     type: "POST",
