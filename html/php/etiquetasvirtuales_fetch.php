@@ -69,35 +69,9 @@ try {
     // Combinar todos los datos
     $resultado = array_merge($materias_primas, $batch_data, $tanques);
     
-    // Si no encuentra datos, devolver datos de prueba
+    // Si no encuentra datos, devolver array vacío
     if (empty($resultado)) {
-        error_log("🔍 etiquetasvirtuales_fetch.php - No se encontraron datos, devolviendo datos de prueba");
-        $resultado = [
-            // Materias primas de prueba
-            [
-                'id' => 1,
-                'referencia' => '10003',
-                'alias' => 'AGUA DESIONIZADA',
-                'porcentaje' => 23.9
-            ],
-            [
-                'id' => 2,
-                'referencia' => '10018',
-                'alias' => 'EXTRACTO DE ALOE VERA - GUIA Nº 351',
-                'porcentaje' => 1.9
-            ],
-            // Datos de batch de prueba
-            [
-                'verifico' => 'Usuario Prueba',
-                'urlfirma' => '/firmas/firma_prueba.jpg',
-                'fecha_registro' => date('Y-m-d H:i:s')
-            ],
-            // Datos de tanques de prueba
-            [
-                'tanques' => 1,
-                'tanquesOk' => 1
-            ]
-        ];
+        error_log("⚠️ etiquetasvirtuales_fetch.php - No se encontraron datos para idProduct=$idProduct, batch=$batch");
     }
     
     error_log("🔍 etiquetasvirtuales_fetch.php - Datos finales: " . json_encode($resultado));

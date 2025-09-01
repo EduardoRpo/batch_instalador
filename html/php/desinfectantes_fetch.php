@@ -14,40 +14,20 @@ try {
     $stmt->execute();
     $desinfectantes = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
+    error_log("🔍 desinfectantes_fetch.php - Consulta ejecutada: $sql");
     error_log("🔍 desinfectantes_fetch.php - Desinfectantes encontrados: " . count($desinfectantes));
     error_log("🔍 desinfectantes_fetch.php - Datos: " . json_encode($desinfectantes));
     
-    // Si no encuentra datos, devolver datos de prueba
+    // Si no encuentra datos, devolver array vacío
     if (empty($desinfectantes)) {
-        error_log("🔍 desinfectantes_fetch.php - No se encontraron datos, devolviendo datos de prueba");
-        $desinfectantes = [
-            [
-                'id' => 1,
-                'nombre' => 'Alcohol'
-            ],
-            [
-                'id' => 2,
-                'nombre' => 'Pure citrus'
-            ],
-            [
-                'id' => 3,
-                'nombre' => 'Glutapure'
-            ],
-            [
-                'id' => 4,
-                'nombre' => 'Sterilex a'
-            ],
-            [
-                'id' => 5,
-                'nombre' => 'Sterilex b'
-            ]
-        ];
+        error_log("⚠️ desinfectantes_fetch.php - No se encontraron desinfectantes en la base de datos");
     }
     
     echo json_encode($desinfectantes, JSON_NUMERIC_CHECK);
     
 } catch (Exception $e) {
     error_log("❌ desinfectantes_fetch.php - Error: " . $e->getMessage());
+    error_log("❌ desinfectantes_fetch.php - Trace: " . $e->getTraceAsString());
     http_response_code(500);
     echo json_encode(['error' => 'Error interno del servidor: ' . $e->getMessage()]);
 }

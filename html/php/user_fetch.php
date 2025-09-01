@@ -54,12 +54,10 @@ try {
         error_log("🔍 user_fetch.php - Usuario encontrado por ID: " . json_encode($user));
     }
     
-    // Si no encuentra datos, devolver datos de prueba
+    // Si no encuentra datos, devolver array vacío
     if (empty($user)) {
-        error_log("🔍 user_fetch.php - No se encontraron datos, devolviendo datos de prueba");
-        $user = [
-            'nombres' => 'Usuario Prueba'
-        ];
+        error_log("⚠️ user_fetch.php - No se encontró usuario para modulo=$modulo, batch=$batch");
+        $user = [];
     }
     
     error_log("🔍 user_fetch.php - Datos finales: " . json_encode($user));
