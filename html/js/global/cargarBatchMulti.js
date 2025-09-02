@@ -66,9 +66,6 @@ $(document).ready(function () {
         for (i = 1; i < 5; i++) {
           $(`.controlpeso_realizado${i}`).prop('disabled', false);
         }
-        
-        // Habilitar botón de pesaje sin importar las observaciones
-        $('.pesaje_realizado').prop('disabled', false);
 
         /* Carga firma calidad */
         $.ajax({

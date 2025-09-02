@@ -1,13 +1,9 @@
 /* Habilitar Botones */
 
 habilitarbotones = () => {
-    // Habilitar botones de control de peso
     for (let index = 1; index < 5; index++) {
         $(`.controlpeso_realizado${index}`).prop("disabled", false);
     }
-    
-    // Habilitar botón de pesaje sin importar las observaciones
-    $('.pesaje_realizado').prop('disabled', false);
 }
 
 habilitarbtn = (btn) => {
