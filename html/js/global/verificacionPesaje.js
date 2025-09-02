@@ -19,7 +19,7 @@ function marcarVerificadoDespejeComoAprobado() {
         console.log('🔍 marcarVerificadoDespejeComoAprobado - HTML del botón:', btnVerificado.html());
         
         if (btnVerificado.length > 0) {
-            // Marcar como aprobado visualmente
+            // Marcar como aprobado
             btnVerificado
                 .prop('disabled', true)
                 .css({ 
@@ -28,58 +28,10 @@ function marcarVerificadoDespejeComoAprobado() {
                 });
             console.log('✅ marcarVerificadoDespejeComoAprobado - Botón verificado marcado como aprobado');
             console.log('🔍 marcarVerificadoDespejeComoAprobado - Estado después del cambio:', btnVerificado.prop('disabled'));
-            
-            // Guardar en la base de datos
-            guardarVerificacionEnBD();
         } else {
             console.log('❌ marcarVerificadoDespejeComoAprobado - No se encontró el botón .despeje_verificado');
         }
     } else {
         console.log('❌ marcarVerificadoDespejeComoAprobado - No es módulo de pesaje, módulo actual:', modulo);
-    }
-}
-
-// Función para guardar la verificación en la base de datos
-async function guardarVerificacionEnBD() {
-    try {
-        console.log('🔍 guardarVerificacionEnBD - Iniciando guardado en BD');
-        console.log('🔍 guardarVerificacionEnBD - ID Batch:', idBatch);
-        console.log('🔍 guardarVerificacionEnBD - Módulo:', modulo);
-        
-        // Crear datos para enviar
-        let data = new FormData();
-        data.append('operacion', '5'); // Operación para actualizar verifico
-        data.append('modulo', modulo);
-        data.append('batch', idBatch);
-        data.append('verifico', '41'); // Usuario automático
-        
-        console.log('🔍 guardarVerificacionEnBD - Enviando datos:', {
-            operacion: '5',
-            modulo: modulo,
-            batch: idBatch,
-            verifico: '41'
-        });
-        
-        // Llamar al endpoint para actualizar la base de datos
-        const response = await fetch('../../html/php/despeje.php', {
-            method: 'POST',
-            body: data
-        });
-        
-        if (response.ok) {
-            const result = await response.text();
-            console.log('✅ guardarVerificacionEnBD - Respuesta exitosa:', result);
-            
-            if (result == '1') {
-                console.log('✅ guardarVerificacionEnBD - Verificación guardada correctamente en BD');
-            } else {
-                console.log('❌ guardarVerificacionEnBD - Error al guardar en BD, respuesta:', result);
-            }
-        } else {
-            console.error('❌ guardarVerificacionEnBD - Error en la petición HTTP:', response.status);
-        }
-        
-    } catch (error) {
-        console.error('❌ guardarVerificacionEnBD - Error:', error);
     }
 } 
