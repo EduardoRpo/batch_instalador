@@ -73,13 +73,11 @@ $(document).ready(function() {
     /* Mostrar los checkbox de acuerdo con la cantidad de tanques */
 
     controlProceso = (cantidad) => {
-
         if (cantidad > 10)
             cantidad = 10
 
         for (i = 0; i < cantidad; i++)
             $('.chk-control').append(`<input type="checkbox" id="chkcontrolTanques${i + 1}" class="chkcontrol" style="height: 30px; width:30px;" onclick="validar_condicionesMedio();">`)
-
     }
 
     /* Control de Tanques seleccionados */
