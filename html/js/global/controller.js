@@ -12,6 +12,11 @@ $(document).ready(function() {
             if (modulo === 10) guardarLiberacion(info);
             else if (modulo !== 7 && modulo !== 8 && modulo !== 9) guardar_preguntas(info.id);
             if (modulo != 7 && modulo != 8) firmar(info);
+            
+            // Solo para pesaje (módulo 2): marcar automáticamente verificado del despeje
+            if (modulo == 2) {
+                marcarVerificadoDespejeComoAprobado();
+            }
         }
 
         if (btn_id == "firma2") {
