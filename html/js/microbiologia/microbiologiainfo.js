@@ -24,7 +24,7 @@ $(document).ready(function () {
 
   loadBatch = async () => {
     let resp = await cargarInfoBatch();
-    if (resp != null) {
+    if (resp == null) {
       result = await cargarDesinfectantes();
       cargarTanques();
       cargarBatchMicro();

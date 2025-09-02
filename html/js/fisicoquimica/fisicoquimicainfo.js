@@ -8,8 +8,9 @@ $('.fisicoquimica_verificado').prop('disabled', true);
 
 loadBatch = async () => {
   let resp = await cargarInfoBatch();
-  if (resp != null) {
+  if (resp == null) {
     cargarTanques();
+    cargarControlProceso();
   }
 };
 
