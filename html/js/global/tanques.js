@@ -3,6 +3,10 @@ var tanques = 0
 var tanque = 0
 
 $(document).ready(function() {
+    console.log('🔍 Document ready - Iniciando script de tanques')
+    console.log('🔍 Document ready - Módulo actual:', modulo)
+    console.log('🔍 Document ready - ID Batch:', idBatch)
+    
     /* tabla de observaciones en la pestaña de informacion del producto */
 
 
@@ -40,18 +44,32 @@ $(document).ready(function() {
     }
 
     cargarTanques = async() => {
+        console.log('🔍 cargarTanques - Iniciando función')
         const data = await cantidadTanques()
+        console.log('🔍 cargarTanques - Datos recibidos:', data)
+        
         if (data == '' || modulo == 5 || modulo == 6) {
+            console.log('🔍 cargarTanques - Condición de salida cumplida, retornando false')
             return false
         }
+        
         /* cargar tabla de tanques en info */
         let info = JSON.parse(data)
+        console.log('🔍 cargarTanques - Info parseada:', info)
 
         tanques = info[0].cantidad
         sessionStorage.setItem('tanques', info[0].cantidad)
+        console.log('🔍 cargarTanques - Cantidad de tanques:', tanques)
+        
         tblTanquesInfo(info)
         await checksTanques(info)
-        modulo == 2 ? tblPesaje() : modulo
+        
+        if (modulo == 2) {
+            console.log('🔍 cargarTanques - Llamando a tblPesaje')
+            tblPesaje()
+        } else {
+            console.log('🔍 cargarTanques - Módulo no es 2, valor:', modulo)
+        }
     }
 
     tblTanquesInfo = (info) => {
@@ -63,21 +81,40 @@ $(document).ready(function() {
     checksTanques = (info) => {
         /* iniciar proceso para colocar checks de tanques */
         cantidad = parseInt(info[0].cantidad)
+        console.log('🔍 checksTanques - Cantidad de tanques:', cantidad)
+        console.log('🔍 checksTanques - Módulo actual:', modulo)
 
-        if (modulo == '2' || modulo == '3')
+        if (modulo == '2' || modulo == '3') {
+            console.log('🔍 checksTanques - Llamando a controlProceso')
             controlProceso(cantidad)
-        else if (modulo == '4')
+        } else if (modulo == '4') {
+            console.log('🔍 checksTanques - Llamando a cargaTanquesControl')
             cargaTanquesControl(cantidad)
+        }
     }
 
     /* Mostrar los checkbox de acuerdo con la cantidad de tanques */
 
     controlProceso = (cantidad) => {
-        if (cantidad > 10)
+        console.log('🔍 controlProceso - Iniciando con cantidad:', cantidad)
+        
+        if (cantidad > 10) {
             cantidad = 10
+            console.log('🔍 controlProceso - Cantidad limitada a 10')
+        }
 
-        for (i = 0; i < cantidad; i++)
-            $('.chk-control').append(`<input type="checkbox" id="chkcontrolTanques${i + 1}" class="chkcontrol" style="height: 30px; width:30px;" onclick="validar_condicionesMedio();">`)
+        console.log('🔍 controlProceso - Buscando elemento .chk-control')
+        const chkControlElement = $('.chk-control')
+        console.log('🔍 controlProceso - Elemento .chk-control encontrado:', chkControlElement.length > 0)
+        console.log('🔍 controlProceso - HTML del elemento:', chkControlElement.html())
+
+        for (i = 0; i < cantidad; i++) {
+            const checkboxHTML = `<input type="checkbox" id="chkcontrolTanques${i + 1}" class="chkcontrol" style="height: 30px; width:30px;" onclick="validar_condicionesMedio();">`
+            console.log(`🔍 controlProceso - Agregando checkbox ${i + 1}:`, checkboxHTML)
+            $('.chk-control').append(checkboxHTML)
+        }
+        
+        console.log('🔍 controlProceso - Checkboxes agregados. HTML final:', $('.chk-control').html())
     }
 
     /* Control de Tanques seleccionados */
