@@ -173,7 +173,7 @@ include_once('modal/modal_condicionesMedio.php');
                   </div>
                   <div class="col-md-8 align-self-center">
                     <label for="in_observaciones" class="col-form-label">Observaciones:</label>
-                    <input type="text" class="form-control in_desinfeccion" id="in_observaciones">
+                    <input type="text" class="form-control in_desinfeccion" id="in_observaciones" value="Sin comentarios">
                   </div>
                 </div>
                 <div class="row" style="margin: 1%">
@@ -319,8 +319,35 @@ include_once('modal/modal_condicionesMedio.php');
   <script src="/html/js/pesaje/conversion.js"></script>
   <script src="/html/js/pesaje/tblFormula.js"></script>
 
-
-
+  <!-- Script para manejar el campo de observaciones -->
+  <script>
+    $(document).ready(function() {
+      const observacionesInput = $('#in_observaciones');
+      const valorPorDefecto = 'Sin comentarios';
+      
+      // Función para restaurar el valor por defecto si el campo está vacío
+      function restaurarValorPorDefecto() {
+        if (observacionesInput.val().trim() === '') {
+          observacionesInput.val(valorPorDefecto);
+        }
+      }
+      
+      // Cuando el campo pierde el foco, restaurar valor por defecto si está vacío
+      observacionesInput.on('blur', restaurarValorPorDefecto);
+      
+      // Cuando se hace clic en el campo, si tiene el valor por defecto, limpiarlo
+      observacionesInput.on('focus', function() {
+        if ($(this).val() === valorPorDefecto) {
+          $(this).val('');
+        }
+      });
+      
+      // Al cargar la página, asegurar que tenga el valor por defecto
+      if (observacionesInput.val().trim() === '') {
+        observacionesInput.val(valorPorDefecto);
+      }
+    });
+  </script>
 
 </body>
 
