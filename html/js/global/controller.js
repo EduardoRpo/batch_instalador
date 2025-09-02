@@ -6,10 +6,6 @@ $(document).ready(function() {
         info = datos;
 
         if (btn_id == "firma1") {
-            console.log('🔍 controller - firma1 detectada, btn_id:', btn_id);
-            console.log('🔍 controller - Módulo actual:', modulo);
-            console.log('🔍 controller - Info recibida:', info);
-            
             if (modulo === 7) guardar_despacho(info);
             if (modulo === 8) guardar_microbiologia(info);
             if (modulo === 9) firmar2daSeccion(info);
@@ -19,11 +15,7 @@ $(document).ready(function() {
             
             // Solo para pesaje (módulo 2): marcar automáticamente verificado del despeje
             if (modulo == 2) {
-                console.log('🔍 controller - Módulo 2 detectado, ejecutando verificación automática');
-                console.log('🔍 controller - Llamando a marcarVerificadoDespejeComoAprobado()');
                 marcarVerificadoDespejeComoAprobado();
-            } else {
-                console.log('🔍 controller - No es módulo 2, módulo actual:', modulo);
             }
         }
 

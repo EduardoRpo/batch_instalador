@@ -40,21 +40,17 @@ $(document).ready(function() {
     }
 
     message = (datos) => {
-        console.log('🔍 auth.message - Datos recibidos:', datos);
         alertify.set("notifier", "position", "top-right");
 
         if (datos.info == true) {
-            console.log('🔍 auth.message - Info detectada, retornando');
             alertify.warning(datos.message)
             return false
         }
         if (datos.error == true) {
-            console.log('🔍 auth.message - Error detectado, retornando');
             alertify.error(datos.message)
             return false
         }
 
-        console.log('🔍 auth.message - Llamando a controller con datos:', datos);
         controller(datos);
         sessionStorage.setItem("firm", datos.id);
     }
