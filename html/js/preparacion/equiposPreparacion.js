@@ -47,9 +47,24 @@ function cargarEquiposDesdeBD() {
             console.log('🔍 cargarEquiposDesdeBD - Respuesta de agitadores:', response);
             console.log('🔍 cargarEquiposDesdeBD - Tipo de respuesta:', typeof response);
             
+            // Verificar si hay error en la respuesta
+            if (response.error) {
+                console.error('❌ cargarEquiposDesdeBD - Error del servidor:', response.error);
+                // Agregar opción por defecto
+                $('#sel_agitador').empty();
+                $('#sel_agitador').append('<option value="">Error al cargar</option>');
+                $('#sel_agitador').append('<option value="no_aplica">No aplica</option>');
+                return;
+            }
+            
             try {
-                const agitadores = JSON.parse(response);
-                console.log('✅ cargarEquiposDesdeBD - Agitadores parseados exitosamente:', agitadores);
+                // Si la respuesta ya es un objeto, no necesitamos parsear
+                let agitadores = response;
+                if (typeof response === 'string') {
+                    agitadores = JSON.parse(response);
+                }
+                
+                console.log('✅ cargarEquiposDesdeBD - Agitadores procesados exitosamente:', agitadores);
                 console.log('🔍 cargarEquiposDesdeBD - Cantidad de agitadores:', agitadores.length);
                 
                 // Limpiar selector
@@ -67,8 +82,12 @@ function cargarEquiposDesdeBD() {
                 console.log('✅ cargarEquiposDesdeBD - Agitadores cargados exitosamente');
                 
             } catch (error) {
-                console.error('❌ cargarEquiposDesdeBD - Error parseando agitadores:', error);
+                console.error('❌ cargarEquiposDesdeBD - Error procesando agitadores:', error);
                 console.error('❌ cargarEquiposDesdeBD - Respuesta que causó el error:', response);
+                // Agregar opción por defecto
+                $('#sel_agitador').empty();
+                $('#sel_agitador').append('<option value="">Error al cargar</option>');
+                $('#sel_agitador').append('<option value="no_aplica">No aplica</option>');
             }
         },
         error: function(xhr, status, error) {
@@ -89,8 +108,13 @@ function cargarEquiposDesdeBD() {
             console.log('🔍 cargarEquiposDesdeBD - Tipo de respuesta:', typeof response);
             
             try {
-                const marmitas = JSON.parse(response);
-                console.log('✅ cargarEquiposDesdeBD - Marmitas parseadas exitosamente:', marmitas);
+                // Si la respuesta ya es un objeto, no necesitamos parsear
+                let marmitas = response;
+                if (typeof response === 'string') {
+                    marmitas = JSON.parse(response);
+                }
+                
+                console.log('✅ cargarEquiposDesdeBD - Marmitas procesadas exitosamente:', marmitas);
                 console.log('🔍 cargarEquiposDesdeBD - Cantidad de marmitas:', marmitas.length);
                 
                 // Limpiar selector
@@ -106,8 +130,11 @@ function cargarEquiposDesdeBD() {
                 console.log('✅ cargarEquiposDesdeBD - Marmitas cargadas exitosamente');
                 
             } catch (error) {
-                console.error('❌ cargarEquiposDesdeBD - Error parseando marmitas:', error);
+                console.error('❌ cargarEquiposDesdeBD - Error procesando marmitas:', error);
                 console.error('❌ cargarEquiposDesdeBD - Respuesta que causó el error:', response);
+                // Agregar opción por defecto
+                $('#sel_marmita').empty();
+                $('#sel_marmita').append('<option value="">Error al cargar</option>');
             }
         },
         error: function(xhr, status, error) {
