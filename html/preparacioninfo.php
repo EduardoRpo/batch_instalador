@@ -370,6 +370,16 @@ include("modal/modal_condicionesMedio.php");
                                 <td><input class="selectpicker form-control especificacionInput" type="number" id="in_grado_alcohol">
                                 </td>
                               </tr>
+                              <tr>
+                                <!-- NUEVO: Campo Agua agregado para control de proceso -->
+                                <!-- ANTES: No existía campo para registrar cantidad de agua pesada -->
+                                <!-- AHORA: Campo Agua con input numérico como Grado de Alcohol -->
+                                <!-- Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss") -->
+                                <td>Agua</td>
+                                <td>Ingresar la cantidad de Agua pesada</td>
+                                <td><input class="selectpicker form-control especificacionInput" type="number" id="in_agua" placeholder="Cantidad de agua">
+                                </td>
+                              </tr>
                           </table>
                         </div>
                       </div>
