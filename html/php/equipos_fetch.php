@@ -7,7 +7,7 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
     // Consultar todos los equipos
-    $sql = "SELECT id, descripcion, tipo FROM equipos WHERE tipo IN ('agitador', 'marmita') ORDER BY tipo, descripcion";
+    $sql = "SELECT id, descripcion, tipo FROM equipos WHERE tipo IN ('agitador', 'marmita', 'tanque') ORDER BY tipo, descripcion";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
     $equipos = $stmt->fetchAll(PDO::FETCH_ASSOC);

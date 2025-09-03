@@ -66,8 +66,8 @@ function cargarEquiposDesdeBD() {
                     );
                 }
                 
-                if (equipo.tipo === 'marmita') {
-                    console.log(`🔍 cargarEquiposDesdeBD - Agregando marmita: ${equipo.descripcion}`);
+                if (equipo.tipo === 'marmita' || equipo.tipo === 'tanque') {
+                    console.log(`🔍 cargarEquiposDesdeBD - Agregando ${equipo.tipo}: ${equipo.descripcion}`);
                     $('#sel_marmita').append(
                         `<option value="${equipo.id}">${equipo.descripcion}</option>`
                     );
