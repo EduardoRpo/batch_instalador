@@ -24,6 +24,7 @@ loadBatch = async () => {
   
   console.log('🔍 loadBatch - Llamando a cargarEquipos()');
   cargarEquipos();
+  console.log('🔍 loadBatch - Después de llamar a cargarEquipos()');
   
   console.log('🔍 loadBatch - Función completada');
 };
