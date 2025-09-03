@@ -91,3 +91,5 @@ function cargarEquipos() {
 }
 
 console.log('🔍 PREPARACIÓN - Después de definir cargarEquipos');
+
+// Comentario para Git - Función cargarEquipos implementada para cargar equipos de preparación
