@@ -95,11 +95,6 @@ include_once('modal/modal_condicionesMedio.php');
                     </div>
 
                     <div class="form-group col-3">
-                      <label>Tamaño Lote (Kg)</label>
-                      <input type="text" class="form-control" id="in_tamano_lote" readonly>
-                    </div>
-
-                    <div class="form-group col-3">
                       <label>No. Lote</label>
                       <input type="text" class="form-control" id="in_numero_lote" readonly>
                     </div>
@@ -107,6 +102,11 @@ include_once('modal/modal_condicionesMedio.php');
                     <div class="form-group col-3">
                       <label>Línea</label>
                       <input type="text" class="form-control" id="in_linea" readonly>
+                    </div>
+
+                    <div class="form-group col-3">
+                      <label>Tamaño Lote (Kg)</label>
+                      <input type="text" class="form-control" id="in_tamano_lote" readonly>
                     </div>
                   </div>
 
