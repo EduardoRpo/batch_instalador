@@ -50,7 +50,22 @@ function firmar2daSeccion(firma) {
         equipos = [];
         equipos.push($('#sel_agitador').val());
         equipos.push($('#sel_marmita').val());
-        data = { operacion: 1, equipos, tanques, tanquesOk, modulo, idBatch, controlProducto, linea: 1 };
+        
+        // MODIFICADO: Agregar campo usuario para el archivo local
+        // ANTES: data = { operacion: 1, equipos, tanques, tanquesOk, modulo, idBatch, controlProducto, linea: 1 };
+        // AHORA: data incluye usuario para guardarTerceraFirma.php
+        // Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+        data = { 
+            operacion: 1, 
+            equipos, 
+            tanques, 
+            tanquesOk, 
+            modulo, 
+            idBatch, 
+            controlProducto, 
+            linea: 1,
+            usuario: firma.usuario || firma.id
+        };
         console.log('🔍 firmar2daSeccion - Configurando datos para módulo 3 (preparación)');
     }
 
@@ -72,12 +87,26 @@ function firmar2daSeccion(firma) {
     }
 
     console.log('🔍 firmar2daSeccion - Datos que se van a enviar:', data);
-    console.log('🔍 firmar2daSeccion - URL del endpoint: /api/saveBatchTanques');
+    
+    // MODIFICADO: Cambiar de API que falla a archivo local para la tercera firma
+    // ANTES: url: '/api/saveBatchTanques' (error 500 por tabla GESTION_GRANELES_TRACKING)
+    // AHORA: url: '../../html/php/guardarTerceraFirma.php' (archivo local funcional)
+    // Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+    let urlEndpoint = '';
+    if (modulo == 3) {
+        urlEndpoint = '../../html/php/guardarTerceraFirma.php';
+        console.log('🔍 firmar2daSeccion - Usando archivo local para módulo 3 (preparación)');
+    } else {
+        urlEndpoint = '/api/saveBatchTanques';
+        console.log('🔍 firmar2daSeccion - Usando API para otros módulos');
+    }
+    
+    console.log('🔍 firmar2daSeccion - URL del endpoint:', urlEndpoint);
     console.log('📤 firmar2daSeccion - Enviando datos al backend...');
 
     $.ajax({
         type: 'POST',
-        url: '/api/saveBatchTanques',
+        url: urlEndpoint,
         data: data,
         beforeSend: function() {
             console.log('⏳ firmar2daSeccion - Iniciando petición AJAX');
