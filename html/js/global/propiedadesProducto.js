@@ -1,7 +1,7 @@
 /* Carga de tabla de propiedades del producto */
-// MODIFICADO: Corregir typos y agregar logs para debuggear carga de especificaciones
-// ANTES: Tenía typo "untosidad" y no había logs para debuggear
-// AHORA: Corregido "untuosidad" y agregados logs para verificar carga
+// MODIFICADO: Corregir typos, agregar logs y cambiar a archivo fetch local
+// ANTES: Tenía typo "untosidad", no había logs y usaba API que fallaba
+// AHORA: Corregido "untuosidad", agregados logs y usa archivo fetch local
 // Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
 
 $(document).ready(function () {
@@ -10,15 +10,23 @@ $(document).ready(function () {
   console.log('🔍 propiedadesProducto.js - Referencia:', referencia);
   console.log('🔍 propiedadesProducto.js - Módulo:', modulo);
   
+  // MODIFICADO: Cambiar de API que falla a archivo fetch local
+  // ANTES: url: `/api/productsDetails/${referencia}` (error 500)
+  // AHORA: url: `../../html/php/productos_fetch.php?referencia=${referencia}`
+  // Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+  
   $.ajax({
-    url: `/api/productsDetails/${referencia}`,
+    url: `../../html/php/productos_fetch.php?referencia=${referencia}`,
     type: "GET",
   }).done((data, status, xhr) => {
     // MODIFICADO: Agregar logs para debuggear
     console.log('🔍 propiedadesProducto.js - Datos recibidos:', data);
     console.log('🔍 propiedadesProducto.js - Tipo de datos:', typeof data);
+    console.log('🔍 propiedadesProducto.js - Status:', status);
     
     if (modulo != 8) {
+      console.log('🔍 propiedadesProducto.js - Módulo != 8, llenando especificaciones');
+      
       $("#espec_color").html(data.color);
       $("#espec_olor").html(data.olor);
       $("#espec_apariencia").html(data.apariencia);
@@ -59,13 +67,19 @@ $(document).ready(function () {
       console.log('🔍 propiedadesProducto.js - Grado Alcohol:', `${data.limite_inferior_grado_alcohol} a ${data.limite_superior_grado_alcohol}`);
       
       console.log('✅ propiedadesProducto.js - Especificaciones del producto cargadas exitosamente');
+    } else {
+      console.log('🔍 propiedadesProducto.js - Módulo == 8, saltando especificaciones');
     }
     if (modulo == 8 || modulo == 1) {
+      console.log('🔍 propiedadesProducto.js - Módulo == 8 o 1, llenando microbiología');
       $("#mesofilos").html(data.mesofilos);
       $("#pseudomona").html(data.pseudomona);
       $("#escherichia").html(data.escherichia);
       $("#staphylococcus").html(data.staphylococcus);
+      console.log('✅ propiedadesProducto.js - Microbiología cargada exitosamente');
     }
+    
+    console.log('✅ propiedadesProducto.js - Función completada completamente');
   }).fail(function(xhr, status, error) {
     // MODIFICADO: Agregar manejo de errores
     console.error('❌ propiedadesProducto.js - Error cargando especificaciones:');
