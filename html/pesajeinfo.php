@@ -89,22 +89,22 @@ include_once('modal/modal_condicionesMedio.php');
                       <input type="text" class="form-control" id="in_numero_orden" readonly>
                     </div> -->
 
-                    <div class="form-group  col-6 col-md-6">
+                    <div class="form-group col-3">
                       <label>Granel</label>
                       <input type="text" class="form-control" id="in_referencia" readonly>
                     </div>
 
-                    <div class="form-group col-6 col-md-6">
+                    <div class="form-group col-3">
                       <label>Tamaño Lote (Kg)</label>
                       <input type="text" class="form-control" id="in_tamano_lote" readonly>
                     </div>
 
-                    <div class="form-group col-6 col-md-6">
+                    <div class="form-group col-3">
                       <label>No. Lote</label>
                       <input type="text" class="form-control" id="in_numero_lote" readonly>
                     </div>
 
-                    <div class="form-group col-6 col-md-6">
+                    <div class="form-group col-3">
                       <label>Línea</label>
                       <input type="text" class="form-control" id="in_linea" readonly>
                     </div>
@@ -112,11 +112,11 @@ include_once('modal/modal_condicionesMedio.php');
 
                   <div class="col-md-4">
 
-                    <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:70%; height: 30px;">
+                    <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:90%; height: 30px;">
                       <thead>
                         <tr>
-                          <th class="centrado">Tamaño Tanque (Kg)</th>
-                          <th class="centrado">Cantidad Tanques</th>
+                          <th class="centrado" style="font-size: 0.9em;">Tamaño Tanque (Kg)</th>
+                          <th class="centrado" style="font-size: 0.9em;">Cantidad Tanques</th>
                           <!-- <th class="centrado">Total</th> -->
                         </tr>
                       </thead>
