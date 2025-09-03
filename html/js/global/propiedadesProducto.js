@@ -9,14 +9,19 @@ $(document).ready(function () {
   console.log('🔍 propiedadesProducto.js - Iniciando carga de especificaciones del producto');
   console.log('🔍 propiedadesProducto.js - Referencia:', referencia);
   console.log('🔍 propiedadesProducto.js - Módulo:', modulo);
+  console.log('🔍 propiedadesProducto.js - Document ready ejecutado');
   
   // MODIFICADO: Cambiar de API que falla a archivo fetch local
   // ANTES: url: `/api/productsDetails/${referencia}` (error 500)
   // AHORA: url: `../../html/php/productos_fetch.php?referencia=${referencia}`
   // Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
   
+  const timestamp = new Date().getTime();
+  const url = `../../html/php/productos_fetch.php?referencia=${referencia}&t=${timestamp}`;
+  console.log('🔍 propiedadesProducto.js - URL que se va a llamar:', url);
+  
   $.ajax({
-    url: `../../html/php/productos_fetch.php?referencia=${referencia}`,
+    url: url,
     type: "GET",
   }).done((data, status, xhr) => {
     // MODIFICADO: Agregar logs para debuggear
@@ -86,5 +91,8 @@ $(document).ready(function () {
     console.error('❌ propiedadesProducto.js - Status:', status);
     console.error('❌ propiedadesProducto.js - Error:', error);
     console.error('❌ propiedadesProducto.js - XHR:', xhr);
+    console.error('❌ propiedadesProducto.js - URL que falló:', url);
   });
+  
+  console.log('🔍 propiedadesProducto.js - Función document.ready completada');
 });
