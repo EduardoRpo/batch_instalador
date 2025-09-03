@@ -1,49 +1,12 @@
-let controlProducto = [];
+/**
+ * MODIFICADO: Agregada función guardarCantidadAgua y corregido error de alertify
+ * ANTES: Solo tenía función cargarControlProceso y error en alertify.info
+ * AHORA: Incluye función para guardar cantidad de agua en batch_lote_materiales
+ * Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+ * Motivo: Usuario requiere guardar automáticamente cantidad de agua utilizada
+ */
 
-$(document).ready(function() {
-
-    /* Valida que todos los datos del formulario de control sean cargados */
-
-    cargarResultadosEspecificaciones = () => {
-        /* Almacenar los datos del formulario en un array */
-
-        $("#tblControlEspecificaciones tr").each(function() {
-            let control = $(this).find("td:eq(2) select option:selected").val();
-
-            if (control != undefined && control != "" && control != "0") {
-                controlProducto.push(control);
-            } else {
-                let valor = $(this).find("td:eq(2) input").val();
-                if (valor != undefined && valor != "") controlProducto.push(valor);
-                else controlProducto = [];
-            }
-        });
-
-        /* Validar que toda la informacion esta completa */
-
-        modulo == 3 ? indice = 9 : modulo == 4 ? indice = 11 : indice = 9
-
-        if (controlProducto.length < indice) {
-            alertify.set("notifier", "position", "top-right");
-            alertify.error("Ingrese todos los campos para el control del proceso");
-            return 0;
-        } else
-            return 1;
-    }
-
-    /* Limpiar campos en el modulo de preparacion y aprobacion*/
-
-    $(document).on("click", ".chkcontrol", function() {
-        if ($(this).is(":checked")) {
-            pasoEjecutado = 0;
-            if (modulo == 3) reiniciarInstructivo();
-            $(`.especificacion`).val("0");
-            $(`.especificacionInput`).val("");
-        }
-    });
-
-    /* Cargar tabla especificaciones */
-    // MODIFICADO: Función para cargar especificaciones del control de proceso desde la BD
+// MODIFICADO: Función para cargar especificaciones del control de proceso desde la BD
     // ANTES: Esta función no se llamaba, por eso el "Control de proceso" aparecía vacío
     // AHORA: Se llama desde preparacioninfo.js para cargar las especificaciones
     // Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
@@ -135,8 +98,11 @@ $(document).ready(function() {
                     alertify.success('Cantidad de agua guardada correctamente');
                 } else {
                     console.log('🔍 guardarCantidadAgua - No se encontró material 10003 para este batch');
-                    // Opcional: Mostrar mensaje informativo
-                    alertify.info('No se encontró registro de agua para este batch');
+                    // MODIFICADO: Cambiar alertify.info por alertify.warning ya que info no existe
+                    // ANTES: alertify.info('No se encontró registro de agua para este batch');
+                    // AHORA: alertify.warning('No se encontró registro de agua para este batch');
+                    // Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+                    alertify.warning('No se encontró registro de agua para este batch');
                 }
             },
             error: function(xhr, status, error) {

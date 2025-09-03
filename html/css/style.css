@@ -10956,10 +10956,11 @@ para mejorar el responsive enseguida*/
   grid-column-end: 14;
 } */
 
-/* MODIFICADO: Cambiar layout de contenedorInfo2 para que coincida con Pesaje */
+/* MODIFICADO: Layout de contenedorInfo2 ajustado para coincidir con Pesaje */
 /* ANTES: 5 columnas con tabla ocupando 2 filas */
 /* AHORA: 4 columnas con tabla ocupando 1 línea completa */
 /* Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss") */
+/* Motivo: Usuario requiere que Preparación se vea igual que Pesaje */
 
 .contenedorInfo2 {
     padding: 1rem;

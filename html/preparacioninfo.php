@@ -1,4 +1,11 @@
 <?php
+/**
+ * MODIFICADO: Agregado campo "Agua" en Control de proceso
+ * ANTES: Solo tenía campos estándar (Color, Olor, Apariencia, PH, etc.)
+ * AHORA: Incluye campo "Agua" con input numérico para cantidad de agua utilizada
+ * Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+ * Motivo: Usuario requiere registrar cantidad de agua en preparación del granel
+ */
 session_start();
 $_SESSION["timeout"] = time();
 include('modal/m_firma.php');
