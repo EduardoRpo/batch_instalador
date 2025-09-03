@@ -10962,14 +10962,33 @@ para mejorar el responsive enseguida*/
 /* Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss") */
 
 .contenedorInfo2 {
-    padding: 1.5rem;
+    padding: 1rem;
     display: grid;
     /* MODIFICADO: Cambiar de 5 columnas a 4 columnas para que coincida con Pesaje */
     /* ANTES: grid-template-columns: repeat(5, 1fr); (6 campos en 2 filas) */
     /* AHORA: grid-template-columns: repeat(4, 1fr); (4 campos en 1 línea) */
     /* Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss") */
     grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
+    gap: 0.5rem;
+}
+
+/* MODIFICADO: Hacer los inputs más compactos para que entren en una fila */
+/* ANTES: Los inputs eran muy anchos y no cabían bien */
+/* AHORA: Inputs compactos con ancho fijo para distribución perfecta */
+/* Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss") */
+.contenedorInfo2 .contenedorInfo__group input {
+    width: 100%;
+    max-width: 100px;
+    font-size: 0.85em;
+    padding: 0.25rem 0.5rem;
+    height: 32px;
+}
+
+.contenedorInfo2 .contenedorInfo__group label {
+    font-size: 0.8em;
+    margin-bottom: 0.2rem;
+    font-weight: 500;
+    color: #333;
 }
 
 .contenedorInfo__group:nth-of-type(5) {
@@ -10979,6 +10998,21 @@ para mejorar el responsive enseguida*/
     /* Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss") */
     grid-column: 1 / -1;
     grid-row: auto;
+}
+
+/* MODIFICADO: Hacer la tabla más compacta para que se vea mejor */
+/* ANTES: La tabla era muy grande y ocupaba mucho espacio */
+/* AHORA: Tabla compacta con mejor distribución */
+/* Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss") */
+.contenedorInfo2 .contenedorInfo__group table {
+    margin-top: 0.5rem;
+    font-size: 0.85em;
+}
+
+.contenedorInfo2 .contenedorInfo__group table th,
+.contenedorInfo2 .contenedorInfo__group table td {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.8em;
 }
 
 @media screen and (max-width: 800px) {
