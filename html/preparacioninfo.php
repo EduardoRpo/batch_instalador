@@ -377,7 +377,7 @@ include("modal/modal_condicionesMedio.php");
                                 <!-- Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss") -->
                                 <td>Agua</td>
                                 <td>Ingresar la cantidad de Agua pesada</td>
-                                <td><input class="selectpicker form-control especificacionInput" type="number" id="in_agua" placeholder="Cantidad de agua">
+                                <td><input class="selectpicker form-control especificacionInput" type="number" id="in_agua" placeholder="Cantidad de agua" onblur="guardarCantidadAgua(this.value);">
                                 </td>
                               </tr>
                           </table>

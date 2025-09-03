@@ -47,7 +47,6 @@ $(document).ready(function() {
     // ANTES: Esta función no se llamaba, por eso el "Control de proceso" aparecía vacío
     // AHORA: Se llama desde preparacioninfo.js para cargar las especificaciones
     // Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
-
     cargarControlProceso = () => {
         // MODIFICADO: Agregar logs para debuggear
         console.log('🔍 cargarControlProceso - Función iniciada');
@@ -94,6 +93,56 @@ $(document).ready(function() {
                 console.error('❌ cargarControlProceso - Status:', status);
                 console.error('❌ cargarControlProceso - Error:', error);
                 console.error('❌ cargarControlProceso - XHR:', xhr);
+            }
+        });
+    }
+
+    // NUEVO: Función para guardar la cantidad de agua en batch_lote_materiales
+    // ANTES: No existía función para guardar el campo Agua
+    // AHORA: Función que actualiza el campo lote donde ref_material=10003
+    // Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+    guardarCantidadAgua = (cantidadAgua) => {
+        console.log('🔍 guardarCantidadAgua - Función iniciada');
+        console.log('🔍 guardarCantidadAgua - Cantidad de agua:', cantidadAgua);
+        console.log('🔍 guardarCantidadAgua - ID Batch:', idBatch);
+        
+        if (!cantidadAgua || cantidadAgua <= 0) {
+            console.log('🔍 guardarCantidadAgua - Cantidad inválida, no se guarda');
+            return;
+        }
+        
+        $.ajax({
+            type: "POST",
+            url: "../../html/php/guardarAgua.php",
+            data: { 
+                batch: idBatch,
+                ref_material: 10003,
+                cantidad_agua: cantidadAgua
+            },
+            success: function(response) {
+                console.log('🔍 guardarCantidadAgua - Respuesta recibida:', response);
+                
+                try {
+                    let result = JSON.parse(response);
+                    if (result.success) {
+                        console.log('✅ guardarCantidadAgua - Cantidad de agua guardada exitosamente');
+                        // Opcional: Mostrar mensaje de éxito
+                        alertify.success('Cantidad de agua guardada correctamente');
+                    } else {
+                        console.log('🔍 guardarCantidadAgua - No se encontró material 10003 para este batch');
+                        // Opcional: Mostrar mensaje informativo
+                        alertify.info('No se encontró registro de agua para este batch');
+                    }
+                } catch (e) {
+                    console.error('❌ guardarCantidadAgua - Error parseando respuesta:', e);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('❌ guardarCantidadAgua - Error en AJAX:');
+                console.error('❌ guardarCantidadAgua - Status:', status);
+                console.error('❌ guardarCantidadAgua - Error:', error);
+                console.error('❌ guardarCantidadAgua - XHR:', xhr);
+                alertify.error('Error al guardar la cantidad de agua');
             }
         });
     }
