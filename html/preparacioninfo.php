@@ -347,8 +347,12 @@ include("modal/modal_condicionesMedio.php");
                                 </td>
                               </tr>
                               <tr>
+                                <!-- MODIFICADO: Corregir typo "untosidad" por "untuosidad" -->
+                                <!-- ANTES: id="espec_untosidad" (typo) -->
+                                <!-- AHORA: id="espec_untuosidad" (correcto) -->
+                                <!-- Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss") -->
                                 <td>Untuosidad</td>
-                                <td id="espec_untosidad"></td>
+                                <td id="espec_untuosidad"></td>
                                 <td><select class="selectpicker form-control untuosidad especificacion">
                                     <option value="0" selected hidden>Seleccionar</option>
                                     <option value="1">Cumple </option>
