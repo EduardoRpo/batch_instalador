@@ -45,109 +45,38 @@ $('#in_fecha').attr('min', new Date().toDateInputValue());
 function cargarEquipos() {
     console.log('🔍 cargarEquipos - Función iniciada - PRUEBA SIMPLE');
     console.log('🔍 cargarEquipos - Función iniciada');
-    console.log('🔍 cargarEquipos - Módulo actual:', modulo);
-    console.log('🔍 cargarEquipos - ID Batch:', idBatch);
     
-    // Verificar que los elementos existen
-    const selectorAgitador = $('#sel_agitador');
-    const selectorMarmita = $('#sel_marmita');
-    
-    console.log('🔍 cargarEquipos - Selector agitador encontrado:', selectorAgitador.length > 0);
-    console.log('🔍 cargarEquipos - Selector marmita encontrado:', selectorMarmita.length > 0);
-    
-    if (selectorAgitador.length === 0) {
-        console.error('❌ cargarEquipos - No se encontró el selector #sel_agitador');
-        return;
-    }
-    
-    if (selectorMarmita.length === 0) {
-        console.error('❌ cargarEquipos - No se encontró el selector #sel_marmita');
-        return;
-    }
-    
-    console.log('🔍 cargarEquipos - Iniciando carga de agitadores...');
-    
-    // Cargar agitadores
-    $.ajax({
-        type: 'POST',
-        url: '../../html/php/equipos_fetch.php',
-        data: { tipo: 'agitador' },
-        success: function(response) {
-            console.log('🔍 cargarEquipos - Respuesta de agitadores recibida:', response);
-            console.log('🔍 cargarEquipos - Tipo de respuesta:', typeof response);
-            
-            try {
-                const agitadores = JSON.parse(response);
-                console.log('✅ cargarEquipos - Agitadores parseados exitosamente:', agitadores);
-                console.log('🔍 cargarEquipos - Cantidad de agitadores:', agitadores.length);
-                
-                // Limpiar selector
-                selectorAgitador.empty();
-                selectorAgitador.append('<option value="">Seleccione</option>');
-                
-                // Agregar opciones
-                agitadores.forEach((agitador, index) => {
-                    console.log(`🔍 cargarEquipos - Agregando agitador ${index + 1}:`, agitador);
-                    selectorAgitador.append(`<option value="${agitador.id}">${agitador.nombre}</option>`);
-                });
-                
-                // Agregar opción "No aplica"
-                selectorAgitador.append('<option value="no_aplica">No aplica</option>');
-                console.log('✅ cargarEquipos - Agitadores cargados exitosamente');
-                
-            } catch (error) {
-                console.error('❌ cargarEquipos - Error parseando agitadores:', error);
-                console.error('❌ cargarEquipos - Respuesta que causó el error:', response);
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error('❌ cargarEquipos - Error cargando agitadores:');
-            console.error('❌ cargarEquipos - Status:', status);
-            console.error('❌ cargarEquipos - Error:', error);
-            console.error('❌ cargarEquipos - XHR:', xhr);
+    // PRUEBA SIMPLE - Solo verificar que la función se ejecuta
+    try {
+        console.log('🔍 cargarEquipos - Módulo actual:', modulo);
+        console.log('🔍 cargarEquipos - ID Batch:', idBatch);
+        
+        // Verificar que los elementos existen
+        const selectorAgitador = $('#sel_agitador');
+        const selectorMarmita = $('#sel_marmita');
+        
+        console.log('🔍 cargarEquipos - Selector agitador encontrado:', selectorAgitador.length > 0);
+        console.log('🔍 cargarEquipos - Selector marmita encontrado:', selectorMarmita.length > 0);
+        
+        if (selectorAgitador.length === 0) {
+            console.error('❌ cargarEquipos - No se encontró el selector #sel_agitador');
+            return;
         }
-    });
-    
-    console.log('🔍 cargarEquipos - Iniciando carga de marmitas...');
-    
-    // Cargar marmitas/tanques
-    $.ajax({
-        type: 'POST',
-        url: '../../html/php/equipos_fetch.php',
-        data: { tipo: 'marmita' },
-        success: function(response) {
-            console.log('🔍 cargarEquipos - Respuesta de marmitas recibida:', response);
-            console.log('🔍 cargarEquipos - Tipo de respuesta:', typeof response);
-            
-            try {
-                const marmitas = JSON.parse(response);
-                console.log('✅ cargarEquipos - Marmitas parseadas exitosamente:', marmitas);
-                console.log('🔍 cargarEquipos - Cantidad de marmitas:', marmitas.length);
-                
-                // Limpiar selector
-                selectorMarmita.empty();
-                selectorMarmita.append('<option value="">Seleccione</option>');
-                
-                // Agregar opciones
-                marmitas.forEach((marmita, index) => {
-                    console.log(`🔍 cargarEquipos - Agregando marmita ${index + 1}:`, marmita);
-                    selectorMarmita.append(`<option value="${marmita.id}">${marmita.nombre}</option>`);
-                });
-                
-                console.log('✅ cargarEquipos - Marmitas cargadas exitosamente');
-                
-            } catch (error) {
-                console.error('❌ cargarEquipos - Error parseando marmitas:', error);
-                console.error('❌ cargarEquipos - Respuesta que causó el error:', response);
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error('❌ cargarEquipos - Error cargando marmitas:');
-            console.error('❌ cargarEquipos - Status:', status);
-            console.error('❌ cargarEquipos - Error:', error);
-            console.error('❌ cargarEquipos - XHR:', xhr);
+        
+        if (selectorMarmita.length === 0) {
+            console.error('❌ cargarEquipos - No se encontró el selector #sel_marmita');
+            return;
         }
-    });
-    
-    console.log('🔍 cargarEquipos - Función completada');
+        
+        console.log('🔍 cargarEquipos - Elementos encontrados, continuando...');
+        
+        // PRUEBA SIMPLE - Solo agregar una opción de prueba
+        selectorAgitador.append('<option value="test">PRUEBA AGITADOR</option>');
+        selectorMarmita.append('<option value="test">PRUEBA MARMITA</option>');
+        
+        console.log('✅ cargarEquipos - Prueba completada exitosamente');
+        
+    } catch (error) {
+        console.error('❌ cargarEquipos - Error en la función:', error);
+    }
 }
