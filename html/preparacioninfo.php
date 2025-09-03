@@ -178,8 +178,13 @@ include("modal/modal_condicionesMedio.php");
                     </select>
                   </div>
                   <div class="col-md-8 align-self-center">
+                    <!-- MODIFICADO: Agregado valor por defecto "Sin comentarios" en observaciones -->
+                    <!-- ANTES: Campo vacío sin valor inicial -->
+                    <!-- AHORA: Campo con valor "Sin comentarios" y comportamiento inteligente -->
+                    <!-- Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss") -->
+                    <!-- Motivo: Usuario requiere mismo comportamiento que en módulo Pesaje -->
                     <label for="in_observaciones" class="col-form-label ">Observaciones</label>
-                    <input type="text" class="form-control in_desinfeccion" id="in_observaciones">
+                    <input type="text" class="form-control in_desinfeccion" id="in_observaciones" value="Sin comentarios">
                   </div>
                 </div>
                 <div class="row" style="margin: 1%">
@@ -489,6 +494,40 @@ include("modal/modal_condicionesMedio.php");
   <script src="/html/js/preparacion/preparacioninfo.js"></script>
   <script src="/html/js/global/searchData.js"></script>
 
+  <!-- Script para manejar el campo de observaciones -->
+  <script>
+    $(document).ready(function() {
+      const observacionesInput = $('#in_observaciones');
+      const valorPorDefecto = 'Sin comentarios';
+      
+      // Función para restaurar el valor por defecto si está vacío
+      const restaurarValorPorDefecto = () => {
+        if (observacionesInput.val().trim() === '') {
+          observacionesInput.val(valorPorDefecto);
+        }
+      };
+      
+      // Restaurar valor por defecto al cargar la página
+      restaurarValorPorDefecto();
+      
+      // Restaurar valor por defecto al perder el foco
+      observacionesInput.on('blur', restaurarValorPorDefecto);
+      
+      // Limpiar campo al obtener el foco
+      observacionesInput.on('focus', function() {
+        if (observacionesInput.val() === valorPorDefecto) {
+          observacionesInput.val('');
+        }
+      });
+      
+      // Restaurar valor por defecto si se deja vacío
+      observacionesInput.on('input', function() {
+        if (observacionesInput.val().trim() === '') {
+          observacionesInput.val(valorPorDefecto);
+        }
+      });
+    });
+  </script>
 
 </body>
 
