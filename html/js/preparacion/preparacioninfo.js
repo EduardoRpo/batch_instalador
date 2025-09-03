@@ -46,6 +46,7 @@ console.log('🔍 PREPARACIÓN - Antes de definir cargarEquipos');
 
 // Función para cargar equipos (agitador y marmita)
 function cargarEquipos() {
+    console.log('🔍 cargarEquipos - PRIMER LOG - Función iniciada');
     console.log('🔍 cargarEquipos - Función iniciada - PRUEBA SIMPLE');
     console.log('🔍 cargarEquipos - Función iniciada');
     
