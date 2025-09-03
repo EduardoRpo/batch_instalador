@@ -31,6 +31,19 @@ loadBatch = async () => {
   }
   console.log('🔍 loadBatch - Después de llamar a cargarEquiposPreparacion()');
   
+  // MODIFICADO: Agregar llamada a cargarControlProceso para cargar especificaciones
+  // ANTES: No se llamaba a cargarControlProceso(), por eso el "Control de proceso" aparecía vacío
+  // AHORA: Se llama a cargarControlProceso() para cargar las especificaciones desde la BD
+  // Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+  console.log('🔍 loadBatch - Llamando a cargarControlProceso()');
+  try {
+    cargarControlProceso();
+    console.log('🔍 loadBatch - cargarControlProceso() ejecutado sin errores');
+  } catch (error) {
+    console.error('❌ loadBatch - Error al ejecutar cargarControlProceso():', error);
+  }
+  console.log('🔍 loadBatch - Después de llamar a cargarControlProceso()');
+  
   console.log('🔍 loadBatch - Función completada');
 };
 

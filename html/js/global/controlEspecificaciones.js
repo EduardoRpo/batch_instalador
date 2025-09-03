@@ -43,17 +43,36 @@ $(document).ready(function() {
     });
 
     /* Cargar tabla especificaciones */
+    // MODIFICADO: Función para cargar especificaciones del control de proceso desde la BD
+    // ANTES: Esta función no se llamaba, por eso el "Control de proceso" aparecía vacío
+    // AHORA: Se llama desde preparacioninfo.js para cargar las especificaciones
+    // Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
 
     cargarControlProceso = () => {
+        // MODIFICADO: Agregar logs para debuggear
+        console.log('🔍 cargarControlProceso - Función iniciada');
+        console.log('🔍 cargarControlProceso - Módulo:', modulo);
+        console.log('🔍 cargarControlProceso - ID Batch:', idBatch);
+        
         $.ajax({
             type: "POST",
             url: "../../html/php/controlProceso.php",
             data: { modulo, idBatch },
 
             success: function(response) {
-                if (response == "" || response == 0) return false;
+                // MODIFICADO: Agregar logs para debuggear
+                console.log('🔍 cargarControlProceso - Respuesta recibida:', response);
+                console.log('🔍 cargarControlProceso - Tipo de respuesta:', typeof response);
+                
+                if (response == "" || response == 0) {
+                    console.log('🔍 cargarControlProceso - No hay datos, retornando false');
+                    return false;
+                }
 
                 let info = JSON.parse(response);
+                console.log('🔍 cargarControlProceso - Datos parseados:', info);
+                console.log('🔍 cargarControlProceso - Cantidad de registros:', info.length);
+                
                 let index = info.length;
 
                 $(".color").val(info[index - 1].color);
@@ -65,7 +84,17 @@ $(document).ready(function() {
                 $(".untuosidad").val(info[index - 1].untuosidad);
                 $(".espumoso").val(info[index - 1].espumoso);
                 $("#in_grado_alcohol").val(info[index - 1].alcohol);
+                
+                console.log('✅ cargarControlProceso - Especificaciones cargadas exitosamente');
             },
+            
+            error: function(xhr, status, error) {
+                // MODIFICADO: Agregar logs para debuggear errores
+                console.error('❌ cargarControlProceso - Error en AJAX:');
+                console.error('❌ cargarControlProceso - Status:', status);
+                console.error('❌ cargarControlProceso - Error:', error);
+                console.error('❌ cargarControlProceso - XHR:', xhr);
+            }
         });
     }
 
