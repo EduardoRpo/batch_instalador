@@ -38,110 +38,62 @@ function cargarEquiposPreparacion() {
 function cargarEquiposDesdeBD() {
     console.log('🔍 cargarEquiposDesdeBD - Iniciando carga desde BD');
     
-    // Cargar agitadores
+    // Usar la misma API que el archivo original equipos.js
     $.ajax({
-        type: 'POST',
-        url: '../../html/php/equipos_fetch.php',
-        data: { tipo: 'agitador' },
-        success: function(response) {
-            console.log('🔍 cargarEquiposDesdeBD - Respuesta de agitadores:', response);
-            console.log('🔍 cargarEquiposDesdeBD - Tipo de respuesta:', typeof response);
+        url: '/api/equipos',
+        type: 'GET',
+        success: function(data) {
+            console.log('🔍 cargarEquiposDesdeBD - Respuesta de /api/equipos:', data);
+            console.log('🔍 cargarEquiposDesdeBD - Tipo de respuesta:', typeof data);
+            console.log('🔍 cargarEquiposDesdeBD - Cantidad de equipos:', data.length);
             
-            // Verificar si hay error en la respuesta
-            if (response.error) {
-                console.error('❌ cargarEquiposDesdeBD - Error del servidor:', response.error);
-                // Agregar opción por defecto
-                $('#sel_agitador').empty();
-                $('#sel_agitador').append('<option value="">Error al cargar</option>');
-                $('#sel_agitador').append('<option value="no_aplica">No aplica</option>');
-                return;
-            }
+            // Limpiar selectores
+            $('#sel_agitador').empty();
+            $('#sel_marmita').empty();
             
-            try {
-                // Si la respuesta ya es un objeto, no necesitamos parsear
-                let agitadores = response;
-                if (typeof response === 'string') {
-                    agitadores = JSON.parse(response);
+            // Agregar opciones por defecto
+            $('#sel_agitador').append('<option value="">Seleccione</option>');
+            $('#sel_marmita').append('<option value="">Seleccione</option>');
+            
+            // Procesar equipos por tipo (igual que equipos.js)
+            data.forEach((equipo, index) => {
+                console.log(`🔍 cargarEquiposDesdeBD - Procesando equipo ${index + 1}:`, equipo);
+                
+                if (equipo.tipo === 'agitador') {
+                    console.log(`🔍 cargarEquiposDesdeBD - Agregando agitador: ${equipo.descripcion}`);
+                    $('#sel_agitador').append(
+                        `<option value="${equipo.id}">${equipo.descripcion}</option>`
+                    );
                 }
                 
-                console.log('✅ cargarEquiposDesdeBD - Agitadores procesados exitosamente:', agitadores);
-                console.log('🔍 cargarEquiposDesdeBD - Cantidad de agitadores:', agitadores.length);
-                
-                // Limpiar selector
-                $('#sel_agitador').empty();
-                $('#sel_agitador').append('<option value="">Seleccione</option>');
-                
-                // Agregar opciones
-                agitadores.forEach((agitador, index) => {
-                    console.log(`🔍 cargarEquiposDesdeBD - Agregando agitador ${index + 1}:`, agitador);
-                    $('#sel_agitador').append(`<option value="${agitador.id}">${agitador.nombre}</option>`);
-                });
-                
-                // Agregar opción "No aplica"
-                $('#sel_agitador').append('<option value="no_aplica">No aplica</option>');
-                console.log('✅ cargarEquiposDesdeBD - Agitadores cargados exitosamente');
-                
-            } catch (error) {
-                console.error('❌ cargarEquiposDesdeBD - Error procesando agitadores:', error);
-                console.error('❌ cargarEquiposDesdeBD - Respuesta que causó el error:', response);
-                // Agregar opción por defecto
-                $('#sel_agitador').empty();
-                $('#sel_agitador').append('<option value="">Error al cargar</option>');
-                $('#sel_agitador').append('<option value="no_aplica">No aplica</option>');
-            }
+                if (equipo.tipo === 'marmita') {
+                    console.log(`🔍 cargarEquiposDesdeBD - Agregando marmita: ${equipo.descripcion}`);
+                    $('#sel_marmita').append(
+                        `<option value="${equipo.id}">${equipo.descripcion}</option>`
+                    );
+                }
+            });
+            
+            // Agregar opción "No aplica" para agitador
+            $('#sel_agitador').append('<option value="no_aplica">No aplica</option>');
+            
+            console.log('✅ cargarEquiposDesdeBD - Equipos cargados exitosamente');
+            console.log('🔍 cargarEquiposDesdeBD - Agitadores encontrados:', $('#sel_agitador option').length - 2); // -2 por "Seleccione" y "No aplica"
+            console.log('🔍 cargarEquiposDesdeBD - Marmitas encontradas:', $('#sel_marmita option').length - 1); // -1 por "Seleccione"
         },
         error: function(xhr, status, error) {
-            console.error('❌ cargarEquiposDesdeBD - Error cargando agitadores:');
+            console.error('❌ cargarEquiposDesdeBD - Error cargando equipos:');
             console.error('❌ cargarEquiposDesdeBD - Status:', status);
             console.error('❌ cargarEquiposDesdeBD - Error:', error);
             console.error('❌ cargarEquiposDesdeBD - XHR:', xhr);
-        }
-    });
-    
-    // Cargar marmitas/tanques
-    $.ajax({
-        type: 'POST',
-        url: '../../html/php/equipos_fetch.php',
-        data: { tipo: 'marmita' },
-        success: function(response) {
-            console.log('🔍 cargarEquiposDesdeBD - Respuesta de marmitas:', response);
-            console.log('🔍 cargarEquiposDesdeBD - Tipo de respuesta:', typeof response);
             
-            try {
-                // Si la respuesta ya es un objeto, no necesitamos parsear
-                let marmitas = response;
-                if (typeof response === 'string') {
-                    marmitas = JSON.parse(response);
-                }
-                
-                console.log('✅ cargarEquiposDesdeBD - Marmitas procesadas exitosamente:', marmitas);
-                console.log('🔍 cargarEquiposDesdeBD - Cantidad de marmitas:', marmitas.length);
-                
-                // Limpiar selector
-                $('#sel_marmita').empty();
-                $('#sel_marmita').append('<option value="">Seleccione</option>');
-                
-                // Agregar opciones
-                marmitas.forEach((marmita, index) => {
-                    console.log(`🔍 cargarEquiposDesdeBD - Agregando marmita ${index + 1}:`, marmita);
-                    $('#sel_marmita').append(`<option value="${marmita.id}">${marmita.nombre}</option>`);
-                });
-                
-                console.log('✅ cargarEquiposDesdeBD - Marmitas cargadas exitosamente');
-                
-            } catch (error) {
-                console.error('❌ cargarEquiposDesdeBD - Error procesando marmitas:', error);
-                console.error('❌ cargarEquiposDesdeBD - Respuesta que causó el error:', response);
-                // Agregar opción por defecto
-                $('#sel_marmita').empty();
-                $('#sel_marmita').append('<option value="">Error al cargar</option>');
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error('❌ cargarEquiposDesdeBD - Error cargando marmitas:');
-            console.error('❌ cargarEquiposDesdeBD - Status:', status);
-            console.error('❌ cargarEquiposDesdeBD - Error:', error);
-            console.error('❌ cargarEquiposDesdeBD - XHR:', xhr);
+            // Agregar opciones por defecto en caso de error
+            $('#sel_agitador').empty();
+            $('#sel_agitador').append('<option value="">Error al cargar</option>');
+            $('#sel_agitador').append('<option value="no_aplica">No aplica</option>');
+            
+            $('#sel_marmita').empty();
+            $('#sel_marmita').append('<option value="">Error al cargar</option>');
         }
     });
 }
