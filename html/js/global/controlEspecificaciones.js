@@ -121,20 +121,22 @@ $(document).ready(function() {
             },
             success: function(response) {
                 console.log('🔍 guardarCantidadAgua - Respuesta recibida:', response);
+                console.log('🔍 guardarCantidadAgua - Tipo de respuesta:', typeof response);
                 
-                try {
-                    let result = JSON.parse(response);
-                    if (result.success) {
-                        console.log('✅ guardarCantidadAgua - Cantidad de agua guardada exitosamente');
-                        // Opcional: Mostrar mensaje de éxito
-                        alertify.success('Cantidad de agua guardada correctamente');
-                    } else {
-                        console.log('🔍 guardarCantidadAgua - No se encontró material 10003 para este batch');
-                        // Opcional: Mostrar mensaje informativo
-                        alertify.info('No se encontró registro de agua para este batch');
-                    }
-                } catch (e) {
-                    console.error('❌ guardarCantidadAgua - Error parseando respuesta:', e);
+                // MODIFICADO: jQuery ya parsea la respuesta automáticamente
+                // ANTES: let result = JSON.parse(response); (causaba error)
+                // AHORA: response ya es un objeto JavaScript
+                // Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+                let result = response;
+                
+                if (result.success) {
+                    console.log('✅ guardarCantidadAgua - Cantidad de agua guardada exitosamente');
+                    // Opcional: Mostrar mensaje de éxito
+                    alertify.success('Cantidad de agua guardada correctamente');
+                } else {
+                    console.log('🔍 guardarCantidadAgua - No se encontró material 10003 para este batch');
+                    // Opcional: Mostrar mensaje informativo
+                    alertify.info('No se encontró registro de agua para este batch');
                 }
             },
             error: function(xhr, status, error) {
