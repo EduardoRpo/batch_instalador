@@ -376,7 +376,7 @@ include("modal/modal_condicionesMedio.php");
                                 <!-- AHORA: Campo Agua con input numérico como Grado de Alcohol -->
                                 <!-- Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss") -->
                                 <td>Agua</td>
-                                <td>Ingresar la cantidad de Agua pesada</td>
+                                <td>Ingresar cantidad de Agua utilizada en la preparación del granel (Kg)</td>
                                 <td><input class="selectpicker form-control especificacionInput" type="number" id="in_agua" placeholder="Cantidad de agua" onblur="guardarCantidadAgua(this.value);">
                                 </td>
                               </tr>
