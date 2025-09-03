@@ -43,6 +43,7 @@ $('#in_fecha').attr('min', new Date().toDateInputValue());
 
 // Función para cargar equipos (agitador y marmita)
 function cargarEquipos() {
+    console.log('🔍 cargarEquipos - Función iniciada - PRUEBA SIMPLE');
     console.log('🔍 cargarEquipos - Función iniciada');
     console.log('🔍 cargarEquipos - Módulo actual:', modulo);
     console.log('🔍 cargarEquipos - ID Batch:', idBatch);
