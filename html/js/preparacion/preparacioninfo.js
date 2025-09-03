@@ -23,7 +23,12 @@ loadBatch = async () => {
   }
   
   console.log('🔍 loadBatch - Llamando a cargarEquipos()');
-  cargarEquipos();
+  try {
+    cargarEquipos();
+    console.log('🔍 loadBatch - cargarEquipos() ejecutado sin errores');
+  } catch (error) {
+    console.error('❌ loadBatch - Error al ejecutar cargarEquipos():', error);
+  }
   console.log('🔍 loadBatch - Después de llamar a cargarEquipos()');
   
   console.log('🔍 loadBatch - Función completada');
