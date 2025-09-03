@@ -22,14 +22,14 @@ loadBatch = async () => {
     console.log('🔍 loadBatch - Respuesta no es null, saltando cargarTanques()');
   }
   
-  console.log('🔍 loadBatch - Llamando a cargarEquipos()');
+  console.log('🔍 loadBatch - Llamando a cargarEquiposPreparacion()');
   try {
-    cargarEquipos();
-    console.log('🔍 loadBatch - cargarEquipos() ejecutado sin errores');
+    cargarEquiposPreparacion();
+    console.log('🔍 loadBatch - cargarEquiposPreparacion() ejecutado sin errores');
   } catch (error) {
-    console.error('❌ loadBatch - Error al ejecutar cargarEquipos():', error);
+    console.error('❌ loadBatch - Error al ejecutar cargarEquiposPreparacion():', error);
   }
-  console.log('🔍 loadBatch - Después de llamar a cargarEquipos()');
+  console.log('🔍 loadBatch - Después de llamar a cargarEquiposPreparacion()');
   
   console.log('🔍 loadBatch - Función completada');
 };
@@ -49,46 +49,7 @@ $('#in_fecha').attr('min', new Date().toDateInputValue());
 
 console.log('🔍 PREPARACIÓN - Antes de definir cargarEquipos');
 
-// Función para cargar equipos (agitador y marmita)
-function cargarEquipos() {
-    console.log('🔍 cargarEquipos - PRIMER LOG - Función iniciada');
-    console.log('🔍 cargarEquipos - Función iniciada - PRUEBA SIMPLE');
-    console.log('🔍 cargarEquipos - Función iniciada');
-    
-    // PRUEBA SIMPLE - Solo verificar que la función se ejecuta
-    try {
-        console.log('🔍 cargarEquipos - Módulo actual:', modulo);
-        console.log('🔍 cargarEquipos - ID Batch:', idBatch);
-        
-        // Verificar que los elementos existen
-        const selectorAgitador = $('#sel_agitador');
-        const selectorMarmita = $('#sel_marmita');
-        
-        console.log('🔍 cargarEquipos - Selector agitador encontrado:', selectorAgitador.length > 0);
-        console.log('🔍 cargarEquipos - Selector marmita encontrado:', selectorMarmita.length > 0);
-        
-        if (selectorAgitador.length === 0) {
-            console.error('❌ cargarEquipos - No se encontró el selector #sel_agitador');
-            return;
-        }
-        
-        if (selectorMarmita.length === 0) {
-            console.error('❌ cargarEquipos - No se encontró el selector #sel_marmita');
-            return;
-        }
-        
-        console.log('🔍 cargarEquipos - Elementos encontrados, continuando...');
-        
-        // PRUEBA SIMPLE - Solo agregar una opción de prueba
-        selectorAgitador.append('<option value="test">PRUEBA AGITADOR</option>');
-        selectorMarmita.append('<option value="test">PRUEBA MARMITA</option>');
-        
-        console.log('✅ cargarEquipos - Prueba completada exitosamente');
-        
-    } catch (error) {
-        console.error('❌ cargarEquipos - Error en la función:', error);
-    }
-}
+// Función eliminada - Se movió a equiposPreparacion.js para evitar conflictos
 
 console.log('🔍 PREPARACIÓN - Después de definir cargarEquipos');
 
