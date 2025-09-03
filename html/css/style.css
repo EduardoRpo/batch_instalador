@@ -10956,26 +10956,39 @@ para mejorar el responsive enseguida*/
   grid-column-end: 14;
 } */
 
+/* MODIFICADO: Cambiar layout de contenedorInfo2 para que coincida con Pesaje */
+/* ANTES: 5 columnas con tabla ocupando 2 filas */
+/* AHORA: 4 columnas con tabla ocupando 1 línea completa */
+/* Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss") */
+
 .contenedorInfo2 {
     padding: 1.5rem;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    /* MODIFICADO: Cambiar de 5 columnas a 4 columnas para que coincida con Pesaje */
+    /* ANTES: grid-template-columns: repeat(5, 1fr); (6 campos en 2 filas) */
+    /* AHORA: grid-template-columns: repeat(4, 1fr); (4 campos en 1 línea) */
+    /* Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss") */
+    grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
 }
 
-.contenedorInfo__group:nth-of-type(4) {
-    grid-column: 4 / -1;
-    grid-row: span 2;
+.contenedorInfo__group:nth-of-type(5) {
+    /* MODIFICADO: Cambiar la posición de la tabla para que ocupe toda la línea */
+    /* ANTES: grid-column: 4 / -1; grid-row: span 2; (ocupaba 2 filas) */
+    /* AHORA: grid-column: 1 / -1; (ocupa toda la línea) */
+    /* Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss") */
+    grid-column: 1 / -1;
+    grid-row: auto;
 }
 
 @media screen and (max-width: 800px) {
     .contenedorInfo2 {
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(4, auto);
+        grid-template-rows: repeat(3, auto);
     }
-    .contenedorInfo__group:nth-of-type(4) {
+    .contenedorInfo__group:nth-of-type(5) {
         grid-column: 1 / -1;
-        grid-row: 4 / -1;
+        grid-row: 3 / -1;
     }
 }
 

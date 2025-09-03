@@ -87,50 +87,16 @@ include("modal/modal_condicionesMedio.php");
               <div class="card-body">
 
 
+                <!-- MODIFICADO: Cambiar layout de información del producto para que coincida con Pesaje -->
+                <!-- ANTES: 6 campos en 2 filas (Fecha Programación, No Orden, Referencia, Tamaño Lote, No. Lote, Línea) -->
+                <!-- AHORA: 4 campos en 1 línea horizontal (Granel, No. Lote, Línea, Tamaño Lote) + tabla compacta -->
+                <!-- Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss") -->
+                
                 <div class="contenedorInfo2">
 
                   <div class="contenedorInfo__group">
-                    <label for="recipient-name" class="col-form-label">Fecha Programación</label>
-                    <input type="date" class="form-control" id="in_fecha" width="50px" readonly>
-                  </div>
-
-                  <div class="contenedorInfo__group">
-                    <label for="recipient-name" class="col-form-label">No Orden de Producción</label>
-                    <input type="text" class="form-control" id="in_numero_orden" readonly>
-                  </div>
-
-                  <div class="contenedorInfo__group">
-                    <label for="recipient-name" class="col-form-label">Referencia</label>
+                    <label for="recipient-name" class="col-form-label">Granel</label>
                     <input type="text" class="form-control" id="in_referencia" readonly>
-                  </div>
-
-                  <div class="contenedorInfo__group">
-                    <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:80%; height: 30px;">
-                      <thead>
-                        <tr>
-                          <th class="centrado">Tamaño Tanque (Kg)</th>
-                          <th class="centrado">Cantidad Tanques</th>
-                          <!-- <th class="centrado">Total</th> -->
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr id="fila1">
-                          <td class="centrado" id="tanque1"></td>
-                          <td class="centrado" id="cantidad1"></td>
-                          <!-- <td class="centrado" id="total1"></td> -->
-                        </tr>
-                        <tr id="fila2">
-                          <td class="centrado" id="tanque2"></td>
-                          <td class="centrado" id="cantidad2"></td>
-                          <!-- <td class="centrado" id="total2"></td> -->
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-
-                  <div class="contenedorInfo__group">
-                    <label for="in_tamano_lote" class="col-form-label">Tamaño Lote (kg)</label>
-                    <input type="text" class="form-control" id="in_tamano_lote" readonly>
                   </div>
 
                   <div class="contenedorInfo__group">
@@ -139,8 +105,34 @@ include("modal/modal_condicionesMedio.php");
                   </div>
 
                   <div class="contenedorInfo__group">
-                    <label for="recipient-name" class="col-form-label">Linea</label>
+                    <label for="recipient-name" class="col-form-label">Línea</label>
                     <input type="text" class="form-control" id="in_linea" readonly>
+                  </div>
+
+                  <div class="contenedorInfo__group">
+                    <label for="in_tamano_lote" class="col-form-label">Tamaño Lote (kg)</label>
+                    <input type="text" class="form-control" id="in_tamano_lote" readonly>
+                  </div>
+
+                  <div class="contenedorInfo__group">
+                    <table id="txtobservacionesTanques" class="itemInfo table table-striped table-bordered" style="width:90%; font-size: 0.9em;">
+                      <thead>
+                        <tr>
+                          <th class="centrado">Tamaño Tanque (Kg)</th>
+                          <th class="centrado">Cantidad Tanques</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr id="fila1">
+                          <td class="centrado" id="tanque1"></td>
+                          <td class="centrado" id="cantidad1"></td>
+                        </tr>
+                        <tr id="fila2">
+                          <td class="centrado" id="tanque2"></td>
+                          <td class="centrado" id="cantidad2"></td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
 
                 </div>
