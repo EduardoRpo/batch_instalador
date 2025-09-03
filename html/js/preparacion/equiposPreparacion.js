@@ -38,9 +38,9 @@ function cargarEquiposPreparacion() {
 function cargarEquiposDesdeBD() {
     console.log('🔍 cargarEquiposDesdeBD - Iniciando carga desde BD');
     
-    // Usar la misma API que el archivo original equipos.js
+    // Usar archivo fetch local (como en pesaje) para evitar errores de API
     $.ajax({
-        url: '/api/equipos',
+        url: '../../html/php/equipos_fetch.php',
         type: 'GET',
         success: function(data) {
             console.log('🔍 cargarEquiposDesdeBD - Respuesta de /api/equipos:', data);
