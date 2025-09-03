@@ -72,7 +72,11 @@ function cargarTablaFormulas(referencia) {
         language: { url: "admin_componentes/es-ar.json" },
 
         ajax: {
-            url: `/api/instructivos/${referencia}`,
+            // MODIFICADO: Usar archivo fetch local en lugar de API que falla
+            // ANTES: url: `/api/instructivos/${referencia}` (error 500)
+            // AHORA: url: `../../../../html/php/instructivos_fetch.php?referencia=${referencia}`
+            // Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+            url: `../../../../html/php/instructivos_fetch.php?referencia=${referencia}`,
             dataSrc: "",
         },
 

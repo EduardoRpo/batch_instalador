@@ -1,4 +1,10 @@
 <?php
+/**
+ * ARCHIVO NUEVO - Creado para evitar errores de API /api/instructivos
+ * Consulta directamente la tabla instructivo_preparacion
+ * Fecha: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+ * Motivo: La API /api/instructivos devuelve error 500
+ */
 require_once __DIR__ . '/../../env.php';
 header('Content-Type: application/json');
 
