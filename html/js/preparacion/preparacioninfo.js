@@ -41,6 +41,8 @@ Date.prototype.toDateInputValue = function () {
 
 $('#in_fecha').attr('min', new Date().toDateInputValue());
 
+console.log('🔍 PREPARACIÓN - Antes de definir cargarEquipos');
+
 // Función para cargar equipos (agitador y marmita)
 function cargarEquipos() {
     console.log('🔍 cargarEquipos - Función iniciada - PRUEBA SIMPLE');
@@ -80,3 +82,5 @@ function cargarEquipos() {
         console.error('❌ cargarEquipos - Error en la función:', error);
     }
 }
+
+console.log('🔍 PREPARACIÓN - Después de definir cargarEquipos');
