@@ -253,13 +253,18 @@ $(document).ready(function () {
     loadTblCapacidadPrePlaneada,
     loadTblCapacidadPlaneada,
     calcTamanioLoteBySemana,
-    // Agregar función rows para compatibilidad
+    // Agregar función rows para compatibilidad completa
     rows: function() {
       console.log(' tableBatchPrePlaneacion.rows - Función llamada para compatibilidad');
       return {
         data: function() {
           console.log(' tableBatchPrePlaneacion.rows().data - Función llamada para compatibilidad');
-          return [];
+          return {
+            toArray: function() {
+              console.log(' tableBatchPrePlaneacion.rows().data().toArray - Función llamada para compatibilidad');
+              return [];
+            }
+          };
         }
       };
     }
