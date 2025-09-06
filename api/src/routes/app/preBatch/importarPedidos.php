@@ -286,6 +286,3 @@ function multi_array_diff($arr1, $arr2)
     }
   }
   return $arrDiff;
-}
-/ /   G I T   R E C O G N I T I O N   C O M M E N T   -   0 9 / 0 6 / 2 0 2 5   0 0 : 1 3 : 2 6  
- // GIT RECOGNITION COMMENT - 2025-01-09
