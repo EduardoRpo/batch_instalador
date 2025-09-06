@@ -39,11 +39,19 @@ $(document).ready(function () {
     let capacidadPrePlaneada = calcTamanioLoteBySemana(data, parseInt(semana));
     console.log('🔍 loadTblCapacidadPrePlaneada - Capacidad calculada:', capacidadPrePlaneada);
 
-    let rowPrePlaneados = document.getElementById(
-      'tblCalcCapacidadPrePlaneadoBody'
-    );
+    let rowPrePlaneados = document.getElementById('tblCalcCapacidadPrePlaneadoBody');
+    console.log('🔍 loadTblCapacidadPrePlaneada - Elemento DOM encontrado:', rowPrePlaneados);
+    
+    if (!rowPrePlaneados) {
+      console.warn('⚠️ loadTblCapacidadPrePlaneada - Elemento tblCalcCapacidadPrePlaneadoBody no encontrado en el DOM');
+      return;
+    }
+
+    // Limpiar contenido anterior
+    rowPrePlaneados.innerHTML = '';
 
     for (i = 0; i < capacidadPrePlaneada.length; i++) {
+      console.log('🔍 loadTblCapacidadPrePlaneada - Agregando fila:', capacidadPrePlaneada[i]);
       rowPrePlaneados.innerHTML += `
         <tr>
           <td>${capacidadPrePlaneada[i].granel}</td>
@@ -90,6 +98,7 @@ $(document).ready(function () {
     let capacidad = 0;
     for (i = 0; i < data.length; i++) {
       console.log('🔍 calcTamanioLoteBySemana - Registro', i, ':', data[i]);
+      console.log('🔍 calcTamanioLoteBySemana - Registro semana:', data[i].semana, 'vs semana buscada:', semana);
       
       if (data[i].semana == semana) {
         capacidad += parseFloat(data[i].tamano_lote);
@@ -143,8 +152,18 @@ $(document).ready(function () {
     console.log('�� loadTblCapacidadPlaneada - Capacidad calculada:', capacidadPlaneada);
 
     let rowPlaneados = document.getElementById('tblCalcCapacidadPlaneadoBody');
+    console.log('�� loadTblCapacidadPlaneada - Elemento DOM encontrado:', rowPlaneados);
+    
+    if (!rowPlaneados) {
+      console.warn('⚠️ loadTblCapacidadPlaneada - Elemento tblCalcCapacidadPlaneadoBody no encontrado en el DOM');
+      return;
+    }
+
+    // Limpiar contenido anterior
+    rowPlaneados.innerHTML = '';
 
     for (i = 0; i < capacidadPlaneada.length; i++) {
+      console.log('�� loadTblCapacidadPlaneada - Agregando fila:', capacidadPlaneada[i]);
       rowPlaneados.innerHTML += `
         <tr>
           <td>${capacidadPlaneada[i].granel}</td>
@@ -152,5 +171,14 @@ $(document).ready(function () {
         </tr>
       `;
     }
+  };
+
+  // Exportar funciones para uso global
+  window.tableBatchPrePlaneacion = {
+    getDataPrePlaneacion,
+    getDataPlaneacion,
+    loadTblCapacidadPrePlaneada,
+    loadTblCapacidadPlaneada,
+    calcTamanioLoteBySemana
   };
 });
