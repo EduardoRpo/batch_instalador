@@ -286,3 +286,4 @@ function multi_array_diff($arr1, $arr2)
     }
   }
   return $arrDiff;
+}
