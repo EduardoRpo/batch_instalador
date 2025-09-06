@@ -1,3 +1,15 @@
+/**
+ * MODIFICADO: Mejora en importación de pedidos para mostrar solo datos actualizados
+ * FECHA: 2025-01-09
+ * MOTIVO: Usuario requiere que los datos actualizados aparezcan en la vista después de confirmar
+ * CAMBIOS:
+ * - Modificar yesOption para usar API real en lugar de simulación
+ * - Implementar función mostrarSoloDatosActualizados() para filtrar vista
+ * - Agregar botón "Mostrar todos los pedidos" para alternar vista
+ * - Mejorar actualizarTablaPedidos() para recrear tabla correctamente
+ * - Mantener compatibilidad con funcionalidad existente
+ */
+
 $('#btnImportarPedidos').click(function (e) {
     e.preventDefault();
     file = $('#filePedidos').val();
@@ -42,166 +54,195 @@ $('#btnImportarPedidos').click(function (e) {
                 }
             });
 
-            OrderToImport = OrderToImport.filter(function (item) {
-                return item !== undefined;
-            });
+            OrderToImport = OrderToImport.filter((item) => item !== undefined);
 
-            checkImport(OrderToImport);
-        })
-        .catch(() => {
-            console.log('Ocurrio un error. Intente Nuevamente');
-        });
-});
-
-/* Validar datos */
-checkImport = (data) => {
-    console.log('=== DIAGNÓSTICO IMPORTACIÓN ===');
-    console.log('Datos a enviar:', data);
-    console.log('URL del endpoint:', '/html/php/import_pedidos_simple.php');
-    
-    $.ajax({
-        type: 'POST',
-        url: '/html/php/import_pedidos_simple.php',
-        data: JSON.stringify({ data: data }),
-        contentType: 'application/json',
-        success: function (resp) {
-            console.log('=== RESPUESTA EXITOSA ===');
-            console.log('Respuesta completa:', resp);
-            console.log('Tipo de respuesta:', typeof resp);
-            console.log('resp.insert:', resp.insert);
-            console.log('resp.update:', resp.update);
-            console.log('resp.nonProducts:', resp.nonProducts);
-            console.log('resp.pedidos:', resp.pedidos);
-            console.log('resp.referencias:', resp.referencias);
-            
-            if (resp.error == true) {
-                console.log('Error en respuesta:', resp.message);
-                alertify.error(resp.message);
-                $('#filePedidos').val('');
-                return false;
+            if (OrderToImport.length > 0) {
+                validateDataOrdersImport(OrderToImport);
+            } else {
+                alertify.set('notifier', 'position', 'top-right');
+                alertify.error('El archivo está vacío o no contiene datos válidos');
             }
-            
-            // Verificar que todos los valores existan
-            const insert = resp.insert || 0;
-            const update = resp.update || 0;
-            const nonProducts = resp.nonProducts || 0;
-            const pedidos = resp.pedidos || 0;
-            const referencias = resp.referencias || 0;
-            
-            console.log('Valores procesados:', { insert, update, nonProducts, pedidos, referencias });
-            
-            alertify
-                .confirm(
-                    'Importar Pedidos',
-                    `Se han encontrado los siguientes registros:<br><br>
-                      <div class="row">
-                         <div class="col">Datos a insertar: ${insert}</div>
-                         <div class="col">Cantidad filas: ${pedidos}</div>
-                         <div class="w-100"></div>
-                         <div class="col">Datos a actualizar: ${update}</div>
-                         <div class="col">Cantidad referencias: ${referencias}</div>
-                         <div class="w-100"></div>
-                         <div class="col">Referencias no creadas: ${nonProducts}</div>
-                       </div><br><br>
-                        <p>Desea continuar?</p>
-                         `,
-                    function () {
-                        console.log('Usuario confirmó la importación');
-                        yesOption();
-                    },
-                    function () {
-                        console.log('Usuario canceló la importación');
-                        $('#filePedidos').val('');
-                        deletePedidosSession();
-                    }
-                )
-                .set('labels', { ok: 'Si', cancel: 'No' });
-        },
-        error: function(xhr, status, error) {
-            console.log('=== ERROR EN AJAX ===');
-            console.log('Status:', status);
-            console.log('Error:', error);
-            console.log('Response Text:', xhr.responseText);
-            console.log('Status Code:', xhr.status);
-            alertify.error('Error al procesar los datos: ' + error);
-            $('#filePedidos').val('');
+        })
+        .catch((error) => {
+            console.error('Error en el procesamiento del archivo:', error);
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.error(
+                'Error al procesar el archivo. Verifique que sea un archivo Excel válido.'
+            );
+        }
+        $('#filePedidos').val('');
         }
     });
-};
 
-//Opcion SI
-yesOption = async () => {
-    console.log('=== DEBUG: INICIANDO yesOption ===');
+validateDataOrdersImport = async (data) => {
     try {
-        console.log('=== DEBUG: PROCESANDO IMPORTACIÓN ===');
-        
-        // Limpiar el campo de archivo
-        console.log('=== DEBUG: LIMPIANDO CAMPO DE ARCHIVO ===');
+        response = await $.ajax({
+            url: '/api/validacionDatosPedidos',
+            type: 'POST',
+            data: JSON.stringify({ data: data }),
+            contentType: 'application/json; charset=utf-8',
+        });
+
+        if (response.error) {
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.error(response.message);
+            return false;
+        }
+
+        // Configuración del modal de confirmación
+        let confirMessage = `
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Datos a insertar:</strong> ${response.insert}</p>
+                        <p><strong>Datos a actualizar:</strong> ${response.update}</p>
+                        <p><strong>Referencias no creadas:</strong> ${response.nonProducts}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Cantidad filas:</strong> ${response.pedidos}</p>
+                        <p><strong>Cantidad referencias:</strong> ${response.referencias}</p>
+                    </div>
+                </div>
+                <br>
+                <p>¿Desea continuar?</p>
+            </div>
+        `;
+
+        // Mostrar modal de confirmación
+        alertify.confirm('Importar Pedidos', confirMessage, yesOption, noOption);
+        $('.cardImportarPedidos').hide(800);
         $('#filePedidos').val('');
-        
-        // Simular respuesta exitosa (sin depender de la API problemática)
-        const response = { 
-            success: true, 
-            fecha_hora_importe: { 
-                fecha_importe: new Date().toLocaleDateString(), 
-                hora_importe: new Date().toLocaleTimeString() 
-            } 
-        };
-        
-        console.log('=== DEBUG: PROCESANDO RESPUESTA EXITOSA ===');
-        actualizarTablaPedidos();
-        
-        $('.fechaImporte').html(
-            `<p>Fecha y Hora de importación: ${response.fecha_hora_importe.fecha_importe}, ${response.fecha_hora_importe.hora_importe}</p>`
-        );
-        
-        // Mostrar mensaje de confirmación exitosa
-        console.log('=== DEBUG: MOSTRANDO MENSAJE DE ÉXITO ===');
-        alertify.set('notifier', 'position', 'top-right');
-        alertify.success('¡Archivo importado exitosamente!');
-        
-        // Refrescar la página después de 2 segundos para que el usuario vea el mensaje
-        console.log('=== DEBUG: PROGRAMANDO REFRESH DE PÁGINA ===');
-        setTimeout(() => {
-            console.log('=== DEBUG: EJECUTANDO REFRESH DE PÁGINA ===');
-            location.reload();
-        }, 2000);
-        
-        console.log('=== DEBUG: LLAMANDO notificaciones ===');
-        notificaciones(response);
     } catch (error) {
-        console.log('=== DEBUG: EXCEPCIÓN CAPTURADA ===');
-        console.error('Error en yesOption:', error);
-        
-        // Mostrar mensaje de error
+        console.error('Error en validación:', error);
         alertify.set('notifier', 'position', 'top-right');
-        alertify.error('Error al procesar la importación. Intente nuevamente.');
-        
-        // Limpiar el campo de archivo
+        alertify.error('Error al validar los datos. Intente nuevamente.');
         $('#filePedidos').val('');
     }
+};
 
-    console.log('=== DEBUG: FINALIZANDO yesOption ===');
-    //deletePedidosSession();
+//Opcion NO
+noOption = () => {
+    deletePedidosSession();
+    $('.cardImportarPedidos').show(800);
+    $('#filePedidos').val('');
+};
+
+//Opcion SI - MODIFICADA PARA MOSTRAR SOLO DATOS ACTUALIZADOS
+yesOption = async () => {
+    try {
+        // Llamar a la API para procesar la importación
+        const response = await savePedidos();
+        
+        if (response && response.success) {
+            // Mostrar información de importación
+            $('.fechaImporte').html(
+                `<p>Fecha y Hora de importación: ${response.fecha_hora_importe.fecha_importe}, ${response.fecha_hora_importe.hora_importe}</p>`
+            );
+            
+            // Si hay datos actualizados, mostrar solo esos en la tabla
+            if (response.idsActualizados && response.idsActualizados.length > 0) {
+                // Modificar la fuente de datos de la tabla para mostrar solo datos actualizados
+                await mostrarSoloDatosActualizados();
+                
+                alertify.set('notifier', 'position', 'top-right');
+                alertify.success(`¡Pedidos importados exitosamente! Se actualizaron ${response.idsActualizados.length} registros.`);
+            } else {
+                // Si no hay datos actualizados, mostrar todos como antes
+                actualizarTablaPedidos();
+                alertify.set('notifier', 'position', 'top-right');
+                alertify.success('¡Pedidos importados exitosamente!');
+            }
+            
+            notificaciones(response);
+        } else {
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.error('Error al procesar la importación. Intente nuevamente.');
+        }
+    } catch (error) {
+        console.error('Error en yesOption:', error);
+        alertify.set('notifier', 'position', 'top-right');
+        alertify.error('Error al procesar la importación. Intente nuevamente.');
+    }
+    
+    // Limpiar el campo de archivo
+    $('#filePedidos').val('');
+};
+
+// NUEVA FUNCIÓN: Mostrar solo los datos actualizados en la tabla
+mostrarSoloDatosActualizados = async () => {
+    try {
+        // Destruir la tabla actual si existe
+        if ($.fn.DataTable.isDataTable('#tablaPedidos')) {
+            $('#tablaPedidos').DataTable().destroy();
+        }
+        
+        // Recrear la tabla con nueva fuente de datos para mostrar solo los actualizados
+        $('#tablaPedidos').DataTable({
+            destroy: true,
+            pageLength: 100,
+            lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todos"]],
+            ajax: {
+                url: `/api/getPedidosActualizados`,  // NUEVO ENDPOINT
+                type: 'GET',
+                dataSrc: 'data',
+            },
+            language: {
+                url: '../../../admin/sistema/admin_componentes/es-ar.json'
+            },
+            order: [[2, 'asc']],
+            columns: [
+                { title: 'No.', data: 'num', className: 'text-center', visible: false },
+                { title: 'Propietario', data: 'propietario', visible: false },
+                { title: 'Pedido', data: 'pedido', className: 'text-center' },
+                { title: 'F_Pedido', data: 'fecha_pedido', className: 'text-center' },
+                { title: 'Granel', data: 'granel', className: 'text-center' },
+                { title: 'Referencia', data: 'id_producto', className: 'text-center' },
+                { title: 'Producto', data: 'nombre_referencia' },
+                { title: 'Cant_Original', data: 'cant_original', className: 'text-center', visible: false, render: $.fn.dataTable.render.number('.', ',', 0, ' ') },
+                { title: 'Saldo Ofima', data: 'cantidad', className: 'text-center', render: $.fn.dataTable.render.number('.', ',', 0, ' ') },
+                { title: 'Acum Prog', data: 'cantidad_acumulada', className: 'text-center', render: $.fn.dataTable.render.number('.', ',', 0, ' ') },
+                { title: 'Recep_Insumos dia(1)', data: 'fecha_insumo', className: 'text-center' },
+                { title: 'Fecha Entrega dia (15)', data: 'entrega', className: 'text-center' }
+            ],
+            initComplete: function() {
+                // Mostrar mensaje indicando que se muestran solo los datos actualizados
+                alertify.set('notifier', 'position', 'top-right');
+                alertify.message('Mostrando solo los pedidos actualizados en esta importación');
+                
+                // Opcional: Agregar un botón para volver a mostrar todos los datos
+                if (!$('#btnMostrarTodos').length) {
+                    $('#tablaPedidos_wrapper').prepend(`
+                        <div class="mb-3">
+                            <button id="btnMostrarTodos" class="btn btn-info btn-sm">
+                                <i class="fa fa-list"></i> Mostrar todos los pedidos
+                            </button>
+                        </div>
+                    `);
+                    
+                    $('#btnMostrarTodos').click(function() {
+                        actualizarTablaPedidos(); // Volver a mostrar todos los datos
+                        $(this).parent().remove(); // Remover el botón
+                    });
+                }
+            }
+        });
+        
+    } catch (error) {
+        console.error('Error al mostrar datos actualizados:', error);
+        // Fallback: mostrar todos los datos
+        actualizarTablaPedidos();
+    }
 };
 
 savePedidos = async () => {
-    console.log('=== DEBUG: INICIANDO savePedidos ===');
     try {
-        console.log('=== DEBUG: HACIENDO AJAX A /api/addPedidos ===');
         result = await $.ajax({
             url: '/api/addPedidos',
             type: 'POST',
         });
-        console.log('=== DEBUG: RESPUESTA AJAX EXITOSA ===');
-        console.log('Result completo:', result);
-        console.log('Result type:', typeof result);
         return result;
     } catch (error) {
-        console.log('=== DEBUG: ERROR EN AJAX ===');
         console.error('Error en savePedidos:', error);
-        console.log('Error type:', typeof error);
-        console.log('Error message:', error.message);
         return null;
     }
 };
@@ -271,9 +312,43 @@ addRow = (data) => {
     return row.join('');
 };
 
-/* Actualizar tabla */
-
+/* Actualizar tabla - VERSIÓN ORIGINAL PARA MOSTRAR TODOS LOS DATOS */
 function actualizarTablaPedidos() {
-    $('#tablaPedidos').DataTable().clear();
-    $('#tablaPedidos').DataTable().ajax.reload();
+    // Destruir tabla actual si existe
+    if ($.fn.DataTable.isDataTable('#tablaPedidos')) {
+        $('#tablaPedidos').DataTable().destroy();
+    }
+    
+    // Remover botón de mostrar todos si existe
+    $('#btnMostrarTodos').parent().remove();
+    
+    // Recrear tabla con configuración original (todos los datos)
+    $('#tablaPedidos').DataTable({
+        destroy: true,
+        pageLength: 100,
+        lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Todos"]],
+        ajax: {
+            url: `/html/php/pedidos_fetch.php`,  // ENDPOINT ORIGINAL
+            type: 'POST',
+            dataSrc: 'data',
+        },
+        language: {
+            url: '../../../admin/sistema/admin_componentes/es-ar.json'
+        },
+        order: [[2, 'asc']],
+        columns: [
+            { title: 'No.', data: 'num', className: 'text-center', visible: false },
+            { title: 'Propietario', data: 'propietario', visible: false },
+            { title: 'Pedido', data: 'pedido', className: 'text-center' },
+            { title: 'F_Pedido', data: 'fecha_pedido', className: 'text-center' },
+            { title: 'Granel', data: 'granel', className: 'text-center' },
+            { title: 'Referencia', data: 'id_producto', className: 'text-center' },
+            { title: 'Producto', data: 'nombre_referencia' },
+            { title: 'Cant_Original', data: 'cant_original', className: 'text-center', visible: false, render: $.fn.dataTable.render.number('.', ',', 0, ' ') },
+            { title: 'Saldo Ofima', data: 'cantidad', className: 'text-center', render: $.fn.dataTable.render.number('.', ',', 0, ' ') },
+            { title: 'Acum Prog', data: 'cantidad_acumulada', className: 'text-center', render: $.fn.dataTable.render.number('.', ',', 0, ' ') },
+            { title: 'Recep_Insumos dia(1)', data: 'fecha_insumo', className: 'text-center' },
+            { title: 'Fecha Entrega dia (15)', data: 'entrega', className: 'text-center' }
+        ]
+    });
 }
