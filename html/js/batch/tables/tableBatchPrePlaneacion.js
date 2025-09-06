@@ -44,7 +44,20 @@ $(document).ready(function () {
     
     if (!rowPrePlaneados) {
       console.warn('⚠️ loadTblCapacidadPrePlaneada - Elemento tblCalcCapacidadPrePlaneadoBody no encontrado en el DOM');
-      return;
+      console.log('🔍 loadTblCapacidadPrePlaneada - Buscando elementos alternativos...');
+      
+      // Buscar elementos alternativos
+      let altElement = document.querySelector('[id*="capacidad"]') || 
+                      document.querySelector('[id*="prePlaneado"]') ||
+                      document.querySelector('[id*="planeado"]');
+      
+      if (altElement) {
+        console.log('🔍 loadTblCapacidadPrePlaneada - Elemento alternativo encontrado:', altElement);
+        rowPrePlaneados = altElement;
+      } else {
+        console.warn('⚠️ loadTblCapacidadPrePlaneada - No se encontraron elementos alternativos');
+        return;
+      }
     }
 
     // Limpiar contenido anterior
@@ -96,17 +109,27 @@ $(document).ready(function () {
     console.log('🔍 calcTamanioLoteBySemana - Data es válido, procesando', data.length, 'registros');
     
     let capacidad = 0;
+    let registrosEncontrados = 0;
+    
     for (i = 0; i < data.length; i++) {
       console.log('🔍 calcTamanioLoteBySemana - Registro', i, ':', data[i]);
       console.log('🔍 calcTamanioLoteBySemana - Registro semana:', data[i].semana, 'vs semana buscada:', semana);
       
       if (data[i].semana == semana) {
         capacidad += parseFloat(data[i].tamano_lote);
-        console.log('🔍 calcTamanioLoteBySemana - Capacidad acumulada:', capacidad);
+        registrosEncontrados++;
+        console.log('🔍 calcTamanioLoteBySemana - Capacidad acumulada:', capacidad, 'Registros encontrados:', registrosEncontrados);
       }
     }
 
-    console.log('🔍 calcTamanioLoteBySemana - Capacidad total calculada:', capacidad);
+    console.log('🔍 calcTamanioLoteBySemana - Capacidad total calculada:', capacidad, 'de', registrosEncontrados, 'registros');
+    
+    // Si no se encontraron registros para la semana, mostrar todas las semanas disponibles
+    if (registrosEncontrados === 0) {
+      console.log('🔍 calcTamanioLoteBySemana - No se encontraron registros para la semana', semana);
+      console.log('🔍 calcTamanioLoteBySemana - Semanas disponibles:', data.map(r => r.semana));
+    }
+    
     return [{ granel: 'Granel-212', capacidad: capacidad }];
   };
 
@@ -134,36 +157,49 @@ $(document).ready(function () {
   getDataPlaneacion();
 
   loadTblCapacidadPlaneada = (data) => {
-    console.log('�� loadTblCapacidadPlaneada - Iniciando con data:', data);
-    console.log('�� loadTblCapacidadPlaneada - Tipo de data:', typeof data);
-    console.log('�� loadTblCapacidadPlaneada - Es array:', Array.isArray(data));
+    console.log(' loadTblCapacidadPlaneada - Iniciando con data:', data);
+    console.log(' loadTblCapacidadPlaneada - Tipo de data:', typeof data);
+    console.log(' loadTblCapacidadPlaneada - Es array:', Array.isArray(data));
     
     semana = sessionStorage.getItem('semana');
-    console.log('�� loadTblCapacidadPlaneada - Semana de sessionStorage:', semana);
+    console.log(' loadTblCapacidadPlaneada - Semana de sessionStorage:', semana);
     
     // Extraer data.data si existe
     let registros = data;
     if (data && data.data && Array.isArray(data.data)) {
-      console.log('�� loadTblCapacidadPlaneada - Extrayendo data.data, registros:', data.data.length);
+      console.log(' loadTblCapacidadPlaneada - Extrayendo data.data, registros:', data.data.length);
       registros = data.data;
     }
     
     let capacidadPlaneada = calcTamanioLoteBySemana(registros, parseInt(semana));
-    console.log('�� loadTblCapacidadPlaneada - Capacidad calculada:', capacidadPlaneada);
+    console.log(' loadTblCapacidadPlaneada - Capacidad calculada:', capacidadPlaneada);
 
     let rowPlaneados = document.getElementById('tblCalcCapacidadPlaneadoBody');
-    console.log('�� loadTblCapacidadPlaneada - Elemento DOM encontrado:', rowPlaneados);
+    console.log(' loadTblCapacidadPlaneada - Elemento DOM encontrado:', rowPlaneados);
     
     if (!rowPlaneados) {
       console.warn('⚠️ loadTblCapacidadPlaneada - Elemento tblCalcCapacidadPlaneadoBody no encontrado en el DOM');
-      return;
+      console.log('�� loadTblCapacidadPlaneada - Buscando elementos alternativos...');
+      
+      // Buscar elementos alternativos
+      let altElement = document.querySelector('[id*="capacidad"]') || 
+                      document.querySelector('[id*="planeado"]') ||
+                      document.querySelector('[id*="prePlaneado"]');
+      
+      if (altElement) {
+        console.log('�� loadTblCapacidadPlaneada - Elemento alternativo encontrado:', altElement);
+        rowPlaneados = altElement;
+      } else {
+        console.warn('⚠️ loadTblCapacidadPlaneada - No se encontraron elementos alternativos');
+        return;
+      }
     }
 
     // Limpiar contenido anterior
     rowPlaneados.innerHTML = '';
 
     for (i = 0; i < capacidadPlaneada.length; i++) {
-      console.log('�� loadTblCapacidadPlaneada - Agregando fila:', capacidadPlaneada[i]);
+      console.log(' loadTblCapacidadPlaneada - Agregando fila:', capacidadPlaneada[i]);
       rowPlaneados.innerHTML += `
         <tr>
           <td>${capacidadPlaneada[i].granel}</td>
@@ -179,6 +215,11 @@ $(document).ready(function () {
     getDataPlaneacion,
     loadTblCapacidadPrePlaneada,
     loadTblCapacidadPlaneada,
-    calcTamanioLoteBySemana
+    calcTamanioLoteBySemana,
+    // Agregar función rows para compatibilidad
+    rows: function() {
+      console.log('�� tableBatchPrePlaneacion.rows - Función llamada para compatibilidad');
+      return [];
+    }
   };
 });
