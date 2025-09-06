@@ -36,6 +36,12 @@ $(document).ready(function () {
     semana = sessionStorage.getItem('semana');
     console.log('🔍 loadTblCapacidadPrePlaneada - Semana de sessionStorage:', semana);
     
+    // Si no hay semana en sessionStorage, usar la semana de los datos
+    if (!semana && data && data.length > 0) {
+      semana = data[0].semana;
+      console.log('🔍 loadTblCapacidadPrePlaneada - Usando semana de los datos:', semana);
+    }
+    
     let capacidadPrePlaneada = calcTamanioLoteBySemana(data, parseInt(semana));
     console.log('🔍 loadTblCapacidadPrePlaneada - Capacidad calculada:', capacidadPrePlaneada);
 
@@ -46,31 +52,43 @@ $(document).ready(function () {
       console.warn('⚠️ loadTblCapacidadPrePlaneada - Elemento tblCalcCapacidadPrePlaneadoBody no encontrado en el DOM');
       console.log('🔍 loadTblCapacidadPrePlaneada - Buscando elementos alternativos...');
       
-      // Buscar elementos alternativos
-      let altElement = document.querySelector('[id*="capacidad"]') || 
+      // Buscar elementos alternativos más específicos
+      let altElement = document.querySelector('#tblCalcCapacidadPrePlaneadoBody') ||
+                      document.querySelector('#tblCalcCapacidadPlaneadoBody') ||
+                      document.querySelector('[id*="capacidad"]') || 
                       document.querySelector('[id*="prePlaneado"]') ||
-                      document.querySelector('[id*="planeado"]');
+                      document.querySelector('[id*="planeado"]') ||
+                      document.querySelector('tbody');
       
       if (altElement) {
         console.log('🔍 loadTblCapacidadPrePlaneada - Elemento alternativo encontrado:', altElement);
         rowPrePlaneados = altElement;
       } else {
         console.warn('⚠️ loadTblCapacidadPrePlaneada - No se encontraron elementos alternativos');
-        return;
+        console.log('🔍 loadTblCapacidadPrePlaneada - Creando elemento temporal para mostrar datos');
+        
+        // Crear un elemento temporal para mostrar los datos
+        let tempDiv = document.createElement('div');
+        tempDiv.id = 'temp-capacidad-pre-planeada';
+        tempDiv.innerHTML = '<h4>Capacidad Pre Planeada (Temporal)</h4><table><thead><tr><th>Granel</th><th>Capacidad</th></tr></thead><tbody></tbody></table>';
+        document.body.appendChild(tempDiv);
+        rowPrePlaneados = tempDiv.querySelector('tbody');
       }
     }
 
     // Limpiar contenido anterior
-    rowPrePlaneados.innerHTML = '';
+    if (rowPrePlaneados) {
+      rowPrePlaneados.innerHTML = '';
 
-    for (i = 0; i < capacidadPrePlaneada.length; i++) {
-      console.log('🔍 loadTblCapacidadPrePlaneada - Agregando fila:', capacidadPrePlaneada[i]);
-      rowPrePlaneados.innerHTML += `
-        <tr>
-          <td>${capacidadPrePlaneada[i].granel}</td>
-          <td>${capacidadPrePlaneada[i].capacidad}</td>
-        </tr>
-      `;
+      for (i = 0; i < capacidadPrePlaneada.length; i++) {
+        console.log('🔍 loadTblCapacidadPrePlaneada - Agregando fila:', capacidadPrePlaneada[i]);
+        rowPrePlaneados.innerHTML += `
+          <tr>
+            <td>${capacidadPrePlaneada[i].granel}</td>
+            <td>${capacidadPrePlaneada[i].capacidad}</td>
+          </tr>
+        `;
+      }
     }
   };
 
@@ -128,6 +146,13 @@ $(document).ready(function () {
     if (registrosEncontrados === 0) {
       console.log('🔍 calcTamanioLoteBySemana - No se encontraron registros para la semana', semana);
       console.log('🔍 calcTamanioLoteBySemana - Semanas disponibles:', data.map(r => r.semana));
+      
+      // Si no hay registros para la semana buscada, usar la primera semana disponible
+      if (data.length > 0) {
+        let primeraSemana = data[0].semana;
+        console.log('🔍 calcTamanioLoteBySemana - Usando primera semana disponible:', primeraSemana);
+        return calcTamanioLoteBySemana(data, primeraSemana);
+      }
     }
     
     return [{ granel: 'Granel-212', capacidad: capacidad }];
@@ -179,33 +204,45 @@ $(document).ready(function () {
     
     if (!rowPlaneados) {
       console.warn('⚠️ loadTblCapacidadPlaneada - Elemento tblCalcCapacidadPlaneadoBody no encontrado en el DOM');
-      console.log('�� loadTblCapacidadPlaneada - Buscando elementos alternativos...');
+      console.log(' loadTblCapacidadPlaneada - Buscando elementos alternativos...');
       
-      // Buscar elementos alternativos
-      let altElement = document.querySelector('[id*="capacidad"]') || 
+      // Buscar elementos alternativos más específicos
+      let altElement = document.querySelector('#tblCalcCapacidadPlaneadoBody') ||
+                      document.querySelector('#tblCalcCapacidadPrePlaneadoBody') ||
+                      document.querySelector('[id*="capacidad"]') || 
                       document.querySelector('[id*="planeado"]') ||
-                      document.querySelector('[id*="prePlaneado"]');
+                      document.querySelector('[id*="prePlaneado"]') ||
+                      document.querySelector('tbody');
       
       if (altElement) {
-        console.log('�� loadTblCapacidadPlaneada - Elemento alternativo encontrado:', altElement);
+        console.log(' loadTblCapacidadPlaneada - Elemento alternativo encontrado:', altElement);
         rowPlaneados = altElement;
       } else {
         console.warn('⚠️ loadTblCapacidadPlaneada - No se encontraron elementos alternativos');
-        return;
+        console.log(' loadTblCapacidadPlaneada - Creando elemento temporal para mostrar datos');
+        
+        // Crear un elemento temporal para mostrar los datos
+        let tempDiv = document.createElement('div');
+        tempDiv.id = 'temp-capacidad-planeada';
+        tempDiv.innerHTML = '<h4>Capacidad Planeada (Temporal)</h4><table><thead><tr><th>Granel</th><th>Capacidad</th></tr></thead><tbody></tbody></table>';
+        document.body.appendChild(tempDiv);
+        rowPlaneados = tempDiv.querySelector('tbody');
       }
     }
 
     // Limpiar contenido anterior
-    rowPlaneados.innerHTML = '';
+    if (rowPlaneados) {
+      rowPlaneados.innerHTML = '';
 
-    for (i = 0; i < capacidadPlaneada.length; i++) {
-      console.log(' loadTblCapacidadPlaneada - Agregando fila:', capacidadPlaneada[i]);
-      rowPlaneados.innerHTML += `
-        <tr>
-          <td>${capacidadPlaneada[i].granel}</td>
-          <td>${capacidadPlaneada[i].capacidad}</td>
-        </tr>
-      `;
+      for (i = 0; i < capacidadPlaneada.length; i++) {
+        console.log(' loadTblCapacidadPlaneada - Agregando fila:', capacidadPlaneada[i]);
+        rowPlaneados.innerHTML += `
+          <tr>
+            <td>${capacidadPlaneada[i].granel}</td>
+            <td>${capacidadPlaneada[i].capacidad}</td>
+          </tr>
+        `;
+      }
     }
   };
 
@@ -218,8 +255,13 @@ $(document).ready(function () {
     calcTamanioLoteBySemana,
     // Agregar función rows para compatibilidad
     rows: function() {
-      console.log('�� tableBatchPrePlaneacion.rows - Función llamada para compatibilidad');
-      return [];
+      console.log(' tableBatchPrePlaneacion.rows - Función llamada para compatibilidad');
+      return {
+        data: function() {
+          console.log(' tableBatchPrePlaneacion.rows().data - Función llamada para compatibilidad');
+          return [];
+        }
+      };
     }
   };
 });
