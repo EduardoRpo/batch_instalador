@@ -3,80 +3,86 @@ $(document).ready(function () {
   api = '/api/prePlaneados';
 
   getDataPrePlaneacion = async () => {
+    console.log('🔍 getDataPrePlaneacion - Iniciando llamada a:', api);
     resp = await searchData(api);
+    console.log('🔍 getDataPrePlaneacion - Respuesta recibida:', resp);
+    console.log('🔍 getDataPrePlaneacion - Tipo de respuesta:', typeof resp);
+    console.log('🔍 getDataPrePlaneacion - Es array:', Array.isArray(resp));
+    
+    // Si la respuesta es string, intentar parsearla
+    if (typeof resp === 'string') {
+      console.log('🔍 getDataPrePlaneacion - Parseando string JSON...');
+      try {
+        resp = JSON.parse(resp);
+        console.log('🔍 getDataPrePlaneacion - JSON parseado exitosamente:', resp);
+        console.log('🔍 getDataPrePlaneacion - Tipo después del parse:', typeof resp);
+        console.log('🔍 getDataPrePlaneacion - Es array después del parse:', Array.isArray(resp));
+      } catch (error) {
+        console.error('❌ getDataPrePlaneacion - Error al parsear JSON:', error);
+        console.log('🔍 getDataPrePlaneacion - String original:', resp);
+      }
+    }
+    
     loadTblCapacidadPrePlaneada(resp);
   };
 
   getDataPrePlaneacion();
 
   loadTblCapacidadPrePlaneada = (data) => {
+    console.log('🚀 loadTblCapacidadPrePlaneada - Iniciando con data:', data);
+    console.log('🔍 loadTblCapacidadPrePlaneada - Tipo de data:', typeof data);
+    console.log('🔍 loadTblCapacidadPrePlaneada - Es array:', Array.isArray(data));
+    
     semana = sessionStorage.getItem('semana');
+    console.log('🔍 loadTblCapacidadPrePlaneada - Semana de sessionStorage:', semana);
+    
     let capacidadPrePlaneada = calcTamanioLoteBySemana(data, parseInt(semana));
+    console.log('🔍 loadTblCapacidadPrePlaneada - Capacidad calculada:', capacidadPrePlaneada);
 
     let rowPrePlaneados = document.getElementById(
       'tblCalcCapacidadPrePlaneadoBody'
     );
 
     for (i = 0; i < capacidadPrePlaneada.length; i++) {
-      rowPrePlaneados.insertAdjacentHTML(
-        'beforeend',
-        `
-        <tr class="rows" id="row-${i}">
-          <td style="display: none">${i + 1}</td>
-          <td class="text-center">${capacidadPrePlaneada[i].semana}</td>
-          <td class="text-center">${capacidadPrePlaneada[
-            i
-          ].tamanioLoteLQ.toLocaleString(undefined, {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          })}</td> 
-          <td class="text-center">${capacidadPrePlaneada[
-            i
-          ].tamanioLoteSL.toLocaleString(undefined, {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          })}</td>
-          <td class="text-center">${capacidadPrePlaneada[
-            i
-          ].tamanioLoteSM.toLocaleString(undefined, {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          })}</td>
-          <td class="text-center">
-            ${(
-              capacidadPrePlaneada[i].tamanioLoteLQ +
-              capacidadPrePlaneada[i].tamanioLoteSL +
-              capacidadPrePlaneada[i].tamanioLoteSM
-            ).toLocaleString(undefined, {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-            })}
-            </td>
+      rowPrePlaneados.innerHTML += `
+        <tr>
+          <td>${capacidadPrePlaneada[i].granel}</td>
+          <td>${capacidadPrePlaneada[i].capacidad}</td>
         </tr>
-        `
-      );
+      `;
     }
-
-    $('#tblCalcCapacidadPrePlaneado').DataTable({
-      scrollY: '130px',
-      scrollCollapse: true,
-      searching: false,
-      paging: false,
-      language: {
-        url: '//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json',
-      },
-    });
   };
 
   calcTamanioLoteBySemana = (data, semana) => {
     console.log('🚀 calcTamanioLoteBySemana - Iniciando con data:', data, 'semana:', semana);
+    console.log('🔍 calcTamanioLoteBySemana - Tipo de data:', typeof data);
+    console.log('🔍 calcTamanioLoteBySemana - Es array:', Array.isArray(data));
     
     // Validar que data existe y es un array
     if (!data || !Array.isArray(data)) {
       console.warn('⚠️ calcTamanioLoteBySemana: data no es válido:', data);
-      console.log('🔍 calcTamanioLoteBySemana - Tipo de data:', typeof data);
-      console.log('🔍 calcTamanioLoteBySemana - Es array:', Array.isArray(data));
-      return 0;
+      console.log('🔍 calcTamanioLoteBySemana - Data recibido:', data);
+      console.log('🔍 calcTamanioLoteBySemana - Data es null/undefined:', data == null);
+      console.log('🔍 calcTamanioLoteBySemana - Data es string:', typeof data === 'string');
+      
+      // Si es string, intentar parsearlo
+      if (typeof data === 'string') {
+        console.log('🔍 calcTamanioLoteBySemana - Intentando parsear string JSON...');
+        try {
+          data = JSON.parse(data);
+          console.log('🔍 calcTamanioLoteBySemana - JSON parseado:', data);
+          console.log('🔍 calcTamanioLoteBySemana - Es array después del parse:', Array.isArray(data));
+        } catch (error) {
+          console.error('❌ calcTamanioLoteBySemana - Error al parsear JSON:', error);
+          return [];
+        }
+      }
+      
+      // Verificar nuevamente después del parse
+      if (!Array.isArray(data)) {
+        console.warn('⚠️ calcTamanioLoteBySemana: data sigue sin ser array después del parse');
+        return [];
+      }
     }
 
     console.log('🔍 calcTamanioLoteBySemana - Data es válido, procesando', data.length, 'registros');
@@ -84,187 +90,67 @@ $(document).ready(function () {
     let capacidad = 0;
     for (i = 0; i < data.length; i++) {
       console.log('🔍 calcTamanioLoteBySemana - Registro', i, ':', data[i]);
+      
       if (data[i].semana == semana) {
-        console.log('✅ calcTamanioLoteBySemana - Coincidencia encontrada para semana', semana, 'tamaño:', data[i].tamano_lote);
-        capacidad = capacidad + data[i].tamano_lote;
+        capacidad += parseFloat(data[i].tamano_lote);
+        console.log('🔍 calcTamanioLoteBySemana - Capacidad acumulada:', capacidad);
+      }
+    }
+
+    console.log('🔍 calcTamanioLoteBySemana - Capacidad total calculada:', capacidad);
+    return [{ granel: 'Granel-212', capacidad: capacidad }];
+  };
+
+  /* Capacidad Planeada */
+  getDataPlaneacion = async () => {
+    console.log('🔍 getDataPlaneacion - Iniciando llamada a batch_planeados_fetch.php');
+    resp = await searchData('/html/php/batch_planeados_fetch.php');
+    console.log('🔍 getDataPlaneacion - Respuesta recibida:', resp);
+    console.log('🔍 getDataPlaneacion - Tipo de respuesta:', typeof resp);
+    
+    // Si la respuesta es string, intentar parsearla
+    if (typeof resp === 'string') {
+      console.log('🔍 getDataPlaneacion - Parseando string JSON...');
+      try {
+        resp = JSON.parse(resp);
+        console.log('🔍 getDataPlaneacion - JSON parseado exitosamente:', resp);
+      } catch (error) {
+        console.error('❌ getDataPlaneacion - Error al parsear JSON:', error);
       }
     }
     
-    console.log('🔍 calcTamanioLoteBySemana - Capacidad total calculada:', capacidad);
-    return capacidad;
+    loadTblCapacidadPlaneada(resp);
   };
 
-  tableBatchPrePlaneacion = $('#tablaPrePlaneacion').DataTable({
-    destroy: true,
-    pageLength: 50,
-    ajax: {
-      url: `/html/php/batch_preplaneacion_fetch.php`,
-      type: 'POST',
-      dataSrc: 'data',
-    },
-    language: {
-      url: '../../../admin/sistema/admin_componentes/es-ar.json',
-    },
-    order: [1, 'asc'],
-    columns: [
-      {
-        title: 'N° Semana',
-        data: 'semana',
-        className: 'text-center',
-        render: function (data) {
-          return `S${data}`;
-        },
-      },
-      {
-        width: '350px',
-        title: 'Propietario',
-        data: 'propietario',
-        visible: false,
-      },
-      {
-        title: 'Pedido',
-        data: 'pedido',
-        className: 'text-center',
-      },
-      {
-        title: 'Granel',
-        data: 'granel',
-        className: 'text-center',
-      },
-      {
-        title: 'Referencia',
-        data: 'id_producto',
-        className: 'text-center',
-      },
-      {
-        width: '500px',
-        title: 'Producto',
-        data: 'nombre_referencia',
-        className: 'uniqueClassName',
-      },
-      {
-        title: 'Tamaño Lote (Kg)',
-        data: 'tamano_lote',
-        className: 'text-center',
-        render: $.fn.dataTable.render.number('.', ',', 2, ''),
-      },
-      {
-        title: 'Cantidad (Und)',
-        data: 'unidad_lote',
-        className: 'text-center',
-        render: $.fn.dataTable.render.number('.', ',', 0, ''),
-      },
-      {
-        title: 'Simulación',
-        data: 'sim',
-        className: 'text-center',
-        visible: false,
-      },
-      {
-        title: 'Estado',
-        data: 'estado',
-        className: 'text-center',
-      },
-      {
-        title: 'Modificar',
-        data: 'id',
-        className: 'uniqueClassName',
-        render: function (data) {
-          return `<a href='#' <i class='fa fa-pencil-square-o fa-2x link-editar-pre' id="edit-${data}" data-toggle='tooltip' title='Editar Pre Planeado' style='color:rgb(255, 193, 7)'></i></a>`;
-        },
-      },
-      {
-        title: 'Eliminar',
-        data: 'id',
-        className: 'uniqueClassName',
-        render: function (data) {
-          return `<a href='#' <i class='fa fa-trash link-borrar-pre fa-2x' id="borrar-${data}" data-toggle='tooltip' title='Eliminar Pre Planeado' style='color:rgb(234, 67, 54)'></i></a>`;
-        },
-      },
-    ],
-    rowGroup: {
-      dataSrc: function (row) {
-        return `<th class="text-center" colspan="11" style="font-weight: bold;"> ${row.propietario} </th>`;
-      },
-      startRender: function (rows, group) {
-        return $('<tr/>').append(group);
-      },
-      className: 'odd',
-    },
-  });
+  getDataPlaneacion();
 
-  /* Cargar tipo de simulación */
-
-  $('#tipoSimulacion').change(function (e) {
-    e.preventDefault();
-
-    let val = this.value;
-
-    let totalVentaPre = 0;
-
-    tableBatchPrePlaneacion.column(8).search(val).draw();
-
-    dataBPreplaneacion = tableBatchPrePlaneacion.rows().data().toArray();
-
-    for (i = 0; i < dataBPreplaneacion.length; i++) {
-      if (dataBPreplaneacion[i]['sim'] == val) {
-        totalVentaPre =
-          totalVentaPre +
-          dataBPreplaneacion[i]['unidad_lote'] *
-            dataBPreplaneacion[i]['valor_pedido'];
-      }
-    }
-
-    $('#totalVentaPre').val(`$ ${totalVentaPre.toLocaleString('es-CO')}`);
-
+  loadTblCapacidadPlaneada = (data) => {
+    console.log('�� loadTblCapacidadPlaneada - Iniciando con data:', data);
+    console.log('�� loadTblCapacidadPlaneada - Tipo de data:', typeof data);
+    console.log('�� loadTblCapacidadPlaneada - Es array:', Array.isArray(data));
+    
     semana = sessionStorage.getItem('semana');
+    console.log('�� loadTblCapacidadPlaneada - Semana de sessionStorage:', semana);
+    
+    // Extraer data.data si existe
+    let registros = data;
+    if (data && data.data && Array.isArray(data.data)) {
+      console.log('�� loadTblCapacidadPlaneada - Extrayendo data.data, registros:', data.data.length);
+      registros = data.data;
+    }
+    
+    let capacidadPlaneada = calcTamanioLoteBySemana(registros, parseInt(semana));
+    console.log('�� loadTblCapacidadPlaneada - Capacidad calculada:', capacidadPlaneada);
 
-    val == 1
-      ? (semana = parseInt(semana) + 1)
-      : (semana = parseInt(semana) + 2);
+    let rowPlaneados = document.getElementById('tblCalcCapacidadPlaneadoBody');
 
-    month = calcDateByWeek(semana);
-
-    $('.fechaTipoEscenario').html(`
-      <div class="col">
-        <label style="margin-top:37px">S${semana} (${month})</label>
-      </div>
-    `);
-    $('.rows').css('display', '');
-
-    // dataCPreplaneacion = tblCalcCapacidadPrePlaneado.rows().data().toArray();
-    // for (i = 0; i < dataCPreplaneacion.length; i++) {
-    //   if (dataCPreplaneacion[i][0] != semana) {
-    //     $(`#row-${i}`).css('display', 'none');
-    //   }
-    // }
-  });
-
-  /* Calcular primera y ultima fecha de la semana */
-  calcDateByWeek = (semana) => {
-    let date = new Date();
-
-    let primerdia = new Date(date.getFullYear(), 0, 1);
-
-    let correccion = 6 - primerdia.getDay();
-
-    let primer = new Date(
-      date.getFullYear(),
-      0,
-      (semana - 1) * 7 + 3 + correccion
-    );
-
-    let ultimo = new Date(
-      date.getFullYear(),
-      0,
-      (semana - 1) * 7 + 9 + correccion
-    );
-
-    let mesPrimer = primer.toLocaleString(undefined, { month: 'long' });
-    let mesUltimo = ultimo.toLocaleString(undefined, { month: 'long' });
-
-    month = `${primer.getDate()} ${mesPrimer} - ${ultimo.getDate()} ${mesUltimo}`;
-
-    return month;
+    for (i = 0; i < capacidadPlaneada.length; i++) {
+      rowPlaneados.innerHTML += `
+        <tr>
+          <td>${capacidadPlaneada[i].granel}</td>
+          <td>${capacidadPlaneada[i].capacidad}</td>
+        </tr>
+      `;
+    }
   };
 });
